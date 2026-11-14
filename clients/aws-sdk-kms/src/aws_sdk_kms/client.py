@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import cast
+from typing import Unpack as _Unpack, cast, overload as _overload
 
 from smithy_aws_core.config.types import ConfigSource
 from smithy_aws_core.identity.chain.resolver import IdentityChain
@@ -20,116 +20,60 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from .models import (
-        CancelKeyDeletionInput,
         CancelKeyDeletionOutput,
-        ConnectCustomKeyStoreInput,
         ConnectCustomKeyStoreOutput,
-        CreateAliasInput,
         CreateAliasOutput,
-        CreateCustomKeyStoreInput,
         CreateCustomKeyStoreOutput,
-        CreateGrantInput,
         CreateGrantOutput,
-        CreateKeyInput,
         CreateKeyOutput,
-        DecapsulateInput,
         DecapsulateOutput,
-        DecryptInput,
         DecryptOutput,
-        DeleteAliasInput,
         DeleteAliasOutput,
-        DeleteCustomKeyStoreInput,
         DeleteCustomKeyStoreOutput,
-        DeleteImportedKeyMaterialInput,
         DeleteImportedKeyMaterialOutput,
-        DeriveSharedSecretInput,
         DeriveSharedSecretOutput,
-        DescribeCustomKeyStoresInput,
         DescribeCustomKeyStoresOutput,
-        DescribeKeyInput,
         DescribeKeyOutput,
-        DisableKeyInput,
         DisableKeyOutput,
-        DisableKeyRotationInput,
         DisableKeyRotationOutput,
-        DisconnectCustomKeyStoreInput,
         DisconnectCustomKeyStoreOutput,
-        EnableKeyInput,
         EnableKeyOutput,
-        EnableKeyRotationInput,
         EnableKeyRotationOutput,
-        EncapsulateInput,
         EncapsulateOutput,
-        EncryptInput,
         EncryptOutput,
-        GenerateDataKeyInput,
         GenerateDataKeyOutput,
-        GenerateDataKeyPairInput,
         GenerateDataKeyPairOutput,
-        GenerateDataKeyPairWithoutPlaintextInput,
         GenerateDataKeyPairWithoutPlaintextOutput,
-        GenerateDataKeyWithoutPlaintextInput,
         GenerateDataKeyWithoutPlaintextOutput,
-        GenerateMacInput,
         GenerateMacOutput,
-        GenerateRandomInput,
         GenerateRandomOutput,
-        GetKeyLastUsageInput,
         GetKeyLastUsageOutput,
-        GetKeyPolicyInput,
         GetKeyPolicyOutput,
-        GetKeyRotationStatusInput,
         GetKeyRotationStatusOutput,
-        GetParametersForImportInput,
         GetParametersForImportOutput,
-        GetPublicKeyInput,
         GetPublicKeyOutput,
-        ImportKeyMaterialInput,
         ImportKeyMaterialOutput,
-        ListAliasesInput,
         ListAliasesOutput,
-        ListGrantsInput,
         ListGrantsOutput,
-        ListKeyPoliciesInput,
         ListKeyPoliciesOutput,
-        ListKeyRotationsInput,
         ListKeyRotationsOutput,
-        ListKeysInput,
         ListKeysOutput,
-        ListResourceTagsInput,
         ListResourceTagsOutput,
-        ListRetirableGrantsInput,
         ListRetirableGrantsOutput,
-        PutKeyPolicyInput,
         PutKeyPolicyOutput,
-        ReEncryptInput,
         ReEncryptOutput,
-        ReplicateKeyInput,
         ReplicateKeyOutput,
-        RetireGrantInput,
         RetireGrantOutput,
-        RevokeGrantInput,
         RevokeGrantOutput,
-        RotateKeyOnDemandInput,
         RotateKeyOnDemandOutput,
-        ScheduleKeyDeletionInput,
         ScheduleKeyDeletionOutput,
-        SignInput,
         SignOutput,
-        TagResourceInput,
         TagResourceOutput,
-        UntagResourceInput,
         UntagResourceOutput,
-        UpdateAliasInput,
         UpdateAliasOutput,
-        UpdateCustomKeyStoreInput,
         UpdateCustomKeyStoreOutput,
-        UpdateKeyDescriptionInput,
         UpdateKeyDescriptionOutput,
-        UpdatePrimaryRegionInput,
         UpdatePrimaryRegionOutput,
-        VerifyInput,
-        VerifyMacInput,
         VerifyMacOutput,
         VerifyOutput,
     )
@@ -257,10 +201,24 @@ class KMSClient(Client[KMSConfig]):
     - GenerateDataKeyWithoutPlaintext
     """
 
-    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
+    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
 
+    @_overload
     def cancel_key_deletion(
-        self, input: CancelKeyDeletionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CancelKeyDeletionInput | _models.CancelKeyDeletionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CancelKeyDeletionOutput: ...
+
+    @_overload
+    def cancel_key_deletion(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CancelKeyDeletionInputDict],
     ) -> CancelKeyDeletionOutput:
         """
         Cancels the deletion of a KMS key. When this operation succeeds, the key
@@ -291,8 +249,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `CancelKeyDeletionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -302,10 +258,34 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `CancelKeyDeletionOutput`.
         """
-        return self._invoke(input, _models.CANCEL_KEY_DELETION, [], plugins)
 
+    def cancel_key_deletion(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CancelKeyDeletionOutput:
+        return self._invoke(
+            self._select_input(_models.CANCEL_KEY_DELETION, args, kwargs),
+            _models.CANCEL_KEY_DELETION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def connect_custom_key_store(
-        self, input: ConnectCustomKeyStoreInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ConnectCustomKeyStoreInput
+        | _models.ConnectCustomKeyStoreInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ConnectCustomKeyStoreOutput: ...
+
+    @_overload
+    def connect_custom_key_store(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ConnectCustomKeyStoreInputDict],
     ) -> ConnectCustomKeyStoreOutput:
         """
         Connects or reconnects a [custom key
@@ -412,8 +392,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `ConnectCustomKeyStoreInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -423,10 +401,33 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `ConnectCustomKeyStoreOutput`.
         """
-        return self._invoke(input, _models.CONNECT_CUSTOM_KEY_STORE, [], plugins)
 
+    def connect_custom_key_store(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ConnectCustomKeyStoreOutput:
+        return self._invoke(
+            self._select_input(_models.CONNECT_CUSTOM_KEY_STORE, args, kwargs),
+            _models.CONNECT_CUSTOM_KEY_STORE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_alias(
-        self, input: CreateAliasInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateAliasInput | _models.CreateAliasInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateAliasOutput: ...
+
+    @_overload
+    def create_alias(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateAliasInputDict],
     ) -> CreateAliasOutput:
         """
         Creates a friendly name for a KMS key.
@@ -492,8 +493,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `CreateAliasInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -503,10 +502,34 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `CreateAliasOutput`.
         """
-        return self._invoke(input, _models.CREATE_ALIAS, [], plugins)
 
+    def create_alias(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateAliasOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_ALIAS, args, kwargs),
+            _models.CREATE_ALIAS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_custom_key_store(
-        self, input: CreateCustomKeyStoreInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateCustomKeyStoreInput
+        | _models.CreateCustomKeyStoreInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateCustomKeyStoreOutput: ...
+
+    @_overload
+    def create_custom_key_store(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateCustomKeyStoreInputDict],
     ) -> CreateCustomKeyStoreOutput:
         """
         Creates a [custom key
@@ -604,8 +627,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `CreateCustomKeyStoreInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -615,10 +636,33 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `CreateCustomKeyStoreOutput`.
         """
-        return self._invoke(input, _models.CREATE_CUSTOM_KEY_STORE, [], plugins)
 
+    def create_custom_key_store(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateCustomKeyStoreOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_CUSTOM_KEY_STORE, args, kwargs),
+            _models.CREATE_CUSTOM_KEY_STORE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_grant(
-        self, input: CreateGrantInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateGrantInput | _models.CreateGrantInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateGrantOutput: ...
+
+    @_overload
+    def create_grant(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateGrantInputDict],
     ) -> CreateGrantOutput:
         """
         Adds a grant to a KMS key.
@@ -692,8 +736,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `CreateGrantInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -703,10 +745,33 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `CreateGrantOutput`.
         """
-        return self._invoke(input, _models.CREATE_GRANT, [], plugins)
 
+    def create_grant(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateGrantOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_GRANT, args, kwargs),
+            _models.CREATE_GRANT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_key(
-        self, input: CreateKeyInput | None = None, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateKeyInput | _models.CreateKeyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateKeyOutput: ...
+
+    @_overload
+    def create_key(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateKeyInputDict],
     ) -> CreateKeyOutput:
         """
         Creates a unique customer managed [KMS
@@ -734,167 +799,172 @@ class KMSClient(Client[KMSConfig]):
 
         Symmetric encryption KMS key
 
-        : By default, `CreateKey` creates a symmetric encryption KMS key with
-          key material that KMS generates. This is the basic and most widely
-          used type of KMS key, and provides the best performance.
+        :   By default, `CreateKey` creates a symmetric encryption KMS key with
+            key material that KMS generates. This is the basic and most widely
+            used type of KMS key, and provides the best performance.
 
-          To create a symmetric encryption KMS key, you don't need to specify
-          any parameters. The default value for `KeySpec`, `SYMMETRIC_DEFAULT`,
-          the default value for `KeyUsage`, `ENCRYPT_DECRYPT`, and the default
-          value for `Origin`, `AWS_KMS`, create a symmetric encryption KMS key
-          with KMS key material.
+            To create a symmetric encryption KMS key, you don't need to specify
+            any parameters. The default value for `KeySpec`,
+            `SYMMETRIC_DEFAULT`, the default value for `KeyUsage`,
+            `ENCRYPT_DECRYPT`, and the default value for `Origin`, `AWS_KMS`,
+            create a symmetric encryption KMS key with KMS key material.
 
-          If you need a key for basic encryption and decryption or you are
-          creating a KMS key to protect your resources in an Amazon Web Services
-          service, create a symmetric encryption KMS key. The key material in a
-          symmetric encryption key never leaves KMS unencrypted. You can use a
-          symmetric encryption KMS key to encrypt and decrypt data up to 4,096
-          bytes, but they are typically used to generate data keys and data keys
-          pairs. For details, see GenerateDataKey and GenerateDataKeyPair.
+            If you need a key for basic encryption and decryption or you are
+            creating a KMS key to protect your resources in an Amazon Web
+            Services service, create a symmetric encryption KMS key. The key
+            material in a symmetric encryption key never leaves KMS unencrypted.
+            You can use a symmetric encryption KMS key to encrypt and decrypt
+            data up to 4,096 bytes, but they are typically used to generate data
+            keys and data keys pairs. For details, see GenerateDataKey and
+            GenerateDataKeyPair.
 
         Asymmetric KMS keys
 
-        : To create an asymmetric KMS key, use the `KeySpec` parameter to
-          specify the type of key material in the KMS key. Then, use the
-          `KeyUsage` parameter to determine whether the KMS key will be used to
-          encrypt and decrypt or sign and verify. You can't change these
-          properties after the KMS key is created.
+        :   To create an asymmetric KMS key, use the `KeySpec` parameter to
+            specify the type of key material in the KMS key. Then, use the
+            `KeyUsage` parameter to determine whether the KMS key will be used
+            to encrypt and decrypt or sign and verify. You can't change these
+            properties after the KMS key is created.
 
-          Asymmetric KMS keys contain an RSA key pair, Elliptic Curve (ECC) key
-          pair, ML-DSA key pair or an SM2 key pair (China Regions only). The
-          private key in an asymmetric KMS key never leaves KMS unencrypted.
-          However, you can use the GetPublicKey operation to download the public
-          key so it can be used outside of KMS. Each KMS key can have only one
-          key usage. KMS keys with RSA key pairs can be used to encrypt and
-          decrypt data or sign and verify messages (but not both). KMS keys with
-          NIST-standard ECC key pairs can be used to sign and verify messages or
-          derive shared secrets (but not both). KMS keys with `ECC_SECG_P256K1`
-          can be used only to sign and verify messages. KMS keys with ML-DSA key
-          pairs can be used to sign and verify messages. KMS keys with SM2 key
-          pairs (China Regions only) can be used to either encrypt and decrypt
-          data, sign and verify messages, or derive shared secrets (you must
-          choose one key usage type). For information about asymmetric KMS keys,
-          see [Asymmetric KMS
-          keys](https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
-          in the *Key Management Service Developer Guide*.
+            Asymmetric KMS keys contain an RSA key pair, Elliptic Curve (ECC)
+            key pair, ML-DSA key pair or an SM2 key pair (China Regions only).
+            The private key in an asymmetric KMS key never leaves KMS
+            unencrypted. However, you can use the GetPublicKey operation to
+            download the public key so it can be used outside of KMS. Each KMS
+            key can have only one key usage. KMS keys with RSA key pairs can be
+            used to encrypt and decrypt data or sign and verify messages (but
+            not both). KMS keys with NIST-standard ECC key pairs can be used to
+            sign and verify messages or derive shared secrets (but not both).
+            KMS keys with `ECC_SECG_P256K1` can be used only to sign and verify
+            messages. KMS keys with ML-DSA key pairs can be used to sign and
+            verify messages. KMS keys with SM2 key pairs (China Regions only)
+            can be used to either encrypt and decrypt data, sign and verify
+            messages, or derive shared secrets (you must choose one key usage
+            type). For information about asymmetric KMS keys, see [Asymmetric
+            KMS
+            keys](https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
+            in the *Key Management Service Developer Guide*.
 
         HMAC KMS key
 
-        : To create an HMAC KMS key, set the `KeySpec` parameter to a key spec
-          value for HMAC KMS keys. Then set the `KeyUsage` parameter to
-          `GENERATE_VERIFY_MAC`. You must set the key usage even though
-          `GENERATE_VERIFY_MAC` is the only valid key usage value for HMAC KMS
-          keys. You can't change these properties after the KMS key is created.
+        :   To create an HMAC KMS key, set the `KeySpec` parameter to a key spec
+            value for HMAC KMS keys. Then set the `KeyUsage` parameter to
+            `GENERATE_VERIFY_MAC`. You must set the key usage even though
+            `GENERATE_VERIFY_MAC` is the only valid key usage value for HMAC KMS
+            keys. You can't change these properties after the KMS key is
+            created.
 
-          HMAC KMS keys are symmetric keys that never leave KMS unencrypted. You
-          can use HMAC keys to generate (GenerateMac) and verify (VerifyMac)
-          HMAC codes for messages up to 4096 bytes.
+            HMAC KMS keys are symmetric keys that never leave KMS unencrypted.
+            You can use HMAC keys to generate (GenerateMac) and verify
+            (VerifyMac) HMAC codes for messages up to 4096 bytes.
 
         Multi-Region primary keys
 
-        : To create a multi-Region *primary key* in the local Amazon Web
-          Services Region, use the `MultiRegion` parameter with a value of
-          `True`. To create a multi-Region *replica key*, that is, a KMS key
-          with the same key ID and key material as a primary key, but in a
-          different Amazon Web Services Region, use the ReplicateKey operation.
-          To change a replica key to a primary key, and its primary key to a
-          replica key, use the UpdatePrimaryRegion operation.
+        :   To create a multi-Region *primary key* in the local Amazon Web
+            Services Region, use the `MultiRegion` parameter with a value of
+            `True`. To create a multi-Region *replica key*, that is, a KMS key
+            with the same key ID and key material as a primary key, but in a
+            different Amazon Web Services Region, use the ReplicateKey
+            operation. To change a replica key to a primary key, and its primary
+            key to a replica key, use the UpdatePrimaryRegion operation.
 
-          You can create multi-Region KMS keys for all supported KMS key types:
-          symmetric encryption KMS keys, HMAC KMS keys, asymmetric encryption
-          KMS keys, and asymmetric signing KMS keys. You can also create
-          multi-Region keys with imported key material. However, you can't
-          create multi-Region keys in a custom key store.
+            You can create multi-Region KMS keys for all supported KMS key
+            types: symmetric encryption KMS keys, HMAC KMS keys, asymmetric
+            encryption KMS keys, and asymmetric signing KMS keys. You can also
+            create multi-Region keys with imported key material. However, you
+            can't create multi-Region keys in a custom key store.
 
-          This operation supports *multi-Region keys*, an KMS feature that lets
-          you create multiple interoperable KMS keys in different Amazon Web
-          Services Regions. Because these KMS keys have the same key ID, key
-          material, and other metadata, you can use them interchangeably to
-          encrypt data in one Amazon Web Services Region and decrypt it in a
-          different Amazon Web Services Region without re-encrypting the data or
-          making a cross-Region call. For more information about multi-Region
-          keys, see [Multi-Region keys in
-          KMS](https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html)
-          in the *Key Management Service Developer Guide*.
+            This operation supports *multi-Region keys*, an KMS feature that
+            lets you create multiple interoperable KMS keys in different Amazon
+            Web Services Regions. Because these KMS keys have the same key ID,
+            key material, and other metadata, you can use them interchangeably
+            to encrypt data in one Amazon Web Services Region and decrypt it in
+            a different Amazon Web Services Region without re-encrypting the
+            data or making a cross-Region call. For more information about
+            multi-Region keys, see [Multi-Region keys in
+            KMS](https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html)
+            in the *Key Management Service Developer Guide*.
 
         Imported key material
 
-        : To import your own key material into a KMS key, begin by creating a
-          KMS key with no key material. To do this, use the `Origin` parameter
-          of `CreateKey` with a value of `EXTERNAL`. Next, use
-          GetParametersForImport operation to get a public key and import token.
-          Use the wrapping public key to encrypt your key material. Then, use
-          ImportKeyMaterial with your import token to import the key material.
-          For step-by-step instructions, see [Importing Key
-          Material](https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html)
-          in the Key Management Service Developer Guide .
+        :   To import your own key material into a KMS key, begin by creating a
+            KMS key with no key material. To do this, use the `Origin` parameter
+            of `CreateKey` with a value of `EXTERNAL`. Next, use
+            GetParametersForImport operation to get a public key and import
+            token. Use the wrapping public key to encrypt your key material.
+            Then, use ImportKeyMaterial with your import token to import the key
+            material. For step-by-step instructions, see [Importing Key
+            Material](https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html)
+            in the Key Management Service Developer Guide .
 
-          You can import key material into KMS keys of all supported KMS key
-          types: symmetric encryption KMS keys, HMAC KMS keys, asymmetric
-          encryption KMS keys, and asymmetric signing KMS keys. You can also
-          create multi-Region keys with imported key material. However, you
-          can't import key material into a KMS key in a custom key store.
+            You can import key material into KMS keys of all supported KMS key
+            types: symmetric encryption KMS keys, HMAC KMS keys, asymmetric
+            encryption KMS keys, and asymmetric signing KMS keys. You can also
+            create multi-Region keys with imported key material. However, you
+            can't import key material into a KMS key in a custom key store.
 
-          To create a multi-Region primary key with imported key material, use
-          the `Origin` parameter of `CreateKey` with a value of `EXTERNAL` and
-          the `MultiRegion` parameter with a value of `True`. To create replicas
-          of the multi-Region primary key, use the ReplicateKey operation. For
-          instructions, see [Importing key material step
-          1](https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys-create-cmk.html).
-          For more information about multi-Region keys, see [Multi-Region keys
-          in
-          KMS](https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html)
-          in the *Key Management Service Developer Guide*.
+            To create a multi-Region primary key with imported key material, use
+            the `Origin` parameter of `CreateKey` with a value of `EXTERNAL` and
+            the `MultiRegion` parameter with a value of `True`. To create
+            replicas of the multi-Region primary key, use the ReplicateKey
+            operation. For instructions, see [Importing key material step
+            1](https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys-create-cmk.html).
+            For more information about multi-Region keys, see [Multi-Region keys
+            in
+            KMS](https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html)
+            in the *Key Management Service Developer Guide*.
 
         Custom key store
 
-        : A [custom key
-          store](https://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html)
-          lets you protect your Amazon Web Services resources using keys in a
-          backing key store that you own and manage. When you request a
-          cryptographic operation with a KMS key in a custom key store, the
-          operation is performed in the backing key store using its
-          cryptographic keys.
+        :   A [custom key
+            store](https://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html)
+            lets you protect your Amazon Web Services resources using keys in a
+            backing key store that you own and manage. When you request a
+            cryptographic operation with a KMS key in a custom key store, the
+            operation is performed in the backing key store using its
+            cryptographic keys.
 
-          KMS supports [CloudHSM key
-          stores](https://docs.aws.amazon.com/kms/latest/developerguide/keystore-cloudhsm.html)
-          backed by an CloudHSM cluster and [external key
-          stores](https://docs.aws.amazon.com/kms/latest/developerguide/keystore-external.html)
-          backed by an external key manager outside of Amazon Web Services. When
-          you create a KMS key in an CloudHSM key store, KMS generates an
-          encryption key in the CloudHSM cluster and associates it with the KMS
-          key. When you create a KMS key in an external key store, you specify
-          an existing encryption key in the external key manager.
+            KMS supports [CloudHSM key
+            stores](https://docs.aws.amazon.com/kms/latest/developerguide/keystore-cloudhsm.html)
+            backed by an CloudHSM cluster and [external key
+            stores](https://docs.aws.amazon.com/kms/latest/developerguide/keystore-external.html)
+            backed by an external key manager outside of Amazon Web Services.
+            When you create a KMS key in an CloudHSM key store, KMS generates an
+            encryption key in the CloudHSM cluster and associates it with the
+            KMS key. When you create a KMS key in an external key store, you
+            specify an existing encryption key in the external key manager.
 
-          Note:
-            Some external key managers provide a simpler method for creating a KMS
-            key in an external key store. For details, see your external key
+            Note:
+            Some external key managers provide a simpler method for creating a
+            KMS key in an external key store. For details, see your external key
             manager documentation.
-          Before you create a KMS key in a custom key store, the
-          `ConnectionState` of the key store must be `CONNECTED`. To connect the
-          custom key store, use the ConnectCustomKeyStore operation. To find the
-          `ConnectionState`, use the DescribeCustomKeyStores operation.
+            Before you create a KMS key in a custom key store, the
+            `ConnectionState` of the key store must be `CONNECTED`. To connect
+            the custom key store, use the ConnectCustomKeyStore operation. To
+            find the `ConnectionState`, use the DescribeCustomKeyStores
+            operation.
 
-          To create a KMS key in a custom key store, use the `CustomKeyStoreId`.
-          Use the default `KeySpec` value, `SYMMETRIC_DEFAULT`, and the default
-          `KeyUsage` value, `ENCRYPT_DECRYPT` to create a symmetric encryption
-          key. No other key type is supported in a custom key store.
+            To create a KMS key in a custom key store, use the
+            `CustomKeyStoreId`. Use the default `KeySpec` value,
+            `SYMMETRIC_DEFAULT`, and the default `KeyUsage` value,
+            `ENCRYPT_DECRYPT` to create a symmetric encryption key. No other key
+            type is supported in a custom key store.
 
-          To create a KMS key in an [CloudHSM key
-          store](https://docs.aws.amazon.com/kms/latest/developerguide/create-cmk-keystore.html),
-          use the `Origin` parameter with a value of `AWS_CLOUDHSM`. The
-          CloudHSM cluster that is associated with the custom key store must
-          have at least two active HSMs in different Availability Zones in the
-          Amazon Web Services Region.
+            To create a KMS key in an [CloudHSM key
+            store](https://docs.aws.amazon.com/kms/latest/developerguide/create-cmk-keystore.html),
+            use the `Origin` parameter with a value of `AWS_CLOUDHSM`. The
+            CloudHSM cluster that is associated with the custom key store must
+            have at least two active HSMs in different Availability Zones in the
+            Amazon Web Services Region.
 
-          To create a KMS key in an [external key
-          store](https://docs.aws.amazon.com/kms/latest/developerguide/create-xks-keys.html),
-          use the `Origin` parameter with a value of `EXTERNAL_KEY_STORE` and an
-          `XksKeyId` parameter that identifies an existing external key.
+            To create a KMS key in an [external key
+            store](https://docs.aws.amazon.com/kms/latest/developerguide/create-xks-keys.html),
+            use the `Origin` parameter with a value of `EXTERNAL_KEY_STORE` and
+            an `XksKeyId` parameter that identifies an existing external key.
 
-          Note:
-            Some external key managers provide a simpler method for creating a KMS
-            key in an external key store. For details, see your external key
+            Note:
+            Some external key managers provide a simpler method for creating a
+            KMS key in an external key store. For details, see your external key
             manager documentation.
 
         **Cross-account use**: No. You cannot use this operation to create a KMS
@@ -922,8 +992,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `CreateKeyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -933,10 +1001,33 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `CreateKeyOutput`.
         """
-        return self._invoke(input, _models.CREATE_KEY, [], plugins)
 
+    def create_key(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateKeyOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_KEY, args, kwargs),
+            _models.CREATE_KEY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def decapsulate(
-        self, input: DecapsulateInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DecapsulateInput | _models.DecapsulateInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DecapsulateOutput: ...
+
+    @_overload
+    def decapsulate(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DecapsulateInputDict],
     ) -> DecapsulateOutput:
         """
         Recovers the shared secret that was encapsulated with the public key of
@@ -996,8 +1087,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `DecapsulateInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1007,10 +1096,33 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `DecapsulateOutput`.
         """
-        return self._invoke(input, _models.DECAPSULATE, [], plugins)
 
+    def decapsulate(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DecapsulateOutput:
+        return self._invoke(
+            self._select_input(_models.DECAPSULATE, args, kwargs),
+            _models.DECAPSULATE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def decrypt(
-        self, input: DecryptInput | None = None, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DecryptInput | _models.DecryptInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DecryptOutput: ...
+
+    @_overload
+    def decrypt(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DecryptInputDict],
     ) -> DecryptOutput:
         """
         Decrypts ciphertext that was encrypted by a KMS key using any of the
@@ -1118,8 +1230,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `DecryptInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1129,10 +1239,33 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `DecryptOutput`.
         """
-        return self._invoke(input, _models.DECRYPT, [], plugins)
 
+    def decrypt(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DecryptOutput:
+        return self._invoke(
+            self._select_input(_models.DECRYPT, args, kwargs),
+            _models.DECRYPT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_alias(
-        self, input: DeleteAliasInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteAliasInput | _models.DeleteAliasInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteAliasOutput: ...
+
+    @_overload
+    def delete_alias(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteAliasInputDict],
     ) -> DeleteAliasOutput:
         """
         Deletes the specified alias.
@@ -1181,8 +1314,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `DeleteAliasInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1192,10 +1323,34 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `DeleteAliasOutput`.
         """
-        return self._invoke(input, _models.DELETE_ALIAS, [], plugins)
 
+    def delete_alias(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteAliasOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_ALIAS, args, kwargs),
+            _models.DELETE_ALIAS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_custom_key_store(
-        self, input: DeleteCustomKeyStoreInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteCustomKeyStoreInput
+        | _models.DeleteCustomKeyStoreInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteCustomKeyStoreOutput: ...
+
+    @_overload
+    def delete_custom_key_store(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteCustomKeyStoreInputDict],
     ) -> DeleteCustomKeyStoreOutput:
         """
         Deletes a [custom key
@@ -1262,8 +1417,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `DeleteCustomKeyStoreInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1273,10 +1426,34 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `DeleteCustomKeyStoreOutput`.
         """
-        return self._invoke(input, _models.DELETE_CUSTOM_KEY_STORE, [], plugins)
 
+    def delete_custom_key_store(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteCustomKeyStoreOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_CUSTOM_KEY_STORE, args, kwargs),
+            _models.DELETE_CUSTOM_KEY_STORE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_imported_key_material(
-        self, input: DeleteImportedKeyMaterialInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteImportedKeyMaterialInput
+        | _models.DeleteImportedKeyMaterialInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteImportedKeyMaterialOutput: ...
+
+    @_overload
+    def delete_imported_key_material(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteImportedKeyMaterialInputDict],
     ) -> DeleteImportedKeyMaterialOutput:
         """
         Deletes key material that was previously imported. This operation makes
@@ -1325,8 +1502,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `DeleteImportedKeyMaterialInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1336,10 +1511,33 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `DeleteImportedKeyMaterialOutput`.
         """
-        return self._invoke(input, _models.DELETE_IMPORTED_KEY_MATERIAL, [], plugins)
 
+    def delete_imported_key_material(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteImportedKeyMaterialOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_IMPORTED_KEY_MATERIAL, args, kwargs),
+            _models.DELETE_IMPORTED_KEY_MATERIAL,
+            [],
+            plugins,
+        )
+
+    @_overload
     def derive_shared_secret(
-        self, input: DeriveSharedSecretInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeriveSharedSecretInput | _models.DeriveSharedSecretInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeriveSharedSecretOutput: ...
+
+    @_overload
+    def derive_shared_secret(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeriveSharedSecretInputDict],
     ) -> DeriveSharedSecretOutput:
         """
         Derives a shared secret using a key agreement algorithm.
@@ -1434,8 +1632,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `DeriveSharedSecretInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1445,12 +1641,34 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `DeriveSharedSecretOutput`.
         """
-        return self._invoke(input, _models.DERIVE_SHARED_SECRET, [], plugins)
 
+    def derive_shared_secret(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeriveSharedSecretOutput:
+        return self._invoke(
+            self._select_input(_models.DERIVE_SHARED_SECRET, args, kwargs),
+            _models.DERIVE_SHARED_SECRET,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_custom_key_stores(
         self,
-        input: DescribeCustomKeyStoresInput | None = None,
+        request: _models.DescribeCustomKeyStoresInput
+        | _models.DescribeCustomKeyStoresInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeCustomKeyStoresOutput: ...
+
+    @_overload
+    def describe_custom_key_stores(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeCustomKeyStoresInputDict],
     ) -> DescribeCustomKeyStoresOutput:
         """
         Gets information about [custom key
@@ -1516,8 +1734,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `DescribeCustomKeyStoresInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1527,10 +1743,33 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `DescribeCustomKeyStoresOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_CUSTOM_KEY_STORES, [], plugins)
 
+    def describe_custom_key_stores(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeCustomKeyStoresOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_CUSTOM_KEY_STORES, args, kwargs),
+            _models.DESCRIBE_CUSTOM_KEY_STORES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_key(
-        self, input: DescribeKeyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeKeyInput | _models.DescribeKeyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeKeyOutput: ...
+
+    @_overload
+    def describe_key(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeKeyInputDict],
     ) -> DescribeKeyOutput:
         """
         Provides detailed information about a KMS key. You can run `DescribeKey`
@@ -1608,8 +1847,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `DescribeKeyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1619,10 +1856,33 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `DescribeKeyOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_KEY, [], plugins)
 
+    def describe_key(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeKeyOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_KEY, args, kwargs),
+            _models.DESCRIBE_KEY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def disable_key(
-        self, input: DisableKeyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DisableKeyInput | _models.DisableKeyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DisableKeyOutput: ...
+
+    @_overload
+    def disable_key(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DisableKeyInputDict],
     ) -> DisableKeyOutput:
         """
         Sets the state of a KMS key to disabled. This change temporarily
@@ -1649,8 +1909,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `DisableKeyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1660,10 +1918,33 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `DisableKeyOutput`.
         """
-        return self._invoke(input, _models.DISABLE_KEY, [], plugins)
 
+    def disable_key(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DisableKeyOutput:
+        return self._invoke(
+            self._select_input(_models.DISABLE_KEY, args, kwargs),
+            _models.DISABLE_KEY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def disable_key_rotation(
-        self, input: DisableKeyRotationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DisableKeyRotationInput | _models.DisableKeyRotationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DisableKeyRotationOutput: ...
+
+    @_overload
+    def disable_key_rotation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DisableKeyRotationInputDict],
     ) -> DisableKeyRotationOutput:
         """
         Disables [automatic rotation of the key
@@ -1726,8 +2007,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `DisableKeyRotationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1737,10 +2016,34 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `DisableKeyRotationOutput`.
         """
-        return self._invoke(input, _models.DISABLE_KEY_ROTATION, [], plugins)
 
+    def disable_key_rotation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DisableKeyRotationOutput:
+        return self._invoke(
+            self._select_input(_models.DISABLE_KEY_ROTATION, args, kwargs),
+            _models.DISABLE_KEY_ROTATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def disconnect_custom_key_store(
-        self, input: DisconnectCustomKeyStoreInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DisconnectCustomKeyStoreInput
+        | _models.DisconnectCustomKeyStoreInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DisconnectCustomKeyStoreOutput: ...
+
+    @_overload
+    def disconnect_custom_key_store(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DisconnectCustomKeyStoreInputDict],
     ) -> DisconnectCustomKeyStoreOutput:
         """
         Disconnects the [custom key
@@ -1797,8 +2100,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `DisconnectCustomKeyStoreInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1808,10 +2109,33 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `DisconnectCustomKeyStoreOutput`.
         """
-        return self._invoke(input, _models.DISCONNECT_CUSTOM_KEY_STORE, [], plugins)
 
+    def disconnect_custom_key_store(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DisconnectCustomKeyStoreOutput:
+        return self._invoke(
+            self._select_input(_models.DISCONNECT_CUSTOM_KEY_STORE, args, kwargs),
+            _models.DISCONNECT_CUSTOM_KEY_STORE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def enable_key(
-        self, input: EnableKeyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.EnableKeyInput | _models.EnableKeyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> EnableKeyOutput: ...
+
+    @_overload
+    def enable_key(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.EnableKeyInputDict],
     ) -> EnableKeyOutput:
         """
         Sets the key state of a KMS key to enabled. This allows you to use the
@@ -1837,8 +2161,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `EnableKeyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1848,10 +2170,33 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `EnableKeyOutput`.
         """
-        return self._invoke(input, _models.ENABLE_KEY, [], plugins)
 
+    def enable_key(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> EnableKeyOutput:
+        return self._invoke(
+            self._select_input(_models.ENABLE_KEY, args, kwargs),
+            _models.ENABLE_KEY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def enable_key_rotation(
-        self, input: EnableKeyRotationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.EnableKeyRotationInput | _models.EnableKeyRotationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> EnableKeyRotationOutput: ...
+
+    @_overload
+    def enable_key_rotation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.EnableKeyRotationInputDict],
     ) -> EnableKeyRotationOutput:
         """
         Enables [automatic rotation of the key
@@ -1940,8 +2285,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `EnableKeyRotationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1951,10 +2294,33 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `EnableKeyRotationOutput`.
         """
-        return self._invoke(input, _models.ENABLE_KEY_ROTATION, [], plugins)
 
+    def enable_key_rotation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> EnableKeyRotationOutput:
+        return self._invoke(
+            self._select_input(_models.ENABLE_KEY_ROTATION, args, kwargs),
+            _models.ENABLE_KEY_ROTATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def encapsulate(
-        self, input: EncapsulateInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.EncapsulateInput | _models.EncapsulateInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> EncapsulateOutput: ...
+
+    @_overload
+    def encapsulate(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.EncapsulateInputDict],
     ) -> EncapsulateOutput:
         """
         Generates a shared secret and its encapsulated (ciphertext) form using
@@ -2001,8 +2367,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `EncapsulateInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2012,10 +2376,33 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `EncapsulateOutput`.
         """
-        return self._invoke(input, _models.ENCAPSULATE, [], plugins)
 
+    def encapsulate(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> EncapsulateOutput:
+        return self._invoke(
+            self._select_input(_models.ENCAPSULATE, args, kwargs),
+            _models.ENCAPSULATE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def encrypt(
-        self, input: EncryptInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.EncryptInput | _models.EncryptInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> EncryptOutput: ...
+
+    @_overload
+    def encrypt(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.EncryptInputDict],
     ) -> EncryptOutput:
         """
         Encrypts plaintext of up to 4,096 bytes using a KMS key. You can use a
@@ -2106,8 +2493,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `EncryptInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2117,10 +2502,33 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `EncryptOutput`.
         """
-        return self._invoke(input, _models.ENCRYPT, [], plugins)
 
+    def encrypt(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> EncryptOutput:
+        return self._invoke(
+            self._select_input(_models.ENCRYPT, args, kwargs),
+            _models.ENCRYPT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def generate_data_key(
-        self, input: GenerateDataKeyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GenerateDataKeyInput | _models.GenerateDataKeyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GenerateDataKeyOutput: ...
+
+    @_overload
+    def generate_data_key(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GenerateDataKeyInputDict],
     ) -> GenerateDataKeyOutput:
         """
         Returns a unique symmetric data key for use outside of KMS. This
@@ -2238,8 +2646,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `GenerateDataKeyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2249,10 +2655,34 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `GenerateDataKeyOutput`.
         """
-        return self._invoke(input, _models.GENERATE_DATA_KEY, [], plugins)
 
+    def generate_data_key(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GenerateDataKeyOutput:
+        return self._invoke(
+            self._select_input(_models.GENERATE_DATA_KEY, args, kwargs),
+            _models.GENERATE_DATA_KEY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def generate_data_key_pair(
-        self, input: GenerateDataKeyPairInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GenerateDataKeyPairInput
+        | _models.GenerateDataKeyPairInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GenerateDataKeyPairOutput: ...
+
+    @_overload
+    def generate_data_key_pair(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GenerateDataKeyPairInputDict],
     ) -> GenerateDataKeyPairOutput:
         """
         Returns a unique asymmetric data key pair for use outside of KMS. This
@@ -2361,8 +2791,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `GenerateDataKeyPairInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2372,12 +2800,34 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `GenerateDataKeyPairOutput`.
         """
-        return self._invoke(input, _models.GENERATE_DATA_KEY_PAIR, [], plugins)
 
+    def generate_data_key_pair(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GenerateDataKeyPairOutput:
+        return self._invoke(
+            self._select_input(_models.GENERATE_DATA_KEY_PAIR, args, kwargs),
+            _models.GENERATE_DATA_KEY_PAIR,
+            [],
+            plugins,
+        )
+
+    @_overload
     def generate_data_key_pair_without_plaintext(
         self,
-        input: GenerateDataKeyPairWithoutPlaintextInput,
+        request: _models.GenerateDataKeyPairWithoutPlaintextInput
+        | _models.GenerateDataKeyPairWithoutPlaintextInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GenerateDataKeyPairWithoutPlaintextOutput: ...
+
+    @_overload
+    def generate_data_key_pair_without_plaintext(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GenerateDataKeyPairWithoutPlaintextInputDict],
     ) -> GenerateDataKeyPairWithoutPlaintextOutput:
         """
         Returns a unique asymmetric data key pair for use outside of KMS. This
@@ -2455,8 +2905,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `GenerateDataKeyPairWithoutPlaintextInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2466,14 +2914,36 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `GenerateDataKeyPairWithoutPlaintextOutput`.
         """
+
+    def generate_data_key_pair_without_plaintext(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GenerateDataKeyPairWithoutPlaintextOutput:
         return self._invoke(
-            input, _models.GENERATE_DATA_KEY_PAIR_WITHOUT_PLAINTEXT, [], plugins
+            self._select_input(
+                _models.GENERATE_DATA_KEY_PAIR_WITHOUT_PLAINTEXT, args, kwargs
+            ),
+            _models.GENERATE_DATA_KEY_PAIR_WITHOUT_PLAINTEXT,
+            [],
+            plugins,
         )
 
+    @_overload
     def generate_data_key_without_plaintext(
         self,
-        input: GenerateDataKeyWithoutPlaintextInput,
+        request: _models.GenerateDataKeyWithoutPlaintextInput
+        | _models.GenerateDataKeyWithoutPlaintextInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GenerateDataKeyWithoutPlaintextOutput: ...
+
+    @_overload
+    def generate_data_key_without_plaintext(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GenerateDataKeyWithoutPlaintextInputDict],
     ) -> GenerateDataKeyWithoutPlaintextOutput:
         """
         Returns a unique symmetric data key for use outside of KMS. This
@@ -2557,8 +3027,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `GenerateDataKeyWithoutPlaintextInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2568,12 +3036,35 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `GenerateDataKeyWithoutPlaintextOutput`.
         """
+
+    def generate_data_key_without_plaintext(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GenerateDataKeyWithoutPlaintextOutput:
         return self._invoke(
-            input, _models.GENERATE_DATA_KEY_WITHOUT_PLAINTEXT, [], plugins
+            self._select_input(
+                _models.GENERATE_DATA_KEY_WITHOUT_PLAINTEXT, args, kwargs
+            ),
+            _models.GENERATE_DATA_KEY_WITHOUT_PLAINTEXT,
+            [],
+            plugins,
         )
 
+    @_overload
     def generate_mac(
-        self, input: GenerateMacInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GenerateMacInput | _models.GenerateMacInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GenerateMacOutput: ...
+
+    @_overload
+    def generate_mac(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GenerateMacInputDict],
     ) -> GenerateMacOutput:
         """
         Generates a hash-based message authentication code (HMAC) for a message
@@ -2620,8 +3111,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `GenerateMacInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2631,12 +3120,33 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `GenerateMacOutput`.
         """
-        return self._invoke(input, _models.GENERATE_MAC, [], plugins)
 
+    def generate_mac(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GenerateMacOutput:
+        return self._invoke(
+            self._select_input(_models.GENERATE_MAC, args, kwargs),
+            _models.GENERATE_MAC,
+            [],
+            plugins,
+        )
+
+    @_overload
     def generate_random(
         self,
-        input: GenerateRandomInput | None = None,
+        request: _models.GenerateRandomInput | _models.GenerateRandomInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GenerateRandomOutput: ...
+
+    @_overload
+    def generate_random(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GenerateRandomInputDict],
     ) -> GenerateRandomOutput:
         """
         Returns a random byte string that is cryptographically secure.
@@ -2681,8 +3191,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `GenerateRandomInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2692,10 +3200,33 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `GenerateRandomOutput`.
         """
-        return self._invoke(input, _models.GENERATE_RANDOM, [], plugins)
 
+    def generate_random(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GenerateRandomOutput:
+        return self._invoke(
+            self._select_input(_models.GENERATE_RANDOM, args, kwargs),
+            _models.GENERATE_RANDOM,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_key_last_usage(
-        self, input: GetKeyLastUsageInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetKeyLastUsageInput | _models.GetKeyLastUsageInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetKeyLastUsageOutput: ...
+
+    @_overload
+    def get_key_last_usage(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetKeyLastUsageInputDict],
     ) -> GetKeyLastUsageOutput:
         """
         Returns usage information about the last successful cryptographic
@@ -2763,8 +3294,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `GetKeyLastUsageInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2774,10 +3303,33 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `GetKeyLastUsageOutput`.
         """
-        return self._invoke(input, _models.GET_KEY_LAST_USAGE, [], plugins)
 
+    def get_key_last_usage(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetKeyLastUsageOutput:
+        return self._invoke(
+            self._select_input(_models.GET_KEY_LAST_USAGE, args, kwargs),
+            _models.GET_KEY_LAST_USAGE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_key_policy(
-        self, input: GetKeyPolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetKeyPolicyInput | _models.GetKeyPolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetKeyPolicyOutput: ...
+
+    @_overload
+    def get_key_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetKeyPolicyInputDict],
     ) -> GetKeyPolicyOutput:
         """
         Gets a key policy attached to the specified KMS key.
@@ -2797,8 +3349,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `GetKeyPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2808,10 +3358,34 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `GetKeyPolicyOutput`.
         """
-        return self._invoke(input, _models.GET_KEY_POLICY, [], plugins)
 
+    def get_key_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetKeyPolicyOutput:
+        return self._invoke(
+            self._select_input(_models.GET_KEY_POLICY, args, kwargs),
+            _models.GET_KEY_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_key_rotation_status(
-        self, input: GetKeyRotationStatusInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetKeyRotationStatusInput
+        | _models.GetKeyRotationStatusInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetKeyRotationStatusOutput: ...
+
+    @_overload
+    def get_key_rotation_status(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetKeyRotationStatusInputDict],
     ) -> GetKeyRotationStatusOutput:
         """
         Provides detailed information about the rotation status for a KMS key,
@@ -2896,8 +3470,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `GetKeyRotationStatusInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2907,10 +3479,34 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `GetKeyRotationStatusOutput`.
         """
-        return self._invoke(input, _models.GET_KEY_ROTATION_STATUS, [], plugins)
 
+    def get_key_rotation_status(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetKeyRotationStatusOutput:
+        return self._invoke(
+            self._select_input(_models.GET_KEY_ROTATION_STATUS, args, kwargs),
+            _models.GET_KEY_ROTATION_STATUS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_parameters_for_import(
-        self, input: GetParametersForImportInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetParametersForImportInput
+        | _models.GetParametersForImportInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetParametersForImportOutput: ...
+
+    @_overload
+    def get_parameters_for_import(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetParametersForImportInputDict],
     ) -> GetParametersForImportOutput:
         """
         Returns the public key and an import token you need to import or
@@ -2993,8 +3589,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `GetParametersForImportInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3004,10 +3598,33 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `GetParametersForImportOutput`.
         """
-        return self._invoke(input, _models.GET_PARAMETERS_FOR_IMPORT, [], plugins)
 
+    def get_parameters_for_import(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetParametersForImportOutput:
+        return self._invoke(
+            self._select_input(_models.GET_PARAMETERS_FOR_IMPORT, args, kwargs),
+            _models.GET_PARAMETERS_FOR_IMPORT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_public_key(
-        self, input: GetPublicKeyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetPublicKeyInput | _models.GetPublicKeyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetPublicKeyOutput: ...
+
+    @_overload
+    def get_public_key(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetPublicKeyInputDict],
     ) -> GetPublicKeyOutput:
         """
         Returns the public key of an asymmetric KMS key. Unlike the private key
@@ -3080,8 +3697,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `GetPublicKeyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3091,10 +3706,33 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `GetPublicKeyOutput`.
         """
-        return self._invoke(input, _models.GET_PUBLIC_KEY, [], plugins)
 
+    def get_public_key(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetPublicKeyOutput:
+        return self._invoke(
+            self._select_input(_models.GET_PUBLIC_KEY, args, kwargs),
+            _models.GET_PUBLIC_KEY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def import_key_material(
-        self, input: ImportKeyMaterialInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ImportKeyMaterialInput | _models.ImportKeyMaterialInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ImportKeyMaterialOutput: ...
+
+    @_overload
+    def import_key_material(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ImportKeyMaterialInputDict],
     ) -> ImportKeyMaterialOutput:
         """
         Imports or reimports key material into an existing KMS key that was
@@ -3239,8 +3877,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `ImportKeyMaterialInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3250,10 +3886,33 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `ImportKeyMaterialOutput`.
         """
-        return self._invoke(input, _models.IMPORT_KEY_MATERIAL, [], plugins)
 
+    def import_key_material(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ImportKeyMaterialOutput:
+        return self._invoke(
+            self._select_input(_models.IMPORT_KEY_MATERIAL, args, kwargs),
+            _models.IMPORT_KEY_MATERIAL,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_aliases(
-        self, input: ListAliasesInput | None = None, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListAliasesInput | _models.ListAliasesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListAliasesOutput: ...
+
+    @_overload
+    def list_aliases(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListAliasesInputDict],
     ) -> ListAliasesOutput:
         """
         Gets a list of aliases in the caller's Amazon Web Services account and
@@ -3301,8 +3960,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `ListAliasesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3312,10 +3969,33 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `ListAliasesOutput`.
         """
-        return self._invoke(input, _models.LIST_ALIASES, [], plugins)
 
+    def list_aliases(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListAliasesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_ALIASES, args, kwargs),
+            _models.LIST_ALIASES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_grants(
-        self, input: ListGrantsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListGrantsInput | _models.ListGrantsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListGrantsOutput: ...
+
+    @_overload
+    def list_grants(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListGrantsInputDict],
     ) -> ListGrantsOutput:
         """
         Gets a list of all grants for the specified KMS key.
@@ -3369,8 +4049,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `ListGrantsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3380,10 +4058,33 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `ListGrantsOutput`.
         """
-        return self._invoke(input, _models.LIST_GRANTS, [], plugins)
 
+    def list_grants(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListGrantsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_GRANTS, args, kwargs),
+            _models.LIST_GRANTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_key_policies(
-        self, input: ListKeyPoliciesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListKeyPoliciesInput | _models.ListKeyPoliciesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListKeyPoliciesOutput: ...
+
+    @_overload
+    def list_key_policies(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListKeyPoliciesInputDict],
     ) -> ListKeyPoliciesOutput:
         """
         Gets the names of the key policies that are attached to a KMS key. This
@@ -3409,8 +4110,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `ListKeyPoliciesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3420,10 +4119,33 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `ListKeyPoliciesOutput`.
         """
-        return self._invoke(input, _models.LIST_KEY_POLICIES, [], plugins)
 
+    def list_key_policies(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListKeyPoliciesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_KEY_POLICIES, args, kwargs),
+            _models.LIST_KEY_POLICIES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_key_rotations(
-        self, input: ListKeyRotationsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListKeyRotationsInput | _models.ListKeyRotationsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListKeyRotationsOutput: ...
+
+    @_overload
+    def list_key_rotations(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListKeyRotationsInputDict],
     ) -> ListKeyRotationsOutput:
         """
         Returns information about the key materials associated with the
@@ -3464,8 +4186,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `ListKeyRotationsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3475,10 +4195,33 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `ListKeyRotationsOutput`.
         """
-        return self._invoke(input, _models.LIST_KEY_ROTATIONS, [], plugins)
 
+    def list_key_rotations(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListKeyRotationsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_KEY_ROTATIONS, args, kwargs),
+            _models.LIST_KEY_ROTATIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_keys(
-        self, input: ListKeysInput | None = None, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListKeysInput | _models.ListKeysInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListKeysOutput: ...
+
+    @_overload
+    def list_keys(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListKeysInputDict],
     ) -> ListKeysOutput:
         """
         Gets a list of all KMS keys in the caller's Amazon Web Services account
@@ -3506,8 +4249,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `ListKeysInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3517,10 +4258,33 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `ListKeysOutput`.
         """
-        return self._invoke(input, _models.LIST_KEYS, [], plugins)
 
+    def list_keys(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListKeysOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_KEYS, args, kwargs),
+            _models.LIST_KEYS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_resource_tags(
-        self, input: ListResourceTagsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListResourceTagsInput | _models.ListResourceTagsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListResourceTagsOutput: ...
+
+    @_overload
+    def list_resource_tags(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListResourceTagsInputDict],
     ) -> ListResourceTagsOutput:
         """
         Returns all tags on the specified KMS key.
@@ -3554,8 +4318,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `ListResourceTagsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3565,12 +4327,34 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `ListResourceTagsOutput`.
         """
-        return self._invoke(input, _models.LIST_RESOURCE_TAGS, [], plugins)
 
+    def list_resource_tags(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListResourceTagsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_RESOURCE_TAGS, args, kwargs),
+            _models.LIST_RESOURCE_TAGS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_retirable_grants(
         self,
-        input: ListRetirableGrantsInput | None = None,
+        request: _models.ListRetirableGrantsInput
+        | _models.ListRetirableGrantsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListRetirableGrantsOutput: ...
+
+    @_overload
+    def list_retirable_grants(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListRetirableGrantsInputDict],
     ) -> ListRetirableGrantsOutput:
         """
         Returns information about all grants in the Amazon Web Services account
@@ -3630,8 +4414,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `ListRetirableGrantsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3641,10 +4423,33 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `ListRetirableGrantsOutput`.
         """
-        return self._invoke(input, _models.LIST_RETIRABLE_GRANTS, [], plugins)
 
+    def list_retirable_grants(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListRetirableGrantsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_RETIRABLE_GRANTS, args, kwargs),
+            _models.LIST_RETIRABLE_GRANTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_key_policy(
-        self, input: PutKeyPolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutKeyPolicyInput | _models.PutKeyPolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutKeyPolicyOutput: ...
+
+    @_overload
+    def put_key_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutKeyPolicyInputDict],
     ) -> PutKeyPolicyOutput:
         """
         Attaches a key policy to the specified KMS key.
@@ -3674,8 +4479,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `PutKeyPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3685,10 +4488,33 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `PutKeyPolicyOutput`.
         """
-        return self._invoke(input, _models.PUT_KEY_POLICY, [], plugins)
 
+    def put_key_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutKeyPolicyOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_KEY_POLICY, args, kwargs),
+            _models.PUT_KEY_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def re_encrypt(
-        self, input: ReEncryptInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ReEncryptInput | _models.ReEncryptInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ReEncryptOutput: ...
+
+    @_overload
+    def re_encrypt(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ReEncryptInputDict],
     ) -> ReEncryptOutput:
         """
         Decrypts ciphertext and then reencrypts it entirely within KMS. You can
@@ -3809,8 +4635,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `ReEncryptInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3820,10 +4644,33 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `ReEncryptOutput`.
         """
-        return self._invoke(input, _models.RE_ENCRYPT, [], plugins)
 
+    def re_encrypt(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ReEncryptOutput:
+        return self._invoke(
+            self._select_input(_models.RE_ENCRYPT, args, kwargs),
+            _models.RE_ENCRYPT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def replicate_key(
-        self, input: ReplicateKeyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ReplicateKeyInput | _models.ReplicateKeyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ReplicateKeyOutput: ...
+
+    @_overload
+    def replicate_key(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ReplicateKeyInputDict],
     ) -> ReplicateKeyOutput:
         """
         Replicates a multi-Region key into the specified Region. This operation
@@ -3923,8 +4770,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `ReplicateKeyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3934,10 +4779,33 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `ReplicateKeyOutput`.
         """
-        return self._invoke(input, _models.REPLICATE_KEY, [], plugins)
 
+    def replicate_key(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ReplicateKeyOutput:
+        return self._invoke(
+            self._select_input(_models.REPLICATE_KEY, args, kwargs),
+            _models.REPLICATE_KEY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def retire_grant(
-        self, input: RetireGrantInput | None = None, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RetireGrantInput | _models.RetireGrantInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RetireGrantOutput: ...
+
+    @_overload
+    def retire_grant(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RetireGrantInputDict],
     ) -> RetireGrantOutput:
         """
         Deletes a grant. Typically, you retire a grant when you no longer need
@@ -3983,8 +4851,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `RetireGrantInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3994,10 +4860,33 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `RetireGrantOutput`.
         """
-        return self._invoke(input, _models.RETIRE_GRANT, [], plugins)
 
+    def retire_grant(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RetireGrantOutput:
+        return self._invoke(
+            self._select_input(_models.RETIRE_GRANT, args, kwargs),
+            _models.RETIRE_GRANT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def revoke_grant(
-        self, input: RevokeGrantInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RevokeGrantInput | _models.RevokeGrantInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RevokeGrantOutput: ...
+
+    @_overload
+    def revoke_grant(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RevokeGrantInputDict],
     ) -> RevokeGrantOutput:
         """
         Deletes the specified grant. You revoke a grant to terminate the
@@ -4044,8 +4933,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `RevokeGrantInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4055,10 +4942,33 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `RevokeGrantOutput`.
         """
-        return self._invoke(input, _models.REVOKE_GRANT, [], plugins)
 
+    def revoke_grant(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RevokeGrantOutput:
+        return self._invoke(
+            self._select_input(_models.REVOKE_GRANT, args, kwargs),
+            _models.REVOKE_GRANT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def rotate_key_on_demand(
-        self, input: RotateKeyOnDemandInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RotateKeyOnDemandInput | _models.RotateKeyOnDemandInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RotateKeyOnDemandOutput: ...
+
+    @_overload
+    def rotate_key_on_demand(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RotateKeyOnDemandInputDict],
     ) -> RotateKeyOnDemandOutput:
         """
         Immediately initiates rotation of the key material of the specified
@@ -4143,8 +5053,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `RotateKeyOnDemandInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4154,10 +5062,34 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `RotateKeyOnDemandOutput`.
         """
-        return self._invoke(input, _models.ROTATE_KEY_ON_DEMAND, [], plugins)
 
+    def rotate_key_on_demand(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RotateKeyOnDemandOutput:
+        return self._invoke(
+            self._select_input(_models.ROTATE_KEY_ON_DEMAND, args, kwargs),
+            _models.ROTATE_KEY_ON_DEMAND,
+            [],
+            plugins,
+        )
+
+    @_overload
     def schedule_key_deletion(
-        self, input: ScheduleKeyDeletionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ScheduleKeyDeletionInput
+        | _models.ScheduleKeyDeletionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ScheduleKeyDeletionOutput: ...
+
+    @_overload
+    def schedule_key_deletion(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ScheduleKeyDeletionInputDict],
     ) -> ScheduleKeyDeletionOutput:
         """
         Schedules the deletion of a KMS key. By default, KMS applies a waiting
@@ -4234,8 +5166,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `ScheduleKeyDeletionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4245,9 +5175,34 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `ScheduleKeyDeletionOutput`.
         """
-        return self._invoke(input, _models.SCHEDULE_KEY_DELETION, [], plugins)
 
-    def sign(self, input: SignInput, plugins: list[Plugin] | None = None) -> SignOutput:
+    def schedule_key_deletion(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ScheduleKeyDeletionOutput:
+        return self._invoke(
+            self._select_input(_models.SCHEDULE_KEY_DELETION, args, kwargs),
+            _models.SCHEDULE_KEY_DELETION,
+            [],
+            plugins,
+        )
+
+    @_overload
+    def sign(
+        self,
+        request: _models.SignInput | _models.SignInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> SignOutput: ...
+
+    @_overload
+    def sign(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SignInputDict],
+    ) -> SignOutput:
         """
         Creates a [digital
         signature](https://en.wikipedia.org/wiki/Digital_signature) for a
@@ -4316,8 +5271,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `SignInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4327,10 +5280,30 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `SignOutput`.
         """
-        return self._invoke(input, _models.SIGN, [], plugins)
 
+    def sign(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SignOutput:
+        return self._invoke(
+            self._select_input(_models.SIGN, args, kwargs), _models.SIGN, [], plugins
+        )
+
+    @_overload
     def tag_resource(
-        self, input: TagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.TagResourceInput | _models.TagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> TagResourceOutput: ...
+
+    @_overload
+    def tag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.TagResourceInputDict],
     ) -> TagResourceOutput:
         """
         Adds or edits tags on a [customer managed
@@ -4395,8 +5368,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `TagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4406,10 +5377,33 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `TagResourceOutput`.
         """
-        return self._invoke(input, _models.TAG_RESOURCE, [], plugins)
 
+    def tag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> TagResourceOutput:
+        return self._invoke(
+            self._select_input(_models.TAG_RESOURCE, args, kwargs),
+            _models.TAG_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def untag_resource(
-        self, input: UntagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UntagResourceInput | _models.UntagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UntagResourceOutput: ...
+
+    @_overload
+    def untag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UntagResourceInputDict],
     ) -> UntagResourceOutput:
         """
         Deletes tags from a [customer managed
@@ -4461,8 +5455,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `UntagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4472,10 +5464,33 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `UntagResourceOutput`.
         """
-        return self._invoke(input, _models.UNTAG_RESOURCE, [], plugins)
 
+    def untag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UntagResourceOutput:
+        return self._invoke(
+            self._select_input(_models.UNTAG_RESOURCE, args, kwargs),
+            _models.UNTAG_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_alias(
-        self, input: UpdateAliasInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateAliasInput | _models.UpdateAliasInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateAliasOutput: ...
+
+    @_overload
+    def update_alias(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateAliasInputDict],
     ) -> UpdateAliasOutput:
         """
         Associates an existing KMS alias with a different KMS key. Each alias is
@@ -4541,8 +5556,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `UpdateAliasInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4552,10 +5565,34 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `UpdateAliasOutput`.
         """
-        return self._invoke(input, _models.UPDATE_ALIAS, [], plugins)
 
+    def update_alias(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateAliasOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_ALIAS, args, kwargs),
+            _models.UPDATE_ALIAS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_custom_key_store(
-        self, input: UpdateCustomKeyStoreInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateCustomKeyStoreInput
+        | _models.UpdateCustomKeyStoreInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateCustomKeyStoreOutput: ...
+
+    @_overload
+    def update_custom_key_store(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateCustomKeyStoreInputDict],
     ) -> UpdateCustomKeyStoreOutput:
         """
         Changes the properties of a custom key store. You can use this operation
@@ -4656,8 +5693,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `UpdateCustomKeyStoreInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4667,10 +5702,34 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `UpdateCustomKeyStoreOutput`.
         """
-        return self._invoke(input, _models.UPDATE_CUSTOM_KEY_STORE, [], plugins)
 
+    def update_custom_key_store(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateCustomKeyStoreOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_CUSTOM_KEY_STORE, args, kwargs),
+            _models.UPDATE_CUSTOM_KEY_STORE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_key_description(
-        self, input: UpdateKeyDescriptionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateKeyDescriptionInput
+        | _models.UpdateKeyDescriptionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateKeyDescriptionOutput: ...
+
+    @_overload
+    def update_key_description(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateKeyDescriptionInputDict],
     ) -> UpdateKeyDescriptionOutput:
         """
         Updates the description of a KMS key. To see the description of a KMS
@@ -4699,8 +5758,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `UpdateKeyDescriptionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4710,10 +5767,34 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `UpdateKeyDescriptionOutput`.
         """
-        return self._invoke(input, _models.UPDATE_KEY_DESCRIPTION, [], plugins)
 
+    def update_key_description(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateKeyDescriptionOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_KEY_DESCRIPTION, args, kwargs),
+            _models.UPDATE_KEY_DESCRIPTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_primary_region(
-        self, input: UpdatePrimaryRegionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdatePrimaryRegionInput
+        | _models.UpdatePrimaryRegionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdatePrimaryRegionOutput: ...
+
+    @_overload
+    def update_primary_region(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdatePrimaryRegionInputDict],
     ) -> UpdatePrimaryRegionOutput:
         """
         Changes the primary key of a multi-Region key.
@@ -4806,8 +5887,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `UpdatePrimaryRegionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4817,10 +5896,33 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `UpdatePrimaryRegionOutput`.
         """
-        return self._invoke(input, _models.UPDATE_PRIMARY_REGION, [], plugins)
 
+    def update_primary_region(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdatePrimaryRegionOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_PRIMARY_REGION, args, kwargs),
+            _models.UPDATE_PRIMARY_REGION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def verify(
-        self, input: VerifyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.VerifyInput | _models.VerifyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> VerifyOutput: ...
+
+    @_overload
+    def verify(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.VerifyInputDict],
     ) -> VerifyOutput:
         """
         Verifies a digital signature that was generated by the Sign operation.
@@ -4880,8 +5982,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `VerifyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4891,10 +5991,33 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `VerifyOutput`.
         """
-        return self._invoke(input, _models.VERIFY, [], plugins)
 
+    def verify(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> VerifyOutput:
+        return self._invoke(
+            self._select_input(_models.VERIFY, args, kwargs),
+            _models.VERIFY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def verify_mac(
-        self, input: VerifyMacInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.VerifyMacInput | _models.VerifyMacInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> VerifyMacOutput: ...
+
+    @_overload
+    def verify_mac(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.VerifyMacInputDict],
     ) -> VerifyMacOutput:
         """
         Verifies the hash-based message authentication code (HMAC) for a
@@ -4935,8 +6058,6 @@ class KMSClient(Client[KMSConfig]):
         consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
 
         Args:
-            input:
-                An instance of `VerifyMacInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4946,7 +6067,16 @@ class KMSClient(Client[KMSConfig]):
         Returns:
             An instance of `VerifyMacOutput`.
         """
-        return self._invoke(input, _models.VERIFY_MAC, [], plugins)
+
+    def verify_mac(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> VerifyMacOutput:
+        return self._invoke(
+            self._select_input(_models.VERIFY_MAC, args, kwargs),
+            _models.VERIFY_MAC,
+            [],
+            plugins,
+        )
 
     def _new_config(self) -> KMSConfig:
         return KMSConfig.resolve()

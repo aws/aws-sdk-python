@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import cast
+from typing import Unpack as _Unpack, cast, overload as _overload
 
 from smithy_aws_core.aio.identity.chain import AsyncIdentityChain
 from smithy_aws_core.config.types import ConfigSource
@@ -16,12 +16,9 @@ from smithy_http.plugins import user_agent_plugin
 from .. import models as _models
 from ..models import (
     CodeInterpreterStreamOutput,
-    InvokeAgentRuntimeCommandInput,
     InvokeAgentRuntimeCommandOutput,
     InvokeAgentRuntimeCommandStreamOutput,
-    InvokeCodeInterpreterInput,
     InvokeCodeInterpreterOutput,
-    InvokeHarnessInput,
     InvokeHarnessOutput,
     InvokeHarnessStreamOutput,
     _CodeInterpreterStreamOutputDeserializer,
@@ -35,135 +32,70 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from ..models import (
-        BatchCreateMemoryRecordsInput,
         BatchCreateMemoryRecordsOutput,
-        BatchDeleteMemoryRecordsInput,
         BatchDeleteMemoryRecordsOutput,
-        BatchUpdateMemoryRecordsInput,
         BatchUpdateMemoryRecordsOutput,
-        CompleteResourceTokenAuthInput,
         CompleteResourceTokenAuthOutput,
-        CreateABTestInput,
         CreateABTestOutput,
-        CreateEventInput,
         CreateEventOutput,
-        CreatePaymentInstrumentInput,
         CreatePaymentInstrumentOutput,
-        CreatePaymentSessionInput,
         CreatePaymentSessionOutput,
-        DeleteABTestInput,
         DeleteABTestOutput,
-        DeleteBatchEvaluationInput,
         DeleteBatchEvaluationOutput,
-        DeleteCapacityProviderSessionInput,
         DeleteCapacityProviderSessionOutput,
-        DeleteEventInput,
         DeleteEventOutput,
-        DeleteMemoryRecordInput,
         DeleteMemoryRecordOutput,
-        DeletePaymentInstrumentInput,
         DeletePaymentInstrumentOutput,
-        DeletePaymentSessionInput,
         DeletePaymentSessionOutput,
-        DeleteRecommendationInput,
         DeleteRecommendationOutput,
-        EvaluateInput,
         EvaluateOutput,
-        GetABTestInput,
         GetABTestOutput,
-        GetAgentCardInput,
         GetAgentCardOutput,
-        GetBatchEvaluationInput,
         GetBatchEvaluationOutput,
-        GetBrowserSessionInput,
         GetBrowserSessionOutput,
-        GetCodeInterpreterSessionInput,
         GetCodeInterpreterSessionOutput,
-        GetEventInput,
         GetEventOutput,
-        GetMemoryRecordInput,
         GetMemoryRecordOutput,
-        GetPaymentInstrumentBalanceInput,
         GetPaymentInstrumentBalanceOutput,
-        GetPaymentInstrumentInput,
         GetPaymentInstrumentOutput,
-        GetPaymentSessionInput,
         GetPaymentSessionOutput,
-        GetRecommendationInput,
         GetRecommendationOutput,
-        GetResourceApiKeyInput,
         GetResourceApiKeyOutput,
-        GetResourceOauth2TokenInput,
         GetResourceOauth2TokenOutput,
-        GetResourcePaymentTokenInput,
         GetResourcePaymentTokenOutput,
-        GetWorkloadAccessTokenForJWTInput,
         GetWorkloadAccessTokenForJWTOutput,
-        GetWorkloadAccessTokenForUserIdInput,
         GetWorkloadAccessTokenForUserIdOutput,
-        GetWorkloadAccessTokenInput,
         GetWorkloadAccessTokenOutput,
-        IngestDataInput,
         IngestDataOutput,
-        InvokeAgentRuntimeInput,
         InvokeAgentRuntimeOutput,
-        InvokeBrowserInput,
         InvokeBrowserOutput,
-        InvokeWebSearchInput,
         InvokeWebSearchOutput,
-        ListABTestsInput,
         ListABTestsOutput,
-        ListActorsInput,
         ListActorsOutput,
-        ListBatchEvaluationsInput,
         ListBatchEvaluationsOutput,
-        ListBrowserSessionsInput,
         ListBrowserSessionsOutput,
-        ListCodeInterpreterSessionsInput,
         ListCodeInterpreterSessionsOutput,
-        ListEventsInput,
         ListEventsOutput,
-        ListMemoryExtractionJobsInput,
         ListMemoryExtractionJobsOutput,
-        ListMemoryRecordsInput,
         ListMemoryRecordsOutput,
-        ListPaymentInstrumentsInput,
         ListPaymentInstrumentsOutput,
-        ListPaymentSessionsInput,
         ListPaymentSessionsOutput,
-        ListRecommendationsInput,
         ListRecommendationsOutput,
-        ListSessionsInput,
         ListSessionsOutput,
-        ProcessPaymentInput,
         ProcessPaymentOutput,
-        RetrieveMemoryRecordsInput,
         RetrieveMemoryRecordsOutput,
-        SaveBrowserSessionProfileInput,
         SaveBrowserSessionProfileOutput,
-        SearchRegistryRecordsInput,
         SearchRegistryRecordsOutput,
-        StartBatchEvaluationInput,
         StartBatchEvaluationOutput,
-        StartBrowserSessionInput,
         StartBrowserSessionOutput,
-        StartCodeInterpreterSessionInput,
         StartCodeInterpreterSessionOutput,
-        StartMemoryExtractionJobInput,
         StartMemoryExtractionJobOutput,
-        StartRecommendationInput,
         StartRecommendationOutput,
-        StopBatchEvaluationInput,
         StopBatchEvaluationOutput,
-        StopBrowserSessionInput,
         StopBrowserSessionOutput,
-        StopCodeInterpreterSessionInput,
         StopCodeInterpreterSessionOutput,
-        StopRuntimeSessionInput,
         StopRuntimeSessionOutput,
-        UpdateABTestInput,
         UpdateABTestOutput,
-        UpdateBrowserStreamInput,
         UpdateBrowserStreamOutput,
     )
 
@@ -178,18 +110,31 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
     Services services.
     """
 
-    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
+    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
 
+    @_overload
     async def batch_create_memory_records(
-        self, input: BatchCreateMemoryRecordsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.BatchCreateMemoryRecordsInput
+        | _models.BatchCreateMemoryRecordsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> BatchCreateMemoryRecordsOutput: ...
+
+    @_overload
+    async def batch_create_memory_records(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.BatchCreateMemoryRecordsInputDict],
     ) -> BatchCreateMemoryRecordsOutput:
         """
         Creates multiple memory records in a single batch operation for the
         specified memory with custom content.
 
         Args:
-            input:
-                An instance of `BatchCreateMemoryRecordsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -199,20 +144,40 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `BatchCreateMemoryRecordsOutput`.
         """
+
+    async def batch_create_memory_records(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> BatchCreateMemoryRecordsOutput:
         return await self._invoke(
-            input, _models.BATCH_CREATE_MEMORY_RECORDS, [], plugins
+            self._select_input(_models.BATCH_CREATE_MEMORY_RECORDS, args, kwargs),
+            _models.BATCH_CREATE_MEMORY_RECORDS,
+            [],
+            plugins,
         )
 
+    @_overload
     async def batch_delete_memory_records(
-        self, input: BatchDeleteMemoryRecordsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.BatchDeleteMemoryRecordsInput
+        | _models.BatchDeleteMemoryRecordsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> BatchDeleteMemoryRecordsOutput: ...
+
+    @_overload
+    async def batch_delete_memory_records(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.BatchDeleteMemoryRecordsInputDict],
     ) -> BatchDeleteMemoryRecordsOutput:
         """
         Deletes multiple memory records in a single batch operation from the
         specified memory.
 
         Args:
-            input:
-                An instance of `BatchDeleteMemoryRecordsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -222,20 +187,40 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `BatchDeleteMemoryRecordsOutput`.
         """
+
+    async def batch_delete_memory_records(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> BatchDeleteMemoryRecordsOutput:
         return await self._invoke(
-            input, _models.BATCH_DELETE_MEMORY_RECORDS, [], plugins
+            self._select_input(_models.BATCH_DELETE_MEMORY_RECORDS, args, kwargs),
+            _models.BATCH_DELETE_MEMORY_RECORDS,
+            [],
+            plugins,
         )
 
+    @_overload
     async def batch_update_memory_records(
-        self, input: BatchUpdateMemoryRecordsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.BatchUpdateMemoryRecordsInput
+        | _models.BatchUpdateMemoryRecordsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> BatchUpdateMemoryRecordsOutput: ...
+
+    @_overload
+    async def batch_update_memory_records(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.BatchUpdateMemoryRecordsInputDict],
     ) -> BatchUpdateMemoryRecordsOutput:
         """
         Updates multiple memory records with custom content in a single batch
         operation within the specified memory.
 
         Args:
-            input:
-                An instance of `BatchUpdateMemoryRecordsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -245,20 +230,40 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `BatchUpdateMemoryRecordsOutput`.
         """
+
+    async def batch_update_memory_records(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> BatchUpdateMemoryRecordsOutput:
         return await self._invoke(
-            input, _models.BATCH_UPDATE_MEMORY_RECORDS, [], plugins
+            self._select_input(_models.BATCH_UPDATE_MEMORY_RECORDS, args, kwargs),
+            _models.BATCH_UPDATE_MEMORY_RECORDS,
+            [],
+            plugins,
         )
 
+    @_overload
     async def complete_resource_token_auth(
-        self, input: CompleteResourceTokenAuthInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CompleteResourceTokenAuthInput
+        | _models.CompleteResourceTokenAuthInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CompleteResourceTokenAuthOutput: ...
+
+    @_overload
+    async def complete_resource_token_auth(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CompleteResourceTokenAuthInputDict],
     ) -> CompleteResourceTokenAuthOutput:
         """
         Confirms the user authentication session for obtaining OAuth2.0 tokens
         for a resource.
 
         Args:
-            input:
-                An instance of `CompleteResourceTokenAuthInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -268,12 +273,33 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `CompleteResourceTokenAuthOutput`.
         """
+
+    async def complete_resource_token_auth(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CompleteResourceTokenAuthOutput:
         return await self._invoke(
-            input, _models.COMPLETE_RESOURCE_TOKEN_AUTH, [], plugins
+            self._select_input(_models.COMPLETE_RESOURCE_TOKEN_AUTH, args, kwargs),
+            _models.COMPLETE_RESOURCE_TOKEN_AUTH,
+            [],
+            plugins,
         )
 
+    @_overload
     async def create_ab_test(
-        self, input: CreateABTestInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateABTestInput | _models.CreateABTestInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateABTestOutput: ...
+
+    @_overload
+    async def create_ab_test(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateABTestInputDict],
     ) -> CreateABTestOutput:
         """
         Creates an A/B test for comparing agent configurations. A/B tests split
@@ -282,8 +308,6 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         configurations to determine which variant performs better.
 
         Args:
-            input:
-                An instance of `CreateABTestInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -293,10 +317,33 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `CreateABTestOutput`.
         """
-        return await self._invoke(input, _models.CREATE_AB_TEST, [], plugins)
 
+    async def create_ab_test(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateABTestOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_AB_TEST, args, kwargs),
+            _models.CREATE_AB_TEST,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_event(
-        self, input: CreateEventInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateEventInput | _models.CreateEventInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateEventOutput: ...
+
+    @_overload
+    async def create_event(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateEventInputDict],
     ) -> CreateEventOutput:
         """
         Creates an event in an AgentCore Memory resource. Events represent
@@ -309,8 +356,6 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         This operation is subject to request rate limiting.
 
         Args:
-            input:
-                An instance of `CreateEventInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -320,17 +365,39 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `CreateEventOutput`.
         """
-        return await self._invoke(input, _models.CREATE_EVENT, [], plugins)
 
+    async def create_event(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateEventOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_EVENT, args, kwargs),
+            _models.CREATE_EVENT,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_payment_instrument(
-        self, input: CreatePaymentInstrumentInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreatePaymentInstrumentInput
+        | _models.CreatePaymentInstrumentInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreatePaymentInstrumentOutput: ...
+
+    @_overload
+    async def create_payment_instrument(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreatePaymentInstrumentInputDict],
     ) -> CreatePaymentInstrumentOutput:
         """
         Create a new payment instrument for a connector.
 
         Args:
-            input:
-                An instance of `CreatePaymentInstrumentInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -340,17 +407,39 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `CreatePaymentInstrumentOutput`.
         """
-        return await self._invoke(input, _models.CREATE_PAYMENT_INSTRUMENT, [], plugins)
 
+    async def create_payment_instrument(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreatePaymentInstrumentOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_PAYMENT_INSTRUMENT, args, kwargs),
+            _models.CREATE_PAYMENT_INSTRUMENT,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_payment_session(
-        self, input: CreatePaymentSessionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreatePaymentSessionInput
+        | _models.CreatePaymentSessionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreatePaymentSessionOutput: ...
+
+    @_overload
+    async def create_payment_session(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreatePaymentSessionInputDict],
     ) -> CreatePaymentSessionOutput:
         """
         Create a new payment session.
 
         Args:
-            input:
-                An instance of `CreatePaymentSessionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -360,17 +449,38 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `CreatePaymentSessionOutput`.
         """
-        return await self._invoke(input, _models.CREATE_PAYMENT_SESSION, [], plugins)
 
+    async def create_payment_session(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreatePaymentSessionOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_PAYMENT_SESSION, args, kwargs),
+            _models.CREATE_PAYMENT_SESSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_ab_test(
-        self, input: DeleteABTestInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteABTestInput | _models.DeleteABTestInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteABTestOutput: ...
+
+    @_overload
+    async def delete_ab_test(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteABTestInputDict],
     ) -> DeleteABTestOutput:
         """
         Deletes an A/B test and its associated gateway rules.
 
         Args:
-            input:
-                An instance of `DeleteABTestInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -380,17 +490,39 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `DeleteABTestOutput`.
         """
-        return await self._invoke(input, _models.DELETE_AB_TEST, [], plugins)
 
+    async def delete_ab_test(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteABTestOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_AB_TEST, args, kwargs),
+            _models.DELETE_AB_TEST,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_batch_evaluation(
-        self, input: DeleteBatchEvaluationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteBatchEvaluationInput
+        | _models.DeleteBatchEvaluationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteBatchEvaluationOutput: ...
+
+    @_overload
+    async def delete_batch_evaluation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteBatchEvaluationInputDict],
     ) -> DeleteBatchEvaluationOutput:
         """
         Deletes a batch evaluation and its associated results.
 
         Args:
-            input:
-                An instance of `DeleteBatchEvaluationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -400,12 +532,34 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `DeleteBatchEvaluationOutput`.
         """
-        return await self._invoke(input, _models.DELETE_BATCH_EVALUATION, [], plugins)
 
+    async def delete_batch_evaluation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteBatchEvaluationOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_BATCH_EVALUATION, args, kwargs),
+            _models.DELETE_BATCH_EVALUATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_capacity_provider_session(
         self,
-        input: DeleteCapacityProviderSessionInput,
+        request: _models.DeleteCapacityProviderSessionInput
+        | _models.DeleteCapacityProviderSessionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteCapacityProviderSessionOutput: ...
+
+    @_overload
+    async def delete_capacity_provider_session(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteCapacityProviderSessionInputDict],
     ) -> DeleteCapacityProviderSessionOutput:
         """
         Deletes a session associated with a capacity provider in Amazon Bedrock
@@ -414,8 +568,6 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         and the session ID. After you delete a session, you cannot restart it.
 
         Args:
-            input:
-                An instance of `DeleteCapacityProviderSessionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -425,12 +577,33 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `DeleteCapacityProviderSessionOutput`.
         """
+
+    async def delete_capacity_provider_session(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteCapacityProviderSessionOutput:
         return await self._invoke(
-            input, _models.DELETE_CAPACITY_PROVIDER_SESSION, [], plugins
+            self._select_input(_models.DELETE_CAPACITY_PROVIDER_SESSION, args, kwargs),
+            _models.DELETE_CAPACITY_PROVIDER_SESSION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def delete_event(
-        self, input: DeleteEventInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteEventInput | _models.DeleteEventInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteEventOutput: ...
+
+    @_overload
+    async def delete_event(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteEventInputDict],
     ) -> DeleteEventOutput:
         """
         Deletes an event from an AgentCore Memory resource. When you delete an
@@ -440,8 +613,6 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         permission.
 
         Args:
-            input:
-                An instance of `DeleteEventInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -451,10 +622,33 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `DeleteEventOutput`.
         """
-        return await self._invoke(input, _models.DELETE_EVENT, [], plugins)
 
+    async def delete_event(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteEventOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_EVENT, args, kwargs),
+            _models.DELETE_EVENT,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_memory_record(
-        self, input: DeleteMemoryRecordInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteMemoryRecordInput | _models.DeleteMemoryRecordInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteMemoryRecordOutput: ...
+
+    @_overload
+    async def delete_memory_record(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteMemoryRecordInputDict],
     ) -> DeleteMemoryRecordOutput:
         """
         Deletes a memory record from an AgentCore Memory resource. When you
@@ -464,8 +658,6 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         `bedrock-agentcore:DeleteMemoryRecord` permission.
 
         Args:
-            input:
-                An instance of `DeleteMemoryRecordInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -475,18 +667,40 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `DeleteMemoryRecordOutput`.
         """
-        return await self._invoke(input, _models.DELETE_MEMORY_RECORD, [], plugins)
 
+    async def delete_memory_record(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteMemoryRecordOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_MEMORY_RECORD, args, kwargs),
+            _models.DELETE_MEMORY_RECORD,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_payment_instrument(
-        self, input: DeletePaymentInstrumentInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeletePaymentInstrumentInput
+        | _models.DeletePaymentInstrumentInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeletePaymentInstrumentOutput: ...
+
+    @_overload
+    async def delete_payment_instrument(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeletePaymentInstrumentInputDict],
     ) -> DeletePaymentInstrumentOutput:
         """
         Deletes a payment instrument. This is a soft delete operation that
         preserves the record for audit and compliance purposes.
 
         Args:
-            input:
-                An instance of `DeletePaymentInstrumentInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -496,18 +710,40 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `DeletePaymentInstrumentOutput`.
         """
-        return await self._invoke(input, _models.DELETE_PAYMENT_INSTRUMENT, [], plugins)
 
+    async def delete_payment_instrument(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeletePaymentInstrumentOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_PAYMENT_INSTRUMENT, args, kwargs),
+            _models.DELETE_PAYMENT_INSTRUMENT,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_payment_session(
-        self, input: DeletePaymentSessionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeletePaymentSessionInput
+        | _models.DeletePaymentSessionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeletePaymentSessionOutput: ...
+
+    @_overload
+    async def delete_payment_session(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeletePaymentSessionInputDict],
     ) -> DeletePaymentSessionOutput:
         """
         Deletes a payment session. This permanently removes the payment session
         record.
 
         Args:
-            input:
-                An instance of `DeletePaymentSessionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -517,17 +753,39 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `DeletePaymentSessionOutput`.
         """
-        return await self._invoke(input, _models.DELETE_PAYMENT_SESSION, [], plugins)
 
+    async def delete_payment_session(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeletePaymentSessionOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_PAYMENT_SESSION, args, kwargs),
+            _models.DELETE_PAYMENT_SESSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_recommendation(
-        self, input: DeleteRecommendationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteRecommendationInput
+        | _models.DeleteRecommendationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteRecommendationOutput: ...
+
+    @_overload
+    async def delete_recommendation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteRecommendationInputDict],
     ) -> DeleteRecommendationOutput:
         """
         Deletes a recommendation and its associated results.
 
         Args:
-            input:
-                An instance of `DeleteRecommendationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -537,10 +795,33 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `DeleteRecommendationOutput`.
         """
-        return await self._invoke(input, _models.DELETE_RECOMMENDATION, [], plugins)
 
+    async def delete_recommendation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteRecommendationOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_RECOMMENDATION, args, kwargs),
+            _models.DELETE_RECOMMENDATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def evaluate(
-        self, input: EvaluateInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.EvaluateInput | _models.EvaluateInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> EvaluateOutput: ...
+
+    @_overload
+    async def evaluate(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.EvaluateInputDict],
     ) -> EvaluateOutput:
         """
         Performs on-demand evaluation of agent traces using a specified
@@ -548,8 +829,6 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         and returns immediate scoring results with detailed explanations.
 
         Args:
-            input:
-                An instance of `EvaluateInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -559,18 +838,39 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `EvaluateOutput`.
         """
-        return await self._invoke(input, _models.EVALUATE, [], plugins)
 
+    async def evaluate(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> EvaluateOutput:
+        return await self._invoke(
+            self._select_input(_models.EVALUATE, args, kwargs),
+            _models.EVALUATE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_ab_test(
-        self, input: GetABTestInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetABTestInput | _models.GetABTestInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetABTestOutput: ...
+
+    @_overload
+    async def get_ab_test(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetABTestInputDict],
     ) -> GetABTestOutput:
         """
         Retrieves detailed information about an A/B test, including its
         configuration, status, and statistical results.
 
         Args:
-            input:
-                An instance of `GetABTestInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -580,17 +880,38 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `GetABTestOutput`.
         """
-        return await self._invoke(input, _models.GET_AB_TEST, [], plugins)
 
+    async def get_ab_test(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetABTestOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_AB_TEST, args, kwargs),
+            _models.GET_AB_TEST,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_agent_card(
-        self, input: GetAgentCardInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetAgentCardInput | _models.GetAgentCardInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetAgentCardOutput: ...
+
+    @_overload
+    async def get_agent_card(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetAgentCardInputDict],
     ) -> GetAgentCardOutput:
         """
         Retrieves the A2A agent card associated with an AgentCore Runtime agent.
 
         Args:
-            input:
-                An instance of `GetAgentCardInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -600,18 +921,39 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `GetAgentCardOutput`.
         """
-        return await self._invoke(input, _models.GET_AGENT_CARD, [], plugins)
 
+    async def get_agent_card(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetAgentCardOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_AGENT_CARD, args, kwargs),
+            _models.GET_AGENT_CARD,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_batch_evaluation(
-        self, input: GetBatchEvaluationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetBatchEvaluationInput | _models.GetBatchEvaluationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetBatchEvaluationOutput: ...
+
+    @_overload
+    async def get_batch_evaluation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetBatchEvaluationInputDict],
     ) -> GetBatchEvaluationOutput:
         """
         Retrieves detailed information about a batch evaluation, including its
         status, configuration, results, and any error details.
 
         Args:
-            input:
-                An instance of `GetBatchEvaluationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -621,10 +963,33 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `GetBatchEvaluationOutput`.
         """
-        return await self._invoke(input, _models.GET_BATCH_EVALUATION, [], plugins)
 
+    async def get_batch_evaluation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetBatchEvaluationOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_BATCH_EVALUATION, args, kwargs),
+            _models.GET_BATCH_EVALUATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_browser_session(
-        self, input: GetBrowserSessionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetBrowserSessionInput | _models.GetBrowserSessionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetBrowserSessionOutput: ...
+
+    @_overload
+    async def get_browser_session(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetBrowserSessionInputDict],
     ) -> GetBrowserSessionOutput:
         """
         Retrieves detailed information about a specific browser session in
@@ -645,8 +1010,6 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         - [StopBrowserSession](https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_StopBrowserSession.html)
 
         Args:
-            input:
-                An instance of `GetBrowserSessionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -656,10 +1019,34 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `GetBrowserSessionOutput`.
         """
-        return await self._invoke(input, _models.GET_BROWSER_SESSION, [], plugins)
 
+    async def get_browser_session(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetBrowserSessionOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_BROWSER_SESSION, args, kwargs),
+            _models.GET_BROWSER_SESSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_code_interpreter_session(
-        self, input: GetCodeInterpreterSessionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetCodeInterpreterSessionInput
+        | _models.GetCodeInterpreterSessionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetCodeInterpreterSessionOutput: ...
+
+    @_overload
+    async def get_code_interpreter_session(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetCodeInterpreterSessionInputDict],
     ) -> GetCodeInterpreterSessionOutput:
         """
         Retrieves detailed information about a specific code interpreter session
@@ -679,8 +1066,6 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         - [StopCodeInterpreterSession](https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_StopCodeInterpreterSession.html)
 
         Args:
-            input:
-                An instance of `GetCodeInterpreterSessionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -690,12 +1075,33 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `GetCodeInterpreterSessionOutput`.
         """
+
+    async def get_code_interpreter_session(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetCodeInterpreterSessionOutput:
         return await self._invoke(
-            input, _models.GET_CODE_INTERPRETER_SESSION, [], plugins
+            self._select_input(_models.GET_CODE_INTERPRETER_SESSION, args, kwargs),
+            _models.GET_CODE_INTERPRETER_SESSION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def get_event(
-        self, input: GetEventInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetEventInput | _models.GetEventInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetEventOutput: ...
+
+    @_overload
+    async def get_event(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetEventInputDict],
     ) -> GetEventOutput:
         """
         Retrieves information about a specific event in an AgentCore Memory
@@ -705,8 +1111,6 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         permission.
 
         Args:
-            input:
-                An instance of `GetEventInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -716,10 +1120,33 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `GetEventOutput`.
         """
-        return await self._invoke(input, _models.GET_EVENT, [], plugins)
 
+    async def get_event(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetEventOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_EVENT, args, kwargs),
+            _models.GET_EVENT,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_memory_record(
-        self, input: GetMemoryRecordInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetMemoryRecordInput | _models.GetMemoryRecordInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetMemoryRecordOutput: ...
+
+    @_overload
+    async def get_memory_record(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetMemoryRecordInputDict],
     ) -> GetMemoryRecordOutput:
         """
         Retrieves a specific memory record from an AgentCore Memory resource.
@@ -728,8 +1155,6 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         `bedrock-agentcore:GetMemoryRecord` permission.
 
         Args:
-            input:
-                An instance of `GetMemoryRecordInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -739,17 +1164,39 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `GetMemoryRecordOutput`.
         """
-        return await self._invoke(input, _models.GET_MEMORY_RECORD, [], plugins)
 
+    async def get_memory_record(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetMemoryRecordOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_MEMORY_RECORD, args, kwargs),
+            _models.GET_MEMORY_RECORD,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_payment_instrument(
-        self, input: GetPaymentInstrumentInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetPaymentInstrumentInput
+        | _models.GetPaymentInstrumentInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetPaymentInstrumentOutput: ...
+
+    @_overload
+    async def get_payment_instrument(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetPaymentInstrumentInputDict],
     ) -> GetPaymentInstrumentOutput:
         """
         Get a payment instrument by ID.
 
         Args:
-            input:
-                An instance of `GetPaymentInstrumentInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -759,19 +1206,39 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `GetPaymentInstrumentOutput`.
         """
-        return await self._invoke(input, _models.GET_PAYMENT_INSTRUMENT, [], plugins)
 
+    async def get_payment_instrument(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetPaymentInstrumentOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_PAYMENT_INSTRUMENT, args, kwargs),
+            _models.GET_PAYMENT_INSTRUMENT,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_payment_instrument_balance(
         self,
-        input: GetPaymentInstrumentBalanceInput,
+        request: _models.GetPaymentInstrumentBalanceInput
+        | _models.GetPaymentInstrumentBalanceInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetPaymentInstrumentBalanceOutput: ...
+
+    @_overload
+    async def get_payment_instrument_balance(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetPaymentInstrumentBalanceInputDict],
     ) -> GetPaymentInstrumentBalanceOutput:
         """
         Get the balance of a payment instrument.
 
         Args:
-            input:
-                An instance of `GetPaymentInstrumentBalanceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -781,19 +1248,38 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `GetPaymentInstrumentBalanceOutput`.
         """
+
+    async def get_payment_instrument_balance(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetPaymentInstrumentBalanceOutput:
         return await self._invoke(
-            input, _models.GET_PAYMENT_INSTRUMENT_BALANCE, [], plugins
+            self._select_input(_models.GET_PAYMENT_INSTRUMENT_BALANCE, args, kwargs),
+            _models.GET_PAYMENT_INSTRUMENT_BALANCE,
+            [],
+            plugins,
         )
 
+    @_overload
     async def get_payment_session(
-        self, input: GetPaymentSessionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetPaymentSessionInput | _models.GetPaymentSessionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetPaymentSessionOutput: ...
+
+    @_overload
+    async def get_payment_session(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetPaymentSessionInputDict],
     ) -> GetPaymentSessionOutput:
         """
         Get a payment session.
 
         Args:
-            input:
-                An instance of `GetPaymentSessionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -803,18 +1289,39 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `GetPaymentSessionOutput`.
         """
-        return await self._invoke(input, _models.GET_PAYMENT_SESSION, [], plugins)
 
+    async def get_payment_session(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetPaymentSessionOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_PAYMENT_SESSION, args, kwargs),
+            _models.GET_PAYMENT_SESSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_recommendation(
-        self, input: GetRecommendationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetRecommendationInput | _models.GetRecommendationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetRecommendationOutput: ...
+
+    @_overload
+    async def get_recommendation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetRecommendationInputDict],
     ) -> GetRecommendationOutput:
         """
         Retrieves detailed information about a recommendation, including its
         configuration, status, and results.
 
         Args:
-            input:
-                An instance of `GetRecommendationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -824,17 +1331,38 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `GetRecommendationOutput`.
         """
-        return await self._invoke(input, _models.GET_RECOMMENDATION, [], plugins)
 
+    async def get_recommendation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetRecommendationOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_RECOMMENDATION, args, kwargs),
+            _models.GET_RECOMMENDATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_resource_api_key(
-        self, input: GetResourceApiKeyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetResourceApiKeyInput | _models.GetResourceApiKeyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetResourceApiKeyOutput: ...
+
+    @_overload
+    async def get_resource_api_key(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetResourceApiKeyInputDict],
     ) -> GetResourceApiKeyOutput:
         """
         Retrieves the API key associated with an API key credential provider.
 
         Args:
-            input:
-                An instance of `GetResourceApiKeyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -844,17 +1372,39 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `GetResourceApiKeyOutput`.
         """
-        return await self._invoke(input, _models.GET_RESOURCE_API_KEY, [], plugins)
 
+    async def get_resource_api_key(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetResourceApiKeyOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_RESOURCE_API_KEY, args, kwargs),
+            _models.GET_RESOURCE_API_KEY,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_resource_oauth2_token(
-        self, input: GetResourceOauth2TokenInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetResourceOauth2TokenInput
+        | _models.GetResourceOauth2TokenInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetResourceOauth2TokenOutput: ...
+
+    @_overload
+    async def get_resource_oauth2_token(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetResourceOauth2TokenInputDict],
     ) -> GetResourceOauth2TokenOutput:
         """
         Returns the OAuth 2.0 token of the provided resource.
 
         Args:
-            input:
-                An instance of `GetResourceOauth2TokenInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -864,18 +1414,40 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `GetResourceOauth2TokenOutput`.
         """
-        return await self._invoke(input, _models.GET_RESOURCE_OAUTH2_TOKEN, [], plugins)
 
+    async def get_resource_oauth2_token(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetResourceOauth2TokenOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_RESOURCE_OAUTH2_TOKEN, args, kwargs),
+            _models.GET_RESOURCE_OAUTH2_TOKEN,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_resource_payment_token(
-        self, input: GetResourcePaymentTokenInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetResourcePaymentTokenInput
+        | _models.GetResourcePaymentTokenInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetResourcePaymentTokenOutput: ...
+
+    @_overload
+    async def get_resource_payment_token(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetResourcePaymentTokenInputDict],
     ) -> GetResourcePaymentTokenOutput:
         """
         Generates authentication tokens for payment providers that use
         vendor-specific authentication mechanisms.
 
         Args:
-            input:
-                An instance of `GetResourcePaymentTokenInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -885,20 +1457,40 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `GetResourcePaymentTokenOutput`.
         """
+
+    async def get_resource_payment_token(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetResourcePaymentTokenOutput:
         return await self._invoke(
-            input, _models.GET_RESOURCE_PAYMENT_TOKEN, [], plugins
+            self._select_input(_models.GET_RESOURCE_PAYMENT_TOKEN, args, kwargs),
+            _models.GET_RESOURCE_PAYMENT_TOKEN,
+            [],
+            plugins,
         )
 
+    @_overload
     async def get_workload_access_token(
-        self, input: GetWorkloadAccessTokenInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetWorkloadAccessTokenInput
+        | _models.GetWorkloadAccessTokenInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetWorkloadAccessTokenOutput: ...
+
+    @_overload
+    async def get_workload_access_token(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetWorkloadAccessTokenInputDict],
     ) -> GetWorkloadAccessTokenOutput:
         """
         Obtains a workload access token for agentic workloads not acting on
         behalf of a user.
 
         Args:
-            input:
-                An instance of `GetWorkloadAccessTokenInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -908,20 +1500,40 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `GetWorkloadAccessTokenOutput`.
         """
-        return await self._invoke(input, _models.GET_WORKLOAD_ACCESS_TOKEN, [], plugins)
 
+    async def get_workload_access_token(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetWorkloadAccessTokenOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_WORKLOAD_ACCESS_TOKEN, args, kwargs),
+            _models.GET_WORKLOAD_ACCESS_TOKEN,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_workload_access_token_for_jwt(
         self,
-        input: GetWorkloadAccessTokenForJWTInput,
+        request: _models.GetWorkloadAccessTokenForJWTInput
+        | _models.GetWorkloadAccessTokenForJWTInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetWorkloadAccessTokenForJWTOutput: ...
+
+    @_overload
+    async def get_workload_access_token_for_jwt(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetWorkloadAccessTokenForJWTInputDict],
     ) -> GetWorkloadAccessTokenForJWTOutput:
         """
         Obtains a workload access token for agentic workloads acting on behalf
         of a user, using a JWT token.
 
         Args:
-            input:
-                An instance of `GetWorkloadAccessTokenForJWTInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -931,22 +1543,40 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `GetWorkloadAccessTokenForJWTOutput`.
         """
+
+    async def get_workload_access_token_for_jwt(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetWorkloadAccessTokenForJWTOutput:
         return await self._invoke(
-            input, _models.GET_WORKLOAD_ACCESS_TOKEN_FOR_JWT, [], plugins
+            self._select_input(_models.GET_WORKLOAD_ACCESS_TOKEN_FOR_JWT, args, kwargs),
+            _models.GET_WORKLOAD_ACCESS_TOKEN_FOR_JWT,
+            [],
+            plugins,
         )
 
+    @_overload
     async def get_workload_access_token_for_user_id(
         self,
-        input: GetWorkloadAccessTokenForUserIdInput,
+        request: _models.GetWorkloadAccessTokenForUserIdInput
+        | _models.GetWorkloadAccessTokenForUserIdInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetWorkloadAccessTokenForUserIdOutput: ...
+
+    @_overload
+    async def get_workload_access_token_for_user_id(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetWorkloadAccessTokenForUserIdInputDict],
     ) -> GetWorkloadAccessTokenForUserIdOutput:
         """
         Obtains a workload access token for agentic workloads acting on behalf
         of a user, using the user's ID.
 
         Args:
-            input:
-                An instance of `GetWorkloadAccessTokenForUserIdInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -956,12 +1586,35 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `GetWorkloadAccessTokenForUserIdOutput`.
         """
+
+    async def get_workload_access_token_for_user_id(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetWorkloadAccessTokenForUserIdOutput:
         return await self._invoke(
-            input, _models.GET_WORKLOAD_ACCESS_TOKEN_FOR_USER_ID, [], plugins
+            self._select_input(
+                _models.GET_WORKLOAD_ACCESS_TOKEN_FOR_USER_ID, args, kwargs
+            ),
+            _models.GET_WORKLOAD_ACCESS_TOKEN_FOR_USER_ID,
+            [],
+            plugins,
         )
 
+    @_overload
     async def ingest_data(
-        self, input: IngestDataInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.IngestDataInput | _models.IngestDataInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> IngestDataOutput: ...
+
+    @_overload
+    async def ingest_data(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.IngestDataInputDict],
     ) -> IngestDataOutput:
         """
         Submits content directly for ingestion to generate long-term memory
@@ -971,8 +1624,6 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         permission.
 
         Args:
-            input:
-                An instance of `IngestDataInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -982,10 +1633,33 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `IngestDataOutput`.
         """
-        return await self._invoke(input, _models.INGEST_DATA, [], plugins)
 
+    async def ingest_data(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> IngestDataOutput:
+        return await self._invoke(
+            self._select_input(_models.INGEST_DATA, args, kwargs),
+            _models.INGEST_DATA,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def invoke_agent_runtime(
-        self, input: InvokeAgentRuntimeInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.InvokeAgentRuntimeInput | _models.InvokeAgentRuntimeInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> InvokeAgentRuntimeOutput: ...
+
+    @_overload
+    async def invoke_agent_runtime(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.InvokeAgentRuntimeInputDict],
     ) -> InvokeAgentRuntimeOutput:
         """
         Sends a request to an agent or tool hosted in an Amazon Bedrock
@@ -1019,8 +1693,6 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         `bedrock-agentcore:InvokeAgentRuntimeForUser`).
 
         Args:
-            input:
-                An instance of `InvokeAgentRuntimeInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1030,10 +1702,36 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `InvokeAgentRuntimeOutput`.
         """
-        return await self._invoke(input, _models.INVOKE_AGENT_RUNTIME, [], plugins)
 
+    async def invoke_agent_runtime(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> InvokeAgentRuntimeOutput:
+        return await self._invoke(
+            self._select_input(_models.INVOKE_AGENT_RUNTIME, args, kwargs),
+            _models.INVOKE_AGENT_RUNTIME,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def invoke_agent_runtime_command(
-        self, input: InvokeAgentRuntimeCommandInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.InvokeAgentRuntimeCommandInput
+        | _models.InvokeAgentRuntimeCommandInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AsyncOutputEventStream[
+        InvokeAgentRuntimeCommandStreamOutput, InvokeAgentRuntimeCommandOutput
+    ]: ...
+
+    @_overload
+    async def invoke_agent_runtime_command(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.InvokeAgentRuntimeCommandInputDict],
     ) -> AsyncOutputEventStream[
         InvokeAgentRuntimeCommandStreamOutput, InvokeAgentRuntimeCommandOutput
     ]:
@@ -1052,8 +1750,6 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         `bedrock-agentcore:InvokeAgentRuntimeCommand` permission.
 
         Args:
-            input:
-                An instance of `InvokeAgentRuntimeCommandInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1063,8 +1759,17 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An `AsyncOutputEventStream` for server-to-client streaming.
         """
+
+    async def invoke_agent_runtime_command(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AsyncOutputEventStream[
+        InvokeAgentRuntimeCommandStreamOutput, InvokeAgentRuntimeCommandOutput
+    ]:
         pipeline, call = await self._prepare_call(
-            input, _models.INVOKE_AGENT_RUNTIME_COMMAND, [], plugins
+            self._select_input(_models.INVOKE_AGENT_RUNTIME_COMMAND, args, kwargs),
+            _models.INVOKE_AGENT_RUNTIME_COMMAND,
+            [],
+            plugins,
         )
         return await pipeline.output_stream(
             call,
@@ -1072,8 +1777,22 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
             _InvokeAgentRuntimeCommandStreamOutputDeserializer().deserialize,
         )
 
+    @_overload
     async def invoke_browser(
-        self, input: InvokeBrowserInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.InvokeBrowserInput | _models.InvokeBrowserInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> InvokeBrowserOutput: ...
+
+    @_overload
+    async def invoke_browser(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.InvokeBrowserInputDict],
     ) -> InvokeBrowserOutput:
         """
         Invokes an operating system-level action on a browser session in Amazon
@@ -1095,8 +1814,6 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         - [StopBrowserSession](https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_StopBrowserSession.html)
 
         Args:
-            input:
-                An instance of `InvokeBrowserInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1106,10 +1823,36 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `InvokeBrowserOutput`.
         """
-        return await self._invoke(input, _models.INVOKE_BROWSER, [], plugins)
 
+    async def invoke_browser(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> InvokeBrowserOutput:
+        return await self._invoke(
+            self._select_input(_models.INVOKE_BROWSER, args, kwargs),
+            _models.INVOKE_BROWSER,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def invoke_code_interpreter(
-        self, input: InvokeCodeInterpreterInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.InvokeCodeInterpreterInput
+        | _models.InvokeCodeInterpreterInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AsyncOutputEventStream[
+        CodeInterpreterStreamOutput, InvokeCodeInterpreterOutput
+    ]: ...
+
+    @_overload
+    async def invoke_code_interpreter(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.InvokeCodeInterpreterInputDict],
     ) -> AsyncOutputEventStream[
         CodeInterpreterStreamOutput, InvokeCodeInterpreterOutput
     ]:
@@ -1134,8 +1877,6 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         - [GetCodeInterpreterSession](https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_GetCodeInterpreterSession.html)
 
         Args:
-            input:
-                An instance of `InvokeCodeInterpreterInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1145,8 +1886,17 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An `AsyncOutputEventStream` for server-to-client streaming.
         """
+
+    async def invoke_code_interpreter(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AsyncOutputEventStream[
+        CodeInterpreterStreamOutput, InvokeCodeInterpreterOutput
+    ]:
         pipeline, call = await self._prepare_call(
-            input, _models.INVOKE_CODE_INTERPRETER, [], plugins
+            self._select_input(_models.INVOKE_CODE_INTERPRETER, args, kwargs),
+            _models.INVOKE_CODE_INTERPRETER,
+            [],
+            plugins,
         )
         return await pipeline.output_stream(
             call,
@@ -1154,15 +1904,27 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
             _CodeInterpreterStreamOutputDeserializer().deserialize,
         )
 
+    @_overload
     async def invoke_harness(
-        self, input: InvokeHarnessInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.InvokeHarnessInput | _models.InvokeHarnessInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AsyncOutputEventStream[InvokeHarnessStreamOutput, InvokeHarnessOutput]: ...
+
+    @_overload
+    async def invoke_harness(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.InvokeHarnessInputDict],
     ) -> AsyncOutputEventStream[InvokeHarnessStreamOutput, InvokeHarnessOutput]:
         """
         Operation to invoke a Harness.
 
         Args:
-            input:
-                An instance of `InvokeHarnessInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1172,8 +1934,15 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An `AsyncOutputEventStream` for server-to-client streaming.
         """
+
+    async def invoke_harness(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AsyncOutputEventStream[InvokeHarnessStreamOutput, InvokeHarnessOutput]:
         pipeline, call = await self._prepare_call(
-            input, _models.INVOKE_HARNESS, [], plugins
+            self._select_input(_models.INVOKE_HARNESS, args, kwargs),
+            _models.INVOKE_HARNESS,
+            [],
+            plugins,
         )
         return await pipeline.output_stream(
             call,
@@ -1181,8 +1950,22 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
             _InvokeHarnessStreamOutputDeserializer().deserialize,
         )
 
+    @_overload
     async def invoke_web_search(
-        self, input: InvokeWebSearchInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.InvokeWebSearchInput | _models.InvokeWebSearchInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> InvokeWebSearchOutput: ...
+
+    @_overload
+    async def invoke_web_search(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.InvokeWebSearchInputDict],
     ) -> InvokeWebSearchOutput:
         """
         Searches the web and returns a ranked list of results. Each result
@@ -1192,11 +1975,9 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
 
         To use this operation, you must have the
         `bedrock-agentcore:InvokeWebSearch` permission on the resource
-        `arn:$${Partition}:bedrock-agentcore:$${Region}:aws:tool/web-search.v1`.
+        `arn:${Partition}:bedrock-agentcore:${Region}:aws:tool/web-search.v1`.
 
         Args:
-            input:
-                An instance of `InvokeWebSearchInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1206,17 +1987,38 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `InvokeWebSearchOutput`.
         """
-        return await self._invoke(input, _models.INVOKE_WEB_SEARCH, [], plugins)
 
+    async def invoke_web_search(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> InvokeWebSearchOutput:
+        return await self._invoke(
+            self._select_input(_models.INVOKE_WEB_SEARCH, args, kwargs),
+            _models.INVOKE_WEB_SEARCH,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_ab_tests(
-        self, input: ListABTestsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListABTestsInput | _models.ListABTestsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListABTestsOutput: ...
+
+    @_overload
+    async def list_ab_tests(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListABTestsInputDict],
     ) -> ListABTestsOutput:
         """
         Lists all A/B tests in the account.
 
         Args:
-            input:
-                An instance of `ListABTestsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1226,10 +2028,33 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `ListABTestsOutput`.
         """
-        return await self._invoke(input, _models.LIST_AB_TESTS, [], plugins)
 
+    async def list_ab_tests(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListABTestsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_AB_TESTS, args, kwargs),
+            _models.LIST_AB_TESTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_actors(
-        self, input: ListActorsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListActorsInput | _models.ListActorsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListActorsOutput: ...
+
+    @_overload
+    async def list_actors(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListActorsInputDict],
     ) -> ListActorsOutput:
         """
         Lists all actors in an AgentCore Memory resource. We recommend using
@@ -1240,8 +2065,6 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         permission.
 
         Args:
-            input:
-                An instance of `ListActorsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1251,18 +2074,40 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `ListActorsOutput`.
         """
-        return await self._invoke(input, _models.LIST_ACTORS, [], plugins)
 
+    async def list_actors(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListActorsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_ACTORS, args, kwargs),
+            _models.LIST_ACTORS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_batch_evaluations(
-        self, input: ListBatchEvaluationsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListBatchEvaluationsInput
+        | _models.ListBatchEvaluationsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListBatchEvaluationsOutput: ...
+
+    @_overload
+    async def list_batch_evaluations(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListBatchEvaluationsInputDict],
     ) -> ListBatchEvaluationsOutput:
         """
         Lists all batch evaluations in the account, providing summary
         information about each evaluation's status and configuration.
 
         Args:
-            input:
-                An instance of `ListBatchEvaluationsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1272,10 +2117,34 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `ListBatchEvaluationsOutput`.
         """
-        return await self._invoke(input, _models.LIST_BATCH_EVALUATIONS, [], plugins)
 
+    async def list_batch_evaluations(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListBatchEvaluationsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_BATCH_EVALUATIONS, args, kwargs),
+            _models.LIST_BATCH_EVALUATIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_browser_sessions(
-        self, input: ListBrowserSessionsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListBrowserSessionsInput
+        | _models.ListBrowserSessionsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListBrowserSessionsOutput: ...
+
+    @_overload
+    async def list_browser_sessions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListBrowserSessionsInputDict],
     ) -> ListBrowserSessionsOutput:
         """
         Retrieves a list of browser sessions in Amazon Bedrock AgentCore that
@@ -1295,8 +2164,6 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         - [GetBrowserSession](https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_GetBrowserSession.html)
 
         Args:
-            input:
-                An instance of `ListBrowserSessionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1306,12 +2173,34 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `ListBrowserSessionsOutput`.
         """
-        return await self._invoke(input, _models.LIST_BROWSER_SESSIONS, [], plugins)
 
+    async def list_browser_sessions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListBrowserSessionsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_BROWSER_SESSIONS, args, kwargs),
+            _models.LIST_BROWSER_SESSIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_code_interpreter_sessions(
         self,
-        input: ListCodeInterpreterSessionsInput,
+        request: _models.ListCodeInterpreterSessionsInput
+        | _models.ListCodeInterpreterSessionsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListCodeInterpreterSessionsOutput: ...
+
+    @_overload
+    async def list_code_interpreter_sessions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListCodeInterpreterSessionsInputDict],
     ) -> ListCodeInterpreterSessionsOutput:
         """
         Retrieves a list of code interpreter sessions in Amazon Bedrock
@@ -1333,8 +2222,6 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         - [GetCodeInterpreterSession](https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_GetCodeInterpreterSession.html)
 
         Args:
-            input:
-                An instance of `ListCodeInterpreterSessionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1344,12 +2231,33 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `ListCodeInterpreterSessionsOutput`.
         """
+
+    async def list_code_interpreter_sessions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListCodeInterpreterSessionsOutput:
         return await self._invoke(
-            input, _models.LIST_CODE_INTERPRETER_SESSIONS, [], plugins
+            self._select_input(_models.LIST_CODE_INTERPRETER_SESSIONS, args, kwargs),
+            _models.LIST_CODE_INTERPRETER_SESSIONS,
+            [],
+            plugins,
         )
 
+    @_overload
     async def list_events(
-        self, input: ListEventsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListEventsInput | _models.ListEventsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListEventsOutput: ...
+
+    @_overload
+    async def list_events(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListEventsInputDict],
     ) -> ListEventsOutput:
         """
         Lists events in an AgentCore Memory resource based on specified
@@ -1360,8 +2268,6 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         permission.
 
         Args:
-            input:
-                An instance of `ListEventsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1371,10 +2277,34 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `ListEventsOutput`.
         """
-        return await self._invoke(input, _models.LIST_EVENTS, [], plugins)
 
+    async def list_events(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListEventsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_EVENTS, args, kwargs),
+            _models.LIST_EVENTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_memory_extraction_jobs(
-        self, input: ListMemoryExtractionJobsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListMemoryExtractionJobsInput
+        | _models.ListMemoryExtractionJobsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListMemoryExtractionJobsOutput: ...
+
+    @_overload
+    async def list_memory_extraction_jobs(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListMemoryExtractionJobsInputDict],
     ) -> ListMemoryExtractionJobsOutput:
         """
         Lists all long-term memory extraction jobs that are eligible to be
@@ -1384,8 +2314,6 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         `bedrock-agentcore:ListMemoryExtractionJobs` permission.
 
         Args:
-            input:
-                An instance of `ListMemoryExtractionJobsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1395,12 +2323,33 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `ListMemoryExtractionJobsOutput`.
         """
+
+    async def list_memory_extraction_jobs(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListMemoryExtractionJobsOutput:
         return await self._invoke(
-            input, _models.LIST_MEMORY_EXTRACTION_JOBS, [], plugins
+            self._select_input(_models.LIST_MEMORY_EXTRACTION_JOBS, args, kwargs),
+            _models.LIST_MEMORY_EXTRACTION_JOBS,
+            [],
+            plugins,
         )
 
+    @_overload
     async def list_memory_records(
-        self, input: ListMemoryRecordsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListMemoryRecordsInput | _models.ListMemoryRecordsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListMemoryRecordsOutput: ...
+
+    @_overload
+    async def list_memory_records(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListMemoryRecordsInputDict],
     ) -> ListMemoryRecordsOutput:
         """
         Lists memory records in an AgentCore Memory resource based on specified
@@ -1411,8 +2360,6 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         `bedrock-agentcore:ListMemoryRecords` permission.
 
         Args:
-            input:
-                An instance of `ListMemoryRecordsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1422,17 +2369,39 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `ListMemoryRecordsOutput`.
         """
-        return await self._invoke(input, _models.LIST_MEMORY_RECORDS, [], plugins)
 
+    async def list_memory_records(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListMemoryRecordsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_MEMORY_RECORDS, args, kwargs),
+            _models.LIST_MEMORY_RECORDS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_payment_instruments(
-        self, input: ListPaymentInstrumentsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListPaymentInstrumentsInput
+        | _models.ListPaymentInstrumentsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListPaymentInstrumentsOutput: ...
+
+    @_overload
+    async def list_payment_instruments(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListPaymentInstrumentsInputDict],
     ) -> ListPaymentInstrumentsOutput:
         """
         List payment instruments for a manager.
 
         Args:
-            input:
-                An instance of `ListPaymentInstrumentsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1442,17 +2411,39 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `ListPaymentInstrumentsOutput`.
         """
-        return await self._invoke(input, _models.LIST_PAYMENT_INSTRUMENTS, [], plugins)
 
+    async def list_payment_instruments(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListPaymentInstrumentsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_PAYMENT_INSTRUMENTS, args, kwargs),
+            _models.LIST_PAYMENT_INSTRUMENTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_payment_sessions(
-        self, input: ListPaymentSessionsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListPaymentSessionsInput
+        | _models.ListPaymentSessionsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListPaymentSessionsOutput: ...
+
+    @_overload
+    async def list_payment_sessions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListPaymentSessionsInputDict],
     ) -> ListPaymentSessionsOutput:
         """
         List payment sessions.
 
         Args:
-            input:
-                An instance of `ListPaymentSessionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1462,18 +2453,40 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `ListPaymentSessionsOutput`.
         """
-        return await self._invoke(input, _models.LIST_PAYMENT_SESSIONS, [], plugins)
 
+    async def list_payment_sessions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListPaymentSessionsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_PAYMENT_SESSIONS, args, kwargs),
+            _models.LIST_PAYMENT_SESSIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_recommendations(
-        self, input: ListRecommendationsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListRecommendationsInput
+        | _models.ListRecommendationsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListRecommendationsOutput: ...
+
+    @_overload
+    async def list_recommendations(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListRecommendationsInputDict],
     ) -> ListRecommendationsOutput:
         """
         Lists all recommendations in the account, with optional filtering by
         status.
 
         Args:
-            input:
-                An instance of `ListRecommendationsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1483,10 +2496,33 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `ListRecommendationsOutput`.
         """
-        return await self._invoke(input, _models.LIST_RECOMMENDATIONS, [], plugins)
 
+    async def list_recommendations(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListRecommendationsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_RECOMMENDATIONS, args, kwargs),
+            _models.LIST_RECOMMENDATIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_sessions(
-        self, input: ListSessionsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListSessionsInput | _models.ListSessionsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListSessionsOutput: ...
+
+    @_overload
+    async def list_sessions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListSessionsInputDict],
     ) -> ListSessionsOutput:
         """
         Lists sessions in an AgentCore Memory resource based on specified
@@ -1499,8 +2535,6 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         `bedrock-agentcore:ListSessions` permission.
 
         Args:
-            input:
-                An instance of `ListSessionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1510,17 +2544,38 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `ListSessionsOutput`.
         """
-        return await self._invoke(input, _models.LIST_SESSIONS, [], plugins)
 
+    async def list_sessions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListSessionsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_SESSIONS, args, kwargs),
+            _models.LIST_SESSIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def process_payment(
-        self, input: ProcessPaymentInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ProcessPaymentInput | _models.ProcessPaymentInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ProcessPaymentOutput: ...
+
+    @_overload
+    async def process_payment(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ProcessPaymentInputDict],
     ) -> ProcessPaymentOutput:
         """
         Processes a payment using a payment instrument within a payment session.
 
         Args:
-            input:
-                An instance of `ProcessPaymentInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1530,10 +2585,34 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `ProcessPaymentOutput`.
         """
-        return await self._invoke(input, _models.PROCESS_PAYMENT, [], plugins)
 
+    async def process_payment(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ProcessPaymentOutput:
+        return await self._invoke(
+            self._select_input(_models.PROCESS_PAYMENT, args, kwargs),
+            _models.PROCESS_PAYMENT,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def retrieve_memory_records(
-        self, input: RetrieveMemoryRecordsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RetrieveMemoryRecordsInput
+        | _models.RetrieveMemoryRecordsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RetrieveMemoryRecordsOutput: ...
+
+    @_overload
+    async def retrieve_memory_records(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RetrieveMemoryRecordsInputDict],
     ) -> RetrieveMemoryRecordsOutput:
         """
         Searches for and retrieves memory records from an AgentCore Memory
@@ -1545,8 +2624,6 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         `bedrock-agentcore:RetrieveMemoryRecords` permission.
 
         Args:
-            input:
-                An instance of `RetrieveMemoryRecordsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1556,10 +2633,34 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `RetrieveMemoryRecordsOutput`.
         """
-        return await self._invoke(input, _models.RETRIEVE_MEMORY_RECORDS, [], plugins)
 
+    async def retrieve_memory_records(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RetrieveMemoryRecordsOutput:
+        return await self._invoke(
+            self._select_input(_models.RETRIEVE_MEMORY_RECORDS, args, kwargs),
+            _models.RETRIEVE_MEMORY_RECORDS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def save_browser_session_profile(
-        self, input: SaveBrowserSessionProfileInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.SaveBrowserSessionProfileInput
+        | _models.SaveBrowserSessionProfileInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> SaveBrowserSessionProfileOutput: ...
+
+    @_overload
+    async def save_browser_session_profile(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SaveBrowserSessionProfileInputDict],
     ) -> SaveBrowserSessionProfileOutput:
         """
         Saves the current state of a browser session as a reusable profile in
@@ -1584,8 +2685,6 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         - [GetBrowserSession](https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_GetBrowserSession.html)
 
         Args:
-            input:
-                An instance of `SaveBrowserSessionProfileInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1595,12 +2694,34 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `SaveBrowserSessionProfileOutput`.
         """
+
+    async def save_browser_session_profile(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SaveBrowserSessionProfileOutput:
         return await self._invoke(
-            input, _models.SAVE_BROWSER_SESSION_PROFILE, [], plugins
+            self._select_input(_models.SAVE_BROWSER_SESSION_PROFILE, args, kwargs),
+            _models.SAVE_BROWSER_SESSION_PROFILE,
+            [],
+            plugins,
         )
 
+    @_overload
     async def search_registry_records(
-        self, input: SearchRegistryRecordsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.SearchRegistryRecordsInput
+        | _models.SearchRegistryRecordsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> SearchRegistryRecordsOutput: ...
+
+    @_overload
+    async def search_registry_records(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SearchRegistryRecordsInputDict],
     ) -> SearchRegistryRecordsOutput:
         """
         Searches for registry records using semantic, lexical, or hybrid
@@ -1608,8 +2729,6 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         within the specified registry.
 
         Args:
-            input:
-                An instance of `SearchRegistryRecordsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1619,10 +2738,34 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `SearchRegistryRecordsOutput`.
         """
-        return await self._invoke(input, _models.SEARCH_REGISTRY_RECORDS, [], plugins)
 
+    async def search_registry_records(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SearchRegistryRecordsOutput:
+        return await self._invoke(
+            self._select_input(_models.SEARCH_REGISTRY_RECORDS, args, kwargs),
+            _models.SEARCH_REGISTRY_RECORDS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def start_batch_evaluation(
-        self, input: StartBatchEvaluationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StartBatchEvaluationInput
+        | _models.StartBatchEvaluationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StartBatchEvaluationOutput: ...
+
+    @_overload
+    async def start_batch_evaluation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartBatchEvaluationInputDict],
     ) -> StartBatchEvaluationOutput:
         """
         Starts a batch evaluation job that evaluates agent performance across
@@ -1631,8 +2774,6 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         evaluators and insights against them.
 
         Args:
-            input:
-                An instance of `StartBatchEvaluationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1642,10 +2783,34 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `StartBatchEvaluationOutput`.
         """
-        return await self._invoke(input, _models.START_BATCH_EVALUATION, [], plugins)
 
+    async def start_batch_evaluation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StartBatchEvaluationOutput:
+        return await self._invoke(
+            self._select_input(_models.START_BATCH_EVALUATION, args, kwargs),
+            _models.START_BATCH_EVALUATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def start_browser_session(
-        self, input: StartBrowserSessionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StartBrowserSessionInput
+        | _models.StartBrowserSessionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StartBrowserSessionOutput: ...
+
+    @_overload
+    async def start_browser_session(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartBrowserSessionInputDict],
     ) -> StartBrowserSessionOutput:
         """
         Creates and initializes a browser session in Amazon Bedrock AgentCore.
@@ -1671,8 +2836,6 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         - [InvokeBrowser](https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_InvokeBrowser.html)
 
         Args:
-            input:
-                An instance of `StartBrowserSessionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1682,12 +2845,34 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `StartBrowserSessionOutput`.
         """
-        return await self._invoke(input, _models.START_BROWSER_SESSION, [], plugins)
 
+    async def start_browser_session(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StartBrowserSessionOutput:
+        return await self._invoke(
+            self._select_input(_models.START_BROWSER_SESSION, args, kwargs),
+            _models.START_BROWSER_SESSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def start_code_interpreter_session(
         self,
-        input: StartCodeInterpreterSessionInput,
+        request: _models.StartCodeInterpreterSessionInput
+        | _models.StartCodeInterpreterSessionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> StartCodeInterpreterSessionOutput: ...
+
+    @_overload
+    async def start_code_interpreter_session(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartCodeInterpreterSessionInputDict],
     ) -> StartCodeInterpreterSessionOutput:
         """
         Creates and initializes a code interpreter session in Amazon Bedrock
@@ -1708,8 +2893,6 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         - [StopCodeInterpreterSession](https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_StopCodeInterpreterSession.html)
 
         Args:
-            input:
-                An instance of `StartCodeInterpreterSessionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1719,12 +2902,34 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `StartCodeInterpreterSessionOutput`.
         """
+
+    async def start_code_interpreter_session(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StartCodeInterpreterSessionOutput:
         return await self._invoke(
-            input, _models.START_CODE_INTERPRETER_SESSION, [], plugins
+            self._select_input(_models.START_CODE_INTERPRETER_SESSION, args, kwargs),
+            _models.START_CODE_INTERPRETER_SESSION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def start_memory_extraction_job(
-        self, input: StartMemoryExtractionJobInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StartMemoryExtractionJobInput
+        | _models.StartMemoryExtractionJobInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StartMemoryExtractionJobOutput: ...
+
+    @_overload
+    async def start_memory_extraction_job(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartMemoryExtractionJobInputDict],
     ) -> StartMemoryExtractionJobOutput:
         """
         Starts a memory extraction job that processes events that failed
@@ -1736,8 +2941,6 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         `bedrock-agentcore:StartMemoryExtractionJob` permission.
 
         Args:
-            input:
-                An instance of `StartMemoryExtractionJobInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1747,12 +2950,34 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `StartMemoryExtractionJobOutput`.
         """
+
+    async def start_memory_extraction_job(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StartMemoryExtractionJobOutput:
         return await self._invoke(
-            input, _models.START_MEMORY_EXTRACTION_JOB, [], plugins
+            self._select_input(_models.START_MEMORY_EXTRACTION_JOB, args, kwargs),
+            _models.START_MEMORY_EXTRACTION_JOB,
+            [],
+            plugins,
         )
 
+    @_overload
     async def start_recommendation(
-        self, input: StartRecommendationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StartRecommendationInput
+        | _models.StartRecommendationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StartRecommendationOutput: ...
+
+    @_overload
+    async def start_recommendation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartRecommendationInputDict],
     ) -> StartRecommendationOutput:
         """
         Starts a recommendation job that analyzes agent traces and generates
@@ -1760,8 +2985,6 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         improve agent performance.
 
         Args:
-            input:
-                An instance of `StartRecommendationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1771,18 +2994,40 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `StartRecommendationOutput`.
         """
-        return await self._invoke(input, _models.START_RECOMMENDATION, [], plugins)
 
+    async def start_recommendation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StartRecommendationOutput:
+        return await self._invoke(
+            self._select_input(_models.START_RECOMMENDATION, args, kwargs),
+            _models.START_RECOMMENDATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def stop_batch_evaluation(
-        self, input: StopBatchEvaluationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StopBatchEvaluationInput
+        | _models.StopBatchEvaluationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StopBatchEvaluationOutput: ...
+
+    @_overload
+    async def stop_batch_evaluation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StopBatchEvaluationInputDict],
     ) -> StopBatchEvaluationOutput:
         """
         Stops a running batch evaluation. Sessions that have already been
         evaluated retain their results.
 
         Args:
-            input:
-                An instance of `StopBatchEvaluationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1792,10 +3037,33 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `StopBatchEvaluationOutput`.
         """
-        return await self._invoke(input, _models.STOP_BATCH_EVALUATION, [], plugins)
 
+    async def stop_batch_evaluation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StopBatchEvaluationOutput:
+        return await self._invoke(
+            self._select_input(_models.STOP_BATCH_EVALUATION, args, kwargs),
+            _models.STOP_BATCH_EVALUATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def stop_browser_session(
-        self, input: StopBrowserSessionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StopBrowserSessionInput | _models.StopBrowserSessionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StopBrowserSessionOutput: ...
+
+    @_overload
+    async def stop_browser_session(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StopBrowserSessionInputDict],
     ) -> StopBrowserSessionOutput:
         """
         Terminates an active browser session in Amazon Bedrock AgentCore. This
@@ -1813,8 +3081,6 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         - [GetBrowserSession](https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_GetBrowserSession.html)
 
         Args:
-            input:
-                An instance of `StopBrowserSessionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1824,12 +3090,34 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `StopBrowserSessionOutput`.
         """
-        return await self._invoke(input, _models.STOP_BROWSER_SESSION, [], plugins)
 
+    async def stop_browser_session(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StopBrowserSessionOutput:
+        return await self._invoke(
+            self._select_input(_models.STOP_BROWSER_SESSION, args, kwargs),
+            _models.STOP_BROWSER_SESSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def stop_code_interpreter_session(
         self,
-        input: StopCodeInterpreterSessionInput,
+        request: _models.StopCodeInterpreterSessionInput
+        | _models.StopCodeInterpreterSessionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> StopCodeInterpreterSessionOutput: ...
+
+    @_overload
+    async def stop_code_interpreter_session(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StopCodeInterpreterSessionInputDict],
     ) -> StopCodeInterpreterSessionOutput:
         """
         Terminates an active code interpreter session in Amazon Bedrock
@@ -1848,8 +3136,6 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         - [GetCodeInterpreterSession](https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_GetCodeInterpreterSession.html)
 
         Args:
-            input:
-                An instance of `StopCodeInterpreterSessionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1859,19 +3145,38 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `StopCodeInterpreterSessionOutput`.
         """
+
+    async def stop_code_interpreter_session(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StopCodeInterpreterSessionOutput:
         return await self._invoke(
-            input, _models.STOP_CODE_INTERPRETER_SESSION, [], plugins
+            self._select_input(_models.STOP_CODE_INTERPRETER_SESSION, args, kwargs),
+            _models.STOP_CODE_INTERPRETER_SESSION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def stop_runtime_session(
-        self, input: StopRuntimeSessionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StopRuntimeSessionInput | _models.StopRuntimeSessionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StopRuntimeSessionOutput: ...
+
+    @_overload
+    async def stop_runtime_session(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StopRuntimeSessionInputDict],
     ) -> StopRuntimeSessionOutput:
         """
         Stops a session that is running in an running AgentCore Runtime agent.
 
         Args:
-            input:
-                An instance of `StopRuntimeSessionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1881,18 +3186,39 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `StopRuntimeSessionOutput`.
         """
-        return await self._invoke(input, _models.STOP_RUNTIME_SESSION, [], plugins)
 
+    async def stop_runtime_session(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StopRuntimeSessionOutput:
+        return await self._invoke(
+            self._select_input(_models.STOP_RUNTIME_SESSION, args, kwargs),
+            _models.STOP_RUNTIME_SESSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_ab_test(
-        self, input: UpdateABTestInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateABTestInput | _models.UpdateABTestInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateABTestOutput: ...
+
+    @_overload
+    async def update_ab_test(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateABTestInputDict],
     ) -> UpdateABTestOutput:
         """
         Updates an A/B test's configuration, including variants, traffic
         allocation, evaluation settings, or execution status.
 
         Args:
-            input:
-                An instance of `UpdateABTestInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1902,18 +3228,40 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `UpdateABTestOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_AB_TEST, [], plugins)
 
+    async def update_ab_test(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateABTestOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_AB_TEST, args, kwargs),
+            _models.UPDATE_AB_TEST,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_browser_stream(
-        self, input: UpdateBrowserStreamInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateBrowserStreamInput
+        | _models.UpdateBrowserStreamInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateBrowserStreamOutput: ...
+
+    @_overload
+    async def update_browser_stream(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateBrowserStreamInputDict],
     ) -> UpdateBrowserStreamOutput:
         """
         Updates a browser stream. To use this operation, you must have
         permissions to perform the bedrock:UpdateBrowserStream action.
 
         Args:
-            input:
-                An instance of `UpdateBrowserStreamInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1923,7 +3271,16 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         Returns:
             An instance of `UpdateBrowserStreamOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_BROWSER_STREAM, [], plugins)
+
+    async def update_browser_stream(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateBrowserStreamOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_BROWSER_STREAM, args, kwargs),
+            _models.UPDATE_BROWSER_STREAM,
+            [],
+            plugins,
+        )
 
     async def _new_config(self) -> AsyncBedrockAgentCoreConfig:
         return await AsyncBedrockAgentCoreConfig.resolve()

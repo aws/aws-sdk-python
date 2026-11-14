@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import cast
+from typing import Unpack as _Unpack, cast, overload as _overload
 
 from smithy_aws_core.aio.identity.chain import AsyncIdentityChain
 from smithy_aws_core.config.types import ConfigSource
@@ -20,51 +20,28 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from ..models import (
-        BatchGetSecretValueInput,
         BatchGetSecretValueOutput,
-        CancelRotateSecretInput,
         CancelRotateSecretOutput,
-        CreateSecretInput,
         CreateSecretOutput,
-        DeleteResourcePolicyInput,
         DeleteResourcePolicyOutput,
-        DeleteSecretInput,
         DeleteSecretOutput,
-        DescribeSecretInput,
         DescribeSecretOutput,
-        GetRandomPasswordInput,
         GetRandomPasswordOutput,
-        GetResourcePolicyInput,
         GetResourcePolicyOutput,
-        GetSecretValueInput,
         GetSecretValueOutput,
-        ListSecretVersionIdsInput,
         ListSecretVersionIdsOutput,
-        ListSecretsInput,
         ListSecretsOutput,
-        PutResourcePolicyInput,
         PutResourcePolicyOutput,
-        PutSecretValueInput,
         PutSecretValueOutput,
-        RemoveRegionsFromReplicationInput,
         RemoveRegionsFromReplicationOutput,
-        ReplicateSecretToRegionsInput,
         ReplicateSecretToRegionsOutput,
-        RestoreSecretInput,
         RestoreSecretOutput,
-        RotateSecretInput,
         RotateSecretOutput,
-        StopReplicationToReplicaInput,
         StopReplicationToReplicaOutput,
-        TagResourceInput,
         TagResourceOutput,
-        UntagResourceInput,
         UntagResourceOutput,
-        UpdateSecretInput,
         UpdateSecretOutput,
-        UpdateSecretVersionStageInput,
         UpdateSecretVersionStageOutput,
-        ValidateResourcePolicyInput,
         ValidateResourcePolicyOutput,
     )
 
@@ -117,10 +94,25 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
     Guide](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/what_is_cloud_trail_top_level.html).
     """
 
-    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
+    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
 
+    @_overload
     async def batch_get_secret_value(
-        self, input: BatchGetSecretValueInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.BatchGetSecretValueInput
+        | _models.BatchGetSecretValueInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> BatchGetSecretValueOutput: ...
+
+    @_overload
+    async def batch_get_secret_value(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.BatchGetSecretValueInputDict],
     ) -> BatchGetSecretValueOutput:
         """
         Retrieves the contents of the encrypted fields `SecretString` or
@@ -150,8 +142,6 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 
         Args:
-            input:
-                An instance of `BatchGetSecretValueInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -161,10 +151,33 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Returns:
             An instance of `BatchGetSecretValueOutput`.
         """
-        return await self._invoke(input, _models.BATCH_GET_SECRET_VALUE, [], plugins)
 
+    async def batch_get_secret_value(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> BatchGetSecretValueOutput:
+        return await self._invoke(
+            self._select_input(_models.BATCH_GET_SECRET_VALUE, args, kwargs),
+            _models.BATCH_GET_SECRET_VALUE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def cancel_rotate_secret(
-        self, input: CancelRotateSecretInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CancelRotateSecretInput | _models.CancelRotateSecretInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CancelRotateSecretOutput: ...
+
+    @_overload
+    async def cancel_rotate_secret(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CancelRotateSecretInputDict],
     ) -> CancelRotateSecretOutput:
         """
         Turns off automatic rotation, and if a rotation is currently in
@@ -195,8 +208,6 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 
         Args:
-            input:
-                An instance of `CancelRotateSecretInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -206,10 +217,33 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Returns:
             An instance of `CancelRotateSecretOutput`.
         """
-        return await self._invoke(input, _models.CANCEL_ROTATE_SECRET, [], plugins)
 
+    async def cancel_rotate_secret(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CancelRotateSecretOutput:
+        return await self._invoke(
+            self._select_input(_models.CANCEL_ROTATE_SECRET, args, kwargs),
+            _models.CANCEL_ROTATE_SECRET,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_secret(
-        self, input: CreateSecretInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateSecretInput | _models.CreateSecretInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateSecretOutput: ...
+
+    @_overload
+    async def create_secret(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateSecretInputDict],
     ) -> CreateSecretOutput:
         """
         Creates a new secret. A *secret* can be a password, a set of credentials
@@ -279,8 +313,6 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
             secrets](https://docs.aws.amazon.com/secretsmanager/latest/userguide/security_cli-exposure-risks.html).
 
         Args:
-            input:
-                An instance of `CreateSecretInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -290,10 +322,34 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Returns:
             An instance of `CreateSecretOutput`.
         """
-        return await self._invoke(input, _models.CREATE_SECRET, [], plugins)
 
+    async def create_secret(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateSecretOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_SECRET, args, kwargs),
+            _models.CREATE_SECRET,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_resource_policy(
-        self, input: DeleteResourcePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteResourcePolicyInput
+        | _models.DeleteResourcePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteResourcePolicyOutput: ...
+
+    @_overload
+    async def delete_resource_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteResourcePolicyInputDict],
     ) -> DeleteResourcePolicyOutput:
         """
         Deletes the resource-based permission policy attached to the secret. To
@@ -312,8 +368,6 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 
         Args:
-            input:
-                An instance of `DeleteResourcePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -323,10 +377,33 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Returns:
             An instance of `DeleteResourcePolicyOutput`.
         """
-        return await self._invoke(input, _models.DELETE_RESOURCE_POLICY, [], plugins)
 
+    async def delete_resource_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteResourcePolicyOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_RESOURCE_POLICY, args, kwargs),
+            _models.DELETE_RESOURCE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_secret(
-        self, input: DeleteSecretInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteSecretInput | _models.DeleteSecretInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteSecretOutput: ...
+
+    @_overload
+    async def delete_secret(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteSecretInputDict],
     ) -> DeleteSecretOutput:
         """
         Deletes a secret and all of its versions. You can specify a recovery
@@ -377,8 +454,6 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 
         Args:
-            input:
-                An instance of `DeleteSecretInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -388,10 +463,33 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Returns:
             An instance of `DeleteSecretOutput`.
         """
-        return await self._invoke(input, _models.DELETE_SECRET, [], plugins)
 
+    async def delete_secret(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteSecretOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_SECRET, args, kwargs),
+            _models.DELETE_SECRET,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def describe_secret(
-        self, input: DescribeSecretInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeSecretInput | _models.DescribeSecretInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeSecretOutput: ...
+
+    @_overload
+    async def describe_secret(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeSecretInputDict],
     ) -> DescribeSecretOutput:
         """
         Retrieves the details of a secret. It does not include the encrypted
@@ -411,8 +509,6 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 
         Args:
-            input:
-                An instance of `DescribeSecretInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -422,17 +518,40 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Returns:
             An instance of `DescribeSecretOutput`.
         """
-        return await self._invoke(input, _models.DESCRIBE_SECRET, [], plugins)
 
+    async def describe_secret(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeSecretOutput:
+        return await self._invoke(
+            self._select_input(_models.DESCRIBE_SECRET, args, kwargs),
+            _models.DESCRIBE_SECRET,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_random_password(
-        self, input: GetRandomPasswordInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetRandomPasswordInput | _models.GetRandomPasswordInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetRandomPasswordOutput: ...
+
+    @_overload
+    async def get_random_password(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetRandomPasswordInputDict],
     ) -> GetRandomPasswordOutput:
         """
         Generates a random password. We recommend that you specify the maximum
         length and include every character type that the system you are
         generating a password for can support. By default, Secrets Manager uses
         uppercase and lowercase letters, numbers, and the following characters
-        in passwords: `` !\"#$$%&'()*+,-./:;<=>?@[\\]^_`{|}~ ``
+        in passwords: `` !\\"#$%&'()*+,-./:;<=>?@[\\\\]^_`{|}~ ``
 
         Secrets Manager generates a CloudTrail log entry when you call this
         action.
@@ -444,8 +563,6 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 
         Args:
-            input:
-                An instance of `GetRandomPasswordInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -455,10 +572,33 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Returns:
             An instance of `GetRandomPasswordOutput`.
         """
-        return await self._invoke(input, _models.GET_RANDOM_PASSWORD, [], plugins)
 
+    async def get_random_password(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetRandomPasswordOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_RANDOM_PASSWORD, args, kwargs),
+            _models.GET_RANDOM_PASSWORD,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_resource_policy(
-        self, input: GetResourcePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetResourcePolicyInput | _models.GetResourcePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetResourcePolicyOutput: ...
+
+    @_overload
+    async def get_resource_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetResourcePolicyInputDict],
     ) -> GetResourcePolicyOutput:
         """
         Retrieves the JSON text of the resource-based policy document attached
@@ -479,8 +619,6 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 
         Args:
-            input:
-                An instance of `GetResourcePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -490,10 +628,33 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Returns:
             An instance of `GetResourcePolicyOutput`.
         """
-        return await self._invoke(input, _models.GET_RESOURCE_POLICY, [], plugins)
 
+    async def get_resource_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetResourcePolicyOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_RESOURCE_POLICY, args, kwargs),
+            _models.GET_RESOURCE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_secret_value(
-        self, input: GetSecretValueInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetSecretValueInput | _models.GetSecretValueInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetSecretValueOutput: ...
+
+    @_overload
+    async def get_secret_value(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetSecretValueInputDict],
     ) -> GetSecretValueOutput:
         """
         Retrieves the contents of the encrypted fields `SecretString` or
@@ -527,8 +688,6 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 
         Args:
-            input:
-                An instance of `GetSecretValueInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -538,10 +697,33 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Returns:
             An instance of `GetSecretValueOutput`.
         """
-        return await self._invoke(input, _models.GET_SECRET_VALUE, [], plugins)
 
+    async def get_secret_value(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetSecretValueOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_SECRET_VALUE, args, kwargs),
+            _models.GET_SECRET_VALUE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_secrets(
-        self, input: ListSecretsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListSecretsInput | _models.ListSecretsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListSecretsOutput: ...
+
+    @_overload
+    async def list_secrets(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListSecretsInputDict],
     ) -> ListSecretsOutput:
         """
         Lists the secrets that are stored by Secrets Manager in the Amazon Web
@@ -574,8 +756,6 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 
         Args:
-            input:
-                An instance of `ListSecretsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -585,10 +765,34 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Returns:
             An instance of `ListSecretsOutput`.
         """
-        return await self._invoke(input, _models.LIST_SECRETS, [], plugins)
 
+    async def list_secrets(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListSecretsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_SECRETS, args, kwargs),
+            _models.LIST_SECRETS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_secret_version_ids(
-        self, input: ListSecretVersionIdsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListSecretVersionIdsInput
+        | _models.ListSecretVersionIdsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListSecretVersionIdsOutput: ...
+
+    @_overload
+    async def list_secret_version_ids(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListSecretVersionIdsInputDict],
     ) -> ListSecretVersionIdsOutput:
         """
         Lists the versions of a secret. Secrets Manager uses staging labels to
@@ -611,8 +815,6 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 
         Args:
-            input:
-                An instance of `ListSecretVersionIdsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -622,10 +824,33 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Returns:
             An instance of `ListSecretVersionIdsOutput`.
         """
-        return await self._invoke(input, _models.LIST_SECRET_VERSION_IDS, [], plugins)
 
+    async def list_secret_version_ids(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListSecretVersionIdsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_SECRET_VERSION_IDS, args, kwargs),
+            _models.LIST_SECRET_VERSION_IDS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def put_resource_policy(
-        self, input: PutResourcePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutResourcePolicyInput | _models.PutResourcePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutResourcePolicyOutput: ...
+
+    @_overload
+    async def put_resource_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutResourcePolicyInputDict],
     ) -> PutResourcePolicyOutput:
         """
         Attaches a resource-based permission policy to a secret. A
@@ -650,8 +875,6 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 
         Args:
-            input:
-                An instance of `PutResourcePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -661,10 +884,33 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Returns:
             An instance of `PutResourcePolicyOutput`.
         """
-        return await self._invoke(input, _models.PUT_RESOURCE_POLICY, [], plugins)
 
+    async def put_resource_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutResourcePolicyOutput:
+        return await self._invoke(
+            self._select_input(_models.PUT_RESOURCE_POLICY, args, kwargs),
+            _models.PUT_RESOURCE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def put_secret_value(
-        self, input: PutSecretValueInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutSecretValueInput | _models.PutSecretValueInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutSecretValueOutput: ...
+
+    @_overload
+    async def put_secret_value(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutSecretValueInputDict],
     ) -> PutSecretValueOutput:
         """
         Creates a new version of your secret by creating a new encrypted value
@@ -718,8 +964,6 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
             secrets](https://docs.aws.amazon.com/secretsmanager/latest/userguide/security_cli-exposure-risks.html).
 
         Args:
-            input:
-                An instance of `PutSecretValueInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -729,12 +973,34 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Returns:
             An instance of `PutSecretValueOutput`.
         """
-        return await self._invoke(input, _models.PUT_SECRET_VALUE, [], plugins)
 
+    async def put_secret_value(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutSecretValueOutput:
+        return await self._invoke(
+            self._select_input(_models.PUT_SECRET_VALUE, args, kwargs),
+            _models.PUT_SECRET_VALUE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def remove_regions_from_replication(
         self,
-        input: RemoveRegionsFromReplicationInput,
+        request: _models.RemoveRegionsFromReplicationInput
+        | _models.RemoveRegionsFromReplicationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> RemoveRegionsFromReplicationOutput: ...
+
+    @_overload
+    async def remove_regions_from_replication(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RemoveRegionsFromReplicationInputDict],
     ) -> RemoveRegionsFromReplicationOutput:
         """
         For a secret that is replicated to other Regions, deletes the secret
@@ -753,8 +1019,6 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 
         Args:
-            input:
-                An instance of `RemoveRegionsFromReplicationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -764,12 +1028,34 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Returns:
             An instance of `RemoveRegionsFromReplicationOutput`.
         """
+
+    async def remove_regions_from_replication(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RemoveRegionsFromReplicationOutput:
         return await self._invoke(
-            input, _models.REMOVE_REGIONS_FROM_REPLICATION, [], plugins
+            self._select_input(_models.REMOVE_REGIONS_FROM_REPLICATION, args, kwargs),
+            _models.REMOVE_REGIONS_FROM_REPLICATION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def replicate_secret_to_regions(
-        self, input: ReplicateSecretToRegionsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ReplicateSecretToRegionsInput
+        | _models.ReplicateSecretToRegionsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ReplicateSecretToRegionsOutput: ...
+
+    @_overload
+    async def replicate_secret_to_regions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ReplicateSecretToRegionsInputDict],
     ) -> ReplicateSecretToRegionsOutput:
         """
         Replicates the secret to a new Regions. See [Multi-Region
@@ -792,8 +1078,6 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 
         Args:
-            input:
-                An instance of `ReplicateSecretToRegionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -803,12 +1087,33 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Returns:
             An instance of `ReplicateSecretToRegionsOutput`.
         """
+
+    async def replicate_secret_to_regions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ReplicateSecretToRegionsOutput:
         return await self._invoke(
-            input, _models.REPLICATE_SECRET_TO_REGIONS, [], plugins
+            self._select_input(_models.REPLICATE_SECRET_TO_REGIONS, args, kwargs),
+            _models.REPLICATE_SECRET_TO_REGIONS,
+            [],
+            plugins,
         )
 
+    @_overload
     async def restore_secret(
-        self, input: RestoreSecretInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RestoreSecretInput | _models.RestoreSecretInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RestoreSecretOutput: ...
+
+    @_overload
+    async def restore_secret(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RestoreSecretInputDict],
     ) -> RestoreSecretOutput:
         """
         Cancels the scheduled deletion of a secret by removing the `DeletedDate`
@@ -827,8 +1132,6 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 
         Args:
-            input:
-                An instance of `RestoreSecretInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -838,10 +1141,33 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Returns:
             An instance of `RestoreSecretOutput`.
         """
-        return await self._invoke(input, _models.RESTORE_SECRET, [], plugins)
 
+    async def restore_secret(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RestoreSecretOutput:
+        return await self._invoke(
+            self._select_input(_models.RESTORE_SECRET, args, kwargs),
+            _models.RESTORE_SECRET,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def rotate_secret(
-        self, input: RotateSecretInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RotateSecretInput | _models.RotateSecretInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RotateSecretOutput: ...
+
+    @_overload
+    async def rotate_secret(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RotateSecretInputDict],
     ) -> RotateSecretOutput:
         """
         Configures and starts the asynchronous process of rotating the secret.
@@ -880,8 +1206,6 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         rotation](https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets-required-permissions-function.html).
 
         Args:
-            input:
-                An instance of `RotateSecretInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -891,10 +1215,34 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Returns:
             An instance of `RotateSecretOutput`.
         """
-        return await self._invoke(input, _models.ROTATE_SECRET, [], plugins)
 
+    async def rotate_secret(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RotateSecretOutput:
+        return await self._invoke(
+            self._select_input(_models.ROTATE_SECRET, args, kwargs),
+            _models.ROTATE_SECRET,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def stop_replication_to_replica(
-        self, input: StopReplicationToReplicaInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StopReplicationToReplicaInput
+        | _models.StopReplicationToReplicaInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StopReplicationToReplicaOutput: ...
+
+    @_overload
+    async def stop_replication_to_replica(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StopReplicationToReplicaInputDict],
     ) -> StopReplicationToReplicaOutput:
         """
         Removes the link between the replica secret and the primary secret and
@@ -916,8 +1264,6 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 
         Args:
-            input:
-                An instance of `StopReplicationToReplicaInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -927,12 +1273,33 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Returns:
             An instance of `StopReplicationToReplicaOutput`.
         """
+
+    async def stop_replication_to_replica(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StopReplicationToReplicaOutput:
         return await self._invoke(
-            input, _models.STOP_REPLICATION_TO_REPLICA, [], plugins
+            self._select_input(_models.STOP_REPLICATION_TO_REPLICA, args, kwargs),
+            _models.STOP_REPLICATION_TO_REPLICA,
+            [],
+            plugins,
         )
 
+    @_overload
     async def tag_resource(
-        self, input: TagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.TagResourceInput | _models.TagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> TagResourceOutput: ...
+
+    @_overload
+    async def tag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.TagResourceInputDict],
     ) -> TagResourceOutput:
         """
         Attaches tags to a secret. Tags consist of a key name and a value. Tags
@@ -963,8 +1330,6 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 
         Args:
-            input:
-                An instance of `TagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -974,10 +1339,33 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Returns:
             An instance of `TagResourceOutput`.
         """
-        return await self._invoke(input, _models.TAG_RESOURCE, [], plugins)
 
+    async def tag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> TagResourceOutput:
+        return await self._invoke(
+            self._select_input(_models.TAG_RESOURCE, args, kwargs),
+            _models.TAG_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def untag_resource(
-        self, input: UntagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UntagResourceInput | _models.UntagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UntagResourceOutput: ...
+
+    @_overload
+    async def untag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UntagResourceInputDict],
     ) -> UntagResourceOutput:
         """
         Removes specific tags from a secret.
@@ -1004,8 +1392,6 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 
         Args:
-            input:
-                An instance of `UntagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1015,10 +1401,33 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Returns:
             An instance of `UntagResourceOutput`.
         """
-        return await self._invoke(input, _models.UNTAG_RESOURCE, [], plugins)
 
+    async def untag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UntagResourceOutput:
+        return await self._invoke(
+            self._select_input(_models.UNTAG_RESOURCE, args, kwargs),
+            _models.UNTAG_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_secret(
-        self, input: UpdateSecretInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateSecretInput | _models.UpdateSecretInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateSecretOutput: ...
+
+    @_overload
+    async def update_secret(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateSecretInputDict],
     ) -> UpdateSecretOutput:
         """
         Modifies the details of a secret, including metadata and the secret
@@ -1080,8 +1489,6 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
             secrets](https://docs.aws.amazon.com/secretsmanager/latest/userguide/security_cli-exposure-risks.html).
 
         Args:
-            input:
-                An instance of `UpdateSecretInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1091,10 +1498,34 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Returns:
             An instance of `UpdateSecretOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_SECRET, [], plugins)
 
+    async def update_secret(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateSecretOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_SECRET, args, kwargs),
+            _models.UPDATE_SECRET,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_secret_version_stage(
-        self, input: UpdateSecretVersionStageInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateSecretVersionStageInput
+        | _models.UpdateSecretVersionStageInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateSecretVersionStageOutput: ...
+
+    @_overload
+    async def update_secret_version_stage(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateSecretVersionStageInputDict],
     ) -> UpdateSecretVersionStageOutput:
         """
         Modifies the staging labels attached to a version of a secret. Secrets
@@ -1133,8 +1564,6 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 
         Args:
-            input:
-                An instance of `UpdateSecretVersionStageInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1144,12 +1573,34 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Returns:
             An instance of `UpdateSecretVersionStageOutput`.
         """
+
+    async def update_secret_version_stage(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateSecretVersionStageOutput:
         return await self._invoke(
-            input, _models.UPDATE_SECRET_VERSION_STAGE, [], plugins
+            self._select_input(_models.UPDATE_SECRET_VERSION_STAGE, args, kwargs),
+            _models.UPDATE_SECRET_VERSION_STAGE,
+            [],
+            plugins,
         )
 
+    @_overload
     async def validate_resource_policy(
-        self, input: ValidateResourcePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ValidateResourcePolicyInput
+        | _models.ValidateResourcePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ValidateResourcePolicyOutput: ...
+
+    @_overload
+    async def validate_resource_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ValidateResourcePolicyInputDict],
     ) -> ValidateResourcePolicyOutput:
         """
         Validates that a resource policy does not grant a wide range of
@@ -1182,8 +1633,6 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 
         Args:
-            input:
-                An instance of `ValidateResourcePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1193,7 +1642,16 @@ class AsyncSecretsManagerClient(AsyncClient[AsyncSecretsManagerConfig]):
         Returns:
             An instance of `ValidateResourcePolicyOutput`.
         """
-        return await self._invoke(input, _models.VALIDATE_RESOURCE_POLICY, [], plugins)
+
+    async def validate_resource_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ValidateResourcePolicyOutput:
+        return await self._invoke(
+            self._select_input(_models.VALIDATE_RESOURCE_POLICY, args, kwargs),
+            _models.VALIDATE_RESOURCE_POLICY,
+            [],
+            plugins,
+        )
 
     async def _new_config(self) -> AsyncSecretsManagerConfig:
         return await AsyncSecretsManagerConfig.resolve()

@@ -36,7 +36,6 @@ from aws_sdk_transcribe_streaming.models import (
     AudioEvent,
     AudioStream,
     AudioStreamAudioEvent,
-    StartStreamTranscriptionInput,
     TranscriptEvent,
     TranscriptResultStream,
 )
@@ -126,11 +125,9 @@ async def main():
     ) as client:
         # Start a streaming transcription session
         stream = await client.start_stream_transcription(
-            input=StartStreamTranscriptionInput(
-                language_code="en-US",
-                media_sample_rate_hertz=SAMPLE_RATE,
-                media_encoding="pcm",
-            )
+            language_code="en-US",
+            media_sample_rate_hertz=SAMPLE_RATE,
+            media_encoding="pcm",
         )
 
         # Get the output stream for receiving transcription results

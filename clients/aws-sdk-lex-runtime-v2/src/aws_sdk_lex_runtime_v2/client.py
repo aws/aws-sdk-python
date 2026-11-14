@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import cast
+from typing import Unpack as _Unpack, cast, overload as _overload
 
 from smithy_aws_core.config.types import ConfigSource
 from smithy_aws_core.identity.chain.resolver import IdentityChain
@@ -20,15 +20,10 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from .models import (
-        DeleteSessionInput,
         DeleteSessionOutput,
-        GetSessionInput,
         GetSessionOutput,
-        PutSessionInput,
         PutSessionOutput,
-        RecognizeTextInput,
         RecognizeTextOutput,
-        RecognizeUtteranceInput,
         RecognizeUtteranceOutput,
     )
 
@@ -42,10 +37,24 @@ class LexRuntimeV2Client(Client[LexRuntimeV2Config]):
     operations.
     """
 
-    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
+    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
 
+    @_overload
     def delete_session(
-        self, input: DeleteSessionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteSessionInput | _models.DeleteSessionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteSessionOutput: ...
+
+    @_overload
+    def delete_session(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteSessionInputDict],
     ) -> DeleteSessionOutput:
         """
         Removes session information for a specified bot, alias, and user ID.
@@ -66,8 +75,6 @@ class LexRuntimeV2Client(Client[LexRuntimeV2Config]):
         enables for the alias, you receive a `BadRequestException`.
 
         Args:
-            input:
-                An instance of `DeleteSessionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -77,10 +84,33 @@ class LexRuntimeV2Client(Client[LexRuntimeV2Config]):
         Returns:
             An instance of `DeleteSessionOutput`.
         """
-        return self._invoke(input, _models.DELETE_SESSION, [], plugins)
 
+    def delete_session(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteSessionOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_SESSION, args, kwargs),
+            _models.DELETE_SESSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_session(
-        self, input: GetSessionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetSessionInput | _models.GetSessionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetSessionOutput: ...
+
+    @_overload
+    def get_session(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetSessionInputDict],
     ) -> GetSessionOutput:
         """
         Returns session information for a specified bot, alias, and user.
@@ -93,8 +123,6 @@ class LexRuntimeV2Client(Client[LexRuntimeV2Config]):
         enabled for the alias, you receive a `BadRequestException`.
 
         Args:
-            input:
-                An instance of `GetSessionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -104,10 +132,33 @@ class LexRuntimeV2Client(Client[LexRuntimeV2Config]):
         Returns:
             An instance of `GetSessionOutput`.
         """
-        return self._invoke(input, _models.GET_SESSION, [], plugins)
 
+    def get_session(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetSessionOutput:
+        return self._invoke(
+            self._select_input(_models.GET_SESSION, args, kwargs),
+            _models.GET_SESSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_session(
-        self, input: PutSessionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutSessionInput | _models.PutSessionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutSessionOutput: ...
+
+    @_overload
+    def put_session(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutSessionInputDict],
     ) -> PutSessionOutput:
         """
         Creates a new session or modifies an existing session with an Amazon Lex
@@ -115,8 +166,6 @@ class LexRuntimeV2Client(Client[LexRuntimeV2Config]):
         of the bot.
 
         Args:
-            input:
-                An instance of `PutSessionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -126,10 +175,33 @@ class LexRuntimeV2Client(Client[LexRuntimeV2Config]):
         Returns:
             An instance of `PutSessionOutput`.
         """
-        return self._invoke(input, _models.PUT_SESSION, [], plugins)
 
+    def put_session(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutSessionOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_SESSION, args, kwargs),
+            _models.PUT_SESSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def recognize_text(
-        self, input: RecognizeTextInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RecognizeTextInput | _models.RecognizeTextInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RecognizeTextOutput: ...
+
+    @_overload
+    def recognize_text(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RecognizeTextInputDict],
     ) -> RecognizeTextOutput:
         """
         Sends user input to Amazon Lex V2. Client applications use this API to
@@ -161,8 +233,6 @@ class LexRuntimeV2Client(Client[LexRuntimeV2Config]):
         message](https://docs.aws.amazon.com/lexv2/latest/dg/streaming-progress.html#progress-complete.html).
 
         Args:
-            input:
-                An instance of `RecognizeTextInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -172,10 +242,33 @@ class LexRuntimeV2Client(Client[LexRuntimeV2Config]):
         Returns:
             An instance of `RecognizeTextOutput`.
         """
-        return self._invoke(input, _models.RECOGNIZE_TEXT, [], plugins)
 
+    def recognize_text(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RecognizeTextOutput:
+        return self._invoke(
+            self._select_input(_models.RECOGNIZE_TEXT, args, kwargs),
+            _models.RECOGNIZE_TEXT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def recognize_utterance(
-        self, input: RecognizeUtteranceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RecognizeUtteranceInput | _models.RecognizeUtteranceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RecognizeUtteranceOutput: ...
+
+    @_overload
+    def recognize_utterance(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RecognizeUtteranceInputDict],
     ) -> RecognizeUtteranceOutput:
         """
         Sends user input to Amazon Lex V2. You can send text or speech. Clients
@@ -229,8 +322,6 @@ class LexRuntimeV2Client(Client[LexRuntimeV2Config]):
         message](https://docs.aws.amazon.com/lexv2/latest/dg/streaming-progress.html#progress-complete.html).
 
         Args:
-            input:
-                An instance of `RecognizeUtteranceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -240,7 +331,16 @@ class LexRuntimeV2Client(Client[LexRuntimeV2Config]):
         Returns:
             An instance of `RecognizeUtteranceOutput`.
         """
-        return self._invoke(input, _models.RECOGNIZE_UTTERANCE, [], plugins)
+
+    def recognize_utterance(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RecognizeUtteranceOutput:
+        return self._invoke(
+            self._select_input(_models.RECOGNIZE_UTTERANCE, args, kwargs),
+            _models.RECOGNIZE_UTTERANCE,
+            [],
+            plugins,
+        )
 
     def _new_config(self) -> LexRuntimeV2Config:
         return LexRuntimeV2Config.resolve()

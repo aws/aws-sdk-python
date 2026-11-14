@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import cast
+from typing import Unpack as _Unpack, cast, overload as _overload
 
 from smithy_aws_core.config.types import ConfigSource
 from smithy_aws_core.identity.chain.resolver import IdentityChain
@@ -20,339 +20,172 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from .models import (
-        AssociateAliasInput,
         AssociateAliasOutput,
-        AssociateDistributionTenantWebACLInput,
         AssociateDistributionTenantWebACLOutput,
-        AssociateDistributionWebACLInput,
         AssociateDistributionWebACLOutput,
-        CopyDistributionInput,
         CopyDistributionOutput,
-        CreateAnycastIpListInput,
         CreateAnycastIpListOutput,
-        CreateCachePolicyInput,
         CreateCachePolicyOutput,
-        CreateCloudFrontOriginAccessIdentityInput,
         CreateCloudFrontOriginAccessIdentityOutput,
-        CreateConnectionFunctionInput,
         CreateConnectionFunctionOutput,
-        CreateConnectionGroupInput,
         CreateConnectionGroupOutput,
-        CreateContinuousDeploymentPolicyInput,
         CreateContinuousDeploymentPolicyOutput,
-        CreateDistributionInput,
         CreateDistributionOutput,
-        CreateDistributionTenantInput,
         CreateDistributionTenantOutput,
-        CreateDistributionWithTagsInput,
         CreateDistributionWithTagsOutput,
-        CreateFieldLevelEncryptionConfigInput,
         CreateFieldLevelEncryptionConfigOutput,
-        CreateFieldLevelEncryptionProfileInput,
         CreateFieldLevelEncryptionProfileOutput,
-        CreateFunctionInput,
         CreateFunctionOutput,
-        CreateInvalidationForDistributionTenantInput,
         CreateInvalidationForDistributionTenantOutput,
-        CreateInvalidationInput,
         CreateInvalidationOutput,
-        CreateKeyGroupInput,
         CreateKeyGroupOutput,
-        CreateKeyValueStoreInput,
         CreateKeyValueStoreOutput,
-        CreateMonitoringSubscriptionInput,
         CreateMonitoringSubscriptionOutput,
-        CreateOriginAccessControlInput,
         CreateOriginAccessControlOutput,
-        CreateOriginRequestPolicyInput,
         CreateOriginRequestPolicyOutput,
-        CreatePublicKeyInput,
         CreatePublicKeyOutput,
-        CreateRealtimeLogConfigInput,
         CreateRealtimeLogConfigOutput,
-        CreateResponseHeadersPolicyInput,
         CreateResponseHeadersPolicyOutput,
-        CreateStreamingDistributionInput,
         CreateStreamingDistributionOutput,
-        CreateStreamingDistributionWithTagsInput,
         CreateStreamingDistributionWithTagsOutput,
-        CreateTrustStoreInput,
         CreateTrustStoreOutput,
-        CreateVpcOriginInput,
         CreateVpcOriginOutput,
-        DeleteAnycastIpListInput,
         DeleteAnycastIpListOutput,
-        DeleteCachePolicyInput,
         DeleteCachePolicyOutput,
-        DeleteCloudFrontOriginAccessIdentityInput,
         DeleteCloudFrontOriginAccessIdentityOutput,
-        DeleteConnectionFunctionInput,
         DeleteConnectionFunctionOutput,
-        DeleteConnectionGroupInput,
         DeleteConnectionGroupOutput,
-        DeleteContinuousDeploymentPolicyInput,
         DeleteContinuousDeploymentPolicyOutput,
-        DeleteDistributionInput,
         DeleteDistributionOutput,
-        DeleteDistributionTenantInput,
         DeleteDistributionTenantOutput,
-        DeleteFieldLevelEncryptionConfigInput,
         DeleteFieldLevelEncryptionConfigOutput,
-        DeleteFieldLevelEncryptionProfileInput,
         DeleteFieldLevelEncryptionProfileOutput,
-        DeleteFunctionInput,
         DeleteFunctionOutput,
-        DeleteKeyGroupInput,
         DeleteKeyGroupOutput,
-        DeleteKeyValueStoreInput,
         DeleteKeyValueStoreOutput,
-        DeleteMonitoringSubscriptionInput,
         DeleteMonitoringSubscriptionOutput,
-        DeleteOriginAccessControlInput,
         DeleteOriginAccessControlOutput,
-        DeleteOriginRequestPolicyInput,
         DeleteOriginRequestPolicyOutput,
-        DeletePublicKeyInput,
         DeletePublicKeyOutput,
-        DeleteRealtimeLogConfigInput,
         DeleteRealtimeLogConfigOutput,
-        DeleteResourcePolicyInput,
         DeleteResourcePolicyOutput,
-        DeleteResponseHeadersPolicyInput,
         DeleteResponseHeadersPolicyOutput,
-        DeleteStreamingDistributionInput,
         DeleteStreamingDistributionOutput,
-        DeleteTrustStoreInput,
         DeleteTrustStoreOutput,
-        DeleteVpcOriginInput,
         DeleteVpcOriginOutput,
-        DescribeConnectionFunctionInput,
         DescribeConnectionFunctionOutput,
-        DescribeFunctionInput,
         DescribeFunctionOutput,
-        DescribeKeyValueStoreInput,
         DescribeKeyValueStoreOutput,
-        DisassociateDistributionTenantWebACLInput,
         DisassociateDistributionTenantWebACLOutput,
-        DisassociateDistributionWebACLInput,
         DisassociateDistributionWebACLOutput,
-        GetAnycastIpListInput,
         GetAnycastIpListOutput,
-        GetCachePolicyConfigInput,
         GetCachePolicyConfigOutput,
-        GetCachePolicyInput,
         GetCachePolicyOutput,
-        GetCloudFrontOriginAccessIdentityConfigInput,
         GetCloudFrontOriginAccessIdentityConfigOutput,
-        GetCloudFrontOriginAccessIdentityInput,
         GetCloudFrontOriginAccessIdentityOutput,
-        GetConnectionFunctionInput,
         GetConnectionFunctionOutput,
-        GetConnectionGroupByRoutingEndpointInput,
         GetConnectionGroupByRoutingEndpointOutput,
-        GetConnectionGroupInput,
         GetConnectionGroupOutput,
-        GetContinuousDeploymentPolicyConfigInput,
         GetContinuousDeploymentPolicyConfigOutput,
-        GetContinuousDeploymentPolicyInput,
         GetContinuousDeploymentPolicyOutput,
-        GetDistributionConfigInput,
         GetDistributionConfigOutput,
-        GetDistributionInput,
         GetDistributionOutput,
-        GetDistributionTenantByDomainInput,
         GetDistributionTenantByDomainOutput,
-        GetDistributionTenantInput,
         GetDistributionTenantOutput,
-        GetFieldLevelEncryptionConfigInput,
         GetFieldLevelEncryptionConfigOutput,
-        GetFieldLevelEncryptionInput,
         GetFieldLevelEncryptionOutput,
-        GetFieldLevelEncryptionProfileConfigInput,
         GetFieldLevelEncryptionProfileConfigOutput,
-        GetFieldLevelEncryptionProfileInput,
         GetFieldLevelEncryptionProfileOutput,
-        GetFunctionInput,
         GetFunctionOutput,
-        GetInvalidationForDistributionTenantInput,
         GetInvalidationForDistributionTenantOutput,
-        GetInvalidationInput,
         GetInvalidationOutput,
-        GetKeyGroupConfigInput,
         GetKeyGroupConfigOutput,
-        GetKeyGroupInput,
         GetKeyGroupOutput,
-        GetManagedCertificateDetailsInput,
         GetManagedCertificateDetailsOutput,
-        GetMonitoringSubscriptionInput,
         GetMonitoringSubscriptionOutput,
-        GetOriginAccessControlConfigInput,
         GetOriginAccessControlConfigOutput,
-        GetOriginAccessControlInput,
         GetOriginAccessControlOutput,
-        GetOriginRequestPolicyConfigInput,
         GetOriginRequestPolicyConfigOutput,
-        GetOriginRequestPolicyInput,
         GetOriginRequestPolicyOutput,
-        GetPublicKeyConfigInput,
         GetPublicKeyConfigOutput,
-        GetPublicKeyInput,
         GetPublicKeyOutput,
-        GetRealtimeLogConfigInput,
         GetRealtimeLogConfigOutput,
-        GetResourcePolicyInput,
         GetResourcePolicyOutput,
-        GetResponseHeadersPolicyConfigInput,
         GetResponseHeadersPolicyConfigOutput,
-        GetResponseHeadersPolicyInput,
         GetResponseHeadersPolicyOutput,
-        GetStreamingDistributionConfigInput,
         GetStreamingDistributionConfigOutput,
-        GetStreamingDistributionInput,
         GetStreamingDistributionOutput,
-        GetTrustStoreInput,
         GetTrustStoreOutput,
-        GetVpcOriginInput,
         GetVpcOriginOutput,
-        ListAnycastIpListsInput,
         ListAnycastIpListsOutput,
-        ListCachePoliciesInput,
         ListCachePoliciesOutput,
-        ListCloudFrontOriginAccessIdentitiesInput,
         ListCloudFrontOriginAccessIdentitiesOutput,
-        ListConflictingAliasesInput,
         ListConflictingAliasesOutput,
-        ListConnectionFunctionsInput,
         ListConnectionFunctionsOutput,
-        ListConnectionGroupsInput,
         ListConnectionGroupsOutput,
-        ListContinuousDeploymentPoliciesInput,
         ListContinuousDeploymentPoliciesOutput,
-        ListDistributionTenantsByCustomizationInput,
         ListDistributionTenantsByCustomizationOutput,
-        ListDistributionTenantsInput,
         ListDistributionTenantsOutput,
-        ListDistributionsByAnycastIpListIdInput,
         ListDistributionsByAnycastIpListIdOutput,
-        ListDistributionsByCachePolicyIdInput,
         ListDistributionsByCachePolicyIdOutput,
-        ListDistributionsByConnectionFunctionInput,
         ListDistributionsByConnectionFunctionOutput,
-        ListDistributionsByConnectionModeInput,
         ListDistributionsByConnectionModeOutput,
-        ListDistributionsByKeyGroupInput,
         ListDistributionsByKeyGroupOutput,
-        ListDistributionsByOriginRequestPolicyIdInput,
         ListDistributionsByOriginRequestPolicyIdOutput,
-        ListDistributionsByOwnedResourceInput,
         ListDistributionsByOwnedResourceOutput,
-        ListDistributionsByRealtimeLogConfigInput,
         ListDistributionsByRealtimeLogConfigOutput,
-        ListDistributionsByResponseHeadersPolicyIdInput,
         ListDistributionsByResponseHeadersPolicyIdOutput,
-        ListDistributionsByTrustStoreInput,
         ListDistributionsByTrustStoreOutput,
-        ListDistributionsByVpcOriginIdInput,
         ListDistributionsByVpcOriginIdOutput,
-        ListDistributionsByWebACLIdInput,
         ListDistributionsByWebACLIdOutput,
-        ListDistributionsInput,
         ListDistributionsOutput,
-        ListDomainConflictsInput,
         ListDomainConflictsOutput,
-        ListFieldLevelEncryptionConfigsInput,
         ListFieldLevelEncryptionConfigsOutput,
-        ListFieldLevelEncryptionProfilesInput,
         ListFieldLevelEncryptionProfilesOutput,
-        ListFunctionsInput,
         ListFunctionsOutput,
-        ListInvalidationsForDistributionTenantInput,
         ListInvalidationsForDistributionTenantOutput,
-        ListInvalidationsInput,
         ListInvalidationsOutput,
-        ListKeyGroupsInput,
         ListKeyGroupsOutput,
-        ListKeyValueStoresInput,
         ListKeyValueStoresOutput,
-        ListOriginAccessControlsInput,
         ListOriginAccessControlsOutput,
-        ListOriginRequestPoliciesInput,
         ListOriginRequestPoliciesOutput,
-        ListPublicKeysInput,
         ListPublicKeysOutput,
-        ListRealtimeLogConfigsInput,
         ListRealtimeLogConfigsOutput,
-        ListResponseHeadersPoliciesInput,
         ListResponseHeadersPoliciesOutput,
-        ListStreamingDistributionsInput,
         ListStreamingDistributionsOutput,
-        ListTagsForResourceInput,
         ListTagsForResourceOutput,
-        ListTrustStoresInput,
         ListTrustStoresOutput,
-        ListVpcOriginsInput,
         ListVpcOriginsOutput,
-        PublishConnectionFunctionInput,
         PublishConnectionFunctionOutput,
-        PublishFunctionInput,
         PublishFunctionOutput,
-        PutResourcePolicyInput,
         PutResourcePolicyOutput,
-        TagResourceInput,
         TagResourceOutput,
-        TestConnectionFunctionInput,
         TestConnectionFunctionOutput,
-        TestFunctionInput,
         TestFunctionOutput,
-        UntagResourceInput,
         UntagResourceOutput,
-        UpdateAnycastIpListInput,
         UpdateAnycastIpListOutput,
-        UpdateCachePolicyInput,
         UpdateCachePolicyOutput,
-        UpdateCloudFrontOriginAccessIdentityInput,
         UpdateCloudFrontOriginAccessIdentityOutput,
-        UpdateConnectionFunctionInput,
         UpdateConnectionFunctionOutput,
-        UpdateConnectionGroupInput,
         UpdateConnectionGroupOutput,
-        UpdateContinuousDeploymentPolicyInput,
         UpdateContinuousDeploymentPolicyOutput,
-        UpdateDistributionInput,
         UpdateDistributionOutput,
-        UpdateDistributionTenantInput,
         UpdateDistributionTenantOutput,
-        UpdateDistributionWithStagingConfigInput,
         UpdateDistributionWithStagingConfigOutput,
-        UpdateDomainAssociationInput,
         UpdateDomainAssociationOutput,
-        UpdateFieldLevelEncryptionConfigInput,
         UpdateFieldLevelEncryptionConfigOutput,
-        UpdateFieldLevelEncryptionProfileInput,
         UpdateFieldLevelEncryptionProfileOutput,
-        UpdateFunctionInput,
         UpdateFunctionOutput,
-        UpdateKeyGroupInput,
         UpdateKeyGroupOutput,
-        UpdateKeyValueStoreInput,
         UpdateKeyValueStoreOutput,
-        UpdateOriginAccessControlInput,
         UpdateOriginAccessControlOutput,
-        UpdateOriginRequestPolicyInput,
         UpdateOriginRequestPolicyOutput,
-        UpdatePublicKeyInput,
         UpdatePublicKeyOutput,
-        UpdateRealtimeLogConfigInput,
         UpdateRealtimeLogConfigOutput,
-        UpdateResponseHeadersPolicyInput,
         UpdateResponseHeadersPolicyOutput,
-        UpdateStreamingDistributionInput,
         UpdateStreamingDistributionOutput,
-        UpdateTrustStoreInput,
         UpdateTrustStoreOutput,
-        UpdateVpcOriginInput,
         UpdateVpcOriginOutput,
-        VerifyDnsConfigurationInput,
         VerifyDnsConfigurationOutput,
     )
 
@@ -369,10 +202,24 @@ class CloudFrontClient(Client[CloudFrontConfig]):
     Guide](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html).
     """
 
-    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
+    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
 
+    @_overload
     def associate_alias(
-        self, input: AssociateAliasInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.AssociateAliasInput | _models.AssociateAliasInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AssociateAliasOutput: ...
+
+    @_overload
+    def associate_alias(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AssociateAliasInputDict],
     ) -> AssociateAliasOutput:
         """
         Note:
@@ -403,8 +250,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         in the *Amazon CloudFront Developer Guide*.
 
         Args:
-            input:
-                An instance of `AssociateAliasInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -414,19 +259,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `AssociateAliasOutput`.
         """
-        return self._invoke(input, _models.ASSOCIATE_ALIAS, [], plugins)
 
+    def associate_alias(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AssociateAliasOutput:
+        return self._invoke(
+            self._select_input(_models.ASSOCIATE_ALIAS, args, kwargs),
+            _models.ASSOCIATE_ALIAS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def associate_distribution_tenant_web_acl(
         self,
-        input: AssociateDistributionTenantWebACLInput,
+        request: _models.AssociateDistributionTenantWebACLInput
+        | _models.AssociateDistributionTenantWebACLInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> AssociateDistributionTenantWebACLOutput: ...
+
+    @_overload
+    def associate_distribution_tenant_web_acl(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AssociateDistributionTenantWebACLInputDict],
     ) -> AssociateDistributionTenantWebACLOutput:
         """
         Associates the WAF web ACL with a distribution tenant.
 
         Args:
-            input:
-                An instance of `AssociateDistributionTenantWebACLInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -436,21 +301,41 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `AssociateDistributionTenantWebACLOutput`.
         """
+
+    def associate_distribution_tenant_web_acl(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AssociateDistributionTenantWebACLOutput:
         return self._invoke(
-            input, _models.ASSOCIATE_DISTRIBUTION_TENANT_WEB_ACL, [], plugins
+            self._select_input(
+                _models.ASSOCIATE_DISTRIBUTION_TENANT_WEB_ACL, args, kwargs
+            ),
+            _models.ASSOCIATE_DISTRIBUTION_TENANT_WEB_ACL,
+            [],
+            plugins,
         )
 
+    @_overload
     def associate_distribution_web_acl(
         self,
-        input: AssociateDistributionWebACLInput,
+        request: _models.AssociateDistributionWebACLInput
+        | _models.AssociateDistributionWebACLInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> AssociateDistributionWebACLOutput: ...
+
+    @_overload
+    def associate_distribution_web_acl(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AssociateDistributionWebACLInputDict],
     ) -> AssociateDistributionWebACLOutput:
         """
         Associates the WAF web ACL with a distribution.
 
         Args:
-            input:
-                An instance of `AssociateDistributionWebACLInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -460,10 +345,33 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `AssociateDistributionWebACLOutput`.
         """
-        return self._invoke(input, _models.ASSOCIATE_DISTRIBUTION_WEB_ACL, [], plugins)
 
+    def associate_distribution_web_acl(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AssociateDistributionWebACLOutput:
+        return self._invoke(
+            self._select_input(_models.ASSOCIATE_DISTRIBUTION_WEB_ACL, args, kwargs),
+            _models.ASSOCIATE_DISTRIBUTION_WEB_ACL,
+            [],
+            plugins,
+        )
+
+    @_overload
     def copy_distribution(
-        self, input: CopyDistributionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CopyDistributionInput | _models.CopyDistributionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CopyDistributionOutput: ...
+
+    @_overload
+    def copy_distribution(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CopyDistributionInputDict],
     ) -> CopyDistributionOutput:
         """
         Creates a staging distribution using the configuration of the provided
@@ -485,8 +393,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         - [CopyDistribution](https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_CopyDistribution.html)
 
         Args:
-            input:
-                An instance of `CopyDistributionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -496,17 +402,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `CopyDistributionOutput`.
         """
-        return self._invoke(input, _models.COPY_DISTRIBUTION, [], plugins)
 
+    def copy_distribution(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CopyDistributionOutput:
+        return self._invoke(
+            self._select_input(_models.COPY_DISTRIBUTION, args, kwargs),
+            _models.COPY_DISTRIBUTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_anycast_ip_list(
-        self, input: CreateAnycastIpListInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateAnycastIpListInput
+        | _models.CreateAnycastIpListInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateAnycastIpListOutput: ...
+
+    @_overload
+    def create_anycast_ip_list(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateAnycastIpListInputDict],
     ) -> CreateAnycastIpListOutput:
         """
         Creates an Anycast static IP list.
 
         Args:
-            input:
-                An instance of `CreateAnycastIpListInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -516,10 +444,33 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `CreateAnycastIpListOutput`.
         """
-        return self._invoke(input, _models.CREATE_ANYCAST_IP_LIST, [], plugins)
 
+    def create_anycast_ip_list(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateAnycastIpListOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_ANYCAST_IP_LIST, args, kwargs),
+            _models.CREATE_ANYCAST_IP_LIST,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_cache_policy(
-        self, input: CreateCachePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateCachePolicyInput | _models.CreateCachePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateCachePolicyOutput: ...
+
+    @_overload
+    def create_cache_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateCachePolicyInputDict],
     ) -> CreateCachePolicyOutput:
         """
         Creates a cache policy.
@@ -554,8 +505,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         in the *Amazon CloudFront Developer Guide*.
 
         Args:
-            input:
-                An instance of `CreateCachePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -565,12 +514,34 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `CreateCachePolicyOutput`.
         """
-        return self._invoke(input, _models.CREATE_CACHE_POLICY, [], plugins)
 
+    def create_cache_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateCachePolicyOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_CACHE_POLICY, args, kwargs),
+            _models.CREATE_CACHE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_cloud_front_origin_access_identity(
         self,
-        input: CreateCloudFrontOriginAccessIdentityInput,
+        request: _models.CreateCloudFrontOriginAccessIdentityInput
+        | _models.CreateCloudFrontOriginAccessIdentityInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateCloudFrontOriginAccessIdentityOutput: ...
+
+    @_overload
+    def create_cloud_front_origin_access_identity(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateCloudFrontOriginAccessIdentityInputDict],
     ) -> CreateCloudFrontOriginAccessIdentityOutput:
         """
         Creates a new origin access identity. If you're using Amazon S3 for
@@ -582,8 +553,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         in the *Amazon CloudFront Developer Guide*.
 
         Args:
-            input:
-                An instance of `CreateCloudFrontOriginAccessIdentityInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -593,19 +562,41 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `CreateCloudFrontOriginAccessIdentityOutput`.
         """
+
+    def create_cloud_front_origin_access_identity(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateCloudFrontOriginAccessIdentityOutput:
         return self._invoke(
-            input, _models.CREATE_CLOUD_FRONT_ORIGIN_ACCESS_IDENTITY, [], plugins
+            self._select_input(
+                _models.CREATE_CLOUD_FRONT_ORIGIN_ACCESS_IDENTITY, args, kwargs
+            ),
+            _models.CREATE_CLOUD_FRONT_ORIGIN_ACCESS_IDENTITY,
+            [],
+            plugins,
         )
 
+    @_overload
     def create_connection_function(
-        self, input: CreateConnectionFunctionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateConnectionFunctionInput
+        | _models.CreateConnectionFunctionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateConnectionFunctionOutput: ...
+
+    @_overload
+    def create_connection_function(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateConnectionFunctionInputDict],
     ) -> CreateConnectionFunctionOutput:
         """
         Creates a connection function.
 
         Args:
-            input:
-                An instance of `CreateConnectionFunctionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -615,17 +606,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `CreateConnectionFunctionOutput`.
         """
-        return self._invoke(input, _models.CREATE_CONNECTION_FUNCTION, [], plugins)
 
+    def create_connection_function(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateConnectionFunctionOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_CONNECTION_FUNCTION, args, kwargs),
+            _models.CREATE_CONNECTION_FUNCTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_connection_group(
-        self, input: CreateConnectionGroupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateConnectionGroupInput
+        | _models.CreateConnectionGroupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateConnectionGroupOutput: ...
+
+    @_overload
+    def create_connection_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateConnectionGroupInputDict],
     ) -> CreateConnectionGroupOutput:
         """
         Creates a connection group.
 
         Args:
-            input:
-                An instance of `CreateConnectionGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -635,12 +648,34 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `CreateConnectionGroupOutput`.
         """
-        return self._invoke(input, _models.CREATE_CONNECTION_GROUP, [], plugins)
 
+    def create_connection_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateConnectionGroupOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_CONNECTION_GROUP, args, kwargs),
+            _models.CREATE_CONNECTION_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_continuous_deployment_policy(
         self,
-        input: CreateContinuousDeploymentPolicyInput,
+        request: _models.CreateContinuousDeploymentPolicyInput
+        | _models.CreateContinuousDeploymentPolicyInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateContinuousDeploymentPolicyOutput: ...
+
+    @_overload
+    def create_continuous_deployment_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateContinuousDeploymentPolicyInputDict],
     ) -> CreateContinuousDeploymentPolicyOutput:
         """
         Creates a continuous deployment policy that distributes traffic for a
@@ -657,8 +692,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         production traffic to the new configuration.
 
         Args:
-            input:
-                An instance of `CreateContinuousDeploymentPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -668,19 +701,40 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `CreateContinuousDeploymentPolicyOutput`.
         """
+
+    def create_continuous_deployment_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateContinuousDeploymentPolicyOutput:
         return self._invoke(
-            input, _models.CREATE_CONTINUOUS_DEPLOYMENT_POLICY, [], plugins
+            self._select_input(
+                _models.CREATE_CONTINUOUS_DEPLOYMENT_POLICY, args, kwargs
+            ),
+            _models.CREATE_CONTINUOUS_DEPLOYMENT_POLICY,
+            [],
+            plugins,
         )
 
+    @_overload
     def create_distribution(
-        self, input: CreateDistributionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateDistributionInput | _models.CreateDistributionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateDistributionOutput: ...
+
+    @_overload
+    def create_distribution(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateDistributionInputDict],
     ) -> CreateDistributionOutput:
         """
         Creates a CloudFront distribution.
 
         Args:
-            input:
-                An instance of `CreateDistributionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -690,17 +744,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `CreateDistributionOutput`.
         """
-        return self._invoke(input, _models.CREATE_DISTRIBUTION, [], plugins)
 
+    def create_distribution(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateDistributionOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_DISTRIBUTION, args, kwargs),
+            _models.CREATE_DISTRIBUTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_distribution_tenant(
-        self, input: CreateDistributionTenantInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateDistributionTenantInput
+        | _models.CreateDistributionTenantInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateDistributionTenantOutput: ...
+
+    @_overload
+    def create_distribution_tenant(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateDistributionTenantInputDict],
     ) -> CreateDistributionTenantOutput:
         """
         Creates a distribution tenant.
 
         Args:
-            input:
-                An instance of `CreateDistributionTenantInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -710,12 +786,34 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `CreateDistributionTenantOutput`.
         """
-        return self._invoke(input, _models.CREATE_DISTRIBUTION_TENANT, [], plugins)
 
+    def create_distribution_tenant(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateDistributionTenantOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_DISTRIBUTION_TENANT, args, kwargs),
+            _models.CREATE_DISTRIBUTION_TENANT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_distribution_with_tags(
         self,
-        input: CreateDistributionWithTagsInput,
+        request: _models.CreateDistributionWithTagsInput
+        | _models.CreateDistributionWithTagsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateDistributionWithTagsOutput: ...
+
+    @_overload
+    def create_distribution_with_tags(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateDistributionWithTagsInputDict],
     ) -> CreateDistributionWithTagsOutput:
         """
         Create a new distribution with tags. This API operation requires the
@@ -726,8 +824,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         - [TagResource](https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_TagResource.html)
 
         Args:
-            input:
-                An instance of `CreateDistributionWithTagsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -737,19 +833,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `CreateDistributionWithTagsOutput`.
         """
-        return self._invoke(input, _models.CREATE_DISTRIBUTION_WITH_TAGS, [], plugins)
 
+    def create_distribution_with_tags(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateDistributionWithTagsOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_DISTRIBUTION_WITH_TAGS, args, kwargs),
+            _models.CREATE_DISTRIBUTION_WITH_TAGS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_field_level_encryption_config(
         self,
-        input: CreateFieldLevelEncryptionConfigInput,
+        request: _models.CreateFieldLevelEncryptionConfigInput
+        | _models.CreateFieldLevelEncryptionConfigInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateFieldLevelEncryptionConfigOutput: ...
+
+    @_overload
+    def create_field_level_encryption_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateFieldLevelEncryptionConfigInputDict],
     ) -> CreateFieldLevelEncryptionConfigOutput:
         """
         Create a new field-level encryption configuration.
 
         Args:
-            input:
-                An instance of `CreateFieldLevelEncryptionConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -759,21 +875,41 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `CreateFieldLevelEncryptionConfigOutput`.
         """
+
+    def create_field_level_encryption_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateFieldLevelEncryptionConfigOutput:
         return self._invoke(
-            input, _models.CREATE_FIELD_LEVEL_ENCRYPTION_CONFIG, [], plugins
+            self._select_input(
+                _models.CREATE_FIELD_LEVEL_ENCRYPTION_CONFIG, args, kwargs
+            ),
+            _models.CREATE_FIELD_LEVEL_ENCRYPTION_CONFIG,
+            [],
+            plugins,
         )
 
+    @_overload
     def create_field_level_encryption_profile(
         self,
-        input: CreateFieldLevelEncryptionProfileInput,
+        request: _models.CreateFieldLevelEncryptionProfileInput
+        | _models.CreateFieldLevelEncryptionProfileInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateFieldLevelEncryptionProfileOutput: ...
+
+    @_overload
+    def create_field_level_encryption_profile(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateFieldLevelEncryptionProfileInputDict],
     ) -> CreateFieldLevelEncryptionProfileOutput:
         """
         Create a field-level encryption profile.
 
         Args:
-            input:
-                An instance of `CreateFieldLevelEncryptionProfileInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -783,12 +919,35 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `CreateFieldLevelEncryptionProfileOutput`.
         """
+
+    def create_field_level_encryption_profile(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateFieldLevelEncryptionProfileOutput:
         return self._invoke(
-            input, _models.CREATE_FIELD_LEVEL_ENCRYPTION_PROFILE, [], plugins
+            self._select_input(
+                _models.CREATE_FIELD_LEVEL_ENCRYPTION_PROFILE, args, kwargs
+            ),
+            _models.CREATE_FIELD_LEVEL_ENCRYPTION_PROFILE,
+            [],
+            plugins,
         )
 
+    @_overload
     def create_function(
-        self, input: CreateFunctionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateFunctionInput | _models.CreateFunctionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateFunctionOutput: ...
+
+    @_overload
+    def create_function(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateFunctionInputDict],
     ) -> CreateFunctionOutput:
         """
         Creates a CloudFront function.
@@ -807,8 +966,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         distribution's cache behavior, using the function's ARN.
 
         Args:
-            input:
-                An instance of `CreateFunctionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -818,10 +975,33 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `CreateFunctionOutput`.
         """
-        return self._invoke(input, _models.CREATE_FUNCTION, [], plugins)
 
+    def create_function(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateFunctionOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_FUNCTION, args, kwargs),
+            _models.CREATE_FUNCTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_invalidation(
-        self, input: CreateInvalidationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateInvalidationInput | _models.CreateInvalidationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateInvalidationOutput: ...
+
+    @_overload
+    def create_invalidation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateInvalidationInputDict],
     ) -> CreateInvalidationOutput:
         """
         Create a new invalidation. For more information, see [Invalidating
@@ -829,8 +1009,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         in the *Amazon CloudFront Developer Guide*.
 
         Args:
-            input:
-                An instance of `CreateInvalidationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -840,12 +1018,34 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `CreateInvalidationOutput`.
         """
-        return self._invoke(input, _models.CREATE_INVALIDATION, [], plugins)
 
+    def create_invalidation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateInvalidationOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_INVALIDATION, args, kwargs),
+            _models.CREATE_INVALIDATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_invalidation_for_distribution_tenant(
         self,
-        input: CreateInvalidationForDistributionTenantInput,
+        request: _models.CreateInvalidationForDistributionTenantInput
+        | _models.CreateInvalidationForDistributionTenantInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateInvalidationForDistributionTenantOutput: ...
+
+    @_overload
+    def create_invalidation_for_distribution_tenant(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateInvalidationForDistributionTenantInputDict],
     ) -> CreateInvalidationForDistributionTenantOutput:
         """
         Creates an invalidation for a distribution tenant. For more information,
@@ -854,8 +1054,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         in the *Amazon CloudFront Developer Guide*.
 
         Args:
-            input:
-                An instance of `CreateInvalidationForDistributionTenantInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -865,12 +1063,35 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `CreateInvalidationForDistributionTenantOutput`.
         """
+
+    def create_invalidation_for_distribution_tenant(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateInvalidationForDistributionTenantOutput:
         return self._invoke(
-            input, _models.CREATE_INVALIDATION_FOR_DISTRIBUTION_TENANT, [], plugins
+            self._select_input(
+                _models.CREATE_INVALIDATION_FOR_DISTRIBUTION_TENANT, args, kwargs
+            ),
+            _models.CREATE_INVALIDATION_FOR_DISTRIBUTION_TENANT,
+            [],
+            plugins,
         )
 
+    @_overload
     def create_key_group(
-        self, input: CreateKeyGroupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateKeyGroupInput | _models.CreateKeyGroupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateKeyGroupOutput: ...
+
+    @_overload
+    def create_key_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateKeyGroupInputDict],
     ) -> CreateKeyGroupOutput:
         """
         Creates a key group that you can use with [CloudFront signed URLs and
@@ -890,8 +1111,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         in the *Amazon CloudFront Developer Guide*.
 
         Args:
-            input:
-                An instance of `CreateKeyGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -901,10 +1120,34 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `CreateKeyGroupOutput`.
         """
-        return self._invoke(input, _models.CREATE_KEY_GROUP, [], plugins)
 
+    def create_key_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateKeyGroupOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_KEY_GROUP, args, kwargs),
+            _models.CREATE_KEY_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_key_value_store(
-        self, input: CreateKeyValueStoreInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateKeyValueStoreInput
+        | _models.CreateKeyValueStoreInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateKeyValueStoreOutput: ...
+
+    @_overload
+    def create_key_value_store(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateKeyValueStoreInputDict],
     ) -> CreateKeyValueStoreOutput:
         """
         Specifies the key value store resource to add to your account. In your
@@ -913,8 +1156,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         valid `ImportSource` that you own.
 
         Args:
-            input:
-                An instance of `CreateKeyValueStoreInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -924,12 +1165,34 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `CreateKeyValueStoreOutput`.
         """
-        return self._invoke(input, _models.CREATE_KEY_VALUE_STORE, [], plugins)
 
+    def create_key_value_store(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateKeyValueStoreOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_KEY_VALUE_STORE, args, kwargs),
+            _models.CREATE_KEY_VALUE_STORE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_monitoring_subscription(
         self,
-        input: CreateMonitoringSubscriptionInput,
+        request: _models.CreateMonitoringSubscriptionInput
+        | _models.CreateMonitoringSubscriptionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateMonitoringSubscriptionOutput: ...
+
+    @_overload
+    def create_monitoring_subscription(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateMonitoringSubscriptionInputDict],
     ) -> CreateMonitoringSubscriptionOutput:
         """
         Enables or disables additional Amazon CloudWatch metrics for the
@@ -941,8 +1204,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         in the *Amazon CloudFront Developer Guide*.
 
         Args:
-            input:
-                An instance of `CreateMonitoringSubscriptionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -952,10 +1213,34 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `CreateMonitoringSubscriptionOutput`.
         """
-        return self._invoke(input, _models.CREATE_MONITORING_SUBSCRIPTION, [], plugins)
 
+    def create_monitoring_subscription(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateMonitoringSubscriptionOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_MONITORING_SUBSCRIPTION, args, kwargs),
+            _models.CREATE_MONITORING_SUBSCRIPTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_origin_access_control(
-        self, input: CreateOriginAccessControlInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateOriginAccessControlInput
+        | _models.CreateOriginAccessControlInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateOriginAccessControlOutput: ...
+
+    @_overload
+    def create_origin_access_control(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateOriginAccessControlInputDict],
     ) -> CreateOriginAccessControlOutput:
         """
         Creates a new origin access control in CloudFront. After you create an
@@ -972,8 +1257,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         in the *Amazon CloudFront Developer Guide*.
 
         Args:
-            input:
-                An instance of `CreateOriginAccessControlInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -983,10 +1266,34 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `CreateOriginAccessControlOutput`.
         """
-        return self._invoke(input, _models.CREATE_ORIGIN_ACCESS_CONTROL, [], plugins)
 
+    def create_origin_access_control(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateOriginAccessControlOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_ORIGIN_ACCESS_CONTROL, args, kwargs),
+            _models.CREATE_ORIGIN_ACCESS_CONTROL,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_origin_request_policy(
-        self, input: CreateOriginRequestPolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateOriginRequestPolicyInput
+        | _models.CreateOriginRequestPolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateOriginRequestPolicyOutput: ...
+
+    @_overload
+    def create_origin_request_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateOriginRequestPolicyInputDict],
     ) -> CreateOriginRequestPolicyOutput:
         """
         Creates an origin request policy.
@@ -1018,8 +1325,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         in the *Amazon CloudFront Developer Guide*.
 
         Args:
-            input:
-                An instance of `CreateOriginRequestPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1029,10 +1334,33 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `CreateOriginRequestPolicyOutput`.
         """
-        return self._invoke(input, _models.CREATE_ORIGIN_REQUEST_POLICY, [], plugins)
 
+    def create_origin_request_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateOriginRequestPolicyOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_ORIGIN_REQUEST_POLICY, args, kwargs),
+            _models.CREATE_ORIGIN_REQUEST_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_public_key(
-        self, input: CreatePublicKeyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreatePublicKeyInput | _models.CreatePublicKeyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreatePublicKeyOutput: ...
+
+    @_overload
+    def create_public_key(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreatePublicKeyInputDict],
     ) -> CreatePublicKeyOutput:
         """
         Uploads a public key to CloudFront that you can use with [signed URLs
@@ -1042,8 +1370,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         encryption](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html).
 
         Args:
-            input:
-                An instance of `CreatePublicKeyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1053,10 +1379,34 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `CreatePublicKeyOutput`.
         """
-        return self._invoke(input, _models.CREATE_PUBLIC_KEY, [], plugins)
 
+    def create_public_key(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreatePublicKeyOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_PUBLIC_KEY, args, kwargs),
+            _models.CREATE_PUBLIC_KEY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_realtime_log_config(
-        self, input: CreateRealtimeLogConfigInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateRealtimeLogConfigInput
+        | _models.CreateRealtimeLogConfigInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateRealtimeLogConfigOutput: ...
+
+    @_overload
+    def create_realtime_log_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateRealtimeLogConfigInputDict],
     ) -> CreateRealtimeLogConfigOutput:
         """
         Creates a real-time log configuration.
@@ -1070,8 +1420,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         in the *Amazon CloudFront Developer Guide*.
 
         Args:
-            input:
-                An instance of `CreateRealtimeLogConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1081,12 +1429,34 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `CreateRealtimeLogConfigOutput`.
         """
-        return self._invoke(input, _models.CREATE_REALTIME_LOG_CONFIG, [], plugins)
 
+    def create_realtime_log_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateRealtimeLogConfigOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_REALTIME_LOG_CONFIG, args, kwargs),
+            _models.CREATE_REALTIME_LOG_CONFIG,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_response_headers_policy(
         self,
-        input: CreateResponseHeadersPolicyInput,
+        request: _models.CreateResponseHeadersPolicyInput
+        | _models.CreateResponseHeadersPolicyInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateResponseHeadersPolicyOutput: ...
+
+    @_overload
+    def create_response_headers_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateResponseHeadersPolicyInputDict],
     ) -> CreateResponseHeadersPolicyOutput:
         """
         Creates a response headers policy.
@@ -1107,8 +1477,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         in the *Amazon CloudFront Developer Guide*.
 
         Args:
-            input:
-                An instance of `CreateResponseHeadersPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1118,12 +1486,34 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `CreateResponseHeadersPolicyOutput`.
         """
-        return self._invoke(input, _models.CREATE_RESPONSE_HEADERS_POLICY, [], plugins)
 
+    def create_response_headers_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateResponseHeadersPolicyOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_RESPONSE_HEADERS_POLICY, args, kwargs),
+            _models.CREATE_RESPONSE_HEADERS_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_streaming_distribution(
         self,
-        input: CreateStreamingDistributionInput,
+        request: _models.CreateStreamingDistributionInput
+        | _models.CreateStreamingDistributionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateStreamingDistributionOutput: ...
+
+    @_overload
+    def create_streaming_distribution(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateStreamingDistributionInputDict],
     ) -> CreateStreamingDistributionOutput:
         """
         This API is deprecated. Amazon CloudFront is deprecating real-time
@@ -1133,8 +1523,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Amazon CloudFront discussion forum.
 
         Args:
-            input:
-                An instance of `CreateStreamingDistributionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1144,12 +1532,34 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `CreateStreamingDistributionOutput`.
         """
-        return self._invoke(input, _models.CREATE_STREAMING_DISTRIBUTION, [], plugins)
 
+    def create_streaming_distribution(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateStreamingDistributionOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_STREAMING_DISTRIBUTION, args, kwargs),
+            _models.CREATE_STREAMING_DISTRIBUTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_streaming_distribution_with_tags(
         self,
-        input: CreateStreamingDistributionWithTagsInput,
+        request: _models.CreateStreamingDistributionWithTagsInput
+        | _models.CreateStreamingDistributionWithTagsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateStreamingDistributionWithTagsOutput: ...
+
+    @_overload
+    def create_streaming_distribution_with_tags(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateStreamingDistributionWithTagsInputDict],
     ) -> CreateStreamingDistributionWithTagsOutput:
         """
         This API is deprecated. Amazon CloudFront is deprecating real-time
@@ -1159,8 +1569,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Amazon CloudFront discussion forum.
 
         Args:
-            input:
-                An instance of `CreateStreamingDistributionWithTagsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1170,19 +1578,40 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `CreateStreamingDistributionWithTagsOutput`.
         """
+
+    def create_streaming_distribution_with_tags(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateStreamingDistributionWithTagsOutput:
         return self._invoke(
-            input, _models.CREATE_STREAMING_DISTRIBUTION_WITH_TAGS, [], plugins
+            self._select_input(
+                _models.CREATE_STREAMING_DISTRIBUTION_WITH_TAGS, args, kwargs
+            ),
+            _models.CREATE_STREAMING_DISTRIBUTION_WITH_TAGS,
+            [],
+            plugins,
         )
 
+    @_overload
     def create_trust_store(
-        self, input: CreateTrustStoreInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateTrustStoreInput | _models.CreateTrustStoreInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateTrustStoreOutput: ...
+
+    @_overload
+    def create_trust_store(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateTrustStoreInputDict],
     ) -> CreateTrustStoreOutput:
         """
         Creates a trust store.
 
         Args:
-            input:
-                An instance of `CreateTrustStoreInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1192,17 +1621,38 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `CreateTrustStoreOutput`.
         """
-        return self._invoke(input, _models.CREATE_TRUST_STORE, [], plugins)
 
+    def create_trust_store(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateTrustStoreOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_TRUST_STORE, args, kwargs),
+            _models.CREATE_TRUST_STORE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_vpc_origin(
-        self, input: CreateVpcOriginInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateVpcOriginInput | _models.CreateVpcOriginInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateVpcOriginOutput: ...
+
+    @_overload
+    def create_vpc_origin(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateVpcOriginInputDict],
     ) -> CreateVpcOriginOutput:
         """
         Create an Amazon CloudFront VPC origin.
 
         Args:
-            input:
-                An instance of `CreateVpcOriginInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1212,17 +1662,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `CreateVpcOriginOutput`.
         """
-        return self._invoke(input, _models.CREATE_VPC_ORIGIN, [], plugins)
 
+    def create_vpc_origin(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateVpcOriginOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_VPC_ORIGIN, args, kwargs),
+            _models.CREATE_VPC_ORIGIN,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_anycast_ip_list(
-        self, input: DeleteAnycastIpListInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteAnycastIpListInput
+        | _models.DeleteAnycastIpListInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteAnycastIpListOutput: ...
+
+    @_overload
+    def delete_anycast_ip_list(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteAnycastIpListInputDict],
     ) -> DeleteAnycastIpListOutput:
         """
         Deletes an Anycast static IP list.
 
         Args:
-            input:
-                An instance of `DeleteAnycastIpListInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1232,10 +1704,33 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `DeleteAnycastIpListOutput`.
         """
-        return self._invoke(input, _models.DELETE_ANYCAST_IP_LIST, [], plugins)
 
+    def delete_anycast_ip_list(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteAnycastIpListOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_ANYCAST_IP_LIST, args, kwargs),
+            _models.DELETE_ANYCAST_IP_LIST,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_cache_policy(
-        self, input: DeleteCachePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteCachePolicyInput | _models.DeleteCachePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteCachePolicyOutput: ...
+
+    @_overload
+    def delete_cache_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteCachePolicyInputDict],
     ) -> DeleteCachePolicyOutput:
         """
         Deletes a cache policy.
@@ -1249,8 +1744,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         `GetCachePolicy`.
 
         Args:
-            input:
-                An instance of `DeleteCachePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1260,19 +1753,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `DeleteCachePolicyOutput`.
         """
-        return self._invoke(input, _models.DELETE_CACHE_POLICY, [], plugins)
 
+    def delete_cache_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteCachePolicyOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_CACHE_POLICY, args, kwargs),
+            _models.DELETE_CACHE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_cloud_front_origin_access_identity(
         self,
-        input: DeleteCloudFrontOriginAccessIdentityInput,
+        request: _models.DeleteCloudFrontOriginAccessIdentityInput
+        | _models.DeleteCloudFrontOriginAccessIdentityInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteCloudFrontOriginAccessIdentityOutput: ...
+
+    @_overload
+    def delete_cloud_front_origin_access_identity(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteCloudFrontOriginAccessIdentityInputDict],
     ) -> DeleteCloudFrontOriginAccessIdentityOutput:
         """
         Delete an origin access identity.
 
         Args:
-            input:
-                An instance of `DeleteCloudFrontOriginAccessIdentityInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1282,19 +1795,41 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `DeleteCloudFrontOriginAccessIdentityOutput`.
         """
+
+    def delete_cloud_front_origin_access_identity(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteCloudFrontOriginAccessIdentityOutput:
         return self._invoke(
-            input, _models.DELETE_CLOUD_FRONT_ORIGIN_ACCESS_IDENTITY, [], plugins
+            self._select_input(
+                _models.DELETE_CLOUD_FRONT_ORIGIN_ACCESS_IDENTITY, args, kwargs
+            ),
+            _models.DELETE_CLOUD_FRONT_ORIGIN_ACCESS_IDENTITY,
+            [],
+            plugins,
         )
 
+    @_overload
     def delete_connection_function(
-        self, input: DeleteConnectionFunctionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteConnectionFunctionInput
+        | _models.DeleteConnectionFunctionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteConnectionFunctionOutput: ...
+
+    @_overload
+    def delete_connection_function(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteConnectionFunctionInputDict],
     ) -> DeleteConnectionFunctionOutput:
         """
         Deletes a connection function.
 
         Args:
-            input:
-                An instance of `DeleteConnectionFunctionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1304,17 +1839,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `DeleteConnectionFunctionOutput`.
         """
-        return self._invoke(input, _models.DELETE_CONNECTION_FUNCTION, [], plugins)
 
+    def delete_connection_function(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteConnectionFunctionOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_CONNECTION_FUNCTION, args, kwargs),
+            _models.DELETE_CONNECTION_FUNCTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_connection_group(
-        self, input: DeleteConnectionGroupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteConnectionGroupInput
+        | _models.DeleteConnectionGroupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteConnectionGroupOutput: ...
+
+    @_overload
+    def delete_connection_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteConnectionGroupInputDict],
     ) -> DeleteConnectionGroupOutput:
         """
         Deletes a connection group.
 
         Args:
-            input:
-                An instance of `DeleteConnectionGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1324,12 +1881,34 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `DeleteConnectionGroupOutput`.
         """
-        return self._invoke(input, _models.DELETE_CONNECTION_GROUP, [], plugins)
 
+    def delete_connection_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteConnectionGroupOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_CONNECTION_GROUP, args, kwargs),
+            _models.DELETE_CONNECTION_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_continuous_deployment_policy(
         self,
-        input: DeleteContinuousDeploymentPolicyInput,
+        request: _models.DeleteContinuousDeploymentPolicyInput
+        | _models.DeleteContinuousDeploymentPolicyInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteContinuousDeploymentPolicyOutput: ...
+
+    @_overload
+    def delete_continuous_deployment_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteContinuousDeploymentPolicyInputDict],
     ) -> DeleteContinuousDeploymentPolicyOutput:
         """
         Deletes a continuous deployment policy.
@@ -1339,8 +1918,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         continuous deployment policy, then you can delete the policy.
 
         Args:
-            input:
-                An instance of `DeleteContinuousDeploymentPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1350,12 +1927,35 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `DeleteContinuousDeploymentPolicyOutput`.
         """
+
+    def delete_continuous_deployment_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteContinuousDeploymentPolicyOutput:
         return self._invoke(
-            input, _models.DELETE_CONTINUOUS_DEPLOYMENT_POLICY, [], plugins
+            self._select_input(
+                _models.DELETE_CONTINUOUS_DEPLOYMENT_POLICY, args, kwargs
+            ),
+            _models.DELETE_CONTINUOUS_DEPLOYMENT_POLICY,
+            [],
+            plugins,
         )
 
+    @_overload
     def delete_distribution(
-        self, input: DeleteDistributionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteDistributionInput | _models.DeleteDistributionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteDistributionOutput: ...
+
+    @_overload
+    def delete_distribution(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteDistributionInputDict],
     ) -> DeleteDistributionOutput:
         """
         Delete a distribution.
@@ -1366,8 +1966,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
             distribution cannot be recovered.
 
         Args:
-            input:
-                An instance of `DeleteDistributionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1377,10 +1975,34 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `DeleteDistributionOutput`.
         """
-        return self._invoke(input, _models.DELETE_DISTRIBUTION, [], plugins)
 
+    def delete_distribution(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteDistributionOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_DISTRIBUTION, args, kwargs),
+            _models.DELETE_DISTRIBUTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_distribution_tenant(
-        self, input: DeleteDistributionTenantInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteDistributionTenantInput
+        | _models.DeleteDistributionTenantInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteDistributionTenantOutput: ...
+
+    @_overload
+    def delete_distribution_tenant(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteDistributionTenantInputDict],
     ) -> DeleteDistributionTenantOutput:
         """
         Deletes a distribution tenant. If you use this API operation to delete a
@@ -1390,8 +2012,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         tenant by using the `UpdateDistributionTenant` API operation.
 
         Args:
-            input:
-                An instance of `DeleteDistributionTenantInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1401,19 +2021,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `DeleteDistributionTenantOutput`.
         """
-        return self._invoke(input, _models.DELETE_DISTRIBUTION_TENANT, [], plugins)
 
+    def delete_distribution_tenant(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteDistributionTenantOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_DISTRIBUTION_TENANT, args, kwargs),
+            _models.DELETE_DISTRIBUTION_TENANT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_field_level_encryption_config(
         self,
-        input: DeleteFieldLevelEncryptionConfigInput,
+        request: _models.DeleteFieldLevelEncryptionConfigInput
+        | _models.DeleteFieldLevelEncryptionConfigInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteFieldLevelEncryptionConfigOutput: ...
+
+    @_overload
+    def delete_field_level_encryption_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteFieldLevelEncryptionConfigInputDict],
     ) -> DeleteFieldLevelEncryptionConfigOutput:
         """
         Remove a field-level encryption configuration.
 
         Args:
-            input:
-                An instance of `DeleteFieldLevelEncryptionConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1423,21 +2063,41 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `DeleteFieldLevelEncryptionConfigOutput`.
         """
+
+    def delete_field_level_encryption_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteFieldLevelEncryptionConfigOutput:
         return self._invoke(
-            input, _models.DELETE_FIELD_LEVEL_ENCRYPTION_CONFIG, [], plugins
+            self._select_input(
+                _models.DELETE_FIELD_LEVEL_ENCRYPTION_CONFIG, args, kwargs
+            ),
+            _models.DELETE_FIELD_LEVEL_ENCRYPTION_CONFIG,
+            [],
+            plugins,
         )
 
+    @_overload
     def delete_field_level_encryption_profile(
         self,
-        input: DeleteFieldLevelEncryptionProfileInput,
+        request: _models.DeleteFieldLevelEncryptionProfileInput
+        | _models.DeleteFieldLevelEncryptionProfileInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteFieldLevelEncryptionProfileOutput: ...
+
+    @_overload
+    def delete_field_level_encryption_profile(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteFieldLevelEncryptionProfileInputDict],
     ) -> DeleteFieldLevelEncryptionProfileOutput:
         """
         Remove a field-level encryption profile.
 
         Args:
-            input:
-                An instance of `DeleteFieldLevelEncryptionProfileInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1447,12 +2107,35 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `DeleteFieldLevelEncryptionProfileOutput`.
         """
+
+    def delete_field_level_encryption_profile(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteFieldLevelEncryptionProfileOutput:
         return self._invoke(
-            input, _models.DELETE_FIELD_LEVEL_ENCRYPTION_PROFILE, [], plugins
+            self._select_input(
+                _models.DELETE_FIELD_LEVEL_ENCRYPTION_PROFILE, args, kwargs
+            ),
+            _models.DELETE_FIELD_LEVEL_ENCRYPTION_PROFILE,
+            [],
+            plugins,
         )
 
+    @_overload
     def delete_function(
-        self, input: DeleteFunctionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteFunctionInput | _models.DeleteFunctionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteFunctionOutput: ...
+
+    @_overload
+    def delete_function(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteFunctionInputDict],
     ) -> DeleteFunctionOutput:
         """
         Deletes a CloudFront function.
@@ -1466,8 +2149,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         `DescribeFunction`.
 
         Args:
-            input:
-                An instance of `DeleteFunctionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1477,10 +2158,33 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `DeleteFunctionOutput`.
         """
-        return self._invoke(input, _models.DELETE_FUNCTION, [], plugins)
 
+    def delete_function(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteFunctionOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_FUNCTION, args, kwargs),
+            _models.DELETE_FUNCTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_key_group(
-        self, input: DeleteKeyGroupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteKeyGroupInput | _models.DeleteKeyGroupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteKeyGroupOutput: ...
+
+    @_overload
+    def delete_key_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteKeyGroupInputDict],
     ) -> DeleteKeyGroupOutput:
         """
         Deletes a key group.
@@ -1494,8 +2198,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         `GetKeyGroup` or `GetKeyGroupConfig`.
 
         Args:
-            input:
-                An instance of `DeleteKeyGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1505,17 +2207,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `DeleteKeyGroupOutput`.
         """
-        return self._invoke(input, _models.DELETE_KEY_GROUP, [], plugins)
 
+    def delete_key_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteKeyGroupOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_KEY_GROUP, args, kwargs),
+            _models.DELETE_KEY_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_key_value_store(
-        self, input: DeleteKeyValueStoreInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteKeyValueStoreInput
+        | _models.DeleteKeyValueStoreInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteKeyValueStoreOutput: ...
+
+    @_overload
+    def delete_key_value_store(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteKeyValueStoreInputDict],
     ) -> DeleteKeyValueStoreOutput:
         """
         Specifies the key value store to delete.
 
         Args:
-            input:
-                An instance of `DeleteKeyValueStoreInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1525,20 +2249,40 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `DeleteKeyValueStoreOutput`.
         """
-        return self._invoke(input, _models.DELETE_KEY_VALUE_STORE, [], plugins)
 
+    def delete_key_value_store(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteKeyValueStoreOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_KEY_VALUE_STORE, args, kwargs),
+            _models.DELETE_KEY_VALUE_STORE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_monitoring_subscription(
         self,
-        input: DeleteMonitoringSubscriptionInput,
+        request: _models.DeleteMonitoringSubscriptionInput
+        | _models.DeleteMonitoringSubscriptionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteMonitoringSubscriptionOutput: ...
+
+    @_overload
+    def delete_monitoring_subscription(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteMonitoringSubscriptionInputDict],
     ) -> DeleteMonitoringSubscriptionOutput:
         """
         Disables additional CloudWatch metrics for the specified CloudFront
         distribution.
 
         Args:
-            input:
-                An instance of `DeleteMonitoringSubscriptionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1548,10 +2292,34 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `DeleteMonitoringSubscriptionOutput`.
         """
-        return self._invoke(input, _models.DELETE_MONITORING_SUBSCRIPTION, [], plugins)
 
+    def delete_monitoring_subscription(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteMonitoringSubscriptionOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_MONITORING_SUBSCRIPTION, args, kwargs),
+            _models.DELETE_MONITORING_SUBSCRIPTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_origin_access_control(
-        self, input: DeleteOriginAccessControlInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteOriginAccessControlInput
+        | _models.DeleteOriginAccessControlInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteOriginAccessControlOutput: ...
+
+    @_overload
+    def delete_origin_access_control(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteOriginAccessControlInputDict],
     ) -> DeleteOriginAccessControlOutput:
         """
         Deletes a CloudFront origin access control.
@@ -1561,8 +2329,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         origins, then delete the origin access control.
 
         Args:
-            input:
-                An instance of `DeleteOriginAccessControlInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1572,10 +2338,34 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `DeleteOriginAccessControlOutput`.
         """
-        return self._invoke(input, _models.DELETE_ORIGIN_ACCESS_CONTROL, [], plugins)
 
+    def delete_origin_access_control(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteOriginAccessControlOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_ORIGIN_ACCESS_CONTROL, args, kwargs),
+            _models.DELETE_ORIGIN_ACCESS_CONTROL,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_origin_request_policy(
-        self, input: DeleteOriginRequestPolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteOriginRequestPolicyInput
+        | _models.DeleteOriginRequestPolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteOriginRequestPolicyOutput: ...
+
+    @_overload
+    def delete_origin_request_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteOriginRequestPolicyInputDict],
     ) -> DeleteOriginRequestPolicyOutput:
         """
         Deletes an origin request policy.
@@ -1590,8 +2380,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         `ListOriginRequestPolicies` or `GetOriginRequestPolicy`.
 
         Args:
-            input:
-                An instance of `DeleteOriginRequestPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1601,17 +2389,38 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `DeleteOriginRequestPolicyOutput`.
         """
-        return self._invoke(input, _models.DELETE_ORIGIN_REQUEST_POLICY, [], plugins)
 
+    def delete_origin_request_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteOriginRequestPolicyOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_ORIGIN_REQUEST_POLICY, args, kwargs),
+            _models.DELETE_ORIGIN_REQUEST_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_public_key(
-        self, input: DeletePublicKeyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeletePublicKeyInput | _models.DeletePublicKeyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeletePublicKeyOutput: ...
+
+    @_overload
+    def delete_public_key(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeletePublicKeyInputDict],
     ) -> DeletePublicKeyOutput:
         """
         Remove a public key you previously added to CloudFront.
 
         Args:
-            input:
-                An instance of `DeletePublicKeyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1621,12 +2430,34 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `DeletePublicKeyOutput`.
         """
-        return self._invoke(input, _models.DELETE_PUBLIC_KEY, [], plugins)
 
+    def delete_public_key(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeletePublicKeyOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_PUBLIC_KEY, args, kwargs),
+            _models.DELETE_PUBLIC_KEY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_realtime_log_config(
         self,
-        input: DeleteRealtimeLogConfigInput | None = None,
+        request: _models.DeleteRealtimeLogConfigInput
+        | _models.DeleteRealtimeLogConfigInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteRealtimeLogConfigOutput: ...
+
+    @_overload
+    def delete_realtime_log_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteRealtimeLogConfigInputDict],
     ) -> DeleteRealtimeLogConfigOutput:
         """
         Deletes a real-time log configuration.
@@ -1642,8 +2473,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         identify the real-time log configuration to delete.
 
         Args:
-            input:
-                An instance of `DeleteRealtimeLogConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1653,17 +2482,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `DeleteRealtimeLogConfigOutput`.
         """
-        return self._invoke(input, _models.DELETE_REALTIME_LOG_CONFIG, [], plugins)
 
+    def delete_realtime_log_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteRealtimeLogConfigOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_REALTIME_LOG_CONFIG, args, kwargs),
+            _models.DELETE_REALTIME_LOG_CONFIG,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_resource_policy(
-        self, input: DeleteResourcePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteResourcePolicyInput
+        | _models.DeleteResourcePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteResourcePolicyOutput: ...
+
+    @_overload
+    def delete_resource_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteResourcePolicyInputDict],
     ) -> DeleteResourcePolicyOutput:
         """
         Deletes the resource policy attached to the CloudFront resource.
 
         Args:
-            input:
-                An instance of `DeleteResourcePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1673,12 +2524,34 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `DeleteResourcePolicyOutput`.
         """
-        return self._invoke(input, _models.DELETE_RESOURCE_POLICY, [], plugins)
 
+    def delete_resource_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteResourcePolicyOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_RESOURCE_POLICY, args, kwargs),
+            _models.DELETE_RESOURCE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_response_headers_policy(
         self,
-        input: DeleteResponseHeadersPolicyInput,
+        request: _models.DeleteResponseHeadersPolicyInput
+        | _models.DeleteResponseHeadersPolicyInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteResponseHeadersPolicyOutput: ...
+
+    @_overload
+    def delete_response_headers_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteResponseHeadersPolicyInputDict],
     ) -> DeleteResponseHeadersPolicyOutput:
         """
         Deletes a response headers policy.
@@ -1693,8 +2566,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         `ListResponseHeadersPolicies` or `GetResponseHeadersPolicy`.
 
         Args:
-            input:
-                An instance of `DeleteResponseHeadersPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1704,12 +2575,34 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `DeleteResponseHeadersPolicyOutput`.
         """
-        return self._invoke(input, _models.DELETE_RESPONSE_HEADERS_POLICY, [], plugins)
 
+    def delete_response_headers_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteResponseHeadersPolicyOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_RESPONSE_HEADERS_POLICY, args, kwargs),
+            _models.DELETE_RESPONSE_HEADERS_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_streaming_distribution(
         self,
-        input: DeleteStreamingDistributionInput,
+        request: _models.DeleteStreamingDistributionInput
+        | _models.DeleteStreamingDistributionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteStreamingDistributionOutput: ...
+
+    @_overload
+    def delete_streaming_distribution(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteStreamingDistributionInputDict],
     ) -> DeleteStreamingDistributionOutput:
         """
         Delete a streaming distribution. To delete an RTMP distribution using
@@ -1754,8 +2647,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         in the *Amazon CloudFront Developer Guide*.
 
         Args:
-            input:
-                An instance of `DeleteStreamingDistributionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1765,17 +2656,38 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `DeleteStreamingDistributionOutput`.
         """
-        return self._invoke(input, _models.DELETE_STREAMING_DISTRIBUTION, [], plugins)
 
+    def delete_streaming_distribution(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteStreamingDistributionOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_STREAMING_DISTRIBUTION, args, kwargs),
+            _models.DELETE_STREAMING_DISTRIBUTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_trust_store(
-        self, input: DeleteTrustStoreInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteTrustStoreInput | _models.DeleteTrustStoreInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteTrustStoreOutput: ...
+
+    @_overload
+    def delete_trust_store(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteTrustStoreInputDict],
     ) -> DeleteTrustStoreOutput:
         """
         Deletes a trust store.
 
         Args:
-            input:
-                An instance of `DeleteTrustStoreInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1785,17 +2697,38 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `DeleteTrustStoreOutput`.
         """
-        return self._invoke(input, _models.DELETE_TRUST_STORE, [], plugins)
 
+    def delete_trust_store(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteTrustStoreOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_TRUST_STORE, args, kwargs),
+            _models.DELETE_TRUST_STORE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_vpc_origin(
-        self, input: DeleteVpcOriginInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteVpcOriginInput | _models.DeleteVpcOriginInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteVpcOriginOutput: ...
+
+    @_overload
+    def delete_vpc_origin(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteVpcOriginInputDict],
     ) -> DeleteVpcOriginOutput:
         """
         Delete an Amazon CloudFront VPC origin.
 
         Args:
-            input:
-                An instance of `DeleteVpcOriginInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1805,19 +2738,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `DeleteVpcOriginOutput`.
         """
-        return self._invoke(input, _models.DELETE_VPC_ORIGIN, [], plugins)
 
+    def delete_vpc_origin(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteVpcOriginOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_VPC_ORIGIN, args, kwargs),
+            _models.DELETE_VPC_ORIGIN,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_connection_function(
         self,
-        input: DescribeConnectionFunctionInput,
+        request: _models.DescribeConnectionFunctionInput
+        | _models.DescribeConnectionFunctionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeConnectionFunctionOutput: ...
+
+    @_overload
+    def describe_connection_function(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeConnectionFunctionInputDict],
     ) -> DescribeConnectionFunctionOutput:
         """
         Describes a connection function.
 
         Args:
-            input:
-                An instance of `DescribeConnectionFunctionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1827,10 +2780,33 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `DescribeConnectionFunctionOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_CONNECTION_FUNCTION, [], plugins)
 
+    def describe_connection_function(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeConnectionFunctionOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_CONNECTION_FUNCTION, args, kwargs),
+            _models.DESCRIBE_CONNECTION_FUNCTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_function(
-        self, input: DescribeFunctionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeFunctionInput | _models.DescribeFunctionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeFunctionOutput: ...
+
+    @_overload
+    def describe_function(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeFunctionInputDict],
     ) -> DescribeFunctionOutput:
         """
         Gets configuration information and metadata about a CloudFront function,
@@ -1842,8 +2818,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         `ListFunctions`.
 
         Args:
-            input:
-                An instance of `DescribeFunctionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1853,17 +2827,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `DescribeFunctionOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_FUNCTION, [], plugins)
 
+    def describe_function(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeFunctionOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_FUNCTION, args, kwargs),
+            _models.DESCRIBE_FUNCTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_key_value_store(
-        self, input: DescribeKeyValueStoreInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeKeyValueStoreInput
+        | _models.DescribeKeyValueStoreInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeKeyValueStoreOutput: ...
+
+    @_overload
+    def describe_key_value_store(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeKeyValueStoreInputDict],
     ) -> DescribeKeyValueStoreOutput:
         """
         Specifies the key value store and its configuration.
 
         Args:
-            input:
-                An instance of `DescribeKeyValueStoreInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1873,19 +2869,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `DescribeKeyValueStoreOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_KEY_VALUE_STORE, [], plugins)
 
+    def describe_key_value_store(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeKeyValueStoreOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_KEY_VALUE_STORE, args, kwargs),
+            _models.DESCRIBE_KEY_VALUE_STORE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def disassociate_distribution_tenant_web_acl(
         self,
-        input: DisassociateDistributionTenantWebACLInput,
+        request: _models.DisassociateDistributionTenantWebACLInput
+        | _models.DisassociateDistributionTenantWebACLInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DisassociateDistributionTenantWebACLOutput: ...
+
+    @_overload
+    def disassociate_distribution_tenant_web_acl(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DisassociateDistributionTenantWebACLInputDict],
     ) -> DisassociateDistributionTenantWebACLOutput:
         """
         Disassociates a distribution tenant from the WAF web ACL.
 
         Args:
-            input:
-                An instance of `DisassociateDistributionTenantWebACLInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1895,21 +2911,41 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `DisassociateDistributionTenantWebACLOutput`.
         """
+
+    def disassociate_distribution_tenant_web_acl(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DisassociateDistributionTenantWebACLOutput:
         return self._invoke(
-            input, _models.DISASSOCIATE_DISTRIBUTION_TENANT_WEB_ACL, [], plugins
+            self._select_input(
+                _models.DISASSOCIATE_DISTRIBUTION_TENANT_WEB_ACL, args, kwargs
+            ),
+            _models.DISASSOCIATE_DISTRIBUTION_TENANT_WEB_ACL,
+            [],
+            plugins,
         )
 
+    @_overload
     def disassociate_distribution_web_acl(
         self,
-        input: DisassociateDistributionWebACLInput,
+        request: _models.DisassociateDistributionWebACLInput
+        | _models.DisassociateDistributionWebACLInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DisassociateDistributionWebACLOutput: ...
+
+    @_overload
+    def disassociate_distribution_web_acl(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DisassociateDistributionWebACLInputDict],
     ) -> DisassociateDistributionWebACLOutput:
         """
         Disassociates a distribution from the WAF web ACL.
 
         Args:
-            input:
-                An instance of `DisassociateDistributionWebACLInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1919,19 +2955,38 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `DisassociateDistributionWebACLOutput`.
         """
+
+    def disassociate_distribution_web_acl(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DisassociateDistributionWebACLOutput:
         return self._invoke(
-            input, _models.DISASSOCIATE_DISTRIBUTION_WEB_ACL, [], plugins
+            self._select_input(_models.DISASSOCIATE_DISTRIBUTION_WEB_ACL, args, kwargs),
+            _models.DISASSOCIATE_DISTRIBUTION_WEB_ACL,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_anycast_ip_list(
-        self, input: GetAnycastIpListInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetAnycastIpListInput | _models.GetAnycastIpListInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetAnycastIpListOutput: ...
+
+    @_overload
+    def get_anycast_ip_list(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetAnycastIpListInputDict],
     ) -> GetAnycastIpListOutput:
         """
         Gets an Anycast static IP list.
 
         Args:
-            input:
-                An instance of `GetAnycastIpListInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1941,10 +2996,33 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `GetAnycastIpListOutput`.
         """
-        return self._invoke(input, _models.GET_ANYCAST_IP_LIST, [], plugins)
 
+    def get_anycast_ip_list(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetAnycastIpListOutput:
+        return self._invoke(
+            self._select_input(_models.GET_ANYCAST_IP_LIST, args, kwargs),
+            _models.GET_ANYCAST_IP_LIST,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_cache_policy(
-        self, input: GetCachePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetCachePolicyInput | _models.GetCachePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetCachePolicyOutput: ...
+
+    @_overload
+    def get_cache_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetCachePolicyInputDict],
     ) -> GetCachePolicyOutput:
         """
         Gets a cache policy, including the following metadata:
@@ -1960,8 +3038,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         behavior, you can get the identifier using `ListCachePolicies`.
 
         Args:
-            input:
-                An instance of `GetCachePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1971,10 +3047,34 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `GetCachePolicyOutput`.
         """
-        return self._invoke(input, _models.GET_CACHE_POLICY, [], plugins)
 
+    def get_cache_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetCachePolicyOutput:
+        return self._invoke(
+            self._select_input(_models.GET_CACHE_POLICY, args, kwargs),
+            _models.GET_CACHE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_cache_policy_config(
-        self, input: GetCachePolicyConfigInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetCachePolicyConfigInput
+        | _models.GetCachePolicyConfigInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetCachePolicyConfigOutput: ...
+
+    @_overload
+    def get_cache_policy_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetCachePolicyConfigInputDict],
     ) -> GetCachePolicyConfigOutput:
         """
         Gets a cache policy configuration.
@@ -1986,8 +3086,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         behavior, you can get the identifier using `ListCachePolicies`.
 
         Args:
-            input:
-                An instance of `GetCachePolicyConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1997,19 +3095,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `GetCachePolicyConfigOutput`.
         """
-        return self._invoke(input, _models.GET_CACHE_POLICY_CONFIG, [], plugins)
 
+    def get_cache_policy_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetCachePolicyConfigOutput:
+        return self._invoke(
+            self._select_input(_models.GET_CACHE_POLICY_CONFIG, args, kwargs),
+            _models.GET_CACHE_POLICY_CONFIG,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_cloud_front_origin_access_identity(
         self,
-        input: GetCloudFrontOriginAccessIdentityInput,
+        request: _models.GetCloudFrontOriginAccessIdentityInput
+        | _models.GetCloudFrontOriginAccessIdentityInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetCloudFrontOriginAccessIdentityOutput: ...
+
+    @_overload
+    def get_cloud_front_origin_access_identity(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetCloudFrontOriginAccessIdentityInputDict],
     ) -> GetCloudFrontOriginAccessIdentityOutput:
         """
         Get the information about an origin access identity.
 
         Args:
-            input:
-                An instance of `GetCloudFrontOriginAccessIdentityInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2019,21 +3137,41 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `GetCloudFrontOriginAccessIdentityOutput`.
         """
+
+    def get_cloud_front_origin_access_identity(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetCloudFrontOriginAccessIdentityOutput:
         return self._invoke(
-            input, _models.GET_CLOUD_FRONT_ORIGIN_ACCESS_IDENTITY, [], plugins
+            self._select_input(
+                _models.GET_CLOUD_FRONT_ORIGIN_ACCESS_IDENTITY, args, kwargs
+            ),
+            _models.GET_CLOUD_FRONT_ORIGIN_ACCESS_IDENTITY,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_cloud_front_origin_access_identity_config(
         self,
-        input: GetCloudFrontOriginAccessIdentityConfigInput,
+        request: _models.GetCloudFrontOriginAccessIdentityConfigInput
+        | _models.GetCloudFrontOriginAccessIdentityConfigInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetCloudFrontOriginAccessIdentityConfigOutput: ...
+
+    @_overload
+    def get_cloud_front_origin_access_identity_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetCloudFrontOriginAccessIdentityConfigInputDict],
     ) -> GetCloudFrontOriginAccessIdentityConfigOutput:
         """
         Get the configuration information about an origin access identity.
 
         Args:
-            input:
-                An instance of `GetCloudFrontOriginAccessIdentityConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2043,19 +3181,41 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `GetCloudFrontOriginAccessIdentityConfigOutput`.
         """
+
+    def get_cloud_front_origin_access_identity_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetCloudFrontOriginAccessIdentityConfigOutput:
         return self._invoke(
-            input, _models.GET_CLOUD_FRONT_ORIGIN_ACCESS_IDENTITY_CONFIG, [], plugins
+            self._select_input(
+                _models.GET_CLOUD_FRONT_ORIGIN_ACCESS_IDENTITY_CONFIG, args, kwargs
+            ),
+            _models.GET_CLOUD_FRONT_ORIGIN_ACCESS_IDENTITY_CONFIG,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_connection_function(
-        self, input: GetConnectionFunctionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetConnectionFunctionInput
+        | _models.GetConnectionFunctionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetConnectionFunctionOutput: ...
+
+    @_overload
+    def get_connection_function(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetConnectionFunctionInputDict],
     ) -> GetConnectionFunctionOutput:
         """
         Gets a connection function.
 
         Args:
-            input:
-                An instance of `GetConnectionFunctionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2065,17 +3225,38 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `GetConnectionFunctionOutput`.
         """
-        return self._invoke(input, _models.GET_CONNECTION_FUNCTION, [], plugins)
 
+    def get_connection_function(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetConnectionFunctionOutput:
+        return self._invoke(
+            self._select_input(_models.GET_CONNECTION_FUNCTION, args, kwargs),
+            _models.GET_CONNECTION_FUNCTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_connection_group(
-        self, input: GetConnectionGroupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetConnectionGroupInput | _models.GetConnectionGroupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetConnectionGroupOutput: ...
+
+    @_overload
+    def get_connection_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetConnectionGroupInputDict],
     ) -> GetConnectionGroupOutput:
         """
         Gets information about a connection group.
 
         Args:
-            input:
-                An instance of `GetConnectionGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2085,20 +3266,40 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `GetConnectionGroupOutput`.
         """
-        return self._invoke(input, _models.GET_CONNECTION_GROUP, [], plugins)
 
+    def get_connection_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetConnectionGroupOutput:
+        return self._invoke(
+            self._select_input(_models.GET_CONNECTION_GROUP, args, kwargs),
+            _models.GET_CONNECTION_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_connection_group_by_routing_endpoint(
         self,
-        input: GetConnectionGroupByRoutingEndpointInput,
+        request: _models.GetConnectionGroupByRoutingEndpointInput
+        | _models.GetConnectionGroupByRoutingEndpointInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetConnectionGroupByRoutingEndpointOutput: ...
+
+    @_overload
+    def get_connection_group_by_routing_endpoint(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetConnectionGroupByRoutingEndpointInputDict],
     ) -> GetConnectionGroupByRoutingEndpointOutput:
         """
         Gets information about a connection group by using the endpoint that you
         specify.
 
         Args:
-            input:
-                An instance of `GetConnectionGroupByRoutingEndpointInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2108,22 +3309,42 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `GetConnectionGroupByRoutingEndpointOutput`.
         """
+
+    def get_connection_group_by_routing_endpoint(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetConnectionGroupByRoutingEndpointOutput:
         return self._invoke(
-            input, _models.GET_CONNECTION_GROUP_BY_ROUTING_ENDPOINT, [], plugins
+            self._select_input(
+                _models.GET_CONNECTION_GROUP_BY_ROUTING_ENDPOINT, args, kwargs
+            ),
+            _models.GET_CONNECTION_GROUP_BY_ROUTING_ENDPOINT,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_continuous_deployment_policy(
         self,
-        input: GetContinuousDeploymentPolicyInput,
+        request: _models.GetContinuousDeploymentPolicyInput
+        | _models.GetContinuousDeploymentPolicyInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetContinuousDeploymentPolicyOutput: ...
+
+    @_overload
+    def get_continuous_deployment_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetContinuousDeploymentPolicyInputDict],
     ) -> GetContinuousDeploymentPolicyOutput:
         """
         Gets a continuous deployment policy, including metadata (the policy's
         identifier and the date and time when the policy was last modified).
 
         Args:
-            input:
-                An instance of `GetContinuousDeploymentPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2133,21 +3354,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `GetContinuousDeploymentPolicyOutput`.
         """
+
+    def get_continuous_deployment_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetContinuousDeploymentPolicyOutput:
         return self._invoke(
-            input, _models.GET_CONTINUOUS_DEPLOYMENT_POLICY, [], plugins
+            self._select_input(_models.GET_CONTINUOUS_DEPLOYMENT_POLICY, args, kwargs),
+            _models.GET_CONTINUOUS_DEPLOYMENT_POLICY,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_continuous_deployment_policy_config(
         self,
-        input: GetContinuousDeploymentPolicyConfigInput,
+        request: _models.GetContinuousDeploymentPolicyConfigInput
+        | _models.GetContinuousDeploymentPolicyConfigInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetContinuousDeploymentPolicyConfigOutput: ...
+
+    @_overload
+    def get_continuous_deployment_policy_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetContinuousDeploymentPolicyConfigInputDict],
     ) -> GetContinuousDeploymentPolicyConfigOutput:
         """
         Gets configuration information about a continuous deployment policy.
 
         Args:
-            input:
-                An instance of `GetContinuousDeploymentPolicyConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2157,19 +3396,40 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `GetContinuousDeploymentPolicyConfigOutput`.
         """
+
+    def get_continuous_deployment_policy_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetContinuousDeploymentPolicyConfigOutput:
         return self._invoke(
-            input, _models.GET_CONTINUOUS_DEPLOYMENT_POLICY_CONFIG, [], plugins
+            self._select_input(
+                _models.GET_CONTINUOUS_DEPLOYMENT_POLICY_CONFIG, args, kwargs
+            ),
+            _models.GET_CONTINUOUS_DEPLOYMENT_POLICY_CONFIG,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_distribution(
-        self, input: GetDistributionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetDistributionInput | _models.GetDistributionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetDistributionOutput: ...
+
+    @_overload
+    def get_distribution(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetDistributionInputDict],
     ) -> GetDistributionOutput:
         """
         Get the information about a distribution.
 
         Args:
-            input:
-                An instance of `GetDistributionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2179,17 +3439,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `GetDistributionOutput`.
         """
-        return self._invoke(input, _models.GET_DISTRIBUTION, [], plugins)
 
+    def get_distribution(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetDistributionOutput:
+        return self._invoke(
+            self._select_input(_models.GET_DISTRIBUTION, args, kwargs),
+            _models.GET_DISTRIBUTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_distribution_config(
-        self, input: GetDistributionConfigInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetDistributionConfigInput
+        | _models.GetDistributionConfigInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetDistributionConfigOutput: ...
+
+    @_overload
+    def get_distribution_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetDistributionConfigInputDict],
     ) -> GetDistributionConfigOutput:
         """
         Get the configuration information about a distribution.
 
         Args:
-            input:
-                An instance of `GetDistributionConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2199,17 +3481,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `GetDistributionConfigOutput`.
         """
-        return self._invoke(input, _models.GET_DISTRIBUTION_CONFIG, [], plugins)
 
+    def get_distribution_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetDistributionConfigOutput:
+        return self._invoke(
+            self._select_input(_models.GET_DISTRIBUTION_CONFIG, args, kwargs),
+            _models.GET_DISTRIBUTION_CONFIG,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_distribution_tenant(
-        self, input: GetDistributionTenantInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetDistributionTenantInput
+        | _models.GetDistributionTenantInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetDistributionTenantOutput: ...
+
+    @_overload
+    def get_distribution_tenant(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetDistributionTenantInputDict],
     ) -> GetDistributionTenantOutput:
         """
         Gets information about a distribution tenant.
 
         Args:
-            input:
-                An instance of `GetDistributionTenantInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2219,19 +3523,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `GetDistributionTenantOutput`.
         """
-        return self._invoke(input, _models.GET_DISTRIBUTION_TENANT, [], plugins)
 
+    def get_distribution_tenant(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetDistributionTenantOutput:
+        return self._invoke(
+            self._select_input(_models.GET_DISTRIBUTION_TENANT, args, kwargs),
+            _models.GET_DISTRIBUTION_TENANT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_distribution_tenant_by_domain(
         self,
-        input: GetDistributionTenantByDomainInput,
+        request: _models.GetDistributionTenantByDomainInput
+        | _models.GetDistributionTenantByDomainInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetDistributionTenantByDomainOutput: ...
+
+    @_overload
+    def get_distribution_tenant_by_domain(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetDistributionTenantByDomainInputDict],
     ) -> GetDistributionTenantByDomainOutput:
         """
         Gets information about a distribution tenant by the associated domain.
 
         Args:
-            input:
-                An instance of `GetDistributionTenantByDomainInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2241,19 +3565,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `GetDistributionTenantByDomainOutput`.
         """
+
+    def get_distribution_tenant_by_domain(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetDistributionTenantByDomainOutput:
         return self._invoke(
-            input, _models.GET_DISTRIBUTION_TENANT_BY_DOMAIN, [], plugins
+            self._select_input(_models.GET_DISTRIBUTION_TENANT_BY_DOMAIN, args, kwargs),
+            _models.GET_DISTRIBUTION_TENANT_BY_DOMAIN,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_field_level_encryption(
-        self, input: GetFieldLevelEncryptionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetFieldLevelEncryptionInput
+        | _models.GetFieldLevelEncryptionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetFieldLevelEncryptionOutput: ...
+
+    @_overload
+    def get_field_level_encryption(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetFieldLevelEncryptionInputDict],
     ) -> GetFieldLevelEncryptionOutput:
         """
         Get the field-level encryption configuration information.
 
         Args:
-            input:
-                An instance of `GetFieldLevelEncryptionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2263,19 +3607,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `GetFieldLevelEncryptionOutput`.
         """
-        return self._invoke(input, _models.GET_FIELD_LEVEL_ENCRYPTION, [], plugins)
 
+    def get_field_level_encryption(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetFieldLevelEncryptionOutput:
+        return self._invoke(
+            self._select_input(_models.GET_FIELD_LEVEL_ENCRYPTION, args, kwargs),
+            _models.GET_FIELD_LEVEL_ENCRYPTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_field_level_encryption_config(
         self,
-        input: GetFieldLevelEncryptionConfigInput,
+        request: _models.GetFieldLevelEncryptionConfigInput
+        | _models.GetFieldLevelEncryptionConfigInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetFieldLevelEncryptionConfigOutput: ...
+
+    @_overload
+    def get_field_level_encryption_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetFieldLevelEncryptionConfigInputDict],
     ) -> GetFieldLevelEncryptionConfigOutput:
         """
         Get the field-level encryption configuration information.
 
         Args:
-            input:
-                An instance of `GetFieldLevelEncryptionConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2285,21 +3649,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `GetFieldLevelEncryptionConfigOutput`.
         """
+
+    def get_field_level_encryption_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetFieldLevelEncryptionConfigOutput:
         return self._invoke(
-            input, _models.GET_FIELD_LEVEL_ENCRYPTION_CONFIG, [], plugins
+            self._select_input(_models.GET_FIELD_LEVEL_ENCRYPTION_CONFIG, args, kwargs),
+            _models.GET_FIELD_LEVEL_ENCRYPTION_CONFIG,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_field_level_encryption_profile(
         self,
-        input: GetFieldLevelEncryptionProfileInput,
+        request: _models.GetFieldLevelEncryptionProfileInput
+        | _models.GetFieldLevelEncryptionProfileInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetFieldLevelEncryptionProfileOutput: ...
+
+    @_overload
+    def get_field_level_encryption_profile(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetFieldLevelEncryptionProfileInputDict],
     ) -> GetFieldLevelEncryptionProfileOutput:
         """
         Get the field-level encryption profile information.
 
         Args:
-            input:
-                An instance of `GetFieldLevelEncryptionProfileInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2309,21 +3691,41 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `GetFieldLevelEncryptionProfileOutput`.
         """
+
+    def get_field_level_encryption_profile(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetFieldLevelEncryptionProfileOutput:
         return self._invoke(
-            input, _models.GET_FIELD_LEVEL_ENCRYPTION_PROFILE, [], plugins
+            self._select_input(
+                _models.GET_FIELD_LEVEL_ENCRYPTION_PROFILE, args, kwargs
+            ),
+            _models.GET_FIELD_LEVEL_ENCRYPTION_PROFILE,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_field_level_encryption_profile_config(
         self,
-        input: GetFieldLevelEncryptionProfileConfigInput,
+        request: _models.GetFieldLevelEncryptionProfileConfigInput
+        | _models.GetFieldLevelEncryptionProfileConfigInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetFieldLevelEncryptionProfileConfigOutput: ...
+
+    @_overload
+    def get_field_level_encryption_profile_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetFieldLevelEncryptionProfileConfigInputDict],
     ) -> GetFieldLevelEncryptionProfileConfigOutput:
         """
         Get the field-level encryption profile configuration information.
 
         Args:
-            input:
-                An instance of `GetFieldLevelEncryptionProfileConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2333,12 +3735,35 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `GetFieldLevelEncryptionProfileConfigOutput`.
         """
+
+    def get_field_level_encryption_profile_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetFieldLevelEncryptionProfileConfigOutput:
         return self._invoke(
-            input, _models.GET_FIELD_LEVEL_ENCRYPTION_PROFILE_CONFIG, [], plugins
+            self._select_input(
+                _models.GET_FIELD_LEVEL_ENCRYPTION_PROFILE_CONFIG, args, kwargs
+            ),
+            _models.GET_FIELD_LEVEL_ENCRYPTION_PROFILE_CONFIG,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_function(
-        self, input: GetFunctionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetFunctionInput | _models.GetFunctionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetFunctionOutput: ...
+
+    @_overload
+    def get_function(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetFunctionInputDict],
     ) -> GetFunctionOutput:
         """
         Gets the code of a CloudFront function. To get configuration information
@@ -2348,8 +3773,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         stage. To get these values, you can use `ListFunctions`.
 
         Args:
-            input:
-                An instance of `GetFunctionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2359,17 +3782,38 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `GetFunctionOutput`.
         """
-        return self._invoke(input, _models.GET_FUNCTION, [], plugins)
 
+    def get_function(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetFunctionOutput:
+        return self._invoke(
+            self._select_input(_models.GET_FUNCTION, args, kwargs),
+            _models.GET_FUNCTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_invalidation(
-        self, input: GetInvalidationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetInvalidationInput | _models.GetInvalidationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetInvalidationOutput: ...
+
+    @_overload
+    def get_invalidation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetInvalidationInputDict],
     ) -> GetInvalidationOutput:
         """
         Get the information about an invalidation.
 
         Args:
-            input:
-                An instance of `GetInvalidationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2379,20 +3823,40 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `GetInvalidationOutput`.
         """
-        return self._invoke(input, _models.GET_INVALIDATION, [], plugins)
 
+    def get_invalidation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetInvalidationOutput:
+        return self._invoke(
+            self._select_input(_models.GET_INVALIDATION, args, kwargs),
+            _models.GET_INVALIDATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_invalidation_for_distribution_tenant(
         self,
-        input: GetInvalidationForDistributionTenantInput,
+        request: _models.GetInvalidationForDistributionTenantInput
+        | _models.GetInvalidationForDistributionTenantInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetInvalidationForDistributionTenantOutput: ...
+
+    @_overload
+    def get_invalidation_for_distribution_tenant(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetInvalidationForDistributionTenantInputDict],
     ) -> GetInvalidationForDistributionTenantOutput:
         """
         Gets information about a specific invalidation for a distribution
         tenant.
 
         Args:
-            input:
-                An instance of `GetInvalidationForDistributionTenantInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2402,12 +3866,35 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `GetInvalidationForDistributionTenantOutput`.
         """
+
+    def get_invalidation_for_distribution_tenant(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetInvalidationForDistributionTenantOutput:
         return self._invoke(
-            input, _models.GET_INVALIDATION_FOR_DISTRIBUTION_TENANT, [], plugins
+            self._select_input(
+                _models.GET_INVALIDATION_FOR_DISTRIBUTION_TENANT, args, kwargs
+            ),
+            _models.GET_INVALIDATION_FOR_DISTRIBUTION_TENANT,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_key_group(
-        self, input: GetKeyGroupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetKeyGroupInput | _models.GetKeyGroupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetKeyGroupOutput: ...
+
+    @_overload
+    def get_key_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetKeyGroupInputDict],
     ) -> GetKeyGroupOutput:
         """
         Gets a key group, including the date and time when the key group was
@@ -2420,8 +3907,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         behavior, you can get the identifier using `ListKeyGroups`.
 
         Args:
-            input:
-                An instance of `GetKeyGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2431,10 +3916,33 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `GetKeyGroupOutput`.
         """
-        return self._invoke(input, _models.GET_KEY_GROUP, [], plugins)
 
+    def get_key_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetKeyGroupOutput:
+        return self._invoke(
+            self._select_input(_models.GET_KEY_GROUP, args, kwargs),
+            _models.GET_KEY_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_key_group_config(
-        self, input: GetKeyGroupConfigInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetKeyGroupConfigInput | _models.GetKeyGroupConfigInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetKeyGroupConfigOutput: ...
+
+    @_overload
+    def get_key_group_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetKeyGroupConfigInputDict],
     ) -> GetKeyGroupConfigOutput:
         """
         Gets a key group configuration.
@@ -2447,8 +3955,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         `ListKeyGroups`.
 
         Args:
-            input:
-                An instance of `GetKeyGroupConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2458,19 +3964,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `GetKeyGroupConfigOutput`.
         """
-        return self._invoke(input, _models.GET_KEY_GROUP_CONFIG, [], plugins)
 
+    def get_key_group_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetKeyGroupConfigOutput:
+        return self._invoke(
+            self._select_input(_models.GET_KEY_GROUP_CONFIG, args, kwargs),
+            _models.GET_KEY_GROUP_CONFIG,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_managed_certificate_details(
         self,
-        input: GetManagedCertificateDetailsInput,
+        request: _models.GetManagedCertificateDetailsInput
+        | _models.GetManagedCertificateDetailsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetManagedCertificateDetailsOutput: ...
+
+    @_overload
+    def get_managed_certificate_details(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetManagedCertificateDetailsInputDict],
     ) -> GetManagedCertificateDetailsOutput:
         """
         Gets details about the CloudFront managed ACM certificate.
 
         Args:
-            input:
-                An instance of `GetManagedCertificateDetailsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2480,18 +4006,40 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `GetManagedCertificateDetailsOutput`.
         """
-        return self._invoke(input, _models.GET_MANAGED_CERTIFICATE_DETAILS, [], plugins)
 
+    def get_managed_certificate_details(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetManagedCertificateDetailsOutput:
+        return self._invoke(
+            self._select_input(_models.GET_MANAGED_CERTIFICATE_DETAILS, args, kwargs),
+            _models.GET_MANAGED_CERTIFICATE_DETAILS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_monitoring_subscription(
-        self, input: GetMonitoringSubscriptionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetMonitoringSubscriptionInput
+        | _models.GetMonitoringSubscriptionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetMonitoringSubscriptionOutput: ...
+
+    @_overload
+    def get_monitoring_subscription(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetMonitoringSubscriptionInputDict],
     ) -> GetMonitoringSubscriptionOutput:
         """
         Gets information about whether additional CloudWatch metrics are enabled
         for the specified CloudFront distribution.
 
         Args:
-            input:
-                An instance of `GetMonitoringSubscriptionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2501,18 +4049,40 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `GetMonitoringSubscriptionOutput`.
         """
-        return self._invoke(input, _models.GET_MONITORING_SUBSCRIPTION, [], plugins)
 
+    def get_monitoring_subscription(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetMonitoringSubscriptionOutput:
+        return self._invoke(
+            self._select_input(_models.GET_MONITORING_SUBSCRIPTION, args, kwargs),
+            _models.GET_MONITORING_SUBSCRIPTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_origin_access_control(
-        self, input: GetOriginAccessControlInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetOriginAccessControlInput
+        | _models.GetOriginAccessControlInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetOriginAccessControlOutput: ...
+
+    @_overload
+    def get_origin_access_control(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetOriginAccessControlInputDict],
     ) -> GetOriginAccessControlOutput:
         """
         Gets a CloudFront origin access control, including its unique
         identifier.
 
         Args:
-            input:
-                An instance of `GetOriginAccessControlInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2522,19 +4092,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `GetOriginAccessControlOutput`.
         """
-        return self._invoke(input, _models.GET_ORIGIN_ACCESS_CONTROL, [], plugins)
 
+    def get_origin_access_control(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetOriginAccessControlOutput:
+        return self._invoke(
+            self._select_input(_models.GET_ORIGIN_ACCESS_CONTROL, args, kwargs),
+            _models.GET_ORIGIN_ACCESS_CONTROL,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_origin_access_control_config(
         self,
-        input: GetOriginAccessControlConfigInput,
+        request: _models.GetOriginAccessControlConfigInput
+        | _models.GetOriginAccessControlConfigInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetOriginAccessControlConfigOutput: ...
+
+    @_overload
+    def get_origin_access_control_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetOriginAccessControlConfigInputDict],
     ) -> GetOriginAccessControlConfigOutput:
         """
         Gets a CloudFront origin access control configuration.
 
         Args:
-            input:
-                An instance of `GetOriginAccessControlConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2544,12 +4134,34 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `GetOriginAccessControlConfigOutput`.
         """
+
+    def get_origin_access_control_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetOriginAccessControlConfigOutput:
         return self._invoke(
-            input, _models.GET_ORIGIN_ACCESS_CONTROL_CONFIG, [], plugins
+            self._select_input(_models.GET_ORIGIN_ACCESS_CONTROL_CONFIG, args, kwargs),
+            _models.GET_ORIGIN_ACCESS_CONTROL_CONFIG,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_origin_request_policy(
-        self, input: GetOriginRequestPolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetOriginRequestPolicyInput
+        | _models.GetOriginRequestPolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetOriginRequestPolicyOutput: ...
+
+    @_overload
+    def get_origin_request_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetOriginRequestPolicyInputDict],
     ) -> GetOriginRequestPolicyOutput:
         """
         Gets an origin request policy, including the following metadata:
@@ -2566,8 +4178,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         using `ListOriginRequestPolicies`.
 
         Args:
-            input:
-                An instance of `GetOriginRequestPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2577,12 +4187,34 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `GetOriginRequestPolicyOutput`.
         """
-        return self._invoke(input, _models.GET_ORIGIN_REQUEST_POLICY, [], plugins)
 
+    def get_origin_request_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetOriginRequestPolicyOutput:
+        return self._invoke(
+            self._select_input(_models.GET_ORIGIN_REQUEST_POLICY, args, kwargs),
+            _models.GET_ORIGIN_REQUEST_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_origin_request_policy_config(
         self,
-        input: GetOriginRequestPolicyConfigInput,
+        request: _models.GetOriginRequestPolicyConfigInput
+        | _models.GetOriginRequestPolicyConfigInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetOriginRequestPolicyConfigOutput: ...
+
+    @_overload
+    def get_origin_request_policy_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetOriginRequestPolicyConfigInputDict],
     ) -> GetOriginRequestPolicyConfigOutput:
         """
         Gets an origin request policy configuration.
@@ -2595,8 +4227,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         using `ListOriginRequestPolicies`.
 
         Args:
-            input:
-                An instance of `GetOriginRequestPolicyConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2606,19 +4236,38 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `GetOriginRequestPolicyConfigOutput`.
         """
+
+    def get_origin_request_policy_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetOriginRequestPolicyConfigOutput:
         return self._invoke(
-            input, _models.GET_ORIGIN_REQUEST_POLICY_CONFIG, [], plugins
+            self._select_input(_models.GET_ORIGIN_REQUEST_POLICY_CONFIG, args, kwargs),
+            _models.GET_ORIGIN_REQUEST_POLICY_CONFIG,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_public_key(
-        self, input: GetPublicKeyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetPublicKeyInput | _models.GetPublicKeyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetPublicKeyOutput: ...
+
+    @_overload
+    def get_public_key(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetPublicKeyInputDict],
     ) -> GetPublicKeyOutput:
         """
         Gets a public key.
 
         Args:
-            input:
-                An instance of `GetPublicKeyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2628,17 +4277,38 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `GetPublicKeyOutput`.
         """
-        return self._invoke(input, _models.GET_PUBLIC_KEY, [], plugins)
 
+    def get_public_key(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetPublicKeyOutput:
+        return self._invoke(
+            self._select_input(_models.GET_PUBLIC_KEY, args, kwargs),
+            _models.GET_PUBLIC_KEY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_public_key_config(
-        self, input: GetPublicKeyConfigInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetPublicKeyConfigInput | _models.GetPublicKeyConfigInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetPublicKeyConfigOutput: ...
+
+    @_overload
+    def get_public_key_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetPublicKeyConfigInputDict],
     ) -> GetPublicKeyConfigOutput:
         """
         Gets a public key configuration.
 
         Args:
-            input:
-                An instance of `GetPublicKeyConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2648,12 +4318,34 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `GetPublicKeyConfigOutput`.
         """
-        return self._invoke(input, _models.GET_PUBLIC_KEY_CONFIG, [], plugins)
 
+    def get_public_key_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetPublicKeyConfigOutput:
+        return self._invoke(
+            self._select_input(_models.GET_PUBLIC_KEY_CONFIG, args, kwargs),
+            _models.GET_PUBLIC_KEY_CONFIG,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_realtime_log_config(
         self,
-        input: GetRealtimeLogConfigInput | None = None,
+        request: _models.GetRealtimeLogConfigInput
+        | _models.GetRealtimeLogConfigInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetRealtimeLogConfigOutput: ...
+
+    @_overload
+    def get_realtime_log_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetRealtimeLogConfigInputDict],
     ) -> GetRealtimeLogConfigOutput:
         """
         Gets a real-time log configuration.
@@ -2664,8 +4356,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         identify the real-time log configuration to get.
 
         Args:
-            input:
-                An instance of `GetRealtimeLogConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2675,18 +4365,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `GetRealtimeLogConfigOutput`.
         """
-        return self._invoke(input, _models.GET_REALTIME_LOG_CONFIG, [], plugins)
 
+    def get_realtime_log_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetRealtimeLogConfigOutput:
+        return self._invoke(
+            self._select_input(_models.GET_REALTIME_LOG_CONFIG, args, kwargs),
+            _models.GET_REALTIME_LOG_CONFIG,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_resource_policy(
-        self, input: GetResourcePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetResourcePolicyInput | _models.GetResourcePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetResourcePolicyOutput: ...
+
+    @_overload
+    def get_resource_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetResourcePolicyInputDict],
     ) -> GetResourcePolicyOutput:
         """
         Retrieves the resource policy for the specified CloudFront resource that
         you own and have shared.
 
         Args:
-            input:
-                An instance of `GetResourcePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2696,10 +4407,34 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `GetResourcePolicyOutput`.
         """
-        return self._invoke(input, _models.GET_RESOURCE_POLICY, [], plugins)
 
+    def get_resource_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetResourcePolicyOutput:
+        return self._invoke(
+            self._select_input(_models.GET_RESOURCE_POLICY, args, kwargs),
+            _models.GET_RESOURCE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_response_headers_policy(
-        self, input: GetResponseHeadersPolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetResponseHeadersPolicyInput
+        | _models.GetResponseHeadersPolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetResponseHeadersPolicyOutput: ...
+
+    @_overload
+    def get_response_headers_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetResponseHeadersPolicyInputDict],
     ) -> GetResponseHeadersPolicyOutput:
         """
         Gets a response headers policy, including metadata (the policy's
@@ -2713,8 +4448,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         using `ListResponseHeadersPolicies`.
 
         Args:
-            input:
-                An instance of `GetResponseHeadersPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2724,12 +4457,34 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `GetResponseHeadersPolicyOutput`.
         """
-        return self._invoke(input, _models.GET_RESPONSE_HEADERS_POLICY, [], plugins)
 
+    def get_response_headers_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetResponseHeadersPolicyOutput:
+        return self._invoke(
+            self._select_input(_models.GET_RESPONSE_HEADERS_POLICY, args, kwargs),
+            _models.GET_RESPONSE_HEADERS_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_response_headers_policy_config(
         self,
-        input: GetResponseHeadersPolicyConfigInput,
+        request: _models.GetResponseHeadersPolicyConfigInput
+        | _models.GetResponseHeadersPolicyConfigInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetResponseHeadersPolicyConfigOutput: ...
+
+    @_overload
+    def get_response_headers_policy_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetResponseHeadersPolicyConfigInputDict],
     ) -> GetResponseHeadersPolicyConfigOutput:
         """
         Gets a response headers policy configuration.
@@ -2742,8 +4497,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         using `ListResponseHeadersPolicies`.
 
         Args:
-            input:
-                An instance of `GetResponseHeadersPolicyConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2753,20 +4506,42 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `GetResponseHeadersPolicyConfigOutput`.
         """
+
+    def get_response_headers_policy_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetResponseHeadersPolicyConfigOutput:
         return self._invoke(
-            input, _models.GET_RESPONSE_HEADERS_POLICY_CONFIG, [], plugins
+            self._select_input(
+                _models.GET_RESPONSE_HEADERS_POLICY_CONFIG, args, kwargs
+            ),
+            _models.GET_RESPONSE_HEADERS_POLICY_CONFIG,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_streaming_distribution(
-        self, input: GetStreamingDistributionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetStreamingDistributionInput
+        | _models.GetStreamingDistributionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetStreamingDistributionOutput: ...
+
+    @_overload
+    def get_streaming_distribution(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetStreamingDistributionInputDict],
     ) -> GetStreamingDistributionOutput:
         """
         Gets information about a specified RTMP distribution, including the
         distribution configuration.
 
         Args:
-            input:
-                An instance of `GetStreamingDistributionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2776,19 +4551,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `GetStreamingDistributionOutput`.
         """
-        return self._invoke(input, _models.GET_STREAMING_DISTRIBUTION, [], plugins)
 
+    def get_streaming_distribution(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetStreamingDistributionOutput:
+        return self._invoke(
+            self._select_input(_models.GET_STREAMING_DISTRIBUTION, args, kwargs),
+            _models.GET_STREAMING_DISTRIBUTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_streaming_distribution_config(
         self,
-        input: GetStreamingDistributionConfigInput,
+        request: _models.GetStreamingDistributionConfigInput
+        | _models.GetStreamingDistributionConfigInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetStreamingDistributionConfigOutput: ...
+
+    @_overload
+    def get_streaming_distribution_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetStreamingDistributionConfigInputDict],
     ) -> GetStreamingDistributionConfigOutput:
         """
         Get the configuration information about a streaming distribution.
 
         Args:
-            input:
-                An instance of `GetStreamingDistributionConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2798,19 +4593,38 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `GetStreamingDistributionConfigOutput`.
         """
+
+    def get_streaming_distribution_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetStreamingDistributionConfigOutput:
         return self._invoke(
-            input, _models.GET_STREAMING_DISTRIBUTION_CONFIG, [], plugins
+            self._select_input(_models.GET_STREAMING_DISTRIBUTION_CONFIG, args, kwargs),
+            _models.GET_STREAMING_DISTRIBUTION_CONFIG,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_trust_store(
-        self, input: GetTrustStoreInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetTrustStoreInput | _models.GetTrustStoreInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetTrustStoreOutput: ...
+
+    @_overload
+    def get_trust_store(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetTrustStoreInputDict],
     ) -> GetTrustStoreOutput:
         """
         Gets a trust store.
 
         Args:
-            input:
-                An instance of `GetTrustStoreInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2820,17 +4634,38 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `GetTrustStoreOutput`.
         """
-        return self._invoke(input, _models.GET_TRUST_STORE, [], plugins)
 
+    def get_trust_store(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetTrustStoreOutput:
+        return self._invoke(
+            self._select_input(_models.GET_TRUST_STORE, args, kwargs),
+            _models.GET_TRUST_STORE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_vpc_origin(
-        self, input: GetVpcOriginInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetVpcOriginInput | _models.GetVpcOriginInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetVpcOriginOutput: ...
+
+    @_overload
+    def get_vpc_origin(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetVpcOriginInputDict],
     ) -> GetVpcOriginOutput:
         """
         Get the details of an Amazon CloudFront VPC origin.
 
         Args:
-            input:
-                An instance of `GetVpcOriginInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2840,19 +4675,38 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `GetVpcOriginOutput`.
         """
-        return self._invoke(input, _models.GET_VPC_ORIGIN, [], plugins)
 
+    def get_vpc_origin(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetVpcOriginOutput:
+        return self._invoke(
+            self._select_input(_models.GET_VPC_ORIGIN, args, kwargs),
+            _models.GET_VPC_ORIGIN,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_anycast_ip_lists(
         self,
-        input: ListAnycastIpListsInput | None = None,
+        request: _models.ListAnycastIpListsInput | _models.ListAnycastIpListsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListAnycastIpListsOutput: ...
+
+    @_overload
+    def list_anycast_ip_lists(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListAnycastIpListsInputDict],
     ) -> ListAnycastIpListsOutput:
         """
         Lists your Anycast static IP lists.
 
         Args:
-            input:
-                An instance of `ListAnycastIpListsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2862,12 +4716,33 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `ListAnycastIpListsOutput`.
         """
-        return self._invoke(input, _models.LIST_ANYCAST_IP_LISTS, [], plugins)
 
+    def list_anycast_ip_lists(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListAnycastIpListsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_ANYCAST_IP_LISTS, args, kwargs),
+            _models.LIST_ANYCAST_IP_LISTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_cache_policies(
         self,
-        input: ListCachePoliciesInput | None = None,
+        request: _models.ListCachePoliciesInput | _models.ListCachePoliciesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListCachePoliciesOutput: ...
+
+    @_overload
+    def list_cache_policies(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListCachePoliciesInputDict],
     ) -> ListCachePoliciesOutput:
         """
         Gets a list of cache policies.
@@ -2884,8 +4759,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         the subsequent request.
 
         Args:
-            input:
-                An instance of `ListCachePoliciesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2895,19 +4768,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `ListCachePoliciesOutput`.
         """
-        return self._invoke(input, _models.LIST_CACHE_POLICIES, [], plugins)
 
+    def list_cache_policies(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListCachePoliciesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_CACHE_POLICIES, args, kwargs),
+            _models.LIST_CACHE_POLICIES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_cloud_front_origin_access_identities(
         self,
-        input: ListCloudFrontOriginAccessIdentitiesInput | None = None,
+        request: _models.ListCloudFrontOriginAccessIdentitiesInput
+        | _models.ListCloudFrontOriginAccessIdentitiesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListCloudFrontOriginAccessIdentitiesOutput: ...
+
+    @_overload
+    def list_cloud_front_origin_access_identities(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListCloudFrontOriginAccessIdentitiesInputDict],
     ) -> ListCloudFrontOriginAccessIdentitiesOutput:
         """
         Lists origin access identities.
 
         Args:
-            input:
-                An instance of `ListCloudFrontOriginAccessIdentitiesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2917,12 +4810,36 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `ListCloudFrontOriginAccessIdentitiesOutput`.
         """
+
+    def list_cloud_front_origin_access_identities(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListCloudFrontOriginAccessIdentitiesOutput:
         return self._invoke(
-            input, _models.LIST_CLOUD_FRONT_ORIGIN_ACCESS_IDENTITIES, [], plugins
+            self._select_input(
+                _models.LIST_CLOUD_FRONT_ORIGIN_ACCESS_IDENTITIES, args, kwargs
+            ),
+            _models.LIST_CLOUD_FRONT_ORIGIN_ACCESS_IDENTITIES,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_conflicting_aliases(
-        self, input: ListConflictingAliasesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListConflictingAliasesInput
+        | _models.ListConflictingAliasesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListConflictingAliasesOutput: ...
+
+    @_overload
+    def list_conflicting_aliases(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListConflictingAliasesInputDict],
     ) -> ListConflictingAliasesOutput:
         """
         Note:
@@ -2969,8 +4886,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         the subsequent request.
 
         Args:
-            input:
-                An instance of `ListConflictingAliasesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2980,19 +4895,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `ListConflictingAliasesOutput`.
         """
-        return self._invoke(input, _models.LIST_CONFLICTING_ALIASES, [], plugins)
 
+    def list_conflicting_aliases(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListConflictingAliasesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_CONFLICTING_ALIASES, args, kwargs),
+            _models.LIST_CONFLICTING_ALIASES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_connection_functions(
         self,
-        input: ListConnectionFunctionsInput | None = None,
+        request: _models.ListConnectionFunctionsInput
+        | _models.ListConnectionFunctionsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListConnectionFunctionsOutput: ...
+
+    @_overload
+    def list_connection_functions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListConnectionFunctionsInputDict],
     ) -> ListConnectionFunctionsOutput:
         """
         Lists connection functions.
 
         Args:
-            input:
-                An instance of `ListConnectionFunctionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3002,19 +4937,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `ListConnectionFunctionsOutput`.
         """
-        return self._invoke(input, _models.LIST_CONNECTION_FUNCTIONS, [], plugins)
 
+    def list_connection_functions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListConnectionFunctionsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_CONNECTION_FUNCTIONS, args, kwargs),
+            _models.LIST_CONNECTION_FUNCTIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_connection_groups(
         self,
-        input: ListConnectionGroupsInput | None = None,
+        request: _models.ListConnectionGroupsInput
+        | _models.ListConnectionGroupsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListConnectionGroupsOutput: ...
+
+    @_overload
+    def list_connection_groups(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListConnectionGroupsInputDict],
     ) -> ListConnectionGroupsOutput:
         """
         Lists the connection groups in your Amazon Web Services account.
 
         Args:
-            input:
-                An instance of `ListConnectionGroupsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3024,12 +4979,34 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `ListConnectionGroupsOutput`.
         """
-        return self._invoke(input, _models.LIST_CONNECTION_GROUPS, [], plugins)
 
+    def list_connection_groups(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListConnectionGroupsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_CONNECTION_GROUPS, args, kwargs),
+            _models.LIST_CONNECTION_GROUPS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_continuous_deployment_policies(
         self,
-        input: ListContinuousDeploymentPoliciesInput | None = None,
+        request: _models.ListContinuousDeploymentPoliciesInput
+        | _models.ListContinuousDeploymentPoliciesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListContinuousDeploymentPoliciesOutput: ...
+
+    @_overload
+    def list_continuous_deployment_policies(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListContinuousDeploymentPoliciesInputDict],
     ) -> ListContinuousDeploymentPoliciesOutput:
         """
         Gets a list of the continuous deployment policies in your Amazon Web
@@ -3043,8 +5020,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         the subsequent request.
 
         Args:
-            input:
-                An instance of `ListContinuousDeploymentPoliciesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3054,21 +5029,40 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `ListContinuousDeploymentPoliciesOutput`.
         """
+
+    def list_continuous_deployment_policies(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListContinuousDeploymentPoliciesOutput:
         return self._invoke(
-            input, _models.LIST_CONTINUOUS_DEPLOYMENT_POLICIES, [], plugins
+            self._select_input(
+                _models.LIST_CONTINUOUS_DEPLOYMENT_POLICIES, args, kwargs
+            ),
+            _models.LIST_CONTINUOUS_DEPLOYMENT_POLICIES,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_distributions(
         self,
-        input: ListDistributionsInput | None = None,
+        request: _models.ListDistributionsInput | _models.ListDistributionsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListDistributionsOutput: ...
+
+    @_overload
+    def list_distributions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListDistributionsInputDict],
     ) -> ListDistributionsOutput:
         """
         List CloudFront distributions.
 
         Args:
-            input:
-                An instance of `ListDistributionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3078,20 +5072,40 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `ListDistributionsOutput`.
         """
-        return self._invoke(input, _models.LIST_DISTRIBUTIONS, [], plugins)
 
+    def list_distributions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListDistributionsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_DISTRIBUTIONS, args, kwargs),
+            _models.LIST_DISTRIBUTIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_distributions_by_anycast_ip_list_id(
         self,
-        input: ListDistributionsByAnycastIpListIdInput,
+        request: _models.ListDistributionsByAnycastIpListIdInput
+        | _models.ListDistributionsByAnycastIpListIdInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListDistributionsByAnycastIpListIdOutput: ...
+
+    @_overload
+    def list_distributions_by_anycast_ip_list_id(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListDistributionsByAnycastIpListIdInputDict],
     ) -> ListDistributionsByAnycastIpListIdOutput:
         """
         Lists the distributions in your account that are associated with the
         specified `AnycastIpListId`.
 
         Args:
-            input:
-                An instance of `ListDistributionsByAnycastIpListIdInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3101,14 +5115,36 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `ListDistributionsByAnycastIpListIdOutput`.
         """
+
+    def list_distributions_by_anycast_ip_list_id(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListDistributionsByAnycastIpListIdOutput:
         return self._invoke(
-            input, _models.LIST_DISTRIBUTIONS_BY_ANYCAST_IP_LIST_ID, [], plugins
+            self._select_input(
+                _models.LIST_DISTRIBUTIONS_BY_ANYCAST_IP_LIST_ID, args, kwargs
+            ),
+            _models.LIST_DISTRIBUTIONS_BY_ANYCAST_IP_LIST_ID,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_distributions_by_cache_policy_id(
         self,
-        input: ListDistributionsByCachePolicyIdInput,
+        request: _models.ListDistributionsByCachePolicyIdInput
+        | _models.ListDistributionsByCachePolicyIdInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListDistributionsByCachePolicyIdOutput: ...
+
+    @_overload
+    def list_distributions_by_cache_policy_id(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListDistributionsByCachePolicyIdInputDict],
     ) -> ListDistributionsByCachePolicyIdOutput:
         """
         Gets a list of distribution IDs for distributions that have a cache
@@ -3122,8 +5158,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         the subsequent request.
 
         Args:
-            input:
-                An instance of `ListDistributionsByCachePolicyIdInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3133,21 +5167,41 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `ListDistributionsByCachePolicyIdOutput`.
         """
+
+    def list_distributions_by_cache_policy_id(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListDistributionsByCachePolicyIdOutput:
         return self._invoke(
-            input, _models.LIST_DISTRIBUTIONS_BY_CACHE_POLICY_ID, [], plugins
+            self._select_input(
+                _models.LIST_DISTRIBUTIONS_BY_CACHE_POLICY_ID, args, kwargs
+            ),
+            _models.LIST_DISTRIBUTIONS_BY_CACHE_POLICY_ID,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_distributions_by_connection_function(
         self,
-        input: ListDistributionsByConnectionFunctionInput,
+        request: _models.ListDistributionsByConnectionFunctionInput
+        | _models.ListDistributionsByConnectionFunctionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListDistributionsByConnectionFunctionOutput: ...
+
+    @_overload
+    def list_distributions_by_connection_function(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListDistributionsByConnectionFunctionInputDict],
     ) -> ListDistributionsByConnectionFunctionOutput:
         """
         Lists distributions by connection function.
 
         Args:
-            input:
-                An instance of `ListDistributionsByConnectionFunctionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3157,21 +5211,41 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `ListDistributionsByConnectionFunctionOutput`.
         """
+
+    def list_distributions_by_connection_function(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListDistributionsByConnectionFunctionOutput:
         return self._invoke(
-            input, _models.LIST_DISTRIBUTIONS_BY_CONNECTION_FUNCTION, [], plugins
+            self._select_input(
+                _models.LIST_DISTRIBUTIONS_BY_CONNECTION_FUNCTION, args, kwargs
+            ),
+            _models.LIST_DISTRIBUTIONS_BY_CONNECTION_FUNCTION,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_distributions_by_connection_mode(
         self,
-        input: ListDistributionsByConnectionModeInput,
+        request: _models.ListDistributionsByConnectionModeInput
+        | _models.ListDistributionsByConnectionModeInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListDistributionsByConnectionModeOutput: ...
+
+    @_overload
+    def list_distributions_by_connection_mode(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListDistributionsByConnectionModeInputDict],
     ) -> ListDistributionsByConnectionModeOutput:
         """
         Lists the distributions by the connection mode that you specify.
 
         Args:
-            input:
-                An instance of `ListDistributionsByConnectionModeInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3181,14 +5255,36 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `ListDistributionsByConnectionModeOutput`.
         """
+
+    def list_distributions_by_connection_mode(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListDistributionsByConnectionModeOutput:
         return self._invoke(
-            input, _models.LIST_DISTRIBUTIONS_BY_CONNECTION_MODE, [], plugins
+            self._select_input(
+                _models.LIST_DISTRIBUTIONS_BY_CONNECTION_MODE, args, kwargs
+            ),
+            _models.LIST_DISTRIBUTIONS_BY_CONNECTION_MODE,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_distributions_by_key_group(
         self,
-        input: ListDistributionsByKeyGroupInput,
+        request: _models.ListDistributionsByKeyGroupInput
+        | _models.ListDistributionsByKeyGroupInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListDistributionsByKeyGroupOutput: ...
+
+    @_overload
+    def list_distributions_by_key_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListDistributionsByKeyGroupInputDict],
     ) -> ListDistributionsByKeyGroupOutput:
         """
         Gets a list of distribution IDs for distributions that have a cache
@@ -3202,8 +5298,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         the subsequent request.
 
         Args:
-            input:
-                An instance of `ListDistributionsByKeyGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3213,12 +5307,34 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `ListDistributionsByKeyGroupOutput`.
         """
-        return self._invoke(input, _models.LIST_DISTRIBUTIONS_BY_KEY_GROUP, [], plugins)
 
+    def list_distributions_by_key_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListDistributionsByKeyGroupOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_DISTRIBUTIONS_BY_KEY_GROUP, args, kwargs),
+            _models.LIST_DISTRIBUTIONS_BY_KEY_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_distributions_by_origin_request_policy_id(
         self,
-        input: ListDistributionsByOriginRequestPolicyIdInput,
+        request: _models.ListDistributionsByOriginRequestPolicyIdInput
+        | _models.ListDistributionsByOriginRequestPolicyIdInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListDistributionsByOriginRequestPolicyIdOutput: ...
+
+    @_overload
+    def list_distributions_by_origin_request_policy_id(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListDistributionsByOriginRequestPolicyIdInputDict],
     ) -> ListDistributionsByOriginRequestPolicyIdOutput:
         """
         Gets a list of distribution IDs for distributions that have a cache
@@ -3232,8 +5348,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         the subsequent request.
 
         Args:
-            input:
-                An instance of `ListDistributionsByOriginRequestPolicyIdInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3243,22 +5357,42 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `ListDistributionsByOriginRequestPolicyIdOutput`.
         """
+
+    def list_distributions_by_origin_request_policy_id(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListDistributionsByOriginRequestPolicyIdOutput:
         return self._invoke(
-            input, _models.LIST_DISTRIBUTIONS_BY_ORIGIN_REQUEST_POLICY_ID, [], plugins
+            self._select_input(
+                _models.LIST_DISTRIBUTIONS_BY_ORIGIN_REQUEST_POLICY_ID, args, kwargs
+            ),
+            _models.LIST_DISTRIBUTIONS_BY_ORIGIN_REQUEST_POLICY_ID,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_distributions_by_owned_resource(
         self,
-        input: ListDistributionsByOwnedResourceInput,
+        request: _models.ListDistributionsByOwnedResourceInput
+        | _models.ListDistributionsByOwnedResourceInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListDistributionsByOwnedResourceOutput: ...
+
+    @_overload
+    def list_distributions_by_owned_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListDistributionsByOwnedResourceInputDict],
     ) -> ListDistributionsByOwnedResourceOutput:
         """
         Lists the CloudFront distributions that are associated with the
         specified resource that you own.
 
         Args:
-            input:
-                An instance of `ListDistributionsByOwnedResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3268,14 +5402,36 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `ListDistributionsByOwnedResourceOutput`.
         """
+
+    def list_distributions_by_owned_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListDistributionsByOwnedResourceOutput:
         return self._invoke(
-            input, _models.LIST_DISTRIBUTIONS_BY_OWNED_RESOURCE, [], plugins
+            self._select_input(
+                _models.LIST_DISTRIBUTIONS_BY_OWNED_RESOURCE, args, kwargs
+            ),
+            _models.LIST_DISTRIBUTIONS_BY_OWNED_RESOURCE,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_distributions_by_realtime_log_config(
         self,
-        input: ListDistributionsByRealtimeLogConfigInput | None = None,
+        request: _models.ListDistributionsByRealtimeLogConfigInput
+        | _models.ListDistributionsByRealtimeLogConfigInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListDistributionsByRealtimeLogConfigOutput: ...
+
+    @_overload
+    def list_distributions_by_realtime_log_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListDistributionsByRealtimeLogConfigInputDict],
     ) -> ListDistributionsByRealtimeLogConfigOutput:
         """
         Gets a list of distributions that have a cache behavior that's
@@ -3294,8 +5450,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         the subsequent request.
 
         Args:
-            input:
-                An instance of `ListDistributionsByRealtimeLogConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3305,14 +5459,36 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `ListDistributionsByRealtimeLogConfigOutput`.
         """
+
+    def list_distributions_by_realtime_log_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListDistributionsByRealtimeLogConfigOutput:
         return self._invoke(
-            input, _models.LIST_DISTRIBUTIONS_BY_REALTIME_LOG_CONFIG, [], plugins
+            self._select_input(
+                _models.LIST_DISTRIBUTIONS_BY_REALTIME_LOG_CONFIG, args, kwargs
+            ),
+            _models.LIST_DISTRIBUTIONS_BY_REALTIME_LOG_CONFIG,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_distributions_by_response_headers_policy_id(
         self,
-        input: ListDistributionsByResponseHeadersPolicyIdInput,
+        request: _models.ListDistributionsByResponseHeadersPolicyIdInput
+        | _models.ListDistributionsByResponseHeadersPolicyIdInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListDistributionsByResponseHeadersPolicyIdOutput: ...
+
+    @_overload
+    def list_distributions_by_response_headers_policy_id(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListDistributionsByResponseHeadersPolicyIdInputDict],
     ) -> ListDistributionsByResponseHeadersPolicyIdOutput:
         """
         Gets a list of distribution IDs for distributions that have a cache
@@ -3326,8 +5502,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         the subsequent request.
 
         Args:
-            input:
-                An instance of `ListDistributionsByResponseHeadersPolicyIdInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3337,21 +5511,41 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `ListDistributionsByResponseHeadersPolicyIdOutput`.
         """
+
+    def list_distributions_by_response_headers_policy_id(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListDistributionsByResponseHeadersPolicyIdOutput:
         return self._invoke(
-            input, _models.LIST_DISTRIBUTIONS_BY_RESPONSE_HEADERS_POLICY_ID, [], plugins
+            self._select_input(
+                _models.LIST_DISTRIBUTIONS_BY_RESPONSE_HEADERS_POLICY_ID, args, kwargs
+            ),
+            _models.LIST_DISTRIBUTIONS_BY_RESPONSE_HEADERS_POLICY_ID,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_distributions_by_trust_store(
         self,
-        input: ListDistributionsByTrustStoreInput,
+        request: _models.ListDistributionsByTrustStoreInput
+        | _models.ListDistributionsByTrustStoreInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListDistributionsByTrustStoreOutput: ...
+
+    @_overload
+    def list_distributions_by_trust_store(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListDistributionsByTrustStoreInputDict],
     ) -> ListDistributionsByTrustStoreOutput:
         """
         Lists distributions by trust store.
 
         Args:
-            input:
-                An instance of `ListDistributionsByTrustStoreInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3361,21 +5555,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `ListDistributionsByTrustStoreOutput`.
         """
+
+    def list_distributions_by_trust_store(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListDistributionsByTrustStoreOutput:
         return self._invoke(
-            input, _models.LIST_DISTRIBUTIONS_BY_TRUST_STORE, [], plugins
+            self._select_input(_models.LIST_DISTRIBUTIONS_BY_TRUST_STORE, args, kwargs),
+            _models.LIST_DISTRIBUTIONS_BY_TRUST_STORE,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_distributions_by_vpc_origin_id(
         self,
-        input: ListDistributionsByVpcOriginIdInput,
+        request: _models.ListDistributionsByVpcOriginIdInput
+        | _models.ListDistributionsByVpcOriginIdInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListDistributionsByVpcOriginIdOutput: ...
+
+    @_overload
+    def list_distributions_by_vpc_origin_id(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListDistributionsByVpcOriginIdInputDict],
     ) -> ListDistributionsByVpcOriginIdOutput:
         """
         List CloudFront distributions by their VPC origin ID.
 
         Args:
-            input:
-                An instance of `ListDistributionsByVpcOriginIdInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3385,21 +5597,41 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `ListDistributionsByVpcOriginIdOutput`.
         """
+
+    def list_distributions_by_vpc_origin_id(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListDistributionsByVpcOriginIdOutput:
         return self._invoke(
-            input, _models.LIST_DISTRIBUTIONS_BY_VPC_ORIGIN_ID, [], plugins
+            self._select_input(
+                _models.LIST_DISTRIBUTIONS_BY_VPC_ORIGIN_ID, args, kwargs
+            ),
+            _models.LIST_DISTRIBUTIONS_BY_VPC_ORIGIN_ID,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_distributions_by_web_acl_id(
         self,
-        input: ListDistributionsByWebACLIdInput,
+        request: _models.ListDistributionsByWebACLIdInput
+        | _models.ListDistributionsByWebACLIdInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListDistributionsByWebACLIdOutput: ...
+
+    @_overload
+    def list_distributions_by_web_acl_id(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListDistributionsByWebACLIdInputDict],
     ) -> ListDistributionsByWebACLIdOutput:
         """
         List the distributions that are associated with a specified WAF web ACL.
 
         Args:
-            input:
-                An instance of `ListDistributionsByWebACLIdInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3409,21 +5641,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `ListDistributionsByWebACLIdOutput`.
         """
+
+    def list_distributions_by_web_acl_id(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListDistributionsByWebACLIdOutput:
         return self._invoke(
-            input, _models.LIST_DISTRIBUTIONS_BY_WEB_ACL_ID, [], plugins
+            self._select_input(_models.LIST_DISTRIBUTIONS_BY_WEB_ACL_ID, args, kwargs),
+            _models.LIST_DISTRIBUTIONS_BY_WEB_ACL_ID,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_distribution_tenants(
         self,
-        input: ListDistributionTenantsInput | None = None,
+        request: _models.ListDistributionTenantsInput
+        | _models.ListDistributionTenantsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListDistributionTenantsOutput: ...
+
+    @_overload
+    def list_distribution_tenants(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListDistributionTenantsInputDict],
     ) -> ListDistributionTenantsOutput:
         """
         Lists the distribution tenants in your Amazon Web Services account.
 
         Args:
-            input:
-                An instance of `ListDistributionTenantsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3433,12 +5683,34 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `ListDistributionTenantsOutput`.
         """
-        return self._invoke(input, _models.LIST_DISTRIBUTION_TENANTS, [], plugins)
 
+    def list_distribution_tenants(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListDistributionTenantsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_DISTRIBUTION_TENANTS, args, kwargs),
+            _models.LIST_DISTRIBUTION_TENANTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_distribution_tenants_by_customization(
         self,
-        input: ListDistributionTenantsByCustomizationInput | None = None,
+        request: _models.ListDistributionTenantsByCustomizationInput
+        | _models.ListDistributionTenantsByCustomizationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListDistributionTenantsByCustomizationOutput: ...
+
+    @_overload
+    def list_distribution_tenants_by_customization(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListDistributionTenantsByCustomizationInputDict],
     ) -> ListDistributionTenantsByCustomizationOutput:
         """
         Lists distribution tenants by the customization that you specify.
@@ -3447,8 +5719,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         parameter, but not both in the same request.
 
         Args:
-            input:
-                An instance of `ListDistributionTenantsByCustomizationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3458,12 +5728,36 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `ListDistributionTenantsByCustomizationOutput`.
         """
+
+    def list_distribution_tenants_by_customization(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListDistributionTenantsByCustomizationOutput:
         return self._invoke(
-            input, _models.LIST_DISTRIBUTION_TENANTS_BY_CUSTOMIZATION, [], plugins
+            self._select_input(
+                _models.LIST_DISTRIBUTION_TENANTS_BY_CUSTOMIZATION, args, kwargs
+            ),
+            _models.LIST_DISTRIBUTION_TENANTS_BY_CUSTOMIZATION,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_domain_conflicts(
-        self, input: ListDomainConflictsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListDomainConflictsInput
+        | _models.ListDomainConflictsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListDomainConflictsOutput: ...
+
+    @_overload
+    def list_domain_conflicts(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListDomainConflictsInputDict],
     ) -> ListDomainConflictsOutput:
         """
         Note:
@@ -3511,8 +5805,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         the subsequent request.
 
         Args:
-            input:
-                An instance of `ListDomainConflictsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3522,20 +5814,40 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `ListDomainConflictsOutput`.
         """
-        return self._invoke(input, _models.LIST_DOMAIN_CONFLICTS, [], plugins)
 
+    def list_domain_conflicts(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListDomainConflictsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_DOMAIN_CONFLICTS, args, kwargs),
+            _models.LIST_DOMAIN_CONFLICTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_field_level_encryption_configs(
         self,
-        input: ListFieldLevelEncryptionConfigsInput | None = None,
+        request: _models.ListFieldLevelEncryptionConfigsInput
+        | _models.ListFieldLevelEncryptionConfigsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListFieldLevelEncryptionConfigsOutput: ...
+
+    @_overload
+    def list_field_level_encryption_configs(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListFieldLevelEncryptionConfigsInputDict],
     ) -> ListFieldLevelEncryptionConfigsOutput:
         """
         List all field-level encryption configurations that have been created in
         CloudFront for this account.
 
         Args:
-            input:
-                An instance of `ListFieldLevelEncryptionConfigsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3545,22 +5857,42 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `ListFieldLevelEncryptionConfigsOutput`.
         """
+
+    def list_field_level_encryption_configs(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListFieldLevelEncryptionConfigsOutput:
         return self._invoke(
-            input, _models.LIST_FIELD_LEVEL_ENCRYPTION_CONFIGS, [], plugins
+            self._select_input(
+                _models.LIST_FIELD_LEVEL_ENCRYPTION_CONFIGS, args, kwargs
+            ),
+            _models.LIST_FIELD_LEVEL_ENCRYPTION_CONFIGS,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_field_level_encryption_profiles(
         self,
-        input: ListFieldLevelEncryptionProfilesInput | None = None,
+        request: _models.ListFieldLevelEncryptionProfilesInput
+        | _models.ListFieldLevelEncryptionProfilesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListFieldLevelEncryptionProfilesOutput: ...
+
+    @_overload
+    def list_field_level_encryption_profiles(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListFieldLevelEncryptionProfilesInputDict],
     ) -> ListFieldLevelEncryptionProfilesOutput:
         """
         Request a list of field-level encryption profiles that have been created
         in CloudFront for this account.
 
         Args:
-            input:
-                An instance of `ListFieldLevelEncryptionProfilesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3570,14 +5902,35 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `ListFieldLevelEncryptionProfilesOutput`.
         """
+
+    def list_field_level_encryption_profiles(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListFieldLevelEncryptionProfilesOutput:
         return self._invoke(
-            input, _models.LIST_FIELD_LEVEL_ENCRYPTION_PROFILES, [], plugins
+            self._select_input(
+                _models.LIST_FIELD_LEVEL_ENCRYPTION_PROFILES, args, kwargs
+            ),
+            _models.LIST_FIELD_LEVEL_ENCRYPTION_PROFILES,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_functions(
         self,
-        input: ListFunctionsInput | None = None,
+        request: _models.ListFunctionsInput | _models.ListFunctionsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListFunctionsOutput: ...
+
+    @_overload
+    def list_functions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListFunctionsInputDict],
     ) -> ListFunctionsOutput:
         """
         Gets a list of all CloudFront functions in your Amazon Web Services
@@ -3594,8 +5947,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         the subsequent request.
 
         Args:
-            input:
-                An instance of `ListFunctionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3605,17 +5956,38 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `ListFunctionsOutput`.
         """
-        return self._invoke(input, _models.LIST_FUNCTIONS, [], plugins)
 
+    def list_functions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListFunctionsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_FUNCTIONS, args, kwargs),
+            _models.LIST_FUNCTIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_invalidations(
-        self, input: ListInvalidationsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListInvalidationsInput | _models.ListInvalidationsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListInvalidationsOutput: ...
+
+    @_overload
+    def list_invalidations(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListInvalidationsInputDict],
     ) -> ListInvalidationsOutput:
         """
         Lists invalidation batches.
 
         Args:
-            input:
-                An instance of `ListInvalidationsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3625,19 +5997,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `ListInvalidationsOutput`.
         """
-        return self._invoke(input, _models.LIST_INVALIDATIONS, [], plugins)
 
+    def list_invalidations(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListInvalidationsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_INVALIDATIONS, args, kwargs),
+            _models.LIST_INVALIDATIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_invalidations_for_distribution_tenant(
         self,
-        input: ListInvalidationsForDistributionTenantInput,
+        request: _models.ListInvalidationsForDistributionTenantInput
+        | _models.ListInvalidationsForDistributionTenantInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListInvalidationsForDistributionTenantOutput: ...
+
+    @_overload
+    def list_invalidations_for_distribution_tenant(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListInvalidationsForDistributionTenantInputDict],
     ) -> ListInvalidationsForDistributionTenantOutput:
         """
         Lists the invalidations for a distribution tenant.
 
         Args:
-            input:
-                An instance of `ListInvalidationsForDistributionTenantInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3647,14 +6039,35 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `ListInvalidationsForDistributionTenantOutput`.
         """
+
+    def list_invalidations_for_distribution_tenant(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListInvalidationsForDistributionTenantOutput:
         return self._invoke(
-            input, _models.LIST_INVALIDATIONS_FOR_DISTRIBUTION_TENANT, [], plugins
+            self._select_input(
+                _models.LIST_INVALIDATIONS_FOR_DISTRIBUTION_TENANT, args, kwargs
+            ),
+            _models.LIST_INVALIDATIONS_FOR_DISTRIBUTION_TENANT,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_key_groups(
         self,
-        input: ListKeyGroupsInput | None = None,
+        request: _models.ListKeyGroupsInput | _models.ListKeyGroupsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListKeyGroupsOutput: ...
+
+    @_overload
+    def list_key_groups(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListKeyGroupsInputDict],
     ) -> ListKeyGroupsOutput:
         """
         Gets a list of key groups.
@@ -3667,8 +6080,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         the subsequent request.
 
         Args:
-            input:
-                An instance of `ListKeyGroupsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3678,19 +6089,38 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `ListKeyGroupsOutput`.
         """
-        return self._invoke(input, _models.LIST_KEY_GROUPS, [], plugins)
 
+    def list_key_groups(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListKeyGroupsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_KEY_GROUPS, args, kwargs),
+            _models.LIST_KEY_GROUPS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_key_value_stores(
         self,
-        input: ListKeyValueStoresInput | None = None,
+        request: _models.ListKeyValueStoresInput | _models.ListKeyValueStoresInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListKeyValueStoresOutput: ...
+
+    @_overload
+    def list_key_value_stores(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListKeyValueStoresInputDict],
     ) -> ListKeyValueStoresOutput:
         """
         Specifies the key value stores to list.
 
         Args:
-            input:
-                An instance of `ListKeyValueStoresInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3700,12 +6130,34 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `ListKeyValueStoresOutput`.
         """
-        return self._invoke(input, _models.LIST_KEY_VALUE_STORES, [], plugins)
 
+    def list_key_value_stores(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListKeyValueStoresOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_KEY_VALUE_STORES, args, kwargs),
+            _models.LIST_KEY_VALUE_STORES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_origin_access_controls(
         self,
-        input: ListOriginAccessControlsInput | None = None,
+        request: _models.ListOriginAccessControlsInput
+        | _models.ListOriginAccessControlsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListOriginAccessControlsOutput: ...
+
+    @_overload
+    def list_origin_access_controls(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListOriginAccessControlsInputDict],
     ) -> ListOriginAccessControlsOutput:
         """
         Gets the list of CloudFront origin access controls (OACs) in this Amazon
@@ -3724,8 +6176,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
             `Items` element in the response.
 
         Args:
-            input:
-                An instance of `ListOriginAccessControlsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3735,12 +6185,34 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `ListOriginAccessControlsOutput`.
         """
-        return self._invoke(input, _models.LIST_ORIGIN_ACCESS_CONTROLS, [], plugins)
 
+    def list_origin_access_controls(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListOriginAccessControlsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_ORIGIN_ACCESS_CONTROLS, args, kwargs),
+            _models.LIST_ORIGIN_ACCESS_CONTROLS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_origin_request_policies(
         self,
-        input: ListOriginRequestPoliciesInput | None = None,
+        request: _models.ListOriginRequestPoliciesInput
+        | _models.ListOriginRequestPoliciesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListOriginRequestPoliciesOutput: ...
+
+    @_overload
+    def list_origin_request_policies(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListOriginRequestPoliciesInputDict],
     ) -> ListOriginRequestPoliciesOutput:
         """
         Gets a list of origin request policies.
@@ -3757,8 +6229,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         the subsequent request.
 
         Args:
-            input:
-                An instance of `ListOriginRequestPoliciesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3768,20 +6238,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `ListOriginRequestPoliciesOutput`.
         """
-        return self._invoke(input, _models.LIST_ORIGIN_REQUEST_POLICIES, [], plugins)
 
+    def list_origin_request_policies(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListOriginRequestPoliciesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_ORIGIN_REQUEST_POLICIES, args, kwargs),
+            _models.LIST_ORIGIN_REQUEST_POLICIES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_public_keys(
         self,
-        input: ListPublicKeysInput | None = None,
+        request: _models.ListPublicKeysInput | _models.ListPublicKeysInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListPublicKeysOutput: ...
+
+    @_overload
+    def list_public_keys(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListPublicKeysInputDict],
     ) -> ListPublicKeysOutput:
         """
         List all public keys that have been added to CloudFront for this
         account.
 
         Args:
-            input:
-                An instance of `ListPublicKeysInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3791,12 +6280,34 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `ListPublicKeysOutput`.
         """
-        return self._invoke(input, _models.LIST_PUBLIC_KEYS, [], plugins)
 
+    def list_public_keys(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListPublicKeysOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_PUBLIC_KEYS, args, kwargs),
+            _models.LIST_PUBLIC_KEYS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_realtime_log_configs(
         self,
-        input: ListRealtimeLogConfigsInput | None = None,
+        request: _models.ListRealtimeLogConfigsInput
+        | _models.ListRealtimeLogConfigsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListRealtimeLogConfigsOutput: ...
+
+    @_overload
+    def list_realtime_log_configs(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListRealtimeLogConfigsInputDict],
     ) -> ListRealtimeLogConfigsOutput:
         """
         Gets a list of real-time log configurations.
@@ -3809,8 +6320,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         the subsequent request.
 
         Args:
-            input:
-                An instance of `ListRealtimeLogConfigsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3820,12 +6329,34 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `ListRealtimeLogConfigsOutput`.
         """
-        return self._invoke(input, _models.LIST_REALTIME_LOG_CONFIGS, [], plugins)
 
+    def list_realtime_log_configs(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListRealtimeLogConfigsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_REALTIME_LOG_CONFIGS, args, kwargs),
+            _models.LIST_REALTIME_LOG_CONFIGS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_response_headers_policies(
         self,
-        input: ListResponseHeadersPoliciesInput | None = None,
+        request: _models.ListResponseHeadersPoliciesInput
+        | _models.ListResponseHeadersPoliciesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListResponseHeadersPoliciesOutput: ...
+
+    @_overload
+    def list_response_headers_policies(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListResponseHeadersPoliciesInputDict],
     ) -> ListResponseHeadersPoliciesOutput:
         """
         Gets a list of response headers policies.
@@ -3842,8 +6373,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         the subsequent request.
 
         Args:
-            input:
-                An instance of `ListResponseHeadersPoliciesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3853,19 +6382,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `ListResponseHeadersPoliciesOutput`.
         """
-        return self._invoke(input, _models.LIST_RESPONSE_HEADERS_POLICIES, [], plugins)
 
+    def list_response_headers_policies(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListResponseHeadersPoliciesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_RESPONSE_HEADERS_POLICIES, args, kwargs),
+            _models.LIST_RESPONSE_HEADERS_POLICIES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_streaming_distributions(
         self,
-        input: ListStreamingDistributionsInput | None = None,
+        request: _models.ListStreamingDistributionsInput
+        | _models.ListStreamingDistributionsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListStreamingDistributionsOutput: ...
+
+    @_overload
+    def list_streaming_distributions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListStreamingDistributionsInputDict],
     ) -> ListStreamingDistributionsOutput:
         """
         List streaming distributions.
 
         Args:
-            input:
-                An instance of `ListStreamingDistributionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3875,10 +6424,34 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `ListStreamingDistributionsOutput`.
         """
-        return self._invoke(input, _models.LIST_STREAMING_DISTRIBUTIONS, [], plugins)
 
+    def list_streaming_distributions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListStreamingDistributionsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_STREAMING_DISTRIBUTIONS, args, kwargs),
+            _models.LIST_STREAMING_DISTRIBUTIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_tags_for_resource(
-        self, input: ListTagsForResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListTagsForResourceInput
+        | _models.ListTagsForResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListTagsForResourceOutput: ...
+
+    @_overload
+    def list_tags_for_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListTagsForResourceInputDict],
     ) -> ListTagsForResourceOutput:
         """
         List tags for a CloudFront resource. For more information, see [Tagging
@@ -3887,8 +6460,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         in the *Amazon CloudFront Developer Guide*.
 
         Args:
-            input:
-                An instance of `ListTagsForResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3898,19 +6469,38 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `ListTagsForResourceOutput`.
         """
-        return self._invoke(input, _models.LIST_TAGS_FOR_RESOURCE, [], plugins)
 
+    def list_tags_for_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListTagsForResourceOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_TAGS_FOR_RESOURCE, args, kwargs),
+            _models.LIST_TAGS_FOR_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_trust_stores(
         self,
-        input: ListTrustStoresInput | None = None,
+        request: _models.ListTrustStoresInput | _models.ListTrustStoresInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListTrustStoresOutput: ...
+
+    @_overload
+    def list_trust_stores(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListTrustStoresInputDict],
     ) -> ListTrustStoresOutput:
         """
         Lists trust stores.
 
         Args:
-            input:
-                An instance of `ListTrustStoresInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3920,19 +6510,38 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `ListTrustStoresOutput`.
         """
-        return self._invoke(input, _models.LIST_TRUST_STORES, [], plugins)
 
+    def list_trust_stores(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListTrustStoresOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_TRUST_STORES, args, kwargs),
+            _models.LIST_TRUST_STORES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_vpc_origins(
         self,
-        input: ListVpcOriginsInput | None = None,
+        request: _models.ListVpcOriginsInput | _models.ListVpcOriginsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListVpcOriginsOutput: ...
+
+    @_overload
+    def list_vpc_origins(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListVpcOriginsInputDict],
     ) -> ListVpcOriginsOutput:
         """
         List the CloudFront VPC origins in your account.
 
         Args:
-            input:
-                An instance of `ListVpcOriginsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3942,17 +6551,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `ListVpcOriginsOutput`.
         """
-        return self._invoke(input, _models.LIST_VPC_ORIGINS, [], plugins)
 
+    def list_vpc_origins(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListVpcOriginsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_VPC_ORIGINS, args, kwargs),
+            _models.LIST_VPC_ORIGINS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def publish_connection_function(
-        self, input: PublishConnectionFunctionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PublishConnectionFunctionInput
+        | _models.PublishConnectionFunctionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PublishConnectionFunctionOutput: ...
+
+    @_overload
+    def publish_connection_function(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PublishConnectionFunctionInputDict],
     ) -> PublishConnectionFunctionOutput:
         """
         Publishes a connection function.
 
         Args:
-            input:
-                An instance of `PublishConnectionFunctionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3962,10 +6593,33 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `PublishConnectionFunctionOutput`.
         """
-        return self._invoke(input, _models.PUBLISH_CONNECTION_FUNCTION, [], plugins)
 
+    def publish_connection_function(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PublishConnectionFunctionOutput:
+        return self._invoke(
+            self._select_input(_models.PUBLISH_CONNECTION_FUNCTION, args, kwargs),
+            _models.PUBLISH_CONNECTION_FUNCTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def publish_function(
-        self, input: PublishFunctionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PublishFunctionInput | _models.PublishFunctionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PublishFunctionOutput: ...
+
+    @_overload
+    def publish_function(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PublishFunctionInputDict],
     ) -> PublishFunctionOutput:
         """
         Publishes a CloudFront function by copying the function code from the
@@ -3982,8 +6636,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         `DescribeFunction`.
 
         Args:
-            input:
-                An instance of `PublishFunctionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3993,17 +6645,38 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `PublishFunctionOutput`.
         """
-        return self._invoke(input, _models.PUBLISH_FUNCTION, [], plugins)
 
+    def publish_function(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PublishFunctionOutput:
+        return self._invoke(
+            self._select_input(_models.PUBLISH_FUNCTION, args, kwargs),
+            _models.PUBLISH_FUNCTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_resource_policy(
-        self, input: PutResourcePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutResourcePolicyInput | _models.PutResourcePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutResourcePolicyOutput: ...
+
+    @_overload
+    def put_resource_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutResourcePolicyInputDict],
     ) -> PutResourcePolicyOutput:
         """
         Creates a resource control policy for a given CloudFront resource.
 
         Args:
-            input:
-                An instance of `PutResourcePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4013,10 +6686,33 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `PutResourcePolicyOutput`.
         """
-        return self._invoke(input, _models.PUT_RESOURCE_POLICY, [], plugins)
 
+    def put_resource_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutResourcePolicyOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_RESOURCE_POLICY, args, kwargs),
+            _models.PUT_RESOURCE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def tag_resource(
-        self, input: TagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.TagResourceInput | _models.TagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> TagResourceOutput: ...
+
+    @_overload
+    def tag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.TagResourceInputDict],
     ) -> TagResourceOutput:
         """
         Add tags to a CloudFront resource. For more information, see [Tagging a
@@ -4024,8 +6720,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         in the *Amazon CloudFront Developer Guide*.
 
         Args:
-            input:
-                An instance of `TagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4035,17 +6729,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `TagResourceOutput`.
         """
-        return self._invoke(input, _models.TAG_RESOURCE, [], plugins)
 
+    def tag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> TagResourceOutput:
+        return self._invoke(
+            self._select_input(_models.TAG_RESOURCE, args, kwargs),
+            _models.TAG_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def test_connection_function(
-        self, input: TestConnectionFunctionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.TestConnectionFunctionInput
+        | _models.TestConnectionFunctionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> TestConnectionFunctionOutput: ...
+
+    @_overload
+    def test_connection_function(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.TestConnectionFunctionInputDict],
     ) -> TestConnectionFunctionOutput:
         """
         Tests a connection function.
 
         Args:
-            input:
-                An instance of `TestConnectionFunctionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4055,10 +6771,33 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `TestConnectionFunctionOutput`.
         """
-        return self._invoke(input, _models.TEST_CONNECTION_FUNCTION, [], plugins)
 
+    def test_connection_function(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> TestConnectionFunctionOutput:
+        return self._invoke(
+            self._select_input(_models.TEST_CONNECTION_FUNCTION, args, kwargs),
+            _models.TEST_CONNECTION_FUNCTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def test_function(
-        self, input: TestFunctionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.TestFunctionInput | _models.TestFunctionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> TestFunctionOutput: ...
+
+    @_overload
+    def test_function(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.TestFunctionInputDict],
     ) -> TestFunctionOutput:
         """
         Tests a CloudFront function.
@@ -4078,8 +6817,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         version, you can use `ListFunctions` and `DescribeFunction`.
 
         Args:
-            input:
-                An instance of `TestFunctionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4089,10 +6826,33 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `TestFunctionOutput`.
         """
-        return self._invoke(input, _models.TEST_FUNCTION, [], plugins)
 
+    def test_function(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> TestFunctionOutput:
+        return self._invoke(
+            self._select_input(_models.TEST_FUNCTION, args, kwargs),
+            _models.TEST_FUNCTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def untag_resource(
-        self, input: UntagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UntagResourceInput | _models.UntagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UntagResourceOutput: ...
+
+    @_overload
+    def untag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UntagResourceInputDict],
     ) -> UntagResourceOutput:
         """
         Remove tags from a CloudFront resource. For more information, see
@@ -4101,8 +6861,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         in the *Amazon CloudFront Developer Guide*.
 
         Args:
-            input:
-                An instance of `UntagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4112,17 +6870,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `UntagResourceOutput`.
         """
-        return self._invoke(input, _models.UNTAG_RESOURCE, [], plugins)
 
+    def untag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UntagResourceOutput:
+        return self._invoke(
+            self._select_input(_models.UNTAG_RESOURCE, args, kwargs),
+            _models.UNTAG_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_anycast_ip_list(
-        self, input: UpdateAnycastIpListInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateAnycastIpListInput
+        | _models.UpdateAnycastIpListInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateAnycastIpListOutput: ...
+
+    @_overload
+    def update_anycast_ip_list(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateAnycastIpListInputDict],
     ) -> UpdateAnycastIpListOutput:
         """
         Updates an Anycast static IP list.
 
         Args:
-            input:
-                An instance of `UpdateAnycastIpListInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4132,10 +6912,33 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `UpdateAnycastIpListOutput`.
         """
-        return self._invoke(input, _models.UPDATE_ANYCAST_IP_LIST, [], plugins)
 
+    def update_anycast_ip_list(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateAnycastIpListOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_ANYCAST_IP_LIST, args, kwargs),
+            _models.UPDATE_ANYCAST_IP_LIST,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_cache_policy(
-        self, input: UpdateCachePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateCachePolicyInput | _models.UpdateCachePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateCachePolicyOutput: ...
+
+    @_overload
+    def update_cache_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateCachePolicyInputDict],
     ) -> UpdateCachePolicyOutput:
         """
         Updates a cache policy configuration.
@@ -4160,8 +6963,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
             are present in the origin headers.
 
         Args:
-            input:
-                An instance of `UpdateCachePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4171,19 +6972,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `UpdateCachePolicyOutput`.
         """
-        return self._invoke(input, _models.UPDATE_CACHE_POLICY, [], plugins)
 
+    def update_cache_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateCachePolicyOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_CACHE_POLICY, args, kwargs),
+            _models.UPDATE_CACHE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_cloud_front_origin_access_identity(
         self,
-        input: UpdateCloudFrontOriginAccessIdentityInput,
+        request: _models.UpdateCloudFrontOriginAccessIdentityInput
+        | _models.UpdateCloudFrontOriginAccessIdentityInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateCloudFrontOriginAccessIdentityOutput: ...
+
+    @_overload
+    def update_cloud_front_origin_access_identity(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateCloudFrontOriginAccessIdentityInputDict],
     ) -> UpdateCloudFrontOriginAccessIdentityOutput:
         """
         Update an origin access identity.
 
         Args:
-            input:
-                An instance of `UpdateCloudFrontOriginAccessIdentityInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4193,19 +7014,41 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `UpdateCloudFrontOriginAccessIdentityOutput`.
         """
+
+    def update_cloud_front_origin_access_identity(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateCloudFrontOriginAccessIdentityOutput:
         return self._invoke(
-            input, _models.UPDATE_CLOUD_FRONT_ORIGIN_ACCESS_IDENTITY, [], plugins
+            self._select_input(
+                _models.UPDATE_CLOUD_FRONT_ORIGIN_ACCESS_IDENTITY, args, kwargs
+            ),
+            _models.UPDATE_CLOUD_FRONT_ORIGIN_ACCESS_IDENTITY,
+            [],
+            plugins,
         )
 
+    @_overload
     def update_connection_function(
-        self, input: UpdateConnectionFunctionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateConnectionFunctionInput
+        | _models.UpdateConnectionFunctionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateConnectionFunctionOutput: ...
+
+    @_overload
+    def update_connection_function(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateConnectionFunctionInputDict],
     ) -> UpdateConnectionFunctionOutput:
         """
         Updates a connection function.
 
         Args:
-            input:
-                An instance of `UpdateConnectionFunctionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4215,17 +7058,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `UpdateConnectionFunctionOutput`.
         """
-        return self._invoke(input, _models.UPDATE_CONNECTION_FUNCTION, [], plugins)
 
+    def update_connection_function(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateConnectionFunctionOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_CONNECTION_FUNCTION, args, kwargs),
+            _models.UPDATE_CONNECTION_FUNCTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_connection_group(
-        self, input: UpdateConnectionGroupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateConnectionGroupInput
+        | _models.UpdateConnectionGroupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateConnectionGroupOutput: ...
+
+    @_overload
+    def update_connection_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateConnectionGroupInputDict],
     ) -> UpdateConnectionGroupOutput:
         """
         Updates a connection group.
 
         Args:
-            input:
-                An instance of `UpdateConnectionGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4235,12 +7100,34 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `UpdateConnectionGroupOutput`.
         """
-        return self._invoke(input, _models.UPDATE_CONNECTION_GROUP, [], plugins)
 
+    def update_connection_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateConnectionGroupOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_CONNECTION_GROUP, args, kwargs),
+            _models.UPDATE_CONNECTION_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_continuous_deployment_policy(
         self,
-        input: UpdateContinuousDeploymentPolicyInput,
+        request: _models.UpdateContinuousDeploymentPolicyInput
+        | _models.UpdateContinuousDeploymentPolicyInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateContinuousDeploymentPolicyOutput: ...
+
+    @_overload
+    def update_continuous_deployment_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateContinuousDeploymentPolicyInputDict],
     ) -> UpdateContinuousDeploymentPolicyOutput:
         """
         Updates a continuous deployment policy. You can update a continuous
@@ -4264,8 +7151,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
             that you modified and those that you didn't.
 
         Args:
-            input:
-                An instance of `UpdateContinuousDeploymentPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4275,12 +7160,35 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `UpdateContinuousDeploymentPolicyOutput`.
         """
+
+    def update_continuous_deployment_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateContinuousDeploymentPolicyOutput:
         return self._invoke(
-            input, _models.UPDATE_CONTINUOUS_DEPLOYMENT_POLICY, [], plugins
+            self._select_input(
+                _models.UPDATE_CONTINUOUS_DEPLOYMENT_POLICY, args, kwargs
+            ),
+            _models.UPDATE_CONTINUOUS_DEPLOYMENT_POLICY,
+            [],
+            plugins,
         )
 
+    @_overload
     def update_distribution(
-        self, input: UpdateDistributionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateDistributionInput | _models.UpdateDistributionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateDistributionOutput: ...
+
+    @_overload
+    def update_distribution(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateDistributionInputDict],
     ) -> UpdateDistributionOutput:
         """
         Updates the configuration for a CloudFront distribution.
@@ -4312,8 +7220,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
             modified and also the ones that you didn't.
 
         Args:
-            input:
-                An instance of `UpdateDistributionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4323,17 +7229,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `UpdateDistributionOutput`.
         """
-        return self._invoke(input, _models.UPDATE_DISTRIBUTION, [], plugins)
 
+    def update_distribution(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateDistributionOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_DISTRIBUTION, args, kwargs),
+            _models.UPDATE_DISTRIBUTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_distribution_tenant(
-        self, input: UpdateDistributionTenantInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateDistributionTenantInput
+        | _models.UpdateDistributionTenantInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateDistributionTenantOutput: ...
+
+    @_overload
+    def update_distribution_tenant(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateDistributionTenantInputDict],
     ) -> UpdateDistributionTenantOutput:
         """
         Updates a distribution tenant.
 
         Args:
-            input:
-                An instance of `UpdateDistributionTenantInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4343,12 +7271,34 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `UpdateDistributionTenantOutput`.
         """
-        return self._invoke(input, _models.UPDATE_DISTRIBUTION_TENANT, [], plugins)
 
+    def update_distribution_tenant(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateDistributionTenantOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_DISTRIBUTION_TENANT, args, kwargs),
+            _models.UPDATE_DISTRIBUTION_TENANT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_distribution_with_staging_config(
         self,
-        input: UpdateDistributionWithStagingConfigInput,
+        request: _models.UpdateDistributionWithStagingConfigInput
+        | _models.UpdateDistributionWithStagingConfigInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateDistributionWithStagingConfigOutput: ...
+
+    @_overload
+    def update_distribution_with_staging_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateDistributionWithStagingConfigInputDict],
     ) -> UpdateDistributionWithStagingConfigOutput:
         """
         Copies the staging distribution's configuration to its corresponding
@@ -4373,8 +7323,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         - [UpdateDistribution](https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html)
 
         Args:
-            input:
-                An instance of `UpdateDistributionWithStagingConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4384,12 +7332,36 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `UpdateDistributionWithStagingConfigOutput`.
         """
+
+    def update_distribution_with_staging_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateDistributionWithStagingConfigOutput:
         return self._invoke(
-            input, _models.UPDATE_DISTRIBUTION_WITH_STAGING_CONFIG, [], plugins
+            self._select_input(
+                _models.UPDATE_DISTRIBUTION_WITH_STAGING_CONFIG, args, kwargs
+            ),
+            _models.UPDATE_DISTRIBUTION_WITH_STAGING_CONFIG,
+            [],
+            plugins,
         )
 
+    @_overload
     def update_domain_association(
-        self, input: UpdateDomainAssociationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateDomainAssociationInput
+        | _models.UpdateDomainAssociationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateDomainAssociationOutput: ...
+
+    @_overload
+    def update_domain_association(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateDomainAssociationInputDict],
     ) -> UpdateDomainAssociationOutput:
         """
         Note:
@@ -4416,8 +7388,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         in the *Amazon CloudFront Developer Guide*.
 
         Args:
-            input:
-                An instance of `UpdateDomainAssociationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4427,19 +7397,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `UpdateDomainAssociationOutput`.
         """
-        return self._invoke(input, _models.UPDATE_DOMAIN_ASSOCIATION, [], plugins)
 
+    def update_domain_association(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateDomainAssociationOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_DOMAIN_ASSOCIATION, args, kwargs),
+            _models.UPDATE_DOMAIN_ASSOCIATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_field_level_encryption_config(
         self,
-        input: UpdateFieldLevelEncryptionConfigInput,
+        request: _models.UpdateFieldLevelEncryptionConfigInput
+        | _models.UpdateFieldLevelEncryptionConfigInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateFieldLevelEncryptionConfigOutput: ...
+
+    @_overload
+    def update_field_level_encryption_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateFieldLevelEncryptionConfigInputDict],
     ) -> UpdateFieldLevelEncryptionConfigOutput:
         """
         Update a field-level encryption configuration.
 
         Args:
-            input:
-                An instance of `UpdateFieldLevelEncryptionConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4449,21 +7439,41 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `UpdateFieldLevelEncryptionConfigOutput`.
         """
+
+    def update_field_level_encryption_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateFieldLevelEncryptionConfigOutput:
         return self._invoke(
-            input, _models.UPDATE_FIELD_LEVEL_ENCRYPTION_CONFIG, [], plugins
+            self._select_input(
+                _models.UPDATE_FIELD_LEVEL_ENCRYPTION_CONFIG, args, kwargs
+            ),
+            _models.UPDATE_FIELD_LEVEL_ENCRYPTION_CONFIG,
+            [],
+            plugins,
         )
 
+    @_overload
     def update_field_level_encryption_profile(
         self,
-        input: UpdateFieldLevelEncryptionProfileInput,
+        request: _models.UpdateFieldLevelEncryptionProfileInput
+        | _models.UpdateFieldLevelEncryptionProfileInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateFieldLevelEncryptionProfileOutput: ...
+
+    @_overload
+    def update_field_level_encryption_profile(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateFieldLevelEncryptionProfileInputDict],
     ) -> UpdateFieldLevelEncryptionProfileOutput:
         """
         Update a field-level encryption profile.
 
         Args:
-            input:
-                An instance of `UpdateFieldLevelEncryptionProfileInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4473,12 +7483,35 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `UpdateFieldLevelEncryptionProfileOutput`.
         """
+
+    def update_field_level_encryption_profile(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateFieldLevelEncryptionProfileOutput:
         return self._invoke(
-            input, _models.UPDATE_FIELD_LEVEL_ENCRYPTION_PROFILE, [], plugins
+            self._select_input(
+                _models.UPDATE_FIELD_LEVEL_ENCRYPTION_PROFILE, args, kwargs
+            ),
+            _models.UPDATE_FIELD_LEVEL_ENCRYPTION_PROFILE,
+            [],
+            plugins,
         )
 
+    @_overload
     def update_function(
-        self, input: UpdateFunctionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateFunctionInput | _models.UpdateFunctionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateFunctionOutput: ...
+
+    @_overload
+    def update_function(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateFunctionInputDict],
     ) -> UpdateFunctionOutput:
         """
         Updates a CloudFront function.
@@ -4491,8 +7524,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         version, you can use `ListFunctions` and `DescribeFunction`.
 
         Args:
-            input:
-                An instance of `UpdateFunctionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4502,10 +7533,33 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `UpdateFunctionOutput`.
         """
-        return self._invoke(input, _models.UPDATE_FUNCTION, [], plugins)
 
+    def update_function(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateFunctionOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_FUNCTION, args, kwargs),
+            _models.UPDATE_FUNCTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_key_group(
-        self, input: UpdateKeyGroupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateKeyGroupInput | _models.UpdateKeyGroupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateKeyGroupOutput: ...
+
+    @_overload
+    def update_key_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateKeyGroupInputDict],
     ) -> UpdateKeyGroupOutput:
         """
         Updates a key group.
@@ -4523,8 +7577,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
             the fields that you modified and those that you didn't.
 
         Args:
-            input:
-                An instance of `UpdateKeyGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4534,17 +7586,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `UpdateKeyGroupOutput`.
         """
-        return self._invoke(input, _models.UPDATE_KEY_GROUP, [], plugins)
 
+    def update_key_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateKeyGroupOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_KEY_GROUP, args, kwargs),
+            _models.UPDATE_KEY_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_key_value_store(
-        self, input: UpdateKeyValueStoreInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateKeyValueStoreInput
+        | _models.UpdateKeyValueStoreInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateKeyValueStoreOutput: ...
+
+    @_overload
+    def update_key_value_store(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateKeyValueStoreInputDict],
     ) -> UpdateKeyValueStoreOutput:
         """
         Specifies the key value store to update.
 
         Args:
-            input:
-                An instance of `UpdateKeyValueStoreInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4554,17 +7628,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `UpdateKeyValueStoreOutput`.
         """
-        return self._invoke(input, _models.UPDATE_KEY_VALUE_STORE, [], plugins)
 
+    def update_key_value_store(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateKeyValueStoreOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_KEY_VALUE_STORE, args, kwargs),
+            _models.UPDATE_KEY_VALUE_STORE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_origin_access_control(
-        self, input: UpdateOriginAccessControlInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateOriginAccessControlInput
+        | _models.UpdateOriginAccessControlInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateOriginAccessControlOutput: ...
+
+    @_overload
+    def update_origin_access_control(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateOriginAccessControlInputDict],
     ) -> UpdateOriginAccessControlOutput:
         """
         Updates a CloudFront origin access control.
 
         Args:
-            input:
-                An instance of `UpdateOriginAccessControlInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4574,10 +7670,34 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `UpdateOriginAccessControlOutput`.
         """
-        return self._invoke(input, _models.UPDATE_ORIGIN_ACCESS_CONTROL, [], plugins)
 
+    def update_origin_access_control(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateOriginAccessControlOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_ORIGIN_ACCESS_CONTROL, args, kwargs),
+            _models.UPDATE_ORIGIN_ACCESS_CONTROL,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_origin_request_policy(
-        self, input: UpdateOriginRequestPolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateOriginRequestPolicyInput
+        | _models.UpdateOriginRequestPolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateOriginRequestPolicyOutput: ...
+
+    @_overload
+    def update_origin_request_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateOriginRequestPolicyInputDict],
     ) -> UpdateOriginRequestPolicyOutput:
         """
         Updates an origin request policy configuration.
@@ -4597,8 +7717,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
             and those that you didn't.
 
         Args:
-            input:
-                An instance of `UpdateOriginRequestPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4608,18 +7726,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `UpdateOriginRequestPolicyOutput`.
         """
-        return self._invoke(input, _models.UPDATE_ORIGIN_REQUEST_POLICY, [], plugins)
 
+    def update_origin_request_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateOriginRequestPolicyOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_ORIGIN_REQUEST_POLICY, args, kwargs),
+            _models.UPDATE_ORIGIN_REQUEST_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_public_key(
-        self, input: UpdatePublicKeyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdatePublicKeyInput | _models.UpdatePublicKeyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdatePublicKeyOutput: ...
+
+    @_overload
+    def update_public_key(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdatePublicKeyInputDict],
     ) -> UpdatePublicKeyOutput:
         """
         Update public key information. Note that the only value you can change
         is the comment.
 
         Args:
-            input:
-                An instance of `UpdatePublicKeyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4629,12 +7768,34 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `UpdatePublicKeyOutput`.
         """
-        return self._invoke(input, _models.UPDATE_PUBLIC_KEY, [], plugins)
 
+    def update_public_key(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdatePublicKeyOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_PUBLIC_KEY, args, kwargs),
+            _models.UPDATE_PUBLIC_KEY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_realtime_log_config(
         self,
-        input: UpdateRealtimeLogConfigInput | None = None,
+        request: _models.UpdateRealtimeLogConfigInput
+        | _models.UpdateRealtimeLogConfigInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateRealtimeLogConfigOutput: ...
+
+    @_overload
+    def update_realtime_log_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateRealtimeLogConfigInputDict],
     ) -> UpdateRealtimeLogConfigOutput:
         """
         Updates a real-time log configuration.
@@ -4657,8 +7818,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         You cannot update a real-time log configuration's `Name` or `ARN`.
 
         Args:
-            input:
-                An instance of `UpdateRealtimeLogConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4668,12 +7827,34 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `UpdateRealtimeLogConfigOutput`.
         """
-        return self._invoke(input, _models.UPDATE_REALTIME_LOG_CONFIG, [], plugins)
 
+    def update_realtime_log_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateRealtimeLogConfigOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_REALTIME_LOG_CONFIG, args, kwargs),
+            _models.UPDATE_REALTIME_LOG_CONFIG,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_response_headers_policy(
         self,
-        input: UpdateResponseHeadersPolicyInput,
+        request: _models.UpdateResponseHeadersPolicyInput
+        | _models.UpdateResponseHeadersPolicyInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateResponseHeadersPolicyOutput: ...
+
+    @_overload
+    def update_response_headers_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateResponseHeadersPolicyInputDict],
     ) -> UpdateResponseHeadersPolicyOutput:
         """
         Updates a response headers policy.
@@ -4693,8 +7874,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
             and those that you didn't.
 
         Args:
-            input:
-                An instance of `UpdateResponseHeadersPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4704,19 +7883,39 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `UpdateResponseHeadersPolicyOutput`.
         """
-        return self._invoke(input, _models.UPDATE_RESPONSE_HEADERS_POLICY, [], plugins)
 
+    def update_response_headers_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateResponseHeadersPolicyOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_RESPONSE_HEADERS_POLICY, args, kwargs),
+            _models.UPDATE_RESPONSE_HEADERS_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_streaming_distribution(
         self,
-        input: UpdateStreamingDistributionInput,
+        request: _models.UpdateStreamingDistributionInput
+        | _models.UpdateStreamingDistributionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateStreamingDistributionOutput: ...
+
+    @_overload
+    def update_streaming_distribution(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateStreamingDistributionInputDict],
     ) -> UpdateStreamingDistributionOutput:
         """
         Update a streaming distribution.
 
         Args:
-            input:
-                An instance of `UpdateStreamingDistributionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4726,17 +7925,38 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `UpdateStreamingDistributionOutput`.
         """
-        return self._invoke(input, _models.UPDATE_STREAMING_DISTRIBUTION, [], plugins)
 
+    def update_streaming_distribution(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateStreamingDistributionOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_STREAMING_DISTRIBUTION, args, kwargs),
+            _models.UPDATE_STREAMING_DISTRIBUTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_trust_store(
-        self, input: UpdateTrustStoreInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateTrustStoreInput | _models.UpdateTrustStoreInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateTrustStoreOutput: ...
+
+    @_overload
+    def update_trust_store(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateTrustStoreInputDict],
     ) -> UpdateTrustStoreOutput:
         """
         Updates a trust store.
 
         Args:
-            input:
-                An instance of `UpdateTrustStoreInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4746,17 +7966,38 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `UpdateTrustStoreOutput`.
         """
-        return self._invoke(input, _models.UPDATE_TRUST_STORE, [], plugins)
 
+    def update_trust_store(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateTrustStoreOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_TRUST_STORE, args, kwargs),
+            _models.UPDATE_TRUST_STORE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_vpc_origin(
-        self, input: UpdateVpcOriginInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateVpcOriginInput | _models.UpdateVpcOriginInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateVpcOriginOutput: ...
+
+    @_overload
+    def update_vpc_origin(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateVpcOriginInputDict],
     ) -> UpdateVpcOriginOutput:
         """
         Update an Amazon CloudFront VPC origin in your account.
 
         Args:
-            input:
-                An instance of `UpdateVpcOriginInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4766,10 +8007,34 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `UpdateVpcOriginOutput`.
         """
-        return self._invoke(input, _models.UPDATE_VPC_ORIGIN, [], plugins)
 
+    def update_vpc_origin(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateVpcOriginOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_VPC_ORIGIN, args, kwargs),
+            _models.UPDATE_VPC_ORIGIN,
+            [],
+            plugins,
+        )
+
+    @_overload
     def verify_dns_configuration(
-        self, input: VerifyDnsConfigurationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.VerifyDnsConfigurationInput
+        | _models.VerifyDnsConfigurationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> VerifyDnsConfigurationOutput: ...
+
+    @_overload
+    def verify_dns_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.VerifyDnsConfigurationInputDict],
     ) -> VerifyDnsConfigurationOutput:
         """
         Verify the DNS configuration for your domain names. This API operation
@@ -4779,8 +8044,6 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         issues.
 
         Args:
-            input:
-                An instance of `VerifyDnsConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4790,7 +8053,16 @@ class CloudFrontClient(Client[CloudFrontConfig]):
         Returns:
             An instance of `VerifyDnsConfigurationOutput`.
         """
-        return self._invoke(input, _models.VERIFY_DNS_CONFIGURATION, [], plugins)
+
+    def verify_dns_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> VerifyDnsConfigurationOutput:
+        return self._invoke(
+            self._select_input(_models.VERIFY_DNS_CONFIGURATION, args, kwargs),
+            _models.VERIFY_DNS_CONFIGURATION,
+            [],
+            plugins,
+        )
 
     def _new_config(self) -> CloudFrontConfig:
         return CloudFrontConfig.resolve()

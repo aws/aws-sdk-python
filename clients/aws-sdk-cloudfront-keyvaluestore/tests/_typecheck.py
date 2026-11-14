@@ -2,27 +2,40 @@
 
 from typing import Any
 
+from aws_sdk_cloudfront_keyvaluestore.aio.client import (
+    AsyncCloudFrontKeyValueStoreClient,
+)
+from aws_sdk_cloudfront_keyvaluestore.client import CloudFrontKeyValueStoreClient
 from aws_sdk_cloudfront_keyvaluestore.models import (
     DeleteKeyInput,
+    DeleteKeyInputDict,
     DeleteKeyOutput,
     DeleteKeyRequestListItem,
+    DeleteKeyRequestListItemDict,
     DescribeKeyValueStoreInput,
+    DescribeKeyValueStoreInputDict,
     DescribeKeyValueStoreOutput,
     GetKeyInput,
+    GetKeyInputDict,
     GetKeyOutput,
     ListKeysInput,
+    ListKeysInputDict,
     ListKeysOutput,
     ListKeysResponseListItem,
     PutKeyInput,
+    PutKeyInputDict,
     PutKeyOutput,
     PutKeyRequestListItem,
+    PutKeyRequestListItemDict,
     UpdateKeysInput,
+    UpdateKeysInputDict,
     UpdateKeysOutput,
 )
 
 
-# Static type fixture: pyright over this validates models.pyi.
-# Not executed as a test; it only needs to type-check.
+# Static type fixture: pyright over this validates models.pyi and the
+# client method signatures. Not executed as a test; it only needs to
+# type-check.
 
 _: Any = ...
 
@@ -43,3 +56,71 @@ PutKeyOutput(item_count=_, total_size_in_bytes=_, e_tag=_)
 PutKeyRequestListItem(key=_, value=_)
 UpdateKeysInput()
 UpdateKeysOutput(item_count=_, total_size_in_bytes=_, e_tag=_)
+_params_0: DeleteKeyInputDict = {"kvs_arn": _, "key": _, "if_match": _}
+_params_1: DeleteKeyRequestListItemDict = {"key": _}
+_params_2: DescribeKeyValueStoreInputDict = {"kvs_arn": _}
+_params_3: GetKeyInputDict = {"kvs_arn": _, "key": _}
+_params_4: ListKeysInputDict = {"kvs_arn": _}
+_params_5: PutKeyInputDict = {"key": _, "value": _, "kvs_arn": _, "if_match": _}
+_params_6: PutKeyRequestListItemDict = {"key": _, "value": _}
+_params_7: UpdateKeysInputDict = {"kvs_arn": _, "if_match": _}
+
+
+def _request[T](form: type[T]) -> T:
+    raise NotImplementedError
+
+
+async def check_async_calls(client: AsyncCloudFrontKeyValueStoreClient) -> None:
+    pass
+    await client.delete_key(kvs_arn=_, key=_, if_match=_)
+    await client.delete_key(**_request(DeleteKeyInputDict))
+    await client.delete_key(_request(DeleteKeyInput))
+    await client.delete_key(_request(DeleteKeyInputDict))
+    await client.describe_key_value_store(kvs_arn=_)
+    await client.describe_key_value_store(**_request(DescribeKeyValueStoreInputDict))
+    await client.describe_key_value_store(_request(DescribeKeyValueStoreInput))
+    await client.describe_key_value_store(_request(DescribeKeyValueStoreInputDict))
+    await client.get_key(kvs_arn=_, key=_)
+    await client.get_key(**_request(GetKeyInputDict))
+    await client.get_key(_request(GetKeyInput))
+    await client.get_key(_request(GetKeyInputDict))
+    await client.list_keys(kvs_arn=_)
+    await client.list_keys(**_request(ListKeysInputDict))
+    await client.list_keys(_request(ListKeysInput))
+    await client.list_keys(_request(ListKeysInputDict))
+    await client.put_key(key=_, value=_, kvs_arn=_, if_match=_)
+    await client.put_key(**_request(PutKeyInputDict))
+    await client.put_key(_request(PutKeyInput))
+    await client.put_key(_request(PutKeyInputDict))
+    await client.update_keys(kvs_arn=_, if_match=_)
+    await client.update_keys(**_request(UpdateKeysInputDict))
+    await client.update_keys(_request(UpdateKeysInput))
+    await client.update_keys(_request(UpdateKeysInputDict))
+
+
+def check_sync_calls(client: CloudFrontKeyValueStoreClient) -> None:
+    pass
+    client.delete_key(kvs_arn=_, key=_, if_match=_)
+    client.delete_key(**_request(DeleteKeyInputDict))
+    client.delete_key(_request(DeleteKeyInput))
+    client.delete_key(_request(DeleteKeyInputDict))
+    client.describe_key_value_store(kvs_arn=_)
+    client.describe_key_value_store(**_request(DescribeKeyValueStoreInputDict))
+    client.describe_key_value_store(_request(DescribeKeyValueStoreInput))
+    client.describe_key_value_store(_request(DescribeKeyValueStoreInputDict))
+    client.get_key(kvs_arn=_, key=_)
+    client.get_key(**_request(GetKeyInputDict))
+    client.get_key(_request(GetKeyInput))
+    client.get_key(_request(GetKeyInputDict))
+    client.list_keys(kvs_arn=_)
+    client.list_keys(**_request(ListKeysInputDict))
+    client.list_keys(_request(ListKeysInput))
+    client.list_keys(_request(ListKeysInputDict))
+    client.put_key(key=_, value=_, kvs_arn=_, if_match=_)
+    client.put_key(**_request(PutKeyInputDict))
+    client.put_key(_request(PutKeyInput))
+    client.put_key(_request(PutKeyInputDict))
+    client.update_keys(kvs_arn=_, if_match=_)
+    client.update_keys(**_request(UpdateKeysInputDict))
+    client.update_keys(_request(UpdateKeysInput))
+    client.update_keys(_request(UpdateKeysInputDict))

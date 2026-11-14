@@ -2,99 +2,140 @@
 
 from typing import Any
 
+from aws_sdk_rds.aio.client import AsyncRDSClient
+from aws_sdk_rds.client import RDSClient
 from aws_sdk_rds.models import (
     AccountQuota,
     AddRoleToDBClusterInput,
+    AddRoleToDBClusterInputDict,
     AddRoleToDBClusterOutput,
     AddRoleToDBInstanceInput,
+    AddRoleToDBInstanceInputDict,
     AddRoleToDBInstanceOutput,
     AddSourceIdentifierToSubscriptionInput,
+    AddSourceIdentifierToSubscriptionInputDict,
     AddSourceIdentifierToSubscriptionOutput,
     AddTagsToResourceInput,
+    AddTagsToResourceInputDict,
     AddTagsToResourceOutput,
     AdditionalStorageVolume,
+    AdditionalStorageVolumeDict,
     AdditionalStorageVolumeOutput,
     ApplyPendingMaintenanceActionInput,
+    ApplyPendingMaintenanceActionInputDict,
     ApplyPendingMaintenanceActionOutput,
     AuthorizeDBSecurityGroupIngressInput,
+    AuthorizeDBSecurityGroupIngressInputDict,
     AuthorizeDBSecurityGroupIngressOutput,
     AvailabilityZone,
     AvailableAdditionalStorageVolumesOption,
     AvailableCapacityPerAvailabilityZone,
     AvailableProcessorFeature,
     BacktrackDBClusterInput,
+    BacktrackDBClusterInputDict,
     BacktrackDBClusterOutput,
     BlueGreenDeployment,
     BlueGreenDeploymentTask,
     CancelDBCapacityReservationInput,
+    CancelDBCapacityReservationInputDict,
     CancelDBCapacityReservationOutput,
     CancelExportTaskInput,
+    CancelExportTaskInputDict,
     CancelExportTaskOutput,
     Certificate,
     CertificateDetails,
     CharacterSet,
     CloudwatchLogsExportConfiguration,
+    CloudwatchLogsExportConfigurationDict,
     ClusterPendingModifiedValues,
     ConnectionPoolConfiguration,
+    ConnectionPoolConfigurationDict,
     ConnectionPoolConfigurationInfo,
     ContextAttribute,
     CopyDBClusterParameterGroupInput,
+    CopyDBClusterParameterGroupInputDict,
     CopyDBClusterParameterGroupOutput,
     CopyDBClusterSnapshotInput,
+    CopyDBClusterSnapshotInputDict,
     CopyDBClusterSnapshotOutput,
     CopyDBParameterGroupInput,
+    CopyDBParameterGroupInputDict,
     CopyDBParameterGroupOutput,
     CopyDBSnapshotInput,
+    CopyDBSnapshotInputDict,
     CopyDBSnapshotOutput,
     CopyOptionGroupInput,
+    CopyOptionGroupInputDict,
     CopyOptionGroupOutput,
     CreateBlueGreenDeploymentInput,
+    CreateBlueGreenDeploymentInputDict,
     CreateBlueGreenDeploymentOutput,
     CreateCustomDBEngineVersionInput,
+    CreateCustomDBEngineVersionInputDict,
     CreateCustomDBEngineVersionOutput,
     CreateDBCapacityReservationInput,
+    CreateDBCapacityReservationInputDict,
     CreateDBCapacityReservationOutput,
     CreateDBClusterEndpointInput,
+    CreateDBClusterEndpointInputDict,
     CreateDBClusterEndpointOutput,
     CreateDBClusterInput,
+    CreateDBClusterInputDict,
     CreateDBClusterOutput,
     CreateDBClusterParameterGroupInput,
+    CreateDBClusterParameterGroupInputDict,
     CreateDBClusterParameterGroupOutput,
     CreateDBClusterSnapshotInput,
+    CreateDBClusterSnapshotInputDict,
     CreateDBClusterSnapshotOutput,
     CreateDBInstanceInput,
+    CreateDBInstanceInputDict,
     CreateDBInstanceOutput,
     CreateDBInstanceReadReplicaInput,
+    CreateDBInstanceReadReplicaInputDict,
     CreateDBInstanceReadReplicaOutput,
     CreateDBParameterGroupInput,
+    CreateDBParameterGroupInputDict,
     CreateDBParameterGroupOutput,
     CreateDBProxyEndpointInput,
+    CreateDBProxyEndpointInputDict,
     CreateDBProxyEndpointOutput,
     CreateDBProxyInput,
+    CreateDBProxyInputDict,
     CreateDBProxyOutput,
     CreateDBSecurityGroupInput,
+    CreateDBSecurityGroupInputDict,
     CreateDBSecurityGroupOutput,
     CreateDBShardGroupInput,
+    CreateDBShardGroupInputDict,
     CreateDBShardGroupOutput,
     CreateDBSnapshotInput,
+    CreateDBSnapshotInputDict,
     CreateDBSnapshotOutput,
     CreateDBSubnetGroupInput,
+    CreateDBSubnetGroupInputDict,
     CreateDBSubnetGroupOutput,
     CreateEventSubscriptionInput,
+    CreateEventSubscriptionInputDict,
     CreateEventSubscriptionOutput,
     CreateGlobalClusterInput,
+    CreateGlobalClusterInputDict,
     CreateGlobalClusterOutput,
     CreateIntegrationInput,
+    CreateIntegrationInputDict,
     CreateIntegrationOutput,
     CreateOptionGroupInput,
+    CreateOptionGroupInputDict,
     CreateOptionGroupOutput,
     CreateTenantDatabaseInput,
+    CreateTenantDatabaseInputDict,
     CreateTenantDatabaseOutput,
     CustomDBEngineVersionAMI,
     DBCapacityReservation,
     DBCapacityReservationCommitmentInfo,
     DBCluster,
     DBClusterAssociatedRole,
+    DBClusterAssociatedRoleDict,
     DBClusterAutomatedBackup,
     DBClusterBacktrack,
     DBClusterEndpoint,
@@ -129,155 +170,228 @@ from aws_sdk_rds.models import (
     DBSnapshotTenantDatabase,
     DBSubnetGroup,
     DeleteBlueGreenDeploymentInput,
+    DeleteBlueGreenDeploymentInputDict,
     DeleteBlueGreenDeploymentOutput,
     DeleteCustomDBEngineVersionInput,
+    DeleteCustomDBEngineVersionInputDict,
     DeleteCustomDBEngineVersionOutput,
     DeleteDBClusterAutomatedBackupInput,
+    DeleteDBClusterAutomatedBackupInputDict,
     DeleteDBClusterAutomatedBackupOutput,
     DeleteDBClusterEndpointInput,
+    DeleteDBClusterEndpointInputDict,
     DeleteDBClusterEndpointOutput,
     DeleteDBClusterInput,
+    DeleteDBClusterInputDict,
     DeleteDBClusterOutput,
     DeleteDBClusterParameterGroupInput,
+    DeleteDBClusterParameterGroupInputDict,
     DeleteDBClusterParameterGroupOutput,
     DeleteDBClusterSnapshotInput,
+    DeleteDBClusterSnapshotInputDict,
     DeleteDBClusterSnapshotOutput,
     DeleteDBInstanceAutomatedBackupInput,
+    DeleteDBInstanceAutomatedBackupInputDict,
     DeleteDBInstanceAutomatedBackupOutput,
     DeleteDBInstanceInput,
+    DeleteDBInstanceInputDict,
     DeleteDBInstanceOutput,
     DeleteDBParameterGroupInput,
+    DeleteDBParameterGroupInputDict,
     DeleteDBParameterGroupOutput,
     DeleteDBProxyEndpointInput,
+    DeleteDBProxyEndpointInputDict,
     DeleteDBProxyEndpointOutput,
     DeleteDBProxyInput,
+    DeleteDBProxyInputDict,
     DeleteDBProxyOutput,
     DeleteDBSecurityGroupInput,
+    DeleteDBSecurityGroupInputDict,
     DeleteDBSecurityGroupOutput,
     DeleteDBShardGroupInput,
+    DeleteDBShardGroupInputDict,
     DeleteDBShardGroupOutput,
     DeleteDBSnapshotInput,
+    DeleteDBSnapshotInputDict,
     DeleteDBSnapshotOutput,
     DeleteDBSubnetGroupInput,
+    DeleteDBSubnetGroupInputDict,
     DeleteDBSubnetGroupOutput,
     DeleteEventSubscriptionInput,
+    DeleteEventSubscriptionInputDict,
     DeleteEventSubscriptionOutput,
     DeleteGlobalClusterInput,
+    DeleteGlobalClusterInputDict,
     DeleteGlobalClusterOutput,
     DeleteIntegrationInput,
+    DeleteIntegrationInputDict,
     DeleteIntegrationOutput,
     DeleteOptionGroupInput,
+    DeleteOptionGroupInputDict,
     DeleteOptionGroupOutput,
     DeleteTenantDatabaseInput,
+    DeleteTenantDatabaseInputDict,
     DeleteTenantDatabaseOutput,
     DeregisterDBProxyTargetsInput,
+    DeregisterDBProxyTargetsInputDict,
     DeregisterDBProxyTargetsOutput,
     DescribeAccountAttributesInput,
+    DescribeAccountAttributesInputDict,
     DescribeAccountAttributesOutput,
     DescribeBlueGreenDeploymentsInput,
+    DescribeBlueGreenDeploymentsInputDict,
     DescribeBlueGreenDeploymentsOutput,
     DescribeCertificatesInput,
+    DescribeCertificatesInputDict,
     DescribeCertificatesOutput,
     DescribeDBCapacityReservationsInput,
+    DescribeDBCapacityReservationsInputDict,
     DescribeDBCapacityReservationsOutput,
     DescribeDBClusterAutomatedBackupsInput,
+    DescribeDBClusterAutomatedBackupsInputDict,
     DescribeDBClusterAutomatedBackupsOutput,
     DescribeDBClusterBacktracksInput,
+    DescribeDBClusterBacktracksInputDict,
     DescribeDBClusterBacktracksOutput,
     DescribeDBClusterEndpointsInput,
+    DescribeDBClusterEndpointsInputDict,
     DescribeDBClusterEndpointsOutput,
     DescribeDBClusterParameterGroupsInput,
+    DescribeDBClusterParameterGroupsInputDict,
     DescribeDBClusterParameterGroupsOutput,
     DescribeDBClusterParametersInput,
+    DescribeDBClusterParametersInputDict,
     DescribeDBClusterParametersOutput,
     DescribeDBClusterSnapshotAttributesInput,
+    DescribeDBClusterSnapshotAttributesInputDict,
     DescribeDBClusterSnapshotAttributesOutput,
     DescribeDBClusterSnapshotsInput,
+    DescribeDBClusterSnapshotsInputDict,
     DescribeDBClusterSnapshotsOutput,
     DescribeDBClustersInput,
+    DescribeDBClustersInputDict,
     DescribeDBClustersOutput,
     DescribeDBEngineVersionsInput,
+    DescribeDBEngineVersionsInputDict,
     DescribeDBEngineVersionsOutput,
     DescribeDBInstanceAutomatedBackupsInput,
+    DescribeDBInstanceAutomatedBackupsInputDict,
     DescribeDBInstanceAutomatedBackupsOutput,
     DescribeDBInstancesInput,
+    DescribeDBInstancesInputDict,
     DescribeDBInstancesOutput,
     DescribeDBLogFilesDetails,
     DescribeDBLogFilesInput,
+    DescribeDBLogFilesInputDict,
     DescribeDBLogFilesOutput,
     DescribeDBMajorEngineVersionsInput,
+    DescribeDBMajorEngineVersionsInputDict,
     DescribeDBMajorEngineVersionsOutput,
     DescribeDBParameterGroupsInput,
+    DescribeDBParameterGroupsInputDict,
     DescribeDBParameterGroupsOutput,
     DescribeDBParametersInput,
+    DescribeDBParametersInputDict,
     DescribeDBParametersOutput,
     DescribeDBProxiesInput,
+    DescribeDBProxiesInputDict,
     DescribeDBProxiesOutput,
     DescribeDBProxyEndpointsInput,
+    DescribeDBProxyEndpointsInputDict,
     DescribeDBProxyEndpointsOutput,
     DescribeDBProxyTargetGroupsInput,
+    DescribeDBProxyTargetGroupsInputDict,
     DescribeDBProxyTargetGroupsOutput,
     DescribeDBProxyTargetsInput,
+    DescribeDBProxyTargetsInputDict,
     DescribeDBProxyTargetsOutput,
     DescribeDBRecommendationsInput,
+    DescribeDBRecommendationsInputDict,
     DescribeDBRecommendationsOutput,
     DescribeDBSecurityGroupsInput,
+    DescribeDBSecurityGroupsInputDict,
     DescribeDBSecurityGroupsOutput,
     DescribeDBShardGroupsInput,
+    DescribeDBShardGroupsInputDict,
     DescribeDBShardGroupsOutput,
     DescribeDBSnapshotAttributesInput,
+    DescribeDBSnapshotAttributesInputDict,
     DescribeDBSnapshotAttributesOutput,
     DescribeDBSnapshotTenantDatabasesInput,
+    DescribeDBSnapshotTenantDatabasesInputDict,
     DescribeDBSnapshotTenantDatabasesOutput,
     DescribeDBSnapshotsInput,
+    DescribeDBSnapshotsInputDict,
     DescribeDBSnapshotsOutput,
     DescribeDBSubnetGroupsInput,
+    DescribeDBSubnetGroupsInputDict,
     DescribeDBSubnetGroupsOutput,
     DescribeEngineDefaultClusterParametersInput,
+    DescribeEngineDefaultClusterParametersInputDict,
     DescribeEngineDefaultClusterParametersOutput,
     DescribeEngineDefaultParametersInput,
+    DescribeEngineDefaultParametersInputDict,
     DescribeEngineDefaultParametersOutput,
     DescribeEventCategoriesInput,
+    DescribeEventCategoriesInputDict,
     DescribeEventCategoriesOutput,
     DescribeEventSubscriptionsInput,
+    DescribeEventSubscriptionsInputDict,
     DescribeEventSubscriptionsOutput,
     DescribeEventsInput,
+    DescribeEventsInputDict,
     DescribeEventsOutput,
     DescribeExportTasksInput,
+    DescribeExportTasksInputDict,
     DescribeExportTasksOutput,
     DescribeGlobalClustersInput,
+    DescribeGlobalClustersInputDict,
     DescribeGlobalClustersOutput,
     DescribeIntegrationsInput,
+    DescribeIntegrationsInputDict,
     DescribeIntegrationsOutput,
     DescribeOptionGroupOptionsInput,
+    DescribeOptionGroupOptionsInputDict,
     DescribeOptionGroupOptionsOutput,
     DescribeOptionGroupsInput,
+    DescribeOptionGroupsInputDict,
     DescribeOptionGroupsOutput,
     DescribeOrderableDBInstanceOptionsInput,
+    DescribeOrderableDBInstanceOptionsInputDict,
     DescribeOrderableDBInstanceOptionsOutput,
     DescribePendingMaintenanceActionsInput,
+    DescribePendingMaintenanceActionsInputDict,
     DescribePendingMaintenanceActionsOutput,
     DescribeReservedDBInstancesInput,
+    DescribeReservedDBInstancesInputDict,
     DescribeReservedDBInstancesOfferingsInput,
+    DescribeReservedDBInstancesOfferingsInputDict,
     DescribeReservedDBInstancesOfferingsOutput,
     DescribeReservedDBInstancesOutput,
     DescribeServerlessV2PlatformVersionsInput,
+    DescribeServerlessV2PlatformVersionsInputDict,
     DescribeServerlessV2PlatformVersionsOutput,
     DescribeSourceRegionsInput,
+    DescribeSourceRegionsInputDict,
     DescribeSourceRegionsOutput,
     DescribeTenantDatabasesInput,
+    DescribeTenantDatabasesInputDict,
     DescribeTenantDatabasesOutput,
     DescribeValidDBInstanceModificationsInput,
+    DescribeValidDBInstanceModificationsInputDict,
     DescribeValidDBInstanceModificationsOutput,
     DisableHttpEndpointInput,
+    DisableHttpEndpointInputDict,
     DisableHttpEndpointOutput,
     DocLink,
     DomainMembership,
     DoubleRange,
     DownloadDBLogFilePortionInput,
+    DownloadDBLogFilePortionInputDict,
     DownloadDBLogFilePortionOutput,
     EC2SecurityGroup,
     EnableHttpEndpointInput,
+    EnableHttpEndpointInputDict,
     EnableHttpEndpointOutput,
     Endpoint,
     EngineDefaults,
@@ -286,11 +400,14 @@ from aws_sdk_rds.models import (
     EventSubscription,
     ExportTask,
     FailoverDBClusterInput,
+    FailoverDBClusterInputDict,
     FailoverDBClusterOutput,
     FailoverGlobalClusterInput,
+    FailoverGlobalClusterInputDict,
     FailoverGlobalClusterOutput,
     FailoverState,
     Filter,
+    FilterDict,
     GlobalCluster,
     GlobalClusterMember,
     IPRange,
@@ -299,6 +416,7 @@ from aws_sdk_rds.models import (
     IssueDetails,
     LimitlessDatabase,
     ListTagsForResourceInput,
+    ListTagsForResourceInputDict,
     ListTagsForResourceOutput,
     MasterUserSecret,
     Metric,
@@ -306,65 +424,93 @@ from aws_sdk_rds.models import (
     MetricReference,
     MinimumEngineVersionPerAllowedValue,
     ModifyActivityStreamInput,
+    ModifyActivityStreamInputDict,
     ModifyActivityStreamOutput,
     ModifyAdditionalStorageVolume,
+    ModifyAdditionalStorageVolumeDict,
     ModifyCertificatesInput,
+    ModifyCertificatesInputDict,
     ModifyCertificatesOutput,
     ModifyCurrentDBClusterCapacityInput,
+    ModifyCurrentDBClusterCapacityInputDict,
     ModifyCurrentDBClusterCapacityOutput,
     ModifyCustomDBEngineVersionInput,
+    ModifyCustomDBEngineVersionInputDict,
     ModifyCustomDBEngineVersionOutput,
     ModifyDBCapacityReservationInput,
+    ModifyDBCapacityReservationInputDict,
     ModifyDBCapacityReservationOutput,
     ModifyDBClusterEndpointInput,
+    ModifyDBClusterEndpointInputDict,
     ModifyDBClusterEndpointOutput,
     ModifyDBClusterInput,
+    ModifyDBClusterInputDict,
     ModifyDBClusterOutput,
     ModifyDBClusterParameterGroupInput,
+    ModifyDBClusterParameterGroupInputDict,
     ModifyDBClusterParameterGroupOutput,
     ModifyDBClusterSnapshotAttributeInput,
+    ModifyDBClusterSnapshotAttributeInputDict,
     ModifyDBClusterSnapshotAttributeOutput,
     ModifyDBInstanceInput,
+    ModifyDBInstanceInputDict,
     ModifyDBInstanceOutput,
     ModifyDBParameterGroupInput,
+    ModifyDBParameterGroupInputDict,
     ModifyDBParameterGroupOutput,
     ModifyDBProxyEndpointInput,
+    ModifyDBProxyEndpointInputDict,
     ModifyDBProxyEndpointOutput,
     ModifyDBProxyInput,
+    ModifyDBProxyInputDict,
     ModifyDBProxyOutput,
     ModifyDBProxyTargetGroupInput,
+    ModifyDBProxyTargetGroupInputDict,
     ModifyDBProxyTargetGroupOutput,
     ModifyDBRecommendationInput,
+    ModifyDBRecommendationInputDict,
     ModifyDBRecommendationOutput,
     ModifyDBShardGroupInput,
+    ModifyDBShardGroupInputDict,
     ModifyDBShardGroupOutput,
     ModifyDBSnapshotAttributeInput,
+    ModifyDBSnapshotAttributeInputDict,
     ModifyDBSnapshotAttributeOutput,
     ModifyDBSnapshotInput,
+    ModifyDBSnapshotInputDict,
     ModifyDBSnapshotOutput,
     ModifyDBSubnetGroupInput,
+    ModifyDBSubnetGroupInputDict,
     ModifyDBSubnetGroupOutput,
     ModifyEventSubscriptionInput,
+    ModifyEventSubscriptionInputDict,
     ModifyEventSubscriptionOutput,
     ModifyGlobalClusterInput,
+    ModifyGlobalClusterInputDict,
     ModifyGlobalClusterOutput,
     ModifyIntegrationInput,
+    ModifyIntegrationInputDict,
     ModifyIntegrationOutput,
     ModifyOptionGroupInput,
+    ModifyOptionGroupInputDict,
     ModifyOptionGroupOutput,
     ModifyTenantDatabaseInput,
+    ModifyTenantDatabaseInputDict,
     ModifyTenantDatabaseOutput,
     Option,
     OptionConfiguration,
+    OptionConfigurationDict,
     OptionGroup,
     OptionGroupMembership,
     OptionGroupOption,
     OptionGroupOptionSetting,
     OptionSetting,
+    OptionSettingDict,
     OptionVersion,
     OrderableDBInstanceOption,
     Outpost,
     Parameter,
+    ParameterDict,
     PendingCloudwatchLogsExports,
     PendingMaintenanceAction,
     PendingModifiedValues,
@@ -372,103 +518,145 @@ from aws_sdk_rds.models import (
     PerformanceInsightsMetricQuery,
     PerformanceIssueDetails,
     ProcessorFeature,
+    ProcessorFeatureDict,
     PromoteReadReplicaDBClusterInput,
+    PromoteReadReplicaDBClusterInputDict,
     PromoteReadReplicaDBClusterOutput,
     PromoteReadReplicaInput,
+    PromoteReadReplicaInputDict,
     PromoteReadReplicaOutput,
     PurchaseReservedDBInstancesOfferingInput,
+    PurchaseReservedDBInstancesOfferingInputDict,
     PurchaseReservedDBInstancesOfferingOutput,
     Range,
     RdsCustomClusterConfiguration,
+    RdsCustomClusterConfigurationDict,
     RebootDBClusterInput,
+    RebootDBClusterInputDict,
     RebootDBClusterOutput,
     RebootDBInstanceInput,
+    RebootDBInstanceInputDict,
     RebootDBInstanceOutput,
     RebootDBShardGroupInput,
+    RebootDBShardGroupInputDict,
     RebootDBShardGroupOutput,
     RecommendedAction,
     RecommendedActionParameter,
     RecommendedActionUpdate,
+    RecommendedActionUpdateDict,
     RecurringCharge,
     ReferenceDetails,
     RegisterDBProxyTargetsInput,
+    RegisterDBProxyTargetsInputDict,
     RegisterDBProxyTargetsOutput,
     RemoveFromGlobalClusterInput,
+    RemoveFromGlobalClusterInputDict,
     RemoveFromGlobalClusterOutput,
     RemoveRoleFromDBClusterInput,
+    RemoveRoleFromDBClusterInputDict,
     RemoveRoleFromDBClusterOutput,
     RemoveRoleFromDBInstanceInput,
+    RemoveRoleFromDBInstanceInputDict,
     RemoveRoleFromDBInstanceOutput,
     RemoveSourceIdentifierFromSubscriptionInput,
+    RemoveSourceIdentifierFromSubscriptionInputDict,
     RemoveSourceIdentifierFromSubscriptionOutput,
     RemoveTagsFromResourceInput,
+    RemoveTagsFromResourceInputDict,
     RemoveTagsFromResourceOutput,
     ReservedDBInstance,
     ReservedDBInstancesOffering,
     ResetDBClusterParameterGroupInput,
+    ResetDBClusterParameterGroupInputDict,
     ResetDBClusterParameterGroupOutput,
     ResetDBParameterGroupInput,
+    ResetDBParameterGroupInputDict,
     ResetDBParameterGroupOutput,
     ResourcePendingMaintenanceActions,
     RestoreDBClusterFromS3Input,
+    RestoreDBClusterFromS3InputDict,
     RestoreDBClusterFromS3Output,
     RestoreDBClusterFromSnapshotInput,
+    RestoreDBClusterFromSnapshotInputDict,
     RestoreDBClusterFromSnapshotOutput,
     RestoreDBClusterToPointInTimeInput,
+    RestoreDBClusterToPointInTimeInputDict,
     RestoreDBClusterToPointInTimeOutput,
     RestoreDBInstanceFromDBSnapshotInput,
+    RestoreDBInstanceFromDBSnapshotInputDict,
     RestoreDBInstanceFromDBSnapshotOutput,
     RestoreDBInstanceFromS3Input,
+    RestoreDBInstanceFromS3InputDict,
     RestoreDBInstanceFromS3Output,
     RestoreDBInstanceToPointInTimeInput,
+    RestoreDBInstanceToPointInTimeInputDict,
     RestoreDBInstanceToPointInTimeOutput,
     RestoreWindow,
     RevokeDBSecurityGroupIngressInput,
+    RevokeDBSecurityGroupIngressInputDict,
     RevokeDBSecurityGroupIngressOutput,
     ScalarReferenceDetails,
     ScalingConfiguration,
+    ScalingConfigurationDict,
     ScalingConfigurationInfo,
     ServerlessV2FeaturesSupport,
     ServerlessV2PlatformVersionInfo,
     ServerlessV2ScalingConfiguration,
+    ServerlessV2ScalingConfigurationDict,
     ServerlessV2ScalingConfigurationInfo,
     SourceRegion,
     StartActivityStreamInput,
+    StartActivityStreamInputDict,
     StartActivityStreamOutput,
     StartDBClusterInput,
+    StartDBClusterInputDict,
     StartDBClusterOutput,
     StartDBInstanceAutomatedBackupsReplicationInput,
+    StartDBInstanceAutomatedBackupsReplicationInputDict,
     StartDBInstanceAutomatedBackupsReplicationOutput,
     StartDBInstanceInput,
+    StartDBInstanceInputDict,
     StartDBInstanceOutput,
     StartExportTaskInput,
+    StartExportTaskInputDict,
     StartExportTaskOutput,
     StopActivityStreamInput,
+    StopActivityStreamInputDict,
     StopActivityStreamOutput,
     StopDBClusterInput,
+    StopDBClusterInputDict,
     StopDBClusterOutput,
     StopDBInstanceAutomatedBackupsReplicationInput,
+    StopDBInstanceAutomatedBackupsReplicationInputDict,
     StopDBInstanceAutomatedBackupsReplicationOutput,
     StopDBInstanceInput,
+    StopDBInstanceInputDict,
     StopDBInstanceOutput,
     Subnet,
     SupportedEngineLifecycle,
     SwitchoverBlueGreenDeploymentInput,
+    SwitchoverBlueGreenDeploymentInputDict,
     SwitchoverBlueGreenDeploymentOutput,
     SwitchoverDetail,
     SwitchoverGlobalClusterInput,
+    SwitchoverGlobalClusterInputDict,
     SwitchoverGlobalClusterOutput,
     SwitchoverReadReplicaInput,
+    SwitchoverReadReplicaInputDict,
     SwitchoverReadReplicaOutput,
     Tag,
+    TagDict,
     TagSpecification,
+    TagSpecificationDict,
     TargetHealth,
     TargetResourceConfiguration,
+    TargetResourceConfigurationDict,
     TenantDatabase,
     TenantDatabasePendingModifiedValues,
     Timezone,
     UpgradeTarget,
     UserAuthConfig,
+    UserAuthConfigDict,
     UserAuthConfigInfo,
     ValidAdditionalStorageOptions,
     ValidDBInstanceModificationsMessage,
@@ -478,8 +666,9 @@ from aws_sdk_rds.models import (
 )
 
 
-# Static type fixture: pyright over this validates models.pyi.
-# Not executed as a test; it only needs to type-check.
+# Static type fixture: pyright over this validates models.pyi and the
+# client method signatures. Not executed as a test; it only needs to
+# type-check.
 
 _: Any = ...
 
@@ -955,3 +1144,2592 @@ ValidDBInstanceModificationsMessage()
 ValidStorageOptions()
 ValidVolumeOptions()
 VpcSecurityGroupMembership()
+_params_0: AdditionalStorageVolumeDict = {"volume_name": _}
+_params_1: AddRoleToDBClusterInputDict = {"db_cluster_identifier": _, "role_arn": _}
+_params_2: AddRoleToDBInstanceInputDict = {
+    "db_instance_identifier": _,
+    "role_arn": _,
+    "feature_name": _,
+}
+_params_3: AddSourceIdentifierToSubscriptionInputDict = {
+    "subscription_name": _,
+    "source_identifier": _,
+}
+_params_4: AddTagsToResourceInputDict = {"resource_name": _, "tags": _}
+_params_5: ApplyPendingMaintenanceActionInputDict = {
+    "resource_identifier": _,
+    "apply_action": _,
+    "opt_in_type": _,
+}
+_params_6: AuthorizeDBSecurityGroupIngressInputDict = {"db_security_group_name": _}
+_params_7: BacktrackDBClusterInputDict = {"db_cluster_identifier": _, "backtrack_to": _}
+_params_8: CancelDBCapacityReservationInputDict = {
+    "db_capacity_reservation_identifier": _
+}
+_params_9: CancelExportTaskInputDict = {"export_task_identifier": _}
+_params_10: CloudwatchLogsExportConfigurationDict = {}
+_params_11: ConnectionPoolConfigurationDict = {}
+_params_12: CopyDBClusterParameterGroupInputDict = {
+    "source_db_cluster_parameter_group_identifier": _,
+    "target_db_cluster_parameter_group_identifier": _,
+    "target_db_cluster_parameter_group_description": _,
+}
+_params_13: CopyDBClusterSnapshotInputDict = {
+    "source_db_cluster_snapshot_identifier": _,
+    "target_db_cluster_snapshot_identifier": _,
+}
+_params_14: CopyDBParameterGroupInputDict = {
+    "source_db_parameter_group_identifier": _,
+    "target_db_parameter_group_identifier": _,
+    "target_db_parameter_group_description": _,
+}
+_params_15: CopyDBSnapshotInputDict = {
+    "source_db_snapshot_identifier": _,
+    "target_db_snapshot_identifier": _,
+}
+_params_16: CopyOptionGroupInputDict = {
+    "source_option_group_identifier": _,
+    "target_option_group_identifier": _,
+    "target_option_group_description": _,
+}
+_params_17: CreateBlueGreenDeploymentInputDict = {
+    "blue_green_deployment_name": _,
+    "source": _,
+}
+_params_18: CreateCustomDBEngineVersionInputDict = {"engine": _, "engine_version": _}
+_params_19: CreateDBCapacityReservationInputDict = {
+    "db_capacity_reservation_name": _,
+    "db_instance_class": _,
+    "engine": _,
+    "capacity_per_availability_zone": _,
+    "availability_zones": _,
+}
+_params_20: CreateDBClusterEndpointInputDict = {
+    "db_cluster_identifier": _,
+    "db_cluster_endpoint_identifier": _,
+    "endpoint_type": _,
+}
+_params_21: CreateDBClusterInputDict = {"db_cluster_identifier": _, "engine": _}
+_params_22: CreateDBClusterParameterGroupInputDict = {
+    "db_cluster_parameter_group_name": _,
+    "db_parameter_group_family": _,
+    "description": _,
+}
+_params_23: CreateDBClusterSnapshotInputDict = {
+    "db_cluster_snapshot_identifier": _,
+    "db_cluster_identifier": _,
+}
+_params_24: CreateDBInstanceInputDict = {
+    "db_instance_identifier": _,
+    "db_instance_class": _,
+    "engine": _,
+}
+_params_25: CreateDBInstanceReadReplicaInputDict = {"db_instance_identifier": _}
+_params_26: CreateDBParameterGroupInputDict = {
+    "db_parameter_group_name": _,
+    "db_parameter_group_family": _,
+    "description": _,
+}
+_params_27: CreateDBProxyEndpointInputDict = {
+    "db_proxy_name": _,
+    "db_proxy_endpoint_name": _,
+    "vpc_subnet_ids": _,
+}
+_params_28: CreateDBProxyInputDict = {
+    "db_proxy_name": _,
+    "engine_family": _,
+    "role_arn": _,
+    "vpc_subnet_ids": _,
+}
+_params_29: CreateDBSecurityGroupInputDict = {
+    "db_security_group_name": _,
+    "db_security_group_description": _,
+}
+_params_30: CreateDBShardGroupInputDict = {
+    "db_shard_group_identifier": _,
+    "db_cluster_identifier": _,
+    "max_acu": _,
+}
+_params_31: CreateDBSnapshotInputDict = {
+    "db_snapshot_identifier": _,
+    "db_instance_identifier": _,
+}
+_params_32: CreateDBSubnetGroupInputDict = {
+    "db_subnet_group_name": _,
+    "db_subnet_group_description": _,
+    "subnet_ids": _,
+}
+_params_33: CreateEventSubscriptionInputDict = {
+    "subscription_name": _,
+    "sns_topic_arn": _,
+}
+_params_34: CreateGlobalClusterInputDict = {"global_cluster_identifier": _}
+_params_35: CreateIntegrationInputDict = {
+    "source_arn": _,
+    "target_arn": _,
+    "integration_name": _,
+}
+_params_36: CreateOptionGroupInputDict = {
+    "option_group_name": _,
+    "engine_name": _,
+    "major_engine_version": _,
+    "option_group_description": _,
+}
+_params_37: CreateTenantDatabaseInputDict = {
+    "db_instance_identifier": _,
+    "tenant_db_name": _,
+    "master_username": _,
+}
+_params_38: DBClusterAssociatedRoleDict = {"role_arn": _}
+_params_39: DeleteBlueGreenDeploymentInputDict = {"blue_green_deployment_identifier": _}
+_params_40: DeleteCustomDBEngineVersionInputDict = {"engine": _, "engine_version": _}
+_params_41: DeleteDBClusterAutomatedBackupInputDict = {"db_cluster_resource_id": _}
+_params_42: DeleteDBClusterEndpointInputDict = {"db_cluster_endpoint_identifier": _}
+_params_43: DeleteDBClusterInputDict = {"db_cluster_identifier": _}
+_params_44: DeleteDBClusterParameterGroupInputDict = {
+    "db_cluster_parameter_group_name": _
+}
+_params_45: DeleteDBClusterSnapshotInputDict = {"db_cluster_snapshot_identifier": _}
+_params_46: DeleteDBInstanceAutomatedBackupInputDict = {}
+_params_47: DeleteDBInstanceInputDict = {"db_instance_identifier": _}
+_params_48: DeleteDBParameterGroupInputDict = {"db_parameter_group_name": _}
+_params_49: DeleteDBProxyEndpointInputDict = {"db_proxy_endpoint_name": _}
+_params_50: DeleteDBProxyInputDict = {"db_proxy_name": _}
+_params_51: DeleteDBSecurityGroupInputDict = {"db_security_group_name": _}
+_params_52: DeleteDBShardGroupInputDict = {"db_shard_group_identifier": _}
+_params_53: DeleteDBSnapshotInputDict = {"db_snapshot_identifier": _}
+_params_54: DeleteDBSubnetGroupInputDict = {"db_subnet_group_name": _}
+_params_55: DeleteEventSubscriptionInputDict = {"subscription_name": _}
+_params_56: DeleteGlobalClusterInputDict = {"global_cluster_identifier": _}
+_params_57: DeleteIntegrationInputDict = {"integration_identifier": _}
+_params_58: DeleteOptionGroupInputDict = {"option_group_name": _}
+_params_59: DeleteTenantDatabaseInputDict = {
+    "db_instance_identifier": _,
+    "tenant_db_name": _,
+}
+_params_60: DeregisterDBProxyTargetsInputDict = {"db_proxy_name": _}
+_params_61: DescribeAccountAttributesInputDict = {}
+_params_62: DescribeBlueGreenDeploymentsInputDict = {}
+_params_63: DescribeCertificatesInputDict = {}
+_params_64: DescribeDBCapacityReservationsInputDict = {}
+_params_65: DescribeDBClusterAutomatedBackupsInputDict = {}
+_params_66: DescribeDBClusterBacktracksInputDict = {"db_cluster_identifier": _}
+_params_67: DescribeDBClusterEndpointsInputDict = {}
+_params_68: DescribeDBClusterParameterGroupsInputDict = {}
+_params_69: DescribeDBClusterParametersInputDict = {
+    "db_cluster_parameter_group_name": _
+}
+_params_70: DescribeDBClustersInputDict = {}
+_params_71: DescribeDBClusterSnapshotAttributesInputDict = {
+    "db_cluster_snapshot_identifier": _
+}
+_params_72: DescribeDBClusterSnapshotsInputDict = {}
+_params_73: DescribeDBEngineVersionsInputDict = {}
+_params_74: DescribeDBInstanceAutomatedBackupsInputDict = {}
+_params_75: DescribeDBInstancesInputDict = {}
+_params_76: DescribeDBLogFilesInputDict = {"db_instance_identifier": _}
+_params_77: DescribeDBMajorEngineVersionsInputDict = {}
+_params_78: DescribeDBParameterGroupsInputDict = {}
+_params_79: DescribeDBParametersInputDict = {"db_parameter_group_name": _}
+_params_80: DescribeDBProxiesInputDict = {}
+_params_81: DescribeDBProxyEndpointsInputDict = {}
+_params_82: DescribeDBProxyTargetGroupsInputDict = {"db_proxy_name": _}
+_params_83: DescribeDBProxyTargetsInputDict = {"db_proxy_name": _}
+_params_84: DescribeDBRecommendationsInputDict = {}
+_params_85: DescribeDBSecurityGroupsInputDict = {}
+_params_86: DescribeDBShardGroupsInputDict = {}
+_params_87: DescribeDBSnapshotAttributesInputDict = {"db_snapshot_identifier": _}
+_params_88: DescribeDBSnapshotsInputDict = {}
+_params_89: DescribeDBSnapshotTenantDatabasesInputDict = {}
+_params_90: DescribeDBSubnetGroupsInputDict = {}
+_params_91: DescribeEngineDefaultClusterParametersInputDict = {
+    "db_parameter_group_family": _
+}
+_params_92: DescribeEngineDefaultParametersInputDict = {"db_parameter_group_family": _}
+_params_93: DescribeEventCategoriesInputDict = {}
+_params_94: DescribeEventsInputDict = {}
+_params_95: DescribeEventSubscriptionsInputDict = {}
+_params_96: DescribeExportTasksInputDict = {}
+_params_97: DescribeGlobalClustersInputDict = {}
+_params_98: DescribeIntegrationsInputDict = {}
+_params_99: DescribeOptionGroupOptionsInputDict = {"engine_name": _}
+_params_100: DescribeOptionGroupsInputDict = {}
+_params_101: DescribeOrderableDBInstanceOptionsInputDict = {"engine": _}
+_params_102: DescribePendingMaintenanceActionsInputDict = {}
+_params_103: DescribeReservedDBInstancesInputDict = {}
+_params_104: DescribeReservedDBInstancesOfferingsInputDict = {}
+_params_105: DescribeServerlessV2PlatformVersionsInputDict = {}
+_params_106: DescribeSourceRegionsInputDict = {}
+_params_107: DescribeTenantDatabasesInputDict = {}
+_params_108: DescribeValidDBInstanceModificationsInputDict = {
+    "db_instance_identifier": _
+}
+_params_109: DisableHttpEndpointInputDict = {"resource_arn": _}
+_params_110: DownloadDBLogFilePortionInputDict = {
+    "db_instance_identifier": _,
+    "log_file_name": _,
+}
+_params_111: EnableHttpEndpointInputDict = {"resource_arn": _}
+_params_112: FailoverDBClusterInputDict = {"db_cluster_identifier": _}
+_params_113: FailoverGlobalClusterInputDict = {
+    "global_cluster_identifier": _,
+    "target_db_cluster_identifier": _,
+}
+_params_114: FilterDict = {"name": _, "values": _}
+_params_115: ListTagsForResourceInputDict = {"resource_name": _}
+_params_116: ModifyActivityStreamInputDict = {}
+_params_117: ModifyAdditionalStorageVolumeDict = {"volume_name": _}
+_params_118: ModifyCertificatesInputDict = {}
+_params_119: ModifyCurrentDBClusterCapacityInputDict = {"db_cluster_identifier": _}
+_params_120: ModifyCustomDBEngineVersionInputDict = {"engine": _, "engine_version": _}
+_params_121: ModifyDBCapacityReservationInputDict = {
+    "db_capacity_reservation_identifier": _
+}
+_params_122: ModifyDBClusterEndpointInputDict = {"db_cluster_endpoint_identifier": _}
+_params_123: ModifyDBClusterInputDict = {"db_cluster_identifier": _}
+_params_124: ModifyDBClusterParameterGroupInputDict = {
+    "db_cluster_parameter_group_name": _,
+    "parameters": _,
+}
+_params_125: ModifyDBClusterSnapshotAttributeInputDict = {
+    "db_cluster_snapshot_identifier": _,
+    "attribute_name": _,
+}
+_params_126: ModifyDBInstanceInputDict = {"db_instance_identifier": _}
+_params_127: ModifyDBParameterGroupInputDict = {
+    "db_parameter_group_name": _,
+    "parameters": _,
+}
+_params_128: ModifyDBProxyEndpointInputDict = {"db_proxy_endpoint_name": _}
+_params_129: ModifyDBProxyInputDict = {"db_proxy_name": _}
+_params_130: ModifyDBProxyTargetGroupInputDict = {
+    "target_group_name": _,
+    "db_proxy_name": _,
+}
+_params_131: ModifyDBRecommendationInputDict = {"recommendation_id": _}
+_params_132: ModifyDBShardGroupInputDict = {"db_shard_group_identifier": _}
+_params_133: ModifyDBSnapshotAttributeInputDict = {
+    "db_snapshot_identifier": _,
+    "attribute_name": _,
+}
+_params_134: ModifyDBSnapshotInputDict = {"db_snapshot_identifier": _}
+_params_135: ModifyDBSubnetGroupInputDict = {"db_subnet_group_name": _, "subnet_ids": _}
+_params_136: ModifyEventSubscriptionInputDict = {"subscription_name": _}
+_params_137: ModifyGlobalClusterInputDict = {"global_cluster_identifier": _}
+_params_138: ModifyIntegrationInputDict = {"integration_identifier": _}
+_params_139: ModifyOptionGroupInputDict = {"option_group_name": _}
+_params_140: ModifyTenantDatabaseInputDict = {
+    "db_instance_identifier": _,
+    "tenant_db_name": _,
+}
+_params_141: OptionConfigurationDict = {"option_name": _}
+_params_142: OptionSettingDict = {}
+_params_143: ParameterDict = {}
+_params_144: ProcessorFeatureDict = {}
+_params_145: PromoteReadReplicaDBClusterInputDict = {"db_cluster_identifier": _}
+_params_146: PromoteReadReplicaInputDict = {"db_instance_identifier": _}
+_params_147: PurchaseReservedDBInstancesOfferingInputDict = {
+    "reserved_db_instances_offering_id": _
+}
+_params_148: RdsCustomClusterConfigurationDict = {}
+_params_149: RebootDBClusterInputDict = {"db_cluster_identifier": _}
+_params_150: RebootDBInstanceInputDict = {"db_instance_identifier": _}
+_params_151: RebootDBShardGroupInputDict = {"db_shard_group_identifier": _}
+_params_152: RecommendedActionUpdateDict = {"action_id": _, "status": _}
+_params_153: RegisterDBProxyTargetsInputDict = {"db_proxy_name": _}
+_params_154: RemoveFromGlobalClusterInputDict = {
+    "global_cluster_identifier": _,
+    "db_cluster_identifier": _,
+}
+_params_155: RemoveRoleFromDBClusterInputDict = {
+    "db_cluster_identifier": _,
+    "role_arn": _,
+}
+_params_156: RemoveRoleFromDBInstanceInputDict = {
+    "db_instance_identifier": _,
+    "role_arn": _,
+    "feature_name": _,
+}
+_params_157: RemoveSourceIdentifierFromSubscriptionInputDict = {
+    "subscription_name": _,
+    "source_identifier": _,
+}
+_params_158: RemoveTagsFromResourceInputDict = {"resource_name": _, "tag_keys": _}
+_params_159: ResetDBClusterParameterGroupInputDict = {
+    "db_cluster_parameter_group_name": _
+}
+_params_160: ResetDBParameterGroupInputDict = {"db_parameter_group_name": _}
+_params_161: RestoreDBClusterFromS3InputDict = {
+    "db_cluster_identifier": _,
+    "engine": _,
+    "master_username": _,
+    "source_engine": _,
+    "source_engine_version": _,
+    "s3_bucket_name": _,
+    "s3_ingestion_role_arn": _,
+}
+_params_162: RestoreDBClusterFromSnapshotInputDict = {
+    "db_cluster_identifier": _,
+    "snapshot_identifier": _,
+    "engine": _,
+}
+_params_163: RestoreDBClusterToPointInTimeInputDict = {"db_cluster_identifier": _}
+_params_164: RestoreDBInstanceFromDBSnapshotInputDict = {"db_instance_identifier": _}
+_params_165: RestoreDBInstanceFromS3InputDict = {
+    "db_instance_identifier": _,
+    "db_instance_class": _,
+    "engine": _,
+    "source_engine": _,
+    "source_engine_version": _,
+    "s3_bucket_name": _,
+    "s3_ingestion_role_arn": _,
+}
+_params_166: RestoreDBInstanceToPointInTimeInputDict = {
+    "target_db_instance_identifier": _
+}
+_params_167: RevokeDBSecurityGroupIngressInputDict = {"db_security_group_name": _}
+_params_168: ScalingConfigurationDict = {}
+_params_169: ServerlessV2ScalingConfigurationDict = {}
+_params_170: StartActivityStreamInputDict = {
+    "resource_arn": _,
+    "mode": _,
+    "kms_key_id": _,
+}
+_params_171: StartDBClusterInputDict = {"db_cluster_identifier": _}
+_params_172: StartDBInstanceAutomatedBackupsReplicationInputDict = {
+    "source_db_instance_arn": _
+}
+_params_173: StartDBInstanceInputDict = {"db_instance_identifier": _}
+_params_174: StartExportTaskInputDict = {
+    "export_task_identifier": _,
+    "source_arn": _,
+    "s3_bucket_name": _,
+    "iam_role_arn": _,
+    "kms_key_id": _,
+}
+_params_175: StopActivityStreamInputDict = {"resource_arn": _}
+_params_176: StopDBClusterInputDict = {"db_cluster_identifier": _}
+_params_177: StopDBInstanceAutomatedBackupsReplicationInputDict = {
+    "source_db_instance_arn": _
+}
+_params_178: StopDBInstanceInputDict = {"db_instance_identifier": _}
+_params_179: SwitchoverBlueGreenDeploymentInputDict = {
+    "blue_green_deployment_identifier": _
+}
+_params_180: SwitchoverGlobalClusterInputDict = {
+    "global_cluster_identifier": _,
+    "target_db_cluster_identifier": _,
+}
+_params_181: SwitchoverReadReplicaInputDict = {"db_instance_identifier": _}
+_params_182: TagDict = {}
+_params_183: TagSpecificationDict = {}
+_params_184: TargetResourceConfigurationDict = {"source_arn": _}
+_params_185: UserAuthConfigDict = {}
+
+
+def _request[T](form: type[T]) -> T:
+    raise NotImplementedError
+
+
+async def check_async_calls(client: AsyncRDSClient) -> None:
+    pass
+    await client.add_role_to_db_cluster(db_cluster_identifier=_, role_arn=_)
+    await client.add_role_to_db_cluster(**_request(AddRoleToDBClusterInputDict))
+    await client.add_role_to_db_cluster(_request(AddRoleToDBClusterInput))
+    await client.add_role_to_db_cluster(_request(AddRoleToDBClusterInputDict))
+    await client.add_role_to_db_instance(
+        db_instance_identifier=_, role_arn=_, feature_name=_
+    )
+    await client.add_role_to_db_instance(**_request(AddRoleToDBInstanceInputDict))
+    await client.add_role_to_db_instance(_request(AddRoleToDBInstanceInput))
+    await client.add_role_to_db_instance(_request(AddRoleToDBInstanceInputDict))
+    await client.add_source_identifier_to_subscription(
+        subscription_name=_, source_identifier=_
+    )
+    await client.add_source_identifier_to_subscription(
+        **_request(AddSourceIdentifierToSubscriptionInputDict)
+    )
+    await client.add_source_identifier_to_subscription(
+        _request(AddSourceIdentifierToSubscriptionInput)
+    )
+    await client.add_source_identifier_to_subscription(
+        _request(AddSourceIdentifierToSubscriptionInputDict)
+    )
+    await client.add_tags_to_resource(resource_name=_, tags=_)
+    await client.add_tags_to_resource(**_request(AddTagsToResourceInputDict))
+    await client.add_tags_to_resource(_request(AddTagsToResourceInput))
+    await client.add_tags_to_resource(_request(AddTagsToResourceInputDict))
+    await client.apply_pending_maintenance_action(
+        resource_identifier=_, apply_action=_, opt_in_type=_
+    )
+    await client.apply_pending_maintenance_action(
+        **_request(ApplyPendingMaintenanceActionInputDict)
+    )
+    await client.apply_pending_maintenance_action(
+        _request(ApplyPendingMaintenanceActionInput)
+    )
+    await client.apply_pending_maintenance_action(
+        _request(ApplyPendingMaintenanceActionInputDict)
+    )
+    await client.authorize_db_security_group_ingress(db_security_group_name=_)
+    await client.authorize_db_security_group_ingress(
+        **_request(AuthorizeDBSecurityGroupIngressInputDict)
+    )
+    await client.authorize_db_security_group_ingress(
+        _request(AuthorizeDBSecurityGroupIngressInput)
+    )
+    await client.authorize_db_security_group_ingress(
+        _request(AuthorizeDBSecurityGroupIngressInputDict)
+    )
+    await client.backtrack_db_cluster(db_cluster_identifier=_, backtrack_to=_)
+    await client.backtrack_db_cluster(**_request(BacktrackDBClusterInputDict))
+    await client.backtrack_db_cluster(_request(BacktrackDBClusterInput))
+    await client.backtrack_db_cluster(_request(BacktrackDBClusterInputDict))
+    await client.cancel_db_capacity_reservation(db_capacity_reservation_identifier=_)
+    await client.cancel_db_capacity_reservation(
+        **_request(CancelDBCapacityReservationInputDict)
+    )
+    await client.cancel_db_capacity_reservation(
+        _request(CancelDBCapacityReservationInput)
+    )
+    await client.cancel_db_capacity_reservation(
+        _request(CancelDBCapacityReservationInputDict)
+    )
+    await client.cancel_export_task(export_task_identifier=_)
+    await client.cancel_export_task(**_request(CancelExportTaskInputDict))
+    await client.cancel_export_task(_request(CancelExportTaskInput))
+    await client.cancel_export_task(_request(CancelExportTaskInputDict))
+    await client.copy_db_cluster_parameter_group(
+        source_db_cluster_parameter_group_identifier=_,
+        target_db_cluster_parameter_group_identifier=_,
+        target_db_cluster_parameter_group_description=_,
+    )
+    await client.copy_db_cluster_parameter_group(
+        **_request(CopyDBClusterParameterGroupInputDict)
+    )
+    await client.copy_db_cluster_parameter_group(
+        _request(CopyDBClusterParameterGroupInput)
+    )
+    await client.copy_db_cluster_parameter_group(
+        _request(CopyDBClusterParameterGroupInputDict)
+    )
+    await client.copy_db_cluster_snapshot(
+        source_db_cluster_snapshot_identifier=_, target_db_cluster_snapshot_identifier=_
+    )
+    await client.copy_db_cluster_snapshot(**_request(CopyDBClusterSnapshotInputDict))
+    await client.copy_db_cluster_snapshot(_request(CopyDBClusterSnapshotInput))
+    await client.copy_db_cluster_snapshot(_request(CopyDBClusterSnapshotInputDict))
+    await client.copy_db_parameter_group(
+        source_db_parameter_group_identifier=_,
+        target_db_parameter_group_identifier=_,
+        target_db_parameter_group_description=_,
+    )
+    await client.copy_db_parameter_group(**_request(CopyDBParameterGroupInputDict))
+    await client.copy_db_parameter_group(_request(CopyDBParameterGroupInput))
+    await client.copy_db_parameter_group(_request(CopyDBParameterGroupInputDict))
+    await client.copy_db_snapshot(
+        source_db_snapshot_identifier=_, target_db_snapshot_identifier=_
+    )
+    await client.copy_db_snapshot(**_request(CopyDBSnapshotInputDict))
+    await client.copy_db_snapshot(_request(CopyDBSnapshotInput))
+    await client.copy_db_snapshot(_request(CopyDBSnapshotInputDict))
+    await client.copy_option_group(
+        source_option_group_identifier=_,
+        target_option_group_identifier=_,
+        target_option_group_description=_,
+    )
+    await client.copy_option_group(**_request(CopyOptionGroupInputDict))
+    await client.copy_option_group(_request(CopyOptionGroupInput))
+    await client.copy_option_group(_request(CopyOptionGroupInputDict))
+    await client.create_blue_green_deployment(blue_green_deployment_name=_, source=_)
+    await client.create_blue_green_deployment(
+        **_request(CreateBlueGreenDeploymentInputDict)
+    )
+    await client.create_blue_green_deployment(_request(CreateBlueGreenDeploymentInput))
+    await client.create_blue_green_deployment(
+        _request(CreateBlueGreenDeploymentInputDict)
+    )
+    await client.create_custom_db_engine_version(engine=_, engine_version=_)
+    await client.create_custom_db_engine_version(
+        **_request(CreateCustomDBEngineVersionInputDict)
+    )
+    await client.create_custom_db_engine_version(
+        _request(CreateCustomDBEngineVersionInput)
+    )
+    await client.create_custom_db_engine_version(
+        _request(CreateCustomDBEngineVersionInputDict)
+    )
+    await client.create_db_capacity_reservation(
+        db_capacity_reservation_name=_,
+        db_instance_class=_,
+        engine=_,
+        capacity_per_availability_zone=_,
+        availability_zones=_,
+    )
+    await client.create_db_capacity_reservation(
+        **_request(CreateDBCapacityReservationInputDict)
+    )
+    await client.create_db_capacity_reservation(
+        _request(CreateDBCapacityReservationInput)
+    )
+    await client.create_db_capacity_reservation(
+        _request(CreateDBCapacityReservationInputDict)
+    )
+    await client.create_db_cluster(db_cluster_identifier=_, engine=_)
+    await client.create_db_cluster(**_request(CreateDBClusterInputDict))
+    await client.create_db_cluster(_request(CreateDBClusterInput))
+    await client.create_db_cluster(_request(CreateDBClusterInputDict))
+    await client.create_db_cluster_endpoint(
+        db_cluster_identifier=_, db_cluster_endpoint_identifier=_, endpoint_type=_
+    )
+    await client.create_db_cluster_endpoint(
+        **_request(CreateDBClusterEndpointInputDict)
+    )
+    await client.create_db_cluster_endpoint(_request(CreateDBClusterEndpointInput))
+    await client.create_db_cluster_endpoint(_request(CreateDBClusterEndpointInputDict))
+    await client.create_db_cluster_parameter_group(
+        db_cluster_parameter_group_name=_, db_parameter_group_family=_, description=_
+    )
+    await client.create_db_cluster_parameter_group(
+        **_request(CreateDBClusterParameterGroupInputDict)
+    )
+    await client.create_db_cluster_parameter_group(
+        _request(CreateDBClusterParameterGroupInput)
+    )
+    await client.create_db_cluster_parameter_group(
+        _request(CreateDBClusterParameterGroupInputDict)
+    )
+    await client.create_db_cluster_snapshot(
+        db_cluster_snapshot_identifier=_, db_cluster_identifier=_
+    )
+    await client.create_db_cluster_snapshot(
+        **_request(CreateDBClusterSnapshotInputDict)
+    )
+    await client.create_db_cluster_snapshot(_request(CreateDBClusterSnapshotInput))
+    await client.create_db_cluster_snapshot(_request(CreateDBClusterSnapshotInputDict))
+    await client.create_db_instance(
+        db_instance_identifier=_, db_instance_class=_, engine=_
+    )
+    await client.create_db_instance(**_request(CreateDBInstanceInputDict))
+    await client.create_db_instance(_request(CreateDBInstanceInput))
+    await client.create_db_instance(_request(CreateDBInstanceInputDict))
+    await client.create_db_instance_read_replica(db_instance_identifier=_)
+    await client.create_db_instance_read_replica(
+        **_request(CreateDBInstanceReadReplicaInputDict)
+    )
+    await client.create_db_instance_read_replica(
+        _request(CreateDBInstanceReadReplicaInput)
+    )
+    await client.create_db_instance_read_replica(
+        _request(CreateDBInstanceReadReplicaInputDict)
+    )
+    await client.create_db_parameter_group(
+        db_parameter_group_name=_, db_parameter_group_family=_, description=_
+    )
+    await client.create_db_parameter_group(**_request(CreateDBParameterGroupInputDict))
+    await client.create_db_parameter_group(_request(CreateDBParameterGroupInput))
+    await client.create_db_parameter_group(_request(CreateDBParameterGroupInputDict))
+    await client.create_db_proxy(
+        db_proxy_name=_, engine_family=_, role_arn=_, vpc_subnet_ids=_
+    )
+    await client.create_db_proxy(**_request(CreateDBProxyInputDict))
+    await client.create_db_proxy(_request(CreateDBProxyInput))
+    await client.create_db_proxy(_request(CreateDBProxyInputDict))
+    await client.create_db_proxy_endpoint(
+        db_proxy_name=_, db_proxy_endpoint_name=_, vpc_subnet_ids=_
+    )
+    await client.create_db_proxy_endpoint(**_request(CreateDBProxyEndpointInputDict))
+    await client.create_db_proxy_endpoint(_request(CreateDBProxyEndpointInput))
+    await client.create_db_proxy_endpoint(_request(CreateDBProxyEndpointInputDict))
+    await client.create_db_security_group(
+        db_security_group_name=_, db_security_group_description=_
+    )
+    await client.create_db_security_group(**_request(CreateDBSecurityGroupInputDict))
+    await client.create_db_security_group(_request(CreateDBSecurityGroupInput))
+    await client.create_db_security_group(_request(CreateDBSecurityGroupInputDict))
+    await client.create_db_shard_group(
+        db_shard_group_identifier=_, db_cluster_identifier=_, max_acu=_
+    )
+    await client.create_db_shard_group(**_request(CreateDBShardGroupInputDict))
+    await client.create_db_shard_group(_request(CreateDBShardGroupInput))
+    await client.create_db_shard_group(_request(CreateDBShardGroupInputDict))
+    await client.create_db_snapshot(db_snapshot_identifier=_, db_instance_identifier=_)
+    await client.create_db_snapshot(**_request(CreateDBSnapshotInputDict))
+    await client.create_db_snapshot(_request(CreateDBSnapshotInput))
+    await client.create_db_snapshot(_request(CreateDBSnapshotInputDict))
+    await client.create_db_subnet_group(
+        db_subnet_group_name=_, db_subnet_group_description=_, subnet_ids=_
+    )
+    await client.create_db_subnet_group(**_request(CreateDBSubnetGroupInputDict))
+    await client.create_db_subnet_group(_request(CreateDBSubnetGroupInput))
+    await client.create_db_subnet_group(_request(CreateDBSubnetGroupInputDict))
+    await client.create_event_subscription(subscription_name=_, sns_topic_arn=_)
+    await client.create_event_subscription(**_request(CreateEventSubscriptionInputDict))
+    await client.create_event_subscription(_request(CreateEventSubscriptionInput))
+    await client.create_event_subscription(_request(CreateEventSubscriptionInputDict))
+    await client.create_global_cluster(global_cluster_identifier=_)
+    await client.create_global_cluster(**_request(CreateGlobalClusterInputDict))
+    await client.create_global_cluster(_request(CreateGlobalClusterInput))
+    await client.create_global_cluster(_request(CreateGlobalClusterInputDict))
+    await client.create_integration(source_arn=_, target_arn=_, integration_name=_)
+    await client.create_integration(**_request(CreateIntegrationInputDict))
+    await client.create_integration(_request(CreateIntegrationInput))
+    await client.create_integration(_request(CreateIntegrationInputDict))
+    await client.create_option_group(
+        option_group_name=_,
+        engine_name=_,
+        major_engine_version=_,
+        option_group_description=_,
+    )
+    await client.create_option_group(**_request(CreateOptionGroupInputDict))
+    await client.create_option_group(_request(CreateOptionGroupInput))
+    await client.create_option_group(_request(CreateOptionGroupInputDict))
+    await client.create_tenant_database(
+        db_instance_identifier=_, tenant_db_name=_, master_username=_
+    )
+    await client.create_tenant_database(**_request(CreateTenantDatabaseInputDict))
+    await client.create_tenant_database(_request(CreateTenantDatabaseInput))
+    await client.create_tenant_database(_request(CreateTenantDatabaseInputDict))
+    await client.delete_blue_green_deployment(blue_green_deployment_identifier=_)
+    await client.delete_blue_green_deployment(
+        **_request(DeleteBlueGreenDeploymentInputDict)
+    )
+    await client.delete_blue_green_deployment(_request(DeleteBlueGreenDeploymentInput))
+    await client.delete_blue_green_deployment(
+        _request(DeleteBlueGreenDeploymentInputDict)
+    )
+    await client.delete_custom_db_engine_version(engine=_, engine_version=_)
+    await client.delete_custom_db_engine_version(
+        **_request(DeleteCustomDBEngineVersionInputDict)
+    )
+    await client.delete_custom_db_engine_version(
+        _request(DeleteCustomDBEngineVersionInput)
+    )
+    await client.delete_custom_db_engine_version(
+        _request(DeleteCustomDBEngineVersionInputDict)
+    )
+    await client.delete_db_cluster(db_cluster_identifier=_)
+    await client.delete_db_cluster(**_request(DeleteDBClusterInputDict))
+    await client.delete_db_cluster(_request(DeleteDBClusterInput))
+    await client.delete_db_cluster(_request(DeleteDBClusterInputDict))
+    await client.delete_db_cluster_automated_backup(db_cluster_resource_id=_)
+    await client.delete_db_cluster_automated_backup(
+        **_request(DeleteDBClusterAutomatedBackupInputDict)
+    )
+    await client.delete_db_cluster_automated_backup(
+        _request(DeleteDBClusterAutomatedBackupInput)
+    )
+    await client.delete_db_cluster_automated_backup(
+        _request(DeleteDBClusterAutomatedBackupInputDict)
+    )
+    await client.delete_db_cluster_endpoint(db_cluster_endpoint_identifier=_)
+    await client.delete_db_cluster_endpoint(
+        **_request(DeleteDBClusterEndpointInputDict)
+    )
+    await client.delete_db_cluster_endpoint(_request(DeleteDBClusterEndpointInput))
+    await client.delete_db_cluster_endpoint(_request(DeleteDBClusterEndpointInputDict))
+    await client.delete_db_cluster_parameter_group(db_cluster_parameter_group_name=_)
+    await client.delete_db_cluster_parameter_group(
+        **_request(DeleteDBClusterParameterGroupInputDict)
+    )
+    await client.delete_db_cluster_parameter_group(
+        _request(DeleteDBClusterParameterGroupInput)
+    )
+    await client.delete_db_cluster_parameter_group(
+        _request(DeleteDBClusterParameterGroupInputDict)
+    )
+    await client.delete_db_cluster_snapshot(db_cluster_snapshot_identifier=_)
+    await client.delete_db_cluster_snapshot(
+        **_request(DeleteDBClusterSnapshotInputDict)
+    )
+    await client.delete_db_cluster_snapshot(_request(DeleteDBClusterSnapshotInput))
+    await client.delete_db_cluster_snapshot(_request(DeleteDBClusterSnapshotInputDict))
+    await client.delete_db_instance(db_instance_identifier=_)
+    await client.delete_db_instance(**_request(DeleteDBInstanceInputDict))
+    await client.delete_db_instance(_request(DeleteDBInstanceInput))
+    await client.delete_db_instance(_request(DeleteDBInstanceInputDict))
+    await client.delete_db_instance_automated_backup()
+    await client.delete_db_instance_automated_backup(
+        **_request(DeleteDBInstanceAutomatedBackupInputDict)
+    )
+    await client.delete_db_instance_automated_backup(
+        _request(DeleteDBInstanceAutomatedBackupInput)
+    )
+    await client.delete_db_instance_automated_backup(
+        _request(DeleteDBInstanceAutomatedBackupInputDict)
+    )
+    await client.delete_db_parameter_group(db_parameter_group_name=_)
+    await client.delete_db_parameter_group(**_request(DeleteDBParameterGroupInputDict))
+    await client.delete_db_parameter_group(_request(DeleteDBParameterGroupInput))
+    await client.delete_db_parameter_group(_request(DeleteDBParameterGroupInputDict))
+    await client.delete_db_proxy(db_proxy_name=_)
+    await client.delete_db_proxy(**_request(DeleteDBProxyInputDict))
+    await client.delete_db_proxy(_request(DeleteDBProxyInput))
+    await client.delete_db_proxy(_request(DeleteDBProxyInputDict))
+    await client.delete_db_proxy_endpoint(db_proxy_endpoint_name=_)
+    await client.delete_db_proxy_endpoint(**_request(DeleteDBProxyEndpointInputDict))
+    await client.delete_db_proxy_endpoint(_request(DeleteDBProxyEndpointInput))
+    await client.delete_db_proxy_endpoint(_request(DeleteDBProxyEndpointInputDict))
+    await client.delete_db_security_group(db_security_group_name=_)
+    await client.delete_db_security_group(**_request(DeleteDBSecurityGroupInputDict))
+    await client.delete_db_security_group(_request(DeleteDBSecurityGroupInput))
+    await client.delete_db_security_group(_request(DeleteDBSecurityGroupInputDict))
+    await client.delete_db_shard_group(db_shard_group_identifier=_)
+    await client.delete_db_shard_group(**_request(DeleteDBShardGroupInputDict))
+    await client.delete_db_shard_group(_request(DeleteDBShardGroupInput))
+    await client.delete_db_shard_group(_request(DeleteDBShardGroupInputDict))
+    await client.delete_db_snapshot(db_snapshot_identifier=_)
+    await client.delete_db_snapshot(**_request(DeleteDBSnapshotInputDict))
+    await client.delete_db_snapshot(_request(DeleteDBSnapshotInput))
+    await client.delete_db_snapshot(_request(DeleteDBSnapshotInputDict))
+    await client.delete_db_subnet_group(db_subnet_group_name=_)
+    await client.delete_db_subnet_group(**_request(DeleteDBSubnetGroupInputDict))
+    await client.delete_db_subnet_group(_request(DeleteDBSubnetGroupInput))
+    await client.delete_db_subnet_group(_request(DeleteDBSubnetGroupInputDict))
+    await client.delete_event_subscription(subscription_name=_)
+    await client.delete_event_subscription(**_request(DeleteEventSubscriptionInputDict))
+    await client.delete_event_subscription(_request(DeleteEventSubscriptionInput))
+    await client.delete_event_subscription(_request(DeleteEventSubscriptionInputDict))
+    await client.delete_global_cluster(global_cluster_identifier=_)
+    await client.delete_global_cluster(**_request(DeleteGlobalClusterInputDict))
+    await client.delete_global_cluster(_request(DeleteGlobalClusterInput))
+    await client.delete_global_cluster(_request(DeleteGlobalClusterInputDict))
+    await client.delete_integration(integration_identifier=_)
+    await client.delete_integration(**_request(DeleteIntegrationInputDict))
+    await client.delete_integration(_request(DeleteIntegrationInput))
+    await client.delete_integration(_request(DeleteIntegrationInputDict))
+    await client.delete_option_group(option_group_name=_)
+    await client.delete_option_group(**_request(DeleteOptionGroupInputDict))
+    await client.delete_option_group(_request(DeleteOptionGroupInput))
+    await client.delete_option_group(_request(DeleteOptionGroupInputDict))
+    await client.delete_tenant_database(db_instance_identifier=_, tenant_db_name=_)
+    await client.delete_tenant_database(**_request(DeleteTenantDatabaseInputDict))
+    await client.delete_tenant_database(_request(DeleteTenantDatabaseInput))
+    await client.delete_tenant_database(_request(DeleteTenantDatabaseInputDict))
+    await client.deregister_db_proxy_targets(db_proxy_name=_)
+    await client.deregister_db_proxy_targets(
+        **_request(DeregisterDBProxyTargetsInputDict)
+    )
+    await client.deregister_db_proxy_targets(_request(DeregisterDBProxyTargetsInput))
+    await client.deregister_db_proxy_targets(
+        _request(DeregisterDBProxyTargetsInputDict)
+    )
+    await client.describe_account_attributes()
+    await client.describe_account_attributes(
+        **_request(DescribeAccountAttributesInputDict)
+    )
+    await client.describe_account_attributes(_request(DescribeAccountAttributesInput))
+    await client.describe_account_attributes(
+        _request(DescribeAccountAttributesInputDict)
+    )
+    await client.describe_blue_green_deployments()
+    await client.describe_blue_green_deployments(
+        **_request(DescribeBlueGreenDeploymentsInputDict)
+    )
+    await client.describe_blue_green_deployments(
+        _request(DescribeBlueGreenDeploymentsInput)
+    )
+    await client.describe_blue_green_deployments(
+        _request(DescribeBlueGreenDeploymentsInputDict)
+    )
+    await client.describe_certificates()
+    await client.describe_certificates(**_request(DescribeCertificatesInputDict))
+    await client.describe_certificates(_request(DescribeCertificatesInput))
+    await client.describe_certificates(_request(DescribeCertificatesInputDict))
+    await client.describe_db_capacity_reservations()
+    await client.describe_db_capacity_reservations(
+        **_request(DescribeDBCapacityReservationsInputDict)
+    )
+    await client.describe_db_capacity_reservations(
+        _request(DescribeDBCapacityReservationsInput)
+    )
+    await client.describe_db_capacity_reservations(
+        _request(DescribeDBCapacityReservationsInputDict)
+    )
+    await client.describe_db_cluster_automated_backups()
+    await client.describe_db_cluster_automated_backups(
+        **_request(DescribeDBClusterAutomatedBackupsInputDict)
+    )
+    await client.describe_db_cluster_automated_backups(
+        _request(DescribeDBClusterAutomatedBackupsInput)
+    )
+    await client.describe_db_cluster_automated_backups(
+        _request(DescribeDBClusterAutomatedBackupsInputDict)
+    )
+    await client.describe_db_cluster_backtracks(db_cluster_identifier=_)
+    await client.describe_db_cluster_backtracks(
+        **_request(DescribeDBClusterBacktracksInputDict)
+    )
+    await client.describe_db_cluster_backtracks(
+        _request(DescribeDBClusterBacktracksInput)
+    )
+    await client.describe_db_cluster_backtracks(
+        _request(DescribeDBClusterBacktracksInputDict)
+    )
+    await client.describe_db_cluster_endpoints()
+    await client.describe_db_cluster_endpoints(
+        **_request(DescribeDBClusterEndpointsInputDict)
+    )
+    await client.describe_db_cluster_endpoints(
+        _request(DescribeDBClusterEndpointsInput)
+    )
+    await client.describe_db_cluster_endpoints(
+        _request(DescribeDBClusterEndpointsInputDict)
+    )
+    await client.describe_db_cluster_parameter_groups()
+    await client.describe_db_cluster_parameter_groups(
+        **_request(DescribeDBClusterParameterGroupsInputDict)
+    )
+    await client.describe_db_cluster_parameter_groups(
+        _request(DescribeDBClusterParameterGroupsInput)
+    )
+    await client.describe_db_cluster_parameter_groups(
+        _request(DescribeDBClusterParameterGroupsInputDict)
+    )
+    await client.describe_db_cluster_parameters(db_cluster_parameter_group_name=_)
+    await client.describe_db_cluster_parameters(
+        **_request(DescribeDBClusterParametersInputDict)
+    )
+    await client.describe_db_cluster_parameters(
+        _request(DescribeDBClusterParametersInput)
+    )
+    await client.describe_db_cluster_parameters(
+        _request(DescribeDBClusterParametersInputDict)
+    )
+    await client.describe_db_clusters()
+    await client.describe_db_clusters(**_request(DescribeDBClustersInputDict))
+    await client.describe_db_clusters(_request(DescribeDBClustersInput))
+    await client.describe_db_clusters(_request(DescribeDBClustersInputDict))
+    await client.describe_db_cluster_snapshot_attributes(
+        db_cluster_snapshot_identifier=_
+    )
+    await client.describe_db_cluster_snapshot_attributes(
+        **_request(DescribeDBClusterSnapshotAttributesInputDict)
+    )
+    await client.describe_db_cluster_snapshot_attributes(
+        _request(DescribeDBClusterSnapshotAttributesInput)
+    )
+    await client.describe_db_cluster_snapshot_attributes(
+        _request(DescribeDBClusterSnapshotAttributesInputDict)
+    )
+    await client.describe_db_cluster_snapshots()
+    await client.describe_db_cluster_snapshots(
+        **_request(DescribeDBClusterSnapshotsInputDict)
+    )
+    await client.describe_db_cluster_snapshots(
+        _request(DescribeDBClusterSnapshotsInput)
+    )
+    await client.describe_db_cluster_snapshots(
+        _request(DescribeDBClusterSnapshotsInputDict)
+    )
+    await client.describe_db_engine_versions()
+    await client.describe_db_engine_versions(
+        **_request(DescribeDBEngineVersionsInputDict)
+    )
+    await client.describe_db_engine_versions(_request(DescribeDBEngineVersionsInput))
+    await client.describe_db_engine_versions(
+        _request(DescribeDBEngineVersionsInputDict)
+    )
+    await client.describe_db_instance_automated_backups()
+    await client.describe_db_instance_automated_backups(
+        **_request(DescribeDBInstanceAutomatedBackupsInputDict)
+    )
+    await client.describe_db_instance_automated_backups(
+        _request(DescribeDBInstanceAutomatedBackupsInput)
+    )
+    await client.describe_db_instance_automated_backups(
+        _request(DescribeDBInstanceAutomatedBackupsInputDict)
+    )
+    await client.describe_db_instances()
+    await client.describe_db_instances(**_request(DescribeDBInstancesInputDict))
+    await client.describe_db_instances(_request(DescribeDBInstancesInput))
+    await client.describe_db_instances(_request(DescribeDBInstancesInputDict))
+    await client.describe_db_log_files(db_instance_identifier=_)
+    await client.describe_db_log_files(**_request(DescribeDBLogFilesInputDict))
+    await client.describe_db_log_files(_request(DescribeDBLogFilesInput))
+    await client.describe_db_log_files(_request(DescribeDBLogFilesInputDict))
+    await client.describe_db_major_engine_versions()
+    await client.describe_db_major_engine_versions(
+        **_request(DescribeDBMajorEngineVersionsInputDict)
+    )
+    await client.describe_db_major_engine_versions(
+        _request(DescribeDBMajorEngineVersionsInput)
+    )
+    await client.describe_db_major_engine_versions(
+        _request(DescribeDBMajorEngineVersionsInputDict)
+    )
+    await client.describe_db_parameter_groups()
+    await client.describe_db_parameter_groups(
+        **_request(DescribeDBParameterGroupsInputDict)
+    )
+    await client.describe_db_parameter_groups(_request(DescribeDBParameterGroupsInput))
+    await client.describe_db_parameter_groups(
+        _request(DescribeDBParameterGroupsInputDict)
+    )
+    await client.describe_db_parameters(db_parameter_group_name=_)
+    await client.describe_db_parameters(**_request(DescribeDBParametersInputDict))
+    await client.describe_db_parameters(_request(DescribeDBParametersInput))
+    await client.describe_db_parameters(_request(DescribeDBParametersInputDict))
+    await client.describe_db_proxies()
+    await client.describe_db_proxies(**_request(DescribeDBProxiesInputDict))
+    await client.describe_db_proxies(_request(DescribeDBProxiesInput))
+    await client.describe_db_proxies(_request(DescribeDBProxiesInputDict))
+    await client.describe_db_proxy_endpoints()
+    await client.describe_db_proxy_endpoints(
+        **_request(DescribeDBProxyEndpointsInputDict)
+    )
+    await client.describe_db_proxy_endpoints(_request(DescribeDBProxyEndpointsInput))
+    await client.describe_db_proxy_endpoints(
+        _request(DescribeDBProxyEndpointsInputDict)
+    )
+    await client.describe_db_proxy_target_groups(db_proxy_name=_)
+    await client.describe_db_proxy_target_groups(
+        **_request(DescribeDBProxyTargetGroupsInputDict)
+    )
+    await client.describe_db_proxy_target_groups(
+        _request(DescribeDBProxyTargetGroupsInput)
+    )
+    await client.describe_db_proxy_target_groups(
+        _request(DescribeDBProxyTargetGroupsInputDict)
+    )
+    await client.describe_db_proxy_targets(db_proxy_name=_)
+    await client.describe_db_proxy_targets(**_request(DescribeDBProxyTargetsInputDict))
+    await client.describe_db_proxy_targets(_request(DescribeDBProxyTargetsInput))
+    await client.describe_db_proxy_targets(_request(DescribeDBProxyTargetsInputDict))
+    await client.describe_db_recommendations()
+    await client.describe_db_recommendations(
+        **_request(DescribeDBRecommendationsInputDict)
+    )
+    await client.describe_db_recommendations(_request(DescribeDBRecommendationsInput))
+    await client.describe_db_recommendations(
+        _request(DescribeDBRecommendationsInputDict)
+    )
+    await client.describe_db_security_groups()
+    await client.describe_db_security_groups(
+        **_request(DescribeDBSecurityGroupsInputDict)
+    )
+    await client.describe_db_security_groups(_request(DescribeDBSecurityGroupsInput))
+    await client.describe_db_security_groups(
+        _request(DescribeDBSecurityGroupsInputDict)
+    )
+    await client.describe_db_shard_groups()
+    await client.describe_db_shard_groups(**_request(DescribeDBShardGroupsInputDict))
+    await client.describe_db_shard_groups(_request(DescribeDBShardGroupsInput))
+    await client.describe_db_shard_groups(_request(DescribeDBShardGroupsInputDict))
+    await client.describe_db_snapshot_attributes(db_snapshot_identifier=_)
+    await client.describe_db_snapshot_attributes(
+        **_request(DescribeDBSnapshotAttributesInputDict)
+    )
+    await client.describe_db_snapshot_attributes(
+        _request(DescribeDBSnapshotAttributesInput)
+    )
+    await client.describe_db_snapshot_attributes(
+        _request(DescribeDBSnapshotAttributesInputDict)
+    )
+    await client.describe_db_snapshots()
+    await client.describe_db_snapshots(**_request(DescribeDBSnapshotsInputDict))
+    await client.describe_db_snapshots(_request(DescribeDBSnapshotsInput))
+    await client.describe_db_snapshots(_request(DescribeDBSnapshotsInputDict))
+    await client.describe_db_snapshot_tenant_databases()
+    await client.describe_db_snapshot_tenant_databases(
+        **_request(DescribeDBSnapshotTenantDatabasesInputDict)
+    )
+    await client.describe_db_snapshot_tenant_databases(
+        _request(DescribeDBSnapshotTenantDatabasesInput)
+    )
+    await client.describe_db_snapshot_tenant_databases(
+        _request(DescribeDBSnapshotTenantDatabasesInputDict)
+    )
+    await client.describe_db_subnet_groups()
+    await client.describe_db_subnet_groups(**_request(DescribeDBSubnetGroupsInputDict))
+    await client.describe_db_subnet_groups(_request(DescribeDBSubnetGroupsInput))
+    await client.describe_db_subnet_groups(_request(DescribeDBSubnetGroupsInputDict))
+    await client.describe_engine_default_cluster_parameters(db_parameter_group_family=_)
+    await client.describe_engine_default_cluster_parameters(
+        **_request(DescribeEngineDefaultClusterParametersInputDict)
+    )
+    await client.describe_engine_default_cluster_parameters(
+        _request(DescribeEngineDefaultClusterParametersInput)
+    )
+    await client.describe_engine_default_cluster_parameters(
+        _request(DescribeEngineDefaultClusterParametersInputDict)
+    )
+    await client.describe_engine_default_parameters(db_parameter_group_family=_)
+    await client.describe_engine_default_parameters(
+        **_request(DescribeEngineDefaultParametersInputDict)
+    )
+    await client.describe_engine_default_parameters(
+        _request(DescribeEngineDefaultParametersInput)
+    )
+    await client.describe_engine_default_parameters(
+        _request(DescribeEngineDefaultParametersInputDict)
+    )
+    await client.describe_event_categories()
+    await client.describe_event_categories(**_request(DescribeEventCategoriesInputDict))
+    await client.describe_event_categories(_request(DescribeEventCategoriesInput))
+    await client.describe_event_categories(_request(DescribeEventCategoriesInputDict))
+    await client.describe_events()
+    await client.describe_events(**_request(DescribeEventsInputDict))
+    await client.describe_events(_request(DescribeEventsInput))
+    await client.describe_events(_request(DescribeEventsInputDict))
+    await client.describe_event_subscriptions()
+    await client.describe_event_subscriptions(
+        **_request(DescribeEventSubscriptionsInputDict)
+    )
+    await client.describe_event_subscriptions(_request(DescribeEventSubscriptionsInput))
+    await client.describe_event_subscriptions(
+        _request(DescribeEventSubscriptionsInputDict)
+    )
+    await client.describe_export_tasks()
+    await client.describe_export_tasks(**_request(DescribeExportTasksInputDict))
+    await client.describe_export_tasks(_request(DescribeExportTasksInput))
+    await client.describe_export_tasks(_request(DescribeExportTasksInputDict))
+    await client.describe_global_clusters()
+    await client.describe_global_clusters(**_request(DescribeGlobalClustersInputDict))
+    await client.describe_global_clusters(_request(DescribeGlobalClustersInput))
+    await client.describe_global_clusters(_request(DescribeGlobalClustersInputDict))
+    await client.describe_integrations()
+    await client.describe_integrations(**_request(DescribeIntegrationsInputDict))
+    await client.describe_integrations(_request(DescribeIntegrationsInput))
+    await client.describe_integrations(_request(DescribeIntegrationsInputDict))
+    await client.describe_option_group_options(engine_name=_)
+    await client.describe_option_group_options(
+        **_request(DescribeOptionGroupOptionsInputDict)
+    )
+    await client.describe_option_group_options(
+        _request(DescribeOptionGroupOptionsInput)
+    )
+    await client.describe_option_group_options(
+        _request(DescribeOptionGroupOptionsInputDict)
+    )
+    await client.describe_option_groups()
+    await client.describe_option_groups(**_request(DescribeOptionGroupsInputDict))
+    await client.describe_option_groups(_request(DescribeOptionGroupsInput))
+    await client.describe_option_groups(_request(DescribeOptionGroupsInputDict))
+    await client.describe_orderable_db_instance_options(engine=_)
+    await client.describe_orderable_db_instance_options(
+        **_request(DescribeOrderableDBInstanceOptionsInputDict)
+    )
+    await client.describe_orderable_db_instance_options(
+        _request(DescribeOrderableDBInstanceOptionsInput)
+    )
+    await client.describe_orderable_db_instance_options(
+        _request(DescribeOrderableDBInstanceOptionsInputDict)
+    )
+    await client.describe_pending_maintenance_actions()
+    await client.describe_pending_maintenance_actions(
+        **_request(DescribePendingMaintenanceActionsInputDict)
+    )
+    await client.describe_pending_maintenance_actions(
+        _request(DescribePendingMaintenanceActionsInput)
+    )
+    await client.describe_pending_maintenance_actions(
+        _request(DescribePendingMaintenanceActionsInputDict)
+    )
+    await client.describe_reserved_db_instances()
+    await client.describe_reserved_db_instances(
+        **_request(DescribeReservedDBInstancesInputDict)
+    )
+    await client.describe_reserved_db_instances(
+        _request(DescribeReservedDBInstancesInput)
+    )
+    await client.describe_reserved_db_instances(
+        _request(DescribeReservedDBInstancesInputDict)
+    )
+    await client.describe_reserved_db_instances_offerings()
+    await client.describe_reserved_db_instances_offerings(
+        **_request(DescribeReservedDBInstancesOfferingsInputDict)
+    )
+    await client.describe_reserved_db_instances_offerings(
+        _request(DescribeReservedDBInstancesOfferingsInput)
+    )
+    await client.describe_reserved_db_instances_offerings(
+        _request(DescribeReservedDBInstancesOfferingsInputDict)
+    )
+    await client.describe_serverless_v2_platform_versions()
+    await client.describe_serverless_v2_platform_versions(
+        **_request(DescribeServerlessV2PlatformVersionsInputDict)
+    )
+    await client.describe_serverless_v2_platform_versions(
+        _request(DescribeServerlessV2PlatformVersionsInput)
+    )
+    await client.describe_serverless_v2_platform_versions(
+        _request(DescribeServerlessV2PlatformVersionsInputDict)
+    )
+    await client.describe_source_regions()
+    await client.describe_source_regions(**_request(DescribeSourceRegionsInputDict))
+    await client.describe_source_regions(_request(DescribeSourceRegionsInput))
+    await client.describe_source_regions(_request(DescribeSourceRegionsInputDict))
+    await client.describe_tenant_databases()
+    await client.describe_tenant_databases(**_request(DescribeTenantDatabasesInputDict))
+    await client.describe_tenant_databases(_request(DescribeTenantDatabasesInput))
+    await client.describe_tenant_databases(_request(DescribeTenantDatabasesInputDict))
+    await client.describe_valid_db_instance_modifications(db_instance_identifier=_)
+    await client.describe_valid_db_instance_modifications(
+        **_request(DescribeValidDBInstanceModificationsInputDict)
+    )
+    await client.describe_valid_db_instance_modifications(
+        _request(DescribeValidDBInstanceModificationsInput)
+    )
+    await client.describe_valid_db_instance_modifications(
+        _request(DescribeValidDBInstanceModificationsInputDict)
+    )
+    await client.disable_http_endpoint(resource_arn=_)
+    await client.disable_http_endpoint(**_request(DisableHttpEndpointInputDict))
+    await client.disable_http_endpoint(_request(DisableHttpEndpointInput))
+    await client.disable_http_endpoint(_request(DisableHttpEndpointInputDict))
+    await client.download_db_log_file_portion(db_instance_identifier=_, log_file_name=_)
+    await client.download_db_log_file_portion(
+        **_request(DownloadDBLogFilePortionInputDict)
+    )
+    await client.download_db_log_file_portion(_request(DownloadDBLogFilePortionInput))
+    await client.download_db_log_file_portion(
+        _request(DownloadDBLogFilePortionInputDict)
+    )
+    await client.enable_http_endpoint(resource_arn=_)
+    await client.enable_http_endpoint(**_request(EnableHttpEndpointInputDict))
+    await client.enable_http_endpoint(_request(EnableHttpEndpointInput))
+    await client.enable_http_endpoint(_request(EnableHttpEndpointInputDict))
+    await client.failover_db_cluster(db_cluster_identifier=_)
+    await client.failover_db_cluster(**_request(FailoverDBClusterInputDict))
+    await client.failover_db_cluster(_request(FailoverDBClusterInput))
+    await client.failover_db_cluster(_request(FailoverDBClusterInputDict))
+    await client.failover_global_cluster(
+        global_cluster_identifier=_, target_db_cluster_identifier=_
+    )
+    await client.failover_global_cluster(**_request(FailoverGlobalClusterInputDict))
+    await client.failover_global_cluster(_request(FailoverGlobalClusterInput))
+    await client.failover_global_cluster(_request(FailoverGlobalClusterInputDict))
+    await client.list_tags_for_resource(resource_name=_)
+    await client.list_tags_for_resource(**_request(ListTagsForResourceInputDict))
+    await client.list_tags_for_resource(_request(ListTagsForResourceInput))
+    await client.list_tags_for_resource(_request(ListTagsForResourceInputDict))
+    await client.modify_activity_stream()
+    await client.modify_activity_stream(**_request(ModifyActivityStreamInputDict))
+    await client.modify_activity_stream(_request(ModifyActivityStreamInput))
+    await client.modify_activity_stream(_request(ModifyActivityStreamInputDict))
+    await client.modify_certificates()
+    await client.modify_certificates(**_request(ModifyCertificatesInputDict))
+    await client.modify_certificates(_request(ModifyCertificatesInput))
+    await client.modify_certificates(_request(ModifyCertificatesInputDict))
+    await client.modify_current_db_cluster_capacity(db_cluster_identifier=_)
+    await client.modify_current_db_cluster_capacity(
+        **_request(ModifyCurrentDBClusterCapacityInputDict)
+    )
+    await client.modify_current_db_cluster_capacity(
+        _request(ModifyCurrentDBClusterCapacityInput)
+    )
+    await client.modify_current_db_cluster_capacity(
+        _request(ModifyCurrentDBClusterCapacityInputDict)
+    )
+    await client.modify_custom_db_engine_version(engine=_, engine_version=_)
+    await client.modify_custom_db_engine_version(
+        **_request(ModifyCustomDBEngineVersionInputDict)
+    )
+    await client.modify_custom_db_engine_version(
+        _request(ModifyCustomDBEngineVersionInput)
+    )
+    await client.modify_custom_db_engine_version(
+        _request(ModifyCustomDBEngineVersionInputDict)
+    )
+    await client.modify_db_capacity_reservation(db_capacity_reservation_identifier=_)
+    await client.modify_db_capacity_reservation(
+        **_request(ModifyDBCapacityReservationInputDict)
+    )
+    await client.modify_db_capacity_reservation(
+        _request(ModifyDBCapacityReservationInput)
+    )
+    await client.modify_db_capacity_reservation(
+        _request(ModifyDBCapacityReservationInputDict)
+    )
+    await client.modify_db_cluster(db_cluster_identifier=_)
+    await client.modify_db_cluster(**_request(ModifyDBClusterInputDict))
+    await client.modify_db_cluster(_request(ModifyDBClusterInput))
+    await client.modify_db_cluster(_request(ModifyDBClusterInputDict))
+    await client.modify_db_cluster_endpoint(db_cluster_endpoint_identifier=_)
+    await client.modify_db_cluster_endpoint(
+        **_request(ModifyDBClusterEndpointInputDict)
+    )
+    await client.modify_db_cluster_endpoint(_request(ModifyDBClusterEndpointInput))
+    await client.modify_db_cluster_endpoint(_request(ModifyDBClusterEndpointInputDict))
+    await client.modify_db_cluster_parameter_group(
+        db_cluster_parameter_group_name=_, parameters=_
+    )
+    await client.modify_db_cluster_parameter_group(
+        **_request(ModifyDBClusterParameterGroupInputDict)
+    )
+    await client.modify_db_cluster_parameter_group(
+        _request(ModifyDBClusterParameterGroupInput)
+    )
+    await client.modify_db_cluster_parameter_group(
+        _request(ModifyDBClusterParameterGroupInputDict)
+    )
+    await client.modify_db_cluster_snapshot_attribute(
+        db_cluster_snapshot_identifier=_, attribute_name=_
+    )
+    await client.modify_db_cluster_snapshot_attribute(
+        **_request(ModifyDBClusterSnapshotAttributeInputDict)
+    )
+    await client.modify_db_cluster_snapshot_attribute(
+        _request(ModifyDBClusterSnapshotAttributeInput)
+    )
+    await client.modify_db_cluster_snapshot_attribute(
+        _request(ModifyDBClusterSnapshotAttributeInputDict)
+    )
+    await client.modify_db_instance(db_instance_identifier=_)
+    await client.modify_db_instance(**_request(ModifyDBInstanceInputDict))
+    await client.modify_db_instance(_request(ModifyDBInstanceInput))
+    await client.modify_db_instance(_request(ModifyDBInstanceInputDict))
+    await client.modify_db_parameter_group(db_parameter_group_name=_, parameters=_)
+    await client.modify_db_parameter_group(**_request(ModifyDBParameterGroupInputDict))
+    await client.modify_db_parameter_group(_request(ModifyDBParameterGroupInput))
+    await client.modify_db_parameter_group(_request(ModifyDBParameterGroupInputDict))
+    await client.modify_db_proxy(db_proxy_name=_)
+    await client.modify_db_proxy(**_request(ModifyDBProxyInputDict))
+    await client.modify_db_proxy(_request(ModifyDBProxyInput))
+    await client.modify_db_proxy(_request(ModifyDBProxyInputDict))
+    await client.modify_db_proxy_endpoint(db_proxy_endpoint_name=_)
+    await client.modify_db_proxy_endpoint(**_request(ModifyDBProxyEndpointInputDict))
+    await client.modify_db_proxy_endpoint(_request(ModifyDBProxyEndpointInput))
+    await client.modify_db_proxy_endpoint(_request(ModifyDBProxyEndpointInputDict))
+    await client.modify_db_proxy_target_group(target_group_name=_, db_proxy_name=_)
+    await client.modify_db_proxy_target_group(
+        **_request(ModifyDBProxyTargetGroupInputDict)
+    )
+    await client.modify_db_proxy_target_group(_request(ModifyDBProxyTargetGroupInput))
+    await client.modify_db_proxy_target_group(
+        _request(ModifyDBProxyTargetGroupInputDict)
+    )
+    await client.modify_db_recommendation(recommendation_id=_)
+    await client.modify_db_recommendation(**_request(ModifyDBRecommendationInputDict))
+    await client.modify_db_recommendation(_request(ModifyDBRecommendationInput))
+    await client.modify_db_recommendation(_request(ModifyDBRecommendationInputDict))
+    await client.modify_db_shard_group(db_shard_group_identifier=_)
+    await client.modify_db_shard_group(**_request(ModifyDBShardGroupInputDict))
+    await client.modify_db_shard_group(_request(ModifyDBShardGroupInput))
+    await client.modify_db_shard_group(_request(ModifyDBShardGroupInputDict))
+    await client.modify_db_snapshot(db_snapshot_identifier=_)
+    await client.modify_db_snapshot(**_request(ModifyDBSnapshotInputDict))
+    await client.modify_db_snapshot(_request(ModifyDBSnapshotInput))
+    await client.modify_db_snapshot(_request(ModifyDBSnapshotInputDict))
+    await client.modify_db_snapshot_attribute(
+        db_snapshot_identifier=_, attribute_name=_
+    )
+    await client.modify_db_snapshot_attribute(
+        **_request(ModifyDBSnapshotAttributeInputDict)
+    )
+    await client.modify_db_snapshot_attribute(_request(ModifyDBSnapshotAttributeInput))
+    await client.modify_db_snapshot_attribute(
+        _request(ModifyDBSnapshotAttributeInputDict)
+    )
+    await client.modify_db_subnet_group(db_subnet_group_name=_, subnet_ids=_)
+    await client.modify_db_subnet_group(**_request(ModifyDBSubnetGroupInputDict))
+    await client.modify_db_subnet_group(_request(ModifyDBSubnetGroupInput))
+    await client.modify_db_subnet_group(_request(ModifyDBSubnetGroupInputDict))
+    await client.modify_event_subscription(subscription_name=_)
+    await client.modify_event_subscription(**_request(ModifyEventSubscriptionInputDict))
+    await client.modify_event_subscription(_request(ModifyEventSubscriptionInput))
+    await client.modify_event_subscription(_request(ModifyEventSubscriptionInputDict))
+    await client.modify_global_cluster(global_cluster_identifier=_)
+    await client.modify_global_cluster(**_request(ModifyGlobalClusterInputDict))
+    await client.modify_global_cluster(_request(ModifyGlobalClusterInput))
+    await client.modify_global_cluster(_request(ModifyGlobalClusterInputDict))
+    await client.modify_integration(integration_identifier=_)
+    await client.modify_integration(**_request(ModifyIntegrationInputDict))
+    await client.modify_integration(_request(ModifyIntegrationInput))
+    await client.modify_integration(_request(ModifyIntegrationInputDict))
+    await client.modify_option_group(option_group_name=_)
+    await client.modify_option_group(**_request(ModifyOptionGroupInputDict))
+    await client.modify_option_group(_request(ModifyOptionGroupInput))
+    await client.modify_option_group(_request(ModifyOptionGroupInputDict))
+    await client.modify_tenant_database(db_instance_identifier=_, tenant_db_name=_)
+    await client.modify_tenant_database(**_request(ModifyTenantDatabaseInputDict))
+    await client.modify_tenant_database(_request(ModifyTenantDatabaseInput))
+    await client.modify_tenant_database(_request(ModifyTenantDatabaseInputDict))
+    await client.promote_read_replica(db_instance_identifier=_)
+    await client.promote_read_replica(**_request(PromoteReadReplicaInputDict))
+    await client.promote_read_replica(_request(PromoteReadReplicaInput))
+    await client.promote_read_replica(_request(PromoteReadReplicaInputDict))
+    await client.promote_read_replica_db_cluster(db_cluster_identifier=_)
+    await client.promote_read_replica_db_cluster(
+        **_request(PromoteReadReplicaDBClusterInputDict)
+    )
+    await client.promote_read_replica_db_cluster(
+        _request(PromoteReadReplicaDBClusterInput)
+    )
+    await client.promote_read_replica_db_cluster(
+        _request(PromoteReadReplicaDBClusterInputDict)
+    )
+    await client.purchase_reserved_db_instances_offering(
+        reserved_db_instances_offering_id=_
+    )
+    await client.purchase_reserved_db_instances_offering(
+        **_request(PurchaseReservedDBInstancesOfferingInputDict)
+    )
+    await client.purchase_reserved_db_instances_offering(
+        _request(PurchaseReservedDBInstancesOfferingInput)
+    )
+    await client.purchase_reserved_db_instances_offering(
+        _request(PurchaseReservedDBInstancesOfferingInputDict)
+    )
+    await client.reboot_db_cluster(db_cluster_identifier=_)
+    await client.reboot_db_cluster(**_request(RebootDBClusterInputDict))
+    await client.reboot_db_cluster(_request(RebootDBClusterInput))
+    await client.reboot_db_cluster(_request(RebootDBClusterInputDict))
+    await client.reboot_db_instance(db_instance_identifier=_)
+    await client.reboot_db_instance(**_request(RebootDBInstanceInputDict))
+    await client.reboot_db_instance(_request(RebootDBInstanceInput))
+    await client.reboot_db_instance(_request(RebootDBInstanceInputDict))
+    await client.reboot_db_shard_group(db_shard_group_identifier=_)
+    await client.reboot_db_shard_group(**_request(RebootDBShardGroupInputDict))
+    await client.reboot_db_shard_group(_request(RebootDBShardGroupInput))
+    await client.reboot_db_shard_group(_request(RebootDBShardGroupInputDict))
+    await client.register_db_proxy_targets(db_proxy_name=_)
+    await client.register_db_proxy_targets(**_request(RegisterDBProxyTargetsInputDict))
+    await client.register_db_proxy_targets(_request(RegisterDBProxyTargetsInput))
+    await client.register_db_proxy_targets(_request(RegisterDBProxyTargetsInputDict))
+    await client.remove_from_global_cluster(
+        global_cluster_identifier=_, db_cluster_identifier=_
+    )
+    await client.remove_from_global_cluster(
+        **_request(RemoveFromGlobalClusterInputDict)
+    )
+    await client.remove_from_global_cluster(_request(RemoveFromGlobalClusterInput))
+    await client.remove_from_global_cluster(_request(RemoveFromGlobalClusterInputDict))
+    await client.remove_role_from_db_cluster(db_cluster_identifier=_, role_arn=_)
+    await client.remove_role_from_db_cluster(
+        **_request(RemoveRoleFromDBClusterInputDict)
+    )
+    await client.remove_role_from_db_cluster(_request(RemoveRoleFromDBClusterInput))
+    await client.remove_role_from_db_cluster(_request(RemoveRoleFromDBClusterInputDict))
+    await client.remove_role_from_db_instance(
+        db_instance_identifier=_, role_arn=_, feature_name=_
+    )
+    await client.remove_role_from_db_instance(
+        **_request(RemoveRoleFromDBInstanceInputDict)
+    )
+    await client.remove_role_from_db_instance(_request(RemoveRoleFromDBInstanceInput))
+    await client.remove_role_from_db_instance(
+        _request(RemoveRoleFromDBInstanceInputDict)
+    )
+    await client.remove_source_identifier_from_subscription(
+        subscription_name=_, source_identifier=_
+    )
+    await client.remove_source_identifier_from_subscription(
+        **_request(RemoveSourceIdentifierFromSubscriptionInputDict)
+    )
+    await client.remove_source_identifier_from_subscription(
+        _request(RemoveSourceIdentifierFromSubscriptionInput)
+    )
+    await client.remove_source_identifier_from_subscription(
+        _request(RemoveSourceIdentifierFromSubscriptionInputDict)
+    )
+    await client.remove_tags_from_resource(resource_name=_, tag_keys=_)
+    await client.remove_tags_from_resource(**_request(RemoveTagsFromResourceInputDict))
+    await client.remove_tags_from_resource(_request(RemoveTagsFromResourceInput))
+    await client.remove_tags_from_resource(_request(RemoveTagsFromResourceInputDict))
+    await client.reset_db_cluster_parameter_group(db_cluster_parameter_group_name=_)
+    await client.reset_db_cluster_parameter_group(
+        **_request(ResetDBClusterParameterGroupInputDict)
+    )
+    await client.reset_db_cluster_parameter_group(
+        _request(ResetDBClusterParameterGroupInput)
+    )
+    await client.reset_db_cluster_parameter_group(
+        _request(ResetDBClusterParameterGroupInputDict)
+    )
+    await client.reset_db_parameter_group(db_parameter_group_name=_)
+    await client.reset_db_parameter_group(**_request(ResetDBParameterGroupInputDict))
+    await client.reset_db_parameter_group(_request(ResetDBParameterGroupInput))
+    await client.reset_db_parameter_group(_request(ResetDBParameterGroupInputDict))
+    await client.restore_db_cluster_from_s3(
+        db_cluster_identifier=_,
+        engine=_,
+        master_username=_,
+        source_engine=_,
+        source_engine_version=_,
+        s3_bucket_name=_,
+        s3_ingestion_role_arn=_,
+    )
+    await client.restore_db_cluster_from_s3(**_request(RestoreDBClusterFromS3InputDict))
+    await client.restore_db_cluster_from_s3(_request(RestoreDBClusterFromS3Input))
+    await client.restore_db_cluster_from_s3(_request(RestoreDBClusterFromS3InputDict))
+    await client.restore_db_cluster_from_snapshot(
+        db_cluster_identifier=_, snapshot_identifier=_, engine=_
+    )
+    await client.restore_db_cluster_from_snapshot(
+        **_request(RestoreDBClusterFromSnapshotInputDict)
+    )
+    await client.restore_db_cluster_from_snapshot(
+        _request(RestoreDBClusterFromSnapshotInput)
+    )
+    await client.restore_db_cluster_from_snapshot(
+        _request(RestoreDBClusterFromSnapshotInputDict)
+    )
+    await client.restore_db_cluster_to_point_in_time(db_cluster_identifier=_)
+    await client.restore_db_cluster_to_point_in_time(
+        **_request(RestoreDBClusterToPointInTimeInputDict)
+    )
+    await client.restore_db_cluster_to_point_in_time(
+        _request(RestoreDBClusterToPointInTimeInput)
+    )
+    await client.restore_db_cluster_to_point_in_time(
+        _request(RestoreDBClusterToPointInTimeInputDict)
+    )
+    await client.restore_db_instance_from_db_snapshot(db_instance_identifier=_)
+    await client.restore_db_instance_from_db_snapshot(
+        **_request(RestoreDBInstanceFromDBSnapshotInputDict)
+    )
+    await client.restore_db_instance_from_db_snapshot(
+        _request(RestoreDBInstanceFromDBSnapshotInput)
+    )
+    await client.restore_db_instance_from_db_snapshot(
+        _request(RestoreDBInstanceFromDBSnapshotInputDict)
+    )
+    await client.restore_db_instance_from_s3(
+        db_instance_identifier=_,
+        db_instance_class=_,
+        engine=_,
+        source_engine=_,
+        source_engine_version=_,
+        s3_bucket_name=_,
+        s3_ingestion_role_arn=_,
+    )
+    await client.restore_db_instance_from_s3(
+        **_request(RestoreDBInstanceFromS3InputDict)
+    )
+    await client.restore_db_instance_from_s3(_request(RestoreDBInstanceFromS3Input))
+    await client.restore_db_instance_from_s3(_request(RestoreDBInstanceFromS3InputDict))
+    await client.restore_db_instance_to_point_in_time(target_db_instance_identifier=_)
+    await client.restore_db_instance_to_point_in_time(
+        **_request(RestoreDBInstanceToPointInTimeInputDict)
+    )
+    await client.restore_db_instance_to_point_in_time(
+        _request(RestoreDBInstanceToPointInTimeInput)
+    )
+    await client.restore_db_instance_to_point_in_time(
+        _request(RestoreDBInstanceToPointInTimeInputDict)
+    )
+    await client.revoke_db_security_group_ingress(db_security_group_name=_)
+    await client.revoke_db_security_group_ingress(
+        **_request(RevokeDBSecurityGroupIngressInputDict)
+    )
+    await client.revoke_db_security_group_ingress(
+        _request(RevokeDBSecurityGroupIngressInput)
+    )
+    await client.revoke_db_security_group_ingress(
+        _request(RevokeDBSecurityGroupIngressInputDict)
+    )
+    await client.start_activity_stream(resource_arn=_, mode=_, kms_key_id=_)
+    await client.start_activity_stream(**_request(StartActivityStreamInputDict))
+    await client.start_activity_stream(_request(StartActivityStreamInput))
+    await client.start_activity_stream(_request(StartActivityStreamInputDict))
+    await client.start_db_cluster(db_cluster_identifier=_)
+    await client.start_db_cluster(**_request(StartDBClusterInputDict))
+    await client.start_db_cluster(_request(StartDBClusterInput))
+    await client.start_db_cluster(_request(StartDBClusterInputDict))
+    await client.start_db_instance(db_instance_identifier=_)
+    await client.start_db_instance(**_request(StartDBInstanceInputDict))
+    await client.start_db_instance(_request(StartDBInstanceInput))
+    await client.start_db_instance(_request(StartDBInstanceInputDict))
+    await client.start_db_instance_automated_backups_replication(
+        source_db_instance_arn=_
+    )
+    await client.start_db_instance_automated_backups_replication(
+        **_request(StartDBInstanceAutomatedBackupsReplicationInputDict)
+    )
+    await client.start_db_instance_automated_backups_replication(
+        _request(StartDBInstanceAutomatedBackupsReplicationInput)
+    )
+    await client.start_db_instance_automated_backups_replication(
+        _request(StartDBInstanceAutomatedBackupsReplicationInputDict)
+    )
+    await client.start_export_task(
+        export_task_identifier=_,
+        source_arn=_,
+        s3_bucket_name=_,
+        iam_role_arn=_,
+        kms_key_id=_,
+    )
+    await client.start_export_task(**_request(StartExportTaskInputDict))
+    await client.start_export_task(_request(StartExportTaskInput))
+    await client.start_export_task(_request(StartExportTaskInputDict))
+    await client.stop_activity_stream(resource_arn=_)
+    await client.stop_activity_stream(**_request(StopActivityStreamInputDict))
+    await client.stop_activity_stream(_request(StopActivityStreamInput))
+    await client.stop_activity_stream(_request(StopActivityStreamInputDict))
+    await client.stop_db_cluster(db_cluster_identifier=_)
+    await client.stop_db_cluster(**_request(StopDBClusterInputDict))
+    await client.stop_db_cluster(_request(StopDBClusterInput))
+    await client.stop_db_cluster(_request(StopDBClusterInputDict))
+    await client.stop_db_instance(db_instance_identifier=_)
+    await client.stop_db_instance(**_request(StopDBInstanceInputDict))
+    await client.stop_db_instance(_request(StopDBInstanceInput))
+    await client.stop_db_instance(_request(StopDBInstanceInputDict))
+    await client.stop_db_instance_automated_backups_replication(
+        source_db_instance_arn=_
+    )
+    await client.stop_db_instance_automated_backups_replication(
+        **_request(StopDBInstanceAutomatedBackupsReplicationInputDict)
+    )
+    await client.stop_db_instance_automated_backups_replication(
+        _request(StopDBInstanceAutomatedBackupsReplicationInput)
+    )
+    await client.stop_db_instance_automated_backups_replication(
+        _request(StopDBInstanceAutomatedBackupsReplicationInputDict)
+    )
+    await client.switchover_blue_green_deployment(blue_green_deployment_identifier=_)
+    await client.switchover_blue_green_deployment(
+        **_request(SwitchoverBlueGreenDeploymentInputDict)
+    )
+    await client.switchover_blue_green_deployment(
+        _request(SwitchoverBlueGreenDeploymentInput)
+    )
+    await client.switchover_blue_green_deployment(
+        _request(SwitchoverBlueGreenDeploymentInputDict)
+    )
+    await client.switchover_global_cluster(
+        global_cluster_identifier=_, target_db_cluster_identifier=_
+    )
+    await client.switchover_global_cluster(**_request(SwitchoverGlobalClusterInputDict))
+    await client.switchover_global_cluster(_request(SwitchoverGlobalClusterInput))
+    await client.switchover_global_cluster(_request(SwitchoverGlobalClusterInputDict))
+    await client.switchover_read_replica(db_instance_identifier=_)
+    await client.switchover_read_replica(**_request(SwitchoverReadReplicaInputDict))
+    await client.switchover_read_replica(_request(SwitchoverReadReplicaInput))
+    await client.switchover_read_replica(_request(SwitchoverReadReplicaInputDict))
+
+
+def check_sync_calls(client: RDSClient) -> None:
+    pass
+    client.add_role_to_db_cluster(db_cluster_identifier=_, role_arn=_)
+    client.add_role_to_db_cluster(**_request(AddRoleToDBClusterInputDict))
+    client.add_role_to_db_cluster(_request(AddRoleToDBClusterInput))
+    client.add_role_to_db_cluster(_request(AddRoleToDBClusterInputDict))
+    client.add_role_to_db_instance(db_instance_identifier=_, role_arn=_, feature_name=_)
+    client.add_role_to_db_instance(**_request(AddRoleToDBInstanceInputDict))
+    client.add_role_to_db_instance(_request(AddRoleToDBInstanceInput))
+    client.add_role_to_db_instance(_request(AddRoleToDBInstanceInputDict))
+    client.add_source_identifier_to_subscription(
+        subscription_name=_, source_identifier=_
+    )
+    client.add_source_identifier_to_subscription(
+        **_request(AddSourceIdentifierToSubscriptionInputDict)
+    )
+    client.add_source_identifier_to_subscription(
+        _request(AddSourceIdentifierToSubscriptionInput)
+    )
+    client.add_source_identifier_to_subscription(
+        _request(AddSourceIdentifierToSubscriptionInputDict)
+    )
+    client.add_tags_to_resource(resource_name=_, tags=_)
+    client.add_tags_to_resource(**_request(AddTagsToResourceInputDict))
+    client.add_tags_to_resource(_request(AddTagsToResourceInput))
+    client.add_tags_to_resource(_request(AddTagsToResourceInputDict))
+    client.apply_pending_maintenance_action(
+        resource_identifier=_, apply_action=_, opt_in_type=_
+    )
+    client.apply_pending_maintenance_action(
+        **_request(ApplyPendingMaintenanceActionInputDict)
+    )
+    client.apply_pending_maintenance_action(
+        _request(ApplyPendingMaintenanceActionInput)
+    )
+    client.apply_pending_maintenance_action(
+        _request(ApplyPendingMaintenanceActionInputDict)
+    )
+    client.authorize_db_security_group_ingress(db_security_group_name=_)
+    client.authorize_db_security_group_ingress(
+        **_request(AuthorizeDBSecurityGroupIngressInputDict)
+    )
+    client.authorize_db_security_group_ingress(
+        _request(AuthorizeDBSecurityGroupIngressInput)
+    )
+    client.authorize_db_security_group_ingress(
+        _request(AuthorizeDBSecurityGroupIngressInputDict)
+    )
+    client.backtrack_db_cluster(db_cluster_identifier=_, backtrack_to=_)
+    client.backtrack_db_cluster(**_request(BacktrackDBClusterInputDict))
+    client.backtrack_db_cluster(_request(BacktrackDBClusterInput))
+    client.backtrack_db_cluster(_request(BacktrackDBClusterInputDict))
+    client.cancel_db_capacity_reservation(db_capacity_reservation_identifier=_)
+    client.cancel_db_capacity_reservation(
+        **_request(CancelDBCapacityReservationInputDict)
+    )
+    client.cancel_db_capacity_reservation(_request(CancelDBCapacityReservationInput))
+    client.cancel_db_capacity_reservation(
+        _request(CancelDBCapacityReservationInputDict)
+    )
+    client.cancel_export_task(export_task_identifier=_)
+    client.cancel_export_task(**_request(CancelExportTaskInputDict))
+    client.cancel_export_task(_request(CancelExportTaskInput))
+    client.cancel_export_task(_request(CancelExportTaskInputDict))
+    client.copy_db_cluster_parameter_group(
+        source_db_cluster_parameter_group_identifier=_,
+        target_db_cluster_parameter_group_identifier=_,
+        target_db_cluster_parameter_group_description=_,
+    )
+    client.copy_db_cluster_parameter_group(
+        **_request(CopyDBClusterParameterGroupInputDict)
+    )
+    client.copy_db_cluster_parameter_group(_request(CopyDBClusterParameterGroupInput))
+    client.copy_db_cluster_parameter_group(
+        _request(CopyDBClusterParameterGroupInputDict)
+    )
+    client.copy_db_cluster_snapshot(
+        source_db_cluster_snapshot_identifier=_, target_db_cluster_snapshot_identifier=_
+    )
+    client.copy_db_cluster_snapshot(**_request(CopyDBClusterSnapshotInputDict))
+    client.copy_db_cluster_snapshot(_request(CopyDBClusterSnapshotInput))
+    client.copy_db_cluster_snapshot(_request(CopyDBClusterSnapshotInputDict))
+    client.copy_db_parameter_group(
+        source_db_parameter_group_identifier=_,
+        target_db_parameter_group_identifier=_,
+        target_db_parameter_group_description=_,
+    )
+    client.copy_db_parameter_group(**_request(CopyDBParameterGroupInputDict))
+    client.copy_db_parameter_group(_request(CopyDBParameterGroupInput))
+    client.copy_db_parameter_group(_request(CopyDBParameterGroupInputDict))
+    client.copy_db_snapshot(
+        source_db_snapshot_identifier=_, target_db_snapshot_identifier=_
+    )
+    client.copy_db_snapshot(**_request(CopyDBSnapshotInputDict))
+    client.copy_db_snapshot(_request(CopyDBSnapshotInput))
+    client.copy_db_snapshot(_request(CopyDBSnapshotInputDict))
+    client.copy_option_group(
+        source_option_group_identifier=_,
+        target_option_group_identifier=_,
+        target_option_group_description=_,
+    )
+    client.copy_option_group(**_request(CopyOptionGroupInputDict))
+    client.copy_option_group(_request(CopyOptionGroupInput))
+    client.copy_option_group(_request(CopyOptionGroupInputDict))
+    client.create_blue_green_deployment(blue_green_deployment_name=_, source=_)
+    client.create_blue_green_deployment(**_request(CreateBlueGreenDeploymentInputDict))
+    client.create_blue_green_deployment(_request(CreateBlueGreenDeploymentInput))
+    client.create_blue_green_deployment(_request(CreateBlueGreenDeploymentInputDict))
+    client.create_custom_db_engine_version(engine=_, engine_version=_)
+    client.create_custom_db_engine_version(
+        **_request(CreateCustomDBEngineVersionInputDict)
+    )
+    client.create_custom_db_engine_version(_request(CreateCustomDBEngineVersionInput))
+    client.create_custom_db_engine_version(
+        _request(CreateCustomDBEngineVersionInputDict)
+    )
+    client.create_db_capacity_reservation(
+        db_capacity_reservation_name=_,
+        db_instance_class=_,
+        engine=_,
+        capacity_per_availability_zone=_,
+        availability_zones=_,
+    )
+    client.create_db_capacity_reservation(
+        **_request(CreateDBCapacityReservationInputDict)
+    )
+    client.create_db_capacity_reservation(_request(CreateDBCapacityReservationInput))
+    client.create_db_capacity_reservation(
+        _request(CreateDBCapacityReservationInputDict)
+    )
+    client.create_db_cluster(db_cluster_identifier=_, engine=_)
+    client.create_db_cluster(**_request(CreateDBClusterInputDict))
+    client.create_db_cluster(_request(CreateDBClusterInput))
+    client.create_db_cluster(_request(CreateDBClusterInputDict))
+    client.create_db_cluster_endpoint(
+        db_cluster_identifier=_, db_cluster_endpoint_identifier=_, endpoint_type=_
+    )
+    client.create_db_cluster_endpoint(**_request(CreateDBClusterEndpointInputDict))
+    client.create_db_cluster_endpoint(_request(CreateDBClusterEndpointInput))
+    client.create_db_cluster_endpoint(_request(CreateDBClusterEndpointInputDict))
+    client.create_db_cluster_parameter_group(
+        db_cluster_parameter_group_name=_, db_parameter_group_family=_, description=_
+    )
+    client.create_db_cluster_parameter_group(
+        **_request(CreateDBClusterParameterGroupInputDict)
+    )
+    client.create_db_cluster_parameter_group(
+        _request(CreateDBClusterParameterGroupInput)
+    )
+    client.create_db_cluster_parameter_group(
+        _request(CreateDBClusterParameterGroupInputDict)
+    )
+    client.create_db_cluster_snapshot(
+        db_cluster_snapshot_identifier=_, db_cluster_identifier=_
+    )
+    client.create_db_cluster_snapshot(**_request(CreateDBClusterSnapshotInputDict))
+    client.create_db_cluster_snapshot(_request(CreateDBClusterSnapshotInput))
+    client.create_db_cluster_snapshot(_request(CreateDBClusterSnapshotInputDict))
+    client.create_db_instance(db_instance_identifier=_, db_instance_class=_, engine=_)
+    client.create_db_instance(**_request(CreateDBInstanceInputDict))
+    client.create_db_instance(_request(CreateDBInstanceInput))
+    client.create_db_instance(_request(CreateDBInstanceInputDict))
+    client.create_db_instance_read_replica(db_instance_identifier=_)
+    client.create_db_instance_read_replica(
+        **_request(CreateDBInstanceReadReplicaInputDict)
+    )
+    client.create_db_instance_read_replica(_request(CreateDBInstanceReadReplicaInput))
+    client.create_db_instance_read_replica(
+        _request(CreateDBInstanceReadReplicaInputDict)
+    )
+    client.create_db_parameter_group(
+        db_parameter_group_name=_, db_parameter_group_family=_, description=_
+    )
+    client.create_db_parameter_group(**_request(CreateDBParameterGroupInputDict))
+    client.create_db_parameter_group(_request(CreateDBParameterGroupInput))
+    client.create_db_parameter_group(_request(CreateDBParameterGroupInputDict))
+    client.create_db_proxy(
+        db_proxy_name=_, engine_family=_, role_arn=_, vpc_subnet_ids=_
+    )
+    client.create_db_proxy(**_request(CreateDBProxyInputDict))
+    client.create_db_proxy(_request(CreateDBProxyInput))
+    client.create_db_proxy(_request(CreateDBProxyInputDict))
+    client.create_db_proxy_endpoint(
+        db_proxy_name=_, db_proxy_endpoint_name=_, vpc_subnet_ids=_
+    )
+    client.create_db_proxy_endpoint(**_request(CreateDBProxyEndpointInputDict))
+    client.create_db_proxy_endpoint(_request(CreateDBProxyEndpointInput))
+    client.create_db_proxy_endpoint(_request(CreateDBProxyEndpointInputDict))
+    client.create_db_security_group(
+        db_security_group_name=_, db_security_group_description=_
+    )
+    client.create_db_security_group(**_request(CreateDBSecurityGroupInputDict))
+    client.create_db_security_group(_request(CreateDBSecurityGroupInput))
+    client.create_db_security_group(_request(CreateDBSecurityGroupInputDict))
+    client.create_db_shard_group(
+        db_shard_group_identifier=_, db_cluster_identifier=_, max_acu=_
+    )
+    client.create_db_shard_group(**_request(CreateDBShardGroupInputDict))
+    client.create_db_shard_group(_request(CreateDBShardGroupInput))
+    client.create_db_shard_group(_request(CreateDBShardGroupInputDict))
+    client.create_db_snapshot(db_snapshot_identifier=_, db_instance_identifier=_)
+    client.create_db_snapshot(**_request(CreateDBSnapshotInputDict))
+    client.create_db_snapshot(_request(CreateDBSnapshotInput))
+    client.create_db_snapshot(_request(CreateDBSnapshotInputDict))
+    client.create_db_subnet_group(
+        db_subnet_group_name=_, db_subnet_group_description=_, subnet_ids=_
+    )
+    client.create_db_subnet_group(**_request(CreateDBSubnetGroupInputDict))
+    client.create_db_subnet_group(_request(CreateDBSubnetGroupInput))
+    client.create_db_subnet_group(_request(CreateDBSubnetGroupInputDict))
+    client.create_event_subscription(subscription_name=_, sns_topic_arn=_)
+    client.create_event_subscription(**_request(CreateEventSubscriptionInputDict))
+    client.create_event_subscription(_request(CreateEventSubscriptionInput))
+    client.create_event_subscription(_request(CreateEventSubscriptionInputDict))
+    client.create_global_cluster(global_cluster_identifier=_)
+    client.create_global_cluster(**_request(CreateGlobalClusterInputDict))
+    client.create_global_cluster(_request(CreateGlobalClusterInput))
+    client.create_global_cluster(_request(CreateGlobalClusterInputDict))
+    client.create_integration(source_arn=_, target_arn=_, integration_name=_)
+    client.create_integration(**_request(CreateIntegrationInputDict))
+    client.create_integration(_request(CreateIntegrationInput))
+    client.create_integration(_request(CreateIntegrationInputDict))
+    client.create_option_group(
+        option_group_name=_,
+        engine_name=_,
+        major_engine_version=_,
+        option_group_description=_,
+    )
+    client.create_option_group(**_request(CreateOptionGroupInputDict))
+    client.create_option_group(_request(CreateOptionGroupInput))
+    client.create_option_group(_request(CreateOptionGroupInputDict))
+    client.create_tenant_database(
+        db_instance_identifier=_, tenant_db_name=_, master_username=_
+    )
+    client.create_tenant_database(**_request(CreateTenantDatabaseInputDict))
+    client.create_tenant_database(_request(CreateTenantDatabaseInput))
+    client.create_tenant_database(_request(CreateTenantDatabaseInputDict))
+    client.delete_blue_green_deployment(blue_green_deployment_identifier=_)
+    client.delete_blue_green_deployment(**_request(DeleteBlueGreenDeploymentInputDict))
+    client.delete_blue_green_deployment(_request(DeleteBlueGreenDeploymentInput))
+    client.delete_blue_green_deployment(_request(DeleteBlueGreenDeploymentInputDict))
+    client.delete_custom_db_engine_version(engine=_, engine_version=_)
+    client.delete_custom_db_engine_version(
+        **_request(DeleteCustomDBEngineVersionInputDict)
+    )
+    client.delete_custom_db_engine_version(_request(DeleteCustomDBEngineVersionInput))
+    client.delete_custom_db_engine_version(
+        _request(DeleteCustomDBEngineVersionInputDict)
+    )
+    client.delete_db_cluster(db_cluster_identifier=_)
+    client.delete_db_cluster(**_request(DeleteDBClusterInputDict))
+    client.delete_db_cluster(_request(DeleteDBClusterInput))
+    client.delete_db_cluster(_request(DeleteDBClusterInputDict))
+    client.delete_db_cluster_automated_backup(db_cluster_resource_id=_)
+    client.delete_db_cluster_automated_backup(
+        **_request(DeleteDBClusterAutomatedBackupInputDict)
+    )
+    client.delete_db_cluster_automated_backup(
+        _request(DeleteDBClusterAutomatedBackupInput)
+    )
+    client.delete_db_cluster_automated_backup(
+        _request(DeleteDBClusterAutomatedBackupInputDict)
+    )
+    client.delete_db_cluster_endpoint(db_cluster_endpoint_identifier=_)
+    client.delete_db_cluster_endpoint(**_request(DeleteDBClusterEndpointInputDict))
+    client.delete_db_cluster_endpoint(_request(DeleteDBClusterEndpointInput))
+    client.delete_db_cluster_endpoint(_request(DeleteDBClusterEndpointInputDict))
+    client.delete_db_cluster_parameter_group(db_cluster_parameter_group_name=_)
+    client.delete_db_cluster_parameter_group(
+        **_request(DeleteDBClusterParameterGroupInputDict)
+    )
+    client.delete_db_cluster_parameter_group(
+        _request(DeleteDBClusterParameterGroupInput)
+    )
+    client.delete_db_cluster_parameter_group(
+        _request(DeleteDBClusterParameterGroupInputDict)
+    )
+    client.delete_db_cluster_snapshot(db_cluster_snapshot_identifier=_)
+    client.delete_db_cluster_snapshot(**_request(DeleteDBClusterSnapshotInputDict))
+    client.delete_db_cluster_snapshot(_request(DeleteDBClusterSnapshotInput))
+    client.delete_db_cluster_snapshot(_request(DeleteDBClusterSnapshotInputDict))
+    client.delete_db_instance(db_instance_identifier=_)
+    client.delete_db_instance(**_request(DeleteDBInstanceInputDict))
+    client.delete_db_instance(_request(DeleteDBInstanceInput))
+    client.delete_db_instance(_request(DeleteDBInstanceInputDict))
+    client.delete_db_instance_automated_backup()
+    client.delete_db_instance_automated_backup(
+        **_request(DeleteDBInstanceAutomatedBackupInputDict)
+    )
+    client.delete_db_instance_automated_backup(
+        _request(DeleteDBInstanceAutomatedBackupInput)
+    )
+    client.delete_db_instance_automated_backup(
+        _request(DeleteDBInstanceAutomatedBackupInputDict)
+    )
+    client.delete_db_parameter_group(db_parameter_group_name=_)
+    client.delete_db_parameter_group(**_request(DeleteDBParameterGroupInputDict))
+    client.delete_db_parameter_group(_request(DeleteDBParameterGroupInput))
+    client.delete_db_parameter_group(_request(DeleteDBParameterGroupInputDict))
+    client.delete_db_proxy(db_proxy_name=_)
+    client.delete_db_proxy(**_request(DeleteDBProxyInputDict))
+    client.delete_db_proxy(_request(DeleteDBProxyInput))
+    client.delete_db_proxy(_request(DeleteDBProxyInputDict))
+    client.delete_db_proxy_endpoint(db_proxy_endpoint_name=_)
+    client.delete_db_proxy_endpoint(**_request(DeleteDBProxyEndpointInputDict))
+    client.delete_db_proxy_endpoint(_request(DeleteDBProxyEndpointInput))
+    client.delete_db_proxy_endpoint(_request(DeleteDBProxyEndpointInputDict))
+    client.delete_db_security_group(db_security_group_name=_)
+    client.delete_db_security_group(**_request(DeleteDBSecurityGroupInputDict))
+    client.delete_db_security_group(_request(DeleteDBSecurityGroupInput))
+    client.delete_db_security_group(_request(DeleteDBSecurityGroupInputDict))
+    client.delete_db_shard_group(db_shard_group_identifier=_)
+    client.delete_db_shard_group(**_request(DeleteDBShardGroupInputDict))
+    client.delete_db_shard_group(_request(DeleteDBShardGroupInput))
+    client.delete_db_shard_group(_request(DeleteDBShardGroupInputDict))
+    client.delete_db_snapshot(db_snapshot_identifier=_)
+    client.delete_db_snapshot(**_request(DeleteDBSnapshotInputDict))
+    client.delete_db_snapshot(_request(DeleteDBSnapshotInput))
+    client.delete_db_snapshot(_request(DeleteDBSnapshotInputDict))
+    client.delete_db_subnet_group(db_subnet_group_name=_)
+    client.delete_db_subnet_group(**_request(DeleteDBSubnetGroupInputDict))
+    client.delete_db_subnet_group(_request(DeleteDBSubnetGroupInput))
+    client.delete_db_subnet_group(_request(DeleteDBSubnetGroupInputDict))
+    client.delete_event_subscription(subscription_name=_)
+    client.delete_event_subscription(**_request(DeleteEventSubscriptionInputDict))
+    client.delete_event_subscription(_request(DeleteEventSubscriptionInput))
+    client.delete_event_subscription(_request(DeleteEventSubscriptionInputDict))
+    client.delete_global_cluster(global_cluster_identifier=_)
+    client.delete_global_cluster(**_request(DeleteGlobalClusterInputDict))
+    client.delete_global_cluster(_request(DeleteGlobalClusterInput))
+    client.delete_global_cluster(_request(DeleteGlobalClusterInputDict))
+    client.delete_integration(integration_identifier=_)
+    client.delete_integration(**_request(DeleteIntegrationInputDict))
+    client.delete_integration(_request(DeleteIntegrationInput))
+    client.delete_integration(_request(DeleteIntegrationInputDict))
+    client.delete_option_group(option_group_name=_)
+    client.delete_option_group(**_request(DeleteOptionGroupInputDict))
+    client.delete_option_group(_request(DeleteOptionGroupInput))
+    client.delete_option_group(_request(DeleteOptionGroupInputDict))
+    client.delete_tenant_database(db_instance_identifier=_, tenant_db_name=_)
+    client.delete_tenant_database(**_request(DeleteTenantDatabaseInputDict))
+    client.delete_tenant_database(_request(DeleteTenantDatabaseInput))
+    client.delete_tenant_database(_request(DeleteTenantDatabaseInputDict))
+    client.deregister_db_proxy_targets(db_proxy_name=_)
+    client.deregister_db_proxy_targets(**_request(DeregisterDBProxyTargetsInputDict))
+    client.deregister_db_proxy_targets(_request(DeregisterDBProxyTargetsInput))
+    client.deregister_db_proxy_targets(_request(DeregisterDBProxyTargetsInputDict))
+    client.describe_account_attributes()
+    client.describe_account_attributes(**_request(DescribeAccountAttributesInputDict))
+    client.describe_account_attributes(_request(DescribeAccountAttributesInput))
+    client.describe_account_attributes(_request(DescribeAccountAttributesInputDict))
+    client.describe_blue_green_deployments()
+    client.describe_blue_green_deployments(
+        **_request(DescribeBlueGreenDeploymentsInputDict)
+    )
+    client.describe_blue_green_deployments(_request(DescribeBlueGreenDeploymentsInput))
+    client.describe_blue_green_deployments(
+        _request(DescribeBlueGreenDeploymentsInputDict)
+    )
+    client.describe_certificates()
+    client.describe_certificates(**_request(DescribeCertificatesInputDict))
+    client.describe_certificates(_request(DescribeCertificatesInput))
+    client.describe_certificates(_request(DescribeCertificatesInputDict))
+    client.describe_db_capacity_reservations()
+    client.describe_db_capacity_reservations(
+        **_request(DescribeDBCapacityReservationsInputDict)
+    )
+    client.describe_db_capacity_reservations(
+        _request(DescribeDBCapacityReservationsInput)
+    )
+    client.describe_db_capacity_reservations(
+        _request(DescribeDBCapacityReservationsInputDict)
+    )
+    client.describe_db_cluster_automated_backups()
+    client.describe_db_cluster_automated_backups(
+        **_request(DescribeDBClusterAutomatedBackupsInputDict)
+    )
+    client.describe_db_cluster_automated_backups(
+        _request(DescribeDBClusterAutomatedBackupsInput)
+    )
+    client.describe_db_cluster_automated_backups(
+        _request(DescribeDBClusterAutomatedBackupsInputDict)
+    )
+    client.describe_db_cluster_backtracks(db_cluster_identifier=_)
+    client.describe_db_cluster_backtracks(
+        **_request(DescribeDBClusterBacktracksInputDict)
+    )
+    client.describe_db_cluster_backtracks(_request(DescribeDBClusterBacktracksInput))
+    client.describe_db_cluster_backtracks(
+        _request(DescribeDBClusterBacktracksInputDict)
+    )
+    client.describe_db_cluster_endpoints()
+    client.describe_db_cluster_endpoints(
+        **_request(DescribeDBClusterEndpointsInputDict)
+    )
+    client.describe_db_cluster_endpoints(_request(DescribeDBClusterEndpointsInput))
+    client.describe_db_cluster_endpoints(_request(DescribeDBClusterEndpointsInputDict))
+    client.describe_db_cluster_parameter_groups()
+    client.describe_db_cluster_parameter_groups(
+        **_request(DescribeDBClusterParameterGroupsInputDict)
+    )
+    client.describe_db_cluster_parameter_groups(
+        _request(DescribeDBClusterParameterGroupsInput)
+    )
+    client.describe_db_cluster_parameter_groups(
+        _request(DescribeDBClusterParameterGroupsInputDict)
+    )
+    client.describe_db_cluster_parameters(db_cluster_parameter_group_name=_)
+    client.describe_db_cluster_parameters(
+        **_request(DescribeDBClusterParametersInputDict)
+    )
+    client.describe_db_cluster_parameters(_request(DescribeDBClusterParametersInput))
+    client.describe_db_cluster_parameters(
+        _request(DescribeDBClusterParametersInputDict)
+    )
+    client.describe_db_clusters()
+    client.describe_db_clusters(**_request(DescribeDBClustersInputDict))
+    client.describe_db_clusters(_request(DescribeDBClustersInput))
+    client.describe_db_clusters(_request(DescribeDBClustersInputDict))
+    client.describe_db_cluster_snapshot_attributes(db_cluster_snapshot_identifier=_)
+    client.describe_db_cluster_snapshot_attributes(
+        **_request(DescribeDBClusterSnapshotAttributesInputDict)
+    )
+    client.describe_db_cluster_snapshot_attributes(
+        _request(DescribeDBClusterSnapshotAttributesInput)
+    )
+    client.describe_db_cluster_snapshot_attributes(
+        _request(DescribeDBClusterSnapshotAttributesInputDict)
+    )
+    client.describe_db_cluster_snapshots()
+    client.describe_db_cluster_snapshots(
+        **_request(DescribeDBClusterSnapshotsInputDict)
+    )
+    client.describe_db_cluster_snapshots(_request(DescribeDBClusterSnapshotsInput))
+    client.describe_db_cluster_snapshots(_request(DescribeDBClusterSnapshotsInputDict))
+    client.describe_db_engine_versions()
+    client.describe_db_engine_versions(**_request(DescribeDBEngineVersionsInputDict))
+    client.describe_db_engine_versions(_request(DescribeDBEngineVersionsInput))
+    client.describe_db_engine_versions(_request(DescribeDBEngineVersionsInputDict))
+    client.describe_db_instance_automated_backups()
+    client.describe_db_instance_automated_backups(
+        **_request(DescribeDBInstanceAutomatedBackupsInputDict)
+    )
+    client.describe_db_instance_automated_backups(
+        _request(DescribeDBInstanceAutomatedBackupsInput)
+    )
+    client.describe_db_instance_automated_backups(
+        _request(DescribeDBInstanceAutomatedBackupsInputDict)
+    )
+    client.describe_db_instances()
+    client.describe_db_instances(**_request(DescribeDBInstancesInputDict))
+    client.describe_db_instances(_request(DescribeDBInstancesInput))
+    client.describe_db_instances(_request(DescribeDBInstancesInputDict))
+    client.describe_db_log_files(db_instance_identifier=_)
+    client.describe_db_log_files(**_request(DescribeDBLogFilesInputDict))
+    client.describe_db_log_files(_request(DescribeDBLogFilesInput))
+    client.describe_db_log_files(_request(DescribeDBLogFilesInputDict))
+    client.describe_db_major_engine_versions()
+    client.describe_db_major_engine_versions(
+        **_request(DescribeDBMajorEngineVersionsInputDict)
+    )
+    client.describe_db_major_engine_versions(
+        _request(DescribeDBMajorEngineVersionsInput)
+    )
+    client.describe_db_major_engine_versions(
+        _request(DescribeDBMajorEngineVersionsInputDict)
+    )
+    client.describe_db_parameter_groups()
+    client.describe_db_parameter_groups(**_request(DescribeDBParameterGroupsInputDict))
+    client.describe_db_parameter_groups(_request(DescribeDBParameterGroupsInput))
+    client.describe_db_parameter_groups(_request(DescribeDBParameterGroupsInputDict))
+    client.describe_db_parameters(db_parameter_group_name=_)
+    client.describe_db_parameters(**_request(DescribeDBParametersInputDict))
+    client.describe_db_parameters(_request(DescribeDBParametersInput))
+    client.describe_db_parameters(_request(DescribeDBParametersInputDict))
+    client.describe_db_proxies()
+    client.describe_db_proxies(**_request(DescribeDBProxiesInputDict))
+    client.describe_db_proxies(_request(DescribeDBProxiesInput))
+    client.describe_db_proxies(_request(DescribeDBProxiesInputDict))
+    client.describe_db_proxy_endpoints()
+    client.describe_db_proxy_endpoints(**_request(DescribeDBProxyEndpointsInputDict))
+    client.describe_db_proxy_endpoints(_request(DescribeDBProxyEndpointsInput))
+    client.describe_db_proxy_endpoints(_request(DescribeDBProxyEndpointsInputDict))
+    client.describe_db_proxy_target_groups(db_proxy_name=_)
+    client.describe_db_proxy_target_groups(
+        **_request(DescribeDBProxyTargetGroupsInputDict)
+    )
+    client.describe_db_proxy_target_groups(_request(DescribeDBProxyTargetGroupsInput))
+    client.describe_db_proxy_target_groups(
+        _request(DescribeDBProxyTargetGroupsInputDict)
+    )
+    client.describe_db_proxy_targets(db_proxy_name=_)
+    client.describe_db_proxy_targets(**_request(DescribeDBProxyTargetsInputDict))
+    client.describe_db_proxy_targets(_request(DescribeDBProxyTargetsInput))
+    client.describe_db_proxy_targets(_request(DescribeDBProxyTargetsInputDict))
+    client.describe_db_recommendations()
+    client.describe_db_recommendations(**_request(DescribeDBRecommendationsInputDict))
+    client.describe_db_recommendations(_request(DescribeDBRecommendationsInput))
+    client.describe_db_recommendations(_request(DescribeDBRecommendationsInputDict))
+    client.describe_db_security_groups()
+    client.describe_db_security_groups(**_request(DescribeDBSecurityGroupsInputDict))
+    client.describe_db_security_groups(_request(DescribeDBSecurityGroupsInput))
+    client.describe_db_security_groups(_request(DescribeDBSecurityGroupsInputDict))
+    client.describe_db_shard_groups()
+    client.describe_db_shard_groups(**_request(DescribeDBShardGroupsInputDict))
+    client.describe_db_shard_groups(_request(DescribeDBShardGroupsInput))
+    client.describe_db_shard_groups(_request(DescribeDBShardGroupsInputDict))
+    client.describe_db_snapshot_attributes(db_snapshot_identifier=_)
+    client.describe_db_snapshot_attributes(
+        **_request(DescribeDBSnapshotAttributesInputDict)
+    )
+    client.describe_db_snapshot_attributes(_request(DescribeDBSnapshotAttributesInput))
+    client.describe_db_snapshot_attributes(
+        _request(DescribeDBSnapshotAttributesInputDict)
+    )
+    client.describe_db_snapshots()
+    client.describe_db_snapshots(**_request(DescribeDBSnapshotsInputDict))
+    client.describe_db_snapshots(_request(DescribeDBSnapshotsInput))
+    client.describe_db_snapshots(_request(DescribeDBSnapshotsInputDict))
+    client.describe_db_snapshot_tenant_databases()
+    client.describe_db_snapshot_tenant_databases(
+        **_request(DescribeDBSnapshotTenantDatabasesInputDict)
+    )
+    client.describe_db_snapshot_tenant_databases(
+        _request(DescribeDBSnapshotTenantDatabasesInput)
+    )
+    client.describe_db_snapshot_tenant_databases(
+        _request(DescribeDBSnapshotTenantDatabasesInputDict)
+    )
+    client.describe_db_subnet_groups()
+    client.describe_db_subnet_groups(**_request(DescribeDBSubnetGroupsInputDict))
+    client.describe_db_subnet_groups(_request(DescribeDBSubnetGroupsInput))
+    client.describe_db_subnet_groups(_request(DescribeDBSubnetGroupsInputDict))
+    client.describe_engine_default_cluster_parameters(db_parameter_group_family=_)
+    client.describe_engine_default_cluster_parameters(
+        **_request(DescribeEngineDefaultClusterParametersInputDict)
+    )
+    client.describe_engine_default_cluster_parameters(
+        _request(DescribeEngineDefaultClusterParametersInput)
+    )
+    client.describe_engine_default_cluster_parameters(
+        _request(DescribeEngineDefaultClusterParametersInputDict)
+    )
+    client.describe_engine_default_parameters(db_parameter_group_family=_)
+    client.describe_engine_default_parameters(
+        **_request(DescribeEngineDefaultParametersInputDict)
+    )
+    client.describe_engine_default_parameters(
+        _request(DescribeEngineDefaultParametersInput)
+    )
+    client.describe_engine_default_parameters(
+        _request(DescribeEngineDefaultParametersInputDict)
+    )
+    client.describe_event_categories()
+    client.describe_event_categories(**_request(DescribeEventCategoriesInputDict))
+    client.describe_event_categories(_request(DescribeEventCategoriesInput))
+    client.describe_event_categories(_request(DescribeEventCategoriesInputDict))
+    client.describe_events()
+    client.describe_events(**_request(DescribeEventsInputDict))
+    client.describe_events(_request(DescribeEventsInput))
+    client.describe_events(_request(DescribeEventsInputDict))
+    client.describe_event_subscriptions()
+    client.describe_event_subscriptions(**_request(DescribeEventSubscriptionsInputDict))
+    client.describe_event_subscriptions(_request(DescribeEventSubscriptionsInput))
+    client.describe_event_subscriptions(_request(DescribeEventSubscriptionsInputDict))
+    client.describe_export_tasks()
+    client.describe_export_tasks(**_request(DescribeExportTasksInputDict))
+    client.describe_export_tasks(_request(DescribeExportTasksInput))
+    client.describe_export_tasks(_request(DescribeExportTasksInputDict))
+    client.describe_global_clusters()
+    client.describe_global_clusters(**_request(DescribeGlobalClustersInputDict))
+    client.describe_global_clusters(_request(DescribeGlobalClustersInput))
+    client.describe_global_clusters(_request(DescribeGlobalClustersInputDict))
+    client.describe_integrations()
+    client.describe_integrations(**_request(DescribeIntegrationsInputDict))
+    client.describe_integrations(_request(DescribeIntegrationsInput))
+    client.describe_integrations(_request(DescribeIntegrationsInputDict))
+    client.describe_option_group_options(engine_name=_)
+    client.describe_option_group_options(
+        **_request(DescribeOptionGroupOptionsInputDict)
+    )
+    client.describe_option_group_options(_request(DescribeOptionGroupOptionsInput))
+    client.describe_option_group_options(_request(DescribeOptionGroupOptionsInputDict))
+    client.describe_option_groups()
+    client.describe_option_groups(**_request(DescribeOptionGroupsInputDict))
+    client.describe_option_groups(_request(DescribeOptionGroupsInput))
+    client.describe_option_groups(_request(DescribeOptionGroupsInputDict))
+    client.describe_orderable_db_instance_options(engine=_)
+    client.describe_orderable_db_instance_options(
+        **_request(DescribeOrderableDBInstanceOptionsInputDict)
+    )
+    client.describe_orderable_db_instance_options(
+        _request(DescribeOrderableDBInstanceOptionsInput)
+    )
+    client.describe_orderable_db_instance_options(
+        _request(DescribeOrderableDBInstanceOptionsInputDict)
+    )
+    client.describe_pending_maintenance_actions()
+    client.describe_pending_maintenance_actions(
+        **_request(DescribePendingMaintenanceActionsInputDict)
+    )
+    client.describe_pending_maintenance_actions(
+        _request(DescribePendingMaintenanceActionsInput)
+    )
+    client.describe_pending_maintenance_actions(
+        _request(DescribePendingMaintenanceActionsInputDict)
+    )
+    client.describe_reserved_db_instances()
+    client.describe_reserved_db_instances(
+        **_request(DescribeReservedDBInstancesInputDict)
+    )
+    client.describe_reserved_db_instances(_request(DescribeReservedDBInstancesInput))
+    client.describe_reserved_db_instances(
+        _request(DescribeReservedDBInstancesInputDict)
+    )
+    client.describe_reserved_db_instances_offerings()
+    client.describe_reserved_db_instances_offerings(
+        **_request(DescribeReservedDBInstancesOfferingsInputDict)
+    )
+    client.describe_reserved_db_instances_offerings(
+        _request(DescribeReservedDBInstancesOfferingsInput)
+    )
+    client.describe_reserved_db_instances_offerings(
+        _request(DescribeReservedDBInstancesOfferingsInputDict)
+    )
+    client.describe_serverless_v2_platform_versions()
+    client.describe_serverless_v2_platform_versions(
+        **_request(DescribeServerlessV2PlatformVersionsInputDict)
+    )
+    client.describe_serverless_v2_platform_versions(
+        _request(DescribeServerlessV2PlatformVersionsInput)
+    )
+    client.describe_serverless_v2_platform_versions(
+        _request(DescribeServerlessV2PlatformVersionsInputDict)
+    )
+    client.describe_source_regions()
+    client.describe_source_regions(**_request(DescribeSourceRegionsInputDict))
+    client.describe_source_regions(_request(DescribeSourceRegionsInput))
+    client.describe_source_regions(_request(DescribeSourceRegionsInputDict))
+    client.describe_tenant_databases()
+    client.describe_tenant_databases(**_request(DescribeTenantDatabasesInputDict))
+    client.describe_tenant_databases(_request(DescribeTenantDatabasesInput))
+    client.describe_tenant_databases(_request(DescribeTenantDatabasesInputDict))
+    client.describe_valid_db_instance_modifications(db_instance_identifier=_)
+    client.describe_valid_db_instance_modifications(
+        **_request(DescribeValidDBInstanceModificationsInputDict)
+    )
+    client.describe_valid_db_instance_modifications(
+        _request(DescribeValidDBInstanceModificationsInput)
+    )
+    client.describe_valid_db_instance_modifications(
+        _request(DescribeValidDBInstanceModificationsInputDict)
+    )
+    client.disable_http_endpoint(resource_arn=_)
+    client.disable_http_endpoint(**_request(DisableHttpEndpointInputDict))
+    client.disable_http_endpoint(_request(DisableHttpEndpointInput))
+    client.disable_http_endpoint(_request(DisableHttpEndpointInputDict))
+    client.download_db_log_file_portion(db_instance_identifier=_, log_file_name=_)
+    client.download_db_log_file_portion(**_request(DownloadDBLogFilePortionInputDict))
+    client.download_db_log_file_portion(_request(DownloadDBLogFilePortionInput))
+    client.download_db_log_file_portion(_request(DownloadDBLogFilePortionInputDict))
+    client.enable_http_endpoint(resource_arn=_)
+    client.enable_http_endpoint(**_request(EnableHttpEndpointInputDict))
+    client.enable_http_endpoint(_request(EnableHttpEndpointInput))
+    client.enable_http_endpoint(_request(EnableHttpEndpointInputDict))
+    client.failover_db_cluster(db_cluster_identifier=_)
+    client.failover_db_cluster(**_request(FailoverDBClusterInputDict))
+    client.failover_db_cluster(_request(FailoverDBClusterInput))
+    client.failover_db_cluster(_request(FailoverDBClusterInputDict))
+    client.failover_global_cluster(
+        global_cluster_identifier=_, target_db_cluster_identifier=_
+    )
+    client.failover_global_cluster(**_request(FailoverGlobalClusterInputDict))
+    client.failover_global_cluster(_request(FailoverGlobalClusterInput))
+    client.failover_global_cluster(_request(FailoverGlobalClusterInputDict))
+    client.list_tags_for_resource(resource_name=_)
+    client.list_tags_for_resource(**_request(ListTagsForResourceInputDict))
+    client.list_tags_for_resource(_request(ListTagsForResourceInput))
+    client.list_tags_for_resource(_request(ListTagsForResourceInputDict))
+    client.modify_activity_stream()
+    client.modify_activity_stream(**_request(ModifyActivityStreamInputDict))
+    client.modify_activity_stream(_request(ModifyActivityStreamInput))
+    client.modify_activity_stream(_request(ModifyActivityStreamInputDict))
+    client.modify_certificates()
+    client.modify_certificates(**_request(ModifyCertificatesInputDict))
+    client.modify_certificates(_request(ModifyCertificatesInput))
+    client.modify_certificates(_request(ModifyCertificatesInputDict))
+    client.modify_current_db_cluster_capacity(db_cluster_identifier=_)
+    client.modify_current_db_cluster_capacity(
+        **_request(ModifyCurrentDBClusterCapacityInputDict)
+    )
+    client.modify_current_db_cluster_capacity(
+        _request(ModifyCurrentDBClusterCapacityInput)
+    )
+    client.modify_current_db_cluster_capacity(
+        _request(ModifyCurrentDBClusterCapacityInputDict)
+    )
+    client.modify_custom_db_engine_version(engine=_, engine_version=_)
+    client.modify_custom_db_engine_version(
+        **_request(ModifyCustomDBEngineVersionInputDict)
+    )
+    client.modify_custom_db_engine_version(_request(ModifyCustomDBEngineVersionInput))
+    client.modify_custom_db_engine_version(
+        _request(ModifyCustomDBEngineVersionInputDict)
+    )
+    client.modify_db_capacity_reservation(db_capacity_reservation_identifier=_)
+    client.modify_db_capacity_reservation(
+        **_request(ModifyDBCapacityReservationInputDict)
+    )
+    client.modify_db_capacity_reservation(_request(ModifyDBCapacityReservationInput))
+    client.modify_db_capacity_reservation(
+        _request(ModifyDBCapacityReservationInputDict)
+    )
+    client.modify_db_cluster(db_cluster_identifier=_)
+    client.modify_db_cluster(**_request(ModifyDBClusterInputDict))
+    client.modify_db_cluster(_request(ModifyDBClusterInput))
+    client.modify_db_cluster(_request(ModifyDBClusterInputDict))
+    client.modify_db_cluster_endpoint(db_cluster_endpoint_identifier=_)
+    client.modify_db_cluster_endpoint(**_request(ModifyDBClusterEndpointInputDict))
+    client.modify_db_cluster_endpoint(_request(ModifyDBClusterEndpointInput))
+    client.modify_db_cluster_endpoint(_request(ModifyDBClusterEndpointInputDict))
+    client.modify_db_cluster_parameter_group(
+        db_cluster_parameter_group_name=_, parameters=_
+    )
+    client.modify_db_cluster_parameter_group(
+        **_request(ModifyDBClusterParameterGroupInputDict)
+    )
+    client.modify_db_cluster_parameter_group(
+        _request(ModifyDBClusterParameterGroupInput)
+    )
+    client.modify_db_cluster_parameter_group(
+        _request(ModifyDBClusterParameterGroupInputDict)
+    )
+    client.modify_db_cluster_snapshot_attribute(
+        db_cluster_snapshot_identifier=_, attribute_name=_
+    )
+    client.modify_db_cluster_snapshot_attribute(
+        **_request(ModifyDBClusterSnapshotAttributeInputDict)
+    )
+    client.modify_db_cluster_snapshot_attribute(
+        _request(ModifyDBClusterSnapshotAttributeInput)
+    )
+    client.modify_db_cluster_snapshot_attribute(
+        _request(ModifyDBClusterSnapshotAttributeInputDict)
+    )
+    client.modify_db_instance(db_instance_identifier=_)
+    client.modify_db_instance(**_request(ModifyDBInstanceInputDict))
+    client.modify_db_instance(_request(ModifyDBInstanceInput))
+    client.modify_db_instance(_request(ModifyDBInstanceInputDict))
+    client.modify_db_parameter_group(db_parameter_group_name=_, parameters=_)
+    client.modify_db_parameter_group(**_request(ModifyDBParameterGroupInputDict))
+    client.modify_db_parameter_group(_request(ModifyDBParameterGroupInput))
+    client.modify_db_parameter_group(_request(ModifyDBParameterGroupInputDict))
+    client.modify_db_proxy(db_proxy_name=_)
+    client.modify_db_proxy(**_request(ModifyDBProxyInputDict))
+    client.modify_db_proxy(_request(ModifyDBProxyInput))
+    client.modify_db_proxy(_request(ModifyDBProxyInputDict))
+    client.modify_db_proxy_endpoint(db_proxy_endpoint_name=_)
+    client.modify_db_proxy_endpoint(**_request(ModifyDBProxyEndpointInputDict))
+    client.modify_db_proxy_endpoint(_request(ModifyDBProxyEndpointInput))
+    client.modify_db_proxy_endpoint(_request(ModifyDBProxyEndpointInputDict))
+    client.modify_db_proxy_target_group(target_group_name=_, db_proxy_name=_)
+    client.modify_db_proxy_target_group(**_request(ModifyDBProxyTargetGroupInputDict))
+    client.modify_db_proxy_target_group(_request(ModifyDBProxyTargetGroupInput))
+    client.modify_db_proxy_target_group(_request(ModifyDBProxyTargetGroupInputDict))
+    client.modify_db_recommendation(recommendation_id=_)
+    client.modify_db_recommendation(**_request(ModifyDBRecommendationInputDict))
+    client.modify_db_recommendation(_request(ModifyDBRecommendationInput))
+    client.modify_db_recommendation(_request(ModifyDBRecommendationInputDict))
+    client.modify_db_shard_group(db_shard_group_identifier=_)
+    client.modify_db_shard_group(**_request(ModifyDBShardGroupInputDict))
+    client.modify_db_shard_group(_request(ModifyDBShardGroupInput))
+    client.modify_db_shard_group(_request(ModifyDBShardGroupInputDict))
+    client.modify_db_snapshot(db_snapshot_identifier=_)
+    client.modify_db_snapshot(**_request(ModifyDBSnapshotInputDict))
+    client.modify_db_snapshot(_request(ModifyDBSnapshotInput))
+    client.modify_db_snapshot(_request(ModifyDBSnapshotInputDict))
+    client.modify_db_snapshot_attribute(db_snapshot_identifier=_, attribute_name=_)
+    client.modify_db_snapshot_attribute(**_request(ModifyDBSnapshotAttributeInputDict))
+    client.modify_db_snapshot_attribute(_request(ModifyDBSnapshotAttributeInput))
+    client.modify_db_snapshot_attribute(_request(ModifyDBSnapshotAttributeInputDict))
+    client.modify_db_subnet_group(db_subnet_group_name=_, subnet_ids=_)
+    client.modify_db_subnet_group(**_request(ModifyDBSubnetGroupInputDict))
+    client.modify_db_subnet_group(_request(ModifyDBSubnetGroupInput))
+    client.modify_db_subnet_group(_request(ModifyDBSubnetGroupInputDict))
+    client.modify_event_subscription(subscription_name=_)
+    client.modify_event_subscription(**_request(ModifyEventSubscriptionInputDict))
+    client.modify_event_subscription(_request(ModifyEventSubscriptionInput))
+    client.modify_event_subscription(_request(ModifyEventSubscriptionInputDict))
+    client.modify_global_cluster(global_cluster_identifier=_)
+    client.modify_global_cluster(**_request(ModifyGlobalClusterInputDict))
+    client.modify_global_cluster(_request(ModifyGlobalClusterInput))
+    client.modify_global_cluster(_request(ModifyGlobalClusterInputDict))
+    client.modify_integration(integration_identifier=_)
+    client.modify_integration(**_request(ModifyIntegrationInputDict))
+    client.modify_integration(_request(ModifyIntegrationInput))
+    client.modify_integration(_request(ModifyIntegrationInputDict))
+    client.modify_option_group(option_group_name=_)
+    client.modify_option_group(**_request(ModifyOptionGroupInputDict))
+    client.modify_option_group(_request(ModifyOptionGroupInput))
+    client.modify_option_group(_request(ModifyOptionGroupInputDict))
+    client.modify_tenant_database(db_instance_identifier=_, tenant_db_name=_)
+    client.modify_tenant_database(**_request(ModifyTenantDatabaseInputDict))
+    client.modify_tenant_database(_request(ModifyTenantDatabaseInput))
+    client.modify_tenant_database(_request(ModifyTenantDatabaseInputDict))
+    client.promote_read_replica(db_instance_identifier=_)
+    client.promote_read_replica(**_request(PromoteReadReplicaInputDict))
+    client.promote_read_replica(_request(PromoteReadReplicaInput))
+    client.promote_read_replica(_request(PromoteReadReplicaInputDict))
+    client.promote_read_replica_db_cluster(db_cluster_identifier=_)
+    client.promote_read_replica_db_cluster(
+        **_request(PromoteReadReplicaDBClusterInputDict)
+    )
+    client.promote_read_replica_db_cluster(_request(PromoteReadReplicaDBClusterInput))
+    client.promote_read_replica_db_cluster(
+        _request(PromoteReadReplicaDBClusterInputDict)
+    )
+    client.purchase_reserved_db_instances_offering(reserved_db_instances_offering_id=_)
+    client.purchase_reserved_db_instances_offering(
+        **_request(PurchaseReservedDBInstancesOfferingInputDict)
+    )
+    client.purchase_reserved_db_instances_offering(
+        _request(PurchaseReservedDBInstancesOfferingInput)
+    )
+    client.purchase_reserved_db_instances_offering(
+        _request(PurchaseReservedDBInstancesOfferingInputDict)
+    )
+    client.reboot_db_cluster(db_cluster_identifier=_)
+    client.reboot_db_cluster(**_request(RebootDBClusterInputDict))
+    client.reboot_db_cluster(_request(RebootDBClusterInput))
+    client.reboot_db_cluster(_request(RebootDBClusterInputDict))
+    client.reboot_db_instance(db_instance_identifier=_)
+    client.reboot_db_instance(**_request(RebootDBInstanceInputDict))
+    client.reboot_db_instance(_request(RebootDBInstanceInput))
+    client.reboot_db_instance(_request(RebootDBInstanceInputDict))
+    client.reboot_db_shard_group(db_shard_group_identifier=_)
+    client.reboot_db_shard_group(**_request(RebootDBShardGroupInputDict))
+    client.reboot_db_shard_group(_request(RebootDBShardGroupInput))
+    client.reboot_db_shard_group(_request(RebootDBShardGroupInputDict))
+    client.register_db_proxy_targets(db_proxy_name=_)
+    client.register_db_proxy_targets(**_request(RegisterDBProxyTargetsInputDict))
+    client.register_db_proxy_targets(_request(RegisterDBProxyTargetsInput))
+    client.register_db_proxy_targets(_request(RegisterDBProxyTargetsInputDict))
+    client.remove_from_global_cluster(
+        global_cluster_identifier=_, db_cluster_identifier=_
+    )
+    client.remove_from_global_cluster(**_request(RemoveFromGlobalClusterInputDict))
+    client.remove_from_global_cluster(_request(RemoveFromGlobalClusterInput))
+    client.remove_from_global_cluster(_request(RemoveFromGlobalClusterInputDict))
+    client.remove_role_from_db_cluster(db_cluster_identifier=_, role_arn=_)
+    client.remove_role_from_db_cluster(**_request(RemoveRoleFromDBClusterInputDict))
+    client.remove_role_from_db_cluster(_request(RemoveRoleFromDBClusterInput))
+    client.remove_role_from_db_cluster(_request(RemoveRoleFromDBClusterInputDict))
+    client.remove_role_from_db_instance(
+        db_instance_identifier=_, role_arn=_, feature_name=_
+    )
+    client.remove_role_from_db_instance(**_request(RemoveRoleFromDBInstanceInputDict))
+    client.remove_role_from_db_instance(_request(RemoveRoleFromDBInstanceInput))
+    client.remove_role_from_db_instance(_request(RemoveRoleFromDBInstanceInputDict))
+    client.remove_source_identifier_from_subscription(
+        subscription_name=_, source_identifier=_
+    )
+    client.remove_source_identifier_from_subscription(
+        **_request(RemoveSourceIdentifierFromSubscriptionInputDict)
+    )
+    client.remove_source_identifier_from_subscription(
+        _request(RemoveSourceIdentifierFromSubscriptionInput)
+    )
+    client.remove_source_identifier_from_subscription(
+        _request(RemoveSourceIdentifierFromSubscriptionInputDict)
+    )
+    client.remove_tags_from_resource(resource_name=_, tag_keys=_)
+    client.remove_tags_from_resource(**_request(RemoveTagsFromResourceInputDict))
+    client.remove_tags_from_resource(_request(RemoveTagsFromResourceInput))
+    client.remove_tags_from_resource(_request(RemoveTagsFromResourceInputDict))
+    client.reset_db_cluster_parameter_group(db_cluster_parameter_group_name=_)
+    client.reset_db_cluster_parameter_group(
+        **_request(ResetDBClusterParameterGroupInputDict)
+    )
+    client.reset_db_cluster_parameter_group(_request(ResetDBClusterParameterGroupInput))
+    client.reset_db_cluster_parameter_group(
+        _request(ResetDBClusterParameterGroupInputDict)
+    )
+    client.reset_db_parameter_group(db_parameter_group_name=_)
+    client.reset_db_parameter_group(**_request(ResetDBParameterGroupInputDict))
+    client.reset_db_parameter_group(_request(ResetDBParameterGroupInput))
+    client.reset_db_parameter_group(_request(ResetDBParameterGroupInputDict))
+    client.restore_db_cluster_from_s3(
+        db_cluster_identifier=_,
+        engine=_,
+        master_username=_,
+        source_engine=_,
+        source_engine_version=_,
+        s3_bucket_name=_,
+        s3_ingestion_role_arn=_,
+    )
+    client.restore_db_cluster_from_s3(**_request(RestoreDBClusterFromS3InputDict))
+    client.restore_db_cluster_from_s3(_request(RestoreDBClusterFromS3Input))
+    client.restore_db_cluster_from_s3(_request(RestoreDBClusterFromS3InputDict))
+    client.restore_db_cluster_from_snapshot(
+        db_cluster_identifier=_, snapshot_identifier=_, engine=_
+    )
+    client.restore_db_cluster_from_snapshot(
+        **_request(RestoreDBClusterFromSnapshotInputDict)
+    )
+    client.restore_db_cluster_from_snapshot(_request(RestoreDBClusterFromSnapshotInput))
+    client.restore_db_cluster_from_snapshot(
+        _request(RestoreDBClusterFromSnapshotInputDict)
+    )
+    client.restore_db_cluster_to_point_in_time(db_cluster_identifier=_)
+    client.restore_db_cluster_to_point_in_time(
+        **_request(RestoreDBClusterToPointInTimeInputDict)
+    )
+    client.restore_db_cluster_to_point_in_time(
+        _request(RestoreDBClusterToPointInTimeInput)
+    )
+    client.restore_db_cluster_to_point_in_time(
+        _request(RestoreDBClusterToPointInTimeInputDict)
+    )
+    client.restore_db_instance_from_db_snapshot(db_instance_identifier=_)
+    client.restore_db_instance_from_db_snapshot(
+        **_request(RestoreDBInstanceFromDBSnapshotInputDict)
+    )
+    client.restore_db_instance_from_db_snapshot(
+        _request(RestoreDBInstanceFromDBSnapshotInput)
+    )
+    client.restore_db_instance_from_db_snapshot(
+        _request(RestoreDBInstanceFromDBSnapshotInputDict)
+    )
+    client.restore_db_instance_from_s3(
+        db_instance_identifier=_,
+        db_instance_class=_,
+        engine=_,
+        source_engine=_,
+        source_engine_version=_,
+        s3_bucket_name=_,
+        s3_ingestion_role_arn=_,
+    )
+    client.restore_db_instance_from_s3(**_request(RestoreDBInstanceFromS3InputDict))
+    client.restore_db_instance_from_s3(_request(RestoreDBInstanceFromS3Input))
+    client.restore_db_instance_from_s3(_request(RestoreDBInstanceFromS3InputDict))
+    client.restore_db_instance_to_point_in_time(target_db_instance_identifier=_)
+    client.restore_db_instance_to_point_in_time(
+        **_request(RestoreDBInstanceToPointInTimeInputDict)
+    )
+    client.restore_db_instance_to_point_in_time(
+        _request(RestoreDBInstanceToPointInTimeInput)
+    )
+    client.restore_db_instance_to_point_in_time(
+        _request(RestoreDBInstanceToPointInTimeInputDict)
+    )
+    client.revoke_db_security_group_ingress(db_security_group_name=_)
+    client.revoke_db_security_group_ingress(
+        **_request(RevokeDBSecurityGroupIngressInputDict)
+    )
+    client.revoke_db_security_group_ingress(_request(RevokeDBSecurityGroupIngressInput))
+    client.revoke_db_security_group_ingress(
+        _request(RevokeDBSecurityGroupIngressInputDict)
+    )
+    client.start_activity_stream(resource_arn=_, mode=_, kms_key_id=_)
+    client.start_activity_stream(**_request(StartActivityStreamInputDict))
+    client.start_activity_stream(_request(StartActivityStreamInput))
+    client.start_activity_stream(_request(StartActivityStreamInputDict))
+    client.start_db_cluster(db_cluster_identifier=_)
+    client.start_db_cluster(**_request(StartDBClusterInputDict))
+    client.start_db_cluster(_request(StartDBClusterInput))
+    client.start_db_cluster(_request(StartDBClusterInputDict))
+    client.start_db_instance(db_instance_identifier=_)
+    client.start_db_instance(**_request(StartDBInstanceInputDict))
+    client.start_db_instance(_request(StartDBInstanceInput))
+    client.start_db_instance(_request(StartDBInstanceInputDict))
+    client.start_db_instance_automated_backups_replication(source_db_instance_arn=_)
+    client.start_db_instance_automated_backups_replication(
+        **_request(StartDBInstanceAutomatedBackupsReplicationInputDict)
+    )
+    client.start_db_instance_automated_backups_replication(
+        _request(StartDBInstanceAutomatedBackupsReplicationInput)
+    )
+    client.start_db_instance_automated_backups_replication(
+        _request(StartDBInstanceAutomatedBackupsReplicationInputDict)
+    )
+    client.start_export_task(
+        export_task_identifier=_,
+        source_arn=_,
+        s3_bucket_name=_,
+        iam_role_arn=_,
+        kms_key_id=_,
+    )
+    client.start_export_task(**_request(StartExportTaskInputDict))
+    client.start_export_task(_request(StartExportTaskInput))
+    client.start_export_task(_request(StartExportTaskInputDict))
+    client.stop_activity_stream(resource_arn=_)
+    client.stop_activity_stream(**_request(StopActivityStreamInputDict))
+    client.stop_activity_stream(_request(StopActivityStreamInput))
+    client.stop_activity_stream(_request(StopActivityStreamInputDict))
+    client.stop_db_cluster(db_cluster_identifier=_)
+    client.stop_db_cluster(**_request(StopDBClusterInputDict))
+    client.stop_db_cluster(_request(StopDBClusterInput))
+    client.stop_db_cluster(_request(StopDBClusterInputDict))
+    client.stop_db_instance(db_instance_identifier=_)
+    client.stop_db_instance(**_request(StopDBInstanceInputDict))
+    client.stop_db_instance(_request(StopDBInstanceInput))
+    client.stop_db_instance(_request(StopDBInstanceInputDict))
+    client.stop_db_instance_automated_backups_replication(source_db_instance_arn=_)
+    client.stop_db_instance_automated_backups_replication(
+        **_request(StopDBInstanceAutomatedBackupsReplicationInputDict)
+    )
+    client.stop_db_instance_automated_backups_replication(
+        _request(StopDBInstanceAutomatedBackupsReplicationInput)
+    )
+    client.stop_db_instance_automated_backups_replication(
+        _request(StopDBInstanceAutomatedBackupsReplicationInputDict)
+    )
+    client.switchover_blue_green_deployment(blue_green_deployment_identifier=_)
+    client.switchover_blue_green_deployment(
+        **_request(SwitchoverBlueGreenDeploymentInputDict)
+    )
+    client.switchover_blue_green_deployment(
+        _request(SwitchoverBlueGreenDeploymentInput)
+    )
+    client.switchover_blue_green_deployment(
+        _request(SwitchoverBlueGreenDeploymentInputDict)
+    )
+    client.switchover_global_cluster(
+        global_cluster_identifier=_, target_db_cluster_identifier=_
+    )
+    client.switchover_global_cluster(**_request(SwitchoverGlobalClusterInputDict))
+    client.switchover_global_cluster(_request(SwitchoverGlobalClusterInput))
+    client.switchover_global_cluster(_request(SwitchoverGlobalClusterInputDict))
+    client.switchover_read_replica(db_instance_identifier=_)
+    client.switchover_read_replica(**_request(SwitchoverReadReplicaInputDict))
+    client.switchover_read_replica(_request(SwitchoverReadReplicaInput))
+    client.switchover_read_replica(_request(SwitchoverReadReplicaInputDict))

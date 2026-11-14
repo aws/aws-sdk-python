@@ -2,8 +2,11 @@
 
 from typing import Any
 
+from aws_sdk_acm.aio.client import AsyncACMClient
+from aws_sdk_acm.client import ACMClient
 from aws_sdk_acm.models import (
     AcmCertificateMetadata,
+    AcmCertificateMetadataFilterDict,
     AcmeAccount,
     AcmeAccountSummary,
     AcmeDomainValidation,
@@ -13,124 +16,184 @@ from aws_sdk_acm.models import (
     AcmeExternalAccountBinding,
     AcmeExternalAccountBindingSummary,
     AddTagsToCertificateInput,
+    AddTagsToCertificateInputDict,
     AddTagsToCertificateOutput,
+    CertificateAuthorityDict,
     CertificateDetail,
+    CertificateFilterDict,
+    CertificateFilterStatementDict,
     CertificateOptions,
+    CertificateOptionsDict,
     CertificateSearchResult,
     CertificateSummary,
     CommonNameFilter,
+    CommonNameFilterDict,
     CreateAcmeDomainValidationInput,
+    CreateAcmeDomainValidationInputDict,
     CreateAcmeDomainValidationOutput,
     CreateAcmeEndpointInput,
+    CreateAcmeEndpointInputDict,
     CreateAcmeEndpointOutput,
     CreateAcmeExternalAccountBindingInput,
+    CreateAcmeExternalAccountBindingInputDict,
     CreateAcmeExternalAccountBindingOutput,
     CustomAttribute,
     DeleteAcmeDomainValidationInput,
+    DeleteAcmeDomainValidationInputDict,
     DeleteAcmeDomainValidationOutput,
     DeleteAcmeEndpointInput,
+    DeleteAcmeEndpointInputDict,
     DeleteAcmeEndpointOutput,
     DeleteAcmeExternalAccountBindingInput,
+    DeleteAcmeExternalAccountBindingInputDict,
     DeleteAcmeExternalAccountBindingOutput,
     DeleteCertificateInput,
+    DeleteCertificateInputDict,
     DeleteCertificateOutput,
     DescribeAcmeAccountInput,
+    DescribeAcmeAccountInputDict,
     DescribeAcmeAccountOutput,
     DescribeAcmeDomainValidationInput,
+    DescribeAcmeDomainValidationInputDict,
     DescribeAcmeDomainValidationOutput,
     DescribeAcmeEndpointInput,
+    DescribeAcmeEndpointInputDict,
     DescribeAcmeEndpointOutput,
     DescribeAcmeExternalAccountBindingInput,
+    DescribeAcmeExternalAccountBindingInputDict,
     DescribeAcmeExternalAccountBindingOutput,
     DescribeCertificateInput,
+    DescribeCertificateInputDict,
     DescribeCertificateOutput,
     DistinguishedName,
     DnsNameFilter,
+    DnsNameFilterDict,
     DnsPrevalidationDetails,
     DnsPrevalidationOptions,
+    DnsPrevalidationOptionsDict,
     DnsValidationChallenge,
     DomainScope,
+    DomainScopeDict,
     DomainValidation,
     DomainValidationMethodUpdateSummary,
     DomainValidationOption,
+    DomainValidationOptionDict,
     DomainValidationSummary,
     EmailValidationChallenge,
     Expiration,
+    ExpirationDict,
     ExpiryEventsConfiguration,
+    ExpiryEventsConfigurationDict,
     ExportCertificateInput,
+    ExportCertificateInputDict,
     ExportCertificateOutput,
     ExtendedKeyUsage,
     FailureDetails,
     Filters,
+    FiltersDict,
     GetAccountConfigurationInput,
+    GetAccountConfigurationInputDict,
     GetAccountConfigurationOutput,
     GetAcmeExternalAccountBindingCredentialsInput,
+    GetAcmeExternalAccountBindingCredentialsInputDict,
     GetAcmeExternalAccountBindingCredentialsOutput,
     GetCertificateInput,
+    GetCertificateInputDict,
     GetCertificateOutput,
     HttpRedirect,
     ImportCertificateInput,
+    ImportCertificateInputDict,
     ImportCertificateOutput,
     KeyUsage,
     ListAcmeAccountsInput,
+    ListAcmeAccountsInputDict,
     ListAcmeAccountsOutput,
     ListAcmeDomainValidationsInput,
+    ListAcmeDomainValidationsInputDict,
     ListAcmeDomainValidationsOutput,
     ListAcmeEndpointsInput,
+    ListAcmeEndpointsInputDict,
     ListAcmeEndpointsOutput,
     ListAcmeExternalAccountBindingsInput,
+    ListAcmeExternalAccountBindingsInputDict,
     ListAcmeExternalAccountBindingsOutput,
     ListCertificateDomainValidationsInput,
+    ListCertificateDomainValidationsInputDict,
     ListCertificateDomainValidationsOutput,
     ListCertificatesInput,
+    ListCertificatesInputDict,
     ListCertificatesOutput,
     ListTagsForCertificateInput,
+    ListTagsForCertificateInputDict,
     ListTagsForCertificateOutput,
     ListTagsForResourceInput,
+    ListTagsForResourceInputDict,
     ListTagsForResourceOutput,
     OtherName,
+    PrevalidationOptionsDict,
     PublicCertificateAuthority,
+    PublicCertificateAuthorityDict,
     PutAccountConfigurationInput,
+    PutAccountConfigurationInputDict,
     PutAccountConfigurationOutput,
     RemoveTagsFromCertificateInput,
+    RemoveTagsFromCertificateInputDict,
     RemoveTagsFromCertificateOutput,
     RenewCertificateInput,
+    RenewCertificateInputDict,
     RenewCertificateOutput,
     RenewalSummary,
     RequestCertificateInput,
+    RequestCertificateInputDict,
     RequestCertificateOutput,
     ResendValidationEmailInput,
+    ResendValidationEmailInputDict,
     ResendValidationEmailOutput,
     ResourceRecord,
     RevokeAcmeAccountInput,
+    RevokeAcmeAccountInputDict,
     RevokeAcmeAccountOutput,
     RevokeAcmeExternalAccountBindingInput,
+    RevokeAcmeExternalAccountBindingInputDict,
     RevokeAcmeExternalAccountBindingOutput,
     RevokeCertificateInput,
+    RevokeCertificateInputDict,
     RevokeCertificateOutput,
     SearchCertificatesInput,
+    SearchCertificatesInputDict,
     SearchCertificatesOutput,
+    SubjectAlternativeNameFilterDict,
+    SubjectFilterDict,
     Tag,
+    TagDict,
     TagResourceInput,
+    TagResourceInputDict,
     TagResourceOutput,
     ThrottlingReason,
     TimestampRange,
+    TimestampRangeDict,
     UntagResourceInput,
+    UntagResourceInputDict,
     UntagResourceOutput,
     UpdateAcmeDomainValidationInput,
+    UpdateAcmeDomainValidationInputDict,
     UpdateAcmeDomainValidationOutput,
     UpdateAcmeEndpointInput,
+    UpdateAcmeEndpointInputDict,
     UpdateAcmeEndpointOutput,
     UpdateCertificateOptionsInput,
+    UpdateCertificateOptionsInputDict,
     UpdateCertificateOptionsOutput,
     UpdateSummary,
     ValidationConfiguration,
+    X509AttributeFilterDict,
     X509Attributes,
 )
 
 
-# Static type fixture: pyright over this validates models.pyi.
-# Not executed as a test; it only needs to type-check.
+# Static type fixture: pyright over this validates models.pyi and the
+# client method signatures. Not executed as a test; it only needs to
+# type-check.
 
 _: Any = ...
 
@@ -257,3 +320,561 @@ UpdateCertificateOptionsOutput()
 UpdateSummary()
 ValidationConfiguration()
 X509Attributes()
+_params_0: AcmCertificateMetadataFilterDict = {"status": _}
+_params_1: AddTagsToCertificateInputDict = {"certificate_arn": _, "tags": _}
+_params_2: CertificateAuthorityDict = {"public_certificate_authority": _}
+_params_3: CertificateFilterDict = {"certificate_arn": _}
+_params_4: CertificateFilterStatementDict = {"and_": _}
+_params_5: CertificateOptionsDict = {}
+_params_6: CommonNameFilterDict = {"value": _, "comparison_operator": _}
+_params_7: CreateAcmeDomainValidationInputDict = {
+    "acme_endpoint_arn": _,
+    "domain_name": _,
+    "prevalidation_options": _,
+}
+_params_8: CreateAcmeEndpointInputDict = {
+    "authorization_behavior": _,
+    "certificate_authority": _,
+}
+_params_9: CreateAcmeExternalAccountBindingInputDict = {
+    "acme_endpoint_arn": _,
+    "role_arn": _,
+}
+_params_10: DeleteAcmeDomainValidationInputDict = {"acme_domain_validation_arn": _}
+_params_11: DeleteAcmeEndpointInputDict = {"acme_endpoint_arn": _}
+_params_12: DeleteAcmeExternalAccountBindingInputDict = {
+    "acme_external_account_binding_arn": _
+}
+_params_13: DeleteCertificateInputDict = {"certificate_arn": _}
+_params_14: DescribeAcmeAccountInputDict = {"acme_endpoint_arn": _, "account_url": _}
+_params_15: DescribeAcmeDomainValidationInputDict = {"acme_domain_validation_arn": _}
+_params_16: DescribeAcmeEndpointInputDict = {"acme_endpoint_arn": _}
+_params_17: DescribeAcmeExternalAccountBindingInputDict = {
+    "acme_external_account_binding_arn": _
+}
+_params_18: DescribeCertificateInputDict = {"certificate_arn": _}
+_params_19: DnsNameFilterDict = {"value": _, "comparison_operator": _}
+_params_20: DnsPrevalidationOptionsDict = {}
+_params_21: DomainScopeDict = {}
+_params_22: DomainValidationOptionDict = {"domain_name": _, "validation_domain": _}
+_params_23: ExpirationDict = {"value": _, "type": _}
+_params_24: ExpiryEventsConfigurationDict = {}
+_params_25: ExportCertificateInputDict = {"certificate_arn": _, "passphrase": _}
+_params_26: FiltersDict = {}
+_params_27: GetAccountConfigurationInputDict = {}
+_params_28: GetAcmeExternalAccountBindingCredentialsInputDict = {
+    "acme_external_account_binding_arn": _
+}
+_params_29: GetCertificateInputDict = {"certificate_arn": _}
+_params_30: ImportCertificateInputDict = {"certificate": _, "private_key": _}
+_params_31: ListAcmeAccountsInputDict = {"acme_endpoint_arn": _}
+_params_32: ListAcmeDomainValidationsInputDict = {"acme_endpoint_arn": _}
+_params_33: ListAcmeEndpointsInputDict = {}
+_params_34: ListAcmeExternalAccountBindingsInputDict = {"acme_endpoint_arn": _}
+_params_35: ListCertificateDomainValidationsInputDict = {"certificate_arn": _}
+_params_36: ListCertificatesInputDict = {}
+_params_37: ListTagsForCertificateInputDict = {"certificate_arn": _}
+_params_38: ListTagsForResourceInputDict = {"resource_arn": _}
+_params_39: PrevalidationOptionsDict = {"dns_prevalidation": _}
+_params_40: PublicCertificateAuthorityDict = {}
+_params_41: PutAccountConfigurationInputDict = {"idempotency_token": _}
+_params_42: RemoveTagsFromCertificateInputDict = {"certificate_arn": _, "tags": _}
+_params_43: RenewCertificateInputDict = {"certificate_arn": _}
+_params_44: RequestCertificateInputDict = {"domain_name": _}
+_params_45: ResendValidationEmailInputDict = {
+    "certificate_arn": _,
+    "domain": _,
+    "validation_domain": _,
+}
+_params_46: RevokeAcmeAccountInputDict = {"acme_endpoint_arn": _, "account_url": _}
+_params_47: RevokeAcmeExternalAccountBindingInputDict = {
+    "acme_external_account_binding_arn": _
+}
+_params_48: RevokeCertificateInputDict = {"certificate_arn": _, "revocation_reason": _}
+_params_49: SearchCertificatesInputDict = {}
+_params_50: SubjectAlternativeNameFilterDict = {"dns_name": _}
+_params_51: SubjectFilterDict = {"common_name": _}
+_params_52: TagDict = {"key": _}
+_params_53: TagResourceInputDict = {"resource_arn": _, "tags": _}
+_params_54: TimestampRangeDict = {}
+_params_55: UntagResourceInputDict = {"resource_arn": _, "tag_keys": _}
+_params_56: UpdateAcmeDomainValidationInputDict = {"acme_domain_validation_arn": _}
+_params_57: UpdateAcmeEndpointInputDict = {"acme_endpoint_arn": _}
+_params_58: UpdateCertificateOptionsInputDict = {"certificate_arn": _, "options": _}
+_params_59: X509AttributeFilterDict = {"subject": _}
+
+
+def _request[T](form: type[T]) -> T:
+    raise NotImplementedError
+
+
+async def check_async_calls(client: AsyncACMClient) -> None:
+    pass
+    await client.add_tags_to_certificate(certificate_arn=_, tags=_)
+    await client.add_tags_to_certificate(**_request(AddTagsToCertificateInputDict))
+    await client.add_tags_to_certificate(_request(AddTagsToCertificateInput))
+    await client.add_tags_to_certificate(_request(AddTagsToCertificateInputDict))
+    await client.create_acme_domain_validation(
+        acme_endpoint_arn=_, domain_name=_, prevalidation_options=_
+    )
+    await client.create_acme_domain_validation(
+        **_request(CreateAcmeDomainValidationInputDict)
+    )
+    await client.create_acme_domain_validation(
+        _request(CreateAcmeDomainValidationInput)
+    )
+    await client.create_acme_domain_validation(
+        _request(CreateAcmeDomainValidationInputDict)
+    )
+    await client.create_acme_endpoint(authorization_behavior=_, certificate_authority=_)
+    await client.create_acme_endpoint(**_request(CreateAcmeEndpointInputDict))
+    await client.create_acme_endpoint(_request(CreateAcmeEndpointInput))
+    await client.create_acme_endpoint(_request(CreateAcmeEndpointInputDict))
+    await client.create_acme_external_account_binding(acme_endpoint_arn=_, role_arn=_)
+    await client.create_acme_external_account_binding(
+        **_request(CreateAcmeExternalAccountBindingInputDict)
+    )
+    await client.create_acme_external_account_binding(
+        _request(CreateAcmeExternalAccountBindingInput)
+    )
+    await client.create_acme_external_account_binding(
+        _request(CreateAcmeExternalAccountBindingInputDict)
+    )
+    await client.delete_acme_domain_validation(acme_domain_validation_arn=_)
+    await client.delete_acme_domain_validation(
+        **_request(DeleteAcmeDomainValidationInputDict)
+    )
+    await client.delete_acme_domain_validation(
+        _request(DeleteAcmeDomainValidationInput)
+    )
+    await client.delete_acme_domain_validation(
+        _request(DeleteAcmeDomainValidationInputDict)
+    )
+    await client.delete_acme_endpoint(acme_endpoint_arn=_)
+    await client.delete_acme_endpoint(**_request(DeleteAcmeEndpointInputDict))
+    await client.delete_acme_endpoint(_request(DeleteAcmeEndpointInput))
+    await client.delete_acme_endpoint(_request(DeleteAcmeEndpointInputDict))
+    await client.delete_acme_external_account_binding(
+        acme_external_account_binding_arn=_
+    )
+    await client.delete_acme_external_account_binding(
+        **_request(DeleteAcmeExternalAccountBindingInputDict)
+    )
+    await client.delete_acme_external_account_binding(
+        _request(DeleteAcmeExternalAccountBindingInput)
+    )
+    await client.delete_acme_external_account_binding(
+        _request(DeleteAcmeExternalAccountBindingInputDict)
+    )
+    await client.delete_certificate(certificate_arn=_)
+    await client.delete_certificate(**_request(DeleteCertificateInputDict))
+    await client.delete_certificate(_request(DeleteCertificateInput))
+    await client.delete_certificate(_request(DeleteCertificateInputDict))
+    await client.describe_acme_account(acme_endpoint_arn=_, account_url=_)
+    await client.describe_acme_account(**_request(DescribeAcmeAccountInputDict))
+    await client.describe_acme_account(_request(DescribeAcmeAccountInput))
+    await client.describe_acme_account(_request(DescribeAcmeAccountInputDict))
+    await client.describe_acme_domain_validation(acme_domain_validation_arn=_)
+    await client.describe_acme_domain_validation(
+        **_request(DescribeAcmeDomainValidationInputDict)
+    )
+    await client.describe_acme_domain_validation(
+        _request(DescribeAcmeDomainValidationInput)
+    )
+    await client.describe_acme_domain_validation(
+        _request(DescribeAcmeDomainValidationInputDict)
+    )
+    await client.describe_acme_endpoint(acme_endpoint_arn=_)
+    await client.describe_acme_endpoint(**_request(DescribeAcmeEndpointInputDict))
+    await client.describe_acme_endpoint(_request(DescribeAcmeEndpointInput))
+    await client.describe_acme_endpoint(_request(DescribeAcmeEndpointInputDict))
+    await client.describe_acme_external_account_binding(
+        acme_external_account_binding_arn=_
+    )
+    await client.describe_acme_external_account_binding(
+        **_request(DescribeAcmeExternalAccountBindingInputDict)
+    )
+    await client.describe_acme_external_account_binding(
+        _request(DescribeAcmeExternalAccountBindingInput)
+    )
+    await client.describe_acme_external_account_binding(
+        _request(DescribeAcmeExternalAccountBindingInputDict)
+    )
+    await client.describe_certificate(certificate_arn=_)
+    await client.describe_certificate(**_request(DescribeCertificateInputDict))
+    await client.describe_certificate(_request(DescribeCertificateInput))
+    await client.describe_certificate(_request(DescribeCertificateInputDict))
+    await client.export_certificate(certificate_arn=_, passphrase=_)
+    await client.export_certificate(**_request(ExportCertificateInputDict))
+    await client.export_certificate(_request(ExportCertificateInput))
+    await client.export_certificate(_request(ExportCertificateInputDict))
+    await client.get_account_configuration()
+    await client.get_account_configuration(**_request(GetAccountConfigurationInputDict))
+    await client.get_account_configuration(_request(GetAccountConfigurationInput))
+    await client.get_account_configuration(_request(GetAccountConfigurationInputDict))
+    await client.get_acme_external_account_binding_credentials(
+        acme_external_account_binding_arn=_
+    )
+    await client.get_acme_external_account_binding_credentials(
+        **_request(GetAcmeExternalAccountBindingCredentialsInputDict)
+    )
+    await client.get_acme_external_account_binding_credentials(
+        _request(GetAcmeExternalAccountBindingCredentialsInput)
+    )
+    await client.get_acme_external_account_binding_credentials(
+        _request(GetAcmeExternalAccountBindingCredentialsInputDict)
+    )
+    await client.get_certificate(certificate_arn=_)
+    await client.get_certificate(**_request(GetCertificateInputDict))
+    await client.get_certificate(_request(GetCertificateInput))
+    await client.get_certificate(_request(GetCertificateInputDict))
+    await client.import_certificate(certificate=_, private_key=_)
+    await client.import_certificate(**_request(ImportCertificateInputDict))
+    await client.import_certificate(_request(ImportCertificateInput))
+    await client.import_certificate(_request(ImportCertificateInputDict))
+    await client.list_acme_accounts(acme_endpoint_arn=_)
+    await client.list_acme_accounts(**_request(ListAcmeAccountsInputDict))
+    await client.list_acme_accounts(_request(ListAcmeAccountsInput))
+    await client.list_acme_accounts(_request(ListAcmeAccountsInputDict))
+    await client.list_acme_domain_validations(acme_endpoint_arn=_)
+    await client.list_acme_domain_validations(
+        **_request(ListAcmeDomainValidationsInputDict)
+    )
+    await client.list_acme_domain_validations(_request(ListAcmeDomainValidationsInput))
+    await client.list_acme_domain_validations(
+        _request(ListAcmeDomainValidationsInputDict)
+    )
+    await client.list_acme_endpoints()
+    await client.list_acme_endpoints(**_request(ListAcmeEndpointsInputDict))
+    await client.list_acme_endpoints(_request(ListAcmeEndpointsInput))
+    await client.list_acme_endpoints(_request(ListAcmeEndpointsInputDict))
+    await client.list_acme_external_account_bindings(acme_endpoint_arn=_)
+    await client.list_acme_external_account_bindings(
+        **_request(ListAcmeExternalAccountBindingsInputDict)
+    )
+    await client.list_acme_external_account_bindings(
+        _request(ListAcmeExternalAccountBindingsInput)
+    )
+    await client.list_acme_external_account_bindings(
+        _request(ListAcmeExternalAccountBindingsInputDict)
+    )
+    await client.list_certificate_domain_validations(certificate_arn=_)
+    await client.list_certificate_domain_validations(
+        **_request(ListCertificateDomainValidationsInputDict)
+    )
+    await client.list_certificate_domain_validations(
+        _request(ListCertificateDomainValidationsInput)
+    )
+    await client.list_certificate_domain_validations(
+        _request(ListCertificateDomainValidationsInputDict)
+    )
+    await client.list_certificates()
+    await client.list_certificates(**_request(ListCertificatesInputDict))
+    await client.list_certificates(_request(ListCertificatesInput))
+    await client.list_certificates(_request(ListCertificatesInputDict))
+    await client.list_tags_for_certificate(certificate_arn=_)
+    await client.list_tags_for_certificate(**_request(ListTagsForCertificateInputDict))
+    await client.list_tags_for_certificate(_request(ListTagsForCertificateInput))
+    await client.list_tags_for_certificate(_request(ListTagsForCertificateInputDict))
+    await client.list_tags_for_resource(resource_arn=_)
+    await client.list_tags_for_resource(**_request(ListTagsForResourceInputDict))
+    await client.list_tags_for_resource(_request(ListTagsForResourceInput))
+    await client.list_tags_for_resource(_request(ListTagsForResourceInputDict))
+    await client.put_account_configuration(idempotency_token=_)
+    await client.put_account_configuration(**_request(PutAccountConfigurationInputDict))
+    await client.put_account_configuration(_request(PutAccountConfigurationInput))
+    await client.put_account_configuration(_request(PutAccountConfigurationInputDict))
+    await client.remove_tags_from_certificate(certificate_arn=_, tags=_)
+    await client.remove_tags_from_certificate(
+        **_request(RemoveTagsFromCertificateInputDict)
+    )
+    await client.remove_tags_from_certificate(_request(RemoveTagsFromCertificateInput))
+    await client.remove_tags_from_certificate(
+        _request(RemoveTagsFromCertificateInputDict)
+    )
+    await client.renew_certificate(certificate_arn=_)
+    await client.renew_certificate(**_request(RenewCertificateInputDict))
+    await client.renew_certificate(_request(RenewCertificateInput))
+    await client.renew_certificate(_request(RenewCertificateInputDict))
+    await client.request_certificate(domain_name=_)
+    await client.request_certificate(**_request(RequestCertificateInputDict))
+    await client.request_certificate(_request(RequestCertificateInput))
+    await client.request_certificate(_request(RequestCertificateInputDict))
+    await client.resend_validation_email(
+        certificate_arn=_, domain=_, validation_domain=_
+    )
+    await client.resend_validation_email(**_request(ResendValidationEmailInputDict))
+    await client.resend_validation_email(_request(ResendValidationEmailInput))
+    await client.resend_validation_email(_request(ResendValidationEmailInputDict))
+    await client.revoke_acme_account(acme_endpoint_arn=_, account_url=_)
+    await client.revoke_acme_account(**_request(RevokeAcmeAccountInputDict))
+    await client.revoke_acme_account(_request(RevokeAcmeAccountInput))
+    await client.revoke_acme_account(_request(RevokeAcmeAccountInputDict))
+    await client.revoke_acme_external_account_binding(
+        acme_external_account_binding_arn=_
+    )
+    await client.revoke_acme_external_account_binding(
+        **_request(RevokeAcmeExternalAccountBindingInputDict)
+    )
+    await client.revoke_acme_external_account_binding(
+        _request(RevokeAcmeExternalAccountBindingInput)
+    )
+    await client.revoke_acme_external_account_binding(
+        _request(RevokeAcmeExternalAccountBindingInputDict)
+    )
+    await client.revoke_certificate(certificate_arn=_, revocation_reason=_)
+    await client.revoke_certificate(**_request(RevokeCertificateInputDict))
+    await client.revoke_certificate(_request(RevokeCertificateInput))
+    await client.revoke_certificate(_request(RevokeCertificateInputDict))
+    await client.search_certificates()
+    await client.search_certificates(**_request(SearchCertificatesInputDict))
+    await client.search_certificates(_request(SearchCertificatesInput))
+    await client.search_certificates(_request(SearchCertificatesInputDict))
+    await client.tag_resource(resource_arn=_, tags=_)
+    await client.tag_resource(**_request(TagResourceInputDict))
+    await client.tag_resource(_request(TagResourceInput))
+    await client.tag_resource(_request(TagResourceInputDict))
+    await client.untag_resource(resource_arn=_, tag_keys=_)
+    await client.untag_resource(**_request(UntagResourceInputDict))
+    await client.untag_resource(_request(UntagResourceInput))
+    await client.untag_resource(_request(UntagResourceInputDict))
+    await client.update_acme_domain_validation(acme_domain_validation_arn=_)
+    await client.update_acme_domain_validation(
+        **_request(UpdateAcmeDomainValidationInputDict)
+    )
+    await client.update_acme_domain_validation(
+        _request(UpdateAcmeDomainValidationInput)
+    )
+    await client.update_acme_domain_validation(
+        _request(UpdateAcmeDomainValidationInputDict)
+    )
+    await client.update_acme_endpoint(acme_endpoint_arn=_)
+    await client.update_acme_endpoint(**_request(UpdateAcmeEndpointInputDict))
+    await client.update_acme_endpoint(_request(UpdateAcmeEndpointInput))
+    await client.update_acme_endpoint(_request(UpdateAcmeEndpointInputDict))
+    await client.update_certificate_options(certificate_arn=_, options=_)
+    await client.update_certificate_options(
+        **_request(UpdateCertificateOptionsInputDict)
+    )
+    await client.update_certificate_options(_request(UpdateCertificateOptionsInput))
+    await client.update_certificate_options(_request(UpdateCertificateOptionsInputDict))
+
+
+def check_sync_calls(client: ACMClient) -> None:
+    pass
+    client.add_tags_to_certificate(certificate_arn=_, tags=_)
+    client.add_tags_to_certificate(**_request(AddTagsToCertificateInputDict))
+    client.add_tags_to_certificate(_request(AddTagsToCertificateInput))
+    client.add_tags_to_certificate(_request(AddTagsToCertificateInputDict))
+    client.create_acme_domain_validation(
+        acme_endpoint_arn=_, domain_name=_, prevalidation_options=_
+    )
+    client.create_acme_domain_validation(
+        **_request(CreateAcmeDomainValidationInputDict)
+    )
+    client.create_acme_domain_validation(_request(CreateAcmeDomainValidationInput))
+    client.create_acme_domain_validation(_request(CreateAcmeDomainValidationInputDict))
+    client.create_acme_endpoint(authorization_behavior=_, certificate_authority=_)
+    client.create_acme_endpoint(**_request(CreateAcmeEndpointInputDict))
+    client.create_acme_endpoint(_request(CreateAcmeEndpointInput))
+    client.create_acme_endpoint(_request(CreateAcmeEndpointInputDict))
+    client.create_acme_external_account_binding(acme_endpoint_arn=_, role_arn=_)
+    client.create_acme_external_account_binding(
+        **_request(CreateAcmeExternalAccountBindingInputDict)
+    )
+    client.create_acme_external_account_binding(
+        _request(CreateAcmeExternalAccountBindingInput)
+    )
+    client.create_acme_external_account_binding(
+        _request(CreateAcmeExternalAccountBindingInputDict)
+    )
+    client.delete_acme_domain_validation(acme_domain_validation_arn=_)
+    client.delete_acme_domain_validation(
+        **_request(DeleteAcmeDomainValidationInputDict)
+    )
+    client.delete_acme_domain_validation(_request(DeleteAcmeDomainValidationInput))
+    client.delete_acme_domain_validation(_request(DeleteAcmeDomainValidationInputDict))
+    client.delete_acme_endpoint(acme_endpoint_arn=_)
+    client.delete_acme_endpoint(**_request(DeleteAcmeEndpointInputDict))
+    client.delete_acme_endpoint(_request(DeleteAcmeEndpointInput))
+    client.delete_acme_endpoint(_request(DeleteAcmeEndpointInputDict))
+    client.delete_acme_external_account_binding(acme_external_account_binding_arn=_)
+    client.delete_acme_external_account_binding(
+        **_request(DeleteAcmeExternalAccountBindingInputDict)
+    )
+    client.delete_acme_external_account_binding(
+        _request(DeleteAcmeExternalAccountBindingInput)
+    )
+    client.delete_acme_external_account_binding(
+        _request(DeleteAcmeExternalAccountBindingInputDict)
+    )
+    client.delete_certificate(certificate_arn=_)
+    client.delete_certificate(**_request(DeleteCertificateInputDict))
+    client.delete_certificate(_request(DeleteCertificateInput))
+    client.delete_certificate(_request(DeleteCertificateInputDict))
+    client.describe_acme_account(acme_endpoint_arn=_, account_url=_)
+    client.describe_acme_account(**_request(DescribeAcmeAccountInputDict))
+    client.describe_acme_account(_request(DescribeAcmeAccountInput))
+    client.describe_acme_account(_request(DescribeAcmeAccountInputDict))
+    client.describe_acme_domain_validation(acme_domain_validation_arn=_)
+    client.describe_acme_domain_validation(
+        **_request(DescribeAcmeDomainValidationInputDict)
+    )
+    client.describe_acme_domain_validation(_request(DescribeAcmeDomainValidationInput))
+    client.describe_acme_domain_validation(
+        _request(DescribeAcmeDomainValidationInputDict)
+    )
+    client.describe_acme_endpoint(acme_endpoint_arn=_)
+    client.describe_acme_endpoint(**_request(DescribeAcmeEndpointInputDict))
+    client.describe_acme_endpoint(_request(DescribeAcmeEndpointInput))
+    client.describe_acme_endpoint(_request(DescribeAcmeEndpointInputDict))
+    client.describe_acme_external_account_binding(acme_external_account_binding_arn=_)
+    client.describe_acme_external_account_binding(
+        **_request(DescribeAcmeExternalAccountBindingInputDict)
+    )
+    client.describe_acme_external_account_binding(
+        _request(DescribeAcmeExternalAccountBindingInput)
+    )
+    client.describe_acme_external_account_binding(
+        _request(DescribeAcmeExternalAccountBindingInputDict)
+    )
+    client.describe_certificate(certificate_arn=_)
+    client.describe_certificate(**_request(DescribeCertificateInputDict))
+    client.describe_certificate(_request(DescribeCertificateInput))
+    client.describe_certificate(_request(DescribeCertificateInputDict))
+    client.export_certificate(certificate_arn=_, passphrase=_)
+    client.export_certificate(**_request(ExportCertificateInputDict))
+    client.export_certificate(_request(ExportCertificateInput))
+    client.export_certificate(_request(ExportCertificateInputDict))
+    client.get_account_configuration()
+    client.get_account_configuration(**_request(GetAccountConfigurationInputDict))
+    client.get_account_configuration(_request(GetAccountConfigurationInput))
+    client.get_account_configuration(_request(GetAccountConfigurationInputDict))
+    client.get_acme_external_account_binding_credentials(
+        acme_external_account_binding_arn=_
+    )
+    client.get_acme_external_account_binding_credentials(
+        **_request(GetAcmeExternalAccountBindingCredentialsInputDict)
+    )
+    client.get_acme_external_account_binding_credentials(
+        _request(GetAcmeExternalAccountBindingCredentialsInput)
+    )
+    client.get_acme_external_account_binding_credentials(
+        _request(GetAcmeExternalAccountBindingCredentialsInputDict)
+    )
+    client.get_certificate(certificate_arn=_)
+    client.get_certificate(**_request(GetCertificateInputDict))
+    client.get_certificate(_request(GetCertificateInput))
+    client.get_certificate(_request(GetCertificateInputDict))
+    client.import_certificate(certificate=_, private_key=_)
+    client.import_certificate(**_request(ImportCertificateInputDict))
+    client.import_certificate(_request(ImportCertificateInput))
+    client.import_certificate(_request(ImportCertificateInputDict))
+    client.list_acme_accounts(acme_endpoint_arn=_)
+    client.list_acme_accounts(**_request(ListAcmeAccountsInputDict))
+    client.list_acme_accounts(_request(ListAcmeAccountsInput))
+    client.list_acme_accounts(_request(ListAcmeAccountsInputDict))
+    client.list_acme_domain_validations(acme_endpoint_arn=_)
+    client.list_acme_domain_validations(**_request(ListAcmeDomainValidationsInputDict))
+    client.list_acme_domain_validations(_request(ListAcmeDomainValidationsInput))
+    client.list_acme_domain_validations(_request(ListAcmeDomainValidationsInputDict))
+    client.list_acme_endpoints()
+    client.list_acme_endpoints(**_request(ListAcmeEndpointsInputDict))
+    client.list_acme_endpoints(_request(ListAcmeEndpointsInput))
+    client.list_acme_endpoints(_request(ListAcmeEndpointsInputDict))
+    client.list_acme_external_account_bindings(acme_endpoint_arn=_)
+    client.list_acme_external_account_bindings(
+        **_request(ListAcmeExternalAccountBindingsInputDict)
+    )
+    client.list_acme_external_account_bindings(
+        _request(ListAcmeExternalAccountBindingsInput)
+    )
+    client.list_acme_external_account_bindings(
+        _request(ListAcmeExternalAccountBindingsInputDict)
+    )
+    client.list_certificate_domain_validations(certificate_arn=_)
+    client.list_certificate_domain_validations(
+        **_request(ListCertificateDomainValidationsInputDict)
+    )
+    client.list_certificate_domain_validations(
+        _request(ListCertificateDomainValidationsInput)
+    )
+    client.list_certificate_domain_validations(
+        _request(ListCertificateDomainValidationsInputDict)
+    )
+    client.list_certificates()
+    client.list_certificates(**_request(ListCertificatesInputDict))
+    client.list_certificates(_request(ListCertificatesInput))
+    client.list_certificates(_request(ListCertificatesInputDict))
+    client.list_tags_for_certificate(certificate_arn=_)
+    client.list_tags_for_certificate(**_request(ListTagsForCertificateInputDict))
+    client.list_tags_for_certificate(_request(ListTagsForCertificateInput))
+    client.list_tags_for_certificate(_request(ListTagsForCertificateInputDict))
+    client.list_tags_for_resource(resource_arn=_)
+    client.list_tags_for_resource(**_request(ListTagsForResourceInputDict))
+    client.list_tags_for_resource(_request(ListTagsForResourceInput))
+    client.list_tags_for_resource(_request(ListTagsForResourceInputDict))
+    client.put_account_configuration(idempotency_token=_)
+    client.put_account_configuration(**_request(PutAccountConfigurationInputDict))
+    client.put_account_configuration(_request(PutAccountConfigurationInput))
+    client.put_account_configuration(_request(PutAccountConfigurationInputDict))
+    client.remove_tags_from_certificate(certificate_arn=_, tags=_)
+    client.remove_tags_from_certificate(**_request(RemoveTagsFromCertificateInputDict))
+    client.remove_tags_from_certificate(_request(RemoveTagsFromCertificateInput))
+    client.remove_tags_from_certificate(_request(RemoveTagsFromCertificateInputDict))
+    client.renew_certificate(certificate_arn=_)
+    client.renew_certificate(**_request(RenewCertificateInputDict))
+    client.renew_certificate(_request(RenewCertificateInput))
+    client.renew_certificate(_request(RenewCertificateInputDict))
+    client.request_certificate(domain_name=_)
+    client.request_certificate(**_request(RequestCertificateInputDict))
+    client.request_certificate(_request(RequestCertificateInput))
+    client.request_certificate(_request(RequestCertificateInputDict))
+    client.resend_validation_email(certificate_arn=_, domain=_, validation_domain=_)
+    client.resend_validation_email(**_request(ResendValidationEmailInputDict))
+    client.resend_validation_email(_request(ResendValidationEmailInput))
+    client.resend_validation_email(_request(ResendValidationEmailInputDict))
+    client.revoke_acme_account(acme_endpoint_arn=_, account_url=_)
+    client.revoke_acme_account(**_request(RevokeAcmeAccountInputDict))
+    client.revoke_acme_account(_request(RevokeAcmeAccountInput))
+    client.revoke_acme_account(_request(RevokeAcmeAccountInputDict))
+    client.revoke_acme_external_account_binding(acme_external_account_binding_arn=_)
+    client.revoke_acme_external_account_binding(
+        **_request(RevokeAcmeExternalAccountBindingInputDict)
+    )
+    client.revoke_acme_external_account_binding(
+        _request(RevokeAcmeExternalAccountBindingInput)
+    )
+    client.revoke_acme_external_account_binding(
+        _request(RevokeAcmeExternalAccountBindingInputDict)
+    )
+    client.revoke_certificate(certificate_arn=_, revocation_reason=_)
+    client.revoke_certificate(**_request(RevokeCertificateInputDict))
+    client.revoke_certificate(_request(RevokeCertificateInput))
+    client.revoke_certificate(_request(RevokeCertificateInputDict))
+    client.search_certificates()
+    client.search_certificates(**_request(SearchCertificatesInputDict))
+    client.search_certificates(_request(SearchCertificatesInput))
+    client.search_certificates(_request(SearchCertificatesInputDict))
+    client.tag_resource(resource_arn=_, tags=_)
+    client.tag_resource(**_request(TagResourceInputDict))
+    client.tag_resource(_request(TagResourceInput))
+    client.tag_resource(_request(TagResourceInputDict))
+    client.untag_resource(resource_arn=_, tag_keys=_)
+    client.untag_resource(**_request(UntagResourceInputDict))
+    client.untag_resource(_request(UntagResourceInput))
+    client.untag_resource(_request(UntagResourceInputDict))
+    client.update_acme_domain_validation(acme_domain_validation_arn=_)
+    client.update_acme_domain_validation(
+        **_request(UpdateAcmeDomainValidationInputDict)
+    )
+    client.update_acme_domain_validation(_request(UpdateAcmeDomainValidationInput))
+    client.update_acme_domain_validation(_request(UpdateAcmeDomainValidationInputDict))
+    client.update_acme_endpoint(acme_endpoint_arn=_)
+    client.update_acme_endpoint(**_request(UpdateAcmeEndpointInputDict))
+    client.update_acme_endpoint(_request(UpdateAcmeEndpointInput))
+    client.update_acme_endpoint(_request(UpdateAcmeEndpointInputDict))
+    client.update_certificate_options(certificate_arn=_, options=_)
+    client.update_certificate_options(**_request(UpdateCertificateOptionsInputDict))
+    client.update_certificate_options(_request(UpdateCertificateOptionsInput))
+    client.update_certificate_options(_request(UpdateCertificateOptionsInputDict))

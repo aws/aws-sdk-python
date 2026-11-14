@@ -2,32 +2,48 @@
 
 from typing import Any
 
+from aws_sdk_ec2.aio.client import AsyncEC2Client
+from aws_sdk_ec2.client import EC2Client
 from aws_sdk_ec2.models import (
     AcceleratorCount,
+    AcceleratorCountDict,
     AcceleratorCountRequest,
+    AcceleratorCountRequestDict,
     AcceleratorTotalMemoryMiB,
+    AcceleratorTotalMemoryMiBDict,
     AcceleratorTotalMemoryMiBRequest,
+    AcceleratorTotalMemoryMiBRequestDict,
     AcceptAddressTransferInput,
+    AcceptAddressTransferInputDict,
     AcceptAddressTransferOutput,
     AcceptCapacityReservationBillingOwnershipInput,
+    AcceptCapacityReservationBillingOwnershipInputDict,
     AcceptCapacityReservationBillingOwnershipOutput,
     AcceptReservedInstancesExchangeQuoteInput,
+    AcceptReservedInstancesExchangeQuoteInputDict,
     AcceptReservedInstancesExchangeQuoteOutput,
     AcceptTransitGatewayClientVpnAttachmentInput,
+    AcceptTransitGatewayClientVpnAttachmentInputDict,
     AcceptTransitGatewayClientVpnAttachmentOutput,
     AcceptTransitGatewayMulticastDomainAssociationsInput,
+    AcceptTransitGatewayMulticastDomainAssociationsInputDict,
     AcceptTransitGatewayMulticastDomainAssociationsOutput,
     AcceptTransitGatewayPeeringAttachmentInput,
+    AcceptTransitGatewayPeeringAttachmentInputDict,
     AcceptTransitGatewayPeeringAttachmentOutput,
     AcceptTransitGatewayVpcAttachmentInput,
+    AcceptTransitGatewayVpcAttachmentInputDict,
     AcceptTransitGatewayVpcAttachmentOutput,
     AcceptVpcEndpointConnectionsInput,
+    AcceptVpcEndpointConnectionsInputDict,
     AcceptVpcEndpointConnectionsOutput,
     AcceptVpcPeeringConnectionInput,
+    AcceptVpcPeeringConnectionInputDict,
     AcceptVpcPeeringConnectionOutput,
     AccessScopeAnalysisFinding,
     AccessScopePath,
     AccessScopePathRequest,
+    AccessScopePathRequestDict,
     AccountAttribute,
     AccountAttributeValue,
     AccountVpcEncryptionControl,
@@ -35,20 +51,27 @@ from aws_sdk_ec2.models import (
     ActiveInstance,
     ActiveVpnTunnelStatus,
     AddIpamOperatingRegion,
+    AddIpamOperatingRegionDict,
     AddIpamOrganizationalUnitExclusion,
+    AddIpamOrganizationalUnitExclusionDict,
     AddPrefixListEntry,
+    AddPrefixListEntryDict,
     AddedPrincipal,
     AdditionalDetail,
     Address,
     AddressAttribute,
     AddressTransfer,
     AdvertiseByoipCidrInput,
+    AdvertiseByoipCidrInputDict,
     AdvertiseByoipCidrOutput,
     AllocateAddressInput,
+    AllocateAddressInputDict,
     AllocateAddressOutput,
     AllocateHostsInput,
+    AllocateHostsInputDict,
     AllocateHostsOutput,
     AllocateIpamPoolCidrInput,
+    AllocateIpamPoolCidrInputDict,
     AllocateIpamPoolCidrOutput,
     AllowedPrincipal,
     AlternatePathHint,
@@ -68,132 +91,189 @@ from aws_sdk_ec2.models import (
     ApplicationStatusSummary,
     ApplicationStatusesResponseType,
     ApplySecurityGroupsToClientVpnTargetNetworkInput,
+    ApplySecurityGroupsToClientVpnTargetNetworkInputDict,
     ApplySecurityGroupsToClientVpnTargetNetworkOutput,
     AsnAssociation,
     AsnAuthorizationContext,
+    AsnAuthorizationContextDict,
     AssignIpv6AddressesInput,
+    AssignIpv6AddressesInputDict,
     AssignIpv6AddressesOutput,
     AssignPrivateIpAddressesInput,
+    AssignPrivateIpAddressesInputDict,
     AssignPrivateIpAddressesOutput,
     AssignPrivateNatGatewayAddressInput,
+    AssignPrivateNatGatewayAddressInputDict,
     AssignPrivateNatGatewayAddressOutput,
     AssignedPrivateIpAddress,
     AssociateAddressInput,
+    AssociateAddressInputDict,
     AssociateAddressOutput,
     AssociateApplicationStatusCheckInput,
+    AssociateApplicationStatusCheckInputDict,
     AssociateApplicationStatusCheckOutput,
     AssociateCapacityReservationBillingOwnerInput,
+    AssociateCapacityReservationBillingOwnerInputDict,
     AssociateCapacityReservationBillingOwnerOutput,
     AssociateClientVpnTargetNetworkInput,
+    AssociateClientVpnTargetNetworkInputDict,
     AssociateClientVpnTargetNetworkOutput,
     AssociateDhcpOptionsInput,
+    AssociateDhcpOptionsInputDict,
     AssociateDhcpOptionsOutput,
     AssociateEnclaveCertificateIamRoleInput,
+    AssociateEnclaveCertificateIamRoleInputDict,
     AssociateEnclaveCertificateIamRoleOutput,
     AssociateIamInstanceProfileInput,
+    AssociateIamInstanceProfileInputDict,
     AssociateIamInstanceProfileOutput,
     AssociateInstanceEventWindowInput,
+    AssociateInstanceEventWindowInputDict,
     AssociateInstanceEventWindowOutput,
     AssociateIpamByoasnInput,
+    AssociateIpamByoasnInputDict,
     AssociateIpamByoasnOutput,
     AssociateIpamResourceDiscoveryInput,
+    AssociateIpamResourceDiscoveryInputDict,
     AssociateIpamResourceDiscoveryOutput,
     AssociateNatGatewayAddressInput,
+    AssociateNatGatewayAddressInputDict,
     AssociateNatGatewayAddressOutput,
     AssociateRouteServerInput,
+    AssociateRouteServerInputDict,
     AssociateRouteServerOutput,
     AssociateRouteTableInput,
+    AssociateRouteTableInputDict,
     AssociateRouteTableOutput,
     AssociateSecurityGroupVpcInput,
+    AssociateSecurityGroupVpcInputDict,
     AssociateSecurityGroupVpcOutput,
     AssociateSubnetCidrBlockInput,
+    AssociateSubnetCidrBlockInputDict,
     AssociateSubnetCidrBlockOutput,
     AssociateTransitGatewayMulticastDomainInput,
+    AssociateTransitGatewayMulticastDomainInputDict,
     AssociateTransitGatewayMulticastDomainOutput,
     AssociateTransitGatewayPolicyTableInput,
+    AssociateTransitGatewayPolicyTableInputDict,
     AssociateTransitGatewayPolicyTableOutput,
     AssociateTransitGatewayRouteTableInput,
+    AssociateTransitGatewayRouteTableInputDict,
     AssociateTransitGatewayRouteTableOutput,
     AssociateTrunkInterfaceInput,
+    AssociateTrunkInterfaceInputDict,
     AssociateTrunkInterfaceOutput,
     AssociateVpcCidrBlockInput,
+    AssociateVpcCidrBlockInputDict,
     AssociateVpcCidrBlockOutput,
     AssociatedRole,
     AssociatedTargetNetwork,
     AssociationStatus,
     AthenaIntegration,
+    AthenaIntegrationDict,
     AttachClassicLinkVpcInput,
+    AttachClassicLinkVpcInputDict,
     AttachClassicLinkVpcOutput,
     AttachImageWatermarkInput,
+    AttachImageWatermarkInputDict,
     AttachImageWatermarkOutput,
     AttachInternetGatewayInput,
+    AttachInternetGatewayInputDict,
     AttachInternetGatewayOutput,
     AttachNetworkInterfaceInput,
+    AttachNetworkInterfaceInputDict,
     AttachNetworkInterfaceOutput,
     AttachVerifiedAccessTrustProviderInput,
+    AttachVerifiedAccessTrustProviderInputDict,
     AttachVerifiedAccessTrustProviderOutput,
     AttachVolumeInput,
+    AttachVolumeInputDict,
     AttachVolumeOutput,
     AttachVpnGatewayInput,
+    AttachVpnGatewayInputDict,
     AttachVpnGatewayOutput,
     AttachmentEnaSrdSpecification,
     AttachmentEnaSrdUdpSpecification,
     AttributeBooleanValue,
+    AttributeBooleanValueDict,
     AttributeSummary,
     AttributeValue,
+    AttributeValueDict,
     AuthorizationRule,
     AuthorizeClientVpnIngressInput,
+    AuthorizeClientVpnIngressInputDict,
     AuthorizeClientVpnIngressOutput,
     AuthorizeSecurityGroupEgressInput,
+    AuthorizeSecurityGroupEgressInputDict,
     AuthorizeSecurityGroupEgressOutput,
     AuthorizeSecurityGroupIngressInput,
+    AuthorizeSecurityGroupIngressInputDict,
     AuthorizeSecurityGroupIngressOutput,
     AvailabilityZone,
     AvailabilityZoneAddress,
+    AvailabilityZoneAddressDict,
     AvailabilityZoneGeography,
     AvailabilityZoneMessage,
     AvailabilityZoneSubGeography,
     AvailableCapacity,
     BaselineEbsBandwidthMbps,
+    BaselineEbsBandwidthMbpsDict,
     BaselineEbsBandwidthMbpsRequest,
+    BaselineEbsBandwidthMbpsRequestDict,
     BaselinePerformanceFactors,
+    BaselinePerformanceFactorsDict,
     BaselinePerformanceFactorsRequest,
+    BaselinePerformanceFactorsRequestDict,
     BatchModifyIpamRoutingPolicyRegistrationsInput,
+    BatchModifyIpamRoutingPolicyRegistrationsInputDict,
     BatchModifyIpamRoutingPolicyRegistrationsOutput,
     BlockDeviceMapping,
+    BlockDeviceMappingDict,
     BlockDeviceMappingResponse,
     BlockPublicAccessStates,
     BundleInstanceInput,
+    BundleInstanceInputDict,
     BundleInstanceOutput,
     BundleTask,
     BundleTaskError,
     Byoasn,
     ByoipCidr,
     CancelBundleTaskInput,
+    CancelBundleTaskInputDict,
     CancelBundleTaskOutput,
     CancelCapacityReservationFleetError,
     CancelCapacityReservationFleetsInput,
+    CancelCapacityReservationFleetsInputDict,
     CancelCapacityReservationFleetsOutput,
     CancelCapacityReservationInput,
+    CancelCapacityReservationInputDict,
     CancelCapacityReservationOutput,
     CancelConversionTaskInput,
+    CancelConversionTaskInputDict,
     CancelConversionTaskOutput,
     CancelDeclarativePoliciesReportInput,
+    CancelDeclarativePoliciesReportInputDict,
     CancelDeclarativePoliciesReportOutput,
     CancelExportTaskInput,
+    CancelExportTaskInputDict,
     CancelExportTaskOutput,
     CancelImageLaunchPermissionInput,
+    CancelImageLaunchPermissionInputDict,
     CancelImageLaunchPermissionOutput,
     CancelImportTaskInput,
+    CancelImportTaskInputDict,
     CancelImportTaskOutput,
     CancelReservedInstancesListingInput,
+    CancelReservedInstancesListingInputDict,
     CancelReservedInstancesListingOutput,
     CancelSpotFleetRequestsError,
     CancelSpotFleetRequestsErrorItem,
     CancelSpotFleetRequestsInput,
+    CancelSpotFleetRequestsInputDict,
     CancelSpotFleetRequestsOutput,
     CancelSpotFleetRequestsSuccessItem,
     CancelSpotInstanceRequestsInput,
+    CancelSpotInstanceRequestsInputDict,
     CancelSpotInstanceRequestsOutput,
     CancellationTerms,
     CancelledSpotInstanceRequest,
@@ -205,6 +285,7 @@ from aws_sdk_ec2.models import (
     CapacityBlockOffering,
     CapacityBlockStatus,
     CapacityManagerCondition,
+    CapacityManagerConditionDict,
     CapacityManagerDataExportResponse,
     CapacityManagerDimension,
     CapacityManagerMonitoredTagKey,
@@ -223,31 +304,43 @@ from aws_sdk_ec2.models import (
     CapacityReservationModificationQuote,
     CapacityReservationOptions,
     CapacityReservationOptionsRequest,
+    CapacityReservationOptionsRequestDict,
     CapacityReservationSpecification,
+    CapacityReservationSpecificationDict,
     CapacityReservationSpecificationResponse,
     CapacityReservationStatus,
     CapacityReservationTarget,
+    CapacityReservationTargetDict,
     CapacityReservationTargetResponse,
     CapacityReservationTopology,
     CarrierGateway,
     CertificateAuthentication,
     CertificateAuthenticationRequest,
+    CertificateAuthenticationRequestDict,
     CidrAuthorizationContext,
+    CidrAuthorizationContextDict,
     CidrBlock,
     ClassicLinkDnsSupport,
     ClassicLinkInstance,
     ClassicLoadBalancer,
+    ClassicLoadBalancerDict,
     ClassicLoadBalancersConfig,
+    ClassicLoadBalancersConfigDict,
     ClientCertificateRevocationListStatus,
     ClientConnectOptions,
+    ClientConnectOptionsDict,
     ClientConnectResponseOptions,
     ClientData,
+    ClientDataDict,
     ClientLoginBannerOptions,
+    ClientLoginBannerOptionsDict,
     ClientLoginBannerResponseOptions,
     ClientRouteEnforcementOptions,
+    ClientRouteEnforcementOptionsDict,
     ClientRouteEnforcementResponseOptions,
     ClientVpnAuthentication,
     ClientVpnAuthenticationRequest,
+    ClientVpnAuthenticationRequestDict,
     ClientVpnAuthorizationRuleStatus,
     ClientVpnConnection,
     ClientVpnConnectionStatus,
@@ -258,1017 +351,1516 @@ from aws_sdk_ec2.models import (
     ClientVpnRouteStatus,
     ClientVpnTrustProvider,
     ClientVpnTrustProviderRequest,
+    ClientVpnTrustProviderRequestDict,
     CloudWatchLogOptions,
     CloudWatchLogOptionsSpecification,
+    CloudWatchLogOptionsSpecificationDict,
     CoipAddressUsage,
     CoipCidr,
     CoipPool,
     ConfirmProductInstanceInput,
+    ConfirmProductInstanceInputDict,
     ConfirmProductInstanceOutput,
     ConnectionLogOptions,
+    ConnectionLogOptionsDict,
     ConnectionLogResponseOptions,
     ConnectionNotification,
     ConnectionTrackingConfiguration,
     ConnectionTrackingSpecification,
     ConnectionTrackingSpecificationRequest,
+    ConnectionTrackingSpecificationRequestDict,
     ConnectionTrackingSpecificationResponse,
     ConversionTask,
     CopyFpgaImageInput,
+    CopyFpgaImageInputDict,
     CopyFpgaImageOutput,
     CopyImageInput,
+    CopyImageInputDict,
     CopyImageOutput,
     CopySnapshotInput,
+    CopySnapshotInputDict,
     CopySnapshotOutput,
     CopyVolumesInput,
+    CopyVolumesInputDict,
     CopyVolumesOutput,
     CpuOptions,
     CpuOptionsRequest,
+    CpuOptionsRequestDict,
     CpuPerformanceFactor,
+    CpuPerformanceFactorDict,
     CpuPerformanceFactorRequest,
+    CpuPerformanceFactorRequestDict,
     CreateApplicationStatusCheckInput,
+    CreateApplicationStatusCheckInputDict,
     CreateApplicationStatusCheckOutput,
     CreateCapacityManagerDataExportInput,
+    CreateCapacityManagerDataExportInputDict,
     CreateCapacityManagerDataExportOutput,
     CreateCapacityReservationBySplittingInput,
+    CreateCapacityReservationBySplittingInputDict,
     CreateCapacityReservationBySplittingOutput,
     CreateCapacityReservationCancellationQuoteInput,
+    CreateCapacityReservationCancellationQuoteInputDict,
     CreateCapacityReservationCancellationQuoteOutput,
     CreateCapacityReservationDateChangeQuoteInput,
+    CreateCapacityReservationDateChangeQuoteInputDict,
     CreateCapacityReservationDateChangeQuoteOutput,
     CreateCapacityReservationFleetInput,
+    CreateCapacityReservationFleetInputDict,
     CreateCapacityReservationFleetOutput,
     CreateCapacityReservationInput,
+    CreateCapacityReservationInputDict,
     CreateCapacityReservationOutput,
     CreateCarrierGatewayInput,
+    CreateCarrierGatewayInputDict,
     CreateCarrierGatewayOutput,
     CreateClientVpnEndpointInput,
+    CreateClientVpnEndpointInputDict,
     CreateClientVpnEndpointOutput,
     CreateClientVpnRouteInput,
+    CreateClientVpnRouteInputDict,
     CreateClientVpnRouteOutput,
     CreateCoipCidrInput,
+    CreateCoipCidrInputDict,
     CreateCoipCidrOutput,
     CreateCoipPoolInput,
+    CreateCoipPoolInputDict,
     CreateCoipPoolOutput,
     CreateCustomerGatewayInput,
+    CreateCustomerGatewayInputDict,
     CreateCustomerGatewayOutput,
     CreateDefaultSubnetInput,
+    CreateDefaultSubnetInputDict,
     CreateDefaultSubnetOutput,
     CreateDefaultVpcInput,
+    CreateDefaultVpcInputDict,
     CreateDefaultVpcOutput,
     CreateDelegateMacVolumeOwnershipTaskInput,
+    CreateDelegateMacVolumeOwnershipTaskInputDict,
     CreateDelegateMacVolumeOwnershipTaskOutput,
     CreateDhcpOptionsInput,
+    CreateDhcpOptionsInputDict,
     CreateDhcpOptionsOutput,
     CreateEgressOnlyInternetGatewayInput,
+    CreateEgressOnlyInternetGatewayInputDict,
     CreateEgressOnlyInternetGatewayOutput,
     CreateFleetError,
     CreateFleetInput,
+    CreateFleetInputDict,
     CreateFleetInstance,
     CreateFleetOutput,
     CreateFlowLogsInput,
+    CreateFlowLogsInputDict,
     CreateFlowLogsOutput,
     CreateFpgaImageInput,
+    CreateFpgaImageInputDict,
     CreateFpgaImageOutput,
     CreateImageInput,
+    CreateImageInputDict,
     CreateImageOutput,
     CreateImageUsageReportInput,
+    CreateImageUsageReportInputDict,
     CreateImageUsageReportOutput,
     CreateInstanceConnectEndpointInput,
+    CreateInstanceConnectEndpointInputDict,
     CreateInstanceConnectEndpointOutput,
     CreateInstanceEventWindowInput,
+    CreateInstanceEventWindowInputDict,
     CreateInstanceEventWindowOutput,
     CreateInstanceExportTaskInput,
+    CreateInstanceExportTaskInputDict,
     CreateInstanceExportTaskOutput,
     CreateInternetGatewayInput,
+    CreateInternetGatewayInputDict,
     CreateInternetGatewayOutput,
     CreateInterruptibleCapacityReservationAllocationInput,
+    CreateInterruptibleCapacityReservationAllocationInputDict,
     CreateInterruptibleCapacityReservationAllocationOutput,
     CreateIpamExternalResourceVerificationTokenInput,
+    CreateIpamExternalResourceVerificationTokenInputDict,
     CreateIpamExternalResourceVerificationTokenOutput,
     CreateIpamInput,
+    CreateIpamInputDict,
     CreateIpamInternetRegistryAssociationInput,
+    CreateIpamInternetRegistryAssociationInputDict,
     CreateIpamInternetRegistryAssociationOutput,
     CreateIpamOutput,
     CreateIpamPolicyInput,
+    CreateIpamPolicyInputDict,
     CreateIpamPolicyOutput,
     CreateIpamPoolInput,
+    CreateIpamPoolInputDict,
     CreateIpamPoolOutput,
     CreateIpamPrefixListResolverInput,
+    CreateIpamPrefixListResolverInputDict,
     CreateIpamPrefixListResolverOutput,
     CreateIpamPrefixListResolverTargetInput,
+    CreateIpamPrefixListResolverTargetInputDict,
     CreateIpamPrefixListResolverTargetOutput,
     CreateIpamResourceDiscoveryInput,
+    CreateIpamResourceDiscoveryInputDict,
     CreateIpamResourceDiscoveryOutput,
     CreateIpamRoutingPolicyRegistrationInput,
+    CreateIpamRoutingPolicyRegistrationInputDict,
     CreateIpamRoutingPolicyRegistrationOutput,
     CreateIpamScopeInput,
+    CreateIpamScopeInputDict,
     CreateIpamScopeOutput,
     CreateKeyPairInput,
+    CreateKeyPairInputDict,
     CreateKeyPairOutput,
     CreateLaunchTemplateInput,
+    CreateLaunchTemplateInputDict,
     CreateLaunchTemplateOutput,
     CreateLaunchTemplateVersionInput,
+    CreateLaunchTemplateVersionInputDict,
     CreateLaunchTemplateVersionOutput,
     CreateLocalGatewayRouteInput,
+    CreateLocalGatewayRouteInputDict,
     CreateLocalGatewayRouteOutput,
     CreateLocalGatewayRouteTableInput,
+    CreateLocalGatewayRouteTableInputDict,
     CreateLocalGatewayRouteTableOutput,
     CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationInput,
+    CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationInputDict,
     CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationOutput,
     CreateLocalGatewayRouteTableVpcAssociationInput,
+    CreateLocalGatewayRouteTableVpcAssociationInputDict,
     CreateLocalGatewayRouteTableVpcAssociationOutput,
     CreateLocalGatewayVirtualInterfaceGroupInput,
+    CreateLocalGatewayVirtualInterfaceGroupInputDict,
     CreateLocalGatewayVirtualInterfaceGroupOutput,
     CreateLocalGatewayVirtualInterfaceInput,
+    CreateLocalGatewayVirtualInterfaceInputDict,
     CreateLocalGatewayVirtualInterfaceOutput,
     CreateMacSystemIntegrityProtectionModificationTaskInput,
+    CreateMacSystemIntegrityProtectionModificationTaskInputDict,
     CreateMacSystemIntegrityProtectionModificationTaskOutput,
     CreateManagedPrefixListInput,
+    CreateManagedPrefixListInputDict,
     CreateManagedPrefixListOutput,
     CreateNatGatewayInput,
+    CreateNatGatewayInputDict,
     CreateNatGatewayOutput,
     CreateNetworkAclEntryInput,
+    CreateNetworkAclEntryInputDict,
     CreateNetworkAclEntryOutput,
     CreateNetworkAclInput,
+    CreateNetworkAclInputDict,
     CreateNetworkAclOutput,
     CreateNetworkInsightsAccessScopeInput,
+    CreateNetworkInsightsAccessScopeInputDict,
     CreateNetworkInsightsAccessScopeOutput,
     CreateNetworkInsightsPathInput,
+    CreateNetworkInsightsPathInputDict,
     CreateNetworkInsightsPathOutput,
     CreateNetworkInterfaceInput,
+    CreateNetworkInterfaceInputDict,
     CreateNetworkInterfaceOutput,
     CreateNetworkInterfacePermissionInput,
+    CreateNetworkInterfacePermissionInputDict,
     CreateNetworkInterfacePermissionOutput,
     CreatePlacementGroupInput,
+    CreatePlacementGroupInputDict,
     CreatePlacementGroupOutput,
     CreatePublicIpv4PoolInput,
+    CreatePublicIpv4PoolInputDict,
     CreatePublicIpv4PoolOutput,
     CreateReplaceRootVolumeTaskInput,
+    CreateReplaceRootVolumeTaskInputDict,
     CreateReplaceRootVolumeTaskOutput,
     CreateReservedInstancesListingInput,
+    CreateReservedInstancesListingInputDict,
     CreateReservedInstancesListingOutput,
     CreateRestoreImageTaskInput,
+    CreateRestoreImageTaskInputDict,
     CreateRestoreImageTaskOutput,
     CreateRouteInput,
+    CreateRouteInputDict,
     CreateRouteOutput,
     CreateRouteServerEndpointInput,
+    CreateRouteServerEndpointInputDict,
     CreateRouteServerEndpointOutput,
     CreateRouteServerInput,
+    CreateRouteServerInputDict,
     CreateRouteServerOutput,
     CreateRouteServerPeerInput,
+    CreateRouteServerPeerInputDict,
     CreateRouteServerPeerOutput,
     CreateRouteTableInput,
+    CreateRouteTableInputDict,
     CreateRouteTableOutput,
     CreateSecondaryNetworkInput,
+    CreateSecondaryNetworkInputDict,
     CreateSecondaryNetworkOutput,
     CreateSecondarySubnetInput,
+    CreateSecondarySubnetInputDict,
     CreateSecondarySubnetOutput,
     CreateSecurityGroupInput,
+    CreateSecurityGroupInputDict,
     CreateSecurityGroupOutput,
     CreateSnapshotInput,
+    CreateSnapshotInputDict,
     CreateSnapshotOutput,
     CreateSnapshotsInput,
+    CreateSnapshotsInputDict,
     CreateSnapshotsOutput,
     CreateSpotDatafeedSubscriptionInput,
+    CreateSpotDatafeedSubscriptionInputDict,
     CreateSpotDatafeedSubscriptionOutput,
     CreateStoreImageTaskInput,
+    CreateStoreImageTaskInputDict,
     CreateStoreImageTaskOutput,
     CreateSubnetCidrReservationInput,
+    CreateSubnetCidrReservationInputDict,
     CreateSubnetCidrReservationOutput,
     CreateSubnetInput,
+    CreateSubnetInputDict,
     CreateSubnetOutput,
     CreateTagsInput,
+    CreateTagsInputDict,
     CreateTagsOutput,
     CreateTrafficMirrorFilterInput,
+    CreateTrafficMirrorFilterInputDict,
     CreateTrafficMirrorFilterOutput,
     CreateTrafficMirrorFilterRuleInput,
+    CreateTrafficMirrorFilterRuleInputDict,
     CreateTrafficMirrorFilterRuleOutput,
     CreateTrafficMirrorSessionInput,
+    CreateTrafficMirrorSessionInputDict,
     CreateTrafficMirrorSessionOutput,
     CreateTrafficMirrorTargetInput,
+    CreateTrafficMirrorTargetInputDict,
     CreateTrafficMirrorTargetOutput,
     CreateTransitGatewayConnectInput,
+    CreateTransitGatewayConnectInputDict,
     CreateTransitGatewayConnectOutput,
     CreateTransitGatewayConnectPeerInput,
+    CreateTransitGatewayConnectPeerInputDict,
     CreateTransitGatewayConnectPeerOutput,
     CreateTransitGatewayConnectRequestOptions,
+    CreateTransitGatewayConnectRequestOptionsDict,
     CreateTransitGatewayInput,
+    CreateTransitGatewayInputDict,
     CreateTransitGatewayMeteringPolicyEntryInput,
+    CreateTransitGatewayMeteringPolicyEntryInputDict,
     CreateTransitGatewayMeteringPolicyEntryOutput,
     CreateTransitGatewayMeteringPolicyInput,
+    CreateTransitGatewayMeteringPolicyInputDict,
     CreateTransitGatewayMeteringPolicyOutput,
     CreateTransitGatewayMulticastDomainInput,
+    CreateTransitGatewayMulticastDomainInputDict,
     CreateTransitGatewayMulticastDomainOutput,
     CreateTransitGatewayMulticastDomainRequestOptions,
+    CreateTransitGatewayMulticastDomainRequestOptionsDict,
     CreateTransitGatewayOutput,
     CreateTransitGatewayPeeringAttachmentInput,
+    CreateTransitGatewayPeeringAttachmentInputDict,
     CreateTransitGatewayPeeringAttachmentOutput,
     CreateTransitGatewayPeeringAttachmentRequestOptions,
+    CreateTransitGatewayPeeringAttachmentRequestOptionsDict,
     CreateTransitGatewayPolicyTableEntryInput,
+    CreateTransitGatewayPolicyTableEntryInputDict,
     CreateTransitGatewayPolicyTableEntryOutput,
     CreateTransitGatewayPolicyTableInput,
+    CreateTransitGatewayPolicyTableInputDict,
     CreateTransitGatewayPolicyTableOutput,
     CreateTransitGatewayPrefixListReferenceInput,
+    CreateTransitGatewayPrefixListReferenceInputDict,
     CreateTransitGatewayPrefixListReferenceOutput,
     CreateTransitGatewayRouteInput,
+    CreateTransitGatewayRouteInputDict,
     CreateTransitGatewayRouteOutput,
     CreateTransitGatewayRouteTableAnnouncementInput,
+    CreateTransitGatewayRouteTableAnnouncementInputDict,
     CreateTransitGatewayRouteTableAnnouncementOutput,
     CreateTransitGatewayRouteTableInput,
+    CreateTransitGatewayRouteTableInputDict,
     CreateTransitGatewayRouteTableOutput,
     CreateTransitGatewayVpcAttachmentInput,
+    CreateTransitGatewayVpcAttachmentInputDict,
     CreateTransitGatewayVpcAttachmentOutput,
     CreateTransitGatewayVpcAttachmentRequestOptions,
+    CreateTransitGatewayVpcAttachmentRequestOptionsDict,
     CreateVerifiedAccessEndpointCidrOptions,
+    CreateVerifiedAccessEndpointCidrOptionsDict,
     CreateVerifiedAccessEndpointEniOptions,
+    CreateVerifiedAccessEndpointEniOptionsDict,
     CreateVerifiedAccessEndpointInput,
+    CreateVerifiedAccessEndpointInputDict,
     CreateVerifiedAccessEndpointLoadBalancerOptions,
+    CreateVerifiedAccessEndpointLoadBalancerOptionsDict,
     CreateVerifiedAccessEndpointOutput,
     CreateVerifiedAccessEndpointPortRange,
+    CreateVerifiedAccessEndpointPortRangeDict,
     CreateVerifiedAccessEndpointRdsOptions,
+    CreateVerifiedAccessEndpointRdsOptionsDict,
     CreateVerifiedAccessGroupInput,
+    CreateVerifiedAccessGroupInputDict,
     CreateVerifiedAccessGroupOutput,
     CreateVerifiedAccessInstanceInput,
+    CreateVerifiedAccessInstanceInputDict,
     CreateVerifiedAccessInstanceOutput,
     CreateVerifiedAccessNativeApplicationOidcOptions,
+    CreateVerifiedAccessNativeApplicationOidcOptionsDict,
     CreateVerifiedAccessTrustProviderDeviceOptions,
+    CreateVerifiedAccessTrustProviderDeviceOptionsDict,
     CreateVerifiedAccessTrustProviderInput,
+    CreateVerifiedAccessTrustProviderInputDict,
     CreateVerifiedAccessTrustProviderOidcOptions,
+    CreateVerifiedAccessTrustProviderOidcOptionsDict,
     CreateVerifiedAccessTrustProviderOutput,
     CreateVolumeInput,
+    CreateVolumeInputDict,
     CreateVolumeOutput,
     CreateVolumePermission,
+    CreateVolumePermissionDict,
     CreateVolumePermissionModifications,
+    CreateVolumePermissionModificationsDict,
     CreateVpcBlockPublicAccessExclusionInput,
+    CreateVpcBlockPublicAccessExclusionInputDict,
     CreateVpcBlockPublicAccessExclusionOutput,
     CreateVpcEncryptionControlInput,
+    CreateVpcEncryptionControlInputDict,
     CreateVpcEncryptionControlOutput,
     CreateVpcEndpointConnectionNotificationInput,
+    CreateVpcEndpointConnectionNotificationInputDict,
     CreateVpcEndpointConnectionNotificationOutput,
     CreateVpcEndpointInput,
+    CreateVpcEndpointInputDict,
     CreateVpcEndpointOutput,
     CreateVpcEndpointServiceConfigurationInput,
+    CreateVpcEndpointServiceConfigurationInputDict,
     CreateVpcEndpointServiceConfigurationOutput,
     CreateVpcInput,
+    CreateVpcInputDict,
     CreateVpcOutput,
     CreateVpcPeeringConnectionInput,
+    CreateVpcPeeringConnectionInputDict,
     CreateVpcPeeringConnectionOutput,
     CreateVpnConcentratorInput,
+    CreateVpnConcentratorInputDict,
     CreateVpnConcentratorOutput,
     CreateVpnConnectionInput,
+    CreateVpnConnectionInputDict,
     CreateVpnConnectionOutput,
     CreateVpnConnectionRouteInput,
+    CreateVpnConnectionRouteInputDict,
     CreateVpnConnectionRouteOutput,
     CreateVpnGatewayInput,
+    CreateVpnGatewayInputDict,
     CreateVpnGatewayOutput,
     CreationDateCondition,
     CreationDateConditionRequest,
+    CreationDateConditionRequestDict,
     CreditSpecification,
     CreditSpecificationRequest,
+    CreditSpecificationRequestDict,
     CustomTagKeyValueRequestPair,
+    CustomTagKeyValueRequestPairDict,
     CustomTagKeyValueResponsePair,
     CustomerGateway,
     DataQuery,
+    DataQueryDict,
     DataResponse,
     DeclarativePoliciesReport,
     DefaultConnectionTrackingConfiguration,
     DeleteApplicationStatusCheckInput,
+    DeleteApplicationStatusCheckInputDict,
     DeleteApplicationStatusCheckOutput,
     DeleteCapacityManagerDataExportInput,
+    DeleteCapacityManagerDataExportInputDict,
     DeleteCapacityManagerDataExportOutput,
     DeleteCarrierGatewayInput,
+    DeleteCarrierGatewayInputDict,
     DeleteCarrierGatewayOutput,
     DeleteClientVpnEndpointAuthorizationPolicyInput,
+    DeleteClientVpnEndpointAuthorizationPolicyInputDict,
     DeleteClientVpnEndpointAuthorizationPolicyOutput,
     DeleteClientVpnEndpointInput,
+    DeleteClientVpnEndpointInputDict,
     DeleteClientVpnEndpointOutput,
     DeleteClientVpnRouteInput,
+    DeleteClientVpnRouteInputDict,
     DeleteClientVpnRouteOutput,
     DeleteCoipCidrInput,
+    DeleteCoipCidrInputDict,
     DeleteCoipCidrOutput,
     DeleteCoipPoolInput,
+    DeleteCoipPoolInputDict,
     DeleteCoipPoolOutput,
     DeleteCustomerGatewayInput,
+    DeleteCustomerGatewayInputDict,
     DeleteCustomerGatewayOutput,
     DeleteDhcpOptionsInput,
+    DeleteDhcpOptionsInputDict,
     DeleteDhcpOptionsOutput,
     DeleteEgressOnlyInternetGatewayInput,
+    DeleteEgressOnlyInternetGatewayInputDict,
     DeleteEgressOnlyInternetGatewayOutput,
     DeleteFleetError,
     DeleteFleetErrorItem,
     DeleteFleetSuccessItem,
     DeleteFleetsInput,
+    DeleteFleetsInputDict,
     DeleteFleetsOutput,
     DeleteFlowLogsInput,
+    DeleteFlowLogsInputDict,
     DeleteFlowLogsOutput,
     DeleteFpgaImageInput,
+    DeleteFpgaImageInputDict,
     DeleteFpgaImageOutput,
     DeleteImageUsageReportInput,
+    DeleteImageUsageReportInputDict,
     DeleteImageUsageReportOutput,
     DeleteInstanceConnectEndpointInput,
+    DeleteInstanceConnectEndpointInputDict,
     DeleteInstanceConnectEndpointOutput,
     DeleteInstanceEventWindowInput,
+    DeleteInstanceEventWindowInputDict,
     DeleteInstanceEventWindowOutput,
     DeleteInternetGatewayInput,
+    DeleteInternetGatewayInputDict,
     DeleteInternetGatewayOutput,
     DeleteIpamExternalResourceVerificationTokenInput,
+    DeleteIpamExternalResourceVerificationTokenInputDict,
     DeleteIpamExternalResourceVerificationTokenOutput,
     DeleteIpamInput,
+    DeleteIpamInputDict,
     DeleteIpamInternetRegistryAssociationInput,
+    DeleteIpamInternetRegistryAssociationInputDict,
     DeleteIpamInternetRegistryAssociationOutput,
     DeleteIpamOutput,
     DeleteIpamPolicyInput,
+    DeleteIpamPolicyInputDict,
     DeleteIpamPolicyOutput,
     DeleteIpamPoolInput,
+    DeleteIpamPoolInputDict,
     DeleteIpamPoolOutput,
     DeleteIpamPrefixListResolverInput,
+    DeleteIpamPrefixListResolverInputDict,
     DeleteIpamPrefixListResolverOutput,
     DeleteIpamPrefixListResolverTargetInput,
+    DeleteIpamPrefixListResolverTargetInputDict,
     DeleteIpamPrefixListResolverTargetOutput,
     DeleteIpamResourceDiscoveryInput,
+    DeleteIpamResourceDiscoveryInputDict,
     DeleteIpamResourceDiscoveryOutput,
     DeleteIpamRoutingPolicyRegistrationInput,
+    DeleteIpamRoutingPolicyRegistrationInputDict,
     DeleteIpamRoutingPolicyRegistrationOutput,
     DeleteIpamScopeInput,
+    DeleteIpamScopeInputDict,
     DeleteIpamScopeOutput,
     DeleteKeyPairInput,
+    DeleteKeyPairInputDict,
     DeleteKeyPairOutput,
     DeleteLaunchTemplateInput,
+    DeleteLaunchTemplateInputDict,
     DeleteLaunchTemplateOutput,
     DeleteLaunchTemplateVersionsInput,
+    DeleteLaunchTemplateVersionsInputDict,
     DeleteLaunchTemplateVersionsOutput,
     DeleteLaunchTemplateVersionsResponseErrorItem,
     DeleteLaunchTemplateVersionsResponseSuccessItem,
     DeleteLocalGatewayRouteInput,
+    DeleteLocalGatewayRouteInputDict,
     DeleteLocalGatewayRouteOutput,
     DeleteLocalGatewayRouteTableInput,
+    DeleteLocalGatewayRouteTableInputDict,
     DeleteLocalGatewayRouteTableOutput,
     DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationInput,
+    DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationInputDict,
     DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationOutput,
     DeleteLocalGatewayRouteTableVpcAssociationInput,
+    DeleteLocalGatewayRouteTableVpcAssociationInputDict,
     DeleteLocalGatewayRouteTableVpcAssociationOutput,
     DeleteLocalGatewayVirtualInterfaceGroupInput,
+    DeleteLocalGatewayVirtualInterfaceGroupInputDict,
     DeleteLocalGatewayVirtualInterfaceGroupOutput,
     DeleteLocalGatewayVirtualInterfaceInput,
+    DeleteLocalGatewayVirtualInterfaceInputDict,
     DeleteLocalGatewayVirtualInterfaceOutput,
     DeleteManagedPrefixListInput,
+    DeleteManagedPrefixListInputDict,
     DeleteManagedPrefixListOutput,
     DeleteNatGatewayInput,
+    DeleteNatGatewayInputDict,
     DeleteNatGatewayOutput,
     DeleteNetworkAclEntryInput,
+    DeleteNetworkAclEntryInputDict,
     DeleteNetworkAclEntryOutput,
     DeleteNetworkAclInput,
+    DeleteNetworkAclInputDict,
     DeleteNetworkAclOutput,
     DeleteNetworkInsightsAccessScopeAnalysisInput,
+    DeleteNetworkInsightsAccessScopeAnalysisInputDict,
     DeleteNetworkInsightsAccessScopeAnalysisOutput,
     DeleteNetworkInsightsAccessScopeInput,
+    DeleteNetworkInsightsAccessScopeInputDict,
     DeleteNetworkInsightsAccessScopeOutput,
     DeleteNetworkInsightsAnalysisInput,
+    DeleteNetworkInsightsAnalysisInputDict,
     DeleteNetworkInsightsAnalysisOutput,
     DeleteNetworkInsightsPathInput,
+    DeleteNetworkInsightsPathInputDict,
     DeleteNetworkInsightsPathOutput,
     DeleteNetworkInterfaceInput,
+    DeleteNetworkInterfaceInputDict,
     DeleteNetworkInterfaceOutput,
     DeleteNetworkInterfacePermissionInput,
+    DeleteNetworkInterfacePermissionInputDict,
     DeleteNetworkInterfacePermissionOutput,
     DeletePlacementGroupInput,
+    DeletePlacementGroupInputDict,
     DeletePlacementGroupOutput,
     DeletePublicIpv4PoolInput,
+    DeletePublicIpv4PoolInputDict,
     DeletePublicIpv4PoolOutput,
     DeleteQueuedReservedInstancesError,
     DeleteQueuedReservedInstancesInput,
+    DeleteQueuedReservedInstancesInputDict,
     DeleteQueuedReservedInstancesOutput,
     DeleteRouteInput,
+    DeleteRouteInputDict,
     DeleteRouteOutput,
     DeleteRouteServerEndpointInput,
+    DeleteRouteServerEndpointInputDict,
     DeleteRouteServerEndpointOutput,
     DeleteRouteServerInput,
+    DeleteRouteServerInputDict,
     DeleteRouteServerOutput,
     DeleteRouteServerPeerInput,
+    DeleteRouteServerPeerInputDict,
     DeleteRouteServerPeerOutput,
     DeleteRouteTableInput,
+    DeleteRouteTableInputDict,
     DeleteRouteTableOutput,
     DeleteSecondaryNetworkInput,
+    DeleteSecondaryNetworkInputDict,
     DeleteSecondaryNetworkOutput,
     DeleteSecondarySubnetInput,
+    DeleteSecondarySubnetInputDict,
     DeleteSecondarySubnetOutput,
     DeleteSecurityGroupInput,
+    DeleteSecurityGroupInputDict,
     DeleteSecurityGroupOutput,
     DeleteSnapshotInput,
+    DeleteSnapshotInputDict,
     DeleteSnapshotOutput,
     DeleteSnapshotReturnCode,
     DeleteSpotDatafeedSubscriptionInput,
+    DeleteSpotDatafeedSubscriptionInputDict,
     DeleteSpotDatafeedSubscriptionOutput,
     DeleteSubnetCidrReservationInput,
+    DeleteSubnetCidrReservationInputDict,
     DeleteSubnetCidrReservationOutput,
     DeleteSubnetInput,
+    DeleteSubnetInputDict,
     DeleteSubnetOutput,
     DeleteTagsInput,
+    DeleteTagsInputDict,
     DeleteTagsOutput,
     DeleteTrafficMirrorFilterInput,
+    DeleteTrafficMirrorFilterInputDict,
     DeleteTrafficMirrorFilterOutput,
     DeleteTrafficMirrorFilterRuleInput,
+    DeleteTrafficMirrorFilterRuleInputDict,
     DeleteTrafficMirrorFilterRuleOutput,
     DeleteTrafficMirrorSessionInput,
+    DeleteTrafficMirrorSessionInputDict,
     DeleteTrafficMirrorSessionOutput,
     DeleteTrafficMirrorTargetInput,
+    DeleteTrafficMirrorTargetInputDict,
     DeleteTrafficMirrorTargetOutput,
     DeleteTransitGatewayClientVpnAttachmentInput,
+    DeleteTransitGatewayClientVpnAttachmentInputDict,
     DeleteTransitGatewayClientVpnAttachmentOutput,
     DeleteTransitGatewayConnectInput,
+    DeleteTransitGatewayConnectInputDict,
     DeleteTransitGatewayConnectOutput,
     DeleteTransitGatewayConnectPeerInput,
+    DeleteTransitGatewayConnectPeerInputDict,
     DeleteTransitGatewayConnectPeerOutput,
     DeleteTransitGatewayInput,
+    DeleteTransitGatewayInputDict,
     DeleteTransitGatewayMeteringPolicyEntryInput,
+    DeleteTransitGatewayMeteringPolicyEntryInputDict,
     DeleteTransitGatewayMeteringPolicyEntryOutput,
     DeleteTransitGatewayMeteringPolicyInput,
+    DeleteTransitGatewayMeteringPolicyInputDict,
     DeleteTransitGatewayMeteringPolicyOutput,
     DeleteTransitGatewayMulticastDomainInput,
+    DeleteTransitGatewayMulticastDomainInputDict,
     DeleteTransitGatewayMulticastDomainOutput,
     DeleteTransitGatewayOutput,
     DeleteTransitGatewayPeeringAttachmentInput,
+    DeleteTransitGatewayPeeringAttachmentInputDict,
     DeleteTransitGatewayPeeringAttachmentOutput,
     DeleteTransitGatewayPolicyTableEntryInput,
+    DeleteTransitGatewayPolicyTableEntryInputDict,
     DeleteTransitGatewayPolicyTableEntryOutput,
     DeleteTransitGatewayPolicyTableInput,
+    DeleteTransitGatewayPolicyTableInputDict,
     DeleteTransitGatewayPolicyTableOutput,
     DeleteTransitGatewayPrefixListReferenceInput,
+    DeleteTransitGatewayPrefixListReferenceInputDict,
     DeleteTransitGatewayPrefixListReferenceOutput,
     DeleteTransitGatewayRouteInput,
+    DeleteTransitGatewayRouteInputDict,
     DeleteTransitGatewayRouteOutput,
     DeleteTransitGatewayRouteTableAnnouncementInput,
+    DeleteTransitGatewayRouteTableAnnouncementInputDict,
     DeleteTransitGatewayRouteTableAnnouncementOutput,
     DeleteTransitGatewayRouteTableInput,
+    DeleteTransitGatewayRouteTableInputDict,
     DeleteTransitGatewayRouteTableOutput,
     DeleteTransitGatewayVpcAttachmentInput,
+    DeleteTransitGatewayVpcAttachmentInputDict,
     DeleteTransitGatewayVpcAttachmentOutput,
     DeleteVerifiedAccessEndpointInput,
+    DeleteVerifiedAccessEndpointInputDict,
     DeleteVerifiedAccessEndpointOutput,
     DeleteVerifiedAccessGroupInput,
+    DeleteVerifiedAccessGroupInputDict,
     DeleteVerifiedAccessGroupOutput,
     DeleteVerifiedAccessInstanceInput,
+    DeleteVerifiedAccessInstanceInputDict,
     DeleteVerifiedAccessInstanceOutput,
     DeleteVerifiedAccessTrustProviderInput,
+    DeleteVerifiedAccessTrustProviderInputDict,
     DeleteVerifiedAccessTrustProviderOutput,
     DeleteVolumeInput,
+    DeleteVolumeInputDict,
     DeleteVolumeOutput,
     DeleteVpcBlockPublicAccessExclusionInput,
+    DeleteVpcBlockPublicAccessExclusionInputDict,
     DeleteVpcBlockPublicAccessExclusionOutput,
     DeleteVpcEncryptionControlInput,
+    DeleteVpcEncryptionControlInputDict,
     DeleteVpcEncryptionControlOutput,
     DeleteVpcEndpointConnectionNotificationsInput,
+    DeleteVpcEndpointConnectionNotificationsInputDict,
     DeleteVpcEndpointConnectionNotificationsOutput,
     DeleteVpcEndpointServiceConfigurationsInput,
+    DeleteVpcEndpointServiceConfigurationsInputDict,
     DeleteVpcEndpointServiceConfigurationsOutput,
     DeleteVpcEndpointsInput,
+    DeleteVpcEndpointsInputDict,
     DeleteVpcEndpointsOutput,
     DeleteVpcInput,
+    DeleteVpcInputDict,
     DeleteVpcOutput,
     DeleteVpcPeeringConnectionInput,
+    DeleteVpcPeeringConnectionInputDict,
     DeleteVpcPeeringConnectionOutput,
     DeleteVpnConcentratorInput,
+    DeleteVpnConcentratorInputDict,
     DeleteVpnConcentratorOutput,
     DeleteVpnConnectionInput,
+    DeleteVpnConnectionInputDict,
     DeleteVpnConnectionOutput,
     DeleteVpnConnectionRouteInput,
+    DeleteVpnConnectionRouteInputDict,
     DeleteVpnConnectionRouteOutput,
     DeleteVpnGatewayInput,
+    DeleteVpnGatewayInputDict,
     DeleteVpnGatewayOutput,
     DeprecationTimeCondition,
     DeprecationTimeConditionRequest,
+    DeprecationTimeConditionRequestDict,
     DeprovisionByoipCidrInput,
+    DeprovisionByoipCidrInputDict,
     DeprovisionByoipCidrOutput,
     DeprovisionIpamByoasnInput,
+    DeprovisionIpamByoasnInputDict,
     DeprovisionIpamByoasnOutput,
     DeprovisionIpamPoolCidrInput,
+    DeprovisionIpamPoolCidrInputDict,
     DeprovisionIpamPoolCidrOutput,
     DeprovisionPublicIpv4PoolCidrInput,
+    DeprovisionPublicIpv4PoolCidrInputDict,
     DeprovisionPublicIpv4PoolCidrOutput,
     DeregisterImageInput,
+    DeregisterImageInputDict,
     DeregisterImageOutput,
     DeregisterInstanceEventNotificationAttributesInput,
+    DeregisterInstanceEventNotificationAttributesInputDict,
     DeregisterInstanceEventNotificationAttributesOutput,
     DeregisterInstanceTagAttributeRequest,
+    DeregisterInstanceTagAttributeRequestDict,
     DeregisterTransitGatewayMulticastGroupMembersInput,
+    DeregisterTransitGatewayMulticastGroupMembersInputDict,
     DeregisterTransitGatewayMulticastGroupMembersOutput,
     DeregisterTransitGatewayMulticastGroupSourcesInput,
+    DeregisterTransitGatewayMulticastGroupSourcesInputDict,
     DeregisterTransitGatewayMulticastGroupSourcesOutput,
     DescribeAccountAttributesInput,
+    DescribeAccountAttributesInputDict,
     DescribeAccountAttributesOutput,
     DescribeAccountVpcEncryptionControlInput,
+    DescribeAccountVpcEncryptionControlInputDict,
     DescribeAccountVpcEncryptionControlOutput,
     DescribeAddressTransfersInput,
+    DescribeAddressTransfersInputDict,
     DescribeAddressTransfersOutput,
     DescribeAddressesAttributeInput,
+    DescribeAddressesAttributeInputDict,
     DescribeAddressesAttributeOutput,
     DescribeAddressesInput,
+    DescribeAddressesInputDict,
     DescribeAddressesOutput,
     DescribeAggregateIdFormatInput,
+    DescribeAggregateIdFormatInputDict,
     DescribeAggregateIdFormatOutput,
     DescribeApplicationStatusCheckAssociationsInput,
+    DescribeApplicationStatusCheckAssociationsInputDict,
     DescribeApplicationStatusCheckAssociationsOutput,
     DescribeApplicationStatusChecksInput,
+    DescribeApplicationStatusChecksInputDict,
     DescribeApplicationStatusChecksOutput,
     DescribeApplicationStatusInput,
+    DescribeApplicationStatusInputDict,
     DescribeApplicationStatusOutput,
     DescribeAvailabilityZonesInput,
+    DescribeAvailabilityZonesInputDict,
     DescribeAvailabilityZonesOutput,
     DescribeAwsNetworkPerformanceMetricSubscriptionsInput,
+    DescribeAwsNetworkPerformanceMetricSubscriptionsInputDict,
     DescribeAwsNetworkPerformanceMetricSubscriptionsOutput,
     DescribeBundleTasksInput,
+    DescribeBundleTasksInputDict,
     DescribeBundleTasksOutput,
     DescribeByoipCidrsInput,
+    DescribeByoipCidrsInputDict,
     DescribeByoipCidrsOutput,
     DescribeCapacityBlockExtensionHistoryInput,
+    DescribeCapacityBlockExtensionHistoryInputDict,
     DescribeCapacityBlockExtensionHistoryOutput,
     DescribeCapacityBlockExtensionOfferingsInput,
+    DescribeCapacityBlockExtensionOfferingsInputDict,
     DescribeCapacityBlockExtensionOfferingsOutput,
     DescribeCapacityBlockOfferingsInput,
+    DescribeCapacityBlockOfferingsInputDict,
     DescribeCapacityBlockOfferingsOutput,
     DescribeCapacityBlockStatusInput,
+    DescribeCapacityBlockStatusInputDict,
     DescribeCapacityBlockStatusOutput,
     DescribeCapacityBlocksInput,
+    DescribeCapacityBlocksInputDict,
     DescribeCapacityBlocksOutput,
     DescribeCapacityManagerDataExportsInput,
+    DescribeCapacityManagerDataExportsInputDict,
     DescribeCapacityManagerDataExportsOutput,
     DescribeCapacityReservationBillingRequestsInput,
+    DescribeCapacityReservationBillingRequestsInputDict,
     DescribeCapacityReservationBillingRequestsOutput,
     DescribeCapacityReservationCancellationQuotesInput,
+    DescribeCapacityReservationCancellationQuotesInputDict,
     DescribeCapacityReservationCancellationQuotesOutput,
     DescribeCapacityReservationDateChangeQuotesInput,
+    DescribeCapacityReservationDateChangeQuotesInputDict,
     DescribeCapacityReservationDateChangeQuotesOutput,
     DescribeCapacityReservationFleetsInput,
+    DescribeCapacityReservationFleetsInputDict,
     DescribeCapacityReservationFleetsOutput,
     DescribeCapacityReservationTopologyInput,
+    DescribeCapacityReservationTopologyInputDict,
     DescribeCapacityReservationTopologyOutput,
     DescribeCapacityReservationsInput,
+    DescribeCapacityReservationsInputDict,
     DescribeCapacityReservationsOutput,
     DescribeCarrierGatewaysInput,
+    DescribeCarrierGatewaysInputDict,
     DescribeCarrierGatewaysOutput,
     DescribeClassicLinkInstancesInput,
+    DescribeClassicLinkInstancesInputDict,
     DescribeClassicLinkInstancesOutput,
     DescribeClientVpnAuthorizationRulesInput,
+    DescribeClientVpnAuthorizationRulesInputDict,
     DescribeClientVpnAuthorizationRulesOutput,
     DescribeClientVpnConnectionsInput,
+    DescribeClientVpnConnectionsInputDict,
     DescribeClientVpnConnectionsOutput,
     DescribeClientVpnEndpointsInput,
+    DescribeClientVpnEndpointsInputDict,
     DescribeClientVpnEndpointsOutput,
     DescribeClientVpnRoutesInput,
+    DescribeClientVpnRoutesInputDict,
     DescribeClientVpnRoutesOutput,
     DescribeClientVpnTargetNetworksInput,
+    DescribeClientVpnTargetNetworksInputDict,
     DescribeClientVpnTargetNetworksOutput,
     DescribeCoipPoolsInput,
+    DescribeCoipPoolsInputDict,
     DescribeCoipPoolsOutput,
     DescribeConversionTasksInput,
+    DescribeConversionTasksInputDict,
     DescribeConversionTasksOutput,
     DescribeCustomerGatewaysInput,
+    DescribeCustomerGatewaysInputDict,
     DescribeCustomerGatewaysOutput,
     DescribeDeclarativePoliciesReportsInput,
+    DescribeDeclarativePoliciesReportsInputDict,
     DescribeDeclarativePoliciesReportsOutput,
     DescribeDhcpOptionsInput,
+    DescribeDhcpOptionsInputDict,
     DescribeDhcpOptionsOutput,
     DescribeEgressOnlyInternetGatewaysInput,
+    DescribeEgressOnlyInternetGatewaysInputDict,
     DescribeEgressOnlyInternetGatewaysOutput,
     DescribeElasticGpusInput,
+    DescribeElasticGpusInputDict,
     DescribeElasticGpusOutput,
     DescribeExportImageTasksInput,
+    DescribeExportImageTasksInputDict,
     DescribeExportImageTasksOutput,
     DescribeExportTasksInput,
+    DescribeExportTasksInputDict,
     DescribeExportTasksOutput,
     DescribeFastLaunchImagesInput,
+    DescribeFastLaunchImagesInputDict,
     DescribeFastLaunchImagesOutput,
     DescribeFastLaunchImagesSuccessItem,
     DescribeFastSnapshotRestoreSuccessItem,
     DescribeFastSnapshotRestoresInput,
+    DescribeFastSnapshotRestoresInputDict,
     DescribeFastSnapshotRestoresOutput,
     DescribeFleetError,
     DescribeFleetHistoryInput,
+    DescribeFleetHistoryInputDict,
     DescribeFleetHistoryOutput,
     DescribeFleetInstancesInput,
+    DescribeFleetInstancesInputDict,
     DescribeFleetInstancesOutput,
     DescribeFleetsInput,
+    DescribeFleetsInputDict,
     DescribeFleetsInstances,
     DescribeFleetsOutput,
     DescribeFlowLogsInput,
+    DescribeFlowLogsInputDict,
     DescribeFlowLogsOutput,
     DescribeFpgaImageAttributeInput,
+    DescribeFpgaImageAttributeInputDict,
     DescribeFpgaImageAttributeOutput,
     DescribeFpgaImagesInput,
+    DescribeFpgaImagesInputDict,
     DescribeFpgaImagesOutput,
     DescribeHostReservationOfferingsInput,
+    DescribeHostReservationOfferingsInputDict,
     DescribeHostReservationOfferingsOutput,
     DescribeHostReservationsInput,
+    DescribeHostReservationsInputDict,
     DescribeHostReservationsOutput,
     DescribeHostsInput,
+    DescribeHostsInputDict,
     DescribeHostsOutput,
     DescribeIamInstanceProfileAssociationsInput,
+    DescribeIamInstanceProfileAssociationsInputDict,
     DescribeIamInstanceProfileAssociationsOutput,
     DescribeIdFormatInput,
+    DescribeIdFormatInputDict,
     DescribeIdFormatOutput,
     DescribeIdentityIdFormatInput,
+    DescribeIdentityIdFormatInputDict,
     DescribeIdentityIdFormatOutput,
     DescribeImageAttributeInput,
+    DescribeImageAttributeInputDict,
     DescribeImageAttributeOutput,
     DescribeImageReferencesInput,
+    DescribeImageReferencesInputDict,
     DescribeImageReferencesOutput,
     DescribeImageUsageReportEntriesInput,
+    DescribeImageUsageReportEntriesInputDict,
     DescribeImageUsageReportEntriesOutput,
     DescribeImageUsageReportsInput,
+    DescribeImageUsageReportsInputDict,
     DescribeImageUsageReportsOutput,
     DescribeImagesInput,
+    DescribeImagesInputDict,
     DescribeImagesOutput,
     DescribeImportImageTasksInput,
+    DescribeImportImageTasksInputDict,
     DescribeImportImageTasksOutput,
     DescribeImportSnapshotTasksInput,
+    DescribeImportSnapshotTasksInputDict,
     DescribeImportSnapshotTasksOutput,
     DescribeInstanceAttributeInput,
+    DescribeInstanceAttributeInputDict,
     DescribeInstanceAttributeOutput,
     DescribeInstanceConnectEndpointsInput,
+    DescribeInstanceConnectEndpointsInputDict,
     DescribeInstanceConnectEndpointsOutput,
     DescribeInstanceCreditSpecificationsInput,
+    DescribeInstanceCreditSpecificationsInputDict,
     DescribeInstanceCreditSpecificationsOutput,
     DescribeInstanceEventNotificationAttributesInput,
+    DescribeInstanceEventNotificationAttributesInputDict,
     DescribeInstanceEventNotificationAttributesOutput,
     DescribeInstanceEventWindowsInput,
+    DescribeInstanceEventWindowsInputDict,
     DescribeInstanceEventWindowsOutput,
     DescribeInstanceImageMetadataInput,
+    DescribeInstanceImageMetadataInputDict,
     DescribeInstanceImageMetadataOutput,
     DescribeInstanceSqlHaHistoryStatesInput,
+    DescribeInstanceSqlHaHistoryStatesInputDict,
     DescribeInstanceSqlHaHistoryStatesOutput,
     DescribeInstanceSqlHaStatesInput,
+    DescribeInstanceSqlHaStatesInputDict,
     DescribeInstanceSqlHaStatesOutput,
     DescribeInstanceStatusInput,
+    DescribeInstanceStatusInputDict,
     DescribeInstanceStatusOutput,
     DescribeInstanceTopologyInput,
+    DescribeInstanceTopologyInputDict,
     DescribeInstanceTopologyOutput,
     DescribeInstanceTypeOfferingsInput,
+    DescribeInstanceTypeOfferingsInputDict,
     DescribeInstanceTypeOfferingsOutput,
     DescribeInstanceTypesInput,
+    DescribeInstanceTypesInputDict,
     DescribeInstanceTypesOutput,
     DescribeInstancesInput,
+    DescribeInstancesInputDict,
     DescribeInstancesOutput,
     DescribeInternetGatewaysInput,
+    DescribeInternetGatewaysInputDict,
     DescribeInternetGatewaysOutput,
     DescribeIpamByoasnInput,
+    DescribeIpamByoasnInputDict,
     DescribeIpamByoasnOutput,
     DescribeIpamExternalResourceVerificationTokensInput,
+    DescribeIpamExternalResourceVerificationTokensInputDict,
     DescribeIpamExternalResourceVerificationTokensOutput,
     DescribeIpamInternetRegistryAssociationsInput,
+    DescribeIpamInternetRegistryAssociationsInputDict,
     DescribeIpamInternetRegistryAssociationsOutput,
     DescribeIpamPoliciesInput,
+    DescribeIpamPoliciesInputDict,
     DescribeIpamPoliciesOutput,
     DescribeIpamPoolAllocationsInput,
+    DescribeIpamPoolAllocationsInputDict,
     DescribeIpamPoolAllocationsOutput,
     DescribeIpamPoolsInput,
+    DescribeIpamPoolsInputDict,
     DescribeIpamPoolsOutput,
     DescribeIpamPrefixListResolverTargetsInput,
+    DescribeIpamPrefixListResolverTargetsInputDict,
     DescribeIpamPrefixListResolverTargetsOutput,
     DescribeIpamPrefixListResolversInput,
+    DescribeIpamPrefixListResolversInputDict,
     DescribeIpamPrefixListResolversOutput,
     DescribeIpamResourceDiscoveriesInput,
+    DescribeIpamResourceDiscoveriesInputDict,
     DescribeIpamResourceDiscoveriesOutput,
     DescribeIpamResourceDiscoveryAssociationsInput,
+    DescribeIpamResourceDiscoveryAssociationsInputDict,
     DescribeIpamResourceDiscoveryAssociationsOutput,
     DescribeIpamScopesInput,
+    DescribeIpamScopesInputDict,
     DescribeIpamScopesOutput,
     DescribeIpamsInput,
+    DescribeIpamsInputDict,
     DescribeIpamsOutput,
     DescribeIpv6PoolsInput,
+    DescribeIpv6PoolsInputDict,
     DescribeIpv6PoolsOutput,
     DescribeKeyPairsInput,
+    DescribeKeyPairsInputDict,
     DescribeKeyPairsOutput,
     DescribeLaunchTemplateVersionsInput,
+    DescribeLaunchTemplateVersionsInputDict,
     DescribeLaunchTemplateVersionsOutput,
     DescribeLaunchTemplatesInput,
+    DescribeLaunchTemplatesInputDict,
     DescribeLaunchTemplatesOutput,
     DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsInput,
+    DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsInputDict,
     DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsOutput,
     DescribeLocalGatewayRouteTableVpcAssociationsInput,
+    DescribeLocalGatewayRouteTableVpcAssociationsInputDict,
     DescribeLocalGatewayRouteTableVpcAssociationsOutput,
     DescribeLocalGatewayRouteTablesInput,
+    DescribeLocalGatewayRouteTablesInputDict,
     DescribeLocalGatewayRouteTablesOutput,
     DescribeLocalGatewayVirtualInterfaceGroupsInput,
+    DescribeLocalGatewayVirtualInterfaceGroupsInputDict,
     DescribeLocalGatewayVirtualInterfaceGroupsOutput,
     DescribeLocalGatewayVirtualInterfacesInput,
+    DescribeLocalGatewayVirtualInterfacesInputDict,
     DescribeLocalGatewayVirtualInterfacesOutput,
     DescribeLocalGatewaysInput,
+    DescribeLocalGatewaysInputDict,
     DescribeLocalGatewaysOutput,
     DescribeLockedSnapshotsInput,
+    DescribeLockedSnapshotsInputDict,
     DescribeLockedSnapshotsOutput,
     DescribeMacHostsInput,
+    DescribeMacHostsInputDict,
     DescribeMacHostsOutput,
     DescribeMacModificationTasksInput,
+    DescribeMacModificationTasksInputDict,
     DescribeMacModificationTasksOutput,
     DescribeManagedPrefixListsInput,
+    DescribeManagedPrefixListsInputDict,
     DescribeManagedPrefixListsOutput,
     DescribeMovingAddressesInput,
+    DescribeMovingAddressesInputDict,
     DescribeMovingAddressesOutput,
     DescribeNatGatewaysInput,
+    DescribeNatGatewaysInputDict,
     DescribeNatGatewaysOutput,
     DescribeNetworkAclsInput,
+    DescribeNetworkAclsInputDict,
     DescribeNetworkAclsOutput,
     DescribeNetworkInsightsAccessScopeAnalysesInput,
+    DescribeNetworkInsightsAccessScopeAnalysesInputDict,
     DescribeNetworkInsightsAccessScopeAnalysesOutput,
     DescribeNetworkInsightsAccessScopesInput,
+    DescribeNetworkInsightsAccessScopesInputDict,
     DescribeNetworkInsightsAccessScopesOutput,
     DescribeNetworkInsightsAnalysesInput,
+    DescribeNetworkInsightsAnalysesInputDict,
     DescribeNetworkInsightsAnalysesOutput,
     DescribeNetworkInsightsPathsInput,
+    DescribeNetworkInsightsPathsInputDict,
     DescribeNetworkInsightsPathsOutput,
     DescribeNetworkInterfaceAttributeInput,
+    DescribeNetworkInterfaceAttributeInputDict,
     DescribeNetworkInterfaceAttributeOutput,
     DescribeNetworkInterfacePermissionsInput,
+    DescribeNetworkInterfacePermissionsInputDict,
     DescribeNetworkInterfacePermissionsOutput,
     DescribeNetworkInterfacesInput,
+    DescribeNetworkInterfacesInputDict,
     DescribeNetworkInterfacesOutput,
     DescribeOutpostLagsInput,
+    DescribeOutpostLagsInputDict,
     DescribeOutpostLagsOutput,
     DescribePlacementGroupsInput,
+    DescribePlacementGroupsInputDict,
     DescribePlacementGroupsOutput,
     DescribePrefixListsInput,
+    DescribePrefixListsInputDict,
     DescribePrefixListsOutput,
     DescribePrincipalIdFormatInput,
+    DescribePrincipalIdFormatInputDict,
     DescribePrincipalIdFormatOutput,
     DescribePublicIpv4PoolsInput,
+    DescribePublicIpv4PoolsInputDict,
     DescribePublicIpv4PoolsOutput,
     DescribeRegionsInput,
+    DescribeRegionsInputDict,
     DescribeRegionsOutput,
     DescribeReplaceRootVolumeTasksInput,
+    DescribeReplaceRootVolumeTasksInputDict,
     DescribeReplaceRootVolumeTasksOutput,
     DescribeReservedInstancesInput,
+    DescribeReservedInstancesInputDict,
     DescribeReservedInstancesListingsInput,
+    DescribeReservedInstancesListingsInputDict,
     DescribeReservedInstancesListingsOutput,
     DescribeReservedInstancesModificationsInput,
+    DescribeReservedInstancesModificationsInputDict,
     DescribeReservedInstancesModificationsOutput,
     DescribeReservedInstancesOfferingsInput,
+    DescribeReservedInstancesOfferingsInputDict,
     DescribeReservedInstancesOfferingsOutput,
     DescribeReservedInstancesOutput,
     DescribeRouteServerEndpointsInput,
+    DescribeRouteServerEndpointsInputDict,
     DescribeRouteServerEndpointsOutput,
     DescribeRouteServerPeersInput,
+    DescribeRouteServerPeersInputDict,
     DescribeRouteServerPeersOutput,
     DescribeRouteServersInput,
+    DescribeRouteServersInputDict,
     DescribeRouteServersOutput,
     DescribeRouteTablesInput,
+    DescribeRouteTablesInputDict,
     DescribeRouteTablesOutput,
     DescribeScheduledInstanceAvailabilityInput,
+    DescribeScheduledInstanceAvailabilityInputDict,
     DescribeScheduledInstanceAvailabilityOutput,
     DescribeScheduledInstancesInput,
+    DescribeScheduledInstancesInputDict,
     DescribeScheduledInstancesOutput,
     DescribeSecondaryInterfacesInput,
+    DescribeSecondaryInterfacesInputDict,
     DescribeSecondaryInterfacesOutput,
     DescribeSecondaryNetworksInput,
+    DescribeSecondaryNetworksInputDict,
     DescribeSecondaryNetworksOutput,
     DescribeSecondarySubnetsInput,
+    DescribeSecondarySubnetsInputDict,
     DescribeSecondarySubnetsOutput,
     DescribeSecurityGroupReferencesInput,
+    DescribeSecurityGroupReferencesInputDict,
     DescribeSecurityGroupReferencesOutput,
     DescribeSecurityGroupRulesInput,
+    DescribeSecurityGroupRulesInputDict,
     DescribeSecurityGroupRulesOutput,
     DescribeSecurityGroupVpcAssociationsInput,
+    DescribeSecurityGroupVpcAssociationsInputDict,
     DescribeSecurityGroupVpcAssociationsOutput,
     DescribeSecurityGroupsInput,
+    DescribeSecurityGroupsInputDict,
     DescribeSecurityGroupsOutput,
     DescribeServiceLinkVirtualInterfacesInput,
+    DescribeServiceLinkVirtualInterfacesInputDict,
     DescribeServiceLinkVirtualInterfacesOutput,
     DescribeSnapshotAttributeInput,
+    DescribeSnapshotAttributeInputDict,
     DescribeSnapshotAttributeOutput,
     DescribeSnapshotTierStatusInput,
+    DescribeSnapshotTierStatusInputDict,
     DescribeSnapshotTierStatusOutput,
     DescribeSnapshotsInput,
+    DescribeSnapshotsInputDict,
     DescribeSnapshotsOutput,
     DescribeSpotDatafeedSubscriptionInput,
+    DescribeSpotDatafeedSubscriptionInputDict,
     DescribeSpotDatafeedSubscriptionOutput,
     DescribeSpotFleetInstancesInput,
+    DescribeSpotFleetInstancesInputDict,
     DescribeSpotFleetInstancesOutput,
     DescribeSpotFleetRequestHistoryInput,
+    DescribeSpotFleetRequestHistoryInputDict,
     DescribeSpotFleetRequestHistoryOutput,
     DescribeSpotFleetRequestsInput,
+    DescribeSpotFleetRequestsInputDict,
     DescribeSpotFleetRequestsOutput,
     DescribeSpotInstanceRequestsInput,
+    DescribeSpotInstanceRequestsInputDict,
     DescribeSpotInstanceRequestsOutput,
     DescribeSpotPriceHistoryInput,
+    DescribeSpotPriceHistoryInputDict,
     DescribeSpotPriceHistoryOutput,
     DescribeStaleSecurityGroupsInput,
+    DescribeStaleSecurityGroupsInputDict,
     DescribeStaleSecurityGroupsOutput,
     DescribeStoreImageTasksInput,
+    DescribeStoreImageTasksInputDict,
     DescribeStoreImageTasksOutput,
     DescribeSubnetsInput,
+    DescribeSubnetsInputDict,
     DescribeSubnetsOutput,
     DescribeTagsInput,
+    DescribeTagsInputDict,
     DescribeTagsOutput,
     DescribeTrafficMirrorFilterRulesInput,
+    DescribeTrafficMirrorFilterRulesInputDict,
     DescribeTrafficMirrorFilterRulesOutput,
     DescribeTrafficMirrorFiltersInput,
+    DescribeTrafficMirrorFiltersInputDict,
     DescribeTrafficMirrorFiltersOutput,
     DescribeTrafficMirrorSessionsInput,
+    DescribeTrafficMirrorSessionsInputDict,
     DescribeTrafficMirrorSessionsOutput,
     DescribeTrafficMirrorTargetsInput,
+    DescribeTrafficMirrorTargetsInputDict,
     DescribeTrafficMirrorTargetsOutput,
     DescribeTransitGatewayAttachmentsInput,
+    DescribeTransitGatewayAttachmentsInputDict,
     DescribeTransitGatewayAttachmentsOutput,
     DescribeTransitGatewayConnectPeersInput,
+    DescribeTransitGatewayConnectPeersInputDict,
     DescribeTransitGatewayConnectPeersOutput,
     DescribeTransitGatewayConnectsInput,
+    DescribeTransitGatewayConnectsInputDict,
     DescribeTransitGatewayConnectsOutput,
     DescribeTransitGatewayMeteringPoliciesInput,
+    DescribeTransitGatewayMeteringPoliciesInputDict,
     DescribeTransitGatewayMeteringPoliciesOutput,
     DescribeTransitGatewayMulticastDomainsInput,
+    DescribeTransitGatewayMulticastDomainsInputDict,
     DescribeTransitGatewayMulticastDomainsOutput,
     DescribeTransitGatewayPeeringAttachmentsInput,
+    DescribeTransitGatewayPeeringAttachmentsInputDict,
     DescribeTransitGatewayPeeringAttachmentsOutput,
     DescribeTransitGatewayPolicyTablesInput,
+    DescribeTransitGatewayPolicyTablesInputDict,
     DescribeTransitGatewayPolicyTablesOutput,
     DescribeTransitGatewayRouteTableAnnouncementsInput,
+    DescribeTransitGatewayRouteTableAnnouncementsInputDict,
     DescribeTransitGatewayRouteTableAnnouncementsOutput,
     DescribeTransitGatewayRouteTablesInput,
+    DescribeTransitGatewayRouteTablesInputDict,
     DescribeTransitGatewayRouteTablesOutput,
     DescribeTransitGatewayVpcAttachmentsInput,
+    DescribeTransitGatewayVpcAttachmentsInputDict,
     DescribeTransitGatewayVpcAttachmentsOutput,
     DescribeTransitGatewaysInput,
+    DescribeTransitGatewaysInputDict,
     DescribeTransitGatewaysOutput,
     DescribeTrunkInterfaceAssociationsInput,
+    DescribeTrunkInterfaceAssociationsInputDict,
     DescribeTrunkInterfaceAssociationsOutput,
     DescribeVerifiedAccessEndpointsInput,
+    DescribeVerifiedAccessEndpointsInputDict,
     DescribeVerifiedAccessEndpointsOutput,
     DescribeVerifiedAccessGroupsInput,
+    DescribeVerifiedAccessGroupsInputDict,
     DescribeVerifiedAccessGroupsOutput,
     DescribeVerifiedAccessInstanceLoggingConfigurationsInput,
+    DescribeVerifiedAccessInstanceLoggingConfigurationsInputDict,
     DescribeVerifiedAccessInstanceLoggingConfigurationsOutput,
     DescribeVerifiedAccessInstancesInput,
+    DescribeVerifiedAccessInstancesInputDict,
     DescribeVerifiedAccessInstancesOutput,
     DescribeVerifiedAccessTrustProvidersInput,
+    DescribeVerifiedAccessTrustProvidersInputDict,
     DescribeVerifiedAccessTrustProvidersOutput,
     DescribeVolumeAttributeInput,
+    DescribeVolumeAttributeInputDict,
     DescribeVolumeAttributeOutput,
     DescribeVolumeStatusInput,
+    DescribeVolumeStatusInputDict,
     DescribeVolumeStatusOutput,
     DescribeVolumesInput,
+    DescribeVolumesInputDict,
     DescribeVolumesModificationsInput,
+    DescribeVolumesModificationsInputDict,
     DescribeVolumesModificationsOutput,
     DescribeVolumesOutput,
     DescribeVpcAttributeInput,
+    DescribeVpcAttributeInputDict,
     DescribeVpcAttributeOutput,
     DescribeVpcBlockPublicAccessExclusionsInput,
+    DescribeVpcBlockPublicAccessExclusionsInputDict,
     DescribeVpcBlockPublicAccessExclusionsOutput,
     DescribeVpcBlockPublicAccessOptionsInput,
+    DescribeVpcBlockPublicAccessOptionsInputDict,
     DescribeVpcBlockPublicAccessOptionsOutput,
     DescribeVpcClassicLinkDnsSupportInput,
+    DescribeVpcClassicLinkDnsSupportInputDict,
     DescribeVpcClassicLinkDnsSupportOutput,
     DescribeVpcClassicLinkInput,
+    DescribeVpcClassicLinkInputDict,
     DescribeVpcClassicLinkOutput,
     DescribeVpcEncryptionControlsInput,
+    DescribeVpcEncryptionControlsInputDict,
     DescribeVpcEncryptionControlsOutput,
     DescribeVpcEndpointAssociationsInput,
+    DescribeVpcEndpointAssociationsInputDict,
     DescribeVpcEndpointAssociationsOutput,
     DescribeVpcEndpointConnectionNotificationsInput,
+    DescribeVpcEndpointConnectionNotificationsInputDict,
     DescribeVpcEndpointConnectionNotificationsOutput,
     DescribeVpcEndpointConnectionsInput,
+    DescribeVpcEndpointConnectionsInputDict,
     DescribeVpcEndpointConnectionsOutput,
     DescribeVpcEndpointServiceConfigurationsInput,
+    DescribeVpcEndpointServiceConfigurationsInputDict,
     DescribeVpcEndpointServiceConfigurationsOutput,
     DescribeVpcEndpointServicePermissionsInput,
+    DescribeVpcEndpointServicePermissionsInputDict,
     DescribeVpcEndpointServicePermissionsOutput,
     DescribeVpcEndpointServicesInput,
+    DescribeVpcEndpointServicesInputDict,
     DescribeVpcEndpointServicesOutput,
     DescribeVpcEndpointsInput,
+    DescribeVpcEndpointsInputDict,
     DescribeVpcEndpointsOutput,
     DescribeVpcPeeringConnectionsInput,
+    DescribeVpcPeeringConnectionsInputDict,
     DescribeVpcPeeringConnectionsOutput,
     DescribeVpcsInput,
+    DescribeVpcsInputDict,
     DescribeVpcsOutput,
     DescribeVpnConcentratorsInput,
+    DescribeVpnConcentratorsInputDict,
     DescribeVpnConcentratorsOutput,
     DescribeVpnConnectionsInput,
+    DescribeVpnConnectionsInputDict,
     DescribeVpnConnectionsOutput,
     DescribeVpnGatewaysInput,
+    DescribeVpnGatewaysInputDict,
     DescribeVpnGatewaysOutput,
     DestinationOptionsRequest,
+    DestinationOptionsRequestDict,
     DestinationOptionsResponse,
     DetachClassicLinkVpcInput,
+    DetachClassicLinkVpcInputDict,
     DetachClassicLinkVpcOutput,
     DetachImageWatermarkInput,
+    DetachImageWatermarkInputDict,
     DetachImageWatermarkOutput,
     DetachInternetGatewayInput,
+    DetachInternetGatewayInputDict,
     DetachInternetGatewayOutput,
     DetachNetworkInterfaceInput,
+    DetachNetworkInterfaceInputDict,
     DetachNetworkInterfaceOutput,
     DetachVerifiedAccessTrustProviderInput,
+    DetachVerifiedAccessTrustProviderInputDict,
     DetachVerifiedAccessTrustProviderOutput,
     DetachVolumeInput,
+    DetachVolumeInputDict,
     DetachVolumeOutput,
     DetachVpnGatewayInput,
+    DetachVpnGatewayInputDict,
     DetachVpnGatewayOutput,
     DeviceOptions,
     DevicePostureOptions,
+    DevicePostureOptionsDict,
     DevicePostureResponseOptions,
     DhcpConfiguration,
     DhcpOptions,
     DimensionCondition,
+    DimensionConditionDict,
     DirectoryServiceAuthentication,
     DirectoryServiceAuthenticationRequest,
+    DirectoryServiceAuthenticationRequestDict,
     DisableAddressTransferInput,
+    DisableAddressTransferInputDict,
     DisableAddressTransferOutput,
     DisableAllowedImagesSettingsInput,
+    DisableAllowedImagesSettingsInputDict,
     DisableAllowedImagesSettingsOutput,
     DisableApplicationStatusCheckSuppressionInput,
+    DisableApplicationStatusCheckSuppressionInputDict,
     DisableApplicationStatusCheckSuppressionOutput,
     DisableAwsNetworkPerformanceMetricSubscriptionInput,
+    DisableAwsNetworkPerformanceMetricSubscriptionInputDict,
     DisableAwsNetworkPerformanceMetricSubscriptionOutput,
     DisableCapacityManagerInput,
+    DisableCapacityManagerInputDict,
     DisableCapacityManagerOutput,
     DisableEbsEncryptionByDefaultInput,
+    DisableEbsEncryptionByDefaultInputDict,
     DisableEbsEncryptionByDefaultOutput,
     DisableFastLaunchInput,
+    DisableFastLaunchInputDict,
     DisableFastLaunchOutput,
     DisableFastSnapshotRestoreErrorItem,
     DisableFastSnapshotRestoreStateError,
     DisableFastSnapshotRestoreStateErrorItem,
     DisableFastSnapshotRestoreSuccessItem,
     DisableFastSnapshotRestoresInput,
+    DisableFastSnapshotRestoresInputDict,
     DisableFastSnapshotRestoresOutput,
     DisableImageBlockPublicAccessInput,
+    DisableImageBlockPublicAccessInputDict,
     DisableImageBlockPublicAccessOutput,
     DisableImageDeprecationInput,
+    DisableImageDeprecationInputDict,
     DisableImageDeprecationOutput,
     DisableImageDeregistrationProtectionInput,
+    DisableImageDeregistrationProtectionInputDict,
     DisableImageDeregistrationProtectionOutput,
     DisableImageInput,
+    DisableImageInputDict,
     DisableImageOutput,
     DisableInstanceSqlHaStandbyDetectionsInput,
+    DisableInstanceSqlHaStandbyDetectionsInputDict,
     DisableInstanceSqlHaStandbyDetectionsOutput,
     DisableIpamOrganizationAdminAccountInput,
+    DisableIpamOrganizationAdminAccountInputDict,
     DisableIpamOrganizationAdminAccountOutput,
     DisableIpamPolicyInput,
+    DisableIpamPolicyInputDict,
     DisableIpamPolicyOutput,
     DisableRouteServerPropagationInput,
+    DisableRouteServerPropagationInputDict,
     DisableRouteServerPropagationOutput,
     DisableSerialConsoleAccessInput,
+    DisableSerialConsoleAccessInputDict,
     DisableSerialConsoleAccessOutput,
     DisableSnapshotBlockPublicAccessInput,
+    DisableSnapshotBlockPublicAccessInputDict,
     DisableSnapshotBlockPublicAccessOutput,
     DisableTransitGatewayRouteTablePropagationInput,
+    DisableTransitGatewayRouteTablePropagationInputDict,
     DisableTransitGatewayRouteTablePropagationOutput,
     DisableVgwRoutePropagationInput,
+    DisableVgwRoutePropagationInputDict,
     DisableVgwRoutePropagationOutput,
     DisableVpcClassicLinkDnsSupportInput,
+    DisableVpcClassicLinkDnsSupportInputDict,
     DisableVpcClassicLinkDnsSupportOutput,
     DisableVpcClassicLinkInput,
+    DisableVpcClassicLinkInputDict,
     DisableVpcClassicLinkOutput,
     DisassociateAddressInput,
+    DisassociateAddressInputDict,
     DisassociateAddressOutput,
     DisassociateApplicationStatusCheckInput,
+    DisassociateApplicationStatusCheckInputDict,
     DisassociateApplicationStatusCheckOutput,
     DisassociateCapacityReservationBillingOwnerInput,
+    DisassociateCapacityReservationBillingOwnerInputDict,
     DisassociateCapacityReservationBillingOwnerOutput,
     DisassociateClientVpnTargetNetworkInput,
+    DisassociateClientVpnTargetNetworkInputDict,
     DisassociateClientVpnTargetNetworkOutput,
     DisassociateEnclaveCertificateIamRoleInput,
+    DisassociateEnclaveCertificateIamRoleInputDict,
     DisassociateEnclaveCertificateIamRoleOutput,
     DisassociateIamInstanceProfileInput,
+    DisassociateIamInstanceProfileInputDict,
     DisassociateIamInstanceProfileOutput,
     DisassociateInstanceEventWindowInput,
+    DisassociateInstanceEventWindowInputDict,
     DisassociateInstanceEventWindowOutput,
     DisassociateIpamByoasnInput,
+    DisassociateIpamByoasnInputDict,
     DisassociateIpamByoasnOutput,
     DisassociateIpamResourceDiscoveryInput,
+    DisassociateIpamResourceDiscoveryInputDict,
     DisassociateIpamResourceDiscoveryOutput,
     DisassociateNatGatewayAddressInput,
+    DisassociateNatGatewayAddressInputDict,
     DisassociateNatGatewayAddressOutput,
     DisassociateRouteServerInput,
+    DisassociateRouteServerInputDict,
     DisassociateRouteServerOutput,
     DisassociateRouteTableInput,
+    DisassociateRouteTableInputDict,
     DisassociateRouteTableOutput,
     DisassociateSecurityGroupVpcInput,
+    DisassociateSecurityGroupVpcInputDict,
     DisassociateSecurityGroupVpcOutput,
     DisassociateSubnetCidrBlockInput,
+    DisassociateSubnetCidrBlockInputDict,
     DisassociateSubnetCidrBlockOutput,
     DisassociateTransitGatewayMulticastDomainInput,
+    DisassociateTransitGatewayMulticastDomainInputDict,
     DisassociateTransitGatewayMulticastDomainOutput,
     DisassociateTransitGatewayPolicyTableInput,
+    DisassociateTransitGatewayPolicyTableInputDict,
     DisassociateTransitGatewayPolicyTableOutput,
     DisassociateTransitGatewayRouteTableInput,
+    DisassociateTransitGatewayRouteTableInputDict,
     DisassociateTransitGatewayRouteTableOutput,
     DisassociateTrunkInterfaceInput,
+    DisassociateTrunkInterfaceInputDict,
     DisassociateTrunkInterfaceOutput,
     DisassociateVpcCidrBlockInput,
+    DisassociateVpcCidrBlockInputDict,
     DisassociateVpcCidrBlockOutput,
     DiskImage,
     DiskImageDescription,
     DiskImageDetail,
+    DiskImageDetailDict,
+    DiskImageDict,
     DiskImageVolumeDescription,
     DiskInfo,
     DnsEntry,
     DnsOptions,
     DnsOptionsSpecification,
+    DnsOptionsSpecificationDict,
     DnsServersOptionsModifyStructure,
+    DnsServersOptionsModifyStructureDict,
     EbsBlockDevice,
+    EbsBlockDeviceDict,
     EbsBlockDeviceResponse,
     EbsCardInfo,
     EbsInfo,
     EbsInstanceBlockDevice,
     EbsInstanceBlockDeviceSpecification,
+    EbsInstanceBlockDeviceSpecificationDict,
     EbsOptimizedInfo,
     EbsStatusDetails,
     EbsStatusSummary,
@@ -1278,119 +1870,174 @@ from aws_sdk_ec2.models import (
     ElasticGpuAssociation,
     ElasticGpuHealth,
     ElasticGpuSpecification,
+    ElasticGpuSpecificationDict,
     ElasticGpuSpecificationResponse,
     ElasticGpus,
     ElasticInferenceAccelerator,
     ElasticInferenceAcceleratorAssociation,
+    ElasticInferenceAcceleratorDict,
     EnaSrdSpecification,
+    EnaSrdSpecificationDict,
     EnaSrdSpecificationRequest,
+    EnaSrdSpecificationRequestDict,
     EnaSrdUdpSpecification,
+    EnaSrdUdpSpecificationDict,
     EnaSrdUdpSpecificationRequest,
+    EnaSrdUdpSpecificationRequestDict,
     EnableAddressTransferInput,
+    EnableAddressTransferInputDict,
     EnableAddressTransferOutput,
     EnableAllowedImagesSettingsInput,
+    EnableAllowedImagesSettingsInputDict,
     EnableAllowedImagesSettingsOutput,
     EnableApplicationStatusCheckSuppressionInput,
+    EnableApplicationStatusCheckSuppressionInputDict,
     EnableApplicationStatusCheckSuppressionOutput,
     EnableAwsNetworkPerformanceMetricSubscriptionInput,
+    EnableAwsNetworkPerformanceMetricSubscriptionInputDict,
     EnableAwsNetworkPerformanceMetricSubscriptionOutput,
     EnableCapacityManagerInput,
+    EnableCapacityManagerInputDict,
     EnableCapacityManagerOutput,
     EnableEbsEncryptionByDefaultInput,
+    EnableEbsEncryptionByDefaultInputDict,
     EnableEbsEncryptionByDefaultOutput,
     EnableFastLaunchInput,
+    EnableFastLaunchInputDict,
     EnableFastLaunchOutput,
     EnableFastSnapshotRestoreErrorItem,
     EnableFastSnapshotRestoreStateError,
     EnableFastSnapshotRestoreStateErrorItem,
     EnableFastSnapshotRestoreSuccessItem,
     EnableFastSnapshotRestoresInput,
+    EnableFastSnapshotRestoresInputDict,
     EnableFastSnapshotRestoresOutput,
     EnableImageBlockPublicAccessInput,
+    EnableImageBlockPublicAccessInputDict,
     EnableImageBlockPublicAccessOutput,
     EnableImageDeprecationInput,
+    EnableImageDeprecationInputDict,
     EnableImageDeprecationOutput,
     EnableImageDeregistrationProtectionInput,
+    EnableImageDeregistrationProtectionInputDict,
     EnableImageDeregistrationProtectionOutput,
     EnableImageInput,
+    EnableImageInputDict,
     EnableImageOutput,
     EnableInstanceSqlHaStandbyDetectionsInput,
+    EnableInstanceSqlHaStandbyDetectionsInputDict,
     EnableInstanceSqlHaStandbyDetectionsOutput,
     EnableIpamInternetRegistryAssociationInput,
+    EnableIpamInternetRegistryAssociationInputDict,
     EnableIpamInternetRegistryAssociationOutput,
     EnableIpamOrganizationAdminAccountInput,
+    EnableIpamOrganizationAdminAccountInputDict,
     EnableIpamOrganizationAdminAccountOutput,
     EnableIpamPolicyInput,
+    EnableIpamPolicyInputDict,
     EnableIpamPolicyOutput,
     EnableReachabilityAnalyzerOrganizationSharingInput,
+    EnableReachabilityAnalyzerOrganizationSharingInputDict,
     EnableReachabilityAnalyzerOrganizationSharingOutput,
     EnableRouteServerPropagationInput,
+    EnableRouteServerPropagationInputDict,
     EnableRouteServerPropagationOutput,
     EnableSerialConsoleAccessInput,
+    EnableSerialConsoleAccessInputDict,
     EnableSerialConsoleAccessOutput,
     EnableSnapshotBlockPublicAccessInput,
+    EnableSnapshotBlockPublicAccessInputDict,
     EnableSnapshotBlockPublicAccessOutput,
     EnableTransitGatewayRouteTablePropagationInput,
+    EnableTransitGatewayRouteTablePropagationInputDict,
     EnableTransitGatewayRouteTablePropagationOutput,
     EnableVgwRoutePropagationInput,
+    EnableVgwRoutePropagationInputDict,
     EnableVgwRoutePropagationOutput,
     EnableVolumeIOInput,
+    EnableVolumeIOInputDict,
     EnableVolumeIOOutput,
     EnableVpcClassicLinkDnsSupportInput,
+    EnableVpcClassicLinkDnsSupportInputDict,
     EnableVpcClassicLinkDnsSupportOutput,
     EnableVpcClassicLinkInput,
+    EnableVpcClassicLinkInputDict,
     EnableVpcClassicLinkOutput,
     EnclaveOptions,
     EnclaveOptionsRequest,
+    EnclaveOptionsRequestDict,
     EncryptionSupport,
     EventInformation,
     Explanation,
     ExportClientVpnClientCertificateRevocationListInput,
+    ExportClientVpnClientCertificateRevocationListInputDict,
     ExportClientVpnClientCertificateRevocationListOutput,
     ExportClientVpnClientConfigurationInput,
+    ExportClientVpnClientConfigurationInputDict,
     ExportClientVpnClientConfigurationOutput,
     ExportImageInput,
+    ExportImageInputDict,
     ExportImageOutput,
     ExportImageTask,
     ExportTask,
     ExportTaskS3Location,
     ExportTaskS3LocationRequest,
+    ExportTaskS3LocationRequestDict,
     ExportToS3Task,
     ExportToS3TaskSpecification,
+    ExportToS3TaskSpecificationDict,
     ExportTransitGatewayRoutesInput,
+    ExportTransitGatewayRoutesInputDict,
     ExportTransitGatewayRoutesOutput,
     ExportVerifiedAccessInstanceClientConfigurationInput,
+    ExportVerifiedAccessInstanceClientConfigurationInputDict,
     ExportVerifiedAccessInstanceClientConfigurationOutput,
     ExternalAuthorityConfiguration,
+    ExternalAuthorityConfigurationDict,
     FailedCapacityReservationFleetCancellationResult,
     FailedQueuedPurchaseDeletion,
     FastLaunchLaunchTemplateSpecificationRequest,
+    FastLaunchLaunchTemplateSpecificationRequestDict,
     FastLaunchLaunchTemplateSpecificationResponse,
     FastLaunchSnapshotConfigurationRequest,
+    FastLaunchSnapshotConfigurationRequestDict,
     FastLaunchSnapshotConfigurationResponse,
     FederatedAuthentication,
     FederatedAuthenticationRequest,
+    FederatedAuthenticationRequestDict,
     Filter,
+    FilterDict,
     FilterPortRange,
     FirewallStatefulRule,
     FirewallStatelessRule,
     FleetBlockDeviceMappingRequest,
+    FleetBlockDeviceMappingRequestDict,
     FleetCapacityReservation,
     FleetCapacityReservationTargetRequest,
+    FleetCapacityReservationTargetRequestDict,
     FleetData,
     FleetEbsBlockDeviceRequest,
+    FleetEbsBlockDeviceRequestDict,
     FleetIamInstanceProfileSpecificationRequest,
+    FleetIamInstanceProfileSpecificationRequestDict,
     FleetInstanceMetadataOptionsRequest,
+    FleetInstanceMetadataOptionsRequestDict,
     FleetLaunchTemplateConfig,
     FleetLaunchTemplateConfigRequest,
+    FleetLaunchTemplateConfigRequestDict,
     FleetLaunchTemplateOverrides,
     FleetLaunchTemplateOverridesRequest,
+    FleetLaunchTemplateOverridesRequestDict,
     FleetLaunchTemplateSpecification,
+    FleetLaunchTemplateSpecificationDict,
     FleetLaunchTemplateSpecificationRequest,
+    FleetLaunchTemplateSpecificationRequestDict,
     FleetSpotCapacityRebalance,
     FleetSpotCapacityRebalanceRequest,
+    FleetSpotCapacityRebalanceRequestDict,
     FleetSpotMaintenanceStrategies,
     FleetSpotMaintenanceStrategiesRequest,
+    FleetSpotMaintenanceStrategiesRequestDict,
     FlowLog,
     FpgaDeviceInfo,
     FpgaDeviceMemoryInfo,
@@ -1399,200 +2046,292 @@ from aws_sdk_ec2.models import (
     FpgaImageState,
     FpgaInfo,
     GetActiveVpnTunnelStatusInput,
+    GetActiveVpnTunnelStatusInputDict,
     GetActiveVpnTunnelStatusOutput,
     GetAllowedImagesSettingsInput,
+    GetAllowedImagesSettingsInputDict,
     GetAllowedImagesSettingsOutput,
     GetAssociatedEnclaveCertificateIamRolesInput,
+    GetAssociatedEnclaveCertificateIamRolesInputDict,
     GetAssociatedEnclaveCertificateIamRolesOutput,
     GetAssociatedIpv6PoolCidrsInput,
+    GetAssociatedIpv6PoolCidrsInputDict,
     GetAssociatedIpv6PoolCidrsOutput,
     GetAwsNetworkPerformanceDataInput,
+    GetAwsNetworkPerformanceDataInputDict,
     GetAwsNetworkPerformanceDataOutput,
     GetCapacityManagerAttributesInput,
+    GetCapacityManagerAttributesInputDict,
     GetCapacityManagerAttributesOutput,
     GetCapacityManagerMetricDataInput,
+    GetCapacityManagerMetricDataInputDict,
     GetCapacityManagerMetricDataOutput,
     GetCapacityManagerMetricDimensionsInput,
+    GetCapacityManagerMetricDimensionsInputDict,
     GetCapacityManagerMetricDimensionsOutput,
     GetCapacityManagerMonitoredTagKeysInput,
+    GetCapacityManagerMonitoredTagKeysInputDict,
     GetCapacityManagerMonitoredTagKeysOutput,
     GetCapacityManagerSupportabilityScoresInput,
+    GetCapacityManagerSupportabilityScoresInputDict,
     GetCapacityManagerSupportabilityScoresOutput,
     GetCapacityReservationUsageInput,
+    GetCapacityReservationUsageInputDict,
     GetCapacityReservationUsageOutput,
     GetClientVpnEndpointAuthorizationPolicyInput,
+    GetClientVpnEndpointAuthorizationPolicyInputDict,
     GetClientVpnEndpointAuthorizationPolicyOutput,
     GetCoipPoolUsageInput,
+    GetCoipPoolUsageInputDict,
     GetCoipPoolUsageOutput,
     GetConsoleOutputInput,
+    GetConsoleOutputInputDict,
     GetConsoleOutputOutput,
     GetConsoleScreenshotInput,
+    GetConsoleScreenshotInputDict,
     GetConsoleScreenshotOutput,
     GetDeclarativePoliciesReportSummaryInput,
+    GetDeclarativePoliciesReportSummaryInputDict,
     GetDeclarativePoliciesReportSummaryOutput,
     GetDefaultCreditSpecificationInput,
+    GetDefaultCreditSpecificationInputDict,
     GetDefaultCreditSpecificationOutput,
     GetEbsDefaultKmsKeyIdInput,
+    GetEbsDefaultKmsKeyIdInputDict,
     GetEbsDefaultKmsKeyIdOutput,
     GetEbsEncryptionByDefaultInput,
+    GetEbsEncryptionByDefaultInputDict,
     GetEbsEncryptionByDefaultOutput,
     GetEnabledIpamPolicyInput,
+    GetEnabledIpamPolicyInputDict,
     GetEnabledIpamPolicyOutput,
     GetFlowLogsIntegrationTemplateInput,
+    GetFlowLogsIntegrationTemplateInputDict,
     GetFlowLogsIntegrationTemplateOutput,
     GetGroupsForCapacityReservationInput,
+    GetGroupsForCapacityReservationInputDict,
     GetGroupsForCapacityReservationOutput,
     GetHostReservationPurchasePreviewInput,
+    GetHostReservationPurchasePreviewInputDict,
     GetHostReservationPurchasePreviewOutput,
     GetImageAncestryInput,
+    GetImageAncestryInputDict,
     GetImageAncestryOutput,
     GetImageBlockPublicAccessStateInput,
+    GetImageBlockPublicAccessStateInputDict,
     GetImageBlockPublicAccessStateOutput,
     GetImageFindingsInput,
+    GetImageFindingsInputDict,
     GetImageFindingsOutput,
     GetInstanceMetadataDefaultsInput,
+    GetInstanceMetadataDefaultsInputDict,
     GetInstanceMetadataDefaultsOutput,
     GetInstanceTpmEkPubInput,
+    GetInstanceTpmEkPubInputDict,
     GetInstanceTpmEkPubOutput,
     GetInstanceTypesFromInstanceRequirementsInput,
+    GetInstanceTypesFromInstanceRequirementsInputDict,
     GetInstanceTypesFromInstanceRequirementsOutput,
     GetInstanceUefiDataInput,
+    GetInstanceUefiDataInputDict,
     GetInstanceUefiDataOutput,
     GetIpamAddressHistoryInput,
+    GetIpamAddressHistoryInputDict,
     GetIpamAddressHistoryOutput,
     GetIpamDiscoveredAccountsInput,
+    GetIpamDiscoveredAccountsInputDict,
     GetIpamDiscoveredAccountsOutput,
     GetIpamDiscoveredPublicAddressesInput,
+    GetIpamDiscoveredPublicAddressesInputDict,
     GetIpamDiscoveredPublicAddressesOutput,
     GetIpamDiscoveredResourceCidrsInput,
+    GetIpamDiscoveredResourceCidrsInputDict,
     GetIpamDiscoveredResourceCidrsOutput,
     GetIpamDiscoveredRoutesInput,
+    GetIpamDiscoveredRoutesInputDict,
     GetIpamDiscoveredRoutesOutput,
     GetIpamInternetRegistryAssociationAsnsInput,
+    GetIpamInternetRegistryAssociationAsnsInputDict,
     GetIpamInternetRegistryAssociationAsnsOutput,
     GetIpamInternetRegistryAssociationCidrsInput,
+    GetIpamInternetRegistryAssociationCidrsInputDict,
     GetIpamInternetRegistryAssociationCidrsOutput,
     GetIpamPolicyAllocationRulesInput,
+    GetIpamPolicyAllocationRulesInputDict,
     GetIpamPolicyAllocationRulesOutput,
     GetIpamPolicyOrganizationTargetsInput,
+    GetIpamPolicyOrganizationTargetsInputDict,
     GetIpamPolicyOrganizationTargetsOutput,
     GetIpamPoolAllocationsInput,
+    GetIpamPoolAllocationsInputDict,
     GetIpamPoolAllocationsOutput,
     GetIpamPoolCidrsInput,
+    GetIpamPoolCidrsInputDict,
     GetIpamPoolCidrsOutput,
     GetIpamPrefixListResolverRulesInput,
+    GetIpamPrefixListResolverRulesInputDict,
     GetIpamPrefixListResolverRulesOutput,
     GetIpamPrefixListResolverVersionEntriesInput,
+    GetIpamPrefixListResolverVersionEntriesInputDict,
     GetIpamPrefixListResolverVersionEntriesOutput,
     GetIpamPrefixListResolverVersionsInput,
+    GetIpamPrefixListResolverVersionsInputDict,
     GetIpamPrefixListResolverVersionsOutput,
     GetIpamResourceCidrsInput,
+    GetIpamResourceCidrsInputDict,
     GetIpamResourceCidrsOutput,
     GetIpamRouteOriginAuthorizationsInput,
+    GetIpamRouteOriginAuthorizationsInputDict,
     GetIpamRouteOriginAuthorizationsOutput,
     GetIpamRouteProtectionFindingsInput,
+    GetIpamRouteProtectionFindingsInputDict,
     GetIpamRouteProtectionFindingsOutput,
     GetIpamRoutingPolicyRegistrationDeltasInput,
+    GetIpamRoutingPolicyRegistrationDeltasInputDict,
     GetIpamRoutingPolicyRegistrationDeltasOutput,
     GetIpamRoutingPolicyRegistrationsInput,
+    GetIpamRoutingPolicyRegistrationsInputDict,
     GetIpamRoutingPolicyRegistrationsOutput,
     GetLaunchTemplateDataInput,
+    GetLaunchTemplateDataInputDict,
     GetLaunchTemplateDataOutput,
     GetManagedPrefixListAssociationsInput,
+    GetManagedPrefixListAssociationsInputDict,
     GetManagedPrefixListAssociationsOutput,
     GetManagedPrefixListEntriesInput,
+    GetManagedPrefixListEntriesInputDict,
     GetManagedPrefixListEntriesOutput,
     GetManagedResourceVisibilityInput,
+    GetManagedResourceVisibilityInputDict,
     GetManagedResourceVisibilityOutput,
     GetNetworkInsightsAccessScopeAnalysisFindingsInput,
+    GetNetworkInsightsAccessScopeAnalysisFindingsInputDict,
     GetNetworkInsightsAccessScopeAnalysisFindingsOutput,
     GetNetworkInsightsAccessScopeContentInput,
+    GetNetworkInsightsAccessScopeContentInputDict,
     GetNetworkInsightsAccessScopeContentOutput,
     GetPasswordDataInput,
+    GetPasswordDataInputDict,
     GetPasswordDataOutput,
     GetReservedInstancesExchangeQuoteInput,
+    GetReservedInstancesExchangeQuoteInputDict,
     GetReservedInstancesExchangeQuoteOutput,
     GetRouteServerAssociationsInput,
+    GetRouteServerAssociationsInputDict,
     GetRouteServerAssociationsOutput,
     GetRouteServerPropagationsInput,
+    GetRouteServerPropagationsInputDict,
     GetRouteServerPropagationsOutput,
     GetRouteServerRoutingDatabaseInput,
+    GetRouteServerRoutingDatabaseInputDict,
     GetRouteServerRoutingDatabaseOutput,
     GetSecurityGroupsForVpcInput,
+    GetSecurityGroupsForVpcInputDict,
     GetSecurityGroupsForVpcOutput,
     GetSerialConsoleAccessStatusInput,
+    GetSerialConsoleAccessStatusInputDict,
     GetSerialConsoleAccessStatusOutput,
     GetSnapshotBlockPublicAccessStateInput,
+    GetSnapshotBlockPublicAccessStateInputDict,
     GetSnapshotBlockPublicAccessStateOutput,
     GetSpotPlacementScoresInput,
+    GetSpotPlacementScoresInputDict,
     GetSpotPlacementScoresOutput,
     GetSubnetCidrReservationsInput,
+    GetSubnetCidrReservationsInputDict,
     GetSubnetCidrReservationsOutput,
     GetTransitGatewayAttachmentNatConfigurationInput,
+    GetTransitGatewayAttachmentNatConfigurationInputDict,
     GetTransitGatewayAttachmentNatConfigurationOutput,
     GetTransitGatewayAttachmentPropagationsInput,
+    GetTransitGatewayAttachmentPropagationsInputDict,
     GetTransitGatewayAttachmentPropagationsOutput,
     GetTransitGatewayMeteringPolicyEntriesInput,
+    GetTransitGatewayMeteringPolicyEntriesInputDict,
     GetTransitGatewayMeteringPolicyEntriesOutput,
     GetTransitGatewayMulticastDomainAssociationsInput,
+    GetTransitGatewayMulticastDomainAssociationsInputDict,
     GetTransitGatewayMulticastDomainAssociationsOutput,
     GetTransitGatewayPolicyTableAssociationsInput,
+    GetTransitGatewayPolicyTableAssociationsInputDict,
     GetTransitGatewayPolicyTableAssociationsOutput,
     GetTransitGatewayPolicyTableEntriesInput,
+    GetTransitGatewayPolicyTableEntriesInputDict,
     GetTransitGatewayPolicyTableEntriesOutput,
     GetTransitGatewayPrefixListReferencesInput,
+    GetTransitGatewayPrefixListReferencesInputDict,
     GetTransitGatewayPrefixListReferencesOutput,
     GetTransitGatewayRouteTableAssociationsInput,
+    GetTransitGatewayRouteTableAssociationsInputDict,
     GetTransitGatewayRouteTableAssociationsOutput,
     GetTransitGatewayRouteTablePropagationsInput,
+    GetTransitGatewayRouteTablePropagationsInputDict,
     GetTransitGatewayRouteTablePropagationsOutput,
     GetVerifiedAccessEndpointPolicyInput,
+    GetVerifiedAccessEndpointPolicyInputDict,
     GetVerifiedAccessEndpointPolicyOutput,
     GetVerifiedAccessEndpointTargetsInput,
+    GetVerifiedAccessEndpointTargetsInputDict,
     GetVerifiedAccessEndpointTargetsOutput,
     GetVerifiedAccessGroupPolicyInput,
+    GetVerifiedAccessGroupPolicyInputDict,
     GetVerifiedAccessGroupPolicyOutput,
     GetVpcResourcesBlockingEncryptionEnforcementInput,
+    GetVpcResourcesBlockingEncryptionEnforcementInputDict,
     GetVpcResourcesBlockingEncryptionEnforcementOutput,
     GetVpnConnectionDeviceSampleConfigurationInput,
+    GetVpnConnectionDeviceSampleConfigurationInputDict,
     GetVpnConnectionDeviceSampleConfigurationOutput,
     GetVpnConnectionDeviceTypesInput,
+    GetVpnConnectionDeviceTypesInputDict,
     GetVpnConnectionDeviceTypesOutput,
     GetVpnTunnelReplacementStatusInput,
+    GetVpnTunnelReplacementStatusInputDict,
     GetVpnTunnelReplacementStatusOutput,
     GpuDeviceInfo,
     GpuDeviceMemoryInfo,
     GpuInfo,
     GroupIdentifier,
+    GroupIdentifierDict,
     HealthCheckPathDestinationRequestObject,
+    HealthCheckPathDestinationRequestObjectDict,
     HealthCheckPathDestinationResponseObject,
     HealthCheckPathRequestObject,
+    HealthCheckPathRequestObjectDict,
     HealthCheckPathResponseObject,
     HealthCheckPathSourceRequestObject,
+    HealthCheckPathSourceRequestObjectDict,
     HealthCheckPathSourceResponseObject,
     HibernationOptions,
     HibernationOptionsRequest,
+    HibernationOptionsRequestDict,
     HistoryRecord,
     HistoryRecordEntry,
     Host,
     HostCpuOptions,
     HostCpuOptionsRequest,
+    HostCpuOptionsRequestDict,
     HostInstance,
     HostOffering,
     HostProperties,
     HostReservation,
     IKEVersionsListValue,
     IKEVersionsRequestListValue,
+    IKEVersionsRequestListValueDict,
     IamInstanceProfile,
     IamInstanceProfileAssociation,
     IamInstanceProfileSpecification,
+    IamInstanceProfileSpecificationDict,
     IcmpTypeCode,
+    IcmpTypeCodeDict,
     IdFormat,
     Image,
     ImageAncestryEntry,
     ImageCriterion,
     ImageCriterionRequest,
+    ImageCriterionRequestDict,
     ImageDiskContainer,
+    ImageDiskContainerDict,
     ImageFinding,
     ImageMetadata,
     ImageRecycleBinInfo,
@@ -1602,28 +2341,39 @@ from aws_sdk_ec2.models import (
     ImageUsageResourceType,
     ImageUsageResourceTypeOption,
     ImageUsageResourceTypeOptionRequest,
+    ImageUsageResourceTypeOptionRequestDict,
     ImageUsageResourceTypeRequest,
+    ImageUsageResourceTypeRequestDict,
     ImageWatermark,
     ImageWatermarkFilterRequest,
+    ImageWatermarkFilterRequestDict,
     ImageWatermarkFilterResponse,
     ImportClientVpnClientCertificateRevocationListInput,
+    ImportClientVpnClientCertificateRevocationListInputDict,
     ImportClientVpnClientCertificateRevocationListOutput,
     ImportImageInput,
+    ImportImageInputDict,
     ImportImageLicenseConfigurationRequest,
+    ImportImageLicenseConfigurationRequestDict,
     ImportImageLicenseConfigurationResponse,
     ImportImageOutput,
     ImportImageTask,
     ImportInstanceInput,
+    ImportInstanceInputDict,
     ImportInstanceLaunchSpecification,
+    ImportInstanceLaunchSpecificationDict,
     ImportInstanceOutput,
     ImportInstanceTaskDetails,
     ImportInstanceVolumeDetailItem,
     ImportKeyPairInput,
+    ImportKeyPairInputDict,
     ImportKeyPairOutput,
     ImportSnapshotInput,
+    ImportSnapshotInputDict,
     ImportSnapshotOutput,
     ImportSnapshotTask,
     ImportVolumeInput,
+    ImportVolumeInputDict,
     ImportVolumeOutput,
     ImportVolumeTaskDetails,
     InferenceAcceleratorInfo,
@@ -1636,49 +2386,67 @@ from aws_sdk_ec2.models import (
     InstanceAttachmentEnaSrdUdpSpecification,
     InstanceBlockDeviceMapping,
     InstanceBlockDeviceMappingSpecification,
+    InstanceBlockDeviceMappingSpecificationDict,
     InstanceCapacity,
     InstanceConnectEndpointDnsNames,
     InstanceConnectEndpointPublicDnsNames,
     InstanceCount,
     InstanceCreditSpecification,
     InstanceCreditSpecificationRequest,
+    InstanceCreditSpecificationRequestDict,
     InstanceEventWindow,
     InstanceEventWindowAssociationRequest,
+    InstanceEventWindowAssociationRequestDict,
     InstanceEventWindowAssociationTarget,
     InstanceEventWindowDisassociationRequest,
+    InstanceEventWindowDisassociationRequestDict,
     InstanceEventWindowStateChange,
     InstanceEventWindowTimeRange,
     InstanceEventWindowTimeRangeRequest,
+    InstanceEventWindowTimeRangeRequestDict,
     InstanceExportDetails,
     InstanceFamilyCreditSpecification,
     InstanceImageMetadata,
     InstanceIpv4Prefix,
     InstanceIpv6Address,
+    InstanceIpv6AddressDict,
     InstanceIpv6AddressRequest,
+    InstanceIpv6AddressRequestDict,
     InstanceIpv6Prefix,
     InstanceMaintenanceOptions,
     InstanceMaintenanceOptionsRequest,
+    InstanceMaintenanceOptionsRequestDict,
     InstanceMarketOptionsRequest,
+    InstanceMarketOptionsRequestDict,
     InstanceMetadataDefaultsResponse,
     InstanceMetadataOptionsRequest,
+    InstanceMetadataOptionsRequestDict,
     InstanceMetadataOptionsResponse,
     InstanceMonitoring,
     InstanceNetworkInterface,
     InstanceNetworkInterfaceAssociation,
     InstanceNetworkInterfaceAttachment,
     InstanceNetworkInterfaceSpecification,
+    InstanceNetworkInterfaceSpecificationDict,
     InstanceNetworkPerformanceOptions,
     InstanceNetworkPerformanceOptionsRequest,
+    InstanceNetworkPerformanceOptionsRequestDict,
     InstancePrivateIpAddress,
     InstanceRequirements,
+    InstanceRequirementsDict,
     InstanceRequirementsRequest,
+    InstanceRequirementsRequestDict,
     InstanceRequirementsWithMetadataRequest,
+    InstanceRequirementsWithMetadataRequestDict,
     InstanceSecondaryInterface,
     InstanceSecondaryInterfaceAttachment,
     InstanceSecondaryInterfacePrivateIpAddress,
     InstanceSecondaryInterfacePrivateIpAddressRequest,
+    InstanceSecondaryInterfacePrivateIpAddressRequestDict,
     InstanceSecondaryInterfaceSpecificationRequest,
+    InstanceSecondaryInterfaceSpecificationRequestDict,
     InstanceSpecification,
+    InstanceSpecificationDict,
     InstanceState,
     InstanceStateChange,
     InstanceStatus,
@@ -1694,17 +2462,22 @@ from aws_sdk_ec2.models import (
     InstanceTypeOffering,
     InstanceTypeSpecification,
     InstanceTypeSpecificationRequest,
+    InstanceTypeSpecificationRequestDict,
     InstanceUsage,
     IntegrateServices,
+    IntegrateServicesDict,
     InternetGateway,
     InternetGatewayAttachment,
     InterruptibleCapacityAllocation,
     InterruptionInfo,
     IpPermission,
+    IpPermissionDict,
     IpRange,
+    IpRangeDict,
     Ipam,
     IpamAddressHistoryRecord,
     IpamCidrAuthorizationContext,
+    IpamCidrAuthorizationContextDict,
     IpamDiscoveredAccount,
     IpamDiscoveredPublicAddress,
     IpamDiscoveredResourceCidr,
@@ -1719,6 +2492,7 @@ from aws_sdk_ec2.models import (
     IpamPolicy,
     IpamPolicyAllocationRule,
     IpamPolicyAllocationRuleRequest,
+    IpamPolicyAllocationRuleRequestDict,
     IpamPolicyDocument,
     IpamPolicyOrganizationTarget,
     IpamPool,
@@ -1727,11 +2501,14 @@ from aws_sdk_ec2.models import (
     IpamPoolCidrFailureReason,
     IpamPoolSourceResource,
     IpamPoolSourceResourceRequest,
+    IpamPoolSourceResourceRequestDict,
     IpamPrefixListResolver,
     IpamPrefixListResolverRule,
     IpamPrefixListResolverRuleCondition,
     IpamPrefixListResolverRuleConditionRequest,
+    IpamPrefixListResolverRuleConditionRequestDict,
     IpamPrefixListResolverRuleRequest,
+    IpamPrefixListResolverRuleRequestDict,
     IpamPrefixListResolverTarget,
     IpamPrefixListResolverVersion,
     IpamPrefixListResolverVersionEntry,
@@ -1752,79 +2529,114 @@ from aws_sdk_ec2.models import (
     IpamScopeExternalAuthorityConfiguration,
     Ipv4PrefixSpecification,
     Ipv4PrefixSpecificationRequest,
+    Ipv4PrefixSpecificationRequestDict,
     Ipv4PrefixSpecificationResponse,
     Ipv6CidrAssociation,
     Ipv6CidrBlock,
     Ipv6Pool,
     Ipv6PrefixSpecification,
     Ipv6PrefixSpecificationRequest,
+    Ipv6PrefixSpecificationRequestDict,
     Ipv6PrefixSpecificationResponse,
     Ipv6Range,
+    Ipv6RangeDict,
     KeyPairInfo,
     LastError,
     LaunchPermission,
+    LaunchPermissionDict,
     LaunchPermissionModifications,
+    LaunchPermissionModificationsDict,
     LaunchSpecification,
     LaunchTemplate,
     LaunchTemplateAndOverridesResponse,
     LaunchTemplateBlockDeviceMapping,
     LaunchTemplateBlockDeviceMappingRequest,
+    LaunchTemplateBlockDeviceMappingRequestDict,
     LaunchTemplateCapacityReservationSpecificationRequest,
+    LaunchTemplateCapacityReservationSpecificationRequestDict,
     LaunchTemplateCapacityReservationSpecificationResponse,
     LaunchTemplateConfig,
+    LaunchTemplateConfigDict,
     LaunchTemplateCpuOptions,
     LaunchTemplateCpuOptionsRequest,
+    LaunchTemplateCpuOptionsRequestDict,
     LaunchTemplateEbsBlockDevice,
     LaunchTemplateEbsBlockDeviceRequest,
+    LaunchTemplateEbsBlockDeviceRequestDict,
     LaunchTemplateElasticInferenceAccelerator,
+    LaunchTemplateElasticInferenceAcceleratorDict,
     LaunchTemplateElasticInferenceAcceleratorResponse,
     LaunchTemplateEnaSrdSpecification,
     LaunchTemplateEnaSrdUdpSpecification,
     LaunchTemplateEnclaveOptions,
     LaunchTemplateEnclaveOptionsRequest,
+    LaunchTemplateEnclaveOptionsRequestDict,
     LaunchTemplateHibernationOptions,
     LaunchTemplateHibernationOptionsRequest,
+    LaunchTemplateHibernationOptionsRequestDict,
     LaunchTemplateIamInstanceProfileSpecification,
     LaunchTemplateIamInstanceProfileSpecificationRequest,
+    LaunchTemplateIamInstanceProfileSpecificationRequestDict,
     LaunchTemplateInstanceMaintenanceOptions,
     LaunchTemplateInstanceMaintenanceOptionsRequest,
+    LaunchTemplateInstanceMaintenanceOptionsRequestDict,
     LaunchTemplateInstanceMarketOptions,
     LaunchTemplateInstanceMarketOptionsRequest,
+    LaunchTemplateInstanceMarketOptionsRequestDict,
     LaunchTemplateInstanceMetadataOptions,
     LaunchTemplateInstanceMetadataOptionsRequest,
+    LaunchTemplateInstanceMetadataOptionsRequestDict,
     LaunchTemplateInstanceNetworkInterfaceSpecification,
     LaunchTemplateInstanceNetworkInterfaceSpecificationRequest,
+    LaunchTemplateInstanceNetworkInterfaceSpecificationRequestDict,
     LaunchTemplateInstanceSecondaryInterfaceSpecification,
     LaunchTemplateInstanceSecondaryInterfaceSpecificationRequest,
+    LaunchTemplateInstanceSecondaryInterfaceSpecificationRequestDict,
     LaunchTemplateLicenseConfiguration,
     LaunchTemplateLicenseConfigurationRequest,
+    LaunchTemplateLicenseConfigurationRequestDict,
     LaunchTemplateNetworkPerformanceOptions,
     LaunchTemplateNetworkPerformanceOptionsRequest,
+    LaunchTemplateNetworkPerformanceOptionsRequestDict,
     LaunchTemplateOverrides,
+    LaunchTemplateOverridesDict,
     LaunchTemplatePlacement,
     LaunchTemplatePlacementRequest,
+    LaunchTemplatePlacementRequestDict,
     LaunchTemplatePrivateDnsNameOptions,
     LaunchTemplatePrivateDnsNameOptionsRequest,
+    LaunchTemplatePrivateDnsNameOptionsRequestDict,
     LaunchTemplateSpecification,
+    LaunchTemplateSpecificationDict,
     LaunchTemplateSpotMarketOptions,
     LaunchTemplateSpotMarketOptionsRequest,
+    LaunchTemplateSpotMarketOptionsRequestDict,
     LaunchTemplateTagSpecification,
     LaunchTemplateTagSpecificationRequest,
+    LaunchTemplateTagSpecificationRequestDict,
     LaunchTemplateVersion,
     LaunchTemplatesMonitoring,
     LaunchTemplatesMonitoringRequest,
+    LaunchTemplatesMonitoringRequestDict,
     LicenseConfiguration,
     LicenseConfigurationRequest,
+    LicenseConfigurationRequestDict,
     ListImagesInRecycleBinInput,
+    ListImagesInRecycleBinInputDict,
     ListImagesInRecycleBinOutput,
     ListSnapshotsInRecycleBinInput,
+    ListSnapshotsInRecycleBinInputDict,
     ListSnapshotsInRecycleBinOutput,
     ListVolumesInRecycleBinInput,
+    ListVolumesInRecycleBinInputDict,
     ListVolumesInRecycleBinOutput,
     LoadBalancersConfig,
+    LoadBalancersConfigDict,
     LoadPermission,
     LoadPermissionModifications,
+    LoadPermissionModificationsDict,
     LoadPermissionRequest,
+    LoadPermissionRequestDict,
     LocalGateway,
     LocalGatewayRoute,
     LocalGatewayRouteTable,
@@ -1833,12 +2645,14 @@ from aws_sdk_ec2.models import (
     LocalGatewayVirtualInterface,
     LocalGatewayVirtualInterfaceGroup,
     LockSnapshotInput,
+    LockSnapshotInputDict,
     LockSnapshotOutput,
     LockedSnapshotsInfo,
     MacHost,
     MacModificationTask,
     MacSystemIntegrityProtectionConfiguration,
     MacSystemIntegrityProtectionConfigurationRequest,
+    MacSystemIntegrityProtectionConfigurationRequestDict,
     MaintenanceDetails,
     ManagedPrefixList,
     ManagedResourceVisibilitySettings,
@@ -1846,10 +2660,14 @@ from aws_sdk_ec2.models import (
     MediaDeviceInfo,
     MediaDeviceMemoryInfo,
     MemoryGiBPerVCpu,
+    MemoryGiBPerVCpuDict,
     MemoryGiBPerVCpuRequest,
+    MemoryGiBPerVCpuRequestDict,
     MemoryInfo,
     MemoryMiB,
+    MemoryMiBDict,
     MemoryMiBRequest,
+    MemoryMiBRequestDict,
     MetricDataResult,
     MetricPoint,
     MetricValue,
@@ -1857,196 +2675,297 @@ from aws_sdk_ec2.models import (
     ModificationReservationUpdate,
     ModificationTerms,
     ModifyAccountVpcEncryptionControlInput,
+    ModifyAccountVpcEncryptionControlInputDict,
     ModifyAccountVpcEncryptionControlOutput,
     ModifyAddressAttributeInput,
+    ModifyAddressAttributeInputDict,
     ModifyAddressAttributeOutput,
     ModifyApplicationStatusCheckInput,
+    ModifyApplicationStatusCheckInputDict,
     ModifyApplicationStatusCheckOutput,
     ModifyAvailabilityZoneGroupInput,
+    ModifyAvailabilityZoneGroupInputDict,
     ModifyAvailabilityZoneGroupOutput,
     ModifyCapacityReservationFleetInput,
+    ModifyCapacityReservationFleetInputDict,
     ModifyCapacityReservationFleetOutput,
     ModifyCapacityReservationInput,
+    ModifyCapacityReservationInputDict,
     ModifyCapacityReservationOutput,
     ModifyClientVpnEndpointAuthorizationPolicyInput,
+    ModifyClientVpnEndpointAuthorizationPolicyInputDict,
     ModifyClientVpnEndpointAuthorizationPolicyOutput,
     ModifyClientVpnEndpointInput,
+    ModifyClientVpnEndpointInputDict,
     ModifyClientVpnEndpointOutput,
     ModifyDefaultCreditSpecificationInput,
+    ModifyDefaultCreditSpecificationInputDict,
     ModifyDefaultCreditSpecificationOutput,
     ModifyEbsDefaultKmsKeyIdInput,
+    ModifyEbsDefaultKmsKeyIdInputDict,
     ModifyEbsDefaultKmsKeyIdOutput,
     ModifyFleetInput,
+    ModifyFleetInputDict,
     ModifyFleetOutput,
     ModifyFpgaImageAttributeInput,
+    ModifyFpgaImageAttributeInputDict,
     ModifyFpgaImageAttributeOutput,
     ModifyHostsInput,
+    ModifyHostsInputDict,
     ModifyHostsOutput,
     ModifyIdFormatInput,
+    ModifyIdFormatInputDict,
     ModifyIdFormatOutput,
     ModifyIdentityIdFormatInput,
+    ModifyIdentityIdFormatInputDict,
     ModifyIdentityIdFormatOutput,
     ModifyImageAttributeInput,
+    ModifyImageAttributeInputDict,
     ModifyImageAttributeOutput,
     ModifyInstanceAttributeInput,
+    ModifyInstanceAttributeInputDict,
     ModifyInstanceAttributeOutput,
     ModifyInstanceCapacityReservationAttributesInput,
+    ModifyInstanceCapacityReservationAttributesInputDict,
     ModifyInstanceCapacityReservationAttributesOutput,
     ModifyInstanceConnectEndpointInput,
+    ModifyInstanceConnectEndpointInputDict,
     ModifyInstanceConnectEndpointOutput,
     ModifyInstanceCpuOptionsInput,
+    ModifyInstanceCpuOptionsInputDict,
     ModifyInstanceCpuOptionsOutput,
     ModifyInstanceCreditSpecificationInput,
+    ModifyInstanceCreditSpecificationInputDict,
     ModifyInstanceCreditSpecificationOutput,
     ModifyInstanceEventStartTimeInput,
+    ModifyInstanceEventStartTimeInputDict,
     ModifyInstanceEventStartTimeOutput,
     ModifyInstanceEventWindowInput,
+    ModifyInstanceEventWindowInputDict,
     ModifyInstanceEventWindowOutput,
     ModifyInstanceMaintenanceOptionsInput,
+    ModifyInstanceMaintenanceOptionsInputDict,
     ModifyInstanceMaintenanceOptionsOutput,
     ModifyInstanceMetadataDefaultsInput,
+    ModifyInstanceMetadataDefaultsInputDict,
     ModifyInstanceMetadataDefaultsOutput,
     ModifyInstanceMetadataOptionsInput,
+    ModifyInstanceMetadataOptionsInputDict,
     ModifyInstanceMetadataOptionsOutput,
     ModifyInstanceNetworkPerformanceOptionsInput,
+    ModifyInstanceNetworkPerformanceOptionsInputDict,
     ModifyInstanceNetworkPerformanceOptionsOutput,
     ModifyInstancePlacementInput,
+    ModifyInstancePlacementInputDict,
     ModifyInstancePlacementOutput,
     ModifyIpamInput,
+    ModifyIpamInputDict,
     ModifyIpamOutput,
     ModifyIpamPolicyAllocationRulesInput,
+    ModifyIpamPolicyAllocationRulesInputDict,
     ModifyIpamPolicyAllocationRulesOutput,
     ModifyIpamPoolAllocationInput,
+    ModifyIpamPoolAllocationInputDict,
     ModifyIpamPoolAllocationOutput,
     ModifyIpamPoolInput,
+    ModifyIpamPoolInputDict,
     ModifyIpamPoolOutput,
     ModifyIpamPrefixListResolverInput,
+    ModifyIpamPrefixListResolverInputDict,
     ModifyIpamPrefixListResolverOutput,
     ModifyIpamPrefixListResolverTargetInput,
+    ModifyIpamPrefixListResolverTargetInputDict,
     ModifyIpamPrefixListResolverTargetOutput,
     ModifyIpamResourceCidrInput,
+    ModifyIpamResourceCidrInputDict,
     ModifyIpamResourceCidrOutput,
     ModifyIpamResourceDiscoveryInput,
+    ModifyIpamResourceDiscoveryInputDict,
     ModifyIpamResourceDiscoveryOutput,
     ModifyIpamRoutingPolicyRegistrationInput,
+    ModifyIpamRoutingPolicyRegistrationInputDict,
     ModifyIpamRoutingPolicyRegistrationOutput,
     ModifyIpamScopeInput,
+    ModifyIpamScopeInputDict,
     ModifyIpamScopeOutput,
     ModifyLaunchTemplateInput,
+    ModifyLaunchTemplateInputDict,
     ModifyLaunchTemplateOutput,
     ModifyLocalGatewayRouteInput,
+    ModifyLocalGatewayRouteInputDict,
     ModifyLocalGatewayRouteOutput,
     ModifyManagedPrefixListInput,
+    ModifyManagedPrefixListInputDict,
     ModifyManagedPrefixListOutput,
     ModifyManagedResourceVisibilityInput,
+    ModifyManagedResourceVisibilityInputDict,
     ModifyManagedResourceVisibilityOutput,
     ModifyNetworkInterfaceAttributeInput,
+    ModifyNetworkInterfaceAttributeInputDict,
     ModifyNetworkInterfaceAttributeOutput,
     ModifyPrivateDnsNameOptionsInput,
+    ModifyPrivateDnsNameOptionsInputDict,
     ModifyPrivateDnsNameOptionsOutput,
     ModifyPublicIpDnsNameOptionsInput,
+    ModifyPublicIpDnsNameOptionsInputDict,
     ModifyPublicIpDnsNameOptionsOutput,
     ModifyReservedInstancesInput,
+    ModifyReservedInstancesInputDict,
     ModifyReservedInstancesOutput,
     ModifyRouteServerInput,
+    ModifyRouteServerInputDict,
     ModifyRouteServerOutput,
     ModifySecurityGroupRulesInput,
+    ModifySecurityGroupRulesInputDict,
     ModifySecurityGroupRulesOutput,
     ModifySnapshotAttributeInput,
+    ModifySnapshotAttributeInputDict,
     ModifySnapshotAttributeOutput,
     ModifySnapshotTierInput,
+    ModifySnapshotTierInputDict,
     ModifySnapshotTierOutput,
     ModifySpotFleetRequestInput,
+    ModifySpotFleetRequestInputDict,
     ModifySpotFleetRequestOutput,
     ModifySubnetAttributeInput,
+    ModifySubnetAttributeInputDict,
     ModifySubnetAttributeOutput,
     ModifyTrafficMirrorFilterNetworkServicesInput,
+    ModifyTrafficMirrorFilterNetworkServicesInputDict,
     ModifyTrafficMirrorFilterNetworkServicesOutput,
     ModifyTrafficMirrorFilterRuleInput,
+    ModifyTrafficMirrorFilterRuleInputDict,
     ModifyTrafficMirrorFilterRuleOutput,
     ModifyTrafficMirrorSessionInput,
+    ModifyTrafficMirrorSessionInputDict,
     ModifyTrafficMirrorSessionOutput,
     ModifyTransitGatewayAttachmentNatConfigurationInput,
+    ModifyTransitGatewayAttachmentNatConfigurationInputDict,
     ModifyTransitGatewayAttachmentNatConfigurationOutput,
     ModifyTransitGatewayInput,
+    ModifyTransitGatewayInputDict,
     ModifyTransitGatewayMeteringPolicyInput,
+    ModifyTransitGatewayMeteringPolicyInputDict,
     ModifyTransitGatewayMeteringPolicyOutput,
     ModifyTransitGatewayOptions,
+    ModifyTransitGatewayOptionsDict,
     ModifyTransitGatewayOutput,
     ModifyTransitGatewayPolicyTableEntryInput,
+    ModifyTransitGatewayPolicyTableEntryInputDict,
     ModifyTransitGatewayPolicyTableEntryOutput,
     ModifyTransitGatewayPrefixListReferenceInput,
+    ModifyTransitGatewayPrefixListReferenceInputDict,
     ModifyTransitGatewayPrefixListReferenceOutput,
     ModifyTransitGatewayVpcAttachmentInput,
+    ModifyTransitGatewayVpcAttachmentInputDict,
     ModifyTransitGatewayVpcAttachmentOutput,
     ModifyTransitGatewayVpcAttachmentRequestOptions,
+    ModifyTransitGatewayVpcAttachmentRequestOptionsDict,
     ModifyVerifiedAccessEndpointCidrOptions,
+    ModifyVerifiedAccessEndpointCidrOptionsDict,
     ModifyVerifiedAccessEndpointEniOptions,
+    ModifyVerifiedAccessEndpointEniOptionsDict,
     ModifyVerifiedAccessEndpointInput,
+    ModifyVerifiedAccessEndpointInputDict,
     ModifyVerifiedAccessEndpointLoadBalancerOptions,
+    ModifyVerifiedAccessEndpointLoadBalancerOptionsDict,
     ModifyVerifiedAccessEndpointOutput,
     ModifyVerifiedAccessEndpointPolicyInput,
+    ModifyVerifiedAccessEndpointPolicyInputDict,
     ModifyVerifiedAccessEndpointPolicyOutput,
     ModifyVerifiedAccessEndpointPortRange,
+    ModifyVerifiedAccessEndpointPortRangeDict,
     ModifyVerifiedAccessEndpointRdsOptions,
+    ModifyVerifiedAccessEndpointRdsOptionsDict,
     ModifyVerifiedAccessGroupInput,
+    ModifyVerifiedAccessGroupInputDict,
     ModifyVerifiedAccessGroupOutput,
     ModifyVerifiedAccessGroupPolicyInput,
+    ModifyVerifiedAccessGroupPolicyInputDict,
     ModifyVerifiedAccessGroupPolicyOutput,
     ModifyVerifiedAccessInstanceInput,
+    ModifyVerifiedAccessInstanceInputDict,
     ModifyVerifiedAccessInstanceLoggingConfigurationInput,
+    ModifyVerifiedAccessInstanceLoggingConfigurationInputDict,
     ModifyVerifiedAccessInstanceLoggingConfigurationOutput,
     ModifyVerifiedAccessInstanceOutput,
     ModifyVerifiedAccessNativeApplicationOidcOptions,
+    ModifyVerifiedAccessNativeApplicationOidcOptionsDict,
     ModifyVerifiedAccessTrustProviderDeviceOptions,
+    ModifyVerifiedAccessTrustProviderDeviceOptionsDict,
     ModifyVerifiedAccessTrustProviderInput,
+    ModifyVerifiedAccessTrustProviderInputDict,
     ModifyVerifiedAccessTrustProviderOidcOptions,
+    ModifyVerifiedAccessTrustProviderOidcOptionsDict,
     ModifyVerifiedAccessTrustProviderOutput,
     ModifyVolumeAttributeInput,
+    ModifyVolumeAttributeInputDict,
     ModifyVolumeAttributeOutput,
     ModifyVolumeInput,
+    ModifyVolumeInputDict,
     ModifyVolumeOutput,
     ModifyVpcAttributeInput,
+    ModifyVpcAttributeInputDict,
     ModifyVpcAttributeOutput,
     ModifyVpcBlockPublicAccessExclusionInput,
+    ModifyVpcBlockPublicAccessExclusionInputDict,
     ModifyVpcBlockPublicAccessExclusionOutput,
     ModifyVpcBlockPublicAccessOptionsInput,
+    ModifyVpcBlockPublicAccessOptionsInputDict,
     ModifyVpcBlockPublicAccessOptionsOutput,
     ModifyVpcEncryptionControlInput,
+    ModifyVpcEncryptionControlInputDict,
     ModifyVpcEncryptionControlOutput,
     ModifyVpcEndpointConnectionNotificationInput,
+    ModifyVpcEndpointConnectionNotificationInputDict,
     ModifyVpcEndpointConnectionNotificationOutput,
     ModifyVpcEndpointInput,
+    ModifyVpcEndpointInputDict,
     ModifyVpcEndpointOutput,
     ModifyVpcEndpointPayerResponsibilityInput,
+    ModifyVpcEndpointPayerResponsibilityInputDict,
     ModifyVpcEndpointPayerResponsibilityOutput,
     ModifyVpcEndpointServiceConfigurationInput,
+    ModifyVpcEndpointServiceConfigurationInputDict,
     ModifyVpcEndpointServiceConfigurationOutput,
     ModifyVpcEndpointServicePayerResponsibilityInput,
+    ModifyVpcEndpointServicePayerResponsibilityInputDict,
     ModifyVpcEndpointServicePayerResponsibilityOutput,
     ModifyVpcEndpointServicePermissionsInput,
+    ModifyVpcEndpointServicePermissionsInputDict,
     ModifyVpcEndpointServicePermissionsOutput,
     ModifyVpcPeeringConnectionOptionsInput,
+    ModifyVpcPeeringConnectionOptionsInputDict,
     ModifyVpcPeeringConnectionOptionsOutput,
     ModifyVpcTenancyInput,
+    ModifyVpcTenancyInputDict,
     ModifyVpcTenancyOutput,
     ModifyVpnConnectionInput,
+    ModifyVpnConnectionInputDict,
     ModifyVpnConnectionOptionsInput,
+    ModifyVpnConnectionOptionsInputDict,
     ModifyVpnConnectionOptionsOutput,
     ModifyVpnConnectionOutput,
     ModifyVpnTunnelCertificateInput,
+    ModifyVpnTunnelCertificateInputDict,
     ModifyVpnTunnelCertificateOutput,
     ModifyVpnTunnelOptionsInput,
+    ModifyVpnTunnelOptionsInputDict,
     ModifyVpnTunnelOptionsOutput,
     ModifyVpnTunnelOptionsSpecification,
+    ModifyVpnTunnelOptionsSpecificationDict,
     MonitorInstancesInput,
+    MonitorInstancesInputDict,
     MonitorInstancesOutput,
     Monitoring,
     MoveAddressToVpcInput,
+    MoveAddressToVpcInputDict,
     MoveAddressToVpcOutput,
     MoveByoipCidrToIpamInput,
+    MoveByoipCidrToIpamInputDict,
     MoveByoipCidrToIpamOutput,
     MoveCapacityReservationInstancesInput,
+    MoveCapacityReservationInstancesInputDict,
     MoveCapacityReservationInstancesOutput,
     MovingAddressStatus,
     NatGateway,
@@ -2057,7 +2976,9 @@ from aws_sdk_ec2.models import (
     NetworkAclAssociation,
     NetworkAclEntry,
     NetworkBandwidthGbps,
+    NetworkBandwidthGbpsDict,
     NetworkBandwidthGbpsRequest,
+    NetworkBandwidthGbpsRequestDict,
     NetworkCardInfo,
     NetworkInfo,
     NetworkInsightsAccessScope,
@@ -2069,8 +2990,11 @@ from aws_sdk_ec2.models import (
     NetworkInterfaceAssociation,
     NetworkInterfaceAttachment,
     NetworkInterfaceAttachmentChanges,
+    NetworkInterfaceAttachmentChangesDict,
     NetworkInterfaceCount,
+    NetworkInterfaceCountDict,
     NetworkInterfaceCountRequest,
+    NetworkInterfaceCountRequestDict,
     NetworkInterfaceIpv6Address,
     NetworkInterfacePermission,
     NetworkInterfacePermissionState,
@@ -2080,71 +3004,96 @@ from aws_sdk_ec2.models import (
     NeuronDeviceMemoryInfo,
     NeuronInfo,
     NewDhcpConfiguration,
+    NewDhcpConfigurationDict,
     NitroTpmInfo,
     OidcOptions,
     OnDemandOptions,
     OnDemandOptionsRequest,
+    OnDemandOptionsRequestDict,
     OperatorRequest,
+    OperatorRequestDict,
     OperatorResponse,
     OutpostLag,
     PacketHeaderStatement,
     PacketHeaderStatementRequest,
+    PacketHeaderStatementRequestDict,
     PathComponent,
     PathFilter,
     PathRequestFilter,
+    PathRequestFilterDict,
     PathStatement,
     PathStatementRequest,
+    PathStatementRequestDict,
     PayerResponsibilityEntry,
     PciId,
     PeeringAttachmentStatus,
     PeeringConnectionOptions,
     PeeringConnectionOptionsRequest,
+    PeeringConnectionOptionsRequestDict,
     PeeringTgwInfo,
     PerformanceFactorReference,
+    PerformanceFactorReferenceDict,
     PerformanceFactorReferenceRequest,
+    PerformanceFactorReferenceRequestDict,
     PerformanceStatusSummary,
     Phase1DHGroupNumbersListValue,
     Phase1DHGroupNumbersRequestListValue,
+    Phase1DHGroupNumbersRequestListValueDict,
     Phase1EncryptionAlgorithmsListValue,
     Phase1EncryptionAlgorithmsRequestListValue,
+    Phase1EncryptionAlgorithmsRequestListValueDict,
     Phase1IntegrityAlgorithmsListValue,
     Phase1IntegrityAlgorithmsRequestListValue,
+    Phase1IntegrityAlgorithmsRequestListValueDict,
     Phase2DHGroupNumbersListValue,
     Phase2DHGroupNumbersRequestListValue,
+    Phase2DHGroupNumbersRequestListValueDict,
     Phase2EncryptionAlgorithmsListValue,
     Phase2EncryptionAlgorithmsRequestListValue,
+    Phase2EncryptionAlgorithmsRequestListValueDict,
     Phase2IntegrityAlgorithmsListValue,
     Phase2IntegrityAlgorithmsRequestListValue,
+    Phase2IntegrityAlgorithmsRequestListValueDict,
     Placement,
+    PlacementDict,
     PlacementGroup,
     PlacementGroupInfo,
     PlacementResponse,
     PoolCidrBlock,
     PortRange,
+    PortRangeDict,
     PrefixList,
     PrefixListAssociation,
     PrefixListEntry,
     PrefixListId,
+    PrefixListIdDict,
     PriceSchedule,
     PriceScheduleSpecification,
+    PriceScheduleSpecificationDict,
     PricingDetail,
     PrincipalIdFormat,
     PrivateDnsDetails,
     PrivateDnsNameConfiguration,
     PrivateDnsNameOptionsOnLaunch,
     PrivateDnsNameOptionsRequest,
+    PrivateDnsNameOptionsRequestDict,
     PrivateDnsNameOptionsResponse,
     PrivateIpAddressSpecification,
+    PrivateIpAddressSpecificationDict,
     ProcessorInfo,
     ProductCode,
     PropagatingVgw,
     ProvisionByoipCidrInput,
+    ProvisionByoipCidrInputDict,
     ProvisionByoipCidrOutput,
     ProvisionIpamByoasnInput,
+    ProvisionIpamByoasnInputDict,
     ProvisionIpamByoasnOutput,
     ProvisionIpamPoolCidrInput,
+    ProvisionIpamPoolCidrInputDict,
     ProvisionIpamPoolCidrOutput,
     ProvisionPublicIpv4PoolCidrInput,
+    ProvisionPublicIpv4PoolCidrInputDict,
     ProvisionPublicIpv4PoolCidrOutput,
     ProvisionedBandwidth,
     PtrUpdateStatus,
@@ -2153,17 +3102,24 @@ from aws_sdk_ec2.models import (
     PublicIpv4PoolRange,
     Purchase,
     PurchaseCapacityBlockExtensionInput,
+    PurchaseCapacityBlockExtensionInputDict,
     PurchaseCapacityBlockExtensionOutput,
     PurchaseCapacityBlockInput,
+    PurchaseCapacityBlockInputDict,
     PurchaseCapacityBlockOutput,
     PurchaseHostReservationInput,
+    PurchaseHostReservationInputDict,
     PurchaseHostReservationOutput,
     PurchaseRequest,
+    PurchaseRequestDict,
     PurchaseReservedInstancesOfferingInput,
+    PurchaseReservedInstancesOfferingInputDict,
     PurchaseReservedInstancesOfferingOutput,
     PurchaseScheduledInstancesInput,
+    PurchaseScheduledInstancesInputDict,
     PurchaseScheduledInstancesOutput,
     RebootInstancesInput,
+    RebootInstancesInputDict,
     RebootInstancesOutput,
     RecurringCharge,
     ReferencedSecurityGroup,
@@ -2171,120 +3127,178 @@ from aws_sdk_ec2.models import (
     RegionGeography,
     RegionalSummary,
     RegisterImageInput,
+    RegisterImageInputDict,
     RegisterImageOutput,
     RegisterInstanceEventNotificationAttributesInput,
+    RegisterInstanceEventNotificationAttributesInputDict,
     RegisterInstanceEventNotificationAttributesOutput,
     RegisterInstanceTagAttributeRequest,
+    RegisterInstanceTagAttributeRequestDict,
     RegisterTransitGatewayMulticastGroupMembersInput,
+    RegisterTransitGatewayMulticastGroupMembersInputDict,
     RegisterTransitGatewayMulticastGroupMembersOutput,
     RegisterTransitGatewayMulticastGroupSourcesInput,
+    RegisterTransitGatewayMulticastGroupSourcesInputDict,
     RegisterTransitGatewayMulticastGroupSourcesOutput,
     RegisteredInstance,
     RejectCapacityReservationBillingOwnershipInput,
+    RejectCapacityReservationBillingOwnershipInputDict,
     RejectCapacityReservationBillingOwnershipOutput,
     RejectTransitGatewayClientVpnAttachmentInput,
+    RejectTransitGatewayClientVpnAttachmentInputDict,
     RejectTransitGatewayClientVpnAttachmentOutput,
     RejectTransitGatewayMulticastDomainAssociationsInput,
+    RejectTransitGatewayMulticastDomainAssociationsInputDict,
     RejectTransitGatewayMulticastDomainAssociationsOutput,
     RejectTransitGatewayPeeringAttachmentInput,
+    RejectTransitGatewayPeeringAttachmentInputDict,
     RejectTransitGatewayPeeringAttachmentOutput,
     RejectTransitGatewayVpcAttachmentInput,
+    RejectTransitGatewayVpcAttachmentInputDict,
     RejectTransitGatewayVpcAttachmentOutput,
     RejectVpcEndpointConnectionsInput,
+    RejectVpcEndpointConnectionsInputDict,
     RejectVpcEndpointConnectionsOutput,
     RejectVpcPeeringConnectionInput,
+    RejectVpcPeeringConnectionInputDict,
     RejectVpcPeeringConnectionOutput,
     ReleaseAddressInput,
+    ReleaseAddressInputDict,
     ReleaseAddressOutput,
     ReleaseHostsInput,
+    ReleaseHostsInputDict,
     ReleaseHostsOutput,
     ReleaseIpamPoolAllocationInput,
+    ReleaseIpamPoolAllocationInputDict,
     ReleaseIpamPoolAllocationOutput,
     RemoveIpamOperatingRegion,
+    RemoveIpamOperatingRegionDict,
     RemoveIpamOrganizationalUnitExclusion,
+    RemoveIpamOrganizationalUnitExclusionDict,
     RemovePrefixListEntry,
+    RemovePrefixListEntryDict,
     ReplaceIamInstanceProfileAssociationInput,
+    ReplaceIamInstanceProfileAssociationInputDict,
     ReplaceIamInstanceProfileAssociationOutput,
     ReplaceImageCriteriaInAllowedImagesSettingsInput,
+    ReplaceImageCriteriaInAllowedImagesSettingsInputDict,
     ReplaceImageCriteriaInAllowedImagesSettingsOutput,
     ReplaceImageInstanceTypeSpecificationInput,
+    ReplaceImageInstanceTypeSpecificationInputDict,
     ReplaceImageInstanceTypeSpecificationOutput,
     ReplaceNetworkAclAssociationInput,
+    ReplaceNetworkAclAssociationInputDict,
     ReplaceNetworkAclAssociationOutput,
     ReplaceNetworkAclEntryInput,
+    ReplaceNetworkAclEntryInputDict,
     ReplaceNetworkAclEntryOutput,
     ReplaceRootVolumeTask,
     ReplaceRouteInput,
+    ReplaceRouteInputDict,
     ReplaceRouteOutput,
     ReplaceRouteTableAssociationInput,
+    ReplaceRouteTableAssociationInputDict,
     ReplaceRouteTableAssociationOutput,
     ReplaceTransitGatewayRouteInput,
+    ReplaceTransitGatewayRouteInputDict,
     ReplaceTransitGatewayRouteOutput,
     ReplaceVpnTunnelInput,
+    ReplaceVpnTunnelInputDict,
     ReplaceVpnTunnelOutput,
     ReportInstanceStatusInput,
+    ReportInstanceStatusInputDict,
     ReportInstanceStatusOutput,
     RequestFilterPortRange,
+    RequestFilterPortRangeDict,
     RequestIpamResourceTag,
+    RequestIpamResourceTagDict,
     RequestLaunchTemplateData,
+    RequestLaunchTemplateDataDict,
     RequestSpotFleetInput,
+    RequestSpotFleetInputDict,
     RequestSpotFleetOutput,
     RequestSpotInstancesInput,
+    RequestSpotInstancesInputDict,
     RequestSpotInstancesOutput,
     RequestSpotLaunchSpecification,
+    RequestSpotLaunchSpecificationDict,
     Reservation,
     ReservationFleetInstanceSpecification,
+    ReservationFleetInstanceSpecificationDict,
     ReservationValue,
     ReservedCapacityFallbackOptions,
     ReservedCapacityFallbackOptionsRequest,
+    ReservedCapacityFallbackOptionsRequestDict,
     ReservedCapacityOptions,
     ReservedCapacityOptionsRequest,
+    ReservedCapacityOptionsRequestDict,
     ReservedInstanceLimitPrice,
+    ReservedInstanceLimitPriceDict,
     ReservedInstanceReservationValue,
     ReservedInstances,
     ReservedInstancesConfiguration,
+    ReservedInstancesConfigurationDict,
     ReservedInstancesId,
     ReservedInstancesListing,
     ReservedInstancesModification,
     ReservedInstancesModificationResult,
     ReservedInstancesOffering,
     ResetAddressAttributeInput,
+    ResetAddressAttributeInputDict,
     ResetAddressAttributeOutput,
     ResetEbsDefaultKmsKeyIdInput,
+    ResetEbsDefaultKmsKeyIdInputDict,
     ResetEbsDefaultKmsKeyIdOutput,
     ResetFpgaImageAttributeInput,
+    ResetFpgaImageAttributeInputDict,
     ResetFpgaImageAttributeOutput,
     ResetImageAttributeInput,
+    ResetImageAttributeInputDict,
     ResetImageAttributeOutput,
     ResetInstanceAttributeInput,
+    ResetInstanceAttributeInputDict,
     ResetInstanceAttributeOutput,
     ResetNetworkInterfaceAttributeInput,
+    ResetNetworkInterfaceAttributeInputDict,
     ResetNetworkInterfaceAttributeOutput,
     ResetSnapshotAttributeInput,
+    ResetSnapshotAttributeInputDict,
     ResetSnapshotAttributeOutput,
     ResourceStatement,
     ResourceStatementRequest,
+    ResourceStatementRequestDict,
     ResourceTypeOption,
+    ResourceTypeOptionDict,
     ResourceTypeRequest,
+    ResourceTypeRequestDict,
     ResponseError,
     ResponseLaunchTemplateData,
     RestoreAddressToClassicInput,
+    RestoreAddressToClassicInputDict,
     RestoreAddressToClassicOutput,
     RestoreImageFromRecycleBinInput,
+    RestoreImageFromRecycleBinInputDict,
     RestoreImageFromRecycleBinOutput,
     RestoreManagedPrefixListVersionInput,
+    RestoreManagedPrefixListVersionInputDict,
     RestoreManagedPrefixListVersionOutput,
     RestoreSnapshotFromRecycleBinInput,
+    RestoreSnapshotFromRecycleBinInputDict,
     RestoreSnapshotFromRecycleBinOutput,
     RestoreSnapshotTierInput,
+    RestoreSnapshotTierInputDict,
     RestoreSnapshotTierOutput,
     RestoreVolumeFromRecycleBinInput,
+    RestoreVolumeFromRecycleBinInputDict,
     RestoreVolumeFromRecycleBinOutput,
     RevokeClientVpnIngressInput,
+    RevokeClientVpnIngressInputDict,
     RevokeClientVpnIngressOutput,
     RevokeSecurityGroupEgressInput,
+    RevokeSecurityGroupEgressInputDict,
     RevokeSecurityGroupEgressOutput,
     RevokeSecurityGroupIngressInput,
+    RevokeSecurityGroupIngressInputDict,
     RevokeSecurityGroupIngressOutput,
     RevokedSecurityGroupRule,
     Route,
@@ -2293,6 +3307,7 @@ from aws_sdk_ec2.models import (
     RouteServerBfdStatus,
     RouteServerBgpOptions,
     RouteServerBgpOptionsRequest,
+    RouteServerBgpOptionsRequestDict,
     RouteServerBgpStatus,
     RouteServerEndpoint,
     RouteServerPeer,
@@ -2306,108 +3321,154 @@ from aws_sdk_ec2.models import (
     RuleGroupTypePair,
     RuleOption,
     RunInstancesInput,
+    RunInstancesInputDict,
     RunInstancesMonitoringEnabled,
+    RunInstancesMonitoringEnabledDict,
     RunInstancesOutput,
     RunScheduledInstancesInput,
+    RunScheduledInstancesInputDict,
     RunScheduledInstancesOutput,
     S3ObjectTag,
+    S3ObjectTagDict,
     S3Storage,
+    S3StorageDict,
     ScanResultCondition,
     ScanResultConditionRequest,
+    ScanResultConditionRequestDict,
     ScanResults,
     ScheduledInstance,
     ScheduledInstanceAvailability,
     ScheduledInstanceRecurrence,
     ScheduledInstanceRecurrenceRequest,
+    ScheduledInstanceRecurrenceRequestDict,
     ScheduledInstancesBlockDeviceMapping,
+    ScheduledInstancesBlockDeviceMappingDict,
     ScheduledInstancesEbs,
+    ScheduledInstancesEbsDict,
     ScheduledInstancesIamInstanceProfile,
+    ScheduledInstancesIamInstanceProfileDict,
     ScheduledInstancesIpv6Address,
+    ScheduledInstancesIpv6AddressDict,
     ScheduledInstancesLaunchSpecification,
+    ScheduledInstancesLaunchSpecificationDict,
     ScheduledInstancesMonitoring,
+    ScheduledInstancesMonitoringDict,
     ScheduledInstancesNetworkInterface,
+    ScheduledInstancesNetworkInterfaceDict,
     ScheduledInstancesPlacement,
+    ScheduledInstancesPlacementDict,
     ScheduledInstancesPrivateIpAddressConfig,
+    ScheduledInstancesPrivateIpAddressConfigDict,
     SearchLocalGatewayRoutesInput,
+    SearchLocalGatewayRoutesInputDict,
     SearchLocalGatewayRoutesOutput,
     SearchTransitGatewayMulticastGroupsInput,
+    SearchTransitGatewayMulticastGroupsInputDict,
     SearchTransitGatewayMulticastGroupsOutput,
     SearchTransitGatewayRoutesInput,
+    SearchTransitGatewayRoutesInputDict,
     SearchTransitGatewayRoutesOutput,
     SecondaryInterface,
     SecondaryInterfaceAttachment,
     SecondaryInterfaceIpv4Address,
     SecondaryInterfacePrivateIpAddressSpecification,
     SecondaryInterfacePrivateIpAddressSpecificationRequest,
+    SecondaryInterfacePrivateIpAddressSpecificationRequestDict,
     SecondaryNetwork,
     SecondaryNetworkIpv4CidrBlockAssociation,
     SecondarySubnet,
     SecondarySubnetIpv4CidrBlockAssociation,
     SecureBlobAttributeValue,
+    SecureBlobAttributeValueDict,
     SecurityGroup,
     SecurityGroupForVpc,
     SecurityGroupIdentifier,
     SecurityGroupReference,
     SecurityGroupRule,
     SecurityGroupRuleDescription,
+    SecurityGroupRuleDescriptionDict,
     SecurityGroupRuleRequest,
+    SecurityGroupRuleRequestDict,
     SecurityGroupRuleUpdate,
+    SecurityGroupRuleUpdateDict,
     SecurityGroupVpcAssociation,
     SendDiagnosticInterruptInput,
+    SendDiagnosticInterruptInputDict,
     SendDiagnosticInterruptOutput,
     ServiceConfiguration,
     ServiceDetail,
     ServiceLinkVirtualInterface,
     ServiceTypeDetail,
     SlotDateTimeRangeRequest,
+    SlotDateTimeRangeRequestDict,
     SlotStartTimeRangeRequest,
+    SlotStartTimeRangeRequestDict,
     Snapshot,
     SnapshotDetail,
     SnapshotDiskContainer,
+    SnapshotDiskContainerDict,
     SnapshotInfo,
     SnapshotRecycleBinInfo,
     SnapshotTaskDetail,
     SnapshotTierStatus,
     SpotCapacityRebalance,
+    SpotCapacityRebalanceDict,
     SpotDatafeedSubscription,
     SpotFleetLaunchSpecification,
+    SpotFleetLaunchSpecificationDict,
     SpotFleetMonitoring,
+    SpotFleetMonitoringDict,
     SpotFleetRequestConfig,
     SpotFleetRequestConfigData,
+    SpotFleetRequestConfigDataDict,
     SpotFleetTagSpecification,
+    SpotFleetTagSpecificationDict,
     SpotInstanceRequest,
     SpotInstanceStateFault,
     SpotInstanceStatus,
     SpotMaintenanceStrategies,
+    SpotMaintenanceStrategiesDict,
     SpotMarketOptions,
+    SpotMarketOptionsDict,
     SpotOptions,
     SpotOptionsRequest,
+    SpotOptionsRequestDict,
     SpotPlacement,
+    SpotPlacementDict,
     SpotPlacementScore,
     SpotPrice,
     StaleIpPermission,
     StaleSecurityGroup,
     StartDeclarativePoliciesReportInput,
+    StartDeclarativePoliciesReportInputDict,
     StartDeclarativePoliciesReportOutput,
     StartInstancesInput,
+    StartInstancesInputDict,
     StartInstancesOutput,
     StartNetworkInsightsAccessScopeAnalysisInput,
+    StartNetworkInsightsAccessScopeAnalysisInputDict,
     StartNetworkInsightsAccessScopeAnalysisOutput,
     StartNetworkInsightsAnalysisInput,
+    StartNetworkInsightsAnalysisInputDict,
     StartNetworkInsightsAnalysisOutput,
     StartVpcEndpointServicePrivateDnsVerificationInput,
+    StartVpcEndpointServicePrivateDnsVerificationInputDict,
     StartVpcEndpointServicePrivateDnsVerificationOutput,
     StateReason,
     StopInstancesInput,
+    StopInstancesInputDict,
     StopInstancesOutput,
     Storage,
+    StorageDict,
     StorageLocation,
+    StorageLocationDict,
     StoreImageTaskResult,
     Subnet,
     SubnetAssociation,
     SubnetCidrBlockState,
     SubnetCidrReservation,
     SubnetConfiguration,
+    SubnetConfigurationDict,
     SubnetIpPrefixes,
     SubnetIpv6CidrBlockAssociation,
     Subscription,
@@ -2418,30 +3479,43 @@ from aws_sdk_ec2.models import (
     SupportedRegionDetail,
     Tag,
     TagDescription,
+    TagDict,
     TagFieldSpecificationRequest,
+    TagFieldSpecificationRequestDict,
     TagFieldSpecificationResponse,
     TagSpecification,
+    TagSpecificationDict,
     TargetCapacitySpecification,
     TargetCapacitySpecificationRequest,
+    TargetCapacitySpecificationRequestDict,
     TargetConfiguration,
     TargetConfigurationRequest,
+    TargetConfigurationRequestDict,
     TargetGroup,
+    TargetGroupDict,
     TargetGroupsConfig,
+    TargetGroupsConfigDict,
     TargetNetwork,
     TargetReservationValue,
     TerminateClientVpnConnectionsInput,
+    TerminateClientVpnConnectionsInputDict,
     TerminateClientVpnConnectionsOutput,
     TerminateConnectionStatus,
     TerminateInstancesInput,
+    TerminateInstancesInputDict,
     TerminateInstancesOutput,
     ThroughResourcesStatement,
     ThroughResourcesStatementRequest,
+    ThroughResourcesStatementRequestDict,
     TotalLocalStorageGB,
+    TotalLocalStorageGBDict,
     TotalLocalStorageGBRequest,
+    TotalLocalStorageGBRequestDict,
     TrafficMirrorFilter,
     TrafficMirrorFilterRule,
     TrafficMirrorPortRange,
     TrafficMirrorPortRangeRequest,
+    TrafficMirrorPortRangeRequestDict,
     TrafficMirrorSession,
     TrafficMirrorTarget,
     TransitGateway,
@@ -2453,11 +3527,13 @@ from aws_sdk_ec2.models import (
     TransitGatewayClientVpnAttachment,
     TransitGatewayConfigurationDescribeEndpointStructure,
     TransitGatewayConfigurationInputStructure,
+    TransitGatewayConfigurationInputStructureDict,
     TransitGatewayConnect,
     TransitGatewayConnectOptions,
     TransitGatewayConnectPeer,
     TransitGatewayConnectPeerConfiguration,
     TransitGatewayConnectRequestBgpOptions,
+    TransitGatewayConnectRequestBgpOptionsDict,
     TransitGatewayMeteringPolicy,
     TransitGatewayMeteringPolicyEntry,
     TransitGatewayMeteringPolicyRule,
@@ -2472,6 +3548,7 @@ from aws_sdk_ec2.models import (
     TransitGatewayMulticastRegisteredGroupSources,
     TransitGatewayNatRule,
     TransitGatewayNatRuleRequest,
+    TransitGatewayNatRuleRequestDict,
     TransitGatewayOptions,
     TransitGatewayPeeringAttachment,
     TransitGatewayPeeringAttachmentOptions,
@@ -2484,8 +3561,11 @@ from aws_sdk_ec2.models import (
     TransitGatewayPrefixListReference,
     TransitGatewayPropagation,
     TransitGatewayRequestOptions,
+    TransitGatewayRequestOptionsDict,
     TransitGatewayRequestPolicyRule,
+    TransitGatewayRequestPolicyRuleDict,
     TransitGatewayRequestPolicyRuleMetaData,
+    TransitGatewayRequestPolicyRuleMetaDataDict,
     TransitGatewayRoute,
     TransitGatewayRouteAttachment,
     TransitGatewayRouteTable,
@@ -2498,14 +3578,19 @@ from aws_sdk_ec2.models import (
     TrunkInterfaceAssociation,
     TunnelOption,
     UnassignIpv6AddressesInput,
+    UnassignIpv6AddressesInputDict,
     UnassignIpv6AddressesOutput,
     UnassignPrivateIpAddressesInput,
+    UnassignPrivateIpAddressesInputDict,
     UnassignPrivateIpAddressesOutput,
     UnassignPrivateNatGatewayAddressInput,
+    UnassignPrivateNatGatewayAddressInputDict,
     UnassignPrivateNatGatewayAddressOutput,
     UnlockSnapshotInput,
+    UnlockSnapshotInputDict,
     UnlockSnapshotOutput,
     UnmonitorInstancesInput,
+    UnmonitorInstancesInputDict,
     UnmonitorInstancesOutput,
     UnsuccessfulAssociationResponseObject,
     UnsuccessfulInstanceCreditSpecificationItem,
@@ -2514,23 +3599,34 @@ from aws_sdk_ec2.models import (
     UnsuccessfulItemError,
     UnsuccessfulSuppressionResponseObject,
     UpdateCapacityManagerMonitoredTagKeysInput,
+    UpdateCapacityManagerMonitoredTagKeysInputDict,
     UpdateCapacityManagerMonitoredTagKeysOutput,
     UpdateCapacityManagerOrganizationsAccessInput,
+    UpdateCapacityManagerOrganizationsAccessInputDict,
     UpdateCapacityManagerOrganizationsAccessOutput,
     UpdateInterruptibleCapacityReservationAllocationInput,
+    UpdateInterruptibleCapacityReservationAllocationInputDict,
     UpdateInterruptibleCapacityReservationAllocationOutput,
     UpdateSecurityGroupRuleDescriptionsEgressInput,
+    UpdateSecurityGroupRuleDescriptionsEgressInputDict,
     UpdateSecurityGroupRuleDescriptionsEgressOutput,
     UpdateSecurityGroupRuleDescriptionsIngressInput,
+    UpdateSecurityGroupRuleDescriptionsIngressInputDict,
     UpdateSecurityGroupRuleDescriptionsIngressOutput,
     UserBucket,
     UserBucketDetails,
+    UserBucketDict,
     UserData,
+    UserDataDict,
     UserIdGroupPair,
+    UserIdGroupPairDict,
     VCpuCountRange,
+    VCpuCountRangeDict,
     VCpuCountRangeRequest,
+    VCpuCountRangeRequestDict,
     VCpuInfo,
     ValidateSecurityGroupQuotasForInterfaceInput,
+    ValidateSecurityGroupQuotasForInterfaceInputDict,
     ValidateSecurityGroupQuotasForInterfaceOutput,
     ValidationError,
     ValidationWarning,
@@ -2551,14 +3647,19 @@ from aws_sdk_ec2.models import (
     VerifiedAccessInstanceUserTrustProviderClientConfiguration,
     VerifiedAccessLogCloudWatchLogsDestination,
     VerifiedAccessLogCloudWatchLogsDestinationOptions,
+    VerifiedAccessLogCloudWatchLogsDestinationOptionsDict,
     VerifiedAccessLogDeliveryStatus,
     VerifiedAccessLogKinesisDataFirehoseDestination,
     VerifiedAccessLogKinesisDataFirehoseDestinationOptions,
+    VerifiedAccessLogKinesisDataFirehoseDestinationOptionsDict,
     VerifiedAccessLogOptions,
+    VerifiedAccessLogOptionsDict,
     VerifiedAccessLogS3Destination,
     VerifiedAccessLogS3DestinationOptions,
+    VerifiedAccessLogS3DestinationOptionsDict,
     VerifiedAccessLogs,
     VerifiedAccessSseSpecificationRequest,
+    VerifiedAccessSseSpecificationRequestDict,
     VerifiedAccessSseSpecificationResponse,
     VerifiedAccessTrustProvider,
     VerifiedAccessTrustProviderCondensed,
@@ -2566,6 +3667,7 @@ from aws_sdk_ec2.models import (
     Volume,
     VolumeAttachment,
     VolumeDetail,
+    VolumeDetailDict,
     VolumeModification,
     VolumeRecycleBinInfo,
     VolumeStatusAction,
@@ -2583,6 +3685,7 @@ from aws_sdk_ec2.models import (
     VpcClassicLink,
     VpcEncryptionControl,
     VpcEncryptionControlConfiguration,
+    VpcEncryptionControlConfigurationDict,
     VpcEncryptionControlExclusion,
     VpcEncryptionControlExclusions,
     VpcEncryptionNonCompliantResource,
@@ -2599,18 +3702,23 @@ from aws_sdk_ec2.models import (
     VpnConnectionDeviceType,
     VpnConnectionOptions,
     VpnConnectionOptionsSpecification,
+    VpnConnectionOptionsSpecificationDict,
     VpnGateway,
     VpnStaticRoute,
     VpnTunnelLogOptions,
     VpnTunnelLogOptionsSpecification,
+    VpnTunnelLogOptionsSpecificationDict,
     VpnTunnelOptionsSpecification,
+    VpnTunnelOptionsSpecificationDict,
     WithdrawByoipCidrInput,
+    WithdrawByoipCidrInputDict,
     WithdrawByoipCidrOutput,
 )
 
 
-# Static type fixture: pyright over this validates models.pyi.
-# Not executed as a test; it only needs to type-check.
+# Static type fixture: pyright over this validates models.pyi and the
+# client method signatures. Not executed as a test; it only needs to
+# type-check.
 
 _: Any = ...
 
@@ -5217,3 +6325,14237 @@ VpnTunnelLogOptionsSpecification()
 VpnTunnelOptionsSpecification()
 WithdrawByoipCidrInput()
 WithdrawByoipCidrOutput()
+_params_0: AcceleratorCountDict = {}
+_params_1: AcceleratorCountRequestDict = {}
+_params_2: AcceleratorTotalMemoryMiBDict = {}
+_params_3: AcceleratorTotalMemoryMiBRequestDict = {}
+_params_4: AcceptAddressTransferInputDict = {"address": _}
+_params_5: AcceptCapacityReservationBillingOwnershipInputDict = {
+    "capacity_reservation_id": _
+}
+_params_6: AcceptReservedInstancesExchangeQuoteInputDict = {"reserved_instance_ids": _}
+_params_7: AcceptTransitGatewayClientVpnAttachmentInputDict = {
+    "transit_gateway_attachment_id": _
+}
+_params_8: AcceptTransitGatewayMulticastDomainAssociationsInputDict = {}
+_params_9: AcceptTransitGatewayPeeringAttachmentInputDict = {
+    "transit_gateway_attachment_id": _
+}
+_params_10: AcceptTransitGatewayVpcAttachmentInputDict = {
+    "transit_gateway_attachment_id": _
+}
+_params_11: AcceptVpcEndpointConnectionsInputDict = {
+    "service_id": _,
+    "vpc_endpoint_ids": _,
+}
+_params_12: AcceptVpcPeeringConnectionInputDict = {"vpc_peering_connection_id": _}
+_params_13: AccessScopePathRequestDict = {}
+_params_14: AddIpamOperatingRegionDict = {}
+_params_15: AddIpamOrganizationalUnitExclusionDict = {}
+_params_16: AddPrefixListEntryDict = {"cidr": _}
+_params_17: AdvertiseByoipCidrInputDict = {"cidr": _}
+_params_18: AllocateAddressInputDict = {}
+_params_19: AllocateHostsInputDict = {}
+_params_20: AllocateIpamPoolCidrInputDict = {"ipam_pool_id": _}
+_params_21: ApplySecurityGroupsToClientVpnTargetNetworkInputDict = {
+    "client_vpn_endpoint_id": _,
+    "vpc_id": _,
+    "security_group_ids": _,
+}
+_params_22: AsnAuthorizationContextDict = {"message": _, "signature": _}
+_params_23: AssignIpv6AddressesInputDict = {"network_interface_id": _}
+_params_24: AssignPrivateIpAddressesInputDict = {"network_interface_id": _}
+_params_25: AssignPrivateNatGatewayAddressInputDict = {"nat_gateway_id": _}
+_params_26: AssociateAddressInputDict = {}
+_params_27: AssociateApplicationStatusCheckInputDict = {
+    "application_status_check_id": _
+}
+_params_28: AssociateCapacityReservationBillingOwnerInputDict = {
+    "capacity_reservation_id": _,
+    "unused_reservation_billing_owner_id": _,
+}
+_params_29: AssociateClientVpnTargetNetworkInputDict = {"client_vpn_endpoint_id": _}
+_params_30: AssociateDhcpOptionsInputDict = {"dhcp_options_id": _, "vpc_id": _}
+_params_31: AssociateEnclaveCertificateIamRoleInputDict = {
+    "certificate_arn": _,
+    "role_arn": _,
+}
+_params_32: AssociateIamInstanceProfileInputDict = {
+    "iam_instance_profile": _,
+    "instance_id": _,
+}
+_params_33: AssociateInstanceEventWindowInputDict = {
+    "instance_event_window_id": _,
+    "association_target": _,
+}
+_params_34: AssociateIpamByoasnInputDict = {"asn": _, "cidr": _}
+_params_35: AssociateIpamResourceDiscoveryInputDict = {
+    "ipam_id": _,
+    "ipam_resource_discovery_id": _,
+}
+_params_36: AssociateNatGatewayAddressInputDict = {
+    "nat_gateway_id": _,
+    "allocation_ids": _,
+}
+_params_37: AssociateRouteServerInputDict = {"route_server_id": _, "vpc_id": _}
+_params_38: AssociateRouteTableInputDict = {"route_table_id": _}
+_params_39: AssociateSecurityGroupVpcInputDict = {"group_id": _, "vpc_id": _}
+_params_40: AssociateSubnetCidrBlockInputDict = {"subnet_id": _}
+_params_41: AssociateTransitGatewayMulticastDomainInputDict = {
+    "transit_gateway_multicast_domain_id": _,
+    "transit_gateway_attachment_id": _,
+    "subnet_ids": _,
+}
+_params_42: AssociateTransitGatewayPolicyTableInputDict = {
+    "transit_gateway_policy_table_id": _,
+    "transit_gateway_attachment_id": _,
+}
+_params_43: AssociateTransitGatewayRouteTableInputDict = {
+    "transit_gateway_route_table_id": _,
+    "transit_gateway_attachment_id": _,
+}
+_params_44: AssociateTrunkInterfaceInputDict = {
+    "branch_interface_id": _,
+    "trunk_interface_id": _,
+}
+_params_45: AssociateVpcCidrBlockInputDict = {"vpc_id": _}
+_params_46: AthenaIntegrationDict = {
+    "integration_result_s3_destination_arn": _,
+    "partition_load_frequency": _,
+}
+_params_47: AttachClassicLinkVpcInputDict = {"instance_id": _, "vpc_id": _, "groups": _}
+_params_48: AttachImageWatermarkInputDict = {"image_id": _, "watermark_name": _}
+_params_49: AttachInternetGatewayInputDict = {"internet_gateway_id": _, "vpc_id": _}
+_params_50: AttachNetworkInterfaceInputDict = {
+    "network_interface_id": _,
+    "instance_id": _,
+    "device_index": _,
+}
+_params_51: AttachVerifiedAccessTrustProviderInputDict = {
+    "verified_access_instance_id": _,
+    "verified_access_trust_provider_id": _,
+}
+_params_52: AttachVolumeInputDict = {"device": _, "instance_id": _, "volume_id": _}
+_params_53: AttachVpnGatewayInputDict = {"vpc_id": _, "vpn_gateway_id": _}
+_params_54: AttributeBooleanValueDict = {}
+_params_55: AttributeValueDict = {}
+_params_56: AuthorizeClientVpnIngressInputDict = {
+    "client_vpn_endpoint_id": _,
+    "target_network_cidr": _,
+}
+_params_57: AuthorizeSecurityGroupEgressInputDict = {"group_id": _}
+_params_58: AuthorizeSecurityGroupIngressInputDict = {}
+_params_59: AvailabilityZoneAddressDict = {}
+_params_60: BaselineEbsBandwidthMbpsDict = {}
+_params_61: BaselineEbsBandwidthMbpsRequestDict = {}
+_params_62: BaselinePerformanceFactorsDict = {}
+_params_63: BaselinePerformanceFactorsRequestDict = {}
+_params_64: BatchModifyIpamRoutingPolicyRegistrationsInputDict = {
+    "ipam_internet_registry_association_id": _,
+    "delta_json": _,
+}
+_params_65: BlockDeviceMappingDict = {}
+_params_66: BundleInstanceInputDict = {"instance_id": _, "storage": _}
+_params_67: CancelBundleTaskInputDict = {"bundle_id": _}
+_params_68: CancelCapacityReservationFleetsInputDict = {
+    "capacity_reservation_fleet_ids": _
+}
+_params_69: CancelCapacityReservationInputDict = {"capacity_reservation_id": _}
+_params_70: CancelConversionTaskInputDict = {"conversion_task_id": _}
+_params_71: CancelDeclarativePoliciesReportInputDict = {"report_id": _}
+_params_72: CancelExportTaskInputDict = {"export_task_id": _}
+_params_73: CancelImageLaunchPermissionInputDict = {"image_id": _}
+_params_74: CancelImportTaskInputDict = {}
+_params_75: CancelReservedInstancesListingInputDict = {
+    "reserved_instances_listing_id": _
+}
+_params_76: CancelSpotFleetRequestsInputDict = {
+    "spot_fleet_request_ids": _,
+    "terminate_instances": _,
+}
+_params_77: CancelSpotInstanceRequestsInputDict = {"spot_instance_request_ids": _}
+_params_78: CapacityManagerConditionDict = {}
+_params_79: CapacityReservationOptionsRequestDict = {}
+_params_80: CapacityReservationSpecificationDict = {}
+_params_81: CapacityReservationTargetDict = {}
+_params_82: CertificateAuthenticationRequestDict = {}
+_params_83: CidrAuthorizationContextDict = {"message": _, "signature": _}
+_params_84: ClassicLoadBalancerDict = {}
+_params_85: ClassicLoadBalancersConfigDict = {}
+_params_86: ClientConnectOptionsDict = {}
+_params_87: ClientDataDict = {}
+_params_88: ClientLoginBannerOptionsDict = {}
+_params_89: ClientRouteEnforcementOptionsDict = {}
+_params_90: ClientVpnAuthenticationRequestDict = {}
+_params_91: ClientVpnTrustProviderRequestDict = {}
+_params_92: CloudWatchLogOptionsSpecificationDict = {}
+_params_93: ConfirmProductInstanceInputDict = {"instance_id": _, "product_code": _}
+_params_94: ConnectionLogOptionsDict = {}
+_params_95: ConnectionTrackingSpecificationRequestDict = {}
+_params_96: CopyFpgaImageInputDict = {"source_fpga_image_id": _, "source_region": _}
+_params_97: CopyImageInputDict = {"name": _, "source_image_id": _, "source_region": _}
+_params_98: CopySnapshotInputDict = {"source_region": _, "source_snapshot_id": _}
+_params_99: CopyVolumesInputDict = {"source_volume_id": _}
+_params_100: CpuOptionsRequestDict = {}
+_params_101: CpuPerformanceFactorDict = {}
+_params_102: CpuPerformanceFactorRequestDict = {}
+_params_103: CreateApplicationStatusCheckInputDict = {"protocol": _, "port": _}
+_params_104: CreateCapacityManagerDataExportInputDict = {
+    "s3_bucket_name": _,
+    "schedule": _,
+    "output_format": _,
+}
+_params_105: CreateCapacityReservationBySplittingInputDict = {
+    "source_capacity_reservation_id": _,
+    "instance_count": _,
+}
+_params_106: CreateCapacityReservationCancellationQuoteInputDict = {
+    "capacity_reservation_id": _
+}
+_params_107: CreateCapacityReservationDateChangeQuoteInputDict = {
+    "capacity_reservation_id": _,
+    "new_start_date": _,
+}
+_params_108: CreateCapacityReservationFleetInputDict = {"total_target_capacity": _}
+_params_109: CreateCapacityReservationInputDict = {
+    "instance_type": _,
+    "instance_platform": _,
+    "instance_count": _,
+}
+_params_110: CreateCarrierGatewayInputDict = {"vpc_id": _}
+_params_111: CreateClientVpnEndpointInputDict = {
+    "server_certificate_arn": _,
+    "authentication_options": _,
+    "connection_log_options": _,
+}
+_params_112: CreateClientVpnRouteInputDict = {
+    "client_vpn_endpoint_id": _,
+    "destination_cidr_block": _,
+}
+_params_113: CreateCoipCidrInputDict = {"cidr": _, "coip_pool_id": _}
+_params_114: CreateCoipPoolInputDict = {"local_gateway_route_table_id": _}
+_params_115: CreateCustomerGatewayInputDict = {"type": _}
+_params_116: CreateDefaultSubnetInputDict = {}
+_params_117: CreateDefaultVpcInputDict = {}
+_params_118: CreateDelegateMacVolumeOwnershipTaskInputDict = {
+    "instance_id": _,
+    "mac_credentials": _,
+}
+_params_119: CreateDhcpOptionsInputDict = {"dhcp_configurations": _}
+_params_120: CreateEgressOnlyInternetGatewayInputDict = {"vpc_id": _}
+_params_121: CreateFleetInputDict = {
+    "launch_template_configs": _,
+    "target_capacity_specification": _,
+}
+_params_122: CreateFlowLogsInputDict = {"resource_ids": _, "resource_type": _}
+_params_123: CreateFpgaImageInputDict = {"input_storage_location": _}
+_params_124: CreateImageInputDict = {"instance_id": _, "name": _}
+_params_125: CreateImageUsageReportInputDict = {"image_id": _, "resource_types": _}
+_params_126: CreateInstanceConnectEndpointInputDict = {"subnet_id": _}
+_params_127: CreateInstanceEventWindowInputDict = {}
+_params_128: CreateInstanceExportTaskInputDict = {
+    "instance_id": _,
+    "target_environment": _,
+    "export_to_s3_task": _,
+}
+_params_129: CreateInternetGatewayInputDict = {}
+_params_130: CreateInterruptibleCapacityReservationAllocationInputDict = {
+    "capacity_reservation_id": _,
+    "instance_count": _,
+}
+_params_131: CreateIpamExternalResourceVerificationTokenInputDict = {"ipam_id": _}
+_params_132: CreateIpamInputDict = {}
+_params_133: CreateIpamInternetRegistryAssociationInputDict = {
+    "ipam_id": _,
+    "rir": _,
+    "organization_handle": _,
+}
+_params_134: CreateIpamPolicyInputDict = {"ipam_id": _}
+_params_135: CreateIpamPoolInputDict = {"ipam_scope_id": _, "address_family": _}
+_params_136: CreateIpamPrefixListResolverInputDict = {"ipam_id": _, "address_family": _}
+_params_137: CreateIpamPrefixListResolverTargetInputDict = {
+    "ipam_prefix_list_resolver_id": _,
+    "prefix_list_id": _,
+    "prefix_list_region": _,
+    "track_latest_version": _,
+}
+_params_138: CreateIpamResourceDiscoveryInputDict = {}
+_params_139: CreateIpamRoutingPolicyRegistrationInputDict = {
+    "ipam_internet_registry_association_id": _,
+    "cidr": _,
+    "asns": _,
+}
+_params_140: CreateIpamScopeInputDict = {"ipam_id": _}
+_params_141: CreateKeyPairInputDict = {"key_name": _}
+_params_142: CreateLaunchTemplateInputDict = {
+    "launch_template_name": _,
+    "launch_template_data": _,
+}
+_params_143: CreateLaunchTemplateVersionInputDict = {"launch_template_data": _}
+_params_144: CreateLocalGatewayRouteInputDict = {"local_gateway_route_table_id": _}
+_params_145: CreateLocalGatewayRouteTableInputDict = {"local_gateway_id": _}
+_params_146: CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationInputDict = {
+    "local_gateway_route_table_id": _,
+    "local_gateway_virtual_interface_group_id": _,
+}
+_params_147: CreateLocalGatewayRouteTableVpcAssociationInputDict = {
+    "local_gateway_route_table_id": _,
+    "vpc_id": _,
+}
+_params_148: CreateLocalGatewayVirtualInterfaceGroupInputDict = {"local_gateway_id": _}
+_params_149: CreateLocalGatewayVirtualInterfaceInputDict = {
+    "local_gateway_virtual_interface_group_id": _,
+    "outpost_lag_id": _,
+    "vlan": _,
+    "local_address": _,
+    "peer_address": _,
+}
+_params_150: CreateMacSystemIntegrityProtectionModificationTaskInputDict = {
+    "instance_id": _,
+    "mac_system_integrity_protection_status": _,
+}
+_params_151: CreateManagedPrefixListInputDict = {
+    "prefix_list_name": _,
+    "max_entries": _,
+    "address_family": _,
+}
+_params_152: CreateNatGatewayInputDict = {}
+_params_153: CreateNetworkAclEntryInputDict = {
+    "network_acl_id": _,
+    "rule_number": _,
+    "protocol": _,
+    "rule_action": _,
+    "egress": _,
+}
+_params_154: CreateNetworkAclInputDict = {"vpc_id": _}
+_params_155: CreateNetworkInsightsAccessScopeInputDict = {}
+_params_156: CreateNetworkInsightsPathInputDict = {"source": _, "protocol": _}
+_params_157: CreateNetworkInterfaceInputDict = {"subnet_id": _}
+_params_158: CreateNetworkInterfacePermissionInputDict = {
+    "network_interface_id": _,
+    "permission": _,
+}
+_params_159: CreatePlacementGroupInputDict = {}
+_params_160: CreatePublicIpv4PoolInputDict = {}
+_params_161: CreateReplaceRootVolumeTaskInputDict = {"instance_id": _}
+_params_162: CreateReservedInstancesListingInputDict = {
+    "reserved_instances_id": _,
+    "instance_count": _,
+    "price_schedules": _,
+    "client_token": _,
+}
+_params_163: CreateRestoreImageTaskInputDict = {"bucket": _, "object_key": _}
+_params_164: CreateRouteInputDict = {"route_table_id": _}
+_params_165: CreateRouteServerEndpointInputDict = {"route_server_id": _, "subnet_id": _}
+_params_166: CreateRouteServerInputDict = {"amazon_side_asn": _}
+_params_167: CreateRouteServerPeerInputDict = {
+    "route_server_endpoint_id": _,
+    "peer_address": _,
+    "bgp_options": _,
+}
+_params_168: CreateRouteTableInputDict = {"vpc_id": _}
+_params_169: CreateSecondaryNetworkInputDict = {"ipv4_cidr_block": _, "network_type": _}
+_params_170: CreateSecondarySubnetInputDict = {
+    "ipv4_cidr_block": _,
+    "secondary_network_id": _,
+}
+_params_171: CreateSecurityGroupInputDict = {"description": _, "group_name": _}
+_params_172: CreateSnapshotInputDict = {"volume_id": _}
+_params_173: CreateSnapshotsInputDict = {"instance_specification": _}
+_params_174: CreateSpotDatafeedSubscriptionInputDict = {"bucket": _}
+_params_175: CreateStoreImageTaskInputDict = {"image_id": _, "bucket": _}
+_params_176: CreateSubnetCidrReservationInputDict = {
+    "subnet_id": _,
+    "cidr": _,
+    "reservation_type": _,
+}
+_params_177: CreateSubnetInputDict = {"vpc_id": _}
+_params_178: CreateTagsInputDict = {"resources": _, "tags": _}
+_params_179: CreateTrafficMirrorFilterInputDict = {}
+_params_180: CreateTrafficMirrorFilterRuleInputDict = {
+    "traffic_mirror_filter_id": _,
+    "traffic_direction": _,
+    "rule_number": _,
+    "rule_action": _,
+    "destination_cidr_block": _,
+    "source_cidr_block": _,
+}
+_params_181: CreateTrafficMirrorSessionInputDict = {
+    "network_interface_id": _,
+    "traffic_mirror_target_id": _,
+    "traffic_mirror_filter_id": _,
+    "session_number": _,
+}
+_params_182: CreateTrafficMirrorTargetInputDict = {}
+_params_183: CreateTransitGatewayConnectInputDict = {
+    "transport_transit_gateway_attachment_id": _,
+    "options": _,
+}
+_params_184: CreateTransitGatewayConnectPeerInputDict = {
+    "transit_gateway_attachment_id": _,
+    "peer_address": _,
+    "inside_cidr_blocks": _,
+}
+_params_185: CreateTransitGatewayConnectRequestOptionsDict = {"protocol": _}
+_params_186: CreateTransitGatewayInputDict = {}
+_params_187: CreateTransitGatewayMeteringPolicyEntryInputDict = {
+    "transit_gateway_metering_policy_id": _,
+    "policy_rule_number": _,
+    "metered_account": _,
+}
+_params_188: CreateTransitGatewayMeteringPolicyInputDict = {"transit_gateway_id": _}
+_params_189: CreateTransitGatewayMulticastDomainInputDict = {"transit_gateway_id": _}
+_params_190: CreateTransitGatewayMulticastDomainRequestOptionsDict = {}
+_params_191: CreateTransitGatewayPeeringAttachmentInputDict = {
+    "transit_gateway_id": _,
+    "peer_transit_gateway_id": _,
+    "peer_account_id": _,
+    "peer_region": _,
+}
+_params_192: CreateTransitGatewayPeeringAttachmentRequestOptionsDict = {}
+_params_193: CreateTransitGatewayPolicyTableEntryInputDict = {
+    "transit_gateway_policy_table_id": _,
+    "policy_rule_number": _,
+    "target_route_table_id": _,
+}
+_params_194: CreateTransitGatewayPolicyTableInputDict = {"transit_gateway_id": _}
+_params_195: CreateTransitGatewayPrefixListReferenceInputDict = {
+    "transit_gateway_route_table_id": _,
+    "prefix_list_id": _,
+}
+_params_196: CreateTransitGatewayRouteInputDict = {
+    "destination_cidr_block": _,
+    "transit_gateway_route_table_id": _,
+}
+_params_197: CreateTransitGatewayRouteTableAnnouncementInputDict = {
+    "transit_gateway_route_table_id": _,
+    "peering_attachment_id": _,
+}
+_params_198: CreateTransitGatewayRouteTableInputDict = {"transit_gateway_id": _}
+_params_199: CreateTransitGatewayVpcAttachmentInputDict = {
+    "transit_gateway_id": _,
+    "vpc_id": _,
+    "subnet_ids": _,
+}
+_params_200: CreateTransitGatewayVpcAttachmentRequestOptionsDict = {}
+_params_201: CreateVerifiedAccessEndpointCidrOptionsDict = {}
+_params_202: CreateVerifiedAccessEndpointEniOptionsDict = {}
+_params_203: CreateVerifiedAccessEndpointInputDict = {
+    "verified_access_group_id": _,
+    "endpoint_type": _,
+    "attachment_type": _,
+}
+_params_204: CreateVerifiedAccessEndpointLoadBalancerOptionsDict = {}
+_params_205: CreateVerifiedAccessEndpointPortRangeDict = {}
+_params_206: CreateVerifiedAccessEndpointRdsOptionsDict = {}
+_params_207: CreateVerifiedAccessGroupInputDict = {"verified_access_instance_id": _}
+_params_208: CreateVerifiedAccessInstanceInputDict = {}
+_params_209: CreateVerifiedAccessNativeApplicationOidcOptionsDict = {}
+_params_210: CreateVerifiedAccessTrustProviderDeviceOptionsDict = {}
+_params_211: CreateVerifiedAccessTrustProviderInputDict = {
+    "trust_provider_type": _,
+    "policy_reference_name": _,
+}
+_params_212: CreateVerifiedAccessTrustProviderOidcOptionsDict = {}
+_params_213: CreateVolumeInputDict = {}
+_params_214: CreateVolumePermissionDict = {}
+_params_215: CreateVolumePermissionModificationsDict = {}
+_params_216: CreateVpcBlockPublicAccessExclusionInputDict = {
+    "internet_gateway_exclusion_mode": _
+}
+_params_217: CreateVpcEncryptionControlInputDict = {"vpc_id": _}
+_params_218: CreateVpcEndpointConnectionNotificationInputDict = {
+    "connection_notification_arn": _,
+    "connection_events": _,
+}
+_params_219: CreateVpcEndpointInputDict = {"vpc_id": _}
+_params_220: CreateVpcEndpointServiceConfigurationInputDict = {}
+_params_221: CreateVpcInputDict = {}
+_params_222: CreateVpcPeeringConnectionInputDict = {"vpc_id": _}
+_params_223: CreateVpnConcentratorInputDict = {"type": _}
+_params_224: CreateVpnConnectionInputDict = {"customer_gateway_id": _, "type": _}
+_params_225: CreateVpnConnectionRouteInputDict = {
+    "destination_cidr_block": _,
+    "vpn_connection_id": _,
+}
+_params_226: CreateVpnGatewayInputDict = {"type": _}
+_params_227: CreationDateConditionRequestDict = {}
+_params_228: CreditSpecificationRequestDict = {"cpu_credits": _}
+_params_229: CustomTagKeyValueRequestPairDict = {}
+_params_230: DataQueryDict = {}
+_params_231: DeleteApplicationStatusCheckInputDict = {"application_status_check_id": _}
+_params_232: DeleteCapacityManagerDataExportInputDict = {
+    "capacity_manager_data_export_id": _
+}
+_params_233: DeleteCarrierGatewayInputDict = {"carrier_gateway_id": _}
+_params_234: DeleteClientVpnEndpointAuthorizationPolicyInputDict = {
+    "client_vpn_endpoint_id": _
+}
+_params_235: DeleteClientVpnEndpointInputDict = {"client_vpn_endpoint_id": _}
+_params_236: DeleteClientVpnRouteInputDict = {
+    "client_vpn_endpoint_id": _,
+    "destination_cidr_block": _,
+}
+_params_237: DeleteCoipCidrInputDict = {"cidr": _, "coip_pool_id": _}
+_params_238: DeleteCoipPoolInputDict = {"coip_pool_id": _}
+_params_239: DeleteCustomerGatewayInputDict = {"customer_gateway_id": _}
+_params_240: DeleteDhcpOptionsInputDict = {"dhcp_options_id": _}
+_params_241: DeleteEgressOnlyInternetGatewayInputDict = {
+    "egress_only_internet_gateway_id": _
+}
+_params_242: DeleteFleetsInputDict = {"fleet_ids": _, "terminate_instances": _}
+_params_243: DeleteFlowLogsInputDict = {"flow_log_ids": _}
+_params_244: DeleteFpgaImageInputDict = {"fpga_image_id": _}
+_params_245: DeleteImageUsageReportInputDict = {"report_id": _}
+_params_246: DeleteInstanceConnectEndpointInputDict = {
+    "instance_connect_endpoint_id": _
+}
+_params_247: DeleteInstanceEventWindowInputDict = {"instance_event_window_id": _}
+_params_248: DeleteInternetGatewayInputDict = {"internet_gateway_id": _}
+_params_249: DeleteIpamExternalResourceVerificationTokenInputDict = {
+    "ipam_external_resource_verification_token_id": _
+}
+_params_250: DeleteIpamInputDict = {"ipam_id": _}
+_params_251: DeleteIpamInternetRegistryAssociationInputDict = {
+    "ipam_internet_registry_association_id": _
+}
+_params_252: DeleteIpamPolicyInputDict = {"ipam_policy_id": _}
+_params_253: DeleteIpamPoolInputDict = {"ipam_pool_id": _}
+_params_254: DeleteIpamPrefixListResolverInputDict = {"ipam_prefix_list_resolver_id": _}
+_params_255: DeleteIpamPrefixListResolverTargetInputDict = {
+    "ipam_prefix_list_resolver_target_id": _
+}
+_params_256: DeleteIpamResourceDiscoveryInputDict = {"ipam_resource_discovery_id": _}
+_params_257: DeleteIpamRoutingPolicyRegistrationInputDict = {
+    "ipam_internet_registry_association_id": _,
+    "cidr": _,
+}
+_params_258: DeleteIpamScopeInputDict = {"ipam_scope_id": _}
+_params_259: DeleteKeyPairInputDict = {}
+_params_260: DeleteLaunchTemplateInputDict = {}
+_params_261: DeleteLaunchTemplateVersionsInputDict = {"versions": _}
+_params_262: DeleteLocalGatewayRouteInputDict = {"local_gateway_route_table_id": _}
+_params_263: DeleteLocalGatewayRouteTableInputDict = {"local_gateway_route_table_id": _}
+_params_264: DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationInputDict = {
+    "local_gateway_route_table_virtual_interface_group_association_id": _
+}
+_params_265: DeleteLocalGatewayRouteTableVpcAssociationInputDict = {
+    "local_gateway_route_table_vpc_association_id": _
+}
+_params_266: DeleteLocalGatewayVirtualInterfaceGroupInputDict = {
+    "local_gateway_virtual_interface_group_id": _
+}
+_params_267: DeleteLocalGatewayVirtualInterfaceInputDict = {
+    "local_gateway_virtual_interface_id": _
+}
+_params_268: DeleteManagedPrefixListInputDict = {"prefix_list_id": _}
+_params_269: DeleteNatGatewayInputDict = {"nat_gateway_id": _}
+_params_270: DeleteNetworkAclEntryInputDict = {
+    "network_acl_id": _,
+    "rule_number": _,
+    "egress": _,
+}
+_params_271: DeleteNetworkAclInputDict = {"network_acl_id": _}
+_params_272: DeleteNetworkInsightsAccessScopeAnalysisInputDict = {
+    "network_insights_access_scope_analysis_id": _
+}
+_params_273: DeleteNetworkInsightsAccessScopeInputDict = {
+    "network_insights_access_scope_id": _
+}
+_params_274: DeleteNetworkInsightsAnalysisInputDict = {
+    "network_insights_analysis_id": _
+}
+_params_275: DeleteNetworkInsightsPathInputDict = {"network_insights_path_id": _}
+_params_276: DeleteNetworkInterfaceInputDict = {"network_interface_id": _}
+_params_277: DeleteNetworkInterfacePermissionInputDict = {
+    "network_interface_permission_id": _
+}
+_params_278: DeletePlacementGroupInputDict = {"group_name": _}
+_params_279: DeletePublicIpv4PoolInputDict = {"pool_id": _}
+_params_280: DeleteQueuedReservedInstancesInputDict = {"reserved_instances_ids": _}
+_params_281: DeleteRouteInputDict = {"route_table_id": _}
+_params_282: DeleteRouteServerEndpointInputDict = {"route_server_endpoint_id": _}
+_params_283: DeleteRouteServerInputDict = {"route_server_id": _}
+_params_284: DeleteRouteServerPeerInputDict = {"route_server_peer_id": _}
+_params_285: DeleteRouteTableInputDict = {"route_table_id": _}
+_params_286: DeleteSecondaryNetworkInputDict = {"secondary_network_id": _}
+_params_287: DeleteSecondarySubnetInputDict = {"secondary_subnet_id": _}
+_params_288: DeleteSecurityGroupInputDict = {}
+_params_289: DeleteSnapshotInputDict = {"snapshot_id": _}
+_params_290: DeleteSpotDatafeedSubscriptionInputDict = {}
+_params_291: DeleteSubnetCidrReservationInputDict = {"subnet_cidr_reservation_id": _}
+_params_292: DeleteSubnetInputDict = {"subnet_id": _}
+_params_293: DeleteTagsInputDict = {"resources": _}
+_params_294: DeleteTrafficMirrorFilterInputDict = {"traffic_mirror_filter_id": _}
+_params_295: DeleteTrafficMirrorFilterRuleInputDict = {
+    "traffic_mirror_filter_rule_id": _
+}
+_params_296: DeleteTrafficMirrorSessionInputDict = {"traffic_mirror_session_id": _}
+_params_297: DeleteTrafficMirrorTargetInputDict = {"traffic_mirror_target_id": _}
+_params_298: DeleteTransitGatewayClientVpnAttachmentInputDict = {
+    "transit_gateway_attachment_id": _
+}
+_params_299: DeleteTransitGatewayConnectInputDict = {"transit_gateway_attachment_id": _}
+_params_300: DeleteTransitGatewayConnectPeerInputDict = {
+    "transit_gateway_connect_peer_id": _
+}
+_params_301: DeleteTransitGatewayInputDict = {"transit_gateway_id": _}
+_params_302: DeleteTransitGatewayMeteringPolicyEntryInputDict = {
+    "transit_gateway_metering_policy_id": _,
+    "policy_rule_number": _,
+}
+_params_303: DeleteTransitGatewayMeteringPolicyInputDict = {
+    "transit_gateway_metering_policy_id": _
+}
+_params_304: DeleteTransitGatewayMulticastDomainInputDict = {
+    "transit_gateway_multicast_domain_id": _
+}
+_params_305: DeleteTransitGatewayPeeringAttachmentInputDict = {
+    "transit_gateway_attachment_id": _
+}
+_params_306: DeleteTransitGatewayPolicyTableEntryInputDict = {
+    "transit_gateway_policy_table_id": _,
+    "policy_rule_number": _,
+}
+_params_307: DeleteTransitGatewayPolicyTableInputDict = {
+    "transit_gateway_policy_table_id": _
+}
+_params_308: DeleteTransitGatewayPrefixListReferenceInputDict = {
+    "transit_gateway_route_table_id": _,
+    "prefix_list_id": _,
+}
+_params_309: DeleteTransitGatewayRouteInputDict = {
+    "transit_gateway_route_table_id": _,
+    "destination_cidr_block": _,
+}
+_params_310: DeleteTransitGatewayRouteTableAnnouncementInputDict = {
+    "transit_gateway_route_table_announcement_id": _
+}
+_params_311: DeleteTransitGatewayRouteTableInputDict = {
+    "transit_gateway_route_table_id": _
+}
+_params_312: DeleteTransitGatewayVpcAttachmentInputDict = {
+    "transit_gateway_attachment_id": _
+}
+_params_313: DeleteVerifiedAccessEndpointInputDict = {"verified_access_endpoint_id": _}
+_params_314: DeleteVerifiedAccessGroupInputDict = {"verified_access_group_id": _}
+_params_315: DeleteVerifiedAccessInstanceInputDict = {"verified_access_instance_id": _}
+_params_316: DeleteVerifiedAccessTrustProviderInputDict = {
+    "verified_access_trust_provider_id": _
+}
+_params_317: DeleteVolumeInputDict = {"volume_id": _}
+_params_318: DeleteVpcBlockPublicAccessExclusionInputDict = {"exclusion_id": _}
+_params_319: DeleteVpcEncryptionControlInputDict = {"vpc_encryption_control_id": _}
+_params_320: DeleteVpcEndpointConnectionNotificationsInputDict = {
+    "connection_notification_ids": _
+}
+_params_321: DeleteVpcEndpointServiceConfigurationsInputDict = {"service_ids": _}
+_params_322: DeleteVpcEndpointsInputDict = {"vpc_endpoint_ids": _}
+_params_323: DeleteVpcInputDict = {"vpc_id": _}
+_params_324: DeleteVpcPeeringConnectionInputDict = {"vpc_peering_connection_id": _}
+_params_325: DeleteVpnConcentratorInputDict = {"vpn_concentrator_id": _}
+_params_326: DeleteVpnConnectionInputDict = {"vpn_connection_id": _}
+_params_327: DeleteVpnConnectionRouteInputDict = {
+    "destination_cidr_block": _,
+    "vpn_connection_id": _,
+}
+_params_328: DeleteVpnGatewayInputDict = {"vpn_gateway_id": _}
+_params_329: DeprecationTimeConditionRequestDict = {}
+_params_330: DeprovisionByoipCidrInputDict = {"cidr": _}
+_params_331: DeprovisionIpamByoasnInputDict = {"ipam_id": _, "asn": _}
+_params_332: DeprovisionIpamPoolCidrInputDict = {"ipam_pool_id": _}
+_params_333: DeprovisionPublicIpv4PoolCidrInputDict = {"pool_id": _, "cidr": _}
+_params_334: DeregisterImageInputDict = {"image_id": _}
+_params_335: DeregisterInstanceEventNotificationAttributesInputDict = {
+    "instance_tag_attribute": _
+}
+_params_336: DeregisterInstanceTagAttributeRequestDict = {}
+_params_337: DeregisterTransitGatewayMulticastGroupMembersInputDict = {}
+_params_338: DeregisterTransitGatewayMulticastGroupSourcesInputDict = {}
+_params_339: DescribeAccountAttributesInputDict = {}
+_params_340: DescribeAccountVpcEncryptionControlInputDict = {}
+_params_341: DescribeAddressesAttributeInputDict = {}
+_params_342: DescribeAddressesInputDict = {}
+_params_343: DescribeAddressTransfersInputDict = {}
+_params_344: DescribeAggregateIdFormatInputDict = {}
+_params_345: DescribeApplicationStatusCheckAssociationsInputDict = {}
+_params_346: DescribeApplicationStatusChecksInputDict = {}
+_params_347: DescribeApplicationStatusInputDict = {}
+_params_348: DescribeAvailabilityZonesInputDict = {}
+_params_349: DescribeAwsNetworkPerformanceMetricSubscriptionsInputDict = {}
+_params_350: DescribeBundleTasksInputDict = {}
+_params_351: DescribeByoipCidrsInputDict = {"max_results": _}
+_params_352: DescribeCapacityBlockExtensionHistoryInputDict = {}
+_params_353: DescribeCapacityBlockExtensionOfferingsInputDict = {
+    "capacity_block_extension_duration_hours": _,
+    "capacity_reservation_id": _,
+}
+_params_354: DescribeCapacityBlockOfferingsInputDict = {"capacity_duration_hours": _}
+_params_355: DescribeCapacityBlocksInputDict = {}
+_params_356: DescribeCapacityBlockStatusInputDict = {}
+_params_357: DescribeCapacityManagerDataExportsInputDict = {}
+_params_358: DescribeCapacityReservationBillingRequestsInputDict = {"role": _}
+_params_359: DescribeCapacityReservationCancellationQuotesInputDict = {}
+_params_360: DescribeCapacityReservationDateChangeQuotesInputDict = {}
+_params_361: DescribeCapacityReservationFleetsInputDict = {}
+_params_362: DescribeCapacityReservationsInputDict = {}
+_params_363: DescribeCapacityReservationTopologyInputDict = {}
+_params_364: DescribeCarrierGatewaysInputDict = {}
+_params_365: DescribeClassicLinkInstancesInputDict = {}
+_params_366: DescribeClientVpnAuthorizationRulesInputDict = {
+    "client_vpn_endpoint_id": _
+}
+_params_367: DescribeClientVpnConnectionsInputDict = {"client_vpn_endpoint_id": _}
+_params_368: DescribeClientVpnEndpointsInputDict = {}
+_params_369: DescribeClientVpnRoutesInputDict = {"client_vpn_endpoint_id": _}
+_params_370: DescribeClientVpnTargetNetworksInputDict = {"client_vpn_endpoint_id": _}
+_params_371: DescribeCoipPoolsInputDict = {}
+_params_372: DescribeConversionTasksInputDict = {}
+_params_373: DescribeCustomerGatewaysInputDict = {}
+_params_374: DescribeDeclarativePoliciesReportsInputDict = {}
+_params_375: DescribeDhcpOptionsInputDict = {}
+_params_376: DescribeEgressOnlyInternetGatewaysInputDict = {}
+_params_377: DescribeElasticGpusInputDict = {}
+_params_378: DescribeExportImageTasksInputDict = {}
+_params_379: DescribeExportTasksInputDict = {}
+_params_380: DescribeFastLaunchImagesInputDict = {}
+_params_381: DescribeFastSnapshotRestoresInputDict = {}
+_params_382: DescribeFleetHistoryInputDict = {"fleet_id": _, "start_time": _}
+_params_383: DescribeFleetInstancesInputDict = {"fleet_id": _}
+_params_384: DescribeFleetsInputDict = {}
+_params_385: DescribeFlowLogsInputDict = {}
+_params_386: DescribeFpgaImageAttributeInputDict = {"fpga_image_id": _, "attribute": _}
+_params_387: DescribeFpgaImagesInputDict = {}
+_params_388: DescribeHostReservationOfferingsInputDict = {}
+_params_389: DescribeHostReservationsInputDict = {}
+_params_390: DescribeHostsInputDict = {}
+_params_391: DescribeIamInstanceProfileAssociationsInputDict = {}
+_params_392: DescribeIdentityIdFormatInputDict = {"principal_arn": _}
+_params_393: DescribeIdFormatInputDict = {}
+_params_394: DescribeImageAttributeInputDict = {"attribute": _, "image_id": _}
+_params_395: DescribeImageReferencesInputDict = {"image_ids": _}
+_params_396: DescribeImagesInputDict = {}
+_params_397: DescribeImageUsageReportEntriesInputDict = {}
+_params_398: DescribeImageUsageReportsInputDict = {}
+_params_399: DescribeImportImageTasksInputDict = {}
+_params_400: DescribeImportSnapshotTasksInputDict = {}
+_params_401: DescribeInstanceAttributeInputDict = {"instance_id": _, "attribute": _}
+_params_402: DescribeInstanceConnectEndpointsInputDict = {}
+_params_403: DescribeInstanceCreditSpecificationsInputDict = {}
+_params_404: DescribeInstanceEventNotificationAttributesInputDict = {}
+_params_405: DescribeInstanceEventWindowsInputDict = {}
+_params_406: DescribeInstanceImageMetadataInputDict = {}
+_params_407: DescribeInstancesInputDict = {}
+_params_408: DescribeInstanceSqlHaHistoryStatesInputDict = {}
+_params_409: DescribeInstanceSqlHaStatesInputDict = {}
+_params_410: DescribeInstanceStatusInputDict = {}
+_params_411: DescribeInstanceTopologyInputDict = {}
+_params_412: DescribeInstanceTypeOfferingsInputDict = {}
+_params_413: DescribeInstanceTypesInputDict = {}
+_params_414: DescribeInternetGatewaysInputDict = {}
+_params_415: DescribeIpamByoasnInputDict = {}
+_params_416: DescribeIpamExternalResourceVerificationTokensInputDict = {}
+_params_417: DescribeIpamInternetRegistryAssociationsInputDict = {}
+_params_418: DescribeIpamPoliciesInputDict = {}
+_params_419: DescribeIpamPoolAllocationsInputDict = {}
+_params_420: DescribeIpamPoolsInputDict = {}
+_params_421: DescribeIpamPrefixListResolversInputDict = {}
+_params_422: DescribeIpamPrefixListResolverTargetsInputDict = {}
+_params_423: DescribeIpamResourceDiscoveriesInputDict = {}
+_params_424: DescribeIpamResourceDiscoveryAssociationsInputDict = {}
+_params_425: DescribeIpamScopesInputDict = {}
+_params_426: DescribeIpamsInputDict = {}
+_params_427: DescribeIpv6PoolsInputDict = {}
+_params_428: DescribeKeyPairsInputDict = {}
+_params_429: DescribeLaunchTemplatesInputDict = {}
+_params_430: DescribeLaunchTemplateVersionsInputDict = {}
+_params_431: DescribeLocalGatewayRouteTablesInputDict = {}
+_params_432: DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsInputDict = {}
+_params_433: DescribeLocalGatewayRouteTableVpcAssociationsInputDict = {}
+_params_434: DescribeLocalGatewaysInputDict = {}
+_params_435: DescribeLocalGatewayVirtualInterfaceGroupsInputDict = {}
+_params_436: DescribeLocalGatewayVirtualInterfacesInputDict = {}
+_params_437: DescribeLockedSnapshotsInputDict = {}
+_params_438: DescribeMacHostsInputDict = {}
+_params_439: DescribeMacModificationTasksInputDict = {}
+_params_440: DescribeManagedPrefixListsInputDict = {}
+_params_441: DescribeMovingAddressesInputDict = {}
+_params_442: DescribeNatGatewaysInputDict = {}
+_params_443: DescribeNetworkAclsInputDict = {}
+_params_444: DescribeNetworkInsightsAccessScopeAnalysesInputDict = {}
+_params_445: DescribeNetworkInsightsAccessScopesInputDict = {}
+_params_446: DescribeNetworkInsightsAnalysesInputDict = {}
+_params_447: DescribeNetworkInsightsPathsInputDict = {}
+_params_448: DescribeNetworkInterfaceAttributeInputDict = {"network_interface_id": _}
+_params_449: DescribeNetworkInterfacePermissionsInputDict = {}
+_params_450: DescribeNetworkInterfacesInputDict = {}
+_params_451: DescribeOutpostLagsInputDict = {}
+_params_452: DescribePlacementGroupsInputDict = {}
+_params_453: DescribePrefixListsInputDict = {}
+_params_454: DescribePrincipalIdFormatInputDict = {}
+_params_455: DescribePublicIpv4PoolsInputDict = {}
+_params_456: DescribeRegionsInputDict = {}
+_params_457: DescribeReplaceRootVolumeTasksInputDict = {}
+_params_458: DescribeReservedInstancesInputDict = {}
+_params_459: DescribeReservedInstancesListingsInputDict = {}
+_params_460: DescribeReservedInstancesModificationsInputDict = {}
+_params_461: DescribeReservedInstancesOfferingsInputDict = {}
+_params_462: DescribeRouteServerEndpointsInputDict = {}
+_params_463: DescribeRouteServerPeersInputDict = {}
+_params_464: DescribeRouteServersInputDict = {}
+_params_465: DescribeRouteTablesInputDict = {}
+_params_466: DescribeScheduledInstanceAvailabilityInputDict = {
+    "first_slot_start_time_range": _,
+    "recurrence": _,
+}
+_params_467: DescribeScheduledInstancesInputDict = {}
+_params_468: DescribeSecondaryInterfacesInputDict = {}
+_params_469: DescribeSecondaryNetworksInputDict = {}
+_params_470: DescribeSecondarySubnetsInputDict = {}
+_params_471: DescribeSecurityGroupReferencesInputDict = {"group_id": _}
+_params_472: DescribeSecurityGroupRulesInputDict = {}
+_params_473: DescribeSecurityGroupsInputDict = {}
+_params_474: DescribeSecurityGroupVpcAssociationsInputDict = {}
+_params_475: DescribeServiceLinkVirtualInterfacesInputDict = {}
+_params_476: DescribeSnapshotAttributeInputDict = {"attribute": _, "snapshot_id": _}
+_params_477: DescribeSnapshotsInputDict = {}
+_params_478: DescribeSnapshotTierStatusInputDict = {}
+_params_479: DescribeSpotDatafeedSubscriptionInputDict = {}
+_params_480: DescribeSpotFleetInstancesInputDict = {"spot_fleet_request_id": _}
+_params_481: DescribeSpotFleetRequestHistoryInputDict = {
+    "spot_fleet_request_id": _,
+    "start_time": _,
+}
+_params_482: DescribeSpotFleetRequestsInputDict = {}
+_params_483: DescribeSpotInstanceRequestsInputDict = {}
+_params_484: DescribeSpotPriceHistoryInputDict = {}
+_params_485: DescribeStaleSecurityGroupsInputDict = {"vpc_id": _}
+_params_486: DescribeStoreImageTasksInputDict = {}
+_params_487: DescribeSubnetsInputDict = {}
+_params_488: DescribeTagsInputDict = {}
+_params_489: DescribeTrafficMirrorFilterRulesInputDict = {}
+_params_490: DescribeTrafficMirrorFiltersInputDict = {}
+_params_491: DescribeTrafficMirrorSessionsInputDict = {}
+_params_492: DescribeTrafficMirrorTargetsInputDict = {}
+_params_493: DescribeTransitGatewayAttachmentsInputDict = {}
+_params_494: DescribeTransitGatewayConnectPeersInputDict = {}
+_params_495: DescribeTransitGatewayConnectsInputDict = {}
+_params_496: DescribeTransitGatewayMeteringPoliciesInputDict = {}
+_params_497: DescribeTransitGatewayMulticastDomainsInputDict = {}
+_params_498: DescribeTransitGatewayPeeringAttachmentsInputDict = {}
+_params_499: DescribeTransitGatewayPolicyTablesInputDict = {}
+_params_500: DescribeTransitGatewayRouteTableAnnouncementsInputDict = {}
+_params_501: DescribeTransitGatewayRouteTablesInputDict = {}
+_params_502: DescribeTransitGatewaysInputDict = {}
+_params_503: DescribeTransitGatewayVpcAttachmentsInputDict = {}
+_params_504: DescribeTrunkInterfaceAssociationsInputDict = {}
+_params_505: DescribeVerifiedAccessEndpointsInputDict = {}
+_params_506: DescribeVerifiedAccessGroupsInputDict = {}
+_params_507: DescribeVerifiedAccessInstanceLoggingConfigurationsInputDict = {}
+_params_508: DescribeVerifiedAccessInstancesInputDict = {}
+_params_509: DescribeVerifiedAccessTrustProvidersInputDict = {}
+_params_510: DescribeVolumeAttributeInputDict = {"attribute": _, "volume_id": _}
+_params_511: DescribeVolumesInputDict = {}
+_params_512: DescribeVolumesModificationsInputDict = {}
+_params_513: DescribeVolumeStatusInputDict = {}
+_params_514: DescribeVpcAttributeInputDict = {"attribute": _, "vpc_id": _}
+_params_515: DescribeVpcBlockPublicAccessExclusionsInputDict = {}
+_params_516: DescribeVpcBlockPublicAccessOptionsInputDict = {}
+_params_517: DescribeVpcClassicLinkDnsSupportInputDict = {}
+_params_518: DescribeVpcClassicLinkInputDict = {}
+_params_519: DescribeVpcEncryptionControlsInputDict = {}
+_params_520: DescribeVpcEndpointAssociationsInputDict = {}
+_params_521: DescribeVpcEndpointConnectionNotificationsInputDict = {}
+_params_522: DescribeVpcEndpointConnectionsInputDict = {}
+_params_523: DescribeVpcEndpointServiceConfigurationsInputDict = {}
+_params_524: DescribeVpcEndpointServicePermissionsInputDict = {"service_id": _}
+_params_525: DescribeVpcEndpointServicesInputDict = {}
+_params_526: DescribeVpcEndpointsInputDict = {}
+_params_527: DescribeVpcPeeringConnectionsInputDict = {}
+_params_528: DescribeVpcsInputDict = {}
+_params_529: DescribeVpnConcentratorsInputDict = {}
+_params_530: DescribeVpnConnectionsInputDict = {}
+_params_531: DescribeVpnGatewaysInputDict = {}
+_params_532: DestinationOptionsRequestDict = {}
+_params_533: DetachClassicLinkVpcInputDict = {"instance_id": _, "vpc_id": _}
+_params_534: DetachImageWatermarkInputDict = {"image_id": _, "watermark_key": _}
+_params_535: DetachInternetGatewayInputDict = {"internet_gateway_id": _, "vpc_id": _}
+_params_536: DetachNetworkInterfaceInputDict = {"attachment_id": _}
+_params_537: DetachVerifiedAccessTrustProviderInputDict = {
+    "verified_access_instance_id": _,
+    "verified_access_trust_provider_id": _,
+}
+_params_538: DetachVolumeInputDict = {"volume_id": _}
+_params_539: DetachVpnGatewayInputDict = {"vpc_id": _, "vpn_gateway_id": _}
+_params_540: DevicePostureOptionsDict = {}
+_params_541: DimensionConditionDict = {}
+_params_542: DirectoryServiceAuthenticationRequestDict = {}
+_params_543: DisableAddressTransferInputDict = {"allocation_id": _}
+_params_544: DisableAllowedImagesSettingsInputDict = {}
+_params_545: DisableApplicationStatusCheckSuppressionInputDict = {}
+_params_546: DisableAwsNetworkPerformanceMetricSubscriptionInputDict = {}
+_params_547: DisableCapacityManagerInputDict = {}
+_params_548: DisableEbsEncryptionByDefaultInputDict = {}
+_params_549: DisableFastLaunchInputDict = {"image_id": _}
+_params_550: DisableFastSnapshotRestoresInputDict = {"source_snapshot_ids": _}
+_params_551: DisableImageBlockPublicAccessInputDict = {}
+_params_552: DisableImageDeprecationInputDict = {"image_id": _}
+_params_553: DisableImageDeregistrationProtectionInputDict = {"image_id": _}
+_params_554: DisableImageInputDict = {"image_id": _}
+_params_555: DisableInstanceSqlHaStandbyDetectionsInputDict = {"instance_ids": _}
+_params_556: DisableIpamOrganizationAdminAccountInputDict = {
+    "delegated_admin_account_id": _
+}
+_params_557: DisableIpamPolicyInputDict = {"ipam_policy_id": _}
+_params_558: DisableRouteServerPropagationInputDict = {
+    "route_server_id": _,
+    "route_table_id": _,
+}
+_params_559: DisableSerialConsoleAccessInputDict = {}
+_params_560: DisableSnapshotBlockPublicAccessInputDict = {}
+_params_561: DisableTransitGatewayRouteTablePropagationInputDict = {
+    "transit_gateway_route_table_id": _
+}
+_params_562: DisableVgwRoutePropagationInputDict = {
+    "gateway_id": _,
+    "route_table_id": _,
+}
+_params_563: DisableVpcClassicLinkDnsSupportInputDict = {}
+_params_564: DisableVpcClassicLinkInputDict = {"vpc_id": _}
+_params_565: DisassociateAddressInputDict = {}
+_params_566: DisassociateApplicationStatusCheckInputDict = {
+    "application_status_check_id": _
+}
+_params_567: DisassociateCapacityReservationBillingOwnerInputDict = {
+    "capacity_reservation_id": _,
+    "unused_reservation_billing_owner_id": _,
+}
+_params_568: DisassociateClientVpnTargetNetworkInputDict = {
+    "client_vpn_endpoint_id": _,
+    "association_id": _,
+}
+_params_569: DisassociateEnclaveCertificateIamRoleInputDict = {
+    "certificate_arn": _,
+    "role_arn": _,
+}
+_params_570: DisassociateIamInstanceProfileInputDict = {"association_id": _}
+_params_571: DisassociateInstanceEventWindowInputDict = {
+    "instance_event_window_id": _,
+    "association_target": _,
+}
+_params_572: DisassociateIpamByoasnInputDict = {"asn": _, "cidr": _}
+_params_573: DisassociateIpamResourceDiscoveryInputDict = {
+    "ipam_resource_discovery_association_id": _
+}
+_params_574: DisassociateNatGatewayAddressInputDict = {
+    "nat_gateway_id": _,
+    "association_ids": _,
+}
+_params_575: DisassociateRouteServerInputDict = {"route_server_id": _, "vpc_id": _}
+_params_576: DisassociateRouteTableInputDict = {"association_id": _}
+_params_577: DisassociateSecurityGroupVpcInputDict = {"group_id": _, "vpc_id": _}
+_params_578: DisassociateSubnetCidrBlockInputDict = {"association_id": _}
+_params_579: DisassociateTransitGatewayMulticastDomainInputDict = {
+    "transit_gateway_multicast_domain_id": _,
+    "transit_gateway_attachment_id": _,
+    "subnet_ids": _,
+}
+_params_580: DisassociateTransitGatewayPolicyTableInputDict = {
+    "transit_gateway_policy_table_id": _,
+    "transit_gateway_attachment_id": _,
+}
+_params_581: DisassociateTransitGatewayRouteTableInputDict = {
+    "transit_gateway_route_table_id": _,
+    "transit_gateway_attachment_id": _,
+}
+_params_582: DisassociateTrunkInterfaceInputDict = {"association_id": _}
+_params_583: DisassociateVpcCidrBlockInputDict = {"association_id": _}
+_params_584: DiskImageDict = {}
+_params_585: DiskImageDetailDict = {"format": _, "bytes_": _, "import_manifest_url": _}
+_params_586: DnsOptionsSpecificationDict = {}
+_params_587: DnsServersOptionsModifyStructureDict = {}
+_params_588: EbsBlockDeviceDict = {}
+_params_589: EbsInstanceBlockDeviceSpecificationDict = {}
+_params_590: ElasticGpuSpecificationDict = {"type": _}
+_params_591: ElasticInferenceAcceleratorDict = {"type": _}
+_params_592: EnableAddressTransferInputDict = {
+    "allocation_id": _,
+    "transfer_account_id": _,
+}
+_params_593: EnableAllowedImagesSettingsInputDict = {"allowed_images_settings_state": _}
+_params_594: EnableApplicationStatusCheckSuppressionInputDict = {}
+_params_595: EnableAwsNetworkPerformanceMetricSubscriptionInputDict = {}
+_params_596: EnableCapacityManagerInputDict = {}
+_params_597: EnableEbsEncryptionByDefaultInputDict = {}
+_params_598: EnableFastLaunchInputDict = {"image_id": _}
+_params_599: EnableFastSnapshotRestoresInputDict = {"source_snapshot_ids": _}
+_params_600: EnableImageBlockPublicAccessInputDict = {
+    "image_block_public_access_state": _
+}
+_params_601: EnableImageDeprecationInputDict = {"image_id": _, "deprecate_at": _}
+_params_602: EnableImageDeregistrationProtectionInputDict = {"image_id": _}
+_params_603: EnableImageInputDict = {"image_id": _}
+_params_604: EnableInstanceSqlHaStandbyDetectionsInputDict = {"instance_ids": _}
+_params_605: EnableIpamInternetRegistryAssociationInputDict = {
+    "ipam_internet_registry_association_id": _,
+    "rpki_version": _,
+    "service_uri": _,
+    "child_handle": _,
+    "parent_handle": _,
+    "parent_bpki_ta": _,
+}
+_params_606: EnableIpamOrganizationAdminAccountInputDict = {
+    "delegated_admin_account_id": _
+}
+_params_607: EnableIpamPolicyInputDict = {"ipam_policy_id": _}
+_params_608: EnableReachabilityAnalyzerOrganizationSharingInputDict = {}
+_params_609: EnableRouteServerPropagationInputDict = {
+    "route_server_id": _,
+    "route_table_id": _,
+}
+_params_610: EnableSerialConsoleAccessInputDict = {}
+_params_611: EnableSnapshotBlockPublicAccessInputDict = {"state": _}
+_params_612: EnableTransitGatewayRouteTablePropagationInputDict = {
+    "transit_gateway_route_table_id": _
+}
+_params_613: EnableVgwRoutePropagationInputDict = {"gateway_id": _, "route_table_id": _}
+_params_614: EnableVolumeIOInputDict = {"volume_id": _}
+_params_615: EnableVpcClassicLinkDnsSupportInputDict = {}
+_params_616: EnableVpcClassicLinkInputDict = {"vpc_id": _}
+_params_617: EnaSrdSpecificationDict = {}
+_params_618: EnaSrdSpecificationRequestDict = {}
+_params_619: EnaSrdUdpSpecificationDict = {}
+_params_620: EnaSrdUdpSpecificationRequestDict = {}
+_params_621: EnclaveOptionsRequestDict = {}
+_params_622: ExportClientVpnClientCertificateRevocationListInputDict = {
+    "client_vpn_endpoint_id": _
+}
+_params_623: ExportClientVpnClientConfigurationInputDict = {"client_vpn_endpoint_id": _}
+_params_624: ExportImageInputDict = {
+    "disk_image_format": _,
+    "image_id": _,
+    "s3_export_location": _,
+}
+_params_625: ExportTaskS3LocationRequestDict = {"s3_bucket": _}
+_params_626: ExportToS3TaskSpecificationDict = {}
+_params_627: ExportTransitGatewayRoutesInputDict = {
+    "transit_gateway_route_table_id": _,
+    "s3_bucket": _,
+}
+_params_628: ExportVerifiedAccessInstanceClientConfigurationInputDict = {
+    "verified_access_instance_id": _
+}
+_params_629: ExternalAuthorityConfigurationDict = {}
+_params_630: FastLaunchLaunchTemplateSpecificationRequestDict = {"version": _}
+_params_631: FastLaunchSnapshotConfigurationRequestDict = {}
+_params_632: FederatedAuthenticationRequestDict = {}
+_params_633: FilterDict = {}
+_params_634: FleetBlockDeviceMappingRequestDict = {}
+_params_635: FleetCapacityReservationTargetRequestDict = {}
+_params_636: FleetEbsBlockDeviceRequestDict = {}
+_params_637: FleetIamInstanceProfileSpecificationRequestDict = {}
+_params_638: FleetInstanceMetadataOptionsRequestDict = {}
+_params_639: FleetLaunchTemplateConfigRequestDict = {}
+_params_640: FleetLaunchTemplateOverridesRequestDict = {}
+_params_641: FleetLaunchTemplateSpecificationDict = {}
+_params_642: FleetLaunchTemplateSpecificationRequestDict = {}
+_params_643: FleetSpotCapacityRebalanceRequestDict = {}
+_params_644: FleetSpotMaintenanceStrategiesRequestDict = {}
+_params_645: GetActiveVpnTunnelStatusInputDict = {
+    "vpn_connection_id": _,
+    "vpn_tunnel_outside_ip_address": _,
+}
+_params_646: GetAllowedImagesSettingsInputDict = {}
+_params_647: GetAssociatedEnclaveCertificateIamRolesInputDict = {"certificate_arn": _}
+_params_648: GetAssociatedIpv6PoolCidrsInputDict = {"pool_id": _}
+_params_649: GetAwsNetworkPerformanceDataInputDict = {}
+_params_650: GetCapacityManagerAttributesInputDict = {}
+_params_651: GetCapacityManagerMetricDataInputDict = {
+    "metric_names": _,
+    "start_time": _,
+    "end_time": _,
+    "period": _,
+}
+_params_652: GetCapacityManagerMetricDimensionsInputDict = {
+    "group_by": _,
+    "start_time": _,
+    "end_time": _,
+    "metric_names": _,
+}
+_params_653: GetCapacityManagerMonitoredTagKeysInputDict = {}
+_params_654: GetCapacityManagerSupportabilityScoresInputDict = {
+    "market_type": _,
+    "capacity_amount": _,
+    "capacity_unit": _,
+    "capacity_availability_zone_ids": _,
+}
+_params_655: GetCapacityReservationUsageInputDict = {"capacity_reservation_id": _}
+_params_656: GetClientVpnEndpointAuthorizationPolicyInputDict = {
+    "client_vpn_endpoint_id": _
+}
+_params_657: GetCoipPoolUsageInputDict = {"pool_id": _}
+_params_658: GetConsoleOutputInputDict = {"instance_id": _}
+_params_659: GetConsoleScreenshotInputDict = {"instance_id": _}
+_params_660: GetDeclarativePoliciesReportSummaryInputDict = {"report_id": _}
+_params_661: GetDefaultCreditSpecificationInputDict = {"instance_family": _}
+_params_662: GetEbsDefaultKmsKeyIdInputDict = {}
+_params_663: GetEbsEncryptionByDefaultInputDict = {}
+_params_664: GetEnabledIpamPolicyInputDict = {}
+_params_665: GetFlowLogsIntegrationTemplateInputDict = {
+    "flow_log_id": _,
+    "config_delivery_s3_destination_arn": _,
+    "integrate_services": _,
+}
+_params_666: GetGroupsForCapacityReservationInputDict = {"capacity_reservation_id": _}
+_params_667: GetHostReservationPurchasePreviewInputDict = {
+    "host_id_set": _,
+    "offering_id": _,
+}
+_params_668: GetImageAncestryInputDict = {"image_id": _}
+_params_669: GetImageBlockPublicAccessStateInputDict = {}
+_params_670: GetImageFindingsInputDict = {"image_id": _}
+_params_671: GetInstanceMetadataDefaultsInputDict = {}
+_params_672: GetInstanceTpmEkPubInputDict = {
+    "instance_id": _,
+    "key_type": _,
+    "key_format": _,
+}
+_params_673: GetInstanceTypesFromInstanceRequirementsInputDict = {
+    "architecture_types": _,
+    "virtualization_types": _,
+    "instance_requirements": _,
+}
+_params_674: GetInstanceUefiDataInputDict = {"instance_id": _}
+_params_675: GetIpamAddressHistoryInputDict = {"cidr": _, "ipam_scope_id": _}
+_params_676: GetIpamDiscoveredAccountsInputDict = {
+    "ipam_resource_discovery_id": _,
+    "discovery_region": _,
+}
+_params_677: GetIpamDiscoveredPublicAddressesInputDict = {
+    "ipam_resource_discovery_id": _,
+    "address_region": _,
+}
+_params_678: GetIpamDiscoveredResourceCidrsInputDict = {
+    "ipam_resource_discovery_id": _,
+    "resource_region": _,
+}
+_params_679: GetIpamDiscoveredRoutesInputDict = {
+    "ipam_resource_discovery_id": _,
+    "resource_region": _,
+}
+_params_680: GetIpamInternetRegistryAssociationAsnsInputDict = {
+    "ipam_internet_registry_association_id": _
+}
+_params_681: GetIpamInternetRegistryAssociationCidrsInputDict = {
+    "ipam_internet_registry_association_id": _
+}
+_params_682: GetIpamPolicyAllocationRulesInputDict = {"ipam_policy_id": _}
+_params_683: GetIpamPolicyOrganizationTargetsInputDict = {"ipam_policy_id": _}
+_params_684: GetIpamPoolAllocationsInputDict = {"ipam_pool_id": _}
+_params_685: GetIpamPoolCidrsInputDict = {"ipam_pool_id": _}
+_params_686: GetIpamPrefixListResolverRulesInputDict = {
+    "ipam_prefix_list_resolver_id": _
+}
+_params_687: GetIpamPrefixListResolverVersionEntriesInputDict = {
+    "ipam_prefix_list_resolver_id": _,
+    "ipam_prefix_list_resolver_version": _,
+}
+_params_688: GetIpamPrefixListResolverVersionsInputDict = {
+    "ipam_prefix_list_resolver_id": _
+}
+_params_689: GetIpamResourceCidrsInputDict = {"ipam_scope_id": _}
+_params_690: GetIpamRouteOriginAuthorizationsInputDict = {
+    "ipam_internet_registry_association_id": _
+}
+_params_691: GetIpamRouteProtectionFindingsInputDict = {"ipam_id": _}
+_params_692: GetIpamRoutingPolicyRegistrationDeltasInputDict = {
+    "ipam_internet_registry_association_id": _
+}
+_params_693: GetIpamRoutingPolicyRegistrationsInputDict = {
+    "ipam_internet_registry_association_id": _
+}
+_params_694: GetLaunchTemplateDataInputDict = {"instance_id": _}
+_params_695: GetManagedPrefixListAssociationsInputDict = {"prefix_list_id": _}
+_params_696: GetManagedPrefixListEntriesInputDict = {"prefix_list_id": _}
+_params_697: GetManagedResourceVisibilityInputDict = {}
+_params_698: GetNetworkInsightsAccessScopeAnalysisFindingsInputDict = {
+    "network_insights_access_scope_analysis_id": _
+}
+_params_699: GetNetworkInsightsAccessScopeContentInputDict = {
+    "network_insights_access_scope_id": _
+}
+_params_700: GetPasswordDataInputDict = {"instance_id": _}
+_params_701: GetReservedInstancesExchangeQuoteInputDict = {"reserved_instance_ids": _}
+_params_702: GetRouteServerAssociationsInputDict = {"route_server_id": _}
+_params_703: GetRouteServerPropagationsInputDict = {"route_server_id": _}
+_params_704: GetRouteServerRoutingDatabaseInputDict = {"route_server_id": _}
+_params_705: GetSecurityGroupsForVpcInputDict = {"vpc_id": _}
+_params_706: GetSerialConsoleAccessStatusInputDict = {}
+_params_707: GetSnapshotBlockPublicAccessStateInputDict = {}
+_params_708: GetSpotPlacementScoresInputDict = {"target_capacity": _}
+_params_709: GetSubnetCidrReservationsInputDict = {"subnet_id": _}
+_params_710: GetTransitGatewayAttachmentNatConfigurationInputDict = {
+    "transit_gateway_attachment_id": _
+}
+_params_711: GetTransitGatewayAttachmentPropagationsInputDict = {
+    "transit_gateway_attachment_id": _
+}
+_params_712: GetTransitGatewayMeteringPolicyEntriesInputDict = {
+    "transit_gateway_metering_policy_id": _
+}
+_params_713: GetTransitGatewayMulticastDomainAssociationsInputDict = {
+    "transit_gateway_multicast_domain_id": _
+}
+_params_714: GetTransitGatewayPolicyTableAssociationsInputDict = {
+    "transit_gateway_policy_table_id": _
+}
+_params_715: GetTransitGatewayPolicyTableEntriesInputDict = {
+    "transit_gateway_policy_table_id": _
+}
+_params_716: GetTransitGatewayPrefixListReferencesInputDict = {
+    "transit_gateway_route_table_id": _
+}
+_params_717: GetTransitGatewayRouteTableAssociationsInputDict = {
+    "transit_gateway_route_table_id": _
+}
+_params_718: GetTransitGatewayRouteTablePropagationsInputDict = {
+    "transit_gateway_route_table_id": _
+}
+_params_719: GetVerifiedAccessEndpointPolicyInputDict = {
+    "verified_access_endpoint_id": _
+}
+_params_720: GetVerifiedAccessEndpointTargetsInputDict = {
+    "verified_access_endpoint_id": _
+}
+_params_721: GetVerifiedAccessGroupPolicyInputDict = {"verified_access_group_id": _}
+_params_722: GetVpcResourcesBlockingEncryptionEnforcementInputDict = {"vpc_id": _}
+_params_723: GetVpnConnectionDeviceSampleConfigurationInputDict = {
+    "vpn_connection_id": _,
+    "vpn_connection_device_type_id": _,
+}
+_params_724: GetVpnConnectionDeviceTypesInputDict = {}
+_params_725: GetVpnTunnelReplacementStatusInputDict = {
+    "vpn_connection_id": _,
+    "vpn_tunnel_outside_ip_address": _,
+}
+_params_726: GroupIdentifierDict = {}
+_params_727: HealthCheckPathDestinationRequestObjectDict = {}
+_params_728: HealthCheckPathRequestObjectDict = {}
+_params_729: HealthCheckPathSourceRequestObjectDict = {}
+_params_730: HibernationOptionsRequestDict = {}
+_params_731: HostCpuOptionsRequestDict = {}
+_params_732: IamInstanceProfileSpecificationDict = {}
+_params_733: IcmpTypeCodeDict = {}
+_params_734: IKEVersionsRequestListValueDict = {}
+_params_735: ImageCriterionRequestDict = {}
+_params_736: ImageDiskContainerDict = {}
+_params_737: ImageUsageResourceTypeOptionRequestDict = {}
+_params_738: ImageUsageResourceTypeRequestDict = {}
+_params_739: ImageWatermarkFilterRequestDict = {}
+_params_740: ImportClientVpnClientCertificateRevocationListInputDict = {
+    "client_vpn_endpoint_id": _,
+    "certificate_revocation_list": _,
+}
+_params_741: ImportImageInputDict = {}
+_params_742: ImportImageLicenseConfigurationRequestDict = {}
+_params_743: ImportInstanceInputDict = {"platform": _}
+_params_744: ImportInstanceLaunchSpecificationDict = {}
+_params_745: ImportKeyPairInputDict = {"key_name": _, "public_key_material": _}
+_params_746: ImportSnapshotInputDict = {}
+_params_747: ImportVolumeInputDict = {"image": _, "volume": _}
+_params_748: InstanceBlockDeviceMappingSpecificationDict = {}
+_params_749: InstanceCreditSpecificationRequestDict = {"instance_id": _}
+_params_750: InstanceEventWindowAssociationRequestDict = {}
+_params_751: InstanceEventWindowDisassociationRequestDict = {}
+_params_752: InstanceEventWindowTimeRangeRequestDict = {}
+_params_753: InstanceIpv6AddressDict = {}
+_params_754: InstanceIpv6AddressRequestDict = {}
+_params_755: InstanceMaintenanceOptionsRequestDict = {}
+_params_756: InstanceMarketOptionsRequestDict = {}
+_params_757: InstanceMetadataOptionsRequestDict = {}
+_params_758: InstanceNetworkInterfaceSpecificationDict = {}
+_params_759: InstanceNetworkPerformanceOptionsRequestDict = {}
+_params_760: InstanceRequirementsDict = {}
+_params_761: InstanceRequirementsRequestDict = {"v_cpu_count": _, "memory_mi_b": _}
+_params_762: InstanceRequirementsWithMetadataRequestDict = {}
+_params_763: InstanceSecondaryInterfacePrivateIpAddressRequestDict = {
+    "private_ip_address": _
+}
+_params_764: InstanceSecondaryInterfaceSpecificationRequestDict = {}
+_params_765: InstanceSpecificationDict = {"instance_id": _}
+_params_766: InstanceTypeSpecificationRequestDict = {}
+_params_767: IntegrateServicesDict = {}
+_params_768: IpamCidrAuthorizationContextDict = {}
+_params_769: IpamPolicyAllocationRuleRequestDict = {}
+_params_770: IpamPoolSourceResourceRequestDict = {}
+_params_771: IpamPrefixListResolverRuleConditionRequestDict = {"operation": _}
+_params_772: IpamPrefixListResolverRuleRequestDict = {"rule_type": _}
+_params_773: IpPermissionDict = {}
+_params_774: IpRangeDict = {}
+_params_775: Ipv4PrefixSpecificationRequestDict = {}
+_params_776: Ipv6PrefixSpecificationRequestDict = {}
+_params_777: Ipv6RangeDict = {}
+_params_778: LaunchPermissionDict = {}
+_params_779: LaunchPermissionModificationsDict = {}
+_params_780: LaunchTemplateBlockDeviceMappingRequestDict = {}
+_params_781: LaunchTemplateCapacityReservationSpecificationRequestDict = {}
+_params_782: LaunchTemplateConfigDict = {}
+_params_783: LaunchTemplateCpuOptionsRequestDict = {}
+_params_784: LaunchTemplateEbsBlockDeviceRequestDict = {}
+_params_785: LaunchTemplateElasticInferenceAcceleratorDict = {"type": _}
+_params_786: LaunchTemplateEnclaveOptionsRequestDict = {}
+_params_787: LaunchTemplateHibernationOptionsRequestDict = {}
+_params_788: LaunchTemplateIamInstanceProfileSpecificationRequestDict = {}
+_params_789: LaunchTemplateInstanceMaintenanceOptionsRequestDict = {}
+_params_790: LaunchTemplateInstanceMarketOptionsRequestDict = {}
+_params_791: LaunchTemplateInstanceMetadataOptionsRequestDict = {}
+_params_792: LaunchTemplateInstanceNetworkInterfaceSpecificationRequestDict = {}
+_params_793: LaunchTemplateInstanceSecondaryInterfaceSpecificationRequestDict = {}
+_params_794: LaunchTemplateLicenseConfigurationRequestDict = {}
+_params_795: LaunchTemplateNetworkPerformanceOptionsRequestDict = {}
+_params_796: LaunchTemplateOverridesDict = {}
+_params_797: LaunchTemplatePlacementRequestDict = {}
+_params_798: LaunchTemplatePrivateDnsNameOptionsRequestDict = {}
+_params_799: LaunchTemplatesMonitoringRequestDict = {}
+_params_800: LaunchTemplateSpecificationDict = {}
+_params_801: LaunchTemplateSpotMarketOptionsRequestDict = {}
+_params_802: LaunchTemplateTagSpecificationRequestDict = {}
+_params_803: LicenseConfigurationRequestDict = {}
+_params_804: ListImagesInRecycleBinInputDict = {}
+_params_805: ListSnapshotsInRecycleBinInputDict = {}
+_params_806: ListVolumesInRecycleBinInputDict = {}
+_params_807: LoadBalancersConfigDict = {}
+_params_808: LoadPermissionModificationsDict = {}
+_params_809: LoadPermissionRequestDict = {}
+_params_810: LockSnapshotInputDict = {"snapshot_id": _, "lock_mode": _}
+_params_811: MacSystemIntegrityProtectionConfigurationRequestDict = {}
+_params_812: MemoryGiBPerVCpuDict = {}
+_params_813: MemoryGiBPerVCpuRequestDict = {}
+_params_814: MemoryMiBDict = {}
+_params_815: MemoryMiBRequestDict = {"min": _}
+_params_816: ModifyAccountVpcEncryptionControlInputDict = {}
+_params_817: ModifyAddressAttributeInputDict = {"allocation_id": _}
+_params_818: ModifyApplicationStatusCheckInputDict = {"application_status_check_id": _}
+_params_819: ModifyAvailabilityZoneGroupInputDict = {
+    "group_name": _,
+    "opt_in_status": _,
+}
+_params_820: ModifyCapacityReservationFleetInputDict = {
+    "capacity_reservation_fleet_id": _
+}
+_params_821: ModifyCapacityReservationInputDict = {"capacity_reservation_id": _}
+_params_822: ModifyClientVpnEndpointAuthorizationPolicyInputDict = {
+    "client_vpn_endpoint_id": _
+}
+_params_823: ModifyClientVpnEndpointInputDict = {"client_vpn_endpoint_id": _}
+_params_824: ModifyDefaultCreditSpecificationInputDict = {
+    "instance_family": _,
+    "cpu_credits": _,
+}
+_params_825: ModifyEbsDefaultKmsKeyIdInputDict = {"kms_key_id": _}
+_params_826: ModifyFleetInputDict = {"fleet_id": _}
+_params_827: ModifyFpgaImageAttributeInputDict = {"fpga_image_id": _}
+_params_828: ModifyHostsInputDict = {"host_ids": _}
+_params_829: ModifyIdentityIdFormatInputDict = {
+    "resource": _,
+    "use_long_ids": _,
+    "principal_arn": _,
+}
+_params_830: ModifyIdFormatInputDict = {"resource": _, "use_long_ids": _}
+_params_831: ModifyImageAttributeInputDict = {"image_id": _}
+_params_832: ModifyInstanceAttributeInputDict = {"instance_id": _}
+_params_833: ModifyInstanceCapacityReservationAttributesInputDict = {
+    "instance_id": _,
+    "capacity_reservation_specification": _,
+}
+_params_834: ModifyInstanceConnectEndpointInputDict = {
+    "instance_connect_endpoint_id": _
+}
+_params_835: ModifyInstanceCpuOptionsInputDict = {"instance_id": _}
+_params_836: ModifyInstanceCreditSpecificationInputDict = {
+    "instance_credit_specifications": _
+}
+_params_837: ModifyInstanceEventStartTimeInputDict = {
+    "instance_id": _,
+    "instance_event_id": _,
+    "not_before": _,
+}
+_params_838: ModifyInstanceEventWindowInputDict = {"instance_event_window_id": _}
+_params_839: ModifyInstanceMaintenanceOptionsInputDict = {"instance_id": _}
+_params_840: ModifyInstanceMetadataDefaultsInputDict = {}
+_params_841: ModifyInstanceMetadataOptionsInputDict = {"instance_id": _}
+_params_842: ModifyInstanceNetworkPerformanceOptionsInputDict = {
+    "instance_id": _,
+    "bandwidth_weighting": _,
+}
+_params_843: ModifyInstancePlacementInputDict = {"instance_id": _}
+_params_844: ModifyIpamInputDict = {"ipam_id": _}
+_params_845: ModifyIpamPolicyAllocationRulesInputDict = {
+    "ipam_policy_id": _,
+    "locale": _,
+    "resource_type": _,
+}
+_params_846: ModifyIpamPoolAllocationInputDict = {"ipam_pool_allocation_id": _}
+_params_847: ModifyIpamPoolInputDict = {"ipam_pool_id": _}
+_params_848: ModifyIpamPrefixListResolverInputDict = {"ipam_prefix_list_resolver_id": _}
+_params_849: ModifyIpamPrefixListResolverTargetInputDict = {
+    "ipam_prefix_list_resolver_target_id": _
+}
+_params_850: ModifyIpamResourceCidrInputDict = {
+    "resource_id": _,
+    "resource_cidr": _,
+    "resource_region": _,
+    "current_ipam_scope_id": _,
+    "monitored": _,
+}
+_params_851: ModifyIpamResourceDiscoveryInputDict = {"ipam_resource_discovery_id": _}
+_params_852: ModifyIpamRoutingPolicyRegistrationInputDict = {
+    "ipam_internet_registry_association_id": _,
+    "cidr": _,
+    "asns": _,
+}
+_params_853: ModifyIpamScopeInputDict = {"ipam_scope_id": _}
+_params_854: ModifyLaunchTemplateInputDict = {}
+_params_855: ModifyLocalGatewayRouteInputDict = {"local_gateway_route_table_id": _}
+_params_856: ModifyManagedPrefixListInputDict = {"prefix_list_id": _}
+_params_857: ModifyManagedResourceVisibilityInputDict = {"default_visibility": _}
+_params_858: ModifyNetworkInterfaceAttributeInputDict = {"network_interface_id": _}
+_params_859: ModifyPrivateDnsNameOptionsInputDict = {"instance_id": _}
+_params_860: ModifyPublicIpDnsNameOptionsInputDict = {
+    "network_interface_id": _,
+    "hostname_type": _,
+}
+_params_861: ModifyReservedInstancesInputDict = {
+    "reserved_instances_ids": _,
+    "target_configurations": _,
+}
+_params_862: ModifyRouteServerInputDict = {"route_server_id": _}
+_params_863: ModifySecurityGroupRulesInputDict = {
+    "group_id": _,
+    "security_group_rules": _,
+}
+_params_864: ModifySnapshotAttributeInputDict = {"snapshot_id": _}
+_params_865: ModifySnapshotTierInputDict = {"snapshot_id": _}
+_params_866: ModifySpotFleetRequestInputDict = {"spot_fleet_request_id": _}
+_params_867: ModifySubnetAttributeInputDict = {"subnet_id": _}
+_params_868: ModifyTrafficMirrorFilterNetworkServicesInputDict = {
+    "traffic_mirror_filter_id": _
+}
+_params_869: ModifyTrafficMirrorFilterRuleInputDict = {
+    "traffic_mirror_filter_rule_id": _
+}
+_params_870: ModifyTrafficMirrorSessionInputDict = {"traffic_mirror_session_id": _}
+_params_871: ModifyTransitGatewayAttachmentNatConfigurationInputDict = {
+    "transit_gateway_attachment_id": _
+}
+_params_872: ModifyTransitGatewayInputDict = {"transit_gateway_id": _}
+_params_873: ModifyTransitGatewayMeteringPolicyInputDict = {
+    "transit_gateway_metering_policy_id": _
+}
+_params_874: ModifyTransitGatewayOptionsDict = {}
+_params_875: ModifyTransitGatewayPolicyTableEntryInputDict = {
+    "transit_gateway_policy_table_id": _,
+    "policy_rule_number": _,
+}
+_params_876: ModifyTransitGatewayPrefixListReferenceInputDict = {
+    "transit_gateway_route_table_id": _,
+    "prefix_list_id": _,
+}
+_params_877: ModifyTransitGatewayVpcAttachmentInputDict = {
+    "transit_gateway_attachment_id": _
+}
+_params_878: ModifyTransitGatewayVpcAttachmentRequestOptionsDict = {}
+_params_879: ModifyVerifiedAccessEndpointCidrOptionsDict = {}
+_params_880: ModifyVerifiedAccessEndpointEniOptionsDict = {}
+_params_881: ModifyVerifiedAccessEndpointInputDict = {"verified_access_endpoint_id": _}
+_params_882: ModifyVerifiedAccessEndpointLoadBalancerOptionsDict = {}
+_params_883: ModifyVerifiedAccessEndpointPolicyInputDict = {
+    "verified_access_endpoint_id": _
+}
+_params_884: ModifyVerifiedAccessEndpointPortRangeDict = {}
+_params_885: ModifyVerifiedAccessEndpointRdsOptionsDict = {}
+_params_886: ModifyVerifiedAccessGroupInputDict = {"verified_access_group_id": _}
+_params_887: ModifyVerifiedAccessGroupPolicyInputDict = {"verified_access_group_id": _}
+_params_888: ModifyVerifiedAccessInstanceInputDict = {"verified_access_instance_id": _}
+_params_889: ModifyVerifiedAccessInstanceLoggingConfigurationInputDict = {
+    "verified_access_instance_id": _,
+    "access_logs": _,
+}
+_params_890: ModifyVerifiedAccessNativeApplicationOidcOptionsDict = {}
+_params_891: ModifyVerifiedAccessTrustProviderDeviceOptionsDict = {}
+_params_892: ModifyVerifiedAccessTrustProviderInputDict = {
+    "verified_access_trust_provider_id": _
+}
+_params_893: ModifyVerifiedAccessTrustProviderOidcOptionsDict = {}
+_params_894: ModifyVolumeAttributeInputDict = {"volume_id": _}
+_params_895: ModifyVolumeInputDict = {"volume_id": _}
+_params_896: ModifyVpcAttributeInputDict = {"vpc_id": _}
+_params_897: ModifyVpcBlockPublicAccessExclusionInputDict = {
+    "exclusion_id": _,
+    "internet_gateway_exclusion_mode": _,
+}
+_params_898: ModifyVpcBlockPublicAccessOptionsInputDict = {
+    "internet_gateway_block_mode": _
+}
+_params_899: ModifyVpcEncryptionControlInputDict = {"vpc_encryption_control_id": _}
+_params_900: ModifyVpcEndpointConnectionNotificationInputDict = {
+    "connection_notification_id": _
+}
+_params_901: ModifyVpcEndpointInputDict = {"vpc_endpoint_id": _}
+_params_902: ModifyVpcEndpointPayerResponsibilityInputDict = {
+    "vpc_endpoint_id": _,
+    "payer_responsibility": _,
+    "scope": _,
+}
+_params_903: ModifyVpcEndpointServiceConfigurationInputDict = {"service_id": _}
+_params_904: ModifyVpcEndpointServicePayerResponsibilityInputDict = {
+    "service_id": _,
+    "payer_responsibility": _,
+}
+_params_905: ModifyVpcEndpointServicePermissionsInputDict = {"service_id": _}
+_params_906: ModifyVpcPeeringConnectionOptionsInputDict = {
+    "vpc_peering_connection_id": _
+}
+_params_907: ModifyVpcTenancyInputDict = {"vpc_id": _, "instance_tenancy": _}
+_params_908: ModifyVpnConnectionInputDict = {"vpn_connection_id": _}
+_params_909: ModifyVpnConnectionOptionsInputDict = {"vpn_connection_id": _}
+_params_910: ModifyVpnTunnelCertificateInputDict = {
+    "vpn_connection_id": _,
+    "vpn_tunnel_outside_ip_address": _,
+}
+_params_911: ModifyVpnTunnelOptionsInputDict = {
+    "vpn_connection_id": _,
+    "vpn_tunnel_outside_ip_address": _,
+    "tunnel_options": _,
+}
+_params_912: ModifyVpnTunnelOptionsSpecificationDict = {}
+_params_913: MonitorInstancesInputDict = {"instance_ids": _}
+_params_914: MoveAddressToVpcInputDict = {"public_ip": _}
+_params_915: MoveByoipCidrToIpamInputDict = {
+    "cidr": _,
+    "ipam_pool_id": _,
+    "ipam_pool_owner": _,
+}
+_params_916: MoveCapacityReservationInstancesInputDict = {
+    "source_capacity_reservation_id": _,
+    "destination_capacity_reservation_id": _,
+    "instance_count": _,
+}
+_params_917: NetworkBandwidthGbpsDict = {}
+_params_918: NetworkBandwidthGbpsRequestDict = {}
+_params_919: NetworkInterfaceAttachmentChangesDict = {}
+_params_920: NetworkInterfaceCountDict = {}
+_params_921: NetworkInterfaceCountRequestDict = {}
+_params_922: NewDhcpConfigurationDict = {}
+_params_923: OnDemandOptionsRequestDict = {}
+_params_924: OperatorRequestDict = {}
+_params_925: PacketHeaderStatementRequestDict = {}
+_params_926: PathRequestFilterDict = {}
+_params_927: PathStatementRequestDict = {}
+_params_928: PeeringConnectionOptionsRequestDict = {}
+_params_929: PerformanceFactorReferenceDict = {}
+_params_930: PerformanceFactorReferenceRequestDict = {}
+_params_931: Phase1DHGroupNumbersRequestListValueDict = {}
+_params_932: Phase1EncryptionAlgorithmsRequestListValueDict = {}
+_params_933: Phase1IntegrityAlgorithmsRequestListValueDict = {}
+_params_934: Phase2DHGroupNumbersRequestListValueDict = {}
+_params_935: Phase2EncryptionAlgorithmsRequestListValueDict = {}
+_params_936: Phase2IntegrityAlgorithmsRequestListValueDict = {}
+_params_937: PlacementDict = {}
+_params_938: PortRangeDict = {}
+_params_939: PrefixListIdDict = {}
+_params_940: PriceScheduleSpecificationDict = {}
+_params_941: PrivateDnsNameOptionsRequestDict = {}
+_params_942: PrivateIpAddressSpecificationDict = {}
+_params_943: ProvisionByoipCidrInputDict = {"cidr": _}
+_params_944: ProvisionIpamByoasnInputDict = {
+    "ipam_id": _,
+    "asn": _,
+    "asn_authorization_context": _,
+}
+_params_945: ProvisionIpamPoolCidrInputDict = {"ipam_pool_id": _}
+_params_946: ProvisionPublicIpv4PoolCidrInputDict = {
+    "ipam_pool_id": _,
+    "pool_id": _,
+    "netmask_length": _,
+}
+_params_947: PurchaseCapacityBlockExtensionInputDict = {
+    "capacity_block_extension_offering_id": _,
+    "capacity_reservation_id": _,
+}
+_params_948: PurchaseCapacityBlockInputDict = {
+    "capacity_block_offering_id": _,
+    "instance_platform": _,
+}
+_params_949: PurchaseHostReservationInputDict = {"host_id_set": _, "offering_id": _}
+_params_950: PurchaseRequestDict = {"instance_count": _, "purchase_token": _}
+_params_951: PurchaseReservedInstancesOfferingInputDict = {
+    "instance_count": _,
+    "reserved_instances_offering_id": _,
+}
+_params_952: PurchaseScheduledInstancesInputDict = {"purchase_requests": _}
+_params_953: RebootInstancesInputDict = {"instance_ids": _}
+_params_954: RegisterImageInputDict = {"name": _}
+_params_955: RegisterInstanceEventNotificationAttributesInputDict = {
+    "instance_tag_attribute": _
+}
+_params_956: RegisterInstanceTagAttributeRequestDict = {}
+_params_957: RegisterTransitGatewayMulticastGroupMembersInputDict = {
+    "transit_gateway_multicast_domain_id": _,
+    "network_interface_ids": _,
+}
+_params_958: RegisterTransitGatewayMulticastGroupSourcesInputDict = {
+    "transit_gateway_multicast_domain_id": _,
+    "network_interface_ids": _,
+}
+_params_959: RejectCapacityReservationBillingOwnershipInputDict = {
+    "capacity_reservation_id": _
+}
+_params_960: RejectTransitGatewayClientVpnAttachmentInputDict = {
+    "transit_gateway_attachment_id": _
+}
+_params_961: RejectTransitGatewayMulticastDomainAssociationsInputDict = {}
+_params_962: RejectTransitGatewayPeeringAttachmentInputDict = {
+    "transit_gateway_attachment_id": _
+}
+_params_963: RejectTransitGatewayVpcAttachmentInputDict = {
+    "transit_gateway_attachment_id": _
+}
+_params_964: RejectVpcEndpointConnectionsInputDict = {
+    "service_id": _,
+    "vpc_endpoint_ids": _,
+}
+_params_965: RejectVpcPeeringConnectionInputDict = {"vpc_peering_connection_id": _}
+_params_966: ReleaseAddressInputDict = {}
+_params_967: ReleaseHostsInputDict = {"host_ids": _}
+_params_968: ReleaseIpamPoolAllocationInputDict = {
+    "ipam_pool_id": _,
+    "cidr": _,
+    "ipam_pool_allocation_id": _,
+}
+_params_969: RemoveIpamOperatingRegionDict = {}
+_params_970: RemoveIpamOrganizationalUnitExclusionDict = {}
+_params_971: RemovePrefixListEntryDict = {"cidr": _}
+_params_972: ReplaceIamInstanceProfileAssociationInputDict = {
+    "iam_instance_profile": _,
+    "association_id": _,
+}
+_params_973: ReplaceImageCriteriaInAllowedImagesSettingsInputDict = {}
+_params_974: ReplaceImageInstanceTypeSpecificationInputDict = {"image_id": _}
+_params_975: ReplaceNetworkAclAssociationInputDict = {
+    "association_id": _,
+    "network_acl_id": _,
+}
+_params_976: ReplaceNetworkAclEntryInputDict = {
+    "network_acl_id": _,
+    "rule_number": _,
+    "protocol": _,
+    "rule_action": _,
+    "egress": _,
+}
+_params_977: ReplaceRouteInputDict = {"route_table_id": _}
+_params_978: ReplaceRouteTableAssociationInputDict = {
+    "association_id": _,
+    "route_table_id": _,
+}
+_params_979: ReplaceTransitGatewayRouteInputDict = {
+    "destination_cidr_block": _,
+    "transit_gateway_route_table_id": _,
+}
+_params_980: ReplaceVpnTunnelInputDict = {
+    "vpn_connection_id": _,
+    "vpn_tunnel_outside_ip_address": _,
+}
+_params_981: ReportInstanceStatusInputDict = {
+    "instances": _,
+    "status": _,
+    "reason_codes": _,
+}
+_params_982: RequestFilterPortRangeDict = {}
+_params_983: RequestIpamResourceTagDict = {}
+_params_984: RequestLaunchTemplateDataDict = {}
+_params_985: RequestSpotFleetInputDict = {"spot_fleet_request_config": _}
+_params_986: RequestSpotInstancesInputDict = {}
+_params_987: RequestSpotLaunchSpecificationDict = {}
+_params_988: ReservationFleetInstanceSpecificationDict = {}
+_params_989: ReservedCapacityFallbackOptionsRequestDict = {}
+_params_990: ReservedCapacityOptionsRequestDict = {}
+_params_991: ReservedInstanceLimitPriceDict = {}
+_params_992: ReservedInstancesConfigurationDict = {}
+_params_993: ResetAddressAttributeInputDict = {"allocation_id": _, "attribute": _}
+_params_994: ResetEbsDefaultKmsKeyIdInputDict = {}
+_params_995: ResetFpgaImageAttributeInputDict = {"fpga_image_id": _}
+_params_996: ResetImageAttributeInputDict = {"attribute": _, "image_id": _}
+_params_997: ResetInstanceAttributeInputDict = {"instance_id": _, "attribute": _}
+_params_998: ResetNetworkInterfaceAttributeInputDict = {"network_interface_id": _}
+_params_999: ResetSnapshotAttributeInputDict = {"attribute": _, "snapshot_id": _}
+_params_1000: ResourceStatementRequestDict = {}
+_params_1001: ResourceTypeOptionDict = {}
+_params_1002: ResourceTypeRequestDict = {}
+_params_1003: RestoreAddressToClassicInputDict = {"public_ip": _}
+_params_1004: RestoreImageFromRecycleBinInputDict = {"image_id": _}
+_params_1005: RestoreManagedPrefixListVersionInputDict = {
+    "prefix_list_id": _,
+    "previous_version": _,
+    "current_version": _,
+}
+_params_1006: RestoreSnapshotFromRecycleBinInputDict = {"snapshot_id": _}
+_params_1007: RestoreSnapshotTierInputDict = {"snapshot_id": _}
+_params_1008: RestoreVolumeFromRecycleBinInputDict = {"volume_id": _}
+_params_1009: RevokeClientVpnIngressInputDict = {
+    "client_vpn_endpoint_id": _,
+    "target_network_cidr": _,
+}
+_params_1010: RevokeSecurityGroupEgressInputDict = {"group_id": _}
+_params_1011: RevokeSecurityGroupIngressInputDict = {}
+_params_1012: RouteServerBgpOptionsRequestDict = {"peer_asn": _}
+_params_1013: RunInstancesInputDict = {"max_count": _, "min_count": _}
+_params_1014: RunInstancesMonitoringEnabledDict = {"enabled": _}
+_params_1015: RunScheduledInstancesInputDict = {
+    "launch_specification": _,
+    "scheduled_instance_id": _,
+}
+_params_1016: S3ObjectTagDict = {}
+_params_1017: S3StorageDict = {}
+_params_1018: ScanResultConditionRequestDict = {}
+_params_1019: ScheduledInstanceRecurrenceRequestDict = {}
+_params_1020: ScheduledInstancesBlockDeviceMappingDict = {}
+_params_1021: ScheduledInstancesEbsDict = {}
+_params_1022: ScheduledInstancesIamInstanceProfileDict = {}
+_params_1023: ScheduledInstancesIpv6AddressDict = {}
+_params_1024: ScheduledInstancesLaunchSpecificationDict = {"image_id": _}
+_params_1025: ScheduledInstancesMonitoringDict = {}
+_params_1026: ScheduledInstancesNetworkInterfaceDict = {}
+_params_1027: ScheduledInstancesPlacementDict = {}
+_params_1028: ScheduledInstancesPrivateIpAddressConfigDict = {}
+_params_1029: SearchLocalGatewayRoutesInputDict = {"local_gateway_route_table_id": _}
+_params_1030: SearchTransitGatewayMulticastGroupsInputDict = {
+    "transit_gateway_multicast_domain_id": _
+}
+_params_1031: SearchTransitGatewayRoutesInputDict = {
+    "transit_gateway_route_table_id": _,
+    "filters": _,
+}
+_params_1032: SecondaryInterfacePrivateIpAddressSpecificationRequestDict = {}
+_params_1033: SecureBlobAttributeValueDict = {}
+_params_1034: SecurityGroupRuleDescriptionDict = {}
+_params_1035: SecurityGroupRuleRequestDict = {}
+_params_1036: SecurityGroupRuleUpdateDict = {"security_group_rule_id": _}
+_params_1037: SendDiagnosticInterruptInputDict = {"instance_id": _}
+_params_1038: SlotDateTimeRangeRequestDict = {"earliest_time": _, "latest_time": _}
+_params_1039: SlotStartTimeRangeRequestDict = {}
+_params_1040: SnapshotDiskContainerDict = {}
+_params_1041: SpotCapacityRebalanceDict = {}
+_params_1042: SpotFleetLaunchSpecificationDict = {}
+_params_1043: SpotFleetMonitoringDict = {}
+_params_1044: SpotFleetRequestConfigDataDict = {
+    "iam_fleet_role": _,
+    "target_capacity": _,
+}
+_params_1045: SpotFleetTagSpecificationDict = {}
+_params_1046: SpotMaintenanceStrategiesDict = {}
+_params_1047: SpotMarketOptionsDict = {}
+_params_1048: SpotOptionsRequestDict = {}
+_params_1049: SpotPlacementDict = {}
+_params_1050: StartDeclarativePoliciesReportInputDict = {"s3_bucket": _, "target_id": _}
+_params_1051: StartInstancesInputDict = {"instance_ids": _}
+_params_1052: StartNetworkInsightsAccessScopeAnalysisInputDict = {
+    "network_insights_access_scope_id": _
+}
+_params_1053: StartNetworkInsightsAnalysisInputDict = {"network_insights_path_id": _}
+_params_1054: StartVpcEndpointServicePrivateDnsVerificationInputDict = {"service_id": _}
+_params_1055: StopInstancesInputDict = {"instance_ids": _}
+_params_1056: StorageDict = {}
+_params_1057: StorageLocationDict = {}
+_params_1058: SubnetConfigurationDict = {}
+_params_1059: TagDict = {}
+_params_1060: TagFieldSpecificationRequestDict = {}
+_params_1061: TagSpecificationDict = {}
+_params_1062: TargetCapacitySpecificationRequestDict = {"total_target_capacity": _}
+_params_1063: TargetConfigurationRequestDict = {"offering_id": _}
+_params_1064: TargetGroupDict = {}
+_params_1065: TargetGroupsConfigDict = {}
+_params_1066: TerminateClientVpnConnectionsInputDict = {"client_vpn_endpoint_id": _}
+_params_1067: TerminateInstancesInputDict = {"instance_ids": _}
+_params_1068: ThroughResourcesStatementRequestDict = {}
+_params_1069: TotalLocalStorageGBDict = {}
+_params_1070: TotalLocalStorageGBRequestDict = {}
+_params_1071: TrafficMirrorPortRangeRequestDict = {}
+_params_1072: TransitGatewayConfigurationInputStructureDict = {}
+_params_1073: TransitGatewayConnectRequestBgpOptionsDict = {}
+_params_1074: TransitGatewayNatRuleRequestDict = {}
+_params_1075: TransitGatewayRequestOptionsDict = {}
+_params_1076: TransitGatewayRequestPolicyRuleDict = {}
+_params_1077: TransitGatewayRequestPolicyRuleMetaDataDict = {}
+_params_1078: UnassignIpv6AddressesInputDict = {"network_interface_id": _}
+_params_1079: UnassignPrivateIpAddressesInputDict = {"network_interface_id": _}
+_params_1080: UnassignPrivateNatGatewayAddressInputDict = {
+    "nat_gateway_id": _,
+    "private_ip_addresses": _,
+}
+_params_1081: UnlockSnapshotInputDict = {"snapshot_id": _}
+_params_1082: UnmonitorInstancesInputDict = {"instance_ids": _}
+_params_1083: UpdateCapacityManagerMonitoredTagKeysInputDict = {}
+_params_1084: UpdateCapacityManagerOrganizationsAccessInputDict = {
+    "organizations_access": _
+}
+_params_1085: UpdateInterruptibleCapacityReservationAllocationInputDict = {
+    "capacity_reservation_id": _
+}
+_params_1086: UpdateSecurityGroupRuleDescriptionsEgressInputDict = {}
+_params_1087: UpdateSecurityGroupRuleDescriptionsIngressInputDict = {}
+_params_1088: UserBucketDict = {}
+_params_1089: UserDataDict = {}
+_params_1090: UserIdGroupPairDict = {}
+_params_1091: ValidateSecurityGroupQuotasForInterfaceInputDict = {
+    "security_group_ids": _
+}
+_params_1092: VCpuCountRangeDict = {}
+_params_1093: VCpuCountRangeRequestDict = {"min": _}
+_params_1094: VerifiedAccessLogCloudWatchLogsDestinationOptionsDict = {"enabled": _}
+_params_1095: VerifiedAccessLogKinesisDataFirehoseDestinationOptionsDict = {
+    "enabled": _
+}
+_params_1096: VerifiedAccessLogOptionsDict = {}
+_params_1097: VerifiedAccessLogS3DestinationOptionsDict = {"enabled": _}
+_params_1098: VerifiedAccessSseSpecificationRequestDict = {}
+_params_1099: VolumeDetailDict = {"size": _}
+_params_1100: VpcEncryptionControlConfigurationDict = {"mode": _}
+_params_1101: VpnConnectionOptionsSpecificationDict = {}
+_params_1102: VpnTunnelLogOptionsSpecificationDict = {}
+_params_1103: VpnTunnelOptionsSpecificationDict = {}
+_params_1104: WithdrawByoipCidrInputDict = {"cidr": _}
+
+
+def _request[T](form: type[T]) -> T:
+    raise NotImplementedError
+
+
+async def check_async_calls(client: AsyncEC2Client) -> None:
+    pass
+    await client.accept_address_transfer(address=_)
+    await client.accept_address_transfer(**_request(AcceptAddressTransferInputDict))
+    await client.accept_address_transfer(_request(AcceptAddressTransferInput))
+    await client.accept_address_transfer(_request(AcceptAddressTransferInputDict))
+    await client.accept_capacity_reservation_billing_ownership(
+        capacity_reservation_id=_
+    )
+    await client.accept_capacity_reservation_billing_ownership(
+        **_request(AcceptCapacityReservationBillingOwnershipInputDict)
+    )
+    await client.accept_capacity_reservation_billing_ownership(
+        _request(AcceptCapacityReservationBillingOwnershipInput)
+    )
+    await client.accept_capacity_reservation_billing_ownership(
+        _request(AcceptCapacityReservationBillingOwnershipInputDict)
+    )
+    await client.accept_reserved_instances_exchange_quote(reserved_instance_ids=_)
+    await client.accept_reserved_instances_exchange_quote(
+        **_request(AcceptReservedInstancesExchangeQuoteInputDict)
+    )
+    await client.accept_reserved_instances_exchange_quote(
+        _request(AcceptReservedInstancesExchangeQuoteInput)
+    )
+    await client.accept_reserved_instances_exchange_quote(
+        _request(AcceptReservedInstancesExchangeQuoteInputDict)
+    )
+    await client.accept_transit_gateway_client_vpn_attachment(
+        transit_gateway_attachment_id=_
+    )
+    await client.accept_transit_gateway_client_vpn_attachment(
+        **_request(AcceptTransitGatewayClientVpnAttachmentInputDict)
+    )
+    await client.accept_transit_gateway_client_vpn_attachment(
+        _request(AcceptTransitGatewayClientVpnAttachmentInput)
+    )
+    await client.accept_transit_gateway_client_vpn_attachment(
+        _request(AcceptTransitGatewayClientVpnAttachmentInputDict)
+    )
+    await client.accept_transit_gateway_multicast_domain_associations()
+    await client.accept_transit_gateway_multicast_domain_associations(
+        **_request(AcceptTransitGatewayMulticastDomainAssociationsInputDict)
+    )
+    await client.accept_transit_gateway_multicast_domain_associations(
+        _request(AcceptTransitGatewayMulticastDomainAssociationsInput)
+    )
+    await client.accept_transit_gateway_multicast_domain_associations(
+        _request(AcceptTransitGatewayMulticastDomainAssociationsInputDict)
+    )
+    await client.accept_transit_gateway_peering_attachment(
+        transit_gateway_attachment_id=_
+    )
+    await client.accept_transit_gateway_peering_attachment(
+        **_request(AcceptTransitGatewayPeeringAttachmentInputDict)
+    )
+    await client.accept_transit_gateway_peering_attachment(
+        _request(AcceptTransitGatewayPeeringAttachmentInput)
+    )
+    await client.accept_transit_gateway_peering_attachment(
+        _request(AcceptTransitGatewayPeeringAttachmentInputDict)
+    )
+    await client.accept_transit_gateway_vpc_attachment(transit_gateway_attachment_id=_)
+    await client.accept_transit_gateway_vpc_attachment(
+        **_request(AcceptTransitGatewayVpcAttachmentInputDict)
+    )
+    await client.accept_transit_gateway_vpc_attachment(
+        _request(AcceptTransitGatewayVpcAttachmentInput)
+    )
+    await client.accept_transit_gateway_vpc_attachment(
+        _request(AcceptTransitGatewayVpcAttachmentInputDict)
+    )
+    await client.accept_vpc_endpoint_connections(service_id=_, vpc_endpoint_ids=_)
+    await client.accept_vpc_endpoint_connections(
+        **_request(AcceptVpcEndpointConnectionsInputDict)
+    )
+    await client.accept_vpc_endpoint_connections(
+        _request(AcceptVpcEndpointConnectionsInput)
+    )
+    await client.accept_vpc_endpoint_connections(
+        _request(AcceptVpcEndpointConnectionsInputDict)
+    )
+    await client.accept_vpc_peering_connection(vpc_peering_connection_id=_)
+    await client.accept_vpc_peering_connection(
+        **_request(AcceptVpcPeeringConnectionInputDict)
+    )
+    await client.accept_vpc_peering_connection(
+        _request(AcceptVpcPeeringConnectionInput)
+    )
+    await client.accept_vpc_peering_connection(
+        _request(AcceptVpcPeeringConnectionInputDict)
+    )
+    await client.advertise_byoip_cidr(cidr=_)
+    await client.advertise_byoip_cidr(**_request(AdvertiseByoipCidrInputDict))
+    await client.advertise_byoip_cidr(_request(AdvertiseByoipCidrInput))
+    await client.advertise_byoip_cidr(_request(AdvertiseByoipCidrInputDict))
+    await client.allocate_address()
+    await client.allocate_address(**_request(AllocateAddressInputDict))
+    await client.allocate_address(_request(AllocateAddressInput))
+    await client.allocate_address(_request(AllocateAddressInputDict))
+    await client.allocate_hosts()
+    await client.allocate_hosts(**_request(AllocateHostsInputDict))
+    await client.allocate_hosts(_request(AllocateHostsInput))
+    await client.allocate_hosts(_request(AllocateHostsInputDict))
+    await client.allocate_ipam_pool_cidr(ipam_pool_id=_)
+    await client.allocate_ipam_pool_cidr(**_request(AllocateIpamPoolCidrInputDict))
+    await client.allocate_ipam_pool_cidr(_request(AllocateIpamPoolCidrInput))
+    await client.allocate_ipam_pool_cidr(_request(AllocateIpamPoolCidrInputDict))
+    await client.apply_security_groups_to_client_vpn_target_network(
+        client_vpn_endpoint_id=_, vpc_id=_, security_group_ids=_
+    )
+    await client.apply_security_groups_to_client_vpn_target_network(
+        **_request(ApplySecurityGroupsToClientVpnTargetNetworkInputDict)
+    )
+    await client.apply_security_groups_to_client_vpn_target_network(
+        _request(ApplySecurityGroupsToClientVpnTargetNetworkInput)
+    )
+    await client.apply_security_groups_to_client_vpn_target_network(
+        _request(ApplySecurityGroupsToClientVpnTargetNetworkInputDict)
+    )
+    await client.assign_ipv6_addresses(network_interface_id=_)
+    await client.assign_ipv6_addresses(**_request(AssignIpv6AddressesInputDict))
+    await client.assign_ipv6_addresses(_request(AssignIpv6AddressesInput))
+    await client.assign_ipv6_addresses(_request(AssignIpv6AddressesInputDict))
+    await client.assign_private_ip_addresses(network_interface_id=_)
+    await client.assign_private_ip_addresses(
+        **_request(AssignPrivateIpAddressesInputDict)
+    )
+    await client.assign_private_ip_addresses(_request(AssignPrivateIpAddressesInput))
+    await client.assign_private_ip_addresses(
+        _request(AssignPrivateIpAddressesInputDict)
+    )
+    await client.assign_private_nat_gateway_address(nat_gateway_id=_)
+    await client.assign_private_nat_gateway_address(
+        **_request(AssignPrivateNatGatewayAddressInputDict)
+    )
+    await client.assign_private_nat_gateway_address(
+        _request(AssignPrivateNatGatewayAddressInput)
+    )
+    await client.assign_private_nat_gateway_address(
+        _request(AssignPrivateNatGatewayAddressInputDict)
+    )
+    await client.associate_address()
+    await client.associate_address(**_request(AssociateAddressInputDict))
+    await client.associate_address(_request(AssociateAddressInput))
+    await client.associate_address(_request(AssociateAddressInputDict))
+    await client.associate_application_status_check(application_status_check_id=_)
+    await client.associate_application_status_check(
+        **_request(AssociateApplicationStatusCheckInputDict)
+    )
+    await client.associate_application_status_check(
+        _request(AssociateApplicationStatusCheckInput)
+    )
+    await client.associate_application_status_check(
+        _request(AssociateApplicationStatusCheckInputDict)
+    )
+    await client.associate_capacity_reservation_billing_owner(
+        capacity_reservation_id=_, unused_reservation_billing_owner_id=_
+    )
+    await client.associate_capacity_reservation_billing_owner(
+        **_request(AssociateCapacityReservationBillingOwnerInputDict)
+    )
+    await client.associate_capacity_reservation_billing_owner(
+        _request(AssociateCapacityReservationBillingOwnerInput)
+    )
+    await client.associate_capacity_reservation_billing_owner(
+        _request(AssociateCapacityReservationBillingOwnerInputDict)
+    )
+    await client.associate_client_vpn_target_network(client_vpn_endpoint_id=_)
+    await client.associate_client_vpn_target_network(
+        **_request(AssociateClientVpnTargetNetworkInputDict)
+    )
+    await client.associate_client_vpn_target_network(
+        _request(AssociateClientVpnTargetNetworkInput)
+    )
+    await client.associate_client_vpn_target_network(
+        _request(AssociateClientVpnTargetNetworkInputDict)
+    )
+    await client.associate_dhcp_options(dhcp_options_id=_, vpc_id=_)
+    await client.associate_dhcp_options(**_request(AssociateDhcpOptionsInputDict))
+    await client.associate_dhcp_options(_request(AssociateDhcpOptionsInput))
+    await client.associate_dhcp_options(_request(AssociateDhcpOptionsInputDict))
+    await client.associate_enclave_certificate_iam_role(certificate_arn=_, role_arn=_)
+    await client.associate_enclave_certificate_iam_role(
+        **_request(AssociateEnclaveCertificateIamRoleInputDict)
+    )
+    await client.associate_enclave_certificate_iam_role(
+        _request(AssociateEnclaveCertificateIamRoleInput)
+    )
+    await client.associate_enclave_certificate_iam_role(
+        _request(AssociateEnclaveCertificateIamRoleInputDict)
+    )
+    await client.associate_iam_instance_profile(iam_instance_profile=_, instance_id=_)
+    await client.associate_iam_instance_profile(
+        **_request(AssociateIamInstanceProfileInputDict)
+    )
+    await client.associate_iam_instance_profile(
+        _request(AssociateIamInstanceProfileInput)
+    )
+    await client.associate_iam_instance_profile(
+        _request(AssociateIamInstanceProfileInputDict)
+    )
+    await client.associate_instance_event_window(
+        instance_event_window_id=_, association_target=_
+    )
+    await client.associate_instance_event_window(
+        **_request(AssociateInstanceEventWindowInputDict)
+    )
+    await client.associate_instance_event_window(
+        _request(AssociateInstanceEventWindowInput)
+    )
+    await client.associate_instance_event_window(
+        _request(AssociateInstanceEventWindowInputDict)
+    )
+    await client.associate_ipam_byoasn(asn=_, cidr=_)
+    await client.associate_ipam_byoasn(**_request(AssociateIpamByoasnInputDict))
+    await client.associate_ipam_byoasn(_request(AssociateIpamByoasnInput))
+    await client.associate_ipam_byoasn(_request(AssociateIpamByoasnInputDict))
+    await client.associate_ipam_resource_discovery(
+        ipam_id=_, ipam_resource_discovery_id=_
+    )
+    await client.associate_ipam_resource_discovery(
+        **_request(AssociateIpamResourceDiscoveryInputDict)
+    )
+    await client.associate_ipam_resource_discovery(
+        _request(AssociateIpamResourceDiscoveryInput)
+    )
+    await client.associate_ipam_resource_discovery(
+        _request(AssociateIpamResourceDiscoveryInputDict)
+    )
+    await client.associate_nat_gateway_address(nat_gateway_id=_, allocation_ids=_)
+    await client.associate_nat_gateway_address(
+        **_request(AssociateNatGatewayAddressInputDict)
+    )
+    await client.associate_nat_gateway_address(
+        _request(AssociateNatGatewayAddressInput)
+    )
+    await client.associate_nat_gateway_address(
+        _request(AssociateNatGatewayAddressInputDict)
+    )
+    await client.associate_route_server(route_server_id=_, vpc_id=_)
+    await client.associate_route_server(**_request(AssociateRouteServerInputDict))
+    await client.associate_route_server(_request(AssociateRouteServerInput))
+    await client.associate_route_server(_request(AssociateRouteServerInputDict))
+    await client.associate_route_table(route_table_id=_)
+    await client.associate_route_table(**_request(AssociateRouteTableInputDict))
+    await client.associate_route_table(_request(AssociateRouteTableInput))
+    await client.associate_route_table(_request(AssociateRouteTableInputDict))
+    await client.associate_security_group_vpc(group_id=_, vpc_id=_)
+    await client.associate_security_group_vpc(
+        **_request(AssociateSecurityGroupVpcInputDict)
+    )
+    await client.associate_security_group_vpc(_request(AssociateSecurityGroupVpcInput))
+    await client.associate_security_group_vpc(
+        _request(AssociateSecurityGroupVpcInputDict)
+    )
+    await client.associate_subnet_cidr_block(subnet_id=_)
+    await client.associate_subnet_cidr_block(
+        **_request(AssociateSubnetCidrBlockInputDict)
+    )
+    await client.associate_subnet_cidr_block(_request(AssociateSubnetCidrBlockInput))
+    await client.associate_subnet_cidr_block(
+        _request(AssociateSubnetCidrBlockInputDict)
+    )
+    await client.associate_transit_gateway_multicast_domain(
+        transit_gateway_multicast_domain_id=_,
+        transit_gateway_attachment_id=_,
+        subnet_ids=_,
+    )
+    await client.associate_transit_gateway_multicast_domain(
+        **_request(AssociateTransitGatewayMulticastDomainInputDict)
+    )
+    await client.associate_transit_gateway_multicast_domain(
+        _request(AssociateTransitGatewayMulticastDomainInput)
+    )
+    await client.associate_transit_gateway_multicast_domain(
+        _request(AssociateTransitGatewayMulticastDomainInputDict)
+    )
+    await client.associate_transit_gateway_policy_table(
+        transit_gateway_policy_table_id=_, transit_gateway_attachment_id=_
+    )
+    await client.associate_transit_gateway_policy_table(
+        **_request(AssociateTransitGatewayPolicyTableInputDict)
+    )
+    await client.associate_transit_gateway_policy_table(
+        _request(AssociateTransitGatewayPolicyTableInput)
+    )
+    await client.associate_transit_gateway_policy_table(
+        _request(AssociateTransitGatewayPolicyTableInputDict)
+    )
+    await client.associate_transit_gateway_route_table(
+        transit_gateway_route_table_id=_, transit_gateway_attachment_id=_
+    )
+    await client.associate_transit_gateway_route_table(
+        **_request(AssociateTransitGatewayRouteTableInputDict)
+    )
+    await client.associate_transit_gateway_route_table(
+        _request(AssociateTransitGatewayRouteTableInput)
+    )
+    await client.associate_transit_gateway_route_table(
+        _request(AssociateTransitGatewayRouteTableInputDict)
+    )
+    await client.associate_trunk_interface(branch_interface_id=_, trunk_interface_id=_)
+    await client.associate_trunk_interface(**_request(AssociateTrunkInterfaceInputDict))
+    await client.associate_trunk_interface(_request(AssociateTrunkInterfaceInput))
+    await client.associate_trunk_interface(_request(AssociateTrunkInterfaceInputDict))
+    await client.associate_vpc_cidr_block(vpc_id=_)
+    await client.associate_vpc_cidr_block(**_request(AssociateVpcCidrBlockInputDict))
+    await client.associate_vpc_cidr_block(_request(AssociateVpcCidrBlockInput))
+    await client.associate_vpc_cidr_block(_request(AssociateVpcCidrBlockInputDict))
+    await client.attach_classic_link_vpc(instance_id=_, vpc_id=_, groups=_)
+    await client.attach_classic_link_vpc(**_request(AttachClassicLinkVpcInputDict))
+    await client.attach_classic_link_vpc(_request(AttachClassicLinkVpcInput))
+    await client.attach_classic_link_vpc(_request(AttachClassicLinkVpcInputDict))
+    await client.attach_image_watermark(image_id=_, watermark_name=_)
+    await client.attach_image_watermark(**_request(AttachImageWatermarkInputDict))
+    await client.attach_image_watermark(_request(AttachImageWatermarkInput))
+    await client.attach_image_watermark(_request(AttachImageWatermarkInputDict))
+    await client.attach_internet_gateway(internet_gateway_id=_, vpc_id=_)
+    await client.attach_internet_gateway(**_request(AttachInternetGatewayInputDict))
+    await client.attach_internet_gateway(_request(AttachInternetGatewayInput))
+    await client.attach_internet_gateway(_request(AttachInternetGatewayInputDict))
+    await client.attach_network_interface(
+        network_interface_id=_, instance_id=_, device_index=_
+    )
+    await client.attach_network_interface(**_request(AttachNetworkInterfaceInputDict))
+    await client.attach_network_interface(_request(AttachNetworkInterfaceInput))
+    await client.attach_network_interface(_request(AttachNetworkInterfaceInputDict))
+    await client.attach_verified_access_trust_provider(
+        verified_access_instance_id=_, verified_access_trust_provider_id=_
+    )
+    await client.attach_verified_access_trust_provider(
+        **_request(AttachVerifiedAccessTrustProviderInputDict)
+    )
+    await client.attach_verified_access_trust_provider(
+        _request(AttachVerifiedAccessTrustProviderInput)
+    )
+    await client.attach_verified_access_trust_provider(
+        _request(AttachVerifiedAccessTrustProviderInputDict)
+    )
+    await client.attach_volume(device=_, instance_id=_, volume_id=_)
+    await client.attach_volume(**_request(AttachVolumeInputDict))
+    await client.attach_volume(_request(AttachVolumeInput))
+    await client.attach_volume(_request(AttachVolumeInputDict))
+    await client.attach_vpn_gateway(vpc_id=_, vpn_gateway_id=_)
+    await client.attach_vpn_gateway(**_request(AttachVpnGatewayInputDict))
+    await client.attach_vpn_gateway(_request(AttachVpnGatewayInput))
+    await client.attach_vpn_gateway(_request(AttachVpnGatewayInputDict))
+    await client.authorize_client_vpn_ingress(
+        client_vpn_endpoint_id=_, target_network_cidr=_
+    )
+    await client.authorize_client_vpn_ingress(
+        **_request(AuthorizeClientVpnIngressInputDict)
+    )
+    await client.authorize_client_vpn_ingress(_request(AuthorizeClientVpnIngressInput))
+    await client.authorize_client_vpn_ingress(
+        _request(AuthorizeClientVpnIngressInputDict)
+    )
+    await client.authorize_security_group_egress(group_id=_)
+    await client.authorize_security_group_egress(
+        **_request(AuthorizeSecurityGroupEgressInputDict)
+    )
+    await client.authorize_security_group_egress(
+        _request(AuthorizeSecurityGroupEgressInput)
+    )
+    await client.authorize_security_group_egress(
+        _request(AuthorizeSecurityGroupEgressInputDict)
+    )
+    await client.authorize_security_group_ingress()
+    await client.authorize_security_group_ingress(
+        **_request(AuthorizeSecurityGroupIngressInputDict)
+    )
+    await client.authorize_security_group_ingress(
+        _request(AuthorizeSecurityGroupIngressInput)
+    )
+    await client.authorize_security_group_ingress(
+        _request(AuthorizeSecurityGroupIngressInputDict)
+    )
+    await client.batch_modify_ipam_routing_policy_registrations(
+        ipam_internet_registry_association_id=_, delta_json=_
+    )
+    await client.batch_modify_ipam_routing_policy_registrations(
+        **_request(BatchModifyIpamRoutingPolicyRegistrationsInputDict)
+    )
+    await client.batch_modify_ipam_routing_policy_registrations(
+        _request(BatchModifyIpamRoutingPolicyRegistrationsInput)
+    )
+    await client.batch_modify_ipam_routing_policy_registrations(
+        _request(BatchModifyIpamRoutingPolicyRegistrationsInputDict)
+    )
+    await client.bundle_instance(instance_id=_, storage=_)
+    await client.bundle_instance(**_request(BundleInstanceInputDict))
+    await client.bundle_instance(_request(BundleInstanceInput))
+    await client.bundle_instance(_request(BundleInstanceInputDict))
+    await client.cancel_bundle_task(bundle_id=_)
+    await client.cancel_bundle_task(**_request(CancelBundleTaskInputDict))
+    await client.cancel_bundle_task(_request(CancelBundleTaskInput))
+    await client.cancel_bundle_task(_request(CancelBundleTaskInputDict))
+    await client.cancel_capacity_reservation(capacity_reservation_id=_)
+    await client.cancel_capacity_reservation(
+        **_request(CancelCapacityReservationInputDict)
+    )
+    await client.cancel_capacity_reservation(_request(CancelCapacityReservationInput))
+    await client.cancel_capacity_reservation(
+        _request(CancelCapacityReservationInputDict)
+    )
+    await client.cancel_capacity_reservation_fleets(capacity_reservation_fleet_ids=_)
+    await client.cancel_capacity_reservation_fleets(
+        **_request(CancelCapacityReservationFleetsInputDict)
+    )
+    await client.cancel_capacity_reservation_fleets(
+        _request(CancelCapacityReservationFleetsInput)
+    )
+    await client.cancel_capacity_reservation_fleets(
+        _request(CancelCapacityReservationFleetsInputDict)
+    )
+    await client.cancel_conversion_task(conversion_task_id=_)
+    await client.cancel_conversion_task(**_request(CancelConversionTaskInputDict))
+    await client.cancel_conversion_task(_request(CancelConversionTaskInput))
+    await client.cancel_conversion_task(_request(CancelConversionTaskInputDict))
+    await client.cancel_declarative_policies_report(report_id=_)
+    await client.cancel_declarative_policies_report(
+        **_request(CancelDeclarativePoliciesReportInputDict)
+    )
+    await client.cancel_declarative_policies_report(
+        _request(CancelDeclarativePoliciesReportInput)
+    )
+    await client.cancel_declarative_policies_report(
+        _request(CancelDeclarativePoliciesReportInputDict)
+    )
+    await client.cancel_export_task(export_task_id=_)
+    await client.cancel_export_task(**_request(CancelExportTaskInputDict))
+    await client.cancel_export_task(_request(CancelExportTaskInput))
+    await client.cancel_export_task(_request(CancelExportTaskInputDict))
+    await client.cancel_image_launch_permission(image_id=_)
+    await client.cancel_image_launch_permission(
+        **_request(CancelImageLaunchPermissionInputDict)
+    )
+    await client.cancel_image_launch_permission(
+        _request(CancelImageLaunchPermissionInput)
+    )
+    await client.cancel_image_launch_permission(
+        _request(CancelImageLaunchPermissionInputDict)
+    )
+    await client.cancel_import_task()
+    await client.cancel_import_task(**_request(CancelImportTaskInputDict))
+    await client.cancel_import_task(_request(CancelImportTaskInput))
+    await client.cancel_import_task(_request(CancelImportTaskInputDict))
+    await client.cancel_reserved_instances_listing(reserved_instances_listing_id=_)
+    await client.cancel_reserved_instances_listing(
+        **_request(CancelReservedInstancesListingInputDict)
+    )
+    await client.cancel_reserved_instances_listing(
+        _request(CancelReservedInstancesListingInput)
+    )
+    await client.cancel_reserved_instances_listing(
+        _request(CancelReservedInstancesListingInputDict)
+    )
+    await client.cancel_spot_fleet_requests(
+        spot_fleet_request_ids=_, terminate_instances=_
+    )
+    await client.cancel_spot_fleet_requests(
+        **_request(CancelSpotFleetRequestsInputDict)
+    )
+    await client.cancel_spot_fleet_requests(_request(CancelSpotFleetRequestsInput))
+    await client.cancel_spot_fleet_requests(_request(CancelSpotFleetRequestsInputDict))
+    await client.cancel_spot_instance_requests(spot_instance_request_ids=_)
+    await client.cancel_spot_instance_requests(
+        **_request(CancelSpotInstanceRequestsInputDict)
+    )
+    await client.cancel_spot_instance_requests(
+        _request(CancelSpotInstanceRequestsInput)
+    )
+    await client.cancel_spot_instance_requests(
+        _request(CancelSpotInstanceRequestsInputDict)
+    )
+    await client.confirm_product_instance(instance_id=_, product_code=_)
+    await client.confirm_product_instance(**_request(ConfirmProductInstanceInputDict))
+    await client.confirm_product_instance(_request(ConfirmProductInstanceInput))
+    await client.confirm_product_instance(_request(ConfirmProductInstanceInputDict))
+    await client.copy_fpga_image(source_fpga_image_id=_, source_region=_)
+    await client.copy_fpga_image(**_request(CopyFpgaImageInputDict))
+    await client.copy_fpga_image(_request(CopyFpgaImageInput))
+    await client.copy_fpga_image(_request(CopyFpgaImageInputDict))
+    await client.copy_image(name=_, source_image_id=_, source_region=_)
+    await client.copy_image(**_request(CopyImageInputDict))
+    await client.copy_image(_request(CopyImageInput))
+    await client.copy_image(_request(CopyImageInputDict))
+    await client.copy_snapshot(source_region=_, source_snapshot_id=_)
+    await client.copy_snapshot(**_request(CopySnapshotInputDict))
+    await client.copy_snapshot(_request(CopySnapshotInput))
+    await client.copy_snapshot(_request(CopySnapshotInputDict))
+    await client.copy_volumes(source_volume_id=_)
+    await client.copy_volumes(**_request(CopyVolumesInputDict))
+    await client.copy_volumes(_request(CopyVolumesInput))
+    await client.copy_volumes(_request(CopyVolumesInputDict))
+    await client.create_application_status_check(protocol=_, port=_)
+    await client.create_application_status_check(
+        **_request(CreateApplicationStatusCheckInputDict)
+    )
+    await client.create_application_status_check(
+        _request(CreateApplicationStatusCheckInput)
+    )
+    await client.create_application_status_check(
+        _request(CreateApplicationStatusCheckInputDict)
+    )
+    await client.create_capacity_manager_data_export(
+        s3_bucket_name=_, schedule=_, output_format=_
+    )
+    await client.create_capacity_manager_data_export(
+        **_request(CreateCapacityManagerDataExportInputDict)
+    )
+    await client.create_capacity_manager_data_export(
+        _request(CreateCapacityManagerDataExportInput)
+    )
+    await client.create_capacity_manager_data_export(
+        _request(CreateCapacityManagerDataExportInputDict)
+    )
+    await client.create_capacity_reservation(
+        instance_type=_, instance_platform=_, instance_count=_
+    )
+    await client.create_capacity_reservation(
+        **_request(CreateCapacityReservationInputDict)
+    )
+    await client.create_capacity_reservation(_request(CreateCapacityReservationInput))
+    await client.create_capacity_reservation(
+        _request(CreateCapacityReservationInputDict)
+    )
+    await client.create_capacity_reservation_by_splitting(
+        source_capacity_reservation_id=_, instance_count=_
+    )
+    await client.create_capacity_reservation_by_splitting(
+        **_request(CreateCapacityReservationBySplittingInputDict)
+    )
+    await client.create_capacity_reservation_by_splitting(
+        _request(CreateCapacityReservationBySplittingInput)
+    )
+    await client.create_capacity_reservation_by_splitting(
+        _request(CreateCapacityReservationBySplittingInputDict)
+    )
+    await client.create_capacity_reservation_cancellation_quote(
+        capacity_reservation_id=_
+    )
+    await client.create_capacity_reservation_cancellation_quote(
+        **_request(CreateCapacityReservationCancellationQuoteInputDict)
+    )
+    await client.create_capacity_reservation_cancellation_quote(
+        _request(CreateCapacityReservationCancellationQuoteInput)
+    )
+    await client.create_capacity_reservation_cancellation_quote(
+        _request(CreateCapacityReservationCancellationQuoteInputDict)
+    )
+    await client.create_capacity_reservation_date_change_quote(
+        capacity_reservation_id=_, new_start_date=_
+    )
+    await client.create_capacity_reservation_date_change_quote(
+        **_request(CreateCapacityReservationDateChangeQuoteInputDict)
+    )
+    await client.create_capacity_reservation_date_change_quote(
+        _request(CreateCapacityReservationDateChangeQuoteInput)
+    )
+    await client.create_capacity_reservation_date_change_quote(
+        _request(CreateCapacityReservationDateChangeQuoteInputDict)
+    )
+    await client.create_capacity_reservation_fleet(total_target_capacity=_)
+    await client.create_capacity_reservation_fleet(
+        **_request(CreateCapacityReservationFleetInputDict)
+    )
+    await client.create_capacity_reservation_fleet(
+        _request(CreateCapacityReservationFleetInput)
+    )
+    await client.create_capacity_reservation_fleet(
+        _request(CreateCapacityReservationFleetInputDict)
+    )
+    await client.create_carrier_gateway(vpc_id=_)
+    await client.create_carrier_gateway(**_request(CreateCarrierGatewayInputDict))
+    await client.create_carrier_gateway(_request(CreateCarrierGatewayInput))
+    await client.create_carrier_gateway(_request(CreateCarrierGatewayInputDict))
+    await client.create_client_vpn_endpoint(
+        server_certificate_arn=_, authentication_options=_, connection_log_options=_
+    )
+    await client.create_client_vpn_endpoint(
+        **_request(CreateClientVpnEndpointInputDict)
+    )
+    await client.create_client_vpn_endpoint(_request(CreateClientVpnEndpointInput))
+    await client.create_client_vpn_endpoint(_request(CreateClientVpnEndpointInputDict))
+    await client.create_client_vpn_route(
+        client_vpn_endpoint_id=_, destination_cidr_block=_
+    )
+    await client.create_client_vpn_route(**_request(CreateClientVpnRouteInputDict))
+    await client.create_client_vpn_route(_request(CreateClientVpnRouteInput))
+    await client.create_client_vpn_route(_request(CreateClientVpnRouteInputDict))
+    await client.create_coip_cidr(cidr=_, coip_pool_id=_)
+    await client.create_coip_cidr(**_request(CreateCoipCidrInputDict))
+    await client.create_coip_cidr(_request(CreateCoipCidrInput))
+    await client.create_coip_cidr(_request(CreateCoipCidrInputDict))
+    await client.create_coip_pool(local_gateway_route_table_id=_)
+    await client.create_coip_pool(**_request(CreateCoipPoolInputDict))
+    await client.create_coip_pool(_request(CreateCoipPoolInput))
+    await client.create_coip_pool(_request(CreateCoipPoolInputDict))
+    await client.create_customer_gateway(type=_)
+    await client.create_customer_gateway(**_request(CreateCustomerGatewayInputDict))
+    await client.create_customer_gateway(_request(CreateCustomerGatewayInput))
+    await client.create_customer_gateway(_request(CreateCustomerGatewayInputDict))
+    await client.create_default_subnet()
+    await client.create_default_subnet(**_request(CreateDefaultSubnetInputDict))
+    await client.create_default_subnet(_request(CreateDefaultSubnetInput))
+    await client.create_default_subnet(_request(CreateDefaultSubnetInputDict))
+    await client.create_default_vpc()
+    await client.create_default_vpc(**_request(CreateDefaultVpcInputDict))
+    await client.create_default_vpc(_request(CreateDefaultVpcInput))
+    await client.create_default_vpc(_request(CreateDefaultVpcInputDict))
+    await client.create_delegate_mac_volume_ownership_task(
+        instance_id=_, mac_credentials=_
+    )
+    await client.create_delegate_mac_volume_ownership_task(
+        **_request(CreateDelegateMacVolumeOwnershipTaskInputDict)
+    )
+    await client.create_delegate_mac_volume_ownership_task(
+        _request(CreateDelegateMacVolumeOwnershipTaskInput)
+    )
+    await client.create_delegate_mac_volume_ownership_task(
+        _request(CreateDelegateMacVolumeOwnershipTaskInputDict)
+    )
+    await client.create_dhcp_options(dhcp_configurations=_)
+    await client.create_dhcp_options(**_request(CreateDhcpOptionsInputDict))
+    await client.create_dhcp_options(_request(CreateDhcpOptionsInput))
+    await client.create_dhcp_options(_request(CreateDhcpOptionsInputDict))
+    await client.create_egress_only_internet_gateway(vpc_id=_)
+    await client.create_egress_only_internet_gateway(
+        **_request(CreateEgressOnlyInternetGatewayInputDict)
+    )
+    await client.create_egress_only_internet_gateway(
+        _request(CreateEgressOnlyInternetGatewayInput)
+    )
+    await client.create_egress_only_internet_gateway(
+        _request(CreateEgressOnlyInternetGatewayInputDict)
+    )
+    await client.create_fleet(
+        launch_template_configs=_, target_capacity_specification=_
+    )
+    await client.create_fleet(**_request(CreateFleetInputDict))
+    await client.create_fleet(_request(CreateFleetInput))
+    await client.create_fleet(_request(CreateFleetInputDict))
+    await client.create_flow_logs(resource_ids=_, resource_type=_)
+    await client.create_flow_logs(**_request(CreateFlowLogsInputDict))
+    await client.create_flow_logs(_request(CreateFlowLogsInput))
+    await client.create_flow_logs(_request(CreateFlowLogsInputDict))
+    await client.create_fpga_image(input_storage_location=_)
+    await client.create_fpga_image(**_request(CreateFpgaImageInputDict))
+    await client.create_fpga_image(_request(CreateFpgaImageInput))
+    await client.create_fpga_image(_request(CreateFpgaImageInputDict))
+    await client.create_image(instance_id=_, name=_)
+    await client.create_image(**_request(CreateImageInputDict))
+    await client.create_image(_request(CreateImageInput))
+    await client.create_image(_request(CreateImageInputDict))
+    await client.create_image_usage_report(image_id=_, resource_types=_)
+    await client.create_image_usage_report(**_request(CreateImageUsageReportInputDict))
+    await client.create_image_usage_report(_request(CreateImageUsageReportInput))
+    await client.create_image_usage_report(_request(CreateImageUsageReportInputDict))
+    await client.create_instance_connect_endpoint(subnet_id=_)
+    await client.create_instance_connect_endpoint(
+        **_request(CreateInstanceConnectEndpointInputDict)
+    )
+    await client.create_instance_connect_endpoint(
+        _request(CreateInstanceConnectEndpointInput)
+    )
+    await client.create_instance_connect_endpoint(
+        _request(CreateInstanceConnectEndpointInputDict)
+    )
+    await client.create_instance_event_window()
+    await client.create_instance_event_window(
+        **_request(CreateInstanceEventWindowInputDict)
+    )
+    await client.create_instance_event_window(_request(CreateInstanceEventWindowInput))
+    await client.create_instance_event_window(
+        _request(CreateInstanceEventWindowInputDict)
+    )
+    await client.create_instance_export_task(
+        instance_id=_, target_environment=_, export_to_s3_task=_
+    )
+    await client.create_instance_export_task(
+        **_request(CreateInstanceExportTaskInputDict)
+    )
+    await client.create_instance_export_task(_request(CreateInstanceExportTaskInput))
+    await client.create_instance_export_task(
+        _request(CreateInstanceExportTaskInputDict)
+    )
+    await client.create_internet_gateway()
+    await client.create_internet_gateway(**_request(CreateInternetGatewayInputDict))
+    await client.create_internet_gateway(_request(CreateInternetGatewayInput))
+    await client.create_internet_gateway(_request(CreateInternetGatewayInputDict))
+    await client.create_interruptible_capacity_reservation_allocation(
+        capacity_reservation_id=_, instance_count=_
+    )
+    await client.create_interruptible_capacity_reservation_allocation(
+        **_request(CreateInterruptibleCapacityReservationAllocationInputDict)
+    )
+    await client.create_interruptible_capacity_reservation_allocation(
+        _request(CreateInterruptibleCapacityReservationAllocationInput)
+    )
+    await client.create_interruptible_capacity_reservation_allocation(
+        _request(CreateInterruptibleCapacityReservationAllocationInputDict)
+    )
+    await client.create_ipam()
+    await client.create_ipam(**_request(CreateIpamInputDict))
+    await client.create_ipam(_request(CreateIpamInput))
+    await client.create_ipam(_request(CreateIpamInputDict))
+    await client.create_ipam_external_resource_verification_token(ipam_id=_)
+    await client.create_ipam_external_resource_verification_token(
+        **_request(CreateIpamExternalResourceVerificationTokenInputDict)
+    )
+    await client.create_ipam_external_resource_verification_token(
+        _request(CreateIpamExternalResourceVerificationTokenInput)
+    )
+    await client.create_ipam_external_resource_verification_token(
+        _request(CreateIpamExternalResourceVerificationTokenInputDict)
+    )
+    await client.create_ipam_internet_registry_association(
+        ipam_id=_, rir=_, organization_handle=_
+    )
+    await client.create_ipam_internet_registry_association(
+        **_request(CreateIpamInternetRegistryAssociationInputDict)
+    )
+    await client.create_ipam_internet_registry_association(
+        _request(CreateIpamInternetRegistryAssociationInput)
+    )
+    await client.create_ipam_internet_registry_association(
+        _request(CreateIpamInternetRegistryAssociationInputDict)
+    )
+    await client.create_ipam_policy(ipam_id=_)
+    await client.create_ipam_policy(**_request(CreateIpamPolicyInputDict))
+    await client.create_ipam_policy(_request(CreateIpamPolicyInput))
+    await client.create_ipam_policy(_request(CreateIpamPolicyInputDict))
+    await client.create_ipam_pool(ipam_scope_id=_, address_family=_)
+    await client.create_ipam_pool(**_request(CreateIpamPoolInputDict))
+    await client.create_ipam_pool(_request(CreateIpamPoolInput))
+    await client.create_ipam_pool(_request(CreateIpamPoolInputDict))
+    await client.create_ipam_prefix_list_resolver(ipam_id=_, address_family=_)
+    await client.create_ipam_prefix_list_resolver(
+        **_request(CreateIpamPrefixListResolverInputDict)
+    )
+    await client.create_ipam_prefix_list_resolver(
+        _request(CreateIpamPrefixListResolverInput)
+    )
+    await client.create_ipam_prefix_list_resolver(
+        _request(CreateIpamPrefixListResolverInputDict)
+    )
+    await client.create_ipam_prefix_list_resolver_target(
+        ipam_prefix_list_resolver_id=_,
+        prefix_list_id=_,
+        prefix_list_region=_,
+        track_latest_version=_,
+    )
+    await client.create_ipam_prefix_list_resolver_target(
+        **_request(CreateIpamPrefixListResolverTargetInputDict)
+    )
+    await client.create_ipam_prefix_list_resolver_target(
+        _request(CreateIpamPrefixListResolverTargetInput)
+    )
+    await client.create_ipam_prefix_list_resolver_target(
+        _request(CreateIpamPrefixListResolverTargetInputDict)
+    )
+    await client.create_ipam_resource_discovery()
+    await client.create_ipam_resource_discovery(
+        **_request(CreateIpamResourceDiscoveryInputDict)
+    )
+    await client.create_ipam_resource_discovery(
+        _request(CreateIpamResourceDiscoveryInput)
+    )
+    await client.create_ipam_resource_discovery(
+        _request(CreateIpamResourceDiscoveryInputDict)
+    )
+    await client.create_ipam_routing_policy_registration(
+        ipam_internet_registry_association_id=_, cidr=_, asns=_
+    )
+    await client.create_ipam_routing_policy_registration(
+        **_request(CreateIpamRoutingPolicyRegistrationInputDict)
+    )
+    await client.create_ipam_routing_policy_registration(
+        _request(CreateIpamRoutingPolicyRegistrationInput)
+    )
+    await client.create_ipam_routing_policy_registration(
+        _request(CreateIpamRoutingPolicyRegistrationInputDict)
+    )
+    await client.create_ipam_scope(ipam_id=_)
+    await client.create_ipam_scope(**_request(CreateIpamScopeInputDict))
+    await client.create_ipam_scope(_request(CreateIpamScopeInput))
+    await client.create_ipam_scope(_request(CreateIpamScopeInputDict))
+    await client.create_key_pair(key_name=_)
+    await client.create_key_pair(**_request(CreateKeyPairInputDict))
+    await client.create_key_pair(_request(CreateKeyPairInput))
+    await client.create_key_pair(_request(CreateKeyPairInputDict))
+    await client.create_launch_template(launch_template_name=_, launch_template_data=_)
+    await client.create_launch_template(**_request(CreateLaunchTemplateInputDict))
+    await client.create_launch_template(_request(CreateLaunchTemplateInput))
+    await client.create_launch_template(_request(CreateLaunchTemplateInputDict))
+    await client.create_launch_template_version(launch_template_data=_)
+    await client.create_launch_template_version(
+        **_request(CreateLaunchTemplateVersionInputDict)
+    )
+    await client.create_launch_template_version(
+        _request(CreateLaunchTemplateVersionInput)
+    )
+    await client.create_launch_template_version(
+        _request(CreateLaunchTemplateVersionInputDict)
+    )
+    await client.create_local_gateway_route(local_gateway_route_table_id=_)
+    await client.create_local_gateway_route(
+        **_request(CreateLocalGatewayRouteInputDict)
+    )
+    await client.create_local_gateway_route(_request(CreateLocalGatewayRouteInput))
+    await client.create_local_gateway_route(_request(CreateLocalGatewayRouteInputDict))
+    await client.create_local_gateway_route_table(local_gateway_id=_)
+    await client.create_local_gateway_route_table(
+        **_request(CreateLocalGatewayRouteTableInputDict)
+    )
+    await client.create_local_gateway_route_table(
+        _request(CreateLocalGatewayRouteTableInput)
+    )
+    await client.create_local_gateway_route_table(
+        _request(CreateLocalGatewayRouteTableInputDict)
+    )
+    await client.create_local_gateway_route_table_virtual_interface_group_association(
+        local_gateway_route_table_id=_, local_gateway_virtual_interface_group_id=_
+    )
+    await client.create_local_gateway_route_table_virtual_interface_group_association(
+        **_request(
+            CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationInputDict
+        )
+    )
+    await client.create_local_gateway_route_table_virtual_interface_group_association(
+        _request(CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationInput)
+    )
+    await client.create_local_gateway_route_table_virtual_interface_group_association(
+        _request(CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationInputDict)
+    )
+    await client.create_local_gateway_route_table_vpc_association(
+        local_gateway_route_table_id=_, vpc_id=_
+    )
+    await client.create_local_gateway_route_table_vpc_association(
+        **_request(CreateLocalGatewayRouteTableVpcAssociationInputDict)
+    )
+    await client.create_local_gateway_route_table_vpc_association(
+        _request(CreateLocalGatewayRouteTableVpcAssociationInput)
+    )
+    await client.create_local_gateway_route_table_vpc_association(
+        _request(CreateLocalGatewayRouteTableVpcAssociationInputDict)
+    )
+    await client.create_local_gateway_virtual_interface(
+        local_gateway_virtual_interface_group_id=_,
+        outpost_lag_id=_,
+        vlan=_,
+        local_address=_,
+        peer_address=_,
+    )
+    await client.create_local_gateway_virtual_interface(
+        **_request(CreateLocalGatewayVirtualInterfaceInputDict)
+    )
+    await client.create_local_gateway_virtual_interface(
+        _request(CreateLocalGatewayVirtualInterfaceInput)
+    )
+    await client.create_local_gateway_virtual_interface(
+        _request(CreateLocalGatewayVirtualInterfaceInputDict)
+    )
+    await client.create_local_gateway_virtual_interface_group(local_gateway_id=_)
+    await client.create_local_gateway_virtual_interface_group(
+        **_request(CreateLocalGatewayVirtualInterfaceGroupInputDict)
+    )
+    await client.create_local_gateway_virtual_interface_group(
+        _request(CreateLocalGatewayVirtualInterfaceGroupInput)
+    )
+    await client.create_local_gateway_virtual_interface_group(
+        _request(CreateLocalGatewayVirtualInterfaceGroupInputDict)
+    )
+    await client.create_mac_system_integrity_protection_modification_task(
+        instance_id=_, mac_system_integrity_protection_status=_
+    )
+    await client.create_mac_system_integrity_protection_modification_task(
+        **_request(CreateMacSystemIntegrityProtectionModificationTaskInputDict)
+    )
+    await client.create_mac_system_integrity_protection_modification_task(
+        _request(CreateMacSystemIntegrityProtectionModificationTaskInput)
+    )
+    await client.create_mac_system_integrity_protection_modification_task(
+        _request(CreateMacSystemIntegrityProtectionModificationTaskInputDict)
+    )
+    await client.create_managed_prefix_list(
+        prefix_list_name=_, max_entries=_, address_family=_
+    )
+    await client.create_managed_prefix_list(
+        **_request(CreateManagedPrefixListInputDict)
+    )
+    await client.create_managed_prefix_list(_request(CreateManagedPrefixListInput))
+    await client.create_managed_prefix_list(_request(CreateManagedPrefixListInputDict))
+    await client.create_nat_gateway()
+    await client.create_nat_gateway(**_request(CreateNatGatewayInputDict))
+    await client.create_nat_gateway(_request(CreateNatGatewayInput))
+    await client.create_nat_gateway(_request(CreateNatGatewayInputDict))
+    await client.create_network_acl(vpc_id=_)
+    await client.create_network_acl(**_request(CreateNetworkAclInputDict))
+    await client.create_network_acl(_request(CreateNetworkAclInput))
+    await client.create_network_acl(_request(CreateNetworkAclInputDict))
+    await client.create_network_acl_entry(
+        network_acl_id=_, rule_number=_, protocol=_, rule_action=_, egress=_
+    )
+    await client.create_network_acl_entry(**_request(CreateNetworkAclEntryInputDict))
+    await client.create_network_acl_entry(_request(CreateNetworkAclEntryInput))
+    await client.create_network_acl_entry(_request(CreateNetworkAclEntryInputDict))
+    await client.create_network_insights_access_scope()
+    await client.create_network_insights_access_scope(
+        **_request(CreateNetworkInsightsAccessScopeInputDict)
+    )
+    await client.create_network_insights_access_scope(
+        _request(CreateNetworkInsightsAccessScopeInput)
+    )
+    await client.create_network_insights_access_scope(
+        _request(CreateNetworkInsightsAccessScopeInputDict)
+    )
+    await client.create_network_insights_path(source=_, protocol=_)
+    await client.create_network_insights_path(
+        **_request(CreateNetworkInsightsPathInputDict)
+    )
+    await client.create_network_insights_path(_request(CreateNetworkInsightsPathInput))
+    await client.create_network_insights_path(
+        _request(CreateNetworkInsightsPathInputDict)
+    )
+    await client.create_network_interface(subnet_id=_)
+    await client.create_network_interface(**_request(CreateNetworkInterfaceInputDict))
+    await client.create_network_interface(_request(CreateNetworkInterfaceInput))
+    await client.create_network_interface(_request(CreateNetworkInterfaceInputDict))
+    await client.create_network_interface_permission(
+        network_interface_id=_, permission=_
+    )
+    await client.create_network_interface_permission(
+        **_request(CreateNetworkInterfacePermissionInputDict)
+    )
+    await client.create_network_interface_permission(
+        _request(CreateNetworkInterfacePermissionInput)
+    )
+    await client.create_network_interface_permission(
+        _request(CreateNetworkInterfacePermissionInputDict)
+    )
+    await client.create_placement_group()
+    await client.create_placement_group(**_request(CreatePlacementGroupInputDict))
+    await client.create_placement_group(_request(CreatePlacementGroupInput))
+    await client.create_placement_group(_request(CreatePlacementGroupInputDict))
+    await client.create_public_ipv4_pool()
+    await client.create_public_ipv4_pool(**_request(CreatePublicIpv4PoolInputDict))
+    await client.create_public_ipv4_pool(_request(CreatePublicIpv4PoolInput))
+    await client.create_public_ipv4_pool(_request(CreatePublicIpv4PoolInputDict))
+    await client.create_replace_root_volume_task(instance_id=_)
+    await client.create_replace_root_volume_task(
+        **_request(CreateReplaceRootVolumeTaskInputDict)
+    )
+    await client.create_replace_root_volume_task(
+        _request(CreateReplaceRootVolumeTaskInput)
+    )
+    await client.create_replace_root_volume_task(
+        _request(CreateReplaceRootVolumeTaskInputDict)
+    )
+    await client.create_reserved_instances_listing(
+        reserved_instances_id=_, instance_count=_, price_schedules=_, client_token=_
+    )
+    await client.create_reserved_instances_listing(
+        **_request(CreateReservedInstancesListingInputDict)
+    )
+    await client.create_reserved_instances_listing(
+        _request(CreateReservedInstancesListingInput)
+    )
+    await client.create_reserved_instances_listing(
+        _request(CreateReservedInstancesListingInputDict)
+    )
+    await client.create_restore_image_task(bucket=_, object_key=_)
+    await client.create_restore_image_task(**_request(CreateRestoreImageTaskInputDict))
+    await client.create_restore_image_task(_request(CreateRestoreImageTaskInput))
+    await client.create_restore_image_task(_request(CreateRestoreImageTaskInputDict))
+    await client.create_route(route_table_id=_)
+    await client.create_route(**_request(CreateRouteInputDict))
+    await client.create_route(_request(CreateRouteInput))
+    await client.create_route(_request(CreateRouteInputDict))
+    await client.create_route_server(amazon_side_asn=_)
+    await client.create_route_server(**_request(CreateRouteServerInputDict))
+    await client.create_route_server(_request(CreateRouteServerInput))
+    await client.create_route_server(_request(CreateRouteServerInputDict))
+    await client.create_route_server_endpoint(route_server_id=_, subnet_id=_)
+    await client.create_route_server_endpoint(
+        **_request(CreateRouteServerEndpointInputDict)
+    )
+    await client.create_route_server_endpoint(_request(CreateRouteServerEndpointInput))
+    await client.create_route_server_endpoint(
+        _request(CreateRouteServerEndpointInputDict)
+    )
+    await client.create_route_server_peer(
+        route_server_endpoint_id=_, peer_address=_, bgp_options=_
+    )
+    await client.create_route_server_peer(**_request(CreateRouteServerPeerInputDict))
+    await client.create_route_server_peer(_request(CreateRouteServerPeerInput))
+    await client.create_route_server_peer(_request(CreateRouteServerPeerInputDict))
+    await client.create_route_table(vpc_id=_)
+    await client.create_route_table(**_request(CreateRouteTableInputDict))
+    await client.create_route_table(_request(CreateRouteTableInput))
+    await client.create_route_table(_request(CreateRouteTableInputDict))
+    await client.create_secondary_network(ipv4_cidr_block=_, network_type=_)
+    await client.create_secondary_network(**_request(CreateSecondaryNetworkInputDict))
+    await client.create_secondary_network(_request(CreateSecondaryNetworkInput))
+    await client.create_secondary_network(_request(CreateSecondaryNetworkInputDict))
+    await client.create_secondary_subnet(ipv4_cidr_block=_, secondary_network_id=_)
+    await client.create_secondary_subnet(**_request(CreateSecondarySubnetInputDict))
+    await client.create_secondary_subnet(_request(CreateSecondarySubnetInput))
+    await client.create_secondary_subnet(_request(CreateSecondarySubnetInputDict))
+    await client.create_security_group(description=_, group_name=_)
+    await client.create_security_group(**_request(CreateSecurityGroupInputDict))
+    await client.create_security_group(_request(CreateSecurityGroupInput))
+    await client.create_security_group(_request(CreateSecurityGroupInputDict))
+    await client.create_snapshot(volume_id=_)
+    await client.create_snapshot(**_request(CreateSnapshotInputDict))
+    await client.create_snapshot(_request(CreateSnapshotInput))
+    await client.create_snapshot(_request(CreateSnapshotInputDict))
+    await client.create_snapshots(instance_specification=_)
+    await client.create_snapshots(**_request(CreateSnapshotsInputDict))
+    await client.create_snapshots(_request(CreateSnapshotsInput))
+    await client.create_snapshots(_request(CreateSnapshotsInputDict))
+    await client.create_spot_datafeed_subscription(bucket=_)
+    await client.create_spot_datafeed_subscription(
+        **_request(CreateSpotDatafeedSubscriptionInputDict)
+    )
+    await client.create_spot_datafeed_subscription(
+        _request(CreateSpotDatafeedSubscriptionInput)
+    )
+    await client.create_spot_datafeed_subscription(
+        _request(CreateSpotDatafeedSubscriptionInputDict)
+    )
+    await client.create_store_image_task(image_id=_, bucket=_)
+    await client.create_store_image_task(**_request(CreateStoreImageTaskInputDict))
+    await client.create_store_image_task(_request(CreateStoreImageTaskInput))
+    await client.create_store_image_task(_request(CreateStoreImageTaskInputDict))
+    await client.create_subnet(vpc_id=_)
+    await client.create_subnet(**_request(CreateSubnetInputDict))
+    await client.create_subnet(_request(CreateSubnetInput))
+    await client.create_subnet(_request(CreateSubnetInputDict))
+    await client.create_subnet_cidr_reservation(subnet_id=_, cidr=_, reservation_type=_)
+    await client.create_subnet_cidr_reservation(
+        **_request(CreateSubnetCidrReservationInputDict)
+    )
+    await client.create_subnet_cidr_reservation(
+        _request(CreateSubnetCidrReservationInput)
+    )
+    await client.create_subnet_cidr_reservation(
+        _request(CreateSubnetCidrReservationInputDict)
+    )
+    await client.create_tags(resources=_, tags=_)
+    await client.create_tags(**_request(CreateTagsInputDict))
+    await client.create_tags(_request(CreateTagsInput))
+    await client.create_tags(_request(CreateTagsInputDict))
+    await client.create_traffic_mirror_filter()
+    await client.create_traffic_mirror_filter(
+        **_request(CreateTrafficMirrorFilterInputDict)
+    )
+    await client.create_traffic_mirror_filter(_request(CreateTrafficMirrorFilterInput))
+    await client.create_traffic_mirror_filter(
+        _request(CreateTrafficMirrorFilterInputDict)
+    )
+    await client.create_traffic_mirror_filter_rule(
+        traffic_mirror_filter_id=_,
+        traffic_direction=_,
+        rule_number=_,
+        rule_action=_,
+        destination_cidr_block=_,
+        source_cidr_block=_,
+    )
+    await client.create_traffic_mirror_filter_rule(
+        **_request(CreateTrafficMirrorFilterRuleInputDict)
+    )
+    await client.create_traffic_mirror_filter_rule(
+        _request(CreateTrafficMirrorFilterRuleInput)
+    )
+    await client.create_traffic_mirror_filter_rule(
+        _request(CreateTrafficMirrorFilterRuleInputDict)
+    )
+    await client.create_traffic_mirror_session(
+        network_interface_id=_,
+        traffic_mirror_target_id=_,
+        traffic_mirror_filter_id=_,
+        session_number=_,
+    )
+    await client.create_traffic_mirror_session(
+        **_request(CreateTrafficMirrorSessionInputDict)
+    )
+    await client.create_traffic_mirror_session(
+        _request(CreateTrafficMirrorSessionInput)
+    )
+    await client.create_traffic_mirror_session(
+        _request(CreateTrafficMirrorSessionInputDict)
+    )
+    await client.create_traffic_mirror_target()
+    await client.create_traffic_mirror_target(
+        **_request(CreateTrafficMirrorTargetInputDict)
+    )
+    await client.create_traffic_mirror_target(_request(CreateTrafficMirrorTargetInput))
+    await client.create_traffic_mirror_target(
+        _request(CreateTrafficMirrorTargetInputDict)
+    )
+    await client.create_transit_gateway()
+    await client.create_transit_gateway(**_request(CreateTransitGatewayInputDict))
+    await client.create_transit_gateway(_request(CreateTransitGatewayInput))
+    await client.create_transit_gateway(_request(CreateTransitGatewayInputDict))
+    await client.create_transit_gateway_connect(
+        transport_transit_gateway_attachment_id=_, options=_
+    )
+    await client.create_transit_gateway_connect(
+        **_request(CreateTransitGatewayConnectInputDict)
+    )
+    await client.create_transit_gateway_connect(
+        _request(CreateTransitGatewayConnectInput)
+    )
+    await client.create_transit_gateway_connect(
+        _request(CreateTransitGatewayConnectInputDict)
+    )
+    await client.create_transit_gateway_connect_peer(
+        transit_gateway_attachment_id=_, peer_address=_, inside_cidr_blocks=_
+    )
+    await client.create_transit_gateway_connect_peer(
+        **_request(CreateTransitGatewayConnectPeerInputDict)
+    )
+    await client.create_transit_gateway_connect_peer(
+        _request(CreateTransitGatewayConnectPeerInput)
+    )
+    await client.create_transit_gateway_connect_peer(
+        _request(CreateTransitGatewayConnectPeerInputDict)
+    )
+    await client.create_transit_gateway_metering_policy(transit_gateway_id=_)
+    await client.create_transit_gateway_metering_policy(
+        **_request(CreateTransitGatewayMeteringPolicyInputDict)
+    )
+    await client.create_transit_gateway_metering_policy(
+        _request(CreateTransitGatewayMeteringPolicyInput)
+    )
+    await client.create_transit_gateway_metering_policy(
+        _request(CreateTransitGatewayMeteringPolicyInputDict)
+    )
+    await client.create_transit_gateway_metering_policy_entry(
+        transit_gateway_metering_policy_id=_, policy_rule_number=_, metered_account=_
+    )
+    await client.create_transit_gateway_metering_policy_entry(
+        **_request(CreateTransitGatewayMeteringPolicyEntryInputDict)
+    )
+    await client.create_transit_gateway_metering_policy_entry(
+        _request(CreateTransitGatewayMeteringPolicyEntryInput)
+    )
+    await client.create_transit_gateway_metering_policy_entry(
+        _request(CreateTransitGatewayMeteringPolicyEntryInputDict)
+    )
+    await client.create_transit_gateway_multicast_domain(transit_gateway_id=_)
+    await client.create_transit_gateway_multicast_domain(
+        **_request(CreateTransitGatewayMulticastDomainInputDict)
+    )
+    await client.create_transit_gateway_multicast_domain(
+        _request(CreateTransitGatewayMulticastDomainInput)
+    )
+    await client.create_transit_gateway_multicast_domain(
+        _request(CreateTransitGatewayMulticastDomainInputDict)
+    )
+    await client.create_transit_gateway_peering_attachment(
+        transit_gateway_id=_,
+        peer_transit_gateway_id=_,
+        peer_account_id=_,
+        peer_region=_,
+    )
+    await client.create_transit_gateway_peering_attachment(
+        **_request(CreateTransitGatewayPeeringAttachmentInputDict)
+    )
+    await client.create_transit_gateway_peering_attachment(
+        _request(CreateTransitGatewayPeeringAttachmentInput)
+    )
+    await client.create_transit_gateway_peering_attachment(
+        _request(CreateTransitGatewayPeeringAttachmentInputDict)
+    )
+    await client.create_transit_gateway_policy_table(transit_gateway_id=_)
+    await client.create_transit_gateway_policy_table(
+        **_request(CreateTransitGatewayPolicyTableInputDict)
+    )
+    await client.create_transit_gateway_policy_table(
+        _request(CreateTransitGatewayPolicyTableInput)
+    )
+    await client.create_transit_gateway_policy_table(
+        _request(CreateTransitGatewayPolicyTableInputDict)
+    )
+    await client.create_transit_gateway_policy_table_entry(
+        transit_gateway_policy_table_id=_, policy_rule_number=_, target_route_table_id=_
+    )
+    await client.create_transit_gateway_policy_table_entry(
+        **_request(CreateTransitGatewayPolicyTableEntryInputDict)
+    )
+    await client.create_transit_gateway_policy_table_entry(
+        _request(CreateTransitGatewayPolicyTableEntryInput)
+    )
+    await client.create_transit_gateway_policy_table_entry(
+        _request(CreateTransitGatewayPolicyTableEntryInputDict)
+    )
+    await client.create_transit_gateway_prefix_list_reference(
+        transit_gateway_route_table_id=_, prefix_list_id=_
+    )
+    await client.create_transit_gateway_prefix_list_reference(
+        **_request(CreateTransitGatewayPrefixListReferenceInputDict)
+    )
+    await client.create_transit_gateway_prefix_list_reference(
+        _request(CreateTransitGatewayPrefixListReferenceInput)
+    )
+    await client.create_transit_gateway_prefix_list_reference(
+        _request(CreateTransitGatewayPrefixListReferenceInputDict)
+    )
+    await client.create_transit_gateway_route(
+        destination_cidr_block=_, transit_gateway_route_table_id=_
+    )
+    await client.create_transit_gateway_route(
+        **_request(CreateTransitGatewayRouteInputDict)
+    )
+    await client.create_transit_gateway_route(_request(CreateTransitGatewayRouteInput))
+    await client.create_transit_gateway_route(
+        _request(CreateTransitGatewayRouteInputDict)
+    )
+    await client.create_transit_gateway_route_table(transit_gateway_id=_)
+    await client.create_transit_gateway_route_table(
+        **_request(CreateTransitGatewayRouteTableInputDict)
+    )
+    await client.create_transit_gateway_route_table(
+        _request(CreateTransitGatewayRouteTableInput)
+    )
+    await client.create_transit_gateway_route_table(
+        _request(CreateTransitGatewayRouteTableInputDict)
+    )
+    await client.create_transit_gateway_route_table_announcement(
+        transit_gateway_route_table_id=_, peering_attachment_id=_
+    )
+    await client.create_transit_gateway_route_table_announcement(
+        **_request(CreateTransitGatewayRouteTableAnnouncementInputDict)
+    )
+    await client.create_transit_gateway_route_table_announcement(
+        _request(CreateTransitGatewayRouteTableAnnouncementInput)
+    )
+    await client.create_transit_gateway_route_table_announcement(
+        _request(CreateTransitGatewayRouteTableAnnouncementInputDict)
+    )
+    await client.create_transit_gateway_vpc_attachment(
+        transit_gateway_id=_, vpc_id=_, subnet_ids=_
+    )
+    await client.create_transit_gateway_vpc_attachment(
+        **_request(CreateTransitGatewayVpcAttachmentInputDict)
+    )
+    await client.create_transit_gateway_vpc_attachment(
+        _request(CreateTransitGatewayVpcAttachmentInput)
+    )
+    await client.create_transit_gateway_vpc_attachment(
+        _request(CreateTransitGatewayVpcAttachmentInputDict)
+    )
+    await client.create_verified_access_endpoint(
+        verified_access_group_id=_, endpoint_type=_, attachment_type=_
+    )
+    await client.create_verified_access_endpoint(
+        **_request(CreateVerifiedAccessEndpointInputDict)
+    )
+    await client.create_verified_access_endpoint(
+        _request(CreateVerifiedAccessEndpointInput)
+    )
+    await client.create_verified_access_endpoint(
+        _request(CreateVerifiedAccessEndpointInputDict)
+    )
+    await client.create_verified_access_group(verified_access_instance_id=_)
+    await client.create_verified_access_group(
+        **_request(CreateVerifiedAccessGroupInputDict)
+    )
+    await client.create_verified_access_group(_request(CreateVerifiedAccessGroupInput))
+    await client.create_verified_access_group(
+        _request(CreateVerifiedAccessGroupInputDict)
+    )
+    await client.create_verified_access_instance()
+    await client.create_verified_access_instance(
+        **_request(CreateVerifiedAccessInstanceInputDict)
+    )
+    await client.create_verified_access_instance(
+        _request(CreateVerifiedAccessInstanceInput)
+    )
+    await client.create_verified_access_instance(
+        _request(CreateVerifiedAccessInstanceInputDict)
+    )
+    await client.create_verified_access_trust_provider(
+        trust_provider_type=_, policy_reference_name=_
+    )
+    await client.create_verified_access_trust_provider(
+        **_request(CreateVerifiedAccessTrustProviderInputDict)
+    )
+    await client.create_verified_access_trust_provider(
+        _request(CreateVerifiedAccessTrustProviderInput)
+    )
+    await client.create_verified_access_trust_provider(
+        _request(CreateVerifiedAccessTrustProviderInputDict)
+    )
+    await client.create_volume()
+    await client.create_volume(**_request(CreateVolumeInputDict))
+    await client.create_volume(_request(CreateVolumeInput))
+    await client.create_volume(_request(CreateVolumeInputDict))
+    await client.create_vpc()
+    await client.create_vpc(**_request(CreateVpcInputDict))
+    await client.create_vpc(_request(CreateVpcInput))
+    await client.create_vpc(_request(CreateVpcInputDict))
+    await client.create_vpc_block_public_access_exclusion(
+        internet_gateway_exclusion_mode=_
+    )
+    await client.create_vpc_block_public_access_exclusion(
+        **_request(CreateVpcBlockPublicAccessExclusionInputDict)
+    )
+    await client.create_vpc_block_public_access_exclusion(
+        _request(CreateVpcBlockPublicAccessExclusionInput)
+    )
+    await client.create_vpc_block_public_access_exclusion(
+        _request(CreateVpcBlockPublicAccessExclusionInputDict)
+    )
+    await client.create_vpc_encryption_control(vpc_id=_)
+    await client.create_vpc_encryption_control(
+        **_request(CreateVpcEncryptionControlInputDict)
+    )
+    await client.create_vpc_encryption_control(
+        _request(CreateVpcEncryptionControlInput)
+    )
+    await client.create_vpc_encryption_control(
+        _request(CreateVpcEncryptionControlInputDict)
+    )
+    await client.create_vpc_endpoint(vpc_id=_)
+    await client.create_vpc_endpoint(**_request(CreateVpcEndpointInputDict))
+    await client.create_vpc_endpoint(_request(CreateVpcEndpointInput))
+    await client.create_vpc_endpoint(_request(CreateVpcEndpointInputDict))
+    await client.create_vpc_endpoint_connection_notification(
+        connection_notification_arn=_, connection_events=_
+    )
+    await client.create_vpc_endpoint_connection_notification(
+        **_request(CreateVpcEndpointConnectionNotificationInputDict)
+    )
+    await client.create_vpc_endpoint_connection_notification(
+        _request(CreateVpcEndpointConnectionNotificationInput)
+    )
+    await client.create_vpc_endpoint_connection_notification(
+        _request(CreateVpcEndpointConnectionNotificationInputDict)
+    )
+    await client.create_vpc_endpoint_service_configuration()
+    await client.create_vpc_endpoint_service_configuration(
+        **_request(CreateVpcEndpointServiceConfigurationInputDict)
+    )
+    await client.create_vpc_endpoint_service_configuration(
+        _request(CreateVpcEndpointServiceConfigurationInput)
+    )
+    await client.create_vpc_endpoint_service_configuration(
+        _request(CreateVpcEndpointServiceConfigurationInputDict)
+    )
+    await client.create_vpc_peering_connection(vpc_id=_)
+    await client.create_vpc_peering_connection(
+        **_request(CreateVpcPeeringConnectionInputDict)
+    )
+    await client.create_vpc_peering_connection(
+        _request(CreateVpcPeeringConnectionInput)
+    )
+    await client.create_vpc_peering_connection(
+        _request(CreateVpcPeeringConnectionInputDict)
+    )
+    await client.create_vpn_concentrator(type=_)
+    await client.create_vpn_concentrator(**_request(CreateVpnConcentratorInputDict))
+    await client.create_vpn_concentrator(_request(CreateVpnConcentratorInput))
+    await client.create_vpn_concentrator(_request(CreateVpnConcentratorInputDict))
+    await client.create_vpn_connection(customer_gateway_id=_, type=_)
+    await client.create_vpn_connection(**_request(CreateVpnConnectionInputDict))
+    await client.create_vpn_connection(_request(CreateVpnConnectionInput))
+    await client.create_vpn_connection(_request(CreateVpnConnectionInputDict))
+    await client.create_vpn_connection_route(
+        destination_cidr_block=_, vpn_connection_id=_
+    )
+    await client.create_vpn_connection_route(
+        **_request(CreateVpnConnectionRouteInputDict)
+    )
+    await client.create_vpn_connection_route(_request(CreateVpnConnectionRouteInput))
+    await client.create_vpn_connection_route(
+        _request(CreateVpnConnectionRouteInputDict)
+    )
+    await client.create_vpn_gateway(type=_)
+    await client.create_vpn_gateway(**_request(CreateVpnGatewayInputDict))
+    await client.create_vpn_gateway(_request(CreateVpnGatewayInput))
+    await client.create_vpn_gateway(_request(CreateVpnGatewayInputDict))
+    await client.delete_application_status_check(application_status_check_id=_)
+    await client.delete_application_status_check(
+        **_request(DeleteApplicationStatusCheckInputDict)
+    )
+    await client.delete_application_status_check(
+        _request(DeleteApplicationStatusCheckInput)
+    )
+    await client.delete_application_status_check(
+        _request(DeleteApplicationStatusCheckInputDict)
+    )
+    await client.delete_capacity_manager_data_export(capacity_manager_data_export_id=_)
+    await client.delete_capacity_manager_data_export(
+        **_request(DeleteCapacityManagerDataExportInputDict)
+    )
+    await client.delete_capacity_manager_data_export(
+        _request(DeleteCapacityManagerDataExportInput)
+    )
+    await client.delete_capacity_manager_data_export(
+        _request(DeleteCapacityManagerDataExportInputDict)
+    )
+    await client.delete_carrier_gateway(carrier_gateway_id=_)
+    await client.delete_carrier_gateway(**_request(DeleteCarrierGatewayInputDict))
+    await client.delete_carrier_gateway(_request(DeleteCarrierGatewayInput))
+    await client.delete_carrier_gateway(_request(DeleteCarrierGatewayInputDict))
+    await client.delete_client_vpn_endpoint(client_vpn_endpoint_id=_)
+    await client.delete_client_vpn_endpoint(
+        **_request(DeleteClientVpnEndpointInputDict)
+    )
+    await client.delete_client_vpn_endpoint(_request(DeleteClientVpnEndpointInput))
+    await client.delete_client_vpn_endpoint(_request(DeleteClientVpnEndpointInputDict))
+    await client.delete_client_vpn_endpoint_authorization_policy(
+        client_vpn_endpoint_id=_
+    )
+    await client.delete_client_vpn_endpoint_authorization_policy(
+        **_request(DeleteClientVpnEndpointAuthorizationPolicyInputDict)
+    )
+    await client.delete_client_vpn_endpoint_authorization_policy(
+        _request(DeleteClientVpnEndpointAuthorizationPolicyInput)
+    )
+    await client.delete_client_vpn_endpoint_authorization_policy(
+        _request(DeleteClientVpnEndpointAuthorizationPolicyInputDict)
+    )
+    await client.delete_client_vpn_route(
+        client_vpn_endpoint_id=_, destination_cidr_block=_
+    )
+    await client.delete_client_vpn_route(**_request(DeleteClientVpnRouteInputDict))
+    await client.delete_client_vpn_route(_request(DeleteClientVpnRouteInput))
+    await client.delete_client_vpn_route(_request(DeleteClientVpnRouteInputDict))
+    await client.delete_coip_cidr(cidr=_, coip_pool_id=_)
+    await client.delete_coip_cidr(**_request(DeleteCoipCidrInputDict))
+    await client.delete_coip_cidr(_request(DeleteCoipCidrInput))
+    await client.delete_coip_cidr(_request(DeleteCoipCidrInputDict))
+    await client.delete_coip_pool(coip_pool_id=_)
+    await client.delete_coip_pool(**_request(DeleteCoipPoolInputDict))
+    await client.delete_coip_pool(_request(DeleteCoipPoolInput))
+    await client.delete_coip_pool(_request(DeleteCoipPoolInputDict))
+    await client.delete_customer_gateway(customer_gateway_id=_)
+    await client.delete_customer_gateway(**_request(DeleteCustomerGatewayInputDict))
+    await client.delete_customer_gateway(_request(DeleteCustomerGatewayInput))
+    await client.delete_customer_gateway(_request(DeleteCustomerGatewayInputDict))
+    await client.delete_dhcp_options(dhcp_options_id=_)
+    await client.delete_dhcp_options(**_request(DeleteDhcpOptionsInputDict))
+    await client.delete_dhcp_options(_request(DeleteDhcpOptionsInput))
+    await client.delete_dhcp_options(_request(DeleteDhcpOptionsInputDict))
+    await client.delete_egress_only_internet_gateway(egress_only_internet_gateway_id=_)
+    await client.delete_egress_only_internet_gateway(
+        **_request(DeleteEgressOnlyInternetGatewayInputDict)
+    )
+    await client.delete_egress_only_internet_gateway(
+        _request(DeleteEgressOnlyInternetGatewayInput)
+    )
+    await client.delete_egress_only_internet_gateway(
+        _request(DeleteEgressOnlyInternetGatewayInputDict)
+    )
+    await client.delete_fleets(fleet_ids=_, terminate_instances=_)
+    await client.delete_fleets(**_request(DeleteFleetsInputDict))
+    await client.delete_fleets(_request(DeleteFleetsInput))
+    await client.delete_fleets(_request(DeleteFleetsInputDict))
+    await client.delete_flow_logs(flow_log_ids=_)
+    await client.delete_flow_logs(**_request(DeleteFlowLogsInputDict))
+    await client.delete_flow_logs(_request(DeleteFlowLogsInput))
+    await client.delete_flow_logs(_request(DeleteFlowLogsInputDict))
+    await client.delete_fpga_image(fpga_image_id=_)
+    await client.delete_fpga_image(**_request(DeleteFpgaImageInputDict))
+    await client.delete_fpga_image(_request(DeleteFpgaImageInput))
+    await client.delete_fpga_image(_request(DeleteFpgaImageInputDict))
+    await client.delete_image_usage_report(report_id=_)
+    await client.delete_image_usage_report(**_request(DeleteImageUsageReportInputDict))
+    await client.delete_image_usage_report(_request(DeleteImageUsageReportInput))
+    await client.delete_image_usage_report(_request(DeleteImageUsageReportInputDict))
+    await client.delete_instance_connect_endpoint(instance_connect_endpoint_id=_)
+    await client.delete_instance_connect_endpoint(
+        **_request(DeleteInstanceConnectEndpointInputDict)
+    )
+    await client.delete_instance_connect_endpoint(
+        _request(DeleteInstanceConnectEndpointInput)
+    )
+    await client.delete_instance_connect_endpoint(
+        _request(DeleteInstanceConnectEndpointInputDict)
+    )
+    await client.delete_instance_event_window(instance_event_window_id=_)
+    await client.delete_instance_event_window(
+        **_request(DeleteInstanceEventWindowInputDict)
+    )
+    await client.delete_instance_event_window(_request(DeleteInstanceEventWindowInput))
+    await client.delete_instance_event_window(
+        _request(DeleteInstanceEventWindowInputDict)
+    )
+    await client.delete_internet_gateway(internet_gateway_id=_)
+    await client.delete_internet_gateway(**_request(DeleteInternetGatewayInputDict))
+    await client.delete_internet_gateway(_request(DeleteInternetGatewayInput))
+    await client.delete_internet_gateway(_request(DeleteInternetGatewayInputDict))
+    await client.delete_ipam(ipam_id=_)
+    await client.delete_ipam(**_request(DeleteIpamInputDict))
+    await client.delete_ipam(_request(DeleteIpamInput))
+    await client.delete_ipam(_request(DeleteIpamInputDict))
+    await client.delete_ipam_external_resource_verification_token(
+        ipam_external_resource_verification_token_id=_
+    )
+    await client.delete_ipam_external_resource_verification_token(
+        **_request(DeleteIpamExternalResourceVerificationTokenInputDict)
+    )
+    await client.delete_ipam_external_resource_verification_token(
+        _request(DeleteIpamExternalResourceVerificationTokenInput)
+    )
+    await client.delete_ipam_external_resource_verification_token(
+        _request(DeleteIpamExternalResourceVerificationTokenInputDict)
+    )
+    await client.delete_ipam_internet_registry_association(
+        ipam_internet_registry_association_id=_
+    )
+    await client.delete_ipam_internet_registry_association(
+        **_request(DeleteIpamInternetRegistryAssociationInputDict)
+    )
+    await client.delete_ipam_internet_registry_association(
+        _request(DeleteIpamInternetRegistryAssociationInput)
+    )
+    await client.delete_ipam_internet_registry_association(
+        _request(DeleteIpamInternetRegistryAssociationInputDict)
+    )
+    await client.delete_ipam_policy(ipam_policy_id=_)
+    await client.delete_ipam_policy(**_request(DeleteIpamPolicyInputDict))
+    await client.delete_ipam_policy(_request(DeleteIpamPolicyInput))
+    await client.delete_ipam_policy(_request(DeleteIpamPolicyInputDict))
+    await client.delete_ipam_pool(ipam_pool_id=_)
+    await client.delete_ipam_pool(**_request(DeleteIpamPoolInputDict))
+    await client.delete_ipam_pool(_request(DeleteIpamPoolInput))
+    await client.delete_ipam_pool(_request(DeleteIpamPoolInputDict))
+    await client.delete_ipam_prefix_list_resolver(ipam_prefix_list_resolver_id=_)
+    await client.delete_ipam_prefix_list_resolver(
+        **_request(DeleteIpamPrefixListResolverInputDict)
+    )
+    await client.delete_ipam_prefix_list_resolver(
+        _request(DeleteIpamPrefixListResolverInput)
+    )
+    await client.delete_ipam_prefix_list_resolver(
+        _request(DeleteIpamPrefixListResolverInputDict)
+    )
+    await client.delete_ipam_prefix_list_resolver_target(
+        ipam_prefix_list_resolver_target_id=_
+    )
+    await client.delete_ipam_prefix_list_resolver_target(
+        **_request(DeleteIpamPrefixListResolverTargetInputDict)
+    )
+    await client.delete_ipam_prefix_list_resolver_target(
+        _request(DeleteIpamPrefixListResolverTargetInput)
+    )
+    await client.delete_ipam_prefix_list_resolver_target(
+        _request(DeleteIpamPrefixListResolverTargetInputDict)
+    )
+    await client.delete_ipam_resource_discovery(ipam_resource_discovery_id=_)
+    await client.delete_ipam_resource_discovery(
+        **_request(DeleteIpamResourceDiscoveryInputDict)
+    )
+    await client.delete_ipam_resource_discovery(
+        _request(DeleteIpamResourceDiscoveryInput)
+    )
+    await client.delete_ipam_resource_discovery(
+        _request(DeleteIpamResourceDiscoveryInputDict)
+    )
+    await client.delete_ipam_routing_policy_registration(
+        ipam_internet_registry_association_id=_, cidr=_
+    )
+    await client.delete_ipam_routing_policy_registration(
+        **_request(DeleteIpamRoutingPolicyRegistrationInputDict)
+    )
+    await client.delete_ipam_routing_policy_registration(
+        _request(DeleteIpamRoutingPolicyRegistrationInput)
+    )
+    await client.delete_ipam_routing_policy_registration(
+        _request(DeleteIpamRoutingPolicyRegistrationInputDict)
+    )
+    await client.delete_ipam_scope(ipam_scope_id=_)
+    await client.delete_ipam_scope(**_request(DeleteIpamScopeInputDict))
+    await client.delete_ipam_scope(_request(DeleteIpamScopeInput))
+    await client.delete_ipam_scope(_request(DeleteIpamScopeInputDict))
+    await client.delete_key_pair()
+    await client.delete_key_pair(**_request(DeleteKeyPairInputDict))
+    await client.delete_key_pair(_request(DeleteKeyPairInput))
+    await client.delete_key_pair(_request(DeleteKeyPairInputDict))
+    await client.delete_launch_template()
+    await client.delete_launch_template(**_request(DeleteLaunchTemplateInputDict))
+    await client.delete_launch_template(_request(DeleteLaunchTemplateInput))
+    await client.delete_launch_template(_request(DeleteLaunchTemplateInputDict))
+    await client.delete_launch_template_versions(versions=_)
+    await client.delete_launch_template_versions(
+        **_request(DeleteLaunchTemplateVersionsInputDict)
+    )
+    await client.delete_launch_template_versions(
+        _request(DeleteLaunchTemplateVersionsInput)
+    )
+    await client.delete_launch_template_versions(
+        _request(DeleteLaunchTemplateVersionsInputDict)
+    )
+    await client.delete_local_gateway_route(local_gateway_route_table_id=_)
+    await client.delete_local_gateway_route(
+        **_request(DeleteLocalGatewayRouteInputDict)
+    )
+    await client.delete_local_gateway_route(_request(DeleteLocalGatewayRouteInput))
+    await client.delete_local_gateway_route(_request(DeleteLocalGatewayRouteInputDict))
+    await client.delete_local_gateway_route_table(local_gateway_route_table_id=_)
+    await client.delete_local_gateway_route_table(
+        **_request(DeleteLocalGatewayRouteTableInputDict)
+    )
+    await client.delete_local_gateway_route_table(
+        _request(DeleteLocalGatewayRouteTableInput)
+    )
+    await client.delete_local_gateway_route_table(
+        _request(DeleteLocalGatewayRouteTableInputDict)
+    )
+    await client.delete_local_gateway_route_table_virtual_interface_group_association(
+        local_gateway_route_table_virtual_interface_group_association_id=_
+    )
+    await client.delete_local_gateway_route_table_virtual_interface_group_association(
+        **_request(
+            DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationInputDict
+        )
+    )
+    await client.delete_local_gateway_route_table_virtual_interface_group_association(
+        _request(DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationInput)
+    )
+    await client.delete_local_gateway_route_table_virtual_interface_group_association(
+        _request(DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationInputDict)
+    )
+    await client.delete_local_gateway_route_table_vpc_association(
+        local_gateway_route_table_vpc_association_id=_
+    )
+    await client.delete_local_gateway_route_table_vpc_association(
+        **_request(DeleteLocalGatewayRouteTableVpcAssociationInputDict)
+    )
+    await client.delete_local_gateway_route_table_vpc_association(
+        _request(DeleteLocalGatewayRouteTableVpcAssociationInput)
+    )
+    await client.delete_local_gateway_route_table_vpc_association(
+        _request(DeleteLocalGatewayRouteTableVpcAssociationInputDict)
+    )
+    await client.delete_local_gateway_virtual_interface(
+        local_gateway_virtual_interface_id=_
+    )
+    await client.delete_local_gateway_virtual_interface(
+        **_request(DeleteLocalGatewayVirtualInterfaceInputDict)
+    )
+    await client.delete_local_gateway_virtual_interface(
+        _request(DeleteLocalGatewayVirtualInterfaceInput)
+    )
+    await client.delete_local_gateway_virtual_interface(
+        _request(DeleteLocalGatewayVirtualInterfaceInputDict)
+    )
+    await client.delete_local_gateway_virtual_interface_group(
+        local_gateway_virtual_interface_group_id=_
+    )
+    await client.delete_local_gateway_virtual_interface_group(
+        **_request(DeleteLocalGatewayVirtualInterfaceGroupInputDict)
+    )
+    await client.delete_local_gateway_virtual_interface_group(
+        _request(DeleteLocalGatewayVirtualInterfaceGroupInput)
+    )
+    await client.delete_local_gateway_virtual_interface_group(
+        _request(DeleteLocalGatewayVirtualInterfaceGroupInputDict)
+    )
+    await client.delete_managed_prefix_list(prefix_list_id=_)
+    await client.delete_managed_prefix_list(
+        **_request(DeleteManagedPrefixListInputDict)
+    )
+    await client.delete_managed_prefix_list(_request(DeleteManagedPrefixListInput))
+    await client.delete_managed_prefix_list(_request(DeleteManagedPrefixListInputDict))
+    await client.delete_nat_gateway(nat_gateway_id=_)
+    await client.delete_nat_gateway(**_request(DeleteNatGatewayInputDict))
+    await client.delete_nat_gateway(_request(DeleteNatGatewayInput))
+    await client.delete_nat_gateway(_request(DeleteNatGatewayInputDict))
+    await client.delete_network_acl(network_acl_id=_)
+    await client.delete_network_acl(**_request(DeleteNetworkAclInputDict))
+    await client.delete_network_acl(_request(DeleteNetworkAclInput))
+    await client.delete_network_acl(_request(DeleteNetworkAclInputDict))
+    await client.delete_network_acl_entry(network_acl_id=_, rule_number=_, egress=_)
+    await client.delete_network_acl_entry(**_request(DeleteNetworkAclEntryInputDict))
+    await client.delete_network_acl_entry(_request(DeleteNetworkAclEntryInput))
+    await client.delete_network_acl_entry(_request(DeleteNetworkAclEntryInputDict))
+    await client.delete_network_insights_access_scope(
+        network_insights_access_scope_id=_
+    )
+    await client.delete_network_insights_access_scope(
+        **_request(DeleteNetworkInsightsAccessScopeInputDict)
+    )
+    await client.delete_network_insights_access_scope(
+        _request(DeleteNetworkInsightsAccessScopeInput)
+    )
+    await client.delete_network_insights_access_scope(
+        _request(DeleteNetworkInsightsAccessScopeInputDict)
+    )
+    await client.delete_network_insights_access_scope_analysis(
+        network_insights_access_scope_analysis_id=_
+    )
+    await client.delete_network_insights_access_scope_analysis(
+        **_request(DeleteNetworkInsightsAccessScopeAnalysisInputDict)
+    )
+    await client.delete_network_insights_access_scope_analysis(
+        _request(DeleteNetworkInsightsAccessScopeAnalysisInput)
+    )
+    await client.delete_network_insights_access_scope_analysis(
+        _request(DeleteNetworkInsightsAccessScopeAnalysisInputDict)
+    )
+    await client.delete_network_insights_analysis(network_insights_analysis_id=_)
+    await client.delete_network_insights_analysis(
+        **_request(DeleteNetworkInsightsAnalysisInputDict)
+    )
+    await client.delete_network_insights_analysis(
+        _request(DeleteNetworkInsightsAnalysisInput)
+    )
+    await client.delete_network_insights_analysis(
+        _request(DeleteNetworkInsightsAnalysisInputDict)
+    )
+    await client.delete_network_insights_path(network_insights_path_id=_)
+    await client.delete_network_insights_path(
+        **_request(DeleteNetworkInsightsPathInputDict)
+    )
+    await client.delete_network_insights_path(_request(DeleteNetworkInsightsPathInput))
+    await client.delete_network_insights_path(
+        _request(DeleteNetworkInsightsPathInputDict)
+    )
+    await client.delete_network_interface(network_interface_id=_)
+    await client.delete_network_interface(**_request(DeleteNetworkInterfaceInputDict))
+    await client.delete_network_interface(_request(DeleteNetworkInterfaceInput))
+    await client.delete_network_interface(_request(DeleteNetworkInterfaceInputDict))
+    await client.delete_network_interface_permission(network_interface_permission_id=_)
+    await client.delete_network_interface_permission(
+        **_request(DeleteNetworkInterfacePermissionInputDict)
+    )
+    await client.delete_network_interface_permission(
+        _request(DeleteNetworkInterfacePermissionInput)
+    )
+    await client.delete_network_interface_permission(
+        _request(DeleteNetworkInterfacePermissionInputDict)
+    )
+    await client.delete_placement_group(group_name=_)
+    await client.delete_placement_group(**_request(DeletePlacementGroupInputDict))
+    await client.delete_placement_group(_request(DeletePlacementGroupInput))
+    await client.delete_placement_group(_request(DeletePlacementGroupInputDict))
+    await client.delete_public_ipv4_pool(pool_id=_)
+    await client.delete_public_ipv4_pool(**_request(DeletePublicIpv4PoolInputDict))
+    await client.delete_public_ipv4_pool(_request(DeletePublicIpv4PoolInput))
+    await client.delete_public_ipv4_pool(_request(DeletePublicIpv4PoolInputDict))
+    await client.delete_queued_reserved_instances(reserved_instances_ids=_)
+    await client.delete_queued_reserved_instances(
+        **_request(DeleteQueuedReservedInstancesInputDict)
+    )
+    await client.delete_queued_reserved_instances(
+        _request(DeleteQueuedReservedInstancesInput)
+    )
+    await client.delete_queued_reserved_instances(
+        _request(DeleteQueuedReservedInstancesInputDict)
+    )
+    await client.delete_route(route_table_id=_)
+    await client.delete_route(**_request(DeleteRouteInputDict))
+    await client.delete_route(_request(DeleteRouteInput))
+    await client.delete_route(_request(DeleteRouteInputDict))
+    await client.delete_route_server(route_server_id=_)
+    await client.delete_route_server(**_request(DeleteRouteServerInputDict))
+    await client.delete_route_server(_request(DeleteRouteServerInput))
+    await client.delete_route_server(_request(DeleteRouteServerInputDict))
+    await client.delete_route_server_endpoint(route_server_endpoint_id=_)
+    await client.delete_route_server_endpoint(
+        **_request(DeleteRouteServerEndpointInputDict)
+    )
+    await client.delete_route_server_endpoint(_request(DeleteRouteServerEndpointInput))
+    await client.delete_route_server_endpoint(
+        _request(DeleteRouteServerEndpointInputDict)
+    )
+    await client.delete_route_server_peer(route_server_peer_id=_)
+    await client.delete_route_server_peer(**_request(DeleteRouteServerPeerInputDict))
+    await client.delete_route_server_peer(_request(DeleteRouteServerPeerInput))
+    await client.delete_route_server_peer(_request(DeleteRouteServerPeerInputDict))
+    await client.delete_route_table(route_table_id=_)
+    await client.delete_route_table(**_request(DeleteRouteTableInputDict))
+    await client.delete_route_table(_request(DeleteRouteTableInput))
+    await client.delete_route_table(_request(DeleteRouteTableInputDict))
+    await client.delete_secondary_network(secondary_network_id=_)
+    await client.delete_secondary_network(**_request(DeleteSecondaryNetworkInputDict))
+    await client.delete_secondary_network(_request(DeleteSecondaryNetworkInput))
+    await client.delete_secondary_network(_request(DeleteSecondaryNetworkInputDict))
+    await client.delete_secondary_subnet(secondary_subnet_id=_)
+    await client.delete_secondary_subnet(**_request(DeleteSecondarySubnetInputDict))
+    await client.delete_secondary_subnet(_request(DeleteSecondarySubnetInput))
+    await client.delete_secondary_subnet(_request(DeleteSecondarySubnetInputDict))
+    await client.delete_security_group()
+    await client.delete_security_group(**_request(DeleteSecurityGroupInputDict))
+    await client.delete_security_group(_request(DeleteSecurityGroupInput))
+    await client.delete_security_group(_request(DeleteSecurityGroupInputDict))
+    await client.delete_snapshot(snapshot_id=_)
+    await client.delete_snapshot(**_request(DeleteSnapshotInputDict))
+    await client.delete_snapshot(_request(DeleteSnapshotInput))
+    await client.delete_snapshot(_request(DeleteSnapshotInputDict))
+    await client.delete_spot_datafeed_subscription()
+    await client.delete_spot_datafeed_subscription(
+        **_request(DeleteSpotDatafeedSubscriptionInputDict)
+    )
+    await client.delete_spot_datafeed_subscription(
+        _request(DeleteSpotDatafeedSubscriptionInput)
+    )
+    await client.delete_spot_datafeed_subscription(
+        _request(DeleteSpotDatafeedSubscriptionInputDict)
+    )
+    await client.delete_subnet(subnet_id=_)
+    await client.delete_subnet(**_request(DeleteSubnetInputDict))
+    await client.delete_subnet(_request(DeleteSubnetInput))
+    await client.delete_subnet(_request(DeleteSubnetInputDict))
+    await client.delete_subnet_cidr_reservation(subnet_cidr_reservation_id=_)
+    await client.delete_subnet_cidr_reservation(
+        **_request(DeleteSubnetCidrReservationInputDict)
+    )
+    await client.delete_subnet_cidr_reservation(
+        _request(DeleteSubnetCidrReservationInput)
+    )
+    await client.delete_subnet_cidr_reservation(
+        _request(DeleteSubnetCidrReservationInputDict)
+    )
+    await client.delete_tags(resources=_)
+    await client.delete_tags(**_request(DeleteTagsInputDict))
+    await client.delete_tags(_request(DeleteTagsInput))
+    await client.delete_tags(_request(DeleteTagsInputDict))
+    await client.delete_traffic_mirror_filter(traffic_mirror_filter_id=_)
+    await client.delete_traffic_mirror_filter(
+        **_request(DeleteTrafficMirrorFilterInputDict)
+    )
+    await client.delete_traffic_mirror_filter(_request(DeleteTrafficMirrorFilterInput))
+    await client.delete_traffic_mirror_filter(
+        _request(DeleteTrafficMirrorFilterInputDict)
+    )
+    await client.delete_traffic_mirror_filter_rule(traffic_mirror_filter_rule_id=_)
+    await client.delete_traffic_mirror_filter_rule(
+        **_request(DeleteTrafficMirrorFilterRuleInputDict)
+    )
+    await client.delete_traffic_mirror_filter_rule(
+        _request(DeleteTrafficMirrorFilterRuleInput)
+    )
+    await client.delete_traffic_mirror_filter_rule(
+        _request(DeleteTrafficMirrorFilterRuleInputDict)
+    )
+    await client.delete_traffic_mirror_session(traffic_mirror_session_id=_)
+    await client.delete_traffic_mirror_session(
+        **_request(DeleteTrafficMirrorSessionInputDict)
+    )
+    await client.delete_traffic_mirror_session(
+        _request(DeleteTrafficMirrorSessionInput)
+    )
+    await client.delete_traffic_mirror_session(
+        _request(DeleteTrafficMirrorSessionInputDict)
+    )
+    await client.delete_traffic_mirror_target(traffic_mirror_target_id=_)
+    await client.delete_traffic_mirror_target(
+        **_request(DeleteTrafficMirrorTargetInputDict)
+    )
+    await client.delete_traffic_mirror_target(_request(DeleteTrafficMirrorTargetInput))
+    await client.delete_traffic_mirror_target(
+        _request(DeleteTrafficMirrorTargetInputDict)
+    )
+    await client.delete_transit_gateway(transit_gateway_id=_)
+    await client.delete_transit_gateway(**_request(DeleteTransitGatewayInputDict))
+    await client.delete_transit_gateway(_request(DeleteTransitGatewayInput))
+    await client.delete_transit_gateway(_request(DeleteTransitGatewayInputDict))
+    await client.delete_transit_gateway_client_vpn_attachment(
+        transit_gateway_attachment_id=_
+    )
+    await client.delete_transit_gateway_client_vpn_attachment(
+        **_request(DeleteTransitGatewayClientVpnAttachmentInputDict)
+    )
+    await client.delete_transit_gateway_client_vpn_attachment(
+        _request(DeleteTransitGatewayClientVpnAttachmentInput)
+    )
+    await client.delete_transit_gateway_client_vpn_attachment(
+        _request(DeleteTransitGatewayClientVpnAttachmentInputDict)
+    )
+    await client.delete_transit_gateway_connect(transit_gateway_attachment_id=_)
+    await client.delete_transit_gateway_connect(
+        **_request(DeleteTransitGatewayConnectInputDict)
+    )
+    await client.delete_transit_gateway_connect(
+        _request(DeleteTransitGatewayConnectInput)
+    )
+    await client.delete_transit_gateway_connect(
+        _request(DeleteTransitGatewayConnectInputDict)
+    )
+    await client.delete_transit_gateway_connect_peer(transit_gateway_connect_peer_id=_)
+    await client.delete_transit_gateway_connect_peer(
+        **_request(DeleteTransitGatewayConnectPeerInputDict)
+    )
+    await client.delete_transit_gateway_connect_peer(
+        _request(DeleteTransitGatewayConnectPeerInput)
+    )
+    await client.delete_transit_gateway_connect_peer(
+        _request(DeleteTransitGatewayConnectPeerInputDict)
+    )
+    await client.delete_transit_gateway_metering_policy(
+        transit_gateway_metering_policy_id=_
+    )
+    await client.delete_transit_gateway_metering_policy(
+        **_request(DeleteTransitGatewayMeteringPolicyInputDict)
+    )
+    await client.delete_transit_gateway_metering_policy(
+        _request(DeleteTransitGatewayMeteringPolicyInput)
+    )
+    await client.delete_transit_gateway_metering_policy(
+        _request(DeleteTransitGatewayMeteringPolicyInputDict)
+    )
+    await client.delete_transit_gateway_metering_policy_entry(
+        transit_gateway_metering_policy_id=_, policy_rule_number=_
+    )
+    await client.delete_transit_gateway_metering_policy_entry(
+        **_request(DeleteTransitGatewayMeteringPolicyEntryInputDict)
+    )
+    await client.delete_transit_gateway_metering_policy_entry(
+        _request(DeleteTransitGatewayMeteringPolicyEntryInput)
+    )
+    await client.delete_transit_gateway_metering_policy_entry(
+        _request(DeleteTransitGatewayMeteringPolicyEntryInputDict)
+    )
+    await client.delete_transit_gateway_multicast_domain(
+        transit_gateway_multicast_domain_id=_
+    )
+    await client.delete_transit_gateway_multicast_domain(
+        **_request(DeleteTransitGatewayMulticastDomainInputDict)
+    )
+    await client.delete_transit_gateway_multicast_domain(
+        _request(DeleteTransitGatewayMulticastDomainInput)
+    )
+    await client.delete_transit_gateway_multicast_domain(
+        _request(DeleteTransitGatewayMulticastDomainInputDict)
+    )
+    await client.delete_transit_gateway_peering_attachment(
+        transit_gateway_attachment_id=_
+    )
+    await client.delete_transit_gateway_peering_attachment(
+        **_request(DeleteTransitGatewayPeeringAttachmentInputDict)
+    )
+    await client.delete_transit_gateway_peering_attachment(
+        _request(DeleteTransitGatewayPeeringAttachmentInput)
+    )
+    await client.delete_transit_gateway_peering_attachment(
+        _request(DeleteTransitGatewayPeeringAttachmentInputDict)
+    )
+    await client.delete_transit_gateway_policy_table(transit_gateway_policy_table_id=_)
+    await client.delete_transit_gateway_policy_table(
+        **_request(DeleteTransitGatewayPolicyTableInputDict)
+    )
+    await client.delete_transit_gateway_policy_table(
+        _request(DeleteTransitGatewayPolicyTableInput)
+    )
+    await client.delete_transit_gateway_policy_table(
+        _request(DeleteTransitGatewayPolicyTableInputDict)
+    )
+    await client.delete_transit_gateway_policy_table_entry(
+        transit_gateway_policy_table_id=_, policy_rule_number=_
+    )
+    await client.delete_transit_gateway_policy_table_entry(
+        **_request(DeleteTransitGatewayPolicyTableEntryInputDict)
+    )
+    await client.delete_transit_gateway_policy_table_entry(
+        _request(DeleteTransitGatewayPolicyTableEntryInput)
+    )
+    await client.delete_transit_gateway_policy_table_entry(
+        _request(DeleteTransitGatewayPolicyTableEntryInputDict)
+    )
+    await client.delete_transit_gateway_prefix_list_reference(
+        transit_gateway_route_table_id=_, prefix_list_id=_
+    )
+    await client.delete_transit_gateway_prefix_list_reference(
+        **_request(DeleteTransitGatewayPrefixListReferenceInputDict)
+    )
+    await client.delete_transit_gateway_prefix_list_reference(
+        _request(DeleteTransitGatewayPrefixListReferenceInput)
+    )
+    await client.delete_transit_gateway_prefix_list_reference(
+        _request(DeleteTransitGatewayPrefixListReferenceInputDict)
+    )
+    await client.delete_transit_gateway_route(
+        transit_gateway_route_table_id=_, destination_cidr_block=_
+    )
+    await client.delete_transit_gateway_route(
+        **_request(DeleteTransitGatewayRouteInputDict)
+    )
+    await client.delete_transit_gateway_route(_request(DeleteTransitGatewayRouteInput))
+    await client.delete_transit_gateway_route(
+        _request(DeleteTransitGatewayRouteInputDict)
+    )
+    await client.delete_transit_gateway_route_table(transit_gateway_route_table_id=_)
+    await client.delete_transit_gateway_route_table(
+        **_request(DeleteTransitGatewayRouteTableInputDict)
+    )
+    await client.delete_transit_gateway_route_table(
+        _request(DeleteTransitGatewayRouteTableInput)
+    )
+    await client.delete_transit_gateway_route_table(
+        _request(DeleteTransitGatewayRouteTableInputDict)
+    )
+    await client.delete_transit_gateway_route_table_announcement(
+        transit_gateway_route_table_announcement_id=_
+    )
+    await client.delete_transit_gateway_route_table_announcement(
+        **_request(DeleteTransitGatewayRouteTableAnnouncementInputDict)
+    )
+    await client.delete_transit_gateway_route_table_announcement(
+        _request(DeleteTransitGatewayRouteTableAnnouncementInput)
+    )
+    await client.delete_transit_gateway_route_table_announcement(
+        _request(DeleteTransitGatewayRouteTableAnnouncementInputDict)
+    )
+    await client.delete_transit_gateway_vpc_attachment(transit_gateway_attachment_id=_)
+    await client.delete_transit_gateway_vpc_attachment(
+        **_request(DeleteTransitGatewayVpcAttachmentInputDict)
+    )
+    await client.delete_transit_gateway_vpc_attachment(
+        _request(DeleteTransitGatewayVpcAttachmentInput)
+    )
+    await client.delete_transit_gateway_vpc_attachment(
+        _request(DeleteTransitGatewayVpcAttachmentInputDict)
+    )
+    await client.delete_verified_access_endpoint(verified_access_endpoint_id=_)
+    await client.delete_verified_access_endpoint(
+        **_request(DeleteVerifiedAccessEndpointInputDict)
+    )
+    await client.delete_verified_access_endpoint(
+        _request(DeleteVerifiedAccessEndpointInput)
+    )
+    await client.delete_verified_access_endpoint(
+        _request(DeleteVerifiedAccessEndpointInputDict)
+    )
+    await client.delete_verified_access_group(verified_access_group_id=_)
+    await client.delete_verified_access_group(
+        **_request(DeleteVerifiedAccessGroupInputDict)
+    )
+    await client.delete_verified_access_group(_request(DeleteVerifiedAccessGroupInput))
+    await client.delete_verified_access_group(
+        _request(DeleteVerifiedAccessGroupInputDict)
+    )
+    await client.delete_verified_access_instance(verified_access_instance_id=_)
+    await client.delete_verified_access_instance(
+        **_request(DeleteVerifiedAccessInstanceInputDict)
+    )
+    await client.delete_verified_access_instance(
+        _request(DeleteVerifiedAccessInstanceInput)
+    )
+    await client.delete_verified_access_instance(
+        _request(DeleteVerifiedAccessInstanceInputDict)
+    )
+    await client.delete_verified_access_trust_provider(
+        verified_access_trust_provider_id=_
+    )
+    await client.delete_verified_access_trust_provider(
+        **_request(DeleteVerifiedAccessTrustProviderInputDict)
+    )
+    await client.delete_verified_access_trust_provider(
+        _request(DeleteVerifiedAccessTrustProviderInput)
+    )
+    await client.delete_verified_access_trust_provider(
+        _request(DeleteVerifiedAccessTrustProviderInputDict)
+    )
+    await client.delete_volume(volume_id=_)
+    await client.delete_volume(**_request(DeleteVolumeInputDict))
+    await client.delete_volume(_request(DeleteVolumeInput))
+    await client.delete_volume(_request(DeleteVolumeInputDict))
+    await client.delete_vpc(vpc_id=_)
+    await client.delete_vpc(**_request(DeleteVpcInputDict))
+    await client.delete_vpc(_request(DeleteVpcInput))
+    await client.delete_vpc(_request(DeleteVpcInputDict))
+    await client.delete_vpc_block_public_access_exclusion(exclusion_id=_)
+    await client.delete_vpc_block_public_access_exclusion(
+        **_request(DeleteVpcBlockPublicAccessExclusionInputDict)
+    )
+    await client.delete_vpc_block_public_access_exclusion(
+        _request(DeleteVpcBlockPublicAccessExclusionInput)
+    )
+    await client.delete_vpc_block_public_access_exclusion(
+        _request(DeleteVpcBlockPublicAccessExclusionInputDict)
+    )
+    await client.delete_vpc_encryption_control(vpc_encryption_control_id=_)
+    await client.delete_vpc_encryption_control(
+        **_request(DeleteVpcEncryptionControlInputDict)
+    )
+    await client.delete_vpc_encryption_control(
+        _request(DeleteVpcEncryptionControlInput)
+    )
+    await client.delete_vpc_encryption_control(
+        _request(DeleteVpcEncryptionControlInputDict)
+    )
+    await client.delete_vpc_endpoint_connection_notifications(
+        connection_notification_ids=_
+    )
+    await client.delete_vpc_endpoint_connection_notifications(
+        **_request(DeleteVpcEndpointConnectionNotificationsInputDict)
+    )
+    await client.delete_vpc_endpoint_connection_notifications(
+        _request(DeleteVpcEndpointConnectionNotificationsInput)
+    )
+    await client.delete_vpc_endpoint_connection_notifications(
+        _request(DeleteVpcEndpointConnectionNotificationsInputDict)
+    )
+    await client.delete_vpc_endpoints(vpc_endpoint_ids=_)
+    await client.delete_vpc_endpoints(**_request(DeleteVpcEndpointsInputDict))
+    await client.delete_vpc_endpoints(_request(DeleteVpcEndpointsInput))
+    await client.delete_vpc_endpoints(_request(DeleteVpcEndpointsInputDict))
+    await client.delete_vpc_endpoint_service_configurations(service_ids=_)
+    await client.delete_vpc_endpoint_service_configurations(
+        **_request(DeleteVpcEndpointServiceConfigurationsInputDict)
+    )
+    await client.delete_vpc_endpoint_service_configurations(
+        _request(DeleteVpcEndpointServiceConfigurationsInput)
+    )
+    await client.delete_vpc_endpoint_service_configurations(
+        _request(DeleteVpcEndpointServiceConfigurationsInputDict)
+    )
+    await client.delete_vpc_peering_connection(vpc_peering_connection_id=_)
+    await client.delete_vpc_peering_connection(
+        **_request(DeleteVpcPeeringConnectionInputDict)
+    )
+    await client.delete_vpc_peering_connection(
+        _request(DeleteVpcPeeringConnectionInput)
+    )
+    await client.delete_vpc_peering_connection(
+        _request(DeleteVpcPeeringConnectionInputDict)
+    )
+    await client.delete_vpn_concentrator(vpn_concentrator_id=_)
+    await client.delete_vpn_concentrator(**_request(DeleteVpnConcentratorInputDict))
+    await client.delete_vpn_concentrator(_request(DeleteVpnConcentratorInput))
+    await client.delete_vpn_concentrator(_request(DeleteVpnConcentratorInputDict))
+    await client.delete_vpn_connection(vpn_connection_id=_)
+    await client.delete_vpn_connection(**_request(DeleteVpnConnectionInputDict))
+    await client.delete_vpn_connection(_request(DeleteVpnConnectionInput))
+    await client.delete_vpn_connection(_request(DeleteVpnConnectionInputDict))
+    await client.delete_vpn_connection_route(
+        destination_cidr_block=_, vpn_connection_id=_
+    )
+    await client.delete_vpn_connection_route(
+        **_request(DeleteVpnConnectionRouteInputDict)
+    )
+    await client.delete_vpn_connection_route(_request(DeleteVpnConnectionRouteInput))
+    await client.delete_vpn_connection_route(
+        _request(DeleteVpnConnectionRouteInputDict)
+    )
+    await client.delete_vpn_gateway(vpn_gateway_id=_)
+    await client.delete_vpn_gateway(**_request(DeleteVpnGatewayInputDict))
+    await client.delete_vpn_gateway(_request(DeleteVpnGatewayInput))
+    await client.delete_vpn_gateway(_request(DeleteVpnGatewayInputDict))
+    await client.deprovision_byoip_cidr(cidr=_)
+    await client.deprovision_byoip_cidr(**_request(DeprovisionByoipCidrInputDict))
+    await client.deprovision_byoip_cidr(_request(DeprovisionByoipCidrInput))
+    await client.deprovision_byoip_cidr(_request(DeprovisionByoipCidrInputDict))
+    await client.deprovision_ipam_byoasn(ipam_id=_, asn=_)
+    await client.deprovision_ipam_byoasn(**_request(DeprovisionIpamByoasnInputDict))
+    await client.deprovision_ipam_byoasn(_request(DeprovisionIpamByoasnInput))
+    await client.deprovision_ipam_byoasn(_request(DeprovisionIpamByoasnInputDict))
+    await client.deprovision_ipam_pool_cidr(ipam_pool_id=_)
+    await client.deprovision_ipam_pool_cidr(
+        **_request(DeprovisionIpamPoolCidrInputDict)
+    )
+    await client.deprovision_ipam_pool_cidr(_request(DeprovisionIpamPoolCidrInput))
+    await client.deprovision_ipam_pool_cidr(_request(DeprovisionIpamPoolCidrInputDict))
+    await client.deprovision_public_ipv4_pool_cidr(pool_id=_, cidr=_)
+    await client.deprovision_public_ipv4_pool_cidr(
+        **_request(DeprovisionPublicIpv4PoolCidrInputDict)
+    )
+    await client.deprovision_public_ipv4_pool_cidr(
+        _request(DeprovisionPublicIpv4PoolCidrInput)
+    )
+    await client.deprovision_public_ipv4_pool_cidr(
+        _request(DeprovisionPublicIpv4PoolCidrInputDict)
+    )
+    await client.deregister_image(image_id=_)
+    await client.deregister_image(**_request(DeregisterImageInputDict))
+    await client.deregister_image(_request(DeregisterImageInput))
+    await client.deregister_image(_request(DeregisterImageInputDict))
+    await client.deregister_instance_event_notification_attributes(
+        instance_tag_attribute=_
+    )
+    await client.deregister_instance_event_notification_attributes(
+        **_request(DeregisterInstanceEventNotificationAttributesInputDict)
+    )
+    await client.deregister_instance_event_notification_attributes(
+        _request(DeregisterInstanceEventNotificationAttributesInput)
+    )
+    await client.deregister_instance_event_notification_attributes(
+        _request(DeregisterInstanceEventNotificationAttributesInputDict)
+    )
+    await client.deregister_transit_gateway_multicast_group_members()
+    await client.deregister_transit_gateway_multicast_group_members(
+        **_request(DeregisterTransitGatewayMulticastGroupMembersInputDict)
+    )
+    await client.deregister_transit_gateway_multicast_group_members(
+        _request(DeregisterTransitGatewayMulticastGroupMembersInput)
+    )
+    await client.deregister_transit_gateway_multicast_group_members(
+        _request(DeregisterTransitGatewayMulticastGroupMembersInputDict)
+    )
+    await client.deregister_transit_gateway_multicast_group_sources()
+    await client.deregister_transit_gateway_multicast_group_sources(
+        **_request(DeregisterTransitGatewayMulticastGroupSourcesInputDict)
+    )
+    await client.deregister_transit_gateway_multicast_group_sources(
+        _request(DeregisterTransitGatewayMulticastGroupSourcesInput)
+    )
+    await client.deregister_transit_gateway_multicast_group_sources(
+        _request(DeregisterTransitGatewayMulticastGroupSourcesInputDict)
+    )
+    await client.describe_account_attributes()
+    await client.describe_account_attributes(
+        **_request(DescribeAccountAttributesInputDict)
+    )
+    await client.describe_account_attributes(_request(DescribeAccountAttributesInput))
+    await client.describe_account_attributes(
+        _request(DescribeAccountAttributesInputDict)
+    )
+    await client.describe_account_vpc_encryption_control()
+    await client.describe_account_vpc_encryption_control(
+        **_request(DescribeAccountVpcEncryptionControlInputDict)
+    )
+    await client.describe_account_vpc_encryption_control(
+        _request(DescribeAccountVpcEncryptionControlInput)
+    )
+    await client.describe_account_vpc_encryption_control(
+        _request(DescribeAccountVpcEncryptionControlInputDict)
+    )
+    await client.describe_addresses()
+    await client.describe_addresses(**_request(DescribeAddressesInputDict))
+    await client.describe_addresses(_request(DescribeAddressesInput))
+    await client.describe_addresses(_request(DescribeAddressesInputDict))
+    await client.describe_addresses_attribute()
+    await client.describe_addresses_attribute(
+        **_request(DescribeAddressesAttributeInputDict)
+    )
+    await client.describe_addresses_attribute(_request(DescribeAddressesAttributeInput))
+    await client.describe_addresses_attribute(
+        _request(DescribeAddressesAttributeInputDict)
+    )
+    await client.describe_address_transfers()
+    await client.describe_address_transfers(
+        **_request(DescribeAddressTransfersInputDict)
+    )
+    await client.describe_address_transfers(_request(DescribeAddressTransfersInput))
+    await client.describe_address_transfers(_request(DescribeAddressTransfersInputDict))
+    await client.describe_aggregate_id_format()
+    await client.describe_aggregate_id_format(
+        **_request(DescribeAggregateIdFormatInputDict)
+    )
+    await client.describe_aggregate_id_format(_request(DescribeAggregateIdFormatInput))
+    await client.describe_aggregate_id_format(
+        _request(DescribeAggregateIdFormatInputDict)
+    )
+    await client.describe_application_status()
+    await client.describe_application_status(
+        **_request(DescribeApplicationStatusInputDict)
+    )
+    await client.describe_application_status(_request(DescribeApplicationStatusInput))
+    await client.describe_application_status(
+        _request(DescribeApplicationStatusInputDict)
+    )
+    await client.describe_application_status_check_associations()
+    await client.describe_application_status_check_associations(
+        **_request(DescribeApplicationStatusCheckAssociationsInputDict)
+    )
+    await client.describe_application_status_check_associations(
+        _request(DescribeApplicationStatusCheckAssociationsInput)
+    )
+    await client.describe_application_status_check_associations(
+        _request(DescribeApplicationStatusCheckAssociationsInputDict)
+    )
+    await client.describe_application_status_checks()
+    await client.describe_application_status_checks(
+        **_request(DescribeApplicationStatusChecksInputDict)
+    )
+    await client.describe_application_status_checks(
+        _request(DescribeApplicationStatusChecksInput)
+    )
+    await client.describe_application_status_checks(
+        _request(DescribeApplicationStatusChecksInputDict)
+    )
+    await client.describe_availability_zones()
+    await client.describe_availability_zones(
+        **_request(DescribeAvailabilityZonesInputDict)
+    )
+    await client.describe_availability_zones(_request(DescribeAvailabilityZonesInput))
+    await client.describe_availability_zones(
+        _request(DescribeAvailabilityZonesInputDict)
+    )
+    await client.describe_aws_network_performance_metric_subscriptions()
+    await client.describe_aws_network_performance_metric_subscriptions(
+        **_request(DescribeAwsNetworkPerformanceMetricSubscriptionsInputDict)
+    )
+    await client.describe_aws_network_performance_metric_subscriptions(
+        _request(DescribeAwsNetworkPerformanceMetricSubscriptionsInput)
+    )
+    await client.describe_aws_network_performance_metric_subscriptions(
+        _request(DescribeAwsNetworkPerformanceMetricSubscriptionsInputDict)
+    )
+    await client.describe_bundle_tasks()
+    await client.describe_bundle_tasks(**_request(DescribeBundleTasksInputDict))
+    await client.describe_bundle_tasks(_request(DescribeBundleTasksInput))
+    await client.describe_bundle_tasks(_request(DescribeBundleTasksInputDict))
+    await client.describe_byoip_cidrs(max_results=_)
+    await client.describe_byoip_cidrs(**_request(DescribeByoipCidrsInputDict))
+    await client.describe_byoip_cidrs(_request(DescribeByoipCidrsInput))
+    await client.describe_byoip_cidrs(_request(DescribeByoipCidrsInputDict))
+    await client.describe_capacity_block_extension_history()
+    await client.describe_capacity_block_extension_history(
+        **_request(DescribeCapacityBlockExtensionHistoryInputDict)
+    )
+    await client.describe_capacity_block_extension_history(
+        _request(DescribeCapacityBlockExtensionHistoryInput)
+    )
+    await client.describe_capacity_block_extension_history(
+        _request(DescribeCapacityBlockExtensionHistoryInputDict)
+    )
+    await client.describe_capacity_block_extension_offerings(
+        capacity_block_extension_duration_hours=_, capacity_reservation_id=_
+    )
+    await client.describe_capacity_block_extension_offerings(
+        **_request(DescribeCapacityBlockExtensionOfferingsInputDict)
+    )
+    await client.describe_capacity_block_extension_offerings(
+        _request(DescribeCapacityBlockExtensionOfferingsInput)
+    )
+    await client.describe_capacity_block_extension_offerings(
+        _request(DescribeCapacityBlockExtensionOfferingsInputDict)
+    )
+    await client.describe_capacity_block_offerings(capacity_duration_hours=_)
+    await client.describe_capacity_block_offerings(
+        **_request(DescribeCapacityBlockOfferingsInputDict)
+    )
+    await client.describe_capacity_block_offerings(
+        _request(DescribeCapacityBlockOfferingsInput)
+    )
+    await client.describe_capacity_block_offerings(
+        _request(DescribeCapacityBlockOfferingsInputDict)
+    )
+    await client.describe_capacity_blocks()
+    await client.describe_capacity_blocks(**_request(DescribeCapacityBlocksInputDict))
+    await client.describe_capacity_blocks(_request(DescribeCapacityBlocksInput))
+    await client.describe_capacity_blocks(_request(DescribeCapacityBlocksInputDict))
+    await client.describe_capacity_block_status()
+    await client.describe_capacity_block_status(
+        **_request(DescribeCapacityBlockStatusInputDict)
+    )
+    await client.describe_capacity_block_status(
+        _request(DescribeCapacityBlockStatusInput)
+    )
+    await client.describe_capacity_block_status(
+        _request(DescribeCapacityBlockStatusInputDict)
+    )
+    await client.describe_capacity_manager_data_exports()
+    await client.describe_capacity_manager_data_exports(
+        **_request(DescribeCapacityManagerDataExportsInputDict)
+    )
+    await client.describe_capacity_manager_data_exports(
+        _request(DescribeCapacityManagerDataExportsInput)
+    )
+    await client.describe_capacity_manager_data_exports(
+        _request(DescribeCapacityManagerDataExportsInputDict)
+    )
+    await client.describe_capacity_reservation_billing_requests(role=_)
+    await client.describe_capacity_reservation_billing_requests(
+        **_request(DescribeCapacityReservationBillingRequestsInputDict)
+    )
+    await client.describe_capacity_reservation_billing_requests(
+        _request(DescribeCapacityReservationBillingRequestsInput)
+    )
+    await client.describe_capacity_reservation_billing_requests(
+        _request(DescribeCapacityReservationBillingRequestsInputDict)
+    )
+    await client.describe_capacity_reservation_cancellation_quotes()
+    await client.describe_capacity_reservation_cancellation_quotes(
+        **_request(DescribeCapacityReservationCancellationQuotesInputDict)
+    )
+    await client.describe_capacity_reservation_cancellation_quotes(
+        _request(DescribeCapacityReservationCancellationQuotesInput)
+    )
+    await client.describe_capacity_reservation_cancellation_quotes(
+        _request(DescribeCapacityReservationCancellationQuotesInputDict)
+    )
+    await client.describe_capacity_reservation_date_change_quotes()
+    await client.describe_capacity_reservation_date_change_quotes(
+        **_request(DescribeCapacityReservationDateChangeQuotesInputDict)
+    )
+    await client.describe_capacity_reservation_date_change_quotes(
+        _request(DescribeCapacityReservationDateChangeQuotesInput)
+    )
+    await client.describe_capacity_reservation_date_change_quotes(
+        _request(DescribeCapacityReservationDateChangeQuotesInputDict)
+    )
+    await client.describe_capacity_reservation_fleets()
+    await client.describe_capacity_reservation_fleets(
+        **_request(DescribeCapacityReservationFleetsInputDict)
+    )
+    await client.describe_capacity_reservation_fleets(
+        _request(DescribeCapacityReservationFleetsInput)
+    )
+    await client.describe_capacity_reservation_fleets(
+        _request(DescribeCapacityReservationFleetsInputDict)
+    )
+    await client.describe_capacity_reservations()
+    await client.describe_capacity_reservations(
+        **_request(DescribeCapacityReservationsInputDict)
+    )
+    await client.describe_capacity_reservations(
+        _request(DescribeCapacityReservationsInput)
+    )
+    await client.describe_capacity_reservations(
+        _request(DescribeCapacityReservationsInputDict)
+    )
+    await client.describe_capacity_reservation_topology()
+    await client.describe_capacity_reservation_topology(
+        **_request(DescribeCapacityReservationTopologyInputDict)
+    )
+    await client.describe_capacity_reservation_topology(
+        _request(DescribeCapacityReservationTopologyInput)
+    )
+    await client.describe_capacity_reservation_topology(
+        _request(DescribeCapacityReservationTopologyInputDict)
+    )
+    await client.describe_carrier_gateways()
+    await client.describe_carrier_gateways(**_request(DescribeCarrierGatewaysInputDict))
+    await client.describe_carrier_gateways(_request(DescribeCarrierGatewaysInput))
+    await client.describe_carrier_gateways(_request(DescribeCarrierGatewaysInputDict))
+    await client.describe_classic_link_instances()
+    await client.describe_classic_link_instances(
+        **_request(DescribeClassicLinkInstancesInputDict)
+    )
+    await client.describe_classic_link_instances(
+        _request(DescribeClassicLinkInstancesInput)
+    )
+    await client.describe_classic_link_instances(
+        _request(DescribeClassicLinkInstancesInputDict)
+    )
+    await client.describe_client_vpn_authorization_rules(client_vpn_endpoint_id=_)
+    await client.describe_client_vpn_authorization_rules(
+        **_request(DescribeClientVpnAuthorizationRulesInputDict)
+    )
+    await client.describe_client_vpn_authorization_rules(
+        _request(DescribeClientVpnAuthorizationRulesInput)
+    )
+    await client.describe_client_vpn_authorization_rules(
+        _request(DescribeClientVpnAuthorizationRulesInputDict)
+    )
+    await client.describe_client_vpn_connections(client_vpn_endpoint_id=_)
+    await client.describe_client_vpn_connections(
+        **_request(DescribeClientVpnConnectionsInputDict)
+    )
+    await client.describe_client_vpn_connections(
+        _request(DescribeClientVpnConnectionsInput)
+    )
+    await client.describe_client_vpn_connections(
+        _request(DescribeClientVpnConnectionsInputDict)
+    )
+    await client.describe_client_vpn_endpoints()
+    await client.describe_client_vpn_endpoints(
+        **_request(DescribeClientVpnEndpointsInputDict)
+    )
+    await client.describe_client_vpn_endpoints(
+        _request(DescribeClientVpnEndpointsInput)
+    )
+    await client.describe_client_vpn_endpoints(
+        _request(DescribeClientVpnEndpointsInputDict)
+    )
+    await client.describe_client_vpn_routes(client_vpn_endpoint_id=_)
+    await client.describe_client_vpn_routes(
+        **_request(DescribeClientVpnRoutesInputDict)
+    )
+    await client.describe_client_vpn_routes(_request(DescribeClientVpnRoutesInput))
+    await client.describe_client_vpn_routes(_request(DescribeClientVpnRoutesInputDict))
+    await client.describe_client_vpn_target_networks(client_vpn_endpoint_id=_)
+    await client.describe_client_vpn_target_networks(
+        **_request(DescribeClientVpnTargetNetworksInputDict)
+    )
+    await client.describe_client_vpn_target_networks(
+        _request(DescribeClientVpnTargetNetworksInput)
+    )
+    await client.describe_client_vpn_target_networks(
+        _request(DescribeClientVpnTargetNetworksInputDict)
+    )
+    await client.describe_coip_pools()
+    await client.describe_coip_pools(**_request(DescribeCoipPoolsInputDict))
+    await client.describe_coip_pools(_request(DescribeCoipPoolsInput))
+    await client.describe_coip_pools(_request(DescribeCoipPoolsInputDict))
+    await client.describe_conversion_tasks()
+    await client.describe_conversion_tasks(**_request(DescribeConversionTasksInputDict))
+    await client.describe_conversion_tasks(_request(DescribeConversionTasksInput))
+    await client.describe_conversion_tasks(_request(DescribeConversionTasksInputDict))
+    await client.describe_customer_gateways()
+    await client.describe_customer_gateways(
+        **_request(DescribeCustomerGatewaysInputDict)
+    )
+    await client.describe_customer_gateways(_request(DescribeCustomerGatewaysInput))
+    await client.describe_customer_gateways(_request(DescribeCustomerGatewaysInputDict))
+    await client.describe_declarative_policies_reports()
+    await client.describe_declarative_policies_reports(
+        **_request(DescribeDeclarativePoliciesReportsInputDict)
+    )
+    await client.describe_declarative_policies_reports(
+        _request(DescribeDeclarativePoliciesReportsInput)
+    )
+    await client.describe_declarative_policies_reports(
+        _request(DescribeDeclarativePoliciesReportsInputDict)
+    )
+    await client.describe_dhcp_options()
+    await client.describe_dhcp_options(**_request(DescribeDhcpOptionsInputDict))
+    await client.describe_dhcp_options(_request(DescribeDhcpOptionsInput))
+    await client.describe_dhcp_options(_request(DescribeDhcpOptionsInputDict))
+    await client.describe_egress_only_internet_gateways()
+    await client.describe_egress_only_internet_gateways(
+        **_request(DescribeEgressOnlyInternetGatewaysInputDict)
+    )
+    await client.describe_egress_only_internet_gateways(
+        _request(DescribeEgressOnlyInternetGatewaysInput)
+    )
+    await client.describe_egress_only_internet_gateways(
+        _request(DescribeEgressOnlyInternetGatewaysInputDict)
+    )
+    await client.describe_elastic_gpus()
+    await client.describe_elastic_gpus(**_request(DescribeElasticGpusInputDict))
+    await client.describe_elastic_gpus(_request(DescribeElasticGpusInput))
+    await client.describe_elastic_gpus(_request(DescribeElasticGpusInputDict))
+    await client.describe_export_image_tasks()
+    await client.describe_export_image_tasks(
+        **_request(DescribeExportImageTasksInputDict)
+    )
+    await client.describe_export_image_tasks(_request(DescribeExportImageTasksInput))
+    await client.describe_export_image_tasks(
+        _request(DescribeExportImageTasksInputDict)
+    )
+    await client.describe_export_tasks()
+    await client.describe_export_tasks(**_request(DescribeExportTasksInputDict))
+    await client.describe_export_tasks(_request(DescribeExportTasksInput))
+    await client.describe_export_tasks(_request(DescribeExportTasksInputDict))
+    await client.describe_fast_launch_images()
+    await client.describe_fast_launch_images(
+        **_request(DescribeFastLaunchImagesInputDict)
+    )
+    await client.describe_fast_launch_images(_request(DescribeFastLaunchImagesInput))
+    await client.describe_fast_launch_images(
+        _request(DescribeFastLaunchImagesInputDict)
+    )
+    await client.describe_fast_snapshot_restores()
+    await client.describe_fast_snapshot_restores(
+        **_request(DescribeFastSnapshotRestoresInputDict)
+    )
+    await client.describe_fast_snapshot_restores(
+        _request(DescribeFastSnapshotRestoresInput)
+    )
+    await client.describe_fast_snapshot_restores(
+        _request(DescribeFastSnapshotRestoresInputDict)
+    )
+    await client.describe_fleet_history(fleet_id=_, start_time=_)
+    await client.describe_fleet_history(**_request(DescribeFleetHistoryInputDict))
+    await client.describe_fleet_history(_request(DescribeFleetHistoryInput))
+    await client.describe_fleet_history(_request(DescribeFleetHistoryInputDict))
+    await client.describe_fleet_instances(fleet_id=_)
+    await client.describe_fleet_instances(**_request(DescribeFleetInstancesInputDict))
+    await client.describe_fleet_instances(_request(DescribeFleetInstancesInput))
+    await client.describe_fleet_instances(_request(DescribeFleetInstancesInputDict))
+    await client.describe_fleets()
+    await client.describe_fleets(**_request(DescribeFleetsInputDict))
+    await client.describe_fleets(_request(DescribeFleetsInput))
+    await client.describe_fleets(_request(DescribeFleetsInputDict))
+    await client.describe_flow_logs()
+    await client.describe_flow_logs(**_request(DescribeFlowLogsInputDict))
+    await client.describe_flow_logs(_request(DescribeFlowLogsInput))
+    await client.describe_flow_logs(_request(DescribeFlowLogsInputDict))
+    await client.describe_fpga_image_attribute(fpga_image_id=_, attribute=_)
+    await client.describe_fpga_image_attribute(
+        **_request(DescribeFpgaImageAttributeInputDict)
+    )
+    await client.describe_fpga_image_attribute(
+        _request(DescribeFpgaImageAttributeInput)
+    )
+    await client.describe_fpga_image_attribute(
+        _request(DescribeFpgaImageAttributeInputDict)
+    )
+    await client.describe_fpga_images()
+    await client.describe_fpga_images(**_request(DescribeFpgaImagesInputDict))
+    await client.describe_fpga_images(_request(DescribeFpgaImagesInput))
+    await client.describe_fpga_images(_request(DescribeFpgaImagesInputDict))
+    await client.describe_host_reservation_offerings()
+    await client.describe_host_reservation_offerings(
+        **_request(DescribeHostReservationOfferingsInputDict)
+    )
+    await client.describe_host_reservation_offerings(
+        _request(DescribeHostReservationOfferingsInput)
+    )
+    await client.describe_host_reservation_offerings(
+        _request(DescribeHostReservationOfferingsInputDict)
+    )
+    await client.describe_host_reservations()
+    await client.describe_host_reservations(
+        **_request(DescribeHostReservationsInputDict)
+    )
+    await client.describe_host_reservations(_request(DescribeHostReservationsInput))
+    await client.describe_host_reservations(_request(DescribeHostReservationsInputDict))
+    await client.describe_hosts()
+    await client.describe_hosts(**_request(DescribeHostsInputDict))
+    await client.describe_hosts(_request(DescribeHostsInput))
+    await client.describe_hosts(_request(DescribeHostsInputDict))
+    await client.describe_iam_instance_profile_associations()
+    await client.describe_iam_instance_profile_associations(
+        **_request(DescribeIamInstanceProfileAssociationsInputDict)
+    )
+    await client.describe_iam_instance_profile_associations(
+        _request(DescribeIamInstanceProfileAssociationsInput)
+    )
+    await client.describe_iam_instance_profile_associations(
+        _request(DescribeIamInstanceProfileAssociationsInputDict)
+    )
+    await client.describe_identity_id_format(principal_arn=_)
+    await client.describe_identity_id_format(
+        **_request(DescribeIdentityIdFormatInputDict)
+    )
+    await client.describe_identity_id_format(_request(DescribeIdentityIdFormatInput))
+    await client.describe_identity_id_format(
+        _request(DescribeIdentityIdFormatInputDict)
+    )
+    await client.describe_id_format()
+    await client.describe_id_format(**_request(DescribeIdFormatInputDict))
+    await client.describe_id_format(_request(DescribeIdFormatInput))
+    await client.describe_id_format(_request(DescribeIdFormatInputDict))
+    await client.describe_image_attribute(attribute=_, image_id=_)
+    await client.describe_image_attribute(**_request(DescribeImageAttributeInputDict))
+    await client.describe_image_attribute(_request(DescribeImageAttributeInput))
+    await client.describe_image_attribute(_request(DescribeImageAttributeInputDict))
+    await client.describe_image_references(image_ids=_)
+    await client.describe_image_references(**_request(DescribeImageReferencesInputDict))
+    await client.describe_image_references(_request(DescribeImageReferencesInput))
+    await client.describe_image_references(_request(DescribeImageReferencesInputDict))
+    await client.describe_images()
+    await client.describe_images(**_request(DescribeImagesInputDict))
+    await client.describe_images(_request(DescribeImagesInput))
+    await client.describe_images(_request(DescribeImagesInputDict))
+    await client.describe_image_usage_report_entries()
+    await client.describe_image_usage_report_entries(
+        **_request(DescribeImageUsageReportEntriesInputDict)
+    )
+    await client.describe_image_usage_report_entries(
+        _request(DescribeImageUsageReportEntriesInput)
+    )
+    await client.describe_image_usage_report_entries(
+        _request(DescribeImageUsageReportEntriesInputDict)
+    )
+    await client.describe_image_usage_reports()
+    await client.describe_image_usage_reports(
+        **_request(DescribeImageUsageReportsInputDict)
+    )
+    await client.describe_image_usage_reports(_request(DescribeImageUsageReportsInput))
+    await client.describe_image_usage_reports(
+        _request(DescribeImageUsageReportsInputDict)
+    )
+    await client.describe_import_image_tasks()
+    await client.describe_import_image_tasks(
+        **_request(DescribeImportImageTasksInputDict)
+    )
+    await client.describe_import_image_tasks(_request(DescribeImportImageTasksInput))
+    await client.describe_import_image_tasks(
+        _request(DescribeImportImageTasksInputDict)
+    )
+    await client.describe_import_snapshot_tasks()
+    await client.describe_import_snapshot_tasks(
+        **_request(DescribeImportSnapshotTasksInputDict)
+    )
+    await client.describe_import_snapshot_tasks(
+        _request(DescribeImportSnapshotTasksInput)
+    )
+    await client.describe_import_snapshot_tasks(
+        _request(DescribeImportSnapshotTasksInputDict)
+    )
+    await client.describe_instance_attribute(instance_id=_, attribute=_)
+    await client.describe_instance_attribute(
+        **_request(DescribeInstanceAttributeInputDict)
+    )
+    await client.describe_instance_attribute(_request(DescribeInstanceAttributeInput))
+    await client.describe_instance_attribute(
+        _request(DescribeInstanceAttributeInputDict)
+    )
+    await client.describe_instance_connect_endpoints()
+    await client.describe_instance_connect_endpoints(
+        **_request(DescribeInstanceConnectEndpointsInputDict)
+    )
+    await client.describe_instance_connect_endpoints(
+        _request(DescribeInstanceConnectEndpointsInput)
+    )
+    await client.describe_instance_connect_endpoints(
+        _request(DescribeInstanceConnectEndpointsInputDict)
+    )
+    await client.describe_instance_credit_specifications()
+    await client.describe_instance_credit_specifications(
+        **_request(DescribeInstanceCreditSpecificationsInputDict)
+    )
+    await client.describe_instance_credit_specifications(
+        _request(DescribeInstanceCreditSpecificationsInput)
+    )
+    await client.describe_instance_credit_specifications(
+        _request(DescribeInstanceCreditSpecificationsInputDict)
+    )
+    await client.describe_instance_event_notification_attributes()
+    await client.describe_instance_event_notification_attributes(
+        **_request(DescribeInstanceEventNotificationAttributesInputDict)
+    )
+    await client.describe_instance_event_notification_attributes(
+        _request(DescribeInstanceEventNotificationAttributesInput)
+    )
+    await client.describe_instance_event_notification_attributes(
+        _request(DescribeInstanceEventNotificationAttributesInputDict)
+    )
+    await client.describe_instance_event_windows()
+    await client.describe_instance_event_windows(
+        **_request(DescribeInstanceEventWindowsInputDict)
+    )
+    await client.describe_instance_event_windows(
+        _request(DescribeInstanceEventWindowsInput)
+    )
+    await client.describe_instance_event_windows(
+        _request(DescribeInstanceEventWindowsInputDict)
+    )
+    await client.describe_instance_image_metadata()
+    await client.describe_instance_image_metadata(
+        **_request(DescribeInstanceImageMetadataInputDict)
+    )
+    await client.describe_instance_image_metadata(
+        _request(DescribeInstanceImageMetadataInput)
+    )
+    await client.describe_instance_image_metadata(
+        _request(DescribeInstanceImageMetadataInputDict)
+    )
+    await client.describe_instances()
+    await client.describe_instances(**_request(DescribeInstancesInputDict))
+    await client.describe_instances(_request(DescribeInstancesInput))
+    await client.describe_instances(_request(DescribeInstancesInputDict))
+    await client.describe_instance_sql_ha_history_states()
+    await client.describe_instance_sql_ha_history_states(
+        **_request(DescribeInstanceSqlHaHistoryStatesInputDict)
+    )
+    await client.describe_instance_sql_ha_history_states(
+        _request(DescribeInstanceSqlHaHistoryStatesInput)
+    )
+    await client.describe_instance_sql_ha_history_states(
+        _request(DescribeInstanceSqlHaHistoryStatesInputDict)
+    )
+    await client.describe_instance_sql_ha_states()
+    await client.describe_instance_sql_ha_states(
+        **_request(DescribeInstanceSqlHaStatesInputDict)
+    )
+    await client.describe_instance_sql_ha_states(
+        _request(DescribeInstanceSqlHaStatesInput)
+    )
+    await client.describe_instance_sql_ha_states(
+        _request(DescribeInstanceSqlHaStatesInputDict)
+    )
+    await client.describe_instance_status()
+    await client.describe_instance_status(**_request(DescribeInstanceStatusInputDict))
+    await client.describe_instance_status(_request(DescribeInstanceStatusInput))
+    await client.describe_instance_status(_request(DescribeInstanceStatusInputDict))
+    await client.describe_instance_topology()
+    await client.describe_instance_topology(
+        **_request(DescribeInstanceTopologyInputDict)
+    )
+    await client.describe_instance_topology(_request(DescribeInstanceTopologyInput))
+    await client.describe_instance_topology(_request(DescribeInstanceTopologyInputDict))
+    await client.describe_instance_type_offerings()
+    await client.describe_instance_type_offerings(
+        **_request(DescribeInstanceTypeOfferingsInputDict)
+    )
+    await client.describe_instance_type_offerings(
+        _request(DescribeInstanceTypeOfferingsInput)
+    )
+    await client.describe_instance_type_offerings(
+        _request(DescribeInstanceTypeOfferingsInputDict)
+    )
+    await client.describe_instance_types()
+    await client.describe_instance_types(**_request(DescribeInstanceTypesInputDict))
+    await client.describe_instance_types(_request(DescribeInstanceTypesInput))
+    await client.describe_instance_types(_request(DescribeInstanceTypesInputDict))
+    await client.describe_internet_gateways()
+    await client.describe_internet_gateways(
+        **_request(DescribeInternetGatewaysInputDict)
+    )
+    await client.describe_internet_gateways(_request(DescribeInternetGatewaysInput))
+    await client.describe_internet_gateways(_request(DescribeInternetGatewaysInputDict))
+    await client.describe_ipam_byoasn()
+    await client.describe_ipam_byoasn(**_request(DescribeIpamByoasnInputDict))
+    await client.describe_ipam_byoasn(_request(DescribeIpamByoasnInput))
+    await client.describe_ipam_byoasn(_request(DescribeIpamByoasnInputDict))
+    await client.describe_ipam_external_resource_verification_tokens()
+    await client.describe_ipam_external_resource_verification_tokens(
+        **_request(DescribeIpamExternalResourceVerificationTokensInputDict)
+    )
+    await client.describe_ipam_external_resource_verification_tokens(
+        _request(DescribeIpamExternalResourceVerificationTokensInput)
+    )
+    await client.describe_ipam_external_resource_verification_tokens(
+        _request(DescribeIpamExternalResourceVerificationTokensInputDict)
+    )
+    await client.describe_ipam_internet_registry_associations()
+    await client.describe_ipam_internet_registry_associations(
+        **_request(DescribeIpamInternetRegistryAssociationsInputDict)
+    )
+    await client.describe_ipam_internet_registry_associations(
+        _request(DescribeIpamInternetRegistryAssociationsInput)
+    )
+    await client.describe_ipam_internet_registry_associations(
+        _request(DescribeIpamInternetRegistryAssociationsInputDict)
+    )
+    await client.describe_ipam_policies()
+    await client.describe_ipam_policies(**_request(DescribeIpamPoliciesInputDict))
+    await client.describe_ipam_policies(_request(DescribeIpamPoliciesInput))
+    await client.describe_ipam_policies(_request(DescribeIpamPoliciesInputDict))
+    await client.describe_ipam_pool_allocations()
+    await client.describe_ipam_pool_allocations(
+        **_request(DescribeIpamPoolAllocationsInputDict)
+    )
+    await client.describe_ipam_pool_allocations(
+        _request(DescribeIpamPoolAllocationsInput)
+    )
+    await client.describe_ipam_pool_allocations(
+        _request(DescribeIpamPoolAllocationsInputDict)
+    )
+    await client.describe_ipam_pools()
+    await client.describe_ipam_pools(**_request(DescribeIpamPoolsInputDict))
+    await client.describe_ipam_pools(_request(DescribeIpamPoolsInput))
+    await client.describe_ipam_pools(_request(DescribeIpamPoolsInputDict))
+    await client.describe_ipam_prefix_list_resolvers()
+    await client.describe_ipam_prefix_list_resolvers(
+        **_request(DescribeIpamPrefixListResolversInputDict)
+    )
+    await client.describe_ipam_prefix_list_resolvers(
+        _request(DescribeIpamPrefixListResolversInput)
+    )
+    await client.describe_ipam_prefix_list_resolvers(
+        _request(DescribeIpamPrefixListResolversInputDict)
+    )
+    await client.describe_ipam_prefix_list_resolver_targets()
+    await client.describe_ipam_prefix_list_resolver_targets(
+        **_request(DescribeIpamPrefixListResolverTargetsInputDict)
+    )
+    await client.describe_ipam_prefix_list_resolver_targets(
+        _request(DescribeIpamPrefixListResolverTargetsInput)
+    )
+    await client.describe_ipam_prefix_list_resolver_targets(
+        _request(DescribeIpamPrefixListResolverTargetsInputDict)
+    )
+    await client.describe_ipam_resource_discoveries()
+    await client.describe_ipam_resource_discoveries(
+        **_request(DescribeIpamResourceDiscoveriesInputDict)
+    )
+    await client.describe_ipam_resource_discoveries(
+        _request(DescribeIpamResourceDiscoveriesInput)
+    )
+    await client.describe_ipam_resource_discoveries(
+        _request(DescribeIpamResourceDiscoveriesInputDict)
+    )
+    await client.describe_ipam_resource_discovery_associations()
+    await client.describe_ipam_resource_discovery_associations(
+        **_request(DescribeIpamResourceDiscoveryAssociationsInputDict)
+    )
+    await client.describe_ipam_resource_discovery_associations(
+        _request(DescribeIpamResourceDiscoveryAssociationsInput)
+    )
+    await client.describe_ipam_resource_discovery_associations(
+        _request(DescribeIpamResourceDiscoveryAssociationsInputDict)
+    )
+    await client.describe_ipams()
+    await client.describe_ipams(**_request(DescribeIpamsInputDict))
+    await client.describe_ipams(_request(DescribeIpamsInput))
+    await client.describe_ipams(_request(DescribeIpamsInputDict))
+    await client.describe_ipam_scopes()
+    await client.describe_ipam_scopes(**_request(DescribeIpamScopesInputDict))
+    await client.describe_ipam_scopes(_request(DescribeIpamScopesInput))
+    await client.describe_ipam_scopes(_request(DescribeIpamScopesInputDict))
+    await client.describe_ipv6_pools()
+    await client.describe_ipv6_pools(**_request(DescribeIpv6PoolsInputDict))
+    await client.describe_ipv6_pools(_request(DescribeIpv6PoolsInput))
+    await client.describe_ipv6_pools(_request(DescribeIpv6PoolsInputDict))
+    await client.describe_key_pairs()
+    await client.describe_key_pairs(**_request(DescribeKeyPairsInputDict))
+    await client.describe_key_pairs(_request(DescribeKeyPairsInput))
+    await client.describe_key_pairs(_request(DescribeKeyPairsInputDict))
+    await client.describe_launch_templates()
+    await client.describe_launch_templates(**_request(DescribeLaunchTemplatesInputDict))
+    await client.describe_launch_templates(_request(DescribeLaunchTemplatesInput))
+    await client.describe_launch_templates(_request(DescribeLaunchTemplatesInputDict))
+    await client.describe_launch_template_versions()
+    await client.describe_launch_template_versions(
+        **_request(DescribeLaunchTemplateVersionsInputDict)
+    )
+    await client.describe_launch_template_versions(
+        _request(DescribeLaunchTemplateVersionsInput)
+    )
+    await client.describe_launch_template_versions(
+        _request(DescribeLaunchTemplateVersionsInputDict)
+    )
+    await client.describe_local_gateway_route_tables()
+    await client.describe_local_gateway_route_tables(
+        **_request(DescribeLocalGatewayRouteTablesInputDict)
+    )
+    await client.describe_local_gateway_route_tables(
+        _request(DescribeLocalGatewayRouteTablesInput)
+    )
+    await client.describe_local_gateway_route_tables(
+        _request(DescribeLocalGatewayRouteTablesInputDict)
+    )
+    await (
+        client.describe_local_gateway_route_table_virtual_interface_group_associations()
+    )
+    await (
+        client.describe_local_gateway_route_table_virtual_interface_group_associations(
+            **_request(
+                DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsInputDict
+            )
+        )
+    )
+    await (
+        client.describe_local_gateway_route_table_virtual_interface_group_associations(
+            _request(
+                DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsInput
+            )
+        )
+    )
+    await (
+        client.describe_local_gateway_route_table_virtual_interface_group_associations(
+            _request(
+                DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsInputDict
+            )
+        )
+    )
+    await client.describe_local_gateway_route_table_vpc_associations()
+    await client.describe_local_gateway_route_table_vpc_associations(
+        **_request(DescribeLocalGatewayRouteTableVpcAssociationsInputDict)
+    )
+    await client.describe_local_gateway_route_table_vpc_associations(
+        _request(DescribeLocalGatewayRouteTableVpcAssociationsInput)
+    )
+    await client.describe_local_gateway_route_table_vpc_associations(
+        _request(DescribeLocalGatewayRouteTableVpcAssociationsInputDict)
+    )
+    await client.describe_local_gateways()
+    await client.describe_local_gateways(**_request(DescribeLocalGatewaysInputDict))
+    await client.describe_local_gateways(_request(DescribeLocalGatewaysInput))
+    await client.describe_local_gateways(_request(DescribeLocalGatewaysInputDict))
+    await client.describe_local_gateway_virtual_interface_groups()
+    await client.describe_local_gateway_virtual_interface_groups(
+        **_request(DescribeLocalGatewayVirtualInterfaceGroupsInputDict)
+    )
+    await client.describe_local_gateway_virtual_interface_groups(
+        _request(DescribeLocalGatewayVirtualInterfaceGroupsInput)
+    )
+    await client.describe_local_gateway_virtual_interface_groups(
+        _request(DescribeLocalGatewayVirtualInterfaceGroupsInputDict)
+    )
+    await client.describe_local_gateway_virtual_interfaces()
+    await client.describe_local_gateway_virtual_interfaces(
+        **_request(DescribeLocalGatewayVirtualInterfacesInputDict)
+    )
+    await client.describe_local_gateway_virtual_interfaces(
+        _request(DescribeLocalGatewayVirtualInterfacesInput)
+    )
+    await client.describe_local_gateway_virtual_interfaces(
+        _request(DescribeLocalGatewayVirtualInterfacesInputDict)
+    )
+    await client.describe_locked_snapshots()
+    await client.describe_locked_snapshots(**_request(DescribeLockedSnapshotsInputDict))
+    await client.describe_locked_snapshots(_request(DescribeLockedSnapshotsInput))
+    await client.describe_locked_snapshots(_request(DescribeLockedSnapshotsInputDict))
+    await client.describe_mac_hosts()
+    await client.describe_mac_hosts(**_request(DescribeMacHostsInputDict))
+    await client.describe_mac_hosts(_request(DescribeMacHostsInput))
+    await client.describe_mac_hosts(_request(DescribeMacHostsInputDict))
+    await client.describe_mac_modification_tasks()
+    await client.describe_mac_modification_tasks(
+        **_request(DescribeMacModificationTasksInputDict)
+    )
+    await client.describe_mac_modification_tasks(
+        _request(DescribeMacModificationTasksInput)
+    )
+    await client.describe_mac_modification_tasks(
+        _request(DescribeMacModificationTasksInputDict)
+    )
+    await client.describe_managed_prefix_lists()
+    await client.describe_managed_prefix_lists(
+        **_request(DescribeManagedPrefixListsInputDict)
+    )
+    await client.describe_managed_prefix_lists(
+        _request(DescribeManagedPrefixListsInput)
+    )
+    await client.describe_managed_prefix_lists(
+        _request(DescribeManagedPrefixListsInputDict)
+    )
+    await client.describe_moving_addresses()
+    await client.describe_moving_addresses(**_request(DescribeMovingAddressesInputDict))
+    await client.describe_moving_addresses(_request(DescribeMovingAddressesInput))
+    await client.describe_moving_addresses(_request(DescribeMovingAddressesInputDict))
+    await client.describe_nat_gateways()
+    await client.describe_nat_gateways(**_request(DescribeNatGatewaysInputDict))
+    await client.describe_nat_gateways(_request(DescribeNatGatewaysInput))
+    await client.describe_nat_gateways(_request(DescribeNatGatewaysInputDict))
+    await client.describe_network_acls()
+    await client.describe_network_acls(**_request(DescribeNetworkAclsInputDict))
+    await client.describe_network_acls(_request(DescribeNetworkAclsInput))
+    await client.describe_network_acls(_request(DescribeNetworkAclsInputDict))
+    await client.describe_network_insights_access_scope_analyses()
+    await client.describe_network_insights_access_scope_analyses(
+        **_request(DescribeNetworkInsightsAccessScopeAnalysesInputDict)
+    )
+    await client.describe_network_insights_access_scope_analyses(
+        _request(DescribeNetworkInsightsAccessScopeAnalysesInput)
+    )
+    await client.describe_network_insights_access_scope_analyses(
+        _request(DescribeNetworkInsightsAccessScopeAnalysesInputDict)
+    )
+    await client.describe_network_insights_access_scopes()
+    await client.describe_network_insights_access_scopes(
+        **_request(DescribeNetworkInsightsAccessScopesInputDict)
+    )
+    await client.describe_network_insights_access_scopes(
+        _request(DescribeNetworkInsightsAccessScopesInput)
+    )
+    await client.describe_network_insights_access_scopes(
+        _request(DescribeNetworkInsightsAccessScopesInputDict)
+    )
+    await client.describe_network_insights_analyses()
+    await client.describe_network_insights_analyses(
+        **_request(DescribeNetworkInsightsAnalysesInputDict)
+    )
+    await client.describe_network_insights_analyses(
+        _request(DescribeNetworkInsightsAnalysesInput)
+    )
+    await client.describe_network_insights_analyses(
+        _request(DescribeNetworkInsightsAnalysesInputDict)
+    )
+    await client.describe_network_insights_paths()
+    await client.describe_network_insights_paths(
+        **_request(DescribeNetworkInsightsPathsInputDict)
+    )
+    await client.describe_network_insights_paths(
+        _request(DescribeNetworkInsightsPathsInput)
+    )
+    await client.describe_network_insights_paths(
+        _request(DescribeNetworkInsightsPathsInputDict)
+    )
+    await client.describe_network_interface_attribute(network_interface_id=_)
+    await client.describe_network_interface_attribute(
+        **_request(DescribeNetworkInterfaceAttributeInputDict)
+    )
+    await client.describe_network_interface_attribute(
+        _request(DescribeNetworkInterfaceAttributeInput)
+    )
+    await client.describe_network_interface_attribute(
+        _request(DescribeNetworkInterfaceAttributeInputDict)
+    )
+    await client.describe_network_interface_permissions()
+    await client.describe_network_interface_permissions(
+        **_request(DescribeNetworkInterfacePermissionsInputDict)
+    )
+    await client.describe_network_interface_permissions(
+        _request(DescribeNetworkInterfacePermissionsInput)
+    )
+    await client.describe_network_interface_permissions(
+        _request(DescribeNetworkInterfacePermissionsInputDict)
+    )
+    await client.describe_network_interfaces()
+    await client.describe_network_interfaces(
+        **_request(DescribeNetworkInterfacesInputDict)
+    )
+    await client.describe_network_interfaces(_request(DescribeNetworkInterfacesInput))
+    await client.describe_network_interfaces(
+        _request(DescribeNetworkInterfacesInputDict)
+    )
+    await client.describe_outpost_lags()
+    await client.describe_outpost_lags(**_request(DescribeOutpostLagsInputDict))
+    await client.describe_outpost_lags(_request(DescribeOutpostLagsInput))
+    await client.describe_outpost_lags(_request(DescribeOutpostLagsInputDict))
+    await client.describe_placement_groups()
+    await client.describe_placement_groups(**_request(DescribePlacementGroupsInputDict))
+    await client.describe_placement_groups(_request(DescribePlacementGroupsInput))
+    await client.describe_placement_groups(_request(DescribePlacementGroupsInputDict))
+    await client.describe_prefix_lists()
+    await client.describe_prefix_lists(**_request(DescribePrefixListsInputDict))
+    await client.describe_prefix_lists(_request(DescribePrefixListsInput))
+    await client.describe_prefix_lists(_request(DescribePrefixListsInputDict))
+    await client.describe_principal_id_format()
+    await client.describe_principal_id_format(
+        **_request(DescribePrincipalIdFormatInputDict)
+    )
+    await client.describe_principal_id_format(_request(DescribePrincipalIdFormatInput))
+    await client.describe_principal_id_format(
+        _request(DescribePrincipalIdFormatInputDict)
+    )
+    await client.describe_public_ipv4_pools()
+    await client.describe_public_ipv4_pools(
+        **_request(DescribePublicIpv4PoolsInputDict)
+    )
+    await client.describe_public_ipv4_pools(_request(DescribePublicIpv4PoolsInput))
+    await client.describe_public_ipv4_pools(_request(DescribePublicIpv4PoolsInputDict))
+    await client.describe_regions()
+    await client.describe_regions(**_request(DescribeRegionsInputDict))
+    await client.describe_regions(_request(DescribeRegionsInput))
+    await client.describe_regions(_request(DescribeRegionsInputDict))
+    await client.describe_replace_root_volume_tasks()
+    await client.describe_replace_root_volume_tasks(
+        **_request(DescribeReplaceRootVolumeTasksInputDict)
+    )
+    await client.describe_replace_root_volume_tasks(
+        _request(DescribeReplaceRootVolumeTasksInput)
+    )
+    await client.describe_replace_root_volume_tasks(
+        _request(DescribeReplaceRootVolumeTasksInputDict)
+    )
+    await client.describe_reserved_instances()
+    await client.describe_reserved_instances(
+        **_request(DescribeReservedInstancesInputDict)
+    )
+    await client.describe_reserved_instances(_request(DescribeReservedInstancesInput))
+    await client.describe_reserved_instances(
+        _request(DescribeReservedInstancesInputDict)
+    )
+    await client.describe_reserved_instances_listings()
+    await client.describe_reserved_instances_listings(
+        **_request(DescribeReservedInstancesListingsInputDict)
+    )
+    await client.describe_reserved_instances_listings(
+        _request(DescribeReservedInstancesListingsInput)
+    )
+    await client.describe_reserved_instances_listings(
+        _request(DescribeReservedInstancesListingsInputDict)
+    )
+    await client.describe_reserved_instances_modifications()
+    await client.describe_reserved_instances_modifications(
+        **_request(DescribeReservedInstancesModificationsInputDict)
+    )
+    await client.describe_reserved_instances_modifications(
+        _request(DescribeReservedInstancesModificationsInput)
+    )
+    await client.describe_reserved_instances_modifications(
+        _request(DescribeReservedInstancesModificationsInputDict)
+    )
+    await client.describe_reserved_instances_offerings()
+    await client.describe_reserved_instances_offerings(
+        **_request(DescribeReservedInstancesOfferingsInputDict)
+    )
+    await client.describe_reserved_instances_offerings(
+        _request(DescribeReservedInstancesOfferingsInput)
+    )
+    await client.describe_reserved_instances_offerings(
+        _request(DescribeReservedInstancesOfferingsInputDict)
+    )
+    await client.describe_route_server_endpoints()
+    await client.describe_route_server_endpoints(
+        **_request(DescribeRouteServerEndpointsInputDict)
+    )
+    await client.describe_route_server_endpoints(
+        _request(DescribeRouteServerEndpointsInput)
+    )
+    await client.describe_route_server_endpoints(
+        _request(DescribeRouteServerEndpointsInputDict)
+    )
+    await client.describe_route_server_peers()
+    await client.describe_route_server_peers(
+        **_request(DescribeRouteServerPeersInputDict)
+    )
+    await client.describe_route_server_peers(_request(DescribeRouteServerPeersInput))
+    await client.describe_route_server_peers(
+        _request(DescribeRouteServerPeersInputDict)
+    )
+    await client.describe_route_servers()
+    await client.describe_route_servers(**_request(DescribeRouteServersInputDict))
+    await client.describe_route_servers(_request(DescribeRouteServersInput))
+    await client.describe_route_servers(_request(DescribeRouteServersInputDict))
+    await client.describe_route_tables()
+    await client.describe_route_tables(**_request(DescribeRouteTablesInputDict))
+    await client.describe_route_tables(_request(DescribeRouteTablesInput))
+    await client.describe_route_tables(_request(DescribeRouteTablesInputDict))
+    await client.describe_scheduled_instance_availability(
+        first_slot_start_time_range=_, recurrence=_
+    )
+    await client.describe_scheduled_instance_availability(
+        **_request(DescribeScheduledInstanceAvailabilityInputDict)
+    )
+    await client.describe_scheduled_instance_availability(
+        _request(DescribeScheduledInstanceAvailabilityInput)
+    )
+    await client.describe_scheduled_instance_availability(
+        _request(DescribeScheduledInstanceAvailabilityInputDict)
+    )
+    await client.describe_scheduled_instances()
+    await client.describe_scheduled_instances(
+        **_request(DescribeScheduledInstancesInputDict)
+    )
+    await client.describe_scheduled_instances(_request(DescribeScheduledInstancesInput))
+    await client.describe_scheduled_instances(
+        _request(DescribeScheduledInstancesInputDict)
+    )
+    await client.describe_secondary_interfaces()
+    await client.describe_secondary_interfaces(
+        **_request(DescribeSecondaryInterfacesInputDict)
+    )
+    await client.describe_secondary_interfaces(
+        _request(DescribeSecondaryInterfacesInput)
+    )
+    await client.describe_secondary_interfaces(
+        _request(DescribeSecondaryInterfacesInputDict)
+    )
+    await client.describe_secondary_networks()
+    await client.describe_secondary_networks(
+        **_request(DescribeSecondaryNetworksInputDict)
+    )
+    await client.describe_secondary_networks(_request(DescribeSecondaryNetworksInput))
+    await client.describe_secondary_networks(
+        _request(DescribeSecondaryNetworksInputDict)
+    )
+    await client.describe_secondary_subnets()
+    await client.describe_secondary_subnets(
+        **_request(DescribeSecondarySubnetsInputDict)
+    )
+    await client.describe_secondary_subnets(_request(DescribeSecondarySubnetsInput))
+    await client.describe_secondary_subnets(_request(DescribeSecondarySubnetsInputDict))
+    await client.describe_security_group_references(group_id=_)
+    await client.describe_security_group_references(
+        **_request(DescribeSecurityGroupReferencesInputDict)
+    )
+    await client.describe_security_group_references(
+        _request(DescribeSecurityGroupReferencesInput)
+    )
+    await client.describe_security_group_references(
+        _request(DescribeSecurityGroupReferencesInputDict)
+    )
+    await client.describe_security_group_rules()
+    await client.describe_security_group_rules(
+        **_request(DescribeSecurityGroupRulesInputDict)
+    )
+    await client.describe_security_group_rules(
+        _request(DescribeSecurityGroupRulesInput)
+    )
+    await client.describe_security_group_rules(
+        _request(DescribeSecurityGroupRulesInputDict)
+    )
+    await client.describe_security_groups()
+    await client.describe_security_groups(**_request(DescribeSecurityGroupsInputDict))
+    await client.describe_security_groups(_request(DescribeSecurityGroupsInput))
+    await client.describe_security_groups(_request(DescribeSecurityGroupsInputDict))
+    await client.describe_security_group_vpc_associations()
+    await client.describe_security_group_vpc_associations(
+        **_request(DescribeSecurityGroupVpcAssociationsInputDict)
+    )
+    await client.describe_security_group_vpc_associations(
+        _request(DescribeSecurityGroupVpcAssociationsInput)
+    )
+    await client.describe_security_group_vpc_associations(
+        _request(DescribeSecurityGroupVpcAssociationsInputDict)
+    )
+    await client.describe_service_link_virtual_interfaces()
+    await client.describe_service_link_virtual_interfaces(
+        **_request(DescribeServiceLinkVirtualInterfacesInputDict)
+    )
+    await client.describe_service_link_virtual_interfaces(
+        _request(DescribeServiceLinkVirtualInterfacesInput)
+    )
+    await client.describe_service_link_virtual_interfaces(
+        _request(DescribeServiceLinkVirtualInterfacesInputDict)
+    )
+    await client.describe_snapshot_attribute(attribute=_, snapshot_id=_)
+    await client.describe_snapshot_attribute(
+        **_request(DescribeSnapshotAttributeInputDict)
+    )
+    await client.describe_snapshot_attribute(_request(DescribeSnapshotAttributeInput))
+    await client.describe_snapshot_attribute(
+        _request(DescribeSnapshotAttributeInputDict)
+    )
+    await client.describe_snapshots()
+    await client.describe_snapshots(**_request(DescribeSnapshotsInputDict))
+    await client.describe_snapshots(_request(DescribeSnapshotsInput))
+    await client.describe_snapshots(_request(DescribeSnapshotsInputDict))
+    await client.describe_snapshot_tier_status()
+    await client.describe_snapshot_tier_status(
+        **_request(DescribeSnapshotTierStatusInputDict)
+    )
+    await client.describe_snapshot_tier_status(
+        _request(DescribeSnapshotTierStatusInput)
+    )
+    await client.describe_snapshot_tier_status(
+        _request(DescribeSnapshotTierStatusInputDict)
+    )
+    await client.describe_spot_datafeed_subscription()
+    await client.describe_spot_datafeed_subscription(
+        **_request(DescribeSpotDatafeedSubscriptionInputDict)
+    )
+    await client.describe_spot_datafeed_subscription(
+        _request(DescribeSpotDatafeedSubscriptionInput)
+    )
+    await client.describe_spot_datafeed_subscription(
+        _request(DescribeSpotDatafeedSubscriptionInputDict)
+    )
+    await client.describe_spot_fleet_instances(spot_fleet_request_id=_)
+    await client.describe_spot_fleet_instances(
+        **_request(DescribeSpotFleetInstancesInputDict)
+    )
+    await client.describe_spot_fleet_instances(
+        _request(DescribeSpotFleetInstancesInput)
+    )
+    await client.describe_spot_fleet_instances(
+        _request(DescribeSpotFleetInstancesInputDict)
+    )
+    await client.describe_spot_fleet_request_history(
+        spot_fleet_request_id=_, start_time=_
+    )
+    await client.describe_spot_fleet_request_history(
+        **_request(DescribeSpotFleetRequestHistoryInputDict)
+    )
+    await client.describe_spot_fleet_request_history(
+        _request(DescribeSpotFleetRequestHistoryInput)
+    )
+    await client.describe_spot_fleet_request_history(
+        _request(DescribeSpotFleetRequestHistoryInputDict)
+    )
+    await client.describe_spot_fleet_requests()
+    await client.describe_spot_fleet_requests(
+        **_request(DescribeSpotFleetRequestsInputDict)
+    )
+    await client.describe_spot_fleet_requests(_request(DescribeSpotFleetRequestsInput))
+    await client.describe_spot_fleet_requests(
+        _request(DescribeSpotFleetRequestsInputDict)
+    )
+    await client.describe_spot_instance_requests()
+    await client.describe_spot_instance_requests(
+        **_request(DescribeSpotInstanceRequestsInputDict)
+    )
+    await client.describe_spot_instance_requests(
+        _request(DescribeSpotInstanceRequestsInput)
+    )
+    await client.describe_spot_instance_requests(
+        _request(DescribeSpotInstanceRequestsInputDict)
+    )
+    await client.describe_spot_price_history()
+    await client.describe_spot_price_history(
+        **_request(DescribeSpotPriceHistoryInputDict)
+    )
+    await client.describe_spot_price_history(_request(DescribeSpotPriceHistoryInput))
+    await client.describe_spot_price_history(
+        _request(DescribeSpotPriceHistoryInputDict)
+    )
+    await client.describe_stale_security_groups(vpc_id=_)
+    await client.describe_stale_security_groups(
+        **_request(DescribeStaleSecurityGroupsInputDict)
+    )
+    await client.describe_stale_security_groups(
+        _request(DescribeStaleSecurityGroupsInput)
+    )
+    await client.describe_stale_security_groups(
+        _request(DescribeStaleSecurityGroupsInputDict)
+    )
+    await client.describe_store_image_tasks()
+    await client.describe_store_image_tasks(
+        **_request(DescribeStoreImageTasksInputDict)
+    )
+    await client.describe_store_image_tasks(_request(DescribeStoreImageTasksInput))
+    await client.describe_store_image_tasks(_request(DescribeStoreImageTasksInputDict))
+    await client.describe_subnets()
+    await client.describe_subnets(**_request(DescribeSubnetsInputDict))
+    await client.describe_subnets(_request(DescribeSubnetsInput))
+    await client.describe_subnets(_request(DescribeSubnetsInputDict))
+    await client.describe_tags()
+    await client.describe_tags(**_request(DescribeTagsInputDict))
+    await client.describe_tags(_request(DescribeTagsInput))
+    await client.describe_tags(_request(DescribeTagsInputDict))
+    await client.describe_traffic_mirror_filter_rules()
+    await client.describe_traffic_mirror_filter_rules(
+        **_request(DescribeTrafficMirrorFilterRulesInputDict)
+    )
+    await client.describe_traffic_mirror_filter_rules(
+        _request(DescribeTrafficMirrorFilterRulesInput)
+    )
+    await client.describe_traffic_mirror_filter_rules(
+        _request(DescribeTrafficMirrorFilterRulesInputDict)
+    )
+    await client.describe_traffic_mirror_filters()
+    await client.describe_traffic_mirror_filters(
+        **_request(DescribeTrafficMirrorFiltersInputDict)
+    )
+    await client.describe_traffic_mirror_filters(
+        _request(DescribeTrafficMirrorFiltersInput)
+    )
+    await client.describe_traffic_mirror_filters(
+        _request(DescribeTrafficMirrorFiltersInputDict)
+    )
+    await client.describe_traffic_mirror_sessions()
+    await client.describe_traffic_mirror_sessions(
+        **_request(DescribeTrafficMirrorSessionsInputDict)
+    )
+    await client.describe_traffic_mirror_sessions(
+        _request(DescribeTrafficMirrorSessionsInput)
+    )
+    await client.describe_traffic_mirror_sessions(
+        _request(DescribeTrafficMirrorSessionsInputDict)
+    )
+    await client.describe_traffic_mirror_targets()
+    await client.describe_traffic_mirror_targets(
+        **_request(DescribeTrafficMirrorTargetsInputDict)
+    )
+    await client.describe_traffic_mirror_targets(
+        _request(DescribeTrafficMirrorTargetsInput)
+    )
+    await client.describe_traffic_mirror_targets(
+        _request(DescribeTrafficMirrorTargetsInputDict)
+    )
+    await client.describe_transit_gateway_attachments()
+    await client.describe_transit_gateway_attachments(
+        **_request(DescribeTransitGatewayAttachmentsInputDict)
+    )
+    await client.describe_transit_gateway_attachments(
+        _request(DescribeTransitGatewayAttachmentsInput)
+    )
+    await client.describe_transit_gateway_attachments(
+        _request(DescribeTransitGatewayAttachmentsInputDict)
+    )
+    await client.describe_transit_gateway_connect_peers()
+    await client.describe_transit_gateway_connect_peers(
+        **_request(DescribeTransitGatewayConnectPeersInputDict)
+    )
+    await client.describe_transit_gateway_connect_peers(
+        _request(DescribeTransitGatewayConnectPeersInput)
+    )
+    await client.describe_transit_gateway_connect_peers(
+        _request(DescribeTransitGatewayConnectPeersInputDict)
+    )
+    await client.describe_transit_gateway_connects()
+    await client.describe_transit_gateway_connects(
+        **_request(DescribeTransitGatewayConnectsInputDict)
+    )
+    await client.describe_transit_gateway_connects(
+        _request(DescribeTransitGatewayConnectsInput)
+    )
+    await client.describe_transit_gateway_connects(
+        _request(DescribeTransitGatewayConnectsInputDict)
+    )
+    await client.describe_transit_gateway_metering_policies()
+    await client.describe_transit_gateway_metering_policies(
+        **_request(DescribeTransitGatewayMeteringPoliciesInputDict)
+    )
+    await client.describe_transit_gateway_metering_policies(
+        _request(DescribeTransitGatewayMeteringPoliciesInput)
+    )
+    await client.describe_transit_gateway_metering_policies(
+        _request(DescribeTransitGatewayMeteringPoliciesInputDict)
+    )
+    await client.describe_transit_gateway_multicast_domains()
+    await client.describe_transit_gateway_multicast_domains(
+        **_request(DescribeTransitGatewayMulticastDomainsInputDict)
+    )
+    await client.describe_transit_gateway_multicast_domains(
+        _request(DescribeTransitGatewayMulticastDomainsInput)
+    )
+    await client.describe_transit_gateway_multicast_domains(
+        _request(DescribeTransitGatewayMulticastDomainsInputDict)
+    )
+    await client.describe_transit_gateway_peering_attachments()
+    await client.describe_transit_gateway_peering_attachments(
+        **_request(DescribeTransitGatewayPeeringAttachmentsInputDict)
+    )
+    await client.describe_transit_gateway_peering_attachments(
+        _request(DescribeTransitGatewayPeeringAttachmentsInput)
+    )
+    await client.describe_transit_gateway_peering_attachments(
+        _request(DescribeTransitGatewayPeeringAttachmentsInputDict)
+    )
+    await client.describe_transit_gateway_policy_tables()
+    await client.describe_transit_gateway_policy_tables(
+        **_request(DescribeTransitGatewayPolicyTablesInputDict)
+    )
+    await client.describe_transit_gateway_policy_tables(
+        _request(DescribeTransitGatewayPolicyTablesInput)
+    )
+    await client.describe_transit_gateway_policy_tables(
+        _request(DescribeTransitGatewayPolicyTablesInputDict)
+    )
+    await client.describe_transit_gateway_route_table_announcements()
+    await client.describe_transit_gateway_route_table_announcements(
+        **_request(DescribeTransitGatewayRouteTableAnnouncementsInputDict)
+    )
+    await client.describe_transit_gateway_route_table_announcements(
+        _request(DescribeTransitGatewayRouteTableAnnouncementsInput)
+    )
+    await client.describe_transit_gateway_route_table_announcements(
+        _request(DescribeTransitGatewayRouteTableAnnouncementsInputDict)
+    )
+    await client.describe_transit_gateway_route_tables()
+    await client.describe_transit_gateway_route_tables(
+        **_request(DescribeTransitGatewayRouteTablesInputDict)
+    )
+    await client.describe_transit_gateway_route_tables(
+        _request(DescribeTransitGatewayRouteTablesInput)
+    )
+    await client.describe_transit_gateway_route_tables(
+        _request(DescribeTransitGatewayRouteTablesInputDict)
+    )
+    await client.describe_transit_gateways()
+    await client.describe_transit_gateways(**_request(DescribeTransitGatewaysInputDict))
+    await client.describe_transit_gateways(_request(DescribeTransitGatewaysInput))
+    await client.describe_transit_gateways(_request(DescribeTransitGatewaysInputDict))
+    await client.describe_transit_gateway_vpc_attachments()
+    await client.describe_transit_gateway_vpc_attachments(
+        **_request(DescribeTransitGatewayVpcAttachmentsInputDict)
+    )
+    await client.describe_transit_gateway_vpc_attachments(
+        _request(DescribeTransitGatewayVpcAttachmentsInput)
+    )
+    await client.describe_transit_gateway_vpc_attachments(
+        _request(DescribeTransitGatewayVpcAttachmentsInputDict)
+    )
+    await client.describe_trunk_interface_associations()
+    await client.describe_trunk_interface_associations(
+        **_request(DescribeTrunkInterfaceAssociationsInputDict)
+    )
+    await client.describe_trunk_interface_associations(
+        _request(DescribeTrunkInterfaceAssociationsInput)
+    )
+    await client.describe_trunk_interface_associations(
+        _request(DescribeTrunkInterfaceAssociationsInputDict)
+    )
+    await client.describe_verified_access_endpoints()
+    await client.describe_verified_access_endpoints(
+        **_request(DescribeVerifiedAccessEndpointsInputDict)
+    )
+    await client.describe_verified_access_endpoints(
+        _request(DescribeVerifiedAccessEndpointsInput)
+    )
+    await client.describe_verified_access_endpoints(
+        _request(DescribeVerifiedAccessEndpointsInputDict)
+    )
+    await client.describe_verified_access_groups()
+    await client.describe_verified_access_groups(
+        **_request(DescribeVerifiedAccessGroupsInputDict)
+    )
+    await client.describe_verified_access_groups(
+        _request(DescribeVerifiedAccessGroupsInput)
+    )
+    await client.describe_verified_access_groups(
+        _request(DescribeVerifiedAccessGroupsInputDict)
+    )
+    await client.describe_verified_access_instance_logging_configurations()
+    await client.describe_verified_access_instance_logging_configurations(
+        **_request(DescribeVerifiedAccessInstanceLoggingConfigurationsInputDict)
+    )
+    await client.describe_verified_access_instance_logging_configurations(
+        _request(DescribeVerifiedAccessInstanceLoggingConfigurationsInput)
+    )
+    await client.describe_verified_access_instance_logging_configurations(
+        _request(DescribeVerifiedAccessInstanceLoggingConfigurationsInputDict)
+    )
+    await client.describe_verified_access_instances()
+    await client.describe_verified_access_instances(
+        **_request(DescribeVerifiedAccessInstancesInputDict)
+    )
+    await client.describe_verified_access_instances(
+        _request(DescribeVerifiedAccessInstancesInput)
+    )
+    await client.describe_verified_access_instances(
+        _request(DescribeVerifiedAccessInstancesInputDict)
+    )
+    await client.describe_verified_access_trust_providers()
+    await client.describe_verified_access_trust_providers(
+        **_request(DescribeVerifiedAccessTrustProvidersInputDict)
+    )
+    await client.describe_verified_access_trust_providers(
+        _request(DescribeVerifiedAccessTrustProvidersInput)
+    )
+    await client.describe_verified_access_trust_providers(
+        _request(DescribeVerifiedAccessTrustProvidersInputDict)
+    )
+    await client.describe_volume_attribute(attribute=_, volume_id=_)
+    await client.describe_volume_attribute(**_request(DescribeVolumeAttributeInputDict))
+    await client.describe_volume_attribute(_request(DescribeVolumeAttributeInput))
+    await client.describe_volume_attribute(_request(DescribeVolumeAttributeInputDict))
+    await client.describe_volumes()
+    await client.describe_volumes(**_request(DescribeVolumesInputDict))
+    await client.describe_volumes(_request(DescribeVolumesInput))
+    await client.describe_volumes(_request(DescribeVolumesInputDict))
+    await client.describe_volumes_modifications()
+    await client.describe_volumes_modifications(
+        **_request(DescribeVolumesModificationsInputDict)
+    )
+    await client.describe_volumes_modifications(
+        _request(DescribeVolumesModificationsInput)
+    )
+    await client.describe_volumes_modifications(
+        _request(DescribeVolumesModificationsInputDict)
+    )
+    await client.describe_volume_status()
+    await client.describe_volume_status(**_request(DescribeVolumeStatusInputDict))
+    await client.describe_volume_status(_request(DescribeVolumeStatusInput))
+    await client.describe_volume_status(_request(DescribeVolumeStatusInputDict))
+    await client.describe_vpc_attribute(attribute=_, vpc_id=_)
+    await client.describe_vpc_attribute(**_request(DescribeVpcAttributeInputDict))
+    await client.describe_vpc_attribute(_request(DescribeVpcAttributeInput))
+    await client.describe_vpc_attribute(_request(DescribeVpcAttributeInputDict))
+    await client.describe_vpc_block_public_access_exclusions()
+    await client.describe_vpc_block_public_access_exclusions(
+        **_request(DescribeVpcBlockPublicAccessExclusionsInputDict)
+    )
+    await client.describe_vpc_block_public_access_exclusions(
+        _request(DescribeVpcBlockPublicAccessExclusionsInput)
+    )
+    await client.describe_vpc_block_public_access_exclusions(
+        _request(DescribeVpcBlockPublicAccessExclusionsInputDict)
+    )
+    await client.describe_vpc_block_public_access_options()
+    await client.describe_vpc_block_public_access_options(
+        **_request(DescribeVpcBlockPublicAccessOptionsInputDict)
+    )
+    await client.describe_vpc_block_public_access_options(
+        _request(DescribeVpcBlockPublicAccessOptionsInput)
+    )
+    await client.describe_vpc_block_public_access_options(
+        _request(DescribeVpcBlockPublicAccessOptionsInputDict)
+    )
+    await client.describe_vpc_classic_link()
+    await client.describe_vpc_classic_link(**_request(DescribeVpcClassicLinkInputDict))
+    await client.describe_vpc_classic_link(_request(DescribeVpcClassicLinkInput))
+    await client.describe_vpc_classic_link(_request(DescribeVpcClassicLinkInputDict))
+    await client.describe_vpc_classic_link_dns_support()
+    await client.describe_vpc_classic_link_dns_support(
+        **_request(DescribeVpcClassicLinkDnsSupportInputDict)
+    )
+    await client.describe_vpc_classic_link_dns_support(
+        _request(DescribeVpcClassicLinkDnsSupportInput)
+    )
+    await client.describe_vpc_classic_link_dns_support(
+        _request(DescribeVpcClassicLinkDnsSupportInputDict)
+    )
+    await client.describe_vpc_encryption_controls()
+    await client.describe_vpc_encryption_controls(
+        **_request(DescribeVpcEncryptionControlsInputDict)
+    )
+    await client.describe_vpc_encryption_controls(
+        _request(DescribeVpcEncryptionControlsInput)
+    )
+    await client.describe_vpc_encryption_controls(
+        _request(DescribeVpcEncryptionControlsInputDict)
+    )
+    await client.describe_vpc_endpoint_associations()
+    await client.describe_vpc_endpoint_associations(
+        **_request(DescribeVpcEndpointAssociationsInputDict)
+    )
+    await client.describe_vpc_endpoint_associations(
+        _request(DescribeVpcEndpointAssociationsInput)
+    )
+    await client.describe_vpc_endpoint_associations(
+        _request(DescribeVpcEndpointAssociationsInputDict)
+    )
+    await client.describe_vpc_endpoint_connection_notifications()
+    await client.describe_vpc_endpoint_connection_notifications(
+        **_request(DescribeVpcEndpointConnectionNotificationsInputDict)
+    )
+    await client.describe_vpc_endpoint_connection_notifications(
+        _request(DescribeVpcEndpointConnectionNotificationsInput)
+    )
+    await client.describe_vpc_endpoint_connection_notifications(
+        _request(DescribeVpcEndpointConnectionNotificationsInputDict)
+    )
+    await client.describe_vpc_endpoint_connections()
+    await client.describe_vpc_endpoint_connections(
+        **_request(DescribeVpcEndpointConnectionsInputDict)
+    )
+    await client.describe_vpc_endpoint_connections(
+        _request(DescribeVpcEndpointConnectionsInput)
+    )
+    await client.describe_vpc_endpoint_connections(
+        _request(DescribeVpcEndpointConnectionsInputDict)
+    )
+    await client.describe_vpc_endpoints()
+    await client.describe_vpc_endpoints(**_request(DescribeVpcEndpointsInputDict))
+    await client.describe_vpc_endpoints(_request(DescribeVpcEndpointsInput))
+    await client.describe_vpc_endpoints(_request(DescribeVpcEndpointsInputDict))
+    await client.describe_vpc_endpoint_service_configurations()
+    await client.describe_vpc_endpoint_service_configurations(
+        **_request(DescribeVpcEndpointServiceConfigurationsInputDict)
+    )
+    await client.describe_vpc_endpoint_service_configurations(
+        _request(DescribeVpcEndpointServiceConfigurationsInput)
+    )
+    await client.describe_vpc_endpoint_service_configurations(
+        _request(DescribeVpcEndpointServiceConfigurationsInputDict)
+    )
+    await client.describe_vpc_endpoint_service_permissions(service_id=_)
+    await client.describe_vpc_endpoint_service_permissions(
+        **_request(DescribeVpcEndpointServicePermissionsInputDict)
+    )
+    await client.describe_vpc_endpoint_service_permissions(
+        _request(DescribeVpcEndpointServicePermissionsInput)
+    )
+    await client.describe_vpc_endpoint_service_permissions(
+        _request(DescribeVpcEndpointServicePermissionsInputDict)
+    )
+    await client.describe_vpc_endpoint_services()
+    await client.describe_vpc_endpoint_services(
+        **_request(DescribeVpcEndpointServicesInputDict)
+    )
+    await client.describe_vpc_endpoint_services(
+        _request(DescribeVpcEndpointServicesInput)
+    )
+    await client.describe_vpc_endpoint_services(
+        _request(DescribeVpcEndpointServicesInputDict)
+    )
+    await client.describe_vpc_peering_connections()
+    await client.describe_vpc_peering_connections(
+        **_request(DescribeVpcPeeringConnectionsInputDict)
+    )
+    await client.describe_vpc_peering_connections(
+        _request(DescribeVpcPeeringConnectionsInput)
+    )
+    await client.describe_vpc_peering_connections(
+        _request(DescribeVpcPeeringConnectionsInputDict)
+    )
+    await client.describe_vpcs()
+    await client.describe_vpcs(**_request(DescribeVpcsInputDict))
+    await client.describe_vpcs(_request(DescribeVpcsInput))
+    await client.describe_vpcs(_request(DescribeVpcsInputDict))
+    await client.describe_vpn_concentrators()
+    await client.describe_vpn_concentrators(
+        **_request(DescribeVpnConcentratorsInputDict)
+    )
+    await client.describe_vpn_concentrators(_request(DescribeVpnConcentratorsInput))
+    await client.describe_vpn_concentrators(_request(DescribeVpnConcentratorsInputDict))
+    await client.describe_vpn_connections()
+    await client.describe_vpn_connections(**_request(DescribeVpnConnectionsInputDict))
+    await client.describe_vpn_connections(_request(DescribeVpnConnectionsInput))
+    await client.describe_vpn_connections(_request(DescribeVpnConnectionsInputDict))
+    await client.describe_vpn_gateways()
+    await client.describe_vpn_gateways(**_request(DescribeVpnGatewaysInputDict))
+    await client.describe_vpn_gateways(_request(DescribeVpnGatewaysInput))
+    await client.describe_vpn_gateways(_request(DescribeVpnGatewaysInputDict))
+    await client.detach_classic_link_vpc(instance_id=_, vpc_id=_)
+    await client.detach_classic_link_vpc(**_request(DetachClassicLinkVpcInputDict))
+    await client.detach_classic_link_vpc(_request(DetachClassicLinkVpcInput))
+    await client.detach_classic_link_vpc(_request(DetachClassicLinkVpcInputDict))
+    await client.detach_image_watermark(image_id=_, watermark_key=_)
+    await client.detach_image_watermark(**_request(DetachImageWatermarkInputDict))
+    await client.detach_image_watermark(_request(DetachImageWatermarkInput))
+    await client.detach_image_watermark(_request(DetachImageWatermarkInputDict))
+    await client.detach_internet_gateway(internet_gateway_id=_, vpc_id=_)
+    await client.detach_internet_gateway(**_request(DetachInternetGatewayInputDict))
+    await client.detach_internet_gateway(_request(DetachInternetGatewayInput))
+    await client.detach_internet_gateway(_request(DetachInternetGatewayInputDict))
+    await client.detach_network_interface(attachment_id=_)
+    await client.detach_network_interface(**_request(DetachNetworkInterfaceInputDict))
+    await client.detach_network_interface(_request(DetachNetworkInterfaceInput))
+    await client.detach_network_interface(_request(DetachNetworkInterfaceInputDict))
+    await client.detach_verified_access_trust_provider(
+        verified_access_instance_id=_, verified_access_trust_provider_id=_
+    )
+    await client.detach_verified_access_trust_provider(
+        **_request(DetachVerifiedAccessTrustProviderInputDict)
+    )
+    await client.detach_verified_access_trust_provider(
+        _request(DetachVerifiedAccessTrustProviderInput)
+    )
+    await client.detach_verified_access_trust_provider(
+        _request(DetachVerifiedAccessTrustProviderInputDict)
+    )
+    await client.detach_volume(volume_id=_)
+    await client.detach_volume(**_request(DetachVolumeInputDict))
+    await client.detach_volume(_request(DetachVolumeInput))
+    await client.detach_volume(_request(DetachVolumeInputDict))
+    await client.detach_vpn_gateway(vpc_id=_, vpn_gateway_id=_)
+    await client.detach_vpn_gateway(**_request(DetachVpnGatewayInputDict))
+    await client.detach_vpn_gateway(_request(DetachVpnGatewayInput))
+    await client.detach_vpn_gateway(_request(DetachVpnGatewayInputDict))
+    await client.disable_address_transfer(allocation_id=_)
+    await client.disable_address_transfer(**_request(DisableAddressTransferInputDict))
+    await client.disable_address_transfer(_request(DisableAddressTransferInput))
+    await client.disable_address_transfer(_request(DisableAddressTransferInputDict))
+    await client.disable_allowed_images_settings()
+    await client.disable_allowed_images_settings(
+        **_request(DisableAllowedImagesSettingsInputDict)
+    )
+    await client.disable_allowed_images_settings(
+        _request(DisableAllowedImagesSettingsInput)
+    )
+    await client.disable_allowed_images_settings(
+        _request(DisableAllowedImagesSettingsInputDict)
+    )
+    await client.disable_application_status_check_suppression()
+    await client.disable_application_status_check_suppression(
+        **_request(DisableApplicationStatusCheckSuppressionInputDict)
+    )
+    await client.disable_application_status_check_suppression(
+        _request(DisableApplicationStatusCheckSuppressionInput)
+    )
+    await client.disable_application_status_check_suppression(
+        _request(DisableApplicationStatusCheckSuppressionInputDict)
+    )
+    await client.disable_aws_network_performance_metric_subscription()
+    await client.disable_aws_network_performance_metric_subscription(
+        **_request(DisableAwsNetworkPerformanceMetricSubscriptionInputDict)
+    )
+    await client.disable_aws_network_performance_metric_subscription(
+        _request(DisableAwsNetworkPerformanceMetricSubscriptionInput)
+    )
+    await client.disable_aws_network_performance_metric_subscription(
+        _request(DisableAwsNetworkPerformanceMetricSubscriptionInputDict)
+    )
+    await client.disable_capacity_manager()
+    await client.disable_capacity_manager(**_request(DisableCapacityManagerInputDict))
+    await client.disable_capacity_manager(_request(DisableCapacityManagerInput))
+    await client.disable_capacity_manager(_request(DisableCapacityManagerInputDict))
+    await client.disable_ebs_encryption_by_default()
+    await client.disable_ebs_encryption_by_default(
+        **_request(DisableEbsEncryptionByDefaultInputDict)
+    )
+    await client.disable_ebs_encryption_by_default(
+        _request(DisableEbsEncryptionByDefaultInput)
+    )
+    await client.disable_ebs_encryption_by_default(
+        _request(DisableEbsEncryptionByDefaultInputDict)
+    )
+    await client.disable_fast_launch(image_id=_)
+    await client.disable_fast_launch(**_request(DisableFastLaunchInputDict))
+    await client.disable_fast_launch(_request(DisableFastLaunchInput))
+    await client.disable_fast_launch(_request(DisableFastLaunchInputDict))
+    await client.disable_fast_snapshot_restores(source_snapshot_ids=_)
+    await client.disable_fast_snapshot_restores(
+        **_request(DisableFastSnapshotRestoresInputDict)
+    )
+    await client.disable_fast_snapshot_restores(
+        _request(DisableFastSnapshotRestoresInput)
+    )
+    await client.disable_fast_snapshot_restores(
+        _request(DisableFastSnapshotRestoresInputDict)
+    )
+    await client.disable_image(image_id=_)
+    await client.disable_image(**_request(DisableImageInputDict))
+    await client.disable_image(_request(DisableImageInput))
+    await client.disable_image(_request(DisableImageInputDict))
+    await client.disable_image_block_public_access()
+    await client.disable_image_block_public_access(
+        **_request(DisableImageBlockPublicAccessInputDict)
+    )
+    await client.disable_image_block_public_access(
+        _request(DisableImageBlockPublicAccessInput)
+    )
+    await client.disable_image_block_public_access(
+        _request(DisableImageBlockPublicAccessInputDict)
+    )
+    await client.disable_image_deprecation(image_id=_)
+    await client.disable_image_deprecation(**_request(DisableImageDeprecationInputDict))
+    await client.disable_image_deprecation(_request(DisableImageDeprecationInput))
+    await client.disable_image_deprecation(_request(DisableImageDeprecationInputDict))
+    await client.disable_image_deregistration_protection(image_id=_)
+    await client.disable_image_deregistration_protection(
+        **_request(DisableImageDeregistrationProtectionInputDict)
+    )
+    await client.disable_image_deregistration_protection(
+        _request(DisableImageDeregistrationProtectionInput)
+    )
+    await client.disable_image_deregistration_protection(
+        _request(DisableImageDeregistrationProtectionInputDict)
+    )
+    await client.disable_instance_sql_ha_standby_detections(instance_ids=_)
+    await client.disable_instance_sql_ha_standby_detections(
+        **_request(DisableInstanceSqlHaStandbyDetectionsInputDict)
+    )
+    await client.disable_instance_sql_ha_standby_detections(
+        _request(DisableInstanceSqlHaStandbyDetectionsInput)
+    )
+    await client.disable_instance_sql_ha_standby_detections(
+        _request(DisableInstanceSqlHaStandbyDetectionsInputDict)
+    )
+    await client.disable_ipam_organization_admin_account(delegated_admin_account_id=_)
+    await client.disable_ipam_organization_admin_account(
+        **_request(DisableIpamOrganizationAdminAccountInputDict)
+    )
+    await client.disable_ipam_organization_admin_account(
+        _request(DisableIpamOrganizationAdminAccountInput)
+    )
+    await client.disable_ipam_organization_admin_account(
+        _request(DisableIpamOrganizationAdminAccountInputDict)
+    )
+    await client.disable_ipam_policy(ipam_policy_id=_)
+    await client.disable_ipam_policy(**_request(DisableIpamPolicyInputDict))
+    await client.disable_ipam_policy(_request(DisableIpamPolicyInput))
+    await client.disable_ipam_policy(_request(DisableIpamPolicyInputDict))
+    await client.disable_route_server_propagation(route_server_id=_, route_table_id=_)
+    await client.disable_route_server_propagation(
+        **_request(DisableRouteServerPropagationInputDict)
+    )
+    await client.disable_route_server_propagation(
+        _request(DisableRouteServerPropagationInput)
+    )
+    await client.disable_route_server_propagation(
+        _request(DisableRouteServerPropagationInputDict)
+    )
+    await client.disable_serial_console_access()
+    await client.disable_serial_console_access(
+        **_request(DisableSerialConsoleAccessInputDict)
+    )
+    await client.disable_serial_console_access(
+        _request(DisableSerialConsoleAccessInput)
+    )
+    await client.disable_serial_console_access(
+        _request(DisableSerialConsoleAccessInputDict)
+    )
+    await client.disable_snapshot_block_public_access()
+    await client.disable_snapshot_block_public_access(
+        **_request(DisableSnapshotBlockPublicAccessInputDict)
+    )
+    await client.disable_snapshot_block_public_access(
+        _request(DisableSnapshotBlockPublicAccessInput)
+    )
+    await client.disable_snapshot_block_public_access(
+        _request(DisableSnapshotBlockPublicAccessInputDict)
+    )
+    await client.disable_transit_gateway_route_table_propagation(
+        transit_gateway_route_table_id=_
+    )
+    await client.disable_transit_gateway_route_table_propagation(
+        **_request(DisableTransitGatewayRouteTablePropagationInputDict)
+    )
+    await client.disable_transit_gateway_route_table_propagation(
+        _request(DisableTransitGatewayRouteTablePropagationInput)
+    )
+    await client.disable_transit_gateway_route_table_propagation(
+        _request(DisableTransitGatewayRouteTablePropagationInputDict)
+    )
+    await client.disable_vgw_route_propagation(gateway_id=_, route_table_id=_)
+    await client.disable_vgw_route_propagation(
+        **_request(DisableVgwRoutePropagationInputDict)
+    )
+    await client.disable_vgw_route_propagation(
+        _request(DisableVgwRoutePropagationInput)
+    )
+    await client.disable_vgw_route_propagation(
+        _request(DisableVgwRoutePropagationInputDict)
+    )
+    await client.disable_vpc_classic_link(vpc_id=_)
+    await client.disable_vpc_classic_link(**_request(DisableVpcClassicLinkInputDict))
+    await client.disable_vpc_classic_link(_request(DisableVpcClassicLinkInput))
+    await client.disable_vpc_classic_link(_request(DisableVpcClassicLinkInputDict))
+    await client.disable_vpc_classic_link_dns_support()
+    await client.disable_vpc_classic_link_dns_support(
+        **_request(DisableVpcClassicLinkDnsSupportInputDict)
+    )
+    await client.disable_vpc_classic_link_dns_support(
+        _request(DisableVpcClassicLinkDnsSupportInput)
+    )
+    await client.disable_vpc_classic_link_dns_support(
+        _request(DisableVpcClassicLinkDnsSupportInputDict)
+    )
+    await client.disassociate_address()
+    await client.disassociate_address(**_request(DisassociateAddressInputDict))
+    await client.disassociate_address(_request(DisassociateAddressInput))
+    await client.disassociate_address(_request(DisassociateAddressInputDict))
+    await client.disassociate_application_status_check(application_status_check_id=_)
+    await client.disassociate_application_status_check(
+        **_request(DisassociateApplicationStatusCheckInputDict)
+    )
+    await client.disassociate_application_status_check(
+        _request(DisassociateApplicationStatusCheckInput)
+    )
+    await client.disassociate_application_status_check(
+        _request(DisassociateApplicationStatusCheckInputDict)
+    )
+    await client.disassociate_capacity_reservation_billing_owner(
+        capacity_reservation_id=_, unused_reservation_billing_owner_id=_
+    )
+    await client.disassociate_capacity_reservation_billing_owner(
+        **_request(DisassociateCapacityReservationBillingOwnerInputDict)
+    )
+    await client.disassociate_capacity_reservation_billing_owner(
+        _request(DisassociateCapacityReservationBillingOwnerInput)
+    )
+    await client.disassociate_capacity_reservation_billing_owner(
+        _request(DisassociateCapacityReservationBillingOwnerInputDict)
+    )
+    await client.disassociate_client_vpn_target_network(
+        client_vpn_endpoint_id=_, association_id=_
+    )
+    await client.disassociate_client_vpn_target_network(
+        **_request(DisassociateClientVpnTargetNetworkInputDict)
+    )
+    await client.disassociate_client_vpn_target_network(
+        _request(DisassociateClientVpnTargetNetworkInput)
+    )
+    await client.disassociate_client_vpn_target_network(
+        _request(DisassociateClientVpnTargetNetworkInputDict)
+    )
+    await client.disassociate_enclave_certificate_iam_role(
+        certificate_arn=_, role_arn=_
+    )
+    await client.disassociate_enclave_certificate_iam_role(
+        **_request(DisassociateEnclaveCertificateIamRoleInputDict)
+    )
+    await client.disassociate_enclave_certificate_iam_role(
+        _request(DisassociateEnclaveCertificateIamRoleInput)
+    )
+    await client.disassociate_enclave_certificate_iam_role(
+        _request(DisassociateEnclaveCertificateIamRoleInputDict)
+    )
+    await client.disassociate_iam_instance_profile(association_id=_)
+    await client.disassociate_iam_instance_profile(
+        **_request(DisassociateIamInstanceProfileInputDict)
+    )
+    await client.disassociate_iam_instance_profile(
+        _request(DisassociateIamInstanceProfileInput)
+    )
+    await client.disassociate_iam_instance_profile(
+        _request(DisassociateIamInstanceProfileInputDict)
+    )
+    await client.disassociate_instance_event_window(
+        instance_event_window_id=_, association_target=_
+    )
+    await client.disassociate_instance_event_window(
+        **_request(DisassociateInstanceEventWindowInputDict)
+    )
+    await client.disassociate_instance_event_window(
+        _request(DisassociateInstanceEventWindowInput)
+    )
+    await client.disassociate_instance_event_window(
+        _request(DisassociateInstanceEventWindowInputDict)
+    )
+    await client.disassociate_ipam_byoasn(asn=_, cidr=_)
+    await client.disassociate_ipam_byoasn(**_request(DisassociateIpamByoasnInputDict))
+    await client.disassociate_ipam_byoasn(_request(DisassociateIpamByoasnInput))
+    await client.disassociate_ipam_byoasn(_request(DisassociateIpamByoasnInputDict))
+    await client.disassociate_ipam_resource_discovery(
+        ipam_resource_discovery_association_id=_
+    )
+    await client.disassociate_ipam_resource_discovery(
+        **_request(DisassociateIpamResourceDiscoveryInputDict)
+    )
+    await client.disassociate_ipam_resource_discovery(
+        _request(DisassociateIpamResourceDiscoveryInput)
+    )
+    await client.disassociate_ipam_resource_discovery(
+        _request(DisassociateIpamResourceDiscoveryInputDict)
+    )
+    await client.disassociate_nat_gateway_address(nat_gateway_id=_, association_ids=_)
+    await client.disassociate_nat_gateway_address(
+        **_request(DisassociateNatGatewayAddressInputDict)
+    )
+    await client.disassociate_nat_gateway_address(
+        _request(DisassociateNatGatewayAddressInput)
+    )
+    await client.disassociate_nat_gateway_address(
+        _request(DisassociateNatGatewayAddressInputDict)
+    )
+    await client.disassociate_route_server(route_server_id=_, vpc_id=_)
+    await client.disassociate_route_server(**_request(DisassociateRouteServerInputDict))
+    await client.disassociate_route_server(_request(DisassociateRouteServerInput))
+    await client.disassociate_route_server(_request(DisassociateRouteServerInputDict))
+    await client.disassociate_route_table(association_id=_)
+    await client.disassociate_route_table(**_request(DisassociateRouteTableInputDict))
+    await client.disassociate_route_table(_request(DisassociateRouteTableInput))
+    await client.disassociate_route_table(_request(DisassociateRouteTableInputDict))
+    await client.disassociate_security_group_vpc(group_id=_, vpc_id=_)
+    await client.disassociate_security_group_vpc(
+        **_request(DisassociateSecurityGroupVpcInputDict)
+    )
+    await client.disassociate_security_group_vpc(
+        _request(DisassociateSecurityGroupVpcInput)
+    )
+    await client.disassociate_security_group_vpc(
+        _request(DisassociateSecurityGroupVpcInputDict)
+    )
+    await client.disassociate_subnet_cidr_block(association_id=_)
+    await client.disassociate_subnet_cidr_block(
+        **_request(DisassociateSubnetCidrBlockInputDict)
+    )
+    await client.disassociate_subnet_cidr_block(
+        _request(DisassociateSubnetCidrBlockInput)
+    )
+    await client.disassociate_subnet_cidr_block(
+        _request(DisassociateSubnetCidrBlockInputDict)
+    )
+    await client.disassociate_transit_gateway_multicast_domain(
+        transit_gateway_multicast_domain_id=_,
+        transit_gateway_attachment_id=_,
+        subnet_ids=_,
+    )
+    await client.disassociate_transit_gateway_multicast_domain(
+        **_request(DisassociateTransitGatewayMulticastDomainInputDict)
+    )
+    await client.disassociate_transit_gateway_multicast_domain(
+        _request(DisassociateTransitGatewayMulticastDomainInput)
+    )
+    await client.disassociate_transit_gateway_multicast_domain(
+        _request(DisassociateTransitGatewayMulticastDomainInputDict)
+    )
+    await client.disassociate_transit_gateway_policy_table(
+        transit_gateway_policy_table_id=_, transit_gateway_attachment_id=_
+    )
+    await client.disassociate_transit_gateway_policy_table(
+        **_request(DisassociateTransitGatewayPolicyTableInputDict)
+    )
+    await client.disassociate_transit_gateway_policy_table(
+        _request(DisassociateTransitGatewayPolicyTableInput)
+    )
+    await client.disassociate_transit_gateway_policy_table(
+        _request(DisassociateTransitGatewayPolicyTableInputDict)
+    )
+    await client.disassociate_transit_gateway_route_table(
+        transit_gateway_route_table_id=_, transit_gateway_attachment_id=_
+    )
+    await client.disassociate_transit_gateway_route_table(
+        **_request(DisassociateTransitGatewayRouteTableInputDict)
+    )
+    await client.disassociate_transit_gateway_route_table(
+        _request(DisassociateTransitGatewayRouteTableInput)
+    )
+    await client.disassociate_transit_gateway_route_table(
+        _request(DisassociateTransitGatewayRouteTableInputDict)
+    )
+    await client.disassociate_trunk_interface(association_id=_)
+    await client.disassociate_trunk_interface(
+        **_request(DisassociateTrunkInterfaceInputDict)
+    )
+    await client.disassociate_trunk_interface(_request(DisassociateTrunkInterfaceInput))
+    await client.disassociate_trunk_interface(
+        _request(DisassociateTrunkInterfaceInputDict)
+    )
+    await client.disassociate_vpc_cidr_block(association_id=_)
+    await client.disassociate_vpc_cidr_block(
+        **_request(DisassociateVpcCidrBlockInputDict)
+    )
+    await client.disassociate_vpc_cidr_block(_request(DisassociateVpcCidrBlockInput))
+    await client.disassociate_vpc_cidr_block(
+        _request(DisassociateVpcCidrBlockInputDict)
+    )
+    await client.enable_address_transfer(allocation_id=_, transfer_account_id=_)
+    await client.enable_address_transfer(**_request(EnableAddressTransferInputDict))
+    await client.enable_address_transfer(_request(EnableAddressTransferInput))
+    await client.enable_address_transfer(_request(EnableAddressTransferInputDict))
+    await client.enable_allowed_images_settings(allowed_images_settings_state=_)
+    await client.enable_allowed_images_settings(
+        **_request(EnableAllowedImagesSettingsInputDict)
+    )
+    await client.enable_allowed_images_settings(
+        _request(EnableAllowedImagesSettingsInput)
+    )
+    await client.enable_allowed_images_settings(
+        _request(EnableAllowedImagesSettingsInputDict)
+    )
+    await client.enable_application_status_check_suppression()
+    await client.enable_application_status_check_suppression(
+        **_request(EnableApplicationStatusCheckSuppressionInputDict)
+    )
+    await client.enable_application_status_check_suppression(
+        _request(EnableApplicationStatusCheckSuppressionInput)
+    )
+    await client.enable_application_status_check_suppression(
+        _request(EnableApplicationStatusCheckSuppressionInputDict)
+    )
+    await client.enable_aws_network_performance_metric_subscription()
+    await client.enable_aws_network_performance_metric_subscription(
+        **_request(EnableAwsNetworkPerformanceMetricSubscriptionInputDict)
+    )
+    await client.enable_aws_network_performance_metric_subscription(
+        _request(EnableAwsNetworkPerformanceMetricSubscriptionInput)
+    )
+    await client.enable_aws_network_performance_metric_subscription(
+        _request(EnableAwsNetworkPerformanceMetricSubscriptionInputDict)
+    )
+    await client.enable_capacity_manager()
+    await client.enable_capacity_manager(**_request(EnableCapacityManagerInputDict))
+    await client.enable_capacity_manager(_request(EnableCapacityManagerInput))
+    await client.enable_capacity_manager(_request(EnableCapacityManagerInputDict))
+    await client.enable_ebs_encryption_by_default()
+    await client.enable_ebs_encryption_by_default(
+        **_request(EnableEbsEncryptionByDefaultInputDict)
+    )
+    await client.enable_ebs_encryption_by_default(
+        _request(EnableEbsEncryptionByDefaultInput)
+    )
+    await client.enable_ebs_encryption_by_default(
+        _request(EnableEbsEncryptionByDefaultInputDict)
+    )
+    await client.enable_fast_launch(image_id=_)
+    await client.enable_fast_launch(**_request(EnableFastLaunchInputDict))
+    await client.enable_fast_launch(_request(EnableFastLaunchInput))
+    await client.enable_fast_launch(_request(EnableFastLaunchInputDict))
+    await client.enable_fast_snapshot_restores(source_snapshot_ids=_)
+    await client.enable_fast_snapshot_restores(
+        **_request(EnableFastSnapshotRestoresInputDict)
+    )
+    await client.enable_fast_snapshot_restores(
+        _request(EnableFastSnapshotRestoresInput)
+    )
+    await client.enable_fast_snapshot_restores(
+        _request(EnableFastSnapshotRestoresInputDict)
+    )
+    await client.enable_image(image_id=_)
+    await client.enable_image(**_request(EnableImageInputDict))
+    await client.enable_image(_request(EnableImageInput))
+    await client.enable_image(_request(EnableImageInputDict))
+    await client.enable_image_block_public_access(image_block_public_access_state=_)
+    await client.enable_image_block_public_access(
+        **_request(EnableImageBlockPublicAccessInputDict)
+    )
+    await client.enable_image_block_public_access(
+        _request(EnableImageBlockPublicAccessInput)
+    )
+    await client.enable_image_block_public_access(
+        _request(EnableImageBlockPublicAccessInputDict)
+    )
+    await client.enable_image_deprecation(image_id=_, deprecate_at=_)
+    await client.enable_image_deprecation(**_request(EnableImageDeprecationInputDict))
+    await client.enable_image_deprecation(_request(EnableImageDeprecationInput))
+    await client.enable_image_deprecation(_request(EnableImageDeprecationInputDict))
+    await client.enable_image_deregistration_protection(image_id=_)
+    await client.enable_image_deregistration_protection(
+        **_request(EnableImageDeregistrationProtectionInputDict)
+    )
+    await client.enable_image_deregistration_protection(
+        _request(EnableImageDeregistrationProtectionInput)
+    )
+    await client.enable_image_deregistration_protection(
+        _request(EnableImageDeregistrationProtectionInputDict)
+    )
+    await client.enable_instance_sql_ha_standby_detections(instance_ids=_)
+    await client.enable_instance_sql_ha_standby_detections(
+        **_request(EnableInstanceSqlHaStandbyDetectionsInputDict)
+    )
+    await client.enable_instance_sql_ha_standby_detections(
+        _request(EnableInstanceSqlHaStandbyDetectionsInput)
+    )
+    await client.enable_instance_sql_ha_standby_detections(
+        _request(EnableInstanceSqlHaStandbyDetectionsInputDict)
+    )
+    await client.enable_ipam_internet_registry_association(
+        ipam_internet_registry_association_id=_,
+        rpki_version=_,
+        service_uri=_,
+        child_handle=_,
+        parent_handle=_,
+        parent_bpki_ta=_,
+    )
+    await client.enable_ipam_internet_registry_association(
+        **_request(EnableIpamInternetRegistryAssociationInputDict)
+    )
+    await client.enable_ipam_internet_registry_association(
+        _request(EnableIpamInternetRegistryAssociationInput)
+    )
+    await client.enable_ipam_internet_registry_association(
+        _request(EnableIpamInternetRegistryAssociationInputDict)
+    )
+    await client.enable_ipam_organization_admin_account(delegated_admin_account_id=_)
+    await client.enable_ipam_organization_admin_account(
+        **_request(EnableIpamOrganizationAdminAccountInputDict)
+    )
+    await client.enable_ipam_organization_admin_account(
+        _request(EnableIpamOrganizationAdminAccountInput)
+    )
+    await client.enable_ipam_organization_admin_account(
+        _request(EnableIpamOrganizationAdminAccountInputDict)
+    )
+    await client.enable_ipam_policy(ipam_policy_id=_)
+    await client.enable_ipam_policy(**_request(EnableIpamPolicyInputDict))
+    await client.enable_ipam_policy(_request(EnableIpamPolicyInput))
+    await client.enable_ipam_policy(_request(EnableIpamPolicyInputDict))
+    await client.enable_reachability_analyzer_organization_sharing()
+    await client.enable_reachability_analyzer_organization_sharing(
+        **_request(EnableReachabilityAnalyzerOrganizationSharingInputDict)
+    )
+    await client.enable_reachability_analyzer_organization_sharing(
+        _request(EnableReachabilityAnalyzerOrganizationSharingInput)
+    )
+    await client.enable_reachability_analyzer_organization_sharing(
+        _request(EnableReachabilityAnalyzerOrganizationSharingInputDict)
+    )
+    await client.enable_route_server_propagation(route_server_id=_, route_table_id=_)
+    await client.enable_route_server_propagation(
+        **_request(EnableRouteServerPropagationInputDict)
+    )
+    await client.enable_route_server_propagation(
+        _request(EnableRouteServerPropagationInput)
+    )
+    await client.enable_route_server_propagation(
+        _request(EnableRouteServerPropagationInputDict)
+    )
+    await client.enable_serial_console_access()
+    await client.enable_serial_console_access(
+        **_request(EnableSerialConsoleAccessInputDict)
+    )
+    await client.enable_serial_console_access(_request(EnableSerialConsoleAccessInput))
+    await client.enable_serial_console_access(
+        _request(EnableSerialConsoleAccessInputDict)
+    )
+    await client.enable_snapshot_block_public_access(state=_)
+    await client.enable_snapshot_block_public_access(
+        **_request(EnableSnapshotBlockPublicAccessInputDict)
+    )
+    await client.enable_snapshot_block_public_access(
+        _request(EnableSnapshotBlockPublicAccessInput)
+    )
+    await client.enable_snapshot_block_public_access(
+        _request(EnableSnapshotBlockPublicAccessInputDict)
+    )
+    await client.enable_transit_gateway_route_table_propagation(
+        transit_gateway_route_table_id=_
+    )
+    await client.enable_transit_gateway_route_table_propagation(
+        **_request(EnableTransitGatewayRouteTablePropagationInputDict)
+    )
+    await client.enable_transit_gateway_route_table_propagation(
+        _request(EnableTransitGatewayRouteTablePropagationInput)
+    )
+    await client.enable_transit_gateway_route_table_propagation(
+        _request(EnableTransitGatewayRouteTablePropagationInputDict)
+    )
+    await client.enable_vgw_route_propagation(gateway_id=_, route_table_id=_)
+    await client.enable_vgw_route_propagation(
+        **_request(EnableVgwRoutePropagationInputDict)
+    )
+    await client.enable_vgw_route_propagation(_request(EnableVgwRoutePropagationInput))
+    await client.enable_vgw_route_propagation(
+        _request(EnableVgwRoutePropagationInputDict)
+    )
+    await client.enable_volume_io(volume_id=_)
+    await client.enable_volume_io(**_request(EnableVolumeIOInputDict))
+    await client.enable_volume_io(_request(EnableVolumeIOInput))
+    await client.enable_volume_io(_request(EnableVolumeIOInputDict))
+    await client.enable_vpc_classic_link(vpc_id=_)
+    await client.enable_vpc_classic_link(**_request(EnableVpcClassicLinkInputDict))
+    await client.enable_vpc_classic_link(_request(EnableVpcClassicLinkInput))
+    await client.enable_vpc_classic_link(_request(EnableVpcClassicLinkInputDict))
+    await client.enable_vpc_classic_link_dns_support()
+    await client.enable_vpc_classic_link_dns_support(
+        **_request(EnableVpcClassicLinkDnsSupportInputDict)
+    )
+    await client.enable_vpc_classic_link_dns_support(
+        _request(EnableVpcClassicLinkDnsSupportInput)
+    )
+    await client.enable_vpc_classic_link_dns_support(
+        _request(EnableVpcClassicLinkDnsSupportInputDict)
+    )
+    await client.export_client_vpn_client_certificate_revocation_list(
+        client_vpn_endpoint_id=_
+    )
+    await client.export_client_vpn_client_certificate_revocation_list(
+        **_request(ExportClientVpnClientCertificateRevocationListInputDict)
+    )
+    await client.export_client_vpn_client_certificate_revocation_list(
+        _request(ExportClientVpnClientCertificateRevocationListInput)
+    )
+    await client.export_client_vpn_client_certificate_revocation_list(
+        _request(ExportClientVpnClientCertificateRevocationListInputDict)
+    )
+    await client.export_client_vpn_client_configuration(client_vpn_endpoint_id=_)
+    await client.export_client_vpn_client_configuration(
+        **_request(ExportClientVpnClientConfigurationInputDict)
+    )
+    await client.export_client_vpn_client_configuration(
+        _request(ExportClientVpnClientConfigurationInput)
+    )
+    await client.export_client_vpn_client_configuration(
+        _request(ExportClientVpnClientConfigurationInputDict)
+    )
+    await client.export_image(disk_image_format=_, image_id=_, s3_export_location=_)
+    await client.export_image(**_request(ExportImageInputDict))
+    await client.export_image(_request(ExportImageInput))
+    await client.export_image(_request(ExportImageInputDict))
+    await client.export_transit_gateway_routes(
+        transit_gateway_route_table_id=_, s3_bucket=_
+    )
+    await client.export_transit_gateway_routes(
+        **_request(ExportTransitGatewayRoutesInputDict)
+    )
+    await client.export_transit_gateway_routes(
+        _request(ExportTransitGatewayRoutesInput)
+    )
+    await client.export_transit_gateway_routes(
+        _request(ExportTransitGatewayRoutesInputDict)
+    )
+    await client.export_verified_access_instance_client_configuration(
+        verified_access_instance_id=_
+    )
+    await client.export_verified_access_instance_client_configuration(
+        **_request(ExportVerifiedAccessInstanceClientConfigurationInputDict)
+    )
+    await client.export_verified_access_instance_client_configuration(
+        _request(ExportVerifiedAccessInstanceClientConfigurationInput)
+    )
+    await client.export_verified_access_instance_client_configuration(
+        _request(ExportVerifiedAccessInstanceClientConfigurationInputDict)
+    )
+    await client.get_active_vpn_tunnel_status(
+        vpn_connection_id=_, vpn_tunnel_outside_ip_address=_
+    )
+    await client.get_active_vpn_tunnel_status(
+        **_request(GetActiveVpnTunnelStatusInputDict)
+    )
+    await client.get_active_vpn_tunnel_status(_request(GetActiveVpnTunnelStatusInput))
+    await client.get_active_vpn_tunnel_status(
+        _request(GetActiveVpnTunnelStatusInputDict)
+    )
+    await client.get_allowed_images_settings()
+    await client.get_allowed_images_settings(
+        **_request(GetAllowedImagesSettingsInputDict)
+    )
+    await client.get_allowed_images_settings(_request(GetAllowedImagesSettingsInput))
+    await client.get_allowed_images_settings(
+        _request(GetAllowedImagesSettingsInputDict)
+    )
+    await client.get_associated_enclave_certificate_iam_roles(certificate_arn=_)
+    await client.get_associated_enclave_certificate_iam_roles(
+        **_request(GetAssociatedEnclaveCertificateIamRolesInputDict)
+    )
+    await client.get_associated_enclave_certificate_iam_roles(
+        _request(GetAssociatedEnclaveCertificateIamRolesInput)
+    )
+    await client.get_associated_enclave_certificate_iam_roles(
+        _request(GetAssociatedEnclaveCertificateIamRolesInputDict)
+    )
+    await client.get_associated_ipv6_pool_cidrs(pool_id=_)
+    await client.get_associated_ipv6_pool_cidrs(
+        **_request(GetAssociatedIpv6PoolCidrsInputDict)
+    )
+    await client.get_associated_ipv6_pool_cidrs(
+        _request(GetAssociatedIpv6PoolCidrsInput)
+    )
+    await client.get_associated_ipv6_pool_cidrs(
+        _request(GetAssociatedIpv6PoolCidrsInputDict)
+    )
+    await client.get_aws_network_performance_data()
+    await client.get_aws_network_performance_data(
+        **_request(GetAwsNetworkPerformanceDataInputDict)
+    )
+    await client.get_aws_network_performance_data(
+        _request(GetAwsNetworkPerformanceDataInput)
+    )
+    await client.get_aws_network_performance_data(
+        _request(GetAwsNetworkPerformanceDataInputDict)
+    )
+    await client.get_capacity_manager_attributes()
+    await client.get_capacity_manager_attributes(
+        **_request(GetCapacityManagerAttributesInputDict)
+    )
+    await client.get_capacity_manager_attributes(
+        _request(GetCapacityManagerAttributesInput)
+    )
+    await client.get_capacity_manager_attributes(
+        _request(GetCapacityManagerAttributesInputDict)
+    )
+    await client.get_capacity_manager_metric_data(
+        metric_names=_, start_time=_, end_time=_, period=_
+    )
+    await client.get_capacity_manager_metric_data(
+        **_request(GetCapacityManagerMetricDataInputDict)
+    )
+    await client.get_capacity_manager_metric_data(
+        _request(GetCapacityManagerMetricDataInput)
+    )
+    await client.get_capacity_manager_metric_data(
+        _request(GetCapacityManagerMetricDataInputDict)
+    )
+    await client.get_capacity_manager_metric_dimensions(
+        group_by=_, start_time=_, end_time=_, metric_names=_
+    )
+    await client.get_capacity_manager_metric_dimensions(
+        **_request(GetCapacityManagerMetricDimensionsInputDict)
+    )
+    await client.get_capacity_manager_metric_dimensions(
+        _request(GetCapacityManagerMetricDimensionsInput)
+    )
+    await client.get_capacity_manager_metric_dimensions(
+        _request(GetCapacityManagerMetricDimensionsInputDict)
+    )
+    await client.get_capacity_manager_monitored_tag_keys()
+    await client.get_capacity_manager_monitored_tag_keys(
+        **_request(GetCapacityManagerMonitoredTagKeysInputDict)
+    )
+    await client.get_capacity_manager_monitored_tag_keys(
+        _request(GetCapacityManagerMonitoredTagKeysInput)
+    )
+    await client.get_capacity_manager_monitored_tag_keys(
+        _request(GetCapacityManagerMonitoredTagKeysInputDict)
+    )
+    await client.get_capacity_manager_supportability_scores(
+        market_type=_,
+        capacity_amount=_,
+        capacity_unit=_,
+        capacity_availability_zone_ids=_,
+    )
+    await client.get_capacity_manager_supportability_scores(
+        **_request(GetCapacityManagerSupportabilityScoresInputDict)
+    )
+    await client.get_capacity_manager_supportability_scores(
+        _request(GetCapacityManagerSupportabilityScoresInput)
+    )
+    await client.get_capacity_manager_supportability_scores(
+        _request(GetCapacityManagerSupportabilityScoresInputDict)
+    )
+    await client.get_capacity_reservation_usage(capacity_reservation_id=_)
+    await client.get_capacity_reservation_usage(
+        **_request(GetCapacityReservationUsageInputDict)
+    )
+    await client.get_capacity_reservation_usage(
+        _request(GetCapacityReservationUsageInput)
+    )
+    await client.get_capacity_reservation_usage(
+        _request(GetCapacityReservationUsageInputDict)
+    )
+    await client.get_client_vpn_endpoint_authorization_policy(client_vpn_endpoint_id=_)
+    await client.get_client_vpn_endpoint_authorization_policy(
+        **_request(GetClientVpnEndpointAuthorizationPolicyInputDict)
+    )
+    await client.get_client_vpn_endpoint_authorization_policy(
+        _request(GetClientVpnEndpointAuthorizationPolicyInput)
+    )
+    await client.get_client_vpn_endpoint_authorization_policy(
+        _request(GetClientVpnEndpointAuthorizationPolicyInputDict)
+    )
+    await client.get_coip_pool_usage(pool_id=_)
+    await client.get_coip_pool_usage(**_request(GetCoipPoolUsageInputDict))
+    await client.get_coip_pool_usage(_request(GetCoipPoolUsageInput))
+    await client.get_coip_pool_usage(_request(GetCoipPoolUsageInputDict))
+    await client.get_console_output(instance_id=_)
+    await client.get_console_output(**_request(GetConsoleOutputInputDict))
+    await client.get_console_output(_request(GetConsoleOutputInput))
+    await client.get_console_output(_request(GetConsoleOutputInputDict))
+    await client.get_console_screenshot(instance_id=_)
+    await client.get_console_screenshot(**_request(GetConsoleScreenshotInputDict))
+    await client.get_console_screenshot(_request(GetConsoleScreenshotInput))
+    await client.get_console_screenshot(_request(GetConsoleScreenshotInputDict))
+    await client.get_declarative_policies_report_summary(report_id=_)
+    await client.get_declarative_policies_report_summary(
+        **_request(GetDeclarativePoliciesReportSummaryInputDict)
+    )
+    await client.get_declarative_policies_report_summary(
+        _request(GetDeclarativePoliciesReportSummaryInput)
+    )
+    await client.get_declarative_policies_report_summary(
+        _request(GetDeclarativePoliciesReportSummaryInputDict)
+    )
+    await client.get_default_credit_specification(instance_family=_)
+    await client.get_default_credit_specification(
+        **_request(GetDefaultCreditSpecificationInputDict)
+    )
+    await client.get_default_credit_specification(
+        _request(GetDefaultCreditSpecificationInput)
+    )
+    await client.get_default_credit_specification(
+        _request(GetDefaultCreditSpecificationInputDict)
+    )
+    await client.get_ebs_default_kms_key_id()
+    await client.get_ebs_default_kms_key_id(**_request(GetEbsDefaultKmsKeyIdInputDict))
+    await client.get_ebs_default_kms_key_id(_request(GetEbsDefaultKmsKeyIdInput))
+    await client.get_ebs_default_kms_key_id(_request(GetEbsDefaultKmsKeyIdInputDict))
+    await client.get_ebs_encryption_by_default()
+    await client.get_ebs_encryption_by_default(
+        **_request(GetEbsEncryptionByDefaultInputDict)
+    )
+    await client.get_ebs_encryption_by_default(_request(GetEbsEncryptionByDefaultInput))
+    await client.get_ebs_encryption_by_default(
+        _request(GetEbsEncryptionByDefaultInputDict)
+    )
+    await client.get_enabled_ipam_policy()
+    await client.get_enabled_ipam_policy(**_request(GetEnabledIpamPolicyInputDict))
+    await client.get_enabled_ipam_policy(_request(GetEnabledIpamPolicyInput))
+    await client.get_enabled_ipam_policy(_request(GetEnabledIpamPolicyInputDict))
+    await client.get_flow_logs_integration_template(
+        flow_log_id=_, config_delivery_s3_destination_arn=_, integrate_services=_
+    )
+    await client.get_flow_logs_integration_template(
+        **_request(GetFlowLogsIntegrationTemplateInputDict)
+    )
+    await client.get_flow_logs_integration_template(
+        _request(GetFlowLogsIntegrationTemplateInput)
+    )
+    await client.get_flow_logs_integration_template(
+        _request(GetFlowLogsIntegrationTemplateInputDict)
+    )
+    await client.get_groups_for_capacity_reservation(capacity_reservation_id=_)
+    await client.get_groups_for_capacity_reservation(
+        **_request(GetGroupsForCapacityReservationInputDict)
+    )
+    await client.get_groups_for_capacity_reservation(
+        _request(GetGroupsForCapacityReservationInput)
+    )
+    await client.get_groups_for_capacity_reservation(
+        _request(GetGroupsForCapacityReservationInputDict)
+    )
+    await client.get_host_reservation_purchase_preview(host_id_set=_, offering_id=_)
+    await client.get_host_reservation_purchase_preview(
+        **_request(GetHostReservationPurchasePreviewInputDict)
+    )
+    await client.get_host_reservation_purchase_preview(
+        _request(GetHostReservationPurchasePreviewInput)
+    )
+    await client.get_host_reservation_purchase_preview(
+        _request(GetHostReservationPurchasePreviewInputDict)
+    )
+    await client.get_image_ancestry(image_id=_)
+    await client.get_image_ancestry(**_request(GetImageAncestryInputDict))
+    await client.get_image_ancestry(_request(GetImageAncestryInput))
+    await client.get_image_ancestry(_request(GetImageAncestryInputDict))
+    await client.get_image_block_public_access_state()
+    await client.get_image_block_public_access_state(
+        **_request(GetImageBlockPublicAccessStateInputDict)
+    )
+    await client.get_image_block_public_access_state(
+        _request(GetImageBlockPublicAccessStateInput)
+    )
+    await client.get_image_block_public_access_state(
+        _request(GetImageBlockPublicAccessStateInputDict)
+    )
+    await client.get_image_findings(image_id=_)
+    await client.get_image_findings(**_request(GetImageFindingsInputDict))
+    await client.get_image_findings(_request(GetImageFindingsInput))
+    await client.get_image_findings(_request(GetImageFindingsInputDict))
+    await client.get_instance_metadata_defaults()
+    await client.get_instance_metadata_defaults(
+        **_request(GetInstanceMetadataDefaultsInputDict)
+    )
+    await client.get_instance_metadata_defaults(
+        _request(GetInstanceMetadataDefaultsInput)
+    )
+    await client.get_instance_metadata_defaults(
+        _request(GetInstanceMetadataDefaultsInputDict)
+    )
+    await client.get_instance_tpm_ek_pub(instance_id=_, key_type=_, key_format=_)
+    await client.get_instance_tpm_ek_pub(**_request(GetInstanceTpmEkPubInputDict))
+    await client.get_instance_tpm_ek_pub(_request(GetInstanceTpmEkPubInput))
+    await client.get_instance_tpm_ek_pub(_request(GetInstanceTpmEkPubInputDict))
+    await client.get_instance_types_from_instance_requirements(
+        architecture_types=_, virtualization_types=_, instance_requirements=_
+    )
+    await client.get_instance_types_from_instance_requirements(
+        **_request(GetInstanceTypesFromInstanceRequirementsInputDict)
+    )
+    await client.get_instance_types_from_instance_requirements(
+        _request(GetInstanceTypesFromInstanceRequirementsInput)
+    )
+    await client.get_instance_types_from_instance_requirements(
+        _request(GetInstanceTypesFromInstanceRequirementsInputDict)
+    )
+    await client.get_instance_uefi_data(instance_id=_)
+    await client.get_instance_uefi_data(**_request(GetInstanceUefiDataInputDict))
+    await client.get_instance_uefi_data(_request(GetInstanceUefiDataInput))
+    await client.get_instance_uefi_data(_request(GetInstanceUefiDataInputDict))
+    await client.get_ipam_address_history(cidr=_, ipam_scope_id=_)
+    await client.get_ipam_address_history(**_request(GetIpamAddressHistoryInputDict))
+    await client.get_ipam_address_history(_request(GetIpamAddressHistoryInput))
+    await client.get_ipam_address_history(_request(GetIpamAddressHistoryInputDict))
+    await client.get_ipam_discovered_accounts(
+        ipam_resource_discovery_id=_, discovery_region=_
+    )
+    await client.get_ipam_discovered_accounts(
+        **_request(GetIpamDiscoveredAccountsInputDict)
+    )
+    await client.get_ipam_discovered_accounts(_request(GetIpamDiscoveredAccountsInput))
+    await client.get_ipam_discovered_accounts(
+        _request(GetIpamDiscoveredAccountsInputDict)
+    )
+    await client.get_ipam_discovered_public_addresses(
+        ipam_resource_discovery_id=_, address_region=_
+    )
+    await client.get_ipam_discovered_public_addresses(
+        **_request(GetIpamDiscoveredPublicAddressesInputDict)
+    )
+    await client.get_ipam_discovered_public_addresses(
+        _request(GetIpamDiscoveredPublicAddressesInput)
+    )
+    await client.get_ipam_discovered_public_addresses(
+        _request(GetIpamDiscoveredPublicAddressesInputDict)
+    )
+    await client.get_ipam_discovered_resource_cidrs(
+        ipam_resource_discovery_id=_, resource_region=_
+    )
+    await client.get_ipam_discovered_resource_cidrs(
+        **_request(GetIpamDiscoveredResourceCidrsInputDict)
+    )
+    await client.get_ipam_discovered_resource_cidrs(
+        _request(GetIpamDiscoveredResourceCidrsInput)
+    )
+    await client.get_ipam_discovered_resource_cidrs(
+        _request(GetIpamDiscoveredResourceCidrsInputDict)
+    )
+    await client.get_ipam_discovered_routes(
+        ipam_resource_discovery_id=_, resource_region=_
+    )
+    await client.get_ipam_discovered_routes(
+        **_request(GetIpamDiscoveredRoutesInputDict)
+    )
+    await client.get_ipam_discovered_routes(_request(GetIpamDiscoveredRoutesInput))
+    await client.get_ipam_discovered_routes(_request(GetIpamDiscoveredRoutesInputDict))
+    await client.get_ipam_internet_registry_association_asns(
+        ipam_internet_registry_association_id=_
+    )
+    await client.get_ipam_internet_registry_association_asns(
+        **_request(GetIpamInternetRegistryAssociationAsnsInputDict)
+    )
+    await client.get_ipam_internet_registry_association_asns(
+        _request(GetIpamInternetRegistryAssociationAsnsInput)
+    )
+    await client.get_ipam_internet_registry_association_asns(
+        _request(GetIpamInternetRegistryAssociationAsnsInputDict)
+    )
+    await client.get_ipam_internet_registry_association_cidrs(
+        ipam_internet_registry_association_id=_
+    )
+    await client.get_ipam_internet_registry_association_cidrs(
+        **_request(GetIpamInternetRegistryAssociationCidrsInputDict)
+    )
+    await client.get_ipam_internet_registry_association_cidrs(
+        _request(GetIpamInternetRegistryAssociationCidrsInput)
+    )
+    await client.get_ipam_internet_registry_association_cidrs(
+        _request(GetIpamInternetRegistryAssociationCidrsInputDict)
+    )
+    await client.get_ipam_policy_allocation_rules(ipam_policy_id=_)
+    await client.get_ipam_policy_allocation_rules(
+        **_request(GetIpamPolicyAllocationRulesInputDict)
+    )
+    await client.get_ipam_policy_allocation_rules(
+        _request(GetIpamPolicyAllocationRulesInput)
+    )
+    await client.get_ipam_policy_allocation_rules(
+        _request(GetIpamPolicyAllocationRulesInputDict)
+    )
+    await client.get_ipam_policy_organization_targets(ipam_policy_id=_)
+    await client.get_ipam_policy_organization_targets(
+        **_request(GetIpamPolicyOrganizationTargetsInputDict)
+    )
+    await client.get_ipam_policy_organization_targets(
+        _request(GetIpamPolicyOrganizationTargetsInput)
+    )
+    await client.get_ipam_policy_organization_targets(
+        _request(GetIpamPolicyOrganizationTargetsInputDict)
+    )
+    await client.get_ipam_pool_allocations(ipam_pool_id=_)
+    await client.get_ipam_pool_allocations(**_request(GetIpamPoolAllocationsInputDict))
+    await client.get_ipam_pool_allocations(_request(GetIpamPoolAllocationsInput))
+    await client.get_ipam_pool_allocations(_request(GetIpamPoolAllocationsInputDict))
+    await client.get_ipam_pool_cidrs(ipam_pool_id=_)
+    await client.get_ipam_pool_cidrs(**_request(GetIpamPoolCidrsInputDict))
+    await client.get_ipam_pool_cidrs(_request(GetIpamPoolCidrsInput))
+    await client.get_ipam_pool_cidrs(_request(GetIpamPoolCidrsInputDict))
+    await client.get_ipam_prefix_list_resolver_rules(ipam_prefix_list_resolver_id=_)
+    await client.get_ipam_prefix_list_resolver_rules(
+        **_request(GetIpamPrefixListResolverRulesInputDict)
+    )
+    await client.get_ipam_prefix_list_resolver_rules(
+        _request(GetIpamPrefixListResolverRulesInput)
+    )
+    await client.get_ipam_prefix_list_resolver_rules(
+        _request(GetIpamPrefixListResolverRulesInputDict)
+    )
+    await client.get_ipam_prefix_list_resolver_version_entries(
+        ipam_prefix_list_resolver_id=_, ipam_prefix_list_resolver_version=_
+    )
+    await client.get_ipam_prefix_list_resolver_version_entries(
+        **_request(GetIpamPrefixListResolverVersionEntriesInputDict)
+    )
+    await client.get_ipam_prefix_list_resolver_version_entries(
+        _request(GetIpamPrefixListResolverVersionEntriesInput)
+    )
+    await client.get_ipam_prefix_list_resolver_version_entries(
+        _request(GetIpamPrefixListResolverVersionEntriesInputDict)
+    )
+    await client.get_ipam_prefix_list_resolver_versions(ipam_prefix_list_resolver_id=_)
+    await client.get_ipam_prefix_list_resolver_versions(
+        **_request(GetIpamPrefixListResolverVersionsInputDict)
+    )
+    await client.get_ipam_prefix_list_resolver_versions(
+        _request(GetIpamPrefixListResolverVersionsInput)
+    )
+    await client.get_ipam_prefix_list_resolver_versions(
+        _request(GetIpamPrefixListResolverVersionsInputDict)
+    )
+    await client.get_ipam_resource_cidrs(ipam_scope_id=_)
+    await client.get_ipam_resource_cidrs(**_request(GetIpamResourceCidrsInputDict))
+    await client.get_ipam_resource_cidrs(_request(GetIpamResourceCidrsInput))
+    await client.get_ipam_resource_cidrs(_request(GetIpamResourceCidrsInputDict))
+    await client.get_ipam_route_origin_authorizations(
+        ipam_internet_registry_association_id=_
+    )
+    await client.get_ipam_route_origin_authorizations(
+        **_request(GetIpamRouteOriginAuthorizationsInputDict)
+    )
+    await client.get_ipam_route_origin_authorizations(
+        _request(GetIpamRouteOriginAuthorizationsInput)
+    )
+    await client.get_ipam_route_origin_authorizations(
+        _request(GetIpamRouteOriginAuthorizationsInputDict)
+    )
+    await client.get_ipam_route_protection_findings(ipam_id=_)
+    await client.get_ipam_route_protection_findings(
+        **_request(GetIpamRouteProtectionFindingsInputDict)
+    )
+    await client.get_ipam_route_protection_findings(
+        _request(GetIpamRouteProtectionFindingsInput)
+    )
+    await client.get_ipam_route_protection_findings(
+        _request(GetIpamRouteProtectionFindingsInputDict)
+    )
+    await client.get_ipam_routing_policy_registration_deltas(
+        ipam_internet_registry_association_id=_
+    )
+    await client.get_ipam_routing_policy_registration_deltas(
+        **_request(GetIpamRoutingPolicyRegistrationDeltasInputDict)
+    )
+    await client.get_ipam_routing_policy_registration_deltas(
+        _request(GetIpamRoutingPolicyRegistrationDeltasInput)
+    )
+    await client.get_ipam_routing_policy_registration_deltas(
+        _request(GetIpamRoutingPolicyRegistrationDeltasInputDict)
+    )
+    await client.get_ipam_routing_policy_registrations(
+        ipam_internet_registry_association_id=_
+    )
+    await client.get_ipam_routing_policy_registrations(
+        **_request(GetIpamRoutingPolicyRegistrationsInputDict)
+    )
+    await client.get_ipam_routing_policy_registrations(
+        _request(GetIpamRoutingPolicyRegistrationsInput)
+    )
+    await client.get_ipam_routing_policy_registrations(
+        _request(GetIpamRoutingPolicyRegistrationsInputDict)
+    )
+    await client.get_launch_template_data(instance_id=_)
+    await client.get_launch_template_data(**_request(GetLaunchTemplateDataInputDict))
+    await client.get_launch_template_data(_request(GetLaunchTemplateDataInput))
+    await client.get_launch_template_data(_request(GetLaunchTemplateDataInputDict))
+    await client.get_managed_prefix_list_associations(prefix_list_id=_)
+    await client.get_managed_prefix_list_associations(
+        **_request(GetManagedPrefixListAssociationsInputDict)
+    )
+    await client.get_managed_prefix_list_associations(
+        _request(GetManagedPrefixListAssociationsInput)
+    )
+    await client.get_managed_prefix_list_associations(
+        _request(GetManagedPrefixListAssociationsInputDict)
+    )
+    await client.get_managed_prefix_list_entries(prefix_list_id=_)
+    await client.get_managed_prefix_list_entries(
+        **_request(GetManagedPrefixListEntriesInputDict)
+    )
+    await client.get_managed_prefix_list_entries(
+        _request(GetManagedPrefixListEntriesInput)
+    )
+    await client.get_managed_prefix_list_entries(
+        _request(GetManagedPrefixListEntriesInputDict)
+    )
+    await client.get_managed_resource_visibility()
+    await client.get_managed_resource_visibility(
+        **_request(GetManagedResourceVisibilityInputDict)
+    )
+    await client.get_managed_resource_visibility(
+        _request(GetManagedResourceVisibilityInput)
+    )
+    await client.get_managed_resource_visibility(
+        _request(GetManagedResourceVisibilityInputDict)
+    )
+    await client.get_network_insights_access_scope_analysis_findings(
+        network_insights_access_scope_analysis_id=_
+    )
+    await client.get_network_insights_access_scope_analysis_findings(
+        **_request(GetNetworkInsightsAccessScopeAnalysisFindingsInputDict)
+    )
+    await client.get_network_insights_access_scope_analysis_findings(
+        _request(GetNetworkInsightsAccessScopeAnalysisFindingsInput)
+    )
+    await client.get_network_insights_access_scope_analysis_findings(
+        _request(GetNetworkInsightsAccessScopeAnalysisFindingsInputDict)
+    )
+    await client.get_network_insights_access_scope_content(
+        network_insights_access_scope_id=_
+    )
+    await client.get_network_insights_access_scope_content(
+        **_request(GetNetworkInsightsAccessScopeContentInputDict)
+    )
+    await client.get_network_insights_access_scope_content(
+        _request(GetNetworkInsightsAccessScopeContentInput)
+    )
+    await client.get_network_insights_access_scope_content(
+        _request(GetNetworkInsightsAccessScopeContentInputDict)
+    )
+    await client.get_password_data(instance_id=_)
+    await client.get_password_data(**_request(GetPasswordDataInputDict))
+    await client.get_password_data(_request(GetPasswordDataInput))
+    await client.get_password_data(_request(GetPasswordDataInputDict))
+    await client.get_reserved_instances_exchange_quote(reserved_instance_ids=_)
+    await client.get_reserved_instances_exchange_quote(
+        **_request(GetReservedInstancesExchangeQuoteInputDict)
+    )
+    await client.get_reserved_instances_exchange_quote(
+        _request(GetReservedInstancesExchangeQuoteInput)
+    )
+    await client.get_reserved_instances_exchange_quote(
+        _request(GetReservedInstancesExchangeQuoteInputDict)
+    )
+    await client.get_route_server_associations(route_server_id=_)
+    await client.get_route_server_associations(
+        **_request(GetRouteServerAssociationsInputDict)
+    )
+    await client.get_route_server_associations(
+        _request(GetRouteServerAssociationsInput)
+    )
+    await client.get_route_server_associations(
+        _request(GetRouteServerAssociationsInputDict)
+    )
+    await client.get_route_server_propagations(route_server_id=_)
+    await client.get_route_server_propagations(
+        **_request(GetRouteServerPropagationsInputDict)
+    )
+    await client.get_route_server_propagations(
+        _request(GetRouteServerPropagationsInput)
+    )
+    await client.get_route_server_propagations(
+        _request(GetRouteServerPropagationsInputDict)
+    )
+    await client.get_route_server_routing_database(route_server_id=_)
+    await client.get_route_server_routing_database(
+        **_request(GetRouteServerRoutingDatabaseInputDict)
+    )
+    await client.get_route_server_routing_database(
+        _request(GetRouteServerRoutingDatabaseInput)
+    )
+    await client.get_route_server_routing_database(
+        _request(GetRouteServerRoutingDatabaseInputDict)
+    )
+    await client.get_security_groups_for_vpc(vpc_id=_)
+    await client.get_security_groups_for_vpc(
+        **_request(GetSecurityGroupsForVpcInputDict)
+    )
+    await client.get_security_groups_for_vpc(_request(GetSecurityGroupsForVpcInput))
+    await client.get_security_groups_for_vpc(_request(GetSecurityGroupsForVpcInputDict))
+    await client.get_serial_console_access_status()
+    await client.get_serial_console_access_status(
+        **_request(GetSerialConsoleAccessStatusInputDict)
+    )
+    await client.get_serial_console_access_status(
+        _request(GetSerialConsoleAccessStatusInput)
+    )
+    await client.get_serial_console_access_status(
+        _request(GetSerialConsoleAccessStatusInputDict)
+    )
+    await client.get_snapshot_block_public_access_state()
+    await client.get_snapshot_block_public_access_state(
+        **_request(GetSnapshotBlockPublicAccessStateInputDict)
+    )
+    await client.get_snapshot_block_public_access_state(
+        _request(GetSnapshotBlockPublicAccessStateInput)
+    )
+    await client.get_snapshot_block_public_access_state(
+        _request(GetSnapshotBlockPublicAccessStateInputDict)
+    )
+    await client.get_spot_placement_scores(target_capacity=_)
+    await client.get_spot_placement_scores(**_request(GetSpotPlacementScoresInputDict))
+    await client.get_spot_placement_scores(_request(GetSpotPlacementScoresInput))
+    await client.get_spot_placement_scores(_request(GetSpotPlacementScoresInputDict))
+    await client.get_subnet_cidr_reservations(subnet_id=_)
+    await client.get_subnet_cidr_reservations(
+        **_request(GetSubnetCidrReservationsInputDict)
+    )
+    await client.get_subnet_cidr_reservations(_request(GetSubnetCidrReservationsInput))
+    await client.get_subnet_cidr_reservations(
+        _request(GetSubnetCidrReservationsInputDict)
+    )
+    await client.get_transit_gateway_attachment_nat_configuration(
+        transit_gateway_attachment_id=_
+    )
+    await client.get_transit_gateway_attachment_nat_configuration(
+        **_request(GetTransitGatewayAttachmentNatConfigurationInputDict)
+    )
+    await client.get_transit_gateway_attachment_nat_configuration(
+        _request(GetTransitGatewayAttachmentNatConfigurationInput)
+    )
+    await client.get_transit_gateway_attachment_nat_configuration(
+        _request(GetTransitGatewayAttachmentNatConfigurationInputDict)
+    )
+    await client.get_transit_gateway_attachment_propagations(
+        transit_gateway_attachment_id=_
+    )
+    await client.get_transit_gateway_attachment_propagations(
+        **_request(GetTransitGatewayAttachmentPropagationsInputDict)
+    )
+    await client.get_transit_gateway_attachment_propagations(
+        _request(GetTransitGatewayAttachmentPropagationsInput)
+    )
+    await client.get_transit_gateway_attachment_propagations(
+        _request(GetTransitGatewayAttachmentPropagationsInputDict)
+    )
+    await client.get_transit_gateway_metering_policy_entries(
+        transit_gateway_metering_policy_id=_
+    )
+    await client.get_transit_gateway_metering_policy_entries(
+        **_request(GetTransitGatewayMeteringPolicyEntriesInputDict)
+    )
+    await client.get_transit_gateway_metering_policy_entries(
+        _request(GetTransitGatewayMeteringPolicyEntriesInput)
+    )
+    await client.get_transit_gateway_metering_policy_entries(
+        _request(GetTransitGatewayMeteringPolicyEntriesInputDict)
+    )
+    await client.get_transit_gateway_multicast_domain_associations(
+        transit_gateway_multicast_domain_id=_
+    )
+    await client.get_transit_gateway_multicast_domain_associations(
+        **_request(GetTransitGatewayMulticastDomainAssociationsInputDict)
+    )
+    await client.get_transit_gateway_multicast_domain_associations(
+        _request(GetTransitGatewayMulticastDomainAssociationsInput)
+    )
+    await client.get_transit_gateway_multicast_domain_associations(
+        _request(GetTransitGatewayMulticastDomainAssociationsInputDict)
+    )
+    await client.get_transit_gateway_policy_table_associations(
+        transit_gateway_policy_table_id=_
+    )
+    await client.get_transit_gateway_policy_table_associations(
+        **_request(GetTransitGatewayPolicyTableAssociationsInputDict)
+    )
+    await client.get_transit_gateway_policy_table_associations(
+        _request(GetTransitGatewayPolicyTableAssociationsInput)
+    )
+    await client.get_transit_gateway_policy_table_associations(
+        _request(GetTransitGatewayPolicyTableAssociationsInputDict)
+    )
+    await client.get_transit_gateway_policy_table_entries(
+        transit_gateway_policy_table_id=_
+    )
+    await client.get_transit_gateway_policy_table_entries(
+        **_request(GetTransitGatewayPolicyTableEntriesInputDict)
+    )
+    await client.get_transit_gateway_policy_table_entries(
+        _request(GetTransitGatewayPolicyTableEntriesInput)
+    )
+    await client.get_transit_gateway_policy_table_entries(
+        _request(GetTransitGatewayPolicyTableEntriesInputDict)
+    )
+    await client.get_transit_gateway_prefix_list_references(
+        transit_gateway_route_table_id=_
+    )
+    await client.get_transit_gateway_prefix_list_references(
+        **_request(GetTransitGatewayPrefixListReferencesInputDict)
+    )
+    await client.get_transit_gateway_prefix_list_references(
+        _request(GetTransitGatewayPrefixListReferencesInput)
+    )
+    await client.get_transit_gateway_prefix_list_references(
+        _request(GetTransitGatewayPrefixListReferencesInputDict)
+    )
+    await client.get_transit_gateway_route_table_associations(
+        transit_gateway_route_table_id=_
+    )
+    await client.get_transit_gateway_route_table_associations(
+        **_request(GetTransitGatewayRouteTableAssociationsInputDict)
+    )
+    await client.get_transit_gateway_route_table_associations(
+        _request(GetTransitGatewayRouteTableAssociationsInput)
+    )
+    await client.get_transit_gateway_route_table_associations(
+        _request(GetTransitGatewayRouteTableAssociationsInputDict)
+    )
+    await client.get_transit_gateway_route_table_propagations(
+        transit_gateway_route_table_id=_
+    )
+    await client.get_transit_gateway_route_table_propagations(
+        **_request(GetTransitGatewayRouteTablePropagationsInputDict)
+    )
+    await client.get_transit_gateway_route_table_propagations(
+        _request(GetTransitGatewayRouteTablePropagationsInput)
+    )
+    await client.get_transit_gateway_route_table_propagations(
+        _request(GetTransitGatewayRouteTablePropagationsInputDict)
+    )
+    await client.get_verified_access_endpoint_policy(verified_access_endpoint_id=_)
+    await client.get_verified_access_endpoint_policy(
+        **_request(GetVerifiedAccessEndpointPolicyInputDict)
+    )
+    await client.get_verified_access_endpoint_policy(
+        _request(GetVerifiedAccessEndpointPolicyInput)
+    )
+    await client.get_verified_access_endpoint_policy(
+        _request(GetVerifiedAccessEndpointPolicyInputDict)
+    )
+    await client.get_verified_access_endpoint_targets(verified_access_endpoint_id=_)
+    await client.get_verified_access_endpoint_targets(
+        **_request(GetVerifiedAccessEndpointTargetsInputDict)
+    )
+    await client.get_verified_access_endpoint_targets(
+        _request(GetVerifiedAccessEndpointTargetsInput)
+    )
+    await client.get_verified_access_endpoint_targets(
+        _request(GetVerifiedAccessEndpointTargetsInputDict)
+    )
+    await client.get_verified_access_group_policy(verified_access_group_id=_)
+    await client.get_verified_access_group_policy(
+        **_request(GetVerifiedAccessGroupPolicyInputDict)
+    )
+    await client.get_verified_access_group_policy(
+        _request(GetVerifiedAccessGroupPolicyInput)
+    )
+    await client.get_verified_access_group_policy(
+        _request(GetVerifiedAccessGroupPolicyInputDict)
+    )
+    await client.get_vpc_resources_blocking_encryption_enforcement(vpc_id=_)
+    await client.get_vpc_resources_blocking_encryption_enforcement(
+        **_request(GetVpcResourcesBlockingEncryptionEnforcementInputDict)
+    )
+    await client.get_vpc_resources_blocking_encryption_enforcement(
+        _request(GetVpcResourcesBlockingEncryptionEnforcementInput)
+    )
+    await client.get_vpc_resources_blocking_encryption_enforcement(
+        _request(GetVpcResourcesBlockingEncryptionEnforcementInputDict)
+    )
+    await client.get_vpn_connection_device_sample_configuration(
+        vpn_connection_id=_, vpn_connection_device_type_id=_
+    )
+    await client.get_vpn_connection_device_sample_configuration(
+        **_request(GetVpnConnectionDeviceSampleConfigurationInputDict)
+    )
+    await client.get_vpn_connection_device_sample_configuration(
+        _request(GetVpnConnectionDeviceSampleConfigurationInput)
+    )
+    await client.get_vpn_connection_device_sample_configuration(
+        _request(GetVpnConnectionDeviceSampleConfigurationInputDict)
+    )
+    await client.get_vpn_connection_device_types()
+    await client.get_vpn_connection_device_types(
+        **_request(GetVpnConnectionDeviceTypesInputDict)
+    )
+    await client.get_vpn_connection_device_types(
+        _request(GetVpnConnectionDeviceTypesInput)
+    )
+    await client.get_vpn_connection_device_types(
+        _request(GetVpnConnectionDeviceTypesInputDict)
+    )
+    await client.get_vpn_tunnel_replacement_status(
+        vpn_connection_id=_, vpn_tunnel_outside_ip_address=_
+    )
+    await client.get_vpn_tunnel_replacement_status(
+        **_request(GetVpnTunnelReplacementStatusInputDict)
+    )
+    await client.get_vpn_tunnel_replacement_status(
+        _request(GetVpnTunnelReplacementStatusInput)
+    )
+    await client.get_vpn_tunnel_replacement_status(
+        _request(GetVpnTunnelReplacementStatusInputDict)
+    )
+    await client.import_client_vpn_client_certificate_revocation_list(
+        client_vpn_endpoint_id=_, certificate_revocation_list=_
+    )
+    await client.import_client_vpn_client_certificate_revocation_list(
+        **_request(ImportClientVpnClientCertificateRevocationListInputDict)
+    )
+    await client.import_client_vpn_client_certificate_revocation_list(
+        _request(ImportClientVpnClientCertificateRevocationListInput)
+    )
+    await client.import_client_vpn_client_certificate_revocation_list(
+        _request(ImportClientVpnClientCertificateRevocationListInputDict)
+    )
+    await client.import_image()
+    await client.import_image(**_request(ImportImageInputDict))
+    await client.import_image(_request(ImportImageInput))
+    await client.import_image(_request(ImportImageInputDict))
+    await client.import_instance(platform=_)
+    await client.import_instance(**_request(ImportInstanceInputDict))
+    await client.import_instance(_request(ImportInstanceInput))
+    await client.import_instance(_request(ImportInstanceInputDict))
+    await client.import_key_pair(key_name=_, public_key_material=_)
+    await client.import_key_pair(**_request(ImportKeyPairInputDict))
+    await client.import_key_pair(_request(ImportKeyPairInput))
+    await client.import_key_pair(_request(ImportKeyPairInputDict))
+    await client.import_snapshot()
+    await client.import_snapshot(**_request(ImportSnapshotInputDict))
+    await client.import_snapshot(_request(ImportSnapshotInput))
+    await client.import_snapshot(_request(ImportSnapshotInputDict))
+    await client.import_volume(image=_, volume=_)
+    await client.import_volume(**_request(ImportVolumeInputDict))
+    await client.import_volume(_request(ImportVolumeInput))
+    await client.import_volume(_request(ImportVolumeInputDict))
+    await client.list_images_in_recycle_bin()
+    await client.list_images_in_recycle_bin(**_request(ListImagesInRecycleBinInputDict))
+    await client.list_images_in_recycle_bin(_request(ListImagesInRecycleBinInput))
+    await client.list_images_in_recycle_bin(_request(ListImagesInRecycleBinInputDict))
+    await client.list_snapshots_in_recycle_bin()
+    await client.list_snapshots_in_recycle_bin(
+        **_request(ListSnapshotsInRecycleBinInputDict)
+    )
+    await client.list_snapshots_in_recycle_bin(_request(ListSnapshotsInRecycleBinInput))
+    await client.list_snapshots_in_recycle_bin(
+        _request(ListSnapshotsInRecycleBinInputDict)
+    )
+    await client.list_volumes_in_recycle_bin()
+    await client.list_volumes_in_recycle_bin(
+        **_request(ListVolumesInRecycleBinInputDict)
+    )
+    await client.list_volumes_in_recycle_bin(_request(ListVolumesInRecycleBinInput))
+    await client.list_volumes_in_recycle_bin(_request(ListVolumesInRecycleBinInputDict))
+    await client.lock_snapshot(snapshot_id=_, lock_mode=_)
+    await client.lock_snapshot(**_request(LockSnapshotInputDict))
+    await client.lock_snapshot(_request(LockSnapshotInput))
+    await client.lock_snapshot(_request(LockSnapshotInputDict))
+    await client.modify_account_vpc_encryption_control()
+    await client.modify_account_vpc_encryption_control(
+        **_request(ModifyAccountVpcEncryptionControlInputDict)
+    )
+    await client.modify_account_vpc_encryption_control(
+        _request(ModifyAccountVpcEncryptionControlInput)
+    )
+    await client.modify_account_vpc_encryption_control(
+        _request(ModifyAccountVpcEncryptionControlInputDict)
+    )
+    await client.modify_address_attribute(allocation_id=_)
+    await client.modify_address_attribute(**_request(ModifyAddressAttributeInputDict))
+    await client.modify_address_attribute(_request(ModifyAddressAttributeInput))
+    await client.modify_address_attribute(_request(ModifyAddressAttributeInputDict))
+    await client.modify_application_status_check(application_status_check_id=_)
+    await client.modify_application_status_check(
+        **_request(ModifyApplicationStatusCheckInputDict)
+    )
+    await client.modify_application_status_check(
+        _request(ModifyApplicationStatusCheckInput)
+    )
+    await client.modify_application_status_check(
+        _request(ModifyApplicationStatusCheckInputDict)
+    )
+    await client.modify_availability_zone_group(group_name=_, opt_in_status=_)
+    await client.modify_availability_zone_group(
+        **_request(ModifyAvailabilityZoneGroupInputDict)
+    )
+    await client.modify_availability_zone_group(
+        _request(ModifyAvailabilityZoneGroupInput)
+    )
+    await client.modify_availability_zone_group(
+        _request(ModifyAvailabilityZoneGroupInputDict)
+    )
+    await client.modify_capacity_reservation(capacity_reservation_id=_)
+    await client.modify_capacity_reservation(
+        **_request(ModifyCapacityReservationInputDict)
+    )
+    await client.modify_capacity_reservation(_request(ModifyCapacityReservationInput))
+    await client.modify_capacity_reservation(
+        _request(ModifyCapacityReservationInputDict)
+    )
+    await client.modify_capacity_reservation_fleet(capacity_reservation_fleet_id=_)
+    await client.modify_capacity_reservation_fleet(
+        **_request(ModifyCapacityReservationFleetInputDict)
+    )
+    await client.modify_capacity_reservation_fleet(
+        _request(ModifyCapacityReservationFleetInput)
+    )
+    await client.modify_capacity_reservation_fleet(
+        _request(ModifyCapacityReservationFleetInputDict)
+    )
+    await client.modify_client_vpn_endpoint(client_vpn_endpoint_id=_)
+    await client.modify_client_vpn_endpoint(
+        **_request(ModifyClientVpnEndpointInputDict)
+    )
+    await client.modify_client_vpn_endpoint(_request(ModifyClientVpnEndpointInput))
+    await client.modify_client_vpn_endpoint(_request(ModifyClientVpnEndpointInputDict))
+    await client.modify_client_vpn_endpoint_authorization_policy(
+        client_vpn_endpoint_id=_
+    )
+    await client.modify_client_vpn_endpoint_authorization_policy(
+        **_request(ModifyClientVpnEndpointAuthorizationPolicyInputDict)
+    )
+    await client.modify_client_vpn_endpoint_authorization_policy(
+        _request(ModifyClientVpnEndpointAuthorizationPolicyInput)
+    )
+    await client.modify_client_vpn_endpoint_authorization_policy(
+        _request(ModifyClientVpnEndpointAuthorizationPolicyInputDict)
+    )
+    await client.modify_default_credit_specification(instance_family=_, cpu_credits=_)
+    await client.modify_default_credit_specification(
+        **_request(ModifyDefaultCreditSpecificationInputDict)
+    )
+    await client.modify_default_credit_specification(
+        _request(ModifyDefaultCreditSpecificationInput)
+    )
+    await client.modify_default_credit_specification(
+        _request(ModifyDefaultCreditSpecificationInputDict)
+    )
+    await client.modify_ebs_default_kms_key_id(kms_key_id=_)
+    await client.modify_ebs_default_kms_key_id(
+        **_request(ModifyEbsDefaultKmsKeyIdInputDict)
+    )
+    await client.modify_ebs_default_kms_key_id(_request(ModifyEbsDefaultKmsKeyIdInput))
+    await client.modify_ebs_default_kms_key_id(
+        _request(ModifyEbsDefaultKmsKeyIdInputDict)
+    )
+    await client.modify_fleet(fleet_id=_)
+    await client.modify_fleet(**_request(ModifyFleetInputDict))
+    await client.modify_fleet(_request(ModifyFleetInput))
+    await client.modify_fleet(_request(ModifyFleetInputDict))
+    await client.modify_fpga_image_attribute(fpga_image_id=_)
+    await client.modify_fpga_image_attribute(
+        **_request(ModifyFpgaImageAttributeInputDict)
+    )
+    await client.modify_fpga_image_attribute(_request(ModifyFpgaImageAttributeInput))
+    await client.modify_fpga_image_attribute(
+        _request(ModifyFpgaImageAttributeInputDict)
+    )
+    await client.modify_hosts(host_ids=_)
+    await client.modify_hosts(**_request(ModifyHostsInputDict))
+    await client.modify_hosts(_request(ModifyHostsInput))
+    await client.modify_hosts(_request(ModifyHostsInputDict))
+    await client.modify_identity_id_format(resource=_, use_long_ids=_, principal_arn=_)
+    await client.modify_identity_id_format(**_request(ModifyIdentityIdFormatInputDict))
+    await client.modify_identity_id_format(_request(ModifyIdentityIdFormatInput))
+    await client.modify_identity_id_format(_request(ModifyIdentityIdFormatInputDict))
+    await client.modify_id_format(resource=_, use_long_ids=_)
+    await client.modify_id_format(**_request(ModifyIdFormatInputDict))
+    await client.modify_id_format(_request(ModifyIdFormatInput))
+    await client.modify_id_format(_request(ModifyIdFormatInputDict))
+    await client.modify_image_attribute(image_id=_)
+    await client.modify_image_attribute(**_request(ModifyImageAttributeInputDict))
+    await client.modify_image_attribute(_request(ModifyImageAttributeInput))
+    await client.modify_image_attribute(_request(ModifyImageAttributeInputDict))
+    await client.modify_instance_attribute(instance_id=_)
+    await client.modify_instance_attribute(**_request(ModifyInstanceAttributeInputDict))
+    await client.modify_instance_attribute(_request(ModifyInstanceAttributeInput))
+    await client.modify_instance_attribute(_request(ModifyInstanceAttributeInputDict))
+    await client.modify_instance_capacity_reservation_attributes(
+        instance_id=_, capacity_reservation_specification=_
+    )
+    await client.modify_instance_capacity_reservation_attributes(
+        **_request(ModifyInstanceCapacityReservationAttributesInputDict)
+    )
+    await client.modify_instance_capacity_reservation_attributes(
+        _request(ModifyInstanceCapacityReservationAttributesInput)
+    )
+    await client.modify_instance_capacity_reservation_attributes(
+        _request(ModifyInstanceCapacityReservationAttributesInputDict)
+    )
+    await client.modify_instance_connect_endpoint(instance_connect_endpoint_id=_)
+    await client.modify_instance_connect_endpoint(
+        **_request(ModifyInstanceConnectEndpointInputDict)
+    )
+    await client.modify_instance_connect_endpoint(
+        _request(ModifyInstanceConnectEndpointInput)
+    )
+    await client.modify_instance_connect_endpoint(
+        _request(ModifyInstanceConnectEndpointInputDict)
+    )
+    await client.modify_instance_cpu_options(instance_id=_)
+    await client.modify_instance_cpu_options(
+        **_request(ModifyInstanceCpuOptionsInputDict)
+    )
+    await client.modify_instance_cpu_options(_request(ModifyInstanceCpuOptionsInput))
+    await client.modify_instance_cpu_options(
+        _request(ModifyInstanceCpuOptionsInputDict)
+    )
+    await client.modify_instance_credit_specification(instance_credit_specifications=_)
+    await client.modify_instance_credit_specification(
+        **_request(ModifyInstanceCreditSpecificationInputDict)
+    )
+    await client.modify_instance_credit_specification(
+        _request(ModifyInstanceCreditSpecificationInput)
+    )
+    await client.modify_instance_credit_specification(
+        _request(ModifyInstanceCreditSpecificationInputDict)
+    )
+    await client.modify_instance_event_start_time(
+        instance_id=_, instance_event_id=_, not_before=_
+    )
+    await client.modify_instance_event_start_time(
+        **_request(ModifyInstanceEventStartTimeInputDict)
+    )
+    await client.modify_instance_event_start_time(
+        _request(ModifyInstanceEventStartTimeInput)
+    )
+    await client.modify_instance_event_start_time(
+        _request(ModifyInstanceEventStartTimeInputDict)
+    )
+    await client.modify_instance_event_window(instance_event_window_id=_)
+    await client.modify_instance_event_window(
+        **_request(ModifyInstanceEventWindowInputDict)
+    )
+    await client.modify_instance_event_window(_request(ModifyInstanceEventWindowInput))
+    await client.modify_instance_event_window(
+        _request(ModifyInstanceEventWindowInputDict)
+    )
+    await client.modify_instance_maintenance_options(instance_id=_)
+    await client.modify_instance_maintenance_options(
+        **_request(ModifyInstanceMaintenanceOptionsInputDict)
+    )
+    await client.modify_instance_maintenance_options(
+        _request(ModifyInstanceMaintenanceOptionsInput)
+    )
+    await client.modify_instance_maintenance_options(
+        _request(ModifyInstanceMaintenanceOptionsInputDict)
+    )
+    await client.modify_instance_metadata_defaults()
+    await client.modify_instance_metadata_defaults(
+        **_request(ModifyInstanceMetadataDefaultsInputDict)
+    )
+    await client.modify_instance_metadata_defaults(
+        _request(ModifyInstanceMetadataDefaultsInput)
+    )
+    await client.modify_instance_metadata_defaults(
+        _request(ModifyInstanceMetadataDefaultsInputDict)
+    )
+    await client.modify_instance_metadata_options(instance_id=_)
+    await client.modify_instance_metadata_options(
+        **_request(ModifyInstanceMetadataOptionsInputDict)
+    )
+    await client.modify_instance_metadata_options(
+        _request(ModifyInstanceMetadataOptionsInput)
+    )
+    await client.modify_instance_metadata_options(
+        _request(ModifyInstanceMetadataOptionsInputDict)
+    )
+    await client.modify_instance_network_performance_options(
+        instance_id=_, bandwidth_weighting=_
+    )
+    await client.modify_instance_network_performance_options(
+        **_request(ModifyInstanceNetworkPerformanceOptionsInputDict)
+    )
+    await client.modify_instance_network_performance_options(
+        _request(ModifyInstanceNetworkPerformanceOptionsInput)
+    )
+    await client.modify_instance_network_performance_options(
+        _request(ModifyInstanceNetworkPerformanceOptionsInputDict)
+    )
+    await client.modify_instance_placement(instance_id=_)
+    await client.modify_instance_placement(**_request(ModifyInstancePlacementInputDict))
+    await client.modify_instance_placement(_request(ModifyInstancePlacementInput))
+    await client.modify_instance_placement(_request(ModifyInstancePlacementInputDict))
+    await client.modify_ipam(ipam_id=_)
+    await client.modify_ipam(**_request(ModifyIpamInputDict))
+    await client.modify_ipam(_request(ModifyIpamInput))
+    await client.modify_ipam(_request(ModifyIpamInputDict))
+    await client.modify_ipam_policy_allocation_rules(
+        ipam_policy_id=_, locale=_, resource_type=_
+    )
+    await client.modify_ipam_policy_allocation_rules(
+        **_request(ModifyIpamPolicyAllocationRulesInputDict)
+    )
+    await client.modify_ipam_policy_allocation_rules(
+        _request(ModifyIpamPolicyAllocationRulesInput)
+    )
+    await client.modify_ipam_policy_allocation_rules(
+        _request(ModifyIpamPolicyAllocationRulesInputDict)
+    )
+    await client.modify_ipam_pool(ipam_pool_id=_)
+    await client.modify_ipam_pool(**_request(ModifyIpamPoolInputDict))
+    await client.modify_ipam_pool(_request(ModifyIpamPoolInput))
+    await client.modify_ipam_pool(_request(ModifyIpamPoolInputDict))
+    await client.modify_ipam_pool_allocation(ipam_pool_allocation_id=_)
+    await client.modify_ipam_pool_allocation(
+        **_request(ModifyIpamPoolAllocationInputDict)
+    )
+    await client.modify_ipam_pool_allocation(_request(ModifyIpamPoolAllocationInput))
+    await client.modify_ipam_pool_allocation(
+        _request(ModifyIpamPoolAllocationInputDict)
+    )
+    await client.modify_ipam_prefix_list_resolver(ipam_prefix_list_resolver_id=_)
+    await client.modify_ipam_prefix_list_resolver(
+        **_request(ModifyIpamPrefixListResolverInputDict)
+    )
+    await client.modify_ipam_prefix_list_resolver(
+        _request(ModifyIpamPrefixListResolverInput)
+    )
+    await client.modify_ipam_prefix_list_resolver(
+        _request(ModifyIpamPrefixListResolverInputDict)
+    )
+    await client.modify_ipam_prefix_list_resolver_target(
+        ipam_prefix_list_resolver_target_id=_
+    )
+    await client.modify_ipam_prefix_list_resolver_target(
+        **_request(ModifyIpamPrefixListResolverTargetInputDict)
+    )
+    await client.modify_ipam_prefix_list_resolver_target(
+        _request(ModifyIpamPrefixListResolverTargetInput)
+    )
+    await client.modify_ipam_prefix_list_resolver_target(
+        _request(ModifyIpamPrefixListResolverTargetInputDict)
+    )
+    await client.modify_ipam_resource_cidr(
+        resource_id=_,
+        resource_cidr=_,
+        resource_region=_,
+        current_ipam_scope_id=_,
+        monitored=_,
+    )
+    await client.modify_ipam_resource_cidr(**_request(ModifyIpamResourceCidrInputDict))
+    await client.modify_ipam_resource_cidr(_request(ModifyIpamResourceCidrInput))
+    await client.modify_ipam_resource_cidr(_request(ModifyIpamResourceCidrInputDict))
+    await client.modify_ipam_resource_discovery(ipam_resource_discovery_id=_)
+    await client.modify_ipam_resource_discovery(
+        **_request(ModifyIpamResourceDiscoveryInputDict)
+    )
+    await client.modify_ipam_resource_discovery(
+        _request(ModifyIpamResourceDiscoveryInput)
+    )
+    await client.modify_ipam_resource_discovery(
+        _request(ModifyIpamResourceDiscoveryInputDict)
+    )
+    await client.modify_ipam_routing_policy_registration(
+        ipam_internet_registry_association_id=_, cidr=_, asns=_
+    )
+    await client.modify_ipam_routing_policy_registration(
+        **_request(ModifyIpamRoutingPolicyRegistrationInputDict)
+    )
+    await client.modify_ipam_routing_policy_registration(
+        _request(ModifyIpamRoutingPolicyRegistrationInput)
+    )
+    await client.modify_ipam_routing_policy_registration(
+        _request(ModifyIpamRoutingPolicyRegistrationInputDict)
+    )
+    await client.modify_ipam_scope(ipam_scope_id=_)
+    await client.modify_ipam_scope(**_request(ModifyIpamScopeInputDict))
+    await client.modify_ipam_scope(_request(ModifyIpamScopeInput))
+    await client.modify_ipam_scope(_request(ModifyIpamScopeInputDict))
+    await client.modify_launch_template()
+    await client.modify_launch_template(**_request(ModifyLaunchTemplateInputDict))
+    await client.modify_launch_template(_request(ModifyLaunchTemplateInput))
+    await client.modify_launch_template(_request(ModifyLaunchTemplateInputDict))
+    await client.modify_local_gateway_route(local_gateway_route_table_id=_)
+    await client.modify_local_gateway_route(
+        **_request(ModifyLocalGatewayRouteInputDict)
+    )
+    await client.modify_local_gateway_route(_request(ModifyLocalGatewayRouteInput))
+    await client.modify_local_gateway_route(_request(ModifyLocalGatewayRouteInputDict))
+    await client.modify_managed_prefix_list(prefix_list_id=_)
+    await client.modify_managed_prefix_list(
+        **_request(ModifyManagedPrefixListInputDict)
+    )
+    await client.modify_managed_prefix_list(_request(ModifyManagedPrefixListInput))
+    await client.modify_managed_prefix_list(_request(ModifyManagedPrefixListInputDict))
+    await client.modify_managed_resource_visibility(default_visibility=_)
+    await client.modify_managed_resource_visibility(
+        **_request(ModifyManagedResourceVisibilityInputDict)
+    )
+    await client.modify_managed_resource_visibility(
+        _request(ModifyManagedResourceVisibilityInput)
+    )
+    await client.modify_managed_resource_visibility(
+        _request(ModifyManagedResourceVisibilityInputDict)
+    )
+    await client.modify_network_interface_attribute(network_interface_id=_)
+    await client.modify_network_interface_attribute(
+        **_request(ModifyNetworkInterfaceAttributeInputDict)
+    )
+    await client.modify_network_interface_attribute(
+        _request(ModifyNetworkInterfaceAttributeInput)
+    )
+    await client.modify_network_interface_attribute(
+        _request(ModifyNetworkInterfaceAttributeInputDict)
+    )
+    await client.modify_private_dns_name_options(instance_id=_)
+    await client.modify_private_dns_name_options(
+        **_request(ModifyPrivateDnsNameOptionsInputDict)
+    )
+    await client.modify_private_dns_name_options(
+        _request(ModifyPrivateDnsNameOptionsInput)
+    )
+    await client.modify_private_dns_name_options(
+        _request(ModifyPrivateDnsNameOptionsInputDict)
+    )
+    await client.modify_public_ip_dns_name_options(
+        network_interface_id=_, hostname_type=_
+    )
+    await client.modify_public_ip_dns_name_options(
+        **_request(ModifyPublicIpDnsNameOptionsInputDict)
+    )
+    await client.modify_public_ip_dns_name_options(
+        _request(ModifyPublicIpDnsNameOptionsInput)
+    )
+    await client.modify_public_ip_dns_name_options(
+        _request(ModifyPublicIpDnsNameOptionsInputDict)
+    )
+    await client.modify_reserved_instances(
+        reserved_instances_ids=_, target_configurations=_
+    )
+    await client.modify_reserved_instances(**_request(ModifyReservedInstancesInputDict))
+    await client.modify_reserved_instances(_request(ModifyReservedInstancesInput))
+    await client.modify_reserved_instances(_request(ModifyReservedInstancesInputDict))
+    await client.modify_route_server(route_server_id=_)
+    await client.modify_route_server(**_request(ModifyRouteServerInputDict))
+    await client.modify_route_server(_request(ModifyRouteServerInput))
+    await client.modify_route_server(_request(ModifyRouteServerInputDict))
+    await client.modify_security_group_rules(group_id=_, security_group_rules=_)
+    await client.modify_security_group_rules(
+        **_request(ModifySecurityGroupRulesInputDict)
+    )
+    await client.modify_security_group_rules(_request(ModifySecurityGroupRulesInput))
+    await client.modify_security_group_rules(
+        _request(ModifySecurityGroupRulesInputDict)
+    )
+    await client.modify_snapshot_attribute(snapshot_id=_)
+    await client.modify_snapshot_attribute(**_request(ModifySnapshotAttributeInputDict))
+    await client.modify_snapshot_attribute(_request(ModifySnapshotAttributeInput))
+    await client.modify_snapshot_attribute(_request(ModifySnapshotAttributeInputDict))
+    await client.modify_snapshot_tier(snapshot_id=_)
+    await client.modify_snapshot_tier(**_request(ModifySnapshotTierInputDict))
+    await client.modify_snapshot_tier(_request(ModifySnapshotTierInput))
+    await client.modify_snapshot_tier(_request(ModifySnapshotTierInputDict))
+    await client.modify_spot_fleet_request(spot_fleet_request_id=_)
+    await client.modify_spot_fleet_request(**_request(ModifySpotFleetRequestInputDict))
+    await client.modify_spot_fleet_request(_request(ModifySpotFleetRequestInput))
+    await client.modify_spot_fleet_request(_request(ModifySpotFleetRequestInputDict))
+    await client.modify_subnet_attribute(subnet_id=_)
+    await client.modify_subnet_attribute(**_request(ModifySubnetAttributeInputDict))
+    await client.modify_subnet_attribute(_request(ModifySubnetAttributeInput))
+    await client.modify_subnet_attribute(_request(ModifySubnetAttributeInputDict))
+    await client.modify_traffic_mirror_filter_network_services(
+        traffic_mirror_filter_id=_
+    )
+    await client.modify_traffic_mirror_filter_network_services(
+        **_request(ModifyTrafficMirrorFilterNetworkServicesInputDict)
+    )
+    await client.modify_traffic_mirror_filter_network_services(
+        _request(ModifyTrafficMirrorFilterNetworkServicesInput)
+    )
+    await client.modify_traffic_mirror_filter_network_services(
+        _request(ModifyTrafficMirrorFilterNetworkServicesInputDict)
+    )
+    await client.modify_traffic_mirror_filter_rule(traffic_mirror_filter_rule_id=_)
+    await client.modify_traffic_mirror_filter_rule(
+        **_request(ModifyTrafficMirrorFilterRuleInputDict)
+    )
+    await client.modify_traffic_mirror_filter_rule(
+        _request(ModifyTrafficMirrorFilterRuleInput)
+    )
+    await client.modify_traffic_mirror_filter_rule(
+        _request(ModifyTrafficMirrorFilterRuleInputDict)
+    )
+    await client.modify_traffic_mirror_session(traffic_mirror_session_id=_)
+    await client.modify_traffic_mirror_session(
+        **_request(ModifyTrafficMirrorSessionInputDict)
+    )
+    await client.modify_traffic_mirror_session(
+        _request(ModifyTrafficMirrorSessionInput)
+    )
+    await client.modify_traffic_mirror_session(
+        _request(ModifyTrafficMirrorSessionInputDict)
+    )
+    await client.modify_transit_gateway(transit_gateway_id=_)
+    await client.modify_transit_gateway(**_request(ModifyTransitGatewayInputDict))
+    await client.modify_transit_gateway(_request(ModifyTransitGatewayInput))
+    await client.modify_transit_gateway(_request(ModifyTransitGatewayInputDict))
+    await client.modify_transit_gateway_attachment_nat_configuration(
+        transit_gateway_attachment_id=_
+    )
+    await client.modify_transit_gateway_attachment_nat_configuration(
+        **_request(ModifyTransitGatewayAttachmentNatConfigurationInputDict)
+    )
+    await client.modify_transit_gateway_attachment_nat_configuration(
+        _request(ModifyTransitGatewayAttachmentNatConfigurationInput)
+    )
+    await client.modify_transit_gateway_attachment_nat_configuration(
+        _request(ModifyTransitGatewayAttachmentNatConfigurationInputDict)
+    )
+    await client.modify_transit_gateway_metering_policy(
+        transit_gateway_metering_policy_id=_
+    )
+    await client.modify_transit_gateway_metering_policy(
+        **_request(ModifyTransitGatewayMeteringPolicyInputDict)
+    )
+    await client.modify_transit_gateway_metering_policy(
+        _request(ModifyTransitGatewayMeteringPolicyInput)
+    )
+    await client.modify_transit_gateway_metering_policy(
+        _request(ModifyTransitGatewayMeteringPolicyInputDict)
+    )
+    await client.modify_transit_gateway_policy_table_entry(
+        transit_gateway_policy_table_id=_, policy_rule_number=_
+    )
+    await client.modify_transit_gateway_policy_table_entry(
+        **_request(ModifyTransitGatewayPolicyTableEntryInputDict)
+    )
+    await client.modify_transit_gateway_policy_table_entry(
+        _request(ModifyTransitGatewayPolicyTableEntryInput)
+    )
+    await client.modify_transit_gateway_policy_table_entry(
+        _request(ModifyTransitGatewayPolicyTableEntryInputDict)
+    )
+    await client.modify_transit_gateway_prefix_list_reference(
+        transit_gateway_route_table_id=_, prefix_list_id=_
+    )
+    await client.modify_transit_gateway_prefix_list_reference(
+        **_request(ModifyTransitGatewayPrefixListReferenceInputDict)
+    )
+    await client.modify_transit_gateway_prefix_list_reference(
+        _request(ModifyTransitGatewayPrefixListReferenceInput)
+    )
+    await client.modify_transit_gateway_prefix_list_reference(
+        _request(ModifyTransitGatewayPrefixListReferenceInputDict)
+    )
+    await client.modify_transit_gateway_vpc_attachment(transit_gateway_attachment_id=_)
+    await client.modify_transit_gateway_vpc_attachment(
+        **_request(ModifyTransitGatewayVpcAttachmentInputDict)
+    )
+    await client.modify_transit_gateway_vpc_attachment(
+        _request(ModifyTransitGatewayVpcAttachmentInput)
+    )
+    await client.modify_transit_gateway_vpc_attachment(
+        _request(ModifyTransitGatewayVpcAttachmentInputDict)
+    )
+    await client.modify_verified_access_endpoint(verified_access_endpoint_id=_)
+    await client.modify_verified_access_endpoint(
+        **_request(ModifyVerifiedAccessEndpointInputDict)
+    )
+    await client.modify_verified_access_endpoint(
+        _request(ModifyVerifiedAccessEndpointInput)
+    )
+    await client.modify_verified_access_endpoint(
+        _request(ModifyVerifiedAccessEndpointInputDict)
+    )
+    await client.modify_verified_access_endpoint_policy(verified_access_endpoint_id=_)
+    await client.modify_verified_access_endpoint_policy(
+        **_request(ModifyVerifiedAccessEndpointPolicyInputDict)
+    )
+    await client.modify_verified_access_endpoint_policy(
+        _request(ModifyVerifiedAccessEndpointPolicyInput)
+    )
+    await client.modify_verified_access_endpoint_policy(
+        _request(ModifyVerifiedAccessEndpointPolicyInputDict)
+    )
+    await client.modify_verified_access_group(verified_access_group_id=_)
+    await client.modify_verified_access_group(
+        **_request(ModifyVerifiedAccessGroupInputDict)
+    )
+    await client.modify_verified_access_group(_request(ModifyVerifiedAccessGroupInput))
+    await client.modify_verified_access_group(
+        _request(ModifyVerifiedAccessGroupInputDict)
+    )
+    await client.modify_verified_access_group_policy(verified_access_group_id=_)
+    await client.modify_verified_access_group_policy(
+        **_request(ModifyVerifiedAccessGroupPolicyInputDict)
+    )
+    await client.modify_verified_access_group_policy(
+        _request(ModifyVerifiedAccessGroupPolicyInput)
+    )
+    await client.modify_verified_access_group_policy(
+        _request(ModifyVerifiedAccessGroupPolicyInputDict)
+    )
+    await client.modify_verified_access_instance(verified_access_instance_id=_)
+    await client.modify_verified_access_instance(
+        **_request(ModifyVerifiedAccessInstanceInputDict)
+    )
+    await client.modify_verified_access_instance(
+        _request(ModifyVerifiedAccessInstanceInput)
+    )
+    await client.modify_verified_access_instance(
+        _request(ModifyVerifiedAccessInstanceInputDict)
+    )
+    await client.modify_verified_access_instance_logging_configuration(
+        verified_access_instance_id=_, access_logs=_
+    )
+    await client.modify_verified_access_instance_logging_configuration(
+        **_request(ModifyVerifiedAccessInstanceLoggingConfigurationInputDict)
+    )
+    await client.modify_verified_access_instance_logging_configuration(
+        _request(ModifyVerifiedAccessInstanceLoggingConfigurationInput)
+    )
+    await client.modify_verified_access_instance_logging_configuration(
+        _request(ModifyVerifiedAccessInstanceLoggingConfigurationInputDict)
+    )
+    await client.modify_verified_access_trust_provider(
+        verified_access_trust_provider_id=_
+    )
+    await client.modify_verified_access_trust_provider(
+        **_request(ModifyVerifiedAccessTrustProviderInputDict)
+    )
+    await client.modify_verified_access_trust_provider(
+        _request(ModifyVerifiedAccessTrustProviderInput)
+    )
+    await client.modify_verified_access_trust_provider(
+        _request(ModifyVerifiedAccessTrustProviderInputDict)
+    )
+    await client.modify_volume(volume_id=_)
+    await client.modify_volume(**_request(ModifyVolumeInputDict))
+    await client.modify_volume(_request(ModifyVolumeInput))
+    await client.modify_volume(_request(ModifyVolumeInputDict))
+    await client.modify_volume_attribute(volume_id=_)
+    await client.modify_volume_attribute(**_request(ModifyVolumeAttributeInputDict))
+    await client.modify_volume_attribute(_request(ModifyVolumeAttributeInput))
+    await client.modify_volume_attribute(_request(ModifyVolumeAttributeInputDict))
+    await client.modify_vpc_attribute(vpc_id=_)
+    await client.modify_vpc_attribute(**_request(ModifyVpcAttributeInputDict))
+    await client.modify_vpc_attribute(_request(ModifyVpcAttributeInput))
+    await client.modify_vpc_attribute(_request(ModifyVpcAttributeInputDict))
+    await client.modify_vpc_block_public_access_exclusion(
+        exclusion_id=_, internet_gateway_exclusion_mode=_
+    )
+    await client.modify_vpc_block_public_access_exclusion(
+        **_request(ModifyVpcBlockPublicAccessExclusionInputDict)
+    )
+    await client.modify_vpc_block_public_access_exclusion(
+        _request(ModifyVpcBlockPublicAccessExclusionInput)
+    )
+    await client.modify_vpc_block_public_access_exclusion(
+        _request(ModifyVpcBlockPublicAccessExclusionInputDict)
+    )
+    await client.modify_vpc_block_public_access_options(internet_gateway_block_mode=_)
+    await client.modify_vpc_block_public_access_options(
+        **_request(ModifyVpcBlockPublicAccessOptionsInputDict)
+    )
+    await client.modify_vpc_block_public_access_options(
+        _request(ModifyVpcBlockPublicAccessOptionsInput)
+    )
+    await client.modify_vpc_block_public_access_options(
+        _request(ModifyVpcBlockPublicAccessOptionsInputDict)
+    )
+    await client.modify_vpc_encryption_control(vpc_encryption_control_id=_)
+    await client.modify_vpc_encryption_control(
+        **_request(ModifyVpcEncryptionControlInputDict)
+    )
+    await client.modify_vpc_encryption_control(
+        _request(ModifyVpcEncryptionControlInput)
+    )
+    await client.modify_vpc_encryption_control(
+        _request(ModifyVpcEncryptionControlInputDict)
+    )
+    await client.modify_vpc_endpoint(vpc_endpoint_id=_)
+    await client.modify_vpc_endpoint(**_request(ModifyVpcEndpointInputDict))
+    await client.modify_vpc_endpoint(_request(ModifyVpcEndpointInput))
+    await client.modify_vpc_endpoint(_request(ModifyVpcEndpointInputDict))
+    await client.modify_vpc_endpoint_connection_notification(
+        connection_notification_id=_
+    )
+    await client.modify_vpc_endpoint_connection_notification(
+        **_request(ModifyVpcEndpointConnectionNotificationInputDict)
+    )
+    await client.modify_vpc_endpoint_connection_notification(
+        _request(ModifyVpcEndpointConnectionNotificationInput)
+    )
+    await client.modify_vpc_endpoint_connection_notification(
+        _request(ModifyVpcEndpointConnectionNotificationInputDict)
+    )
+    await client.modify_vpc_endpoint_payer_responsibility(
+        vpc_endpoint_id=_, payer_responsibility=_, scope=_
+    )
+    await client.modify_vpc_endpoint_payer_responsibility(
+        **_request(ModifyVpcEndpointPayerResponsibilityInputDict)
+    )
+    await client.modify_vpc_endpoint_payer_responsibility(
+        _request(ModifyVpcEndpointPayerResponsibilityInput)
+    )
+    await client.modify_vpc_endpoint_payer_responsibility(
+        _request(ModifyVpcEndpointPayerResponsibilityInputDict)
+    )
+    await client.modify_vpc_endpoint_service_configuration(service_id=_)
+    await client.modify_vpc_endpoint_service_configuration(
+        **_request(ModifyVpcEndpointServiceConfigurationInputDict)
+    )
+    await client.modify_vpc_endpoint_service_configuration(
+        _request(ModifyVpcEndpointServiceConfigurationInput)
+    )
+    await client.modify_vpc_endpoint_service_configuration(
+        _request(ModifyVpcEndpointServiceConfigurationInputDict)
+    )
+    await client.modify_vpc_endpoint_service_payer_responsibility(
+        service_id=_, payer_responsibility=_
+    )
+    await client.modify_vpc_endpoint_service_payer_responsibility(
+        **_request(ModifyVpcEndpointServicePayerResponsibilityInputDict)
+    )
+    await client.modify_vpc_endpoint_service_payer_responsibility(
+        _request(ModifyVpcEndpointServicePayerResponsibilityInput)
+    )
+    await client.modify_vpc_endpoint_service_payer_responsibility(
+        _request(ModifyVpcEndpointServicePayerResponsibilityInputDict)
+    )
+    await client.modify_vpc_endpoint_service_permissions(service_id=_)
+    await client.modify_vpc_endpoint_service_permissions(
+        **_request(ModifyVpcEndpointServicePermissionsInputDict)
+    )
+    await client.modify_vpc_endpoint_service_permissions(
+        _request(ModifyVpcEndpointServicePermissionsInput)
+    )
+    await client.modify_vpc_endpoint_service_permissions(
+        _request(ModifyVpcEndpointServicePermissionsInputDict)
+    )
+    await client.modify_vpc_peering_connection_options(vpc_peering_connection_id=_)
+    await client.modify_vpc_peering_connection_options(
+        **_request(ModifyVpcPeeringConnectionOptionsInputDict)
+    )
+    await client.modify_vpc_peering_connection_options(
+        _request(ModifyVpcPeeringConnectionOptionsInput)
+    )
+    await client.modify_vpc_peering_connection_options(
+        _request(ModifyVpcPeeringConnectionOptionsInputDict)
+    )
+    await client.modify_vpc_tenancy(vpc_id=_, instance_tenancy=_)
+    await client.modify_vpc_tenancy(**_request(ModifyVpcTenancyInputDict))
+    await client.modify_vpc_tenancy(_request(ModifyVpcTenancyInput))
+    await client.modify_vpc_tenancy(_request(ModifyVpcTenancyInputDict))
+    await client.modify_vpn_connection(vpn_connection_id=_)
+    await client.modify_vpn_connection(**_request(ModifyVpnConnectionInputDict))
+    await client.modify_vpn_connection(_request(ModifyVpnConnectionInput))
+    await client.modify_vpn_connection(_request(ModifyVpnConnectionInputDict))
+    await client.modify_vpn_connection_options(vpn_connection_id=_)
+    await client.modify_vpn_connection_options(
+        **_request(ModifyVpnConnectionOptionsInputDict)
+    )
+    await client.modify_vpn_connection_options(
+        _request(ModifyVpnConnectionOptionsInput)
+    )
+    await client.modify_vpn_connection_options(
+        _request(ModifyVpnConnectionOptionsInputDict)
+    )
+    await client.modify_vpn_tunnel_certificate(
+        vpn_connection_id=_, vpn_tunnel_outside_ip_address=_
+    )
+    await client.modify_vpn_tunnel_certificate(
+        **_request(ModifyVpnTunnelCertificateInputDict)
+    )
+    await client.modify_vpn_tunnel_certificate(
+        _request(ModifyVpnTunnelCertificateInput)
+    )
+    await client.modify_vpn_tunnel_certificate(
+        _request(ModifyVpnTunnelCertificateInputDict)
+    )
+    await client.modify_vpn_tunnel_options(
+        vpn_connection_id=_, vpn_tunnel_outside_ip_address=_, tunnel_options=_
+    )
+    await client.modify_vpn_tunnel_options(**_request(ModifyVpnTunnelOptionsInputDict))
+    await client.modify_vpn_tunnel_options(_request(ModifyVpnTunnelOptionsInput))
+    await client.modify_vpn_tunnel_options(_request(ModifyVpnTunnelOptionsInputDict))
+    await client.monitor_instances(instance_ids=_)
+    await client.monitor_instances(**_request(MonitorInstancesInputDict))
+    await client.monitor_instances(_request(MonitorInstancesInput))
+    await client.monitor_instances(_request(MonitorInstancesInputDict))
+    await client.move_address_to_vpc(public_ip=_)
+    await client.move_address_to_vpc(**_request(MoveAddressToVpcInputDict))
+    await client.move_address_to_vpc(_request(MoveAddressToVpcInput))
+    await client.move_address_to_vpc(_request(MoveAddressToVpcInputDict))
+    await client.move_byoip_cidr_to_ipam(cidr=_, ipam_pool_id=_, ipam_pool_owner=_)
+    await client.move_byoip_cidr_to_ipam(**_request(MoveByoipCidrToIpamInputDict))
+    await client.move_byoip_cidr_to_ipam(_request(MoveByoipCidrToIpamInput))
+    await client.move_byoip_cidr_to_ipam(_request(MoveByoipCidrToIpamInputDict))
+    await client.move_capacity_reservation_instances(
+        source_capacity_reservation_id=_,
+        destination_capacity_reservation_id=_,
+        instance_count=_,
+    )
+    await client.move_capacity_reservation_instances(
+        **_request(MoveCapacityReservationInstancesInputDict)
+    )
+    await client.move_capacity_reservation_instances(
+        _request(MoveCapacityReservationInstancesInput)
+    )
+    await client.move_capacity_reservation_instances(
+        _request(MoveCapacityReservationInstancesInputDict)
+    )
+    await client.provision_byoip_cidr(cidr=_)
+    await client.provision_byoip_cidr(**_request(ProvisionByoipCidrInputDict))
+    await client.provision_byoip_cidr(_request(ProvisionByoipCidrInput))
+    await client.provision_byoip_cidr(_request(ProvisionByoipCidrInputDict))
+    await client.provision_ipam_byoasn(ipam_id=_, asn=_, asn_authorization_context=_)
+    await client.provision_ipam_byoasn(**_request(ProvisionIpamByoasnInputDict))
+    await client.provision_ipam_byoasn(_request(ProvisionIpamByoasnInput))
+    await client.provision_ipam_byoasn(_request(ProvisionIpamByoasnInputDict))
+    await client.provision_ipam_pool_cidr(ipam_pool_id=_)
+    await client.provision_ipam_pool_cidr(**_request(ProvisionIpamPoolCidrInputDict))
+    await client.provision_ipam_pool_cidr(_request(ProvisionIpamPoolCidrInput))
+    await client.provision_ipam_pool_cidr(_request(ProvisionIpamPoolCidrInputDict))
+    await client.provision_public_ipv4_pool_cidr(
+        ipam_pool_id=_, pool_id=_, netmask_length=_
+    )
+    await client.provision_public_ipv4_pool_cidr(
+        **_request(ProvisionPublicIpv4PoolCidrInputDict)
+    )
+    await client.provision_public_ipv4_pool_cidr(
+        _request(ProvisionPublicIpv4PoolCidrInput)
+    )
+    await client.provision_public_ipv4_pool_cidr(
+        _request(ProvisionPublicIpv4PoolCidrInputDict)
+    )
+    await client.purchase_capacity_block(
+        capacity_block_offering_id=_, instance_platform=_
+    )
+    await client.purchase_capacity_block(**_request(PurchaseCapacityBlockInputDict))
+    await client.purchase_capacity_block(_request(PurchaseCapacityBlockInput))
+    await client.purchase_capacity_block(_request(PurchaseCapacityBlockInputDict))
+    await client.purchase_capacity_block_extension(
+        capacity_block_extension_offering_id=_, capacity_reservation_id=_
+    )
+    await client.purchase_capacity_block_extension(
+        **_request(PurchaseCapacityBlockExtensionInputDict)
+    )
+    await client.purchase_capacity_block_extension(
+        _request(PurchaseCapacityBlockExtensionInput)
+    )
+    await client.purchase_capacity_block_extension(
+        _request(PurchaseCapacityBlockExtensionInputDict)
+    )
+    await client.purchase_host_reservation(host_id_set=_, offering_id=_)
+    await client.purchase_host_reservation(**_request(PurchaseHostReservationInputDict))
+    await client.purchase_host_reservation(_request(PurchaseHostReservationInput))
+    await client.purchase_host_reservation(_request(PurchaseHostReservationInputDict))
+    await client.purchase_reserved_instances_offering(
+        instance_count=_, reserved_instances_offering_id=_
+    )
+    await client.purchase_reserved_instances_offering(
+        **_request(PurchaseReservedInstancesOfferingInputDict)
+    )
+    await client.purchase_reserved_instances_offering(
+        _request(PurchaseReservedInstancesOfferingInput)
+    )
+    await client.purchase_reserved_instances_offering(
+        _request(PurchaseReservedInstancesOfferingInputDict)
+    )
+    await client.purchase_scheduled_instances(purchase_requests=_)
+    await client.purchase_scheduled_instances(
+        **_request(PurchaseScheduledInstancesInputDict)
+    )
+    await client.purchase_scheduled_instances(_request(PurchaseScheduledInstancesInput))
+    await client.purchase_scheduled_instances(
+        _request(PurchaseScheduledInstancesInputDict)
+    )
+    await client.reboot_instances(instance_ids=_)
+    await client.reboot_instances(**_request(RebootInstancesInputDict))
+    await client.reboot_instances(_request(RebootInstancesInput))
+    await client.reboot_instances(_request(RebootInstancesInputDict))
+    await client.register_image(name=_)
+    await client.register_image(**_request(RegisterImageInputDict))
+    await client.register_image(_request(RegisterImageInput))
+    await client.register_image(_request(RegisterImageInputDict))
+    await client.register_instance_event_notification_attributes(
+        instance_tag_attribute=_
+    )
+    await client.register_instance_event_notification_attributes(
+        **_request(RegisterInstanceEventNotificationAttributesInputDict)
+    )
+    await client.register_instance_event_notification_attributes(
+        _request(RegisterInstanceEventNotificationAttributesInput)
+    )
+    await client.register_instance_event_notification_attributes(
+        _request(RegisterInstanceEventNotificationAttributesInputDict)
+    )
+    await client.register_transit_gateway_multicast_group_members(
+        transit_gateway_multicast_domain_id=_, network_interface_ids=_
+    )
+    await client.register_transit_gateway_multicast_group_members(
+        **_request(RegisterTransitGatewayMulticastGroupMembersInputDict)
+    )
+    await client.register_transit_gateway_multicast_group_members(
+        _request(RegisterTransitGatewayMulticastGroupMembersInput)
+    )
+    await client.register_transit_gateway_multicast_group_members(
+        _request(RegisterTransitGatewayMulticastGroupMembersInputDict)
+    )
+    await client.register_transit_gateway_multicast_group_sources(
+        transit_gateway_multicast_domain_id=_, network_interface_ids=_
+    )
+    await client.register_transit_gateway_multicast_group_sources(
+        **_request(RegisterTransitGatewayMulticastGroupSourcesInputDict)
+    )
+    await client.register_transit_gateway_multicast_group_sources(
+        _request(RegisterTransitGatewayMulticastGroupSourcesInput)
+    )
+    await client.register_transit_gateway_multicast_group_sources(
+        _request(RegisterTransitGatewayMulticastGroupSourcesInputDict)
+    )
+    await client.reject_capacity_reservation_billing_ownership(
+        capacity_reservation_id=_
+    )
+    await client.reject_capacity_reservation_billing_ownership(
+        **_request(RejectCapacityReservationBillingOwnershipInputDict)
+    )
+    await client.reject_capacity_reservation_billing_ownership(
+        _request(RejectCapacityReservationBillingOwnershipInput)
+    )
+    await client.reject_capacity_reservation_billing_ownership(
+        _request(RejectCapacityReservationBillingOwnershipInputDict)
+    )
+    await client.reject_transit_gateway_client_vpn_attachment(
+        transit_gateway_attachment_id=_
+    )
+    await client.reject_transit_gateway_client_vpn_attachment(
+        **_request(RejectTransitGatewayClientVpnAttachmentInputDict)
+    )
+    await client.reject_transit_gateway_client_vpn_attachment(
+        _request(RejectTransitGatewayClientVpnAttachmentInput)
+    )
+    await client.reject_transit_gateway_client_vpn_attachment(
+        _request(RejectTransitGatewayClientVpnAttachmentInputDict)
+    )
+    await client.reject_transit_gateway_multicast_domain_associations()
+    await client.reject_transit_gateway_multicast_domain_associations(
+        **_request(RejectTransitGatewayMulticastDomainAssociationsInputDict)
+    )
+    await client.reject_transit_gateway_multicast_domain_associations(
+        _request(RejectTransitGatewayMulticastDomainAssociationsInput)
+    )
+    await client.reject_transit_gateway_multicast_domain_associations(
+        _request(RejectTransitGatewayMulticastDomainAssociationsInputDict)
+    )
+    await client.reject_transit_gateway_peering_attachment(
+        transit_gateway_attachment_id=_
+    )
+    await client.reject_transit_gateway_peering_attachment(
+        **_request(RejectTransitGatewayPeeringAttachmentInputDict)
+    )
+    await client.reject_transit_gateway_peering_attachment(
+        _request(RejectTransitGatewayPeeringAttachmentInput)
+    )
+    await client.reject_transit_gateway_peering_attachment(
+        _request(RejectTransitGatewayPeeringAttachmentInputDict)
+    )
+    await client.reject_transit_gateway_vpc_attachment(transit_gateway_attachment_id=_)
+    await client.reject_transit_gateway_vpc_attachment(
+        **_request(RejectTransitGatewayVpcAttachmentInputDict)
+    )
+    await client.reject_transit_gateway_vpc_attachment(
+        _request(RejectTransitGatewayVpcAttachmentInput)
+    )
+    await client.reject_transit_gateway_vpc_attachment(
+        _request(RejectTransitGatewayVpcAttachmentInputDict)
+    )
+    await client.reject_vpc_endpoint_connections(service_id=_, vpc_endpoint_ids=_)
+    await client.reject_vpc_endpoint_connections(
+        **_request(RejectVpcEndpointConnectionsInputDict)
+    )
+    await client.reject_vpc_endpoint_connections(
+        _request(RejectVpcEndpointConnectionsInput)
+    )
+    await client.reject_vpc_endpoint_connections(
+        _request(RejectVpcEndpointConnectionsInputDict)
+    )
+    await client.reject_vpc_peering_connection(vpc_peering_connection_id=_)
+    await client.reject_vpc_peering_connection(
+        **_request(RejectVpcPeeringConnectionInputDict)
+    )
+    await client.reject_vpc_peering_connection(
+        _request(RejectVpcPeeringConnectionInput)
+    )
+    await client.reject_vpc_peering_connection(
+        _request(RejectVpcPeeringConnectionInputDict)
+    )
+    await client.release_address()
+    await client.release_address(**_request(ReleaseAddressInputDict))
+    await client.release_address(_request(ReleaseAddressInput))
+    await client.release_address(_request(ReleaseAddressInputDict))
+    await client.release_hosts(host_ids=_)
+    await client.release_hosts(**_request(ReleaseHostsInputDict))
+    await client.release_hosts(_request(ReleaseHostsInput))
+    await client.release_hosts(_request(ReleaseHostsInputDict))
+    await client.release_ipam_pool_allocation(
+        ipam_pool_id=_, cidr=_, ipam_pool_allocation_id=_
+    )
+    await client.release_ipam_pool_allocation(
+        **_request(ReleaseIpamPoolAllocationInputDict)
+    )
+    await client.release_ipam_pool_allocation(_request(ReleaseIpamPoolAllocationInput))
+    await client.release_ipam_pool_allocation(
+        _request(ReleaseIpamPoolAllocationInputDict)
+    )
+    await client.replace_iam_instance_profile_association(
+        iam_instance_profile=_, association_id=_
+    )
+    await client.replace_iam_instance_profile_association(
+        **_request(ReplaceIamInstanceProfileAssociationInputDict)
+    )
+    await client.replace_iam_instance_profile_association(
+        _request(ReplaceIamInstanceProfileAssociationInput)
+    )
+    await client.replace_iam_instance_profile_association(
+        _request(ReplaceIamInstanceProfileAssociationInputDict)
+    )
+    await client.replace_image_criteria_in_allowed_images_settings()
+    await client.replace_image_criteria_in_allowed_images_settings(
+        **_request(ReplaceImageCriteriaInAllowedImagesSettingsInputDict)
+    )
+    await client.replace_image_criteria_in_allowed_images_settings(
+        _request(ReplaceImageCriteriaInAllowedImagesSettingsInput)
+    )
+    await client.replace_image_criteria_in_allowed_images_settings(
+        _request(ReplaceImageCriteriaInAllowedImagesSettingsInputDict)
+    )
+    await client.replace_image_instance_type_specification(image_id=_)
+    await client.replace_image_instance_type_specification(
+        **_request(ReplaceImageInstanceTypeSpecificationInputDict)
+    )
+    await client.replace_image_instance_type_specification(
+        _request(ReplaceImageInstanceTypeSpecificationInput)
+    )
+    await client.replace_image_instance_type_specification(
+        _request(ReplaceImageInstanceTypeSpecificationInputDict)
+    )
+    await client.replace_network_acl_association(association_id=_, network_acl_id=_)
+    await client.replace_network_acl_association(
+        **_request(ReplaceNetworkAclAssociationInputDict)
+    )
+    await client.replace_network_acl_association(
+        _request(ReplaceNetworkAclAssociationInput)
+    )
+    await client.replace_network_acl_association(
+        _request(ReplaceNetworkAclAssociationInputDict)
+    )
+    await client.replace_network_acl_entry(
+        network_acl_id=_, rule_number=_, protocol=_, rule_action=_, egress=_
+    )
+    await client.replace_network_acl_entry(**_request(ReplaceNetworkAclEntryInputDict))
+    await client.replace_network_acl_entry(_request(ReplaceNetworkAclEntryInput))
+    await client.replace_network_acl_entry(_request(ReplaceNetworkAclEntryInputDict))
+    await client.replace_route(route_table_id=_)
+    await client.replace_route(**_request(ReplaceRouteInputDict))
+    await client.replace_route(_request(ReplaceRouteInput))
+    await client.replace_route(_request(ReplaceRouteInputDict))
+    await client.replace_route_table_association(association_id=_, route_table_id=_)
+    await client.replace_route_table_association(
+        **_request(ReplaceRouteTableAssociationInputDict)
+    )
+    await client.replace_route_table_association(
+        _request(ReplaceRouteTableAssociationInput)
+    )
+    await client.replace_route_table_association(
+        _request(ReplaceRouteTableAssociationInputDict)
+    )
+    await client.replace_transit_gateway_route(
+        destination_cidr_block=_, transit_gateway_route_table_id=_
+    )
+    await client.replace_transit_gateway_route(
+        **_request(ReplaceTransitGatewayRouteInputDict)
+    )
+    await client.replace_transit_gateway_route(
+        _request(ReplaceTransitGatewayRouteInput)
+    )
+    await client.replace_transit_gateway_route(
+        _request(ReplaceTransitGatewayRouteInputDict)
+    )
+    await client.replace_vpn_tunnel(
+        vpn_connection_id=_, vpn_tunnel_outside_ip_address=_
+    )
+    await client.replace_vpn_tunnel(**_request(ReplaceVpnTunnelInputDict))
+    await client.replace_vpn_tunnel(_request(ReplaceVpnTunnelInput))
+    await client.replace_vpn_tunnel(_request(ReplaceVpnTunnelInputDict))
+    await client.report_instance_status(instances=_, status=_, reason_codes=_)
+    await client.report_instance_status(**_request(ReportInstanceStatusInputDict))
+    await client.report_instance_status(_request(ReportInstanceStatusInput))
+    await client.report_instance_status(_request(ReportInstanceStatusInputDict))
+    await client.request_spot_fleet(spot_fleet_request_config=_)
+    await client.request_spot_fleet(**_request(RequestSpotFleetInputDict))
+    await client.request_spot_fleet(_request(RequestSpotFleetInput))
+    await client.request_spot_fleet(_request(RequestSpotFleetInputDict))
+    await client.request_spot_instances()
+    await client.request_spot_instances(**_request(RequestSpotInstancesInputDict))
+    await client.request_spot_instances(_request(RequestSpotInstancesInput))
+    await client.request_spot_instances(_request(RequestSpotInstancesInputDict))
+    await client.reset_address_attribute(allocation_id=_, attribute=_)
+    await client.reset_address_attribute(**_request(ResetAddressAttributeInputDict))
+    await client.reset_address_attribute(_request(ResetAddressAttributeInput))
+    await client.reset_address_attribute(_request(ResetAddressAttributeInputDict))
+    await client.reset_ebs_default_kms_key_id()
+    await client.reset_ebs_default_kms_key_id(
+        **_request(ResetEbsDefaultKmsKeyIdInputDict)
+    )
+    await client.reset_ebs_default_kms_key_id(_request(ResetEbsDefaultKmsKeyIdInput))
+    await client.reset_ebs_default_kms_key_id(
+        _request(ResetEbsDefaultKmsKeyIdInputDict)
+    )
+    await client.reset_fpga_image_attribute(fpga_image_id=_)
+    await client.reset_fpga_image_attribute(
+        **_request(ResetFpgaImageAttributeInputDict)
+    )
+    await client.reset_fpga_image_attribute(_request(ResetFpgaImageAttributeInput))
+    await client.reset_fpga_image_attribute(_request(ResetFpgaImageAttributeInputDict))
+    await client.reset_image_attribute(attribute=_, image_id=_)
+    await client.reset_image_attribute(**_request(ResetImageAttributeInputDict))
+    await client.reset_image_attribute(_request(ResetImageAttributeInput))
+    await client.reset_image_attribute(_request(ResetImageAttributeInputDict))
+    await client.reset_instance_attribute(instance_id=_, attribute=_)
+    await client.reset_instance_attribute(**_request(ResetInstanceAttributeInputDict))
+    await client.reset_instance_attribute(_request(ResetInstanceAttributeInput))
+    await client.reset_instance_attribute(_request(ResetInstanceAttributeInputDict))
+    await client.reset_network_interface_attribute(network_interface_id=_)
+    await client.reset_network_interface_attribute(
+        **_request(ResetNetworkInterfaceAttributeInputDict)
+    )
+    await client.reset_network_interface_attribute(
+        _request(ResetNetworkInterfaceAttributeInput)
+    )
+    await client.reset_network_interface_attribute(
+        _request(ResetNetworkInterfaceAttributeInputDict)
+    )
+    await client.reset_snapshot_attribute(attribute=_, snapshot_id=_)
+    await client.reset_snapshot_attribute(**_request(ResetSnapshotAttributeInputDict))
+    await client.reset_snapshot_attribute(_request(ResetSnapshotAttributeInput))
+    await client.reset_snapshot_attribute(_request(ResetSnapshotAttributeInputDict))
+    await client.restore_address_to_classic(public_ip=_)
+    await client.restore_address_to_classic(
+        **_request(RestoreAddressToClassicInputDict)
+    )
+    await client.restore_address_to_classic(_request(RestoreAddressToClassicInput))
+    await client.restore_address_to_classic(_request(RestoreAddressToClassicInputDict))
+    await client.restore_image_from_recycle_bin(image_id=_)
+    await client.restore_image_from_recycle_bin(
+        **_request(RestoreImageFromRecycleBinInputDict)
+    )
+    await client.restore_image_from_recycle_bin(
+        _request(RestoreImageFromRecycleBinInput)
+    )
+    await client.restore_image_from_recycle_bin(
+        _request(RestoreImageFromRecycleBinInputDict)
+    )
+    await client.restore_managed_prefix_list_version(
+        prefix_list_id=_, previous_version=_, current_version=_
+    )
+    await client.restore_managed_prefix_list_version(
+        **_request(RestoreManagedPrefixListVersionInputDict)
+    )
+    await client.restore_managed_prefix_list_version(
+        _request(RestoreManagedPrefixListVersionInput)
+    )
+    await client.restore_managed_prefix_list_version(
+        _request(RestoreManagedPrefixListVersionInputDict)
+    )
+    await client.restore_snapshot_from_recycle_bin(snapshot_id=_)
+    await client.restore_snapshot_from_recycle_bin(
+        **_request(RestoreSnapshotFromRecycleBinInputDict)
+    )
+    await client.restore_snapshot_from_recycle_bin(
+        _request(RestoreSnapshotFromRecycleBinInput)
+    )
+    await client.restore_snapshot_from_recycle_bin(
+        _request(RestoreSnapshotFromRecycleBinInputDict)
+    )
+    await client.restore_snapshot_tier(snapshot_id=_)
+    await client.restore_snapshot_tier(**_request(RestoreSnapshotTierInputDict))
+    await client.restore_snapshot_tier(_request(RestoreSnapshotTierInput))
+    await client.restore_snapshot_tier(_request(RestoreSnapshotTierInputDict))
+    await client.restore_volume_from_recycle_bin(volume_id=_)
+    await client.restore_volume_from_recycle_bin(
+        **_request(RestoreVolumeFromRecycleBinInputDict)
+    )
+    await client.restore_volume_from_recycle_bin(
+        _request(RestoreVolumeFromRecycleBinInput)
+    )
+    await client.restore_volume_from_recycle_bin(
+        _request(RestoreVolumeFromRecycleBinInputDict)
+    )
+    await client.revoke_client_vpn_ingress(
+        client_vpn_endpoint_id=_, target_network_cidr=_
+    )
+    await client.revoke_client_vpn_ingress(**_request(RevokeClientVpnIngressInputDict))
+    await client.revoke_client_vpn_ingress(_request(RevokeClientVpnIngressInput))
+    await client.revoke_client_vpn_ingress(_request(RevokeClientVpnIngressInputDict))
+    await client.revoke_security_group_egress(group_id=_)
+    await client.revoke_security_group_egress(
+        **_request(RevokeSecurityGroupEgressInputDict)
+    )
+    await client.revoke_security_group_egress(_request(RevokeSecurityGroupEgressInput))
+    await client.revoke_security_group_egress(
+        _request(RevokeSecurityGroupEgressInputDict)
+    )
+    await client.revoke_security_group_ingress()
+    await client.revoke_security_group_ingress(
+        **_request(RevokeSecurityGroupIngressInputDict)
+    )
+    await client.revoke_security_group_ingress(
+        _request(RevokeSecurityGroupIngressInput)
+    )
+    await client.revoke_security_group_ingress(
+        _request(RevokeSecurityGroupIngressInputDict)
+    )
+    await client.run_instances(max_count=_, min_count=_)
+    await client.run_instances(**_request(RunInstancesInputDict))
+    await client.run_instances(_request(RunInstancesInput))
+    await client.run_instances(_request(RunInstancesInputDict))
+    await client.run_scheduled_instances(
+        launch_specification=_, scheduled_instance_id=_
+    )
+    await client.run_scheduled_instances(**_request(RunScheduledInstancesInputDict))
+    await client.run_scheduled_instances(_request(RunScheduledInstancesInput))
+    await client.run_scheduled_instances(_request(RunScheduledInstancesInputDict))
+    await client.search_local_gateway_routes(local_gateway_route_table_id=_)
+    await client.search_local_gateway_routes(
+        **_request(SearchLocalGatewayRoutesInputDict)
+    )
+    await client.search_local_gateway_routes(_request(SearchLocalGatewayRoutesInput))
+    await client.search_local_gateway_routes(
+        _request(SearchLocalGatewayRoutesInputDict)
+    )
+    await client.search_transit_gateway_multicast_groups(
+        transit_gateway_multicast_domain_id=_
+    )
+    await client.search_transit_gateway_multicast_groups(
+        **_request(SearchTransitGatewayMulticastGroupsInputDict)
+    )
+    await client.search_transit_gateway_multicast_groups(
+        _request(SearchTransitGatewayMulticastGroupsInput)
+    )
+    await client.search_transit_gateway_multicast_groups(
+        _request(SearchTransitGatewayMulticastGroupsInputDict)
+    )
+    await client.search_transit_gateway_routes(
+        transit_gateway_route_table_id=_, filters=_
+    )
+    await client.search_transit_gateway_routes(
+        **_request(SearchTransitGatewayRoutesInputDict)
+    )
+    await client.search_transit_gateway_routes(
+        _request(SearchTransitGatewayRoutesInput)
+    )
+    await client.search_transit_gateway_routes(
+        _request(SearchTransitGatewayRoutesInputDict)
+    )
+    await client.send_diagnostic_interrupt(instance_id=_)
+    await client.send_diagnostic_interrupt(**_request(SendDiagnosticInterruptInputDict))
+    await client.send_diagnostic_interrupt(_request(SendDiagnosticInterruptInput))
+    await client.send_diagnostic_interrupt(_request(SendDiagnosticInterruptInputDict))
+    await client.start_declarative_policies_report(s3_bucket=_, target_id=_)
+    await client.start_declarative_policies_report(
+        **_request(StartDeclarativePoliciesReportInputDict)
+    )
+    await client.start_declarative_policies_report(
+        _request(StartDeclarativePoliciesReportInput)
+    )
+    await client.start_declarative_policies_report(
+        _request(StartDeclarativePoliciesReportInputDict)
+    )
+    await client.start_instances(instance_ids=_)
+    await client.start_instances(**_request(StartInstancesInputDict))
+    await client.start_instances(_request(StartInstancesInput))
+    await client.start_instances(_request(StartInstancesInputDict))
+    await client.start_network_insights_access_scope_analysis(
+        network_insights_access_scope_id=_
+    )
+    await client.start_network_insights_access_scope_analysis(
+        **_request(StartNetworkInsightsAccessScopeAnalysisInputDict)
+    )
+    await client.start_network_insights_access_scope_analysis(
+        _request(StartNetworkInsightsAccessScopeAnalysisInput)
+    )
+    await client.start_network_insights_access_scope_analysis(
+        _request(StartNetworkInsightsAccessScopeAnalysisInputDict)
+    )
+    await client.start_network_insights_analysis(network_insights_path_id=_)
+    await client.start_network_insights_analysis(
+        **_request(StartNetworkInsightsAnalysisInputDict)
+    )
+    await client.start_network_insights_analysis(
+        _request(StartNetworkInsightsAnalysisInput)
+    )
+    await client.start_network_insights_analysis(
+        _request(StartNetworkInsightsAnalysisInputDict)
+    )
+    await client.start_vpc_endpoint_service_private_dns_verification(service_id=_)
+    await client.start_vpc_endpoint_service_private_dns_verification(
+        **_request(StartVpcEndpointServicePrivateDnsVerificationInputDict)
+    )
+    await client.start_vpc_endpoint_service_private_dns_verification(
+        _request(StartVpcEndpointServicePrivateDnsVerificationInput)
+    )
+    await client.start_vpc_endpoint_service_private_dns_verification(
+        _request(StartVpcEndpointServicePrivateDnsVerificationInputDict)
+    )
+    await client.stop_instances(instance_ids=_)
+    await client.stop_instances(**_request(StopInstancesInputDict))
+    await client.stop_instances(_request(StopInstancesInput))
+    await client.stop_instances(_request(StopInstancesInputDict))
+    await client.terminate_client_vpn_connections(client_vpn_endpoint_id=_)
+    await client.terminate_client_vpn_connections(
+        **_request(TerminateClientVpnConnectionsInputDict)
+    )
+    await client.terminate_client_vpn_connections(
+        _request(TerminateClientVpnConnectionsInput)
+    )
+    await client.terminate_client_vpn_connections(
+        _request(TerminateClientVpnConnectionsInputDict)
+    )
+    await client.terminate_instances(instance_ids=_)
+    await client.terminate_instances(**_request(TerminateInstancesInputDict))
+    await client.terminate_instances(_request(TerminateInstancesInput))
+    await client.terminate_instances(_request(TerminateInstancesInputDict))
+    await client.unassign_ipv6_addresses(network_interface_id=_)
+    await client.unassign_ipv6_addresses(**_request(UnassignIpv6AddressesInputDict))
+    await client.unassign_ipv6_addresses(_request(UnassignIpv6AddressesInput))
+    await client.unassign_ipv6_addresses(_request(UnassignIpv6AddressesInputDict))
+    await client.unassign_private_ip_addresses(network_interface_id=_)
+    await client.unassign_private_ip_addresses(
+        **_request(UnassignPrivateIpAddressesInputDict)
+    )
+    await client.unassign_private_ip_addresses(
+        _request(UnassignPrivateIpAddressesInput)
+    )
+    await client.unassign_private_ip_addresses(
+        _request(UnassignPrivateIpAddressesInputDict)
+    )
+    await client.unassign_private_nat_gateway_address(
+        nat_gateway_id=_, private_ip_addresses=_
+    )
+    await client.unassign_private_nat_gateway_address(
+        **_request(UnassignPrivateNatGatewayAddressInputDict)
+    )
+    await client.unassign_private_nat_gateway_address(
+        _request(UnassignPrivateNatGatewayAddressInput)
+    )
+    await client.unassign_private_nat_gateway_address(
+        _request(UnassignPrivateNatGatewayAddressInputDict)
+    )
+    await client.unlock_snapshot(snapshot_id=_)
+    await client.unlock_snapshot(**_request(UnlockSnapshotInputDict))
+    await client.unlock_snapshot(_request(UnlockSnapshotInput))
+    await client.unlock_snapshot(_request(UnlockSnapshotInputDict))
+    await client.unmonitor_instances(instance_ids=_)
+    await client.unmonitor_instances(**_request(UnmonitorInstancesInputDict))
+    await client.unmonitor_instances(_request(UnmonitorInstancesInput))
+    await client.unmonitor_instances(_request(UnmonitorInstancesInputDict))
+    await client.update_capacity_manager_monitored_tag_keys()
+    await client.update_capacity_manager_monitored_tag_keys(
+        **_request(UpdateCapacityManagerMonitoredTagKeysInputDict)
+    )
+    await client.update_capacity_manager_monitored_tag_keys(
+        _request(UpdateCapacityManagerMonitoredTagKeysInput)
+    )
+    await client.update_capacity_manager_monitored_tag_keys(
+        _request(UpdateCapacityManagerMonitoredTagKeysInputDict)
+    )
+    await client.update_capacity_manager_organizations_access(organizations_access=_)
+    await client.update_capacity_manager_organizations_access(
+        **_request(UpdateCapacityManagerOrganizationsAccessInputDict)
+    )
+    await client.update_capacity_manager_organizations_access(
+        _request(UpdateCapacityManagerOrganizationsAccessInput)
+    )
+    await client.update_capacity_manager_organizations_access(
+        _request(UpdateCapacityManagerOrganizationsAccessInputDict)
+    )
+    await client.update_interruptible_capacity_reservation_allocation(
+        capacity_reservation_id=_
+    )
+    await client.update_interruptible_capacity_reservation_allocation(
+        **_request(UpdateInterruptibleCapacityReservationAllocationInputDict)
+    )
+    await client.update_interruptible_capacity_reservation_allocation(
+        _request(UpdateInterruptibleCapacityReservationAllocationInput)
+    )
+    await client.update_interruptible_capacity_reservation_allocation(
+        _request(UpdateInterruptibleCapacityReservationAllocationInputDict)
+    )
+    await client.update_security_group_rule_descriptions_egress()
+    await client.update_security_group_rule_descriptions_egress(
+        **_request(UpdateSecurityGroupRuleDescriptionsEgressInputDict)
+    )
+    await client.update_security_group_rule_descriptions_egress(
+        _request(UpdateSecurityGroupRuleDescriptionsEgressInput)
+    )
+    await client.update_security_group_rule_descriptions_egress(
+        _request(UpdateSecurityGroupRuleDescriptionsEgressInputDict)
+    )
+    await client.update_security_group_rule_descriptions_ingress()
+    await client.update_security_group_rule_descriptions_ingress(
+        **_request(UpdateSecurityGroupRuleDescriptionsIngressInputDict)
+    )
+    await client.update_security_group_rule_descriptions_ingress(
+        _request(UpdateSecurityGroupRuleDescriptionsIngressInput)
+    )
+    await client.update_security_group_rule_descriptions_ingress(
+        _request(UpdateSecurityGroupRuleDescriptionsIngressInputDict)
+    )
+    await client.validate_security_group_quotas_for_interface(security_group_ids=_)
+    await client.validate_security_group_quotas_for_interface(
+        **_request(ValidateSecurityGroupQuotasForInterfaceInputDict)
+    )
+    await client.validate_security_group_quotas_for_interface(
+        _request(ValidateSecurityGroupQuotasForInterfaceInput)
+    )
+    await client.validate_security_group_quotas_for_interface(
+        _request(ValidateSecurityGroupQuotasForInterfaceInputDict)
+    )
+    await client.withdraw_byoip_cidr(cidr=_)
+    await client.withdraw_byoip_cidr(**_request(WithdrawByoipCidrInputDict))
+    await client.withdraw_byoip_cidr(_request(WithdrawByoipCidrInput))
+    await client.withdraw_byoip_cidr(_request(WithdrawByoipCidrInputDict))
+
+
+def check_sync_calls(client: EC2Client) -> None:
+    pass
+    client.accept_address_transfer(address=_)
+    client.accept_address_transfer(**_request(AcceptAddressTransferInputDict))
+    client.accept_address_transfer(_request(AcceptAddressTransferInput))
+    client.accept_address_transfer(_request(AcceptAddressTransferInputDict))
+    client.accept_capacity_reservation_billing_ownership(capacity_reservation_id=_)
+    client.accept_capacity_reservation_billing_ownership(
+        **_request(AcceptCapacityReservationBillingOwnershipInputDict)
+    )
+    client.accept_capacity_reservation_billing_ownership(
+        _request(AcceptCapacityReservationBillingOwnershipInput)
+    )
+    client.accept_capacity_reservation_billing_ownership(
+        _request(AcceptCapacityReservationBillingOwnershipInputDict)
+    )
+    client.accept_reserved_instances_exchange_quote(reserved_instance_ids=_)
+    client.accept_reserved_instances_exchange_quote(
+        **_request(AcceptReservedInstancesExchangeQuoteInputDict)
+    )
+    client.accept_reserved_instances_exchange_quote(
+        _request(AcceptReservedInstancesExchangeQuoteInput)
+    )
+    client.accept_reserved_instances_exchange_quote(
+        _request(AcceptReservedInstancesExchangeQuoteInputDict)
+    )
+    client.accept_transit_gateway_client_vpn_attachment(transit_gateway_attachment_id=_)
+    client.accept_transit_gateway_client_vpn_attachment(
+        **_request(AcceptTransitGatewayClientVpnAttachmentInputDict)
+    )
+    client.accept_transit_gateway_client_vpn_attachment(
+        _request(AcceptTransitGatewayClientVpnAttachmentInput)
+    )
+    client.accept_transit_gateway_client_vpn_attachment(
+        _request(AcceptTransitGatewayClientVpnAttachmentInputDict)
+    )
+    client.accept_transit_gateway_multicast_domain_associations()
+    client.accept_transit_gateway_multicast_domain_associations(
+        **_request(AcceptTransitGatewayMulticastDomainAssociationsInputDict)
+    )
+    client.accept_transit_gateway_multicast_domain_associations(
+        _request(AcceptTransitGatewayMulticastDomainAssociationsInput)
+    )
+    client.accept_transit_gateway_multicast_domain_associations(
+        _request(AcceptTransitGatewayMulticastDomainAssociationsInputDict)
+    )
+    client.accept_transit_gateway_peering_attachment(transit_gateway_attachment_id=_)
+    client.accept_transit_gateway_peering_attachment(
+        **_request(AcceptTransitGatewayPeeringAttachmentInputDict)
+    )
+    client.accept_transit_gateway_peering_attachment(
+        _request(AcceptTransitGatewayPeeringAttachmentInput)
+    )
+    client.accept_transit_gateway_peering_attachment(
+        _request(AcceptTransitGatewayPeeringAttachmentInputDict)
+    )
+    client.accept_transit_gateway_vpc_attachment(transit_gateway_attachment_id=_)
+    client.accept_transit_gateway_vpc_attachment(
+        **_request(AcceptTransitGatewayVpcAttachmentInputDict)
+    )
+    client.accept_transit_gateway_vpc_attachment(
+        _request(AcceptTransitGatewayVpcAttachmentInput)
+    )
+    client.accept_transit_gateway_vpc_attachment(
+        _request(AcceptTransitGatewayVpcAttachmentInputDict)
+    )
+    client.accept_vpc_endpoint_connections(service_id=_, vpc_endpoint_ids=_)
+    client.accept_vpc_endpoint_connections(
+        **_request(AcceptVpcEndpointConnectionsInputDict)
+    )
+    client.accept_vpc_endpoint_connections(_request(AcceptVpcEndpointConnectionsInput))
+    client.accept_vpc_endpoint_connections(
+        _request(AcceptVpcEndpointConnectionsInputDict)
+    )
+    client.accept_vpc_peering_connection(vpc_peering_connection_id=_)
+    client.accept_vpc_peering_connection(
+        **_request(AcceptVpcPeeringConnectionInputDict)
+    )
+    client.accept_vpc_peering_connection(_request(AcceptVpcPeeringConnectionInput))
+    client.accept_vpc_peering_connection(_request(AcceptVpcPeeringConnectionInputDict))
+    client.advertise_byoip_cidr(cidr=_)
+    client.advertise_byoip_cidr(**_request(AdvertiseByoipCidrInputDict))
+    client.advertise_byoip_cidr(_request(AdvertiseByoipCidrInput))
+    client.advertise_byoip_cidr(_request(AdvertiseByoipCidrInputDict))
+    client.allocate_address()
+    client.allocate_address(**_request(AllocateAddressInputDict))
+    client.allocate_address(_request(AllocateAddressInput))
+    client.allocate_address(_request(AllocateAddressInputDict))
+    client.allocate_hosts()
+    client.allocate_hosts(**_request(AllocateHostsInputDict))
+    client.allocate_hosts(_request(AllocateHostsInput))
+    client.allocate_hosts(_request(AllocateHostsInputDict))
+    client.allocate_ipam_pool_cidr(ipam_pool_id=_)
+    client.allocate_ipam_pool_cidr(**_request(AllocateIpamPoolCidrInputDict))
+    client.allocate_ipam_pool_cidr(_request(AllocateIpamPoolCidrInput))
+    client.allocate_ipam_pool_cidr(_request(AllocateIpamPoolCidrInputDict))
+    client.apply_security_groups_to_client_vpn_target_network(
+        client_vpn_endpoint_id=_, vpc_id=_, security_group_ids=_
+    )
+    client.apply_security_groups_to_client_vpn_target_network(
+        **_request(ApplySecurityGroupsToClientVpnTargetNetworkInputDict)
+    )
+    client.apply_security_groups_to_client_vpn_target_network(
+        _request(ApplySecurityGroupsToClientVpnTargetNetworkInput)
+    )
+    client.apply_security_groups_to_client_vpn_target_network(
+        _request(ApplySecurityGroupsToClientVpnTargetNetworkInputDict)
+    )
+    client.assign_ipv6_addresses(network_interface_id=_)
+    client.assign_ipv6_addresses(**_request(AssignIpv6AddressesInputDict))
+    client.assign_ipv6_addresses(_request(AssignIpv6AddressesInput))
+    client.assign_ipv6_addresses(_request(AssignIpv6AddressesInputDict))
+    client.assign_private_ip_addresses(network_interface_id=_)
+    client.assign_private_ip_addresses(**_request(AssignPrivateIpAddressesInputDict))
+    client.assign_private_ip_addresses(_request(AssignPrivateIpAddressesInput))
+    client.assign_private_ip_addresses(_request(AssignPrivateIpAddressesInputDict))
+    client.assign_private_nat_gateway_address(nat_gateway_id=_)
+    client.assign_private_nat_gateway_address(
+        **_request(AssignPrivateNatGatewayAddressInputDict)
+    )
+    client.assign_private_nat_gateway_address(
+        _request(AssignPrivateNatGatewayAddressInput)
+    )
+    client.assign_private_nat_gateway_address(
+        _request(AssignPrivateNatGatewayAddressInputDict)
+    )
+    client.associate_address()
+    client.associate_address(**_request(AssociateAddressInputDict))
+    client.associate_address(_request(AssociateAddressInput))
+    client.associate_address(_request(AssociateAddressInputDict))
+    client.associate_application_status_check(application_status_check_id=_)
+    client.associate_application_status_check(
+        **_request(AssociateApplicationStatusCheckInputDict)
+    )
+    client.associate_application_status_check(
+        _request(AssociateApplicationStatusCheckInput)
+    )
+    client.associate_application_status_check(
+        _request(AssociateApplicationStatusCheckInputDict)
+    )
+    client.associate_capacity_reservation_billing_owner(
+        capacity_reservation_id=_, unused_reservation_billing_owner_id=_
+    )
+    client.associate_capacity_reservation_billing_owner(
+        **_request(AssociateCapacityReservationBillingOwnerInputDict)
+    )
+    client.associate_capacity_reservation_billing_owner(
+        _request(AssociateCapacityReservationBillingOwnerInput)
+    )
+    client.associate_capacity_reservation_billing_owner(
+        _request(AssociateCapacityReservationBillingOwnerInputDict)
+    )
+    client.associate_client_vpn_target_network(client_vpn_endpoint_id=_)
+    client.associate_client_vpn_target_network(
+        **_request(AssociateClientVpnTargetNetworkInputDict)
+    )
+    client.associate_client_vpn_target_network(
+        _request(AssociateClientVpnTargetNetworkInput)
+    )
+    client.associate_client_vpn_target_network(
+        _request(AssociateClientVpnTargetNetworkInputDict)
+    )
+    client.associate_dhcp_options(dhcp_options_id=_, vpc_id=_)
+    client.associate_dhcp_options(**_request(AssociateDhcpOptionsInputDict))
+    client.associate_dhcp_options(_request(AssociateDhcpOptionsInput))
+    client.associate_dhcp_options(_request(AssociateDhcpOptionsInputDict))
+    client.associate_enclave_certificate_iam_role(certificate_arn=_, role_arn=_)
+    client.associate_enclave_certificate_iam_role(
+        **_request(AssociateEnclaveCertificateIamRoleInputDict)
+    )
+    client.associate_enclave_certificate_iam_role(
+        _request(AssociateEnclaveCertificateIamRoleInput)
+    )
+    client.associate_enclave_certificate_iam_role(
+        _request(AssociateEnclaveCertificateIamRoleInputDict)
+    )
+    client.associate_iam_instance_profile(iam_instance_profile=_, instance_id=_)
+    client.associate_iam_instance_profile(
+        **_request(AssociateIamInstanceProfileInputDict)
+    )
+    client.associate_iam_instance_profile(_request(AssociateIamInstanceProfileInput))
+    client.associate_iam_instance_profile(
+        _request(AssociateIamInstanceProfileInputDict)
+    )
+    client.associate_instance_event_window(
+        instance_event_window_id=_, association_target=_
+    )
+    client.associate_instance_event_window(
+        **_request(AssociateInstanceEventWindowInputDict)
+    )
+    client.associate_instance_event_window(_request(AssociateInstanceEventWindowInput))
+    client.associate_instance_event_window(
+        _request(AssociateInstanceEventWindowInputDict)
+    )
+    client.associate_ipam_byoasn(asn=_, cidr=_)
+    client.associate_ipam_byoasn(**_request(AssociateIpamByoasnInputDict))
+    client.associate_ipam_byoasn(_request(AssociateIpamByoasnInput))
+    client.associate_ipam_byoasn(_request(AssociateIpamByoasnInputDict))
+    client.associate_ipam_resource_discovery(ipam_id=_, ipam_resource_discovery_id=_)
+    client.associate_ipam_resource_discovery(
+        **_request(AssociateIpamResourceDiscoveryInputDict)
+    )
+    client.associate_ipam_resource_discovery(
+        _request(AssociateIpamResourceDiscoveryInput)
+    )
+    client.associate_ipam_resource_discovery(
+        _request(AssociateIpamResourceDiscoveryInputDict)
+    )
+    client.associate_nat_gateway_address(nat_gateway_id=_, allocation_ids=_)
+    client.associate_nat_gateway_address(
+        **_request(AssociateNatGatewayAddressInputDict)
+    )
+    client.associate_nat_gateway_address(_request(AssociateNatGatewayAddressInput))
+    client.associate_nat_gateway_address(_request(AssociateNatGatewayAddressInputDict))
+    client.associate_route_server(route_server_id=_, vpc_id=_)
+    client.associate_route_server(**_request(AssociateRouteServerInputDict))
+    client.associate_route_server(_request(AssociateRouteServerInput))
+    client.associate_route_server(_request(AssociateRouteServerInputDict))
+    client.associate_route_table(route_table_id=_)
+    client.associate_route_table(**_request(AssociateRouteTableInputDict))
+    client.associate_route_table(_request(AssociateRouteTableInput))
+    client.associate_route_table(_request(AssociateRouteTableInputDict))
+    client.associate_security_group_vpc(group_id=_, vpc_id=_)
+    client.associate_security_group_vpc(**_request(AssociateSecurityGroupVpcInputDict))
+    client.associate_security_group_vpc(_request(AssociateSecurityGroupVpcInput))
+    client.associate_security_group_vpc(_request(AssociateSecurityGroupVpcInputDict))
+    client.associate_subnet_cidr_block(subnet_id=_)
+    client.associate_subnet_cidr_block(**_request(AssociateSubnetCidrBlockInputDict))
+    client.associate_subnet_cidr_block(_request(AssociateSubnetCidrBlockInput))
+    client.associate_subnet_cidr_block(_request(AssociateSubnetCidrBlockInputDict))
+    client.associate_transit_gateway_multicast_domain(
+        transit_gateway_multicast_domain_id=_,
+        transit_gateway_attachment_id=_,
+        subnet_ids=_,
+    )
+    client.associate_transit_gateway_multicast_domain(
+        **_request(AssociateTransitGatewayMulticastDomainInputDict)
+    )
+    client.associate_transit_gateway_multicast_domain(
+        _request(AssociateTransitGatewayMulticastDomainInput)
+    )
+    client.associate_transit_gateway_multicast_domain(
+        _request(AssociateTransitGatewayMulticastDomainInputDict)
+    )
+    client.associate_transit_gateway_policy_table(
+        transit_gateway_policy_table_id=_, transit_gateway_attachment_id=_
+    )
+    client.associate_transit_gateway_policy_table(
+        **_request(AssociateTransitGatewayPolicyTableInputDict)
+    )
+    client.associate_transit_gateway_policy_table(
+        _request(AssociateTransitGatewayPolicyTableInput)
+    )
+    client.associate_transit_gateway_policy_table(
+        _request(AssociateTransitGatewayPolicyTableInputDict)
+    )
+    client.associate_transit_gateway_route_table(
+        transit_gateway_route_table_id=_, transit_gateway_attachment_id=_
+    )
+    client.associate_transit_gateway_route_table(
+        **_request(AssociateTransitGatewayRouteTableInputDict)
+    )
+    client.associate_transit_gateway_route_table(
+        _request(AssociateTransitGatewayRouteTableInput)
+    )
+    client.associate_transit_gateway_route_table(
+        _request(AssociateTransitGatewayRouteTableInputDict)
+    )
+    client.associate_trunk_interface(branch_interface_id=_, trunk_interface_id=_)
+    client.associate_trunk_interface(**_request(AssociateTrunkInterfaceInputDict))
+    client.associate_trunk_interface(_request(AssociateTrunkInterfaceInput))
+    client.associate_trunk_interface(_request(AssociateTrunkInterfaceInputDict))
+    client.associate_vpc_cidr_block(vpc_id=_)
+    client.associate_vpc_cidr_block(**_request(AssociateVpcCidrBlockInputDict))
+    client.associate_vpc_cidr_block(_request(AssociateVpcCidrBlockInput))
+    client.associate_vpc_cidr_block(_request(AssociateVpcCidrBlockInputDict))
+    client.attach_classic_link_vpc(instance_id=_, vpc_id=_, groups=_)
+    client.attach_classic_link_vpc(**_request(AttachClassicLinkVpcInputDict))
+    client.attach_classic_link_vpc(_request(AttachClassicLinkVpcInput))
+    client.attach_classic_link_vpc(_request(AttachClassicLinkVpcInputDict))
+    client.attach_image_watermark(image_id=_, watermark_name=_)
+    client.attach_image_watermark(**_request(AttachImageWatermarkInputDict))
+    client.attach_image_watermark(_request(AttachImageWatermarkInput))
+    client.attach_image_watermark(_request(AttachImageWatermarkInputDict))
+    client.attach_internet_gateway(internet_gateway_id=_, vpc_id=_)
+    client.attach_internet_gateway(**_request(AttachInternetGatewayInputDict))
+    client.attach_internet_gateway(_request(AttachInternetGatewayInput))
+    client.attach_internet_gateway(_request(AttachInternetGatewayInputDict))
+    client.attach_network_interface(
+        network_interface_id=_, instance_id=_, device_index=_
+    )
+    client.attach_network_interface(**_request(AttachNetworkInterfaceInputDict))
+    client.attach_network_interface(_request(AttachNetworkInterfaceInput))
+    client.attach_network_interface(_request(AttachNetworkInterfaceInputDict))
+    client.attach_verified_access_trust_provider(
+        verified_access_instance_id=_, verified_access_trust_provider_id=_
+    )
+    client.attach_verified_access_trust_provider(
+        **_request(AttachVerifiedAccessTrustProviderInputDict)
+    )
+    client.attach_verified_access_trust_provider(
+        _request(AttachVerifiedAccessTrustProviderInput)
+    )
+    client.attach_verified_access_trust_provider(
+        _request(AttachVerifiedAccessTrustProviderInputDict)
+    )
+    client.attach_volume(device=_, instance_id=_, volume_id=_)
+    client.attach_volume(**_request(AttachVolumeInputDict))
+    client.attach_volume(_request(AttachVolumeInput))
+    client.attach_volume(_request(AttachVolumeInputDict))
+    client.attach_vpn_gateway(vpc_id=_, vpn_gateway_id=_)
+    client.attach_vpn_gateway(**_request(AttachVpnGatewayInputDict))
+    client.attach_vpn_gateway(_request(AttachVpnGatewayInput))
+    client.attach_vpn_gateway(_request(AttachVpnGatewayInputDict))
+    client.authorize_client_vpn_ingress(client_vpn_endpoint_id=_, target_network_cidr=_)
+    client.authorize_client_vpn_ingress(**_request(AuthorizeClientVpnIngressInputDict))
+    client.authorize_client_vpn_ingress(_request(AuthorizeClientVpnIngressInput))
+    client.authorize_client_vpn_ingress(_request(AuthorizeClientVpnIngressInputDict))
+    client.authorize_security_group_egress(group_id=_)
+    client.authorize_security_group_egress(
+        **_request(AuthorizeSecurityGroupEgressInputDict)
+    )
+    client.authorize_security_group_egress(_request(AuthorizeSecurityGroupEgressInput))
+    client.authorize_security_group_egress(
+        _request(AuthorizeSecurityGroupEgressInputDict)
+    )
+    client.authorize_security_group_ingress()
+    client.authorize_security_group_ingress(
+        **_request(AuthorizeSecurityGroupIngressInputDict)
+    )
+    client.authorize_security_group_ingress(
+        _request(AuthorizeSecurityGroupIngressInput)
+    )
+    client.authorize_security_group_ingress(
+        _request(AuthorizeSecurityGroupIngressInputDict)
+    )
+    client.batch_modify_ipam_routing_policy_registrations(
+        ipam_internet_registry_association_id=_, delta_json=_
+    )
+    client.batch_modify_ipam_routing_policy_registrations(
+        **_request(BatchModifyIpamRoutingPolicyRegistrationsInputDict)
+    )
+    client.batch_modify_ipam_routing_policy_registrations(
+        _request(BatchModifyIpamRoutingPolicyRegistrationsInput)
+    )
+    client.batch_modify_ipam_routing_policy_registrations(
+        _request(BatchModifyIpamRoutingPolicyRegistrationsInputDict)
+    )
+    client.bundle_instance(instance_id=_, storage=_)
+    client.bundle_instance(**_request(BundleInstanceInputDict))
+    client.bundle_instance(_request(BundleInstanceInput))
+    client.bundle_instance(_request(BundleInstanceInputDict))
+    client.cancel_bundle_task(bundle_id=_)
+    client.cancel_bundle_task(**_request(CancelBundleTaskInputDict))
+    client.cancel_bundle_task(_request(CancelBundleTaskInput))
+    client.cancel_bundle_task(_request(CancelBundleTaskInputDict))
+    client.cancel_capacity_reservation(capacity_reservation_id=_)
+    client.cancel_capacity_reservation(**_request(CancelCapacityReservationInputDict))
+    client.cancel_capacity_reservation(_request(CancelCapacityReservationInput))
+    client.cancel_capacity_reservation(_request(CancelCapacityReservationInputDict))
+    client.cancel_capacity_reservation_fleets(capacity_reservation_fleet_ids=_)
+    client.cancel_capacity_reservation_fleets(
+        **_request(CancelCapacityReservationFleetsInputDict)
+    )
+    client.cancel_capacity_reservation_fleets(
+        _request(CancelCapacityReservationFleetsInput)
+    )
+    client.cancel_capacity_reservation_fleets(
+        _request(CancelCapacityReservationFleetsInputDict)
+    )
+    client.cancel_conversion_task(conversion_task_id=_)
+    client.cancel_conversion_task(**_request(CancelConversionTaskInputDict))
+    client.cancel_conversion_task(_request(CancelConversionTaskInput))
+    client.cancel_conversion_task(_request(CancelConversionTaskInputDict))
+    client.cancel_declarative_policies_report(report_id=_)
+    client.cancel_declarative_policies_report(
+        **_request(CancelDeclarativePoliciesReportInputDict)
+    )
+    client.cancel_declarative_policies_report(
+        _request(CancelDeclarativePoliciesReportInput)
+    )
+    client.cancel_declarative_policies_report(
+        _request(CancelDeclarativePoliciesReportInputDict)
+    )
+    client.cancel_export_task(export_task_id=_)
+    client.cancel_export_task(**_request(CancelExportTaskInputDict))
+    client.cancel_export_task(_request(CancelExportTaskInput))
+    client.cancel_export_task(_request(CancelExportTaskInputDict))
+    client.cancel_image_launch_permission(image_id=_)
+    client.cancel_image_launch_permission(
+        **_request(CancelImageLaunchPermissionInputDict)
+    )
+    client.cancel_image_launch_permission(_request(CancelImageLaunchPermissionInput))
+    client.cancel_image_launch_permission(
+        _request(CancelImageLaunchPermissionInputDict)
+    )
+    client.cancel_import_task()
+    client.cancel_import_task(**_request(CancelImportTaskInputDict))
+    client.cancel_import_task(_request(CancelImportTaskInput))
+    client.cancel_import_task(_request(CancelImportTaskInputDict))
+    client.cancel_reserved_instances_listing(reserved_instances_listing_id=_)
+    client.cancel_reserved_instances_listing(
+        **_request(CancelReservedInstancesListingInputDict)
+    )
+    client.cancel_reserved_instances_listing(
+        _request(CancelReservedInstancesListingInput)
+    )
+    client.cancel_reserved_instances_listing(
+        _request(CancelReservedInstancesListingInputDict)
+    )
+    client.cancel_spot_fleet_requests(spot_fleet_request_ids=_, terminate_instances=_)
+    client.cancel_spot_fleet_requests(**_request(CancelSpotFleetRequestsInputDict))
+    client.cancel_spot_fleet_requests(_request(CancelSpotFleetRequestsInput))
+    client.cancel_spot_fleet_requests(_request(CancelSpotFleetRequestsInputDict))
+    client.cancel_spot_instance_requests(spot_instance_request_ids=_)
+    client.cancel_spot_instance_requests(
+        **_request(CancelSpotInstanceRequestsInputDict)
+    )
+    client.cancel_spot_instance_requests(_request(CancelSpotInstanceRequestsInput))
+    client.cancel_spot_instance_requests(_request(CancelSpotInstanceRequestsInputDict))
+    client.confirm_product_instance(instance_id=_, product_code=_)
+    client.confirm_product_instance(**_request(ConfirmProductInstanceInputDict))
+    client.confirm_product_instance(_request(ConfirmProductInstanceInput))
+    client.confirm_product_instance(_request(ConfirmProductInstanceInputDict))
+    client.copy_fpga_image(source_fpga_image_id=_, source_region=_)
+    client.copy_fpga_image(**_request(CopyFpgaImageInputDict))
+    client.copy_fpga_image(_request(CopyFpgaImageInput))
+    client.copy_fpga_image(_request(CopyFpgaImageInputDict))
+    client.copy_image(name=_, source_image_id=_, source_region=_)
+    client.copy_image(**_request(CopyImageInputDict))
+    client.copy_image(_request(CopyImageInput))
+    client.copy_image(_request(CopyImageInputDict))
+    client.copy_snapshot(source_region=_, source_snapshot_id=_)
+    client.copy_snapshot(**_request(CopySnapshotInputDict))
+    client.copy_snapshot(_request(CopySnapshotInput))
+    client.copy_snapshot(_request(CopySnapshotInputDict))
+    client.copy_volumes(source_volume_id=_)
+    client.copy_volumes(**_request(CopyVolumesInputDict))
+    client.copy_volumes(_request(CopyVolumesInput))
+    client.copy_volumes(_request(CopyVolumesInputDict))
+    client.create_application_status_check(protocol=_, port=_)
+    client.create_application_status_check(
+        **_request(CreateApplicationStatusCheckInputDict)
+    )
+    client.create_application_status_check(_request(CreateApplicationStatusCheckInput))
+    client.create_application_status_check(
+        _request(CreateApplicationStatusCheckInputDict)
+    )
+    client.create_capacity_manager_data_export(
+        s3_bucket_name=_, schedule=_, output_format=_
+    )
+    client.create_capacity_manager_data_export(
+        **_request(CreateCapacityManagerDataExportInputDict)
+    )
+    client.create_capacity_manager_data_export(
+        _request(CreateCapacityManagerDataExportInput)
+    )
+    client.create_capacity_manager_data_export(
+        _request(CreateCapacityManagerDataExportInputDict)
+    )
+    client.create_capacity_reservation(
+        instance_type=_, instance_platform=_, instance_count=_
+    )
+    client.create_capacity_reservation(**_request(CreateCapacityReservationInputDict))
+    client.create_capacity_reservation(_request(CreateCapacityReservationInput))
+    client.create_capacity_reservation(_request(CreateCapacityReservationInputDict))
+    client.create_capacity_reservation_by_splitting(
+        source_capacity_reservation_id=_, instance_count=_
+    )
+    client.create_capacity_reservation_by_splitting(
+        **_request(CreateCapacityReservationBySplittingInputDict)
+    )
+    client.create_capacity_reservation_by_splitting(
+        _request(CreateCapacityReservationBySplittingInput)
+    )
+    client.create_capacity_reservation_by_splitting(
+        _request(CreateCapacityReservationBySplittingInputDict)
+    )
+    client.create_capacity_reservation_cancellation_quote(capacity_reservation_id=_)
+    client.create_capacity_reservation_cancellation_quote(
+        **_request(CreateCapacityReservationCancellationQuoteInputDict)
+    )
+    client.create_capacity_reservation_cancellation_quote(
+        _request(CreateCapacityReservationCancellationQuoteInput)
+    )
+    client.create_capacity_reservation_cancellation_quote(
+        _request(CreateCapacityReservationCancellationQuoteInputDict)
+    )
+    client.create_capacity_reservation_date_change_quote(
+        capacity_reservation_id=_, new_start_date=_
+    )
+    client.create_capacity_reservation_date_change_quote(
+        **_request(CreateCapacityReservationDateChangeQuoteInputDict)
+    )
+    client.create_capacity_reservation_date_change_quote(
+        _request(CreateCapacityReservationDateChangeQuoteInput)
+    )
+    client.create_capacity_reservation_date_change_quote(
+        _request(CreateCapacityReservationDateChangeQuoteInputDict)
+    )
+    client.create_capacity_reservation_fleet(total_target_capacity=_)
+    client.create_capacity_reservation_fleet(
+        **_request(CreateCapacityReservationFleetInputDict)
+    )
+    client.create_capacity_reservation_fleet(
+        _request(CreateCapacityReservationFleetInput)
+    )
+    client.create_capacity_reservation_fleet(
+        _request(CreateCapacityReservationFleetInputDict)
+    )
+    client.create_carrier_gateway(vpc_id=_)
+    client.create_carrier_gateway(**_request(CreateCarrierGatewayInputDict))
+    client.create_carrier_gateway(_request(CreateCarrierGatewayInput))
+    client.create_carrier_gateway(_request(CreateCarrierGatewayInputDict))
+    client.create_client_vpn_endpoint(
+        server_certificate_arn=_, authentication_options=_, connection_log_options=_
+    )
+    client.create_client_vpn_endpoint(**_request(CreateClientVpnEndpointInputDict))
+    client.create_client_vpn_endpoint(_request(CreateClientVpnEndpointInput))
+    client.create_client_vpn_endpoint(_request(CreateClientVpnEndpointInputDict))
+    client.create_client_vpn_route(client_vpn_endpoint_id=_, destination_cidr_block=_)
+    client.create_client_vpn_route(**_request(CreateClientVpnRouteInputDict))
+    client.create_client_vpn_route(_request(CreateClientVpnRouteInput))
+    client.create_client_vpn_route(_request(CreateClientVpnRouteInputDict))
+    client.create_coip_cidr(cidr=_, coip_pool_id=_)
+    client.create_coip_cidr(**_request(CreateCoipCidrInputDict))
+    client.create_coip_cidr(_request(CreateCoipCidrInput))
+    client.create_coip_cidr(_request(CreateCoipCidrInputDict))
+    client.create_coip_pool(local_gateway_route_table_id=_)
+    client.create_coip_pool(**_request(CreateCoipPoolInputDict))
+    client.create_coip_pool(_request(CreateCoipPoolInput))
+    client.create_coip_pool(_request(CreateCoipPoolInputDict))
+    client.create_customer_gateway(type=_)
+    client.create_customer_gateway(**_request(CreateCustomerGatewayInputDict))
+    client.create_customer_gateway(_request(CreateCustomerGatewayInput))
+    client.create_customer_gateway(_request(CreateCustomerGatewayInputDict))
+    client.create_default_subnet()
+    client.create_default_subnet(**_request(CreateDefaultSubnetInputDict))
+    client.create_default_subnet(_request(CreateDefaultSubnetInput))
+    client.create_default_subnet(_request(CreateDefaultSubnetInputDict))
+    client.create_default_vpc()
+    client.create_default_vpc(**_request(CreateDefaultVpcInputDict))
+    client.create_default_vpc(_request(CreateDefaultVpcInput))
+    client.create_default_vpc(_request(CreateDefaultVpcInputDict))
+    client.create_delegate_mac_volume_ownership_task(instance_id=_, mac_credentials=_)
+    client.create_delegate_mac_volume_ownership_task(
+        **_request(CreateDelegateMacVolumeOwnershipTaskInputDict)
+    )
+    client.create_delegate_mac_volume_ownership_task(
+        _request(CreateDelegateMacVolumeOwnershipTaskInput)
+    )
+    client.create_delegate_mac_volume_ownership_task(
+        _request(CreateDelegateMacVolumeOwnershipTaskInputDict)
+    )
+    client.create_dhcp_options(dhcp_configurations=_)
+    client.create_dhcp_options(**_request(CreateDhcpOptionsInputDict))
+    client.create_dhcp_options(_request(CreateDhcpOptionsInput))
+    client.create_dhcp_options(_request(CreateDhcpOptionsInputDict))
+    client.create_egress_only_internet_gateway(vpc_id=_)
+    client.create_egress_only_internet_gateway(
+        **_request(CreateEgressOnlyInternetGatewayInputDict)
+    )
+    client.create_egress_only_internet_gateway(
+        _request(CreateEgressOnlyInternetGatewayInput)
+    )
+    client.create_egress_only_internet_gateway(
+        _request(CreateEgressOnlyInternetGatewayInputDict)
+    )
+    client.create_fleet(launch_template_configs=_, target_capacity_specification=_)
+    client.create_fleet(**_request(CreateFleetInputDict))
+    client.create_fleet(_request(CreateFleetInput))
+    client.create_fleet(_request(CreateFleetInputDict))
+    client.create_flow_logs(resource_ids=_, resource_type=_)
+    client.create_flow_logs(**_request(CreateFlowLogsInputDict))
+    client.create_flow_logs(_request(CreateFlowLogsInput))
+    client.create_flow_logs(_request(CreateFlowLogsInputDict))
+    client.create_fpga_image(input_storage_location=_)
+    client.create_fpga_image(**_request(CreateFpgaImageInputDict))
+    client.create_fpga_image(_request(CreateFpgaImageInput))
+    client.create_fpga_image(_request(CreateFpgaImageInputDict))
+    client.create_image(instance_id=_, name=_)
+    client.create_image(**_request(CreateImageInputDict))
+    client.create_image(_request(CreateImageInput))
+    client.create_image(_request(CreateImageInputDict))
+    client.create_image_usage_report(image_id=_, resource_types=_)
+    client.create_image_usage_report(**_request(CreateImageUsageReportInputDict))
+    client.create_image_usage_report(_request(CreateImageUsageReportInput))
+    client.create_image_usage_report(_request(CreateImageUsageReportInputDict))
+    client.create_instance_connect_endpoint(subnet_id=_)
+    client.create_instance_connect_endpoint(
+        **_request(CreateInstanceConnectEndpointInputDict)
+    )
+    client.create_instance_connect_endpoint(
+        _request(CreateInstanceConnectEndpointInput)
+    )
+    client.create_instance_connect_endpoint(
+        _request(CreateInstanceConnectEndpointInputDict)
+    )
+    client.create_instance_event_window()
+    client.create_instance_event_window(**_request(CreateInstanceEventWindowInputDict))
+    client.create_instance_event_window(_request(CreateInstanceEventWindowInput))
+    client.create_instance_event_window(_request(CreateInstanceEventWindowInputDict))
+    client.create_instance_export_task(
+        instance_id=_, target_environment=_, export_to_s3_task=_
+    )
+    client.create_instance_export_task(**_request(CreateInstanceExportTaskInputDict))
+    client.create_instance_export_task(_request(CreateInstanceExportTaskInput))
+    client.create_instance_export_task(_request(CreateInstanceExportTaskInputDict))
+    client.create_internet_gateway()
+    client.create_internet_gateway(**_request(CreateInternetGatewayInputDict))
+    client.create_internet_gateway(_request(CreateInternetGatewayInput))
+    client.create_internet_gateway(_request(CreateInternetGatewayInputDict))
+    client.create_interruptible_capacity_reservation_allocation(
+        capacity_reservation_id=_, instance_count=_
+    )
+    client.create_interruptible_capacity_reservation_allocation(
+        **_request(CreateInterruptibleCapacityReservationAllocationInputDict)
+    )
+    client.create_interruptible_capacity_reservation_allocation(
+        _request(CreateInterruptibleCapacityReservationAllocationInput)
+    )
+    client.create_interruptible_capacity_reservation_allocation(
+        _request(CreateInterruptibleCapacityReservationAllocationInputDict)
+    )
+    client.create_ipam()
+    client.create_ipam(**_request(CreateIpamInputDict))
+    client.create_ipam(_request(CreateIpamInput))
+    client.create_ipam(_request(CreateIpamInputDict))
+    client.create_ipam_external_resource_verification_token(ipam_id=_)
+    client.create_ipam_external_resource_verification_token(
+        **_request(CreateIpamExternalResourceVerificationTokenInputDict)
+    )
+    client.create_ipam_external_resource_verification_token(
+        _request(CreateIpamExternalResourceVerificationTokenInput)
+    )
+    client.create_ipam_external_resource_verification_token(
+        _request(CreateIpamExternalResourceVerificationTokenInputDict)
+    )
+    client.create_ipam_internet_registry_association(
+        ipam_id=_, rir=_, organization_handle=_
+    )
+    client.create_ipam_internet_registry_association(
+        **_request(CreateIpamInternetRegistryAssociationInputDict)
+    )
+    client.create_ipam_internet_registry_association(
+        _request(CreateIpamInternetRegistryAssociationInput)
+    )
+    client.create_ipam_internet_registry_association(
+        _request(CreateIpamInternetRegistryAssociationInputDict)
+    )
+    client.create_ipam_policy(ipam_id=_)
+    client.create_ipam_policy(**_request(CreateIpamPolicyInputDict))
+    client.create_ipam_policy(_request(CreateIpamPolicyInput))
+    client.create_ipam_policy(_request(CreateIpamPolicyInputDict))
+    client.create_ipam_pool(ipam_scope_id=_, address_family=_)
+    client.create_ipam_pool(**_request(CreateIpamPoolInputDict))
+    client.create_ipam_pool(_request(CreateIpamPoolInput))
+    client.create_ipam_pool(_request(CreateIpamPoolInputDict))
+    client.create_ipam_prefix_list_resolver(ipam_id=_, address_family=_)
+    client.create_ipam_prefix_list_resolver(
+        **_request(CreateIpamPrefixListResolverInputDict)
+    )
+    client.create_ipam_prefix_list_resolver(_request(CreateIpamPrefixListResolverInput))
+    client.create_ipam_prefix_list_resolver(
+        _request(CreateIpamPrefixListResolverInputDict)
+    )
+    client.create_ipam_prefix_list_resolver_target(
+        ipam_prefix_list_resolver_id=_,
+        prefix_list_id=_,
+        prefix_list_region=_,
+        track_latest_version=_,
+    )
+    client.create_ipam_prefix_list_resolver_target(
+        **_request(CreateIpamPrefixListResolverTargetInputDict)
+    )
+    client.create_ipam_prefix_list_resolver_target(
+        _request(CreateIpamPrefixListResolverTargetInput)
+    )
+    client.create_ipam_prefix_list_resolver_target(
+        _request(CreateIpamPrefixListResolverTargetInputDict)
+    )
+    client.create_ipam_resource_discovery()
+    client.create_ipam_resource_discovery(
+        **_request(CreateIpamResourceDiscoveryInputDict)
+    )
+    client.create_ipam_resource_discovery(_request(CreateIpamResourceDiscoveryInput))
+    client.create_ipam_resource_discovery(
+        _request(CreateIpamResourceDiscoveryInputDict)
+    )
+    client.create_ipam_routing_policy_registration(
+        ipam_internet_registry_association_id=_, cidr=_, asns=_
+    )
+    client.create_ipam_routing_policy_registration(
+        **_request(CreateIpamRoutingPolicyRegistrationInputDict)
+    )
+    client.create_ipam_routing_policy_registration(
+        _request(CreateIpamRoutingPolicyRegistrationInput)
+    )
+    client.create_ipam_routing_policy_registration(
+        _request(CreateIpamRoutingPolicyRegistrationInputDict)
+    )
+    client.create_ipam_scope(ipam_id=_)
+    client.create_ipam_scope(**_request(CreateIpamScopeInputDict))
+    client.create_ipam_scope(_request(CreateIpamScopeInput))
+    client.create_ipam_scope(_request(CreateIpamScopeInputDict))
+    client.create_key_pair(key_name=_)
+    client.create_key_pair(**_request(CreateKeyPairInputDict))
+    client.create_key_pair(_request(CreateKeyPairInput))
+    client.create_key_pair(_request(CreateKeyPairInputDict))
+    client.create_launch_template(launch_template_name=_, launch_template_data=_)
+    client.create_launch_template(**_request(CreateLaunchTemplateInputDict))
+    client.create_launch_template(_request(CreateLaunchTemplateInput))
+    client.create_launch_template(_request(CreateLaunchTemplateInputDict))
+    client.create_launch_template_version(launch_template_data=_)
+    client.create_launch_template_version(
+        **_request(CreateLaunchTemplateVersionInputDict)
+    )
+    client.create_launch_template_version(_request(CreateLaunchTemplateVersionInput))
+    client.create_launch_template_version(
+        _request(CreateLaunchTemplateVersionInputDict)
+    )
+    client.create_local_gateway_route(local_gateway_route_table_id=_)
+    client.create_local_gateway_route(**_request(CreateLocalGatewayRouteInputDict))
+    client.create_local_gateway_route(_request(CreateLocalGatewayRouteInput))
+    client.create_local_gateway_route(_request(CreateLocalGatewayRouteInputDict))
+    client.create_local_gateway_route_table(local_gateway_id=_)
+    client.create_local_gateway_route_table(
+        **_request(CreateLocalGatewayRouteTableInputDict)
+    )
+    client.create_local_gateway_route_table(_request(CreateLocalGatewayRouteTableInput))
+    client.create_local_gateway_route_table(
+        _request(CreateLocalGatewayRouteTableInputDict)
+    )
+    client.create_local_gateway_route_table_virtual_interface_group_association(
+        local_gateway_route_table_id=_, local_gateway_virtual_interface_group_id=_
+    )
+    client.create_local_gateway_route_table_virtual_interface_group_association(
+        **_request(
+            CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationInputDict
+        )
+    )
+    client.create_local_gateway_route_table_virtual_interface_group_association(
+        _request(CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationInput)
+    )
+    client.create_local_gateway_route_table_virtual_interface_group_association(
+        _request(CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationInputDict)
+    )
+    client.create_local_gateway_route_table_vpc_association(
+        local_gateway_route_table_id=_, vpc_id=_
+    )
+    client.create_local_gateway_route_table_vpc_association(
+        **_request(CreateLocalGatewayRouteTableVpcAssociationInputDict)
+    )
+    client.create_local_gateway_route_table_vpc_association(
+        _request(CreateLocalGatewayRouteTableVpcAssociationInput)
+    )
+    client.create_local_gateway_route_table_vpc_association(
+        _request(CreateLocalGatewayRouteTableVpcAssociationInputDict)
+    )
+    client.create_local_gateway_virtual_interface(
+        local_gateway_virtual_interface_group_id=_,
+        outpost_lag_id=_,
+        vlan=_,
+        local_address=_,
+        peer_address=_,
+    )
+    client.create_local_gateway_virtual_interface(
+        **_request(CreateLocalGatewayVirtualInterfaceInputDict)
+    )
+    client.create_local_gateway_virtual_interface(
+        _request(CreateLocalGatewayVirtualInterfaceInput)
+    )
+    client.create_local_gateway_virtual_interface(
+        _request(CreateLocalGatewayVirtualInterfaceInputDict)
+    )
+    client.create_local_gateway_virtual_interface_group(local_gateway_id=_)
+    client.create_local_gateway_virtual_interface_group(
+        **_request(CreateLocalGatewayVirtualInterfaceGroupInputDict)
+    )
+    client.create_local_gateway_virtual_interface_group(
+        _request(CreateLocalGatewayVirtualInterfaceGroupInput)
+    )
+    client.create_local_gateway_virtual_interface_group(
+        _request(CreateLocalGatewayVirtualInterfaceGroupInputDict)
+    )
+    client.create_mac_system_integrity_protection_modification_task(
+        instance_id=_, mac_system_integrity_protection_status=_
+    )
+    client.create_mac_system_integrity_protection_modification_task(
+        **_request(CreateMacSystemIntegrityProtectionModificationTaskInputDict)
+    )
+    client.create_mac_system_integrity_protection_modification_task(
+        _request(CreateMacSystemIntegrityProtectionModificationTaskInput)
+    )
+    client.create_mac_system_integrity_protection_modification_task(
+        _request(CreateMacSystemIntegrityProtectionModificationTaskInputDict)
+    )
+    client.create_managed_prefix_list(
+        prefix_list_name=_, max_entries=_, address_family=_
+    )
+    client.create_managed_prefix_list(**_request(CreateManagedPrefixListInputDict))
+    client.create_managed_prefix_list(_request(CreateManagedPrefixListInput))
+    client.create_managed_prefix_list(_request(CreateManagedPrefixListInputDict))
+    client.create_nat_gateway()
+    client.create_nat_gateway(**_request(CreateNatGatewayInputDict))
+    client.create_nat_gateway(_request(CreateNatGatewayInput))
+    client.create_nat_gateway(_request(CreateNatGatewayInputDict))
+    client.create_network_acl(vpc_id=_)
+    client.create_network_acl(**_request(CreateNetworkAclInputDict))
+    client.create_network_acl(_request(CreateNetworkAclInput))
+    client.create_network_acl(_request(CreateNetworkAclInputDict))
+    client.create_network_acl_entry(
+        network_acl_id=_, rule_number=_, protocol=_, rule_action=_, egress=_
+    )
+    client.create_network_acl_entry(**_request(CreateNetworkAclEntryInputDict))
+    client.create_network_acl_entry(_request(CreateNetworkAclEntryInput))
+    client.create_network_acl_entry(_request(CreateNetworkAclEntryInputDict))
+    client.create_network_insights_access_scope()
+    client.create_network_insights_access_scope(
+        **_request(CreateNetworkInsightsAccessScopeInputDict)
+    )
+    client.create_network_insights_access_scope(
+        _request(CreateNetworkInsightsAccessScopeInput)
+    )
+    client.create_network_insights_access_scope(
+        _request(CreateNetworkInsightsAccessScopeInputDict)
+    )
+    client.create_network_insights_path(source=_, protocol=_)
+    client.create_network_insights_path(**_request(CreateNetworkInsightsPathInputDict))
+    client.create_network_insights_path(_request(CreateNetworkInsightsPathInput))
+    client.create_network_insights_path(_request(CreateNetworkInsightsPathInputDict))
+    client.create_network_interface(subnet_id=_)
+    client.create_network_interface(**_request(CreateNetworkInterfaceInputDict))
+    client.create_network_interface(_request(CreateNetworkInterfaceInput))
+    client.create_network_interface(_request(CreateNetworkInterfaceInputDict))
+    client.create_network_interface_permission(network_interface_id=_, permission=_)
+    client.create_network_interface_permission(
+        **_request(CreateNetworkInterfacePermissionInputDict)
+    )
+    client.create_network_interface_permission(
+        _request(CreateNetworkInterfacePermissionInput)
+    )
+    client.create_network_interface_permission(
+        _request(CreateNetworkInterfacePermissionInputDict)
+    )
+    client.create_placement_group()
+    client.create_placement_group(**_request(CreatePlacementGroupInputDict))
+    client.create_placement_group(_request(CreatePlacementGroupInput))
+    client.create_placement_group(_request(CreatePlacementGroupInputDict))
+    client.create_public_ipv4_pool()
+    client.create_public_ipv4_pool(**_request(CreatePublicIpv4PoolInputDict))
+    client.create_public_ipv4_pool(_request(CreatePublicIpv4PoolInput))
+    client.create_public_ipv4_pool(_request(CreatePublicIpv4PoolInputDict))
+    client.create_replace_root_volume_task(instance_id=_)
+    client.create_replace_root_volume_task(
+        **_request(CreateReplaceRootVolumeTaskInputDict)
+    )
+    client.create_replace_root_volume_task(_request(CreateReplaceRootVolumeTaskInput))
+    client.create_replace_root_volume_task(
+        _request(CreateReplaceRootVolumeTaskInputDict)
+    )
+    client.create_reserved_instances_listing(
+        reserved_instances_id=_, instance_count=_, price_schedules=_, client_token=_
+    )
+    client.create_reserved_instances_listing(
+        **_request(CreateReservedInstancesListingInputDict)
+    )
+    client.create_reserved_instances_listing(
+        _request(CreateReservedInstancesListingInput)
+    )
+    client.create_reserved_instances_listing(
+        _request(CreateReservedInstancesListingInputDict)
+    )
+    client.create_restore_image_task(bucket=_, object_key=_)
+    client.create_restore_image_task(**_request(CreateRestoreImageTaskInputDict))
+    client.create_restore_image_task(_request(CreateRestoreImageTaskInput))
+    client.create_restore_image_task(_request(CreateRestoreImageTaskInputDict))
+    client.create_route(route_table_id=_)
+    client.create_route(**_request(CreateRouteInputDict))
+    client.create_route(_request(CreateRouteInput))
+    client.create_route(_request(CreateRouteInputDict))
+    client.create_route_server(amazon_side_asn=_)
+    client.create_route_server(**_request(CreateRouteServerInputDict))
+    client.create_route_server(_request(CreateRouteServerInput))
+    client.create_route_server(_request(CreateRouteServerInputDict))
+    client.create_route_server_endpoint(route_server_id=_, subnet_id=_)
+    client.create_route_server_endpoint(**_request(CreateRouteServerEndpointInputDict))
+    client.create_route_server_endpoint(_request(CreateRouteServerEndpointInput))
+    client.create_route_server_endpoint(_request(CreateRouteServerEndpointInputDict))
+    client.create_route_server_peer(
+        route_server_endpoint_id=_, peer_address=_, bgp_options=_
+    )
+    client.create_route_server_peer(**_request(CreateRouteServerPeerInputDict))
+    client.create_route_server_peer(_request(CreateRouteServerPeerInput))
+    client.create_route_server_peer(_request(CreateRouteServerPeerInputDict))
+    client.create_route_table(vpc_id=_)
+    client.create_route_table(**_request(CreateRouteTableInputDict))
+    client.create_route_table(_request(CreateRouteTableInput))
+    client.create_route_table(_request(CreateRouteTableInputDict))
+    client.create_secondary_network(ipv4_cidr_block=_, network_type=_)
+    client.create_secondary_network(**_request(CreateSecondaryNetworkInputDict))
+    client.create_secondary_network(_request(CreateSecondaryNetworkInput))
+    client.create_secondary_network(_request(CreateSecondaryNetworkInputDict))
+    client.create_secondary_subnet(ipv4_cidr_block=_, secondary_network_id=_)
+    client.create_secondary_subnet(**_request(CreateSecondarySubnetInputDict))
+    client.create_secondary_subnet(_request(CreateSecondarySubnetInput))
+    client.create_secondary_subnet(_request(CreateSecondarySubnetInputDict))
+    client.create_security_group(description=_, group_name=_)
+    client.create_security_group(**_request(CreateSecurityGroupInputDict))
+    client.create_security_group(_request(CreateSecurityGroupInput))
+    client.create_security_group(_request(CreateSecurityGroupInputDict))
+    client.create_snapshot(volume_id=_)
+    client.create_snapshot(**_request(CreateSnapshotInputDict))
+    client.create_snapshot(_request(CreateSnapshotInput))
+    client.create_snapshot(_request(CreateSnapshotInputDict))
+    client.create_snapshots(instance_specification=_)
+    client.create_snapshots(**_request(CreateSnapshotsInputDict))
+    client.create_snapshots(_request(CreateSnapshotsInput))
+    client.create_snapshots(_request(CreateSnapshotsInputDict))
+    client.create_spot_datafeed_subscription(bucket=_)
+    client.create_spot_datafeed_subscription(
+        **_request(CreateSpotDatafeedSubscriptionInputDict)
+    )
+    client.create_spot_datafeed_subscription(
+        _request(CreateSpotDatafeedSubscriptionInput)
+    )
+    client.create_spot_datafeed_subscription(
+        _request(CreateSpotDatafeedSubscriptionInputDict)
+    )
+    client.create_store_image_task(image_id=_, bucket=_)
+    client.create_store_image_task(**_request(CreateStoreImageTaskInputDict))
+    client.create_store_image_task(_request(CreateStoreImageTaskInput))
+    client.create_store_image_task(_request(CreateStoreImageTaskInputDict))
+    client.create_subnet(vpc_id=_)
+    client.create_subnet(**_request(CreateSubnetInputDict))
+    client.create_subnet(_request(CreateSubnetInput))
+    client.create_subnet(_request(CreateSubnetInputDict))
+    client.create_subnet_cidr_reservation(subnet_id=_, cidr=_, reservation_type=_)
+    client.create_subnet_cidr_reservation(
+        **_request(CreateSubnetCidrReservationInputDict)
+    )
+    client.create_subnet_cidr_reservation(_request(CreateSubnetCidrReservationInput))
+    client.create_subnet_cidr_reservation(
+        _request(CreateSubnetCidrReservationInputDict)
+    )
+    client.create_tags(resources=_, tags=_)
+    client.create_tags(**_request(CreateTagsInputDict))
+    client.create_tags(_request(CreateTagsInput))
+    client.create_tags(_request(CreateTagsInputDict))
+    client.create_traffic_mirror_filter()
+    client.create_traffic_mirror_filter(**_request(CreateTrafficMirrorFilterInputDict))
+    client.create_traffic_mirror_filter(_request(CreateTrafficMirrorFilterInput))
+    client.create_traffic_mirror_filter(_request(CreateTrafficMirrorFilterInputDict))
+    client.create_traffic_mirror_filter_rule(
+        traffic_mirror_filter_id=_,
+        traffic_direction=_,
+        rule_number=_,
+        rule_action=_,
+        destination_cidr_block=_,
+        source_cidr_block=_,
+    )
+    client.create_traffic_mirror_filter_rule(
+        **_request(CreateTrafficMirrorFilterRuleInputDict)
+    )
+    client.create_traffic_mirror_filter_rule(
+        _request(CreateTrafficMirrorFilterRuleInput)
+    )
+    client.create_traffic_mirror_filter_rule(
+        _request(CreateTrafficMirrorFilterRuleInputDict)
+    )
+    client.create_traffic_mirror_session(
+        network_interface_id=_,
+        traffic_mirror_target_id=_,
+        traffic_mirror_filter_id=_,
+        session_number=_,
+    )
+    client.create_traffic_mirror_session(
+        **_request(CreateTrafficMirrorSessionInputDict)
+    )
+    client.create_traffic_mirror_session(_request(CreateTrafficMirrorSessionInput))
+    client.create_traffic_mirror_session(_request(CreateTrafficMirrorSessionInputDict))
+    client.create_traffic_mirror_target()
+    client.create_traffic_mirror_target(**_request(CreateTrafficMirrorTargetInputDict))
+    client.create_traffic_mirror_target(_request(CreateTrafficMirrorTargetInput))
+    client.create_traffic_mirror_target(_request(CreateTrafficMirrorTargetInputDict))
+    client.create_transit_gateway()
+    client.create_transit_gateway(**_request(CreateTransitGatewayInputDict))
+    client.create_transit_gateway(_request(CreateTransitGatewayInput))
+    client.create_transit_gateway(_request(CreateTransitGatewayInputDict))
+    client.create_transit_gateway_connect(
+        transport_transit_gateway_attachment_id=_, options=_
+    )
+    client.create_transit_gateway_connect(
+        **_request(CreateTransitGatewayConnectInputDict)
+    )
+    client.create_transit_gateway_connect(_request(CreateTransitGatewayConnectInput))
+    client.create_transit_gateway_connect(
+        _request(CreateTransitGatewayConnectInputDict)
+    )
+    client.create_transit_gateway_connect_peer(
+        transit_gateway_attachment_id=_, peer_address=_, inside_cidr_blocks=_
+    )
+    client.create_transit_gateway_connect_peer(
+        **_request(CreateTransitGatewayConnectPeerInputDict)
+    )
+    client.create_transit_gateway_connect_peer(
+        _request(CreateTransitGatewayConnectPeerInput)
+    )
+    client.create_transit_gateway_connect_peer(
+        _request(CreateTransitGatewayConnectPeerInputDict)
+    )
+    client.create_transit_gateway_metering_policy(transit_gateway_id=_)
+    client.create_transit_gateway_metering_policy(
+        **_request(CreateTransitGatewayMeteringPolicyInputDict)
+    )
+    client.create_transit_gateway_metering_policy(
+        _request(CreateTransitGatewayMeteringPolicyInput)
+    )
+    client.create_transit_gateway_metering_policy(
+        _request(CreateTransitGatewayMeteringPolicyInputDict)
+    )
+    client.create_transit_gateway_metering_policy_entry(
+        transit_gateway_metering_policy_id=_, policy_rule_number=_, metered_account=_
+    )
+    client.create_transit_gateway_metering_policy_entry(
+        **_request(CreateTransitGatewayMeteringPolicyEntryInputDict)
+    )
+    client.create_transit_gateway_metering_policy_entry(
+        _request(CreateTransitGatewayMeteringPolicyEntryInput)
+    )
+    client.create_transit_gateway_metering_policy_entry(
+        _request(CreateTransitGatewayMeteringPolicyEntryInputDict)
+    )
+    client.create_transit_gateway_multicast_domain(transit_gateway_id=_)
+    client.create_transit_gateway_multicast_domain(
+        **_request(CreateTransitGatewayMulticastDomainInputDict)
+    )
+    client.create_transit_gateway_multicast_domain(
+        _request(CreateTransitGatewayMulticastDomainInput)
+    )
+    client.create_transit_gateway_multicast_domain(
+        _request(CreateTransitGatewayMulticastDomainInputDict)
+    )
+    client.create_transit_gateway_peering_attachment(
+        transit_gateway_id=_,
+        peer_transit_gateway_id=_,
+        peer_account_id=_,
+        peer_region=_,
+    )
+    client.create_transit_gateway_peering_attachment(
+        **_request(CreateTransitGatewayPeeringAttachmentInputDict)
+    )
+    client.create_transit_gateway_peering_attachment(
+        _request(CreateTransitGatewayPeeringAttachmentInput)
+    )
+    client.create_transit_gateway_peering_attachment(
+        _request(CreateTransitGatewayPeeringAttachmentInputDict)
+    )
+    client.create_transit_gateway_policy_table(transit_gateway_id=_)
+    client.create_transit_gateway_policy_table(
+        **_request(CreateTransitGatewayPolicyTableInputDict)
+    )
+    client.create_transit_gateway_policy_table(
+        _request(CreateTransitGatewayPolicyTableInput)
+    )
+    client.create_transit_gateway_policy_table(
+        _request(CreateTransitGatewayPolicyTableInputDict)
+    )
+    client.create_transit_gateway_policy_table_entry(
+        transit_gateway_policy_table_id=_, policy_rule_number=_, target_route_table_id=_
+    )
+    client.create_transit_gateway_policy_table_entry(
+        **_request(CreateTransitGatewayPolicyTableEntryInputDict)
+    )
+    client.create_transit_gateway_policy_table_entry(
+        _request(CreateTransitGatewayPolicyTableEntryInput)
+    )
+    client.create_transit_gateway_policy_table_entry(
+        _request(CreateTransitGatewayPolicyTableEntryInputDict)
+    )
+    client.create_transit_gateway_prefix_list_reference(
+        transit_gateway_route_table_id=_, prefix_list_id=_
+    )
+    client.create_transit_gateway_prefix_list_reference(
+        **_request(CreateTransitGatewayPrefixListReferenceInputDict)
+    )
+    client.create_transit_gateway_prefix_list_reference(
+        _request(CreateTransitGatewayPrefixListReferenceInput)
+    )
+    client.create_transit_gateway_prefix_list_reference(
+        _request(CreateTransitGatewayPrefixListReferenceInputDict)
+    )
+    client.create_transit_gateway_route(
+        destination_cidr_block=_, transit_gateway_route_table_id=_
+    )
+    client.create_transit_gateway_route(**_request(CreateTransitGatewayRouteInputDict))
+    client.create_transit_gateway_route(_request(CreateTransitGatewayRouteInput))
+    client.create_transit_gateway_route(_request(CreateTransitGatewayRouteInputDict))
+    client.create_transit_gateway_route_table(transit_gateway_id=_)
+    client.create_transit_gateway_route_table(
+        **_request(CreateTransitGatewayRouteTableInputDict)
+    )
+    client.create_transit_gateway_route_table(
+        _request(CreateTransitGatewayRouteTableInput)
+    )
+    client.create_transit_gateway_route_table(
+        _request(CreateTransitGatewayRouteTableInputDict)
+    )
+    client.create_transit_gateway_route_table_announcement(
+        transit_gateway_route_table_id=_, peering_attachment_id=_
+    )
+    client.create_transit_gateway_route_table_announcement(
+        **_request(CreateTransitGatewayRouteTableAnnouncementInputDict)
+    )
+    client.create_transit_gateway_route_table_announcement(
+        _request(CreateTransitGatewayRouteTableAnnouncementInput)
+    )
+    client.create_transit_gateway_route_table_announcement(
+        _request(CreateTransitGatewayRouteTableAnnouncementInputDict)
+    )
+    client.create_transit_gateway_vpc_attachment(
+        transit_gateway_id=_, vpc_id=_, subnet_ids=_
+    )
+    client.create_transit_gateway_vpc_attachment(
+        **_request(CreateTransitGatewayVpcAttachmentInputDict)
+    )
+    client.create_transit_gateway_vpc_attachment(
+        _request(CreateTransitGatewayVpcAttachmentInput)
+    )
+    client.create_transit_gateway_vpc_attachment(
+        _request(CreateTransitGatewayVpcAttachmentInputDict)
+    )
+    client.create_verified_access_endpoint(
+        verified_access_group_id=_, endpoint_type=_, attachment_type=_
+    )
+    client.create_verified_access_endpoint(
+        **_request(CreateVerifiedAccessEndpointInputDict)
+    )
+    client.create_verified_access_endpoint(_request(CreateVerifiedAccessEndpointInput))
+    client.create_verified_access_endpoint(
+        _request(CreateVerifiedAccessEndpointInputDict)
+    )
+    client.create_verified_access_group(verified_access_instance_id=_)
+    client.create_verified_access_group(**_request(CreateVerifiedAccessGroupInputDict))
+    client.create_verified_access_group(_request(CreateVerifiedAccessGroupInput))
+    client.create_verified_access_group(_request(CreateVerifiedAccessGroupInputDict))
+    client.create_verified_access_instance()
+    client.create_verified_access_instance(
+        **_request(CreateVerifiedAccessInstanceInputDict)
+    )
+    client.create_verified_access_instance(_request(CreateVerifiedAccessInstanceInput))
+    client.create_verified_access_instance(
+        _request(CreateVerifiedAccessInstanceInputDict)
+    )
+    client.create_verified_access_trust_provider(
+        trust_provider_type=_, policy_reference_name=_
+    )
+    client.create_verified_access_trust_provider(
+        **_request(CreateVerifiedAccessTrustProviderInputDict)
+    )
+    client.create_verified_access_trust_provider(
+        _request(CreateVerifiedAccessTrustProviderInput)
+    )
+    client.create_verified_access_trust_provider(
+        _request(CreateVerifiedAccessTrustProviderInputDict)
+    )
+    client.create_volume()
+    client.create_volume(**_request(CreateVolumeInputDict))
+    client.create_volume(_request(CreateVolumeInput))
+    client.create_volume(_request(CreateVolumeInputDict))
+    client.create_vpc()
+    client.create_vpc(**_request(CreateVpcInputDict))
+    client.create_vpc(_request(CreateVpcInput))
+    client.create_vpc(_request(CreateVpcInputDict))
+    client.create_vpc_block_public_access_exclusion(internet_gateway_exclusion_mode=_)
+    client.create_vpc_block_public_access_exclusion(
+        **_request(CreateVpcBlockPublicAccessExclusionInputDict)
+    )
+    client.create_vpc_block_public_access_exclusion(
+        _request(CreateVpcBlockPublicAccessExclusionInput)
+    )
+    client.create_vpc_block_public_access_exclusion(
+        _request(CreateVpcBlockPublicAccessExclusionInputDict)
+    )
+    client.create_vpc_encryption_control(vpc_id=_)
+    client.create_vpc_encryption_control(
+        **_request(CreateVpcEncryptionControlInputDict)
+    )
+    client.create_vpc_encryption_control(_request(CreateVpcEncryptionControlInput))
+    client.create_vpc_encryption_control(_request(CreateVpcEncryptionControlInputDict))
+    client.create_vpc_endpoint(vpc_id=_)
+    client.create_vpc_endpoint(**_request(CreateVpcEndpointInputDict))
+    client.create_vpc_endpoint(_request(CreateVpcEndpointInput))
+    client.create_vpc_endpoint(_request(CreateVpcEndpointInputDict))
+    client.create_vpc_endpoint_connection_notification(
+        connection_notification_arn=_, connection_events=_
+    )
+    client.create_vpc_endpoint_connection_notification(
+        **_request(CreateVpcEndpointConnectionNotificationInputDict)
+    )
+    client.create_vpc_endpoint_connection_notification(
+        _request(CreateVpcEndpointConnectionNotificationInput)
+    )
+    client.create_vpc_endpoint_connection_notification(
+        _request(CreateVpcEndpointConnectionNotificationInputDict)
+    )
+    client.create_vpc_endpoint_service_configuration()
+    client.create_vpc_endpoint_service_configuration(
+        **_request(CreateVpcEndpointServiceConfigurationInputDict)
+    )
+    client.create_vpc_endpoint_service_configuration(
+        _request(CreateVpcEndpointServiceConfigurationInput)
+    )
+    client.create_vpc_endpoint_service_configuration(
+        _request(CreateVpcEndpointServiceConfigurationInputDict)
+    )
+    client.create_vpc_peering_connection(vpc_id=_)
+    client.create_vpc_peering_connection(
+        **_request(CreateVpcPeeringConnectionInputDict)
+    )
+    client.create_vpc_peering_connection(_request(CreateVpcPeeringConnectionInput))
+    client.create_vpc_peering_connection(_request(CreateVpcPeeringConnectionInputDict))
+    client.create_vpn_concentrator(type=_)
+    client.create_vpn_concentrator(**_request(CreateVpnConcentratorInputDict))
+    client.create_vpn_concentrator(_request(CreateVpnConcentratorInput))
+    client.create_vpn_concentrator(_request(CreateVpnConcentratorInputDict))
+    client.create_vpn_connection(customer_gateway_id=_, type=_)
+    client.create_vpn_connection(**_request(CreateVpnConnectionInputDict))
+    client.create_vpn_connection(_request(CreateVpnConnectionInput))
+    client.create_vpn_connection(_request(CreateVpnConnectionInputDict))
+    client.create_vpn_connection_route(destination_cidr_block=_, vpn_connection_id=_)
+    client.create_vpn_connection_route(**_request(CreateVpnConnectionRouteInputDict))
+    client.create_vpn_connection_route(_request(CreateVpnConnectionRouteInput))
+    client.create_vpn_connection_route(_request(CreateVpnConnectionRouteInputDict))
+    client.create_vpn_gateway(type=_)
+    client.create_vpn_gateway(**_request(CreateVpnGatewayInputDict))
+    client.create_vpn_gateway(_request(CreateVpnGatewayInput))
+    client.create_vpn_gateway(_request(CreateVpnGatewayInputDict))
+    client.delete_application_status_check(application_status_check_id=_)
+    client.delete_application_status_check(
+        **_request(DeleteApplicationStatusCheckInputDict)
+    )
+    client.delete_application_status_check(_request(DeleteApplicationStatusCheckInput))
+    client.delete_application_status_check(
+        _request(DeleteApplicationStatusCheckInputDict)
+    )
+    client.delete_capacity_manager_data_export(capacity_manager_data_export_id=_)
+    client.delete_capacity_manager_data_export(
+        **_request(DeleteCapacityManagerDataExportInputDict)
+    )
+    client.delete_capacity_manager_data_export(
+        _request(DeleteCapacityManagerDataExportInput)
+    )
+    client.delete_capacity_manager_data_export(
+        _request(DeleteCapacityManagerDataExportInputDict)
+    )
+    client.delete_carrier_gateway(carrier_gateway_id=_)
+    client.delete_carrier_gateway(**_request(DeleteCarrierGatewayInputDict))
+    client.delete_carrier_gateway(_request(DeleteCarrierGatewayInput))
+    client.delete_carrier_gateway(_request(DeleteCarrierGatewayInputDict))
+    client.delete_client_vpn_endpoint(client_vpn_endpoint_id=_)
+    client.delete_client_vpn_endpoint(**_request(DeleteClientVpnEndpointInputDict))
+    client.delete_client_vpn_endpoint(_request(DeleteClientVpnEndpointInput))
+    client.delete_client_vpn_endpoint(_request(DeleteClientVpnEndpointInputDict))
+    client.delete_client_vpn_endpoint_authorization_policy(client_vpn_endpoint_id=_)
+    client.delete_client_vpn_endpoint_authorization_policy(
+        **_request(DeleteClientVpnEndpointAuthorizationPolicyInputDict)
+    )
+    client.delete_client_vpn_endpoint_authorization_policy(
+        _request(DeleteClientVpnEndpointAuthorizationPolicyInput)
+    )
+    client.delete_client_vpn_endpoint_authorization_policy(
+        _request(DeleteClientVpnEndpointAuthorizationPolicyInputDict)
+    )
+    client.delete_client_vpn_route(client_vpn_endpoint_id=_, destination_cidr_block=_)
+    client.delete_client_vpn_route(**_request(DeleteClientVpnRouteInputDict))
+    client.delete_client_vpn_route(_request(DeleteClientVpnRouteInput))
+    client.delete_client_vpn_route(_request(DeleteClientVpnRouteInputDict))
+    client.delete_coip_cidr(cidr=_, coip_pool_id=_)
+    client.delete_coip_cidr(**_request(DeleteCoipCidrInputDict))
+    client.delete_coip_cidr(_request(DeleteCoipCidrInput))
+    client.delete_coip_cidr(_request(DeleteCoipCidrInputDict))
+    client.delete_coip_pool(coip_pool_id=_)
+    client.delete_coip_pool(**_request(DeleteCoipPoolInputDict))
+    client.delete_coip_pool(_request(DeleteCoipPoolInput))
+    client.delete_coip_pool(_request(DeleteCoipPoolInputDict))
+    client.delete_customer_gateway(customer_gateway_id=_)
+    client.delete_customer_gateway(**_request(DeleteCustomerGatewayInputDict))
+    client.delete_customer_gateway(_request(DeleteCustomerGatewayInput))
+    client.delete_customer_gateway(_request(DeleteCustomerGatewayInputDict))
+    client.delete_dhcp_options(dhcp_options_id=_)
+    client.delete_dhcp_options(**_request(DeleteDhcpOptionsInputDict))
+    client.delete_dhcp_options(_request(DeleteDhcpOptionsInput))
+    client.delete_dhcp_options(_request(DeleteDhcpOptionsInputDict))
+    client.delete_egress_only_internet_gateway(egress_only_internet_gateway_id=_)
+    client.delete_egress_only_internet_gateway(
+        **_request(DeleteEgressOnlyInternetGatewayInputDict)
+    )
+    client.delete_egress_only_internet_gateway(
+        _request(DeleteEgressOnlyInternetGatewayInput)
+    )
+    client.delete_egress_only_internet_gateway(
+        _request(DeleteEgressOnlyInternetGatewayInputDict)
+    )
+    client.delete_fleets(fleet_ids=_, terminate_instances=_)
+    client.delete_fleets(**_request(DeleteFleetsInputDict))
+    client.delete_fleets(_request(DeleteFleetsInput))
+    client.delete_fleets(_request(DeleteFleetsInputDict))
+    client.delete_flow_logs(flow_log_ids=_)
+    client.delete_flow_logs(**_request(DeleteFlowLogsInputDict))
+    client.delete_flow_logs(_request(DeleteFlowLogsInput))
+    client.delete_flow_logs(_request(DeleteFlowLogsInputDict))
+    client.delete_fpga_image(fpga_image_id=_)
+    client.delete_fpga_image(**_request(DeleteFpgaImageInputDict))
+    client.delete_fpga_image(_request(DeleteFpgaImageInput))
+    client.delete_fpga_image(_request(DeleteFpgaImageInputDict))
+    client.delete_image_usage_report(report_id=_)
+    client.delete_image_usage_report(**_request(DeleteImageUsageReportInputDict))
+    client.delete_image_usage_report(_request(DeleteImageUsageReportInput))
+    client.delete_image_usage_report(_request(DeleteImageUsageReportInputDict))
+    client.delete_instance_connect_endpoint(instance_connect_endpoint_id=_)
+    client.delete_instance_connect_endpoint(
+        **_request(DeleteInstanceConnectEndpointInputDict)
+    )
+    client.delete_instance_connect_endpoint(
+        _request(DeleteInstanceConnectEndpointInput)
+    )
+    client.delete_instance_connect_endpoint(
+        _request(DeleteInstanceConnectEndpointInputDict)
+    )
+    client.delete_instance_event_window(instance_event_window_id=_)
+    client.delete_instance_event_window(**_request(DeleteInstanceEventWindowInputDict))
+    client.delete_instance_event_window(_request(DeleteInstanceEventWindowInput))
+    client.delete_instance_event_window(_request(DeleteInstanceEventWindowInputDict))
+    client.delete_internet_gateway(internet_gateway_id=_)
+    client.delete_internet_gateway(**_request(DeleteInternetGatewayInputDict))
+    client.delete_internet_gateway(_request(DeleteInternetGatewayInput))
+    client.delete_internet_gateway(_request(DeleteInternetGatewayInputDict))
+    client.delete_ipam(ipam_id=_)
+    client.delete_ipam(**_request(DeleteIpamInputDict))
+    client.delete_ipam(_request(DeleteIpamInput))
+    client.delete_ipam(_request(DeleteIpamInputDict))
+    client.delete_ipam_external_resource_verification_token(
+        ipam_external_resource_verification_token_id=_
+    )
+    client.delete_ipam_external_resource_verification_token(
+        **_request(DeleteIpamExternalResourceVerificationTokenInputDict)
+    )
+    client.delete_ipam_external_resource_verification_token(
+        _request(DeleteIpamExternalResourceVerificationTokenInput)
+    )
+    client.delete_ipam_external_resource_verification_token(
+        _request(DeleteIpamExternalResourceVerificationTokenInputDict)
+    )
+    client.delete_ipam_internet_registry_association(
+        ipam_internet_registry_association_id=_
+    )
+    client.delete_ipam_internet_registry_association(
+        **_request(DeleteIpamInternetRegistryAssociationInputDict)
+    )
+    client.delete_ipam_internet_registry_association(
+        _request(DeleteIpamInternetRegistryAssociationInput)
+    )
+    client.delete_ipam_internet_registry_association(
+        _request(DeleteIpamInternetRegistryAssociationInputDict)
+    )
+    client.delete_ipam_policy(ipam_policy_id=_)
+    client.delete_ipam_policy(**_request(DeleteIpamPolicyInputDict))
+    client.delete_ipam_policy(_request(DeleteIpamPolicyInput))
+    client.delete_ipam_policy(_request(DeleteIpamPolicyInputDict))
+    client.delete_ipam_pool(ipam_pool_id=_)
+    client.delete_ipam_pool(**_request(DeleteIpamPoolInputDict))
+    client.delete_ipam_pool(_request(DeleteIpamPoolInput))
+    client.delete_ipam_pool(_request(DeleteIpamPoolInputDict))
+    client.delete_ipam_prefix_list_resolver(ipam_prefix_list_resolver_id=_)
+    client.delete_ipam_prefix_list_resolver(
+        **_request(DeleteIpamPrefixListResolverInputDict)
+    )
+    client.delete_ipam_prefix_list_resolver(_request(DeleteIpamPrefixListResolverInput))
+    client.delete_ipam_prefix_list_resolver(
+        _request(DeleteIpamPrefixListResolverInputDict)
+    )
+    client.delete_ipam_prefix_list_resolver_target(
+        ipam_prefix_list_resolver_target_id=_
+    )
+    client.delete_ipam_prefix_list_resolver_target(
+        **_request(DeleteIpamPrefixListResolverTargetInputDict)
+    )
+    client.delete_ipam_prefix_list_resolver_target(
+        _request(DeleteIpamPrefixListResolverTargetInput)
+    )
+    client.delete_ipam_prefix_list_resolver_target(
+        _request(DeleteIpamPrefixListResolverTargetInputDict)
+    )
+    client.delete_ipam_resource_discovery(ipam_resource_discovery_id=_)
+    client.delete_ipam_resource_discovery(
+        **_request(DeleteIpamResourceDiscoveryInputDict)
+    )
+    client.delete_ipam_resource_discovery(_request(DeleteIpamResourceDiscoveryInput))
+    client.delete_ipam_resource_discovery(
+        _request(DeleteIpamResourceDiscoveryInputDict)
+    )
+    client.delete_ipam_routing_policy_registration(
+        ipam_internet_registry_association_id=_, cidr=_
+    )
+    client.delete_ipam_routing_policy_registration(
+        **_request(DeleteIpamRoutingPolicyRegistrationInputDict)
+    )
+    client.delete_ipam_routing_policy_registration(
+        _request(DeleteIpamRoutingPolicyRegistrationInput)
+    )
+    client.delete_ipam_routing_policy_registration(
+        _request(DeleteIpamRoutingPolicyRegistrationInputDict)
+    )
+    client.delete_ipam_scope(ipam_scope_id=_)
+    client.delete_ipam_scope(**_request(DeleteIpamScopeInputDict))
+    client.delete_ipam_scope(_request(DeleteIpamScopeInput))
+    client.delete_ipam_scope(_request(DeleteIpamScopeInputDict))
+    client.delete_key_pair()
+    client.delete_key_pair(**_request(DeleteKeyPairInputDict))
+    client.delete_key_pair(_request(DeleteKeyPairInput))
+    client.delete_key_pair(_request(DeleteKeyPairInputDict))
+    client.delete_launch_template()
+    client.delete_launch_template(**_request(DeleteLaunchTemplateInputDict))
+    client.delete_launch_template(_request(DeleteLaunchTemplateInput))
+    client.delete_launch_template(_request(DeleteLaunchTemplateInputDict))
+    client.delete_launch_template_versions(versions=_)
+    client.delete_launch_template_versions(
+        **_request(DeleteLaunchTemplateVersionsInputDict)
+    )
+    client.delete_launch_template_versions(_request(DeleteLaunchTemplateVersionsInput))
+    client.delete_launch_template_versions(
+        _request(DeleteLaunchTemplateVersionsInputDict)
+    )
+    client.delete_local_gateway_route(local_gateway_route_table_id=_)
+    client.delete_local_gateway_route(**_request(DeleteLocalGatewayRouteInputDict))
+    client.delete_local_gateway_route(_request(DeleteLocalGatewayRouteInput))
+    client.delete_local_gateway_route(_request(DeleteLocalGatewayRouteInputDict))
+    client.delete_local_gateway_route_table(local_gateway_route_table_id=_)
+    client.delete_local_gateway_route_table(
+        **_request(DeleteLocalGatewayRouteTableInputDict)
+    )
+    client.delete_local_gateway_route_table(_request(DeleteLocalGatewayRouteTableInput))
+    client.delete_local_gateway_route_table(
+        _request(DeleteLocalGatewayRouteTableInputDict)
+    )
+    client.delete_local_gateway_route_table_virtual_interface_group_association(
+        local_gateway_route_table_virtual_interface_group_association_id=_
+    )
+    client.delete_local_gateway_route_table_virtual_interface_group_association(
+        **_request(
+            DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationInputDict
+        )
+    )
+    client.delete_local_gateway_route_table_virtual_interface_group_association(
+        _request(DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationInput)
+    )
+    client.delete_local_gateway_route_table_virtual_interface_group_association(
+        _request(DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationInputDict)
+    )
+    client.delete_local_gateway_route_table_vpc_association(
+        local_gateway_route_table_vpc_association_id=_
+    )
+    client.delete_local_gateway_route_table_vpc_association(
+        **_request(DeleteLocalGatewayRouteTableVpcAssociationInputDict)
+    )
+    client.delete_local_gateway_route_table_vpc_association(
+        _request(DeleteLocalGatewayRouteTableVpcAssociationInput)
+    )
+    client.delete_local_gateway_route_table_vpc_association(
+        _request(DeleteLocalGatewayRouteTableVpcAssociationInputDict)
+    )
+    client.delete_local_gateway_virtual_interface(local_gateway_virtual_interface_id=_)
+    client.delete_local_gateway_virtual_interface(
+        **_request(DeleteLocalGatewayVirtualInterfaceInputDict)
+    )
+    client.delete_local_gateway_virtual_interface(
+        _request(DeleteLocalGatewayVirtualInterfaceInput)
+    )
+    client.delete_local_gateway_virtual_interface(
+        _request(DeleteLocalGatewayVirtualInterfaceInputDict)
+    )
+    client.delete_local_gateway_virtual_interface_group(
+        local_gateway_virtual_interface_group_id=_
+    )
+    client.delete_local_gateway_virtual_interface_group(
+        **_request(DeleteLocalGatewayVirtualInterfaceGroupInputDict)
+    )
+    client.delete_local_gateway_virtual_interface_group(
+        _request(DeleteLocalGatewayVirtualInterfaceGroupInput)
+    )
+    client.delete_local_gateway_virtual_interface_group(
+        _request(DeleteLocalGatewayVirtualInterfaceGroupInputDict)
+    )
+    client.delete_managed_prefix_list(prefix_list_id=_)
+    client.delete_managed_prefix_list(**_request(DeleteManagedPrefixListInputDict))
+    client.delete_managed_prefix_list(_request(DeleteManagedPrefixListInput))
+    client.delete_managed_prefix_list(_request(DeleteManagedPrefixListInputDict))
+    client.delete_nat_gateway(nat_gateway_id=_)
+    client.delete_nat_gateway(**_request(DeleteNatGatewayInputDict))
+    client.delete_nat_gateway(_request(DeleteNatGatewayInput))
+    client.delete_nat_gateway(_request(DeleteNatGatewayInputDict))
+    client.delete_network_acl(network_acl_id=_)
+    client.delete_network_acl(**_request(DeleteNetworkAclInputDict))
+    client.delete_network_acl(_request(DeleteNetworkAclInput))
+    client.delete_network_acl(_request(DeleteNetworkAclInputDict))
+    client.delete_network_acl_entry(network_acl_id=_, rule_number=_, egress=_)
+    client.delete_network_acl_entry(**_request(DeleteNetworkAclEntryInputDict))
+    client.delete_network_acl_entry(_request(DeleteNetworkAclEntryInput))
+    client.delete_network_acl_entry(_request(DeleteNetworkAclEntryInputDict))
+    client.delete_network_insights_access_scope(network_insights_access_scope_id=_)
+    client.delete_network_insights_access_scope(
+        **_request(DeleteNetworkInsightsAccessScopeInputDict)
+    )
+    client.delete_network_insights_access_scope(
+        _request(DeleteNetworkInsightsAccessScopeInput)
+    )
+    client.delete_network_insights_access_scope(
+        _request(DeleteNetworkInsightsAccessScopeInputDict)
+    )
+    client.delete_network_insights_access_scope_analysis(
+        network_insights_access_scope_analysis_id=_
+    )
+    client.delete_network_insights_access_scope_analysis(
+        **_request(DeleteNetworkInsightsAccessScopeAnalysisInputDict)
+    )
+    client.delete_network_insights_access_scope_analysis(
+        _request(DeleteNetworkInsightsAccessScopeAnalysisInput)
+    )
+    client.delete_network_insights_access_scope_analysis(
+        _request(DeleteNetworkInsightsAccessScopeAnalysisInputDict)
+    )
+    client.delete_network_insights_analysis(network_insights_analysis_id=_)
+    client.delete_network_insights_analysis(
+        **_request(DeleteNetworkInsightsAnalysisInputDict)
+    )
+    client.delete_network_insights_analysis(
+        _request(DeleteNetworkInsightsAnalysisInput)
+    )
+    client.delete_network_insights_analysis(
+        _request(DeleteNetworkInsightsAnalysisInputDict)
+    )
+    client.delete_network_insights_path(network_insights_path_id=_)
+    client.delete_network_insights_path(**_request(DeleteNetworkInsightsPathInputDict))
+    client.delete_network_insights_path(_request(DeleteNetworkInsightsPathInput))
+    client.delete_network_insights_path(_request(DeleteNetworkInsightsPathInputDict))
+    client.delete_network_interface(network_interface_id=_)
+    client.delete_network_interface(**_request(DeleteNetworkInterfaceInputDict))
+    client.delete_network_interface(_request(DeleteNetworkInterfaceInput))
+    client.delete_network_interface(_request(DeleteNetworkInterfaceInputDict))
+    client.delete_network_interface_permission(network_interface_permission_id=_)
+    client.delete_network_interface_permission(
+        **_request(DeleteNetworkInterfacePermissionInputDict)
+    )
+    client.delete_network_interface_permission(
+        _request(DeleteNetworkInterfacePermissionInput)
+    )
+    client.delete_network_interface_permission(
+        _request(DeleteNetworkInterfacePermissionInputDict)
+    )
+    client.delete_placement_group(group_name=_)
+    client.delete_placement_group(**_request(DeletePlacementGroupInputDict))
+    client.delete_placement_group(_request(DeletePlacementGroupInput))
+    client.delete_placement_group(_request(DeletePlacementGroupInputDict))
+    client.delete_public_ipv4_pool(pool_id=_)
+    client.delete_public_ipv4_pool(**_request(DeletePublicIpv4PoolInputDict))
+    client.delete_public_ipv4_pool(_request(DeletePublicIpv4PoolInput))
+    client.delete_public_ipv4_pool(_request(DeletePublicIpv4PoolInputDict))
+    client.delete_queued_reserved_instances(reserved_instances_ids=_)
+    client.delete_queued_reserved_instances(
+        **_request(DeleteQueuedReservedInstancesInputDict)
+    )
+    client.delete_queued_reserved_instances(
+        _request(DeleteQueuedReservedInstancesInput)
+    )
+    client.delete_queued_reserved_instances(
+        _request(DeleteQueuedReservedInstancesInputDict)
+    )
+    client.delete_route(route_table_id=_)
+    client.delete_route(**_request(DeleteRouteInputDict))
+    client.delete_route(_request(DeleteRouteInput))
+    client.delete_route(_request(DeleteRouteInputDict))
+    client.delete_route_server(route_server_id=_)
+    client.delete_route_server(**_request(DeleteRouteServerInputDict))
+    client.delete_route_server(_request(DeleteRouteServerInput))
+    client.delete_route_server(_request(DeleteRouteServerInputDict))
+    client.delete_route_server_endpoint(route_server_endpoint_id=_)
+    client.delete_route_server_endpoint(**_request(DeleteRouteServerEndpointInputDict))
+    client.delete_route_server_endpoint(_request(DeleteRouteServerEndpointInput))
+    client.delete_route_server_endpoint(_request(DeleteRouteServerEndpointInputDict))
+    client.delete_route_server_peer(route_server_peer_id=_)
+    client.delete_route_server_peer(**_request(DeleteRouteServerPeerInputDict))
+    client.delete_route_server_peer(_request(DeleteRouteServerPeerInput))
+    client.delete_route_server_peer(_request(DeleteRouteServerPeerInputDict))
+    client.delete_route_table(route_table_id=_)
+    client.delete_route_table(**_request(DeleteRouteTableInputDict))
+    client.delete_route_table(_request(DeleteRouteTableInput))
+    client.delete_route_table(_request(DeleteRouteTableInputDict))
+    client.delete_secondary_network(secondary_network_id=_)
+    client.delete_secondary_network(**_request(DeleteSecondaryNetworkInputDict))
+    client.delete_secondary_network(_request(DeleteSecondaryNetworkInput))
+    client.delete_secondary_network(_request(DeleteSecondaryNetworkInputDict))
+    client.delete_secondary_subnet(secondary_subnet_id=_)
+    client.delete_secondary_subnet(**_request(DeleteSecondarySubnetInputDict))
+    client.delete_secondary_subnet(_request(DeleteSecondarySubnetInput))
+    client.delete_secondary_subnet(_request(DeleteSecondarySubnetInputDict))
+    client.delete_security_group()
+    client.delete_security_group(**_request(DeleteSecurityGroupInputDict))
+    client.delete_security_group(_request(DeleteSecurityGroupInput))
+    client.delete_security_group(_request(DeleteSecurityGroupInputDict))
+    client.delete_snapshot(snapshot_id=_)
+    client.delete_snapshot(**_request(DeleteSnapshotInputDict))
+    client.delete_snapshot(_request(DeleteSnapshotInput))
+    client.delete_snapshot(_request(DeleteSnapshotInputDict))
+    client.delete_spot_datafeed_subscription()
+    client.delete_spot_datafeed_subscription(
+        **_request(DeleteSpotDatafeedSubscriptionInputDict)
+    )
+    client.delete_spot_datafeed_subscription(
+        _request(DeleteSpotDatafeedSubscriptionInput)
+    )
+    client.delete_spot_datafeed_subscription(
+        _request(DeleteSpotDatafeedSubscriptionInputDict)
+    )
+    client.delete_subnet(subnet_id=_)
+    client.delete_subnet(**_request(DeleteSubnetInputDict))
+    client.delete_subnet(_request(DeleteSubnetInput))
+    client.delete_subnet(_request(DeleteSubnetInputDict))
+    client.delete_subnet_cidr_reservation(subnet_cidr_reservation_id=_)
+    client.delete_subnet_cidr_reservation(
+        **_request(DeleteSubnetCidrReservationInputDict)
+    )
+    client.delete_subnet_cidr_reservation(_request(DeleteSubnetCidrReservationInput))
+    client.delete_subnet_cidr_reservation(
+        _request(DeleteSubnetCidrReservationInputDict)
+    )
+    client.delete_tags(resources=_)
+    client.delete_tags(**_request(DeleteTagsInputDict))
+    client.delete_tags(_request(DeleteTagsInput))
+    client.delete_tags(_request(DeleteTagsInputDict))
+    client.delete_traffic_mirror_filter(traffic_mirror_filter_id=_)
+    client.delete_traffic_mirror_filter(**_request(DeleteTrafficMirrorFilterInputDict))
+    client.delete_traffic_mirror_filter(_request(DeleteTrafficMirrorFilterInput))
+    client.delete_traffic_mirror_filter(_request(DeleteTrafficMirrorFilterInputDict))
+    client.delete_traffic_mirror_filter_rule(traffic_mirror_filter_rule_id=_)
+    client.delete_traffic_mirror_filter_rule(
+        **_request(DeleteTrafficMirrorFilterRuleInputDict)
+    )
+    client.delete_traffic_mirror_filter_rule(
+        _request(DeleteTrafficMirrorFilterRuleInput)
+    )
+    client.delete_traffic_mirror_filter_rule(
+        _request(DeleteTrafficMirrorFilterRuleInputDict)
+    )
+    client.delete_traffic_mirror_session(traffic_mirror_session_id=_)
+    client.delete_traffic_mirror_session(
+        **_request(DeleteTrafficMirrorSessionInputDict)
+    )
+    client.delete_traffic_mirror_session(_request(DeleteTrafficMirrorSessionInput))
+    client.delete_traffic_mirror_session(_request(DeleteTrafficMirrorSessionInputDict))
+    client.delete_traffic_mirror_target(traffic_mirror_target_id=_)
+    client.delete_traffic_mirror_target(**_request(DeleteTrafficMirrorTargetInputDict))
+    client.delete_traffic_mirror_target(_request(DeleteTrafficMirrorTargetInput))
+    client.delete_traffic_mirror_target(_request(DeleteTrafficMirrorTargetInputDict))
+    client.delete_transit_gateway(transit_gateway_id=_)
+    client.delete_transit_gateway(**_request(DeleteTransitGatewayInputDict))
+    client.delete_transit_gateway(_request(DeleteTransitGatewayInput))
+    client.delete_transit_gateway(_request(DeleteTransitGatewayInputDict))
+    client.delete_transit_gateway_client_vpn_attachment(transit_gateway_attachment_id=_)
+    client.delete_transit_gateway_client_vpn_attachment(
+        **_request(DeleteTransitGatewayClientVpnAttachmentInputDict)
+    )
+    client.delete_transit_gateway_client_vpn_attachment(
+        _request(DeleteTransitGatewayClientVpnAttachmentInput)
+    )
+    client.delete_transit_gateway_client_vpn_attachment(
+        _request(DeleteTransitGatewayClientVpnAttachmentInputDict)
+    )
+    client.delete_transit_gateway_connect(transit_gateway_attachment_id=_)
+    client.delete_transit_gateway_connect(
+        **_request(DeleteTransitGatewayConnectInputDict)
+    )
+    client.delete_transit_gateway_connect(_request(DeleteTransitGatewayConnectInput))
+    client.delete_transit_gateway_connect(
+        _request(DeleteTransitGatewayConnectInputDict)
+    )
+    client.delete_transit_gateway_connect_peer(transit_gateway_connect_peer_id=_)
+    client.delete_transit_gateway_connect_peer(
+        **_request(DeleteTransitGatewayConnectPeerInputDict)
+    )
+    client.delete_transit_gateway_connect_peer(
+        _request(DeleteTransitGatewayConnectPeerInput)
+    )
+    client.delete_transit_gateway_connect_peer(
+        _request(DeleteTransitGatewayConnectPeerInputDict)
+    )
+    client.delete_transit_gateway_metering_policy(transit_gateway_metering_policy_id=_)
+    client.delete_transit_gateway_metering_policy(
+        **_request(DeleteTransitGatewayMeteringPolicyInputDict)
+    )
+    client.delete_transit_gateway_metering_policy(
+        _request(DeleteTransitGatewayMeteringPolicyInput)
+    )
+    client.delete_transit_gateway_metering_policy(
+        _request(DeleteTransitGatewayMeteringPolicyInputDict)
+    )
+    client.delete_transit_gateway_metering_policy_entry(
+        transit_gateway_metering_policy_id=_, policy_rule_number=_
+    )
+    client.delete_transit_gateway_metering_policy_entry(
+        **_request(DeleteTransitGatewayMeteringPolicyEntryInputDict)
+    )
+    client.delete_transit_gateway_metering_policy_entry(
+        _request(DeleteTransitGatewayMeteringPolicyEntryInput)
+    )
+    client.delete_transit_gateway_metering_policy_entry(
+        _request(DeleteTransitGatewayMeteringPolicyEntryInputDict)
+    )
+    client.delete_transit_gateway_multicast_domain(
+        transit_gateway_multicast_domain_id=_
+    )
+    client.delete_transit_gateway_multicast_domain(
+        **_request(DeleteTransitGatewayMulticastDomainInputDict)
+    )
+    client.delete_transit_gateway_multicast_domain(
+        _request(DeleteTransitGatewayMulticastDomainInput)
+    )
+    client.delete_transit_gateway_multicast_domain(
+        _request(DeleteTransitGatewayMulticastDomainInputDict)
+    )
+    client.delete_transit_gateway_peering_attachment(transit_gateway_attachment_id=_)
+    client.delete_transit_gateway_peering_attachment(
+        **_request(DeleteTransitGatewayPeeringAttachmentInputDict)
+    )
+    client.delete_transit_gateway_peering_attachment(
+        _request(DeleteTransitGatewayPeeringAttachmentInput)
+    )
+    client.delete_transit_gateway_peering_attachment(
+        _request(DeleteTransitGatewayPeeringAttachmentInputDict)
+    )
+    client.delete_transit_gateway_policy_table(transit_gateway_policy_table_id=_)
+    client.delete_transit_gateway_policy_table(
+        **_request(DeleteTransitGatewayPolicyTableInputDict)
+    )
+    client.delete_transit_gateway_policy_table(
+        _request(DeleteTransitGatewayPolicyTableInput)
+    )
+    client.delete_transit_gateway_policy_table(
+        _request(DeleteTransitGatewayPolicyTableInputDict)
+    )
+    client.delete_transit_gateway_policy_table_entry(
+        transit_gateway_policy_table_id=_, policy_rule_number=_
+    )
+    client.delete_transit_gateway_policy_table_entry(
+        **_request(DeleteTransitGatewayPolicyTableEntryInputDict)
+    )
+    client.delete_transit_gateway_policy_table_entry(
+        _request(DeleteTransitGatewayPolicyTableEntryInput)
+    )
+    client.delete_transit_gateway_policy_table_entry(
+        _request(DeleteTransitGatewayPolicyTableEntryInputDict)
+    )
+    client.delete_transit_gateway_prefix_list_reference(
+        transit_gateway_route_table_id=_, prefix_list_id=_
+    )
+    client.delete_transit_gateway_prefix_list_reference(
+        **_request(DeleteTransitGatewayPrefixListReferenceInputDict)
+    )
+    client.delete_transit_gateway_prefix_list_reference(
+        _request(DeleteTransitGatewayPrefixListReferenceInput)
+    )
+    client.delete_transit_gateway_prefix_list_reference(
+        _request(DeleteTransitGatewayPrefixListReferenceInputDict)
+    )
+    client.delete_transit_gateway_route(
+        transit_gateway_route_table_id=_, destination_cidr_block=_
+    )
+    client.delete_transit_gateway_route(**_request(DeleteTransitGatewayRouteInputDict))
+    client.delete_transit_gateway_route(_request(DeleteTransitGatewayRouteInput))
+    client.delete_transit_gateway_route(_request(DeleteTransitGatewayRouteInputDict))
+    client.delete_transit_gateway_route_table(transit_gateway_route_table_id=_)
+    client.delete_transit_gateway_route_table(
+        **_request(DeleteTransitGatewayRouteTableInputDict)
+    )
+    client.delete_transit_gateway_route_table(
+        _request(DeleteTransitGatewayRouteTableInput)
+    )
+    client.delete_transit_gateway_route_table(
+        _request(DeleteTransitGatewayRouteTableInputDict)
+    )
+    client.delete_transit_gateway_route_table_announcement(
+        transit_gateway_route_table_announcement_id=_
+    )
+    client.delete_transit_gateway_route_table_announcement(
+        **_request(DeleteTransitGatewayRouteTableAnnouncementInputDict)
+    )
+    client.delete_transit_gateway_route_table_announcement(
+        _request(DeleteTransitGatewayRouteTableAnnouncementInput)
+    )
+    client.delete_transit_gateway_route_table_announcement(
+        _request(DeleteTransitGatewayRouteTableAnnouncementInputDict)
+    )
+    client.delete_transit_gateway_vpc_attachment(transit_gateway_attachment_id=_)
+    client.delete_transit_gateway_vpc_attachment(
+        **_request(DeleteTransitGatewayVpcAttachmentInputDict)
+    )
+    client.delete_transit_gateway_vpc_attachment(
+        _request(DeleteTransitGatewayVpcAttachmentInput)
+    )
+    client.delete_transit_gateway_vpc_attachment(
+        _request(DeleteTransitGatewayVpcAttachmentInputDict)
+    )
+    client.delete_verified_access_endpoint(verified_access_endpoint_id=_)
+    client.delete_verified_access_endpoint(
+        **_request(DeleteVerifiedAccessEndpointInputDict)
+    )
+    client.delete_verified_access_endpoint(_request(DeleteVerifiedAccessEndpointInput))
+    client.delete_verified_access_endpoint(
+        _request(DeleteVerifiedAccessEndpointInputDict)
+    )
+    client.delete_verified_access_group(verified_access_group_id=_)
+    client.delete_verified_access_group(**_request(DeleteVerifiedAccessGroupInputDict))
+    client.delete_verified_access_group(_request(DeleteVerifiedAccessGroupInput))
+    client.delete_verified_access_group(_request(DeleteVerifiedAccessGroupInputDict))
+    client.delete_verified_access_instance(verified_access_instance_id=_)
+    client.delete_verified_access_instance(
+        **_request(DeleteVerifiedAccessInstanceInputDict)
+    )
+    client.delete_verified_access_instance(_request(DeleteVerifiedAccessInstanceInput))
+    client.delete_verified_access_instance(
+        _request(DeleteVerifiedAccessInstanceInputDict)
+    )
+    client.delete_verified_access_trust_provider(verified_access_trust_provider_id=_)
+    client.delete_verified_access_trust_provider(
+        **_request(DeleteVerifiedAccessTrustProviderInputDict)
+    )
+    client.delete_verified_access_trust_provider(
+        _request(DeleteVerifiedAccessTrustProviderInput)
+    )
+    client.delete_verified_access_trust_provider(
+        _request(DeleteVerifiedAccessTrustProviderInputDict)
+    )
+    client.delete_volume(volume_id=_)
+    client.delete_volume(**_request(DeleteVolumeInputDict))
+    client.delete_volume(_request(DeleteVolumeInput))
+    client.delete_volume(_request(DeleteVolumeInputDict))
+    client.delete_vpc(vpc_id=_)
+    client.delete_vpc(**_request(DeleteVpcInputDict))
+    client.delete_vpc(_request(DeleteVpcInput))
+    client.delete_vpc(_request(DeleteVpcInputDict))
+    client.delete_vpc_block_public_access_exclusion(exclusion_id=_)
+    client.delete_vpc_block_public_access_exclusion(
+        **_request(DeleteVpcBlockPublicAccessExclusionInputDict)
+    )
+    client.delete_vpc_block_public_access_exclusion(
+        _request(DeleteVpcBlockPublicAccessExclusionInput)
+    )
+    client.delete_vpc_block_public_access_exclusion(
+        _request(DeleteVpcBlockPublicAccessExclusionInputDict)
+    )
+    client.delete_vpc_encryption_control(vpc_encryption_control_id=_)
+    client.delete_vpc_encryption_control(
+        **_request(DeleteVpcEncryptionControlInputDict)
+    )
+    client.delete_vpc_encryption_control(_request(DeleteVpcEncryptionControlInput))
+    client.delete_vpc_encryption_control(_request(DeleteVpcEncryptionControlInputDict))
+    client.delete_vpc_endpoint_connection_notifications(connection_notification_ids=_)
+    client.delete_vpc_endpoint_connection_notifications(
+        **_request(DeleteVpcEndpointConnectionNotificationsInputDict)
+    )
+    client.delete_vpc_endpoint_connection_notifications(
+        _request(DeleteVpcEndpointConnectionNotificationsInput)
+    )
+    client.delete_vpc_endpoint_connection_notifications(
+        _request(DeleteVpcEndpointConnectionNotificationsInputDict)
+    )
+    client.delete_vpc_endpoints(vpc_endpoint_ids=_)
+    client.delete_vpc_endpoints(**_request(DeleteVpcEndpointsInputDict))
+    client.delete_vpc_endpoints(_request(DeleteVpcEndpointsInput))
+    client.delete_vpc_endpoints(_request(DeleteVpcEndpointsInputDict))
+    client.delete_vpc_endpoint_service_configurations(service_ids=_)
+    client.delete_vpc_endpoint_service_configurations(
+        **_request(DeleteVpcEndpointServiceConfigurationsInputDict)
+    )
+    client.delete_vpc_endpoint_service_configurations(
+        _request(DeleteVpcEndpointServiceConfigurationsInput)
+    )
+    client.delete_vpc_endpoint_service_configurations(
+        _request(DeleteVpcEndpointServiceConfigurationsInputDict)
+    )
+    client.delete_vpc_peering_connection(vpc_peering_connection_id=_)
+    client.delete_vpc_peering_connection(
+        **_request(DeleteVpcPeeringConnectionInputDict)
+    )
+    client.delete_vpc_peering_connection(_request(DeleteVpcPeeringConnectionInput))
+    client.delete_vpc_peering_connection(_request(DeleteVpcPeeringConnectionInputDict))
+    client.delete_vpn_concentrator(vpn_concentrator_id=_)
+    client.delete_vpn_concentrator(**_request(DeleteVpnConcentratorInputDict))
+    client.delete_vpn_concentrator(_request(DeleteVpnConcentratorInput))
+    client.delete_vpn_concentrator(_request(DeleteVpnConcentratorInputDict))
+    client.delete_vpn_connection(vpn_connection_id=_)
+    client.delete_vpn_connection(**_request(DeleteVpnConnectionInputDict))
+    client.delete_vpn_connection(_request(DeleteVpnConnectionInput))
+    client.delete_vpn_connection(_request(DeleteVpnConnectionInputDict))
+    client.delete_vpn_connection_route(destination_cidr_block=_, vpn_connection_id=_)
+    client.delete_vpn_connection_route(**_request(DeleteVpnConnectionRouteInputDict))
+    client.delete_vpn_connection_route(_request(DeleteVpnConnectionRouteInput))
+    client.delete_vpn_connection_route(_request(DeleteVpnConnectionRouteInputDict))
+    client.delete_vpn_gateway(vpn_gateway_id=_)
+    client.delete_vpn_gateway(**_request(DeleteVpnGatewayInputDict))
+    client.delete_vpn_gateway(_request(DeleteVpnGatewayInput))
+    client.delete_vpn_gateway(_request(DeleteVpnGatewayInputDict))
+    client.deprovision_byoip_cidr(cidr=_)
+    client.deprovision_byoip_cidr(**_request(DeprovisionByoipCidrInputDict))
+    client.deprovision_byoip_cidr(_request(DeprovisionByoipCidrInput))
+    client.deprovision_byoip_cidr(_request(DeprovisionByoipCidrInputDict))
+    client.deprovision_ipam_byoasn(ipam_id=_, asn=_)
+    client.deprovision_ipam_byoasn(**_request(DeprovisionIpamByoasnInputDict))
+    client.deprovision_ipam_byoasn(_request(DeprovisionIpamByoasnInput))
+    client.deprovision_ipam_byoasn(_request(DeprovisionIpamByoasnInputDict))
+    client.deprovision_ipam_pool_cidr(ipam_pool_id=_)
+    client.deprovision_ipam_pool_cidr(**_request(DeprovisionIpamPoolCidrInputDict))
+    client.deprovision_ipam_pool_cidr(_request(DeprovisionIpamPoolCidrInput))
+    client.deprovision_ipam_pool_cidr(_request(DeprovisionIpamPoolCidrInputDict))
+    client.deprovision_public_ipv4_pool_cidr(pool_id=_, cidr=_)
+    client.deprovision_public_ipv4_pool_cidr(
+        **_request(DeprovisionPublicIpv4PoolCidrInputDict)
+    )
+    client.deprovision_public_ipv4_pool_cidr(
+        _request(DeprovisionPublicIpv4PoolCidrInput)
+    )
+    client.deprovision_public_ipv4_pool_cidr(
+        _request(DeprovisionPublicIpv4PoolCidrInputDict)
+    )
+    client.deregister_image(image_id=_)
+    client.deregister_image(**_request(DeregisterImageInputDict))
+    client.deregister_image(_request(DeregisterImageInput))
+    client.deregister_image(_request(DeregisterImageInputDict))
+    client.deregister_instance_event_notification_attributes(instance_tag_attribute=_)
+    client.deregister_instance_event_notification_attributes(
+        **_request(DeregisterInstanceEventNotificationAttributesInputDict)
+    )
+    client.deregister_instance_event_notification_attributes(
+        _request(DeregisterInstanceEventNotificationAttributesInput)
+    )
+    client.deregister_instance_event_notification_attributes(
+        _request(DeregisterInstanceEventNotificationAttributesInputDict)
+    )
+    client.deregister_transit_gateway_multicast_group_members()
+    client.deregister_transit_gateway_multicast_group_members(
+        **_request(DeregisterTransitGatewayMulticastGroupMembersInputDict)
+    )
+    client.deregister_transit_gateway_multicast_group_members(
+        _request(DeregisterTransitGatewayMulticastGroupMembersInput)
+    )
+    client.deregister_transit_gateway_multicast_group_members(
+        _request(DeregisterTransitGatewayMulticastGroupMembersInputDict)
+    )
+    client.deregister_transit_gateway_multicast_group_sources()
+    client.deregister_transit_gateway_multicast_group_sources(
+        **_request(DeregisterTransitGatewayMulticastGroupSourcesInputDict)
+    )
+    client.deregister_transit_gateway_multicast_group_sources(
+        _request(DeregisterTransitGatewayMulticastGroupSourcesInput)
+    )
+    client.deregister_transit_gateway_multicast_group_sources(
+        _request(DeregisterTransitGatewayMulticastGroupSourcesInputDict)
+    )
+    client.describe_account_attributes()
+    client.describe_account_attributes(**_request(DescribeAccountAttributesInputDict))
+    client.describe_account_attributes(_request(DescribeAccountAttributesInput))
+    client.describe_account_attributes(_request(DescribeAccountAttributesInputDict))
+    client.describe_account_vpc_encryption_control()
+    client.describe_account_vpc_encryption_control(
+        **_request(DescribeAccountVpcEncryptionControlInputDict)
+    )
+    client.describe_account_vpc_encryption_control(
+        _request(DescribeAccountVpcEncryptionControlInput)
+    )
+    client.describe_account_vpc_encryption_control(
+        _request(DescribeAccountVpcEncryptionControlInputDict)
+    )
+    client.describe_addresses()
+    client.describe_addresses(**_request(DescribeAddressesInputDict))
+    client.describe_addresses(_request(DescribeAddressesInput))
+    client.describe_addresses(_request(DescribeAddressesInputDict))
+    client.describe_addresses_attribute()
+    client.describe_addresses_attribute(**_request(DescribeAddressesAttributeInputDict))
+    client.describe_addresses_attribute(_request(DescribeAddressesAttributeInput))
+    client.describe_addresses_attribute(_request(DescribeAddressesAttributeInputDict))
+    client.describe_address_transfers()
+    client.describe_address_transfers(**_request(DescribeAddressTransfersInputDict))
+    client.describe_address_transfers(_request(DescribeAddressTransfersInput))
+    client.describe_address_transfers(_request(DescribeAddressTransfersInputDict))
+    client.describe_aggregate_id_format()
+    client.describe_aggregate_id_format(**_request(DescribeAggregateIdFormatInputDict))
+    client.describe_aggregate_id_format(_request(DescribeAggregateIdFormatInput))
+    client.describe_aggregate_id_format(_request(DescribeAggregateIdFormatInputDict))
+    client.describe_application_status()
+    client.describe_application_status(**_request(DescribeApplicationStatusInputDict))
+    client.describe_application_status(_request(DescribeApplicationStatusInput))
+    client.describe_application_status(_request(DescribeApplicationStatusInputDict))
+    client.describe_application_status_check_associations()
+    client.describe_application_status_check_associations(
+        **_request(DescribeApplicationStatusCheckAssociationsInputDict)
+    )
+    client.describe_application_status_check_associations(
+        _request(DescribeApplicationStatusCheckAssociationsInput)
+    )
+    client.describe_application_status_check_associations(
+        _request(DescribeApplicationStatusCheckAssociationsInputDict)
+    )
+    client.describe_application_status_checks()
+    client.describe_application_status_checks(
+        **_request(DescribeApplicationStatusChecksInputDict)
+    )
+    client.describe_application_status_checks(
+        _request(DescribeApplicationStatusChecksInput)
+    )
+    client.describe_application_status_checks(
+        _request(DescribeApplicationStatusChecksInputDict)
+    )
+    client.describe_availability_zones()
+    client.describe_availability_zones(**_request(DescribeAvailabilityZonesInputDict))
+    client.describe_availability_zones(_request(DescribeAvailabilityZonesInput))
+    client.describe_availability_zones(_request(DescribeAvailabilityZonesInputDict))
+    client.describe_aws_network_performance_metric_subscriptions()
+    client.describe_aws_network_performance_metric_subscriptions(
+        **_request(DescribeAwsNetworkPerformanceMetricSubscriptionsInputDict)
+    )
+    client.describe_aws_network_performance_metric_subscriptions(
+        _request(DescribeAwsNetworkPerformanceMetricSubscriptionsInput)
+    )
+    client.describe_aws_network_performance_metric_subscriptions(
+        _request(DescribeAwsNetworkPerformanceMetricSubscriptionsInputDict)
+    )
+    client.describe_bundle_tasks()
+    client.describe_bundle_tasks(**_request(DescribeBundleTasksInputDict))
+    client.describe_bundle_tasks(_request(DescribeBundleTasksInput))
+    client.describe_bundle_tasks(_request(DescribeBundleTasksInputDict))
+    client.describe_byoip_cidrs(max_results=_)
+    client.describe_byoip_cidrs(**_request(DescribeByoipCidrsInputDict))
+    client.describe_byoip_cidrs(_request(DescribeByoipCidrsInput))
+    client.describe_byoip_cidrs(_request(DescribeByoipCidrsInputDict))
+    client.describe_capacity_block_extension_history()
+    client.describe_capacity_block_extension_history(
+        **_request(DescribeCapacityBlockExtensionHistoryInputDict)
+    )
+    client.describe_capacity_block_extension_history(
+        _request(DescribeCapacityBlockExtensionHistoryInput)
+    )
+    client.describe_capacity_block_extension_history(
+        _request(DescribeCapacityBlockExtensionHistoryInputDict)
+    )
+    client.describe_capacity_block_extension_offerings(
+        capacity_block_extension_duration_hours=_, capacity_reservation_id=_
+    )
+    client.describe_capacity_block_extension_offerings(
+        **_request(DescribeCapacityBlockExtensionOfferingsInputDict)
+    )
+    client.describe_capacity_block_extension_offerings(
+        _request(DescribeCapacityBlockExtensionOfferingsInput)
+    )
+    client.describe_capacity_block_extension_offerings(
+        _request(DescribeCapacityBlockExtensionOfferingsInputDict)
+    )
+    client.describe_capacity_block_offerings(capacity_duration_hours=_)
+    client.describe_capacity_block_offerings(
+        **_request(DescribeCapacityBlockOfferingsInputDict)
+    )
+    client.describe_capacity_block_offerings(
+        _request(DescribeCapacityBlockOfferingsInput)
+    )
+    client.describe_capacity_block_offerings(
+        _request(DescribeCapacityBlockOfferingsInputDict)
+    )
+    client.describe_capacity_blocks()
+    client.describe_capacity_blocks(**_request(DescribeCapacityBlocksInputDict))
+    client.describe_capacity_blocks(_request(DescribeCapacityBlocksInput))
+    client.describe_capacity_blocks(_request(DescribeCapacityBlocksInputDict))
+    client.describe_capacity_block_status()
+    client.describe_capacity_block_status(
+        **_request(DescribeCapacityBlockStatusInputDict)
+    )
+    client.describe_capacity_block_status(_request(DescribeCapacityBlockStatusInput))
+    client.describe_capacity_block_status(
+        _request(DescribeCapacityBlockStatusInputDict)
+    )
+    client.describe_capacity_manager_data_exports()
+    client.describe_capacity_manager_data_exports(
+        **_request(DescribeCapacityManagerDataExportsInputDict)
+    )
+    client.describe_capacity_manager_data_exports(
+        _request(DescribeCapacityManagerDataExportsInput)
+    )
+    client.describe_capacity_manager_data_exports(
+        _request(DescribeCapacityManagerDataExportsInputDict)
+    )
+    client.describe_capacity_reservation_billing_requests(role=_)
+    client.describe_capacity_reservation_billing_requests(
+        **_request(DescribeCapacityReservationBillingRequestsInputDict)
+    )
+    client.describe_capacity_reservation_billing_requests(
+        _request(DescribeCapacityReservationBillingRequestsInput)
+    )
+    client.describe_capacity_reservation_billing_requests(
+        _request(DescribeCapacityReservationBillingRequestsInputDict)
+    )
+    client.describe_capacity_reservation_cancellation_quotes()
+    client.describe_capacity_reservation_cancellation_quotes(
+        **_request(DescribeCapacityReservationCancellationQuotesInputDict)
+    )
+    client.describe_capacity_reservation_cancellation_quotes(
+        _request(DescribeCapacityReservationCancellationQuotesInput)
+    )
+    client.describe_capacity_reservation_cancellation_quotes(
+        _request(DescribeCapacityReservationCancellationQuotesInputDict)
+    )
+    client.describe_capacity_reservation_date_change_quotes()
+    client.describe_capacity_reservation_date_change_quotes(
+        **_request(DescribeCapacityReservationDateChangeQuotesInputDict)
+    )
+    client.describe_capacity_reservation_date_change_quotes(
+        _request(DescribeCapacityReservationDateChangeQuotesInput)
+    )
+    client.describe_capacity_reservation_date_change_quotes(
+        _request(DescribeCapacityReservationDateChangeQuotesInputDict)
+    )
+    client.describe_capacity_reservation_fleets()
+    client.describe_capacity_reservation_fleets(
+        **_request(DescribeCapacityReservationFleetsInputDict)
+    )
+    client.describe_capacity_reservation_fleets(
+        _request(DescribeCapacityReservationFleetsInput)
+    )
+    client.describe_capacity_reservation_fleets(
+        _request(DescribeCapacityReservationFleetsInputDict)
+    )
+    client.describe_capacity_reservations()
+    client.describe_capacity_reservations(
+        **_request(DescribeCapacityReservationsInputDict)
+    )
+    client.describe_capacity_reservations(_request(DescribeCapacityReservationsInput))
+    client.describe_capacity_reservations(
+        _request(DescribeCapacityReservationsInputDict)
+    )
+    client.describe_capacity_reservation_topology()
+    client.describe_capacity_reservation_topology(
+        **_request(DescribeCapacityReservationTopologyInputDict)
+    )
+    client.describe_capacity_reservation_topology(
+        _request(DescribeCapacityReservationTopologyInput)
+    )
+    client.describe_capacity_reservation_topology(
+        _request(DescribeCapacityReservationTopologyInputDict)
+    )
+    client.describe_carrier_gateways()
+    client.describe_carrier_gateways(**_request(DescribeCarrierGatewaysInputDict))
+    client.describe_carrier_gateways(_request(DescribeCarrierGatewaysInput))
+    client.describe_carrier_gateways(_request(DescribeCarrierGatewaysInputDict))
+    client.describe_classic_link_instances()
+    client.describe_classic_link_instances(
+        **_request(DescribeClassicLinkInstancesInputDict)
+    )
+    client.describe_classic_link_instances(_request(DescribeClassicLinkInstancesInput))
+    client.describe_classic_link_instances(
+        _request(DescribeClassicLinkInstancesInputDict)
+    )
+    client.describe_client_vpn_authorization_rules(client_vpn_endpoint_id=_)
+    client.describe_client_vpn_authorization_rules(
+        **_request(DescribeClientVpnAuthorizationRulesInputDict)
+    )
+    client.describe_client_vpn_authorization_rules(
+        _request(DescribeClientVpnAuthorizationRulesInput)
+    )
+    client.describe_client_vpn_authorization_rules(
+        _request(DescribeClientVpnAuthorizationRulesInputDict)
+    )
+    client.describe_client_vpn_connections(client_vpn_endpoint_id=_)
+    client.describe_client_vpn_connections(
+        **_request(DescribeClientVpnConnectionsInputDict)
+    )
+    client.describe_client_vpn_connections(_request(DescribeClientVpnConnectionsInput))
+    client.describe_client_vpn_connections(
+        _request(DescribeClientVpnConnectionsInputDict)
+    )
+    client.describe_client_vpn_endpoints()
+    client.describe_client_vpn_endpoints(
+        **_request(DescribeClientVpnEndpointsInputDict)
+    )
+    client.describe_client_vpn_endpoints(_request(DescribeClientVpnEndpointsInput))
+    client.describe_client_vpn_endpoints(_request(DescribeClientVpnEndpointsInputDict))
+    client.describe_client_vpn_routes(client_vpn_endpoint_id=_)
+    client.describe_client_vpn_routes(**_request(DescribeClientVpnRoutesInputDict))
+    client.describe_client_vpn_routes(_request(DescribeClientVpnRoutesInput))
+    client.describe_client_vpn_routes(_request(DescribeClientVpnRoutesInputDict))
+    client.describe_client_vpn_target_networks(client_vpn_endpoint_id=_)
+    client.describe_client_vpn_target_networks(
+        **_request(DescribeClientVpnTargetNetworksInputDict)
+    )
+    client.describe_client_vpn_target_networks(
+        _request(DescribeClientVpnTargetNetworksInput)
+    )
+    client.describe_client_vpn_target_networks(
+        _request(DescribeClientVpnTargetNetworksInputDict)
+    )
+    client.describe_coip_pools()
+    client.describe_coip_pools(**_request(DescribeCoipPoolsInputDict))
+    client.describe_coip_pools(_request(DescribeCoipPoolsInput))
+    client.describe_coip_pools(_request(DescribeCoipPoolsInputDict))
+    client.describe_conversion_tasks()
+    client.describe_conversion_tasks(**_request(DescribeConversionTasksInputDict))
+    client.describe_conversion_tasks(_request(DescribeConversionTasksInput))
+    client.describe_conversion_tasks(_request(DescribeConversionTasksInputDict))
+    client.describe_customer_gateways()
+    client.describe_customer_gateways(**_request(DescribeCustomerGatewaysInputDict))
+    client.describe_customer_gateways(_request(DescribeCustomerGatewaysInput))
+    client.describe_customer_gateways(_request(DescribeCustomerGatewaysInputDict))
+    client.describe_declarative_policies_reports()
+    client.describe_declarative_policies_reports(
+        **_request(DescribeDeclarativePoliciesReportsInputDict)
+    )
+    client.describe_declarative_policies_reports(
+        _request(DescribeDeclarativePoliciesReportsInput)
+    )
+    client.describe_declarative_policies_reports(
+        _request(DescribeDeclarativePoliciesReportsInputDict)
+    )
+    client.describe_dhcp_options()
+    client.describe_dhcp_options(**_request(DescribeDhcpOptionsInputDict))
+    client.describe_dhcp_options(_request(DescribeDhcpOptionsInput))
+    client.describe_dhcp_options(_request(DescribeDhcpOptionsInputDict))
+    client.describe_egress_only_internet_gateways()
+    client.describe_egress_only_internet_gateways(
+        **_request(DescribeEgressOnlyInternetGatewaysInputDict)
+    )
+    client.describe_egress_only_internet_gateways(
+        _request(DescribeEgressOnlyInternetGatewaysInput)
+    )
+    client.describe_egress_only_internet_gateways(
+        _request(DescribeEgressOnlyInternetGatewaysInputDict)
+    )
+    client.describe_elastic_gpus()
+    client.describe_elastic_gpus(**_request(DescribeElasticGpusInputDict))
+    client.describe_elastic_gpus(_request(DescribeElasticGpusInput))
+    client.describe_elastic_gpus(_request(DescribeElasticGpusInputDict))
+    client.describe_export_image_tasks()
+    client.describe_export_image_tasks(**_request(DescribeExportImageTasksInputDict))
+    client.describe_export_image_tasks(_request(DescribeExportImageTasksInput))
+    client.describe_export_image_tasks(_request(DescribeExportImageTasksInputDict))
+    client.describe_export_tasks()
+    client.describe_export_tasks(**_request(DescribeExportTasksInputDict))
+    client.describe_export_tasks(_request(DescribeExportTasksInput))
+    client.describe_export_tasks(_request(DescribeExportTasksInputDict))
+    client.describe_fast_launch_images()
+    client.describe_fast_launch_images(**_request(DescribeFastLaunchImagesInputDict))
+    client.describe_fast_launch_images(_request(DescribeFastLaunchImagesInput))
+    client.describe_fast_launch_images(_request(DescribeFastLaunchImagesInputDict))
+    client.describe_fast_snapshot_restores()
+    client.describe_fast_snapshot_restores(
+        **_request(DescribeFastSnapshotRestoresInputDict)
+    )
+    client.describe_fast_snapshot_restores(_request(DescribeFastSnapshotRestoresInput))
+    client.describe_fast_snapshot_restores(
+        _request(DescribeFastSnapshotRestoresInputDict)
+    )
+    client.describe_fleet_history(fleet_id=_, start_time=_)
+    client.describe_fleet_history(**_request(DescribeFleetHistoryInputDict))
+    client.describe_fleet_history(_request(DescribeFleetHistoryInput))
+    client.describe_fleet_history(_request(DescribeFleetHistoryInputDict))
+    client.describe_fleet_instances(fleet_id=_)
+    client.describe_fleet_instances(**_request(DescribeFleetInstancesInputDict))
+    client.describe_fleet_instances(_request(DescribeFleetInstancesInput))
+    client.describe_fleet_instances(_request(DescribeFleetInstancesInputDict))
+    client.describe_fleets()
+    client.describe_fleets(**_request(DescribeFleetsInputDict))
+    client.describe_fleets(_request(DescribeFleetsInput))
+    client.describe_fleets(_request(DescribeFleetsInputDict))
+    client.describe_flow_logs()
+    client.describe_flow_logs(**_request(DescribeFlowLogsInputDict))
+    client.describe_flow_logs(_request(DescribeFlowLogsInput))
+    client.describe_flow_logs(_request(DescribeFlowLogsInputDict))
+    client.describe_fpga_image_attribute(fpga_image_id=_, attribute=_)
+    client.describe_fpga_image_attribute(
+        **_request(DescribeFpgaImageAttributeInputDict)
+    )
+    client.describe_fpga_image_attribute(_request(DescribeFpgaImageAttributeInput))
+    client.describe_fpga_image_attribute(_request(DescribeFpgaImageAttributeInputDict))
+    client.describe_fpga_images()
+    client.describe_fpga_images(**_request(DescribeFpgaImagesInputDict))
+    client.describe_fpga_images(_request(DescribeFpgaImagesInput))
+    client.describe_fpga_images(_request(DescribeFpgaImagesInputDict))
+    client.describe_host_reservation_offerings()
+    client.describe_host_reservation_offerings(
+        **_request(DescribeHostReservationOfferingsInputDict)
+    )
+    client.describe_host_reservation_offerings(
+        _request(DescribeHostReservationOfferingsInput)
+    )
+    client.describe_host_reservation_offerings(
+        _request(DescribeHostReservationOfferingsInputDict)
+    )
+    client.describe_host_reservations()
+    client.describe_host_reservations(**_request(DescribeHostReservationsInputDict))
+    client.describe_host_reservations(_request(DescribeHostReservationsInput))
+    client.describe_host_reservations(_request(DescribeHostReservationsInputDict))
+    client.describe_hosts()
+    client.describe_hosts(**_request(DescribeHostsInputDict))
+    client.describe_hosts(_request(DescribeHostsInput))
+    client.describe_hosts(_request(DescribeHostsInputDict))
+    client.describe_iam_instance_profile_associations()
+    client.describe_iam_instance_profile_associations(
+        **_request(DescribeIamInstanceProfileAssociationsInputDict)
+    )
+    client.describe_iam_instance_profile_associations(
+        _request(DescribeIamInstanceProfileAssociationsInput)
+    )
+    client.describe_iam_instance_profile_associations(
+        _request(DescribeIamInstanceProfileAssociationsInputDict)
+    )
+    client.describe_identity_id_format(principal_arn=_)
+    client.describe_identity_id_format(**_request(DescribeIdentityIdFormatInputDict))
+    client.describe_identity_id_format(_request(DescribeIdentityIdFormatInput))
+    client.describe_identity_id_format(_request(DescribeIdentityIdFormatInputDict))
+    client.describe_id_format()
+    client.describe_id_format(**_request(DescribeIdFormatInputDict))
+    client.describe_id_format(_request(DescribeIdFormatInput))
+    client.describe_id_format(_request(DescribeIdFormatInputDict))
+    client.describe_image_attribute(attribute=_, image_id=_)
+    client.describe_image_attribute(**_request(DescribeImageAttributeInputDict))
+    client.describe_image_attribute(_request(DescribeImageAttributeInput))
+    client.describe_image_attribute(_request(DescribeImageAttributeInputDict))
+    client.describe_image_references(image_ids=_)
+    client.describe_image_references(**_request(DescribeImageReferencesInputDict))
+    client.describe_image_references(_request(DescribeImageReferencesInput))
+    client.describe_image_references(_request(DescribeImageReferencesInputDict))
+    client.describe_images()
+    client.describe_images(**_request(DescribeImagesInputDict))
+    client.describe_images(_request(DescribeImagesInput))
+    client.describe_images(_request(DescribeImagesInputDict))
+    client.describe_image_usage_report_entries()
+    client.describe_image_usage_report_entries(
+        **_request(DescribeImageUsageReportEntriesInputDict)
+    )
+    client.describe_image_usage_report_entries(
+        _request(DescribeImageUsageReportEntriesInput)
+    )
+    client.describe_image_usage_report_entries(
+        _request(DescribeImageUsageReportEntriesInputDict)
+    )
+    client.describe_image_usage_reports()
+    client.describe_image_usage_reports(**_request(DescribeImageUsageReportsInputDict))
+    client.describe_image_usage_reports(_request(DescribeImageUsageReportsInput))
+    client.describe_image_usage_reports(_request(DescribeImageUsageReportsInputDict))
+    client.describe_import_image_tasks()
+    client.describe_import_image_tasks(**_request(DescribeImportImageTasksInputDict))
+    client.describe_import_image_tasks(_request(DescribeImportImageTasksInput))
+    client.describe_import_image_tasks(_request(DescribeImportImageTasksInputDict))
+    client.describe_import_snapshot_tasks()
+    client.describe_import_snapshot_tasks(
+        **_request(DescribeImportSnapshotTasksInputDict)
+    )
+    client.describe_import_snapshot_tasks(_request(DescribeImportSnapshotTasksInput))
+    client.describe_import_snapshot_tasks(
+        _request(DescribeImportSnapshotTasksInputDict)
+    )
+    client.describe_instance_attribute(instance_id=_, attribute=_)
+    client.describe_instance_attribute(**_request(DescribeInstanceAttributeInputDict))
+    client.describe_instance_attribute(_request(DescribeInstanceAttributeInput))
+    client.describe_instance_attribute(_request(DescribeInstanceAttributeInputDict))
+    client.describe_instance_connect_endpoints()
+    client.describe_instance_connect_endpoints(
+        **_request(DescribeInstanceConnectEndpointsInputDict)
+    )
+    client.describe_instance_connect_endpoints(
+        _request(DescribeInstanceConnectEndpointsInput)
+    )
+    client.describe_instance_connect_endpoints(
+        _request(DescribeInstanceConnectEndpointsInputDict)
+    )
+    client.describe_instance_credit_specifications()
+    client.describe_instance_credit_specifications(
+        **_request(DescribeInstanceCreditSpecificationsInputDict)
+    )
+    client.describe_instance_credit_specifications(
+        _request(DescribeInstanceCreditSpecificationsInput)
+    )
+    client.describe_instance_credit_specifications(
+        _request(DescribeInstanceCreditSpecificationsInputDict)
+    )
+    client.describe_instance_event_notification_attributes()
+    client.describe_instance_event_notification_attributes(
+        **_request(DescribeInstanceEventNotificationAttributesInputDict)
+    )
+    client.describe_instance_event_notification_attributes(
+        _request(DescribeInstanceEventNotificationAttributesInput)
+    )
+    client.describe_instance_event_notification_attributes(
+        _request(DescribeInstanceEventNotificationAttributesInputDict)
+    )
+    client.describe_instance_event_windows()
+    client.describe_instance_event_windows(
+        **_request(DescribeInstanceEventWindowsInputDict)
+    )
+    client.describe_instance_event_windows(_request(DescribeInstanceEventWindowsInput))
+    client.describe_instance_event_windows(
+        _request(DescribeInstanceEventWindowsInputDict)
+    )
+    client.describe_instance_image_metadata()
+    client.describe_instance_image_metadata(
+        **_request(DescribeInstanceImageMetadataInputDict)
+    )
+    client.describe_instance_image_metadata(
+        _request(DescribeInstanceImageMetadataInput)
+    )
+    client.describe_instance_image_metadata(
+        _request(DescribeInstanceImageMetadataInputDict)
+    )
+    client.describe_instances()
+    client.describe_instances(**_request(DescribeInstancesInputDict))
+    client.describe_instances(_request(DescribeInstancesInput))
+    client.describe_instances(_request(DescribeInstancesInputDict))
+    client.describe_instance_sql_ha_history_states()
+    client.describe_instance_sql_ha_history_states(
+        **_request(DescribeInstanceSqlHaHistoryStatesInputDict)
+    )
+    client.describe_instance_sql_ha_history_states(
+        _request(DescribeInstanceSqlHaHistoryStatesInput)
+    )
+    client.describe_instance_sql_ha_history_states(
+        _request(DescribeInstanceSqlHaHistoryStatesInputDict)
+    )
+    client.describe_instance_sql_ha_states()
+    client.describe_instance_sql_ha_states(
+        **_request(DescribeInstanceSqlHaStatesInputDict)
+    )
+    client.describe_instance_sql_ha_states(_request(DescribeInstanceSqlHaStatesInput))
+    client.describe_instance_sql_ha_states(
+        _request(DescribeInstanceSqlHaStatesInputDict)
+    )
+    client.describe_instance_status()
+    client.describe_instance_status(**_request(DescribeInstanceStatusInputDict))
+    client.describe_instance_status(_request(DescribeInstanceStatusInput))
+    client.describe_instance_status(_request(DescribeInstanceStatusInputDict))
+    client.describe_instance_topology()
+    client.describe_instance_topology(**_request(DescribeInstanceTopologyInputDict))
+    client.describe_instance_topology(_request(DescribeInstanceTopologyInput))
+    client.describe_instance_topology(_request(DescribeInstanceTopologyInputDict))
+    client.describe_instance_type_offerings()
+    client.describe_instance_type_offerings(
+        **_request(DescribeInstanceTypeOfferingsInputDict)
+    )
+    client.describe_instance_type_offerings(
+        _request(DescribeInstanceTypeOfferingsInput)
+    )
+    client.describe_instance_type_offerings(
+        _request(DescribeInstanceTypeOfferingsInputDict)
+    )
+    client.describe_instance_types()
+    client.describe_instance_types(**_request(DescribeInstanceTypesInputDict))
+    client.describe_instance_types(_request(DescribeInstanceTypesInput))
+    client.describe_instance_types(_request(DescribeInstanceTypesInputDict))
+    client.describe_internet_gateways()
+    client.describe_internet_gateways(**_request(DescribeInternetGatewaysInputDict))
+    client.describe_internet_gateways(_request(DescribeInternetGatewaysInput))
+    client.describe_internet_gateways(_request(DescribeInternetGatewaysInputDict))
+    client.describe_ipam_byoasn()
+    client.describe_ipam_byoasn(**_request(DescribeIpamByoasnInputDict))
+    client.describe_ipam_byoasn(_request(DescribeIpamByoasnInput))
+    client.describe_ipam_byoasn(_request(DescribeIpamByoasnInputDict))
+    client.describe_ipam_external_resource_verification_tokens()
+    client.describe_ipam_external_resource_verification_tokens(
+        **_request(DescribeIpamExternalResourceVerificationTokensInputDict)
+    )
+    client.describe_ipam_external_resource_verification_tokens(
+        _request(DescribeIpamExternalResourceVerificationTokensInput)
+    )
+    client.describe_ipam_external_resource_verification_tokens(
+        _request(DescribeIpamExternalResourceVerificationTokensInputDict)
+    )
+    client.describe_ipam_internet_registry_associations()
+    client.describe_ipam_internet_registry_associations(
+        **_request(DescribeIpamInternetRegistryAssociationsInputDict)
+    )
+    client.describe_ipam_internet_registry_associations(
+        _request(DescribeIpamInternetRegistryAssociationsInput)
+    )
+    client.describe_ipam_internet_registry_associations(
+        _request(DescribeIpamInternetRegistryAssociationsInputDict)
+    )
+    client.describe_ipam_policies()
+    client.describe_ipam_policies(**_request(DescribeIpamPoliciesInputDict))
+    client.describe_ipam_policies(_request(DescribeIpamPoliciesInput))
+    client.describe_ipam_policies(_request(DescribeIpamPoliciesInputDict))
+    client.describe_ipam_pool_allocations()
+    client.describe_ipam_pool_allocations(
+        **_request(DescribeIpamPoolAllocationsInputDict)
+    )
+    client.describe_ipam_pool_allocations(_request(DescribeIpamPoolAllocationsInput))
+    client.describe_ipam_pool_allocations(
+        _request(DescribeIpamPoolAllocationsInputDict)
+    )
+    client.describe_ipam_pools()
+    client.describe_ipam_pools(**_request(DescribeIpamPoolsInputDict))
+    client.describe_ipam_pools(_request(DescribeIpamPoolsInput))
+    client.describe_ipam_pools(_request(DescribeIpamPoolsInputDict))
+    client.describe_ipam_prefix_list_resolvers()
+    client.describe_ipam_prefix_list_resolvers(
+        **_request(DescribeIpamPrefixListResolversInputDict)
+    )
+    client.describe_ipam_prefix_list_resolvers(
+        _request(DescribeIpamPrefixListResolversInput)
+    )
+    client.describe_ipam_prefix_list_resolvers(
+        _request(DescribeIpamPrefixListResolversInputDict)
+    )
+    client.describe_ipam_prefix_list_resolver_targets()
+    client.describe_ipam_prefix_list_resolver_targets(
+        **_request(DescribeIpamPrefixListResolverTargetsInputDict)
+    )
+    client.describe_ipam_prefix_list_resolver_targets(
+        _request(DescribeIpamPrefixListResolverTargetsInput)
+    )
+    client.describe_ipam_prefix_list_resolver_targets(
+        _request(DescribeIpamPrefixListResolverTargetsInputDict)
+    )
+    client.describe_ipam_resource_discoveries()
+    client.describe_ipam_resource_discoveries(
+        **_request(DescribeIpamResourceDiscoveriesInputDict)
+    )
+    client.describe_ipam_resource_discoveries(
+        _request(DescribeIpamResourceDiscoveriesInput)
+    )
+    client.describe_ipam_resource_discoveries(
+        _request(DescribeIpamResourceDiscoveriesInputDict)
+    )
+    client.describe_ipam_resource_discovery_associations()
+    client.describe_ipam_resource_discovery_associations(
+        **_request(DescribeIpamResourceDiscoveryAssociationsInputDict)
+    )
+    client.describe_ipam_resource_discovery_associations(
+        _request(DescribeIpamResourceDiscoveryAssociationsInput)
+    )
+    client.describe_ipam_resource_discovery_associations(
+        _request(DescribeIpamResourceDiscoveryAssociationsInputDict)
+    )
+    client.describe_ipams()
+    client.describe_ipams(**_request(DescribeIpamsInputDict))
+    client.describe_ipams(_request(DescribeIpamsInput))
+    client.describe_ipams(_request(DescribeIpamsInputDict))
+    client.describe_ipam_scopes()
+    client.describe_ipam_scopes(**_request(DescribeIpamScopesInputDict))
+    client.describe_ipam_scopes(_request(DescribeIpamScopesInput))
+    client.describe_ipam_scopes(_request(DescribeIpamScopesInputDict))
+    client.describe_ipv6_pools()
+    client.describe_ipv6_pools(**_request(DescribeIpv6PoolsInputDict))
+    client.describe_ipv6_pools(_request(DescribeIpv6PoolsInput))
+    client.describe_ipv6_pools(_request(DescribeIpv6PoolsInputDict))
+    client.describe_key_pairs()
+    client.describe_key_pairs(**_request(DescribeKeyPairsInputDict))
+    client.describe_key_pairs(_request(DescribeKeyPairsInput))
+    client.describe_key_pairs(_request(DescribeKeyPairsInputDict))
+    client.describe_launch_templates()
+    client.describe_launch_templates(**_request(DescribeLaunchTemplatesInputDict))
+    client.describe_launch_templates(_request(DescribeLaunchTemplatesInput))
+    client.describe_launch_templates(_request(DescribeLaunchTemplatesInputDict))
+    client.describe_launch_template_versions()
+    client.describe_launch_template_versions(
+        **_request(DescribeLaunchTemplateVersionsInputDict)
+    )
+    client.describe_launch_template_versions(
+        _request(DescribeLaunchTemplateVersionsInput)
+    )
+    client.describe_launch_template_versions(
+        _request(DescribeLaunchTemplateVersionsInputDict)
+    )
+    client.describe_local_gateway_route_tables()
+    client.describe_local_gateway_route_tables(
+        **_request(DescribeLocalGatewayRouteTablesInputDict)
+    )
+    client.describe_local_gateway_route_tables(
+        _request(DescribeLocalGatewayRouteTablesInput)
+    )
+    client.describe_local_gateway_route_tables(
+        _request(DescribeLocalGatewayRouteTablesInputDict)
+    )
+    client.describe_local_gateway_route_table_virtual_interface_group_associations()
+    client.describe_local_gateway_route_table_virtual_interface_group_associations(
+        **_request(
+            DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsInputDict
+        )
+    )
+    client.describe_local_gateway_route_table_virtual_interface_group_associations(
+        _request(DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsInput)
+    )
+    client.describe_local_gateway_route_table_virtual_interface_group_associations(
+        _request(
+            DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsInputDict
+        )
+    )
+    client.describe_local_gateway_route_table_vpc_associations()
+    client.describe_local_gateway_route_table_vpc_associations(
+        **_request(DescribeLocalGatewayRouteTableVpcAssociationsInputDict)
+    )
+    client.describe_local_gateway_route_table_vpc_associations(
+        _request(DescribeLocalGatewayRouteTableVpcAssociationsInput)
+    )
+    client.describe_local_gateway_route_table_vpc_associations(
+        _request(DescribeLocalGatewayRouteTableVpcAssociationsInputDict)
+    )
+    client.describe_local_gateways()
+    client.describe_local_gateways(**_request(DescribeLocalGatewaysInputDict))
+    client.describe_local_gateways(_request(DescribeLocalGatewaysInput))
+    client.describe_local_gateways(_request(DescribeLocalGatewaysInputDict))
+    client.describe_local_gateway_virtual_interface_groups()
+    client.describe_local_gateway_virtual_interface_groups(
+        **_request(DescribeLocalGatewayVirtualInterfaceGroupsInputDict)
+    )
+    client.describe_local_gateway_virtual_interface_groups(
+        _request(DescribeLocalGatewayVirtualInterfaceGroupsInput)
+    )
+    client.describe_local_gateway_virtual_interface_groups(
+        _request(DescribeLocalGatewayVirtualInterfaceGroupsInputDict)
+    )
+    client.describe_local_gateway_virtual_interfaces()
+    client.describe_local_gateway_virtual_interfaces(
+        **_request(DescribeLocalGatewayVirtualInterfacesInputDict)
+    )
+    client.describe_local_gateway_virtual_interfaces(
+        _request(DescribeLocalGatewayVirtualInterfacesInput)
+    )
+    client.describe_local_gateway_virtual_interfaces(
+        _request(DescribeLocalGatewayVirtualInterfacesInputDict)
+    )
+    client.describe_locked_snapshots()
+    client.describe_locked_snapshots(**_request(DescribeLockedSnapshotsInputDict))
+    client.describe_locked_snapshots(_request(DescribeLockedSnapshotsInput))
+    client.describe_locked_snapshots(_request(DescribeLockedSnapshotsInputDict))
+    client.describe_mac_hosts()
+    client.describe_mac_hosts(**_request(DescribeMacHostsInputDict))
+    client.describe_mac_hosts(_request(DescribeMacHostsInput))
+    client.describe_mac_hosts(_request(DescribeMacHostsInputDict))
+    client.describe_mac_modification_tasks()
+    client.describe_mac_modification_tasks(
+        **_request(DescribeMacModificationTasksInputDict)
+    )
+    client.describe_mac_modification_tasks(_request(DescribeMacModificationTasksInput))
+    client.describe_mac_modification_tasks(
+        _request(DescribeMacModificationTasksInputDict)
+    )
+    client.describe_managed_prefix_lists()
+    client.describe_managed_prefix_lists(
+        **_request(DescribeManagedPrefixListsInputDict)
+    )
+    client.describe_managed_prefix_lists(_request(DescribeManagedPrefixListsInput))
+    client.describe_managed_prefix_lists(_request(DescribeManagedPrefixListsInputDict))
+    client.describe_moving_addresses()
+    client.describe_moving_addresses(**_request(DescribeMovingAddressesInputDict))
+    client.describe_moving_addresses(_request(DescribeMovingAddressesInput))
+    client.describe_moving_addresses(_request(DescribeMovingAddressesInputDict))
+    client.describe_nat_gateways()
+    client.describe_nat_gateways(**_request(DescribeNatGatewaysInputDict))
+    client.describe_nat_gateways(_request(DescribeNatGatewaysInput))
+    client.describe_nat_gateways(_request(DescribeNatGatewaysInputDict))
+    client.describe_network_acls()
+    client.describe_network_acls(**_request(DescribeNetworkAclsInputDict))
+    client.describe_network_acls(_request(DescribeNetworkAclsInput))
+    client.describe_network_acls(_request(DescribeNetworkAclsInputDict))
+    client.describe_network_insights_access_scope_analyses()
+    client.describe_network_insights_access_scope_analyses(
+        **_request(DescribeNetworkInsightsAccessScopeAnalysesInputDict)
+    )
+    client.describe_network_insights_access_scope_analyses(
+        _request(DescribeNetworkInsightsAccessScopeAnalysesInput)
+    )
+    client.describe_network_insights_access_scope_analyses(
+        _request(DescribeNetworkInsightsAccessScopeAnalysesInputDict)
+    )
+    client.describe_network_insights_access_scopes()
+    client.describe_network_insights_access_scopes(
+        **_request(DescribeNetworkInsightsAccessScopesInputDict)
+    )
+    client.describe_network_insights_access_scopes(
+        _request(DescribeNetworkInsightsAccessScopesInput)
+    )
+    client.describe_network_insights_access_scopes(
+        _request(DescribeNetworkInsightsAccessScopesInputDict)
+    )
+    client.describe_network_insights_analyses()
+    client.describe_network_insights_analyses(
+        **_request(DescribeNetworkInsightsAnalysesInputDict)
+    )
+    client.describe_network_insights_analyses(
+        _request(DescribeNetworkInsightsAnalysesInput)
+    )
+    client.describe_network_insights_analyses(
+        _request(DescribeNetworkInsightsAnalysesInputDict)
+    )
+    client.describe_network_insights_paths()
+    client.describe_network_insights_paths(
+        **_request(DescribeNetworkInsightsPathsInputDict)
+    )
+    client.describe_network_insights_paths(_request(DescribeNetworkInsightsPathsInput))
+    client.describe_network_insights_paths(
+        _request(DescribeNetworkInsightsPathsInputDict)
+    )
+    client.describe_network_interface_attribute(network_interface_id=_)
+    client.describe_network_interface_attribute(
+        **_request(DescribeNetworkInterfaceAttributeInputDict)
+    )
+    client.describe_network_interface_attribute(
+        _request(DescribeNetworkInterfaceAttributeInput)
+    )
+    client.describe_network_interface_attribute(
+        _request(DescribeNetworkInterfaceAttributeInputDict)
+    )
+    client.describe_network_interface_permissions()
+    client.describe_network_interface_permissions(
+        **_request(DescribeNetworkInterfacePermissionsInputDict)
+    )
+    client.describe_network_interface_permissions(
+        _request(DescribeNetworkInterfacePermissionsInput)
+    )
+    client.describe_network_interface_permissions(
+        _request(DescribeNetworkInterfacePermissionsInputDict)
+    )
+    client.describe_network_interfaces()
+    client.describe_network_interfaces(**_request(DescribeNetworkInterfacesInputDict))
+    client.describe_network_interfaces(_request(DescribeNetworkInterfacesInput))
+    client.describe_network_interfaces(_request(DescribeNetworkInterfacesInputDict))
+    client.describe_outpost_lags()
+    client.describe_outpost_lags(**_request(DescribeOutpostLagsInputDict))
+    client.describe_outpost_lags(_request(DescribeOutpostLagsInput))
+    client.describe_outpost_lags(_request(DescribeOutpostLagsInputDict))
+    client.describe_placement_groups()
+    client.describe_placement_groups(**_request(DescribePlacementGroupsInputDict))
+    client.describe_placement_groups(_request(DescribePlacementGroupsInput))
+    client.describe_placement_groups(_request(DescribePlacementGroupsInputDict))
+    client.describe_prefix_lists()
+    client.describe_prefix_lists(**_request(DescribePrefixListsInputDict))
+    client.describe_prefix_lists(_request(DescribePrefixListsInput))
+    client.describe_prefix_lists(_request(DescribePrefixListsInputDict))
+    client.describe_principal_id_format()
+    client.describe_principal_id_format(**_request(DescribePrincipalIdFormatInputDict))
+    client.describe_principal_id_format(_request(DescribePrincipalIdFormatInput))
+    client.describe_principal_id_format(_request(DescribePrincipalIdFormatInputDict))
+    client.describe_public_ipv4_pools()
+    client.describe_public_ipv4_pools(**_request(DescribePublicIpv4PoolsInputDict))
+    client.describe_public_ipv4_pools(_request(DescribePublicIpv4PoolsInput))
+    client.describe_public_ipv4_pools(_request(DescribePublicIpv4PoolsInputDict))
+    client.describe_regions()
+    client.describe_regions(**_request(DescribeRegionsInputDict))
+    client.describe_regions(_request(DescribeRegionsInput))
+    client.describe_regions(_request(DescribeRegionsInputDict))
+    client.describe_replace_root_volume_tasks()
+    client.describe_replace_root_volume_tasks(
+        **_request(DescribeReplaceRootVolumeTasksInputDict)
+    )
+    client.describe_replace_root_volume_tasks(
+        _request(DescribeReplaceRootVolumeTasksInput)
+    )
+    client.describe_replace_root_volume_tasks(
+        _request(DescribeReplaceRootVolumeTasksInputDict)
+    )
+    client.describe_reserved_instances()
+    client.describe_reserved_instances(**_request(DescribeReservedInstancesInputDict))
+    client.describe_reserved_instances(_request(DescribeReservedInstancesInput))
+    client.describe_reserved_instances(_request(DescribeReservedInstancesInputDict))
+    client.describe_reserved_instances_listings()
+    client.describe_reserved_instances_listings(
+        **_request(DescribeReservedInstancesListingsInputDict)
+    )
+    client.describe_reserved_instances_listings(
+        _request(DescribeReservedInstancesListingsInput)
+    )
+    client.describe_reserved_instances_listings(
+        _request(DescribeReservedInstancesListingsInputDict)
+    )
+    client.describe_reserved_instances_modifications()
+    client.describe_reserved_instances_modifications(
+        **_request(DescribeReservedInstancesModificationsInputDict)
+    )
+    client.describe_reserved_instances_modifications(
+        _request(DescribeReservedInstancesModificationsInput)
+    )
+    client.describe_reserved_instances_modifications(
+        _request(DescribeReservedInstancesModificationsInputDict)
+    )
+    client.describe_reserved_instances_offerings()
+    client.describe_reserved_instances_offerings(
+        **_request(DescribeReservedInstancesOfferingsInputDict)
+    )
+    client.describe_reserved_instances_offerings(
+        _request(DescribeReservedInstancesOfferingsInput)
+    )
+    client.describe_reserved_instances_offerings(
+        _request(DescribeReservedInstancesOfferingsInputDict)
+    )
+    client.describe_route_server_endpoints()
+    client.describe_route_server_endpoints(
+        **_request(DescribeRouteServerEndpointsInputDict)
+    )
+    client.describe_route_server_endpoints(_request(DescribeRouteServerEndpointsInput))
+    client.describe_route_server_endpoints(
+        _request(DescribeRouteServerEndpointsInputDict)
+    )
+    client.describe_route_server_peers()
+    client.describe_route_server_peers(**_request(DescribeRouteServerPeersInputDict))
+    client.describe_route_server_peers(_request(DescribeRouteServerPeersInput))
+    client.describe_route_server_peers(_request(DescribeRouteServerPeersInputDict))
+    client.describe_route_servers()
+    client.describe_route_servers(**_request(DescribeRouteServersInputDict))
+    client.describe_route_servers(_request(DescribeRouteServersInput))
+    client.describe_route_servers(_request(DescribeRouteServersInputDict))
+    client.describe_route_tables()
+    client.describe_route_tables(**_request(DescribeRouteTablesInputDict))
+    client.describe_route_tables(_request(DescribeRouteTablesInput))
+    client.describe_route_tables(_request(DescribeRouteTablesInputDict))
+    client.describe_scheduled_instance_availability(
+        first_slot_start_time_range=_, recurrence=_
+    )
+    client.describe_scheduled_instance_availability(
+        **_request(DescribeScheduledInstanceAvailabilityInputDict)
+    )
+    client.describe_scheduled_instance_availability(
+        _request(DescribeScheduledInstanceAvailabilityInput)
+    )
+    client.describe_scheduled_instance_availability(
+        _request(DescribeScheduledInstanceAvailabilityInputDict)
+    )
+    client.describe_scheduled_instances()
+    client.describe_scheduled_instances(**_request(DescribeScheduledInstancesInputDict))
+    client.describe_scheduled_instances(_request(DescribeScheduledInstancesInput))
+    client.describe_scheduled_instances(_request(DescribeScheduledInstancesInputDict))
+    client.describe_secondary_interfaces()
+    client.describe_secondary_interfaces(
+        **_request(DescribeSecondaryInterfacesInputDict)
+    )
+    client.describe_secondary_interfaces(_request(DescribeSecondaryInterfacesInput))
+    client.describe_secondary_interfaces(_request(DescribeSecondaryInterfacesInputDict))
+    client.describe_secondary_networks()
+    client.describe_secondary_networks(**_request(DescribeSecondaryNetworksInputDict))
+    client.describe_secondary_networks(_request(DescribeSecondaryNetworksInput))
+    client.describe_secondary_networks(_request(DescribeSecondaryNetworksInputDict))
+    client.describe_secondary_subnets()
+    client.describe_secondary_subnets(**_request(DescribeSecondarySubnetsInputDict))
+    client.describe_secondary_subnets(_request(DescribeSecondarySubnetsInput))
+    client.describe_secondary_subnets(_request(DescribeSecondarySubnetsInputDict))
+    client.describe_security_group_references(group_id=_)
+    client.describe_security_group_references(
+        **_request(DescribeSecurityGroupReferencesInputDict)
+    )
+    client.describe_security_group_references(
+        _request(DescribeSecurityGroupReferencesInput)
+    )
+    client.describe_security_group_references(
+        _request(DescribeSecurityGroupReferencesInputDict)
+    )
+    client.describe_security_group_rules()
+    client.describe_security_group_rules(
+        **_request(DescribeSecurityGroupRulesInputDict)
+    )
+    client.describe_security_group_rules(_request(DescribeSecurityGroupRulesInput))
+    client.describe_security_group_rules(_request(DescribeSecurityGroupRulesInputDict))
+    client.describe_security_groups()
+    client.describe_security_groups(**_request(DescribeSecurityGroupsInputDict))
+    client.describe_security_groups(_request(DescribeSecurityGroupsInput))
+    client.describe_security_groups(_request(DescribeSecurityGroupsInputDict))
+    client.describe_security_group_vpc_associations()
+    client.describe_security_group_vpc_associations(
+        **_request(DescribeSecurityGroupVpcAssociationsInputDict)
+    )
+    client.describe_security_group_vpc_associations(
+        _request(DescribeSecurityGroupVpcAssociationsInput)
+    )
+    client.describe_security_group_vpc_associations(
+        _request(DescribeSecurityGroupVpcAssociationsInputDict)
+    )
+    client.describe_service_link_virtual_interfaces()
+    client.describe_service_link_virtual_interfaces(
+        **_request(DescribeServiceLinkVirtualInterfacesInputDict)
+    )
+    client.describe_service_link_virtual_interfaces(
+        _request(DescribeServiceLinkVirtualInterfacesInput)
+    )
+    client.describe_service_link_virtual_interfaces(
+        _request(DescribeServiceLinkVirtualInterfacesInputDict)
+    )
+    client.describe_snapshot_attribute(attribute=_, snapshot_id=_)
+    client.describe_snapshot_attribute(**_request(DescribeSnapshotAttributeInputDict))
+    client.describe_snapshot_attribute(_request(DescribeSnapshotAttributeInput))
+    client.describe_snapshot_attribute(_request(DescribeSnapshotAttributeInputDict))
+    client.describe_snapshots()
+    client.describe_snapshots(**_request(DescribeSnapshotsInputDict))
+    client.describe_snapshots(_request(DescribeSnapshotsInput))
+    client.describe_snapshots(_request(DescribeSnapshotsInputDict))
+    client.describe_snapshot_tier_status()
+    client.describe_snapshot_tier_status(
+        **_request(DescribeSnapshotTierStatusInputDict)
+    )
+    client.describe_snapshot_tier_status(_request(DescribeSnapshotTierStatusInput))
+    client.describe_snapshot_tier_status(_request(DescribeSnapshotTierStatusInputDict))
+    client.describe_spot_datafeed_subscription()
+    client.describe_spot_datafeed_subscription(
+        **_request(DescribeSpotDatafeedSubscriptionInputDict)
+    )
+    client.describe_spot_datafeed_subscription(
+        _request(DescribeSpotDatafeedSubscriptionInput)
+    )
+    client.describe_spot_datafeed_subscription(
+        _request(DescribeSpotDatafeedSubscriptionInputDict)
+    )
+    client.describe_spot_fleet_instances(spot_fleet_request_id=_)
+    client.describe_spot_fleet_instances(
+        **_request(DescribeSpotFleetInstancesInputDict)
+    )
+    client.describe_spot_fleet_instances(_request(DescribeSpotFleetInstancesInput))
+    client.describe_spot_fleet_instances(_request(DescribeSpotFleetInstancesInputDict))
+    client.describe_spot_fleet_request_history(spot_fleet_request_id=_, start_time=_)
+    client.describe_spot_fleet_request_history(
+        **_request(DescribeSpotFleetRequestHistoryInputDict)
+    )
+    client.describe_spot_fleet_request_history(
+        _request(DescribeSpotFleetRequestHistoryInput)
+    )
+    client.describe_spot_fleet_request_history(
+        _request(DescribeSpotFleetRequestHistoryInputDict)
+    )
+    client.describe_spot_fleet_requests()
+    client.describe_spot_fleet_requests(**_request(DescribeSpotFleetRequestsInputDict))
+    client.describe_spot_fleet_requests(_request(DescribeSpotFleetRequestsInput))
+    client.describe_spot_fleet_requests(_request(DescribeSpotFleetRequestsInputDict))
+    client.describe_spot_instance_requests()
+    client.describe_spot_instance_requests(
+        **_request(DescribeSpotInstanceRequestsInputDict)
+    )
+    client.describe_spot_instance_requests(_request(DescribeSpotInstanceRequestsInput))
+    client.describe_spot_instance_requests(
+        _request(DescribeSpotInstanceRequestsInputDict)
+    )
+    client.describe_spot_price_history()
+    client.describe_spot_price_history(**_request(DescribeSpotPriceHistoryInputDict))
+    client.describe_spot_price_history(_request(DescribeSpotPriceHistoryInput))
+    client.describe_spot_price_history(_request(DescribeSpotPriceHistoryInputDict))
+    client.describe_stale_security_groups(vpc_id=_)
+    client.describe_stale_security_groups(
+        **_request(DescribeStaleSecurityGroupsInputDict)
+    )
+    client.describe_stale_security_groups(_request(DescribeStaleSecurityGroupsInput))
+    client.describe_stale_security_groups(
+        _request(DescribeStaleSecurityGroupsInputDict)
+    )
+    client.describe_store_image_tasks()
+    client.describe_store_image_tasks(**_request(DescribeStoreImageTasksInputDict))
+    client.describe_store_image_tasks(_request(DescribeStoreImageTasksInput))
+    client.describe_store_image_tasks(_request(DescribeStoreImageTasksInputDict))
+    client.describe_subnets()
+    client.describe_subnets(**_request(DescribeSubnetsInputDict))
+    client.describe_subnets(_request(DescribeSubnetsInput))
+    client.describe_subnets(_request(DescribeSubnetsInputDict))
+    client.describe_tags()
+    client.describe_tags(**_request(DescribeTagsInputDict))
+    client.describe_tags(_request(DescribeTagsInput))
+    client.describe_tags(_request(DescribeTagsInputDict))
+    client.describe_traffic_mirror_filter_rules()
+    client.describe_traffic_mirror_filter_rules(
+        **_request(DescribeTrafficMirrorFilterRulesInputDict)
+    )
+    client.describe_traffic_mirror_filter_rules(
+        _request(DescribeTrafficMirrorFilterRulesInput)
+    )
+    client.describe_traffic_mirror_filter_rules(
+        _request(DescribeTrafficMirrorFilterRulesInputDict)
+    )
+    client.describe_traffic_mirror_filters()
+    client.describe_traffic_mirror_filters(
+        **_request(DescribeTrafficMirrorFiltersInputDict)
+    )
+    client.describe_traffic_mirror_filters(_request(DescribeTrafficMirrorFiltersInput))
+    client.describe_traffic_mirror_filters(
+        _request(DescribeTrafficMirrorFiltersInputDict)
+    )
+    client.describe_traffic_mirror_sessions()
+    client.describe_traffic_mirror_sessions(
+        **_request(DescribeTrafficMirrorSessionsInputDict)
+    )
+    client.describe_traffic_mirror_sessions(
+        _request(DescribeTrafficMirrorSessionsInput)
+    )
+    client.describe_traffic_mirror_sessions(
+        _request(DescribeTrafficMirrorSessionsInputDict)
+    )
+    client.describe_traffic_mirror_targets()
+    client.describe_traffic_mirror_targets(
+        **_request(DescribeTrafficMirrorTargetsInputDict)
+    )
+    client.describe_traffic_mirror_targets(_request(DescribeTrafficMirrorTargetsInput))
+    client.describe_traffic_mirror_targets(
+        _request(DescribeTrafficMirrorTargetsInputDict)
+    )
+    client.describe_transit_gateway_attachments()
+    client.describe_transit_gateway_attachments(
+        **_request(DescribeTransitGatewayAttachmentsInputDict)
+    )
+    client.describe_transit_gateway_attachments(
+        _request(DescribeTransitGatewayAttachmentsInput)
+    )
+    client.describe_transit_gateway_attachments(
+        _request(DescribeTransitGatewayAttachmentsInputDict)
+    )
+    client.describe_transit_gateway_connect_peers()
+    client.describe_transit_gateway_connect_peers(
+        **_request(DescribeTransitGatewayConnectPeersInputDict)
+    )
+    client.describe_transit_gateway_connect_peers(
+        _request(DescribeTransitGatewayConnectPeersInput)
+    )
+    client.describe_transit_gateway_connect_peers(
+        _request(DescribeTransitGatewayConnectPeersInputDict)
+    )
+    client.describe_transit_gateway_connects()
+    client.describe_transit_gateway_connects(
+        **_request(DescribeTransitGatewayConnectsInputDict)
+    )
+    client.describe_transit_gateway_connects(
+        _request(DescribeTransitGatewayConnectsInput)
+    )
+    client.describe_transit_gateway_connects(
+        _request(DescribeTransitGatewayConnectsInputDict)
+    )
+    client.describe_transit_gateway_metering_policies()
+    client.describe_transit_gateway_metering_policies(
+        **_request(DescribeTransitGatewayMeteringPoliciesInputDict)
+    )
+    client.describe_transit_gateway_metering_policies(
+        _request(DescribeTransitGatewayMeteringPoliciesInput)
+    )
+    client.describe_transit_gateway_metering_policies(
+        _request(DescribeTransitGatewayMeteringPoliciesInputDict)
+    )
+    client.describe_transit_gateway_multicast_domains()
+    client.describe_transit_gateway_multicast_domains(
+        **_request(DescribeTransitGatewayMulticastDomainsInputDict)
+    )
+    client.describe_transit_gateway_multicast_domains(
+        _request(DescribeTransitGatewayMulticastDomainsInput)
+    )
+    client.describe_transit_gateway_multicast_domains(
+        _request(DescribeTransitGatewayMulticastDomainsInputDict)
+    )
+    client.describe_transit_gateway_peering_attachments()
+    client.describe_transit_gateway_peering_attachments(
+        **_request(DescribeTransitGatewayPeeringAttachmentsInputDict)
+    )
+    client.describe_transit_gateway_peering_attachments(
+        _request(DescribeTransitGatewayPeeringAttachmentsInput)
+    )
+    client.describe_transit_gateway_peering_attachments(
+        _request(DescribeTransitGatewayPeeringAttachmentsInputDict)
+    )
+    client.describe_transit_gateway_policy_tables()
+    client.describe_transit_gateway_policy_tables(
+        **_request(DescribeTransitGatewayPolicyTablesInputDict)
+    )
+    client.describe_transit_gateway_policy_tables(
+        _request(DescribeTransitGatewayPolicyTablesInput)
+    )
+    client.describe_transit_gateway_policy_tables(
+        _request(DescribeTransitGatewayPolicyTablesInputDict)
+    )
+    client.describe_transit_gateway_route_table_announcements()
+    client.describe_transit_gateway_route_table_announcements(
+        **_request(DescribeTransitGatewayRouteTableAnnouncementsInputDict)
+    )
+    client.describe_transit_gateway_route_table_announcements(
+        _request(DescribeTransitGatewayRouteTableAnnouncementsInput)
+    )
+    client.describe_transit_gateway_route_table_announcements(
+        _request(DescribeTransitGatewayRouteTableAnnouncementsInputDict)
+    )
+    client.describe_transit_gateway_route_tables()
+    client.describe_transit_gateway_route_tables(
+        **_request(DescribeTransitGatewayRouteTablesInputDict)
+    )
+    client.describe_transit_gateway_route_tables(
+        _request(DescribeTransitGatewayRouteTablesInput)
+    )
+    client.describe_transit_gateway_route_tables(
+        _request(DescribeTransitGatewayRouteTablesInputDict)
+    )
+    client.describe_transit_gateways()
+    client.describe_transit_gateways(**_request(DescribeTransitGatewaysInputDict))
+    client.describe_transit_gateways(_request(DescribeTransitGatewaysInput))
+    client.describe_transit_gateways(_request(DescribeTransitGatewaysInputDict))
+    client.describe_transit_gateway_vpc_attachments()
+    client.describe_transit_gateway_vpc_attachments(
+        **_request(DescribeTransitGatewayVpcAttachmentsInputDict)
+    )
+    client.describe_transit_gateway_vpc_attachments(
+        _request(DescribeTransitGatewayVpcAttachmentsInput)
+    )
+    client.describe_transit_gateway_vpc_attachments(
+        _request(DescribeTransitGatewayVpcAttachmentsInputDict)
+    )
+    client.describe_trunk_interface_associations()
+    client.describe_trunk_interface_associations(
+        **_request(DescribeTrunkInterfaceAssociationsInputDict)
+    )
+    client.describe_trunk_interface_associations(
+        _request(DescribeTrunkInterfaceAssociationsInput)
+    )
+    client.describe_trunk_interface_associations(
+        _request(DescribeTrunkInterfaceAssociationsInputDict)
+    )
+    client.describe_verified_access_endpoints()
+    client.describe_verified_access_endpoints(
+        **_request(DescribeVerifiedAccessEndpointsInputDict)
+    )
+    client.describe_verified_access_endpoints(
+        _request(DescribeVerifiedAccessEndpointsInput)
+    )
+    client.describe_verified_access_endpoints(
+        _request(DescribeVerifiedAccessEndpointsInputDict)
+    )
+    client.describe_verified_access_groups()
+    client.describe_verified_access_groups(
+        **_request(DescribeVerifiedAccessGroupsInputDict)
+    )
+    client.describe_verified_access_groups(_request(DescribeVerifiedAccessGroupsInput))
+    client.describe_verified_access_groups(
+        _request(DescribeVerifiedAccessGroupsInputDict)
+    )
+    client.describe_verified_access_instance_logging_configurations()
+    client.describe_verified_access_instance_logging_configurations(
+        **_request(DescribeVerifiedAccessInstanceLoggingConfigurationsInputDict)
+    )
+    client.describe_verified_access_instance_logging_configurations(
+        _request(DescribeVerifiedAccessInstanceLoggingConfigurationsInput)
+    )
+    client.describe_verified_access_instance_logging_configurations(
+        _request(DescribeVerifiedAccessInstanceLoggingConfigurationsInputDict)
+    )
+    client.describe_verified_access_instances()
+    client.describe_verified_access_instances(
+        **_request(DescribeVerifiedAccessInstancesInputDict)
+    )
+    client.describe_verified_access_instances(
+        _request(DescribeVerifiedAccessInstancesInput)
+    )
+    client.describe_verified_access_instances(
+        _request(DescribeVerifiedAccessInstancesInputDict)
+    )
+    client.describe_verified_access_trust_providers()
+    client.describe_verified_access_trust_providers(
+        **_request(DescribeVerifiedAccessTrustProvidersInputDict)
+    )
+    client.describe_verified_access_trust_providers(
+        _request(DescribeVerifiedAccessTrustProvidersInput)
+    )
+    client.describe_verified_access_trust_providers(
+        _request(DescribeVerifiedAccessTrustProvidersInputDict)
+    )
+    client.describe_volume_attribute(attribute=_, volume_id=_)
+    client.describe_volume_attribute(**_request(DescribeVolumeAttributeInputDict))
+    client.describe_volume_attribute(_request(DescribeVolumeAttributeInput))
+    client.describe_volume_attribute(_request(DescribeVolumeAttributeInputDict))
+    client.describe_volumes()
+    client.describe_volumes(**_request(DescribeVolumesInputDict))
+    client.describe_volumes(_request(DescribeVolumesInput))
+    client.describe_volumes(_request(DescribeVolumesInputDict))
+    client.describe_volumes_modifications()
+    client.describe_volumes_modifications(
+        **_request(DescribeVolumesModificationsInputDict)
+    )
+    client.describe_volumes_modifications(_request(DescribeVolumesModificationsInput))
+    client.describe_volumes_modifications(
+        _request(DescribeVolumesModificationsInputDict)
+    )
+    client.describe_volume_status()
+    client.describe_volume_status(**_request(DescribeVolumeStatusInputDict))
+    client.describe_volume_status(_request(DescribeVolumeStatusInput))
+    client.describe_volume_status(_request(DescribeVolumeStatusInputDict))
+    client.describe_vpc_attribute(attribute=_, vpc_id=_)
+    client.describe_vpc_attribute(**_request(DescribeVpcAttributeInputDict))
+    client.describe_vpc_attribute(_request(DescribeVpcAttributeInput))
+    client.describe_vpc_attribute(_request(DescribeVpcAttributeInputDict))
+    client.describe_vpc_block_public_access_exclusions()
+    client.describe_vpc_block_public_access_exclusions(
+        **_request(DescribeVpcBlockPublicAccessExclusionsInputDict)
+    )
+    client.describe_vpc_block_public_access_exclusions(
+        _request(DescribeVpcBlockPublicAccessExclusionsInput)
+    )
+    client.describe_vpc_block_public_access_exclusions(
+        _request(DescribeVpcBlockPublicAccessExclusionsInputDict)
+    )
+    client.describe_vpc_block_public_access_options()
+    client.describe_vpc_block_public_access_options(
+        **_request(DescribeVpcBlockPublicAccessOptionsInputDict)
+    )
+    client.describe_vpc_block_public_access_options(
+        _request(DescribeVpcBlockPublicAccessOptionsInput)
+    )
+    client.describe_vpc_block_public_access_options(
+        _request(DescribeVpcBlockPublicAccessOptionsInputDict)
+    )
+    client.describe_vpc_classic_link()
+    client.describe_vpc_classic_link(**_request(DescribeVpcClassicLinkInputDict))
+    client.describe_vpc_classic_link(_request(DescribeVpcClassicLinkInput))
+    client.describe_vpc_classic_link(_request(DescribeVpcClassicLinkInputDict))
+    client.describe_vpc_classic_link_dns_support()
+    client.describe_vpc_classic_link_dns_support(
+        **_request(DescribeVpcClassicLinkDnsSupportInputDict)
+    )
+    client.describe_vpc_classic_link_dns_support(
+        _request(DescribeVpcClassicLinkDnsSupportInput)
+    )
+    client.describe_vpc_classic_link_dns_support(
+        _request(DescribeVpcClassicLinkDnsSupportInputDict)
+    )
+    client.describe_vpc_encryption_controls()
+    client.describe_vpc_encryption_controls(
+        **_request(DescribeVpcEncryptionControlsInputDict)
+    )
+    client.describe_vpc_encryption_controls(
+        _request(DescribeVpcEncryptionControlsInput)
+    )
+    client.describe_vpc_encryption_controls(
+        _request(DescribeVpcEncryptionControlsInputDict)
+    )
+    client.describe_vpc_endpoint_associations()
+    client.describe_vpc_endpoint_associations(
+        **_request(DescribeVpcEndpointAssociationsInputDict)
+    )
+    client.describe_vpc_endpoint_associations(
+        _request(DescribeVpcEndpointAssociationsInput)
+    )
+    client.describe_vpc_endpoint_associations(
+        _request(DescribeVpcEndpointAssociationsInputDict)
+    )
+    client.describe_vpc_endpoint_connection_notifications()
+    client.describe_vpc_endpoint_connection_notifications(
+        **_request(DescribeVpcEndpointConnectionNotificationsInputDict)
+    )
+    client.describe_vpc_endpoint_connection_notifications(
+        _request(DescribeVpcEndpointConnectionNotificationsInput)
+    )
+    client.describe_vpc_endpoint_connection_notifications(
+        _request(DescribeVpcEndpointConnectionNotificationsInputDict)
+    )
+    client.describe_vpc_endpoint_connections()
+    client.describe_vpc_endpoint_connections(
+        **_request(DescribeVpcEndpointConnectionsInputDict)
+    )
+    client.describe_vpc_endpoint_connections(
+        _request(DescribeVpcEndpointConnectionsInput)
+    )
+    client.describe_vpc_endpoint_connections(
+        _request(DescribeVpcEndpointConnectionsInputDict)
+    )
+    client.describe_vpc_endpoints()
+    client.describe_vpc_endpoints(**_request(DescribeVpcEndpointsInputDict))
+    client.describe_vpc_endpoints(_request(DescribeVpcEndpointsInput))
+    client.describe_vpc_endpoints(_request(DescribeVpcEndpointsInputDict))
+    client.describe_vpc_endpoint_service_configurations()
+    client.describe_vpc_endpoint_service_configurations(
+        **_request(DescribeVpcEndpointServiceConfigurationsInputDict)
+    )
+    client.describe_vpc_endpoint_service_configurations(
+        _request(DescribeVpcEndpointServiceConfigurationsInput)
+    )
+    client.describe_vpc_endpoint_service_configurations(
+        _request(DescribeVpcEndpointServiceConfigurationsInputDict)
+    )
+    client.describe_vpc_endpoint_service_permissions(service_id=_)
+    client.describe_vpc_endpoint_service_permissions(
+        **_request(DescribeVpcEndpointServicePermissionsInputDict)
+    )
+    client.describe_vpc_endpoint_service_permissions(
+        _request(DescribeVpcEndpointServicePermissionsInput)
+    )
+    client.describe_vpc_endpoint_service_permissions(
+        _request(DescribeVpcEndpointServicePermissionsInputDict)
+    )
+    client.describe_vpc_endpoint_services()
+    client.describe_vpc_endpoint_services(
+        **_request(DescribeVpcEndpointServicesInputDict)
+    )
+    client.describe_vpc_endpoint_services(_request(DescribeVpcEndpointServicesInput))
+    client.describe_vpc_endpoint_services(
+        _request(DescribeVpcEndpointServicesInputDict)
+    )
+    client.describe_vpc_peering_connections()
+    client.describe_vpc_peering_connections(
+        **_request(DescribeVpcPeeringConnectionsInputDict)
+    )
+    client.describe_vpc_peering_connections(
+        _request(DescribeVpcPeeringConnectionsInput)
+    )
+    client.describe_vpc_peering_connections(
+        _request(DescribeVpcPeeringConnectionsInputDict)
+    )
+    client.describe_vpcs()
+    client.describe_vpcs(**_request(DescribeVpcsInputDict))
+    client.describe_vpcs(_request(DescribeVpcsInput))
+    client.describe_vpcs(_request(DescribeVpcsInputDict))
+    client.describe_vpn_concentrators()
+    client.describe_vpn_concentrators(**_request(DescribeVpnConcentratorsInputDict))
+    client.describe_vpn_concentrators(_request(DescribeVpnConcentratorsInput))
+    client.describe_vpn_concentrators(_request(DescribeVpnConcentratorsInputDict))
+    client.describe_vpn_connections()
+    client.describe_vpn_connections(**_request(DescribeVpnConnectionsInputDict))
+    client.describe_vpn_connections(_request(DescribeVpnConnectionsInput))
+    client.describe_vpn_connections(_request(DescribeVpnConnectionsInputDict))
+    client.describe_vpn_gateways()
+    client.describe_vpn_gateways(**_request(DescribeVpnGatewaysInputDict))
+    client.describe_vpn_gateways(_request(DescribeVpnGatewaysInput))
+    client.describe_vpn_gateways(_request(DescribeVpnGatewaysInputDict))
+    client.detach_classic_link_vpc(instance_id=_, vpc_id=_)
+    client.detach_classic_link_vpc(**_request(DetachClassicLinkVpcInputDict))
+    client.detach_classic_link_vpc(_request(DetachClassicLinkVpcInput))
+    client.detach_classic_link_vpc(_request(DetachClassicLinkVpcInputDict))
+    client.detach_image_watermark(image_id=_, watermark_key=_)
+    client.detach_image_watermark(**_request(DetachImageWatermarkInputDict))
+    client.detach_image_watermark(_request(DetachImageWatermarkInput))
+    client.detach_image_watermark(_request(DetachImageWatermarkInputDict))
+    client.detach_internet_gateway(internet_gateway_id=_, vpc_id=_)
+    client.detach_internet_gateway(**_request(DetachInternetGatewayInputDict))
+    client.detach_internet_gateway(_request(DetachInternetGatewayInput))
+    client.detach_internet_gateway(_request(DetachInternetGatewayInputDict))
+    client.detach_network_interface(attachment_id=_)
+    client.detach_network_interface(**_request(DetachNetworkInterfaceInputDict))
+    client.detach_network_interface(_request(DetachNetworkInterfaceInput))
+    client.detach_network_interface(_request(DetachNetworkInterfaceInputDict))
+    client.detach_verified_access_trust_provider(
+        verified_access_instance_id=_, verified_access_trust_provider_id=_
+    )
+    client.detach_verified_access_trust_provider(
+        **_request(DetachVerifiedAccessTrustProviderInputDict)
+    )
+    client.detach_verified_access_trust_provider(
+        _request(DetachVerifiedAccessTrustProviderInput)
+    )
+    client.detach_verified_access_trust_provider(
+        _request(DetachVerifiedAccessTrustProviderInputDict)
+    )
+    client.detach_volume(volume_id=_)
+    client.detach_volume(**_request(DetachVolumeInputDict))
+    client.detach_volume(_request(DetachVolumeInput))
+    client.detach_volume(_request(DetachVolumeInputDict))
+    client.detach_vpn_gateway(vpc_id=_, vpn_gateway_id=_)
+    client.detach_vpn_gateway(**_request(DetachVpnGatewayInputDict))
+    client.detach_vpn_gateway(_request(DetachVpnGatewayInput))
+    client.detach_vpn_gateway(_request(DetachVpnGatewayInputDict))
+    client.disable_address_transfer(allocation_id=_)
+    client.disable_address_transfer(**_request(DisableAddressTransferInputDict))
+    client.disable_address_transfer(_request(DisableAddressTransferInput))
+    client.disable_address_transfer(_request(DisableAddressTransferInputDict))
+    client.disable_allowed_images_settings()
+    client.disable_allowed_images_settings(
+        **_request(DisableAllowedImagesSettingsInputDict)
+    )
+    client.disable_allowed_images_settings(_request(DisableAllowedImagesSettingsInput))
+    client.disable_allowed_images_settings(
+        _request(DisableAllowedImagesSettingsInputDict)
+    )
+    client.disable_application_status_check_suppression()
+    client.disable_application_status_check_suppression(
+        **_request(DisableApplicationStatusCheckSuppressionInputDict)
+    )
+    client.disable_application_status_check_suppression(
+        _request(DisableApplicationStatusCheckSuppressionInput)
+    )
+    client.disable_application_status_check_suppression(
+        _request(DisableApplicationStatusCheckSuppressionInputDict)
+    )
+    client.disable_aws_network_performance_metric_subscription()
+    client.disable_aws_network_performance_metric_subscription(
+        **_request(DisableAwsNetworkPerformanceMetricSubscriptionInputDict)
+    )
+    client.disable_aws_network_performance_metric_subscription(
+        _request(DisableAwsNetworkPerformanceMetricSubscriptionInput)
+    )
+    client.disable_aws_network_performance_metric_subscription(
+        _request(DisableAwsNetworkPerformanceMetricSubscriptionInputDict)
+    )
+    client.disable_capacity_manager()
+    client.disable_capacity_manager(**_request(DisableCapacityManagerInputDict))
+    client.disable_capacity_manager(_request(DisableCapacityManagerInput))
+    client.disable_capacity_manager(_request(DisableCapacityManagerInputDict))
+    client.disable_ebs_encryption_by_default()
+    client.disable_ebs_encryption_by_default(
+        **_request(DisableEbsEncryptionByDefaultInputDict)
+    )
+    client.disable_ebs_encryption_by_default(
+        _request(DisableEbsEncryptionByDefaultInput)
+    )
+    client.disable_ebs_encryption_by_default(
+        _request(DisableEbsEncryptionByDefaultInputDict)
+    )
+    client.disable_fast_launch(image_id=_)
+    client.disable_fast_launch(**_request(DisableFastLaunchInputDict))
+    client.disable_fast_launch(_request(DisableFastLaunchInput))
+    client.disable_fast_launch(_request(DisableFastLaunchInputDict))
+    client.disable_fast_snapshot_restores(source_snapshot_ids=_)
+    client.disable_fast_snapshot_restores(
+        **_request(DisableFastSnapshotRestoresInputDict)
+    )
+    client.disable_fast_snapshot_restores(_request(DisableFastSnapshotRestoresInput))
+    client.disable_fast_snapshot_restores(
+        _request(DisableFastSnapshotRestoresInputDict)
+    )
+    client.disable_image(image_id=_)
+    client.disable_image(**_request(DisableImageInputDict))
+    client.disable_image(_request(DisableImageInput))
+    client.disable_image(_request(DisableImageInputDict))
+    client.disable_image_block_public_access()
+    client.disable_image_block_public_access(
+        **_request(DisableImageBlockPublicAccessInputDict)
+    )
+    client.disable_image_block_public_access(
+        _request(DisableImageBlockPublicAccessInput)
+    )
+    client.disable_image_block_public_access(
+        _request(DisableImageBlockPublicAccessInputDict)
+    )
+    client.disable_image_deprecation(image_id=_)
+    client.disable_image_deprecation(**_request(DisableImageDeprecationInputDict))
+    client.disable_image_deprecation(_request(DisableImageDeprecationInput))
+    client.disable_image_deprecation(_request(DisableImageDeprecationInputDict))
+    client.disable_image_deregistration_protection(image_id=_)
+    client.disable_image_deregistration_protection(
+        **_request(DisableImageDeregistrationProtectionInputDict)
+    )
+    client.disable_image_deregistration_protection(
+        _request(DisableImageDeregistrationProtectionInput)
+    )
+    client.disable_image_deregistration_protection(
+        _request(DisableImageDeregistrationProtectionInputDict)
+    )
+    client.disable_instance_sql_ha_standby_detections(instance_ids=_)
+    client.disable_instance_sql_ha_standby_detections(
+        **_request(DisableInstanceSqlHaStandbyDetectionsInputDict)
+    )
+    client.disable_instance_sql_ha_standby_detections(
+        _request(DisableInstanceSqlHaStandbyDetectionsInput)
+    )
+    client.disable_instance_sql_ha_standby_detections(
+        _request(DisableInstanceSqlHaStandbyDetectionsInputDict)
+    )
+    client.disable_ipam_organization_admin_account(delegated_admin_account_id=_)
+    client.disable_ipam_organization_admin_account(
+        **_request(DisableIpamOrganizationAdminAccountInputDict)
+    )
+    client.disable_ipam_organization_admin_account(
+        _request(DisableIpamOrganizationAdminAccountInput)
+    )
+    client.disable_ipam_organization_admin_account(
+        _request(DisableIpamOrganizationAdminAccountInputDict)
+    )
+    client.disable_ipam_policy(ipam_policy_id=_)
+    client.disable_ipam_policy(**_request(DisableIpamPolicyInputDict))
+    client.disable_ipam_policy(_request(DisableIpamPolicyInput))
+    client.disable_ipam_policy(_request(DisableIpamPolicyInputDict))
+    client.disable_route_server_propagation(route_server_id=_, route_table_id=_)
+    client.disable_route_server_propagation(
+        **_request(DisableRouteServerPropagationInputDict)
+    )
+    client.disable_route_server_propagation(
+        _request(DisableRouteServerPropagationInput)
+    )
+    client.disable_route_server_propagation(
+        _request(DisableRouteServerPropagationInputDict)
+    )
+    client.disable_serial_console_access()
+    client.disable_serial_console_access(
+        **_request(DisableSerialConsoleAccessInputDict)
+    )
+    client.disable_serial_console_access(_request(DisableSerialConsoleAccessInput))
+    client.disable_serial_console_access(_request(DisableSerialConsoleAccessInputDict))
+    client.disable_snapshot_block_public_access()
+    client.disable_snapshot_block_public_access(
+        **_request(DisableSnapshotBlockPublicAccessInputDict)
+    )
+    client.disable_snapshot_block_public_access(
+        _request(DisableSnapshotBlockPublicAccessInput)
+    )
+    client.disable_snapshot_block_public_access(
+        _request(DisableSnapshotBlockPublicAccessInputDict)
+    )
+    client.disable_transit_gateway_route_table_propagation(
+        transit_gateway_route_table_id=_
+    )
+    client.disable_transit_gateway_route_table_propagation(
+        **_request(DisableTransitGatewayRouteTablePropagationInputDict)
+    )
+    client.disable_transit_gateway_route_table_propagation(
+        _request(DisableTransitGatewayRouteTablePropagationInput)
+    )
+    client.disable_transit_gateway_route_table_propagation(
+        _request(DisableTransitGatewayRouteTablePropagationInputDict)
+    )
+    client.disable_vgw_route_propagation(gateway_id=_, route_table_id=_)
+    client.disable_vgw_route_propagation(
+        **_request(DisableVgwRoutePropagationInputDict)
+    )
+    client.disable_vgw_route_propagation(_request(DisableVgwRoutePropagationInput))
+    client.disable_vgw_route_propagation(_request(DisableVgwRoutePropagationInputDict))
+    client.disable_vpc_classic_link(vpc_id=_)
+    client.disable_vpc_classic_link(**_request(DisableVpcClassicLinkInputDict))
+    client.disable_vpc_classic_link(_request(DisableVpcClassicLinkInput))
+    client.disable_vpc_classic_link(_request(DisableVpcClassicLinkInputDict))
+    client.disable_vpc_classic_link_dns_support()
+    client.disable_vpc_classic_link_dns_support(
+        **_request(DisableVpcClassicLinkDnsSupportInputDict)
+    )
+    client.disable_vpc_classic_link_dns_support(
+        _request(DisableVpcClassicLinkDnsSupportInput)
+    )
+    client.disable_vpc_classic_link_dns_support(
+        _request(DisableVpcClassicLinkDnsSupportInputDict)
+    )
+    client.disassociate_address()
+    client.disassociate_address(**_request(DisassociateAddressInputDict))
+    client.disassociate_address(_request(DisassociateAddressInput))
+    client.disassociate_address(_request(DisassociateAddressInputDict))
+    client.disassociate_application_status_check(application_status_check_id=_)
+    client.disassociate_application_status_check(
+        **_request(DisassociateApplicationStatusCheckInputDict)
+    )
+    client.disassociate_application_status_check(
+        _request(DisassociateApplicationStatusCheckInput)
+    )
+    client.disassociate_application_status_check(
+        _request(DisassociateApplicationStatusCheckInputDict)
+    )
+    client.disassociate_capacity_reservation_billing_owner(
+        capacity_reservation_id=_, unused_reservation_billing_owner_id=_
+    )
+    client.disassociate_capacity_reservation_billing_owner(
+        **_request(DisassociateCapacityReservationBillingOwnerInputDict)
+    )
+    client.disassociate_capacity_reservation_billing_owner(
+        _request(DisassociateCapacityReservationBillingOwnerInput)
+    )
+    client.disassociate_capacity_reservation_billing_owner(
+        _request(DisassociateCapacityReservationBillingOwnerInputDict)
+    )
+    client.disassociate_client_vpn_target_network(
+        client_vpn_endpoint_id=_, association_id=_
+    )
+    client.disassociate_client_vpn_target_network(
+        **_request(DisassociateClientVpnTargetNetworkInputDict)
+    )
+    client.disassociate_client_vpn_target_network(
+        _request(DisassociateClientVpnTargetNetworkInput)
+    )
+    client.disassociate_client_vpn_target_network(
+        _request(DisassociateClientVpnTargetNetworkInputDict)
+    )
+    client.disassociate_enclave_certificate_iam_role(certificate_arn=_, role_arn=_)
+    client.disassociate_enclave_certificate_iam_role(
+        **_request(DisassociateEnclaveCertificateIamRoleInputDict)
+    )
+    client.disassociate_enclave_certificate_iam_role(
+        _request(DisassociateEnclaveCertificateIamRoleInput)
+    )
+    client.disassociate_enclave_certificate_iam_role(
+        _request(DisassociateEnclaveCertificateIamRoleInputDict)
+    )
+    client.disassociate_iam_instance_profile(association_id=_)
+    client.disassociate_iam_instance_profile(
+        **_request(DisassociateIamInstanceProfileInputDict)
+    )
+    client.disassociate_iam_instance_profile(
+        _request(DisassociateIamInstanceProfileInput)
+    )
+    client.disassociate_iam_instance_profile(
+        _request(DisassociateIamInstanceProfileInputDict)
+    )
+    client.disassociate_instance_event_window(
+        instance_event_window_id=_, association_target=_
+    )
+    client.disassociate_instance_event_window(
+        **_request(DisassociateInstanceEventWindowInputDict)
+    )
+    client.disassociate_instance_event_window(
+        _request(DisassociateInstanceEventWindowInput)
+    )
+    client.disassociate_instance_event_window(
+        _request(DisassociateInstanceEventWindowInputDict)
+    )
+    client.disassociate_ipam_byoasn(asn=_, cidr=_)
+    client.disassociate_ipam_byoasn(**_request(DisassociateIpamByoasnInputDict))
+    client.disassociate_ipam_byoasn(_request(DisassociateIpamByoasnInput))
+    client.disassociate_ipam_byoasn(_request(DisassociateIpamByoasnInputDict))
+    client.disassociate_ipam_resource_discovery(
+        ipam_resource_discovery_association_id=_
+    )
+    client.disassociate_ipam_resource_discovery(
+        **_request(DisassociateIpamResourceDiscoveryInputDict)
+    )
+    client.disassociate_ipam_resource_discovery(
+        _request(DisassociateIpamResourceDiscoveryInput)
+    )
+    client.disassociate_ipam_resource_discovery(
+        _request(DisassociateIpamResourceDiscoveryInputDict)
+    )
+    client.disassociate_nat_gateway_address(nat_gateway_id=_, association_ids=_)
+    client.disassociate_nat_gateway_address(
+        **_request(DisassociateNatGatewayAddressInputDict)
+    )
+    client.disassociate_nat_gateway_address(
+        _request(DisassociateNatGatewayAddressInput)
+    )
+    client.disassociate_nat_gateway_address(
+        _request(DisassociateNatGatewayAddressInputDict)
+    )
+    client.disassociate_route_server(route_server_id=_, vpc_id=_)
+    client.disassociate_route_server(**_request(DisassociateRouteServerInputDict))
+    client.disassociate_route_server(_request(DisassociateRouteServerInput))
+    client.disassociate_route_server(_request(DisassociateRouteServerInputDict))
+    client.disassociate_route_table(association_id=_)
+    client.disassociate_route_table(**_request(DisassociateRouteTableInputDict))
+    client.disassociate_route_table(_request(DisassociateRouteTableInput))
+    client.disassociate_route_table(_request(DisassociateRouteTableInputDict))
+    client.disassociate_security_group_vpc(group_id=_, vpc_id=_)
+    client.disassociate_security_group_vpc(
+        **_request(DisassociateSecurityGroupVpcInputDict)
+    )
+    client.disassociate_security_group_vpc(_request(DisassociateSecurityGroupVpcInput))
+    client.disassociate_security_group_vpc(
+        _request(DisassociateSecurityGroupVpcInputDict)
+    )
+    client.disassociate_subnet_cidr_block(association_id=_)
+    client.disassociate_subnet_cidr_block(
+        **_request(DisassociateSubnetCidrBlockInputDict)
+    )
+    client.disassociate_subnet_cidr_block(_request(DisassociateSubnetCidrBlockInput))
+    client.disassociate_subnet_cidr_block(
+        _request(DisassociateSubnetCidrBlockInputDict)
+    )
+    client.disassociate_transit_gateway_multicast_domain(
+        transit_gateway_multicast_domain_id=_,
+        transit_gateway_attachment_id=_,
+        subnet_ids=_,
+    )
+    client.disassociate_transit_gateway_multicast_domain(
+        **_request(DisassociateTransitGatewayMulticastDomainInputDict)
+    )
+    client.disassociate_transit_gateway_multicast_domain(
+        _request(DisassociateTransitGatewayMulticastDomainInput)
+    )
+    client.disassociate_transit_gateway_multicast_domain(
+        _request(DisassociateTransitGatewayMulticastDomainInputDict)
+    )
+    client.disassociate_transit_gateway_policy_table(
+        transit_gateway_policy_table_id=_, transit_gateway_attachment_id=_
+    )
+    client.disassociate_transit_gateway_policy_table(
+        **_request(DisassociateTransitGatewayPolicyTableInputDict)
+    )
+    client.disassociate_transit_gateway_policy_table(
+        _request(DisassociateTransitGatewayPolicyTableInput)
+    )
+    client.disassociate_transit_gateway_policy_table(
+        _request(DisassociateTransitGatewayPolicyTableInputDict)
+    )
+    client.disassociate_transit_gateway_route_table(
+        transit_gateway_route_table_id=_, transit_gateway_attachment_id=_
+    )
+    client.disassociate_transit_gateway_route_table(
+        **_request(DisassociateTransitGatewayRouteTableInputDict)
+    )
+    client.disassociate_transit_gateway_route_table(
+        _request(DisassociateTransitGatewayRouteTableInput)
+    )
+    client.disassociate_transit_gateway_route_table(
+        _request(DisassociateTransitGatewayRouteTableInputDict)
+    )
+    client.disassociate_trunk_interface(association_id=_)
+    client.disassociate_trunk_interface(**_request(DisassociateTrunkInterfaceInputDict))
+    client.disassociate_trunk_interface(_request(DisassociateTrunkInterfaceInput))
+    client.disassociate_trunk_interface(_request(DisassociateTrunkInterfaceInputDict))
+    client.disassociate_vpc_cidr_block(association_id=_)
+    client.disassociate_vpc_cidr_block(**_request(DisassociateVpcCidrBlockInputDict))
+    client.disassociate_vpc_cidr_block(_request(DisassociateVpcCidrBlockInput))
+    client.disassociate_vpc_cidr_block(_request(DisassociateVpcCidrBlockInputDict))
+    client.enable_address_transfer(allocation_id=_, transfer_account_id=_)
+    client.enable_address_transfer(**_request(EnableAddressTransferInputDict))
+    client.enable_address_transfer(_request(EnableAddressTransferInput))
+    client.enable_address_transfer(_request(EnableAddressTransferInputDict))
+    client.enable_allowed_images_settings(allowed_images_settings_state=_)
+    client.enable_allowed_images_settings(
+        **_request(EnableAllowedImagesSettingsInputDict)
+    )
+    client.enable_allowed_images_settings(_request(EnableAllowedImagesSettingsInput))
+    client.enable_allowed_images_settings(
+        _request(EnableAllowedImagesSettingsInputDict)
+    )
+    client.enable_application_status_check_suppression()
+    client.enable_application_status_check_suppression(
+        **_request(EnableApplicationStatusCheckSuppressionInputDict)
+    )
+    client.enable_application_status_check_suppression(
+        _request(EnableApplicationStatusCheckSuppressionInput)
+    )
+    client.enable_application_status_check_suppression(
+        _request(EnableApplicationStatusCheckSuppressionInputDict)
+    )
+    client.enable_aws_network_performance_metric_subscription()
+    client.enable_aws_network_performance_metric_subscription(
+        **_request(EnableAwsNetworkPerformanceMetricSubscriptionInputDict)
+    )
+    client.enable_aws_network_performance_metric_subscription(
+        _request(EnableAwsNetworkPerformanceMetricSubscriptionInput)
+    )
+    client.enable_aws_network_performance_metric_subscription(
+        _request(EnableAwsNetworkPerformanceMetricSubscriptionInputDict)
+    )
+    client.enable_capacity_manager()
+    client.enable_capacity_manager(**_request(EnableCapacityManagerInputDict))
+    client.enable_capacity_manager(_request(EnableCapacityManagerInput))
+    client.enable_capacity_manager(_request(EnableCapacityManagerInputDict))
+    client.enable_ebs_encryption_by_default()
+    client.enable_ebs_encryption_by_default(
+        **_request(EnableEbsEncryptionByDefaultInputDict)
+    )
+    client.enable_ebs_encryption_by_default(_request(EnableEbsEncryptionByDefaultInput))
+    client.enable_ebs_encryption_by_default(
+        _request(EnableEbsEncryptionByDefaultInputDict)
+    )
+    client.enable_fast_launch(image_id=_)
+    client.enable_fast_launch(**_request(EnableFastLaunchInputDict))
+    client.enable_fast_launch(_request(EnableFastLaunchInput))
+    client.enable_fast_launch(_request(EnableFastLaunchInputDict))
+    client.enable_fast_snapshot_restores(source_snapshot_ids=_)
+    client.enable_fast_snapshot_restores(
+        **_request(EnableFastSnapshotRestoresInputDict)
+    )
+    client.enable_fast_snapshot_restores(_request(EnableFastSnapshotRestoresInput))
+    client.enable_fast_snapshot_restores(_request(EnableFastSnapshotRestoresInputDict))
+    client.enable_image(image_id=_)
+    client.enable_image(**_request(EnableImageInputDict))
+    client.enable_image(_request(EnableImageInput))
+    client.enable_image(_request(EnableImageInputDict))
+    client.enable_image_block_public_access(image_block_public_access_state=_)
+    client.enable_image_block_public_access(
+        **_request(EnableImageBlockPublicAccessInputDict)
+    )
+    client.enable_image_block_public_access(_request(EnableImageBlockPublicAccessInput))
+    client.enable_image_block_public_access(
+        _request(EnableImageBlockPublicAccessInputDict)
+    )
+    client.enable_image_deprecation(image_id=_, deprecate_at=_)
+    client.enable_image_deprecation(**_request(EnableImageDeprecationInputDict))
+    client.enable_image_deprecation(_request(EnableImageDeprecationInput))
+    client.enable_image_deprecation(_request(EnableImageDeprecationInputDict))
+    client.enable_image_deregistration_protection(image_id=_)
+    client.enable_image_deregistration_protection(
+        **_request(EnableImageDeregistrationProtectionInputDict)
+    )
+    client.enable_image_deregistration_protection(
+        _request(EnableImageDeregistrationProtectionInput)
+    )
+    client.enable_image_deregistration_protection(
+        _request(EnableImageDeregistrationProtectionInputDict)
+    )
+    client.enable_instance_sql_ha_standby_detections(instance_ids=_)
+    client.enable_instance_sql_ha_standby_detections(
+        **_request(EnableInstanceSqlHaStandbyDetectionsInputDict)
+    )
+    client.enable_instance_sql_ha_standby_detections(
+        _request(EnableInstanceSqlHaStandbyDetectionsInput)
+    )
+    client.enable_instance_sql_ha_standby_detections(
+        _request(EnableInstanceSqlHaStandbyDetectionsInputDict)
+    )
+    client.enable_ipam_internet_registry_association(
+        ipam_internet_registry_association_id=_,
+        rpki_version=_,
+        service_uri=_,
+        child_handle=_,
+        parent_handle=_,
+        parent_bpki_ta=_,
+    )
+    client.enable_ipam_internet_registry_association(
+        **_request(EnableIpamInternetRegistryAssociationInputDict)
+    )
+    client.enable_ipam_internet_registry_association(
+        _request(EnableIpamInternetRegistryAssociationInput)
+    )
+    client.enable_ipam_internet_registry_association(
+        _request(EnableIpamInternetRegistryAssociationInputDict)
+    )
+    client.enable_ipam_organization_admin_account(delegated_admin_account_id=_)
+    client.enable_ipam_organization_admin_account(
+        **_request(EnableIpamOrganizationAdminAccountInputDict)
+    )
+    client.enable_ipam_organization_admin_account(
+        _request(EnableIpamOrganizationAdminAccountInput)
+    )
+    client.enable_ipam_organization_admin_account(
+        _request(EnableIpamOrganizationAdminAccountInputDict)
+    )
+    client.enable_ipam_policy(ipam_policy_id=_)
+    client.enable_ipam_policy(**_request(EnableIpamPolicyInputDict))
+    client.enable_ipam_policy(_request(EnableIpamPolicyInput))
+    client.enable_ipam_policy(_request(EnableIpamPolicyInputDict))
+    client.enable_reachability_analyzer_organization_sharing()
+    client.enable_reachability_analyzer_organization_sharing(
+        **_request(EnableReachabilityAnalyzerOrganizationSharingInputDict)
+    )
+    client.enable_reachability_analyzer_organization_sharing(
+        _request(EnableReachabilityAnalyzerOrganizationSharingInput)
+    )
+    client.enable_reachability_analyzer_organization_sharing(
+        _request(EnableReachabilityAnalyzerOrganizationSharingInputDict)
+    )
+    client.enable_route_server_propagation(route_server_id=_, route_table_id=_)
+    client.enable_route_server_propagation(
+        **_request(EnableRouteServerPropagationInputDict)
+    )
+    client.enable_route_server_propagation(_request(EnableRouteServerPropagationInput))
+    client.enable_route_server_propagation(
+        _request(EnableRouteServerPropagationInputDict)
+    )
+    client.enable_serial_console_access()
+    client.enable_serial_console_access(**_request(EnableSerialConsoleAccessInputDict))
+    client.enable_serial_console_access(_request(EnableSerialConsoleAccessInput))
+    client.enable_serial_console_access(_request(EnableSerialConsoleAccessInputDict))
+    client.enable_snapshot_block_public_access(state=_)
+    client.enable_snapshot_block_public_access(
+        **_request(EnableSnapshotBlockPublicAccessInputDict)
+    )
+    client.enable_snapshot_block_public_access(
+        _request(EnableSnapshotBlockPublicAccessInput)
+    )
+    client.enable_snapshot_block_public_access(
+        _request(EnableSnapshotBlockPublicAccessInputDict)
+    )
+    client.enable_transit_gateway_route_table_propagation(
+        transit_gateway_route_table_id=_
+    )
+    client.enable_transit_gateway_route_table_propagation(
+        **_request(EnableTransitGatewayRouteTablePropagationInputDict)
+    )
+    client.enable_transit_gateway_route_table_propagation(
+        _request(EnableTransitGatewayRouteTablePropagationInput)
+    )
+    client.enable_transit_gateway_route_table_propagation(
+        _request(EnableTransitGatewayRouteTablePropagationInputDict)
+    )
+    client.enable_vgw_route_propagation(gateway_id=_, route_table_id=_)
+    client.enable_vgw_route_propagation(**_request(EnableVgwRoutePropagationInputDict))
+    client.enable_vgw_route_propagation(_request(EnableVgwRoutePropagationInput))
+    client.enable_vgw_route_propagation(_request(EnableVgwRoutePropagationInputDict))
+    client.enable_volume_io(volume_id=_)
+    client.enable_volume_io(**_request(EnableVolumeIOInputDict))
+    client.enable_volume_io(_request(EnableVolumeIOInput))
+    client.enable_volume_io(_request(EnableVolumeIOInputDict))
+    client.enable_vpc_classic_link(vpc_id=_)
+    client.enable_vpc_classic_link(**_request(EnableVpcClassicLinkInputDict))
+    client.enable_vpc_classic_link(_request(EnableVpcClassicLinkInput))
+    client.enable_vpc_classic_link(_request(EnableVpcClassicLinkInputDict))
+    client.enable_vpc_classic_link_dns_support()
+    client.enable_vpc_classic_link_dns_support(
+        **_request(EnableVpcClassicLinkDnsSupportInputDict)
+    )
+    client.enable_vpc_classic_link_dns_support(
+        _request(EnableVpcClassicLinkDnsSupportInput)
+    )
+    client.enable_vpc_classic_link_dns_support(
+        _request(EnableVpcClassicLinkDnsSupportInputDict)
+    )
+    client.export_client_vpn_client_certificate_revocation_list(
+        client_vpn_endpoint_id=_
+    )
+    client.export_client_vpn_client_certificate_revocation_list(
+        **_request(ExportClientVpnClientCertificateRevocationListInputDict)
+    )
+    client.export_client_vpn_client_certificate_revocation_list(
+        _request(ExportClientVpnClientCertificateRevocationListInput)
+    )
+    client.export_client_vpn_client_certificate_revocation_list(
+        _request(ExportClientVpnClientCertificateRevocationListInputDict)
+    )
+    client.export_client_vpn_client_configuration(client_vpn_endpoint_id=_)
+    client.export_client_vpn_client_configuration(
+        **_request(ExportClientVpnClientConfigurationInputDict)
+    )
+    client.export_client_vpn_client_configuration(
+        _request(ExportClientVpnClientConfigurationInput)
+    )
+    client.export_client_vpn_client_configuration(
+        _request(ExportClientVpnClientConfigurationInputDict)
+    )
+    client.export_image(disk_image_format=_, image_id=_, s3_export_location=_)
+    client.export_image(**_request(ExportImageInputDict))
+    client.export_image(_request(ExportImageInput))
+    client.export_image(_request(ExportImageInputDict))
+    client.export_transit_gateway_routes(transit_gateway_route_table_id=_, s3_bucket=_)
+    client.export_transit_gateway_routes(
+        **_request(ExportTransitGatewayRoutesInputDict)
+    )
+    client.export_transit_gateway_routes(_request(ExportTransitGatewayRoutesInput))
+    client.export_transit_gateway_routes(_request(ExportTransitGatewayRoutesInputDict))
+    client.export_verified_access_instance_client_configuration(
+        verified_access_instance_id=_
+    )
+    client.export_verified_access_instance_client_configuration(
+        **_request(ExportVerifiedAccessInstanceClientConfigurationInputDict)
+    )
+    client.export_verified_access_instance_client_configuration(
+        _request(ExportVerifiedAccessInstanceClientConfigurationInput)
+    )
+    client.export_verified_access_instance_client_configuration(
+        _request(ExportVerifiedAccessInstanceClientConfigurationInputDict)
+    )
+    client.get_active_vpn_tunnel_status(
+        vpn_connection_id=_, vpn_tunnel_outside_ip_address=_
+    )
+    client.get_active_vpn_tunnel_status(**_request(GetActiveVpnTunnelStatusInputDict))
+    client.get_active_vpn_tunnel_status(_request(GetActiveVpnTunnelStatusInput))
+    client.get_active_vpn_tunnel_status(_request(GetActiveVpnTunnelStatusInputDict))
+    client.get_allowed_images_settings()
+    client.get_allowed_images_settings(**_request(GetAllowedImagesSettingsInputDict))
+    client.get_allowed_images_settings(_request(GetAllowedImagesSettingsInput))
+    client.get_allowed_images_settings(_request(GetAllowedImagesSettingsInputDict))
+    client.get_associated_enclave_certificate_iam_roles(certificate_arn=_)
+    client.get_associated_enclave_certificate_iam_roles(
+        **_request(GetAssociatedEnclaveCertificateIamRolesInputDict)
+    )
+    client.get_associated_enclave_certificate_iam_roles(
+        _request(GetAssociatedEnclaveCertificateIamRolesInput)
+    )
+    client.get_associated_enclave_certificate_iam_roles(
+        _request(GetAssociatedEnclaveCertificateIamRolesInputDict)
+    )
+    client.get_associated_ipv6_pool_cidrs(pool_id=_)
+    client.get_associated_ipv6_pool_cidrs(
+        **_request(GetAssociatedIpv6PoolCidrsInputDict)
+    )
+    client.get_associated_ipv6_pool_cidrs(_request(GetAssociatedIpv6PoolCidrsInput))
+    client.get_associated_ipv6_pool_cidrs(_request(GetAssociatedIpv6PoolCidrsInputDict))
+    client.get_aws_network_performance_data()
+    client.get_aws_network_performance_data(
+        **_request(GetAwsNetworkPerformanceDataInputDict)
+    )
+    client.get_aws_network_performance_data(_request(GetAwsNetworkPerformanceDataInput))
+    client.get_aws_network_performance_data(
+        _request(GetAwsNetworkPerformanceDataInputDict)
+    )
+    client.get_capacity_manager_attributes()
+    client.get_capacity_manager_attributes(
+        **_request(GetCapacityManagerAttributesInputDict)
+    )
+    client.get_capacity_manager_attributes(_request(GetCapacityManagerAttributesInput))
+    client.get_capacity_manager_attributes(
+        _request(GetCapacityManagerAttributesInputDict)
+    )
+    client.get_capacity_manager_metric_data(
+        metric_names=_, start_time=_, end_time=_, period=_
+    )
+    client.get_capacity_manager_metric_data(
+        **_request(GetCapacityManagerMetricDataInputDict)
+    )
+    client.get_capacity_manager_metric_data(_request(GetCapacityManagerMetricDataInput))
+    client.get_capacity_manager_metric_data(
+        _request(GetCapacityManagerMetricDataInputDict)
+    )
+    client.get_capacity_manager_metric_dimensions(
+        group_by=_, start_time=_, end_time=_, metric_names=_
+    )
+    client.get_capacity_manager_metric_dimensions(
+        **_request(GetCapacityManagerMetricDimensionsInputDict)
+    )
+    client.get_capacity_manager_metric_dimensions(
+        _request(GetCapacityManagerMetricDimensionsInput)
+    )
+    client.get_capacity_manager_metric_dimensions(
+        _request(GetCapacityManagerMetricDimensionsInputDict)
+    )
+    client.get_capacity_manager_monitored_tag_keys()
+    client.get_capacity_manager_monitored_tag_keys(
+        **_request(GetCapacityManagerMonitoredTagKeysInputDict)
+    )
+    client.get_capacity_manager_monitored_tag_keys(
+        _request(GetCapacityManagerMonitoredTagKeysInput)
+    )
+    client.get_capacity_manager_monitored_tag_keys(
+        _request(GetCapacityManagerMonitoredTagKeysInputDict)
+    )
+    client.get_capacity_manager_supportability_scores(
+        market_type=_,
+        capacity_amount=_,
+        capacity_unit=_,
+        capacity_availability_zone_ids=_,
+    )
+    client.get_capacity_manager_supportability_scores(
+        **_request(GetCapacityManagerSupportabilityScoresInputDict)
+    )
+    client.get_capacity_manager_supportability_scores(
+        _request(GetCapacityManagerSupportabilityScoresInput)
+    )
+    client.get_capacity_manager_supportability_scores(
+        _request(GetCapacityManagerSupportabilityScoresInputDict)
+    )
+    client.get_capacity_reservation_usage(capacity_reservation_id=_)
+    client.get_capacity_reservation_usage(
+        **_request(GetCapacityReservationUsageInputDict)
+    )
+    client.get_capacity_reservation_usage(_request(GetCapacityReservationUsageInput))
+    client.get_capacity_reservation_usage(
+        _request(GetCapacityReservationUsageInputDict)
+    )
+    client.get_client_vpn_endpoint_authorization_policy(client_vpn_endpoint_id=_)
+    client.get_client_vpn_endpoint_authorization_policy(
+        **_request(GetClientVpnEndpointAuthorizationPolicyInputDict)
+    )
+    client.get_client_vpn_endpoint_authorization_policy(
+        _request(GetClientVpnEndpointAuthorizationPolicyInput)
+    )
+    client.get_client_vpn_endpoint_authorization_policy(
+        _request(GetClientVpnEndpointAuthorizationPolicyInputDict)
+    )
+    client.get_coip_pool_usage(pool_id=_)
+    client.get_coip_pool_usage(**_request(GetCoipPoolUsageInputDict))
+    client.get_coip_pool_usage(_request(GetCoipPoolUsageInput))
+    client.get_coip_pool_usage(_request(GetCoipPoolUsageInputDict))
+    client.get_console_output(instance_id=_)
+    client.get_console_output(**_request(GetConsoleOutputInputDict))
+    client.get_console_output(_request(GetConsoleOutputInput))
+    client.get_console_output(_request(GetConsoleOutputInputDict))
+    client.get_console_screenshot(instance_id=_)
+    client.get_console_screenshot(**_request(GetConsoleScreenshotInputDict))
+    client.get_console_screenshot(_request(GetConsoleScreenshotInput))
+    client.get_console_screenshot(_request(GetConsoleScreenshotInputDict))
+    client.get_declarative_policies_report_summary(report_id=_)
+    client.get_declarative_policies_report_summary(
+        **_request(GetDeclarativePoliciesReportSummaryInputDict)
+    )
+    client.get_declarative_policies_report_summary(
+        _request(GetDeclarativePoliciesReportSummaryInput)
+    )
+    client.get_declarative_policies_report_summary(
+        _request(GetDeclarativePoliciesReportSummaryInputDict)
+    )
+    client.get_default_credit_specification(instance_family=_)
+    client.get_default_credit_specification(
+        **_request(GetDefaultCreditSpecificationInputDict)
+    )
+    client.get_default_credit_specification(
+        _request(GetDefaultCreditSpecificationInput)
+    )
+    client.get_default_credit_specification(
+        _request(GetDefaultCreditSpecificationInputDict)
+    )
+    client.get_ebs_default_kms_key_id()
+    client.get_ebs_default_kms_key_id(**_request(GetEbsDefaultKmsKeyIdInputDict))
+    client.get_ebs_default_kms_key_id(_request(GetEbsDefaultKmsKeyIdInput))
+    client.get_ebs_default_kms_key_id(_request(GetEbsDefaultKmsKeyIdInputDict))
+    client.get_ebs_encryption_by_default()
+    client.get_ebs_encryption_by_default(**_request(GetEbsEncryptionByDefaultInputDict))
+    client.get_ebs_encryption_by_default(_request(GetEbsEncryptionByDefaultInput))
+    client.get_ebs_encryption_by_default(_request(GetEbsEncryptionByDefaultInputDict))
+    client.get_enabled_ipam_policy()
+    client.get_enabled_ipam_policy(**_request(GetEnabledIpamPolicyInputDict))
+    client.get_enabled_ipam_policy(_request(GetEnabledIpamPolicyInput))
+    client.get_enabled_ipam_policy(_request(GetEnabledIpamPolicyInputDict))
+    client.get_flow_logs_integration_template(
+        flow_log_id=_, config_delivery_s3_destination_arn=_, integrate_services=_
+    )
+    client.get_flow_logs_integration_template(
+        **_request(GetFlowLogsIntegrationTemplateInputDict)
+    )
+    client.get_flow_logs_integration_template(
+        _request(GetFlowLogsIntegrationTemplateInput)
+    )
+    client.get_flow_logs_integration_template(
+        _request(GetFlowLogsIntegrationTemplateInputDict)
+    )
+    client.get_groups_for_capacity_reservation(capacity_reservation_id=_)
+    client.get_groups_for_capacity_reservation(
+        **_request(GetGroupsForCapacityReservationInputDict)
+    )
+    client.get_groups_for_capacity_reservation(
+        _request(GetGroupsForCapacityReservationInput)
+    )
+    client.get_groups_for_capacity_reservation(
+        _request(GetGroupsForCapacityReservationInputDict)
+    )
+    client.get_host_reservation_purchase_preview(host_id_set=_, offering_id=_)
+    client.get_host_reservation_purchase_preview(
+        **_request(GetHostReservationPurchasePreviewInputDict)
+    )
+    client.get_host_reservation_purchase_preview(
+        _request(GetHostReservationPurchasePreviewInput)
+    )
+    client.get_host_reservation_purchase_preview(
+        _request(GetHostReservationPurchasePreviewInputDict)
+    )
+    client.get_image_ancestry(image_id=_)
+    client.get_image_ancestry(**_request(GetImageAncestryInputDict))
+    client.get_image_ancestry(_request(GetImageAncestryInput))
+    client.get_image_ancestry(_request(GetImageAncestryInputDict))
+    client.get_image_block_public_access_state()
+    client.get_image_block_public_access_state(
+        **_request(GetImageBlockPublicAccessStateInputDict)
+    )
+    client.get_image_block_public_access_state(
+        _request(GetImageBlockPublicAccessStateInput)
+    )
+    client.get_image_block_public_access_state(
+        _request(GetImageBlockPublicAccessStateInputDict)
+    )
+    client.get_image_findings(image_id=_)
+    client.get_image_findings(**_request(GetImageFindingsInputDict))
+    client.get_image_findings(_request(GetImageFindingsInput))
+    client.get_image_findings(_request(GetImageFindingsInputDict))
+    client.get_instance_metadata_defaults()
+    client.get_instance_metadata_defaults(
+        **_request(GetInstanceMetadataDefaultsInputDict)
+    )
+    client.get_instance_metadata_defaults(_request(GetInstanceMetadataDefaultsInput))
+    client.get_instance_metadata_defaults(
+        _request(GetInstanceMetadataDefaultsInputDict)
+    )
+    client.get_instance_tpm_ek_pub(instance_id=_, key_type=_, key_format=_)
+    client.get_instance_tpm_ek_pub(**_request(GetInstanceTpmEkPubInputDict))
+    client.get_instance_tpm_ek_pub(_request(GetInstanceTpmEkPubInput))
+    client.get_instance_tpm_ek_pub(_request(GetInstanceTpmEkPubInputDict))
+    client.get_instance_types_from_instance_requirements(
+        architecture_types=_, virtualization_types=_, instance_requirements=_
+    )
+    client.get_instance_types_from_instance_requirements(
+        **_request(GetInstanceTypesFromInstanceRequirementsInputDict)
+    )
+    client.get_instance_types_from_instance_requirements(
+        _request(GetInstanceTypesFromInstanceRequirementsInput)
+    )
+    client.get_instance_types_from_instance_requirements(
+        _request(GetInstanceTypesFromInstanceRequirementsInputDict)
+    )
+    client.get_instance_uefi_data(instance_id=_)
+    client.get_instance_uefi_data(**_request(GetInstanceUefiDataInputDict))
+    client.get_instance_uefi_data(_request(GetInstanceUefiDataInput))
+    client.get_instance_uefi_data(_request(GetInstanceUefiDataInputDict))
+    client.get_ipam_address_history(cidr=_, ipam_scope_id=_)
+    client.get_ipam_address_history(**_request(GetIpamAddressHistoryInputDict))
+    client.get_ipam_address_history(_request(GetIpamAddressHistoryInput))
+    client.get_ipam_address_history(_request(GetIpamAddressHistoryInputDict))
+    client.get_ipam_discovered_accounts(
+        ipam_resource_discovery_id=_, discovery_region=_
+    )
+    client.get_ipam_discovered_accounts(**_request(GetIpamDiscoveredAccountsInputDict))
+    client.get_ipam_discovered_accounts(_request(GetIpamDiscoveredAccountsInput))
+    client.get_ipam_discovered_accounts(_request(GetIpamDiscoveredAccountsInputDict))
+    client.get_ipam_discovered_public_addresses(
+        ipam_resource_discovery_id=_, address_region=_
+    )
+    client.get_ipam_discovered_public_addresses(
+        **_request(GetIpamDiscoveredPublicAddressesInputDict)
+    )
+    client.get_ipam_discovered_public_addresses(
+        _request(GetIpamDiscoveredPublicAddressesInput)
+    )
+    client.get_ipam_discovered_public_addresses(
+        _request(GetIpamDiscoveredPublicAddressesInputDict)
+    )
+    client.get_ipam_discovered_resource_cidrs(
+        ipam_resource_discovery_id=_, resource_region=_
+    )
+    client.get_ipam_discovered_resource_cidrs(
+        **_request(GetIpamDiscoveredResourceCidrsInputDict)
+    )
+    client.get_ipam_discovered_resource_cidrs(
+        _request(GetIpamDiscoveredResourceCidrsInput)
+    )
+    client.get_ipam_discovered_resource_cidrs(
+        _request(GetIpamDiscoveredResourceCidrsInputDict)
+    )
+    client.get_ipam_discovered_routes(ipam_resource_discovery_id=_, resource_region=_)
+    client.get_ipam_discovered_routes(**_request(GetIpamDiscoveredRoutesInputDict))
+    client.get_ipam_discovered_routes(_request(GetIpamDiscoveredRoutesInput))
+    client.get_ipam_discovered_routes(_request(GetIpamDiscoveredRoutesInputDict))
+    client.get_ipam_internet_registry_association_asns(
+        ipam_internet_registry_association_id=_
+    )
+    client.get_ipam_internet_registry_association_asns(
+        **_request(GetIpamInternetRegistryAssociationAsnsInputDict)
+    )
+    client.get_ipam_internet_registry_association_asns(
+        _request(GetIpamInternetRegistryAssociationAsnsInput)
+    )
+    client.get_ipam_internet_registry_association_asns(
+        _request(GetIpamInternetRegistryAssociationAsnsInputDict)
+    )
+    client.get_ipam_internet_registry_association_cidrs(
+        ipam_internet_registry_association_id=_
+    )
+    client.get_ipam_internet_registry_association_cidrs(
+        **_request(GetIpamInternetRegistryAssociationCidrsInputDict)
+    )
+    client.get_ipam_internet_registry_association_cidrs(
+        _request(GetIpamInternetRegistryAssociationCidrsInput)
+    )
+    client.get_ipam_internet_registry_association_cidrs(
+        _request(GetIpamInternetRegistryAssociationCidrsInputDict)
+    )
+    client.get_ipam_policy_allocation_rules(ipam_policy_id=_)
+    client.get_ipam_policy_allocation_rules(
+        **_request(GetIpamPolicyAllocationRulesInputDict)
+    )
+    client.get_ipam_policy_allocation_rules(_request(GetIpamPolicyAllocationRulesInput))
+    client.get_ipam_policy_allocation_rules(
+        _request(GetIpamPolicyAllocationRulesInputDict)
+    )
+    client.get_ipam_policy_organization_targets(ipam_policy_id=_)
+    client.get_ipam_policy_organization_targets(
+        **_request(GetIpamPolicyOrganizationTargetsInputDict)
+    )
+    client.get_ipam_policy_organization_targets(
+        _request(GetIpamPolicyOrganizationTargetsInput)
+    )
+    client.get_ipam_policy_organization_targets(
+        _request(GetIpamPolicyOrganizationTargetsInputDict)
+    )
+    client.get_ipam_pool_allocations(ipam_pool_id=_)
+    client.get_ipam_pool_allocations(**_request(GetIpamPoolAllocationsInputDict))
+    client.get_ipam_pool_allocations(_request(GetIpamPoolAllocationsInput))
+    client.get_ipam_pool_allocations(_request(GetIpamPoolAllocationsInputDict))
+    client.get_ipam_pool_cidrs(ipam_pool_id=_)
+    client.get_ipam_pool_cidrs(**_request(GetIpamPoolCidrsInputDict))
+    client.get_ipam_pool_cidrs(_request(GetIpamPoolCidrsInput))
+    client.get_ipam_pool_cidrs(_request(GetIpamPoolCidrsInputDict))
+    client.get_ipam_prefix_list_resolver_rules(ipam_prefix_list_resolver_id=_)
+    client.get_ipam_prefix_list_resolver_rules(
+        **_request(GetIpamPrefixListResolverRulesInputDict)
+    )
+    client.get_ipam_prefix_list_resolver_rules(
+        _request(GetIpamPrefixListResolverRulesInput)
+    )
+    client.get_ipam_prefix_list_resolver_rules(
+        _request(GetIpamPrefixListResolverRulesInputDict)
+    )
+    client.get_ipam_prefix_list_resolver_version_entries(
+        ipam_prefix_list_resolver_id=_, ipam_prefix_list_resolver_version=_
+    )
+    client.get_ipam_prefix_list_resolver_version_entries(
+        **_request(GetIpamPrefixListResolverVersionEntriesInputDict)
+    )
+    client.get_ipam_prefix_list_resolver_version_entries(
+        _request(GetIpamPrefixListResolverVersionEntriesInput)
+    )
+    client.get_ipam_prefix_list_resolver_version_entries(
+        _request(GetIpamPrefixListResolverVersionEntriesInputDict)
+    )
+    client.get_ipam_prefix_list_resolver_versions(ipam_prefix_list_resolver_id=_)
+    client.get_ipam_prefix_list_resolver_versions(
+        **_request(GetIpamPrefixListResolverVersionsInputDict)
+    )
+    client.get_ipam_prefix_list_resolver_versions(
+        _request(GetIpamPrefixListResolverVersionsInput)
+    )
+    client.get_ipam_prefix_list_resolver_versions(
+        _request(GetIpamPrefixListResolverVersionsInputDict)
+    )
+    client.get_ipam_resource_cidrs(ipam_scope_id=_)
+    client.get_ipam_resource_cidrs(**_request(GetIpamResourceCidrsInputDict))
+    client.get_ipam_resource_cidrs(_request(GetIpamResourceCidrsInput))
+    client.get_ipam_resource_cidrs(_request(GetIpamResourceCidrsInputDict))
+    client.get_ipam_route_origin_authorizations(ipam_internet_registry_association_id=_)
+    client.get_ipam_route_origin_authorizations(
+        **_request(GetIpamRouteOriginAuthorizationsInputDict)
+    )
+    client.get_ipam_route_origin_authorizations(
+        _request(GetIpamRouteOriginAuthorizationsInput)
+    )
+    client.get_ipam_route_origin_authorizations(
+        _request(GetIpamRouteOriginAuthorizationsInputDict)
+    )
+    client.get_ipam_route_protection_findings(ipam_id=_)
+    client.get_ipam_route_protection_findings(
+        **_request(GetIpamRouteProtectionFindingsInputDict)
+    )
+    client.get_ipam_route_protection_findings(
+        _request(GetIpamRouteProtectionFindingsInput)
+    )
+    client.get_ipam_route_protection_findings(
+        _request(GetIpamRouteProtectionFindingsInputDict)
+    )
+    client.get_ipam_routing_policy_registration_deltas(
+        ipam_internet_registry_association_id=_
+    )
+    client.get_ipam_routing_policy_registration_deltas(
+        **_request(GetIpamRoutingPolicyRegistrationDeltasInputDict)
+    )
+    client.get_ipam_routing_policy_registration_deltas(
+        _request(GetIpamRoutingPolicyRegistrationDeltasInput)
+    )
+    client.get_ipam_routing_policy_registration_deltas(
+        _request(GetIpamRoutingPolicyRegistrationDeltasInputDict)
+    )
+    client.get_ipam_routing_policy_registrations(
+        ipam_internet_registry_association_id=_
+    )
+    client.get_ipam_routing_policy_registrations(
+        **_request(GetIpamRoutingPolicyRegistrationsInputDict)
+    )
+    client.get_ipam_routing_policy_registrations(
+        _request(GetIpamRoutingPolicyRegistrationsInput)
+    )
+    client.get_ipam_routing_policy_registrations(
+        _request(GetIpamRoutingPolicyRegistrationsInputDict)
+    )
+    client.get_launch_template_data(instance_id=_)
+    client.get_launch_template_data(**_request(GetLaunchTemplateDataInputDict))
+    client.get_launch_template_data(_request(GetLaunchTemplateDataInput))
+    client.get_launch_template_data(_request(GetLaunchTemplateDataInputDict))
+    client.get_managed_prefix_list_associations(prefix_list_id=_)
+    client.get_managed_prefix_list_associations(
+        **_request(GetManagedPrefixListAssociationsInputDict)
+    )
+    client.get_managed_prefix_list_associations(
+        _request(GetManagedPrefixListAssociationsInput)
+    )
+    client.get_managed_prefix_list_associations(
+        _request(GetManagedPrefixListAssociationsInputDict)
+    )
+    client.get_managed_prefix_list_entries(prefix_list_id=_)
+    client.get_managed_prefix_list_entries(
+        **_request(GetManagedPrefixListEntriesInputDict)
+    )
+    client.get_managed_prefix_list_entries(_request(GetManagedPrefixListEntriesInput))
+    client.get_managed_prefix_list_entries(
+        _request(GetManagedPrefixListEntriesInputDict)
+    )
+    client.get_managed_resource_visibility()
+    client.get_managed_resource_visibility(
+        **_request(GetManagedResourceVisibilityInputDict)
+    )
+    client.get_managed_resource_visibility(_request(GetManagedResourceVisibilityInput))
+    client.get_managed_resource_visibility(
+        _request(GetManagedResourceVisibilityInputDict)
+    )
+    client.get_network_insights_access_scope_analysis_findings(
+        network_insights_access_scope_analysis_id=_
+    )
+    client.get_network_insights_access_scope_analysis_findings(
+        **_request(GetNetworkInsightsAccessScopeAnalysisFindingsInputDict)
+    )
+    client.get_network_insights_access_scope_analysis_findings(
+        _request(GetNetworkInsightsAccessScopeAnalysisFindingsInput)
+    )
+    client.get_network_insights_access_scope_analysis_findings(
+        _request(GetNetworkInsightsAccessScopeAnalysisFindingsInputDict)
+    )
+    client.get_network_insights_access_scope_content(network_insights_access_scope_id=_)
+    client.get_network_insights_access_scope_content(
+        **_request(GetNetworkInsightsAccessScopeContentInputDict)
+    )
+    client.get_network_insights_access_scope_content(
+        _request(GetNetworkInsightsAccessScopeContentInput)
+    )
+    client.get_network_insights_access_scope_content(
+        _request(GetNetworkInsightsAccessScopeContentInputDict)
+    )
+    client.get_password_data(instance_id=_)
+    client.get_password_data(**_request(GetPasswordDataInputDict))
+    client.get_password_data(_request(GetPasswordDataInput))
+    client.get_password_data(_request(GetPasswordDataInputDict))
+    client.get_reserved_instances_exchange_quote(reserved_instance_ids=_)
+    client.get_reserved_instances_exchange_quote(
+        **_request(GetReservedInstancesExchangeQuoteInputDict)
+    )
+    client.get_reserved_instances_exchange_quote(
+        _request(GetReservedInstancesExchangeQuoteInput)
+    )
+    client.get_reserved_instances_exchange_quote(
+        _request(GetReservedInstancesExchangeQuoteInputDict)
+    )
+    client.get_route_server_associations(route_server_id=_)
+    client.get_route_server_associations(
+        **_request(GetRouteServerAssociationsInputDict)
+    )
+    client.get_route_server_associations(_request(GetRouteServerAssociationsInput))
+    client.get_route_server_associations(_request(GetRouteServerAssociationsInputDict))
+    client.get_route_server_propagations(route_server_id=_)
+    client.get_route_server_propagations(
+        **_request(GetRouteServerPropagationsInputDict)
+    )
+    client.get_route_server_propagations(_request(GetRouteServerPropagationsInput))
+    client.get_route_server_propagations(_request(GetRouteServerPropagationsInputDict))
+    client.get_route_server_routing_database(route_server_id=_)
+    client.get_route_server_routing_database(
+        **_request(GetRouteServerRoutingDatabaseInputDict)
+    )
+    client.get_route_server_routing_database(
+        _request(GetRouteServerRoutingDatabaseInput)
+    )
+    client.get_route_server_routing_database(
+        _request(GetRouteServerRoutingDatabaseInputDict)
+    )
+    client.get_security_groups_for_vpc(vpc_id=_)
+    client.get_security_groups_for_vpc(**_request(GetSecurityGroupsForVpcInputDict))
+    client.get_security_groups_for_vpc(_request(GetSecurityGroupsForVpcInput))
+    client.get_security_groups_for_vpc(_request(GetSecurityGroupsForVpcInputDict))
+    client.get_serial_console_access_status()
+    client.get_serial_console_access_status(
+        **_request(GetSerialConsoleAccessStatusInputDict)
+    )
+    client.get_serial_console_access_status(_request(GetSerialConsoleAccessStatusInput))
+    client.get_serial_console_access_status(
+        _request(GetSerialConsoleAccessStatusInputDict)
+    )
+    client.get_snapshot_block_public_access_state()
+    client.get_snapshot_block_public_access_state(
+        **_request(GetSnapshotBlockPublicAccessStateInputDict)
+    )
+    client.get_snapshot_block_public_access_state(
+        _request(GetSnapshotBlockPublicAccessStateInput)
+    )
+    client.get_snapshot_block_public_access_state(
+        _request(GetSnapshotBlockPublicAccessStateInputDict)
+    )
+    client.get_spot_placement_scores(target_capacity=_)
+    client.get_spot_placement_scores(**_request(GetSpotPlacementScoresInputDict))
+    client.get_spot_placement_scores(_request(GetSpotPlacementScoresInput))
+    client.get_spot_placement_scores(_request(GetSpotPlacementScoresInputDict))
+    client.get_subnet_cidr_reservations(subnet_id=_)
+    client.get_subnet_cidr_reservations(**_request(GetSubnetCidrReservationsInputDict))
+    client.get_subnet_cidr_reservations(_request(GetSubnetCidrReservationsInput))
+    client.get_subnet_cidr_reservations(_request(GetSubnetCidrReservationsInputDict))
+    client.get_transit_gateway_attachment_nat_configuration(
+        transit_gateway_attachment_id=_
+    )
+    client.get_transit_gateway_attachment_nat_configuration(
+        **_request(GetTransitGatewayAttachmentNatConfigurationInputDict)
+    )
+    client.get_transit_gateway_attachment_nat_configuration(
+        _request(GetTransitGatewayAttachmentNatConfigurationInput)
+    )
+    client.get_transit_gateway_attachment_nat_configuration(
+        _request(GetTransitGatewayAttachmentNatConfigurationInputDict)
+    )
+    client.get_transit_gateway_attachment_propagations(transit_gateway_attachment_id=_)
+    client.get_transit_gateway_attachment_propagations(
+        **_request(GetTransitGatewayAttachmentPropagationsInputDict)
+    )
+    client.get_transit_gateway_attachment_propagations(
+        _request(GetTransitGatewayAttachmentPropagationsInput)
+    )
+    client.get_transit_gateway_attachment_propagations(
+        _request(GetTransitGatewayAttachmentPropagationsInputDict)
+    )
+    client.get_transit_gateway_metering_policy_entries(
+        transit_gateway_metering_policy_id=_
+    )
+    client.get_transit_gateway_metering_policy_entries(
+        **_request(GetTransitGatewayMeteringPolicyEntriesInputDict)
+    )
+    client.get_transit_gateway_metering_policy_entries(
+        _request(GetTransitGatewayMeteringPolicyEntriesInput)
+    )
+    client.get_transit_gateway_metering_policy_entries(
+        _request(GetTransitGatewayMeteringPolicyEntriesInputDict)
+    )
+    client.get_transit_gateway_multicast_domain_associations(
+        transit_gateway_multicast_domain_id=_
+    )
+    client.get_transit_gateway_multicast_domain_associations(
+        **_request(GetTransitGatewayMulticastDomainAssociationsInputDict)
+    )
+    client.get_transit_gateway_multicast_domain_associations(
+        _request(GetTransitGatewayMulticastDomainAssociationsInput)
+    )
+    client.get_transit_gateway_multicast_domain_associations(
+        _request(GetTransitGatewayMulticastDomainAssociationsInputDict)
+    )
+    client.get_transit_gateway_policy_table_associations(
+        transit_gateway_policy_table_id=_
+    )
+    client.get_transit_gateway_policy_table_associations(
+        **_request(GetTransitGatewayPolicyTableAssociationsInputDict)
+    )
+    client.get_transit_gateway_policy_table_associations(
+        _request(GetTransitGatewayPolicyTableAssociationsInput)
+    )
+    client.get_transit_gateway_policy_table_associations(
+        _request(GetTransitGatewayPolicyTableAssociationsInputDict)
+    )
+    client.get_transit_gateway_policy_table_entries(transit_gateway_policy_table_id=_)
+    client.get_transit_gateway_policy_table_entries(
+        **_request(GetTransitGatewayPolicyTableEntriesInputDict)
+    )
+    client.get_transit_gateway_policy_table_entries(
+        _request(GetTransitGatewayPolicyTableEntriesInput)
+    )
+    client.get_transit_gateway_policy_table_entries(
+        _request(GetTransitGatewayPolicyTableEntriesInputDict)
+    )
+    client.get_transit_gateway_prefix_list_references(transit_gateway_route_table_id=_)
+    client.get_transit_gateway_prefix_list_references(
+        **_request(GetTransitGatewayPrefixListReferencesInputDict)
+    )
+    client.get_transit_gateway_prefix_list_references(
+        _request(GetTransitGatewayPrefixListReferencesInput)
+    )
+    client.get_transit_gateway_prefix_list_references(
+        _request(GetTransitGatewayPrefixListReferencesInputDict)
+    )
+    client.get_transit_gateway_route_table_associations(
+        transit_gateway_route_table_id=_
+    )
+    client.get_transit_gateway_route_table_associations(
+        **_request(GetTransitGatewayRouteTableAssociationsInputDict)
+    )
+    client.get_transit_gateway_route_table_associations(
+        _request(GetTransitGatewayRouteTableAssociationsInput)
+    )
+    client.get_transit_gateway_route_table_associations(
+        _request(GetTransitGatewayRouteTableAssociationsInputDict)
+    )
+    client.get_transit_gateway_route_table_propagations(
+        transit_gateway_route_table_id=_
+    )
+    client.get_transit_gateway_route_table_propagations(
+        **_request(GetTransitGatewayRouteTablePropagationsInputDict)
+    )
+    client.get_transit_gateway_route_table_propagations(
+        _request(GetTransitGatewayRouteTablePropagationsInput)
+    )
+    client.get_transit_gateway_route_table_propagations(
+        _request(GetTransitGatewayRouteTablePropagationsInputDict)
+    )
+    client.get_verified_access_endpoint_policy(verified_access_endpoint_id=_)
+    client.get_verified_access_endpoint_policy(
+        **_request(GetVerifiedAccessEndpointPolicyInputDict)
+    )
+    client.get_verified_access_endpoint_policy(
+        _request(GetVerifiedAccessEndpointPolicyInput)
+    )
+    client.get_verified_access_endpoint_policy(
+        _request(GetVerifiedAccessEndpointPolicyInputDict)
+    )
+    client.get_verified_access_endpoint_targets(verified_access_endpoint_id=_)
+    client.get_verified_access_endpoint_targets(
+        **_request(GetVerifiedAccessEndpointTargetsInputDict)
+    )
+    client.get_verified_access_endpoint_targets(
+        _request(GetVerifiedAccessEndpointTargetsInput)
+    )
+    client.get_verified_access_endpoint_targets(
+        _request(GetVerifiedAccessEndpointTargetsInputDict)
+    )
+    client.get_verified_access_group_policy(verified_access_group_id=_)
+    client.get_verified_access_group_policy(
+        **_request(GetVerifiedAccessGroupPolicyInputDict)
+    )
+    client.get_verified_access_group_policy(_request(GetVerifiedAccessGroupPolicyInput))
+    client.get_verified_access_group_policy(
+        _request(GetVerifiedAccessGroupPolicyInputDict)
+    )
+    client.get_vpc_resources_blocking_encryption_enforcement(vpc_id=_)
+    client.get_vpc_resources_blocking_encryption_enforcement(
+        **_request(GetVpcResourcesBlockingEncryptionEnforcementInputDict)
+    )
+    client.get_vpc_resources_blocking_encryption_enforcement(
+        _request(GetVpcResourcesBlockingEncryptionEnforcementInput)
+    )
+    client.get_vpc_resources_blocking_encryption_enforcement(
+        _request(GetVpcResourcesBlockingEncryptionEnforcementInputDict)
+    )
+    client.get_vpn_connection_device_sample_configuration(
+        vpn_connection_id=_, vpn_connection_device_type_id=_
+    )
+    client.get_vpn_connection_device_sample_configuration(
+        **_request(GetVpnConnectionDeviceSampleConfigurationInputDict)
+    )
+    client.get_vpn_connection_device_sample_configuration(
+        _request(GetVpnConnectionDeviceSampleConfigurationInput)
+    )
+    client.get_vpn_connection_device_sample_configuration(
+        _request(GetVpnConnectionDeviceSampleConfigurationInputDict)
+    )
+    client.get_vpn_connection_device_types()
+    client.get_vpn_connection_device_types(
+        **_request(GetVpnConnectionDeviceTypesInputDict)
+    )
+    client.get_vpn_connection_device_types(_request(GetVpnConnectionDeviceTypesInput))
+    client.get_vpn_connection_device_types(
+        _request(GetVpnConnectionDeviceTypesInputDict)
+    )
+    client.get_vpn_tunnel_replacement_status(
+        vpn_connection_id=_, vpn_tunnel_outside_ip_address=_
+    )
+    client.get_vpn_tunnel_replacement_status(
+        **_request(GetVpnTunnelReplacementStatusInputDict)
+    )
+    client.get_vpn_tunnel_replacement_status(
+        _request(GetVpnTunnelReplacementStatusInput)
+    )
+    client.get_vpn_tunnel_replacement_status(
+        _request(GetVpnTunnelReplacementStatusInputDict)
+    )
+    client.import_client_vpn_client_certificate_revocation_list(
+        client_vpn_endpoint_id=_, certificate_revocation_list=_
+    )
+    client.import_client_vpn_client_certificate_revocation_list(
+        **_request(ImportClientVpnClientCertificateRevocationListInputDict)
+    )
+    client.import_client_vpn_client_certificate_revocation_list(
+        _request(ImportClientVpnClientCertificateRevocationListInput)
+    )
+    client.import_client_vpn_client_certificate_revocation_list(
+        _request(ImportClientVpnClientCertificateRevocationListInputDict)
+    )
+    client.import_image()
+    client.import_image(**_request(ImportImageInputDict))
+    client.import_image(_request(ImportImageInput))
+    client.import_image(_request(ImportImageInputDict))
+    client.import_instance(platform=_)
+    client.import_instance(**_request(ImportInstanceInputDict))
+    client.import_instance(_request(ImportInstanceInput))
+    client.import_instance(_request(ImportInstanceInputDict))
+    client.import_key_pair(key_name=_, public_key_material=_)
+    client.import_key_pair(**_request(ImportKeyPairInputDict))
+    client.import_key_pair(_request(ImportKeyPairInput))
+    client.import_key_pair(_request(ImportKeyPairInputDict))
+    client.import_snapshot()
+    client.import_snapshot(**_request(ImportSnapshotInputDict))
+    client.import_snapshot(_request(ImportSnapshotInput))
+    client.import_snapshot(_request(ImportSnapshotInputDict))
+    client.import_volume(image=_, volume=_)
+    client.import_volume(**_request(ImportVolumeInputDict))
+    client.import_volume(_request(ImportVolumeInput))
+    client.import_volume(_request(ImportVolumeInputDict))
+    client.list_images_in_recycle_bin()
+    client.list_images_in_recycle_bin(**_request(ListImagesInRecycleBinInputDict))
+    client.list_images_in_recycle_bin(_request(ListImagesInRecycleBinInput))
+    client.list_images_in_recycle_bin(_request(ListImagesInRecycleBinInputDict))
+    client.list_snapshots_in_recycle_bin()
+    client.list_snapshots_in_recycle_bin(**_request(ListSnapshotsInRecycleBinInputDict))
+    client.list_snapshots_in_recycle_bin(_request(ListSnapshotsInRecycleBinInput))
+    client.list_snapshots_in_recycle_bin(_request(ListSnapshotsInRecycleBinInputDict))
+    client.list_volumes_in_recycle_bin()
+    client.list_volumes_in_recycle_bin(**_request(ListVolumesInRecycleBinInputDict))
+    client.list_volumes_in_recycle_bin(_request(ListVolumesInRecycleBinInput))
+    client.list_volumes_in_recycle_bin(_request(ListVolumesInRecycleBinInputDict))
+    client.lock_snapshot(snapshot_id=_, lock_mode=_)
+    client.lock_snapshot(**_request(LockSnapshotInputDict))
+    client.lock_snapshot(_request(LockSnapshotInput))
+    client.lock_snapshot(_request(LockSnapshotInputDict))
+    client.modify_account_vpc_encryption_control()
+    client.modify_account_vpc_encryption_control(
+        **_request(ModifyAccountVpcEncryptionControlInputDict)
+    )
+    client.modify_account_vpc_encryption_control(
+        _request(ModifyAccountVpcEncryptionControlInput)
+    )
+    client.modify_account_vpc_encryption_control(
+        _request(ModifyAccountVpcEncryptionControlInputDict)
+    )
+    client.modify_address_attribute(allocation_id=_)
+    client.modify_address_attribute(**_request(ModifyAddressAttributeInputDict))
+    client.modify_address_attribute(_request(ModifyAddressAttributeInput))
+    client.modify_address_attribute(_request(ModifyAddressAttributeInputDict))
+    client.modify_application_status_check(application_status_check_id=_)
+    client.modify_application_status_check(
+        **_request(ModifyApplicationStatusCheckInputDict)
+    )
+    client.modify_application_status_check(_request(ModifyApplicationStatusCheckInput))
+    client.modify_application_status_check(
+        _request(ModifyApplicationStatusCheckInputDict)
+    )
+    client.modify_availability_zone_group(group_name=_, opt_in_status=_)
+    client.modify_availability_zone_group(
+        **_request(ModifyAvailabilityZoneGroupInputDict)
+    )
+    client.modify_availability_zone_group(_request(ModifyAvailabilityZoneGroupInput))
+    client.modify_availability_zone_group(
+        _request(ModifyAvailabilityZoneGroupInputDict)
+    )
+    client.modify_capacity_reservation(capacity_reservation_id=_)
+    client.modify_capacity_reservation(**_request(ModifyCapacityReservationInputDict))
+    client.modify_capacity_reservation(_request(ModifyCapacityReservationInput))
+    client.modify_capacity_reservation(_request(ModifyCapacityReservationInputDict))
+    client.modify_capacity_reservation_fleet(capacity_reservation_fleet_id=_)
+    client.modify_capacity_reservation_fleet(
+        **_request(ModifyCapacityReservationFleetInputDict)
+    )
+    client.modify_capacity_reservation_fleet(
+        _request(ModifyCapacityReservationFleetInput)
+    )
+    client.modify_capacity_reservation_fleet(
+        _request(ModifyCapacityReservationFleetInputDict)
+    )
+    client.modify_client_vpn_endpoint(client_vpn_endpoint_id=_)
+    client.modify_client_vpn_endpoint(**_request(ModifyClientVpnEndpointInputDict))
+    client.modify_client_vpn_endpoint(_request(ModifyClientVpnEndpointInput))
+    client.modify_client_vpn_endpoint(_request(ModifyClientVpnEndpointInputDict))
+    client.modify_client_vpn_endpoint_authorization_policy(client_vpn_endpoint_id=_)
+    client.modify_client_vpn_endpoint_authorization_policy(
+        **_request(ModifyClientVpnEndpointAuthorizationPolicyInputDict)
+    )
+    client.modify_client_vpn_endpoint_authorization_policy(
+        _request(ModifyClientVpnEndpointAuthorizationPolicyInput)
+    )
+    client.modify_client_vpn_endpoint_authorization_policy(
+        _request(ModifyClientVpnEndpointAuthorizationPolicyInputDict)
+    )
+    client.modify_default_credit_specification(instance_family=_, cpu_credits=_)
+    client.modify_default_credit_specification(
+        **_request(ModifyDefaultCreditSpecificationInputDict)
+    )
+    client.modify_default_credit_specification(
+        _request(ModifyDefaultCreditSpecificationInput)
+    )
+    client.modify_default_credit_specification(
+        _request(ModifyDefaultCreditSpecificationInputDict)
+    )
+    client.modify_ebs_default_kms_key_id(kms_key_id=_)
+    client.modify_ebs_default_kms_key_id(**_request(ModifyEbsDefaultKmsKeyIdInputDict))
+    client.modify_ebs_default_kms_key_id(_request(ModifyEbsDefaultKmsKeyIdInput))
+    client.modify_ebs_default_kms_key_id(_request(ModifyEbsDefaultKmsKeyIdInputDict))
+    client.modify_fleet(fleet_id=_)
+    client.modify_fleet(**_request(ModifyFleetInputDict))
+    client.modify_fleet(_request(ModifyFleetInput))
+    client.modify_fleet(_request(ModifyFleetInputDict))
+    client.modify_fpga_image_attribute(fpga_image_id=_)
+    client.modify_fpga_image_attribute(**_request(ModifyFpgaImageAttributeInputDict))
+    client.modify_fpga_image_attribute(_request(ModifyFpgaImageAttributeInput))
+    client.modify_fpga_image_attribute(_request(ModifyFpgaImageAttributeInputDict))
+    client.modify_hosts(host_ids=_)
+    client.modify_hosts(**_request(ModifyHostsInputDict))
+    client.modify_hosts(_request(ModifyHostsInput))
+    client.modify_hosts(_request(ModifyHostsInputDict))
+    client.modify_identity_id_format(resource=_, use_long_ids=_, principal_arn=_)
+    client.modify_identity_id_format(**_request(ModifyIdentityIdFormatInputDict))
+    client.modify_identity_id_format(_request(ModifyIdentityIdFormatInput))
+    client.modify_identity_id_format(_request(ModifyIdentityIdFormatInputDict))
+    client.modify_id_format(resource=_, use_long_ids=_)
+    client.modify_id_format(**_request(ModifyIdFormatInputDict))
+    client.modify_id_format(_request(ModifyIdFormatInput))
+    client.modify_id_format(_request(ModifyIdFormatInputDict))
+    client.modify_image_attribute(image_id=_)
+    client.modify_image_attribute(**_request(ModifyImageAttributeInputDict))
+    client.modify_image_attribute(_request(ModifyImageAttributeInput))
+    client.modify_image_attribute(_request(ModifyImageAttributeInputDict))
+    client.modify_instance_attribute(instance_id=_)
+    client.modify_instance_attribute(**_request(ModifyInstanceAttributeInputDict))
+    client.modify_instance_attribute(_request(ModifyInstanceAttributeInput))
+    client.modify_instance_attribute(_request(ModifyInstanceAttributeInputDict))
+    client.modify_instance_capacity_reservation_attributes(
+        instance_id=_, capacity_reservation_specification=_
+    )
+    client.modify_instance_capacity_reservation_attributes(
+        **_request(ModifyInstanceCapacityReservationAttributesInputDict)
+    )
+    client.modify_instance_capacity_reservation_attributes(
+        _request(ModifyInstanceCapacityReservationAttributesInput)
+    )
+    client.modify_instance_capacity_reservation_attributes(
+        _request(ModifyInstanceCapacityReservationAttributesInputDict)
+    )
+    client.modify_instance_connect_endpoint(instance_connect_endpoint_id=_)
+    client.modify_instance_connect_endpoint(
+        **_request(ModifyInstanceConnectEndpointInputDict)
+    )
+    client.modify_instance_connect_endpoint(
+        _request(ModifyInstanceConnectEndpointInput)
+    )
+    client.modify_instance_connect_endpoint(
+        _request(ModifyInstanceConnectEndpointInputDict)
+    )
+    client.modify_instance_cpu_options(instance_id=_)
+    client.modify_instance_cpu_options(**_request(ModifyInstanceCpuOptionsInputDict))
+    client.modify_instance_cpu_options(_request(ModifyInstanceCpuOptionsInput))
+    client.modify_instance_cpu_options(_request(ModifyInstanceCpuOptionsInputDict))
+    client.modify_instance_credit_specification(instance_credit_specifications=_)
+    client.modify_instance_credit_specification(
+        **_request(ModifyInstanceCreditSpecificationInputDict)
+    )
+    client.modify_instance_credit_specification(
+        _request(ModifyInstanceCreditSpecificationInput)
+    )
+    client.modify_instance_credit_specification(
+        _request(ModifyInstanceCreditSpecificationInputDict)
+    )
+    client.modify_instance_event_start_time(
+        instance_id=_, instance_event_id=_, not_before=_
+    )
+    client.modify_instance_event_start_time(
+        **_request(ModifyInstanceEventStartTimeInputDict)
+    )
+    client.modify_instance_event_start_time(_request(ModifyInstanceEventStartTimeInput))
+    client.modify_instance_event_start_time(
+        _request(ModifyInstanceEventStartTimeInputDict)
+    )
+    client.modify_instance_event_window(instance_event_window_id=_)
+    client.modify_instance_event_window(**_request(ModifyInstanceEventWindowInputDict))
+    client.modify_instance_event_window(_request(ModifyInstanceEventWindowInput))
+    client.modify_instance_event_window(_request(ModifyInstanceEventWindowInputDict))
+    client.modify_instance_maintenance_options(instance_id=_)
+    client.modify_instance_maintenance_options(
+        **_request(ModifyInstanceMaintenanceOptionsInputDict)
+    )
+    client.modify_instance_maintenance_options(
+        _request(ModifyInstanceMaintenanceOptionsInput)
+    )
+    client.modify_instance_maintenance_options(
+        _request(ModifyInstanceMaintenanceOptionsInputDict)
+    )
+    client.modify_instance_metadata_defaults()
+    client.modify_instance_metadata_defaults(
+        **_request(ModifyInstanceMetadataDefaultsInputDict)
+    )
+    client.modify_instance_metadata_defaults(
+        _request(ModifyInstanceMetadataDefaultsInput)
+    )
+    client.modify_instance_metadata_defaults(
+        _request(ModifyInstanceMetadataDefaultsInputDict)
+    )
+    client.modify_instance_metadata_options(instance_id=_)
+    client.modify_instance_metadata_options(
+        **_request(ModifyInstanceMetadataOptionsInputDict)
+    )
+    client.modify_instance_metadata_options(
+        _request(ModifyInstanceMetadataOptionsInput)
+    )
+    client.modify_instance_metadata_options(
+        _request(ModifyInstanceMetadataOptionsInputDict)
+    )
+    client.modify_instance_network_performance_options(
+        instance_id=_, bandwidth_weighting=_
+    )
+    client.modify_instance_network_performance_options(
+        **_request(ModifyInstanceNetworkPerformanceOptionsInputDict)
+    )
+    client.modify_instance_network_performance_options(
+        _request(ModifyInstanceNetworkPerformanceOptionsInput)
+    )
+    client.modify_instance_network_performance_options(
+        _request(ModifyInstanceNetworkPerformanceOptionsInputDict)
+    )
+    client.modify_instance_placement(instance_id=_)
+    client.modify_instance_placement(**_request(ModifyInstancePlacementInputDict))
+    client.modify_instance_placement(_request(ModifyInstancePlacementInput))
+    client.modify_instance_placement(_request(ModifyInstancePlacementInputDict))
+    client.modify_ipam(ipam_id=_)
+    client.modify_ipam(**_request(ModifyIpamInputDict))
+    client.modify_ipam(_request(ModifyIpamInput))
+    client.modify_ipam(_request(ModifyIpamInputDict))
+    client.modify_ipam_policy_allocation_rules(
+        ipam_policy_id=_, locale=_, resource_type=_
+    )
+    client.modify_ipam_policy_allocation_rules(
+        **_request(ModifyIpamPolicyAllocationRulesInputDict)
+    )
+    client.modify_ipam_policy_allocation_rules(
+        _request(ModifyIpamPolicyAllocationRulesInput)
+    )
+    client.modify_ipam_policy_allocation_rules(
+        _request(ModifyIpamPolicyAllocationRulesInputDict)
+    )
+    client.modify_ipam_pool(ipam_pool_id=_)
+    client.modify_ipam_pool(**_request(ModifyIpamPoolInputDict))
+    client.modify_ipam_pool(_request(ModifyIpamPoolInput))
+    client.modify_ipam_pool(_request(ModifyIpamPoolInputDict))
+    client.modify_ipam_pool_allocation(ipam_pool_allocation_id=_)
+    client.modify_ipam_pool_allocation(**_request(ModifyIpamPoolAllocationInputDict))
+    client.modify_ipam_pool_allocation(_request(ModifyIpamPoolAllocationInput))
+    client.modify_ipam_pool_allocation(_request(ModifyIpamPoolAllocationInputDict))
+    client.modify_ipam_prefix_list_resolver(ipam_prefix_list_resolver_id=_)
+    client.modify_ipam_prefix_list_resolver(
+        **_request(ModifyIpamPrefixListResolverInputDict)
+    )
+    client.modify_ipam_prefix_list_resolver(_request(ModifyIpamPrefixListResolverInput))
+    client.modify_ipam_prefix_list_resolver(
+        _request(ModifyIpamPrefixListResolverInputDict)
+    )
+    client.modify_ipam_prefix_list_resolver_target(
+        ipam_prefix_list_resolver_target_id=_
+    )
+    client.modify_ipam_prefix_list_resolver_target(
+        **_request(ModifyIpamPrefixListResolverTargetInputDict)
+    )
+    client.modify_ipam_prefix_list_resolver_target(
+        _request(ModifyIpamPrefixListResolverTargetInput)
+    )
+    client.modify_ipam_prefix_list_resolver_target(
+        _request(ModifyIpamPrefixListResolverTargetInputDict)
+    )
+    client.modify_ipam_resource_cidr(
+        resource_id=_,
+        resource_cidr=_,
+        resource_region=_,
+        current_ipam_scope_id=_,
+        monitored=_,
+    )
+    client.modify_ipam_resource_cidr(**_request(ModifyIpamResourceCidrInputDict))
+    client.modify_ipam_resource_cidr(_request(ModifyIpamResourceCidrInput))
+    client.modify_ipam_resource_cidr(_request(ModifyIpamResourceCidrInputDict))
+    client.modify_ipam_resource_discovery(ipam_resource_discovery_id=_)
+    client.modify_ipam_resource_discovery(
+        **_request(ModifyIpamResourceDiscoveryInputDict)
+    )
+    client.modify_ipam_resource_discovery(_request(ModifyIpamResourceDiscoveryInput))
+    client.modify_ipam_resource_discovery(
+        _request(ModifyIpamResourceDiscoveryInputDict)
+    )
+    client.modify_ipam_routing_policy_registration(
+        ipam_internet_registry_association_id=_, cidr=_, asns=_
+    )
+    client.modify_ipam_routing_policy_registration(
+        **_request(ModifyIpamRoutingPolicyRegistrationInputDict)
+    )
+    client.modify_ipam_routing_policy_registration(
+        _request(ModifyIpamRoutingPolicyRegistrationInput)
+    )
+    client.modify_ipam_routing_policy_registration(
+        _request(ModifyIpamRoutingPolicyRegistrationInputDict)
+    )
+    client.modify_ipam_scope(ipam_scope_id=_)
+    client.modify_ipam_scope(**_request(ModifyIpamScopeInputDict))
+    client.modify_ipam_scope(_request(ModifyIpamScopeInput))
+    client.modify_ipam_scope(_request(ModifyIpamScopeInputDict))
+    client.modify_launch_template()
+    client.modify_launch_template(**_request(ModifyLaunchTemplateInputDict))
+    client.modify_launch_template(_request(ModifyLaunchTemplateInput))
+    client.modify_launch_template(_request(ModifyLaunchTemplateInputDict))
+    client.modify_local_gateway_route(local_gateway_route_table_id=_)
+    client.modify_local_gateway_route(**_request(ModifyLocalGatewayRouteInputDict))
+    client.modify_local_gateway_route(_request(ModifyLocalGatewayRouteInput))
+    client.modify_local_gateway_route(_request(ModifyLocalGatewayRouteInputDict))
+    client.modify_managed_prefix_list(prefix_list_id=_)
+    client.modify_managed_prefix_list(**_request(ModifyManagedPrefixListInputDict))
+    client.modify_managed_prefix_list(_request(ModifyManagedPrefixListInput))
+    client.modify_managed_prefix_list(_request(ModifyManagedPrefixListInputDict))
+    client.modify_managed_resource_visibility(default_visibility=_)
+    client.modify_managed_resource_visibility(
+        **_request(ModifyManagedResourceVisibilityInputDict)
+    )
+    client.modify_managed_resource_visibility(
+        _request(ModifyManagedResourceVisibilityInput)
+    )
+    client.modify_managed_resource_visibility(
+        _request(ModifyManagedResourceVisibilityInputDict)
+    )
+    client.modify_network_interface_attribute(network_interface_id=_)
+    client.modify_network_interface_attribute(
+        **_request(ModifyNetworkInterfaceAttributeInputDict)
+    )
+    client.modify_network_interface_attribute(
+        _request(ModifyNetworkInterfaceAttributeInput)
+    )
+    client.modify_network_interface_attribute(
+        _request(ModifyNetworkInterfaceAttributeInputDict)
+    )
+    client.modify_private_dns_name_options(instance_id=_)
+    client.modify_private_dns_name_options(
+        **_request(ModifyPrivateDnsNameOptionsInputDict)
+    )
+    client.modify_private_dns_name_options(_request(ModifyPrivateDnsNameOptionsInput))
+    client.modify_private_dns_name_options(
+        _request(ModifyPrivateDnsNameOptionsInputDict)
+    )
+    client.modify_public_ip_dns_name_options(network_interface_id=_, hostname_type=_)
+    client.modify_public_ip_dns_name_options(
+        **_request(ModifyPublicIpDnsNameOptionsInputDict)
+    )
+    client.modify_public_ip_dns_name_options(
+        _request(ModifyPublicIpDnsNameOptionsInput)
+    )
+    client.modify_public_ip_dns_name_options(
+        _request(ModifyPublicIpDnsNameOptionsInputDict)
+    )
+    client.modify_reserved_instances(reserved_instances_ids=_, target_configurations=_)
+    client.modify_reserved_instances(**_request(ModifyReservedInstancesInputDict))
+    client.modify_reserved_instances(_request(ModifyReservedInstancesInput))
+    client.modify_reserved_instances(_request(ModifyReservedInstancesInputDict))
+    client.modify_route_server(route_server_id=_)
+    client.modify_route_server(**_request(ModifyRouteServerInputDict))
+    client.modify_route_server(_request(ModifyRouteServerInput))
+    client.modify_route_server(_request(ModifyRouteServerInputDict))
+    client.modify_security_group_rules(group_id=_, security_group_rules=_)
+    client.modify_security_group_rules(**_request(ModifySecurityGroupRulesInputDict))
+    client.modify_security_group_rules(_request(ModifySecurityGroupRulesInput))
+    client.modify_security_group_rules(_request(ModifySecurityGroupRulesInputDict))
+    client.modify_snapshot_attribute(snapshot_id=_)
+    client.modify_snapshot_attribute(**_request(ModifySnapshotAttributeInputDict))
+    client.modify_snapshot_attribute(_request(ModifySnapshotAttributeInput))
+    client.modify_snapshot_attribute(_request(ModifySnapshotAttributeInputDict))
+    client.modify_snapshot_tier(snapshot_id=_)
+    client.modify_snapshot_tier(**_request(ModifySnapshotTierInputDict))
+    client.modify_snapshot_tier(_request(ModifySnapshotTierInput))
+    client.modify_snapshot_tier(_request(ModifySnapshotTierInputDict))
+    client.modify_spot_fleet_request(spot_fleet_request_id=_)
+    client.modify_spot_fleet_request(**_request(ModifySpotFleetRequestInputDict))
+    client.modify_spot_fleet_request(_request(ModifySpotFleetRequestInput))
+    client.modify_spot_fleet_request(_request(ModifySpotFleetRequestInputDict))
+    client.modify_subnet_attribute(subnet_id=_)
+    client.modify_subnet_attribute(**_request(ModifySubnetAttributeInputDict))
+    client.modify_subnet_attribute(_request(ModifySubnetAttributeInput))
+    client.modify_subnet_attribute(_request(ModifySubnetAttributeInputDict))
+    client.modify_traffic_mirror_filter_network_services(traffic_mirror_filter_id=_)
+    client.modify_traffic_mirror_filter_network_services(
+        **_request(ModifyTrafficMirrorFilterNetworkServicesInputDict)
+    )
+    client.modify_traffic_mirror_filter_network_services(
+        _request(ModifyTrafficMirrorFilterNetworkServicesInput)
+    )
+    client.modify_traffic_mirror_filter_network_services(
+        _request(ModifyTrafficMirrorFilterNetworkServicesInputDict)
+    )
+    client.modify_traffic_mirror_filter_rule(traffic_mirror_filter_rule_id=_)
+    client.modify_traffic_mirror_filter_rule(
+        **_request(ModifyTrafficMirrorFilterRuleInputDict)
+    )
+    client.modify_traffic_mirror_filter_rule(
+        _request(ModifyTrafficMirrorFilterRuleInput)
+    )
+    client.modify_traffic_mirror_filter_rule(
+        _request(ModifyTrafficMirrorFilterRuleInputDict)
+    )
+    client.modify_traffic_mirror_session(traffic_mirror_session_id=_)
+    client.modify_traffic_mirror_session(
+        **_request(ModifyTrafficMirrorSessionInputDict)
+    )
+    client.modify_traffic_mirror_session(_request(ModifyTrafficMirrorSessionInput))
+    client.modify_traffic_mirror_session(_request(ModifyTrafficMirrorSessionInputDict))
+    client.modify_transit_gateway(transit_gateway_id=_)
+    client.modify_transit_gateway(**_request(ModifyTransitGatewayInputDict))
+    client.modify_transit_gateway(_request(ModifyTransitGatewayInput))
+    client.modify_transit_gateway(_request(ModifyTransitGatewayInputDict))
+    client.modify_transit_gateway_attachment_nat_configuration(
+        transit_gateway_attachment_id=_
+    )
+    client.modify_transit_gateway_attachment_nat_configuration(
+        **_request(ModifyTransitGatewayAttachmentNatConfigurationInputDict)
+    )
+    client.modify_transit_gateway_attachment_nat_configuration(
+        _request(ModifyTransitGatewayAttachmentNatConfigurationInput)
+    )
+    client.modify_transit_gateway_attachment_nat_configuration(
+        _request(ModifyTransitGatewayAttachmentNatConfigurationInputDict)
+    )
+    client.modify_transit_gateway_metering_policy(transit_gateway_metering_policy_id=_)
+    client.modify_transit_gateway_metering_policy(
+        **_request(ModifyTransitGatewayMeteringPolicyInputDict)
+    )
+    client.modify_transit_gateway_metering_policy(
+        _request(ModifyTransitGatewayMeteringPolicyInput)
+    )
+    client.modify_transit_gateway_metering_policy(
+        _request(ModifyTransitGatewayMeteringPolicyInputDict)
+    )
+    client.modify_transit_gateway_policy_table_entry(
+        transit_gateway_policy_table_id=_, policy_rule_number=_
+    )
+    client.modify_transit_gateway_policy_table_entry(
+        **_request(ModifyTransitGatewayPolicyTableEntryInputDict)
+    )
+    client.modify_transit_gateway_policy_table_entry(
+        _request(ModifyTransitGatewayPolicyTableEntryInput)
+    )
+    client.modify_transit_gateway_policy_table_entry(
+        _request(ModifyTransitGatewayPolicyTableEntryInputDict)
+    )
+    client.modify_transit_gateway_prefix_list_reference(
+        transit_gateway_route_table_id=_, prefix_list_id=_
+    )
+    client.modify_transit_gateway_prefix_list_reference(
+        **_request(ModifyTransitGatewayPrefixListReferenceInputDict)
+    )
+    client.modify_transit_gateway_prefix_list_reference(
+        _request(ModifyTransitGatewayPrefixListReferenceInput)
+    )
+    client.modify_transit_gateway_prefix_list_reference(
+        _request(ModifyTransitGatewayPrefixListReferenceInputDict)
+    )
+    client.modify_transit_gateway_vpc_attachment(transit_gateway_attachment_id=_)
+    client.modify_transit_gateway_vpc_attachment(
+        **_request(ModifyTransitGatewayVpcAttachmentInputDict)
+    )
+    client.modify_transit_gateway_vpc_attachment(
+        _request(ModifyTransitGatewayVpcAttachmentInput)
+    )
+    client.modify_transit_gateway_vpc_attachment(
+        _request(ModifyTransitGatewayVpcAttachmentInputDict)
+    )
+    client.modify_verified_access_endpoint(verified_access_endpoint_id=_)
+    client.modify_verified_access_endpoint(
+        **_request(ModifyVerifiedAccessEndpointInputDict)
+    )
+    client.modify_verified_access_endpoint(_request(ModifyVerifiedAccessEndpointInput))
+    client.modify_verified_access_endpoint(
+        _request(ModifyVerifiedAccessEndpointInputDict)
+    )
+    client.modify_verified_access_endpoint_policy(verified_access_endpoint_id=_)
+    client.modify_verified_access_endpoint_policy(
+        **_request(ModifyVerifiedAccessEndpointPolicyInputDict)
+    )
+    client.modify_verified_access_endpoint_policy(
+        _request(ModifyVerifiedAccessEndpointPolicyInput)
+    )
+    client.modify_verified_access_endpoint_policy(
+        _request(ModifyVerifiedAccessEndpointPolicyInputDict)
+    )
+    client.modify_verified_access_group(verified_access_group_id=_)
+    client.modify_verified_access_group(**_request(ModifyVerifiedAccessGroupInputDict))
+    client.modify_verified_access_group(_request(ModifyVerifiedAccessGroupInput))
+    client.modify_verified_access_group(_request(ModifyVerifiedAccessGroupInputDict))
+    client.modify_verified_access_group_policy(verified_access_group_id=_)
+    client.modify_verified_access_group_policy(
+        **_request(ModifyVerifiedAccessGroupPolicyInputDict)
+    )
+    client.modify_verified_access_group_policy(
+        _request(ModifyVerifiedAccessGroupPolicyInput)
+    )
+    client.modify_verified_access_group_policy(
+        _request(ModifyVerifiedAccessGroupPolicyInputDict)
+    )
+    client.modify_verified_access_instance(verified_access_instance_id=_)
+    client.modify_verified_access_instance(
+        **_request(ModifyVerifiedAccessInstanceInputDict)
+    )
+    client.modify_verified_access_instance(_request(ModifyVerifiedAccessInstanceInput))
+    client.modify_verified_access_instance(
+        _request(ModifyVerifiedAccessInstanceInputDict)
+    )
+    client.modify_verified_access_instance_logging_configuration(
+        verified_access_instance_id=_, access_logs=_
+    )
+    client.modify_verified_access_instance_logging_configuration(
+        **_request(ModifyVerifiedAccessInstanceLoggingConfigurationInputDict)
+    )
+    client.modify_verified_access_instance_logging_configuration(
+        _request(ModifyVerifiedAccessInstanceLoggingConfigurationInput)
+    )
+    client.modify_verified_access_instance_logging_configuration(
+        _request(ModifyVerifiedAccessInstanceLoggingConfigurationInputDict)
+    )
+    client.modify_verified_access_trust_provider(verified_access_trust_provider_id=_)
+    client.modify_verified_access_trust_provider(
+        **_request(ModifyVerifiedAccessTrustProviderInputDict)
+    )
+    client.modify_verified_access_trust_provider(
+        _request(ModifyVerifiedAccessTrustProviderInput)
+    )
+    client.modify_verified_access_trust_provider(
+        _request(ModifyVerifiedAccessTrustProviderInputDict)
+    )
+    client.modify_volume(volume_id=_)
+    client.modify_volume(**_request(ModifyVolumeInputDict))
+    client.modify_volume(_request(ModifyVolumeInput))
+    client.modify_volume(_request(ModifyVolumeInputDict))
+    client.modify_volume_attribute(volume_id=_)
+    client.modify_volume_attribute(**_request(ModifyVolumeAttributeInputDict))
+    client.modify_volume_attribute(_request(ModifyVolumeAttributeInput))
+    client.modify_volume_attribute(_request(ModifyVolumeAttributeInputDict))
+    client.modify_vpc_attribute(vpc_id=_)
+    client.modify_vpc_attribute(**_request(ModifyVpcAttributeInputDict))
+    client.modify_vpc_attribute(_request(ModifyVpcAttributeInput))
+    client.modify_vpc_attribute(_request(ModifyVpcAttributeInputDict))
+    client.modify_vpc_block_public_access_exclusion(
+        exclusion_id=_, internet_gateway_exclusion_mode=_
+    )
+    client.modify_vpc_block_public_access_exclusion(
+        **_request(ModifyVpcBlockPublicAccessExclusionInputDict)
+    )
+    client.modify_vpc_block_public_access_exclusion(
+        _request(ModifyVpcBlockPublicAccessExclusionInput)
+    )
+    client.modify_vpc_block_public_access_exclusion(
+        _request(ModifyVpcBlockPublicAccessExclusionInputDict)
+    )
+    client.modify_vpc_block_public_access_options(internet_gateway_block_mode=_)
+    client.modify_vpc_block_public_access_options(
+        **_request(ModifyVpcBlockPublicAccessOptionsInputDict)
+    )
+    client.modify_vpc_block_public_access_options(
+        _request(ModifyVpcBlockPublicAccessOptionsInput)
+    )
+    client.modify_vpc_block_public_access_options(
+        _request(ModifyVpcBlockPublicAccessOptionsInputDict)
+    )
+    client.modify_vpc_encryption_control(vpc_encryption_control_id=_)
+    client.modify_vpc_encryption_control(
+        **_request(ModifyVpcEncryptionControlInputDict)
+    )
+    client.modify_vpc_encryption_control(_request(ModifyVpcEncryptionControlInput))
+    client.modify_vpc_encryption_control(_request(ModifyVpcEncryptionControlInputDict))
+    client.modify_vpc_endpoint(vpc_endpoint_id=_)
+    client.modify_vpc_endpoint(**_request(ModifyVpcEndpointInputDict))
+    client.modify_vpc_endpoint(_request(ModifyVpcEndpointInput))
+    client.modify_vpc_endpoint(_request(ModifyVpcEndpointInputDict))
+    client.modify_vpc_endpoint_connection_notification(connection_notification_id=_)
+    client.modify_vpc_endpoint_connection_notification(
+        **_request(ModifyVpcEndpointConnectionNotificationInputDict)
+    )
+    client.modify_vpc_endpoint_connection_notification(
+        _request(ModifyVpcEndpointConnectionNotificationInput)
+    )
+    client.modify_vpc_endpoint_connection_notification(
+        _request(ModifyVpcEndpointConnectionNotificationInputDict)
+    )
+    client.modify_vpc_endpoint_payer_responsibility(
+        vpc_endpoint_id=_, payer_responsibility=_, scope=_
+    )
+    client.modify_vpc_endpoint_payer_responsibility(
+        **_request(ModifyVpcEndpointPayerResponsibilityInputDict)
+    )
+    client.modify_vpc_endpoint_payer_responsibility(
+        _request(ModifyVpcEndpointPayerResponsibilityInput)
+    )
+    client.modify_vpc_endpoint_payer_responsibility(
+        _request(ModifyVpcEndpointPayerResponsibilityInputDict)
+    )
+    client.modify_vpc_endpoint_service_configuration(service_id=_)
+    client.modify_vpc_endpoint_service_configuration(
+        **_request(ModifyVpcEndpointServiceConfigurationInputDict)
+    )
+    client.modify_vpc_endpoint_service_configuration(
+        _request(ModifyVpcEndpointServiceConfigurationInput)
+    )
+    client.modify_vpc_endpoint_service_configuration(
+        _request(ModifyVpcEndpointServiceConfigurationInputDict)
+    )
+    client.modify_vpc_endpoint_service_payer_responsibility(
+        service_id=_, payer_responsibility=_
+    )
+    client.modify_vpc_endpoint_service_payer_responsibility(
+        **_request(ModifyVpcEndpointServicePayerResponsibilityInputDict)
+    )
+    client.modify_vpc_endpoint_service_payer_responsibility(
+        _request(ModifyVpcEndpointServicePayerResponsibilityInput)
+    )
+    client.modify_vpc_endpoint_service_payer_responsibility(
+        _request(ModifyVpcEndpointServicePayerResponsibilityInputDict)
+    )
+    client.modify_vpc_endpoint_service_permissions(service_id=_)
+    client.modify_vpc_endpoint_service_permissions(
+        **_request(ModifyVpcEndpointServicePermissionsInputDict)
+    )
+    client.modify_vpc_endpoint_service_permissions(
+        _request(ModifyVpcEndpointServicePermissionsInput)
+    )
+    client.modify_vpc_endpoint_service_permissions(
+        _request(ModifyVpcEndpointServicePermissionsInputDict)
+    )
+    client.modify_vpc_peering_connection_options(vpc_peering_connection_id=_)
+    client.modify_vpc_peering_connection_options(
+        **_request(ModifyVpcPeeringConnectionOptionsInputDict)
+    )
+    client.modify_vpc_peering_connection_options(
+        _request(ModifyVpcPeeringConnectionOptionsInput)
+    )
+    client.modify_vpc_peering_connection_options(
+        _request(ModifyVpcPeeringConnectionOptionsInputDict)
+    )
+    client.modify_vpc_tenancy(vpc_id=_, instance_tenancy=_)
+    client.modify_vpc_tenancy(**_request(ModifyVpcTenancyInputDict))
+    client.modify_vpc_tenancy(_request(ModifyVpcTenancyInput))
+    client.modify_vpc_tenancy(_request(ModifyVpcTenancyInputDict))
+    client.modify_vpn_connection(vpn_connection_id=_)
+    client.modify_vpn_connection(**_request(ModifyVpnConnectionInputDict))
+    client.modify_vpn_connection(_request(ModifyVpnConnectionInput))
+    client.modify_vpn_connection(_request(ModifyVpnConnectionInputDict))
+    client.modify_vpn_connection_options(vpn_connection_id=_)
+    client.modify_vpn_connection_options(
+        **_request(ModifyVpnConnectionOptionsInputDict)
+    )
+    client.modify_vpn_connection_options(_request(ModifyVpnConnectionOptionsInput))
+    client.modify_vpn_connection_options(_request(ModifyVpnConnectionOptionsInputDict))
+    client.modify_vpn_tunnel_certificate(
+        vpn_connection_id=_, vpn_tunnel_outside_ip_address=_
+    )
+    client.modify_vpn_tunnel_certificate(
+        **_request(ModifyVpnTunnelCertificateInputDict)
+    )
+    client.modify_vpn_tunnel_certificate(_request(ModifyVpnTunnelCertificateInput))
+    client.modify_vpn_tunnel_certificate(_request(ModifyVpnTunnelCertificateInputDict))
+    client.modify_vpn_tunnel_options(
+        vpn_connection_id=_, vpn_tunnel_outside_ip_address=_, tunnel_options=_
+    )
+    client.modify_vpn_tunnel_options(**_request(ModifyVpnTunnelOptionsInputDict))
+    client.modify_vpn_tunnel_options(_request(ModifyVpnTunnelOptionsInput))
+    client.modify_vpn_tunnel_options(_request(ModifyVpnTunnelOptionsInputDict))
+    client.monitor_instances(instance_ids=_)
+    client.monitor_instances(**_request(MonitorInstancesInputDict))
+    client.monitor_instances(_request(MonitorInstancesInput))
+    client.monitor_instances(_request(MonitorInstancesInputDict))
+    client.move_address_to_vpc(public_ip=_)
+    client.move_address_to_vpc(**_request(MoveAddressToVpcInputDict))
+    client.move_address_to_vpc(_request(MoveAddressToVpcInput))
+    client.move_address_to_vpc(_request(MoveAddressToVpcInputDict))
+    client.move_byoip_cidr_to_ipam(cidr=_, ipam_pool_id=_, ipam_pool_owner=_)
+    client.move_byoip_cidr_to_ipam(**_request(MoveByoipCidrToIpamInputDict))
+    client.move_byoip_cidr_to_ipam(_request(MoveByoipCidrToIpamInput))
+    client.move_byoip_cidr_to_ipam(_request(MoveByoipCidrToIpamInputDict))
+    client.move_capacity_reservation_instances(
+        source_capacity_reservation_id=_,
+        destination_capacity_reservation_id=_,
+        instance_count=_,
+    )
+    client.move_capacity_reservation_instances(
+        **_request(MoveCapacityReservationInstancesInputDict)
+    )
+    client.move_capacity_reservation_instances(
+        _request(MoveCapacityReservationInstancesInput)
+    )
+    client.move_capacity_reservation_instances(
+        _request(MoveCapacityReservationInstancesInputDict)
+    )
+    client.provision_byoip_cidr(cidr=_)
+    client.provision_byoip_cidr(**_request(ProvisionByoipCidrInputDict))
+    client.provision_byoip_cidr(_request(ProvisionByoipCidrInput))
+    client.provision_byoip_cidr(_request(ProvisionByoipCidrInputDict))
+    client.provision_ipam_byoasn(ipam_id=_, asn=_, asn_authorization_context=_)
+    client.provision_ipam_byoasn(**_request(ProvisionIpamByoasnInputDict))
+    client.provision_ipam_byoasn(_request(ProvisionIpamByoasnInput))
+    client.provision_ipam_byoasn(_request(ProvisionIpamByoasnInputDict))
+    client.provision_ipam_pool_cidr(ipam_pool_id=_)
+    client.provision_ipam_pool_cidr(**_request(ProvisionIpamPoolCidrInputDict))
+    client.provision_ipam_pool_cidr(_request(ProvisionIpamPoolCidrInput))
+    client.provision_ipam_pool_cidr(_request(ProvisionIpamPoolCidrInputDict))
+    client.provision_public_ipv4_pool_cidr(ipam_pool_id=_, pool_id=_, netmask_length=_)
+    client.provision_public_ipv4_pool_cidr(
+        **_request(ProvisionPublicIpv4PoolCidrInputDict)
+    )
+    client.provision_public_ipv4_pool_cidr(_request(ProvisionPublicIpv4PoolCidrInput))
+    client.provision_public_ipv4_pool_cidr(
+        _request(ProvisionPublicIpv4PoolCidrInputDict)
+    )
+    client.purchase_capacity_block(capacity_block_offering_id=_, instance_platform=_)
+    client.purchase_capacity_block(**_request(PurchaseCapacityBlockInputDict))
+    client.purchase_capacity_block(_request(PurchaseCapacityBlockInput))
+    client.purchase_capacity_block(_request(PurchaseCapacityBlockInputDict))
+    client.purchase_capacity_block_extension(
+        capacity_block_extension_offering_id=_, capacity_reservation_id=_
+    )
+    client.purchase_capacity_block_extension(
+        **_request(PurchaseCapacityBlockExtensionInputDict)
+    )
+    client.purchase_capacity_block_extension(
+        _request(PurchaseCapacityBlockExtensionInput)
+    )
+    client.purchase_capacity_block_extension(
+        _request(PurchaseCapacityBlockExtensionInputDict)
+    )
+    client.purchase_host_reservation(host_id_set=_, offering_id=_)
+    client.purchase_host_reservation(**_request(PurchaseHostReservationInputDict))
+    client.purchase_host_reservation(_request(PurchaseHostReservationInput))
+    client.purchase_host_reservation(_request(PurchaseHostReservationInputDict))
+    client.purchase_reserved_instances_offering(
+        instance_count=_, reserved_instances_offering_id=_
+    )
+    client.purchase_reserved_instances_offering(
+        **_request(PurchaseReservedInstancesOfferingInputDict)
+    )
+    client.purchase_reserved_instances_offering(
+        _request(PurchaseReservedInstancesOfferingInput)
+    )
+    client.purchase_reserved_instances_offering(
+        _request(PurchaseReservedInstancesOfferingInputDict)
+    )
+    client.purchase_scheduled_instances(purchase_requests=_)
+    client.purchase_scheduled_instances(**_request(PurchaseScheduledInstancesInputDict))
+    client.purchase_scheduled_instances(_request(PurchaseScheduledInstancesInput))
+    client.purchase_scheduled_instances(_request(PurchaseScheduledInstancesInputDict))
+    client.reboot_instances(instance_ids=_)
+    client.reboot_instances(**_request(RebootInstancesInputDict))
+    client.reboot_instances(_request(RebootInstancesInput))
+    client.reboot_instances(_request(RebootInstancesInputDict))
+    client.register_image(name=_)
+    client.register_image(**_request(RegisterImageInputDict))
+    client.register_image(_request(RegisterImageInput))
+    client.register_image(_request(RegisterImageInputDict))
+    client.register_instance_event_notification_attributes(instance_tag_attribute=_)
+    client.register_instance_event_notification_attributes(
+        **_request(RegisterInstanceEventNotificationAttributesInputDict)
+    )
+    client.register_instance_event_notification_attributes(
+        _request(RegisterInstanceEventNotificationAttributesInput)
+    )
+    client.register_instance_event_notification_attributes(
+        _request(RegisterInstanceEventNotificationAttributesInputDict)
+    )
+    client.register_transit_gateway_multicast_group_members(
+        transit_gateway_multicast_domain_id=_, network_interface_ids=_
+    )
+    client.register_transit_gateway_multicast_group_members(
+        **_request(RegisterTransitGatewayMulticastGroupMembersInputDict)
+    )
+    client.register_transit_gateway_multicast_group_members(
+        _request(RegisterTransitGatewayMulticastGroupMembersInput)
+    )
+    client.register_transit_gateway_multicast_group_members(
+        _request(RegisterTransitGatewayMulticastGroupMembersInputDict)
+    )
+    client.register_transit_gateway_multicast_group_sources(
+        transit_gateway_multicast_domain_id=_, network_interface_ids=_
+    )
+    client.register_transit_gateway_multicast_group_sources(
+        **_request(RegisterTransitGatewayMulticastGroupSourcesInputDict)
+    )
+    client.register_transit_gateway_multicast_group_sources(
+        _request(RegisterTransitGatewayMulticastGroupSourcesInput)
+    )
+    client.register_transit_gateway_multicast_group_sources(
+        _request(RegisterTransitGatewayMulticastGroupSourcesInputDict)
+    )
+    client.reject_capacity_reservation_billing_ownership(capacity_reservation_id=_)
+    client.reject_capacity_reservation_billing_ownership(
+        **_request(RejectCapacityReservationBillingOwnershipInputDict)
+    )
+    client.reject_capacity_reservation_billing_ownership(
+        _request(RejectCapacityReservationBillingOwnershipInput)
+    )
+    client.reject_capacity_reservation_billing_ownership(
+        _request(RejectCapacityReservationBillingOwnershipInputDict)
+    )
+    client.reject_transit_gateway_client_vpn_attachment(transit_gateway_attachment_id=_)
+    client.reject_transit_gateway_client_vpn_attachment(
+        **_request(RejectTransitGatewayClientVpnAttachmentInputDict)
+    )
+    client.reject_transit_gateway_client_vpn_attachment(
+        _request(RejectTransitGatewayClientVpnAttachmentInput)
+    )
+    client.reject_transit_gateway_client_vpn_attachment(
+        _request(RejectTransitGatewayClientVpnAttachmentInputDict)
+    )
+    client.reject_transit_gateway_multicast_domain_associations()
+    client.reject_transit_gateway_multicast_domain_associations(
+        **_request(RejectTransitGatewayMulticastDomainAssociationsInputDict)
+    )
+    client.reject_transit_gateway_multicast_domain_associations(
+        _request(RejectTransitGatewayMulticastDomainAssociationsInput)
+    )
+    client.reject_transit_gateway_multicast_domain_associations(
+        _request(RejectTransitGatewayMulticastDomainAssociationsInputDict)
+    )
+    client.reject_transit_gateway_peering_attachment(transit_gateway_attachment_id=_)
+    client.reject_transit_gateway_peering_attachment(
+        **_request(RejectTransitGatewayPeeringAttachmentInputDict)
+    )
+    client.reject_transit_gateway_peering_attachment(
+        _request(RejectTransitGatewayPeeringAttachmentInput)
+    )
+    client.reject_transit_gateway_peering_attachment(
+        _request(RejectTransitGatewayPeeringAttachmentInputDict)
+    )
+    client.reject_transit_gateway_vpc_attachment(transit_gateway_attachment_id=_)
+    client.reject_transit_gateway_vpc_attachment(
+        **_request(RejectTransitGatewayVpcAttachmentInputDict)
+    )
+    client.reject_transit_gateway_vpc_attachment(
+        _request(RejectTransitGatewayVpcAttachmentInput)
+    )
+    client.reject_transit_gateway_vpc_attachment(
+        _request(RejectTransitGatewayVpcAttachmentInputDict)
+    )
+    client.reject_vpc_endpoint_connections(service_id=_, vpc_endpoint_ids=_)
+    client.reject_vpc_endpoint_connections(
+        **_request(RejectVpcEndpointConnectionsInputDict)
+    )
+    client.reject_vpc_endpoint_connections(_request(RejectVpcEndpointConnectionsInput))
+    client.reject_vpc_endpoint_connections(
+        _request(RejectVpcEndpointConnectionsInputDict)
+    )
+    client.reject_vpc_peering_connection(vpc_peering_connection_id=_)
+    client.reject_vpc_peering_connection(
+        **_request(RejectVpcPeeringConnectionInputDict)
+    )
+    client.reject_vpc_peering_connection(_request(RejectVpcPeeringConnectionInput))
+    client.reject_vpc_peering_connection(_request(RejectVpcPeeringConnectionInputDict))
+    client.release_address()
+    client.release_address(**_request(ReleaseAddressInputDict))
+    client.release_address(_request(ReleaseAddressInput))
+    client.release_address(_request(ReleaseAddressInputDict))
+    client.release_hosts(host_ids=_)
+    client.release_hosts(**_request(ReleaseHostsInputDict))
+    client.release_hosts(_request(ReleaseHostsInput))
+    client.release_hosts(_request(ReleaseHostsInputDict))
+    client.release_ipam_pool_allocation(
+        ipam_pool_id=_, cidr=_, ipam_pool_allocation_id=_
+    )
+    client.release_ipam_pool_allocation(**_request(ReleaseIpamPoolAllocationInputDict))
+    client.release_ipam_pool_allocation(_request(ReleaseIpamPoolAllocationInput))
+    client.release_ipam_pool_allocation(_request(ReleaseIpamPoolAllocationInputDict))
+    client.replace_iam_instance_profile_association(
+        iam_instance_profile=_, association_id=_
+    )
+    client.replace_iam_instance_profile_association(
+        **_request(ReplaceIamInstanceProfileAssociationInputDict)
+    )
+    client.replace_iam_instance_profile_association(
+        _request(ReplaceIamInstanceProfileAssociationInput)
+    )
+    client.replace_iam_instance_profile_association(
+        _request(ReplaceIamInstanceProfileAssociationInputDict)
+    )
+    client.replace_image_criteria_in_allowed_images_settings()
+    client.replace_image_criteria_in_allowed_images_settings(
+        **_request(ReplaceImageCriteriaInAllowedImagesSettingsInputDict)
+    )
+    client.replace_image_criteria_in_allowed_images_settings(
+        _request(ReplaceImageCriteriaInAllowedImagesSettingsInput)
+    )
+    client.replace_image_criteria_in_allowed_images_settings(
+        _request(ReplaceImageCriteriaInAllowedImagesSettingsInputDict)
+    )
+    client.replace_image_instance_type_specification(image_id=_)
+    client.replace_image_instance_type_specification(
+        **_request(ReplaceImageInstanceTypeSpecificationInputDict)
+    )
+    client.replace_image_instance_type_specification(
+        _request(ReplaceImageInstanceTypeSpecificationInput)
+    )
+    client.replace_image_instance_type_specification(
+        _request(ReplaceImageInstanceTypeSpecificationInputDict)
+    )
+    client.replace_network_acl_association(association_id=_, network_acl_id=_)
+    client.replace_network_acl_association(
+        **_request(ReplaceNetworkAclAssociationInputDict)
+    )
+    client.replace_network_acl_association(_request(ReplaceNetworkAclAssociationInput))
+    client.replace_network_acl_association(
+        _request(ReplaceNetworkAclAssociationInputDict)
+    )
+    client.replace_network_acl_entry(
+        network_acl_id=_, rule_number=_, protocol=_, rule_action=_, egress=_
+    )
+    client.replace_network_acl_entry(**_request(ReplaceNetworkAclEntryInputDict))
+    client.replace_network_acl_entry(_request(ReplaceNetworkAclEntryInput))
+    client.replace_network_acl_entry(_request(ReplaceNetworkAclEntryInputDict))
+    client.replace_route(route_table_id=_)
+    client.replace_route(**_request(ReplaceRouteInputDict))
+    client.replace_route(_request(ReplaceRouteInput))
+    client.replace_route(_request(ReplaceRouteInputDict))
+    client.replace_route_table_association(association_id=_, route_table_id=_)
+    client.replace_route_table_association(
+        **_request(ReplaceRouteTableAssociationInputDict)
+    )
+    client.replace_route_table_association(_request(ReplaceRouteTableAssociationInput))
+    client.replace_route_table_association(
+        _request(ReplaceRouteTableAssociationInputDict)
+    )
+    client.replace_transit_gateway_route(
+        destination_cidr_block=_, transit_gateway_route_table_id=_
+    )
+    client.replace_transit_gateway_route(
+        **_request(ReplaceTransitGatewayRouteInputDict)
+    )
+    client.replace_transit_gateway_route(_request(ReplaceTransitGatewayRouteInput))
+    client.replace_transit_gateway_route(_request(ReplaceTransitGatewayRouteInputDict))
+    client.replace_vpn_tunnel(vpn_connection_id=_, vpn_tunnel_outside_ip_address=_)
+    client.replace_vpn_tunnel(**_request(ReplaceVpnTunnelInputDict))
+    client.replace_vpn_tunnel(_request(ReplaceVpnTunnelInput))
+    client.replace_vpn_tunnel(_request(ReplaceVpnTunnelInputDict))
+    client.report_instance_status(instances=_, status=_, reason_codes=_)
+    client.report_instance_status(**_request(ReportInstanceStatusInputDict))
+    client.report_instance_status(_request(ReportInstanceStatusInput))
+    client.report_instance_status(_request(ReportInstanceStatusInputDict))
+    client.request_spot_fleet(spot_fleet_request_config=_)
+    client.request_spot_fleet(**_request(RequestSpotFleetInputDict))
+    client.request_spot_fleet(_request(RequestSpotFleetInput))
+    client.request_spot_fleet(_request(RequestSpotFleetInputDict))
+    client.request_spot_instances()
+    client.request_spot_instances(**_request(RequestSpotInstancesInputDict))
+    client.request_spot_instances(_request(RequestSpotInstancesInput))
+    client.request_spot_instances(_request(RequestSpotInstancesInputDict))
+    client.reset_address_attribute(allocation_id=_, attribute=_)
+    client.reset_address_attribute(**_request(ResetAddressAttributeInputDict))
+    client.reset_address_attribute(_request(ResetAddressAttributeInput))
+    client.reset_address_attribute(_request(ResetAddressAttributeInputDict))
+    client.reset_ebs_default_kms_key_id()
+    client.reset_ebs_default_kms_key_id(**_request(ResetEbsDefaultKmsKeyIdInputDict))
+    client.reset_ebs_default_kms_key_id(_request(ResetEbsDefaultKmsKeyIdInput))
+    client.reset_ebs_default_kms_key_id(_request(ResetEbsDefaultKmsKeyIdInputDict))
+    client.reset_fpga_image_attribute(fpga_image_id=_)
+    client.reset_fpga_image_attribute(**_request(ResetFpgaImageAttributeInputDict))
+    client.reset_fpga_image_attribute(_request(ResetFpgaImageAttributeInput))
+    client.reset_fpga_image_attribute(_request(ResetFpgaImageAttributeInputDict))
+    client.reset_image_attribute(attribute=_, image_id=_)
+    client.reset_image_attribute(**_request(ResetImageAttributeInputDict))
+    client.reset_image_attribute(_request(ResetImageAttributeInput))
+    client.reset_image_attribute(_request(ResetImageAttributeInputDict))
+    client.reset_instance_attribute(instance_id=_, attribute=_)
+    client.reset_instance_attribute(**_request(ResetInstanceAttributeInputDict))
+    client.reset_instance_attribute(_request(ResetInstanceAttributeInput))
+    client.reset_instance_attribute(_request(ResetInstanceAttributeInputDict))
+    client.reset_network_interface_attribute(network_interface_id=_)
+    client.reset_network_interface_attribute(
+        **_request(ResetNetworkInterfaceAttributeInputDict)
+    )
+    client.reset_network_interface_attribute(
+        _request(ResetNetworkInterfaceAttributeInput)
+    )
+    client.reset_network_interface_attribute(
+        _request(ResetNetworkInterfaceAttributeInputDict)
+    )
+    client.reset_snapshot_attribute(attribute=_, snapshot_id=_)
+    client.reset_snapshot_attribute(**_request(ResetSnapshotAttributeInputDict))
+    client.reset_snapshot_attribute(_request(ResetSnapshotAttributeInput))
+    client.reset_snapshot_attribute(_request(ResetSnapshotAttributeInputDict))
+    client.restore_address_to_classic(public_ip=_)
+    client.restore_address_to_classic(**_request(RestoreAddressToClassicInputDict))
+    client.restore_address_to_classic(_request(RestoreAddressToClassicInput))
+    client.restore_address_to_classic(_request(RestoreAddressToClassicInputDict))
+    client.restore_image_from_recycle_bin(image_id=_)
+    client.restore_image_from_recycle_bin(
+        **_request(RestoreImageFromRecycleBinInputDict)
+    )
+    client.restore_image_from_recycle_bin(_request(RestoreImageFromRecycleBinInput))
+    client.restore_image_from_recycle_bin(_request(RestoreImageFromRecycleBinInputDict))
+    client.restore_managed_prefix_list_version(
+        prefix_list_id=_, previous_version=_, current_version=_
+    )
+    client.restore_managed_prefix_list_version(
+        **_request(RestoreManagedPrefixListVersionInputDict)
+    )
+    client.restore_managed_prefix_list_version(
+        _request(RestoreManagedPrefixListVersionInput)
+    )
+    client.restore_managed_prefix_list_version(
+        _request(RestoreManagedPrefixListVersionInputDict)
+    )
+    client.restore_snapshot_from_recycle_bin(snapshot_id=_)
+    client.restore_snapshot_from_recycle_bin(
+        **_request(RestoreSnapshotFromRecycleBinInputDict)
+    )
+    client.restore_snapshot_from_recycle_bin(
+        _request(RestoreSnapshotFromRecycleBinInput)
+    )
+    client.restore_snapshot_from_recycle_bin(
+        _request(RestoreSnapshotFromRecycleBinInputDict)
+    )
+    client.restore_snapshot_tier(snapshot_id=_)
+    client.restore_snapshot_tier(**_request(RestoreSnapshotTierInputDict))
+    client.restore_snapshot_tier(_request(RestoreSnapshotTierInput))
+    client.restore_snapshot_tier(_request(RestoreSnapshotTierInputDict))
+    client.restore_volume_from_recycle_bin(volume_id=_)
+    client.restore_volume_from_recycle_bin(
+        **_request(RestoreVolumeFromRecycleBinInputDict)
+    )
+    client.restore_volume_from_recycle_bin(_request(RestoreVolumeFromRecycleBinInput))
+    client.restore_volume_from_recycle_bin(
+        _request(RestoreVolumeFromRecycleBinInputDict)
+    )
+    client.revoke_client_vpn_ingress(client_vpn_endpoint_id=_, target_network_cidr=_)
+    client.revoke_client_vpn_ingress(**_request(RevokeClientVpnIngressInputDict))
+    client.revoke_client_vpn_ingress(_request(RevokeClientVpnIngressInput))
+    client.revoke_client_vpn_ingress(_request(RevokeClientVpnIngressInputDict))
+    client.revoke_security_group_egress(group_id=_)
+    client.revoke_security_group_egress(**_request(RevokeSecurityGroupEgressInputDict))
+    client.revoke_security_group_egress(_request(RevokeSecurityGroupEgressInput))
+    client.revoke_security_group_egress(_request(RevokeSecurityGroupEgressInputDict))
+    client.revoke_security_group_ingress()
+    client.revoke_security_group_ingress(
+        **_request(RevokeSecurityGroupIngressInputDict)
+    )
+    client.revoke_security_group_ingress(_request(RevokeSecurityGroupIngressInput))
+    client.revoke_security_group_ingress(_request(RevokeSecurityGroupIngressInputDict))
+    client.run_instances(max_count=_, min_count=_)
+    client.run_instances(**_request(RunInstancesInputDict))
+    client.run_instances(_request(RunInstancesInput))
+    client.run_instances(_request(RunInstancesInputDict))
+    client.run_scheduled_instances(launch_specification=_, scheduled_instance_id=_)
+    client.run_scheduled_instances(**_request(RunScheduledInstancesInputDict))
+    client.run_scheduled_instances(_request(RunScheduledInstancesInput))
+    client.run_scheduled_instances(_request(RunScheduledInstancesInputDict))
+    client.search_local_gateway_routes(local_gateway_route_table_id=_)
+    client.search_local_gateway_routes(**_request(SearchLocalGatewayRoutesInputDict))
+    client.search_local_gateway_routes(_request(SearchLocalGatewayRoutesInput))
+    client.search_local_gateway_routes(_request(SearchLocalGatewayRoutesInputDict))
+    client.search_transit_gateway_multicast_groups(
+        transit_gateway_multicast_domain_id=_
+    )
+    client.search_transit_gateway_multicast_groups(
+        **_request(SearchTransitGatewayMulticastGroupsInputDict)
+    )
+    client.search_transit_gateway_multicast_groups(
+        _request(SearchTransitGatewayMulticastGroupsInput)
+    )
+    client.search_transit_gateway_multicast_groups(
+        _request(SearchTransitGatewayMulticastGroupsInputDict)
+    )
+    client.search_transit_gateway_routes(transit_gateway_route_table_id=_, filters=_)
+    client.search_transit_gateway_routes(
+        **_request(SearchTransitGatewayRoutesInputDict)
+    )
+    client.search_transit_gateway_routes(_request(SearchTransitGatewayRoutesInput))
+    client.search_transit_gateway_routes(_request(SearchTransitGatewayRoutesInputDict))
+    client.send_diagnostic_interrupt(instance_id=_)
+    client.send_diagnostic_interrupt(**_request(SendDiagnosticInterruptInputDict))
+    client.send_diagnostic_interrupt(_request(SendDiagnosticInterruptInput))
+    client.send_diagnostic_interrupt(_request(SendDiagnosticInterruptInputDict))
+    client.start_declarative_policies_report(s3_bucket=_, target_id=_)
+    client.start_declarative_policies_report(
+        **_request(StartDeclarativePoliciesReportInputDict)
+    )
+    client.start_declarative_policies_report(
+        _request(StartDeclarativePoliciesReportInput)
+    )
+    client.start_declarative_policies_report(
+        _request(StartDeclarativePoliciesReportInputDict)
+    )
+    client.start_instances(instance_ids=_)
+    client.start_instances(**_request(StartInstancesInputDict))
+    client.start_instances(_request(StartInstancesInput))
+    client.start_instances(_request(StartInstancesInputDict))
+    client.start_network_insights_access_scope_analysis(
+        network_insights_access_scope_id=_
+    )
+    client.start_network_insights_access_scope_analysis(
+        **_request(StartNetworkInsightsAccessScopeAnalysisInputDict)
+    )
+    client.start_network_insights_access_scope_analysis(
+        _request(StartNetworkInsightsAccessScopeAnalysisInput)
+    )
+    client.start_network_insights_access_scope_analysis(
+        _request(StartNetworkInsightsAccessScopeAnalysisInputDict)
+    )
+    client.start_network_insights_analysis(network_insights_path_id=_)
+    client.start_network_insights_analysis(
+        **_request(StartNetworkInsightsAnalysisInputDict)
+    )
+    client.start_network_insights_analysis(_request(StartNetworkInsightsAnalysisInput))
+    client.start_network_insights_analysis(
+        _request(StartNetworkInsightsAnalysisInputDict)
+    )
+    client.start_vpc_endpoint_service_private_dns_verification(service_id=_)
+    client.start_vpc_endpoint_service_private_dns_verification(
+        **_request(StartVpcEndpointServicePrivateDnsVerificationInputDict)
+    )
+    client.start_vpc_endpoint_service_private_dns_verification(
+        _request(StartVpcEndpointServicePrivateDnsVerificationInput)
+    )
+    client.start_vpc_endpoint_service_private_dns_verification(
+        _request(StartVpcEndpointServicePrivateDnsVerificationInputDict)
+    )
+    client.stop_instances(instance_ids=_)
+    client.stop_instances(**_request(StopInstancesInputDict))
+    client.stop_instances(_request(StopInstancesInput))
+    client.stop_instances(_request(StopInstancesInputDict))
+    client.terminate_client_vpn_connections(client_vpn_endpoint_id=_)
+    client.terminate_client_vpn_connections(
+        **_request(TerminateClientVpnConnectionsInputDict)
+    )
+    client.terminate_client_vpn_connections(
+        _request(TerminateClientVpnConnectionsInput)
+    )
+    client.terminate_client_vpn_connections(
+        _request(TerminateClientVpnConnectionsInputDict)
+    )
+    client.terminate_instances(instance_ids=_)
+    client.terminate_instances(**_request(TerminateInstancesInputDict))
+    client.terminate_instances(_request(TerminateInstancesInput))
+    client.terminate_instances(_request(TerminateInstancesInputDict))
+    client.unassign_ipv6_addresses(network_interface_id=_)
+    client.unassign_ipv6_addresses(**_request(UnassignIpv6AddressesInputDict))
+    client.unassign_ipv6_addresses(_request(UnassignIpv6AddressesInput))
+    client.unassign_ipv6_addresses(_request(UnassignIpv6AddressesInputDict))
+    client.unassign_private_ip_addresses(network_interface_id=_)
+    client.unassign_private_ip_addresses(
+        **_request(UnassignPrivateIpAddressesInputDict)
+    )
+    client.unassign_private_ip_addresses(_request(UnassignPrivateIpAddressesInput))
+    client.unassign_private_ip_addresses(_request(UnassignPrivateIpAddressesInputDict))
+    client.unassign_private_nat_gateway_address(
+        nat_gateway_id=_, private_ip_addresses=_
+    )
+    client.unassign_private_nat_gateway_address(
+        **_request(UnassignPrivateNatGatewayAddressInputDict)
+    )
+    client.unassign_private_nat_gateway_address(
+        _request(UnassignPrivateNatGatewayAddressInput)
+    )
+    client.unassign_private_nat_gateway_address(
+        _request(UnassignPrivateNatGatewayAddressInputDict)
+    )
+    client.unlock_snapshot(snapshot_id=_)
+    client.unlock_snapshot(**_request(UnlockSnapshotInputDict))
+    client.unlock_snapshot(_request(UnlockSnapshotInput))
+    client.unlock_snapshot(_request(UnlockSnapshotInputDict))
+    client.unmonitor_instances(instance_ids=_)
+    client.unmonitor_instances(**_request(UnmonitorInstancesInputDict))
+    client.unmonitor_instances(_request(UnmonitorInstancesInput))
+    client.unmonitor_instances(_request(UnmonitorInstancesInputDict))
+    client.update_capacity_manager_monitored_tag_keys()
+    client.update_capacity_manager_monitored_tag_keys(
+        **_request(UpdateCapacityManagerMonitoredTagKeysInputDict)
+    )
+    client.update_capacity_manager_monitored_tag_keys(
+        _request(UpdateCapacityManagerMonitoredTagKeysInput)
+    )
+    client.update_capacity_manager_monitored_tag_keys(
+        _request(UpdateCapacityManagerMonitoredTagKeysInputDict)
+    )
+    client.update_capacity_manager_organizations_access(organizations_access=_)
+    client.update_capacity_manager_organizations_access(
+        **_request(UpdateCapacityManagerOrganizationsAccessInputDict)
+    )
+    client.update_capacity_manager_organizations_access(
+        _request(UpdateCapacityManagerOrganizationsAccessInput)
+    )
+    client.update_capacity_manager_organizations_access(
+        _request(UpdateCapacityManagerOrganizationsAccessInputDict)
+    )
+    client.update_interruptible_capacity_reservation_allocation(
+        capacity_reservation_id=_
+    )
+    client.update_interruptible_capacity_reservation_allocation(
+        **_request(UpdateInterruptibleCapacityReservationAllocationInputDict)
+    )
+    client.update_interruptible_capacity_reservation_allocation(
+        _request(UpdateInterruptibleCapacityReservationAllocationInput)
+    )
+    client.update_interruptible_capacity_reservation_allocation(
+        _request(UpdateInterruptibleCapacityReservationAllocationInputDict)
+    )
+    client.update_security_group_rule_descriptions_egress()
+    client.update_security_group_rule_descriptions_egress(
+        **_request(UpdateSecurityGroupRuleDescriptionsEgressInputDict)
+    )
+    client.update_security_group_rule_descriptions_egress(
+        _request(UpdateSecurityGroupRuleDescriptionsEgressInput)
+    )
+    client.update_security_group_rule_descriptions_egress(
+        _request(UpdateSecurityGroupRuleDescriptionsEgressInputDict)
+    )
+    client.update_security_group_rule_descriptions_ingress()
+    client.update_security_group_rule_descriptions_ingress(
+        **_request(UpdateSecurityGroupRuleDescriptionsIngressInputDict)
+    )
+    client.update_security_group_rule_descriptions_ingress(
+        _request(UpdateSecurityGroupRuleDescriptionsIngressInput)
+    )
+    client.update_security_group_rule_descriptions_ingress(
+        _request(UpdateSecurityGroupRuleDescriptionsIngressInputDict)
+    )
+    client.validate_security_group_quotas_for_interface(security_group_ids=_)
+    client.validate_security_group_quotas_for_interface(
+        **_request(ValidateSecurityGroupQuotasForInterfaceInputDict)
+    )
+    client.validate_security_group_quotas_for_interface(
+        _request(ValidateSecurityGroupQuotasForInterfaceInput)
+    )
+    client.validate_security_group_quotas_for_interface(
+        _request(ValidateSecurityGroupQuotasForInterfaceInputDict)
+    )
+    client.withdraw_byoip_cidr(cidr=_)
+    client.withdraw_byoip_cidr(**_request(WithdrawByoipCidrInputDict))
+    client.withdraw_byoip_cidr(_request(WithdrawByoipCidrInput))
+    client.withdraw_byoip_cidr(_request(WithdrawByoipCidrInputDict))

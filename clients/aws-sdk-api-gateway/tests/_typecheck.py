@@ -2,204 +2,302 @@
 
 from typing import Any
 
+from aws_sdk_api_gateway.aio.client import AsyncAPIGatewayClient
+from aws_sdk_api_gateway.client import APIGatewayClient
 from aws_sdk_api_gateway.models import (
     AccessLogSettings,
     ApiKey,
     ApiStage,
+    ApiStageDict,
     Authorizer,
     BasePathMapping,
     CanarySettings,
+    CanarySettingsDict,
     ClientCertificate,
     CreateApiKeyInput,
+    CreateApiKeyInputDict,
     CreateApiKeyOutput,
     CreateAuthorizerInput,
+    CreateAuthorizerInputDict,
     CreateAuthorizerOutput,
     CreateBasePathMappingInput,
+    CreateBasePathMappingInputDict,
     CreateBasePathMappingOutput,
     CreateDeploymentInput,
+    CreateDeploymentInputDict,
     CreateDeploymentOutput,
     CreateDocumentationPartInput,
+    CreateDocumentationPartInputDict,
     CreateDocumentationPartOutput,
     CreateDocumentationVersionInput,
+    CreateDocumentationVersionInputDict,
     CreateDocumentationVersionOutput,
     CreateDomainNameAccessAssociationInput,
+    CreateDomainNameAccessAssociationInputDict,
     CreateDomainNameAccessAssociationOutput,
     CreateDomainNameInput,
+    CreateDomainNameInputDict,
     CreateDomainNameOutput,
     CreateModelInput,
+    CreateModelInputDict,
     CreateModelOutput,
     CreateRequestValidatorInput,
+    CreateRequestValidatorInputDict,
     CreateRequestValidatorOutput,
     CreateResourceInput,
+    CreateResourceInputDict,
     CreateResourceOutput,
     CreateRestApiInput,
+    CreateRestApiInputDict,
     CreateRestApiOutput,
     CreateStageInput,
+    CreateStageInputDict,
     CreateStageOutput,
     CreateUsagePlanInput,
+    CreateUsagePlanInputDict,
     CreateUsagePlanKeyInput,
+    CreateUsagePlanKeyInputDict,
     CreateUsagePlanKeyOutput,
     CreateUsagePlanOutput,
     CreateVpcLinkInput,
+    CreateVpcLinkInputDict,
     CreateVpcLinkOutput,
     DeleteApiKeyInput,
+    DeleteApiKeyInputDict,
     DeleteApiKeyOutput,
     DeleteAuthorizerInput,
+    DeleteAuthorizerInputDict,
     DeleteAuthorizerOutput,
     DeleteBasePathMappingInput,
+    DeleteBasePathMappingInputDict,
     DeleteBasePathMappingOutput,
     DeleteClientCertificateInput,
+    DeleteClientCertificateInputDict,
     DeleteClientCertificateOutput,
     DeleteDeploymentInput,
+    DeleteDeploymentInputDict,
     DeleteDeploymentOutput,
     DeleteDocumentationPartInput,
+    DeleteDocumentationPartInputDict,
     DeleteDocumentationPartOutput,
     DeleteDocumentationVersionInput,
+    DeleteDocumentationVersionInputDict,
     DeleteDocumentationVersionOutput,
     DeleteDomainNameAccessAssociationInput,
+    DeleteDomainNameAccessAssociationInputDict,
     DeleteDomainNameAccessAssociationOutput,
     DeleteDomainNameInput,
+    DeleteDomainNameInputDict,
     DeleteDomainNameOutput,
     DeleteGatewayResponseInput,
+    DeleteGatewayResponseInputDict,
     DeleteGatewayResponseOutput,
     DeleteIntegrationInput,
+    DeleteIntegrationInputDict,
     DeleteIntegrationOutput,
     DeleteIntegrationResponseInput,
+    DeleteIntegrationResponseInputDict,
     DeleteIntegrationResponseOutput,
     DeleteMethodInput,
+    DeleteMethodInputDict,
     DeleteMethodOutput,
     DeleteMethodResponseInput,
+    DeleteMethodResponseInputDict,
     DeleteMethodResponseOutput,
     DeleteModelInput,
+    DeleteModelInputDict,
     DeleteModelOutput,
     DeleteRequestValidatorInput,
+    DeleteRequestValidatorInputDict,
     DeleteRequestValidatorOutput,
     DeleteResourceInput,
+    DeleteResourceInputDict,
     DeleteResourceOutput,
     DeleteRestApiInput,
+    DeleteRestApiInputDict,
     DeleteRestApiOutput,
     DeleteStageInput,
+    DeleteStageInputDict,
     DeleteStageOutput,
     DeleteUsagePlanInput,
+    DeleteUsagePlanInputDict,
     DeleteUsagePlanKeyInput,
+    DeleteUsagePlanKeyInputDict,
     DeleteUsagePlanKeyOutput,
     DeleteUsagePlanOutput,
     DeleteVpcLinkInput,
+    DeleteVpcLinkInputDict,
     DeleteVpcLinkOutput,
     Deployment,
     DeploymentCanarySettings,
+    DeploymentCanarySettingsDict,
     DocumentationPart,
     DocumentationPartLocation,
+    DocumentationPartLocationDict,
     DocumentationVersion,
     DomainName,
     DomainNameAccessAssociation,
     EndpointConfiguration,
+    EndpointConfigurationDict,
     FlushStageAuthorizersCacheInput,
+    FlushStageAuthorizersCacheInputDict,
     FlushStageAuthorizersCacheOutput,
     FlushStageCacheInput,
+    FlushStageCacheInputDict,
     FlushStageCacheOutput,
     GatewayResponse,
     GenerateClientCertificateInput,
+    GenerateClientCertificateInputDict,
     GenerateClientCertificateOutput,
     GetAccountInput,
+    GetAccountInputDict,
     GetAccountOutput,
     GetApiKeyInput,
+    GetApiKeyInputDict,
     GetApiKeyOutput,
     GetApiKeysInput,
+    GetApiKeysInputDict,
     GetApiKeysOutput,
     GetAuthorizerInput,
+    GetAuthorizerInputDict,
     GetAuthorizerOutput,
     GetAuthorizersInput,
+    GetAuthorizersInputDict,
     GetAuthorizersOutput,
     GetBasePathMappingInput,
+    GetBasePathMappingInputDict,
     GetBasePathMappingOutput,
     GetBasePathMappingsInput,
+    GetBasePathMappingsInputDict,
     GetBasePathMappingsOutput,
     GetClientCertificateInput,
+    GetClientCertificateInputDict,
     GetClientCertificateOutput,
     GetClientCertificatesInput,
+    GetClientCertificatesInputDict,
     GetClientCertificatesOutput,
     GetDeploymentInput,
+    GetDeploymentInputDict,
     GetDeploymentOutput,
     GetDeploymentsInput,
+    GetDeploymentsInputDict,
     GetDeploymentsOutput,
     GetDocumentationPartInput,
+    GetDocumentationPartInputDict,
     GetDocumentationPartOutput,
     GetDocumentationPartsInput,
+    GetDocumentationPartsInputDict,
     GetDocumentationPartsOutput,
     GetDocumentationVersionInput,
+    GetDocumentationVersionInputDict,
     GetDocumentationVersionOutput,
     GetDocumentationVersionsInput,
+    GetDocumentationVersionsInputDict,
     GetDocumentationVersionsOutput,
     GetDomainNameAccessAssociationsInput,
+    GetDomainNameAccessAssociationsInputDict,
     GetDomainNameAccessAssociationsOutput,
     GetDomainNameInput,
+    GetDomainNameInputDict,
     GetDomainNameOutput,
     GetDomainNamesInput,
+    GetDomainNamesInputDict,
     GetDomainNamesOutput,
     GetExportInput,
+    GetExportInputDict,
     GetExportOutput,
     GetGatewayResponseInput,
+    GetGatewayResponseInputDict,
     GetGatewayResponseOutput,
     GetGatewayResponsesInput,
+    GetGatewayResponsesInputDict,
     GetGatewayResponsesOutput,
     GetIntegrationInput,
+    GetIntegrationInputDict,
     GetIntegrationOutput,
     GetIntegrationResponseInput,
+    GetIntegrationResponseInputDict,
     GetIntegrationResponseOutput,
     GetMethodInput,
+    GetMethodInputDict,
     GetMethodOutput,
     GetMethodResponseInput,
+    GetMethodResponseInputDict,
     GetMethodResponseOutput,
     GetModelInput,
+    GetModelInputDict,
     GetModelOutput,
     GetModelTemplateInput,
+    GetModelTemplateInputDict,
     GetModelTemplateOutput,
     GetModelsInput,
+    GetModelsInputDict,
     GetModelsOutput,
     GetRequestValidatorInput,
+    GetRequestValidatorInputDict,
     GetRequestValidatorOutput,
     GetRequestValidatorsInput,
+    GetRequestValidatorsInputDict,
     GetRequestValidatorsOutput,
     GetResourceInput,
+    GetResourceInputDict,
     GetResourceOutput,
     GetResourcesInput,
+    GetResourcesInputDict,
     GetResourcesOutput,
     GetRestApiInput,
+    GetRestApiInputDict,
     GetRestApiOutput,
     GetRestApisInput,
+    GetRestApisInputDict,
     GetRestApisOutput,
     GetSdkInput,
+    GetSdkInputDict,
     GetSdkOutput,
     GetSdkTypeInput,
+    GetSdkTypeInputDict,
     GetSdkTypeOutput,
     GetSdkTypesInput,
+    GetSdkTypesInputDict,
     GetSdkTypesOutput,
     GetStageInput,
+    GetStageInputDict,
     GetStageOutput,
     GetStagesInput,
+    GetStagesInputDict,
     GetStagesOutput,
     GetTagsInput,
+    GetTagsInputDict,
     GetTagsOutput,
     GetUsageInput,
+    GetUsageInputDict,
     GetUsageOutput,
     GetUsagePlanInput,
+    GetUsagePlanInputDict,
     GetUsagePlanKeyInput,
+    GetUsagePlanKeyInputDict,
     GetUsagePlanKeyOutput,
     GetUsagePlanKeysInput,
+    GetUsagePlanKeysInputDict,
     GetUsagePlanKeysOutput,
     GetUsagePlanOutput,
     GetUsagePlansInput,
+    GetUsagePlansInputDict,
     GetUsagePlansOutput,
     GetVpcLinkInput,
+    GetVpcLinkInputDict,
     GetVpcLinkOutput,
     GetVpcLinksInput,
+    GetVpcLinksInputDict,
     GetVpcLinksOutput,
     ImportApiKeysInput,
+    ImportApiKeysInputDict,
     ImportApiKeysOutput,
     ImportDocumentationPartsInput,
+    ImportDocumentationPartsInputDict,
     ImportDocumentationPartsOutput,
     ImportRestApiInput,
+    ImportRestApiInputDict,
     ImportRestApiOutput,
     Integration,
     IntegrationResponse,
@@ -210,21 +308,31 @@ from aws_sdk_api_gateway.models import (
     Model,
     MutualTlsAuthentication,
     MutualTlsAuthenticationInput,
+    MutualTlsAuthenticationInputDict,
     PatchOperation,
+    PatchOperationDict,
     PutGatewayResponseInput,
+    PutGatewayResponseInputDict,
     PutGatewayResponseOutput,
     PutIntegrationInput,
+    PutIntegrationInputDict,
     PutIntegrationOutput,
     PutIntegrationResponseInput,
+    PutIntegrationResponseInputDict,
     PutIntegrationResponseOutput,
     PutMethodInput,
+    PutMethodInputDict,
     PutMethodOutput,
     PutMethodResponseInput,
+    PutMethodResponseInputDict,
     PutMethodResponseOutput,
     PutRestApiInput,
+    PutRestApiInputDict,
     PutRestApiOutput,
     QuotaSettings,
+    QuotaSettingsDict,
     RejectDomainNameAccessAssociationInput,
+    RejectDomainNameAccessAssociationInputDict,
     RejectDomainNameAccessAssociationOutput,
     RequestValidator,
     Resource,
@@ -233,59 +341,88 @@ from aws_sdk_api_gateway.models import (
     SdkType,
     Stage,
     StageKey,
+    StageKeyDict,
     TagResourceInput,
+    TagResourceInputDict,
     TagResourceOutput,
     TestInvokeAuthorizerInput,
+    TestInvokeAuthorizerInputDict,
     TestInvokeAuthorizerOutput,
     TestInvokeMethodInput,
+    TestInvokeMethodInputDict,
     TestInvokeMethodOutput,
     ThrottleSettings,
+    ThrottleSettingsDict,
     TlsConfig,
+    TlsConfigDict,
     UntagResourceInput,
+    UntagResourceInputDict,
     UntagResourceOutput,
     UpdateAccountInput,
+    UpdateAccountInputDict,
     UpdateAccountOutput,
     UpdateApiKeyInput,
+    UpdateApiKeyInputDict,
     UpdateApiKeyOutput,
     UpdateAuthorizerInput,
+    UpdateAuthorizerInputDict,
     UpdateAuthorizerOutput,
     UpdateBasePathMappingInput,
+    UpdateBasePathMappingInputDict,
     UpdateBasePathMappingOutput,
     UpdateClientCertificateInput,
+    UpdateClientCertificateInputDict,
     UpdateClientCertificateOutput,
     UpdateDeploymentInput,
+    UpdateDeploymentInputDict,
     UpdateDeploymentOutput,
     UpdateDocumentationPartInput,
+    UpdateDocumentationPartInputDict,
     UpdateDocumentationPartOutput,
     UpdateDocumentationVersionInput,
+    UpdateDocumentationVersionInputDict,
     UpdateDocumentationVersionOutput,
     UpdateDomainNameInput,
+    UpdateDomainNameInputDict,
     UpdateDomainNameOutput,
     UpdateGatewayResponseInput,
+    UpdateGatewayResponseInputDict,
     UpdateGatewayResponseOutput,
     UpdateIntegrationInput,
+    UpdateIntegrationInputDict,
     UpdateIntegrationOutput,
     UpdateIntegrationResponseInput,
+    UpdateIntegrationResponseInputDict,
     UpdateIntegrationResponseOutput,
     UpdateMethodInput,
+    UpdateMethodInputDict,
     UpdateMethodOutput,
     UpdateMethodResponseInput,
+    UpdateMethodResponseInputDict,
     UpdateMethodResponseOutput,
     UpdateModelInput,
+    UpdateModelInputDict,
     UpdateModelOutput,
     UpdateRequestValidatorInput,
+    UpdateRequestValidatorInputDict,
     UpdateRequestValidatorOutput,
     UpdateResourceInput,
+    UpdateResourceInputDict,
     UpdateResourceOutput,
     UpdateRestApiInput,
+    UpdateRestApiInputDict,
     UpdateRestApiOutput,
     UpdateStageInput,
+    UpdateStageInputDict,
     UpdateStageOutput,
     UpdateUsageInput,
+    UpdateUsageInputDict,
     UpdateUsageOutput,
     UpdateUsagePlanInput,
+    UpdateUsagePlanInputDict,
     UpdateUsagePlanOutput,
     UpdateVpcLinkInput,
+    UpdateVpcLinkInputDict,
     UpdateVpcLinkOutput,
     UsagePlan,
     UsagePlanKey,
@@ -293,8 +430,9 @@ from aws_sdk_api_gateway.models import (
 )
 
 
-# Static type fixture: pyright over this validates models.pyi.
-# Not executed as a test; it only needs to type-check.
+# Static type fixture: pyright over this validates models.pyi and the
+# client method signatures. Not executed as a test; it only needs to
+# type-check.
 
 _: Any = ...
 
@@ -585,3 +723,1392 @@ UpdateVpcLinkOutput()
 UsagePlan()
 UsagePlanKey()
 VpcLink()
+_params_0: ApiStageDict = {}
+_params_1: CanarySettingsDict = {}
+_params_2: CreateApiKeyInputDict = {}
+_params_3: CreateAuthorizerInputDict = {"rest_api_id": _, "name": _, "type": _}
+_params_4: CreateBasePathMappingInputDict = {"domain_name": _, "rest_api_id": _}
+_params_5: CreateDeploymentInputDict = {"rest_api_id": _}
+_params_6: CreateDocumentationPartInputDict = {
+    "rest_api_id": _,
+    "location": _,
+    "properties": _,
+}
+_params_7: CreateDocumentationVersionInputDict = {
+    "rest_api_id": _,
+    "documentation_version": _,
+}
+_params_8: CreateDomainNameAccessAssociationInputDict = {
+    "domain_name_arn": _,
+    "access_association_source_type": _,
+    "access_association_source": _,
+}
+_params_9: CreateDomainNameInputDict = {"domain_name": _}
+_params_10: CreateModelInputDict = {"rest_api_id": _, "name": _, "content_type": _}
+_params_11: CreateRequestValidatorInputDict = {"rest_api_id": _}
+_params_12: CreateResourceInputDict = {"rest_api_id": _, "parent_id": _, "path_part": _}
+_params_13: CreateRestApiInputDict = {"name": _}
+_params_14: CreateStageInputDict = {
+    "rest_api_id": _,
+    "stage_name": _,
+    "deployment_id": _,
+}
+_params_15: CreateUsagePlanInputDict = {"name": _}
+_params_16: CreateUsagePlanKeyInputDict = {
+    "usage_plan_id": _,
+    "key_id": _,
+    "key_type": _,
+}
+_params_17: CreateVpcLinkInputDict = {"name": _, "target_arns": _}
+_params_18: DeleteApiKeyInputDict = {"api_key": _}
+_params_19: DeleteAuthorizerInputDict = {"rest_api_id": _, "authorizer_id": _}
+_params_20: DeleteBasePathMappingInputDict = {"domain_name": _, "base_path": _}
+_params_21: DeleteClientCertificateInputDict = {"client_certificate_id": _}
+_params_22: DeleteDeploymentInputDict = {"rest_api_id": _, "deployment_id": _}
+_params_23: DeleteDocumentationPartInputDict = {
+    "rest_api_id": _,
+    "documentation_part_id": _,
+}
+_params_24: DeleteDocumentationVersionInputDict = {
+    "rest_api_id": _,
+    "documentation_version": _,
+}
+_params_25: DeleteDomainNameAccessAssociationInputDict = {
+    "domain_name_access_association_arn": _
+}
+_params_26: DeleteDomainNameInputDict = {"domain_name": _}
+_params_27: DeleteGatewayResponseInputDict = {"rest_api_id": _, "response_type": _}
+_params_28: DeleteIntegrationInputDict = {
+    "rest_api_id": _,
+    "resource_id": _,
+    "http_method": _,
+}
+_params_29: DeleteIntegrationResponseInputDict = {
+    "rest_api_id": _,
+    "resource_id": _,
+    "http_method": _,
+    "status_code": _,
+}
+_params_30: DeleteMethodInputDict = {
+    "rest_api_id": _,
+    "resource_id": _,
+    "http_method": _,
+}
+_params_31: DeleteMethodResponseInputDict = {
+    "rest_api_id": _,
+    "resource_id": _,
+    "http_method": _,
+    "status_code": _,
+}
+_params_32: DeleteModelInputDict = {"rest_api_id": _, "model_name": _}
+_params_33: DeleteRequestValidatorInputDict = {
+    "rest_api_id": _,
+    "request_validator_id": _,
+}
+_params_34: DeleteResourceInputDict = {"rest_api_id": _, "resource_id": _}
+_params_35: DeleteRestApiInputDict = {"rest_api_id": _}
+_params_36: DeleteStageInputDict = {"rest_api_id": _, "stage_name": _}
+_params_37: DeleteUsagePlanInputDict = {"usage_plan_id": _}
+_params_38: DeleteUsagePlanKeyInputDict = {"usage_plan_id": _, "key_id": _}
+_params_39: DeleteVpcLinkInputDict = {"vpc_link_id": _}
+_params_40: DeploymentCanarySettingsDict = {}
+_params_41: DocumentationPartLocationDict = {"type": _}
+_params_42: EndpointConfigurationDict = {}
+_params_43: FlushStageAuthorizersCacheInputDict = {"rest_api_id": _, "stage_name": _}
+_params_44: FlushStageCacheInputDict = {"rest_api_id": _, "stage_name": _}
+_params_45: GenerateClientCertificateInputDict = {}
+_params_46: GetAccountInputDict = {}
+_params_47: GetApiKeyInputDict = {"api_key": _}
+_params_48: GetApiKeysInputDict = {}
+_params_49: GetAuthorizerInputDict = {"rest_api_id": _, "authorizer_id": _}
+_params_50: GetAuthorizersInputDict = {"rest_api_id": _}
+_params_51: GetBasePathMappingInputDict = {"domain_name": _, "base_path": _}
+_params_52: GetBasePathMappingsInputDict = {"domain_name": _}
+_params_53: GetClientCertificateInputDict = {"client_certificate_id": _}
+_params_54: GetClientCertificatesInputDict = {}
+_params_55: GetDeploymentInputDict = {"rest_api_id": _, "deployment_id": _}
+_params_56: GetDeploymentsInputDict = {"rest_api_id": _}
+_params_57: GetDocumentationPartInputDict = {
+    "rest_api_id": _,
+    "documentation_part_id": _,
+}
+_params_58: GetDocumentationPartsInputDict = {"rest_api_id": _}
+_params_59: GetDocumentationVersionInputDict = {
+    "rest_api_id": _,
+    "documentation_version": _,
+}
+_params_60: GetDocumentationVersionsInputDict = {"rest_api_id": _}
+_params_61: GetDomainNameAccessAssociationsInputDict = {}
+_params_62: GetDomainNameInputDict = {"domain_name": _}
+_params_63: GetDomainNamesInputDict = {}
+_params_64: GetExportInputDict = {"rest_api_id": _, "stage_name": _, "export_type": _}
+_params_65: GetGatewayResponseInputDict = {"rest_api_id": _, "response_type": _}
+_params_66: GetGatewayResponsesInputDict = {"rest_api_id": _}
+_params_67: GetIntegrationInputDict = {
+    "rest_api_id": _,
+    "resource_id": _,
+    "http_method": _,
+}
+_params_68: GetIntegrationResponseInputDict = {
+    "rest_api_id": _,
+    "resource_id": _,
+    "http_method": _,
+    "status_code": _,
+}
+_params_69: GetMethodInputDict = {"rest_api_id": _, "resource_id": _, "http_method": _}
+_params_70: GetMethodResponseInputDict = {
+    "rest_api_id": _,
+    "resource_id": _,
+    "http_method": _,
+    "status_code": _,
+}
+_params_71: GetModelInputDict = {"rest_api_id": _, "model_name": _}
+_params_72: GetModelsInputDict = {"rest_api_id": _}
+_params_73: GetModelTemplateInputDict = {"rest_api_id": _, "model_name": _}
+_params_74: GetRequestValidatorInputDict = {"rest_api_id": _, "request_validator_id": _}
+_params_75: GetRequestValidatorsInputDict = {"rest_api_id": _}
+_params_76: GetResourceInputDict = {"rest_api_id": _, "resource_id": _}
+_params_77: GetResourcesInputDict = {"rest_api_id": _}
+_params_78: GetRestApiInputDict = {"rest_api_id": _}
+_params_79: GetRestApisInputDict = {}
+_params_80: GetSdkInputDict = {"rest_api_id": _, "stage_name": _, "sdk_type": _}
+_params_81: GetSdkTypeInputDict = {"id": _}
+_params_82: GetSdkTypesInputDict = {}
+_params_83: GetStageInputDict = {"rest_api_id": _, "stage_name": _}
+_params_84: GetStagesInputDict = {"rest_api_id": _}
+_params_85: GetTagsInputDict = {"resource_arn": _}
+_params_86: GetUsageInputDict = {"usage_plan_id": _, "start_date": _, "end_date": _}
+_params_87: GetUsagePlanInputDict = {"usage_plan_id": _}
+_params_88: GetUsagePlanKeyInputDict = {"usage_plan_id": _, "key_id": _}
+_params_89: GetUsagePlanKeysInputDict = {"usage_plan_id": _}
+_params_90: GetUsagePlansInputDict = {}
+_params_91: GetVpcLinkInputDict = {"vpc_link_id": _}
+_params_92: GetVpcLinksInputDict = {}
+_params_93: ImportApiKeysInputDict = {"body": _, "format": _}
+_params_94: ImportDocumentationPartsInputDict = {"rest_api_id": _, "body": _}
+_params_95: ImportRestApiInputDict = {"body": _}
+_params_96: MutualTlsAuthenticationInputDict = {}
+_params_97: PatchOperationDict = {}
+_params_98: PutGatewayResponseInputDict = {"rest_api_id": _, "response_type": _}
+_params_99: PutIntegrationInputDict = {
+    "rest_api_id": _,
+    "resource_id": _,
+    "http_method": _,
+    "type": _,
+}
+_params_100: PutIntegrationResponseInputDict = {
+    "rest_api_id": _,
+    "resource_id": _,
+    "http_method": _,
+    "status_code": _,
+}
+_params_101: PutMethodInputDict = {
+    "rest_api_id": _,
+    "resource_id": _,
+    "http_method": _,
+    "authorization_type": _,
+}
+_params_102: PutMethodResponseInputDict = {
+    "rest_api_id": _,
+    "resource_id": _,
+    "http_method": _,
+    "status_code": _,
+}
+_params_103: PutRestApiInputDict = {"rest_api_id": _, "body": _}
+_params_104: QuotaSettingsDict = {}
+_params_105: RejectDomainNameAccessAssociationInputDict = {
+    "domain_name_access_association_arn": _,
+    "domain_name_arn": _,
+}
+_params_106: StageKeyDict = {}
+_params_107: TagResourceInputDict = {"resource_arn": _, "tags": _}
+_params_108: TestInvokeAuthorizerInputDict = {"rest_api_id": _, "authorizer_id": _}
+_params_109: TestInvokeMethodInputDict = {
+    "rest_api_id": _,
+    "resource_id": _,
+    "http_method": _,
+}
+_params_110: ThrottleSettingsDict = {}
+_params_111: TlsConfigDict = {}
+_params_112: UntagResourceInputDict = {"resource_arn": _, "tag_keys": _}
+_params_113: UpdateAccountInputDict = {}
+_params_114: UpdateApiKeyInputDict = {"api_key": _}
+_params_115: UpdateAuthorizerInputDict = {"rest_api_id": _, "authorizer_id": _}
+_params_116: UpdateBasePathMappingInputDict = {"domain_name": _, "base_path": _}
+_params_117: UpdateClientCertificateInputDict = {"client_certificate_id": _}
+_params_118: UpdateDeploymentInputDict = {"rest_api_id": _, "deployment_id": _}
+_params_119: UpdateDocumentationPartInputDict = {
+    "rest_api_id": _,
+    "documentation_part_id": _,
+}
+_params_120: UpdateDocumentationVersionInputDict = {
+    "rest_api_id": _,
+    "documentation_version": _,
+}
+_params_121: UpdateDomainNameInputDict = {"domain_name": _}
+_params_122: UpdateGatewayResponseInputDict = {"rest_api_id": _, "response_type": _}
+_params_123: UpdateIntegrationInputDict = {
+    "rest_api_id": _,
+    "resource_id": _,
+    "http_method": _,
+}
+_params_124: UpdateIntegrationResponseInputDict = {
+    "rest_api_id": _,
+    "resource_id": _,
+    "http_method": _,
+    "status_code": _,
+}
+_params_125: UpdateMethodInputDict = {
+    "rest_api_id": _,
+    "resource_id": _,
+    "http_method": _,
+}
+_params_126: UpdateMethodResponseInputDict = {
+    "rest_api_id": _,
+    "resource_id": _,
+    "http_method": _,
+    "status_code": _,
+}
+_params_127: UpdateModelInputDict = {"rest_api_id": _, "model_name": _}
+_params_128: UpdateRequestValidatorInputDict = {
+    "rest_api_id": _,
+    "request_validator_id": _,
+}
+_params_129: UpdateResourceInputDict = {"rest_api_id": _, "resource_id": _}
+_params_130: UpdateRestApiInputDict = {"rest_api_id": _}
+_params_131: UpdateStageInputDict = {"rest_api_id": _, "stage_name": _}
+_params_132: UpdateUsageInputDict = {"usage_plan_id": _, "key_id": _}
+_params_133: UpdateUsagePlanInputDict = {"usage_plan_id": _}
+_params_134: UpdateVpcLinkInputDict = {"vpc_link_id": _}
+
+
+def _request[T](form: type[T]) -> T:
+    raise NotImplementedError
+
+
+async def check_async_calls(client: AsyncAPIGatewayClient) -> None:
+    pass
+    await client.create_api_key()
+    await client.create_api_key(**_request(CreateApiKeyInputDict))
+    await client.create_api_key(_request(CreateApiKeyInput))
+    await client.create_api_key(_request(CreateApiKeyInputDict))
+    await client.create_authorizer(rest_api_id=_, name=_, type=_)
+    await client.create_authorizer(**_request(CreateAuthorizerInputDict))
+    await client.create_authorizer(_request(CreateAuthorizerInput))
+    await client.create_authorizer(_request(CreateAuthorizerInputDict))
+    await client.create_base_path_mapping(domain_name=_, rest_api_id=_)
+    await client.create_base_path_mapping(**_request(CreateBasePathMappingInputDict))
+    await client.create_base_path_mapping(_request(CreateBasePathMappingInput))
+    await client.create_base_path_mapping(_request(CreateBasePathMappingInputDict))
+    await client.create_deployment(rest_api_id=_)
+    await client.create_deployment(**_request(CreateDeploymentInputDict))
+    await client.create_deployment(_request(CreateDeploymentInput))
+    await client.create_deployment(_request(CreateDeploymentInputDict))
+    await client.create_documentation_part(rest_api_id=_, location=_, properties=_)
+    await client.create_documentation_part(**_request(CreateDocumentationPartInputDict))
+    await client.create_documentation_part(_request(CreateDocumentationPartInput))
+    await client.create_documentation_part(_request(CreateDocumentationPartInputDict))
+    await client.create_documentation_version(rest_api_id=_, documentation_version=_)
+    await client.create_documentation_version(
+        **_request(CreateDocumentationVersionInputDict)
+    )
+    await client.create_documentation_version(_request(CreateDocumentationVersionInput))
+    await client.create_documentation_version(
+        _request(CreateDocumentationVersionInputDict)
+    )
+    await client.create_domain_name(domain_name=_)
+    await client.create_domain_name(**_request(CreateDomainNameInputDict))
+    await client.create_domain_name(_request(CreateDomainNameInput))
+    await client.create_domain_name(_request(CreateDomainNameInputDict))
+    await client.create_domain_name_access_association(
+        domain_name_arn=_, access_association_source_type=_, access_association_source=_
+    )
+    await client.create_domain_name_access_association(
+        **_request(CreateDomainNameAccessAssociationInputDict)
+    )
+    await client.create_domain_name_access_association(
+        _request(CreateDomainNameAccessAssociationInput)
+    )
+    await client.create_domain_name_access_association(
+        _request(CreateDomainNameAccessAssociationInputDict)
+    )
+    await client.create_model(rest_api_id=_, name=_, content_type=_)
+    await client.create_model(**_request(CreateModelInputDict))
+    await client.create_model(_request(CreateModelInput))
+    await client.create_model(_request(CreateModelInputDict))
+    await client.create_request_validator(rest_api_id=_)
+    await client.create_request_validator(**_request(CreateRequestValidatorInputDict))
+    await client.create_request_validator(_request(CreateRequestValidatorInput))
+    await client.create_request_validator(_request(CreateRequestValidatorInputDict))
+    await client.create_resource(rest_api_id=_, parent_id=_, path_part=_)
+    await client.create_resource(**_request(CreateResourceInputDict))
+    await client.create_resource(_request(CreateResourceInput))
+    await client.create_resource(_request(CreateResourceInputDict))
+    await client.create_rest_api(name=_)
+    await client.create_rest_api(**_request(CreateRestApiInputDict))
+    await client.create_rest_api(_request(CreateRestApiInput))
+    await client.create_rest_api(_request(CreateRestApiInputDict))
+    await client.create_stage(rest_api_id=_, stage_name=_, deployment_id=_)
+    await client.create_stage(**_request(CreateStageInputDict))
+    await client.create_stage(_request(CreateStageInput))
+    await client.create_stage(_request(CreateStageInputDict))
+    await client.create_usage_plan(name=_)
+    await client.create_usage_plan(**_request(CreateUsagePlanInputDict))
+    await client.create_usage_plan(_request(CreateUsagePlanInput))
+    await client.create_usage_plan(_request(CreateUsagePlanInputDict))
+    await client.create_usage_plan_key(usage_plan_id=_, key_id=_, key_type=_)
+    await client.create_usage_plan_key(**_request(CreateUsagePlanKeyInputDict))
+    await client.create_usage_plan_key(_request(CreateUsagePlanKeyInput))
+    await client.create_usage_plan_key(_request(CreateUsagePlanKeyInputDict))
+    await client.create_vpc_link(name=_, target_arns=_)
+    await client.create_vpc_link(**_request(CreateVpcLinkInputDict))
+    await client.create_vpc_link(_request(CreateVpcLinkInput))
+    await client.create_vpc_link(_request(CreateVpcLinkInputDict))
+    await client.delete_api_key(api_key=_)
+    await client.delete_api_key(**_request(DeleteApiKeyInputDict))
+    await client.delete_api_key(_request(DeleteApiKeyInput))
+    await client.delete_api_key(_request(DeleteApiKeyInputDict))
+    await client.delete_authorizer(rest_api_id=_, authorizer_id=_)
+    await client.delete_authorizer(**_request(DeleteAuthorizerInputDict))
+    await client.delete_authorizer(_request(DeleteAuthorizerInput))
+    await client.delete_authorizer(_request(DeleteAuthorizerInputDict))
+    await client.delete_base_path_mapping(domain_name=_, base_path=_)
+    await client.delete_base_path_mapping(**_request(DeleteBasePathMappingInputDict))
+    await client.delete_base_path_mapping(_request(DeleteBasePathMappingInput))
+    await client.delete_base_path_mapping(_request(DeleteBasePathMappingInputDict))
+    await client.delete_client_certificate(client_certificate_id=_)
+    await client.delete_client_certificate(**_request(DeleteClientCertificateInputDict))
+    await client.delete_client_certificate(_request(DeleteClientCertificateInput))
+    await client.delete_client_certificate(_request(DeleteClientCertificateInputDict))
+    await client.delete_deployment(rest_api_id=_, deployment_id=_)
+    await client.delete_deployment(**_request(DeleteDeploymentInputDict))
+    await client.delete_deployment(_request(DeleteDeploymentInput))
+    await client.delete_deployment(_request(DeleteDeploymentInputDict))
+    await client.delete_documentation_part(rest_api_id=_, documentation_part_id=_)
+    await client.delete_documentation_part(**_request(DeleteDocumentationPartInputDict))
+    await client.delete_documentation_part(_request(DeleteDocumentationPartInput))
+    await client.delete_documentation_part(_request(DeleteDocumentationPartInputDict))
+    await client.delete_documentation_version(rest_api_id=_, documentation_version=_)
+    await client.delete_documentation_version(
+        **_request(DeleteDocumentationVersionInputDict)
+    )
+    await client.delete_documentation_version(_request(DeleteDocumentationVersionInput))
+    await client.delete_documentation_version(
+        _request(DeleteDocumentationVersionInputDict)
+    )
+    await client.delete_domain_name(domain_name=_)
+    await client.delete_domain_name(**_request(DeleteDomainNameInputDict))
+    await client.delete_domain_name(_request(DeleteDomainNameInput))
+    await client.delete_domain_name(_request(DeleteDomainNameInputDict))
+    await client.delete_domain_name_access_association(
+        domain_name_access_association_arn=_
+    )
+    await client.delete_domain_name_access_association(
+        **_request(DeleteDomainNameAccessAssociationInputDict)
+    )
+    await client.delete_domain_name_access_association(
+        _request(DeleteDomainNameAccessAssociationInput)
+    )
+    await client.delete_domain_name_access_association(
+        _request(DeleteDomainNameAccessAssociationInputDict)
+    )
+    await client.delete_gateway_response(rest_api_id=_, response_type=_)
+    await client.delete_gateway_response(**_request(DeleteGatewayResponseInputDict))
+    await client.delete_gateway_response(_request(DeleteGatewayResponseInput))
+    await client.delete_gateway_response(_request(DeleteGatewayResponseInputDict))
+    await client.delete_integration(rest_api_id=_, resource_id=_, http_method=_)
+    await client.delete_integration(**_request(DeleteIntegrationInputDict))
+    await client.delete_integration(_request(DeleteIntegrationInput))
+    await client.delete_integration(_request(DeleteIntegrationInputDict))
+    await client.delete_integration_response(
+        rest_api_id=_, resource_id=_, http_method=_, status_code=_
+    )
+    await client.delete_integration_response(
+        **_request(DeleteIntegrationResponseInputDict)
+    )
+    await client.delete_integration_response(_request(DeleteIntegrationResponseInput))
+    await client.delete_integration_response(
+        _request(DeleteIntegrationResponseInputDict)
+    )
+    await client.delete_method(rest_api_id=_, resource_id=_, http_method=_)
+    await client.delete_method(**_request(DeleteMethodInputDict))
+    await client.delete_method(_request(DeleteMethodInput))
+    await client.delete_method(_request(DeleteMethodInputDict))
+    await client.delete_method_response(
+        rest_api_id=_, resource_id=_, http_method=_, status_code=_
+    )
+    await client.delete_method_response(**_request(DeleteMethodResponseInputDict))
+    await client.delete_method_response(_request(DeleteMethodResponseInput))
+    await client.delete_method_response(_request(DeleteMethodResponseInputDict))
+    await client.delete_model(rest_api_id=_, model_name=_)
+    await client.delete_model(**_request(DeleteModelInputDict))
+    await client.delete_model(_request(DeleteModelInput))
+    await client.delete_model(_request(DeleteModelInputDict))
+    await client.delete_request_validator(rest_api_id=_, request_validator_id=_)
+    await client.delete_request_validator(**_request(DeleteRequestValidatorInputDict))
+    await client.delete_request_validator(_request(DeleteRequestValidatorInput))
+    await client.delete_request_validator(_request(DeleteRequestValidatorInputDict))
+    await client.delete_resource(rest_api_id=_, resource_id=_)
+    await client.delete_resource(**_request(DeleteResourceInputDict))
+    await client.delete_resource(_request(DeleteResourceInput))
+    await client.delete_resource(_request(DeleteResourceInputDict))
+    await client.delete_rest_api(rest_api_id=_)
+    await client.delete_rest_api(**_request(DeleteRestApiInputDict))
+    await client.delete_rest_api(_request(DeleteRestApiInput))
+    await client.delete_rest_api(_request(DeleteRestApiInputDict))
+    await client.delete_stage(rest_api_id=_, stage_name=_)
+    await client.delete_stage(**_request(DeleteStageInputDict))
+    await client.delete_stage(_request(DeleteStageInput))
+    await client.delete_stage(_request(DeleteStageInputDict))
+    await client.delete_usage_plan(usage_plan_id=_)
+    await client.delete_usage_plan(**_request(DeleteUsagePlanInputDict))
+    await client.delete_usage_plan(_request(DeleteUsagePlanInput))
+    await client.delete_usage_plan(_request(DeleteUsagePlanInputDict))
+    await client.delete_usage_plan_key(usage_plan_id=_, key_id=_)
+    await client.delete_usage_plan_key(**_request(DeleteUsagePlanKeyInputDict))
+    await client.delete_usage_plan_key(_request(DeleteUsagePlanKeyInput))
+    await client.delete_usage_plan_key(_request(DeleteUsagePlanKeyInputDict))
+    await client.delete_vpc_link(vpc_link_id=_)
+    await client.delete_vpc_link(**_request(DeleteVpcLinkInputDict))
+    await client.delete_vpc_link(_request(DeleteVpcLinkInput))
+    await client.delete_vpc_link(_request(DeleteVpcLinkInputDict))
+    await client.flush_stage_authorizers_cache(rest_api_id=_, stage_name=_)
+    await client.flush_stage_authorizers_cache(
+        **_request(FlushStageAuthorizersCacheInputDict)
+    )
+    await client.flush_stage_authorizers_cache(
+        _request(FlushStageAuthorizersCacheInput)
+    )
+    await client.flush_stage_authorizers_cache(
+        _request(FlushStageAuthorizersCacheInputDict)
+    )
+    await client.flush_stage_cache(rest_api_id=_, stage_name=_)
+    await client.flush_stage_cache(**_request(FlushStageCacheInputDict))
+    await client.flush_stage_cache(_request(FlushStageCacheInput))
+    await client.flush_stage_cache(_request(FlushStageCacheInputDict))
+    await client.generate_client_certificate()
+    await client.generate_client_certificate(
+        **_request(GenerateClientCertificateInputDict)
+    )
+    await client.generate_client_certificate(_request(GenerateClientCertificateInput))
+    await client.generate_client_certificate(
+        _request(GenerateClientCertificateInputDict)
+    )
+    await client.get_account()
+    await client.get_account(**_request(GetAccountInputDict))
+    await client.get_account(_request(GetAccountInput))
+    await client.get_account(_request(GetAccountInputDict))
+    await client.get_api_key(api_key=_)
+    await client.get_api_key(**_request(GetApiKeyInputDict))
+    await client.get_api_key(_request(GetApiKeyInput))
+    await client.get_api_key(_request(GetApiKeyInputDict))
+    await client.get_api_keys()
+    await client.get_api_keys(**_request(GetApiKeysInputDict))
+    await client.get_api_keys(_request(GetApiKeysInput))
+    await client.get_api_keys(_request(GetApiKeysInputDict))
+    await client.get_authorizer(rest_api_id=_, authorizer_id=_)
+    await client.get_authorizer(**_request(GetAuthorizerInputDict))
+    await client.get_authorizer(_request(GetAuthorizerInput))
+    await client.get_authorizer(_request(GetAuthorizerInputDict))
+    await client.get_authorizers(rest_api_id=_)
+    await client.get_authorizers(**_request(GetAuthorizersInputDict))
+    await client.get_authorizers(_request(GetAuthorizersInput))
+    await client.get_authorizers(_request(GetAuthorizersInputDict))
+    await client.get_base_path_mapping(domain_name=_, base_path=_)
+    await client.get_base_path_mapping(**_request(GetBasePathMappingInputDict))
+    await client.get_base_path_mapping(_request(GetBasePathMappingInput))
+    await client.get_base_path_mapping(_request(GetBasePathMappingInputDict))
+    await client.get_base_path_mappings(domain_name=_)
+    await client.get_base_path_mappings(**_request(GetBasePathMappingsInputDict))
+    await client.get_base_path_mappings(_request(GetBasePathMappingsInput))
+    await client.get_base_path_mappings(_request(GetBasePathMappingsInputDict))
+    await client.get_client_certificate(client_certificate_id=_)
+    await client.get_client_certificate(**_request(GetClientCertificateInputDict))
+    await client.get_client_certificate(_request(GetClientCertificateInput))
+    await client.get_client_certificate(_request(GetClientCertificateInputDict))
+    await client.get_client_certificates()
+    await client.get_client_certificates(**_request(GetClientCertificatesInputDict))
+    await client.get_client_certificates(_request(GetClientCertificatesInput))
+    await client.get_client_certificates(_request(GetClientCertificatesInputDict))
+    await client.get_deployment(rest_api_id=_, deployment_id=_)
+    await client.get_deployment(**_request(GetDeploymentInputDict))
+    await client.get_deployment(_request(GetDeploymentInput))
+    await client.get_deployment(_request(GetDeploymentInputDict))
+    await client.get_deployments(rest_api_id=_)
+    await client.get_deployments(**_request(GetDeploymentsInputDict))
+    await client.get_deployments(_request(GetDeploymentsInput))
+    await client.get_deployments(_request(GetDeploymentsInputDict))
+    await client.get_documentation_part(rest_api_id=_, documentation_part_id=_)
+    await client.get_documentation_part(**_request(GetDocumentationPartInputDict))
+    await client.get_documentation_part(_request(GetDocumentationPartInput))
+    await client.get_documentation_part(_request(GetDocumentationPartInputDict))
+    await client.get_documentation_parts(rest_api_id=_)
+    await client.get_documentation_parts(**_request(GetDocumentationPartsInputDict))
+    await client.get_documentation_parts(_request(GetDocumentationPartsInput))
+    await client.get_documentation_parts(_request(GetDocumentationPartsInputDict))
+    await client.get_documentation_version(rest_api_id=_, documentation_version=_)
+    await client.get_documentation_version(**_request(GetDocumentationVersionInputDict))
+    await client.get_documentation_version(_request(GetDocumentationVersionInput))
+    await client.get_documentation_version(_request(GetDocumentationVersionInputDict))
+    await client.get_documentation_versions(rest_api_id=_)
+    await client.get_documentation_versions(
+        **_request(GetDocumentationVersionsInputDict)
+    )
+    await client.get_documentation_versions(_request(GetDocumentationVersionsInput))
+    await client.get_documentation_versions(_request(GetDocumentationVersionsInputDict))
+    await client.get_domain_name(domain_name=_)
+    await client.get_domain_name(**_request(GetDomainNameInputDict))
+    await client.get_domain_name(_request(GetDomainNameInput))
+    await client.get_domain_name(_request(GetDomainNameInputDict))
+    await client.get_domain_name_access_associations()
+    await client.get_domain_name_access_associations(
+        **_request(GetDomainNameAccessAssociationsInputDict)
+    )
+    await client.get_domain_name_access_associations(
+        _request(GetDomainNameAccessAssociationsInput)
+    )
+    await client.get_domain_name_access_associations(
+        _request(GetDomainNameAccessAssociationsInputDict)
+    )
+    await client.get_domain_names()
+    await client.get_domain_names(**_request(GetDomainNamesInputDict))
+    await client.get_domain_names(_request(GetDomainNamesInput))
+    await client.get_domain_names(_request(GetDomainNamesInputDict))
+    await client.get_export(rest_api_id=_, stage_name=_, export_type=_)
+    await client.get_export(**_request(GetExportInputDict))
+    await client.get_export(_request(GetExportInput))
+    await client.get_export(_request(GetExportInputDict))
+    await client.get_gateway_response(rest_api_id=_, response_type=_)
+    await client.get_gateway_response(**_request(GetGatewayResponseInputDict))
+    await client.get_gateway_response(_request(GetGatewayResponseInput))
+    await client.get_gateway_response(_request(GetGatewayResponseInputDict))
+    await client.get_gateway_responses(rest_api_id=_)
+    await client.get_gateway_responses(**_request(GetGatewayResponsesInputDict))
+    await client.get_gateway_responses(_request(GetGatewayResponsesInput))
+    await client.get_gateway_responses(_request(GetGatewayResponsesInputDict))
+    await client.get_integration(rest_api_id=_, resource_id=_, http_method=_)
+    await client.get_integration(**_request(GetIntegrationInputDict))
+    await client.get_integration(_request(GetIntegrationInput))
+    await client.get_integration(_request(GetIntegrationInputDict))
+    await client.get_integration_response(
+        rest_api_id=_, resource_id=_, http_method=_, status_code=_
+    )
+    await client.get_integration_response(**_request(GetIntegrationResponseInputDict))
+    await client.get_integration_response(_request(GetIntegrationResponseInput))
+    await client.get_integration_response(_request(GetIntegrationResponseInputDict))
+    await client.get_method(rest_api_id=_, resource_id=_, http_method=_)
+    await client.get_method(**_request(GetMethodInputDict))
+    await client.get_method(_request(GetMethodInput))
+    await client.get_method(_request(GetMethodInputDict))
+    await client.get_method_response(
+        rest_api_id=_, resource_id=_, http_method=_, status_code=_
+    )
+    await client.get_method_response(**_request(GetMethodResponseInputDict))
+    await client.get_method_response(_request(GetMethodResponseInput))
+    await client.get_method_response(_request(GetMethodResponseInputDict))
+    await client.get_model(rest_api_id=_, model_name=_)
+    await client.get_model(**_request(GetModelInputDict))
+    await client.get_model(_request(GetModelInput))
+    await client.get_model(_request(GetModelInputDict))
+    await client.get_models(rest_api_id=_)
+    await client.get_models(**_request(GetModelsInputDict))
+    await client.get_models(_request(GetModelsInput))
+    await client.get_models(_request(GetModelsInputDict))
+    await client.get_model_template(rest_api_id=_, model_name=_)
+    await client.get_model_template(**_request(GetModelTemplateInputDict))
+    await client.get_model_template(_request(GetModelTemplateInput))
+    await client.get_model_template(_request(GetModelTemplateInputDict))
+    await client.get_request_validator(rest_api_id=_, request_validator_id=_)
+    await client.get_request_validator(**_request(GetRequestValidatorInputDict))
+    await client.get_request_validator(_request(GetRequestValidatorInput))
+    await client.get_request_validator(_request(GetRequestValidatorInputDict))
+    await client.get_request_validators(rest_api_id=_)
+    await client.get_request_validators(**_request(GetRequestValidatorsInputDict))
+    await client.get_request_validators(_request(GetRequestValidatorsInput))
+    await client.get_request_validators(_request(GetRequestValidatorsInputDict))
+    await client.get_resource(rest_api_id=_, resource_id=_)
+    await client.get_resource(**_request(GetResourceInputDict))
+    await client.get_resource(_request(GetResourceInput))
+    await client.get_resource(_request(GetResourceInputDict))
+    await client.get_resources(rest_api_id=_)
+    await client.get_resources(**_request(GetResourcesInputDict))
+    await client.get_resources(_request(GetResourcesInput))
+    await client.get_resources(_request(GetResourcesInputDict))
+    await client.get_rest_api(rest_api_id=_)
+    await client.get_rest_api(**_request(GetRestApiInputDict))
+    await client.get_rest_api(_request(GetRestApiInput))
+    await client.get_rest_api(_request(GetRestApiInputDict))
+    await client.get_rest_apis()
+    await client.get_rest_apis(**_request(GetRestApisInputDict))
+    await client.get_rest_apis(_request(GetRestApisInput))
+    await client.get_rest_apis(_request(GetRestApisInputDict))
+    await client.get_sdk(rest_api_id=_, stage_name=_, sdk_type=_)
+    await client.get_sdk(**_request(GetSdkInputDict))
+    await client.get_sdk(_request(GetSdkInput))
+    await client.get_sdk(_request(GetSdkInputDict))
+    await client.get_sdk_type(id=_)
+    await client.get_sdk_type(**_request(GetSdkTypeInputDict))
+    await client.get_sdk_type(_request(GetSdkTypeInput))
+    await client.get_sdk_type(_request(GetSdkTypeInputDict))
+    await client.get_sdk_types()
+    await client.get_sdk_types(**_request(GetSdkTypesInputDict))
+    await client.get_sdk_types(_request(GetSdkTypesInput))
+    await client.get_sdk_types(_request(GetSdkTypesInputDict))
+    await client.get_stage(rest_api_id=_, stage_name=_)
+    await client.get_stage(**_request(GetStageInputDict))
+    await client.get_stage(_request(GetStageInput))
+    await client.get_stage(_request(GetStageInputDict))
+    await client.get_stages(rest_api_id=_)
+    await client.get_stages(**_request(GetStagesInputDict))
+    await client.get_stages(_request(GetStagesInput))
+    await client.get_stages(_request(GetStagesInputDict))
+    await client.get_tags(resource_arn=_)
+    await client.get_tags(**_request(GetTagsInputDict))
+    await client.get_tags(_request(GetTagsInput))
+    await client.get_tags(_request(GetTagsInputDict))
+    await client.get_usage(usage_plan_id=_, start_date=_, end_date=_)
+    await client.get_usage(**_request(GetUsageInputDict))
+    await client.get_usage(_request(GetUsageInput))
+    await client.get_usage(_request(GetUsageInputDict))
+    await client.get_usage_plan(usage_plan_id=_)
+    await client.get_usage_plan(**_request(GetUsagePlanInputDict))
+    await client.get_usage_plan(_request(GetUsagePlanInput))
+    await client.get_usage_plan(_request(GetUsagePlanInputDict))
+    await client.get_usage_plan_key(usage_plan_id=_, key_id=_)
+    await client.get_usage_plan_key(**_request(GetUsagePlanKeyInputDict))
+    await client.get_usage_plan_key(_request(GetUsagePlanKeyInput))
+    await client.get_usage_plan_key(_request(GetUsagePlanKeyInputDict))
+    await client.get_usage_plan_keys(usage_plan_id=_)
+    await client.get_usage_plan_keys(**_request(GetUsagePlanKeysInputDict))
+    await client.get_usage_plan_keys(_request(GetUsagePlanKeysInput))
+    await client.get_usage_plan_keys(_request(GetUsagePlanKeysInputDict))
+    await client.get_usage_plans()
+    await client.get_usage_plans(**_request(GetUsagePlansInputDict))
+    await client.get_usage_plans(_request(GetUsagePlansInput))
+    await client.get_usage_plans(_request(GetUsagePlansInputDict))
+    await client.get_vpc_link(vpc_link_id=_)
+    await client.get_vpc_link(**_request(GetVpcLinkInputDict))
+    await client.get_vpc_link(_request(GetVpcLinkInput))
+    await client.get_vpc_link(_request(GetVpcLinkInputDict))
+    await client.get_vpc_links()
+    await client.get_vpc_links(**_request(GetVpcLinksInputDict))
+    await client.get_vpc_links(_request(GetVpcLinksInput))
+    await client.get_vpc_links(_request(GetVpcLinksInputDict))
+    await client.import_api_keys(body=_, format=_)
+    await client.import_api_keys(**_request(ImportApiKeysInputDict))
+    await client.import_api_keys(_request(ImportApiKeysInput))
+    await client.import_api_keys(_request(ImportApiKeysInputDict))
+    await client.import_documentation_parts(rest_api_id=_, body=_)
+    await client.import_documentation_parts(
+        **_request(ImportDocumentationPartsInputDict)
+    )
+    await client.import_documentation_parts(_request(ImportDocumentationPartsInput))
+    await client.import_documentation_parts(_request(ImportDocumentationPartsInputDict))
+    await client.import_rest_api(body=_)
+    await client.import_rest_api(**_request(ImportRestApiInputDict))
+    await client.import_rest_api(_request(ImportRestApiInput))
+    await client.import_rest_api(_request(ImportRestApiInputDict))
+    await client.put_gateway_response(rest_api_id=_, response_type=_)
+    await client.put_gateway_response(**_request(PutGatewayResponseInputDict))
+    await client.put_gateway_response(_request(PutGatewayResponseInput))
+    await client.put_gateway_response(_request(PutGatewayResponseInputDict))
+    await client.put_integration(rest_api_id=_, resource_id=_, http_method=_, type=_)
+    await client.put_integration(**_request(PutIntegrationInputDict))
+    await client.put_integration(_request(PutIntegrationInput))
+    await client.put_integration(_request(PutIntegrationInputDict))
+    await client.put_integration_response(
+        rest_api_id=_, resource_id=_, http_method=_, status_code=_
+    )
+    await client.put_integration_response(**_request(PutIntegrationResponseInputDict))
+    await client.put_integration_response(_request(PutIntegrationResponseInput))
+    await client.put_integration_response(_request(PutIntegrationResponseInputDict))
+    await client.put_method(
+        rest_api_id=_, resource_id=_, http_method=_, authorization_type=_
+    )
+    await client.put_method(**_request(PutMethodInputDict))
+    await client.put_method(_request(PutMethodInput))
+    await client.put_method(_request(PutMethodInputDict))
+    await client.put_method_response(
+        rest_api_id=_, resource_id=_, http_method=_, status_code=_
+    )
+    await client.put_method_response(**_request(PutMethodResponseInputDict))
+    await client.put_method_response(_request(PutMethodResponseInput))
+    await client.put_method_response(_request(PutMethodResponseInputDict))
+    await client.put_rest_api(rest_api_id=_, body=_)
+    await client.put_rest_api(**_request(PutRestApiInputDict))
+    await client.put_rest_api(_request(PutRestApiInput))
+    await client.put_rest_api(_request(PutRestApiInputDict))
+    await client.reject_domain_name_access_association(
+        domain_name_access_association_arn=_, domain_name_arn=_
+    )
+    await client.reject_domain_name_access_association(
+        **_request(RejectDomainNameAccessAssociationInputDict)
+    )
+    await client.reject_domain_name_access_association(
+        _request(RejectDomainNameAccessAssociationInput)
+    )
+    await client.reject_domain_name_access_association(
+        _request(RejectDomainNameAccessAssociationInputDict)
+    )
+    await client.tag_resource(resource_arn=_, tags=_)
+    await client.tag_resource(**_request(TagResourceInputDict))
+    await client.tag_resource(_request(TagResourceInput))
+    await client.tag_resource(_request(TagResourceInputDict))
+    await client.test_invoke_authorizer(rest_api_id=_, authorizer_id=_)
+    await client.test_invoke_authorizer(**_request(TestInvokeAuthorizerInputDict))
+    await client.test_invoke_authorizer(_request(TestInvokeAuthorizerInput))
+    await client.test_invoke_authorizer(_request(TestInvokeAuthorizerInputDict))
+    await client.test_invoke_method(rest_api_id=_, resource_id=_, http_method=_)
+    await client.test_invoke_method(**_request(TestInvokeMethodInputDict))
+    await client.test_invoke_method(_request(TestInvokeMethodInput))
+    await client.test_invoke_method(_request(TestInvokeMethodInputDict))
+    await client.untag_resource(resource_arn=_, tag_keys=_)
+    await client.untag_resource(**_request(UntagResourceInputDict))
+    await client.untag_resource(_request(UntagResourceInput))
+    await client.untag_resource(_request(UntagResourceInputDict))
+    await client.update_account()
+    await client.update_account(**_request(UpdateAccountInputDict))
+    await client.update_account(_request(UpdateAccountInput))
+    await client.update_account(_request(UpdateAccountInputDict))
+    await client.update_api_key(api_key=_)
+    await client.update_api_key(**_request(UpdateApiKeyInputDict))
+    await client.update_api_key(_request(UpdateApiKeyInput))
+    await client.update_api_key(_request(UpdateApiKeyInputDict))
+    await client.update_authorizer(rest_api_id=_, authorizer_id=_)
+    await client.update_authorizer(**_request(UpdateAuthorizerInputDict))
+    await client.update_authorizer(_request(UpdateAuthorizerInput))
+    await client.update_authorizer(_request(UpdateAuthorizerInputDict))
+    await client.update_base_path_mapping(domain_name=_, base_path=_)
+    await client.update_base_path_mapping(**_request(UpdateBasePathMappingInputDict))
+    await client.update_base_path_mapping(_request(UpdateBasePathMappingInput))
+    await client.update_base_path_mapping(_request(UpdateBasePathMappingInputDict))
+    await client.update_client_certificate(client_certificate_id=_)
+    await client.update_client_certificate(**_request(UpdateClientCertificateInputDict))
+    await client.update_client_certificate(_request(UpdateClientCertificateInput))
+    await client.update_client_certificate(_request(UpdateClientCertificateInputDict))
+    await client.update_deployment(rest_api_id=_, deployment_id=_)
+    await client.update_deployment(**_request(UpdateDeploymentInputDict))
+    await client.update_deployment(_request(UpdateDeploymentInput))
+    await client.update_deployment(_request(UpdateDeploymentInputDict))
+    await client.update_documentation_part(rest_api_id=_, documentation_part_id=_)
+    await client.update_documentation_part(**_request(UpdateDocumentationPartInputDict))
+    await client.update_documentation_part(_request(UpdateDocumentationPartInput))
+    await client.update_documentation_part(_request(UpdateDocumentationPartInputDict))
+    await client.update_documentation_version(rest_api_id=_, documentation_version=_)
+    await client.update_documentation_version(
+        **_request(UpdateDocumentationVersionInputDict)
+    )
+    await client.update_documentation_version(_request(UpdateDocumentationVersionInput))
+    await client.update_documentation_version(
+        _request(UpdateDocumentationVersionInputDict)
+    )
+    await client.update_domain_name(domain_name=_)
+    await client.update_domain_name(**_request(UpdateDomainNameInputDict))
+    await client.update_domain_name(_request(UpdateDomainNameInput))
+    await client.update_domain_name(_request(UpdateDomainNameInputDict))
+    await client.update_gateway_response(rest_api_id=_, response_type=_)
+    await client.update_gateway_response(**_request(UpdateGatewayResponseInputDict))
+    await client.update_gateway_response(_request(UpdateGatewayResponseInput))
+    await client.update_gateway_response(_request(UpdateGatewayResponseInputDict))
+    await client.update_integration(rest_api_id=_, resource_id=_, http_method=_)
+    await client.update_integration(**_request(UpdateIntegrationInputDict))
+    await client.update_integration(_request(UpdateIntegrationInput))
+    await client.update_integration(_request(UpdateIntegrationInputDict))
+    await client.update_integration_response(
+        rest_api_id=_, resource_id=_, http_method=_, status_code=_
+    )
+    await client.update_integration_response(
+        **_request(UpdateIntegrationResponseInputDict)
+    )
+    await client.update_integration_response(_request(UpdateIntegrationResponseInput))
+    await client.update_integration_response(
+        _request(UpdateIntegrationResponseInputDict)
+    )
+    await client.update_method(rest_api_id=_, resource_id=_, http_method=_)
+    await client.update_method(**_request(UpdateMethodInputDict))
+    await client.update_method(_request(UpdateMethodInput))
+    await client.update_method(_request(UpdateMethodInputDict))
+    await client.update_method_response(
+        rest_api_id=_, resource_id=_, http_method=_, status_code=_
+    )
+    await client.update_method_response(**_request(UpdateMethodResponseInputDict))
+    await client.update_method_response(_request(UpdateMethodResponseInput))
+    await client.update_method_response(_request(UpdateMethodResponseInputDict))
+    await client.update_model(rest_api_id=_, model_name=_)
+    await client.update_model(**_request(UpdateModelInputDict))
+    await client.update_model(_request(UpdateModelInput))
+    await client.update_model(_request(UpdateModelInputDict))
+    await client.update_request_validator(rest_api_id=_, request_validator_id=_)
+    await client.update_request_validator(**_request(UpdateRequestValidatorInputDict))
+    await client.update_request_validator(_request(UpdateRequestValidatorInput))
+    await client.update_request_validator(_request(UpdateRequestValidatorInputDict))
+    await client.update_resource(rest_api_id=_, resource_id=_)
+    await client.update_resource(**_request(UpdateResourceInputDict))
+    await client.update_resource(_request(UpdateResourceInput))
+    await client.update_resource(_request(UpdateResourceInputDict))
+    await client.update_rest_api(rest_api_id=_)
+    await client.update_rest_api(**_request(UpdateRestApiInputDict))
+    await client.update_rest_api(_request(UpdateRestApiInput))
+    await client.update_rest_api(_request(UpdateRestApiInputDict))
+    await client.update_stage(rest_api_id=_, stage_name=_)
+    await client.update_stage(**_request(UpdateStageInputDict))
+    await client.update_stage(_request(UpdateStageInput))
+    await client.update_stage(_request(UpdateStageInputDict))
+    await client.update_usage(usage_plan_id=_, key_id=_)
+    await client.update_usage(**_request(UpdateUsageInputDict))
+    await client.update_usage(_request(UpdateUsageInput))
+    await client.update_usage(_request(UpdateUsageInputDict))
+    await client.update_usage_plan(usage_plan_id=_)
+    await client.update_usage_plan(**_request(UpdateUsagePlanInputDict))
+    await client.update_usage_plan(_request(UpdateUsagePlanInput))
+    await client.update_usage_plan(_request(UpdateUsagePlanInputDict))
+    await client.update_vpc_link(vpc_link_id=_)
+    await client.update_vpc_link(**_request(UpdateVpcLinkInputDict))
+    await client.update_vpc_link(_request(UpdateVpcLinkInput))
+    await client.update_vpc_link(_request(UpdateVpcLinkInputDict))
+
+
+def check_sync_calls(client: APIGatewayClient) -> None:
+    pass
+    client.create_api_key()
+    client.create_api_key(**_request(CreateApiKeyInputDict))
+    client.create_api_key(_request(CreateApiKeyInput))
+    client.create_api_key(_request(CreateApiKeyInputDict))
+    client.create_authorizer(rest_api_id=_, name=_, type=_)
+    client.create_authorizer(**_request(CreateAuthorizerInputDict))
+    client.create_authorizer(_request(CreateAuthorizerInput))
+    client.create_authorizer(_request(CreateAuthorizerInputDict))
+    client.create_base_path_mapping(domain_name=_, rest_api_id=_)
+    client.create_base_path_mapping(**_request(CreateBasePathMappingInputDict))
+    client.create_base_path_mapping(_request(CreateBasePathMappingInput))
+    client.create_base_path_mapping(_request(CreateBasePathMappingInputDict))
+    client.create_deployment(rest_api_id=_)
+    client.create_deployment(**_request(CreateDeploymentInputDict))
+    client.create_deployment(_request(CreateDeploymentInput))
+    client.create_deployment(_request(CreateDeploymentInputDict))
+    client.create_documentation_part(rest_api_id=_, location=_, properties=_)
+    client.create_documentation_part(**_request(CreateDocumentationPartInputDict))
+    client.create_documentation_part(_request(CreateDocumentationPartInput))
+    client.create_documentation_part(_request(CreateDocumentationPartInputDict))
+    client.create_documentation_version(rest_api_id=_, documentation_version=_)
+    client.create_documentation_version(**_request(CreateDocumentationVersionInputDict))
+    client.create_documentation_version(_request(CreateDocumentationVersionInput))
+    client.create_documentation_version(_request(CreateDocumentationVersionInputDict))
+    client.create_domain_name(domain_name=_)
+    client.create_domain_name(**_request(CreateDomainNameInputDict))
+    client.create_domain_name(_request(CreateDomainNameInput))
+    client.create_domain_name(_request(CreateDomainNameInputDict))
+    client.create_domain_name_access_association(
+        domain_name_arn=_, access_association_source_type=_, access_association_source=_
+    )
+    client.create_domain_name_access_association(
+        **_request(CreateDomainNameAccessAssociationInputDict)
+    )
+    client.create_domain_name_access_association(
+        _request(CreateDomainNameAccessAssociationInput)
+    )
+    client.create_domain_name_access_association(
+        _request(CreateDomainNameAccessAssociationInputDict)
+    )
+    client.create_model(rest_api_id=_, name=_, content_type=_)
+    client.create_model(**_request(CreateModelInputDict))
+    client.create_model(_request(CreateModelInput))
+    client.create_model(_request(CreateModelInputDict))
+    client.create_request_validator(rest_api_id=_)
+    client.create_request_validator(**_request(CreateRequestValidatorInputDict))
+    client.create_request_validator(_request(CreateRequestValidatorInput))
+    client.create_request_validator(_request(CreateRequestValidatorInputDict))
+    client.create_resource(rest_api_id=_, parent_id=_, path_part=_)
+    client.create_resource(**_request(CreateResourceInputDict))
+    client.create_resource(_request(CreateResourceInput))
+    client.create_resource(_request(CreateResourceInputDict))
+    client.create_rest_api(name=_)
+    client.create_rest_api(**_request(CreateRestApiInputDict))
+    client.create_rest_api(_request(CreateRestApiInput))
+    client.create_rest_api(_request(CreateRestApiInputDict))
+    client.create_stage(rest_api_id=_, stage_name=_, deployment_id=_)
+    client.create_stage(**_request(CreateStageInputDict))
+    client.create_stage(_request(CreateStageInput))
+    client.create_stage(_request(CreateStageInputDict))
+    client.create_usage_plan(name=_)
+    client.create_usage_plan(**_request(CreateUsagePlanInputDict))
+    client.create_usage_plan(_request(CreateUsagePlanInput))
+    client.create_usage_plan(_request(CreateUsagePlanInputDict))
+    client.create_usage_plan_key(usage_plan_id=_, key_id=_, key_type=_)
+    client.create_usage_plan_key(**_request(CreateUsagePlanKeyInputDict))
+    client.create_usage_plan_key(_request(CreateUsagePlanKeyInput))
+    client.create_usage_plan_key(_request(CreateUsagePlanKeyInputDict))
+    client.create_vpc_link(name=_, target_arns=_)
+    client.create_vpc_link(**_request(CreateVpcLinkInputDict))
+    client.create_vpc_link(_request(CreateVpcLinkInput))
+    client.create_vpc_link(_request(CreateVpcLinkInputDict))
+    client.delete_api_key(api_key=_)
+    client.delete_api_key(**_request(DeleteApiKeyInputDict))
+    client.delete_api_key(_request(DeleteApiKeyInput))
+    client.delete_api_key(_request(DeleteApiKeyInputDict))
+    client.delete_authorizer(rest_api_id=_, authorizer_id=_)
+    client.delete_authorizer(**_request(DeleteAuthorizerInputDict))
+    client.delete_authorizer(_request(DeleteAuthorizerInput))
+    client.delete_authorizer(_request(DeleteAuthorizerInputDict))
+    client.delete_base_path_mapping(domain_name=_, base_path=_)
+    client.delete_base_path_mapping(**_request(DeleteBasePathMappingInputDict))
+    client.delete_base_path_mapping(_request(DeleteBasePathMappingInput))
+    client.delete_base_path_mapping(_request(DeleteBasePathMappingInputDict))
+    client.delete_client_certificate(client_certificate_id=_)
+    client.delete_client_certificate(**_request(DeleteClientCertificateInputDict))
+    client.delete_client_certificate(_request(DeleteClientCertificateInput))
+    client.delete_client_certificate(_request(DeleteClientCertificateInputDict))
+    client.delete_deployment(rest_api_id=_, deployment_id=_)
+    client.delete_deployment(**_request(DeleteDeploymentInputDict))
+    client.delete_deployment(_request(DeleteDeploymentInput))
+    client.delete_deployment(_request(DeleteDeploymentInputDict))
+    client.delete_documentation_part(rest_api_id=_, documentation_part_id=_)
+    client.delete_documentation_part(**_request(DeleteDocumentationPartInputDict))
+    client.delete_documentation_part(_request(DeleteDocumentationPartInput))
+    client.delete_documentation_part(_request(DeleteDocumentationPartInputDict))
+    client.delete_documentation_version(rest_api_id=_, documentation_version=_)
+    client.delete_documentation_version(**_request(DeleteDocumentationVersionInputDict))
+    client.delete_documentation_version(_request(DeleteDocumentationVersionInput))
+    client.delete_documentation_version(_request(DeleteDocumentationVersionInputDict))
+    client.delete_domain_name(domain_name=_)
+    client.delete_domain_name(**_request(DeleteDomainNameInputDict))
+    client.delete_domain_name(_request(DeleteDomainNameInput))
+    client.delete_domain_name(_request(DeleteDomainNameInputDict))
+    client.delete_domain_name_access_association(domain_name_access_association_arn=_)
+    client.delete_domain_name_access_association(
+        **_request(DeleteDomainNameAccessAssociationInputDict)
+    )
+    client.delete_domain_name_access_association(
+        _request(DeleteDomainNameAccessAssociationInput)
+    )
+    client.delete_domain_name_access_association(
+        _request(DeleteDomainNameAccessAssociationInputDict)
+    )
+    client.delete_gateway_response(rest_api_id=_, response_type=_)
+    client.delete_gateway_response(**_request(DeleteGatewayResponseInputDict))
+    client.delete_gateway_response(_request(DeleteGatewayResponseInput))
+    client.delete_gateway_response(_request(DeleteGatewayResponseInputDict))
+    client.delete_integration(rest_api_id=_, resource_id=_, http_method=_)
+    client.delete_integration(**_request(DeleteIntegrationInputDict))
+    client.delete_integration(_request(DeleteIntegrationInput))
+    client.delete_integration(_request(DeleteIntegrationInputDict))
+    client.delete_integration_response(
+        rest_api_id=_, resource_id=_, http_method=_, status_code=_
+    )
+    client.delete_integration_response(**_request(DeleteIntegrationResponseInputDict))
+    client.delete_integration_response(_request(DeleteIntegrationResponseInput))
+    client.delete_integration_response(_request(DeleteIntegrationResponseInputDict))
+    client.delete_method(rest_api_id=_, resource_id=_, http_method=_)
+    client.delete_method(**_request(DeleteMethodInputDict))
+    client.delete_method(_request(DeleteMethodInput))
+    client.delete_method(_request(DeleteMethodInputDict))
+    client.delete_method_response(
+        rest_api_id=_, resource_id=_, http_method=_, status_code=_
+    )
+    client.delete_method_response(**_request(DeleteMethodResponseInputDict))
+    client.delete_method_response(_request(DeleteMethodResponseInput))
+    client.delete_method_response(_request(DeleteMethodResponseInputDict))
+    client.delete_model(rest_api_id=_, model_name=_)
+    client.delete_model(**_request(DeleteModelInputDict))
+    client.delete_model(_request(DeleteModelInput))
+    client.delete_model(_request(DeleteModelInputDict))
+    client.delete_request_validator(rest_api_id=_, request_validator_id=_)
+    client.delete_request_validator(**_request(DeleteRequestValidatorInputDict))
+    client.delete_request_validator(_request(DeleteRequestValidatorInput))
+    client.delete_request_validator(_request(DeleteRequestValidatorInputDict))
+    client.delete_resource(rest_api_id=_, resource_id=_)
+    client.delete_resource(**_request(DeleteResourceInputDict))
+    client.delete_resource(_request(DeleteResourceInput))
+    client.delete_resource(_request(DeleteResourceInputDict))
+    client.delete_rest_api(rest_api_id=_)
+    client.delete_rest_api(**_request(DeleteRestApiInputDict))
+    client.delete_rest_api(_request(DeleteRestApiInput))
+    client.delete_rest_api(_request(DeleteRestApiInputDict))
+    client.delete_stage(rest_api_id=_, stage_name=_)
+    client.delete_stage(**_request(DeleteStageInputDict))
+    client.delete_stage(_request(DeleteStageInput))
+    client.delete_stage(_request(DeleteStageInputDict))
+    client.delete_usage_plan(usage_plan_id=_)
+    client.delete_usage_plan(**_request(DeleteUsagePlanInputDict))
+    client.delete_usage_plan(_request(DeleteUsagePlanInput))
+    client.delete_usage_plan(_request(DeleteUsagePlanInputDict))
+    client.delete_usage_plan_key(usage_plan_id=_, key_id=_)
+    client.delete_usage_plan_key(**_request(DeleteUsagePlanKeyInputDict))
+    client.delete_usage_plan_key(_request(DeleteUsagePlanKeyInput))
+    client.delete_usage_plan_key(_request(DeleteUsagePlanKeyInputDict))
+    client.delete_vpc_link(vpc_link_id=_)
+    client.delete_vpc_link(**_request(DeleteVpcLinkInputDict))
+    client.delete_vpc_link(_request(DeleteVpcLinkInput))
+    client.delete_vpc_link(_request(DeleteVpcLinkInputDict))
+    client.flush_stage_authorizers_cache(rest_api_id=_, stage_name=_)
+    client.flush_stage_authorizers_cache(
+        **_request(FlushStageAuthorizersCacheInputDict)
+    )
+    client.flush_stage_authorizers_cache(_request(FlushStageAuthorizersCacheInput))
+    client.flush_stage_authorizers_cache(_request(FlushStageAuthorizersCacheInputDict))
+    client.flush_stage_cache(rest_api_id=_, stage_name=_)
+    client.flush_stage_cache(**_request(FlushStageCacheInputDict))
+    client.flush_stage_cache(_request(FlushStageCacheInput))
+    client.flush_stage_cache(_request(FlushStageCacheInputDict))
+    client.generate_client_certificate()
+    client.generate_client_certificate(**_request(GenerateClientCertificateInputDict))
+    client.generate_client_certificate(_request(GenerateClientCertificateInput))
+    client.generate_client_certificate(_request(GenerateClientCertificateInputDict))
+    client.get_account()
+    client.get_account(**_request(GetAccountInputDict))
+    client.get_account(_request(GetAccountInput))
+    client.get_account(_request(GetAccountInputDict))
+    client.get_api_key(api_key=_)
+    client.get_api_key(**_request(GetApiKeyInputDict))
+    client.get_api_key(_request(GetApiKeyInput))
+    client.get_api_key(_request(GetApiKeyInputDict))
+    client.get_api_keys()
+    client.get_api_keys(**_request(GetApiKeysInputDict))
+    client.get_api_keys(_request(GetApiKeysInput))
+    client.get_api_keys(_request(GetApiKeysInputDict))
+    client.get_authorizer(rest_api_id=_, authorizer_id=_)
+    client.get_authorizer(**_request(GetAuthorizerInputDict))
+    client.get_authorizer(_request(GetAuthorizerInput))
+    client.get_authorizer(_request(GetAuthorizerInputDict))
+    client.get_authorizers(rest_api_id=_)
+    client.get_authorizers(**_request(GetAuthorizersInputDict))
+    client.get_authorizers(_request(GetAuthorizersInput))
+    client.get_authorizers(_request(GetAuthorizersInputDict))
+    client.get_base_path_mapping(domain_name=_, base_path=_)
+    client.get_base_path_mapping(**_request(GetBasePathMappingInputDict))
+    client.get_base_path_mapping(_request(GetBasePathMappingInput))
+    client.get_base_path_mapping(_request(GetBasePathMappingInputDict))
+    client.get_base_path_mappings(domain_name=_)
+    client.get_base_path_mappings(**_request(GetBasePathMappingsInputDict))
+    client.get_base_path_mappings(_request(GetBasePathMappingsInput))
+    client.get_base_path_mappings(_request(GetBasePathMappingsInputDict))
+    client.get_client_certificate(client_certificate_id=_)
+    client.get_client_certificate(**_request(GetClientCertificateInputDict))
+    client.get_client_certificate(_request(GetClientCertificateInput))
+    client.get_client_certificate(_request(GetClientCertificateInputDict))
+    client.get_client_certificates()
+    client.get_client_certificates(**_request(GetClientCertificatesInputDict))
+    client.get_client_certificates(_request(GetClientCertificatesInput))
+    client.get_client_certificates(_request(GetClientCertificatesInputDict))
+    client.get_deployment(rest_api_id=_, deployment_id=_)
+    client.get_deployment(**_request(GetDeploymentInputDict))
+    client.get_deployment(_request(GetDeploymentInput))
+    client.get_deployment(_request(GetDeploymentInputDict))
+    client.get_deployments(rest_api_id=_)
+    client.get_deployments(**_request(GetDeploymentsInputDict))
+    client.get_deployments(_request(GetDeploymentsInput))
+    client.get_deployments(_request(GetDeploymentsInputDict))
+    client.get_documentation_part(rest_api_id=_, documentation_part_id=_)
+    client.get_documentation_part(**_request(GetDocumentationPartInputDict))
+    client.get_documentation_part(_request(GetDocumentationPartInput))
+    client.get_documentation_part(_request(GetDocumentationPartInputDict))
+    client.get_documentation_parts(rest_api_id=_)
+    client.get_documentation_parts(**_request(GetDocumentationPartsInputDict))
+    client.get_documentation_parts(_request(GetDocumentationPartsInput))
+    client.get_documentation_parts(_request(GetDocumentationPartsInputDict))
+    client.get_documentation_version(rest_api_id=_, documentation_version=_)
+    client.get_documentation_version(**_request(GetDocumentationVersionInputDict))
+    client.get_documentation_version(_request(GetDocumentationVersionInput))
+    client.get_documentation_version(_request(GetDocumentationVersionInputDict))
+    client.get_documentation_versions(rest_api_id=_)
+    client.get_documentation_versions(**_request(GetDocumentationVersionsInputDict))
+    client.get_documentation_versions(_request(GetDocumentationVersionsInput))
+    client.get_documentation_versions(_request(GetDocumentationVersionsInputDict))
+    client.get_domain_name(domain_name=_)
+    client.get_domain_name(**_request(GetDomainNameInputDict))
+    client.get_domain_name(_request(GetDomainNameInput))
+    client.get_domain_name(_request(GetDomainNameInputDict))
+    client.get_domain_name_access_associations()
+    client.get_domain_name_access_associations(
+        **_request(GetDomainNameAccessAssociationsInputDict)
+    )
+    client.get_domain_name_access_associations(
+        _request(GetDomainNameAccessAssociationsInput)
+    )
+    client.get_domain_name_access_associations(
+        _request(GetDomainNameAccessAssociationsInputDict)
+    )
+    client.get_domain_names()
+    client.get_domain_names(**_request(GetDomainNamesInputDict))
+    client.get_domain_names(_request(GetDomainNamesInput))
+    client.get_domain_names(_request(GetDomainNamesInputDict))
+    client.get_export(rest_api_id=_, stage_name=_, export_type=_)
+    client.get_export(**_request(GetExportInputDict))
+    client.get_export(_request(GetExportInput))
+    client.get_export(_request(GetExportInputDict))
+    client.get_gateway_response(rest_api_id=_, response_type=_)
+    client.get_gateway_response(**_request(GetGatewayResponseInputDict))
+    client.get_gateway_response(_request(GetGatewayResponseInput))
+    client.get_gateway_response(_request(GetGatewayResponseInputDict))
+    client.get_gateway_responses(rest_api_id=_)
+    client.get_gateway_responses(**_request(GetGatewayResponsesInputDict))
+    client.get_gateway_responses(_request(GetGatewayResponsesInput))
+    client.get_gateway_responses(_request(GetGatewayResponsesInputDict))
+    client.get_integration(rest_api_id=_, resource_id=_, http_method=_)
+    client.get_integration(**_request(GetIntegrationInputDict))
+    client.get_integration(_request(GetIntegrationInput))
+    client.get_integration(_request(GetIntegrationInputDict))
+    client.get_integration_response(
+        rest_api_id=_, resource_id=_, http_method=_, status_code=_
+    )
+    client.get_integration_response(**_request(GetIntegrationResponseInputDict))
+    client.get_integration_response(_request(GetIntegrationResponseInput))
+    client.get_integration_response(_request(GetIntegrationResponseInputDict))
+    client.get_method(rest_api_id=_, resource_id=_, http_method=_)
+    client.get_method(**_request(GetMethodInputDict))
+    client.get_method(_request(GetMethodInput))
+    client.get_method(_request(GetMethodInputDict))
+    client.get_method_response(
+        rest_api_id=_, resource_id=_, http_method=_, status_code=_
+    )
+    client.get_method_response(**_request(GetMethodResponseInputDict))
+    client.get_method_response(_request(GetMethodResponseInput))
+    client.get_method_response(_request(GetMethodResponseInputDict))
+    client.get_model(rest_api_id=_, model_name=_)
+    client.get_model(**_request(GetModelInputDict))
+    client.get_model(_request(GetModelInput))
+    client.get_model(_request(GetModelInputDict))
+    client.get_models(rest_api_id=_)
+    client.get_models(**_request(GetModelsInputDict))
+    client.get_models(_request(GetModelsInput))
+    client.get_models(_request(GetModelsInputDict))
+    client.get_model_template(rest_api_id=_, model_name=_)
+    client.get_model_template(**_request(GetModelTemplateInputDict))
+    client.get_model_template(_request(GetModelTemplateInput))
+    client.get_model_template(_request(GetModelTemplateInputDict))
+    client.get_request_validator(rest_api_id=_, request_validator_id=_)
+    client.get_request_validator(**_request(GetRequestValidatorInputDict))
+    client.get_request_validator(_request(GetRequestValidatorInput))
+    client.get_request_validator(_request(GetRequestValidatorInputDict))
+    client.get_request_validators(rest_api_id=_)
+    client.get_request_validators(**_request(GetRequestValidatorsInputDict))
+    client.get_request_validators(_request(GetRequestValidatorsInput))
+    client.get_request_validators(_request(GetRequestValidatorsInputDict))
+    client.get_resource(rest_api_id=_, resource_id=_)
+    client.get_resource(**_request(GetResourceInputDict))
+    client.get_resource(_request(GetResourceInput))
+    client.get_resource(_request(GetResourceInputDict))
+    client.get_resources(rest_api_id=_)
+    client.get_resources(**_request(GetResourcesInputDict))
+    client.get_resources(_request(GetResourcesInput))
+    client.get_resources(_request(GetResourcesInputDict))
+    client.get_rest_api(rest_api_id=_)
+    client.get_rest_api(**_request(GetRestApiInputDict))
+    client.get_rest_api(_request(GetRestApiInput))
+    client.get_rest_api(_request(GetRestApiInputDict))
+    client.get_rest_apis()
+    client.get_rest_apis(**_request(GetRestApisInputDict))
+    client.get_rest_apis(_request(GetRestApisInput))
+    client.get_rest_apis(_request(GetRestApisInputDict))
+    client.get_sdk(rest_api_id=_, stage_name=_, sdk_type=_)
+    client.get_sdk(**_request(GetSdkInputDict))
+    client.get_sdk(_request(GetSdkInput))
+    client.get_sdk(_request(GetSdkInputDict))
+    client.get_sdk_type(id=_)
+    client.get_sdk_type(**_request(GetSdkTypeInputDict))
+    client.get_sdk_type(_request(GetSdkTypeInput))
+    client.get_sdk_type(_request(GetSdkTypeInputDict))
+    client.get_sdk_types()
+    client.get_sdk_types(**_request(GetSdkTypesInputDict))
+    client.get_sdk_types(_request(GetSdkTypesInput))
+    client.get_sdk_types(_request(GetSdkTypesInputDict))
+    client.get_stage(rest_api_id=_, stage_name=_)
+    client.get_stage(**_request(GetStageInputDict))
+    client.get_stage(_request(GetStageInput))
+    client.get_stage(_request(GetStageInputDict))
+    client.get_stages(rest_api_id=_)
+    client.get_stages(**_request(GetStagesInputDict))
+    client.get_stages(_request(GetStagesInput))
+    client.get_stages(_request(GetStagesInputDict))
+    client.get_tags(resource_arn=_)
+    client.get_tags(**_request(GetTagsInputDict))
+    client.get_tags(_request(GetTagsInput))
+    client.get_tags(_request(GetTagsInputDict))
+    client.get_usage(usage_plan_id=_, start_date=_, end_date=_)
+    client.get_usage(**_request(GetUsageInputDict))
+    client.get_usage(_request(GetUsageInput))
+    client.get_usage(_request(GetUsageInputDict))
+    client.get_usage_plan(usage_plan_id=_)
+    client.get_usage_plan(**_request(GetUsagePlanInputDict))
+    client.get_usage_plan(_request(GetUsagePlanInput))
+    client.get_usage_plan(_request(GetUsagePlanInputDict))
+    client.get_usage_plan_key(usage_plan_id=_, key_id=_)
+    client.get_usage_plan_key(**_request(GetUsagePlanKeyInputDict))
+    client.get_usage_plan_key(_request(GetUsagePlanKeyInput))
+    client.get_usage_plan_key(_request(GetUsagePlanKeyInputDict))
+    client.get_usage_plan_keys(usage_plan_id=_)
+    client.get_usage_plan_keys(**_request(GetUsagePlanKeysInputDict))
+    client.get_usage_plan_keys(_request(GetUsagePlanKeysInput))
+    client.get_usage_plan_keys(_request(GetUsagePlanKeysInputDict))
+    client.get_usage_plans()
+    client.get_usage_plans(**_request(GetUsagePlansInputDict))
+    client.get_usage_plans(_request(GetUsagePlansInput))
+    client.get_usage_plans(_request(GetUsagePlansInputDict))
+    client.get_vpc_link(vpc_link_id=_)
+    client.get_vpc_link(**_request(GetVpcLinkInputDict))
+    client.get_vpc_link(_request(GetVpcLinkInput))
+    client.get_vpc_link(_request(GetVpcLinkInputDict))
+    client.get_vpc_links()
+    client.get_vpc_links(**_request(GetVpcLinksInputDict))
+    client.get_vpc_links(_request(GetVpcLinksInput))
+    client.get_vpc_links(_request(GetVpcLinksInputDict))
+    client.import_api_keys(body=_, format=_)
+    client.import_api_keys(**_request(ImportApiKeysInputDict))
+    client.import_api_keys(_request(ImportApiKeysInput))
+    client.import_api_keys(_request(ImportApiKeysInputDict))
+    client.import_documentation_parts(rest_api_id=_, body=_)
+    client.import_documentation_parts(**_request(ImportDocumentationPartsInputDict))
+    client.import_documentation_parts(_request(ImportDocumentationPartsInput))
+    client.import_documentation_parts(_request(ImportDocumentationPartsInputDict))
+    client.import_rest_api(body=_)
+    client.import_rest_api(**_request(ImportRestApiInputDict))
+    client.import_rest_api(_request(ImportRestApiInput))
+    client.import_rest_api(_request(ImportRestApiInputDict))
+    client.put_gateway_response(rest_api_id=_, response_type=_)
+    client.put_gateway_response(**_request(PutGatewayResponseInputDict))
+    client.put_gateway_response(_request(PutGatewayResponseInput))
+    client.put_gateway_response(_request(PutGatewayResponseInputDict))
+    client.put_integration(rest_api_id=_, resource_id=_, http_method=_, type=_)
+    client.put_integration(**_request(PutIntegrationInputDict))
+    client.put_integration(_request(PutIntegrationInput))
+    client.put_integration(_request(PutIntegrationInputDict))
+    client.put_integration_response(
+        rest_api_id=_, resource_id=_, http_method=_, status_code=_
+    )
+    client.put_integration_response(**_request(PutIntegrationResponseInputDict))
+    client.put_integration_response(_request(PutIntegrationResponseInput))
+    client.put_integration_response(_request(PutIntegrationResponseInputDict))
+    client.put_method(rest_api_id=_, resource_id=_, http_method=_, authorization_type=_)
+    client.put_method(**_request(PutMethodInputDict))
+    client.put_method(_request(PutMethodInput))
+    client.put_method(_request(PutMethodInputDict))
+    client.put_method_response(
+        rest_api_id=_, resource_id=_, http_method=_, status_code=_
+    )
+    client.put_method_response(**_request(PutMethodResponseInputDict))
+    client.put_method_response(_request(PutMethodResponseInput))
+    client.put_method_response(_request(PutMethodResponseInputDict))
+    client.put_rest_api(rest_api_id=_, body=_)
+    client.put_rest_api(**_request(PutRestApiInputDict))
+    client.put_rest_api(_request(PutRestApiInput))
+    client.put_rest_api(_request(PutRestApiInputDict))
+    client.reject_domain_name_access_association(
+        domain_name_access_association_arn=_, domain_name_arn=_
+    )
+    client.reject_domain_name_access_association(
+        **_request(RejectDomainNameAccessAssociationInputDict)
+    )
+    client.reject_domain_name_access_association(
+        _request(RejectDomainNameAccessAssociationInput)
+    )
+    client.reject_domain_name_access_association(
+        _request(RejectDomainNameAccessAssociationInputDict)
+    )
+    client.tag_resource(resource_arn=_, tags=_)
+    client.tag_resource(**_request(TagResourceInputDict))
+    client.tag_resource(_request(TagResourceInput))
+    client.tag_resource(_request(TagResourceInputDict))
+    client.test_invoke_authorizer(rest_api_id=_, authorizer_id=_)
+    client.test_invoke_authorizer(**_request(TestInvokeAuthorizerInputDict))
+    client.test_invoke_authorizer(_request(TestInvokeAuthorizerInput))
+    client.test_invoke_authorizer(_request(TestInvokeAuthorizerInputDict))
+    client.test_invoke_method(rest_api_id=_, resource_id=_, http_method=_)
+    client.test_invoke_method(**_request(TestInvokeMethodInputDict))
+    client.test_invoke_method(_request(TestInvokeMethodInput))
+    client.test_invoke_method(_request(TestInvokeMethodInputDict))
+    client.untag_resource(resource_arn=_, tag_keys=_)
+    client.untag_resource(**_request(UntagResourceInputDict))
+    client.untag_resource(_request(UntagResourceInput))
+    client.untag_resource(_request(UntagResourceInputDict))
+    client.update_account()
+    client.update_account(**_request(UpdateAccountInputDict))
+    client.update_account(_request(UpdateAccountInput))
+    client.update_account(_request(UpdateAccountInputDict))
+    client.update_api_key(api_key=_)
+    client.update_api_key(**_request(UpdateApiKeyInputDict))
+    client.update_api_key(_request(UpdateApiKeyInput))
+    client.update_api_key(_request(UpdateApiKeyInputDict))
+    client.update_authorizer(rest_api_id=_, authorizer_id=_)
+    client.update_authorizer(**_request(UpdateAuthorizerInputDict))
+    client.update_authorizer(_request(UpdateAuthorizerInput))
+    client.update_authorizer(_request(UpdateAuthorizerInputDict))
+    client.update_base_path_mapping(domain_name=_, base_path=_)
+    client.update_base_path_mapping(**_request(UpdateBasePathMappingInputDict))
+    client.update_base_path_mapping(_request(UpdateBasePathMappingInput))
+    client.update_base_path_mapping(_request(UpdateBasePathMappingInputDict))
+    client.update_client_certificate(client_certificate_id=_)
+    client.update_client_certificate(**_request(UpdateClientCertificateInputDict))
+    client.update_client_certificate(_request(UpdateClientCertificateInput))
+    client.update_client_certificate(_request(UpdateClientCertificateInputDict))
+    client.update_deployment(rest_api_id=_, deployment_id=_)
+    client.update_deployment(**_request(UpdateDeploymentInputDict))
+    client.update_deployment(_request(UpdateDeploymentInput))
+    client.update_deployment(_request(UpdateDeploymentInputDict))
+    client.update_documentation_part(rest_api_id=_, documentation_part_id=_)
+    client.update_documentation_part(**_request(UpdateDocumentationPartInputDict))
+    client.update_documentation_part(_request(UpdateDocumentationPartInput))
+    client.update_documentation_part(_request(UpdateDocumentationPartInputDict))
+    client.update_documentation_version(rest_api_id=_, documentation_version=_)
+    client.update_documentation_version(**_request(UpdateDocumentationVersionInputDict))
+    client.update_documentation_version(_request(UpdateDocumentationVersionInput))
+    client.update_documentation_version(_request(UpdateDocumentationVersionInputDict))
+    client.update_domain_name(domain_name=_)
+    client.update_domain_name(**_request(UpdateDomainNameInputDict))
+    client.update_domain_name(_request(UpdateDomainNameInput))
+    client.update_domain_name(_request(UpdateDomainNameInputDict))
+    client.update_gateway_response(rest_api_id=_, response_type=_)
+    client.update_gateway_response(**_request(UpdateGatewayResponseInputDict))
+    client.update_gateway_response(_request(UpdateGatewayResponseInput))
+    client.update_gateway_response(_request(UpdateGatewayResponseInputDict))
+    client.update_integration(rest_api_id=_, resource_id=_, http_method=_)
+    client.update_integration(**_request(UpdateIntegrationInputDict))
+    client.update_integration(_request(UpdateIntegrationInput))
+    client.update_integration(_request(UpdateIntegrationInputDict))
+    client.update_integration_response(
+        rest_api_id=_, resource_id=_, http_method=_, status_code=_
+    )
+    client.update_integration_response(**_request(UpdateIntegrationResponseInputDict))
+    client.update_integration_response(_request(UpdateIntegrationResponseInput))
+    client.update_integration_response(_request(UpdateIntegrationResponseInputDict))
+    client.update_method(rest_api_id=_, resource_id=_, http_method=_)
+    client.update_method(**_request(UpdateMethodInputDict))
+    client.update_method(_request(UpdateMethodInput))
+    client.update_method(_request(UpdateMethodInputDict))
+    client.update_method_response(
+        rest_api_id=_, resource_id=_, http_method=_, status_code=_
+    )
+    client.update_method_response(**_request(UpdateMethodResponseInputDict))
+    client.update_method_response(_request(UpdateMethodResponseInput))
+    client.update_method_response(_request(UpdateMethodResponseInputDict))
+    client.update_model(rest_api_id=_, model_name=_)
+    client.update_model(**_request(UpdateModelInputDict))
+    client.update_model(_request(UpdateModelInput))
+    client.update_model(_request(UpdateModelInputDict))
+    client.update_request_validator(rest_api_id=_, request_validator_id=_)
+    client.update_request_validator(**_request(UpdateRequestValidatorInputDict))
+    client.update_request_validator(_request(UpdateRequestValidatorInput))
+    client.update_request_validator(_request(UpdateRequestValidatorInputDict))
+    client.update_resource(rest_api_id=_, resource_id=_)
+    client.update_resource(**_request(UpdateResourceInputDict))
+    client.update_resource(_request(UpdateResourceInput))
+    client.update_resource(_request(UpdateResourceInputDict))
+    client.update_rest_api(rest_api_id=_)
+    client.update_rest_api(**_request(UpdateRestApiInputDict))
+    client.update_rest_api(_request(UpdateRestApiInput))
+    client.update_rest_api(_request(UpdateRestApiInputDict))
+    client.update_stage(rest_api_id=_, stage_name=_)
+    client.update_stage(**_request(UpdateStageInputDict))
+    client.update_stage(_request(UpdateStageInput))
+    client.update_stage(_request(UpdateStageInputDict))
+    client.update_usage(usage_plan_id=_, key_id=_)
+    client.update_usage(**_request(UpdateUsageInputDict))
+    client.update_usage(_request(UpdateUsageInput))
+    client.update_usage(_request(UpdateUsageInputDict))
+    client.update_usage_plan(usage_plan_id=_)
+    client.update_usage_plan(**_request(UpdateUsagePlanInputDict))
+    client.update_usage_plan(_request(UpdateUsagePlanInput))
+    client.update_usage_plan(_request(UpdateUsagePlanInputDict))
+    client.update_vpc_link(vpc_link_id=_)
+    client.update_vpc_link(**_request(UpdateVpcLinkInputDict))
+    client.update_vpc_link(_request(UpdateVpcLinkInput))
+    client.update_vpc_link(_request(UpdateVpcLinkInputDict))

@@ -24,21 +24,21 @@ classifiers = [
 ]
 
 dependencies = [
-    "smithy_aws_core[eventstream, json]~=0.14.0",
-    "smithy_core~=0.11.0",
-    "smithy_http[aiohttp, urllib3]~=0.8.0"
+    "smithy_aws_core[eventstream, json]~=0.15.0",
+    "smithy_core~=0.12.0",
+    "smithy_http[aiohttp, urllib3]~=0.9.0"
 ]
 
 [project.optional-dependencies]
 awscrt = [
-    "smithy_http[awscrt]~=0.8.0"
+    "smithy_http[awscrt]~=0.9.0"
 ]
 
 [dependency-groups]
 test = [
     "pytest>=9.0.3,<10.0.0",
     "pytest-asyncio>=1.3.0,<1.4.0",
-    "smithy_test~=0.3.0"
+    "smithy_test~=0.4.0"
 ]
 
 [build-system]

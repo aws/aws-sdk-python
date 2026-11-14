@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import cast
+from typing import Unpack as _Unpack, cast, overload as _overload
 
 from smithy_aws_core.aio.identity.chain import AsyncIdentityChain
 from smithy_aws_core.config.types import ConfigSource
@@ -20,89 +20,47 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from ..models import (
-        AddPermissionInput,
         AddPermissionOutput,
-        CheckIfPhoneNumberIsOptedOutInput,
         CheckIfPhoneNumberIsOptedOutOutput,
-        ConfirmSubscriptionInput,
         ConfirmSubscriptionOutput,
-        CreatePlatformApplicationInput,
         CreatePlatformApplicationOutput,
-        CreatePlatformEndpointInput,
         CreatePlatformEndpointOutput,
-        CreateSMSSandboxPhoneNumberInput,
         CreateSMSSandboxPhoneNumberOutput,
-        CreateTopicInput,
         CreateTopicOutput,
-        DeleteEndpointInput,
         DeleteEndpointOutput,
-        DeletePlatformApplicationInput,
         DeletePlatformApplicationOutput,
-        DeleteSMSSandboxPhoneNumberInput,
         DeleteSMSSandboxPhoneNumberOutput,
-        DeleteTopicInput,
         DeleteTopicOutput,
-        GetDataProtectionPolicyInput,
         GetDataProtectionPolicyOutput,
-        GetEndpointAttributesInput,
         GetEndpointAttributesOutput,
-        GetPlatformApplicationAttributesInput,
         GetPlatformApplicationAttributesOutput,
-        GetSMSAttributesInput,
         GetSMSAttributesOutput,
-        GetSMSSandboxAccountStatusInput,
         GetSMSSandboxAccountStatusOutput,
-        GetSubscriptionAttributesInput,
         GetSubscriptionAttributesOutput,
-        GetTopicAttributesInput,
         GetTopicAttributesOutput,
-        ListEndpointsByPlatformApplicationInput,
         ListEndpointsByPlatformApplicationOutput,
-        ListOriginationNumbersInput,
         ListOriginationNumbersOutput,
-        ListPhoneNumbersOptedOutInput,
         ListPhoneNumbersOptedOutOutput,
-        ListPlatformApplicationsInput,
         ListPlatformApplicationsOutput,
-        ListSMSSandboxPhoneNumbersInput,
         ListSMSSandboxPhoneNumbersOutput,
-        ListSubscriptionsByTopicInput,
         ListSubscriptionsByTopicOutput,
-        ListSubscriptionsInput,
         ListSubscriptionsOutput,
-        ListTagsForResourceInput,
         ListTagsForResourceOutput,
-        ListTopicsInput,
         ListTopicsOutput,
-        OptInPhoneNumberInput,
         OptInPhoneNumberOutput,
-        PublishBatchInput,
         PublishBatchOutput,
-        PublishInput,
         PublishOutput,
-        PutDataProtectionPolicyInput,
         PutDataProtectionPolicyOutput,
-        RemovePermissionInput,
         RemovePermissionOutput,
-        SetEndpointAttributesInput,
         SetEndpointAttributesOutput,
-        SetPlatformApplicationAttributesInput,
         SetPlatformApplicationAttributesOutput,
-        SetSMSAttributesInput,
         SetSMSAttributesOutput,
-        SetSubscriptionAttributesInput,
         SetSubscriptionAttributesOutput,
-        SetTopicAttributesInput,
         SetTopicAttributesOutput,
-        SubscribeInput,
         SubscribeOutput,
-        TagResourceInput,
         TagResourceOutput,
-        UnsubscribeInput,
         UnsubscribeOutput,
-        UntagResourceInput,
         UntagResourceOutput,
-        VerifySMSSandboxPhoneNumberInput,
         VerifySMSSandboxPhoneNumberOutput,
     )
 
@@ -134,10 +92,24 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
     Services](http://aws.amazon.com/tools/).
     """
 
-    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
+    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
 
+    @_overload
     async def add_permission(
-        self, input: AddPermissionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.AddPermissionInput | _models.AddPermissionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AddPermissionOutput: ...
+
+    @_overload
+    async def add_permission(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AddPermissionInputDict],
     ) -> AddPermissionOutput:
         """
         Adds a statement to a topic's access control policy, granting access
@@ -149,8 +121,6 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
             `SetTopicAttributes` actions in your IAM policy.
 
         Args:
-            input:
-                An instance of `AddPermissionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -160,12 +130,34 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `AddPermissionOutput`.
         """
-        return await self._invoke(input, _models.ADD_PERMISSION, [], plugins)
 
+    async def add_permission(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AddPermissionOutput:
+        return await self._invoke(
+            self._select_input(_models.ADD_PERMISSION, args, kwargs),
+            _models.ADD_PERMISSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def check_if_phone_number_is_opted_out(
         self,
-        input: CheckIfPhoneNumberIsOptedOutInput,
+        request: _models.CheckIfPhoneNumberIsOptedOutInput
+        | _models.CheckIfPhoneNumberIsOptedOutInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CheckIfPhoneNumberIsOptedOutOutput: ...
+
+    @_overload
+    async def check_if_phone_number_is_opted_out(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CheckIfPhoneNumberIsOptedOutInputDict],
     ) -> CheckIfPhoneNumberIsOptedOutOutput:
         """
         Accepts a phone number and indicates whether the phone holder has opted
@@ -176,8 +168,6 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         `OptInPhoneNumber` action.
 
         Args:
-            input:
-                An instance of `CheckIfPhoneNumberIsOptedOutInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -187,12 +177,36 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `CheckIfPhoneNumberIsOptedOutOutput`.
         """
+
+    async def check_if_phone_number_is_opted_out(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CheckIfPhoneNumberIsOptedOutOutput:
         return await self._invoke(
-            input, _models.CHECK_IF_PHONE_NUMBER_IS_OPTED_OUT, [], plugins
+            self._select_input(
+                _models.CHECK_IF_PHONE_NUMBER_IS_OPTED_OUT, args, kwargs
+            ),
+            _models.CHECK_IF_PHONE_NUMBER_IS_OPTED_OUT,
+            [],
+            plugins,
         )
 
+    @_overload
     async def confirm_subscription(
-        self, input: ConfirmSubscriptionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ConfirmSubscriptionInput
+        | _models.ConfirmSubscriptionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ConfirmSubscriptionOutput: ...
+
+    @_overload
+    async def confirm_subscription(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ConfirmSubscriptionInputDict],
     ) -> ConfirmSubscriptionOutput:
         """
         Verifies an endpoint owner's intent to receive messages by validating
@@ -202,8 +216,6 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         when the `AuthenticateOnUnsubscribe` flag is set to \"true\".
 
         Args:
-            input:
-                An instance of `ConfirmSubscriptionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -213,10 +225,34 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `ConfirmSubscriptionOutput`.
         """
-        return await self._invoke(input, _models.CONFIRM_SUBSCRIPTION, [], plugins)
 
+    async def confirm_subscription(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ConfirmSubscriptionOutput:
+        return await self._invoke(
+            self._select_input(_models.CONFIRM_SUBSCRIPTION, args, kwargs),
+            _models.CONFIRM_SUBSCRIPTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_platform_application(
-        self, input: CreatePlatformApplicationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreatePlatformApplicationInput
+        | _models.CreatePlatformApplicationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreatePlatformApplicationOutput: ...
+
+    @_overload
+    async def create_platform_application(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreatePlatformApplicationInputDict],
     ) -> CreatePlatformApplicationOutput:
         """
         Creates a platform application object for one of the supported push
@@ -251,7 +287,7 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
           Services SDKs, the file must be in string format and special
           characters must be ignored. To format the file correctly, Amazon SNS
           recommends using the following command:
-          `SERVICE_JSON=$$(jq @json < service.json)`.
+          `SERVICE_JSON=$(jq @json < service.json)`.
 
         - For MPNS, `PlatformPrincipal` is `TLS certificate` and
           `PlatformCredential` is `private key`.
@@ -263,8 +299,6 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         the `CreatePlatformEndpoint` action.
 
         Args:
-            input:
-                An instance of `CreatePlatformApplicationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -274,12 +308,34 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `CreatePlatformApplicationOutput`.
         """
+
+    async def create_platform_application(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreatePlatformApplicationOutput:
         return await self._invoke(
-            input, _models.CREATE_PLATFORM_APPLICATION, [], plugins
+            self._select_input(_models.CREATE_PLATFORM_APPLICATION, args, kwargs),
+            _models.CREATE_PLATFORM_APPLICATION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def create_platform_endpoint(
-        self, input: CreatePlatformEndpointInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreatePlatformEndpointInput
+        | _models.CreatePlatformEndpointInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreatePlatformEndpointOutput: ...
+
+    @_overload
+    async def create_platform_endpoint(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreatePlatformEndpointInputDict],
     ) -> CreatePlatformEndpointOutput:
         """
         Creates an endpoint for a device and mobile app on one of the supported
@@ -301,8 +357,6 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Baidu](https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePushBaiduEndpoint.html).
 
         Args:
-            input:
-                An instance of `CreatePlatformEndpointInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -312,12 +366,34 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `CreatePlatformEndpointOutput`.
         """
-        return await self._invoke(input, _models.CREATE_PLATFORM_ENDPOINT, [], plugins)
 
+    async def create_platform_endpoint(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreatePlatformEndpointOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_PLATFORM_ENDPOINT, args, kwargs),
+            _models.CREATE_PLATFORM_ENDPOINT,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_sms_sandbox_phone_number(
         self,
-        input: CreateSMSSandboxPhoneNumberInput,
+        request: _models.CreateSMSSandboxPhoneNumberInput
+        | _models.CreateSMSSandboxPhoneNumberInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateSMSSandboxPhoneNumberOutput: ...
+
+    @_overload
+    async def create_sms_sandbox_phone_number(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateSMSSandboxPhoneNumberInputDict],
     ) -> CreateSMSSandboxPhoneNumberOutput:
         """
         Adds a destination phone number to an Amazon Web Services account in the
@@ -335,8 +411,6 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         in the *Amazon SNS Developer Guide*.
 
         Args:
-            input:
-                An instance of `CreateSMSSandboxPhoneNumberInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -346,12 +420,33 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `CreateSMSSandboxPhoneNumberOutput`.
         """
+
+    async def create_sms_sandbox_phone_number(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateSMSSandboxPhoneNumberOutput:
         return await self._invoke(
-            input, _models.CREATE_SMS_SANDBOX_PHONE_NUMBER, [], plugins
+            self._select_input(_models.CREATE_SMS_SANDBOX_PHONE_NUMBER, args, kwargs),
+            _models.CREATE_SMS_SANDBOX_PHONE_NUMBER,
+            [],
+            plugins,
         )
 
+    @_overload
     async def create_topic(
-        self, input: CreateTopicInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateTopicInput | _models.CreateTopicInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateTopicOutput: ...
+
+    @_overload
+    async def create_topic(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateTopicInputDict],
     ) -> CreateTopicOutput:
         """
         Creates a topic to which notifications can be published. Users can
@@ -363,8 +458,6 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         topic's ARN is returned without creating a new topic.
 
         Args:
-            input:
-                An instance of `CreateTopicInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -374,10 +467,33 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `CreateTopicOutput`.
         """
-        return await self._invoke(input, _models.CREATE_TOPIC, [], plugins)
 
+    async def create_topic(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateTopicOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_TOPIC, args, kwargs),
+            _models.CREATE_TOPIC,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_endpoint(
-        self, input: DeleteEndpointInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteEndpointInput | _models.DeleteEndpointInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteEndpointOutput: ...
+
+    @_overload
+    async def delete_endpoint(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteEndpointInputDict],
     ) -> DeleteEndpointOutput:
         """
         Deletes the endpoint for a device and mobile app from Amazon SNS. This
@@ -389,8 +505,6 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         must also unsubscribe the endpoint from the topic.
 
         Args:
-            input:
-                An instance of `DeleteEndpointInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -400,10 +514,34 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `DeleteEndpointOutput`.
         """
-        return await self._invoke(input, _models.DELETE_ENDPOINT, [], plugins)
 
+    async def delete_endpoint(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteEndpointOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_ENDPOINT, args, kwargs),
+            _models.DELETE_ENDPOINT,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_platform_application(
-        self, input: DeletePlatformApplicationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeletePlatformApplicationInput
+        | _models.DeletePlatformApplicationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeletePlatformApplicationOutput: ...
+
+    @_overload
+    async def delete_platform_application(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeletePlatformApplicationInputDict],
     ) -> DeletePlatformApplicationOutput:
         """
         Deletes a platform application object for one of the supported push
@@ -412,8 +550,6 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Notifications](https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
 
         Args:
-            input:
-                An instance of `DeletePlatformApplicationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -423,14 +559,34 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `DeletePlatformApplicationOutput`.
         """
+
+    async def delete_platform_application(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeletePlatformApplicationOutput:
         return await self._invoke(
-            input, _models.DELETE_PLATFORM_APPLICATION, [], plugins
+            self._select_input(_models.DELETE_PLATFORM_APPLICATION, args, kwargs),
+            _models.DELETE_PLATFORM_APPLICATION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def delete_sms_sandbox_phone_number(
         self,
-        input: DeleteSMSSandboxPhoneNumberInput,
+        request: _models.DeleteSMSSandboxPhoneNumberInput
+        | _models.DeleteSMSSandboxPhoneNumberInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteSMSSandboxPhoneNumberOutput: ...
+
+    @_overload
+    async def delete_sms_sandbox_phone_number(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteSMSSandboxPhoneNumberInputDict],
     ) -> DeleteSMSSandboxPhoneNumberOutput:
         """
         Deletes an Amazon Web Services account's verified or pending phone
@@ -448,8 +604,6 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         in the *Amazon SNS Developer Guide*.
 
         Args:
-            input:
-                An instance of `DeleteSMSSandboxPhoneNumberInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -459,12 +613,33 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `DeleteSMSSandboxPhoneNumberOutput`.
         """
+
+    async def delete_sms_sandbox_phone_number(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteSMSSandboxPhoneNumberOutput:
         return await self._invoke(
-            input, _models.DELETE_SMS_SANDBOX_PHONE_NUMBER, [], plugins
+            self._select_input(_models.DELETE_SMS_SANDBOX_PHONE_NUMBER, args, kwargs),
+            _models.DELETE_SMS_SANDBOX_PHONE_NUMBER,
+            [],
+            plugins,
         )
 
+    @_overload
     async def delete_topic(
-        self, input: DeleteTopicInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteTopicInput | _models.DeleteTopicInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteTopicOutput: ...
+
+    @_overload
+    async def delete_topic(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteTopicInputDict],
     ) -> DeleteTopicOutput:
         """
         Deletes a topic and all its subscriptions. Deleting a topic might
@@ -473,8 +648,6 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         not exist does not result in an error.
 
         Args:
-            input:
-                An instance of `DeleteTopicInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -484,10 +657,34 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `DeleteTopicOutput`.
         """
-        return await self._invoke(input, _models.DELETE_TOPIC, [], plugins)
 
+    async def delete_topic(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteTopicOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_TOPIC, args, kwargs),
+            _models.DELETE_TOPIC,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_data_protection_policy(
-        self, input: GetDataProtectionPolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetDataProtectionPolicyInput
+        | _models.GetDataProtectionPolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetDataProtectionPolicyOutput: ...
+
+    @_overload
+    async def get_data_protection_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetDataProtectionPolicyInputDict],
     ) -> GetDataProtectionPolicyOutput:
         """
         Warning:
@@ -500,8 +697,6 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         stored in the specified Amazon SNS topic.
 
         Args:
-            input:
-                An instance of `GetDataProtectionPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -511,12 +706,34 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `GetDataProtectionPolicyOutput`.
         """
+
+    async def get_data_protection_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetDataProtectionPolicyOutput:
         return await self._invoke(
-            input, _models.GET_DATA_PROTECTION_POLICY, [], plugins
+            self._select_input(_models.GET_DATA_PROTECTION_POLICY, args, kwargs),
+            _models.GET_DATA_PROTECTION_POLICY,
+            [],
+            plugins,
         )
 
+    @_overload
     async def get_endpoint_attributes(
-        self, input: GetEndpointAttributesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetEndpointAttributesInput
+        | _models.GetEndpointAttributesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetEndpointAttributesOutput: ...
+
+    @_overload
+    async def get_endpoint_attributes(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetEndpointAttributesInputDict],
     ) -> GetEndpointAttributesOutput:
         """
         Retrieves the endpoint attributes for a device on one of the supported
@@ -525,8 +742,6 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Notifications](https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
 
         Args:
-            input:
-                An instance of `GetEndpointAttributesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -536,12 +751,34 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `GetEndpointAttributesOutput`.
         """
-        return await self._invoke(input, _models.GET_ENDPOINT_ATTRIBUTES, [], plugins)
 
+    async def get_endpoint_attributes(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetEndpointAttributesOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_ENDPOINT_ATTRIBUTES, args, kwargs),
+            _models.GET_ENDPOINT_ATTRIBUTES,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_platform_application_attributes(
         self,
-        input: GetPlatformApplicationAttributesInput,
+        request: _models.GetPlatformApplicationAttributesInput
+        | _models.GetPlatformApplicationAttributesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetPlatformApplicationAttributesOutput: ...
+
+    @_overload
+    async def get_platform_application_attributes(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetPlatformApplicationAttributesInputDict],
     ) -> GetPlatformApplicationAttributesOutput:
         """
         Retrieves the attributes of the platform application object for the
@@ -551,8 +788,6 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Notifications](https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
 
         Args:
-            input:
-                An instance of `GetPlatformApplicationAttributesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -562,12 +797,35 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `GetPlatformApplicationAttributesOutput`.
         """
+
+    async def get_platform_application_attributes(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetPlatformApplicationAttributesOutput:
         return await self._invoke(
-            input, _models.GET_PLATFORM_APPLICATION_ATTRIBUTES, [], plugins
+            self._select_input(
+                _models.GET_PLATFORM_APPLICATION_ATTRIBUTES, args, kwargs
+            ),
+            _models.GET_PLATFORM_APPLICATION_ATTRIBUTES,
+            [],
+            plugins,
         )
 
+    @_overload
     async def get_sms_attributes(
-        self, input: GetSMSAttributesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetSMSAttributesInput | _models.GetSMSAttributesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetSMSAttributesOutput: ...
+
+    @_overload
+    async def get_sms_attributes(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetSMSAttributesInputDict],
     ) -> GetSMSAttributesOutput:
         """
         Returns the settings for sending SMS messages from your Amazon Web
@@ -576,8 +834,6 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         These settings are set with the `SetSMSAttributes` action.
 
         Args:
-            input:
-                An instance of `GetSMSAttributesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -587,12 +843,34 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `GetSMSAttributesOutput`.
         """
-        return await self._invoke(input, _models.GET_SMS_ATTRIBUTES, [], plugins)
 
+    async def get_sms_attributes(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetSMSAttributesOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_SMS_ATTRIBUTES, args, kwargs),
+            _models.GET_SMS_ATTRIBUTES,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_sms_sandbox_account_status(
         self,
-        input: GetSMSSandboxAccountStatusInput,
+        request: _models.GetSMSSandboxAccountStatusInput
+        | _models.GetSMSSandboxAccountStatusInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetSMSSandboxAccountStatusOutput: ...
+
+    @_overload
+    async def get_sms_sandbox_account_status(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetSMSSandboxAccountStatusInputDict],
     ) -> GetSMSSandboxAccountStatusOutput:
         """
         Retrieves the SMS sandbox status for the calling Amazon Web Services
@@ -610,8 +888,6 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         in the *Amazon SNS Developer Guide*.
 
         Args:
-            input:
-                An instance of `GetSMSSandboxAccountStatusInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -621,19 +897,39 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `GetSMSSandboxAccountStatusOutput`.
         """
+
+    async def get_sms_sandbox_account_status(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetSMSSandboxAccountStatusOutput:
         return await self._invoke(
-            input, _models.GET_SMS_SANDBOX_ACCOUNT_STATUS, [], plugins
+            self._select_input(_models.GET_SMS_SANDBOX_ACCOUNT_STATUS, args, kwargs),
+            _models.GET_SMS_SANDBOX_ACCOUNT_STATUS,
+            [],
+            plugins,
         )
 
+    @_overload
     async def get_subscription_attributes(
-        self, input: GetSubscriptionAttributesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetSubscriptionAttributesInput
+        | _models.GetSubscriptionAttributesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetSubscriptionAttributesOutput: ...
+
+    @_overload
+    async def get_subscription_attributes(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetSubscriptionAttributesInputDict],
     ) -> GetSubscriptionAttributesOutput:
         """
         Returns all of the properties of a subscription.
 
         Args:
-            input:
-                An instance of `GetSubscriptionAttributesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -643,20 +939,39 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `GetSubscriptionAttributesOutput`.
         """
+
+    async def get_subscription_attributes(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetSubscriptionAttributesOutput:
         return await self._invoke(
-            input, _models.GET_SUBSCRIPTION_ATTRIBUTES, [], plugins
+            self._select_input(_models.GET_SUBSCRIPTION_ATTRIBUTES, args, kwargs),
+            _models.GET_SUBSCRIPTION_ATTRIBUTES,
+            [],
+            plugins,
         )
 
+    @_overload
     async def get_topic_attributes(
-        self, input: GetTopicAttributesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetTopicAttributesInput | _models.GetTopicAttributesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetTopicAttributesOutput: ...
+
+    @_overload
+    async def get_topic_attributes(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetTopicAttributesInputDict],
     ) -> GetTopicAttributesOutput:
         """
         Returns all of the properties of a topic. Topic properties returned
         might differ based on the authorization of the user.
 
         Args:
-            input:
-                An instance of `GetTopicAttributesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -666,12 +981,34 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `GetTopicAttributesOutput`.
         """
-        return await self._invoke(input, _models.GET_TOPIC_ATTRIBUTES, [], plugins)
 
+    async def get_topic_attributes(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetTopicAttributesOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_TOPIC_ATTRIBUTES, args, kwargs),
+            _models.GET_TOPIC_ATTRIBUTES,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_endpoints_by_platform_application(
         self,
-        input: ListEndpointsByPlatformApplicationInput,
+        request: _models.ListEndpointsByPlatformApplicationInput
+        | _models.ListEndpointsByPlatformApplicationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListEndpointsByPlatformApplicationOutput: ...
+
+    @_overload
+    async def list_endpoints_by_platform_application(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListEndpointsByPlatformApplicationInputDict],
     ) -> ListEndpointsByPlatformApplicationOutput:
         """
         Lists the endpoints and endpoint attributes for devices in a supported
@@ -689,8 +1026,6 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         This action is throttled at 30 transactions per second (TPS).
 
         Args:
-            input:
-                An instance of `ListEndpointsByPlatformApplicationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -700,12 +1035,36 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `ListEndpointsByPlatformApplicationOutput`.
         """
+
+    async def list_endpoints_by_platform_application(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListEndpointsByPlatformApplicationOutput:
         return await self._invoke(
-            input, _models.LIST_ENDPOINTS_BY_PLATFORM_APPLICATION, [], plugins
+            self._select_input(
+                _models.LIST_ENDPOINTS_BY_PLATFORM_APPLICATION, args, kwargs
+            ),
+            _models.LIST_ENDPOINTS_BY_PLATFORM_APPLICATION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def list_origination_numbers(
-        self, input: ListOriginationNumbersInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListOriginationNumbersInput
+        | _models.ListOriginationNumbersInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListOriginationNumbersOutput: ...
+
+    @_overload
+    async def list_origination_numbers(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListOriginationNumbersInputDict],
     ) -> ListOriginationNumbersOutput:
         """
         Lists the calling Amazon Web Services account's dedicated origination
@@ -715,8 +1074,6 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         in the *Amazon SNS Developer Guide*.
 
         Args:
-            input:
-                An instance of `ListOriginationNumbersInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -726,10 +1083,34 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `ListOriginationNumbersOutput`.
         """
-        return await self._invoke(input, _models.LIST_ORIGINATION_NUMBERS, [], plugins)
 
+    async def list_origination_numbers(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListOriginationNumbersOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_ORIGINATION_NUMBERS, args, kwargs),
+            _models.LIST_ORIGINATION_NUMBERS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_phone_numbers_opted_out(
-        self, input: ListPhoneNumbersOptedOutInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListPhoneNumbersOptedOutInput
+        | _models.ListPhoneNumbersOptedOutInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListPhoneNumbersOptedOutOutput: ...
+
+    @_overload
+    async def list_phone_numbers_opted_out(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListPhoneNumbersOptedOutInputDict],
     ) -> ListPhoneNumbersOptedOutOutput:
         """
         Returns a list of phone numbers that are opted out, meaning you cannot
@@ -744,8 +1125,6 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         `NextToken` will be null.
 
         Args:
-            input:
-                An instance of `ListPhoneNumbersOptedOutInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -755,12 +1134,34 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `ListPhoneNumbersOptedOutOutput`.
         """
+
+    async def list_phone_numbers_opted_out(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListPhoneNumbersOptedOutOutput:
         return await self._invoke(
-            input, _models.LIST_PHONE_NUMBERS_OPTED_OUT, [], plugins
+            self._select_input(_models.LIST_PHONE_NUMBERS_OPTED_OUT, args, kwargs),
+            _models.LIST_PHONE_NUMBERS_OPTED_OUT,
+            [],
+            plugins,
         )
 
+    @_overload
     async def list_platform_applications(
-        self, input: ListPlatformApplicationsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListPlatformApplicationsInput
+        | _models.ListPlatformApplicationsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListPlatformApplicationsOutput: ...
+
+    @_overload
+    async def list_platform_applications(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListPlatformApplicationsInputDict],
     ) -> ListPlatformApplicationsOutput:
         """
         Lists the platform application objects for the supported push
@@ -777,8 +1178,6 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         This action is throttled at 15 transactions per second (TPS).
 
         Args:
-            input:
-                An instance of `ListPlatformApplicationsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -788,14 +1187,34 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `ListPlatformApplicationsOutput`.
         """
+
+    async def list_platform_applications(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListPlatformApplicationsOutput:
         return await self._invoke(
-            input, _models.LIST_PLATFORM_APPLICATIONS, [], plugins
+            self._select_input(_models.LIST_PLATFORM_APPLICATIONS, args, kwargs),
+            _models.LIST_PLATFORM_APPLICATIONS,
+            [],
+            plugins,
         )
 
+    @_overload
     async def list_sms_sandbox_phone_numbers(
         self,
-        input: ListSMSSandboxPhoneNumbersInput,
+        request: _models.ListSMSSandboxPhoneNumbersInput
+        | _models.ListSMSSandboxPhoneNumbersInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListSMSSandboxPhoneNumbersOutput: ...
+
+    @_overload
+    async def list_sms_sandbox_phone_numbers(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListSMSSandboxPhoneNumbersInputDict],
     ) -> ListSMSSandboxPhoneNumbersOutput:
         """
         Lists the calling Amazon Web Services account's current verified and
@@ -813,8 +1232,6 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         in the *Amazon SNS Developer Guide*.
 
         Args:
-            input:
-                An instance of `ListSMSSandboxPhoneNumbersInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -824,12 +1241,33 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `ListSMSSandboxPhoneNumbersOutput`.
         """
+
+    async def list_sms_sandbox_phone_numbers(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListSMSSandboxPhoneNumbersOutput:
         return await self._invoke(
-            input, _models.LIST_SMS_SANDBOX_PHONE_NUMBERS, [], plugins
+            self._select_input(_models.LIST_SMS_SANDBOX_PHONE_NUMBERS, args, kwargs),
+            _models.LIST_SMS_SANDBOX_PHONE_NUMBERS,
+            [],
+            plugins,
         )
 
+    @_overload
     async def list_subscriptions(
-        self, input: ListSubscriptionsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListSubscriptionsInput | _models.ListSubscriptionsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListSubscriptionsOutput: ...
+
+    @_overload
+    async def list_subscriptions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListSubscriptionsInputDict],
     ) -> ListSubscriptionsOutput:
         """
         Returns a list of the requester's subscriptions. Each call returns a
@@ -840,8 +1278,6 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         This action is throttled at 30 transactions per second (TPS).
 
         Args:
-            input:
-                An instance of `ListSubscriptionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -851,10 +1287,34 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `ListSubscriptionsOutput`.
         """
-        return await self._invoke(input, _models.LIST_SUBSCRIPTIONS, [], plugins)
 
+    async def list_subscriptions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListSubscriptionsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_SUBSCRIPTIONS, args, kwargs),
+            _models.LIST_SUBSCRIPTIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_subscriptions_by_topic(
-        self, input: ListSubscriptionsByTopicInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListSubscriptionsByTopicInput
+        | _models.ListSubscriptionsByTopicInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListSubscriptionsByTopicOutput: ...
+
+    @_overload
+    async def list_subscriptions_by_topic(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListSubscriptionsByTopicInputDict],
     ) -> ListSubscriptionsByTopicOutput:
         """
         Returns a list of the subscriptions to a specific topic. Each call
@@ -866,8 +1326,6 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         This action is throttled at 30 transactions per second (TPS).
 
         Args:
-            input:
-                An instance of `ListSubscriptionsByTopicInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -877,12 +1335,34 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `ListSubscriptionsByTopicOutput`.
         """
+
+    async def list_subscriptions_by_topic(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListSubscriptionsByTopicOutput:
         return await self._invoke(
-            input, _models.LIST_SUBSCRIPTIONS_BY_TOPIC, [], plugins
+            self._select_input(_models.LIST_SUBSCRIPTIONS_BY_TOPIC, args, kwargs),
+            _models.LIST_SUBSCRIPTIONS_BY_TOPIC,
+            [],
+            plugins,
         )
 
+    @_overload
     async def list_tags_for_resource(
-        self, input: ListTagsForResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListTagsForResourceInput
+        | _models.ListTagsForResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListTagsForResourceOutput: ...
+
+    @_overload
+    async def list_tags_for_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListTagsForResourceInputDict],
     ) -> ListTagsForResourceOutput:
         """
         List all tags added to the specified Amazon SNS topic. For an overview,
@@ -891,8 +1371,6 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         *Amazon Simple Notification Service Developer Guide*.
 
         Args:
-            input:
-                An instance of `ListTagsForResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -902,10 +1380,33 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `ListTagsForResourceOutput`.
         """
-        return await self._invoke(input, _models.LIST_TAGS_FOR_RESOURCE, [], plugins)
 
+    async def list_tags_for_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListTagsForResourceOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_TAGS_FOR_RESOURCE, args, kwargs),
+            _models.LIST_TAGS_FOR_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_topics(
-        self, input: ListTopicsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListTopicsInput | _models.ListTopicsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListTopicsOutput: ...
+
+    @_overload
+    async def list_topics(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListTopicsInputDict],
     ) -> ListTopicsOutput:
         """
         Returns a list of the requester's topics. Each call returns a limited
@@ -916,8 +1417,6 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         This action is throttled at 30 transactions per second (TPS).
 
         Args:
-            input:
-                An instance of `ListTopicsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -927,10 +1426,33 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `ListTopicsOutput`.
         """
-        return await self._invoke(input, _models.LIST_TOPICS, [], plugins)
 
+    async def list_topics(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListTopicsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_TOPICS, args, kwargs),
+            _models.LIST_TOPICS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def opt_in_phone_number(
-        self, input: OptInPhoneNumberInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.OptInPhoneNumberInput | _models.OptInPhoneNumberInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> OptInPhoneNumberOutput: ...
+
+    @_overload
+    async def opt_in_phone_number(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.OptInPhoneNumberInputDict],
     ) -> OptInPhoneNumberOutput:
         """
         Use this request to opt in a phone number that is opted out, which
@@ -939,8 +1461,6 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         You can opt in a phone number only once every 30 days.
 
         Args:
-            input:
-                An instance of `OptInPhoneNumberInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -950,10 +1470,33 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `OptInPhoneNumberOutput`.
         """
-        return await self._invoke(input, _models.OPT_IN_PHONE_NUMBER, [], plugins)
 
+    async def opt_in_phone_number(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> OptInPhoneNumberOutput:
+        return await self._invoke(
+            self._select_input(_models.OPT_IN_PHONE_NUMBER, args, kwargs),
+            _models.OPT_IN_PHONE_NUMBER,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def publish(
-        self, input: PublishInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PublishInput | _models.PublishInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PublishOutput: ...
+
+    @_overload
+    async def publish(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PublishInputDict],
     ) -> PublishOutput:
         """
         Sends a message to an Amazon SNS topic, a text message (SMS message)
@@ -981,8 +1524,6 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
             Web Services Region.
 
         Args:
-            input:
-                An instance of `PublishInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -992,10 +1533,33 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `PublishOutput`.
         """
-        return await self._invoke(input, _models.PUBLISH, [], plugins)
 
+    async def publish(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PublishOutput:
+        return await self._invoke(
+            self._select_input(_models.PUBLISH, args, kwargs),
+            _models.PUBLISH,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def publish_batch(
-        self, input: PublishBatchInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PublishBatchInput | _models.PublishBatchInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PublishBatchOutput: ...
+
+    @_overload
+    async def publish_batch(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PublishBatchInputDict],
     ) -> PublishBatchOutput:
         """
         Publishes up to 10 messages to the specified topic in a single batch.
@@ -1048,8 +1612,6 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         SNS immediately delivers the message to subscribers.
 
         Args:
-            input:
-                An instance of `PublishBatchInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1059,10 +1621,34 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `PublishBatchOutput`.
         """
-        return await self._invoke(input, _models.PUBLISH_BATCH, [], plugins)
 
+    async def publish_batch(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PublishBatchOutput:
+        return await self._invoke(
+            self._select_input(_models.PUBLISH_BATCH, args, kwargs),
+            _models.PUBLISH_BATCH,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def put_data_protection_policy(
-        self, input: PutDataProtectionPolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutDataProtectionPolicyInput
+        | _models.PutDataProtectionPolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutDataProtectionPolicyOutput: ...
+
+    @_overload
+    async def put_data_protection_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutDataProtectionPolicyInputDict],
     ) -> PutDataProtectionPolicyOutput:
         """
         Warning:
@@ -1075,8 +1661,6 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         specified Amazon SNS topic.
 
         Args:
-            input:
-                An instance of `PutDataProtectionPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1086,12 +1670,33 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `PutDataProtectionPolicyOutput`.
         """
+
+    async def put_data_protection_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutDataProtectionPolicyOutput:
         return await self._invoke(
-            input, _models.PUT_DATA_PROTECTION_POLICY, [], plugins
+            self._select_input(_models.PUT_DATA_PROTECTION_POLICY, args, kwargs),
+            _models.PUT_DATA_PROTECTION_POLICY,
+            [],
+            plugins,
         )
 
+    @_overload
     async def remove_permission(
-        self, input: RemovePermissionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RemovePermissionInput | _models.RemovePermissionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RemovePermissionOutput: ...
+
+    @_overload
+    async def remove_permission(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RemovePermissionInputDict],
     ) -> RemovePermissionOutput:
         """
         Removes a statement from a topic's access control policy.
@@ -1102,8 +1707,6 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
             `SetTopicAttributes` actions in your IAM policy.
 
         Args:
-            input:
-                An instance of `RemovePermissionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1113,10 +1716,34 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `RemovePermissionOutput`.
         """
-        return await self._invoke(input, _models.REMOVE_PERMISSION, [], plugins)
 
+    async def remove_permission(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RemovePermissionOutput:
+        return await self._invoke(
+            self._select_input(_models.REMOVE_PERMISSION, args, kwargs),
+            _models.REMOVE_PERMISSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def set_endpoint_attributes(
-        self, input: SetEndpointAttributesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.SetEndpointAttributesInput
+        | _models.SetEndpointAttributesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> SetEndpointAttributesOutput: ...
+
+    @_overload
+    async def set_endpoint_attributes(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SetEndpointAttributesInputDict],
     ) -> SetEndpointAttributesOutput:
         """
         Sets the attributes for an endpoint for a device on one of the supported
@@ -1125,8 +1752,6 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Notifications](https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
 
         Args:
-            input:
-                An instance of `SetEndpointAttributesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1136,12 +1761,34 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `SetEndpointAttributesOutput`.
         """
-        return await self._invoke(input, _models.SET_ENDPOINT_ATTRIBUTES, [], plugins)
 
+    async def set_endpoint_attributes(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SetEndpointAttributesOutput:
+        return await self._invoke(
+            self._select_input(_models.SET_ENDPOINT_ATTRIBUTES, args, kwargs),
+            _models.SET_ENDPOINT_ATTRIBUTES,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def set_platform_application_attributes(
         self,
-        input: SetPlatformApplicationAttributesInput,
+        request: _models.SetPlatformApplicationAttributesInput
+        | _models.SetPlatformApplicationAttributesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> SetPlatformApplicationAttributesOutput: ...
+
+    @_overload
+    async def set_platform_application_attributes(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SetPlatformApplicationAttributesInputDict],
     ) -> SetPlatformApplicationAttributesOutput:
         """
         Sets the attributes of the platform application object for the supported
@@ -1153,8 +1800,6 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Status](https://docs.aws.amazon.com/sns/latest/dg/sns-msg-status.html).
 
         Args:
-            input:
-                An instance of `SetPlatformApplicationAttributesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1164,12 +1809,35 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `SetPlatformApplicationAttributesOutput`.
         """
+
+    async def set_platform_application_attributes(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SetPlatformApplicationAttributesOutput:
         return await self._invoke(
-            input, _models.SET_PLATFORM_APPLICATION_ATTRIBUTES, [], plugins
+            self._select_input(
+                _models.SET_PLATFORM_APPLICATION_ATTRIBUTES, args, kwargs
+            ),
+            _models.SET_PLATFORM_APPLICATION_ATTRIBUTES,
+            [],
+            plugins,
         )
 
+    @_overload
     async def set_sms_attributes(
-        self, input: SetSMSAttributesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.SetSMSAttributesInput | _models.SetSMSAttributesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> SetSMSAttributesOutput: ...
+
+    @_overload
+    async def set_sms_attributes(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SetSMSAttributesInputDict],
     ) -> SetSMSAttributesOutput:
         """
         Use this request to set the default settings for sending SMS messages
@@ -1186,8 +1854,6 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
             (`sns.amazonaws.com`) permission to perform the `s3:ListBucket` action.
 
         Args:
-            input:
-                An instance of `SetSMSAttributesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1197,18 +1863,40 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `SetSMSAttributesOutput`.
         """
-        return await self._invoke(input, _models.SET_SMS_ATTRIBUTES, [], plugins)
 
+    async def set_sms_attributes(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SetSMSAttributesOutput:
+        return await self._invoke(
+            self._select_input(_models.SET_SMS_ATTRIBUTES, args, kwargs),
+            _models.SET_SMS_ATTRIBUTES,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def set_subscription_attributes(
-        self, input: SetSubscriptionAttributesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.SetSubscriptionAttributesInput
+        | _models.SetSubscriptionAttributesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> SetSubscriptionAttributesOutput: ...
+
+    @_overload
+    async def set_subscription_attributes(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SetSubscriptionAttributesInputDict],
     ) -> SetSubscriptionAttributesOutput:
         """
         Allows a subscription owner to set an attribute of the subscription to a
         new value.
 
         Args:
-            input:
-                An instance of `SetSubscriptionAttributesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1218,12 +1906,33 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `SetSubscriptionAttributesOutput`.
         """
+
+    async def set_subscription_attributes(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SetSubscriptionAttributesOutput:
         return await self._invoke(
-            input, _models.SET_SUBSCRIPTION_ATTRIBUTES, [], plugins
+            self._select_input(_models.SET_SUBSCRIPTION_ATTRIBUTES, args, kwargs),
+            _models.SET_SUBSCRIPTION_ATTRIBUTES,
+            [],
+            plugins,
         )
 
+    @_overload
     async def set_topic_attributes(
-        self, input: SetTopicAttributesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.SetTopicAttributesInput | _models.SetTopicAttributesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> SetTopicAttributesOutput: ...
+
+    @_overload
+    async def set_topic_attributes(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SetTopicAttributesInputDict],
     ) -> SetTopicAttributesOutput:
         """
         Allows a topic owner to set an attribute of the topic to a new value.
@@ -1234,8 +1943,6 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
             `SetTopicAttributes` actions in your IAM policy.
 
         Args:
-            input:
-                An instance of `SetTopicAttributesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1245,10 +1952,33 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `SetTopicAttributesOutput`.
         """
-        return await self._invoke(input, _models.SET_TOPIC_ATTRIBUTES, [], plugins)
 
+    async def set_topic_attributes(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SetTopicAttributesOutput:
+        return await self._invoke(
+            self._select_input(_models.SET_TOPIC_ATTRIBUTES, args, kwargs),
+            _models.SET_TOPIC_ATTRIBUTES,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def subscribe(
-        self, input: SubscribeInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.SubscribeInput | _models.SubscribeInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> SubscribeOutput: ...
+
+    @_overload
+    async def subscribe(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SubscribeInputDict],
     ) -> SubscribeOutput:
         """
         Subscribes an endpoint to an Amazon SNS topic. If the endpoint type is
@@ -1262,8 +1992,6 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         This action is throttled at 100 transactions per second (TPS).
 
         Args:
-            input:
-                An instance of `SubscribeInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1273,10 +2001,33 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `SubscribeOutput`.
         """
-        return await self._invoke(input, _models.SUBSCRIBE, [], plugins)
 
+    async def subscribe(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SubscribeOutput:
+        return await self._invoke(
+            self._select_input(_models.SUBSCRIBE, args, kwargs),
+            _models.SUBSCRIBE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def tag_resource(
-        self, input: TagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.TagResourceInput | _models.TagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> TagResourceOutput: ...
+
+    @_overload
+    async def tag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.TagResourceInputDict],
     ) -> TagResourceOutput:
         """
         Add tags to the specified Amazon SNS topic. For an overview, see [Amazon
@@ -1301,8 +2052,6 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
           request](https://console.aws.amazon.com/support/home#/case/create?issueType=technical).
 
         Args:
-            input:
-                An instance of `TagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1312,10 +2061,33 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `TagResourceOutput`.
         """
-        return await self._invoke(input, _models.TAG_RESOURCE, [], plugins)
 
+    async def tag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> TagResourceOutput:
+        return await self._invoke(
+            self._select_input(_models.TAG_RESOURCE, args, kwargs),
+            _models.TAG_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def unsubscribe(
-        self, input: UnsubscribeInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UnsubscribeInput | _models.UnsubscribeInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UnsubscribeOutput: ...
+
+    @_overload
+    async def unsubscribe(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UnsubscribeInputDict],
     ) -> UnsubscribeOutput:
         """
         Deletes a subscription. If the subscription requires authentication for
@@ -1329,8 +2101,6 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         This action is throttled at 100 transactions per second (TPS).
 
         Args:
-            input:
-                An instance of `UnsubscribeInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1340,10 +2110,33 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `UnsubscribeOutput`.
         """
-        return await self._invoke(input, _models.UNSUBSCRIBE, [], plugins)
 
+    async def unsubscribe(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UnsubscribeOutput:
+        return await self._invoke(
+            self._select_input(_models.UNSUBSCRIBE, args, kwargs),
+            _models.UNSUBSCRIBE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def untag_resource(
-        self, input: UntagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UntagResourceInput | _models.UntagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UntagResourceOutput: ...
+
+    @_overload
+    async def untag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UntagResourceInputDict],
     ) -> UntagResourceOutput:
         """
         Remove tags from the specified Amazon SNS topic. For an overview, see
@@ -1352,8 +2145,6 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         *Amazon SNS Developer Guide*.
 
         Args:
-            input:
-                An instance of `UntagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1363,12 +2154,34 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `UntagResourceOutput`.
         """
-        return await self._invoke(input, _models.UNTAG_RESOURCE, [], plugins)
 
+    async def untag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UntagResourceOutput:
+        return await self._invoke(
+            self._select_input(_models.UNTAG_RESOURCE, args, kwargs),
+            _models.UNTAG_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def verify_sms_sandbox_phone_number(
         self,
-        input: VerifySMSSandboxPhoneNumberInput,
+        request: _models.VerifySMSSandboxPhoneNumberInput
+        | _models.VerifySMSSandboxPhoneNumberInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> VerifySMSSandboxPhoneNumberOutput: ...
+
+    @_overload
+    async def verify_sms_sandbox_phone_number(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.VerifySMSSandboxPhoneNumberInputDict],
     ) -> VerifySMSSandboxPhoneNumberOutput:
         """
         Verifies a destination phone number with a one-time password (OTP) for
@@ -1386,8 +2199,6 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         in the *Amazon SNS Developer Guide*.
 
         Args:
-            input:
-                An instance of `VerifySMSSandboxPhoneNumberInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1397,8 +2208,15 @@ class AsyncSNSClient(AsyncClient[AsyncSNSConfig]):
         Returns:
             An instance of `VerifySMSSandboxPhoneNumberOutput`.
         """
+
+    async def verify_sms_sandbox_phone_number(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> VerifySMSSandboxPhoneNumberOutput:
         return await self._invoke(
-            input, _models.VERIFY_SMS_SANDBOX_PHONE_NUMBER, [], plugins
+            self._select_input(_models.VERIFY_SMS_SANDBOX_PHONE_NUMBER, args, kwargs),
+            _models.VERIFY_SMS_SANDBOX_PHONE_NUMBER,
+            [],
+            plugins,
         )
 
     async def _new_config(self) -> AsyncSNSConfig:

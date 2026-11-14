@@ -5,12 +5,9 @@
 
 from aws_sdk_bedrock_runtime.models import (
     ContentBlockDeltaText,
-    ContentBlockText,
-    ConverseStreamInput,
     ConverseStreamOperationOutput,
     ConverseStreamOutputContentBlockDelta,
     ConverseStreamOutputMetadata,
-    Message,
 )
 
 from . import MESSAGE, MODEL_ID, create_bedrock_client
@@ -18,9 +15,9 @@ from . import MESSAGE, MODEL_ID, create_bedrock_client
 
 async def test_converse_stream() -> None:
     async with await create_bedrock_client("us-west-2") as bedrock_client:
-        input_message = Message(role="user", content=[ContentBlockText(value=MESSAGE)])
         response = await bedrock_client.converse_stream(
-            ConverseStreamInput(model_id=MODEL_ID, messages=[input_message])
+            model_id=MODEL_ID,
+            messages=[{"role": "user", "content": [{"text": MESSAGE}]}],
         )
 
         received_text: list[str] = []

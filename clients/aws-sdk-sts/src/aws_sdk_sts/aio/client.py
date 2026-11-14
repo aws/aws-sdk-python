@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import cast
+from typing import Unpack as _Unpack, cast, overload as _overload
 
 from smithy_aws_core.aio.identity.chain import AsyncIdentityChain
 from smithy_aws_core.config.types import ConfigSource
@@ -20,27 +20,16 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from ..models import (
-        AssumeRoleInput,
         AssumeRoleOutput,
-        AssumeRoleWithSAMLInput,
         AssumeRoleWithSAMLOutput,
-        AssumeRoleWithWebIdentityInput,
         AssumeRoleWithWebIdentityOutput,
-        AssumeRootInput,
         AssumeRootOutput,
-        DecodeAuthorizationMessageInput,
         DecodeAuthorizationMessageOutput,
-        GetAccessKeyInfoInput,
         GetAccessKeyInfoOutput,
-        GetCallerIdentityInput,
         GetCallerIdentityOutput,
-        GetDelegatedAccessTokenInput,
         GetDelegatedAccessTokenOutput,
-        GetFederationTokenInput,
         GetFederationTokenOutput,
-        GetSessionTokenInput,
         GetSessionTokenOutput,
-        GetWebIdentityTokenInput,
         GetWebIdentityTokenOutput,
     )
 
@@ -87,10 +76,24 @@ class AsyncSTSClient(AsyncClient[AsyncSTSConfig]):
     in the *IAM User Guide*.
     """
 
-    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
+    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
 
+    @_overload
     async def assume_role(
-        self, input: AssumeRoleInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.AssumeRoleInput | _models.AssumeRoleInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AssumeRoleOutput: ...
+
+    @_overload
+    async def assume_role(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AssumeRoleInputDict],
     ) -> AssumeRoleOutput:
         """
         Returns a set of temporary security credentials that you can use to
@@ -204,8 +207,6 @@ class AsyncSTSClient(AsyncClient[AsyncSTSConfig]):
         one-time password (TOTP) that the MFA device produces.
 
         Args:
-            input:
-                An instance of `AssumeRoleInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -215,10 +216,33 @@ class AsyncSTSClient(AsyncClient[AsyncSTSConfig]):
         Returns:
             An instance of `AssumeRoleOutput`.
         """
-        return await self._invoke(input, _models.ASSUME_ROLE, [], plugins)
 
+    async def assume_role(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AssumeRoleOutput:
+        return await self._invoke(
+            self._select_input(_models.ASSUME_ROLE, args, kwargs),
+            _models.ASSUME_ROLE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def assume_role_with_saml(
-        self, input: AssumeRoleWithSAMLInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.AssumeRoleWithSAMLInput | _models.AssumeRoleWithSAMLInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AssumeRoleWithSAMLOutput: ...
+
+    @_overload
+    async def assume_role_with_saml(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AssumeRoleWithSAMLInputDict],
     ) -> AssumeRoleWithSAMLOutput:
         """
         Returns a set of temporary security credentials for users who have been
@@ -380,8 +404,6 @@ class AsyncSTSClient(AsyncClient[AsyncSTSConfig]):
           in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `AssumeRoleWithSAMLInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -391,10 +413,34 @@ class AsyncSTSClient(AsyncClient[AsyncSTSConfig]):
         Returns:
             An instance of `AssumeRoleWithSAMLOutput`.
         """
-        return await self._invoke(input, _models.ASSUME_ROLE_WITH_SAML, [], plugins)
 
+    async def assume_role_with_saml(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AssumeRoleWithSAMLOutput:
+        return await self._invoke(
+            self._select_input(_models.ASSUME_ROLE_WITH_SAML, args, kwargs),
+            _models.ASSUME_ROLE_WITH_SAML,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def assume_role_with_web_identity(
-        self, input: AssumeRoleWithWebIdentityInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.AssumeRoleWithWebIdentityInput
+        | _models.AssumeRoleWithWebIdentityInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AssumeRoleWithWebIdentityOutput: ...
+
+    @_overload
+    async def assume_role_with_web_identity(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AssumeRoleWithWebIdentityInputDict],
     ) -> AssumeRoleWithWebIdentityOutput:
         """
         Returns a set of temporary security credentials for users who have been
@@ -553,8 +599,6 @@ class AsyncSTSClient(AsyncClient[AsyncSTSConfig]):
           from these providers to get and use temporary security credentials.
 
         Args:
-            input:
-                An instance of `AssumeRoleWithWebIdentityInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -564,12 +608,33 @@ class AsyncSTSClient(AsyncClient[AsyncSTSConfig]):
         Returns:
             An instance of `AssumeRoleWithWebIdentityOutput`.
         """
+
+    async def assume_role_with_web_identity(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AssumeRoleWithWebIdentityOutput:
         return await self._invoke(
-            input, _models.ASSUME_ROLE_WITH_WEB_IDENTITY, [], plugins
+            self._select_input(_models.ASSUME_ROLE_WITH_WEB_IDENTITY, args, kwargs),
+            _models.ASSUME_ROLE_WITH_WEB_IDENTITY,
+            [],
+            plugins,
         )
 
+    @_overload
     async def assume_root(
-        self, input: AssumeRootInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.AssumeRootInput | _models.AssumeRootInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AssumeRootOutput: ...
+
+    @_overload
+    async def assume_root(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AssumeRootInputDict],
     ) -> AssumeRootOutput:
         """
         Returns a set of short term credentials you can use to perform
@@ -607,8 +672,6 @@ class AsyncSTSClient(AsyncClient[AsyncSTSConfig]):
         in the *Organizations User Guide* for more information on SCPs.
 
         Args:
-            input:
-                An instance of `AssumeRootInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -618,12 +681,34 @@ class AsyncSTSClient(AsyncClient[AsyncSTSConfig]):
         Returns:
             An instance of `AssumeRootOutput`.
         """
-        return await self._invoke(input, _models.ASSUME_ROOT, [], plugins)
 
+    async def assume_root(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AssumeRootOutput:
+        return await self._invoke(
+            self._select_input(_models.ASSUME_ROOT, args, kwargs),
+            _models.ASSUME_ROOT,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def decode_authorization_message(
         self,
-        input: DecodeAuthorizationMessageInput,
+        request: _models.DecodeAuthorizationMessageInput
+        | _models.DecodeAuthorizationMessageInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DecodeAuthorizationMessageOutput: ...
+
+    @_overload
+    async def decode_authorization_message(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DecodeAuthorizationMessageInputDict],
     ) -> DecodeAuthorizationMessageOutput:
         """
         Decodes additional information about the authorization status of a
@@ -667,8 +752,6 @@ class AsyncSTSClient(AsyncClient[AsyncSTSConfig]):
         - The values of condition keys in the context of the user's request.
 
         Args:
-            input:
-                An instance of `DecodeAuthorizationMessageInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -678,12 +761,33 @@ class AsyncSTSClient(AsyncClient[AsyncSTSConfig]):
         Returns:
             An instance of `DecodeAuthorizationMessageOutput`.
         """
+
+    async def decode_authorization_message(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DecodeAuthorizationMessageOutput:
         return await self._invoke(
-            input, _models.DECODE_AUTHORIZATION_MESSAGE, [], plugins
+            self._select_input(_models.DECODE_AUTHORIZATION_MESSAGE, args, kwargs),
+            _models.DECODE_AUTHORIZATION_MESSAGE,
+            [],
+            plugins,
         )
 
+    @_overload
     async def get_access_key_info(
-        self, input: GetAccessKeyInfoInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetAccessKeyInfoInput | _models.GetAccessKeyInfoInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetAccessKeyInfoOutput: ...
+
+    @_overload
+    async def get_access_key_info(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetAccessKeyInfoInputDict],
     ) -> GetAccessKeyInfoOutput:
         """
         Returns the account identifier for the specified access key ID.
@@ -716,8 +820,6 @@ class AsyncSTSClient(AsyncClient[AsyncSTSConfig]):
         might return an error that the key doesn't exist.
 
         Args:
-            input:
-                An instance of `GetAccessKeyInfoInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -727,10 +829,33 @@ class AsyncSTSClient(AsyncClient[AsyncSTSConfig]):
         Returns:
             An instance of `GetAccessKeyInfoOutput`.
         """
-        return await self._invoke(input, _models.GET_ACCESS_KEY_INFO, [], plugins)
 
+    async def get_access_key_info(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetAccessKeyInfoOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_ACCESS_KEY_INFO, args, kwargs),
+            _models.GET_ACCESS_KEY_INFO,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_caller_identity(
-        self, input: GetCallerIdentityInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetCallerIdentityInput | _models.GetCallerIdentityInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetCallerIdentityOutput: ...
+
+    @_overload
+    async def get_caller_identity(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetCallerIdentityInputDict],
     ) -> GetCallerIdentityOutput:
         """
         Returns details about the IAM user or role whose credentials are used to
@@ -747,8 +872,6 @@ class AsyncSTSClient(AsyncClient[AsyncSTSConfig]):
             in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `GetCallerIdentityInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -758,10 +881,34 @@ class AsyncSTSClient(AsyncClient[AsyncSTSConfig]):
         Returns:
             An instance of `GetCallerIdentityOutput`.
         """
-        return await self._invoke(input, _models.GET_CALLER_IDENTITY, [], plugins)
 
+    async def get_caller_identity(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetCallerIdentityOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_CALLER_IDENTITY, args, kwargs),
+            _models.GET_CALLER_IDENTITY,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_delegated_access_token(
-        self, input: GetDelegatedAccessTokenInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetDelegatedAccessTokenInput
+        | _models.GetDelegatedAccessTokenInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetDelegatedAccessTokenOutput: ...
+
+    @_overload
+    async def get_delegated_access_token(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetDelegatedAccessTokenInputDict],
     ) -> GetDelegatedAccessTokenOutput:
         """
         Exchanges a trade-in token for temporary Amazon Web Services credentials
@@ -771,8 +918,6 @@ class AsyncSTSClient(AsyncClient[AsyncSTSConfig]):
         Services resources.
 
         Args:
-            input:
-                An instance of `GetDelegatedAccessTokenInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -782,12 +927,33 @@ class AsyncSTSClient(AsyncClient[AsyncSTSConfig]):
         Returns:
             An instance of `GetDelegatedAccessTokenOutput`.
         """
+
+    async def get_delegated_access_token(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetDelegatedAccessTokenOutput:
         return await self._invoke(
-            input, _models.GET_DELEGATED_ACCESS_TOKEN, [], plugins
+            self._select_input(_models.GET_DELEGATED_ACCESS_TOKEN, args, kwargs),
+            _models.GET_DELEGATED_ACCESS_TOKEN,
+            [],
+            plugins,
         )
 
+    @_overload
     async def get_federation_token(
-        self, input: GetFederationTokenInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetFederationTokenInput | _models.GetFederationTokenInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetFederationTokenOutput: ...
+
+    @_overload
+    async def get_federation_token(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetFederationTokenInputDict],
     ) -> GetFederationTokenOutput:
         """
         Returns a set of temporary security credentials (consisting of an access
@@ -907,8 +1073,6 @@ class AsyncSTSClient(AsyncClient[AsyncSTSConfig]):
         the user tag.
 
         Args:
-            input:
-                An instance of `GetFederationTokenInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -918,10 +1082,33 @@ class AsyncSTSClient(AsyncClient[AsyncSTSConfig]):
         Returns:
             An instance of `GetFederationTokenOutput`.
         """
-        return await self._invoke(input, _models.GET_FEDERATION_TOKEN, [], plugins)
 
+    async def get_federation_token(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetFederationTokenOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_FEDERATION_TOKEN, args, kwargs),
+            _models.GET_FEDERATION_TOKEN,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_session_token(
-        self, input: GetSessionTokenInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetSessionTokenInput | _models.GetSessionTokenInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetSessionTokenOutput: ...
+
+    @_overload
+    async def get_session_token(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetSessionTokenInputDict],
     ) -> GetSessionTokenOutput:
         """
         Returns a set of temporary credentials for an Amazon Web Services
@@ -995,8 +1182,6 @@ class AsyncSTSClient(AsyncClient[AsyncSTSConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `GetSessionTokenInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1006,10 +1191,34 @@ class AsyncSTSClient(AsyncClient[AsyncSTSConfig]):
         Returns:
             An instance of `GetSessionTokenOutput`.
         """
-        return await self._invoke(input, _models.GET_SESSION_TOKEN, [], plugins)
 
+    async def get_session_token(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetSessionTokenOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_SESSION_TOKEN, args, kwargs),
+            _models.GET_SESSION_TOKEN,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_web_identity_token(
-        self, input: GetWebIdentityTokenInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetWebIdentityTokenInput
+        | _models.GetWebIdentityTokenInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetWebIdentityTokenOutput: ...
+
+    @_overload
+    async def get_web_identity_token(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetWebIdentityTokenInputDict],
     ) -> GetWebIdentityTokenOutput:
         """
         Returns a signed JSON Web Token (JWT) that represents the calling Amazon
@@ -1023,8 +1232,6 @@ class AsyncSTSClient(AsyncClient[AsyncSTSConfig]):
             endpoint.
 
         Args:
-            input:
-                An instance of `GetWebIdentityTokenInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1034,7 +1241,16 @@ class AsyncSTSClient(AsyncClient[AsyncSTSConfig]):
         Returns:
             An instance of `GetWebIdentityTokenOutput`.
         """
-        return await self._invoke(input, _models.GET_WEB_IDENTITY_TOKEN, [], plugins)
+
+    async def get_web_identity_token(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetWebIdentityTokenOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_WEB_IDENTITY_TOKEN, args, kwargs),
+            _models.GET_WEB_IDENTITY_TOKEN,
+            [],
+            plugins,
+        )
 
     async def _new_config(self) -> AsyncSTSConfig:
         return await AsyncSTSConfig.resolve()

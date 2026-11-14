@@ -3,7 +3,7 @@
 from dataclasses import dataclass
 from datetime import datetime
 from enum import StrEnum
-from typing import Self, Union
+from typing import Required, Self, TypedDict, Union
 
 from smithy_core.deserializers import ShapeDeserializer
 from smithy_core.exceptions import ModeledError
@@ -594,6 +594,15 @@ class GetMedicalScribeStreamInput(_SerdeShape):
     """Dataclass for GetMedicalScribeStreamInput structure."""
 
     session_id: str | None = ...
+    """
+    The identifier of the HealthScribe streaming session you want
+    information about.
+    """
+
+class GetMedicalScribeStreamInputDict(TypedDict, total=False):
+    """Dictionary form of `GetMedicalScribeStreamInput`."""
+
+    session_id: Required[str]
     """
     The identifier of the HealthScribe streaming session you want
     information about.
@@ -2115,6 +2124,249 @@ class StartCallAnalyticsStreamTranscriptionInput(_SerdeShape):
     or identified.
     """
 
+class StartCallAnalyticsStreamTranscriptionInputDict(TypedDict, total=False):
+    """Dictionary form of `StartCallAnalyticsStreamTranscriptionInput`."""
+
+    language_code: str | None
+    """
+    Specify the language code that represents the language spoken in your
+    audio.
+
+    For a list of languages supported with real-time Call Analytics, refer
+    to the [Supported
+    languages](https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html)
+    table.
+    """
+    media_sample_rate_hertz: Required[int]
+    """
+    The sample rate of the input audio (in hertz). Low-quality audio, such
+    as telephone audio, is typically around 8,000 Hz. High-quality audio
+    typically ranges from 16,000 Hz to 48,000 Hz. Note that the sample rate
+    you specify must match that of your audio.
+    """
+    media_encoding: Required[str]
+    """
+    Specify the encoding of your input audio. Supported formats are:
+
+    - FLAC
+
+    - OPUS-encoded audio in an Ogg container
+
+    - PCM (only signed 16-bit little-endian audio formats, which does not
+      include WAV)
+
+    For more information, see [Media
+    formats](https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio).
+    """
+    vocabulary_name: str | None
+    """
+    Specify the name of the custom vocabulary that you want to use when
+    processing your transcription. Note that vocabulary names are case
+    sensitive.
+
+    If the language of the specified custom vocabulary doesn't match the
+    language identified in your media, the custom vocabulary is not applied
+    to your transcription.
+
+    For more information, see [Custom
+    vocabularies](https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html).
+    """
+    session_id: str | None
+    """
+    Specify a name for your Call Analytics transcription session. If you
+    don't include this parameter in your request, Amazon Transcribe
+    generates an ID and returns it in the response.
+    """
+    vocabulary_filter_name: str | None
+    """
+    Specify the name of the custom vocabulary filter that you want to use
+    when processing your transcription. Note that vocabulary filter names
+    are case sensitive.
+
+    If the language of the specified custom vocabulary filter doesn't match
+    the language identified in your media, the vocabulary filter is not
+    applied to your transcription.
+
+    For more information, see [Using vocabulary filtering with unwanted
+    words](https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html).
+    """
+    vocabulary_filter_method: str | None
+    """
+    Specify how you want your vocabulary filter applied to your transcript.
+
+    To replace words with `***`, choose `mask`.
+
+    To delete words, choose `remove`.
+
+    To flag words without changing them, choose `tag`.
+    """
+    language_model_name: str | None
+    """
+    Specify the name of the custom language model that you want to use when
+    processing your transcription. Note that language model names are case
+    sensitive.
+
+    The language of the specified language model must match the language
+    code you specify in your transcription request. If the languages don't
+    match, the custom language model isn't applied. There are no errors or
+    warnings associated with a language mismatch.
+
+    For more information, see [Custom language
+    models](https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html).
+    """
+    identify_language: bool | None
+    """
+    Enables automatic language identification for your Call Analytics
+    transcription.
+
+    If you include `IdentifyLanguage`, you must include a list of language
+    codes, using `LanguageOptions`, that you think may be present in your
+    audio stream. You must provide a minimum of two language selections.
+
+    You can also include a preferred language using `PreferredLanguage`.
+    Adding a preferred language can help Amazon Transcribe identify the
+    language faster than if you omit this parameter.
+
+    Note that you must include either `LanguageCode` or `IdentifyLanguage`
+    in your request. If you include both parameters, your transcription job
+    fails.
+    """
+    language_options: str | None
+    """
+    Specify two or more language codes that represent the languages you
+    think may be present in your media.
+
+    Including language options can improve the accuracy of language
+    identification.
+
+    If you include `LanguageOptions` in your request, you must also include
+    `IdentifyLanguage`.
+
+    For a list of languages supported with Call Analytics streaming, refer
+    to the [Supported
+    languages](https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html)
+    table.
+
+    Warning:
+        You can only include one language dialect per language per stream. For
+        example, you cannot include `en-US` and `en-AU` in the same request.
+    """
+    preferred_language: str | None
+    """
+    Specify a preferred language from the subset of languages codes you
+    specified in `LanguageOptions`.
+
+    You can only use this parameter if you've included `IdentifyLanguage`
+    and `LanguageOptions` in your request.
+    """
+    vocabulary_names: str | None
+    """
+    Specify the names of the custom vocabularies that you want to use when
+    processing your Call Analytics transcription. Note that vocabulary names
+    are case sensitive.
+
+    If the custom vocabulary's language doesn't match the identified media
+    language, it won't be applied to the transcription.
+
+    Warning:
+        This parameter is only intended for use **with** the `IdentifyLanguage`
+        parameter. If you're **not** including `IdentifyLanguage` in your
+        request and want to use a custom vocabulary with your transcription, use
+        the `VocabularyName` parameter instead.
+
+    For more information, see [Custom
+    vocabularies](https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html).
+    """
+    vocabulary_filter_names: str | None
+    """
+    Specify the names of the custom vocabulary filters that you want to use
+    when processing your Call Analytics transcription. Note that vocabulary
+    filter names are case sensitive.
+
+    These filters serve to customize the transcript output.
+
+    Warning:
+        This parameter is only intended for use **with** the `IdentifyLanguage`
+        parameter. If you're **not** including `IdentifyLanguage` in your
+        request and want to use a custom vocabulary filter with your
+        transcription, use the `VocabularyFilterName` parameter instead.
+
+    For more information, see [Using vocabulary filtering with unwanted
+    words](https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html).
+    """
+    enable_partial_results_stabilization: bool | None
+    """
+    Enables partial result stabilization for your transcription. Partial
+    result stabilization can reduce latency in your output, but may impact
+    accuracy. For more information, see [Partial-result
+    stabilization](https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization).
+    """
+    partial_results_stability: str | None
+    """
+    Specify the level of stability to use when you enable partial results
+    stabilization (`EnablePartialResultsStabilization`).
+
+    Low stability provides the highest accuracy. High stability transcribes
+    faster, but with slightly lower accuracy.
+
+    For more information, see [Partial-result
+    stabilization](https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization).
+    """
+    content_identification_type: str | None
+    """
+    Labels all personally identifiable information (PII) identified in your
+    transcript.
+
+    Content identification is performed at the segment level; PII specified
+    in `PiiEntityTypes` is flagged upon complete transcription of an audio
+    segment. If you don't include `PiiEntityTypes` in your request, all PII
+    is identified.
+
+    You can't set `ContentIdentificationType` and `ContentRedactionType` in
+    the same request. If you set both, your request returns a
+    `BadRequestException`.
+
+    For more information, see [Redacting or identifying personally
+    identifiable
+    information](https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html).
+    """
+    content_redaction_type: str | None
+    """
+    Redacts all personally identifiable information (PII) identified in your
+    transcript.
+
+    Content redaction is performed at the segment level; PII specified in
+    `PiiEntityTypes` is redacted upon complete transcription of an audio
+    segment. If you don't include `PiiEntityTypes` in your request, all PII
+    is redacted.
+
+    You can't set `ContentRedactionType` and `ContentIdentificationType` in
+    the same request. If you set both, your request returns a
+    `BadRequestException`.
+
+    For more information, see [Redacting or identifying personally
+    identifiable
+    information](https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html).
+    """
+    pii_entity_types: str | None
+    """
+    Specify which types of personally identifiable information (PII) you
+    want to redact in your transcript. You can include as many types as
+    you'd like, or you can select `ALL`.
+
+    Values must be comma-separated and can include: `ADDRESS`,
+    `BANK_ACCOUNT_NUMBER`, `BANK_ROUTING`, `CREDIT_DEBIT_CVV`,
+    `CREDIT_DEBIT_EXPIRY`, `CREDIT_DEBIT_NUMBER`, `EMAIL`, `NAME`, `PHONE`,
+    `PIN`, `SSN`, or `ALL`.
+
+    Note that if you include `PiiEntityTypes` in your request, you must also
+    include `ContentIdentificationType` or `ContentRedactionType`.
+
+    If you include `ContentRedactionType` or `ContentIdentificationType` in
+    your request, but do not include `PiiEntityTypes`, all PII is redacted
+    or identified.
+    """
+
 @dataclass(kw_only=True)
 class StartCallAnalyticsStreamTranscriptionOutput(_SerdeShape):
     """Dataclass for StartCallAnalyticsStreamTranscriptionOutput structure."""
@@ -2229,6 +2481,40 @@ class StartMedicalScribeStreamInput(_SerdeShape):
     sample rate you specify must match that of your audio.
     """
     media_encoding: str | None = ...
+    """
+    Specify the encoding used for the input audio.
+
+    Supported formats are:
+
+    - FLAC
+
+    - OPUS-encoded audio in an Ogg container
+
+    - PCM (only signed 16-bit little-endian audio formats, which does not
+      include WAV)
+
+    For more information, see [Media
+    formats](https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio).
+    """
+
+class StartMedicalScribeStreamInputDict(TypedDict, total=False):
+    """Dictionary form of `StartMedicalScribeStreamInput`."""
+
+    session_id: str | None
+    """
+    Specify an identifier for your streaming session (in UUID format). If
+    you don't include a SessionId in your request, Amazon Web Services
+    HealthScribe generates an ID and returns it in the response.
+    """
+    language_code: Required[str]
+    """Specify the language code for your HealthScribe streaming session."""
+    media_sample_rate_hertz: Required[int]
+    """
+    Specify the sample rate of the input audio (in hertz). Amazon Web
+    Services HealthScribe supports a range from 16,000 Hz to 48,000 Hz. The
+    sample rate you specify must match that of your audio.
+    """
+    media_encoding: Required[str]
     """
     Specify the encoding used for the input audio.
 
@@ -2370,6 +2656,106 @@ class StartMedicalStreamTranscriptionInput(_SerdeShape):
     `EnableChannelIdentification`.
     """
     content_identification_type: str | None = ...
+    """
+    Labels all personal health information (PHI) identified in your
+    transcript.
+
+    Content identification is performed at the segment level; PHI is flagged
+    upon complete transcription of an audio segment.
+
+    For more information, see [Identifying personal health information (PHI)
+    in a
+    transcription](https://docs.aws.amazon.com/transcribe/latest/dg/phi-id.html).
+    """
+
+class StartMedicalStreamTranscriptionInputDict(TypedDict, total=False):
+    """Dictionary form of `StartMedicalStreamTranscriptionInput`."""
+
+    language_code: Required[str]
+    """
+    Specify the language code that represents the language spoken in your
+    audio.
+
+    Warning:
+        Amazon Transcribe Medical only supports US English (`en-US`).
+    """
+    media_sample_rate_hertz: Required[int]
+    """
+    The sample rate of the input audio (in hertz). Amazon Transcribe Medical
+    supports a range from 16,000 Hz to 48,000 Hz. Note that the sample rate
+    you specify must match that of your audio.
+    """
+    media_encoding: Required[str]
+    """
+    Specify the encoding used for the input audio. Supported formats are:
+
+    - FLAC
+
+    - OPUS-encoded audio in an Ogg container
+
+    - PCM (only signed 16-bit little-endian audio formats, which does not
+      include WAV)
+
+    For more information, see [Media
+    formats](https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio).
+    """
+    vocabulary_name: str | None
+    """
+    Specify the name of the custom vocabulary that you want to use when
+    processing your transcription. Note that vocabulary names are case
+    sensitive.
+    """
+    specialty: Required[str]
+    """Specify the medical specialty contained in your audio."""
+    type: Required[str]
+    """
+    Specify the type of input audio. For example, choose `DICTATION` for a
+    provider dictating patient notes and `CONVERSATION` for a dialogue
+    between a patient and a medical professional.
+    """
+    show_speaker_label: bool | None
+    """
+    Enables speaker partitioning (diarization) in your transcription output.
+    Speaker partitioning labels the speech from individual speakers in your
+    media file.
+
+    For more information, see [Partitioning speakers
+    (diarization)](https://docs.aws.amazon.com/transcribe/latest/dg/diarization.html).
+    """
+    session_id: str | None
+    """
+    Specify a name for your transcription session. If you don't include
+    this parameter in your request, Amazon Transcribe Medical generates an
+    ID and returns it in the response.
+    """
+    enable_channel_identification: bool | None
+    """
+    Enables channel identification in multi-channel audio.
+
+    Channel identification transcribes the audio on each channel
+    independently, then appends the output for each channel into one
+    transcript.
+
+    If you have multi-channel audio and do not enable channel
+    identification, your audio is transcribed in a continuous manner and
+    your transcript is not separated by channel.
+
+    If you include `EnableChannelIdentification` in your request, you must
+    also include `NumberOfChannels`.
+
+    For more information, see [Transcribing multi-channel
+    audio](https://docs.aws.amazon.com/transcribe/latest/dg/channel-id.html).
+    """
+    number_of_channels: int | None
+    """
+    Specify the number of channels in your audio stream. This value must be
+    `2`, as only two channels are supported. If your audio doesn't contain
+    multiple channels, do not include this parameter in your request.
+
+    If you include `NumberOfChannels` in your request, you must also include
+    `EnableChannelIdentification`.
+    """
+    content_identification_type: str | None
     """
     Labels all personal health information (PHI) identified in your
     transcript.
@@ -2758,6 +3144,353 @@ class StartStreamTranscriptionInput(_SerdeShape):
     many times as you want until 1:30 PM.
     """
     transcript_format: str | None = ...
+    """
+    Specify how numbers, dates, and other alphanumeric entities are rendered
+    in your transcription results.
+
+    - `WRITTEN` renders these entities in their standard written form (for
+      example, `$50`, `10:30 AM`, and `101`).
+
+    - `SPOKEN` renders these entities as words, exactly as they were spoken
+      (for example, `fifty dollars`, `ten thirty a m`, and `one oh one`).
+
+    If you don't specify a value, Amazon Transcribe uses `WRITTEN` by
+    default.
+    """
+
+class StartStreamTranscriptionInputDict(TypedDict, total=False):
+    """Dictionary form of `StartStreamTranscriptionInput`."""
+
+    language_code: str | None
+    """
+    Specify the language code that represents the language spoken in your
+    audio.
+
+    If you're unsure of the language spoken in your audio, consider using
+    `IdentifyLanguage` to enable automatic language identification.
+
+    For a list of languages supported with Amazon Transcribe streaming,
+    refer to the [Supported
+    languages](https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html)
+    table.
+    """
+    media_sample_rate_hertz: Required[int]
+    """
+    The sample rate of the input audio (in hertz). Low-quality audio, such
+    as telephone audio, is typically around 8,000 Hz. High-quality audio
+    typically ranges from 16,000 Hz to 48,000 Hz. Note that the sample rate
+    you specify must match that of your audio.
+    """
+    media_encoding: Required[str]
+    """
+    Specify the encoding of your input audio. Supported formats are:
+
+    - FLAC
+
+    - OPUS-encoded audio in an Ogg container
+
+    - PCM (only signed 16-bit little-endian audio formats, which does not
+      include WAV)
+
+    For more information, see [Media
+    formats](https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio).
+    """
+    vocabulary_name: str | None
+    """
+    Specify the name of the custom vocabulary that you want to use when
+    processing your transcription. Note that vocabulary names are case
+    sensitive.
+
+    If the language of the specified custom vocabulary doesn't match the
+    language identified in your media, the custom vocabulary is not applied
+    to your transcription.
+
+    Warning:
+        This parameter is **not** intended for use with the `IdentifyLanguage`
+        parameter. If you're including `IdentifyLanguage` in your request and
+        want to use one or more custom vocabularies with your transcription, use
+        the `VocabularyNames` parameter instead.
+
+    For more information, see [Custom
+    vocabularies](https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html).
+    """
+    session_id: str | None
+    """
+    Specify a name for your transcription session. If you don't include
+    this parameter in your request, Amazon Transcribe generates an ID and
+    returns it in the response.
+    """
+    vocabulary_filter_name: str | None
+    """
+    Specify the name of the custom vocabulary filter that you want to use
+    when processing your transcription. Note that vocabulary filter names
+    are case sensitive.
+
+    If the language of the specified custom vocabulary filter doesn't match
+    the language identified in your media, the vocabulary filter is not
+    applied to your transcription.
+
+    Warning:
+        This parameter is **not** intended for use with the `IdentifyLanguage`
+        parameter. If you're including `IdentifyLanguage` in your request and
+        want to use one or more vocabulary filters with your transcription, use
+        the `VocabularyFilterNames` parameter instead.
+
+    For more information, see [Using vocabulary filtering with unwanted
+    words](https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html).
+    """
+    vocabulary_filter_method: str | None
+    """
+    Specify how you want your vocabulary filter applied to your transcript.
+
+    To replace words with `***`, choose `mask`.
+
+    To delete words, choose `remove`.
+
+    To flag words without changing them, choose `tag`.
+    """
+    show_speaker_label: bool | None
+    """
+    Enables speaker partitioning (diarization) in your transcription output.
+    Speaker partitioning labels the speech from individual speakers in your
+    media file.
+
+    For more information, see [Partitioning speakers
+    (diarization)](https://docs.aws.amazon.com/transcribe/latest/dg/diarization.html).
+    """
+    enable_channel_identification: bool | None
+    """
+    Enables channel identification in multi-channel audio.
+
+    Channel identification transcribes the audio on each channel
+    independently, then appends the output for each channel into one
+    transcript.
+
+    If you have multi-channel audio and do not enable channel
+    identification, your audio is transcribed in a continuous manner and
+    your transcript is not separated by channel.
+
+    If you include `EnableChannelIdentification` in your request, you must
+    also include `NumberOfChannels`.
+
+    For more information, see [Transcribing multi-channel
+    audio](https://docs.aws.amazon.com/transcribe/latest/dg/channel-id.html).
+    """
+    number_of_channels: int | None
+    """
+    Specify the number of channels in your audio stream. This value must be
+    `2`, as only two channels are supported. If your audio doesn't contain
+    multiple channels, do not include this parameter in your request.
+
+    If you include `NumberOfChannels` in your request, you must also include
+    `EnableChannelIdentification`.
+    """
+    enable_partial_results_stabilization: bool | None
+    """
+    Enables partial result stabilization for your transcription. Partial
+    result stabilization can reduce latency in your output, but may impact
+    accuracy. For more information, see [Partial-result
+    stabilization](https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization).
+    """
+    partial_results_stability: str | None
+    """
+    Specify the level of stability to use when you enable partial results
+    stabilization (`EnablePartialResultsStabilization`).
+
+    Low stability provides the highest accuracy. High stability transcribes
+    faster, but with slightly lower accuracy.
+
+    For more information, see [Partial-result
+    stabilization](https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization).
+    """
+    content_identification_type: str | None
+    """
+    Labels all personally identifiable information (PII) identified in your
+    transcript.
+
+    Content identification is performed at the segment level; PII specified
+    in `PiiEntityTypes` is flagged upon complete transcription of an audio
+    segment. If you don't include `PiiEntityTypes` in your request, all PII
+    is identified.
+
+    You can't set `ContentIdentificationType` and `ContentRedactionType` in
+    the same request. If you set both, your request returns a
+    `BadRequestException`.
+
+    For more information, see [Redacting or identifying personally
+    identifiable
+    information](https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html).
+    """
+    content_redaction_type: str | None
+    """
+    Redacts all personally identifiable information (PII) identified in your
+    transcript.
+
+    Content redaction is performed at the segment level; PII specified in
+    `PiiEntityTypes` is redacted upon complete transcription of an audio
+    segment. If you don't include `PiiEntityTypes` in your request, all PII
+    is redacted.
+
+    You can't set `ContentRedactionType` and `ContentIdentificationType` in
+    the same request. If you set both, your request returns a
+    `BadRequestException`.
+
+    For more information, see [Redacting or identifying personally
+    identifiable
+    information](https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html).
+    """
+    pii_entity_types: str | None
+    """
+    Specify which types of personally identifiable information (PII) you
+    want to redact in your transcript. You can include as many types as
+    you'd like, or you can select `ALL`.
+
+    Values must be comma-separated and can include: `ADDRESS`,
+    `BANK_ACCOUNT_NUMBER`, `BANK_ROUTING`, `CREDIT_DEBIT_CVV`,
+    `CREDIT_DEBIT_EXPIRY`, `CREDIT_DEBIT_NUMBER`, `EMAIL`, `NAME`, `PHONE`,
+    `PIN`, `SSN`, `AGE`, `DATE_TIME`, `LICENSE_PLATE`, `PASSPORT_NUMBER`,
+    `PASSWORD`, `USERNAME`, `VEHICLE_IDENTIFICATION_NUMBER`, or `ALL`.
+
+    Note that if you include `PiiEntityTypes` in your request, you must also
+    include `ContentIdentificationType` or `ContentRedactionType`.
+
+    If you include `ContentRedactionType` or `ContentIdentificationType` in
+    your request, but do not include `PiiEntityTypes`, all PII is redacted
+    or identified.
+    """
+    language_model_name: str | None
+    """
+    Specify the name of the custom language model that you want to use when
+    processing your transcription. Note that language model names are case
+    sensitive.
+
+    The language of the specified language model must match the language
+    code you specify in your transcription request. If the languages don't
+    match, the custom language model isn't applied. There are no errors or
+    warnings associated with a language mismatch.
+
+    For more information, see [Custom language
+    models](https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html).
+    """
+    identify_language: bool | None
+    """
+    Enables automatic language identification for your transcription.
+
+    If you include `IdentifyLanguage`, you must include a list of language
+    codes, using `LanguageOptions`, that you think may be present in your
+    audio stream.
+
+    You can also include a preferred language using `PreferredLanguage`.
+    Adding a preferred language can help Amazon Transcribe identify the
+    language faster than if you omit this parameter.
+
+    If you have multi-channel audio that contains different languages on
+    each channel, and you've enabled channel identification, automatic
+    language identification identifies the dominant language on each audio
+    channel.
+
+    Note that you must include either `LanguageCode` or `IdentifyLanguage`
+    or `IdentifyMultipleLanguages` in your request. If you include more than
+    one of these parameters, your transcription job fails.
+
+    Streaming language identification can't be combined with custom
+    language models or redaction.
+    """
+    language_options: str | None
+    """
+    Specify two or more language codes that represent the languages you
+    think may be present in your media; including more than five is not
+    recommended.
+
+    Including language options can improve the accuracy of language
+    identification.
+
+    If you include `LanguageOptions` in your request, you must also include
+    `IdentifyLanguage` or `IdentifyMultipleLanguages`.
+
+    For a list of languages supported with Amazon Transcribe streaming,
+    refer to the [Supported
+    languages](https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html)
+    table.
+
+    Warning:
+        You can only include one language dialect per language per stream. For
+        example, you cannot include `en-US` and `en-AU` in the same request.
+    """
+    preferred_language: str | None
+    """
+    Specify a preferred language from the subset of languages codes you
+    specified in `LanguageOptions`.
+
+    You can only use this parameter if you've included `IdentifyLanguage`
+    and `LanguageOptions` in your request.
+    """
+    identify_multiple_languages: bool | None
+    """
+    Enables automatic multi-language identification in your transcription
+    job request. Use this parameter if your stream contains more than one
+    language. If your stream contains only one language, use
+    IdentifyLanguage instead.
+
+    If you include `IdentifyMultipleLanguages`, you must include a list of
+    language codes, using `LanguageOptions`, that you think may be present
+    in your stream.
+
+    If you want to apply a custom vocabulary or a custom vocabulary filter
+    to your automatic multiple language identification request, include
+    `VocabularyNames` or `VocabularyFilterNames`.
+
+    Note that you must include one of `LanguageCode`, `IdentifyLanguage`, or
+    `IdentifyMultipleLanguages` in your request. If you include more than
+    one of these parameters, your transcription job fails.
+    """
+    vocabulary_names: str | None
+    """
+    Specify the names of the custom vocabularies that you want to use when
+    processing your transcription. Note that vocabulary names are case
+    sensitive.
+
+    If none of the languages of the specified custom vocabularies match the
+    language identified in your media, your job fails.
+
+    Warning:
+        This parameter is only intended for use **with** the `IdentifyLanguage`
+        parameter. If you're **not** including `IdentifyLanguage` in your
+        request and want to use a custom vocabulary with your transcription, use
+        the `VocabularyName` parameter instead.
+
+    For more information, see [Custom
+    vocabularies](https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html).
+    """
+    vocabulary_filter_names: str | None
+    """
+    Specify the names of the custom vocabulary filters that you want to use
+    when processing your transcription. Note that vocabulary filter names
+    are case sensitive.
+
+    If none of the languages of the specified custom vocabulary filters
+    match the language identified in your media, your job fails.
+
+    Warning:
+        This parameter is only intended for use **with** the `IdentifyLanguage`
+        parameter. If you're **not** including `IdentifyLanguage` in your
+        request and want to use a custom vocabulary filter with your
+        transcription, use the `VocabularyFilterName` parameter instead.
+
+    For more information, see [Using vocabulary filtering with unwanted
+    words](https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html).
+    """
+    session_resume_window: int | None
+    """
+    Specify the time window, in minutes, during which your transcription
+    session can be resumed, measured from the stream start time. This
+    optional parameter accepts integer values from 1 to 300 (5 hours).
+
+    For example, if your stream starts at 1 PM and you specify a
+    `SessionResumeWindow` of 30 minutes, you can reconnect to the session as
+    many times as you want until 1:30 PM.
+    """
+    transcript_format: str | None
     """
     Specify how numbers, dates, and other alphanumeric entities are rendered
     in your transcription results.

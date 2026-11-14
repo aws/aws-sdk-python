@@ -1,0 +1,4 @@
+{
+  "type": "enhancement",
+  "description": "Codegen sync for [smithy-python 481e133..285aeb0](https://github.com/smithy-lang/smithy-python/commits/481e1334cf29b683928f57c4bcb292f7e323b6c4..285aeb06dc769ed6c1861d229d706d2ede5303e1): Support operation input members as keyword arguments and accept nested dictionaries alongside modeled values, with typed request dictionaries for both synchronous and asynchronous clients. Whole request objects and dictionaries are positional-only, and operation plugins are keyword-only. Preserve full member documentation on models and request dictionaries, and fix generated model partition filename ordering."
+}

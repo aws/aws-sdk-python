@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import cast
+from typing import Unpack as _Unpack, cast, overload as _overload
 
 from smithy_aws_core.aio.identity.chain import AsyncIdentityChain
 from smithy_aws_core.config.types import ConfigSource
@@ -15,7 +15,6 @@ from smithy_http.plugins import user_agent_plugin
 
 from .. import models as _models
 from ..models import (
-    StartConversationInput,
     StartConversationOutput,
     StartConversationRequestEventStream,
     StartConversationResponseEventStream,
@@ -28,15 +27,10 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from ..models import (
-        DeleteSessionInput,
         DeleteSessionOutput,
-        GetSessionInput,
         GetSessionOutput,
-        PutSessionInput,
         PutSessionOutput,
-        RecognizeTextInput,
         RecognizeTextOutput,
-        RecognizeUtteranceInput,
         RecognizeUtteranceOutput,
     )
 
@@ -50,10 +44,24 @@ class AsyncLexRuntimeV2Client(AsyncClient[AsyncLexRuntimeV2Config]):
     operations.
     """
 
-    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
+    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
 
+    @_overload
     async def delete_session(
-        self, input: DeleteSessionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteSessionInput | _models.DeleteSessionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteSessionOutput: ...
+
+    @_overload
+    async def delete_session(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteSessionInputDict],
     ) -> DeleteSessionOutput:
         """
         Removes session information for a specified bot, alias, and user ID.
@@ -74,8 +82,6 @@ class AsyncLexRuntimeV2Client(AsyncClient[AsyncLexRuntimeV2Config]):
         enables for the alias, you receive a `BadRequestException`.
 
         Args:
-            input:
-                An instance of `DeleteSessionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -85,10 +91,33 @@ class AsyncLexRuntimeV2Client(AsyncClient[AsyncLexRuntimeV2Config]):
         Returns:
             An instance of `DeleteSessionOutput`.
         """
-        return await self._invoke(input, _models.DELETE_SESSION, [], plugins)
 
+    async def delete_session(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteSessionOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_SESSION, args, kwargs),
+            _models.DELETE_SESSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_session(
-        self, input: GetSessionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetSessionInput | _models.GetSessionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetSessionOutput: ...
+
+    @_overload
+    async def get_session(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetSessionInputDict],
     ) -> GetSessionOutput:
         """
         Returns session information for a specified bot, alias, and user.
@@ -101,8 +130,6 @@ class AsyncLexRuntimeV2Client(AsyncClient[AsyncLexRuntimeV2Config]):
         enabled for the alias, you receive a `BadRequestException`.
 
         Args:
-            input:
-                An instance of `GetSessionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -112,10 +139,33 @@ class AsyncLexRuntimeV2Client(AsyncClient[AsyncLexRuntimeV2Config]):
         Returns:
             An instance of `GetSessionOutput`.
         """
-        return await self._invoke(input, _models.GET_SESSION, [], plugins)
 
+    async def get_session(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetSessionOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_SESSION, args, kwargs),
+            _models.GET_SESSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def put_session(
-        self, input: PutSessionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutSessionInput | _models.PutSessionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutSessionOutput: ...
+
+    @_overload
+    async def put_session(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutSessionInputDict],
     ) -> PutSessionOutput:
         """
         Creates a new session or modifies an existing session with an Amazon Lex
@@ -123,8 +173,6 @@ class AsyncLexRuntimeV2Client(AsyncClient[AsyncLexRuntimeV2Config]):
         of the bot.
 
         Args:
-            input:
-                An instance of `PutSessionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -134,10 +182,33 @@ class AsyncLexRuntimeV2Client(AsyncClient[AsyncLexRuntimeV2Config]):
         Returns:
             An instance of `PutSessionOutput`.
         """
-        return await self._invoke(input, _models.PUT_SESSION, [], plugins)
 
+    async def put_session(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutSessionOutput:
+        return await self._invoke(
+            self._select_input(_models.PUT_SESSION, args, kwargs),
+            _models.PUT_SESSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def recognize_text(
-        self, input: RecognizeTextInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RecognizeTextInput | _models.RecognizeTextInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RecognizeTextOutput: ...
+
+    @_overload
+    async def recognize_text(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RecognizeTextInputDict],
     ) -> RecognizeTextOutput:
         """
         Sends user input to Amazon Lex V2. Client applications use this API to
@@ -169,8 +240,6 @@ class AsyncLexRuntimeV2Client(AsyncClient[AsyncLexRuntimeV2Config]):
         message](https://docs.aws.amazon.com/lexv2/latest/dg/streaming-progress.html#progress-complete.html).
 
         Args:
-            input:
-                An instance of `RecognizeTextInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -180,10 +249,35 @@ class AsyncLexRuntimeV2Client(AsyncClient[AsyncLexRuntimeV2Config]):
         Returns:
             An instance of `RecognizeTextOutput`.
         """
-        return await self._invoke(input, _models.RECOGNIZE_TEXT, [], plugins)
 
+    async def recognize_text(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RecognizeTextOutput:
+        return await self._invoke(
+            self._select_input(_models.RECOGNIZE_TEXT, args, kwargs),
+            _models.RECOGNIZE_TEXT,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def recognize_utterance(
-        self, input: RecognizeUtteranceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RecognizeUtteranceInput
+        | _models.RecognizeUtteranceInputDict
+        | _models.AsyncRecognizeUtteranceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RecognizeUtteranceOutput: ...
+
+    @_overload
+    async def recognize_utterance(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AsyncRecognizeUtteranceInputDict],
     ) -> RecognizeUtteranceOutput:
         """
         Sends user input to Amazon Lex V2. You can send text or speech. Clients
@@ -237,8 +331,6 @@ class AsyncLexRuntimeV2Client(AsyncClient[AsyncLexRuntimeV2Config]):
         message](https://docs.aws.amazon.com/lexv2/latest/dg/streaming-progress.html#progress-complete.html).
 
         Args:
-            input:
-                An instance of `RecognizeUtteranceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -248,10 +340,37 @@ class AsyncLexRuntimeV2Client(AsyncClient[AsyncLexRuntimeV2Config]):
         Returns:
             An instance of `RecognizeUtteranceOutput`.
         """
-        return await self._invoke(input, _models.RECOGNIZE_UTTERANCE, [], plugins)
 
+    async def recognize_utterance(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RecognizeUtteranceOutput:
+        return await self._invoke(
+            self._select_input(_models.RECOGNIZE_UTTERANCE, args, kwargs),
+            _models.RECOGNIZE_UTTERANCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def start_conversation(
-        self, input: StartConversationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StartConversationInput | _models.StartConversationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AsyncDuplexEventStream[
+        StartConversationRequestEventStream,
+        StartConversationResponseEventStream,
+        StartConversationOutput,
+    ]: ...
+
+    @_overload
+    async def start_conversation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartConversationInputDict],
     ) -> AsyncDuplexEventStream[
         StartConversationRequestEventStream,
         StartConversationResponseEventStream,
@@ -308,8 +427,6 @@ class AsyncLexRuntimeV2Client(AsyncClient[AsyncLexRuntimeV2Config]):
           V3](https://docs.aws.amazon.com/goto/SdkForRubyV3/runtime.lex.v2-2020-08-07/StartConversation)
 
         Args:
-            input:
-                An instance of `StartConversationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -319,8 +436,19 @@ class AsyncLexRuntimeV2Client(AsyncClient[AsyncLexRuntimeV2Config]):
         Returns:
             An `AsyncDuplexEventStream` for bidirectional streaming.
         """
+
+    async def start_conversation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AsyncDuplexEventStream[
+        StartConversationRequestEventStream,
+        StartConversationResponseEventStream,
+        StartConversationOutput,
+    ]:
         pipeline, call = await self._prepare_call(
-            input, _models.START_CONVERSATION, [], plugins
+            self._select_input(_models.START_CONVERSATION, args, kwargs),
+            _models.START_CONVERSATION,
+            [],
+            plugins,
         )
         return await pipeline.duplex_stream(
             call,

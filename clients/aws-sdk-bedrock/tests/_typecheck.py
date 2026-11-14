@@ -2,15 +2,23 @@
 
 from typing import Any
 
+from aws_sdk_bedrock.aio.client import AsyncBedrockClient
+from aws_sdk_bedrock.client import BedrockClient
 from aws_sdk_bedrock.models import (
     AccountEnforcedGuardrailInferenceInputConfiguration,
+    AccountEnforcedGuardrailInferenceInputConfigurationDict,
     AccountEnforcedGuardrailOutputConfiguration,
     AdvancedPromptOptimizationInputConfig,
+    AdvancedPromptOptimizationInputConfigDict,
     AdvancedPromptOptimizationJobSummary,
     AdvancedPromptOptimizationOutputConfig,
+    AdvancedPromptOptimizationOutputConfigDict,
     AgreementAvailability,
     AutomatedEvaluationConfig,
+    AutomatedEvaluationConfigDict,
     AutomatedEvaluationCustomMetricConfig,
+    AutomatedEvaluationCustomMetricConfigDict,
+    AutomatedEvaluationCustomMetricSourceDict,
     AutomatedReasoningCheckImpossibleFinding,
     AutomatedReasoningCheckInputTextReference,
     AutomatedReasoningCheckInvalidFinding,
@@ -26,15 +34,21 @@ from aws_sdk_bedrock.models import (
     AutomatedReasoningCheckValidFinding,
     AutomatedReasoningLogicStatement,
     AutomatedReasoningPolicyAddRuleAnnotation,
+    AutomatedReasoningPolicyAddRuleAnnotationDict,
     AutomatedReasoningPolicyAddRuleFromNaturalLanguageAnnotation,
+    AutomatedReasoningPolicyAddRuleFromNaturalLanguageAnnotationDict,
     AutomatedReasoningPolicyAddRuleMutation,
     AutomatedReasoningPolicyAddTypeAnnotation,
+    AutomatedReasoningPolicyAddTypeAnnotationDict,
     AutomatedReasoningPolicyAddTypeMutation,
     AutomatedReasoningPolicyAddTypeValue,
+    AutomatedReasoningPolicyAddTypeValueDict,
     AutomatedReasoningPolicyAddVariableAnnotation,
+    AutomatedReasoningPolicyAddVariableAnnotationDict,
     AutomatedReasoningPolicyAddVariableMutation,
     AutomatedReasoningPolicyAnnotatedChunk,
     AutomatedReasoningPolicyAnnotatedLine,
+    AutomatedReasoningPolicyAnnotationDict,
     AutomatedReasoningPolicyAtomicStatement,
     AutomatedReasoningPolicyBuildLog,
     AutomatedReasoningPolicyBuildLogEntry,
@@ -43,29 +57,44 @@ from aws_sdk_bedrock.models import (
     AutomatedReasoningPolicyBuildStep,
     AutomatedReasoningPolicyBuildStepMessage,
     AutomatedReasoningPolicyBuildWorkflowDocument,
+    AutomatedReasoningPolicyBuildWorkflowDocumentDict,
     AutomatedReasoningPolicyBuildWorkflowRepairContent,
+    AutomatedReasoningPolicyBuildWorkflowRepairContentDict,
     AutomatedReasoningPolicyBuildWorkflowSource,
+    AutomatedReasoningPolicyBuildWorkflowSourceDict,
     AutomatedReasoningPolicyBuildWorkflowSummary,
     AutomatedReasoningPolicyDefinition,
+    AutomatedReasoningPolicyDefinitionDict,
     AutomatedReasoningPolicyDefinitionQualityReport,
     AutomatedReasoningPolicyDefinitionRule,
+    AutomatedReasoningPolicyDefinitionRuleDict,
     AutomatedReasoningPolicyDefinitionType,
+    AutomatedReasoningPolicyDefinitionTypeDict,
     AutomatedReasoningPolicyDefinitionTypeValue,
+    AutomatedReasoningPolicyDefinitionTypeValueDict,
     AutomatedReasoningPolicyDefinitionTypeValuePair,
     AutomatedReasoningPolicyDefinitionVariable,
+    AutomatedReasoningPolicyDefinitionVariableDict,
     AutomatedReasoningPolicyDeleteRuleAnnotation,
+    AutomatedReasoningPolicyDeleteRuleAnnotationDict,
     AutomatedReasoningPolicyDeleteRuleMutation,
     AutomatedReasoningPolicyDeleteTypeAnnotation,
+    AutomatedReasoningPolicyDeleteTypeAnnotationDict,
     AutomatedReasoningPolicyDeleteTypeMutation,
     AutomatedReasoningPolicyDeleteTypeValue,
+    AutomatedReasoningPolicyDeleteTypeValueDict,
     AutomatedReasoningPolicyDeleteVariableAnnotation,
+    AutomatedReasoningPolicyDeleteVariableAnnotationDict,
     AutomatedReasoningPolicyDeleteVariableMutation,
     AutomatedReasoningPolicyDisjointRuleSet,
     AutomatedReasoningPolicyFidelityReport,
+    AutomatedReasoningPolicyGenerateFidelityReportContentDict,
     AutomatedReasoningPolicyGeneratedTestCase,
     AutomatedReasoningPolicyGeneratedTestCases,
     AutomatedReasoningPolicyIngestContentAnnotation,
+    AutomatedReasoningPolicyIngestContentAnnotationDict,
     AutomatedReasoningPolicyIterativeRefinementContent,
+    AutomatedReasoningPolicyIterativeRefinementContentDict,
     AutomatedReasoningPolicyPlanning,
     AutomatedReasoningPolicyReportSourceDocument,
     AutomatedReasoningPolicyRuleReport,
@@ -77,379 +106,602 @@ from aws_sdk_bedrock.models import (
     AutomatedReasoningPolicySummary,
     AutomatedReasoningPolicyTestCase,
     AutomatedReasoningPolicyTestResult,
+    AutomatedReasoningPolicyTypeValueAnnotationDict,
     AutomatedReasoningPolicyUpdateFromRuleFeedbackAnnotation,
+    AutomatedReasoningPolicyUpdateFromRuleFeedbackAnnotationDict,
     AutomatedReasoningPolicyUpdateFromScenarioFeedbackAnnotation,
+    AutomatedReasoningPolicyUpdateFromScenarioFeedbackAnnotationDict,
     AutomatedReasoningPolicyUpdateRuleAnnotation,
+    AutomatedReasoningPolicyUpdateRuleAnnotationDict,
     AutomatedReasoningPolicyUpdateRuleMutation,
     AutomatedReasoningPolicyUpdateTypeAnnotation,
+    AutomatedReasoningPolicyUpdateTypeAnnotationDict,
     AutomatedReasoningPolicyUpdateTypeMutation,
     AutomatedReasoningPolicyUpdateTypeValue,
+    AutomatedReasoningPolicyUpdateTypeValueDict,
     AutomatedReasoningPolicyUpdateVariableAnnotation,
+    AutomatedReasoningPolicyUpdateVariableAnnotationDict,
     AutomatedReasoningPolicyUpdateVariableMutation,
     AutomatedReasoningPolicyVariableReport,
+    AutomatedReasoningPolicyWorkflowTypeContentDict,
     BatchDeleteAdvancedPromptOptimizationJobError,
     BatchDeleteAdvancedPromptOptimizationJobInput,
+    BatchDeleteAdvancedPromptOptimizationJobInputDict,
     BatchDeleteAdvancedPromptOptimizationJobItem,
     BatchDeleteAdvancedPromptOptimizationJobOutput,
     BatchDeleteEvaluationJobError,
     BatchDeleteEvaluationJobInput,
+    BatchDeleteEvaluationJobInputDict,
     BatchDeleteEvaluationJobItem,
     BatchDeleteEvaluationJobOutput,
     BedrockEvaluatorModel,
+    BedrockEvaluatorModelDict,
     ByteContentDoc,
+    ByteContentDocDict,
     CancelAutomatedReasoningPolicyBuildWorkflowInput,
+    CancelAutomatedReasoningPolicyBuildWorkflowInputDict,
     CancelAutomatedReasoningPolicyBuildWorkflowOutput,
     CloudWatchConfig,
+    CloudWatchConfigDict,
     CreateAdvancedPromptOptimizationJobInput,
+    CreateAdvancedPromptOptimizationJobInputDict,
     CreateAdvancedPromptOptimizationJobOutput,
     CreateAutomatedReasoningPolicyInput,
+    CreateAutomatedReasoningPolicyInputDict,
     CreateAutomatedReasoningPolicyOutput,
     CreateAutomatedReasoningPolicyTestCaseInput,
+    CreateAutomatedReasoningPolicyTestCaseInputDict,
     CreateAutomatedReasoningPolicyTestCaseOutput,
     CreateAutomatedReasoningPolicyVersionInput,
+    CreateAutomatedReasoningPolicyVersionInputDict,
     CreateAutomatedReasoningPolicyVersionOutput,
     CreateCustomModelDeploymentInput,
+    CreateCustomModelDeploymentInputDict,
     CreateCustomModelDeploymentOutput,
     CreateCustomModelInput,
+    CreateCustomModelInputDict,
     CreateCustomModelOutput,
     CreateEvaluationJobInput,
+    CreateEvaluationJobInputDict,
     CreateEvaluationJobOutput,
     CreateFoundationModelAgreementInput,
+    CreateFoundationModelAgreementInputDict,
     CreateFoundationModelAgreementOutput,
     CreateGuardrailInput,
+    CreateGuardrailInputDict,
     CreateGuardrailOutput,
     CreateGuardrailVersionInput,
+    CreateGuardrailVersionInputDict,
     CreateGuardrailVersionOutput,
     CreateInferenceProfileInput,
+    CreateInferenceProfileInputDict,
     CreateInferenceProfileOutput,
     CreateMarketplaceModelEndpointInput,
+    CreateMarketplaceModelEndpointInputDict,
     CreateMarketplaceModelEndpointOutput,
     CreateModelCopyJobInput,
+    CreateModelCopyJobInputDict,
     CreateModelCopyJobOutput,
     CreateModelCustomizationJobInput,
+    CreateModelCustomizationJobInputDict,
     CreateModelCustomizationJobOutput,
     CreateModelImportJobInput,
+    CreateModelImportJobInputDict,
     CreateModelImportJobOutput,
     CreateModelInvocationJobInput,
+    CreateModelInvocationJobInputDict,
     CreateModelInvocationJobOutput,
     CreatePromptRouterInput,
+    CreatePromptRouterInputDict,
     CreatePromptRouterOutput,
     CreateProvisionedModelThroughputInput,
+    CreateProvisionedModelThroughputInputDict,
     CreateProvisionedModelThroughputOutput,
     CustomMetricBedrockEvaluatorModel,
+    CustomMetricBedrockEvaluatorModelDict,
     CustomMetricDefinition,
+    CustomMetricDefinitionDict,
     CustomMetricEvaluatorModelConfig,
+    CustomMetricEvaluatorModelConfigDict,
+    CustomModelDataSourceDict,
     CustomModelDeploymentSummary,
     CustomModelDeploymentUpdateDetails,
     CustomModelSummary,
     CustomModelUnits,
+    CustomizationConfigDict,
     DataProcessingDetails,
     DeleteAutomatedReasoningPolicyBuildWorkflowInput,
+    DeleteAutomatedReasoningPolicyBuildWorkflowInputDict,
     DeleteAutomatedReasoningPolicyBuildWorkflowOutput,
     DeleteAutomatedReasoningPolicyInput,
+    DeleteAutomatedReasoningPolicyInputDict,
     DeleteAutomatedReasoningPolicyOutput,
     DeleteAutomatedReasoningPolicyTestCaseInput,
+    DeleteAutomatedReasoningPolicyTestCaseInputDict,
     DeleteAutomatedReasoningPolicyTestCaseOutput,
     DeleteCustomModelDeploymentInput,
+    DeleteCustomModelDeploymentInputDict,
     DeleteCustomModelDeploymentOutput,
     DeleteCustomModelInput,
+    DeleteCustomModelInputDict,
     DeleteCustomModelOutput,
     DeleteEnforcedGuardrailConfigurationInput,
+    DeleteEnforcedGuardrailConfigurationInputDict,
     DeleteEnforcedGuardrailConfigurationOutput,
     DeleteFoundationModelAgreementInput,
+    DeleteFoundationModelAgreementInputDict,
     DeleteFoundationModelAgreementOutput,
     DeleteGuardrailInput,
+    DeleteGuardrailInputDict,
     DeleteGuardrailOutput,
     DeleteImportedModelInput,
+    DeleteImportedModelInputDict,
     DeleteImportedModelOutput,
     DeleteInferenceProfileInput,
+    DeleteInferenceProfileInputDict,
     DeleteInferenceProfileOutput,
     DeleteMarketplaceModelEndpointInput,
+    DeleteMarketplaceModelEndpointInputDict,
     DeleteMarketplaceModelEndpointOutput,
     DeleteModelInvocationLoggingConfigurationInput,
+    DeleteModelInvocationLoggingConfigurationInputDict,
     DeleteModelInvocationLoggingConfigurationOutput,
     DeletePromptRouterInput,
+    DeletePromptRouterInputDict,
     DeletePromptRouterOutput,
     DeleteProvisionedModelThroughputInput,
+    DeleteProvisionedModelThroughputInputDict,
     DeleteProvisionedModelThroughputOutput,
     DeleteResourcePolicyInput,
+    DeleteResourcePolicyInputDict,
     DeleteResourcePolicyOutput,
     DeregisterMarketplaceModelEndpointInput,
+    DeregisterMarketplaceModelEndpointInputDict,
     DeregisterMarketplaceModelEndpointOutput,
     DimensionalPriceRate,
     DistillationConfig,
+    DistillationConfigDict,
+    EndpointConfigDict,
     EvaluationBedrockModel,
+    EvaluationBedrockModelDict,
+    EvaluationConfigDict,
     EvaluationDataset,
+    EvaluationDatasetDict,
+    EvaluationDatasetLocationDict,
     EvaluationDatasetMetricConfig,
+    EvaluationDatasetMetricConfigDict,
+    EvaluationInferenceConfigDict,
     EvaluationInferenceConfigSummary,
+    EvaluationModelConfigDict,
     EvaluationModelConfigSummary,
     EvaluationOutputDataConfig,
+    EvaluationOutputDataConfigDict,
     EvaluationPrecomputedInferenceSource,
+    EvaluationPrecomputedInferenceSourceDict,
+    EvaluationPrecomputedRagSourceConfigDict,
     EvaluationPrecomputedRetrieveAndGenerateSourceConfig,
+    EvaluationPrecomputedRetrieveAndGenerateSourceConfigDict,
     EvaluationPrecomputedRetrieveSourceConfig,
+    EvaluationPrecomputedRetrieveSourceConfigDict,
     EvaluationRagConfigSummary,
     EvaluationSummary,
+    EvaluatorModelConfigDict,
     ExportAutomatedReasoningPolicyVersionInput,
+    ExportAutomatedReasoningPolicyVersionInputDict,
     ExportAutomatedReasoningPolicyVersionOutput,
     ExternalSource,
+    ExternalSourceDict,
     ExternalSourcesGenerationConfiguration,
+    ExternalSourcesGenerationConfigurationDict,
     ExternalSourcesRetrieveAndGenerateConfiguration,
+    ExternalSourcesRetrieveAndGenerateConfigurationDict,
     FieldForReranking,
+    FieldForRerankingDict,
     FilterAttribute,
+    FilterAttributeDict,
     FoundationModelDetails,
     FoundationModelLifecycle,
     FoundationModelSummary,
     GenerationConfiguration,
+    GenerationConfigurationDict,
     GetAccountDataRetentionInput,
+    GetAccountDataRetentionInputDict,
     GetAccountDataRetentionOutput,
     GetAdvancedPromptOptimizationJobInput,
+    GetAdvancedPromptOptimizationJobInputDict,
     GetAdvancedPromptOptimizationJobOutput,
     GetAutomatedReasoningPolicyAnnotationsInput,
+    GetAutomatedReasoningPolicyAnnotationsInputDict,
     GetAutomatedReasoningPolicyAnnotationsOutput,
     GetAutomatedReasoningPolicyBuildWorkflowInput,
+    GetAutomatedReasoningPolicyBuildWorkflowInputDict,
     GetAutomatedReasoningPolicyBuildWorkflowOutput,
     GetAutomatedReasoningPolicyBuildWorkflowResultAssetsInput,
+    GetAutomatedReasoningPolicyBuildWorkflowResultAssetsInputDict,
     GetAutomatedReasoningPolicyBuildWorkflowResultAssetsOutput,
     GetAutomatedReasoningPolicyInput,
+    GetAutomatedReasoningPolicyInputDict,
     GetAutomatedReasoningPolicyNextScenarioInput,
+    GetAutomatedReasoningPolicyNextScenarioInputDict,
     GetAutomatedReasoningPolicyNextScenarioOutput,
     GetAutomatedReasoningPolicyOutput,
     GetAutomatedReasoningPolicyTestCaseInput,
+    GetAutomatedReasoningPolicyTestCaseInputDict,
     GetAutomatedReasoningPolicyTestCaseOutput,
     GetAutomatedReasoningPolicyTestResultInput,
+    GetAutomatedReasoningPolicyTestResultInputDict,
     GetAutomatedReasoningPolicyTestResultOutput,
     GetCustomModelDeploymentInput,
+    GetCustomModelDeploymentInputDict,
     GetCustomModelDeploymentOutput,
     GetCustomModelInput,
+    GetCustomModelInputDict,
     GetCustomModelOutput,
     GetEvaluationJobInput,
+    GetEvaluationJobInputDict,
     GetEvaluationJobOutput,
     GetFoundationModelAvailabilityInput,
+    GetFoundationModelAvailabilityInputDict,
     GetFoundationModelAvailabilityOutput,
     GetFoundationModelInput,
+    GetFoundationModelInputDict,
     GetFoundationModelOutput,
     GetGuardrailInput,
+    GetGuardrailInputDict,
     GetGuardrailOutput,
     GetImportedModelInput,
+    GetImportedModelInputDict,
     GetImportedModelOutput,
     GetInferenceProfileInput,
+    GetInferenceProfileInputDict,
     GetInferenceProfileOutput,
     GetMarketplaceModelEndpointInput,
+    GetMarketplaceModelEndpointInputDict,
     GetMarketplaceModelEndpointOutput,
     GetModelCopyJobInput,
+    GetModelCopyJobInputDict,
     GetModelCopyJobOutput,
     GetModelCustomizationJobInput,
+    GetModelCustomizationJobInputDict,
     GetModelCustomizationJobOutput,
     GetModelImportJobInput,
+    GetModelImportJobInputDict,
     GetModelImportJobOutput,
     GetModelInvocationJobInput,
+    GetModelInvocationJobInputDict,
     GetModelInvocationJobOutput,
     GetModelInvocationLoggingConfigurationInput,
+    GetModelInvocationLoggingConfigurationInputDict,
     GetModelInvocationLoggingConfigurationOutput,
     GetPromptRouterInput,
+    GetPromptRouterInputDict,
     GetPromptRouterOutput,
     GetProvisionedModelThroughputInput,
+    GetProvisionedModelThroughputInputDict,
     GetProvisionedModelThroughputOutput,
     GetResourcePolicyInput,
+    GetResourcePolicyInputDict,
     GetResourcePolicyOutput,
     GetUseCaseForModelAccessInput,
+    GetUseCaseForModelAccessInputDict,
     GetUseCaseForModelAccessOutput,
+    GraderConfigDict,
     GuardrailAutomatedReasoningPolicy,
     GuardrailAutomatedReasoningPolicyConfig,
+    GuardrailAutomatedReasoningPolicyConfigDict,
     GuardrailConfiguration,
+    GuardrailConfigurationDict,
     GuardrailContentFilter,
     GuardrailContentFilterConfig,
+    GuardrailContentFilterConfigDict,
     GuardrailContentFiltersTier,
     GuardrailContentFiltersTierConfig,
+    GuardrailContentFiltersTierConfigDict,
     GuardrailContentPolicy,
     GuardrailContentPolicyConfig,
+    GuardrailContentPolicyConfigDict,
     GuardrailContextualGroundingFilter,
     GuardrailContextualGroundingFilterConfig,
+    GuardrailContextualGroundingFilterConfigDict,
     GuardrailContextualGroundingPolicy,
     GuardrailContextualGroundingPolicyConfig,
+    GuardrailContextualGroundingPolicyConfigDict,
     GuardrailContextualGroundingTier,
     GuardrailContextualGroundingTierConfig,
+    GuardrailContextualGroundingTierConfigDict,
     GuardrailCrossRegionConfig,
+    GuardrailCrossRegionConfigDict,
     GuardrailCrossRegionDetails,
     GuardrailManagedWords,
     GuardrailManagedWordsConfig,
+    GuardrailManagedWordsConfigDict,
     GuardrailPiiEntity,
     GuardrailPiiEntityConfig,
+    GuardrailPiiEntityConfigDict,
     GuardrailRegex,
     GuardrailRegexConfig,
+    GuardrailRegexConfigDict,
     GuardrailSensitiveInformationPolicy,
     GuardrailSensitiveInformationPolicyConfig,
+    GuardrailSensitiveInformationPolicyConfigDict,
     GuardrailSummary,
     GuardrailTopic,
     GuardrailTopicConfig,
+    GuardrailTopicConfigDict,
     GuardrailTopicPolicy,
     GuardrailTopicPolicyConfig,
+    GuardrailTopicPolicyConfigDict,
     GuardrailTopicsTier,
     GuardrailTopicsTierConfig,
+    GuardrailTopicsTierConfigDict,
     GuardrailWord,
     GuardrailWordConfig,
+    GuardrailWordConfigDict,
     GuardrailWordPolicy,
     GuardrailWordPolicyConfig,
+    GuardrailWordPolicyConfigDict,
     HumanEvaluationConfig,
+    HumanEvaluationConfigDict,
     HumanEvaluationCustomMetric,
+    HumanEvaluationCustomMetricDict,
     HumanWorkflowConfig,
+    HumanWorkflowConfigDict,
     ImplicitFilterConfiguration,
+    ImplicitFilterConfigurationDict,
     ImportedModelSummary,
     InferenceConfiguration,
+    InferenceConfigurationDict,
     InferenceProfileModel,
+    InferenceProfileModelSourceDict,
     InferenceProfileSummary,
+    InvocationLogSourceDict,
     InvocationLogsConfig,
+    InvocationLogsConfigDict,
     KbInferenceConfig,
+    KbInferenceConfigDict,
+    KnowledgeBaseConfigDict,
     KnowledgeBaseRetrievalConfiguration,
+    KnowledgeBaseRetrievalConfigurationDict,
     KnowledgeBaseRetrieveAndGenerateConfiguration,
+    KnowledgeBaseRetrieveAndGenerateConfigurationDict,
     KnowledgeBaseVectorSearchConfiguration,
+    KnowledgeBaseVectorSearchConfigurationDict,
     LambdaGraderConfig,
+    LambdaGraderConfigDict,
     LegalTerm,
     ListAdvancedPromptOptimizationJobsInput,
+    ListAdvancedPromptOptimizationJobsInputDict,
     ListAdvancedPromptOptimizationJobsOutput,
     ListAutomatedReasoningPoliciesInput,
+    ListAutomatedReasoningPoliciesInputDict,
     ListAutomatedReasoningPoliciesOutput,
     ListAutomatedReasoningPolicyBuildWorkflowsInput,
+    ListAutomatedReasoningPolicyBuildWorkflowsInputDict,
     ListAutomatedReasoningPolicyBuildWorkflowsOutput,
     ListAutomatedReasoningPolicyTestCasesInput,
+    ListAutomatedReasoningPolicyTestCasesInputDict,
     ListAutomatedReasoningPolicyTestCasesOutput,
     ListAutomatedReasoningPolicyTestResultsInput,
+    ListAutomatedReasoningPolicyTestResultsInputDict,
     ListAutomatedReasoningPolicyTestResultsOutput,
     ListCustomModelDeploymentsInput,
+    ListCustomModelDeploymentsInputDict,
     ListCustomModelDeploymentsOutput,
     ListCustomModelsInput,
+    ListCustomModelsInputDict,
     ListCustomModelsOutput,
     ListEnforcedGuardrailsConfigurationInput,
+    ListEnforcedGuardrailsConfigurationInputDict,
     ListEnforcedGuardrailsConfigurationOutput,
     ListEvaluationJobsInput,
+    ListEvaluationJobsInputDict,
     ListEvaluationJobsOutput,
     ListFoundationModelAgreementOffersInput,
+    ListFoundationModelAgreementOffersInputDict,
     ListFoundationModelAgreementOffersOutput,
     ListFoundationModelsInput,
+    ListFoundationModelsInputDict,
     ListFoundationModelsOutput,
     ListGuardrailsInput,
+    ListGuardrailsInputDict,
     ListGuardrailsOutput,
     ListImportedModelsInput,
+    ListImportedModelsInputDict,
     ListImportedModelsOutput,
     ListInferenceProfilesInput,
+    ListInferenceProfilesInputDict,
     ListInferenceProfilesOutput,
     ListMarketplaceModelEndpointsInput,
+    ListMarketplaceModelEndpointsInputDict,
     ListMarketplaceModelEndpointsOutput,
     ListModelCopyJobsInput,
+    ListModelCopyJobsInputDict,
     ListModelCopyJobsOutput,
     ListModelCustomizationJobsInput,
+    ListModelCustomizationJobsInputDict,
     ListModelCustomizationJobsOutput,
     ListModelImportJobsInput,
+    ListModelImportJobsInputDict,
     ListModelImportJobsOutput,
     ListModelInvocationJobsInput,
+    ListModelInvocationJobsInputDict,
     ListModelInvocationJobsOutput,
     ListPromptRoutersInput,
+    ListPromptRoutersInputDict,
     ListPromptRoutersOutput,
     ListProvisionedModelThroughputsInput,
+    ListProvisionedModelThroughputsInputDict,
     ListProvisionedModelThroughputsOutput,
     ListTagsForResourceInput,
+    ListTagsForResourceInputDict,
     ListTagsForResourceOutput,
     LoggingConfig,
+    LoggingConfigDict,
     MarketplaceModelEndpoint,
     MarketplaceModelEndpointSummary,
     MetadataAttributeSchema,
+    MetadataAttributeSchemaDict,
     MetadataConfigurationForReranking,
+    MetadataConfigurationForRerankingDict,
     ModelConfiguration,
+    ModelConfigurationDict,
     ModelCopyJobSummary,
     ModelCustomizationJobSummary,
+    ModelDataSourceDict,
     ModelEnforcement,
+    ModelEnforcementDict,
     ModelImportJobSummary,
+    ModelInvocationJobInputDataConfigDict,
+    ModelInvocationJobOutputDataConfigDict,
     ModelInvocationJobS3InputDataConfig,
+    ModelInvocationJobS3InputDataConfigDict,
     ModelInvocationJobS3OutputDataConfig,
+    ModelInvocationJobS3OutputDataConfigDict,
     ModelInvocationJobSummary,
     ModelPackageArnDataSource,
+    ModelPackageArnDataSourceDict,
     Offer,
     OrchestrationConfiguration,
+    OrchestrationConfigurationDict,
     OutputDataConfig,
+    OutputDataConfigDict,
     PerformanceConfiguration,
+    PerformanceConfigurationDict,
     PricingTerm,
     PromptRouterSummary,
     PromptRouterTargetModel,
+    PromptRouterTargetModelDict,
     PromptTemplate,
+    PromptTemplateDict,
     ProvisionedModelSummary,
     PutAccountDataRetentionInput,
+    PutAccountDataRetentionInputDict,
     PutAccountDataRetentionOutput,
     PutEnforcedGuardrailConfigurationInput,
+    PutEnforcedGuardrailConfigurationInputDict,
     PutEnforcedGuardrailConfigurationOutput,
     PutModelInvocationLoggingConfigurationInput,
+    PutModelInvocationLoggingConfigurationInputDict,
     PutModelInvocationLoggingConfigurationOutput,
     PutResourcePolicyInput,
+    PutResourcePolicyInputDict,
     PutResourcePolicyOutput,
     PutUseCaseForModelAccessInput,
+    PutUseCaseForModelAccessInputDict,
     PutUseCaseForModelAccessOutput,
     QueryTransformationConfiguration,
+    QueryTransformationConfigurationDict,
+    RAGConfigDict,
     RFTConfig,
+    RFTConfigDict,
     RFTHyperParameters,
+    RFTHyperParametersDict,
     RatingScaleItem,
+    RatingScaleItemDict,
+    RatingScaleItemValueDict,
     RegisterMarketplaceModelEndpointInput,
+    RegisterMarketplaceModelEndpointInputDict,
     RegisterMarketplaceModelEndpointOutput,
     RequestMetadataBaseFilters,
+    RequestMetadataBaseFiltersDict,
+    RequestMetadataFiltersDict,
+    RerankingMetadataSelectiveModeConfigurationDict,
+    RetrievalFilterDict,
     RetrieveAndGenerateConfiguration,
+    RetrieveAndGenerateConfigurationDict,
     RetrieveConfig,
+    RetrieveConfigDict,
     RoutingCriteria,
+    RoutingCriteriaDict,
     S3Config,
+    S3ConfigDict,
     S3DataSource,
+    S3DataSourceDict,
     S3ObjectDoc,
+    S3ObjectDocDict,
     SageMakerEndpoint,
+    SageMakerEndpointDict,
     SelectiveContentGuarding,
+    SelectiveContentGuardingDict,
     StartAutomatedReasoningPolicyBuildWorkflowInput,
+    StartAutomatedReasoningPolicyBuildWorkflowInputDict,
     StartAutomatedReasoningPolicyBuildWorkflowOutput,
     StartAutomatedReasoningPolicyTestWorkflowInput,
+    StartAutomatedReasoningPolicyTestWorkflowInputDict,
     StartAutomatedReasoningPolicyTestWorkflowOutput,
     StatusDetails,
     StopAdvancedPromptOptimizationJobInput,
+    StopAdvancedPromptOptimizationJobInputDict,
     StopAdvancedPromptOptimizationJobOutput,
     StopEvaluationJobInput,
+    StopEvaluationJobInputDict,
     StopEvaluationJobOutput,
     StopModelCustomizationJobInput,
+    StopModelCustomizationJobInputDict,
     StopModelCustomizationJobOutput,
     StopModelInvocationJobInput,
+    StopModelInvocationJobInputDict,
     StopModelInvocationJobOutput,
     SupportTerm,
     Tag,
+    TagDict,
     TagResourceInput,
+    TagResourceInputDict,
     TagResourceOutput,
     TeacherModelConfig,
+    TeacherModelConfigDict,
     TermDetails,
     TextInferenceConfig,
+    TextInferenceConfigDict,
     TrainingDataConfig,
+    TrainingDataConfigDict,
     TrainingDetails,
     TrainingMetrics,
     UntagResourceInput,
+    UntagResourceInputDict,
     UntagResourceOutput,
     UpdateAutomatedReasoningPolicyAnnotationsInput,
+    UpdateAutomatedReasoningPolicyAnnotationsInputDict,
     UpdateAutomatedReasoningPolicyAnnotationsOutput,
     UpdateAutomatedReasoningPolicyInput,
+    UpdateAutomatedReasoningPolicyInputDict,
     UpdateAutomatedReasoningPolicyOutput,
     UpdateAutomatedReasoningPolicyTestCaseInput,
+    UpdateAutomatedReasoningPolicyTestCaseInputDict,
     UpdateAutomatedReasoningPolicyTestCaseOutput,
     UpdateCustomModelDeploymentInput,
+    UpdateCustomModelDeploymentInputDict,
     UpdateCustomModelDeploymentOutput,
     UpdateGuardrailInput,
+    UpdateGuardrailInputDict,
     UpdateGuardrailOutput,
     UpdateMarketplaceModelEndpointInput,
+    UpdateMarketplaceModelEndpointInputDict,
     UpdateMarketplaceModelEndpointOutput,
     UpdateProvisionedModelThroughputInput,
+    UpdateProvisionedModelThroughputInputDict,
     UpdateProvisionedModelThroughputOutput,
     ValidationDataConfig,
+    ValidationDataConfigDict,
     ValidationDetails,
     Validator,
+    ValidatorDict,
     ValidatorMetric,
     ValidityTerm,
     VectorSearchBedrockRerankingConfiguration,
+    VectorSearchBedrockRerankingConfigurationDict,
     VectorSearchBedrockRerankingModelConfiguration,
+    VectorSearchBedrockRerankingModelConfigurationDict,
     VectorSearchRerankingConfiguration,
+    VectorSearchRerankingConfigurationDict,
     VpcConfig,
+    VpcConfigDict,
 )
 
 
-# Static type fixture: pyright over this validates models.pyi.
-# Not executed as a test; it only needs to type-check.
+# Static type fixture: pyright over this validates models.pyi and the
+# client method signatures. Not executed as a test; it only needs to
+# type-check.
 
 _: Any = ...
 
@@ -1128,3 +1380,2168 @@ VectorSearchBedrockRerankingConfiguration(model_configuration=_)
 VectorSearchBedrockRerankingModelConfiguration(model_arn=_)
 VectorSearchRerankingConfiguration(type=_)
 VpcConfig(subnet_ids=_, security_group_ids=_)
+_params_0: AccountEnforcedGuardrailInferenceInputConfigurationDict = {
+    "guardrail_identifier": _,
+    "guardrail_version": _,
+}
+_params_1: AdvancedPromptOptimizationInputConfigDict = {"s3_uri": _}
+_params_2: AdvancedPromptOptimizationOutputConfigDict = {"s3_uri": _}
+_params_3: AutomatedEvaluationConfigDict = {"dataset_metric_configs": _}
+_params_4: AutomatedEvaluationCustomMetricConfigDict = {
+    "custom_metrics": _,
+    "evaluator_model_config": _,
+}
+_params_5: AutomatedEvaluationCustomMetricSourceDict = {"custom_metric_definition": _}
+_params_6: AutomatedReasoningPolicyAddRuleAnnotationDict = {"expression": _}
+_params_7: AutomatedReasoningPolicyAddRuleFromNaturalLanguageAnnotationDict = {
+    "natural_language": _
+}
+_params_8: AutomatedReasoningPolicyAddTypeAnnotationDict = {
+    "name": _,
+    "description": _,
+    "values": _,
+}
+_params_9: AutomatedReasoningPolicyAddTypeValueDict = {"value": _}
+_params_10: AutomatedReasoningPolicyAddVariableAnnotationDict = {
+    "name": _,
+    "type": _,
+    "description": _,
+}
+_params_11: AutomatedReasoningPolicyAnnotationDict = {"add_type": _}
+_params_12: AutomatedReasoningPolicyBuildWorkflowDocumentDict = {
+    "document": _,
+    "document_content_type": _,
+    "document_name": _,
+}
+_params_13: AutomatedReasoningPolicyBuildWorkflowRepairContentDict = {"annotations": _}
+_params_14: AutomatedReasoningPolicyBuildWorkflowSourceDict = {}
+_params_15: AutomatedReasoningPolicyDefinitionDict = {}
+_params_16: AutomatedReasoningPolicyDefinitionRuleDict = {"id": _, "expression": _}
+_params_17: AutomatedReasoningPolicyDefinitionTypeDict = {"name": _, "values": _}
+_params_18: AutomatedReasoningPolicyDefinitionTypeValueDict = {"value": _}
+_params_19: AutomatedReasoningPolicyDefinitionVariableDict = {
+    "name": _,
+    "type": _,
+    "description": _,
+}
+_params_20: AutomatedReasoningPolicyDeleteRuleAnnotationDict = {"rule_id": _}
+_params_21: AutomatedReasoningPolicyDeleteTypeAnnotationDict = {"name": _}
+_params_22: AutomatedReasoningPolicyDeleteTypeValueDict = {"value": _}
+_params_23: AutomatedReasoningPolicyDeleteVariableAnnotationDict = {"name": _}
+_params_24: AutomatedReasoningPolicyGenerateFidelityReportContentDict = {"documents": _}
+_params_25: AutomatedReasoningPolicyIngestContentAnnotationDict = {"content": _}
+_params_26: AutomatedReasoningPolicyIterativeRefinementContentDict = {"documents": _}
+_params_27: AutomatedReasoningPolicyTypeValueAnnotationDict = {"add_type_value": _}
+_params_28: AutomatedReasoningPolicyUpdateFromRuleFeedbackAnnotationDict = {
+    "feedback": _
+}
+_params_29: AutomatedReasoningPolicyUpdateFromScenarioFeedbackAnnotationDict = {
+    "scenario_expression": _
+}
+_params_30: AutomatedReasoningPolicyUpdateRuleAnnotationDict = {
+    "rule_id": _,
+    "expression": _,
+}
+_params_31: AutomatedReasoningPolicyUpdateTypeAnnotationDict = {"name": _, "values": _}
+_params_32: AutomatedReasoningPolicyUpdateTypeValueDict = {"value": _}
+_params_33: AutomatedReasoningPolicyUpdateVariableAnnotationDict = {"name": _}
+_params_34: AutomatedReasoningPolicyWorkflowTypeContentDict = {"documents": _}
+_params_35: BatchDeleteAdvancedPromptOptimizationJobInputDict = {"job_identifiers": _}
+_params_36: BatchDeleteEvaluationJobInputDict = {"job_identifiers": _}
+_params_37: BedrockEvaluatorModelDict = {"model_identifier": _}
+_params_38: ByteContentDocDict = {"identifier": _, "content_type": _, "data": _}
+_params_39: CancelAutomatedReasoningPolicyBuildWorkflowInputDict = {
+    "policy_arn": _,
+    "build_workflow_id": _,
+}
+_params_40: CloudWatchConfigDict = {"log_group_name": _, "role_arn": _}
+_params_41: CreateAdvancedPromptOptimizationJobInputDict = {
+    "job_name": _,
+    "input_config": _,
+    "output_config": _,
+    "model_configurations": _,
+}
+_params_42: CreateAutomatedReasoningPolicyInputDict = {"name": _}
+_params_43: CreateAutomatedReasoningPolicyTestCaseInputDict = {
+    "policy_arn": _,
+    "guard_content": _,
+    "expected_aggregated_findings_result": _,
+}
+_params_44: CreateAutomatedReasoningPolicyVersionInputDict = {
+    "policy_arn": _,
+    "last_updated_definition_hash": _,
+}
+_params_45: CreateCustomModelDeploymentInputDict = {
+    "model_deployment_name": _,
+    "model_arn": _,
+}
+_params_46: CreateCustomModelInputDict = {"model_name": _}
+_params_47: CreateEvaluationJobInputDict = {
+    "job_name": _,
+    "role_arn": _,
+    "evaluation_config": _,
+    "inference_config": _,
+    "output_data_config": _,
+}
+_params_48: CreateFoundationModelAgreementInputDict = {"offer_token": _, "model_id": _}
+_params_49: CreateGuardrailInputDict = {
+    "name": _,
+    "blocked_input_messaging": _,
+    "blocked_outputs_messaging": _,
+}
+_params_50: CreateGuardrailVersionInputDict = {"guardrail_identifier": _}
+_params_51: CreateInferenceProfileInputDict = {
+    "inference_profile_name": _,
+    "model_source": _,
+}
+_params_52: CreateMarketplaceModelEndpointInputDict = {
+    "model_source_identifier": _,
+    "endpoint_config": _,
+    "endpoint_name": _,
+}
+_params_53: CreateModelCopyJobInputDict = {
+    "source_model_arn": _,
+    "target_model_name": _,
+}
+_params_54: CreateModelCustomizationJobInputDict = {
+    "job_name": _,
+    "custom_model_name": _,
+    "role_arn": _,
+    "base_model_identifier": _,
+    "training_data_config": _,
+    "output_data_config": _,
+}
+_params_55: CreateModelImportJobInputDict = {
+    "job_name": _,
+    "imported_model_name": _,
+    "role_arn": _,
+    "model_data_source": _,
+}
+_params_56: CreateModelInvocationJobInputDict = {
+    "job_name": _,
+    "role_arn": _,
+    "model_id": _,
+    "input_data_config": _,
+    "output_data_config": _,
+}
+_params_57: CreatePromptRouterInputDict = {
+    "prompt_router_name": _,
+    "models": _,
+    "routing_criteria": _,
+    "fallback_model": _,
+}
+_params_58: CreateProvisionedModelThroughputInputDict = {
+    "model_units": _,
+    "provisioned_model_name": _,
+    "model_id": _,
+}
+_params_59: CustomizationConfigDict = {"distillation_config": _}
+_params_60: CustomMetricBedrockEvaluatorModelDict = {"model_identifier": _}
+_params_61: CustomMetricDefinitionDict = {"name": _, "instructions": _}
+_params_62: CustomMetricEvaluatorModelConfigDict = {"bedrock_evaluator_models": _}
+_params_63: CustomModelDataSourceDict = {"model_package_arn_data_source": _}
+_params_64: DeleteAutomatedReasoningPolicyBuildWorkflowInputDict = {
+    "policy_arn": _,
+    "build_workflow_id": _,
+    "last_updated_at": _,
+}
+_params_65: DeleteAutomatedReasoningPolicyInputDict = {"policy_arn": _}
+_params_66: DeleteAutomatedReasoningPolicyTestCaseInputDict = {
+    "policy_arn": _,
+    "test_case_id": _,
+    "last_updated_at": _,
+}
+_params_67: DeleteCustomModelDeploymentInputDict = {
+    "custom_model_deployment_identifier": _
+}
+_params_68: DeleteCustomModelInputDict = {"model_identifier": _}
+_params_69: DeleteEnforcedGuardrailConfigurationInputDict = {"config_id": _}
+_params_70: DeleteFoundationModelAgreementInputDict = {"model_id": _}
+_params_71: DeleteGuardrailInputDict = {"guardrail_identifier": _}
+_params_72: DeleteImportedModelInputDict = {"model_identifier": _}
+_params_73: DeleteInferenceProfileInputDict = {"inference_profile_identifier": _}
+_params_74: DeleteMarketplaceModelEndpointInputDict = {"endpoint_arn": _}
+_params_75: DeleteModelInvocationLoggingConfigurationInputDict = {}
+_params_76: DeletePromptRouterInputDict = {"prompt_router_arn": _}
+_params_77: DeleteProvisionedModelThroughputInputDict = {"provisioned_model_id": _}
+_params_78: DeleteResourcePolicyInputDict = {"resource_arn": _}
+_params_79: DeregisterMarketplaceModelEndpointInputDict = {"endpoint_arn": _}
+_params_80: DistillationConfigDict = {"teacher_model_config": _}
+_params_81: EndpointConfigDict = {"sage_maker": _}
+_params_82: EvaluationBedrockModelDict = {"model_identifier": _}
+_params_83: EvaluationConfigDict = {"automated": _}
+_params_84: EvaluationDatasetDict = {"name": _}
+_params_85: EvaluationDatasetLocationDict = {"s3_uri": _}
+_params_86: EvaluationDatasetMetricConfigDict = {
+    "task_type": _,
+    "dataset": _,
+    "metric_names": _,
+}
+_params_87: EvaluationInferenceConfigDict = {"models": _}
+_params_88: EvaluationModelConfigDict = {"bedrock_model": _}
+_params_89: EvaluationOutputDataConfigDict = {"s3_uri": _}
+_params_90: EvaluationPrecomputedInferenceSourceDict = {
+    "inference_source_identifier": _
+}
+_params_91: EvaluationPrecomputedRagSourceConfigDict = {"retrieve_source_config": _}
+_params_92: EvaluationPrecomputedRetrieveAndGenerateSourceConfigDict = {
+    "rag_source_identifier": _
+}
+_params_93: EvaluationPrecomputedRetrieveSourceConfigDict = {"rag_source_identifier": _}
+_params_94: EvaluatorModelConfigDict = {"bedrock_evaluator_models": _}
+_params_95: ExportAutomatedReasoningPolicyVersionInputDict = {"policy_arn": _}
+_params_96: ExternalSourceDict = {"source_type": _}
+_params_97: ExternalSourcesGenerationConfigurationDict = {}
+_params_98: ExternalSourcesRetrieveAndGenerateConfigurationDict = {
+    "model_arn": _,
+    "sources": _,
+}
+_params_99: FieldForRerankingDict = {"field_name": _}
+_params_100: FilterAttributeDict = {"key": _, "value": _}
+_params_101: GenerationConfigurationDict = {}
+_params_102: GetAccountDataRetentionInputDict = {}
+_params_103: GetAdvancedPromptOptimizationJobInputDict = {"job_identifier": _}
+_params_104: GetAutomatedReasoningPolicyAnnotationsInputDict = {
+    "policy_arn": _,
+    "build_workflow_id": _,
+}
+_params_105: GetAutomatedReasoningPolicyBuildWorkflowInputDict = {
+    "policy_arn": _,
+    "build_workflow_id": _,
+}
+_params_106: GetAutomatedReasoningPolicyBuildWorkflowResultAssetsInputDict = {
+    "policy_arn": _,
+    "build_workflow_id": _,
+    "asset_type": _,
+}
+_params_107: GetAutomatedReasoningPolicyInputDict = {"policy_arn": _}
+_params_108: GetAutomatedReasoningPolicyNextScenarioInputDict = {
+    "policy_arn": _,
+    "build_workflow_id": _,
+}
+_params_109: GetAutomatedReasoningPolicyTestCaseInputDict = {
+    "policy_arn": _,
+    "test_case_id": _,
+}
+_params_110: GetAutomatedReasoningPolicyTestResultInputDict = {
+    "policy_arn": _,
+    "build_workflow_id": _,
+    "test_case_id": _,
+}
+_params_111: GetCustomModelDeploymentInputDict = {
+    "custom_model_deployment_identifier": _
+}
+_params_112: GetCustomModelInputDict = {"model_identifier": _}
+_params_113: GetEvaluationJobInputDict = {"job_identifier": _}
+_params_114: GetFoundationModelAvailabilityInputDict = {"model_id": _}
+_params_115: GetFoundationModelInputDict = {"model_identifier": _}
+_params_116: GetGuardrailInputDict = {"guardrail_identifier": _}
+_params_117: GetImportedModelInputDict = {"model_identifier": _}
+_params_118: GetInferenceProfileInputDict = {"inference_profile_identifier": _}
+_params_119: GetMarketplaceModelEndpointInputDict = {"endpoint_arn": _}
+_params_120: GetModelCopyJobInputDict = {"job_arn": _}
+_params_121: GetModelCustomizationJobInputDict = {"job_identifier": _}
+_params_122: GetModelImportJobInputDict = {"job_identifier": _}
+_params_123: GetModelInvocationJobInputDict = {"job_identifier": _}
+_params_124: GetModelInvocationLoggingConfigurationInputDict = {}
+_params_125: GetPromptRouterInputDict = {"prompt_router_arn": _}
+_params_126: GetProvisionedModelThroughputInputDict = {"provisioned_model_id": _}
+_params_127: GetResourcePolicyInputDict = {"resource_arn": _}
+_params_128: GetUseCaseForModelAccessInputDict = {}
+_params_129: GraderConfigDict = {"lambda_grader": _}
+_params_130: GuardrailAutomatedReasoningPolicyConfigDict = {"policies": _}
+_params_131: GuardrailConfigurationDict = {"guardrail_id": _, "guardrail_version": _}
+_params_132: GuardrailContentFilterConfigDict = {
+    "type": _,
+    "input_strength": _,
+    "output_strength": _,
+}
+_params_133: GuardrailContentFiltersTierConfigDict = {"tier_name": _}
+_params_134: GuardrailContentPolicyConfigDict = {"filters_config": _}
+_params_135: GuardrailContextualGroundingFilterConfigDict = {"type": _, "threshold": _}
+_params_136: GuardrailContextualGroundingPolicyConfigDict = {"filters_config": _}
+_params_137: GuardrailContextualGroundingTierConfigDict = {"tier_name": _}
+_params_138: GuardrailCrossRegionConfigDict = {"guardrail_profile_identifier": _}
+_params_139: GuardrailManagedWordsConfigDict = {"type": _}
+_params_140: GuardrailPiiEntityConfigDict = {"type": _, "action": _}
+_params_141: GuardrailRegexConfigDict = {"name": _, "pattern": _, "action": _}
+_params_142: GuardrailSensitiveInformationPolicyConfigDict = {}
+_params_143: GuardrailTopicConfigDict = {"name": _, "definition": _, "type": _}
+_params_144: GuardrailTopicPolicyConfigDict = {"topics_config": _}
+_params_145: GuardrailTopicsTierConfigDict = {"tier_name": _}
+_params_146: GuardrailWordConfigDict = {"text": _}
+_params_147: GuardrailWordPolicyConfigDict = {}
+_params_148: HumanEvaluationConfigDict = {"dataset_metric_configs": _}
+_params_149: HumanEvaluationCustomMetricDict = {"name": _, "rating_method": _}
+_params_150: HumanWorkflowConfigDict = {"flow_definition_arn": _}
+_params_151: ImplicitFilterConfigurationDict = {
+    "metadata_attributes": _,
+    "model_arn": _,
+}
+_params_152: InferenceConfigurationDict = {}
+_params_153: InferenceProfileModelSourceDict = {"copy_from": _}
+_params_154: InvocationLogsConfigDict = {"invocation_log_source": _}
+_params_155: InvocationLogSourceDict = {"s3_uri": _}
+_params_156: KbInferenceConfigDict = {}
+_params_157: KnowledgeBaseConfigDict = {"retrieve_config": _}
+_params_158: KnowledgeBaseRetrievalConfigurationDict = {
+    "vector_search_configuration": _
+}
+_params_159: KnowledgeBaseRetrieveAndGenerateConfigurationDict = {
+    "knowledge_base_id": _,
+    "model_arn": _,
+}
+_params_160: KnowledgeBaseVectorSearchConfigurationDict = {}
+_params_161: LambdaGraderConfigDict = {"lambda_arn": _}
+_params_162: ListAdvancedPromptOptimizationJobsInputDict = {}
+_params_163: ListAutomatedReasoningPoliciesInputDict = {}
+_params_164: ListAutomatedReasoningPolicyBuildWorkflowsInputDict = {"policy_arn": _}
+_params_165: ListAutomatedReasoningPolicyTestCasesInputDict = {"policy_arn": _}
+_params_166: ListAutomatedReasoningPolicyTestResultsInputDict = {
+    "policy_arn": _,
+    "build_workflow_id": _,
+}
+_params_167: ListCustomModelDeploymentsInputDict = {}
+_params_168: ListCustomModelsInputDict = {}
+_params_169: ListEnforcedGuardrailsConfigurationInputDict = {}
+_params_170: ListEvaluationJobsInputDict = {}
+_params_171: ListFoundationModelAgreementOffersInputDict = {"model_id": _}
+_params_172: ListFoundationModelsInputDict = {}
+_params_173: ListGuardrailsInputDict = {}
+_params_174: ListImportedModelsInputDict = {}
+_params_175: ListInferenceProfilesInputDict = {}
+_params_176: ListMarketplaceModelEndpointsInputDict = {}
+_params_177: ListModelCopyJobsInputDict = {}
+_params_178: ListModelCustomizationJobsInputDict = {}
+_params_179: ListModelImportJobsInputDict = {}
+_params_180: ListModelInvocationJobsInputDict = {}
+_params_181: ListPromptRoutersInputDict = {}
+_params_182: ListProvisionedModelThroughputsInputDict = {}
+_params_183: ListTagsForResourceInputDict = {"resource_arn": _}
+_params_184: LoggingConfigDict = {}
+_params_185: MetadataAttributeSchemaDict = {"key": _, "type": _, "description": _}
+_params_186: MetadataConfigurationForRerankingDict = {"selection_mode": _}
+_params_187: ModelConfigurationDict = {"model_id": _}
+_params_188: ModelDataSourceDict = {"s3_data_source": _}
+_params_189: ModelEnforcementDict = {"included_models": _, "excluded_models": _}
+_params_190: ModelInvocationJobInputDataConfigDict = {"s3_input_data_config": _}
+_params_191: ModelInvocationJobOutputDataConfigDict = {"s3_output_data_config": _}
+_params_192: ModelInvocationJobS3InputDataConfigDict = {"s3_uri": _}
+_params_193: ModelInvocationJobS3OutputDataConfigDict = {"s3_uri": _}
+_params_194: ModelPackageArnDataSourceDict = {"model_package_arn": _}
+_params_195: OrchestrationConfigurationDict = {"query_transformation_configuration": _}
+_params_196: OutputDataConfigDict = {"s3_uri": _}
+_params_197: PerformanceConfigurationDict = {}
+_params_198: PromptRouterTargetModelDict = {"model_arn": _}
+_params_199: PromptTemplateDict = {}
+_params_200: PutAccountDataRetentionInputDict = {"mode": _}
+_params_201: PutEnforcedGuardrailConfigurationInputDict = {
+    "guardrail_inference_config": _
+}
+_params_202: PutModelInvocationLoggingConfigurationInputDict = {"logging_config": _}
+_params_203: PutResourcePolicyInputDict = {"resource_arn": _, "resource_policy": _}
+_params_204: PutUseCaseForModelAccessInputDict = {"form_data": _}
+_params_205: QueryTransformationConfigurationDict = {"type": _}
+_params_206: RAGConfigDict = {"knowledge_base_config": _}
+_params_207: RatingScaleItemDict = {"definition": _, "value": _}
+_params_208: RatingScaleItemValueDict = {"string_value": _}
+_params_209: RegisterMarketplaceModelEndpointInputDict = {
+    "endpoint_identifier": _,
+    "model_source_identifier": _,
+}
+_params_210: RequestMetadataBaseFiltersDict = {}
+_params_211: RequestMetadataFiltersDict = {"equals": _}
+_params_212: RerankingMetadataSelectiveModeConfigurationDict = {"fields_to_include": _}
+_params_213: RetrievalFilterDict = {"equals": _}
+_params_214: RetrieveAndGenerateConfigurationDict = {"type": _}
+_params_215: RetrieveConfigDict = {
+    "knowledge_base_id": _,
+    "knowledge_base_retrieval_configuration": _,
+}
+_params_216: RFTConfigDict = {}
+_params_217: RFTHyperParametersDict = {}
+_params_218: RoutingCriteriaDict = {"response_quality_difference": _}
+_params_219: S3ConfigDict = {"bucket_name": _}
+_params_220: S3DataSourceDict = {"s3_uri": _}
+_params_221: S3ObjectDocDict = {"uri": _}
+_params_222: SageMakerEndpointDict = {
+    "initial_instance_count": _,
+    "instance_type": _,
+    "execution_role": _,
+}
+_params_223: SelectiveContentGuardingDict = {}
+_params_224: StartAutomatedReasoningPolicyBuildWorkflowInputDict = {
+    "policy_arn": _,
+    "build_workflow_type": _,
+    "source_content": _,
+}
+_params_225: StartAutomatedReasoningPolicyTestWorkflowInputDict = {
+    "policy_arn": _,
+    "build_workflow_id": _,
+}
+_params_226: StopAdvancedPromptOptimizationJobInputDict = {"job_identifier": _}
+_params_227: StopEvaluationJobInputDict = {"job_identifier": _}
+_params_228: StopModelCustomizationJobInputDict = {"job_identifier": _}
+_params_229: StopModelInvocationJobInputDict = {"job_identifier": _}
+_params_230: TagDict = {"key": _, "value": _}
+_params_231: TagResourceInputDict = {"resource_arn": _, "tags": _}
+_params_232: TeacherModelConfigDict = {"teacher_model_identifier": _}
+_params_233: TextInferenceConfigDict = {}
+_params_234: TrainingDataConfigDict = {}
+_params_235: UntagResourceInputDict = {"resource_arn": _, "tag_keys": _}
+_params_236: UpdateAutomatedReasoningPolicyAnnotationsInputDict = {
+    "policy_arn": _,
+    "build_workflow_id": _,
+    "annotations": _,
+    "last_updated_annotation_set_hash": _,
+}
+_params_237: UpdateAutomatedReasoningPolicyInputDict = {
+    "policy_arn": _,
+    "policy_definition": _,
+}
+_params_238: UpdateAutomatedReasoningPolicyTestCaseInputDict = {
+    "policy_arn": _,
+    "test_case_id": _,
+    "guard_content": _,
+    "last_updated_at": _,
+    "expected_aggregated_findings_result": _,
+}
+_params_239: UpdateCustomModelDeploymentInputDict = {
+    "model_arn": _,
+    "custom_model_deployment_identifier": _,
+}
+_params_240: UpdateGuardrailInputDict = {
+    "guardrail_identifier": _,
+    "name": _,
+    "blocked_input_messaging": _,
+    "blocked_outputs_messaging": _,
+}
+_params_241: UpdateMarketplaceModelEndpointInputDict = {
+    "endpoint_arn": _,
+    "endpoint_config": _,
+}
+_params_242: UpdateProvisionedModelThroughputInputDict = {"provisioned_model_id": _}
+_params_243: ValidationDataConfigDict = {"validators": _}
+_params_244: ValidatorDict = {"s3_uri": _}
+_params_245: VectorSearchBedrockRerankingConfigurationDict = {"model_configuration": _}
+_params_246: VectorSearchBedrockRerankingModelConfigurationDict = {"model_arn": _}
+_params_247: VectorSearchRerankingConfigurationDict = {"type": _}
+_params_248: VpcConfigDict = {"subnet_ids": _, "security_group_ids": _}
+
+
+def _request[T](form: type[T]) -> T:
+    raise NotImplementedError
+
+
+async def check_async_calls(client: AsyncBedrockClient) -> None:
+    pass
+    await client.batch_delete_advanced_prompt_optimization_job(job_identifiers=_)
+    await client.batch_delete_advanced_prompt_optimization_job(
+        **_request(BatchDeleteAdvancedPromptOptimizationJobInputDict)
+    )
+    await client.batch_delete_advanced_prompt_optimization_job(
+        _request(BatchDeleteAdvancedPromptOptimizationJobInput)
+    )
+    await client.batch_delete_advanced_prompt_optimization_job(
+        _request(BatchDeleteAdvancedPromptOptimizationJobInputDict)
+    )
+    await client.batch_delete_evaluation_job(job_identifiers=_)
+    await client.batch_delete_evaluation_job(
+        **_request(BatchDeleteEvaluationJobInputDict)
+    )
+    await client.batch_delete_evaluation_job(_request(BatchDeleteEvaluationJobInput))
+    await client.batch_delete_evaluation_job(
+        _request(BatchDeleteEvaluationJobInputDict)
+    )
+    await client.cancel_automated_reasoning_policy_build_workflow(
+        policy_arn=_, build_workflow_id=_
+    )
+    await client.cancel_automated_reasoning_policy_build_workflow(
+        **_request(CancelAutomatedReasoningPolicyBuildWorkflowInputDict)
+    )
+    await client.cancel_automated_reasoning_policy_build_workflow(
+        _request(CancelAutomatedReasoningPolicyBuildWorkflowInput)
+    )
+    await client.cancel_automated_reasoning_policy_build_workflow(
+        _request(CancelAutomatedReasoningPolicyBuildWorkflowInputDict)
+    )
+    await client.create_advanced_prompt_optimization_job(
+        job_name=_, input_config=_, output_config=_, model_configurations=_
+    )
+    await client.create_advanced_prompt_optimization_job(
+        **_request(CreateAdvancedPromptOptimizationJobInputDict)
+    )
+    await client.create_advanced_prompt_optimization_job(
+        _request(CreateAdvancedPromptOptimizationJobInput)
+    )
+    await client.create_advanced_prompt_optimization_job(
+        _request(CreateAdvancedPromptOptimizationJobInputDict)
+    )
+    await client.create_automated_reasoning_policy(name=_)
+    await client.create_automated_reasoning_policy(
+        **_request(CreateAutomatedReasoningPolicyInputDict)
+    )
+    await client.create_automated_reasoning_policy(
+        _request(CreateAutomatedReasoningPolicyInput)
+    )
+    await client.create_automated_reasoning_policy(
+        _request(CreateAutomatedReasoningPolicyInputDict)
+    )
+    await client.create_automated_reasoning_policy_test_case(
+        policy_arn=_, guard_content=_, expected_aggregated_findings_result=_
+    )
+    await client.create_automated_reasoning_policy_test_case(
+        **_request(CreateAutomatedReasoningPolicyTestCaseInputDict)
+    )
+    await client.create_automated_reasoning_policy_test_case(
+        _request(CreateAutomatedReasoningPolicyTestCaseInput)
+    )
+    await client.create_automated_reasoning_policy_test_case(
+        _request(CreateAutomatedReasoningPolicyTestCaseInputDict)
+    )
+    await client.create_automated_reasoning_policy_version(
+        policy_arn=_, last_updated_definition_hash=_
+    )
+    await client.create_automated_reasoning_policy_version(
+        **_request(CreateAutomatedReasoningPolicyVersionInputDict)
+    )
+    await client.create_automated_reasoning_policy_version(
+        _request(CreateAutomatedReasoningPolicyVersionInput)
+    )
+    await client.create_automated_reasoning_policy_version(
+        _request(CreateAutomatedReasoningPolicyVersionInputDict)
+    )
+    await client.create_custom_model(model_name=_)
+    await client.create_custom_model(**_request(CreateCustomModelInputDict))
+    await client.create_custom_model(_request(CreateCustomModelInput))
+    await client.create_custom_model(_request(CreateCustomModelInputDict))
+    await client.create_custom_model_deployment(model_deployment_name=_, model_arn=_)
+    await client.create_custom_model_deployment(
+        **_request(CreateCustomModelDeploymentInputDict)
+    )
+    await client.create_custom_model_deployment(
+        _request(CreateCustomModelDeploymentInput)
+    )
+    await client.create_custom_model_deployment(
+        _request(CreateCustomModelDeploymentInputDict)
+    )
+    await client.create_evaluation_job(
+        job_name=_,
+        role_arn=_,
+        evaluation_config=_,
+        inference_config=_,
+        output_data_config=_,
+    )
+    await client.create_evaluation_job(**_request(CreateEvaluationJobInputDict))
+    await client.create_evaluation_job(_request(CreateEvaluationJobInput))
+    await client.create_evaluation_job(_request(CreateEvaluationJobInputDict))
+    await client.create_foundation_model_agreement(offer_token=_, model_id=_)
+    await client.create_foundation_model_agreement(
+        **_request(CreateFoundationModelAgreementInputDict)
+    )
+    await client.create_foundation_model_agreement(
+        _request(CreateFoundationModelAgreementInput)
+    )
+    await client.create_foundation_model_agreement(
+        _request(CreateFoundationModelAgreementInputDict)
+    )
+    await client.create_guardrail(
+        name=_, blocked_input_messaging=_, blocked_outputs_messaging=_
+    )
+    await client.create_guardrail(**_request(CreateGuardrailInputDict))
+    await client.create_guardrail(_request(CreateGuardrailInput))
+    await client.create_guardrail(_request(CreateGuardrailInputDict))
+    await client.create_guardrail_version(guardrail_identifier=_)
+    await client.create_guardrail_version(**_request(CreateGuardrailVersionInputDict))
+    await client.create_guardrail_version(_request(CreateGuardrailVersionInput))
+    await client.create_guardrail_version(_request(CreateGuardrailVersionInputDict))
+    await client.create_inference_profile(inference_profile_name=_, model_source=_)
+    await client.create_inference_profile(**_request(CreateInferenceProfileInputDict))
+    await client.create_inference_profile(_request(CreateInferenceProfileInput))
+    await client.create_inference_profile(_request(CreateInferenceProfileInputDict))
+    await client.create_marketplace_model_endpoint(
+        model_source_identifier=_, endpoint_config=_, endpoint_name=_
+    )
+    await client.create_marketplace_model_endpoint(
+        **_request(CreateMarketplaceModelEndpointInputDict)
+    )
+    await client.create_marketplace_model_endpoint(
+        _request(CreateMarketplaceModelEndpointInput)
+    )
+    await client.create_marketplace_model_endpoint(
+        _request(CreateMarketplaceModelEndpointInputDict)
+    )
+    await client.create_model_copy_job(source_model_arn=_, target_model_name=_)
+    await client.create_model_copy_job(**_request(CreateModelCopyJobInputDict))
+    await client.create_model_copy_job(_request(CreateModelCopyJobInput))
+    await client.create_model_copy_job(_request(CreateModelCopyJobInputDict))
+    await client.create_model_customization_job(
+        job_name=_,
+        custom_model_name=_,
+        role_arn=_,
+        base_model_identifier=_,
+        training_data_config=_,
+        output_data_config=_,
+    )
+    await client.create_model_customization_job(
+        **_request(CreateModelCustomizationJobInputDict)
+    )
+    await client.create_model_customization_job(
+        _request(CreateModelCustomizationJobInput)
+    )
+    await client.create_model_customization_job(
+        _request(CreateModelCustomizationJobInputDict)
+    )
+    await client.create_model_import_job(
+        job_name=_, imported_model_name=_, role_arn=_, model_data_source=_
+    )
+    await client.create_model_import_job(**_request(CreateModelImportJobInputDict))
+    await client.create_model_import_job(_request(CreateModelImportJobInput))
+    await client.create_model_import_job(_request(CreateModelImportJobInputDict))
+    await client.create_model_invocation_job(
+        job_name=_, role_arn=_, model_id=_, input_data_config=_, output_data_config=_
+    )
+    await client.create_model_invocation_job(
+        **_request(CreateModelInvocationJobInputDict)
+    )
+    await client.create_model_invocation_job(_request(CreateModelInvocationJobInput))
+    await client.create_model_invocation_job(
+        _request(CreateModelInvocationJobInputDict)
+    )
+    await client.create_prompt_router(
+        prompt_router_name=_, models=_, routing_criteria=_, fallback_model=_
+    )
+    await client.create_prompt_router(**_request(CreatePromptRouterInputDict))
+    await client.create_prompt_router(_request(CreatePromptRouterInput))
+    await client.create_prompt_router(_request(CreatePromptRouterInputDict))
+    await client.create_provisioned_model_throughput(
+        model_units=_, provisioned_model_name=_, model_id=_
+    )
+    await client.create_provisioned_model_throughput(
+        **_request(CreateProvisionedModelThroughputInputDict)
+    )
+    await client.create_provisioned_model_throughput(
+        _request(CreateProvisionedModelThroughputInput)
+    )
+    await client.create_provisioned_model_throughput(
+        _request(CreateProvisionedModelThroughputInputDict)
+    )
+    await client.delete_automated_reasoning_policy(policy_arn=_)
+    await client.delete_automated_reasoning_policy(
+        **_request(DeleteAutomatedReasoningPolicyInputDict)
+    )
+    await client.delete_automated_reasoning_policy(
+        _request(DeleteAutomatedReasoningPolicyInput)
+    )
+    await client.delete_automated_reasoning_policy(
+        _request(DeleteAutomatedReasoningPolicyInputDict)
+    )
+    await client.delete_automated_reasoning_policy_build_workflow(
+        policy_arn=_, build_workflow_id=_, last_updated_at=_
+    )
+    await client.delete_automated_reasoning_policy_build_workflow(
+        **_request(DeleteAutomatedReasoningPolicyBuildWorkflowInputDict)
+    )
+    await client.delete_automated_reasoning_policy_build_workflow(
+        _request(DeleteAutomatedReasoningPolicyBuildWorkflowInput)
+    )
+    await client.delete_automated_reasoning_policy_build_workflow(
+        _request(DeleteAutomatedReasoningPolicyBuildWorkflowInputDict)
+    )
+    await client.delete_automated_reasoning_policy_test_case(
+        policy_arn=_, test_case_id=_, last_updated_at=_
+    )
+    await client.delete_automated_reasoning_policy_test_case(
+        **_request(DeleteAutomatedReasoningPolicyTestCaseInputDict)
+    )
+    await client.delete_automated_reasoning_policy_test_case(
+        _request(DeleteAutomatedReasoningPolicyTestCaseInput)
+    )
+    await client.delete_automated_reasoning_policy_test_case(
+        _request(DeleteAutomatedReasoningPolicyTestCaseInputDict)
+    )
+    await client.delete_custom_model(model_identifier=_)
+    await client.delete_custom_model(**_request(DeleteCustomModelInputDict))
+    await client.delete_custom_model(_request(DeleteCustomModelInput))
+    await client.delete_custom_model(_request(DeleteCustomModelInputDict))
+    await client.delete_custom_model_deployment(custom_model_deployment_identifier=_)
+    await client.delete_custom_model_deployment(
+        **_request(DeleteCustomModelDeploymentInputDict)
+    )
+    await client.delete_custom_model_deployment(
+        _request(DeleteCustomModelDeploymentInput)
+    )
+    await client.delete_custom_model_deployment(
+        _request(DeleteCustomModelDeploymentInputDict)
+    )
+    await client.delete_enforced_guardrail_configuration(config_id=_)
+    await client.delete_enforced_guardrail_configuration(
+        **_request(DeleteEnforcedGuardrailConfigurationInputDict)
+    )
+    await client.delete_enforced_guardrail_configuration(
+        _request(DeleteEnforcedGuardrailConfigurationInput)
+    )
+    await client.delete_enforced_guardrail_configuration(
+        _request(DeleteEnforcedGuardrailConfigurationInputDict)
+    )
+    await client.delete_foundation_model_agreement(model_id=_)
+    await client.delete_foundation_model_agreement(
+        **_request(DeleteFoundationModelAgreementInputDict)
+    )
+    await client.delete_foundation_model_agreement(
+        _request(DeleteFoundationModelAgreementInput)
+    )
+    await client.delete_foundation_model_agreement(
+        _request(DeleteFoundationModelAgreementInputDict)
+    )
+    await client.delete_guardrail(guardrail_identifier=_)
+    await client.delete_guardrail(**_request(DeleteGuardrailInputDict))
+    await client.delete_guardrail(_request(DeleteGuardrailInput))
+    await client.delete_guardrail(_request(DeleteGuardrailInputDict))
+    await client.delete_imported_model(model_identifier=_)
+    await client.delete_imported_model(**_request(DeleteImportedModelInputDict))
+    await client.delete_imported_model(_request(DeleteImportedModelInput))
+    await client.delete_imported_model(_request(DeleteImportedModelInputDict))
+    await client.delete_inference_profile(inference_profile_identifier=_)
+    await client.delete_inference_profile(**_request(DeleteInferenceProfileInputDict))
+    await client.delete_inference_profile(_request(DeleteInferenceProfileInput))
+    await client.delete_inference_profile(_request(DeleteInferenceProfileInputDict))
+    await client.delete_marketplace_model_endpoint(endpoint_arn=_)
+    await client.delete_marketplace_model_endpoint(
+        **_request(DeleteMarketplaceModelEndpointInputDict)
+    )
+    await client.delete_marketplace_model_endpoint(
+        _request(DeleteMarketplaceModelEndpointInput)
+    )
+    await client.delete_marketplace_model_endpoint(
+        _request(DeleteMarketplaceModelEndpointInputDict)
+    )
+    await client.delete_model_invocation_logging_configuration()
+    await client.delete_model_invocation_logging_configuration(
+        **_request(DeleteModelInvocationLoggingConfigurationInputDict)
+    )
+    await client.delete_model_invocation_logging_configuration(
+        _request(DeleteModelInvocationLoggingConfigurationInput)
+    )
+    await client.delete_model_invocation_logging_configuration(
+        _request(DeleteModelInvocationLoggingConfigurationInputDict)
+    )
+    await client.delete_prompt_router(prompt_router_arn=_)
+    await client.delete_prompt_router(**_request(DeletePromptRouterInputDict))
+    await client.delete_prompt_router(_request(DeletePromptRouterInput))
+    await client.delete_prompt_router(_request(DeletePromptRouterInputDict))
+    await client.delete_provisioned_model_throughput(provisioned_model_id=_)
+    await client.delete_provisioned_model_throughput(
+        **_request(DeleteProvisionedModelThroughputInputDict)
+    )
+    await client.delete_provisioned_model_throughput(
+        _request(DeleteProvisionedModelThroughputInput)
+    )
+    await client.delete_provisioned_model_throughput(
+        _request(DeleteProvisionedModelThroughputInputDict)
+    )
+    await client.delete_resource_policy(resource_arn=_)
+    await client.delete_resource_policy(**_request(DeleteResourcePolicyInputDict))
+    await client.delete_resource_policy(_request(DeleteResourcePolicyInput))
+    await client.delete_resource_policy(_request(DeleteResourcePolicyInputDict))
+    await client.deregister_marketplace_model_endpoint(endpoint_arn=_)
+    await client.deregister_marketplace_model_endpoint(
+        **_request(DeregisterMarketplaceModelEndpointInputDict)
+    )
+    await client.deregister_marketplace_model_endpoint(
+        _request(DeregisterMarketplaceModelEndpointInput)
+    )
+    await client.deregister_marketplace_model_endpoint(
+        _request(DeregisterMarketplaceModelEndpointInputDict)
+    )
+    await client.export_automated_reasoning_policy_version(policy_arn=_)
+    await client.export_automated_reasoning_policy_version(
+        **_request(ExportAutomatedReasoningPolicyVersionInputDict)
+    )
+    await client.export_automated_reasoning_policy_version(
+        _request(ExportAutomatedReasoningPolicyVersionInput)
+    )
+    await client.export_automated_reasoning_policy_version(
+        _request(ExportAutomatedReasoningPolicyVersionInputDict)
+    )
+    await client.get_account_data_retention()
+    await client.get_account_data_retention(
+        **_request(GetAccountDataRetentionInputDict)
+    )
+    await client.get_account_data_retention(_request(GetAccountDataRetentionInput))
+    await client.get_account_data_retention(_request(GetAccountDataRetentionInputDict))
+    await client.get_advanced_prompt_optimization_job(job_identifier=_)
+    await client.get_advanced_prompt_optimization_job(
+        **_request(GetAdvancedPromptOptimizationJobInputDict)
+    )
+    await client.get_advanced_prompt_optimization_job(
+        _request(GetAdvancedPromptOptimizationJobInput)
+    )
+    await client.get_advanced_prompt_optimization_job(
+        _request(GetAdvancedPromptOptimizationJobInputDict)
+    )
+    await client.get_automated_reasoning_policy(policy_arn=_)
+    await client.get_automated_reasoning_policy(
+        **_request(GetAutomatedReasoningPolicyInputDict)
+    )
+    await client.get_automated_reasoning_policy(
+        _request(GetAutomatedReasoningPolicyInput)
+    )
+    await client.get_automated_reasoning_policy(
+        _request(GetAutomatedReasoningPolicyInputDict)
+    )
+    await client.get_automated_reasoning_policy_annotations(
+        policy_arn=_, build_workflow_id=_
+    )
+    await client.get_automated_reasoning_policy_annotations(
+        **_request(GetAutomatedReasoningPolicyAnnotationsInputDict)
+    )
+    await client.get_automated_reasoning_policy_annotations(
+        _request(GetAutomatedReasoningPolicyAnnotationsInput)
+    )
+    await client.get_automated_reasoning_policy_annotations(
+        _request(GetAutomatedReasoningPolicyAnnotationsInputDict)
+    )
+    await client.get_automated_reasoning_policy_build_workflow(
+        policy_arn=_, build_workflow_id=_
+    )
+    await client.get_automated_reasoning_policy_build_workflow(
+        **_request(GetAutomatedReasoningPolicyBuildWorkflowInputDict)
+    )
+    await client.get_automated_reasoning_policy_build_workflow(
+        _request(GetAutomatedReasoningPolicyBuildWorkflowInput)
+    )
+    await client.get_automated_reasoning_policy_build_workflow(
+        _request(GetAutomatedReasoningPolicyBuildWorkflowInputDict)
+    )
+    await client.get_automated_reasoning_policy_build_workflow_result_assets(
+        policy_arn=_, build_workflow_id=_, asset_type=_
+    )
+    await client.get_automated_reasoning_policy_build_workflow_result_assets(
+        **_request(GetAutomatedReasoningPolicyBuildWorkflowResultAssetsInputDict)
+    )
+    await client.get_automated_reasoning_policy_build_workflow_result_assets(
+        _request(GetAutomatedReasoningPolicyBuildWorkflowResultAssetsInput)
+    )
+    await client.get_automated_reasoning_policy_build_workflow_result_assets(
+        _request(GetAutomatedReasoningPolicyBuildWorkflowResultAssetsInputDict)
+    )
+    await client.get_automated_reasoning_policy_next_scenario(
+        policy_arn=_, build_workflow_id=_
+    )
+    await client.get_automated_reasoning_policy_next_scenario(
+        **_request(GetAutomatedReasoningPolicyNextScenarioInputDict)
+    )
+    await client.get_automated_reasoning_policy_next_scenario(
+        _request(GetAutomatedReasoningPolicyNextScenarioInput)
+    )
+    await client.get_automated_reasoning_policy_next_scenario(
+        _request(GetAutomatedReasoningPolicyNextScenarioInputDict)
+    )
+    await client.get_automated_reasoning_policy_test_case(policy_arn=_, test_case_id=_)
+    await client.get_automated_reasoning_policy_test_case(
+        **_request(GetAutomatedReasoningPolicyTestCaseInputDict)
+    )
+    await client.get_automated_reasoning_policy_test_case(
+        _request(GetAutomatedReasoningPolicyTestCaseInput)
+    )
+    await client.get_automated_reasoning_policy_test_case(
+        _request(GetAutomatedReasoningPolicyTestCaseInputDict)
+    )
+    await client.get_automated_reasoning_policy_test_result(
+        policy_arn=_, build_workflow_id=_, test_case_id=_
+    )
+    await client.get_automated_reasoning_policy_test_result(
+        **_request(GetAutomatedReasoningPolicyTestResultInputDict)
+    )
+    await client.get_automated_reasoning_policy_test_result(
+        _request(GetAutomatedReasoningPolicyTestResultInput)
+    )
+    await client.get_automated_reasoning_policy_test_result(
+        _request(GetAutomatedReasoningPolicyTestResultInputDict)
+    )
+    await client.get_custom_model(model_identifier=_)
+    await client.get_custom_model(**_request(GetCustomModelInputDict))
+    await client.get_custom_model(_request(GetCustomModelInput))
+    await client.get_custom_model(_request(GetCustomModelInputDict))
+    await client.get_custom_model_deployment(custom_model_deployment_identifier=_)
+    await client.get_custom_model_deployment(
+        **_request(GetCustomModelDeploymentInputDict)
+    )
+    await client.get_custom_model_deployment(_request(GetCustomModelDeploymentInput))
+    await client.get_custom_model_deployment(
+        _request(GetCustomModelDeploymentInputDict)
+    )
+    await client.get_evaluation_job(job_identifier=_)
+    await client.get_evaluation_job(**_request(GetEvaluationJobInputDict))
+    await client.get_evaluation_job(_request(GetEvaluationJobInput))
+    await client.get_evaluation_job(_request(GetEvaluationJobInputDict))
+    await client.get_foundation_model(model_identifier=_)
+    await client.get_foundation_model(**_request(GetFoundationModelInputDict))
+    await client.get_foundation_model(_request(GetFoundationModelInput))
+    await client.get_foundation_model(_request(GetFoundationModelInputDict))
+    await client.get_foundation_model_availability(model_id=_)
+    await client.get_foundation_model_availability(
+        **_request(GetFoundationModelAvailabilityInputDict)
+    )
+    await client.get_foundation_model_availability(
+        _request(GetFoundationModelAvailabilityInput)
+    )
+    await client.get_foundation_model_availability(
+        _request(GetFoundationModelAvailabilityInputDict)
+    )
+    await client.get_guardrail(guardrail_identifier=_)
+    await client.get_guardrail(**_request(GetGuardrailInputDict))
+    await client.get_guardrail(_request(GetGuardrailInput))
+    await client.get_guardrail(_request(GetGuardrailInputDict))
+    await client.get_imported_model(model_identifier=_)
+    await client.get_imported_model(**_request(GetImportedModelInputDict))
+    await client.get_imported_model(_request(GetImportedModelInput))
+    await client.get_imported_model(_request(GetImportedModelInputDict))
+    await client.get_inference_profile(inference_profile_identifier=_)
+    await client.get_inference_profile(**_request(GetInferenceProfileInputDict))
+    await client.get_inference_profile(_request(GetInferenceProfileInput))
+    await client.get_inference_profile(_request(GetInferenceProfileInputDict))
+    await client.get_marketplace_model_endpoint(endpoint_arn=_)
+    await client.get_marketplace_model_endpoint(
+        **_request(GetMarketplaceModelEndpointInputDict)
+    )
+    await client.get_marketplace_model_endpoint(
+        _request(GetMarketplaceModelEndpointInput)
+    )
+    await client.get_marketplace_model_endpoint(
+        _request(GetMarketplaceModelEndpointInputDict)
+    )
+    await client.get_model_copy_job(job_arn=_)
+    await client.get_model_copy_job(**_request(GetModelCopyJobInputDict))
+    await client.get_model_copy_job(_request(GetModelCopyJobInput))
+    await client.get_model_copy_job(_request(GetModelCopyJobInputDict))
+    await client.get_model_customization_job(job_identifier=_)
+    await client.get_model_customization_job(
+        **_request(GetModelCustomizationJobInputDict)
+    )
+    await client.get_model_customization_job(_request(GetModelCustomizationJobInput))
+    await client.get_model_customization_job(
+        _request(GetModelCustomizationJobInputDict)
+    )
+    await client.get_model_import_job(job_identifier=_)
+    await client.get_model_import_job(**_request(GetModelImportJobInputDict))
+    await client.get_model_import_job(_request(GetModelImportJobInput))
+    await client.get_model_import_job(_request(GetModelImportJobInputDict))
+    await client.get_model_invocation_job(job_identifier=_)
+    await client.get_model_invocation_job(**_request(GetModelInvocationJobInputDict))
+    await client.get_model_invocation_job(_request(GetModelInvocationJobInput))
+    await client.get_model_invocation_job(_request(GetModelInvocationJobInputDict))
+    await client.get_model_invocation_logging_configuration()
+    await client.get_model_invocation_logging_configuration(
+        **_request(GetModelInvocationLoggingConfigurationInputDict)
+    )
+    await client.get_model_invocation_logging_configuration(
+        _request(GetModelInvocationLoggingConfigurationInput)
+    )
+    await client.get_model_invocation_logging_configuration(
+        _request(GetModelInvocationLoggingConfigurationInputDict)
+    )
+    await client.get_prompt_router(prompt_router_arn=_)
+    await client.get_prompt_router(**_request(GetPromptRouterInputDict))
+    await client.get_prompt_router(_request(GetPromptRouterInput))
+    await client.get_prompt_router(_request(GetPromptRouterInputDict))
+    await client.get_provisioned_model_throughput(provisioned_model_id=_)
+    await client.get_provisioned_model_throughput(
+        **_request(GetProvisionedModelThroughputInputDict)
+    )
+    await client.get_provisioned_model_throughput(
+        _request(GetProvisionedModelThroughputInput)
+    )
+    await client.get_provisioned_model_throughput(
+        _request(GetProvisionedModelThroughputInputDict)
+    )
+    await client.get_resource_policy(resource_arn=_)
+    await client.get_resource_policy(**_request(GetResourcePolicyInputDict))
+    await client.get_resource_policy(_request(GetResourcePolicyInput))
+    await client.get_resource_policy(_request(GetResourcePolicyInputDict))
+    await client.get_use_case_for_model_access()
+    await client.get_use_case_for_model_access(
+        **_request(GetUseCaseForModelAccessInputDict)
+    )
+    await client.get_use_case_for_model_access(_request(GetUseCaseForModelAccessInput))
+    await client.get_use_case_for_model_access(
+        _request(GetUseCaseForModelAccessInputDict)
+    )
+    await client.list_advanced_prompt_optimization_jobs()
+    await client.list_advanced_prompt_optimization_jobs(
+        **_request(ListAdvancedPromptOptimizationJobsInputDict)
+    )
+    await client.list_advanced_prompt_optimization_jobs(
+        _request(ListAdvancedPromptOptimizationJobsInput)
+    )
+    await client.list_advanced_prompt_optimization_jobs(
+        _request(ListAdvancedPromptOptimizationJobsInputDict)
+    )
+    await client.list_automated_reasoning_policies()
+    await client.list_automated_reasoning_policies(
+        **_request(ListAutomatedReasoningPoliciesInputDict)
+    )
+    await client.list_automated_reasoning_policies(
+        _request(ListAutomatedReasoningPoliciesInput)
+    )
+    await client.list_automated_reasoning_policies(
+        _request(ListAutomatedReasoningPoliciesInputDict)
+    )
+    await client.list_automated_reasoning_policy_build_workflows(policy_arn=_)
+    await client.list_automated_reasoning_policy_build_workflows(
+        **_request(ListAutomatedReasoningPolicyBuildWorkflowsInputDict)
+    )
+    await client.list_automated_reasoning_policy_build_workflows(
+        _request(ListAutomatedReasoningPolicyBuildWorkflowsInput)
+    )
+    await client.list_automated_reasoning_policy_build_workflows(
+        _request(ListAutomatedReasoningPolicyBuildWorkflowsInputDict)
+    )
+    await client.list_automated_reasoning_policy_test_cases(policy_arn=_)
+    await client.list_automated_reasoning_policy_test_cases(
+        **_request(ListAutomatedReasoningPolicyTestCasesInputDict)
+    )
+    await client.list_automated_reasoning_policy_test_cases(
+        _request(ListAutomatedReasoningPolicyTestCasesInput)
+    )
+    await client.list_automated_reasoning_policy_test_cases(
+        _request(ListAutomatedReasoningPolicyTestCasesInputDict)
+    )
+    await client.list_automated_reasoning_policy_test_results(
+        policy_arn=_, build_workflow_id=_
+    )
+    await client.list_automated_reasoning_policy_test_results(
+        **_request(ListAutomatedReasoningPolicyTestResultsInputDict)
+    )
+    await client.list_automated_reasoning_policy_test_results(
+        _request(ListAutomatedReasoningPolicyTestResultsInput)
+    )
+    await client.list_automated_reasoning_policy_test_results(
+        _request(ListAutomatedReasoningPolicyTestResultsInputDict)
+    )
+    await client.list_custom_model_deployments()
+    await client.list_custom_model_deployments(
+        **_request(ListCustomModelDeploymentsInputDict)
+    )
+    await client.list_custom_model_deployments(
+        _request(ListCustomModelDeploymentsInput)
+    )
+    await client.list_custom_model_deployments(
+        _request(ListCustomModelDeploymentsInputDict)
+    )
+    await client.list_custom_models()
+    await client.list_custom_models(**_request(ListCustomModelsInputDict))
+    await client.list_custom_models(_request(ListCustomModelsInput))
+    await client.list_custom_models(_request(ListCustomModelsInputDict))
+    await client.list_enforced_guardrails_configuration()
+    await client.list_enforced_guardrails_configuration(
+        **_request(ListEnforcedGuardrailsConfigurationInputDict)
+    )
+    await client.list_enforced_guardrails_configuration(
+        _request(ListEnforcedGuardrailsConfigurationInput)
+    )
+    await client.list_enforced_guardrails_configuration(
+        _request(ListEnforcedGuardrailsConfigurationInputDict)
+    )
+    await client.list_evaluation_jobs()
+    await client.list_evaluation_jobs(**_request(ListEvaluationJobsInputDict))
+    await client.list_evaluation_jobs(_request(ListEvaluationJobsInput))
+    await client.list_evaluation_jobs(_request(ListEvaluationJobsInputDict))
+    await client.list_foundation_model_agreement_offers(model_id=_)
+    await client.list_foundation_model_agreement_offers(
+        **_request(ListFoundationModelAgreementOffersInputDict)
+    )
+    await client.list_foundation_model_agreement_offers(
+        _request(ListFoundationModelAgreementOffersInput)
+    )
+    await client.list_foundation_model_agreement_offers(
+        _request(ListFoundationModelAgreementOffersInputDict)
+    )
+    await client.list_foundation_models()
+    await client.list_foundation_models(**_request(ListFoundationModelsInputDict))
+    await client.list_foundation_models(_request(ListFoundationModelsInput))
+    await client.list_foundation_models(_request(ListFoundationModelsInputDict))
+    await client.list_guardrails()
+    await client.list_guardrails(**_request(ListGuardrailsInputDict))
+    await client.list_guardrails(_request(ListGuardrailsInput))
+    await client.list_guardrails(_request(ListGuardrailsInputDict))
+    await client.list_imported_models()
+    await client.list_imported_models(**_request(ListImportedModelsInputDict))
+    await client.list_imported_models(_request(ListImportedModelsInput))
+    await client.list_imported_models(_request(ListImportedModelsInputDict))
+    await client.list_inference_profiles()
+    await client.list_inference_profiles(**_request(ListInferenceProfilesInputDict))
+    await client.list_inference_profiles(_request(ListInferenceProfilesInput))
+    await client.list_inference_profiles(_request(ListInferenceProfilesInputDict))
+    await client.list_marketplace_model_endpoints()
+    await client.list_marketplace_model_endpoints(
+        **_request(ListMarketplaceModelEndpointsInputDict)
+    )
+    await client.list_marketplace_model_endpoints(
+        _request(ListMarketplaceModelEndpointsInput)
+    )
+    await client.list_marketplace_model_endpoints(
+        _request(ListMarketplaceModelEndpointsInputDict)
+    )
+    await client.list_model_copy_jobs()
+    await client.list_model_copy_jobs(**_request(ListModelCopyJobsInputDict))
+    await client.list_model_copy_jobs(_request(ListModelCopyJobsInput))
+    await client.list_model_copy_jobs(_request(ListModelCopyJobsInputDict))
+    await client.list_model_customization_jobs()
+    await client.list_model_customization_jobs(
+        **_request(ListModelCustomizationJobsInputDict)
+    )
+    await client.list_model_customization_jobs(
+        _request(ListModelCustomizationJobsInput)
+    )
+    await client.list_model_customization_jobs(
+        _request(ListModelCustomizationJobsInputDict)
+    )
+    await client.list_model_import_jobs()
+    await client.list_model_import_jobs(**_request(ListModelImportJobsInputDict))
+    await client.list_model_import_jobs(_request(ListModelImportJobsInput))
+    await client.list_model_import_jobs(_request(ListModelImportJobsInputDict))
+    await client.list_model_invocation_jobs()
+    await client.list_model_invocation_jobs(
+        **_request(ListModelInvocationJobsInputDict)
+    )
+    await client.list_model_invocation_jobs(_request(ListModelInvocationJobsInput))
+    await client.list_model_invocation_jobs(_request(ListModelInvocationJobsInputDict))
+    await client.list_prompt_routers()
+    await client.list_prompt_routers(**_request(ListPromptRoutersInputDict))
+    await client.list_prompt_routers(_request(ListPromptRoutersInput))
+    await client.list_prompt_routers(_request(ListPromptRoutersInputDict))
+    await client.list_provisioned_model_throughputs()
+    await client.list_provisioned_model_throughputs(
+        **_request(ListProvisionedModelThroughputsInputDict)
+    )
+    await client.list_provisioned_model_throughputs(
+        _request(ListProvisionedModelThroughputsInput)
+    )
+    await client.list_provisioned_model_throughputs(
+        _request(ListProvisionedModelThroughputsInputDict)
+    )
+    await client.list_tags_for_resource(resource_arn=_)
+    await client.list_tags_for_resource(**_request(ListTagsForResourceInputDict))
+    await client.list_tags_for_resource(_request(ListTagsForResourceInput))
+    await client.list_tags_for_resource(_request(ListTagsForResourceInputDict))
+    await client.put_account_data_retention(mode=_)
+    await client.put_account_data_retention(
+        **_request(PutAccountDataRetentionInputDict)
+    )
+    await client.put_account_data_retention(_request(PutAccountDataRetentionInput))
+    await client.put_account_data_retention(_request(PutAccountDataRetentionInputDict))
+    await client.put_enforced_guardrail_configuration(guardrail_inference_config=_)
+    await client.put_enforced_guardrail_configuration(
+        **_request(PutEnforcedGuardrailConfigurationInputDict)
+    )
+    await client.put_enforced_guardrail_configuration(
+        _request(PutEnforcedGuardrailConfigurationInput)
+    )
+    await client.put_enforced_guardrail_configuration(
+        _request(PutEnforcedGuardrailConfigurationInputDict)
+    )
+    await client.put_model_invocation_logging_configuration(logging_config=_)
+    await client.put_model_invocation_logging_configuration(
+        **_request(PutModelInvocationLoggingConfigurationInputDict)
+    )
+    await client.put_model_invocation_logging_configuration(
+        _request(PutModelInvocationLoggingConfigurationInput)
+    )
+    await client.put_model_invocation_logging_configuration(
+        _request(PutModelInvocationLoggingConfigurationInputDict)
+    )
+    await client.put_resource_policy(resource_arn=_, resource_policy=_)
+    await client.put_resource_policy(**_request(PutResourcePolicyInputDict))
+    await client.put_resource_policy(_request(PutResourcePolicyInput))
+    await client.put_resource_policy(_request(PutResourcePolicyInputDict))
+    await client.put_use_case_for_model_access(form_data=_)
+    await client.put_use_case_for_model_access(
+        **_request(PutUseCaseForModelAccessInputDict)
+    )
+    await client.put_use_case_for_model_access(_request(PutUseCaseForModelAccessInput))
+    await client.put_use_case_for_model_access(
+        _request(PutUseCaseForModelAccessInputDict)
+    )
+    await client.register_marketplace_model_endpoint(
+        endpoint_identifier=_, model_source_identifier=_
+    )
+    await client.register_marketplace_model_endpoint(
+        **_request(RegisterMarketplaceModelEndpointInputDict)
+    )
+    await client.register_marketplace_model_endpoint(
+        _request(RegisterMarketplaceModelEndpointInput)
+    )
+    await client.register_marketplace_model_endpoint(
+        _request(RegisterMarketplaceModelEndpointInputDict)
+    )
+    await client.start_automated_reasoning_policy_build_workflow(
+        policy_arn=_, build_workflow_type=_, source_content=_
+    )
+    await client.start_automated_reasoning_policy_build_workflow(
+        **_request(StartAutomatedReasoningPolicyBuildWorkflowInputDict)
+    )
+    await client.start_automated_reasoning_policy_build_workflow(
+        _request(StartAutomatedReasoningPolicyBuildWorkflowInput)
+    )
+    await client.start_automated_reasoning_policy_build_workflow(
+        _request(StartAutomatedReasoningPolicyBuildWorkflowInputDict)
+    )
+    await client.start_automated_reasoning_policy_test_workflow(
+        policy_arn=_, build_workflow_id=_
+    )
+    await client.start_automated_reasoning_policy_test_workflow(
+        **_request(StartAutomatedReasoningPolicyTestWorkflowInputDict)
+    )
+    await client.start_automated_reasoning_policy_test_workflow(
+        _request(StartAutomatedReasoningPolicyTestWorkflowInput)
+    )
+    await client.start_automated_reasoning_policy_test_workflow(
+        _request(StartAutomatedReasoningPolicyTestWorkflowInputDict)
+    )
+    await client.stop_advanced_prompt_optimization_job(job_identifier=_)
+    await client.stop_advanced_prompt_optimization_job(
+        **_request(StopAdvancedPromptOptimizationJobInputDict)
+    )
+    await client.stop_advanced_prompt_optimization_job(
+        _request(StopAdvancedPromptOptimizationJobInput)
+    )
+    await client.stop_advanced_prompt_optimization_job(
+        _request(StopAdvancedPromptOptimizationJobInputDict)
+    )
+    await client.stop_evaluation_job(job_identifier=_)
+    await client.stop_evaluation_job(**_request(StopEvaluationJobInputDict))
+    await client.stop_evaluation_job(_request(StopEvaluationJobInput))
+    await client.stop_evaluation_job(_request(StopEvaluationJobInputDict))
+    await client.stop_model_customization_job(job_identifier=_)
+    await client.stop_model_customization_job(
+        **_request(StopModelCustomizationJobInputDict)
+    )
+    await client.stop_model_customization_job(_request(StopModelCustomizationJobInput))
+    await client.stop_model_customization_job(
+        _request(StopModelCustomizationJobInputDict)
+    )
+    await client.stop_model_invocation_job(job_identifier=_)
+    await client.stop_model_invocation_job(**_request(StopModelInvocationJobInputDict))
+    await client.stop_model_invocation_job(_request(StopModelInvocationJobInput))
+    await client.stop_model_invocation_job(_request(StopModelInvocationJobInputDict))
+    await client.tag_resource(resource_arn=_, tags=_)
+    await client.tag_resource(**_request(TagResourceInputDict))
+    await client.tag_resource(_request(TagResourceInput))
+    await client.tag_resource(_request(TagResourceInputDict))
+    await client.untag_resource(resource_arn=_, tag_keys=_)
+    await client.untag_resource(**_request(UntagResourceInputDict))
+    await client.untag_resource(_request(UntagResourceInput))
+    await client.untag_resource(_request(UntagResourceInputDict))
+    await client.update_automated_reasoning_policy(policy_arn=_, policy_definition=_)
+    await client.update_automated_reasoning_policy(
+        **_request(UpdateAutomatedReasoningPolicyInputDict)
+    )
+    await client.update_automated_reasoning_policy(
+        _request(UpdateAutomatedReasoningPolicyInput)
+    )
+    await client.update_automated_reasoning_policy(
+        _request(UpdateAutomatedReasoningPolicyInputDict)
+    )
+    await client.update_automated_reasoning_policy_annotations(
+        policy_arn=_,
+        build_workflow_id=_,
+        annotations=_,
+        last_updated_annotation_set_hash=_,
+    )
+    await client.update_automated_reasoning_policy_annotations(
+        **_request(UpdateAutomatedReasoningPolicyAnnotationsInputDict)
+    )
+    await client.update_automated_reasoning_policy_annotations(
+        _request(UpdateAutomatedReasoningPolicyAnnotationsInput)
+    )
+    await client.update_automated_reasoning_policy_annotations(
+        _request(UpdateAutomatedReasoningPolicyAnnotationsInputDict)
+    )
+    await client.update_automated_reasoning_policy_test_case(
+        policy_arn=_,
+        test_case_id=_,
+        guard_content=_,
+        last_updated_at=_,
+        expected_aggregated_findings_result=_,
+    )
+    await client.update_automated_reasoning_policy_test_case(
+        **_request(UpdateAutomatedReasoningPolicyTestCaseInputDict)
+    )
+    await client.update_automated_reasoning_policy_test_case(
+        _request(UpdateAutomatedReasoningPolicyTestCaseInput)
+    )
+    await client.update_automated_reasoning_policy_test_case(
+        _request(UpdateAutomatedReasoningPolicyTestCaseInputDict)
+    )
+    await client.update_custom_model_deployment(
+        model_arn=_, custom_model_deployment_identifier=_
+    )
+    await client.update_custom_model_deployment(
+        **_request(UpdateCustomModelDeploymentInputDict)
+    )
+    await client.update_custom_model_deployment(
+        _request(UpdateCustomModelDeploymentInput)
+    )
+    await client.update_custom_model_deployment(
+        _request(UpdateCustomModelDeploymentInputDict)
+    )
+    await client.update_guardrail(
+        guardrail_identifier=_,
+        name=_,
+        blocked_input_messaging=_,
+        blocked_outputs_messaging=_,
+    )
+    await client.update_guardrail(**_request(UpdateGuardrailInputDict))
+    await client.update_guardrail(_request(UpdateGuardrailInput))
+    await client.update_guardrail(_request(UpdateGuardrailInputDict))
+    await client.update_marketplace_model_endpoint(endpoint_arn=_, endpoint_config=_)
+    await client.update_marketplace_model_endpoint(
+        **_request(UpdateMarketplaceModelEndpointInputDict)
+    )
+    await client.update_marketplace_model_endpoint(
+        _request(UpdateMarketplaceModelEndpointInput)
+    )
+    await client.update_marketplace_model_endpoint(
+        _request(UpdateMarketplaceModelEndpointInputDict)
+    )
+    await client.update_provisioned_model_throughput(provisioned_model_id=_)
+    await client.update_provisioned_model_throughput(
+        **_request(UpdateProvisionedModelThroughputInputDict)
+    )
+    await client.update_provisioned_model_throughput(
+        _request(UpdateProvisionedModelThroughputInput)
+    )
+    await client.update_provisioned_model_throughput(
+        _request(UpdateProvisionedModelThroughputInputDict)
+    )
+
+
+def check_sync_calls(client: BedrockClient) -> None:
+    pass
+    client.batch_delete_advanced_prompt_optimization_job(job_identifiers=_)
+    client.batch_delete_advanced_prompt_optimization_job(
+        **_request(BatchDeleteAdvancedPromptOptimizationJobInputDict)
+    )
+    client.batch_delete_advanced_prompt_optimization_job(
+        _request(BatchDeleteAdvancedPromptOptimizationJobInput)
+    )
+    client.batch_delete_advanced_prompt_optimization_job(
+        _request(BatchDeleteAdvancedPromptOptimizationJobInputDict)
+    )
+    client.batch_delete_evaluation_job(job_identifiers=_)
+    client.batch_delete_evaluation_job(**_request(BatchDeleteEvaluationJobInputDict))
+    client.batch_delete_evaluation_job(_request(BatchDeleteEvaluationJobInput))
+    client.batch_delete_evaluation_job(_request(BatchDeleteEvaluationJobInputDict))
+    client.cancel_automated_reasoning_policy_build_workflow(
+        policy_arn=_, build_workflow_id=_
+    )
+    client.cancel_automated_reasoning_policy_build_workflow(
+        **_request(CancelAutomatedReasoningPolicyBuildWorkflowInputDict)
+    )
+    client.cancel_automated_reasoning_policy_build_workflow(
+        _request(CancelAutomatedReasoningPolicyBuildWorkflowInput)
+    )
+    client.cancel_automated_reasoning_policy_build_workflow(
+        _request(CancelAutomatedReasoningPolicyBuildWorkflowInputDict)
+    )
+    client.create_advanced_prompt_optimization_job(
+        job_name=_, input_config=_, output_config=_, model_configurations=_
+    )
+    client.create_advanced_prompt_optimization_job(
+        **_request(CreateAdvancedPromptOptimizationJobInputDict)
+    )
+    client.create_advanced_prompt_optimization_job(
+        _request(CreateAdvancedPromptOptimizationJobInput)
+    )
+    client.create_advanced_prompt_optimization_job(
+        _request(CreateAdvancedPromptOptimizationJobInputDict)
+    )
+    client.create_automated_reasoning_policy(name=_)
+    client.create_automated_reasoning_policy(
+        **_request(CreateAutomatedReasoningPolicyInputDict)
+    )
+    client.create_automated_reasoning_policy(
+        _request(CreateAutomatedReasoningPolicyInput)
+    )
+    client.create_automated_reasoning_policy(
+        _request(CreateAutomatedReasoningPolicyInputDict)
+    )
+    client.create_automated_reasoning_policy_test_case(
+        policy_arn=_, guard_content=_, expected_aggregated_findings_result=_
+    )
+    client.create_automated_reasoning_policy_test_case(
+        **_request(CreateAutomatedReasoningPolicyTestCaseInputDict)
+    )
+    client.create_automated_reasoning_policy_test_case(
+        _request(CreateAutomatedReasoningPolicyTestCaseInput)
+    )
+    client.create_automated_reasoning_policy_test_case(
+        _request(CreateAutomatedReasoningPolicyTestCaseInputDict)
+    )
+    client.create_automated_reasoning_policy_version(
+        policy_arn=_, last_updated_definition_hash=_
+    )
+    client.create_automated_reasoning_policy_version(
+        **_request(CreateAutomatedReasoningPolicyVersionInputDict)
+    )
+    client.create_automated_reasoning_policy_version(
+        _request(CreateAutomatedReasoningPolicyVersionInput)
+    )
+    client.create_automated_reasoning_policy_version(
+        _request(CreateAutomatedReasoningPolicyVersionInputDict)
+    )
+    client.create_custom_model(model_name=_)
+    client.create_custom_model(**_request(CreateCustomModelInputDict))
+    client.create_custom_model(_request(CreateCustomModelInput))
+    client.create_custom_model(_request(CreateCustomModelInputDict))
+    client.create_custom_model_deployment(model_deployment_name=_, model_arn=_)
+    client.create_custom_model_deployment(
+        **_request(CreateCustomModelDeploymentInputDict)
+    )
+    client.create_custom_model_deployment(_request(CreateCustomModelDeploymentInput))
+    client.create_custom_model_deployment(
+        _request(CreateCustomModelDeploymentInputDict)
+    )
+    client.create_evaluation_job(
+        job_name=_,
+        role_arn=_,
+        evaluation_config=_,
+        inference_config=_,
+        output_data_config=_,
+    )
+    client.create_evaluation_job(**_request(CreateEvaluationJobInputDict))
+    client.create_evaluation_job(_request(CreateEvaluationJobInput))
+    client.create_evaluation_job(_request(CreateEvaluationJobInputDict))
+    client.create_foundation_model_agreement(offer_token=_, model_id=_)
+    client.create_foundation_model_agreement(
+        **_request(CreateFoundationModelAgreementInputDict)
+    )
+    client.create_foundation_model_agreement(
+        _request(CreateFoundationModelAgreementInput)
+    )
+    client.create_foundation_model_agreement(
+        _request(CreateFoundationModelAgreementInputDict)
+    )
+    client.create_guardrail(
+        name=_, blocked_input_messaging=_, blocked_outputs_messaging=_
+    )
+    client.create_guardrail(**_request(CreateGuardrailInputDict))
+    client.create_guardrail(_request(CreateGuardrailInput))
+    client.create_guardrail(_request(CreateGuardrailInputDict))
+    client.create_guardrail_version(guardrail_identifier=_)
+    client.create_guardrail_version(**_request(CreateGuardrailVersionInputDict))
+    client.create_guardrail_version(_request(CreateGuardrailVersionInput))
+    client.create_guardrail_version(_request(CreateGuardrailVersionInputDict))
+    client.create_inference_profile(inference_profile_name=_, model_source=_)
+    client.create_inference_profile(**_request(CreateInferenceProfileInputDict))
+    client.create_inference_profile(_request(CreateInferenceProfileInput))
+    client.create_inference_profile(_request(CreateInferenceProfileInputDict))
+    client.create_marketplace_model_endpoint(
+        model_source_identifier=_, endpoint_config=_, endpoint_name=_
+    )
+    client.create_marketplace_model_endpoint(
+        **_request(CreateMarketplaceModelEndpointInputDict)
+    )
+    client.create_marketplace_model_endpoint(
+        _request(CreateMarketplaceModelEndpointInput)
+    )
+    client.create_marketplace_model_endpoint(
+        _request(CreateMarketplaceModelEndpointInputDict)
+    )
+    client.create_model_copy_job(source_model_arn=_, target_model_name=_)
+    client.create_model_copy_job(**_request(CreateModelCopyJobInputDict))
+    client.create_model_copy_job(_request(CreateModelCopyJobInput))
+    client.create_model_copy_job(_request(CreateModelCopyJobInputDict))
+    client.create_model_customization_job(
+        job_name=_,
+        custom_model_name=_,
+        role_arn=_,
+        base_model_identifier=_,
+        training_data_config=_,
+        output_data_config=_,
+    )
+    client.create_model_customization_job(
+        **_request(CreateModelCustomizationJobInputDict)
+    )
+    client.create_model_customization_job(_request(CreateModelCustomizationJobInput))
+    client.create_model_customization_job(
+        _request(CreateModelCustomizationJobInputDict)
+    )
+    client.create_model_import_job(
+        job_name=_, imported_model_name=_, role_arn=_, model_data_source=_
+    )
+    client.create_model_import_job(**_request(CreateModelImportJobInputDict))
+    client.create_model_import_job(_request(CreateModelImportJobInput))
+    client.create_model_import_job(_request(CreateModelImportJobInputDict))
+    client.create_model_invocation_job(
+        job_name=_, role_arn=_, model_id=_, input_data_config=_, output_data_config=_
+    )
+    client.create_model_invocation_job(**_request(CreateModelInvocationJobInputDict))
+    client.create_model_invocation_job(_request(CreateModelInvocationJobInput))
+    client.create_model_invocation_job(_request(CreateModelInvocationJobInputDict))
+    client.create_prompt_router(
+        prompt_router_name=_, models=_, routing_criteria=_, fallback_model=_
+    )
+    client.create_prompt_router(**_request(CreatePromptRouterInputDict))
+    client.create_prompt_router(_request(CreatePromptRouterInput))
+    client.create_prompt_router(_request(CreatePromptRouterInputDict))
+    client.create_provisioned_model_throughput(
+        model_units=_, provisioned_model_name=_, model_id=_
+    )
+    client.create_provisioned_model_throughput(
+        **_request(CreateProvisionedModelThroughputInputDict)
+    )
+    client.create_provisioned_model_throughput(
+        _request(CreateProvisionedModelThroughputInput)
+    )
+    client.create_provisioned_model_throughput(
+        _request(CreateProvisionedModelThroughputInputDict)
+    )
+    client.delete_automated_reasoning_policy(policy_arn=_)
+    client.delete_automated_reasoning_policy(
+        **_request(DeleteAutomatedReasoningPolicyInputDict)
+    )
+    client.delete_automated_reasoning_policy(
+        _request(DeleteAutomatedReasoningPolicyInput)
+    )
+    client.delete_automated_reasoning_policy(
+        _request(DeleteAutomatedReasoningPolicyInputDict)
+    )
+    client.delete_automated_reasoning_policy_build_workflow(
+        policy_arn=_, build_workflow_id=_, last_updated_at=_
+    )
+    client.delete_automated_reasoning_policy_build_workflow(
+        **_request(DeleteAutomatedReasoningPolicyBuildWorkflowInputDict)
+    )
+    client.delete_automated_reasoning_policy_build_workflow(
+        _request(DeleteAutomatedReasoningPolicyBuildWorkflowInput)
+    )
+    client.delete_automated_reasoning_policy_build_workflow(
+        _request(DeleteAutomatedReasoningPolicyBuildWorkflowInputDict)
+    )
+    client.delete_automated_reasoning_policy_test_case(
+        policy_arn=_, test_case_id=_, last_updated_at=_
+    )
+    client.delete_automated_reasoning_policy_test_case(
+        **_request(DeleteAutomatedReasoningPolicyTestCaseInputDict)
+    )
+    client.delete_automated_reasoning_policy_test_case(
+        _request(DeleteAutomatedReasoningPolicyTestCaseInput)
+    )
+    client.delete_automated_reasoning_policy_test_case(
+        _request(DeleteAutomatedReasoningPolicyTestCaseInputDict)
+    )
+    client.delete_custom_model(model_identifier=_)
+    client.delete_custom_model(**_request(DeleteCustomModelInputDict))
+    client.delete_custom_model(_request(DeleteCustomModelInput))
+    client.delete_custom_model(_request(DeleteCustomModelInputDict))
+    client.delete_custom_model_deployment(custom_model_deployment_identifier=_)
+    client.delete_custom_model_deployment(
+        **_request(DeleteCustomModelDeploymentInputDict)
+    )
+    client.delete_custom_model_deployment(_request(DeleteCustomModelDeploymentInput))
+    client.delete_custom_model_deployment(
+        _request(DeleteCustomModelDeploymentInputDict)
+    )
+    client.delete_enforced_guardrail_configuration(config_id=_)
+    client.delete_enforced_guardrail_configuration(
+        **_request(DeleteEnforcedGuardrailConfigurationInputDict)
+    )
+    client.delete_enforced_guardrail_configuration(
+        _request(DeleteEnforcedGuardrailConfigurationInput)
+    )
+    client.delete_enforced_guardrail_configuration(
+        _request(DeleteEnforcedGuardrailConfigurationInputDict)
+    )
+    client.delete_foundation_model_agreement(model_id=_)
+    client.delete_foundation_model_agreement(
+        **_request(DeleteFoundationModelAgreementInputDict)
+    )
+    client.delete_foundation_model_agreement(
+        _request(DeleteFoundationModelAgreementInput)
+    )
+    client.delete_foundation_model_agreement(
+        _request(DeleteFoundationModelAgreementInputDict)
+    )
+    client.delete_guardrail(guardrail_identifier=_)
+    client.delete_guardrail(**_request(DeleteGuardrailInputDict))
+    client.delete_guardrail(_request(DeleteGuardrailInput))
+    client.delete_guardrail(_request(DeleteGuardrailInputDict))
+    client.delete_imported_model(model_identifier=_)
+    client.delete_imported_model(**_request(DeleteImportedModelInputDict))
+    client.delete_imported_model(_request(DeleteImportedModelInput))
+    client.delete_imported_model(_request(DeleteImportedModelInputDict))
+    client.delete_inference_profile(inference_profile_identifier=_)
+    client.delete_inference_profile(**_request(DeleteInferenceProfileInputDict))
+    client.delete_inference_profile(_request(DeleteInferenceProfileInput))
+    client.delete_inference_profile(_request(DeleteInferenceProfileInputDict))
+    client.delete_marketplace_model_endpoint(endpoint_arn=_)
+    client.delete_marketplace_model_endpoint(
+        **_request(DeleteMarketplaceModelEndpointInputDict)
+    )
+    client.delete_marketplace_model_endpoint(
+        _request(DeleteMarketplaceModelEndpointInput)
+    )
+    client.delete_marketplace_model_endpoint(
+        _request(DeleteMarketplaceModelEndpointInputDict)
+    )
+    client.delete_model_invocation_logging_configuration()
+    client.delete_model_invocation_logging_configuration(
+        **_request(DeleteModelInvocationLoggingConfigurationInputDict)
+    )
+    client.delete_model_invocation_logging_configuration(
+        _request(DeleteModelInvocationLoggingConfigurationInput)
+    )
+    client.delete_model_invocation_logging_configuration(
+        _request(DeleteModelInvocationLoggingConfigurationInputDict)
+    )
+    client.delete_prompt_router(prompt_router_arn=_)
+    client.delete_prompt_router(**_request(DeletePromptRouterInputDict))
+    client.delete_prompt_router(_request(DeletePromptRouterInput))
+    client.delete_prompt_router(_request(DeletePromptRouterInputDict))
+    client.delete_provisioned_model_throughput(provisioned_model_id=_)
+    client.delete_provisioned_model_throughput(
+        **_request(DeleteProvisionedModelThroughputInputDict)
+    )
+    client.delete_provisioned_model_throughput(
+        _request(DeleteProvisionedModelThroughputInput)
+    )
+    client.delete_provisioned_model_throughput(
+        _request(DeleteProvisionedModelThroughputInputDict)
+    )
+    client.delete_resource_policy(resource_arn=_)
+    client.delete_resource_policy(**_request(DeleteResourcePolicyInputDict))
+    client.delete_resource_policy(_request(DeleteResourcePolicyInput))
+    client.delete_resource_policy(_request(DeleteResourcePolicyInputDict))
+    client.deregister_marketplace_model_endpoint(endpoint_arn=_)
+    client.deregister_marketplace_model_endpoint(
+        **_request(DeregisterMarketplaceModelEndpointInputDict)
+    )
+    client.deregister_marketplace_model_endpoint(
+        _request(DeregisterMarketplaceModelEndpointInput)
+    )
+    client.deregister_marketplace_model_endpoint(
+        _request(DeregisterMarketplaceModelEndpointInputDict)
+    )
+    client.export_automated_reasoning_policy_version(policy_arn=_)
+    client.export_automated_reasoning_policy_version(
+        **_request(ExportAutomatedReasoningPolicyVersionInputDict)
+    )
+    client.export_automated_reasoning_policy_version(
+        _request(ExportAutomatedReasoningPolicyVersionInput)
+    )
+    client.export_automated_reasoning_policy_version(
+        _request(ExportAutomatedReasoningPolicyVersionInputDict)
+    )
+    client.get_account_data_retention()
+    client.get_account_data_retention(**_request(GetAccountDataRetentionInputDict))
+    client.get_account_data_retention(_request(GetAccountDataRetentionInput))
+    client.get_account_data_retention(_request(GetAccountDataRetentionInputDict))
+    client.get_advanced_prompt_optimization_job(job_identifier=_)
+    client.get_advanced_prompt_optimization_job(
+        **_request(GetAdvancedPromptOptimizationJobInputDict)
+    )
+    client.get_advanced_prompt_optimization_job(
+        _request(GetAdvancedPromptOptimizationJobInput)
+    )
+    client.get_advanced_prompt_optimization_job(
+        _request(GetAdvancedPromptOptimizationJobInputDict)
+    )
+    client.get_automated_reasoning_policy(policy_arn=_)
+    client.get_automated_reasoning_policy(
+        **_request(GetAutomatedReasoningPolicyInputDict)
+    )
+    client.get_automated_reasoning_policy(_request(GetAutomatedReasoningPolicyInput))
+    client.get_automated_reasoning_policy(
+        _request(GetAutomatedReasoningPolicyInputDict)
+    )
+    client.get_automated_reasoning_policy_annotations(policy_arn=_, build_workflow_id=_)
+    client.get_automated_reasoning_policy_annotations(
+        **_request(GetAutomatedReasoningPolicyAnnotationsInputDict)
+    )
+    client.get_automated_reasoning_policy_annotations(
+        _request(GetAutomatedReasoningPolicyAnnotationsInput)
+    )
+    client.get_automated_reasoning_policy_annotations(
+        _request(GetAutomatedReasoningPolicyAnnotationsInputDict)
+    )
+    client.get_automated_reasoning_policy_build_workflow(
+        policy_arn=_, build_workflow_id=_
+    )
+    client.get_automated_reasoning_policy_build_workflow(
+        **_request(GetAutomatedReasoningPolicyBuildWorkflowInputDict)
+    )
+    client.get_automated_reasoning_policy_build_workflow(
+        _request(GetAutomatedReasoningPolicyBuildWorkflowInput)
+    )
+    client.get_automated_reasoning_policy_build_workflow(
+        _request(GetAutomatedReasoningPolicyBuildWorkflowInputDict)
+    )
+    client.get_automated_reasoning_policy_build_workflow_result_assets(
+        policy_arn=_, build_workflow_id=_, asset_type=_
+    )
+    client.get_automated_reasoning_policy_build_workflow_result_assets(
+        **_request(GetAutomatedReasoningPolicyBuildWorkflowResultAssetsInputDict)
+    )
+    client.get_automated_reasoning_policy_build_workflow_result_assets(
+        _request(GetAutomatedReasoningPolicyBuildWorkflowResultAssetsInput)
+    )
+    client.get_automated_reasoning_policy_build_workflow_result_assets(
+        _request(GetAutomatedReasoningPolicyBuildWorkflowResultAssetsInputDict)
+    )
+    client.get_automated_reasoning_policy_next_scenario(
+        policy_arn=_, build_workflow_id=_
+    )
+    client.get_automated_reasoning_policy_next_scenario(
+        **_request(GetAutomatedReasoningPolicyNextScenarioInputDict)
+    )
+    client.get_automated_reasoning_policy_next_scenario(
+        _request(GetAutomatedReasoningPolicyNextScenarioInput)
+    )
+    client.get_automated_reasoning_policy_next_scenario(
+        _request(GetAutomatedReasoningPolicyNextScenarioInputDict)
+    )
+    client.get_automated_reasoning_policy_test_case(policy_arn=_, test_case_id=_)
+    client.get_automated_reasoning_policy_test_case(
+        **_request(GetAutomatedReasoningPolicyTestCaseInputDict)
+    )
+    client.get_automated_reasoning_policy_test_case(
+        _request(GetAutomatedReasoningPolicyTestCaseInput)
+    )
+    client.get_automated_reasoning_policy_test_case(
+        _request(GetAutomatedReasoningPolicyTestCaseInputDict)
+    )
+    client.get_automated_reasoning_policy_test_result(
+        policy_arn=_, build_workflow_id=_, test_case_id=_
+    )
+    client.get_automated_reasoning_policy_test_result(
+        **_request(GetAutomatedReasoningPolicyTestResultInputDict)
+    )
+    client.get_automated_reasoning_policy_test_result(
+        _request(GetAutomatedReasoningPolicyTestResultInput)
+    )
+    client.get_automated_reasoning_policy_test_result(
+        _request(GetAutomatedReasoningPolicyTestResultInputDict)
+    )
+    client.get_custom_model(model_identifier=_)
+    client.get_custom_model(**_request(GetCustomModelInputDict))
+    client.get_custom_model(_request(GetCustomModelInput))
+    client.get_custom_model(_request(GetCustomModelInputDict))
+    client.get_custom_model_deployment(custom_model_deployment_identifier=_)
+    client.get_custom_model_deployment(**_request(GetCustomModelDeploymentInputDict))
+    client.get_custom_model_deployment(_request(GetCustomModelDeploymentInput))
+    client.get_custom_model_deployment(_request(GetCustomModelDeploymentInputDict))
+    client.get_evaluation_job(job_identifier=_)
+    client.get_evaluation_job(**_request(GetEvaluationJobInputDict))
+    client.get_evaluation_job(_request(GetEvaluationJobInput))
+    client.get_evaluation_job(_request(GetEvaluationJobInputDict))
+    client.get_foundation_model(model_identifier=_)
+    client.get_foundation_model(**_request(GetFoundationModelInputDict))
+    client.get_foundation_model(_request(GetFoundationModelInput))
+    client.get_foundation_model(_request(GetFoundationModelInputDict))
+    client.get_foundation_model_availability(model_id=_)
+    client.get_foundation_model_availability(
+        **_request(GetFoundationModelAvailabilityInputDict)
+    )
+    client.get_foundation_model_availability(
+        _request(GetFoundationModelAvailabilityInput)
+    )
+    client.get_foundation_model_availability(
+        _request(GetFoundationModelAvailabilityInputDict)
+    )
+    client.get_guardrail(guardrail_identifier=_)
+    client.get_guardrail(**_request(GetGuardrailInputDict))
+    client.get_guardrail(_request(GetGuardrailInput))
+    client.get_guardrail(_request(GetGuardrailInputDict))
+    client.get_imported_model(model_identifier=_)
+    client.get_imported_model(**_request(GetImportedModelInputDict))
+    client.get_imported_model(_request(GetImportedModelInput))
+    client.get_imported_model(_request(GetImportedModelInputDict))
+    client.get_inference_profile(inference_profile_identifier=_)
+    client.get_inference_profile(**_request(GetInferenceProfileInputDict))
+    client.get_inference_profile(_request(GetInferenceProfileInput))
+    client.get_inference_profile(_request(GetInferenceProfileInputDict))
+    client.get_marketplace_model_endpoint(endpoint_arn=_)
+    client.get_marketplace_model_endpoint(
+        **_request(GetMarketplaceModelEndpointInputDict)
+    )
+    client.get_marketplace_model_endpoint(_request(GetMarketplaceModelEndpointInput))
+    client.get_marketplace_model_endpoint(
+        _request(GetMarketplaceModelEndpointInputDict)
+    )
+    client.get_model_copy_job(job_arn=_)
+    client.get_model_copy_job(**_request(GetModelCopyJobInputDict))
+    client.get_model_copy_job(_request(GetModelCopyJobInput))
+    client.get_model_copy_job(_request(GetModelCopyJobInputDict))
+    client.get_model_customization_job(job_identifier=_)
+    client.get_model_customization_job(**_request(GetModelCustomizationJobInputDict))
+    client.get_model_customization_job(_request(GetModelCustomizationJobInput))
+    client.get_model_customization_job(_request(GetModelCustomizationJobInputDict))
+    client.get_model_import_job(job_identifier=_)
+    client.get_model_import_job(**_request(GetModelImportJobInputDict))
+    client.get_model_import_job(_request(GetModelImportJobInput))
+    client.get_model_import_job(_request(GetModelImportJobInputDict))
+    client.get_model_invocation_job(job_identifier=_)
+    client.get_model_invocation_job(**_request(GetModelInvocationJobInputDict))
+    client.get_model_invocation_job(_request(GetModelInvocationJobInput))
+    client.get_model_invocation_job(_request(GetModelInvocationJobInputDict))
+    client.get_model_invocation_logging_configuration()
+    client.get_model_invocation_logging_configuration(
+        **_request(GetModelInvocationLoggingConfigurationInputDict)
+    )
+    client.get_model_invocation_logging_configuration(
+        _request(GetModelInvocationLoggingConfigurationInput)
+    )
+    client.get_model_invocation_logging_configuration(
+        _request(GetModelInvocationLoggingConfigurationInputDict)
+    )
+    client.get_prompt_router(prompt_router_arn=_)
+    client.get_prompt_router(**_request(GetPromptRouterInputDict))
+    client.get_prompt_router(_request(GetPromptRouterInput))
+    client.get_prompt_router(_request(GetPromptRouterInputDict))
+    client.get_provisioned_model_throughput(provisioned_model_id=_)
+    client.get_provisioned_model_throughput(
+        **_request(GetProvisionedModelThroughputInputDict)
+    )
+    client.get_provisioned_model_throughput(
+        _request(GetProvisionedModelThroughputInput)
+    )
+    client.get_provisioned_model_throughput(
+        _request(GetProvisionedModelThroughputInputDict)
+    )
+    client.get_resource_policy(resource_arn=_)
+    client.get_resource_policy(**_request(GetResourcePolicyInputDict))
+    client.get_resource_policy(_request(GetResourcePolicyInput))
+    client.get_resource_policy(_request(GetResourcePolicyInputDict))
+    client.get_use_case_for_model_access()
+    client.get_use_case_for_model_access(**_request(GetUseCaseForModelAccessInputDict))
+    client.get_use_case_for_model_access(_request(GetUseCaseForModelAccessInput))
+    client.get_use_case_for_model_access(_request(GetUseCaseForModelAccessInputDict))
+    client.list_advanced_prompt_optimization_jobs()
+    client.list_advanced_prompt_optimization_jobs(
+        **_request(ListAdvancedPromptOptimizationJobsInputDict)
+    )
+    client.list_advanced_prompt_optimization_jobs(
+        _request(ListAdvancedPromptOptimizationJobsInput)
+    )
+    client.list_advanced_prompt_optimization_jobs(
+        _request(ListAdvancedPromptOptimizationJobsInputDict)
+    )
+    client.list_automated_reasoning_policies()
+    client.list_automated_reasoning_policies(
+        **_request(ListAutomatedReasoningPoliciesInputDict)
+    )
+    client.list_automated_reasoning_policies(
+        _request(ListAutomatedReasoningPoliciesInput)
+    )
+    client.list_automated_reasoning_policies(
+        _request(ListAutomatedReasoningPoliciesInputDict)
+    )
+    client.list_automated_reasoning_policy_build_workflows(policy_arn=_)
+    client.list_automated_reasoning_policy_build_workflows(
+        **_request(ListAutomatedReasoningPolicyBuildWorkflowsInputDict)
+    )
+    client.list_automated_reasoning_policy_build_workflows(
+        _request(ListAutomatedReasoningPolicyBuildWorkflowsInput)
+    )
+    client.list_automated_reasoning_policy_build_workflows(
+        _request(ListAutomatedReasoningPolicyBuildWorkflowsInputDict)
+    )
+    client.list_automated_reasoning_policy_test_cases(policy_arn=_)
+    client.list_automated_reasoning_policy_test_cases(
+        **_request(ListAutomatedReasoningPolicyTestCasesInputDict)
+    )
+    client.list_automated_reasoning_policy_test_cases(
+        _request(ListAutomatedReasoningPolicyTestCasesInput)
+    )
+    client.list_automated_reasoning_policy_test_cases(
+        _request(ListAutomatedReasoningPolicyTestCasesInputDict)
+    )
+    client.list_automated_reasoning_policy_test_results(
+        policy_arn=_, build_workflow_id=_
+    )
+    client.list_automated_reasoning_policy_test_results(
+        **_request(ListAutomatedReasoningPolicyTestResultsInputDict)
+    )
+    client.list_automated_reasoning_policy_test_results(
+        _request(ListAutomatedReasoningPolicyTestResultsInput)
+    )
+    client.list_automated_reasoning_policy_test_results(
+        _request(ListAutomatedReasoningPolicyTestResultsInputDict)
+    )
+    client.list_custom_model_deployments()
+    client.list_custom_model_deployments(
+        **_request(ListCustomModelDeploymentsInputDict)
+    )
+    client.list_custom_model_deployments(_request(ListCustomModelDeploymentsInput))
+    client.list_custom_model_deployments(_request(ListCustomModelDeploymentsInputDict))
+    client.list_custom_models()
+    client.list_custom_models(**_request(ListCustomModelsInputDict))
+    client.list_custom_models(_request(ListCustomModelsInput))
+    client.list_custom_models(_request(ListCustomModelsInputDict))
+    client.list_enforced_guardrails_configuration()
+    client.list_enforced_guardrails_configuration(
+        **_request(ListEnforcedGuardrailsConfigurationInputDict)
+    )
+    client.list_enforced_guardrails_configuration(
+        _request(ListEnforcedGuardrailsConfigurationInput)
+    )
+    client.list_enforced_guardrails_configuration(
+        _request(ListEnforcedGuardrailsConfigurationInputDict)
+    )
+    client.list_evaluation_jobs()
+    client.list_evaluation_jobs(**_request(ListEvaluationJobsInputDict))
+    client.list_evaluation_jobs(_request(ListEvaluationJobsInput))
+    client.list_evaluation_jobs(_request(ListEvaluationJobsInputDict))
+    client.list_foundation_model_agreement_offers(model_id=_)
+    client.list_foundation_model_agreement_offers(
+        **_request(ListFoundationModelAgreementOffersInputDict)
+    )
+    client.list_foundation_model_agreement_offers(
+        _request(ListFoundationModelAgreementOffersInput)
+    )
+    client.list_foundation_model_agreement_offers(
+        _request(ListFoundationModelAgreementOffersInputDict)
+    )
+    client.list_foundation_models()
+    client.list_foundation_models(**_request(ListFoundationModelsInputDict))
+    client.list_foundation_models(_request(ListFoundationModelsInput))
+    client.list_foundation_models(_request(ListFoundationModelsInputDict))
+    client.list_guardrails()
+    client.list_guardrails(**_request(ListGuardrailsInputDict))
+    client.list_guardrails(_request(ListGuardrailsInput))
+    client.list_guardrails(_request(ListGuardrailsInputDict))
+    client.list_imported_models()
+    client.list_imported_models(**_request(ListImportedModelsInputDict))
+    client.list_imported_models(_request(ListImportedModelsInput))
+    client.list_imported_models(_request(ListImportedModelsInputDict))
+    client.list_inference_profiles()
+    client.list_inference_profiles(**_request(ListInferenceProfilesInputDict))
+    client.list_inference_profiles(_request(ListInferenceProfilesInput))
+    client.list_inference_profiles(_request(ListInferenceProfilesInputDict))
+    client.list_marketplace_model_endpoints()
+    client.list_marketplace_model_endpoints(
+        **_request(ListMarketplaceModelEndpointsInputDict)
+    )
+    client.list_marketplace_model_endpoints(
+        _request(ListMarketplaceModelEndpointsInput)
+    )
+    client.list_marketplace_model_endpoints(
+        _request(ListMarketplaceModelEndpointsInputDict)
+    )
+    client.list_model_copy_jobs()
+    client.list_model_copy_jobs(**_request(ListModelCopyJobsInputDict))
+    client.list_model_copy_jobs(_request(ListModelCopyJobsInput))
+    client.list_model_copy_jobs(_request(ListModelCopyJobsInputDict))
+    client.list_model_customization_jobs()
+    client.list_model_customization_jobs(
+        **_request(ListModelCustomizationJobsInputDict)
+    )
+    client.list_model_customization_jobs(_request(ListModelCustomizationJobsInput))
+    client.list_model_customization_jobs(_request(ListModelCustomizationJobsInputDict))
+    client.list_model_import_jobs()
+    client.list_model_import_jobs(**_request(ListModelImportJobsInputDict))
+    client.list_model_import_jobs(_request(ListModelImportJobsInput))
+    client.list_model_import_jobs(_request(ListModelImportJobsInputDict))
+    client.list_model_invocation_jobs()
+    client.list_model_invocation_jobs(**_request(ListModelInvocationJobsInputDict))
+    client.list_model_invocation_jobs(_request(ListModelInvocationJobsInput))
+    client.list_model_invocation_jobs(_request(ListModelInvocationJobsInputDict))
+    client.list_prompt_routers()
+    client.list_prompt_routers(**_request(ListPromptRoutersInputDict))
+    client.list_prompt_routers(_request(ListPromptRoutersInput))
+    client.list_prompt_routers(_request(ListPromptRoutersInputDict))
+    client.list_provisioned_model_throughputs()
+    client.list_provisioned_model_throughputs(
+        **_request(ListProvisionedModelThroughputsInputDict)
+    )
+    client.list_provisioned_model_throughputs(
+        _request(ListProvisionedModelThroughputsInput)
+    )
+    client.list_provisioned_model_throughputs(
+        _request(ListProvisionedModelThroughputsInputDict)
+    )
+    client.list_tags_for_resource(resource_arn=_)
+    client.list_tags_for_resource(**_request(ListTagsForResourceInputDict))
+    client.list_tags_for_resource(_request(ListTagsForResourceInput))
+    client.list_tags_for_resource(_request(ListTagsForResourceInputDict))
+    client.put_account_data_retention(mode=_)
+    client.put_account_data_retention(**_request(PutAccountDataRetentionInputDict))
+    client.put_account_data_retention(_request(PutAccountDataRetentionInput))
+    client.put_account_data_retention(_request(PutAccountDataRetentionInputDict))
+    client.put_enforced_guardrail_configuration(guardrail_inference_config=_)
+    client.put_enforced_guardrail_configuration(
+        **_request(PutEnforcedGuardrailConfigurationInputDict)
+    )
+    client.put_enforced_guardrail_configuration(
+        _request(PutEnforcedGuardrailConfigurationInput)
+    )
+    client.put_enforced_guardrail_configuration(
+        _request(PutEnforcedGuardrailConfigurationInputDict)
+    )
+    client.put_model_invocation_logging_configuration(logging_config=_)
+    client.put_model_invocation_logging_configuration(
+        **_request(PutModelInvocationLoggingConfigurationInputDict)
+    )
+    client.put_model_invocation_logging_configuration(
+        _request(PutModelInvocationLoggingConfigurationInput)
+    )
+    client.put_model_invocation_logging_configuration(
+        _request(PutModelInvocationLoggingConfigurationInputDict)
+    )
+    client.put_resource_policy(resource_arn=_, resource_policy=_)
+    client.put_resource_policy(**_request(PutResourcePolicyInputDict))
+    client.put_resource_policy(_request(PutResourcePolicyInput))
+    client.put_resource_policy(_request(PutResourcePolicyInputDict))
+    client.put_use_case_for_model_access(form_data=_)
+    client.put_use_case_for_model_access(**_request(PutUseCaseForModelAccessInputDict))
+    client.put_use_case_for_model_access(_request(PutUseCaseForModelAccessInput))
+    client.put_use_case_for_model_access(_request(PutUseCaseForModelAccessInputDict))
+    client.register_marketplace_model_endpoint(
+        endpoint_identifier=_, model_source_identifier=_
+    )
+    client.register_marketplace_model_endpoint(
+        **_request(RegisterMarketplaceModelEndpointInputDict)
+    )
+    client.register_marketplace_model_endpoint(
+        _request(RegisterMarketplaceModelEndpointInput)
+    )
+    client.register_marketplace_model_endpoint(
+        _request(RegisterMarketplaceModelEndpointInputDict)
+    )
+    client.start_automated_reasoning_policy_build_workflow(
+        policy_arn=_, build_workflow_type=_, source_content=_
+    )
+    client.start_automated_reasoning_policy_build_workflow(
+        **_request(StartAutomatedReasoningPolicyBuildWorkflowInputDict)
+    )
+    client.start_automated_reasoning_policy_build_workflow(
+        _request(StartAutomatedReasoningPolicyBuildWorkflowInput)
+    )
+    client.start_automated_reasoning_policy_build_workflow(
+        _request(StartAutomatedReasoningPolicyBuildWorkflowInputDict)
+    )
+    client.start_automated_reasoning_policy_test_workflow(
+        policy_arn=_, build_workflow_id=_
+    )
+    client.start_automated_reasoning_policy_test_workflow(
+        **_request(StartAutomatedReasoningPolicyTestWorkflowInputDict)
+    )
+    client.start_automated_reasoning_policy_test_workflow(
+        _request(StartAutomatedReasoningPolicyTestWorkflowInput)
+    )
+    client.start_automated_reasoning_policy_test_workflow(
+        _request(StartAutomatedReasoningPolicyTestWorkflowInputDict)
+    )
+    client.stop_advanced_prompt_optimization_job(job_identifier=_)
+    client.stop_advanced_prompt_optimization_job(
+        **_request(StopAdvancedPromptOptimizationJobInputDict)
+    )
+    client.stop_advanced_prompt_optimization_job(
+        _request(StopAdvancedPromptOptimizationJobInput)
+    )
+    client.stop_advanced_prompt_optimization_job(
+        _request(StopAdvancedPromptOptimizationJobInputDict)
+    )
+    client.stop_evaluation_job(job_identifier=_)
+    client.stop_evaluation_job(**_request(StopEvaluationJobInputDict))
+    client.stop_evaluation_job(_request(StopEvaluationJobInput))
+    client.stop_evaluation_job(_request(StopEvaluationJobInputDict))
+    client.stop_model_customization_job(job_identifier=_)
+    client.stop_model_customization_job(**_request(StopModelCustomizationJobInputDict))
+    client.stop_model_customization_job(_request(StopModelCustomizationJobInput))
+    client.stop_model_customization_job(_request(StopModelCustomizationJobInputDict))
+    client.stop_model_invocation_job(job_identifier=_)
+    client.stop_model_invocation_job(**_request(StopModelInvocationJobInputDict))
+    client.stop_model_invocation_job(_request(StopModelInvocationJobInput))
+    client.stop_model_invocation_job(_request(StopModelInvocationJobInputDict))
+    client.tag_resource(resource_arn=_, tags=_)
+    client.tag_resource(**_request(TagResourceInputDict))
+    client.tag_resource(_request(TagResourceInput))
+    client.tag_resource(_request(TagResourceInputDict))
+    client.untag_resource(resource_arn=_, tag_keys=_)
+    client.untag_resource(**_request(UntagResourceInputDict))
+    client.untag_resource(_request(UntagResourceInput))
+    client.untag_resource(_request(UntagResourceInputDict))
+    client.update_automated_reasoning_policy(policy_arn=_, policy_definition=_)
+    client.update_automated_reasoning_policy(
+        **_request(UpdateAutomatedReasoningPolicyInputDict)
+    )
+    client.update_automated_reasoning_policy(
+        _request(UpdateAutomatedReasoningPolicyInput)
+    )
+    client.update_automated_reasoning_policy(
+        _request(UpdateAutomatedReasoningPolicyInputDict)
+    )
+    client.update_automated_reasoning_policy_annotations(
+        policy_arn=_,
+        build_workflow_id=_,
+        annotations=_,
+        last_updated_annotation_set_hash=_,
+    )
+    client.update_automated_reasoning_policy_annotations(
+        **_request(UpdateAutomatedReasoningPolicyAnnotationsInputDict)
+    )
+    client.update_automated_reasoning_policy_annotations(
+        _request(UpdateAutomatedReasoningPolicyAnnotationsInput)
+    )
+    client.update_automated_reasoning_policy_annotations(
+        _request(UpdateAutomatedReasoningPolicyAnnotationsInputDict)
+    )
+    client.update_automated_reasoning_policy_test_case(
+        policy_arn=_,
+        test_case_id=_,
+        guard_content=_,
+        last_updated_at=_,
+        expected_aggregated_findings_result=_,
+    )
+    client.update_automated_reasoning_policy_test_case(
+        **_request(UpdateAutomatedReasoningPolicyTestCaseInputDict)
+    )
+    client.update_automated_reasoning_policy_test_case(
+        _request(UpdateAutomatedReasoningPolicyTestCaseInput)
+    )
+    client.update_automated_reasoning_policy_test_case(
+        _request(UpdateAutomatedReasoningPolicyTestCaseInputDict)
+    )
+    client.update_custom_model_deployment(
+        model_arn=_, custom_model_deployment_identifier=_
+    )
+    client.update_custom_model_deployment(
+        **_request(UpdateCustomModelDeploymentInputDict)
+    )
+    client.update_custom_model_deployment(_request(UpdateCustomModelDeploymentInput))
+    client.update_custom_model_deployment(
+        _request(UpdateCustomModelDeploymentInputDict)
+    )
+    client.update_guardrail(
+        guardrail_identifier=_,
+        name=_,
+        blocked_input_messaging=_,
+        blocked_outputs_messaging=_,
+    )
+    client.update_guardrail(**_request(UpdateGuardrailInputDict))
+    client.update_guardrail(_request(UpdateGuardrailInput))
+    client.update_guardrail(_request(UpdateGuardrailInputDict))
+    client.update_marketplace_model_endpoint(endpoint_arn=_, endpoint_config=_)
+    client.update_marketplace_model_endpoint(
+        **_request(UpdateMarketplaceModelEndpointInputDict)
+    )
+    client.update_marketplace_model_endpoint(
+        _request(UpdateMarketplaceModelEndpointInput)
+    )
+    client.update_marketplace_model_endpoint(
+        _request(UpdateMarketplaceModelEndpointInputDict)
+    )
+    client.update_provisioned_model_throughput(provisioned_model_id=_)
+    client.update_provisioned_model_throughput(
+        **_request(UpdateProvisionedModelThroughputInputDict)
+    )
+    client.update_provisioned_model_throughput(
+        _request(UpdateProvisionedModelThroughputInput)
+    )
+    client.update_provisioned_model_throughput(
+        _request(UpdateProvisionedModelThroughputInputDict)
+    )

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import cast
+from typing import Unpack as _Unpack, cast, overload as _overload
 
 from smithy_aws_core.config.types import ConfigSource
 from smithy_aws_core.identity.chain.resolver import IdentityChain
@@ -20,35 +20,20 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from .models import (
-        ActivateSubscriptionInput,
         ActivateSubscriptionOutput,
-        CreateDomainInput,
         CreateDomainOutput,
-        CreateSubscriptionInput,
         CreateSubscriptionOutput,
-        DeactivateSubscriptionInput,
         DeactivateSubscriptionOutput,
-        DeleteDomainInput,
         DeleteDomainOutput,
-        GetDomainInput,
         GetDomainOutput,
-        GetMedicalScribeListeningSessionInput,
         GetMedicalScribeListeningSessionOutput,
-        GetPatientInsightsJobInput,
         GetPatientInsightsJobOutput,
-        GetSubscriptionInput,
         GetSubscriptionOutput,
-        ListDomainsInput,
         ListDomainsOutput,
-        ListSubscriptionsInput,
         ListSubscriptionsOutput,
-        ListTagsForResourceInput,
         ListTagsForResourceOutput,
-        StartPatientInsightsJobInput,
         StartPatientInsightsJobOutput,
-        TagResourceInput,
         TagResourceOutput,
-        UntagResourceInput,
         UntagResourceOutput,
     )
 
@@ -72,17 +57,30 @@ class ConnectHealthClient(Client[ConnectHealthConfig]):
     Amazon Connect Health.
     """
 
-    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
+    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
 
+    @_overload
     def activate_subscription(
-        self, input: ActivateSubscriptionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ActivateSubscriptionInput
+        | _models.ActivateSubscriptionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ActivateSubscriptionOutput: ...
+
+    @_overload
+    def activate_subscription(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ActivateSubscriptionInputDict],
     ) -> ActivateSubscriptionOutput:
         """
         Activates a Subscription to enable billing for a user.
 
         Args:
-            input:
-                An instance of `ActivateSubscriptionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -92,17 +90,38 @@ class ConnectHealthClient(Client[ConnectHealthConfig]):
         Returns:
             An instance of `ActivateSubscriptionOutput`.
         """
-        return self._invoke(input, _models.ACTIVATE_SUBSCRIPTION, [], plugins)
 
+    def activate_subscription(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ActivateSubscriptionOutput:
+        return self._invoke(
+            self._select_input(_models.ACTIVATE_SUBSCRIPTION, args, kwargs),
+            _models.ACTIVATE_SUBSCRIPTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_domain(
-        self, input: CreateDomainInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateDomainInput | _models.CreateDomainInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateDomainOutput: ...
+
+    @_overload
+    def create_domain(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateDomainInputDict],
     ) -> CreateDomainOutput:
         """
         Creates a new Domain for managing HealthAgent resources.
 
         Args:
-            input:
-                An instance of `CreateDomainInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -112,18 +131,39 @@ class ConnectHealthClient(Client[ConnectHealthConfig]):
         Returns:
             An instance of `CreateDomainOutput`.
         """
-        return self._invoke(input, _models.CREATE_DOMAIN, [], plugins)
 
+    def create_domain(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateDomainOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_DOMAIN, args, kwargs),
+            _models.CREATE_DOMAIN,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_subscription(
-        self, input: CreateSubscriptionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateSubscriptionInput | _models.CreateSubscriptionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateSubscriptionOutput: ...
+
+    @_overload
+    def create_subscription(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateSubscriptionInputDict],
     ) -> CreateSubscriptionOutput:
         """
         Creates a new Subscription within a Domain for billing and user
         management.
 
         Args:
-            input:
-                An instance of `CreateSubscriptionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -133,17 +173,39 @@ class ConnectHealthClient(Client[ConnectHealthConfig]):
         Returns:
             An instance of `CreateSubscriptionOutput`.
         """
-        return self._invoke(input, _models.CREATE_SUBSCRIPTION, [], plugins)
 
+    def create_subscription(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateSubscriptionOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_SUBSCRIPTION, args, kwargs),
+            _models.CREATE_SUBSCRIPTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def deactivate_subscription(
-        self, input: DeactivateSubscriptionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeactivateSubscriptionInput
+        | _models.DeactivateSubscriptionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeactivateSubscriptionOutput: ...
+
+    @_overload
+    def deactivate_subscription(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeactivateSubscriptionInputDict],
     ) -> DeactivateSubscriptionOutput:
         """
         Deactivates a Subscription to stop billing for a user.
 
         Args:
-            input:
-                An instance of `DeactivateSubscriptionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -153,17 +215,38 @@ class ConnectHealthClient(Client[ConnectHealthConfig]):
         Returns:
             An instance of `DeactivateSubscriptionOutput`.
         """
-        return self._invoke(input, _models.DEACTIVATE_SUBSCRIPTION, [], plugins)
 
+    def deactivate_subscription(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeactivateSubscriptionOutput:
+        return self._invoke(
+            self._select_input(_models.DEACTIVATE_SUBSCRIPTION, args, kwargs),
+            _models.DEACTIVATE_SUBSCRIPTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_domain(
-        self, input: DeleteDomainInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteDomainInput | _models.DeleteDomainInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteDomainOutput: ...
+
+    @_overload
+    def delete_domain(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteDomainInputDict],
     ) -> DeleteDomainOutput:
         """
         Deletes a Domain and all associated resources.
 
         Args:
-            input:
-                An instance of `DeleteDomainInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -173,17 +256,38 @@ class ConnectHealthClient(Client[ConnectHealthConfig]):
         Returns:
             An instance of `DeleteDomainOutput`.
         """
-        return self._invoke(input, _models.DELETE_DOMAIN, [], plugins)
 
+    def delete_domain(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteDomainOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_DOMAIN, args, kwargs),
+            _models.DELETE_DOMAIN,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_domain(
-        self, input: GetDomainInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetDomainInput | _models.GetDomainInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetDomainOutput: ...
+
+    @_overload
+    def get_domain(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetDomainInputDict],
     ) -> GetDomainOutput:
         """
         Retrieves information about a Domain.
 
         Args:
-            input:
-                An instance of `GetDomainInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -193,19 +297,39 @@ class ConnectHealthClient(Client[ConnectHealthConfig]):
         Returns:
             An instance of `GetDomainOutput`.
         """
-        return self._invoke(input, _models.GET_DOMAIN, [], plugins)
 
+    def get_domain(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetDomainOutput:
+        return self._invoke(
+            self._select_input(_models.GET_DOMAIN, args, kwargs),
+            _models.GET_DOMAIN,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_medical_scribe_listening_session(
         self,
-        input: GetMedicalScribeListeningSessionInput,
+        request: _models.GetMedicalScribeListeningSessionInput
+        | _models.GetMedicalScribeListeningSessionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetMedicalScribeListeningSessionOutput: ...
+
+    @_overload
+    def get_medical_scribe_listening_session(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetMedicalScribeListeningSessionInputDict],
     ) -> GetMedicalScribeListeningSessionOutput:
         """
         Retrieves details about an existing Medical Scribe listening session
 
         Args:
-            input:
-                An instance of `GetMedicalScribeListeningSessionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -215,19 +339,41 @@ class ConnectHealthClient(Client[ConnectHealthConfig]):
         Returns:
             An instance of `GetMedicalScribeListeningSessionOutput`.
         """
+
+    def get_medical_scribe_listening_session(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetMedicalScribeListeningSessionOutput:
         return self._invoke(
-            input, _models.GET_MEDICAL_SCRIBE_LISTENING_SESSION, [], plugins
+            self._select_input(
+                _models.GET_MEDICAL_SCRIBE_LISTENING_SESSION, args, kwargs
+            ),
+            _models.GET_MEDICAL_SCRIBE_LISTENING_SESSION,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_patient_insights_job(
-        self, input: GetPatientInsightsJobInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetPatientInsightsJobInput
+        | _models.GetPatientInsightsJobInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetPatientInsightsJobOutput: ...
+
+    @_overload
+    def get_patient_insights_job(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetPatientInsightsJobInputDict],
     ) -> GetPatientInsightsJobOutput:
         """
         Get details of a started patient insights job.
 
         Args:
-            input:
-                An instance of `GetPatientInsightsJobInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -237,17 +383,38 @@ class ConnectHealthClient(Client[ConnectHealthConfig]):
         Returns:
             An instance of `GetPatientInsightsJobOutput`.
         """
-        return self._invoke(input, _models.GET_PATIENT_INSIGHTS_JOB, [], plugins)
 
+    def get_patient_insights_job(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetPatientInsightsJobOutput:
+        return self._invoke(
+            self._select_input(_models.GET_PATIENT_INSIGHTS_JOB, args, kwargs),
+            _models.GET_PATIENT_INSIGHTS_JOB,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_subscription(
-        self, input: GetSubscriptionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetSubscriptionInput | _models.GetSubscriptionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetSubscriptionOutput: ...
+
+    @_overload
+    def get_subscription(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetSubscriptionInputDict],
     ) -> GetSubscriptionOutput:
         """
         Retrieves information about a Subscription.
 
         Args:
-            input:
-                An instance of `GetSubscriptionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -257,17 +424,38 @@ class ConnectHealthClient(Client[ConnectHealthConfig]):
         Returns:
             An instance of `GetSubscriptionOutput`.
         """
-        return self._invoke(input, _models.GET_SUBSCRIPTION, [], plugins)
 
+    def get_subscription(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetSubscriptionOutput:
+        return self._invoke(
+            self._select_input(_models.GET_SUBSCRIPTION, args, kwargs),
+            _models.GET_SUBSCRIPTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_domains(
-        self, input: ListDomainsInput | None = None, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListDomainsInput | _models.ListDomainsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListDomainsOutput: ...
+
+    @_overload
+    def list_domains(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListDomainsInputDict],
     ) -> ListDomainsOutput:
         """
         Lists Domains for a given account.
 
         Args:
-            input:
-                An instance of `ListDomainsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -277,17 +465,38 @@ class ConnectHealthClient(Client[ConnectHealthConfig]):
         Returns:
             An instance of `ListDomainsOutput`.
         """
-        return self._invoke(input, _models.LIST_DOMAINS, [], plugins)
 
+    def list_domains(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListDomainsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_DOMAINS, args, kwargs),
+            _models.LIST_DOMAINS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_subscriptions(
-        self, input: ListSubscriptionsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListSubscriptionsInput | _models.ListSubscriptionsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListSubscriptionsOutput: ...
+
+    @_overload
+    def list_subscriptions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListSubscriptionsInputDict],
     ) -> ListSubscriptionsOutput:
         """
         Lists all Subscriptions within a Domain.
 
         Args:
-            input:
-                An instance of `ListSubscriptionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -297,17 +506,39 @@ class ConnectHealthClient(Client[ConnectHealthConfig]):
         Returns:
             An instance of `ListSubscriptionsOutput`.
         """
-        return self._invoke(input, _models.LIST_SUBSCRIPTIONS, [], plugins)
 
+    def list_subscriptions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListSubscriptionsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_SUBSCRIPTIONS, args, kwargs),
+            _models.LIST_SUBSCRIPTIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_tags_for_resource(
-        self, input: ListTagsForResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListTagsForResourceInput
+        | _models.ListTagsForResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListTagsForResourceOutput: ...
+
+    @_overload
+    def list_tags_for_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListTagsForResourceInputDict],
     ) -> ListTagsForResourceOutput:
         """
         Lists the tags associated with the specified resource
 
         Args:
-            input:
-                An instance of `ListTagsForResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -317,17 +548,39 @@ class ConnectHealthClient(Client[ConnectHealthConfig]):
         Returns:
             An instance of `ListTagsForResourceOutput`.
         """
-        return self._invoke(input, _models.LIST_TAGS_FOR_RESOURCE, [], plugins)
 
+    def list_tags_for_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListTagsForResourceOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_TAGS_FOR_RESOURCE, args, kwargs),
+            _models.LIST_TAGS_FOR_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def start_patient_insights_job(
-        self, input: StartPatientInsightsJobInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StartPatientInsightsJobInput
+        | _models.StartPatientInsightsJobInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StartPatientInsightsJobOutput: ...
+
+    @_overload
+    def start_patient_insights_job(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartPatientInsightsJobInputDict],
     ) -> StartPatientInsightsJobOutput:
         """
         Starts a new patient insights job.
 
         Args:
-            input:
-                An instance of `StartPatientInsightsJobInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -337,17 +590,38 @@ class ConnectHealthClient(Client[ConnectHealthConfig]):
         Returns:
             An instance of `StartPatientInsightsJobOutput`.
         """
-        return self._invoke(input, _models.START_PATIENT_INSIGHTS_JOB, [], plugins)
 
+    def start_patient_insights_job(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StartPatientInsightsJobOutput:
+        return self._invoke(
+            self._select_input(_models.START_PATIENT_INSIGHTS_JOB, args, kwargs),
+            _models.START_PATIENT_INSIGHTS_JOB,
+            [],
+            plugins,
+        )
+
+    @_overload
     def tag_resource(
-        self, input: TagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.TagResourceInput | _models.TagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> TagResourceOutput: ...
+
+    @_overload
+    def tag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.TagResourceInputDict],
     ) -> TagResourceOutput:
         """
         Associates the specified tags with the specified resource
 
         Args:
-            input:
-                An instance of `TagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -357,17 +631,38 @@ class ConnectHealthClient(Client[ConnectHealthConfig]):
         Returns:
             An instance of `TagResourceOutput`.
         """
-        return self._invoke(input, _models.TAG_RESOURCE, [], plugins)
 
+    def tag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> TagResourceOutput:
+        return self._invoke(
+            self._select_input(_models.TAG_RESOURCE, args, kwargs),
+            _models.TAG_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def untag_resource(
-        self, input: UntagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UntagResourceInput | _models.UntagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UntagResourceOutput: ...
+
+    @_overload
+    def untag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UntagResourceInputDict],
     ) -> UntagResourceOutput:
         """
         Removes the specified tags from the specified resource
 
         Args:
-            input:
-                An instance of `UntagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -377,7 +672,16 @@ class ConnectHealthClient(Client[ConnectHealthConfig]):
         Returns:
             An instance of `UntagResourceOutput`.
         """
-        return self._invoke(input, _models.UNTAG_RESOURCE, [], plugins)
+
+    def untag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UntagResourceOutput:
+        return self._invoke(
+            self._select_input(_models.UNTAG_RESOURCE, args, kwargs),
+            _models.UNTAG_RESOURCE,
+            [],
+            plugins,
+        )
 
     def _new_config(self) -> ConnectHealthConfig:
         return ConnectHealthConfig.resolve()
