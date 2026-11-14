@@ -5,7 +5,7 @@
 
 import uuid
 
-from aws_sdk_qbusiness.models import ChatSyncInput, ChatSyncOutput
+from aws_sdk_qbusiness.models import ChatSyncOutput
 
 from . import REGION, create_qbusiness_client
 
@@ -14,11 +14,9 @@ async def test_chat_sync(qbusiness_app: str) -> None:
     """Test non-streaming ChatSync operation."""
     async with await create_qbusiness_client(REGION) as qbusiness_client:
         response = await qbusiness_client.chat_sync(
-            input=ChatSyncInput(
-                application_id=qbusiness_app,
-                user_message="Hello",
-                client_token=str(uuid.uuid4()),
-            )
+            application_id=qbusiness_app,
+            user_message="Hello",
+            client_token=str(uuid.uuid4()),
         )
 
         assert isinstance(response, ChatSyncOutput)

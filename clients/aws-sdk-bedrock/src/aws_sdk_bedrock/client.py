@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import cast
+from typing import Unpack as _Unpack, cast, overload as _overload
 
 from smithy_aws_core.config.types import ConfigSource
 from smithy_aws_core.identity.chain.resolver import IdentityChain
@@ -20,221 +20,113 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from .models import (
-        BatchDeleteAdvancedPromptOptimizationJobInput,
         BatchDeleteAdvancedPromptOptimizationJobOutput,
-        BatchDeleteEvaluationJobInput,
         BatchDeleteEvaluationJobOutput,
-        CancelAutomatedReasoningPolicyBuildWorkflowInput,
         CancelAutomatedReasoningPolicyBuildWorkflowOutput,
-        CreateAdvancedPromptOptimizationJobInput,
         CreateAdvancedPromptOptimizationJobOutput,
-        CreateAutomatedReasoningPolicyInput,
         CreateAutomatedReasoningPolicyOutput,
-        CreateAutomatedReasoningPolicyTestCaseInput,
         CreateAutomatedReasoningPolicyTestCaseOutput,
-        CreateAutomatedReasoningPolicyVersionInput,
         CreateAutomatedReasoningPolicyVersionOutput,
-        CreateCustomModelDeploymentInput,
         CreateCustomModelDeploymentOutput,
-        CreateCustomModelInput,
         CreateCustomModelOutput,
-        CreateEvaluationJobInput,
         CreateEvaluationJobOutput,
-        CreateFoundationModelAgreementInput,
         CreateFoundationModelAgreementOutput,
-        CreateGuardrailInput,
         CreateGuardrailOutput,
-        CreateGuardrailVersionInput,
         CreateGuardrailVersionOutput,
-        CreateInferenceProfileInput,
         CreateInferenceProfileOutput,
-        CreateMarketplaceModelEndpointInput,
         CreateMarketplaceModelEndpointOutput,
-        CreateModelCopyJobInput,
         CreateModelCopyJobOutput,
-        CreateModelCustomizationJobInput,
         CreateModelCustomizationJobOutput,
-        CreateModelImportJobInput,
         CreateModelImportJobOutput,
-        CreateModelInvocationJobInput,
         CreateModelInvocationJobOutput,
-        CreatePromptRouterInput,
         CreatePromptRouterOutput,
-        CreateProvisionedModelThroughputInput,
         CreateProvisionedModelThroughputOutput,
-        DeleteAutomatedReasoningPolicyBuildWorkflowInput,
         DeleteAutomatedReasoningPolicyBuildWorkflowOutput,
-        DeleteAutomatedReasoningPolicyInput,
         DeleteAutomatedReasoningPolicyOutput,
-        DeleteAutomatedReasoningPolicyTestCaseInput,
         DeleteAutomatedReasoningPolicyTestCaseOutput,
-        DeleteCustomModelDeploymentInput,
         DeleteCustomModelDeploymentOutput,
-        DeleteCustomModelInput,
         DeleteCustomModelOutput,
-        DeleteEnforcedGuardrailConfigurationInput,
         DeleteEnforcedGuardrailConfigurationOutput,
-        DeleteFoundationModelAgreementInput,
         DeleteFoundationModelAgreementOutput,
-        DeleteGuardrailInput,
         DeleteGuardrailOutput,
-        DeleteImportedModelInput,
         DeleteImportedModelOutput,
-        DeleteInferenceProfileInput,
         DeleteInferenceProfileOutput,
-        DeleteMarketplaceModelEndpointInput,
         DeleteMarketplaceModelEndpointOutput,
-        DeleteModelInvocationLoggingConfigurationInput,
         DeleteModelInvocationLoggingConfigurationOutput,
-        DeletePromptRouterInput,
         DeletePromptRouterOutput,
-        DeleteProvisionedModelThroughputInput,
         DeleteProvisionedModelThroughputOutput,
-        DeleteResourcePolicyInput,
         DeleteResourcePolicyOutput,
-        DeregisterMarketplaceModelEndpointInput,
         DeregisterMarketplaceModelEndpointOutput,
-        ExportAutomatedReasoningPolicyVersionInput,
         ExportAutomatedReasoningPolicyVersionOutput,
-        GetAccountDataRetentionInput,
         GetAccountDataRetentionOutput,
-        GetAdvancedPromptOptimizationJobInput,
         GetAdvancedPromptOptimizationJobOutput,
-        GetAutomatedReasoningPolicyAnnotationsInput,
         GetAutomatedReasoningPolicyAnnotationsOutput,
-        GetAutomatedReasoningPolicyBuildWorkflowInput,
         GetAutomatedReasoningPolicyBuildWorkflowOutput,
-        GetAutomatedReasoningPolicyBuildWorkflowResultAssetsInput,
         GetAutomatedReasoningPolicyBuildWorkflowResultAssetsOutput,
-        GetAutomatedReasoningPolicyInput,
-        GetAutomatedReasoningPolicyNextScenarioInput,
         GetAutomatedReasoningPolicyNextScenarioOutput,
         GetAutomatedReasoningPolicyOutput,
-        GetAutomatedReasoningPolicyTestCaseInput,
         GetAutomatedReasoningPolicyTestCaseOutput,
-        GetAutomatedReasoningPolicyTestResultInput,
         GetAutomatedReasoningPolicyTestResultOutput,
-        GetCustomModelDeploymentInput,
         GetCustomModelDeploymentOutput,
-        GetCustomModelInput,
         GetCustomModelOutput,
-        GetEvaluationJobInput,
         GetEvaluationJobOutput,
-        GetFoundationModelAvailabilityInput,
         GetFoundationModelAvailabilityOutput,
-        GetFoundationModelInput,
         GetFoundationModelOutput,
-        GetGuardrailInput,
         GetGuardrailOutput,
-        GetImportedModelInput,
         GetImportedModelOutput,
-        GetInferenceProfileInput,
         GetInferenceProfileOutput,
-        GetMarketplaceModelEndpointInput,
         GetMarketplaceModelEndpointOutput,
-        GetModelCopyJobInput,
         GetModelCopyJobOutput,
-        GetModelCustomizationJobInput,
         GetModelCustomizationJobOutput,
-        GetModelImportJobInput,
         GetModelImportJobOutput,
-        GetModelInvocationJobInput,
         GetModelInvocationJobOutput,
-        GetModelInvocationLoggingConfigurationInput,
         GetModelInvocationLoggingConfigurationOutput,
-        GetPromptRouterInput,
         GetPromptRouterOutput,
-        GetProvisionedModelThroughputInput,
         GetProvisionedModelThroughputOutput,
-        GetResourcePolicyInput,
         GetResourcePolicyOutput,
-        GetUseCaseForModelAccessInput,
         GetUseCaseForModelAccessOutput,
-        ListAdvancedPromptOptimizationJobsInput,
         ListAdvancedPromptOptimizationJobsOutput,
-        ListAutomatedReasoningPoliciesInput,
         ListAutomatedReasoningPoliciesOutput,
-        ListAutomatedReasoningPolicyBuildWorkflowsInput,
         ListAutomatedReasoningPolicyBuildWorkflowsOutput,
-        ListAutomatedReasoningPolicyTestCasesInput,
         ListAutomatedReasoningPolicyTestCasesOutput,
-        ListAutomatedReasoningPolicyTestResultsInput,
         ListAutomatedReasoningPolicyTestResultsOutput,
-        ListCustomModelDeploymentsInput,
         ListCustomModelDeploymentsOutput,
-        ListCustomModelsInput,
         ListCustomModelsOutput,
-        ListEnforcedGuardrailsConfigurationInput,
         ListEnforcedGuardrailsConfigurationOutput,
-        ListEvaluationJobsInput,
         ListEvaluationJobsOutput,
-        ListFoundationModelAgreementOffersInput,
         ListFoundationModelAgreementOffersOutput,
-        ListFoundationModelsInput,
         ListFoundationModelsOutput,
-        ListGuardrailsInput,
         ListGuardrailsOutput,
-        ListImportedModelsInput,
         ListImportedModelsOutput,
-        ListInferenceProfilesInput,
         ListInferenceProfilesOutput,
-        ListMarketplaceModelEndpointsInput,
         ListMarketplaceModelEndpointsOutput,
-        ListModelCopyJobsInput,
         ListModelCopyJobsOutput,
-        ListModelCustomizationJobsInput,
         ListModelCustomizationJobsOutput,
-        ListModelImportJobsInput,
         ListModelImportJobsOutput,
-        ListModelInvocationJobsInput,
         ListModelInvocationJobsOutput,
-        ListPromptRoutersInput,
         ListPromptRoutersOutput,
-        ListProvisionedModelThroughputsInput,
         ListProvisionedModelThroughputsOutput,
-        ListTagsForResourceInput,
         ListTagsForResourceOutput,
-        PutAccountDataRetentionInput,
         PutAccountDataRetentionOutput,
-        PutEnforcedGuardrailConfigurationInput,
         PutEnforcedGuardrailConfigurationOutput,
-        PutModelInvocationLoggingConfigurationInput,
         PutModelInvocationLoggingConfigurationOutput,
-        PutResourcePolicyInput,
         PutResourcePolicyOutput,
-        PutUseCaseForModelAccessInput,
         PutUseCaseForModelAccessOutput,
-        RegisterMarketplaceModelEndpointInput,
         RegisterMarketplaceModelEndpointOutput,
-        StartAutomatedReasoningPolicyBuildWorkflowInput,
         StartAutomatedReasoningPolicyBuildWorkflowOutput,
-        StartAutomatedReasoningPolicyTestWorkflowInput,
         StartAutomatedReasoningPolicyTestWorkflowOutput,
-        StopAdvancedPromptOptimizationJobInput,
         StopAdvancedPromptOptimizationJobOutput,
-        StopEvaluationJobInput,
         StopEvaluationJobOutput,
-        StopModelCustomizationJobInput,
         StopModelCustomizationJobOutput,
-        StopModelInvocationJobInput,
         StopModelInvocationJobOutput,
-        TagResourceInput,
         TagResourceOutput,
-        UntagResourceInput,
         UntagResourceOutput,
-        UpdateAutomatedReasoningPolicyAnnotationsInput,
         UpdateAutomatedReasoningPolicyAnnotationsOutput,
-        UpdateAutomatedReasoningPolicyInput,
         UpdateAutomatedReasoningPolicyOutput,
-        UpdateAutomatedReasoningPolicyTestCaseInput,
         UpdateAutomatedReasoningPolicyTestCaseOutput,
-        UpdateCustomModelDeploymentInput,
         UpdateCustomModelDeploymentOutput,
-        UpdateGuardrailInput,
         UpdateGuardrailOutput,
-        UpdateMarketplaceModelEndpointInput,
         UpdateMarketplaceModelEndpointOutput,
-        UpdateProvisionedModelThroughputInput,
         UpdateProvisionedModelThroughputOutput,
     )
 
@@ -248,19 +140,30 @@ class BedrockClient(Client[BedrockConfig]):
     evaluating Amazon Bedrock models.
     """
 
-    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
+    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
 
+    @_overload
     def batch_delete_advanced_prompt_optimization_job(
         self,
-        input: BatchDeleteAdvancedPromptOptimizationJobInput,
+        request: _models.BatchDeleteAdvancedPromptOptimizationJobInput
+        | _models.BatchDeleteAdvancedPromptOptimizationJobInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> BatchDeleteAdvancedPromptOptimizationJobOutput: ...
+
+    @_overload
+    def batch_delete_advanced_prompt_optimization_job(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.BatchDeleteAdvancedPromptOptimizationJobInputDict],
     ) -> BatchDeleteAdvancedPromptOptimizationJobOutput:
         """
         Deletes one or more advanced prompt optimization jobs.
 
         Args:
-            input:
-                An instance of `BatchDeleteAdvancedPromptOptimizationJobInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -270,12 +173,36 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `BatchDeleteAdvancedPromptOptimizationJobOutput`.
         """
+
+    def batch_delete_advanced_prompt_optimization_job(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> BatchDeleteAdvancedPromptOptimizationJobOutput:
         return self._invoke(
-            input, _models.BATCH_DELETE_ADVANCED_PROMPT_OPTIMIZATION_JOB, [], plugins
+            self._select_input(
+                _models.BATCH_DELETE_ADVANCED_PROMPT_OPTIMIZATION_JOB, args, kwargs
+            ),
+            _models.BATCH_DELETE_ADVANCED_PROMPT_OPTIMIZATION_JOB,
+            [],
+            plugins,
         )
 
+    @_overload
     def batch_delete_evaluation_job(
-        self, input: BatchDeleteEvaluationJobInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.BatchDeleteEvaluationJobInput
+        | _models.BatchDeleteEvaluationJobInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> BatchDeleteEvaluationJobOutput: ...
+
+    @_overload
+    def batch_delete_evaluation_job(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.BatchDeleteEvaluationJobInputDict],
     ) -> BatchDeleteEvaluationJobOutput:
         """
         Deletes a batch of evaluation jobs. An evaluation job can only be
@@ -284,8 +211,6 @@ class BedrockClient(Client[BedrockConfig]):
         request.
 
         Args:
-            input:
-                An instance of `BatchDeleteEvaluationJobInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -295,12 +220,34 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `BatchDeleteEvaluationJobOutput`.
         """
-        return self._invoke(input, _models.BATCH_DELETE_EVALUATION_JOB, [], plugins)
 
+    def batch_delete_evaluation_job(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> BatchDeleteEvaluationJobOutput:
+        return self._invoke(
+            self._select_input(_models.BATCH_DELETE_EVALUATION_JOB, args, kwargs),
+            _models.BATCH_DELETE_EVALUATION_JOB,
+            [],
+            plugins,
+        )
+
+    @_overload
     def cancel_automated_reasoning_policy_build_workflow(
         self,
-        input: CancelAutomatedReasoningPolicyBuildWorkflowInput,
+        request: _models.CancelAutomatedReasoningPolicyBuildWorkflowInput
+        | _models.CancelAutomatedReasoningPolicyBuildWorkflowInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CancelAutomatedReasoningPolicyBuildWorkflowOutput: ...
+
+    @_overload
+    def cancel_automated_reasoning_policy_build_workflow(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CancelAutomatedReasoningPolicyBuildWorkflowInputDict],
     ) -> CancelAutomatedReasoningPolicyBuildWorkflowOutput:
         """
         Cancels a running Automated Reasoning policy build workflow. This stops
@@ -308,8 +255,6 @@ class BedrockClient(Client[BedrockConfig]):
         source documents.
 
         Args:
-            input:
-                An instance of `CancelAutomatedReasoningPolicyBuildWorkflowInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -319,14 +264,36 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `CancelAutomatedReasoningPolicyBuildWorkflowOutput`.
         """
+
+    def cancel_automated_reasoning_policy_build_workflow(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CancelAutomatedReasoningPolicyBuildWorkflowOutput:
         return self._invoke(
-            input, _models.CANCEL_AUTOMATED_REASONING_POLICY_BUILD_WORKFLOW, [], plugins
+            self._select_input(
+                _models.CANCEL_AUTOMATED_REASONING_POLICY_BUILD_WORKFLOW, args, kwargs
+            ),
+            _models.CANCEL_AUTOMATED_REASONING_POLICY_BUILD_WORKFLOW,
+            [],
+            plugins,
         )
 
+    @_overload
     def create_advanced_prompt_optimization_job(
         self,
-        input: CreateAdvancedPromptOptimizationJobInput,
+        request: _models.CreateAdvancedPromptOptimizationJobInput
+        | _models.CreateAdvancedPromptOptimizationJobInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateAdvancedPromptOptimizationJobOutput: ...
+
+    @_overload
+    def create_advanced_prompt_optimization_job(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateAdvancedPromptOptimizationJobInputDict],
     ) -> CreateAdvancedPromptOptimizationJobOutput:
         """
         Creates an advanced prompt optimization job. The job optimizes your
@@ -334,8 +301,6 @@ class BedrockClient(Client[BedrockConfig]):
         criteria.
 
         Args:
-            input:
-                An instance of `CreateAdvancedPromptOptimizationJobInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -345,14 +310,36 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `CreateAdvancedPromptOptimizationJobOutput`.
         """
+
+    def create_advanced_prompt_optimization_job(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateAdvancedPromptOptimizationJobOutput:
         return self._invoke(
-            input, _models.CREATE_ADVANCED_PROMPT_OPTIMIZATION_JOB, [], plugins
+            self._select_input(
+                _models.CREATE_ADVANCED_PROMPT_OPTIMIZATION_JOB, args, kwargs
+            ),
+            _models.CREATE_ADVANCED_PROMPT_OPTIMIZATION_JOB,
+            [],
+            plugins,
         )
 
+    @_overload
     def create_automated_reasoning_policy(
         self,
-        input: CreateAutomatedReasoningPolicyInput,
+        request: _models.CreateAutomatedReasoningPolicyInput
+        | _models.CreateAutomatedReasoningPolicyInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateAutomatedReasoningPolicyOutput: ...
+
+    @_overload
+    def create_automated_reasoning_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateAutomatedReasoningPolicyInputDict],
     ) -> CreateAutomatedReasoningPolicyOutput:
         """
         Creates an Automated Reasoning policy for Amazon Bedrock Guardrails.
@@ -366,8 +353,6 @@ class BedrockClient(Client[BedrockConfig]):
         policy and infers policy rules.
 
         Args:
-            input:
-                An instance of `CreateAutomatedReasoningPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -377,14 +362,34 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `CreateAutomatedReasoningPolicyOutput`.
         """
+
+    def create_automated_reasoning_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateAutomatedReasoningPolicyOutput:
         return self._invoke(
-            input, _models.CREATE_AUTOMATED_REASONING_POLICY, [], plugins
+            self._select_input(_models.CREATE_AUTOMATED_REASONING_POLICY, args, kwargs),
+            _models.CREATE_AUTOMATED_REASONING_POLICY,
+            [],
+            plugins,
         )
 
+    @_overload
     def create_automated_reasoning_policy_test_case(
         self,
-        input: CreateAutomatedReasoningPolicyTestCaseInput,
+        request: _models.CreateAutomatedReasoningPolicyTestCaseInput
+        | _models.CreateAutomatedReasoningPolicyTestCaseInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateAutomatedReasoningPolicyTestCaseOutput: ...
+
+    @_overload
+    def create_automated_reasoning_policy_test_case(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateAutomatedReasoningPolicyTestCaseInputDict],
     ) -> CreateAutomatedReasoningPolicyTestCaseOutput:
         """
         Creates a test for an Automated Reasoning policy. Tests validate that
@@ -393,8 +398,6 @@ class BedrockClient(Client[BedrockConfig]):
         production.
 
         Args:
-            input:
-                An instance of `CreateAutomatedReasoningPolicyTestCaseInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -404,14 +407,36 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `CreateAutomatedReasoningPolicyTestCaseOutput`.
         """
+
+    def create_automated_reasoning_policy_test_case(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateAutomatedReasoningPolicyTestCaseOutput:
         return self._invoke(
-            input, _models.CREATE_AUTOMATED_REASONING_POLICY_TEST_CASE, [], plugins
+            self._select_input(
+                _models.CREATE_AUTOMATED_REASONING_POLICY_TEST_CASE, args, kwargs
+            ),
+            _models.CREATE_AUTOMATED_REASONING_POLICY_TEST_CASE,
+            [],
+            plugins,
         )
 
+    @_overload
     def create_automated_reasoning_policy_version(
         self,
-        input: CreateAutomatedReasoningPolicyVersionInput,
+        request: _models.CreateAutomatedReasoningPolicyVersionInput
+        | _models.CreateAutomatedReasoningPolicyVersionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateAutomatedReasoningPolicyVersionOutput: ...
+
+    @_overload
+    def create_automated_reasoning_policy_version(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateAutomatedReasoningPolicyVersionInputDict],
     ) -> CreateAutomatedReasoningPolicyVersionOutput:
         """
         Creates a new version of an existing Automated Reasoning policy. This
@@ -419,8 +444,6 @@ class BedrockClient(Client[BedrockConfig]):
         versions for rollback or comparison purposes.
 
         Args:
-            input:
-                An instance of `CreateAutomatedReasoningPolicyVersionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -430,12 +453,35 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `CreateAutomatedReasoningPolicyVersionOutput`.
         """
+
+    def create_automated_reasoning_policy_version(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateAutomatedReasoningPolicyVersionOutput:
         return self._invoke(
-            input, _models.CREATE_AUTOMATED_REASONING_POLICY_VERSION, [], plugins
+            self._select_input(
+                _models.CREATE_AUTOMATED_REASONING_POLICY_VERSION, args, kwargs
+            ),
+            _models.CREATE_AUTOMATED_REASONING_POLICY_VERSION,
+            [],
+            plugins,
         )
 
+    @_overload
     def create_custom_model(
-        self, input: CreateCustomModelInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateCustomModelInput | _models.CreateCustomModelInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateCustomModelOutput: ...
+
+    @_overload
+    def create_custom_model(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateCustomModelInputDict],
     ) -> CreateCustomModelOutput:
         """
         Creates a new custom model in Amazon Bedrock. After the model is active,
@@ -476,8 +522,6 @@ class BedrockClient(Client[BedrockConfig]):
         - [DeleteCustomModel](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_DeleteCustomModel.html)
 
         Args:
-            input:
-                An instance of `CreateCustomModelInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -487,12 +531,34 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `CreateCustomModelOutput`.
         """
-        return self._invoke(input, _models.CREATE_CUSTOM_MODEL, [], plugins)
 
+    def create_custom_model(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateCustomModelOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_CUSTOM_MODEL, args, kwargs),
+            _models.CREATE_CUSTOM_MODEL,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_custom_model_deployment(
         self,
-        input: CreateCustomModelDeploymentInput,
+        request: _models.CreateCustomModelDeploymentInput
+        | _models.CreateCustomModelDeploymentInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateCustomModelDeploymentOutput: ...
+
+    @_overload
+    def create_custom_model_deployment(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateCustomModelDeploymentInputDict],
     ) -> CreateCustomModelDeploymentOutput:
         """
         Deploys a custom model for on-demand inference in Amazon Bedrock. After
@@ -514,8 +580,6 @@ class BedrockClient(Client[BedrockConfig]):
         - [DeleteCustomModelDeployment](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_DeleteCustomModelDeployment.html)
 
         Args:
-            input:
-                An instance of `CreateCustomModelDeploymentInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -525,17 +589,39 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `CreateCustomModelDeploymentOutput`.
         """
-        return self._invoke(input, _models.CREATE_CUSTOM_MODEL_DEPLOYMENT, [], plugins)
 
+    def create_custom_model_deployment(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateCustomModelDeploymentOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_CUSTOM_MODEL_DEPLOYMENT, args, kwargs),
+            _models.CREATE_CUSTOM_MODEL_DEPLOYMENT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_evaluation_job(
-        self, input: CreateEvaluationJobInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateEvaluationJobInput
+        | _models.CreateEvaluationJobInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateEvaluationJobOutput: ...
+
+    @_overload
+    def create_evaluation_job(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateEvaluationJobInputDict],
     ) -> CreateEvaluationJobOutput:
         """
         Creates an evaluation job.
 
         Args:
-            input:
-                An instance of `CreateEvaluationJobInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -545,19 +631,39 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `CreateEvaluationJobOutput`.
         """
-        return self._invoke(input, _models.CREATE_EVALUATION_JOB, [], plugins)
 
+    def create_evaluation_job(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateEvaluationJobOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_EVALUATION_JOB, args, kwargs),
+            _models.CREATE_EVALUATION_JOB,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_foundation_model_agreement(
         self,
-        input: CreateFoundationModelAgreementInput,
+        request: _models.CreateFoundationModelAgreementInput
+        | _models.CreateFoundationModelAgreementInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateFoundationModelAgreementOutput: ...
+
+    @_overload
+    def create_foundation_model_agreement(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateFoundationModelAgreementInputDict],
     ) -> CreateFoundationModelAgreementOutput:
         """
         Request a model access agreement for the specified model.
 
         Args:
-            input:
-                An instance of `CreateFoundationModelAgreementInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -567,12 +673,33 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `CreateFoundationModelAgreementOutput`.
         """
+
+    def create_foundation_model_agreement(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateFoundationModelAgreementOutput:
         return self._invoke(
-            input, _models.CREATE_FOUNDATION_MODEL_AGREEMENT, [], plugins
+            self._select_input(_models.CREATE_FOUNDATION_MODEL_AGREEMENT, args, kwargs),
+            _models.CREATE_FOUNDATION_MODEL_AGREEMENT,
+            [],
+            plugins,
         )
 
+    @_overload
     def create_guardrail(
-        self, input: CreateGuardrailInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateGuardrailInput | _models.CreateGuardrailInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateGuardrailOutput: ...
+
+    @_overload
+    def create_guardrail(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateGuardrailInputDict],
     ) -> CreateGuardrailOutput:
         """
         Creates a guardrail to block topics and to implement safeguards for your
@@ -606,8 +733,6 @@ class BedrockClient(Client[BedrockConfig]):
         in the *Amazon Bedrock User Guide*.
 
         Args:
-            input:
-                An instance of `CreateGuardrailInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -617,10 +742,34 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `CreateGuardrailOutput`.
         """
-        return self._invoke(input, _models.CREATE_GUARDRAIL, [], plugins)
 
+    def create_guardrail(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateGuardrailOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_GUARDRAIL, args, kwargs),
+            _models.CREATE_GUARDRAIL,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_guardrail_version(
-        self, input: CreateGuardrailVersionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateGuardrailVersionInput
+        | _models.CreateGuardrailVersionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateGuardrailVersionOutput: ...
+
+    @_overload
+    def create_guardrail_version(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateGuardrailVersionInputDict],
     ) -> CreateGuardrailVersionOutput:
         """
         Creates a version of the guardrail. Use this API to create a snapshot of
@@ -628,8 +777,6 @@ class BedrockClient(Client[BedrockConfig]):
         the configuration with another version.
 
         Args:
-            input:
-                An instance of `CreateGuardrailVersionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -639,10 +786,34 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `CreateGuardrailVersionOutput`.
         """
-        return self._invoke(input, _models.CREATE_GUARDRAIL_VERSION, [], plugins)
 
+    def create_guardrail_version(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateGuardrailVersionOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_GUARDRAIL_VERSION, args, kwargs),
+            _models.CREATE_GUARDRAIL_VERSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_inference_profile(
-        self, input: CreateInferenceProfileInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateInferenceProfileInput
+        | _models.CreateInferenceProfileInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateInferenceProfileOutput: ...
+
+    @_overload
+    def create_inference_profile(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateInferenceProfileInputDict],
     ) -> CreateInferenceProfileOutput:
         """
         Creates an application inference profile to track metrics and costs when
@@ -657,8 +828,6 @@ class BedrockClient(Client[BedrockConfig]):
         in the Amazon Bedrock User Guide.
 
         Args:
-            input:
-                An instance of `CreateInferenceProfileInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -668,20 +837,40 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `CreateInferenceProfileOutput`.
         """
-        return self._invoke(input, _models.CREATE_INFERENCE_PROFILE, [], plugins)
 
+    def create_inference_profile(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateInferenceProfileOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_INFERENCE_PROFILE, args, kwargs),
+            _models.CREATE_INFERENCE_PROFILE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_marketplace_model_endpoint(
         self,
-        input: CreateMarketplaceModelEndpointInput,
+        request: _models.CreateMarketplaceModelEndpointInput
+        | _models.CreateMarketplaceModelEndpointInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateMarketplaceModelEndpointOutput: ...
+
+    @_overload
+    def create_marketplace_model_endpoint(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateMarketplaceModelEndpointInputDict],
     ) -> CreateMarketplaceModelEndpointOutput:
         """
         Creates an endpoint for a model from Amazon Bedrock Marketplace. The
         endpoint is hosted by Amazon SageMaker.
 
         Args:
-            input:
-                An instance of `CreateMarketplaceModelEndpointInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -691,12 +880,33 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `CreateMarketplaceModelEndpointOutput`.
         """
+
+    def create_marketplace_model_endpoint(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateMarketplaceModelEndpointOutput:
         return self._invoke(
-            input, _models.CREATE_MARKETPLACE_MODEL_ENDPOINT, [], plugins
+            self._select_input(_models.CREATE_MARKETPLACE_MODEL_ENDPOINT, args, kwargs),
+            _models.CREATE_MARKETPLACE_MODEL_ENDPOINT,
+            [],
+            plugins,
         )
 
+    @_overload
     def create_model_copy_job(
-        self, input: CreateModelCopyJobInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateModelCopyJobInput | _models.CreateModelCopyJobInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateModelCopyJobOutput: ...
+
+    @_overload
+    def create_model_copy_job(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateModelCopyJobInputDict],
     ) -> CreateModelCopyJobOutput:
         """
         Copies a model to another region so that it can be used there. For more
@@ -706,8 +916,6 @@ class BedrockClient(Client[BedrockConfig]):
         Guide](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html).
 
         Args:
-            input:
-                An instance of `CreateModelCopyJobInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -717,12 +925,34 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `CreateModelCopyJobOutput`.
         """
-        return self._invoke(input, _models.CREATE_MODEL_COPY_JOB, [], plugins)
 
+    def create_model_copy_job(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateModelCopyJobOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_MODEL_COPY_JOB, args, kwargs),
+            _models.CREATE_MODEL_COPY_JOB,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_model_customization_job(
         self,
-        input: CreateModelCustomizationJobInput,
+        request: _models.CreateModelCustomizationJobInput
+        | _models.CreateModelCustomizationJobInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateModelCustomizationJobOutput: ...
+
+    @_overload
+    def create_model_customization_job(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateModelCustomizationJobInputDict],
     ) -> CreateModelCustomizationJobOutput:
         """
         Creates a fine-tuning job to customize a base model.
@@ -747,8 +977,6 @@ class BedrockClient(Client[BedrockConfig]):
         Guide](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html).
 
         Args:
-            input:
-                An instance of `CreateModelCustomizationJobInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -758,10 +986,34 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `CreateModelCustomizationJobOutput`.
         """
-        return self._invoke(input, _models.CREATE_MODEL_CUSTOMIZATION_JOB, [], plugins)
 
+    def create_model_customization_job(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateModelCustomizationJobOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_MODEL_CUSTOMIZATION_JOB, args, kwargs),
+            _models.CREATE_MODEL_CUSTOMIZATION_JOB,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_model_import_job(
-        self, input: CreateModelImportJobInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateModelImportJobInput
+        | _models.CreateModelImportJobInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateModelImportJobOutput: ...
+
+    @_overload
+    def create_model_import_job(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateModelImportJobInputDict],
     ) -> CreateModelImportJobOutput:
         """
         Creates a model import job to import model that you have customized in
@@ -770,8 +1022,6 @@ class BedrockClient(Client[BedrockConfig]):
         model](https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html)
 
         Args:
-            input:
-                An instance of `CreateModelImportJobInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -781,10 +1031,34 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `CreateModelImportJobOutput`.
         """
-        return self._invoke(input, _models.CREATE_MODEL_IMPORT_JOB, [], plugins)
 
+    def create_model_import_job(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateModelImportJobOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_MODEL_IMPORT_JOB, args, kwargs),
+            _models.CREATE_MODEL_IMPORT_JOB,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_model_invocation_job(
-        self, input: CreateModelInvocationJobInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateModelInvocationJobInput
+        | _models.CreateModelInvocationJobInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateModelInvocationJobOutput: ...
+
+    @_overload
+    def create_model_invocation_job(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateModelInvocationJobInputDict],
     ) -> CreateModelInvocationJobOutput:
         """
         Creates a batch inference job to invoke a model on multiple prompts.
@@ -798,8 +1072,6 @@ class BedrockClient(Client[BedrockConfig]):
         about the job.
 
         Args:
-            input:
-                An instance of `CreateModelInvocationJobInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -809,18 +1081,39 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `CreateModelInvocationJobOutput`.
         """
-        return self._invoke(input, _models.CREATE_MODEL_INVOCATION_JOB, [], plugins)
 
+    def create_model_invocation_job(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateModelInvocationJobOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_MODEL_INVOCATION_JOB, args, kwargs),
+            _models.CREATE_MODEL_INVOCATION_JOB,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_prompt_router(
-        self, input: CreatePromptRouterInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreatePromptRouterInput | _models.CreatePromptRouterInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreatePromptRouterOutput: ...
+
+    @_overload
+    def create_prompt_router(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreatePromptRouterInputDict],
     ) -> CreatePromptRouterOutput:
         """
         Creates a prompt router that manages the routing of requests between
         multiple foundation models based on the routing criteria.
 
         Args:
-            input:
-                An instance of `CreatePromptRouterInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -830,12 +1123,34 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `CreatePromptRouterOutput`.
         """
-        return self._invoke(input, _models.CREATE_PROMPT_ROUTER, [], plugins)
 
+    def create_prompt_router(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreatePromptRouterOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_PROMPT_ROUTER, args, kwargs),
+            _models.CREATE_PROMPT_ROUTER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_provisioned_model_throughput(
         self,
-        input: CreateProvisionedModelThroughputInput,
+        request: _models.CreateProvisionedModelThroughputInput
+        | _models.CreateProvisionedModelThroughputInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateProvisionedModelThroughputOutput: ...
+
+    @_overload
+    def create_provisioned_model_throughput(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateProvisionedModelThroughputInputDict],
     ) -> CreateProvisionedModelThroughputOutput:
         """
         Creates dedicated throughput for a base or custom model with the model
@@ -847,8 +1162,6 @@ class BedrockClient(Client[BedrockConfig]):
         Guide](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html).
 
         Args:
-            input:
-                An instance of `CreateProvisionedModelThroughputInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -858,14 +1171,36 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `CreateProvisionedModelThroughputOutput`.
         """
+
+    def create_provisioned_model_throughput(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateProvisionedModelThroughputOutput:
         return self._invoke(
-            input, _models.CREATE_PROVISIONED_MODEL_THROUGHPUT, [], plugins
+            self._select_input(
+                _models.CREATE_PROVISIONED_MODEL_THROUGHPUT, args, kwargs
+            ),
+            _models.CREATE_PROVISIONED_MODEL_THROUGHPUT,
+            [],
+            plugins,
         )
 
+    @_overload
     def delete_automated_reasoning_policy(
         self,
-        input: DeleteAutomatedReasoningPolicyInput,
+        request: _models.DeleteAutomatedReasoningPolicyInput
+        | _models.DeleteAutomatedReasoningPolicyInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteAutomatedReasoningPolicyOutput: ...
+
+    @_overload
+    def delete_automated_reasoning_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteAutomatedReasoningPolicyInputDict],
     ) -> DeleteAutomatedReasoningPolicyOutput:
         """
         Deletes an Automated Reasoning policy or policy version. This operation
@@ -873,8 +1208,6 @@ class BedrockClient(Client[BedrockConfig]):
         succeeds. Deleting a policy removes it permanently and cannot be undone.
 
         Args:
-            input:
-                An instance of `DeleteAutomatedReasoningPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -884,14 +1217,34 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `DeleteAutomatedReasoningPolicyOutput`.
         """
+
+    def delete_automated_reasoning_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteAutomatedReasoningPolicyOutput:
         return self._invoke(
-            input, _models.DELETE_AUTOMATED_REASONING_POLICY, [], plugins
+            self._select_input(_models.DELETE_AUTOMATED_REASONING_POLICY, args, kwargs),
+            _models.DELETE_AUTOMATED_REASONING_POLICY,
+            [],
+            plugins,
         )
 
+    @_overload
     def delete_automated_reasoning_policy_build_workflow(
         self,
-        input: DeleteAutomatedReasoningPolicyBuildWorkflowInput,
+        request: _models.DeleteAutomatedReasoningPolicyBuildWorkflowInput
+        | _models.DeleteAutomatedReasoningPolicyBuildWorkflowInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteAutomatedReasoningPolicyBuildWorkflowOutput: ...
+
+    @_overload
+    def delete_automated_reasoning_policy_build_workflow(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteAutomatedReasoningPolicyBuildWorkflowInputDict],
     ) -> DeleteAutomatedReasoningPolicyBuildWorkflowOutput:
         """
         Deletes an Automated Reasoning policy build workflow and its associated
@@ -899,8 +1252,6 @@ class BedrockClient(Client[BedrockConfig]):
         generated assets.
 
         Args:
-            input:
-                An instance of `DeleteAutomatedReasoningPolicyBuildWorkflowInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -910,22 +1261,42 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `DeleteAutomatedReasoningPolicyBuildWorkflowOutput`.
         """
+
+    def delete_automated_reasoning_policy_build_workflow(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteAutomatedReasoningPolicyBuildWorkflowOutput:
         return self._invoke(
-            input, _models.DELETE_AUTOMATED_REASONING_POLICY_BUILD_WORKFLOW, [], plugins
+            self._select_input(
+                _models.DELETE_AUTOMATED_REASONING_POLICY_BUILD_WORKFLOW, args, kwargs
+            ),
+            _models.DELETE_AUTOMATED_REASONING_POLICY_BUILD_WORKFLOW,
+            [],
+            plugins,
         )
 
+    @_overload
     def delete_automated_reasoning_policy_test_case(
         self,
-        input: DeleteAutomatedReasoningPolicyTestCaseInput,
+        request: _models.DeleteAutomatedReasoningPolicyTestCaseInput
+        | _models.DeleteAutomatedReasoningPolicyTestCaseInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteAutomatedReasoningPolicyTestCaseOutput: ...
+
+    @_overload
+    def delete_automated_reasoning_policy_test_case(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteAutomatedReasoningPolicyTestCaseInputDict],
     ) -> DeleteAutomatedReasoningPolicyTestCaseOutput:
         """
         Deletes an Automated Reasoning policy test. This operation is
         idempotent; if you delete a test more than once, each call succeeds.
 
         Args:
-            input:
-                An instance of `DeleteAutomatedReasoningPolicyTestCaseInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -935,12 +1306,35 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `DeleteAutomatedReasoningPolicyTestCaseOutput`.
         """
+
+    def delete_automated_reasoning_policy_test_case(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteAutomatedReasoningPolicyTestCaseOutput:
         return self._invoke(
-            input, _models.DELETE_AUTOMATED_REASONING_POLICY_TEST_CASE, [], plugins
+            self._select_input(
+                _models.DELETE_AUTOMATED_REASONING_POLICY_TEST_CASE, args, kwargs
+            ),
+            _models.DELETE_AUTOMATED_REASONING_POLICY_TEST_CASE,
+            [],
+            plugins,
         )
 
+    @_overload
     def delete_custom_model(
-        self, input: DeleteCustomModelInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteCustomModelInput | _models.DeleteCustomModelInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteCustomModelOutput: ...
+
+    @_overload
+    def delete_custom_model(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteCustomModelInputDict],
     ) -> DeleteCustomModelOutput:
         """
         Deletes a custom model that you created earlier. For more information,
@@ -950,8 +1344,6 @@ class BedrockClient(Client[BedrockConfig]):
         Guide](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html).
 
         Args:
-            input:
-                An instance of `DeleteCustomModelInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -961,12 +1353,34 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `DeleteCustomModelOutput`.
         """
-        return self._invoke(input, _models.DELETE_CUSTOM_MODEL, [], plugins)
 
+    def delete_custom_model(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteCustomModelOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_CUSTOM_MODEL, args, kwargs),
+            _models.DELETE_CUSTOM_MODEL,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_custom_model_deployment(
         self,
-        input: DeleteCustomModelDeploymentInput,
+        request: _models.DeleteCustomModelDeploymentInput
+        | _models.DeleteCustomModelDeploymentInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteCustomModelDeploymentOutput: ...
+
+    @_overload
+    def delete_custom_model_deployment(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteCustomModelDeploymentInputDict],
     ) -> DeleteCustomModelDeploymentOutput:
         """
         Deletes a custom model deployment. This operation stops the deployment
@@ -983,8 +1397,6 @@ class BedrockClient(Client[BedrockConfig]):
         - [ListCustomModelDeployments](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_ListCustomModelDeployments.html)
 
         Args:
-            input:
-                An instance of `DeleteCustomModelDeploymentInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -994,19 +1406,39 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `DeleteCustomModelDeploymentOutput`.
         """
-        return self._invoke(input, _models.DELETE_CUSTOM_MODEL_DEPLOYMENT, [], plugins)
 
+    def delete_custom_model_deployment(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteCustomModelDeploymentOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_CUSTOM_MODEL_DEPLOYMENT, args, kwargs),
+            _models.DELETE_CUSTOM_MODEL_DEPLOYMENT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_enforced_guardrail_configuration(
         self,
-        input: DeleteEnforcedGuardrailConfigurationInput,
+        request: _models.DeleteEnforcedGuardrailConfigurationInput
+        | _models.DeleteEnforcedGuardrailConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteEnforcedGuardrailConfigurationOutput: ...
+
+    @_overload
+    def delete_enforced_guardrail_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteEnforcedGuardrailConfigurationInputDict],
     ) -> DeleteEnforcedGuardrailConfigurationOutput:
         """
         Deletes the account-level enforced guardrail configuration.
 
         Args:
-            input:
-                An instance of `DeleteEnforcedGuardrailConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1016,21 +1448,41 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `DeleteEnforcedGuardrailConfigurationOutput`.
         """
+
+    def delete_enforced_guardrail_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteEnforcedGuardrailConfigurationOutput:
         return self._invoke(
-            input, _models.DELETE_ENFORCED_GUARDRAIL_CONFIGURATION, [], plugins
+            self._select_input(
+                _models.DELETE_ENFORCED_GUARDRAIL_CONFIGURATION, args, kwargs
+            ),
+            _models.DELETE_ENFORCED_GUARDRAIL_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     def delete_foundation_model_agreement(
         self,
-        input: DeleteFoundationModelAgreementInput,
+        request: _models.DeleteFoundationModelAgreementInput
+        | _models.DeleteFoundationModelAgreementInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteFoundationModelAgreementOutput: ...
+
+    @_overload
+    def delete_foundation_model_agreement(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteFoundationModelAgreementInputDict],
     ) -> DeleteFoundationModelAgreementOutput:
         """
         Delete the model access agreement for the specified model.
 
         Args:
-            input:
-                An instance of `DeleteFoundationModelAgreementInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1040,12 +1492,33 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `DeleteFoundationModelAgreementOutput`.
         """
+
+    def delete_foundation_model_agreement(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteFoundationModelAgreementOutput:
         return self._invoke(
-            input, _models.DELETE_FOUNDATION_MODEL_AGREEMENT, [], plugins
+            self._select_input(_models.DELETE_FOUNDATION_MODEL_AGREEMENT, args, kwargs),
+            _models.DELETE_FOUNDATION_MODEL_AGREEMENT,
+            [],
+            plugins,
         )
 
+    @_overload
     def delete_guardrail(
-        self, input: DeleteGuardrailInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteGuardrailInput | _models.DeleteGuardrailInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteGuardrailOutput: ...
+
+    @_overload
+    def delete_guardrail(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteGuardrailInputDict],
     ) -> DeleteGuardrailOutput:
         """
         Deletes a guardrail.
@@ -1059,8 +1532,6 @@ class BedrockClient(Client[BedrockConfig]):
           `guardrailVersion` field.
 
         Args:
-            input:
-                An instance of `DeleteGuardrailInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1070,10 +1541,34 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `DeleteGuardrailOutput`.
         """
-        return self._invoke(input, _models.DELETE_GUARDRAIL, [], plugins)
 
+    def delete_guardrail(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteGuardrailOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_GUARDRAIL, args, kwargs),
+            _models.DELETE_GUARDRAIL,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_imported_model(
-        self, input: DeleteImportedModelInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteImportedModelInput
+        | _models.DeleteImportedModelInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteImportedModelOutput: ...
+
+    @_overload
+    def delete_imported_model(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteImportedModelInputDict],
     ) -> DeleteImportedModelOutput:
         """
         Deletes a custom model that you imported earlier. For more information,
@@ -1083,8 +1578,6 @@ class BedrockClient(Client[BedrockConfig]):
         Guide](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html).
 
         Args:
-            input:
-                An instance of `DeleteImportedModelInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1094,10 +1587,34 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `DeleteImportedModelOutput`.
         """
-        return self._invoke(input, _models.DELETE_IMPORTED_MODEL, [], plugins)
 
+    def delete_imported_model(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteImportedModelOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_IMPORTED_MODEL, args, kwargs),
+            _models.DELETE_IMPORTED_MODEL,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_inference_profile(
-        self, input: DeleteInferenceProfileInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteInferenceProfileInput
+        | _models.DeleteInferenceProfileInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteInferenceProfileOutput: ...
+
+    @_overload
+    def delete_inference_profile(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteInferenceProfileInputDict],
     ) -> DeleteInferenceProfileOutput:
         """
         Deletes an application inference profile. For more information, see
@@ -1107,8 +1624,6 @@ class BedrockClient(Client[BedrockConfig]):
         in the Amazon Bedrock User Guide.
 
         Args:
-            input:
-                An instance of `DeleteInferenceProfileInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1118,19 +1633,39 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `DeleteInferenceProfileOutput`.
         """
-        return self._invoke(input, _models.DELETE_INFERENCE_PROFILE, [], plugins)
 
+    def delete_inference_profile(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteInferenceProfileOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_INFERENCE_PROFILE, args, kwargs),
+            _models.DELETE_INFERENCE_PROFILE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_marketplace_model_endpoint(
         self,
-        input: DeleteMarketplaceModelEndpointInput,
+        request: _models.DeleteMarketplaceModelEndpointInput
+        | _models.DeleteMarketplaceModelEndpointInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteMarketplaceModelEndpointOutput: ...
+
+    @_overload
+    def delete_marketplace_model_endpoint(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteMarketplaceModelEndpointInputDict],
     ) -> DeleteMarketplaceModelEndpointOutput:
         """
         Deletes an endpoint for a model from Amazon Bedrock Marketplace.
 
         Args:
-            input:
-                An instance of `DeleteMarketplaceModelEndpointInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1140,21 +1675,39 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `DeleteMarketplaceModelEndpointOutput`.
         """
+
+    def delete_marketplace_model_endpoint(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteMarketplaceModelEndpointOutput:
         return self._invoke(
-            input, _models.DELETE_MARKETPLACE_MODEL_ENDPOINT, [], plugins
+            self._select_input(_models.DELETE_MARKETPLACE_MODEL_ENDPOINT, args, kwargs),
+            _models.DELETE_MARKETPLACE_MODEL_ENDPOINT,
+            [],
+            plugins,
         )
 
+    @_overload
     def delete_model_invocation_logging_configuration(
         self,
-        input: DeleteModelInvocationLoggingConfigurationInput | None = None,
+        request: _models.DeleteModelInvocationLoggingConfigurationInput
+        | _models.DeleteModelInvocationLoggingConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteModelInvocationLoggingConfigurationOutput: ...
+
+    @_overload
+    def delete_model_invocation_logging_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteModelInvocationLoggingConfigurationInputDict],
     ) -> DeleteModelInvocationLoggingConfigurationOutput:
         """
         Delete the invocation logging.
 
         Args:
-            input:
-                An instance of `DeleteModelInvocationLoggingConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1164,19 +1717,40 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `DeleteModelInvocationLoggingConfigurationOutput`.
         """
+
+    def delete_model_invocation_logging_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteModelInvocationLoggingConfigurationOutput:
         return self._invoke(
-            input, _models.DELETE_MODEL_INVOCATION_LOGGING_CONFIGURATION, [], plugins
+            self._select_input(
+                _models.DELETE_MODEL_INVOCATION_LOGGING_CONFIGURATION, args, kwargs
+            ),
+            _models.DELETE_MODEL_INVOCATION_LOGGING_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     def delete_prompt_router(
-        self, input: DeletePromptRouterInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeletePromptRouterInput | _models.DeletePromptRouterInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeletePromptRouterOutput: ...
+
+    @_overload
+    def delete_prompt_router(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeletePromptRouterInputDict],
     ) -> DeletePromptRouterOutput:
         """
         Deletes a specified prompt router. This action cannot be undone.
 
         Args:
-            input:
-                An instance of `DeletePromptRouterInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1186,12 +1760,34 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `DeletePromptRouterOutput`.
         """
-        return self._invoke(input, _models.DELETE_PROMPT_ROUTER, [], plugins)
 
+    def delete_prompt_router(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeletePromptRouterOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_PROMPT_ROUTER, args, kwargs),
+            _models.DELETE_PROMPT_ROUTER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_provisioned_model_throughput(
         self,
-        input: DeleteProvisionedModelThroughputInput,
+        request: _models.DeleteProvisionedModelThroughputInput
+        | _models.DeleteProvisionedModelThroughputInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteProvisionedModelThroughputOutput: ...
+
+    @_overload
+    def delete_provisioned_model_throughput(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteProvisionedModelThroughputInputDict],
     ) -> DeleteProvisionedModelThroughputOutput:
         """
         Deletes a Provisioned Throughput. You can't delete a Provisioned
@@ -1202,8 +1798,6 @@ class BedrockClient(Client[BedrockConfig]):
         Guide](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html).
 
         Args:
-            input:
-                An instance of `DeleteProvisionedModelThroughputInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1213,19 +1807,41 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `DeleteProvisionedModelThroughputOutput`.
         """
+
+    def delete_provisioned_model_throughput(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteProvisionedModelThroughputOutput:
         return self._invoke(
-            input, _models.DELETE_PROVISIONED_MODEL_THROUGHPUT, [], plugins
+            self._select_input(
+                _models.DELETE_PROVISIONED_MODEL_THROUGHPUT, args, kwargs
+            ),
+            _models.DELETE_PROVISIONED_MODEL_THROUGHPUT,
+            [],
+            plugins,
         )
 
+    @_overload
     def delete_resource_policy(
-        self, input: DeleteResourcePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteResourcePolicyInput
+        | _models.DeleteResourcePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteResourcePolicyOutput: ...
+
+    @_overload
+    def delete_resource_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteResourcePolicyInputDict],
     ) -> DeleteResourcePolicyOutput:
         """
         Deletes a previously created Bedrock resource policy.
 
         Args:
-            input:
-                An instance of `DeleteResourcePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1235,12 +1851,34 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `DeleteResourcePolicyOutput`.
         """
-        return self._invoke(input, _models.DELETE_RESOURCE_POLICY, [], plugins)
 
+    def delete_resource_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteResourcePolicyOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_RESOURCE_POLICY, args, kwargs),
+            _models.DELETE_RESOURCE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def deregister_marketplace_model_endpoint(
         self,
-        input: DeregisterMarketplaceModelEndpointInput,
+        request: _models.DeregisterMarketplaceModelEndpointInput
+        | _models.DeregisterMarketplaceModelEndpointInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeregisterMarketplaceModelEndpointOutput: ...
+
+    @_overload
+    def deregister_marketplace_model_endpoint(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeregisterMarketplaceModelEndpointInputDict],
     ) -> DeregisterMarketplaceModelEndpointOutput:
         """
         Deregisters an endpoint for a model from Amazon Bedrock Marketplace.
@@ -1248,8 +1886,6 @@ class BedrockClient(Client[BedrockConfig]):
         but does not delete the underlying Amazon SageMaker endpoint.
 
         Args:
-            input:
-                An instance of `DeregisterMarketplaceModelEndpointInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1259,14 +1895,36 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `DeregisterMarketplaceModelEndpointOutput`.
         """
+
+    def deregister_marketplace_model_endpoint(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeregisterMarketplaceModelEndpointOutput:
         return self._invoke(
-            input, _models.DEREGISTER_MARKETPLACE_MODEL_ENDPOINT, [], plugins
+            self._select_input(
+                _models.DEREGISTER_MARKETPLACE_MODEL_ENDPOINT, args, kwargs
+            ),
+            _models.DEREGISTER_MARKETPLACE_MODEL_ENDPOINT,
+            [],
+            plugins,
         )
 
+    @_overload
     def export_automated_reasoning_policy_version(
         self,
-        input: ExportAutomatedReasoningPolicyVersionInput,
+        request: _models.ExportAutomatedReasoningPolicyVersionInput
+        | _models.ExportAutomatedReasoningPolicyVersionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ExportAutomatedReasoningPolicyVersionOutput: ...
+
+    @_overload
+    def export_automated_reasoning_policy_version(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ExportAutomatedReasoningPolicyVersionInputDict],
     ) -> ExportAutomatedReasoningPolicyVersionOutput:
         """
         Exports the policy definition for an Automated Reasoning policy version.
@@ -1274,8 +1932,6 @@ class BedrockClient(Client[BedrockConfig]):
         custom variable types in a structured format.
 
         Args:
-            input:
-                An instance of `ExportAutomatedReasoningPolicyVersionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1285,21 +1941,41 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `ExportAutomatedReasoningPolicyVersionOutput`.
         """
+
+    def export_automated_reasoning_policy_version(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ExportAutomatedReasoningPolicyVersionOutput:
         return self._invoke(
-            input, _models.EXPORT_AUTOMATED_REASONING_POLICY_VERSION, [], plugins
+            self._select_input(
+                _models.EXPORT_AUTOMATED_REASONING_POLICY_VERSION, args, kwargs
+            ),
+            _models.EXPORT_AUTOMATED_REASONING_POLICY_VERSION,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_account_data_retention(
         self,
-        input: GetAccountDataRetentionInput | None = None,
+        request: _models.GetAccountDataRetentionInput
+        | _models.GetAccountDataRetentionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetAccountDataRetentionOutput: ...
+
+    @_overload
+    def get_account_data_retention(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetAccountDataRetentionInputDict],
     ) -> GetAccountDataRetentionOutput:
         """
         Returns the account-wide data retention mode for Amazon Bedrock.
 
         Args:
-            input:
-                An instance of `GetAccountDataRetentionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1309,19 +1985,39 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `GetAccountDataRetentionOutput`.
         """
-        return self._invoke(input, _models.GET_ACCOUNT_DATA_RETENTION, [], plugins)
 
+    def get_account_data_retention(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetAccountDataRetentionOutput:
+        return self._invoke(
+            self._select_input(_models.GET_ACCOUNT_DATA_RETENTION, args, kwargs),
+            _models.GET_ACCOUNT_DATA_RETENTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_advanced_prompt_optimization_job(
         self,
-        input: GetAdvancedPromptOptimizationJobInput,
+        request: _models.GetAdvancedPromptOptimizationJobInput
+        | _models.GetAdvancedPromptOptimizationJobInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetAdvancedPromptOptimizationJobOutput: ...
+
+    @_overload
+    def get_advanced_prompt_optimization_job(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetAdvancedPromptOptimizationJobInputDict],
     ) -> GetAdvancedPromptOptimizationJobOutput:
         """
         Gets information about an advanced prompt optimization job.
 
         Args:
-            input:
-                An instance of `GetAdvancedPromptOptimizationJobInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1331,14 +2027,36 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `GetAdvancedPromptOptimizationJobOutput`.
         """
+
+    def get_advanced_prompt_optimization_job(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetAdvancedPromptOptimizationJobOutput:
         return self._invoke(
-            input, _models.GET_ADVANCED_PROMPT_OPTIMIZATION_JOB, [], plugins
+            self._select_input(
+                _models.GET_ADVANCED_PROMPT_OPTIMIZATION_JOB, args, kwargs
+            ),
+            _models.GET_ADVANCED_PROMPT_OPTIMIZATION_JOB,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_automated_reasoning_policy(
         self,
-        input: GetAutomatedReasoningPolicyInput,
+        request: _models.GetAutomatedReasoningPolicyInput
+        | _models.GetAutomatedReasoningPolicyInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetAutomatedReasoningPolicyOutput: ...
+
+    @_overload
+    def get_automated_reasoning_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetAutomatedReasoningPolicyInputDict],
     ) -> GetAutomatedReasoningPolicyOutput:
         """
         Retrieves details about an Automated Reasoning policy or policy version.
@@ -1346,8 +2064,6 @@ class BedrockClient(Client[BedrockConfig]):
         timestamps.
 
         Args:
-            input:
-                An instance of `GetAutomatedReasoningPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1357,12 +2073,34 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `GetAutomatedReasoningPolicyOutput`.
         """
-        return self._invoke(input, _models.GET_AUTOMATED_REASONING_POLICY, [], plugins)
 
+    def get_automated_reasoning_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetAutomatedReasoningPolicyOutput:
+        return self._invoke(
+            self._select_input(_models.GET_AUTOMATED_REASONING_POLICY, args, kwargs),
+            _models.GET_AUTOMATED_REASONING_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_automated_reasoning_policy_annotations(
         self,
-        input: GetAutomatedReasoningPolicyAnnotationsInput,
+        request: _models.GetAutomatedReasoningPolicyAnnotationsInput
+        | _models.GetAutomatedReasoningPolicyAnnotationsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetAutomatedReasoningPolicyAnnotationsOutput: ...
+
+    @_overload
+    def get_automated_reasoning_policy_annotations(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetAutomatedReasoningPolicyAnnotationsInputDict],
     ) -> GetAutomatedReasoningPolicyAnnotationsOutput:
         """
         Retrieves the current annotations for an Automated Reasoning policy
@@ -1370,8 +2108,6 @@ class BedrockClient(Client[BedrockConfig]):
         and types to be applied to the policy.
 
         Args:
-            input:
-                An instance of `GetAutomatedReasoningPolicyAnnotationsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1381,22 +2117,42 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `GetAutomatedReasoningPolicyAnnotationsOutput`.
         """
+
+    def get_automated_reasoning_policy_annotations(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetAutomatedReasoningPolicyAnnotationsOutput:
         return self._invoke(
-            input, _models.GET_AUTOMATED_REASONING_POLICY_ANNOTATIONS, [], plugins
+            self._select_input(
+                _models.GET_AUTOMATED_REASONING_POLICY_ANNOTATIONS, args, kwargs
+            ),
+            _models.GET_AUTOMATED_REASONING_POLICY_ANNOTATIONS,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_automated_reasoning_policy_build_workflow(
         self,
-        input: GetAutomatedReasoningPolicyBuildWorkflowInput,
+        request: _models.GetAutomatedReasoningPolicyBuildWorkflowInput
+        | _models.GetAutomatedReasoningPolicyBuildWorkflowInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetAutomatedReasoningPolicyBuildWorkflowOutput: ...
+
+    @_overload
+    def get_automated_reasoning_policy_build_workflow(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetAutomatedReasoningPolicyBuildWorkflowInputDict],
     ) -> GetAutomatedReasoningPolicyBuildWorkflowOutput:
         """
         Retrieves detailed information about an Automated Reasoning policy build
         workflow, including its status, configuration, and metadata.
 
         Args:
-            input:
-                An instance of `GetAutomatedReasoningPolicyBuildWorkflowInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1406,14 +2162,38 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `GetAutomatedReasoningPolicyBuildWorkflowOutput`.
         """
+
+    def get_automated_reasoning_policy_build_workflow(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetAutomatedReasoningPolicyBuildWorkflowOutput:
         return self._invoke(
-            input, _models.GET_AUTOMATED_REASONING_POLICY_BUILD_WORKFLOW, [], plugins
+            self._select_input(
+                _models.GET_AUTOMATED_REASONING_POLICY_BUILD_WORKFLOW, args, kwargs
+            ),
+            _models.GET_AUTOMATED_REASONING_POLICY_BUILD_WORKFLOW,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_automated_reasoning_policy_build_workflow_result_assets(
         self,
-        input: GetAutomatedReasoningPolicyBuildWorkflowResultAssetsInput,
+        request: _models.GetAutomatedReasoningPolicyBuildWorkflowResultAssetsInput
+        | _models.GetAutomatedReasoningPolicyBuildWorkflowResultAssetsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetAutomatedReasoningPolicyBuildWorkflowResultAssetsOutput: ...
+
+    @_overload
+    def get_automated_reasoning_policy_build_workflow_result_assets(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[
+            _models.GetAutomatedReasoningPolicyBuildWorkflowResultAssetsInputDict
+        ],
     ) -> GetAutomatedReasoningPolicyBuildWorkflowResultAssetsOutput:
         """
         Retrieves the resulting assets from a completed Automated Reasoning
@@ -1421,8 +2201,6 @@ class BedrockClient(Client[BedrockConfig]):
         generated policy artifacts.
 
         Args:
-            input:
-                An instance of `GetAutomatedReasoningPolicyBuildWorkflowResultAssetsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1432,17 +2210,38 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `GetAutomatedReasoningPolicyBuildWorkflowResultAssetsOutput`.
         """
+
+    def get_automated_reasoning_policy_build_workflow_result_assets(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetAutomatedReasoningPolicyBuildWorkflowResultAssetsOutput:
         return self._invoke(
-            input,
+            self._select_input(
+                _models.GET_AUTOMATED_REASONING_POLICY_BUILD_WORKFLOW_RESULT_ASSETS,
+                args,
+                kwargs,
+            ),
             _models.GET_AUTOMATED_REASONING_POLICY_BUILD_WORKFLOW_RESULT_ASSETS,
             [],
             plugins,
         )
 
+    @_overload
     def get_automated_reasoning_policy_next_scenario(
         self,
-        input: GetAutomatedReasoningPolicyNextScenarioInput,
+        request: _models.GetAutomatedReasoningPolicyNextScenarioInput
+        | _models.GetAutomatedReasoningPolicyNextScenarioInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetAutomatedReasoningPolicyNextScenarioOutput: ...
+
+    @_overload
+    def get_automated_reasoning_policy_next_scenario(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetAutomatedReasoningPolicyNextScenarioInputDict],
     ) -> GetAutomatedReasoningPolicyNextScenarioOutput:
         """
         Retrieves the next test scenario for validating an Automated Reasoning
@@ -1450,8 +2249,6 @@ class BedrockClient(Client[BedrockConfig]):
         test policy behavior.
 
         Args:
-            input:
-                An instance of `GetAutomatedReasoningPolicyNextScenarioInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1461,21 +2258,41 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `GetAutomatedReasoningPolicyNextScenarioOutput`.
         """
+
+    def get_automated_reasoning_policy_next_scenario(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetAutomatedReasoningPolicyNextScenarioOutput:
         return self._invoke(
-            input, _models.GET_AUTOMATED_REASONING_POLICY_NEXT_SCENARIO, [], plugins
+            self._select_input(
+                _models.GET_AUTOMATED_REASONING_POLICY_NEXT_SCENARIO, args, kwargs
+            ),
+            _models.GET_AUTOMATED_REASONING_POLICY_NEXT_SCENARIO,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_automated_reasoning_policy_test_case(
         self,
-        input: GetAutomatedReasoningPolicyTestCaseInput,
+        request: _models.GetAutomatedReasoningPolicyTestCaseInput
+        | _models.GetAutomatedReasoningPolicyTestCaseInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetAutomatedReasoningPolicyTestCaseOutput: ...
+
+    @_overload
+    def get_automated_reasoning_policy_test_case(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetAutomatedReasoningPolicyTestCaseInputDict],
     ) -> GetAutomatedReasoningPolicyTestCaseOutput:
         """
         Retrieves details about a specific Automated Reasoning policy test.
 
         Args:
-            input:
-                An instance of `GetAutomatedReasoningPolicyTestCaseInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1485,22 +2302,42 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `GetAutomatedReasoningPolicyTestCaseOutput`.
         """
+
+    def get_automated_reasoning_policy_test_case(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetAutomatedReasoningPolicyTestCaseOutput:
         return self._invoke(
-            input, _models.GET_AUTOMATED_REASONING_POLICY_TEST_CASE, [], plugins
+            self._select_input(
+                _models.GET_AUTOMATED_REASONING_POLICY_TEST_CASE, args, kwargs
+            ),
+            _models.GET_AUTOMATED_REASONING_POLICY_TEST_CASE,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_automated_reasoning_policy_test_result(
         self,
-        input: GetAutomatedReasoningPolicyTestResultInput,
+        request: _models.GetAutomatedReasoningPolicyTestResultInput
+        | _models.GetAutomatedReasoningPolicyTestResultInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetAutomatedReasoningPolicyTestResultOutput: ...
+
+    @_overload
+    def get_automated_reasoning_policy_test_result(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetAutomatedReasoningPolicyTestResultInputDict],
     ) -> GetAutomatedReasoningPolicyTestResultOutput:
         """
         Retrieves the test result for a specific Automated Reasoning policy
         test. Returns detailed validation findings and execution status.
 
         Args:
-            input:
-                An instance of `GetAutomatedReasoningPolicyTestResultInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1510,12 +2347,35 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `GetAutomatedReasoningPolicyTestResultOutput`.
         """
+
+    def get_automated_reasoning_policy_test_result(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetAutomatedReasoningPolicyTestResultOutput:
         return self._invoke(
-            input, _models.GET_AUTOMATED_REASONING_POLICY_TEST_RESULT, [], plugins
+            self._select_input(
+                _models.GET_AUTOMATED_REASONING_POLICY_TEST_RESULT, args, kwargs
+            ),
+            _models.GET_AUTOMATED_REASONING_POLICY_TEST_RESULT,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_custom_model(
-        self, input: GetCustomModelInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetCustomModelInput | _models.GetCustomModelInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetCustomModelOutput: ...
+
+    @_overload
+    def get_custom_model(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetCustomModelInputDict],
     ) -> GetCustomModelOutput:
         """
         Get the properties associated with a Amazon Bedrock custom model that
@@ -1525,8 +2385,6 @@ class BedrockClient(Client[BedrockConfig]):
         Guide](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html).
 
         Args:
-            input:
-                An instance of `GetCustomModelInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1536,10 +2394,34 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `GetCustomModelOutput`.
         """
-        return self._invoke(input, _models.GET_CUSTOM_MODEL, [], plugins)
 
+    def get_custom_model(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetCustomModelOutput:
+        return self._invoke(
+            self._select_input(_models.GET_CUSTOM_MODEL, args, kwargs),
+            _models.GET_CUSTOM_MODEL,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_custom_model_deployment(
-        self, input: GetCustomModelDeploymentInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetCustomModelDeploymentInput
+        | _models.GetCustomModelDeploymentInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetCustomModelDeploymentOutput: ...
+
+    @_overload
+    def get_custom_model_deployment(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetCustomModelDeploymentInputDict],
     ) -> GetCustomModelDeploymentOutput:
         """
         Retrieves information about a custom model deployment, including its
@@ -1556,8 +2438,6 @@ class BedrockClient(Client[BedrockConfig]):
         - [DeleteCustomModelDeployment](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_DeleteCustomModelDeployment.html)
 
         Args:
-            input:
-                An instance of `GetCustomModelDeploymentInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1567,17 +2447,38 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `GetCustomModelDeploymentOutput`.
         """
-        return self._invoke(input, _models.GET_CUSTOM_MODEL_DEPLOYMENT, [], plugins)
 
+    def get_custom_model_deployment(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetCustomModelDeploymentOutput:
+        return self._invoke(
+            self._select_input(_models.GET_CUSTOM_MODEL_DEPLOYMENT, args, kwargs),
+            _models.GET_CUSTOM_MODEL_DEPLOYMENT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_evaluation_job(
-        self, input: GetEvaluationJobInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetEvaluationJobInput | _models.GetEvaluationJobInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetEvaluationJobOutput: ...
+
+    @_overload
+    def get_evaluation_job(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetEvaluationJobInputDict],
     ) -> GetEvaluationJobOutput:
         """
         Gets information about an evaluation job, such as the status of the job.
 
         Args:
-            input:
-                An instance of `GetEvaluationJobInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1587,17 +2488,38 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `GetEvaluationJobOutput`.
         """
-        return self._invoke(input, _models.GET_EVALUATION_JOB, [], plugins)
 
+    def get_evaluation_job(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetEvaluationJobOutput:
+        return self._invoke(
+            self._select_input(_models.GET_EVALUATION_JOB, args, kwargs),
+            _models.GET_EVALUATION_JOB,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_foundation_model(
-        self, input: GetFoundationModelInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetFoundationModelInput | _models.GetFoundationModelInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetFoundationModelOutput: ...
+
+    @_overload
+    def get_foundation_model(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetFoundationModelInputDict],
     ) -> GetFoundationModelOutput:
         """
         Get details about a Amazon Bedrock foundation model.
 
         Args:
-            input:
-                An instance of `GetFoundationModelInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1607,19 +2529,39 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `GetFoundationModelOutput`.
         """
-        return self._invoke(input, _models.GET_FOUNDATION_MODEL, [], plugins)
 
+    def get_foundation_model(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetFoundationModelOutput:
+        return self._invoke(
+            self._select_input(_models.GET_FOUNDATION_MODEL, args, kwargs),
+            _models.GET_FOUNDATION_MODEL,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_foundation_model_availability(
         self,
-        input: GetFoundationModelAvailabilityInput,
+        request: _models.GetFoundationModelAvailabilityInput
+        | _models.GetFoundationModelAvailabilityInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetFoundationModelAvailabilityOutput: ...
+
+    @_overload
+    def get_foundation_model_availability(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetFoundationModelAvailabilityInputDict],
     ) -> GetFoundationModelAvailabilityOutput:
         """
         Get information about the Foundation model availability.
 
         Args:
-            input:
-                An instance of `GetFoundationModelAvailabilityInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1629,20 +2571,39 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `GetFoundationModelAvailabilityOutput`.
         """
+
+    def get_foundation_model_availability(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetFoundationModelAvailabilityOutput:
         return self._invoke(
-            input, _models.GET_FOUNDATION_MODEL_AVAILABILITY, [], plugins
+            self._select_input(_models.GET_FOUNDATION_MODEL_AVAILABILITY, args, kwargs),
+            _models.GET_FOUNDATION_MODEL_AVAILABILITY,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_guardrail(
-        self, input: GetGuardrailInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetGuardrailInput | _models.GetGuardrailInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetGuardrailOutput: ...
+
+    @_overload
+    def get_guardrail(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetGuardrailInputDict],
     ) -> GetGuardrailOutput:
         """
         Gets details about a guardrail. If you don't specify a version, the
         response returns details for the `DRAFT` version.
 
         Args:
-            input:
-                An instance of `GetGuardrailInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1652,17 +2613,38 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `GetGuardrailOutput`.
         """
-        return self._invoke(input, _models.GET_GUARDRAIL, [], plugins)
 
+    def get_guardrail(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetGuardrailOutput:
+        return self._invoke(
+            self._select_input(_models.GET_GUARDRAIL, args, kwargs),
+            _models.GET_GUARDRAIL,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_imported_model(
-        self, input: GetImportedModelInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetImportedModelInput | _models.GetImportedModelInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetImportedModelOutput: ...
+
+    @_overload
+    def get_imported_model(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetImportedModelInputDict],
     ) -> GetImportedModelOutput:
         """
         Gets properties associated with a customized model you imported.
 
         Args:
-            input:
-                An instance of `GetImportedModelInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1672,10 +2654,34 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `GetImportedModelOutput`.
         """
-        return self._invoke(input, _models.GET_IMPORTED_MODEL, [], plugins)
 
+    def get_imported_model(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetImportedModelOutput:
+        return self._invoke(
+            self._select_input(_models.GET_IMPORTED_MODEL, args, kwargs),
+            _models.GET_IMPORTED_MODEL,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_inference_profile(
-        self, input: GetInferenceProfileInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetInferenceProfileInput
+        | _models.GetInferenceProfileInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetInferenceProfileOutput: ...
+
+    @_overload
+    def get_inference_profile(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetInferenceProfileInputDict],
     ) -> GetInferenceProfileOutput:
         """
         Gets information about an inference profile. For more information, see
@@ -1685,8 +2691,6 @@ class BedrockClient(Client[BedrockConfig]):
         in the Amazon Bedrock User Guide.
 
         Args:
-            input:
-                An instance of `GetInferenceProfileInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1696,20 +2700,40 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `GetInferenceProfileOutput`.
         """
-        return self._invoke(input, _models.GET_INFERENCE_PROFILE, [], plugins)
 
+    def get_inference_profile(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetInferenceProfileOutput:
+        return self._invoke(
+            self._select_input(_models.GET_INFERENCE_PROFILE, args, kwargs),
+            _models.GET_INFERENCE_PROFILE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_marketplace_model_endpoint(
         self,
-        input: GetMarketplaceModelEndpointInput,
+        request: _models.GetMarketplaceModelEndpointInput
+        | _models.GetMarketplaceModelEndpointInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetMarketplaceModelEndpointOutput: ...
+
+    @_overload
+    def get_marketplace_model_endpoint(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetMarketplaceModelEndpointInputDict],
     ) -> GetMarketplaceModelEndpointOutput:
         """
         Retrieves details about a specific endpoint for a model from Amazon
         Bedrock Marketplace.
 
         Args:
-            input:
-                An instance of `GetMarketplaceModelEndpointInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1719,10 +2743,33 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `GetMarketplaceModelEndpointOutput`.
         """
-        return self._invoke(input, _models.GET_MARKETPLACE_MODEL_ENDPOINT, [], plugins)
 
+    def get_marketplace_model_endpoint(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetMarketplaceModelEndpointOutput:
+        return self._invoke(
+            self._select_input(_models.GET_MARKETPLACE_MODEL_ENDPOINT, args, kwargs),
+            _models.GET_MARKETPLACE_MODEL_ENDPOINT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_model_copy_job(
-        self, input: GetModelCopyJobInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetModelCopyJobInput | _models.GetModelCopyJobInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetModelCopyJobOutput: ...
+
+    @_overload
+    def get_model_copy_job(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetModelCopyJobInputDict],
     ) -> GetModelCopyJobOutput:
         """
         Retrieves information about a model copy job. For more information, see
@@ -1732,8 +2779,6 @@ class BedrockClient(Client[BedrockConfig]):
         Guide](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html).
 
         Args:
-            input:
-                An instance of `GetModelCopyJobInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1743,10 +2788,34 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `GetModelCopyJobOutput`.
         """
-        return self._invoke(input, _models.GET_MODEL_COPY_JOB, [], plugins)
 
+    def get_model_copy_job(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetModelCopyJobOutput:
+        return self._invoke(
+            self._select_input(_models.GET_MODEL_COPY_JOB, args, kwargs),
+            _models.GET_MODEL_COPY_JOB,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_model_customization_job(
-        self, input: GetModelCustomizationJobInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetModelCustomizationJobInput
+        | _models.GetModelCustomizationJobInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetModelCustomizationJobOutput: ...
+
+    @_overload
+    def get_model_customization_job(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetModelCustomizationJobInputDict],
     ) -> GetModelCustomizationJobOutput:
         """
         Retrieves the properties associated with a model-customization job,
@@ -1756,8 +2825,6 @@ class BedrockClient(Client[BedrockConfig]):
         Guide](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html).
 
         Args:
-            input:
-                An instance of `GetModelCustomizationJobInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1767,10 +2834,33 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `GetModelCustomizationJobOutput`.
         """
-        return self._invoke(input, _models.GET_MODEL_CUSTOMIZATION_JOB, [], plugins)
 
+    def get_model_customization_job(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetModelCustomizationJobOutput:
+        return self._invoke(
+            self._select_input(_models.GET_MODEL_CUSTOMIZATION_JOB, args, kwargs),
+            _models.GET_MODEL_CUSTOMIZATION_JOB,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_model_import_job(
-        self, input: GetModelImportJobInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetModelImportJobInput | _models.GetModelImportJobInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetModelImportJobOutput: ...
+
+    @_overload
+    def get_model_import_job(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetModelImportJobInputDict],
     ) -> GetModelImportJobOutput:
         """
         Retrieves the properties associated with import model job, including the
@@ -1780,8 +2870,6 @@ class BedrockClient(Client[BedrockConfig]):
         Guide](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html).
 
         Args:
-            input:
-                An instance of `GetModelImportJobInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1791,10 +2879,34 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `GetModelImportJobOutput`.
         """
-        return self._invoke(input, _models.GET_MODEL_IMPORT_JOB, [], plugins)
 
+    def get_model_import_job(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetModelImportJobOutput:
+        return self._invoke(
+            self._select_input(_models.GET_MODEL_IMPORT_JOB, args, kwargs),
+            _models.GET_MODEL_IMPORT_JOB,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_model_invocation_job(
-        self, input: GetModelInvocationJobInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetModelInvocationJobInput
+        | _models.GetModelInvocationJobInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetModelInvocationJobOutput: ...
+
+    @_overload
+    def get_model_invocation_job(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetModelInvocationJobInputDict],
     ) -> GetModelInvocationJobOutput:
         """
         Gets details about a batch inference job. For more information, see
@@ -1802,8 +2914,6 @@ class BedrockClient(Client[BedrockConfig]):
         jobs](https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-monitor)
 
         Args:
-            input:
-                An instance of `GetModelInvocationJobInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1813,19 +2923,39 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `GetModelInvocationJobOutput`.
         """
-        return self._invoke(input, _models.GET_MODEL_INVOCATION_JOB, [], plugins)
 
+    def get_model_invocation_job(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetModelInvocationJobOutput:
+        return self._invoke(
+            self._select_input(_models.GET_MODEL_INVOCATION_JOB, args, kwargs),
+            _models.GET_MODEL_INVOCATION_JOB,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_model_invocation_logging_configuration(
         self,
-        input: GetModelInvocationLoggingConfigurationInput | None = None,
+        request: _models.GetModelInvocationLoggingConfigurationInput
+        | _models.GetModelInvocationLoggingConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetModelInvocationLoggingConfigurationOutput: ...
+
+    @_overload
+    def get_model_invocation_logging_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetModelInvocationLoggingConfigurationInputDict],
     ) -> GetModelInvocationLoggingConfigurationOutput:
         """
         Get the current configuration values for model invocation logging.
 
         Args:
-            input:
-                An instance of `GetModelInvocationLoggingConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1835,19 +2965,40 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `GetModelInvocationLoggingConfigurationOutput`.
         """
+
+    def get_model_invocation_logging_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetModelInvocationLoggingConfigurationOutput:
         return self._invoke(
-            input, _models.GET_MODEL_INVOCATION_LOGGING_CONFIGURATION, [], plugins
+            self._select_input(
+                _models.GET_MODEL_INVOCATION_LOGGING_CONFIGURATION, args, kwargs
+            ),
+            _models.GET_MODEL_INVOCATION_LOGGING_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_prompt_router(
-        self, input: GetPromptRouterInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetPromptRouterInput | _models.GetPromptRouterInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetPromptRouterOutput: ...
+
+    @_overload
+    def get_prompt_router(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetPromptRouterInputDict],
     ) -> GetPromptRouterOutput:
         """
         Retrieves details about a prompt router.
 
         Args:
-            input:
-                An instance of `GetPromptRouterInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1857,12 +3008,34 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `GetPromptRouterOutput`.
         """
-        return self._invoke(input, _models.GET_PROMPT_ROUTER, [], plugins)
 
+    def get_prompt_router(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetPromptRouterOutput:
+        return self._invoke(
+            self._select_input(_models.GET_PROMPT_ROUTER, args, kwargs),
+            _models.GET_PROMPT_ROUTER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_provisioned_model_throughput(
         self,
-        input: GetProvisionedModelThroughputInput,
+        request: _models.GetProvisionedModelThroughputInput
+        | _models.GetProvisionedModelThroughputInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetProvisionedModelThroughputOutput: ...
+
+    @_overload
+    def get_provisioned_model_throughput(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetProvisionedModelThroughputInputDict],
     ) -> GetProvisionedModelThroughputOutput:
         """
         Returns details for a Provisioned Throughput. For more information, see
@@ -1872,8 +3045,6 @@ class BedrockClient(Client[BedrockConfig]):
         Guide](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html).
 
         Args:
-            input:
-                An instance of `GetProvisionedModelThroughputInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1883,19 +3054,38 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `GetProvisionedModelThroughputOutput`.
         """
+
+    def get_provisioned_model_throughput(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetProvisionedModelThroughputOutput:
         return self._invoke(
-            input, _models.GET_PROVISIONED_MODEL_THROUGHPUT, [], plugins
+            self._select_input(_models.GET_PROVISIONED_MODEL_THROUGHPUT, args, kwargs),
+            _models.GET_PROVISIONED_MODEL_THROUGHPUT,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_resource_policy(
-        self, input: GetResourcePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetResourcePolicyInput | _models.GetResourcePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetResourcePolicyOutput: ...
+
+    @_overload
+    def get_resource_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetResourcePolicyInputDict],
     ) -> GetResourcePolicyOutput:
         """
         Gets the resource policy document for a Bedrock resource
 
         Args:
-            input:
-                An instance of `GetResourcePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1905,19 +3095,39 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `GetResourcePolicyOutput`.
         """
-        return self._invoke(input, _models.GET_RESOURCE_POLICY, [], plugins)
 
+    def get_resource_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetResourcePolicyOutput:
+        return self._invoke(
+            self._select_input(_models.GET_RESOURCE_POLICY, args, kwargs),
+            _models.GET_RESOURCE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_use_case_for_model_access(
         self,
-        input: GetUseCaseForModelAccessInput | None = None,
+        request: _models.GetUseCaseForModelAccessInput
+        | _models.GetUseCaseForModelAccessInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetUseCaseForModelAccessOutput: ...
+
+    @_overload
+    def get_use_case_for_model_access(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetUseCaseForModelAccessInputDict],
     ) -> GetUseCaseForModelAccessOutput:
         """
         Get usecase for model access.
 
         Args:
-            input:
-                An instance of `GetUseCaseForModelAccessInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1927,19 +3137,39 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `GetUseCaseForModelAccessOutput`.
         """
-        return self._invoke(input, _models.GET_USE_CASE_FOR_MODEL_ACCESS, [], plugins)
 
+    def get_use_case_for_model_access(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetUseCaseForModelAccessOutput:
+        return self._invoke(
+            self._select_input(_models.GET_USE_CASE_FOR_MODEL_ACCESS, args, kwargs),
+            _models.GET_USE_CASE_FOR_MODEL_ACCESS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_advanced_prompt_optimization_jobs(
         self,
-        input: ListAdvancedPromptOptimizationJobsInput | None = None,
+        request: _models.ListAdvancedPromptOptimizationJobsInput
+        | _models.ListAdvancedPromptOptimizationJobsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListAdvancedPromptOptimizationJobsOutput: ...
+
+    @_overload
+    def list_advanced_prompt_optimization_jobs(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListAdvancedPromptOptimizationJobsInputDict],
     ) -> ListAdvancedPromptOptimizationJobsOutput:
         """
         Lists the advanced prompt optimization jobs in your account.
 
         Args:
-            input:
-                An instance of `ListAdvancedPromptOptimizationJobsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1949,14 +3179,36 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `ListAdvancedPromptOptimizationJobsOutput`.
         """
+
+    def list_advanced_prompt_optimization_jobs(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListAdvancedPromptOptimizationJobsOutput:
         return self._invoke(
-            input, _models.LIST_ADVANCED_PROMPT_OPTIMIZATION_JOBS, [], plugins
+            self._select_input(
+                _models.LIST_ADVANCED_PROMPT_OPTIMIZATION_JOBS, args, kwargs
+            ),
+            _models.LIST_ADVANCED_PROMPT_OPTIMIZATION_JOBS,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_automated_reasoning_policies(
         self,
-        input: ListAutomatedReasoningPoliciesInput | None = None,
+        request: _models.ListAutomatedReasoningPoliciesInput
+        | _models.ListAutomatedReasoningPoliciesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListAutomatedReasoningPoliciesOutput: ...
+
+    @_overload
+    def list_automated_reasoning_policies(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListAutomatedReasoningPoliciesInputDict],
     ) -> ListAutomatedReasoningPoliciesOutput:
         """
         Lists all Automated Reasoning policies in your account, with optional
@@ -1964,8 +3216,6 @@ class BedrockClient(Client[BedrockConfig]):
         policies.
 
         Args:
-            input:
-                An instance of `ListAutomatedReasoningPoliciesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1975,22 +3225,40 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `ListAutomatedReasoningPoliciesOutput`.
         """
+
+    def list_automated_reasoning_policies(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListAutomatedReasoningPoliciesOutput:
         return self._invoke(
-            input, _models.LIST_AUTOMATED_REASONING_POLICIES, [], plugins
+            self._select_input(_models.LIST_AUTOMATED_REASONING_POLICIES, args, kwargs),
+            _models.LIST_AUTOMATED_REASONING_POLICIES,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_automated_reasoning_policy_build_workflows(
         self,
-        input: ListAutomatedReasoningPolicyBuildWorkflowsInput,
+        request: _models.ListAutomatedReasoningPolicyBuildWorkflowsInput
+        | _models.ListAutomatedReasoningPolicyBuildWorkflowsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListAutomatedReasoningPolicyBuildWorkflowsOutput: ...
+
+    @_overload
+    def list_automated_reasoning_policy_build_workflows(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListAutomatedReasoningPolicyBuildWorkflowsInputDict],
     ) -> ListAutomatedReasoningPolicyBuildWorkflowsOutput:
         """
         Lists all build workflows for an Automated Reasoning policy, showing the
         history of policy creation and modification attempts.
 
         Args:
-            input:
-                An instance of `ListAutomatedReasoningPolicyBuildWorkflowsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2000,14 +3268,36 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `ListAutomatedReasoningPolicyBuildWorkflowsOutput`.
         """
+
+    def list_automated_reasoning_policy_build_workflows(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListAutomatedReasoningPolicyBuildWorkflowsOutput:
         return self._invoke(
-            input, _models.LIST_AUTOMATED_REASONING_POLICY_BUILD_WORKFLOWS, [], plugins
+            self._select_input(
+                _models.LIST_AUTOMATED_REASONING_POLICY_BUILD_WORKFLOWS, args, kwargs
+            ),
+            _models.LIST_AUTOMATED_REASONING_POLICY_BUILD_WORKFLOWS,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_automated_reasoning_policy_test_cases(
         self,
-        input: ListAutomatedReasoningPolicyTestCasesInput,
+        request: _models.ListAutomatedReasoningPolicyTestCasesInput
+        | _models.ListAutomatedReasoningPolicyTestCasesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListAutomatedReasoningPolicyTestCasesOutput: ...
+
+    @_overload
+    def list_automated_reasoning_policy_test_cases(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListAutomatedReasoningPolicyTestCasesInputDict],
     ) -> ListAutomatedReasoningPolicyTestCasesOutput:
         """
         Lists tests for an Automated Reasoning policy. We recommend using
@@ -2015,8 +3305,6 @@ class BedrockClient(Client[BedrockConfig]):
         successfully.
 
         Args:
-            input:
-                An instance of `ListAutomatedReasoningPolicyTestCasesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2026,22 +3314,42 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `ListAutomatedReasoningPolicyTestCasesOutput`.
         """
+
+    def list_automated_reasoning_policy_test_cases(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListAutomatedReasoningPolicyTestCasesOutput:
         return self._invoke(
-            input, _models.LIST_AUTOMATED_REASONING_POLICY_TEST_CASES, [], plugins
+            self._select_input(
+                _models.LIST_AUTOMATED_REASONING_POLICY_TEST_CASES, args, kwargs
+            ),
+            _models.LIST_AUTOMATED_REASONING_POLICY_TEST_CASES,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_automated_reasoning_policy_test_results(
         self,
-        input: ListAutomatedReasoningPolicyTestResultsInput,
+        request: _models.ListAutomatedReasoningPolicyTestResultsInput
+        | _models.ListAutomatedReasoningPolicyTestResultsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListAutomatedReasoningPolicyTestResultsOutput: ...
+
+    @_overload
+    def list_automated_reasoning_policy_test_results(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListAutomatedReasoningPolicyTestResultsInputDict],
     ) -> ListAutomatedReasoningPolicyTestResultsOutput:
         """
         Lists test results for an Automated Reasoning policy, showing how the
         policy performed against various test scenarios and validation checks.
 
         Args:
-            input:
-                An instance of `ListAutomatedReasoningPolicyTestResultsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2051,14 +3359,36 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `ListAutomatedReasoningPolicyTestResultsOutput`.
         """
+
+    def list_automated_reasoning_policy_test_results(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListAutomatedReasoningPolicyTestResultsOutput:
         return self._invoke(
-            input, _models.LIST_AUTOMATED_REASONING_POLICY_TEST_RESULTS, [], plugins
+            self._select_input(
+                _models.LIST_AUTOMATED_REASONING_POLICY_TEST_RESULTS, args, kwargs
+            ),
+            _models.LIST_AUTOMATED_REASONING_POLICY_TEST_RESULTS,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_custom_model_deployments(
         self,
-        input: ListCustomModelDeploymentsInput | None = None,
+        request: _models.ListCustomModelDeploymentsInput
+        | _models.ListCustomModelDeploymentsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListCustomModelDeploymentsOutput: ...
+
+    @_overload
+    def list_custom_model_deployments(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListCustomModelDeploymentsInputDict],
     ) -> ListCustomModelDeploymentsOutput:
         """
         Lists custom model deployments in your account. You can filter the
@@ -2078,8 +3408,6 @@ class BedrockClient(Client[BedrockConfig]):
         - [DeleteCustomModelDeployment](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_DeleteCustomModelDeployment.html)
 
         Args:
-            input:
-                An instance of `ListCustomModelDeploymentsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2089,12 +3417,33 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `ListCustomModelDeploymentsOutput`.
         """
-        return self._invoke(input, _models.LIST_CUSTOM_MODEL_DEPLOYMENTS, [], plugins)
 
+    def list_custom_model_deployments(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListCustomModelDeploymentsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_CUSTOM_MODEL_DEPLOYMENTS, args, kwargs),
+            _models.LIST_CUSTOM_MODEL_DEPLOYMENTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_custom_models(
         self,
-        input: ListCustomModelsInput | None = None,
+        request: _models.ListCustomModelsInput | _models.ListCustomModelsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListCustomModelsOutput: ...
+
+    @_overload
+    def list_custom_models(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListCustomModelsInputDict],
     ) -> ListCustomModelsOutput:
         """
         Returns a list of the custom models that you have created with the
@@ -2106,8 +3455,6 @@ class BedrockClient(Client[BedrockConfig]):
         Guide](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html).
 
         Args:
-            input:
-                An instance of `ListCustomModelsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2117,19 +3464,39 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `ListCustomModelsOutput`.
         """
-        return self._invoke(input, _models.LIST_CUSTOM_MODELS, [], plugins)
 
+    def list_custom_models(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListCustomModelsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_CUSTOM_MODELS, args, kwargs),
+            _models.LIST_CUSTOM_MODELS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_enforced_guardrails_configuration(
         self,
-        input: ListEnforcedGuardrailsConfigurationInput | None = None,
+        request: _models.ListEnforcedGuardrailsConfigurationInput
+        | _models.ListEnforcedGuardrailsConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListEnforcedGuardrailsConfigurationOutput: ...
+
+    @_overload
+    def list_enforced_guardrails_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListEnforcedGuardrailsConfigurationInputDict],
     ) -> ListEnforcedGuardrailsConfigurationOutput:
         """
         Lists the account-level enforced guardrail configurations.
 
         Args:
-            input:
-                An instance of `ListEnforcedGuardrailsConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2139,21 +3506,40 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `ListEnforcedGuardrailsConfigurationOutput`.
         """
+
+    def list_enforced_guardrails_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListEnforcedGuardrailsConfigurationOutput:
         return self._invoke(
-            input, _models.LIST_ENFORCED_GUARDRAILS_CONFIGURATION, [], plugins
+            self._select_input(
+                _models.LIST_ENFORCED_GUARDRAILS_CONFIGURATION, args, kwargs
+            ),
+            _models.LIST_ENFORCED_GUARDRAILS_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_evaluation_jobs(
         self,
-        input: ListEvaluationJobsInput | None = None,
+        request: _models.ListEvaluationJobsInput | _models.ListEvaluationJobsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListEvaluationJobsOutput: ...
+
+    @_overload
+    def list_evaluation_jobs(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListEvaluationJobsInputDict],
     ) -> ListEvaluationJobsOutput:
         """
         Lists all existing evaluation jobs.
 
         Args:
-            input:
-                An instance of `ListEvaluationJobsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2163,19 +3549,39 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `ListEvaluationJobsOutput`.
         """
-        return self._invoke(input, _models.LIST_EVALUATION_JOBS, [], plugins)
 
+    def list_evaluation_jobs(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListEvaluationJobsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_EVALUATION_JOBS, args, kwargs),
+            _models.LIST_EVALUATION_JOBS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_foundation_model_agreement_offers(
         self,
-        input: ListFoundationModelAgreementOffersInput,
+        request: _models.ListFoundationModelAgreementOffersInput
+        | _models.ListFoundationModelAgreementOffersInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListFoundationModelAgreementOffersOutput: ...
+
+    @_overload
+    def list_foundation_model_agreement_offers(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListFoundationModelAgreementOffersInputDict],
     ) -> ListFoundationModelAgreementOffersOutput:
         """
         Get the offers associated with the specified model.
 
         Args:
-            input:
-                An instance of `ListFoundationModelAgreementOffersInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2185,14 +3591,36 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `ListFoundationModelAgreementOffersOutput`.
         """
+
+    def list_foundation_model_agreement_offers(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListFoundationModelAgreementOffersOutput:
         return self._invoke(
-            input, _models.LIST_FOUNDATION_MODEL_AGREEMENT_OFFERS, [], plugins
+            self._select_input(
+                _models.LIST_FOUNDATION_MODEL_AGREEMENT_OFFERS, args, kwargs
+            ),
+            _models.LIST_FOUNDATION_MODEL_AGREEMENT_OFFERS,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_foundation_models(
         self,
-        input: ListFoundationModelsInput | None = None,
+        request: _models.ListFoundationModelsInput
+        | _models.ListFoundationModelsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListFoundationModelsOutput: ...
+
+    @_overload
+    def list_foundation_models(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListFoundationModelsInputDict],
     ) -> ListFoundationModelsOutput:
         """
         Lists Amazon Bedrock foundation models that you can use. You can filter
@@ -2203,8 +3631,6 @@ class BedrockClient(Client[BedrockConfig]):
         Guide](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html).
 
         Args:
-            input:
-                An instance of `ListFoundationModelsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2214,12 +3640,33 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `ListFoundationModelsOutput`.
         """
-        return self._invoke(input, _models.LIST_FOUNDATION_MODELS, [], plugins)
 
+    def list_foundation_models(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListFoundationModelsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_FOUNDATION_MODELS, args, kwargs),
+            _models.LIST_FOUNDATION_MODELS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_guardrails(
         self,
-        input: ListGuardrailsInput | None = None,
+        request: _models.ListGuardrailsInput | _models.ListGuardrailsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListGuardrailsOutput: ...
+
+    @_overload
+    def list_guardrails(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListGuardrailsInputDict],
     ) -> ListGuardrailsOutput:
         """
         Lists details about all the guardrails in an account. To list the
@@ -2233,8 +3680,6 @@ class BedrockClient(Client[BedrockConfig]):
         `ListGuardrails` request to see the next batch of results.
 
         Args:
-            input:
-                An instance of `ListGuardrailsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2244,12 +3689,33 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `ListGuardrailsOutput`.
         """
-        return self._invoke(input, _models.LIST_GUARDRAILS, [], plugins)
 
+    def list_guardrails(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListGuardrailsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_GUARDRAILS, args, kwargs),
+            _models.LIST_GUARDRAILS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_imported_models(
         self,
-        input: ListImportedModelsInput | None = None,
+        request: _models.ListImportedModelsInput | _models.ListImportedModelsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListImportedModelsOutput: ...
+
+    @_overload
+    def list_imported_models(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListImportedModelsInputDict],
     ) -> ListImportedModelsOutput:
         """
         Returns a list of models you've imported. You can filter the results to
@@ -2260,8 +3726,6 @@ class BedrockClient(Client[BedrockConfig]):
         Guide](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html).
 
         Args:
-            input:
-                An instance of `ListImportedModelsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2271,12 +3735,34 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `ListImportedModelsOutput`.
         """
-        return self._invoke(input, _models.LIST_IMPORTED_MODELS, [], plugins)
 
+    def list_imported_models(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListImportedModelsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_IMPORTED_MODELS, args, kwargs),
+            _models.LIST_IMPORTED_MODELS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_inference_profiles(
         self,
-        input: ListInferenceProfilesInput | None = None,
+        request: _models.ListInferenceProfilesInput
+        | _models.ListInferenceProfilesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListInferenceProfilesOutput: ...
+
+    @_overload
+    def list_inference_profiles(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListInferenceProfilesInputDict],
     ) -> ListInferenceProfilesOutput:
         """
         Returns a list of inference profiles that you can use. For more
@@ -2286,8 +3772,6 @@ class BedrockClient(Client[BedrockConfig]):
         in the Amazon Bedrock User Guide.
 
         Args:
-            input:
-                An instance of `ListInferenceProfilesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2297,20 +3781,40 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `ListInferenceProfilesOutput`.
         """
-        return self._invoke(input, _models.LIST_INFERENCE_PROFILES, [], plugins)
 
+    def list_inference_profiles(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListInferenceProfilesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_INFERENCE_PROFILES, args, kwargs),
+            _models.LIST_INFERENCE_PROFILES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_marketplace_model_endpoints(
         self,
-        input: ListMarketplaceModelEndpointsInput | None = None,
+        request: _models.ListMarketplaceModelEndpointsInput
+        | _models.ListMarketplaceModelEndpointsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListMarketplaceModelEndpointsOutput: ...
+
+    @_overload
+    def list_marketplace_model_endpoints(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListMarketplaceModelEndpointsInputDict],
     ) -> ListMarketplaceModelEndpointsOutput:
         """
         Lists the endpoints for models from Amazon Bedrock Marketplace in your
         Amazon Web Services account.
 
         Args:
-            input:
-                An instance of `ListMarketplaceModelEndpointsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2320,14 +3824,33 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `ListMarketplaceModelEndpointsOutput`.
         """
+
+    def list_marketplace_model_endpoints(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListMarketplaceModelEndpointsOutput:
         return self._invoke(
-            input, _models.LIST_MARKETPLACE_MODEL_ENDPOINTS, [], plugins
+            self._select_input(_models.LIST_MARKETPLACE_MODEL_ENDPOINTS, args, kwargs),
+            _models.LIST_MARKETPLACE_MODEL_ENDPOINTS,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_model_copy_jobs(
         self,
-        input: ListModelCopyJobsInput | None = None,
+        request: _models.ListModelCopyJobsInput | _models.ListModelCopyJobsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListModelCopyJobsOutput: ...
+
+    @_overload
+    def list_model_copy_jobs(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListModelCopyJobsInputDict],
     ) -> ListModelCopyJobsOutput:
         """
         Returns a list of model copy jobs that you have submitted. You can
@@ -2338,8 +3861,6 @@ class BedrockClient(Client[BedrockConfig]):
         Guide](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html).
 
         Args:
-            input:
-                An instance of `ListModelCopyJobsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2349,12 +3870,34 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `ListModelCopyJobsOutput`.
         """
-        return self._invoke(input, _models.LIST_MODEL_COPY_JOBS, [], plugins)
 
+    def list_model_copy_jobs(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListModelCopyJobsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_MODEL_COPY_JOBS, args, kwargs),
+            _models.LIST_MODEL_COPY_JOBS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_model_customization_jobs(
         self,
-        input: ListModelCustomizationJobsInput | None = None,
+        request: _models.ListModelCustomizationJobsInput
+        | _models.ListModelCustomizationJobsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListModelCustomizationJobsOutput: ...
+
+    @_overload
+    def list_model_customization_jobs(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListModelCustomizationJobsInputDict],
     ) -> ListModelCustomizationJobsOutput:
         """
         Returns a list of model customization jobs that you have submitted. You
@@ -2366,8 +3909,6 @@ class BedrockClient(Client[BedrockConfig]):
         Guide](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html).
 
         Args:
-            input:
-                An instance of `ListModelCustomizationJobsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2377,12 +3918,34 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `ListModelCustomizationJobsOutput`.
         """
-        return self._invoke(input, _models.LIST_MODEL_CUSTOMIZATION_JOBS, [], plugins)
 
+    def list_model_customization_jobs(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListModelCustomizationJobsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_MODEL_CUSTOMIZATION_JOBS, args, kwargs),
+            _models.LIST_MODEL_CUSTOMIZATION_JOBS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_model_import_jobs(
         self,
-        input: ListModelImportJobsInput | None = None,
+        request: _models.ListModelImportJobsInput
+        | _models.ListModelImportJobsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListModelImportJobsOutput: ...
+
+    @_overload
+    def list_model_import_jobs(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListModelImportJobsInputDict],
     ) -> ListModelImportJobsOutput:
         """
         Returns a list of import jobs you've submitted. You can filter the
@@ -2393,8 +3956,6 @@ class BedrockClient(Client[BedrockConfig]):
         Guide](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html).
 
         Args:
-            input:
-                An instance of `ListModelImportJobsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2404,12 +3965,34 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `ListModelImportJobsOutput`.
         """
-        return self._invoke(input, _models.LIST_MODEL_IMPORT_JOBS, [], plugins)
 
+    def list_model_import_jobs(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListModelImportJobsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_MODEL_IMPORT_JOBS, args, kwargs),
+            _models.LIST_MODEL_IMPORT_JOBS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_model_invocation_jobs(
         self,
-        input: ListModelInvocationJobsInput | None = None,
+        request: _models.ListModelInvocationJobsInput
+        | _models.ListModelInvocationJobsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListModelInvocationJobsOutput: ...
+
+    @_overload
+    def list_model_invocation_jobs(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListModelInvocationJobsInputDict],
     ) -> ListModelInvocationJobsOutput:
         """
         Lists all batch inference jobs in the account. For more information, see
@@ -2417,8 +4000,6 @@ class BedrockClient(Client[BedrockConfig]):
         job](https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-view.html).
 
         Args:
-            input:
-                An instance of `ListModelInvocationJobsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2428,19 +4009,38 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `ListModelInvocationJobsOutput`.
         """
-        return self._invoke(input, _models.LIST_MODEL_INVOCATION_JOBS, [], plugins)
 
+    def list_model_invocation_jobs(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListModelInvocationJobsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_MODEL_INVOCATION_JOBS, args, kwargs),
+            _models.LIST_MODEL_INVOCATION_JOBS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_prompt_routers(
         self,
-        input: ListPromptRoutersInput | None = None,
+        request: _models.ListPromptRoutersInput | _models.ListPromptRoutersInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListPromptRoutersOutput: ...
+
+    @_overload
+    def list_prompt_routers(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListPromptRoutersInputDict],
     ) -> ListPromptRoutersOutput:
         """
         Retrieves a list of prompt routers.
 
         Args:
-            input:
-                An instance of `ListPromptRoutersInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2450,12 +4050,34 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `ListPromptRoutersOutput`.
         """
-        return self._invoke(input, _models.LIST_PROMPT_ROUTERS, [], plugins)
 
+    def list_prompt_routers(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListPromptRoutersOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_PROMPT_ROUTERS, args, kwargs),
+            _models.LIST_PROMPT_ROUTERS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_provisioned_model_throughputs(
         self,
-        input: ListProvisionedModelThroughputsInput | None = None,
+        request: _models.ListProvisionedModelThroughputsInput
+        | _models.ListProvisionedModelThroughputsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListProvisionedModelThroughputsOutput: ...
+
+    @_overload
+    def list_provisioned_model_throughputs(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListProvisionedModelThroughputsInputDict],
     ) -> ListProvisionedModelThroughputsOutput:
         """
         Lists the Provisioned Throughputs in the account. For more information,
@@ -2465,8 +4087,6 @@ class BedrockClient(Client[BedrockConfig]):
         Guide](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html).
 
         Args:
-            input:
-                An instance of `ListProvisionedModelThroughputsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2476,12 +4096,36 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `ListProvisionedModelThroughputsOutput`.
         """
+
+    def list_provisioned_model_throughputs(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListProvisionedModelThroughputsOutput:
         return self._invoke(
-            input, _models.LIST_PROVISIONED_MODEL_THROUGHPUTS, [], plugins
+            self._select_input(
+                _models.LIST_PROVISIONED_MODEL_THROUGHPUTS, args, kwargs
+            ),
+            _models.LIST_PROVISIONED_MODEL_THROUGHPUTS,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_tags_for_resource(
-        self, input: ListTagsForResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListTagsForResourceInput
+        | _models.ListTagsForResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListTagsForResourceOutput: ...
+
+    @_overload
+    def list_tags_for_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListTagsForResourceInputDict],
     ) -> ListTagsForResourceOutput:
         """
         List the tags associated with the specified resource.
@@ -2492,8 +4136,6 @@ class BedrockClient(Client[BedrockConfig]):
         Guide](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html).
 
         Args:
-            input:
-                An instance of `ListTagsForResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2503,17 +4145,39 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `ListTagsForResourceOutput`.
         """
-        return self._invoke(input, _models.LIST_TAGS_FOR_RESOURCE, [], plugins)
 
+    def list_tags_for_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListTagsForResourceOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_TAGS_FOR_RESOURCE, args, kwargs),
+            _models.LIST_TAGS_FOR_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_account_data_retention(
-        self, input: PutAccountDataRetentionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutAccountDataRetentionInput
+        | _models.PutAccountDataRetentionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutAccountDataRetentionOutput: ...
+
+    @_overload
+    def put_account_data_retention(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutAccountDataRetentionInputDict],
     ) -> PutAccountDataRetentionOutput:
         """
         Sets the account-wide data retention mode for Amazon Bedrock.
 
         Args:
-            input:
-                An instance of `PutAccountDataRetentionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2523,19 +4187,39 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `PutAccountDataRetentionOutput`.
         """
-        return self._invoke(input, _models.PUT_ACCOUNT_DATA_RETENTION, [], plugins)
 
+    def put_account_data_retention(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutAccountDataRetentionOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_ACCOUNT_DATA_RETENTION, args, kwargs),
+            _models.PUT_ACCOUNT_DATA_RETENTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_enforced_guardrail_configuration(
         self,
-        input: PutEnforcedGuardrailConfigurationInput,
+        request: _models.PutEnforcedGuardrailConfigurationInput
+        | _models.PutEnforcedGuardrailConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> PutEnforcedGuardrailConfigurationOutput: ...
+
+    @_overload
+    def put_enforced_guardrail_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutEnforcedGuardrailConfigurationInputDict],
     ) -> PutEnforcedGuardrailConfigurationOutput:
         """
         Sets the account-level enforced guardrail configuration.
 
         Args:
-            input:
-                An instance of `PutEnforcedGuardrailConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2545,21 +4229,41 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `PutEnforcedGuardrailConfigurationOutput`.
         """
+
+    def put_enforced_guardrail_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutEnforcedGuardrailConfigurationOutput:
         return self._invoke(
-            input, _models.PUT_ENFORCED_GUARDRAIL_CONFIGURATION, [], plugins
+            self._select_input(
+                _models.PUT_ENFORCED_GUARDRAIL_CONFIGURATION, args, kwargs
+            ),
+            _models.PUT_ENFORCED_GUARDRAIL_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     def put_model_invocation_logging_configuration(
         self,
-        input: PutModelInvocationLoggingConfigurationInput,
+        request: _models.PutModelInvocationLoggingConfigurationInput
+        | _models.PutModelInvocationLoggingConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> PutModelInvocationLoggingConfigurationOutput: ...
+
+    @_overload
+    def put_model_invocation_logging_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutModelInvocationLoggingConfigurationInputDict],
     ) -> PutModelInvocationLoggingConfigurationOutput:
         """
         Set the configuration values for model invocation logging.
 
         Args:
-            input:
-                An instance of `PutModelInvocationLoggingConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2569,19 +4273,40 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `PutModelInvocationLoggingConfigurationOutput`.
         """
+
+    def put_model_invocation_logging_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutModelInvocationLoggingConfigurationOutput:
         return self._invoke(
-            input, _models.PUT_MODEL_INVOCATION_LOGGING_CONFIGURATION, [], plugins
+            self._select_input(
+                _models.PUT_MODEL_INVOCATION_LOGGING_CONFIGURATION, args, kwargs
+            ),
+            _models.PUT_MODEL_INVOCATION_LOGGING_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     def put_resource_policy(
-        self, input: PutResourcePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutResourcePolicyInput | _models.PutResourcePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutResourcePolicyOutput: ...
+
+    @_overload
+    def put_resource_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutResourcePolicyInputDict],
     ) -> PutResourcePolicyOutput:
         """
         Adds a resource policy for a Bedrock resource.
 
         Args:
-            input:
-                An instance of `PutResourcePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2591,17 +4316,39 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `PutResourcePolicyOutput`.
         """
-        return self._invoke(input, _models.PUT_RESOURCE_POLICY, [], plugins)
 
+    def put_resource_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutResourcePolicyOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_RESOURCE_POLICY, args, kwargs),
+            _models.PUT_RESOURCE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_use_case_for_model_access(
-        self, input: PutUseCaseForModelAccessInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutUseCaseForModelAccessInput
+        | _models.PutUseCaseForModelAccessInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutUseCaseForModelAccessOutput: ...
+
+    @_overload
+    def put_use_case_for_model_access(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutUseCaseForModelAccessInputDict],
     ) -> PutUseCaseForModelAccessOutput:
         """
         Put usecase for model access.
 
         Args:
-            input:
-                An instance of `PutUseCaseForModelAccessInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2611,20 +4358,40 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `PutUseCaseForModelAccessOutput`.
         """
-        return self._invoke(input, _models.PUT_USE_CASE_FOR_MODEL_ACCESS, [], plugins)
 
+    def put_use_case_for_model_access(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutUseCaseForModelAccessOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_USE_CASE_FOR_MODEL_ACCESS, args, kwargs),
+            _models.PUT_USE_CASE_FOR_MODEL_ACCESS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def register_marketplace_model_endpoint(
         self,
-        input: RegisterMarketplaceModelEndpointInput,
+        request: _models.RegisterMarketplaceModelEndpointInput
+        | _models.RegisterMarketplaceModelEndpointInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> RegisterMarketplaceModelEndpointOutput: ...
+
+    @_overload
+    def register_marketplace_model_endpoint(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RegisterMarketplaceModelEndpointInputDict],
     ) -> RegisterMarketplaceModelEndpointOutput:
         """
         Registers an existing Amazon SageMaker endpoint with Amazon Bedrock
         Marketplace, allowing it to be used with Amazon Bedrock APIs.
 
         Args:
-            input:
-                An instance of `RegisterMarketplaceModelEndpointInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2634,14 +4401,36 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `RegisterMarketplaceModelEndpointOutput`.
         """
+
+    def register_marketplace_model_endpoint(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RegisterMarketplaceModelEndpointOutput:
         return self._invoke(
-            input, _models.REGISTER_MARKETPLACE_MODEL_ENDPOINT, [], plugins
+            self._select_input(
+                _models.REGISTER_MARKETPLACE_MODEL_ENDPOINT, args, kwargs
+            ),
+            _models.REGISTER_MARKETPLACE_MODEL_ENDPOINT,
+            [],
+            plugins,
         )
 
+    @_overload
     def start_automated_reasoning_policy_build_workflow(
         self,
-        input: StartAutomatedReasoningPolicyBuildWorkflowInput,
+        request: _models.StartAutomatedReasoningPolicyBuildWorkflowInput
+        | _models.StartAutomatedReasoningPolicyBuildWorkflowInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> StartAutomatedReasoningPolicyBuildWorkflowOutput: ...
+
+    @_overload
+    def start_automated_reasoning_policy_build_workflow(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartAutomatedReasoningPolicyBuildWorkflowInputDict],
     ) -> StartAutomatedReasoningPolicyBuildWorkflowOutput:
         """
         Starts a new build workflow for an Automated Reasoning policy. This
@@ -2649,8 +4438,6 @@ class BedrockClient(Client[BedrockConfig]):
         policy rules, variables, and types.
 
         Args:
-            input:
-                An instance of `StartAutomatedReasoningPolicyBuildWorkflowInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2660,14 +4447,36 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `StartAutomatedReasoningPolicyBuildWorkflowOutput`.
         """
+
+    def start_automated_reasoning_policy_build_workflow(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StartAutomatedReasoningPolicyBuildWorkflowOutput:
         return self._invoke(
-            input, _models.START_AUTOMATED_REASONING_POLICY_BUILD_WORKFLOW, [], plugins
+            self._select_input(
+                _models.START_AUTOMATED_REASONING_POLICY_BUILD_WORKFLOW, args, kwargs
+            ),
+            _models.START_AUTOMATED_REASONING_POLICY_BUILD_WORKFLOW,
+            [],
+            plugins,
         )
 
+    @_overload
     def start_automated_reasoning_policy_test_workflow(
         self,
-        input: StartAutomatedReasoningPolicyTestWorkflowInput,
+        request: _models.StartAutomatedReasoningPolicyTestWorkflowInput
+        | _models.StartAutomatedReasoningPolicyTestWorkflowInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> StartAutomatedReasoningPolicyTestWorkflowOutput: ...
+
+    @_overload
+    def start_automated_reasoning_policy_test_workflow(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartAutomatedReasoningPolicyTestWorkflowInputDict],
     ) -> StartAutomatedReasoningPolicyTestWorkflowOutput:
         """
         Initiates a test workflow to validate Automated Reasoning policy tests.
@@ -2675,8 +4484,6 @@ class BedrockClient(Client[BedrockConfig]):
         generates validation results.
 
         Args:
-            input:
-                An instance of `StartAutomatedReasoningPolicyTestWorkflowInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2686,21 +4493,41 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `StartAutomatedReasoningPolicyTestWorkflowOutput`.
         """
+
+    def start_automated_reasoning_policy_test_workflow(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StartAutomatedReasoningPolicyTestWorkflowOutput:
         return self._invoke(
-            input, _models.START_AUTOMATED_REASONING_POLICY_TEST_WORKFLOW, [], plugins
+            self._select_input(
+                _models.START_AUTOMATED_REASONING_POLICY_TEST_WORKFLOW, args, kwargs
+            ),
+            _models.START_AUTOMATED_REASONING_POLICY_TEST_WORKFLOW,
+            [],
+            plugins,
         )
 
+    @_overload
     def stop_advanced_prompt_optimization_job(
         self,
-        input: StopAdvancedPromptOptimizationJobInput,
+        request: _models.StopAdvancedPromptOptimizationJobInput
+        | _models.StopAdvancedPromptOptimizationJobInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> StopAdvancedPromptOptimizationJobOutput: ...
+
+    @_overload
+    def stop_advanced_prompt_optimization_job(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StopAdvancedPromptOptimizationJobInputDict],
     ) -> StopAdvancedPromptOptimizationJobOutput:
         """
         Stops an advanced prompt optimization job that is in progress.
 
         Args:
-            input:
-                An instance of `StopAdvancedPromptOptimizationJobInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2710,19 +4537,40 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `StopAdvancedPromptOptimizationJobOutput`.
         """
+
+    def stop_advanced_prompt_optimization_job(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StopAdvancedPromptOptimizationJobOutput:
         return self._invoke(
-            input, _models.STOP_ADVANCED_PROMPT_OPTIMIZATION_JOB, [], plugins
+            self._select_input(
+                _models.STOP_ADVANCED_PROMPT_OPTIMIZATION_JOB, args, kwargs
+            ),
+            _models.STOP_ADVANCED_PROMPT_OPTIMIZATION_JOB,
+            [],
+            plugins,
         )
 
+    @_overload
     def stop_evaluation_job(
-        self, input: StopEvaluationJobInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StopEvaluationJobInput | _models.StopEvaluationJobInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StopEvaluationJobOutput: ...
+
+    @_overload
+    def stop_evaluation_job(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StopEvaluationJobInputDict],
     ) -> StopEvaluationJobOutput:
         """
         Stops an evaluation job that is current being created or running.
 
         Args:
-            input:
-                An instance of `StopEvaluationJobInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2732,10 +4580,34 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `StopEvaluationJobOutput`.
         """
-        return self._invoke(input, _models.STOP_EVALUATION_JOB, [], plugins)
 
+    def stop_evaluation_job(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StopEvaluationJobOutput:
+        return self._invoke(
+            self._select_input(_models.STOP_EVALUATION_JOB, args, kwargs),
+            _models.STOP_EVALUATION_JOB,
+            [],
+            plugins,
+        )
+
+    @_overload
     def stop_model_customization_job(
-        self, input: StopModelCustomizationJobInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StopModelCustomizationJobInput
+        | _models.StopModelCustomizationJobInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StopModelCustomizationJobOutput: ...
+
+    @_overload
+    def stop_model_customization_job(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StopModelCustomizationJobInputDict],
     ) -> StopModelCustomizationJobOutput:
         """
         Stops an active model customization job. For more information, see
@@ -2745,8 +4617,6 @@ class BedrockClient(Client[BedrockConfig]):
         Guide](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html).
 
         Args:
-            input:
-                An instance of `StopModelCustomizationJobInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2756,10 +4626,34 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `StopModelCustomizationJobOutput`.
         """
-        return self._invoke(input, _models.STOP_MODEL_CUSTOMIZATION_JOB, [], plugins)
 
+    def stop_model_customization_job(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StopModelCustomizationJobOutput:
+        return self._invoke(
+            self._select_input(_models.STOP_MODEL_CUSTOMIZATION_JOB, args, kwargs),
+            _models.STOP_MODEL_CUSTOMIZATION_JOB,
+            [],
+            plugins,
+        )
+
+    @_overload
     def stop_model_invocation_job(
-        self, input: StopModelInvocationJobInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StopModelInvocationJobInput
+        | _models.StopModelInvocationJobInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StopModelInvocationJobOutput: ...
+
+    @_overload
+    def stop_model_invocation_job(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StopModelInvocationJobInputDict],
     ) -> StopModelInvocationJobOutput:
         """
         Stops a batch inference job. You're only charged for tokens that were
@@ -2767,8 +4661,6 @@ class BedrockClient(Client[BedrockConfig]):
         job](https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-stop.html).
 
         Args:
-            input:
-                An instance of `StopModelInvocationJobInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2778,10 +4670,33 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `StopModelInvocationJobOutput`.
         """
-        return self._invoke(input, _models.STOP_MODEL_INVOCATION_JOB, [], plugins)
 
+    def stop_model_invocation_job(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StopModelInvocationJobOutput:
+        return self._invoke(
+            self._select_input(_models.STOP_MODEL_INVOCATION_JOB, args, kwargs),
+            _models.STOP_MODEL_INVOCATION_JOB,
+            [],
+            plugins,
+        )
+
+    @_overload
     def tag_resource(
-        self, input: TagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.TagResourceInput | _models.TagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> TagResourceOutput: ...
+
+    @_overload
+    def tag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.TagResourceInputDict],
     ) -> TagResourceOutput:
         """
         Associate tags with a resource. For more information, see [Tagging
@@ -2790,8 +4705,6 @@ class BedrockClient(Client[BedrockConfig]):
         Guide](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html).
 
         Args:
-            input:
-                An instance of `TagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2801,10 +4714,33 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `TagResourceOutput`.
         """
-        return self._invoke(input, _models.TAG_RESOURCE, [], plugins)
 
+    def tag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> TagResourceOutput:
+        return self._invoke(
+            self._select_input(_models.TAG_RESOURCE, args, kwargs),
+            _models.TAG_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def untag_resource(
-        self, input: UntagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UntagResourceInput | _models.UntagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UntagResourceOutput: ...
+
+    @_overload
+    def untag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UntagResourceInputDict],
     ) -> UntagResourceOutput:
         """
         Remove one or more tags from a resource. For more information, see
@@ -2814,8 +4750,6 @@ class BedrockClient(Client[BedrockConfig]):
         Guide](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html).
 
         Args:
-            input:
-                An instance of `UntagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2825,12 +4759,34 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `UntagResourceOutput`.
         """
-        return self._invoke(input, _models.UNTAG_RESOURCE, [], plugins)
 
+    def untag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UntagResourceOutput:
+        return self._invoke(
+            self._select_input(_models.UNTAG_RESOURCE, args, kwargs),
+            _models.UNTAG_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_automated_reasoning_policy(
         self,
-        input: UpdateAutomatedReasoningPolicyInput,
+        request: _models.UpdateAutomatedReasoningPolicyInput
+        | _models.UpdateAutomatedReasoningPolicyInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateAutomatedReasoningPolicyOutput: ...
+
+    @_overload
+    def update_automated_reasoning_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateAutomatedReasoningPolicyInputDict],
     ) -> UpdateAutomatedReasoningPolicyOutput:
         """
         Updates an existing Automated Reasoning policy with new rules,
@@ -2838,8 +4794,6 @@ class BedrockClient(Client[BedrockConfig]):
         while preserving the previous version.
 
         Args:
-            input:
-                An instance of `UpdateAutomatedReasoningPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2849,14 +4803,34 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `UpdateAutomatedReasoningPolicyOutput`.
         """
+
+    def update_automated_reasoning_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateAutomatedReasoningPolicyOutput:
         return self._invoke(
-            input, _models.UPDATE_AUTOMATED_REASONING_POLICY, [], plugins
+            self._select_input(_models.UPDATE_AUTOMATED_REASONING_POLICY, args, kwargs),
+            _models.UPDATE_AUTOMATED_REASONING_POLICY,
+            [],
+            plugins,
         )
 
+    @_overload
     def update_automated_reasoning_policy_annotations(
         self,
-        input: UpdateAutomatedReasoningPolicyAnnotationsInput,
+        request: _models.UpdateAutomatedReasoningPolicyAnnotationsInput
+        | _models.UpdateAutomatedReasoningPolicyAnnotationsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateAutomatedReasoningPolicyAnnotationsOutput: ...
+
+    @_overload
+    def update_automated_reasoning_policy_annotations(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateAutomatedReasoningPolicyAnnotationsInputDict],
     ) -> UpdateAutomatedReasoningPolicyAnnotationsOutput:
         """
         Updates the annotations for an Automated Reasoning policy build
@@ -2864,8 +4838,6 @@ class BedrockClient(Client[BedrockConfig]):
         types before finalizing the policy.
 
         Args:
-            input:
-                An instance of `UpdateAutomatedReasoningPolicyAnnotationsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2875,22 +4847,42 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `UpdateAutomatedReasoningPolicyAnnotationsOutput`.
         """
+
+    def update_automated_reasoning_policy_annotations(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateAutomatedReasoningPolicyAnnotationsOutput:
         return self._invoke(
-            input, _models.UPDATE_AUTOMATED_REASONING_POLICY_ANNOTATIONS, [], plugins
+            self._select_input(
+                _models.UPDATE_AUTOMATED_REASONING_POLICY_ANNOTATIONS, args, kwargs
+            ),
+            _models.UPDATE_AUTOMATED_REASONING_POLICY_ANNOTATIONS,
+            [],
+            plugins,
         )
 
+    @_overload
     def update_automated_reasoning_policy_test_case(
         self,
-        input: UpdateAutomatedReasoningPolicyTestCaseInput,
+        request: _models.UpdateAutomatedReasoningPolicyTestCaseInput
+        | _models.UpdateAutomatedReasoningPolicyTestCaseInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateAutomatedReasoningPolicyTestCaseOutput: ...
+
+    @_overload
+    def update_automated_reasoning_policy_test_case(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateAutomatedReasoningPolicyTestCaseInputDict],
     ) -> UpdateAutomatedReasoningPolicyTestCaseOutput:
         """
         Updates an existing Automated Reasoning policy test. You can modify the
         content, query, expected result, and confidence threshold.
 
         Args:
-            input:
-                An instance of `UpdateAutomatedReasoningPolicyTestCaseInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2900,22 +4892,42 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `UpdateAutomatedReasoningPolicyTestCaseOutput`.
         """
+
+    def update_automated_reasoning_policy_test_case(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateAutomatedReasoningPolicyTestCaseOutput:
         return self._invoke(
-            input, _models.UPDATE_AUTOMATED_REASONING_POLICY_TEST_CASE, [], plugins
+            self._select_input(
+                _models.UPDATE_AUTOMATED_REASONING_POLICY_TEST_CASE, args, kwargs
+            ),
+            _models.UPDATE_AUTOMATED_REASONING_POLICY_TEST_CASE,
+            [],
+            plugins,
         )
 
+    @_overload
     def update_custom_model_deployment(
         self,
-        input: UpdateCustomModelDeploymentInput,
+        request: _models.UpdateCustomModelDeploymentInput
+        | _models.UpdateCustomModelDeploymentInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateCustomModelDeploymentOutput: ...
+
+    @_overload
+    def update_custom_model_deployment(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateCustomModelDeploymentInputDict],
     ) -> UpdateCustomModelDeploymentOutput:
         """
         Updates a custom model deployment with a new custom model. This allows
         you to deploy updated models without creating new deployment endpoints.
 
         Args:
-            input:
-                An instance of `UpdateCustomModelDeploymentInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2925,10 +4937,33 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `UpdateCustomModelDeploymentOutput`.
         """
-        return self._invoke(input, _models.UPDATE_CUSTOM_MODEL_DEPLOYMENT, [], plugins)
 
+    def update_custom_model_deployment(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateCustomModelDeploymentOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_CUSTOM_MODEL_DEPLOYMENT, args, kwargs),
+            _models.UPDATE_CUSTOM_MODEL_DEPLOYMENT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_guardrail(
-        self, input: UpdateGuardrailInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateGuardrailInput | _models.UpdateGuardrailInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateGuardrailOutput: ...
+
+    @_overload
+    def update_guardrail(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateGuardrailInputDict],
     ) -> UpdateGuardrailOutput:
         """
         Updates a guardrail with the values you specify.
@@ -2972,8 +5007,6 @@ class BedrockClient(Client[BedrockConfig]):
           `kmsKeyId` field.
 
         Args:
-            input:
-                An instance of `UpdateGuardrailInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2983,20 +5016,40 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `UpdateGuardrailOutput`.
         """
-        return self._invoke(input, _models.UPDATE_GUARDRAIL, [], plugins)
 
+    def update_guardrail(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateGuardrailOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_GUARDRAIL, args, kwargs),
+            _models.UPDATE_GUARDRAIL,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_marketplace_model_endpoint(
         self,
-        input: UpdateMarketplaceModelEndpointInput,
+        request: _models.UpdateMarketplaceModelEndpointInput
+        | _models.UpdateMarketplaceModelEndpointInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateMarketplaceModelEndpointOutput: ...
+
+    @_overload
+    def update_marketplace_model_endpoint(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateMarketplaceModelEndpointInputDict],
     ) -> UpdateMarketplaceModelEndpointOutput:
         """
         Updates the configuration of an existing endpoint for a model from
         Amazon Bedrock Marketplace.
 
         Args:
-            input:
-                An instance of `UpdateMarketplaceModelEndpointInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3006,14 +5059,34 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `UpdateMarketplaceModelEndpointOutput`.
         """
+
+    def update_marketplace_model_endpoint(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateMarketplaceModelEndpointOutput:
         return self._invoke(
-            input, _models.UPDATE_MARKETPLACE_MODEL_ENDPOINT, [], plugins
+            self._select_input(_models.UPDATE_MARKETPLACE_MODEL_ENDPOINT, args, kwargs),
+            _models.UPDATE_MARKETPLACE_MODEL_ENDPOINT,
+            [],
+            plugins,
         )
 
+    @_overload
     def update_provisioned_model_throughput(
         self,
-        input: UpdateProvisionedModelThroughputInput,
+        request: _models.UpdateProvisionedModelThroughputInput
+        | _models.UpdateProvisionedModelThroughputInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateProvisionedModelThroughputOutput: ...
+
+    @_overload
+    def update_provisioned_model_throughput(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateProvisionedModelThroughputInputDict],
     ) -> UpdateProvisionedModelThroughputOutput:
         """
         Updates the name or associated model for a Provisioned Throughput. For
@@ -3023,8 +5096,6 @@ class BedrockClient(Client[BedrockConfig]):
         Guide](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html).
 
         Args:
-            input:
-                An instance of `UpdateProvisionedModelThroughputInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3034,8 +5105,17 @@ class BedrockClient(Client[BedrockConfig]):
         Returns:
             An instance of `UpdateProvisionedModelThroughputOutput`.
         """
+
+    def update_provisioned_model_throughput(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateProvisionedModelThroughputOutput:
         return self._invoke(
-            input, _models.UPDATE_PROVISIONED_MODEL_THROUGHPUT, [], plugins
+            self._select_input(
+                _models.UPDATE_PROVISIONED_MODEL_THROUGHPUT, args, kwargs
+            ),
+            _models.UPDATE_PROVISIONED_MODEL_THROUGHPUT,
+            [],
+            plugins,
         )
 
     def _new_config(self) -> BedrockConfig:

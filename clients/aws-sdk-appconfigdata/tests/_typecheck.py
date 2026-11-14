@@ -2,17 +2,22 @@
 
 from typing import Any
 
+from aws_sdk_appconfigdata.aio.client import AsyncAppConfigDataClient
+from aws_sdk_appconfigdata.client import AppConfigDataClient
 from aws_sdk_appconfigdata.models import (
     GetLatestConfigurationInput,
+    GetLatestConfigurationInputDict,
     GetLatestConfigurationOutput,
     InvalidParameterDetail,
     StartConfigurationSessionInput,
+    StartConfigurationSessionInputDict,
     StartConfigurationSessionOutput,
 )
 
 
-# Static type fixture: pyright over this validates models.pyi.
-# Not executed as a test; it only needs to type-check.
+# Static type fixture: pyright over this validates models.pyi and the
+# client method signatures. Not executed as a test; it only needs to
+# type-check.
 
 _: Any = ...
 
@@ -21,3 +26,49 @@ GetLatestConfigurationOutput()
 InvalidParameterDetail()
 StartConfigurationSessionInput()
 StartConfigurationSessionOutput()
+_params_0: GetLatestConfigurationInputDict = {"configuration_token": _}
+_params_1: StartConfigurationSessionInputDict = {
+    "application_identifier": _,
+    "environment_identifier": _,
+    "configuration_profile_identifier": _,
+}
+
+
+def _request[T](form: type[T]) -> T:
+    raise NotImplementedError
+
+
+async def check_async_calls(client: AsyncAppConfigDataClient) -> None:
+    pass
+    await client.get_latest_configuration(configuration_token=_)
+    await client.get_latest_configuration(**_request(GetLatestConfigurationInputDict))
+    await client.get_latest_configuration(_request(GetLatestConfigurationInput))
+    await client.get_latest_configuration(_request(GetLatestConfigurationInputDict))
+    await client.start_configuration_session(
+        application_identifier=_,
+        environment_identifier=_,
+        configuration_profile_identifier=_,
+    )
+    await client.start_configuration_session(
+        **_request(StartConfigurationSessionInputDict)
+    )
+    await client.start_configuration_session(_request(StartConfigurationSessionInput))
+    await client.start_configuration_session(
+        _request(StartConfigurationSessionInputDict)
+    )
+
+
+def check_sync_calls(client: AppConfigDataClient) -> None:
+    pass
+    client.get_latest_configuration(configuration_token=_)
+    client.get_latest_configuration(**_request(GetLatestConfigurationInputDict))
+    client.get_latest_configuration(_request(GetLatestConfigurationInput))
+    client.get_latest_configuration(_request(GetLatestConfigurationInputDict))
+    client.start_configuration_session(
+        application_identifier=_,
+        environment_identifier=_,
+        configuration_profile_identifier=_,
+    )
+    client.start_configuration_session(**_request(StartConfigurationSessionInputDict))
+    client.start_configuration_session(_request(StartConfigurationSessionInput))
+    client.start_configuration_session(_request(StartConfigurationSessionInputDict))

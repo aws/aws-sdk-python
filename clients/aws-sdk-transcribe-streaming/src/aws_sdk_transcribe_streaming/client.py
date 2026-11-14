@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import cast
+from typing import Unpack as _Unpack, cast, overload as _overload
 
 from smithy_aws_core.config.types import ConfigSource
 from smithy_aws_core.identity.chain.resolver import IdentityChain
@@ -19,7 +19,7 @@ from .user_agent import aws_user_agent_plugin
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from .models import GetMedicalScribeStreamInput, GetMedicalScribeStreamOutput
+    from .models import GetMedicalScribeStreamOutput
 
 
 logger = logging.getLogger(__name__)
@@ -48,10 +48,25 @@ class TranscribeStreamingClient(Client[TranscribeStreamingConfig]):
       AI. Refer to [here] for details.
     """
 
-    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
+    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
 
+    @_overload
     def get_medical_scribe_stream(
-        self, input: GetMedicalScribeStreamInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetMedicalScribeStreamInput
+        | _models.GetMedicalScribeStreamInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetMedicalScribeStreamOutput: ...
+
+    @_overload
+    def get_medical_scribe_stream(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetMedicalScribeStreamInputDict],
     ) -> GetMedicalScribeStreamOutput:
         """
         Provides details about the specified Amazon Web Services HealthScribe
@@ -61,8 +76,6 @@ class TranscribeStreamingClient(Client[TranscribeStreamingConfig]):
         `PostStreamAnalyticsResult` field in the response.
 
         Args:
-            input:
-                An instance of `GetMedicalScribeStreamInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -72,7 +85,16 @@ class TranscribeStreamingClient(Client[TranscribeStreamingConfig]):
         Returns:
             An instance of `GetMedicalScribeStreamOutput`.
         """
-        return self._invoke(input, _models.GET_MEDICAL_SCRIBE_STREAM, [], plugins)
+
+    def get_medical_scribe_stream(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetMedicalScribeStreamOutput:
+        return self._invoke(
+            self._select_input(_models.GET_MEDICAL_SCRIBE_STREAM, args, kwargs),
+            _models.GET_MEDICAL_SCRIBE_STREAM,
+            [],
+            plugins,
+        )
 
     def _new_config(self) -> TranscribeStreamingConfig:
         return TranscribeStreamingConfig.resolve()

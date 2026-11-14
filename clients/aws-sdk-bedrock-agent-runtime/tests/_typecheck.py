@@ -2,10 +2,15 @@
 
 from typing import Any
 
+from aws_sdk_bedrock_agent_runtime.aio.client import AsyncBedrockAgentRuntimeClient
+from aws_sdk_bedrock_agent_runtime.client import BedrockAgentRuntimeClient
 from aws_sdk_bedrock_agent_runtime.models import (
+    APISchemaDict,
+    ActionGroupExecutorDict,
     ActionGroupInvocationInput,
     ActionGroupInvocationOutput,
     AgentActionGroup,
+    AgentActionGroupDict,
     AgentCollaboratorInputPayload,
     AgentCollaboratorInvocationInput,
     AgentCollaboratorInvocationOutput,
@@ -14,54 +19,82 @@ from aws_sdk_bedrock_agent_runtime.models import (
     AgenticRetrieveActionDetails,
     AgenticRetrieveAppliedInstruction,
     AgenticRetrieveBedrockGuardrailConfiguration,
+    AgenticRetrieveBedrockGuardrailConfigurationDict,
     AgenticRetrieveBedrockRerankingConfiguration,
+    AgenticRetrieveBedrockRerankingConfigurationDict,
     AgenticRetrieveBedrockRerankingModelConfiguration,
+    AgenticRetrieveBedrockRerankingModelConfigurationDict,
     AgenticRetrieveCitation,
     AgenticRetrieveCitationReference,
     AgenticRetrieveCodeExecutionDetails,
     AgenticRetrieveCodeExecutionDocument,
     AgenticRetrieveConfiguration,
+    AgenticRetrieveConfigurationDict,
     AgenticRetrieveFailure,
     AgenticRetrieveFullDocExpansionDetails,
     AgenticRetrieveGeneratedResponse,
     AgenticRetrieveGuardrailWarning,
     AgenticRetrieveInstructionConfiguration,
+    AgenticRetrieveInstructionConfigurationDict,
     AgenticRetrieveMemoryConfiguration,
+    AgenticRetrieveMemoryConfigurationDict,
     AgenticRetrieveMemoryMetadataFilter,
+    AgenticRetrieveMemoryMetadataFilterDict,
+    AgenticRetrieveMemoryMetadataFilterLeftDict,
+    AgenticRetrieveMemoryMetadataFilterRightDict,
+    AgenticRetrieveMemoryMetadataValueDict,
     AgenticRetrieveMemoryRetrievalConfig,
+    AgenticRetrieveMemoryRetrievalConfigDict,
     AgenticRetrieveMemoryRetrieveDetails,
     AgenticRetrieveMemorySessionBinding,
+    AgenticRetrieveMemorySessionBindingDict,
     AgenticRetrieveMessage,
     AgenticRetrieveMessageContent,
+    AgenticRetrieveMessageContentDict,
+    AgenticRetrieveMessageDict,
     AgenticRetrievePolicyConfiguration,
+    AgenticRetrievePolicyConfigurationDict,
     AgenticRetrieveRerankingConfiguration,
+    AgenticRetrieveRerankingConfigurationDict,
     AgenticRetrieveResponseEvent,
     AgenticRetrieveResultEvent,
     AgenticRetrieveResultItem,
     AgenticRetrieveSourceMetadata,
     AgenticRetrieveSourceRetriever,
     AgenticRetrieveStreamInput,
+    AgenticRetrieveStreamInputDict,
     AgenticRetrieveStreamOutput,
     AgenticRetrieveTraceEvent,
     AgenticRetrieveTraceEventAttributes,
     AgenticRetrieveTraceResultItem,
     AgenticRetrieveWarningMessage,
     AgenticRetriever,
+    AgenticRetrieverDict,
     AnalyzePromptEvent,
     ApiInvocationInput,
     ApiParameter,
     ApiRequestBody,
     ApiResult,
+    ApiResultDict,
     Attribution,
     AudioSegment,
     BedrockFoundationModelConfiguration,
+    BedrockFoundationModelConfigurationDict,
     BedrockFoundationModelModelConfiguration,
+    BedrockFoundationModelModelConfigurationDict,
     BedrockModelConfigurations,
+    BedrockModelConfigurationsDict,
     BedrockRerankingConfiguration,
+    BedrockRerankingConfigurationDict,
     BedrockRerankingModelConfiguration,
+    BedrockRerankingModelConfigurationDict,
+    BedrockSessionContentBlockDict,
     ByteContentDoc,
+    ByteContentDocDict,
     ByteContentFile,
+    ByteContentFileDict,
     CheckIngestedDocumentAclInput,
+    CheckIngestedDocumentAclInputDict,
     CheckIngestedDocumentAclOutput,
     Citation,
     CitationEvent,
@@ -69,19 +102,29 @@ from aws_sdk_bedrock_agent_runtime.models import (
     CodeInterpreterInvocationOutput,
     Collaborator,
     CollaboratorConfiguration,
+    CollaboratorConfigurationDict,
+    CollaboratorDict,
     ConditionResultEvent,
+    ContentBlockDict,
     ContentBody,
+    ContentBodyDict,
     ConversationHistory,
+    ConversationHistoryDict,
     CreateInvocationInput,
+    CreateInvocationInputDict,
     CreateInvocationOutput,
     CreateSessionInput,
+    CreateSessionInputDict,
     CreateSessionOutput,
     CustomOrchestration,
+    CustomOrchestrationDict,
     CustomOrchestrationTrace,
     CustomOrchestrationTraceEvent,
     DeleteAgentMemoryInput,
+    DeleteAgentMemoryInputDict,
     DeleteAgentMemoryOutput,
     DeleteSessionInput,
+    DeleteSessionInputDict,
     DeleteSessionOutput,
     DocumentAcl,
     DocumentAclCondition,
@@ -89,15 +132,22 @@ from aws_sdk_bedrock_agent_runtime.models import (
     DocumentAclMembership,
     DocumentAclUser,
     EndSessionInput,
+    EndSessionInputDict,
     EndSessionOutput,
     ExternalSource,
+    ExternalSourceDict,
     ExternalSourcesGenerationConfiguration,
+    ExternalSourcesGenerationConfigurationDict,
     ExternalSourcesRetrieveAndGenerateConfiguration,
+    ExternalSourcesRetrieveAndGenerateConfigurationDict,
     FailureTrace,
     FieldForReranking,
+    FieldForRerankingDict,
     FilePart,
     FileSource,
+    FileSourceDict,
     FilterAttribute,
+    FilterAttributeDict,
     FinalResponse,
     FlowCompletionEvent,
     FlowExecutionError,
@@ -106,6 +156,8 @@ from aws_sdk_bedrock_agent_runtime.models import (
     FlowExecutionSummary,
     FlowFailureEvent,
     FlowInput,
+    FlowInputContentDict,
+    FlowInputDict,
     FlowInputField,
     FlowMultiTurnInputRequestEvent,
     FlowOutputEvent,
@@ -123,32 +175,47 @@ from aws_sdk_bedrock_agent_runtime.models import (
     FlowTraceNodeOutputField,
     FlowTraceNodeOutputNext,
     FoundationModelConfiguration,
+    FoundationModelConfigurationDict,
     FunctionDefinition,
+    FunctionDefinitionDict,
     FunctionInvocationInput,
     FunctionParameter,
     FunctionResult,
+    FunctionResultDict,
+    FunctionSchemaDict,
     GenerateQueryInput,
+    GenerateQueryInputDict,
     GenerateQueryOutput,
     GeneratedQuery,
     GeneratedResponsePart,
     GenerationConfiguration,
+    GenerationConfigurationDict,
     GetAgentMemoryInput,
+    GetAgentMemoryInputDict,
     GetAgentMemoryOutput,
     GetDocumentContentInput,
+    GetDocumentContentInputDict,
     GetDocumentContentOutput,
     GetExecutionFlowSnapshotInput,
+    GetExecutionFlowSnapshotInputDict,
     GetExecutionFlowSnapshotOutput,
     GetFlowExecutionInput,
+    GetFlowExecutionInputDict,
     GetFlowExecutionOutput,
     GetIngestedDocumentAclInput,
+    GetIngestedDocumentAclInputDict,
     GetIngestedDocumentAclOutput,
     GetInvocationStepInput,
+    GetInvocationStepInputDict,
     GetInvocationStepOutput,
     GetSessionInput,
+    GetSessionInputDict,
     GetSessionOutput,
     GuardrailAssessment,
     GuardrailConfiguration,
+    GuardrailConfigurationDict,
     GuardrailConfigurationWithArn,
+    GuardrailConfigurationWithArnDict,
     GuardrailContentFilter,
     GuardrailContentPolicyAssessment,
     GuardrailCustomWord,
@@ -162,63 +229,103 @@ from aws_sdk_bedrock_agent_runtime.models import (
     GuardrailTrace,
     GuardrailWordPolicyAssessment,
     ImageBlock,
+    ImageBlockDict,
     ImageInput,
+    ImageInputDict,
+    ImageInputSourceDict,
+    ImageSourceDict,
     ImplicitFilterConfiguration,
+    ImplicitFilterConfigurationDict,
     InferenceConfig,
+    InferenceConfigDict,
     InferenceConfiguration,
+    InferenceConfigurationDict,
     InlineAgentFilePart,
     InlineAgentPayloadPart,
     InlineAgentReturnControlPayload,
     InlineAgentTracePart,
     InlineBedrockModelConfigurations,
+    InlineBedrockModelConfigurationsDict,
     InlineSessionState,
+    InlineSessionStateDict,
     InputFile,
+    InputFileDict,
     InputImage,
+    InputImageDict,
+    InputPromptDict,
     InvocationInput,
+    InvocationResultMemberDict,
     InvocationStep,
+    InvocationStepPayloadDict,
     InvocationStepSummary,
     InvocationSummary,
     InvokeAgentInput,
+    InvokeAgentInputDict,
     InvokeAgentOutput,
     InvokeFlowInput,
+    InvokeFlowInputDict,
     InvokeFlowOutput,
     InvokeInlineAgentInput,
+    InvokeInlineAgentInputDict,
     InvokeInlineAgentOutput,
     KnowledgeBase,
     KnowledgeBaseConfiguration,
+    KnowledgeBaseConfigurationDict,
+    KnowledgeBaseDict,
     KnowledgeBaseLookupInput,
     KnowledgeBaseLookupOutput,
     KnowledgeBaseQuery,
+    KnowledgeBaseQueryDict,
     KnowledgeBaseRetrievalConfiguration,
+    KnowledgeBaseRetrievalConfigurationDict,
     KnowledgeBaseRetrievalResult,
     KnowledgeBaseRetrieveAndGenerateConfiguration,
+    KnowledgeBaseRetrieveAndGenerateConfigurationDict,
     KnowledgeBaseRetrieverConfiguration,
+    KnowledgeBaseRetrieverConfigurationDict,
     KnowledgeBaseVectorSearchConfiguration,
+    KnowledgeBaseVectorSearchConfigurationDict,
     ListFlowExecutionEventsInput,
+    ListFlowExecutionEventsInputDict,
     ListFlowExecutionEventsOutput,
     ListFlowExecutionsInput,
+    ListFlowExecutionsInputDict,
     ListFlowExecutionsOutput,
     ListInvocationStepsInput,
+    ListInvocationStepsInputDict,
     ListInvocationStepsOutput,
     ListInvocationsInput,
+    ListInvocationsInputDict,
     ListInvocationsOutput,
     ListSessionsInput,
+    ListSessionsInputDict,
     ListSessionsOutput,
     ListTagsForResourceInput,
+    ListTagsForResourceInputDict,
     ListTagsForResourceOutput,
     ManagedSearchBedrockRerankingConfiguration,
+    ManagedSearchBedrockRerankingConfigurationDict,
     ManagedSearchBedrockRerankingModelConfiguration,
+    ManagedSearchBedrockRerankingModelConfigurationDict,
     ManagedSearchConfiguration,
+    ManagedSearchConfigurationDict,
     ManagedSearchRerankingConfiguration,
+    ManagedSearchRerankingConfigurationDict,
     MantleFoundationModelConfiguration,
+    MantleFoundationModelConfigurationDict,
     MantleFoundationModelModelConfiguration,
+    MantleFoundationModelModelConfigurationDict,
     MemorySessionSummary,
     Message,
+    MessageDict,
     Metadata,
     MetadataAttributeSchema,
+    MetadataAttributeSchemaDict,
     MetadataConfigurationForReranking,
+    MetadataConfigurationForRerankingDict,
     ModelInvocationInput,
     ModelPerformanceConfiguration,
+    ModelPerformanceConfigurationDict,
     NodeActionEvent,
     NodeDependencyEvent,
     NodeFailureEvent,
@@ -231,43 +338,64 @@ from aws_sdk_bedrock_agent_runtime.models import (
     NodeOutputNext,
     Observation,
     OptimizePromptInput,
+    OptimizePromptInputDict,
     OptimizePromptOutput,
     OptimizedPromptEvent,
     OrchestrationConfiguration,
+    OrchestrationConfigurationDict,
+    OrchestrationExecutorDict,
     OrchestrationModelInvocationOutput,
     OutputFile,
     Parameter,
     ParameterDetail,
+    ParameterDetailDict,
     PayloadPart,
     PerformanceConfiguration,
+    PerformanceConfigurationDict,
     PostProcessingModelInvocationOutput,
     PostProcessingParsedResponse,
     PreProcessingModelInvocationOutput,
     PreProcessingParsedResponse,
     PromptConfiguration,
+    PromptConfigurationDict,
     PromptCreationConfigurations,
+    PromptCreationConfigurationsDict,
     PromptOverrideConfiguration,
+    PromptOverrideConfigurationDict,
     PromptTemplate,
+    PromptTemplateDict,
     PropertyParameters,
     PutInvocationStepInput,
+    PutInvocationStepInputDict,
     PutInvocationStepOutput,
     QueryGenerationInput,
+    QueryGenerationInputDict,
     QueryTransformationConfiguration,
+    QueryTransformationConfigurationDict,
     Rationale,
     RawResponse,
     ReasoningTextBlock,
     RepromptResponse,
     RequestBody,
     RerankDocument,
+    RerankDocumentDict,
     RerankInput,
+    RerankInputDict,
     RerankOutput,
     RerankQuery,
+    RerankQueryDict,
     RerankResult,
     RerankSource,
+    RerankSourceDict,
     RerankTextDocument,
+    RerankTextDocumentDict,
     RerankingConfiguration,
+    RerankingConfigurationDict,
+    RerankingMetadataSelectiveModeConfigurationDict,
     RetrievalContent,
+    RetrievalFilterDict,
     RetrievalOverrides,
+    RetrievalOverridesDict,
     RetrievalResultConfluenceLocation,
     RetrievalResultContent,
     RetrievalResultContentColumn,
@@ -282,57 +410,85 @@ from aws_sdk_bedrock_agent_runtime.models import (
     RetrievalResultSqlLocation,
     RetrievalResultWebLocation,
     RetrieveAndGenerateConfiguration,
+    RetrieveAndGenerateConfigurationDict,
     RetrieveAndGenerateInput,
+    RetrieveAndGenerateInputDict,
     RetrieveAndGenerateOperationInput,
+    RetrieveAndGenerateOperationInputDict,
     RetrieveAndGenerateOperationOutput,
     RetrieveAndGenerateOutput,
     RetrieveAndGenerateOutputEvent,
     RetrieveAndGenerateSessionConfiguration,
+    RetrieveAndGenerateSessionConfigurationDict,
     RetrieveAndGenerateStreamInput,
+    RetrieveAndGenerateStreamInputDict,
     RetrieveAndGenerateStreamOutput,
     RetrieveInput,
+    RetrieveInputDict,
     RetrieveOutput,
     RetrievedReference,
+    RetrieverConfigurationDict,
     ReturnControlPayload,
     ReturnControlResults,
     RoutingClassifierModelInvocationOutput,
     S3Identifier,
+    S3IdentifierDict,
     S3Location,
+    S3LocationDict,
     S3ObjectDoc,
+    S3ObjectDocDict,
     S3ObjectFile,
+    S3ObjectFileDict,
     SatisfiedCondition,
     SessionState,
+    SessionStateDict,
     SessionSummary,
     Span,
     StartFlowExecutionInput,
+    StartFlowExecutionInputDict,
     StartFlowExecutionOutput,
     StopFlowExecutionInput,
+    StopFlowExecutionInputDict,
     StopFlowExecutionOutput,
     StreamingConfigurations,
+    StreamingConfigurationsDict,
     TagResourceInput,
+    TagResourceInputDict,
     TagResourceOutput,
     TextInferenceConfig,
+    TextInferenceConfigDict,
     TextPrompt,
+    TextPromptDict,
     TextResponsePart,
     TextToSqlConfiguration,
+    TextToSqlConfigurationDict,
     TextToSqlKnowledgeBaseConfiguration,
+    TextToSqlKnowledgeBaseConfigurationDict,
     TracePart,
     TransformationConfiguration,
+    TransformationConfigurationDict,
     UntagResourceInput,
+    UntagResourceInputDict,
     UntagResourceOutput,
     UpdateSessionInput,
+    UpdateSessionInputDict,
     UpdateSessionOutput,
     Usage,
     UserContext,
+    UserContextDict,
     VectorSearchBedrockRerankingConfiguration,
+    VectorSearchBedrockRerankingConfigurationDict,
     VectorSearchBedrockRerankingModelConfiguration,
+    VectorSearchBedrockRerankingModelConfigurationDict,
     VectorSearchRerankingConfiguration,
+    VectorSearchRerankingConfigurationDict,
     VideoSegment,
 )
 
 
-# Static type fixture: pyright over this validates models.pyi.
-# Not executed as a test; it only needs to type-check.
+# Static type fixture: pyright over this validates models.pyi and the
+# client method signatures. Not executed as a test; it only needs to
+# type-check.
 
 _: Any = ...
 
@@ -699,3 +855,570 @@ VectorSearchBedrockRerankingConfiguration(model_configuration=_)
 VectorSearchBedrockRerankingModelConfiguration(model_arn=_)
 VectorSearchRerankingConfiguration(type=_)
 VideoSegment(s3_uri=_)
+_params_0: ActionGroupExecutorDict = {"lambda_": _}
+_params_1: AgentActionGroupDict = {"action_group_name": _}
+_params_2: AgenticRetrieveBedrockGuardrailConfigurationDict = {
+    "guardrail_id": _,
+    "guardrail_version": _,
+}
+_params_3: AgenticRetrieveBedrockRerankingConfigurationDict = {"model_configuration": _}
+_params_4: AgenticRetrieveBedrockRerankingModelConfigurationDict = {"model_arn": _}
+_params_5: AgenticRetrieveConfigurationDict = {}
+_params_6: AgenticRetrieveInstructionConfigurationDict = {"retrieval_instruction_id": _}
+_params_7: AgenticRetrieveMemoryConfigurationDict = {"memory_id": _}
+_params_8: AgenticRetrieveMemoryMetadataFilterDict = {"left": _, "operator": _}
+_params_9: AgenticRetrieveMemoryMetadataFilterLeftDict = {"metadata_key": _}
+_params_10: AgenticRetrieveMemoryMetadataFilterRightDict = {"metadata_value": _}
+_params_11: AgenticRetrieveMemoryMetadataValueDict = {"string_value": _}
+_params_12: AgenticRetrieveMemoryRetrievalConfigDict = {}
+_params_13: AgenticRetrieveMemorySessionBindingDict = {"actor_id": _, "session_id": _}
+_params_14: AgenticRetrieveMessageDict = {"content": _, "role": _}
+_params_15: AgenticRetrieveMessageContentDict = {}
+_params_16: AgenticRetrievePolicyConfigurationDict = {}
+_params_17: AgenticRetrieverDict = {"configuration": _}
+_params_18: AgenticRetrieveRerankingConfigurationDict = {"type": _}
+_params_19: AgenticRetrieveStreamInputDict = {
+    "messages": _,
+    "retrievers": _,
+    "agentic_retrieve_configuration": _,
+}
+_params_20: ApiResultDict = {"action_group": _}
+_params_21: APISchemaDict = {"s3": _}
+_params_22: BedrockFoundationModelConfigurationDict = {"model_configuration": _}
+_params_23: BedrockFoundationModelModelConfigurationDict = {"model_arn": _}
+_params_24: BedrockModelConfigurationsDict = {}
+_params_25: BedrockRerankingConfigurationDict = {"model_configuration": _}
+_params_26: BedrockRerankingModelConfigurationDict = {"model_arn": _}
+_params_27: BedrockSessionContentBlockDict = {"text": _}
+_params_28: ByteContentDocDict = {"identifier": _, "content_type": _, "data": _}
+_params_29: ByteContentFileDict = {"media_type": _, "data": _}
+_params_30: CheckIngestedDocumentAclInputDict = {
+    "knowledge_base_id": _,
+    "data_source_id": _,
+    "document_id": _,
+    "user_context": _,
+}
+_params_31: CollaboratorDict = {"foundation_model": _, "instruction": _}
+_params_32: CollaboratorConfigurationDict = {
+    "collaborator_name": _,
+    "collaborator_instruction": _,
+}
+_params_33: ContentBlockDict = {"text": _}
+_params_34: ContentBodyDict = {}
+_params_35: ConversationHistoryDict = {}
+_params_36: CreateInvocationInputDict = {"session_identifier": _}
+_params_37: CreateSessionInputDict = {}
+_params_38: CustomOrchestrationDict = {}
+_params_39: DeleteAgentMemoryInputDict = {"agent_id": _, "agent_alias_id": _}
+_params_40: DeleteSessionInputDict = {"session_identifier": _}
+_params_41: EndSessionInputDict = {"session_identifier": _}
+_params_42: ExternalSourceDict = {"source_type": _}
+_params_43: ExternalSourcesGenerationConfigurationDict = {}
+_params_44: ExternalSourcesRetrieveAndGenerateConfigurationDict = {
+    "model_arn": _,
+    "sources": _,
+}
+_params_45: FieldForRerankingDict = {"field_name": _}
+_params_46: FileSourceDict = {"source_type": _}
+_params_47: FilterAttributeDict = {"key": _, "value": _}
+_params_48: FlowInputDict = {"node_name": _, "content": _}
+_params_49: FlowInputContentDict = {"document": _}
+_params_50: FoundationModelConfigurationDict = {"type": _}
+_params_51: FunctionDefinitionDict = {"name": _}
+_params_52: FunctionResultDict = {"action_group": _}
+_params_53: FunctionSchemaDict = {"functions": _}
+_params_54: GenerateQueryInputDict = {
+    "query_generation_input": _,
+    "transformation_configuration": _,
+}
+_params_55: GenerationConfigurationDict = {}
+_params_56: GetAgentMemoryInputDict = {
+    "agent_id": _,
+    "agent_alias_id": _,
+    "memory_type": _,
+    "memory_id": _,
+}
+_params_57: GetDocumentContentInputDict = {
+    "knowledge_base_id": _,
+    "data_source_id": _,
+    "document_id": _,
+}
+_params_58: GetExecutionFlowSnapshotInputDict = {
+    "flow_identifier": _,
+    "flow_alias_identifier": _,
+    "execution_identifier": _,
+}
+_params_59: GetFlowExecutionInputDict = {
+    "flow_identifier": _,
+    "flow_alias_identifier": _,
+    "execution_identifier": _,
+}
+_params_60: GetIngestedDocumentAclInputDict = {
+    "knowledge_base_id": _,
+    "data_source_id": _,
+    "document_id": _,
+}
+_params_61: GetInvocationStepInputDict = {
+    "invocation_identifier": _,
+    "invocation_step_id": _,
+    "session_identifier": _,
+}
+_params_62: GetSessionInputDict = {"session_identifier": _}
+_params_63: GuardrailConfigurationDict = {"guardrail_id": _, "guardrail_version": _}
+_params_64: GuardrailConfigurationWithArnDict = {
+    "guardrail_identifier": _,
+    "guardrail_version": _,
+}
+_params_65: ImageBlockDict = {"format": _, "source": _}
+_params_66: ImageInputDict = {"format": _, "source": _}
+_params_67: ImageInputSourceDict = {"bytes_": _}
+_params_68: ImageSourceDict = {"bytes_": _}
+_params_69: ImplicitFilterConfigurationDict = {"metadata_attributes": _, "model_arn": _}
+_params_70: InferenceConfigDict = {}
+_params_71: InferenceConfigurationDict = {}
+_params_72: InlineBedrockModelConfigurationsDict = {}
+_params_73: InlineSessionStateDict = {}
+_params_74: InputFileDict = {"name": _, "source": _, "use_case": _}
+_params_75: InputImageDict = {"format": _, "inline_content": _}
+_params_76: InputPromptDict = {"text_prompt": _}
+_params_77: InvocationResultMemberDict = {"api_result": _}
+_params_78: InvocationStepPayloadDict = {"content_blocks": _}
+_params_79: InvokeAgentInputDict = {"agent_id": _, "agent_alias_id": _, "session_id": _}
+_params_80: InvokeFlowInputDict = {
+    "flow_identifier": _,
+    "flow_alias_identifier": _,
+    "inputs": _,
+}
+_params_81: InvokeInlineAgentInputDict = {
+    "foundation_model": _,
+    "instruction": _,
+    "session_id": _,
+}
+_params_82: KnowledgeBaseDict = {"knowledge_base_id": _, "description": _}
+_params_83: KnowledgeBaseConfigurationDict = {
+    "knowledge_base_id": _,
+    "retrieval_configuration": _,
+}
+_params_84: KnowledgeBaseQueryDict = {}
+_params_85: KnowledgeBaseRetrievalConfigurationDict = {}
+_params_86: KnowledgeBaseRetrieveAndGenerateConfigurationDict = {
+    "knowledge_base_id": _,
+    "model_arn": _,
+}
+_params_87: KnowledgeBaseRetrieverConfigurationDict = {"knowledge_base_id": _}
+_params_88: KnowledgeBaseVectorSearchConfigurationDict = {}
+_params_89: ListFlowExecutionEventsInputDict = {
+    "flow_identifier": _,
+    "flow_alias_identifier": _,
+    "execution_identifier": _,
+    "event_type": _,
+}
+_params_90: ListFlowExecutionsInputDict = {"flow_identifier": _}
+_params_91: ListInvocationsInputDict = {"session_identifier": _}
+_params_92: ListInvocationStepsInputDict = {"session_identifier": _}
+_params_93: ListSessionsInputDict = {}
+_params_94: ListTagsForResourceInputDict = {"resource_arn": _}
+_params_95: ManagedSearchBedrockRerankingConfigurationDict = {"model_configuration": _}
+_params_96: ManagedSearchBedrockRerankingModelConfigurationDict = {"model_arn": _}
+_params_97: ManagedSearchConfigurationDict = {}
+_params_98: ManagedSearchRerankingConfigurationDict = {"type": _}
+_params_99: MantleFoundationModelConfigurationDict = {"model_configuration": _}
+_params_100: MantleFoundationModelModelConfigurationDict = {"model_arn": _}
+_params_101: MessageDict = {"role": _, "content": _}
+_params_102: MetadataAttributeSchemaDict = {"key": _, "type": _, "description": _}
+_params_103: MetadataConfigurationForRerankingDict = {"selection_mode": _}
+_params_104: ModelPerformanceConfigurationDict = {}
+_params_105: OptimizePromptInputDict = {"input": _, "target_model_id": _}
+_params_106: OrchestrationConfigurationDict = {}
+_params_107: OrchestrationExecutorDict = {"lambda_": _}
+_params_108: ParameterDetailDict = {"type": _}
+_params_109: PerformanceConfigurationDict = {}
+_params_110: PromptConfigurationDict = {}
+_params_111: PromptCreationConfigurationsDict = {}
+_params_112: PromptOverrideConfigurationDict = {"prompt_configurations": _}
+_params_113: PromptTemplateDict = {}
+_params_114: PutInvocationStepInputDict = {
+    "session_identifier": _,
+    "invocation_identifier": _,
+    "invocation_step_time": _,
+    "payload": _,
+}
+_params_115: QueryGenerationInputDict = {"type": _, "text": _}
+_params_116: QueryTransformationConfigurationDict = {"type": _}
+_params_117: RerankDocumentDict = {"type": _}
+_params_118: RerankingConfigurationDict = {
+    "type": _,
+    "bedrock_reranking_configuration": _,
+}
+_params_119: RerankingMetadataSelectiveModeConfigurationDict = {"fields_to_include": _}
+_params_120: RerankInputDict = {
+    "queries": _,
+    "sources": _,
+    "reranking_configuration": _,
+}
+_params_121: RerankQueryDict = {"type": _, "text_query": _}
+_params_122: RerankSourceDict = {"type": _, "inline_document_source": _}
+_params_123: RerankTextDocumentDict = {}
+_params_124: RetrievalFilterDict = {"equals": _}
+_params_125: RetrievalOverridesDict = {}
+_params_126: RetrieveAndGenerateConfigurationDict = {"type": _}
+_params_127: RetrieveAndGenerateInputDict = {"text": _}
+_params_128: RetrieveAndGenerateOperationInputDict = {"input": _}
+_params_129: RetrieveAndGenerateSessionConfigurationDict = {"kms_key_arn": _}
+_params_130: RetrieveAndGenerateStreamInputDict = {"input": _}
+_params_131: RetrieveInputDict = {"knowledge_base_id": _, "retrieval_query": _}
+_params_132: RetrieverConfigurationDict = {"knowledge_base": _}
+_params_133: S3IdentifierDict = {}
+_params_134: S3LocationDict = {"uri": _}
+_params_135: S3ObjectDocDict = {"uri": _}
+_params_136: S3ObjectFileDict = {"uri": _}
+_params_137: SessionStateDict = {}
+_params_138: StartFlowExecutionInputDict = {
+    "flow_identifier": _,
+    "flow_alias_identifier": _,
+    "inputs": _,
+}
+_params_139: StopFlowExecutionInputDict = {
+    "flow_identifier": _,
+    "flow_alias_identifier": _,
+    "execution_identifier": _,
+}
+_params_140: StreamingConfigurationsDict = {}
+_params_141: TagResourceInputDict = {"resource_arn": _, "tags": _}
+_params_142: TextInferenceConfigDict = {}
+_params_143: TextPromptDict = {"text": _}
+_params_144: TextToSqlConfigurationDict = {"type": _}
+_params_145: TextToSqlKnowledgeBaseConfigurationDict = {"knowledge_base_arn": _}
+_params_146: TransformationConfigurationDict = {"mode": _}
+_params_147: UntagResourceInputDict = {"resource_arn": _, "tag_keys": _}
+_params_148: UpdateSessionInputDict = {"session_identifier": _}
+_params_149: UserContextDict = {"user_id": _}
+_params_150: VectorSearchBedrockRerankingConfigurationDict = {"model_configuration": _}
+_params_151: VectorSearchBedrockRerankingModelConfigurationDict = {"model_arn": _}
+_params_152: VectorSearchRerankingConfigurationDict = {"type": _}
+
+
+def _request[T](form: type[T]) -> T:
+    raise NotImplementedError
+
+
+async def check_async_calls(client: AsyncBedrockAgentRuntimeClient) -> None:
+    pass
+    await client.agentic_retrieve_stream(
+        messages=_, retrievers=_, agentic_retrieve_configuration=_
+    )
+    await client.agentic_retrieve_stream(**_request(AgenticRetrieveStreamInputDict))
+    await client.agentic_retrieve_stream(_request(AgenticRetrieveStreamInput))
+    await client.agentic_retrieve_stream(_request(AgenticRetrieveStreamInputDict))
+    await client.check_ingested_document_acl(
+        knowledge_base_id=_, data_source_id=_, document_id=_, user_context=_
+    )
+    await client.check_ingested_document_acl(
+        **_request(CheckIngestedDocumentAclInputDict)
+    )
+    await client.check_ingested_document_acl(_request(CheckIngestedDocumentAclInput))
+    await client.check_ingested_document_acl(
+        _request(CheckIngestedDocumentAclInputDict)
+    )
+    await client.create_invocation(session_identifier=_)
+    await client.create_invocation(**_request(CreateInvocationInputDict))
+    await client.create_invocation(_request(CreateInvocationInput))
+    await client.create_invocation(_request(CreateInvocationInputDict))
+    await client.create_session()
+    await client.create_session(**_request(CreateSessionInputDict))
+    await client.create_session(_request(CreateSessionInput))
+    await client.create_session(_request(CreateSessionInputDict))
+    await client.delete_agent_memory(agent_id=_, agent_alias_id=_)
+    await client.delete_agent_memory(**_request(DeleteAgentMemoryInputDict))
+    await client.delete_agent_memory(_request(DeleteAgentMemoryInput))
+    await client.delete_agent_memory(_request(DeleteAgentMemoryInputDict))
+    await client.delete_session(session_identifier=_)
+    await client.delete_session(**_request(DeleteSessionInputDict))
+    await client.delete_session(_request(DeleteSessionInput))
+    await client.delete_session(_request(DeleteSessionInputDict))
+    await client.end_session(session_identifier=_)
+    await client.end_session(**_request(EndSessionInputDict))
+    await client.end_session(_request(EndSessionInput))
+    await client.end_session(_request(EndSessionInputDict))
+    await client.generate_query(
+        query_generation_input=_, transformation_configuration=_
+    )
+    await client.generate_query(**_request(GenerateQueryInputDict))
+    await client.generate_query(_request(GenerateQueryInput))
+    await client.generate_query(_request(GenerateQueryInputDict))
+    await client.get_agent_memory(
+        agent_id=_, agent_alias_id=_, memory_type=_, memory_id=_
+    )
+    await client.get_agent_memory(**_request(GetAgentMemoryInputDict))
+    await client.get_agent_memory(_request(GetAgentMemoryInput))
+    await client.get_agent_memory(_request(GetAgentMemoryInputDict))
+    await client.get_document_content(
+        knowledge_base_id=_, data_source_id=_, document_id=_
+    )
+    await client.get_document_content(**_request(GetDocumentContentInputDict))
+    await client.get_document_content(_request(GetDocumentContentInput))
+    await client.get_document_content(_request(GetDocumentContentInputDict))
+    await client.get_execution_flow_snapshot(
+        flow_identifier=_, flow_alias_identifier=_, execution_identifier=_
+    )
+    await client.get_execution_flow_snapshot(
+        **_request(GetExecutionFlowSnapshotInputDict)
+    )
+    await client.get_execution_flow_snapshot(_request(GetExecutionFlowSnapshotInput))
+    await client.get_execution_flow_snapshot(
+        _request(GetExecutionFlowSnapshotInputDict)
+    )
+    await client.get_flow_execution(
+        flow_identifier=_, flow_alias_identifier=_, execution_identifier=_
+    )
+    await client.get_flow_execution(**_request(GetFlowExecutionInputDict))
+    await client.get_flow_execution(_request(GetFlowExecutionInput))
+    await client.get_flow_execution(_request(GetFlowExecutionInputDict))
+    await client.get_ingested_document_acl(
+        knowledge_base_id=_, data_source_id=_, document_id=_
+    )
+    await client.get_ingested_document_acl(**_request(GetIngestedDocumentAclInputDict))
+    await client.get_ingested_document_acl(_request(GetIngestedDocumentAclInput))
+    await client.get_ingested_document_acl(_request(GetIngestedDocumentAclInputDict))
+    await client.get_invocation_step(
+        invocation_identifier=_, invocation_step_id=_, session_identifier=_
+    )
+    await client.get_invocation_step(**_request(GetInvocationStepInputDict))
+    await client.get_invocation_step(_request(GetInvocationStepInput))
+    await client.get_invocation_step(_request(GetInvocationStepInputDict))
+    await client.get_session(session_identifier=_)
+    await client.get_session(**_request(GetSessionInputDict))
+    await client.get_session(_request(GetSessionInput))
+    await client.get_session(_request(GetSessionInputDict))
+    await client.invoke_agent(agent_id=_, agent_alias_id=_, session_id=_)
+    await client.invoke_agent(**_request(InvokeAgentInputDict))
+    await client.invoke_agent(_request(InvokeAgentInput))
+    await client.invoke_agent(_request(InvokeAgentInputDict))
+    await client.invoke_flow(flow_identifier=_, flow_alias_identifier=_, inputs=_)
+    await client.invoke_flow(**_request(InvokeFlowInputDict))
+    await client.invoke_flow(_request(InvokeFlowInput))
+    await client.invoke_flow(_request(InvokeFlowInputDict))
+    await client.invoke_inline_agent(foundation_model=_, instruction=_, session_id=_)
+    await client.invoke_inline_agent(**_request(InvokeInlineAgentInputDict))
+    await client.invoke_inline_agent(_request(InvokeInlineAgentInput))
+    await client.invoke_inline_agent(_request(InvokeInlineAgentInputDict))
+    await client.list_flow_execution_events(
+        flow_identifier=_, flow_alias_identifier=_, execution_identifier=_, event_type=_
+    )
+    await client.list_flow_execution_events(
+        **_request(ListFlowExecutionEventsInputDict)
+    )
+    await client.list_flow_execution_events(_request(ListFlowExecutionEventsInput))
+    await client.list_flow_execution_events(_request(ListFlowExecutionEventsInputDict))
+    await client.list_flow_executions(flow_identifier=_)
+    await client.list_flow_executions(**_request(ListFlowExecutionsInputDict))
+    await client.list_flow_executions(_request(ListFlowExecutionsInput))
+    await client.list_flow_executions(_request(ListFlowExecutionsInputDict))
+    await client.list_invocations(session_identifier=_)
+    await client.list_invocations(**_request(ListInvocationsInputDict))
+    await client.list_invocations(_request(ListInvocationsInput))
+    await client.list_invocations(_request(ListInvocationsInputDict))
+    await client.list_invocation_steps(session_identifier=_)
+    await client.list_invocation_steps(**_request(ListInvocationStepsInputDict))
+    await client.list_invocation_steps(_request(ListInvocationStepsInput))
+    await client.list_invocation_steps(_request(ListInvocationStepsInputDict))
+    await client.list_sessions()
+    await client.list_sessions(**_request(ListSessionsInputDict))
+    await client.list_sessions(_request(ListSessionsInput))
+    await client.list_sessions(_request(ListSessionsInputDict))
+    await client.list_tags_for_resource(resource_arn=_)
+    await client.list_tags_for_resource(**_request(ListTagsForResourceInputDict))
+    await client.list_tags_for_resource(_request(ListTagsForResourceInput))
+    await client.list_tags_for_resource(_request(ListTagsForResourceInputDict))
+    await client.optimize_prompt(input=_, target_model_id=_)
+    await client.optimize_prompt(**_request(OptimizePromptInputDict))
+    await client.optimize_prompt(_request(OptimizePromptInput))
+    await client.optimize_prompt(_request(OptimizePromptInputDict))
+    await client.put_invocation_step(
+        session_identifier=_, invocation_identifier=_, invocation_step_time=_, payload=_
+    )
+    await client.put_invocation_step(**_request(PutInvocationStepInputDict))
+    await client.put_invocation_step(_request(PutInvocationStepInput))
+    await client.put_invocation_step(_request(PutInvocationStepInputDict))
+    await client.rerank(queries=_, sources=_, reranking_configuration=_)
+    await client.rerank(**_request(RerankInputDict))
+    await client.rerank(_request(RerankInput))
+    await client.rerank(_request(RerankInputDict))
+    await client.retrieve(knowledge_base_id=_, retrieval_query=_)
+    await client.retrieve(**_request(RetrieveInputDict))
+    await client.retrieve(_request(RetrieveInput))
+    await client.retrieve(_request(RetrieveInputDict))
+    await client.retrieve_and_generate(input=_)
+    await client.retrieve_and_generate(
+        **_request(RetrieveAndGenerateOperationInputDict)
+    )
+    await client.retrieve_and_generate(_request(RetrieveAndGenerateOperationInput))
+    await client.retrieve_and_generate(_request(RetrieveAndGenerateOperationInputDict))
+    await client.retrieve_and_generate_stream(input=_)
+    await client.retrieve_and_generate_stream(
+        **_request(RetrieveAndGenerateStreamInputDict)
+    )
+    await client.retrieve_and_generate_stream(_request(RetrieveAndGenerateStreamInput))
+    await client.retrieve_and_generate_stream(
+        _request(RetrieveAndGenerateStreamInputDict)
+    )
+    await client.start_flow_execution(
+        flow_identifier=_, flow_alias_identifier=_, inputs=_
+    )
+    await client.start_flow_execution(**_request(StartFlowExecutionInputDict))
+    await client.start_flow_execution(_request(StartFlowExecutionInput))
+    await client.start_flow_execution(_request(StartFlowExecutionInputDict))
+    await client.stop_flow_execution(
+        flow_identifier=_, flow_alias_identifier=_, execution_identifier=_
+    )
+    await client.stop_flow_execution(**_request(StopFlowExecutionInputDict))
+    await client.stop_flow_execution(_request(StopFlowExecutionInput))
+    await client.stop_flow_execution(_request(StopFlowExecutionInputDict))
+    await client.tag_resource(resource_arn=_, tags=_)
+    await client.tag_resource(**_request(TagResourceInputDict))
+    await client.tag_resource(_request(TagResourceInput))
+    await client.tag_resource(_request(TagResourceInputDict))
+    await client.untag_resource(resource_arn=_, tag_keys=_)
+    await client.untag_resource(**_request(UntagResourceInputDict))
+    await client.untag_resource(_request(UntagResourceInput))
+    await client.untag_resource(_request(UntagResourceInputDict))
+    await client.update_session(session_identifier=_)
+    await client.update_session(**_request(UpdateSessionInputDict))
+    await client.update_session(_request(UpdateSessionInput))
+    await client.update_session(_request(UpdateSessionInputDict))
+
+
+def check_sync_calls(client: BedrockAgentRuntimeClient) -> None:
+    pass
+    client.check_ingested_document_acl(
+        knowledge_base_id=_, data_source_id=_, document_id=_, user_context=_
+    )
+    client.check_ingested_document_acl(**_request(CheckIngestedDocumentAclInputDict))
+    client.check_ingested_document_acl(_request(CheckIngestedDocumentAclInput))
+    client.check_ingested_document_acl(_request(CheckIngestedDocumentAclInputDict))
+    client.create_invocation(session_identifier=_)
+    client.create_invocation(**_request(CreateInvocationInputDict))
+    client.create_invocation(_request(CreateInvocationInput))
+    client.create_invocation(_request(CreateInvocationInputDict))
+    client.create_session()
+    client.create_session(**_request(CreateSessionInputDict))
+    client.create_session(_request(CreateSessionInput))
+    client.create_session(_request(CreateSessionInputDict))
+    client.delete_agent_memory(agent_id=_, agent_alias_id=_)
+    client.delete_agent_memory(**_request(DeleteAgentMemoryInputDict))
+    client.delete_agent_memory(_request(DeleteAgentMemoryInput))
+    client.delete_agent_memory(_request(DeleteAgentMemoryInputDict))
+    client.delete_session(session_identifier=_)
+    client.delete_session(**_request(DeleteSessionInputDict))
+    client.delete_session(_request(DeleteSessionInput))
+    client.delete_session(_request(DeleteSessionInputDict))
+    client.end_session(session_identifier=_)
+    client.end_session(**_request(EndSessionInputDict))
+    client.end_session(_request(EndSessionInput))
+    client.end_session(_request(EndSessionInputDict))
+    client.generate_query(query_generation_input=_, transformation_configuration=_)
+    client.generate_query(**_request(GenerateQueryInputDict))
+    client.generate_query(_request(GenerateQueryInput))
+    client.generate_query(_request(GenerateQueryInputDict))
+    client.get_agent_memory(agent_id=_, agent_alias_id=_, memory_type=_, memory_id=_)
+    client.get_agent_memory(**_request(GetAgentMemoryInputDict))
+    client.get_agent_memory(_request(GetAgentMemoryInput))
+    client.get_agent_memory(_request(GetAgentMemoryInputDict))
+    client.get_document_content(knowledge_base_id=_, data_source_id=_, document_id=_)
+    client.get_document_content(**_request(GetDocumentContentInputDict))
+    client.get_document_content(_request(GetDocumentContentInput))
+    client.get_document_content(_request(GetDocumentContentInputDict))
+    client.get_execution_flow_snapshot(
+        flow_identifier=_, flow_alias_identifier=_, execution_identifier=_
+    )
+    client.get_execution_flow_snapshot(**_request(GetExecutionFlowSnapshotInputDict))
+    client.get_execution_flow_snapshot(_request(GetExecutionFlowSnapshotInput))
+    client.get_execution_flow_snapshot(_request(GetExecutionFlowSnapshotInputDict))
+    client.get_flow_execution(
+        flow_identifier=_, flow_alias_identifier=_, execution_identifier=_
+    )
+    client.get_flow_execution(**_request(GetFlowExecutionInputDict))
+    client.get_flow_execution(_request(GetFlowExecutionInput))
+    client.get_flow_execution(_request(GetFlowExecutionInputDict))
+    client.get_ingested_document_acl(
+        knowledge_base_id=_, data_source_id=_, document_id=_
+    )
+    client.get_ingested_document_acl(**_request(GetIngestedDocumentAclInputDict))
+    client.get_ingested_document_acl(_request(GetIngestedDocumentAclInput))
+    client.get_ingested_document_acl(_request(GetIngestedDocumentAclInputDict))
+    client.get_invocation_step(
+        invocation_identifier=_, invocation_step_id=_, session_identifier=_
+    )
+    client.get_invocation_step(**_request(GetInvocationStepInputDict))
+    client.get_invocation_step(_request(GetInvocationStepInput))
+    client.get_invocation_step(_request(GetInvocationStepInputDict))
+    client.get_session(session_identifier=_)
+    client.get_session(**_request(GetSessionInputDict))
+    client.get_session(_request(GetSessionInput))
+    client.get_session(_request(GetSessionInputDict))
+    client.list_flow_execution_events(
+        flow_identifier=_, flow_alias_identifier=_, execution_identifier=_, event_type=_
+    )
+    client.list_flow_execution_events(**_request(ListFlowExecutionEventsInputDict))
+    client.list_flow_execution_events(_request(ListFlowExecutionEventsInput))
+    client.list_flow_execution_events(_request(ListFlowExecutionEventsInputDict))
+    client.list_flow_executions(flow_identifier=_)
+    client.list_flow_executions(**_request(ListFlowExecutionsInputDict))
+    client.list_flow_executions(_request(ListFlowExecutionsInput))
+    client.list_flow_executions(_request(ListFlowExecutionsInputDict))
+    client.list_invocations(session_identifier=_)
+    client.list_invocations(**_request(ListInvocationsInputDict))
+    client.list_invocations(_request(ListInvocationsInput))
+    client.list_invocations(_request(ListInvocationsInputDict))
+    client.list_invocation_steps(session_identifier=_)
+    client.list_invocation_steps(**_request(ListInvocationStepsInputDict))
+    client.list_invocation_steps(_request(ListInvocationStepsInput))
+    client.list_invocation_steps(_request(ListInvocationStepsInputDict))
+    client.list_sessions()
+    client.list_sessions(**_request(ListSessionsInputDict))
+    client.list_sessions(_request(ListSessionsInput))
+    client.list_sessions(_request(ListSessionsInputDict))
+    client.list_tags_for_resource(resource_arn=_)
+    client.list_tags_for_resource(**_request(ListTagsForResourceInputDict))
+    client.list_tags_for_resource(_request(ListTagsForResourceInput))
+    client.list_tags_for_resource(_request(ListTagsForResourceInputDict))
+    client.put_invocation_step(
+        session_identifier=_, invocation_identifier=_, invocation_step_time=_, payload=_
+    )
+    client.put_invocation_step(**_request(PutInvocationStepInputDict))
+    client.put_invocation_step(_request(PutInvocationStepInput))
+    client.put_invocation_step(_request(PutInvocationStepInputDict))
+    client.rerank(queries=_, sources=_, reranking_configuration=_)
+    client.rerank(**_request(RerankInputDict))
+    client.rerank(_request(RerankInput))
+    client.rerank(_request(RerankInputDict))
+    client.retrieve(knowledge_base_id=_, retrieval_query=_)
+    client.retrieve(**_request(RetrieveInputDict))
+    client.retrieve(_request(RetrieveInput))
+    client.retrieve(_request(RetrieveInputDict))
+    client.retrieve_and_generate(input=_)
+    client.retrieve_and_generate(**_request(RetrieveAndGenerateOperationInputDict))
+    client.retrieve_and_generate(_request(RetrieveAndGenerateOperationInput))
+    client.retrieve_and_generate(_request(RetrieveAndGenerateOperationInputDict))
+    client.start_flow_execution(flow_identifier=_, flow_alias_identifier=_, inputs=_)
+    client.start_flow_execution(**_request(StartFlowExecutionInputDict))
+    client.start_flow_execution(_request(StartFlowExecutionInput))
+    client.start_flow_execution(_request(StartFlowExecutionInputDict))
+    client.stop_flow_execution(
+        flow_identifier=_, flow_alias_identifier=_, execution_identifier=_
+    )
+    client.stop_flow_execution(**_request(StopFlowExecutionInputDict))
+    client.stop_flow_execution(_request(StopFlowExecutionInput))
+    client.stop_flow_execution(_request(StopFlowExecutionInputDict))
+    client.tag_resource(resource_arn=_, tags=_)
+    client.tag_resource(**_request(TagResourceInputDict))
+    client.tag_resource(_request(TagResourceInput))
+    client.tag_resource(_request(TagResourceInputDict))
+    client.untag_resource(resource_arn=_, tag_keys=_)
+    client.untag_resource(**_request(UntagResourceInputDict))
+    client.untag_resource(_request(UntagResourceInput))
+    client.untag_resource(_request(UntagResourceInputDict))
+    client.update_session(session_identifier=_)
+    client.update_session(**_request(UpdateSessionInputDict))
+    client.update_session(_request(UpdateSessionInput))
+    client.update_session(_request(UpdateSessionInputDict))

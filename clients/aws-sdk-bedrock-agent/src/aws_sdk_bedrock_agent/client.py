@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import cast
+from typing import Unpack as _Unpack, cast, overload as _overload
 
 from smithy_aws_core.config.types import ConfigSource
 from smithy_aws_core.identity.chain.resolver import IdentityChain
@@ -20,177 +20,91 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from .models import (
-        AssociateAgentCollaboratorInput,
         AssociateAgentCollaboratorOutput,
-        AssociateAgentKnowledgeBaseInput,
         AssociateAgentKnowledgeBaseOutput,
-        CreateAgentActionGroupInput,
         CreateAgentActionGroupOutput,
-        CreateAgentAliasInput,
         CreateAgentAliasOutput,
-        CreateAgentInput,
         CreateAgentOutput,
-        CreateDataSourceInput,
         CreateDataSourceOutput,
-        CreateFlowAliasInput,
         CreateFlowAliasOutput,
-        CreateFlowInput,
         CreateFlowOutput,
-        CreateFlowVersionInput,
         CreateFlowVersionOutput,
-        CreateKnowledgeBaseInput,
         CreateKnowledgeBaseOutput,
-        CreatePromptInput,
         CreatePromptOutput,
-        CreatePromptVersionInput,
         CreatePromptVersionOutput,
-        CreateRetrievalInstructionInput,
         CreateRetrievalInstructionOutput,
-        CreateRetrievalInstructionVersionInput,
         CreateRetrievalInstructionVersionOutput,
-        CreateVpcConfigurationInput,
         CreateVpcConfigurationOutput,
-        DeleteAgentActionGroupInput,
         DeleteAgentActionGroupOutput,
-        DeleteAgentAliasInput,
         DeleteAgentAliasOutput,
-        DeleteAgentInput,
         DeleteAgentOutput,
-        DeleteAgentVersionInput,
         DeleteAgentVersionOutput,
-        DeleteDataSourceInput,
         DeleteDataSourceOutput,
-        DeleteFlowAliasInput,
         DeleteFlowAliasOutput,
-        DeleteFlowInput,
         DeleteFlowOutput,
-        DeleteFlowVersionInput,
         DeleteFlowVersionOutput,
-        DeleteKnowledgeBaseDocumentsInput,
         DeleteKnowledgeBaseDocumentsOutput,
-        DeleteKnowledgeBaseInput,
         DeleteKnowledgeBaseOutput,
-        DeletePromptInput,
         DeletePromptOutput,
-        DeleteResourcePolicyInput,
         DeleteResourcePolicyOutput,
-        DeleteRetrievalInstructionInput,
         DeleteRetrievalInstructionOutput,
-        DeleteVpcConfigurationInput,
         DeleteVpcConfigurationOutput,
-        DisassociateAgentCollaboratorInput,
         DisassociateAgentCollaboratorOutput,
-        DisassociateAgentKnowledgeBaseInput,
         DisassociateAgentKnowledgeBaseOutput,
-        GetAgentActionGroupInput,
         GetAgentActionGroupOutput,
-        GetAgentAliasInput,
         GetAgentAliasOutput,
-        GetAgentCollaboratorInput,
         GetAgentCollaboratorOutput,
-        GetAgentInput,
-        GetAgentKnowledgeBaseInput,
         GetAgentKnowledgeBaseOutput,
         GetAgentOutput,
-        GetAgentVersionInput,
         GetAgentVersionOutput,
-        GetDataSourceInput,
         GetDataSourceOutput,
-        GetFlowAliasInput,
         GetFlowAliasOutput,
-        GetFlowInput,
         GetFlowOutput,
-        GetFlowVersionInput,
         GetFlowVersionOutput,
-        GetIngestionJobInput,
         GetIngestionJobOutput,
-        GetKnowledgeBaseDocumentsInput,
         GetKnowledgeBaseDocumentsOutput,
-        GetKnowledgeBaseInput,
         GetKnowledgeBaseOutput,
-        GetPromptInput,
         GetPromptOutput,
-        GetResourcePolicyInput,
         GetResourcePolicyOutput,
-        GetRetrievalInstructionInput,
         GetRetrievalInstructionOutput,
-        GetVpcConfigurationInput,
         GetVpcConfigurationOutput,
-        IngestKnowledgeBaseDocumentsInput,
         IngestKnowledgeBaseDocumentsOutput,
-        ListAgentActionGroupsInput,
         ListAgentActionGroupsOutput,
-        ListAgentAliasesInput,
         ListAgentAliasesOutput,
-        ListAgentCollaboratorsInput,
         ListAgentCollaboratorsOutput,
-        ListAgentKnowledgeBasesInput,
         ListAgentKnowledgeBasesOutput,
-        ListAgentVersionsInput,
         ListAgentVersionsOutput,
-        ListAgentsInput,
         ListAgentsOutput,
-        ListDataSourcesInput,
         ListDataSourcesOutput,
-        ListFlowAliasesInput,
         ListFlowAliasesOutput,
-        ListFlowVersionsInput,
         ListFlowVersionsOutput,
-        ListFlowsInput,
         ListFlowsOutput,
-        ListIngestionJobsInput,
         ListIngestionJobsOutput,
-        ListKnowledgeBaseDocumentsInput,
         ListKnowledgeBaseDocumentsOutput,
-        ListKnowledgeBasesInput,
         ListKnowledgeBasesOutput,
-        ListPromptsInput,
         ListPromptsOutput,
-        ListRetrievalInstructionVersionsInput,
         ListRetrievalInstructionVersionsOutput,
-        ListRetrievalInstructionsInput,
         ListRetrievalInstructionsOutput,
-        ListTagsForResourceInput,
         ListTagsForResourceOutput,
-        ListVpcConfigurationsInput,
         ListVpcConfigurationsOutput,
-        PrepareAgentInput,
         PrepareAgentOutput,
-        PrepareFlowInput,
         PrepareFlowOutput,
-        PutResourcePolicyInput,
         PutResourcePolicyOutput,
-        StartIngestionJobInput,
         StartIngestionJobOutput,
-        StopIngestionJobInput,
         StopIngestionJobOutput,
-        TagResourceInput,
         TagResourceOutput,
-        UntagResourceInput,
         UntagResourceOutput,
-        UpdateAgentActionGroupInput,
         UpdateAgentActionGroupOutput,
-        UpdateAgentAliasInput,
         UpdateAgentAliasOutput,
-        UpdateAgentCollaboratorInput,
         UpdateAgentCollaboratorOutput,
-        UpdateAgentInput,
-        UpdateAgentKnowledgeBaseInput,
         UpdateAgentKnowledgeBaseOutput,
         UpdateAgentOutput,
-        UpdateDataSourceInput,
         UpdateDataSourceOutput,
-        UpdateFlowAliasInput,
         UpdateFlowAliasOutput,
-        UpdateFlowInput,
         UpdateFlowOutput,
-        UpdateKnowledgeBaseInput,
         UpdateKnowledgeBaseOutput,
-        UpdatePromptInput,
         UpdatePromptOutput,
-        UpdateRetrievalInstructionInput,
         UpdateRetrievalInstructionOutput,
-        ValidateFlowDefinitionInput,
         ValidateFlowDefinitionOutput,
     )
 
@@ -212,19 +126,30 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
     agents.
     """
 
-    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
+    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
 
+    @_overload
     def associate_agent_collaborator(
         self,
-        input: AssociateAgentCollaboratorInput,
+        request: _models.AssociateAgentCollaboratorInput
+        | _models.AssociateAgentCollaboratorInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> AssociateAgentCollaboratorOutput: ...
+
+    @_overload
+    def associate_agent_collaborator(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AssociateAgentCollaboratorInputDict],
     ) -> AssociateAgentCollaboratorOutput:
         """
         Makes an agent a collaborator for another agent.
 
         Args:
-            input:
-                An instance of `AssociateAgentCollaboratorInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -234,12 +159,34 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `AssociateAgentCollaboratorOutput`.
         """
-        return self._invoke(input, _models.ASSOCIATE_AGENT_COLLABORATOR, [], plugins)
 
+    def associate_agent_collaborator(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AssociateAgentCollaboratorOutput:
+        return self._invoke(
+            self._select_input(_models.ASSOCIATE_AGENT_COLLABORATOR, args, kwargs),
+            _models.ASSOCIATE_AGENT_COLLABORATOR,
+            [],
+            plugins,
+        )
+
+    @_overload
     def associate_agent_knowledge_base(
         self,
-        input: AssociateAgentKnowledgeBaseInput,
+        request: _models.AssociateAgentKnowledgeBaseInput
+        | _models.AssociateAgentKnowledgeBaseInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> AssociateAgentKnowledgeBaseOutput: ...
+
+    @_overload
+    def associate_agent_knowledge_base(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AssociateAgentKnowledgeBaseInputDict],
     ) -> AssociateAgentKnowledgeBaseOutput:
         """
         Associates a knowledge base with an agent. If a knowledge base is
@@ -247,8 +194,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         the knowledge base for information to augment its response to the user.
 
         Args:
-            input:
-                An instance of `AssociateAgentKnowledgeBaseInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -258,10 +203,33 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `AssociateAgentKnowledgeBaseOutput`.
         """
-        return self._invoke(input, _models.ASSOCIATE_AGENT_KNOWLEDGE_BASE, [], plugins)
 
+    def associate_agent_knowledge_base(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AssociateAgentKnowledgeBaseOutput:
+        return self._invoke(
+            self._select_input(_models.ASSOCIATE_AGENT_KNOWLEDGE_BASE, args, kwargs),
+            _models.ASSOCIATE_AGENT_KNOWLEDGE_BASE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_agent(
-        self, input: CreateAgentInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateAgentInput | _models.CreateAgentInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateAgentOutput: ...
+
+    @_overload
+    def create_agent(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateAgentInputDict],
     ) -> CreateAgentOutput:
         """
         Note:
@@ -308,8 +276,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
           input is disabled.
 
         Args:
-            input:
-                An instance of `CreateAgentInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -319,10 +285,34 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `CreateAgentOutput`.
         """
-        return self._invoke(input, _models.CREATE_AGENT, [], plugins)
 
+    def create_agent(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateAgentOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_AGENT, args, kwargs),
+            _models.CREATE_AGENT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_agent_action_group(
-        self, input: CreateAgentActionGroupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateAgentActionGroupInput
+        | _models.CreateAgentActionGroupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateAgentActionGroupOutput: ...
+
+    @_overload
+    def create_agent_action_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateAgentActionGroupInputDict],
     ) -> CreateAgentActionGroupOutput:
         """
         Creates an action group for an agent. An action group represents the
@@ -346,8 +336,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         reprompting the user for more information.
 
         Args:
-            input:
-                An instance of `CreateAgentActionGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -357,17 +345,38 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `CreateAgentActionGroupOutput`.
         """
-        return self._invoke(input, _models.CREATE_AGENT_ACTION_GROUP, [], plugins)
 
+    def create_agent_action_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateAgentActionGroupOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_AGENT_ACTION_GROUP, args, kwargs),
+            _models.CREATE_AGENT_ACTION_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_agent_alias(
-        self, input: CreateAgentAliasInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateAgentAliasInput | _models.CreateAgentAliasInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateAgentAliasOutput: ...
+
+    @_overload
+    def create_agent_alias(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateAgentAliasInputDict],
     ) -> CreateAgentAliasOutput:
         """
         Creates an alias of an agent that can be used to deploy the agent.
 
         Args:
-            input:
-                An instance of `CreateAgentAliasInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -377,10 +386,33 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `CreateAgentAliasOutput`.
         """
-        return self._invoke(input, _models.CREATE_AGENT_ALIAS, [], plugins)
 
+    def create_agent_alias(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateAgentAliasOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_AGENT_ALIAS, args, kwargs),
+            _models.CREATE_AGENT_ALIAS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_data_source(
-        self, input: CreateDataSourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateDataSourceInput | _models.CreateDataSourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateDataSourceOutput: ...
+
+    @_overload
+    def create_data_source(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateDataSourceInputDict],
     ) -> CreateDataSourceOutput:
         """
         Connects a knowledge base to a data source. You specify the
@@ -392,8 +424,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
             source connector.
 
         Args:
-            input:
-                An instance of `CreateDataSourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -403,10 +433,33 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `CreateDataSourceOutput`.
         """
-        return self._invoke(input, _models.CREATE_DATA_SOURCE, [], plugins)
 
+    def create_data_source(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateDataSourceOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_DATA_SOURCE, args, kwargs),
+            _models.CREATE_DATA_SOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_flow(
-        self, input: CreateFlowInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateFlowInput | _models.CreateFlowInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateFlowOutput: ...
+
+    @_overload
+    def create_flow(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateFlowInputDict],
     ) -> CreateFlowOutput:
         """
         Creates a prompt flow that you can use to send an input through various
@@ -419,8 +472,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         in the Amazon Bedrock User Guide.
 
         Args:
-            input:
-                An instance of `CreateFlowInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -430,10 +481,33 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `CreateFlowOutput`.
         """
-        return self._invoke(input, _models.CREATE_FLOW, [], plugins)
 
+    def create_flow(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateFlowOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_FLOW, args, kwargs),
+            _models.CREATE_FLOW,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_flow_alias(
-        self, input: CreateFlowAliasInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateFlowAliasInput | _models.CreateFlowAliasInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateFlowAliasOutput: ...
+
+    @_overload
+    def create_flow_alias(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateFlowAliasInputDict],
     ) -> CreateFlowAliasOutput:
         """
         Creates an alias of a flow for deployment. For more information, see
@@ -442,8 +516,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         in the Amazon Bedrock User Guide.
 
         Args:
-            input:
-                An instance of `CreateFlowAliasInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -453,10 +525,33 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `CreateFlowAliasOutput`.
         """
-        return self._invoke(input, _models.CREATE_FLOW_ALIAS, [], plugins)
 
+    def create_flow_alias(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateFlowAliasOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_FLOW_ALIAS, args, kwargs),
+            _models.CREATE_FLOW_ALIAS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_flow_version(
-        self, input: CreateFlowVersionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateFlowVersionInput | _models.CreateFlowVersionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateFlowVersionOutput: ...
+
+    @_overload
+    def create_flow_version(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateFlowVersionInputDict],
     ) -> CreateFlowVersionOutput:
         """
         Creates a version of the flow that you can deploy. For more information,
@@ -465,8 +560,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         in the Amazon Bedrock User Guide.
 
         Args:
-            input:
-                An instance of `CreateFlowVersionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -476,10 +569,34 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `CreateFlowVersionOutput`.
         """
-        return self._invoke(input, _models.CREATE_FLOW_VERSION, [], plugins)
 
+    def create_flow_version(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateFlowVersionOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_FLOW_VERSION, args, kwargs),
+            _models.CREATE_FLOW_VERSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_knowledge_base(
-        self, input: CreateKnowledgeBaseInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateKnowledgeBaseInput
+        | _models.CreateKnowledgeBaseInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateKnowledgeBaseOutput: ...
+
+    @_overload
+    def create_knowledge_base(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateKnowledgeBaseInputDict],
     ) -> CreateKnowledgeBaseOutput:
         """
         Creates a knowledge base. A knowledge base contains your data sources so
@@ -531,8 +648,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
             Cloud](https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-redis.html).
 
         Args:
-            input:
-                An instance of `CreateKnowledgeBaseInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -542,10 +657,33 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `CreateKnowledgeBaseOutput`.
         """
-        return self._invoke(input, _models.CREATE_KNOWLEDGE_BASE, [], plugins)
 
+    def create_knowledge_base(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateKnowledgeBaseOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_KNOWLEDGE_BASE, args, kwargs),
+            _models.CREATE_KNOWLEDGE_BASE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_prompt(
-        self, input: CreatePromptInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreatePromptInput | _models.CreatePromptInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreatePromptOutput: ...
+
+    @_overload
+    def create_prompt(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreatePromptInputDict],
     ) -> CreatePromptOutput:
         """
         Creates a prompt in your prompt library that you can add to a flow. For
@@ -558,8 +696,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         in the Amazon Bedrock User Guide.
 
         Args:
-            input:
-                An instance of `CreatePromptInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -569,10 +705,34 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `CreatePromptOutput`.
         """
-        return self._invoke(input, _models.CREATE_PROMPT, [], plugins)
 
+    def create_prompt(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreatePromptOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_PROMPT, args, kwargs),
+            _models.CREATE_PROMPT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_prompt_version(
-        self, input: CreatePromptVersionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreatePromptVersionInput
+        | _models.CreatePromptVersionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreatePromptVersionOutput: ...
+
+    @_overload
+    def create_prompt_version(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreatePromptVersionInputDict],
     ) -> CreatePromptVersionOutput:
         """
         Creates a static snapshot of your prompt that can be deployed to
@@ -582,8 +742,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         in the Amazon Bedrock User Guide.
 
         Args:
-            input:
-                An instance of `CreatePromptVersionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -593,12 +751,34 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `CreatePromptVersionOutput`.
         """
-        return self._invoke(input, _models.CREATE_PROMPT_VERSION, [], plugins)
 
+    def create_prompt_version(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreatePromptVersionOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_PROMPT_VERSION, args, kwargs),
+            _models.CREATE_PROMPT_VERSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_retrieval_instruction(
         self,
-        input: CreateRetrievalInstructionInput,
+        request: _models.CreateRetrievalInstructionInput
+        | _models.CreateRetrievalInstructionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateRetrievalInstructionOutput: ...
+
+    @_overload
+    def create_retrieval_instruction(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateRetrievalInstructionInputDict],
     ) -> CreateRetrievalInstructionOutput:
         """
         Creates a new retrieval instruction. The retrieval instruction is usable
@@ -606,8 +786,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         whether it is ready.
 
         Args:
-            input:
-                An instance of `CreateRetrievalInstructionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -617,12 +795,34 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `CreateRetrievalInstructionOutput`.
         """
-        return self._invoke(input, _models.CREATE_RETRIEVAL_INSTRUCTION, [], plugins)
 
+    def create_retrieval_instruction(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateRetrievalInstructionOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_RETRIEVAL_INSTRUCTION, args, kwargs),
+            _models.CREATE_RETRIEVAL_INSTRUCTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_retrieval_instruction_version(
         self,
-        input: CreateRetrievalInstructionVersionInput,
+        request: _models.CreateRetrievalInstructionVersionInput
+        | _models.CreateRetrievalInstructionVersionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateRetrievalInstructionVersionOutput: ...
+
+    @_overload
+    def create_retrieval_instruction_version(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateRetrievalInstructionVersionInputDict],
     ) -> CreateRetrievalInstructionVersionOutput:
         """
         Creates an immutable numbered version from the retrieval instruction's
@@ -632,8 +832,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         reusing a number.
 
         Args:
-            input:
-                An instance of `CreateRetrievalInstructionVersionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -643,12 +841,36 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `CreateRetrievalInstructionVersionOutput`.
         """
+
+    def create_retrieval_instruction_version(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateRetrievalInstructionVersionOutput:
         return self._invoke(
-            input, _models.CREATE_RETRIEVAL_INSTRUCTION_VERSION, [], plugins
+            self._select_input(
+                _models.CREATE_RETRIEVAL_INSTRUCTION_VERSION, args, kwargs
+            ),
+            _models.CREATE_RETRIEVAL_INSTRUCTION_VERSION,
+            [],
+            plugins,
         )
 
+    @_overload
     def create_vpc_configuration(
-        self, input: CreateVpcConfigurationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateVpcConfigurationInput
+        | _models.CreateVpcConfigurationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateVpcConfigurationOutput: ...
+
+    @_overload
+    def create_vpc_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateVpcConfigurationInputDict],
     ) -> CreateVpcConfigurationOutput:
         """
         Creates a VPC configuration that lets a knowledge base connect to a
@@ -658,8 +880,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         `CREATE_FAILED`.
 
         Args:
-            input:
-                An instance of `CreateVpcConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -669,17 +889,38 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `CreateVpcConfigurationOutput`.
         """
-        return self._invoke(input, _models.CREATE_VPC_CONFIGURATION, [], plugins)
 
+    def create_vpc_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateVpcConfigurationOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_VPC_CONFIGURATION, args, kwargs),
+            _models.CREATE_VPC_CONFIGURATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_agent(
-        self, input: DeleteAgentInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteAgentInput | _models.DeleteAgentInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteAgentOutput: ...
+
+    @_overload
+    def delete_agent(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteAgentInputDict],
     ) -> DeleteAgentOutput:
         """
         Deletes an agent.
 
         Args:
-            input:
-                An instance of `DeleteAgentInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -689,17 +930,39 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `DeleteAgentOutput`.
         """
-        return self._invoke(input, _models.DELETE_AGENT, [], plugins)
 
+    def delete_agent(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteAgentOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_AGENT, args, kwargs),
+            _models.DELETE_AGENT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_agent_action_group(
-        self, input: DeleteAgentActionGroupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteAgentActionGroupInput
+        | _models.DeleteAgentActionGroupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteAgentActionGroupOutput: ...
+
+    @_overload
+    def delete_agent_action_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteAgentActionGroupInputDict],
     ) -> DeleteAgentActionGroupOutput:
         """
         Deletes an action group in an agent.
 
         Args:
-            input:
-                An instance of `DeleteAgentActionGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -709,17 +972,38 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `DeleteAgentActionGroupOutput`.
         """
-        return self._invoke(input, _models.DELETE_AGENT_ACTION_GROUP, [], plugins)
 
+    def delete_agent_action_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteAgentActionGroupOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_AGENT_ACTION_GROUP, args, kwargs),
+            _models.DELETE_AGENT_ACTION_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_agent_alias(
-        self, input: DeleteAgentAliasInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteAgentAliasInput | _models.DeleteAgentAliasInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteAgentAliasOutput: ...
+
+    @_overload
+    def delete_agent_alias(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteAgentAliasInputDict],
     ) -> DeleteAgentAliasOutput:
         """
         Deletes an alias of an agent.
 
         Args:
-            input:
-                An instance of `DeleteAgentAliasInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -729,17 +1013,38 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `DeleteAgentAliasOutput`.
         """
-        return self._invoke(input, _models.DELETE_AGENT_ALIAS, [], plugins)
 
+    def delete_agent_alias(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteAgentAliasOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_AGENT_ALIAS, args, kwargs),
+            _models.DELETE_AGENT_ALIAS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_agent_version(
-        self, input: DeleteAgentVersionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteAgentVersionInput | _models.DeleteAgentVersionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteAgentVersionOutput: ...
+
+    @_overload
+    def delete_agent_version(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteAgentVersionInputDict],
     ) -> DeleteAgentVersionOutput:
         """
         Deletes a version of an agent.
 
         Args:
-            input:
-                An instance of `DeleteAgentVersionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -749,17 +1054,38 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `DeleteAgentVersionOutput`.
         """
-        return self._invoke(input, _models.DELETE_AGENT_VERSION, [], plugins)
 
+    def delete_agent_version(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteAgentVersionOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_AGENT_VERSION, args, kwargs),
+            _models.DELETE_AGENT_VERSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_data_source(
-        self, input: DeleteDataSourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteDataSourceInput | _models.DeleteDataSourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteDataSourceOutput: ...
+
+    @_overload
+    def delete_data_source(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteDataSourceInputDict],
     ) -> DeleteDataSourceOutput:
         """
         Deletes a data source from a knowledge base.
 
         Args:
-            input:
-                An instance of `DeleteDataSourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -769,17 +1095,38 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `DeleteDataSourceOutput`.
         """
-        return self._invoke(input, _models.DELETE_DATA_SOURCE, [], plugins)
 
+    def delete_data_source(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteDataSourceOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_DATA_SOURCE, args, kwargs),
+            _models.DELETE_DATA_SOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_flow(
-        self, input: DeleteFlowInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteFlowInput | _models.DeleteFlowInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteFlowOutput: ...
+
+    @_overload
+    def delete_flow(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteFlowInputDict],
     ) -> DeleteFlowOutput:
         """
         Deletes a flow.
 
         Args:
-            input:
-                An instance of `DeleteFlowInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -789,17 +1136,38 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `DeleteFlowOutput`.
         """
-        return self._invoke(input, _models.DELETE_FLOW, [], plugins)
 
+    def delete_flow(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteFlowOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_FLOW, args, kwargs),
+            _models.DELETE_FLOW,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_flow_alias(
-        self, input: DeleteFlowAliasInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteFlowAliasInput | _models.DeleteFlowAliasInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteFlowAliasOutput: ...
+
+    @_overload
+    def delete_flow_alias(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteFlowAliasInputDict],
     ) -> DeleteFlowAliasOutput:
         """
         Deletes an alias of a flow.
 
         Args:
-            input:
-                An instance of `DeleteFlowAliasInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -809,17 +1177,38 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `DeleteFlowAliasOutput`.
         """
-        return self._invoke(input, _models.DELETE_FLOW_ALIAS, [], plugins)
 
+    def delete_flow_alias(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteFlowAliasOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_FLOW_ALIAS, args, kwargs),
+            _models.DELETE_FLOW_ALIAS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_flow_version(
-        self, input: DeleteFlowVersionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteFlowVersionInput | _models.DeleteFlowVersionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteFlowVersionOutput: ...
+
+    @_overload
+    def delete_flow_version(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteFlowVersionInputDict],
     ) -> DeleteFlowVersionOutput:
         """
         Deletes a version of a flow.
 
         Args:
-            input:
-                An instance of `DeleteFlowVersionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -829,10 +1218,34 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `DeleteFlowVersionOutput`.
         """
-        return self._invoke(input, _models.DELETE_FLOW_VERSION, [], plugins)
 
+    def delete_flow_version(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteFlowVersionOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_FLOW_VERSION, args, kwargs),
+            _models.DELETE_FLOW_VERSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_knowledge_base(
-        self, input: DeleteKnowledgeBaseInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteKnowledgeBaseInput
+        | _models.DeleteKnowledgeBaseInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteKnowledgeBaseOutput: ...
+
+    @_overload
+    def delete_knowledge_base(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteKnowledgeBaseInputDict],
     ) -> DeleteKnowledgeBaseOutput:
         """
         Deletes a knowledge base. Before deleting a knowledge base, you should
@@ -842,8 +1255,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         request.
 
         Args:
-            input:
-                An instance of `DeleteKnowledgeBaseInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -853,12 +1264,34 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `DeleteKnowledgeBaseOutput`.
         """
-        return self._invoke(input, _models.DELETE_KNOWLEDGE_BASE, [], plugins)
 
+    def delete_knowledge_base(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteKnowledgeBaseOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_KNOWLEDGE_BASE, args, kwargs),
+            _models.DELETE_KNOWLEDGE_BASE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_knowledge_base_documents(
         self,
-        input: DeleteKnowledgeBaseDocumentsInput,
+        request: _models.DeleteKnowledgeBaseDocumentsInput
+        | _models.DeleteKnowledgeBaseDocumentsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteKnowledgeBaseDocumentsOutput: ...
+
+    @_overload
+    def delete_knowledge_base_documents(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteKnowledgeBaseDocumentsInputDict],
     ) -> DeleteKnowledgeBaseDocumentsOutput:
         """
         Deletes documents from a data source and syncs the changes to the
@@ -868,8 +1301,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         in the Amazon Bedrock User Guide.
 
         Args:
-            input:
-                An instance of `DeleteKnowledgeBaseDocumentsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -879,10 +1310,33 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `DeleteKnowledgeBaseDocumentsOutput`.
         """
-        return self._invoke(input, _models.DELETE_KNOWLEDGE_BASE_DOCUMENTS, [], plugins)
 
+    def delete_knowledge_base_documents(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteKnowledgeBaseDocumentsOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_KNOWLEDGE_BASE_DOCUMENTS, args, kwargs),
+            _models.DELETE_KNOWLEDGE_BASE_DOCUMENTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_prompt(
-        self, input: DeletePromptInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeletePromptInput | _models.DeletePromptInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeletePromptOutput: ...
+
+    @_overload
+    def delete_prompt(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeletePromptInputDict],
     ) -> DeletePromptOutput:
         """
         Deletes a prompt or a version of it, depending on whether you include
@@ -894,8 +1348,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         in the Amazon Bedrock User Guide.
 
         Args:
-            input:
-                An instance of `DeletePromptInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -905,10 +1357,34 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `DeletePromptOutput`.
         """
-        return self._invoke(input, _models.DELETE_PROMPT, [], plugins)
 
+    def delete_prompt(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeletePromptOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_PROMPT, args, kwargs),
+            _models.DELETE_PROMPT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_resource_policy(
-        self, input: DeleteResourcePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteResourcePolicyInput
+        | _models.DeleteResourcePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteResourcePolicyOutput: ...
+
+    @_overload
+    def delete_resource_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteResourcePolicyInputDict],
     ) -> DeleteResourcePolicyOutput:
         """
         Removes the resource policy associated with a knowledge base. After
@@ -916,8 +1392,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         using cross-account permissions.
 
         Args:
-            input:
-                An instance of `DeleteResourcePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -927,12 +1401,34 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `DeleteResourcePolicyOutput`.
         """
-        return self._invoke(input, _models.DELETE_RESOURCE_POLICY, [], plugins)
 
+    def delete_resource_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteResourcePolicyOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_RESOURCE_POLICY, args, kwargs),
+            _models.DELETE_RESOURCE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_retrieval_instruction(
         self,
-        input: DeleteRetrievalInstructionInput,
+        request: _models.DeleteRetrievalInstructionInput
+        | _models.DeleteRetrievalInstructionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteRetrievalInstructionOutput: ...
+
+    @_overload
+    def delete_retrieval_instruction(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteRetrievalInstructionInputDict],
     ) -> DeleteRetrievalInstructionOutput:
         """
         Deletes a retrieval instruction or a single version of it. Omit
@@ -944,8 +1440,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         unaffected.
 
         Args:
-            input:
-                An instance of `DeleteRetrievalInstructionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -955,10 +1449,34 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `DeleteRetrievalInstructionOutput`.
         """
-        return self._invoke(input, _models.DELETE_RETRIEVAL_INSTRUCTION, [], plugins)
 
+    def delete_retrieval_instruction(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteRetrievalInstructionOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_RETRIEVAL_INSTRUCTION, args, kwargs),
+            _models.DELETE_RETRIEVAL_INSTRUCTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_vpc_configuration(
-        self, input: DeleteVpcConfigurationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteVpcConfigurationInput
+        | _models.DeleteVpcConfigurationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteVpcConfigurationOutput: ...
+
+    @_overload
+    def delete_vpc_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteVpcConfigurationInputDict],
     ) -> DeleteVpcConfigurationOutput:
         """
         Deletes a VPC configuration. This operation is asynchronous: it returns
@@ -967,8 +1485,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Delete requests are idempotent and safe to retry.
 
         Args:
-            input:
-                An instance of `DeleteVpcConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -978,19 +1494,39 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `DeleteVpcConfigurationOutput`.
         """
-        return self._invoke(input, _models.DELETE_VPC_CONFIGURATION, [], plugins)
 
+    def delete_vpc_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteVpcConfigurationOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_VPC_CONFIGURATION, args, kwargs),
+            _models.DELETE_VPC_CONFIGURATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def disassociate_agent_collaborator(
         self,
-        input: DisassociateAgentCollaboratorInput,
+        request: _models.DisassociateAgentCollaboratorInput
+        | _models.DisassociateAgentCollaboratorInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DisassociateAgentCollaboratorOutput: ...
+
+    @_overload
+    def disassociate_agent_collaborator(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DisassociateAgentCollaboratorInputDict],
     ) -> DisassociateAgentCollaboratorOutput:
         """
         Disassociates an agent collaborator.
 
         Args:
-            input:
-                An instance of `DisassociateAgentCollaboratorInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1000,19 +1536,39 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `DisassociateAgentCollaboratorOutput`.
         """
-        return self._invoke(input, _models.DISASSOCIATE_AGENT_COLLABORATOR, [], plugins)
 
+    def disassociate_agent_collaborator(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DisassociateAgentCollaboratorOutput:
+        return self._invoke(
+            self._select_input(_models.DISASSOCIATE_AGENT_COLLABORATOR, args, kwargs),
+            _models.DISASSOCIATE_AGENT_COLLABORATOR,
+            [],
+            plugins,
+        )
+
+    @_overload
     def disassociate_agent_knowledge_base(
         self,
-        input: DisassociateAgentKnowledgeBaseInput,
+        request: _models.DisassociateAgentKnowledgeBaseInput
+        | _models.DisassociateAgentKnowledgeBaseInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DisassociateAgentKnowledgeBaseOutput: ...
+
+    @_overload
+    def disassociate_agent_knowledge_base(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DisassociateAgentKnowledgeBaseInputDict],
     ) -> DisassociateAgentKnowledgeBaseOutput:
         """
         Disassociates a knowledge base from an agent.
 
         Args:
-            input:
-                An instance of `DisassociateAgentKnowledgeBaseInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1022,19 +1578,38 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `DisassociateAgentKnowledgeBaseOutput`.
         """
+
+    def disassociate_agent_knowledge_base(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DisassociateAgentKnowledgeBaseOutput:
         return self._invoke(
-            input, _models.DISASSOCIATE_AGENT_KNOWLEDGE_BASE, [], plugins
+            self._select_input(_models.DISASSOCIATE_AGENT_KNOWLEDGE_BASE, args, kwargs),
+            _models.DISASSOCIATE_AGENT_KNOWLEDGE_BASE,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_agent(
-        self, input: GetAgentInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetAgentInput | _models.GetAgentInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetAgentOutput: ...
+
+    @_overload
+    def get_agent(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetAgentInputDict],
     ) -> GetAgentOutput:
         """
         Gets information about an agent.
 
         Args:
-            input:
-                An instance of `GetAgentInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1044,17 +1619,39 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `GetAgentOutput`.
         """
-        return self._invoke(input, _models.GET_AGENT, [], plugins)
 
+    def get_agent(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetAgentOutput:
+        return self._invoke(
+            self._select_input(_models.GET_AGENT, args, kwargs),
+            _models.GET_AGENT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_agent_action_group(
-        self, input: GetAgentActionGroupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetAgentActionGroupInput
+        | _models.GetAgentActionGroupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetAgentActionGroupOutput: ...
+
+    @_overload
+    def get_agent_action_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetAgentActionGroupInputDict],
     ) -> GetAgentActionGroupOutput:
         """
         Gets information about an action group for an agent.
 
         Args:
-            input:
-                An instance of `GetAgentActionGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1064,17 +1661,38 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `GetAgentActionGroupOutput`.
         """
-        return self._invoke(input, _models.GET_AGENT_ACTION_GROUP, [], plugins)
 
+    def get_agent_action_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetAgentActionGroupOutput:
+        return self._invoke(
+            self._select_input(_models.GET_AGENT_ACTION_GROUP, args, kwargs),
+            _models.GET_AGENT_ACTION_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_agent_alias(
-        self, input: GetAgentAliasInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetAgentAliasInput | _models.GetAgentAliasInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetAgentAliasOutput: ...
+
+    @_overload
+    def get_agent_alias(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetAgentAliasInputDict],
     ) -> GetAgentAliasOutput:
         """
         Gets information about an alias of an agent.
 
         Args:
-            input:
-                An instance of `GetAgentAliasInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1084,17 +1702,39 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `GetAgentAliasOutput`.
         """
-        return self._invoke(input, _models.GET_AGENT_ALIAS, [], plugins)
 
+    def get_agent_alias(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetAgentAliasOutput:
+        return self._invoke(
+            self._select_input(_models.GET_AGENT_ALIAS, args, kwargs),
+            _models.GET_AGENT_ALIAS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_agent_collaborator(
-        self, input: GetAgentCollaboratorInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetAgentCollaboratorInput
+        | _models.GetAgentCollaboratorInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetAgentCollaboratorOutput: ...
+
+    @_overload
+    def get_agent_collaborator(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetAgentCollaboratorInputDict],
     ) -> GetAgentCollaboratorOutput:
         """
         Retrieves information about an agent's collaborator.
 
         Args:
-            input:
-                An instance of `GetAgentCollaboratorInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1104,17 +1744,39 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `GetAgentCollaboratorOutput`.
         """
-        return self._invoke(input, _models.GET_AGENT_COLLABORATOR, [], plugins)
 
+    def get_agent_collaborator(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetAgentCollaboratorOutput:
+        return self._invoke(
+            self._select_input(_models.GET_AGENT_COLLABORATOR, args, kwargs),
+            _models.GET_AGENT_COLLABORATOR,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_agent_knowledge_base(
-        self, input: GetAgentKnowledgeBaseInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetAgentKnowledgeBaseInput
+        | _models.GetAgentKnowledgeBaseInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetAgentKnowledgeBaseOutput: ...
+
+    @_overload
+    def get_agent_knowledge_base(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetAgentKnowledgeBaseInputDict],
     ) -> GetAgentKnowledgeBaseOutput:
         """
         Gets information about a knowledge base associated with an agent.
 
         Args:
-            input:
-                An instance of `GetAgentKnowledgeBaseInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1124,17 +1786,38 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `GetAgentKnowledgeBaseOutput`.
         """
-        return self._invoke(input, _models.GET_AGENT_KNOWLEDGE_BASE, [], plugins)
 
+    def get_agent_knowledge_base(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetAgentKnowledgeBaseOutput:
+        return self._invoke(
+            self._select_input(_models.GET_AGENT_KNOWLEDGE_BASE, args, kwargs),
+            _models.GET_AGENT_KNOWLEDGE_BASE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_agent_version(
-        self, input: GetAgentVersionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetAgentVersionInput | _models.GetAgentVersionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetAgentVersionOutput: ...
+
+    @_overload
+    def get_agent_version(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetAgentVersionInputDict],
     ) -> GetAgentVersionOutput:
         """
         Gets details about a version of an agent.
 
         Args:
-            input:
-                An instance of `GetAgentVersionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1144,17 +1827,38 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `GetAgentVersionOutput`.
         """
-        return self._invoke(input, _models.GET_AGENT_VERSION, [], plugins)
 
+    def get_agent_version(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetAgentVersionOutput:
+        return self._invoke(
+            self._select_input(_models.GET_AGENT_VERSION, args, kwargs),
+            _models.GET_AGENT_VERSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_data_source(
-        self, input: GetDataSourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetDataSourceInput | _models.GetDataSourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetDataSourceOutput: ...
+
+    @_overload
+    def get_data_source(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetDataSourceInputDict],
     ) -> GetDataSourceOutput:
         """
         Gets information about a data source.
 
         Args:
-            input:
-                An instance of `GetDataSourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1164,10 +1868,33 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `GetDataSourceOutput`.
         """
-        return self._invoke(input, _models.GET_DATA_SOURCE, [], plugins)
 
+    def get_data_source(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetDataSourceOutput:
+        return self._invoke(
+            self._select_input(_models.GET_DATA_SOURCE, args, kwargs),
+            _models.GET_DATA_SOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_flow(
-        self, input: GetFlowInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetFlowInput | _models.GetFlowInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetFlowOutput: ...
+
+    @_overload
+    def get_flow(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetFlowInputDict],
     ) -> GetFlowOutput:
         """
         Retrieves information about a flow. For more information, see [Manage a
@@ -1176,8 +1903,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         in the Amazon Bedrock User Guide.
 
         Args:
-            input:
-                An instance of `GetFlowInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1187,10 +1912,33 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `GetFlowOutput`.
         """
-        return self._invoke(input, _models.GET_FLOW, [], plugins)
 
+    def get_flow(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetFlowOutput:
+        return self._invoke(
+            self._select_input(_models.GET_FLOW, args, kwargs),
+            _models.GET_FLOW,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_flow_alias(
-        self, input: GetFlowAliasInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetFlowAliasInput | _models.GetFlowAliasInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetFlowAliasOutput: ...
+
+    @_overload
+    def get_flow_alias(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetFlowAliasInputDict],
     ) -> GetFlowAliasOutput:
         """
         Retrieves information about a flow. For more information, see [Deploy a
@@ -1199,8 +1947,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         in the Amazon Bedrock User Guide.
 
         Args:
-            input:
-                An instance of `GetFlowAliasInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1210,10 +1956,33 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `GetFlowAliasOutput`.
         """
-        return self._invoke(input, _models.GET_FLOW_ALIAS, [], plugins)
 
+    def get_flow_alias(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetFlowAliasOutput:
+        return self._invoke(
+            self._select_input(_models.GET_FLOW_ALIAS, args, kwargs),
+            _models.GET_FLOW_ALIAS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_flow_version(
-        self, input: GetFlowVersionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetFlowVersionInput | _models.GetFlowVersionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetFlowVersionOutput: ...
+
+    @_overload
+    def get_flow_version(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetFlowVersionInputDict],
     ) -> GetFlowVersionOutput:
         """
         Retrieves information about a version of a flow. For more information,
@@ -1222,8 +1991,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         in the Amazon Bedrock User Guide.
 
         Args:
-            input:
-                An instance of `GetFlowVersionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1233,10 +2000,33 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `GetFlowVersionOutput`.
         """
-        return self._invoke(input, _models.GET_FLOW_VERSION, [], plugins)
 
+    def get_flow_version(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetFlowVersionOutput:
+        return self._invoke(
+            self._select_input(_models.GET_FLOW_VERSION, args, kwargs),
+            _models.GET_FLOW_VERSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_ingestion_job(
-        self, input: GetIngestionJobInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetIngestionJobInput | _models.GetIngestionJobInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetIngestionJobOutput: ...
+
+    @_overload
+    def get_ingestion_job(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetIngestionJobInputDict],
     ) -> GetIngestionJobOutput:
         """
         Gets information about a data ingestion job. Data sources are ingested
@@ -1244,8 +2034,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         your data.
 
         Args:
-            input:
-                An instance of `GetIngestionJobInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1255,17 +2043,38 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `GetIngestionJobOutput`.
         """
-        return self._invoke(input, _models.GET_INGESTION_JOB, [], plugins)
 
+    def get_ingestion_job(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetIngestionJobOutput:
+        return self._invoke(
+            self._select_input(_models.GET_INGESTION_JOB, args, kwargs),
+            _models.GET_INGESTION_JOB,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_knowledge_base(
-        self, input: GetKnowledgeBaseInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetKnowledgeBaseInput | _models.GetKnowledgeBaseInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetKnowledgeBaseOutput: ...
+
+    @_overload
+    def get_knowledge_base(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetKnowledgeBaseInputDict],
     ) -> GetKnowledgeBaseOutput:
         """
         Gets information about a knowledge base.
 
         Args:
-            input:
-                An instance of `GetKnowledgeBaseInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1275,10 +2084,34 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `GetKnowledgeBaseOutput`.
         """
-        return self._invoke(input, _models.GET_KNOWLEDGE_BASE, [], plugins)
 
+    def get_knowledge_base(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetKnowledgeBaseOutput:
+        return self._invoke(
+            self._select_input(_models.GET_KNOWLEDGE_BASE, args, kwargs),
+            _models.GET_KNOWLEDGE_BASE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_knowledge_base_documents(
-        self, input: GetKnowledgeBaseDocumentsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetKnowledgeBaseDocumentsInput
+        | _models.GetKnowledgeBaseDocumentsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetKnowledgeBaseDocumentsOutput: ...
+
+    @_overload
+    def get_knowledge_base_documents(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetKnowledgeBaseDocumentsInputDict],
     ) -> GetKnowledgeBaseDocumentsOutput:
         """
         Retrieves specific documents from a data source that is connected to a
@@ -1288,8 +2121,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         in the Amazon Bedrock User Guide.
 
         Args:
-            input:
-                An instance of `GetKnowledgeBaseDocumentsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1299,10 +2130,33 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `GetKnowledgeBaseDocumentsOutput`.
         """
-        return self._invoke(input, _models.GET_KNOWLEDGE_BASE_DOCUMENTS, [], plugins)
 
+    def get_knowledge_base_documents(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetKnowledgeBaseDocumentsOutput:
+        return self._invoke(
+            self._select_input(_models.GET_KNOWLEDGE_BASE_DOCUMENTS, args, kwargs),
+            _models.GET_KNOWLEDGE_BASE_DOCUMENTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_prompt(
-        self, input: GetPromptInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetPromptInput | _models.GetPromptInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetPromptOutput: ...
+
+    @_overload
+    def get_prompt(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetPromptInputDict],
     ) -> GetPromptOutput:
         """
         Retrieves information about the working draft (`DRAFT` version) of a
@@ -1315,8 +2169,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         in the Amazon Bedrock User Guide.
 
         Args:
-            input:
-                An instance of `GetPromptInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1326,17 +2178,38 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `GetPromptOutput`.
         """
-        return self._invoke(input, _models.GET_PROMPT, [], plugins)
 
+    def get_prompt(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetPromptOutput:
+        return self._invoke(
+            self._select_input(_models.GET_PROMPT, args, kwargs),
+            _models.GET_PROMPT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_resource_policy(
-        self, input: GetResourcePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetResourcePolicyInput | _models.GetResourcePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetResourcePolicyOutput: ...
+
+    @_overload
+    def get_resource_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetResourcePolicyInputDict],
     ) -> GetResourcePolicyOutput:
         """
         Retrieves the resource policy associated with a knowledge base.
 
         Args:
-            input:
-                An instance of `GetResourcePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1346,18 +2219,40 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `GetResourcePolicyOutput`.
         """
-        return self._invoke(input, _models.GET_RESOURCE_POLICY, [], plugins)
 
+    def get_resource_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetResourcePolicyOutput:
+        return self._invoke(
+            self._select_input(_models.GET_RESOURCE_POLICY, args, kwargs),
+            _models.GET_RESOURCE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_retrieval_instruction(
-        self, input: GetRetrievalInstructionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetRetrievalInstructionInput
+        | _models.GetRetrievalInstructionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetRetrievalInstructionOutput: ...
+
+    @_overload
+    def get_retrieval_instruction(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetRetrievalInstructionInputDict],
     ) -> GetRetrievalInstructionOutput:
         """
         Gets a retrieval instruction. Also used to poll the terminal reporting
         of an asynchronous create or update.
 
         Args:
-            input:
-                An instance of `GetRetrievalInstructionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1367,10 +2262,34 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `GetRetrievalInstructionOutput`.
         """
-        return self._invoke(input, _models.GET_RETRIEVAL_INSTRUCTION, [], plugins)
 
+    def get_retrieval_instruction(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetRetrievalInstructionOutput:
+        return self._invoke(
+            self._select_input(_models.GET_RETRIEVAL_INSTRUCTION, args, kwargs),
+            _models.GET_RETRIEVAL_INSTRUCTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_vpc_configuration(
-        self, input: GetVpcConfigurationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetVpcConfigurationInput
+        | _models.GetVpcConfigurationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetVpcConfigurationOutput: ...
+
+    @_overload
+    def get_vpc_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetVpcConfigurationInputDict],
     ) -> GetVpcConfigurationOutput:
         """
         Returns the details and current status of a single VPC configuration.
@@ -1378,8 +2297,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         delete.
 
         Args:
-            input:
-                An instance of `GetVpcConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1389,12 +2306,34 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `GetVpcConfigurationOutput`.
         """
-        return self._invoke(input, _models.GET_VPC_CONFIGURATION, [], plugins)
 
+    def get_vpc_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetVpcConfigurationOutput:
+        return self._invoke(
+            self._select_input(_models.GET_VPC_CONFIGURATION, args, kwargs),
+            _models.GET_VPC_CONFIGURATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def ingest_knowledge_base_documents(
         self,
-        input: IngestKnowledgeBaseDocumentsInput,
+        request: _models.IngestKnowledgeBaseDocumentsInput
+        | _models.IngestKnowledgeBaseDocumentsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> IngestKnowledgeBaseDocumentsOutput: ...
+
+    @_overload
+    def ingest_knowledge_base_documents(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.IngestKnowledgeBaseDocumentsInputDict],
     ) -> IngestKnowledgeBaseDocumentsOutput:
         """
         Ingests documents directly into the knowledge base that is connected to
@@ -1406,8 +2345,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         in the Amazon Bedrock User Guide.
 
         Args:
-            input:
-                An instance of `IngestKnowledgeBaseDocumentsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1417,17 +2354,39 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `IngestKnowledgeBaseDocumentsOutput`.
         """
-        return self._invoke(input, _models.INGEST_KNOWLEDGE_BASE_DOCUMENTS, [], plugins)
 
+    def ingest_knowledge_base_documents(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> IngestKnowledgeBaseDocumentsOutput:
+        return self._invoke(
+            self._select_input(_models.INGEST_KNOWLEDGE_BASE_DOCUMENTS, args, kwargs),
+            _models.INGEST_KNOWLEDGE_BASE_DOCUMENTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_agent_action_groups(
-        self, input: ListAgentActionGroupsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListAgentActionGroupsInput
+        | _models.ListAgentActionGroupsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListAgentActionGroupsOutput: ...
+
+    @_overload
+    def list_agent_action_groups(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListAgentActionGroupsInputDict],
     ) -> ListAgentActionGroupsOutput:
         """
         Lists the action groups for an agent and information about each one.
 
         Args:
-            input:
-                An instance of `ListAgentActionGroupsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1437,17 +2396,38 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `ListAgentActionGroupsOutput`.
         """
-        return self._invoke(input, _models.LIST_AGENT_ACTION_GROUPS, [], plugins)
 
+    def list_agent_action_groups(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListAgentActionGroupsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_AGENT_ACTION_GROUPS, args, kwargs),
+            _models.LIST_AGENT_ACTION_GROUPS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_agent_aliases(
-        self, input: ListAgentAliasesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListAgentAliasesInput | _models.ListAgentAliasesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListAgentAliasesOutput: ...
+
+    @_overload
+    def list_agent_aliases(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListAgentAliasesInputDict],
     ) -> ListAgentAliasesOutput:
         """
         Lists the aliases of an agent and information about each one.
 
         Args:
-            input:
-                An instance of `ListAgentAliasesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1457,17 +2437,39 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `ListAgentAliasesOutput`.
         """
-        return self._invoke(input, _models.LIST_AGENT_ALIASES, [], plugins)
 
+    def list_agent_aliases(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListAgentAliasesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_AGENT_ALIASES, args, kwargs),
+            _models.LIST_AGENT_ALIASES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_agent_collaborators(
-        self, input: ListAgentCollaboratorsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListAgentCollaboratorsInput
+        | _models.ListAgentCollaboratorsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListAgentCollaboratorsOutput: ...
+
+    @_overload
+    def list_agent_collaborators(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListAgentCollaboratorsInputDict],
     ) -> ListAgentCollaboratorsOutput:
         """
         Retrieve a list of an agent's collaborators.
 
         Args:
-            input:
-                An instance of `ListAgentCollaboratorsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1477,18 +2479,40 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `ListAgentCollaboratorsOutput`.
         """
-        return self._invoke(input, _models.LIST_AGENT_COLLABORATORS, [], plugins)
 
+    def list_agent_collaborators(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListAgentCollaboratorsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_AGENT_COLLABORATORS, args, kwargs),
+            _models.LIST_AGENT_COLLABORATORS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_agent_knowledge_bases(
-        self, input: ListAgentKnowledgeBasesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListAgentKnowledgeBasesInput
+        | _models.ListAgentKnowledgeBasesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListAgentKnowledgeBasesOutput: ...
+
+    @_overload
+    def list_agent_knowledge_bases(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListAgentKnowledgeBasesInputDict],
     ) -> ListAgentKnowledgeBasesOutput:
         """
         Lists knowledge bases associated with an agent and information about
         each one.
 
         Args:
-            input:
-                An instance of `ListAgentKnowledgeBasesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1498,18 +2522,39 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `ListAgentKnowledgeBasesOutput`.
         """
-        return self._invoke(input, _models.LIST_AGENT_KNOWLEDGE_BASES, [], plugins)
 
+    def list_agent_knowledge_bases(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListAgentKnowledgeBasesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_AGENT_KNOWLEDGE_BASES, args, kwargs),
+            _models.LIST_AGENT_KNOWLEDGE_BASES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_agents(
-        self, input: ListAgentsInput | None = None, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListAgentsInput | _models.ListAgentsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListAgentsOutput: ...
+
+    @_overload
+    def list_agents(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListAgentsInputDict],
     ) -> ListAgentsOutput:
         """
         Lists the agents belonging to an account and information about each
         agent.
 
         Args:
-            input:
-                An instance of `ListAgentsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1519,17 +2564,38 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `ListAgentsOutput`.
         """
-        return self._invoke(input, _models.LIST_AGENTS, [], plugins)
 
+    def list_agents(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListAgentsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_AGENTS, args, kwargs),
+            _models.LIST_AGENTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_agent_versions(
-        self, input: ListAgentVersionsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListAgentVersionsInput | _models.ListAgentVersionsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListAgentVersionsOutput: ...
+
+    @_overload
+    def list_agent_versions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListAgentVersionsInputDict],
     ) -> ListAgentVersionsOutput:
         """
         Lists the versions of an agent and information about each version.
 
         Args:
-            input:
-                An instance of `ListAgentVersionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1539,18 +2605,39 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `ListAgentVersionsOutput`.
         """
-        return self._invoke(input, _models.LIST_AGENT_VERSIONS, [], plugins)
 
+    def list_agent_versions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListAgentVersionsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_AGENT_VERSIONS, args, kwargs),
+            _models.LIST_AGENT_VERSIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_data_sources(
-        self, input: ListDataSourcesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListDataSourcesInput | _models.ListDataSourcesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListDataSourcesOutput: ...
+
+    @_overload
+    def list_data_sources(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListDataSourcesInputDict],
     ) -> ListDataSourcesOutput:
         """
         Lists the data sources in a knowledge base and information about each
         one.
 
         Args:
-            input:
-                An instance of `ListDataSourcesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1560,17 +2647,38 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `ListDataSourcesOutput`.
         """
-        return self._invoke(input, _models.LIST_DATA_SOURCES, [], plugins)
 
+    def list_data_sources(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListDataSourcesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_DATA_SOURCES, args, kwargs),
+            _models.LIST_DATA_SOURCES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_flow_aliases(
-        self, input: ListFlowAliasesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListFlowAliasesInput | _models.ListFlowAliasesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListFlowAliasesOutput: ...
+
+    @_overload
+    def list_flow_aliases(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListFlowAliasesInputDict],
     ) -> ListFlowAliasesOutput:
         """
         Returns a list of aliases for a flow.
 
         Args:
-            input:
-                An instance of `ListFlowAliasesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1580,10 +2688,33 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `ListFlowAliasesOutput`.
         """
-        return self._invoke(input, _models.LIST_FLOW_ALIASES, [], plugins)
 
+    def list_flow_aliases(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListFlowAliasesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_FLOW_ALIASES, args, kwargs),
+            _models.LIST_FLOW_ALIASES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_flows(
-        self, input: ListFlowsInput | None = None, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListFlowsInput | _models.ListFlowsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListFlowsOutput: ...
+
+    @_overload
+    def list_flows(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListFlowsInputDict],
     ) -> ListFlowsOutput:
         """
         Returns a list of flows and information about each flow. For more
@@ -1592,8 +2723,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         in the Amazon Bedrock User Guide.
 
         Args:
-            input:
-                An instance of `ListFlowsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1603,10 +2732,33 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `ListFlowsOutput`.
         """
-        return self._invoke(input, _models.LIST_FLOWS, [], plugins)
 
+    def list_flows(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListFlowsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_FLOWS, args, kwargs),
+            _models.LIST_FLOWS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_flow_versions(
-        self, input: ListFlowVersionsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListFlowVersionsInput | _models.ListFlowVersionsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListFlowVersionsOutput: ...
+
+    @_overload
+    def list_flow_versions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListFlowVersionsInputDict],
     ) -> ListFlowVersionsOutput:
         """
         Returns a list of information about each flow. For more information, see
@@ -1615,8 +2767,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         in the Amazon Bedrock User Guide.
 
         Args:
-            input:
-                An instance of `ListFlowVersionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1626,18 +2776,39 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `ListFlowVersionsOutput`.
         """
-        return self._invoke(input, _models.LIST_FLOW_VERSIONS, [], plugins)
 
+    def list_flow_versions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListFlowVersionsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_FLOW_VERSIONS, args, kwargs),
+            _models.LIST_FLOW_VERSIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_ingestion_jobs(
-        self, input: ListIngestionJobsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListIngestionJobsInput | _models.ListIngestionJobsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListIngestionJobsOutput: ...
+
+    @_overload
+    def list_ingestion_jobs(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListIngestionJobsInputDict],
     ) -> ListIngestionJobsOutput:
         """
         Lists the data ingestion jobs for a data source. The list also includes
         information about each job.
 
         Args:
-            input:
-                An instance of `ListIngestionJobsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1647,12 +2818,34 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `ListIngestionJobsOutput`.
         """
-        return self._invoke(input, _models.LIST_INGESTION_JOBS, [], plugins)
 
+    def list_ingestion_jobs(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListIngestionJobsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_INGESTION_JOBS, args, kwargs),
+            _models.LIST_INGESTION_JOBS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_knowledge_base_documents(
         self,
-        input: ListKnowledgeBaseDocumentsInput,
+        request: _models.ListKnowledgeBaseDocumentsInput
+        | _models.ListKnowledgeBaseDocumentsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListKnowledgeBaseDocumentsOutput: ...
+
+    @_overload
+    def list_knowledge_base_documents(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListKnowledgeBaseDocumentsInputDict],
     ) -> ListKnowledgeBaseDocumentsOutput:
         """
         Retrieves all the documents contained in a data source that is connected
@@ -1662,8 +2855,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         in the Amazon Bedrock User Guide.
 
         Args:
-            input:
-                An instance of `ListKnowledgeBaseDocumentsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1673,20 +2864,39 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `ListKnowledgeBaseDocumentsOutput`.
         """
-        return self._invoke(input, _models.LIST_KNOWLEDGE_BASE_DOCUMENTS, [], plugins)
 
+    def list_knowledge_base_documents(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListKnowledgeBaseDocumentsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_KNOWLEDGE_BASE_DOCUMENTS, args, kwargs),
+            _models.LIST_KNOWLEDGE_BASE_DOCUMENTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_knowledge_bases(
         self,
-        input: ListKnowledgeBasesInput | None = None,
+        request: _models.ListKnowledgeBasesInput | _models.ListKnowledgeBasesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListKnowledgeBasesOutput: ...
+
+    @_overload
+    def list_knowledge_bases(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListKnowledgeBasesInputDict],
     ) -> ListKnowledgeBasesOutput:
         """
         Lists the knowledge bases in an account. The list also
         includesinformation about each knowledge base.
 
         Args:
-            input:
-                An instance of `ListKnowledgeBasesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1696,10 +2906,33 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `ListKnowledgeBasesOutput`.
         """
-        return self._invoke(input, _models.LIST_KNOWLEDGE_BASES, [], plugins)
 
+    def list_knowledge_bases(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListKnowledgeBasesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_KNOWLEDGE_BASES, args, kwargs),
+            _models.LIST_KNOWLEDGE_BASES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_prompts(
-        self, input: ListPromptsInput | None = None, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListPromptsInput | _models.ListPromptsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListPromptsOutput: ...
+
+    @_overload
+    def list_prompts(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListPromptsInputDict],
     ) -> ListPromptsOutput:
         """
         Returns either information about the working draft (`DRAFT` version) of
@@ -1711,8 +2944,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         in the Amazon Bedrock User Guide.
 
         Args:
-            input:
-                An instance of `ListPromptsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1722,20 +2953,40 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `ListPromptsOutput`.
         """
-        return self._invoke(input, _models.LIST_PROMPTS, [], plugins)
 
+    def list_prompts(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListPromptsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_PROMPTS, args, kwargs),
+            _models.LIST_PROMPTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_retrieval_instructions(
         self,
-        input: ListRetrievalInstructionsInput | None = None,
+        request: _models.ListRetrievalInstructionsInput
+        | _models.ListRetrievalInstructionsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListRetrievalInstructionsOutput: ...
+
+    @_overload
+    def list_retrieval_instructions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListRetrievalInstructionsInputDict],
     ) -> ListRetrievalInstructionsOutput:
         """
         Lists the retrieval instructions in the caller's account. Results are
         paginated. Use the nextToken parameter to retrieve additional results.
 
         Args:
-            input:
-                An instance of `ListRetrievalInstructionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1745,12 +2996,34 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `ListRetrievalInstructionsOutput`.
         """
-        return self._invoke(input, _models.LIST_RETRIEVAL_INSTRUCTIONS, [], plugins)
 
+    def list_retrieval_instructions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListRetrievalInstructionsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_RETRIEVAL_INSTRUCTIONS, args, kwargs),
+            _models.LIST_RETRIEVAL_INSTRUCTIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_retrieval_instruction_versions(
         self,
-        input: ListRetrievalInstructionVersionsInput,
+        request: _models.ListRetrievalInstructionVersionsInput
+        | _models.ListRetrievalInstructionVersionsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListRetrievalInstructionVersionsOutput: ...
+
+    @_overload
+    def list_retrieval_instruction_versions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListRetrievalInstructionVersionsInputDict],
     ) -> ListRetrievalInstructionVersionsOutput:
         """
         Lists the numbered versions of a retrieval instruction, newest first.
@@ -1759,8 +3032,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         parameter to retrieve additional results.
 
         Args:
-            input:
-                An instance of `ListRetrievalInstructionVersionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1770,19 +3041,41 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `ListRetrievalInstructionVersionsOutput`.
         """
+
+    def list_retrieval_instruction_versions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListRetrievalInstructionVersionsOutput:
         return self._invoke(
-            input, _models.LIST_RETRIEVAL_INSTRUCTION_VERSIONS, [], plugins
+            self._select_input(
+                _models.LIST_RETRIEVAL_INSTRUCTION_VERSIONS, args, kwargs
+            ),
+            _models.LIST_RETRIEVAL_INSTRUCTION_VERSIONS,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_tags_for_resource(
-        self, input: ListTagsForResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListTagsForResourceInput
+        | _models.ListTagsForResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListTagsForResourceOutput: ...
+
+    @_overload
+    def list_tags_for_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListTagsForResourceInputDict],
     ) -> ListTagsForResourceOutput:
         """
         List all the tags for the resource you specify.
 
         Args:
-            input:
-                An instance of `ListTagsForResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1792,10 +3085,34 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `ListTagsForResourceOutput`.
         """
-        return self._invoke(input, _models.LIST_TAGS_FOR_RESOURCE, [], plugins)
 
+    def list_tags_for_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListTagsForResourceOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_TAGS_FOR_RESOURCE, args, kwargs),
+            _models.LIST_TAGS_FOR_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_vpc_configurations(
-        self, input: ListVpcConfigurationsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListVpcConfigurationsInput
+        | _models.ListVpcConfigurationsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListVpcConfigurationsOutput: ...
+
+    @_overload
+    def list_vpc_configurations(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListVpcConfigurationsInputDict],
     ) -> ListVpcConfigurationsOutput:
         """
         Returns a paginated list of the VPC configurations for a knowledge base.
@@ -1803,8 +3120,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         retrieve additional results.
 
         Args:
-            input:
-                An instance of `ListVpcConfigurationsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1814,18 +3129,39 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `ListVpcConfigurationsOutput`.
         """
-        return self._invoke(input, _models.LIST_VPC_CONFIGURATIONS, [], plugins)
 
+    def list_vpc_configurations(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListVpcConfigurationsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_VPC_CONFIGURATIONS, args, kwargs),
+            _models.LIST_VPC_CONFIGURATIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def prepare_agent(
-        self, input: PrepareAgentInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PrepareAgentInput | _models.PrepareAgentInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PrepareAgentOutput: ...
+
+    @_overload
+    def prepare_agent(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PrepareAgentInputDict],
     ) -> PrepareAgentOutput:
         """
         Creates a `DRAFT` version of the agent that can be used for internal
         testing.
 
         Args:
-            input:
-                An instance of `PrepareAgentInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1835,10 +3171,33 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `PrepareAgentOutput`.
         """
-        return self._invoke(input, _models.PREPARE_AGENT, [], plugins)
 
+    def prepare_agent(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PrepareAgentOutput:
+        return self._invoke(
+            self._select_input(_models.PREPARE_AGENT, args, kwargs),
+            _models.PREPARE_AGENT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def prepare_flow(
-        self, input: PrepareFlowInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PrepareFlowInput | _models.PrepareFlowInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PrepareFlowOutput: ...
+
+    @_overload
+    def prepare_flow(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PrepareFlowInputDict],
     ) -> PrepareFlowOutput:
         """
         Prepares the `DRAFT` version of a flow so that it can be invoked. For
@@ -1847,8 +3206,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         in the Amazon Bedrock User Guide.
 
         Args:
-            input:
-                An instance of `PrepareFlowInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1858,10 +3215,33 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `PrepareFlowOutput`.
         """
-        return self._invoke(input, _models.PREPARE_FLOW, [], plugins)
 
+    def prepare_flow(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PrepareFlowOutput:
+        return self._invoke(
+            self._select_input(_models.PREPARE_FLOW, args, kwargs),
+            _models.PREPARE_FLOW,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_resource_policy(
-        self, input: PutResourcePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutResourcePolicyInput | _models.PutResourcePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutResourcePolicyOutput: ...
+
+    @_overload
+    def put_resource_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutResourcePolicyInputDict],
     ) -> PutResourcePolicyOutput:
         """
         Associates a resource policy with a knowledge base. A resource policy
@@ -1870,8 +3250,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         bases](https://docs.aws.amazon.com/bedrock/latest/userguide/kb-managed-cross-account.html).
 
         Args:
-            input:
-                An instance of `PutResourcePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1881,18 +3259,39 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `PutResourcePolicyOutput`.
         """
-        return self._invoke(input, _models.PUT_RESOURCE_POLICY, [], plugins)
 
+    def put_resource_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutResourcePolicyOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_RESOURCE_POLICY, args, kwargs),
+            _models.PUT_RESOURCE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def start_ingestion_job(
-        self, input: StartIngestionJobInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StartIngestionJobInput | _models.StartIngestionJobInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StartIngestionJobOutput: ...
+
+    @_overload
+    def start_ingestion_job(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartIngestionJobInputDict],
     ) -> StartIngestionJobOutput:
         """
         Begins a data ingestion job. Data sources are ingested into your
         knowledge base so that Large Language Models (LLMs) can use your data.
 
         Args:
-            input:
-                An instance of `StartIngestionJobInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1902,10 +3301,33 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `StartIngestionJobOutput`.
         """
-        return self._invoke(input, _models.START_INGESTION_JOB, [], plugins)
 
+    def start_ingestion_job(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StartIngestionJobOutput:
+        return self._invoke(
+            self._select_input(_models.START_INGESTION_JOB, args, kwargs),
+            _models.START_INGESTION_JOB,
+            [],
+            plugins,
+        )
+
+    @_overload
     def stop_ingestion_job(
-        self, input: StopIngestionJobInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StopIngestionJobInput | _models.StopIngestionJobInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StopIngestionJobOutput: ...
+
+    @_overload
+    def stop_ingestion_job(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StopIngestionJobInputDict],
     ) -> StopIngestionJobOutput:
         """
         Stops a currently running data ingestion job. You can send a
@@ -1913,8 +3335,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         you are ready.
 
         Args:
-            input:
-                An instance of `StopIngestionJobInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1924,10 +3344,33 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `StopIngestionJobOutput`.
         """
-        return self._invoke(input, _models.STOP_INGESTION_JOB, [], plugins)
 
+    def stop_ingestion_job(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StopIngestionJobOutput:
+        return self._invoke(
+            self._select_input(_models.STOP_INGESTION_JOB, args, kwargs),
+            _models.STOP_INGESTION_JOB,
+            [],
+            plugins,
+        )
+
+    @_overload
     def tag_resource(
-        self, input: TagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.TagResourceInput | _models.TagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> TagResourceOutput: ...
+
+    @_overload
+    def tag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.TagResourceInputDict],
     ) -> TagResourceOutput:
         """
         Associate tags with a resource. For more information, see [Tagging
@@ -1935,8 +3378,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         in the Amazon Bedrock User Guide.
 
         Args:
-            input:
-                An instance of `TagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1946,17 +3387,38 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `TagResourceOutput`.
         """
-        return self._invoke(input, _models.TAG_RESOURCE, [], plugins)
 
+    def tag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> TagResourceOutput:
+        return self._invoke(
+            self._select_input(_models.TAG_RESOURCE, args, kwargs),
+            _models.TAG_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def untag_resource(
-        self, input: UntagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UntagResourceInput | _models.UntagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UntagResourceOutput: ...
+
+    @_overload
+    def untag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UntagResourceInputDict],
     ) -> UntagResourceOutput:
         """
         Remove tags from a resource.
 
         Args:
-            input:
-                An instance of `UntagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1966,17 +3428,38 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `UntagResourceOutput`.
         """
-        return self._invoke(input, _models.UNTAG_RESOURCE, [], plugins)
 
+    def untag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UntagResourceOutput:
+        return self._invoke(
+            self._select_input(_models.UNTAG_RESOURCE, args, kwargs),
+            _models.UNTAG_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_agent(
-        self, input: UpdateAgentInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateAgentInput | _models.UpdateAgentInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateAgentOutput: ...
+
+    @_overload
+    def update_agent(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateAgentInputDict],
     ) -> UpdateAgentOutput:
         """
         Updates the configuration of an agent.
 
         Args:
-            input:
-                An instance of `UpdateAgentInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1986,17 +3469,39 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `UpdateAgentOutput`.
         """
-        return self._invoke(input, _models.UPDATE_AGENT, [], plugins)
 
+    def update_agent(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateAgentOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_AGENT, args, kwargs),
+            _models.UPDATE_AGENT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_agent_action_group(
-        self, input: UpdateAgentActionGroupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateAgentActionGroupInput
+        | _models.UpdateAgentActionGroupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateAgentActionGroupOutput: ...
+
+    @_overload
+    def update_agent_action_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateAgentActionGroupInputDict],
     ) -> UpdateAgentActionGroupOutput:
         """
         Updates the configuration for an action group for an agent.
 
         Args:
-            input:
-                An instance of `UpdateAgentActionGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2006,17 +3511,38 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `UpdateAgentActionGroupOutput`.
         """
-        return self._invoke(input, _models.UPDATE_AGENT_ACTION_GROUP, [], plugins)
 
+    def update_agent_action_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateAgentActionGroupOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_AGENT_ACTION_GROUP, args, kwargs),
+            _models.UPDATE_AGENT_ACTION_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_agent_alias(
-        self, input: UpdateAgentAliasInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateAgentAliasInput | _models.UpdateAgentAliasInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateAgentAliasOutput: ...
+
+    @_overload
+    def update_agent_alias(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateAgentAliasInputDict],
     ) -> UpdateAgentAliasOutput:
         """
         Updates configurations for an alias of an agent.
 
         Args:
-            input:
-                An instance of `UpdateAgentAliasInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2026,17 +3552,39 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `UpdateAgentAliasOutput`.
         """
-        return self._invoke(input, _models.UPDATE_AGENT_ALIAS, [], plugins)
 
+    def update_agent_alias(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateAgentAliasOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_AGENT_ALIAS, args, kwargs),
+            _models.UPDATE_AGENT_ALIAS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_agent_collaborator(
-        self, input: UpdateAgentCollaboratorInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateAgentCollaboratorInput
+        | _models.UpdateAgentCollaboratorInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateAgentCollaboratorOutput: ...
+
+    @_overload
+    def update_agent_collaborator(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateAgentCollaboratorInputDict],
     ) -> UpdateAgentCollaboratorOutput:
         """
         Updates an agent's collaborator.
 
         Args:
-            input:
-                An instance of `UpdateAgentCollaboratorInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2046,18 +3594,40 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `UpdateAgentCollaboratorOutput`.
         """
-        return self._invoke(input, _models.UPDATE_AGENT_COLLABORATOR, [], plugins)
 
+    def update_agent_collaborator(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateAgentCollaboratorOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_AGENT_COLLABORATOR, args, kwargs),
+            _models.UPDATE_AGENT_COLLABORATOR,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_agent_knowledge_base(
-        self, input: UpdateAgentKnowledgeBaseInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateAgentKnowledgeBaseInput
+        | _models.UpdateAgentKnowledgeBaseInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateAgentKnowledgeBaseOutput: ...
+
+    @_overload
+    def update_agent_knowledge_base(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateAgentKnowledgeBaseInputDict],
     ) -> UpdateAgentKnowledgeBaseOutput:
         """
         Updates the configuration for a knowledge base that has been associated
         with an agent.
 
         Args:
-            input:
-                An instance of `UpdateAgentKnowledgeBaseInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2067,10 +3637,33 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `UpdateAgentKnowledgeBaseOutput`.
         """
-        return self._invoke(input, _models.UPDATE_AGENT_KNOWLEDGE_BASE, [], plugins)
 
+    def update_agent_knowledge_base(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateAgentKnowledgeBaseOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_AGENT_KNOWLEDGE_BASE, args, kwargs),
+            _models.UPDATE_AGENT_KNOWLEDGE_BASE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_data_source(
-        self, input: UpdateDataSourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateDataSourceInput | _models.UpdateDataSourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateDataSourceOutput: ...
+
+    @_overload
+    def update_data_source(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateDataSourceInputDict],
     ) -> UpdateDataSourceOutput:
         """
         Updates the configurations for a data source connector.
@@ -2080,8 +3673,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
             source connector. Specify the existing `chunkingConfiguration`.
 
         Args:
-            input:
-                An instance of `UpdateDataSourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2091,10 +3682,33 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `UpdateDataSourceOutput`.
         """
-        return self._invoke(input, _models.UPDATE_DATA_SOURCE, [], plugins)
 
+    def update_data_source(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateDataSourceOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_DATA_SOURCE, args, kwargs),
+            _models.UPDATE_DATA_SOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_flow(
-        self, input: UpdateFlowInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateFlowInput | _models.UpdateFlowInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateFlowOutput: ...
+
+    @_overload
+    def update_flow(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateFlowInputDict],
     ) -> UpdateFlowOutput:
         """
         Modifies a flow. Include both fields that you want to keep and fields
@@ -2105,8 +3719,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         in the Amazon Bedrock User Guide.
 
         Args:
-            input:
-                An instance of `UpdateFlowInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2116,10 +3728,33 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `UpdateFlowOutput`.
         """
-        return self._invoke(input, _models.UPDATE_FLOW, [], plugins)
 
+    def update_flow(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateFlowOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_FLOW, args, kwargs),
+            _models.UPDATE_FLOW,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_flow_alias(
-        self, input: UpdateFlowAliasInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateFlowAliasInput | _models.UpdateFlowAliasInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateFlowAliasOutput: ...
+
+    @_overload
+    def update_flow_alias(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateFlowAliasInputDict],
     ) -> UpdateFlowAliasOutput:
         """
         Modifies the alias of a flow. Include both fields that you want to keep
@@ -2129,8 +3764,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         in the Amazon Bedrock User Guide.
 
         Args:
-            input:
-                An instance of `UpdateFlowAliasInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2140,10 +3773,34 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `UpdateFlowAliasOutput`.
         """
-        return self._invoke(input, _models.UPDATE_FLOW_ALIAS, [], plugins)
 
+    def update_flow_alias(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateFlowAliasOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_FLOW_ALIAS, args, kwargs),
+            _models.UPDATE_FLOW_ALIAS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_knowledge_base(
-        self, input: UpdateKnowledgeBaseInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateKnowledgeBaseInput
+        | _models.UpdateKnowledgeBaseInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateKnowledgeBaseOutput: ...
+
+    @_overload
+    def update_knowledge_base(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateKnowledgeBaseInputDict],
     ) -> UpdateKnowledgeBaseOutput:
         """
         Updates the configuration of a knowledge base with the fields that you
@@ -2165,8 +3822,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         request and copy the same configurations.
 
         Args:
-            input:
-                An instance of `UpdateKnowledgeBaseInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2176,10 +3831,33 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `UpdateKnowledgeBaseOutput`.
         """
-        return self._invoke(input, _models.UPDATE_KNOWLEDGE_BASE, [], plugins)
 
+    def update_knowledge_base(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateKnowledgeBaseOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_KNOWLEDGE_BASE, args, kwargs),
+            _models.UPDATE_KNOWLEDGE_BASE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_prompt(
-        self, input: UpdatePromptInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdatePromptInput | _models.UpdatePromptInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdatePromptOutput: ...
+
+    @_overload
+    def update_prompt(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdatePromptInputDict],
     ) -> UpdatePromptOutput:
         """
         Modifies a prompt in your prompt library. Include both fields that you
@@ -2191,8 +3869,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         in the Amazon Bedrock User Guide.
 
         Args:
-            input:
-                An instance of `UpdatePromptInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2202,12 +3878,34 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `UpdatePromptOutput`.
         """
-        return self._invoke(input, _models.UPDATE_PROMPT, [], plugins)
 
+    def update_prompt(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdatePromptOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_PROMPT, args, kwargs),
+            _models.UPDATE_PROMPT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_retrieval_instruction(
         self,
-        input: UpdateRetrievalInstructionInput,
+        request: _models.UpdateRetrievalInstructionInput
+        | _models.UpdateRetrievalInstructionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateRetrievalInstructionOutput: ...
+
+    @_overload
+    def update_retrieval_instruction(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateRetrievalInstructionInputDict],
     ) -> UpdateRetrievalInstructionOutput:
         """
         Updates the content of a retrieval instruction. The update is processed
@@ -2217,8 +3915,6 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         lastTransitionStatus is CREATING or UPDATING.
 
         Args:
-            input:
-                An instance of `UpdateRetrievalInstructionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2228,17 +3924,39 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `UpdateRetrievalInstructionOutput`.
         """
-        return self._invoke(input, _models.UPDATE_RETRIEVAL_INSTRUCTION, [], plugins)
 
+    def update_retrieval_instruction(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateRetrievalInstructionOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_RETRIEVAL_INSTRUCTION, args, kwargs),
+            _models.UPDATE_RETRIEVAL_INSTRUCTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def validate_flow_definition(
-        self, input: ValidateFlowDefinitionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ValidateFlowDefinitionInput
+        | _models.ValidateFlowDefinitionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ValidateFlowDefinitionOutput: ...
+
+    @_overload
+    def validate_flow_definition(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ValidateFlowDefinitionInputDict],
     ) -> ValidateFlowDefinitionOutput:
         """
         Validates the definition of a flow.
 
         Args:
-            input:
-                An instance of `ValidateFlowDefinitionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2248,7 +3966,16 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         Returns:
             An instance of `ValidateFlowDefinitionOutput`.
         """
-        return self._invoke(input, _models.VALIDATE_FLOW_DEFINITION, [], plugins)
+
+    def validate_flow_definition(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ValidateFlowDefinitionOutput:
+        return self._invoke(
+            self._select_input(_models.VALIDATE_FLOW_DEFINITION, args, kwargs),
+            _models.VALIDATE_FLOW_DEFINITION,
+            [],
+            plugins,
+        )
 
     def _new_config(self) -> BedrockAgentConfig:
         return BedrockAgentConfig.resolve()

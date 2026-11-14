@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import cast
+from typing import Unpack as _Unpack, cast, overload as _overload
 
 from smithy_aws_core.aio.identity.chain import AsyncIdentityChain
 from smithy_aws_core.config.types import ConfigSource
@@ -20,51 +20,28 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from ..models import (
-        AddPermissionInput,
         AddPermissionOutput,
-        CancelMessageMoveTaskInput,
         CancelMessageMoveTaskOutput,
-        ChangeMessageVisibilityBatchInput,
         ChangeMessageVisibilityBatchOutput,
-        ChangeMessageVisibilityInput,
         ChangeMessageVisibilityOutput,
-        CreateQueueInput,
         CreateQueueOutput,
-        DeleteMessageBatchInput,
         DeleteMessageBatchOutput,
-        DeleteMessageInput,
         DeleteMessageOutput,
-        DeleteQueueInput,
         DeleteQueueOutput,
-        GetQueueAttributesInput,
         GetQueueAttributesOutput,
-        GetQueueUrlInput,
         GetQueueUrlOutput,
-        ListDeadLetterSourceQueuesInput,
         ListDeadLetterSourceQueuesOutput,
-        ListMessageMoveTasksInput,
         ListMessageMoveTasksOutput,
-        ListQueueTagsInput,
         ListQueueTagsOutput,
-        ListQueuesInput,
         ListQueuesOutput,
-        PurgeQueueInput,
         PurgeQueueOutput,
-        ReceiveMessageInput,
         ReceiveMessageOutput,
-        RemovePermissionInput,
         RemovePermissionOutput,
-        SendMessageBatchInput,
         SendMessageBatchOutput,
-        SendMessageInput,
         SendMessageOutput,
-        SetQueueAttributesInput,
         SetQueueAttributesOutput,
-        StartMessageMoveTaskInput,
         StartMessageMoveTaskOutput,
-        TagQueueInput,
         TagQueueOutput,
-        UntagQueueInput,
         UntagQueueOutput,
     )
 
@@ -120,10 +97,24 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
         Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#sqs_region)
     """
 
-    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
+    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
 
+    @_overload
     async def add_permission(
-        self, input: AddPermissionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.AddPermissionInput | _models.AddPermissionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AddPermissionOutput: ...
+
+    @_overload
+    async def add_permission(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AddPermissionInputDict],
     ) -> AddPermissionOutput:
         """
         Adds a permission to a queue for a specific
@@ -161,8 +152,6 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
             in the *Amazon SQS Developer Guide*.
 
         Args:
-            input:
-                An instance of `AddPermissionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -172,10 +161,34 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
         Returns:
             An instance of `AddPermissionOutput`.
         """
-        return await self._invoke(input, _models.ADD_PERMISSION, [], plugins)
 
+    async def add_permission(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AddPermissionOutput:
+        return await self._invoke(
+            self._select_input(_models.ADD_PERMISSION, args, kwargs),
+            _models.ADD_PERMISSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def cancel_message_move_task(
-        self, input: CancelMessageMoveTaskInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CancelMessageMoveTaskInput
+        | _models.CancelMessageMoveTaskInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CancelMessageMoveTaskOutput: ...
+
+    @_overload
+    async def cancel_message_move_task(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CancelMessageMoveTaskInputDict],
     ) -> CancelMessageMoveTaskOutput:
         """
         Cancels a specified message movement task. A message movement can only
@@ -196,8 +209,6 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
             given time.
 
         Args:
-            input:
-                An instance of `CancelMessageMoveTaskInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -207,10 +218,34 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
         Returns:
             An instance of `CancelMessageMoveTaskOutput`.
         """
-        return await self._invoke(input, _models.CANCEL_MESSAGE_MOVE_TASK, [], plugins)
 
+    async def cancel_message_move_task(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CancelMessageMoveTaskOutput:
+        return await self._invoke(
+            self._select_input(_models.CANCEL_MESSAGE_MOVE_TASK, args, kwargs),
+            _models.CANCEL_MESSAGE_MOVE_TASK,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def change_message_visibility(
-        self, input: ChangeMessageVisibilityInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ChangeMessageVisibilityInput
+        | _models.ChangeMessageVisibilityInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ChangeMessageVisibilityOutput: ...
+
+    @_overload
+    async def change_message_visibility(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ChangeMessageVisibilityInputDict],
     ) -> ChangeMessageVisibilityOutput:
         """
         Changes the visibility timeout of a specified message in a queue to a
@@ -276,8 +311,6 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
             `ChangeMessageVisibility` action) the next time the message is received.
 
         Args:
-            input:
-                An instance of `ChangeMessageVisibilityInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -287,12 +320,34 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
         Returns:
             An instance of `ChangeMessageVisibilityOutput`.
         """
-        return await self._invoke(input, _models.CHANGE_MESSAGE_VISIBILITY, [], plugins)
 
+    async def change_message_visibility(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ChangeMessageVisibilityOutput:
+        return await self._invoke(
+            self._select_input(_models.CHANGE_MESSAGE_VISIBILITY, args, kwargs),
+            _models.CHANGE_MESSAGE_VISIBILITY,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def change_message_visibility_batch(
         self,
-        input: ChangeMessageVisibilityBatchInput,
+        request: _models.ChangeMessageVisibilityBatchInput
+        | _models.ChangeMessageVisibilityBatchInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ChangeMessageVisibilityBatchOutput: ...
+
+    @_overload
+    async def change_message_visibility_batch(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ChangeMessageVisibilityBatchInputDict],
     ) -> ChangeMessageVisibilityBatchOutput:
         """
         Changes the visibility timeout of multiple messages. This is a batch
@@ -307,8 +362,6 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
             call returns an HTTP status code of `200`.
 
         Args:
-            input:
-                An instance of `ChangeMessageVisibilityBatchInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -318,12 +371,33 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
         Returns:
             An instance of `ChangeMessageVisibilityBatchOutput`.
         """
+
+    async def change_message_visibility_batch(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ChangeMessageVisibilityBatchOutput:
         return await self._invoke(
-            input, _models.CHANGE_MESSAGE_VISIBILITY_BATCH, [], plugins
+            self._select_input(_models.CHANGE_MESSAGE_VISIBILITY_BATCH, args, kwargs),
+            _models.CHANGE_MESSAGE_VISIBILITY_BATCH,
+            [],
+            plugins,
         )
 
+    @_overload
     async def create_queue(
-        self, input: CreateQueueInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateQueueInput | _models.CreateQueueInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateQueueOutput: ...
+
+    @_overload
+    async def create_queue(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateQueueInputDict],
     ) -> CreateQueueOutput:
         """
         Creates a new standard or FIFO queue. You can pass one or more
@@ -382,8 +456,6 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
             in the *Amazon SQS Developer Guide*.
 
         Args:
-            input:
-                An instance of `CreateQueueInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -393,10 +465,33 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
         Returns:
             An instance of `CreateQueueOutput`.
         """
-        return await self._invoke(input, _models.CREATE_QUEUE, [], plugins)
 
+    async def create_queue(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateQueueOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_QUEUE, args, kwargs),
+            _models.CREATE_QUEUE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_message(
-        self, input: DeleteMessageInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteMessageInput | _models.DeleteMessageInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteMessageOutput: ...
+
+    @_overload
+    async def delete_message(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteMessageInputDict],
     ) -> DeleteMessageOutput:
         """
         Deletes the specified message from the specified queue. To select the
@@ -425,8 +520,6 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
             more than once does not cause issues.
 
         Args:
-            input:
-                An instance of `DeleteMessageInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -436,10 +529,33 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
         Returns:
             An instance of `DeleteMessageOutput`.
         """
-        return await self._invoke(input, _models.DELETE_MESSAGE, [], plugins)
 
+    async def delete_message(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteMessageOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_MESSAGE, args, kwargs),
+            _models.DELETE_MESSAGE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_message_batch(
-        self, input: DeleteMessageBatchInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteMessageBatchInput | _models.DeleteMessageBatchInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteMessageBatchOutput: ...
+
+    @_overload
+    async def delete_message_batch(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteMessageBatchInputDict],
     ) -> DeleteMessageBatchOutput:
         """
         Deletes up to ten messages from the specified queue. This is a batch
@@ -452,8 +568,6 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
             call returns an HTTP status code of `200`.
 
         Args:
-            input:
-                An instance of `DeleteMessageBatchInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -463,10 +577,33 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
         Returns:
             An instance of `DeleteMessageBatchOutput`.
         """
-        return await self._invoke(input, _models.DELETE_MESSAGE_BATCH, [], plugins)
 
+    async def delete_message_batch(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteMessageBatchOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_MESSAGE_BATCH, args, kwargs),
+            _models.DELETE_MESSAGE_BATCH,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_queue(
-        self, input: DeleteQueueInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteQueueInput | _models.DeleteQueueInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteQueueOutput: ...
+
+    @_overload
+    async def delete_queue(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteQueueInputDict],
     ) -> DeleteQueueOutput:
         """
         Deletes the queue specified by the `QueueUrl`, regardless of the
@@ -493,8 +630,6 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
             The delete operation uses the HTTP `GET` verb.
 
         Args:
-            input:
-                An instance of `DeleteQueueInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -504,10 +639,33 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
         Returns:
             An instance of `DeleteQueueOutput`.
         """
-        return await self._invoke(input, _models.DELETE_QUEUE, [], plugins)
 
+    async def delete_queue(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteQueueOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_QUEUE, args, kwargs),
+            _models.DELETE_QUEUE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_queue_attributes(
-        self, input: GetQueueAttributesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetQueueAttributesInput | _models.GetQueueAttributesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetQueueAttributesOutput: ...
+
+    @_overload
+    async def get_queue_attributes(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetQueueAttributesInputDict],
     ) -> GetQueueAttributesOutput:
         """
         Gets attributes for the specified queue.
@@ -518,8 +676,6 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
             you can check whether `QueueName` ends with the `.fifo` suffix.
 
         Args:
-            input:
-                An instance of `GetQueueAttributesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -529,10 +685,33 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
         Returns:
             An instance of `GetQueueAttributesOutput`.
         """
-        return await self._invoke(input, _models.GET_QUEUE_ATTRIBUTES, [], plugins)
 
+    async def get_queue_attributes(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetQueueAttributesOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_QUEUE_ATTRIBUTES, args, kwargs),
+            _models.GET_QUEUE_ATTRIBUTES,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_queue_url(
-        self, input: GetQueueUrlInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetQueueUrlInput | _models.GetQueueUrlInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetQueueUrlOutput: ...
+
+    @_overload
+    async def get_queue_url(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetQueueUrlInputDict],
     ) -> GetQueueUrlOutput:
         """
         The `GetQueueUrl` API returns the URL of an existing Amazon SQS queue.
@@ -549,8 +728,6 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
         in the *Amazon SQS Developer Guide*.
 
         Args:
-            input:
-                An instance of `GetQueueUrlInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -560,12 +737,34 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
         Returns:
             An instance of `GetQueueUrlOutput`.
         """
-        return await self._invoke(input, _models.GET_QUEUE_URL, [], plugins)
 
+    async def get_queue_url(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetQueueUrlOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_QUEUE_URL, args, kwargs),
+            _models.GET_QUEUE_URL,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_dead_letter_source_queues(
         self,
-        input: ListDeadLetterSourceQueuesInput,
+        request: _models.ListDeadLetterSourceQueuesInput
+        | _models.ListDeadLetterSourceQueuesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListDeadLetterSourceQueuesOutput: ...
+
+    @_overload
+    async def list_dead_letter_source_queues(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListDeadLetterSourceQueuesInputDict],
     ) -> ListDeadLetterSourceQueuesOutput:
         """
         Returns a list of your queues that have the `RedrivePolicy` queue
@@ -586,8 +785,6 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
         in the *Amazon SQS Developer Guide*.
 
         Args:
-            input:
-                An instance of `ListDeadLetterSourceQueuesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -597,12 +794,34 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
         Returns:
             An instance of `ListDeadLetterSourceQueuesOutput`.
         """
+
+    async def list_dead_letter_source_queues(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListDeadLetterSourceQueuesOutput:
         return await self._invoke(
-            input, _models.LIST_DEAD_LETTER_SOURCE_QUEUES, [], plugins
+            self._select_input(_models.LIST_DEAD_LETTER_SOURCE_QUEUES, args, kwargs),
+            _models.LIST_DEAD_LETTER_SOURCE_QUEUES,
+            [],
+            plugins,
         )
 
+    @_overload
     async def list_message_move_tasks(
-        self, input: ListMessageMoveTasksInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListMessageMoveTasksInput
+        | _models.ListMessageMoveTasksInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListMessageMoveTasksOutput: ...
+
+    @_overload
+    async def list_message_move_tasks(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListMessageMoveTasksInputDict],
     ) -> ListMessageMoveTasksOutput:
         """
         Gets the most recent message movement tasks (up to 10) under a specific
@@ -621,8 +840,6 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
             given time.
 
         Args:
-            input:
-                An instance of `ListMessageMoveTasksInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -632,10 +849,33 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
         Returns:
             An instance of `ListMessageMoveTasksOutput`.
         """
-        return await self._invoke(input, _models.LIST_MESSAGE_MOVE_TASKS, [], plugins)
 
+    async def list_message_move_tasks(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListMessageMoveTasksOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_MESSAGE_MOVE_TASKS, args, kwargs),
+            _models.LIST_MESSAGE_MOVE_TASKS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_queues(
-        self, input: ListQueuesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListQueuesInput | _models.ListQueuesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListQueuesOutput: ...
+
+    @_overload
+    async def list_queues(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListQueuesInputDict],
     ) -> ListQueuesOutput:
         """
         Returns a list of your queues in the current region. The response
@@ -658,8 +898,6 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
             in the *Amazon SQS Developer Guide*.
 
         Args:
-            input:
-                An instance of `ListQueuesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -669,10 +907,33 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
         Returns:
             An instance of `ListQueuesOutput`.
         """
-        return await self._invoke(input, _models.LIST_QUEUES, [], plugins)
 
+    async def list_queues(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListQueuesOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_QUEUES, args, kwargs),
+            _models.LIST_QUEUES,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_queue_tags(
-        self, input: ListQueueTagsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListQueueTagsInput | _models.ListQueueTagsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListQueueTagsOutput: ...
+
+    @_overload
+    async def list_queue_tags(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListQueueTagsInputDict],
     ) -> ListQueueTagsOutput:
         """
         List all cost allocation tags added to the specified Amazon SQS queue.
@@ -687,8 +948,6 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
             in the *Amazon SQS Developer Guide*.
 
         Args:
-            input:
-                An instance of `ListQueueTagsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -698,10 +957,33 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
         Returns:
             An instance of `ListQueueTagsOutput`.
         """
-        return await self._invoke(input, _models.LIST_QUEUE_TAGS, [], plugins)
 
+    async def list_queue_tags(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListQueueTagsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_QUEUE_TAGS, args, kwargs),
+            _models.LIST_QUEUE_TAGS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def purge_queue(
-        self, input: PurgeQueueInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PurgeQueueInput | _models.PurgeQueueInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PurgeQueueOutput: ...
+
+    @_overload
+    async def purge_queue(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PurgeQueueInputDict],
     ) -> PurgeQueueOutput:
         """
         Deletes available messages in a queue (including in-flight messages)
@@ -721,8 +1003,6 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
         deleted while the queue is being purged.
 
         Args:
-            input:
-                An instance of `PurgeQueueInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -732,10 +1012,33 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
         Returns:
             An instance of `PurgeQueueOutput`.
         """
-        return await self._invoke(input, _models.PURGE_QUEUE, [], plugins)
 
+    async def purge_queue(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PurgeQueueOutput:
+        return await self._invoke(
+            self._select_input(_models.PURGE_QUEUE, args, kwargs),
+            _models.PURGE_QUEUE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def receive_message(
-        self, input: ReceiveMessageInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ReceiveMessageInput | _models.ReceiveMessageInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ReceiveMessageOutput: ...
+
+    @_overload
+    async def receive_message(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ReceiveMessageInputDict],
     ) -> ReceiveMessageOutput:
         """
         Retrieves one or more messages (up to 10), from the specified queue.
@@ -785,8 +1088,6 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
             can handle new attributes gracefully.
 
         Args:
-            input:
-                An instance of `ReceiveMessageInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -796,10 +1097,33 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
         Returns:
             An instance of `ReceiveMessageOutput`.
         """
-        return await self._invoke(input, _models.RECEIVE_MESSAGE, [], plugins)
 
+    async def receive_message(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ReceiveMessageOutput:
+        return await self._invoke(
+            self._select_input(_models.RECEIVE_MESSAGE, args, kwargs),
+            _models.RECEIVE_MESSAGE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def remove_permission(
-        self, input: RemovePermissionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RemovePermissionInput | _models.RemovePermissionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RemovePermissionOutput: ...
+
+    @_overload
+    async def remove_permission(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RemovePermissionInputDict],
     ) -> RemovePermissionOutput:
         """
         Revokes any permissions in the queue policy that matches the specified
@@ -818,8 +1142,6 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
             `SetQueueAttributes` actions in your IAM policy.
 
         Args:
-            input:
-                An instance of `RemovePermissionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -829,10 +1151,33 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
         Returns:
             An instance of `RemovePermissionOutput`.
         """
-        return await self._invoke(input, _models.REMOVE_PERMISSION, [], plugins)
 
+    async def remove_permission(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RemovePermissionOutput:
+        return await self._invoke(
+            self._select_input(_models.REMOVE_PERMISSION, args, kwargs),
+            _models.REMOVE_PERMISSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def send_message(
-        self, input: SendMessageInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.SendMessageInput | _models.SendMessageInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> SendMessageOutput: ...
+
+    @_overload
+    async def send_message(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SendMessageInputDict],
     ) -> SendMessageOutput:
         """
         Delivers a message to the specified queue.
@@ -852,8 +1197,6 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
             exception.
 
         Args:
-            input:
-                An instance of `SendMessageInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -863,10 +1206,33 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
         Returns:
             An instance of `SendMessageOutput`.
         """
-        return await self._invoke(input, _models.SEND_MESSAGE, [], plugins)
 
+    async def send_message(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SendMessageOutput:
+        return await self._invoke(
+            self._select_input(_models.SEND_MESSAGE, args, kwargs),
+            _models.SEND_MESSAGE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def send_message_batch(
-        self, input: SendMessageBatchInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.SendMessageBatchInput | _models.SendMessageBatchInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> SendMessageBatchOutput: ...
+
+    @_overload
+    async def send_message_batch(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SendMessageBatchInputDict],
     ) -> SendMessageBatchOutput:
         """
         You can use `SendMessageBatch` to send up to 10 messages to the
@@ -902,8 +1268,6 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
         SQS uses the default value for the queue.
 
         Args:
-            input:
-                An instance of `SendMessageBatchInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -913,10 +1277,33 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
         Returns:
             An instance of `SendMessageBatchOutput`.
         """
-        return await self._invoke(input, _models.SEND_MESSAGE_BATCH, [], plugins)
 
+    async def send_message_batch(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SendMessageBatchOutput:
+        return await self._invoke(
+            self._select_input(_models.SEND_MESSAGE_BATCH, args, kwargs),
+            _models.SEND_MESSAGE_BATCH,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def set_queue_attributes(
-        self, input: SetQueueAttributesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.SetQueueAttributesInput | _models.SetQueueAttributesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> SetQueueAttributesOutput: ...
+
+    @_overload
+    async def set_queue_attributes(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SetQueueAttributesInputDict],
     ) -> SetQueueAttributesOutput:
         """
         Sets the value of one or more queue attributes, like a policy. When you
@@ -942,8 +1329,6 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
             `SetQueueAttributes` actions in your IAM policy.
 
         Args:
-            input:
-                An instance of `SetQueueAttributesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -953,10 +1338,34 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
         Returns:
             An instance of `SetQueueAttributesOutput`.
         """
-        return await self._invoke(input, _models.SET_QUEUE_ATTRIBUTES, [], plugins)
 
+    async def set_queue_attributes(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SetQueueAttributesOutput:
+        return await self._invoke(
+            self._select_input(_models.SET_QUEUE_ATTRIBUTES, args, kwargs),
+            _models.SET_QUEUE_ATTRIBUTES,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def start_message_move_task(
-        self, input: StartMessageMoveTaskInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StartMessageMoveTaskInput
+        | _models.StartMessageMoveTaskInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StartMessageMoveTaskOutput: ...
+
+    @_overload
+    async def start_message_move_task(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartMessageMoveTaskInputDict],
     ) -> StartMessageMoveTaskOutput:
         """
         Starts an asynchronous task to move messages from a specified source
@@ -979,8 +1388,6 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
             given time.
 
         Args:
-            input:
-                An instance of `StartMessageMoveTaskInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -990,10 +1397,33 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
         Returns:
             An instance of `StartMessageMoveTaskOutput`.
         """
-        return await self._invoke(input, _models.START_MESSAGE_MOVE_TASK, [], plugins)
 
+    async def start_message_move_task(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StartMessageMoveTaskOutput:
+        return await self._invoke(
+            self._select_input(_models.START_MESSAGE_MOVE_TASK, args, kwargs),
+            _models.START_MESSAGE_MOVE_TASK,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def tag_queue(
-        self, input: TagQueueInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.TagQueueInput | _models.TagQueueInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> TagQueueOutput: ...
+
+    @_overload
+    async def tag_queue(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.TagQueueInputDict],
     ) -> TagQueueOutput:
         """
         Add cost allocation tags to the specified Amazon SQS queue. For an
@@ -1024,8 +1454,6 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
             in the *Amazon SQS Developer Guide*.
 
         Args:
-            input:
-                An instance of `TagQueueInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1035,10 +1463,33 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
         Returns:
             An instance of `TagQueueOutput`.
         """
-        return await self._invoke(input, _models.TAG_QUEUE, [], plugins)
 
+    async def tag_queue(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> TagQueueOutput:
+        return await self._invoke(
+            self._select_input(_models.TAG_QUEUE, args, kwargs),
+            _models.TAG_QUEUE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def untag_queue(
-        self, input: UntagQueueInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UntagQueueInput | _models.UntagQueueInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UntagQueueOutput: ...
+
+    @_overload
+    async def untag_queue(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UntagQueueInputDict],
     ) -> UntagQueueOutput:
         """
         Remove cost allocation tags from the specified Amazon SQS queue. For an
@@ -1053,8 +1504,6 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
             in the *Amazon SQS Developer Guide*.
 
         Args:
-            input:
-                An instance of `UntagQueueInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1064,7 +1513,16 @@ class AsyncSQSClient(AsyncClient[AsyncSQSConfig]):
         Returns:
             An instance of `UntagQueueOutput`.
         """
-        return await self._invoke(input, _models.UNTAG_QUEUE, [], plugins)
+
+    async def untag_queue(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UntagQueueOutput:
+        return await self._invoke(
+            self._select_input(_models.UNTAG_QUEUE, args, kwargs),
+            _models.UNTAG_QUEUE,
+            [],
+            plugins,
+        )
 
     async def _new_config(self) -> AsyncSQSConfig:
         return await AsyncSQSConfig.resolve()

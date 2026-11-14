@@ -243,7 +243,8 @@ docs-generate:
 	uv run python scripts/docs/generate_nav.py
 
 docs: docs-generate
-	uv run zensical build
+	# The rendered-page cache does not track Python sources read by mkdocstrings.
+	uv run zensical build --clean
 
 docs-serve:
 	@[ -d site ] || $(MAKE) docs

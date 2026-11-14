@@ -642,9 +642,9 @@ class _AsyncS3ConfigOverrides(AsyncAwsConfigOverrides, total=False):
     disable_s3_express_session_auth: bool | None
     use_fips_endpoint: bool | None
     use_dualstack_endpoint: bool | None
+    disable_host_prefix_injection: bool | None
     request_checksum_calculation: RequestChecksumCalculation | None
     response_checksum_validation: ResponseChecksumValidation | None
-    disable_host_prefix_injection: bool | None
 
 
 @dataclass(kw_only=True, repr=False, init=False)
@@ -713,6 +713,12 @@ class AsyncS3Config(AsyncAwsConfig):
     not support dual-stack, dispatching the request MAY return an error.
     """
 
+    disable_host_prefix_injection: bool | None = None
+    """
+    Whether to skip prepending operations' modeled host prefixes to the
+    endpoint host.
+    """
+
     aws_credentials_identity_resolver: (
         AsyncIdentityResolver[AWSCredentialsIdentity, AWSIdentityProperties] | None
     ) = None
@@ -761,12 +767,6 @@ class AsyncS3Config(AsyncAwsConfig):
     end, and a mismatch raises ``ChecksumMismatchError``.
     """
 
-    disable_host_prefix_injection: bool | None = None
-    """
-    Whether to skip prepending operations' modeled host prefixes to the
-    endpoint host.
-    """
-
     _FIELDS: ClassVar[dict[str, FieldSpec]] = {
         "force_path_style": FieldSpec(default=None),
         "use_arn_region": FieldSpec(default=None, resolver=_resolve_use_arn_region),
@@ -783,6 +783,7 @@ class AsyncS3Config(AsyncAwsConfig):
         "use_dualstack_endpoint": FieldSpec(
             default=None, resolver=resolve_use_dualstack_endpoint_program
         ),
+        "disable_host_prefix_injection": FieldSpec(default=None),
         "aws_credentials_identity_resolver": FieldSpec(default=None),
         "region": FieldSpec(default=None),
         "aws_access_key_id": FieldSpec(default=None),
@@ -800,7 +801,6 @@ class AsyncS3Config(AsyncAwsConfig):
             resolver=resolve_response_checksum_validation_program,
             validator=validate_response_checksum_validation,
         ),
-        "disable_host_prefix_injection": FieldSpec(default=None),
         **AsyncAwsConfig._FIELDS,
         "endpoint_uri": FieldSpec(
             default=None, resolver=EndpointUriResolver("s3").program

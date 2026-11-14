@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import cast
+from typing import Unpack as _Unpack, cast, overload as _overload
 
 from smithy_aws_core.aio.identity.chain import AsyncIdentityChain
 from smithy_aws_core.config.types import ConfigSource
@@ -20,31 +20,18 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from ..models import (
-        CreateBearerTokenInput,
         CreateBearerTokenOutput,
-        CreateOAuth2TokenInput,
         CreateOAuth2TokenOutput,
-        CreateOAuth2TokenWithIAMInput,
         CreateOAuth2TokenWithIAMOutput,
-        CreateOAuth2TokenWithTokenExchangeInput,
         CreateOAuth2TokenWithTokenExchangeOutput,
-        DeleteConsoleAuthorizationConfigurationInput,
         DeleteConsoleAuthorizationConfigurationOutput,
-        DeleteResourcePermissionStatementInput,
         DeleteResourcePermissionStatementOutput,
-        GetConsoleAuthorizationConfigurationInput,
         GetConsoleAuthorizationConfigurationOutput,
-        GetResourcePolicyInput,
         GetResourcePolicyOutput,
-        IntrospectOAuth2TokenWithIAMInput,
         IntrospectOAuth2TokenWithIAMOutput,
-        ListResourcePermissionStatementsInput,
         ListResourcePermissionStatementsOutput,
-        PutConsoleAuthorizationConfigurationInput,
         PutConsoleAuthorizationConfigurationOutput,
-        PutResourcePermissionStatementInput,
         PutResourcePermissionStatementOutput,
-        RevokeOAuth2TokenWithIAMInput,
         RevokeOAuth2TokenWithIAMOutput,
     )
 
@@ -58,10 +45,24 @@ class AsyncSigninClient(AsyncClient[AsyncSigninConfig]):
     2.0, providing secure token exchange and refresh capabilities.
     """
 
-    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
+    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
 
+    @_overload
     async def create_bearer_token(
-        self, input: CreateBearerTokenInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateBearerTokenInput | _models.CreateBearerTokenInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateBearerTokenOutput: ...
+
+    @_overload
+    async def create_bearer_token(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateBearerTokenInputDict],
     ) -> CreateBearerTokenOutput:
         """
         Creates a bearer token that represents your IAM credentials and can be
@@ -69,8 +70,6 @@ class AsyncSigninClient(AsyncClient[AsyncSigninConfig]):
         for 12 hours.
 
         Args:
-            input:
-                An instance of `CreateBearerTokenInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -80,18 +79,39 @@ class AsyncSigninClient(AsyncClient[AsyncSigninConfig]):
         Returns:
             An instance of `CreateBearerTokenOutput`.
         """
-        return await self._invoke(input, _models.CREATE_BEARER_TOKEN, [], plugins)
 
+    async def create_bearer_token(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateBearerTokenOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_BEARER_TOKEN, args, kwargs),
+            _models.CREATE_BEARER_TOKEN,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_o_auth2_token(
-        self, input: CreateOAuth2TokenInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateOAuth2TokenInput | _models.CreateOAuth2TokenInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateOAuth2TokenOutput: ...
+
+    @_overload
+    async def create_o_auth2_token(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateOAuth2TokenInputDict],
     ) -> CreateOAuth2TokenOutput:
         """
         Exchanges an authorization code or refresh token for an OAuth 2.0 access
         token and refresh token.
 
         Args:
-            input:
-                An instance of `CreateOAuth2TokenInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -101,18 +121,40 @@ class AsyncSigninClient(AsyncClient[AsyncSigninConfig]):
         Returns:
             An instance of `CreateOAuth2TokenOutput`.
         """
-        return await self._invoke(input, _models.CREATE_O_AUTH2_TOKEN, [], plugins)
 
+    async def create_o_auth2_token(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateOAuth2TokenOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_O_AUTH2_TOKEN, args, kwargs),
+            _models.CREATE_O_AUTH2_TOKEN,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_o_auth2_token_with_iam(
-        self, input: CreateOAuth2TokenWithIAMInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateOAuth2TokenWithIAMInput
+        | _models.CreateOAuth2TokenWithIAMInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateOAuth2TokenWithIAMOutput: ...
+
+    @_overload
+    async def create_o_auth2_token_with_iam(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateOAuth2TokenWithIAMInputDict],
     ) -> CreateOAuth2TokenWithIAMOutput:
         """
         Exchanges client credentials for an OAuth 2.0 access token scoped to a
         resource, which you can use to access AWS services from applications.
 
         Args:
-            input:
-                An instance of `CreateOAuth2TokenWithIAMInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -122,22 +164,40 @@ class AsyncSigninClient(AsyncClient[AsyncSigninConfig]):
         Returns:
             An instance of `CreateOAuth2TokenWithIAMOutput`.
         """
+
+    async def create_o_auth2_token_with_iam(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateOAuth2TokenWithIAMOutput:
         return await self._invoke(
-            input, _models.CREATE_O_AUTH2_TOKEN_WITH_IAM, [], plugins
+            self._select_input(_models.CREATE_O_AUTH2_TOKEN_WITH_IAM, args, kwargs),
+            _models.CREATE_O_AUTH2_TOKEN_WITH_IAM,
+            [],
+            plugins,
         )
 
+    @_overload
     async def create_o_auth2_token_with_token_exchange(
         self,
-        input: CreateOAuth2TokenWithTokenExchangeInput,
+        request: _models.CreateOAuth2TokenWithTokenExchangeInput
+        | _models.CreateOAuth2TokenWithTokenExchangeInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateOAuth2TokenWithTokenExchangeOutput: ...
+
+    @_overload
+    async def create_o_auth2_token_with_token_exchange(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateOAuth2TokenWithTokenExchangeInputDict],
     ) -> CreateOAuth2TokenWithTokenExchangeOutput:
         """
         Exchanges a supported token for an OAuth 2.0 access token scoped to a
         resource, which you can use to access AWS services from applications.
 
         Args:
-            input:
-                An instance of `CreateOAuth2TokenWithTokenExchangeInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -147,22 +207,42 @@ class AsyncSigninClient(AsyncClient[AsyncSigninConfig]):
         Returns:
             An instance of `CreateOAuth2TokenWithTokenExchangeOutput`.
         """
+
+    async def create_o_auth2_token_with_token_exchange(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateOAuth2TokenWithTokenExchangeOutput:
         return await self._invoke(
-            input, _models.CREATE_O_AUTH2_TOKEN_WITH_TOKEN_EXCHANGE, [], plugins
+            self._select_input(
+                _models.CREATE_O_AUTH2_TOKEN_WITH_TOKEN_EXCHANGE, args, kwargs
+            ),
+            _models.CREATE_O_AUTH2_TOKEN_WITH_TOKEN_EXCHANGE,
+            [],
+            plugins,
         )
 
+    @_overload
     async def delete_console_authorization_configuration(
         self,
-        input: DeleteConsoleAuthorizationConfigurationInput,
+        request: _models.DeleteConsoleAuthorizationConfigurationInput
+        | _models.DeleteConsoleAuthorizationConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteConsoleAuthorizationConfigurationOutput: ...
+
+    @_overload
+    async def delete_console_authorization_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteConsoleAuthorizationConfigurationInputDict],
     ) -> DeleteConsoleAuthorizationConfigurationOutput:
         """
         Delete console authorization configuration with automatic scope
         detection
 
         Args:
-            input:
-                An instance of `DeleteConsoleAuthorizationConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -172,22 +252,42 @@ class AsyncSigninClient(AsyncClient[AsyncSigninConfig]):
         Returns:
             An instance of `DeleteConsoleAuthorizationConfigurationOutput`.
         """
+
+    async def delete_console_authorization_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteConsoleAuthorizationConfigurationOutput:
         return await self._invoke(
-            input, _models.DELETE_CONSOLE_AUTHORIZATION_CONFIGURATION, [], plugins
+            self._select_input(
+                _models.DELETE_CONSOLE_AUTHORIZATION_CONFIGURATION, args, kwargs
+            ),
+            _models.DELETE_CONSOLE_AUTHORIZATION_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def delete_resource_permission_statement(
         self,
-        input: DeleteResourcePermissionStatementInput,
+        request: _models.DeleteResourcePermissionStatementInput
+        | _models.DeleteResourcePermissionStatementInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteResourcePermissionStatementOutput: ...
+
+    @_overload
+    async def delete_resource_permission_statement(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteResourcePermissionStatementInputDict],
     ) -> DeleteResourcePermissionStatementOutput:
         """
         Remove a permission statement from the account's SignIn resource-based
         policy
 
         Args:
-            input:
-                An instance of `DeleteResourcePermissionStatementInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -197,21 +297,41 @@ class AsyncSigninClient(AsyncClient[AsyncSigninConfig]):
         Returns:
             An instance of `DeleteResourcePermissionStatementOutput`.
         """
+
+    async def delete_resource_permission_statement(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteResourcePermissionStatementOutput:
         return await self._invoke(
-            input, _models.DELETE_RESOURCE_PERMISSION_STATEMENT, [], plugins
+            self._select_input(
+                _models.DELETE_RESOURCE_PERMISSION_STATEMENT, args, kwargs
+            ),
+            _models.DELETE_RESOURCE_PERMISSION_STATEMENT,
+            [],
+            plugins,
         )
 
+    @_overload
     async def get_console_authorization_configuration(
         self,
-        input: GetConsoleAuthorizationConfigurationInput,
+        request: _models.GetConsoleAuthorizationConfigurationInput
+        | _models.GetConsoleAuthorizationConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetConsoleAuthorizationConfigurationOutput: ...
+
+    @_overload
+    async def get_console_authorization_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetConsoleAuthorizationConfigurationInputDict],
     ) -> GetConsoleAuthorizationConfigurationOutput:
         """
         Get console authorization configuration with automatic scope detection
 
         Args:
-            input:
-                An instance of `GetConsoleAuthorizationConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -221,19 +341,40 @@ class AsyncSigninClient(AsyncClient[AsyncSigninConfig]):
         Returns:
             An instance of `GetConsoleAuthorizationConfigurationOutput`.
         """
+
+    async def get_console_authorization_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetConsoleAuthorizationConfigurationOutput:
         return await self._invoke(
-            input, _models.GET_CONSOLE_AUTHORIZATION_CONFIGURATION, [], plugins
+            self._select_input(
+                _models.GET_CONSOLE_AUTHORIZATION_CONFIGURATION, args, kwargs
+            ),
+            _models.GET_CONSOLE_AUTHORIZATION_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def get_resource_policy(
-        self, input: GetResourcePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetResourcePolicyInput | _models.GetResourcePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetResourcePolicyOutput: ...
+
+    @_overload
+    async def get_resource_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetResourcePolicyInputDict],
     ) -> GetResourcePolicyOutput:
         """
         Retrieve the account's consolidated SignIn resource-based policy
 
         Args:
-            input:
-                An instance of `GetResourcePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -243,12 +384,34 @@ class AsyncSigninClient(AsyncClient[AsyncSigninConfig]):
         Returns:
             An instance of `GetResourcePolicyOutput`.
         """
-        return await self._invoke(input, _models.GET_RESOURCE_POLICY, [], plugins)
 
+    async def get_resource_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetResourcePolicyOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_RESOURCE_POLICY, args, kwargs),
+            _models.GET_RESOURCE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def introspect_o_auth2_token_with_iam(
         self,
-        input: IntrospectOAuth2TokenWithIAMInput,
+        request: _models.IntrospectOAuth2TokenWithIAMInput
+        | _models.IntrospectOAuth2TokenWithIAMInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> IntrospectOAuth2TokenWithIAMOutput: ...
+
+    @_overload
+    async def introspect_o_auth2_token_with_iam(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.IntrospectOAuth2TokenWithIAMInputDict],
     ) -> IntrospectOAuth2TokenWithIAMOutput:
         """
         Inspects the metadata and active state of an OAuth 2.0 access token or
@@ -257,8 +420,6 @@ class AsyncSigninClient(AsyncClient[AsyncSigninConfig]):
         issued by AWS Sign-In.
 
         Args:
-            input:
-                An instance of `IntrospectOAuth2TokenWithIAMInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -268,22 +429,40 @@ class AsyncSigninClient(AsyncClient[AsyncSigninConfig]):
         Returns:
             An instance of `IntrospectOAuth2TokenWithIAMOutput`.
         """
+
+    async def introspect_o_auth2_token_with_iam(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> IntrospectOAuth2TokenWithIAMOutput:
         return await self._invoke(
-            input, _models.INTROSPECT_O_AUTH2_TOKEN_WITH_IAM, [], plugins
+            self._select_input(_models.INTROSPECT_O_AUTH2_TOKEN_WITH_IAM, args, kwargs),
+            _models.INTROSPECT_O_AUTH2_TOKEN_WITH_IAM,
+            [],
+            plugins,
         )
 
+    @_overload
     async def list_resource_permission_statements(
         self,
-        input: ListResourcePermissionStatementsInput,
+        request: _models.ListResourcePermissionStatementsInput
+        | _models.ListResourcePermissionStatementsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListResourcePermissionStatementsOutput: ...
+
+    @_overload
+    async def list_resource_permission_statements(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListResourcePermissionStatementsInputDict],
     ) -> ListResourcePermissionStatementsOutput:
         """
         Retrieve all permission statements in the account's SignIn
         resource-based policy
 
         Args:
-            input:
-                An instance of `ListResourcePermissionStatementsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -293,22 +472,42 @@ class AsyncSigninClient(AsyncClient[AsyncSigninConfig]):
         Returns:
             An instance of `ListResourcePermissionStatementsOutput`.
         """
+
+    async def list_resource_permission_statements(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListResourcePermissionStatementsOutput:
         return await self._invoke(
-            input, _models.LIST_RESOURCE_PERMISSION_STATEMENTS, [], plugins
+            self._select_input(
+                _models.LIST_RESOURCE_PERMISSION_STATEMENTS, args, kwargs
+            ),
+            _models.LIST_RESOURCE_PERMISSION_STATEMENTS,
+            [],
+            plugins,
         )
 
+    @_overload
     async def put_console_authorization_configuration(
         self,
-        input: PutConsoleAuthorizationConfigurationInput,
+        request: _models.PutConsoleAuthorizationConfigurationInput
+        | _models.PutConsoleAuthorizationConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> PutConsoleAuthorizationConfigurationOutput: ...
+
+    @_overload
+    async def put_console_authorization_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutConsoleAuthorizationConfigurationInputDict],
     ) -> PutConsoleAuthorizationConfigurationOutput:
         """
         Enable console authorization configuration with automatic scope
         detection
 
         Args:
-            input:
-                An instance of `PutConsoleAuthorizationConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -318,22 +517,42 @@ class AsyncSigninClient(AsyncClient[AsyncSigninConfig]):
         Returns:
             An instance of `PutConsoleAuthorizationConfigurationOutput`.
         """
+
+    async def put_console_authorization_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutConsoleAuthorizationConfigurationOutput:
         return await self._invoke(
-            input, _models.PUT_CONSOLE_AUTHORIZATION_CONFIGURATION, [], plugins
+            self._select_input(
+                _models.PUT_CONSOLE_AUTHORIZATION_CONFIGURATION, args, kwargs
+            ),
+            _models.PUT_CONSOLE_AUTHORIZATION_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def put_resource_permission_statement(
         self,
-        input: PutResourcePermissionStatementInput,
+        request: _models.PutResourcePermissionStatementInput
+        | _models.PutResourcePermissionStatementInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> PutResourcePermissionStatementOutput: ...
+
+    @_overload
+    async def put_resource_permission_statement(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutResourcePermissionStatementInputDict],
     ) -> PutResourcePermissionStatementOutput:
         """
         Create a permission statement in the account's SignIn resource-based
         policy
 
         Args:
-            input:
-                An instance of `PutResourcePermissionStatementInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -343,19 +562,39 @@ class AsyncSigninClient(AsyncClient[AsyncSigninConfig]):
         Returns:
             An instance of `PutResourcePermissionStatementOutput`.
         """
+
+    async def put_resource_permission_statement(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutResourcePermissionStatementOutput:
         return await self._invoke(
-            input, _models.PUT_RESOURCE_PERMISSION_STATEMENT, [], plugins
+            self._select_input(_models.PUT_RESOURCE_PERMISSION_STATEMENT, args, kwargs),
+            _models.PUT_RESOURCE_PERMISSION_STATEMENT,
+            [],
+            plugins,
         )
 
+    @_overload
     async def revoke_o_auth2_token_with_iam(
-        self, input: RevokeOAuth2TokenWithIAMInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RevokeOAuth2TokenWithIAMInput
+        | _models.RevokeOAuth2TokenWithIAMInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RevokeOAuth2TokenWithIAMOutput: ...
+
+    @_overload
+    async def revoke_o_auth2_token_with_iam(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RevokeOAuth2TokenWithIAMInputDict],
     ) -> RevokeOAuth2TokenWithIAMOutput:
         """
         Revokes an OAuth 2.0 refresh token and its associated token chain.
 
         Args:
-            input:
-                An instance of `RevokeOAuth2TokenWithIAMInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -365,8 +604,15 @@ class AsyncSigninClient(AsyncClient[AsyncSigninConfig]):
         Returns:
             An instance of `RevokeOAuth2TokenWithIAMOutput`.
         """
+
+    async def revoke_o_auth2_token_with_iam(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RevokeOAuth2TokenWithIAMOutput:
         return await self._invoke(
-            input, _models.REVOKE_O_AUTH2_TOKEN_WITH_IAM, [], plugins
+            self._select_input(_models.REVOKE_O_AUTH2_TOKEN_WITH_IAM, args, kwargs),
+            _models.REVOKE_O_AUTH2_TOKEN_WITH_IAM,
+            [],
+            plugins,
         )
 
     async def _new_config(self) -> AsyncSigninConfig:

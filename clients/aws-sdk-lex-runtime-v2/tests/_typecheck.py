@@ -2,55 +2,79 @@
 
 from typing import Any
 
+from aws_sdk_lex_runtime_v2.aio.client import AsyncLexRuntimeV2Client
+from aws_sdk_lex_runtime_v2.client import LexRuntimeV2Client
 from aws_sdk_lex_runtime_v2.models import (
     ActiveContext,
+    ActiveContextDict,
     ActiveContextTimeToLive,
+    ActiveContextTimeToLiveDict,
+    AsyncRecognizeUtteranceInputDict,
     AudioInputEvent,
     AudioResponseEvent,
     Button,
+    ButtonDict,
     ConfidenceScore,
     ConfigurationEvent,
     DTMFInputEvent,
     DeleteSessionInput,
+    DeleteSessionInputDict,
     DeleteSessionOutput,
     DialogAction,
+    DialogActionDict,
     DisconnectionEvent,
     ElicitSubSlot,
+    ElicitSubSlotDict,
     GetSessionInput,
+    GetSessionInputDict,
     GetSessionOutput,
     HeartbeatEvent,
     ImageResponseCard,
+    ImageResponseCardDict,
     Intent,
+    IntentDict,
     IntentResultEvent,
     Interpretation,
     Message,
+    MessageDict,
     PlaybackCompletionEvent,
     PlaybackInterruptionEvent,
     PutSessionInput,
+    PutSessionInputDict,
     PutSessionOutput,
     RecognizeTextInput,
+    RecognizeTextInputDict,
     RecognizeTextOutput,
     RecognizeUtteranceInput,
+    RecognizeUtteranceInputDict,
     RecognizeUtteranceOutput,
     RecognizedBotMember,
     RuntimeHintDetails,
+    RuntimeHintDetailsDict,
     RuntimeHintValue,
+    RuntimeHintValueDict,
     RuntimeHints,
+    RuntimeHintsDict,
     SentimentResponse,
     SentimentScore,
     SessionState,
+    SessionStateDict,
     Slot,
+    SlotDict,
     StartConversationInput,
+    StartConversationInputDict,
     StartConversationOutput,
     TextInputEvent,
     TextResponseEvent,
     TranscriptEvent,
     Value,
+    ValueDict,
 )
 
 
-# Static type fixture: pyright over this validates models.pyi.
-# Not executed as a test; it only needs to type-check.
+# Static type fixture: pyright over this validates models.pyi and the
+# client method signatures. Not executed as a test; it only needs to
+# type-check.
 
 _: Any = ...
 
@@ -97,3 +121,127 @@ TextInputEvent(text=_)
 TextResponseEvent()
 TranscriptEvent()
 Value(interpreted_value=_)
+_params_0: ActiveContextDict = {"name": _, "time_to_live": _, "context_attributes": _}
+_params_1: ActiveContextTimeToLiveDict = {
+    "time_to_live_in_seconds": _,
+    "turns_to_live": _,
+}
+_params_2: ButtonDict = {"text": _, "value": _}
+_params_3: DeleteSessionInputDict = {
+    "bot_id": _,
+    "bot_alias_id": _,
+    "locale_id": _,
+    "session_id": _,
+}
+_params_4: DialogActionDict = {"type": _}
+_params_5: ElicitSubSlotDict = {"name": _}
+_params_6: GetSessionInputDict = {
+    "bot_id": _,
+    "bot_alias_id": _,
+    "locale_id": _,
+    "session_id": _,
+}
+_params_7: ImageResponseCardDict = {"title": _}
+_params_8: IntentDict = {"name": _}
+_params_9: MessageDict = {"content_type": _}
+_params_10: PutSessionInputDict = {
+    "bot_id": _,
+    "bot_alias_id": _,
+    "locale_id": _,
+    "session_id": _,
+    "session_state": _,
+}
+_params_11: RecognizeTextInputDict = {
+    "bot_id": _,
+    "bot_alias_id": _,
+    "locale_id": _,
+    "session_id": _,
+    "text": _,
+}
+_params_12: RecognizeUtteranceInputDict = {
+    "bot_id": _,
+    "bot_alias_id": _,
+    "locale_id": _,
+    "session_id": _,
+    "request_content_type": _,
+}
+_params_13: RuntimeHintDetailsDict = {}
+_params_14: RuntimeHintsDict = {}
+_params_15: RuntimeHintValueDict = {"phrase": _}
+_params_16: SessionStateDict = {}
+_params_17: SlotDict = {}
+_params_18: StartConversationInputDict = {
+    "bot_id": _,
+    "bot_alias_id": _,
+    "locale_id": _,
+    "session_id": _,
+}
+_params_19: ValueDict = {"interpreted_value": _}
+
+
+def _request[T](form: type[T]) -> T:
+    raise NotImplementedError
+
+
+async def check_async_calls(client: AsyncLexRuntimeV2Client) -> None:
+    pass
+    await client.delete_session(bot_id=_, bot_alias_id=_, locale_id=_, session_id=_)
+    await client.delete_session(**_request(DeleteSessionInputDict))
+    await client.delete_session(_request(DeleteSessionInput))
+    await client.delete_session(_request(DeleteSessionInputDict))
+    await client.get_session(bot_id=_, bot_alias_id=_, locale_id=_, session_id=_)
+    await client.get_session(**_request(GetSessionInputDict))
+    await client.get_session(_request(GetSessionInput))
+    await client.get_session(_request(GetSessionInputDict))
+    await client.put_session(
+        bot_id=_, bot_alias_id=_, locale_id=_, session_id=_, session_state=_
+    )
+    await client.put_session(**_request(PutSessionInputDict))
+    await client.put_session(_request(PutSessionInput))
+    await client.put_session(_request(PutSessionInputDict))
+    await client.recognize_text(
+        bot_id=_, bot_alias_id=_, locale_id=_, session_id=_, text=_
+    )
+    await client.recognize_text(**_request(RecognizeTextInputDict))
+    await client.recognize_text(_request(RecognizeTextInput))
+    await client.recognize_text(_request(RecognizeTextInputDict))
+    await client.recognize_utterance(
+        bot_id=_, bot_alias_id=_, locale_id=_, session_id=_, request_content_type=_
+    )
+    await client.recognize_utterance(**_request(RecognizeUtteranceInputDict))
+    await client.recognize_utterance(_request(RecognizeUtteranceInput))
+    await client.recognize_utterance(_request(RecognizeUtteranceInputDict))
+    await client.recognize_utterance(**_request(AsyncRecognizeUtteranceInputDict))
+    await client.recognize_utterance(_request(AsyncRecognizeUtteranceInputDict))
+    await client.start_conversation(bot_id=_, bot_alias_id=_, locale_id=_, session_id=_)
+    await client.start_conversation(**_request(StartConversationInputDict))
+    await client.start_conversation(_request(StartConversationInput))
+    await client.start_conversation(_request(StartConversationInputDict))
+
+
+def check_sync_calls(client: LexRuntimeV2Client) -> None:
+    pass
+    client.delete_session(bot_id=_, bot_alias_id=_, locale_id=_, session_id=_)
+    client.delete_session(**_request(DeleteSessionInputDict))
+    client.delete_session(_request(DeleteSessionInput))
+    client.delete_session(_request(DeleteSessionInputDict))
+    client.get_session(bot_id=_, bot_alias_id=_, locale_id=_, session_id=_)
+    client.get_session(**_request(GetSessionInputDict))
+    client.get_session(_request(GetSessionInput))
+    client.get_session(_request(GetSessionInputDict))
+    client.put_session(
+        bot_id=_, bot_alias_id=_, locale_id=_, session_id=_, session_state=_
+    )
+    client.put_session(**_request(PutSessionInputDict))
+    client.put_session(_request(PutSessionInput))
+    client.put_session(_request(PutSessionInputDict))
+    client.recognize_text(bot_id=_, bot_alias_id=_, locale_id=_, session_id=_, text=_)
+    client.recognize_text(**_request(RecognizeTextInputDict))
+    client.recognize_text(_request(RecognizeTextInput))
+    client.recognize_text(_request(RecognizeTextInputDict))
+    client.recognize_utterance(
+        bot_id=_, bot_alias_id=_, locale_id=_, session_id=_, request_content_type=_
+    )
+    client.recognize_utterance(**_request(RecognizeUtteranceInputDict))
+    client.recognize_utterance(_request(RecognizeUtteranceInput))
+    client.recognize_utterance(_request(RecognizeUtteranceInputDict))

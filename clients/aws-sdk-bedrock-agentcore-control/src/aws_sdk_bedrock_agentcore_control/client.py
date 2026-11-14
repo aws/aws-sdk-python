@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import cast
+from typing import Unpack as _Unpack, cast, overload as _overload
 
 from smithy_aws_core.config.types import ConfigSource
 from smithy_aws_core.identity.chain.resolver import IdentityChain
@@ -20,349 +20,177 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from .models import (
-        AddDatasetExamplesInput,
         AddDatasetExamplesOutput,
-        BatchPutGatewayRateLimitsInput,
         BatchPutGatewayRateLimitsOutput,
-        CreateAgentRuntimeEndpointInput,
         CreateAgentRuntimeEndpointOutput,
-        CreateAgentRuntimeInput,
         CreateAgentRuntimeOutput,
-        CreateApiKeyCredentialProviderInput,
         CreateApiKeyCredentialProviderOutput,
-        CreateBrowserInput,
         CreateBrowserOutput,
-        CreateBrowserProfileInput,
         CreateBrowserProfileOutput,
-        CreateCapacityProviderInput,
         CreateCapacityProviderOutput,
-        CreateCodeInterpreterInput,
         CreateCodeInterpreterOutput,
-        CreateConfigurationBundleInput,
         CreateConfigurationBundleOutput,
-        CreateConsentPortalInput,
         CreateConsentPortalOutput,
-        CreateDatasetInput,
         CreateDatasetOutput,
-        CreateDatasetVersionInput,
         CreateDatasetVersionOutput,
-        CreateEvaluatorInput,
         CreateEvaluatorOutput,
-        CreateGatewayInput,
         CreateGatewayOutput,
-        CreateGatewayRateLimitInput,
         CreateGatewayRateLimitOutput,
-        CreateGatewayRuleInput,
         CreateGatewayRuleOutput,
-        CreateGatewayTargetInput,
         CreateGatewayTargetOutput,
-        CreateHarnessEndpointInput,
         CreateHarnessEndpointOutput,
-        CreateHarnessInput,
         CreateHarnessOutput,
-        CreateMemoryInput,
         CreateMemoryOutput,
-        CreateOauth2CredentialProviderInput,
         CreateOauth2CredentialProviderOutput,
-        CreateOnlineEvaluationConfigInput,
         CreateOnlineEvaluationConfigOutput,
-        CreatePaymentConnectorInput,
         CreatePaymentConnectorOutput,
-        CreatePaymentCredentialProviderInput,
         CreatePaymentCredentialProviderOutput,
-        CreatePaymentManagerInput,
         CreatePaymentManagerOutput,
-        CreatePolicyEngineInput,
         CreatePolicyEngineOutput,
-        CreatePolicyInput,
         CreatePolicyOutput,
-        CreateRegistryInput,
         CreateRegistryOutput,
-        CreateRegistryRecordInput,
         CreateRegistryRecordOutput,
-        CreateWorkloadIdentityInput,
         CreateWorkloadIdentityOutput,
-        DeleteAgentRuntimeEndpointInput,
         DeleteAgentRuntimeEndpointOutput,
-        DeleteAgentRuntimeInput,
         DeleteAgentRuntimeOutput,
-        DeleteApiKeyCredentialProviderInput,
         DeleteApiKeyCredentialProviderOutput,
-        DeleteBrowserInput,
         DeleteBrowserOutput,
-        DeleteBrowserProfileInput,
         DeleteBrowserProfileOutput,
-        DeleteCapacityProviderInput,
         DeleteCapacityProviderOutput,
-        DeleteCodeInterpreterInput,
         DeleteCodeInterpreterOutput,
-        DeleteConfigurationBundleInput,
         DeleteConfigurationBundleOutput,
-        DeleteConsentPortalInput,
         DeleteConsentPortalOutput,
-        DeleteDatasetExamplesInput,
         DeleteDatasetExamplesOutput,
-        DeleteDatasetInput,
         DeleteDatasetOutput,
-        DeleteEvaluatorInput,
         DeleteEvaluatorOutput,
-        DeleteGatewayInput,
         DeleteGatewayOutput,
-        DeleteGatewayRateLimitInput,
         DeleteGatewayRateLimitOutput,
-        DeleteGatewayRuleInput,
         DeleteGatewayRuleOutput,
-        DeleteGatewayTargetInput,
         DeleteGatewayTargetOutput,
-        DeleteHarnessEndpointInput,
         DeleteHarnessEndpointOutput,
-        DeleteHarnessInput,
         DeleteHarnessOutput,
-        DeleteMemoryInput,
         DeleteMemoryOutput,
-        DeleteOauth2CredentialProviderInput,
         DeleteOauth2CredentialProviderOutput,
-        DeleteOnlineEvaluationConfigInput,
         DeleteOnlineEvaluationConfigOutput,
-        DeletePaymentConnectorInput,
         DeletePaymentConnectorOutput,
-        DeletePaymentCredentialProviderInput,
         DeletePaymentCredentialProviderOutput,
-        DeletePaymentManagerInput,
         DeletePaymentManagerOutput,
-        DeletePolicyEngineInput,
         DeletePolicyEngineOutput,
-        DeletePolicyInput,
         DeletePolicyOutput,
-        DeleteRegistryInput,
         DeleteRegistryOutput,
-        DeleteRegistryRecordInput,
         DeleteRegistryRecordOutput,
-        DeleteResourcePolicyInput,
         DeleteResourcePolicyOutput,
-        DeleteWorkloadIdentityInput,
         DeleteWorkloadIdentityOutput,
-        GetAgentRuntimeEndpointInput,
         GetAgentRuntimeEndpointOutput,
-        GetAgentRuntimeInput,
         GetAgentRuntimeOutput,
-        GetApiKeyCredentialProviderInput,
         GetApiKeyCredentialProviderOutput,
-        GetBrowserInput,
         GetBrowserOutput,
-        GetBrowserProfileInput,
         GetBrowserProfileOutput,
-        GetCapacityProviderInput,
         GetCapacityProviderOutput,
-        GetCodeInterpreterInput,
         GetCodeInterpreterOutput,
-        GetConfigurationBundleInput,
         GetConfigurationBundleOutput,
-        GetConfigurationBundleVersionInput,
         GetConfigurationBundleVersionOutput,
-        GetConsentPortalInput,
         GetConsentPortalOutput,
-        GetDatasetInput,
         GetDatasetOutput,
-        GetEvaluatorInput,
         GetEvaluatorOutput,
-        GetGatewayInput,
         GetGatewayOutput,
-        GetGatewayRateLimitInput,
         GetGatewayRateLimitOutput,
-        GetGatewayRuleInput,
         GetGatewayRuleOutput,
-        GetGatewayTargetInput,
         GetGatewayTargetOutput,
-        GetHarnessEndpointInput,
         GetHarnessEndpointOutput,
-        GetHarnessInput,
         GetHarnessOutput,
-        GetMemoryInput,
         GetMemoryOutput,
-        GetOauth2CredentialProviderInput,
         GetOauth2CredentialProviderOutput,
-        GetOnlineEvaluationConfigInput,
         GetOnlineEvaluationConfigOutput,
-        GetPaymentConnectorInput,
         GetPaymentConnectorOutput,
-        GetPaymentCredentialProviderInput,
         GetPaymentCredentialProviderOutput,
-        GetPaymentManagerInput,
         GetPaymentManagerOutput,
-        GetPolicyEngineInput,
         GetPolicyEngineOutput,
-        GetPolicyEngineSummaryInput,
         GetPolicyEngineSummaryOutput,
-        GetPolicyGenerationInput,
         GetPolicyGenerationOutput,
-        GetPolicyGenerationSummaryInput,
         GetPolicyGenerationSummaryOutput,
-        GetPolicyInput,
         GetPolicyOutput,
-        GetPolicySummaryInput,
         GetPolicySummaryOutput,
-        GetRegistryInput,
         GetRegistryOutput,
-        GetRegistryRecordInput,
         GetRegistryRecordOutput,
-        GetResourcePolicyInput,
         GetResourcePolicyOutput,
-        GetTokenVaultInput,
         GetTokenVaultOutput,
-        GetWorkloadIdentityInput,
         GetWorkloadIdentityOutput,
-        ListAgentRuntimeEndpointsInput,
         ListAgentRuntimeEndpointsOutput,
-        ListAgentRuntimeVersionsByCapacityProviderInput,
         ListAgentRuntimeVersionsByCapacityProviderOutput,
-        ListAgentRuntimeVersionsInput,
         ListAgentRuntimeVersionsOutput,
-        ListAgentRuntimesInput,
         ListAgentRuntimesOutput,
-        ListApiKeyCredentialProvidersInput,
         ListApiKeyCredentialProvidersOutput,
-        ListBrowserProfilesInput,
         ListBrowserProfilesOutput,
-        ListBrowsersInput,
         ListBrowsersOutput,
-        ListCapacityProvidersInput,
         ListCapacityProvidersOutput,
-        ListCodeInterpretersInput,
         ListCodeInterpretersOutput,
-        ListConfigurationBundleVersionsInput,
         ListConfigurationBundleVersionsOutput,
-        ListConfigurationBundlesInput,
         ListConfigurationBundlesOutput,
-        ListConsentPortalsInput,
         ListConsentPortalsOutput,
-        ListDatasetExamplesInput,
         ListDatasetExamplesOutput,
-        ListDatasetVersionsInput,
         ListDatasetVersionsOutput,
-        ListDatasetsInput,
         ListDatasetsOutput,
-        ListEvaluatorsInput,
         ListEvaluatorsOutput,
-        ListGatewayRateLimitsInput,
         ListGatewayRateLimitsOutput,
-        ListGatewayRulesInput,
         ListGatewayRulesOutput,
-        ListGatewayTargetsInput,
         ListGatewayTargetsOutput,
-        ListGatewaysInput,
         ListGatewaysOutput,
-        ListHarnessEndpointsInput,
         ListHarnessEndpointsOutput,
-        ListHarnessVersionsInput,
         ListHarnessVersionsOutput,
-        ListHarnessesInput,
         ListHarnessesOutput,
-        ListMemoriesInput,
         ListMemoriesOutput,
-        ListOauth2CredentialProvidersInput,
         ListOauth2CredentialProvidersOutput,
-        ListOnlineEvaluationConfigsInput,
         ListOnlineEvaluationConfigsOutput,
-        ListPaymentConnectorsInput,
         ListPaymentConnectorsOutput,
-        ListPaymentCredentialProvidersInput,
         ListPaymentCredentialProvidersOutput,
-        ListPaymentManagersInput,
         ListPaymentManagersOutput,
-        ListPoliciesInput,
         ListPoliciesOutput,
-        ListPolicyEngineSummariesInput,
         ListPolicyEngineSummariesOutput,
-        ListPolicyEnginesInput,
         ListPolicyEnginesOutput,
-        ListPolicyGenerationAssetsInput,
         ListPolicyGenerationAssetsOutput,
-        ListPolicyGenerationSummariesInput,
         ListPolicyGenerationSummariesOutput,
-        ListPolicyGenerationsInput,
         ListPolicyGenerationsOutput,
-        ListPolicySummariesInput,
         ListPolicySummariesOutput,
-        ListRegistriesInput,
         ListRegistriesOutput,
-        ListRegistryRecordsInput,
         ListRegistryRecordsOutput,
-        ListTagsForResourceInput,
         ListTagsForResourceOutput,
-        ListWorkloadIdentitiesInput,
         ListWorkloadIdentitiesOutput,
-        PutResourcePolicyInput,
         PutResourcePolicyOutput,
-        ResetTokenVaultKeyMaterialInput,
         ResetTokenVaultKeyMaterialOutput,
-        RotatePaymentConnectorCredentialsInput,
         RotatePaymentConnectorCredentialsOutput,
-        SetTokenVaultCMKInput,
         SetTokenVaultCMKOutput,
-        StartPolicyGenerationInput,
         StartPolicyGenerationOutput,
-        SubmitRegistryRecordForApprovalInput,
         SubmitRegistryRecordForApprovalOutput,
-        SynchronizeGatewayTargetsInput,
         SynchronizeGatewayTargetsOutput,
-        TagResourceInput,
         TagResourceOutput,
-        UntagResourceInput,
         UntagResourceOutput,
-        UpdateAgentRuntimeEndpointInput,
         UpdateAgentRuntimeEndpointOutput,
-        UpdateAgentRuntimeInput,
         UpdateAgentRuntimeOutput,
-        UpdateApiKeyCredentialProviderInput,
         UpdateApiKeyCredentialProviderOutput,
-        UpdateCapacityProviderInput,
         UpdateCapacityProviderOutput,
-        UpdateConfigurationBundleInput,
         UpdateConfigurationBundleOutput,
-        UpdateConsentPortalInput,
         UpdateConsentPortalOutput,
-        UpdateDatasetExamplesInput,
         UpdateDatasetExamplesOutput,
-        UpdateDatasetInput,
         UpdateDatasetOutput,
-        UpdateEvaluatorInput,
         UpdateEvaluatorOutput,
-        UpdateGatewayInput,
         UpdateGatewayOutput,
-        UpdateGatewayRateLimitInput,
         UpdateGatewayRateLimitOutput,
-        UpdateGatewayRuleInput,
         UpdateGatewayRuleOutput,
-        UpdateGatewayTargetInput,
         UpdateGatewayTargetOutput,
-        UpdateHarnessEndpointInput,
         UpdateHarnessEndpointOutput,
-        UpdateHarnessInput,
         UpdateHarnessOutput,
-        UpdateMemoryInput,
         UpdateMemoryOutput,
-        UpdateOauth2CredentialProviderInput,
         UpdateOauth2CredentialProviderOutput,
-        UpdateOnlineEvaluationConfigInput,
         UpdateOnlineEvaluationConfigOutput,
-        UpdatePaymentConnectorInput,
         UpdatePaymentConnectorOutput,
-        UpdatePaymentCredentialProviderInput,
         UpdatePaymentCredentialProviderOutput,
-        UpdatePaymentManagerInput,
         UpdatePaymentManagerOutput,
-        UpdatePolicyEngineInput,
         UpdatePolicyEngineOutput,
-        UpdatePolicyInput,
         UpdatePolicyOutput,
-        UpdateRegistryInput,
         UpdateRegistryOutput,
-        UpdateRegistryRecordInput,
         UpdateRegistryRecordOutput,
-        UpdateRegistryRecordStatusInput,
         UpdateRegistryRecordStatusOutput,
-        UpdateWorkloadIdentityInput,
         UpdateWorkloadIdentityOutput,
     )
 
@@ -377,10 +205,24 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
     Services resources.
     """
 
-    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
+    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
 
+    @_overload
     def add_dataset_examples(
-        self, input: AddDatasetExamplesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.AddDatasetExamplesInput | _models.AddDatasetExamplesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AddDatasetExamplesOutput: ...
+
+    @_overload
+    def add_dataset_examples(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AddDatasetExamplesInputDict],
     ) -> AddDatasetExamplesOutput:
         """
         Adds examples to the dataset's DRAFT. All examples are validated
@@ -389,8 +231,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         semantics).
 
         Args:
-            input:
-                An instance of `AddDatasetExamplesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -400,10 +240,34 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `AddDatasetExamplesOutput`.
         """
-        return self._invoke(input, _models.ADD_DATASET_EXAMPLES, [], plugins)
 
+    def add_dataset_examples(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AddDatasetExamplesOutput:
+        return self._invoke(
+            self._select_input(_models.ADD_DATASET_EXAMPLES, args, kwargs),
+            _models.ADD_DATASET_EXAMPLES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def batch_put_gateway_rate_limits(
-        self, input: BatchPutGatewayRateLimitsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.BatchPutGatewayRateLimitsInput
+        | _models.BatchPutGatewayRateLimitsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> BatchPutGatewayRateLimitsOutput: ...
+
+    @_overload
+    def batch_put_gateway_rate_limits(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.BatchPutGatewayRateLimitsInputDict],
     ) -> BatchPutGatewayRateLimitsOutput:
         """
         Atomically creates or updates multiple rate limits for a gateway. The
@@ -412,8 +276,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         changes. Retry the request after resolving the issue.
 
         Args:
-            input:
-                An instance of `BatchPutGatewayRateLimitsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -423,17 +285,38 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `BatchPutGatewayRateLimitsOutput`.
         """
-        return self._invoke(input, _models.BATCH_PUT_GATEWAY_RATE_LIMITS, [], plugins)
 
+    def batch_put_gateway_rate_limits(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> BatchPutGatewayRateLimitsOutput:
+        return self._invoke(
+            self._select_input(_models.BATCH_PUT_GATEWAY_RATE_LIMITS, args, kwargs),
+            _models.BATCH_PUT_GATEWAY_RATE_LIMITS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_agent_runtime(
-        self, input: CreateAgentRuntimeInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateAgentRuntimeInput | _models.CreateAgentRuntimeInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateAgentRuntimeOutput: ...
+
+    @_overload
+    def create_agent_runtime(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateAgentRuntimeInputDict],
     ) -> CreateAgentRuntimeOutput:
         """
         Creates an Amazon Bedrock AgentCore Runtime.
 
         Args:
-            input:
-                An instance of `CreateAgentRuntimeInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -443,19 +326,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `CreateAgentRuntimeOutput`.
         """
-        return self._invoke(input, _models.CREATE_AGENT_RUNTIME, [], plugins)
 
+    def create_agent_runtime(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateAgentRuntimeOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_AGENT_RUNTIME, args, kwargs),
+            _models.CREATE_AGENT_RUNTIME,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_agent_runtime_endpoint(
         self,
-        input: CreateAgentRuntimeEndpointInput,
+        request: _models.CreateAgentRuntimeEndpointInput
+        | _models.CreateAgentRuntimeEndpointInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateAgentRuntimeEndpointOutput: ...
+
+    @_overload
+    def create_agent_runtime_endpoint(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateAgentRuntimeEndpointInputDict],
     ) -> CreateAgentRuntimeEndpointOutput:
         """
         Creates an AgentCore Runtime endpoint.
 
         Args:
-            input:
-                An instance of `CreateAgentRuntimeEndpointInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -465,19 +368,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `CreateAgentRuntimeEndpointOutput`.
         """
-        return self._invoke(input, _models.CREATE_AGENT_RUNTIME_ENDPOINT, [], plugins)
 
+    def create_agent_runtime_endpoint(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateAgentRuntimeEndpointOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_AGENT_RUNTIME_ENDPOINT, args, kwargs),
+            _models.CREATE_AGENT_RUNTIME_ENDPOINT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_api_key_credential_provider(
         self,
-        input: CreateApiKeyCredentialProviderInput,
+        request: _models.CreateApiKeyCredentialProviderInput
+        | _models.CreateApiKeyCredentialProviderInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateApiKeyCredentialProviderOutput: ...
+
+    @_overload
+    def create_api_key_credential_provider(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateApiKeyCredentialProviderInputDict],
     ) -> CreateApiKeyCredentialProviderOutput:
         """
         Creates a new API key credential provider.
 
         Args:
-            input:
-                An instance of `CreateApiKeyCredentialProviderInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -487,19 +410,40 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `CreateApiKeyCredentialProviderOutput`.
         """
+
+    def create_api_key_credential_provider(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateApiKeyCredentialProviderOutput:
         return self._invoke(
-            input, _models.CREATE_API_KEY_CREDENTIAL_PROVIDER, [], plugins
+            self._select_input(
+                _models.CREATE_API_KEY_CREDENTIAL_PROVIDER, args, kwargs
+            ),
+            _models.CREATE_API_KEY_CREDENTIAL_PROVIDER,
+            [],
+            plugins,
         )
 
+    @_overload
     def create_browser(
-        self, input: CreateBrowserInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateBrowserInput | _models.CreateBrowserInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateBrowserOutput: ...
+
+    @_overload
+    def create_browser(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateBrowserInputDict],
     ) -> CreateBrowserOutput:
         """
         Creates a custom browser.
 
         Args:
-            input:
-                An instance of `CreateBrowserInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -509,10 +453,34 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `CreateBrowserOutput`.
         """
-        return self._invoke(input, _models.CREATE_BROWSER, [], plugins)
 
+    def create_browser(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateBrowserOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_BROWSER, args, kwargs),
+            _models.CREATE_BROWSER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_browser_profile(
-        self, input: CreateBrowserProfileInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateBrowserProfileInput
+        | _models.CreateBrowserProfileInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateBrowserProfileOutput: ...
+
+    @_overload
+    def create_browser_profile(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateBrowserProfileInputDict],
     ) -> CreateBrowserProfileOutput:
         """
         Creates a browser profile in Amazon Bedrock AgentCore. A browser profile
@@ -521,8 +489,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         and reused in subsequent sessions.
 
         Args:
-            input:
-                An instance of `CreateBrowserProfileInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -532,10 +498,34 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `CreateBrowserProfileOutput`.
         """
-        return self._invoke(input, _models.CREATE_BROWSER_PROFILE, [], plugins)
 
+    def create_browser_profile(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateBrowserProfileOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_BROWSER_PROFILE, args, kwargs),
+            _models.CREATE_BROWSER_PROFILE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_capacity_provider(
-        self, input: CreateCapacityProviderInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateCapacityProviderInput
+        | _models.CreateCapacityProviderInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateCapacityProviderOutput: ...
+
+    @_overload
+    def create_capacity_provider(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateCapacityProviderInputDict],
     ) -> CreateCapacityProviderOutput:
         """
         Creates a capacity provider. A capacity provider defines the Amazon EC2
@@ -548,8 +538,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         transitions to `READY` when it is available for use.
 
         Args:
-            input:
-                An instance of `CreateCapacityProviderInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -559,17 +547,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `CreateCapacityProviderOutput`.
         """
-        return self._invoke(input, _models.CREATE_CAPACITY_PROVIDER, [], plugins)
 
+    def create_capacity_provider(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateCapacityProviderOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_CAPACITY_PROVIDER, args, kwargs),
+            _models.CREATE_CAPACITY_PROVIDER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_code_interpreter(
-        self, input: CreateCodeInterpreterInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateCodeInterpreterInput
+        | _models.CreateCodeInterpreterInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateCodeInterpreterOutput: ...
+
+    @_overload
+    def create_code_interpreter(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateCodeInterpreterInputDict],
     ) -> CreateCodeInterpreterOutput:
         """
         Creates a custom code interpreter.
 
         Args:
-            input:
-                An instance of `CreateCodeInterpreterInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -579,10 +589,34 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `CreateCodeInterpreterOutput`.
         """
-        return self._invoke(input, _models.CREATE_CODE_INTERPRETER, [], plugins)
 
+    def create_code_interpreter(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateCodeInterpreterOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_CODE_INTERPRETER, args, kwargs),
+            _models.CREATE_CODE_INTERPRETER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_configuration_bundle(
-        self, input: CreateConfigurationBundleInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateConfigurationBundleInput
+        | _models.CreateConfigurationBundleInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateConfigurationBundleOutput: ...
+
+    @_overload
+    def create_configuration_bundle(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateConfigurationBundleInputDict],
     ) -> CreateConfigurationBundleOutput:
         """
         Creates a new configuration bundle resource. A configuration bundle
@@ -590,8 +624,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         workflows.
 
         Args:
-            input:
-                An instance of `CreateConfigurationBundleInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -601,17 +633,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `CreateConfigurationBundleOutput`.
         """
-        return self._invoke(input, _models.CREATE_CONFIGURATION_BUNDLE, [], plugins)
 
+    def create_configuration_bundle(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateConfigurationBundleOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_CONFIGURATION_BUNDLE, args, kwargs),
+            _models.CREATE_CONFIGURATION_BUNDLE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_consent_portal(
-        self, input: CreateConsentPortalInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateConsentPortalInput
+        | _models.CreateConsentPortalInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateConsentPortalOutput: ...
+
+    @_overload
+    def create_consent_portal(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateConsentPortalInputDict],
     ) -> CreateConsentPortalOutput:
         """
         Creates a new consent portal.
 
         Args:
-            input:
-                An instance of `CreateConsentPortalInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -621,10 +675,33 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `CreateConsentPortalOutput`.
         """
-        return self._invoke(input, _models.CREATE_CONSENT_PORTAL, [], plugins)
 
+    def create_consent_portal(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateConsentPortalOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_CONSENT_PORTAL, args, kwargs),
+            _models.CREATE_CONSENT_PORTAL,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_dataset(
-        self, input: CreateDatasetInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateDatasetInput | _models.CreateDatasetInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateDatasetOutput: ...
+
+    @_overload
+    def create_dataset(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateDatasetInputDict],
     ) -> CreateDatasetOutput:
         """
         Creates a new dataset resource asynchronously. Returns immediately with
@@ -632,8 +709,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         CREATE_FAILED.
 
         Args:
-            input:
-                An instance of `CreateDatasetInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -643,10 +718,34 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `CreateDatasetOutput`.
         """
-        return self._invoke(input, _models.CREATE_DATASET, [], plugins)
 
+    def create_dataset(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateDatasetOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_DATASET, args, kwargs),
+            _models.CREATE_DATASET,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_dataset_version(
-        self, input: CreateDatasetVersionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateDatasetVersionInput
+        | _models.CreateDatasetVersionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateDatasetVersionOutput: ...
+
+    @_overload
+    def create_dataset_version(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateDatasetVersionInputDict],
     ) -> CreateDatasetVersionOutput:
         """
         Publishes the current DRAFT as a new numbered version. The DRAFT is
@@ -655,8 +754,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         ACTIVE or UPDATE_FAILED.
 
         Args:
-            input:
-                An instance of `CreateDatasetVersionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -666,10 +763,33 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `CreateDatasetVersionOutput`.
         """
-        return self._invoke(input, _models.CREATE_DATASET_VERSION, [], plugins)
 
+    def create_dataset_version(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateDatasetVersionOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_DATASET_VERSION, args, kwargs),
+            _models.CREATE_DATASET_VERSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_evaluator(
-        self, input: CreateEvaluatorInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateEvaluatorInput | _models.CreateEvaluatorInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateEvaluatorOutput: ...
+
+    @_overload
+    def create_evaluator(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateEvaluatorInputDict],
     ) -> CreateEvaluatorOutput:
         """
         Creates a custom evaluator for agent quality assessment. Custom
@@ -679,8 +799,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         performance at tool call, trace, or session levels.
 
         Args:
-            input:
-                An instance of `CreateEvaluatorInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -690,10 +808,33 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `CreateEvaluatorOutput`.
         """
-        return self._invoke(input, _models.CREATE_EVALUATOR, [], plugins)
 
+    def create_evaluator(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateEvaluatorOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_EVALUATOR, args, kwargs),
+            _models.CREATE_EVALUATOR,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_gateway(
-        self, input: CreateGatewayInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateGatewayInput | _models.CreateGatewayInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateGatewayOutput: ...
+
+    @_overload
+    def create_gateway(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateGatewayInputDict],
     ) -> CreateGatewayOutput:
         """
         Creates a gateway for Amazon Bedrock Agent. A gateway serves as an
@@ -703,8 +844,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         `authorizerConfiguration`.
 
         Args:
-            input:
-                An instance of `CreateGatewayInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -714,10 +853,34 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `CreateGatewayOutput`.
         """
-        return self._invoke(input, _models.CREATE_GATEWAY, [], plugins)
 
+    def create_gateway(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateGatewayOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_GATEWAY, args, kwargs),
+            _models.CREATE_GATEWAY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_gateway_rate_limit(
-        self, input: CreateGatewayRateLimitInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateGatewayRateLimitInput
+        | _models.CreateGatewayRateLimitInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateGatewayRateLimitOutput: ...
+
+    @_overload
+    def create_gateway_rate_limit(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateGatewayRateLimitInputDict],
     ) -> CreateGatewayRateLimitOutput:
         """
         Creates a rate limit for a gateway. Rate limits define throttling rules
@@ -725,8 +888,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         and concurrent connections through the gateway.
 
         Args:
-            input:
-                An instance of `CreateGatewayRateLimitInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -736,10 +897,33 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `CreateGatewayRateLimitOutput`.
         """
-        return self._invoke(input, _models.CREATE_GATEWAY_RATE_LIMIT, [], plugins)
 
+    def create_gateway_rate_limit(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateGatewayRateLimitOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_GATEWAY_RATE_LIMIT, args, kwargs),
+            _models.CREATE_GATEWAY_RATE_LIMIT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_gateway_rule(
-        self, input: CreateGatewayRuleInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateGatewayRuleInput | _models.CreateGatewayRuleInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateGatewayRuleOutput: ...
+
+    @_overload
+    def create_gateway_rule(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateGatewayRuleInputDict],
     ) -> CreateGatewayRuleOutput:
         """
         Creates a rule for a gateway. Rules define conditions and actions that
@@ -747,8 +931,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         including principal-based access control and path-based routing.
 
         Args:
-            input:
-                An instance of `CreateGatewayRuleInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -758,18 +940,40 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `CreateGatewayRuleOutput`.
         """
-        return self._invoke(input, _models.CREATE_GATEWAY_RULE, [], plugins)
 
+    def create_gateway_rule(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateGatewayRuleOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_GATEWAY_RULE, args, kwargs),
+            _models.CREATE_GATEWAY_RULE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_gateway_target(
-        self, input: CreateGatewayTargetInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateGatewayTargetInput
+        | _models.CreateGatewayTargetInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateGatewayTargetOutput: ...
+
+    @_overload
+    def create_gateway_target(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateGatewayTargetInputDict],
     ) -> CreateGatewayTargetOutput:
         """
         Creates a target for a gateway. A target defines an endpoint that the
         gateway can connect to.
 
         Args:
-            input:
-                An instance of `CreateGatewayTargetInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -779,17 +983,38 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `CreateGatewayTargetOutput`.
         """
-        return self._invoke(input, _models.CREATE_GATEWAY_TARGET, [], plugins)
 
+    def create_gateway_target(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateGatewayTargetOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_GATEWAY_TARGET, args, kwargs),
+            _models.CREATE_GATEWAY_TARGET,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_harness(
-        self, input: CreateHarnessInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateHarnessInput | _models.CreateHarnessInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateHarnessOutput: ...
+
+    @_overload
+    def create_harness(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateHarnessInputDict],
     ) -> CreateHarnessOutput:
         """
         Operation to create a harness.
 
         Args:
-            input:
-                An instance of `CreateHarnessInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -799,17 +1024,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `CreateHarnessOutput`.
         """
-        return self._invoke(input, _models.CREATE_HARNESS, [], plugins)
 
+    def create_harness(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateHarnessOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_HARNESS, args, kwargs),
+            _models.CREATE_HARNESS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_harness_endpoint(
-        self, input: CreateHarnessEndpointInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateHarnessEndpointInput
+        | _models.CreateHarnessEndpointInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateHarnessEndpointOutput: ...
+
+    @_overload
+    def create_harness_endpoint(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateHarnessEndpointInputDict],
     ) -> CreateHarnessEndpointOutput:
         """
         Operation to create a harness endpoint.
 
         Args:
-            input:
-                An instance of `CreateHarnessEndpointInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -819,17 +1066,38 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `CreateHarnessEndpointOutput`.
         """
-        return self._invoke(input, _models.CREATE_HARNESS_ENDPOINT, [], plugins)
 
+    def create_harness_endpoint(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateHarnessEndpointOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_HARNESS_ENDPOINT, args, kwargs),
+            _models.CREATE_HARNESS_ENDPOINT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_memory(
-        self, input: CreateMemoryInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateMemoryInput | _models.CreateMemoryInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateMemoryOutput: ...
+
+    @_overload
+    def create_memory(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateMemoryInputDict],
     ) -> CreateMemoryOutput:
         """
         Creates a new Amazon Bedrock AgentCore Memory resource.
 
         Args:
-            input:
-                An instance of `CreateMemoryInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -839,19 +1107,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `CreateMemoryOutput`.
         """
-        return self._invoke(input, _models.CREATE_MEMORY, [], plugins)
 
+    def create_memory(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateMemoryOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_MEMORY, args, kwargs),
+            _models.CREATE_MEMORY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_oauth2_credential_provider(
         self,
-        input: CreateOauth2CredentialProviderInput,
+        request: _models.CreateOauth2CredentialProviderInput
+        | _models.CreateOauth2CredentialProviderInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateOauth2CredentialProviderOutput: ...
+
+    @_overload
+    def create_oauth2_credential_provider(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateOauth2CredentialProviderInputDict],
     ) -> CreateOauth2CredentialProviderOutput:
         """
         Creates a new OAuth2 credential provider.
 
         Args:
-            input:
-                An instance of `CreateOauth2CredentialProviderInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -861,14 +1149,34 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `CreateOauth2CredentialProviderOutput`.
         """
+
+    def create_oauth2_credential_provider(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateOauth2CredentialProviderOutput:
         return self._invoke(
-            input, _models.CREATE_OAUTH2_CREDENTIAL_PROVIDER, [], plugins
+            self._select_input(_models.CREATE_OAUTH2_CREDENTIAL_PROVIDER, args, kwargs),
+            _models.CREATE_OAUTH2_CREDENTIAL_PROVIDER,
+            [],
+            plugins,
         )
 
+    @_overload
     def create_online_evaluation_config(
         self,
-        input: CreateOnlineEvaluationConfigInput,
+        request: _models.CreateOnlineEvaluationConfigInput
+        | _models.CreateOnlineEvaluationConfigInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateOnlineEvaluationConfigOutput: ...
+
+    @_overload
+    def create_online_evaluation_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateOnlineEvaluationConfigInputDict],
     ) -> CreateOnlineEvaluationConfigOutput:
         """
         Creates an online evaluation configuration for continuous monitoring of
@@ -877,8 +1185,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         agent quality in production.
 
         Args:
-            input:
-                An instance of `CreateOnlineEvaluationConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -888,10 +1194,34 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `CreateOnlineEvaluationConfigOutput`.
         """
-        return self._invoke(input, _models.CREATE_ONLINE_EVALUATION_CONFIG, [], plugins)
 
+    def create_online_evaluation_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateOnlineEvaluationConfigOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_ONLINE_EVALUATION_CONFIG, args, kwargs),
+            _models.CREATE_ONLINE_EVALUATION_CONFIG,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_payment_connector(
-        self, input: CreatePaymentConnectorInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreatePaymentConnectorInput
+        | _models.CreatePaymentConnectorInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreatePaymentConnectorOutput: ...
+
+    @_overload
+    def create_payment_connector(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreatePaymentConnectorInputDict],
     ) -> CreatePaymentConnectorOutput:
         """
         Creates a new payment connector for a payment manager. A payment
@@ -899,8 +1229,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         processing capabilities.
 
         Args:
-            input:
-                An instance of `CreatePaymentConnectorInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -910,12 +1238,34 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `CreatePaymentConnectorOutput`.
         """
-        return self._invoke(input, _models.CREATE_PAYMENT_CONNECTOR, [], plugins)
 
+    def create_payment_connector(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreatePaymentConnectorOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_PAYMENT_CONNECTOR, args, kwargs),
+            _models.CREATE_PAYMENT_CONNECTOR,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_payment_credential_provider(
         self,
-        input: CreatePaymentCredentialProviderInput,
+        request: _models.CreatePaymentCredentialProviderInput
+        | _models.CreatePaymentCredentialProviderInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreatePaymentCredentialProviderOutput: ...
+
+    @_overload
+    def create_payment_credential_provider(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreatePaymentCredentialProviderInputDict],
     ) -> CreatePaymentCredentialProviderOutput:
         """
         Creates a new payment credential provider for storing authentication
@@ -923,8 +1273,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         payment providers.
 
         Args:
-            input:
-                An instance of `CreatePaymentCredentialProviderInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -934,12 +1282,36 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `CreatePaymentCredentialProviderOutput`.
         """
+
+    def create_payment_credential_provider(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreatePaymentCredentialProviderOutput:
         return self._invoke(
-            input, _models.CREATE_PAYMENT_CREDENTIAL_PROVIDER, [], plugins
+            self._select_input(
+                _models.CREATE_PAYMENT_CREDENTIAL_PROVIDER, args, kwargs
+            ),
+            _models.CREATE_PAYMENT_CREDENTIAL_PROVIDER,
+            [],
+            plugins,
         )
 
+    @_overload
     def create_payment_manager(
-        self, input: CreatePaymentManagerInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreatePaymentManagerInput
+        | _models.CreatePaymentManagerInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreatePaymentManagerOutput: ...
+
+    @_overload
+    def create_payment_manager(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreatePaymentManagerInputDict],
     ) -> CreatePaymentManagerOutput:
         """
         Creates a new payment manager in your Amazon Web Services account. A
@@ -951,8 +1323,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         `authorizerConfiguration`.
 
         Args:
-            input:
-                An instance of `CreatePaymentManagerInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -962,10 +1332,33 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `CreatePaymentManagerOutput`.
         """
-        return self._invoke(input, _models.CREATE_PAYMENT_MANAGER, [], plugins)
 
+    def create_payment_manager(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreatePaymentManagerOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_PAYMENT_MANAGER, args, kwargs),
+            _models.CREATE_PAYMENT_MANAGER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_policy(
-        self, input: CreatePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreatePolicyInput | _models.CreatePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreatePolicyOutput: ...
+
+    @_overload
+    def create_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreatePolicyInputDict],
     ) -> CreatePolicyOutput:
         """
         Creates a policy within the AgentCore Policy system. Policies provide
@@ -989,8 +1382,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         sessions. To resume, you must start a new session with a new session ID.
 
         Args:
-            input:
-                An instance of `CreatePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1000,10 +1391,33 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `CreatePolicyOutput`.
         """
-        return self._invoke(input, _models.CREATE_POLICY, [], plugins)
 
+    def create_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreatePolicyOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_POLICY, args, kwargs),
+            _models.CREATE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_policy_engine(
-        self, input: CreatePolicyEngineInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreatePolicyEngineInput | _models.CreatePolicyEngineInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreatePolicyEngineOutput: ...
+
+    @_overload
+    def create_policy_engine(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreatePolicyEngineInputDict],
     ) -> CreatePolicyEngineOutput:
         """
         Creates a new policy engine within the AgentCore Policy system. A policy
@@ -1017,8 +1431,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         operation to poll the `status` field to track completion.
 
         Args:
-            input:
-                An instance of `CreatePolicyEngineInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1028,10 +1440,33 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `CreatePolicyEngineOutput`.
         """
-        return self._invoke(input, _models.CREATE_POLICY_ENGINE, [], plugins)
 
+    def create_policy_engine(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreatePolicyEngineOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_POLICY_ENGINE, args, kwargs),
+            _models.CREATE_POLICY_ENGINE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_registry(
-        self, input: CreateRegistryInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateRegistryInput | _models.CreateRegistryInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateRegistryOutput: ...
+
+    @_overload
+    def create_registry(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateRegistryInputDict],
     ) -> CreateRegistryOutput:
         """
         Creates a new registry in your Amazon Web Services account. A registry
@@ -1043,8 +1478,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         `authorizerConfiguration`.
 
         Args:
-            input:
-                An instance of `CreateRegistryInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1054,10 +1487,34 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `CreateRegistryOutput`.
         """
-        return self._invoke(input, _models.CREATE_REGISTRY, [], plugins)
 
+    def create_registry(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateRegistryOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_REGISTRY, args, kwargs),
+            _models.CREATE_REGISTRY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_registry_record(
-        self, input: CreateRegistryRecordInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateRegistryRecordInput
+        | _models.CreateRegistryRecordInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateRegistryRecordOutput: ...
+
+    @_overload
+    def create_registry_record(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateRegistryRecordInputDict],
     ) -> CreateRegistryRecordOutput:
         """
         Creates a new registry record within the specified registry. A registry
@@ -1068,8 +1525,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         The record is processed asynchronously and returns HTTP 202 Accepted.
 
         Args:
-            input:
-                An instance of `CreateRegistryRecordInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1079,17 +1534,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `CreateRegistryRecordOutput`.
         """
-        return self._invoke(input, _models.CREATE_REGISTRY_RECORD, [], plugins)
 
+    def create_registry_record(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateRegistryRecordOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_REGISTRY_RECORD, args, kwargs),
+            _models.CREATE_REGISTRY_RECORD,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_workload_identity(
-        self, input: CreateWorkloadIdentityInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateWorkloadIdentityInput
+        | _models.CreateWorkloadIdentityInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateWorkloadIdentityOutput: ...
+
+    @_overload
+    def create_workload_identity(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateWorkloadIdentityInputDict],
     ) -> CreateWorkloadIdentityOutput:
         """
         Creates a new workload identity.
 
         Args:
-            input:
-                An instance of `CreateWorkloadIdentityInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1099,18 +1576,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `CreateWorkloadIdentityOutput`.
         """
-        return self._invoke(input, _models.CREATE_WORKLOAD_IDENTITY, [], plugins)
 
+    def create_workload_identity(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateWorkloadIdentityOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_WORKLOAD_IDENTITY, args, kwargs),
+            _models.CREATE_WORKLOAD_IDENTITY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_agent_runtime(
-        self, input: DeleteAgentRuntimeInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteAgentRuntimeInput | _models.DeleteAgentRuntimeInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteAgentRuntimeOutput: ...
+
+    @_overload
+    def delete_agent_runtime(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteAgentRuntimeInputDict],
     ) -> DeleteAgentRuntimeOutput:
         """
         Deletes an Amazon Bedrock AgentCore Runtime, or a single version of an
         AgentCore Runtime when you provide the version qualifier.
 
         Args:
-            input:
-                An instance of `DeleteAgentRuntimeInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1120,19 +1618,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `DeleteAgentRuntimeOutput`.
         """
-        return self._invoke(input, _models.DELETE_AGENT_RUNTIME, [], plugins)
 
+    def delete_agent_runtime(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteAgentRuntimeOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_AGENT_RUNTIME, args, kwargs),
+            _models.DELETE_AGENT_RUNTIME,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_agent_runtime_endpoint(
         self,
-        input: DeleteAgentRuntimeEndpointInput,
+        request: _models.DeleteAgentRuntimeEndpointInput
+        | _models.DeleteAgentRuntimeEndpointInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteAgentRuntimeEndpointOutput: ...
+
+    @_overload
+    def delete_agent_runtime_endpoint(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteAgentRuntimeEndpointInputDict],
     ) -> DeleteAgentRuntimeEndpointOutput:
         """
         Deletes an AgentCore Runtime endpoint.
 
         Args:
-            input:
-                An instance of `DeleteAgentRuntimeEndpointInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1142,19 +1660,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `DeleteAgentRuntimeEndpointOutput`.
         """
-        return self._invoke(input, _models.DELETE_AGENT_RUNTIME_ENDPOINT, [], plugins)
 
+    def delete_agent_runtime_endpoint(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteAgentRuntimeEndpointOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_AGENT_RUNTIME_ENDPOINT, args, kwargs),
+            _models.DELETE_AGENT_RUNTIME_ENDPOINT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_api_key_credential_provider(
         self,
-        input: DeleteApiKeyCredentialProviderInput,
+        request: _models.DeleteApiKeyCredentialProviderInput
+        | _models.DeleteApiKeyCredentialProviderInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteApiKeyCredentialProviderOutput: ...
+
+    @_overload
+    def delete_api_key_credential_provider(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteApiKeyCredentialProviderInputDict],
     ) -> DeleteApiKeyCredentialProviderOutput:
         """
         Deletes an API key credential provider.
 
         Args:
-            input:
-                An instance of `DeleteApiKeyCredentialProviderInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1164,19 +1702,40 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `DeleteApiKeyCredentialProviderOutput`.
         """
+
+    def delete_api_key_credential_provider(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteApiKeyCredentialProviderOutput:
         return self._invoke(
-            input, _models.DELETE_API_KEY_CREDENTIAL_PROVIDER, [], plugins
+            self._select_input(
+                _models.DELETE_API_KEY_CREDENTIAL_PROVIDER, args, kwargs
+            ),
+            _models.DELETE_API_KEY_CREDENTIAL_PROVIDER,
+            [],
+            plugins,
         )
 
+    @_overload
     def delete_browser(
-        self, input: DeleteBrowserInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteBrowserInput | _models.DeleteBrowserInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteBrowserOutput: ...
+
+    @_overload
+    def delete_browser(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteBrowserInputDict],
     ) -> DeleteBrowserOutput:
         """
         Deletes a custom browser.
 
         Args:
-            input:
-                An instance of `DeleteBrowserInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1186,17 +1745,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `DeleteBrowserOutput`.
         """
-        return self._invoke(input, _models.DELETE_BROWSER, [], plugins)
 
+    def delete_browser(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteBrowserOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_BROWSER, args, kwargs),
+            _models.DELETE_BROWSER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_browser_profile(
-        self, input: DeleteBrowserProfileInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteBrowserProfileInput
+        | _models.DeleteBrowserProfileInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteBrowserProfileOutput: ...
+
+    @_overload
+    def delete_browser_profile(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteBrowserProfileInputDict],
     ) -> DeleteBrowserProfileOutput:
         """
         Deletes a browser profile.
 
         Args:
-            input:
-                An instance of `DeleteBrowserProfileInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1206,10 +1787,34 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `DeleteBrowserProfileOutput`.
         """
-        return self._invoke(input, _models.DELETE_BROWSER_PROFILE, [], plugins)
 
+    def delete_browser_profile(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteBrowserProfileOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_BROWSER_PROFILE, args, kwargs),
+            _models.DELETE_BROWSER_PROFILE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_capacity_provider(
-        self, input: DeleteCapacityProviderInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteCapacityProviderInput
+        | _models.DeleteCapacityProviderInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteCapacityProviderOutput: ...
+
+    @_overload
+    def delete_capacity_provider(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteCapacityProviderInputDict],
     ) -> DeleteCapacityProviderOutput:
         """
         Deletes a capacity provider. Before you delete a capacity provider,
@@ -1217,8 +1822,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         If any references remain, the operation fails.
 
         Args:
-            input:
-                An instance of `DeleteCapacityProviderInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1228,17 +1831,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `DeleteCapacityProviderOutput`.
         """
-        return self._invoke(input, _models.DELETE_CAPACITY_PROVIDER, [], plugins)
 
+    def delete_capacity_provider(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteCapacityProviderOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_CAPACITY_PROVIDER, args, kwargs),
+            _models.DELETE_CAPACITY_PROVIDER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_code_interpreter(
-        self, input: DeleteCodeInterpreterInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteCodeInterpreterInput
+        | _models.DeleteCodeInterpreterInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteCodeInterpreterOutput: ...
+
+    @_overload
+    def delete_code_interpreter(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteCodeInterpreterInputDict],
     ) -> DeleteCodeInterpreterOutput:
         """
         Deletes a custom code interpreter.
 
         Args:
-            input:
-                An instance of `DeleteCodeInterpreterInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1248,17 +1873,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `DeleteCodeInterpreterOutput`.
         """
-        return self._invoke(input, _models.DELETE_CODE_INTERPRETER, [], plugins)
 
+    def delete_code_interpreter(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteCodeInterpreterOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_CODE_INTERPRETER, args, kwargs),
+            _models.DELETE_CODE_INTERPRETER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_configuration_bundle(
-        self, input: DeleteConfigurationBundleInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteConfigurationBundleInput
+        | _models.DeleteConfigurationBundleInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteConfigurationBundleOutput: ...
+
+    @_overload
+    def delete_configuration_bundle(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteConfigurationBundleInputDict],
     ) -> DeleteConfigurationBundleOutput:
         """
         Deletes a configuration bundle and all of its versions.
 
         Args:
-            input:
-                An instance of `DeleteConfigurationBundleInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1268,17 +1915,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `DeleteConfigurationBundleOutput`.
         """
-        return self._invoke(input, _models.DELETE_CONFIGURATION_BUNDLE, [], plugins)
 
+    def delete_configuration_bundle(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteConfigurationBundleOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_CONFIGURATION_BUNDLE, args, kwargs),
+            _models.DELETE_CONFIGURATION_BUNDLE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_consent_portal(
-        self, input: DeleteConsentPortalInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteConsentPortalInput
+        | _models.DeleteConsentPortalInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteConsentPortalOutput: ...
+
+    @_overload
+    def delete_consent_portal(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteConsentPortalInputDict],
     ) -> DeleteConsentPortalOutput:
         """
         Deletes a consent portal.
 
         Args:
-            input:
-                An instance of `DeleteConsentPortalInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1288,10 +1957,33 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `DeleteConsentPortalOutput`.
         """
-        return self._invoke(input, _models.DELETE_CONSENT_PORTAL, [], plugins)
 
+    def delete_consent_portal(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteConsentPortalOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_CONSENT_PORTAL, args, kwargs),
+            _models.DELETE_CONSENT_PORTAL,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_dataset(
-        self, input: DeleteDatasetInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteDatasetInput | _models.DeleteDatasetInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteDatasetOutput: ...
+
+    @_overload
+    def delete_dataset(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteDatasetInputDict],
     ) -> DeleteDatasetOutput:
         """
         Deletes a dataset version or an entire dataset asynchronously. If
@@ -1299,8 +1991,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         itself. If provided, deletes only that specific version.
 
         Args:
-            input:
-                An instance of `DeleteDatasetInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1310,10 +2000,34 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `DeleteDatasetOutput`.
         """
-        return self._invoke(input, _models.DELETE_DATASET, [], plugins)
 
+    def delete_dataset(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteDatasetOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_DATASET, args, kwargs),
+            _models.DELETE_DATASET,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_dataset_examples(
-        self, input: DeleteDatasetExamplesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteDatasetExamplesInput
+        | _models.DeleteDatasetExamplesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteDatasetExamplesOutput: ...
+
+    @_overload
+    def delete_dataset_examples(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteDatasetExamplesInputDict],
     ) -> DeleteDatasetExamplesOutput:
         """
         Deletes specific examples by ID from DRAFT. All example IDs are
@@ -1321,8 +2035,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         the entire batch is rejected (all-or-nothing semantics).
 
         Args:
-            input:
-                An instance of `DeleteDatasetExamplesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1332,10 +2044,33 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `DeleteDatasetExamplesOutput`.
         """
-        return self._invoke(input, _models.DELETE_DATASET_EXAMPLES, [], plugins)
 
+    def delete_dataset_examples(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteDatasetExamplesOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_DATASET_EXAMPLES, args, kwargs),
+            _models.DELETE_DATASET_EXAMPLES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_evaluator(
-        self, input: DeleteEvaluatorInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteEvaluatorInput | _models.DeleteEvaluatorInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteEvaluatorOutput: ...
+
+    @_overload
+    def delete_evaluator(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteEvaluatorInputDict],
     ) -> DeleteEvaluatorOutput:
         """
         Deletes a custom evaluator. Builtin evaluators cannot be deleted. The
@@ -1343,8 +2078,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         configurations.
 
         Args:
-            input:
-                An instance of `DeleteEvaluatorInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1354,17 +2087,38 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `DeleteEvaluatorOutput`.
         """
-        return self._invoke(input, _models.DELETE_EVALUATOR, [], plugins)
 
+    def delete_evaluator(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteEvaluatorOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_EVALUATOR, args, kwargs),
+            _models.DELETE_EVALUATOR,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_gateway(
-        self, input: DeleteGatewayInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteGatewayInput | _models.DeleteGatewayInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteGatewayOutput: ...
+
+    @_overload
+    def delete_gateway(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteGatewayInputDict],
     ) -> DeleteGatewayOutput:
         """
         Deletes a gateway.
 
         Args:
-            input:
-                An instance of `DeleteGatewayInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1374,17 +2128,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `DeleteGatewayOutput`.
         """
-        return self._invoke(input, _models.DELETE_GATEWAY, [], plugins)
 
+    def delete_gateway(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteGatewayOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_GATEWAY, args, kwargs),
+            _models.DELETE_GATEWAY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_gateway_rate_limit(
-        self, input: DeleteGatewayRateLimitInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteGatewayRateLimitInput
+        | _models.DeleteGatewayRateLimitInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteGatewayRateLimitOutput: ...
+
+    @_overload
+    def delete_gateway_rate_limit(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteGatewayRateLimitInputDict],
     ) -> DeleteGatewayRateLimitOutput:
         """
         Deletes a gateway rate limit.
 
         Args:
-            input:
-                An instance of `DeleteGatewayRateLimitInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1394,17 +2170,38 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `DeleteGatewayRateLimitOutput`.
         """
-        return self._invoke(input, _models.DELETE_GATEWAY_RATE_LIMIT, [], plugins)
 
+    def delete_gateway_rate_limit(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteGatewayRateLimitOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_GATEWAY_RATE_LIMIT, args, kwargs),
+            _models.DELETE_GATEWAY_RATE_LIMIT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_gateway_rule(
-        self, input: DeleteGatewayRuleInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteGatewayRuleInput | _models.DeleteGatewayRuleInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteGatewayRuleOutput: ...
+
+    @_overload
+    def delete_gateway_rule(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteGatewayRuleInputDict],
     ) -> DeleteGatewayRuleOutput:
         """
         Deletes a gateway rule.
 
         Args:
-            input:
-                An instance of `DeleteGatewayRuleInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1414,10 +2211,34 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `DeleteGatewayRuleOutput`.
         """
-        return self._invoke(input, _models.DELETE_GATEWAY_RULE, [], plugins)
 
+    def delete_gateway_rule(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteGatewayRuleOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_GATEWAY_RULE, args, kwargs),
+            _models.DELETE_GATEWAY_RULE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_gateway_target(
-        self, input: DeleteGatewayTargetInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteGatewayTargetInput
+        | _models.DeleteGatewayTargetInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteGatewayTargetOutput: ...
+
+    @_overload
+    def delete_gateway_target(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteGatewayTargetInputDict],
     ) -> DeleteGatewayTargetOutput:
         """
         Deletes a gateway target.
@@ -1428,8 +2249,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         fail before deleting the target.
 
         Args:
-            input:
-                An instance of `DeleteGatewayTargetInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1439,17 +2258,38 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `DeleteGatewayTargetOutput`.
         """
-        return self._invoke(input, _models.DELETE_GATEWAY_TARGET, [], plugins)
 
+    def delete_gateway_target(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteGatewayTargetOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_GATEWAY_TARGET, args, kwargs),
+            _models.DELETE_GATEWAY_TARGET,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_harness(
-        self, input: DeleteHarnessInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteHarnessInput | _models.DeleteHarnessInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteHarnessOutput: ...
+
+    @_overload
+    def delete_harness(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteHarnessInputDict],
     ) -> DeleteHarnessOutput:
         """
         Operation to delete a Harness.
 
         Args:
-            input:
-                An instance of `DeleteHarnessInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1459,17 +2299,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `DeleteHarnessOutput`.
         """
-        return self._invoke(input, _models.DELETE_HARNESS, [], plugins)
 
+    def delete_harness(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteHarnessOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_HARNESS, args, kwargs),
+            _models.DELETE_HARNESS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_harness_endpoint(
-        self, input: DeleteHarnessEndpointInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteHarnessEndpointInput
+        | _models.DeleteHarnessEndpointInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteHarnessEndpointOutput: ...
+
+    @_overload
+    def delete_harness_endpoint(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteHarnessEndpointInputDict],
     ) -> DeleteHarnessEndpointOutput:
         """
         Operation to delete a harness endpoint.
 
         Args:
-            input:
-                An instance of `DeleteHarnessEndpointInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1479,18 +2341,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `DeleteHarnessEndpointOutput`.
         """
-        return self._invoke(input, _models.DELETE_HARNESS_ENDPOINT, [], plugins)
 
+    def delete_harness_endpoint(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteHarnessEndpointOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_HARNESS_ENDPOINT, args, kwargs),
+            _models.DELETE_HARNESS_ENDPOINT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_memory(
-        self, input: DeleteMemoryInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteMemoryInput | _models.DeleteMemoryInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteMemoryOutput: ...
+
+    @_overload
+    def delete_memory(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteMemoryInputDict],
     ) -> DeleteMemoryOutput:
         """
         Deletes an Amazon Bedrock AgentCore Memory resource. When you delete a
         memory resource, it is permanently removed.
 
         Args:
-            input:
-                An instance of `DeleteMemoryInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1500,19 +2383,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `DeleteMemoryOutput`.
         """
-        return self._invoke(input, _models.DELETE_MEMORY, [], plugins)
 
+    def delete_memory(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteMemoryOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_MEMORY, args, kwargs),
+            _models.DELETE_MEMORY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_oauth2_credential_provider(
         self,
-        input: DeleteOauth2CredentialProviderInput,
+        request: _models.DeleteOauth2CredentialProviderInput
+        | _models.DeleteOauth2CredentialProviderInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteOauth2CredentialProviderOutput: ...
+
+    @_overload
+    def delete_oauth2_credential_provider(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteOauth2CredentialProviderInputDict],
     ) -> DeleteOauth2CredentialProviderOutput:
         """
         Deletes an OAuth2 credential provider.
 
         Args:
-            input:
-                An instance of `DeleteOauth2CredentialProviderInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1522,22 +2425,40 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `DeleteOauth2CredentialProviderOutput`.
         """
+
+    def delete_oauth2_credential_provider(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteOauth2CredentialProviderOutput:
         return self._invoke(
-            input, _models.DELETE_OAUTH2_CREDENTIAL_PROVIDER, [], plugins
+            self._select_input(_models.DELETE_OAUTH2_CREDENTIAL_PROVIDER, args, kwargs),
+            _models.DELETE_OAUTH2_CREDENTIAL_PROVIDER,
+            [],
+            plugins,
         )
 
+    @_overload
     def delete_online_evaluation_config(
         self,
-        input: DeleteOnlineEvaluationConfigInput,
+        request: _models.DeleteOnlineEvaluationConfigInput
+        | _models.DeleteOnlineEvaluationConfigInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteOnlineEvaluationConfigOutput: ...
+
+    @_overload
+    def delete_online_evaluation_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteOnlineEvaluationConfigInputDict],
     ) -> DeleteOnlineEvaluationConfigOutput:
         """
         Deletes an online evaluation configuration and stops any ongoing
         evaluation processes associated with it.
 
         Args:
-            input:
-                An instance of `DeleteOnlineEvaluationConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1547,17 +2468,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `DeleteOnlineEvaluationConfigOutput`.
         """
-        return self._invoke(input, _models.DELETE_ONLINE_EVALUATION_CONFIG, [], plugins)
 
+    def delete_online_evaluation_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteOnlineEvaluationConfigOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_ONLINE_EVALUATION_CONFIG, args, kwargs),
+            _models.DELETE_ONLINE_EVALUATION_CONFIG,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_payment_connector(
-        self, input: DeletePaymentConnectorInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeletePaymentConnectorInput
+        | _models.DeletePaymentConnectorInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeletePaymentConnectorOutput: ...
+
+    @_overload
+    def delete_payment_connector(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeletePaymentConnectorInputDict],
     ) -> DeletePaymentConnectorOutput:
         """
         Deletes a payment connector.
 
         Args:
-            input:
-                An instance of `DeletePaymentConnectorInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1567,20 +2510,40 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `DeletePaymentConnectorOutput`.
         """
-        return self._invoke(input, _models.DELETE_PAYMENT_CONNECTOR, [], plugins)
 
+    def delete_payment_connector(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeletePaymentConnectorOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_PAYMENT_CONNECTOR, args, kwargs),
+            _models.DELETE_PAYMENT_CONNECTOR,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_payment_credential_provider(
         self,
-        input: DeletePaymentCredentialProviderInput,
+        request: _models.DeletePaymentCredentialProviderInput
+        | _models.DeletePaymentCredentialProviderInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeletePaymentCredentialProviderOutput: ...
+
+    @_overload
+    def delete_payment_credential_provider(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeletePaymentCredentialProviderInputDict],
     ) -> DeletePaymentCredentialProviderOutput:
         """
         Deletes a payment credential provider and its associated stored
         credentials.
 
         Args:
-            input:
-                An instance of `DeletePaymentCredentialProviderInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1590,12 +2553,36 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `DeletePaymentCredentialProviderOutput`.
         """
+
+    def delete_payment_credential_provider(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeletePaymentCredentialProviderOutput:
         return self._invoke(
-            input, _models.DELETE_PAYMENT_CREDENTIAL_PROVIDER, [], plugins
+            self._select_input(
+                _models.DELETE_PAYMENT_CREDENTIAL_PROVIDER, args, kwargs
+            ),
+            _models.DELETE_PAYMENT_CREDENTIAL_PROVIDER,
+            [],
+            plugins,
         )
 
+    @_overload
     def delete_payment_manager(
-        self, input: DeletePaymentManagerInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeletePaymentManagerInput
+        | _models.DeletePaymentManagerInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeletePaymentManagerOutput: ...
+
+    @_overload
+    def delete_payment_manager(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeletePaymentManagerInputDict],
     ) -> DeletePaymentManagerOutput:
         """
         Deletes a payment manager. All payment connectors associated with the
@@ -1603,8 +2590,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         deleted. This operation initiates the deletion process asynchronously.
 
         Args:
-            input:
-                An instance of `DeletePaymentManagerInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1614,10 +2599,33 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `DeletePaymentManagerOutput`.
         """
-        return self._invoke(input, _models.DELETE_PAYMENT_MANAGER, [], plugins)
 
+    def delete_payment_manager(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeletePaymentManagerOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_PAYMENT_MANAGER, args, kwargs),
+            _models.DELETE_PAYMENT_MANAGER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_policy(
-        self, input: DeletePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeletePolicyInput | _models.DeletePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeletePolicyOutput: ...
+
+    @_overload
+    def delete_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeletePolicyInputDict],
     ) -> DeletePolicyOutput:
         """
         Deletes an existing policy from the AgentCore Policy system. Once
@@ -1627,8 +2635,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         completion.
 
         Args:
-            input:
-                An instance of `DeletePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1638,10 +2644,33 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `DeletePolicyOutput`.
         """
-        return self._invoke(input, _models.DELETE_POLICY, [], plugins)
 
+    def delete_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeletePolicyOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_POLICY, args, kwargs),
+            _models.DELETE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_policy_engine(
-        self, input: DeletePolicyEngineInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeletePolicyEngineInput | _models.DeletePolicyEngineInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeletePolicyEngineOutput: ...
+
+    @_overload
+    def delete_policy_engine(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeletePolicyEngineInputDict],
     ) -> DeletePolicyEngineOutput:
         """
         Deletes an existing policy engine from the AgentCore Policy system. The
@@ -1652,8 +2681,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         `status` field to track completion.
 
         Args:
-            input:
-                An instance of `DeletePolicyEngineInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1663,10 +2690,33 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `DeletePolicyEngineOutput`.
         """
-        return self._invoke(input, _models.DELETE_POLICY_ENGINE, [], plugins)
 
+    def delete_policy_engine(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeletePolicyEngineOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_POLICY_ENGINE, args, kwargs),
+            _models.DELETE_POLICY_ENGINE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_registry(
-        self, input: DeleteRegistryInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteRegistryInput | _models.DeleteRegistryInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteRegistryOutput: ...
+
+    @_overload
+    def delete_registry(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteRegistryInputDict],
     ) -> DeleteRegistryOutput:
         """
         Deletes a registry. The registry must contain zero records before it can
@@ -1674,8 +2724,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         asynchronously.
 
         Args:
-            input:
-                An instance of `DeleteRegistryInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1685,18 +2733,40 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `DeleteRegistryOutput`.
         """
-        return self._invoke(input, _models.DELETE_REGISTRY, [], plugins)
 
+    def delete_registry(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteRegistryOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_REGISTRY, args, kwargs),
+            _models.DELETE_REGISTRY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_registry_record(
-        self, input: DeleteRegistryRecordInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteRegistryRecordInput
+        | _models.DeleteRegistryRecordInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteRegistryRecordOutput: ...
+
+    @_overload
+    def delete_registry_record(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteRegistryRecordInputDict],
     ) -> DeleteRegistryRecordOutput:
         """
         Deletes a registry record. The record's status transitions to
         `DELETING` and the record is removed asynchronously.
 
         Args:
-            input:
-                An instance of `DeleteRegistryRecordInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1706,10 +2776,34 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `DeleteRegistryRecordOutput`.
         """
-        return self._invoke(input, _models.DELETE_REGISTRY_RECORD, [], plugins)
 
+    def delete_registry_record(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteRegistryRecordOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_REGISTRY_RECORD, args, kwargs),
+            _models.DELETE_REGISTRY_RECORD,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_resource_policy(
-        self, input: DeleteResourcePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteResourcePolicyInput
+        | _models.DeleteResourcePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteResourcePolicyOutput: ...
+
+    @_overload
+    def delete_resource_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteResourcePolicyInputDict],
     ) -> DeleteResourcePolicyOutput:
         """
         Deletes the resource-based policy for a specified resource.
@@ -1719,8 +2813,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
             Gateway.
 
         Args:
-            input:
-                An instance of `DeleteResourcePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1730,17 +2822,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `DeleteResourcePolicyOutput`.
         """
-        return self._invoke(input, _models.DELETE_RESOURCE_POLICY, [], plugins)
 
+    def delete_resource_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteResourcePolicyOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_RESOURCE_POLICY, args, kwargs),
+            _models.DELETE_RESOURCE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_workload_identity(
-        self, input: DeleteWorkloadIdentityInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteWorkloadIdentityInput
+        | _models.DeleteWorkloadIdentityInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteWorkloadIdentityOutput: ...
+
+    @_overload
+    def delete_workload_identity(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteWorkloadIdentityInputDict],
     ) -> DeleteWorkloadIdentityOutput:
         """
         Deletes a workload identity.
 
         Args:
-            input:
-                An instance of `DeleteWorkloadIdentityInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1750,17 +2864,38 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `DeleteWorkloadIdentityOutput`.
         """
-        return self._invoke(input, _models.DELETE_WORKLOAD_IDENTITY, [], plugins)
 
+    def delete_workload_identity(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteWorkloadIdentityOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_WORKLOAD_IDENTITY, args, kwargs),
+            _models.DELETE_WORKLOAD_IDENTITY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_agent_runtime(
-        self, input: GetAgentRuntimeInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetAgentRuntimeInput | _models.GetAgentRuntimeInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetAgentRuntimeOutput: ...
+
+    @_overload
+    def get_agent_runtime(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetAgentRuntimeInputDict],
     ) -> GetAgentRuntimeOutput:
         """
         Gets an Amazon Bedrock AgentCore Runtime.
 
         Args:
-            input:
-                An instance of `GetAgentRuntimeInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1770,17 +2905,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `GetAgentRuntimeOutput`.
         """
-        return self._invoke(input, _models.GET_AGENT_RUNTIME, [], plugins)
 
+    def get_agent_runtime(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetAgentRuntimeOutput:
+        return self._invoke(
+            self._select_input(_models.GET_AGENT_RUNTIME, args, kwargs),
+            _models.GET_AGENT_RUNTIME,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_agent_runtime_endpoint(
-        self, input: GetAgentRuntimeEndpointInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetAgentRuntimeEndpointInput
+        | _models.GetAgentRuntimeEndpointInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetAgentRuntimeEndpointOutput: ...
+
+    @_overload
+    def get_agent_runtime_endpoint(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetAgentRuntimeEndpointInputDict],
     ) -> GetAgentRuntimeEndpointOutput:
         """
         Gets information about an Amazon Secure AgentEndpoint.
 
         Args:
-            input:
-                An instance of `GetAgentRuntimeEndpointInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1790,19 +2947,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `GetAgentRuntimeEndpointOutput`.
         """
-        return self._invoke(input, _models.GET_AGENT_RUNTIME_ENDPOINT, [], plugins)
 
+    def get_agent_runtime_endpoint(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetAgentRuntimeEndpointOutput:
+        return self._invoke(
+            self._select_input(_models.GET_AGENT_RUNTIME_ENDPOINT, args, kwargs),
+            _models.GET_AGENT_RUNTIME_ENDPOINT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_api_key_credential_provider(
         self,
-        input: GetApiKeyCredentialProviderInput,
+        request: _models.GetApiKeyCredentialProviderInput
+        | _models.GetApiKeyCredentialProviderInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetApiKeyCredentialProviderOutput: ...
+
+    @_overload
+    def get_api_key_credential_provider(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetApiKeyCredentialProviderInputDict],
     ) -> GetApiKeyCredentialProviderOutput:
         """
         Retrieves information about an API key credential provider.
 
         Args:
-            input:
-                An instance of `GetApiKeyCredentialProviderInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1812,17 +2989,38 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `GetApiKeyCredentialProviderOutput`.
         """
-        return self._invoke(input, _models.GET_API_KEY_CREDENTIAL_PROVIDER, [], plugins)
 
+    def get_api_key_credential_provider(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetApiKeyCredentialProviderOutput:
+        return self._invoke(
+            self._select_input(_models.GET_API_KEY_CREDENTIAL_PROVIDER, args, kwargs),
+            _models.GET_API_KEY_CREDENTIAL_PROVIDER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_browser(
-        self, input: GetBrowserInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetBrowserInput | _models.GetBrowserInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetBrowserOutput: ...
+
+    @_overload
+    def get_browser(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetBrowserInputDict],
     ) -> GetBrowserOutput:
         """
         Gets information about a custom browser.
 
         Args:
-            input:
-                An instance of `GetBrowserInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1832,17 +3030,38 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `GetBrowserOutput`.
         """
-        return self._invoke(input, _models.GET_BROWSER, [], plugins)
 
+    def get_browser(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetBrowserOutput:
+        return self._invoke(
+            self._select_input(_models.GET_BROWSER, args, kwargs),
+            _models.GET_BROWSER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_browser_profile(
-        self, input: GetBrowserProfileInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetBrowserProfileInput | _models.GetBrowserProfileInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetBrowserProfileOutput: ...
+
+    @_overload
+    def get_browser_profile(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetBrowserProfileInputDict],
     ) -> GetBrowserProfileOutput:
         """
         Gets information about a browser profile.
 
         Args:
-            input:
-                An instance of `GetBrowserProfileInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1852,18 +3071,40 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `GetBrowserProfileOutput`.
         """
-        return self._invoke(input, _models.GET_BROWSER_PROFILE, [], plugins)
 
+    def get_browser_profile(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetBrowserProfileOutput:
+        return self._invoke(
+            self._select_input(_models.GET_BROWSER_PROFILE, args, kwargs),
+            _models.GET_BROWSER_PROFILE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_capacity_provider(
-        self, input: GetCapacityProviderInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetCapacityProviderInput
+        | _models.GetCapacityProviderInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetCapacityProviderOutput: ...
+
+    @_overload
+    def get_capacity_provider(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetCapacityProviderInputDict],
     ) -> GetCapacityProviderOutput:
         """
         Retrieves information about a capacity provider, including its status,
         permissions configuration, and compute configuration.
 
         Args:
-            input:
-                An instance of `GetCapacityProviderInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1873,17 +3114,38 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `GetCapacityProviderOutput`.
         """
-        return self._invoke(input, _models.GET_CAPACITY_PROVIDER, [], plugins)
 
+    def get_capacity_provider(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetCapacityProviderOutput:
+        return self._invoke(
+            self._select_input(_models.GET_CAPACITY_PROVIDER, args, kwargs),
+            _models.GET_CAPACITY_PROVIDER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_code_interpreter(
-        self, input: GetCodeInterpreterInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetCodeInterpreterInput | _models.GetCodeInterpreterInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetCodeInterpreterOutput: ...
+
+    @_overload
+    def get_code_interpreter(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetCodeInterpreterInputDict],
     ) -> GetCodeInterpreterOutput:
         """
         Gets information about a custom code interpreter.
 
         Args:
-            input:
-                An instance of `GetCodeInterpreterInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1893,10 +3155,34 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `GetCodeInterpreterOutput`.
         """
-        return self._invoke(input, _models.GET_CODE_INTERPRETER, [], plugins)
 
+    def get_code_interpreter(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetCodeInterpreterOutput:
+        return self._invoke(
+            self._select_input(_models.GET_CODE_INTERPRETER, args, kwargs),
+            _models.GET_CODE_INTERPRETER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_configuration_bundle(
-        self, input: GetConfigurationBundleInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetConfigurationBundleInput
+        | _models.GetConfigurationBundleInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetConfigurationBundleOutput: ...
+
+    @_overload
+    def get_configuration_bundle(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetConfigurationBundleInputDict],
     ) -> GetConfigurationBundleOutput:
         """
         Gets the latest version of a configuration bundle. By default, returns
@@ -1905,8 +3191,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         version.
 
         Args:
-            input:
-                An instance of `GetConfigurationBundleInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1916,20 +3200,40 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `GetConfigurationBundleOutput`.
         """
-        return self._invoke(input, _models.GET_CONFIGURATION_BUNDLE, [], plugins)
 
+    def get_configuration_bundle(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetConfigurationBundleOutput:
+        return self._invoke(
+            self._select_input(_models.GET_CONFIGURATION_BUNDLE, args, kwargs),
+            _models.GET_CONFIGURATION_BUNDLE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_configuration_bundle_version(
         self,
-        input: GetConfigurationBundleVersionInput,
+        request: _models.GetConfigurationBundleVersionInput
+        | _models.GetConfigurationBundleVersionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetConfigurationBundleVersionOutput: ...
+
+    @_overload
+    def get_configuration_bundle_version(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetConfigurationBundleVersionInputDict],
     ) -> GetConfigurationBundleVersionOutput:
         """
         Gets a specific version of a configuration bundle by its version
         identifier.
 
         Args:
-            input:
-                An instance of `GetConfigurationBundleVersionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1939,19 +3243,38 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `GetConfigurationBundleVersionOutput`.
         """
+
+    def get_configuration_bundle_version(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetConfigurationBundleVersionOutput:
         return self._invoke(
-            input, _models.GET_CONFIGURATION_BUNDLE_VERSION, [], plugins
+            self._select_input(_models.GET_CONFIGURATION_BUNDLE_VERSION, args, kwargs),
+            _models.GET_CONFIGURATION_BUNDLE_VERSION,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_consent_portal(
-        self, input: GetConsentPortalInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetConsentPortalInput | _models.GetConsentPortalInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetConsentPortalOutput: ...
+
+    @_overload
+    def get_consent_portal(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetConsentPortalInputDict],
     ) -> GetConsentPortalOutput:
         """
         Retrieves information about a consent portal.
 
         Args:
-            input:
-                An instance of `GetConsentPortalInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1961,10 +3284,33 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `GetConsentPortalOutput`.
         """
-        return self._invoke(input, _models.GET_CONSENT_PORTAL, [], plugins)
 
+    def get_consent_portal(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetConsentPortalOutput:
+        return self._invoke(
+            self._select_input(_models.GET_CONSENT_PORTAL, args, kwargs),
+            _models.GET_CONSENT_PORTAL,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_dataset(
-        self, input: GetDatasetInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetDatasetInput | _models.GetDatasetInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetDatasetOutput: ...
+
+    @_overload
+    def get_dataset(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetDatasetInputDict],
     ) -> GetDatasetOutput:
         """
         Retrieves dataset metadata. Use the `datasetVersion` query parameter to
@@ -1972,8 +3318,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         For paginated example content, use `ListDatasetExamples`.
 
         Args:
-            input:
-                An instance of `GetDatasetInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1983,10 +3327,33 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `GetDatasetOutput`.
         """
-        return self._invoke(input, _models.GET_DATASET, [], plugins)
 
+    def get_dataset(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetDatasetOutput:
+        return self._invoke(
+            self._select_input(_models.GET_DATASET, args, kwargs),
+            _models.GET_DATASET,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_evaluator(
-        self, input: GetEvaluatorInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetEvaluatorInput | _models.GetEvaluatorInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetEvaluatorOutput: ...
+
+    @_overload
+    def get_evaluator(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetEvaluatorInputDict],
     ) -> GetEvaluatorOutput:
         """
         Retrieves detailed information about an evaluator, including its
@@ -1994,8 +3361,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         evaluators.
 
         Args:
-            input:
-                An instance of `GetEvaluatorInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2005,17 +3370,38 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `GetEvaluatorOutput`.
         """
-        return self._invoke(input, _models.GET_EVALUATOR, [], plugins)
 
+    def get_evaluator(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetEvaluatorOutput:
+        return self._invoke(
+            self._select_input(_models.GET_EVALUATOR, args, kwargs),
+            _models.GET_EVALUATOR,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_gateway(
-        self, input: GetGatewayInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetGatewayInput | _models.GetGatewayInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetGatewayOutput: ...
+
+    @_overload
+    def get_gateway(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetGatewayInputDict],
     ) -> GetGatewayOutput:
         """
         Retrieves information about a specific Gateway.
 
         Args:
-            input:
-                An instance of `GetGatewayInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2025,17 +3411,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `GetGatewayOutput`.
         """
-        return self._invoke(input, _models.GET_GATEWAY, [], plugins)
 
+    def get_gateway(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetGatewayOutput:
+        return self._invoke(
+            self._select_input(_models.GET_GATEWAY, args, kwargs),
+            _models.GET_GATEWAY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_gateway_rate_limit(
-        self, input: GetGatewayRateLimitInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetGatewayRateLimitInput
+        | _models.GetGatewayRateLimitInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetGatewayRateLimitOutput: ...
+
+    @_overload
+    def get_gateway_rate_limit(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetGatewayRateLimitInputDict],
     ) -> GetGatewayRateLimitOutput:
         """
         Retrieves information about a gateway rate limit.
 
         Args:
-            input:
-                An instance of `GetGatewayRateLimitInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2045,17 +3453,38 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `GetGatewayRateLimitOutput`.
         """
-        return self._invoke(input, _models.GET_GATEWAY_RATE_LIMIT, [], plugins)
 
+    def get_gateway_rate_limit(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetGatewayRateLimitOutput:
+        return self._invoke(
+            self._select_input(_models.GET_GATEWAY_RATE_LIMIT, args, kwargs),
+            _models.GET_GATEWAY_RATE_LIMIT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_gateway_rule(
-        self, input: GetGatewayRuleInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetGatewayRuleInput | _models.GetGatewayRuleInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetGatewayRuleOutput: ...
+
+    @_overload
+    def get_gateway_rule(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetGatewayRuleInputDict],
     ) -> GetGatewayRuleOutput:
         """
         Retrieves detailed information about a specific gateway rule.
 
         Args:
-            input:
-                An instance of `GetGatewayRuleInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2065,17 +3494,38 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `GetGatewayRuleOutput`.
         """
-        return self._invoke(input, _models.GET_GATEWAY_RULE, [], plugins)
 
+    def get_gateway_rule(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetGatewayRuleOutput:
+        return self._invoke(
+            self._select_input(_models.GET_GATEWAY_RULE, args, kwargs),
+            _models.GET_GATEWAY_RULE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_gateway_target(
-        self, input: GetGatewayTargetInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetGatewayTargetInput | _models.GetGatewayTargetInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetGatewayTargetOutput: ...
+
+    @_overload
+    def get_gateway_target(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetGatewayTargetInputDict],
     ) -> GetGatewayTargetOutput:
         """
         Retrieves information about a specific gateway target.
 
         Args:
-            input:
-                An instance of `GetGatewayTargetInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2085,17 +3535,38 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `GetGatewayTargetOutput`.
         """
-        return self._invoke(input, _models.GET_GATEWAY_TARGET, [], plugins)
 
+    def get_gateway_target(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetGatewayTargetOutput:
+        return self._invoke(
+            self._select_input(_models.GET_GATEWAY_TARGET, args, kwargs),
+            _models.GET_GATEWAY_TARGET,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_harness(
-        self, input: GetHarnessInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetHarnessInput | _models.GetHarnessInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetHarnessOutput: ...
+
+    @_overload
+    def get_harness(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetHarnessInputDict],
     ) -> GetHarnessOutput:
         """
         Operation to get a single harness.
 
         Args:
-            input:
-                An instance of `GetHarnessInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2105,17 +3576,38 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `GetHarnessOutput`.
         """
-        return self._invoke(input, _models.GET_HARNESS, [], plugins)
 
+    def get_harness(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetHarnessOutput:
+        return self._invoke(
+            self._select_input(_models.GET_HARNESS, args, kwargs),
+            _models.GET_HARNESS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_harness_endpoint(
-        self, input: GetHarnessEndpointInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetHarnessEndpointInput | _models.GetHarnessEndpointInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetHarnessEndpointOutput: ...
+
+    @_overload
+    def get_harness_endpoint(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetHarnessEndpointInputDict],
     ) -> GetHarnessEndpointOutput:
         """
         Operation to get a single harness endpoint.
 
         Args:
-            input:
-                An instance of `GetHarnessEndpointInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2125,17 +3617,38 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `GetHarnessEndpointOutput`.
         """
-        return self._invoke(input, _models.GET_HARNESS_ENDPOINT, [], plugins)
 
+    def get_harness_endpoint(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetHarnessEndpointOutput:
+        return self._invoke(
+            self._select_input(_models.GET_HARNESS_ENDPOINT, args, kwargs),
+            _models.GET_HARNESS_ENDPOINT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_memory(
-        self, input: GetMemoryInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetMemoryInput | _models.GetMemoryInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetMemoryOutput: ...
+
+    @_overload
+    def get_memory(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetMemoryInputDict],
     ) -> GetMemoryOutput:
         """
         Retrieve an existing Amazon Bedrock AgentCore Memory resource.
 
         Args:
-            input:
-                An instance of `GetMemoryInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2145,19 +3658,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `GetMemoryOutput`.
         """
-        return self._invoke(input, _models.GET_MEMORY, [], plugins)
 
+    def get_memory(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetMemoryOutput:
+        return self._invoke(
+            self._select_input(_models.GET_MEMORY, args, kwargs),
+            _models.GET_MEMORY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_oauth2_credential_provider(
         self,
-        input: GetOauth2CredentialProviderInput,
+        request: _models.GetOauth2CredentialProviderInput
+        | _models.GetOauth2CredentialProviderInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetOauth2CredentialProviderOutput: ...
+
+    @_overload
+    def get_oauth2_credential_provider(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetOauth2CredentialProviderInputDict],
     ) -> GetOauth2CredentialProviderOutput:
         """
         Retrieves information about an OAuth2 credential provider.
 
         Args:
-            input:
-                An instance of `GetOauth2CredentialProviderInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2167,18 +3700,40 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `GetOauth2CredentialProviderOutput`.
         """
-        return self._invoke(input, _models.GET_OAUTH2_CREDENTIAL_PROVIDER, [], plugins)
 
+    def get_oauth2_credential_provider(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetOauth2CredentialProviderOutput:
+        return self._invoke(
+            self._select_input(_models.GET_OAUTH2_CREDENTIAL_PROVIDER, args, kwargs),
+            _models.GET_OAUTH2_CREDENTIAL_PROVIDER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_online_evaluation_config(
-        self, input: GetOnlineEvaluationConfigInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetOnlineEvaluationConfigInput
+        | _models.GetOnlineEvaluationConfigInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetOnlineEvaluationConfigOutput: ...
+
+    @_overload
+    def get_online_evaluation_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetOnlineEvaluationConfigInputDict],
     ) -> GetOnlineEvaluationConfigOutput:
         """
         Retrieves detailed information about an online evaluation configuration,
         including its rules, data sources, evaluators, and execution status.
 
         Args:
-            input:
-                An instance of `GetOnlineEvaluationConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2188,17 +3743,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `GetOnlineEvaluationConfigOutput`.
         """
-        return self._invoke(input, _models.GET_ONLINE_EVALUATION_CONFIG, [], plugins)
 
+    def get_online_evaluation_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetOnlineEvaluationConfigOutput:
+        return self._invoke(
+            self._select_input(_models.GET_ONLINE_EVALUATION_CONFIG, args, kwargs),
+            _models.GET_ONLINE_EVALUATION_CONFIG,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_payment_connector(
-        self, input: GetPaymentConnectorInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetPaymentConnectorInput
+        | _models.GetPaymentConnectorInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetPaymentConnectorOutput: ...
+
+    @_overload
+    def get_payment_connector(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetPaymentConnectorInputDict],
     ) -> GetPaymentConnectorOutput:
         """
         Retrieves information about a specific payment connector.
 
         Args:
-            input:
-                An instance of `GetPaymentConnectorInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2208,19 +3785,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `GetPaymentConnectorOutput`.
         """
-        return self._invoke(input, _models.GET_PAYMENT_CONNECTOR, [], plugins)
 
+    def get_payment_connector(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetPaymentConnectorOutput:
+        return self._invoke(
+            self._select_input(_models.GET_PAYMENT_CONNECTOR, args, kwargs),
+            _models.GET_PAYMENT_CONNECTOR,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_payment_credential_provider(
         self,
-        input: GetPaymentCredentialProviderInput,
+        request: _models.GetPaymentCredentialProviderInput
+        | _models.GetPaymentCredentialProviderInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetPaymentCredentialProviderOutput: ...
+
+    @_overload
+    def get_payment_credential_provider(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetPaymentCredentialProviderInputDict],
     ) -> GetPaymentCredentialProviderOutput:
         """
         Retrieves information about a specific payment credential provider.
 
         Args:
-            input:
-                An instance of `GetPaymentCredentialProviderInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2230,17 +3827,38 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `GetPaymentCredentialProviderOutput`.
         """
-        return self._invoke(input, _models.GET_PAYMENT_CREDENTIAL_PROVIDER, [], plugins)
 
+    def get_payment_credential_provider(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetPaymentCredentialProviderOutput:
+        return self._invoke(
+            self._select_input(_models.GET_PAYMENT_CREDENTIAL_PROVIDER, args, kwargs),
+            _models.GET_PAYMENT_CREDENTIAL_PROVIDER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_payment_manager(
-        self, input: GetPaymentManagerInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetPaymentManagerInput | _models.GetPaymentManagerInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetPaymentManagerOutput: ...
+
+    @_overload
+    def get_payment_manager(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetPaymentManagerInputDict],
     ) -> GetPaymentManagerOutput:
         """
         Retrieves information about a specific payment manager.
 
         Args:
-            input:
-                An instance of `GetPaymentManagerInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2250,10 +3868,33 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `GetPaymentManagerOutput`.
         """
-        return self._invoke(input, _models.GET_PAYMENT_MANAGER, [], plugins)
 
+    def get_payment_manager(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetPaymentManagerOutput:
+        return self._invoke(
+            self._select_input(_models.GET_PAYMENT_MANAGER, args, kwargs),
+            _models.GET_PAYMENT_MANAGER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_policy(
-        self, input: GetPolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetPolicyInput | _models.GetPolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetPolicyOutput: ...
+
+    @_overload
+    def get_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetPolicyInputDict],
     ) -> GetPolicyOutput:
         """
         Retrieves detailed information about a specific policy within the
@@ -2262,8 +3903,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         review and manage policy configurations.
 
         Args:
-            input:
-                An instance of `GetPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2273,10 +3912,33 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `GetPolicyOutput`.
         """
-        return self._invoke(input, _models.GET_POLICY, [], plugins)
 
+    def get_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetPolicyOutput:
+        return self._invoke(
+            self._select_input(_models.GET_POLICY, args, kwargs),
+            _models.GET_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_policy_engine(
-        self, input: GetPolicyEngineInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetPolicyEngineInput | _models.GetPolicyEngineInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetPolicyEngineOutput: ...
+
+    @_overload
+    def get_policy_engine(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetPolicyEngineInputDict],
     ) -> GetPolicyEngineOutput:
         """
         Retrieves detailed information about a specific policy engine within the
@@ -2285,8 +3947,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         administrators to review and manage policy engine settings.
 
         Args:
-            input:
-                An instance of `GetPolicyEngineInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2296,10 +3956,34 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `GetPolicyEngineOutput`.
         """
-        return self._invoke(input, _models.GET_POLICY_ENGINE, [], plugins)
 
+    def get_policy_engine(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetPolicyEngineOutput:
+        return self._invoke(
+            self._select_input(_models.GET_POLICY_ENGINE, args, kwargs),
+            _models.GET_POLICY_ENGINE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_policy_engine_summary(
-        self, input: GetPolicyEngineSummaryInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetPolicyEngineSummaryInput
+        | _models.GetPolicyEngineSummaryInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetPolicyEngineSummaryOutput: ...
+
+    @_overload
+    def get_policy_engine_summary(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetPolicyEngineSummaryInputDict],
     ) -> GetPolicyEngineSummaryOutput:
         """
         Retrieves a metadata-only summary of a specific policy engine without
@@ -2311,8 +3995,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         where only metadata is needed.
 
         Args:
-            input:
-                An instance of `GetPolicyEngineSummaryInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2322,10 +4004,34 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `GetPolicyEngineSummaryOutput`.
         """
-        return self._invoke(input, _models.GET_POLICY_ENGINE_SUMMARY, [], plugins)
 
+    def get_policy_engine_summary(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetPolicyEngineSummaryOutput:
+        return self._invoke(
+            self._select_input(_models.GET_POLICY_ENGINE_SUMMARY, args, kwargs),
+            _models.GET_POLICY_ENGINE_SUMMARY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_policy_generation(
-        self, input: GetPolicyGenerationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetPolicyGenerationInput
+        | _models.GetPolicyGenerationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetPolicyGenerationOutput: ...
+
+    @_overload
+    def get_policy_generation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetPolicyGenerationInputDict],
     ) -> GetPolicyGenerationOutput:
         """
         Retrieves information about a policy generation request within the
@@ -2334,8 +4040,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         translation, enabling non-technical users to create policies.
 
         Args:
-            input:
-                An instance of `GetPolicyGenerationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2345,12 +4049,34 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `GetPolicyGenerationOutput`.
         """
-        return self._invoke(input, _models.GET_POLICY_GENERATION, [], plugins)
 
+    def get_policy_generation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetPolicyGenerationOutput:
+        return self._invoke(
+            self._select_input(_models.GET_POLICY_GENERATION, args, kwargs),
+            _models.GET_POLICY_GENERATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_policy_generation_summary(
         self,
-        input: GetPolicyGenerationSummaryInput,
+        request: _models.GetPolicyGenerationSummaryInput
+        | _models.GetPolicyGenerationSummaryInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetPolicyGenerationSummaryOutput: ...
+
+    @_overload
+    def get_policy_generation_summary(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetPolicyGenerationSummaryInputDict],
     ) -> GetPolicyGenerationSummaryOutput:
         """
         Retrieves a metadata-only summary of a specific policy generation
@@ -2362,8 +4088,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         metadata is needed.
 
         Args:
-            input:
-                An instance of `GetPolicyGenerationSummaryInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2373,10 +4097,33 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `GetPolicyGenerationSummaryOutput`.
         """
-        return self._invoke(input, _models.GET_POLICY_GENERATION_SUMMARY, [], plugins)
 
+    def get_policy_generation_summary(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetPolicyGenerationSummaryOutput:
+        return self._invoke(
+            self._select_input(_models.GET_POLICY_GENERATION_SUMMARY, args, kwargs),
+            _models.GET_POLICY_GENERATION_SUMMARY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_policy_summary(
-        self, input: GetPolicySummaryInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetPolicySummaryInput | _models.GetPolicySummaryInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetPolicySummaryOutput: ...
+
+    @_overload
+    def get_policy_summary(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetPolicySummaryInputDict],
     ) -> GetPolicySummaryOutput:
         """
         Retrieves a metadata-only summary of a specific policy without
@@ -2388,8 +4135,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         where only metadata is needed.
 
         Args:
-            input:
-                An instance of `GetPolicySummaryInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2399,17 +4144,38 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `GetPolicySummaryOutput`.
         """
-        return self._invoke(input, _models.GET_POLICY_SUMMARY, [], plugins)
 
+    def get_policy_summary(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetPolicySummaryOutput:
+        return self._invoke(
+            self._select_input(_models.GET_POLICY_SUMMARY, args, kwargs),
+            _models.GET_POLICY_SUMMARY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_registry(
-        self, input: GetRegistryInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetRegistryInput | _models.GetRegistryInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetRegistryOutput: ...
+
+    @_overload
+    def get_registry(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetRegistryInputDict],
     ) -> GetRegistryOutput:
         """
         Retrieves information about a specific registry.
 
         Args:
-            input:
-                An instance of `GetRegistryInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2419,17 +4185,38 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `GetRegistryOutput`.
         """
-        return self._invoke(input, _models.GET_REGISTRY, [], plugins)
 
+    def get_registry(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetRegistryOutput:
+        return self._invoke(
+            self._select_input(_models.GET_REGISTRY, args, kwargs),
+            _models.GET_REGISTRY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_registry_record(
-        self, input: GetRegistryRecordInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetRegistryRecordInput | _models.GetRegistryRecordInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetRegistryRecordOutput: ...
+
+    @_overload
+    def get_registry_record(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetRegistryRecordInputDict],
     ) -> GetRegistryRecordOutput:
         """
         Retrieves information about a specific registry record.
 
         Args:
-            input:
-                An instance of `GetRegistryRecordInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2439,10 +4226,33 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `GetRegistryRecordOutput`.
         """
-        return self._invoke(input, _models.GET_REGISTRY_RECORD, [], plugins)
 
+    def get_registry_record(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetRegistryRecordOutput:
+        return self._invoke(
+            self._select_input(_models.GET_REGISTRY_RECORD, args, kwargs),
+            _models.GET_REGISTRY_RECORD,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_resource_policy(
-        self, input: GetResourcePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetResourcePolicyInput | _models.GetResourcePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetResourcePolicyOutput: ...
+
+    @_overload
+    def get_resource_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetResourcePolicyInputDict],
     ) -> GetResourcePolicyOutput:
         """
         Retrieves the resource-based policy for a specified resource.
@@ -2452,8 +4262,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
             Gateway.
 
         Args:
-            input:
-                An instance of `GetResourcePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2463,19 +4271,38 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `GetResourcePolicyOutput`.
         """
-        return self._invoke(input, _models.GET_RESOURCE_POLICY, [], plugins)
 
+    def get_resource_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetResourcePolicyOutput:
+        return self._invoke(
+            self._select_input(_models.GET_RESOURCE_POLICY, args, kwargs),
+            _models.GET_RESOURCE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_token_vault(
         self,
-        input: GetTokenVaultInput | None = None,
+        request: _models.GetTokenVaultInput | _models.GetTokenVaultInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetTokenVaultOutput: ...
+
+    @_overload
+    def get_token_vault(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetTokenVaultInputDict],
     ) -> GetTokenVaultOutput:
         """
         Retrieves information about a token vault.
 
         Args:
-            input:
-                An instance of `GetTokenVaultInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2485,17 +4312,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `GetTokenVaultOutput`.
         """
-        return self._invoke(input, _models.GET_TOKEN_VAULT, [], plugins)
 
+    def get_token_vault(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetTokenVaultOutput:
+        return self._invoke(
+            self._select_input(_models.GET_TOKEN_VAULT, args, kwargs),
+            _models.GET_TOKEN_VAULT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_workload_identity(
-        self, input: GetWorkloadIdentityInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetWorkloadIdentityInput
+        | _models.GetWorkloadIdentityInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetWorkloadIdentityOutput: ...
+
+    @_overload
+    def get_workload_identity(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetWorkloadIdentityInputDict],
     ) -> GetWorkloadIdentityOutput:
         """
         Retrieves information about a workload identity.
 
         Args:
-            input:
-                An instance of `GetWorkloadIdentityInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2505,17 +4354,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `GetWorkloadIdentityOutput`.
         """
-        return self._invoke(input, _models.GET_WORKLOAD_IDENTITY, [], plugins)
 
+    def get_workload_identity(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetWorkloadIdentityOutput:
+        return self._invoke(
+            self._select_input(_models.GET_WORKLOAD_IDENTITY, args, kwargs),
+            _models.GET_WORKLOAD_IDENTITY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_agent_runtime_endpoints(
-        self, input: ListAgentRuntimeEndpointsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListAgentRuntimeEndpointsInput
+        | _models.ListAgentRuntimeEndpointsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListAgentRuntimeEndpointsOutput: ...
+
+    @_overload
+    def list_agent_runtime_endpoints(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListAgentRuntimeEndpointsInputDict],
     ) -> ListAgentRuntimeEndpointsOutput:
         """
         Lists all endpoints for a specific Amazon Secure Agent.
 
         Args:
-            input:
-                An instance of `ListAgentRuntimeEndpointsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2525,19 +4396,38 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `ListAgentRuntimeEndpointsOutput`.
         """
-        return self._invoke(input, _models.LIST_AGENT_RUNTIME_ENDPOINTS, [], plugins)
 
+    def list_agent_runtime_endpoints(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListAgentRuntimeEndpointsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_AGENT_RUNTIME_ENDPOINTS, args, kwargs),
+            _models.LIST_AGENT_RUNTIME_ENDPOINTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_agent_runtimes(
         self,
-        input: ListAgentRuntimesInput | None = None,
+        request: _models.ListAgentRuntimesInput | _models.ListAgentRuntimesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListAgentRuntimesOutput: ...
+
+    @_overload
+    def list_agent_runtimes(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListAgentRuntimesInputDict],
     ) -> ListAgentRuntimesOutput:
         """
         Lists all Amazon Secure Agents in your account.
 
         Args:
-            input:
-                An instance of `ListAgentRuntimesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2547,17 +4437,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `ListAgentRuntimesOutput`.
         """
-        return self._invoke(input, _models.LIST_AGENT_RUNTIMES, [], plugins)
 
+    def list_agent_runtimes(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListAgentRuntimesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_AGENT_RUNTIMES, args, kwargs),
+            _models.LIST_AGENT_RUNTIMES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_agent_runtime_versions(
-        self, input: ListAgentRuntimeVersionsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListAgentRuntimeVersionsInput
+        | _models.ListAgentRuntimeVersionsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListAgentRuntimeVersionsOutput: ...
+
+    @_overload
+    def list_agent_runtime_versions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListAgentRuntimeVersionsInputDict],
     ) -> ListAgentRuntimeVersionsOutput:
         """
         Lists all versions of a specific Amazon Secure Agent.
 
         Args:
-            input:
-                An instance of `ListAgentRuntimeVersionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2567,12 +4479,34 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `ListAgentRuntimeVersionsOutput`.
         """
-        return self._invoke(input, _models.LIST_AGENT_RUNTIME_VERSIONS, [], plugins)
 
+    def list_agent_runtime_versions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListAgentRuntimeVersionsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_AGENT_RUNTIME_VERSIONS, args, kwargs),
+            _models.LIST_AGENT_RUNTIME_VERSIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_agent_runtime_versions_by_capacity_provider(
         self,
-        input: ListAgentRuntimeVersionsByCapacityProviderInput,
+        request: _models.ListAgentRuntimeVersionsByCapacityProviderInput
+        | _models.ListAgentRuntimeVersionsByCapacityProviderInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListAgentRuntimeVersionsByCapacityProviderOutput: ...
+
+    @_overload
+    def list_agent_runtime_versions_by_capacity_provider(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListAgentRuntimeVersionsByCapacityProviderInputDict],
     ) -> ListAgentRuntimeVersionsByCapacityProviderOutput:
         """
         Lists the agent runtime versions that are associated with a capacity
@@ -2581,8 +4515,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         paginated; use the `nextToken` parameter to retrieve additional results.
 
         Args:
-            input:
-                An instance of `ListAgentRuntimeVersionsByCapacityProviderInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2592,21 +4524,41 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `ListAgentRuntimeVersionsByCapacityProviderOutput`.
         """
+
+    def list_agent_runtime_versions_by_capacity_provider(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListAgentRuntimeVersionsByCapacityProviderOutput:
         return self._invoke(
-            input, _models.LIST_AGENT_RUNTIME_VERSIONS_BY_CAPACITY_PROVIDER, [], plugins
+            self._select_input(
+                _models.LIST_AGENT_RUNTIME_VERSIONS_BY_CAPACITY_PROVIDER, args, kwargs
+            ),
+            _models.LIST_AGENT_RUNTIME_VERSIONS_BY_CAPACITY_PROVIDER,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_api_key_credential_providers(
         self,
-        input: ListApiKeyCredentialProvidersInput | None = None,
+        request: _models.ListApiKeyCredentialProvidersInput
+        | _models.ListApiKeyCredentialProvidersInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListApiKeyCredentialProvidersOutput: ...
+
+    @_overload
+    def list_api_key_credential_providers(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListApiKeyCredentialProvidersInputDict],
     ) -> ListApiKeyCredentialProvidersOutput:
         """
         Lists all API key credential providers in your account.
 
         Args:
-            input:
-                An instance of `ListApiKeyCredentialProvidersInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2616,21 +4568,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `ListApiKeyCredentialProvidersOutput`.
         """
+
+    def list_api_key_credential_providers(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListApiKeyCredentialProvidersOutput:
         return self._invoke(
-            input, _models.LIST_API_KEY_CREDENTIAL_PROVIDERS, [], plugins
+            self._select_input(_models.LIST_API_KEY_CREDENTIAL_PROVIDERS, args, kwargs),
+            _models.LIST_API_KEY_CREDENTIAL_PROVIDERS,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_browser_profiles(
         self,
-        input: ListBrowserProfilesInput | None = None,
+        request: _models.ListBrowserProfilesInput
+        | _models.ListBrowserProfilesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListBrowserProfilesOutput: ...
+
+    @_overload
+    def list_browser_profiles(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListBrowserProfilesInputDict],
     ) -> ListBrowserProfilesOutput:
         """
         Lists all browser profiles in your account.
 
         Args:
-            input:
-                An instance of `ListBrowserProfilesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2640,19 +4610,38 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `ListBrowserProfilesOutput`.
         """
-        return self._invoke(input, _models.LIST_BROWSER_PROFILES, [], plugins)
 
+    def list_browser_profiles(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListBrowserProfilesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_BROWSER_PROFILES, args, kwargs),
+            _models.LIST_BROWSER_PROFILES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_browsers(
         self,
-        input: ListBrowsersInput | None = None,
+        request: _models.ListBrowsersInput | _models.ListBrowsersInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListBrowsersOutput: ...
+
+    @_overload
+    def list_browsers(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListBrowsersInputDict],
     ) -> ListBrowsersOutput:
         """
         Lists all custom browsers in your account.
 
         Args:
-            input:
-                An instance of `ListBrowsersInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2662,12 +4651,34 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `ListBrowsersOutput`.
         """
-        return self._invoke(input, _models.LIST_BROWSERS, [], plugins)
 
+    def list_browsers(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListBrowsersOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_BROWSERS, args, kwargs),
+            _models.LIST_BROWSERS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_capacity_providers(
         self,
-        input: ListCapacityProvidersInput | None = None,
+        request: _models.ListCapacityProvidersInput
+        | _models.ListCapacityProvidersInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListCapacityProvidersOutput: ...
+
+    @_overload
+    def list_capacity_providers(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListCapacityProvidersInputDict],
     ) -> ListCapacityProvidersOutput:
         """
         Lists the capacity providers in your account and returns summary
@@ -2676,8 +4687,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         paginated; use the `nextToken` parameter to retrieve additional results.
 
         Args:
-            input:
-                An instance of `ListCapacityProvidersInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2687,19 +4696,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `ListCapacityProvidersOutput`.
         """
-        return self._invoke(input, _models.LIST_CAPACITY_PROVIDERS, [], plugins)
 
+    def list_capacity_providers(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListCapacityProvidersOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_CAPACITY_PROVIDERS, args, kwargs),
+            _models.LIST_CAPACITY_PROVIDERS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_code_interpreters(
         self,
-        input: ListCodeInterpretersInput | None = None,
+        request: _models.ListCodeInterpretersInput
+        | _models.ListCodeInterpretersInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListCodeInterpretersOutput: ...
+
+    @_overload
+    def list_code_interpreters(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListCodeInterpretersInputDict],
     ) -> ListCodeInterpretersOutput:
         """
         Lists all custom code interpreters in your account.
 
         Args:
-            input:
-                An instance of `ListCodeInterpretersInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2709,19 +4738,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `ListCodeInterpretersOutput`.
         """
-        return self._invoke(input, _models.LIST_CODE_INTERPRETERS, [], plugins)
 
+    def list_code_interpreters(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListCodeInterpretersOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_CODE_INTERPRETERS, args, kwargs),
+            _models.LIST_CODE_INTERPRETERS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_configuration_bundles(
         self,
-        input: ListConfigurationBundlesInput | None = None,
+        request: _models.ListConfigurationBundlesInput
+        | _models.ListConfigurationBundlesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListConfigurationBundlesOutput: ...
+
+    @_overload
+    def list_configuration_bundles(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListConfigurationBundlesInputDict],
     ) -> ListConfigurationBundlesOutput:
         """
         Lists all configuration bundles in the account.
 
         Args:
-            input:
-                An instance of `ListConfigurationBundlesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2731,20 +4780,40 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `ListConfigurationBundlesOutput`.
         """
-        return self._invoke(input, _models.LIST_CONFIGURATION_BUNDLES, [], plugins)
 
+    def list_configuration_bundles(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListConfigurationBundlesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_CONFIGURATION_BUNDLES, args, kwargs),
+            _models.LIST_CONFIGURATION_BUNDLES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_configuration_bundle_versions(
         self,
-        input: ListConfigurationBundleVersionsInput,
+        request: _models.ListConfigurationBundleVersionsInput
+        | _models.ListConfigurationBundleVersionsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListConfigurationBundleVersionsOutput: ...
+
+    @_overload
+    def list_configuration_bundle_versions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListConfigurationBundleVersionsInputDict],
     ) -> ListConfigurationBundleVersionsOutput:
         """
         Lists all versions of a configuration bundle, with optional filtering by
         branch name or creation source.
 
         Args:
-            input:
-                An instance of `ListConfigurationBundleVersionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2754,21 +4823,40 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `ListConfigurationBundleVersionsOutput`.
         """
+
+    def list_configuration_bundle_versions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListConfigurationBundleVersionsOutput:
         return self._invoke(
-            input, _models.LIST_CONFIGURATION_BUNDLE_VERSIONS, [], plugins
+            self._select_input(
+                _models.LIST_CONFIGURATION_BUNDLE_VERSIONS, args, kwargs
+            ),
+            _models.LIST_CONFIGURATION_BUNDLE_VERSIONS,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_consent_portals(
         self,
-        input: ListConsentPortalsInput | None = None,
+        request: _models.ListConsentPortalsInput | _models.ListConsentPortalsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListConsentPortalsOutput: ...
+
+    @_overload
+    def list_consent_portals(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListConsentPortalsInputDict],
     ) -> ListConsentPortalsOutput:
         """
         Lists all of the consent portals in your account.
 
         Args:
-            input:
-                An instance of `ListConsentPortalsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2778,10 +4866,34 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `ListConsentPortalsOutput`.
         """
-        return self._invoke(input, _models.LIST_CONSENT_PORTALS, [], plugins)
 
+    def list_consent_portals(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListConsentPortalsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_CONSENT_PORTALS, args, kwargs),
+            _models.LIST_CONSENT_PORTALS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_dataset_examples(
-        self, input: ListDatasetExamplesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListDatasetExamplesInput
+        | _models.ListDatasetExamplesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListDatasetExamplesOutput: ...
+
+    @_overload
+    def list_dataset_examples(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListDatasetExamplesInputDict],
     ) -> ListDatasetExamplesOutput:
         """
         Returns paginated examples from the dataset. The server embeds the
@@ -2790,8 +4902,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         mutations.
 
         Args:
-            input:
-                An instance of `ListDatasetExamplesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2801,19 +4911,38 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `ListDatasetExamplesOutput`.
         """
-        return self._invoke(input, _models.LIST_DATASET_EXAMPLES, [], plugins)
 
+    def list_dataset_examples(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListDatasetExamplesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_DATASET_EXAMPLES, args, kwargs),
+            _models.LIST_DATASET_EXAMPLES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_datasets(
         self,
-        input: ListDatasetsInput | None = None,
+        request: _models.ListDatasetsInput | _models.ListDatasetsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListDatasetsOutput: ...
+
+    @_overload
+    def list_datasets(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListDatasetsInputDict],
     ) -> ListDatasetsOutput:
         """
         Lists all datasets in the caller's account, paginated.
 
         Args:
-            input:
-                An instance of `ListDatasetsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2823,18 +4952,40 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `ListDatasetsOutput`.
         """
-        return self._invoke(input, _models.LIST_DATASETS, [], plugins)
 
+    def list_datasets(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListDatasetsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_DATASETS, args, kwargs),
+            _models.LIST_DATASETS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_dataset_versions(
-        self, input: ListDatasetVersionsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListDatasetVersionsInput
+        | _models.ListDatasetVersionsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListDatasetVersionsOutput: ...
+
+    @_overload
+    def list_dataset_versions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListDatasetVersionsInputDict],
     ) -> ListDatasetVersionsOutput:
         """
         Lists all published versions of a dataset, sorted by version number
         descending (newest first). Does not include the DRAFT working copy.
 
         Args:
-            input:
-                An instance of `ListDatasetVersionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2844,20 +4995,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `ListDatasetVersionsOutput`.
         """
-        return self._invoke(input, _models.LIST_DATASET_VERSIONS, [], plugins)
 
+    def list_dataset_versions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListDatasetVersionsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_DATASET_VERSIONS, args, kwargs),
+            _models.LIST_DATASET_VERSIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_evaluators(
         self,
-        input: ListEvaluatorsInput | None = None,
+        request: _models.ListEvaluatorsInput | _models.ListEvaluatorsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListEvaluatorsOutput: ...
+
+    @_overload
+    def list_evaluators(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListEvaluatorsInputDict],
     ) -> ListEvaluatorsOutput:
         """
         Lists all available evaluators, including both builtin evaluators
         provided by the service and custom evaluators created by the user.
 
         Args:
-            input:
-                An instance of `ListEvaluatorsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2867,18 +5037,40 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `ListEvaluatorsOutput`.
         """
-        return self._invoke(input, _models.LIST_EVALUATORS, [], plugins)
 
+    def list_evaluators(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListEvaluatorsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_EVALUATORS, args, kwargs),
+            _models.LIST_EVALUATORS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_gateway_rate_limits(
-        self, input: ListGatewayRateLimitsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListGatewayRateLimitsInput
+        | _models.ListGatewayRateLimitsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListGatewayRateLimitsOutput: ...
+
+    @_overload
+    def list_gateway_rate_limits(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListGatewayRateLimitsInputDict],
     ) -> ListGatewayRateLimitsOutput:
         """
         Lists all rate limits for a gateway. Results are paginated. Use the
         `nextToken` parameter to retrieve additional results.
 
         Args:
-            input:
-                An instance of `ListGatewayRateLimitsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2888,17 +5080,38 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `ListGatewayRateLimitsOutput`.
         """
-        return self._invoke(input, _models.LIST_GATEWAY_RATE_LIMITS, [], plugins)
 
+    def list_gateway_rate_limits(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListGatewayRateLimitsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_GATEWAY_RATE_LIMITS, args, kwargs),
+            _models.LIST_GATEWAY_RATE_LIMITS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_gateway_rules(
-        self, input: ListGatewayRulesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListGatewayRulesInput | _models.ListGatewayRulesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListGatewayRulesOutput: ...
+
+    @_overload
+    def list_gateway_rules(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListGatewayRulesInputDict],
     ) -> ListGatewayRulesOutput:
         """
         Lists all rules for a gateway.
 
         Args:
-            input:
-                An instance of `ListGatewayRulesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2908,19 +5121,38 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `ListGatewayRulesOutput`.
         """
-        return self._invoke(input, _models.LIST_GATEWAY_RULES, [], plugins)
 
+    def list_gateway_rules(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListGatewayRulesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_GATEWAY_RULES, args, kwargs),
+            _models.LIST_GATEWAY_RULES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_gateways(
         self,
-        input: ListGatewaysInput | None = None,
+        request: _models.ListGatewaysInput | _models.ListGatewaysInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListGatewaysOutput: ...
+
+    @_overload
+    def list_gateways(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListGatewaysInputDict],
     ) -> ListGatewaysOutput:
         """
         Lists all gateways in the account.
 
         Args:
-            input:
-                An instance of `ListGatewaysInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2930,17 +5162,38 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `ListGatewaysOutput`.
         """
-        return self._invoke(input, _models.LIST_GATEWAYS, [], plugins)
 
+    def list_gateways(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListGatewaysOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_GATEWAYS, args, kwargs),
+            _models.LIST_GATEWAYS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_gateway_targets(
-        self, input: ListGatewayTargetsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListGatewayTargetsInput | _models.ListGatewayTargetsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListGatewayTargetsOutput: ...
+
+    @_overload
+    def list_gateway_targets(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListGatewayTargetsInputDict],
     ) -> ListGatewayTargetsOutput:
         """
         Lists all targets for a specific gateway.
 
         Args:
-            input:
-                An instance of `ListGatewayTargetsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2950,17 +5203,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `ListGatewayTargetsOutput`.
         """
-        return self._invoke(input, _models.LIST_GATEWAY_TARGETS, [], plugins)
 
+    def list_gateway_targets(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListGatewayTargetsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_GATEWAY_TARGETS, args, kwargs),
+            _models.LIST_GATEWAY_TARGETS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_harness_endpoints(
-        self, input: ListHarnessEndpointsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListHarnessEndpointsInput
+        | _models.ListHarnessEndpointsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListHarnessEndpointsOutput: ...
+
+    @_overload
+    def list_harness_endpoints(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListHarnessEndpointsInputDict],
     ) -> ListHarnessEndpointsOutput:
         """
         Operation to list the endpoints of a harness.
 
         Args:
-            input:
-                An instance of `ListHarnessEndpointsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2970,19 +5245,38 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `ListHarnessEndpointsOutput`.
         """
-        return self._invoke(input, _models.LIST_HARNESS_ENDPOINTS, [], plugins)
 
+    def list_harness_endpoints(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListHarnessEndpointsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_HARNESS_ENDPOINTS, args, kwargs),
+            _models.LIST_HARNESS_ENDPOINTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_harnesses(
         self,
-        input: ListHarnessesInput | None = None,
+        request: _models.ListHarnessesInput | _models.ListHarnessesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListHarnessesOutput: ...
+
+    @_overload
+    def list_harnesses(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListHarnessesInputDict],
     ) -> ListHarnessesOutput:
         """
         Operation to list harnesses.
 
         Args:
-            input:
-                An instance of `ListHarnessesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2992,17 +5286,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `ListHarnessesOutput`.
         """
-        return self._invoke(input, _models.LIST_HARNESSES, [], plugins)
 
+    def list_harnesses(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListHarnessesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_HARNESSES, args, kwargs),
+            _models.LIST_HARNESSES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_harness_versions(
-        self, input: ListHarnessVersionsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListHarnessVersionsInput
+        | _models.ListHarnessVersionsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListHarnessVersionsOutput: ...
+
+    @_overload
+    def list_harness_versions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListHarnessVersionsInputDict],
     ) -> ListHarnessVersionsOutput:
         """
         Operation to list the versions of a Harness.
 
         Args:
-            input:
-                An instance of `ListHarnessVersionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3012,20 +5328,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `ListHarnessVersionsOutput`.
         """
-        return self._invoke(input, _models.LIST_HARNESS_VERSIONS, [], plugins)
 
+    def list_harness_versions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListHarnessVersionsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_HARNESS_VERSIONS, args, kwargs),
+            _models.LIST_HARNESS_VERSIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_memories(
         self,
-        input: ListMemoriesInput | None = None,
+        request: _models.ListMemoriesInput | _models.ListMemoriesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListMemoriesOutput: ...
+
+    @_overload
+    def list_memories(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListMemoriesInputDict],
     ) -> ListMemoriesOutput:
         """
         Lists the available Amazon Bedrock AgentCore Memory resources in the
         current Amazon Web Services Region.
 
         Args:
-            input:
-                An instance of `ListMemoriesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3035,19 +5370,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `ListMemoriesOutput`.
         """
-        return self._invoke(input, _models.LIST_MEMORIES, [], plugins)
 
+    def list_memories(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListMemoriesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_MEMORIES, args, kwargs),
+            _models.LIST_MEMORIES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_oauth2_credential_providers(
         self,
-        input: ListOauth2CredentialProvidersInput | None = None,
+        request: _models.ListOauth2CredentialProvidersInput
+        | _models.ListOauth2CredentialProvidersInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListOauth2CredentialProvidersOutput: ...
+
+    @_overload
+    def list_oauth2_credential_providers(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListOauth2CredentialProvidersInputDict],
     ) -> ListOauth2CredentialProvidersOutput:
         """
         Lists all OAuth2 credential providers in your account.
 
         Args:
-            input:
-                An instance of `ListOauth2CredentialProvidersInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3057,22 +5412,40 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `ListOauth2CredentialProvidersOutput`.
         """
+
+    def list_oauth2_credential_providers(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListOauth2CredentialProvidersOutput:
         return self._invoke(
-            input, _models.LIST_OAUTH2_CREDENTIAL_PROVIDERS, [], plugins
+            self._select_input(_models.LIST_OAUTH2_CREDENTIAL_PROVIDERS, args, kwargs),
+            _models.LIST_OAUTH2_CREDENTIAL_PROVIDERS,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_online_evaluation_configs(
         self,
-        input: ListOnlineEvaluationConfigsInput | None = None,
+        request: _models.ListOnlineEvaluationConfigsInput
+        | _models.ListOnlineEvaluationConfigsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListOnlineEvaluationConfigsOutput: ...
+
+    @_overload
+    def list_online_evaluation_configs(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListOnlineEvaluationConfigsInputDict],
     ) -> ListOnlineEvaluationConfigsOutput:
         """
         Lists all online evaluation configurations in the account, providing
         summary information about each configuration's status and settings.
 
         Args:
-            input:
-                An instance of `ListOnlineEvaluationConfigsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3082,17 +5455,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `ListOnlineEvaluationConfigsOutput`.
         """
-        return self._invoke(input, _models.LIST_ONLINE_EVALUATION_CONFIGS, [], plugins)
 
+    def list_online_evaluation_configs(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListOnlineEvaluationConfigsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_ONLINE_EVALUATION_CONFIGS, args, kwargs),
+            _models.LIST_ONLINE_EVALUATION_CONFIGS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_payment_connectors(
-        self, input: ListPaymentConnectorsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListPaymentConnectorsInput
+        | _models.ListPaymentConnectorsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListPaymentConnectorsOutput: ...
+
+    @_overload
+    def list_payment_connectors(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListPaymentConnectorsInputDict],
     ) -> ListPaymentConnectorsOutput:
         """
         Lists all payment connectors for a specified payment manager.
 
         Args:
-            input:
-                An instance of `ListPaymentConnectorsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3102,19 +5497,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `ListPaymentConnectorsOutput`.
         """
-        return self._invoke(input, _models.LIST_PAYMENT_CONNECTORS, [], plugins)
 
+    def list_payment_connectors(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListPaymentConnectorsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_PAYMENT_CONNECTORS, args, kwargs),
+            _models.LIST_PAYMENT_CONNECTORS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_payment_credential_providers(
         self,
-        input: ListPaymentCredentialProvidersInput | None = None,
+        request: _models.ListPaymentCredentialProvidersInput
+        | _models.ListPaymentCredentialProvidersInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListPaymentCredentialProvidersOutput: ...
+
+    @_overload
+    def list_payment_credential_providers(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListPaymentCredentialProvidersInputDict],
     ) -> ListPaymentCredentialProvidersOutput:
         """
         Lists all payment credential providers in the account.
 
         Args:
-            input:
-                An instance of `ListPaymentCredentialProvidersInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3124,21 +5539,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `ListPaymentCredentialProvidersOutput`.
         """
+
+    def list_payment_credential_providers(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListPaymentCredentialProvidersOutput:
         return self._invoke(
-            input, _models.LIST_PAYMENT_CREDENTIAL_PROVIDERS, [], plugins
+            self._select_input(_models.LIST_PAYMENT_CREDENTIAL_PROVIDERS, args, kwargs),
+            _models.LIST_PAYMENT_CREDENTIAL_PROVIDERS,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_payment_managers(
         self,
-        input: ListPaymentManagersInput | None = None,
+        request: _models.ListPaymentManagersInput
+        | _models.ListPaymentManagersInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListPaymentManagersOutput: ...
+
+    @_overload
+    def list_payment_managers(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListPaymentManagersInputDict],
     ) -> ListPaymentManagersOutput:
         """
         Lists all payment managers in the account.
 
         Args:
-            input:
-                An instance of `ListPaymentManagersInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3148,10 +5581,33 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `ListPaymentManagersOutput`.
         """
-        return self._invoke(input, _models.LIST_PAYMENT_MANAGERS, [], plugins)
 
+    def list_payment_managers(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListPaymentManagersOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_PAYMENT_MANAGERS, args, kwargs),
+            _models.LIST_PAYMENT_MANAGERS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_policies(
-        self, input: ListPoliciesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListPoliciesInput | _models.ListPoliciesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListPoliciesOutput: ...
+
+    @_overload
+    def list_policies(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListPoliciesInputDict],
     ) -> ListPoliciesOutput:
         """
         Retrieves a list of policies within the AgentCore Policy engine. This
@@ -3160,8 +5616,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         filtered by policy engine or resource associations.
 
         Args:
-            input:
-                An instance of `ListPoliciesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3171,12 +5625,33 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `ListPoliciesOutput`.
         """
-        return self._invoke(input, _models.LIST_POLICIES, [], plugins)
 
+    def list_policies(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListPoliciesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_POLICIES, args, kwargs),
+            _models.LIST_POLICIES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_policy_engines(
         self,
-        input: ListPolicyEnginesInput | None = None,
+        request: _models.ListPolicyEnginesInput | _models.ListPolicyEnginesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListPolicyEnginesOutput: ...
+
+    @_overload
+    def list_policy_engines(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListPolicyEnginesInputDict],
     ) -> ListPolicyEnginesOutput:
         """
         Retrieves a list of policy engines within the AgentCore Policy system.
@@ -3185,8 +5660,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         a container for related policies.
 
         Args:
-            input:
-                An instance of `ListPolicyEnginesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3196,12 +5669,34 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `ListPolicyEnginesOutput`.
         """
-        return self._invoke(input, _models.LIST_POLICY_ENGINES, [], plugins)
 
+    def list_policy_engines(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListPolicyEnginesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_POLICY_ENGINES, args, kwargs),
+            _models.LIST_POLICY_ENGINES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_policy_engine_summaries(
         self,
-        input: ListPolicyEngineSummariesInput | None = None,
+        request: _models.ListPolicyEngineSummariesInput
+        | _models.ListPolicyEngineSummariesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListPolicyEngineSummariesOutput: ...
+
+    @_overload
+    def list_policy_engine_summaries(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListPolicyEngineSummariesInputDict],
     ) -> ListPolicyEngineSummariesOutput:
         """
         Retrieves a paginated list of metadata-only policy engine summaries
@@ -3213,8 +5708,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         where only metadata is needed.
 
         Args:
-            input:
-                An instance of `ListPolicyEngineSummariesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3224,12 +5717,34 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `ListPolicyEngineSummariesOutput`.
         """
-        return self._invoke(input, _models.LIST_POLICY_ENGINE_SUMMARIES, [], plugins)
 
+    def list_policy_engine_summaries(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListPolicyEngineSummariesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_POLICY_ENGINE_SUMMARIES, args, kwargs),
+            _models.LIST_POLICY_ENGINE_SUMMARIES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_policy_generation_assets(
         self,
-        input: ListPolicyGenerationAssetsInput,
+        request: _models.ListPolicyGenerationAssetsInput
+        | _models.ListPolicyGenerationAssetsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListPolicyGenerationAssetsOutput: ...
+
+    @_overload
+    def list_policy_generation_assets(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListPolicyGenerationAssetsInputDict],
     ) -> ListPolicyGenerationAssetsOutput:
         """
         Retrieves a list of generated policy assets from a policy generation
@@ -3239,8 +5754,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         multiple generated policy options.
 
         Args:
-            input:
-                An instance of `ListPolicyGenerationAssetsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3250,10 +5763,34 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `ListPolicyGenerationAssetsOutput`.
         """
-        return self._invoke(input, _models.LIST_POLICY_GENERATION_ASSETS, [], plugins)
 
+    def list_policy_generation_assets(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListPolicyGenerationAssetsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_POLICY_GENERATION_ASSETS, args, kwargs),
+            _models.LIST_POLICY_GENERATION_ASSETS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_policy_generations(
-        self, input: ListPolicyGenerationsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListPolicyGenerationsInput
+        | _models.ListPolicyGenerationsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListPolicyGenerationsOutput: ...
+
+    @_overload
+    def list_policy_generations(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListPolicyGenerationsInputDict],
     ) -> ListPolicyGenerationsOutput:
         """
         Retrieves a list of policy generation requests within the AgentCore
@@ -3261,8 +5798,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         track and manage AI-powered policy generation operations.
 
         Args:
-            input:
-                An instance of `ListPolicyGenerationsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3272,12 +5807,34 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `ListPolicyGenerationsOutput`.
         """
-        return self._invoke(input, _models.LIST_POLICY_GENERATIONS, [], plugins)
 
+    def list_policy_generations(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListPolicyGenerationsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_POLICY_GENERATIONS, args, kwargs),
+            _models.LIST_POLICY_GENERATIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_policy_generation_summaries(
         self,
-        input: ListPolicyGenerationSummariesInput,
+        request: _models.ListPolicyGenerationSummariesInput
+        | _models.ListPolicyGenerationSummariesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListPolicyGenerationSummariesOutput: ...
+
+    @_overload
+    def list_policy_generation_summaries(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListPolicyGenerationSummariesInputDict],
     ) -> ListPolicyGenerationSummariesOutput:
         """
         Retrieves a paginated list of metadata-only policy generation summaries
@@ -3289,8 +5846,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         inventory, and integration scenarios where only metadata is needed.
 
         Args:
-            input:
-                An instance of `ListPolicyGenerationSummariesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3300,12 +5855,34 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `ListPolicyGenerationSummariesOutput`.
         """
+
+    def list_policy_generation_summaries(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListPolicyGenerationSummariesOutput:
         return self._invoke(
-            input, _models.LIST_POLICY_GENERATION_SUMMARIES, [], plugins
+            self._select_input(_models.LIST_POLICY_GENERATION_SUMMARIES, args, kwargs),
+            _models.LIST_POLICY_GENERATION_SUMMARIES,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_policy_summaries(
-        self, input: ListPolicySummariesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListPolicySummariesInput
+        | _models.ListPolicySummariesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListPolicySummariesOutput: ...
+
+    @_overload
+    def list_policy_summaries(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListPolicySummariesInputDict],
     ) -> ListPolicySummariesOutput:
         """
         Retrieves a paginated list of metadata-only policy summaries within a
@@ -3317,8 +5894,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         and integration scenarios where only metadata is needed.
 
         Args:
-            input:
-                An instance of `ListPolicySummariesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3328,12 +5903,33 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `ListPolicySummariesOutput`.
         """
-        return self._invoke(input, _models.LIST_POLICY_SUMMARIES, [], plugins)
 
+    def list_policy_summaries(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListPolicySummariesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_POLICY_SUMMARIES, args, kwargs),
+            _models.LIST_POLICY_SUMMARIES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_registries(
         self,
-        input: ListRegistriesInput | None = None,
+        request: _models.ListRegistriesInput | _models.ListRegistriesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListRegistriesOutput: ...
+
+    @_overload
+    def list_registries(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListRegistriesInputDict],
     ) -> ListRegistriesOutput:
         """
         Lists all registries in the account. You can optionally filter results
@@ -3341,8 +5937,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         `authorizerType` parameter.
 
         Args:
-            input:
-                An instance of `ListRegistriesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3352,10 +5946,34 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `ListRegistriesOutput`.
         """
-        return self._invoke(input, _models.LIST_REGISTRIES, [], plugins)
 
+    def list_registries(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListRegistriesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_REGISTRIES, args, kwargs),
+            _models.LIST_REGISTRIES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_registry_records(
-        self, input: ListRegistryRecordsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListRegistryRecordsInput
+        | _models.ListRegistryRecordsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListRegistryRecordsOutput: ...
+
+    @_overload
+    def list_registry_records(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListRegistryRecordsInputDict],
     ) -> ListRegistryRecordsOutput:
         """
         Lists registry records within a registry. You can optionally filter
@@ -3363,8 +5981,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         When multiple filters are specified, they are combined using AND logic.
 
         Args:
-            input:
-                An instance of `ListRegistryRecordsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3374,10 +5990,34 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `ListRegistryRecordsOutput`.
         """
-        return self._invoke(input, _models.LIST_REGISTRY_RECORDS, [], plugins)
 
+    def list_registry_records(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListRegistryRecordsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_REGISTRY_RECORDS, args, kwargs),
+            _models.LIST_REGISTRY_RECORDS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_tags_for_resource(
-        self, input: ListTagsForResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListTagsForResourceInput
+        | _models.ListTagsForResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListTagsForResourceOutput: ...
+
+    @_overload
+    def list_tags_for_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListTagsForResourceInputDict],
     ) -> ListTagsForResourceOutput:
         """
         Lists the tags associated with the specified resource.
@@ -3387,8 +6027,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
             Browser Profile, Code Interpreter tool, and Gateway.
 
         Args:
-            input:
-                An instance of `ListTagsForResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3398,19 +6036,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `ListTagsForResourceOutput`.
         """
-        return self._invoke(input, _models.LIST_TAGS_FOR_RESOURCE, [], plugins)
 
+    def list_tags_for_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListTagsForResourceOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_TAGS_FOR_RESOURCE, args, kwargs),
+            _models.LIST_TAGS_FOR_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_workload_identities(
         self,
-        input: ListWorkloadIdentitiesInput | None = None,
+        request: _models.ListWorkloadIdentitiesInput
+        | _models.ListWorkloadIdentitiesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListWorkloadIdentitiesOutput: ...
+
+    @_overload
+    def list_workload_identities(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListWorkloadIdentitiesInputDict],
     ) -> ListWorkloadIdentitiesOutput:
         """
         Lists all workload identities in your account.
 
         Args:
-            input:
-                An instance of `ListWorkloadIdentitiesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3420,10 +6078,33 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `ListWorkloadIdentitiesOutput`.
         """
-        return self._invoke(input, _models.LIST_WORKLOAD_IDENTITIES, [], plugins)
 
+    def list_workload_identities(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListWorkloadIdentitiesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_WORKLOAD_IDENTITIES, args, kwargs),
+            _models.LIST_WORKLOAD_IDENTITIES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_resource_policy(
-        self, input: PutResourcePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutResourcePolicyInput | _models.PutResourcePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutResourcePolicyOutput: ...
+
+    @_overload
+    def put_resource_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutResourcePolicyInputDict],
     ) -> PutResourcePolicyOutput:
         """
         Creates or updates a resource-based policy for a resource with the
@@ -3434,8 +6115,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
             Gateway.
 
         Args:
-            input:
-                An instance of `PutResourcePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3445,12 +6124,34 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `PutResourcePolicyOutput`.
         """
-        return self._invoke(input, _models.PUT_RESOURCE_POLICY, [], plugins)
 
+    def put_resource_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutResourcePolicyOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_RESOURCE_POLICY, args, kwargs),
+            _models.PUT_RESOURCE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def reset_token_vault_key_material(
         self,
-        input: ResetTokenVaultKeyMaterialInput,
+        request: _models.ResetTokenVaultKeyMaterialInput
+        | _models.ResetTokenVaultKeyMaterialInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ResetTokenVaultKeyMaterialOutput: ...
+
+    @_overload
+    def reset_token_vault_key_material(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ResetTokenVaultKeyMaterialInputDict],
     ) -> ResetTokenVaultKeyMaterialOutput:
         """
         Resets the key material for a token vault whose customer managed KMS key
@@ -3472,8 +6173,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         deletion in KMS. To switch to a different key, use `SetTokenVaultCMK`.
 
         Args:
-            input:
-                An instance of `ResetTokenVaultKeyMaterialInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3483,12 +6182,34 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `ResetTokenVaultKeyMaterialOutput`.
         """
-        return self._invoke(input, _models.RESET_TOKEN_VAULT_KEY_MATERIAL, [], plugins)
 
+    def reset_token_vault_key_material(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ResetTokenVaultKeyMaterialOutput:
+        return self._invoke(
+            self._select_input(_models.RESET_TOKEN_VAULT_KEY_MATERIAL, args, kwargs),
+            _models.RESET_TOKEN_VAULT_KEY_MATERIAL,
+            [],
+            plugins,
+        )
+
+    @_overload
     def rotate_payment_connector_credentials(
         self,
-        input: RotatePaymentConnectorCredentialsInput,
+        request: _models.RotatePaymentConnectorCredentialsInput
+        | _models.RotatePaymentConnectorCredentialsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> RotatePaymentConnectorCredentialsOutput: ...
+
+    @_overload
+    def rotate_payment_connector_credentials(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RotatePaymentConnectorCredentialsInputDict],
     ) -> RotatePaymentConnectorCredentialsOutput:
         """
         Replaces the service-managed credentials of a payment connector with
@@ -3512,8 +6233,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         outside AgentCore.
 
         Args:
-            input:
-                An instance of `RotatePaymentConnectorCredentialsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3523,19 +6242,40 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `RotatePaymentConnectorCredentialsOutput`.
         """
+
+    def rotate_payment_connector_credentials(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RotatePaymentConnectorCredentialsOutput:
         return self._invoke(
-            input, _models.ROTATE_PAYMENT_CONNECTOR_CREDENTIALS, [], plugins
+            self._select_input(
+                _models.ROTATE_PAYMENT_CONNECTOR_CREDENTIALS, args, kwargs
+            ),
+            _models.ROTATE_PAYMENT_CONNECTOR_CREDENTIALS,
+            [],
+            plugins,
         )
 
+    @_overload
     def set_token_vault_cmk(
-        self, input: SetTokenVaultCMKInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.SetTokenVaultCMKInput | _models.SetTokenVaultCMKInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> SetTokenVaultCMKOutput: ...
+
+    @_overload
+    def set_token_vault_cmk(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SetTokenVaultCMKInputDict],
     ) -> SetTokenVaultCMKOutput:
         """
         Sets the customer master key (CMK) for a token vault.
 
         Args:
-            input:
-                An instance of `SetTokenVaultCMKInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3545,10 +6285,34 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `SetTokenVaultCMKOutput`.
         """
-        return self._invoke(input, _models.SET_TOKEN_VAULT_CMK, [], plugins)
 
+    def set_token_vault_cmk(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SetTokenVaultCMKOutput:
+        return self._invoke(
+            self._select_input(_models.SET_TOKEN_VAULT_CMK, args, kwargs),
+            _models.SET_TOKEN_VAULT_CMK,
+            [],
+            plugins,
+        )
+
+    @_overload
     def start_policy_generation(
-        self, input: StartPolicyGenerationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StartPolicyGenerationInput
+        | _models.StartPolicyGenerationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StartPolicyGenerationOutput: ...
+
+    @_overload
+    def start_policy_generation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartPolicyGenerationInputDict],
     ) -> StartPolicyGenerationOutput:
         """
         Initiates the AI-powered generation of Dogwood policies from natural
@@ -3567,8 +6331,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         generated policies may require refinement for complex scenarios.
 
         Args:
-            input:
-                An instance of `StartPolicyGenerationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3578,12 +6340,34 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `StartPolicyGenerationOutput`.
         """
-        return self._invoke(input, _models.START_POLICY_GENERATION, [], plugins)
 
+    def start_policy_generation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StartPolicyGenerationOutput:
+        return self._invoke(
+            self._select_input(_models.START_POLICY_GENERATION, args, kwargs),
+            _models.START_POLICY_GENERATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def submit_registry_record_for_approval(
         self,
-        input: SubmitRegistryRecordForApprovalInput,
+        request: _models.SubmitRegistryRecordForApprovalInput
+        | _models.SubmitRegistryRecordForApprovalInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> SubmitRegistryRecordForApprovalOutput: ...
+
+    @_overload
+    def submit_registry_record_for_approval(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SubmitRegistryRecordForApprovalInputDict],
     ) -> SubmitRegistryRecordForApprovalOutput:
         """
         Submits a registry record for approval. This transitions the record from
@@ -3591,8 +6375,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         auto-approval enabled, the record is automatically approved.
 
         Args:
-            input:
-                An instance of `SubmitRegistryRecordForApprovalInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3602,12 +6384,36 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `SubmitRegistryRecordForApprovalOutput`.
         """
+
+    def submit_registry_record_for_approval(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SubmitRegistryRecordForApprovalOutput:
         return self._invoke(
-            input, _models.SUBMIT_REGISTRY_RECORD_FOR_APPROVAL, [], plugins
+            self._select_input(
+                _models.SUBMIT_REGISTRY_RECORD_FOR_APPROVAL, args, kwargs
+            ),
+            _models.SUBMIT_REGISTRY_RECORD_FOR_APPROVAL,
+            [],
+            plugins,
         )
 
+    @_overload
     def synchronize_gateway_targets(
-        self, input: SynchronizeGatewayTargetsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.SynchronizeGatewayTargetsInput
+        | _models.SynchronizeGatewayTargetsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> SynchronizeGatewayTargetsOutput: ...
+
+    @_overload
+    def synchronize_gateway_targets(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SynchronizeGatewayTargetsInputDict],
     ) -> SynchronizeGatewayTargetsOutput:
         """
         Synchronizes the gateway targets by fetching the latest tool definitions
@@ -3623,8 +6429,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         `UpdateGatewayTarget` call to enable dynamic tool synchronization.
 
         Args:
-            input:
-                An instance of `SynchronizeGatewayTargetsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3634,10 +6438,33 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `SynchronizeGatewayTargetsOutput`.
         """
-        return self._invoke(input, _models.SYNCHRONIZE_GATEWAY_TARGETS, [], plugins)
 
+    def synchronize_gateway_targets(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SynchronizeGatewayTargetsOutput:
+        return self._invoke(
+            self._select_input(_models.SYNCHRONIZE_GATEWAY_TARGETS, args, kwargs),
+            _models.SYNCHRONIZE_GATEWAY_TARGETS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def tag_resource(
-        self, input: TagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.TagResourceInput | _models.TagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> TagResourceOutput: ...
+
+    @_overload
+    def tag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.TagResourceInputDict],
     ) -> TagResourceOutput:
         """
         Associates the specified tags to a resource with the specified
@@ -3650,8 +6477,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
             Browser Profile, Code Interpreter tool, and Gateway.
 
         Args:
-            input:
-                An instance of `TagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3661,10 +6486,33 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `TagResourceOutput`.
         """
-        return self._invoke(input, _models.TAG_RESOURCE, [], plugins)
 
+    def tag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> TagResourceOutput:
+        return self._invoke(
+            self._select_input(_models.TAG_RESOURCE, args, kwargs),
+            _models.TAG_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def untag_resource(
-        self, input: UntagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UntagResourceInput | _models.UntagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UntagResourceOutput: ...
+
+    @_overload
+    def untag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UntagResourceInputDict],
     ) -> UntagResourceOutput:
         """
         Removes the specified tags from the specified resource.
@@ -3674,8 +6522,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
             Browser Profile, Code Interpreter tool, and Gateway.
 
         Args:
-            input:
-                An instance of `UntagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3685,17 +6531,38 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `UntagResourceOutput`.
         """
-        return self._invoke(input, _models.UNTAG_RESOURCE, [], plugins)
 
+    def untag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UntagResourceOutput:
+        return self._invoke(
+            self._select_input(_models.UNTAG_RESOURCE, args, kwargs),
+            _models.UNTAG_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_agent_runtime(
-        self, input: UpdateAgentRuntimeInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateAgentRuntimeInput | _models.UpdateAgentRuntimeInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateAgentRuntimeOutput: ...
+
+    @_overload
+    def update_agent_runtime(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateAgentRuntimeInputDict],
     ) -> UpdateAgentRuntimeOutput:
         """
         Updates an existing Amazon Secure Agent.
 
         Args:
-            input:
-                An instance of `UpdateAgentRuntimeInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3705,19 +6572,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `UpdateAgentRuntimeOutput`.
         """
-        return self._invoke(input, _models.UPDATE_AGENT_RUNTIME, [], plugins)
 
+    def update_agent_runtime(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateAgentRuntimeOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_AGENT_RUNTIME, args, kwargs),
+            _models.UPDATE_AGENT_RUNTIME,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_agent_runtime_endpoint(
         self,
-        input: UpdateAgentRuntimeEndpointInput,
+        request: _models.UpdateAgentRuntimeEndpointInput
+        | _models.UpdateAgentRuntimeEndpointInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateAgentRuntimeEndpointOutput: ...
+
+    @_overload
+    def update_agent_runtime_endpoint(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateAgentRuntimeEndpointInputDict],
     ) -> UpdateAgentRuntimeEndpointOutput:
         """
         Updates an existing Amazon Bedrock AgentCore Runtime endpoint.
 
         Args:
-            input:
-                An instance of `UpdateAgentRuntimeEndpointInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3727,19 +6614,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `UpdateAgentRuntimeEndpointOutput`.
         """
-        return self._invoke(input, _models.UPDATE_AGENT_RUNTIME_ENDPOINT, [], plugins)
 
+    def update_agent_runtime_endpoint(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateAgentRuntimeEndpointOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_AGENT_RUNTIME_ENDPOINT, args, kwargs),
+            _models.UPDATE_AGENT_RUNTIME_ENDPOINT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_api_key_credential_provider(
         self,
-        input: UpdateApiKeyCredentialProviderInput,
+        request: _models.UpdateApiKeyCredentialProviderInput
+        | _models.UpdateApiKeyCredentialProviderInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateApiKeyCredentialProviderOutput: ...
+
+    @_overload
+    def update_api_key_credential_provider(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateApiKeyCredentialProviderInputDict],
     ) -> UpdateApiKeyCredentialProviderOutput:
         """
         Updates an existing API key credential provider.
 
         Args:
-            input:
-                An instance of `UpdateApiKeyCredentialProviderInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3749,12 +6656,36 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `UpdateApiKeyCredentialProviderOutput`.
         """
+
+    def update_api_key_credential_provider(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateApiKeyCredentialProviderOutput:
         return self._invoke(
-            input, _models.UPDATE_API_KEY_CREDENTIAL_PROVIDER, [], plugins
+            self._select_input(
+                _models.UPDATE_API_KEY_CREDENTIAL_PROVIDER, args, kwargs
+            ),
+            _models.UPDATE_API_KEY_CREDENTIAL_PROVIDER,
+            [],
+            plugins,
         )
 
+    @_overload
     def update_capacity_provider(
-        self, input: UpdateCapacityProviderInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateCapacityProviderInput
+        | _models.UpdateCapacityProviderInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateCapacityProviderOutput: ...
+
+    @_overload
+    def update_capacity_provider(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateCapacityProviderInputDict],
     ) -> UpdateCapacityProviderOutput:
         """
         Updates a capacity provider. Only the description can be changed. To
@@ -3762,8 +6693,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         storage, create a new capacity provider.
 
         Args:
-            input:
-                An instance of `UpdateCapacityProviderInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3773,10 +6702,34 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `UpdateCapacityProviderOutput`.
         """
-        return self._invoke(input, _models.UPDATE_CAPACITY_PROVIDER, [], plugins)
 
+    def update_capacity_provider(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateCapacityProviderOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_CAPACITY_PROVIDER, args, kwargs),
+            _models.UPDATE_CAPACITY_PROVIDER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_configuration_bundle(
-        self, input: UpdateConfigurationBundleInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateConfigurationBundleInput
+        | _models.UpdateConfigurationBundleInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateConfigurationBundleOutput: ...
+
+    @_overload
+    def update_configuration_bundle(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateConfigurationBundleInputDict],
     ) -> UpdateConfigurationBundleOutput:
         """
         Updates a configuration bundle by creating a new version with the
@@ -3784,8 +6737,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         history.
 
         Args:
-            input:
-                An instance of `UpdateConfigurationBundleInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3795,17 +6746,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `UpdateConfigurationBundleOutput`.
         """
-        return self._invoke(input, _models.UPDATE_CONFIGURATION_BUNDLE, [], plugins)
 
+    def update_configuration_bundle(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateConfigurationBundleOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_CONFIGURATION_BUNDLE, args, kwargs),
+            _models.UPDATE_CONFIGURATION_BUNDLE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_consent_portal(
-        self, input: UpdateConsentPortalInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateConsentPortalInput
+        | _models.UpdateConsentPortalInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateConsentPortalOutput: ...
+
+    @_overload
+    def update_consent_portal(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateConsentPortalInputDict],
     ) -> UpdateConsentPortalOutput:
         """
         Updates an existing consent portal.
 
         Args:
-            input:
-                An instance of `UpdateConsentPortalInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3815,10 +6788,33 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `UpdateConsentPortalOutput`.
         """
-        return self._invoke(input, _models.UPDATE_CONSENT_PORTAL, [], plugins)
 
+    def update_consent_portal(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateConsentPortalOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_CONSENT_PORTAL, args, kwargs),
+            _models.UPDATE_CONSENT_PORTAL,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_dataset(
-        self, input: UpdateDatasetInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateDatasetInput | _models.UpdateDatasetInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateDatasetOutput: ...
+
+    @_overload
+    def update_dataset(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateDatasetInputDict],
     ) -> UpdateDatasetOutput:
         """
         Updates a dataset's metadata. Synchronous operation. Only provided
@@ -3827,8 +6823,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         `DeleteDatasetExamples`.
 
         Args:
-            input:
-                An instance of `UpdateDatasetInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3838,10 +6832,34 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `UpdateDatasetOutput`.
         """
-        return self._invoke(input, _models.UPDATE_DATASET, [], plugins)
 
+    def update_dataset(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateDatasetOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_DATASET, args, kwargs),
+            _models.UPDATE_DATASET,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_dataset_examples(
-        self, input: UpdateDatasetExamplesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateDatasetExamplesInput
+        | _models.UpdateDatasetExamplesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateDatasetExamplesOutput: ...
+
+    @_overload
+    def update_dataset_examples(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateDatasetExamplesInputDict],
     ) -> UpdateDatasetExamplesOutput:
         """
         Updates multiple existing examples in-place on DRAFT. All examples are
@@ -3850,8 +6868,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         (all-or-nothing semantics).
 
         Args:
-            input:
-                An instance of `UpdateDatasetExamplesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3861,10 +6877,33 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `UpdateDatasetExamplesOutput`.
         """
-        return self._invoke(input, _models.UPDATE_DATASET_EXAMPLES, [], plugins)
 
+    def update_dataset_examples(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateDatasetExamplesOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_DATASET_EXAMPLES, args, kwargs),
+            _models.UPDATE_DATASET_EXAMPLES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_evaluator(
-        self, input: UpdateEvaluatorInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateEvaluatorInput | _models.UpdateEvaluatorInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateEvaluatorOutput: ...
+
+    @_overload
+    def update_evaluator(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateEvaluatorInputDict],
     ) -> UpdateEvaluatorOutput:
         """
         Updates a custom evaluator's configuration, description, or evaluation
@@ -3872,8 +6911,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         locked for modification.
 
         Args:
-            input:
-                An instance of `UpdateEvaluatorInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3883,10 +6920,33 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `UpdateEvaluatorOutput`.
         """
-        return self._invoke(input, _models.UPDATE_EVALUATOR, [], plugins)
 
+    def update_evaluator(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateEvaluatorOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_EVALUATOR, args, kwargs),
+            _models.UPDATE_EVALUATOR,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_gateway(
-        self, input: UpdateGatewayInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateGatewayInput | _models.UpdateGatewayInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateGatewayOutput: ...
+
+    @_overload
+    def update_gateway(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateGatewayInputDict],
     ) -> UpdateGatewayOutput:
         """
         Updates an existing gateway.
@@ -3897,8 +6957,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         [GetGateway](https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_GetGateway.html).
 
         Args:
-            input:
-                An instance of `UpdateGatewayInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3908,18 +6966,40 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `UpdateGatewayOutput`.
         """
-        return self._invoke(input, _models.UPDATE_GATEWAY, [], plugins)
 
+    def update_gateway(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateGatewayOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_GATEWAY, args, kwargs),
+            _models.UPDATE_GATEWAY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_gateway_rate_limit(
-        self, input: UpdateGatewayRateLimitInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateGatewayRateLimitInput
+        | _models.UpdateGatewayRateLimitInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateGatewayRateLimitOutput: ...
+
+    @_overload
+    def update_gateway_rate_limit(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateGatewayRateLimitInputDict],
     ) -> UpdateGatewayRateLimitOutput:
         """
         Updates the entries of a gateway rate limit. The dimension keys are
         immutable after creation.
 
         Args:
-            input:
-                An instance of `UpdateGatewayRateLimitInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3929,17 +7009,38 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `UpdateGatewayRateLimitOutput`.
         """
-        return self._invoke(input, _models.UPDATE_GATEWAY_RATE_LIMIT, [], plugins)
 
+    def update_gateway_rate_limit(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateGatewayRateLimitOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_GATEWAY_RATE_LIMIT, args, kwargs),
+            _models.UPDATE_GATEWAY_RATE_LIMIT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_gateway_rule(
-        self, input: UpdateGatewayRuleInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateGatewayRuleInput | _models.UpdateGatewayRuleInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateGatewayRuleOutput: ...
+
+    @_overload
+    def update_gateway_rule(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateGatewayRuleInputDict],
     ) -> UpdateGatewayRuleOutput:
         """
         Updates a gateway rule's priority, conditions, actions, or description.
 
         Args:
-            input:
-                An instance of `UpdateGatewayRuleInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3949,10 +7050,34 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `UpdateGatewayRuleOutput`.
         """
-        return self._invoke(input, _models.UPDATE_GATEWAY_RULE, [], plugins)
 
+    def update_gateway_rule(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateGatewayRuleOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_GATEWAY_RULE, args, kwargs),
+            _models.UPDATE_GATEWAY_RULE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_gateway_target(
-        self, input: UpdateGatewayTargetInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateGatewayTargetInput
+        | _models.UpdateGatewayTargetInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateGatewayTargetOutput: ...
+
+    @_overload
+    def update_gateway_target(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateGatewayTargetInputDict],
     ) -> UpdateGatewayTargetOutput:
         """
         Updates an existing gateway target.
@@ -3963,8 +7088,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         fail before updating the target.
 
         Args:
-            input:
-                An instance of `UpdateGatewayTargetInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3974,17 +7097,38 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `UpdateGatewayTargetOutput`.
         """
-        return self._invoke(input, _models.UPDATE_GATEWAY_TARGET, [], plugins)
 
+    def update_gateway_target(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateGatewayTargetOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_GATEWAY_TARGET, args, kwargs),
+            _models.UPDATE_GATEWAY_TARGET,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_harness(
-        self, input: UpdateHarnessInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateHarnessInput | _models.UpdateHarnessInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateHarnessOutput: ...
+
+    @_overload
+    def update_harness(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateHarnessInputDict],
     ) -> UpdateHarnessOutput:
         """
         Operation to update a harness.
 
         Args:
-            input:
-                An instance of `UpdateHarnessInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3994,17 +7138,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `UpdateHarnessOutput`.
         """
-        return self._invoke(input, _models.UPDATE_HARNESS, [], plugins)
 
+    def update_harness(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateHarnessOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_HARNESS, args, kwargs),
+            _models.UPDATE_HARNESS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_harness_endpoint(
-        self, input: UpdateHarnessEndpointInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateHarnessEndpointInput
+        | _models.UpdateHarnessEndpointInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateHarnessEndpointOutput: ...
+
+    @_overload
+    def update_harness_endpoint(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateHarnessEndpointInputDict],
     ) -> UpdateHarnessEndpointOutput:
         """
         Operation to update a harness endpoint.
 
         Args:
-            input:
-                An instance of `UpdateHarnessEndpointInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4014,17 +7180,38 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `UpdateHarnessEndpointOutput`.
         """
-        return self._invoke(input, _models.UPDATE_HARNESS_ENDPOINT, [], plugins)
 
+    def update_harness_endpoint(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateHarnessEndpointOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_HARNESS_ENDPOINT, args, kwargs),
+            _models.UPDATE_HARNESS_ENDPOINT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_memory(
-        self, input: UpdateMemoryInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateMemoryInput | _models.UpdateMemoryInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateMemoryOutput: ...
+
+    @_overload
+    def update_memory(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateMemoryInputDict],
     ) -> UpdateMemoryOutput:
         """
         Update an Amazon Bedrock AgentCore Memory resource memory.
 
         Args:
-            input:
-                An instance of `UpdateMemoryInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4034,19 +7221,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `UpdateMemoryOutput`.
         """
-        return self._invoke(input, _models.UPDATE_MEMORY, [], plugins)
 
+    def update_memory(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateMemoryOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_MEMORY, args, kwargs),
+            _models.UPDATE_MEMORY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_oauth2_credential_provider(
         self,
-        input: UpdateOauth2CredentialProviderInput,
+        request: _models.UpdateOauth2CredentialProviderInput
+        | _models.UpdateOauth2CredentialProviderInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateOauth2CredentialProviderOutput: ...
+
+    @_overload
+    def update_oauth2_credential_provider(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateOauth2CredentialProviderInputDict],
     ) -> UpdateOauth2CredentialProviderOutput:
         """
         Updates an existing OAuth2 credential provider.
 
         Args:
-            input:
-                An instance of `UpdateOauth2CredentialProviderInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4056,14 +7263,34 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `UpdateOauth2CredentialProviderOutput`.
         """
+
+    def update_oauth2_credential_provider(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateOauth2CredentialProviderOutput:
         return self._invoke(
-            input, _models.UPDATE_OAUTH2_CREDENTIAL_PROVIDER, [], plugins
+            self._select_input(_models.UPDATE_OAUTH2_CREDENTIAL_PROVIDER, args, kwargs),
+            _models.UPDATE_OAUTH2_CREDENTIAL_PROVIDER,
+            [],
+            plugins,
         )
 
+    @_overload
     def update_online_evaluation_config(
         self,
-        input: UpdateOnlineEvaluationConfigInput,
+        request: _models.UpdateOnlineEvaluationConfigInput
+        | _models.UpdateOnlineEvaluationConfigInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateOnlineEvaluationConfigOutput: ...
+
+    @_overload
+    def update_online_evaluation_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateOnlineEvaluationConfigInputDict],
     ) -> UpdateOnlineEvaluationConfigOutput:
         """
         Updates an online evaluation configuration's settings, including rules,
@@ -4071,8 +7298,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         immediately for ongoing evaluations.
 
         Args:
-            input:
-                An instance of `UpdateOnlineEvaluationConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4082,18 +7307,40 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `UpdateOnlineEvaluationConfigOutput`.
         """
-        return self._invoke(input, _models.UPDATE_ONLINE_EVALUATION_CONFIG, [], plugins)
 
+    def update_online_evaluation_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateOnlineEvaluationConfigOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_ONLINE_EVALUATION_CONFIG, args, kwargs),
+            _models.UPDATE_ONLINE_EVALUATION_CONFIG,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_payment_connector(
-        self, input: UpdatePaymentConnectorInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdatePaymentConnectorInput
+        | _models.UpdatePaymentConnectorInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdatePaymentConnectorOutput: ...
+
+    @_overload
+    def update_payment_connector(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdatePaymentConnectorInputDict],
     ) -> UpdatePaymentConnectorOutput:
         """
         Updates an existing payment connector. This operation uses PATCH
         semantics, so you only need to specify the fields you want to change.
 
         Args:
-            input:
-                An instance of `UpdatePaymentConnectorInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4103,20 +7350,40 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `UpdatePaymentConnectorOutput`.
         """
-        return self._invoke(input, _models.UPDATE_PAYMENT_CONNECTOR, [], plugins)
 
+    def update_payment_connector(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdatePaymentConnectorOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_PAYMENT_CONNECTOR, args, kwargs),
+            _models.UPDATE_PAYMENT_CONNECTOR,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_payment_credential_provider(
         self,
-        input: UpdatePaymentCredentialProviderInput,
+        request: _models.UpdatePaymentCredentialProviderInput
+        | _models.UpdatePaymentCredentialProviderInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdatePaymentCredentialProviderOutput: ...
+
+    @_overload
+    def update_payment_credential_provider(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdatePaymentCredentialProviderInputDict],
     ) -> UpdatePaymentCredentialProviderOutput:
         """
         Updates an existing payment credential provider with new authentication
         credentials.
 
         Args:
-            input:
-                An instance of `UpdatePaymentCredentialProviderInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4126,20 +7393,42 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `UpdatePaymentCredentialProviderOutput`.
         """
+
+    def update_payment_credential_provider(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdatePaymentCredentialProviderOutput:
         return self._invoke(
-            input, _models.UPDATE_PAYMENT_CREDENTIAL_PROVIDER, [], plugins
+            self._select_input(
+                _models.UPDATE_PAYMENT_CREDENTIAL_PROVIDER, args, kwargs
+            ),
+            _models.UPDATE_PAYMENT_CREDENTIAL_PROVIDER,
+            [],
+            plugins,
         )
 
+    @_overload
     def update_payment_manager(
-        self, input: UpdatePaymentManagerInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdatePaymentManagerInput
+        | _models.UpdatePaymentManagerInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdatePaymentManagerOutput: ...
+
+    @_overload
+    def update_payment_manager(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdatePaymentManagerInputDict],
     ) -> UpdatePaymentManagerOutput:
         """
         Updates an existing payment manager. This operation uses PATCH
         semantics, so you only need to specify the fields you want to change.
 
         Args:
-            input:
-                An instance of `UpdatePaymentManagerInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4149,10 +7438,33 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `UpdatePaymentManagerOutput`.
         """
-        return self._invoke(input, _models.UPDATE_PAYMENT_MANAGER, [], plugins)
 
+    def update_payment_manager(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdatePaymentManagerOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_PAYMENT_MANAGER, args, kwargs),
+            _models.UPDATE_PAYMENT_MANAGER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_policy(
-        self, input: UpdatePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdatePolicyInput | _models.UpdatePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdatePolicyOutput: ...
+
+    @_overload
+    def update_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdatePolicyInputDict],
     ) -> UpdatePolicyOutput:
         """
         Updates an existing policy within the AgentCore Policy system. This
@@ -4172,8 +7484,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         sessions. To resume, you must start a new session with a new session ID.
 
         Args:
-            input:
-                An instance of `UpdatePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4183,10 +7493,33 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `UpdatePolicyOutput`.
         """
-        return self._invoke(input, _models.UPDATE_POLICY, [], plugins)
 
+    def update_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdatePolicyOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_POLICY, args, kwargs),
+            _models.UPDATE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_policy_engine(
-        self, input: UpdatePolicyEngineInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdatePolicyEngineInput | _models.UpdatePolicyEngineInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdatePolicyEngineOutput: ...
+
+    @_overload
+    def update_policy_engine(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdatePolicyEngineInputDict],
     ) -> UpdatePolicyEngineOutput:
         """
         Updates an existing policy engine within the AgentCore Policy system.
@@ -4196,8 +7529,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         completion.
 
         Args:
-            input:
-                An instance of `UpdatePolicyEngineInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4207,18 +7538,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `UpdatePolicyEngineOutput`.
         """
-        return self._invoke(input, _models.UPDATE_POLICY_ENGINE, [], plugins)
 
+    def update_policy_engine(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdatePolicyEngineOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_POLICY_ENGINE, args, kwargs),
+            _models.UPDATE_POLICY_ENGINE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_registry(
-        self, input: UpdateRegistryInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateRegistryInput | _models.UpdateRegistryInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateRegistryOutput: ...
+
+    @_overload
+    def update_registry(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateRegistryInputDict],
     ) -> UpdateRegistryOutput:
         """
         Updates an existing registry. This operation uses PATCH semantics, so
         you only need to specify the fields you want to change.
 
         Args:
-            input:
-                An instance of `UpdateRegistryInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4228,10 +7580,34 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `UpdateRegistryOutput`.
         """
-        return self._invoke(input, _models.UPDATE_REGISTRY, [], plugins)
 
+    def update_registry(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateRegistryOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_REGISTRY, args, kwargs),
+            _models.UPDATE_REGISTRY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_registry_record(
-        self, input: UpdateRegistryRecordInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateRegistryRecordInput
+        | _models.UpdateRegistryRecordInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateRegistryRecordOutput: ...
+
+    @_overload
+    def update_registry_record(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateRegistryRecordInputDict],
     ) -> UpdateRegistryRecordOutput:
         """
         Updates an existing registry record. This operation uses PATCH
@@ -4239,8 +7615,6 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         The update is processed asynchronously and returns HTTP 202 Accepted.
 
         Args:
-            input:
-                An instance of `UpdateRegistryRecordInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4250,20 +7624,40 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `UpdateRegistryRecordOutput`.
         """
-        return self._invoke(input, _models.UPDATE_REGISTRY_RECORD, [], plugins)
 
+    def update_registry_record(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateRegistryRecordOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_REGISTRY_RECORD, args, kwargs),
+            _models.UPDATE_REGISTRY_RECORD,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_registry_record_status(
         self,
-        input: UpdateRegistryRecordStatusInput,
+        request: _models.UpdateRegistryRecordStatusInput
+        | _models.UpdateRegistryRecordStatusInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateRegistryRecordStatusOutput: ...
+
+    @_overload
+    def update_registry_record_status(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateRegistryRecordStatusInputDict],
     ) -> UpdateRegistryRecordStatusOutput:
         """
         Updates the status of a registry record. Use this operation to approve,
         reject, or deprecate a registry record.
 
         Args:
-            input:
-                An instance of `UpdateRegistryRecordStatusInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4273,17 +7667,39 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `UpdateRegistryRecordStatusOutput`.
         """
-        return self._invoke(input, _models.UPDATE_REGISTRY_RECORD_STATUS, [], plugins)
 
+    def update_registry_record_status(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateRegistryRecordStatusOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_REGISTRY_RECORD_STATUS, args, kwargs),
+            _models.UPDATE_REGISTRY_RECORD_STATUS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_workload_identity(
-        self, input: UpdateWorkloadIdentityInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateWorkloadIdentityInput
+        | _models.UpdateWorkloadIdentityInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateWorkloadIdentityOutput: ...
+
+    @_overload
+    def update_workload_identity(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateWorkloadIdentityInputDict],
     ) -> UpdateWorkloadIdentityOutput:
         """
         Updates an existing workload identity.
 
         Args:
-            input:
-                An instance of `UpdateWorkloadIdentityInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4293,7 +7709,16 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         Returns:
             An instance of `UpdateWorkloadIdentityOutput`.
         """
-        return self._invoke(input, _models.UPDATE_WORKLOAD_IDENTITY, [], plugins)
+
+    def update_workload_identity(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateWorkloadIdentityOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_WORKLOAD_IDENTITY, args, kwargs),
+            _models.UPDATE_WORKLOAD_IDENTITY,
+            [],
+            plugins,
+        )
 
     def _new_config(self) -> BedrockAgentCoreControlConfig:
         return BedrockAgentCoreControlConfig.resolve()

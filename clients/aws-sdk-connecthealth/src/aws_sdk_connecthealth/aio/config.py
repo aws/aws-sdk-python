@@ -177,6 +177,12 @@ class AsyncConnectHealthConfig(AsyncAwsConfig):
     dispatching the request will return an error.
     """
 
+    disable_host_prefix_injection: bool | None = None
+    """
+    Whether to skip prepending operations' modeled host prefixes to the
+    endpoint host.
+    """
+
     aws_credentials_identity_resolver: (
         AsyncIdentityResolver[AWSCredentialsIdentity, AWSIdentityProperties] | None
     ) = None
@@ -206,16 +212,11 @@ class AsyncConnectHealthConfig(AsyncAwsConfig):
     header.
     """
 
-    disable_host_prefix_injection: bool | None = None
-    """
-    Whether to skip prepending operations' modeled host prefixes to the
-    endpoint host.
-    """
-
     _FIELDS: ClassVar[dict[str, FieldSpec]] = {
         "use_fips_endpoint": FieldSpec(
             default=None, resolver=resolve_use_fips_endpoint_program
         ),
+        "disable_host_prefix_injection": FieldSpec(default=None),
         "aws_credentials_identity_resolver": FieldSpec(default=None),
         "region": FieldSpec(default=None),
         "aws_access_key_id": FieldSpec(default=None),
@@ -223,7 +224,6 @@ class AsyncConnectHealthConfig(AsyncAwsConfig):
         "aws_session_token": FieldSpec(default=None),
         "user_agent_extra": FieldSpec(default=None),
         "sdk_ua_app_id": FieldSpec(default=None),
-        "disable_host_prefix_injection": FieldSpec(default=None),
         **AsyncAwsConfig._FIELDS,
         "endpoint_uri": FieldSpec(
             default=None, resolver=EndpointUriResolver("connecthealth").program

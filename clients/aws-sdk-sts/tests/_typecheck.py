@@ -2,40 +2,57 @@
 
 from typing import Any
 
+from aws_sdk_sts.aio.client import AsyncSTSClient
+from aws_sdk_sts.client import STSClient
 from aws_sdk_sts.models import (
     AssumeRoleInput,
+    AssumeRoleInputDict,
     AssumeRoleOutput,
     AssumeRoleWithSAMLInput,
+    AssumeRoleWithSAMLInputDict,
     AssumeRoleWithSAMLOutput,
     AssumeRoleWithWebIdentityInput,
+    AssumeRoleWithWebIdentityInputDict,
     AssumeRoleWithWebIdentityOutput,
     AssumeRootInput,
+    AssumeRootInputDict,
     AssumeRootOutput,
     AssumedRoleUser,
     Credentials,
     DecodeAuthorizationMessageInput,
+    DecodeAuthorizationMessageInputDict,
     DecodeAuthorizationMessageOutput,
     FederatedUser,
     GetAccessKeyInfoInput,
+    GetAccessKeyInfoInputDict,
     GetAccessKeyInfoOutput,
     GetCallerIdentityInput,
+    GetCallerIdentityInputDict,
     GetCallerIdentityOutput,
     GetDelegatedAccessTokenInput,
+    GetDelegatedAccessTokenInputDict,
     GetDelegatedAccessTokenOutput,
     GetFederationTokenInput,
+    GetFederationTokenInputDict,
     GetFederationTokenOutput,
     GetSessionTokenInput,
+    GetSessionTokenInputDict,
     GetSessionTokenOutput,
     GetWebIdentityTokenInput,
+    GetWebIdentityTokenInputDict,
     GetWebIdentityTokenOutput,
     PolicyDescriptorType,
+    PolicyDescriptorTypeDict,
     ProvidedContext,
+    ProvidedContextDict,
     Tag,
+    TagDict,
 )
 
 
-# Static type fixture: pyright over this validates models.pyi.
-# Not executed as a test; it only needs to type-check.
+# Static type fixture: pyright over this validates models.pyi and the
+# client method signatures. Not executed as a test; it only needs to
+# type-check.
 
 _: Any = ...
 
@@ -67,3 +84,139 @@ GetWebIdentityTokenOutput()
 PolicyDescriptorType()
 ProvidedContext()
 Tag(key=_, value=_)
+_params_0: AssumeRoleInputDict = {"role_arn": _, "role_session_name": _}
+_params_1: AssumeRoleWithSAMLInputDict = {
+    "role_arn": _,
+    "principal_arn": _,
+    "saml_assertion": _,
+}
+_params_2: AssumeRoleWithWebIdentityInputDict = {
+    "role_arn": _,
+    "role_session_name": _,
+    "web_identity_token": _,
+}
+_params_3: AssumeRootInputDict = {"target_principal": _, "task_policy_arn": _}
+_params_4: DecodeAuthorizationMessageInputDict = {"encoded_message": _}
+_params_5: GetAccessKeyInfoInputDict = {"access_key_id": _}
+_params_6: GetCallerIdentityInputDict = {}
+_params_7: GetDelegatedAccessTokenInputDict = {"trade_in_token": _}
+_params_8: GetFederationTokenInputDict = {"name": _}
+_params_9: GetSessionTokenInputDict = {}
+_params_10: GetWebIdentityTokenInputDict = {"audience": _, "signing_algorithm": _}
+_params_11: PolicyDescriptorTypeDict = {}
+_params_12: ProvidedContextDict = {}
+_params_13: TagDict = {"key": _, "value": _}
+
+
+def _request[T](form: type[T]) -> T:
+    raise NotImplementedError
+
+
+async def check_async_calls(client: AsyncSTSClient) -> None:
+    pass
+    await client.assume_role(role_arn=_, role_session_name=_)
+    await client.assume_role(**_request(AssumeRoleInputDict))
+    await client.assume_role(_request(AssumeRoleInput))
+    await client.assume_role(_request(AssumeRoleInputDict))
+    await client.assume_role_with_saml(role_arn=_, principal_arn=_, saml_assertion=_)
+    await client.assume_role_with_saml(**_request(AssumeRoleWithSAMLInputDict))
+    await client.assume_role_with_saml(_request(AssumeRoleWithSAMLInput))
+    await client.assume_role_with_saml(_request(AssumeRoleWithSAMLInputDict))
+    await client.assume_role_with_web_identity(
+        role_arn=_, role_session_name=_, web_identity_token=_
+    )
+    await client.assume_role_with_web_identity(
+        **_request(AssumeRoleWithWebIdentityInputDict)
+    )
+    await client.assume_role_with_web_identity(_request(AssumeRoleWithWebIdentityInput))
+    await client.assume_role_with_web_identity(
+        _request(AssumeRoleWithWebIdentityInputDict)
+    )
+    await client.assume_root(target_principal=_, task_policy_arn=_)
+    await client.assume_root(**_request(AssumeRootInputDict))
+    await client.assume_root(_request(AssumeRootInput))
+    await client.assume_root(_request(AssumeRootInputDict))
+    await client.decode_authorization_message(encoded_message=_)
+    await client.decode_authorization_message(
+        **_request(DecodeAuthorizationMessageInputDict)
+    )
+    await client.decode_authorization_message(_request(DecodeAuthorizationMessageInput))
+    await client.decode_authorization_message(
+        _request(DecodeAuthorizationMessageInputDict)
+    )
+    await client.get_access_key_info(access_key_id=_)
+    await client.get_access_key_info(**_request(GetAccessKeyInfoInputDict))
+    await client.get_access_key_info(_request(GetAccessKeyInfoInput))
+    await client.get_access_key_info(_request(GetAccessKeyInfoInputDict))
+    await client.get_caller_identity()
+    await client.get_caller_identity(**_request(GetCallerIdentityInputDict))
+    await client.get_caller_identity(_request(GetCallerIdentityInput))
+    await client.get_caller_identity(_request(GetCallerIdentityInputDict))
+    await client.get_delegated_access_token(trade_in_token=_)
+    await client.get_delegated_access_token(
+        **_request(GetDelegatedAccessTokenInputDict)
+    )
+    await client.get_delegated_access_token(_request(GetDelegatedAccessTokenInput))
+    await client.get_delegated_access_token(_request(GetDelegatedAccessTokenInputDict))
+    await client.get_federation_token(name=_)
+    await client.get_federation_token(**_request(GetFederationTokenInputDict))
+    await client.get_federation_token(_request(GetFederationTokenInput))
+    await client.get_federation_token(_request(GetFederationTokenInputDict))
+    await client.get_session_token()
+    await client.get_session_token(**_request(GetSessionTokenInputDict))
+    await client.get_session_token(_request(GetSessionTokenInput))
+    await client.get_session_token(_request(GetSessionTokenInputDict))
+    await client.get_web_identity_token(audience=_, signing_algorithm=_)
+    await client.get_web_identity_token(**_request(GetWebIdentityTokenInputDict))
+    await client.get_web_identity_token(_request(GetWebIdentityTokenInput))
+    await client.get_web_identity_token(_request(GetWebIdentityTokenInputDict))
+
+
+def check_sync_calls(client: STSClient) -> None:
+    pass
+    client.assume_role(role_arn=_, role_session_name=_)
+    client.assume_role(**_request(AssumeRoleInputDict))
+    client.assume_role(_request(AssumeRoleInput))
+    client.assume_role(_request(AssumeRoleInputDict))
+    client.assume_role_with_saml(role_arn=_, principal_arn=_, saml_assertion=_)
+    client.assume_role_with_saml(**_request(AssumeRoleWithSAMLInputDict))
+    client.assume_role_with_saml(_request(AssumeRoleWithSAMLInput))
+    client.assume_role_with_saml(_request(AssumeRoleWithSAMLInputDict))
+    client.assume_role_with_web_identity(
+        role_arn=_, role_session_name=_, web_identity_token=_
+    )
+    client.assume_role_with_web_identity(**_request(AssumeRoleWithWebIdentityInputDict))
+    client.assume_role_with_web_identity(_request(AssumeRoleWithWebIdentityInput))
+    client.assume_role_with_web_identity(_request(AssumeRoleWithWebIdentityInputDict))
+    client.assume_root(target_principal=_, task_policy_arn=_)
+    client.assume_root(**_request(AssumeRootInputDict))
+    client.assume_root(_request(AssumeRootInput))
+    client.assume_root(_request(AssumeRootInputDict))
+    client.decode_authorization_message(encoded_message=_)
+    client.decode_authorization_message(**_request(DecodeAuthorizationMessageInputDict))
+    client.decode_authorization_message(_request(DecodeAuthorizationMessageInput))
+    client.decode_authorization_message(_request(DecodeAuthorizationMessageInputDict))
+    client.get_access_key_info(access_key_id=_)
+    client.get_access_key_info(**_request(GetAccessKeyInfoInputDict))
+    client.get_access_key_info(_request(GetAccessKeyInfoInput))
+    client.get_access_key_info(_request(GetAccessKeyInfoInputDict))
+    client.get_caller_identity()
+    client.get_caller_identity(**_request(GetCallerIdentityInputDict))
+    client.get_caller_identity(_request(GetCallerIdentityInput))
+    client.get_caller_identity(_request(GetCallerIdentityInputDict))
+    client.get_delegated_access_token(trade_in_token=_)
+    client.get_delegated_access_token(**_request(GetDelegatedAccessTokenInputDict))
+    client.get_delegated_access_token(_request(GetDelegatedAccessTokenInput))
+    client.get_delegated_access_token(_request(GetDelegatedAccessTokenInputDict))
+    client.get_federation_token(name=_)
+    client.get_federation_token(**_request(GetFederationTokenInputDict))
+    client.get_federation_token(_request(GetFederationTokenInput))
+    client.get_federation_token(_request(GetFederationTokenInputDict))
+    client.get_session_token()
+    client.get_session_token(**_request(GetSessionTokenInputDict))
+    client.get_session_token(_request(GetSessionTokenInput))
+    client.get_session_token(_request(GetSessionTokenInputDict))
+    client.get_web_identity_token(audience=_, signing_algorithm=_)
+    client.get_web_identity_token(**_request(GetWebIdentityTokenInputDict))
+    client.get_web_identity_token(_request(GetWebIdentityTokenInput))
+    client.get_web_identity_token(_request(GetWebIdentityTokenInputDict))

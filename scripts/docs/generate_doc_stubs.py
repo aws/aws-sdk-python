@@ -85,6 +85,7 @@ class OperationInfo:
     name: str
     module_path: str
     input: TypeInfo
+    input_dicts: list[TypeInfo]
     output: TypeInfo
     stream_type: StreamType | None
     event_input_type: str | None  # For input/duplex streams
@@ -104,6 +105,7 @@ class ModelsInfo:
     """Information about all modeled types."""
 
     structures: list[TypeInfo]
+    dictionaries: list[TypeInfo]
     unions: list[UnionInfo]
     enums: list[TypeInfo]
     errors: list[TypeInfo]
@@ -114,7 +116,8 @@ class ClientInfo:
     """Complete information about a client package."""
 
     name: str  # e.g., "AsyncBedrockRuntimeClient"
-    module_path: str  # e.g., "aws_sdk_bedrock_runtime.aio.client.AsyncBedrockRuntimeClient"
+    # e.g., "aws_sdk_bedrock_runtime.aio.client.AsyncBedrockRuntimeClient"
+    module_path: str
     package_name: str  # e.g., "aws_sdk_bedrock_runtime"
     config: TypeInfo
     plugin: TypeInfo
@@ -126,7 +129,9 @@ class ClientInfo:
 class DocStubGenerator:
     """Generate markdown API Reference stubs for AWS SDK for Python v4 clients."""
 
-    def __init__(self, client_dir: Path, output_dir: Path, service_name: str | None = None) -> None:
+    def __init__(
+        self, client_dir: Path, output_dir: Path, service_name: str | None = None
+    ) -> None:
         """
         Initialize the documentation generator.
 
@@ -153,16 +158,21 @@ class DocStubGenerator:
         """
         Read the authoritative service name (Smithy sdkId) from the package.
 
-        The generated ``_private/schemas.py`` carries the ``aws.api#service``
-        trait's ``sdkId`` (e.g. "SNS"), the same field the sidebar navigation
-        uses, so it keeps acronym casing that the package name does not.
+        The generated schemas carry the ``aws.api#service`` trait's ``sdkId``
+        (e.g. "SNS"), the same field the sidebar navigation uses, so it keeps
+        acronym casing that the package name does not.
         Returns None if the file or value is absent.
         """
-        schemas = client_dir / "_private" / "schemas.py"
-        if not schemas.is_file():
-            return None
-        match = re.search(r'"sdkId":\s*"([^"]+)"', schemas.read_text())
-        return match.group(1) if match else None
+        private_dir = client_dir / "_private"
+        for schemas in [
+            private_dir / "schemas.py",
+            *sorted(private_dir.glob("schemas_*.py")),
+        ]:
+            if schemas.is_file():
+                match = re.search(r'"sdkId":\s*"([^"]+)"', schemas.read_text())
+                if match:
+                    return match.group(1)
+        return None
 
     def generate(self) -> bool:
         """
@@ -184,12 +194,14 @@ class DocStubGenerator:
     def _analyze_client_package(self, package_name: str) -> ClientInfo:
         """Analyze a client package using griffe."""
         logger.info(f"Analyzing package: {package_name}")
-        package = griffe.load(package_name)
+        package = griffe.load(package_name, search_paths=[self.client_dir.parent])
 
         required = ("aio.client", "aio.config", "models")
         missing = [name for name in required if not self._has_module(package, name)]
         if missing:
-            raise ValueError(f"Missing required modules in {package_name}: {', '.join(missing)}")
+            raise ValueError(
+                f"Missing required modules in {package_name}: {', '.join(missing)}"
+            )
 
         client_module = package["aio.client"]
         config_module = package["aio.config"]
@@ -197,11 +209,15 @@ class DocStubGenerator:
 
         client_class = self._find_class_with_suffix(client_module, "Client")
         if not client_class:
-            raise ValueError(f"No class ending with 'Client' found in {package_name}.aio.client")
+            raise ValueError(
+                f"No class ending with 'Client' found in {package_name}.aio.client"
+            )
 
         config_class = self._find_class_with_suffix(config_module, "Config")
         if not config_class:
-            raise ValueError(f"No class ending with 'Config' found in {package_name}.aio.config")
+            raise ValueError(
+                f"No class ending with 'Config' found in {package_name}.aio.config"
+            )
 
         plugin_alias = config_module.members.get("Plugin")
         if not plugin_alias:
@@ -218,6 +234,7 @@ class DocStubGenerator:
             f"Analyzed {client_class.name}: {len(client_methods)} client methods, "
             f"{len(operations)} operations, "
             f"{len(models.structures)} structures, {len(models.errors)} errors, "
+            f"{len(models.dictionaries)} dictionaries, "
             f"{len(models.unions)} unions, {len(models.enums)} enums"
         )
 
@@ -277,14 +294,39 @@ class DocStubGenerator:
         event_input_type = None
         event_output_type = None
 
-        input_param = operation.parameters["input"]
-        input_annotation = self._get_expr(
-            input_param.annotation, f"'{operation.name}' input annotation"
+        # Public request types live on the overloads; the implementation accepts
+        # *args/**kwargs and does not expose the input shape.
+        request_signature = next(
+            (
+                overload
+                for overload in operation.overloads or []
+                if "request" in overload.parameters
+            ),
+            None,
         )
+        if request_signature:
+            input_annotation = request_signature.parameters["request"].annotation
+        else:
+            input_annotation = operation.parameters["input"].annotation
+        input_types = self._get_union_elements(
+            self._get_expr(input_annotation, f"'{operation.name}' input annotation")
+        )
+        model_types = [
+            expr for expr in input_types if not expr.canonical_name.endswith("Dict")
+        ]
+        dict_types = [
+            expr for expr in input_types if expr.canonical_name.endswith("Dict")
+        ]
+        if len(model_types) != 1:
+            raise ValueError(f"'{operation.name}': expected one input model")
         input_info = TypeInfo(
-            name=input_annotation.canonical_name,
-            module_path=input_annotation.canonical_path,
+            name=model_types[0].canonical_name,
+            module_path=model_types[0].canonical_path,
         )
+        input_dicts = [
+            TypeInfo(name=expr.canonical_name, module_path=expr.canonical_path)
+            for expr in dict_types
+        ]
 
         returns = self._get_expr(operation.returns, f"'{operation.name}' return type")
         output_type = returns.canonical_name
@@ -292,7 +334,9 @@ class DocStubGenerator:
 
         if output_type in stream_type_map:
             stream_type = stream_type_map[output_type]
-            stream_args = self._get_subscript_elements(returns, f"'{operation.name}' stream type")
+            stream_args = self._get_subscript_elements(
+                returns, f"'{operation.name}' stream type"
+            )
 
             if stream_type in (StreamType.INPUT, StreamType.DUPLEX):
                 event_input_type = stream_args[0].canonical_name
@@ -311,6 +355,7 @@ class DocStubGenerator:
             name=operation.name,
             module_path=operation.path,
             input=input_info,
+            input_dicts=input_dicts,
             output=output_info,
             stream_type=stream_type,
             event_input_type=event_input_type,
@@ -320,7 +365,9 @@ class DocStubGenerator:
     def _get_expr(self, annotation: str | Expr | None, context: str) -> Expr:
         """Extract and validate an Expr from an annotation."""
         if not isinstance(annotation, Expr):
-            raise TypeError(f"{context}: expected Expr, got {type(annotation).__name__}")
+            raise TypeError(
+                f"{context}: expected Expr, got {type(annotation).__name__}"
+            )
         return annotation
 
     def _get_subscript_elements(self, expr: Expr, context: str) -> list[Expr]:
@@ -334,40 +381,81 @@ class DocStubGenerator:
             return [el for el in slice_expr.elements if isinstance(el, Expr)]
         return [slice_expr]
 
-    def _extract_models(self, models_module: Module, operations: list[OperationInfo]) -> ModelsInfo:
+    def _get_union_elements(self, expr: Expr) -> list[Expr]:
+        """Flatten both Union[A, B] and A | B annotations."""
+        if isinstance(expr, ExprBinOp) and expr.operator == "|":
+            return [
+                *self._get_union_elements(self._get_expr(expr.left, "Union member")),
+                *self._get_union_elements(self._get_expr(expr.right, "Union member")),
+            ]
+        if (
+            isinstance(expr, ExprSubscript)
+            and isinstance(expr.left, Expr)
+            and expr.left.canonical_name == "Union"
+        ):
+            return [
+                member
+                for arg in self._get_subscript_elements(expr, "Union")
+                for member in self._get_union_elements(arg)
+            ]
+        return [expr]
+
+    def _extract_models(
+        self, models_module: Module, operations: list[OperationInfo]
+    ) -> ModelsInfo:
         """Extract structures, unions, enums, and errors from models module."""
-        structures, unions, enums, errors = [], [], [], []
+        structures, dictionaries, unions, enums, errors = [], [], [], [], []
 
         for member in models_module.members.values():
-            # Skip imported and private members
-            if member.is_imported or member.is_private:
+            if member.is_private:
+                continue
+            target = member
+            if isinstance(member, Alias):
+                # Partitioned clients re-export their types from private stubs.
+                # Keep their public paths, while excluding unrelated imports.
+                if not member.target_path.startswith(
+                    f"{models_module.path.removesuffix('.models')}._private.models_"
+                ):
+                    continue
+                target = member.final_target
+            elif member.is_imported:
                 continue
 
-            if self._is_union(member):
+            if self._is_union(target):
                 unions.append(
                     UnionInfo(
                         name=member.name,
                         module_path=member.path,
-                        members=self._extract_union_members(member, models_module),
+                        members=self._extract_union_members(target, models_module),
                     )
                 )
-            elif self._is_enum(member):
+            elif self._is_enum(target):
                 enums.append(TypeInfo(name=member.name, module_path=member.path))
-            elif self._is_error(member):
+            elif self._is_error(target):
                 errors.append(TypeInfo(name=member.name, module_path=member.path))
-            elif member.is_class:
+            elif isinstance(target, Class) and any(
+                isinstance(base, Expr) and base.canonical_name == "TypedDict"
+                for base in target.bases
+            ):
+                dictionaries.append(TypeInfo(name=member.name, module_path=member.path))
+            elif target.is_class:
                 structures.append(TypeInfo(name=member.name, module_path=member.path))
 
-        duplicates = []
-        for structure in structures:
-            if self._is_operation_io_type(structure.name, operations) or self._is_union_member(
-                structure.name, unions
-            ):
-                duplicates.append(structure)
+        def standalone(items: list[TypeInfo]) -> list[TypeInfo]:
+            return [
+                item
+                for item in items
+                if not self._is_operation_io_type(item.name, operations)
+                and not self._is_union_member(item.name, unions)
+            ]
 
-        structures = [struct for struct in structures if struct not in duplicates]
-
-        return ModelsInfo(structures=structures, unions=unions, enums=enums, errors=errors)
+        return ModelsInfo(
+            structures=standalone(structures),
+            dictionaries=standalone(dictionaries),
+            unions=unions,
+            enums=enums,
+            errors=errors,
+        )
 
     def _is_union(self, member: Object | Alias) -> TypeGuard[Attribute]:
         """Check if a module member is a union type."""
@@ -382,7 +470,7 @@ class DocStubGenerator:
                 return True
 
         # Check for PEP 604 (X | Y) syntax
-        if isinstance(value, ExprBinOp):
+        if isinstance(value, ExprBinOp) and value.operator == "|":
             return True
 
         return False
@@ -392,18 +480,14 @@ class DocStubGenerator:
     ) -> list[TypeInfo]:
         """Extract member types from a union."""
         members = []
-        value_str = str(union_attr.value)
-
-        # Clean up value_str for Union[X | Y | Z] syntax
-        if value_str.startswith("Union[") and value_str.endswith("]"):
-            value_str = value_str.removeprefix("Union[").removesuffix("]")
-
-        member_names = [member.strip() for member in value_str.split("|")]
-
-        for name in member_names:
+        value = self._get_expr(union_attr.value, f"'{union_attr.name}' union")
+        for expr in self._get_union_elements(value):
+            name = expr.canonical_name
             if not (member_object := models_module.members.get(name)):
                 raise ValueError(f"Union member '{name}' not found in models module")
-            members.append(TypeInfo(name=member_object.name, module_path=member_object.path))
+            members.append(
+                TypeInfo(name=member_object.name, module_path=member_object.path)
+            )
 
         return members
 
@@ -412,7 +496,8 @@ class DocStubGenerator:
         if not isinstance(member, Class):
             return False
         return any(
-            isinstance(base, ExprName) and base.name in ENUM_BASE_CLASSES for base in member.bases
+            isinstance(base, ExprName) and base.name in ENUM_BASE_CLASSES
+            for base in member.bases
         )
 
     def _is_error(self, member: Object | Alias) -> TypeGuard[Class]:
@@ -420,12 +505,19 @@ class DocStubGenerator:
         if not isinstance(member, Class):
             return False
         return any(
-            isinstance(base, ExprName) and base.name in ERROR_BASE_CLASSES for base in member.bases
+            isinstance(base, ExprName) and base.name in ERROR_BASE_CLASSES
+            for base in member.bases
         )
 
-    def _is_operation_io_type(self, type_name: str, operations: list[OperationInfo]) -> bool:
+    def _is_operation_io_type(
+        self, type_name: str, operations: list[OperationInfo]
+    ) -> bool:
         """Check if a type is used as operation input/output."""
-        return any(type_name in (op.input.name, op.output.name) for op in operations)
+        return any(
+            type_name in (op.input.name, op.output.name)
+            or any(type_name == dictionary.name for dictionary in op.input_dicts)
+            for op in operations
+        )
 
     def _is_union_member(self, type_name: str, unions: list[UnionInfo]) -> bool:
         """Check if a type is used as union member."""
@@ -441,8 +533,15 @@ class DocStubGenerator:
             self._generate_type_stubs(
                 client_info.models.structures, "structures", "Structure Class"
             )
-            self._generate_type_stubs(client_info.models.errors, "errors", "Error Class")
-            self._generate_type_stubs(client_info.models.enums, "enums", "Enum Class", members=True)
+            self._generate_type_stubs(
+                client_info.models.dictionaries, "dictionaries", "Dictionary Type"
+            )
+            self._generate_type_stubs(
+                client_info.models.errors, "errors", "Error Class"
+            )
+            self._generate_type_stubs(
+                client_info.models.enums, "enums", "Enum Class", members=True
+            )
             self._generate_union_stubs(client_info.models.unions)
         except OSError as e:
             logger.error(f"Failed to write documentation files: {e}")
@@ -474,7 +573,9 @@ class DocStubGenerator:
         ]
 
         for method in sorted(client_info.client_methods, key=lambda x: x.name):
-            lines.extend([*self._mkdocs_directive(method.module_path, heading_level=4), ""])
+            lines.extend(
+                [*self._mkdocs_directive(method.module_path, heading_level=4), ""]
+            )
 
         # Operations section
         if client_info.operations:
@@ -504,6 +605,7 @@ class DocStubGenerator:
         # Model sections
         sections: list[tuple[str, str, Sequence[TypeInfo | UnionInfo]]] = [
             ("Structures", "structures", models.structures),
+            ("Dictionaries", "dictionaries", models.dictionaries),
             ("Errors", "errors", models.errors),
             ("Unions", "unions", models.unions),
             ("Enums", "enums", models.enums),
@@ -535,11 +637,32 @@ class DocStubGenerator:
                 "",
                 "## Input",
                 "",
-                *self._mkdocs_directive(op.input.module_path),
-                "",
-                "## Output",
-                "",
             ]
+            if op.input_dicts:
+                lines.extend(
+                    [
+                        "Pass the input fields as keyword arguments, or pass a model or dictionary "
+                        "as the first positional argument. Pass `plugins` separately as a keyword argument.",
+                        "",
+                        "### Model",
+                        "",
+                        *self._mkdocs_directive(op.input.module_path, heading_level=4),
+                        "",
+                        "### Dictionaries",
+                    ]
+                )
+                for dictionary in op.input_dicts:
+                    lines.extend(
+                        [
+                            "",
+                            *self._mkdocs_directive(
+                                dictionary.module_path, heading_level=4
+                            ),
+                        ]
+                    )
+            else:
+                lines.extend(self._mkdocs_directive(op.input.module_path))
+            lines.extend(["", "## Output", ""])
 
             if op.stream_type:
                 lines.extend(
@@ -582,7 +705,9 @@ class DocStubGenerator:
 
             output_path = self.output_dir / "operations" / f"{op.name}.md"
             output_path.parent.mkdir(parents=True, exist_ok=True)
-            output_path.write_text(self._breadcrumb("Operations", op.name) + "\n".join(lines))
+            output_path.write_text(
+                self._breadcrumb("Operations", op.name) + "\n".join(lines)
+            )
 
         logger.info(f"Wrote {len(operations)} operation file(s)")
 
@@ -604,7 +729,9 @@ class DocStubGenerator:
 
             output_path = self.output_dir / category / f"{item.name}.md"
             output_path.parent.mkdir(parents=True, exist_ok=True)
-            output_path.write_text(self._breadcrumb(category.title(), item.name) + "\n".join(lines))
+            output_path.write_text(
+                self._breadcrumb(category.title(), item.name) + "\n".join(lines)
+            )
 
         logger.info(f"Wrote {len(items)} {category} file(s)")
 
@@ -628,7 +755,9 @@ class DocStubGenerator:
 
             output_path = self.output_dir / "unions" / f"{union.name}.md"
             output_path.parent.mkdir(parents=True, exist_ok=True)
-            output_path.write_text(self._breadcrumb("Unions", union.name) + "\n".join(lines))
+            output_path.write_text(
+                self._breadcrumb("Unions", union.name) + "\n".join(lines)
+            )
 
         logger.info(f"Wrote {len(unions)} union file(s)")
 

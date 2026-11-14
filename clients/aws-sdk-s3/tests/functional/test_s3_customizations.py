@@ -70,13 +70,13 @@ def test_allows_using_a_bucket_input_value_as_the_endpoint() -> None:
     )
 
 
-def test_considers_missing_bucket_an_http_label_error() -> None:
-    """An empty bucket raises an error before any request goes out."""
+def test_rejects_missing_bucket_before_sending_request() -> None:
+    """A missing required bucket is rejected before any request goes out."""
     client = S3Client(S3Config.resolve(region="us-west-2"))
     controller = mock(client)
     controller.expect_request()
 
-    with raises(SmithyError, match="(?i)bucket"):
+    with raises(TypeError, match="missing required member 'bucket'"):
         client.head_bucket(HeadBucketInput())
 
     assert controller.requests == []

@@ -2,50 +2,66 @@
 
 from typing import Any
 
+from aws_sdk_polly.aio.client import AsyncPollyClient
+from aws_sdk_polly.client import PollyClient
 from aws_sdk_polly.models import (
     AudioEvent,
     CloseStreamEvent,
     DeleteLexiconInput,
+    DeleteLexiconInputDict,
     DeleteLexiconOutput,
     DescribeVoicesInput,
+    DescribeVoicesInputDict,
     DescribeVoicesOutput,
     FlushStreamConfiguration,
     GetLexiconInput,
+    GetLexiconInputDict,
     GetLexiconOutput,
     GetSpeechSynthesisTaskInput,
+    GetSpeechSynthesisTaskInputDict,
     GetSpeechSynthesisTaskOutput,
     Lexicon,
     LexiconAttributes,
     LexiconDescription,
     ListLexiconsInput,
+    ListLexiconsInputDict,
     ListLexiconsOutput,
     ListSpeechSynthesisTasksInput,
+    ListSpeechSynthesisTasksInputDict,
     ListSpeechSynthesisTasksOutput,
     ListTagsForResourceInput,
+    ListTagsForResourceInputDict,
     ListTagsForResourceOutput,
     PutLexiconInput,
+    PutLexiconInputDict,
     PutLexiconOutput,
     StartSpeechSynthesisStreamInput,
+    StartSpeechSynthesisStreamInputDict,
     StartSpeechSynthesisStreamOutput,
     StartSpeechSynthesisTaskInput,
+    StartSpeechSynthesisTaskInputDict,
     StartSpeechSynthesisTaskOutput,
     StreamClosedEvent,
     SynthesisTask,
     SynthesizeSpeechInput,
+    SynthesizeSpeechInputDict,
     SynthesizeSpeechOutput,
     TagResourceInput,
+    TagResourceInputDict,
     TagResourceOutput,
     TextEvent,
     ThrottlingReason,
     UntagResourceInput,
+    UntagResourceInputDict,
     UntagResourceOutput,
     ValidationExceptionField,
     Voice,
 )
 
 
-# Static type fixture: pyright over this validates models.pyi.
-# Not executed as a test; it only needs to type-check.
+# Static type fixture: pyright over this validates models.pyi and the
+# client method signatures. Not executed as a test; it only needs to
+# type-check.
 
 _: Any = ...
 
@@ -87,3 +103,155 @@ UntagResourceInput()
 UntagResourceOutput()
 ValidationExceptionField(name=_, message=_)
 Voice()
+_params_0: DeleteLexiconInputDict = {"name": _}
+_params_1: DescribeVoicesInputDict = {}
+_params_2: GetLexiconInputDict = {"name": _}
+_params_3: GetSpeechSynthesisTaskInputDict = {"task_id": _}
+_params_4: ListLexiconsInputDict = {}
+_params_5: ListSpeechSynthesisTasksInputDict = {}
+_params_6: ListTagsForResourceInputDict = {"resource_arn": _}
+_params_7: PutLexiconInputDict = {"name": _, "content": _}
+_params_8: StartSpeechSynthesisStreamInputDict = {
+    "engine": _,
+    "output_format": _,
+    "voice_id": _,
+}
+_params_9: StartSpeechSynthesisTaskInputDict = {
+    "output_format": _,
+    "output_s3_bucket_name": _,
+    "text": _,
+    "voice_id": _,
+}
+_params_10: SynthesizeSpeechInputDict = {"output_format": _, "text": _, "voice_id": _}
+_params_11: TagResourceInputDict = {"resource_arn": _, "tags": _}
+_params_12: UntagResourceInputDict = {"resource_arn": _, "tag_keys": _}
+
+
+def _request[T](form: type[T]) -> T:
+    raise NotImplementedError
+
+
+async def check_async_calls(client: AsyncPollyClient) -> None:
+    pass
+    await client.delete_lexicon(name=_)
+    await client.delete_lexicon(**_request(DeleteLexiconInputDict))
+    await client.delete_lexicon(_request(DeleteLexiconInput))
+    await client.delete_lexicon(_request(DeleteLexiconInputDict))
+    await client.describe_voices()
+    await client.describe_voices(**_request(DescribeVoicesInputDict))
+    await client.describe_voices(_request(DescribeVoicesInput))
+    await client.describe_voices(_request(DescribeVoicesInputDict))
+    await client.get_lexicon(name=_)
+    await client.get_lexicon(**_request(GetLexiconInputDict))
+    await client.get_lexicon(_request(GetLexiconInput))
+    await client.get_lexicon(_request(GetLexiconInputDict))
+    await client.get_speech_synthesis_task(task_id=_)
+    await client.get_speech_synthesis_task(**_request(GetSpeechSynthesisTaskInputDict))
+    await client.get_speech_synthesis_task(_request(GetSpeechSynthesisTaskInput))
+    await client.get_speech_synthesis_task(_request(GetSpeechSynthesisTaskInputDict))
+    await client.list_lexicons()
+    await client.list_lexicons(**_request(ListLexiconsInputDict))
+    await client.list_lexicons(_request(ListLexiconsInput))
+    await client.list_lexicons(_request(ListLexiconsInputDict))
+    await client.list_speech_synthesis_tasks()
+    await client.list_speech_synthesis_tasks(
+        **_request(ListSpeechSynthesisTasksInputDict)
+    )
+    await client.list_speech_synthesis_tasks(_request(ListSpeechSynthesisTasksInput))
+    await client.list_speech_synthesis_tasks(
+        _request(ListSpeechSynthesisTasksInputDict)
+    )
+    await client.list_tags_for_resource(resource_arn=_)
+    await client.list_tags_for_resource(**_request(ListTagsForResourceInputDict))
+    await client.list_tags_for_resource(_request(ListTagsForResourceInput))
+    await client.list_tags_for_resource(_request(ListTagsForResourceInputDict))
+    await client.put_lexicon(name=_, content=_)
+    await client.put_lexicon(**_request(PutLexiconInputDict))
+    await client.put_lexicon(_request(PutLexiconInput))
+    await client.put_lexicon(_request(PutLexiconInputDict))
+    await client.start_speech_synthesis_stream(engine=_, output_format=_, voice_id=_)
+    await client.start_speech_synthesis_stream(
+        **_request(StartSpeechSynthesisStreamInputDict)
+    )
+    await client.start_speech_synthesis_stream(
+        _request(StartSpeechSynthesisStreamInput)
+    )
+    await client.start_speech_synthesis_stream(
+        _request(StartSpeechSynthesisStreamInputDict)
+    )
+    await client.start_speech_synthesis_task(
+        output_format=_, output_s3_bucket_name=_, text=_, voice_id=_
+    )
+    await client.start_speech_synthesis_task(
+        **_request(StartSpeechSynthesisTaskInputDict)
+    )
+    await client.start_speech_synthesis_task(_request(StartSpeechSynthesisTaskInput))
+    await client.start_speech_synthesis_task(
+        _request(StartSpeechSynthesisTaskInputDict)
+    )
+    await client.synthesize_speech(output_format=_, text=_, voice_id=_)
+    await client.synthesize_speech(**_request(SynthesizeSpeechInputDict))
+    await client.synthesize_speech(_request(SynthesizeSpeechInput))
+    await client.synthesize_speech(_request(SynthesizeSpeechInputDict))
+    await client.tag_resource(resource_arn=_, tags=_)
+    await client.tag_resource(**_request(TagResourceInputDict))
+    await client.tag_resource(_request(TagResourceInput))
+    await client.tag_resource(_request(TagResourceInputDict))
+    await client.untag_resource(resource_arn=_, tag_keys=_)
+    await client.untag_resource(**_request(UntagResourceInputDict))
+    await client.untag_resource(_request(UntagResourceInput))
+    await client.untag_resource(_request(UntagResourceInputDict))
+
+
+def check_sync_calls(client: PollyClient) -> None:
+    pass
+    client.delete_lexicon(name=_)
+    client.delete_lexicon(**_request(DeleteLexiconInputDict))
+    client.delete_lexicon(_request(DeleteLexiconInput))
+    client.delete_lexicon(_request(DeleteLexiconInputDict))
+    client.describe_voices()
+    client.describe_voices(**_request(DescribeVoicesInputDict))
+    client.describe_voices(_request(DescribeVoicesInput))
+    client.describe_voices(_request(DescribeVoicesInputDict))
+    client.get_lexicon(name=_)
+    client.get_lexicon(**_request(GetLexiconInputDict))
+    client.get_lexicon(_request(GetLexiconInput))
+    client.get_lexicon(_request(GetLexiconInputDict))
+    client.get_speech_synthesis_task(task_id=_)
+    client.get_speech_synthesis_task(**_request(GetSpeechSynthesisTaskInputDict))
+    client.get_speech_synthesis_task(_request(GetSpeechSynthesisTaskInput))
+    client.get_speech_synthesis_task(_request(GetSpeechSynthesisTaskInputDict))
+    client.list_lexicons()
+    client.list_lexicons(**_request(ListLexiconsInputDict))
+    client.list_lexicons(_request(ListLexiconsInput))
+    client.list_lexicons(_request(ListLexiconsInputDict))
+    client.list_speech_synthesis_tasks()
+    client.list_speech_synthesis_tasks(**_request(ListSpeechSynthesisTasksInputDict))
+    client.list_speech_synthesis_tasks(_request(ListSpeechSynthesisTasksInput))
+    client.list_speech_synthesis_tasks(_request(ListSpeechSynthesisTasksInputDict))
+    client.list_tags_for_resource(resource_arn=_)
+    client.list_tags_for_resource(**_request(ListTagsForResourceInputDict))
+    client.list_tags_for_resource(_request(ListTagsForResourceInput))
+    client.list_tags_for_resource(_request(ListTagsForResourceInputDict))
+    client.put_lexicon(name=_, content=_)
+    client.put_lexicon(**_request(PutLexiconInputDict))
+    client.put_lexicon(_request(PutLexiconInput))
+    client.put_lexicon(_request(PutLexiconInputDict))
+    client.start_speech_synthesis_task(
+        output_format=_, output_s3_bucket_name=_, text=_, voice_id=_
+    )
+    client.start_speech_synthesis_task(**_request(StartSpeechSynthesisTaskInputDict))
+    client.start_speech_synthesis_task(_request(StartSpeechSynthesisTaskInput))
+    client.start_speech_synthesis_task(_request(StartSpeechSynthesisTaskInputDict))
+    client.synthesize_speech(output_format=_, text=_, voice_id=_)
+    client.synthesize_speech(**_request(SynthesizeSpeechInputDict))
+    client.synthesize_speech(_request(SynthesizeSpeechInput))
+    client.synthesize_speech(_request(SynthesizeSpeechInputDict))
+    client.tag_resource(resource_arn=_, tags=_)
+    client.tag_resource(**_request(TagResourceInputDict))
+    client.tag_resource(_request(TagResourceInput))
+    client.tag_resource(_request(TagResourceInputDict))
+    client.untag_resource(resource_arn=_, tag_keys=_)
+    client.untag_resource(**_request(UntagResourceInputDict))
+    client.untag_resource(_request(UntagResourceInput))
+    client.untag_resource(_request(UntagResourceInputDict))

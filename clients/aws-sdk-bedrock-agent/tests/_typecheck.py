@@ -2,258 +2,418 @@
 
 from typing import Any
 
+from aws_sdk_bedrock_agent.aio.client import AsyncBedrockAgentClient
+from aws_sdk_bedrock_agent.client import BedrockAgentClient
 from aws_sdk_bedrock_agent.models import (
+    APISchemaDict,
+    ActionGroupExecutorDict,
     ActionGroupSummary,
     Agent,
     AgentActionGroup,
     AgentAlias,
     AgentAliasHistoryEvent,
     AgentAliasRoutingConfigurationListItem,
+    AgentAliasRoutingConfigurationListItemDict,
     AgentAliasSummary,
     AgentCollaborator,
     AgentCollaboratorSummary,
     AgentDescriptor,
+    AgentDescriptorDict,
     AgentFlowNodeConfiguration,
+    AgentFlowNodeConfigurationDict,
     AgentKnowledgeBase,
     AgentKnowledgeBaseSummary,
     AgentSummary,
     AgentVersion,
     AgentVersionSummary,
     AnyToolChoice,
+    AnyToolChoiceDict,
     AssociateAgentCollaboratorInput,
+    AssociateAgentCollaboratorInputDict,
     AssociateAgentCollaboratorOutput,
     AssociateAgentKnowledgeBaseInput,
+    AssociateAgentKnowledgeBaseInputDict,
     AssociateAgentKnowledgeBaseOutput,
     AudioConfiguration,
+    AudioConfigurationDict,
     AudioExtractionConfiguration,
+    AudioExtractionConfigurationDict,
     AudioSegmentationConfiguration,
+    AudioSegmentationConfigurationDict,
     AutoToolChoice,
+    AutoToolChoiceDict,
     BedrockDataAutomationConfiguration,
+    BedrockDataAutomationConfigurationDict,
     BedrockEmbeddingModelConfiguration,
+    BedrockEmbeddingModelConfigurationDict,
     BedrockFoundationModelConfiguration,
+    BedrockFoundationModelConfigurationDict,
     BedrockFoundationModelContextEnrichmentConfiguration,
+    BedrockFoundationModelContextEnrichmentConfigurationDict,
     ByteContentDoc,
+    ByteContentDocDict,
     CachePointBlock,
+    CachePointBlockDict,
     ChatPromptTemplateConfiguration,
+    ChatPromptTemplateConfigurationDict,
     ChunkingConfiguration,
+    ChunkingConfigurationDict,
     CollectorFlowNodeConfiguration,
+    CollectorFlowNodeConfigurationDict,
     ConditionFlowNodeConfiguration,
+    ConditionFlowNodeConfigurationDict,
     ConfluenceCrawlerConfiguration,
+    ConfluenceCrawlerConfigurationDict,
     ConfluenceDataSourceConfiguration,
+    ConfluenceDataSourceConfigurationDict,
     ConfluenceSourceConfiguration,
+    ConfluenceSourceConfigurationDict,
+    ContentBlockDict,
     ContextEnrichmentConfiguration,
+    ContextEnrichmentConfigurationDict,
     CrawlFilterConfiguration,
+    CrawlFilterConfigurationDict,
     CreateAgentActionGroupInput,
+    CreateAgentActionGroupInputDict,
     CreateAgentActionGroupOutput,
     CreateAgentAliasInput,
+    CreateAgentAliasInputDict,
     CreateAgentAliasOutput,
     CreateAgentInput,
+    CreateAgentInputDict,
     CreateAgentOutput,
     CreateDataSourceInput,
+    CreateDataSourceInputDict,
     CreateDataSourceOutput,
     CreateFlowAliasInput,
+    CreateFlowAliasInputDict,
     CreateFlowAliasOutput,
     CreateFlowInput,
+    CreateFlowInputDict,
     CreateFlowOutput,
     CreateFlowVersionInput,
+    CreateFlowVersionInputDict,
     CreateFlowVersionOutput,
     CreateKnowledgeBaseInput,
+    CreateKnowledgeBaseInputDict,
     CreateKnowledgeBaseOutput,
     CreatePromptInput,
+    CreatePromptInputDict,
     CreatePromptOutput,
     CreatePromptVersionInput,
+    CreatePromptVersionInputDict,
     CreatePromptVersionOutput,
     CreateRetrievalInstructionInput,
+    CreateRetrievalInstructionInputDict,
     CreateRetrievalInstructionOutput,
     CreateRetrievalInstructionVersionInput,
+    CreateRetrievalInstructionVersionInputDict,
     CreateRetrievalInstructionVersionOutput,
     CreateVpcConfigurationInput,
+    CreateVpcConfigurationInputDict,
     CreateVpcConfigurationOutput,
     CuratedQuery,
+    CuratedQueryDict,
     CustomContent,
+    CustomContentDict,
     CustomDocumentIdentifier,
+    CustomDocumentIdentifierDict,
     CustomOrchestration,
+    CustomOrchestrationDict,
     CustomS3Location,
+    CustomS3LocationDict,
     CustomTransformationConfiguration,
+    CustomTransformationConfigurationDict,
     CyclicConnectionFlowValidationDetails,
     DailySchedule,
+    DailyScheduleDict,
     DataSource,
     DataSourceConfiguration,
+    DataSourceConfigurationDict,
     DataSourceSummary,
+    DayOfMonthDict,
     DeleteAgentActionGroupInput,
+    DeleteAgentActionGroupInputDict,
     DeleteAgentActionGroupOutput,
     DeleteAgentAliasInput,
+    DeleteAgentAliasInputDict,
     DeleteAgentAliasOutput,
     DeleteAgentInput,
+    DeleteAgentInputDict,
     DeleteAgentOutput,
     DeleteAgentVersionInput,
+    DeleteAgentVersionInputDict,
     DeleteAgentVersionOutput,
     DeleteDataSourceInput,
+    DeleteDataSourceInputDict,
     DeleteDataSourceOutput,
     DeleteFlowAliasInput,
+    DeleteFlowAliasInputDict,
     DeleteFlowAliasOutput,
     DeleteFlowInput,
+    DeleteFlowInputDict,
     DeleteFlowOutput,
     DeleteFlowVersionInput,
+    DeleteFlowVersionInputDict,
     DeleteFlowVersionOutput,
     DeleteKnowledgeBaseDocumentsInput,
+    DeleteKnowledgeBaseDocumentsInputDict,
     DeleteKnowledgeBaseDocumentsOutput,
     DeleteKnowledgeBaseInput,
+    DeleteKnowledgeBaseInputDict,
     DeleteKnowledgeBaseOutput,
     DeletePromptInput,
+    DeletePromptInputDict,
     DeletePromptOutput,
     DeleteResourcePolicyInput,
+    DeleteResourcePolicyInputDict,
     DeleteResourcePolicyOutput,
     DeleteRetrievalInstructionInput,
+    DeleteRetrievalInstructionInputDict,
     DeleteRetrievalInstructionOutput,
     DeleteVpcConfigurationInput,
+    DeleteVpcConfigurationInputDict,
     DeleteVpcConfigurationOutput,
     DeletionProtectionConfiguration,
+    DeletionProtectionConfigurationDict,
     DisassociateAgentCollaboratorInput,
+    DisassociateAgentCollaboratorInputDict,
     DisassociateAgentCollaboratorOutput,
     DisassociateAgentKnowledgeBaseInput,
+    DisassociateAgentKnowledgeBaseInputDict,
     DisassociateAgentKnowledgeBaseOutput,
     DocumentAccessControlEntry,
+    DocumentAccessControlEntryDict,
     DocumentContent,
+    DocumentContentDict,
     DocumentIdentifier,
+    DocumentIdentifierDict,
     DocumentMetadata,
+    DocumentMetadataDict,
     DuplicateConditionExpressionFlowValidationDetails,
     DuplicateConnectionsFlowValidationDetails,
     EmbeddingModelConfiguration,
+    EmbeddingModelConfigurationDict,
     EnrichmentStrategyConfiguration,
+    EnrichmentStrategyConfigurationDict,
     FieldForReranking,
+    FieldForRerankingDict,
     FixedSizeChunkingConfiguration,
+    FixedSizeChunkingConfigurationDict,
     FlowAliasConcurrencyConfiguration,
+    FlowAliasConcurrencyConfigurationDict,
     FlowAliasRoutingConfigurationListItem,
+    FlowAliasRoutingConfigurationListItemDict,
     FlowAliasSummary,
     FlowCondition,
+    FlowConditionDict,
     FlowConditionalConnectionConfiguration,
+    FlowConditionalConnectionConfigurationDict,
     FlowConnection,
+    FlowConnectionConfigurationDict,
+    FlowConnectionDict,
     FlowDataConnectionConfiguration,
+    FlowDataConnectionConfigurationDict,
     FlowDefinition,
+    FlowDefinitionDict,
     FlowNode,
+    FlowNodeConfigurationDict,
+    FlowNodeDict,
     FlowNodeInput,
+    FlowNodeInputDict,
     FlowNodeOutput,
+    FlowNodeOutputDict,
     FlowSummary,
     FlowValidation,
     FlowVersionSummary,
     Function,
+    FunctionDict,
+    FunctionSchemaDict,
     GetAgentActionGroupInput,
+    GetAgentActionGroupInputDict,
     GetAgentActionGroupOutput,
     GetAgentAliasInput,
+    GetAgentAliasInputDict,
     GetAgentAliasOutput,
     GetAgentCollaboratorInput,
+    GetAgentCollaboratorInputDict,
     GetAgentCollaboratorOutput,
     GetAgentInput,
+    GetAgentInputDict,
     GetAgentKnowledgeBaseInput,
+    GetAgentKnowledgeBaseInputDict,
     GetAgentKnowledgeBaseOutput,
     GetAgentOutput,
     GetAgentVersionInput,
+    GetAgentVersionInputDict,
     GetAgentVersionOutput,
     GetDataSourceInput,
+    GetDataSourceInputDict,
     GetDataSourceOutput,
     GetFlowAliasInput,
+    GetFlowAliasInputDict,
     GetFlowAliasOutput,
     GetFlowInput,
+    GetFlowInputDict,
     GetFlowOutput,
     GetFlowVersionInput,
+    GetFlowVersionInputDict,
     GetFlowVersionOutput,
     GetIngestionJobInput,
+    GetIngestionJobInputDict,
     GetIngestionJobOutput,
     GetKnowledgeBaseDocumentsInput,
+    GetKnowledgeBaseDocumentsInputDict,
     GetKnowledgeBaseDocumentsOutput,
     GetKnowledgeBaseInput,
+    GetKnowledgeBaseInputDict,
     GetKnowledgeBaseOutput,
     GetPromptInput,
+    GetPromptInputDict,
     GetPromptOutput,
     GetResourcePolicyInput,
+    GetResourcePolicyInputDict,
     GetResourcePolicyOutput,
     GetRetrievalInstructionInput,
+    GetRetrievalInstructionInputDict,
     GetRetrievalInstructionOutput,
     GetVpcConfigurationInput,
+    GetVpcConfigurationInputDict,
     GetVpcConfigurationOutput,
     GuardrailConfiguration,
+    GuardrailConfigurationDict,
     HierarchicalChunkingConfiguration,
+    HierarchicalChunkingConfigurationDict,
     HierarchicalChunkingLevelConfiguration,
+    HierarchicalChunkingLevelConfigurationDict,
     ImageExtractionConfiguration,
+    ImageExtractionConfigurationDict,
     IncompatibleConnectionDataTypeFlowValidationDetails,
     InferenceConfiguration,
+    InferenceConfigurationDict,
     IngestKnowledgeBaseDocumentsInput,
+    IngestKnowledgeBaseDocumentsInputDict,
     IngestKnowledgeBaseDocumentsOutput,
     IngestionJob,
     IngestionJobFilter,
+    IngestionJobFilterDict,
     IngestionJobSortBy,
+    IngestionJobSortByDict,
     IngestionJobStatistics,
     IngestionJobSummary,
     InlineCodeFlowNodeConfiguration,
+    InlineCodeFlowNodeConfigurationDict,
     InlineContent,
+    InlineContentDict,
     InputFlowNodeConfiguration,
+    InputFlowNodeConfigurationDict,
     IntermediateStorage,
+    IntermediateStorageDict,
     InvalidLoopBoundaryFlowValidationDetails,
     IteratorFlowNodeConfiguration,
+    IteratorFlowNodeConfigurationDict,
     KendraKnowledgeBaseConfiguration,
+    KendraKnowledgeBaseConfigurationDict,
     KnowledgeBase,
     KnowledgeBaseConfiguration,
+    KnowledgeBaseConfigurationDict,
     KnowledgeBaseDocument,
     KnowledgeBaseDocumentDetail,
+    KnowledgeBaseDocumentDict,
     KnowledgeBaseFlowNodeConfiguration,
+    KnowledgeBaseFlowNodeConfigurationDict,
     KnowledgeBaseOrchestrationConfiguration,
+    KnowledgeBaseOrchestrationConfigurationDict,
     KnowledgeBasePromptTemplate,
+    KnowledgeBasePromptTemplateDict,
     KnowledgeBaseSummary,
     LambdaFunctionFlowNodeConfiguration,
+    LambdaFunctionFlowNodeConfigurationDict,
     LastDayOfMonth,
+    LastDayOfMonthDict,
     LexFlowNodeConfiguration,
+    LexFlowNodeConfigurationDict,
     ListAgentActionGroupsInput,
+    ListAgentActionGroupsInputDict,
     ListAgentActionGroupsOutput,
     ListAgentAliasesInput,
+    ListAgentAliasesInputDict,
     ListAgentAliasesOutput,
     ListAgentCollaboratorsInput,
+    ListAgentCollaboratorsInputDict,
     ListAgentCollaboratorsOutput,
     ListAgentKnowledgeBasesInput,
+    ListAgentKnowledgeBasesInputDict,
     ListAgentKnowledgeBasesOutput,
     ListAgentVersionsInput,
+    ListAgentVersionsInputDict,
     ListAgentVersionsOutput,
     ListAgentsInput,
+    ListAgentsInputDict,
     ListAgentsOutput,
     ListDataSourcesInput,
+    ListDataSourcesInputDict,
     ListDataSourcesOutput,
     ListFlowAliasesInput,
+    ListFlowAliasesInputDict,
     ListFlowAliasesOutput,
     ListFlowVersionsInput,
+    ListFlowVersionsInputDict,
     ListFlowVersionsOutput,
     ListFlowsInput,
+    ListFlowsInputDict,
     ListFlowsOutput,
     ListIngestionJobsInput,
+    ListIngestionJobsInputDict,
     ListIngestionJobsOutput,
     ListKnowledgeBaseDocumentsInput,
+    ListKnowledgeBaseDocumentsInputDict,
     ListKnowledgeBaseDocumentsOutput,
     ListKnowledgeBasesInput,
+    ListKnowledgeBasesInputDict,
     ListKnowledgeBasesOutput,
     ListPromptsInput,
+    ListPromptsInputDict,
     ListPromptsOutput,
     ListRetrievalInstructionVersionsInput,
+    ListRetrievalInstructionVersionsInputDict,
     ListRetrievalInstructionVersionsOutput,
     ListRetrievalInstructionsInput,
+    ListRetrievalInstructionsInputDict,
     ListRetrievalInstructionsOutput,
     ListTagsForResourceInput,
+    ListTagsForResourceInputDict,
     ListTagsForResourceOutput,
     ListVpcConfigurationsInput,
+    ListVpcConfigurationsInputDict,
     ListVpcConfigurationsOutput,
     LoopControllerFlowNodeConfiguration,
+    LoopControllerFlowNodeConfigurationDict,
     LoopFlowNodeConfiguration,
+    LoopFlowNodeConfigurationDict,
     LoopIncompatibleNodeTypeFlowValidationDetails,
     LoopInputFlowNodeConfiguration,
+    LoopInputFlowNodeConfigurationDict,
     MalformedConditionExpressionFlowValidationDetails,
     MalformedNodeInputExpressionFlowValidationDetails,
     ManagedKnowledgeBaseConfiguration,
+    ManagedKnowledgeBaseConfigurationDict,
     ManagedKnowledgeBaseConnectorConfiguration,
+    ManagedKnowledgeBaseConnectorConfigurationDict,
     MediaExtractionConfiguration,
+    MediaExtractionConfigurationDict,
     MemoryConfiguration,
+    MemoryConfigurationDict,
     Message,
+    MessageDict,
     MetadataAttribute,
+    MetadataAttributeDict,
     MetadataAttributeValue,
+    MetadataAttributeValueDict,
     MetadataConfiguration,
+    MetadataConfigurationDict,
     MetadataConfigurationForReranking,
+    MetadataConfigurationForRerankingDict,
     MismatchedNodeInputTypeFlowValidationDetails,
     MismatchedNodeOutputTypeFlowValidationDetails,
     MissingConnectionConfigurationFlowValidationDetails,
@@ -266,101 +426,197 @@ from aws_sdk_bedrock_agent.models import (
     MissingNodeOutputFlowValidationDetails,
     MissingStartingNodesFlowValidationDetails,
     MongoDbAtlasConfiguration,
+    MongoDbAtlasConfigurationDict,
     MongoDbAtlasFieldMapping,
+    MongoDbAtlasFieldMappingDict,
     MonthlySchedule,
+    MonthlyScheduleDict,
     MultipleLoopControllerNodesFlowValidationDetails,
     MultipleLoopInputNodesFlowValidationDetails,
     MultipleNodeInputConnectionsFlowValidationDetails,
     NeptuneAnalyticsConfiguration,
+    NeptuneAnalyticsConfigurationDict,
     NeptuneAnalyticsFieldMapping,
+    NeptuneAnalyticsFieldMappingDict,
     OpenSearchManagedClusterConfiguration,
+    OpenSearchManagedClusterConfigurationDict,
     OpenSearchManagedClusterFieldMapping,
+    OpenSearchManagedClusterFieldMappingDict,
     OpenSearchServerlessConfiguration,
+    OpenSearchServerlessConfigurationDict,
     OpenSearchServerlessFieldMapping,
+    OpenSearchServerlessFieldMappingDict,
+    OrchestrationExecutorDict,
     OutputFlowNodeConfiguration,
+    OutputFlowNodeConfigurationDict,
     ParameterDetail,
+    ParameterDetailDict,
     ParsingConfiguration,
+    ParsingConfigurationDict,
     ParsingPrompt,
+    ParsingPromptDict,
     PatternObjectFilter,
     PatternObjectFilterConfiguration,
+    PatternObjectFilterConfigurationDict,
+    PatternObjectFilterDict,
     PerformanceConfiguration,
+    PerformanceConfigurationDict,
     PineconeConfiguration,
+    PineconeConfigurationDict,
     PineconeFieldMapping,
+    PineconeFieldMappingDict,
     PrepareAgentInput,
+    PrepareAgentInputDict,
     PrepareAgentOutput,
     PrepareFlowInput,
+    PrepareFlowInputDict,
     PrepareFlowOutput,
     PromptAgentResource,
+    PromptAgentResourceDict,
     PromptConfiguration,
+    PromptConfigurationDict,
     PromptFlowNodeConfiguration,
+    PromptFlowNodeConfigurationDict,
     PromptFlowNodeInlineConfiguration,
+    PromptFlowNodeInlineConfigurationDict,
     PromptFlowNodeResourceConfiguration,
+    PromptFlowNodeResourceConfigurationDict,
+    PromptFlowNodeSourceConfigurationDict,
+    PromptGenAiResourceDict,
+    PromptInferenceConfigurationDict,
     PromptInputVariable,
+    PromptInputVariableDict,
     PromptMetadataEntry,
+    PromptMetadataEntryDict,
     PromptModelInferenceConfiguration,
+    PromptModelInferenceConfigurationDict,
     PromptOverrideConfiguration,
+    PromptOverrideConfigurationDict,
     PromptSummary,
+    PromptTemplateConfigurationDict,
     PromptVariant,
+    PromptVariantDict,
     PutResourcePolicyInput,
+    PutResourcePolicyInputDict,
     PutResourcePolicyOutput,
     QueryGenerationColumn,
+    QueryGenerationColumnDict,
     QueryGenerationConfiguration,
+    QueryGenerationConfigurationDict,
     QueryGenerationContext,
+    QueryGenerationContextDict,
     QueryGenerationTable,
+    QueryGenerationTableDict,
     RdsConfiguration,
+    RdsConfigurationDict,
     RdsFieldMapping,
+    RdsFieldMappingDict,
     RedisEnterpriseCloudConfiguration,
+    RedisEnterpriseCloudConfigurationDict,
     RedisEnterpriseCloudFieldMapping,
+    RedisEnterpriseCloudFieldMappingDict,
     RedshiftConfiguration,
+    RedshiftConfigurationDict,
     RedshiftProvisionedAuthConfiguration,
+    RedshiftProvisionedAuthConfigurationDict,
     RedshiftProvisionedConfiguration,
+    RedshiftProvisionedConfigurationDict,
     RedshiftQueryEngineAwsDataCatalogStorageConfiguration,
+    RedshiftQueryEngineAwsDataCatalogStorageConfigurationDict,
     RedshiftQueryEngineConfiguration,
+    RedshiftQueryEngineConfigurationDict,
     RedshiftQueryEngineRedshiftStorageConfiguration,
+    RedshiftQueryEngineRedshiftStorageConfigurationDict,
     RedshiftQueryEngineStorageConfiguration,
+    RedshiftQueryEngineStorageConfigurationDict,
     RedshiftServerlessAuthConfiguration,
+    RedshiftServerlessAuthConfigurationDict,
     RedshiftServerlessConfiguration,
+    RedshiftServerlessConfigurationDict,
+    RerankingMetadataSelectiveModeConfigurationDict,
     RetrievalFlowNodeConfiguration,
+    RetrievalFlowNodeConfigurationDict,
     RetrievalFlowNodeS3Configuration,
+    RetrievalFlowNodeS3ConfigurationDict,
+    RetrievalFlowNodeServiceConfigurationDict,
     RetrievalInstructionContent,
+    RetrievalInstructionContentDict,
     RetrievalInstructionFailureReason,
     RetrievalInstructionSummary,
     RetrievalInstructionVersionSummary,
     S3Content,
+    S3ContentDict,
     S3DataSourceConfiguration,
+    S3DataSourceConfigurationDict,
     S3Identifier,
+    S3IdentifierDict,
     S3Location,
+    S3LocationDict,
     S3VectorsConfiguration,
+    S3VectorsConfigurationDict,
     SalesforceCrawlerConfiguration,
+    SalesforceCrawlerConfigurationDict,
     SalesforceDataSourceConfiguration,
+    SalesforceDataSourceConfigurationDict,
     SalesforceSourceConfiguration,
+    SalesforceSourceConfigurationDict,
     SeedUrl,
+    SeedUrlDict,
     SemanticChunkingConfiguration,
+    SemanticChunkingConfigurationDict,
     ServerSideEncryptionConfiguration,
+    ServerSideEncryptionConfigurationDict,
     SessionSummaryConfiguration,
+    SessionSummaryConfigurationDict,
     SharePointCrawlerConfiguration,
+    SharePointCrawlerConfigurationDict,
     SharePointDataSourceConfiguration,
+    SharePointDataSourceConfigurationDict,
     SharePointSourceConfiguration,
+    SharePointSourceConfigurationDict,
     SpecificToolChoice,
+    SpecificToolChoiceDict,
     SqlKnowledgeBaseConfiguration,
+    SqlKnowledgeBaseConfigurationDict,
     StartIngestionJobInput,
+    StartIngestionJobInputDict,
     StartIngestionJobOutput,
     StopIngestionJobInput,
+    StopIngestionJobInputDict,
     StopIngestionJobOutput,
     StorageConfiguration,
+    StorageConfigurationDict,
     StorageFlowNodeConfiguration,
+    StorageFlowNodeConfigurationDict,
     StorageFlowNodeS3Configuration,
+    StorageFlowNodeS3ConfigurationDict,
+    StorageFlowNodeServiceConfigurationDict,
     SupplementalDataStorageConfiguration,
+    SupplementalDataStorageConfigurationDict,
     SupplementalDataStorageLocation,
+    SupplementalDataStorageLocationDict,
+    SyncScheduleDict,
+    SystemContentBlockDict,
     TagResourceInput,
+    TagResourceInputDict,
     TagResourceOutput,
     TextContentDoc,
+    TextContentDocDict,
     TextPromptTemplateConfiguration,
+    TextPromptTemplateConfigurationDict,
+    ToolChoiceDict,
     ToolConfiguration,
+    ToolConfigurationDict,
+    ToolDict,
+    ToolInputSchemaDict,
     ToolSpecification,
+    ToolSpecificationDict,
     Transformation,
+    TransformationDict,
     TransformationFunction,
+    TransformationFunctionDict,
     TransformationLambdaConfiguration,
+    TransformationLambdaConfigurationDict,
     UnfulfilledNodeInputFlowValidationDetails,
     UnknownConnectionConditionFlowValidationDetails,
     UnknownConnectionSourceFlowValidationDetails,
@@ -373,53 +629,81 @@ from aws_sdk_bedrock_agent.models import (
     UnsatisfiedConnectionConditionsFlowValidationDetails,
     UnspecifiedFlowValidationDetails,
     UntagResourceInput,
+    UntagResourceInputDict,
     UntagResourceOutput,
     UpdateAgentActionGroupInput,
+    UpdateAgentActionGroupInputDict,
     UpdateAgentActionGroupOutput,
     UpdateAgentAliasInput,
+    UpdateAgentAliasInputDict,
     UpdateAgentAliasOutput,
     UpdateAgentCollaboratorInput,
+    UpdateAgentCollaboratorInputDict,
     UpdateAgentCollaboratorOutput,
     UpdateAgentInput,
+    UpdateAgentInputDict,
     UpdateAgentKnowledgeBaseInput,
+    UpdateAgentKnowledgeBaseInputDict,
     UpdateAgentKnowledgeBaseOutput,
     UpdateAgentOutput,
     UpdateDataSourceInput,
+    UpdateDataSourceInputDict,
     UpdateDataSourceOutput,
     UpdateFlowAliasInput,
+    UpdateFlowAliasInputDict,
     UpdateFlowAliasOutput,
     UpdateFlowInput,
+    UpdateFlowInputDict,
     UpdateFlowOutput,
     UpdateKnowledgeBaseInput,
+    UpdateKnowledgeBaseInputDict,
     UpdateKnowledgeBaseOutput,
     UpdatePromptInput,
+    UpdatePromptInputDict,
     UpdatePromptOutput,
     UpdateRetrievalInstructionInput,
+    UpdateRetrievalInstructionInputDict,
     UpdateRetrievalInstructionOutput,
     UrlConfiguration,
+    UrlConfigurationDict,
     ValidateFlowDefinitionInput,
+    ValidateFlowDefinitionInputDict,
     ValidateFlowDefinitionOutput,
     ValidationExceptionField,
     VectorIngestionConfiguration,
+    VectorIngestionConfigurationDict,
     VectorKnowledgeBaseConfiguration,
+    VectorKnowledgeBaseConfigurationDict,
     VectorSearchBedrockRerankingConfiguration,
+    VectorSearchBedrockRerankingConfigurationDict,
     VectorSearchBedrockRerankingModelConfiguration,
+    VectorSearchBedrockRerankingModelConfigurationDict,
     VectorSearchRerankingConfiguration,
+    VectorSearchRerankingConfigurationDict,
     VideoConfiguration,
+    VideoConfigurationDict,
     VideoExtractionConfiguration,
+    VideoExtractionConfigurationDict,
     VideoSegmentationConfiguration,
+    VideoSegmentationConfigurationDict,
     VpcConfiguration,
     VpcConfigurationSummary,
     WebCrawlerConfiguration,
+    WebCrawlerConfigurationDict,
     WebCrawlerLimits,
+    WebCrawlerLimitsDict,
     WebDataSourceConfiguration,
+    WebDataSourceConfigurationDict,
     WebSourceConfiguration,
+    WebSourceConfigurationDict,
     WeeklySchedule,
+    WeeklyScheduleDict,
 )
 
 
-# Static type fixture: pyright over this validates models.pyi.
-# Not executed as a test; it only needs to type-check.
+# Static type fixture: pyright over this validates models.pyi and the
+# client method signatures. Not executed as a test; it only needs to
+# type-check.
 
 _: Any = ...
 
@@ -1066,3 +1350,1436 @@ WebCrawlerLimits()
 WebDataSourceConfiguration(source_configuration=_)
 WebSourceConfiguration(url_configuration=_)
 WeeklySchedule(day_of_week=_)
+_params_0: ActionGroupExecutorDict = {"lambda_": _}
+_params_1: AgentAliasRoutingConfigurationListItemDict = {}
+_params_2: AgentDescriptorDict = {}
+_params_3: AgentFlowNodeConfigurationDict = {}
+_params_4: AnyToolChoiceDict = {}
+_params_5: APISchemaDict = {"s3": _}
+_params_6: AssociateAgentCollaboratorInputDict = {
+    "agent_id": _,
+    "agent_version": _,
+    "agent_descriptor": _,
+    "collaborator_name": _,
+    "collaboration_instruction": _,
+}
+_params_7: AssociateAgentKnowledgeBaseInputDict = {
+    "agent_id": _,
+    "agent_version": _,
+    "knowledge_base_id": _,
+    "description": _,
+}
+_params_8: AudioConfigurationDict = {"segmentation_configuration": _}
+_params_9: AudioExtractionConfigurationDict = {"audio_extraction_status": _}
+_params_10: AudioSegmentationConfigurationDict = {"fixed_length_duration": _}
+_params_11: AutoToolChoiceDict = {}
+_params_12: BedrockDataAutomationConfigurationDict = {}
+_params_13: BedrockEmbeddingModelConfigurationDict = {}
+_params_14: BedrockFoundationModelConfigurationDict = {"model_arn": _}
+_params_15: BedrockFoundationModelContextEnrichmentConfigurationDict = {
+    "enrichment_strategy_configuration": _,
+    "model_arn": _,
+}
+_params_16: ByteContentDocDict = {"mime_type": _, "data": _}
+_params_17: CachePointBlockDict = {"type": _}
+_params_18: ChatPromptTemplateConfigurationDict = {"messages": _}
+_params_19: ChunkingConfigurationDict = {"chunking_strategy": _}
+_params_20: CollectorFlowNodeConfigurationDict = {}
+_params_21: ConditionFlowNodeConfigurationDict = {"conditions": _}
+_params_22: ConfluenceCrawlerConfigurationDict = {}
+_params_23: ConfluenceDataSourceConfigurationDict = {"source_configuration": _}
+_params_24: ConfluenceSourceConfigurationDict = {
+    "host_url": _,
+    "host_type": _,
+    "auth_type": _,
+    "credentials_secret_arn": _,
+}
+_params_25: ContentBlockDict = {"text": _}
+_params_26: ContextEnrichmentConfigurationDict = {"type": _}
+_params_27: CrawlFilterConfigurationDict = {"type": _}
+_params_28: CreateAgentActionGroupInputDict = {
+    "agent_id": _,
+    "agent_version": _,
+    "action_group_name": _,
+}
+_params_29: CreateAgentAliasInputDict = {"agent_id": _, "agent_alias_name": _}
+_params_30: CreateAgentInputDict = {"agent_name": _}
+_params_31: CreateDataSourceInputDict = {
+    "knowledge_base_id": _,
+    "name": _,
+    "data_source_configuration": _,
+}
+_params_32: CreateFlowAliasInputDict = {
+    "name": _,
+    "routing_configuration": _,
+    "flow_identifier": _,
+}
+_params_33: CreateFlowInputDict = {"name": _, "execution_role_arn": _}
+_params_34: CreateFlowVersionInputDict = {"flow_identifier": _}
+_params_35: CreateKnowledgeBaseInputDict = {
+    "name": _,
+    "role_arn": _,
+    "knowledge_base_configuration": _,
+}
+_params_36: CreatePromptInputDict = {"name": _}
+_params_37: CreatePromptVersionInputDict = {"prompt_identifier": _}
+_params_38: CreateRetrievalInstructionInputDict = {"name": _, "instruction": _}
+_params_39: CreateRetrievalInstructionVersionInputDict = {"retrieval_instruction_id": _}
+_params_40: CreateVpcConfigurationInputDict = {
+    "knowledge_base_id": _,
+    "vpc_id": _,
+    "subnet_ids": _,
+    "resource_target": _,
+    "port": _,
+    "protocol": _,
+    "resolution_mode": _,
+}
+_params_41: CuratedQueryDict = {"natural_language": _, "sql": _}
+_params_42: CustomContentDict = {"custom_document_identifier": _, "source_type": _}
+_params_43: CustomDocumentIdentifierDict = {"id": _}
+_params_44: CustomOrchestrationDict = {}
+_params_45: CustomS3LocationDict = {"uri": _}
+_params_46: CustomTransformationConfigurationDict = {
+    "intermediate_storage": _,
+    "transformations": _,
+}
+_params_47: DailyScheduleDict = {}
+_params_48: DataSourceConfigurationDict = {"type": _}
+_params_49: DayOfMonthDict = {"day_number": _}
+_params_50: DeleteAgentActionGroupInputDict = {
+    "agent_id": _,
+    "agent_version": _,
+    "action_group_id": _,
+}
+_params_51: DeleteAgentAliasInputDict = {"agent_id": _, "agent_alias_id": _}
+_params_52: DeleteAgentInputDict = {"agent_id": _}
+_params_53: DeleteAgentVersionInputDict = {"agent_id": _, "agent_version": _}
+_params_54: DeleteDataSourceInputDict = {"knowledge_base_id": _, "data_source_id": _}
+_params_55: DeleteFlowAliasInputDict = {"flow_identifier": _, "alias_identifier": _}
+_params_56: DeleteFlowInputDict = {"flow_identifier": _}
+_params_57: DeleteFlowVersionInputDict = {"flow_identifier": _, "flow_version": _}
+_params_58: DeleteKnowledgeBaseDocumentsInputDict = {
+    "knowledge_base_id": _,
+    "data_source_id": _,
+    "document_identifiers": _,
+}
+_params_59: DeleteKnowledgeBaseInputDict = {"knowledge_base_id": _}
+_params_60: DeletePromptInputDict = {"prompt_identifier": _}
+_params_61: DeleteResourcePolicyInputDict = {"resource_arn": _}
+_params_62: DeleteRetrievalInstructionInputDict = {"retrieval_instruction_id": _}
+_params_63: DeleteVpcConfigurationInputDict = {
+    "knowledge_base_id": _,
+    "vpc_configuration_id": _,
+}
+_params_64: DeletionProtectionConfigurationDict = {"deletion_protection_status": _}
+_params_65: DisassociateAgentCollaboratorInputDict = {
+    "agent_id": _,
+    "agent_version": _,
+    "collaborator_id": _,
+}
+_params_66: DisassociateAgentKnowledgeBaseInputDict = {
+    "agent_id": _,
+    "agent_version": _,
+    "knowledge_base_id": _,
+}
+_params_67: DocumentAccessControlEntryDict = {"name": _, "type": _, "access": _}
+_params_68: DocumentContentDict = {"data_source_type": _}
+_params_69: DocumentIdentifierDict = {"data_source_type": _}
+_params_70: DocumentMetadataDict = {"type": _}
+_params_71: EmbeddingModelConfigurationDict = {}
+_params_72: EnrichmentStrategyConfigurationDict = {"method": _}
+_params_73: FieldForRerankingDict = {"field_name": _}
+_params_74: FixedSizeChunkingConfigurationDict = {
+    "max_tokens": _,
+    "overlap_percentage": _,
+}
+_params_75: FlowAliasConcurrencyConfigurationDict = {"type": _}
+_params_76: FlowAliasRoutingConfigurationListItemDict = {}
+_params_77: FlowConditionDict = {"name": _}
+_params_78: FlowConditionalConnectionConfigurationDict = {"condition": _}
+_params_79: FlowConnectionDict = {"type": _, "name": _, "source": _, "target": _}
+_params_80: FlowConnectionConfigurationDict = {"data": _}
+_params_81: FlowDataConnectionConfigurationDict = {
+    "source_output": _,
+    "target_input": _,
+}
+_params_82: FlowDefinitionDict = {}
+_params_83: FlowNodeDict = {"name": _, "type": _}
+_params_84: FlowNodeConfigurationDict = {"input": _}
+_params_85: FlowNodeInputDict = {"name": _, "type": _, "expression": _}
+_params_86: FlowNodeOutputDict = {"name": _, "type": _}
+_params_87: FunctionDict = {"name": _}
+_params_88: FunctionSchemaDict = {"functions": _}
+_params_89: GetAgentActionGroupInputDict = {
+    "agent_id": _,
+    "agent_version": _,
+    "action_group_id": _,
+}
+_params_90: GetAgentAliasInputDict = {"agent_id": _, "agent_alias_id": _}
+_params_91: GetAgentCollaboratorInputDict = {
+    "agent_id": _,
+    "agent_version": _,
+    "collaborator_id": _,
+}
+_params_92: GetAgentInputDict = {"agent_id": _}
+_params_93: GetAgentKnowledgeBaseInputDict = {
+    "agent_id": _,
+    "agent_version": _,
+    "knowledge_base_id": _,
+}
+_params_94: GetAgentVersionInputDict = {"agent_id": _, "agent_version": _}
+_params_95: GetDataSourceInputDict = {"knowledge_base_id": _, "data_source_id": _}
+_params_96: GetFlowAliasInputDict = {"flow_identifier": _, "alias_identifier": _}
+_params_97: GetFlowInputDict = {"flow_identifier": _}
+_params_98: GetFlowVersionInputDict = {"flow_identifier": _, "flow_version": _}
+_params_99: GetIngestionJobInputDict = {
+    "knowledge_base_id": _,
+    "data_source_id": _,
+    "ingestion_job_id": _,
+}
+_params_100: GetKnowledgeBaseDocumentsInputDict = {
+    "knowledge_base_id": _,
+    "data_source_id": _,
+    "document_identifiers": _,
+}
+_params_101: GetKnowledgeBaseInputDict = {"knowledge_base_id": _}
+_params_102: GetPromptInputDict = {"prompt_identifier": _}
+_params_103: GetResourcePolicyInputDict = {"resource_arn": _}
+_params_104: GetRetrievalInstructionInputDict = {"retrieval_instruction_id": _}
+_params_105: GetVpcConfigurationInputDict = {
+    "knowledge_base_id": _,
+    "vpc_configuration_id": _,
+}
+_params_106: GuardrailConfigurationDict = {}
+_params_107: HierarchicalChunkingConfigurationDict = {
+    "level_configurations": _,
+    "overlap_tokens": _,
+}
+_params_108: HierarchicalChunkingLevelConfigurationDict = {"max_tokens": _}
+_params_109: ImageExtractionConfigurationDict = {"image_extraction_status": _}
+_params_110: InferenceConfigurationDict = {}
+_params_111: IngestionJobFilterDict = {"attribute": _, "operator": _, "values": _}
+_params_112: IngestionJobSortByDict = {"attribute": _, "order": _}
+_params_113: IngestKnowledgeBaseDocumentsInputDict = {
+    "knowledge_base_id": _,
+    "data_source_id": _,
+    "documents": _,
+}
+_params_114: InlineCodeFlowNodeConfigurationDict = {}
+_params_115: InlineContentDict = {"type": _}
+_params_116: InputFlowNodeConfigurationDict = {}
+_params_117: IntermediateStorageDict = {"s3_location": _}
+_params_118: IteratorFlowNodeConfigurationDict = {}
+_params_119: KendraKnowledgeBaseConfigurationDict = {"kendra_index_arn": _}
+_params_120: KnowledgeBaseConfigurationDict = {"type": _}
+_params_121: KnowledgeBaseDocumentDict = {"content": _}
+_params_122: KnowledgeBaseFlowNodeConfigurationDict = {}
+_params_123: KnowledgeBaseOrchestrationConfigurationDict = {}
+_params_124: KnowledgeBasePromptTemplateDict = {}
+_params_125: LambdaFunctionFlowNodeConfigurationDict = {}
+_params_126: LastDayOfMonthDict = {}
+_params_127: LexFlowNodeConfigurationDict = {}
+_params_128: ListAgentActionGroupsInputDict = {"agent_id": _, "agent_version": _}
+_params_129: ListAgentAliasesInputDict = {"agent_id": _}
+_params_130: ListAgentCollaboratorsInputDict = {"agent_id": _, "agent_version": _}
+_params_131: ListAgentKnowledgeBasesInputDict = {"agent_id": _, "agent_version": _}
+_params_132: ListAgentsInputDict = {}
+_params_133: ListAgentVersionsInputDict = {"agent_id": _}
+_params_134: ListDataSourcesInputDict = {"knowledge_base_id": _}
+_params_135: ListFlowAliasesInputDict = {"flow_identifier": _}
+_params_136: ListFlowsInputDict = {}
+_params_137: ListFlowVersionsInputDict = {"flow_identifier": _}
+_params_138: ListIngestionJobsInputDict = {"knowledge_base_id": _, "data_source_id": _}
+_params_139: ListKnowledgeBaseDocumentsInputDict = {
+    "knowledge_base_id": _,
+    "data_source_id": _,
+}
+_params_140: ListKnowledgeBasesInputDict = {}
+_params_141: ListPromptsInputDict = {}
+_params_142: ListRetrievalInstructionsInputDict = {}
+_params_143: ListRetrievalInstructionVersionsInputDict = {"retrieval_instruction_id": _}
+_params_144: ListTagsForResourceInputDict = {"resource_arn": _}
+_params_145: ListVpcConfigurationsInputDict = {"knowledge_base_id": _}
+_params_146: LoopControllerFlowNodeConfigurationDict = {"continue_condition": _}
+_params_147: LoopFlowNodeConfigurationDict = {"definition": _}
+_params_148: LoopInputFlowNodeConfigurationDict = {}
+_params_149: ManagedKnowledgeBaseConfigurationDict = {}
+_params_150: ManagedKnowledgeBaseConnectorConfigurationDict = {}
+_params_151: MediaExtractionConfigurationDict = {}
+_params_152: MemoryConfigurationDict = {"enabled_memory_types": _}
+_params_153: MessageDict = {"role": _, "content": _}
+_params_154: MetadataAttributeDict = {"key": _, "value": _}
+_params_155: MetadataAttributeValueDict = {"type": _}
+_params_156: MetadataConfigurationDict = {"name": _, "type": _, "searchability": _}
+_params_157: MetadataConfigurationForRerankingDict = {"selection_mode": _}
+_params_158: MongoDbAtlasConfigurationDict = {
+    "endpoint": _,
+    "database_name": _,
+    "collection_name": _,
+    "vector_index_name": _,
+    "credentials_secret_arn": _,
+    "field_mapping": _,
+}
+_params_159: MongoDbAtlasFieldMappingDict = {
+    "vector_field": _,
+    "text_field": _,
+    "metadata_field": _,
+}
+_params_160: MonthlyScheduleDict = {"day_of_month": _}
+_params_161: NeptuneAnalyticsConfigurationDict = {"graph_arn": _, "field_mapping": _}
+_params_162: NeptuneAnalyticsFieldMappingDict = {"text_field": _, "metadata_field": _}
+_params_163: OpenSearchManagedClusterConfigurationDict = {
+    "domain_endpoint": _,
+    "domain_arn": _,
+    "vector_index_name": _,
+    "field_mapping": _,
+}
+_params_164: OpenSearchManagedClusterFieldMappingDict = {
+    "vector_field": _,
+    "text_field": _,
+    "metadata_field": _,
+}
+_params_165: OpenSearchServerlessConfigurationDict = {
+    "collection_arn": _,
+    "vector_index_name": _,
+    "field_mapping": _,
+}
+_params_166: OpenSearchServerlessFieldMappingDict = {
+    "vector_field": _,
+    "text_field": _,
+    "metadata_field": _,
+}
+_params_167: OrchestrationExecutorDict = {"lambda_": _}
+_params_168: OutputFlowNodeConfigurationDict = {}
+_params_169: ParameterDetailDict = {"type": _}
+_params_170: ParsingConfigurationDict = {"parsing_strategy": _}
+_params_171: ParsingPromptDict = {"parsing_prompt_text": _}
+_params_172: PatternObjectFilterDict = {"object_type": _}
+_params_173: PatternObjectFilterConfigurationDict = {"filters": _}
+_params_174: PerformanceConfigurationDict = {}
+_params_175: PineconeConfigurationDict = {
+    "connection_string": _,
+    "credentials_secret_arn": _,
+    "field_mapping": _,
+}
+_params_176: PineconeFieldMappingDict = {"text_field": _, "metadata_field": _}
+_params_177: PrepareAgentInputDict = {"agent_id": _}
+_params_178: PrepareFlowInputDict = {"flow_identifier": _}
+_params_179: PromptAgentResourceDict = {"agent_identifier": _}
+_params_180: PromptConfigurationDict = {}
+_params_181: PromptFlowNodeConfigurationDict = {"source_configuration": _}
+_params_182: PromptFlowNodeInlineConfigurationDict = {"template_configuration": _}
+_params_183: PromptFlowNodeResourceConfigurationDict = {}
+_params_184: PromptFlowNodeSourceConfigurationDict = {"resource": _}
+_params_185: PromptGenAiResourceDict = {"agent": _}
+_params_186: PromptInferenceConfigurationDict = {"text": _}
+_params_187: PromptInputVariableDict = {}
+_params_188: PromptMetadataEntryDict = {"key": _, "value": _}
+_params_189: PromptModelInferenceConfigurationDict = {}
+_params_190: PromptOverrideConfigurationDict = {"prompt_configurations": _}
+_params_191: PromptTemplateConfigurationDict = {"text": _}
+_params_192: PromptVariantDict = {
+    "name": _,
+    "template_type": _,
+    "template_configuration": _,
+}
+_params_193: PutResourcePolicyInputDict = {"resource_arn": _, "policy": _}
+_params_194: QueryGenerationColumnDict = {}
+_params_195: QueryGenerationConfigurationDict = {}
+_params_196: QueryGenerationContextDict = {}
+_params_197: QueryGenerationTableDict = {"name": _}
+_params_198: RdsConfigurationDict = {
+    "resource_arn": _,
+    "credentials_secret_arn": _,
+    "database_name": _,
+    "table_name": _,
+    "field_mapping": _,
+}
+_params_199: RdsFieldMappingDict = {
+    "primary_key_field": _,
+    "vector_field": _,
+    "text_field": _,
+    "metadata_field": _,
+}
+_params_200: RedisEnterpriseCloudConfigurationDict = {
+    "endpoint": _,
+    "vector_index_name": _,
+    "credentials_secret_arn": _,
+    "field_mapping": _,
+}
+_params_201: RedisEnterpriseCloudFieldMappingDict = {
+    "vector_field": _,
+    "text_field": _,
+    "metadata_field": _,
+}
+_params_202: RedshiftConfigurationDict = {
+    "storage_configurations": _,
+    "query_engine_configuration": _,
+}
+_params_203: RedshiftProvisionedAuthConfigurationDict = {"type": _}
+_params_204: RedshiftProvisionedConfigurationDict = {
+    "cluster_identifier": _,
+    "auth_configuration": _,
+}
+_params_205: RedshiftQueryEngineAwsDataCatalogStorageConfigurationDict = {
+    "table_names": _
+}
+_params_206: RedshiftQueryEngineConfigurationDict = {"type": _}
+_params_207: RedshiftQueryEngineRedshiftStorageConfigurationDict = {"database_name": _}
+_params_208: RedshiftQueryEngineStorageConfigurationDict = {"type": _}
+_params_209: RedshiftServerlessAuthConfigurationDict = {"type": _}
+_params_210: RedshiftServerlessConfigurationDict = {
+    "workgroup_arn": _,
+    "auth_configuration": _,
+}
+_params_211: RerankingMetadataSelectiveModeConfigurationDict = {"fields_to_include": _}
+_params_212: RetrievalFlowNodeConfigurationDict = {"service_configuration": _}
+_params_213: RetrievalFlowNodeS3ConfigurationDict = {}
+_params_214: RetrievalFlowNodeServiceConfigurationDict = {"s3": _}
+_params_215: RetrievalInstructionContentDict = {}
+_params_216: S3ContentDict = {"s3_location": _}
+_params_217: S3DataSourceConfigurationDict = {"bucket_arn": _}
+_params_218: S3IdentifierDict = {}
+_params_219: S3LocationDict = {"uri": _}
+_params_220: S3VectorsConfigurationDict = {}
+_params_221: SalesforceCrawlerConfigurationDict = {}
+_params_222: SalesforceDataSourceConfigurationDict = {"source_configuration": _}
+_params_223: SalesforceSourceConfigurationDict = {
+    "host_url": _,
+    "auth_type": _,
+    "credentials_secret_arn": _,
+}
+_params_224: SeedUrlDict = {}
+_params_225: SemanticChunkingConfigurationDict = {
+    "max_tokens": _,
+    "buffer_size": _,
+    "breakpoint_percentile_threshold": _,
+}
+_params_226: ServerSideEncryptionConfigurationDict = {}
+_params_227: SessionSummaryConfigurationDict = {}
+_params_228: SharePointCrawlerConfigurationDict = {}
+_params_229: SharePointDataSourceConfigurationDict = {"source_configuration": _}
+_params_230: SharePointSourceConfigurationDict = {
+    "domain": _,
+    "site_urls": _,
+    "host_type": _,
+    "auth_type": _,
+    "credentials_secret_arn": _,
+}
+_params_231: SpecificToolChoiceDict = {"name": _}
+_params_232: SqlKnowledgeBaseConfigurationDict = {"type": _}
+_params_233: StartIngestionJobInputDict = {"knowledge_base_id": _, "data_source_id": _}
+_params_234: StopIngestionJobInputDict = {
+    "knowledge_base_id": _,
+    "data_source_id": _,
+    "ingestion_job_id": _,
+}
+_params_235: StorageConfigurationDict = {"type": _}
+_params_236: StorageFlowNodeConfigurationDict = {"service_configuration": _}
+_params_237: StorageFlowNodeS3ConfigurationDict = {}
+_params_238: StorageFlowNodeServiceConfigurationDict = {"s3": _}
+_params_239: SupplementalDataStorageConfigurationDict = {"storage_locations": _}
+_params_240: SupplementalDataStorageLocationDict = {"type": _}
+_params_241: SyncScheduleDict = {"daily": _}
+_params_242: SystemContentBlockDict = {"text": _}
+_params_243: TagResourceInputDict = {"resource_arn": _, "tags": _}
+_params_244: TextContentDocDict = {"data": _}
+_params_245: TextPromptTemplateConfigurationDict = {"text": _}
+_params_246: ToolDict = {"tool_spec": _}
+_params_247: ToolChoiceDict = {"auto": _}
+_params_248: ToolConfigurationDict = {"tools": _}
+_params_249: ToolInputSchemaDict = {"json": _}
+_params_250: ToolSpecificationDict = {"name": _, "input_schema": _}
+_params_251: TransformationDict = {"transformation_function": _, "step_to_apply": _}
+_params_252: TransformationFunctionDict = {"transformation_lambda_configuration": _}
+_params_253: TransformationLambdaConfigurationDict = {"lambda_arn": _}
+_params_254: UntagResourceInputDict = {"resource_arn": _, "tag_keys": _}
+_params_255: UpdateAgentActionGroupInputDict = {
+    "agent_id": _,
+    "agent_version": _,
+    "action_group_id": _,
+    "action_group_name": _,
+}
+_params_256: UpdateAgentAliasInputDict = {
+    "agent_id": _,
+    "agent_alias_id": _,
+    "agent_alias_name": _,
+}
+_params_257: UpdateAgentCollaboratorInputDict = {
+    "agent_id": _,
+    "agent_version": _,
+    "collaborator_id": _,
+    "agent_descriptor": _,
+    "collaborator_name": _,
+    "collaboration_instruction": _,
+}
+_params_258: UpdateAgentInputDict = {
+    "agent_id": _,
+    "agent_name": _,
+    "foundation_model": _,
+    "agent_resource_role_arn": _,
+}
+_params_259: UpdateAgentKnowledgeBaseInputDict = {
+    "agent_id": _,
+    "agent_version": _,
+    "knowledge_base_id": _,
+}
+_params_260: UpdateDataSourceInputDict = {
+    "knowledge_base_id": _,
+    "data_source_id": _,
+    "name": _,
+    "data_source_configuration": _,
+}
+_params_261: UpdateFlowAliasInputDict = {
+    "name": _,
+    "routing_configuration": _,
+    "flow_identifier": _,
+    "alias_identifier": _,
+}
+_params_262: UpdateFlowInputDict = {
+    "name": _,
+    "execution_role_arn": _,
+    "flow_identifier": _,
+}
+_params_263: UpdateKnowledgeBaseInputDict = {
+    "knowledge_base_id": _,
+    "name": _,
+    "role_arn": _,
+    "knowledge_base_configuration": _,
+}
+_params_264: UpdatePromptInputDict = {"name": _, "prompt_identifier": _}
+_params_265: UpdateRetrievalInstructionInputDict = {
+    "retrieval_instruction_id": _,
+    "instruction": _,
+}
+_params_266: UrlConfigurationDict = {}
+_params_267: ValidateFlowDefinitionInputDict = {"definition": _}
+_params_268: VectorIngestionConfigurationDict = {}
+_params_269: VectorKnowledgeBaseConfigurationDict = {"embedding_model_arn": _}
+_params_270: VectorSearchBedrockRerankingConfigurationDict = {"model_configuration": _}
+_params_271: VectorSearchBedrockRerankingModelConfigurationDict = {"model_arn": _}
+_params_272: VectorSearchRerankingConfigurationDict = {"type": _}
+_params_273: VideoConfigurationDict = {"segmentation_configuration": _}
+_params_274: VideoExtractionConfigurationDict = {"video_extraction_status": _}
+_params_275: VideoSegmentationConfigurationDict = {"fixed_length_duration": _}
+_params_276: WebCrawlerConfigurationDict = {}
+_params_277: WebCrawlerLimitsDict = {}
+_params_278: WebDataSourceConfigurationDict = {"source_configuration": _}
+_params_279: WebSourceConfigurationDict = {"url_configuration": _}
+_params_280: WeeklyScheduleDict = {"day_of_week": _}
+
+
+def _request[T](form: type[T]) -> T:
+    raise NotImplementedError
+
+
+async def check_async_calls(client: AsyncBedrockAgentClient) -> None:
+    pass
+    await client.associate_agent_collaborator(
+        agent_id=_,
+        agent_version=_,
+        agent_descriptor=_,
+        collaborator_name=_,
+        collaboration_instruction=_,
+    )
+    await client.associate_agent_collaborator(
+        **_request(AssociateAgentCollaboratorInputDict)
+    )
+    await client.associate_agent_collaborator(_request(AssociateAgentCollaboratorInput))
+    await client.associate_agent_collaborator(
+        _request(AssociateAgentCollaboratorInputDict)
+    )
+    await client.associate_agent_knowledge_base(
+        agent_id=_, agent_version=_, knowledge_base_id=_, description=_
+    )
+    await client.associate_agent_knowledge_base(
+        **_request(AssociateAgentKnowledgeBaseInputDict)
+    )
+    await client.associate_agent_knowledge_base(
+        _request(AssociateAgentKnowledgeBaseInput)
+    )
+    await client.associate_agent_knowledge_base(
+        _request(AssociateAgentKnowledgeBaseInputDict)
+    )
+    await client.create_agent(agent_name=_)
+    await client.create_agent(**_request(CreateAgentInputDict))
+    await client.create_agent(_request(CreateAgentInput))
+    await client.create_agent(_request(CreateAgentInputDict))
+    await client.create_agent_action_group(
+        agent_id=_, agent_version=_, action_group_name=_
+    )
+    await client.create_agent_action_group(**_request(CreateAgentActionGroupInputDict))
+    await client.create_agent_action_group(_request(CreateAgentActionGroupInput))
+    await client.create_agent_action_group(_request(CreateAgentActionGroupInputDict))
+    await client.create_agent_alias(agent_id=_, agent_alias_name=_)
+    await client.create_agent_alias(**_request(CreateAgentAliasInputDict))
+    await client.create_agent_alias(_request(CreateAgentAliasInput))
+    await client.create_agent_alias(_request(CreateAgentAliasInputDict))
+    await client.create_data_source(
+        knowledge_base_id=_, name=_, data_source_configuration=_
+    )
+    await client.create_data_source(**_request(CreateDataSourceInputDict))
+    await client.create_data_source(_request(CreateDataSourceInput))
+    await client.create_data_source(_request(CreateDataSourceInputDict))
+    await client.create_flow(name=_, execution_role_arn=_)
+    await client.create_flow(**_request(CreateFlowInputDict))
+    await client.create_flow(_request(CreateFlowInput))
+    await client.create_flow(_request(CreateFlowInputDict))
+    await client.create_flow_alias(name=_, routing_configuration=_, flow_identifier=_)
+    await client.create_flow_alias(**_request(CreateFlowAliasInputDict))
+    await client.create_flow_alias(_request(CreateFlowAliasInput))
+    await client.create_flow_alias(_request(CreateFlowAliasInputDict))
+    await client.create_flow_version(flow_identifier=_)
+    await client.create_flow_version(**_request(CreateFlowVersionInputDict))
+    await client.create_flow_version(_request(CreateFlowVersionInput))
+    await client.create_flow_version(_request(CreateFlowVersionInputDict))
+    await client.create_knowledge_base(
+        name=_, role_arn=_, knowledge_base_configuration=_
+    )
+    await client.create_knowledge_base(**_request(CreateKnowledgeBaseInputDict))
+    await client.create_knowledge_base(_request(CreateKnowledgeBaseInput))
+    await client.create_knowledge_base(_request(CreateKnowledgeBaseInputDict))
+    await client.create_prompt(name=_)
+    await client.create_prompt(**_request(CreatePromptInputDict))
+    await client.create_prompt(_request(CreatePromptInput))
+    await client.create_prompt(_request(CreatePromptInputDict))
+    await client.create_prompt_version(prompt_identifier=_)
+    await client.create_prompt_version(**_request(CreatePromptVersionInputDict))
+    await client.create_prompt_version(_request(CreatePromptVersionInput))
+    await client.create_prompt_version(_request(CreatePromptVersionInputDict))
+    await client.create_retrieval_instruction(name=_, instruction=_)
+    await client.create_retrieval_instruction(
+        **_request(CreateRetrievalInstructionInputDict)
+    )
+    await client.create_retrieval_instruction(_request(CreateRetrievalInstructionInput))
+    await client.create_retrieval_instruction(
+        _request(CreateRetrievalInstructionInputDict)
+    )
+    await client.create_retrieval_instruction_version(retrieval_instruction_id=_)
+    await client.create_retrieval_instruction_version(
+        **_request(CreateRetrievalInstructionVersionInputDict)
+    )
+    await client.create_retrieval_instruction_version(
+        _request(CreateRetrievalInstructionVersionInput)
+    )
+    await client.create_retrieval_instruction_version(
+        _request(CreateRetrievalInstructionVersionInputDict)
+    )
+    await client.create_vpc_configuration(
+        knowledge_base_id=_,
+        vpc_id=_,
+        subnet_ids=_,
+        resource_target=_,
+        port=_,
+        protocol=_,
+        resolution_mode=_,
+    )
+    await client.create_vpc_configuration(**_request(CreateVpcConfigurationInputDict))
+    await client.create_vpc_configuration(_request(CreateVpcConfigurationInput))
+    await client.create_vpc_configuration(_request(CreateVpcConfigurationInputDict))
+    await client.delete_agent(agent_id=_)
+    await client.delete_agent(**_request(DeleteAgentInputDict))
+    await client.delete_agent(_request(DeleteAgentInput))
+    await client.delete_agent(_request(DeleteAgentInputDict))
+    await client.delete_agent_action_group(
+        agent_id=_, agent_version=_, action_group_id=_
+    )
+    await client.delete_agent_action_group(**_request(DeleteAgentActionGroupInputDict))
+    await client.delete_agent_action_group(_request(DeleteAgentActionGroupInput))
+    await client.delete_agent_action_group(_request(DeleteAgentActionGroupInputDict))
+    await client.delete_agent_alias(agent_id=_, agent_alias_id=_)
+    await client.delete_agent_alias(**_request(DeleteAgentAliasInputDict))
+    await client.delete_agent_alias(_request(DeleteAgentAliasInput))
+    await client.delete_agent_alias(_request(DeleteAgentAliasInputDict))
+    await client.delete_agent_version(agent_id=_, agent_version=_)
+    await client.delete_agent_version(**_request(DeleteAgentVersionInputDict))
+    await client.delete_agent_version(_request(DeleteAgentVersionInput))
+    await client.delete_agent_version(_request(DeleteAgentVersionInputDict))
+    await client.delete_data_source(knowledge_base_id=_, data_source_id=_)
+    await client.delete_data_source(**_request(DeleteDataSourceInputDict))
+    await client.delete_data_source(_request(DeleteDataSourceInput))
+    await client.delete_data_source(_request(DeleteDataSourceInputDict))
+    await client.delete_flow(flow_identifier=_)
+    await client.delete_flow(**_request(DeleteFlowInputDict))
+    await client.delete_flow(_request(DeleteFlowInput))
+    await client.delete_flow(_request(DeleteFlowInputDict))
+    await client.delete_flow_alias(flow_identifier=_, alias_identifier=_)
+    await client.delete_flow_alias(**_request(DeleteFlowAliasInputDict))
+    await client.delete_flow_alias(_request(DeleteFlowAliasInput))
+    await client.delete_flow_alias(_request(DeleteFlowAliasInputDict))
+    await client.delete_flow_version(flow_identifier=_, flow_version=_)
+    await client.delete_flow_version(**_request(DeleteFlowVersionInputDict))
+    await client.delete_flow_version(_request(DeleteFlowVersionInput))
+    await client.delete_flow_version(_request(DeleteFlowVersionInputDict))
+    await client.delete_knowledge_base(knowledge_base_id=_)
+    await client.delete_knowledge_base(**_request(DeleteKnowledgeBaseInputDict))
+    await client.delete_knowledge_base(_request(DeleteKnowledgeBaseInput))
+    await client.delete_knowledge_base(_request(DeleteKnowledgeBaseInputDict))
+    await client.delete_knowledge_base_documents(
+        knowledge_base_id=_, data_source_id=_, document_identifiers=_
+    )
+    await client.delete_knowledge_base_documents(
+        **_request(DeleteKnowledgeBaseDocumentsInputDict)
+    )
+    await client.delete_knowledge_base_documents(
+        _request(DeleteKnowledgeBaseDocumentsInput)
+    )
+    await client.delete_knowledge_base_documents(
+        _request(DeleteKnowledgeBaseDocumentsInputDict)
+    )
+    await client.delete_prompt(prompt_identifier=_)
+    await client.delete_prompt(**_request(DeletePromptInputDict))
+    await client.delete_prompt(_request(DeletePromptInput))
+    await client.delete_prompt(_request(DeletePromptInputDict))
+    await client.delete_resource_policy(resource_arn=_)
+    await client.delete_resource_policy(**_request(DeleteResourcePolicyInputDict))
+    await client.delete_resource_policy(_request(DeleteResourcePolicyInput))
+    await client.delete_resource_policy(_request(DeleteResourcePolicyInputDict))
+    await client.delete_retrieval_instruction(retrieval_instruction_id=_)
+    await client.delete_retrieval_instruction(
+        **_request(DeleteRetrievalInstructionInputDict)
+    )
+    await client.delete_retrieval_instruction(_request(DeleteRetrievalInstructionInput))
+    await client.delete_retrieval_instruction(
+        _request(DeleteRetrievalInstructionInputDict)
+    )
+    await client.delete_vpc_configuration(knowledge_base_id=_, vpc_configuration_id=_)
+    await client.delete_vpc_configuration(**_request(DeleteVpcConfigurationInputDict))
+    await client.delete_vpc_configuration(_request(DeleteVpcConfigurationInput))
+    await client.delete_vpc_configuration(_request(DeleteVpcConfigurationInputDict))
+    await client.disassociate_agent_collaborator(
+        agent_id=_, agent_version=_, collaborator_id=_
+    )
+    await client.disassociate_agent_collaborator(
+        **_request(DisassociateAgentCollaboratorInputDict)
+    )
+    await client.disassociate_agent_collaborator(
+        _request(DisassociateAgentCollaboratorInput)
+    )
+    await client.disassociate_agent_collaborator(
+        _request(DisassociateAgentCollaboratorInputDict)
+    )
+    await client.disassociate_agent_knowledge_base(
+        agent_id=_, agent_version=_, knowledge_base_id=_
+    )
+    await client.disassociate_agent_knowledge_base(
+        **_request(DisassociateAgentKnowledgeBaseInputDict)
+    )
+    await client.disassociate_agent_knowledge_base(
+        _request(DisassociateAgentKnowledgeBaseInput)
+    )
+    await client.disassociate_agent_knowledge_base(
+        _request(DisassociateAgentKnowledgeBaseInputDict)
+    )
+    await client.get_agent(agent_id=_)
+    await client.get_agent(**_request(GetAgentInputDict))
+    await client.get_agent(_request(GetAgentInput))
+    await client.get_agent(_request(GetAgentInputDict))
+    await client.get_agent_action_group(agent_id=_, agent_version=_, action_group_id=_)
+    await client.get_agent_action_group(**_request(GetAgentActionGroupInputDict))
+    await client.get_agent_action_group(_request(GetAgentActionGroupInput))
+    await client.get_agent_action_group(_request(GetAgentActionGroupInputDict))
+    await client.get_agent_alias(agent_id=_, agent_alias_id=_)
+    await client.get_agent_alias(**_request(GetAgentAliasInputDict))
+    await client.get_agent_alias(_request(GetAgentAliasInput))
+    await client.get_agent_alias(_request(GetAgentAliasInputDict))
+    await client.get_agent_collaborator(agent_id=_, agent_version=_, collaborator_id=_)
+    await client.get_agent_collaborator(**_request(GetAgentCollaboratorInputDict))
+    await client.get_agent_collaborator(_request(GetAgentCollaboratorInput))
+    await client.get_agent_collaborator(_request(GetAgentCollaboratorInputDict))
+    await client.get_agent_knowledge_base(
+        agent_id=_, agent_version=_, knowledge_base_id=_
+    )
+    await client.get_agent_knowledge_base(**_request(GetAgentKnowledgeBaseInputDict))
+    await client.get_agent_knowledge_base(_request(GetAgentKnowledgeBaseInput))
+    await client.get_agent_knowledge_base(_request(GetAgentKnowledgeBaseInputDict))
+    await client.get_agent_version(agent_id=_, agent_version=_)
+    await client.get_agent_version(**_request(GetAgentVersionInputDict))
+    await client.get_agent_version(_request(GetAgentVersionInput))
+    await client.get_agent_version(_request(GetAgentVersionInputDict))
+    await client.get_data_source(knowledge_base_id=_, data_source_id=_)
+    await client.get_data_source(**_request(GetDataSourceInputDict))
+    await client.get_data_source(_request(GetDataSourceInput))
+    await client.get_data_source(_request(GetDataSourceInputDict))
+    await client.get_flow(flow_identifier=_)
+    await client.get_flow(**_request(GetFlowInputDict))
+    await client.get_flow(_request(GetFlowInput))
+    await client.get_flow(_request(GetFlowInputDict))
+    await client.get_flow_alias(flow_identifier=_, alias_identifier=_)
+    await client.get_flow_alias(**_request(GetFlowAliasInputDict))
+    await client.get_flow_alias(_request(GetFlowAliasInput))
+    await client.get_flow_alias(_request(GetFlowAliasInputDict))
+    await client.get_flow_version(flow_identifier=_, flow_version=_)
+    await client.get_flow_version(**_request(GetFlowVersionInputDict))
+    await client.get_flow_version(_request(GetFlowVersionInput))
+    await client.get_flow_version(_request(GetFlowVersionInputDict))
+    await client.get_ingestion_job(
+        knowledge_base_id=_, data_source_id=_, ingestion_job_id=_
+    )
+    await client.get_ingestion_job(**_request(GetIngestionJobInputDict))
+    await client.get_ingestion_job(_request(GetIngestionJobInput))
+    await client.get_ingestion_job(_request(GetIngestionJobInputDict))
+    await client.get_knowledge_base(knowledge_base_id=_)
+    await client.get_knowledge_base(**_request(GetKnowledgeBaseInputDict))
+    await client.get_knowledge_base(_request(GetKnowledgeBaseInput))
+    await client.get_knowledge_base(_request(GetKnowledgeBaseInputDict))
+    await client.get_knowledge_base_documents(
+        knowledge_base_id=_, data_source_id=_, document_identifiers=_
+    )
+    await client.get_knowledge_base_documents(
+        **_request(GetKnowledgeBaseDocumentsInputDict)
+    )
+    await client.get_knowledge_base_documents(_request(GetKnowledgeBaseDocumentsInput))
+    await client.get_knowledge_base_documents(
+        _request(GetKnowledgeBaseDocumentsInputDict)
+    )
+    await client.get_prompt(prompt_identifier=_)
+    await client.get_prompt(**_request(GetPromptInputDict))
+    await client.get_prompt(_request(GetPromptInput))
+    await client.get_prompt(_request(GetPromptInputDict))
+    await client.get_resource_policy(resource_arn=_)
+    await client.get_resource_policy(**_request(GetResourcePolicyInputDict))
+    await client.get_resource_policy(_request(GetResourcePolicyInput))
+    await client.get_resource_policy(_request(GetResourcePolicyInputDict))
+    await client.get_retrieval_instruction(retrieval_instruction_id=_)
+    await client.get_retrieval_instruction(**_request(GetRetrievalInstructionInputDict))
+    await client.get_retrieval_instruction(_request(GetRetrievalInstructionInput))
+    await client.get_retrieval_instruction(_request(GetRetrievalInstructionInputDict))
+    await client.get_vpc_configuration(knowledge_base_id=_, vpc_configuration_id=_)
+    await client.get_vpc_configuration(**_request(GetVpcConfigurationInputDict))
+    await client.get_vpc_configuration(_request(GetVpcConfigurationInput))
+    await client.get_vpc_configuration(_request(GetVpcConfigurationInputDict))
+    await client.ingest_knowledge_base_documents(
+        knowledge_base_id=_, data_source_id=_, documents=_
+    )
+    await client.ingest_knowledge_base_documents(
+        **_request(IngestKnowledgeBaseDocumentsInputDict)
+    )
+    await client.ingest_knowledge_base_documents(
+        _request(IngestKnowledgeBaseDocumentsInput)
+    )
+    await client.ingest_knowledge_base_documents(
+        _request(IngestKnowledgeBaseDocumentsInputDict)
+    )
+    await client.list_agent_action_groups(agent_id=_, agent_version=_)
+    await client.list_agent_action_groups(**_request(ListAgentActionGroupsInputDict))
+    await client.list_agent_action_groups(_request(ListAgentActionGroupsInput))
+    await client.list_agent_action_groups(_request(ListAgentActionGroupsInputDict))
+    await client.list_agent_aliases(agent_id=_)
+    await client.list_agent_aliases(**_request(ListAgentAliasesInputDict))
+    await client.list_agent_aliases(_request(ListAgentAliasesInput))
+    await client.list_agent_aliases(_request(ListAgentAliasesInputDict))
+    await client.list_agent_collaborators(agent_id=_, agent_version=_)
+    await client.list_agent_collaborators(**_request(ListAgentCollaboratorsInputDict))
+    await client.list_agent_collaborators(_request(ListAgentCollaboratorsInput))
+    await client.list_agent_collaborators(_request(ListAgentCollaboratorsInputDict))
+    await client.list_agent_knowledge_bases(agent_id=_, agent_version=_)
+    await client.list_agent_knowledge_bases(
+        **_request(ListAgentKnowledgeBasesInputDict)
+    )
+    await client.list_agent_knowledge_bases(_request(ListAgentKnowledgeBasesInput))
+    await client.list_agent_knowledge_bases(_request(ListAgentKnowledgeBasesInputDict))
+    await client.list_agents()
+    await client.list_agents(**_request(ListAgentsInputDict))
+    await client.list_agents(_request(ListAgentsInput))
+    await client.list_agents(_request(ListAgentsInputDict))
+    await client.list_agent_versions(agent_id=_)
+    await client.list_agent_versions(**_request(ListAgentVersionsInputDict))
+    await client.list_agent_versions(_request(ListAgentVersionsInput))
+    await client.list_agent_versions(_request(ListAgentVersionsInputDict))
+    await client.list_data_sources(knowledge_base_id=_)
+    await client.list_data_sources(**_request(ListDataSourcesInputDict))
+    await client.list_data_sources(_request(ListDataSourcesInput))
+    await client.list_data_sources(_request(ListDataSourcesInputDict))
+    await client.list_flow_aliases(flow_identifier=_)
+    await client.list_flow_aliases(**_request(ListFlowAliasesInputDict))
+    await client.list_flow_aliases(_request(ListFlowAliasesInput))
+    await client.list_flow_aliases(_request(ListFlowAliasesInputDict))
+    await client.list_flows()
+    await client.list_flows(**_request(ListFlowsInputDict))
+    await client.list_flows(_request(ListFlowsInput))
+    await client.list_flows(_request(ListFlowsInputDict))
+    await client.list_flow_versions(flow_identifier=_)
+    await client.list_flow_versions(**_request(ListFlowVersionsInputDict))
+    await client.list_flow_versions(_request(ListFlowVersionsInput))
+    await client.list_flow_versions(_request(ListFlowVersionsInputDict))
+    await client.list_ingestion_jobs(knowledge_base_id=_, data_source_id=_)
+    await client.list_ingestion_jobs(**_request(ListIngestionJobsInputDict))
+    await client.list_ingestion_jobs(_request(ListIngestionJobsInput))
+    await client.list_ingestion_jobs(_request(ListIngestionJobsInputDict))
+    await client.list_knowledge_base_documents(knowledge_base_id=_, data_source_id=_)
+    await client.list_knowledge_base_documents(
+        **_request(ListKnowledgeBaseDocumentsInputDict)
+    )
+    await client.list_knowledge_base_documents(
+        _request(ListKnowledgeBaseDocumentsInput)
+    )
+    await client.list_knowledge_base_documents(
+        _request(ListKnowledgeBaseDocumentsInputDict)
+    )
+    await client.list_knowledge_bases()
+    await client.list_knowledge_bases(**_request(ListKnowledgeBasesInputDict))
+    await client.list_knowledge_bases(_request(ListKnowledgeBasesInput))
+    await client.list_knowledge_bases(_request(ListKnowledgeBasesInputDict))
+    await client.list_prompts()
+    await client.list_prompts(**_request(ListPromptsInputDict))
+    await client.list_prompts(_request(ListPromptsInput))
+    await client.list_prompts(_request(ListPromptsInputDict))
+    await client.list_retrieval_instructions()
+    await client.list_retrieval_instructions(
+        **_request(ListRetrievalInstructionsInputDict)
+    )
+    await client.list_retrieval_instructions(_request(ListRetrievalInstructionsInput))
+    await client.list_retrieval_instructions(
+        _request(ListRetrievalInstructionsInputDict)
+    )
+    await client.list_retrieval_instruction_versions(retrieval_instruction_id=_)
+    await client.list_retrieval_instruction_versions(
+        **_request(ListRetrievalInstructionVersionsInputDict)
+    )
+    await client.list_retrieval_instruction_versions(
+        _request(ListRetrievalInstructionVersionsInput)
+    )
+    await client.list_retrieval_instruction_versions(
+        _request(ListRetrievalInstructionVersionsInputDict)
+    )
+    await client.list_tags_for_resource(resource_arn=_)
+    await client.list_tags_for_resource(**_request(ListTagsForResourceInputDict))
+    await client.list_tags_for_resource(_request(ListTagsForResourceInput))
+    await client.list_tags_for_resource(_request(ListTagsForResourceInputDict))
+    await client.list_vpc_configurations(knowledge_base_id=_)
+    await client.list_vpc_configurations(**_request(ListVpcConfigurationsInputDict))
+    await client.list_vpc_configurations(_request(ListVpcConfigurationsInput))
+    await client.list_vpc_configurations(_request(ListVpcConfigurationsInputDict))
+    await client.prepare_agent(agent_id=_)
+    await client.prepare_agent(**_request(PrepareAgentInputDict))
+    await client.prepare_agent(_request(PrepareAgentInput))
+    await client.prepare_agent(_request(PrepareAgentInputDict))
+    await client.prepare_flow(flow_identifier=_)
+    await client.prepare_flow(**_request(PrepareFlowInputDict))
+    await client.prepare_flow(_request(PrepareFlowInput))
+    await client.prepare_flow(_request(PrepareFlowInputDict))
+    await client.put_resource_policy(resource_arn=_, policy=_)
+    await client.put_resource_policy(**_request(PutResourcePolicyInputDict))
+    await client.put_resource_policy(_request(PutResourcePolicyInput))
+    await client.put_resource_policy(_request(PutResourcePolicyInputDict))
+    await client.start_ingestion_job(knowledge_base_id=_, data_source_id=_)
+    await client.start_ingestion_job(**_request(StartIngestionJobInputDict))
+    await client.start_ingestion_job(_request(StartIngestionJobInput))
+    await client.start_ingestion_job(_request(StartIngestionJobInputDict))
+    await client.stop_ingestion_job(
+        knowledge_base_id=_, data_source_id=_, ingestion_job_id=_
+    )
+    await client.stop_ingestion_job(**_request(StopIngestionJobInputDict))
+    await client.stop_ingestion_job(_request(StopIngestionJobInput))
+    await client.stop_ingestion_job(_request(StopIngestionJobInputDict))
+    await client.tag_resource(resource_arn=_, tags=_)
+    await client.tag_resource(**_request(TagResourceInputDict))
+    await client.tag_resource(_request(TagResourceInput))
+    await client.tag_resource(_request(TagResourceInputDict))
+    await client.untag_resource(resource_arn=_, tag_keys=_)
+    await client.untag_resource(**_request(UntagResourceInputDict))
+    await client.untag_resource(_request(UntagResourceInput))
+    await client.untag_resource(_request(UntagResourceInputDict))
+    await client.update_agent(
+        agent_id=_, agent_name=_, foundation_model=_, agent_resource_role_arn=_
+    )
+    await client.update_agent(**_request(UpdateAgentInputDict))
+    await client.update_agent(_request(UpdateAgentInput))
+    await client.update_agent(_request(UpdateAgentInputDict))
+    await client.update_agent_action_group(
+        agent_id=_, agent_version=_, action_group_id=_, action_group_name=_
+    )
+    await client.update_agent_action_group(**_request(UpdateAgentActionGroupInputDict))
+    await client.update_agent_action_group(_request(UpdateAgentActionGroupInput))
+    await client.update_agent_action_group(_request(UpdateAgentActionGroupInputDict))
+    await client.update_agent_alias(agent_id=_, agent_alias_id=_, agent_alias_name=_)
+    await client.update_agent_alias(**_request(UpdateAgentAliasInputDict))
+    await client.update_agent_alias(_request(UpdateAgentAliasInput))
+    await client.update_agent_alias(_request(UpdateAgentAliasInputDict))
+    await client.update_agent_collaborator(
+        agent_id=_,
+        agent_version=_,
+        collaborator_id=_,
+        agent_descriptor=_,
+        collaborator_name=_,
+        collaboration_instruction=_,
+    )
+    await client.update_agent_collaborator(**_request(UpdateAgentCollaboratorInputDict))
+    await client.update_agent_collaborator(_request(UpdateAgentCollaboratorInput))
+    await client.update_agent_collaborator(_request(UpdateAgentCollaboratorInputDict))
+    await client.update_agent_knowledge_base(
+        agent_id=_, agent_version=_, knowledge_base_id=_
+    )
+    await client.update_agent_knowledge_base(
+        **_request(UpdateAgentKnowledgeBaseInputDict)
+    )
+    await client.update_agent_knowledge_base(_request(UpdateAgentKnowledgeBaseInput))
+    await client.update_agent_knowledge_base(
+        _request(UpdateAgentKnowledgeBaseInputDict)
+    )
+    await client.update_data_source(
+        knowledge_base_id=_, data_source_id=_, name=_, data_source_configuration=_
+    )
+    await client.update_data_source(**_request(UpdateDataSourceInputDict))
+    await client.update_data_source(_request(UpdateDataSourceInput))
+    await client.update_data_source(_request(UpdateDataSourceInputDict))
+    await client.update_flow(name=_, execution_role_arn=_, flow_identifier=_)
+    await client.update_flow(**_request(UpdateFlowInputDict))
+    await client.update_flow(_request(UpdateFlowInput))
+    await client.update_flow(_request(UpdateFlowInputDict))
+    await client.update_flow_alias(
+        name=_, routing_configuration=_, flow_identifier=_, alias_identifier=_
+    )
+    await client.update_flow_alias(**_request(UpdateFlowAliasInputDict))
+    await client.update_flow_alias(_request(UpdateFlowAliasInput))
+    await client.update_flow_alias(_request(UpdateFlowAliasInputDict))
+    await client.update_knowledge_base(
+        knowledge_base_id=_, name=_, role_arn=_, knowledge_base_configuration=_
+    )
+    await client.update_knowledge_base(**_request(UpdateKnowledgeBaseInputDict))
+    await client.update_knowledge_base(_request(UpdateKnowledgeBaseInput))
+    await client.update_knowledge_base(_request(UpdateKnowledgeBaseInputDict))
+    await client.update_prompt(name=_, prompt_identifier=_)
+    await client.update_prompt(**_request(UpdatePromptInputDict))
+    await client.update_prompt(_request(UpdatePromptInput))
+    await client.update_prompt(_request(UpdatePromptInputDict))
+    await client.update_retrieval_instruction(retrieval_instruction_id=_, instruction=_)
+    await client.update_retrieval_instruction(
+        **_request(UpdateRetrievalInstructionInputDict)
+    )
+    await client.update_retrieval_instruction(_request(UpdateRetrievalInstructionInput))
+    await client.update_retrieval_instruction(
+        _request(UpdateRetrievalInstructionInputDict)
+    )
+    await client.validate_flow_definition(definition=_)
+    await client.validate_flow_definition(**_request(ValidateFlowDefinitionInputDict))
+    await client.validate_flow_definition(_request(ValidateFlowDefinitionInput))
+    await client.validate_flow_definition(_request(ValidateFlowDefinitionInputDict))
+
+
+def check_sync_calls(client: BedrockAgentClient) -> None:
+    pass
+    client.associate_agent_collaborator(
+        agent_id=_,
+        agent_version=_,
+        agent_descriptor=_,
+        collaborator_name=_,
+        collaboration_instruction=_,
+    )
+    client.associate_agent_collaborator(**_request(AssociateAgentCollaboratorInputDict))
+    client.associate_agent_collaborator(_request(AssociateAgentCollaboratorInput))
+    client.associate_agent_collaborator(_request(AssociateAgentCollaboratorInputDict))
+    client.associate_agent_knowledge_base(
+        agent_id=_, agent_version=_, knowledge_base_id=_, description=_
+    )
+    client.associate_agent_knowledge_base(
+        **_request(AssociateAgentKnowledgeBaseInputDict)
+    )
+    client.associate_agent_knowledge_base(_request(AssociateAgentKnowledgeBaseInput))
+    client.associate_agent_knowledge_base(
+        _request(AssociateAgentKnowledgeBaseInputDict)
+    )
+    client.create_agent(agent_name=_)
+    client.create_agent(**_request(CreateAgentInputDict))
+    client.create_agent(_request(CreateAgentInput))
+    client.create_agent(_request(CreateAgentInputDict))
+    client.create_agent_action_group(agent_id=_, agent_version=_, action_group_name=_)
+    client.create_agent_action_group(**_request(CreateAgentActionGroupInputDict))
+    client.create_agent_action_group(_request(CreateAgentActionGroupInput))
+    client.create_agent_action_group(_request(CreateAgentActionGroupInputDict))
+    client.create_agent_alias(agent_id=_, agent_alias_name=_)
+    client.create_agent_alias(**_request(CreateAgentAliasInputDict))
+    client.create_agent_alias(_request(CreateAgentAliasInput))
+    client.create_agent_alias(_request(CreateAgentAliasInputDict))
+    client.create_data_source(knowledge_base_id=_, name=_, data_source_configuration=_)
+    client.create_data_source(**_request(CreateDataSourceInputDict))
+    client.create_data_source(_request(CreateDataSourceInput))
+    client.create_data_source(_request(CreateDataSourceInputDict))
+    client.create_flow(name=_, execution_role_arn=_)
+    client.create_flow(**_request(CreateFlowInputDict))
+    client.create_flow(_request(CreateFlowInput))
+    client.create_flow(_request(CreateFlowInputDict))
+    client.create_flow_alias(name=_, routing_configuration=_, flow_identifier=_)
+    client.create_flow_alias(**_request(CreateFlowAliasInputDict))
+    client.create_flow_alias(_request(CreateFlowAliasInput))
+    client.create_flow_alias(_request(CreateFlowAliasInputDict))
+    client.create_flow_version(flow_identifier=_)
+    client.create_flow_version(**_request(CreateFlowVersionInputDict))
+    client.create_flow_version(_request(CreateFlowVersionInput))
+    client.create_flow_version(_request(CreateFlowVersionInputDict))
+    client.create_knowledge_base(name=_, role_arn=_, knowledge_base_configuration=_)
+    client.create_knowledge_base(**_request(CreateKnowledgeBaseInputDict))
+    client.create_knowledge_base(_request(CreateKnowledgeBaseInput))
+    client.create_knowledge_base(_request(CreateKnowledgeBaseInputDict))
+    client.create_prompt(name=_)
+    client.create_prompt(**_request(CreatePromptInputDict))
+    client.create_prompt(_request(CreatePromptInput))
+    client.create_prompt(_request(CreatePromptInputDict))
+    client.create_prompt_version(prompt_identifier=_)
+    client.create_prompt_version(**_request(CreatePromptVersionInputDict))
+    client.create_prompt_version(_request(CreatePromptVersionInput))
+    client.create_prompt_version(_request(CreatePromptVersionInputDict))
+    client.create_retrieval_instruction(name=_, instruction=_)
+    client.create_retrieval_instruction(**_request(CreateRetrievalInstructionInputDict))
+    client.create_retrieval_instruction(_request(CreateRetrievalInstructionInput))
+    client.create_retrieval_instruction(_request(CreateRetrievalInstructionInputDict))
+    client.create_retrieval_instruction_version(retrieval_instruction_id=_)
+    client.create_retrieval_instruction_version(
+        **_request(CreateRetrievalInstructionVersionInputDict)
+    )
+    client.create_retrieval_instruction_version(
+        _request(CreateRetrievalInstructionVersionInput)
+    )
+    client.create_retrieval_instruction_version(
+        _request(CreateRetrievalInstructionVersionInputDict)
+    )
+    client.create_vpc_configuration(
+        knowledge_base_id=_,
+        vpc_id=_,
+        subnet_ids=_,
+        resource_target=_,
+        port=_,
+        protocol=_,
+        resolution_mode=_,
+    )
+    client.create_vpc_configuration(**_request(CreateVpcConfigurationInputDict))
+    client.create_vpc_configuration(_request(CreateVpcConfigurationInput))
+    client.create_vpc_configuration(_request(CreateVpcConfigurationInputDict))
+    client.delete_agent(agent_id=_)
+    client.delete_agent(**_request(DeleteAgentInputDict))
+    client.delete_agent(_request(DeleteAgentInput))
+    client.delete_agent(_request(DeleteAgentInputDict))
+    client.delete_agent_action_group(agent_id=_, agent_version=_, action_group_id=_)
+    client.delete_agent_action_group(**_request(DeleteAgentActionGroupInputDict))
+    client.delete_agent_action_group(_request(DeleteAgentActionGroupInput))
+    client.delete_agent_action_group(_request(DeleteAgentActionGroupInputDict))
+    client.delete_agent_alias(agent_id=_, agent_alias_id=_)
+    client.delete_agent_alias(**_request(DeleteAgentAliasInputDict))
+    client.delete_agent_alias(_request(DeleteAgentAliasInput))
+    client.delete_agent_alias(_request(DeleteAgentAliasInputDict))
+    client.delete_agent_version(agent_id=_, agent_version=_)
+    client.delete_agent_version(**_request(DeleteAgentVersionInputDict))
+    client.delete_agent_version(_request(DeleteAgentVersionInput))
+    client.delete_agent_version(_request(DeleteAgentVersionInputDict))
+    client.delete_data_source(knowledge_base_id=_, data_source_id=_)
+    client.delete_data_source(**_request(DeleteDataSourceInputDict))
+    client.delete_data_source(_request(DeleteDataSourceInput))
+    client.delete_data_source(_request(DeleteDataSourceInputDict))
+    client.delete_flow(flow_identifier=_)
+    client.delete_flow(**_request(DeleteFlowInputDict))
+    client.delete_flow(_request(DeleteFlowInput))
+    client.delete_flow(_request(DeleteFlowInputDict))
+    client.delete_flow_alias(flow_identifier=_, alias_identifier=_)
+    client.delete_flow_alias(**_request(DeleteFlowAliasInputDict))
+    client.delete_flow_alias(_request(DeleteFlowAliasInput))
+    client.delete_flow_alias(_request(DeleteFlowAliasInputDict))
+    client.delete_flow_version(flow_identifier=_, flow_version=_)
+    client.delete_flow_version(**_request(DeleteFlowVersionInputDict))
+    client.delete_flow_version(_request(DeleteFlowVersionInput))
+    client.delete_flow_version(_request(DeleteFlowVersionInputDict))
+    client.delete_knowledge_base(knowledge_base_id=_)
+    client.delete_knowledge_base(**_request(DeleteKnowledgeBaseInputDict))
+    client.delete_knowledge_base(_request(DeleteKnowledgeBaseInput))
+    client.delete_knowledge_base(_request(DeleteKnowledgeBaseInputDict))
+    client.delete_knowledge_base_documents(
+        knowledge_base_id=_, data_source_id=_, document_identifiers=_
+    )
+    client.delete_knowledge_base_documents(
+        **_request(DeleteKnowledgeBaseDocumentsInputDict)
+    )
+    client.delete_knowledge_base_documents(_request(DeleteKnowledgeBaseDocumentsInput))
+    client.delete_knowledge_base_documents(
+        _request(DeleteKnowledgeBaseDocumentsInputDict)
+    )
+    client.delete_prompt(prompt_identifier=_)
+    client.delete_prompt(**_request(DeletePromptInputDict))
+    client.delete_prompt(_request(DeletePromptInput))
+    client.delete_prompt(_request(DeletePromptInputDict))
+    client.delete_resource_policy(resource_arn=_)
+    client.delete_resource_policy(**_request(DeleteResourcePolicyInputDict))
+    client.delete_resource_policy(_request(DeleteResourcePolicyInput))
+    client.delete_resource_policy(_request(DeleteResourcePolicyInputDict))
+    client.delete_retrieval_instruction(retrieval_instruction_id=_)
+    client.delete_retrieval_instruction(**_request(DeleteRetrievalInstructionInputDict))
+    client.delete_retrieval_instruction(_request(DeleteRetrievalInstructionInput))
+    client.delete_retrieval_instruction(_request(DeleteRetrievalInstructionInputDict))
+    client.delete_vpc_configuration(knowledge_base_id=_, vpc_configuration_id=_)
+    client.delete_vpc_configuration(**_request(DeleteVpcConfigurationInputDict))
+    client.delete_vpc_configuration(_request(DeleteVpcConfigurationInput))
+    client.delete_vpc_configuration(_request(DeleteVpcConfigurationInputDict))
+    client.disassociate_agent_collaborator(
+        agent_id=_, agent_version=_, collaborator_id=_
+    )
+    client.disassociate_agent_collaborator(
+        **_request(DisassociateAgentCollaboratorInputDict)
+    )
+    client.disassociate_agent_collaborator(_request(DisassociateAgentCollaboratorInput))
+    client.disassociate_agent_collaborator(
+        _request(DisassociateAgentCollaboratorInputDict)
+    )
+    client.disassociate_agent_knowledge_base(
+        agent_id=_, agent_version=_, knowledge_base_id=_
+    )
+    client.disassociate_agent_knowledge_base(
+        **_request(DisassociateAgentKnowledgeBaseInputDict)
+    )
+    client.disassociate_agent_knowledge_base(
+        _request(DisassociateAgentKnowledgeBaseInput)
+    )
+    client.disassociate_agent_knowledge_base(
+        _request(DisassociateAgentKnowledgeBaseInputDict)
+    )
+    client.get_agent(agent_id=_)
+    client.get_agent(**_request(GetAgentInputDict))
+    client.get_agent(_request(GetAgentInput))
+    client.get_agent(_request(GetAgentInputDict))
+    client.get_agent_action_group(agent_id=_, agent_version=_, action_group_id=_)
+    client.get_agent_action_group(**_request(GetAgentActionGroupInputDict))
+    client.get_agent_action_group(_request(GetAgentActionGroupInput))
+    client.get_agent_action_group(_request(GetAgentActionGroupInputDict))
+    client.get_agent_alias(agent_id=_, agent_alias_id=_)
+    client.get_agent_alias(**_request(GetAgentAliasInputDict))
+    client.get_agent_alias(_request(GetAgentAliasInput))
+    client.get_agent_alias(_request(GetAgentAliasInputDict))
+    client.get_agent_collaborator(agent_id=_, agent_version=_, collaborator_id=_)
+    client.get_agent_collaborator(**_request(GetAgentCollaboratorInputDict))
+    client.get_agent_collaborator(_request(GetAgentCollaboratorInput))
+    client.get_agent_collaborator(_request(GetAgentCollaboratorInputDict))
+    client.get_agent_knowledge_base(agent_id=_, agent_version=_, knowledge_base_id=_)
+    client.get_agent_knowledge_base(**_request(GetAgentKnowledgeBaseInputDict))
+    client.get_agent_knowledge_base(_request(GetAgentKnowledgeBaseInput))
+    client.get_agent_knowledge_base(_request(GetAgentKnowledgeBaseInputDict))
+    client.get_agent_version(agent_id=_, agent_version=_)
+    client.get_agent_version(**_request(GetAgentVersionInputDict))
+    client.get_agent_version(_request(GetAgentVersionInput))
+    client.get_agent_version(_request(GetAgentVersionInputDict))
+    client.get_data_source(knowledge_base_id=_, data_source_id=_)
+    client.get_data_source(**_request(GetDataSourceInputDict))
+    client.get_data_source(_request(GetDataSourceInput))
+    client.get_data_source(_request(GetDataSourceInputDict))
+    client.get_flow(flow_identifier=_)
+    client.get_flow(**_request(GetFlowInputDict))
+    client.get_flow(_request(GetFlowInput))
+    client.get_flow(_request(GetFlowInputDict))
+    client.get_flow_alias(flow_identifier=_, alias_identifier=_)
+    client.get_flow_alias(**_request(GetFlowAliasInputDict))
+    client.get_flow_alias(_request(GetFlowAliasInput))
+    client.get_flow_alias(_request(GetFlowAliasInputDict))
+    client.get_flow_version(flow_identifier=_, flow_version=_)
+    client.get_flow_version(**_request(GetFlowVersionInputDict))
+    client.get_flow_version(_request(GetFlowVersionInput))
+    client.get_flow_version(_request(GetFlowVersionInputDict))
+    client.get_ingestion_job(knowledge_base_id=_, data_source_id=_, ingestion_job_id=_)
+    client.get_ingestion_job(**_request(GetIngestionJobInputDict))
+    client.get_ingestion_job(_request(GetIngestionJobInput))
+    client.get_ingestion_job(_request(GetIngestionJobInputDict))
+    client.get_knowledge_base(knowledge_base_id=_)
+    client.get_knowledge_base(**_request(GetKnowledgeBaseInputDict))
+    client.get_knowledge_base(_request(GetKnowledgeBaseInput))
+    client.get_knowledge_base(_request(GetKnowledgeBaseInputDict))
+    client.get_knowledge_base_documents(
+        knowledge_base_id=_, data_source_id=_, document_identifiers=_
+    )
+    client.get_knowledge_base_documents(**_request(GetKnowledgeBaseDocumentsInputDict))
+    client.get_knowledge_base_documents(_request(GetKnowledgeBaseDocumentsInput))
+    client.get_knowledge_base_documents(_request(GetKnowledgeBaseDocumentsInputDict))
+    client.get_prompt(prompt_identifier=_)
+    client.get_prompt(**_request(GetPromptInputDict))
+    client.get_prompt(_request(GetPromptInput))
+    client.get_prompt(_request(GetPromptInputDict))
+    client.get_resource_policy(resource_arn=_)
+    client.get_resource_policy(**_request(GetResourcePolicyInputDict))
+    client.get_resource_policy(_request(GetResourcePolicyInput))
+    client.get_resource_policy(_request(GetResourcePolicyInputDict))
+    client.get_retrieval_instruction(retrieval_instruction_id=_)
+    client.get_retrieval_instruction(**_request(GetRetrievalInstructionInputDict))
+    client.get_retrieval_instruction(_request(GetRetrievalInstructionInput))
+    client.get_retrieval_instruction(_request(GetRetrievalInstructionInputDict))
+    client.get_vpc_configuration(knowledge_base_id=_, vpc_configuration_id=_)
+    client.get_vpc_configuration(**_request(GetVpcConfigurationInputDict))
+    client.get_vpc_configuration(_request(GetVpcConfigurationInput))
+    client.get_vpc_configuration(_request(GetVpcConfigurationInputDict))
+    client.ingest_knowledge_base_documents(
+        knowledge_base_id=_, data_source_id=_, documents=_
+    )
+    client.ingest_knowledge_base_documents(
+        **_request(IngestKnowledgeBaseDocumentsInputDict)
+    )
+    client.ingest_knowledge_base_documents(_request(IngestKnowledgeBaseDocumentsInput))
+    client.ingest_knowledge_base_documents(
+        _request(IngestKnowledgeBaseDocumentsInputDict)
+    )
+    client.list_agent_action_groups(agent_id=_, agent_version=_)
+    client.list_agent_action_groups(**_request(ListAgentActionGroupsInputDict))
+    client.list_agent_action_groups(_request(ListAgentActionGroupsInput))
+    client.list_agent_action_groups(_request(ListAgentActionGroupsInputDict))
+    client.list_agent_aliases(agent_id=_)
+    client.list_agent_aliases(**_request(ListAgentAliasesInputDict))
+    client.list_agent_aliases(_request(ListAgentAliasesInput))
+    client.list_agent_aliases(_request(ListAgentAliasesInputDict))
+    client.list_agent_collaborators(agent_id=_, agent_version=_)
+    client.list_agent_collaborators(**_request(ListAgentCollaboratorsInputDict))
+    client.list_agent_collaborators(_request(ListAgentCollaboratorsInput))
+    client.list_agent_collaborators(_request(ListAgentCollaboratorsInputDict))
+    client.list_agent_knowledge_bases(agent_id=_, agent_version=_)
+    client.list_agent_knowledge_bases(**_request(ListAgentKnowledgeBasesInputDict))
+    client.list_agent_knowledge_bases(_request(ListAgentKnowledgeBasesInput))
+    client.list_agent_knowledge_bases(_request(ListAgentKnowledgeBasesInputDict))
+    client.list_agents()
+    client.list_agents(**_request(ListAgentsInputDict))
+    client.list_agents(_request(ListAgentsInput))
+    client.list_agents(_request(ListAgentsInputDict))
+    client.list_agent_versions(agent_id=_)
+    client.list_agent_versions(**_request(ListAgentVersionsInputDict))
+    client.list_agent_versions(_request(ListAgentVersionsInput))
+    client.list_agent_versions(_request(ListAgentVersionsInputDict))
+    client.list_data_sources(knowledge_base_id=_)
+    client.list_data_sources(**_request(ListDataSourcesInputDict))
+    client.list_data_sources(_request(ListDataSourcesInput))
+    client.list_data_sources(_request(ListDataSourcesInputDict))
+    client.list_flow_aliases(flow_identifier=_)
+    client.list_flow_aliases(**_request(ListFlowAliasesInputDict))
+    client.list_flow_aliases(_request(ListFlowAliasesInput))
+    client.list_flow_aliases(_request(ListFlowAliasesInputDict))
+    client.list_flows()
+    client.list_flows(**_request(ListFlowsInputDict))
+    client.list_flows(_request(ListFlowsInput))
+    client.list_flows(_request(ListFlowsInputDict))
+    client.list_flow_versions(flow_identifier=_)
+    client.list_flow_versions(**_request(ListFlowVersionsInputDict))
+    client.list_flow_versions(_request(ListFlowVersionsInput))
+    client.list_flow_versions(_request(ListFlowVersionsInputDict))
+    client.list_ingestion_jobs(knowledge_base_id=_, data_source_id=_)
+    client.list_ingestion_jobs(**_request(ListIngestionJobsInputDict))
+    client.list_ingestion_jobs(_request(ListIngestionJobsInput))
+    client.list_ingestion_jobs(_request(ListIngestionJobsInputDict))
+    client.list_knowledge_base_documents(knowledge_base_id=_, data_source_id=_)
+    client.list_knowledge_base_documents(
+        **_request(ListKnowledgeBaseDocumentsInputDict)
+    )
+    client.list_knowledge_base_documents(_request(ListKnowledgeBaseDocumentsInput))
+    client.list_knowledge_base_documents(_request(ListKnowledgeBaseDocumentsInputDict))
+    client.list_knowledge_bases()
+    client.list_knowledge_bases(**_request(ListKnowledgeBasesInputDict))
+    client.list_knowledge_bases(_request(ListKnowledgeBasesInput))
+    client.list_knowledge_bases(_request(ListKnowledgeBasesInputDict))
+    client.list_prompts()
+    client.list_prompts(**_request(ListPromptsInputDict))
+    client.list_prompts(_request(ListPromptsInput))
+    client.list_prompts(_request(ListPromptsInputDict))
+    client.list_retrieval_instructions()
+    client.list_retrieval_instructions(**_request(ListRetrievalInstructionsInputDict))
+    client.list_retrieval_instructions(_request(ListRetrievalInstructionsInput))
+    client.list_retrieval_instructions(_request(ListRetrievalInstructionsInputDict))
+    client.list_retrieval_instruction_versions(retrieval_instruction_id=_)
+    client.list_retrieval_instruction_versions(
+        **_request(ListRetrievalInstructionVersionsInputDict)
+    )
+    client.list_retrieval_instruction_versions(
+        _request(ListRetrievalInstructionVersionsInput)
+    )
+    client.list_retrieval_instruction_versions(
+        _request(ListRetrievalInstructionVersionsInputDict)
+    )
+    client.list_tags_for_resource(resource_arn=_)
+    client.list_tags_for_resource(**_request(ListTagsForResourceInputDict))
+    client.list_tags_for_resource(_request(ListTagsForResourceInput))
+    client.list_tags_for_resource(_request(ListTagsForResourceInputDict))
+    client.list_vpc_configurations(knowledge_base_id=_)
+    client.list_vpc_configurations(**_request(ListVpcConfigurationsInputDict))
+    client.list_vpc_configurations(_request(ListVpcConfigurationsInput))
+    client.list_vpc_configurations(_request(ListVpcConfigurationsInputDict))
+    client.prepare_agent(agent_id=_)
+    client.prepare_agent(**_request(PrepareAgentInputDict))
+    client.prepare_agent(_request(PrepareAgentInput))
+    client.prepare_agent(_request(PrepareAgentInputDict))
+    client.prepare_flow(flow_identifier=_)
+    client.prepare_flow(**_request(PrepareFlowInputDict))
+    client.prepare_flow(_request(PrepareFlowInput))
+    client.prepare_flow(_request(PrepareFlowInputDict))
+    client.put_resource_policy(resource_arn=_, policy=_)
+    client.put_resource_policy(**_request(PutResourcePolicyInputDict))
+    client.put_resource_policy(_request(PutResourcePolicyInput))
+    client.put_resource_policy(_request(PutResourcePolicyInputDict))
+    client.start_ingestion_job(knowledge_base_id=_, data_source_id=_)
+    client.start_ingestion_job(**_request(StartIngestionJobInputDict))
+    client.start_ingestion_job(_request(StartIngestionJobInput))
+    client.start_ingestion_job(_request(StartIngestionJobInputDict))
+    client.stop_ingestion_job(knowledge_base_id=_, data_source_id=_, ingestion_job_id=_)
+    client.stop_ingestion_job(**_request(StopIngestionJobInputDict))
+    client.stop_ingestion_job(_request(StopIngestionJobInput))
+    client.stop_ingestion_job(_request(StopIngestionJobInputDict))
+    client.tag_resource(resource_arn=_, tags=_)
+    client.tag_resource(**_request(TagResourceInputDict))
+    client.tag_resource(_request(TagResourceInput))
+    client.tag_resource(_request(TagResourceInputDict))
+    client.untag_resource(resource_arn=_, tag_keys=_)
+    client.untag_resource(**_request(UntagResourceInputDict))
+    client.untag_resource(_request(UntagResourceInput))
+    client.untag_resource(_request(UntagResourceInputDict))
+    client.update_agent(
+        agent_id=_, agent_name=_, foundation_model=_, agent_resource_role_arn=_
+    )
+    client.update_agent(**_request(UpdateAgentInputDict))
+    client.update_agent(_request(UpdateAgentInput))
+    client.update_agent(_request(UpdateAgentInputDict))
+    client.update_agent_action_group(
+        agent_id=_, agent_version=_, action_group_id=_, action_group_name=_
+    )
+    client.update_agent_action_group(**_request(UpdateAgentActionGroupInputDict))
+    client.update_agent_action_group(_request(UpdateAgentActionGroupInput))
+    client.update_agent_action_group(_request(UpdateAgentActionGroupInputDict))
+    client.update_agent_alias(agent_id=_, agent_alias_id=_, agent_alias_name=_)
+    client.update_agent_alias(**_request(UpdateAgentAliasInputDict))
+    client.update_agent_alias(_request(UpdateAgentAliasInput))
+    client.update_agent_alias(_request(UpdateAgentAliasInputDict))
+    client.update_agent_collaborator(
+        agent_id=_,
+        agent_version=_,
+        collaborator_id=_,
+        agent_descriptor=_,
+        collaborator_name=_,
+        collaboration_instruction=_,
+    )
+    client.update_agent_collaborator(**_request(UpdateAgentCollaboratorInputDict))
+    client.update_agent_collaborator(_request(UpdateAgentCollaboratorInput))
+    client.update_agent_collaborator(_request(UpdateAgentCollaboratorInputDict))
+    client.update_agent_knowledge_base(agent_id=_, agent_version=_, knowledge_base_id=_)
+    client.update_agent_knowledge_base(**_request(UpdateAgentKnowledgeBaseInputDict))
+    client.update_agent_knowledge_base(_request(UpdateAgentKnowledgeBaseInput))
+    client.update_agent_knowledge_base(_request(UpdateAgentKnowledgeBaseInputDict))
+    client.update_data_source(
+        knowledge_base_id=_, data_source_id=_, name=_, data_source_configuration=_
+    )
+    client.update_data_source(**_request(UpdateDataSourceInputDict))
+    client.update_data_source(_request(UpdateDataSourceInput))
+    client.update_data_source(_request(UpdateDataSourceInputDict))
+    client.update_flow(name=_, execution_role_arn=_, flow_identifier=_)
+    client.update_flow(**_request(UpdateFlowInputDict))
+    client.update_flow(_request(UpdateFlowInput))
+    client.update_flow(_request(UpdateFlowInputDict))
+    client.update_flow_alias(
+        name=_, routing_configuration=_, flow_identifier=_, alias_identifier=_
+    )
+    client.update_flow_alias(**_request(UpdateFlowAliasInputDict))
+    client.update_flow_alias(_request(UpdateFlowAliasInput))
+    client.update_flow_alias(_request(UpdateFlowAliasInputDict))
+    client.update_knowledge_base(
+        knowledge_base_id=_, name=_, role_arn=_, knowledge_base_configuration=_
+    )
+    client.update_knowledge_base(**_request(UpdateKnowledgeBaseInputDict))
+    client.update_knowledge_base(_request(UpdateKnowledgeBaseInput))
+    client.update_knowledge_base(_request(UpdateKnowledgeBaseInputDict))
+    client.update_prompt(name=_, prompt_identifier=_)
+    client.update_prompt(**_request(UpdatePromptInputDict))
+    client.update_prompt(_request(UpdatePromptInput))
+    client.update_prompt(_request(UpdatePromptInputDict))
+    client.update_retrieval_instruction(retrieval_instruction_id=_, instruction=_)
+    client.update_retrieval_instruction(**_request(UpdateRetrievalInstructionInputDict))
+    client.update_retrieval_instruction(_request(UpdateRetrievalInstructionInput))
+    client.update_retrieval_instruction(_request(UpdateRetrievalInstructionInputDict))
+    client.validate_flow_definition(definition=_)
+    client.validate_flow_definition(**_request(ValidateFlowDefinitionInputDict))
+    client.validate_flow_definition(_request(ValidateFlowDefinitionInput))
+    client.validate_flow_definition(_request(ValidateFlowDefinitionInputDict))

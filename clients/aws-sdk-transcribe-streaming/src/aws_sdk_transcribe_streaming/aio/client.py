@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import cast
+from typing import Unpack as _Unpack, cast, overload as _overload
 
 from smithy_aws_core.aio.identity.chain import AsyncIdentityChain
 from smithy_aws_core.config.types import ConfigSource
@@ -20,13 +20,9 @@ from ..models import (
     MedicalScribeInputStream,
     MedicalScribeResultStream,
     MedicalTranscriptResultStream,
-    StartCallAnalyticsStreamTranscriptionInput,
     StartCallAnalyticsStreamTranscriptionOutput,
-    StartMedicalScribeStreamInput,
     StartMedicalScribeStreamOutput,
-    StartMedicalStreamTranscriptionInput,
     StartMedicalStreamTranscriptionOutput,
-    StartStreamTranscriptionInput,
     StartStreamTranscriptionOutput,
     TranscriptResultStream,
     _CallAnalyticsTranscriptResultStreamDeserializer,
@@ -40,7 +36,7 @@ from .user_agent import aws_user_agent_plugin
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from ..models import GetMedicalScribeStreamInput, GetMedicalScribeStreamOutput
+    from ..models import GetMedicalScribeStreamOutput
 
 
 logger = logging.getLogger(__name__)
@@ -69,10 +65,25 @@ class AsyncTranscribeStreamingClient(AsyncClient[AsyncTranscribeStreamingConfig]
       AI. Refer to [here] for details.
     """
 
-    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
+    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
 
+    @_overload
     async def get_medical_scribe_stream(
-        self, input: GetMedicalScribeStreamInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetMedicalScribeStreamInput
+        | _models.GetMedicalScribeStreamInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetMedicalScribeStreamOutput: ...
+
+    @_overload
+    async def get_medical_scribe_stream(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetMedicalScribeStreamInputDict],
     ) -> GetMedicalScribeStreamOutput:
         """
         Provides details about the specified Amazon Web Services HealthScribe
@@ -82,8 +93,6 @@ class AsyncTranscribeStreamingClient(AsyncClient[AsyncTranscribeStreamingConfig]
         `PostStreamAnalyticsResult` field in the response.
 
         Args:
-            input:
-                An instance of `GetMedicalScribeStreamInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -93,12 +102,38 @@ class AsyncTranscribeStreamingClient(AsyncClient[AsyncTranscribeStreamingConfig]
         Returns:
             An instance of `GetMedicalScribeStreamOutput`.
         """
-        return await self._invoke(input, _models.GET_MEDICAL_SCRIBE_STREAM, [], plugins)
 
+    async def get_medical_scribe_stream(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetMedicalScribeStreamOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_MEDICAL_SCRIBE_STREAM, args, kwargs),
+            _models.GET_MEDICAL_SCRIBE_STREAM,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def start_call_analytics_stream_transcription(
         self,
-        input: StartCallAnalyticsStreamTranscriptionInput,
+        request: _models.StartCallAnalyticsStreamTranscriptionInput
+        | _models.StartCallAnalyticsStreamTranscriptionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> AsyncDuplexEventStream[
+        AudioStream,
+        CallAnalyticsTranscriptResultStream,
+        StartCallAnalyticsStreamTranscriptionOutput,
+    ]: ...
+
+    @_overload
+    async def start_call_analytics_stream_transcription(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartCallAnalyticsStreamTranscriptionInputDict],
     ) -> AsyncDuplexEventStream[
         AudioStream,
         CallAnalyticsTranscriptResultStream,
@@ -124,8 +159,6 @@ class AsyncTranscribeStreamingClient(AsyncClient[AsyncTranscribeStreamingConfig]
         audio](https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html).
 
         Args:
-            input:
-                An instance of `StartCallAnalyticsStreamTranscriptionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -135,8 +168,21 @@ class AsyncTranscribeStreamingClient(AsyncClient[AsyncTranscribeStreamingConfig]
         Returns:
             An `AsyncDuplexEventStream` for bidirectional streaming.
         """
+
+    async def start_call_analytics_stream_transcription(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AsyncDuplexEventStream[
+        AudioStream,
+        CallAnalyticsTranscriptResultStream,
+        StartCallAnalyticsStreamTranscriptionOutput,
+    ]:
         pipeline, call = await self._prepare_call(
-            input, _models.START_CALL_ANALYTICS_STREAM_TRANSCRIPTION, [], plugins
+            self._select_input(
+                _models.START_CALL_ANALYTICS_STREAM_TRANSCRIPTION, args, kwargs
+            ),
+            _models.START_CALL_ANALYTICS_STREAM_TRANSCRIPTION,
+            [],
+            plugins,
         )
         return await pipeline.duplex_stream(
             call,
@@ -145,8 +191,27 @@ class AsyncTranscribeStreamingClient(AsyncClient[AsyncTranscribeStreamingConfig]
             _CallAnalyticsTranscriptResultStreamDeserializer().deserialize,
         )
 
+    @_overload
     async def start_medical_scribe_stream(
-        self, input: StartMedicalScribeStreamInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StartMedicalScribeStreamInput
+        | _models.StartMedicalScribeStreamInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AsyncDuplexEventStream[
+        MedicalScribeInputStream,
+        MedicalScribeResultStream,
+        StartMedicalScribeStreamOutput,
+    ]: ...
+
+    @_overload
+    async def start_medical_scribe_stream(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartMedicalScribeStreamInputDict],
     ) -> AsyncDuplexEventStream[
         MedicalScribeInputStream,
         MedicalScribeResultStream,
@@ -192,8 +257,6 @@ class AsyncTranscribeStreamingClient(AsyncClient[AsyncTranscribeStreamingConfig]
         HealthScribe](https://docs.aws.amazon.com/transcribe/latest/dg/health-scribe-streaming.html).
 
         Args:
-            input:
-                An instance of `StartMedicalScribeStreamInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -203,8 +266,19 @@ class AsyncTranscribeStreamingClient(AsyncClient[AsyncTranscribeStreamingConfig]
         Returns:
             An `AsyncDuplexEventStream` for bidirectional streaming.
         """
+
+    async def start_medical_scribe_stream(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AsyncDuplexEventStream[
+        MedicalScribeInputStream,
+        MedicalScribeResultStream,
+        StartMedicalScribeStreamOutput,
+    ]:
         pipeline, call = await self._prepare_call(
-            input, _models.START_MEDICAL_SCRIBE_STREAM, [], plugins
+            self._select_input(_models.START_MEDICAL_SCRIBE_STREAM, args, kwargs),
+            _models.START_MEDICAL_SCRIBE_STREAM,
+            [],
+            plugins,
         )
         return await pipeline.duplex_stream(
             call,
@@ -213,10 +287,27 @@ class AsyncTranscribeStreamingClient(AsyncClient[AsyncTranscribeStreamingConfig]
             _MedicalScribeResultStreamDeserializer().deserialize,
         )
 
+    @_overload
     async def start_medical_stream_transcription(
         self,
-        input: StartMedicalStreamTranscriptionInput,
+        request: _models.StartMedicalStreamTranscriptionInput
+        | _models.StartMedicalStreamTranscriptionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> AsyncDuplexEventStream[
+        AudioStream,
+        MedicalTranscriptResultStream,
+        StartMedicalStreamTranscriptionOutput,
+    ]: ...
+
+    @_overload
+    async def start_medical_stream_transcription(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartMedicalStreamTranscriptionInputDict],
     ) -> AsyncDuplexEventStream[
         AudioStream,
         MedicalTranscriptResultStream,
@@ -240,8 +331,6 @@ class AsyncTranscribeStreamingClient(AsyncClient[AsyncTranscribeStreamingConfig]
         audio](https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html).
 
         Args:
-            input:
-                An instance of `StartMedicalStreamTranscriptionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -251,8 +340,21 @@ class AsyncTranscribeStreamingClient(AsyncClient[AsyncTranscribeStreamingConfig]
         Returns:
             An `AsyncDuplexEventStream` for bidirectional streaming.
         """
+
+    async def start_medical_stream_transcription(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AsyncDuplexEventStream[
+        AudioStream,
+        MedicalTranscriptResultStream,
+        StartMedicalStreamTranscriptionOutput,
+    ]:
         pipeline, call = await self._prepare_call(
-            input, _models.START_MEDICAL_STREAM_TRANSCRIPTION, [], plugins
+            self._select_input(
+                _models.START_MEDICAL_STREAM_TRANSCRIPTION, args, kwargs
+            ),
+            _models.START_MEDICAL_STREAM_TRANSCRIPTION,
+            [],
+            plugins,
         )
         return await pipeline.duplex_stream(
             call,
@@ -261,8 +363,25 @@ class AsyncTranscribeStreamingClient(AsyncClient[AsyncTranscribeStreamingConfig]
             _MedicalTranscriptResultStreamDeserializer().deserialize,
         )
 
+    @_overload
     async def start_stream_transcription(
-        self, input: StartStreamTranscriptionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StartStreamTranscriptionInput
+        | _models.StartStreamTranscriptionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AsyncDuplexEventStream[
+        AudioStream, TranscriptResultStream, StartStreamTranscriptionOutput
+    ]: ...
+
+    @_overload
+    async def start_stream_transcription(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartStreamTranscriptionInputDict],
     ) -> AsyncDuplexEventStream[
         AudioStream, TranscriptResultStream, StartStreamTranscriptionOutput
     ]:
@@ -284,8 +403,6 @@ class AsyncTranscribeStreamingClient(AsyncClient[AsyncTranscribeStreamingConfig]
         audio](https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html).
 
         Args:
-            input:
-                An instance of `StartStreamTranscriptionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -295,8 +412,17 @@ class AsyncTranscribeStreamingClient(AsyncClient[AsyncTranscribeStreamingConfig]
         Returns:
             An `AsyncDuplexEventStream` for bidirectional streaming.
         """
+
+    async def start_stream_transcription(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AsyncDuplexEventStream[
+        AudioStream, TranscriptResultStream, StartStreamTranscriptionOutput
+    ]:
         pipeline, call = await self._prepare_call(
-            input, _models.START_STREAM_TRANSCRIPTION, [], plugins
+            self._select_input(_models.START_STREAM_TRANSCRIPTION, args, kwargs),
+            _models.START_STREAM_TRANSCRIPTION,
+            [],
+            plugins,
         )
         return await pipeline.duplex_stream(
             call,

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import cast
+from typing import Unpack as _Unpack, cast, overload as _overload
 
 from smithy_aws_core.config.types import ConfigSource
 from smithy_aws_core.identity.chain.resolver import IdentityChain
@@ -20,125 +20,65 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from .models import (
-        AddTagsInput,
         AddTagsOutput,
-        CancelQueryInput,
         CancelQueryOutput,
-        CreateChannelInput,
         CreateChannelOutput,
-        CreateDashboardInput,
         CreateDashboardOutput,
-        CreateEventDataStoreInput,
         CreateEventDataStoreOutput,
-        CreateTrailInput,
         CreateTrailOutput,
-        DeleteChannelInput,
         DeleteChannelOutput,
-        DeleteDashboardInput,
         DeleteDashboardOutput,
-        DeleteEventDataStoreInput,
         DeleteEventDataStoreOutput,
-        DeleteResourcePolicyInput,
         DeleteResourcePolicyOutput,
-        DeleteTrailInput,
         DeleteTrailOutput,
-        DeregisterOrganizationDelegatedAdminInput,
         DeregisterOrganizationDelegatedAdminOutput,
-        DescribeQueryInput,
         DescribeQueryOutput,
-        DescribeTrailsInput,
         DescribeTrailsOutput,
-        DisableFederationInput,
         DisableFederationOutput,
-        EnableFederationInput,
         EnableFederationOutput,
-        GenerateQueryInput,
         GenerateQueryOutput,
-        GetChannelInput,
         GetChannelOutput,
-        GetDashboardInput,
         GetDashboardOutput,
-        GetEventConfigurationInput,
         GetEventConfigurationOutput,
-        GetEventDataStoreInput,
         GetEventDataStoreOutput,
-        GetEventSelectorsInput,
         GetEventSelectorsOutput,
-        GetImportInput,
         GetImportOutput,
-        GetInsightSelectorsInput,
         GetInsightSelectorsOutput,
-        GetQueryResultsInput,
         GetQueryResultsOutput,
-        GetResourcePolicyInput,
         GetResourcePolicyOutput,
-        GetTrailInput,
         GetTrailOutput,
-        GetTrailStatusInput,
         GetTrailStatusOutput,
-        ListChannelsInput,
         ListChannelsOutput,
-        ListDashboardsInput,
         ListDashboardsOutput,
-        ListEventDataStoresInput,
         ListEventDataStoresOutput,
-        ListImportFailuresInput,
         ListImportFailuresOutput,
-        ListImportsInput,
         ListImportsOutput,
-        ListInsightsDataInput,
         ListInsightsDataOutput,
-        ListInsightsMetricDataInput,
         ListInsightsMetricDataOutput,
-        ListPublicKeysInput,
         ListPublicKeysOutput,
-        ListQueriesInput,
         ListQueriesOutput,
-        ListTagsInput,
         ListTagsOutput,
-        ListTrailsInput,
         ListTrailsOutput,
-        LookupEventsInput,
         LookupEventsOutput,
-        PutEventConfigurationInput,
         PutEventConfigurationOutput,
-        PutEventSelectorsInput,
         PutEventSelectorsOutput,
-        PutInsightSelectorsInput,
         PutInsightSelectorsOutput,
-        PutResourcePolicyInput,
         PutResourcePolicyOutput,
-        RegisterOrganizationDelegatedAdminInput,
         RegisterOrganizationDelegatedAdminOutput,
-        RemoveTagsInput,
         RemoveTagsOutput,
-        RestoreEventDataStoreInput,
         RestoreEventDataStoreOutput,
-        SearchSampleQueriesInput,
         SearchSampleQueriesOutput,
-        StartDashboardRefreshInput,
         StartDashboardRefreshOutput,
-        StartEventDataStoreIngestionInput,
         StartEventDataStoreIngestionOutput,
-        StartImportInput,
         StartImportOutput,
-        StartLoggingInput,
         StartLoggingOutput,
-        StartQueryInput,
         StartQueryOutput,
-        StopEventDataStoreIngestionInput,
         StopEventDataStoreIngestionOutput,
-        StopImportInput,
         StopImportOutput,
-        StopLoggingInput,
         StopLoggingOutput,
-        UpdateChannelInput,
         UpdateChannelOutput,
-        UpdateDashboardInput,
         UpdateDashboardOutput,
-        UpdateEventDataStoreInput,
         UpdateEventDataStoreOutput,
-        UpdateTrailInput,
         UpdateTrailOutput,
     )
 
@@ -175,10 +115,24 @@ class CloudTrailClient(Client[CloudTrailConfig]):
     Services API call listed in the log files.
     """
 
-    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
+    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
 
+    @_overload
     def add_tags(
-        self, input: AddTagsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.AddTagsInput | _models.AddTagsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AddTagsOutput: ...
+
+    @_overload
+    def add_tags(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AddTagsInputDict],
     ) -> AddTagsOutput:
         """
         Adds one or more tags to a trail, event data store, dashboard, or
@@ -192,8 +146,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         its home Region).
 
         Args:
-            input:
-                An instance of `AddTagsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -203,10 +155,33 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `AddTagsOutput`.
         """
-        return self._invoke(input, _models.ADD_TAGS, [], plugins)
 
+    def add_tags(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AddTagsOutput:
+        return self._invoke(
+            self._select_input(_models.ADD_TAGS, args, kwargs),
+            _models.ADD_TAGS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def cancel_query(
-        self, input: CancelQueryInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CancelQueryInput | _models.CancelQueryInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CancelQueryOutput: ...
+
+    @_overload
+    def cancel_query(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CancelQueryInputDict],
     ) -> CancelQueryOutput:
         """
         Warning:
@@ -223,8 +198,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         might show as `CANCELLED` even if the operation is not yet finished.
 
         Args:
-            input:
-                An instance of `CancelQueryInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -234,10 +207,33 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `CancelQueryOutput`.
         """
-        return self._invoke(input, _models.CANCEL_QUERY, [], plugins)
 
+    def cancel_query(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CancelQueryOutput:
+        return self._invoke(
+            self._select_input(_models.CANCEL_QUERY, args, kwargs),
+            _models.CANCEL_QUERY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_channel(
-        self, input: CreateChannelInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateChannelInput | _models.CreateChannelInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateChannelOutput: ...
+
+    @_overload
+    def create_channel(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateChannelInputDict],
     ) -> CreateChannelOutput:
         """
         Warning:
@@ -252,8 +248,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         data store can log events from the partner or source that you specify.
 
         Args:
-            input:
-                An instance of `CreateChannelInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -263,10 +257,33 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `CreateChannelOutput`.
         """
-        return self._invoke(input, _models.CREATE_CHANNEL, [], plugins)
 
+    def create_channel(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateChannelOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_CHANNEL, args, kwargs),
+            _models.CREATE_CHANNEL,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_dashboard(
-        self, input: CreateDashboardInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateDashboardInput | _models.CreateDashboardInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateDashboardOutput: ...
+
+    @_overload
+    def create_dashboard(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateDashboardInputDict],
     ) -> CreateDashboardOutput:
         """
         Warning:
@@ -311,8 +328,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         in the *CloudTrail User Guide*.
 
         Args:
-            input:
-                An instance of `CreateDashboardInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -322,10 +337,34 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `CreateDashboardOutput`.
         """
-        return self._invoke(input, _models.CREATE_DASHBOARD, [], plugins)
 
+    def create_dashboard(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateDashboardOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_DASHBOARD, args, kwargs),
+            _models.CREATE_DASHBOARD,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_event_data_store(
-        self, input: CreateEventDataStoreInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateEventDataStoreInput
+        | _models.CreateEventDataStoreInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateEventDataStoreOutput: ...
+
+    @_overload
+    def create_event_data_store(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateEventDataStoreInputDict],
     ) -> CreateEventDataStoreOutput:
         """
         Warning:
@@ -338,8 +377,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Creates a new event data store.
 
         Args:
-            input:
-                An instance of `CreateEventDataStoreInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -349,18 +386,39 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `CreateEventDataStoreOutput`.
         """
-        return self._invoke(input, _models.CREATE_EVENT_DATA_STORE, [], plugins)
 
+    def create_event_data_store(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateEventDataStoreOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_EVENT_DATA_STORE, args, kwargs),
+            _models.CREATE_EVENT_DATA_STORE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_trail(
-        self, input: CreateTrailInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateTrailInput | _models.CreateTrailInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateTrailOutput: ...
+
+    @_overload
+    def create_trail(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateTrailInputDict],
     ) -> CreateTrailOutput:
         """
         Creates a trail that specifies the settings for delivery of log data to
         an Amazon S3 bucket.
 
         Args:
-            input:
-                An instance of `CreateTrailInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -370,10 +428,33 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `CreateTrailOutput`.
         """
-        return self._invoke(input, _models.CREATE_TRAIL, [], plugins)
 
+    def create_trail(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateTrailOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_TRAIL, args, kwargs),
+            _models.CREATE_TRAIL,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_channel(
-        self, input: DeleteChannelInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteChannelInput | _models.DeleteChannelInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteChannelOutput: ...
+
+    @_overload
+    def delete_channel(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteChannelInputDict],
     ) -> DeleteChannelOutput:
         """
         Warning:
@@ -386,8 +467,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Deletes a channel.
 
         Args:
-            input:
-                An instance of `DeleteChannelInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -397,10 +476,33 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `DeleteChannelOutput`.
         """
-        return self._invoke(input, _models.DELETE_CHANNEL, [], plugins)
 
+    def delete_channel(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteChannelOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_CHANNEL, args, kwargs),
+            _models.DELETE_CHANNEL,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_dashboard(
-        self, input: DeleteDashboardInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteDashboardInput | _models.DeleteDashboardInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteDashboardOutput: ...
+
+    @_overload
+    def delete_dashboard(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteDashboardInputDict],
     ) -> DeleteDashboardOutput:
         """
         Warning:
@@ -414,8 +516,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         termination protection enabled.
 
         Args:
-            input:
-                An instance of `DeleteDashboardInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -425,10 +525,34 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `DeleteDashboardOutput`.
         """
-        return self._invoke(input, _models.DELETE_DASHBOARD, [], plugins)
 
+    def delete_dashboard(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteDashboardOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_DASHBOARD, args, kwargs),
+            _models.DELETE_DASHBOARD,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_event_data_store(
-        self, input: DeleteEventDataStoreInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteEventDataStoreInput
+        | _models.DeleteEventDataStoreInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteEventDataStoreOutput: ...
+
+    @_overload
+    def delete_event_data_store(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteEventDataStoreInputDict],
     ) -> DeleteEventDataStoreOutput:
         """
         Warning:
@@ -453,8 +577,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         data store in the `PENDING_DELETION` state does not incur costs.
 
         Args:
-            input:
-                An instance of `DeleteEventDataStoreInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -464,18 +586,40 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `DeleteEventDataStoreOutput`.
         """
-        return self._invoke(input, _models.DELETE_EVENT_DATA_STORE, [], plugins)
 
+    def delete_event_data_store(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteEventDataStoreOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_EVENT_DATA_STORE, args, kwargs),
+            _models.DELETE_EVENT_DATA_STORE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_resource_policy(
-        self, input: DeleteResourcePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteResourcePolicyInput
+        | _models.DeleteResourcePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteResourcePolicyOutput: ...
+
+    @_overload
+    def delete_resource_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteResourcePolicyInputDict],
     ) -> DeleteResourcePolicyOutput:
         """
         Deletes the resource-based policy attached to the CloudTrail event data
         store, dashboard, or channel.
 
         Args:
-            input:
-                An instance of `DeleteResourcePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -485,10 +629,33 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `DeleteResourcePolicyOutput`.
         """
-        return self._invoke(input, _models.DELETE_RESOURCE_POLICY, [], plugins)
 
+    def delete_resource_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteResourcePolicyOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_RESOURCE_POLICY, args, kwargs),
+            _models.DELETE_RESOURCE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_trail(
-        self, input: DeleteTrailInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteTrailInput | _models.DeleteTrailInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteTrailOutput: ...
+
+    @_overload
+    def delete_trail(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteTrailInputDict],
     ) -> DeleteTrailOutput:
         """
         Deletes a trail. This operation must be called from the Region in which
@@ -512,8 +679,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
             <https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-account-closure.html>.
 
         Args:
-            input:
-                An instance of `DeleteTrailInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -523,20 +688,40 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `DeleteTrailOutput`.
         """
-        return self._invoke(input, _models.DELETE_TRAIL, [], plugins)
 
+    def delete_trail(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteTrailOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_TRAIL, args, kwargs),
+            _models.DELETE_TRAIL,
+            [],
+            plugins,
+        )
+
+    @_overload
     def deregister_organization_delegated_admin(
         self,
-        input: DeregisterOrganizationDelegatedAdminInput,
+        request: _models.DeregisterOrganizationDelegatedAdminInput
+        | _models.DeregisterOrganizationDelegatedAdminInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeregisterOrganizationDelegatedAdminOutput: ...
+
+    @_overload
+    def deregister_organization_delegated_admin(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeregisterOrganizationDelegatedAdminInputDict],
     ) -> DeregisterOrganizationDelegatedAdminOutput:
         """
         Removes CloudTrail delegated administrator permissions from a member
         account in an organization.
 
         Args:
-            input:
-                An instance of `DeregisterOrganizationDelegatedAdminInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -546,14 +731,35 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `DeregisterOrganizationDelegatedAdminOutput`.
         """
+
+    def deregister_organization_delegated_admin(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeregisterOrganizationDelegatedAdminOutput:
         return self._invoke(
-            input, _models.DEREGISTER_ORGANIZATION_DELEGATED_ADMIN, [], plugins
+            self._select_input(
+                _models.DEREGISTER_ORGANIZATION_DELEGATED_ADMIN, args, kwargs
+            ),
+            _models.DEREGISTER_ORGANIZATION_DELEGATED_ADMIN,
+            [],
+            plugins,
         )
 
+    @_overload
     def describe_query(
         self,
-        input: DescribeQueryInput | None = None,
+        request: _models.DescribeQueryInput | _models.DescribeQueryInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeQueryOutput: ...
+
+    @_overload
+    def describe_query(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeQueryInputDict],
     ) -> DescribeQueryOutput:
         """
         Warning:
@@ -574,8 +780,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         the query results of a dashboard query for the specified `RefreshId`.
 
         Args:
-            input:
-                An instance of `DescribeQueryInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -585,20 +789,39 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `DescribeQueryOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_QUERY, [], plugins)
 
+    def describe_query(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeQueryOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_QUERY, args, kwargs),
+            _models.DESCRIBE_QUERY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_trails(
         self,
-        input: DescribeTrailsInput | None = None,
+        request: _models.DescribeTrailsInput | _models.DescribeTrailsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeTrailsOutput: ...
+
+    @_overload
+    def describe_trails(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeTrailsInputDict],
     ) -> DescribeTrailsOutput:
         """
         Retrieves settings for one or more trails associated with the current
         Region for your account.
 
         Args:
-            input:
-                An instance of `DescribeTrailsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -608,10 +831,33 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `DescribeTrailsOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_TRAILS, [], plugins)
 
+    def describe_trails(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeTrailsOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_TRAILS, args, kwargs),
+            _models.DESCRIBE_TRAILS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def disable_federation(
-        self, input: DisableFederationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DisableFederationInput | _models.DisableFederationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DisableFederationOutput: ...
+
+    @_overload
+    def disable_federation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DisableFederationInputDict],
     ) -> DisableFederationOutput:
         """
         Warning:
@@ -630,8 +876,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         can continue to run queries in CloudTrail Lake.
 
         Args:
-            input:
-                An instance of `DisableFederationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -641,10 +885,33 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `DisableFederationOutput`.
         """
-        return self._invoke(input, _models.DISABLE_FEDERATION, [], plugins)
 
+    def disable_federation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DisableFederationOutput:
+        return self._invoke(
+            self._select_input(_models.DISABLE_FEDERATION, args, kwargs),
+            _models.DISABLE_FEDERATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def enable_federation(
-        self, input: EnableFederationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.EnableFederationInput | _models.EnableFederationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> EnableFederationOutput: ...
+
+    @_overload
+    def enable_federation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.EnableFederationInputDict],
     ) -> EnableFederationOutput:
         """
         Warning:
@@ -677,8 +944,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         store](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation.html).
 
         Args:
-            input:
-                An instance of `EnableFederationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -688,10 +953,33 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `EnableFederationOutput`.
         """
-        return self._invoke(input, _models.ENABLE_FEDERATION, [], plugins)
 
+    def enable_federation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> EnableFederationOutput:
+        return self._invoke(
+            self._select_input(_models.ENABLE_FEDERATION, args, kwargs),
+            _models.ENABLE_FEDERATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def generate_query(
-        self, input: GenerateQueryInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GenerateQueryInput | _models.GenerateQueryInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GenerateQueryOutput: ...
+
+    @_overload
+    def generate_query(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GenerateQueryInputDict],
     ) -> GenerateQueryOutput:
         """
         Warning:
@@ -724,8 +1012,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
             recommend double-checking the LLM response.
 
         Args:
-            input:
-                An instance of `GenerateQueryInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -735,10 +1021,33 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `GenerateQueryOutput`.
         """
-        return self._invoke(input, _models.GENERATE_QUERY, [], plugins)
 
+    def generate_query(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GenerateQueryOutput:
+        return self._invoke(
+            self._select_input(_models.GENERATE_QUERY, args, kwargs),
+            _models.GENERATE_QUERY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_channel(
-        self, input: GetChannelInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetChannelInput | _models.GetChannelInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetChannelOutput: ...
+
+    @_overload
+    def get_channel(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetChannelInputDict],
     ) -> GetChannelOutput:
         """
         Warning:
@@ -751,8 +1060,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns information about a specific channel.
 
         Args:
-            input:
-                An instance of `GetChannelInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -762,10 +1069,33 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `GetChannelOutput`.
         """
-        return self._invoke(input, _models.GET_CHANNEL, [], plugins)
 
+    def get_channel(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetChannelOutput:
+        return self._invoke(
+            self._select_input(_models.GET_CHANNEL, args, kwargs),
+            _models.GET_CHANNEL,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_dashboard(
-        self, input: GetDashboardInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetDashboardInput | _models.GetDashboardInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetDashboardOutput: ...
+
+    @_overload
+    def get_dashboard(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetDashboardInputDict],
     ) -> GetDashboardOutput:
         """
         Warning:
@@ -778,8 +1108,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns the specified dashboard.
 
         Args:
-            input:
-                An instance of `GetDashboardInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -789,12 +1117,34 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `GetDashboardOutput`.
         """
-        return self._invoke(input, _models.GET_DASHBOARD, [], plugins)
 
+    def get_dashboard(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetDashboardOutput:
+        return self._invoke(
+            self._select_input(_models.GET_DASHBOARD, args, kwargs),
+            _models.GET_DASHBOARD,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_event_configuration(
         self,
-        input: GetEventConfigurationInput | None = None,
+        request: _models.GetEventConfigurationInput
+        | _models.GetEventConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetEventConfigurationOutput: ...
+
+    @_overload
+    def get_event_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetEventConfigurationInputDict],
     ) -> GetEventConfigurationOutput:
         """
         Retrieves the current event configuration settings for the specified
@@ -803,8 +1153,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         store, and any aggregation settings configured for the trail.
 
         Args:
-            input:
-                An instance of `GetEventConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -814,10 +1162,33 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `GetEventConfigurationOutput`.
         """
-        return self._invoke(input, _models.GET_EVENT_CONFIGURATION, [], plugins)
 
+    def get_event_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetEventConfigurationOutput:
+        return self._invoke(
+            self._select_input(_models.GET_EVENT_CONFIGURATION, args, kwargs),
+            _models.GET_EVENT_CONFIGURATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_event_data_store(
-        self, input: GetEventDataStoreInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetEventDataStoreInput | _models.GetEventDataStoreInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetEventDataStoreOutput: ...
+
+    @_overload
+    def get_event_data_store(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetEventDataStoreInputDict],
     ) -> GetEventDataStoreOutput:
         """
         Warning:
@@ -831,8 +1202,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         or the ID portion of the ARN.
 
         Args:
-            input:
-                An instance of `GetEventDataStoreInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -842,10 +1211,33 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `GetEventDataStoreOutput`.
         """
-        return self._invoke(input, _models.GET_EVENT_DATA_STORE, [], plugins)
 
+    def get_event_data_store(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetEventDataStoreOutput:
+        return self._invoke(
+            self._select_input(_models.GET_EVENT_DATA_STORE, args, kwargs),
+            _models.GET_EVENT_DATA_STORE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_event_selectors(
-        self, input: GetEventSelectorsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetEventSelectorsInput | _models.GetEventSelectorsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetEventSelectorsOutput: ...
+
+    @_overload
+    def get_event_selectors(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetEventSelectorsInputDict],
     ) -> GetEventSelectorsOutput:
         """
         Describes the settings for the event selectors that you configured for
@@ -878,8 +1270,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
           events](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-network-events-with-cloudtrail.html)
 
         Args:
-            input:
-                An instance of `GetEventSelectorsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -889,10 +1279,33 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `GetEventSelectorsOutput`.
         """
-        return self._invoke(input, _models.GET_EVENT_SELECTORS, [], plugins)
 
+    def get_event_selectors(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetEventSelectorsOutput:
+        return self._invoke(
+            self._select_input(_models.GET_EVENT_SELECTORS, args, kwargs),
+            _models.GET_EVENT_SELECTORS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_import(
-        self, input: GetImportInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetImportInput | _models.GetImportInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetImportOutput: ...
+
+    @_overload
+    def get_import(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetImportInputDict],
     ) -> GetImportOutput:
         """
         Warning:
@@ -905,8 +1318,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns information about a specific import.
 
         Args:
-            input:
-                An instance of `GetImportInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -916,12 +1327,34 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `GetImportOutput`.
         """
-        return self._invoke(input, _models.GET_IMPORT, [], plugins)
 
+    def get_import(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetImportOutput:
+        return self._invoke(
+            self._select_input(_models.GET_IMPORT, args, kwargs),
+            _models.GET_IMPORT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_insight_selectors(
         self,
-        input: GetInsightSelectorsInput | None = None,
+        request: _models.GetInsightSelectorsInput
+        | _models.GetInsightSelectorsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetInsightSelectorsOutput: ...
+
+    @_overload
+    def get_insight_selectors(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetInsightSelectorsInputDict],
     ) -> GetInsightSelectorsOutput:
         """
         Describes the settings for the Insights event selectors that you
@@ -942,8 +1375,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         in the *CloudTrail User Guide*.
 
         Args:
-            input:
-                An instance of `GetInsightSelectorsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -953,10 +1384,33 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `GetInsightSelectorsOutput`.
         """
-        return self._invoke(input, _models.GET_INSIGHT_SELECTORS, [], plugins)
 
+    def get_insight_selectors(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetInsightSelectorsOutput:
+        return self._invoke(
+            self._select_input(_models.GET_INSIGHT_SELECTORS, args, kwargs),
+            _models.GET_INSIGHT_SELECTORS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_query_results(
-        self, input: GetQueryResultsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetQueryResultsInput | _models.GetQueryResultsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetQueryResultsOutput: ...
+
+    @_overload
+    def get_query_results(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetQueryResultsInputDict],
     ) -> GetQueryResultsOutput:
         """
         Warning:
@@ -970,8 +1424,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         returned by the `StartQuery` operation.
 
         Args:
-            input:
-                An instance of `GetQueryResultsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -981,18 +1433,39 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `GetQueryResultsOutput`.
         """
-        return self._invoke(input, _models.GET_QUERY_RESULTS, [], plugins)
 
+    def get_query_results(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetQueryResultsOutput:
+        return self._invoke(
+            self._select_input(_models.GET_QUERY_RESULTS, args, kwargs),
+            _models.GET_QUERY_RESULTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_resource_policy(
-        self, input: GetResourcePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetResourcePolicyInput | _models.GetResourcePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetResourcePolicyOutput: ...
+
+    @_overload
+    def get_resource_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetResourcePolicyInputDict],
     ) -> GetResourcePolicyOutput:
         """
         Retrieves the JSON text of the resource-based policy document attached
         to the CloudTrail event data store, dashboard, or channel.
 
         Args:
-            input:
-                An instance of `GetResourcePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1002,17 +1475,38 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `GetResourcePolicyOutput`.
         """
-        return self._invoke(input, _models.GET_RESOURCE_POLICY, [], plugins)
 
+    def get_resource_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetResourcePolicyOutput:
+        return self._invoke(
+            self._select_input(_models.GET_RESOURCE_POLICY, args, kwargs),
+            _models.GET_RESOURCE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_trail(
-        self, input: GetTrailInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetTrailInput | _models.GetTrailInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetTrailOutput: ...
+
+    @_overload
+    def get_trail(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetTrailInputDict],
     ) -> GetTrailOutput:
         """
         Returns settings information for a specified trail.
 
         Args:
-            input:
-                An instance of `GetTrailInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1022,10 +1516,33 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `GetTrailOutput`.
         """
-        return self._invoke(input, _models.GET_TRAIL, [], plugins)
 
+    def get_trail(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetTrailOutput:
+        return self._invoke(
+            self._select_input(_models.GET_TRAIL, args, kwargs),
+            _models.GET_TRAIL,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_trail_status(
-        self, input: GetTrailStatusInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetTrailStatusInput | _models.GetTrailStatusInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetTrailStatusOutput: ...
+
+    @_overload
+    def get_trail_status(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetTrailStatusInputDict],
     ) -> GetTrailStatusOutput:
         """
         Returns a JSON-formatted list of information about the specified trail.
@@ -1035,8 +1552,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         all Regions, you must call the operation on each Region.
 
         Args:
-            input:
-                An instance of `GetTrailStatusInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1046,12 +1561,33 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `GetTrailStatusOutput`.
         """
-        return self._invoke(input, _models.GET_TRAIL_STATUS, [], plugins)
 
+    def get_trail_status(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetTrailStatusOutput:
+        return self._invoke(
+            self._select_input(_models.GET_TRAIL_STATUS, args, kwargs),
+            _models.GET_TRAIL_STATUS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_channels(
         self,
-        input: ListChannelsInput | None = None,
+        request: _models.ListChannelsInput | _models.ListChannelsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListChannelsOutput: ...
+
+    @_overload
+    def list_channels(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListChannelsInputDict],
     ) -> ListChannelsOutput:
         """
         Warning:
@@ -1064,8 +1600,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Lists the channels in the current account, and their source names.
 
         Args:
-            input:
-                An instance of `ListChannelsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1075,12 +1609,33 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `ListChannelsOutput`.
         """
-        return self._invoke(input, _models.LIST_CHANNELS, [], plugins)
 
+    def list_channels(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListChannelsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_CHANNELS, args, kwargs),
+            _models.LIST_CHANNELS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_dashboards(
         self,
-        input: ListDashboardsInput | None = None,
+        request: _models.ListDashboardsInput | _models.ListDashboardsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListDashboardsOutput: ...
+
+    @_overload
+    def list_dashboards(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListDashboardsInputDict],
     ) -> ListDashboardsOutput:
         """
         Warning:
@@ -1094,8 +1649,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Region.
 
         Args:
-            input:
-                An instance of `ListDashboardsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1105,12 +1658,34 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `ListDashboardsOutput`.
         """
-        return self._invoke(input, _models.LIST_DASHBOARDS, [], plugins)
 
+    def list_dashboards(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListDashboardsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_DASHBOARDS, args, kwargs),
+            _models.LIST_DASHBOARDS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_event_data_stores(
         self,
-        input: ListEventDataStoresInput | None = None,
+        request: _models.ListEventDataStoresInput
+        | _models.ListEventDataStoresInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListEventDataStoresOutput: ...
+
+    @_overload
+    def list_event_data_stores(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListEventDataStoresInputDict],
     ) -> ListEventDataStoresOutput:
         """
         Warning:
@@ -1124,8 +1699,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         current Region.
 
         Args:
-            input:
-                An instance of `ListEventDataStoresInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1135,10 +1708,33 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `ListEventDataStoresOutput`.
         """
-        return self._invoke(input, _models.LIST_EVENT_DATA_STORES, [], plugins)
 
+    def list_event_data_stores(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListEventDataStoresOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_EVENT_DATA_STORES, args, kwargs),
+            _models.LIST_EVENT_DATA_STORES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_import_failures(
-        self, input: ListImportFailuresInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListImportFailuresInput | _models.ListImportFailuresInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListImportFailuresOutput: ...
+
+    @_overload
+    def list_import_failures(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListImportFailuresInputDict],
     ) -> ListImportFailuresOutput:
         """
         Warning:
@@ -1151,8 +1747,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns a list of failures for the specified import.
 
         Args:
-            input:
-                An instance of `ListImportFailuresInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1162,10 +1756,33 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `ListImportFailuresOutput`.
         """
-        return self._invoke(input, _models.LIST_IMPORT_FAILURES, [], plugins)
 
+    def list_import_failures(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListImportFailuresOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_IMPORT_FAILURES, args, kwargs),
+            _models.LIST_IMPORT_FAILURES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_imports(
-        self, input: ListImportsInput | None = None, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListImportsInput | _models.ListImportsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListImportsOutput: ...
+
+    @_overload
+    def list_imports(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListImportsInputDict],
     ) -> ListImportsOutput:
         """
         Warning:
@@ -1179,8 +1796,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         `ImportStatus` or `Destination`.
 
         Args:
-            input:
-                An instance of `ListImportsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1190,10 +1805,33 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `ListImportsOutput`.
         """
-        return self._invoke(input, _models.LIST_IMPORTS, [], plugins)
 
+    def list_imports(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListImportsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_IMPORTS, args, kwargs),
+            _models.LIST_IMPORTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_insights_data(
-        self, input: ListInsightsDataInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListInsightsDataInput | _models.ListInsightsDataInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListInsightsDataOutput: ...
+
+    @_overload
+    def list_insights_data(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListInsightsDataInputDict],
     ) -> ListInsightsDataOutput:
         """
         Returns Insights events generated on a trail that logs data events. You
@@ -1224,8 +1862,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
             on organization trails.
 
         Args:
-            input:
-                An instance of `ListInsightsDataInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1235,10 +1871,34 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `ListInsightsDataOutput`.
         """
-        return self._invoke(input, _models.LIST_INSIGHTS_DATA, [], plugins)
 
+    def list_insights_data(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListInsightsDataOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_INSIGHTS_DATA, args, kwargs),
+            _models.LIST_INSIGHTS_DATA,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_insights_metric_data(
-        self, input: ListInsightsMetricDataInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListInsightsMetricDataInput
+        | _models.ListInsightsMetricDataInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListInsightsMetricDataOutput: ...
+
+    @_overload
+    def list_insights_metric_data(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListInsightsMetricDataInputDict],
     ) -> ListInsightsMetricDataOutput:
         """
         Returns Insights metrics data for trails that have enabled Insights. The
@@ -1283,8 +1943,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
             this API on organization trails.
 
         Args:
-            input:
-                An instance of `ListInsightsMetricDataInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1294,12 +1952,33 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `ListInsightsMetricDataOutput`.
         """
-        return self._invoke(input, _models.LIST_INSIGHTS_METRIC_DATA, [], plugins)
 
+    def list_insights_metric_data(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListInsightsMetricDataOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_INSIGHTS_METRIC_DATA, args, kwargs),
+            _models.LIST_INSIGHTS_METRIC_DATA,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_public_keys(
         self,
-        input: ListPublicKeysInput | None = None,
+        request: _models.ListPublicKeysInput | _models.ListPublicKeysInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListPublicKeysOutput: ...
+
+    @_overload
+    def list_public_keys(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListPublicKeysInputDict],
     ) -> ListPublicKeysOutput:
         """
         Returns all public keys whose private keys were used to sign the digest
@@ -1314,8 +1993,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
             Region for its corresponding public key.
 
         Args:
-            input:
-                An instance of `ListPublicKeysInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1325,10 +2002,33 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `ListPublicKeysOutput`.
         """
-        return self._invoke(input, _models.LIST_PUBLIC_KEYS, [], plugins)
 
+    def list_public_keys(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListPublicKeysOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_PUBLIC_KEYS, args, kwargs),
+            _models.LIST_PUBLIC_KEYS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_queries(
-        self, input: ListQueriesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListQueriesInput | _models.ListQueriesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListQueriesOutput: ...
+
+    @_overload
+    def list_queries(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListQueriesInputDict],
     ) -> ListQueriesOutput:
         """
         Warning:
@@ -1346,8 +2046,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         `RUNNING`, `FINISHED`, `FAILED`, `TIMED_OUT`, or `CANCELLED`.
 
         Args:
-            input:
-                An instance of `ListQueriesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1357,18 +2055,39 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `ListQueriesOutput`.
         """
-        return self._invoke(input, _models.LIST_QUERIES, [], plugins)
 
+    def list_queries(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListQueriesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_QUERIES, args, kwargs),
+            _models.LIST_QUERIES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_tags(
-        self, input: ListTagsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListTagsInput | _models.ListTagsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListTagsOutput: ...
+
+    @_overload
+    def list_tags(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListTagsInputDict],
     ) -> ListTagsOutput:
         """
         Lists the tags for the specified trails, event data stores, dashboards,
         or channels in the current Region.
 
         Args:
-            input:
-                An instance of `ListTagsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1378,17 +2097,38 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `ListTagsOutput`.
         """
-        return self._invoke(input, _models.LIST_TAGS, [], plugins)
 
+    def list_tags(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListTagsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_TAGS, args, kwargs),
+            _models.LIST_TAGS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_trails(
-        self, input: ListTrailsInput | None = None, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListTrailsInput | _models.ListTrailsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListTrailsOutput: ...
+
+    @_overload
+    def list_trails(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListTrailsInputDict],
     ) -> ListTrailsOutput:
         """
         Lists trails that are in the current account.
 
         Args:
-            input:
-                An instance of `ListTrailsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1398,12 +2138,33 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `ListTrailsOutput`.
         """
-        return self._invoke(input, _models.LIST_TRAILS, [], plugins)
 
+    def list_trails(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListTrailsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_TRAILS, args, kwargs),
+            _models.LIST_TRAILS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def lookup_events(
         self,
-        input: LookupEventsInput | None = None,
+        request: _models.LookupEventsInput | _models.LookupEventsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> LookupEventsOutput: ...
+
+    @_overload
+    def lookup_events(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.LookupEventsInputDict],
     ) -> LookupEventsOutput:
         """
         Looks up [management
@@ -1454,8 +2215,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
             per Region. If this limit is exceeded, a throttling error occurs.
 
         Args:
-            input:
-                An instance of `LookupEventsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1465,12 +2224,34 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `LookupEventsOutput`.
         """
-        return self._invoke(input, _models.LOOKUP_EVENTS, [], plugins)
 
+    def lookup_events(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> LookupEventsOutput:
+        return self._invoke(
+            self._select_input(_models.LOOKUP_EVENTS, args, kwargs),
+            _models.LOOKUP_EVENTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_event_configuration(
         self,
-        input: PutEventConfigurationInput | None = None,
+        request: _models.PutEventConfigurationInput
+        | _models.PutEventConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> PutEventConfigurationOutput: ...
+
+    @_overload
+    def put_event_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutEventConfigurationInputDict],
     ) -> PutEventConfigurationOutput:
         """
         Updates the event configuration settings for the specified event data
@@ -1479,8 +2260,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         configuring aggregation settings for the trail.
 
         Args:
-            input:
-                An instance of `PutEventConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1490,10 +2269,33 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `PutEventConfigurationOutput`.
         """
-        return self._invoke(input, _models.PUT_EVENT_CONFIGURATION, [], plugins)
 
+    def put_event_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutEventConfigurationOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_EVENT_CONFIGURATION, args, kwargs),
+            _models.PUT_EVENT_CONFIGURATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_event_selectors(
-        self, input: PutEventSelectorsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutEventSelectorsInput | _models.PutEventSelectorsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutEventSelectorsOutput: ...
+
+    @_overload
+    def put_event_selectors(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutEventSelectorsInputDict],
     ) -> PutEventSelectorsOutput:
         """
         Configures event selectors (also referred to as *basic event selectors*)
@@ -1566,8 +2368,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         in the *CloudTrail User Guide*.
 
         Args:
-            input:
-                An instance of `PutEventSelectorsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1577,10 +2377,34 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `PutEventSelectorsOutput`.
         """
-        return self._invoke(input, _models.PUT_EVENT_SELECTORS, [], plugins)
 
+    def put_event_selectors(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutEventSelectorsOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_EVENT_SELECTORS, args, kwargs),
+            _models.PUT_EVENT_SELECTORS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_insight_selectors(
-        self, input: PutInsightSelectorsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutInsightSelectorsInput
+        | _models.PutInsightSelectorsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutInsightSelectorsOutput: ...
+
+    @_overload
+    def put_insight_selectors(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutInsightSelectorsInputDict],
     ) -> PutInsightSelectorsOutput:
         """
         Lets you enable Insights event logging on specific event categories by
@@ -1630,8 +2454,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         in the *CloudTrail User Guide*.
 
         Args:
-            input:
-                An instance of `PutInsightSelectorsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1641,10 +2463,33 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `PutInsightSelectorsOutput`.
         """
-        return self._invoke(input, _models.PUT_INSIGHT_SELECTORS, [], plugins)
 
+    def put_insight_selectors(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutInsightSelectorsOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_INSIGHT_SELECTORS, args, kwargs),
+            _models.PUT_INSIGHT_SELECTORS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_resource_policy(
-        self, input: PutResourcePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutResourcePolicyInput | _models.PutResourcePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutResourcePolicyOutput: ...
+
+    @_overload
+    def put_resource_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutResourcePolicyInputDict],
     ) -> PutResourcePolicyOutput:
         """
         Attaches a resource-based permission policy to a CloudTrail event data
@@ -1654,8 +2499,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         in the *CloudTrail User Guide*.
 
         Args:
-            input:
-                An instance of `PutResourcePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1665,20 +2508,40 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `PutResourcePolicyOutput`.
         """
-        return self._invoke(input, _models.PUT_RESOURCE_POLICY, [], plugins)
 
+    def put_resource_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutResourcePolicyOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_RESOURCE_POLICY, args, kwargs),
+            _models.PUT_RESOURCE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def register_organization_delegated_admin(
         self,
-        input: RegisterOrganizationDelegatedAdminInput,
+        request: _models.RegisterOrganizationDelegatedAdminInput
+        | _models.RegisterOrganizationDelegatedAdminInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> RegisterOrganizationDelegatedAdminOutput: ...
+
+    @_overload
+    def register_organization_delegated_admin(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RegisterOrganizationDelegatedAdminInputDict],
     ) -> RegisterOrganizationDelegatedAdminOutput:
         """
         Registers an organization's member account as the CloudTrail [delegated
         administrator](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-delegated-administrator.html).
 
         Args:
-            input:
-                An instance of `RegisterOrganizationDelegatedAdminInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1688,20 +2551,41 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `RegisterOrganizationDelegatedAdminOutput`.
         """
+
+    def register_organization_delegated_admin(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RegisterOrganizationDelegatedAdminOutput:
         return self._invoke(
-            input, _models.REGISTER_ORGANIZATION_DELEGATED_ADMIN, [], plugins
+            self._select_input(
+                _models.REGISTER_ORGANIZATION_DELEGATED_ADMIN, args, kwargs
+            ),
+            _models.REGISTER_ORGANIZATION_DELEGATED_ADMIN,
+            [],
+            plugins,
         )
 
+    @_overload
     def remove_tags(
-        self, input: RemoveTagsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RemoveTagsInput | _models.RemoveTagsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RemoveTagsOutput: ...
+
+    @_overload
+    def remove_tags(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RemoveTagsInputDict],
     ) -> RemoveTagsOutput:
         """
         Removes the specified tags from a trail, event data store, dashboard, or
         channel.
 
         Args:
-            input:
-                An instance of `RemoveTagsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1711,10 +2595,34 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `RemoveTagsOutput`.
         """
-        return self._invoke(input, _models.REMOVE_TAGS, [], plugins)
 
+    def remove_tags(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RemoveTagsOutput:
+        return self._invoke(
+            self._select_input(_models.REMOVE_TAGS, args, kwargs),
+            _models.REMOVE_TAGS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def restore_event_data_store(
-        self, input: RestoreEventDataStoreInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RestoreEventDataStoreInput
+        | _models.RestoreEventDataStoreInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RestoreEventDataStoreOutput: ...
+
+    @_overload
+    def restore_event_data_store(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RestoreEventDataStoreInputDict],
     ) -> RestoreEventDataStoreOutput:
         """
         Warning:
@@ -1731,8 +2639,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         event data store.
 
         Args:
-            input:
-                An instance of `RestoreEventDataStoreInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1742,10 +2648,34 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `RestoreEventDataStoreOutput`.
         """
-        return self._invoke(input, _models.RESTORE_EVENT_DATA_STORE, [], plugins)
 
+    def restore_event_data_store(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RestoreEventDataStoreOutput:
+        return self._invoke(
+            self._select_input(_models.RESTORE_EVENT_DATA_STORE, args, kwargs),
+            _models.RESTORE_EVENT_DATA_STORE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def search_sample_queries(
-        self, input: SearchSampleQueriesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.SearchSampleQueriesInput
+        | _models.SearchSampleQueriesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> SearchSampleQueriesOutput: ...
+
+    @_overload
+    def search_sample_queries(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SearchSampleQueriesInputDict],
     ) -> SearchSampleQueriesOutput:
         """
         Warning:
@@ -1760,8 +2690,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         language `SearchPhrase` in English.
 
         Args:
-            input:
-                An instance of `SearchSampleQueriesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1771,10 +2699,34 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `SearchSampleQueriesOutput`.
         """
-        return self._invoke(input, _models.SEARCH_SAMPLE_QUERIES, [], plugins)
 
+    def search_sample_queries(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SearchSampleQueriesOutput:
+        return self._invoke(
+            self._select_input(_models.SEARCH_SAMPLE_QUERIES, args, kwargs),
+            _models.SEARCH_SAMPLE_QUERIES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def start_dashboard_refresh(
-        self, input: StartDashboardRefreshInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StartDashboardRefreshInput
+        | _models.StartDashboardRefreshInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StartDashboardRefreshOutput: ...
+
+    @_overload
+    def start_dashboard_refresh(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartDashboardRefreshInputDict],
     ) -> StartDashboardRefreshOutput:
         """
         Warning:
@@ -1796,8 +2748,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         in the *CloudTrail User Guide*.
 
         Args:
-            input:
-                An instance of `StartDashboardRefreshInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1807,12 +2757,34 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `StartDashboardRefreshOutput`.
         """
-        return self._invoke(input, _models.START_DASHBOARD_REFRESH, [], plugins)
 
+    def start_dashboard_refresh(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StartDashboardRefreshOutput:
+        return self._invoke(
+            self._select_input(_models.START_DASHBOARD_REFRESH, args, kwargs),
+            _models.START_DASHBOARD_REFRESH,
+            [],
+            plugins,
+        )
+
+    @_overload
     def start_event_data_store_ingestion(
         self,
-        input: StartEventDataStoreIngestionInput,
+        request: _models.StartEventDataStoreIngestionInput
+        | _models.StartEventDataStoreIngestionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> StartEventDataStoreIngestionOutput: ...
+
+    @_overload
+    def start_event_data_store_ingestion(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartEventDataStoreIngestionInputDict],
     ) -> StartEventDataStoreIngestionOutput:
         """
         Warning:
@@ -1829,8 +2801,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         `ConfigurationItem`.
 
         Args:
-            input:
-                An instance of `StartEventDataStoreIngestionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1840,12 +2810,33 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `StartEventDataStoreIngestionOutput`.
         """
+
+    def start_event_data_store_ingestion(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StartEventDataStoreIngestionOutput:
         return self._invoke(
-            input, _models.START_EVENT_DATA_STORE_INGESTION, [], plugins
+            self._select_input(_models.START_EVENT_DATA_STORE_INGESTION, args, kwargs),
+            _models.START_EVENT_DATA_STORE_INGESTION,
+            [],
+            plugins,
         )
 
+    @_overload
     def start_import(
-        self, input: StartImportInput | None = None, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StartImportInput | _models.StartImportInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StartImportOutput: ...
+
+    @_overload
+    def start_import(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartImportInputDict],
     ) -> StartImportOutput:
         """
         Warning:
@@ -1881,8 +2872,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
             delegated administrator account for the organization.
 
         Args:
-            input:
-                An instance of `StartImportInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1892,10 +2881,33 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `StartImportOutput`.
         """
-        return self._invoke(input, _models.START_IMPORT, [], plugins)
 
+    def start_import(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StartImportOutput:
+        return self._invoke(
+            self._select_input(_models.START_IMPORT, args, kwargs),
+            _models.START_IMPORT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def start_logging(
-        self, input: StartLoggingInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StartLoggingInput | _models.StartLoggingInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StartLoggingOutput: ...
+
+    @_overload
+    def start_logging(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartLoggingInputDict],
     ) -> StartLoggingOutput:
         """
         Starts the recording of Amazon Web Services API calls and log file
@@ -1905,8 +2917,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         in other Regions) of a trail that is enabled in all Regions.
 
         Args:
-            input:
-                An instance of `StartLoggingInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1916,10 +2926,33 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `StartLoggingOutput`.
         """
-        return self._invoke(input, _models.START_LOGGING, [], plugins)
 
+    def start_logging(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StartLoggingOutput:
+        return self._invoke(
+            self._select_input(_models.START_LOGGING, args, kwargs),
+            _models.START_LOGGING,
+            [],
+            plugins,
+        )
+
+    @_overload
     def start_query(
-        self, input: StartQueryInput | None = None, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StartQueryInput | _models.StartQueryInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StartQueryOutput: ...
+
+    @_overload
+    def start_query(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartQueryInputDict],
     ) -> StartQueryOutput:
         """
         Warning:
@@ -1940,8 +2973,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         queries that populate the CloudTrail Lake dashboards.
 
         Args:
-            input:
-                An instance of `StartQueryInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1951,12 +2982,34 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `StartQueryOutput`.
         """
-        return self._invoke(input, _models.START_QUERY, [], plugins)
 
+    def start_query(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StartQueryOutput:
+        return self._invoke(
+            self._select_input(_models.START_QUERY, args, kwargs),
+            _models.START_QUERY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def stop_event_data_store_ingestion(
         self,
-        input: StopEventDataStoreIngestionInput,
+        request: _models.StopEventDataStoreIngestionInput
+        | _models.StopEventDataStoreIngestionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> StopEventDataStoreIngestionOutput: ...
+
+    @_overload
+    def stop_event_data_store_ingestion(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StopEventDataStoreIngestionInputDict],
     ) -> StopEventDataStoreIngestionOutput:
         """
         Warning:
@@ -1972,8 +3025,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         `Management`, `Data`, `NetworkActivity`, or `ConfigurationItem`.
 
         Args:
-            input:
-                An instance of `StopEventDataStoreIngestionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1983,10 +3034,33 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `StopEventDataStoreIngestionOutput`.
         """
-        return self._invoke(input, _models.STOP_EVENT_DATA_STORE_INGESTION, [], plugins)
 
+    def stop_event_data_store_ingestion(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StopEventDataStoreIngestionOutput:
+        return self._invoke(
+            self._select_input(_models.STOP_EVENT_DATA_STORE_INGESTION, args, kwargs),
+            _models.STOP_EVENT_DATA_STORE_INGESTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def stop_import(
-        self, input: StopImportInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StopImportInput | _models.StopImportInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StopImportOutput: ...
+
+    @_overload
+    def stop_import(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StopImportInputDict],
     ) -> StopImportOutput:
         """
         Warning:
@@ -1999,8 +3073,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Stops a specified import.
 
         Args:
-            input:
-                An instance of `StopImportInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2010,10 +3082,33 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `StopImportOutput`.
         """
-        return self._invoke(input, _models.STOP_IMPORT, [], plugins)
 
+    def stop_import(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StopImportOutput:
+        return self._invoke(
+            self._select_input(_models.STOP_IMPORT, args, kwargs),
+            _models.STOP_IMPORT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def stop_logging(
-        self, input: StopLoggingInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StopLoggingInput | _models.StopLoggingInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StopLoggingOutput: ...
+
+    @_overload
+    def stop_logging(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StopLoggingInputDict],
     ) -> StopLoggingOutput:
         """
         Suspends the recording of Amazon Web Services API calls and log file
@@ -2026,8 +3121,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         trails in other Regions) of a trail enabled in all Regions.
 
         Args:
-            input:
-                An instance of `StopLoggingInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2037,10 +3130,33 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `StopLoggingOutput`.
         """
-        return self._invoke(input, _models.STOP_LOGGING, [], plugins)
 
+    def stop_logging(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StopLoggingOutput:
+        return self._invoke(
+            self._select_input(_models.STOP_LOGGING, args, kwargs),
+            _models.STOP_LOGGING,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_channel(
-        self, input: UpdateChannelInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateChannelInput | _models.UpdateChannelInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateChannelOutput: ...
+
+    @_overload
+    def update_channel(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateChannelInputDict],
     ) -> UpdateChannelOutput:
         """
         Warning:
@@ -2053,8 +3169,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Updates a channel specified by a required channel ARN or UUID.
 
         Args:
-            input:
-                An instance of `UpdateChannelInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2064,10 +3178,33 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `UpdateChannelOutput`.
         """
-        return self._invoke(input, _models.UPDATE_CHANNEL, [], plugins)
 
+    def update_channel(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateChannelOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_CHANNEL, args, kwargs),
+            _models.UPDATE_CHANNEL,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_dashboard(
-        self, input: UpdateDashboardInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateDashboardInput | _models.UpdateDashboardInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateDashboardOutput: ...
+
+    @_overload
+    def update_dashboard(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateDashboardInputDict],
     ) -> UpdateDashboardOutput:
         """
         Warning:
@@ -2097,8 +3234,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         in the *CloudTrail User Guide*.
 
         Args:
-            input:
-                An instance of `UpdateDashboardInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2108,10 +3243,34 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `UpdateDashboardOutput`.
         """
-        return self._invoke(input, _models.UPDATE_DASHBOARD, [], plugins)
 
+    def update_dashboard(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateDashboardOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_DASHBOARD, args, kwargs),
+            _models.UPDATE_DASHBOARD,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_event_data_store(
-        self, input: UpdateEventDataStoreInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateEventDataStoreInput
+        | _models.UpdateEventDataStoreInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateEventDataStoreOutput: ...
+
+    @_overload
+    def update_event_data_store(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateEventDataStoreInputDict],
     ) -> UpdateEventDataStoreOutput:
         """
         Warning:
@@ -2142,8 +3301,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         event data store.
 
         Args:
-            input:
-                An instance of `UpdateEventDataStoreInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2153,10 +3310,33 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `UpdateEventDataStoreOutput`.
         """
-        return self._invoke(input, _models.UPDATE_EVENT_DATA_STORE, [], plugins)
 
+    def update_event_data_store(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateEventDataStoreOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_EVENT_DATA_STORE, args, kwargs),
+            _models.UPDATE_EVENT_DATA_STORE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_trail(
-        self, input: UpdateTrailInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateTrailInput | _models.UpdateTrailInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateTrailOutput: ...
+
+    @_overload
+    def update_trail(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateTrailInputDict],
     ) -> UpdateTrailOutput:
         """
         Updates trail settings that control what events you are logging, and how
@@ -2168,8 +3348,6 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         otherwise, an `InvalidHomeRegionException` is thrown.
 
         Args:
-            input:
-                An instance of `UpdateTrailInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2179,7 +3357,16 @@ class CloudTrailClient(Client[CloudTrailConfig]):
         Returns:
             An instance of `UpdateTrailOutput`.
         """
-        return self._invoke(input, _models.UPDATE_TRAIL, [], plugins)
+
+    def update_trail(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateTrailOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_TRAIL, args, kwargs),
+            _models.UPDATE_TRAIL,
+            [],
+            plugins,
+        )
 
     def _new_config(self) -> CloudTrailConfig:
         return CloudTrailConfig.resolve()

@@ -2,44 +2,62 @@
 
 from typing import Any
 
+from aws_sdk_connecthealth.aio.client import AsyncConnectHealthClient
+from aws_sdk_connecthealth.client import ConnectHealthClient
 from aws_sdk_connecthealth.models import (
     ActivateSubscriptionInput,
+    ActivateSubscriptionInputDict,
     ActivateSubscriptionOutput,
     ArtifactDetails,
     ClinicalNoteGenerationResult,
     ClinicalNoteGenerationSettings,
     ClinicalNoteGenerationSettingsResponse,
     CreateDomainInput,
+    CreateDomainInputDict,
     CreateDomainOutput,
     CreateSubscriptionInput,
+    CreateSubscriptionInputDict,
     CreateSubscriptionOutput,
     CreateWebAppConfiguration,
+    CreateWebAppConfigurationDict,
     CustomTemplate,
     CustomTemplateResponse,
     DeactivateSubscriptionInput,
+    DeactivateSubscriptionInputDict,
     DeactivateSubscriptionOutput,
     DeleteDomainInput,
+    DeleteDomainInputDict,
     DeleteDomainOutput,
     DomainSummary,
     EncounterContext,
     EncryptionContext,
     FHIRServer,
+    FHIRServerDict,
     GetDomainInput,
+    GetDomainInputDict,
     GetDomainOutput,
     GetMedicalScribeListeningSessionInput,
+    GetMedicalScribeListeningSessionInputDict,
     GetMedicalScribeListeningSessionOutput,
     GetPatientInsightsJobInput,
+    GetPatientInsightsJobInputDict,
     GetPatientInsightsJobOutput,
     GetSubscriptionInput,
+    GetSubscriptionInputDict,
     GetSubscriptionOutput,
     InputDataConfig,
+    InputDataConfigDict,
     InsightsContext,
+    InsightsContextDict,
     InsightsOutput,
     ListDomainsInput,
+    ListDomainsInputDict,
     ListDomainsOutput,
     ListSubscriptionsInput,
+    ListSubscriptionsInputDict,
     ListSubscriptionsOutput,
     ListTagsForResourceInput,
+    ListTagsForResourceInputDict,
     ListTagsForResourceOutput,
     ManagedTemplate,
     ManagedTemplateResponse,
@@ -55,26 +73,36 @@ from aws_sdk_connecthealth.models import (
     MedicalScribeTranscriptEvent,
     MedicalScribeTranscriptSegment,
     OutputDataConfig,
+    OutputDataConfigDict,
     PatientInsightsEncounterContext,
+    PatientInsightsEncounterContextDict,
     PatientInsightsPatientContext,
+    PatientInsightsPatientContextDict,
     S3Source,
+    S3SourceDict,
     StartMedicalScribeListeningSessionInput,
+    StartMedicalScribeListeningSessionInputDict,
     StartMedicalScribeListeningSessionOutput,
     StartPatientInsightsJobInput,
+    StartPatientInsightsJobInputDict,
     StartPatientInsightsJobOutput,
     SubscriptionDescription,
     TagResourceInput,
+    TagResourceInputDict,
     TagResourceOutput,
     TemplateSectionInstruction,
     UntagResourceInput,
+    UntagResourceInputDict,
     UntagResourceOutput,
     UserContext,
+    UserContextDict,
     WebAppConfiguration,
 )
 
 
-# Static type fixture: pyright over this validates models.pyi.
-# Not executed as a test; it only needs to type-check.
+# Static type fixture: pyright over this validates models.pyi and the
+# client method signatures. Not executed as a test; it only needs to
+# type-check.
 
 _: Any = ...
 
@@ -163,3 +191,234 @@ UntagResourceInput()
 UntagResourceOutput()
 UserContext(role=_, user_id=_)
 WebAppConfiguration(ehr_role=_, idc_application_id=_, idc_region=_)
+_params_0: ActivateSubscriptionInputDict = {"domain_id": _, "subscription_id": _}
+_params_1: CreateDomainInputDict = {"name": _}
+_params_2: CreateSubscriptionInputDict = {"domain_id": _}
+_params_3: CreateWebAppConfigurationDict = {
+    "ehr_role": _,
+    "idc_instance_id": _,
+    "idc_region": _,
+}
+_params_4: DeactivateSubscriptionInputDict = {"domain_id": _, "subscription_id": _}
+_params_5: DeleteDomainInputDict = {"domain_id": _}
+_params_6: FHIRServerDict = {"fhir_endpoint": _}
+_params_7: GetDomainInputDict = {"domain_id": _}
+_params_8: GetMedicalScribeListeningSessionInputDict = {
+    "session_id": _,
+    "domain_id": _,
+    "subscription_id": _,
+}
+_params_9: GetPatientInsightsJobInputDict = {"domain_id": _, "job_id": _}
+_params_10: GetSubscriptionInputDict = {"domain_id": _, "subscription_id": _}
+_params_11: InputDataConfigDict = {}
+_params_12: InsightsContextDict = {"insights_type": _}
+_params_13: ListDomainsInputDict = {}
+_params_14: ListSubscriptionsInputDict = {"domain_id": _}
+_params_15: ListTagsForResourceInputDict = {"resource_arn": _}
+_params_16: OutputDataConfigDict = {"s3_output_path": _}
+_params_17: PatientInsightsEncounterContextDict = {"encounter_reason": _}
+_params_18: PatientInsightsPatientContextDict = {"patient_id": _}
+_params_19: S3SourceDict = {"uri": _}
+_params_20: StartMedicalScribeListeningSessionInputDict = {
+    "session_id": _,
+    "domain_id": _,
+    "subscription_id": _,
+    "language_code": _,
+    "media_sample_rate_hertz": _,
+    "media_encoding": _,
+}
+_params_21: StartPatientInsightsJobInputDict = {
+    "domain_id": _,
+    "patient_context": _,
+    "insights_context": _,
+    "encounter_context": _,
+    "user_context": _,
+    "input_data_config": _,
+    "output_data_config": _,
+}
+_params_22: TagResourceInputDict = {"resource_arn": _, "tags": _}
+_params_23: UntagResourceInputDict = {"resource_arn": _, "tag_keys": _}
+_params_24: UserContextDict = {"role": _, "user_id": _}
+
+
+def _request[T](form: type[T]) -> T:
+    raise NotImplementedError
+
+
+async def check_async_calls(client: AsyncConnectHealthClient) -> None:
+    pass
+    await client.activate_subscription(domain_id=_, subscription_id=_)
+    await client.activate_subscription(**_request(ActivateSubscriptionInputDict))
+    await client.activate_subscription(_request(ActivateSubscriptionInput))
+    await client.activate_subscription(_request(ActivateSubscriptionInputDict))
+    await client.create_domain(name=_)
+    await client.create_domain(**_request(CreateDomainInputDict))
+    await client.create_domain(_request(CreateDomainInput))
+    await client.create_domain(_request(CreateDomainInputDict))
+    await client.create_subscription(domain_id=_)
+    await client.create_subscription(**_request(CreateSubscriptionInputDict))
+    await client.create_subscription(_request(CreateSubscriptionInput))
+    await client.create_subscription(_request(CreateSubscriptionInputDict))
+    await client.deactivate_subscription(domain_id=_, subscription_id=_)
+    await client.deactivate_subscription(**_request(DeactivateSubscriptionInputDict))
+    await client.deactivate_subscription(_request(DeactivateSubscriptionInput))
+    await client.deactivate_subscription(_request(DeactivateSubscriptionInputDict))
+    await client.delete_domain(domain_id=_)
+    await client.delete_domain(**_request(DeleteDomainInputDict))
+    await client.delete_domain(_request(DeleteDomainInput))
+    await client.delete_domain(_request(DeleteDomainInputDict))
+    await client.get_domain(domain_id=_)
+    await client.get_domain(**_request(GetDomainInputDict))
+    await client.get_domain(_request(GetDomainInput))
+    await client.get_domain(_request(GetDomainInputDict))
+    await client.get_medical_scribe_listening_session(
+        session_id=_, domain_id=_, subscription_id=_
+    )
+    await client.get_medical_scribe_listening_session(
+        **_request(GetMedicalScribeListeningSessionInputDict)
+    )
+    await client.get_medical_scribe_listening_session(
+        _request(GetMedicalScribeListeningSessionInput)
+    )
+    await client.get_medical_scribe_listening_session(
+        _request(GetMedicalScribeListeningSessionInputDict)
+    )
+    await client.get_patient_insights_job(domain_id=_, job_id=_)
+    await client.get_patient_insights_job(**_request(GetPatientInsightsJobInputDict))
+    await client.get_patient_insights_job(_request(GetPatientInsightsJobInput))
+    await client.get_patient_insights_job(_request(GetPatientInsightsJobInputDict))
+    await client.get_subscription(domain_id=_, subscription_id=_)
+    await client.get_subscription(**_request(GetSubscriptionInputDict))
+    await client.get_subscription(_request(GetSubscriptionInput))
+    await client.get_subscription(_request(GetSubscriptionInputDict))
+    await client.list_domains()
+    await client.list_domains(**_request(ListDomainsInputDict))
+    await client.list_domains(_request(ListDomainsInput))
+    await client.list_domains(_request(ListDomainsInputDict))
+    await client.list_subscriptions(domain_id=_)
+    await client.list_subscriptions(**_request(ListSubscriptionsInputDict))
+    await client.list_subscriptions(_request(ListSubscriptionsInput))
+    await client.list_subscriptions(_request(ListSubscriptionsInputDict))
+    await client.list_tags_for_resource(resource_arn=_)
+    await client.list_tags_for_resource(**_request(ListTagsForResourceInputDict))
+    await client.list_tags_for_resource(_request(ListTagsForResourceInput))
+    await client.list_tags_for_resource(_request(ListTagsForResourceInputDict))
+    await client.start_medical_scribe_listening_session(
+        session_id=_,
+        domain_id=_,
+        subscription_id=_,
+        language_code=_,
+        media_sample_rate_hertz=_,
+        media_encoding=_,
+    )
+    await client.start_medical_scribe_listening_session(
+        **_request(StartMedicalScribeListeningSessionInputDict)
+    )
+    await client.start_medical_scribe_listening_session(
+        _request(StartMedicalScribeListeningSessionInput)
+    )
+    await client.start_medical_scribe_listening_session(
+        _request(StartMedicalScribeListeningSessionInputDict)
+    )
+    await client.start_patient_insights_job(
+        domain_id=_,
+        patient_context=_,
+        insights_context=_,
+        encounter_context=_,
+        user_context=_,
+        input_data_config=_,
+        output_data_config=_,
+    )
+    await client.start_patient_insights_job(
+        **_request(StartPatientInsightsJobInputDict)
+    )
+    await client.start_patient_insights_job(_request(StartPatientInsightsJobInput))
+    await client.start_patient_insights_job(_request(StartPatientInsightsJobInputDict))
+    await client.tag_resource(resource_arn=_, tags=_)
+    await client.tag_resource(**_request(TagResourceInputDict))
+    await client.tag_resource(_request(TagResourceInput))
+    await client.tag_resource(_request(TagResourceInputDict))
+    await client.untag_resource(resource_arn=_, tag_keys=_)
+    await client.untag_resource(**_request(UntagResourceInputDict))
+    await client.untag_resource(_request(UntagResourceInput))
+    await client.untag_resource(_request(UntagResourceInputDict))
+
+
+def check_sync_calls(client: ConnectHealthClient) -> None:
+    pass
+    client.activate_subscription(domain_id=_, subscription_id=_)
+    client.activate_subscription(**_request(ActivateSubscriptionInputDict))
+    client.activate_subscription(_request(ActivateSubscriptionInput))
+    client.activate_subscription(_request(ActivateSubscriptionInputDict))
+    client.create_domain(name=_)
+    client.create_domain(**_request(CreateDomainInputDict))
+    client.create_domain(_request(CreateDomainInput))
+    client.create_domain(_request(CreateDomainInputDict))
+    client.create_subscription(domain_id=_)
+    client.create_subscription(**_request(CreateSubscriptionInputDict))
+    client.create_subscription(_request(CreateSubscriptionInput))
+    client.create_subscription(_request(CreateSubscriptionInputDict))
+    client.deactivate_subscription(domain_id=_, subscription_id=_)
+    client.deactivate_subscription(**_request(DeactivateSubscriptionInputDict))
+    client.deactivate_subscription(_request(DeactivateSubscriptionInput))
+    client.deactivate_subscription(_request(DeactivateSubscriptionInputDict))
+    client.delete_domain(domain_id=_)
+    client.delete_domain(**_request(DeleteDomainInputDict))
+    client.delete_domain(_request(DeleteDomainInput))
+    client.delete_domain(_request(DeleteDomainInputDict))
+    client.get_domain(domain_id=_)
+    client.get_domain(**_request(GetDomainInputDict))
+    client.get_domain(_request(GetDomainInput))
+    client.get_domain(_request(GetDomainInputDict))
+    client.get_medical_scribe_listening_session(
+        session_id=_, domain_id=_, subscription_id=_
+    )
+    client.get_medical_scribe_listening_session(
+        **_request(GetMedicalScribeListeningSessionInputDict)
+    )
+    client.get_medical_scribe_listening_session(
+        _request(GetMedicalScribeListeningSessionInput)
+    )
+    client.get_medical_scribe_listening_session(
+        _request(GetMedicalScribeListeningSessionInputDict)
+    )
+    client.get_patient_insights_job(domain_id=_, job_id=_)
+    client.get_patient_insights_job(**_request(GetPatientInsightsJobInputDict))
+    client.get_patient_insights_job(_request(GetPatientInsightsJobInput))
+    client.get_patient_insights_job(_request(GetPatientInsightsJobInputDict))
+    client.get_subscription(domain_id=_, subscription_id=_)
+    client.get_subscription(**_request(GetSubscriptionInputDict))
+    client.get_subscription(_request(GetSubscriptionInput))
+    client.get_subscription(_request(GetSubscriptionInputDict))
+    client.list_domains()
+    client.list_domains(**_request(ListDomainsInputDict))
+    client.list_domains(_request(ListDomainsInput))
+    client.list_domains(_request(ListDomainsInputDict))
+    client.list_subscriptions(domain_id=_)
+    client.list_subscriptions(**_request(ListSubscriptionsInputDict))
+    client.list_subscriptions(_request(ListSubscriptionsInput))
+    client.list_subscriptions(_request(ListSubscriptionsInputDict))
+    client.list_tags_for_resource(resource_arn=_)
+    client.list_tags_for_resource(**_request(ListTagsForResourceInputDict))
+    client.list_tags_for_resource(_request(ListTagsForResourceInput))
+    client.list_tags_for_resource(_request(ListTagsForResourceInputDict))
+    client.start_patient_insights_job(
+        domain_id=_,
+        patient_context=_,
+        insights_context=_,
+        encounter_context=_,
+        user_context=_,
+        input_data_config=_,
+        output_data_config=_,
+    )
+    client.start_patient_insights_job(**_request(StartPatientInsightsJobInputDict))
+    client.start_patient_insights_job(_request(StartPatientInsightsJobInput))
+    client.start_patient_insights_job(_request(StartPatientInsightsJobInputDict))
+    client.tag_resource(resource_arn=_, tags=_)
+    client.tag_resource(**_request(TagResourceInputDict))
+    client.tag_resource(_request(TagResourceInput))
+    client.tag_resource(_request(TagResourceInputDict))
+    client.untag_resource(resource_arn=_, tag_keys=_)
+    client.untag_resource(**_request(UntagResourceInputDict))
+    client.untag_resource(_request(UntagResourceInput))
+    client.untag_resource(_request(UntagResourceInputDict))

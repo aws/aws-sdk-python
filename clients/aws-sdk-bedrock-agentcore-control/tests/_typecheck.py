@@ -2,701 +2,1223 @@
 
 from typing import Any
 
+from aws_sdk_bedrock_agentcore_control.aio.client import (
+    AsyncBedrockAgentCoreControlClient,
+)
+from aws_sdk_bedrock_agentcore_control.client import BedrockAgentCoreControlClient
 from aws_sdk_bedrock_agentcore_control.models import (
     A2aDescriptor,
+    A2aDescriptorDict,
+    ActionDict,
     AddDatasetExamplesInput,
+    AddDatasetExamplesInputDict,
     AddDatasetExamplesOutput,
     AgentCardDefinition,
+    AgentCardDefinitionDict,
     AgentRuntime,
+    AgentRuntimeArtifactDict,
     AgentRuntimeEndpoint,
     AgentRuntimeVersionSummary,
     AgentSkillsDescriptor,
+    AgentSkillsDescriptorDict,
+    AllowedPortDict,
     AllowedWorkloadConfiguration,
+    AllowedWorkloadConfigurationDict,
     ApiGatewayTargetConfiguration,
+    ApiGatewayTargetConfigurationDict,
     ApiGatewayToolConfiguration,
+    ApiGatewayToolConfigurationDict,
     ApiGatewayToolFilter,
+    ApiGatewayToolFilterDict,
     ApiGatewayToolOverride,
+    ApiGatewayToolOverrideDict,
     ApiKeyCredentialProviderItem,
+    ApiSchemaConfigurationDict,
     ApprovalConfiguration,
+    ApprovalConfigurationDict,
     AtlassianOauth2ProviderConfigInput,
+    AtlassianOauth2ProviderConfigInputDict,
     AtlassianOauth2ProviderConfigOutput,
+    AuthorizerConfigurationDict,
     AuthorizingClaimMatchValueType,
+    AuthorizingClaimMatchValueTypeDict,
     BatchPutGatewayRateLimitsInput,
+    BatchPutGatewayRateLimitsInputDict,
     BatchPutGatewayRateLimitsOutput,
     BatchPutLimitEntry,
+    BatchPutLimitEntryDict,
     BedrockEvaluatorModelConfig,
+    BedrockEvaluatorModelConfigDict,
     BrowserEnterprisePolicy,
+    BrowserEnterprisePolicyDict,
     BrowserNetworkConfiguration,
+    BrowserNetworkConfigurationDict,
     BrowserProfileSummary,
     BrowserSigningConfigInput,
+    BrowserSigningConfigInputDict,
     BrowserSigningConfigOutput,
     BrowserSummary,
     BuildLifecycleHooks,
+    BuildLifecycleHooksDict,
     CapacityProviderConfiguration,
+    CapacityProviderConfigurationDict,
     CapacityProviderSummary,
     CapacityProviderVolumeConfiguration,
+    CapacityProviderVolumeConfigurationDict,
     CapacityReservationSpecification,
+    CapacityReservationSpecificationDict,
     CapacityReservationTarget,
+    CapacityReservationTargetDict,
     CategoricalScaleDefinition,
+    CategoricalScaleDefinitionDict,
     CedarPolicy,
+    CedarPolicyDict,
     Certificate,
+    CertificateConfigurationDict,
+    CertificateDict,
+    CertificateLocationDict,
     CircuitBreakerConfiguration,
+    CircuitBreakerConfigurationDict,
+    ClaimMatchValueTypeDict,
     CloudWatchLogsInputConfig,
+    CloudWatchLogsInputConfigDict,
     CloudWatchOutputConfig,
+    CloudWatchOutputConfigDict,
     ClusteringConfig,
+    ClusteringConfigDict,
+    CodeBasedEvaluatorConfigDict,
     CodeConfiguration,
+    CodeConfigurationDict,
+    CodeDict,
     CodeInterpreterNetworkConfiguration,
+    CodeInterpreterNetworkConfigurationDict,
     CodeInterpreterSummary,
     CoinbaseCdpConfigurationInput,
+    CoinbaseCdpConfigurationInputDict,
     CoinbaseCdpConfigurationOutput,
     CoinbaseCdpRotationTargets,
+    CoinbaseCdpRotationTargetsDict,
     ComponentConfiguration,
+    ComponentConfigurationDict,
+    ComputeConfigurationDict,
+    ConditionDict,
+    ConfigurationBundleActionDict,
     ConfigurationBundleReference,
+    ConfigurationBundleReferenceDict,
     ConfigurationBundleSummary,
     ConfigurationBundleVersionSummary,
     ConnectorConfiguration,
+    ConnectorConfigurationDict,
     ConnectorParameterOverride,
+    ConnectorParameterOverrideDict,
     ConnectorSource,
+    ConnectorSourceDict,
     ConnectorTargetConfiguration,
+    ConnectorTargetConfigurationDict,
     ConsentPortalIdpConfig,
+    ConsentPortalIdpConfigDict,
     ConsentPortalSource,
+    ConsentPortalSourceDict,
     ConsentPortalSummary,
     ContainerConfiguration,
+    ContainerConfigurationDict,
     ContentConfiguration,
+    ContentConfigurationDict,
+    ContentDict,
     CreateAgentRuntimeEndpointInput,
+    CreateAgentRuntimeEndpointInputDict,
     CreateAgentRuntimeEndpointOutput,
     CreateAgentRuntimeInput,
+    CreateAgentRuntimeInputDict,
     CreateAgentRuntimeOutput,
     CreateApiKeyCredentialProviderInput,
+    CreateApiKeyCredentialProviderInputDict,
     CreateApiKeyCredentialProviderOutput,
     CreateBrowserInput,
+    CreateBrowserInputDict,
     CreateBrowserOutput,
     CreateBrowserProfileInput,
+    CreateBrowserProfileInputDict,
     CreateBrowserProfileOutput,
     CreateCapacityProviderInput,
+    CreateCapacityProviderInputDict,
     CreateCapacityProviderOutput,
     CreateCodeInterpreterInput,
+    CreateCodeInterpreterInputDict,
     CreateCodeInterpreterOutput,
     CreateConfigurationBundleInput,
+    CreateConfigurationBundleInputDict,
     CreateConfigurationBundleOutput,
     CreateConsentPortalInput,
+    CreateConsentPortalInputDict,
     CreateConsentPortalOutput,
     CreateDatasetInput,
+    CreateDatasetInputDict,
     CreateDatasetOutput,
     CreateDatasetVersionInput,
+    CreateDatasetVersionInputDict,
     CreateDatasetVersionOutput,
     CreateEvaluatorInput,
+    CreateEvaluatorInputDict,
     CreateEvaluatorOutput,
     CreateGatewayInput,
+    CreateGatewayInputDict,
     CreateGatewayOutput,
     CreateGatewayRateLimitInput,
+    CreateGatewayRateLimitInputDict,
     CreateGatewayRateLimitOutput,
     CreateGatewayRuleInput,
+    CreateGatewayRuleInputDict,
     CreateGatewayRuleOutput,
     CreateGatewayTargetInput,
+    CreateGatewayTargetInputDict,
     CreateGatewayTargetOutput,
     CreateHarnessEndpointInput,
+    CreateHarnessEndpointInputDict,
     CreateHarnessEndpointOutput,
     CreateHarnessInput,
+    CreateHarnessInputDict,
     CreateHarnessOutput,
     CreateMemoryInput,
+    CreateMemoryInputDict,
     CreateMemoryOutput,
     CreateOauth2CredentialProviderInput,
+    CreateOauth2CredentialProviderInputDict,
     CreateOauth2CredentialProviderOutput,
     CreateOnlineEvaluationConfigInput,
+    CreateOnlineEvaluationConfigInputDict,
     CreateOnlineEvaluationConfigOutput,
     CreatePaymentConnectorInput,
+    CreatePaymentConnectorInputDict,
     CreatePaymentConnectorOutput,
     CreatePaymentCredentialProviderInput,
+    CreatePaymentCredentialProviderInputDict,
     CreatePaymentCredentialProviderOutput,
     CreatePaymentManagerInput,
+    CreatePaymentManagerInputDict,
     CreatePaymentManagerOutput,
     CreatePolicyEngineInput,
+    CreatePolicyEngineInputDict,
     CreatePolicyEngineOutput,
     CreatePolicyInput,
+    CreatePolicyInputDict,
     CreatePolicyOutput,
     CreateRegistryInput,
+    CreateRegistryInputDict,
     CreateRegistryOutput,
     CreateRegistryRecordInput,
+    CreateRegistryRecordInputDict,
     CreateRegistryRecordOutput,
     CreateWorkloadIdentityInput,
+    CreateWorkloadIdentityInputDict,
     CreateWorkloadIdentityOutput,
     CredentialProviderConfiguration,
+    CredentialProviderConfigurationDict,
+    CredentialProviderDict,
+    CredentialRotationConfigDict,
+    CredentialsProviderConfigurationDict,
     CustomClaimValidationType,
+    CustomClaimValidationTypeDict,
+    CustomConfigurationInputDict,
+    CustomConsolidationConfigurationInputDict,
     CustomDescriptor,
+    CustomDescriptorDict,
+    CustomExtractionConfigurationInputDict,
     CustomJWTAuthorizerConfiguration,
+    CustomJWTAuthorizerConfigurationDict,
     CustomMemoryStrategyInput,
+    CustomMemoryStrategyInputDict,
     CustomOauth2ProviderConfigInput,
+    CustomOauth2ProviderConfigInputDict,
     CustomOauth2ProviderConfigOutput,
+    CustomReflectionConfigurationInputDict,
     CustomTransformConfiguration,
+    CustomTransformConfigurationDict,
+    DataSourceConfigDict,
+    DataSourceTypeDict,
     DatasetSummary,
     DatasetVersionSummary,
     DeleteAgentRuntimeEndpointInput,
+    DeleteAgentRuntimeEndpointInputDict,
     DeleteAgentRuntimeEndpointOutput,
     DeleteAgentRuntimeInput,
+    DeleteAgentRuntimeInputDict,
     DeleteAgentRuntimeOutput,
     DeleteApiKeyCredentialProviderInput,
+    DeleteApiKeyCredentialProviderInputDict,
     DeleteApiKeyCredentialProviderOutput,
     DeleteBrowserInput,
+    DeleteBrowserInputDict,
     DeleteBrowserOutput,
     DeleteBrowserProfileInput,
+    DeleteBrowserProfileInputDict,
     DeleteBrowserProfileOutput,
     DeleteCapacityProviderInput,
+    DeleteCapacityProviderInputDict,
     DeleteCapacityProviderOutput,
     DeleteCodeInterpreterInput,
+    DeleteCodeInterpreterInputDict,
     DeleteCodeInterpreterOutput,
     DeleteConfigurationBundleInput,
+    DeleteConfigurationBundleInputDict,
     DeleteConfigurationBundleOutput,
     DeleteConsentPortalInput,
+    DeleteConsentPortalInputDict,
     DeleteConsentPortalOutput,
     DeleteDatasetExamplesInput,
+    DeleteDatasetExamplesInputDict,
     DeleteDatasetExamplesOutput,
     DeleteDatasetInput,
+    DeleteDatasetInputDict,
     DeleteDatasetOutput,
     DeleteEvaluatorInput,
+    DeleteEvaluatorInputDict,
     DeleteEvaluatorOutput,
     DeleteGatewayInput,
+    DeleteGatewayInputDict,
     DeleteGatewayOutput,
     DeleteGatewayRateLimitInput,
+    DeleteGatewayRateLimitInputDict,
     DeleteGatewayRateLimitOutput,
     DeleteGatewayRuleInput,
+    DeleteGatewayRuleInputDict,
     DeleteGatewayRuleOutput,
     DeleteGatewayTargetInput,
+    DeleteGatewayTargetInputDict,
     DeleteGatewayTargetOutput,
     DeleteHarnessEndpointInput,
+    DeleteHarnessEndpointInputDict,
     DeleteHarnessEndpointOutput,
     DeleteHarnessInput,
+    DeleteHarnessInputDict,
     DeleteHarnessOutput,
     DeleteMemoryInput,
+    DeleteMemoryInputDict,
     DeleteMemoryOutput,
     DeleteMemoryStrategyInput,
+    DeleteMemoryStrategyInputDict,
     DeleteOauth2CredentialProviderInput,
+    DeleteOauth2CredentialProviderInputDict,
     DeleteOauth2CredentialProviderOutput,
     DeleteOnlineEvaluationConfigInput,
+    DeleteOnlineEvaluationConfigInputDict,
     DeleteOnlineEvaluationConfigOutput,
     DeletePaymentConnectorInput,
+    DeletePaymentConnectorInputDict,
     DeletePaymentConnectorOutput,
     DeletePaymentCredentialProviderInput,
+    DeletePaymentCredentialProviderInputDict,
     DeletePaymentCredentialProviderOutput,
     DeletePaymentManagerInput,
+    DeletePaymentManagerInputDict,
     DeletePaymentManagerOutput,
     DeletePolicyEngineInput,
+    DeletePolicyEngineInputDict,
     DeletePolicyEngineOutput,
     DeletePolicyInput,
+    DeletePolicyInputDict,
     DeletePolicyOutput,
     DeleteRegistryInput,
+    DeleteRegistryInputDict,
     DeleteRegistryOutput,
     DeleteRegistryRecordInput,
+    DeleteRegistryRecordInputDict,
     DeleteRegistryRecordOutput,
     DeleteResourcePolicyInput,
+    DeleteResourcePolicyInputDict,
     DeleteResourcePolicyOutput,
     DeleteWorkloadIdentityInput,
+    DeleteWorkloadIdentityInputDict,
     DeleteWorkloadIdentityOutput,
     DerivedEvaluatorConfig,
+    DerivedEvaluatorConfigDict,
     Descriptors,
+    DescriptorsDict,
+    DimensionRatingScaleDict,
     DomainOverride,
+    DomainOverrideDict,
     EbsVolumeConfiguration,
+    EbsVolumeConfigurationDict,
     Ec2Configuration,
+    Ec2ConfigurationDict,
     EfsAccessPointConfiguration,
+    EfsAccessPointConfigurationDict,
     EfsConfiguration,
+    EfsConfigurationDict,
     EphemeralBlockDeviceMapping,
+    EphemeralBlockDeviceMappingDict,
     EphemeralEBSVolumeConfiguration,
+    EphemeralEBSVolumeConfigurationDict,
     EpisodicConsolidationOverride,
     EpisodicExtractionOverride,
     EpisodicMemoryStrategyInput,
+    EpisodicMemoryStrategyInputDict,
     EpisodicOverrideConfigurationInput,
+    EpisodicOverrideConfigurationInputDict,
     EpisodicOverrideConsolidationConfigurationInput,
+    EpisodicOverrideConsolidationConfigurationInputDict,
     EpisodicOverrideExtractionConfigurationInput,
+    EpisodicOverrideExtractionConfigurationInputDict,
     EpisodicOverrideReflectionConfigurationInput,
+    EpisodicOverrideReflectionConfigurationInputDict,
     EpisodicReflectionConfiguration,
     EpisodicReflectionConfigurationInput,
+    EpisodicReflectionConfigurationInputDict,
     EpisodicReflectionOverride,
     EvaluationDimension,
+    EvaluationDimensionDict,
+    EvaluatorConfigDict,
+    EvaluatorModelConfigDict,
+    EvaluatorReferenceDict,
     EvaluatorSummary,
+    ExtractionConfigDict,
     Fallback,
+    FallbackDict,
     FallbackTarget,
+    FallbackTargetDict,
     FallbackTriggers,
+    FallbackTriggersDict,
+    FilesystemConfigurationDict,
     Filter,
+    FilterDict,
+    FilterValueDict,
     Finding,
     FromUrlSynchronizationConfiguration,
+    FromUrlSynchronizationConfigurationDict,
     GatewayApiKeyCredentialProvider,
+    GatewayApiKeyCredentialProviderDict,
     GatewayInterceptorConfiguration,
+    GatewayInterceptorConfigurationDict,
     GatewayPolicyEngineConfiguration,
+    GatewayPolicyEngineConfigurationDict,
+    GatewayProtocolConfigurationDict,
     GatewayRateLimitDetail,
     GatewayRuleDetail,
     GatewaySummary,
     GatewayTarget,
     GetAgentRuntimeEndpointInput,
+    GetAgentRuntimeEndpointInputDict,
     GetAgentRuntimeEndpointOutput,
     GetAgentRuntimeInput,
+    GetAgentRuntimeInputDict,
     GetAgentRuntimeOutput,
     GetApiKeyCredentialProviderInput,
+    GetApiKeyCredentialProviderInputDict,
     GetApiKeyCredentialProviderOutput,
     GetBrowserInput,
+    GetBrowserInputDict,
     GetBrowserOutput,
     GetBrowserProfileInput,
+    GetBrowserProfileInputDict,
     GetBrowserProfileOutput,
     GetCapacityProviderInput,
+    GetCapacityProviderInputDict,
     GetCapacityProviderOutput,
     GetCodeInterpreterInput,
+    GetCodeInterpreterInputDict,
     GetCodeInterpreterOutput,
     GetConfigurationBundleInput,
+    GetConfigurationBundleInputDict,
     GetConfigurationBundleOutput,
     GetConfigurationBundleVersionInput,
+    GetConfigurationBundleVersionInputDict,
     GetConfigurationBundleVersionOutput,
     GetConsentPortalInput,
+    GetConsentPortalInputDict,
     GetConsentPortalOutput,
     GetDatasetInput,
+    GetDatasetInputDict,
     GetDatasetOutput,
     GetEvaluatorInput,
+    GetEvaluatorInputDict,
     GetEvaluatorOutput,
     GetGatewayInput,
+    GetGatewayInputDict,
     GetGatewayOutput,
     GetGatewayRateLimitInput,
+    GetGatewayRateLimitInputDict,
     GetGatewayRateLimitOutput,
     GetGatewayRuleInput,
+    GetGatewayRuleInputDict,
     GetGatewayRuleOutput,
     GetGatewayTargetInput,
+    GetGatewayTargetInputDict,
     GetGatewayTargetOutput,
     GetHarnessEndpointInput,
+    GetHarnessEndpointInputDict,
     GetHarnessEndpointOutput,
     GetHarnessInput,
+    GetHarnessInputDict,
     GetHarnessOutput,
     GetMemoryInput,
+    GetMemoryInputDict,
     GetMemoryOutput,
     GetOauth2CredentialProviderInput,
+    GetOauth2CredentialProviderInputDict,
     GetOauth2CredentialProviderOutput,
     GetOnlineEvaluationConfigInput,
+    GetOnlineEvaluationConfigInputDict,
     GetOnlineEvaluationConfigOutput,
     GetPaymentConnectorInput,
+    GetPaymentConnectorInputDict,
     GetPaymentConnectorOutput,
     GetPaymentCredentialProviderInput,
+    GetPaymentCredentialProviderInputDict,
     GetPaymentCredentialProviderOutput,
     GetPaymentManagerInput,
+    GetPaymentManagerInputDict,
     GetPaymentManagerOutput,
     GetPolicyEngineInput,
+    GetPolicyEngineInputDict,
     GetPolicyEngineOutput,
     GetPolicyEngineSummaryInput,
+    GetPolicyEngineSummaryInputDict,
     GetPolicyEngineSummaryOutput,
     GetPolicyGenerationInput,
+    GetPolicyGenerationInputDict,
     GetPolicyGenerationOutput,
     GetPolicyGenerationSummaryInput,
+    GetPolicyGenerationSummaryInputDict,
     GetPolicyGenerationSummaryOutput,
     GetPolicyInput,
+    GetPolicyInputDict,
     GetPolicyOutput,
     GetPolicySummaryInput,
+    GetPolicySummaryInputDict,
     GetPolicySummaryOutput,
     GetRegistryInput,
+    GetRegistryInputDict,
     GetRegistryOutput,
     GetRegistryRecordInput,
+    GetRegistryRecordInputDict,
     GetRegistryRecordOutput,
     GetResourcePolicyInput,
+    GetResourcePolicyInputDict,
     GetResourcePolicyOutput,
     GetTokenVaultInput,
+    GetTokenVaultInputDict,
     GetTokenVaultOutput,
     GetWorkloadIdentityInput,
+    GetWorkloadIdentityInputDict,
     GetWorkloadIdentityOutput,
     GithubOauth2ProviderConfigInput,
+    GithubOauth2ProviderConfigInputDict,
     GithubOauth2ProviderConfigOutput,
     GoogleOauth2ProviderConfigInput,
+    GoogleOauth2ProviderConfigInputDict,
     GoogleOauth2ProviderConfigOutput,
     Harness,
     HarnessAfterInvocationHook,
+    HarnessAfterInvocationHookDict,
     HarnessAfterToolCallHook,
+    HarnessAfterToolCallHookDict,
     HarnessAgentCoreBrowserConfig,
+    HarnessAgentCoreBrowserConfigDict,
     HarnessAgentCoreCodeInterpreterConfig,
+    HarnessAgentCoreCodeInterpreterConfigDict,
     HarnessAgentCoreGatewayConfig,
+    HarnessAgentCoreGatewayConfigDict,
     HarnessAgentCoreMemoryConfiguration,
+    HarnessAgentCoreMemoryConfigurationDict,
     HarnessAgentCoreMemoryRetrievalConfig,
+    HarnessAgentCoreMemoryRetrievalConfigDict,
     HarnessAgentCoreRuntimeEnvironment,
     HarnessAgentCoreRuntimeEnvironmentRequest,
+    HarnessAgentCoreRuntimeEnvironmentRequestDict,
     HarnessBedrockModelConfig,
+    HarnessBedrockModelConfigDict,
     HarnessBeforeInvocationHook,
+    HarnessBeforeInvocationHookDict,
     HarnessBeforeToolCallHook,
+    HarnessBeforeToolCallHookDict,
     HarnessDisabledMemoryConfiguration,
+    HarnessDisabledMemoryConfigurationDict,
     HarnessEndpoint,
+    HarnessEnvironmentArtifactDict,
+    HarnessEnvironmentProviderRequestDict,
+    HarnessGatewayOutboundAuthDict,
     HarnessGeminiModelConfig,
+    HarnessGeminiModelConfigDict,
+    HarnessHookDict,
     HarnessHookEventBridgeTarget,
+    HarnessHookEventBridgeTargetDict,
     HarnessHookLambdaTarget,
+    HarnessHookLambdaTargetDict,
     HarnessHookSnsTarget,
+    HarnessHookSnsTargetDict,
+    HarnessHookTargetDict,
     HarnessInlineFunctionConfig,
+    HarnessInlineFunctionConfigDict,
     HarnessLiteLlmModelConfig,
+    HarnessLiteLlmModelConfigDict,
     HarnessManagedMemoryConfiguration,
+    HarnessManagedMemoryConfigurationDict,
+    HarnessMemoryConfigurationDict,
+    HarnessModelConfigurationDict,
     HarnessOpenAiModelConfig,
+    HarnessOpenAiModelConfigDict,
     HarnessRemoteMcpConfig,
+    HarnessRemoteMcpConfigDict,
+    HarnessRemoteMcpOutboundAuthDict,
     HarnessSkillAwsSkillsSource,
+    HarnessSkillAwsSkillsSourceDict,
+    HarnessSkillDict,
     HarnessSkillGitAuth,
+    HarnessSkillGitAuthDict,
     HarnessSkillGitSource,
+    HarnessSkillGitSourceDict,
     HarnessSkillS3Source,
+    HarnessSkillS3SourceDict,
     HarnessSlidingWindowConfiguration,
+    HarnessSlidingWindowConfigurationDict,
     HarnessSummarizationConfiguration,
+    HarnessSummarizationConfigurationDict,
     HarnessSummary,
+    HarnessSystemContentBlockDict,
     HarnessTool,
+    HarnessToolConfigurationDict,
+    HarnessToolDict,
     HarnessTruncationConfiguration,
+    HarnessTruncationConfigurationDict,
+    HarnessTruncationStrategyConfigurationDict,
     HarnessVersionSummary,
     HostingEnvironment,
+    HostingEnvironmentDict,
     HttpApiSchemaConfiguration,
+    HttpApiSchemaConfigurationDict,
     HttpConnectorSource,
+    HttpConnectorSourceDict,
     HttpConnectorTargetConfiguration,
+    HttpConnectorTargetConfigurationDict,
     HttpPostLifecycleHookAction,
+    HttpPostLifecycleHookActionDict,
+    HttpTargetConfigurationDict,
     IamCredentialProvider,
+    IamCredentialProviderDict,
     IamPrincipal,
+    IamPrincipalDict,
     IncludedOauth2ProviderConfigInput,
+    IncludedOauth2ProviderConfigInputDict,
     IncludedOauth2ProviderConfigOutput,
     IndexedKey,
+    IndexedKeyDict,
     InferenceConfiguration,
+    InferenceConfigurationDict,
     InferenceConnectorSource,
+    InferenceConnectorSourceDict,
     InferenceConnectorTargetConfiguration,
+    InferenceConnectorTargetConfigurationDict,
     InferenceOperationConfiguration,
+    InferenceOperationConfigurationDict,
     InferenceProviderTargetConfiguration,
+    InferenceProviderTargetConfigurationDict,
+    InferenceTargetConfigurationDict,
     InlineExamplesSource,
+    InlineExamplesSourceDict,
     Insight,
+    InsightDict,
     InstanceLifecycleConfiguration,
+    InstanceLifecycleConfigurationDict,
     InstanceRequirements,
+    InstanceRequirementsDict,
+    InterceptorConfigurationDict,
     InterceptorInputConfiguration,
+    InterceptorInputConfigurationDict,
+    InterceptorPayloadExclusionSelectorDict,
     InterceptorPayloadFilter,
+    InterceptorPayloadFilterDict,
     InvocationConfiguration,
     InvocationConfigurationInput,
+    InvocationConfigurationInputDict,
     KinesisResource,
+    KinesisResourceDict,
     KmsConfiguration,
+    KmsConfigurationDict,
     KmsKeySourceType,
+    KmsKeySourceTypeDict,
     LambdaEvaluatorConfig,
+    LambdaEvaluatorConfigDict,
     LambdaInterceptorConfiguration,
+    LambdaInterceptorConfigurationDict,
     LambdaTransformConfiguration,
+    LambdaTransformConfigurationDict,
     LaunchParameters,
+    LaunchParametersDict,
+    LaunchTemplateSourceDict,
     LicenseSpecification,
+    LicenseSpecificationDict,
     LifecycleConfiguration,
+    LifecycleConfigurationDict,
     LifecycleHook,
+    LifecycleHookActionDict,
+    LifecycleHookDict,
     LimitEntry,
+    LimitEntryDict,
     LinkedinOauth2ProviderConfigInput,
+    LinkedinOauth2ProviderConfigInputDict,
     LinkedinOauth2ProviderConfigOutput,
     ListAgentRuntimeEndpointsInput,
+    ListAgentRuntimeEndpointsInputDict,
     ListAgentRuntimeEndpointsOutput,
     ListAgentRuntimeVersionsByCapacityProviderInput,
+    ListAgentRuntimeVersionsByCapacityProviderInputDict,
     ListAgentRuntimeVersionsByCapacityProviderOutput,
     ListAgentRuntimeVersionsInput,
+    ListAgentRuntimeVersionsInputDict,
     ListAgentRuntimeVersionsOutput,
     ListAgentRuntimesInput,
+    ListAgentRuntimesInputDict,
     ListAgentRuntimesOutput,
     ListApiKeyCredentialProvidersInput,
+    ListApiKeyCredentialProvidersInputDict,
     ListApiKeyCredentialProvidersOutput,
     ListBrowserProfilesInput,
+    ListBrowserProfilesInputDict,
     ListBrowserProfilesOutput,
     ListBrowsersInput,
+    ListBrowsersInputDict,
     ListBrowsersOutput,
     ListCapacityProvidersInput,
+    ListCapacityProvidersInputDict,
     ListCapacityProvidersOutput,
     ListCodeInterpretersInput,
+    ListCodeInterpretersInputDict,
     ListCodeInterpretersOutput,
     ListConfigurationBundleVersionsInput,
+    ListConfigurationBundleVersionsInputDict,
     ListConfigurationBundleVersionsOutput,
     ListConfigurationBundlesInput,
+    ListConfigurationBundlesInputDict,
     ListConfigurationBundlesOutput,
     ListConsentPortalsInput,
+    ListConsentPortalsInputDict,
     ListConsentPortalsOutput,
     ListDatasetExamplesInput,
+    ListDatasetExamplesInputDict,
     ListDatasetExamplesOutput,
     ListDatasetVersionsInput,
+    ListDatasetVersionsInputDict,
     ListDatasetVersionsOutput,
     ListDatasetsInput,
+    ListDatasetsInputDict,
     ListDatasetsOutput,
     ListEvaluatorsInput,
+    ListEvaluatorsInputDict,
     ListEvaluatorsOutput,
     ListGatewayRateLimitsInput,
+    ListGatewayRateLimitsInputDict,
     ListGatewayRateLimitsOutput,
     ListGatewayRulesInput,
+    ListGatewayRulesInputDict,
     ListGatewayRulesOutput,
     ListGatewayTargetsInput,
+    ListGatewayTargetsInputDict,
     ListGatewayTargetsOutput,
     ListGatewaysInput,
+    ListGatewaysInputDict,
     ListGatewaysOutput,
     ListHarnessEndpointsInput,
+    ListHarnessEndpointsInputDict,
     ListHarnessEndpointsOutput,
     ListHarnessVersionsInput,
+    ListHarnessVersionsInputDict,
     ListHarnessVersionsOutput,
     ListHarnessesInput,
+    ListHarnessesInputDict,
     ListHarnessesOutput,
     ListMemoriesInput,
+    ListMemoriesInputDict,
     ListMemoriesOutput,
     ListOauth2CredentialProvidersInput,
+    ListOauth2CredentialProvidersInputDict,
     ListOauth2CredentialProvidersOutput,
     ListOnlineEvaluationConfigsInput,
+    ListOnlineEvaluationConfigsInputDict,
     ListOnlineEvaluationConfigsOutput,
     ListPaymentConnectorsInput,
+    ListPaymentConnectorsInputDict,
     ListPaymentConnectorsOutput,
     ListPaymentCredentialProvidersInput,
+    ListPaymentCredentialProvidersInputDict,
     ListPaymentCredentialProvidersOutput,
     ListPaymentManagersInput,
+    ListPaymentManagersInputDict,
     ListPaymentManagersOutput,
     ListPoliciesInput,
+    ListPoliciesInputDict,
     ListPoliciesOutput,
     ListPolicyEngineSummariesInput,
+    ListPolicyEngineSummariesInputDict,
     ListPolicyEngineSummariesOutput,
     ListPolicyEnginesInput,
+    ListPolicyEnginesInputDict,
     ListPolicyEnginesOutput,
     ListPolicyGenerationAssetsInput,
+    ListPolicyGenerationAssetsInputDict,
     ListPolicyGenerationAssetsOutput,
     ListPolicyGenerationSummariesInput,
+    ListPolicyGenerationSummariesInputDict,
     ListPolicyGenerationSummariesOutput,
     ListPolicyGenerationsInput,
+    ListPolicyGenerationsInputDict,
     ListPolicyGenerationsOutput,
     ListPolicySummariesInput,
+    ListPolicySummariesInputDict,
     ListPolicySummariesOutput,
     ListRegistriesInput,
+    ListRegistriesInputDict,
     ListRegistriesOutput,
     ListRegistryRecordsInput,
+    ListRegistryRecordsInputDict,
     ListRegistryRecordsOutput,
     ListTagsForResourceInput,
+    ListTagsForResourceInputDict,
     ListTagsForResourceOutput,
     ListWorkloadIdentitiesInput,
+    ListWorkloadIdentitiesInputDict,
     ListWorkloadIdentitiesOutput,
     LlmAsAJudgeEvaluatorConfig,
+    LlmAsAJudgeEvaluatorConfigDict,
     LlmExtractionConfig,
+    LlmExtractionConfigDict,
     MCPGatewayConfiguration,
+    MCPGatewayConfigurationDict,
     ManagedResourceDetails,
     ManagedVpcResource,
+    ManagedVpcResourceDict,
     MatchModelEntry,
+    MatchModelEntryDict,
     MatchModels,
+    MatchModelsDict,
     MatchPaths,
+    MatchPathsDict,
+    MatchPrincipalEntryDict,
     MatchPrincipals,
+    MatchPrincipalsDict,
     McpDescriptor,
+    McpDescriptorDict,
     McpLambdaTargetConfiguration,
+    McpLambdaTargetConfigurationDict,
     McpServerTargetConfiguration,
+    McpServerTargetConfigurationDict,
+    McpTargetConfigurationDict,
+    McpToolSchemaConfigurationDict,
     Memory,
     MemoryRecordSchema,
+    MemoryRecordSchemaDict,
     MemoryStrategy,
+    MemoryStrategyInputDict,
     MemorySummary,
     MessageBasedTrigger,
     MessageBasedTriggerInput,
+    MessageBasedTriggerInputDict,
     MetadataConfiguration,
+    MetadataConfigurationDict,
     MetadataSchemaEntry,
+    MetadataSchemaEntryDict,
     MicrosoftOauth2ProviderConfigInput,
+    MicrosoftOauth2ProviderConfigInputDict,
     MicrosoftOauth2ProviderConfigOutput,
     ModelEntry,
+    ModelEntryDict,
     ModelMapping,
+    ModelMappingDict,
+    ModifyConsolidationConfigurationDict,
+    ModifyExtractionConfigurationDict,
     ModifyInvocationConfigurationInput,
+    ModifyInvocationConfigurationInputDict,
     ModifyMemoryStrategies,
+    ModifyMemoryStrategiesDict,
     ModifyMemoryStrategyInput,
+    ModifyMemoryStrategyInputDict,
+    ModifyReflectionConfigurationDict,
     ModifySelfManagedConfiguration,
+    ModifySelfManagedConfigurationDict,
     ModifyStrategyConfiguration,
+    ModifyStrategyConfigurationDict,
     NamespaceKeyEntry,
+    NamespaceKeyEntryDict,
     NamespaceKeyValidation,
+    NamespaceKeyValidationDict,
     NetworkConfiguration,
+    NetworkConfigurationDict,
     NumberValidation,
+    NumberValidationDict,
     NumericalScaleDefinition,
+    NumericalScaleDefinitionDict,
     OAuth2AuthorizationData,
     OAuthCredentialProvider,
+    OAuthCredentialProviderDict,
     Oauth2AuthorizationServerMetadata,
+    Oauth2AuthorizationServerMetadataDict,
     Oauth2CredentialProviderItem,
+    Oauth2DiscoveryDict,
+    Oauth2ProviderConfigInputDict,
     OnBehalfOfAuthenticationConfig,
+    OnBehalfOfAuthenticationConfigDict,
     OnBehalfOfTokenExchangeConfigType,
+    OnBehalfOfTokenExchangeConfigTypeDict,
     OnlineEvaluationConfigSummary,
     OpenResponsesEvaluatorModelConfig,
+    OpenResponsesEvaluatorModelConfigDict,
     OutputConfig,
+    OutputConfigDict,
     PassthroughTargetConfiguration,
+    PassthroughTargetConfigurationDict,
     PaymentConnectorSummary,
     PaymentCredentialProviderConfiguration,
+    PaymentCredentialProviderConfigurationDict,
     PaymentCredentialProviderItem,
     PaymentManagerSummary,
+    PaymentProviderConfigurationInputDict,
     PermissionsConfiguration,
+    PermissionsConfigurationDict,
     Policy,
+    PolicyDefinitionDict,
     PolicyEngine,
     PolicyEngineSummary,
     PolicyGeneration,
     PolicyGenerationAsset,
     PolicyGenerationDetails,
+    PolicyGenerationDetailsDict,
     PolicyGenerationSummary,
     PolicyStatement,
+    PolicyStatementDict,
     PolicySummary,
     PortRange,
+    PortRangeDict,
+    PrivateEndpointDict,
     PrivateEndpointOverride,
+    PrivateEndpointOverrideDict,
     PrivateKeyJwtConfig,
+    PrivateKeyJwtConfigDict,
+    PrivateKeySourceDict,
     ProtocolConfiguration,
+    ProtocolConfigurationDict,
     ProviderPrefix,
+    ProviderPrefixDict,
     PutResourcePolicyInput,
+    PutResourcePolicyInputDict,
     PutResourcePolicyOutput,
     RateConfig,
+    RateConfigDict,
+    RatingScaleDict,
     ReasoningConfiguration,
+    ReasoningConfigurationDict,
+    RecordExpirySpecificationDict,
     RecordingConfig,
+    RecordingConfigDict,
     RegistryRecordCredentialProviderConfiguration,
+    RegistryRecordCredentialProviderConfigurationDict,
+    RegistryRecordCredentialProviderUnionDict,
     RegistryRecordIamCredentialProvider,
+    RegistryRecordIamCredentialProviderDict,
     RegistryRecordOAuthCredentialProvider,
+    RegistryRecordOAuthCredentialProviderDict,
     RegistryRecordSummary,
     RegistrySummary,
+    RequestHeaderConfigurationDict,
     ResetTokenVaultKeyMaterialInput,
+    ResetTokenVaultKeyMaterialInputDict,
     ResetTokenVaultKeyMaterialOutput,
     ResourceConfiguration,
+    ResourceConfigurationDict,
+    ResourceDict,
+    ResourceLocationDict,
     RootVolumeConfiguration,
+    RootVolumeConfigurationDict,
     RotatePaymentConnectorCredentialsInput,
+    RotatePaymentConnectorCredentialsInputDict,
     RotatePaymentConnectorCredentialsOutput,
+    RouteToTargetActionDict,
     Rule,
+    RuleDict,
     RuntimeHooksConfiguration,
+    RuntimeHooksConfigurationDict,
     RuntimeMetadataConfiguration,
+    RuntimeMetadataConfigurationDict,
     RuntimeTargetConfiguration,
+    RuntimeTargetConfigurationDict,
     S3CertificateConfiguration,
+    S3CertificateConfigurationDict,
     S3Configuration,
+    S3ConfigurationDict,
     S3FilesAccessPointConfiguration,
+    S3FilesAccessPointConfigurationDict,
     S3FilesConfiguration,
+    S3FilesConfigurationDict,
     S3Location,
+    S3LocationDict,
     S3Source,
+    S3SourceDict,
     SalesforceOauth2ProviderConfigInput,
+    SalesforceOauth2ProviderConfigInputDict,
     SalesforceOauth2ProviderConfigOutput,
     SamplingConfig,
+    SamplingConfigDict,
     SchemaDefinition,
+    SchemaDefinitionDict,
     Secret,
     SecretReference,
+    SecretReferenceDict,
     SecretsManagerCertificateConfiguration,
+    SecretsManagerCertificateConfigurationDict,
     SecretsManagerLocation,
+    SecretsManagerLocationDict,
     SelfManagedConfiguration,
     SelfManagedConfigurationInput,
+    SelfManagedConfigurationInputDict,
+    SelfManagedLatticeResourceDict,
     SemanticConsolidationOverride,
     SemanticExtractionOverride,
     SemanticMemoryStrategyInput,
+    SemanticMemoryStrategyInputDict,
     SemanticOverrideConfigurationInput,
+    SemanticOverrideConfigurationInputDict,
     SemanticOverrideConsolidationConfigurationInput,
+    SemanticOverrideConsolidationConfigurationInputDict,
     SemanticOverrideExtractionConfigurationInput,
+    SemanticOverrideExtractionConfigurationInputDict,
     ServerDefinition,
+    ServerDefinitionDict,
     SessionConfig,
+    SessionConfigDict,
     SessionConfiguration,
+    SessionConfigurationDict,
     SessionStorageConfiguration,
+    SessionStorageConfigurationDict,
     SetTokenVaultCMKInput,
+    SetTokenVaultCMKInputDict,
     SetTokenVaultCMKOutput,
     SkillDefinition,
+    SkillDefinitionDict,
     SkillMdDefinition,
+    SkillMdDefinitionDict,
     SlackOauth2ProviderConfigInput,
+    SlackOauth2ProviderConfigInputDict,
     SlackOauth2ProviderConfigOutput,
     StartPolicyGenerationInput,
+    StartPolicyGenerationInputDict,
     StartPolicyGenerationOutput,
     StaticOverride,
+    StaticOverrideDict,
     StaticRoute,
+    StaticRouteDict,
     StickinessConfiguration,
+    StickinessConfigurationDict,
     StrategyConfiguration,
+    StreamDeliveryResourceDict,
     StreamDeliveryResources,
+    StreamDeliveryResourcesDict,
     StreamingConfiguration,
+    StreamingConfigurationDict,
     StringListValidation,
+    StringListValidationDict,
     StringValidation,
+    StringValidationDict,
     StripePrivyConfigurationInput,
+    StripePrivyConfigurationInputDict,
     StripePrivyConfigurationOutput,
     SubmitRegistryRecordForApprovalInput,
+    SubmitRegistryRecordForApprovalInputDict,
     SubmitRegistryRecordForApprovalOutput,
     SummaryConsolidationOverride,
     SummaryMemoryStrategyInput,
+    SummaryMemoryStrategyInputDict,
     SummaryOverrideConfigurationInput,
+    SummaryOverrideConfigurationInputDict,
     SummaryOverrideConsolidationConfigurationInput,
+    SummaryOverrideConsolidationConfigurationInputDict,
     SynchronizationConfiguration,
+    SynchronizationConfigurationDict,
     SynchronizeGatewayTargetsInput,
+    SynchronizeGatewayTargetsInputDict,
     SynchronizeGatewayTargetsOutput,
     SystemManagedBlock,
     TagResourceInput,
+    TagResourceInputDict,
     TagResourceOutput,
+    TargetConfigurationDict,
     TargetSummary,
     TargetTrafficSplitEntry,
+    TargetTrafficSplitEntryDict,
     TimeBasedTrigger,
     TimeBasedTriggerInput,
+    TimeBasedTriggerInputDict,
     TokenBasedTrigger,
     TokenBasedTriggerInput,
+    TokenBasedTriggerInputDict,
     TokenExchangeGrantTypeConfigType,
+    TokenExchangeGrantTypeConfigTypeDict,
     ToolDefinition,
+    ToolDefinitionDict,
+    ToolSchemaDict,
     ToolsDefinition,
+    ToolsDefinitionDict,
+    ToolsFileSystemConfigurationDict,
     TrafficSplitEntry,
+    TrafficSplitEntryDict,
+    TriggerConditionInputDict,
     Unit,
+    UnitDict,
     UntagResourceInput,
+    UntagResourceInputDict,
     UntagResourceOutput,
     UpdateAgentRuntimeEndpointInput,
+    UpdateAgentRuntimeEndpointInputDict,
     UpdateAgentRuntimeEndpointOutput,
     UpdateAgentRuntimeInput,
+    UpdateAgentRuntimeInputDict,
     UpdateAgentRuntimeOutput,
     UpdateApiKeyCredentialProviderInput,
+    UpdateApiKeyCredentialProviderInputDict,
     UpdateApiKeyCredentialProviderOutput,
     UpdateCapacityProviderInput,
+    UpdateCapacityProviderInputDict,
     UpdateCapacityProviderOutput,
     UpdateConfigurationBundleInput,
+    UpdateConfigurationBundleInputDict,
     UpdateConfigurationBundleOutput,
     UpdateConsentPortalInput,
+    UpdateConsentPortalInputDict,
     UpdateConsentPortalOutput,
     UpdateDatasetExamplesInput,
+    UpdateDatasetExamplesInputDict,
     UpdateDatasetExamplesOutput,
     UpdateDatasetInput,
+    UpdateDatasetInputDict,
     UpdateDatasetOutput,
     UpdateEvaluatorInput,
+    UpdateEvaluatorInputDict,
     UpdateEvaluatorOutput,
     UpdateGatewayInput,
+    UpdateGatewayInputDict,
     UpdateGatewayOutput,
     UpdateGatewayRateLimitInput,
+    UpdateGatewayRateLimitInputDict,
     UpdateGatewayRateLimitOutput,
     UpdateGatewayRuleInput,
+    UpdateGatewayRuleInputDict,
     UpdateGatewayRuleOutput,
     UpdateGatewayTargetInput,
+    UpdateGatewayTargetInputDict,
     UpdateGatewayTargetOutput,
     UpdateHarnessEndpointInput,
+    UpdateHarnessEndpointInputDict,
     UpdateHarnessEndpointOutput,
     UpdateHarnessInput,
+    UpdateHarnessInputDict,
     UpdateHarnessOutput,
     UpdateMemoryInput,
+    UpdateMemoryInputDict,
     UpdateMemoryOutput,
     UpdateOauth2CredentialProviderInput,
+    UpdateOauth2CredentialProviderInputDict,
     UpdateOauth2CredentialProviderOutput,
     UpdateOnlineEvaluationConfigInput,
+    UpdateOnlineEvaluationConfigInputDict,
     UpdateOnlineEvaluationConfigOutput,
     UpdatePaymentConnectorInput,
+    UpdatePaymentConnectorInputDict,
     UpdatePaymentConnectorOutput,
     UpdatePaymentCredentialProviderInput,
+    UpdatePaymentCredentialProviderInputDict,
     UpdatePaymentCredentialProviderOutput,
     UpdatePaymentManagerInput,
+    UpdatePaymentManagerInputDict,
     UpdatePaymentManagerOutput,
     UpdatePolicyEngineInput,
+    UpdatePolicyEngineInputDict,
     UpdatePolicyEngineOutput,
     UpdatePolicyInput,
+    UpdatePolicyInputDict,
     UpdatePolicyOutput,
     UpdateRegistryInput,
+    UpdateRegistryInputDict,
     UpdateRegistryOutput,
     UpdateRegistryRecordInput,
+    UpdateRegistryRecordInputDict,
     UpdateRegistryRecordOutput,
     UpdateRegistryRecordStatusInput,
+    UpdateRegistryRecordStatusInputDict,
     UpdateRegistryRecordStatusOutput,
     UpdateWorkloadIdentityInput,
+    UpdateWorkloadIdentityInputDict,
     UpdateWorkloadIdentityOutput,
     UpdatedA2aDescriptor,
+    UpdatedA2aDescriptorDict,
     UpdatedAgentSkillsDescriptor,
+    UpdatedAgentSkillsDescriptorDict,
     UpdatedAgentSkillsDescriptorFields,
+    UpdatedAgentSkillsDescriptorFieldsDict,
     UpdatedApprovalConfiguration,
+    UpdatedApprovalConfigurationDict,
     UpdatedAuthorizerConfiguration,
+    UpdatedAuthorizerConfigurationDict,
     UpdatedCustomDescriptor,
+    UpdatedCustomDescriptorDict,
     UpdatedDescription,
+    UpdatedDescriptionDict,
     UpdatedDescriptors,
+    UpdatedDescriptorsDict,
     UpdatedDescriptorsUnion,
+    UpdatedDescriptorsUnionDict,
     UpdatedHarnessEnvironmentArtifact,
+    UpdatedHarnessEnvironmentArtifactDict,
     UpdatedHarnessMemoryConfiguration,
+    UpdatedHarnessMemoryConfigurationDict,
     UpdatedMcpDescriptor,
+    UpdatedMcpDescriptorDict,
     UpdatedMcpDescriptorFields,
+    UpdatedMcpDescriptorFieldsDict,
     UpdatedServerDefinition,
+    UpdatedServerDefinitionDict,
     UpdatedSkillDefinition,
+    UpdatedSkillDefinitionDict,
     UpdatedSkillMdDefinition,
+    UpdatedSkillMdDefinitionDict,
     UpdatedSynchronizationConfiguration,
+    UpdatedSynchronizationConfigurationDict,
     UpdatedSynchronizationType,
+    UpdatedSynchronizationTypeDict,
     UpdatedToolsDefinition,
+    UpdatedToolsDefinitionDict,
     UserPreferenceConsolidationOverride,
     UserPreferenceExtractionOverride,
     UserPreferenceMemoryStrategyInput,
+    UserPreferenceMemoryStrategyInputDict,
     UserPreferenceOverrideConfigurationInput,
+    UserPreferenceOverrideConfigurationInputDict,
     UserPreferenceOverrideConsolidationConfigurationInput,
+    UserPreferenceOverrideConsolidationConfigurationInputDict,
     UserPreferenceOverrideExtractionConfigurationInput,
+    UserPreferenceOverrideExtractionConfigurationInputDict,
+    ValidationDict,
     ValidationExceptionField,
     VersionCreatedBySource,
+    VersionCreatedBySourceDict,
     VersionFilter,
+    VersionFilterDict,
     VersionLineageMetadata,
+    VolumeConfigurationDict,
     VpcConfig,
+    VpcConfigDict,
     VpcConfiguration,
+    VpcConfigurationDict,
     WafConfiguration,
+    WafConfigurationDict,
     WeightedOverride,
+    WeightedOverrideDict,
     WeightedRoute,
+    WeightedRouteDict,
     WorkloadIdentityDetails,
     WorkloadIdentityType,
 )
 
 
-# Static type fixture: pyright over this validates models.pyi.
-# Not executed as a test; it only needs to type-check.
+# Static type fixture: pyright over this validates models.pyi and the
+# client method signatures. Not executed as a test; it only needs to
+# type-check.
 
 _: Any = ...
 
@@ -2119,3 +2641,2598 @@ WeightedRoute(traffic_split=_)
 WorkloadIdentityDetails(workload_identity_arn=_)
 WorkloadIdentityType(name=_, workload_identity_arn=_)
 Unit()
+_params_0: A2aDescriptorDict = {}
+_params_1: ActionDict = {"configuration_bundle": _}
+_params_2: AddDatasetExamplesInputDict = {"dataset_id": _, "source": _}
+_params_3: AgentCardDefinitionDict = {}
+_params_4: AgentRuntimeArtifactDict = {"container_configuration": _}
+_params_5: AgentSkillsDescriptorDict = {}
+_params_6: AllowedPortDict = {"port": _}
+_params_7: AllowedWorkloadConfigurationDict = {}
+_params_8: ApiGatewayTargetConfigurationDict = {
+    "rest_api_id": _,
+    "stage": _,
+    "api_gateway_tool_configuration": _,
+}
+_params_9: ApiGatewayToolConfigurationDict = {"tool_filters": _}
+_params_10: ApiGatewayToolFilterDict = {"filter_path": _, "methods": _}
+_params_11: ApiGatewayToolOverrideDict = {"name": _, "path": _, "method": _}
+_params_12: ApiSchemaConfigurationDict = {"s3": _}
+_params_13: ApprovalConfigurationDict = {}
+_params_14: AtlassianOauth2ProviderConfigInputDict = {"client_id": _}
+_params_15: AuthorizerConfigurationDict = {"custom_jwt_authorizer": _}
+_params_16: AuthorizingClaimMatchValueTypeDict = {
+    "claim_match_value": _,
+    "claim_match_operator": _,
+}
+_params_17: BatchPutGatewayRateLimitsInputDict = {
+    "gateway_identifier": _,
+    "rate_limits": _,
+}
+_params_18: BatchPutLimitEntryDict = {"dimension_keys": _, "entries": _}
+_params_19: BedrockEvaluatorModelConfigDict = {"model_id": _}
+_params_20: BrowserEnterprisePolicyDict = {"location": _}
+_params_21: BrowserNetworkConfigurationDict = {}
+_params_22: BrowserSigningConfigInputDict = {}
+_params_23: BuildLifecycleHooksDict = {}
+_params_24: CapacityProviderConfigurationDict = {"capacity_provider_arn": _}
+_params_25: CapacityProviderVolumeConfigurationDict = {
+    "volume_name": _,
+    "mount_path": _,
+}
+_params_26: CapacityReservationSpecificationDict = {}
+_params_27: CapacityReservationTargetDict = {}
+_params_28: CategoricalScaleDefinitionDict = {"definition": _, "label": _}
+_params_29: CedarPolicyDict = {"statement": _}
+_params_30: CertificateDict = {"location": _}
+_params_31: CertificateConfigurationDict = {"s3": _}
+_params_32: CertificateLocationDict = {"secrets_manager": _}
+_params_33: CircuitBreakerConfigurationDict = {}
+_params_34: ClaimMatchValueTypeDict = {"match_value_string": _}
+_params_35: CloudWatchLogsInputConfigDict = {"service_names": _}
+_params_36: CloudWatchOutputConfigDict = {}
+_params_37: ClusteringConfigDict = {"frequencies": _}
+_params_38: CodeDict = {"s3": _}
+_params_39: CodeBasedEvaluatorConfigDict = {"lambda_config": _}
+_params_40: CodeConfigurationDict = {"code": _, "runtime": _, "entry_point": _}
+_params_41: CodeInterpreterNetworkConfigurationDict = {}
+_params_42: CoinbaseCdpConfigurationInputDict = {"api_key_id": _}
+_params_43: CoinbaseCdpRotationTargetsDict = {"secrets": _}
+_params_44: ComponentConfigurationDict = {"configuration": _}
+_params_45: ComputeConfigurationDict = {"ec2_configuration": _}
+_params_46: ConditionDict = {"match_principals": _}
+_params_47: ConfigurationBundleActionDict = {"static_override": _}
+_params_48: ConfigurationBundleReferenceDict = {"bundle_arn": _, "bundle_version": _}
+_params_49: ConnectorConfigurationDict = {"name": _}
+_params_50: ConnectorParameterOverrideDict = {"path": _}
+_params_51: ConnectorSourceDict = {"connector_id": _}
+_params_52: ConnectorTargetConfigurationDict = {"source": _}
+_params_53: ConsentPortalIdpConfigDict = {"credential_provider_arn": _, "scopes": _}
+_params_54: ConsentPortalSourceDict = {"identifier": _, "type": _}
+_params_55: ContainerConfigurationDict = {"container_uri": _}
+_params_56: ContentDict = {"raw_text": _}
+_params_57: ContentConfigurationDict = {"type": _}
+_params_58: CreateAgentRuntimeEndpointInputDict = {"agent_runtime_id": _, "name": _}
+_params_59: CreateAgentRuntimeInputDict = {
+    "agent_runtime_name": _,
+    "agent_runtime_artifact": _,
+    "role_arn": _,
+}
+_params_60: CreateApiKeyCredentialProviderInputDict = {"name": _}
+_params_61: CreateBrowserInputDict = {"name": _, "network_configuration": _}
+_params_62: CreateBrowserProfileInputDict = {"name": _}
+_params_63: CreateCapacityProviderInputDict = {
+    "name": _,
+    "permissions_configuration": _,
+    "compute_configuration": _,
+}
+_params_64: CreateCodeInterpreterInputDict = {"name": _, "network_configuration": _}
+_params_65: CreateConfigurationBundleInputDict = {"bundle_name": _, "components": _}
+_params_66: CreateConsentPortalInputDict = {
+    "execution_role_arn": _,
+    "idp_config": _,
+    "name": _,
+    "sources": _,
+}
+_params_67: CreateDatasetInputDict = {"dataset_name": _, "source": _, "schema_type": _}
+_params_68: CreateDatasetVersionInputDict = {"dataset_id": _}
+_params_69: CreateEvaluatorInputDict = {
+    "evaluator_name": _,
+    "evaluator_config": _,
+    "level": _,
+}
+_params_70: CreateGatewayInputDict = {"name": _, "role_arn": _, "authorizer_type": _}
+_params_71: CreateGatewayRateLimitInputDict = {
+    "gateway_identifier": _,
+    "dimension_keys": _,
+    "entries": _,
+}
+_params_72: CreateGatewayRuleInputDict = {
+    "gateway_identifier": _,
+    "priority": _,
+    "actions": _,
+}
+_params_73: CreateGatewayTargetInputDict = {
+    "gateway_identifier": _,
+    "target_configuration": _,
+}
+_params_74: CreateHarnessEndpointInputDict = {"harness_id": _, "endpoint_name": _}
+_params_75: CreateHarnessInputDict = {"harness_name": _, "execution_role_arn": _}
+_params_76: CreateMemoryInputDict = {"name": _, "event_expiry_duration": _}
+_params_77: CreateOauth2CredentialProviderInputDict = {
+    "name": _,
+    "credential_provider_vendor": _,
+    "oauth2_provider_config_input": _,
+}
+_params_78: CreateOnlineEvaluationConfigInputDict = {
+    "online_evaluation_config_name": _,
+    "rule": _,
+    "data_source_config": _,
+    "evaluation_execution_role_arn": _,
+    "enable_on_create": _,
+}
+_params_79: CreatePaymentConnectorInputDict = {
+    "payment_manager_id": _,
+    "name": _,
+    "type": _,
+    "credential_provider_configurations": _,
+}
+_params_80: CreatePaymentCredentialProviderInputDict = {
+    "name": _,
+    "credential_provider_vendor": _,
+    "provider_configuration_input": _,
+}
+_params_81: CreatePaymentManagerInputDict = {
+    "name": _,
+    "authorizer_type": _,
+    "role_arn": _,
+}
+_params_82: CreatePolicyEngineInputDict = {"name": _}
+_params_83: CreatePolicyInputDict = {"name": _, "definition": _, "policy_engine_id": _}
+_params_84: CreateRegistryInputDict = {"name": _}
+_params_85: CreateRegistryRecordInputDict = {
+    "registry_id": _,
+    "name": _,
+    "descriptor_type": _,
+}
+_params_86: CreateWorkloadIdentityInputDict = {"name": _}
+_params_87: CredentialProviderDict = {"oauth_credential_provider": _}
+_params_88: CredentialProviderConfigurationDict = {"credential_provider_type": _}
+_params_89: CredentialRotationConfigDict = {"coinbase_cdp": _}
+_params_90: CredentialsProviderConfigurationDict = {"coinbase_cdp": _}
+_params_91: CustomClaimValidationTypeDict = {
+    "inbound_token_claim_name": _,
+    "inbound_token_claim_value_type": _,
+    "authorizing_claim_match_value": _,
+}
+_params_92: CustomConfigurationInputDict = {"semantic_override": _}
+_params_93: CustomConsolidationConfigurationInputDict = {
+    "semantic_consolidation_override": _
+}
+_params_94: CustomDescriptorDict = {}
+_params_95: CustomExtractionConfigurationInputDict = {"semantic_extraction_override": _}
+_params_96: CustomJWTAuthorizerConfigurationDict = {"discovery_url": _}
+_params_97: CustomMemoryStrategyInputDict = {"name": _}
+_params_98: CustomOauth2ProviderConfigInputDict = {"oauth_discovery": _}
+_params_99: CustomReflectionConfigurationInputDict = {"episodic_reflection_override": _}
+_params_100: CustomTransformConfigurationDict = {}
+_params_101: DataSourceConfigDict = {"cloud_watch_logs": _}
+_params_102: DataSourceTypeDict = {"inline_examples": _}
+_params_103: DeleteAgentRuntimeEndpointInputDict = {
+    "agent_runtime_id": _,
+    "endpoint_name": _,
+}
+_params_104: DeleteAgentRuntimeInputDict = {"agent_runtime_id": _}
+_params_105: DeleteApiKeyCredentialProviderInputDict = {"name": _}
+_params_106: DeleteBrowserInputDict = {"browser_id": _}
+_params_107: DeleteBrowserProfileInputDict = {"profile_id": _}
+_params_108: DeleteCapacityProviderInputDict = {"capacity_provider_id": _}
+_params_109: DeleteCodeInterpreterInputDict = {"code_interpreter_id": _}
+_params_110: DeleteConfigurationBundleInputDict = {"bundle_id": _}
+_params_111: DeleteConsentPortalInputDict = {"consent_portal_identifier": _}
+_params_112: DeleteDatasetExamplesInputDict = {"dataset_id": _, "example_ids": _}
+_params_113: DeleteDatasetInputDict = {"dataset_id": _}
+_params_114: DeleteEvaluatorInputDict = {"evaluator_id": _}
+_params_115: DeleteGatewayInputDict = {"gateway_identifier": _}
+_params_116: DeleteGatewayRateLimitInputDict = {
+    "gateway_identifier": _,
+    "rate_limit_id": _,
+}
+_params_117: DeleteGatewayRuleInputDict = {"gateway_identifier": _, "rule_id": _}
+_params_118: DeleteGatewayTargetInputDict = {"gateway_identifier": _, "target_id": _}
+_params_119: DeleteHarnessEndpointInputDict = {"harness_id": _, "endpoint_name": _}
+_params_120: DeleteHarnessInputDict = {"harness_id": _}
+_params_121: DeleteMemoryInputDict = {"memory_id": _}
+_params_122: DeleteMemoryStrategyInputDict = {"memory_strategy_id": _}
+_params_123: DeleteOauth2CredentialProviderInputDict = {"name": _}
+_params_124: DeleteOnlineEvaluationConfigInputDict = {"online_evaluation_config_id": _}
+_params_125: DeletePaymentConnectorInputDict = {
+    "payment_manager_id": _,
+    "payment_connector_id": _,
+}
+_params_126: DeletePaymentCredentialProviderInputDict = {"name": _}
+_params_127: DeletePaymentManagerInputDict = {"payment_manager_id": _}
+_params_128: DeletePolicyEngineInputDict = {"policy_engine_id": _}
+_params_129: DeletePolicyInputDict = {"policy_engine_id": _, "policy_id": _}
+_params_130: DeleteRegistryInputDict = {"registry_id": _}
+_params_131: DeleteRegistryRecordInputDict = {"registry_id": _, "record_id": _}
+_params_132: DeleteResourcePolicyInputDict = {"resource_arn": _}
+_params_133: DeleteWorkloadIdentityInputDict = {"name": _}
+_params_134: DerivedEvaluatorConfigDict = {"base_evaluator_id": _, "model_config": _}
+_params_135: DescriptorsDict = {}
+_params_136: DimensionRatingScaleDict = {"numerical": _}
+_params_137: DomainOverrideDict = {"default_domain": _}
+_params_138: EbsVolumeConfigurationDict = {"name": _, "size_gi_b": _}
+_params_139: Ec2ConfigurationDict = {
+    "launch_template_source": _,
+    "vpc_configuration": _,
+}
+_params_140: EfsAccessPointConfigurationDict = {"access_point_arn": _, "mount_path": _}
+_params_141: EfsConfigurationDict = {
+    "access_point_arn": _,
+    "mount_path": _,
+    "file_system_arn": _,
+}
+_params_142: EphemeralBlockDeviceMappingDict = {}
+_params_143: EphemeralEBSVolumeConfigurationDict = {}
+_params_144: EpisodicMemoryStrategyInputDict = {"name": _}
+_params_145: EpisodicOverrideConfigurationInputDict = {}
+_params_146: EpisodicOverrideConsolidationConfigurationInputDict = {
+    "append_to_prompt": _,
+    "model_id": _,
+}
+_params_147: EpisodicOverrideExtractionConfigurationInputDict = {
+    "append_to_prompt": _,
+    "model_id": _,
+}
+_params_148: EpisodicOverrideReflectionConfigurationInputDict = {
+    "append_to_prompt": _,
+    "model_id": _,
+}
+_params_149: EpisodicReflectionConfigurationInputDict = {}
+_params_150: EvaluationDimensionDict = {
+    "dimension_name": _,
+    "dimension_instruction": _,
+    "dimension_rating_scale": _,
+}
+_params_151: EvaluatorConfigDict = {"llm_as_a_judge": _}
+_params_152: EvaluatorModelConfigDict = {"bedrock_evaluator_model_config": _}
+_params_153: EvaluatorReferenceDict = {"evaluator_id": _}
+_params_154: ExtractionConfigDict = {"llm_extraction_config": _}
+_params_155: FallbackDict = {"target_fallback": _}
+_params_156: FallbackTargetDict = {"target_name": _}
+_params_157: FallbackTriggersDict = {}
+_params_158: FilesystemConfigurationDict = {"session_storage": _}
+_params_159: FilterDict = {"key": _, "operator": _, "value": _}
+_params_160: FilterValueDict = {"string_value": _}
+_params_161: FromUrlSynchronizationConfigurationDict = {"url": _}
+_params_162: GatewayApiKeyCredentialProviderDict = {"provider_arn": _}
+_params_163: GatewayInterceptorConfigurationDict = {
+    "interceptor": _,
+    "interception_points": _,
+}
+_params_164: GatewayPolicyEngineConfigurationDict = {"arn": _, "mode": _}
+_params_165: GatewayProtocolConfigurationDict = {"mcp": _}
+_params_166: GetAgentRuntimeEndpointInputDict = {
+    "agent_runtime_id": _,
+    "endpoint_name": _,
+}
+_params_167: GetAgentRuntimeInputDict = {"agent_runtime_id": _}
+_params_168: GetApiKeyCredentialProviderInputDict = {"name": _}
+_params_169: GetBrowserInputDict = {"browser_id": _}
+_params_170: GetBrowserProfileInputDict = {"profile_id": _}
+_params_171: GetCapacityProviderInputDict = {"capacity_provider_id": _}
+_params_172: GetCodeInterpreterInputDict = {"code_interpreter_id": _}
+_params_173: GetConfigurationBundleInputDict = {"bundle_id": _}
+_params_174: GetConfigurationBundleVersionInputDict = {"bundle_id": _, "version_id": _}
+_params_175: GetConsentPortalInputDict = {"consent_portal_identifier": _}
+_params_176: GetDatasetInputDict = {"dataset_id": _}
+_params_177: GetEvaluatorInputDict = {"evaluator_id": _}
+_params_178: GetGatewayInputDict = {"gateway_identifier": _}
+_params_179: GetGatewayRateLimitInputDict = {
+    "gateway_identifier": _,
+    "rate_limit_id": _,
+}
+_params_180: GetGatewayRuleInputDict = {"gateway_identifier": _, "rule_id": _}
+_params_181: GetGatewayTargetInputDict = {"gateway_identifier": _, "target_id": _}
+_params_182: GetHarnessEndpointInputDict = {"harness_id": _, "endpoint_name": _}
+_params_183: GetHarnessInputDict = {"harness_id": _}
+_params_184: GetMemoryInputDict = {"memory_id": _}
+_params_185: GetOauth2CredentialProviderInputDict = {"name": _}
+_params_186: GetOnlineEvaluationConfigInputDict = {"online_evaluation_config_id": _}
+_params_187: GetPaymentConnectorInputDict = {
+    "payment_manager_id": _,
+    "payment_connector_id": _,
+}
+_params_188: GetPaymentCredentialProviderInputDict = {"name": _}
+_params_189: GetPaymentManagerInputDict = {"payment_manager_id": _}
+_params_190: GetPolicyEngineInputDict = {"policy_engine_id": _}
+_params_191: GetPolicyEngineSummaryInputDict = {"policy_engine_id": _}
+_params_192: GetPolicyGenerationInputDict = {
+    "policy_generation_id": _,
+    "policy_engine_id": _,
+}
+_params_193: GetPolicyGenerationSummaryInputDict = {
+    "policy_generation_id": _,
+    "policy_engine_id": _,
+}
+_params_194: GetPolicyInputDict = {"policy_engine_id": _, "policy_id": _}
+_params_195: GetPolicySummaryInputDict = {"policy_engine_id": _, "policy_id": _}
+_params_196: GetRegistryInputDict = {"registry_id": _}
+_params_197: GetRegistryRecordInputDict = {"registry_id": _, "record_id": _}
+_params_198: GetResourcePolicyInputDict = {"resource_arn": _}
+_params_199: GetTokenVaultInputDict = {}
+_params_200: GetWorkloadIdentityInputDict = {"name": _}
+_params_201: GithubOauth2ProviderConfigInputDict = {"client_id": _}
+_params_202: GoogleOauth2ProviderConfigInputDict = {"client_id": _}
+_params_203: HarnessAfterInvocationHookDict = {"name": _, "target": _}
+_params_204: HarnessAfterToolCallHookDict = {"name": _, "target": _}
+_params_205: HarnessAgentCoreBrowserConfigDict = {}
+_params_206: HarnessAgentCoreCodeInterpreterConfigDict = {}
+_params_207: HarnessAgentCoreGatewayConfigDict = {"gateway_arn": _}
+_params_208: HarnessAgentCoreMemoryConfigurationDict = {"arn": _}
+_params_209: HarnessAgentCoreMemoryRetrievalConfigDict = {}
+_params_210: HarnessAgentCoreRuntimeEnvironmentRequestDict = {}
+_params_211: HarnessBedrockModelConfigDict = {"model_id": _}
+_params_212: HarnessBeforeInvocationHookDict = {"name": _, "target": _}
+_params_213: HarnessBeforeToolCallHookDict = {"name": _, "target": _}
+_params_214: HarnessDisabledMemoryConfigurationDict = {}
+_params_215: HarnessEnvironmentArtifactDict = {"container_configuration": _}
+_params_216: HarnessEnvironmentProviderRequestDict = {
+    "agent_core_runtime_environment": _
+}
+_params_217: HarnessGatewayOutboundAuthDict = {"aws_iam": _}
+_params_218: HarnessGeminiModelConfigDict = {"model_id": _, "api_key_arn": _}
+_params_219: HarnessHookDict = {"before_invocation": _}
+_params_220: HarnessHookEventBridgeTargetDict = {"arn": _}
+_params_221: HarnessHookLambdaTargetDict = {"arn": _}
+_params_222: HarnessHookSnsTargetDict = {"arn": _}
+_params_223: HarnessHookTargetDict = {"lambda_": _}
+_params_224: HarnessInlineFunctionConfigDict = {"description": _, "input_schema": _}
+_params_225: HarnessLiteLlmModelConfigDict = {"model_id": _}
+_params_226: HarnessManagedMemoryConfigurationDict = {}
+_params_227: HarnessMemoryConfigurationDict = {"agent_core_memory_configuration": _}
+_params_228: HarnessModelConfigurationDict = {"bedrock_model_config": _}
+_params_229: HarnessOpenAiModelConfigDict = {"model_id": _, "api_key_arn": _}
+_params_230: HarnessRemoteMcpConfigDict = {"url": _}
+_params_231: HarnessRemoteMcpOutboundAuthDict = {"aws_iam": _}
+_params_232: HarnessSkillDict = {"path": _}
+_params_233: HarnessSkillAwsSkillsSourceDict = {}
+_params_234: HarnessSkillGitAuthDict = {"credential_arn": _}
+_params_235: HarnessSkillGitSourceDict = {"url": _}
+_params_236: HarnessSkillS3SourceDict = {"uri": _}
+_params_237: HarnessSlidingWindowConfigurationDict = {}
+_params_238: HarnessSummarizationConfigurationDict = {}
+_params_239: HarnessSystemContentBlockDict = {"text": _}
+_params_240: HarnessToolDict = {"type": _}
+_params_241: HarnessToolConfigurationDict = {"remote_mcp": _}
+_params_242: HarnessTruncationConfigurationDict = {"strategy": _}
+_params_243: HarnessTruncationStrategyConfigurationDict = {"sliding_window": _}
+_params_244: HostingEnvironmentDict = {"arn": _}
+_params_245: HttpApiSchemaConfigurationDict = {"source": _}
+_params_246: HttpConnectorSourceDict = {"connector_id": _}
+_params_247: HttpConnectorTargetConfigurationDict = {"source": _}
+_params_248: HttpPostLifecycleHookActionDict = {"path": _}
+_params_249: HttpTargetConfigurationDict = {"agentcore_runtime": _}
+_params_250: IamCredentialProviderDict = {"service": _}
+_params_251: IamPrincipalDict = {"arn": _}
+_params_252: IncludedOauth2ProviderConfigInputDict = {"client_id": _}
+_params_253: IndexedKeyDict = {"key": _, "type": _}
+_params_254: InferenceConfigurationDict = {}
+_params_255: InferenceConnectorSourceDict = {"connector_id": _}
+_params_256: InferenceConnectorTargetConfigurationDict = {"source": _}
+_params_257: InferenceOperationConfigurationDict = {"path": _}
+_params_258: InferenceProviderTargetConfigurationDict = {"endpoint": _}
+_params_259: InferenceTargetConfigurationDict = {"connector": _}
+_params_260: InlineExamplesSourceDict = {"examples": _}
+_params_261: InsightDict = {"insight_id": _}
+_params_262: InstanceLifecycleConfigurationDict = {}
+_params_263: InstanceRequirementsDict = {"allowed_instance_types": _}
+_params_264: InterceptorConfigurationDict = {"lambda_": _}
+_params_265: InterceptorInputConfigurationDict = {"pass_request_headers": _}
+_params_266: InterceptorPayloadExclusionSelectorDict = {"field": _}
+_params_267: InterceptorPayloadFilterDict = {"exclude": _}
+_params_268: InvocationConfigurationInputDict = {
+    "topic_arn": _,
+    "payload_delivery_bucket_name": _,
+}
+_params_269: KinesisResourceDict = {"data_stream_arn": _, "content_configurations": _}
+_params_270: KmsConfigurationDict = {"key_type": _}
+_params_271: KmsKeySourceTypeDict = {"kms_key_arn": _}
+_params_272: LambdaEvaluatorConfigDict = {"lambda_arn": _}
+_params_273: LambdaInterceptorConfigurationDict = {"arn": _}
+_params_274: LambdaTransformConfigurationDict = {}
+_params_275: LaunchParametersDict = {"operating_system": _, "instance_requirements": _}
+_params_276: LaunchTemplateSourceDict = {"launch_parameters": _}
+_params_277: LicenseSpecificationDict = {"license_configuration_arn": _}
+_params_278: LifecycleConfigurationDict = {}
+_params_279: LifecycleHookDict = {"action": _}
+_params_280: LifecycleHookActionDict = {"http_post": _}
+_params_281: LimitEntryDict = {"dimensions": _}
+_params_282: LinkedinOauth2ProviderConfigInputDict = {"client_id": _}
+_params_283: ListAgentRuntimeEndpointsInputDict = {"agent_runtime_id": _}
+_params_284: ListAgentRuntimesInputDict = {}
+_params_285: ListAgentRuntimeVersionsByCapacityProviderInputDict = {
+    "capacity_provider_id": _
+}
+_params_286: ListAgentRuntimeVersionsInputDict = {"agent_runtime_id": _}
+_params_287: ListApiKeyCredentialProvidersInputDict = {}
+_params_288: ListBrowserProfilesInputDict = {}
+_params_289: ListBrowsersInputDict = {}
+_params_290: ListCapacityProvidersInputDict = {}
+_params_291: ListCodeInterpretersInputDict = {}
+_params_292: ListConfigurationBundlesInputDict = {}
+_params_293: ListConfigurationBundleVersionsInputDict = {"bundle_id": _}
+_params_294: ListConsentPortalsInputDict = {}
+_params_295: ListDatasetExamplesInputDict = {"dataset_id": _}
+_params_296: ListDatasetsInputDict = {}
+_params_297: ListDatasetVersionsInputDict = {"dataset_id": _}
+_params_298: ListEvaluatorsInputDict = {}
+_params_299: ListGatewayRateLimitsInputDict = {"gateway_identifier": _}
+_params_300: ListGatewayRulesInputDict = {"gateway_identifier": _}
+_params_301: ListGatewaysInputDict = {}
+_params_302: ListGatewayTargetsInputDict = {"gateway_identifier": _}
+_params_303: ListHarnessEndpointsInputDict = {"harness_id": _}
+_params_304: ListHarnessesInputDict = {}
+_params_305: ListHarnessVersionsInputDict = {"harness_id": _}
+_params_306: ListMemoriesInputDict = {}
+_params_307: ListOauth2CredentialProvidersInputDict = {}
+_params_308: ListOnlineEvaluationConfigsInputDict = {}
+_params_309: ListPaymentConnectorsInputDict = {"payment_manager_id": _}
+_params_310: ListPaymentCredentialProvidersInputDict = {}
+_params_311: ListPaymentManagersInputDict = {}
+_params_312: ListPoliciesInputDict = {"policy_engine_id": _}
+_params_313: ListPolicyEnginesInputDict = {}
+_params_314: ListPolicyEngineSummariesInputDict = {}
+_params_315: ListPolicyGenerationAssetsInputDict = {
+    "policy_generation_id": _,
+    "policy_engine_id": _,
+}
+_params_316: ListPolicyGenerationsInputDict = {"policy_engine_id": _}
+_params_317: ListPolicyGenerationSummariesInputDict = {"policy_engine_id": _}
+_params_318: ListPolicySummariesInputDict = {"policy_engine_id": _}
+_params_319: ListRegistriesInputDict = {}
+_params_320: ListRegistryRecordsInputDict = {"registry_id": _}
+_params_321: ListTagsForResourceInputDict = {"resource_arn": _}
+_params_322: ListWorkloadIdentitiesInputDict = {}
+_params_323: LlmAsAJudgeEvaluatorConfigDict = {
+    "instructions": _,
+    "rating_scale": _,
+    "model_config": _,
+}
+_params_324: LlmExtractionConfigDict = {"definition": _}
+_params_325: ManagedVpcResourceDict = {
+    "vpc_identifier": _,
+    "subnet_ids": _,
+    "endpoint_ip_address_type": _,
+}
+_params_326: MatchModelEntryDict = {"value": _}
+_params_327: MatchModelsDict = {"any_of": _}
+_params_328: MatchPathsDict = {"any_of": _}
+_params_329: MatchPrincipalEntryDict = {"iam_principal": _}
+_params_330: MatchPrincipalsDict = {"any_of": _}
+_params_331: McpDescriptorDict = {}
+_params_332: MCPGatewayConfigurationDict = {}
+_params_333: McpLambdaTargetConfigurationDict = {"lambda_arn": _, "tool_schema": _}
+_params_334: McpServerTargetConfigurationDict = {"endpoint": _}
+_params_335: McpTargetConfigurationDict = {"open_api_schema": _}
+_params_336: McpToolSchemaConfigurationDict = {"s3": _}
+_params_337: MemoryRecordSchemaDict = {}
+_params_338: MemoryStrategyInputDict = {"semantic_memory_strategy": _}
+_params_339: MessageBasedTriggerInputDict = {}
+_params_340: MetadataConfigurationDict = {}
+_params_341: MetadataSchemaEntryDict = {"key": _}
+_params_342: MicrosoftOauth2ProviderConfigInputDict = {"client_id": _}
+_params_343: ModelEntryDict = {"model": _}
+_params_344: ModelMappingDict = {}
+_params_345: ModifyConsolidationConfigurationDict = {
+    "custom_consolidation_configuration": _
+}
+_params_346: ModifyExtractionConfigurationDict = {"custom_extraction_configuration": _}
+_params_347: ModifyInvocationConfigurationInputDict = {}
+_params_348: ModifyMemoryStrategiesDict = {}
+_params_349: ModifyMemoryStrategyInputDict = {"memory_strategy_id": _}
+_params_350: ModifyReflectionConfigurationDict = {
+    "episodic_reflection_configuration": _
+}
+_params_351: ModifySelfManagedConfigurationDict = {}
+_params_352: ModifyStrategyConfigurationDict = {}
+_params_353: NamespaceKeyEntryDict = {"key": _}
+_params_354: NamespaceKeyValidationDict = {}
+_params_355: NetworkConfigurationDict = {"network_mode": _}
+_params_356: NumberValidationDict = {}
+_params_357: NumericalScaleDefinitionDict = {"definition": _, "value": _, "label": _}
+_params_358: Oauth2AuthorizationServerMetadataDict = {
+    "issuer": _,
+    "authorization_endpoint": _,
+    "token_endpoint": _,
+}
+_params_359: Oauth2DiscoveryDict = {"discovery_url": _}
+_params_360: Oauth2ProviderConfigInputDict = {"custom_oauth2_provider_config": _}
+_params_361: OAuthCredentialProviderDict = {"provider_arn": _, "scopes": _}
+_params_362: OnBehalfOfAuthenticationConfigDict = {"client_authentication_method": _}
+_params_363: OnBehalfOfTokenExchangeConfigTypeDict = {"grant_type": _}
+_params_364: OpenResponsesEvaluatorModelConfigDict = {"model_id": _}
+_params_365: OutputConfigDict = {"cloud_watch_config": _}
+_params_366: PassthroughTargetConfigurationDict = {"endpoint": _, "protocol_type": _}
+_params_367: PaymentCredentialProviderConfigurationDict = {"credential_provider_arn": _}
+_params_368: PaymentProviderConfigurationInputDict = {"coinbase_cdp_configuration": _}
+_params_369: PermissionsConfigurationDict = {"capacity_provider_operator_role_arn": _}
+_params_370: PolicyDefinitionDict = {"cedar": _}
+_params_371: PolicyGenerationDetailsDict = {
+    "policy_generation_id": _,
+    "policy_generation_asset_id": _,
+}
+_params_372: PolicyStatementDict = {"statement": _}
+_params_373: PortRangeDict = {"from_": _, "to": _}
+_params_374: PrivateEndpointDict = {"self_managed_lattice_resource": _}
+_params_375: PrivateEndpointOverrideDict = {"domain": _, "private_endpoint": _}
+_params_376: PrivateKeyJwtConfigDict = {}
+_params_377: PrivateKeySourceDict = {"kms_key_source": _}
+_params_378: ProtocolConfigurationDict = {"server_protocol": _}
+_params_379: ProviderPrefixDict = {}
+_params_380: PutResourcePolicyInputDict = {"resource_arn": _, "policy": _}
+_params_381: RateConfigDict = {"rate": _, "period": _}
+_params_382: RatingScaleDict = {"numerical": _}
+_params_383: ReasoningConfigurationDict = {}
+_params_384: RecordExpirySpecificationDict = {"record_expiry_duration_days": _}
+_params_385: RecordingConfigDict = {}
+_params_386: RegistryRecordCredentialProviderConfigurationDict = {
+    "credential_provider_type": _,
+    "credential_provider": _,
+}
+_params_387: RegistryRecordCredentialProviderUnionDict = {
+    "oauth_credential_provider": _
+}
+_params_388: RegistryRecordIamCredentialProviderDict = {}
+_params_389: RegistryRecordOAuthCredentialProviderDict = {"provider_arn": _}
+_params_390: RequestHeaderConfigurationDict = {"request_header_allowlist": _}
+_params_391: ResetTokenVaultKeyMaterialInputDict = {"token_vault_id": _}
+_params_392: ResourceDict = {"arn": _}
+_params_393: ResourceConfigurationDict = {"minimum_memory_in_mi_b": _}
+_params_394: ResourceLocationDict = {"s3": _}
+_params_395: RootVolumeConfigurationDict = {}
+_params_396: RotatePaymentConnectorCredentialsInputDict = {
+    "payment_manager_id": _,
+    "payment_connector_id": _,
+    "credentials_to_rotate": _,
+}
+_params_397: RouteToTargetActionDict = {"static_route": _}
+_params_398: RuleDict = {"sampling_config": _}
+_params_399: RuntimeHooksConfigurationDict = {}
+_params_400: RuntimeMetadataConfigurationDict = {"require_mmdsv2": _}
+_params_401: RuntimeTargetConfigurationDict = {"arn": _}
+_params_402: S3CertificateConfigurationDict = {"uri": _}
+_params_403: S3ConfigurationDict = {}
+_params_404: S3FilesAccessPointConfigurationDict = {
+    "access_point_arn": _,
+    "mount_path": _,
+}
+_params_405: S3FilesConfigurationDict = {
+    "access_point_arn": _,
+    "mount_path": _,
+    "file_system_arn": _,
+}
+_params_406: S3LocationDict = {"bucket": _, "prefix": _}
+_params_407: S3SourceDict = {"s3_uri": _}
+_params_408: SalesforceOauth2ProviderConfigInputDict = {"client_id": _}
+_params_409: SamplingConfigDict = {"sampling_percentage": _}
+_params_410: SchemaDefinitionDict = {"type": _}
+_params_411: SecretReferenceDict = {"secret_id": _, "json_key": _}
+_params_412: SecretsManagerCertificateConfigurationDict = {"secret_arn": _}
+_params_413: SecretsManagerLocationDict = {"secret_arn": _}
+_params_414: SelfManagedConfigurationInputDict = {"invocation_configuration": _}
+_params_415: SelfManagedLatticeResourceDict = {"resource_configuration_identifier": _}
+_params_416: SemanticMemoryStrategyInputDict = {"name": _}
+_params_417: SemanticOverrideConfigurationInputDict = {}
+_params_418: SemanticOverrideConsolidationConfigurationInputDict = {
+    "append_to_prompt": _,
+    "model_id": _,
+}
+_params_419: SemanticOverrideExtractionConfigurationInputDict = {
+    "append_to_prompt": _,
+    "model_id": _,
+}
+_params_420: ServerDefinitionDict = {}
+_params_421: SessionConfigDict = {"session_timeout_minutes": _}
+_params_422: SessionConfigurationDict = {}
+_params_423: SessionStorageConfigurationDict = {"mount_path": _}
+_params_424: SetTokenVaultCMKInputDict = {"kms_configuration": _}
+_params_425: SkillDefinitionDict = {}
+_params_426: SkillMdDefinitionDict = {}
+_params_427: SlackOauth2ProviderConfigInputDict = {"client_id": _}
+_params_428: StartPolicyGenerationInputDict = {
+    "policy_engine_id": _,
+    "resource": _,
+    "content": _,
+    "name": _,
+}
+_params_429: StaticOverrideDict = {"bundle_arn": _, "bundle_version": _}
+_params_430: StaticRouteDict = {"target_name": _}
+_params_431: StickinessConfigurationDict = {"identifier": _}
+_params_432: StreamDeliveryResourceDict = {"kinesis": _}
+_params_433: StreamDeliveryResourcesDict = {"resources": _}
+_params_434: StreamingConfigurationDict = {}
+_params_435: StringListValidationDict = {}
+_params_436: StringValidationDict = {"allowed_values": _}
+_params_437: StripePrivyConfigurationInputDict = {"app_id": _, "authorization_id": _}
+_params_438: SubmitRegistryRecordForApprovalInputDict = {
+    "registry_id": _,
+    "record_id": _,
+}
+_params_439: SummaryMemoryStrategyInputDict = {"name": _}
+_params_440: SummaryOverrideConfigurationInputDict = {}
+_params_441: SummaryOverrideConsolidationConfigurationInputDict = {
+    "append_to_prompt": _,
+    "model_id": _,
+}
+_params_442: SynchronizationConfigurationDict = {}
+_params_443: SynchronizeGatewayTargetsInputDict = {
+    "gateway_identifier": _,
+    "target_id_list": _,
+}
+_params_444: TagResourceInputDict = {"resource_arn": _, "tags": _}
+_params_445: TargetConfigurationDict = {"mcp": _}
+_params_446: TargetTrafficSplitEntryDict = {"target_name": _, "name": _, "weight": _}
+_params_447: TimeBasedTriggerInputDict = {}
+_params_448: TokenBasedTriggerInputDict = {}
+_params_449: TokenExchangeGrantTypeConfigTypeDict = {"actor_token_content": _}
+_params_450: ToolDefinitionDict = {"name": _, "description": _, "input_schema": _}
+_params_451: ToolSchemaDict = {"s3": _}
+_params_452: ToolsDefinitionDict = {}
+_params_453: ToolsFileSystemConfigurationDict = {"s3_files_configuration": _}
+_params_454: TrafficSplitEntryDict = {"name": _, "weight": _, "configuration_bundle": _}
+_params_455: TriggerConditionInputDict = {"message_based_trigger": _}
+_params_456: UntagResourceInputDict = {"resource_arn": _, "tag_keys": _}
+_params_457: UpdateAgentRuntimeEndpointInputDict = {
+    "agent_runtime_id": _,
+    "endpoint_name": _,
+}
+_params_458: UpdateAgentRuntimeInputDict = {
+    "agent_runtime_id": _,
+    "agent_runtime_artifact": _,
+    "role_arn": _,
+}
+_params_459: UpdateApiKeyCredentialProviderInputDict = {"name": _}
+_params_460: UpdateCapacityProviderInputDict = {"capacity_provider_id": _}
+_params_461: UpdateConfigurationBundleInputDict = {
+    "bundle_id": _,
+    "parent_version_ids": _,
+    "commit_message": _,
+}
+_params_462: UpdateConsentPortalInputDict = {"consent_portal_identifier": _}
+_params_463: UpdatedA2aDescriptorDict = {}
+_params_464: UpdatedAgentSkillsDescriptorDict = {}
+_params_465: UpdatedAgentSkillsDescriptorFieldsDict = {}
+_params_466: UpdatedApprovalConfigurationDict = {}
+_params_467: UpdateDatasetExamplesInputDict = {"dataset_id": _, "examples": _}
+_params_468: UpdateDatasetInputDict = {"dataset_id": _}
+_params_469: UpdatedAuthorizerConfigurationDict = {}
+_params_470: UpdatedCustomDescriptorDict = {}
+_params_471: UpdatedDescriptionDict = {}
+_params_472: UpdatedDescriptorsDict = {}
+_params_473: UpdatedDescriptorsUnionDict = {}
+_params_474: UpdatedHarnessEnvironmentArtifactDict = {}
+_params_475: UpdatedHarnessMemoryConfigurationDict = {}
+_params_476: UpdatedMcpDescriptorDict = {}
+_params_477: UpdatedMcpDescriptorFieldsDict = {}
+_params_478: UpdatedServerDefinitionDict = {}
+_params_479: UpdatedSkillDefinitionDict = {}
+_params_480: UpdatedSkillMdDefinitionDict = {}
+_params_481: UpdatedSynchronizationConfigurationDict = {}
+_params_482: UpdatedSynchronizationTypeDict = {}
+_params_483: UpdatedToolsDefinitionDict = {}
+_params_484: UpdateEvaluatorInputDict = {"evaluator_id": _}
+_params_485: UpdateGatewayInputDict = {
+    "gateway_identifier": _,
+    "name": _,
+    "role_arn": _,
+    "authorizer_type": _,
+}
+_params_486: UpdateGatewayRateLimitInputDict = {
+    "gateway_identifier": _,
+    "rate_limit_id": _,
+    "entries": _,
+}
+_params_487: UpdateGatewayRuleInputDict = {"gateway_identifier": _, "rule_id": _}
+_params_488: UpdateGatewayTargetInputDict = {
+    "gateway_identifier": _,
+    "target_id": _,
+    "target_configuration": _,
+}
+_params_489: UpdateHarnessEndpointInputDict = {"harness_id": _, "endpoint_name": _}
+_params_490: UpdateHarnessInputDict = {"harness_id": _}
+_params_491: UpdateMemoryInputDict = {"memory_id": _}
+_params_492: UpdateOauth2CredentialProviderInputDict = {
+    "name": _,
+    "credential_provider_vendor": _,
+    "oauth2_provider_config_input": _,
+}
+_params_493: UpdateOnlineEvaluationConfigInputDict = {"online_evaluation_config_id": _}
+_params_494: UpdatePaymentConnectorInputDict = {
+    "payment_manager_id": _,
+    "payment_connector_id": _,
+}
+_params_495: UpdatePaymentCredentialProviderInputDict = {
+    "name": _,
+    "credential_provider_vendor": _,
+    "provider_configuration_input": _,
+}
+_params_496: UpdatePaymentManagerInputDict = {"payment_manager_id": _}
+_params_497: UpdatePolicyEngineInputDict = {"policy_engine_id": _}
+_params_498: UpdatePolicyInputDict = {"policy_engine_id": _, "policy_id": _}
+_params_499: UpdateRegistryInputDict = {"registry_id": _}
+_params_500: UpdateRegistryRecordInputDict = {"registry_id": _, "record_id": _}
+_params_501: UpdateRegistryRecordStatusInputDict = {
+    "registry_id": _,
+    "record_id": _,
+    "status": _,
+    "status_reason": _,
+}
+_params_502: UpdateWorkloadIdentityInputDict = {"name": _}
+_params_503: UserPreferenceMemoryStrategyInputDict = {"name": _}
+_params_504: UserPreferenceOverrideConfigurationInputDict = {}
+_params_505: UserPreferenceOverrideConsolidationConfigurationInputDict = {
+    "append_to_prompt": _,
+    "model_id": _,
+}
+_params_506: UserPreferenceOverrideExtractionConfigurationInputDict = {
+    "append_to_prompt": _,
+    "model_id": _,
+}
+_params_507: ValidationDict = {"string_validation": _}
+_params_508: VersionCreatedBySourceDict = {"name": _}
+_params_509: VersionFilterDict = {}
+_params_510: VolumeConfigurationDict = {"ebs_configuration": _}
+_params_511: VpcConfigDict = {"security_groups": _, "subnets": _}
+_params_512: VpcConfigurationDict = {"subnets": _, "security_groups": _}
+_params_513: WafConfigurationDict = {}
+_params_514: WeightedOverrideDict = {"traffic_split": _}
+_params_515: WeightedRouteDict = {"traffic_split": _}
+_params_516: UnitDict = {}
+
+
+def _request[T](form: type[T]) -> T:
+    raise NotImplementedError
+
+
+async def check_async_calls(client: AsyncBedrockAgentCoreControlClient) -> None:
+    pass
+    await client.add_dataset_examples(dataset_id=_, source=_)
+    await client.add_dataset_examples(**_request(AddDatasetExamplesInputDict))
+    await client.add_dataset_examples(_request(AddDatasetExamplesInput))
+    await client.add_dataset_examples(_request(AddDatasetExamplesInputDict))
+    await client.batch_put_gateway_rate_limits(gateway_identifier=_, rate_limits=_)
+    await client.batch_put_gateway_rate_limits(
+        **_request(BatchPutGatewayRateLimitsInputDict)
+    )
+    await client.batch_put_gateway_rate_limits(_request(BatchPutGatewayRateLimitsInput))
+    await client.batch_put_gateway_rate_limits(
+        _request(BatchPutGatewayRateLimitsInputDict)
+    )
+    await client.create_agent_runtime(
+        agent_runtime_name=_, agent_runtime_artifact=_, role_arn=_
+    )
+    await client.create_agent_runtime(**_request(CreateAgentRuntimeInputDict))
+    await client.create_agent_runtime(_request(CreateAgentRuntimeInput))
+    await client.create_agent_runtime(_request(CreateAgentRuntimeInputDict))
+    await client.create_agent_runtime_endpoint(agent_runtime_id=_, name=_)
+    await client.create_agent_runtime_endpoint(
+        **_request(CreateAgentRuntimeEndpointInputDict)
+    )
+    await client.create_agent_runtime_endpoint(
+        _request(CreateAgentRuntimeEndpointInput)
+    )
+    await client.create_agent_runtime_endpoint(
+        _request(CreateAgentRuntimeEndpointInputDict)
+    )
+    await client.create_api_key_credential_provider(name=_)
+    await client.create_api_key_credential_provider(
+        **_request(CreateApiKeyCredentialProviderInputDict)
+    )
+    await client.create_api_key_credential_provider(
+        _request(CreateApiKeyCredentialProviderInput)
+    )
+    await client.create_api_key_credential_provider(
+        _request(CreateApiKeyCredentialProviderInputDict)
+    )
+    await client.create_browser(name=_, network_configuration=_)
+    await client.create_browser(**_request(CreateBrowserInputDict))
+    await client.create_browser(_request(CreateBrowserInput))
+    await client.create_browser(_request(CreateBrowserInputDict))
+    await client.create_browser_profile(name=_)
+    await client.create_browser_profile(**_request(CreateBrowserProfileInputDict))
+    await client.create_browser_profile(_request(CreateBrowserProfileInput))
+    await client.create_browser_profile(_request(CreateBrowserProfileInputDict))
+    await client.create_capacity_provider(
+        name=_, permissions_configuration=_, compute_configuration=_
+    )
+    await client.create_capacity_provider(**_request(CreateCapacityProviderInputDict))
+    await client.create_capacity_provider(_request(CreateCapacityProviderInput))
+    await client.create_capacity_provider(_request(CreateCapacityProviderInputDict))
+    await client.create_code_interpreter(name=_, network_configuration=_)
+    await client.create_code_interpreter(**_request(CreateCodeInterpreterInputDict))
+    await client.create_code_interpreter(_request(CreateCodeInterpreterInput))
+    await client.create_code_interpreter(_request(CreateCodeInterpreterInputDict))
+    await client.create_configuration_bundle(bundle_name=_, components=_)
+    await client.create_configuration_bundle(
+        **_request(CreateConfigurationBundleInputDict)
+    )
+    await client.create_configuration_bundle(_request(CreateConfigurationBundleInput))
+    await client.create_configuration_bundle(
+        _request(CreateConfigurationBundleInputDict)
+    )
+    await client.create_consent_portal(
+        execution_role_arn=_, idp_config=_, name=_, sources=_
+    )
+    await client.create_consent_portal(**_request(CreateConsentPortalInputDict))
+    await client.create_consent_portal(_request(CreateConsentPortalInput))
+    await client.create_consent_portal(_request(CreateConsentPortalInputDict))
+    await client.create_dataset(dataset_name=_, source=_, schema_type=_)
+    await client.create_dataset(**_request(CreateDatasetInputDict))
+    await client.create_dataset(_request(CreateDatasetInput))
+    await client.create_dataset(_request(CreateDatasetInputDict))
+    await client.create_dataset_version(dataset_id=_)
+    await client.create_dataset_version(**_request(CreateDatasetVersionInputDict))
+    await client.create_dataset_version(_request(CreateDatasetVersionInput))
+    await client.create_dataset_version(_request(CreateDatasetVersionInputDict))
+    await client.create_evaluator(evaluator_name=_, evaluator_config=_, level=_)
+    await client.create_evaluator(**_request(CreateEvaluatorInputDict))
+    await client.create_evaluator(_request(CreateEvaluatorInput))
+    await client.create_evaluator(_request(CreateEvaluatorInputDict))
+    await client.create_gateway(name=_, role_arn=_, authorizer_type=_)
+    await client.create_gateway(**_request(CreateGatewayInputDict))
+    await client.create_gateway(_request(CreateGatewayInput))
+    await client.create_gateway(_request(CreateGatewayInputDict))
+    await client.create_gateway_rate_limit(
+        gateway_identifier=_, dimension_keys=_, entries=_
+    )
+    await client.create_gateway_rate_limit(**_request(CreateGatewayRateLimitInputDict))
+    await client.create_gateway_rate_limit(_request(CreateGatewayRateLimitInput))
+    await client.create_gateway_rate_limit(_request(CreateGatewayRateLimitInputDict))
+    await client.create_gateway_rule(gateway_identifier=_, priority=_, actions=_)
+    await client.create_gateway_rule(**_request(CreateGatewayRuleInputDict))
+    await client.create_gateway_rule(_request(CreateGatewayRuleInput))
+    await client.create_gateway_rule(_request(CreateGatewayRuleInputDict))
+    await client.create_gateway_target(gateway_identifier=_, target_configuration=_)
+    await client.create_gateway_target(**_request(CreateGatewayTargetInputDict))
+    await client.create_gateway_target(_request(CreateGatewayTargetInput))
+    await client.create_gateway_target(_request(CreateGatewayTargetInputDict))
+    await client.create_harness(harness_name=_, execution_role_arn=_)
+    await client.create_harness(**_request(CreateHarnessInputDict))
+    await client.create_harness(_request(CreateHarnessInput))
+    await client.create_harness(_request(CreateHarnessInputDict))
+    await client.create_harness_endpoint(harness_id=_, endpoint_name=_)
+    await client.create_harness_endpoint(**_request(CreateHarnessEndpointInputDict))
+    await client.create_harness_endpoint(_request(CreateHarnessEndpointInput))
+    await client.create_harness_endpoint(_request(CreateHarnessEndpointInputDict))
+    await client.create_memory(name=_, event_expiry_duration=_)
+    await client.create_memory(**_request(CreateMemoryInputDict))
+    await client.create_memory(_request(CreateMemoryInput))
+    await client.create_memory(_request(CreateMemoryInputDict))
+    await client.create_oauth2_credential_provider(
+        name=_, credential_provider_vendor=_, oauth2_provider_config_input=_
+    )
+    await client.create_oauth2_credential_provider(
+        **_request(CreateOauth2CredentialProviderInputDict)
+    )
+    await client.create_oauth2_credential_provider(
+        _request(CreateOauth2CredentialProviderInput)
+    )
+    await client.create_oauth2_credential_provider(
+        _request(CreateOauth2CredentialProviderInputDict)
+    )
+    await client.create_online_evaluation_config(
+        online_evaluation_config_name=_,
+        rule=_,
+        data_source_config=_,
+        evaluation_execution_role_arn=_,
+        enable_on_create=_,
+    )
+    await client.create_online_evaluation_config(
+        **_request(CreateOnlineEvaluationConfigInputDict)
+    )
+    await client.create_online_evaluation_config(
+        _request(CreateOnlineEvaluationConfigInput)
+    )
+    await client.create_online_evaluation_config(
+        _request(CreateOnlineEvaluationConfigInputDict)
+    )
+    await client.create_payment_connector(
+        payment_manager_id=_, name=_, type=_, credential_provider_configurations=_
+    )
+    await client.create_payment_connector(**_request(CreatePaymentConnectorInputDict))
+    await client.create_payment_connector(_request(CreatePaymentConnectorInput))
+    await client.create_payment_connector(_request(CreatePaymentConnectorInputDict))
+    await client.create_payment_credential_provider(
+        name=_, credential_provider_vendor=_, provider_configuration_input=_
+    )
+    await client.create_payment_credential_provider(
+        **_request(CreatePaymentCredentialProviderInputDict)
+    )
+    await client.create_payment_credential_provider(
+        _request(CreatePaymentCredentialProviderInput)
+    )
+    await client.create_payment_credential_provider(
+        _request(CreatePaymentCredentialProviderInputDict)
+    )
+    await client.create_payment_manager(name=_, authorizer_type=_, role_arn=_)
+    await client.create_payment_manager(**_request(CreatePaymentManagerInputDict))
+    await client.create_payment_manager(_request(CreatePaymentManagerInput))
+    await client.create_payment_manager(_request(CreatePaymentManagerInputDict))
+    await client.create_policy(name=_, definition=_, policy_engine_id=_)
+    await client.create_policy(**_request(CreatePolicyInputDict))
+    await client.create_policy(_request(CreatePolicyInput))
+    await client.create_policy(_request(CreatePolicyInputDict))
+    await client.create_policy_engine(name=_)
+    await client.create_policy_engine(**_request(CreatePolicyEngineInputDict))
+    await client.create_policy_engine(_request(CreatePolicyEngineInput))
+    await client.create_policy_engine(_request(CreatePolicyEngineInputDict))
+    await client.create_registry(name=_)
+    await client.create_registry(**_request(CreateRegistryInputDict))
+    await client.create_registry(_request(CreateRegistryInput))
+    await client.create_registry(_request(CreateRegistryInputDict))
+    await client.create_registry_record(registry_id=_, name=_, descriptor_type=_)
+    await client.create_registry_record(**_request(CreateRegistryRecordInputDict))
+    await client.create_registry_record(_request(CreateRegistryRecordInput))
+    await client.create_registry_record(_request(CreateRegistryRecordInputDict))
+    await client.create_workload_identity(name=_)
+    await client.create_workload_identity(**_request(CreateWorkloadIdentityInputDict))
+    await client.create_workload_identity(_request(CreateWorkloadIdentityInput))
+    await client.create_workload_identity(_request(CreateWorkloadIdentityInputDict))
+    await client.delete_agent_runtime(agent_runtime_id=_)
+    await client.delete_agent_runtime(**_request(DeleteAgentRuntimeInputDict))
+    await client.delete_agent_runtime(_request(DeleteAgentRuntimeInput))
+    await client.delete_agent_runtime(_request(DeleteAgentRuntimeInputDict))
+    await client.delete_agent_runtime_endpoint(agent_runtime_id=_, endpoint_name=_)
+    await client.delete_agent_runtime_endpoint(
+        **_request(DeleteAgentRuntimeEndpointInputDict)
+    )
+    await client.delete_agent_runtime_endpoint(
+        _request(DeleteAgentRuntimeEndpointInput)
+    )
+    await client.delete_agent_runtime_endpoint(
+        _request(DeleteAgentRuntimeEndpointInputDict)
+    )
+    await client.delete_api_key_credential_provider(name=_)
+    await client.delete_api_key_credential_provider(
+        **_request(DeleteApiKeyCredentialProviderInputDict)
+    )
+    await client.delete_api_key_credential_provider(
+        _request(DeleteApiKeyCredentialProviderInput)
+    )
+    await client.delete_api_key_credential_provider(
+        _request(DeleteApiKeyCredentialProviderInputDict)
+    )
+    await client.delete_browser(browser_id=_)
+    await client.delete_browser(**_request(DeleteBrowserInputDict))
+    await client.delete_browser(_request(DeleteBrowserInput))
+    await client.delete_browser(_request(DeleteBrowserInputDict))
+    await client.delete_browser_profile(profile_id=_)
+    await client.delete_browser_profile(**_request(DeleteBrowserProfileInputDict))
+    await client.delete_browser_profile(_request(DeleteBrowserProfileInput))
+    await client.delete_browser_profile(_request(DeleteBrowserProfileInputDict))
+    await client.delete_capacity_provider(capacity_provider_id=_)
+    await client.delete_capacity_provider(**_request(DeleteCapacityProviderInputDict))
+    await client.delete_capacity_provider(_request(DeleteCapacityProviderInput))
+    await client.delete_capacity_provider(_request(DeleteCapacityProviderInputDict))
+    await client.delete_code_interpreter(code_interpreter_id=_)
+    await client.delete_code_interpreter(**_request(DeleteCodeInterpreterInputDict))
+    await client.delete_code_interpreter(_request(DeleteCodeInterpreterInput))
+    await client.delete_code_interpreter(_request(DeleteCodeInterpreterInputDict))
+    await client.delete_configuration_bundle(bundle_id=_)
+    await client.delete_configuration_bundle(
+        **_request(DeleteConfigurationBundleInputDict)
+    )
+    await client.delete_configuration_bundle(_request(DeleteConfigurationBundleInput))
+    await client.delete_configuration_bundle(
+        _request(DeleteConfigurationBundleInputDict)
+    )
+    await client.delete_consent_portal(consent_portal_identifier=_)
+    await client.delete_consent_portal(**_request(DeleteConsentPortalInputDict))
+    await client.delete_consent_portal(_request(DeleteConsentPortalInput))
+    await client.delete_consent_portal(_request(DeleteConsentPortalInputDict))
+    await client.delete_dataset(dataset_id=_)
+    await client.delete_dataset(**_request(DeleteDatasetInputDict))
+    await client.delete_dataset(_request(DeleteDatasetInput))
+    await client.delete_dataset(_request(DeleteDatasetInputDict))
+    await client.delete_dataset_examples(dataset_id=_, example_ids=_)
+    await client.delete_dataset_examples(**_request(DeleteDatasetExamplesInputDict))
+    await client.delete_dataset_examples(_request(DeleteDatasetExamplesInput))
+    await client.delete_dataset_examples(_request(DeleteDatasetExamplesInputDict))
+    await client.delete_evaluator(evaluator_id=_)
+    await client.delete_evaluator(**_request(DeleteEvaluatorInputDict))
+    await client.delete_evaluator(_request(DeleteEvaluatorInput))
+    await client.delete_evaluator(_request(DeleteEvaluatorInputDict))
+    await client.delete_gateway(gateway_identifier=_)
+    await client.delete_gateway(**_request(DeleteGatewayInputDict))
+    await client.delete_gateway(_request(DeleteGatewayInput))
+    await client.delete_gateway(_request(DeleteGatewayInputDict))
+    await client.delete_gateway_rate_limit(gateway_identifier=_, rate_limit_id=_)
+    await client.delete_gateway_rate_limit(**_request(DeleteGatewayRateLimitInputDict))
+    await client.delete_gateway_rate_limit(_request(DeleteGatewayRateLimitInput))
+    await client.delete_gateway_rate_limit(_request(DeleteGatewayRateLimitInputDict))
+    await client.delete_gateway_rule(gateway_identifier=_, rule_id=_)
+    await client.delete_gateway_rule(**_request(DeleteGatewayRuleInputDict))
+    await client.delete_gateway_rule(_request(DeleteGatewayRuleInput))
+    await client.delete_gateway_rule(_request(DeleteGatewayRuleInputDict))
+    await client.delete_gateway_target(gateway_identifier=_, target_id=_)
+    await client.delete_gateway_target(**_request(DeleteGatewayTargetInputDict))
+    await client.delete_gateway_target(_request(DeleteGatewayTargetInput))
+    await client.delete_gateway_target(_request(DeleteGatewayTargetInputDict))
+    await client.delete_harness(harness_id=_)
+    await client.delete_harness(**_request(DeleteHarnessInputDict))
+    await client.delete_harness(_request(DeleteHarnessInput))
+    await client.delete_harness(_request(DeleteHarnessInputDict))
+    await client.delete_harness_endpoint(harness_id=_, endpoint_name=_)
+    await client.delete_harness_endpoint(**_request(DeleteHarnessEndpointInputDict))
+    await client.delete_harness_endpoint(_request(DeleteHarnessEndpointInput))
+    await client.delete_harness_endpoint(_request(DeleteHarnessEndpointInputDict))
+    await client.delete_memory(memory_id=_)
+    await client.delete_memory(**_request(DeleteMemoryInputDict))
+    await client.delete_memory(_request(DeleteMemoryInput))
+    await client.delete_memory(_request(DeleteMemoryInputDict))
+    await client.delete_oauth2_credential_provider(name=_)
+    await client.delete_oauth2_credential_provider(
+        **_request(DeleteOauth2CredentialProviderInputDict)
+    )
+    await client.delete_oauth2_credential_provider(
+        _request(DeleteOauth2CredentialProviderInput)
+    )
+    await client.delete_oauth2_credential_provider(
+        _request(DeleteOauth2CredentialProviderInputDict)
+    )
+    await client.delete_online_evaluation_config(online_evaluation_config_id=_)
+    await client.delete_online_evaluation_config(
+        **_request(DeleteOnlineEvaluationConfigInputDict)
+    )
+    await client.delete_online_evaluation_config(
+        _request(DeleteOnlineEvaluationConfigInput)
+    )
+    await client.delete_online_evaluation_config(
+        _request(DeleteOnlineEvaluationConfigInputDict)
+    )
+    await client.delete_payment_connector(payment_manager_id=_, payment_connector_id=_)
+    await client.delete_payment_connector(**_request(DeletePaymentConnectorInputDict))
+    await client.delete_payment_connector(_request(DeletePaymentConnectorInput))
+    await client.delete_payment_connector(_request(DeletePaymentConnectorInputDict))
+    await client.delete_payment_credential_provider(name=_)
+    await client.delete_payment_credential_provider(
+        **_request(DeletePaymentCredentialProviderInputDict)
+    )
+    await client.delete_payment_credential_provider(
+        _request(DeletePaymentCredentialProviderInput)
+    )
+    await client.delete_payment_credential_provider(
+        _request(DeletePaymentCredentialProviderInputDict)
+    )
+    await client.delete_payment_manager(payment_manager_id=_)
+    await client.delete_payment_manager(**_request(DeletePaymentManagerInputDict))
+    await client.delete_payment_manager(_request(DeletePaymentManagerInput))
+    await client.delete_payment_manager(_request(DeletePaymentManagerInputDict))
+    await client.delete_policy(policy_engine_id=_, policy_id=_)
+    await client.delete_policy(**_request(DeletePolicyInputDict))
+    await client.delete_policy(_request(DeletePolicyInput))
+    await client.delete_policy(_request(DeletePolicyInputDict))
+    await client.delete_policy_engine(policy_engine_id=_)
+    await client.delete_policy_engine(**_request(DeletePolicyEngineInputDict))
+    await client.delete_policy_engine(_request(DeletePolicyEngineInput))
+    await client.delete_policy_engine(_request(DeletePolicyEngineInputDict))
+    await client.delete_registry(registry_id=_)
+    await client.delete_registry(**_request(DeleteRegistryInputDict))
+    await client.delete_registry(_request(DeleteRegistryInput))
+    await client.delete_registry(_request(DeleteRegistryInputDict))
+    await client.delete_registry_record(registry_id=_, record_id=_)
+    await client.delete_registry_record(**_request(DeleteRegistryRecordInputDict))
+    await client.delete_registry_record(_request(DeleteRegistryRecordInput))
+    await client.delete_registry_record(_request(DeleteRegistryRecordInputDict))
+    await client.delete_resource_policy(resource_arn=_)
+    await client.delete_resource_policy(**_request(DeleteResourcePolicyInputDict))
+    await client.delete_resource_policy(_request(DeleteResourcePolicyInput))
+    await client.delete_resource_policy(_request(DeleteResourcePolicyInputDict))
+    await client.delete_workload_identity(name=_)
+    await client.delete_workload_identity(**_request(DeleteWorkloadIdentityInputDict))
+    await client.delete_workload_identity(_request(DeleteWorkloadIdentityInput))
+    await client.delete_workload_identity(_request(DeleteWorkloadIdentityInputDict))
+    await client.get_agent_runtime(agent_runtime_id=_)
+    await client.get_agent_runtime(**_request(GetAgentRuntimeInputDict))
+    await client.get_agent_runtime(_request(GetAgentRuntimeInput))
+    await client.get_agent_runtime(_request(GetAgentRuntimeInputDict))
+    await client.get_agent_runtime_endpoint(agent_runtime_id=_, endpoint_name=_)
+    await client.get_agent_runtime_endpoint(
+        **_request(GetAgentRuntimeEndpointInputDict)
+    )
+    await client.get_agent_runtime_endpoint(_request(GetAgentRuntimeEndpointInput))
+    await client.get_agent_runtime_endpoint(_request(GetAgentRuntimeEndpointInputDict))
+    await client.get_api_key_credential_provider(name=_)
+    await client.get_api_key_credential_provider(
+        **_request(GetApiKeyCredentialProviderInputDict)
+    )
+    await client.get_api_key_credential_provider(
+        _request(GetApiKeyCredentialProviderInput)
+    )
+    await client.get_api_key_credential_provider(
+        _request(GetApiKeyCredentialProviderInputDict)
+    )
+    await client.get_browser(browser_id=_)
+    await client.get_browser(**_request(GetBrowserInputDict))
+    await client.get_browser(_request(GetBrowserInput))
+    await client.get_browser(_request(GetBrowserInputDict))
+    await client.get_browser_profile(profile_id=_)
+    await client.get_browser_profile(**_request(GetBrowserProfileInputDict))
+    await client.get_browser_profile(_request(GetBrowserProfileInput))
+    await client.get_browser_profile(_request(GetBrowserProfileInputDict))
+    await client.get_capacity_provider(capacity_provider_id=_)
+    await client.get_capacity_provider(**_request(GetCapacityProviderInputDict))
+    await client.get_capacity_provider(_request(GetCapacityProviderInput))
+    await client.get_capacity_provider(_request(GetCapacityProviderInputDict))
+    await client.get_code_interpreter(code_interpreter_id=_)
+    await client.get_code_interpreter(**_request(GetCodeInterpreterInputDict))
+    await client.get_code_interpreter(_request(GetCodeInterpreterInput))
+    await client.get_code_interpreter(_request(GetCodeInterpreterInputDict))
+    await client.get_configuration_bundle(bundle_id=_)
+    await client.get_configuration_bundle(**_request(GetConfigurationBundleInputDict))
+    await client.get_configuration_bundle(_request(GetConfigurationBundleInput))
+    await client.get_configuration_bundle(_request(GetConfigurationBundleInputDict))
+    await client.get_configuration_bundle_version(bundle_id=_, version_id=_)
+    await client.get_configuration_bundle_version(
+        **_request(GetConfigurationBundleVersionInputDict)
+    )
+    await client.get_configuration_bundle_version(
+        _request(GetConfigurationBundleVersionInput)
+    )
+    await client.get_configuration_bundle_version(
+        _request(GetConfigurationBundleVersionInputDict)
+    )
+    await client.get_consent_portal(consent_portal_identifier=_)
+    await client.get_consent_portal(**_request(GetConsentPortalInputDict))
+    await client.get_consent_portal(_request(GetConsentPortalInput))
+    await client.get_consent_portal(_request(GetConsentPortalInputDict))
+    await client.get_dataset(dataset_id=_)
+    await client.get_dataset(**_request(GetDatasetInputDict))
+    await client.get_dataset(_request(GetDatasetInput))
+    await client.get_dataset(_request(GetDatasetInputDict))
+    await client.get_evaluator(evaluator_id=_)
+    await client.get_evaluator(**_request(GetEvaluatorInputDict))
+    await client.get_evaluator(_request(GetEvaluatorInput))
+    await client.get_evaluator(_request(GetEvaluatorInputDict))
+    await client.get_gateway(gateway_identifier=_)
+    await client.get_gateway(**_request(GetGatewayInputDict))
+    await client.get_gateway(_request(GetGatewayInput))
+    await client.get_gateway(_request(GetGatewayInputDict))
+    await client.get_gateway_rate_limit(gateway_identifier=_, rate_limit_id=_)
+    await client.get_gateway_rate_limit(**_request(GetGatewayRateLimitInputDict))
+    await client.get_gateway_rate_limit(_request(GetGatewayRateLimitInput))
+    await client.get_gateway_rate_limit(_request(GetGatewayRateLimitInputDict))
+    await client.get_gateway_rule(gateway_identifier=_, rule_id=_)
+    await client.get_gateway_rule(**_request(GetGatewayRuleInputDict))
+    await client.get_gateway_rule(_request(GetGatewayRuleInput))
+    await client.get_gateway_rule(_request(GetGatewayRuleInputDict))
+    await client.get_gateway_target(gateway_identifier=_, target_id=_)
+    await client.get_gateway_target(**_request(GetGatewayTargetInputDict))
+    await client.get_gateway_target(_request(GetGatewayTargetInput))
+    await client.get_gateway_target(_request(GetGatewayTargetInputDict))
+    await client.get_harness(harness_id=_)
+    await client.get_harness(**_request(GetHarnessInputDict))
+    await client.get_harness(_request(GetHarnessInput))
+    await client.get_harness(_request(GetHarnessInputDict))
+    await client.get_harness_endpoint(harness_id=_, endpoint_name=_)
+    await client.get_harness_endpoint(**_request(GetHarnessEndpointInputDict))
+    await client.get_harness_endpoint(_request(GetHarnessEndpointInput))
+    await client.get_harness_endpoint(_request(GetHarnessEndpointInputDict))
+    await client.get_memory(memory_id=_)
+    await client.get_memory(**_request(GetMemoryInputDict))
+    await client.get_memory(_request(GetMemoryInput))
+    await client.get_memory(_request(GetMemoryInputDict))
+    await client.get_oauth2_credential_provider(name=_)
+    await client.get_oauth2_credential_provider(
+        **_request(GetOauth2CredentialProviderInputDict)
+    )
+    await client.get_oauth2_credential_provider(
+        _request(GetOauth2CredentialProviderInput)
+    )
+    await client.get_oauth2_credential_provider(
+        _request(GetOauth2CredentialProviderInputDict)
+    )
+    await client.get_online_evaluation_config(online_evaluation_config_id=_)
+    await client.get_online_evaluation_config(
+        **_request(GetOnlineEvaluationConfigInputDict)
+    )
+    await client.get_online_evaluation_config(_request(GetOnlineEvaluationConfigInput))
+    await client.get_online_evaluation_config(
+        _request(GetOnlineEvaluationConfigInputDict)
+    )
+    await client.get_payment_connector(payment_manager_id=_, payment_connector_id=_)
+    await client.get_payment_connector(**_request(GetPaymentConnectorInputDict))
+    await client.get_payment_connector(_request(GetPaymentConnectorInput))
+    await client.get_payment_connector(_request(GetPaymentConnectorInputDict))
+    await client.get_payment_credential_provider(name=_)
+    await client.get_payment_credential_provider(
+        **_request(GetPaymentCredentialProviderInputDict)
+    )
+    await client.get_payment_credential_provider(
+        _request(GetPaymentCredentialProviderInput)
+    )
+    await client.get_payment_credential_provider(
+        _request(GetPaymentCredentialProviderInputDict)
+    )
+    await client.get_payment_manager(payment_manager_id=_)
+    await client.get_payment_manager(**_request(GetPaymentManagerInputDict))
+    await client.get_payment_manager(_request(GetPaymentManagerInput))
+    await client.get_payment_manager(_request(GetPaymentManagerInputDict))
+    await client.get_policy(policy_engine_id=_, policy_id=_)
+    await client.get_policy(**_request(GetPolicyInputDict))
+    await client.get_policy(_request(GetPolicyInput))
+    await client.get_policy(_request(GetPolicyInputDict))
+    await client.get_policy_engine(policy_engine_id=_)
+    await client.get_policy_engine(**_request(GetPolicyEngineInputDict))
+    await client.get_policy_engine(_request(GetPolicyEngineInput))
+    await client.get_policy_engine(_request(GetPolicyEngineInputDict))
+    await client.get_policy_engine_summary(policy_engine_id=_)
+    await client.get_policy_engine_summary(**_request(GetPolicyEngineSummaryInputDict))
+    await client.get_policy_engine_summary(_request(GetPolicyEngineSummaryInput))
+    await client.get_policy_engine_summary(_request(GetPolicyEngineSummaryInputDict))
+    await client.get_policy_generation(policy_generation_id=_, policy_engine_id=_)
+    await client.get_policy_generation(**_request(GetPolicyGenerationInputDict))
+    await client.get_policy_generation(_request(GetPolicyGenerationInput))
+    await client.get_policy_generation(_request(GetPolicyGenerationInputDict))
+    await client.get_policy_generation_summary(
+        policy_generation_id=_, policy_engine_id=_
+    )
+    await client.get_policy_generation_summary(
+        **_request(GetPolicyGenerationSummaryInputDict)
+    )
+    await client.get_policy_generation_summary(
+        _request(GetPolicyGenerationSummaryInput)
+    )
+    await client.get_policy_generation_summary(
+        _request(GetPolicyGenerationSummaryInputDict)
+    )
+    await client.get_policy_summary(policy_engine_id=_, policy_id=_)
+    await client.get_policy_summary(**_request(GetPolicySummaryInputDict))
+    await client.get_policy_summary(_request(GetPolicySummaryInput))
+    await client.get_policy_summary(_request(GetPolicySummaryInputDict))
+    await client.get_registry(registry_id=_)
+    await client.get_registry(**_request(GetRegistryInputDict))
+    await client.get_registry(_request(GetRegistryInput))
+    await client.get_registry(_request(GetRegistryInputDict))
+    await client.get_registry_record(registry_id=_, record_id=_)
+    await client.get_registry_record(**_request(GetRegistryRecordInputDict))
+    await client.get_registry_record(_request(GetRegistryRecordInput))
+    await client.get_registry_record(_request(GetRegistryRecordInputDict))
+    await client.get_resource_policy(resource_arn=_)
+    await client.get_resource_policy(**_request(GetResourcePolicyInputDict))
+    await client.get_resource_policy(_request(GetResourcePolicyInput))
+    await client.get_resource_policy(_request(GetResourcePolicyInputDict))
+    await client.get_token_vault()
+    await client.get_token_vault(**_request(GetTokenVaultInputDict))
+    await client.get_token_vault(_request(GetTokenVaultInput))
+    await client.get_token_vault(_request(GetTokenVaultInputDict))
+    await client.get_workload_identity(name=_)
+    await client.get_workload_identity(**_request(GetWorkloadIdentityInputDict))
+    await client.get_workload_identity(_request(GetWorkloadIdentityInput))
+    await client.get_workload_identity(_request(GetWorkloadIdentityInputDict))
+    await client.list_agent_runtime_endpoints(agent_runtime_id=_)
+    await client.list_agent_runtime_endpoints(
+        **_request(ListAgentRuntimeEndpointsInputDict)
+    )
+    await client.list_agent_runtime_endpoints(_request(ListAgentRuntimeEndpointsInput))
+    await client.list_agent_runtime_endpoints(
+        _request(ListAgentRuntimeEndpointsInputDict)
+    )
+    await client.list_agent_runtimes()
+    await client.list_agent_runtimes(**_request(ListAgentRuntimesInputDict))
+    await client.list_agent_runtimes(_request(ListAgentRuntimesInput))
+    await client.list_agent_runtimes(_request(ListAgentRuntimesInputDict))
+    await client.list_agent_runtime_versions(agent_runtime_id=_)
+    await client.list_agent_runtime_versions(
+        **_request(ListAgentRuntimeVersionsInputDict)
+    )
+    await client.list_agent_runtime_versions(_request(ListAgentRuntimeVersionsInput))
+    await client.list_agent_runtime_versions(
+        _request(ListAgentRuntimeVersionsInputDict)
+    )
+    await client.list_agent_runtime_versions_by_capacity_provider(
+        capacity_provider_id=_
+    )
+    await client.list_agent_runtime_versions_by_capacity_provider(
+        **_request(ListAgentRuntimeVersionsByCapacityProviderInputDict)
+    )
+    await client.list_agent_runtime_versions_by_capacity_provider(
+        _request(ListAgentRuntimeVersionsByCapacityProviderInput)
+    )
+    await client.list_agent_runtime_versions_by_capacity_provider(
+        _request(ListAgentRuntimeVersionsByCapacityProviderInputDict)
+    )
+    await client.list_api_key_credential_providers()
+    await client.list_api_key_credential_providers(
+        **_request(ListApiKeyCredentialProvidersInputDict)
+    )
+    await client.list_api_key_credential_providers(
+        _request(ListApiKeyCredentialProvidersInput)
+    )
+    await client.list_api_key_credential_providers(
+        _request(ListApiKeyCredentialProvidersInputDict)
+    )
+    await client.list_browser_profiles()
+    await client.list_browser_profiles(**_request(ListBrowserProfilesInputDict))
+    await client.list_browser_profiles(_request(ListBrowserProfilesInput))
+    await client.list_browser_profiles(_request(ListBrowserProfilesInputDict))
+    await client.list_browsers()
+    await client.list_browsers(**_request(ListBrowsersInputDict))
+    await client.list_browsers(_request(ListBrowsersInput))
+    await client.list_browsers(_request(ListBrowsersInputDict))
+    await client.list_capacity_providers()
+    await client.list_capacity_providers(**_request(ListCapacityProvidersInputDict))
+    await client.list_capacity_providers(_request(ListCapacityProvidersInput))
+    await client.list_capacity_providers(_request(ListCapacityProvidersInputDict))
+    await client.list_code_interpreters()
+    await client.list_code_interpreters(**_request(ListCodeInterpretersInputDict))
+    await client.list_code_interpreters(_request(ListCodeInterpretersInput))
+    await client.list_code_interpreters(_request(ListCodeInterpretersInputDict))
+    await client.list_configuration_bundles()
+    await client.list_configuration_bundles(
+        **_request(ListConfigurationBundlesInputDict)
+    )
+    await client.list_configuration_bundles(_request(ListConfigurationBundlesInput))
+    await client.list_configuration_bundles(_request(ListConfigurationBundlesInputDict))
+    await client.list_configuration_bundle_versions(bundle_id=_)
+    await client.list_configuration_bundle_versions(
+        **_request(ListConfigurationBundleVersionsInputDict)
+    )
+    await client.list_configuration_bundle_versions(
+        _request(ListConfigurationBundleVersionsInput)
+    )
+    await client.list_configuration_bundle_versions(
+        _request(ListConfigurationBundleVersionsInputDict)
+    )
+    await client.list_consent_portals()
+    await client.list_consent_portals(**_request(ListConsentPortalsInputDict))
+    await client.list_consent_portals(_request(ListConsentPortalsInput))
+    await client.list_consent_portals(_request(ListConsentPortalsInputDict))
+    await client.list_dataset_examples(dataset_id=_)
+    await client.list_dataset_examples(**_request(ListDatasetExamplesInputDict))
+    await client.list_dataset_examples(_request(ListDatasetExamplesInput))
+    await client.list_dataset_examples(_request(ListDatasetExamplesInputDict))
+    await client.list_datasets()
+    await client.list_datasets(**_request(ListDatasetsInputDict))
+    await client.list_datasets(_request(ListDatasetsInput))
+    await client.list_datasets(_request(ListDatasetsInputDict))
+    await client.list_dataset_versions(dataset_id=_)
+    await client.list_dataset_versions(**_request(ListDatasetVersionsInputDict))
+    await client.list_dataset_versions(_request(ListDatasetVersionsInput))
+    await client.list_dataset_versions(_request(ListDatasetVersionsInputDict))
+    await client.list_evaluators()
+    await client.list_evaluators(**_request(ListEvaluatorsInputDict))
+    await client.list_evaluators(_request(ListEvaluatorsInput))
+    await client.list_evaluators(_request(ListEvaluatorsInputDict))
+    await client.list_gateway_rate_limits(gateway_identifier=_)
+    await client.list_gateway_rate_limits(**_request(ListGatewayRateLimitsInputDict))
+    await client.list_gateway_rate_limits(_request(ListGatewayRateLimitsInput))
+    await client.list_gateway_rate_limits(_request(ListGatewayRateLimitsInputDict))
+    await client.list_gateway_rules(gateway_identifier=_)
+    await client.list_gateway_rules(**_request(ListGatewayRulesInputDict))
+    await client.list_gateway_rules(_request(ListGatewayRulesInput))
+    await client.list_gateway_rules(_request(ListGatewayRulesInputDict))
+    await client.list_gateways()
+    await client.list_gateways(**_request(ListGatewaysInputDict))
+    await client.list_gateways(_request(ListGatewaysInput))
+    await client.list_gateways(_request(ListGatewaysInputDict))
+    await client.list_gateway_targets(gateway_identifier=_)
+    await client.list_gateway_targets(**_request(ListGatewayTargetsInputDict))
+    await client.list_gateway_targets(_request(ListGatewayTargetsInput))
+    await client.list_gateway_targets(_request(ListGatewayTargetsInputDict))
+    await client.list_harness_endpoints(harness_id=_)
+    await client.list_harness_endpoints(**_request(ListHarnessEndpointsInputDict))
+    await client.list_harness_endpoints(_request(ListHarnessEndpointsInput))
+    await client.list_harness_endpoints(_request(ListHarnessEndpointsInputDict))
+    await client.list_harnesses()
+    await client.list_harnesses(**_request(ListHarnessesInputDict))
+    await client.list_harnesses(_request(ListHarnessesInput))
+    await client.list_harnesses(_request(ListHarnessesInputDict))
+    await client.list_harness_versions(harness_id=_)
+    await client.list_harness_versions(**_request(ListHarnessVersionsInputDict))
+    await client.list_harness_versions(_request(ListHarnessVersionsInput))
+    await client.list_harness_versions(_request(ListHarnessVersionsInputDict))
+    await client.list_memories()
+    await client.list_memories(**_request(ListMemoriesInputDict))
+    await client.list_memories(_request(ListMemoriesInput))
+    await client.list_memories(_request(ListMemoriesInputDict))
+    await client.list_oauth2_credential_providers()
+    await client.list_oauth2_credential_providers(
+        **_request(ListOauth2CredentialProvidersInputDict)
+    )
+    await client.list_oauth2_credential_providers(
+        _request(ListOauth2CredentialProvidersInput)
+    )
+    await client.list_oauth2_credential_providers(
+        _request(ListOauth2CredentialProvidersInputDict)
+    )
+    await client.list_online_evaluation_configs()
+    await client.list_online_evaluation_configs(
+        **_request(ListOnlineEvaluationConfigsInputDict)
+    )
+    await client.list_online_evaluation_configs(
+        _request(ListOnlineEvaluationConfigsInput)
+    )
+    await client.list_online_evaluation_configs(
+        _request(ListOnlineEvaluationConfigsInputDict)
+    )
+    await client.list_payment_connectors(payment_manager_id=_)
+    await client.list_payment_connectors(**_request(ListPaymentConnectorsInputDict))
+    await client.list_payment_connectors(_request(ListPaymentConnectorsInput))
+    await client.list_payment_connectors(_request(ListPaymentConnectorsInputDict))
+    await client.list_payment_credential_providers()
+    await client.list_payment_credential_providers(
+        **_request(ListPaymentCredentialProvidersInputDict)
+    )
+    await client.list_payment_credential_providers(
+        _request(ListPaymentCredentialProvidersInput)
+    )
+    await client.list_payment_credential_providers(
+        _request(ListPaymentCredentialProvidersInputDict)
+    )
+    await client.list_payment_managers()
+    await client.list_payment_managers(**_request(ListPaymentManagersInputDict))
+    await client.list_payment_managers(_request(ListPaymentManagersInput))
+    await client.list_payment_managers(_request(ListPaymentManagersInputDict))
+    await client.list_policies(policy_engine_id=_)
+    await client.list_policies(**_request(ListPoliciesInputDict))
+    await client.list_policies(_request(ListPoliciesInput))
+    await client.list_policies(_request(ListPoliciesInputDict))
+    await client.list_policy_engines()
+    await client.list_policy_engines(**_request(ListPolicyEnginesInputDict))
+    await client.list_policy_engines(_request(ListPolicyEnginesInput))
+    await client.list_policy_engines(_request(ListPolicyEnginesInputDict))
+    await client.list_policy_engine_summaries()
+    await client.list_policy_engine_summaries(
+        **_request(ListPolicyEngineSummariesInputDict)
+    )
+    await client.list_policy_engine_summaries(_request(ListPolicyEngineSummariesInput))
+    await client.list_policy_engine_summaries(
+        _request(ListPolicyEngineSummariesInputDict)
+    )
+    await client.list_policy_generation_assets(
+        policy_generation_id=_, policy_engine_id=_
+    )
+    await client.list_policy_generation_assets(
+        **_request(ListPolicyGenerationAssetsInputDict)
+    )
+    await client.list_policy_generation_assets(
+        _request(ListPolicyGenerationAssetsInput)
+    )
+    await client.list_policy_generation_assets(
+        _request(ListPolicyGenerationAssetsInputDict)
+    )
+    await client.list_policy_generations(policy_engine_id=_)
+    await client.list_policy_generations(**_request(ListPolicyGenerationsInputDict))
+    await client.list_policy_generations(_request(ListPolicyGenerationsInput))
+    await client.list_policy_generations(_request(ListPolicyGenerationsInputDict))
+    await client.list_policy_generation_summaries(policy_engine_id=_)
+    await client.list_policy_generation_summaries(
+        **_request(ListPolicyGenerationSummariesInputDict)
+    )
+    await client.list_policy_generation_summaries(
+        _request(ListPolicyGenerationSummariesInput)
+    )
+    await client.list_policy_generation_summaries(
+        _request(ListPolicyGenerationSummariesInputDict)
+    )
+    await client.list_policy_summaries(policy_engine_id=_)
+    await client.list_policy_summaries(**_request(ListPolicySummariesInputDict))
+    await client.list_policy_summaries(_request(ListPolicySummariesInput))
+    await client.list_policy_summaries(_request(ListPolicySummariesInputDict))
+    await client.list_registries()
+    await client.list_registries(**_request(ListRegistriesInputDict))
+    await client.list_registries(_request(ListRegistriesInput))
+    await client.list_registries(_request(ListRegistriesInputDict))
+    await client.list_registry_records(registry_id=_)
+    await client.list_registry_records(**_request(ListRegistryRecordsInputDict))
+    await client.list_registry_records(_request(ListRegistryRecordsInput))
+    await client.list_registry_records(_request(ListRegistryRecordsInputDict))
+    await client.list_tags_for_resource(resource_arn=_)
+    await client.list_tags_for_resource(**_request(ListTagsForResourceInputDict))
+    await client.list_tags_for_resource(_request(ListTagsForResourceInput))
+    await client.list_tags_for_resource(_request(ListTagsForResourceInputDict))
+    await client.list_workload_identities()
+    await client.list_workload_identities(**_request(ListWorkloadIdentitiesInputDict))
+    await client.list_workload_identities(_request(ListWorkloadIdentitiesInput))
+    await client.list_workload_identities(_request(ListWorkloadIdentitiesInputDict))
+    await client.put_resource_policy(resource_arn=_, policy=_)
+    await client.put_resource_policy(**_request(PutResourcePolicyInputDict))
+    await client.put_resource_policy(_request(PutResourcePolicyInput))
+    await client.put_resource_policy(_request(PutResourcePolicyInputDict))
+    await client.reset_token_vault_key_material(token_vault_id=_)
+    await client.reset_token_vault_key_material(
+        **_request(ResetTokenVaultKeyMaterialInputDict)
+    )
+    await client.reset_token_vault_key_material(
+        _request(ResetTokenVaultKeyMaterialInput)
+    )
+    await client.reset_token_vault_key_material(
+        _request(ResetTokenVaultKeyMaterialInputDict)
+    )
+    await client.rotate_payment_connector_credentials(
+        payment_manager_id=_, payment_connector_id=_, credentials_to_rotate=_
+    )
+    await client.rotate_payment_connector_credentials(
+        **_request(RotatePaymentConnectorCredentialsInputDict)
+    )
+    await client.rotate_payment_connector_credentials(
+        _request(RotatePaymentConnectorCredentialsInput)
+    )
+    await client.rotate_payment_connector_credentials(
+        _request(RotatePaymentConnectorCredentialsInputDict)
+    )
+    await client.set_token_vault_cmk(kms_configuration=_)
+    await client.set_token_vault_cmk(**_request(SetTokenVaultCMKInputDict))
+    await client.set_token_vault_cmk(_request(SetTokenVaultCMKInput))
+    await client.set_token_vault_cmk(_request(SetTokenVaultCMKInputDict))
+    await client.start_policy_generation(
+        policy_engine_id=_, resource=_, content=_, name=_
+    )
+    await client.start_policy_generation(**_request(StartPolicyGenerationInputDict))
+    await client.start_policy_generation(_request(StartPolicyGenerationInput))
+    await client.start_policy_generation(_request(StartPolicyGenerationInputDict))
+    await client.submit_registry_record_for_approval(registry_id=_, record_id=_)
+    await client.submit_registry_record_for_approval(
+        **_request(SubmitRegistryRecordForApprovalInputDict)
+    )
+    await client.submit_registry_record_for_approval(
+        _request(SubmitRegistryRecordForApprovalInput)
+    )
+    await client.submit_registry_record_for_approval(
+        _request(SubmitRegistryRecordForApprovalInputDict)
+    )
+    await client.synchronize_gateway_targets(gateway_identifier=_, target_id_list=_)
+    await client.synchronize_gateway_targets(
+        **_request(SynchronizeGatewayTargetsInputDict)
+    )
+    await client.synchronize_gateway_targets(_request(SynchronizeGatewayTargetsInput))
+    await client.synchronize_gateway_targets(
+        _request(SynchronizeGatewayTargetsInputDict)
+    )
+    await client.tag_resource(resource_arn=_, tags=_)
+    await client.tag_resource(**_request(TagResourceInputDict))
+    await client.tag_resource(_request(TagResourceInput))
+    await client.tag_resource(_request(TagResourceInputDict))
+    await client.untag_resource(resource_arn=_, tag_keys=_)
+    await client.untag_resource(**_request(UntagResourceInputDict))
+    await client.untag_resource(_request(UntagResourceInput))
+    await client.untag_resource(_request(UntagResourceInputDict))
+    await client.update_agent_runtime(
+        agent_runtime_id=_, agent_runtime_artifact=_, role_arn=_
+    )
+    await client.update_agent_runtime(**_request(UpdateAgentRuntimeInputDict))
+    await client.update_agent_runtime(_request(UpdateAgentRuntimeInput))
+    await client.update_agent_runtime(_request(UpdateAgentRuntimeInputDict))
+    await client.update_agent_runtime_endpoint(agent_runtime_id=_, endpoint_name=_)
+    await client.update_agent_runtime_endpoint(
+        **_request(UpdateAgentRuntimeEndpointInputDict)
+    )
+    await client.update_agent_runtime_endpoint(
+        _request(UpdateAgentRuntimeEndpointInput)
+    )
+    await client.update_agent_runtime_endpoint(
+        _request(UpdateAgentRuntimeEndpointInputDict)
+    )
+    await client.update_api_key_credential_provider(name=_)
+    await client.update_api_key_credential_provider(
+        **_request(UpdateApiKeyCredentialProviderInputDict)
+    )
+    await client.update_api_key_credential_provider(
+        _request(UpdateApiKeyCredentialProviderInput)
+    )
+    await client.update_api_key_credential_provider(
+        _request(UpdateApiKeyCredentialProviderInputDict)
+    )
+    await client.update_capacity_provider(capacity_provider_id=_)
+    await client.update_capacity_provider(**_request(UpdateCapacityProviderInputDict))
+    await client.update_capacity_provider(_request(UpdateCapacityProviderInput))
+    await client.update_capacity_provider(_request(UpdateCapacityProviderInputDict))
+    await client.update_configuration_bundle(
+        bundle_id=_, parent_version_ids=_, commit_message=_
+    )
+    await client.update_configuration_bundle(
+        **_request(UpdateConfigurationBundleInputDict)
+    )
+    await client.update_configuration_bundle(_request(UpdateConfigurationBundleInput))
+    await client.update_configuration_bundle(
+        _request(UpdateConfigurationBundleInputDict)
+    )
+    await client.update_consent_portal(consent_portal_identifier=_)
+    await client.update_consent_portal(**_request(UpdateConsentPortalInputDict))
+    await client.update_consent_portal(_request(UpdateConsentPortalInput))
+    await client.update_consent_portal(_request(UpdateConsentPortalInputDict))
+    await client.update_dataset(dataset_id=_)
+    await client.update_dataset(**_request(UpdateDatasetInputDict))
+    await client.update_dataset(_request(UpdateDatasetInput))
+    await client.update_dataset(_request(UpdateDatasetInputDict))
+    await client.update_dataset_examples(dataset_id=_, examples=_)
+    await client.update_dataset_examples(**_request(UpdateDatasetExamplesInputDict))
+    await client.update_dataset_examples(_request(UpdateDatasetExamplesInput))
+    await client.update_dataset_examples(_request(UpdateDatasetExamplesInputDict))
+    await client.update_evaluator(evaluator_id=_)
+    await client.update_evaluator(**_request(UpdateEvaluatorInputDict))
+    await client.update_evaluator(_request(UpdateEvaluatorInput))
+    await client.update_evaluator(_request(UpdateEvaluatorInputDict))
+    await client.update_gateway(
+        gateway_identifier=_, name=_, role_arn=_, authorizer_type=_
+    )
+    await client.update_gateway(**_request(UpdateGatewayInputDict))
+    await client.update_gateway(_request(UpdateGatewayInput))
+    await client.update_gateway(_request(UpdateGatewayInputDict))
+    await client.update_gateway_rate_limit(
+        gateway_identifier=_, rate_limit_id=_, entries=_
+    )
+    await client.update_gateway_rate_limit(**_request(UpdateGatewayRateLimitInputDict))
+    await client.update_gateway_rate_limit(_request(UpdateGatewayRateLimitInput))
+    await client.update_gateway_rate_limit(_request(UpdateGatewayRateLimitInputDict))
+    await client.update_gateway_rule(gateway_identifier=_, rule_id=_)
+    await client.update_gateway_rule(**_request(UpdateGatewayRuleInputDict))
+    await client.update_gateway_rule(_request(UpdateGatewayRuleInput))
+    await client.update_gateway_rule(_request(UpdateGatewayRuleInputDict))
+    await client.update_gateway_target(
+        gateway_identifier=_, target_id=_, target_configuration=_
+    )
+    await client.update_gateway_target(**_request(UpdateGatewayTargetInputDict))
+    await client.update_gateway_target(_request(UpdateGatewayTargetInput))
+    await client.update_gateway_target(_request(UpdateGatewayTargetInputDict))
+    await client.update_harness(harness_id=_)
+    await client.update_harness(**_request(UpdateHarnessInputDict))
+    await client.update_harness(_request(UpdateHarnessInput))
+    await client.update_harness(_request(UpdateHarnessInputDict))
+    await client.update_harness_endpoint(harness_id=_, endpoint_name=_)
+    await client.update_harness_endpoint(**_request(UpdateHarnessEndpointInputDict))
+    await client.update_harness_endpoint(_request(UpdateHarnessEndpointInput))
+    await client.update_harness_endpoint(_request(UpdateHarnessEndpointInputDict))
+    await client.update_memory(memory_id=_)
+    await client.update_memory(**_request(UpdateMemoryInputDict))
+    await client.update_memory(_request(UpdateMemoryInput))
+    await client.update_memory(_request(UpdateMemoryInputDict))
+    await client.update_oauth2_credential_provider(
+        name=_, credential_provider_vendor=_, oauth2_provider_config_input=_
+    )
+    await client.update_oauth2_credential_provider(
+        **_request(UpdateOauth2CredentialProviderInputDict)
+    )
+    await client.update_oauth2_credential_provider(
+        _request(UpdateOauth2CredentialProviderInput)
+    )
+    await client.update_oauth2_credential_provider(
+        _request(UpdateOauth2CredentialProviderInputDict)
+    )
+    await client.update_online_evaluation_config(online_evaluation_config_id=_)
+    await client.update_online_evaluation_config(
+        **_request(UpdateOnlineEvaluationConfigInputDict)
+    )
+    await client.update_online_evaluation_config(
+        _request(UpdateOnlineEvaluationConfigInput)
+    )
+    await client.update_online_evaluation_config(
+        _request(UpdateOnlineEvaluationConfigInputDict)
+    )
+    await client.update_payment_connector(payment_manager_id=_, payment_connector_id=_)
+    await client.update_payment_connector(**_request(UpdatePaymentConnectorInputDict))
+    await client.update_payment_connector(_request(UpdatePaymentConnectorInput))
+    await client.update_payment_connector(_request(UpdatePaymentConnectorInputDict))
+    await client.update_payment_credential_provider(
+        name=_, credential_provider_vendor=_, provider_configuration_input=_
+    )
+    await client.update_payment_credential_provider(
+        **_request(UpdatePaymentCredentialProviderInputDict)
+    )
+    await client.update_payment_credential_provider(
+        _request(UpdatePaymentCredentialProviderInput)
+    )
+    await client.update_payment_credential_provider(
+        _request(UpdatePaymentCredentialProviderInputDict)
+    )
+    await client.update_payment_manager(payment_manager_id=_)
+    await client.update_payment_manager(**_request(UpdatePaymentManagerInputDict))
+    await client.update_payment_manager(_request(UpdatePaymentManagerInput))
+    await client.update_payment_manager(_request(UpdatePaymentManagerInputDict))
+    await client.update_policy(policy_engine_id=_, policy_id=_)
+    await client.update_policy(**_request(UpdatePolicyInputDict))
+    await client.update_policy(_request(UpdatePolicyInput))
+    await client.update_policy(_request(UpdatePolicyInputDict))
+    await client.update_policy_engine(policy_engine_id=_)
+    await client.update_policy_engine(**_request(UpdatePolicyEngineInputDict))
+    await client.update_policy_engine(_request(UpdatePolicyEngineInput))
+    await client.update_policy_engine(_request(UpdatePolicyEngineInputDict))
+    await client.update_registry(registry_id=_)
+    await client.update_registry(**_request(UpdateRegistryInputDict))
+    await client.update_registry(_request(UpdateRegistryInput))
+    await client.update_registry(_request(UpdateRegistryInputDict))
+    await client.update_registry_record(registry_id=_, record_id=_)
+    await client.update_registry_record(**_request(UpdateRegistryRecordInputDict))
+    await client.update_registry_record(_request(UpdateRegistryRecordInput))
+    await client.update_registry_record(_request(UpdateRegistryRecordInputDict))
+    await client.update_registry_record_status(
+        registry_id=_, record_id=_, status=_, status_reason=_
+    )
+    await client.update_registry_record_status(
+        **_request(UpdateRegistryRecordStatusInputDict)
+    )
+    await client.update_registry_record_status(
+        _request(UpdateRegistryRecordStatusInput)
+    )
+    await client.update_registry_record_status(
+        _request(UpdateRegistryRecordStatusInputDict)
+    )
+    await client.update_workload_identity(name=_)
+    await client.update_workload_identity(**_request(UpdateWorkloadIdentityInputDict))
+    await client.update_workload_identity(_request(UpdateWorkloadIdentityInput))
+    await client.update_workload_identity(_request(UpdateWorkloadIdentityInputDict))
+
+
+def check_sync_calls(client: BedrockAgentCoreControlClient) -> None:
+    pass
+    client.add_dataset_examples(dataset_id=_, source=_)
+    client.add_dataset_examples(**_request(AddDatasetExamplesInputDict))
+    client.add_dataset_examples(_request(AddDatasetExamplesInput))
+    client.add_dataset_examples(_request(AddDatasetExamplesInputDict))
+    client.batch_put_gateway_rate_limits(gateway_identifier=_, rate_limits=_)
+    client.batch_put_gateway_rate_limits(**_request(BatchPutGatewayRateLimitsInputDict))
+    client.batch_put_gateway_rate_limits(_request(BatchPutGatewayRateLimitsInput))
+    client.batch_put_gateway_rate_limits(_request(BatchPutGatewayRateLimitsInputDict))
+    client.create_agent_runtime(
+        agent_runtime_name=_, agent_runtime_artifact=_, role_arn=_
+    )
+    client.create_agent_runtime(**_request(CreateAgentRuntimeInputDict))
+    client.create_agent_runtime(_request(CreateAgentRuntimeInput))
+    client.create_agent_runtime(_request(CreateAgentRuntimeInputDict))
+    client.create_agent_runtime_endpoint(agent_runtime_id=_, name=_)
+    client.create_agent_runtime_endpoint(
+        **_request(CreateAgentRuntimeEndpointInputDict)
+    )
+    client.create_agent_runtime_endpoint(_request(CreateAgentRuntimeEndpointInput))
+    client.create_agent_runtime_endpoint(_request(CreateAgentRuntimeEndpointInputDict))
+    client.create_api_key_credential_provider(name=_)
+    client.create_api_key_credential_provider(
+        **_request(CreateApiKeyCredentialProviderInputDict)
+    )
+    client.create_api_key_credential_provider(
+        _request(CreateApiKeyCredentialProviderInput)
+    )
+    client.create_api_key_credential_provider(
+        _request(CreateApiKeyCredentialProviderInputDict)
+    )
+    client.create_browser(name=_, network_configuration=_)
+    client.create_browser(**_request(CreateBrowserInputDict))
+    client.create_browser(_request(CreateBrowserInput))
+    client.create_browser(_request(CreateBrowserInputDict))
+    client.create_browser_profile(name=_)
+    client.create_browser_profile(**_request(CreateBrowserProfileInputDict))
+    client.create_browser_profile(_request(CreateBrowserProfileInput))
+    client.create_browser_profile(_request(CreateBrowserProfileInputDict))
+    client.create_capacity_provider(
+        name=_, permissions_configuration=_, compute_configuration=_
+    )
+    client.create_capacity_provider(**_request(CreateCapacityProviderInputDict))
+    client.create_capacity_provider(_request(CreateCapacityProviderInput))
+    client.create_capacity_provider(_request(CreateCapacityProviderInputDict))
+    client.create_code_interpreter(name=_, network_configuration=_)
+    client.create_code_interpreter(**_request(CreateCodeInterpreterInputDict))
+    client.create_code_interpreter(_request(CreateCodeInterpreterInput))
+    client.create_code_interpreter(_request(CreateCodeInterpreterInputDict))
+    client.create_configuration_bundle(bundle_name=_, components=_)
+    client.create_configuration_bundle(**_request(CreateConfigurationBundleInputDict))
+    client.create_configuration_bundle(_request(CreateConfigurationBundleInput))
+    client.create_configuration_bundle(_request(CreateConfigurationBundleInputDict))
+    client.create_consent_portal(execution_role_arn=_, idp_config=_, name=_, sources=_)
+    client.create_consent_portal(**_request(CreateConsentPortalInputDict))
+    client.create_consent_portal(_request(CreateConsentPortalInput))
+    client.create_consent_portal(_request(CreateConsentPortalInputDict))
+    client.create_dataset(dataset_name=_, source=_, schema_type=_)
+    client.create_dataset(**_request(CreateDatasetInputDict))
+    client.create_dataset(_request(CreateDatasetInput))
+    client.create_dataset(_request(CreateDatasetInputDict))
+    client.create_dataset_version(dataset_id=_)
+    client.create_dataset_version(**_request(CreateDatasetVersionInputDict))
+    client.create_dataset_version(_request(CreateDatasetVersionInput))
+    client.create_dataset_version(_request(CreateDatasetVersionInputDict))
+    client.create_evaluator(evaluator_name=_, evaluator_config=_, level=_)
+    client.create_evaluator(**_request(CreateEvaluatorInputDict))
+    client.create_evaluator(_request(CreateEvaluatorInput))
+    client.create_evaluator(_request(CreateEvaluatorInputDict))
+    client.create_gateway(name=_, role_arn=_, authorizer_type=_)
+    client.create_gateway(**_request(CreateGatewayInputDict))
+    client.create_gateway(_request(CreateGatewayInput))
+    client.create_gateway(_request(CreateGatewayInputDict))
+    client.create_gateway_rate_limit(gateway_identifier=_, dimension_keys=_, entries=_)
+    client.create_gateway_rate_limit(**_request(CreateGatewayRateLimitInputDict))
+    client.create_gateway_rate_limit(_request(CreateGatewayRateLimitInput))
+    client.create_gateway_rate_limit(_request(CreateGatewayRateLimitInputDict))
+    client.create_gateway_rule(gateway_identifier=_, priority=_, actions=_)
+    client.create_gateway_rule(**_request(CreateGatewayRuleInputDict))
+    client.create_gateway_rule(_request(CreateGatewayRuleInput))
+    client.create_gateway_rule(_request(CreateGatewayRuleInputDict))
+    client.create_gateway_target(gateway_identifier=_, target_configuration=_)
+    client.create_gateway_target(**_request(CreateGatewayTargetInputDict))
+    client.create_gateway_target(_request(CreateGatewayTargetInput))
+    client.create_gateway_target(_request(CreateGatewayTargetInputDict))
+    client.create_harness(harness_name=_, execution_role_arn=_)
+    client.create_harness(**_request(CreateHarnessInputDict))
+    client.create_harness(_request(CreateHarnessInput))
+    client.create_harness(_request(CreateHarnessInputDict))
+    client.create_harness_endpoint(harness_id=_, endpoint_name=_)
+    client.create_harness_endpoint(**_request(CreateHarnessEndpointInputDict))
+    client.create_harness_endpoint(_request(CreateHarnessEndpointInput))
+    client.create_harness_endpoint(_request(CreateHarnessEndpointInputDict))
+    client.create_memory(name=_, event_expiry_duration=_)
+    client.create_memory(**_request(CreateMemoryInputDict))
+    client.create_memory(_request(CreateMemoryInput))
+    client.create_memory(_request(CreateMemoryInputDict))
+    client.create_oauth2_credential_provider(
+        name=_, credential_provider_vendor=_, oauth2_provider_config_input=_
+    )
+    client.create_oauth2_credential_provider(
+        **_request(CreateOauth2CredentialProviderInputDict)
+    )
+    client.create_oauth2_credential_provider(
+        _request(CreateOauth2CredentialProviderInput)
+    )
+    client.create_oauth2_credential_provider(
+        _request(CreateOauth2CredentialProviderInputDict)
+    )
+    client.create_online_evaluation_config(
+        online_evaluation_config_name=_,
+        rule=_,
+        data_source_config=_,
+        evaluation_execution_role_arn=_,
+        enable_on_create=_,
+    )
+    client.create_online_evaluation_config(
+        **_request(CreateOnlineEvaluationConfigInputDict)
+    )
+    client.create_online_evaluation_config(_request(CreateOnlineEvaluationConfigInput))
+    client.create_online_evaluation_config(
+        _request(CreateOnlineEvaluationConfigInputDict)
+    )
+    client.create_payment_connector(
+        payment_manager_id=_, name=_, type=_, credential_provider_configurations=_
+    )
+    client.create_payment_connector(**_request(CreatePaymentConnectorInputDict))
+    client.create_payment_connector(_request(CreatePaymentConnectorInput))
+    client.create_payment_connector(_request(CreatePaymentConnectorInputDict))
+    client.create_payment_credential_provider(
+        name=_, credential_provider_vendor=_, provider_configuration_input=_
+    )
+    client.create_payment_credential_provider(
+        **_request(CreatePaymentCredentialProviderInputDict)
+    )
+    client.create_payment_credential_provider(
+        _request(CreatePaymentCredentialProviderInput)
+    )
+    client.create_payment_credential_provider(
+        _request(CreatePaymentCredentialProviderInputDict)
+    )
+    client.create_payment_manager(name=_, authorizer_type=_, role_arn=_)
+    client.create_payment_manager(**_request(CreatePaymentManagerInputDict))
+    client.create_payment_manager(_request(CreatePaymentManagerInput))
+    client.create_payment_manager(_request(CreatePaymentManagerInputDict))
+    client.create_policy(name=_, definition=_, policy_engine_id=_)
+    client.create_policy(**_request(CreatePolicyInputDict))
+    client.create_policy(_request(CreatePolicyInput))
+    client.create_policy(_request(CreatePolicyInputDict))
+    client.create_policy_engine(name=_)
+    client.create_policy_engine(**_request(CreatePolicyEngineInputDict))
+    client.create_policy_engine(_request(CreatePolicyEngineInput))
+    client.create_policy_engine(_request(CreatePolicyEngineInputDict))
+    client.create_registry(name=_)
+    client.create_registry(**_request(CreateRegistryInputDict))
+    client.create_registry(_request(CreateRegistryInput))
+    client.create_registry(_request(CreateRegistryInputDict))
+    client.create_registry_record(registry_id=_, name=_, descriptor_type=_)
+    client.create_registry_record(**_request(CreateRegistryRecordInputDict))
+    client.create_registry_record(_request(CreateRegistryRecordInput))
+    client.create_registry_record(_request(CreateRegistryRecordInputDict))
+    client.create_workload_identity(name=_)
+    client.create_workload_identity(**_request(CreateWorkloadIdentityInputDict))
+    client.create_workload_identity(_request(CreateWorkloadIdentityInput))
+    client.create_workload_identity(_request(CreateWorkloadIdentityInputDict))
+    client.delete_agent_runtime(agent_runtime_id=_)
+    client.delete_agent_runtime(**_request(DeleteAgentRuntimeInputDict))
+    client.delete_agent_runtime(_request(DeleteAgentRuntimeInput))
+    client.delete_agent_runtime(_request(DeleteAgentRuntimeInputDict))
+    client.delete_agent_runtime_endpoint(agent_runtime_id=_, endpoint_name=_)
+    client.delete_agent_runtime_endpoint(
+        **_request(DeleteAgentRuntimeEndpointInputDict)
+    )
+    client.delete_agent_runtime_endpoint(_request(DeleteAgentRuntimeEndpointInput))
+    client.delete_agent_runtime_endpoint(_request(DeleteAgentRuntimeEndpointInputDict))
+    client.delete_api_key_credential_provider(name=_)
+    client.delete_api_key_credential_provider(
+        **_request(DeleteApiKeyCredentialProviderInputDict)
+    )
+    client.delete_api_key_credential_provider(
+        _request(DeleteApiKeyCredentialProviderInput)
+    )
+    client.delete_api_key_credential_provider(
+        _request(DeleteApiKeyCredentialProviderInputDict)
+    )
+    client.delete_browser(browser_id=_)
+    client.delete_browser(**_request(DeleteBrowserInputDict))
+    client.delete_browser(_request(DeleteBrowserInput))
+    client.delete_browser(_request(DeleteBrowserInputDict))
+    client.delete_browser_profile(profile_id=_)
+    client.delete_browser_profile(**_request(DeleteBrowserProfileInputDict))
+    client.delete_browser_profile(_request(DeleteBrowserProfileInput))
+    client.delete_browser_profile(_request(DeleteBrowserProfileInputDict))
+    client.delete_capacity_provider(capacity_provider_id=_)
+    client.delete_capacity_provider(**_request(DeleteCapacityProviderInputDict))
+    client.delete_capacity_provider(_request(DeleteCapacityProviderInput))
+    client.delete_capacity_provider(_request(DeleteCapacityProviderInputDict))
+    client.delete_code_interpreter(code_interpreter_id=_)
+    client.delete_code_interpreter(**_request(DeleteCodeInterpreterInputDict))
+    client.delete_code_interpreter(_request(DeleteCodeInterpreterInput))
+    client.delete_code_interpreter(_request(DeleteCodeInterpreterInputDict))
+    client.delete_configuration_bundle(bundle_id=_)
+    client.delete_configuration_bundle(**_request(DeleteConfigurationBundleInputDict))
+    client.delete_configuration_bundle(_request(DeleteConfigurationBundleInput))
+    client.delete_configuration_bundle(_request(DeleteConfigurationBundleInputDict))
+    client.delete_consent_portal(consent_portal_identifier=_)
+    client.delete_consent_portal(**_request(DeleteConsentPortalInputDict))
+    client.delete_consent_portal(_request(DeleteConsentPortalInput))
+    client.delete_consent_portal(_request(DeleteConsentPortalInputDict))
+    client.delete_dataset(dataset_id=_)
+    client.delete_dataset(**_request(DeleteDatasetInputDict))
+    client.delete_dataset(_request(DeleteDatasetInput))
+    client.delete_dataset(_request(DeleteDatasetInputDict))
+    client.delete_dataset_examples(dataset_id=_, example_ids=_)
+    client.delete_dataset_examples(**_request(DeleteDatasetExamplesInputDict))
+    client.delete_dataset_examples(_request(DeleteDatasetExamplesInput))
+    client.delete_dataset_examples(_request(DeleteDatasetExamplesInputDict))
+    client.delete_evaluator(evaluator_id=_)
+    client.delete_evaluator(**_request(DeleteEvaluatorInputDict))
+    client.delete_evaluator(_request(DeleteEvaluatorInput))
+    client.delete_evaluator(_request(DeleteEvaluatorInputDict))
+    client.delete_gateway(gateway_identifier=_)
+    client.delete_gateway(**_request(DeleteGatewayInputDict))
+    client.delete_gateway(_request(DeleteGatewayInput))
+    client.delete_gateway(_request(DeleteGatewayInputDict))
+    client.delete_gateway_rate_limit(gateway_identifier=_, rate_limit_id=_)
+    client.delete_gateway_rate_limit(**_request(DeleteGatewayRateLimitInputDict))
+    client.delete_gateway_rate_limit(_request(DeleteGatewayRateLimitInput))
+    client.delete_gateway_rate_limit(_request(DeleteGatewayRateLimitInputDict))
+    client.delete_gateway_rule(gateway_identifier=_, rule_id=_)
+    client.delete_gateway_rule(**_request(DeleteGatewayRuleInputDict))
+    client.delete_gateway_rule(_request(DeleteGatewayRuleInput))
+    client.delete_gateway_rule(_request(DeleteGatewayRuleInputDict))
+    client.delete_gateway_target(gateway_identifier=_, target_id=_)
+    client.delete_gateway_target(**_request(DeleteGatewayTargetInputDict))
+    client.delete_gateway_target(_request(DeleteGatewayTargetInput))
+    client.delete_gateway_target(_request(DeleteGatewayTargetInputDict))
+    client.delete_harness(harness_id=_)
+    client.delete_harness(**_request(DeleteHarnessInputDict))
+    client.delete_harness(_request(DeleteHarnessInput))
+    client.delete_harness(_request(DeleteHarnessInputDict))
+    client.delete_harness_endpoint(harness_id=_, endpoint_name=_)
+    client.delete_harness_endpoint(**_request(DeleteHarnessEndpointInputDict))
+    client.delete_harness_endpoint(_request(DeleteHarnessEndpointInput))
+    client.delete_harness_endpoint(_request(DeleteHarnessEndpointInputDict))
+    client.delete_memory(memory_id=_)
+    client.delete_memory(**_request(DeleteMemoryInputDict))
+    client.delete_memory(_request(DeleteMemoryInput))
+    client.delete_memory(_request(DeleteMemoryInputDict))
+    client.delete_oauth2_credential_provider(name=_)
+    client.delete_oauth2_credential_provider(
+        **_request(DeleteOauth2CredentialProviderInputDict)
+    )
+    client.delete_oauth2_credential_provider(
+        _request(DeleteOauth2CredentialProviderInput)
+    )
+    client.delete_oauth2_credential_provider(
+        _request(DeleteOauth2CredentialProviderInputDict)
+    )
+    client.delete_online_evaluation_config(online_evaluation_config_id=_)
+    client.delete_online_evaluation_config(
+        **_request(DeleteOnlineEvaluationConfigInputDict)
+    )
+    client.delete_online_evaluation_config(_request(DeleteOnlineEvaluationConfigInput))
+    client.delete_online_evaluation_config(
+        _request(DeleteOnlineEvaluationConfigInputDict)
+    )
+    client.delete_payment_connector(payment_manager_id=_, payment_connector_id=_)
+    client.delete_payment_connector(**_request(DeletePaymentConnectorInputDict))
+    client.delete_payment_connector(_request(DeletePaymentConnectorInput))
+    client.delete_payment_connector(_request(DeletePaymentConnectorInputDict))
+    client.delete_payment_credential_provider(name=_)
+    client.delete_payment_credential_provider(
+        **_request(DeletePaymentCredentialProviderInputDict)
+    )
+    client.delete_payment_credential_provider(
+        _request(DeletePaymentCredentialProviderInput)
+    )
+    client.delete_payment_credential_provider(
+        _request(DeletePaymentCredentialProviderInputDict)
+    )
+    client.delete_payment_manager(payment_manager_id=_)
+    client.delete_payment_manager(**_request(DeletePaymentManagerInputDict))
+    client.delete_payment_manager(_request(DeletePaymentManagerInput))
+    client.delete_payment_manager(_request(DeletePaymentManagerInputDict))
+    client.delete_policy(policy_engine_id=_, policy_id=_)
+    client.delete_policy(**_request(DeletePolicyInputDict))
+    client.delete_policy(_request(DeletePolicyInput))
+    client.delete_policy(_request(DeletePolicyInputDict))
+    client.delete_policy_engine(policy_engine_id=_)
+    client.delete_policy_engine(**_request(DeletePolicyEngineInputDict))
+    client.delete_policy_engine(_request(DeletePolicyEngineInput))
+    client.delete_policy_engine(_request(DeletePolicyEngineInputDict))
+    client.delete_registry(registry_id=_)
+    client.delete_registry(**_request(DeleteRegistryInputDict))
+    client.delete_registry(_request(DeleteRegistryInput))
+    client.delete_registry(_request(DeleteRegistryInputDict))
+    client.delete_registry_record(registry_id=_, record_id=_)
+    client.delete_registry_record(**_request(DeleteRegistryRecordInputDict))
+    client.delete_registry_record(_request(DeleteRegistryRecordInput))
+    client.delete_registry_record(_request(DeleteRegistryRecordInputDict))
+    client.delete_resource_policy(resource_arn=_)
+    client.delete_resource_policy(**_request(DeleteResourcePolicyInputDict))
+    client.delete_resource_policy(_request(DeleteResourcePolicyInput))
+    client.delete_resource_policy(_request(DeleteResourcePolicyInputDict))
+    client.delete_workload_identity(name=_)
+    client.delete_workload_identity(**_request(DeleteWorkloadIdentityInputDict))
+    client.delete_workload_identity(_request(DeleteWorkloadIdentityInput))
+    client.delete_workload_identity(_request(DeleteWorkloadIdentityInputDict))
+    client.get_agent_runtime(agent_runtime_id=_)
+    client.get_agent_runtime(**_request(GetAgentRuntimeInputDict))
+    client.get_agent_runtime(_request(GetAgentRuntimeInput))
+    client.get_agent_runtime(_request(GetAgentRuntimeInputDict))
+    client.get_agent_runtime_endpoint(agent_runtime_id=_, endpoint_name=_)
+    client.get_agent_runtime_endpoint(**_request(GetAgentRuntimeEndpointInputDict))
+    client.get_agent_runtime_endpoint(_request(GetAgentRuntimeEndpointInput))
+    client.get_agent_runtime_endpoint(_request(GetAgentRuntimeEndpointInputDict))
+    client.get_api_key_credential_provider(name=_)
+    client.get_api_key_credential_provider(
+        **_request(GetApiKeyCredentialProviderInputDict)
+    )
+    client.get_api_key_credential_provider(_request(GetApiKeyCredentialProviderInput))
+    client.get_api_key_credential_provider(
+        _request(GetApiKeyCredentialProviderInputDict)
+    )
+    client.get_browser(browser_id=_)
+    client.get_browser(**_request(GetBrowserInputDict))
+    client.get_browser(_request(GetBrowserInput))
+    client.get_browser(_request(GetBrowserInputDict))
+    client.get_browser_profile(profile_id=_)
+    client.get_browser_profile(**_request(GetBrowserProfileInputDict))
+    client.get_browser_profile(_request(GetBrowserProfileInput))
+    client.get_browser_profile(_request(GetBrowserProfileInputDict))
+    client.get_capacity_provider(capacity_provider_id=_)
+    client.get_capacity_provider(**_request(GetCapacityProviderInputDict))
+    client.get_capacity_provider(_request(GetCapacityProviderInput))
+    client.get_capacity_provider(_request(GetCapacityProviderInputDict))
+    client.get_code_interpreter(code_interpreter_id=_)
+    client.get_code_interpreter(**_request(GetCodeInterpreterInputDict))
+    client.get_code_interpreter(_request(GetCodeInterpreterInput))
+    client.get_code_interpreter(_request(GetCodeInterpreterInputDict))
+    client.get_configuration_bundle(bundle_id=_)
+    client.get_configuration_bundle(**_request(GetConfigurationBundleInputDict))
+    client.get_configuration_bundle(_request(GetConfigurationBundleInput))
+    client.get_configuration_bundle(_request(GetConfigurationBundleInputDict))
+    client.get_configuration_bundle_version(bundle_id=_, version_id=_)
+    client.get_configuration_bundle_version(
+        **_request(GetConfigurationBundleVersionInputDict)
+    )
+    client.get_configuration_bundle_version(
+        _request(GetConfigurationBundleVersionInput)
+    )
+    client.get_configuration_bundle_version(
+        _request(GetConfigurationBundleVersionInputDict)
+    )
+    client.get_consent_portal(consent_portal_identifier=_)
+    client.get_consent_portal(**_request(GetConsentPortalInputDict))
+    client.get_consent_portal(_request(GetConsentPortalInput))
+    client.get_consent_portal(_request(GetConsentPortalInputDict))
+    client.get_dataset(dataset_id=_)
+    client.get_dataset(**_request(GetDatasetInputDict))
+    client.get_dataset(_request(GetDatasetInput))
+    client.get_dataset(_request(GetDatasetInputDict))
+    client.get_evaluator(evaluator_id=_)
+    client.get_evaluator(**_request(GetEvaluatorInputDict))
+    client.get_evaluator(_request(GetEvaluatorInput))
+    client.get_evaluator(_request(GetEvaluatorInputDict))
+    client.get_gateway(gateway_identifier=_)
+    client.get_gateway(**_request(GetGatewayInputDict))
+    client.get_gateway(_request(GetGatewayInput))
+    client.get_gateway(_request(GetGatewayInputDict))
+    client.get_gateway_rate_limit(gateway_identifier=_, rate_limit_id=_)
+    client.get_gateway_rate_limit(**_request(GetGatewayRateLimitInputDict))
+    client.get_gateway_rate_limit(_request(GetGatewayRateLimitInput))
+    client.get_gateway_rate_limit(_request(GetGatewayRateLimitInputDict))
+    client.get_gateway_rule(gateway_identifier=_, rule_id=_)
+    client.get_gateway_rule(**_request(GetGatewayRuleInputDict))
+    client.get_gateway_rule(_request(GetGatewayRuleInput))
+    client.get_gateway_rule(_request(GetGatewayRuleInputDict))
+    client.get_gateway_target(gateway_identifier=_, target_id=_)
+    client.get_gateway_target(**_request(GetGatewayTargetInputDict))
+    client.get_gateway_target(_request(GetGatewayTargetInput))
+    client.get_gateway_target(_request(GetGatewayTargetInputDict))
+    client.get_harness(harness_id=_)
+    client.get_harness(**_request(GetHarnessInputDict))
+    client.get_harness(_request(GetHarnessInput))
+    client.get_harness(_request(GetHarnessInputDict))
+    client.get_harness_endpoint(harness_id=_, endpoint_name=_)
+    client.get_harness_endpoint(**_request(GetHarnessEndpointInputDict))
+    client.get_harness_endpoint(_request(GetHarnessEndpointInput))
+    client.get_harness_endpoint(_request(GetHarnessEndpointInputDict))
+    client.get_memory(memory_id=_)
+    client.get_memory(**_request(GetMemoryInputDict))
+    client.get_memory(_request(GetMemoryInput))
+    client.get_memory(_request(GetMemoryInputDict))
+    client.get_oauth2_credential_provider(name=_)
+    client.get_oauth2_credential_provider(
+        **_request(GetOauth2CredentialProviderInputDict)
+    )
+    client.get_oauth2_credential_provider(_request(GetOauth2CredentialProviderInput))
+    client.get_oauth2_credential_provider(
+        _request(GetOauth2CredentialProviderInputDict)
+    )
+    client.get_online_evaluation_config(online_evaluation_config_id=_)
+    client.get_online_evaluation_config(**_request(GetOnlineEvaluationConfigInputDict))
+    client.get_online_evaluation_config(_request(GetOnlineEvaluationConfigInput))
+    client.get_online_evaluation_config(_request(GetOnlineEvaluationConfigInputDict))
+    client.get_payment_connector(payment_manager_id=_, payment_connector_id=_)
+    client.get_payment_connector(**_request(GetPaymentConnectorInputDict))
+    client.get_payment_connector(_request(GetPaymentConnectorInput))
+    client.get_payment_connector(_request(GetPaymentConnectorInputDict))
+    client.get_payment_credential_provider(name=_)
+    client.get_payment_credential_provider(
+        **_request(GetPaymentCredentialProviderInputDict)
+    )
+    client.get_payment_credential_provider(_request(GetPaymentCredentialProviderInput))
+    client.get_payment_credential_provider(
+        _request(GetPaymentCredentialProviderInputDict)
+    )
+    client.get_payment_manager(payment_manager_id=_)
+    client.get_payment_manager(**_request(GetPaymentManagerInputDict))
+    client.get_payment_manager(_request(GetPaymentManagerInput))
+    client.get_payment_manager(_request(GetPaymentManagerInputDict))
+    client.get_policy(policy_engine_id=_, policy_id=_)
+    client.get_policy(**_request(GetPolicyInputDict))
+    client.get_policy(_request(GetPolicyInput))
+    client.get_policy(_request(GetPolicyInputDict))
+    client.get_policy_engine(policy_engine_id=_)
+    client.get_policy_engine(**_request(GetPolicyEngineInputDict))
+    client.get_policy_engine(_request(GetPolicyEngineInput))
+    client.get_policy_engine(_request(GetPolicyEngineInputDict))
+    client.get_policy_engine_summary(policy_engine_id=_)
+    client.get_policy_engine_summary(**_request(GetPolicyEngineSummaryInputDict))
+    client.get_policy_engine_summary(_request(GetPolicyEngineSummaryInput))
+    client.get_policy_engine_summary(_request(GetPolicyEngineSummaryInputDict))
+    client.get_policy_generation(policy_generation_id=_, policy_engine_id=_)
+    client.get_policy_generation(**_request(GetPolicyGenerationInputDict))
+    client.get_policy_generation(_request(GetPolicyGenerationInput))
+    client.get_policy_generation(_request(GetPolicyGenerationInputDict))
+    client.get_policy_generation_summary(policy_generation_id=_, policy_engine_id=_)
+    client.get_policy_generation_summary(
+        **_request(GetPolicyGenerationSummaryInputDict)
+    )
+    client.get_policy_generation_summary(_request(GetPolicyGenerationSummaryInput))
+    client.get_policy_generation_summary(_request(GetPolicyGenerationSummaryInputDict))
+    client.get_policy_summary(policy_engine_id=_, policy_id=_)
+    client.get_policy_summary(**_request(GetPolicySummaryInputDict))
+    client.get_policy_summary(_request(GetPolicySummaryInput))
+    client.get_policy_summary(_request(GetPolicySummaryInputDict))
+    client.get_registry(registry_id=_)
+    client.get_registry(**_request(GetRegistryInputDict))
+    client.get_registry(_request(GetRegistryInput))
+    client.get_registry(_request(GetRegistryInputDict))
+    client.get_registry_record(registry_id=_, record_id=_)
+    client.get_registry_record(**_request(GetRegistryRecordInputDict))
+    client.get_registry_record(_request(GetRegistryRecordInput))
+    client.get_registry_record(_request(GetRegistryRecordInputDict))
+    client.get_resource_policy(resource_arn=_)
+    client.get_resource_policy(**_request(GetResourcePolicyInputDict))
+    client.get_resource_policy(_request(GetResourcePolicyInput))
+    client.get_resource_policy(_request(GetResourcePolicyInputDict))
+    client.get_token_vault()
+    client.get_token_vault(**_request(GetTokenVaultInputDict))
+    client.get_token_vault(_request(GetTokenVaultInput))
+    client.get_token_vault(_request(GetTokenVaultInputDict))
+    client.get_workload_identity(name=_)
+    client.get_workload_identity(**_request(GetWorkloadIdentityInputDict))
+    client.get_workload_identity(_request(GetWorkloadIdentityInput))
+    client.get_workload_identity(_request(GetWorkloadIdentityInputDict))
+    client.list_agent_runtime_endpoints(agent_runtime_id=_)
+    client.list_agent_runtime_endpoints(**_request(ListAgentRuntimeEndpointsInputDict))
+    client.list_agent_runtime_endpoints(_request(ListAgentRuntimeEndpointsInput))
+    client.list_agent_runtime_endpoints(_request(ListAgentRuntimeEndpointsInputDict))
+    client.list_agent_runtimes()
+    client.list_agent_runtimes(**_request(ListAgentRuntimesInputDict))
+    client.list_agent_runtimes(_request(ListAgentRuntimesInput))
+    client.list_agent_runtimes(_request(ListAgentRuntimesInputDict))
+    client.list_agent_runtime_versions(agent_runtime_id=_)
+    client.list_agent_runtime_versions(**_request(ListAgentRuntimeVersionsInputDict))
+    client.list_agent_runtime_versions(_request(ListAgentRuntimeVersionsInput))
+    client.list_agent_runtime_versions(_request(ListAgentRuntimeVersionsInputDict))
+    client.list_agent_runtime_versions_by_capacity_provider(capacity_provider_id=_)
+    client.list_agent_runtime_versions_by_capacity_provider(
+        **_request(ListAgentRuntimeVersionsByCapacityProviderInputDict)
+    )
+    client.list_agent_runtime_versions_by_capacity_provider(
+        _request(ListAgentRuntimeVersionsByCapacityProviderInput)
+    )
+    client.list_agent_runtime_versions_by_capacity_provider(
+        _request(ListAgentRuntimeVersionsByCapacityProviderInputDict)
+    )
+    client.list_api_key_credential_providers()
+    client.list_api_key_credential_providers(
+        **_request(ListApiKeyCredentialProvidersInputDict)
+    )
+    client.list_api_key_credential_providers(
+        _request(ListApiKeyCredentialProvidersInput)
+    )
+    client.list_api_key_credential_providers(
+        _request(ListApiKeyCredentialProvidersInputDict)
+    )
+    client.list_browser_profiles()
+    client.list_browser_profiles(**_request(ListBrowserProfilesInputDict))
+    client.list_browser_profiles(_request(ListBrowserProfilesInput))
+    client.list_browser_profiles(_request(ListBrowserProfilesInputDict))
+    client.list_browsers()
+    client.list_browsers(**_request(ListBrowsersInputDict))
+    client.list_browsers(_request(ListBrowsersInput))
+    client.list_browsers(_request(ListBrowsersInputDict))
+    client.list_capacity_providers()
+    client.list_capacity_providers(**_request(ListCapacityProvidersInputDict))
+    client.list_capacity_providers(_request(ListCapacityProvidersInput))
+    client.list_capacity_providers(_request(ListCapacityProvidersInputDict))
+    client.list_code_interpreters()
+    client.list_code_interpreters(**_request(ListCodeInterpretersInputDict))
+    client.list_code_interpreters(_request(ListCodeInterpretersInput))
+    client.list_code_interpreters(_request(ListCodeInterpretersInputDict))
+    client.list_configuration_bundles()
+    client.list_configuration_bundles(**_request(ListConfigurationBundlesInputDict))
+    client.list_configuration_bundles(_request(ListConfigurationBundlesInput))
+    client.list_configuration_bundles(_request(ListConfigurationBundlesInputDict))
+    client.list_configuration_bundle_versions(bundle_id=_)
+    client.list_configuration_bundle_versions(
+        **_request(ListConfigurationBundleVersionsInputDict)
+    )
+    client.list_configuration_bundle_versions(
+        _request(ListConfigurationBundleVersionsInput)
+    )
+    client.list_configuration_bundle_versions(
+        _request(ListConfigurationBundleVersionsInputDict)
+    )
+    client.list_consent_portals()
+    client.list_consent_portals(**_request(ListConsentPortalsInputDict))
+    client.list_consent_portals(_request(ListConsentPortalsInput))
+    client.list_consent_portals(_request(ListConsentPortalsInputDict))
+    client.list_dataset_examples(dataset_id=_)
+    client.list_dataset_examples(**_request(ListDatasetExamplesInputDict))
+    client.list_dataset_examples(_request(ListDatasetExamplesInput))
+    client.list_dataset_examples(_request(ListDatasetExamplesInputDict))
+    client.list_datasets()
+    client.list_datasets(**_request(ListDatasetsInputDict))
+    client.list_datasets(_request(ListDatasetsInput))
+    client.list_datasets(_request(ListDatasetsInputDict))
+    client.list_dataset_versions(dataset_id=_)
+    client.list_dataset_versions(**_request(ListDatasetVersionsInputDict))
+    client.list_dataset_versions(_request(ListDatasetVersionsInput))
+    client.list_dataset_versions(_request(ListDatasetVersionsInputDict))
+    client.list_evaluators()
+    client.list_evaluators(**_request(ListEvaluatorsInputDict))
+    client.list_evaluators(_request(ListEvaluatorsInput))
+    client.list_evaluators(_request(ListEvaluatorsInputDict))
+    client.list_gateway_rate_limits(gateway_identifier=_)
+    client.list_gateway_rate_limits(**_request(ListGatewayRateLimitsInputDict))
+    client.list_gateway_rate_limits(_request(ListGatewayRateLimitsInput))
+    client.list_gateway_rate_limits(_request(ListGatewayRateLimitsInputDict))
+    client.list_gateway_rules(gateway_identifier=_)
+    client.list_gateway_rules(**_request(ListGatewayRulesInputDict))
+    client.list_gateway_rules(_request(ListGatewayRulesInput))
+    client.list_gateway_rules(_request(ListGatewayRulesInputDict))
+    client.list_gateways()
+    client.list_gateways(**_request(ListGatewaysInputDict))
+    client.list_gateways(_request(ListGatewaysInput))
+    client.list_gateways(_request(ListGatewaysInputDict))
+    client.list_gateway_targets(gateway_identifier=_)
+    client.list_gateway_targets(**_request(ListGatewayTargetsInputDict))
+    client.list_gateway_targets(_request(ListGatewayTargetsInput))
+    client.list_gateway_targets(_request(ListGatewayTargetsInputDict))
+    client.list_harness_endpoints(harness_id=_)
+    client.list_harness_endpoints(**_request(ListHarnessEndpointsInputDict))
+    client.list_harness_endpoints(_request(ListHarnessEndpointsInput))
+    client.list_harness_endpoints(_request(ListHarnessEndpointsInputDict))
+    client.list_harnesses()
+    client.list_harnesses(**_request(ListHarnessesInputDict))
+    client.list_harnesses(_request(ListHarnessesInput))
+    client.list_harnesses(_request(ListHarnessesInputDict))
+    client.list_harness_versions(harness_id=_)
+    client.list_harness_versions(**_request(ListHarnessVersionsInputDict))
+    client.list_harness_versions(_request(ListHarnessVersionsInput))
+    client.list_harness_versions(_request(ListHarnessVersionsInputDict))
+    client.list_memories()
+    client.list_memories(**_request(ListMemoriesInputDict))
+    client.list_memories(_request(ListMemoriesInput))
+    client.list_memories(_request(ListMemoriesInputDict))
+    client.list_oauth2_credential_providers()
+    client.list_oauth2_credential_providers(
+        **_request(ListOauth2CredentialProvidersInputDict)
+    )
+    client.list_oauth2_credential_providers(
+        _request(ListOauth2CredentialProvidersInput)
+    )
+    client.list_oauth2_credential_providers(
+        _request(ListOauth2CredentialProvidersInputDict)
+    )
+    client.list_online_evaluation_configs()
+    client.list_online_evaluation_configs(
+        **_request(ListOnlineEvaluationConfigsInputDict)
+    )
+    client.list_online_evaluation_configs(_request(ListOnlineEvaluationConfigsInput))
+    client.list_online_evaluation_configs(
+        _request(ListOnlineEvaluationConfigsInputDict)
+    )
+    client.list_payment_connectors(payment_manager_id=_)
+    client.list_payment_connectors(**_request(ListPaymentConnectorsInputDict))
+    client.list_payment_connectors(_request(ListPaymentConnectorsInput))
+    client.list_payment_connectors(_request(ListPaymentConnectorsInputDict))
+    client.list_payment_credential_providers()
+    client.list_payment_credential_providers(
+        **_request(ListPaymentCredentialProvidersInputDict)
+    )
+    client.list_payment_credential_providers(
+        _request(ListPaymentCredentialProvidersInput)
+    )
+    client.list_payment_credential_providers(
+        _request(ListPaymentCredentialProvidersInputDict)
+    )
+    client.list_payment_managers()
+    client.list_payment_managers(**_request(ListPaymentManagersInputDict))
+    client.list_payment_managers(_request(ListPaymentManagersInput))
+    client.list_payment_managers(_request(ListPaymentManagersInputDict))
+    client.list_policies(policy_engine_id=_)
+    client.list_policies(**_request(ListPoliciesInputDict))
+    client.list_policies(_request(ListPoliciesInput))
+    client.list_policies(_request(ListPoliciesInputDict))
+    client.list_policy_engines()
+    client.list_policy_engines(**_request(ListPolicyEnginesInputDict))
+    client.list_policy_engines(_request(ListPolicyEnginesInput))
+    client.list_policy_engines(_request(ListPolicyEnginesInputDict))
+    client.list_policy_engine_summaries()
+    client.list_policy_engine_summaries(**_request(ListPolicyEngineSummariesInputDict))
+    client.list_policy_engine_summaries(_request(ListPolicyEngineSummariesInput))
+    client.list_policy_engine_summaries(_request(ListPolicyEngineSummariesInputDict))
+    client.list_policy_generation_assets(policy_generation_id=_, policy_engine_id=_)
+    client.list_policy_generation_assets(
+        **_request(ListPolicyGenerationAssetsInputDict)
+    )
+    client.list_policy_generation_assets(_request(ListPolicyGenerationAssetsInput))
+    client.list_policy_generation_assets(_request(ListPolicyGenerationAssetsInputDict))
+    client.list_policy_generations(policy_engine_id=_)
+    client.list_policy_generations(**_request(ListPolicyGenerationsInputDict))
+    client.list_policy_generations(_request(ListPolicyGenerationsInput))
+    client.list_policy_generations(_request(ListPolicyGenerationsInputDict))
+    client.list_policy_generation_summaries(policy_engine_id=_)
+    client.list_policy_generation_summaries(
+        **_request(ListPolicyGenerationSummariesInputDict)
+    )
+    client.list_policy_generation_summaries(
+        _request(ListPolicyGenerationSummariesInput)
+    )
+    client.list_policy_generation_summaries(
+        _request(ListPolicyGenerationSummariesInputDict)
+    )
+    client.list_policy_summaries(policy_engine_id=_)
+    client.list_policy_summaries(**_request(ListPolicySummariesInputDict))
+    client.list_policy_summaries(_request(ListPolicySummariesInput))
+    client.list_policy_summaries(_request(ListPolicySummariesInputDict))
+    client.list_registries()
+    client.list_registries(**_request(ListRegistriesInputDict))
+    client.list_registries(_request(ListRegistriesInput))
+    client.list_registries(_request(ListRegistriesInputDict))
+    client.list_registry_records(registry_id=_)
+    client.list_registry_records(**_request(ListRegistryRecordsInputDict))
+    client.list_registry_records(_request(ListRegistryRecordsInput))
+    client.list_registry_records(_request(ListRegistryRecordsInputDict))
+    client.list_tags_for_resource(resource_arn=_)
+    client.list_tags_for_resource(**_request(ListTagsForResourceInputDict))
+    client.list_tags_for_resource(_request(ListTagsForResourceInput))
+    client.list_tags_for_resource(_request(ListTagsForResourceInputDict))
+    client.list_workload_identities()
+    client.list_workload_identities(**_request(ListWorkloadIdentitiesInputDict))
+    client.list_workload_identities(_request(ListWorkloadIdentitiesInput))
+    client.list_workload_identities(_request(ListWorkloadIdentitiesInputDict))
+    client.put_resource_policy(resource_arn=_, policy=_)
+    client.put_resource_policy(**_request(PutResourcePolicyInputDict))
+    client.put_resource_policy(_request(PutResourcePolicyInput))
+    client.put_resource_policy(_request(PutResourcePolicyInputDict))
+    client.reset_token_vault_key_material(token_vault_id=_)
+    client.reset_token_vault_key_material(
+        **_request(ResetTokenVaultKeyMaterialInputDict)
+    )
+    client.reset_token_vault_key_material(_request(ResetTokenVaultKeyMaterialInput))
+    client.reset_token_vault_key_material(_request(ResetTokenVaultKeyMaterialInputDict))
+    client.rotate_payment_connector_credentials(
+        payment_manager_id=_, payment_connector_id=_, credentials_to_rotate=_
+    )
+    client.rotate_payment_connector_credentials(
+        **_request(RotatePaymentConnectorCredentialsInputDict)
+    )
+    client.rotate_payment_connector_credentials(
+        _request(RotatePaymentConnectorCredentialsInput)
+    )
+    client.rotate_payment_connector_credentials(
+        _request(RotatePaymentConnectorCredentialsInputDict)
+    )
+    client.set_token_vault_cmk(kms_configuration=_)
+    client.set_token_vault_cmk(**_request(SetTokenVaultCMKInputDict))
+    client.set_token_vault_cmk(_request(SetTokenVaultCMKInput))
+    client.set_token_vault_cmk(_request(SetTokenVaultCMKInputDict))
+    client.start_policy_generation(policy_engine_id=_, resource=_, content=_, name=_)
+    client.start_policy_generation(**_request(StartPolicyGenerationInputDict))
+    client.start_policy_generation(_request(StartPolicyGenerationInput))
+    client.start_policy_generation(_request(StartPolicyGenerationInputDict))
+    client.submit_registry_record_for_approval(registry_id=_, record_id=_)
+    client.submit_registry_record_for_approval(
+        **_request(SubmitRegistryRecordForApprovalInputDict)
+    )
+    client.submit_registry_record_for_approval(
+        _request(SubmitRegistryRecordForApprovalInput)
+    )
+    client.submit_registry_record_for_approval(
+        _request(SubmitRegistryRecordForApprovalInputDict)
+    )
+    client.synchronize_gateway_targets(gateway_identifier=_, target_id_list=_)
+    client.synchronize_gateway_targets(**_request(SynchronizeGatewayTargetsInputDict))
+    client.synchronize_gateway_targets(_request(SynchronizeGatewayTargetsInput))
+    client.synchronize_gateway_targets(_request(SynchronizeGatewayTargetsInputDict))
+    client.tag_resource(resource_arn=_, tags=_)
+    client.tag_resource(**_request(TagResourceInputDict))
+    client.tag_resource(_request(TagResourceInput))
+    client.tag_resource(_request(TagResourceInputDict))
+    client.untag_resource(resource_arn=_, tag_keys=_)
+    client.untag_resource(**_request(UntagResourceInputDict))
+    client.untag_resource(_request(UntagResourceInput))
+    client.untag_resource(_request(UntagResourceInputDict))
+    client.update_agent_runtime(
+        agent_runtime_id=_, agent_runtime_artifact=_, role_arn=_
+    )
+    client.update_agent_runtime(**_request(UpdateAgentRuntimeInputDict))
+    client.update_agent_runtime(_request(UpdateAgentRuntimeInput))
+    client.update_agent_runtime(_request(UpdateAgentRuntimeInputDict))
+    client.update_agent_runtime_endpoint(agent_runtime_id=_, endpoint_name=_)
+    client.update_agent_runtime_endpoint(
+        **_request(UpdateAgentRuntimeEndpointInputDict)
+    )
+    client.update_agent_runtime_endpoint(_request(UpdateAgentRuntimeEndpointInput))
+    client.update_agent_runtime_endpoint(_request(UpdateAgentRuntimeEndpointInputDict))
+    client.update_api_key_credential_provider(name=_)
+    client.update_api_key_credential_provider(
+        **_request(UpdateApiKeyCredentialProviderInputDict)
+    )
+    client.update_api_key_credential_provider(
+        _request(UpdateApiKeyCredentialProviderInput)
+    )
+    client.update_api_key_credential_provider(
+        _request(UpdateApiKeyCredentialProviderInputDict)
+    )
+    client.update_capacity_provider(capacity_provider_id=_)
+    client.update_capacity_provider(**_request(UpdateCapacityProviderInputDict))
+    client.update_capacity_provider(_request(UpdateCapacityProviderInput))
+    client.update_capacity_provider(_request(UpdateCapacityProviderInputDict))
+    client.update_configuration_bundle(
+        bundle_id=_, parent_version_ids=_, commit_message=_
+    )
+    client.update_configuration_bundle(**_request(UpdateConfigurationBundleInputDict))
+    client.update_configuration_bundle(_request(UpdateConfigurationBundleInput))
+    client.update_configuration_bundle(_request(UpdateConfigurationBundleInputDict))
+    client.update_consent_portal(consent_portal_identifier=_)
+    client.update_consent_portal(**_request(UpdateConsentPortalInputDict))
+    client.update_consent_portal(_request(UpdateConsentPortalInput))
+    client.update_consent_portal(_request(UpdateConsentPortalInputDict))
+    client.update_dataset(dataset_id=_)
+    client.update_dataset(**_request(UpdateDatasetInputDict))
+    client.update_dataset(_request(UpdateDatasetInput))
+    client.update_dataset(_request(UpdateDatasetInputDict))
+    client.update_dataset_examples(dataset_id=_, examples=_)
+    client.update_dataset_examples(**_request(UpdateDatasetExamplesInputDict))
+    client.update_dataset_examples(_request(UpdateDatasetExamplesInput))
+    client.update_dataset_examples(_request(UpdateDatasetExamplesInputDict))
+    client.update_evaluator(evaluator_id=_)
+    client.update_evaluator(**_request(UpdateEvaluatorInputDict))
+    client.update_evaluator(_request(UpdateEvaluatorInput))
+    client.update_evaluator(_request(UpdateEvaluatorInputDict))
+    client.update_gateway(gateway_identifier=_, name=_, role_arn=_, authorizer_type=_)
+    client.update_gateway(**_request(UpdateGatewayInputDict))
+    client.update_gateway(_request(UpdateGatewayInput))
+    client.update_gateway(_request(UpdateGatewayInputDict))
+    client.update_gateway_rate_limit(gateway_identifier=_, rate_limit_id=_, entries=_)
+    client.update_gateway_rate_limit(**_request(UpdateGatewayRateLimitInputDict))
+    client.update_gateway_rate_limit(_request(UpdateGatewayRateLimitInput))
+    client.update_gateway_rate_limit(_request(UpdateGatewayRateLimitInputDict))
+    client.update_gateway_rule(gateway_identifier=_, rule_id=_)
+    client.update_gateway_rule(**_request(UpdateGatewayRuleInputDict))
+    client.update_gateway_rule(_request(UpdateGatewayRuleInput))
+    client.update_gateway_rule(_request(UpdateGatewayRuleInputDict))
+    client.update_gateway_target(
+        gateway_identifier=_, target_id=_, target_configuration=_
+    )
+    client.update_gateway_target(**_request(UpdateGatewayTargetInputDict))
+    client.update_gateway_target(_request(UpdateGatewayTargetInput))
+    client.update_gateway_target(_request(UpdateGatewayTargetInputDict))
+    client.update_harness(harness_id=_)
+    client.update_harness(**_request(UpdateHarnessInputDict))
+    client.update_harness(_request(UpdateHarnessInput))
+    client.update_harness(_request(UpdateHarnessInputDict))
+    client.update_harness_endpoint(harness_id=_, endpoint_name=_)
+    client.update_harness_endpoint(**_request(UpdateHarnessEndpointInputDict))
+    client.update_harness_endpoint(_request(UpdateHarnessEndpointInput))
+    client.update_harness_endpoint(_request(UpdateHarnessEndpointInputDict))
+    client.update_memory(memory_id=_)
+    client.update_memory(**_request(UpdateMemoryInputDict))
+    client.update_memory(_request(UpdateMemoryInput))
+    client.update_memory(_request(UpdateMemoryInputDict))
+    client.update_oauth2_credential_provider(
+        name=_, credential_provider_vendor=_, oauth2_provider_config_input=_
+    )
+    client.update_oauth2_credential_provider(
+        **_request(UpdateOauth2CredentialProviderInputDict)
+    )
+    client.update_oauth2_credential_provider(
+        _request(UpdateOauth2CredentialProviderInput)
+    )
+    client.update_oauth2_credential_provider(
+        _request(UpdateOauth2CredentialProviderInputDict)
+    )
+    client.update_online_evaluation_config(online_evaluation_config_id=_)
+    client.update_online_evaluation_config(
+        **_request(UpdateOnlineEvaluationConfigInputDict)
+    )
+    client.update_online_evaluation_config(_request(UpdateOnlineEvaluationConfigInput))
+    client.update_online_evaluation_config(
+        _request(UpdateOnlineEvaluationConfigInputDict)
+    )
+    client.update_payment_connector(payment_manager_id=_, payment_connector_id=_)
+    client.update_payment_connector(**_request(UpdatePaymentConnectorInputDict))
+    client.update_payment_connector(_request(UpdatePaymentConnectorInput))
+    client.update_payment_connector(_request(UpdatePaymentConnectorInputDict))
+    client.update_payment_credential_provider(
+        name=_, credential_provider_vendor=_, provider_configuration_input=_
+    )
+    client.update_payment_credential_provider(
+        **_request(UpdatePaymentCredentialProviderInputDict)
+    )
+    client.update_payment_credential_provider(
+        _request(UpdatePaymentCredentialProviderInput)
+    )
+    client.update_payment_credential_provider(
+        _request(UpdatePaymentCredentialProviderInputDict)
+    )
+    client.update_payment_manager(payment_manager_id=_)
+    client.update_payment_manager(**_request(UpdatePaymentManagerInputDict))
+    client.update_payment_manager(_request(UpdatePaymentManagerInput))
+    client.update_payment_manager(_request(UpdatePaymentManagerInputDict))
+    client.update_policy(policy_engine_id=_, policy_id=_)
+    client.update_policy(**_request(UpdatePolicyInputDict))
+    client.update_policy(_request(UpdatePolicyInput))
+    client.update_policy(_request(UpdatePolicyInputDict))
+    client.update_policy_engine(policy_engine_id=_)
+    client.update_policy_engine(**_request(UpdatePolicyEngineInputDict))
+    client.update_policy_engine(_request(UpdatePolicyEngineInput))
+    client.update_policy_engine(_request(UpdatePolicyEngineInputDict))
+    client.update_registry(registry_id=_)
+    client.update_registry(**_request(UpdateRegistryInputDict))
+    client.update_registry(_request(UpdateRegistryInput))
+    client.update_registry(_request(UpdateRegistryInputDict))
+    client.update_registry_record(registry_id=_, record_id=_)
+    client.update_registry_record(**_request(UpdateRegistryRecordInputDict))
+    client.update_registry_record(_request(UpdateRegistryRecordInput))
+    client.update_registry_record(_request(UpdateRegistryRecordInputDict))
+    client.update_registry_record_status(
+        registry_id=_, record_id=_, status=_, status_reason=_
+    )
+    client.update_registry_record_status(
+        **_request(UpdateRegistryRecordStatusInputDict)
+    )
+    client.update_registry_record_status(_request(UpdateRegistryRecordStatusInput))
+    client.update_registry_record_status(_request(UpdateRegistryRecordStatusInputDict))
+    client.update_workload_identity(name=_)
+    client.update_workload_identity(**_request(UpdateWorkloadIdentityInputDict))
+    client.update_workload_identity(_request(UpdateWorkloadIdentityInput))
+    client.update_workload_identity(_request(UpdateWorkloadIdentityInputDict))

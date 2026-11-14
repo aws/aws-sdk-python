@@ -523,7 +523,7 @@ def __getattr__(name: str):
         partition = _PARTITIONS[name]
     except KeyError as error:
         raise AttributeError(name) from error
-    module = import_module(f".schemas_{partition}", __package__)
+    module = import_module(f".schemas_{partition:01d}", __package__)
     value = getattr(module, name)
     globals()[name] = value
     return value

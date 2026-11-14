@@ -2,7 +2,7 @@
 
 from dataclasses import dataclass
 from enum import StrEnum
-from typing import Self
+from typing import Required, Self, TypedDict
 
 from smithy_core.deserializers import ShapeDeserializer
 from smithy_core.exceptions import ModeledError
@@ -89,6 +89,20 @@ class CreateBearerTokenInput(_SerdeShape):
     the token is valid for 12 hours.
     """
 
+class CreateBearerTokenInputDict(TypedDict, total=False):
+    """Dictionary form of `CreateBearerTokenInput`."""
+
+    grant_type: Required[str]
+    """The grant type. Must be \"client_credentials\"."""
+    resource: Required[str]
+    """The AWS service the bearer token is for. Example: \"ecr.amazonaws.com\"."""
+    duration_seconds: int | None
+    """
+    The requested token lifetime in seconds, from 300 (5 minutes) up to the
+    maximum allowed for the service, currently 43200 (12 hours). If omitted,
+    the token is valid for 12 hours.
+    """
+
 @dataclass(kw_only=True)
 class CreateBearerTokenOutput(_SerdeShape):
     """
@@ -120,6 +134,17 @@ class CreateOAuth2TokenInput(_SerdeShape):
     """
 
     token_input: CreateOAuth2TokenRequestBody | None = ...
+    """
+    Flattened token operation inputs. The \"grant_type\" in the request body
+    determines the specific operation.
+    """
+
+class CreateOAuth2TokenInputDict(TypedDict, total=False):
+    """Dictionary form of `CreateOAuth2TokenInput`."""
+
+    token_input: Required[
+        CreateOAuth2TokenRequestBody | CreateOAuth2TokenRequestBodyDict
+    ]
     """
     Flattened token operation inputs. The \"grant_type\" in the request body
     determines the specific operation.
@@ -158,8 +183,8 @@ class CreateOAuth2TokenRequestBody(_SerdeShape):
     client_id: str
     """
     The OAuth 2.0 client identifier. Expected values:
-    \"arn:aws:signin\\:::devtools/same-device\" or
-    \"arn:aws:signin\\:::devtools/cross-device\".
+    \"arn:aws:signin:::devtools/same-device\" or
+    \"arn:aws:signin:::devtools/cross-device\".
     """
     grant_type: str
     """
@@ -183,6 +208,42 @@ class CreateOAuth2TokenRequestBody(_SerdeShape):
     challenge. Required when \"grant_type=authorization_code\".
     """
     refresh_token: str | None = ...
+    """
+    The refresh token issued by a previous token response. Required when
+    \"grant_type=refresh_token\".
+    """
+
+class CreateOAuth2TokenRequestBodyDict(TypedDict, total=False):
+    """Dictionary form of `CreateOAuth2TokenRequestBody`."""
+
+    client_id: Required[str]
+    """
+    The OAuth 2.0 client identifier. Expected values:
+    \"arn:aws:signin:::devtools/same-device\" or
+    \"arn:aws:signin:::devtools/cross-device\".
+    """
+    grant_type: Required[str]
+    """
+    The OAuth 2.0 grant type. Supported values: - \"authorization_code\" -
+    Exchange an authorization code for tokens. - \"refresh_token\" - Use a
+    refresh token to obtain a new access token.
+    """
+    code: str | None
+    """
+    The authorization code received from the \"/v1/authorize\" endpoint.
+    Required when \"grant_type=authorization_code\".
+    """
+    redirect_uri: str | None
+    """
+    The redirect URI that was used in the original authorization request.
+    Must match exactly. Required when \"grant_type=authorization_code\".
+    """
+    code_verifier: str | None
+    """
+    The PKCE code verifier that proves possession of the original code
+    challenge. Required when \"grant_type=authorization_code\".
+    """
+    refresh_token: str | None
     """
     The refresh token issued by a previous token response. Required when
     \"grant_type=refresh_token\".
@@ -229,6 +290,17 @@ class CreateOAuth2TokenWithIAMInput(_SerdeShape):
     grant_type: str | None = ...
     """The OAuth 2.0 grant type. Must be \"client_credentials\"."""
     resource: str | None = ...
+    """
+    The OAuth resource for which the access token is requested. Example:
+    \"aws-mcp.amazonaws.com\".
+    """
+
+class CreateOAuth2TokenWithIAMInputDict(TypedDict, total=False):
+    """Dictionary form of `CreateOAuth2TokenWithIAMInput`."""
+
+    grant_type: Required[str]
+    """The OAuth 2.0 grant type. Must be \"client_credentials\"."""
+    resource: Required[str]
     """
     The OAuth resource for which the access token is requested. Example:
     \"aws-mcp.amazonaws.com\".
@@ -296,6 +368,40 @@ class CreateOAuth2TokenWithTokenExchangeInput(_SerdeShape):
     \"arn:aws:iam::444455556666:policy/MyPolicy\".
     """
 
+class CreateOAuth2TokenWithTokenExchangeInputDict(TypedDict, total=False):
+    """Dictionary form of `CreateOAuth2TokenWithTokenExchangeInput`."""
+
+    grant_type: Required[str]
+    """
+    The OAuth 2.0 grant type. Currently only supports
+    \"urn:ietf:params:oauth:grant-type:token-exchange\".
+    """
+    subject_token: str | None
+    """
+    The subject token that represents the identity of the party on whose
+    behalf the request is made. Required when
+    \"grant_type=urn:ietf:params:oauth:grant-type:token-exchange\".
+    """
+    subject_token_type: str | None
+    """
+    The token type of the subject token. Currently only supports
+    \"urn:ietf:params:oauth:token-type:jwt\". Required when
+    \"grant_type=urn:ietf:params:oauth:grant-type:token-exchange\".
+    """
+    resource: str | None
+    """
+    The OAuth resource for which the access token is requested. Required
+    when \"grant_type=urn:ietf:params:oauth:grant-type:token-exchange\".
+    Example: \"glue.amazonaws.com\".
+    """
+    scope: str | None
+    """
+    IAM managed policy Amazon Resource Names (ARNs) to apply as session
+    policies that further scope down the permissions of the issued access
+    token, provided as a space-delimited list. Example:
+    \"arn:aws:iam::444455556666:policy/MyPolicy\".
+    """
+
 @dataclass(kw_only=True)
 class CreateOAuth2TokenWithTokenExchangeOutput(_SerdeShape):
     """
@@ -340,6 +446,12 @@ class DeleteConsoleAuthorizationConfigurationInput(_SerdeShape):
     target_id: str | None = ...
     """Target account identifier"""
 
+class DeleteConsoleAuthorizationConfigurationInputDict(TypedDict, total=False):
+    """Dictionary form of `DeleteConsoleAuthorizationConfigurationInput`."""
+
+    target_id: str | None
+    """Target account identifier"""
+
 @dataclass(kw_only=True)
 class DeleteConsoleAuthorizationConfigurationOutput(_SerdeShape):
     """Output for DeleteConsoleAuthorizationConfiguration operation"""
@@ -370,6 +482,17 @@ class DeleteResourcePermissionStatementInput(_SerdeShape):
     provided.
     """
 
+class DeleteResourcePermissionStatementInputDict(TypedDict, total=False):
+    """Dictionary form of `DeleteResourcePermissionStatementInput`."""
+
+    statement_id: Required[str]
+    """Unique identifier of the permission statement to delete"""
+    client_token: str | None
+    """
+    Idempotency token for the request This field is autopopulated if not
+    provided.
+    """
+
 @dataclass(kw_only=True)
 class DeleteResourcePermissionStatementOutput(_SerdeShape):
     """Output for DeleteResourcePermissionStatement operation"""
@@ -387,6 +510,12 @@ class GetConsoleAuthorizationConfigurationInput(_SerdeShape):
     """Input for GetConsoleAuthorizationConfiguration operation"""
 
     target_id: str | None = ...
+    """Target account identifier"""
+
+class GetConsoleAuthorizationConfigurationInputDict(TypedDict, total=False):
+    """Dictionary form of `GetConsoleAuthorizationConfigurationInput`."""
+
+    target_id: str | None
     """Target account identifier"""
 
 @dataclass(kw_only=True)
@@ -410,6 +539,9 @@ class GetConsoleAuthorizationConfigurationOutput(_SerdeShape):
 @dataclass(kw_only=True)
 class GetResourcePolicyInput(_SerdeShape):
     """Input for GetResourcePolicy operation"""
+
+class GetResourcePolicyInputDict(TypedDict, total=False):
+    """Dictionary form of `GetResourcePolicyInput`."""
 
 @dataclass(kw_only=True)
 class GetResourcePolicyOutput(_SerdeShape):
@@ -450,6 +582,19 @@ class IntrospectOAuth2TokenWithIAMInput(_SerdeShape):
     token: str | None = ...
     """The access token or refresh token issued by AWS Sign-In."""
     token_type_hint: str | None = ...
+    """
+    An optional hint about the type of the token submitted for
+    introspection, as defined in RFC 7662 §2.1. The server checks both token
+    types regardless of the hint. Allowed values: \"access_token\",
+    \"refresh_token\".
+    """
+
+class IntrospectOAuth2TokenWithIAMInputDict(TypedDict, total=False):
+    """Dictionary form of `IntrospectOAuth2TokenWithIAMInput`."""
+
+    token: Required[str]
+    """The access token or refresh token issued by AWS Sign-In."""
+    token_type_hint: str | None
     """
     An optional hint about the type of the token submitted for
     introspection, as defined in RFC 7662 §2.1. The server checks both token
@@ -563,6 +708,14 @@ class ListResourcePermissionStatementsInput(_SerdeShape):
     next_token: str | None = ...
     """Token for pagination"""
 
+class ListResourcePermissionStatementsInputDict(TypedDict, total=False):
+    """Dictionary form of `ListResourcePermissionStatementsInput`."""
+
+    max_results: int | None
+    """Maximum number of results to return"""
+    next_token: str | None
+    """Token for pagination"""
+
 @dataclass(kw_only=True)
 class ListResourcePermissionStatementsOutput(_SerdeShape):
     """Output for ListResourcePermissionStatements operation"""
@@ -646,6 +799,12 @@ class PutConsoleAuthorizationConfigurationInput(_SerdeShape):
     target_id: str | None = ...
     """Target account identifier"""
 
+class PutConsoleAuthorizationConfigurationInputDict(TypedDict, total=False):
+    """Dictionary form of `PutConsoleAuthorizationConfigurationInput`."""
+
+    target_id: str | None
+    """Target account identifier"""
+
 @dataclass(kw_only=True)
 class PutConsoleAuthorizationConfigurationOutput(_SerdeShape):
     """Output for PutConsoleAuthorizationConfiguration operation"""
@@ -686,6 +845,32 @@ class PutResourcePermissionStatementInput(_SerdeShape):
     excluded_principal: str | None = ...
     """Principal to exclude from the permission statement"""
     client_token: str | None = ...
+    """
+    Idempotency token for the request This field is autopopulated if not
+    provided.
+    """
+
+class PutResourcePermissionStatementInputDict(TypedDict, total=False):
+    """Dictionary form of `PutResourcePermissionStatementInput`."""
+
+    source_vpc: str | None
+    """VPC identifier to restrict console access"""
+    signin_source_vpce: str | None
+    """SignIn VPC endpoint identifier"""
+    console_source_vpce: str | None
+    """Console VPC endpoint identifier"""
+    vpc_source_ip: str | None
+    """Source IP address within VPC"""
+    source_ip: str | None
+    """Source IP address"""
+    requested_region: str | None
+    """
+    AWS region where the VPC and VPC endpoint reside Required when sourceVpc
+    or signinSourceVpce/consoleSourceVpce is provided
+    """
+    excluded_principal: str | None
+    """Principal to exclude from the permission statement"""
+    client_token: str | None
     """
     Idempotency token for the request This field is autopopulated if not
     provided.
@@ -733,6 +918,15 @@ class RevokeOAuth2TokenWithIAMInput(_SerdeShape):
     """
 
     token: str | None = ...
+    """
+    The refresh token to revoke. Must be a refresh token issued by AWS
+    Sign-In. Access tokens are not accepted for revocation.
+    """
+
+class RevokeOAuth2TokenWithIAMInputDict(TypedDict, total=False):
+    """Dictionary form of `RevokeOAuth2TokenWithIAMInput`."""
+
+    token: Required[str]
     """
     The refresh token to revoke. Must be a refresh token issued by AWS
     Sign-In. Access tokens are not accepted for revocation.

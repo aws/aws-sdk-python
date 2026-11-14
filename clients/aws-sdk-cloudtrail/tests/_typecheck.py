@@ -2,167 +2,245 @@
 
 from typing import Any
 
+from aws_sdk_cloudtrail.aio.client import AsyncCloudTrailClient
+from aws_sdk_cloudtrail.client import CloudTrailClient
 from aws_sdk_cloudtrail.models import (
     AddTagsInput,
+    AddTagsInputDict,
     AddTagsOutput,
     AdvancedEventSelector,
+    AdvancedEventSelectorDict,
     AdvancedFieldSelector,
+    AdvancedFieldSelectorDict,
     AggregationConfiguration,
+    AggregationConfigurationDict,
     CancelQueryInput,
+    CancelQueryInputDict,
     CancelQueryOutput,
     Channel,
     ContextKeySelector,
+    ContextKeySelectorDict,
     CreateChannelInput,
+    CreateChannelInputDict,
     CreateChannelOutput,
     CreateDashboardInput,
+    CreateDashboardInputDict,
     CreateDashboardOutput,
     CreateEventDataStoreInput,
+    CreateEventDataStoreInputDict,
     CreateEventDataStoreOutput,
     CreateTrailInput,
+    CreateTrailInputDict,
     CreateTrailOutput,
     DashboardDetail,
     DataResource,
+    DataResourceDict,
     DeleteChannelInput,
+    DeleteChannelInputDict,
     DeleteChannelOutput,
     DeleteDashboardInput,
+    DeleteDashboardInputDict,
     DeleteDashboardOutput,
     DeleteEventDataStoreInput,
+    DeleteEventDataStoreInputDict,
     DeleteEventDataStoreOutput,
     DeleteResourcePolicyInput,
+    DeleteResourcePolicyInputDict,
     DeleteResourcePolicyOutput,
     DeleteTrailInput,
+    DeleteTrailInputDict,
     DeleteTrailOutput,
     DeregisterOrganizationDelegatedAdminInput,
+    DeregisterOrganizationDelegatedAdminInputDict,
     DeregisterOrganizationDelegatedAdminOutput,
     DescribeQueryInput,
+    DescribeQueryInputDict,
     DescribeQueryOutput,
     DescribeTrailsInput,
+    DescribeTrailsInputDict,
     DescribeTrailsOutput,
     Destination,
+    DestinationDict,
     DisableFederationInput,
+    DisableFederationInputDict,
     DisableFederationOutput,
     EnableFederationInput,
+    EnableFederationInputDict,
     EnableFederationOutput,
     Event,
     EventDataStore,
     EventSelector,
+    EventSelectorDict,
     GenerateQueryInput,
+    GenerateQueryInputDict,
     GenerateQueryOutput,
     GetChannelInput,
+    GetChannelInputDict,
     GetChannelOutput,
     GetDashboardInput,
+    GetDashboardInputDict,
     GetDashboardOutput,
     GetEventConfigurationInput,
+    GetEventConfigurationInputDict,
     GetEventConfigurationOutput,
     GetEventDataStoreInput,
+    GetEventDataStoreInputDict,
     GetEventDataStoreOutput,
     GetEventSelectorsInput,
+    GetEventSelectorsInputDict,
     GetEventSelectorsOutput,
     GetImportInput,
+    GetImportInputDict,
     GetImportOutput,
     GetInsightSelectorsInput,
+    GetInsightSelectorsInputDict,
     GetInsightSelectorsOutput,
     GetQueryResultsInput,
+    GetQueryResultsInputDict,
     GetQueryResultsOutput,
     GetResourcePolicyInput,
+    GetResourcePolicyInputDict,
     GetResourcePolicyOutput,
     GetTrailInput,
+    GetTrailInputDict,
     GetTrailOutput,
     GetTrailStatusInput,
+    GetTrailStatusInputDict,
     GetTrailStatusOutput,
     ImportFailureListItem,
     ImportSource,
+    ImportSourceDict,
     ImportStatistics,
     ImportsListItem,
     IngestionStatus,
     InsightSelector,
+    InsightSelectorDict,
     ListChannelsInput,
+    ListChannelsInputDict,
     ListChannelsOutput,
     ListDashboardsInput,
+    ListDashboardsInputDict,
     ListDashboardsOutput,
     ListEventDataStoresInput,
+    ListEventDataStoresInputDict,
     ListEventDataStoresOutput,
     ListImportFailuresInput,
+    ListImportFailuresInputDict,
     ListImportFailuresOutput,
     ListImportsInput,
+    ListImportsInputDict,
     ListImportsOutput,
     ListInsightsDataInput,
+    ListInsightsDataInputDict,
     ListInsightsDataOutput,
     ListInsightsMetricDataInput,
+    ListInsightsMetricDataInputDict,
     ListInsightsMetricDataOutput,
     ListPublicKeysInput,
+    ListPublicKeysInputDict,
     ListPublicKeysOutput,
     ListQueriesInput,
+    ListQueriesInputDict,
     ListQueriesOutput,
     ListTagsInput,
+    ListTagsInputDict,
     ListTagsOutput,
     ListTrailsInput,
+    ListTrailsInputDict,
     ListTrailsOutput,
     LookupAttribute,
+    LookupAttributeDict,
     LookupEventsInput,
+    LookupEventsInputDict,
     LookupEventsOutput,
     PartitionKey,
     PublicKey,
     PutEventConfigurationInput,
+    PutEventConfigurationInputDict,
     PutEventConfigurationOutput,
     PutEventSelectorsInput,
+    PutEventSelectorsInputDict,
     PutEventSelectorsOutput,
     PutInsightSelectorsInput,
+    PutInsightSelectorsInputDict,
     PutInsightSelectorsOutput,
     PutResourcePolicyInput,
+    PutResourcePolicyInputDict,
     PutResourcePolicyOutput,
     Query,
     QueryStatistics,
     QueryStatisticsForDescribeQuery,
     RefreshSchedule,
+    RefreshScheduleDict,
     RefreshScheduleFrequency,
+    RefreshScheduleFrequencyDict,
     RegisterOrganizationDelegatedAdminInput,
+    RegisterOrganizationDelegatedAdminInputDict,
     RegisterOrganizationDelegatedAdminOutput,
     RemoveTagsInput,
+    RemoveTagsInputDict,
     RemoveTagsOutput,
     RequestWidget,
+    RequestWidgetDict,
     Resource,
     ResourceTag,
     RestoreEventDataStoreInput,
+    RestoreEventDataStoreInputDict,
     RestoreEventDataStoreOutput,
     S3ImportSource,
+    S3ImportSourceDict,
     SearchSampleQueriesInput,
+    SearchSampleQueriesInputDict,
     SearchSampleQueriesOutput,
     SearchSampleQueriesSearchResult,
     SourceConfig,
     StartDashboardRefreshInput,
+    StartDashboardRefreshInputDict,
     StartDashboardRefreshOutput,
     StartEventDataStoreIngestionInput,
+    StartEventDataStoreIngestionInputDict,
     StartEventDataStoreIngestionOutput,
     StartImportInput,
+    StartImportInputDict,
     StartImportOutput,
     StartLoggingInput,
+    StartLoggingInputDict,
     StartLoggingOutput,
     StartQueryInput,
+    StartQueryInputDict,
     StartQueryOutput,
     StopEventDataStoreIngestionInput,
+    StopEventDataStoreIngestionInputDict,
     StopEventDataStoreIngestionOutput,
     StopImportInput,
+    StopImportInputDict,
     StopImportOutput,
     StopLoggingInput,
+    StopLoggingInputDict,
     StopLoggingOutput,
     Tag,
+    TagDict,
     Trail,
     TrailInfo,
     UpdateChannelInput,
+    UpdateChannelInputDict,
     UpdateChannelOutput,
     UpdateDashboardInput,
+    UpdateDashboardInputDict,
     UpdateDashboardOutput,
     UpdateEventDataStoreInput,
+    UpdateEventDataStoreInputDict,
     UpdateEventDataStoreOutput,
     UpdateTrailInput,
+    UpdateTrailInputDict,
     UpdateTrailOutput,
     Widget,
 )
 
 
-# Static type fixture: pyright over this validates models.pyi.
-# Not executed as a test; it only needs to type-check.
+# Static type fixture: pyright over this validates models.pyi and the
+# client method signatures. Not executed as a test; it only needs to
+# type-check.
 
 _: Any = ...
 
@@ -321,3 +399,627 @@ UpdateEventDataStoreOutput()
 UpdateTrailInput()
 UpdateTrailOutput()
 Widget()
+_params_0: AddTagsInputDict = {"resource_id": _, "tags_list": _}
+_params_1: AdvancedEventSelectorDict = {"field_selectors": _}
+_params_2: AdvancedFieldSelectorDict = {"field": _}
+_params_3: AggregationConfigurationDict = {"templates": _, "event_category": _}
+_params_4: CancelQueryInputDict = {"query_id": _}
+_params_5: ContextKeySelectorDict = {"type": _, "equals": _}
+_params_6: CreateChannelInputDict = {"name": _, "source": _, "destinations": _}
+_params_7: CreateDashboardInputDict = {"name": _}
+_params_8: CreateEventDataStoreInputDict = {"name": _}
+_params_9: CreateTrailInputDict = {"name": _, "s3_bucket_name": _}
+_params_10: DataResourceDict = {}
+_params_11: DeleteChannelInputDict = {"channel": _}
+_params_12: DeleteDashboardInputDict = {"dashboard_id": _}
+_params_13: DeleteEventDataStoreInputDict = {"event_data_store": _}
+_params_14: DeleteResourcePolicyInputDict = {"resource_arn": _}
+_params_15: DeleteTrailInputDict = {"name": _}
+_params_16: DeregisterOrganizationDelegatedAdminInputDict = {
+    "delegated_admin_account_id": _
+}
+_params_17: DescribeQueryInputDict = {}
+_params_18: DescribeTrailsInputDict = {}
+_params_19: DestinationDict = {"type": _, "location": _}
+_params_20: DisableFederationInputDict = {"event_data_store": _}
+_params_21: EnableFederationInputDict = {
+    "event_data_store": _,
+    "federation_role_arn": _,
+}
+_params_22: EventSelectorDict = {}
+_params_23: GenerateQueryInputDict = {"event_data_stores": _, "prompt": _}
+_params_24: GetChannelInputDict = {"channel": _}
+_params_25: GetDashboardInputDict = {"dashboard_id": _}
+_params_26: GetEventConfigurationInputDict = {}
+_params_27: GetEventDataStoreInputDict = {"event_data_store": _}
+_params_28: GetEventSelectorsInputDict = {"trail_name": _}
+_params_29: GetImportInputDict = {"import_id": _}
+_params_30: GetInsightSelectorsInputDict = {}
+_params_31: GetQueryResultsInputDict = {"query_id": _}
+_params_32: GetResourcePolicyInputDict = {"resource_arn": _}
+_params_33: GetTrailInputDict = {"name": _}
+_params_34: GetTrailStatusInputDict = {"name": _}
+_params_35: ImportSourceDict = {"s3": _}
+_params_36: InsightSelectorDict = {}
+_params_37: ListChannelsInputDict = {}
+_params_38: ListDashboardsInputDict = {}
+_params_39: ListEventDataStoresInputDict = {}
+_params_40: ListImportFailuresInputDict = {"import_id": _}
+_params_41: ListImportsInputDict = {}
+_params_42: ListInsightsDataInputDict = {"insight_source": _, "data_type": _}
+_params_43: ListInsightsMetricDataInputDict = {
+    "event_source": _,
+    "event_name": _,
+    "insight_type": _,
+}
+_params_44: ListPublicKeysInputDict = {}
+_params_45: ListQueriesInputDict = {"event_data_store": _}
+_params_46: ListTagsInputDict = {"resource_id_list": _}
+_params_47: ListTrailsInputDict = {}
+_params_48: LookupAttributeDict = {"attribute_key": _, "attribute_value": _}
+_params_49: LookupEventsInputDict = {}
+_params_50: PutEventConfigurationInputDict = {}
+_params_51: PutEventSelectorsInputDict = {"trail_name": _}
+_params_52: PutInsightSelectorsInputDict = {"insight_selectors": _}
+_params_53: PutResourcePolicyInputDict = {"resource_arn": _, "resource_policy": _}
+_params_54: RefreshScheduleDict = {}
+_params_55: RefreshScheduleFrequencyDict = {}
+_params_56: RegisterOrganizationDelegatedAdminInputDict = {"member_account_id": _}
+_params_57: RemoveTagsInputDict = {"resource_id": _, "tags_list": _}
+_params_58: RequestWidgetDict = {"query_statement": _, "view_properties": _}
+_params_59: RestoreEventDataStoreInputDict = {"event_data_store": _}
+_params_60: S3ImportSourceDict = {
+    "s3_location_uri": _,
+    "s3_bucket_region": _,
+    "s3_bucket_access_role_arn": _,
+}
+_params_61: SearchSampleQueriesInputDict = {"search_phrase": _}
+_params_62: StartDashboardRefreshInputDict = {"dashboard_id": _}
+_params_63: StartEventDataStoreIngestionInputDict = {"event_data_store": _}
+_params_64: StartImportInputDict = {}
+_params_65: StartLoggingInputDict = {"name": _}
+_params_66: StartQueryInputDict = {}
+_params_67: StopEventDataStoreIngestionInputDict = {"event_data_store": _}
+_params_68: StopImportInputDict = {"import_id": _}
+_params_69: StopLoggingInputDict = {"name": _}
+_params_70: TagDict = {"key": _}
+_params_71: UpdateChannelInputDict = {"channel": _}
+_params_72: UpdateDashboardInputDict = {"dashboard_id": _}
+_params_73: UpdateEventDataStoreInputDict = {"event_data_store": _}
+_params_74: UpdateTrailInputDict = {"name": _}
+
+
+def _request[T](form: type[T]) -> T:
+    raise NotImplementedError
+
+
+async def check_async_calls(client: AsyncCloudTrailClient) -> None:
+    pass
+    await client.add_tags(resource_id=_, tags_list=_)
+    await client.add_tags(**_request(AddTagsInputDict))
+    await client.add_tags(_request(AddTagsInput))
+    await client.add_tags(_request(AddTagsInputDict))
+    await client.cancel_query(query_id=_)
+    await client.cancel_query(**_request(CancelQueryInputDict))
+    await client.cancel_query(_request(CancelQueryInput))
+    await client.cancel_query(_request(CancelQueryInputDict))
+    await client.create_channel(name=_, source=_, destinations=_)
+    await client.create_channel(**_request(CreateChannelInputDict))
+    await client.create_channel(_request(CreateChannelInput))
+    await client.create_channel(_request(CreateChannelInputDict))
+    await client.create_dashboard(name=_)
+    await client.create_dashboard(**_request(CreateDashboardInputDict))
+    await client.create_dashboard(_request(CreateDashboardInput))
+    await client.create_dashboard(_request(CreateDashboardInputDict))
+    await client.create_event_data_store(name=_)
+    await client.create_event_data_store(**_request(CreateEventDataStoreInputDict))
+    await client.create_event_data_store(_request(CreateEventDataStoreInput))
+    await client.create_event_data_store(_request(CreateEventDataStoreInputDict))
+    await client.create_trail(name=_, s3_bucket_name=_)
+    await client.create_trail(**_request(CreateTrailInputDict))
+    await client.create_trail(_request(CreateTrailInput))
+    await client.create_trail(_request(CreateTrailInputDict))
+    await client.delete_channel(channel=_)
+    await client.delete_channel(**_request(DeleteChannelInputDict))
+    await client.delete_channel(_request(DeleteChannelInput))
+    await client.delete_channel(_request(DeleteChannelInputDict))
+    await client.delete_dashboard(dashboard_id=_)
+    await client.delete_dashboard(**_request(DeleteDashboardInputDict))
+    await client.delete_dashboard(_request(DeleteDashboardInput))
+    await client.delete_dashboard(_request(DeleteDashboardInputDict))
+    await client.delete_event_data_store(event_data_store=_)
+    await client.delete_event_data_store(**_request(DeleteEventDataStoreInputDict))
+    await client.delete_event_data_store(_request(DeleteEventDataStoreInput))
+    await client.delete_event_data_store(_request(DeleteEventDataStoreInputDict))
+    await client.delete_resource_policy(resource_arn=_)
+    await client.delete_resource_policy(**_request(DeleteResourcePolicyInputDict))
+    await client.delete_resource_policy(_request(DeleteResourcePolicyInput))
+    await client.delete_resource_policy(_request(DeleteResourcePolicyInputDict))
+    await client.delete_trail(name=_)
+    await client.delete_trail(**_request(DeleteTrailInputDict))
+    await client.delete_trail(_request(DeleteTrailInput))
+    await client.delete_trail(_request(DeleteTrailInputDict))
+    await client.deregister_organization_delegated_admin(delegated_admin_account_id=_)
+    await client.deregister_organization_delegated_admin(
+        **_request(DeregisterOrganizationDelegatedAdminInputDict)
+    )
+    await client.deregister_organization_delegated_admin(
+        _request(DeregisterOrganizationDelegatedAdminInput)
+    )
+    await client.deregister_organization_delegated_admin(
+        _request(DeregisterOrganizationDelegatedAdminInputDict)
+    )
+    await client.describe_query()
+    await client.describe_query(**_request(DescribeQueryInputDict))
+    await client.describe_query(_request(DescribeQueryInput))
+    await client.describe_query(_request(DescribeQueryInputDict))
+    await client.describe_trails()
+    await client.describe_trails(**_request(DescribeTrailsInputDict))
+    await client.describe_trails(_request(DescribeTrailsInput))
+    await client.describe_trails(_request(DescribeTrailsInputDict))
+    await client.disable_federation(event_data_store=_)
+    await client.disable_federation(**_request(DisableFederationInputDict))
+    await client.disable_federation(_request(DisableFederationInput))
+    await client.disable_federation(_request(DisableFederationInputDict))
+    await client.enable_federation(event_data_store=_, federation_role_arn=_)
+    await client.enable_federation(**_request(EnableFederationInputDict))
+    await client.enable_federation(_request(EnableFederationInput))
+    await client.enable_federation(_request(EnableFederationInputDict))
+    await client.generate_query(event_data_stores=_, prompt=_)
+    await client.generate_query(**_request(GenerateQueryInputDict))
+    await client.generate_query(_request(GenerateQueryInput))
+    await client.generate_query(_request(GenerateQueryInputDict))
+    await client.get_channel(channel=_)
+    await client.get_channel(**_request(GetChannelInputDict))
+    await client.get_channel(_request(GetChannelInput))
+    await client.get_channel(_request(GetChannelInputDict))
+    await client.get_dashboard(dashboard_id=_)
+    await client.get_dashboard(**_request(GetDashboardInputDict))
+    await client.get_dashboard(_request(GetDashboardInput))
+    await client.get_dashboard(_request(GetDashboardInputDict))
+    await client.get_event_configuration()
+    await client.get_event_configuration(**_request(GetEventConfigurationInputDict))
+    await client.get_event_configuration(_request(GetEventConfigurationInput))
+    await client.get_event_configuration(_request(GetEventConfigurationInputDict))
+    await client.get_event_data_store(event_data_store=_)
+    await client.get_event_data_store(**_request(GetEventDataStoreInputDict))
+    await client.get_event_data_store(_request(GetEventDataStoreInput))
+    await client.get_event_data_store(_request(GetEventDataStoreInputDict))
+    await client.get_event_selectors(trail_name=_)
+    await client.get_event_selectors(**_request(GetEventSelectorsInputDict))
+    await client.get_event_selectors(_request(GetEventSelectorsInput))
+    await client.get_event_selectors(_request(GetEventSelectorsInputDict))
+    await client.get_import(import_id=_)
+    await client.get_import(**_request(GetImportInputDict))
+    await client.get_import(_request(GetImportInput))
+    await client.get_import(_request(GetImportInputDict))
+    await client.get_insight_selectors()
+    await client.get_insight_selectors(**_request(GetInsightSelectorsInputDict))
+    await client.get_insight_selectors(_request(GetInsightSelectorsInput))
+    await client.get_insight_selectors(_request(GetInsightSelectorsInputDict))
+    await client.get_query_results(query_id=_)
+    await client.get_query_results(**_request(GetQueryResultsInputDict))
+    await client.get_query_results(_request(GetQueryResultsInput))
+    await client.get_query_results(_request(GetQueryResultsInputDict))
+    await client.get_resource_policy(resource_arn=_)
+    await client.get_resource_policy(**_request(GetResourcePolicyInputDict))
+    await client.get_resource_policy(_request(GetResourcePolicyInput))
+    await client.get_resource_policy(_request(GetResourcePolicyInputDict))
+    await client.get_trail(name=_)
+    await client.get_trail(**_request(GetTrailInputDict))
+    await client.get_trail(_request(GetTrailInput))
+    await client.get_trail(_request(GetTrailInputDict))
+    await client.get_trail_status(name=_)
+    await client.get_trail_status(**_request(GetTrailStatusInputDict))
+    await client.get_trail_status(_request(GetTrailStatusInput))
+    await client.get_trail_status(_request(GetTrailStatusInputDict))
+    await client.list_channels()
+    await client.list_channels(**_request(ListChannelsInputDict))
+    await client.list_channels(_request(ListChannelsInput))
+    await client.list_channels(_request(ListChannelsInputDict))
+    await client.list_dashboards()
+    await client.list_dashboards(**_request(ListDashboardsInputDict))
+    await client.list_dashboards(_request(ListDashboardsInput))
+    await client.list_dashboards(_request(ListDashboardsInputDict))
+    await client.list_event_data_stores()
+    await client.list_event_data_stores(**_request(ListEventDataStoresInputDict))
+    await client.list_event_data_stores(_request(ListEventDataStoresInput))
+    await client.list_event_data_stores(_request(ListEventDataStoresInputDict))
+    await client.list_import_failures(import_id=_)
+    await client.list_import_failures(**_request(ListImportFailuresInputDict))
+    await client.list_import_failures(_request(ListImportFailuresInput))
+    await client.list_import_failures(_request(ListImportFailuresInputDict))
+    await client.list_imports()
+    await client.list_imports(**_request(ListImportsInputDict))
+    await client.list_imports(_request(ListImportsInput))
+    await client.list_imports(_request(ListImportsInputDict))
+    await client.list_insights_data(insight_source=_, data_type=_)
+    await client.list_insights_data(**_request(ListInsightsDataInputDict))
+    await client.list_insights_data(_request(ListInsightsDataInput))
+    await client.list_insights_data(_request(ListInsightsDataInputDict))
+    await client.list_insights_metric_data(event_source=_, event_name=_, insight_type=_)
+    await client.list_insights_metric_data(**_request(ListInsightsMetricDataInputDict))
+    await client.list_insights_metric_data(_request(ListInsightsMetricDataInput))
+    await client.list_insights_metric_data(_request(ListInsightsMetricDataInputDict))
+    await client.list_public_keys()
+    await client.list_public_keys(**_request(ListPublicKeysInputDict))
+    await client.list_public_keys(_request(ListPublicKeysInput))
+    await client.list_public_keys(_request(ListPublicKeysInputDict))
+    await client.list_queries(event_data_store=_)
+    await client.list_queries(**_request(ListQueriesInputDict))
+    await client.list_queries(_request(ListQueriesInput))
+    await client.list_queries(_request(ListQueriesInputDict))
+    await client.list_tags(resource_id_list=_)
+    await client.list_tags(**_request(ListTagsInputDict))
+    await client.list_tags(_request(ListTagsInput))
+    await client.list_tags(_request(ListTagsInputDict))
+    await client.list_trails()
+    await client.list_trails(**_request(ListTrailsInputDict))
+    await client.list_trails(_request(ListTrailsInput))
+    await client.list_trails(_request(ListTrailsInputDict))
+    await client.lookup_events()
+    await client.lookup_events(**_request(LookupEventsInputDict))
+    await client.lookup_events(_request(LookupEventsInput))
+    await client.lookup_events(_request(LookupEventsInputDict))
+    await client.put_event_configuration()
+    await client.put_event_configuration(**_request(PutEventConfigurationInputDict))
+    await client.put_event_configuration(_request(PutEventConfigurationInput))
+    await client.put_event_configuration(_request(PutEventConfigurationInputDict))
+    await client.put_event_selectors(trail_name=_)
+    await client.put_event_selectors(**_request(PutEventSelectorsInputDict))
+    await client.put_event_selectors(_request(PutEventSelectorsInput))
+    await client.put_event_selectors(_request(PutEventSelectorsInputDict))
+    await client.put_insight_selectors(insight_selectors=_)
+    await client.put_insight_selectors(**_request(PutInsightSelectorsInputDict))
+    await client.put_insight_selectors(_request(PutInsightSelectorsInput))
+    await client.put_insight_selectors(_request(PutInsightSelectorsInputDict))
+    await client.put_resource_policy(resource_arn=_, resource_policy=_)
+    await client.put_resource_policy(**_request(PutResourcePolicyInputDict))
+    await client.put_resource_policy(_request(PutResourcePolicyInput))
+    await client.put_resource_policy(_request(PutResourcePolicyInputDict))
+    await client.register_organization_delegated_admin(member_account_id=_)
+    await client.register_organization_delegated_admin(
+        **_request(RegisterOrganizationDelegatedAdminInputDict)
+    )
+    await client.register_organization_delegated_admin(
+        _request(RegisterOrganizationDelegatedAdminInput)
+    )
+    await client.register_organization_delegated_admin(
+        _request(RegisterOrganizationDelegatedAdminInputDict)
+    )
+    await client.remove_tags(resource_id=_, tags_list=_)
+    await client.remove_tags(**_request(RemoveTagsInputDict))
+    await client.remove_tags(_request(RemoveTagsInput))
+    await client.remove_tags(_request(RemoveTagsInputDict))
+    await client.restore_event_data_store(event_data_store=_)
+    await client.restore_event_data_store(**_request(RestoreEventDataStoreInputDict))
+    await client.restore_event_data_store(_request(RestoreEventDataStoreInput))
+    await client.restore_event_data_store(_request(RestoreEventDataStoreInputDict))
+    await client.search_sample_queries(search_phrase=_)
+    await client.search_sample_queries(**_request(SearchSampleQueriesInputDict))
+    await client.search_sample_queries(_request(SearchSampleQueriesInput))
+    await client.search_sample_queries(_request(SearchSampleQueriesInputDict))
+    await client.start_dashboard_refresh(dashboard_id=_)
+    await client.start_dashboard_refresh(**_request(StartDashboardRefreshInputDict))
+    await client.start_dashboard_refresh(_request(StartDashboardRefreshInput))
+    await client.start_dashboard_refresh(_request(StartDashboardRefreshInputDict))
+    await client.start_event_data_store_ingestion(event_data_store=_)
+    await client.start_event_data_store_ingestion(
+        **_request(StartEventDataStoreIngestionInputDict)
+    )
+    await client.start_event_data_store_ingestion(
+        _request(StartEventDataStoreIngestionInput)
+    )
+    await client.start_event_data_store_ingestion(
+        _request(StartEventDataStoreIngestionInputDict)
+    )
+    await client.start_import()
+    await client.start_import(**_request(StartImportInputDict))
+    await client.start_import(_request(StartImportInput))
+    await client.start_import(_request(StartImportInputDict))
+    await client.start_logging(name=_)
+    await client.start_logging(**_request(StartLoggingInputDict))
+    await client.start_logging(_request(StartLoggingInput))
+    await client.start_logging(_request(StartLoggingInputDict))
+    await client.start_query()
+    await client.start_query(**_request(StartQueryInputDict))
+    await client.start_query(_request(StartQueryInput))
+    await client.start_query(_request(StartQueryInputDict))
+    await client.stop_event_data_store_ingestion(event_data_store=_)
+    await client.stop_event_data_store_ingestion(
+        **_request(StopEventDataStoreIngestionInputDict)
+    )
+    await client.stop_event_data_store_ingestion(
+        _request(StopEventDataStoreIngestionInput)
+    )
+    await client.stop_event_data_store_ingestion(
+        _request(StopEventDataStoreIngestionInputDict)
+    )
+    await client.stop_import(import_id=_)
+    await client.stop_import(**_request(StopImportInputDict))
+    await client.stop_import(_request(StopImportInput))
+    await client.stop_import(_request(StopImportInputDict))
+    await client.stop_logging(name=_)
+    await client.stop_logging(**_request(StopLoggingInputDict))
+    await client.stop_logging(_request(StopLoggingInput))
+    await client.stop_logging(_request(StopLoggingInputDict))
+    await client.update_channel(channel=_)
+    await client.update_channel(**_request(UpdateChannelInputDict))
+    await client.update_channel(_request(UpdateChannelInput))
+    await client.update_channel(_request(UpdateChannelInputDict))
+    await client.update_dashboard(dashboard_id=_)
+    await client.update_dashboard(**_request(UpdateDashboardInputDict))
+    await client.update_dashboard(_request(UpdateDashboardInput))
+    await client.update_dashboard(_request(UpdateDashboardInputDict))
+    await client.update_event_data_store(event_data_store=_)
+    await client.update_event_data_store(**_request(UpdateEventDataStoreInputDict))
+    await client.update_event_data_store(_request(UpdateEventDataStoreInput))
+    await client.update_event_data_store(_request(UpdateEventDataStoreInputDict))
+    await client.update_trail(name=_)
+    await client.update_trail(**_request(UpdateTrailInputDict))
+    await client.update_trail(_request(UpdateTrailInput))
+    await client.update_trail(_request(UpdateTrailInputDict))
+
+
+def check_sync_calls(client: CloudTrailClient) -> None:
+    pass
+    client.add_tags(resource_id=_, tags_list=_)
+    client.add_tags(**_request(AddTagsInputDict))
+    client.add_tags(_request(AddTagsInput))
+    client.add_tags(_request(AddTagsInputDict))
+    client.cancel_query(query_id=_)
+    client.cancel_query(**_request(CancelQueryInputDict))
+    client.cancel_query(_request(CancelQueryInput))
+    client.cancel_query(_request(CancelQueryInputDict))
+    client.create_channel(name=_, source=_, destinations=_)
+    client.create_channel(**_request(CreateChannelInputDict))
+    client.create_channel(_request(CreateChannelInput))
+    client.create_channel(_request(CreateChannelInputDict))
+    client.create_dashboard(name=_)
+    client.create_dashboard(**_request(CreateDashboardInputDict))
+    client.create_dashboard(_request(CreateDashboardInput))
+    client.create_dashboard(_request(CreateDashboardInputDict))
+    client.create_event_data_store(name=_)
+    client.create_event_data_store(**_request(CreateEventDataStoreInputDict))
+    client.create_event_data_store(_request(CreateEventDataStoreInput))
+    client.create_event_data_store(_request(CreateEventDataStoreInputDict))
+    client.create_trail(name=_, s3_bucket_name=_)
+    client.create_trail(**_request(CreateTrailInputDict))
+    client.create_trail(_request(CreateTrailInput))
+    client.create_trail(_request(CreateTrailInputDict))
+    client.delete_channel(channel=_)
+    client.delete_channel(**_request(DeleteChannelInputDict))
+    client.delete_channel(_request(DeleteChannelInput))
+    client.delete_channel(_request(DeleteChannelInputDict))
+    client.delete_dashboard(dashboard_id=_)
+    client.delete_dashboard(**_request(DeleteDashboardInputDict))
+    client.delete_dashboard(_request(DeleteDashboardInput))
+    client.delete_dashboard(_request(DeleteDashboardInputDict))
+    client.delete_event_data_store(event_data_store=_)
+    client.delete_event_data_store(**_request(DeleteEventDataStoreInputDict))
+    client.delete_event_data_store(_request(DeleteEventDataStoreInput))
+    client.delete_event_data_store(_request(DeleteEventDataStoreInputDict))
+    client.delete_resource_policy(resource_arn=_)
+    client.delete_resource_policy(**_request(DeleteResourcePolicyInputDict))
+    client.delete_resource_policy(_request(DeleteResourcePolicyInput))
+    client.delete_resource_policy(_request(DeleteResourcePolicyInputDict))
+    client.delete_trail(name=_)
+    client.delete_trail(**_request(DeleteTrailInputDict))
+    client.delete_trail(_request(DeleteTrailInput))
+    client.delete_trail(_request(DeleteTrailInputDict))
+    client.deregister_organization_delegated_admin(delegated_admin_account_id=_)
+    client.deregister_organization_delegated_admin(
+        **_request(DeregisterOrganizationDelegatedAdminInputDict)
+    )
+    client.deregister_organization_delegated_admin(
+        _request(DeregisterOrganizationDelegatedAdminInput)
+    )
+    client.deregister_organization_delegated_admin(
+        _request(DeregisterOrganizationDelegatedAdminInputDict)
+    )
+    client.describe_query()
+    client.describe_query(**_request(DescribeQueryInputDict))
+    client.describe_query(_request(DescribeQueryInput))
+    client.describe_query(_request(DescribeQueryInputDict))
+    client.describe_trails()
+    client.describe_trails(**_request(DescribeTrailsInputDict))
+    client.describe_trails(_request(DescribeTrailsInput))
+    client.describe_trails(_request(DescribeTrailsInputDict))
+    client.disable_federation(event_data_store=_)
+    client.disable_federation(**_request(DisableFederationInputDict))
+    client.disable_federation(_request(DisableFederationInput))
+    client.disable_federation(_request(DisableFederationInputDict))
+    client.enable_federation(event_data_store=_, federation_role_arn=_)
+    client.enable_federation(**_request(EnableFederationInputDict))
+    client.enable_federation(_request(EnableFederationInput))
+    client.enable_federation(_request(EnableFederationInputDict))
+    client.generate_query(event_data_stores=_, prompt=_)
+    client.generate_query(**_request(GenerateQueryInputDict))
+    client.generate_query(_request(GenerateQueryInput))
+    client.generate_query(_request(GenerateQueryInputDict))
+    client.get_channel(channel=_)
+    client.get_channel(**_request(GetChannelInputDict))
+    client.get_channel(_request(GetChannelInput))
+    client.get_channel(_request(GetChannelInputDict))
+    client.get_dashboard(dashboard_id=_)
+    client.get_dashboard(**_request(GetDashboardInputDict))
+    client.get_dashboard(_request(GetDashboardInput))
+    client.get_dashboard(_request(GetDashboardInputDict))
+    client.get_event_configuration()
+    client.get_event_configuration(**_request(GetEventConfigurationInputDict))
+    client.get_event_configuration(_request(GetEventConfigurationInput))
+    client.get_event_configuration(_request(GetEventConfigurationInputDict))
+    client.get_event_data_store(event_data_store=_)
+    client.get_event_data_store(**_request(GetEventDataStoreInputDict))
+    client.get_event_data_store(_request(GetEventDataStoreInput))
+    client.get_event_data_store(_request(GetEventDataStoreInputDict))
+    client.get_event_selectors(trail_name=_)
+    client.get_event_selectors(**_request(GetEventSelectorsInputDict))
+    client.get_event_selectors(_request(GetEventSelectorsInput))
+    client.get_event_selectors(_request(GetEventSelectorsInputDict))
+    client.get_import(import_id=_)
+    client.get_import(**_request(GetImportInputDict))
+    client.get_import(_request(GetImportInput))
+    client.get_import(_request(GetImportInputDict))
+    client.get_insight_selectors()
+    client.get_insight_selectors(**_request(GetInsightSelectorsInputDict))
+    client.get_insight_selectors(_request(GetInsightSelectorsInput))
+    client.get_insight_selectors(_request(GetInsightSelectorsInputDict))
+    client.get_query_results(query_id=_)
+    client.get_query_results(**_request(GetQueryResultsInputDict))
+    client.get_query_results(_request(GetQueryResultsInput))
+    client.get_query_results(_request(GetQueryResultsInputDict))
+    client.get_resource_policy(resource_arn=_)
+    client.get_resource_policy(**_request(GetResourcePolicyInputDict))
+    client.get_resource_policy(_request(GetResourcePolicyInput))
+    client.get_resource_policy(_request(GetResourcePolicyInputDict))
+    client.get_trail(name=_)
+    client.get_trail(**_request(GetTrailInputDict))
+    client.get_trail(_request(GetTrailInput))
+    client.get_trail(_request(GetTrailInputDict))
+    client.get_trail_status(name=_)
+    client.get_trail_status(**_request(GetTrailStatusInputDict))
+    client.get_trail_status(_request(GetTrailStatusInput))
+    client.get_trail_status(_request(GetTrailStatusInputDict))
+    client.list_channels()
+    client.list_channels(**_request(ListChannelsInputDict))
+    client.list_channels(_request(ListChannelsInput))
+    client.list_channels(_request(ListChannelsInputDict))
+    client.list_dashboards()
+    client.list_dashboards(**_request(ListDashboardsInputDict))
+    client.list_dashboards(_request(ListDashboardsInput))
+    client.list_dashboards(_request(ListDashboardsInputDict))
+    client.list_event_data_stores()
+    client.list_event_data_stores(**_request(ListEventDataStoresInputDict))
+    client.list_event_data_stores(_request(ListEventDataStoresInput))
+    client.list_event_data_stores(_request(ListEventDataStoresInputDict))
+    client.list_import_failures(import_id=_)
+    client.list_import_failures(**_request(ListImportFailuresInputDict))
+    client.list_import_failures(_request(ListImportFailuresInput))
+    client.list_import_failures(_request(ListImportFailuresInputDict))
+    client.list_imports()
+    client.list_imports(**_request(ListImportsInputDict))
+    client.list_imports(_request(ListImportsInput))
+    client.list_imports(_request(ListImportsInputDict))
+    client.list_insights_data(insight_source=_, data_type=_)
+    client.list_insights_data(**_request(ListInsightsDataInputDict))
+    client.list_insights_data(_request(ListInsightsDataInput))
+    client.list_insights_data(_request(ListInsightsDataInputDict))
+    client.list_insights_metric_data(event_source=_, event_name=_, insight_type=_)
+    client.list_insights_metric_data(**_request(ListInsightsMetricDataInputDict))
+    client.list_insights_metric_data(_request(ListInsightsMetricDataInput))
+    client.list_insights_metric_data(_request(ListInsightsMetricDataInputDict))
+    client.list_public_keys()
+    client.list_public_keys(**_request(ListPublicKeysInputDict))
+    client.list_public_keys(_request(ListPublicKeysInput))
+    client.list_public_keys(_request(ListPublicKeysInputDict))
+    client.list_queries(event_data_store=_)
+    client.list_queries(**_request(ListQueriesInputDict))
+    client.list_queries(_request(ListQueriesInput))
+    client.list_queries(_request(ListQueriesInputDict))
+    client.list_tags(resource_id_list=_)
+    client.list_tags(**_request(ListTagsInputDict))
+    client.list_tags(_request(ListTagsInput))
+    client.list_tags(_request(ListTagsInputDict))
+    client.list_trails()
+    client.list_trails(**_request(ListTrailsInputDict))
+    client.list_trails(_request(ListTrailsInput))
+    client.list_trails(_request(ListTrailsInputDict))
+    client.lookup_events()
+    client.lookup_events(**_request(LookupEventsInputDict))
+    client.lookup_events(_request(LookupEventsInput))
+    client.lookup_events(_request(LookupEventsInputDict))
+    client.put_event_configuration()
+    client.put_event_configuration(**_request(PutEventConfigurationInputDict))
+    client.put_event_configuration(_request(PutEventConfigurationInput))
+    client.put_event_configuration(_request(PutEventConfigurationInputDict))
+    client.put_event_selectors(trail_name=_)
+    client.put_event_selectors(**_request(PutEventSelectorsInputDict))
+    client.put_event_selectors(_request(PutEventSelectorsInput))
+    client.put_event_selectors(_request(PutEventSelectorsInputDict))
+    client.put_insight_selectors(insight_selectors=_)
+    client.put_insight_selectors(**_request(PutInsightSelectorsInputDict))
+    client.put_insight_selectors(_request(PutInsightSelectorsInput))
+    client.put_insight_selectors(_request(PutInsightSelectorsInputDict))
+    client.put_resource_policy(resource_arn=_, resource_policy=_)
+    client.put_resource_policy(**_request(PutResourcePolicyInputDict))
+    client.put_resource_policy(_request(PutResourcePolicyInput))
+    client.put_resource_policy(_request(PutResourcePolicyInputDict))
+    client.register_organization_delegated_admin(member_account_id=_)
+    client.register_organization_delegated_admin(
+        **_request(RegisterOrganizationDelegatedAdminInputDict)
+    )
+    client.register_organization_delegated_admin(
+        _request(RegisterOrganizationDelegatedAdminInput)
+    )
+    client.register_organization_delegated_admin(
+        _request(RegisterOrganizationDelegatedAdminInputDict)
+    )
+    client.remove_tags(resource_id=_, tags_list=_)
+    client.remove_tags(**_request(RemoveTagsInputDict))
+    client.remove_tags(_request(RemoveTagsInput))
+    client.remove_tags(_request(RemoveTagsInputDict))
+    client.restore_event_data_store(event_data_store=_)
+    client.restore_event_data_store(**_request(RestoreEventDataStoreInputDict))
+    client.restore_event_data_store(_request(RestoreEventDataStoreInput))
+    client.restore_event_data_store(_request(RestoreEventDataStoreInputDict))
+    client.search_sample_queries(search_phrase=_)
+    client.search_sample_queries(**_request(SearchSampleQueriesInputDict))
+    client.search_sample_queries(_request(SearchSampleQueriesInput))
+    client.search_sample_queries(_request(SearchSampleQueriesInputDict))
+    client.start_dashboard_refresh(dashboard_id=_)
+    client.start_dashboard_refresh(**_request(StartDashboardRefreshInputDict))
+    client.start_dashboard_refresh(_request(StartDashboardRefreshInput))
+    client.start_dashboard_refresh(_request(StartDashboardRefreshInputDict))
+    client.start_event_data_store_ingestion(event_data_store=_)
+    client.start_event_data_store_ingestion(
+        **_request(StartEventDataStoreIngestionInputDict)
+    )
+    client.start_event_data_store_ingestion(_request(StartEventDataStoreIngestionInput))
+    client.start_event_data_store_ingestion(
+        _request(StartEventDataStoreIngestionInputDict)
+    )
+    client.start_import()
+    client.start_import(**_request(StartImportInputDict))
+    client.start_import(_request(StartImportInput))
+    client.start_import(_request(StartImportInputDict))
+    client.start_logging(name=_)
+    client.start_logging(**_request(StartLoggingInputDict))
+    client.start_logging(_request(StartLoggingInput))
+    client.start_logging(_request(StartLoggingInputDict))
+    client.start_query()
+    client.start_query(**_request(StartQueryInputDict))
+    client.start_query(_request(StartQueryInput))
+    client.start_query(_request(StartQueryInputDict))
+    client.stop_event_data_store_ingestion(event_data_store=_)
+    client.stop_event_data_store_ingestion(
+        **_request(StopEventDataStoreIngestionInputDict)
+    )
+    client.stop_event_data_store_ingestion(_request(StopEventDataStoreIngestionInput))
+    client.stop_event_data_store_ingestion(
+        _request(StopEventDataStoreIngestionInputDict)
+    )
+    client.stop_import(import_id=_)
+    client.stop_import(**_request(StopImportInputDict))
+    client.stop_import(_request(StopImportInput))
+    client.stop_import(_request(StopImportInputDict))
+    client.stop_logging(name=_)
+    client.stop_logging(**_request(StopLoggingInputDict))
+    client.stop_logging(_request(StopLoggingInput))
+    client.stop_logging(_request(StopLoggingInputDict))
+    client.update_channel(channel=_)
+    client.update_channel(**_request(UpdateChannelInputDict))
+    client.update_channel(_request(UpdateChannelInput))
+    client.update_channel(_request(UpdateChannelInputDict))
+    client.update_dashboard(dashboard_id=_)
+    client.update_dashboard(**_request(UpdateDashboardInputDict))
+    client.update_dashboard(_request(UpdateDashboardInput))
+    client.update_dashboard(_request(UpdateDashboardInputDict))
+    client.update_event_data_store(event_data_store=_)
+    client.update_event_data_store(**_request(UpdateEventDataStoreInputDict))
+    client.update_event_data_store(_request(UpdateEventDataStoreInput))
+    client.update_event_data_store(_request(UpdateEventDataStoreInputDict))
+    client.update_trail(name=_)
+    client.update_trail(**_request(UpdateTrailInputDict))
+    client.update_trail(_request(UpdateTrailInput))
+    client.update_trail(_request(UpdateTrailInputDict))

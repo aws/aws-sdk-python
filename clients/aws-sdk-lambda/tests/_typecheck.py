@@ -2,101 +2,148 @@
 
 from typing import Any
 
+from aws_sdk_lambda.aio.client import AsyncLambdaClient
+from aws_sdk_lambda.client import LambdaClient
 from aws_sdk_lambda.models import (
     AccountLimit,
     AccountUsage,
     AddLayerVersionPermissionInput,
+    AddLayerVersionPermissionInputDict,
     AddLayerVersionPermissionOutput,
     AddPermissionInput,
+    AddPermissionInputDict,
     AddPermissionOutput,
     AliasConfiguration,
     AliasRoutingConfiguration,
+    AliasRoutingConfigurationDict,
     AllowedPublishers,
+    AllowedPublishersDict,
     AmazonManagedKafkaEventSourceConfig,
+    AmazonManagedKafkaEventSourceConfigDict,
+    AsyncInvokeAsyncInputDict,
     CallbackDetails,
     CallbackFailedDetails,
     CallbackOptions,
+    CallbackOptionsDict,
     CallbackStartedDetails,
     CallbackSucceededDetails,
     CallbackTimedOutDetails,
     CapacityProvider,
     CapacityProviderConfig,
+    CapacityProviderConfigDict,
     CapacityProviderLoggingConfig,
+    CapacityProviderLoggingConfigDict,
     CapacityProviderPermissionsConfig,
+    CapacityProviderPermissionsConfigDict,
     CapacityProviderScalingConfig,
+    CapacityProviderScalingConfigDict,
     CapacityProviderTelemetryConfig,
+    CapacityProviderTelemetryConfigDict,
     CapacityProviderVpcConfig,
+    CapacityProviderVpcConfigDict,
     ChainedInvokeDetails,
     ChainedInvokeFailedDetails,
     ChainedInvokeOptions,
+    ChainedInvokeOptionsDict,
     ChainedInvokeStartedDetails,
     ChainedInvokeStoppedDetails,
     ChainedInvokeSucceededDetails,
     ChainedInvokeTimedOutDetails,
     CheckpointDurableExecutionInput,
+    CheckpointDurableExecutionInputDict,
     CheckpointDurableExecutionOutput,
     CheckpointUpdatedExecutionState,
     CodeSigningConfig,
     CodeSigningPolicies,
+    CodeSigningPoliciesDict,
     Concurrency,
     ContextDetails,
     ContextFailedDetails,
     ContextOptions,
+    ContextOptionsDict,
     ContextStartedDetails,
     ContextSucceededDetails,
     Cors,
+    CorsDict,
     CreateAliasInput,
+    CreateAliasInputDict,
     CreateAliasOutput,
     CreateCapacityProviderInput,
+    CreateCapacityProviderInputDict,
     CreateCapacityProviderOutput,
     CreateCodeSigningConfigInput,
+    CreateCodeSigningConfigInputDict,
     CreateCodeSigningConfigOutput,
     CreateEventSourceMappingInput,
+    CreateEventSourceMappingInputDict,
     CreateEventSourceMappingOutput,
     CreateFunctionInput,
+    CreateFunctionInputDict,
     CreateFunctionOutput,
     CreateFunctionUrlConfigInput,
+    CreateFunctionUrlConfigInputDict,
     CreateFunctionUrlConfigOutput,
     DeadLetterConfig,
+    DeadLetterConfigDict,
     DeleteAliasInput,
+    DeleteAliasInputDict,
     DeleteAliasOutput,
     DeleteCapacityProviderInput,
+    DeleteCapacityProviderInputDict,
     DeleteCapacityProviderOutput,
     DeleteCodeSigningConfigInput,
+    DeleteCodeSigningConfigInputDict,
     DeleteCodeSigningConfigOutput,
     DeleteEventSourceMappingInput,
+    DeleteEventSourceMappingInputDict,
     DeleteEventSourceMappingOutput,
     DeleteFunctionCodeSigningConfigInput,
+    DeleteFunctionCodeSigningConfigInputDict,
     DeleteFunctionCodeSigningConfigOutput,
     DeleteFunctionConcurrencyInput,
+    DeleteFunctionConcurrencyInputDict,
     DeleteFunctionConcurrencyOutput,
     DeleteFunctionEventInvokeConfigInput,
+    DeleteFunctionEventInvokeConfigInputDict,
     DeleteFunctionEventInvokeConfigOutput,
     DeleteFunctionInput,
+    DeleteFunctionInputDict,
     DeleteFunctionOutput,
     DeleteFunctionUrlConfigInput,
+    DeleteFunctionUrlConfigInputDict,
     DeleteFunctionUrlConfigOutput,
     DeleteLayerVersionInput,
+    DeleteLayerVersionInputDict,
     DeleteLayerVersionOutput,
     DeleteProvisionedConcurrencyConfigInput,
+    DeleteProvisionedConcurrencyConfigInputDict,
     DeleteProvisionedConcurrencyConfigOutput,
     DeleteResourcePolicyInput,
+    DeleteResourcePolicyInputDict,
     DeleteResourcePolicyOutput,
     DestinationConfig,
+    DestinationConfigDict,
     DocumentDBEventSourceConfig,
+    DocumentDBEventSourceConfigDict,
     DurableConfig,
+    DurableConfigDict,
     Environment,
+    EnvironmentDict,
     EnvironmentError,
     EnvironmentResponse,
     EphemeralStorage,
+    EphemeralStorageDict,
     ErrorObject,
+    ErrorObjectDict,
     Event,
     EventError,
     EventInput,
     EventResult,
     EventSourceMappingConfiguration,
     EventSourceMappingLoggingConfig,
+    EventSourceMappingLoggingConfigDict,
     EventSourceMappingMetricsConfig,
+    EventSourceMappingMetricsConfigDict,
     Execution,
     ExecutionDetails,
     ExecutionFailedDetails,
@@ -105,209 +152,307 @@ from aws_sdk_lambda.models import (
     ExecutionSucceededDetails,
     ExecutionTimedOutDetails,
     FileSystemConfig,
+    FileSystemConfigDict,
     Filter,
     FilterCriteria,
+    FilterCriteriaDict,
     FilterCriteriaError,
+    FilterDict,
     FunctionCode,
+    FunctionCodeDict,
     FunctionCodeLocation,
     FunctionCodeLocationError,
     FunctionConfiguration,
     FunctionEventInvokeConfig,
     FunctionScalingConfig,
+    FunctionScalingConfigDict,
     FunctionUrlConfig,
     FunctionVersionsByCapacityProviderListItem,
     GetAccountSettingsInput,
+    GetAccountSettingsInputDict,
     GetAccountSettingsOutput,
     GetAliasInput,
+    GetAliasInputDict,
     GetAliasOutput,
     GetCapacityProviderInput,
+    GetCapacityProviderInputDict,
     GetCapacityProviderOutput,
     GetCodeSigningConfigInput,
+    GetCodeSigningConfigInputDict,
     GetCodeSigningConfigOutput,
     GetDurableExecutionHistoryInput,
+    GetDurableExecutionHistoryInputDict,
     GetDurableExecutionHistoryOutput,
     GetDurableExecutionInput,
+    GetDurableExecutionInputDict,
     GetDurableExecutionOutput,
     GetDurableExecutionStateInput,
+    GetDurableExecutionStateInputDict,
     GetDurableExecutionStateOutput,
     GetEventSourceMappingInput,
+    GetEventSourceMappingInputDict,
     GetEventSourceMappingOutput,
     GetFunctionCodeSigningConfigInput,
+    GetFunctionCodeSigningConfigInputDict,
     GetFunctionCodeSigningConfigOutput,
     GetFunctionConcurrencyInput,
+    GetFunctionConcurrencyInputDict,
     GetFunctionConcurrencyOutput,
     GetFunctionConfigurationInput,
+    GetFunctionConfigurationInputDict,
     GetFunctionConfigurationOutput,
     GetFunctionEventInvokeConfigInput,
+    GetFunctionEventInvokeConfigInputDict,
     GetFunctionEventInvokeConfigOutput,
     GetFunctionInput,
+    GetFunctionInputDict,
     GetFunctionOutput,
     GetFunctionRecursionConfigInput,
+    GetFunctionRecursionConfigInputDict,
     GetFunctionRecursionConfigOutput,
     GetFunctionScalingConfigInput,
+    GetFunctionScalingConfigInputDict,
     GetFunctionScalingConfigOutput,
     GetFunctionUrlConfigInput,
+    GetFunctionUrlConfigInputDict,
     GetFunctionUrlConfigOutput,
     GetLayerVersionByArnInput,
+    GetLayerVersionByArnInputDict,
     GetLayerVersionByArnOutput,
     GetLayerVersionInput,
+    GetLayerVersionInputDict,
     GetLayerVersionOutput,
     GetLayerVersionPolicyInput,
+    GetLayerVersionPolicyInputDict,
     GetLayerVersionPolicyOutput,
     GetPolicyInput,
+    GetPolicyInputDict,
     GetPolicyOutput,
     GetProvisionedConcurrencyConfigInput,
+    GetProvisionedConcurrencyConfigInputDict,
     GetProvisionedConcurrencyConfigOutput,
     GetResourcePolicyInput,
+    GetResourcePolicyInputDict,
     GetResourcePolicyOutput,
     GetRuntimeManagementConfigInput,
+    GetRuntimeManagementConfigInputDict,
     GetRuntimeManagementConfigOutput,
     ImageConfig,
+    ImageConfigDict,
     ImageConfigError,
     ImageConfigResponse,
     InstanceRequirements,
+    InstanceRequirementsDict,
     InvocationCompletedDetails,
     InvokeAsyncInput,
+    InvokeAsyncInputDict,
     InvokeAsyncOutput,
     InvokeInput,
+    InvokeInputDict,
     InvokeOutput,
     InvokeResponseStreamUpdate,
     InvokeWithResponseStreamCompleteEvent,
     InvokeWithResponseStreamInput,
+    InvokeWithResponseStreamInputDict,
     InvokeWithResponseStreamOutput,
     KafkaSchemaRegistryAccessConfig,
+    KafkaSchemaRegistryAccessConfigDict,
     KafkaSchemaRegistryConfig,
+    KafkaSchemaRegistryConfigDict,
     KafkaSchemaValidationConfig,
+    KafkaSchemaValidationConfigDict,
     LambdaManagedInstancesCapacityProviderConfig,
+    LambdaManagedInstancesCapacityProviderConfigDict,
     Layer,
     LayerVersionContentInput,
+    LayerVersionContentInputDict,
     LayerVersionContentOutput,
     LayerVersionsListItem,
     LayersListItem,
     ListAliasesInput,
+    ListAliasesInputDict,
     ListAliasesOutput,
     ListCapacityProvidersInput,
+    ListCapacityProvidersInputDict,
     ListCapacityProvidersOutput,
     ListCodeSigningConfigsInput,
+    ListCodeSigningConfigsInputDict,
     ListCodeSigningConfigsOutput,
     ListDurableExecutionsByFunctionInput,
+    ListDurableExecutionsByFunctionInputDict,
     ListDurableExecutionsByFunctionOutput,
     ListEventSourceMappingsInput,
+    ListEventSourceMappingsInputDict,
     ListEventSourceMappingsOutput,
     ListFunctionEventInvokeConfigsInput,
+    ListFunctionEventInvokeConfigsInputDict,
     ListFunctionEventInvokeConfigsOutput,
     ListFunctionUrlConfigsInput,
+    ListFunctionUrlConfigsInputDict,
     ListFunctionUrlConfigsOutput,
     ListFunctionVersionsByCapacityProviderInput,
+    ListFunctionVersionsByCapacityProviderInputDict,
     ListFunctionVersionsByCapacityProviderOutput,
     ListFunctionsByCodeSigningConfigInput,
+    ListFunctionsByCodeSigningConfigInputDict,
     ListFunctionsByCodeSigningConfigOutput,
     ListFunctionsInput,
+    ListFunctionsInputDict,
     ListFunctionsOutput,
     ListLayerVersionsInput,
+    ListLayerVersionsInputDict,
     ListLayerVersionsOutput,
     ListLayersInput,
+    ListLayersInputDict,
     ListLayersOutput,
     ListProvisionedConcurrencyConfigsInput,
+    ListProvisionedConcurrencyConfigsInputDict,
     ListProvisionedConcurrencyConfigsOutput,
     ListTagsInput,
+    ListTagsInputDict,
     ListTagsOutput,
     ListVersionsByFunctionInput,
+    ListVersionsByFunctionInputDict,
     ListVersionsByFunctionOutput,
     LoggingConfig,
+    LoggingConfigDict,
     OnFailure,
+    OnFailureDict,
     OnSuccess,
+    OnSuccessDict,
     Operation,
     OperationUpdate,
+    OperationUpdateDict,
     PropagateTags,
+    PropagateTagsDict,
     ProvisionedConcurrencyConfigListItem,
     ProvisionedPollerConfig,
+    ProvisionedPollerConfigDict,
     PublishLayerVersionInput,
+    PublishLayerVersionInputDict,
     PublishLayerVersionOutput,
     PublishVersionInput,
+    PublishVersionInputDict,
     PublishVersionOutput,
     PutFunctionCodeSigningConfigInput,
+    PutFunctionCodeSigningConfigInputDict,
     PutFunctionCodeSigningConfigOutput,
     PutFunctionConcurrencyInput,
+    PutFunctionConcurrencyInputDict,
     PutFunctionConcurrencyOutput,
     PutFunctionEventInvokeConfigInput,
+    PutFunctionEventInvokeConfigInputDict,
     PutFunctionEventInvokeConfigOutput,
     PutFunctionRecursionConfigInput,
+    PutFunctionRecursionConfigInputDict,
     PutFunctionRecursionConfigOutput,
     PutFunctionScalingConfigInput,
+    PutFunctionScalingConfigInputDict,
     PutFunctionScalingConfigOutput,
     PutProvisionedConcurrencyConfigInput,
+    PutProvisionedConcurrencyConfigInputDict,
     PutProvisionedConcurrencyConfigOutput,
     PutResourcePolicyInput,
+    PutResourcePolicyInputDict,
     PutResourcePolicyOutput,
     PutRuntimeManagementConfigInput,
+    PutRuntimeManagementConfigInputDict,
     PutRuntimeManagementConfigOutput,
     RemoveLayerVersionPermissionInput,
+    RemoveLayerVersionPermissionInputDict,
     RemoveLayerVersionPermissionOutput,
     RemovePermissionInput,
+    RemovePermissionInputDict,
     RemovePermissionOutput,
     ResolvedS3Object,
     RetryDetails,
     RuntimeVersionConfig,
     RuntimeVersionError,
     S3FilesConfig,
+    S3FilesConfigDict,
     ScalingConfig,
+    ScalingConfigDict,
     SelfManagedEventSource,
+    SelfManagedEventSourceDict,
     SelfManagedKafkaEventSourceConfig,
+    SelfManagedKafkaEventSourceConfigDict,
     SendDurableExecutionCallbackFailureInput,
+    SendDurableExecutionCallbackFailureInputDict,
     SendDurableExecutionCallbackFailureOutput,
     SendDurableExecutionCallbackHeartbeatInput,
+    SendDurableExecutionCallbackHeartbeatInputDict,
     SendDurableExecutionCallbackHeartbeatOutput,
     SendDurableExecutionCallbackSuccessInput,
+    SendDurableExecutionCallbackSuccessInputDict,
     SendDurableExecutionCallbackSuccessOutput,
     SnapStart,
+    SnapStartDict,
     SnapStartResponse,
     SourceAccessConfiguration,
+    SourceAccessConfigurationDict,
     StepDetails,
     StepFailedDetails,
     StepOptions,
+    StepOptionsDict,
     StepStartedDetails,
     StepSucceededDetails,
     StopDurableExecutionInput,
+    StopDurableExecutionInputDict,
     StopDurableExecutionOutput,
     TagResourceInput,
+    TagResourceInputDict,
     TagResourceOutput,
     TagsError,
     TargetTrackingScalingPolicy,
+    TargetTrackingScalingPolicyDict,
     TenancyConfig,
+    TenancyConfigDict,
     TraceHeader,
     TracingConfig,
+    TracingConfigDict,
     TracingConfigResponse,
     UntagResourceInput,
+    UntagResourceInputDict,
     UntagResourceOutput,
     UpdateAliasInput,
+    UpdateAliasInputDict,
     UpdateAliasOutput,
     UpdateCapacityProviderInput,
+    UpdateCapacityProviderInputDict,
     UpdateCapacityProviderOutput,
     UpdateCodeSigningConfigInput,
+    UpdateCodeSigningConfigInputDict,
     UpdateCodeSigningConfigOutput,
     UpdateEventSourceMappingInput,
+    UpdateEventSourceMappingInputDict,
     UpdateEventSourceMappingOutput,
     UpdateFunctionCodeInput,
+    UpdateFunctionCodeInputDict,
     UpdateFunctionCodeOutput,
     UpdateFunctionConfigurationInput,
+    UpdateFunctionConfigurationInputDict,
     UpdateFunctionConfigurationOutput,
     UpdateFunctionEventInvokeConfigInput,
+    UpdateFunctionEventInvokeConfigInputDict,
     UpdateFunctionEventInvokeConfigOutput,
     UpdateFunctionUrlConfigInput,
+    UpdateFunctionUrlConfigInputDict,
     UpdateFunctionUrlConfigOutput,
     VpcConfig,
+    VpcConfigDict,
     VpcConfigResponse,
     WaitCancelledDetails,
     WaitDetails,
     WaitOptions,
+    WaitOptionsDict,
     WaitStartedDetails,
     WaitSucceededDetails,
 )
 
 
-# Static type fixture: pyright over this validates models.pyi.
-# Not executed as a test; it only needs to type-check.
+# Static type fixture: pyright over this validates models.pyi and the
+# client method signatures. Not executed as a test; it only needs to
+# type-check.
 
 _: Any = ...
 
@@ -639,3 +784,1260 @@ WaitDetails()
 WaitOptions()
 WaitStartedDetails(duration=_, scheduled_end_timestamp=_)
 WaitSucceededDetails()
+_params_0: AddLayerVersionPermissionInputDict = {
+    "layer_name": _,
+    "statement_id": _,
+    "action": _,
+    "principal": _,
+}
+_params_1: AddPermissionInputDict = {
+    "function_name": _,
+    "statement_id": _,
+    "action": _,
+    "principal": _,
+}
+_params_2: AliasRoutingConfigurationDict = {}
+_params_3: AllowedPublishersDict = {"signing_profile_version_arns": _}
+_params_4: AmazonManagedKafkaEventSourceConfigDict = {}
+_params_5: CallbackOptionsDict = {}
+_params_6: CapacityProviderConfigDict = {
+    "lambda_managed_instances_capacity_provider_config": _
+}
+_params_7: CapacityProviderLoggingConfigDict = {}
+_params_8: CapacityProviderPermissionsConfigDict = {
+    "capacity_provider_operator_role_arn": _
+}
+_params_9: CapacityProviderScalingConfigDict = {}
+_params_10: CapacityProviderTelemetryConfigDict = {}
+_params_11: CapacityProviderVpcConfigDict = {"subnet_ids": _, "security_group_ids": _}
+_params_12: ChainedInvokeOptionsDict = {"function_name": _}
+_params_13: CheckpointDurableExecutionInputDict = {
+    "durable_execution_arn": _,
+    "checkpoint_token": _,
+}
+_params_14: CodeSigningPoliciesDict = {}
+_params_15: ContextOptionsDict = {}
+_params_16: CorsDict = {}
+_params_17: CreateAliasInputDict = {
+    "function_name": _,
+    "name": _,
+    "function_version": _,
+}
+_params_18: CreateCapacityProviderInputDict = {
+    "capacity_provider_name": _,
+    "vpc_config": _,
+    "permissions_config": _,
+}
+_params_19: CreateCodeSigningConfigInputDict = {"allowed_publishers": _}
+_params_20: CreateEventSourceMappingInputDict = {"function_name": _}
+_params_21: CreateFunctionInputDict = {"function_name": _, "role": _, "code": _}
+_params_22: CreateFunctionUrlConfigInputDict = {"function_name": _, "auth_type": _}
+_params_23: DeadLetterConfigDict = {}
+_params_24: DeleteAliasInputDict = {"function_name": _, "name": _}
+_params_25: DeleteCapacityProviderInputDict = {"capacity_provider_name": _}
+_params_26: DeleteCodeSigningConfigInputDict = {"code_signing_config_arn": _}
+_params_27: DeleteEventSourceMappingInputDict = {"uuid": _}
+_params_28: DeleteFunctionCodeSigningConfigInputDict = {"function_name": _}
+_params_29: DeleteFunctionConcurrencyInputDict = {"function_name": _}
+_params_30: DeleteFunctionEventInvokeConfigInputDict = {"function_name": _}
+_params_31: DeleteFunctionInputDict = {"function_name": _}
+_params_32: DeleteFunctionUrlConfigInputDict = {"function_name": _}
+_params_33: DeleteLayerVersionInputDict = {"layer_name": _}
+_params_34: DeleteProvisionedConcurrencyConfigInputDict = {
+    "function_name": _,
+    "qualifier": _,
+}
+_params_35: DeleteResourcePolicyInputDict = {"resource_arn": _}
+_params_36: DestinationConfigDict = {}
+_params_37: DocumentDBEventSourceConfigDict = {}
+_params_38: DurableConfigDict = {}
+_params_39: EnvironmentDict = {}
+_params_40: EphemeralStorageDict = {"size": _}
+_params_41: ErrorObjectDict = {}
+_params_42: EventSourceMappingLoggingConfigDict = {}
+_params_43: EventSourceMappingMetricsConfigDict = {}
+_params_44: FileSystemConfigDict = {"arn": _, "local_mount_path": _}
+_params_45: FilterDict = {}
+_params_46: FilterCriteriaDict = {}
+_params_47: FunctionCodeDict = {}
+_params_48: FunctionScalingConfigDict = {}
+_params_49: GetAccountSettingsInputDict = {}
+_params_50: GetAliasInputDict = {"function_name": _, "name": _}
+_params_51: GetCapacityProviderInputDict = {"capacity_provider_name": _}
+_params_52: GetCodeSigningConfigInputDict = {"code_signing_config_arn": _}
+_params_53: GetDurableExecutionHistoryInputDict = {"durable_execution_arn": _}
+_params_54: GetDurableExecutionInputDict = {"durable_execution_arn": _}
+_params_55: GetDurableExecutionStateInputDict = {
+    "durable_execution_arn": _,
+    "checkpoint_token": _,
+}
+_params_56: GetEventSourceMappingInputDict = {"uuid": _}
+_params_57: GetFunctionCodeSigningConfigInputDict = {"function_name": _}
+_params_58: GetFunctionConcurrencyInputDict = {"function_name": _}
+_params_59: GetFunctionConfigurationInputDict = {"function_name": _}
+_params_60: GetFunctionEventInvokeConfigInputDict = {"function_name": _}
+_params_61: GetFunctionInputDict = {"function_name": _}
+_params_62: GetFunctionRecursionConfigInputDict = {"function_name": _}
+_params_63: GetFunctionScalingConfigInputDict = {"function_name": _, "qualifier": _}
+_params_64: GetFunctionUrlConfigInputDict = {"function_name": _}
+_params_65: GetLayerVersionByArnInputDict = {"arn": _}
+_params_66: GetLayerVersionInputDict = {"layer_name": _}
+_params_67: GetLayerVersionPolicyInputDict = {"layer_name": _}
+_params_68: GetPolicyInputDict = {"function_name": _}
+_params_69: GetProvisionedConcurrencyConfigInputDict = {
+    "function_name": _,
+    "qualifier": _,
+}
+_params_70: GetResourcePolicyInputDict = {"resource_arn": _}
+_params_71: GetRuntimeManagementConfigInputDict = {"function_name": _}
+_params_72: ImageConfigDict = {}
+_params_73: InstanceRequirementsDict = {}
+_params_74: InvokeAsyncInputDict = {"function_name": _, "invoke_args": _}
+_params_75: InvokeInputDict = {"function_name": _}
+_params_76: InvokeWithResponseStreamInputDict = {"function_name": _}
+_params_77: KafkaSchemaRegistryAccessConfigDict = {}
+_params_78: KafkaSchemaRegistryConfigDict = {}
+_params_79: KafkaSchemaValidationConfigDict = {}
+_params_80: LambdaManagedInstancesCapacityProviderConfigDict = {
+    "capacity_provider_arn": _
+}
+_params_81: LayerVersionContentInputDict = {}
+_params_82: ListAliasesInputDict = {"function_name": _}
+_params_83: ListCapacityProvidersInputDict = {}
+_params_84: ListCodeSigningConfigsInputDict = {}
+_params_85: ListDurableExecutionsByFunctionInputDict = {"function_name": _}
+_params_86: ListEventSourceMappingsInputDict = {}
+_params_87: ListFunctionEventInvokeConfigsInputDict = {"function_name": _}
+_params_88: ListFunctionsByCodeSigningConfigInputDict = {"code_signing_config_arn": _}
+_params_89: ListFunctionsInputDict = {}
+_params_90: ListFunctionUrlConfigsInputDict = {"function_name": _}
+_params_91: ListFunctionVersionsByCapacityProviderInputDict = {
+    "capacity_provider_name": _
+}
+_params_92: ListLayersInputDict = {}
+_params_93: ListLayerVersionsInputDict = {"layer_name": _}
+_params_94: ListProvisionedConcurrencyConfigsInputDict = {"function_name": _}
+_params_95: ListTagsInputDict = {"resource": _}
+_params_96: ListVersionsByFunctionInputDict = {"function_name": _}
+_params_97: LoggingConfigDict = {}
+_params_98: OnFailureDict = {}
+_params_99: OnSuccessDict = {}
+_params_100: OperationUpdateDict = {"id": _, "type": _, "action": _}
+_params_101: PropagateTagsDict = {}
+_params_102: ProvisionedPollerConfigDict = {}
+_params_103: PublishLayerVersionInputDict = {"layer_name": _, "content": _}
+_params_104: PublishVersionInputDict = {"function_name": _}
+_params_105: PutFunctionCodeSigningConfigInputDict = {
+    "code_signing_config_arn": _,
+    "function_name": _,
+}
+_params_106: PutFunctionConcurrencyInputDict = {
+    "function_name": _,
+    "reserved_concurrent_executions": _,
+}
+_params_107: PutFunctionEventInvokeConfigInputDict = {"function_name": _}
+_params_108: PutFunctionRecursionConfigInputDict = {
+    "function_name": _,
+    "recursive_loop": _,
+}
+_params_109: PutFunctionScalingConfigInputDict = {"function_name": _, "qualifier": _}
+_params_110: PutProvisionedConcurrencyConfigInputDict = {
+    "function_name": _,
+    "qualifier": _,
+    "provisioned_concurrent_executions": _,
+}
+_params_111: PutResourcePolicyInputDict = {"resource_arn": _, "policy": _}
+_params_112: PutRuntimeManagementConfigInputDict = {
+    "function_name": _,
+    "update_runtime_on": _,
+}
+_params_113: RemoveLayerVersionPermissionInputDict = {
+    "layer_name": _,
+    "statement_id": _,
+}
+_params_114: RemovePermissionInputDict = {"function_name": _, "statement_id": _}
+_params_115: S3FilesConfigDict = {}
+_params_116: ScalingConfigDict = {}
+_params_117: SelfManagedEventSourceDict = {}
+_params_118: SelfManagedKafkaEventSourceConfigDict = {}
+_params_119: SendDurableExecutionCallbackFailureInputDict = {"callback_id": _}
+_params_120: SendDurableExecutionCallbackHeartbeatInputDict = {"callback_id": _}
+_params_121: SendDurableExecutionCallbackSuccessInputDict = {"callback_id": _}
+_params_122: SnapStartDict = {}
+_params_123: SourceAccessConfigurationDict = {}
+_params_124: StepOptionsDict = {}
+_params_125: StopDurableExecutionInputDict = {"durable_execution_arn": _}
+_params_126: TagResourceInputDict = {"resource": _, "tags": _}
+_params_127: TargetTrackingScalingPolicyDict = {
+    "predefined_metric_type": _,
+    "target_value": _,
+}
+_params_128: TenancyConfigDict = {"tenant_isolation_mode": _}
+_params_129: TracingConfigDict = {}
+_params_130: UntagResourceInputDict = {"resource": _, "tag_keys": _}
+_params_131: UpdateAliasInputDict = {"function_name": _, "name": _}
+_params_132: UpdateCapacityProviderInputDict = {"capacity_provider_name": _}
+_params_133: UpdateCodeSigningConfigInputDict = {"code_signing_config_arn": _}
+_params_134: UpdateEventSourceMappingInputDict = {"uuid": _}
+_params_135: UpdateFunctionCodeInputDict = {"function_name": _}
+_params_136: UpdateFunctionConfigurationInputDict = {"function_name": _}
+_params_137: UpdateFunctionEventInvokeConfigInputDict = {"function_name": _}
+_params_138: UpdateFunctionUrlConfigInputDict = {"function_name": _}
+_params_139: VpcConfigDict = {}
+_params_140: WaitOptionsDict = {}
+
+
+def _request[T](form: type[T]) -> T:
+    raise NotImplementedError
+
+
+async def check_async_calls(client: AsyncLambdaClient) -> None:
+    pass
+    await client.add_layer_version_permission(
+        layer_name=_, statement_id=_, action=_, principal=_
+    )
+    await client.add_layer_version_permission(
+        **_request(AddLayerVersionPermissionInputDict)
+    )
+    await client.add_layer_version_permission(_request(AddLayerVersionPermissionInput))
+    await client.add_layer_version_permission(
+        _request(AddLayerVersionPermissionInputDict)
+    )
+    await client.add_permission(function_name=_, statement_id=_, action=_, principal=_)
+    await client.add_permission(**_request(AddPermissionInputDict))
+    await client.add_permission(_request(AddPermissionInput))
+    await client.add_permission(_request(AddPermissionInputDict))
+    await client.checkpoint_durable_execution(
+        durable_execution_arn=_, checkpoint_token=_
+    )
+    await client.checkpoint_durable_execution(
+        **_request(CheckpointDurableExecutionInputDict)
+    )
+    await client.checkpoint_durable_execution(_request(CheckpointDurableExecutionInput))
+    await client.checkpoint_durable_execution(
+        _request(CheckpointDurableExecutionInputDict)
+    )
+    await client.create_alias(function_name=_, name=_, function_version=_)
+    await client.create_alias(**_request(CreateAliasInputDict))
+    await client.create_alias(_request(CreateAliasInput))
+    await client.create_alias(_request(CreateAliasInputDict))
+    await client.create_capacity_provider(
+        capacity_provider_name=_, vpc_config=_, permissions_config=_
+    )
+    await client.create_capacity_provider(**_request(CreateCapacityProviderInputDict))
+    await client.create_capacity_provider(_request(CreateCapacityProviderInput))
+    await client.create_capacity_provider(_request(CreateCapacityProviderInputDict))
+    await client.create_code_signing_config(allowed_publishers=_)
+    await client.create_code_signing_config(
+        **_request(CreateCodeSigningConfigInputDict)
+    )
+    await client.create_code_signing_config(_request(CreateCodeSigningConfigInput))
+    await client.create_code_signing_config(_request(CreateCodeSigningConfigInputDict))
+    await client.create_event_source_mapping(function_name=_)
+    await client.create_event_source_mapping(
+        **_request(CreateEventSourceMappingInputDict)
+    )
+    await client.create_event_source_mapping(_request(CreateEventSourceMappingInput))
+    await client.create_event_source_mapping(
+        _request(CreateEventSourceMappingInputDict)
+    )
+    await client.create_function(function_name=_, role=_, code=_)
+    await client.create_function(**_request(CreateFunctionInputDict))
+    await client.create_function(_request(CreateFunctionInput))
+    await client.create_function(_request(CreateFunctionInputDict))
+    await client.create_function_url_config(function_name=_, auth_type=_)
+    await client.create_function_url_config(
+        **_request(CreateFunctionUrlConfigInputDict)
+    )
+    await client.create_function_url_config(_request(CreateFunctionUrlConfigInput))
+    await client.create_function_url_config(_request(CreateFunctionUrlConfigInputDict))
+    await client.delete_alias(function_name=_, name=_)
+    await client.delete_alias(**_request(DeleteAliasInputDict))
+    await client.delete_alias(_request(DeleteAliasInput))
+    await client.delete_alias(_request(DeleteAliasInputDict))
+    await client.delete_capacity_provider(capacity_provider_name=_)
+    await client.delete_capacity_provider(**_request(DeleteCapacityProviderInputDict))
+    await client.delete_capacity_provider(_request(DeleteCapacityProviderInput))
+    await client.delete_capacity_provider(_request(DeleteCapacityProviderInputDict))
+    await client.delete_code_signing_config(code_signing_config_arn=_)
+    await client.delete_code_signing_config(
+        **_request(DeleteCodeSigningConfigInputDict)
+    )
+    await client.delete_code_signing_config(_request(DeleteCodeSigningConfigInput))
+    await client.delete_code_signing_config(_request(DeleteCodeSigningConfigInputDict))
+    await client.delete_event_source_mapping(uuid=_)
+    await client.delete_event_source_mapping(
+        **_request(DeleteEventSourceMappingInputDict)
+    )
+    await client.delete_event_source_mapping(_request(DeleteEventSourceMappingInput))
+    await client.delete_event_source_mapping(
+        _request(DeleteEventSourceMappingInputDict)
+    )
+    await client.delete_function(function_name=_)
+    await client.delete_function(**_request(DeleteFunctionInputDict))
+    await client.delete_function(_request(DeleteFunctionInput))
+    await client.delete_function(_request(DeleteFunctionInputDict))
+    await client.delete_function_code_signing_config(function_name=_)
+    await client.delete_function_code_signing_config(
+        **_request(DeleteFunctionCodeSigningConfigInputDict)
+    )
+    await client.delete_function_code_signing_config(
+        _request(DeleteFunctionCodeSigningConfigInput)
+    )
+    await client.delete_function_code_signing_config(
+        _request(DeleteFunctionCodeSigningConfigInputDict)
+    )
+    await client.delete_function_concurrency(function_name=_)
+    await client.delete_function_concurrency(
+        **_request(DeleteFunctionConcurrencyInputDict)
+    )
+    await client.delete_function_concurrency(_request(DeleteFunctionConcurrencyInput))
+    await client.delete_function_concurrency(
+        _request(DeleteFunctionConcurrencyInputDict)
+    )
+    await client.delete_function_event_invoke_config(function_name=_)
+    await client.delete_function_event_invoke_config(
+        **_request(DeleteFunctionEventInvokeConfigInputDict)
+    )
+    await client.delete_function_event_invoke_config(
+        _request(DeleteFunctionEventInvokeConfigInput)
+    )
+    await client.delete_function_event_invoke_config(
+        _request(DeleteFunctionEventInvokeConfigInputDict)
+    )
+    await client.delete_function_url_config(function_name=_)
+    await client.delete_function_url_config(
+        **_request(DeleteFunctionUrlConfigInputDict)
+    )
+    await client.delete_function_url_config(_request(DeleteFunctionUrlConfigInput))
+    await client.delete_function_url_config(_request(DeleteFunctionUrlConfigInputDict))
+    await client.delete_layer_version(layer_name=_)
+    await client.delete_layer_version(**_request(DeleteLayerVersionInputDict))
+    await client.delete_layer_version(_request(DeleteLayerVersionInput))
+    await client.delete_layer_version(_request(DeleteLayerVersionInputDict))
+    await client.delete_provisioned_concurrency_config(function_name=_, qualifier=_)
+    await client.delete_provisioned_concurrency_config(
+        **_request(DeleteProvisionedConcurrencyConfigInputDict)
+    )
+    await client.delete_provisioned_concurrency_config(
+        _request(DeleteProvisionedConcurrencyConfigInput)
+    )
+    await client.delete_provisioned_concurrency_config(
+        _request(DeleteProvisionedConcurrencyConfigInputDict)
+    )
+    await client.delete_resource_policy(resource_arn=_)
+    await client.delete_resource_policy(**_request(DeleteResourcePolicyInputDict))
+    await client.delete_resource_policy(_request(DeleteResourcePolicyInput))
+    await client.delete_resource_policy(_request(DeleteResourcePolicyInputDict))
+    await client.get_account_settings()
+    await client.get_account_settings(**_request(GetAccountSettingsInputDict))
+    await client.get_account_settings(_request(GetAccountSettingsInput))
+    await client.get_account_settings(_request(GetAccountSettingsInputDict))
+    await client.get_alias(function_name=_, name=_)
+    await client.get_alias(**_request(GetAliasInputDict))
+    await client.get_alias(_request(GetAliasInput))
+    await client.get_alias(_request(GetAliasInputDict))
+    await client.get_capacity_provider(capacity_provider_name=_)
+    await client.get_capacity_provider(**_request(GetCapacityProviderInputDict))
+    await client.get_capacity_provider(_request(GetCapacityProviderInput))
+    await client.get_capacity_provider(_request(GetCapacityProviderInputDict))
+    await client.get_code_signing_config(code_signing_config_arn=_)
+    await client.get_code_signing_config(**_request(GetCodeSigningConfigInputDict))
+    await client.get_code_signing_config(_request(GetCodeSigningConfigInput))
+    await client.get_code_signing_config(_request(GetCodeSigningConfigInputDict))
+    await client.get_durable_execution(durable_execution_arn=_)
+    await client.get_durable_execution(**_request(GetDurableExecutionInputDict))
+    await client.get_durable_execution(_request(GetDurableExecutionInput))
+    await client.get_durable_execution(_request(GetDurableExecutionInputDict))
+    await client.get_durable_execution_history(durable_execution_arn=_)
+    await client.get_durable_execution_history(
+        **_request(GetDurableExecutionHistoryInputDict)
+    )
+    await client.get_durable_execution_history(
+        _request(GetDurableExecutionHistoryInput)
+    )
+    await client.get_durable_execution_history(
+        _request(GetDurableExecutionHistoryInputDict)
+    )
+    await client.get_durable_execution_state(
+        durable_execution_arn=_, checkpoint_token=_
+    )
+    await client.get_durable_execution_state(
+        **_request(GetDurableExecutionStateInputDict)
+    )
+    await client.get_durable_execution_state(_request(GetDurableExecutionStateInput))
+    await client.get_durable_execution_state(
+        _request(GetDurableExecutionStateInputDict)
+    )
+    await client.get_event_source_mapping(uuid=_)
+    await client.get_event_source_mapping(**_request(GetEventSourceMappingInputDict))
+    await client.get_event_source_mapping(_request(GetEventSourceMappingInput))
+    await client.get_event_source_mapping(_request(GetEventSourceMappingInputDict))
+    await client.get_function(function_name=_)
+    await client.get_function(**_request(GetFunctionInputDict))
+    await client.get_function(_request(GetFunctionInput))
+    await client.get_function(_request(GetFunctionInputDict))
+    await client.get_function_code_signing_config(function_name=_)
+    await client.get_function_code_signing_config(
+        **_request(GetFunctionCodeSigningConfigInputDict)
+    )
+    await client.get_function_code_signing_config(
+        _request(GetFunctionCodeSigningConfigInput)
+    )
+    await client.get_function_code_signing_config(
+        _request(GetFunctionCodeSigningConfigInputDict)
+    )
+    await client.get_function_concurrency(function_name=_)
+    await client.get_function_concurrency(**_request(GetFunctionConcurrencyInputDict))
+    await client.get_function_concurrency(_request(GetFunctionConcurrencyInput))
+    await client.get_function_concurrency(_request(GetFunctionConcurrencyInputDict))
+    await client.get_function_configuration(function_name=_)
+    await client.get_function_configuration(
+        **_request(GetFunctionConfigurationInputDict)
+    )
+    await client.get_function_configuration(_request(GetFunctionConfigurationInput))
+    await client.get_function_configuration(_request(GetFunctionConfigurationInputDict))
+    await client.get_function_event_invoke_config(function_name=_)
+    await client.get_function_event_invoke_config(
+        **_request(GetFunctionEventInvokeConfigInputDict)
+    )
+    await client.get_function_event_invoke_config(
+        _request(GetFunctionEventInvokeConfigInput)
+    )
+    await client.get_function_event_invoke_config(
+        _request(GetFunctionEventInvokeConfigInputDict)
+    )
+    await client.get_function_recursion_config(function_name=_)
+    await client.get_function_recursion_config(
+        **_request(GetFunctionRecursionConfigInputDict)
+    )
+    await client.get_function_recursion_config(
+        _request(GetFunctionRecursionConfigInput)
+    )
+    await client.get_function_recursion_config(
+        _request(GetFunctionRecursionConfigInputDict)
+    )
+    await client.get_function_scaling_config(function_name=_, qualifier=_)
+    await client.get_function_scaling_config(
+        **_request(GetFunctionScalingConfigInputDict)
+    )
+    await client.get_function_scaling_config(_request(GetFunctionScalingConfigInput))
+    await client.get_function_scaling_config(
+        _request(GetFunctionScalingConfigInputDict)
+    )
+    await client.get_function_url_config(function_name=_)
+    await client.get_function_url_config(**_request(GetFunctionUrlConfigInputDict))
+    await client.get_function_url_config(_request(GetFunctionUrlConfigInput))
+    await client.get_function_url_config(_request(GetFunctionUrlConfigInputDict))
+    await client.get_layer_version(layer_name=_)
+    await client.get_layer_version(**_request(GetLayerVersionInputDict))
+    await client.get_layer_version(_request(GetLayerVersionInput))
+    await client.get_layer_version(_request(GetLayerVersionInputDict))
+    await client.get_layer_version_by_arn(arn=_)
+    await client.get_layer_version_by_arn(**_request(GetLayerVersionByArnInputDict))
+    await client.get_layer_version_by_arn(_request(GetLayerVersionByArnInput))
+    await client.get_layer_version_by_arn(_request(GetLayerVersionByArnInputDict))
+    await client.get_layer_version_policy(layer_name=_)
+    await client.get_layer_version_policy(**_request(GetLayerVersionPolicyInputDict))
+    await client.get_layer_version_policy(_request(GetLayerVersionPolicyInput))
+    await client.get_layer_version_policy(_request(GetLayerVersionPolicyInputDict))
+    await client.get_policy(function_name=_)
+    await client.get_policy(**_request(GetPolicyInputDict))
+    await client.get_policy(_request(GetPolicyInput))
+    await client.get_policy(_request(GetPolicyInputDict))
+    await client.get_provisioned_concurrency_config(function_name=_, qualifier=_)
+    await client.get_provisioned_concurrency_config(
+        **_request(GetProvisionedConcurrencyConfigInputDict)
+    )
+    await client.get_provisioned_concurrency_config(
+        _request(GetProvisionedConcurrencyConfigInput)
+    )
+    await client.get_provisioned_concurrency_config(
+        _request(GetProvisionedConcurrencyConfigInputDict)
+    )
+    await client.get_resource_policy(resource_arn=_)
+    await client.get_resource_policy(**_request(GetResourcePolicyInputDict))
+    await client.get_resource_policy(_request(GetResourcePolicyInput))
+    await client.get_resource_policy(_request(GetResourcePolicyInputDict))
+    await client.get_runtime_management_config(function_name=_)
+    await client.get_runtime_management_config(
+        **_request(GetRuntimeManagementConfigInputDict)
+    )
+    await client.get_runtime_management_config(
+        _request(GetRuntimeManagementConfigInput)
+    )
+    await client.get_runtime_management_config(
+        _request(GetRuntimeManagementConfigInputDict)
+    )
+    await client.invoke(function_name=_)
+    await client.invoke(**_request(InvokeInputDict))
+    await client.invoke(_request(InvokeInput))
+    await client.invoke(_request(InvokeInputDict))
+    await client.invoke_async(function_name=_, invoke_args=_)
+    await client.invoke_async(**_request(InvokeAsyncInputDict))
+    await client.invoke_async(_request(InvokeAsyncInput))
+    await client.invoke_async(_request(InvokeAsyncInputDict))
+    await client.invoke_async(**_request(AsyncInvokeAsyncInputDict))
+    await client.invoke_async(_request(AsyncInvokeAsyncInputDict))
+    await client.invoke_with_response_stream(function_name=_)
+    await client.invoke_with_response_stream(
+        **_request(InvokeWithResponseStreamInputDict)
+    )
+    await client.invoke_with_response_stream(_request(InvokeWithResponseStreamInput))
+    await client.invoke_with_response_stream(
+        _request(InvokeWithResponseStreamInputDict)
+    )
+    await client.list_aliases(function_name=_)
+    await client.list_aliases(**_request(ListAliasesInputDict))
+    await client.list_aliases(_request(ListAliasesInput))
+    await client.list_aliases(_request(ListAliasesInputDict))
+    await client.list_capacity_providers()
+    await client.list_capacity_providers(**_request(ListCapacityProvidersInputDict))
+    await client.list_capacity_providers(_request(ListCapacityProvidersInput))
+    await client.list_capacity_providers(_request(ListCapacityProvidersInputDict))
+    await client.list_code_signing_configs()
+    await client.list_code_signing_configs(**_request(ListCodeSigningConfigsInputDict))
+    await client.list_code_signing_configs(_request(ListCodeSigningConfigsInput))
+    await client.list_code_signing_configs(_request(ListCodeSigningConfigsInputDict))
+    await client.list_durable_executions_by_function(function_name=_)
+    await client.list_durable_executions_by_function(
+        **_request(ListDurableExecutionsByFunctionInputDict)
+    )
+    await client.list_durable_executions_by_function(
+        _request(ListDurableExecutionsByFunctionInput)
+    )
+    await client.list_durable_executions_by_function(
+        _request(ListDurableExecutionsByFunctionInputDict)
+    )
+    await client.list_event_source_mappings()
+    await client.list_event_source_mappings(
+        **_request(ListEventSourceMappingsInputDict)
+    )
+    await client.list_event_source_mappings(_request(ListEventSourceMappingsInput))
+    await client.list_event_source_mappings(_request(ListEventSourceMappingsInputDict))
+    await client.list_function_event_invoke_configs(function_name=_)
+    await client.list_function_event_invoke_configs(
+        **_request(ListFunctionEventInvokeConfigsInputDict)
+    )
+    await client.list_function_event_invoke_configs(
+        _request(ListFunctionEventInvokeConfigsInput)
+    )
+    await client.list_function_event_invoke_configs(
+        _request(ListFunctionEventInvokeConfigsInputDict)
+    )
+    await client.list_functions()
+    await client.list_functions(**_request(ListFunctionsInputDict))
+    await client.list_functions(_request(ListFunctionsInput))
+    await client.list_functions(_request(ListFunctionsInputDict))
+    await client.list_functions_by_code_signing_config(code_signing_config_arn=_)
+    await client.list_functions_by_code_signing_config(
+        **_request(ListFunctionsByCodeSigningConfigInputDict)
+    )
+    await client.list_functions_by_code_signing_config(
+        _request(ListFunctionsByCodeSigningConfigInput)
+    )
+    await client.list_functions_by_code_signing_config(
+        _request(ListFunctionsByCodeSigningConfigInputDict)
+    )
+    await client.list_function_url_configs(function_name=_)
+    await client.list_function_url_configs(**_request(ListFunctionUrlConfigsInputDict))
+    await client.list_function_url_configs(_request(ListFunctionUrlConfigsInput))
+    await client.list_function_url_configs(_request(ListFunctionUrlConfigsInputDict))
+    await client.list_function_versions_by_capacity_provider(capacity_provider_name=_)
+    await client.list_function_versions_by_capacity_provider(
+        **_request(ListFunctionVersionsByCapacityProviderInputDict)
+    )
+    await client.list_function_versions_by_capacity_provider(
+        _request(ListFunctionVersionsByCapacityProviderInput)
+    )
+    await client.list_function_versions_by_capacity_provider(
+        _request(ListFunctionVersionsByCapacityProviderInputDict)
+    )
+    await client.list_layers()
+    await client.list_layers(**_request(ListLayersInputDict))
+    await client.list_layers(_request(ListLayersInput))
+    await client.list_layers(_request(ListLayersInputDict))
+    await client.list_layer_versions(layer_name=_)
+    await client.list_layer_versions(**_request(ListLayerVersionsInputDict))
+    await client.list_layer_versions(_request(ListLayerVersionsInput))
+    await client.list_layer_versions(_request(ListLayerVersionsInputDict))
+    await client.list_provisioned_concurrency_configs(function_name=_)
+    await client.list_provisioned_concurrency_configs(
+        **_request(ListProvisionedConcurrencyConfigsInputDict)
+    )
+    await client.list_provisioned_concurrency_configs(
+        _request(ListProvisionedConcurrencyConfigsInput)
+    )
+    await client.list_provisioned_concurrency_configs(
+        _request(ListProvisionedConcurrencyConfigsInputDict)
+    )
+    await client.list_tags(resource=_)
+    await client.list_tags(**_request(ListTagsInputDict))
+    await client.list_tags(_request(ListTagsInput))
+    await client.list_tags(_request(ListTagsInputDict))
+    await client.list_versions_by_function(function_name=_)
+    await client.list_versions_by_function(**_request(ListVersionsByFunctionInputDict))
+    await client.list_versions_by_function(_request(ListVersionsByFunctionInput))
+    await client.list_versions_by_function(_request(ListVersionsByFunctionInputDict))
+    await client.publish_layer_version(layer_name=_, content=_)
+    await client.publish_layer_version(**_request(PublishLayerVersionInputDict))
+    await client.publish_layer_version(_request(PublishLayerVersionInput))
+    await client.publish_layer_version(_request(PublishLayerVersionInputDict))
+    await client.publish_version(function_name=_)
+    await client.publish_version(**_request(PublishVersionInputDict))
+    await client.publish_version(_request(PublishVersionInput))
+    await client.publish_version(_request(PublishVersionInputDict))
+    await client.put_function_code_signing_config(
+        code_signing_config_arn=_, function_name=_
+    )
+    await client.put_function_code_signing_config(
+        **_request(PutFunctionCodeSigningConfigInputDict)
+    )
+    await client.put_function_code_signing_config(
+        _request(PutFunctionCodeSigningConfigInput)
+    )
+    await client.put_function_code_signing_config(
+        _request(PutFunctionCodeSigningConfigInputDict)
+    )
+    await client.put_function_concurrency(
+        function_name=_, reserved_concurrent_executions=_
+    )
+    await client.put_function_concurrency(**_request(PutFunctionConcurrencyInputDict))
+    await client.put_function_concurrency(_request(PutFunctionConcurrencyInput))
+    await client.put_function_concurrency(_request(PutFunctionConcurrencyInputDict))
+    await client.put_function_event_invoke_config(function_name=_)
+    await client.put_function_event_invoke_config(
+        **_request(PutFunctionEventInvokeConfigInputDict)
+    )
+    await client.put_function_event_invoke_config(
+        _request(PutFunctionEventInvokeConfigInput)
+    )
+    await client.put_function_event_invoke_config(
+        _request(PutFunctionEventInvokeConfigInputDict)
+    )
+    await client.put_function_recursion_config(function_name=_, recursive_loop=_)
+    await client.put_function_recursion_config(
+        **_request(PutFunctionRecursionConfigInputDict)
+    )
+    await client.put_function_recursion_config(
+        _request(PutFunctionRecursionConfigInput)
+    )
+    await client.put_function_recursion_config(
+        _request(PutFunctionRecursionConfigInputDict)
+    )
+    await client.put_function_scaling_config(function_name=_, qualifier=_)
+    await client.put_function_scaling_config(
+        **_request(PutFunctionScalingConfigInputDict)
+    )
+    await client.put_function_scaling_config(_request(PutFunctionScalingConfigInput))
+    await client.put_function_scaling_config(
+        _request(PutFunctionScalingConfigInputDict)
+    )
+    await client.put_provisioned_concurrency_config(
+        function_name=_, qualifier=_, provisioned_concurrent_executions=_
+    )
+    await client.put_provisioned_concurrency_config(
+        **_request(PutProvisionedConcurrencyConfigInputDict)
+    )
+    await client.put_provisioned_concurrency_config(
+        _request(PutProvisionedConcurrencyConfigInput)
+    )
+    await client.put_provisioned_concurrency_config(
+        _request(PutProvisionedConcurrencyConfigInputDict)
+    )
+    await client.put_resource_policy(resource_arn=_, policy=_)
+    await client.put_resource_policy(**_request(PutResourcePolicyInputDict))
+    await client.put_resource_policy(_request(PutResourcePolicyInput))
+    await client.put_resource_policy(_request(PutResourcePolicyInputDict))
+    await client.put_runtime_management_config(function_name=_, update_runtime_on=_)
+    await client.put_runtime_management_config(
+        **_request(PutRuntimeManagementConfigInputDict)
+    )
+    await client.put_runtime_management_config(
+        _request(PutRuntimeManagementConfigInput)
+    )
+    await client.put_runtime_management_config(
+        _request(PutRuntimeManagementConfigInputDict)
+    )
+    await client.remove_layer_version_permission(layer_name=_, statement_id=_)
+    await client.remove_layer_version_permission(
+        **_request(RemoveLayerVersionPermissionInputDict)
+    )
+    await client.remove_layer_version_permission(
+        _request(RemoveLayerVersionPermissionInput)
+    )
+    await client.remove_layer_version_permission(
+        _request(RemoveLayerVersionPermissionInputDict)
+    )
+    await client.remove_permission(function_name=_, statement_id=_)
+    await client.remove_permission(**_request(RemovePermissionInputDict))
+    await client.remove_permission(_request(RemovePermissionInput))
+    await client.remove_permission(_request(RemovePermissionInputDict))
+    await client.send_durable_execution_callback_failure(callback_id=_)
+    await client.send_durable_execution_callback_failure(
+        **_request(SendDurableExecutionCallbackFailureInputDict)
+    )
+    await client.send_durable_execution_callback_failure(
+        _request(SendDurableExecutionCallbackFailureInput)
+    )
+    await client.send_durable_execution_callback_failure(
+        _request(SendDurableExecutionCallbackFailureInputDict)
+    )
+    await client.send_durable_execution_callback_heartbeat(callback_id=_)
+    await client.send_durable_execution_callback_heartbeat(
+        **_request(SendDurableExecutionCallbackHeartbeatInputDict)
+    )
+    await client.send_durable_execution_callback_heartbeat(
+        _request(SendDurableExecutionCallbackHeartbeatInput)
+    )
+    await client.send_durable_execution_callback_heartbeat(
+        _request(SendDurableExecutionCallbackHeartbeatInputDict)
+    )
+    await client.send_durable_execution_callback_success(callback_id=_)
+    await client.send_durable_execution_callback_success(
+        **_request(SendDurableExecutionCallbackSuccessInputDict)
+    )
+    await client.send_durable_execution_callback_success(
+        _request(SendDurableExecutionCallbackSuccessInput)
+    )
+    await client.send_durable_execution_callback_success(
+        _request(SendDurableExecutionCallbackSuccessInputDict)
+    )
+    await client.stop_durable_execution(durable_execution_arn=_)
+    await client.stop_durable_execution(**_request(StopDurableExecutionInputDict))
+    await client.stop_durable_execution(_request(StopDurableExecutionInput))
+    await client.stop_durable_execution(_request(StopDurableExecutionInputDict))
+    await client.tag_resource(resource=_, tags=_)
+    await client.tag_resource(**_request(TagResourceInputDict))
+    await client.tag_resource(_request(TagResourceInput))
+    await client.tag_resource(_request(TagResourceInputDict))
+    await client.untag_resource(resource=_, tag_keys=_)
+    await client.untag_resource(**_request(UntagResourceInputDict))
+    await client.untag_resource(_request(UntagResourceInput))
+    await client.untag_resource(_request(UntagResourceInputDict))
+    await client.update_alias(function_name=_, name=_)
+    await client.update_alias(**_request(UpdateAliasInputDict))
+    await client.update_alias(_request(UpdateAliasInput))
+    await client.update_alias(_request(UpdateAliasInputDict))
+    await client.update_capacity_provider(capacity_provider_name=_)
+    await client.update_capacity_provider(**_request(UpdateCapacityProviderInputDict))
+    await client.update_capacity_provider(_request(UpdateCapacityProviderInput))
+    await client.update_capacity_provider(_request(UpdateCapacityProviderInputDict))
+    await client.update_code_signing_config(code_signing_config_arn=_)
+    await client.update_code_signing_config(
+        **_request(UpdateCodeSigningConfigInputDict)
+    )
+    await client.update_code_signing_config(_request(UpdateCodeSigningConfigInput))
+    await client.update_code_signing_config(_request(UpdateCodeSigningConfigInputDict))
+    await client.update_event_source_mapping(uuid=_)
+    await client.update_event_source_mapping(
+        **_request(UpdateEventSourceMappingInputDict)
+    )
+    await client.update_event_source_mapping(_request(UpdateEventSourceMappingInput))
+    await client.update_event_source_mapping(
+        _request(UpdateEventSourceMappingInputDict)
+    )
+    await client.update_function_code(function_name=_)
+    await client.update_function_code(**_request(UpdateFunctionCodeInputDict))
+    await client.update_function_code(_request(UpdateFunctionCodeInput))
+    await client.update_function_code(_request(UpdateFunctionCodeInputDict))
+    await client.update_function_configuration(function_name=_)
+    await client.update_function_configuration(
+        **_request(UpdateFunctionConfigurationInputDict)
+    )
+    await client.update_function_configuration(
+        _request(UpdateFunctionConfigurationInput)
+    )
+    await client.update_function_configuration(
+        _request(UpdateFunctionConfigurationInputDict)
+    )
+    await client.update_function_event_invoke_config(function_name=_)
+    await client.update_function_event_invoke_config(
+        **_request(UpdateFunctionEventInvokeConfigInputDict)
+    )
+    await client.update_function_event_invoke_config(
+        _request(UpdateFunctionEventInvokeConfigInput)
+    )
+    await client.update_function_event_invoke_config(
+        _request(UpdateFunctionEventInvokeConfigInputDict)
+    )
+    await client.update_function_url_config(function_name=_)
+    await client.update_function_url_config(
+        **_request(UpdateFunctionUrlConfigInputDict)
+    )
+    await client.update_function_url_config(_request(UpdateFunctionUrlConfigInput))
+    await client.update_function_url_config(_request(UpdateFunctionUrlConfigInputDict))
+
+
+def check_sync_calls(client: LambdaClient) -> None:
+    pass
+    client.add_layer_version_permission(
+        layer_name=_, statement_id=_, action=_, principal=_
+    )
+    client.add_layer_version_permission(**_request(AddLayerVersionPermissionInputDict))
+    client.add_layer_version_permission(_request(AddLayerVersionPermissionInput))
+    client.add_layer_version_permission(_request(AddLayerVersionPermissionInputDict))
+    client.add_permission(function_name=_, statement_id=_, action=_, principal=_)
+    client.add_permission(**_request(AddPermissionInputDict))
+    client.add_permission(_request(AddPermissionInput))
+    client.add_permission(_request(AddPermissionInputDict))
+    client.checkpoint_durable_execution(durable_execution_arn=_, checkpoint_token=_)
+    client.checkpoint_durable_execution(**_request(CheckpointDurableExecutionInputDict))
+    client.checkpoint_durable_execution(_request(CheckpointDurableExecutionInput))
+    client.checkpoint_durable_execution(_request(CheckpointDurableExecutionInputDict))
+    client.create_alias(function_name=_, name=_, function_version=_)
+    client.create_alias(**_request(CreateAliasInputDict))
+    client.create_alias(_request(CreateAliasInput))
+    client.create_alias(_request(CreateAliasInputDict))
+    client.create_capacity_provider(
+        capacity_provider_name=_, vpc_config=_, permissions_config=_
+    )
+    client.create_capacity_provider(**_request(CreateCapacityProviderInputDict))
+    client.create_capacity_provider(_request(CreateCapacityProviderInput))
+    client.create_capacity_provider(_request(CreateCapacityProviderInputDict))
+    client.create_code_signing_config(allowed_publishers=_)
+    client.create_code_signing_config(**_request(CreateCodeSigningConfigInputDict))
+    client.create_code_signing_config(_request(CreateCodeSigningConfigInput))
+    client.create_code_signing_config(_request(CreateCodeSigningConfigInputDict))
+    client.create_event_source_mapping(function_name=_)
+    client.create_event_source_mapping(**_request(CreateEventSourceMappingInputDict))
+    client.create_event_source_mapping(_request(CreateEventSourceMappingInput))
+    client.create_event_source_mapping(_request(CreateEventSourceMappingInputDict))
+    client.create_function(function_name=_, role=_, code=_)
+    client.create_function(**_request(CreateFunctionInputDict))
+    client.create_function(_request(CreateFunctionInput))
+    client.create_function(_request(CreateFunctionInputDict))
+    client.create_function_url_config(function_name=_, auth_type=_)
+    client.create_function_url_config(**_request(CreateFunctionUrlConfigInputDict))
+    client.create_function_url_config(_request(CreateFunctionUrlConfigInput))
+    client.create_function_url_config(_request(CreateFunctionUrlConfigInputDict))
+    client.delete_alias(function_name=_, name=_)
+    client.delete_alias(**_request(DeleteAliasInputDict))
+    client.delete_alias(_request(DeleteAliasInput))
+    client.delete_alias(_request(DeleteAliasInputDict))
+    client.delete_capacity_provider(capacity_provider_name=_)
+    client.delete_capacity_provider(**_request(DeleteCapacityProviderInputDict))
+    client.delete_capacity_provider(_request(DeleteCapacityProviderInput))
+    client.delete_capacity_provider(_request(DeleteCapacityProviderInputDict))
+    client.delete_code_signing_config(code_signing_config_arn=_)
+    client.delete_code_signing_config(**_request(DeleteCodeSigningConfigInputDict))
+    client.delete_code_signing_config(_request(DeleteCodeSigningConfigInput))
+    client.delete_code_signing_config(_request(DeleteCodeSigningConfigInputDict))
+    client.delete_event_source_mapping(uuid=_)
+    client.delete_event_source_mapping(**_request(DeleteEventSourceMappingInputDict))
+    client.delete_event_source_mapping(_request(DeleteEventSourceMappingInput))
+    client.delete_event_source_mapping(_request(DeleteEventSourceMappingInputDict))
+    client.delete_function(function_name=_)
+    client.delete_function(**_request(DeleteFunctionInputDict))
+    client.delete_function(_request(DeleteFunctionInput))
+    client.delete_function(_request(DeleteFunctionInputDict))
+    client.delete_function_code_signing_config(function_name=_)
+    client.delete_function_code_signing_config(
+        **_request(DeleteFunctionCodeSigningConfigInputDict)
+    )
+    client.delete_function_code_signing_config(
+        _request(DeleteFunctionCodeSigningConfigInput)
+    )
+    client.delete_function_code_signing_config(
+        _request(DeleteFunctionCodeSigningConfigInputDict)
+    )
+    client.delete_function_concurrency(function_name=_)
+    client.delete_function_concurrency(**_request(DeleteFunctionConcurrencyInputDict))
+    client.delete_function_concurrency(_request(DeleteFunctionConcurrencyInput))
+    client.delete_function_concurrency(_request(DeleteFunctionConcurrencyInputDict))
+    client.delete_function_event_invoke_config(function_name=_)
+    client.delete_function_event_invoke_config(
+        **_request(DeleteFunctionEventInvokeConfigInputDict)
+    )
+    client.delete_function_event_invoke_config(
+        _request(DeleteFunctionEventInvokeConfigInput)
+    )
+    client.delete_function_event_invoke_config(
+        _request(DeleteFunctionEventInvokeConfigInputDict)
+    )
+    client.delete_function_url_config(function_name=_)
+    client.delete_function_url_config(**_request(DeleteFunctionUrlConfigInputDict))
+    client.delete_function_url_config(_request(DeleteFunctionUrlConfigInput))
+    client.delete_function_url_config(_request(DeleteFunctionUrlConfigInputDict))
+    client.delete_layer_version(layer_name=_)
+    client.delete_layer_version(**_request(DeleteLayerVersionInputDict))
+    client.delete_layer_version(_request(DeleteLayerVersionInput))
+    client.delete_layer_version(_request(DeleteLayerVersionInputDict))
+    client.delete_provisioned_concurrency_config(function_name=_, qualifier=_)
+    client.delete_provisioned_concurrency_config(
+        **_request(DeleteProvisionedConcurrencyConfigInputDict)
+    )
+    client.delete_provisioned_concurrency_config(
+        _request(DeleteProvisionedConcurrencyConfigInput)
+    )
+    client.delete_provisioned_concurrency_config(
+        _request(DeleteProvisionedConcurrencyConfigInputDict)
+    )
+    client.delete_resource_policy(resource_arn=_)
+    client.delete_resource_policy(**_request(DeleteResourcePolicyInputDict))
+    client.delete_resource_policy(_request(DeleteResourcePolicyInput))
+    client.delete_resource_policy(_request(DeleteResourcePolicyInputDict))
+    client.get_account_settings()
+    client.get_account_settings(**_request(GetAccountSettingsInputDict))
+    client.get_account_settings(_request(GetAccountSettingsInput))
+    client.get_account_settings(_request(GetAccountSettingsInputDict))
+    client.get_alias(function_name=_, name=_)
+    client.get_alias(**_request(GetAliasInputDict))
+    client.get_alias(_request(GetAliasInput))
+    client.get_alias(_request(GetAliasInputDict))
+    client.get_capacity_provider(capacity_provider_name=_)
+    client.get_capacity_provider(**_request(GetCapacityProviderInputDict))
+    client.get_capacity_provider(_request(GetCapacityProviderInput))
+    client.get_capacity_provider(_request(GetCapacityProviderInputDict))
+    client.get_code_signing_config(code_signing_config_arn=_)
+    client.get_code_signing_config(**_request(GetCodeSigningConfigInputDict))
+    client.get_code_signing_config(_request(GetCodeSigningConfigInput))
+    client.get_code_signing_config(_request(GetCodeSigningConfigInputDict))
+    client.get_durable_execution(durable_execution_arn=_)
+    client.get_durable_execution(**_request(GetDurableExecutionInputDict))
+    client.get_durable_execution(_request(GetDurableExecutionInput))
+    client.get_durable_execution(_request(GetDurableExecutionInputDict))
+    client.get_durable_execution_history(durable_execution_arn=_)
+    client.get_durable_execution_history(
+        **_request(GetDurableExecutionHistoryInputDict)
+    )
+    client.get_durable_execution_history(_request(GetDurableExecutionHistoryInput))
+    client.get_durable_execution_history(_request(GetDurableExecutionHistoryInputDict))
+    client.get_durable_execution_state(durable_execution_arn=_, checkpoint_token=_)
+    client.get_durable_execution_state(**_request(GetDurableExecutionStateInputDict))
+    client.get_durable_execution_state(_request(GetDurableExecutionStateInput))
+    client.get_durable_execution_state(_request(GetDurableExecutionStateInputDict))
+    client.get_event_source_mapping(uuid=_)
+    client.get_event_source_mapping(**_request(GetEventSourceMappingInputDict))
+    client.get_event_source_mapping(_request(GetEventSourceMappingInput))
+    client.get_event_source_mapping(_request(GetEventSourceMappingInputDict))
+    client.get_function(function_name=_)
+    client.get_function(**_request(GetFunctionInputDict))
+    client.get_function(_request(GetFunctionInput))
+    client.get_function(_request(GetFunctionInputDict))
+    client.get_function_code_signing_config(function_name=_)
+    client.get_function_code_signing_config(
+        **_request(GetFunctionCodeSigningConfigInputDict)
+    )
+    client.get_function_code_signing_config(_request(GetFunctionCodeSigningConfigInput))
+    client.get_function_code_signing_config(
+        _request(GetFunctionCodeSigningConfigInputDict)
+    )
+    client.get_function_concurrency(function_name=_)
+    client.get_function_concurrency(**_request(GetFunctionConcurrencyInputDict))
+    client.get_function_concurrency(_request(GetFunctionConcurrencyInput))
+    client.get_function_concurrency(_request(GetFunctionConcurrencyInputDict))
+    client.get_function_configuration(function_name=_)
+    client.get_function_configuration(**_request(GetFunctionConfigurationInputDict))
+    client.get_function_configuration(_request(GetFunctionConfigurationInput))
+    client.get_function_configuration(_request(GetFunctionConfigurationInputDict))
+    client.get_function_event_invoke_config(function_name=_)
+    client.get_function_event_invoke_config(
+        **_request(GetFunctionEventInvokeConfigInputDict)
+    )
+    client.get_function_event_invoke_config(_request(GetFunctionEventInvokeConfigInput))
+    client.get_function_event_invoke_config(
+        _request(GetFunctionEventInvokeConfigInputDict)
+    )
+    client.get_function_recursion_config(function_name=_)
+    client.get_function_recursion_config(
+        **_request(GetFunctionRecursionConfigInputDict)
+    )
+    client.get_function_recursion_config(_request(GetFunctionRecursionConfigInput))
+    client.get_function_recursion_config(_request(GetFunctionRecursionConfigInputDict))
+    client.get_function_scaling_config(function_name=_, qualifier=_)
+    client.get_function_scaling_config(**_request(GetFunctionScalingConfigInputDict))
+    client.get_function_scaling_config(_request(GetFunctionScalingConfigInput))
+    client.get_function_scaling_config(_request(GetFunctionScalingConfigInputDict))
+    client.get_function_url_config(function_name=_)
+    client.get_function_url_config(**_request(GetFunctionUrlConfigInputDict))
+    client.get_function_url_config(_request(GetFunctionUrlConfigInput))
+    client.get_function_url_config(_request(GetFunctionUrlConfigInputDict))
+    client.get_layer_version(layer_name=_)
+    client.get_layer_version(**_request(GetLayerVersionInputDict))
+    client.get_layer_version(_request(GetLayerVersionInput))
+    client.get_layer_version(_request(GetLayerVersionInputDict))
+    client.get_layer_version_by_arn(arn=_)
+    client.get_layer_version_by_arn(**_request(GetLayerVersionByArnInputDict))
+    client.get_layer_version_by_arn(_request(GetLayerVersionByArnInput))
+    client.get_layer_version_by_arn(_request(GetLayerVersionByArnInputDict))
+    client.get_layer_version_policy(layer_name=_)
+    client.get_layer_version_policy(**_request(GetLayerVersionPolicyInputDict))
+    client.get_layer_version_policy(_request(GetLayerVersionPolicyInput))
+    client.get_layer_version_policy(_request(GetLayerVersionPolicyInputDict))
+    client.get_policy(function_name=_)
+    client.get_policy(**_request(GetPolicyInputDict))
+    client.get_policy(_request(GetPolicyInput))
+    client.get_policy(_request(GetPolicyInputDict))
+    client.get_provisioned_concurrency_config(function_name=_, qualifier=_)
+    client.get_provisioned_concurrency_config(
+        **_request(GetProvisionedConcurrencyConfigInputDict)
+    )
+    client.get_provisioned_concurrency_config(
+        _request(GetProvisionedConcurrencyConfigInput)
+    )
+    client.get_provisioned_concurrency_config(
+        _request(GetProvisionedConcurrencyConfigInputDict)
+    )
+    client.get_resource_policy(resource_arn=_)
+    client.get_resource_policy(**_request(GetResourcePolicyInputDict))
+    client.get_resource_policy(_request(GetResourcePolicyInput))
+    client.get_resource_policy(_request(GetResourcePolicyInputDict))
+    client.get_runtime_management_config(function_name=_)
+    client.get_runtime_management_config(
+        **_request(GetRuntimeManagementConfigInputDict)
+    )
+    client.get_runtime_management_config(_request(GetRuntimeManagementConfigInput))
+    client.get_runtime_management_config(_request(GetRuntimeManagementConfigInputDict))
+    client.invoke(function_name=_)
+    client.invoke(**_request(InvokeInputDict))
+    client.invoke(_request(InvokeInput))
+    client.invoke(_request(InvokeInputDict))
+    client.invoke_async(function_name=_, invoke_args=_)
+    client.invoke_async(**_request(InvokeAsyncInputDict))
+    client.invoke_async(_request(InvokeAsyncInput))
+    client.invoke_async(_request(InvokeAsyncInputDict))
+    client.list_aliases(function_name=_)
+    client.list_aliases(**_request(ListAliasesInputDict))
+    client.list_aliases(_request(ListAliasesInput))
+    client.list_aliases(_request(ListAliasesInputDict))
+    client.list_capacity_providers()
+    client.list_capacity_providers(**_request(ListCapacityProvidersInputDict))
+    client.list_capacity_providers(_request(ListCapacityProvidersInput))
+    client.list_capacity_providers(_request(ListCapacityProvidersInputDict))
+    client.list_code_signing_configs()
+    client.list_code_signing_configs(**_request(ListCodeSigningConfigsInputDict))
+    client.list_code_signing_configs(_request(ListCodeSigningConfigsInput))
+    client.list_code_signing_configs(_request(ListCodeSigningConfigsInputDict))
+    client.list_durable_executions_by_function(function_name=_)
+    client.list_durable_executions_by_function(
+        **_request(ListDurableExecutionsByFunctionInputDict)
+    )
+    client.list_durable_executions_by_function(
+        _request(ListDurableExecutionsByFunctionInput)
+    )
+    client.list_durable_executions_by_function(
+        _request(ListDurableExecutionsByFunctionInputDict)
+    )
+    client.list_event_source_mappings()
+    client.list_event_source_mappings(**_request(ListEventSourceMappingsInputDict))
+    client.list_event_source_mappings(_request(ListEventSourceMappingsInput))
+    client.list_event_source_mappings(_request(ListEventSourceMappingsInputDict))
+    client.list_function_event_invoke_configs(function_name=_)
+    client.list_function_event_invoke_configs(
+        **_request(ListFunctionEventInvokeConfigsInputDict)
+    )
+    client.list_function_event_invoke_configs(
+        _request(ListFunctionEventInvokeConfigsInput)
+    )
+    client.list_function_event_invoke_configs(
+        _request(ListFunctionEventInvokeConfigsInputDict)
+    )
+    client.list_functions()
+    client.list_functions(**_request(ListFunctionsInputDict))
+    client.list_functions(_request(ListFunctionsInput))
+    client.list_functions(_request(ListFunctionsInputDict))
+    client.list_functions_by_code_signing_config(code_signing_config_arn=_)
+    client.list_functions_by_code_signing_config(
+        **_request(ListFunctionsByCodeSigningConfigInputDict)
+    )
+    client.list_functions_by_code_signing_config(
+        _request(ListFunctionsByCodeSigningConfigInput)
+    )
+    client.list_functions_by_code_signing_config(
+        _request(ListFunctionsByCodeSigningConfigInputDict)
+    )
+    client.list_function_url_configs(function_name=_)
+    client.list_function_url_configs(**_request(ListFunctionUrlConfigsInputDict))
+    client.list_function_url_configs(_request(ListFunctionUrlConfigsInput))
+    client.list_function_url_configs(_request(ListFunctionUrlConfigsInputDict))
+    client.list_function_versions_by_capacity_provider(capacity_provider_name=_)
+    client.list_function_versions_by_capacity_provider(
+        **_request(ListFunctionVersionsByCapacityProviderInputDict)
+    )
+    client.list_function_versions_by_capacity_provider(
+        _request(ListFunctionVersionsByCapacityProviderInput)
+    )
+    client.list_function_versions_by_capacity_provider(
+        _request(ListFunctionVersionsByCapacityProviderInputDict)
+    )
+    client.list_layers()
+    client.list_layers(**_request(ListLayersInputDict))
+    client.list_layers(_request(ListLayersInput))
+    client.list_layers(_request(ListLayersInputDict))
+    client.list_layer_versions(layer_name=_)
+    client.list_layer_versions(**_request(ListLayerVersionsInputDict))
+    client.list_layer_versions(_request(ListLayerVersionsInput))
+    client.list_layer_versions(_request(ListLayerVersionsInputDict))
+    client.list_provisioned_concurrency_configs(function_name=_)
+    client.list_provisioned_concurrency_configs(
+        **_request(ListProvisionedConcurrencyConfigsInputDict)
+    )
+    client.list_provisioned_concurrency_configs(
+        _request(ListProvisionedConcurrencyConfigsInput)
+    )
+    client.list_provisioned_concurrency_configs(
+        _request(ListProvisionedConcurrencyConfigsInputDict)
+    )
+    client.list_tags(resource=_)
+    client.list_tags(**_request(ListTagsInputDict))
+    client.list_tags(_request(ListTagsInput))
+    client.list_tags(_request(ListTagsInputDict))
+    client.list_versions_by_function(function_name=_)
+    client.list_versions_by_function(**_request(ListVersionsByFunctionInputDict))
+    client.list_versions_by_function(_request(ListVersionsByFunctionInput))
+    client.list_versions_by_function(_request(ListVersionsByFunctionInputDict))
+    client.publish_layer_version(layer_name=_, content=_)
+    client.publish_layer_version(**_request(PublishLayerVersionInputDict))
+    client.publish_layer_version(_request(PublishLayerVersionInput))
+    client.publish_layer_version(_request(PublishLayerVersionInputDict))
+    client.publish_version(function_name=_)
+    client.publish_version(**_request(PublishVersionInputDict))
+    client.publish_version(_request(PublishVersionInput))
+    client.publish_version(_request(PublishVersionInputDict))
+    client.put_function_code_signing_config(code_signing_config_arn=_, function_name=_)
+    client.put_function_code_signing_config(
+        **_request(PutFunctionCodeSigningConfigInputDict)
+    )
+    client.put_function_code_signing_config(_request(PutFunctionCodeSigningConfigInput))
+    client.put_function_code_signing_config(
+        _request(PutFunctionCodeSigningConfigInputDict)
+    )
+    client.put_function_concurrency(function_name=_, reserved_concurrent_executions=_)
+    client.put_function_concurrency(**_request(PutFunctionConcurrencyInputDict))
+    client.put_function_concurrency(_request(PutFunctionConcurrencyInput))
+    client.put_function_concurrency(_request(PutFunctionConcurrencyInputDict))
+    client.put_function_event_invoke_config(function_name=_)
+    client.put_function_event_invoke_config(
+        **_request(PutFunctionEventInvokeConfigInputDict)
+    )
+    client.put_function_event_invoke_config(_request(PutFunctionEventInvokeConfigInput))
+    client.put_function_event_invoke_config(
+        _request(PutFunctionEventInvokeConfigInputDict)
+    )
+    client.put_function_recursion_config(function_name=_, recursive_loop=_)
+    client.put_function_recursion_config(
+        **_request(PutFunctionRecursionConfigInputDict)
+    )
+    client.put_function_recursion_config(_request(PutFunctionRecursionConfigInput))
+    client.put_function_recursion_config(_request(PutFunctionRecursionConfigInputDict))
+    client.put_function_scaling_config(function_name=_, qualifier=_)
+    client.put_function_scaling_config(**_request(PutFunctionScalingConfigInputDict))
+    client.put_function_scaling_config(_request(PutFunctionScalingConfigInput))
+    client.put_function_scaling_config(_request(PutFunctionScalingConfigInputDict))
+    client.put_provisioned_concurrency_config(
+        function_name=_, qualifier=_, provisioned_concurrent_executions=_
+    )
+    client.put_provisioned_concurrency_config(
+        **_request(PutProvisionedConcurrencyConfigInputDict)
+    )
+    client.put_provisioned_concurrency_config(
+        _request(PutProvisionedConcurrencyConfigInput)
+    )
+    client.put_provisioned_concurrency_config(
+        _request(PutProvisionedConcurrencyConfigInputDict)
+    )
+    client.put_resource_policy(resource_arn=_, policy=_)
+    client.put_resource_policy(**_request(PutResourcePolicyInputDict))
+    client.put_resource_policy(_request(PutResourcePolicyInput))
+    client.put_resource_policy(_request(PutResourcePolicyInputDict))
+    client.put_runtime_management_config(function_name=_, update_runtime_on=_)
+    client.put_runtime_management_config(
+        **_request(PutRuntimeManagementConfigInputDict)
+    )
+    client.put_runtime_management_config(_request(PutRuntimeManagementConfigInput))
+    client.put_runtime_management_config(_request(PutRuntimeManagementConfigInputDict))
+    client.remove_layer_version_permission(layer_name=_, statement_id=_)
+    client.remove_layer_version_permission(
+        **_request(RemoveLayerVersionPermissionInputDict)
+    )
+    client.remove_layer_version_permission(_request(RemoveLayerVersionPermissionInput))
+    client.remove_layer_version_permission(
+        _request(RemoveLayerVersionPermissionInputDict)
+    )
+    client.remove_permission(function_name=_, statement_id=_)
+    client.remove_permission(**_request(RemovePermissionInputDict))
+    client.remove_permission(_request(RemovePermissionInput))
+    client.remove_permission(_request(RemovePermissionInputDict))
+    client.send_durable_execution_callback_failure(callback_id=_)
+    client.send_durable_execution_callback_failure(
+        **_request(SendDurableExecutionCallbackFailureInputDict)
+    )
+    client.send_durable_execution_callback_failure(
+        _request(SendDurableExecutionCallbackFailureInput)
+    )
+    client.send_durable_execution_callback_failure(
+        _request(SendDurableExecutionCallbackFailureInputDict)
+    )
+    client.send_durable_execution_callback_heartbeat(callback_id=_)
+    client.send_durable_execution_callback_heartbeat(
+        **_request(SendDurableExecutionCallbackHeartbeatInputDict)
+    )
+    client.send_durable_execution_callback_heartbeat(
+        _request(SendDurableExecutionCallbackHeartbeatInput)
+    )
+    client.send_durable_execution_callback_heartbeat(
+        _request(SendDurableExecutionCallbackHeartbeatInputDict)
+    )
+    client.send_durable_execution_callback_success(callback_id=_)
+    client.send_durable_execution_callback_success(
+        **_request(SendDurableExecutionCallbackSuccessInputDict)
+    )
+    client.send_durable_execution_callback_success(
+        _request(SendDurableExecutionCallbackSuccessInput)
+    )
+    client.send_durable_execution_callback_success(
+        _request(SendDurableExecutionCallbackSuccessInputDict)
+    )
+    client.stop_durable_execution(durable_execution_arn=_)
+    client.stop_durable_execution(**_request(StopDurableExecutionInputDict))
+    client.stop_durable_execution(_request(StopDurableExecutionInput))
+    client.stop_durable_execution(_request(StopDurableExecutionInputDict))
+    client.tag_resource(resource=_, tags=_)
+    client.tag_resource(**_request(TagResourceInputDict))
+    client.tag_resource(_request(TagResourceInput))
+    client.tag_resource(_request(TagResourceInputDict))
+    client.untag_resource(resource=_, tag_keys=_)
+    client.untag_resource(**_request(UntagResourceInputDict))
+    client.untag_resource(_request(UntagResourceInput))
+    client.untag_resource(_request(UntagResourceInputDict))
+    client.update_alias(function_name=_, name=_)
+    client.update_alias(**_request(UpdateAliasInputDict))
+    client.update_alias(_request(UpdateAliasInput))
+    client.update_alias(_request(UpdateAliasInputDict))
+    client.update_capacity_provider(capacity_provider_name=_)
+    client.update_capacity_provider(**_request(UpdateCapacityProviderInputDict))
+    client.update_capacity_provider(_request(UpdateCapacityProviderInput))
+    client.update_capacity_provider(_request(UpdateCapacityProviderInputDict))
+    client.update_code_signing_config(code_signing_config_arn=_)
+    client.update_code_signing_config(**_request(UpdateCodeSigningConfigInputDict))
+    client.update_code_signing_config(_request(UpdateCodeSigningConfigInput))
+    client.update_code_signing_config(_request(UpdateCodeSigningConfigInputDict))
+    client.update_event_source_mapping(uuid=_)
+    client.update_event_source_mapping(**_request(UpdateEventSourceMappingInputDict))
+    client.update_event_source_mapping(_request(UpdateEventSourceMappingInput))
+    client.update_event_source_mapping(_request(UpdateEventSourceMappingInputDict))
+    client.update_function_code(function_name=_)
+    client.update_function_code(**_request(UpdateFunctionCodeInputDict))
+    client.update_function_code(_request(UpdateFunctionCodeInput))
+    client.update_function_code(_request(UpdateFunctionCodeInputDict))
+    client.update_function_configuration(function_name=_)
+    client.update_function_configuration(
+        **_request(UpdateFunctionConfigurationInputDict)
+    )
+    client.update_function_configuration(_request(UpdateFunctionConfigurationInput))
+    client.update_function_configuration(_request(UpdateFunctionConfigurationInputDict))
+    client.update_function_event_invoke_config(function_name=_)
+    client.update_function_event_invoke_config(
+        **_request(UpdateFunctionEventInvokeConfigInputDict)
+    )
+    client.update_function_event_invoke_config(
+        _request(UpdateFunctionEventInvokeConfigInput)
+    )
+    client.update_function_event_invoke_config(
+        _request(UpdateFunctionEventInvokeConfigInputDict)
+    )
+    client.update_function_url_config(function_name=_)
+    client.update_function_url_config(**_request(UpdateFunctionUrlConfigInputDict))
+    client.update_function_url_config(_request(UpdateFunctionUrlConfigInput))
+    client.update_function_url_config(_request(UpdateFunctionUrlConfigInputDict))

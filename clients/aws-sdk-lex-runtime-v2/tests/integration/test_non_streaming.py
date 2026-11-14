@@ -5,7 +5,7 @@
 
 import uuid
 
-from aws_sdk_lex_runtime_v2.models import RecognizeTextInput, RecognizeTextOutput
+from aws_sdk_lex_runtime_v2.models import RecognizeTextOutput
 
 from . import BOT_ALIAS_ID, LOCALE_ID, REGION, create_lex_client
 
@@ -14,13 +14,11 @@ async def test_recognize_text(lex_bot: str) -> None:
     """Test non-streaming RecognizeText operation."""
     async with await create_lex_client(REGION) as client:
         response = await client.recognize_text(
-            input=RecognizeTextInput(
-                bot_id=lex_bot,
-                bot_alias_id=BOT_ALIAS_ID,
-                locale_id=LOCALE_ID,
-                session_id=str(uuid.uuid4()),
-                text="Hello",
-            )
+            bot_id=lex_bot,
+            bot_alias_id=BOT_ALIAS_ID,
+            locale_id=LOCALE_ID,
+            session_id=str(uuid.uuid4()),
+            text="Hello",
         )
 
         assert isinstance(response, RecognizeTextOutput)

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import cast
+from typing import Unpack as _Unpack, cast, overload as _overload
 
 from smithy_aws_core.aio.identity.chain import AsyncIdentityChain
 from smithy_aws_core.config.types import ConfigSource
@@ -21,129 +21,67 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from ..models import (
-        BatchExecuteStatementInput,
         BatchExecuteStatementOutput,
-        BatchGetItemInput,
         BatchGetItemOutput,
-        BatchWriteItemInput,
         BatchWriteItemOutput,
-        CancelBulkOperationInput,
         CancelBulkOperationOutput,
-        CreateBackupInput,
         CreateBackupOutput,
-        CreateGlobalTableInput,
         CreateGlobalTableOutput,
-        CreateTableInput,
         CreateTableOutput,
-        DeleteBackupInput,
         DeleteBackupOutput,
-        DeleteItemInput,
         DeleteItemOutput,
-        DeleteResourcePolicyInput,
         DeleteResourcePolicyOutput,
-        DeleteTableInput,
         DeleteTableOutput,
-        DescribeBackupInput,
         DescribeBackupOutput,
-        DescribeBulkOperationInput,
         DescribeBulkOperationOutput,
-        DescribeContinuousBackupsInput,
         DescribeContinuousBackupsOutput,
-        DescribeContributorInsightsInput,
         DescribeContributorInsightsOutput,
-        DescribeEndpointsInput,
         DescribeEndpointsOutput,
-        DescribeExportInput,
         DescribeExportOutput,
-        DescribeGlobalTableInput,
         DescribeGlobalTableOutput,
-        DescribeGlobalTableSettingsInput,
         DescribeGlobalTableSettingsOutput,
-        DescribeImportInput,
         DescribeImportOutput,
-        DescribeKinesisStreamingDestinationInput,
         DescribeKinesisStreamingDestinationOutput,
-        DescribeLimitsInput,
         DescribeLimitsOutput,
-        DescribeTableInput,
         DescribeTableOutput,
-        DescribeTableReplicaAutoScalingInput,
         DescribeTableReplicaAutoScalingOutput,
-        DescribeTimeToLiveInput,
         DescribeTimeToLiveOutput,
-        DisableKinesisStreamingDestinationInput,
         DisableKinesisStreamingDestinationOutput,
-        EnableKinesisStreamingDestinationInput,
         EnableKinesisStreamingDestinationOutput,
-        ExecuteStatementInput,
         ExecuteStatementOutput,
-        ExecuteTransactionInput,
         ExecuteTransactionOutput,
-        ExportTableToPointInTimeInput,
         ExportTableToPointInTimeOutput,
-        GetItemInput,
         GetItemOutput,
-        GetResourcePolicyInput,
         GetResourcePolicyOutput,
-        ImportTableInput,
         ImportTableOutput,
-        ListBackupsInput,
         ListBackupsOutput,
-        ListBulkOperationsInput,
         ListBulkOperationsOutput,
-        ListContributorInsightsInput,
         ListContributorInsightsOutput,
-        ListExportsInput,
         ListExportsOutput,
-        ListGlobalTablesInput,
         ListGlobalTablesOutput,
-        ListImportsInput,
         ListImportsOutput,
-        ListTablesInput,
         ListTablesOutput,
-        ListTagsOfResourceInput,
         ListTagsOfResourceOutput,
-        PutItemInput,
         PutItemOutput,
-        PutResourcePolicyInput,
         PutResourcePolicyOutput,
-        QueryInput,
         QueryOutput,
-        RestoreTableFromBackupInput,
         RestoreTableFromBackupOutput,
-        RestoreTableToPointInTimeInput,
         RestoreTableToPointInTimeOutput,
-        ScanInput,
         ScanOutput,
-        SearchVectorsInput,
         SearchVectorsOutput,
-        StartBulkPutItemsInput,
         StartBulkPutItemsOutput,
-        TagResourceInput,
         TagResourceOutput,
-        TransactGetItemsInput,
         TransactGetItemsOutput,
-        TransactWriteItemsInput,
         TransactWriteItemsOutput,
-        UntagResourceInput,
         UntagResourceOutput,
-        UpdateContinuousBackupsInput,
         UpdateContinuousBackupsOutput,
-        UpdateContributorInsightsInput,
         UpdateContributorInsightsOutput,
-        UpdateGlobalTableInput,
         UpdateGlobalTableOutput,
-        UpdateGlobalTableSettingsInput,
         UpdateGlobalTableSettingsOutput,
-        UpdateItemInput,
         UpdateItemOutput,
-        UpdateKinesisStreamingDestinationInput,
         UpdateKinesisStreamingDestinationOutput,
-        UpdateTableInput,
         UpdateTableOutput,
-        UpdateTableReplicaAutoScalingInput,
         UpdateTableReplicaAutoScalingOutput,
-        UpdateTimeToLiveInput,
         UpdateTimeToLiveOutput,
     )
 
@@ -175,10 +113,25 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
     Region, providing built-in high availability and data durability.
     """
 
-    _client_plugins = (aws_user_agent_plugin, dynamodb_retry_plugin, user_agent_plugin)
+    _client_plugins = (user_agent_plugin, aws_user_agent_plugin, dynamodb_retry_plugin)
 
+    @_overload
     async def batch_execute_statement(
-        self, input: BatchExecuteStatementInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.BatchExecuteStatementInput
+        | _models.BatchExecuteStatementInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> BatchExecuteStatementOutput: ...
+
+    @_overload
+    async def batch_execute_statement(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.BatchExecuteStatementInputDict],
     ) -> BatchExecuteStatementOutput:
         """
         This operation allows you to perform batch reads or writes on data
@@ -201,8 +154,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
             field of the `BatchStatementResponse` for each statement.
 
         Args:
-            input:
-                An instance of `BatchExecuteStatementInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -212,10 +163,33 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `BatchExecuteStatementOutput`.
         """
-        return await self._invoke(input, _models.BATCH_EXECUTE_STATEMENT, [], plugins)
 
+    async def batch_execute_statement(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> BatchExecuteStatementOutput:
+        return await self._invoke(
+            self._select_input(_models.BATCH_EXECUTE_STATEMENT, args, kwargs),
+            _models.BATCH_EXECUTE_STATEMENT,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def batch_get_item(
-        self, input: BatchGetItemInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.BatchGetItemInput | _models.BatchGetItemInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> BatchGetItemOutput: ...
+
+    @_overload
+    async def batch_get_item(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.BatchGetItemInputDict],
     ) -> BatchGetItemOutput:
         """
         The `BatchGetItem` operation returns the attributes of one or more items
@@ -283,8 +257,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
             specified multiple times.
 
         Args:
-            input:
-                An instance of `BatchGetItemInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -294,10 +266,33 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `BatchGetItemOutput`.
         """
-        return await self._invoke(input, _models.BATCH_GET_ITEM, [], plugins)
 
+    async def batch_get_item(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> BatchGetItemOutput:
+        return await self._invoke(
+            self._select_input(_models.BATCH_GET_ITEM, args, kwargs),
+            _models.BATCH_GET_ITEM,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def batch_write_item(
-        self, input: BatchWriteItemInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.BatchWriteItemInput | _models.BatchWriteItemInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> BatchWriteItemOutput: ...
+
+    @_overload
+    async def batch_write_item(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.BatchWriteItemInputDict],
     ) -> BatchWriteItemOutput:
         """
         The `BatchWriteItem` operation puts or deletes multiple items in one or
@@ -395,8 +390,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
           is 1024 bytes.
 
         Args:
-            input:
-                An instance of `BatchWriteItemInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -406,10 +399,34 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `BatchWriteItemOutput`.
         """
-        return await self._invoke(input, _models.BATCH_WRITE_ITEM, [], plugins)
 
+    async def batch_write_item(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> BatchWriteItemOutput:
+        return await self._invoke(
+            self._select_input(_models.BATCH_WRITE_ITEM, args, kwargs),
+            _models.BATCH_WRITE_ITEM,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def cancel_bulk_operation(
-        self, input: CancelBulkOperationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CancelBulkOperationInput
+        | _models.CancelBulkOperationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CancelBulkOperationOutput: ...
+
+    @_overload
+    async def cancel_bulk_operation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CancelBulkOperationInputDict],
     ) -> CancelBulkOperationOutput:
         """
         Cancels an in-progress bulk operation asynchronously. Cancellation
@@ -418,8 +435,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         terminal status.
 
         Args:
-            input:
-                An instance of `CancelBulkOperationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -429,10 +444,33 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `CancelBulkOperationOutput`.
         """
-        return await self._invoke(input, _models.CANCEL_BULK_OPERATION, [], plugins)
 
+    async def cancel_bulk_operation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CancelBulkOperationOutput:
+        return await self._invoke(
+            self._select_input(_models.CANCEL_BULK_OPERATION, args, kwargs),
+            _models.CANCEL_BULK_OPERATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_backup(
-        self, input: CreateBackupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateBackupInput | _models.CreateBackupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateBackupOutput: ...
+
+    @_overload
+    async def create_backup(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateBackupInputDict],
     ) -> CreateBackupOutput:
         """
         Creates a backup for an existing table.
@@ -469,8 +507,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         - Provisioned read and write capacity
 
         Args:
-            input:
-                An instance of `CreateBackupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -480,10 +516,33 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `CreateBackupOutput`.
         """
-        return await self._invoke(input, _models.CREATE_BACKUP, [], plugins)
 
+    async def create_backup(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateBackupOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_BACKUP, args, kwargs),
+            _models.CREATE_BACKUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_global_table(
-        self, input: CreateGlobalTableInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateGlobalTableInput | _models.CreateGlobalTableInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateGlobalTableOutput: ...
+
+    @_overload
+    async def create_global_table(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateGlobalTableInputDict],
     ) -> CreateGlobalTableOutput:
         """
         Creates a global table from an existing table. A global table creates a
@@ -545,8 +604,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
             matching secondary indexes across your global table.
 
         Args:
-            input:
-                An instance of `CreateGlobalTableInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -556,10 +613,33 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `CreateGlobalTableOutput`.
         """
-        return await self._invoke(input, _models.CREATE_GLOBAL_TABLE, [], plugins)
 
+    async def create_global_table(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateGlobalTableOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_GLOBAL_TABLE, args, kwargs),
+            _models.CREATE_GLOBAL_TABLE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_table(
-        self, input: CreateTableInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateTableInput | _models.CreateTableInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateTableOutput: ...
+
+    @_overload
+    async def create_table(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateTableInputDict],
     ) -> CreateTableOutput:
         """
         The `CreateTable` operation adds a new table to your account. In an
@@ -582,8 +662,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         You can use the `DescribeTable` action to check the table status.
 
         Args:
-            input:
-                An instance of `CreateTableInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -593,10 +671,33 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `CreateTableOutput`.
         """
-        return await self._invoke(input, _models.CREATE_TABLE, [], plugins)
 
+    async def create_table(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateTableOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_TABLE, args, kwargs),
+            _models.CREATE_TABLE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_backup(
-        self, input: DeleteBackupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteBackupInput | _models.DeleteBackupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteBackupOutput: ...
+
+    @_overload
+    async def delete_backup(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteBackupInputDict],
     ) -> DeleteBackupOutput:
         """
         Deletes an existing backup of a table.
@@ -604,8 +705,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         You can call `DeleteBackup` at a maximum rate of 10 times per second.
 
         Args:
-            input:
-                An instance of `DeleteBackupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -615,10 +714,33 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `DeleteBackupOutput`.
         """
-        return await self._invoke(input, _models.DELETE_BACKUP, [], plugins)
 
+    async def delete_backup(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteBackupOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_BACKUP, args, kwargs),
+            _models.DELETE_BACKUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_item(
-        self, input: DeleteItemInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteItemInput | _models.DeleteItemInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteItemOutput: ...
+
+    @_overload
+    async def delete_item(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteItemInputDict],
     ) -> DeleteItemOutput:
         """
         Deletes a single item in a table by primary key. You can perform a
@@ -638,8 +760,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         delete. Otherwise, the item is not deleted.
 
         Args:
-            input:
-                An instance of `DeleteItemInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -649,10 +769,34 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `DeleteItemOutput`.
         """
-        return await self._invoke(input, _models.DELETE_ITEM, [], plugins)
 
+    async def delete_item(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteItemOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_ITEM, args, kwargs),
+            _models.DELETE_ITEM,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_resource_policy(
-        self, input: DeleteResourcePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteResourcePolicyInput
+        | _models.DeleteResourcePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteResourcePolicyOutput: ...
+
+    @_overload
+    async def delete_resource_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteResourcePolicyInputDict],
     ) -> DeleteResourcePolicyOutput:
         """
         Deletes the resource-based policy attached to the resource, which can be
@@ -677,8 +821,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
             `GetResourcePolicy` request again.
 
         Args:
-            input:
-                An instance of `DeleteResourcePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -688,10 +830,33 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `DeleteResourcePolicyOutput`.
         """
-        return await self._invoke(input, _models.DELETE_RESOURCE_POLICY, [], plugins)
 
+    async def delete_resource_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteResourcePolicyOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_RESOURCE_POLICY, args, kwargs),
+            _models.DELETE_RESOURCE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_table(
-        self, input: DeleteTableInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteTableInput | _models.DeleteTableInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteTableOutput: ...
+
+    @_overload
+    async def delete_table(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteTableInputDict],
     ) -> DeleteTableOutput:
         """
         The `DeleteTable` operation deletes a table and all of its items. After
@@ -718,8 +883,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Use the `DescribeTable` action to check the status of the table.
 
         Args:
-            input:
-                An instance of `DeleteTableInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -729,10 +892,33 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `DeleteTableOutput`.
         """
-        return await self._invoke(input, _models.DELETE_TABLE, [], plugins)
 
+    async def delete_table(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteTableOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_TABLE, args, kwargs),
+            _models.DELETE_TABLE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def describe_backup(
-        self, input: DescribeBackupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeBackupInput | _models.DescribeBackupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeBackupOutput: ...
+
+    @_overload
+    async def describe_backup(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeBackupInputDict],
     ) -> DescribeBackupOutput:
         """
         Describes an existing backup of a table.
@@ -740,8 +926,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         You can call `DescribeBackup` at a maximum rate of 10 times per second.
 
         Args:
-            input:
-                An instance of `DescribeBackupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -751,17 +935,39 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `DescribeBackupOutput`.
         """
-        return await self._invoke(input, _models.DESCRIBE_BACKUP, [], plugins)
 
+    async def describe_backup(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeBackupOutput:
+        return await self._invoke(
+            self._select_input(_models.DESCRIBE_BACKUP, args, kwargs),
+            _models.DESCRIBE_BACKUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def describe_bulk_operation(
-        self, input: DescribeBulkOperationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeBulkOperationInput
+        | _models.DescribeBulkOperationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeBulkOperationOutput: ...
+
+    @_overload
+    async def describe_bulk_operation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeBulkOperationInputDict],
     ) -> DescribeBulkOperationOutput:
         """
         Describes the specified bulk operation.
 
         Args:
-            input:
-                An instance of `DescribeBulkOperationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -771,10 +977,34 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `DescribeBulkOperationOutput`.
         """
-        return await self._invoke(input, _models.DESCRIBE_BULK_OPERATION, [], plugins)
 
+    async def describe_bulk_operation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeBulkOperationOutput:
+        return await self._invoke(
+            self._select_input(_models.DESCRIBE_BULK_OPERATION, args, kwargs),
+            _models.DESCRIBE_BULK_OPERATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def describe_continuous_backups(
-        self, input: DescribeContinuousBackupsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeContinuousBackupsInput
+        | _models.DescribeContinuousBackupsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeContinuousBackupsOutput: ...
+
+    @_overload
+    async def describe_continuous_backups(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeContinuousBackupsInputDict],
     ) -> DescribeContinuousBackupsOutput:
         """
         Checks the status of continuous backups and point in time recovery on
@@ -795,8 +1025,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         per second.
 
         Args:
-            input:
-                An instance of `DescribeContinuousBackupsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -806,22 +1034,40 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `DescribeContinuousBackupsOutput`.
         """
+
+    async def describe_continuous_backups(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeContinuousBackupsOutput:
         return await self._invoke(
-            input, _models.DESCRIBE_CONTINUOUS_BACKUPS, [], plugins
+            self._select_input(_models.DESCRIBE_CONTINUOUS_BACKUPS, args, kwargs),
+            _models.DESCRIBE_CONTINUOUS_BACKUPS,
+            [],
+            plugins,
         )
 
+    @_overload
     async def describe_contributor_insights(
         self,
-        input: DescribeContributorInsightsInput,
+        request: _models.DescribeContributorInsightsInput
+        | _models.DescribeContributorInsightsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeContributorInsightsOutput: ...
+
+    @_overload
+    async def describe_contributor_insights(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeContributorInsightsInputDict],
     ) -> DescribeContributorInsightsOutput:
         """
         Returns information about contributor insights for a given table or
         global secondary index.
 
         Args:
-            input:
-                An instance of `DescribeContributorInsightsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -831,12 +1077,33 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `DescribeContributorInsightsOutput`.
         """
+
+    async def describe_contributor_insights(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeContributorInsightsOutput:
         return await self._invoke(
-            input, _models.DESCRIBE_CONTRIBUTOR_INSIGHTS, [], plugins
+            self._select_input(_models.DESCRIBE_CONTRIBUTOR_INSIGHTS, args, kwargs),
+            _models.DESCRIBE_CONTRIBUTOR_INSIGHTS,
+            [],
+            plugins,
         )
 
+    @_overload
     async def describe_endpoints(
-        self, input: DescribeEndpointsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeEndpointsInput | _models.DescribeEndpointsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeEndpointsOutput: ...
+
+    @_overload
+    async def describe_endpoints(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeEndpointsInputDict],
     ) -> DescribeEndpointsOutput:
         """
         Returns the regional endpoint information. For more information on
@@ -844,8 +1111,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         privacy](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/inter-network-traffic-privacy.html#inter-network-traffic-DescribeEndpoints).
 
         Args:
-            input:
-                An instance of `DescribeEndpointsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -855,17 +1120,38 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `DescribeEndpointsOutput`.
         """
-        return await self._invoke(input, _models.DESCRIBE_ENDPOINTS, [], plugins)
 
+    async def describe_endpoints(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeEndpointsOutput:
+        return await self._invoke(
+            self._select_input(_models.DESCRIBE_ENDPOINTS, args, kwargs),
+            _models.DESCRIBE_ENDPOINTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def describe_export(
-        self, input: DescribeExportInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeExportInput | _models.DescribeExportInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeExportOutput: ...
+
+    @_overload
+    async def describe_export(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeExportInputDict],
     ) -> DescribeExportOutput:
         """
         Describes an existing table export.
 
         Args:
-            input:
-                An instance of `DescribeExportInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -875,10 +1161,34 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `DescribeExportOutput`.
         """
-        return await self._invoke(input, _models.DESCRIBE_EXPORT, [], plugins)
 
+    async def describe_export(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeExportOutput:
+        return await self._invoke(
+            self._select_input(_models.DESCRIBE_EXPORT, args, kwargs),
+            _models.DESCRIBE_EXPORT,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def describe_global_table(
-        self, input: DescribeGlobalTableInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeGlobalTableInput
+        | _models.DescribeGlobalTableInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeGlobalTableOutput: ...
+
+    @_overload
+    async def describe_global_table(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeGlobalTableInputDict],
     ) -> DescribeGlobalTableOutput:
         """
         Returns information about the specified global table.
@@ -899,8 +1209,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
             tables](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html).
 
         Args:
-            input:
-                An instance of `DescribeGlobalTableInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -910,12 +1218,34 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `DescribeGlobalTableOutput`.
         """
-        return await self._invoke(input, _models.DESCRIBE_GLOBAL_TABLE, [], plugins)
 
+    async def describe_global_table(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeGlobalTableOutput:
+        return await self._invoke(
+            self._select_input(_models.DESCRIBE_GLOBAL_TABLE, args, kwargs),
+            _models.DESCRIBE_GLOBAL_TABLE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def describe_global_table_settings(
         self,
-        input: DescribeGlobalTableSettingsInput,
+        request: _models.DescribeGlobalTableSettingsInput
+        | _models.DescribeGlobalTableSettingsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeGlobalTableSettingsOutput: ...
+
+    @_overload
+    async def describe_global_table_settings(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeGlobalTableSettingsInputDict],
     ) -> DescribeGlobalTableSettingsOutput:
         """
         Describes Region-specific settings for a global table.
@@ -936,8 +1266,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
             tables](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html).
 
         Args:
-            input:
-                An instance of `DescribeGlobalTableSettingsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -947,19 +1275,38 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `DescribeGlobalTableSettingsOutput`.
         """
+
+    async def describe_global_table_settings(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeGlobalTableSettingsOutput:
         return await self._invoke(
-            input, _models.DESCRIBE_GLOBAL_TABLE_SETTINGS, [], plugins
+            self._select_input(_models.DESCRIBE_GLOBAL_TABLE_SETTINGS, args, kwargs),
+            _models.DESCRIBE_GLOBAL_TABLE_SETTINGS,
+            [],
+            plugins,
         )
 
+    @_overload
     async def describe_import(
-        self, input: DescribeImportInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeImportInput | _models.DescribeImportInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeImportOutput: ...
+
+    @_overload
+    async def describe_import(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeImportInputDict],
     ) -> DescribeImportOutput:
         """
         Represents the properties of the import.
 
         Args:
-            input:
-                An instance of `DescribeImportInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -969,19 +1316,39 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `DescribeImportOutput`.
         """
-        return await self._invoke(input, _models.DESCRIBE_IMPORT, [], plugins)
 
+    async def describe_import(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeImportOutput:
+        return await self._invoke(
+            self._select_input(_models.DESCRIBE_IMPORT, args, kwargs),
+            _models.DESCRIBE_IMPORT,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def describe_kinesis_streaming_destination(
         self,
-        input: DescribeKinesisStreamingDestinationInput,
+        request: _models.DescribeKinesisStreamingDestinationInput
+        | _models.DescribeKinesisStreamingDestinationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeKinesisStreamingDestinationOutput: ...
+
+    @_overload
+    async def describe_kinesis_streaming_destination(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeKinesisStreamingDestinationInputDict],
     ) -> DescribeKinesisStreamingDestinationOutput:
         """
         Returns information about the status of Kinesis streaming.
 
         Args:
-            input:
-                An instance of `DescribeKinesisStreamingDestinationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -991,12 +1358,35 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `DescribeKinesisStreamingDestinationOutput`.
         """
+
+    async def describe_kinesis_streaming_destination(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeKinesisStreamingDestinationOutput:
         return await self._invoke(
-            input, _models.DESCRIBE_KINESIS_STREAMING_DESTINATION, [], plugins
+            self._select_input(
+                _models.DESCRIBE_KINESIS_STREAMING_DESTINATION, args, kwargs
+            ),
+            _models.DESCRIBE_KINESIS_STREAMING_DESTINATION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def describe_limits(
-        self, input: DescribeLimitsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeLimitsInput | _models.DescribeLimitsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeLimitsOutput: ...
+
+    @_overload
+    async def describe_limits(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeLimitsInputDict],
     ) -> DescribeLimitsOutput:
         """
         Returns the current provisioned-capacity quotas for your Amazon Web
@@ -1066,8 +1456,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         The `DescribeLimits` Request element has no content.
 
         Args:
-            input:
-                An instance of `DescribeLimitsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1077,10 +1465,33 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `DescribeLimitsOutput`.
         """
-        return await self._invoke(input, _models.DESCRIBE_LIMITS, [], plugins)
 
+    async def describe_limits(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeLimitsOutput:
+        return await self._invoke(
+            self._select_input(_models.DESCRIBE_LIMITS, args, kwargs),
+            _models.DESCRIBE_LIMITS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def describe_table(
-        self, input: DescribeTableInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeTableInput | _models.DescribeTableInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeTableOutput: ...
+
+    @_overload
+    async def describe_table(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeTableInputDict],
     ) -> DescribeTableOutput:
         """
         Returns information about the table, including the current status of the
@@ -1095,8 +1506,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
             a few seconds, and then try the `DescribeTable` request again.
 
         Args:
-            input:
-                An instance of `DescribeTableInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1106,20 +1515,40 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `DescribeTableOutput`.
         """
-        return await self._invoke(input, _models.DESCRIBE_TABLE, [], plugins)
 
+    async def describe_table(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeTableOutput:
+        return await self._invoke(
+            self._select_input(_models.DESCRIBE_TABLE, args, kwargs),
+            _models.DESCRIBE_TABLE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def describe_table_replica_auto_scaling(
         self,
-        input: DescribeTableReplicaAutoScalingInput,
+        request: _models.DescribeTableReplicaAutoScalingInput
+        | _models.DescribeTableReplicaAutoScalingInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeTableReplicaAutoScalingOutput: ...
+
+    @_overload
+    async def describe_table_replica_auto_scaling(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeTableReplicaAutoScalingInputDict],
     ) -> DescribeTableReplicaAutoScalingOutput:
         """
         Describes auto scaling settings across replicas of the global table at
         once.
 
         Args:
-            input:
-                An instance of `DescribeTableReplicaAutoScalingInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1129,20 +1558,41 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `DescribeTableReplicaAutoScalingOutput`.
         """
+
+    async def describe_table_replica_auto_scaling(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeTableReplicaAutoScalingOutput:
         return await self._invoke(
-            input, _models.DESCRIBE_TABLE_REPLICA_AUTO_SCALING, [], plugins
+            self._select_input(
+                _models.DESCRIBE_TABLE_REPLICA_AUTO_SCALING, args, kwargs
+            ),
+            _models.DESCRIBE_TABLE_REPLICA_AUTO_SCALING,
+            [],
+            plugins,
         )
 
+    @_overload
     async def describe_time_to_live(
-        self, input: DescribeTimeToLiveInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeTimeToLiveInput | _models.DescribeTimeToLiveInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeTimeToLiveOutput: ...
+
+    @_overload
+    async def describe_time_to_live(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeTimeToLiveInputDict],
     ) -> DescribeTimeToLiveOutput:
         """
         Gives a description of the Time to Live (TTL) status on the specified
         table.
 
         Args:
-            input:
-                An instance of `DescribeTimeToLiveInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1152,20 +1602,40 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `DescribeTimeToLiveOutput`.
         """
-        return await self._invoke(input, _models.DESCRIBE_TIME_TO_LIVE, [], plugins)
 
+    async def describe_time_to_live(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeTimeToLiveOutput:
+        return await self._invoke(
+            self._select_input(_models.DESCRIBE_TIME_TO_LIVE, args, kwargs),
+            _models.DESCRIBE_TIME_TO_LIVE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def disable_kinesis_streaming_destination(
         self,
-        input: DisableKinesisStreamingDestinationInput,
+        request: _models.DisableKinesisStreamingDestinationInput
+        | _models.DisableKinesisStreamingDestinationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DisableKinesisStreamingDestinationOutput: ...
+
+    @_overload
+    async def disable_kinesis_streaming_destination(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DisableKinesisStreamingDestinationInputDict],
     ) -> DisableKinesisStreamingDestinationOutput:
         """
         Stops replication from the DynamoDB table to the Kinesis data stream.
         This is done without deleting either of the resources.
 
         Args:
-            input:
-                An instance of `DisableKinesisStreamingDestinationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1175,14 +1645,36 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `DisableKinesisStreamingDestinationOutput`.
         """
+
+    async def disable_kinesis_streaming_destination(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DisableKinesisStreamingDestinationOutput:
         return await self._invoke(
-            input, _models.DISABLE_KINESIS_STREAMING_DESTINATION, [], plugins
+            self._select_input(
+                _models.DISABLE_KINESIS_STREAMING_DESTINATION, args, kwargs
+            ),
+            _models.DISABLE_KINESIS_STREAMING_DESTINATION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def enable_kinesis_streaming_destination(
         self,
-        input: EnableKinesisStreamingDestinationInput,
+        request: _models.EnableKinesisStreamingDestinationInput
+        | _models.EnableKinesisStreamingDestinationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> EnableKinesisStreamingDestinationOutput: ...
+
+    @_overload
+    async def enable_kinesis_streaming_destination(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.EnableKinesisStreamingDestinationInputDict],
     ) -> EnableKinesisStreamingDestinationOutput:
         """
         Starts table data replication to the specified Kinesis data stream at a
@@ -1191,8 +1683,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         check if streaming to the Kinesis data stream is ACTIVE.
 
         Args:
-            input:
-                An instance of `EnableKinesisStreamingDestinationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1202,12 +1692,35 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `EnableKinesisStreamingDestinationOutput`.
         """
+
+    async def enable_kinesis_streaming_destination(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> EnableKinesisStreamingDestinationOutput:
         return await self._invoke(
-            input, _models.ENABLE_KINESIS_STREAMING_DESTINATION, [], plugins
+            self._select_input(
+                _models.ENABLE_KINESIS_STREAMING_DESTINATION, args, kwargs
+            ),
+            _models.ENABLE_KINESIS_STREAMING_DESTINATION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def execute_statement(
-        self, input: ExecuteStatementInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ExecuteStatementInput | _models.ExecuteStatementInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ExecuteStatementOutput: ...
+
+    @_overload
+    async def execute_statement(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ExecuteStatementInputDict],
     ) -> ExecuteStatementOutput:
         """
         This operation allows you to perform reads and singleton writes on data
@@ -1228,8 +1741,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         set and include `NextToken`.
 
         Args:
-            input:
-                An instance of `ExecuteStatementInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1239,10 +1750,33 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `ExecuteStatementOutput`.
         """
-        return await self._invoke(input, _models.EXECUTE_STATEMENT, [], plugins)
 
+    async def execute_statement(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ExecuteStatementOutput:
+        return await self._invoke(
+            self._select_input(_models.EXECUTE_STATEMENT, args, kwargs),
+            _models.EXECUTE_STATEMENT,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def execute_transaction(
-        self, input: ExecuteTransactionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ExecuteTransactionInput | _models.ExecuteTransactionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ExecuteTransactionOutput: ...
+
+    @_overload
+    async def execute_transaction(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ExecuteTransactionInputDict],
     ) -> ExecuteTransactionOutput:
         """
         This operation allows you to perform transactional reads or writes on
@@ -1257,8 +1791,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
             API.
 
         Args:
-            input:
-                An instance of `ExecuteTransactionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1268,10 +1800,34 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `ExecuteTransactionOutput`.
         """
-        return await self._invoke(input, _models.EXECUTE_TRANSACTION, [], plugins)
 
+    async def execute_transaction(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ExecuteTransactionOutput:
+        return await self._invoke(
+            self._select_input(_models.EXECUTE_TRANSACTION, args, kwargs),
+            _models.EXECUTE_TRANSACTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def export_table_to_point_in_time(
-        self, input: ExportTableToPointInTimeInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ExportTableToPointInTimeInput
+        | _models.ExportTableToPointInTimeInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ExportTableToPointInTimeOutput: ...
+
+    @_overload
+    async def export_table_to_point_in_time(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ExportTableToPointInTimeInputDict],
     ) -> ExportTableToPointInTimeOutput:
         """
         Exports table data to an S3 bucket. The table must have point in time
@@ -1279,8 +1835,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         in time recovery window.
 
         Args:
-            input:
-                An instance of `ExportTableToPointInTimeInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1290,12 +1844,33 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `ExportTableToPointInTimeOutput`.
         """
+
+    async def export_table_to_point_in_time(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ExportTableToPointInTimeOutput:
         return await self._invoke(
-            input, _models.EXPORT_TABLE_TO_POINT_IN_TIME, [], plugins
+            self._select_input(_models.EXPORT_TABLE_TO_POINT_IN_TIME, args, kwargs),
+            _models.EXPORT_TABLE_TO_POINT_IN_TIME,
+            [],
+            plugins,
         )
 
+    @_overload
     async def get_item(
-        self, input: GetItemInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetItemInput | _models.GetItemInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetItemOutput: ...
+
+    @_overload
+    async def get_item(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetItemInputDict],
     ) -> GetItemOutput:
         """
         The `GetItem` operation returns a set of attributes for the item with
@@ -1308,8 +1883,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         eventually consistent read, it always returns the last updated value.
 
         Args:
-            input:
-                An instance of `GetItemInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1319,10 +1892,33 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `GetItemOutput`.
         """
-        return await self._invoke(input, _models.GET_ITEM, [], plugins)
 
+    async def get_item(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetItemOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_ITEM, args, kwargs),
+            _models.GET_ITEM,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_resource_policy(
-        self, input: GetResourcePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetResourcePolicyInput | _models.GetResourcePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetResourcePolicyOutput: ...
+
+    @_overload
+    async def get_resource_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetResourcePolicyInputDict],
     ) -> GetResourcePolicyOutput:
         """
         Returns the resource-based policy document attached to the resource,
@@ -1359,8 +1955,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         for that table.
 
         Args:
-            input:
-                An instance of `GetResourcePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1370,17 +1964,38 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `GetResourcePolicyOutput`.
         """
-        return await self._invoke(input, _models.GET_RESOURCE_POLICY, [], plugins)
 
+    async def get_resource_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetResourcePolicyOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_RESOURCE_POLICY, args, kwargs),
+            _models.GET_RESOURCE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def import_table(
-        self, input: ImportTableInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ImportTableInput | _models.ImportTableInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ImportTableOutput: ...
+
+    @_overload
+    async def import_table(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ImportTableInputDict],
     ) -> ImportTableOutput:
         """
         Imports table data from an S3 bucket.
 
         Args:
-            input:
-                An instance of `ImportTableInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1390,10 +2005,33 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `ImportTableOutput`.
         """
-        return await self._invoke(input, _models.IMPORT_TABLE, [], plugins)
 
+    async def import_table(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ImportTableOutput:
+        return await self._invoke(
+            self._select_input(_models.IMPORT_TABLE, args, kwargs),
+            _models.IMPORT_TABLE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_backups(
-        self, input: ListBackupsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListBackupsInput | _models.ListBackupsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListBackupsOutput: ...
+
+    @_overload
+    async def list_backups(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListBackupsInputDict],
     ) -> ListBackupsOutput:
         """
         List DynamoDB backups that are associated with an Amazon Web Services
@@ -1414,8 +2052,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         API.](https://docs.aws.amazon.com/aws-backup/latest/devguide/API_ListBackupJobs.html)
 
         Args:
-            input:
-                An instance of `ListBackupsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1425,10 +2061,33 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `ListBackupsOutput`.
         """
-        return await self._invoke(input, _models.LIST_BACKUPS, [], plugins)
 
+    async def list_backups(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListBackupsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_BACKUPS, args, kwargs),
+            _models.LIST_BACKUPS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_bulk_operations(
-        self, input: ListBulkOperationsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListBulkOperationsInput | _models.ListBulkOperationsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListBulkOperationsOutput: ...
+
+    @_overload
+    async def list_bulk_operations(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListBulkOperationsInputDict],
     ) -> ListBulkOperationsOutput:
         """
         Lists bulk operations that started within the past 90 days for the
@@ -1437,8 +2096,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         `NextToken` parameter to retrieve additional results.
 
         Args:
-            input:
-                An instance of `ListBulkOperationsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1448,18 +2105,40 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `ListBulkOperationsOutput`.
         """
-        return await self._invoke(input, _models.LIST_BULK_OPERATIONS, [], plugins)
 
+    async def list_bulk_operations(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListBulkOperationsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_BULK_OPERATIONS, args, kwargs),
+            _models.LIST_BULK_OPERATIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_contributor_insights(
-        self, input: ListContributorInsightsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListContributorInsightsInput
+        | _models.ListContributorInsightsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListContributorInsightsOutput: ...
+
+    @_overload
+    async def list_contributor_insights(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListContributorInsightsInputDict],
     ) -> ListContributorInsightsOutput:
         """
         Returns a list of ContributorInsightsSummary for a table and all its
         global secondary indexes.
 
         Args:
-            input:
-                An instance of `ListContributorInsightsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1469,18 +2148,39 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `ListContributorInsightsOutput`.
         """
-        return await self._invoke(input, _models.LIST_CONTRIBUTOR_INSIGHTS, [], plugins)
 
+    async def list_contributor_insights(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListContributorInsightsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_CONTRIBUTOR_INSIGHTS, args, kwargs),
+            _models.LIST_CONTRIBUTOR_INSIGHTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_exports(
-        self, input: ListExportsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListExportsInput | _models.ListExportsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListExportsOutput: ...
+
+    @_overload
+    async def list_exports(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListExportsInputDict],
     ) -> ListExportsOutput:
         """
         Lists completed exports within the past 90 days, in reverse alphanumeric
         order of `ExportArn`.
 
         Args:
-            input:
-                An instance of `ListExportsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1490,10 +2190,33 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `ListExportsOutput`.
         """
-        return await self._invoke(input, _models.LIST_EXPORTS, [], plugins)
 
+    async def list_exports(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListExportsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_EXPORTS, args, kwargs),
+            _models.LIST_EXPORTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_global_tables(
-        self, input: ListGlobalTablesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListGlobalTablesInput | _models.ListGlobalTablesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListGlobalTablesOutput: ...
+
+    @_overload
+    async def list_global_tables(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListGlobalTablesInputDict],
     ) -> ListGlobalTablesOutput:
         """
         Lists all global tables that have a replica in the specified Region.
@@ -1514,8 +2237,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
             tables](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html).
 
         Args:
-            input:
-                An instance of `ListGlobalTablesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1525,17 +2246,38 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `ListGlobalTablesOutput`.
         """
-        return await self._invoke(input, _models.LIST_GLOBAL_TABLES, [], plugins)
 
+    async def list_global_tables(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListGlobalTablesOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_GLOBAL_TABLES, args, kwargs),
+            _models.LIST_GLOBAL_TABLES,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_imports(
-        self, input: ListImportsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListImportsInput | _models.ListImportsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListImportsOutput: ...
+
+    @_overload
+    async def list_imports(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListImportsInputDict],
     ) -> ListImportsOutput:
         """
         Lists completed imports within the past 90 days.
 
         Args:
-            input:
-                An instance of `ListImportsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1545,10 +2287,33 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `ListImportsOutput`.
         """
-        return await self._invoke(input, _models.LIST_IMPORTS, [], plugins)
 
+    async def list_imports(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListImportsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_IMPORTS, args, kwargs),
+            _models.LIST_IMPORTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_tables(
-        self, input: ListTablesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListTablesInput | _models.ListTablesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListTablesOutput: ...
+
+    @_overload
+    async def list_tables(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListTablesInputDict],
     ) -> ListTablesOutput:
         """
         Returns an array of table names associated with the current account and
@@ -1556,8 +2321,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         returning a maximum of 100 table names.
 
         Args:
-            input:
-                An instance of `ListTablesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1567,10 +2330,33 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `ListTablesOutput`.
         """
-        return await self._invoke(input, _models.LIST_TABLES, [], plugins)
 
+    async def list_tables(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListTablesOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_TABLES, args, kwargs),
+            _models.LIST_TABLES,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_tags_of_resource(
-        self, input: ListTagsOfResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListTagsOfResourceInput | _models.ListTagsOfResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListTagsOfResourceOutput: ...
+
+    @_overload
+    async def list_tags_of_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListTagsOfResourceInputDict],
     ) -> ListTagsOfResourceOutput:
         """
         List all tags on an Amazon DynamoDB resource. You can call
@@ -1581,8 +2367,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         in the *Amazon DynamoDB Developer Guide*.
 
         Args:
-            input:
-                An instance of `ListTagsOfResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1592,10 +2376,33 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `ListTagsOfResourceOutput`.
         """
-        return await self._invoke(input, _models.LIST_TAGS_OF_RESOURCE, [], plugins)
 
+    async def list_tags_of_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListTagsOfResourceOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_TAGS_OF_RESOURCE, args, kwargs),
+            _models.LIST_TAGS_OF_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def put_item(
-        self, input: PutItemInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutItemInput | _models.PutItemInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutItemOutput: ...
+
+    @_overload
+    async def put_item(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutItemInputDict],
     ) -> PutItemOutput:
         """
         Creates a new item, or replaces an old item with a new item. If an item
@@ -1634,8 +2441,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         in the *Amazon DynamoDB Developer Guide*.
 
         Args:
-            input:
-                An instance of `PutItemInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1645,10 +2450,33 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `PutItemOutput`.
         """
-        return await self._invoke(input, _models.PUT_ITEM, [], plugins)
 
+    async def put_item(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutItemOutput:
+        return await self._invoke(
+            self._select_input(_models.PUT_ITEM, args, kwargs),
+            _models.PUT_ITEM,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def put_resource_policy(
-        self, input: PutResourcePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutResourcePolicyInput | _models.PutResourcePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutResourcePolicyOutput: ...
+
+    @_overload
+    async def put_resource_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutResourcePolicyInputDict],
     ) -> PutResourcePolicyOutput:
         """
         Attaches a resource-based policy document to the resource, which can be
@@ -1674,8 +2502,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
             again.
 
         Args:
-            input:
-                An instance of `PutResourcePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1685,10 +2511,33 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `PutResourcePolicyOutput`.
         """
-        return await self._invoke(input, _models.PUT_RESOURCE_POLICY, [], plugins)
 
+    async def put_resource_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutResourcePolicyOutput:
+        return await self._invoke(
+            self._select_input(_models.PUT_RESOURCE_POLICY, args, kwargs),
+            _models.PUT_RESOURCE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def query(
-        self, input: QueryInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.QueryInput | _models.QueryInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> QueryOutput: ...
+
+    @_overload
+    async def query(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.QueryInputDict],
     ) -> QueryOutput:
         """
         You must provide the name of the partition key attribute and a single
@@ -1751,8 +2600,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         a global secondary index.
 
         Args:
-            input:
-                An instance of `QueryInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1762,10 +2609,31 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `QueryOutput`.
         """
-        return await self._invoke(input, _models.QUERY, [], plugins)
 
+    async def query(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> QueryOutput:
+        return await self._invoke(
+            self._select_input(_models.QUERY, args, kwargs), _models.QUERY, [], plugins
+        )
+
+    @_overload
     async def restore_table_from_backup(
-        self, input: RestoreTableFromBackupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RestoreTableFromBackupInput
+        | _models.RestoreTableFromBackupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RestoreTableFromBackupOutput: ...
+
+    @_overload
+    async def restore_table_from_backup(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RestoreTableFromBackupInputDict],
     ) -> RestoreTableFromBackupOutput:
         """
         Creates a new table from an existing backup. Any number of users can
@@ -1790,8 +2658,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         - Time to Live (TTL) settings
 
         Args:
-            input:
-                An instance of `RestoreTableFromBackupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1801,10 +2667,34 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `RestoreTableFromBackupOutput`.
         """
-        return await self._invoke(input, _models.RESTORE_TABLE_FROM_BACKUP, [], plugins)
 
+    async def restore_table_from_backup(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RestoreTableFromBackupOutput:
+        return await self._invoke(
+            self._select_input(_models.RESTORE_TABLE_FROM_BACKUP, args, kwargs),
+            _models.RESTORE_TABLE_FROM_BACKUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def restore_table_to_point_in_time(
-        self, input: RestoreTableToPointInTimeInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RestoreTableToPointInTimeInput
+        | _models.RestoreTableToPointInTimeInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RestoreTableToPointInTimeOutput: ...
+
+    @_overload
+    async def restore_table_to_point_in_time(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RestoreTableToPointInTimeInputDict],
     ) -> RestoreTableToPointInTimeOutput:
         """
         Restores the specified table to the specified point in time within
@@ -1850,8 +2740,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         - Point in time recovery settings
 
         Args:
-            input:
-                An instance of `RestoreTableToPointInTimeInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1861,12 +2749,33 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `RestoreTableToPointInTimeOutput`.
         """
+
+    async def restore_table_to_point_in_time(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RestoreTableToPointInTimeOutput:
         return await self._invoke(
-            input, _models.RESTORE_TABLE_TO_POINT_IN_TIME, [], plugins
+            self._select_input(_models.RESTORE_TABLE_TO_POINT_IN_TIME, args, kwargs),
+            _models.RESTORE_TABLE_TO_POINT_IN_TIME,
+            [],
+            plugins,
         )
 
+    @_overload
     async def scan(
-        self, input: ScanInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ScanInput | _models.ScanInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ScanOutput: ...
+
+    @_overload
+    async def scan(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ScanInputDict],
     ) -> ScanOutput:
         """
         The `Scan` operation returns one or more items and item attributes by
@@ -1920,8 +2829,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
             snapshot of the table when the scan operation was requested.
 
         Args:
-            input:
-                An instance of `ScanInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1931,10 +2838,30 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `ScanOutput`.
         """
-        return await self._invoke(input, _models.SCAN, [], plugins)
 
+    async def scan(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ScanOutput:
+        return await self._invoke(
+            self._select_input(_models.SCAN, args, kwargs), _models.SCAN, [], plugins
+        )
+
+    @_overload
     async def search_vectors(
-        self, input: SearchVectorsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.SearchVectorsInput | _models.SearchVectorsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> SearchVectorsOutput: ...
+
+    @_overload
+    async def search_vectors(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SearchVectorsInputDict],
     ) -> SearchVectorsOutput:
         """
         Performs a vector similarity search on a vector index associated with an
@@ -1956,8 +2883,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
           scores indicate higher similarity.
 
         Args:
-            input:
-                An instance of `SearchVectorsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1967,10 +2892,33 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `SearchVectorsOutput`.
         """
-        return await self._invoke(input, _models.SEARCH_VECTORS, [], plugins)
 
+    async def search_vectors(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SearchVectorsOutput:
+        return await self._invoke(
+            self._select_input(_models.SEARCH_VECTORS, args, kwargs),
+            _models.SEARCH_VECTORS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def start_bulk_put_items(
-        self, input: StartBulkPutItemsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StartBulkPutItemsInput | _models.StartBulkPutItemsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StartBulkPutItemsOutput: ...
+
+    @_overload
+    async def start_bulk_put_items(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartBulkPutItemsInputDict],
     ) -> StartBulkPutItemsOutput:
         """
         Starts an asynchronous bulk operation that reads items from Amazon S3
@@ -1978,8 +2926,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         load or migrate large datasets.
 
         Args:
-            input:
-                An instance of `StartBulkPutItemsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1989,10 +2935,33 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `StartBulkPutItemsOutput`.
         """
-        return await self._invoke(input, _models.START_BULK_PUT_ITEMS, [], plugins)
 
+    async def start_bulk_put_items(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StartBulkPutItemsOutput:
+        return await self._invoke(
+            self._select_input(_models.START_BULK_PUT_ITEMS, args, kwargs),
+            _models.START_BULK_PUT_ITEMS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def tag_resource(
-        self, input: TagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.TagResourceInput | _models.TagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> TagResourceOutput: ...
+
+    @_overload
+    async def tag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.TagResourceInputDict],
     ) -> TagResourceOutput:
         """
         Associate a set of tags with an Amazon DynamoDB resource. You can then
@@ -2017,8 +2986,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         in the *Amazon DynamoDB Developer Guide*.
 
         Args:
-            input:
-                An instance of `TagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2028,10 +2995,33 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `TagResourceOutput`.
         """
-        return await self._invoke(input, _models.TAG_RESOURCE, [], plugins)
 
+    async def tag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> TagResourceOutput:
+        return await self._invoke(
+            self._select_input(_models.TAG_RESOURCE, args, kwargs),
+            _models.TAG_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def transact_get_items(
-        self, input: TransactGetItemsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.TransactGetItemsInput | _models.TransactGetItemsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> TransactGetItemsOutput: ...
+
+    @_overload
+    async def transact_get_items(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.TransactGetItemsInputDict],
     ) -> TransactGetItemsOutput:
         """
         `TransactGetItems` is a synchronous operation that atomically retrieves
@@ -2057,8 +3047,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         - The aggregate size of the items in the transaction exceeded 4 MB.
 
         Args:
-            input:
-                An instance of `TransactGetItemsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2068,10 +3056,33 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `TransactGetItemsOutput`.
         """
-        return await self._invoke(input, _models.TRANSACT_GET_ITEMS, [], plugins)
 
+    async def transact_get_items(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> TransactGetItemsOutput:
+        return await self._invoke(
+            self._select_input(_models.TRANSACT_GET_ITEMS, args, kwargs),
+            _models.TRANSACT_GET_ITEMS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def transact_write_items(
-        self, input: TransactWriteItemsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.TransactWriteItemsInput | _models.TransactWriteItemsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> TransactWriteItemsOutput: ...
+
+    @_overload
+    async def transact_write_items(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.TransactWriteItemsInputDict],
     ) -> TransactWriteItemsOutput:
         """
         `TransactWriteItems` is a synchronous write operation that groups up to
@@ -2132,8 +3143,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         - There is a user error, such as an invalid data format.
 
         Args:
-            input:
-                An instance of `TransactWriteItemsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2143,10 +3152,33 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `TransactWriteItemsOutput`.
         """
-        return await self._invoke(input, _models.TRANSACT_WRITE_ITEMS, [], plugins)
 
+    async def transact_write_items(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> TransactWriteItemsOutput:
+        return await self._invoke(
+            self._select_input(_models.TRANSACT_WRITE_ITEMS, args, kwargs),
+            _models.TRANSACT_WRITE_ITEMS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def untag_resource(
-        self, input: UntagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UntagResourceInput | _models.UntagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UntagResourceOutput: ...
+
+    @_overload
+    async def untag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UntagResourceInputDict],
     ) -> UntagResourceOutput:
         """
         Removes the association of tags from an Amazon DynamoDB resource. You
@@ -2169,8 +3201,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         in the *Amazon DynamoDB Developer Guide*.
 
         Args:
-            input:
-                An instance of `UntagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2180,10 +3210,34 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `UntagResourceOutput`.
         """
-        return await self._invoke(input, _models.UNTAG_RESOURCE, [], plugins)
 
+    async def untag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UntagResourceOutput:
+        return await self._invoke(
+            self._select_input(_models.UNTAG_RESOURCE, args, kwargs),
+            _models.UNTAG_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_continuous_backups(
-        self, input: UpdateContinuousBackupsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateContinuousBackupsInput
+        | _models.UpdateContinuousBackupsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateContinuousBackupsOutput: ...
+
+    @_overload
+    async def update_continuous_backups(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateContinuousBackupsInputDict],
     ) -> UpdateContinuousBackupsOutput:
         """
         `UpdateContinuousBackups` enables or disables point in time recovery for
@@ -2202,8 +3256,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         35 days.
 
         Args:
-            input:
-                An instance of `UpdateContinuousBackupsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2213,10 +3265,34 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `UpdateContinuousBackupsOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_CONTINUOUS_BACKUPS, [], plugins)
 
+    async def update_continuous_backups(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateContinuousBackupsOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_CONTINUOUS_BACKUPS, args, kwargs),
+            _models.UPDATE_CONTINUOUS_BACKUPS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_contributor_insights(
-        self, input: UpdateContributorInsightsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateContributorInsightsInput
+        | _models.UpdateContributorInsightsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateContributorInsightsOutput: ...
+
+    @_overload
+    async def update_contributor_insights(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateContributorInsightsInputDict],
     ) -> UpdateContributorInsightsOutput:
         """
         Updates the status for contributor insights for a specific table or
@@ -2229,8 +3305,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Insights for DynamoDB for this table.
 
         Args:
-            input:
-                An instance of `UpdateContributorInsightsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2240,12 +3314,33 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `UpdateContributorInsightsOutput`.
         """
+
+    async def update_contributor_insights(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateContributorInsightsOutput:
         return await self._invoke(
-            input, _models.UPDATE_CONTRIBUTOR_INSIGHTS, [], plugins
+            self._select_input(_models.UPDATE_CONTRIBUTOR_INSIGHTS, args, kwargs),
+            _models.UPDATE_CONTRIBUTOR_INSIGHTS,
+            [],
+            plugins,
         )
 
+    @_overload
     async def update_global_table(
-        self, input: UpdateGlobalTableInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateGlobalTableInput | _models.UpdateGlobalTableInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateGlobalTableOutput: ...
+
+    @_overload
+    async def update_global_table(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateGlobalTableInputDict],
     ) -> UpdateGlobalTableOutput:
         """
         Adds or removes replicas in the specified global table. The global table
@@ -2291,8 +3386,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
           maximum write capacity units.
 
         Args:
-            input:
-                An instance of `UpdateGlobalTableInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2302,10 +3395,34 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `UpdateGlobalTableOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_GLOBAL_TABLE, [], plugins)
 
+    async def update_global_table(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateGlobalTableOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_GLOBAL_TABLE, args, kwargs),
+            _models.UPDATE_GLOBAL_TABLE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_global_table_settings(
-        self, input: UpdateGlobalTableSettingsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateGlobalTableSettingsInput
+        | _models.UpdateGlobalTableSettingsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateGlobalTableSettingsOutput: ...
+
+    @_overload
+    async def update_global_table_settings(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateGlobalTableSettingsInputDict],
     ) -> UpdateGlobalTableSettingsOutput:
         """
         Updates settings for a global table.
@@ -2326,8 +3443,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
             tables](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html).
 
         Args:
-            input:
-                An instance of `UpdateGlobalTableSettingsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2337,12 +3452,33 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `UpdateGlobalTableSettingsOutput`.
         """
+
+    async def update_global_table_settings(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateGlobalTableSettingsOutput:
         return await self._invoke(
-            input, _models.UPDATE_GLOBAL_TABLE_SETTINGS, [], plugins
+            self._select_input(_models.UPDATE_GLOBAL_TABLE_SETTINGS, args, kwargs),
+            _models.UPDATE_GLOBAL_TABLE_SETTINGS,
+            [],
+            plugins,
         )
 
+    @_overload
     async def update_item(
-        self, input: UpdateItemInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateItemInput | _models.UpdateItemInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateItemOutput: ...
+
+    @_overload
+    async def update_item(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateItemInputDict],
     ) -> UpdateItemOutput:
         """
         Edits an existing item's attributes, or adds a new item to the table if
@@ -2355,8 +3491,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         `UpdateItem` operation using the `ReturnValues` parameter.
 
         Args:
-            input:
-                An instance of `UpdateItemInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2366,19 +3500,39 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `UpdateItemOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_ITEM, [], plugins)
 
+    async def update_item(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateItemOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_ITEM, args, kwargs),
+            _models.UPDATE_ITEM,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_kinesis_streaming_destination(
         self,
-        input: UpdateKinesisStreamingDestinationInput,
+        request: _models.UpdateKinesisStreamingDestinationInput
+        | _models.UpdateKinesisStreamingDestinationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateKinesisStreamingDestinationOutput: ...
+
+    @_overload
+    async def update_kinesis_streaming_destination(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateKinesisStreamingDestinationInputDict],
     ) -> UpdateKinesisStreamingDestinationOutput:
         """
         The command to update the Kinesis stream destination.
 
         Args:
-            input:
-                An instance of `UpdateKinesisStreamingDestinationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2388,12 +3542,35 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `UpdateKinesisStreamingDestinationOutput`.
         """
+
+    async def update_kinesis_streaming_destination(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateKinesisStreamingDestinationOutput:
         return await self._invoke(
-            input, _models.UPDATE_KINESIS_STREAMING_DESTINATION, [], plugins
+            self._select_input(
+                _models.UPDATE_KINESIS_STREAMING_DESTINATION, args, kwargs
+            ),
+            _models.UPDATE_KINESIS_STREAMING_DESTINATION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def update_table(
-        self, input: UpdateTableInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateTableInput | _models.UpdateTableInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateTableOutput: ...
+
+    @_overload
+    async def update_table(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateTableInputDict],
     ) -> UpdateTableOutput:
         """
         Modifies the provisioned throughput settings, global secondary indexes,
@@ -2441,8 +3618,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         encryption-access problem, resolve it, and retry.
 
         Args:
-            input:
-                An instance of `UpdateTableInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2452,19 +3627,39 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `UpdateTableOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_TABLE, [], plugins)
 
+    async def update_table(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateTableOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_TABLE, args, kwargs),
+            _models.UPDATE_TABLE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_table_replica_auto_scaling(
         self,
-        input: UpdateTableReplicaAutoScalingInput,
+        request: _models.UpdateTableReplicaAutoScalingInput
+        | _models.UpdateTableReplicaAutoScalingInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateTableReplicaAutoScalingOutput: ...
+
+    @_overload
+    async def update_table_replica_auto_scaling(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateTableReplicaAutoScalingInputDict],
     ) -> UpdateTableReplicaAutoScalingOutput:
         """
         Updates auto scaling settings on your global tables at once.
 
         Args:
-            input:
-                An instance of `UpdateTableReplicaAutoScalingInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2474,12 +3669,33 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `UpdateTableReplicaAutoScalingOutput`.
         """
+
+    async def update_table_replica_auto_scaling(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateTableReplicaAutoScalingOutput:
         return await self._invoke(
-            input, _models.UPDATE_TABLE_REPLICA_AUTO_SCALING, [], plugins
+            self._select_input(_models.UPDATE_TABLE_REPLICA_AUTO_SCALING, args, kwargs),
+            _models.UPDATE_TABLE_REPLICA_AUTO_SCALING,
+            [],
+            plugins,
         )
 
+    @_overload
     async def update_time_to_live(
-        self, input: UpdateTimeToLiveInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateTimeToLiveInput | _models.UpdateTimeToLiveInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateTimeToLiveOutput: ...
+
+    @_overload
+    async def update_time_to_live(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateTimeToLiveInputDict],
     ) -> UpdateTimeToLiveOutput:
         """
         The `UpdateTimeToLive` method enables or disables Time to Live (TTL) for
@@ -2516,8 +3732,6 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         in the Amazon DynamoDB Developer Guide.
 
         Args:
-            input:
-                An instance of `UpdateTimeToLiveInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2527,7 +3741,16 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
         Returns:
             An instance of `UpdateTimeToLiveOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_TIME_TO_LIVE, [], plugins)
+
+    async def update_time_to_live(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateTimeToLiveOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_TIME_TO_LIVE, args, kwargs),
+            _models.UPDATE_TIME_TO_LIVE,
+            [],
+            plugins,
+        )
 
     async def _new_config(self) -> AsyncDynamoDBConfig:
         return await AsyncDynamoDBConfig.resolve()

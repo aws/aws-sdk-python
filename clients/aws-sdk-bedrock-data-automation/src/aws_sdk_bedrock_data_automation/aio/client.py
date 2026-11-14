@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import cast
+from typing import Unpack as _Unpack, cast, overload as _overload
 
 from smithy_aws_core.aio.identity.chain import AsyncIdentityChain
 from smithy_aws_core.config.types import ConfigSource
@@ -20,59 +20,32 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from ..models import (
-        CopyBlueprintStageInput,
         CopyBlueprintStageOutput,
-        CreateBlueprintInput,
         CreateBlueprintOutput,
-        CreateBlueprintVersionInput,
         CreateBlueprintVersionOutput,
-        CreateDataAutomationLibraryInput,
         CreateDataAutomationLibraryOutput,
-        CreateDataAutomationProjectInput,
         CreateDataAutomationProjectOutput,
-        DeleteBlueprintInput,
         DeleteBlueprintOutput,
-        DeleteDataAutomationLibraryInput,
         DeleteDataAutomationLibraryOutput,
-        DeleteDataAutomationProjectInput,
         DeleteDataAutomationProjectOutput,
-        GetBlueprintInput,
-        GetBlueprintOptimizationStatusInput,
         GetBlueprintOptimizationStatusOutput,
         GetBlueprintOutput,
-        GetDataAutomationLibraryEntityInput,
         GetDataAutomationLibraryEntityOutput,
-        GetDataAutomationLibraryIngestionJobInput,
         GetDataAutomationLibraryIngestionJobOutput,
-        GetDataAutomationLibraryInput,
         GetDataAutomationLibraryOutput,
-        GetDataAutomationProjectInput,
         GetDataAutomationProjectOutput,
-        InvokeBlueprintOptimizationAsyncInput,
         InvokeBlueprintOptimizationAsyncOutput,
-        InvokeDataAutomationLibraryIngestionJobInput,
         InvokeDataAutomationLibraryIngestionJobOutput,
-        ListBlueprintsInput,
         ListBlueprintsOutput,
-        ListDataAutomationLibrariesInput,
         ListDataAutomationLibrariesOutput,
-        ListDataAutomationLibraryEntitiesInput,
         ListDataAutomationLibraryEntitiesOutput,
-        ListDataAutomationLibraryIngestionJobsInput,
         ListDataAutomationLibraryIngestionJobsOutput,
-        ListDataAutomationProjectsInput,
         ListDataAutomationProjectsOutput,
-        ListTagsForResourceInput,
         ListTagsForResourceOutput,
-        TagResourceInput,
         TagResourceOutput,
-        UntagResourceInput,
         UntagResourceOutput,
-        UpdateBlueprintInput,
         UpdateBlueprintOutput,
-        UpdateDataAutomationLibraryInput,
         UpdateDataAutomationLibraryOutput,
-        UpdateDataAutomationProjectInput,
         UpdateDataAutomationProjectOutput,
     )
 
@@ -83,17 +56,29 @@ logger = logging.getLogger(__name__)
 class AsyncBedrockDataAutomationClient(AsyncClient[AsyncBedrockDataAutomationConfig]):
     """Amazon Bedrock Data Automation BuildTime"""
 
-    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
+    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
 
+    @_overload
     async def copy_blueprint_stage(
-        self, input: CopyBlueprintStageInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CopyBlueprintStageInput | _models.CopyBlueprintStageInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CopyBlueprintStageOutput: ...
+
+    @_overload
+    async def copy_blueprint_stage(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CopyBlueprintStageInputDict],
     ) -> CopyBlueprintStageOutput:
         """
         Copies a Blueprint from one stage to another
 
         Args:
-            input:
-                An instance of `CopyBlueprintStageInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -103,17 +88,38 @@ class AsyncBedrockDataAutomationClient(AsyncClient[AsyncBedrockDataAutomationCon
         Returns:
             An instance of `CopyBlueprintStageOutput`.
         """
-        return await self._invoke(input, _models.COPY_BLUEPRINT_STAGE, [], plugins)
 
+    async def copy_blueprint_stage(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CopyBlueprintStageOutput:
+        return await self._invoke(
+            self._select_input(_models.COPY_BLUEPRINT_STAGE, args, kwargs),
+            _models.COPY_BLUEPRINT_STAGE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_blueprint(
-        self, input: CreateBlueprintInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateBlueprintInput | _models.CreateBlueprintInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateBlueprintOutput: ...
+
+    @_overload
+    async def create_blueprint(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateBlueprintInputDict],
     ) -> CreateBlueprintOutput:
         """
         Creates an Amazon Bedrock Data Automation Blueprint
 
         Args:
-            input:
-                An instance of `CreateBlueprintInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -123,18 +129,40 @@ class AsyncBedrockDataAutomationClient(AsyncClient[AsyncBedrockDataAutomationCon
         Returns:
             An instance of `CreateBlueprintOutput`.
         """
-        return await self._invoke(input, _models.CREATE_BLUEPRINT, [], plugins)
 
+    async def create_blueprint(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateBlueprintOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_BLUEPRINT, args, kwargs),
+            _models.CREATE_BLUEPRINT,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_blueprint_version(
-        self, input: CreateBlueprintVersionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateBlueprintVersionInput
+        | _models.CreateBlueprintVersionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateBlueprintVersionOutput: ...
+
+    @_overload
+    async def create_blueprint_version(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateBlueprintVersionInputDict],
     ) -> CreateBlueprintVersionOutput:
         """
         Creates a new version of an existing Amazon Bedrock Data Automation
         Blueprint
 
         Args:
-            input:
-                An instance of `CreateBlueprintVersionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -144,19 +172,39 @@ class AsyncBedrockDataAutomationClient(AsyncClient[AsyncBedrockDataAutomationCon
         Returns:
             An instance of `CreateBlueprintVersionOutput`.
         """
-        return await self._invoke(input, _models.CREATE_BLUEPRINT_VERSION, [], plugins)
 
+    async def create_blueprint_version(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateBlueprintVersionOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_BLUEPRINT_VERSION, args, kwargs),
+            _models.CREATE_BLUEPRINT_VERSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_data_automation_library(
         self,
-        input: CreateDataAutomationLibraryInput,
+        request: _models.CreateDataAutomationLibraryInput
+        | _models.CreateDataAutomationLibraryInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateDataAutomationLibraryOutput: ...
+
+    @_overload
+    async def create_data_automation_library(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateDataAutomationLibraryInputDict],
     ) -> CreateDataAutomationLibraryOutput:
         """
         Creates an Amazon Bedrock Data Automation Library
 
         Args:
-            input:
-                An instance of `CreateDataAutomationLibraryInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -166,21 +214,39 @@ class AsyncBedrockDataAutomationClient(AsyncClient[AsyncBedrockDataAutomationCon
         Returns:
             An instance of `CreateDataAutomationLibraryOutput`.
         """
+
+    async def create_data_automation_library(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateDataAutomationLibraryOutput:
         return await self._invoke(
-            input, _models.CREATE_DATA_AUTOMATION_LIBRARY, [], plugins
+            self._select_input(_models.CREATE_DATA_AUTOMATION_LIBRARY, args, kwargs),
+            _models.CREATE_DATA_AUTOMATION_LIBRARY,
+            [],
+            plugins,
         )
 
+    @_overload
     async def create_data_automation_project(
         self,
-        input: CreateDataAutomationProjectInput,
+        request: _models.CreateDataAutomationProjectInput
+        | _models.CreateDataAutomationProjectInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateDataAutomationProjectOutput: ...
+
+    @_overload
+    async def create_data_automation_project(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateDataAutomationProjectInputDict],
     ) -> CreateDataAutomationProjectOutput:
         """
         Creates an Amazon Bedrock Data Automation Project
 
         Args:
-            input:
-                An instance of `CreateDataAutomationProjectInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -190,19 +256,38 @@ class AsyncBedrockDataAutomationClient(AsyncClient[AsyncBedrockDataAutomationCon
         Returns:
             An instance of `CreateDataAutomationProjectOutput`.
         """
+
+    async def create_data_automation_project(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateDataAutomationProjectOutput:
         return await self._invoke(
-            input, _models.CREATE_DATA_AUTOMATION_PROJECT, [], plugins
+            self._select_input(_models.CREATE_DATA_AUTOMATION_PROJECT, args, kwargs),
+            _models.CREATE_DATA_AUTOMATION_PROJECT,
+            [],
+            plugins,
         )
 
+    @_overload
     async def delete_blueprint(
-        self, input: DeleteBlueprintInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteBlueprintInput | _models.DeleteBlueprintInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteBlueprintOutput: ...
+
+    @_overload
+    async def delete_blueprint(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteBlueprintInputDict],
     ) -> DeleteBlueprintOutput:
         """
         Deletes an existing Amazon Bedrock Data Automation Blueprint
 
         Args:
-            input:
-                An instance of `DeleteBlueprintInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -212,19 +297,39 @@ class AsyncBedrockDataAutomationClient(AsyncClient[AsyncBedrockDataAutomationCon
         Returns:
             An instance of `DeleteBlueprintOutput`.
         """
-        return await self._invoke(input, _models.DELETE_BLUEPRINT, [], plugins)
 
+    async def delete_blueprint(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteBlueprintOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_BLUEPRINT, args, kwargs),
+            _models.DELETE_BLUEPRINT,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_data_automation_library(
         self,
-        input: DeleteDataAutomationLibraryInput,
+        request: _models.DeleteDataAutomationLibraryInput
+        | _models.DeleteDataAutomationLibraryInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteDataAutomationLibraryOutput: ...
+
+    @_overload
+    async def delete_data_automation_library(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteDataAutomationLibraryInputDict],
     ) -> DeleteDataAutomationLibraryOutput:
         """
         Deletes an existing Amazon Bedrock Data Automation Library
 
         Args:
-            input:
-                An instance of `DeleteDataAutomationLibraryInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -234,21 +339,39 @@ class AsyncBedrockDataAutomationClient(AsyncClient[AsyncBedrockDataAutomationCon
         Returns:
             An instance of `DeleteDataAutomationLibraryOutput`.
         """
+
+    async def delete_data_automation_library(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteDataAutomationLibraryOutput:
         return await self._invoke(
-            input, _models.DELETE_DATA_AUTOMATION_LIBRARY, [], plugins
+            self._select_input(_models.DELETE_DATA_AUTOMATION_LIBRARY, args, kwargs),
+            _models.DELETE_DATA_AUTOMATION_LIBRARY,
+            [],
+            plugins,
         )
 
+    @_overload
     async def delete_data_automation_project(
         self,
-        input: DeleteDataAutomationProjectInput,
+        request: _models.DeleteDataAutomationProjectInput
+        | _models.DeleteDataAutomationProjectInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteDataAutomationProjectOutput: ...
+
+    @_overload
+    async def delete_data_automation_project(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteDataAutomationProjectInputDict],
     ) -> DeleteDataAutomationProjectOutput:
         """
         Deletes an existing Amazon Bedrock Data Automation Project
 
         Args:
-            input:
-                An instance of `DeleteDataAutomationProjectInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -258,19 +381,38 @@ class AsyncBedrockDataAutomationClient(AsyncClient[AsyncBedrockDataAutomationCon
         Returns:
             An instance of `DeleteDataAutomationProjectOutput`.
         """
+
+    async def delete_data_automation_project(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteDataAutomationProjectOutput:
         return await self._invoke(
-            input, _models.DELETE_DATA_AUTOMATION_PROJECT, [], plugins
+            self._select_input(_models.DELETE_DATA_AUTOMATION_PROJECT, args, kwargs),
+            _models.DELETE_DATA_AUTOMATION_PROJECT,
+            [],
+            plugins,
         )
 
+    @_overload
     async def get_blueprint(
-        self, input: GetBlueprintInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetBlueprintInput | _models.GetBlueprintInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetBlueprintOutput: ...
+
+    @_overload
+    async def get_blueprint(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetBlueprintInputDict],
     ) -> GetBlueprintOutput:
         """
         Gets an existing Amazon Bedrock Data Automation Blueprint
 
         Args:
-            input:
-                An instance of `GetBlueprintInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -280,19 +422,39 @@ class AsyncBedrockDataAutomationClient(AsyncClient[AsyncBedrockDataAutomationCon
         Returns:
             An instance of `GetBlueprintOutput`.
         """
-        return await self._invoke(input, _models.GET_BLUEPRINT, [], plugins)
 
+    async def get_blueprint(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetBlueprintOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_BLUEPRINT, args, kwargs),
+            _models.GET_BLUEPRINT,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_blueprint_optimization_status(
         self,
-        input: GetBlueprintOptimizationStatusInput,
+        request: _models.GetBlueprintOptimizationStatusInput
+        | _models.GetBlueprintOptimizationStatusInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetBlueprintOptimizationStatusOutput: ...
+
+    @_overload
+    async def get_blueprint_optimization_status(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetBlueprintOptimizationStatusInputDict],
     ) -> GetBlueprintOptimizationStatusOutput:
         """
         API used to get blueprint optimization status.
 
         Args:
-            input:
-                An instance of `GetBlueprintOptimizationStatusInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -302,19 +464,39 @@ class AsyncBedrockDataAutomationClient(AsyncClient[AsyncBedrockDataAutomationCon
         Returns:
             An instance of `GetBlueprintOptimizationStatusOutput`.
         """
+
+    async def get_blueprint_optimization_status(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetBlueprintOptimizationStatusOutput:
         return await self._invoke(
-            input, _models.GET_BLUEPRINT_OPTIMIZATION_STATUS, [], plugins
+            self._select_input(_models.GET_BLUEPRINT_OPTIMIZATION_STATUS, args, kwargs),
+            _models.GET_BLUEPRINT_OPTIMIZATION_STATUS,
+            [],
+            plugins,
         )
 
+    @_overload
     async def get_data_automation_library(
-        self, input: GetDataAutomationLibraryInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetDataAutomationLibraryInput
+        | _models.GetDataAutomationLibraryInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetDataAutomationLibraryOutput: ...
+
+    @_overload
+    async def get_data_automation_library(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetDataAutomationLibraryInputDict],
     ) -> GetDataAutomationLibraryOutput:
         """
         Gets an existing Amazon Bedrock Data Automation Library
 
         Args:
-            input:
-                An instance of `GetDataAutomationLibraryInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -324,21 +506,39 @@ class AsyncBedrockDataAutomationClient(AsyncClient[AsyncBedrockDataAutomationCon
         Returns:
             An instance of `GetDataAutomationLibraryOutput`.
         """
+
+    async def get_data_automation_library(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetDataAutomationLibraryOutput:
         return await self._invoke(
-            input, _models.GET_DATA_AUTOMATION_LIBRARY, [], plugins
+            self._select_input(_models.GET_DATA_AUTOMATION_LIBRARY, args, kwargs),
+            _models.GET_DATA_AUTOMATION_LIBRARY,
+            [],
+            plugins,
         )
 
+    @_overload
     async def get_data_automation_library_entity(
         self,
-        input: GetDataAutomationLibraryEntityInput,
+        request: _models.GetDataAutomationLibraryEntityInput
+        | _models.GetDataAutomationLibraryEntityInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetDataAutomationLibraryEntityOutput: ...
+
+    @_overload
+    async def get_data_automation_library_entity(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetDataAutomationLibraryEntityInputDict],
     ) -> GetDataAutomationLibraryEntityOutput:
         """
         Gets an existing entity based on entity type from the library
 
         Args:
-            input:
-                An instance of `GetDataAutomationLibraryEntityInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -348,21 +548,41 @@ class AsyncBedrockDataAutomationClient(AsyncClient[AsyncBedrockDataAutomationCon
         Returns:
             An instance of `GetDataAutomationLibraryEntityOutput`.
         """
+
+    async def get_data_automation_library_entity(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetDataAutomationLibraryEntityOutput:
         return await self._invoke(
-            input, _models.GET_DATA_AUTOMATION_LIBRARY_ENTITY, [], plugins
+            self._select_input(
+                _models.GET_DATA_AUTOMATION_LIBRARY_ENTITY, args, kwargs
+            ),
+            _models.GET_DATA_AUTOMATION_LIBRARY_ENTITY,
+            [],
+            plugins,
         )
 
+    @_overload
     async def get_data_automation_library_ingestion_job(
         self,
-        input: GetDataAutomationLibraryIngestionJobInput,
+        request: _models.GetDataAutomationLibraryIngestionJobInput
+        | _models.GetDataAutomationLibraryIngestionJobInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetDataAutomationLibraryIngestionJobOutput: ...
+
+    @_overload
+    async def get_data_automation_library_ingestion_job(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetDataAutomationLibraryIngestionJobInputDict],
     ) -> GetDataAutomationLibraryIngestionJobOutput:
         """
         API used to get status of data automation library ingestion job
 
         Args:
-            input:
-                An instance of `GetDataAutomationLibraryIngestionJobInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -372,19 +592,41 @@ class AsyncBedrockDataAutomationClient(AsyncClient[AsyncBedrockDataAutomationCon
         Returns:
             An instance of `GetDataAutomationLibraryIngestionJobOutput`.
         """
+
+    async def get_data_automation_library_ingestion_job(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetDataAutomationLibraryIngestionJobOutput:
         return await self._invoke(
-            input, _models.GET_DATA_AUTOMATION_LIBRARY_INGESTION_JOB, [], plugins
+            self._select_input(
+                _models.GET_DATA_AUTOMATION_LIBRARY_INGESTION_JOB, args, kwargs
+            ),
+            _models.GET_DATA_AUTOMATION_LIBRARY_INGESTION_JOB,
+            [],
+            plugins,
         )
 
+    @_overload
     async def get_data_automation_project(
-        self, input: GetDataAutomationProjectInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetDataAutomationProjectInput
+        | _models.GetDataAutomationProjectInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetDataAutomationProjectOutput: ...
+
+    @_overload
+    async def get_data_automation_project(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetDataAutomationProjectInputDict],
     ) -> GetDataAutomationProjectOutput:
         """
         Gets an existing Amazon Bedrock Data Automation Project
 
         Args:
-            input:
-                An instance of `GetDataAutomationProjectInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -394,21 +636,39 @@ class AsyncBedrockDataAutomationClient(AsyncClient[AsyncBedrockDataAutomationCon
         Returns:
             An instance of `GetDataAutomationProjectOutput`.
         """
+
+    async def get_data_automation_project(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetDataAutomationProjectOutput:
         return await self._invoke(
-            input, _models.GET_DATA_AUTOMATION_PROJECT, [], plugins
+            self._select_input(_models.GET_DATA_AUTOMATION_PROJECT, args, kwargs),
+            _models.GET_DATA_AUTOMATION_PROJECT,
+            [],
+            plugins,
         )
 
+    @_overload
     async def invoke_blueprint_optimization_async(
         self,
-        input: InvokeBlueprintOptimizationAsyncInput,
+        request: _models.InvokeBlueprintOptimizationAsyncInput
+        | _models.InvokeBlueprintOptimizationAsyncInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> InvokeBlueprintOptimizationAsyncOutput: ...
+
+    @_overload
+    async def invoke_blueprint_optimization_async(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.InvokeBlueprintOptimizationAsyncInputDict],
     ) -> InvokeBlueprintOptimizationAsyncOutput:
         """
         Invoke an async job to perform Blueprint Optimization
 
         Args:
-            input:
-                An instance of `InvokeBlueprintOptimizationAsyncInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -418,21 +678,41 @@ class AsyncBedrockDataAutomationClient(AsyncClient[AsyncBedrockDataAutomationCon
         Returns:
             An instance of `InvokeBlueprintOptimizationAsyncOutput`.
         """
+
+    async def invoke_blueprint_optimization_async(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> InvokeBlueprintOptimizationAsyncOutput:
         return await self._invoke(
-            input, _models.INVOKE_BLUEPRINT_OPTIMIZATION_ASYNC, [], plugins
+            self._select_input(
+                _models.INVOKE_BLUEPRINT_OPTIMIZATION_ASYNC, args, kwargs
+            ),
+            _models.INVOKE_BLUEPRINT_OPTIMIZATION_ASYNC,
+            [],
+            plugins,
         )
 
+    @_overload
     async def invoke_data_automation_library_ingestion_job(
         self,
-        input: InvokeDataAutomationLibraryIngestionJobInput,
+        request: _models.InvokeDataAutomationLibraryIngestionJobInput
+        | _models.InvokeDataAutomationLibraryIngestionJobInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> InvokeDataAutomationLibraryIngestionJobOutput: ...
+
+    @_overload
+    async def invoke_data_automation_library_ingestion_job(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.InvokeDataAutomationLibraryIngestionJobInputDict],
     ) -> InvokeDataAutomationLibraryIngestionJobOutput:
         """
         Async API: Invoke data automation library ingestion job
 
         Args:
-            input:
-                An instance of `InvokeDataAutomationLibraryIngestionJobInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -442,19 +722,40 @@ class AsyncBedrockDataAutomationClient(AsyncClient[AsyncBedrockDataAutomationCon
         Returns:
             An instance of `InvokeDataAutomationLibraryIngestionJobOutput`.
         """
+
+    async def invoke_data_automation_library_ingestion_job(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> InvokeDataAutomationLibraryIngestionJobOutput:
         return await self._invoke(
-            input, _models.INVOKE_DATA_AUTOMATION_LIBRARY_INGESTION_JOB, [], plugins
+            self._select_input(
+                _models.INVOKE_DATA_AUTOMATION_LIBRARY_INGESTION_JOB, args, kwargs
+            ),
+            _models.INVOKE_DATA_AUTOMATION_LIBRARY_INGESTION_JOB,
+            [],
+            plugins,
         )
 
+    @_overload
     async def list_blueprints(
-        self, input: ListBlueprintsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListBlueprintsInput | _models.ListBlueprintsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListBlueprintsOutput: ...
+
+    @_overload
+    async def list_blueprints(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListBlueprintsInputDict],
     ) -> ListBlueprintsOutput:
         """
         Lists all existing Amazon Bedrock Data Automation Blueprints
 
         Args:
-            input:
-                An instance of `ListBlueprintsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -464,19 +765,39 @@ class AsyncBedrockDataAutomationClient(AsyncClient[AsyncBedrockDataAutomationCon
         Returns:
             An instance of `ListBlueprintsOutput`.
         """
-        return await self._invoke(input, _models.LIST_BLUEPRINTS, [], plugins)
 
+    async def list_blueprints(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListBlueprintsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_BLUEPRINTS, args, kwargs),
+            _models.LIST_BLUEPRINTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_data_automation_libraries(
         self,
-        input: ListDataAutomationLibrariesInput,
+        request: _models.ListDataAutomationLibrariesInput
+        | _models.ListDataAutomationLibrariesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListDataAutomationLibrariesOutput: ...
+
+    @_overload
+    async def list_data_automation_libraries(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListDataAutomationLibrariesInputDict],
     ) -> ListDataAutomationLibrariesOutput:
         """
         Lists all existing Amazon Bedrock Data Automation Libraries
 
         Args:
-            input:
-                An instance of `ListDataAutomationLibrariesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -486,21 +807,39 @@ class AsyncBedrockDataAutomationClient(AsyncClient[AsyncBedrockDataAutomationCon
         Returns:
             An instance of `ListDataAutomationLibrariesOutput`.
         """
+
+    async def list_data_automation_libraries(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListDataAutomationLibrariesOutput:
         return await self._invoke(
-            input, _models.LIST_DATA_AUTOMATION_LIBRARIES, [], plugins
+            self._select_input(_models.LIST_DATA_AUTOMATION_LIBRARIES, args, kwargs),
+            _models.LIST_DATA_AUTOMATION_LIBRARIES,
+            [],
+            plugins,
         )
 
+    @_overload
     async def list_data_automation_library_entities(
         self,
-        input: ListDataAutomationLibraryEntitiesInput,
+        request: _models.ListDataAutomationLibraryEntitiesInput
+        | _models.ListDataAutomationLibraryEntitiesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListDataAutomationLibraryEntitiesOutput: ...
+
+    @_overload
+    async def list_data_automation_library_entities(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListDataAutomationLibraryEntitiesInputDict],
     ) -> ListDataAutomationLibraryEntitiesOutput:
         """
         Lists all stored entities in the library
 
         Args:
-            input:
-                An instance of `ListDataAutomationLibraryEntitiesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -510,21 +849,41 @@ class AsyncBedrockDataAutomationClient(AsyncClient[AsyncBedrockDataAutomationCon
         Returns:
             An instance of `ListDataAutomationLibraryEntitiesOutput`.
         """
+
+    async def list_data_automation_library_entities(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListDataAutomationLibraryEntitiesOutput:
         return await self._invoke(
-            input, _models.LIST_DATA_AUTOMATION_LIBRARY_ENTITIES, [], plugins
+            self._select_input(
+                _models.LIST_DATA_AUTOMATION_LIBRARY_ENTITIES, args, kwargs
+            ),
+            _models.LIST_DATA_AUTOMATION_LIBRARY_ENTITIES,
+            [],
+            plugins,
         )
 
+    @_overload
     async def list_data_automation_library_ingestion_jobs(
         self,
-        input: ListDataAutomationLibraryIngestionJobsInput,
+        request: _models.ListDataAutomationLibraryIngestionJobsInput
+        | _models.ListDataAutomationLibraryIngestionJobsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListDataAutomationLibraryIngestionJobsOutput: ...
+
+    @_overload
+    async def list_data_automation_library_ingestion_jobs(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListDataAutomationLibraryIngestionJobsInputDict],
     ) -> ListDataAutomationLibraryIngestionJobsOutput:
         """
         Lists all data automation library ingestion jobs
 
         Args:
-            input:
-                An instance of `ListDataAutomationLibraryIngestionJobsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -534,21 +893,41 @@ class AsyncBedrockDataAutomationClient(AsyncClient[AsyncBedrockDataAutomationCon
         Returns:
             An instance of `ListDataAutomationLibraryIngestionJobsOutput`.
         """
+
+    async def list_data_automation_library_ingestion_jobs(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListDataAutomationLibraryIngestionJobsOutput:
         return await self._invoke(
-            input, _models.LIST_DATA_AUTOMATION_LIBRARY_INGESTION_JOBS, [], plugins
+            self._select_input(
+                _models.LIST_DATA_AUTOMATION_LIBRARY_INGESTION_JOBS, args, kwargs
+            ),
+            _models.LIST_DATA_AUTOMATION_LIBRARY_INGESTION_JOBS,
+            [],
+            plugins,
         )
 
+    @_overload
     async def list_data_automation_projects(
         self,
-        input: ListDataAutomationProjectsInput,
+        request: _models.ListDataAutomationProjectsInput
+        | _models.ListDataAutomationProjectsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListDataAutomationProjectsOutput: ...
+
+    @_overload
+    async def list_data_automation_projects(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListDataAutomationProjectsInputDict],
     ) -> ListDataAutomationProjectsOutput:
         """
         Lists all existing Amazon Bedrock Data Automation Projects
 
         Args:
-            input:
-                An instance of `ListDataAutomationProjectsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -558,19 +937,39 @@ class AsyncBedrockDataAutomationClient(AsyncClient[AsyncBedrockDataAutomationCon
         Returns:
             An instance of `ListDataAutomationProjectsOutput`.
         """
+
+    async def list_data_automation_projects(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListDataAutomationProjectsOutput:
         return await self._invoke(
-            input, _models.LIST_DATA_AUTOMATION_PROJECTS, [], plugins
+            self._select_input(_models.LIST_DATA_AUTOMATION_PROJECTS, args, kwargs),
+            _models.LIST_DATA_AUTOMATION_PROJECTS,
+            [],
+            plugins,
         )
 
+    @_overload
     async def list_tags_for_resource(
-        self, input: ListTagsForResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListTagsForResourceInput
+        | _models.ListTagsForResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListTagsForResourceOutput: ...
+
+    @_overload
+    async def list_tags_for_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListTagsForResourceInputDict],
     ) -> ListTagsForResourceOutput:
         """
         List tags for an Amazon Bedrock Data Automation resource
 
         Args:
-            input:
-                An instance of `ListTagsForResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -580,17 +979,38 @@ class AsyncBedrockDataAutomationClient(AsyncClient[AsyncBedrockDataAutomationCon
         Returns:
             An instance of `ListTagsForResourceOutput`.
         """
-        return await self._invoke(input, _models.LIST_TAGS_FOR_RESOURCE, [], plugins)
 
+    async def list_tags_for_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListTagsForResourceOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_TAGS_FOR_RESOURCE, args, kwargs),
+            _models.LIST_TAGS_FOR_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def tag_resource(
-        self, input: TagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.TagResourceInput | _models.TagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> TagResourceOutput: ...
+
+    @_overload
+    async def tag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.TagResourceInputDict],
     ) -> TagResourceOutput:
         """
         Tag an Amazon Bedrock Data Automation resource
 
         Args:
-            input:
-                An instance of `TagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -600,17 +1020,38 @@ class AsyncBedrockDataAutomationClient(AsyncClient[AsyncBedrockDataAutomationCon
         Returns:
             An instance of `TagResourceOutput`.
         """
-        return await self._invoke(input, _models.TAG_RESOURCE, [], plugins)
 
+    async def tag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> TagResourceOutput:
+        return await self._invoke(
+            self._select_input(_models.TAG_RESOURCE, args, kwargs),
+            _models.TAG_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def untag_resource(
-        self, input: UntagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UntagResourceInput | _models.UntagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UntagResourceOutput: ...
+
+    @_overload
+    async def untag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UntagResourceInputDict],
     ) -> UntagResourceOutput:
         """
         Untag an Amazon Bedrock Data Automation resource
 
         Args:
-            input:
-                An instance of `UntagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -620,17 +1061,38 @@ class AsyncBedrockDataAutomationClient(AsyncClient[AsyncBedrockDataAutomationCon
         Returns:
             An instance of `UntagResourceOutput`.
         """
-        return await self._invoke(input, _models.UNTAG_RESOURCE, [], plugins)
 
+    async def untag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UntagResourceOutput:
+        return await self._invoke(
+            self._select_input(_models.UNTAG_RESOURCE, args, kwargs),
+            _models.UNTAG_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_blueprint(
-        self, input: UpdateBlueprintInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateBlueprintInput | _models.UpdateBlueprintInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateBlueprintOutput: ...
+
+    @_overload
+    async def update_blueprint(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateBlueprintInputDict],
     ) -> UpdateBlueprintOutput:
         """
         Updates an existing Amazon Bedrock Data Automation Blueprint
 
         Args:
-            input:
-                An instance of `UpdateBlueprintInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -640,19 +1102,39 @@ class AsyncBedrockDataAutomationClient(AsyncClient[AsyncBedrockDataAutomationCon
         Returns:
             An instance of `UpdateBlueprintOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_BLUEPRINT, [], plugins)
 
+    async def update_blueprint(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateBlueprintOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_BLUEPRINT, args, kwargs),
+            _models.UPDATE_BLUEPRINT,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_data_automation_library(
         self,
-        input: UpdateDataAutomationLibraryInput,
+        request: _models.UpdateDataAutomationLibraryInput
+        | _models.UpdateDataAutomationLibraryInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateDataAutomationLibraryOutput: ...
+
+    @_overload
+    async def update_data_automation_library(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateDataAutomationLibraryInputDict],
     ) -> UpdateDataAutomationLibraryOutput:
         """
         Updates an existing Amazon Bedrock Data Automation Library
 
         Args:
-            input:
-                An instance of `UpdateDataAutomationLibraryInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -662,21 +1144,39 @@ class AsyncBedrockDataAutomationClient(AsyncClient[AsyncBedrockDataAutomationCon
         Returns:
             An instance of `UpdateDataAutomationLibraryOutput`.
         """
+
+    async def update_data_automation_library(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateDataAutomationLibraryOutput:
         return await self._invoke(
-            input, _models.UPDATE_DATA_AUTOMATION_LIBRARY, [], plugins
+            self._select_input(_models.UPDATE_DATA_AUTOMATION_LIBRARY, args, kwargs),
+            _models.UPDATE_DATA_AUTOMATION_LIBRARY,
+            [],
+            plugins,
         )
 
+    @_overload
     async def update_data_automation_project(
         self,
-        input: UpdateDataAutomationProjectInput,
+        request: _models.UpdateDataAutomationProjectInput
+        | _models.UpdateDataAutomationProjectInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateDataAutomationProjectOutput: ...
+
+    @_overload
+    async def update_data_automation_project(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateDataAutomationProjectInputDict],
     ) -> UpdateDataAutomationProjectOutput:
         """
         Updates an existing Amazon Bedrock Data Automation Project
 
         Args:
-            input:
-                An instance of `UpdateDataAutomationProjectInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -686,8 +1186,15 @@ class AsyncBedrockDataAutomationClient(AsyncClient[AsyncBedrockDataAutomationCon
         Returns:
             An instance of `UpdateDataAutomationProjectOutput`.
         """
+
+    async def update_data_automation_project(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateDataAutomationProjectOutput:
         return await self._invoke(
-            input, _models.UPDATE_DATA_AUTOMATION_PROJECT, [], plugins
+            self._select_input(_models.UPDATE_DATA_AUTOMATION_PROJECT, args, kwargs),
+            _models.UPDATE_DATA_AUTOMATION_PROJECT,
+            [],
+            plugins,
         )
 
     async def _new_config(self) -> AsyncBedrockDataAutomationConfig:

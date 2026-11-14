@@ -2,6 +2,8 @@
 
 from typing import Any
 
+from aws_sdk_transcribe_streaming.aio.client import AsyncTranscribeStreamingClient
+from aws_sdk_transcribe_streaming.client import TranscribeStreamingClient
 from aws_sdk_transcribe_streaming.models import (
     Alternative,
     AudioEvent,
@@ -16,6 +18,7 @@ from aws_sdk_transcribe_streaming.models import (
     ConfigurationEvent,
     Entity,
     GetMedicalScribeStreamInput,
+    GetMedicalScribeStreamInputDict,
     GetMedicalScribeStreamOutput,
     IssueDetected,
     Item,
@@ -43,12 +46,16 @@ from aws_sdk_transcribe_streaming.models import (
     PostCallAnalyticsSettings,
     Result,
     StartCallAnalyticsStreamTranscriptionInput,
+    StartCallAnalyticsStreamTranscriptionInputDict,
     StartCallAnalyticsStreamTranscriptionOutput,
     StartMedicalScribeStreamInput,
+    StartMedicalScribeStreamInputDict,
     StartMedicalScribeStreamOutput,
     StartMedicalStreamTranscriptionInput,
+    StartMedicalStreamTranscriptionInputDict,
     StartMedicalStreamTranscriptionOutput,
     StartStreamTranscriptionInput,
+    StartStreamTranscriptionInputDict,
     StartStreamTranscriptionOutput,
     TimestampRange,
     Transcript,
@@ -57,8 +64,9 @@ from aws_sdk_transcribe_streaming.models import (
 )
 
 
-# Static type fixture: pyright over this validates models.pyi.
-# Not executed as a test; it only needs to type-check.
+# Static type fixture: pyright over this validates models.pyi and the
+# client method signatures. Not executed as a test; it only needs to
+# type-check.
 
 _: Any = ...
 
@@ -115,3 +123,88 @@ TimestampRange()
 Transcript()
 TranscriptEvent()
 UtteranceEvent()
+_params_0: GetMedicalScribeStreamInputDict = {"session_id": _}
+_params_1: StartCallAnalyticsStreamTranscriptionInputDict = {
+    "media_sample_rate_hertz": _,
+    "media_encoding": _,
+}
+_params_2: StartMedicalScribeStreamInputDict = {
+    "language_code": _,
+    "media_sample_rate_hertz": _,
+    "media_encoding": _,
+}
+_params_3: StartMedicalStreamTranscriptionInputDict = {
+    "language_code": _,
+    "media_sample_rate_hertz": _,
+    "media_encoding": _,
+    "specialty": _,
+    "type": _,
+}
+_params_4: StartStreamTranscriptionInputDict = {
+    "media_sample_rate_hertz": _,
+    "media_encoding": _,
+}
+
+
+def _request[T](form: type[T]) -> T:
+    raise NotImplementedError
+
+
+async def check_async_calls(client: AsyncTranscribeStreamingClient) -> None:
+    pass
+    await client.get_medical_scribe_stream(session_id=_)
+    await client.get_medical_scribe_stream(**_request(GetMedicalScribeStreamInputDict))
+    await client.get_medical_scribe_stream(_request(GetMedicalScribeStreamInput))
+    await client.get_medical_scribe_stream(_request(GetMedicalScribeStreamInputDict))
+    await client.start_call_analytics_stream_transcription(
+        media_sample_rate_hertz=_, media_encoding=_
+    )
+    await client.start_call_analytics_stream_transcription(
+        **_request(StartCallAnalyticsStreamTranscriptionInputDict)
+    )
+    await client.start_call_analytics_stream_transcription(
+        _request(StartCallAnalyticsStreamTranscriptionInput)
+    )
+    await client.start_call_analytics_stream_transcription(
+        _request(StartCallAnalyticsStreamTranscriptionInputDict)
+    )
+    await client.start_medical_scribe_stream(
+        language_code=_, media_sample_rate_hertz=_, media_encoding=_
+    )
+    await client.start_medical_scribe_stream(
+        **_request(StartMedicalScribeStreamInputDict)
+    )
+    await client.start_medical_scribe_stream(_request(StartMedicalScribeStreamInput))
+    await client.start_medical_scribe_stream(
+        _request(StartMedicalScribeStreamInputDict)
+    )
+    await client.start_medical_stream_transcription(
+        language_code=_,
+        media_sample_rate_hertz=_,
+        media_encoding=_,
+        specialty=_,
+        type=_,
+    )
+    await client.start_medical_stream_transcription(
+        **_request(StartMedicalStreamTranscriptionInputDict)
+    )
+    await client.start_medical_stream_transcription(
+        _request(StartMedicalStreamTranscriptionInput)
+    )
+    await client.start_medical_stream_transcription(
+        _request(StartMedicalStreamTranscriptionInputDict)
+    )
+    await client.start_stream_transcription(media_sample_rate_hertz=_, media_encoding=_)
+    await client.start_stream_transcription(
+        **_request(StartStreamTranscriptionInputDict)
+    )
+    await client.start_stream_transcription(_request(StartStreamTranscriptionInput))
+    await client.start_stream_transcription(_request(StartStreamTranscriptionInputDict))
+
+
+def check_sync_calls(client: TranscribeStreamingClient) -> None:
+    pass
+    client.get_medical_scribe_stream(session_id=_)
+    client.get_medical_scribe_stream(**_request(GetMedicalScribeStreamInputDict))
+    client.get_medical_scribe_stream(_request(GetMedicalScribeStreamInput))
+    client.get_medical_scribe_stream(_request(GetMedicalScribeStreamInputDict))
