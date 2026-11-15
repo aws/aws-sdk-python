@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import cast
+from typing import Unpack as _Unpack, cast, overload as _overload
 
 from smithy_aws_core.config.types import ConfigSource
 from smithy_aws_core.identity.chain.resolver import IdentityChain
@@ -20,365 +20,185 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from .models import (
-        AcceptDelegationRequestInput,
         AcceptDelegationRequestOutput,
-        AcquireRoleInput,
         AcquireRoleOutput,
-        AddClientIDToOpenIDConnectProviderInput,
         AddClientIDToOpenIDConnectProviderOutput,
-        AddRoleToInstanceProfileInput,
         AddRoleToInstanceProfileOutput,
-        AddUserToGroupInput,
         AddUserToGroupOutput,
-        AssociateDelegationRequestInput,
         AssociateDelegationRequestOutput,
-        AttachGroupPolicyInput,
         AttachGroupPolicyOutput,
-        AttachRolePolicyInput,
         AttachRolePolicyOutput,
-        AttachUserPolicyInput,
         AttachUserPolicyOutput,
-        ChangePasswordInput,
         ChangePasswordOutput,
-        CreateAccessKeyInput,
         CreateAccessKeyOutput,
-        CreateAccountAliasInput,
         CreateAccountAliasOutput,
-        CreateDelegationRequestInput,
         CreateDelegationRequestOutput,
-        CreateGroupInput,
         CreateGroupOutput,
-        CreateInstanceProfileInput,
         CreateInstanceProfileOutput,
-        CreateLoginProfileInput,
         CreateLoginProfileOutput,
-        CreateOpenIDConnectProviderInput,
         CreateOpenIDConnectProviderOutput,
-        CreatePolicyInput,
         CreatePolicyOutput,
-        CreatePolicyVersionInput,
         CreatePolicyVersionOutput,
-        CreateRoleInput,
         CreateRoleOutput,
-        CreateSAMLProviderInput,
         CreateSAMLProviderOutput,
-        CreateServiceLinkedRoleInput,
         CreateServiceLinkedRoleOutput,
-        CreateServiceSpecificCredentialInput,
         CreateServiceSpecificCredentialOutput,
-        CreateUserInput,
         CreateUserOutput,
-        CreateVirtualMFADeviceInput,
         CreateVirtualMFADeviceOutput,
-        DeactivateMFADeviceInput,
         DeactivateMFADeviceOutput,
-        DeleteAccessKeyInput,
         DeleteAccessKeyOutput,
-        DeleteAccountAliasInput,
         DeleteAccountAliasOutput,
-        DeleteAccountPasswordPolicyInput,
         DeleteAccountPasswordPolicyOutput,
-        DeleteGroupInput,
         DeleteGroupOutput,
-        DeleteGroupPolicyInput,
         DeleteGroupPolicyOutput,
-        DeleteInstanceProfileInput,
         DeleteInstanceProfileOutput,
-        DeleteLoginProfileInput,
         DeleteLoginProfileOutput,
-        DeleteOpenIDConnectProviderInput,
         DeleteOpenIDConnectProviderOutput,
-        DeletePolicyInput,
         DeletePolicyOutput,
-        DeletePolicyVersionInput,
         DeletePolicyVersionOutput,
-        DeleteRoleInput,
         DeleteRoleOutput,
-        DeleteRolePermissionsBoundaryInput,
         DeleteRolePermissionsBoundaryOutput,
-        DeleteRolePolicyInput,
         DeleteRolePolicyOutput,
-        DeleteSAMLProviderInput,
         DeleteSAMLProviderOutput,
-        DeleteSSHPublicKeyInput,
         DeleteSSHPublicKeyOutput,
-        DeleteServerCertificateInput,
         DeleteServerCertificateOutput,
-        DeleteServiceLinkedRoleInput,
         DeleteServiceLinkedRoleOutput,
-        DeleteServiceSpecificCredentialInput,
         DeleteServiceSpecificCredentialOutput,
-        DeleteSigningCertificateInput,
         DeleteSigningCertificateOutput,
-        DeleteUserInput,
         DeleteUserOutput,
-        DeleteUserPermissionsBoundaryInput,
         DeleteUserPermissionsBoundaryOutput,
-        DeleteUserPolicyInput,
         DeleteUserPolicyOutput,
-        DeleteVirtualMFADeviceInput,
         DeleteVirtualMFADeviceOutput,
-        DetachGroupPolicyInput,
         DetachGroupPolicyOutput,
-        DetachRolePolicyInput,
         DetachRolePolicyOutput,
-        DetachUserPolicyInput,
         DetachUserPolicyOutput,
-        DisableOrganizationsRootCredentialsManagementInput,
         DisableOrganizationsRootCredentialsManagementOutput,
-        DisableOrganizationsRootSessionsInput,
         DisableOrganizationsRootSessionsOutput,
-        DisableOutboundWebIdentityFederationInput,
         DisableOutboundWebIdentityFederationOutput,
-        EnableMFADeviceInput,
         EnableMFADeviceOutput,
-        EnableOrganizationsRootCredentialsManagementInput,
         EnableOrganizationsRootCredentialsManagementOutput,
-        EnableOrganizationsRootSessionsInput,
         EnableOrganizationsRootSessionsOutput,
-        EnableOutboundWebIdentityFederationInput,
         EnableOutboundWebIdentityFederationOutput,
-        GenerateCredentialReportInput,
         GenerateCredentialReportOutput,
-        GenerateOrganizationsAccessReportInput,
         GenerateOrganizationsAccessReportOutput,
-        GenerateServiceLastAccessedDetailsInput,
         GenerateServiceLastAccessedDetailsOutput,
-        GetAccessKeyLastUsedInput,
         GetAccessKeyLastUsedOutput,
-        GetAccountAuthorizationDetailsInput,
         GetAccountAuthorizationDetailsOutput,
-        GetAccountPasswordPolicyInput,
         GetAccountPasswordPolicyOutput,
-        GetAccountPropertiesInput,
         GetAccountPropertiesOutput,
-        GetAccountSummaryInput,
         GetAccountSummaryOutput,
-        GetContextKeysForCustomPolicyInput,
         GetContextKeysForCustomPolicyOutput,
-        GetContextKeysForPrincipalPolicyInput,
         GetContextKeysForPrincipalPolicyOutput,
-        GetCredentialReportInput,
         GetCredentialReportOutput,
-        GetDelegationRequestInput,
         GetDelegationRequestOutput,
-        GetGroupInput,
         GetGroupOutput,
-        GetGroupPolicyInput,
         GetGroupPolicyOutput,
-        GetHumanReadableSummaryInput,
         GetHumanReadableSummaryOutput,
-        GetInstanceProfileInput,
         GetInstanceProfileOutput,
-        GetLoginProfileInput,
         GetLoginProfileOutput,
-        GetMFADeviceInput,
         GetMFADeviceOutput,
-        GetOpenIDConnectProviderInput,
         GetOpenIDConnectProviderOutput,
-        GetOrganizationsAccessReportInput,
         GetOrganizationsAccessReportOutput,
-        GetOutboundWebIdentityFederationInfoInput,
         GetOutboundWebIdentityFederationInfoOutput,
-        GetPolicyInput,
         GetPolicyOutput,
-        GetPolicyVersionInput,
         GetPolicyVersionOutput,
-        GetRoleInput,
         GetRoleOutput,
-        GetRolePolicyInput,
         GetRolePolicyOutput,
-        GetRoleTemplateVersionInput,
         GetRoleTemplateVersionOutput,
-        GetSAMLProviderInput,
         GetSAMLProviderOutput,
-        GetSSHPublicKeyInput,
         GetSSHPublicKeyOutput,
-        GetServerCertificateInput,
         GetServerCertificateOutput,
-        GetServiceLastAccessedDetailsInput,
         GetServiceLastAccessedDetailsOutput,
-        GetServiceLastAccessedDetailsWithEntitiesInput,
         GetServiceLastAccessedDetailsWithEntitiesOutput,
-        GetServiceLinkedRoleDeletionStatusInput,
         GetServiceLinkedRoleDeletionStatusOutput,
-        GetUserInput,
         GetUserOutput,
-        GetUserPolicyInput,
         GetUserPolicyOutput,
-        ListAccessKeysInput,
         ListAccessKeysOutput,
-        ListAccountAliasesInput,
         ListAccountAliasesOutput,
-        ListAttachedGroupPoliciesInput,
         ListAttachedGroupPoliciesOutput,
-        ListAttachedRolePoliciesInput,
         ListAttachedRolePoliciesOutput,
-        ListAttachedUserPoliciesInput,
         ListAttachedUserPoliciesOutput,
-        ListDelegationRequestsInput,
         ListDelegationRequestsOutput,
-        ListEntitiesForPolicyInput,
         ListEntitiesForPolicyOutput,
-        ListGroupPoliciesInput,
         ListGroupPoliciesOutput,
-        ListGroupsForUserInput,
         ListGroupsForUserOutput,
-        ListGroupsInput,
         ListGroupsOutput,
-        ListInstanceProfileTagsInput,
         ListInstanceProfileTagsOutput,
-        ListInstanceProfilesForRoleInput,
         ListInstanceProfilesForRoleOutput,
-        ListInstanceProfilesInput,
         ListInstanceProfilesOutput,
-        ListMFADeviceTagsInput,
         ListMFADeviceTagsOutput,
-        ListMFADevicesInput,
         ListMFADevicesOutput,
-        ListOpenIDConnectProviderTagsInput,
         ListOpenIDConnectProviderTagsOutput,
-        ListOpenIDConnectProvidersInput,
         ListOpenIDConnectProvidersOutput,
-        ListOrganizationsFeaturesInput,
         ListOrganizationsFeaturesOutput,
-        ListPoliciesGrantingServiceAccessInput,
         ListPoliciesGrantingServiceAccessOutput,
-        ListPoliciesInput,
         ListPoliciesOutput,
-        ListPolicyTagsInput,
         ListPolicyTagsOutput,
-        ListPolicyVersionsInput,
         ListPolicyVersionsOutput,
-        ListRolePoliciesInput,
         ListRolePoliciesOutput,
-        ListRoleTagsInput,
         ListRoleTagsOutput,
-        ListRolesInput,
         ListRolesOutput,
-        ListSAMLProviderTagsInput,
         ListSAMLProviderTagsOutput,
-        ListSAMLProvidersInput,
         ListSAMLProvidersOutput,
-        ListSSHPublicKeysInput,
         ListSSHPublicKeysOutput,
-        ListServerCertificateTagsInput,
         ListServerCertificateTagsOutput,
-        ListServerCertificatesInput,
         ListServerCertificatesOutput,
-        ListServiceSpecificCredentialsInput,
         ListServiceSpecificCredentialsOutput,
-        ListSigningCertificatesInput,
         ListSigningCertificatesOutput,
-        ListUserPoliciesInput,
         ListUserPoliciesOutput,
-        ListUserTagsInput,
         ListUserTagsOutput,
-        ListUsersInput,
         ListUsersOutput,
-        ListVirtualMFADevicesInput,
         ListVirtualMFADevicesOutput,
-        PutAccountPropertiesInput,
         PutAccountPropertiesOutput,
-        PutGroupPolicyInput,
         PutGroupPolicyOutput,
-        PutRolePermissionsBoundaryInput,
         PutRolePermissionsBoundaryOutput,
-        PutRolePolicyInput,
         PutRolePolicyOutput,
-        PutUserPermissionsBoundaryInput,
         PutUserPermissionsBoundaryOutput,
-        PutUserPolicyInput,
         PutUserPolicyOutput,
-        RejectDelegationRequestInput,
         RejectDelegationRequestOutput,
-        RemoveClientIDFromOpenIDConnectProviderInput,
         RemoveClientIDFromOpenIDConnectProviderOutput,
-        RemoveRoleFromInstanceProfileInput,
         RemoveRoleFromInstanceProfileOutput,
-        RemoveUserFromGroupInput,
         RemoveUserFromGroupOutput,
-        ResetServiceSpecificCredentialInput,
         ResetServiceSpecificCredentialOutput,
-        ResyncMFADeviceInput,
         ResyncMFADeviceOutput,
-        SendDelegationTokenInput,
         SendDelegationTokenOutput,
-        SetDefaultPolicyVersionInput,
         SetDefaultPolicyVersionOutput,
-        SetSecurityTokenServicePreferencesInput,
         SetSecurityTokenServicePreferencesOutput,
-        SimulateCustomPolicyInput,
         SimulateCustomPolicyOutput,
-        SimulatePrincipalPolicyInput,
         SimulatePrincipalPolicyOutput,
-        TagInstanceProfileInput,
         TagInstanceProfileOutput,
-        TagMFADeviceInput,
         TagMFADeviceOutput,
-        TagOpenIDConnectProviderInput,
         TagOpenIDConnectProviderOutput,
-        TagPolicyInput,
         TagPolicyOutput,
-        TagRoleInput,
         TagRoleOutput,
-        TagSAMLProviderInput,
         TagSAMLProviderOutput,
-        TagServerCertificateInput,
         TagServerCertificateOutput,
-        TagUserInput,
         TagUserOutput,
-        UntagInstanceProfileInput,
         UntagInstanceProfileOutput,
-        UntagMFADeviceInput,
         UntagMFADeviceOutput,
-        UntagOpenIDConnectProviderInput,
         UntagOpenIDConnectProviderOutput,
-        UntagPolicyInput,
         UntagPolicyOutput,
-        UntagRoleInput,
         UntagRoleOutput,
-        UntagSAMLProviderInput,
         UntagSAMLProviderOutput,
-        UntagServerCertificateInput,
         UntagServerCertificateOutput,
-        UntagUserInput,
         UntagUserOutput,
-        UpdateAccessKeyInput,
         UpdateAccessKeyOutput,
-        UpdateAccountPasswordPolicyInput,
         UpdateAccountPasswordPolicyOutput,
-        UpdateAssumeRolePolicyInput,
         UpdateAssumeRolePolicyOutput,
-        UpdateDelegationRequestInput,
         UpdateDelegationRequestOutput,
-        UpdateGroupInput,
         UpdateGroupOutput,
-        UpdateLoginProfileInput,
         UpdateLoginProfileOutput,
-        UpdateOpenIDConnectProviderThumbprintInput,
         UpdateOpenIDConnectProviderThumbprintOutput,
-        UpdateRoleDescriptionInput,
         UpdateRoleDescriptionOutput,
-        UpdateRoleInput,
         UpdateRoleOutput,
-        UpdateSAMLProviderInput,
         UpdateSAMLProviderOutput,
-        UpdateSSHPublicKeyInput,
         UpdateSSHPublicKeyOutput,
-        UpdateServerCertificateInput,
         UpdateServerCertificateOutput,
-        UpdateServiceSpecificCredentialInput,
         UpdateServiceSpecificCredentialOutput,
-        UpdateSigningCertificateInput,
         UpdateSigningCertificateOutput,
-        UpdateUserInput,
         UpdateUserOutput,
-        UploadSSHPublicKeyInput,
         UploadSSHPublicKeyOutput,
-        UploadServerCertificateInput,
         UploadServerCertificateOutput,
-        UploadSigningCertificateInput,
         UploadSigningCertificateOutput,
     )
 
@@ -453,10 +273,25 @@ class IAMClient(Client[IAMConfig]):
       using an access key ID and secret access key.
     """
 
-    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
+    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
 
+    @_overload
     def accept_delegation_request(
-        self, input: AcceptDelegationRequestInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.AcceptDelegationRequestInput
+        | _models.AcceptDelegationRequestInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AcceptDelegationRequestOutput: ...
+
+    @_overload
+    def accept_delegation_request(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AcceptDelegationRequestInputDict],
     ) -> AcceptDelegationRequestOutput:
         """
         Accepts a delegation request, granting the requested temporary access.
@@ -474,8 +309,6 @@ class IAMClient(Client[IAMConfig]):
         the partner.
 
         Args:
-            input:
-                An instance of `AcceptDelegationRequestInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -485,10 +318,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `AcceptDelegationRequestOutput`.
         """
-        return self._invoke(input, _models.ACCEPT_DELEGATION_REQUEST, [], plugins)
 
+    def accept_delegation_request(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AcceptDelegationRequestOutput:
+        return self._invoke(
+            self._select_input(_models.ACCEPT_DELEGATION_REQUEST, args, kwargs),
+            _models.ACCEPT_DELEGATION_REQUEST,
+            [],
+            plugins,
+        )
+
+    @_overload
     def acquire_role(
-        self, input: AcquireRoleInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.AcquireRoleInput | _models.AcquireRoleInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AcquireRoleOutput: ...
+
+    @_overload
+    def acquire_role(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AcquireRoleInputDict],
     ) -> AcquireRoleOutput:
         """
         Creates an IAM role from the specified role template. The new role takes
@@ -504,8 +360,6 @@ class IAMClient(Client[IAMConfig]):
         role during creation.
 
         Args:
-            input:
-                An instance of `AcquireRoleInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -515,12 +369,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `AcquireRoleOutput`.
         """
-        return self._invoke(input, _models.ACQUIRE_ROLE, [], plugins)
 
+    def acquire_role(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AcquireRoleOutput:
+        return self._invoke(
+            self._select_input(_models.ACQUIRE_ROLE, args, kwargs),
+            _models.ACQUIRE_ROLE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def add_client_id_to_open_id_connect_provider(
         self,
-        input: AddClientIDToOpenIDConnectProviderInput,
+        request: _models.AddClientIDToOpenIDConnectProviderInput
+        | _models.AddClientIDToOpenIDConnectProviderInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> AddClientIDToOpenIDConnectProviderOutput: ...
+
+    @_overload
+    def add_client_id_to_open_id_connect_provider(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AddClientIDToOpenIDConnectProviderInputDict],
     ) -> AddClientIDToOpenIDConnectProviderOutput:
         """
         Adds a new client ID (also known as audience) to the list of client IDs
@@ -531,8 +407,6 @@ class IAMClient(Client[IAMConfig]):
         add an existing client ID to the provider.
 
         Args:
-            input:
-                An instance of `AddClientIDToOpenIDConnectProviderInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -542,12 +416,36 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `AddClientIDToOpenIDConnectProviderOutput`.
         """
+
+    def add_client_id_to_open_id_connect_provider(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AddClientIDToOpenIDConnectProviderOutput:
         return self._invoke(
-            input, _models.ADD_CLIENT_ID_TO_OPEN_ID_CONNECT_PROVIDER, [], plugins
+            self._select_input(
+                _models.ADD_CLIENT_ID_TO_OPEN_ID_CONNECT_PROVIDER, args, kwargs
+            ),
+            _models.ADD_CLIENT_ID_TO_OPEN_ID_CONNECT_PROVIDER,
+            [],
+            plugins,
         )
 
+    @_overload
     def add_role_to_instance_profile(
-        self, input: AddRoleToInstanceProfileInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.AddRoleToInstanceProfileInput
+        | _models.AddRoleToInstanceProfileInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AddRoleToInstanceProfileOutput: ...
+
+    @_overload
+    def add_role_to_instance_profile(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AddRoleToInstanceProfileInputDict],
     ) -> AddRoleToInstanceProfileOutput:
         """
         Adds the specified IAM role to the specified instance profile. An
@@ -584,8 +482,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `AddRoleToInstanceProfileInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -595,17 +491,38 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `AddRoleToInstanceProfileOutput`.
         """
-        return self._invoke(input, _models.ADD_ROLE_TO_INSTANCE_PROFILE, [], plugins)
 
+    def add_role_to_instance_profile(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AddRoleToInstanceProfileOutput:
+        return self._invoke(
+            self._select_input(_models.ADD_ROLE_TO_INSTANCE_PROFILE, args, kwargs),
+            _models.ADD_ROLE_TO_INSTANCE_PROFILE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def add_user_to_group(
-        self, input: AddUserToGroupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.AddUserToGroupInput | _models.AddUserToGroupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AddUserToGroupOutput: ...
+
+    @_overload
+    def add_user_to_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AddUserToGroupInputDict],
     ) -> AddUserToGroupOutput:
         """
         Adds the specified user to the specified group.
 
         Args:
-            input:
-                An instance of `AddUserToGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -615,12 +532,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `AddUserToGroupOutput`.
         """
-        return self._invoke(input, _models.ADD_USER_TO_GROUP, [], plugins)
 
+    def add_user_to_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AddUserToGroupOutput:
+        return self._invoke(
+            self._select_input(_models.ADD_USER_TO_GROUP, args, kwargs),
+            _models.ADD_USER_TO_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def associate_delegation_request(
         self,
-        input: AssociateDelegationRequestInput,
+        request: _models.AssociateDelegationRequestInput
+        | _models.AssociateDelegationRequestInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> AssociateDelegationRequestOutput: ...
+
+    @_overload
+    def associate_delegation_request(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AssociateDelegationRequestInputDict],
     ) -> AssociateDelegationRequestOutput:
         """
         Associates a delegation request with the current identity.
@@ -644,8 +583,6 @@ class IAMClient(Client[IAMConfig]):
         Requests](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies-temporary-delegation.html#temporary-delegation-managing-permissions).
 
         Args:
-            input:
-                An instance of `AssociateDelegationRequestInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -655,10 +592,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `AssociateDelegationRequestOutput`.
         """
-        return self._invoke(input, _models.ASSOCIATE_DELEGATION_REQUEST, [], plugins)
 
+    def associate_delegation_request(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AssociateDelegationRequestOutput:
+        return self._invoke(
+            self._select_input(_models.ASSOCIATE_DELEGATION_REQUEST, args, kwargs),
+            _models.ASSOCIATE_DELEGATION_REQUEST,
+            [],
+            plugins,
+        )
+
+    @_overload
     def attach_group_policy(
-        self, input: AttachGroupPolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.AttachGroupPolicyInput | _models.AttachGroupPolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AttachGroupPolicyOutput: ...
+
+    @_overload
+    def attach_group_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AttachGroupPolicyInputDict],
     ) -> AttachGroupPolicyOutput:
         """
         Attaches the specified managed policy to the specified IAM group.
@@ -678,8 +638,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `AttachGroupPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -689,10 +647,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `AttachGroupPolicyOutput`.
         """
-        return self._invoke(input, _models.ATTACH_GROUP_POLICY, [], plugins)
 
+    def attach_group_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AttachGroupPolicyOutput:
+        return self._invoke(
+            self._select_input(_models.ATTACH_GROUP_POLICY, args, kwargs),
+            _models.ATTACH_GROUP_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def attach_role_policy(
-        self, input: AttachRolePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.AttachRolePolicyInput | _models.AttachRolePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AttachRolePolicyOutput: ...
+
+    @_overload
+    def attach_role_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AttachRolePolicyInputDict],
     ) -> AttachRolePolicyOutput:
         """
         Attaches the specified managed policy to the specified IAM role. When
@@ -720,8 +701,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `AttachRolePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -731,10 +710,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `AttachRolePolicyOutput`.
         """
-        return self._invoke(input, _models.ATTACH_ROLE_POLICY, [], plugins)
 
+    def attach_role_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AttachRolePolicyOutput:
+        return self._invoke(
+            self._select_input(_models.ATTACH_ROLE_POLICY, args, kwargs),
+            _models.ATTACH_ROLE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def attach_user_policy(
-        self, input: AttachUserPolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.AttachUserPolicyInput | _models.AttachUserPolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AttachUserPolicyOutput: ...
+
+    @_overload
+    def attach_user_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AttachUserPolicyInputDict],
     ) -> AttachUserPolicyOutput:
         """
         Attaches the specified managed policy to the specified user.
@@ -754,8 +756,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `AttachUserPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -765,10 +765,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `AttachUserPolicyOutput`.
         """
-        return self._invoke(input, _models.ATTACH_USER_POLICY, [], plugins)
 
+    def attach_user_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AttachUserPolicyOutput:
+        return self._invoke(
+            self._select_input(_models.ATTACH_USER_POLICY, args, kwargs),
+            _models.ATTACH_USER_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def change_password(
-        self, input: ChangePasswordInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ChangePasswordInput | _models.ChangePasswordInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ChangePasswordOutput: ...
+
+    @_overload
+    def change_password(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ChangePasswordInputDict],
     ) -> ChangePasswordOutput:
         """
         Changes the password of the IAM user who is calling this operation. This
@@ -786,8 +809,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `ChangePasswordInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -797,12 +818,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `ChangePasswordOutput`.
         """
-        return self._invoke(input, _models.CHANGE_PASSWORD, [], plugins)
 
+    def change_password(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ChangePasswordOutput:
+        return self._invoke(
+            self._select_input(_models.CHANGE_PASSWORD, args, kwargs),
+            _models.CHANGE_PASSWORD,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_access_key(
         self,
-        input: CreateAccessKeyInput | None = None,
+        request: _models.CreateAccessKeyInput | _models.CreateAccessKeyInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateAccessKeyOutput: ...
+
+    @_overload
+    def create_access_key(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateAccessKeyInputDict],
     ) -> CreateAccessKeyOutput:
         """
         Creates a new Amazon Web Services secret access key and corresponding
@@ -829,8 +871,6 @@ class IAMClient(Client[IAMConfig]):
             for the associated user and then create new keys.
 
         Args:
-            input:
-                An instance of `CreateAccessKeyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -840,10 +880,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `CreateAccessKeyOutput`.
         """
-        return self._invoke(input, _models.CREATE_ACCESS_KEY, [], plugins)
 
+    def create_access_key(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateAccessKeyOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_ACCESS_KEY, args, kwargs),
+            _models.CREATE_ACCESS_KEY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_account_alias(
-        self, input: CreateAccountAliasInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateAccountAliasInput | _models.CreateAccountAliasInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateAccountAliasOutput: ...
+
+    @_overload
+    def create_account_alias(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateAccountAliasInputDict],
     ) -> CreateAccountAliasOutput:
         """
         Creates an alias for your Amazon Web Services account. For information
@@ -853,8 +916,6 @@ class IAMClient(Client[IAMConfig]):
         in the *Amazon Web Services Sign-In User Guide*.
 
         Args:
-            input:
-                An instance of `CreateAccountAliasInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -864,10 +925,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `CreateAccountAliasOutput`.
         """
-        return self._invoke(input, _models.CREATE_ACCOUNT_ALIAS, [], plugins)
 
+    def create_account_alias(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateAccountAliasOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_ACCOUNT_ALIAS, args, kwargs),
+            _models.CREATE_ACCOUNT_ALIAS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_delegation_request(
-        self, input: CreateDelegationRequestInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateDelegationRequestInput
+        | _models.CreateDelegationRequestInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateDelegationRequestOutput: ...
+
+    @_overload
+    def create_delegation_request(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateDelegationRequestInputDict],
     ) -> CreateDelegationRequestOutput:
         """
         Creates an IAM delegation request for temporary access delegation.
@@ -878,8 +963,6 @@ class IAMClient(Client[IAMConfig]):
         documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies-temporary-delegation-partner-guide.html).
 
         Args:
-            input:
-                An instance of `CreateDelegationRequestInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -889,10 +972,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `CreateDelegationRequestOutput`.
         """
-        return self._invoke(input, _models.CREATE_DELEGATION_REQUEST, [], plugins)
 
+    def create_delegation_request(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateDelegationRequestOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_DELEGATION_REQUEST, args, kwargs),
+            _models.CREATE_DELEGATION_REQUEST,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_group(
-        self, input: CreateGroupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateGroupInput | _models.CreateGroupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateGroupOutput: ...
+
+    @_overload
+    def create_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateGroupInputDict],
     ) -> CreateGroupOutput:
         """
         Creates a new group.
@@ -903,8 +1009,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `CreateGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -914,10 +1018,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `CreateGroupOutput`.
         """
-        return self._invoke(input, _models.CREATE_GROUP, [], plugins)
 
+    def create_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateGroupOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_GROUP, args, kwargs),
+            _models.CREATE_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_instance_profile(
-        self, input: CreateInstanceProfileInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateInstanceProfileInput
+        | _models.CreateInstanceProfileInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateInstanceProfileOutput: ...
+
+    @_overload
+    def create_instance_profile(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateInstanceProfileInputDict],
     ) -> CreateInstanceProfileOutput:
         """
         Creates a new instance profile. For information about instance profiles,
@@ -933,8 +1061,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `CreateInstanceProfileInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -944,12 +1070,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `CreateInstanceProfileOutput`.
         """
-        return self._invoke(input, _models.CREATE_INSTANCE_PROFILE, [], plugins)
 
+    def create_instance_profile(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateInstanceProfileOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_INSTANCE_PROFILE, args, kwargs),
+            _models.CREATE_INSTANCE_PROFILE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_login_profile(
         self,
-        input: CreateLoginProfileInput | None = None,
+        request: _models.CreateLoginProfileInput | _models.CreateLoginProfileInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateLoginProfileOutput: ...
+
+    @_overload
+    def create_login_profile(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateLoginProfileInputDict],
     ) -> CreateLoginProfileOutput:
         """
         Creates a password for the specified IAM user. A password allows an IAM
@@ -967,8 +1114,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `CreateLoginProfileInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -978,12 +1123,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `CreateLoginProfileOutput`.
         """
-        return self._invoke(input, _models.CREATE_LOGIN_PROFILE, [], plugins)
 
+    def create_login_profile(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateLoginProfileOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_LOGIN_PROFILE, args, kwargs),
+            _models.CREATE_LOGIN_PROFILE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_open_id_connect_provider(
         self,
-        input: CreateOpenIDConnectProviderInput,
+        request: _models.CreateOpenIDConnectProviderInput
+        | _models.CreateOpenIDConnectProviderInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateOpenIDConnectProviderOutput: ...
+
+    @_overload
+    def create_open_id_connect_provider(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateOpenIDConnectProviderInputDict],
     ) -> CreateOpenIDConnectProviderOutput:
         """
         Creates an IAM entity to describe an identity provider (IdP) that
@@ -1032,8 +1199,6 @@ class IAMClient(Client[IAMConfig]):
             operation to highly privileged users.
 
         Args:
-            input:
-                An instance of `CreateOpenIDConnectProviderInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1043,10 +1208,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `CreateOpenIDConnectProviderOutput`.
         """
-        return self._invoke(input, _models.CREATE_OPEN_ID_CONNECT_PROVIDER, [], plugins)
 
+    def create_open_id_connect_provider(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateOpenIDConnectProviderOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_OPEN_ID_CONNECT_PROVIDER, args, kwargs),
+            _models.CREATE_OPEN_ID_CONNECT_PROVIDER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_policy(
-        self, input: CreatePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreatePolicyInput | _models.CreatePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreatePolicyOutput: ...
+
+    @_overload
+    def create_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreatePolicyInputDict],
     ) -> CreatePolicyOutput:
         """
         Creates a new managed policy for your Amazon Web Services account.
@@ -1068,8 +1256,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `CreatePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1079,10 +1265,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `CreatePolicyOutput`.
         """
-        return self._invoke(input, _models.CREATE_POLICY, [], plugins)
 
+    def create_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreatePolicyOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_POLICY, args, kwargs),
+            _models.CREATE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_policy_version(
-        self, input: CreatePolicyVersionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreatePolicyVersionInput
+        | _models.CreatePolicyVersionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreatePolicyVersionOutput: ...
+
+    @_overload
+    def create_policy_version(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreatePolicyVersionInputDict],
     ) -> CreatePolicyVersionOutput:
         """
         Creates a new version of the specified managed policy. To update a
@@ -1102,8 +1312,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `CreatePolicyVersionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1113,10 +1321,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `CreatePolicyVersionOutput`.
         """
-        return self._invoke(input, _models.CREATE_POLICY_VERSION, [], plugins)
 
+    def create_policy_version(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreatePolicyVersionOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_POLICY_VERSION, args, kwargs),
+            _models.CREATE_POLICY_VERSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_role(
-        self, input: CreateRoleInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateRoleInput | _models.CreateRoleInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateRoleOutput: ...
+
+    @_overload
+    def create_role(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateRoleInputDict],
     ) -> CreateRoleOutput:
         """
         Creates a new role for your Amazon Web Services account.
@@ -1129,8 +1360,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `CreateRoleInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1140,10 +1369,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `CreateRoleOutput`.
         """
-        return self._invoke(input, _models.CREATE_ROLE, [], plugins)
 
+    def create_role(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateRoleOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_ROLE, args, kwargs),
+            _models.CREATE_ROLE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_saml_provider(
-        self, input: CreateSAMLProviderInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateSAMLProviderInput | _models.CreateSAMLProviderInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateSAMLProviderOutput: ...
+
+    @_overload
+    def create_saml_provider(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateSAMLProviderInputDict],
     ) -> CreateSAMLProviderOutput:
         """
         Creates an IAM resource that describes an identity provider (IdP) that
@@ -1175,8 +1427,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `CreateSAMLProviderInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1186,10 +1436,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `CreateSAMLProviderOutput`.
         """
-        return self._invoke(input, _models.CREATE_SAML_PROVIDER, [], plugins)
 
+    def create_saml_provider(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateSAMLProviderOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_SAML_PROVIDER, args, kwargs),
+            _models.CREATE_SAML_PROVIDER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_service_linked_role(
-        self, input: CreateServiceLinkedRoleInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateServiceLinkedRoleInput
+        | _models.CreateServiceLinkedRoleInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateServiceLinkedRoleOutput: ...
+
+    @_overload
+    def create_service_linked_role(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateServiceLinkedRoleInputDict],
     ) -> CreateServiceLinkedRoleOutput:
         """
         Creates an IAM role that is linked to a specific Amazon Web Services
@@ -1207,8 +1481,6 @@ class IAMClient(Client[IAMConfig]):
         request using the Amazon Web Services service that depends on this role.
 
         Args:
-            input:
-                An instance of `CreateServiceLinkedRoleInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1218,12 +1490,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `CreateServiceLinkedRoleOutput`.
         """
-        return self._invoke(input, _models.CREATE_SERVICE_LINKED_ROLE, [], plugins)
 
+    def create_service_linked_role(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateServiceLinkedRoleOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_SERVICE_LINKED_ROLE, args, kwargs),
+            _models.CREATE_SERVICE_LINKED_ROLE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_service_specific_credential(
         self,
-        input: CreateServiceSpecificCredentialInput,
+        request: _models.CreateServiceSpecificCredentialInput
+        | _models.CreateServiceSpecificCredentialInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateServiceSpecificCredentialOutput: ...
+
+    @_overload
+    def create_service_specific_credential(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateServiceSpecificCredentialInputDict],
     ) -> CreateServiceSpecificCredentialOutput:
         """
         Generates a set of credentials consisting of a user name and password
@@ -1258,8 +1552,6 @@ class IAMClient(Client[IAMConfig]):
           in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `CreateServiceSpecificCredentialInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1269,12 +1561,35 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `CreateServiceSpecificCredentialOutput`.
         """
+
+    def create_service_specific_credential(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateServiceSpecificCredentialOutput:
         return self._invoke(
-            input, _models.CREATE_SERVICE_SPECIFIC_CREDENTIAL, [], plugins
+            self._select_input(
+                _models.CREATE_SERVICE_SPECIFIC_CREDENTIAL, args, kwargs
+            ),
+            _models.CREATE_SERVICE_SPECIFIC_CREDENTIAL,
+            [],
+            plugins,
         )
 
+    @_overload
     def create_user(
-        self, input: CreateUserInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateUserInput | _models.CreateUserInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateUserOutput: ...
+
+    @_overload
+    def create_user(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateUserInputDict],
     ) -> CreateUserOutput:
         """
         Creates a new IAM user for your Amazon Web Services account.
@@ -1285,8 +1600,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `CreateUserInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1296,10 +1609,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `CreateUserOutput`.
         """
-        return self._invoke(input, _models.CREATE_USER, [], plugins)
 
+    def create_user(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateUserOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_USER, args, kwargs),
+            _models.CREATE_USER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_virtual_mfa_device(
-        self, input: CreateVirtualMFADeviceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateVirtualMFADeviceInput
+        | _models.CreateVirtualMFADeviceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateVirtualMFADeviceOutput: ...
+
+    @_overload
+    def create_virtual_mfa_device(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateVirtualMFADeviceInputDict],
     ) -> CreateVirtualMFADeviceOutput:
         """
         Creates a new virtual MFA device for the Amazon Web Services account.
@@ -1324,8 +1661,6 @@ class IAMClient(Client[IAMConfig]):
             secure procedures.
 
         Args:
-            input:
-                An instance of `CreateVirtualMFADeviceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1335,10 +1670,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `CreateVirtualMFADeviceOutput`.
         """
-        return self._invoke(input, _models.CREATE_VIRTUAL_MFA_DEVICE, [], plugins)
 
+    def create_virtual_mfa_device(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateVirtualMFADeviceOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_VIRTUAL_MFA_DEVICE, args, kwargs),
+            _models.CREATE_VIRTUAL_MFA_DEVICE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def deactivate_mfa_device(
-        self, input: DeactivateMFADeviceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeactivateMFADeviceInput
+        | _models.DeactivateMFADeviceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeactivateMFADeviceOutput: ...
+
+    @_overload
+    def deactivate_mfa_device(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeactivateMFADeviceInputDict],
     ) -> DeactivateMFADeviceOutput:
         """
         Deactivates the specified MFA device and removes it from association
@@ -1350,8 +1709,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `DeactivateMFADeviceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1361,10 +1718,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `DeactivateMFADeviceOutput`.
         """
-        return self._invoke(input, _models.DEACTIVATE_MFA_DEVICE, [], plugins)
 
+    def deactivate_mfa_device(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeactivateMFADeviceOutput:
+        return self._invoke(
+            self._select_input(_models.DEACTIVATE_MFA_DEVICE, args, kwargs),
+            _models.DEACTIVATE_MFA_DEVICE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_access_key(
-        self, input: DeleteAccessKeyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteAccessKeyInput | _models.DeleteAccessKeyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteAccessKeyOutput: ...
+
+    @_overload
+    def delete_access_key(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteAccessKeyInputDict],
     ) -> DeleteAccessKeyOutput:
         """
         Deletes the access key pair associated with the specified IAM user.
@@ -1377,8 +1757,6 @@ class IAMClient(Client[IAMConfig]):
         Services account has no associated users.
 
         Args:
-            input:
-                An instance of `DeleteAccessKeyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1388,10 +1766,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `DeleteAccessKeyOutput`.
         """
-        return self._invoke(input, _models.DELETE_ACCESS_KEY, [], plugins)
 
+    def delete_access_key(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteAccessKeyOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_ACCESS_KEY, args, kwargs),
+            _models.DELETE_ACCESS_KEY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_account_alias(
-        self, input: DeleteAccountAliasInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteAccountAliasInput | _models.DeleteAccountAliasInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteAccountAliasOutput: ...
+
+    @_overload
+    def delete_account_alias(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteAccountAliasInputDict],
     ) -> DeleteAccountAliasOutput:
         """
         Deletes the specified Amazon Web Services account alias. For information
@@ -1401,8 +1802,6 @@ class IAMClient(Client[IAMConfig]):
         in the *Amazon Web Services Sign-In User Guide*.
 
         Args:
-            input:
-                An instance of `DeleteAccountAliasInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1412,20 +1811,40 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `DeleteAccountAliasOutput`.
         """
-        return self._invoke(input, _models.DELETE_ACCOUNT_ALIAS, [], plugins)
 
+    def delete_account_alias(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteAccountAliasOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_ACCOUNT_ALIAS, args, kwargs),
+            _models.DELETE_ACCOUNT_ALIAS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_account_password_policy(
         self,
-        input: DeleteAccountPasswordPolicyInput | None = None,
+        request: _models.DeleteAccountPasswordPolicyInput
+        | _models.DeleteAccountPasswordPolicyInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteAccountPasswordPolicyOutput: ...
+
+    @_overload
+    def delete_account_password_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteAccountPasswordPolicyInputDict],
     ) -> DeleteAccountPasswordPolicyOutput:
         """
         Deletes the password policy for the Amazon Web Services account. There
         are no parameters.
 
         Args:
-            input:
-                An instance of `DeleteAccountPasswordPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1435,18 +1854,39 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `DeleteAccountPasswordPolicyOutput`.
         """
-        return self._invoke(input, _models.DELETE_ACCOUNT_PASSWORD_POLICY, [], plugins)
 
+    def delete_account_password_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteAccountPasswordPolicyOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_ACCOUNT_PASSWORD_POLICY, args, kwargs),
+            _models.DELETE_ACCOUNT_PASSWORD_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_group(
-        self, input: DeleteGroupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteGroupInput | _models.DeleteGroupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteGroupOutput: ...
+
+    @_overload
+    def delete_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteGroupInputDict],
     ) -> DeleteGroupOutput:
         """
         Deletes the specified IAM group. The group must not contain any users or
         have any attached policies.
 
         Args:
-            input:
-                An instance of `DeleteGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1456,10 +1896,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `DeleteGroupOutput`.
         """
-        return self._invoke(input, _models.DELETE_GROUP, [], plugins)
 
+    def delete_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteGroupOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_GROUP, args, kwargs),
+            _models.DELETE_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_group_policy(
-        self, input: DeleteGroupPolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteGroupPolicyInput | _models.DeleteGroupPolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteGroupPolicyOutput: ...
+
+    @_overload
+    def delete_group_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteGroupPolicyInputDict],
     ) -> DeleteGroupPolicyOutput:
         """
         Deletes the specified inline policy that is embedded in the specified
@@ -1474,8 +1937,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `DeleteGroupPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1485,10 +1946,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `DeleteGroupPolicyOutput`.
         """
-        return self._invoke(input, _models.DELETE_GROUP_POLICY, [], plugins)
 
+    def delete_group_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteGroupPolicyOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_GROUP_POLICY, args, kwargs),
+            _models.DELETE_GROUP_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_instance_profile(
-        self, input: DeleteInstanceProfileInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteInstanceProfileInput
+        | _models.DeleteInstanceProfileInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteInstanceProfileOutput: ...
+
+    @_overload
+    def delete_instance_profile(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteInstanceProfileInputDict],
     ) -> DeleteInstanceProfileOutput:
         """
         Deletes the specified instance profile. The instance profile must not
@@ -1505,8 +1990,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `DeleteInstanceProfileInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1516,12 +1999,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `DeleteInstanceProfileOutput`.
         """
-        return self._invoke(input, _models.DELETE_INSTANCE_PROFILE, [], plugins)
 
+    def delete_instance_profile(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteInstanceProfileOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_INSTANCE_PROFILE, args, kwargs),
+            _models.DELETE_INSTANCE_PROFILE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_login_profile(
         self,
-        input: DeleteLoginProfileInput | None = None,
+        request: _models.DeleteLoginProfileInput | _models.DeleteLoginProfileInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteLoginProfileOutput: ...
+
+    @_overload
+    def delete_login_profile(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteLoginProfileInputDict],
     ) -> DeleteLoginProfileOutput:
         """
         Deletes the password for the specified IAM user or root user, For more
@@ -1545,8 +2049,6 @@ class IAMClient(Client[IAMConfig]):
             [DeleteAccessKey](https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteAccessKey.html).
 
         Args:
-            input:
-                An instance of `DeleteLoginProfileInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1556,12 +2058,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `DeleteLoginProfileOutput`.
         """
-        return self._invoke(input, _models.DELETE_LOGIN_PROFILE, [], plugins)
 
+    def delete_login_profile(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteLoginProfileOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_LOGIN_PROFILE, args, kwargs),
+            _models.DELETE_LOGIN_PROFILE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_open_id_connect_provider(
         self,
-        input: DeleteOpenIDConnectProviderInput,
+        request: _models.DeleteOpenIDConnectProviderInput
+        | _models.DeleteOpenIDConnectProviderInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteOpenIDConnectProviderOutput: ...
+
+    @_overload
+    def delete_open_id_connect_provider(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteOpenIDConnectProviderInputDict],
     ) -> DeleteOpenIDConnectProviderOutput:
         """
         Deletes an OpenID Connect identity provider (IdP) resource object in
@@ -1575,8 +2099,6 @@ class IAMClient(Client[IAMConfig]):
         call the operation for a provider that does not exist.
 
         Args:
-            input:
-                An instance of `DeleteOpenIDConnectProviderInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1586,10 +2108,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `DeleteOpenIDConnectProviderOutput`.
         """
-        return self._invoke(input, _models.DELETE_OPEN_ID_CONNECT_PROVIDER, [], plugins)
 
+    def delete_open_id_connect_provider(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteOpenIDConnectProviderOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_OPEN_ID_CONNECT_PROVIDER, args, kwargs),
+            _models.DELETE_OPEN_ID_CONNECT_PROVIDER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_policy(
-        self, input: DeletePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeletePolicyInput | _models.DeletePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeletePolicyOutput: ...
+
+    @_overload
+    def delete_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeletePolicyInputDict],
     ) -> DeletePolicyOutput:
         """
         Deletes the specified managed policy.
@@ -1626,8 +2171,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `DeletePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1637,10 +2180,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `DeletePolicyOutput`.
         """
-        return self._invoke(input, _models.DELETE_POLICY, [], plugins)
 
+    def delete_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeletePolicyOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_POLICY, args, kwargs),
+            _models.DELETE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_policy_version(
-        self, input: DeletePolicyVersionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeletePolicyVersionInput
+        | _models.DeletePolicyVersionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeletePolicyVersionOutput: ...
+
+    @_overload
+    def delete_policy_version(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeletePolicyVersionInputDict],
     ) -> DeletePolicyVersionOutput:
         """
         Deletes the specified version from the specified managed policy.
@@ -1658,8 +2225,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `DeletePolicyVersionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1669,10 +2234,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `DeletePolicyVersionOutput`.
         """
-        return self._invoke(input, _models.DELETE_POLICY_VERSION, [], plugins)
 
+    def delete_policy_version(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeletePolicyVersionOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_POLICY_VERSION, args, kwargs),
+            _models.DELETE_POLICY_VERSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_role(
-        self, input: DeleteRoleInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteRoleInput | _models.DeleteRoleInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteRoleOutput: ...
+
+    @_overload
+    def delete_role(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteRoleInputDict],
     ) -> DeleteRoleOutput:
         """
         Deletes the specified role. Unlike the Amazon Web Services Management
@@ -1702,8 +2290,6 @@ class IAMClient(Client[IAMConfig]):
             running on the instance.
 
         Args:
-            input:
-                An instance of `DeleteRoleInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1713,12 +2299,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `DeleteRoleOutput`.
         """
-        return self._invoke(input, _models.DELETE_ROLE, [], plugins)
 
+    def delete_role(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteRoleOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_ROLE, args, kwargs),
+            _models.DELETE_ROLE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_role_permissions_boundary(
         self,
-        input: DeleteRolePermissionsBoundaryInput,
+        request: _models.DeleteRolePermissionsBoundaryInput
+        | _models.DeleteRolePermissionsBoundaryInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteRolePermissionsBoundaryOutput: ...
+
+    @_overload
+    def delete_role_permissions_boundary(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteRolePermissionsBoundaryInputDict],
     ) -> DeleteRolePermissionsBoundaryOutput:
         """
         Deletes the permissions boundary for the specified IAM role.
@@ -1731,8 +2339,6 @@ class IAMClient(Client[IAMConfig]):
             perform all the actions granted in its permissions policies.
 
         Args:
-            input:
-                An instance of `DeleteRolePermissionsBoundaryInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1742,12 +2348,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `DeleteRolePermissionsBoundaryOutput`.
         """
+
+    def delete_role_permissions_boundary(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteRolePermissionsBoundaryOutput:
         return self._invoke(
-            input, _models.DELETE_ROLE_PERMISSIONS_BOUNDARY, [], plugins
+            self._select_input(_models.DELETE_ROLE_PERMISSIONS_BOUNDARY, args, kwargs),
+            _models.DELETE_ROLE_PERMISSIONS_BOUNDARY,
+            [],
+            plugins,
         )
 
+    @_overload
     def delete_role_policy(
-        self, input: DeleteRolePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteRolePolicyInput | _models.DeleteRolePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteRolePolicyOutput: ...
+
+    @_overload
+    def delete_role_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteRolePolicyInputDict],
     ) -> DeleteRolePolicyOutput:
         """
         Deletes the specified inline policy that is embedded in the specified
@@ -1762,8 +2389,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `DeleteRolePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1773,10 +2398,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `DeleteRolePolicyOutput`.
         """
-        return self._invoke(input, _models.DELETE_ROLE_POLICY, [], plugins)
 
+    def delete_role_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteRolePolicyOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_ROLE_POLICY, args, kwargs),
+            _models.DELETE_ROLE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_saml_provider(
-        self, input: DeleteSAMLProviderInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteSAMLProviderInput | _models.DeleteSAMLProviderInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteSAMLProviderOutput: ...
+
+    @_overload
+    def delete_saml_provider(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteSAMLProviderInputDict],
     ) -> DeleteSAMLProviderOutput:
         """
         Deletes a SAML provider resource in IAM.
@@ -1791,8 +2439,6 @@ class IAMClient(Client[IAMConfig]):
             4](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
 
         Args:
-            input:
-                An instance of `DeleteSAMLProviderInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1802,10 +2448,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `DeleteSAMLProviderOutput`.
         """
-        return self._invoke(input, _models.DELETE_SAML_PROVIDER, [], plugins)
 
+    def delete_saml_provider(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteSAMLProviderOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_SAML_PROVIDER, args, kwargs),
+            _models.DELETE_SAML_PROVIDER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_server_certificate(
-        self, input: DeleteServerCertificateInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteServerCertificateInput
+        | _models.DeleteServerCertificateInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteServerCertificateOutput: ...
+
+    @_overload
+    def delete_server_certificate(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteServerCertificateInputDict],
     ) -> DeleteServerCertificateOutput:
         """
         Deletes the specified server certificate.
@@ -1830,8 +2500,6 @@ class IAMClient(Client[IAMConfig]):
             in the *Elastic Load Balancing API Reference*.
 
         Args:
-            input:
-                An instance of `DeleteServerCertificateInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1841,10 +2509,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `DeleteServerCertificateOutput`.
         """
-        return self._invoke(input, _models.DELETE_SERVER_CERTIFICATE, [], plugins)
 
+    def delete_server_certificate(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteServerCertificateOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_SERVER_CERTIFICATE, args, kwargs),
+            _models.DELETE_SERVER_CERTIFICATE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_service_linked_role(
-        self, input: DeleteServiceLinkedRoleInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteServiceLinkedRoleInput
+        | _models.DeleteServiceLinkedRoleInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteServiceLinkedRoleOutput: ...
+
+    @_overload
+    def delete_service_linked_role(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteServiceLinkedRoleInputDict],
     ) -> DeleteServiceLinkedRoleOutput:
         """
         Submits a service-linked role deletion request and returns a
@@ -1873,8 +2565,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `DeleteServiceLinkedRoleInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1884,19 +2574,39 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `DeleteServiceLinkedRoleOutput`.
         """
-        return self._invoke(input, _models.DELETE_SERVICE_LINKED_ROLE, [], plugins)
 
+    def delete_service_linked_role(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteServiceLinkedRoleOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_SERVICE_LINKED_ROLE, args, kwargs),
+            _models.DELETE_SERVICE_LINKED_ROLE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_service_specific_credential(
         self,
-        input: DeleteServiceSpecificCredentialInput,
+        request: _models.DeleteServiceSpecificCredentialInput
+        | _models.DeleteServiceSpecificCredentialInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteServiceSpecificCredentialOutput: ...
+
+    @_overload
+    def delete_service_specific_credential(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteServiceSpecificCredentialInputDict],
     ) -> DeleteServiceSpecificCredentialOutput:
         """
         Deletes the specified service-specific credential.
 
         Args:
-            input:
-                An instance of `DeleteServiceSpecificCredentialInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1906,12 +2616,36 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `DeleteServiceSpecificCredentialOutput`.
         """
+
+    def delete_service_specific_credential(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteServiceSpecificCredentialOutput:
         return self._invoke(
-            input, _models.DELETE_SERVICE_SPECIFIC_CREDENTIAL, [], plugins
+            self._select_input(
+                _models.DELETE_SERVICE_SPECIFIC_CREDENTIAL, args, kwargs
+            ),
+            _models.DELETE_SERVICE_SPECIFIC_CREDENTIAL,
+            [],
+            plugins,
         )
 
+    @_overload
     def delete_signing_certificate(
-        self, input: DeleteSigningCertificateInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteSigningCertificateInput
+        | _models.DeleteSigningCertificateInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteSigningCertificateOutput: ...
+
+    @_overload
+    def delete_signing_certificate(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteSigningCertificateInputDict],
     ) -> DeleteSigningCertificateOutput:
         """
         Deletes a signing certificate associated with the specified IAM user.
@@ -1924,8 +2658,6 @@ class IAMClient(Client[IAMConfig]):
         Services account has no associated IAM users.
 
         Args:
-            input:
-                An instance of `DeleteSigningCertificateInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1935,10 +2667,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `DeleteSigningCertificateOutput`.
         """
-        return self._invoke(input, _models.DELETE_SIGNING_CERTIFICATE, [], plugins)
 
+    def delete_signing_certificate(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteSigningCertificateOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_SIGNING_CERTIFICATE, args, kwargs),
+            _models.DELETE_SIGNING_CERTIFICATE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_ssh_public_key(
-        self, input: DeleteSSHPublicKeyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteSSHPublicKeyInput | _models.DeleteSSHPublicKeyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteSSHPublicKeyOutput: ...
+
+    @_overload
+    def delete_ssh_public_key(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteSSHPublicKeyInputDict],
     ) -> DeleteSSHPublicKeyOutput:
         """
         Deletes the specified SSH public key.
@@ -1951,8 +2706,6 @@ class IAMClient(Client[IAMConfig]):
         in the *CodeCommit User Guide*.
 
         Args:
-            input:
-                An instance of `DeleteSSHPublicKeyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1962,10 +2715,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `DeleteSSHPublicKeyOutput`.
         """
-        return self._invoke(input, _models.DELETE_SSH_PUBLIC_KEY, [], plugins)
 
+    def delete_ssh_public_key(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteSSHPublicKeyOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_SSH_PUBLIC_KEY, args, kwargs),
+            _models.DELETE_SSH_PUBLIC_KEY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_user(
-        self, input: DeleteUserInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteUserInput | _models.DeleteUserInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteUserOutput: ...
+
+    @_overload
+    def delete_user(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteUserInputDict],
     ) -> DeleteUserOutput:
         """
         Deletes the specified IAM user. Unlike the Amazon Web Services
@@ -2004,8 +2780,6 @@ class IAMClient(Client[IAMConfig]):
           ([RemoveUserFromGroup](https://docs.aws.amazon.com/IAM/latest/APIReference/API_RemoveUserFromGroup.html))
 
         Args:
-            input:
-                An instance of `DeleteUserInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2015,12 +2789,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `DeleteUserOutput`.
         """
-        return self._invoke(input, _models.DELETE_USER, [], plugins)
 
+    def delete_user(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteUserOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_USER, args, kwargs),
+            _models.DELETE_USER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_user_permissions_boundary(
         self,
-        input: DeleteUserPermissionsBoundaryInput,
+        request: _models.DeleteUserPermissionsBoundaryInput
+        | _models.DeleteUserPermissionsBoundaryInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteUserPermissionsBoundaryOutput: ...
+
+    @_overload
+    def delete_user_permissions_boundary(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteUserPermissionsBoundaryInputDict],
     ) -> DeleteUserPermissionsBoundaryOutput:
         """
         Deletes the permissions boundary for the specified IAM user.
@@ -2031,8 +2827,6 @@ class IAMClient(Client[IAMConfig]):
             its permissions policies.
 
         Args:
-            input:
-                An instance of `DeleteUserPermissionsBoundaryInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2042,12 +2836,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `DeleteUserPermissionsBoundaryOutput`.
         """
+
+    def delete_user_permissions_boundary(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteUserPermissionsBoundaryOutput:
         return self._invoke(
-            input, _models.DELETE_USER_PERMISSIONS_BOUNDARY, [], plugins
+            self._select_input(_models.DELETE_USER_PERMISSIONS_BOUNDARY, args, kwargs),
+            _models.DELETE_USER_PERMISSIONS_BOUNDARY,
+            [],
+            plugins,
         )
 
+    @_overload
     def delete_user_policy(
-        self, input: DeleteUserPolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteUserPolicyInput | _models.DeleteUserPolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteUserPolicyOutput: ...
+
+    @_overload
+    def delete_user_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteUserPolicyInputDict],
     ) -> DeleteUserPolicyOutput:
         """
         Deletes the specified inline policy that is embedded in the specified
@@ -2062,8 +2877,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `DeleteUserPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2073,10 +2886,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `DeleteUserPolicyOutput`.
         """
-        return self._invoke(input, _models.DELETE_USER_POLICY, [], plugins)
 
+    def delete_user_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteUserPolicyOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_USER_POLICY, args, kwargs),
+            _models.DELETE_USER_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_virtual_mfa_device(
-        self, input: DeleteVirtualMFADeviceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteVirtualMFADeviceInput
+        | _models.DeleteVirtualMFADeviceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteVirtualMFADeviceOutput: ...
+
+    @_overload
+    def delete_virtual_mfa_device(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteVirtualMFADeviceInputDict],
     ) -> DeleteVirtualMFADeviceOutput:
         """
         Deletes a virtual MFA device.
@@ -2087,8 +2924,6 @@ class IAMClient(Client[IAMConfig]):
             [DeactivateMFADevice](https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeactivateMFADevice.html).
 
         Args:
-            input:
-                An instance of `DeleteVirtualMFADeviceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2098,10 +2933,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `DeleteVirtualMFADeviceOutput`.
         """
-        return self._invoke(input, _models.DELETE_VIRTUAL_MFA_DEVICE, [], plugins)
 
+    def delete_virtual_mfa_device(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteVirtualMFADeviceOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_VIRTUAL_MFA_DEVICE, args, kwargs),
+            _models.DELETE_VIRTUAL_MFA_DEVICE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def detach_group_policy(
-        self, input: DetachGroupPolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DetachGroupPolicyInput | _models.DetachGroupPolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DetachGroupPolicyOutput: ...
+
+    @_overload
+    def detach_group_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DetachGroupPolicyInputDict],
     ) -> DetachGroupPolicyOutput:
         """
         Removes the specified managed policy from the specified IAM group.
@@ -2114,8 +2972,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `DetachGroupPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2125,10 +2981,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `DetachGroupPolicyOutput`.
         """
-        return self._invoke(input, _models.DETACH_GROUP_POLICY, [], plugins)
 
+    def detach_group_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DetachGroupPolicyOutput:
+        return self._invoke(
+            self._select_input(_models.DETACH_GROUP_POLICY, args, kwargs),
+            _models.DETACH_GROUP_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def detach_role_policy(
-        self, input: DetachRolePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DetachRolePolicyInput | _models.DetachRolePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DetachRolePolicyOutput: ...
+
+    @_overload
+    def detach_role_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DetachRolePolicyInputDict],
     ) -> DetachRolePolicyOutput:
         """
         Removes the specified managed policy from the specified role.
@@ -2141,8 +3020,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `DetachRolePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2152,10 +3029,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `DetachRolePolicyOutput`.
         """
-        return self._invoke(input, _models.DETACH_ROLE_POLICY, [], plugins)
 
+    def detach_role_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DetachRolePolicyOutput:
+        return self._invoke(
+            self._select_input(_models.DETACH_ROLE_POLICY, args, kwargs),
+            _models.DETACH_ROLE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def detach_user_policy(
-        self, input: DetachUserPolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DetachUserPolicyInput | _models.DetachUserPolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DetachUserPolicyOutput: ...
+
+    @_overload
+    def detach_user_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DetachUserPolicyInputDict],
     ) -> DetachUserPolicyOutput:
         """
         Removes the specified managed policy from the specified user.
@@ -2168,8 +3068,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `DetachUserPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2179,12 +3077,36 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `DetachUserPolicyOutput`.
         """
-        return self._invoke(input, _models.DETACH_USER_POLICY, [], plugins)
 
+    def detach_user_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DetachUserPolicyOutput:
+        return self._invoke(
+            self._select_input(_models.DETACH_USER_POLICY, args, kwargs),
+            _models.DETACH_USER_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def disable_organizations_root_credentials_management(
         self,
-        input: DisableOrganizationsRootCredentialsManagementInput | None = None,
+        request: _models.DisableOrganizationsRootCredentialsManagementInput
+        | _models.DisableOrganizationsRootCredentialsManagementInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DisableOrganizationsRootCredentialsManagementOutput: ...
+
+    @_overload
+    def disable_organizations_root_credentials_management(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[
+            _models.DisableOrganizationsRootCredentialsManagementInputDict
+        ],
     ) -> DisableOrganizationsRootCredentialsManagementOutput:
         """
         Disables the management of privileged root user credentials across
@@ -2193,8 +3115,6 @@ class IAMClient(Client[IAMConfig]):
         manage root user credentials for member accounts in your organization.
 
         Args:
-            input:
-                An instance of `DisableOrganizationsRootCredentialsManagementInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2204,17 +3124,36 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `DisableOrganizationsRootCredentialsManagementOutput`.
         """
+
+    def disable_organizations_root_credentials_management(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DisableOrganizationsRootCredentialsManagementOutput:
         return self._invoke(
-            input,
+            self._select_input(
+                _models.DISABLE_ORGANIZATIONS_ROOT_CREDENTIALS_MANAGEMENT, args, kwargs
+            ),
             _models.DISABLE_ORGANIZATIONS_ROOT_CREDENTIALS_MANAGEMENT,
             [],
             plugins,
         )
 
+    @_overload
     def disable_organizations_root_sessions(
         self,
-        input: DisableOrganizationsRootSessionsInput | None = None,
+        request: _models.DisableOrganizationsRootSessionsInput
+        | _models.DisableOrganizationsRootSessionsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DisableOrganizationsRootSessionsOutput: ...
+
+    @_overload
+    def disable_organizations_root_sessions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DisableOrganizationsRootSessionsInputDict],
     ) -> DisableOrganizationsRootSessionsOutput:
         """
         Disables root user sessions for privileged tasks across member accounts
@@ -2223,8 +3162,6 @@ class IAMClient(Client[IAMConfig]):
         privileged tasks on member accounts in your organization.
 
         Args:
-            input:
-                An instance of `DisableOrganizationsRootSessionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2234,14 +3171,36 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `DisableOrganizationsRootSessionsOutput`.
         """
+
+    def disable_organizations_root_sessions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DisableOrganizationsRootSessionsOutput:
         return self._invoke(
-            input, _models.DISABLE_ORGANIZATIONS_ROOT_SESSIONS, [], plugins
+            self._select_input(
+                _models.DISABLE_ORGANIZATIONS_ROOT_SESSIONS, args, kwargs
+            ),
+            _models.DISABLE_ORGANIZATIONS_ROOT_SESSIONS,
+            [],
+            plugins,
         )
 
+    @_overload
     def disable_outbound_web_identity_federation(
         self,
-        input: DisableOutboundWebIdentityFederationInput | None = None,
+        request: _models.DisableOutboundWebIdentityFederationInput
+        | _models.DisableOutboundWebIdentityFederationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DisableOutboundWebIdentityFederationOutput: ...
+
+    @_overload
+    def disable_outbound_web_identity_federation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DisableOutboundWebIdentityFederationInputDict],
     ) -> DisableOutboundWebIdentityFederationOutput:
         """
         Disables the outbound identity federation feature for your Amazon Web
@@ -2251,8 +3210,6 @@ class IAMClient(Client[IAMConfig]):
         tokens that were issued before the feature was disabled.
 
         Args:
-            input:
-                An instance of `DisableOutboundWebIdentityFederationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2262,12 +3219,35 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `DisableOutboundWebIdentityFederationOutput`.
         """
+
+    def disable_outbound_web_identity_federation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DisableOutboundWebIdentityFederationOutput:
         return self._invoke(
-            input, _models.DISABLE_OUTBOUND_WEB_IDENTITY_FEDERATION, [], plugins
+            self._select_input(
+                _models.DISABLE_OUTBOUND_WEB_IDENTITY_FEDERATION, args, kwargs
+            ),
+            _models.DISABLE_OUTBOUND_WEB_IDENTITY_FEDERATION,
+            [],
+            plugins,
         )
 
+    @_overload
     def enable_mfa_device(
-        self, input: EnableMFADeviceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.EnableMFADeviceInput | _models.EnableMFADeviceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> EnableMFADeviceOutput: ...
+
+    @_overload
+    def enable_mfa_device(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.EnableMFADeviceInputDict],
     ) -> EnableMFADeviceOutput:
         """
         Enables the specified MFA device and associates it with the specified
@@ -2275,8 +3255,6 @@ class IAMClient(Client[IAMConfig]):
         login by the IAM user associated with the device.
 
         Args:
-            input:
-                An instance of `EnableMFADeviceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2286,12 +3264,36 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `EnableMFADeviceOutput`.
         """
-        return self._invoke(input, _models.ENABLE_MFA_DEVICE, [], plugins)
 
+    def enable_mfa_device(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> EnableMFADeviceOutput:
+        return self._invoke(
+            self._select_input(_models.ENABLE_MFA_DEVICE, args, kwargs),
+            _models.ENABLE_MFA_DEVICE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def enable_organizations_root_credentials_management(
         self,
-        input: EnableOrganizationsRootCredentialsManagementInput | None = None,
+        request: _models.EnableOrganizationsRootCredentialsManagementInput
+        | _models.EnableOrganizationsRootCredentialsManagementInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> EnableOrganizationsRootCredentialsManagementOutput: ...
+
+    @_overload
+    def enable_organizations_root_credentials_management(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[
+            _models.EnableOrganizationsRootCredentialsManagementInputDict
+        ],
     ) -> EnableOrganizationsRootCredentialsManagementOutput:
         """
         Enables the management of privileged root user credentials across member
@@ -2313,8 +3315,6 @@ class IAMClient(Client[IAMConfig]):
           in the *Organizations User Guide*.
 
         Args:
-            input:
-                An instance of `EnableOrganizationsRootCredentialsManagementInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2324,14 +3324,36 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `EnableOrganizationsRootCredentialsManagementOutput`.
         """
+
+    def enable_organizations_root_credentials_management(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> EnableOrganizationsRootCredentialsManagementOutput:
         return self._invoke(
-            input, _models.ENABLE_ORGANIZATIONS_ROOT_CREDENTIALS_MANAGEMENT, [], plugins
+            self._select_input(
+                _models.ENABLE_ORGANIZATIONS_ROOT_CREDENTIALS_MANAGEMENT, args, kwargs
+            ),
+            _models.ENABLE_ORGANIZATIONS_ROOT_CREDENTIALS_MANAGEMENT,
+            [],
+            plugins,
         )
 
+    @_overload
     def enable_organizations_root_sessions(
         self,
-        input: EnableOrganizationsRootSessionsInput | None = None,
+        request: _models.EnableOrganizationsRootSessionsInput
+        | _models.EnableOrganizationsRootSessionsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> EnableOrganizationsRootSessionsOutput: ...
+
+    @_overload
+    def enable_organizations_root_sessions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.EnableOrganizationsRootSessionsInputDict],
     ) -> EnableOrganizationsRootSessionsOutput:
         """
         Allows the management account or delegated administrator to perform
@@ -2352,8 +3374,6 @@ class IAMClient(Client[IAMConfig]):
           in the *Organizations User Guide*.
 
         Args:
-            input:
-                An instance of `EnableOrganizationsRootSessionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2363,14 +3383,36 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `EnableOrganizationsRootSessionsOutput`.
         """
+
+    def enable_organizations_root_sessions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> EnableOrganizationsRootSessionsOutput:
         return self._invoke(
-            input, _models.ENABLE_ORGANIZATIONS_ROOT_SESSIONS, [], plugins
+            self._select_input(
+                _models.ENABLE_ORGANIZATIONS_ROOT_SESSIONS, args, kwargs
+            ),
+            _models.ENABLE_ORGANIZATIONS_ROOT_SESSIONS,
+            [],
+            plugins,
         )
 
+    @_overload
     def enable_outbound_web_identity_federation(
         self,
-        input: EnableOutboundWebIdentityFederationInput | None = None,
+        request: _models.EnableOutboundWebIdentityFederationInput
+        | _models.EnableOutboundWebIdentityFederationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> EnableOutboundWebIdentityFederationOutput: ...
+
+    @_overload
+    def enable_outbound_web_identity_federation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.EnableOutboundWebIdentityFederationInputDict],
     ) -> EnableOutboundWebIdentityFederationOutput:
         """
         Enables the outbound identity federation feature for your Amazon Web
@@ -2380,8 +3422,6 @@ class IAMClient(Client[IAMConfig]):
         generates a unique issuer URL for your Amazon Web Services account.
 
         Args:
-            input:
-                An instance of `EnableOutboundWebIdentityFederationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2391,14 +3431,36 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `EnableOutboundWebIdentityFederationOutput`.
         """
+
+    def enable_outbound_web_identity_federation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> EnableOutboundWebIdentityFederationOutput:
         return self._invoke(
-            input, _models.ENABLE_OUTBOUND_WEB_IDENTITY_FEDERATION, [], plugins
+            self._select_input(
+                _models.ENABLE_OUTBOUND_WEB_IDENTITY_FEDERATION, args, kwargs
+            ),
+            _models.ENABLE_OUTBOUND_WEB_IDENTITY_FEDERATION,
+            [],
+            plugins,
         )
 
+    @_overload
     def generate_credential_report(
         self,
-        input: GenerateCredentialReportInput | None = None,
+        request: _models.GenerateCredentialReportInput
+        | _models.GenerateCredentialReportInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GenerateCredentialReportOutput: ...
+
+    @_overload
+    def generate_credential_report(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GenerateCredentialReportInputDict],
     ) -> GenerateCredentialReportOutput:
         """
         Generates a credential report for the Amazon Web Services account. For
@@ -2407,8 +3469,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `GenerateCredentialReportInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2418,12 +3478,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `GenerateCredentialReportOutput`.
         """
-        return self._invoke(input, _models.GENERATE_CREDENTIAL_REPORT, [], plugins)
 
+    def generate_credential_report(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GenerateCredentialReportOutput:
+        return self._invoke(
+            self._select_input(_models.GENERATE_CREDENTIAL_REPORT, args, kwargs),
+            _models.GENERATE_CREDENTIAL_REPORT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def generate_organizations_access_report(
         self,
-        input: GenerateOrganizationsAccessReportInput,
+        request: _models.GenerateOrganizationsAccessReportInput
+        | _models.GenerateOrganizationsAccessReportInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GenerateOrganizationsAccessReportOutput: ...
+
+    @_overload
+    def generate_organizations_access_report(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GenerateOrganizationsAccessReportInputDict],
     ) -> GenerateOrganizationsAccessReportOutput:
         """
         Generates a report for service last accessed data for Organizations. You
@@ -2559,8 +3641,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `GenerateOrganizationsAccessReportInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2570,14 +3650,36 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `GenerateOrganizationsAccessReportOutput`.
         """
+
+    def generate_organizations_access_report(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GenerateOrganizationsAccessReportOutput:
         return self._invoke(
-            input, _models.GENERATE_ORGANIZATIONS_ACCESS_REPORT, [], plugins
+            self._select_input(
+                _models.GENERATE_ORGANIZATIONS_ACCESS_REPORT, args, kwargs
+            ),
+            _models.GENERATE_ORGANIZATIONS_ACCESS_REPORT,
+            [],
+            plugins,
         )
 
+    @_overload
     def generate_service_last_accessed_details(
         self,
-        input: GenerateServiceLastAccessedDetailsInput,
+        request: _models.GenerateServiceLastAccessedDetailsInput
+        | _models.GenerateServiceLastAccessedDetailsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GenerateServiceLastAccessedDetailsOutput: ...
+
+    @_overload
+    def generate_service_last_accessed_details(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GenerateServiceLastAccessedDetailsInputDict],
     ) -> GenerateServiceLastAccessedDetailsOutput:
         """
         Generates a report that includes details about when an IAM resource
@@ -2650,8 +3752,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `GenerateServiceLastAccessedDetailsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2661,12 +3761,36 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `GenerateServiceLastAccessedDetailsOutput`.
         """
+
+    def generate_service_last_accessed_details(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GenerateServiceLastAccessedDetailsOutput:
         return self._invoke(
-            input, _models.GENERATE_SERVICE_LAST_ACCESSED_DETAILS, [], plugins
+            self._select_input(
+                _models.GENERATE_SERVICE_LAST_ACCESSED_DETAILS, args, kwargs
+            ),
+            _models.GENERATE_SERVICE_LAST_ACCESSED_DETAILS,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_access_key_last_used(
-        self, input: GetAccessKeyLastUsedInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetAccessKeyLastUsedInput
+        | _models.GetAccessKeyLastUsedInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetAccessKeyLastUsedOutput: ...
+
+    @_overload
+    def get_access_key_last_used(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetAccessKeyLastUsedInputDict],
     ) -> GetAccessKeyLastUsedOutput:
         """
         Retrieves information about when the specified access key was last used.
@@ -2675,8 +3799,6 @@ class IAMClient(Client[IAMConfig]):
         request made with that key.
 
         Args:
-            input:
-                An instance of `GetAccessKeyLastUsedInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2686,12 +3808,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `GetAccessKeyLastUsedOutput`.
         """
-        return self._invoke(input, _models.GET_ACCESS_KEY_LAST_USED, [], plugins)
 
+    def get_access_key_last_used(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetAccessKeyLastUsedOutput:
+        return self._invoke(
+            self._select_input(_models.GET_ACCESS_KEY_LAST_USED, args, kwargs),
+            _models.GET_ACCESS_KEY_LAST_USED,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_account_authorization_details(
         self,
-        input: GetAccountAuthorizationDetailsInput | None = None,
+        request: _models.GetAccountAuthorizationDetailsInput
+        | _models.GetAccountAuthorizationDetailsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetAccountAuthorizationDetailsOutput: ...
+
+    @_overload
+    def get_account_authorization_details(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetAccountAuthorizationDetailsInputDict],
     ) -> GetAccountAuthorizationDetailsOutput:
         """
         Retrieves information about all IAM users, groups, roles, and policies
@@ -2713,8 +3857,6 @@ class IAMClient(Client[IAMConfig]):
         can paginate the results using the `MaxItems` and `Marker` parameters.
 
         Args:
-            input:
-                An instance of `GetAccountAuthorizationDetailsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2724,14 +3866,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `GetAccountAuthorizationDetailsOutput`.
         """
+
+    def get_account_authorization_details(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetAccountAuthorizationDetailsOutput:
         return self._invoke(
-            input, _models.GET_ACCOUNT_AUTHORIZATION_DETAILS, [], plugins
+            self._select_input(_models.GET_ACCOUNT_AUTHORIZATION_DETAILS, args, kwargs),
+            _models.GET_ACCOUNT_AUTHORIZATION_DETAILS,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_account_password_policy(
         self,
-        input: GetAccountPasswordPolicyInput | None = None,
+        request: _models.GetAccountPasswordPolicyInput
+        | _models.GetAccountPasswordPolicyInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetAccountPasswordPolicyOutput: ...
+
+    @_overload
+    def get_account_password_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetAccountPasswordPolicyInputDict],
     ) -> GetAccountPasswordPolicyOutput:
         """
         Retrieves the password policy for the Amazon Web Services account. This
@@ -2741,8 +3903,6 @@ class IAMClient(Client[IAMConfig]):
         policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingPasswordPolicies.html).
 
         Args:
-            input:
-                An instance of `GetAccountPasswordPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2752,12 +3912,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `GetAccountPasswordPolicyOutput`.
         """
-        return self._invoke(input, _models.GET_ACCOUNT_PASSWORD_POLICY, [], plugins)
 
+    def get_account_password_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetAccountPasswordPolicyOutput:
+        return self._invoke(
+            self._select_input(_models.GET_ACCOUNT_PASSWORD_POLICY, args, kwargs),
+            _models.GET_ACCOUNT_PASSWORD_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_account_properties(
         self,
-        input: GetAccountPropertiesInput | None = None,
+        request: _models.GetAccountPropertiesInput
+        | _models.GetAccountPropertiesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetAccountPropertiesOutput: ...
+
+    @_overload
+    def get_account_properties(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetAccountPropertiesInputDict],
     ) -> GetAccountPropertiesOutput:
         """
         Retrieves the account-level properties for the caller's Amazon Web
@@ -2771,8 +3953,6 @@ class IAMClient(Client[IAMConfig]):
         to modify these properties.
 
         Args:
-            input:
-                An instance of `GetAccountPropertiesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2782,12 +3962,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `GetAccountPropertiesOutput`.
         """
-        return self._invoke(input, _models.GET_ACCOUNT_PROPERTIES, [], plugins)
 
+    def get_account_properties(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetAccountPropertiesOutput:
+        return self._invoke(
+            self._select_input(_models.GET_ACCOUNT_PROPERTIES, args, kwargs),
+            _models.GET_ACCOUNT_PROPERTIES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_account_summary(
         self,
-        input: GetAccountSummaryInput | None = None,
+        request: _models.GetAccountSummaryInput | _models.GetAccountSummaryInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetAccountSummaryOutput: ...
+
+    @_overload
+    def get_account_summary(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetAccountSummaryInputDict],
     ) -> GetAccountSummaryOutput:
         """
         Retrieves information about IAM entity usage and IAM quotas in the
@@ -2798,8 +3999,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `GetAccountSummaryInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2809,12 +4008,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `GetAccountSummaryOutput`.
         """
-        return self._invoke(input, _models.GET_ACCOUNT_SUMMARY, [], plugins)
 
+    def get_account_summary(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetAccountSummaryOutput:
+        return self._invoke(
+            self._select_input(_models.GET_ACCOUNT_SUMMARY, args, kwargs),
+            _models.GET_ACCOUNT_SUMMARY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_context_keys_for_custom_policy(
         self,
-        input: GetContextKeysForCustomPolicyInput,
+        request: _models.GetContextKeysForCustomPolicyInput
+        | _models.GetContextKeysForCustomPolicyInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetContextKeysForCustomPolicyOutput: ...
+
+    @_overload
+    def get_context_keys_for_custom_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetContextKeysForCustomPolicyInputDict],
     ) -> GetContextKeysForCustomPolicyOutput:
         """
         Gets a list of all of the context keys referenced in the input policies.
@@ -2833,8 +4054,6 @@ class IAMClient(Client[IAMConfig]):
         but must be URL encoded to be included as a part of a real HTML request.
 
         Args:
-            input:
-                An instance of `GetContextKeysForCustomPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2844,14 +4063,36 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `GetContextKeysForCustomPolicyOutput`.
         """
+
+    def get_context_keys_for_custom_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetContextKeysForCustomPolicyOutput:
         return self._invoke(
-            input, _models.GET_CONTEXT_KEYS_FOR_CUSTOM_POLICY, [], plugins
+            self._select_input(
+                _models.GET_CONTEXT_KEYS_FOR_CUSTOM_POLICY, args, kwargs
+            ),
+            _models.GET_CONTEXT_KEYS_FOR_CUSTOM_POLICY,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_context_keys_for_principal_policy(
         self,
-        input: GetContextKeysForPrincipalPolicyInput,
+        request: _models.GetContextKeysForPrincipalPolicyInput
+        | _models.GetContextKeysForPrincipalPolicyInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetContextKeysForPrincipalPolicyOutput: ...
+
+    @_overload
+    def get_context_keys_for_principal_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetContextKeysForPrincipalPolicyInputDict],
     ) -> GetContextKeysForPrincipalPolicyOutput:
         """
         Gets a list of all of the context keys referenced in all the IAM
@@ -2885,8 +4126,6 @@ class IAMClient(Client[IAMConfig]):
         additional policies that you provide, are included.
 
         Args:
-            input:
-                An instance of `GetContextKeysForPrincipalPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2896,14 +4135,36 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `GetContextKeysForPrincipalPolicyOutput`.
         """
+
+    def get_context_keys_for_principal_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetContextKeysForPrincipalPolicyOutput:
         return self._invoke(
-            input, _models.GET_CONTEXT_KEYS_FOR_PRINCIPAL_POLICY, [], plugins
+            self._select_input(
+                _models.GET_CONTEXT_KEYS_FOR_PRINCIPAL_POLICY, args, kwargs
+            ),
+            _models.GET_CONTEXT_KEYS_FOR_PRINCIPAL_POLICY,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_credential_report(
         self,
-        input: GetCredentialReportInput | None = None,
+        request: _models.GetCredentialReportInput
+        | _models.GetCredentialReportInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetCredentialReportOutput: ...
+
+    @_overload
+    def get_credential_report(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetCredentialReportInputDict],
     ) -> GetCredentialReportOutput:
         """
         Retrieves a credential report for the Amazon Web Services account. For
@@ -2912,8 +4173,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `GetCredentialReportInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2923,10 +4182,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `GetCredentialReportOutput`.
         """
-        return self._invoke(input, _models.GET_CREDENTIAL_REPORT, [], plugins)
 
+    def get_credential_report(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetCredentialReportOutput:
+        return self._invoke(
+            self._select_input(_models.GET_CREDENTIAL_REPORT, args, kwargs),
+            _models.GET_CREDENTIAL_REPORT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_delegation_request(
-        self, input: GetDelegationRequestInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetDelegationRequestInput
+        | _models.GetDelegationRequestInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetDelegationRequestOutput: ...
+
+    @_overload
+    def get_delegation_request(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetDelegationRequestInputDict],
     ) -> GetDelegationRequestOutput:
         """
         Retrieves information about a specific delegation request.
@@ -2941,8 +4224,6 @@ class IAMClient(Client[IAMConfig]):
         Requests](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies-temporary-delegation.html#temporary-delegation-managing-permissions).
 
         Args:
-            input:
-                An instance of `GetDelegationRequestInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2952,18 +4233,39 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `GetDelegationRequestOutput`.
         """
-        return self._invoke(input, _models.GET_DELEGATION_REQUEST, [], plugins)
 
+    def get_delegation_request(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetDelegationRequestOutput:
+        return self._invoke(
+            self._select_input(_models.GET_DELEGATION_REQUEST, args, kwargs),
+            _models.GET_DELEGATION_REQUEST,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_group(
-        self, input: GetGroupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetGroupInput | _models.GetGroupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetGroupOutput: ...
+
+    @_overload
+    def get_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetGroupInputDict],
     ) -> GetGroupOutput:
         """
         Returns a list of IAM users that are in the specified IAM group. You can
         paginate the results using the `MaxItems` and `Marker` parameters.
 
         Args:
-            input:
-                An instance of `GetGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2973,10 +4275,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `GetGroupOutput`.
         """
-        return self._invoke(input, _models.GET_GROUP, [], plugins)
 
+    def get_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetGroupOutput:
+        return self._invoke(
+            self._select_input(_models.GET_GROUP, args, kwargs),
+            _models.GET_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_group_policy(
-        self, input: GetGroupPolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetGroupPolicyInput | _models.GetGroupPolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetGroupPolicyOutput: ...
+
+    @_overload
+    def get_group_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetGroupPolicyInputDict],
     ) -> GetGroupPolicyOutput:
         """
         Retrieves the specified inline policy document that is embedded in the
@@ -3003,8 +4328,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `GetGroupPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3014,10 +4337,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `GetGroupPolicyOutput`.
         """
-        return self._invoke(input, _models.GET_GROUP_POLICY, [], plugins)
 
+    def get_group_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetGroupPolicyOutput:
+        return self._invoke(
+            self._select_input(_models.GET_GROUP_POLICY, args, kwargs),
+            _models.GET_GROUP_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_human_readable_summary(
-        self, input: GetHumanReadableSummaryInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetHumanReadableSummaryInput
+        | _models.GetHumanReadableSummaryInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetHumanReadableSummaryOutput: ...
+
+    @_overload
+    def get_human_readable_summary(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetHumanReadableSummaryInputDict],
     ) -> GetHumanReadableSummaryOutput:
         """
         Retrieves a human readable summary for a given entity. At this time, the
@@ -3041,8 +4388,6 @@ class IAMClient(Client[IAMConfig]):
         readable summary for that request.
 
         Args:
-            input:
-                An instance of `GetHumanReadableSummaryInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3052,10 +4397,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `GetHumanReadableSummaryOutput`.
         """
-        return self._invoke(input, _models.GET_HUMAN_READABLE_SUMMARY, [], plugins)
 
+    def get_human_readable_summary(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetHumanReadableSummaryOutput:
+        return self._invoke(
+            self._select_input(_models.GET_HUMAN_READABLE_SUMMARY, args, kwargs),
+            _models.GET_HUMAN_READABLE_SUMMARY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_instance_profile(
-        self, input: GetInstanceProfileInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetInstanceProfileInput | _models.GetInstanceProfileInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetInstanceProfileOutput: ...
+
+    @_overload
+    def get_instance_profile(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetInstanceProfileInputDict],
     ) -> GetInstanceProfileOutput:
         """
         Retrieves information about the specified instance profile, including
@@ -3065,8 +4433,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `GetInstanceProfileInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3076,12 +4442,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `GetInstanceProfileOutput`.
         """
-        return self._invoke(input, _models.GET_INSTANCE_PROFILE, [], plugins)
 
+    def get_instance_profile(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetInstanceProfileOutput:
+        return self._invoke(
+            self._select_input(_models.GET_INSTANCE_PROFILE, args, kwargs),
+            _models.GET_INSTANCE_PROFILE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_login_profile(
         self,
-        input: GetLoginProfileInput | None = None,
+        request: _models.GetLoginProfileInput | _models.GetLoginProfileInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetLoginProfileOutput: ...
+
+    @_overload
+    def get_login_profile(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetLoginProfileInputDict],
     ) -> GetLoginProfileOutput:
         """
         Retrieves the user name for the specified IAM user. A login profile is
@@ -3100,8 +4487,6 @@ class IAMClient(Client[IAMConfig]):
         Management Console.
 
         Args:
-            input:
-                An instance of `GetLoginProfileInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3111,17 +4496,38 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `GetLoginProfileOutput`.
         """
-        return self._invoke(input, _models.GET_LOGIN_PROFILE, [], plugins)
 
+    def get_login_profile(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetLoginProfileOutput:
+        return self._invoke(
+            self._select_input(_models.GET_LOGIN_PROFILE, args, kwargs),
+            _models.GET_LOGIN_PROFILE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_mfa_device(
-        self, input: GetMFADeviceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetMFADeviceInput | _models.GetMFADeviceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetMFADeviceOutput: ...
+
+    @_overload
+    def get_mfa_device(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetMFADeviceInputDict],
     ) -> GetMFADeviceOutput:
         """
         Retrieves information about an MFA device for a specified user.
 
         Args:
-            input:
-                An instance of `GetMFADeviceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3131,18 +4537,40 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `GetMFADeviceOutput`.
         """
-        return self._invoke(input, _models.GET_MFA_DEVICE, [], plugins)
 
+    def get_mfa_device(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetMFADeviceOutput:
+        return self._invoke(
+            self._select_input(_models.GET_MFA_DEVICE, args, kwargs),
+            _models.GET_MFA_DEVICE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_open_id_connect_provider(
-        self, input: GetOpenIDConnectProviderInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetOpenIDConnectProviderInput
+        | _models.GetOpenIDConnectProviderInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetOpenIDConnectProviderOutput: ...
+
+    @_overload
+    def get_open_id_connect_provider(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetOpenIDConnectProviderInputDict],
     ) -> GetOpenIDConnectProviderOutput:
         """
         Returns information about the specified OpenID Connect (OIDC) provider
         resource object in IAM.
 
         Args:
-            input:
-                An instance of `GetOpenIDConnectProviderInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3152,12 +4580,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `GetOpenIDConnectProviderOutput`.
         """
-        return self._invoke(input, _models.GET_OPEN_ID_CONNECT_PROVIDER, [], plugins)
 
+    def get_open_id_connect_provider(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetOpenIDConnectProviderOutput:
+        return self._invoke(
+            self._select_input(_models.GET_OPEN_ID_CONNECT_PROVIDER, args, kwargs),
+            _models.GET_OPEN_ID_CONNECT_PROVIDER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_organizations_access_report(
         self,
-        input: GetOrganizationsAccessReportInput,
+        request: _models.GetOrganizationsAccessReportInput
+        | _models.GetOrganizationsAccessReportInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetOrganizationsAccessReportOutput: ...
+
+    @_overload
+    def get_organizations_access_report(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetOrganizationsAccessReportInputDict],
     ) -> GetOrganizationsAccessReportOutput:
         """
         Retrieves the service last accessed data report for Organizations that
@@ -3187,8 +4637,6 @@ class IAMClient(Client[IAMConfig]):
         By default, the list is sorted by service namespace.
 
         Args:
-            input:
-                An instance of `GetOrganizationsAccessReportInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3198,12 +4646,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `GetOrganizationsAccessReportOutput`.
         """
-        return self._invoke(input, _models.GET_ORGANIZATIONS_ACCESS_REPORT, [], plugins)
 
+    def get_organizations_access_report(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetOrganizationsAccessReportOutput:
+        return self._invoke(
+            self._select_input(_models.GET_ORGANIZATIONS_ACCESS_REPORT, args, kwargs),
+            _models.GET_ORGANIZATIONS_ACCESS_REPORT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_outbound_web_identity_federation_info(
         self,
-        input: GetOutboundWebIdentityFederationInfoInput | None = None,
+        request: _models.GetOutboundWebIdentityFederationInfoInput
+        | _models.GetOutboundWebIdentityFederationInfoInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetOutboundWebIdentityFederationInfoOutput: ...
+
+    @_overload
+    def get_outbound_web_identity_federation_info(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetOutboundWebIdentityFederationInfoInputDict],
     ) -> GetOutboundWebIdentityFederationInfoOutput:
         """
         Retrieves the configuration information for the outbound identity
@@ -3214,8 +4684,6 @@ class IAMClient(Client[IAMConfig]):
         with external services.
 
         Args:
-            input:
-                An instance of `GetOutboundWebIdentityFederationInfoInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3225,12 +4693,35 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `GetOutboundWebIdentityFederationInfoOutput`.
         """
+
+    def get_outbound_web_identity_federation_info(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetOutboundWebIdentityFederationInfoOutput:
         return self._invoke(
-            input, _models.GET_OUTBOUND_WEB_IDENTITY_FEDERATION_INFO, [], plugins
+            self._select_input(
+                _models.GET_OUTBOUND_WEB_IDENTITY_FEDERATION_INFO, args, kwargs
+            ),
+            _models.GET_OUTBOUND_WEB_IDENTITY_FEDERATION_INFO,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_policy(
-        self, input: GetPolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetPolicyInput | _models.GetPolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetPolicyOutput: ...
+
+    @_overload
+    def get_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetPolicyInputDict],
     ) -> GetPolicyOutput:
         """
         Retrieves information about the specified managed policy, including the
@@ -3255,8 +4746,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `GetPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3266,10 +4755,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `GetPolicyOutput`.
         """
-        return self._invoke(input, _models.GET_POLICY, [], plugins)
 
+    def get_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetPolicyOutput:
+        return self._invoke(
+            self._select_input(_models.GET_POLICY, args, kwargs),
+            _models.GET_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_policy_version(
-        self, input: GetPolicyVersionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetPolicyVersionInput | _models.GetPolicyVersionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetPolicyVersionOutput: ...
+
+    @_overload
+    def get_policy_version(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetPolicyVersionInputDict],
     ) -> GetPolicyVersionOutput:
         """
         Retrieves information about the specified version of the specified
@@ -3306,8 +4818,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `GetPolicyVersionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3317,10 +4827,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `GetPolicyVersionOutput`.
         """
-        return self._invoke(input, _models.GET_POLICY_VERSION, [], plugins)
 
+    def get_policy_version(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetPolicyVersionOutput:
+        return self._invoke(
+            self._select_input(_models.GET_POLICY_VERSION, args, kwargs),
+            _models.GET_POLICY_VERSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_role(
-        self, input: GetRoleInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetRoleInput | _models.GetRoleInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetRoleOutput: ...
+
+    @_overload
+    def get_role(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetRoleInputDict],
     ) -> GetRoleOutput:
         """
         Retrieves information about the specified role, including the role's
@@ -3339,8 +4872,6 @@ class IAMClient(Client[IAMConfig]):
             automatically.
 
         Args:
-            input:
-                An instance of `GetRoleInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3350,10 +4881,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `GetRoleOutput`.
         """
-        return self._invoke(input, _models.GET_ROLE, [], plugins)
 
+    def get_role(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetRoleOutput:
+        return self._invoke(
+            self._select_input(_models.GET_ROLE, args, kwargs),
+            _models.GET_ROLE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_role_policy(
-        self, input: GetRolePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetRolePolicyInput | _models.GetRolePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetRolePolicyOutput: ...
+
+    @_overload
+    def get_role_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetRolePolicyInputDict],
     ) -> GetRolePolicyOutput:
         """
         Retrieves the specified inline policy document that is embedded with the
@@ -3384,8 +4938,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `GetRolePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3395,10 +4947,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `GetRolePolicyOutput`.
         """
-        return self._invoke(input, _models.GET_ROLE_POLICY, [], plugins)
 
+    def get_role_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetRolePolicyOutput:
+        return self._invoke(
+            self._select_input(_models.GET_ROLE_POLICY, args, kwargs),
+            _models.GET_ROLE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_role_template_version(
-        self, input: GetRoleTemplateVersionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetRoleTemplateVersionInput
+        | _models.GetRoleTemplateVersionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetRoleTemplateVersionOutput: ...
+
+    @_overload
+    def get_role_template_version(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetRoleTemplateVersionInputDict],
     ) -> GetRoleTemplateVersionOutput:
         """
         Retrieves information about a version of the specified role template.
@@ -3412,8 +4988,6 @@ class IAMClient(Client[IAMConfig]):
         template's default minor version.
 
         Args:
-            input:
-                An instance of `GetRoleTemplateVersionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3423,10 +4997,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `GetRoleTemplateVersionOutput`.
         """
-        return self._invoke(input, _models.GET_ROLE_TEMPLATE_VERSION, [], plugins)
 
+    def get_role_template_version(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetRoleTemplateVersionOutput:
+        return self._invoke(
+            self._select_input(_models.GET_ROLE_TEMPLATE_VERSION, args, kwargs),
+            _models.GET_ROLE_TEMPLATE_VERSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_saml_provider(
-        self, input: GetSAMLProviderInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetSAMLProviderInput | _models.GetSAMLProviderInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetSAMLProviderOutput: ...
+
+    @_overload
+    def get_saml_provider(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetSAMLProviderInputDict],
     ) -> GetSAMLProviderOutput:
         """
         Returns the SAML provider metadocument that was uploaded when the IAM
@@ -3437,8 +5034,6 @@ class IAMClient(Client[IAMConfig]):
             4](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
 
         Args:
-            input:
-                An instance of `GetSAMLProviderInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3448,10 +5043,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `GetSAMLProviderOutput`.
         """
-        return self._invoke(input, _models.GET_SAML_PROVIDER, [], plugins)
 
+    def get_saml_provider(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetSAMLProviderOutput:
+        return self._invoke(
+            self._select_input(_models.GET_SAML_PROVIDER, args, kwargs),
+            _models.GET_SAML_PROVIDER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_server_certificate(
-        self, input: GetServerCertificateInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetServerCertificateInput
+        | _models.GetServerCertificateInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetServerCertificateOutput: ...
+
+    @_overload
+    def get_server_certificate(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetServerCertificateInputDict],
     ) -> GetServerCertificateOutput:
         """
         Retrieves information about the specified server certificate stored in
@@ -3465,8 +5084,6 @@ class IAMClient(Client[IAMConfig]):
         with IAM.
 
         Args:
-            input:
-                An instance of `GetServerCertificateInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3476,12 +5093,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `GetServerCertificateOutput`.
         """
-        return self._invoke(input, _models.GET_SERVER_CERTIFICATE, [], plugins)
 
+    def get_server_certificate(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetServerCertificateOutput:
+        return self._invoke(
+            self._select_input(_models.GET_SERVER_CERTIFICATE, args, kwargs),
+            _models.GET_SERVER_CERTIFICATE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_service_last_accessed_details(
         self,
-        input: GetServiceLastAccessedDetailsInput,
+        request: _models.GetServiceLastAccessedDetailsInput
+        | _models.GetServiceLastAccessedDetailsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetServiceLastAccessedDetailsOutput: ...
+
+    @_overload
+    def get_service_last_accessed_details(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetServiceLastAccessedDetailsInputDict],
     ) -> GetServiceLastAccessedDetailsOutput:
         """
         Retrieves a service last accessed report that was created using the
@@ -3538,8 +5177,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `GetServiceLastAccessedDetailsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3549,14 +5186,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `GetServiceLastAccessedDetailsOutput`.
         """
+
+    def get_service_last_accessed_details(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetServiceLastAccessedDetailsOutput:
         return self._invoke(
-            input, _models.GET_SERVICE_LAST_ACCESSED_DETAILS, [], plugins
+            self._select_input(_models.GET_SERVICE_LAST_ACCESSED_DETAILS, args, kwargs),
+            _models.GET_SERVICE_LAST_ACCESSED_DETAILS,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_service_last_accessed_details_with_entities(
         self,
-        input: GetServiceLastAccessedDetailsWithEntitiesInput,
+        request: _models.GetServiceLastAccessedDetailsWithEntitiesInput
+        | _models.GetServiceLastAccessedDetailsWithEntitiesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetServiceLastAccessedDetailsWithEntitiesOutput: ...
+
+    @_overload
+    def get_service_last_accessed_details_with_entities(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetServiceLastAccessedDetailsWithEntitiesInputDict],
     ) -> GetServiceLastAccessedDetailsWithEntitiesOutput:
         """
         After you generate a group or policy report using the
@@ -3584,8 +5241,6 @@ class IAMClient(Client[IAMConfig]):
         most recent access listed first.
 
         Args:
-            input:
-                An instance of `GetServiceLastAccessedDetailsWithEntitiesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3595,14 +5250,36 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `GetServiceLastAccessedDetailsWithEntitiesOutput`.
         """
+
+    def get_service_last_accessed_details_with_entities(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetServiceLastAccessedDetailsWithEntitiesOutput:
         return self._invoke(
-            input, _models.GET_SERVICE_LAST_ACCESSED_DETAILS_WITH_ENTITIES, [], plugins
+            self._select_input(
+                _models.GET_SERVICE_LAST_ACCESSED_DETAILS_WITH_ENTITIES, args, kwargs
+            ),
+            _models.GET_SERVICE_LAST_ACCESSED_DETAILS_WITH_ENTITIES,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_service_linked_role_deletion_status(
         self,
-        input: GetServiceLinkedRoleDeletionStatusInput,
+        request: _models.GetServiceLinkedRoleDeletionStatusInput
+        | _models.GetServiceLinkedRoleDeletionStatusInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetServiceLinkedRoleDeletionStatusOutput: ...
+
+    @_overload
+    def get_service_linked_role_deletion_status(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetServiceLinkedRoleDeletionStatusInputDict],
     ) -> GetServiceLinkedRoleDeletionStatusOutput:
         """
         Retrieves the status of your service-linked role deletion. After you use
@@ -3614,8 +5291,6 @@ class IAMClient(Client[IAMConfig]):
         the service.
 
         Args:
-            input:
-                An instance of `GetServiceLinkedRoleDeletionStatusInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3625,12 +5300,35 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `GetServiceLinkedRoleDeletionStatusOutput`.
         """
+
+    def get_service_linked_role_deletion_status(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetServiceLinkedRoleDeletionStatusOutput:
         return self._invoke(
-            input, _models.GET_SERVICE_LINKED_ROLE_DELETION_STATUS, [], plugins
+            self._select_input(
+                _models.GET_SERVICE_LINKED_ROLE_DELETION_STATUS, args, kwargs
+            ),
+            _models.GET_SERVICE_LINKED_ROLE_DELETION_STATUS,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_ssh_public_key(
-        self, input: GetSSHPublicKeyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetSSHPublicKeyInput | _models.GetSSHPublicKeyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetSSHPublicKeyOutput: ...
+
+    @_overload
+    def get_ssh_public_key(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetSSHPublicKeyInputDict],
     ) -> GetSSHPublicKeyOutput:
         """
         Retrieves the specified SSH public key, including metadata about the
@@ -3644,8 +5342,6 @@ class IAMClient(Client[IAMConfig]):
         in the *CodeCommit User Guide*.
 
         Args:
-            input:
-                An instance of `GetSSHPublicKeyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3655,10 +5351,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `GetSSHPublicKeyOutput`.
         """
-        return self._invoke(input, _models.GET_SSH_PUBLIC_KEY, [], plugins)
 
+    def get_ssh_public_key(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetSSHPublicKeyOutput:
+        return self._invoke(
+            self._select_input(_models.GET_SSH_PUBLIC_KEY, args, kwargs),
+            _models.GET_SSH_PUBLIC_KEY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_user(
-        self, input: GetUserInput | None = None, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetUserInput | _models.GetUserInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetUserOutput: ...
+
+    @_overload
+    def get_user(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetUserInputDict],
     ) -> GetUserOutput:
         """
         Retrieves information about the specified IAM user, including the
@@ -3669,8 +5388,6 @@ class IAMClient(Client[IAMConfig]):
         the request to this operation.
 
         Args:
-            input:
-                An instance of `GetUserInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3680,10 +5397,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `GetUserOutput`.
         """
-        return self._invoke(input, _models.GET_USER, [], plugins)
 
+    def get_user(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetUserOutput:
+        return self._invoke(
+            self._select_input(_models.GET_USER, args, kwargs),
+            _models.GET_USER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_user_policy(
-        self, input: GetUserPolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetUserPolicyInput | _models.GetUserPolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetUserPolicyOutput: ...
+
+    @_overload
+    def get_user_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetUserPolicyInputDict],
     ) -> GetUserPolicyOutput:
         """
         Retrieves the specified inline policy document that is embedded in the
@@ -3710,8 +5450,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `GetUserPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3721,12 +5459,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `GetUserPolicyOutput`.
         """
-        return self._invoke(input, _models.GET_USER_POLICY, [], plugins)
 
+    def get_user_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetUserPolicyOutput:
+        return self._invoke(
+            self._select_input(_models.GET_USER_POLICY, args, kwargs),
+            _models.GET_USER_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_access_keys(
         self,
-        input: ListAccessKeysInput | None = None,
+        request: _models.ListAccessKeysInput | _models.ListAccessKeysInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListAccessKeysOutput: ...
+
+    @_overload
+    def list_access_keys(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListAccessKeysInputDict],
     ) -> ListAccessKeysOutput:
         """
         Returns information about the access key IDs associated with the
@@ -3751,8 +5510,6 @@ class IAMClient(Client[IAMConfig]):
             access key is accessible only during key and user creation.
 
         Args:
-            input:
-                An instance of `ListAccessKeysInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3762,12 +5519,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `ListAccessKeysOutput`.
         """
-        return self._invoke(input, _models.LIST_ACCESS_KEYS, [], plugins)
 
+    def list_access_keys(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListAccessKeysOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_ACCESS_KEYS, args, kwargs),
+            _models.LIST_ACCESS_KEYS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_account_aliases(
         self,
-        input: ListAccountAliasesInput | None = None,
+        request: _models.ListAccountAliasesInput | _models.ListAccountAliasesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListAccountAliasesOutput: ...
+
+    @_overload
+    def list_account_aliases(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListAccountAliasesInputDict],
     ) -> ListAccountAliasesOutput:
         """
         Lists the account alias associated with the Amazon Web Services account
@@ -3778,8 +5556,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `ListAccountAliasesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3789,10 +5565,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `ListAccountAliasesOutput`.
         """
-        return self._invoke(input, _models.LIST_ACCOUNT_ALIASES, [], plugins)
 
+    def list_account_aliases(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListAccountAliasesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_ACCOUNT_ALIASES, args, kwargs),
+            _models.LIST_ACCOUNT_ALIASES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_attached_group_policies(
-        self, input: ListAttachedGroupPoliciesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListAttachedGroupPoliciesInput
+        | _models.ListAttachedGroupPoliciesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListAttachedGroupPoliciesOutput: ...
+
+    @_overload
+    def list_attached_group_policies(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListAttachedGroupPoliciesInputDict],
     ) -> ListAttachedGroupPoliciesOutput:
         """
         Lists all managed policies that are attached to the specified IAM group.
@@ -3811,8 +5611,6 @@ class IAMClient(Client[IAMConfig]):
         specified path prefix), the operation returns an empty list.
 
         Args:
-            input:
-                An instance of `ListAttachedGroupPoliciesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3822,10 +5620,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `ListAttachedGroupPoliciesOutput`.
         """
-        return self._invoke(input, _models.LIST_ATTACHED_GROUP_POLICIES, [], plugins)
 
+    def list_attached_group_policies(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListAttachedGroupPoliciesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_ATTACHED_GROUP_POLICIES, args, kwargs),
+            _models.LIST_ATTACHED_GROUP_POLICIES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_attached_role_policies(
-        self, input: ListAttachedRolePoliciesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListAttachedRolePoliciesInput
+        | _models.ListAttachedRolePoliciesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListAttachedRolePoliciesOutput: ...
+
+    @_overload
+    def list_attached_role_policies(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListAttachedRolePoliciesInputDict],
     ) -> ListAttachedRolePoliciesOutput:
         """
         Lists all managed policies that are attached to the specified IAM role.
@@ -3844,8 +5666,6 @@ class IAMClient(Client[IAMConfig]):
         specified path prefix), the operation returns an empty list.
 
         Args:
-            input:
-                An instance of `ListAttachedRolePoliciesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3855,10 +5675,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `ListAttachedRolePoliciesOutput`.
         """
-        return self._invoke(input, _models.LIST_ATTACHED_ROLE_POLICIES, [], plugins)
 
+    def list_attached_role_policies(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListAttachedRolePoliciesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_ATTACHED_ROLE_POLICIES, args, kwargs),
+            _models.LIST_ATTACHED_ROLE_POLICIES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_attached_user_policies(
-        self, input: ListAttachedUserPoliciesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListAttachedUserPoliciesInput
+        | _models.ListAttachedUserPoliciesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListAttachedUserPoliciesOutput: ...
+
+    @_overload
+    def list_attached_user_policies(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListAttachedUserPoliciesInputDict],
     ) -> ListAttachedUserPoliciesOutput:
         """
         Lists all managed policies that are attached to the specified IAM user.
@@ -3877,8 +5721,6 @@ class IAMClient(Client[IAMConfig]):
         specified path prefix), the operation returns an empty list.
 
         Args:
-            input:
-                An instance of `ListAttachedUserPoliciesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3888,12 +5730,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `ListAttachedUserPoliciesOutput`.
         """
-        return self._invoke(input, _models.LIST_ATTACHED_USER_POLICIES, [], plugins)
 
+    def list_attached_user_policies(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListAttachedUserPoliciesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_ATTACHED_USER_POLICIES, args, kwargs),
+            _models.LIST_ATTACHED_USER_POLICIES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_delegation_requests(
         self,
-        input: ListDelegationRequestsInput | None = None,
+        request: _models.ListDelegationRequestsInput
+        | _models.ListDelegationRequestsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListDelegationRequestsOutput: ...
+
+    @_overload
+    def list_delegation_requests(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListDelegationRequestsInputDict],
     ) -> ListDelegationRequestsOutput:
         """
         Lists delegation requests based on the specified criteria.
@@ -3906,8 +5770,6 @@ class IAMClient(Client[IAMConfig]):
         Requests](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies-temporary-delegation.html#temporary-delegation-managing-permissions).
 
         Args:
-            input:
-                An instance of `ListDelegationRequestsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3917,10 +5779,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `ListDelegationRequestsOutput`.
         """
-        return self._invoke(input, _models.LIST_DELEGATION_REQUESTS, [], plugins)
 
+    def list_delegation_requests(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListDelegationRequestsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_DELEGATION_REQUESTS, args, kwargs),
+            _models.LIST_DELEGATION_REQUESTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_entities_for_policy(
-        self, input: ListEntitiesForPolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListEntitiesForPolicyInput
+        | _models.ListEntitiesForPolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListEntitiesForPolicyOutput: ...
+
+    @_overload
+    def list_entities_for_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListEntitiesForPolicyInputDict],
     ) -> ListEntitiesForPolicyOutput:
         """
         Lists all IAM users, groups, and roles that the specified managed policy
@@ -3935,8 +5821,6 @@ class IAMClient(Client[IAMConfig]):
         parameters.
 
         Args:
-            input:
-                An instance of `ListEntitiesForPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3946,10 +5830,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `ListEntitiesForPolicyOutput`.
         """
-        return self._invoke(input, _models.LIST_ENTITIES_FOR_POLICY, [], plugins)
 
+    def list_entities_for_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListEntitiesForPolicyOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_ENTITIES_FOR_POLICY, args, kwargs),
+            _models.LIST_ENTITIES_FOR_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_group_policies(
-        self, input: ListGroupPoliciesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListGroupPoliciesInput | _models.ListGroupPoliciesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListGroupPoliciesOutput: ...
+
+    @_overload
+    def list_group_policies(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListGroupPoliciesInputDict],
     ) -> ListGroupPoliciesOutput:
         """
         Lists the names of the inline policies that are embedded in the
@@ -3967,8 +5874,6 @@ class IAMClient(Client[IAMConfig]):
         group, the operation returns an empty list.
 
         Args:
-            input:
-                An instance of `ListGroupPoliciesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3978,10 +5883,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `ListGroupPoliciesOutput`.
         """
-        return self._invoke(input, _models.LIST_GROUP_POLICIES, [], plugins)
 
+    def list_group_policies(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListGroupPoliciesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_GROUP_POLICIES, args, kwargs),
+            _models.LIST_GROUP_POLICIES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_groups(
-        self, input: ListGroupsInput | None = None, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListGroupsInput | _models.ListGroupsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListGroupsOutput: ...
+
+    @_overload
+    def list_groups(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListGroupsInputDict],
     ) -> ListGroupsOutput:
         """
         Lists the IAM groups that have the specified path prefix.
@@ -3990,8 +5918,6 @@ class IAMClient(Client[IAMConfig]):
         parameters.
 
         Args:
-            input:
-                An instance of `ListGroupsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4001,10 +5927,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `ListGroupsOutput`.
         """
-        return self._invoke(input, _models.LIST_GROUPS, [], plugins)
 
+    def list_groups(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListGroupsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_GROUPS, args, kwargs),
+            _models.LIST_GROUPS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_groups_for_user(
-        self, input: ListGroupsForUserInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListGroupsForUserInput | _models.ListGroupsForUserInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListGroupsForUserOutput: ...
+
+    @_overload
+    def list_groups_for_user(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListGroupsForUserInputDict],
     ) -> ListGroupsForUserOutput:
         """
         Lists the IAM groups that the specified IAM user belongs to.
@@ -4013,8 +5962,6 @@ class IAMClient(Client[IAMConfig]):
         parameters.
 
         Args:
-            input:
-                An instance of `ListGroupsForUserInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4024,12 +5971,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `ListGroupsForUserOutput`.
         """
-        return self._invoke(input, _models.LIST_GROUPS_FOR_USER, [], plugins)
 
+    def list_groups_for_user(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListGroupsForUserOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_GROUPS_FOR_USER, args, kwargs),
+            _models.LIST_GROUPS_FOR_USER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_instance_profiles(
         self,
-        input: ListInstanceProfilesInput | None = None,
+        request: _models.ListInstanceProfilesInput
+        | _models.ListInstanceProfilesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListInstanceProfilesOutput: ...
+
+    @_overload
+    def list_instance_profiles(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListInstanceProfilesInputDict],
     ) -> ListInstanceProfilesOutput:
         """
         Lists the instance profiles that have the specified path prefix. If
@@ -4049,8 +6018,6 @@ class IAMClient(Client[IAMConfig]):
         parameters.
 
         Args:
-            input:
-                An instance of `ListInstanceProfilesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4060,12 +6027,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `ListInstanceProfilesOutput`.
         """
-        return self._invoke(input, _models.LIST_INSTANCE_PROFILES, [], plugins)
 
+    def list_instance_profiles(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListInstanceProfilesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_INSTANCE_PROFILES, args, kwargs),
+            _models.LIST_INSTANCE_PROFILES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_instance_profiles_for_role(
         self,
-        input: ListInstanceProfilesForRoleInput,
+        request: _models.ListInstanceProfilesForRoleInput
+        | _models.ListInstanceProfilesForRoleInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListInstanceProfilesForRoleOutput: ...
+
+    @_overload
+    def list_instance_profiles_for_role(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListInstanceProfilesForRoleInputDict],
     ) -> ListInstanceProfilesForRoleOutput:
         """
         Lists the instance profiles that have the specified associated IAM role.
@@ -4078,8 +6067,6 @@ class IAMClient(Client[IAMConfig]):
         parameters.
 
         Args:
-            input:
-                An instance of `ListInstanceProfilesForRoleInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4089,10 +6076,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `ListInstanceProfilesForRoleOutput`.
         """
-        return self._invoke(input, _models.LIST_INSTANCE_PROFILES_FOR_ROLE, [], plugins)
 
+    def list_instance_profiles_for_role(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListInstanceProfilesForRoleOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_INSTANCE_PROFILES_FOR_ROLE, args, kwargs),
+            _models.LIST_INSTANCE_PROFILES_FOR_ROLE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_instance_profile_tags(
-        self, input: ListInstanceProfileTagsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListInstanceProfileTagsInput
+        | _models.ListInstanceProfileTagsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListInstanceProfileTagsOutput: ...
+
+    @_overload
+    def list_instance_profile_tags(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListInstanceProfileTagsInputDict],
     ) -> ListInstanceProfileTagsOutput:
         """
         Lists the tags that are attached to the specified IAM instance profile.
@@ -4102,8 +6113,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `ListInstanceProfileTagsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4113,12 +6122,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `ListInstanceProfileTagsOutput`.
         """
-        return self._invoke(input, _models.LIST_INSTANCE_PROFILE_TAGS, [], plugins)
 
+    def list_instance_profile_tags(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListInstanceProfileTagsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_INSTANCE_PROFILE_TAGS, args, kwargs),
+            _models.LIST_INSTANCE_PROFILE_TAGS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_mfa_devices(
         self,
-        input: ListMFADevicesInput | None = None,
+        request: _models.ListMFADevicesInput | _models.ListMFADevicesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListMFADevicesOutput: ...
+
+    @_overload
+    def list_mfa_devices(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListMFADevicesInputDict],
     ) -> ListMFADevicesOutput:
         """
         Lists the MFA devices for an IAM user. If the request includes a IAM
@@ -4131,8 +6161,6 @@ class IAMClient(Client[IAMConfig]):
         parameters.
 
         Args:
-            input:
-                An instance of `ListMFADevicesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4142,10 +6170,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `ListMFADevicesOutput`.
         """
-        return self._invoke(input, _models.LIST_MFA_DEVICES, [], plugins)
 
+    def list_mfa_devices(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListMFADevicesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_MFA_DEVICES, args, kwargs),
+            _models.LIST_MFA_DEVICES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_mfa_device_tags(
-        self, input: ListMFADeviceTagsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListMFADeviceTagsInput | _models.ListMFADeviceTagsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListMFADeviceTagsOutput: ...
+
+    @_overload
+    def list_mfa_device_tags(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListMFADeviceTagsInputDict],
     ) -> ListMFADeviceTagsOutput:
         """
         Lists the tags that are attached to the specified IAM virtual
@@ -4155,8 +6206,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `ListMFADeviceTagsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4166,12 +6215,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `ListMFADeviceTagsOutput`.
         """
-        return self._invoke(input, _models.LIST_MFA_DEVICE_TAGS, [], plugins)
 
+    def list_mfa_device_tags(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListMFADeviceTagsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_MFA_DEVICE_TAGS, args, kwargs),
+            _models.LIST_MFA_DEVICE_TAGS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_open_id_connect_providers(
         self,
-        input: ListOpenIDConnectProvidersInput | None = None,
+        request: _models.ListOpenIDConnectProvidersInput
+        | _models.ListOpenIDConnectProvidersInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListOpenIDConnectProvidersOutput: ...
+
+    @_overload
+    def list_open_id_connect_providers(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListOpenIDConnectProvidersInputDict],
     ) -> ListOpenIDConnectProvidersOutput:
         """
         Lists information about the IAM OpenID Connect (OIDC) provider resource
@@ -4185,8 +6256,6 @@ class IAMClient(Client[IAMConfig]):
             [GetOpenIDConnectProvider](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetOpenIDConnectProvider.html).
 
         Args:
-            input:
-                An instance of `ListOpenIDConnectProvidersInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4196,12 +6265,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `ListOpenIDConnectProvidersOutput`.
         """
-        return self._invoke(input, _models.LIST_OPEN_ID_CONNECT_PROVIDERS, [], plugins)
 
+    def list_open_id_connect_providers(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListOpenIDConnectProvidersOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_OPEN_ID_CONNECT_PROVIDERS, args, kwargs),
+            _models.LIST_OPEN_ID_CONNECT_PROVIDERS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_open_id_connect_provider_tags(
         self,
-        input: ListOpenIDConnectProviderTagsInput,
+        request: _models.ListOpenIDConnectProviderTagsInput
+        | _models.ListOpenIDConnectProviderTagsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListOpenIDConnectProviderTagsOutput: ...
+
+    @_overload
+    def list_open_id_connect_provider_tags(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListOpenIDConnectProviderTagsInputDict],
     ) -> ListOpenIDConnectProviderTagsOutput:
         """
         Lists the tags that are attached to the specified OpenID Connect
@@ -4214,8 +6305,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `ListOpenIDConnectProviderTagsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4225,14 +6314,36 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `ListOpenIDConnectProviderTagsOutput`.
         """
+
+    def list_open_id_connect_provider_tags(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListOpenIDConnectProviderTagsOutput:
         return self._invoke(
-            input, _models.LIST_OPEN_ID_CONNECT_PROVIDER_TAGS, [], plugins
+            self._select_input(
+                _models.LIST_OPEN_ID_CONNECT_PROVIDER_TAGS, args, kwargs
+            ),
+            _models.LIST_OPEN_ID_CONNECT_PROVIDER_TAGS,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_organizations_features(
         self,
-        input: ListOrganizationsFeaturesInput | None = None,
+        request: _models.ListOrganizationsFeaturesInput
+        | _models.ListOrganizationsFeaturesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListOrganizationsFeaturesOutput: ...
+
+    @_overload
+    def list_organizations_features(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListOrganizationsFeaturesInputDict],
     ) -> ListOrganizationsFeaturesOutput:
         """
         Lists the centralized root access features enabled for your
@@ -4241,8 +6352,6 @@ class IAMClient(Client[IAMConfig]):
         accounts](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html#id_root-user-access-management).
 
         Args:
-            input:
-                An instance of `ListOrganizationsFeaturesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4252,12 +6361,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `ListOrganizationsFeaturesOutput`.
         """
-        return self._invoke(input, _models.LIST_ORGANIZATIONS_FEATURES, [], plugins)
 
+    def list_organizations_features(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListOrganizationsFeaturesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_ORGANIZATIONS_FEATURES, args, kwargs),
+            _models.LIST_ORGANIZATIONS_FEATURES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_policies(
         self,
-        input: ListPoliciesInput | None = None,
+        request: _models.ListPoliciesInput | _models.ListPoliciesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListPoliciesOutput: ...
+
+    @_overload
+    def list_policies(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListPoliciesInputDict],
     ) -> ListPoliciesOutput:
         """
         Lists all the managed policies that are available in your Amazon Web
@@ -4286,8 +6416,6 @@ class IAMClient(Client[IAMConfig]):
             [GetPolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicy.html).
 
         Args:
-            input:
-                An instance of `ListPoliciesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4297,12 +6425,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `ListPoliciesOutput`.
         """
-        return self._invoke(input, _models.LIST_POLICIES, [], plugins)
 
+    def list_policies(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListPoliciesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_POLICIES, args, kwargs),
+            _models.LIST_POLICIES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_policies_granting_service_access(
         self,
-        input: ListPoliciesGrantingServiceAccessInput,
+        request: _models.ListPoliciesGrantingServiceAccessInput
+        | _models.ListPoliciesGrantingServiceAccessInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListPoliciesGrantingServiceAccessOutput: ...
+
+    @_overload
+    def list_policies_granting_service_access(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListPoliciesGrantingServiceAccessInputDict],
     ) -> ListPoliciesGrantingServiceAccessOutput:
         """
         Retrieves a list of policies that the IAM identity (user, group, or
@@ -4349,8 +6499,6 @@ class IAMClient(Client[IAMConfig]):
         operations.
 
         Args:
-            input:
-                An instance of `ListPoliciesGrantingServiceAccessInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4360,12 +6508,35 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `ListPoliciesGrantingServiceAccessOutput`.
         """
+
+    def list_policies_granting_service_access(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListPoliciesGrantingServiceAccessOutput:
         return self._invoke(
-            input, _models.LIST_POLICIES_GRANTING_SERVICE_ACCESS, [], plugins
+            self._select_input(
+                _models.LIST_POLICIES_GRANTING_SERVICE_ACCESS, args, kwargs
+            ),
+            _models.LIST_POLICIES_GRANTING_SERVICE_ACCESS,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_policy_tags(
-        self, input: ListPolicyTagsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListPolicyTagsInput | _models.ListPolicyTagsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListPolicyTagsOutput: ...
+
+    @_overload
+    def list_policy_tags(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListPolicyTagsInputDict],
     ) -> ListPolicyTagsOutput:
         """
         Lists the tags that are attached to the specified IAM customer managed
@@ -4375,8 +6546,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `ListPolicyTagsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4386,10 +6555,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `ListPolicyTagsOutput`.
         """
-        return self._invoke(input, _models.LIST_POLICY_TAGS, [], plugins)
 
+    def list_policy_tags(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListPolicyTagsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_POLICY_TAGS, args, kwargs),
+            _models.LIST_POLICY_TAGS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_policy_versions(
-        self, input: ListPolicyVersionsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListPolicyVersionsInput | _models.ListPolicyVersionsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListPolicyVersionsOutput: ...
+
+    @_overload
+    def list_policy_versions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListPolicyVersionsInputDict],
     ) -> ListPolicyVersionsOutput:
         """
         Lists information about the versions of the specified managed policy,
@@ -4402,8 +6594,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `ListPolicyVersionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4413,10 +6603,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `ListPolicyVersionsOutput`.
         """
-        return self._invoke(input, _models.LIST_POLICY_VERSIONS, [], plugins)
 
+    def list_policy_versions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListPolicyVersionsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_POLICY_VERSIONS, args, kwargs),
+            _models.LIST_POLICY_VERSIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_role_policies(
-        self, input: ListRolePoliciesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListRolePoliciesInput | _models.ListRolePoliciesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListRolePoliciesOutput: ...
+
+    @_overload
+    def list_role_policies(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListRolePoliciesInputDict],
     ) -> ListRolePoliciesOutput:
         """
         Lists the names of the inline policies that are embedded in the
@@ -4434,8 +6647,6 @@ class IAMClient(Client[IAMConfig]):
         role, the operation returns an empty list.
 
         Args:
-            input:
-                An instance of `ListRolePoliciesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4445,10 +6656,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `ListRolePoliciesOutput`.
         """
-        return self._invoke(input, _models.LIST_ROLE_POLICIES, [], plugins)
 
+    def list_role_policies(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListRolePoliciesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_ROLE_POLICIES, args, kwargs),
+            _models.LIST_ROLE_POLICIES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_roles(
-        self, input: ListRolesInput | None = None, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListRolesInput | _models.ListRolesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListRolesOutput: ...
+
+    @_overload
+    def list_roles(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListRolesInputDict],
     ) -> ListRolesOutput:
         """
         Lists the IAM roles that have the specified path prefix. If there are
@@ -4476,8 +6710,6 @@ class IAMClient(Client[IAMConfig]):
         parameters.
 
         Args:
-            input:
-                An instance of `ListRolesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4487,10 +6719,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `ListRolesOutput`.
         """
-        return self._invoke(input, _models.LIST_ROLES, [], plugins)
 
+    def list_roles(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListRolesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_ROLES, args, kwargs),
+            _models.LIST_ROLES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_role_tags(
-        self, input: ListRoleTagsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListRoleTagsInput | _models.ListRoleTagsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListRoleTagsOutput: ...
+
+    @_overload
+    def list_role_tags(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListRoleTagsInputDict],
     ) -> ListRoleTagsOutput:
         """
         Lists the tags that are attached to the specified role. The returned
@@ -4500,8 +6755,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `ListRoleTagsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4511,12 +6764,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `ListRoleTagsOutput`.
         """
-        return self._invoke(input, _models.LIST_ROLE_TAGS, [], plugins)
 
+    def list_role_tags(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListRoleTagsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_ROLE_TAGS, args, kwargs),
+            _models.LIST_ROLE_TAGS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_saml_providers(
         self,
-        input: ListSAMLProvidersInput | None = None,
+        request: _models.ListSAMLProvidersInput | _models.ListSAMLProvidersInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListSAMLProvidersOutput: ...
+
+    @_overload
+    def list_saml_providers(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListSAMLProvidersInputDict],
     ) -> ListSAMLProvidersOutput:
         """
         Lists the SAML provider resource objects defined in IAM in the account.
@@ -4531,8 +6805,6 @@ class IAMClient(Client[IAMConfig]):
             4](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
 
         Args:
-            input:
-                An instance of `ListSAMLProvidersInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4542,10 +6814,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `ListSAMLProvidersOutput`.
         """
-        return self._invoke(input, _models.LIST_SAML_PROVIDERS, [], plugins)
 
+    def list_saml_providers(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListSAMLProvidersOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_SAML_PROVIDERS, args, kwargs),
+            _models.LIST_SAML_PROVIDERS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_saml_provider_tags(
-        self, input: ListSAMLProviderTagsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListSAMLProviderTagsInput
+        | _models.ListSAMLProviderTagsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListSAMLProviderTagsOutput: ...
+
+    @_overload
+    def list_saml_provider_tags(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListSAMLProviderTagsInputDict],
     ) -> ListSAMLProviderTagsOutput:
         """
         Lists the tags that are attached to the specified Security Assertion
@@ -4558,8 +6854,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `ListSAMLProviderTagsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4569,12 +6863,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `ListSAMLProviderTagsOutput`.
         """
-        return self._invoke(input, _models.LIST_SAML_PROVIDER_TAGS, [], plugins)
 
+    def list_saml_provider_tags(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListSAMLProviderTagsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_SAML_PROVIDER_TAGS, args, kwargs),
+            _models.LIST_SAML_PROVIDER_TAGS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_server_certificates(
         self,
-        input: ListServerCertificatesInput | None = None,
+        request: _models.ListServerCertificatesInput
+        | _models.ListServerCertificatesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListServerCertificatesOutput: ...
+
+    @_overload
+    def list_server_certificates(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListServerCertificatesInputDict],
     ) -> ListServerCertificatesOutput:
         """
         Lists the server certificates stored in IAM that have the specified path
@@ -4598,8 +6914,6 @@ class IAMClient(Client[IAMConfig]):
             [GetServerCertificate](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetServerCertificate.html).
 
         Args:
-            input:
-                An instance of `ListServerCertificatesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4609,10 +6923,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `ListServerCertificatesOutput`.
         """
-        return self._invoke(input, _models.LIST_SERVER_CERTIFICATES, [], plugins)
 
+    def list_server_certificates(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListServerCertificatesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_SERVER_CERTIFICATES, args, kwargs),
+            _models.LIST_SERVER_CERTIFICATES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_server_certificate_tags(
-        self, input: ListServerCertificateTagsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListServerCertificateTagsInput
+        | _models.ListServerCertificateTagsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListServerCertificateTagsOutput: ...
+
+    @_overload
+    def list_server_certificate_tags(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListServerCertificateTagsInputDict],
     ) -> ListServerCertificateTagsOutput:
         """
         Lists the tags that are attached to the specified IAM server
@@ -4630,8 +6968,6 @@ class IAMClient(Client[IAMConfig]):
             in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `ListServerCertificateTagsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4641,12 +6977,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `ListServerCertificateTagsOutput`.
         """
-        return self._invoke(input, _models.LIST_SERVER_CERTIFICATE_TAGS, [], plugins)
 
+    def list_server_certificate_tags(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListServerCertificateTagsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_SERVER_CERTIFICATE_TAGS, args, kwargs),
+            _models.LIST_SERVER_CERTIFICATE_TAGS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_service_specific_credentials(
         self,
-        input: ListServiceSpecificCredentialsInput | None = None,
+        request: _models.ListServiceSpecificCredentialsInput
+        | _models.ListServiceSpecificCredentialsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListServiceSpecificCredentialsOutput: ...
+
+    @_overload
+    def list_service_specific_credentials(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListServiceSpecificCredentialsInputDict],
     ) -> ListServiceSpecificCredentialsOutput:
         """
         Returns information about the service-specific credentials associated
@@ -4674,8 +7032,6 @@ class IAMClient(Client[IAMConfig]):
           in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `ListServiceSpecificCredentialsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4685,14 +7041,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `ListServiceSpecificCredentialsOutput`.
         """
+
+    def list_service_specific_credentials(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListServiceSpecificCredentialsOutput:
         return self._invoke(
-            input, _models.LIST_SERVICE_SPECIFIC_CREDENTIALS, [], plugins
+            self._select_input(_models.LIST_SERVICE_SPECIFIC_CREDENTIALS, args, kwargs),
+            _models.LIST_SERVICE_SPECIFIC_CREDENTIALS,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_signing_certificates(
         self,
-        input: ListSigningCertificatesInput | None = None,
+        request: _models.ListSigningCertificatesInput
+        | _models.ListSigningCertificatesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListSigningCertificatesOutput: ...
+
+    @_overload
+    def list_signing_certificates(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListSigningCertificatesInputDict],
     ) -> ListSigningCertificatesOutput:
         """
         Returns information about the signing certificates associated with the
@@ -4710,8 +7086,6 @@ class IAMClient(Client[IAMConfig]):
         even if the Amazon Web Services account has no associated users.
 
         Args:
-            input:
-                An instance of `ListSigningCertificatesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4721,12 +7095,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `ListSigningCertificatesOutput`.
         """
-        return self._invoke(input, _models.LIST_SIGNING_CERTIFICATES, [], plugins)
 
+    def list_signing_certificates(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListSigningCertificatesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_SIGNING_CERTIFICATES, args, kwargs),
+            _models.LIST_SIGNING_CERTIFICATES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_ssh_public_keys(
         self,
-        input: ListSSHPublicKeysInput | None = None,
+        request: _models.ListSSHPublicKeysInput | _models.ListSSHPublicKeysInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListSSHPublicKeysOutput: ...
+
+    @_overload
+    def list_ssh_public_keys(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListSSHPublicKeysInputDict],
     ) -> ListSSHPublicKeysOutput:
         """
         Returns information about the SSH public keys associated with the
@@ -4743,8 +7138,6 @@ class IAMClient(Client[IAMConfig]):
         paginate the results using the `MaxItems` and `Marker` parameters.
 
         Args:
-            input:
-                An instance of `ListSSHPublicKeysInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4754,10 +7147,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `ListSSHPublicKeysOutput`.
         """
-        return self._invoke(input, _models.LIST_SSH_PUBLIC_KEYS, [], plugins)
 
+    def list_ssh_public_keys(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListSSHPublicKeysOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_SSH_PUBLIC_KEYS, args, kwargs),
+            _models.LIST_SSH_PUBLIC_KEYS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_user_policies(
-        self, input: ListUserPoliciesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListUserPoliciesInput | _models.ListUserPoliciesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListUserPoliciesOutput: ...
+
+    @_overload
+    def list_user_policies(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListUserPoliciesInputDict],
     ) -> ListUserPoliciesOutput:
         """
         Lists the names of the inline policies embedded in the specified IAM
@@ -4775,8 +7191,6 @@ class IAMClient(Client[IAMConfig]):
         user, the operation returns an empty list.
 
         Args:
-            input:
-                An instance of `ListUserPoliciesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4786,10 +7200,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `ListUserPoliciesOutput`.
         """
-        return self._invoke(input, _models.LIST_USER_POLICIES, [], plugins)
 
+    def list_user_policies(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListUserPoliciesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_USER_POLICIES, args, kwargs),
+            _models.LIST_USER_POLICIES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_users(
-        self, input: ListUsersInput | None = None, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListUsersInput | _models.ListUsersInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListUsersOutput: ...
+
+    @_overload
+    def list_users(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListUsersInputDict],
     ) -> ListUsersOutput:
         """
         Lists the IAM users that have the specified path prefix. If no path
@@ -4814,8 +7251,6 @@ class IAMClient(Client[IAMConfig]):
         parameters.
 
         Args:
-            input:
-                An instance of `ListUsersInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4825,10 +7260,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `ListUsersOutput`.
         """
-        return self._invoke(input, _models.LIST_USERS, [], plugins)
 
+    def list_users(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListUsersOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_USERS, args, kwargs),
+            _models.LIST_USERS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_user_tags(
-        self, input: ListUserTagsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListUserTagsInput | _models.ListUserTagsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListUserTagsOutput: ...
+
+    @_overload
+    def list_user_tags(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListUserTagsInputDict],
     ) -> ListUserTagsOutput:
         """
         Lists the tags that are attached to the specified IAM user. The returned
@@ -4838,8 +7296,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `ListUserTagsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4849,12 +7305,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `ListUserTagsOutput`.
         """
-        return self._invoke(input, _models.LIST_USER_TAGS, [], plugins)
 
+    def list_user_tags(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListUserTagsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_USER_TAGS, args, kwargs),
+            _models.LIST_USER_TAGS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_virtual_mfa_devices(
         self,
-        input: ListVirtualMFADevicesInput | None = None,
+        request: _models.ListVirtualMFADevicesInput
+        | _models.ListVirtualMFADevicesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListVirtualMFADevicesOutput: ...
+
+    @_overload
+    def list_virtual_mfa_devices(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListVirtualMFADevicesInputDict],
     ) -> ListVirtualMFADevicesOutput:
         """
         Lists the virtual MFA devices defined in the Amazon Web Services account
@@ -4873,8 +7351,6 @@ class IAMClient(Client[IAMConfig]):
         parameters.
 
         Args:
-            input:
-                An instance of `ListVirtualMFADevicesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4884,10 +7360,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `ListVirtualMFADevicesOutput`.
         """
-        return self._invoke(input, _models.LIST_VIRTUAL_MFA_DEVICES, [], plugins)
 
+    def list_virtual_mfa_devices(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListVirtualMFADevicesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_VIRTUAL_MFA_DEVICES, args, kwargs),
+            _models.LIST_VIRTUAL_MFA_DEVICES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_account_properties(
-        self, input: PutAccountPropertiesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutAccountPropertiesInput
+        | _models.PutAccountPropertiesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutAccountPropertiesOutput: ...
+
+    @_overload
+    def put_account_properties(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutAccountPropertiesInputDict],
     ) -> PutAccountPropertiesOutput:
         """
         Sets account-level properties for the caller's Amazon Web Services
@@ -4901,8 +7401,6 @@ class IAMClient(Client[IAMConfig]):
         to view the current properties.
 
         Args:
-            input:
-                An instance of `PutAccountPropertiesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4912,10 +7410,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `PutAccountPropertiesOutput`.
         """
-        return self._invoke(input, _models.PUT_ACCOUNT_PROPERTIES, [], plugins)
 
+    def put_account_properties(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutAccountPropertiesOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_ACCOUNT_PROPERTIES, args, kwargs),
+            _models.PUT_ACCOUNT_PROPERTIES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_group_policy(
-        self, input: PutGroupPolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutGroupPolicyInput | _models.PutGroupPolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutGroupPolicyOutput: ...
+
+    @_overload
+    def put_group_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutGroupPolicyInputDict],
     ) -> PutGroupPolicyOutput:
         """
         Adds or updates an inline policy document that is embedded in the
@@ -4943,8 +7464,6 @@ class IAMClient(Client[IAMConfig]):
             in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `PutGroupPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4954,12 +7473,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `PutGroupPolicyOutput`.
         """
-        return self._invoke(input, _models.PUT_GROUP_POLICY, [], plugins)
 
+    def put_group_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutGroupPolicyOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_GROUP_POLICY, args, kwargs),
+            _models.PUT_GROUP_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_role_permissions_boundary(
         self,
-        input: PutRolePermissionsBoundaryInput,
+        request: _models.PutRolePermissionsBoundaryInput
+        | _models.PutRolePermissionsBoundaryInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> PutRolePermissionsBoundaryOutput: ...
+
+    @_overload
+    def put_role_permissions_boundary(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutRolePermissionsBoundaryInputDict],
     ) -> PutRolePermissionsBoundaryOutput:
         """
         Adds or updates the policy that is specified as the IAM role's
@@ -4980,8 +7521,6 @@ class IAMClient(Client[IAMConfig]):
             in the IAM User Guide.
 
         Args:
-            input:
-                An instance of `PutRolePermissionsBoundaryInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4991,10 +7530,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `PutRolePermissionsBoundaryOutput`.
         """
-        return self._invoke(input, _models.PUT_ROLE_PERMISSIONS_BOUNDARY, [], plugins)
 
+    def put_role_permissions_boundary(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutRolePermissionsBoundaryOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_ROLE_PERMISSIONS_BOUNDARY, args, kwargs),
+            _models.PUT_ROLE_PERMISSIONS_BOUNDARY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_role_policy(
-        self, input: PutRolePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutRolePolicyInput | _models.PutRolePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutRolePolicyOutput: ...
+
+    @_overload
+    def put_role_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutRolePolicyInputDict],
     ) -> PutRolePolicyOutput:
         """
         Adds or updates an inline policy document that is embedded in the
@@ -5032,8 +7594,6 @@ class IAMClient(Client[IAMConfig]):
             in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `PutRolePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5043,12 +7603,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `PutRolePolicyOutput`.
         """
-        return self._invoke(input, _models.PUT_ROLE_POLICY, [], plugins)
 
+    def put_role_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutRolePolicyOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_ROLE_POLICY, args, kwargs),
+            _models.PUT_ROLE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_user_permissions_boundary(
         self,
-        input: PutUserPermissionsBoundaryInput,
+        request: _models.PutUserPermissionsBoundaryInput
+        | _models.PutUserPermissionsBoundaryInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> PutUserPermissionsBoundaryOutput: ...
+
+    @_overload
+    def put_user_permissions_boundary(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutUserPermissionsBoundaryInputDict],
     ) -> PutUserPermissionsBoundaryOutput:
         """
         Adds or updates the policy that is specified as the IAM user's
@@ -5067,8 +7649,6 @@ class IAMClient(Client[IAMConfig]):
             in the IAM User Guide.
 
         Args:
-            input:
-                An instance of `PutUserPermissionsBoundaryInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5078,10 +7658,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `PutUserPermissionsBoundaryOutput`.
         """
-        return self._invoke(input, _models.PUT_USER_PERMISSIONS_BOUNDARY, [], plugins)
 
+    def put_user_permissions_boundary(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutUserPermissionsBoundaryOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_USER_PERMISSIONS_BOUNDARY, args, kwargs),
+            _models.PUT_USER_PERMISSIONS_BOUNDARY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_user_policy(
-        self, input: PutUserPolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutUserPolicyInput | _models.PutUserPolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutUserPolicyOutput: ...
+
+    @_overload
+    def put_user_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutUserPolicyInputDict],
     ) -> PutUserPolicyOutput:
         """
         Adds or updates an inline policy document that is embedded in the
@@ -5109,8 +7712,6 @@ class IAMClient(Client[IAMConfig]):
             in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `PutUserPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5120,10 +7721,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `PutUserPolicyOutput`.
         """
-        return self._invoke(input, _models.PUT_USER_POLICY, [], plugins)
 
+    def put_user_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutUserPolicyOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_USER_POLICY, args, kwargs),
+            _models.PUT_USER_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def reject_delegation_request(
-        self, input: RejectDelegationRequestInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RejectDelegationRequestInput
+        | _models.RejectDelegationRequestInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RejectDelegationRequestOutput: ...
+
+    @_overload
+    def reject_delegation_request(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RejectDelegationRequestInputDict],
     ) -> RejectDelegationRequestOutput:
         """
         Rejects a delegation request, denying the requested temporary access.
@@ -5138,8 +7763,6 @@ class IAMClient(Client[IAMConfig]):
         Requests](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies-temporary-delegation.html#temporary-delegation-managing-permissions).
 
         Args:
-            input:
-                An instance of `RejectDelegationRequestInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5149,12 +7772,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `RejectDelegationRequestOutput`.
         """
-        return self._invoke(input, _models.REJECT_DELEGATION_REQUEST, [], plugins)
 
+    def reject_delegation_request(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RejectDelegationRequestOutput:
+        return self._invoke(
+            self._select_input(_models.REJECT_DELEGATION_REQUEST, args, kwargs),
+            _models.REJECT_DELEGATION_REQUEST,
+            [],
+            plugins,
+        )
+
+    @_overload
     def remove_client_id_from_open_id_connect_provider(
         self,
-        input: RemoveClientIDFromOpenIDConnectProviderInput,
+        request: _models.RemoveClientIDFromOpenIDConnectProviderInput
+        | _models.RemoveClientIDFromOpenIDConnectProviderInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> RemoveClientIDFromOpenIDConnectProviderOutput: ...
+
+    @_overload
+    def remove_client_id_from_open_id_connect_provider(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RemoveClientIDFromOpenIDConnectProviderInputDict],
     ) -> RemoveClientIDFromOpenIDConnectProviderOutput:
         """
         Removes the specified client ID (also known as audience) from the list
@@ -5165,8 +7810,6 @@ class IAMClient(Client[IAMConfig]):
         try to remove a client ID that does not exist.
 
         Args:
-            input:
-                An instance of `RemoveClientIDFromOpenIDConnectProviderInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5176,14 +7819,36 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `RemoveClientIDFromOpenIDConnectProviderOutput`.
         """
+
+    def remove_client_id_from_open_id_connect_provider(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RemoveClientIDFromOpenIDConnectProviderOutput:
         return self._invoke(
-            input, _models.REMOVE_CLIENT_ID_FROM_OPEN_ID_CONNECT_PROVIDER, [], plugins
+            self._select_input(
+                _models.REMOVE_CLIENT_ID_FROM_OPEN_ID_CONNECT_PROVIDER, args, kwargs
+            ),
+            _models.REMOVE_CLIENT_ID_FROM_OPEN_ID_CONNECT_PROVIDER,
+            [],
+            plugins,
         )
 
+    @_overload
     def remove_role_from_instance_profile(
         self,
-        input: RemoveRoleFromInstanceProfileInput,
+        request: _models.RemoveRoleFromInstanceProfileInput
+        | _models.RemoveRoleFromInstanceProfileInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> RemoveRoleFromInstanceProfileOutput: ...
+
+    @_overload
+    def remove_role_from_instance_profile(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RemoveRoleFromInstanceProfileInputDict],
     ) -> RemoveRoleFromInstanceProfileOutput:
         """
         Removes the specified IAM role from the specified Amazon EC2 instance
@@ -5203,8 +7868,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `RemoveRoleFromInstanceProfileInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5214,19 +7877,39 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `RemoveRoleFromInstanceProfileOutput`.
         """
+
+    def remove_role_from_instance_profile(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RemoveRoleFromInstanceProfileOutput:
         return self._invoke(
-            input, _models.REMOVE_ROLE_FROM_INSTANCE_PROFILE, [], plugins
+            self._select_input(_models.REMOVE_ROLE_FROM_INSTANCE_PROFILE, args, kwargs),
+            _models.REMOVE_ROLE_FROM_INSTANCE_PROFILE,
+            [],
+            plugins,
         )
 
+    @_overload
     def remove_user_from_group(
-        self, input: RemoveUserFromGroupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RemoveUserFromGroupInput
+        | _models.RemoveUserFromGroupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RemoveUserFromGroupOutput: ...
+
+    @_overload
+    def remove_user_from_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RemoveUserFromGroupInputDict],
     ) -> RemoveUserFromGroupOutput:
         """
         Removes the specified user from the specified group.
 
         Args:
-            input:
-                An instance of `RemoveUserFromGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5236,12 +7919,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `RemoveUserFromGroupOutput`.
         """
-        return self._invoke(input, _models.REMOVE_USER_FROM_GROUP, [], plugins)
 
+    def remove_user_from_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RemoveUserFromGroupOutput:
+        return self._invoke(
+            self._select_input(_models.REMOVE_USER_FROM_GROUP, args, kwargs),
+            _models.REMOVE_USER_FROM_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def reset_service_specific_credential(
         self,
-        input: ResetServiceSpecificCredentialInput,
+        request: _models.ResetServiceSpecificCredentialInput
+        | _models.ResetServiceSpecificCredentialInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ResetServiceSpecificCredentialOutput: ...
+
+    @_overload
+    def reset_service_specific_credential(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ResetServiceSpecificCredentialInputDict],
     ) -> ResetServiceSpecificCredentialOutput:
         """
         Resets the password for a service-specific credential. The new password
@@ -5250,8 +7955,6 @@ class IAMClient(Client[IAMConfig]):
         invalidates the previous password associated with this user.
 
         Args:
-            input:
-                An instance of `ResetServiceSpecificCredentialInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5261,12 +7964,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `ResetServiceSpecificCredentialOutput`.
         """
+
+    def reset_service_specific_credential(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ResetServiceSpecificCredentialOutput:
         return self._invoke(
-            input, _models.RESET_SERVICE_SPECIFIC_CREDENTIAL, [], plugins
+            self._select_input(_models.RESET_SERVICE_SPECIFIC_CREDENTIAL, args, kwargs),
+            _models.RESET_SERVICE_SPECIFIC_CREDENTIAL,
+            [],
+            plugins,
         )
 
+    @_overload
     def resync_mfa_device(
-        self, input: ResyncMFADeviceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ResyncMFADeviceInput | _models.ResyncMFADeviceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ResyncMFADeviceOutput: ...
+
+    @_overload
+    def resync_mfa_device(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ResyncMFADeviceInputDict],
     ) -> ResyncMFADeviceOutput:
         """
         Synchronizes the specified MFA device with its IAM resource object on
@@ -5278,8 +8002,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `ResyncMFADeviceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5289,10 +8011,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `ResyncMFADeviceOutput`.
         """
-        return self._invoke(input, _models.RESYNC_MFA_DEVICE, [], plugins)
 
+    def resync_mfa_device(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ResyncMFADeviceOutput:
+        return self._invoke(
+            self._select_input(_models.RESYNC_MFA_DEVICE, args, kwargs),
+            _models.RESYNC_MFA_DEVICE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def send_delegation_token(
-        self, input: SendDelegationTokenInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.SendDelegationTokenInput
+        | _models.SendDelegationTokenInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> SendDelegationTokenOutput: ...
+
+    @_overload
+    def send_delegation_token(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SendDelegationTokenInputDict],
     ) -> SendDelegationTokenOutput:
         """
         Sends the exchange token for an accepted delegation request.
@@ -5310,8 +8056,6 @@ class IAMClient(Client[IAMConfig]):
         Requests](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies-temporary-delegation.html#temporary-delegation-managing-permissions).
 
         Args:
-            input:
-                An instance of `SendDelegationTokenInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5321,10 +8065,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `SendDelegationTokenOutput`.
         """
-        return self._invoke(input, _models.SEND_DELEGATION_TOKEN, [], plugins)
 
+    def send_delegation_token(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SendDelegationTokenOutput:
+        return self._invoke(
+            self._select_input(_models.SEND_DELEGATION_TOKEN, args, kwargs),
+            _models.SEND_DELEGATION_TOKEN,
+            [],
+            plugins,
+        )
+
+    @_overload
     def set_default_policy_version(
-        self, input: SetDefaultPolicyVersionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.SetDefaultPolicyVersionInput
+        | _models.SetDefaultPolicyVersionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> SetDefaultPolicyVersionOutput: ...
+
+    @_overload
+    def set_default_policy_version(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SetDefaultPolicyVersionInputDict],
     ) -> SetDefaultPolicyVersionOutput:
         """
         Sets the specified version of the specified policy as the policy's
@@ -5340,8 +8108,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `SetDefaultPolicyVersionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5351,12 +8117,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `SetDefaultPolicyVersionOutput`.
         """
-        return self._invoke(input, _models.SET_DEFAULT_POLICY_VERSION, [], plugins)
 
+    def set_default_policy_version(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SetDefaultPolicyVersionOutput:
+        return self._invoke(
+            self._select_input(_models.SET_DEFAULT_POLICY_VERSION, args, kwargs),
+            _models.SET_DEFAULT_POLICY_VERSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def set_security_token_service_preferences(
         self,
-        input: SetSecurityTokenServicePreferencesInput,
+        request: _models.SetSecurityTokenServicePreferencesInput
+        | _models.SetSecurityTokenServicePreferencesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> SetSecurityTokenServicePreferencesOutput: ...
+
+    @_overload
+    def set_security_token_service_preferences(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SetSecurityTokenServicePreferencesInputDict],
     ) -> SetSecurityTokenServicePreferencesOutput:
         """
         Sets the specified version of the global endpoint token as the token
@@ -5389,8 +8177,6 @@ class IAMClient(Client[IAMConfig]):
         operation.
 
         Args:
-            input:
-                An instance of `SetSecurityTokenServicePreferencesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5400,12 +8186,36 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `SetSecurityTokenServicePreferencesOutput`.
         """
+
+    def set_security_token_service_preferences(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SetSecurityTokenServicePreferencesOutput:
         return self._invoke(
-            input, _models.SET_SECURITY_TOKEN_SERVICE_PREFERENCES, [], plugins
+            self._select_input(
+                _models.SET_SECURITY_TOKEN_SERVICE_PREFERENCES, args, kwargs
+            ),
+            _models.SET_SECURITY_TOKEN_SERVICE_PREFERENCES,
+            [],
+            plugins,
         )
 
+    @_overload
     def simulate_custom_policy(
-        self, input: SimulateCustomPolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.SimulateCustomPolicyInput
+        | _models.SimulateCustomPolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> SimulateCustomPolicyOutput: ...
+
+    @_overload
+    def simulate_custom_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SimulateCustomPolicyInputDict],
     ) -> SimulateCustomPolicyOutput:
         """
         Simulate how a set of IAM policies and optionally a resource-based
@@ -5447,8 +8257,6 @@ class IAMClient(Client[IAMConfig]):
             in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `SimulateCustomPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5458,10 +8266,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `SimulateCustomPolicyOutput`.
         """
-        return self._invoke(input, _models.SIMULATE_CUSTOM_POLICY, [], plugins)
 
+    def simulate_custom_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SimulateCustomPolicyOutput:
+        return self._invoke(
+            self._select_input(_models.SIMULATE_CUSTOM_POLICY, args, kwargs),
+            _models.SIMULATE_CUSTOM_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def simulate_principal_policy(
-        self, input: SimulatePrincipalPolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.SimulatePrincipalPolicyInput
+        | _models.SimulatePrincipalPolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> SimulatePrincipalPolicyOutput: ...
+
+    @_overload
+    def simulate_principal_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SimulatePrincipalPolicyInputDict],
     ) -> SimulatePrincipalPolicyOutput:
         """
         Simulate how a set of IAM policies attached to an IAM entity works with
@@ -5521,8 +8353,6 @@ class IAMClient(Client[IAMConfig]):
             in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `SimulatePrincipalPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5532,10 +8362,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `SimulatePrincipalPolicyOutput`.
         """
-        return self._invoke(input, _models.SIMULATE_PRINCIPAL_POLICY, [], plugins)
 
+    def simulate_principal_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SimulatePrincipalPolicyOutput:
+        return self._invoke(
+            self._select_input(_models.SIMULATE_PRINCIPAL_POLICY, args, kwargs),
+            _models.SIMULATE_PRINCIPAL_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def tag_instance_profile(
-        self, input: TagInstanceProfileInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.TagInstanceProfileInput | _models.TagInstanceProfileInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> TagInstanceProfileOutput: ...
+
+    @_overload
+    def tag_instance_profile(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.TagInstanceProfileInputDict],
     ) -> TagInstanceProfileOutput:
         """
         Adds one or more tags to an IAM instance profile. If a tag with the same
@@ -5572,8 +8425,6 @@ class IAMClient(Client[IAMConfig]):
             code.
 
         Args:
-            input:
-                An instance of `TagInstanceProfileInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5583,10 +8434,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `TagInstanceProfileOutput`.
         """
-        return self._invoke(input, _models.TAG_INSTANCE_PROFILE, [], plugins)
 
+    def tag_instance_profile(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> TagInstanceProfileOutput:
+        return self._invoke(
+            self._select_input(_models.TAG_INSTANCE_PROFILE, args, kwargs),
+            _models.TAG_INSTANCE_PROFILE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def tag_mfa_device(
-        self, input: TagMFADeviceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.TagMFADeviceInput | _models.TagMFADeviceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> TagMFADeviceOutput: ...
+
+    @_overload
+    def tag_mfa_device(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.TagMFADeviceInputDict],
     ) -> TagMFADeviceOutput:
         """
         Adds one or more tags to an IAM virtual multi-factor authentication
@@ -5623,8 +8497,6 @@ class IAMClient(Client[IAMConfig]):
             code.
 
         Args:
-            input:
-                An instance of `TagMFADeviceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5634,10 +8506,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `TagMFADeviceOutput`.
         """
-        return self._invoke(input, _models.TAG_MFA_DEVICE, [], plugins)
 
+    def tag_mfa_device(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> TagMFADeviceOutput:
+        return self._invoke(
+            self._select_input(_models.TAG_MFA_DEVICE, args, kwargs),
+            _models.TAG_MFA_DEVICE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def tag_open_id_connect_provider(
-        self, input: TagOpenIDConnectProviderInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.TagOpenIDConnectProviderInput
+        | _models.TagOpenIDConnectProviderInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> TagOpenIDConnectProviderOutput: ...
+
+    @_overload
+    def tag_open_id_connect_provider(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.TagOpenIDConnectProviderInputDict],
     ) -> TagOpenIDConnectProviderOutput:
         """
         Adds one or more tags to an OpenID Connect (OIDC)-compatible identity
@@ -5677,8 +8573,6 @@ class IAMClient(Client[IAMConfig]):
             code.
 
         Args:
-            input:
-                An instance of `TagOpenIDConnectProviderInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5688,10 +8582,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `TagOpenIDConnectProviderOutput`.
         """
-        return self._invoke(input, _models.TAG_OPEN_ID_CONNECT_PROVIDER, [], plugins)
 
+    def tag_open_id_connect_provider(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> TagOpenIDConnectProviderOutput:
+        return self._invoke(
+            self._select_input(_models.TAG_OPEN_ID_CONNECT_PROVIDER, args, kwargs),
+            _models.TAG_OPEN_ID_CONNECT_PROVIDER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def tag_policy(
-        self, input: TagPolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.TagPolicyInput | _models.TagPolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> TagPolicyOutput: ...
+
+    @_overload
+    def tag_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.TagPolicyInputDict],
     ) -> TagPolicyOutput:
         """
         Adds one or more tags to an IAM customer managed policy. If a tag with
@@ -5728,8 +8645,6 @@ class IAMClient(Client[IAMConfig]):
             code.
 
         Args:
-            input:
-                An instance of `TagPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5739,10 +8654,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `TagPolicyOutput`.
         """
-        return self._invoke(input, _models.TAG_POLICY, [], plugins)
 
+    def tag_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> TagPolicyOutput:
+        return self._invoke(
+            self._select_input(_models.TAG_POLICY, args, kwargs),
+            _models.TAG_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def tag_role(
-        self, input: TagRoleInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.TagRoleInput | _models.TagRoleInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> TagRoleOutput: ...
+
+    @_overload
+    def tag_role(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.TagRoleInputDict],
     ) -> TagRoleOutput:
         """
         Adds one or more tags to an IAM role. The role can be a regular role or
@@ -5787,8 +8725,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `TagRoleInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5798,10 +8734,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `TagRoleOutput`.
         """
-        return self._invoke(input, _models.TAG_ROLE, [], plugins)
 
+    def tag_role(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> TagRoleOutput:
+        return self._invoke(
+            self._select_input(_models.TAG_ROLE, args, kwargs),
+            _models.TAG_ROLE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def tag_saml_provider(
-        self, input: TagSAMLProviderInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.TagSAMLProviderInput | _models.TagSAMLProviderInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> TagSAMLProviderOutput: ...
+
+    @_overload
+    def tag_saml_provider(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.TagSAMLProviderInputDict],
     ) -> TagSAMLProviderOutput:
         """
         Adds one or more tags to a Security Assertion Markup Language (SAML)
@@ -5841,8 +8800,6 @@ class IAMClient(Client[IAMConfig]):
             code.
 
         Args:
-            input:
-                An instance of `TagSAMLProviderInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5852,10 +8809,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `TagSAMLProviderOutput`.
         """
-        return self._invoke(input, _models.TAG_SAML_PROVIDER, [], plugins)
 
+    def tag_saml_provider(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> TagSAMLProviderOutput:
+        return self._invoke(
+            self._select_input(_models.TAG_SAML_PROVIDER, args, kwargs),
+            _models.TAG_SAML_PROVIDER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def tag_server_certificate(
-        self, input: TagServerCertificateInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.TagServerCertificateInput
+        | _models.TagServerCertificateInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> TagServerCertificateOutput: ...
+
+    @_overload
+    def tag_server_certificate(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.TagServerCertificateInputDict],
     ) -> TagServerCertificateOutput:
         """
         Adds one or more tags to an IAM server certificate. If a tag with the
@@ -5903,8 +8884,6 @@ class IAMClient(Client[IAMConfig]):
             code.
 
         Args:
-            input:
-                An instance of `TagServerCertificateInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5914,10 +8893,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `TagServerCertificateOutput`.
         """
-        return self._invoke(input, _models.TAG_SERVER_CERTIFICATE, [], plugins)
 
+    def tag_server_certificate(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> TagServerCertificateOutput:
+        return self._invoke(
+            self._select_input(_models.TAG_SERVER_CERTIFICATE, args, kwargs),
+            _models.TAG_SERVER_CERTIFICATE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def tag_user(
-        self, input: TagUserInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.TagUserInput | _models.TagUserInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> TagUserOutput: ...
+
+    @_overload
+    def tag_user(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.TagUserInputDict],
     ) -> TagUserOutput:
         """
         Adds one or more tags to an IAM user. If a tag with the same key name
@@ -5961,8 +8963,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `TagUserInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5972,10 +8972,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `TagUserOutput`.
         """
-        return self._invoke(input, _models.TAG_USER, [], plugins)
 
+    def tag_user(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> TagUserOutput:
+        return self._invoke(
+            self._select_input(_models.TAG_USER, args, kwargs),
+            _models.TAG_USER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def untag_instance_profile(
-        self, input: UntagInstanceProfileInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UntagInstanceProfileInput
+        | _models.UntagInstanceProfileInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UntagInstanceProfileOutput: ...
+
+    @_overload
+    def untag_instance_profile(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UntagInstanceProfileInputDict],
     ) -> UntagInstanceProfileOutput:
         """
         Removes the specified tags from the IAM instance profile. For more
@@ -5984,8 +9008,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `UntagInstanceProfileInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5995,10 +9017,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `UntagInstanceProfileOutput`.
         """
-        return self._invoke(input, _models.UNTAG_INSTANCE_PROFILE, [], plugins)
 
+    def untag_instance_profile(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UntagInstanceProfileOutput:
+        return self._invoke(
+            self._select_input(_models.UNTAG_INSTANCE_PROFILE, args, kwargs),
+            _models.UNTAG_INSTANCE_PROFILE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def untag_mfa_device(
-        self, input: UntagMFADeviceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UntagMFADeviceInput | _models.UntagMFADeviceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UntagMFADeviceOutput: ...
+
+    @_overload
+    def untag_mfa_device(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UntagMFADeviceInputDict],
     ) -> UntagMFADeviceOutput:
         """
         Removes the specified tags from the IAM virtual multi-factor
@@ -6008,8 +9053,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `UntagMFADeviceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -6019,12 +9062,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `UntagMFADeviceOutput`.
         """
-        return self._invoke(input, _models.UNTAG_MFA_DEVICE, [], plugins)
 
+    def untag_mfa_device(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UntagMFADeviceOutput:
+        return self._invoke(
+            self._select_input(_models.UNTAG_MFA_DEVICE, args, kwargs),
+            _models.UNTAG_MFA_DEVICE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def untag_open_id_connect_provider(
         self,
-        input: UntagOpenIDConnectProviderInput,
+        request: _models.UntagOpenIDConnectProviderInput
+        | _models.UntagOpenIDConnectProviderInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UntagOpenIDConnectProviderOutput: ...
+
+    @_overload
+    def untag_open_id_connect_provider(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UntagOpenIDConnectProviderInputDict],
     ) -> UntagOpenIDConnectProviderOutput:
         """
         Removes the specified tags from the specified OpenID Connect
@@ -6036,8 +9101,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `UntagOpenIDConnectProviderInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -6047,10 +9110,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `UntagOpenIDConnectProviderOutput`.
         """
-        return self._invoke(input, _models.UNTAG_OPEN_ID_CONNECT_PROVIDER, [], plugins)
 
+    def untag_open_id_connect_provider(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UntagOpenIDConnectProviderOutput:
+        return self._invoke(
+            self._select_input(_models.UNTAG_OPEN_ID_CONNECT_PROVIDER, args, kwargs),
+            _models.UNTAG_OPEN_ID_CONNECT_PROVIDER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def untag_policy(
-        self, input: UntagPolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UntagPolicyInput | _models.UntagPolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UntagPolicyOutput: ...
+
+    @_overload
+    def untag_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UntagPolicyInputDict],
     ) -> UntagPolicyOutput:
         """
         Removes the specified tags from the customer managed policy. For more
@@ -6059,8 +9145,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `UntagPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -6070,10 +9154,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `UntagPolicyOutput`.
         """
-        return self._invoke(input, _models.UNTAG_POLICY, [], plugins)
 
+    def untag_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UntagPolicyOutput:
+        return self._invoke(
+            self._select_input(_models.UNTAG_POLICY, args, kwargs),
+            _models.UNTAG_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def untag_role(
-        self, input: UntagRoleInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UntagRoleInput | _models.UntagRoleInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UntagRoleOutput: ...
+
+    @_overload
+    def untag_role(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UntagRoleInputDict],
     ) -> UntagRoleOutput:
         """
         Removes the specified tags from the role. For more information about
@@ -6082,8 +9189,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `UntagRoleInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -6093,10 +9198,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `UntagRoleOutput`.
         """
-        return self._invoke(input, _models.UNTAG_ROLE, [], plugins)
 
+    def untag_role(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UntagRoleOutput:
+        return self._invoke(
+            self._select_input(_models.UNTAG_ROLE, args, kwargs),
+            _models.UNTAG_ROLE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def untag_saml_provider(
-        self, input: UntagSAMLProviderInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UntagSAMLProviderInput | _models.UntagSAMLProviderInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UntagSAMLProviderOutput: ...
+
+    @_overload
+    def untag_saml_provider(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UntagSAMLProviderInputDict],
     ) -> UntagSAMLProviderOutput:
         """
         Removes the specified tags from the specified Security Assertion Markup
@@ -6108,8 +9236,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `UntagSAMLProviderInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -6119,10 +9245,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `UntagSAMLProviderOutput`.
         """
-        return self._invoke(input, _models.UNTAG_SAML_PROVIDER, [], plugins)
 
+    def untag_saml_provider(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UntagSAMLProviderOutput:
+        return self._invoke(
+            self._select_input(_models.UNTAG_SAML_PROVIDER, args, kwargs),
+            _models.UNTAG_SAML_PROVIDER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def untag_server_certificate(
-        self, input: UntagServerCertificateInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UntagServerCertificateInput
+        | _models.UntagServerCertificateInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UntagServerCertificateOutput: ...
+
+    @_overload
+    def untag_server_certificate(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UntagServerCertificateInputDict],
     ) -> UntagServerCertificateOutput:
         """
         Removes the specified tags from the IAM server certificate. For more
@@ -6139,8 +9289,6 @@ class IAMClient(Client[IAMConfig]):
             in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `UntagServerCertificateInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -6150,10 +9298,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `UntagServerCertificateOutput`.
         """
-        return self._invoke(input, _models.UNTAG_SERVER_CERTIFICATE, [], plugins)
 
+    def untag_server_certificate(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UntagServerCertificateOutput:
+        return self._invoke(
+            self._select_input(_models.UNTAG_SERVER_CERTIFICATE, args, kwargs),
+            _models.UNTAG_SERVER_CERTIFICATE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def untag_user(
-        self, input: UntagUserInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UntagUserInput | _models.UntagUserInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UntagUserOutput: ...
+
+    @_overload
+    def untag_user(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UntagUserInputDict],
     ) -> UntagUserOutput:
         """
         Removes the specified tags from the user. For more information about
@@ -6162,8 +9333,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `UntagUserInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -6173,10 +9342,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `UntagUserOutput`.
         """
-        return self._invoke(input, _models.UNTAG_USER, [], plugins)
 
+    def untag_user(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UntagUserOutput:
+        return self._invoke(
+            self._select_input(_models.UNTAG_USER, args, kwargs),
+            _models.UNTAG_USER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_access_key(
-        self, input: UpdateAccessKeyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateAccessKeyInput | _models.UpdateAccessKeyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateAccessKeyOutput: ...
+
+    @_overload
+    def update_access_key(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateAccessKeyInputDict],
     ) -> UpdateAccessKeyOutput:
         """
         Changes the status of the specified access key from Active to Inactive,
@@ -6197,8 +9389,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `UpdateAccessKeyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -6208,12 +9398,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `UpdateAccessKeyOutput`.
         """
-        return self._invoke(input, _models.UPDATE_ACCESS_KEY, [], plugins)
 
+    def update_access_key(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateAccessKeyOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_ACCESS_KEY, args, kwargs),
+            _models.UPDATE_ACCESS_KEY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_account_password_policy(
         self,
-        input: UpdateAccountPasswordPolicyInput | None = None,
+        request: _models.UpdateAccountPasswordPolicyInput
+        | _models.UpdateAccountPasswordPolicyInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateAccountPasswordPolicyOutput: ...
+
+    @_overload
+    def update_account_password_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateAccountPasswordPolicyInputDict],
     ) -> UpdateAccountPasswordPolicyOutput:
         """
         Updates the password policy settings for the Amazon Web Services
@@ -6234,8 +9446,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `UpdateAccountPasswordPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -6245,10 +9455,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `UpdateAccountPasswordPolicyOutput`.
         """
-        return self._invoke(input, _models.UPDATE_ACCOUNT_PASSWORD_POLICY, [], plugins)
 
+    def update_account_password_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateAccountPasswordPolicyOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_ACCOUNT_PASSWORD_POLICY, args, kwargs),
+            _models.UPDATE_ACCOUNT_PASSWORD_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_assume_role_policy(
-        self, input: UpdateAssumeRolePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateAssumeRolePolicyInput
+        | _models.UpdateAssumeRolePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateAssumeRolePolicyOutput: ...
+
+    @_overload
+    def update_assume_role_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateAssumeRolePolicyInputDict],
     ) -> UpdateAssumeRolePolicyOutput:
         """
         Updates the policy that grants an IAM entity permission to assume a
@@ -6258,8 +9492,6 @@ class IAMClient(Client[IAMConfig]):
         identities](https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html).
 
         Args:
-            input:
-                An instance of `UpdateAssumeRolePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -6269,10 +9501,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `UpdateAssumeRolePolicyOutput`.
         """
-        return self._invoke(input, _models.UPDATE_ASSUME_ROLE_POLICY, [], plugins)
 
+    def update_assume_role_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateAssumeRolePolicyOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_ASSUME_ROLE_POLICY, args, kwargs),
+            _models.UPDATE_ASSUME_ROLE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_delegation_request(
-        self, input: UpdateDelegationRequestInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateDelegationRequestInput
+        | _models.UpdateDelegationRequestInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateDelegationRequestOutput: ...
+
+    @_overload
+    def update_delegation_request(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateDelegationRequestInputDict],
     ) -> UpdateDelegationRequestOutput:
         """
         Updates an existing delegation request with additional information. When
@@ -6285,8 +9541,6 @@ class IAMClient(Client[IAMConfig]):
         Requests](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies-temporary-delegation.html#temporary-delegation-managing-permissions).
 
         Args:
-            input:
-                An instance of `UpdateDelegationRequestInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -6296,10 +9550,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `UpdateDelegationRequestOutput`.
         """
-        return self._invoke(input, _models.UPDATE_DELEGATION_REQUEST, [], plugins)
 
+    def update_delegation_request(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateDelegationRequestOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_DELEGATION_REQUEST, args, kwargs),
+            _models.UPDATE_DELEGATION_REQUEST,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_group(
-        self, input: UpdateGroupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateGroupInput | _models.UpdateGroupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateGroupOutput: ...
+
+    @_overload
+    def update_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateGroupInputDict],
     ) -> UpdateGroupOutput:
         """
         Updates the name and/or the path of the specified IAM group.
@@ -6320,8 +9597,6 @@ class IAMClient(Client[IAMConfig]):
             management](https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html).
 
         Args:
-            input:
-                An instance of `UpdateGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -6331,10 +9606,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `UpdateGroupOutput`.
         """
-        return self._invoke(input, _models.UPDATE_GROUP, [], plugins)
 
+    def update_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateGroupOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_GROUP, args, kwargs),
+            _models.UPDATE_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_login_profile(
-        self, input: UpdateLoginProfileInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateLoginProfileInput | _models.UpdateLoginProfileInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateLoginProfileOutput: ...
+
+    @_overload
+    def update_login_profile(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateLoginProfileInputDict],
     ) -> UpdateLoginProfileOutput:
         """
         Changes the password for the specified IAM user. You can use the CLI,
@@ -6349,8 +9647,6 @@ class IAMClient(Client[IAMConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `UpdateLoginProfileInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -6360,12 +9656,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `UpdateLoginProfileOutput`.
         """
-        return self._invoke(input, _models.UPDATE_LOGIN_PROFILE, [], plugins)
 
+    def update_login_profile(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateLoginProfileOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_LOGIN_PROFILE, args, kwargs),
+            _models.UPDATE_LOGIN_PROFILE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_open_id_connect_provider_thumbprint(
         self,
-        input: UpdateOpenIDConnectProviderThumbprintInput,
+        request: _models.UpdateOpenIDConnectProviderThumbprintInput
+        | _models.UpdateOpenIDConnectProviderThumbprintInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateOpenIDConnectProviderThumbprintOutput: ...
+
+    @_overload
+    def update_open_id_connect_provider_thumbprint(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateOpenIDConnectProviderThumbprintInputDict],
     ) -> UpdateOpenIDConnectProviderThumbprintOutput:
         """
         Replaces the existing list of server certificate thumbprints associated
@@ -6395,8 +9713,6 @@ class IAMClient(Client[IAMConfig]):
             privileged users.
 
         Args:
-            input:
-                An instance of `UpdateOpenIDConnectProviderThumbprintInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -6406,19 +9722,40 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `UpdateOpenIDConnectProviderThumbprintOutput`.
         """
+
+    def update_open_id_connect_provider_thumbprint(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateOpenIDConnectProviderThumbprintOutput:
         return self._invoke(
-            input, _models.UPDATE_OPEN_ID_CONNECT_PROVIDER_THUMBPRINT, [], plugins
+            self._select_input(
+                _models.UPDATE_OPEN_ID_CONNECT_PROVIDER_THUMBPRINT, args, kwargs
+            ),
+            _models.UPDATE_OPEN_ID_CONNECT_PROVIDER_THUMBPRINT,
+            [],
+            plugins,
         )
 
+    @_overload
     def update_role(
-        self, input: UpdateRoleInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateRoleInput | _models.UpdateRoleInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateRoleOutput: ...
+
+    @_overload
+    def update_role(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateRoleInputDict],
     ) -> UpdateRoleOutput:
         """
         Updates the description or maximum session duration setting of a role.
 
         Args:
-            input:
-                An instance of `UpdateRoleInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -6428,10 +9765,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `UpdateRoleOutput`.
         """
-        return self._invoke(input, _models.UPDATE_ROLE, [], plugins)
 
+    def update_role(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateRoleOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_ROLE, args, kwargs),
+            _models.UPDATE_ROLE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_role_description(
-        self, input: UpdateRoleDescriptionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateRoleDescriptionInput
+        | _models.UpdateRoleDescriptionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateRoleDescriptionOutput: ...
+
+    @_overload
+    def update_role_description(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateRoleDescriptionInputDict],
     ) -> UpdateRoleDescriptionOutput:
         """
         Use
@@ -6443,8 +9804,6 @@ class IAMClient(Client[IAMConfig]):
         operation.
 
         Args:
-            input:
-                An instance of `UpdateRoleDescriptionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -6454,10 +9813,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `UpdateRoleDescriptionOutput`.
         """
-        return self._invoke(input, _models.UPDATE_ROLE_DESCRIPTION, [], plugins)
 
+    def update_role_description(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateRoleDescriptionOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_ROLE_DESCRIPTION, args, kwargs),
+            _models.UPDATE_ROLE_DESCRIPTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_saml_provider(
-        self, input: UpdateSAMLProviderInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateSAMLProviderInput | _models.UpdateSAMLProviderInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateSAMLProviderOutput: ...
+
+    @_overload
+    def update_saml_provider(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateSAMLProviderInputDict],
     ) -> UpdateSAMLProviderOutput:
         """
         Updates the metadata document, SAML encryption settings, and private
@@ -6465,8 +9847,6 @@ class IAMClient(Client[IAMConfig]):
         private key and then remove the old key in a separate request.
 
         Args:
-            input:
-                An instance of `UpdateSAMLProviderInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -6476,10 +9856,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `UpdateSAMLProviderOutput`.
         """
-        return self._invoke(input, _models.UPDATE_SAML_PROVIDER, [], plugins)
 
+    def update_saml_provider(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateSAMLProviderOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_SAML_PROVIDER, args, kwargs),
+            _models.UPDATE_SAML_PROVIDER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_server_certificate(
-        self, input: UpdateServerCertificateInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateServerCertificateInput
+        | _models.UpdateServerCertificateInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateServerCertificateOutput: ...
+
+    @_overload
+    def update_server_certificate(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateServerCertificateInputDict],
     ) -> UpdateServerCertificateOutput:
         """
         Updates the name and/or the path of the specified server certificate
@@ -6510,8 +9914,6 @@ class IAMClient(Client[IAMConfig]):
             in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `UpdateServerCertificateInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -6521,12 +9923,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `UpdateServerCertificateOutput`.
         """
-        return self._invoke(input, _models.UPDATE_SERVER_CERTIFICATE, [], plugins)
 
+    def update_server_certificate(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateServerCertificateOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_SERVER_CERTIFICATE, args, kwargs),
+            _models.UPDATE_SERVER_CERTIFICATE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_service_specific_credential(
         self,
-        input: UpdateServiceSpecificCredentialInput,
+        request: _models.UpdateServiceSpecificCredentialInput
+        | _models.UpdateServiceSpecificCredentialInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateServiceSpecificCredentialOutput: ...
+
+    @_overload
+    def update_service_specific_credential(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateServiceSpecificCredentialInputDict],
     ) -> UpdateServiceSpecificCredentialOutput:
         """
         Sets the status of a service-specific credential to `Active` or
@@ -6536,8 +9960,6 @@ class IAMClient(Client[IAMConfig]):
         rotation work flow.
 
         Args:
-            input:
-                An instance of `UpdateServiceSpecificCredentialInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -6547,12 +9969,36 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `UpdateServiceSpecificCredentialOutput`.
         """
+
+    def update_service_specific_credential(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateServiceSpecificCredentialOutput:
         return self._invoke(
-            input, _models.UPDATE_SERVICE_SPECIFIC_CREDENTIAL, [], plugins
+            self._select_input(
+                _models.UPDATE_SERVICE_SPECIFIC_CREDENTIAL, args, kwargs
+            ),
+            _models.UPDATE_SERVICE_SPECIFIC_CREDENTIAL,
+            [],
+            plugins,
         )
 
+    @_overload
     def update_signing_certificate(
-        self, input: UpdateSigningCertificateInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateSigningCertificateInput
+        | _models.UpdateSigningCertificateInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateSigningCertificateOutput: ...
+
+    @_overload
+    def update_signing_certificate(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateSigningCertificateInputDict],
     ) -> UpdateSigningCertificateOutput:
         """
         Changes the status of the specified user signing certificate from active
@@ -6567,8 +10013,6 @@ class IAMClient(Client[IAMConfig]):
         Services account has no associated users.
 
         Args:
-            input:
-                An instance of `UpdateSigningCertificateInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -6578,10 +10022,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `UpdateSigningCertificateOutput`.
         """
-        return self._invoke(input, _models.UPDATE_SIGNING_CERTIFICATE, [], plugins)
 
+    def update_signing_certificate(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateSigningCertificateOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_SIGNING_CERTIFICATE, args, kwargs),
+            _models.UPDATE_SIGNING_CERTIFICATE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_ssh_public_key(
-        self, input: UpdateSSHPublicKeyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateSSHPublicKeyInput | _models.UpdateSSHPublicKeyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateSSHPublicKeyOutput: ...
+
+    @_overload
+    def update_ssh_public_key(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateSSHPublicKeyInputDict],
     ) -> UpdateSSHPublicKeyOutput:
         """
         Sets the status of an IAM user's SSH public key to active or inactive.
@@ -6597,8 +10064,6 @@ class IAMClient(Client[IAMConfig]):
         in the *CodeCommit User Guide*.
 
         Args:
-            input:
-                An instance of `UpdateSSHPublicKeyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -6608,10 +10073,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `UpdateSSHPublicKeyOutput`.
         """
-        return self._invoke(input, _models.UPDATE_SSH_PUBLIC_KEY, [], plugins)
 
+    def update_ssh_public_key(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateSSHPublicKeyOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_SSH_PUBLIC_KEY, args, kwargs),
+            _models.UPDATE_SSH_PUBLIC_KEY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_user(
-        self, input: UpdateUserInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateUserInput | _models.UpdateUserInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateUserOutput: ...
+
+    @_overload
+    def update_user(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateUserInputDict],
     ) -> UpdateUserOutput:
         """
         Updates the name and/or the path of the specified IAM user.
@@ -6632,8 +10120,6 @@ class IAMClient(Client[IAMConfig]):
             policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/PermissionsAndPolicies.html).
 
         Args:
-            input:
-                An instance of `UpdateUserInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -6643,10 +10129,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `UpdateUserOutput`.
         """
-        return self._invoke(input, _models.UPDATE_USER, [], plugins)
 
+    def update_user(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateUserOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_USER, args, kwargs),
+            _models.UPDATE_USER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def upload_server_certificate(
-        self, input: UploadServerCertificateInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UploadServerCertificateInput
+        | _models.UploadServerCertificateInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UploadServerCertificateOutput: ...
+
+    @_overload
+    def upload_server_certificate(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UploadServerCertificateInputDict],
     ) -> UploadServerCertificateOutput:
         """
         Uploads a server certificate entity for the Amazon Web Services account.
@@ -6688,8 +10198,6 @@ class IAMClient(Client[IAMConfig]):
             in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `UploadServerCertificateInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -6699,10 +10207,34 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `UploadServerCertificateOutput`.
         """
-        return self._invoke(input, _models.UPLOAD_SERVER_CERTIFICATE, [], plugins)
 
+    def upload_server_certificate(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UploadServerCertificateOutput:
+        return self._invoke(
+            self._select_input(_models.UPLOAD_SERVER_CERTIFICATE, args, kwargs),
+            _models.UPLOAD_SERVER_CERTIFICATE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def upload_signing_certificate(
-        self, input: UploadSigningCertificateInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UploadSigningCertificateInput
+        | _models.UploadSigningCertificateInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UploadSigningCertificateOutput: ...
+
+    @_overload
+    def upload_signing_certificate(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UploadSigningCertificateInputDict],
     ) -> UploadSigningCertificateOutput:
         """
         Uploads an X.509 signing certificate and associates it with the
@@ -6735,8 +10267,6 @@ class IAMClient(Client[IAMConfig]):
             in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `UploadSigningCertificateInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -6746,10 +10276,33 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `UploadSigningCertificateOutput`.
         """
-        return self._invoke(input, _models.UPLOAD_SIGNING_CERTIFICATE, [], plugins)
 
+    def upload_signing_certificate(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UploadSigningCertificateOutput:
+        return self._invoke(
+            self._select_input(_models.UPLOAD_SIGNING_CERTIFICATE, args, kwargs),
+            _models.UPLOAD_SIGNING_CERTIFICATE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def upload_ssh_public_key(
-        self, input: UploadSSHPublicKeyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UploadSSHPublicKeyInput | _models.UploadSSHPublicKeyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UploadSSHPublicKeyOutput: ...
+
+    @_overload
+    def upload_ssh_public_key(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UploadSSHPublicKeyInputDict],
     ) -> UploadSSHPublicKeyOutput:
         """
         Uploads an SSH public key and associates it with the specified IAM user.
@@ -6762,8 +10315,6 @@ class IAMClient(Client[IAMConfig]):
         in the *CodeCommit User Guide*.
 
         Args:
-            input:
-                An instance of `UploadSSHPublicKeyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -6773,7 +10324,16 @@ class IAMClient(Client[IAMConfig]):
         Returns:
             An instance of `UploadSSHPublicKeyOutput`.
         """
-        return self._invoke(input, _models.UPLOAD_SSH_PUBLIC_KEY, [], plugins)
+
+    def upload_ssh_public_key(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UploadSSHPublicKeyOutput:
+        return self._invoke(
+            self._select_input(_models.UPLOAD_SSH_PUBLIC_KEY, args, kwargs),
+            _models.UPLOAD_SSH_PUBLIC_KEY,
+            [],
+            plugins,
+        )
 
     def _new_config(self) -> IAMConfig:
         return IAMConfig.resolve()

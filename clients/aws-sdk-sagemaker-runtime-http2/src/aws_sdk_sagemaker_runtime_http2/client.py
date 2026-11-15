@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 class SageMakerRuntimeHTTP2Client(Client[SageMakerRuntimeHTTP2Config]):
     """The Amazon SageMaker AI runtime HTTP/2 API."""
 
-    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
+    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
 
     def _new_config(self) -> SageMakerRuntimeHTTP2Config:
         return SageMakerRuntimeHTTP2Config.resolve()

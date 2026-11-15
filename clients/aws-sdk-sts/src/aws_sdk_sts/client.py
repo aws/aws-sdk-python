@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import cast
+from typing import Unpack as _Unpack, cast, overload as _overload
 
 from smithy_aws_core.config.types import ConfigSource
 from smithy_aws_core.identity.chain.resolver import IdentityChain
@@ -20,27 +20,16 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from .models import (
-        AssumeRoleInput,
         AssumeRoleOutput,
-        AssumeRoleWithSAMLInput,
         AssumeRoleWithSAMLOutput,
-        AssumeRoleWithWebIdentityInput,
         AssumeRoleWithWebIdentityOutput,
-        AssumeRootInput,
         AssumeRootOutput,
-        DecodeAuthorizationMessageInput,
         DecodeAuthorizationMessageOutput,
-        GetAccessKeyInfoInput,
         GetAccessKeyInfoOutput,
-        GetCallerIdentityInput,
         GetCallerIdentityOutput,
-        GetDelegatedAccessTokenInput,
         GetDelegatedAccessTokenOutput,
-        GetFederationTokenInput,
         GetFederationTokenOutput,
-        GetSessionTokenInput,
         GetSessionTokenOutput,
-        GetWebIdentityTokenInput,
         GetWebIdentityTokenOutput,
     )
 
@@ -87,10 +76,24 @@ class STSClient(Client[STSConfig]):
     in the *IAM User Guide*.
     """
 
-    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
+    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
 
+    @_overload
     def assume_role(
-        self, input: AssumeRoleInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.AssumeRoleInput | _models.AssumeRoleInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AssumeRoleOutput: ...
+
+    @_overload
+    def assume_role(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AssumeRoleInputDict],
     ) -> AssumeRoleOutput:
         """
         Returns a set of temporary security credentials that you can use to
@@ -204,8 +207,6 @@ class STSClient(Client[STSConfig]):
         one-time password (TOTP) that the MFA device produces.
 
         Args:
-            input:
-                An instance of `AssumeRoleInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -215,10 +216,33 @@ class STSClient(Client[STSConfig]):
         Returns:
             An instance of `AssumeRoleOutput`.
         """
-        return self._invoke(input, _models.ASSUME_ROLE, [], plugins)
 
+    def assume_role(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AssumeRoleOutput:
+        return self._invoke(
+            self._select_input(_models.ASSUME_ROLE, args, kwargs),
+            _models.ASSUME_ROLE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def assume_role_with_saml(
-        self, input: AssumeRoleWithSAMLInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.AssumeRoleWithSAMLInput | _models.AssumeRoleWithSAMLInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AssumeRoleWithSAMLOutput: ...
+
+    @_overload
+    def assume_role_with_saml(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AssumeRoleWithSAMLInputDict],
     ) -> AssumeRoleWithSAMLOutput:
         """
         Returns a set of temporary security credentials for users who have been
@@ -380,8 +404,6 @@ class STSClient(Client[STSConfig]):
           in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `AssumeRoleWithSAMLInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -391,10 +413,34 @@ class STSClient(Client[STSConfig]):
         Returns:
             An instance of `AssumeRoleWithSAMLOutput`.
         """
-        return self._invoke(input, _models.ASSUME_ROLE_WITH_SAML, [], plugins)
 
+    def assume_role_with_saml(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AssumeRoleWithSAMLOutput:
+        return self._invoke(
+            self._select_input(_models.ASSUME_ROLE_WITH_SAML, args, kwargs),
+            _models.ASSUME_ROLE_WITH_SAML,
+            [],
+            plugins,
+        )
+
+    @_overload
     def assume_role_with_web_identity(
-        self, input: AssumeRoleWithWebIdentityInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.AssumeRoleWithWebIdentityInput
+        | _models.AssumeRoleWithWebIdentityInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AssumeRoleWithWebIdentityOutput: ...
+
+    @_overload
+    def assume_role_with_web_identity(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AssumeRoleWithWebIdentityInputDict],
     ) -> AssumeRoleWithWebIdentityOutput:
         """
         Returns a set of temporary security credentials for users who have been
@@ -553,8 +599,6 @@ class STSClient(Client[STSConfig]):
           from these providers to get and use temporary security credentials.
 
         Args:
-            input:
-                An instance of `AssumeRoleWithWebIdentityInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -564,10 +608,33 @@ class STSClient(Client[STSConfig]):
         Returns:
             An instance of `AssumeRoleWithWebIdentityOutput`.
         """
-        return self._invoke(input, _models.ASSUME_ROLE_WITH_WEB_IDENTITY, [], plugins)
 
+    def assume_role_with_web_identity(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AssumeRoleWithWebIdentityOutput:
+        return self._invoke(
+            self._select_input(_models.ASSUME_ROLE_WITH_WEB_IDENTITY, args, kwargs),
+            _models.ASSUME_ROLE_WITH_WEB_IDENTITY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def assume_root(
-        self, input: AssumeRootInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.AssumeRootInput | _models.AssumeRootInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AssumeRootOutput: ...
+
+    @_overload
+    def assume_root(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AssumeRootInputDict],
     ) -> AssumeRootOutput:
         """
         Returns a set of short term credentials you can use to perform
@@ -605,8 +672,6 @@ class STSClient(Client[STSConfig]):
         in the *Organizations User Guide* for more information on SCPs.
 
         Args:
-            input:
-                An instance of `AssumeRootInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -616,12 +681,34 @@ class STSClient(Client[STSConfig]):
         Returns:
             An instance of `AssumeRootOutput`.
         """
-        return self._invoke(input, _models.ASSUME_ROOT, [], plugins)
 
+    def assume_root(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AssumeRootOutput:
+        return self._invoke(
+            self._select_input(_models.ASSUME_ROOT, args, kwargs),
+            _models.ASSUME_ROOT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def decode_authorization_message(
         self,
-        input: DecodeAuthorizationMessageInput,
+        request: _models.DecodeAuthorizationMessageInput
+        | _models.DecodeAuthorizationMessageInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DecodeAuthorizationMessageOutput: ...
+
+    @_overload
+    def decode_authorization_message(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DecodeAuthorizationMessageInputDict],
     ) -> DecodeAuthorizationMessageOutput:
         """
         Decodes additional information about the authorization status of a
@@ -665,8 +752,6 @@ class STSClient(Client[STSConfig]):
         - The values of condition keys in the context of the user's request.
 
         Args:
-            input:
-                An instance of `DecodeAuthorizationMessageInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -676,10 +761,33 @@ class STSClient(Client[STSConfig]):
         Returns:
             An instance of `DecodeAuthorizationMessageOutput`.
         """
-        return self._invoke(input, _models.DECODE_AUTHORIZATION_MESSAGE, [], plugins)
 
+    def decode_authorization_message(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DecodeAuthorizationMessageOutput:
+        return self._invoke(
+            self._select_input(_models.DECODE_AUTHORIZATION_MESSAGE, args, kwargs),
+            _models.DECODE_AUTHORIZATION_MESSAGE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_access_key_info(
-        self, input: GetAccessKeyInfoInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetAccessKeyInfoInput | _models.GetAccessKeyInfoInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetAccessKeyInfoOutput: ...
+
+    @_overload
+    def get_access_key_info(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetAccessKeyInfoInputDict],
     ) -> GetAccessKeyInfoOutput:
         """
         Returns the account identifier for the specified access key ID.
@@ -712,8 +820,6 @@ class STSClient(Client[STSConfig]):
         might return an error that the key doesn't exist.
 
         Args:
-            input:
-                An instance of `GetAccessKeyInfoInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -723,12 +829,33 @@ class STSClient(Client[STSConfig]):
         Returns:
             An instance of `GetAccessKeyInfoOutput`.
         """
-        return self._invoke(input, _models.GET_ACCESS_KEY_INFO, [], plugins)
 
+    def get_access_key_info(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetAccessKeyInfoOutput:
+        return self._invoke(
+            self._select_input(_models.GET_ACCESS_KEY_INFO, args, kwargs),
+            _models.GET_ACCESS_KEY_INFO,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_caller_identity(
         self,
-        input: GetCallerIdentityInput | None = None,
+        request: _models.GetCallerIdentityInput | _models.GetCallerIdentityInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetCallerIdentityOutput: ...
+
+    @_overload
+    def get_caller_identity(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetCallerIdentityInputDict],
     ) -> GetCallerIdentityOutput:
         """
         Returns details about the IAM user or role whose credentials are used to
@@ -745,8 +872,6 @@ class STSClient(Client[STSConfig]):
             in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `GetCallerIdentityInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -756,10 +881,34 @@ class STSClient(Client[STSConfig]):
         Returns:
             An instance of `GetCallerIdentityOutput`.
         """
-        return self._invoke(input, _models.GET_CALLER_IDENTITY, [], plugins)
 
+    def get_caller_identity(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetCallerIdentityOutput:
+        return self._invoke(
+            self._select_input(_models.GET_CALLER_IDENTITY, args, kwargs),
+            _models.GET_CALLER_IDENTITY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_delegated_access_token(
-        self, input: GetDelegatedAccessTokenInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetDelegatedAccessTokenInput
+        | _models.GetDelegatedAccessTokenInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetDelegatedAccessTokenOutput: ...
+
+    @_overload
+    def get_delegated_access_token(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetDelegatedAccessTokenInputDict],
     ) -> GetDelegatedAccessTokenOutput:
         """
         Exchanges a trade-in token for temporary Amazon Web Services credentials
@@ -769,8 +918,6 @@ class STSClient(Client[STSConfig]):
         Services resources.
 
         Args:
-            input:
-                An instance of `GetDelegatedAccessTokenInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -780,10 +927,33 @@ class STSClient(Client[STSConfig]):
         Returns:
             An instance of `GetDelegatedAccessTokenOutput`.
         """
-        return self._invoke(input, _models.GET_DELEGATED_ACCESS_TOKEN, [], plugins)
 
+    def get_delegated_access_token(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetDelegatedAccessTokenOutput:
+        return self._invoke(
+            self._select_input(_models.GET_DELEGATED_ACCESS_TOKEN, args, kwargs),
+            _models.GET_DELEGATED_ACCESS_TOKEN,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_federation_token(
-        self, input: GetFederationTokenInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetFederationTokenInput | _models.GetFederationTokenInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetFederationTokenOutput: ...
+
+    @_overload
+    def get_federation_token(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetFederationTokenInputDict],
     ) -> GetFederationTokenOutput:
         """
         Returns a set of temporary security credentials (consisting of an access
@@ -903,8 +1073,6 @@ class STSClient(Client[STSConfig]):
         the user tag.
 
         Args:
-            input:
-                An instance of `GetFederationTokenInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -914,12 +1082,33 @@ class STSClient(Client[STSConfig]):
         Returns:
             An instance of `GetFederationTokenOutput`.
         """
-        return self._invoke(input, _models.GET_FEDERATION_TOKEN, [], plugins)
 
+    def get_federation_token(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetFederationTokenOutput:
+        return self._invoke(
+            self._select_input(_models.GET_FEDERATION_TOKEN, args, kwargs),
+            _models.GET_FEDERATION_TOKEN,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_session_token(
         self,
-        input: GetSessionTokenInput | None = None,
+        request: _models.GetSessionTokenInput | _models.GetSessionTokenInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetSessionTokenOutput: ...
+
+    @_overload
+    def get_session_token(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetSessionTokenInputDict],
     ) -> GetSessionTokenOutput:
         """
         Returns a set of temporary credentials for an Amazon Web Services
@@ -993,8 +1182,6 @@ class STSClient(Client[STSConfig]):
         in the *IAM User Guide*.
 
         Args:
-            input:
-                An instance of `GetSessionTokenInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1004,10 +1191,34 @@ class STSClient(Client[STSConfig]):
         Returns:
             An instance of `GetSessionTokenOutput`.
         """
-        return self._invoke(input, _models.GET_SESSION_TOKEN, [], plugins)
 
+    def get_session_token(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetSessionTokenOutput:
+        return self._invoke(
+            self._select_input(_models.GET_SESSION_TOKEN, args, kwargs),
+            _models.GET_SESSION_TOKEN,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_web_identity_token(
-        self, input: GetWebIdentityTokenInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetWebIdentityTokenInput
+        | _models.GetWebIdentityTokenInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetWebIdentityTokenOutput: ...
+
+    @_overload
+    def get_web_identity_token(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetWebIdentityTokenInputDict],
     ) -> GetWebIdentityTokenOutput:
         """
         Returns a signed JSON Web Token (JWT) that represents the calling Amazon
@@ -1021,8 +1232,6 @@ class STSClient(Client[STSConfig]):
             endpoint.
 
         Args:
-            input:
-                An instance of `GetWebIdentityTokenInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1032,7 +1241,16 @@ class STSClient(Client[STSConfig]):
         Returns:
             An instance of `GetWebIdentityTokenOutput`.
         """
-        return self._invoke(input, _models.GET_WEB_IDENTITY_TOKEN, [], plugins)
+
+    def get_web_identity_token(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetWebIdentityTokenOutput:
+        return self._invoke(
+            self._select_input(_models.GET_WEB_IDENTITY_TOKEN, args, kwargs),
+            _models.GET_WEB_IDENTITY_TOKEN,
+            [],
+            plugins,
+        )
 
     def _new_config(self) -> STSConfig:
         return STSConfig.resolve()

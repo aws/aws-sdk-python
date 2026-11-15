@@ -72,7 +72,7 @@
   "aws_sdk_rds": 1,
   "aws_sdk_rds (all public modules)": 14,
   "aws_sdk_s3": 1,
-  "aws_sdk_s3 (all public modules)": 18,
+  "aws_sdk_s3 (all public modules)": 16,
   "aws_sdk_sagemaker_runtime_http2": 1,
   "aws_sdk_sagemaker_runtime_http2 (all public modules)": 13,
   "aws_sdk_secrets_manager": 1,

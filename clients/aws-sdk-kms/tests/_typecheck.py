@@ -2,139 +2,202 @@
 
 from typing import Any
 
+from aws_sdk_kms.aio.client import AsyncKMSClient
+from aws_sdk_kms.client import KMSClient
 from aws_sdk_kms.models import (
     AliasListEntry,
     CancelKeyDeletionInput,
+    CancelKeyDeletionInputDict,
     CancelKeyDeletionOutput,
     ConnectCustomKeyStoreInput,
+    ConnectCustomKeyStoreInputDict,
     ConnectCustomKeyStoreOutput,
     CreateAliasInput,
+    CreateAliasInputDict,
     CreateAliasOutput,
     CreateCustomKeyStoreInput,
+    CreateCustomKeyStoreInputDict,
     CreateCustomKeyStoreOutput,
     CreateGrantInput,
+    CreateGrantInputDict,
     CreateGrantOutput,
     CreateKeyInput,
+    CreateKeyInputDict,
     CreateKeyOutput,
     CustomKeyStoresListEntry,
     DecapsulateInput,
+    DecapsulateInputDict,
     DecapsulateOutput,
     DecryptInput,
+    DecryptInputDict,
     DecryptOutput,
     DeleteAliasInput,
+    DeleteAliasInputDict,
     DeleteAliasOutput,
     DeleteCustomKeyStoreInput,
+    DeleteCustomKeyStoreInputDict,
     DeleteCustomKeyStoreOutput,
     DeleteImportedKeyMaterialInput,
+    DeleteImportedKeyMaterialInputDict,
     DeleteImportedKeyMaterialOutput,
     DeriveSharedSecretInput,
+    DeriveSharedSecretInputDict,
     DeriveSharedSecretOutput,
     DescribeCustomKeyStoresInput,
+    DescribeCustomKeyStoresInputDict,
     DescribeCustomKeyStoresOutput,
     DescribeKeyInput,
+    DescribeKeyInputDict,
     DescribeKeyOutput,
     DisableKeyInput,
+    DisableKeyInputDict,
     DisableKeyOutput,
     DisableKeyRotationInput,
+    DisableKeyRotationInputDict,
     DisableKeyRotationOutput,
     DisconnectCustomKeyStoreInput,
+    DisconnectCustomKeyStoreInputDict,
     DisconnectCustomKeyStoreOutput,
     EnableKeyInput,
+    EnableKeyInputDict,
     EnableKeyOutput,
     EnableKeyRotationInput,
+    EnableKeyRotationInputDict,
     EnableKeyRotationOutput,
     EncapsulateInput,
+    EncapsulateInputDict,
     EncapsulateOutput,
     EncryptInput,
+    EncryptInputDict,
     EncryptOutput,
     GenerateDataKeyInput,
+    GenerateDataKeyInputDict,
     GenerateDataKeyOutput,
     GenerateDataKeyPairInput,
+    GenerateDataKeyPairInputDict,
     GenerateDataKeyPairOutput,
     GenerateDataKeyPairWithoutPlaintextInput,
+    GenerateDataKeyPairWithoutPlaintextInputDict,
     GenerateDataKeyPairWithoutPlaintextOutput,
     GenerateDataKeyWithoutPlaintextInput,
+    GenerateDataKeyWithoutPlaintextInputDict,
     GenerateDataKeyWithoutPlaintextOutput,
     GenerateMacInput,
+    GenerateMacInputDict,
     GenerateMacOutput,
     GenerateRandomInput,
+    GenerateRandomInputDict,
     GenerateRandomOutput,
     GetKeyLastUsageInput,
+    GetKeyLastUsageInputDict,
     GetKeyLastUsageOutput,
     GetKeyPolicyInput,
+    GetKeyPolicyInputDict,
     GetKeyPolicyOutput,
     GetKeyRotationStatusInput,
+    GetKeyRotationStatusInputDict,
     GetKeyRotationStatusOutput,
     GetParametersForImportInput,
+    GetParametersForImportInputDict,
     GetParametersForImportOutput,
     GetPublicKeyInput,
+    GetPublicKeyInputDict,
     GetPublicKeyOutput,
     GrantConstraints,
+    GrantConstraintsDict,
     GrantListEntry,
     ImportKeyMaterialInput,
+    ImportKeyMaterialInputDict,
     ImportKeyMaterialOutput,
     KeyLastUsageData,
     KeyListEntry,
     KeyMetadata,
     ListAliasesInput,
+    ListAliasesInputDict,
     ListAliasesOutput,
     ListGrantsInput,
+    ListGrantsInputDict,
     ListGrantsOutput,
     ListKeyPoliciesInput,
+    ListKeyPoliciesInputDict,
     ListKeyPoliciesOutput,
     ListKeyRotationsInput,
+    ListKeyRotationsInputDict,
     ListKeyRotationsOutput,
     ListKeysInput,
+    ListKeysInputDict,
     ListKeysOutput,
     ListResourceTagsInput,
+    ListResourceTagsInputDict,
     ListResourceTagsOutput,
     ListRetirableGrantsInput,
+    ListRetirableGrantsInputDict,
     ListRetirableGrantsOutput,
     MultiRegionConfiguration,
     MultiRegionKey,
     PutKeyPolicyInput,
+    PutKeyPolicyInputDict,
     PutKeyPolicyOutput,
     ReEncryptInput,
+    ReEncryptInputDict,
     ReEncryptOutput,
     RecipientInfo,
+    RecipientInfoDict,
     ReplicateKeyInput,
+    ReplicateKeyInputDict,
     ReplicateKeyOutput,
     RetireGrantInput,
+    RetireGrantInputDict,
     RetireGrantOutput,
     RevokeGrantInput,
+    RevokeGrantInputDict,
     RevokeGrantOutput,
     RotateKeyOnDemandInput,
+    RotateKeyOnDemandInputDict,
     RotateKeyOnDemandOutput,
     RotationsListEntry,
     ScheduleKeyDeletionInput,
+    ScheduleKeyDeletionInputDict,
     ScheduleKeyDeletionOutput,
     SignInput,
+    SignInputDict,
     SignOutput,
     Tag,
+    TagDict,
     TagResourceInput,
+    TagResourceInputDict,
     TagResourceOutput,
     UntagResourceInput,
+    UntagResourceInputDict,
     UntagResourceOutput,
     UpdateAliasInput,
+    UpdateAliasInputDict,
     UpdateAliasOutput,
     UpdateCustomKeyStoreInput,
+    UpdateCustomKeyStoreInputDict,
     UpdateCustomKeyStoreOutput,
     UpdateKeyDescriptionInput,
+    UpdateKeyDescriptionInputDict,
     UpdateKeyDescriptionOutput,
     UpdatePrimaryRegionInput,
+    UpdatePrimaryRegionInputDict,
     UpdatePrimaryRegionOutput,
     VerifyInput,
+    VerifyInputDict,
     VerifyMacInput,
+    VerifyMacInputDict,
     VerifyMacOutput,
     VerifyOutput,
     XksKeyConfigurationType,
     XksProxyAuthenticationCredentialType,
+    XksProxyAuthenticationCredentialTypeDict,
     XksProxyConfigurationType,
 )
 
 
-# Static type fixture: pyright over this validates models.pyi.
-# Not executed as a test; it only needs to type-check.
+# Static type fixture: pyright over this validates models.pyi and the
+# client method signatures. Not executed as a test; it only needs to
+# type-check.
 
 _: Any = ...
 
@@ -265,3 +328,597 @@ VerifyOutput()
 XksKeyConfigurationType()
 XksProxyAuthenticationCredentialType(access_key_id=_, raw_secret_access_key=_)
 XksProxyConfigurationType()
+_params_0: CancelKeyDeletionInputDict = {"key_id": _}
+_params_1: ConnectCustomKeyStoreInputDict = {"custom_key_store_id": _}
+_params_2: CreateAliasInputDict = {"alias_name": _, "target_key_id": _}
+_params_3: CreateCustomKeyStoreInputDict = {"custom_key_store_name": _}
+_params_4: CreateGrantInputDict = {"key_id": _, "operations": _}
+_params_5: CreateKeyInputDict = {}
+_params_6: DecapsulateInputDict = {
+    "key_id": _,
+    "shared_secret_ciphertext_blob": _,
+    "encapsulation_algorithm": _,
+}
+_params_7: DecryptInputDict = {}
+_params_8: DeleteAliasInputDict = {"alias_name": _}
+_params_9: DeleteCustomKeyStoreInputDict = {"custom_key_store_id": _}
+_params_10: DeleteImportedKeyMaterialInputDict = {"key_id": _}
+_params_11: DeriveSharedSecretInputDict = {
+    "key_id": _,
+    "key_agreement_algorithm": _,
+    "public_key": _,
+}
+_params_12: DescribeCustomKeyStoresInputDict = {}
+_params_13: DescribeKeyInputDict = {"key_id": _}
+_params_14: DisableKeyInputDict = {"key_id": _}
+_params_15: DisableKeyRotationInputDict = {"key_id": _}
+_params_16: DisconnectCustomKeyStoreInputDict = {"custom_key_store_id": _}
+_params_17: EnableKeyInputDict = {"key_id": _}
+_params_18: EnableKeyRotationInputDict = {"key_id": _}
+_params_19: EncapsulateInputDict = {"key_id": _, "encapsulation_algorithm": _}
+_params_20: EncryptInputDict = {"key_id": _, "plaintext": _}
+_params_21: GenerateDataKeyInputDict = {"key_id": _}
+_params_22: GenerateDataKeyPairInputDict = {"key_id": _, "key_pair_spec": _}
+_params_23: GenerateDataKeyPairWithoutPlaintextInputDict = {
+    "key_id": _,
+    "key_pair_spec": _,
+}
+_params_24: GenerateDataKeyWithoutPlaintextInputDict = {"key_id": _}
+_params_25: GenerateMacInputDict = {"message": _, "key_id": _, "mac_algorithm": _}
+_params_26: GenerateRandomInputDict = {}
+_params_27: GetKeyLastUsageInputDict = {"key_id": _}
+_params_28: GetKeyPolicyInputDict = {"key_id": _}
+_params_29: GetKeyRotationStatusInputDict = {"key_id": _}
+_params_30: GetParametersForImportInputDict = {
+    "key_id": _,
+    "wrapping_algorithm": _,
+    "wrapping_key_spec": _,
+}
+_params_31: GetPublicKeyInputDict = {"key_id": _}
+_params_32: GrantConstraintsDict = {}
+_params_33: ImportKeyMaterialInputDict = {
+    "key_id": _,
+    "import_token": _,
+    "encrypted_key_material": _,
+}
+_params_34: ListAliasesInputDict = {}
+_params_35: ListGrantsInputDict = {"key_id": _}
+_params_36: ListKeyPoliciesInputDict = {"key_id": _}
+_params_37: ListKeyRotationsInputDict = {"key_id": _}
+_params_38: ListKeysInputDict = {}
+_params_39: ListResourceTagsInputDict = {"key_id": _}
+_params_40: ListRetirableGrantsInputDict = {}
+_params_41: PutKeyPolicyInputDict = {"key_id": _, "policy": _}
+_params_42: RecipientInfoDict = {}
+_params_43: ReEncryptInputDict = {"destination_key_id": _}
+_params_44: ReplicateKeyInputDict = {"key_id": _, "replica_region": _}
+_params_45: RetireGrantInputDict = {}
+_params_46: RevokeGrantInputDict = {"key_id": _, "grant_id": _}
+_params_47: RotateKeyOnDemandInputDict = {"key_id": _}
+_params_48: ScheduleKeyDeletionInputDict = {"key_id": _}
+_params_49: SignInputDict = {"key_id": _, "message": _, "signing_algorithm": _}
+_params_50: TagDict = {"tag_key": _, "tag_value": _}
+_params_51: TagResourceInputDict = {"key_id": _, "tags": _}
+_params_52: UntagResourceInputDict = {"key_id": _, "tag_keys": _}
+_params_53: UpdateAliasInputDict = {"alias_name": _, "target_key_id": _}
+_params_54: UpdateCustomKeyStoreInputDict = {"custom_key_store_id": _}
+_params_55: UpdateKeyDescriptionInputDict = {"key_id": _, "description": _}
+_params_56: UpdatePrimaryRegionInputDict = {"key_id": _, "primary_region": _}
+_params_57: VerifyInputDict = {
+    "key_id": _,
+    "message": _,
+    "signature": _,
+    "signing_algorithm": _,
+}
+_params_58: VerifyMacInputDict = {
+    "message": _,
+    "key_id": _,
+    "mac_algorithm": _,
+    "mac": _,
+}
+_params_59: XksProxyAuthenticationCredentialTypeDict = {
+    "access_key_id": _,
+    "raw_secret_access_key": _,
+}
+
+
+def _request[T](form: type[T]) -> T:
+    raise NotImplementedError
+
+
+async def check_async_calls(client: AsyncKMSClient) -> None:
+    pass
+    await client.cancel_key_deletion(key_id=_)
+    await client.cancel_key_deletion(**_request(CancelKeyDeletionInputDict))
+    await client.cancel_key_deletion(_request(CancelKeyDeletionInput))
+    await client.cancel_key_deletion(_request(CancelKeyDeletionInputDict))
+    await client.connect_custom_key_store(custom_key_store_id=_)
+    await client.connect_custom_key_store(**_request(ConnectCustomKeyStoreInputDict))
+    await client.connect_custom_key_store(_request(ConnectCustomKeyStoreInput))
+    await client.connect_custom_key_store(_request(ConnectCustomKeyStoreInputDict))
+    await client.create_alias(alias_name=_, target_key_id=_)
+    await client.create_alias(**_request(CreateAliasInputDict))
+    await client.create_alias(_request(CreateAliasInput))
+    await client.create_alias(_request(CreateAliasInputDict))
+    await client.create_custom_key_store(custom_key_store_name=_)
+    await client.create_custom_key_store(**_request(CreateCustomKeyStoreInputDict))
+    await client.create_custom_key_store(_request(CreateCustomKeyStoreInput))
+    await client.create_custom_key_store(_request(CreateCustomKeyStoreInputDict))
+    await client.create_grant(key_id=_, operations=_)
+    await client.create_grant(**_request(CreateGrantInputDict))
+    await client.create_grant(_request(CreateGrantInput))
+    await client.create_grant(_request(CreateGrantInputDict))
+    await client.create_key()
+    await client.create_key(**_request(CreateKeyInputDict))
+    await client.create_key(_request(CreateKeyInput))
+    await client.create_key(_request(CreateKeyInputDict))
+    await client.decapsulate(
+        key_id=_, shared_secret_ciphertext_blob=_, encapsulation_algorithm=_
+    )
+    await client.decapsulate(**_request(DecapsulateInputDict))
+    await client.decapsulate(_request(DecapsulateInput))
+    await client.decapsulate(_request(DecapsulateInputDict))
+    await client.decrypt()
+    await client.decrypt(**_request(DecryptInputDict))
+    await client.decrypt(_request(DecryptInput))
+    await client.decrypt(_request(DecryptInputDict))
+    await client.delete_alias(alias_name=_)
+    await client.delete_alias(**_request(DeleteAliasInputDict))
+    await client.delete_alias(_request(DeleteAliasInput))
+    await client.delete_alias(_request(DeleteAliasInputDict))
+    await client.delete_custom_key_store(custom_key_store_id=_)
+    await client.delete_custom_key_store(**_request(DeleteCustomKeyStoreInputDict))
+    await client.delete_custom_key_store(_request(DeleteCustomKeyStoreInput))
+    await client.delete_custom_key_store(_request(DeleteCustomKeyStoreInputDict))
+    await client.delete_imported_key_material(key_id=_)
+    await client.delete_imported_key_material(
+        **_request(DeleteImportedKeyMaterialInputDict)
+    )
+    await client.delete_imported_key_material(_request(DeleteImportedKeyMaterialInput))
+    await client.delete_imported_key_material(
+        _request(DeleteImportedKeyMaterialInputDict)
+    )
+    await client.derive_shared_secret(key_id=_, key_agreement_algorithm=_, public_key=_)
+    await client.derive_shared_secret(**_request(DeriveSharedSecretInputDict))
+    await client.derive_shared_secret(_request(DeriveSharedSecretInput))
+    await client.derive_shared_secret(_request(DeriveSharedSecretInputDict))
+    await client.describe_custom_key_stores()
+    await client.describe_custom_key_stores(
+        **_request(DescribeCustomKeyStoresInputDict)
+    )
+    await client.describe_custom_key_stores(_request(DescribeCustomKeyStoresInput))
+    await client.describe_custom_key_stores(_request(DescribeCustomKeyStoresInputDict))
+    await client.describe_key(key_id=_)
+    await client.describe_key(**_request(DescribeKeyInputDict))
+    await client.describe_key(_request(DescribeKeyInput))
+    await client.describe_key(_request(DescribeKeyInputDict))
+    await client.disable_key(key_id=_)
+    await client.disable_key(**_request(DisableKeyInputDict))
+    await client.disable_key(_request(DisableKeyInput))
+    await client.disable_key(_request(DisableKeyInputDict))
+    await client.disable_key_rotation(key_id=_)
+    await client.disable_key_rotation(**_request(DisableKeyRotationInputDict))
+    await client.disable_key_rotation(_request(DisableKeyRotationInput))
+    await client.disable_key_rotation(_request(DisableKeyRotationInputDict))
+    await client.disconnect_custom_key_store(custom_key_store_id=_)
+    await client.disconnect_custom_key_store(
+        **_request(DisconnectCustomKeyStoreInputDict)
+    )
+    await client.disconnect_custom_key_store(_request(DisconnectCustomKeyStoreInput))
+    await client.disconnect_custom_key_store(
+        _request(DisconnectCustomKeyStoreInputDict)
+    )
+    await client.enable_key(key_id=_)
+    await client.enable_key(**_request(EnableKeyInputDict))
+    await client.enable_key(_request(EnableKeyInput))
+    await client.enable_key(_request(EnableKeyInputDict))
+    await client.enable_key_rotation(key_id=_)
+    await client.enable_key_rotation(**_request(EnableKeyRotationInputDict))
+    await client.enable_key_rotation(_request(EnableKeyRotationInput))
+    await client.enable_key_rotation(_request(EnableKeyRotationInputDict))
+    await client.encapsulate(key_id=_, encapsulation_algorithm=_)
+    await client.encapsulate(**_request(EncapsulateInputDict))
+    await client.encapsulate(_request(EncapsulateInput))
+    await client.encapsulate(_request(EncapsulateInputDict))
+    await client.encrypt(key_id=_, plaintext=_)
+    await client.encrypt(**_request(EncryptInputDict))
+    await client.encrypt(_request(EncryptInput))
+    await client.encrypt(_request(EncryptInputDict))
+    await client.generate_data_key(key_id=_)
+    await client.generate_data_key(**_request(GenerateDataKeyInputDict))
+    await client.generate_data_key(_request(GenerateDataKeyInput))
+    await client.generate_data_key(_request(GenerateDataKeyInputDict))
+    await client.generate_data_key_pair(key_id=_, key_pair_spec=_)
+    await client.generate_data_key_pair(**_request(GenerateDataKeyPairInputDict))
+    await client.generate_data_key_pair(_request(GenerateDataKeyPairInput))
+    await client.generate_data_key_pair(_request(GenerateDataKeyPairInputDict))
+    await client.generate_data_key_pair_without_plaintext(key_id=_, key_pair_spec=_)
+    await client.generate_data_key_pair_without_plaintext(
+        **_request(GenerateDataKeyPairWithoutPlaintextInputDict)
+    )
+    await client.generate_data_key_pair_without_plaintext(
+        _request(GenerateDataKeyPairWithoutPlaintextInput)
+    )
+    await client.generate_data_key_pair_without_plaintext(
+        _request(GenerateDataKeyPairWithoutPlaintextInputDict)
+    )
+    await client.generate_data_key_without_plaintext(key_id=_)
+    await client.generate_data_key_without_plaintext(
+        **_request(GenerateDataKeyWithoutPlaintextInputDict)
+    )
+    await client.generate_data_key_without_plaintext(
+        _request(GenerateDataKeyWithoutPlaintextInput)
+    )
+    await client.generate_data_key_without_plaintext(
+        _request(GenerateDataKeyWithoutPlaintextInputDict)
+    )
+    await client.generate_mac(message=_, key_id=_, mac_algorithm=_)
+    await client.generate_mac(**_request(GenerateMacInputDict))
+    await client.generate_mac(_request(GenerateMacInput))
+    await client.generate_mac(_request(GenerateMacInputDict))
+    await client.generate_random()
+    await client.generate_random(**_request(GenerateRandomInputDict))
+    await client.generate_random(_request(GenerateRandomInput))
+    await client.generate_random(_request(GenerateRandomInputDict))
+    await client.get_key_last_usage(key_id=_)
+    await client.get_key_last_usage(**_request(GetKeyLastUsageInputDict))
+    await client.get_key_last_usage(_request(GetKeyLastUsageInput))
+    await client.get_key_last_usage(_request(GetKeyLastUsageInputDict))
+    await client.get_key_policy(key_id=_)
+    await client.get_key_policy(**_request(GetKeyPolicyInputDict))
+    await client.get_key_policy(_request(GetKeyPolicyInput))
+    await client.get_key_policy(_request(GetKeyPolicyInputDict))
+    await client.get_key_rotation_status(key_id=_)
+    await client.get_key_rotation_status(**_request(GetKeyRotationStatusInputDict))
+    await client.get_key_rotation_status(_request(GetKeyRotationStatusInput))
+    await client.get_key_rotation_status(_request(GetKeyRotationStatusInputDict))
+    await client.get_parameters_for_import(
+        key_id=_, wrapping_algorithm=_, wrapping_key_spec=_
+    )
+    await client.get_parameters_for_import(**_request(GetParametersForImportInputDict))
+    await client.get_parameters_for_import(_request(GetParametersForImportInput))
+    await client.get_parameters_for_import(_request(GetParametersForImportInputDict))
+    await client.get_public_key(key_id=_)
+    await client.get_public_key(**_request(GetPublicKeyInputDict))
+    await client.get_public_key(_request(GetPublicKeyInput))
+    await client.get_public_key(_request(GetPublicKeyInputDict))
+    await client.import_key_material(key_id=_, import_token=_, encrypted_key_material=_)
+    await client.import_key_material(**_request(ImportKeyMaterialInputDict))
+    await client.import_key_material(_request(ImportKeyMaterialInput))
+    await client.import_key_material(_request(ImportKeyMaterialInputDict))
+    await client.list_aliases()
+    await client.list_aliases(**_request(ListAliasesInputDict))
+    await client.list_aliases(_request(ListAliasesInput))
+    await client.list_aliases(_request(ListAliasesInputDict))
+    await client.list_grants(key_id=_)
+    await client.list_grants(**_request(ListGrantsInputDict))
+    await client.list_grants(_request(ListGrantsInput))
+    await client.list_grants(_request(ListGrantsInputDict))
+    await client.list_key_policies(key_id=_)
+    await client.list_key_policies(**_request(ListKeyPoliciesInputDict))
+    await client.list_key_policies(_request(ListKeyPoliciesInput))
+    await client.list_key_policies(_request(ListKeyPoliciesInputDict))
+    await client.list_key_rotations(key_id=_)
+    await client.list_key_rotations(**_request(ListKeyRotationsInputDict))
+    await client.list_key_rotations(_request(ListKeyRotationsInput))
+    await client.list_key_rotations(_request(ListKeyRotationsInputDict))
+    await client.list_keys()
+    await client.list_keys(**_request(ListKeysInputDict))
+    await client.list_keys(_request(ListKeysInput))
+    await client.list_keys(_request(ListKeysInputDict))
+    await client.list_resource_tags(key_id=_)
+    await client.list_resource_tags(**_request(ListResourceTagsInputDict))
+    await client.list_resource_tags(_request(ListResourceTagsInput))
+    await client.list_resource_tags(_request(ListResourceTagsInputDict))
+    await client.list_retirable_grants()
+    await client.list_retirable_grants(**_request(ListRetirableGrantsInputDict))
+    await client.list_retirable_grants(_request(ListRetirableGrantsInput))
+    await client.list_retirable_grants(_request(ListRetirableGrantsInputDict))
+    await client.put_key_policy(key_id=_, policy=_)
+    await client.put_key_policy(**_request(PutKeyPolicyInputDict))
+    await client.put_key_policy(_request(PutKeyPolicyInput))
+    await client.put_key_policy(_request(PutKeyPolicyInputDict))
+    await client.re_encrypt(destination_key_id=_)
+    await client.re_encrypt(**_request(ReEncryptInputDict))
+    await client.re_encrypt(_request(ReEncryptInput))
+    await client.re_encrypt(_request(ReEncryptInputDict))
+    await client.replicate_key(key_id=_, replica_region=_)
+    await client.replicate_key(**_request(ReplicateKeyInputDict))
+    await client.replicate_key(_request(ReplicateKeyInput))
+    await client.replicate_key(_request(ReplicateKeyInputDict))
+    await client.retire_grant()
+    await client.retire_grant(**_request(RetireGrantInputDict))
+    await client.retire_grant(_request(RetireGrantInput))
+    await client.retire_grant(_request(RetireGrantInputDict))
+    await client.revoke_grant(key_id=_, grant_id=_)
+    await client.revoke_grant(**_request(RevokeGrantInputDict))
+    await client.revoke_grant(_request(RevokeGrantInput))
+    await client.revoke_grant(_request(RevokeGrantInputDict))
+    await client.rotate_key_on_demand(key_id=_)
+    await client.rotate_key_on_demand(**_request(RotateKeyOnDemandInputDict))
+    await client.rotate_key_on_demand(_request(RotateKeyOnDemandInput))
+    await client.rotate_key_on_demand(_request(RotateKeyOnDemandInputDict))
+    await client.schedule_key_deletion(key_id=_)
+    await client.schedule_key_deletion(**_request(ScheduleKeyDeletionInputDict))
+    await client.schedule_key_deletion(_request(ScheduleKeyDeletionInput))
+    await client.schedule_key_deletion(_request(ScheduleKeyDeletionInputDict))
+    await client.sign(key_id=_, message=_, signing_algorithm=_)
+    await client.sign(**_request(SignInputDict))
+    await client.sign(_request(SignInput))
+    await client.sign(_request(SignInputDict))
+    await client.tag_resource(key_id=_, tags=_)
+    await client.tag_resource(**_request(TagResourceInputDict))
+    await client.tag_resource(_request(TagResourceInput))
+    await client.tag_resource(_request(TagResourceInputDict))
+    await client.untag_resource(key_id=_, tag_keys=_)
+    await client.untag_resource(**_request(UntagResourceInputDict))
+    await client.untag_resource(_request(UntagResourceInput))
+    await client.untag_resource(_request(UntagResourceInputDict))
+    await client.update_alias(alias_name=_, target_key_id=_)
+    await client.update_alias(**_request(UpdateAliasInputDict))
+    await client.update_alias(_request(UpdateAliasInput))
+    await client.update_alias(_request(UpdateAliasInputDict))
+    await client.update_custom_key_store(custom_key_store_id=_)
+    await client.update_custom_key_store(**_request(UpdateCustomKeyStoreInputDict))
+    await client.update_custom_key_store(_request(UpdateCustomKeyStoreInput))
+    await client.update_custom_key_store(_request(UpdateCustomKeyStoreInputDict))
+    await client.update_key_description(key_id=_, description=_)
+    await client.update_key_description(**_request(UpdateKeyDescriptionInputDict))
+    await client.update_key_description(_request(UpdateKeyDescriptionInput))
+    await client.update_key_description(_request(UpdateKeyDescriptionInputDict))
+    await client.update_primary_region(key_id=_, primary_region=_)
+    await client.update_primary_region(**_request(UpdatePrimaryRegionInputDict))
+    await client.update_primary_region(_request(UpdatePrimaryRegionInput))
+    await client.update_primary_region(_request(UpdatePrimaryRegionInputDict))
+    await client.verify(key_id=_, message=_, signature=_, signing_algorithm=_)
+    await client.verify(**_request(VerifyInputDict))
+    await client.verify(_request(VerifyInput))
+    await client.verify(_request(VerifyInputDict))
+    await client.verify_mac(message=_, key_id=_, mac_algorithm=_, mac=_)
+    await client.verify_mac(**_request(VerifyMacInputDict))
+    await client.verify_mac(_request(VerifyMacInput))
+    await client.verify_mac(_request(VerifyMacInputDict))
+
+
+def check_sync_calls(client: KMSClient) -> None:
+    pass
+    client.cancel_key_deletion(key_id=_)
+    client.cancel_key_deletion(**_request(CancelKeyDeletionInputDict))
+    client.cancel_key_deletion(_request(CancelKeyDeletionInput))
+    client.cancel_key_deletion(_request(CancelKeyDeletionInputDict))
+    client.connect_custom_key_store(custom_key_store_id=_)
+    client.connect_custom_key_store(**_request(ConnectCustomKeyStoreInputDict))
+    client.connect_custom_key_store(_request(ConnectCustomKeyStoreInput))
+    client.connect_custom_key_store(_request(ConnectCustomKeyStoreInputDict))
+    client.create_alias(alias_name=_, target_key_id=_)
+    client.create_alias(**_request(CreateAliasInputDict))
+    client.create_alias(_request(CreateAliasInput))
+    client.create_alias(_request(CreateAliasInputDict))
+    client.create_custom_key_store(custom_key_store_name=_)
+    client.create_custom_key_store(**_request(CreateCustomKeyStoreInputDict))
+    client.create_custom_key_store(_request(CreateCustomKeyStoreInput))
+    client.create_custom_key_store(_request(CreateCustomKeyStoreInputDict))
+    client.create_grant(key_id=_, operations=_)
+    client.create_grant(**_request(CreateGrantInputDict))
+    client.create_grant(_request(CreateGrantInput))
+    client.create_grant(_request(CreateGrantInputDict))
+    client.create_key()
+    client.create_key(**_request(CreateKeyInputDict))
+    client.create_key(_request(CreateKeyInput))
+    client.create_key(_request(CreateKeyInputDict))
+    client.decapsulate(
+        key_id=_, shared_secret_ciphertext_blob=_, encapsulation_algorithm=_
+    )
+    client.decapsulate(**_request(DecapsulateInputDict))
+    client.decapsulate(_request(DecapsulateInput))
+    client.decapsulate(_request(DecapsulateInputDict))
+    client.decrypt()
+    client.decrypt(**_request(DecryptInputDict))
+    client.decrypt(_request(DecryptInput))
+    client.decrypt(_request(DecryptInputDict))
+    client.delete_alias(alias_name=_)
+    client.delete_alias(**_request(DeleteAliasInputDict))
+    client.delete_alias(_request(DeleteAliasInput))
+    client.delete_alias(_request(DeleteAliasInputDict))
+    client.delete_custom_key_store(custom_key_store_id=_)
+    client.delete_custom_key_store(**_request(DeleteCustomKeyStoreInputDict))
+    client.delete_custom_key_store(_request(DeleteCustomKeyStoreInput))
+    client.delete_custom_key_store(_request(DeleteCustomKeyStoreInputDict))
+    client.delete_imported_key_material(key_id=_)
+    client.delete_imported_key_material(**_request(DeleteImportedKeyMaterialInputDict))
+    client.delete_imported_key_material(_request(DeleteImportedKeyMaterialInput))
+    client.delete_imported_key_material(_request(DeleteImportedKeyMaterialInputDict))
+    client.derive_shared_secret(key_id=_, key_agreement_algorithm=_, public_key=_)
+    client.derive_shared_secret(**_request(DeriveSharedSecretInputDict))
+    client.derive_shared_secret(_request(DeriveSharedSecretInput))
+    client.derive_shared_secret(_request(DeriveSharedSecretInputDict))
+    client.describe_custom_key_stores()
+    client.describe_custom_key_stores(**_request(DescribeCustomKeyStoresInputDict))
+    client.describe_custom_key_stores(_request(DescribeCustomKeyStoresInput))
+    client.describe_custom_key_stores(_request(DescribeCustomKeyStoresInputDict))
+    client.describe_key(key_id=_)
+    client.describe_key(**_request(DescribeKeyInputDict))
+    client.describe_key(_request(DescribeKeyInput))
+    client.describe_key(_request(DescribeKeyInputDict))
+    client.disable_key(key_id=_)
+    client.disable_key(**_request(DisableKeyInputDict))
+    client.disable_key(_request(DisableKeyInput))
+    client.disable_key(_request(DisableKeyInputDict))
+    client.disable_key_rotation(key_id=_)
+    client.disable_key_rotation(**_request(DisableKeyRotationInputDict))
+    client.disable_key_rotation(_request(DisableKeyRotationInput))
+    client.disable_key_rotation(_request(DisableKeyRotationInputDict))
+    client.disconnect_custom_key_store(custom_key_store_id=_)
+    client.disconnect_custom_key_store(**_request(DisconnectCustomKeyStoreInputDict))
+    client.disconnect_custom_key_store(_request(DisconnectCustomKeyStoreInput))
+    client.disconnect_custom_key_store(_request(DisconnectCustomKeyStoreInputDict))
+    client.enable_key(key_id=_)
+    client.enable_key(**_request(EnableKeyInputDict))
+    client.enable_key(_request(EnableKeyInput))
+    client.enable_key(_request(EnableKeyInputDict))
+    client.enable_key_rotation(key_id=_)
+    client.enable_key_rotation(**_request(EnableKeyRotationInputDict))
+    client.enable_key_rotation(_request(EnableKeyRotationInput))
+    client.enable_key_rotation(_request(EnableKeyRotationInputDict))
+    client.encapsulate(key_id=_, encapsulation_algorithm=_)
+    client.encapsulate(**_request(EncapsulateInputDict))
+    client.encapsulate(_request(EncapsulateInput))
+    client.encapsulate(_request(EncapsulateInputDict))
+    client.encrypt(key_id=_, plaintext=_)
+    client.encrypt(**_request(EncryptInputDict))
+    client.encrypt(_request(EncryptInput))
+    client.encrypt(_request(EncryptInputDict))
+    client.generate_data_key(key_id=_)
+    client.generate_data_key(**_request(GenerateDataKeyInputDict))
+    client.generate_data_key(_request(GenerateDataKeyInput))
+    client.generate_data_key(_request(GenerateDataKeyInputDict))
+    client.generate_data_key_pair(key_id=_, key_pair_spec=_)
+    client.generate_data_key_pair(**_request(GenerateDataKeyPairInputDict))
+    client.generate_data_key_pair(_request(GenerateDataKeyPairInput))
+    client.generate_data_key_pair(_request(GenerateDataKeyPairInputDict))
+    client.generate_data_key_pair_without_plaintext(key_id=_, key_pair_spec=_)
+    client.generate_data_key_pair_without_plaintext(
+        **_request(GenerateDataKeyPairWithoutPlaintextInputDict)
+    )
+    client.generate_data_key_pair_without_plaintext(
+        _request(GenerateDataKeyPairWithoutPlaintextInput)
+    )
+    client.generate_data_key_pair_without_plaintext(
+        _request(GenerateDataKeyPairWithoutPlaintextInputDict)
+    )
+    client.generate_data_key_without_plaintext(key_id=_)
+    client.generate_data_key_without_plaintext(
+        **_request(GenerateDataKeyWithoutPlaintextInputDict)
+    )
+    client.generate_data_key_without_plaintext(
+        _request(GenerateDataKeyWithoutPlaintextInput)
+    )
+    client.generate_data_key_without_plaintext(
+        _request(GenerateDataKeyWithoutPlaintextInputDict)
+    )
+    client.generate_mac(message=_, key_id=_, mac_algorithm=_)
+    client.generate_mac(**_request(GenerateMacInputDict))
+    client.generate_mac(_request(GenerateMacInput))
+    client.generate_mac(_request(GenerateMacInputDict))
+    client.generate_random()
+    client.generate_random(**_request(GenerateRandomInputDict))
+    client.generate_random(_request(GenerateRandomInput))
+    client.generate_random(_request(GenerateRandomInputDict))
+    client.get_key_last_usage(key_id=_)
+    client.get_key_last_usage(**_request(GetKeyLastUsageInputDict))
+    client.get_key_last_usage(_request(GetKeyLastUsageInput))
+    client.get_key_last_usage(_request(GetKeyLastUsageInputDict))
+    client.get_key_policy(key_id=_)
+    client.get_key_policy(**_request(GetKeyPolicyInputDict))
+    client.get_key_policy(_request(GetKeyPolicyInput))
+    client.get_key_policy(_request(GetKeyPolicyInputDict))
+    client.get_key_rotation_status(key_id=_)
+    client.get_key_rotation_status(**_request(GetKeyRotationStatusInputDict))
+    client.get_key_rotation_status(_request(GetKeyRotationStatusInput))
+    client.get_key_rotation_status(_request(GetKeyRotationStatusInputDict))
+    client.get_parameters_for_import(
+        key_id=_, wrapping_algorithm=_, wrapping_key_spec=_
+    )
+    client.get_parameters_for_import(**_request(GetParametersForImportInputDict))
+    client.get_parameters_for_import(_request(GetParametersForImportInput))
+    client.get_parameters_for_import(_request(GetParametersForImportInputDict))
+    client.get_public_key(key_id=_)
+    client.get_public_key(**_request(GetPublicKeyInputDict))
+    client.get_public_key(_request(GetPublicKeyInput))
+    client.get_public_key(_request(GetPublicKeyInputDict))
+    client.import_key_material(key_id=_, import_token=_, encrypted_key_material=_)
+    client.import_key_material(**_request(ImportKeyMaterialInputDict))
+    client.import_key_material(_request(ImportKeyMaterialInput))
+    client.import_key_material(_request(ImportKeyMaterialInputDict))
+    client.list_aliases()
+    client.list_aliases(**_request(ListAliasesInputDict))
+    client.list_aliases(_request(ListAliasesInput))
+    client.list_aliases(_request(ListAliasesInputDict))
+    client.list_grants(key_id=_)
+    client.list_grants(**_request(ListGrantsInputDict))
+    client.list_grants(_request(ListGrantsInput))
+    client.list_grants(_request(ListGrantsInputDict))
+    client.list_key_policies(key_id=_)
+    client.list_key_policies(**_request(ListKeyPoliciesInputDict))
+    client.list_key_policies(_request(ListKeyPoliciesInput))
+    client.list_key_policies(_request(ListKeyPoliciesInputDict))
+    client.list_key_rotations(key_id=_)
+    client.list_key_rotations(**_request(ListKeyRotationsInputDict))
+    client.list_key_rotations(_request(ListKeyRotationsInput))
+    client.list_key_rotations(_request(ListKeyRotationsInputDict))
+    client.list_keys()
+    client.list_keys(**_request(ListKeysInputDict))
+    client.list_keys(_request(ListKeysInput))
+    client.list_keys(_request(ListKeysInputDict))
+    client.list_resource_tags(key_id=_)
+    client.list_resource_tags(**_request(ListResourceTagsInputDict))
+    client.list_resource_tags(_request(ListResourceTagsInput))
+    client.list_resource_tags(_request(ListResourceTagsInputDict))
+    client.list_retirable_grants()
+    client.list_retirable_grants(**_request(ListRetirableGrantsInputDict))
+    client.list_retirable_grants(_request(ListRetirableGrantsInput))
+    client.list_retirable_grants(_request(ListRetirableGrantsInputDict))
+    client.put_key_policy(key_id=_, policy=_)
+    client.put_key_policy(**_request(PutKeyPolicyInputDict))
+    client.put_key_policy(_request(PutKeyPolicyInput))
+    client.put_key_policy(_request(PutKeyPolicyInputDict))
+    client.re_encrypt(destination_key_id=_)
+    client.re_encrypt(**_request(ReEncryptInputDict))
+    client.re_encrypt(_request(ReEncryptInput))
+    client.re_encrypt(_request(ReEncryptInputDict))
+    client.replicate_key(key_id=_, replica_region=_)
+    client.replicate_key(**_request(ReplicateKeyInputDict))
+    client.replicate_key(_request(ReplicateKeyInput))
+    client.replicate_key(_request(ReplicateKeyInputDict))
+    client.retire_grant()
+    client.retire_grant(**_request(RetireGrantInputDict))
+    client.retire_grant(_request(RetireGrantInput))
+    client.retire_grant(_request(RetireGrantInputDict))
+    client.revoke_grant(key_id=_, grant_id=_)
+    client.revoke_grant(**_request(RevokeGrantInputDict))
+    client.revoke_grant(_request(RevokeGrantInput))
+    client.revoke_grant(_request(RevokeGrantInputDict))
+    client.rotate_key_on_demand(key_id=_)
+    client.rotate_key_on_demand(**_request(RotateKeyOnDemandInputDict))
+    client.rotate_key_on_demand(_request(RotateKeyOnDemandInput))
+    client.rotate_key_on_demand(_request(RotateKeyOnDemandInputDict))
+    client.schedule_key_deletion(key_id=_)
+    client.schedule_key_deletion(**_request(ScheduleKeyDeletionInputDict))
+    client.schedule_key_deletion(_request(ScheduleKeyDeletionInput))
+    client.schedule_key_deletion(_request(ScheduleKeyDeletionInputDict))
+    client.sign(key_id=_, message=_, signing_algorithm=_)
+    client.sign(**_request(SignInputDict))
+    client.sign(_request(SignInput))
+    client.sign(_request(SignInputDict))
+    client.tag_resource(key_id=_, tags=_)
+    client.tag_resource(**_request(TagResourceInputDict))
+    client.tag_resource(_request(TagResourceInput))
+    client.tag_resource(_request(TagResourceInputDict))
+    client.untag_resource(key_id=_, tag_keys=_)
+    client.untag_resource(**_request(UntagResourceInputDict))
+    client.untag_resource(_request(UntagResourceInput))
+    client.untag_resource(_request(UntagResourceInputDict))
+    client.update_alias(alias_name=_, target_key_id=_)
+    client.update_alias(**_request(UpdateAliasInputDict))
+    client.update_alias(_request(UpdateAliasInput))
+    client.update_alias(_request(UpdateAliasInputDict))
+    client.update_custom_key_store(custom_key_store_id=_)
+    client.update_custom_key_store(**_request(UpdateCustomKeyStoreInputDict))
+    client.update_custom_key_store(_request(UpdateCustomKeyStoreInput))
+    client.update_custom_key_store(_request(UpdateCustomKeyStoreInputDict))
+    client.update_key_description(key_id=_, description=_)
+    client.update_key_description(**_request(UpdateKeyDescriptionInputDict))
+    client.update_key_description(_request(UpdateKeyDescriptionInput))
+    client.update_key_description(_request(UpdateKeyDescriptionInputDict))
+    client.update_primary_region(key_id=_, primary_region=_)
+    client.update_primary_region(**_request(UpdatePrimaryRegionInputDict))
+    client.update_primary_region(_request(UpdatePrimaryRegionInput))
+    client.update_primary_region(_request(UpdatePrimaryRegionInputDict))
+    client.verify(key_id=_, message=_, signature=_, signing_algorithm=_)
+    client.verify(**_request(VerifyInputDict))
+    client.verify(_request(VerifyInput))
+    client.verify(_request(VerifyInputDict))
+    client.verify_mac(message=_, key_id=_, mac_algorithm=_, mac=_)
+    client.verify_mac(**_request(VerifyMacInputDict))
+    client.verify_mac(_request(VerifyMacInput))
+    client.verify_mac(_request(VerifyMacInputDict))

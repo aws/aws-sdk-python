@@ -2,146 +2,216 @@
 
 from typing import Any
 
+from aws_sdk_kinesis.aio.client import AsyncKinesisClient
+from aws_sdk_kinesis.client import KinesisClient
 from aws_sdk_kinesis.models import (
     AddTagsToStreamInput,
+    AddTagsToStreamInputDict,
     AddTagsToStreamOutput,
     ChannelDescription,
     ChannelEncryptionConfiguration,
+    ChannelEncryptionConfigurationDict,
     ChannelLoggingConfiguration,
+    ChannelLoggingConfigurationDict,
     ChannelLoggingUpdateInput,
+    ChannelLoggingUpdateInputDict,
     ChannelStreamConfiguration,
+    ChannelStreamConfigurationDict,
     ChannelStreamDescription,
     ChannelStreamIdentifier,
     ChannelSummary,
     ChildShard,
     CloudWatchLogs,
+    CloudWatchLogsDict,
     CloudWatchLogsUpdateInput,
+    CloudWatchLogsUpdateInputDict,
     Consumer,
     ConsumerDescription,
     CreateChannelInput,
+    CreateChannelInputDict,
     CreateChannelOutput,
     CreateStreamInput,
+    CreateStreamInputDict,
     CreateStreamOutput,
     DeadLetterQueueS3Configuration,
+    DeadLetterQueueS3ConfigurationDict,
     DecreaseStreamRetentionPeriodInput,
+    DecreaseStreamRetentionPeriodInputDict,
     DecreaseStreamRetentionPeriodOutput,
     DeleteChannelInput,
+    DeleteChannelInputDict,
     DeleteChannelOutput,
     DeleteResourcePolicyInput,
+    DeleteResourcePolicyInputDict,
     DeleteResourcePolicyOutput,
     DeleteStreamInput,
+    DeleteStreamInputDict,
     DeleteStreamOutput,
     DeregisterStreamConsumerInput,
+    DeregisterStreamConsumerInputDict,
     DeregisterStreamConsumerOutput,
     DescribeAccountSettingsInput,
+    DescribeAccountSettingsInputDict,
     DescribeAccountSettingsOutput,
     DescribeChannelInput,
+    DescribeChannelInputDict,
     DescribeChannelOutput,
     DescribeLimitsInput,
+    DescribeLimitsInputDict,
     DescribeLimitsOutput,
     DescribeStreamConsumerInput,
+    DescribeStreamConsumerInputDict,
     DescribeStreamConsumerOutput,
     DescribeStreamInput,
+    DescribeStreamInputDict,
     DescribeStreamOutput,
     DescribeStreamSummaryInput,
+    DescribeStreamSummaryInputDict,
     DescribeStreamSummaryOutput,
     DisableEnhancedMonitoringInput,
+    DisableEnhancedMonitoringInputDict,
     DisableEnhancedMonitoringOutput,
     EnableEnhancedMonitoringInput,
+    EnableEnhancedMonitoringInputDict,
     EnableEnhancedMonitoringOutput,
     EnhancedMetrics,
     GetRecordsInput,
+    GetRecordsInputDict,
     GetRecordsOutput,
     GetResourcePolicyInput,
+    GetResourcePolicyInputDict,
     GetResourcePolicyOutput,
     GetShardIteratorInput,
+    GetShardIteratorInputDict,
     GetShardIteratorOutput,
     HashKeyRange,
     IncreaseStreamRetentionPeriodInput,
+    IncreaseStreamRetentionPeriodInputDict,
     IncreaseStreamRetentionPeriodOutput,
     ListChannelsInput,
+    ListChannelsInputDict,
     ListChannelsOutput,
     ListShardsInput,
+    ListShardsInputDict,
     ListShardsOutput,
     ListStreamConsumersInput,
+    ListStreamConsumersInputDict,
     ListStreamConsumersOutput,
     ListStreamsInput,
+    ListStreamsInputDict,
     ListStreamsOutput,
     ListTagsForResourceInput,
+    ListTagsForResourceInputDict,
     ListTagsForResourceOutput,
     ListTagsForStreamInput,
+    ListTagsForStreamInputDict,
     ListTagsForStreamOutput,
     MergeShardsInput,
+    MergeShardsInputDict,
     MergeShardsOutput,
     MinimumThroughputBillingCommitmentInput,
+    MinimumThroughputBillingCommitmentInputDict,
     MinimumThroughputBillingCommitmentOutput,
     PartitionField,
+    PartitionFieldDict,
     PartitionSpec,
+    PartitionSpecDict,
     PutRecordInput,
+    PutRecordInputDict,
     PutRecordOutput,
     PutRecordsInput,
+    PutRecordsInputDict,
     PutRecordsOutput,
     PutRecordsRequestEntry,
+    PutRecordsRequestEntryDict,
     PutRecordsResultEntry,
     PutResourcePolicyInput,
+    PutResourcePolicyInputDict,
     PutResourcePolicyOutput,
     Record,
     RecordConfiguration,
+    RecordConfigurationDict,
     RegisterStreamConsumerInput,
+    RegisterStreamConsumerInputDict,
     RegisterStreamConsumerOutput,
     RemoveTagsFromStreamInput,
+    RemoveTagsFromStreamInputDict,
     RemoveTagsFromStreamOutput,
     S3DestinationConfiguration,
+    S3DestinationConfigurationDict,
     S3DestinationDescription,
     S3DestinationUpdateInput,
+    S3DestinationUpdateInputDict,
     S3StorageConfiguration,
+    S3StorageConfigurationDict,
     S3TablesConfiguration,
+    S3TablesConfigurationDict,
     S3TablesDestinationConfiguration,
+    S3TablesDestinationConfigurationDict,
     S3TablesDestinationDescription,
     S3TablesDestinationUpdateInput,
+    S3TablesDestinationUpdateInputDict,
     SequenceNumberRange,
     Shard,
     ShardFilter,
+    ShardFilterDict,
     SplitShardInput,
+    SplitShardInputDict,
     SplitShardOutput,
     StartStreamEncryptionInput,
+    StartStreamEncryptionInputDict,
     StartStreamEncryptionOutput,
     StartingPosition,
+    StartingPositionDict,
     StopStreamEncryptionInput,
+    StopStreamEncryptionInputDict,
     StopStreamEncryptionOutput,
     StreamDescription,
     StreamDescriptionSummary,
     StreamFilter,
+    StreamFilterDict,
     StreamModeDetails,
+    StreamModeDetailsDict,
     StreamSummary,
     SubscribeToShardEvent,
     SubscribeToShardInput,
+    SubscribeToShardInputDict,
     SubscribeToShardOutput,
     Tag,
     TagResourceInput,
+    TagResourceInputDict,
     TagResourceOutput,
     UntagResourceInput,
+    UntagResourceInputDict,
     UntagResourceOutput,
     UpdateAccountSettingsInput,
+    UpdateAccountSettingsInputDict,
     UpdateAccountSettingsOutput,
     UpdateChannelInput,
+    UpdateChannelInputDict,
     UpdateChannelOutput,
     UpdateMaxRecordSizeInput,
+    UpdateMaxRecordSizeInputDict,
     UpdateMaxRecordSizeOutput,
     UpdateShardCountInput,
+    UpdateShardCountInputDict,
     UpdateShardCountOutput,
     UpdateStreamModeInput,
+    UpdateStreamModeInputDict,
     UpdateStreamModeOutput,
     UpdateStreamRecordDistributionStrategyInput,
+    UpdateStreamRecordDistributionStrategyInputDict,
     UpdateStreamRecordDistributionStrategyOutput,
     UpdateStreamWarmThroughputInput,
+    UpdateStreamWarmThroughputInputDict,
     UpdateStreamWarmThroughputOutput,
     WarmThroughputObject,
 )
 
 
-# Static type fixture: pyright over this validates models.pyi.
-# Not executed as a test; it only needs to type-check.
+# Static type fixture: pyright over this validates models.pyi and the
+# client method signatures. Not executed as a test; it only needs to
+# type-check.
 
 _: Any = ...
 
@@ -338,3 +408,526 @@ UpdateStreamRecordDistributionStrategyOutput()
 UpdateStreamWarmThroughputInput()
 UpdateStreamWarmThroughputOutput()
 WarmThroughputObject()
+_params_0: AddTagsToStreamInputDict = {"tags": _}
+_params_1: ChannelEncryptionConfigurationDict = {"encryption_type": _, "key_id": _}
+_params_2: ChannelLoggingConfigurationDict = {"cloud_watch_logs": _}
+_params_3: ChannelLoggingUpdateInputDict = {"cloud_watch_logs": _}
+_params_4: ChannelStreamConfigurationDict = {"stream_arn": _, "record_configuration": _}
+_params_5: CloudWatchLogsDict = {"enabled": _}
+_params_6: CloudWatchLogsUpdateInputDict = {"enabled": _}
+_params_7: CreateChannelInputDict = {
+    "channel_name": _,
+    "service_execution_role_arn": _,
+    "stream_configuration_list": _,
+}
+_params_8: CreateStreamInputDict = {"stream_name": _}
+_params_9: DeadLetterQueueS3ConfigurationDict = {
+    "bucket_arn": _,
+    "expected_bucket_owner": _,
+}
+_params_10: DecreaseStreamRetentionPeriodInputDict = {"retention_period_hours": _}
+_params_11: DeleteChannelInputDict = {"channel_arn": _}
+_params_12: DeleteResourcePolicyInputDict = {"resource_arn": _}
+_params_13: DeleteStreamInputDict = {}
+_params_14: DeregisterStreamConsumerInputDict = {}
+_params_15: DescribeAccountSettingsInputDict = {}
+_params_16: DescribeChannelInputDict = {"channel_arn": _}
+_params_17: DescribeLimitsInputDict = {}
+_params_18: DescribeStreamConsumerInputDict = {}
+_params_19: DescribeStreamInputDict = {}
+_params_20: DescribeStreamSummaryInputDict = {}
+_params_21: DisableEnhancedMonitoringInputDict = {"shard_level_metrics": _}
+_params_22: EnableEnhancedMonitoringInputDict = {"shard_level_metrics": _}
+_params_23: GetRecordsInputDict = {"shard_iterator": _}
+_params_24: GetResourcePolicyInputDict = {"resource_arn": _}
+_params_25: GetShardIteratorInputDict = {"shard_id": _, "shard_iterator_type": _}
+_params_26: IncreaseStreamRetentionPeriodInputDict = {"retention_period_hours": _}
+_params_27: ListChannelsInputDict = {}
+_params_28: ListShardsInputDict = {}
+_params_29: ListStreamConsumersInputDict = {"stream_arn": _}
+_params_30: ListStreamsInputDict = {}
+_params_31: ListTagsForResourceInputDict = {"resource_arn": _}
+_params_32: ListTagsForStreamInputDict = {}
+_params_33: MergeShardsInputDict = {"shard_to_merge": _, "adjacent_shard_to_merge": _}
+_params_34: MinimumThroughputBillingCommitmentInputDict = {"status": _}
+_params_35: PartitionFieldDict = {"transform": _, "source_name": _}
+_params_36: PartitionSpecDict = {"partition_fields": _}
+_params_37: PutRecordInputDict = {"data": _}
+_params_38: PutRecordsInputDict = {"records": _}
+_params_39: PutRecordsRequestEntryDict = {"data": _}
+_params_40: PutResourcePolicyInputDict = {"resource_arn": _, "policy": _}
+_params_41: RecordConfigurationDict = {"record_format_type": _}
+_params_42: RegisterStreamConsumerInputDict = {"stream_arn": _, "consumer_name": _}
+_params_43: RemoveTagsFromStreamInputDict = {"tag_keys": _}
+_params_44: S3DestinationConfigurationDict = {"storage_configuration": _}
+_params_45: S3DestinationUpdateInputDict = {"data_freshness_in_seconds": _}
+_params_46: S3StorageConfigurationDict = {
+    "bucket_arn": _,
+    "expected_bucket_owner": _,
+    "compression_type": _,
+}
+_params_47: S3TablesConfigurationDict = {
+    "table_bucket_arn": _,
+    "namespace": _,
+    "table_name": _,
+    "compression_type": _,
+}
+_params_48: S3TablesDestinationConfigurationDict = {
+    "dead_letter_queue_s3_configuration": _,
+    "s3_tables_configuration_list": _,
+}
+_params_49: S3TablesDestinationUpdateInputDict = {"data_freshness_in_seconds": _}
+_params_50: ShardFilterDict = {"type": _}
+_params_51: SplitShardInputDict = {"shard_to_split": _, "new_starting_hash_key": _}
+_params_52: StartingPositionDict = {"type": _}
+_params_53: StartStreamEncryptionInputDict = {"encryption_type": _, "key_id": _}
+_params_54: StopStreamEncryptionInputDict = {"encryption_type": _, "key_id": _}
+_params_55: StreamFilterDict = {"stream_arn": _}
+_params_56: StreamModeDetailsDict = {"stream_mode": _}
+_params_57: SubscribeToShardInputDict = {
+    "consumer_arn": _,
+    "shard_id": _,
+    "starting_position": _,
+}
+_params_58: TagResourceInputDict = {"tags": _, "resource_arn": _}
+_params_59: UntagResourceInputDict = {"tag_keys": _, "resource_arn": _}
+_params_60: UpdateAccountSettingsInputDict = {
+    "minimum_throughput_billing_commitment": _
+}
+_params_61: UpdateChannelInputDict = {"channel_arn": _}
+_params_62: UpdateMaxRecordSizeInputDict = {"max_record_size_in_ki_b": _}
+_params_63: UpdateShardCountInputDict = {"target_shard_count": _, "scaling_type": _}
+_params_64: UpdateStreamModeInputDict = {"stream_arn": _, "stream_mode_details": _}
+_params_65: UpdateStreamRecordDistributionStrategyInputDict = {
+    "stream_arn": _,
+    "record_distribution_strategy": _,
+}
+_params_66: UpdateStreamWarmThroughputInputDict = {"warm_throughput_mi_bps": _}
+
+
+def _request[T](form: type[T]) -> T:
+    raise NotImplementedError
+
+
+async def check_async_calls(client: AsyncKinesisClient) -> None:
+    pass
+    await client.add_tags_to_stream(tags=_)
+    await client.add_tags_to_stream(**_request(AddTagsToStreamInputDict))
+    await client.add_tags_to_stream(_request(AddTagsToStreamInput))
+    await client.add_tags_to_stream(_request(AddTagsToStreamInputDict))
+    await client.create_channel(
+        channel_name=_, service_execution_role_arn=_, stream_configuration_list=_
+    )
+    await client.create_channel(**_request(CreateChannelInputDict))
+    await client.create_channel(_request(CreateChannelInput))
+    await client.create_channel(_request(CreateChannelInputDict))
+    await client.create_stream(stream_name=_)
+    await client.create_stream(**_request(CreateStreamInputDict))
+    await client.create_stream(_request(CreateStreamInput))
+    await client.create_stream(_request(CreateStreamInputDict))
+    await client.decrease_stream_retention_period(retention_period_hours=_)
+    await client.decrease_stream_retention_period(
+        **_request(DecreaseStreamRetentionPeriodInputDict)
+    )
+    await client.decrease_stream_retention_period(
+        _request(DecreaseStreamRetentionPeriodInput)
+    )
+    await client.decrease_stream_retention_period(
+        _request(DecreaseStreamRetentionPeriodInputDict)
+    )
+    await client.delete_channel(channel_arn=_)
+    await client.delete_channel(**_request(DeleteChannelInputDict))
+    await client.delete_channel(_request(DeleteChannelInput))
+    await client.delete_channel(_request(DeleteChannelInputDict))
+    await client.delete_resource_policy(resource_arn=_)
+    await client.delete_resource_policy(**_request(DeleteResourcePolicyInputDict))
+    await client.delete_resource_policy(_request(DeleteResourcePolicyInput))
+    await client.delete_resource_policy(_request(DeleteResourcePolicyInputDict))
+    await client.delete_stream()
+    await client.delete_stream(**_request(DeleteStreamInputDict))
+    await client.delete_stream(_request(DeleteStreamInput))
+    await client.delete_stream(_request(DeleteStreamInputDict))
+    await client.deregister_stream_consumer()
+    await client.deregister_stream_consumer(
+        **_request(DeregisterStreamConsumerInputDict)
+    )
+    await client.deregister_stream_consumer(_request(DeregisterStreamConsumerInput))
+    await client.deregister_stream_consumer(_request(DeregisterStreamConsumerInputDict))
+    await client.describe_account_settings()
+    await client.describe_account_settings(**_request(DescribeAccountSettingsInputDict))
+    await client.describe_account_settings(_request(DescribeAccountSettingsInput))
+    await client.describe_account_settings(_request(DescribeAccountSettingsInputDict))
+    await client.describe_channel(channel_arn=_)
+    await client.describe_channel(**_request(DescribeChannelInputDict))
+    await client.describe_channel(_request(DescribeChannelInput))
+    await client.describe_channel(_request(DescribeChannelInputDict))
+    await client.describe_limits()
+    await client.describe_limits(**_request(DescribeLimitsInputDict))
+    await client.describe_limits(_request(DescribeLimitsInput))
+    await client.describe_limits(_request(DescribeLimitsInputDict))
+    await client.describe_stream()
+    await client.describe_stream(**_request(DescribeStreamInputDict))
+    await client.describe_stream(_request(DescribeStreamInput))
+    await client.describe_stream(_request(DescribeStreamInputDict))
+    await client.describe_stream_consumer()
+    await client.describe_stream_consumer(**_request(DescribeStreamConsumerInputDict))
+    await client.describe_stream_consumer(_request(DescribeStreamConsumerInput))
+    await client.describe_stream_consumer(_request(DescribeStreamConsumerInputDict))
+    await client.describe_stream_summary()
+    await client.describe_stream_summary(**_request(DescribeStreamSummaryInputDict))
+    await client.describe_stream_summary(_request(DescribeStreamSummaryInput))
+    await client.describe_stream_summary(_request(DescribeStreamSummaryInputDict))
+    await client.disable_enhanced_monitoring(shard_level_metrics=_)
+    await client.disable_enhanced_monitoring(
+        **_request(DisableEnhancedMonitoringInputDict)
+    )
+    await client.disable_enhanced_monitoring(_request(DisableEnhancedMonitoringInput))
+    await client.disable_enhanced_monitoring(
+        _request(DisableEnhancedMonitoringInputDict)
+    )
+    await client.enable_enhanced_monitoring(shard_level_metrics=_)
+    await client.enable_enhanced_monitoring(
+        **_request(EnableEnhancedMonitoringInputDict)
+    )
+    await client.enable_enhanced_monitoring(_request(EnableEnhancedMonitoringInput))
+    await client.enable_enhanced_monitoring(_request(EnableEnhancedMonitoringInputDict))
+    await client.get_records(shard_iterator=_)
+    await client.get_records(**_request(GetRecordsInputDict))
+    await client.get_records(_request(GetRecordsInput))
+    await client.get_records(_request(GetRecordsInputDict))
+    await client.get_resource_policy(resource_arn=_)
+    await client.get_resource_policy(**_request(GetResourcePolicyInputDict))
+    await client.get_resource_policy(_request(GetResourcePolicyInput))
+    await client.get_resource_policy(_request(GetResourcePolicyInputDict))
+    await client.get_shard_iterator(shard_id=_, shard_iterator_type=_)
+    await client.get_shard_iterator(**_request(GetShardIteratorInputDict))
+    await client.get_shard_iterator(_request(GetShardIteratorInput))
+    await client.get_shard_iterator(_request(GetShardIteratorInputDict))
+    await client.increase_stream_retention_period(retention_period_hours=_)
+    await client.increase_stream_retention_period(
+        **_request(IncreaseStreamRetentionPeriodInputDict)
+    )
+    await client.increase_stream_retention_period(
+        _request(IncreaseStreamRetentionPeriodInput)
+    )
+    await client.increase_stream_retention_period(
+        _request(IncreaseStreamRetentionPeriodInputDict)
+    )
+    await client.list_channels()
+    await client.list_channels(**_request(ListChannelsInputDict))
+    await client.list_channels(_request(ListChannelsInput))
+    await client.list_channels(_request(ListChannelsInputDict))
+    await client.list_shards()
+    await client.list_shards(**_request(ListShardsInputDict))
+    await client.list_shards(_request(ListShardsInput))
+    await client.list_shards(_request(ListShardsInputDict))
+    await client.list_stream_consumers(stream_arn=_)
+    await client.list_stream_consumers(**_request(ListStreamConsumersInputDict))
+    await client.list_stream_consumers(_request(ListStreamConsumersInput))
+    await client.list_stream_consumers(_request(ListStreamConsumersInputDict))
+    await client.list_streams()
+    await client.list_streams(**_request(ListStreamsInputDict))
+    await client.list_streams(_request(ListStreamsInput))
+    await client.list_streams(_request(ListStreamsInputDict))
+    await client.list_tags_for_resource(resource_arn=_)
+    await client.list_tags_for_resource(**_request(ListTagsForResourceInputDict))
+    await client.list_tags_for_resource(_request(ListTagsForResourceInput))
+    await client.list_tags_for_resource(_request(ListTagsForResourceInputDict))
+    await client.list_tags_for_stream()
+    await client.list_tags_for_stream(**_request(ListTagsForStreamInputDict))
+    await client.list_tags_for_stream(_request(ListTagsForStreamInput))
+    await client.list_tags_for_stream(_request(ListTagsForStreamInputDict))
+    await client.merge_shards(shard_to_merge=_, adjacent_shard_to_merge=_)
+    await client.merge_shards(**_request(MergeShardsInputDict))
+    await client.merge_shards(_request(MergeShardsInput))
+    await client.merge_shards(_request(MergeShardsInputDict))
+    await client.put_record(data=_)
+    await client.put_record(**_request(PutRecordInputDict))
+    await client.put_record(_request(PutRecordInput))
+    await client.put_record(_request(PutRecordInputDict))
+    await client.put_records(records=_)
+    await client.put_records(**_request(PutRecordsInputDict))
+    await client.put_records(_request(PutRecordsInput))
+    await client.put_records(_request(PutRecordsInputDict))
+    await client.put_resource_policy(resource_arn=_, policy=_)
+    await client.put_resource_policy(**_request(PutResourcePolicyInputDict))
+    await client.put_resource_policy(_request(PutResourcePolicyInput))
+    await client.put_resource_policy(_request(PutResourcePolicyInputDict))
+    await client.register_stream_consumer(stream_arn=_, consumer_name=_)
+    await client.register_stream_consumer(**_request(RegisterStreamConsumerInputDict))
+    await client.register_stream_consumer(_request(RegisterStreamConsumerInput))
+    await client.register_stream_consumer(_request(RegisterStreamConsumerInputDict))
+    await client.remove_tags_from_stream(tag_keys=_)
+    await client.remove_tags_from_stream(**_request(RemoveTagsFromStreamInputDict))
+    await client.remove_tags_from_stream(_request(RemoveTagsFromStreamInput))
+    await client.remove_tags_from_stream(_request(RemoveTagsFromStreamInputDict))
+    await client.split_shard(shard_to_split=_, new_starting_hash_key=_)
+    await client.split_shard(**_request(SplitShardInputDict))
+    await client.split_shard(_request(SplitShardInput))
+    await client.split_shard(_request(SplitShardInputDict))
+    await client.start_stream_encryption(encryption_type=_, key_id=_)
+    await client.start_stream_encryption(**_request(StartStreamEncryptionInputDict))
+    await client.start_stream_encryption(_request(StartStreamEncryptionInput))
+    await client.start_stream_encryption(_request(StartStreamEncryptionInputDict))
+    await client.stop_stream_encryption(encryption_type=_, key_id=_)
+    await client.stop_stream_encryption(**_request(StopStreamEncryptionInputDict))
+    await client.stop_stream_encryption(_request(StopStreamEncryptionInput))
+    await client.stop_stream_encryption(_request(StopStreamEncryptionInputDict))
+    await client.subscribe_to_shard(consumer_arn=_, shard_id=_, starting_position=_)
+    await client.subscribe_to_shard(**_request(SubscribeToShardInputDict))
+    await client.subscribe_to_shard(_request(SubscribeToShardInput))
+    await client.subscribe_to_shard(_request(SubscribeToShardInputDict))
+    await client.tag_resource(tags=_, resource_arn=_)
+    await client.tag_resource(**_request(TagResourceInputDict))
+    await client.tag_resource(_request(TagResourceInput))
+    await client.tag_resource(_request(TagResourceInputDict))
+    await client.untag_resource(tag_keys=_, resource_arn=_)
+    await client.untag_resource(**_request(UntagResourceInputDict))
+    await client.untag_resource(_request(UntagResourceInput))
+    await client.untag_resource(_request(UntagResourceInputDict))
+    await client.update_account_settings(minimum_throughput_billing_commitment=_)
+    await client.update_account_settings(**_request(UpdateAccountSettingsInputDict))
+    await client.update_account_settings(_request(UpdateAccountSettingsInput))
+    await client.update_account_settings(_request(UpdateAccountSettingsInputDict))
+    await client.update_channel(channel_arn=_)
+    await client.update_channel(**_request(UpdateChannelInputDict))
+    await client.update_channel(_request(UpdateChannelInput))
+    await client.update_channel(_request(UpdateChannelInputDict))
+    await client.update_max_record_size(max_record_size_in_ki_b=_)
+    await client.update_max_record_size(**_request(UpdateMaxRecordSizeInputDict))
+    await client.update_max_record_size(_request(UpdateMaxRecordSizeInput))
+    await client.update_max_record_size(_request(UpdateMaxRecordSizeInputDict))
+    await client.update_shard_count(target_shard_count=_, scaling_type=_)
+    await client.update_shard_count(**_request(UpdateShardCountInputDict))
+    await client.update_shard_count(_request(UpdateShardCountInput))
+    await client.update_shard_count(_request(UpdateShardCountInputDict))
+    await client.update_stream_mode(stream_arn=_, stream_mode_details=_)
+    await client.update_stream_mode(**_request(UpdateStreamModeInputDict))
+    await client.update_stream_mode(_request(UpdateStreamModeInput))
+    await client.update_stream_mode(_request(UpdateStreamModeInputDict))
+    await client.update_stream_record_distribution_strategy(
+        stream_arn=_, record_distribution_strategy=_
+    )
+    await client.update_stream_record_distribution_strategy(
+        **_request(UpdateStreamRecordDistributionStrategyInputDict)
+    )
+    await client.update_stream_record_distribution_strategy(
+        _request(UpdateStreamRecordDistributionStrategyInput)
+    )
+    await client.update_stream_record_distribution_strategy(
+        _request(UpdateStreamRecordDistributionStrategyInputDict)
+    )
+    await client.update_stream_warm_throughput(warm_throughput_mi_bps=_)
+    await client.update_stream_warm_throughput(
+        **_request(UpdateStreamWarmThroughputInputDict)
+    )
+    await client.update_stream_warm_throughput(
+        _request(UpdateStreamWarmThroughputInput)
+    )
+    await client.update_stream_warm_throughput(
+        _request(UpdateStreamWarmThroughputInputDict)
+    )
+
+
+def check_sync_calls(client: KinesisClient) -> None:
+    pass
+    client.add_tags_to_stream(tags=_)
+    client.add_tags_to_stream(**_request(AddTagsToStreamInputDict))
+    client.add_tags_to_stream(_request(AddTagsToStreamInput))
+    client.add_tags_to_stream(_request(AddTagsToStreamInputDict))
+    client.create_channel(
+        channel_name=_, service_execution_role_arn=_, stream_configuration_list=_
+    )
+    client.create_channel(**_request(CreateChannelInputDict))
+    client.create_channel(_request(CreateChannelInput))
+    client.create_channel(_request(CreateChannelInputDict))
+    client.create_stream(stream_name=_)
+    client.create_stream(**_request(CreateStreamInputDict))
+    client.create_stream(_request(CreateStreamInput))
+    client.create_stream(_request(CreateStreamInputDict))
+    client.decrease_stream_retention_period(retention_period_hours=_)
+    client.decrease_stream_retention_period(
+        **_request(DecreaseStreamRetentionPeriodInputDict)
+    )
+    client.decrease_stream_retention_period(
+        _request(DecreaseStreamRetentionPeriodInput)
+    )
+    client.decrease_stream_retention_period(
+        _request(DecreaseStreamRetentionPeriodInputDict)
+    )
+    client.delete_channel(channel_arn=_)
+    client.delete_channel(**_request(DeleteChannelInputDict))
+    client.delete_channel(_request(DeleteChannelInput))
+    client.delete_channel(_request(DeleteChannelInputDict))
+    client.delete_resource_policy(resource_arn=_)
+    client.delete_resource_policy(**_request(DeleteResourcePolicyInputDict))
+    client.delete_resource_policy(_request(DeleteResourcePolicyInput))
+    client.delete_resource_policy(_request(DeleteResourcePolicyInputDict))
+    client.delete_stream()
+    client.delete_stream(**_request(DeleteStreamInputDict))
+    client.delete_stream(_request(DeleteStreamInput))
+    client.delete_stream(_request(DeleteStreamInputDict))
+    client.deregister_stream_consumer()
+    client.deregister_stream_consumer(**_request(DeregisterStreamConsumerInputDict))
+    client.deregister_stream_consumer(_request(DeregisterStreamConsumerInput))
+    client.deregister_stream_consumer(_request(DeregisterStreamConsumerInputDict))
+    client.describe_account_settings()
+    client.describe_account_settings(**_request(DescribeAccountSettingsInputDict))
+    client.describe_account_settings(_request(DescribeAccountSettingsInput))
+    client.describe_account_settings(_request(DescribeAccountSettingsInputDict))
+    client.describe_channel(channel_arn=_)
+    client.describe_channel(**_request(DescribeChannelInputDict))
+    client.describe_channel(_request(DescribeChannelInput))
+    client.describe_channel(_request(DescribeChannelInputDict))
+    client.describe_limits()
+    client.describe_limits(**_request(DescribeLimitsInputDict))
+    client.describe_limits(_request(DescribeLimitsInput))
+    client.describe_limits(_request(DescribeLimitsInputDict))
+    client.describe_stream()
+    client.describe_stream(**_request(DescribeStreamInputDict))
+    client.describe_stream(_request(DescribeStreamInput))
+    client.describe_stream(_request(DescribeStreamInputDict))
+    client.describe_stream_consumer()
+    client.describe_stream_consumer(**_request(DescribeStreamConsumerInputDict))
+    client.describe_stream_consumer(_request(DescribeStreamConsumerInput))
+    client.describe_stream_consumer(_request(DescribeStreamConsumerInputDict))
+    client.describe_stream_summary()
+    client.describe_stream_summary(**_request(DescribeStreamSummaryInputDict))
+    client.describe_stream_summary(_request(DescribeStreamSummaryInput))
+    client.describe_stream_summary(_request(DescribeStreamSummaryInputDict))
+    client.disable_enhanced_monitoring(shard_level_metrics=_)
+    client.disable_enhanced_monitoring(**_request(DisableEnhancedMonitoringInputDict))
+    client.disable_enhanced_monitoring(_request(DisableEnhancedMonitoringInput))
+    client.disable_enhanced_monitoring(_request(DisableEnhancedMonitoringInputDict))
+    client.enable_enhanced_monitoring(shard_level_metrics=_)
+    client.enable_enhanced_monitoring(**_request(EnableEnhancedMonitoringInputDict))
+    client.enable_enhanced_monitoring(_request(EnableEnhancedMonitoringInput))
+    client.enable_enhanced_monitoring(_request(EnableEnhancedMonitoringInputDict))
+    client.get_records(shard_iterator=_)
+    client.get_records(**_request(GetRecordsInputDict))
+    client.get_records(_request(GetRecordsInput))
+    client.get_records(_request(GetRecordsInputDict))
+    client.get_resource_policy(resource_arn=_)
+    client.get_resource_policy(**_request(GetResourcePolicyInputDict))
+    client.get_resource_policy(_request(GetResourcePolicyInput))
+    client.get_resource_policy(_request(GetResourcePolicyInputDict))
+    client.get_shard_iterator(shard_id=_, shard_iterator_type=_)
+    client.get_shard_iterator(**_request(GetShardIteratorInputDict))
+    client.get_shard_iterator(_request(GetShardIteratorInput))
+    client.get_shard_iterator(_request(GetShardIteratorInputDict))
+    client.increase_stream_retention_period(retention_period_hours=_)
+    client.increase_stream_retention_period(
+        **_request(IncreaseStreamRetentionPeriodInputDict)
+    )
+    client.increase_stream_retention_period(
+        _request(IncreaseStreamRetentionPeriodInput)
+    )
+    client.increase_stream_retention_period(
+        _request(IncreaseStreamRetentionPeriodInputDict)
+    )
+    client.list_channels()
+    client.list_channels(**_request(ListChannelsInputDict))
+    client.list_channels(_request(ListChannelsInput))
+    client.list_channels(_request(ListChannelsInputDict))
+    client.list_shards()
+    client.list_shards(**_request(ListShardsInputDict))
+    client.list_shards(_request(ListShardsInput))
+    client.list_shards(_request(ListShardsInputDict))
+    client.list_stream_consumers(stream_arn=_)
+    client.list_stream_consumers(**_request(ListStreamConsumersInputDict))
+    client.list_stream_consumers(_request(ListStreamConsumersInput))
+    client.list_stream_consumers(_request(ListStreamConsumersInputDict))
+    client.list_streams()
+    client.list_streams(**_request(ListStreamsInputDict))
+    client.list_streams(_request(ListStreamsInput))
+    client.list_streams(_request(ListStreamsInputDict))
+    client.list_tags_for_resource(resource_arn=_)
+    client.list_tags_for_resource(**_request(ListTagsForResourceInputDict))
+    client.list_tags_for_resource(_request(ListTagsForResourceInput))
+    client.list_tags_for_resource(_request(ListTagsForResourceInputDict))
+    client.list_tags_for_stream()
+    client.list_tags_for_stream(**_request(ListTagsForStreamInputDict))
+    client.list_tags_for_stream(_request(ListTagsForStreamInput))
+    client.list_tags_for_stream(_request(ListTagsForStreamInputDict))
+    client.merge_shards(shard_to_merge=_, adjacent_shard_to_merge=_)
+    client.merge_shards(**_request(MergeShardsInputDict))
+    client.merge_shards(_request(MergeShardsInput))
+    client.merge_shards(_request(MergeShardsInputDict))
+    client.put_record(data=_)
+    client.put_record(**_request(PutRecordInputDict))
+    client.put_record(_request(PutRecordInput))
+    client.put_record(_request(PutRecordInputDict))
+    client.put_records(records=_)
+    client.put_records(**_request(PutRecordsInputDict))
+    client.put_records(_request(PutRecordsInput))
+    client.put_records(_request(PutRecordsInputDict))
+    client.put_resource_policy(resource_arn=_, policy=_)
+    client.put_resource_policy(**_request(PutResourcePolicyInputDict))
+    client.put_resource_policy(_request(PutResourcePolicyInput))
+    client.put_resource_policy(_request(PutResourcePolicyInputDict))
+    client.register_stream_consumer(stream_arn=_, consumer_name=_)
+    client.register_stream_consumer(**_request(RegisterStreamConsumerInputDict))
+    client.register_stream_consumer(_request(RegisterStreamConsumerInput))
+    client.register_stream_consumer(_request(RegisterStreamConsumerInputDict))
+    client.remove_tags_from_stream(tag_keys=_)
+    client.remove_tags_from_stream(**_request(RemoveTagsFromStreamInputDict))
+    client.remove_tags_from_stream(_request(RemoveTagsFromStreamInput))
+    client.remove_tags_from_stream(_request(RemoveTagsFromStreamInputDict))
+    client.split_shard(shard_to_split=_, new_starting_hash_key=_)
+    client.split_shard(**_request(SplitShardInputDict))
+    client.split_shard(_request(SplitShardInput))
+    client.split_shard(_request(SplitShardInputDict))
+    client.start_stream_encryption(encryption_type=_, key_id=_)
+    client.start_stream_encryption(**_request(StartStreamEncryptionInputDict))
+    client.start_stream_encryption(_request(StartStreamEncryptionInput))
+    client.start_stream_encryption(_request(StartStreamEncryptionInputDict))
+    client.stop_stream_encryption(encryption_type=_, key_id=_)
+    client.stop_stream_encryption(**_request(StopStreamEncryptionInputDict))
+    client.stop_stream_encryption(_request(StopStreamEncryptionInput))
+    client.stop_stream_encryption(_request(StopStreamEncryptionInputDict))
+    client.tag_resource(tags=_, resource_arn=_)
+    client.tag_resource(**_request(TagResourceInputDict))
+    client.tag_resource(_request(TagResourceInput))
+    client.tag_resource(_request(TagResourceInputDict))
+    client.untag_resource(tag_keys=_, resource_arn=_)
+    client.untag_resource(**_request(UntagResourceInputDict))
+    client.untag_resource(_request(UntagResourceInput))
+    client.untag_resource(_request(UntagResourceInputDict))
+    client.update_account_settings(minimum_throughput_billing_commitment=_)
+    client.update_account_settings(**_request(UpdateAccountSettingsInputDict))
+    client.update_account_settings(_request(UpdateAccountSettingsInput))
+    client.update_account_settings(_request(UpdateAccountSettingsInputDict))
+    client.update_channel(channel_arn=_)
+    client.update_channel(**_request(UpdateChannelInputDict))
+    client.update_channel(_request(UpdateChannelInput))
+    client.update_channel(_request(UpdateChannelInputDict))
+    client.update_max_record_size(max_record_size_in_ki_b=_)
+    client.update_max_record_size(**_request(UpdateMaxRecordSizeInputDict))
+    client.update_max_record_size(_request(UpdateMaxRecordSizeInput))
+    client.update_max_record_size(_request(UpdateMaxRecordSizeInputDict))
+    client.update_shard_count(target_shard_count=_, scaling_type=_)
+    client.update_shard_count(**_request(UpdateShardCountInputDict))
+    client.update_shard_count(_request(UpdateShardCountInput))
+    client.update_shard_count(_request(UpdateShardCountInputDict))
+    client.update_stream_mode(stream_arn=_, stream_mode_details=_)
+    client.update_stream_mode(**_request(UpdateStreamModeInputDict))
+    client.update_stream_mode(_request(UpdateStreamModeInput))
+    client.update_stream_mode(_request(UpdateStreamModeInputDict))
+    client.update_stream_record_distribution_strategy(
+        stream_arn=_, record_distribution_strategy=_
+    )
+    client.update_stream_record_distribution_strategy(
+        **_request(UpdateStreamRecordDistributionStrategyInputDict)
+    )
+    client.update_stream_record_distribution_strategy(
+        _request(UpdateStreamRecordDistributionStrategyInput)
+    )
+    client.update_stream_record_distribution_strategy(
+        _request(UpdateStreamRecordDistributionStrategyInputDict)
+    )
+    client.update_stream_warm_throughput(warm_throughput_mi_bps=_)
+    client.update_stream_warm_throughput(
+        **_request(UpdateStreamWarmThroughputInputDict)
+    )
+    client.update_stream_warm_throughput(_request(UpdateStreamWarmThroughputInput))
+    client.update_stream_warm_throughput(_request(UpdateStreamWarmThroughputInputDict))

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import cast
+from typing import Unpack as _Unpack, cast, overload as _overload
 
 from smithy_aws_core.config.types import ConfigSource
 from smithy_aws_core.identity.chain.resolver import IdentityChain
@@ -20,341 +20,173 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from .models import (
-        AddRoleToDBClusterInput,
         AddRoleToDBClusterOutput,
-        AddRoleToDBInstanceInput,
         AddRoleToDBInstanceOutput,
-        AddSourceIdentifierToSubscriptionInput,
         AddSourceIdentifierToSubscriptionOutput,
-        AddTagsToResourceInput,
         AddTagsToResourceOutput,
-        ApplyPendingMaintenanceActionInput,
         ApplyPendingMaintenanceActionOutput,
-        AuthorizeDBSecurityGroupIngressInput,
         AuthorizeDBSecurityGroupIngressOutput,
-        BacktrackDBClusterInput,
         BacktrackDBClusterOutput,
-        CancelDBCapacityReservationInput,
         CancelDBCapacityReservationOutput,
-        CancelExportTaskInput,
         CancelExportTaskOutput,
-        CopyDBClusterParameterGroupInput,
         CopyDBClusterParameterGroupOutput,
-        CopyDBClusterSnapshotInput,
         CopyDBClusterSnapshotOutput,
-        CopyDBParameterGroupInput,
         CopyDBParameterGroupOutput,
-        CopyDBSnapshotInput,
         CopyDBSnapshotOutput,
-        CopyOptionGroupInput,
         CopyOptionGroupOutput,
-        CreateBlueGreenDeploymentInput,
         CreateBlueGreenDeploymentOutput,
-        CreateCustomDBEngineVersionInput,
         CreateCustomDBEngineVersionOutput,
-        CreateDBCapacityReservationInput,
         CreateDBCapacityReservationOutput,
-        CreateDBClusterEndpointInput,
         CreateDBClusterEndpointOutput,
-        CreateDBClusterInput,
         CreateDBClusterOutput,
-        CreateDBClusterParameterGroupInput,
         CreateDBClusterParameterGroupOutput,
-        CreateDBClusterSnapshotInput,
         CreateDBClusterSnapshotOutput,
-        CreateDBInstanceInput,
         CreateDBInstanceOutput,
-        CreateDBInstanceReadReplicaInput,
         CreateDBInstanceReadReplicaOutput,
-        CreateDBParameterGroupInput,
         CreateDBParameterGroupOutput,
-        CreateDBProxyEndpointInput,
         CreateDBProxyEndpointOutput,
-        CreateDBProxyInput,
         CreateDBProxyOutput,
-        CreateDBSecurityGroupInput,
         CreateDBSecurityGroupOutput,
-        CreateDBShardGroupInput,
         CreateDBShardGroupOutput,
-        CreateDBSnapshotInput,
         CreateDBSnapshotOutput,
-        CreateDBSubnetGroupInput,
         CreateDBSubnetGroupOutput,
-        CreateEventSubscriptionInput,
         CreateEventSubscriptionOutput,
-        CreateGlobalClusterInput,
         CreateGlobalClusterOutput,
-        CreateIntegrationInput,
         CreateIntegrationOutput,
-        CreateOptionGroupInput,
         CreateOptionGroupOutput,
-        CreateTenantDatabaseInput,
         CreateTenantDatabaseOutput,
-        DeleteBlueGreenDeploymentInput,
         DeleteBlueGreenDeploymentOutput,
-        DeleteCustomDBEngineVersionInput,
         DeleteCustomDBEngineVersionOutput,
-        DeleteDBClusterAutomatedBackupInput,
         DeleteDBClusterAutomatedBackupOutput,
-        DeleteDBClusterEndpointInput,
         DeleteDBClusterEndpointOutput,
-        DeleteDBClusterInput,
         DeleteDBClusterOutput,
-        DeleteDBClusterParameterGroupInput,
         DeleteDBClusterParameterGroupOutput,
-        DeleteDBClusterSnapshotInput,
         DeleteDBClusterSnapshotOutput,
-        DeleteDBInstanceAutomatedBackupInput,
         DeleteDBInstanceAutomatedBackupOutput,
-        DeleteDBInstanceInput,
         DeleteDBInstanceOutput,
-        DeleteDBParameterGroupInput,
         DeleteDBParameterGroupOutput,
-        DeleteDBProxyEndpointInput,
         DeleteDBProxyEndpointOutput,
-        DeleteDBProxyInput,
         DeleteDBProxyOutput,
-        DeleteDBSecurityGroupInput,
         DeleteDBSecurityGroupOutput,
-        DeleteDBShardGroupInput,
         DeleteDBShardGroupOutput,
-        DeleteDBSnapshotInput,
         DeleteDBSnapshotOutput,
-        DeleteDBSubnetGroupInput,
         DeleteDBSubnetGroupOutput,
-        DeleteEventSubscriptionInput,
         DeleteEventSubscriptionOutput,
-        DeleteGlobalClusterInput,
         DeleteGlobalClusterOutput,
-        DeleteIntegrationInput,
         DeleteIntegrationOutput,
-        DeleteOptionGroupInput,
         DeleteOptionGroupOutput,
-        DeleteTenantDatabaseInput,
         DeleteTenantDatabaseOutput,
-        DeregisterDBProxyTargetsInput,
         DeregisterDBProxyTargetsOutput,
-        DescribeAccountAttributesInput,
         DescribeAccountAttributesOutput,
-        DescribeBlueGreenDeploymentsInput,
         DescribeBlueGreenDeploymentsOutput,
-        DescribeCertificatesInput,
         DescribeCertificatesOutput,
-        DescribeDBCapacityReservationsInput,
         DescribeDBCapacityReservationsOutput,
-        DescribeDBClusterAutomatedBackupsInput,
         DescribeDBClusterAutomatedBackupsOutput,
-        DescribeDBClusterBacktracksInput,
         DescribeDBClusterBacktracksOutput,
-        DescribeDBClusterEndpointsInput,
         DescribeDBClusterEndpointsOutput,
-        DescribeDBClusterParameterGroupsInput,
         DescribeDBClusterParameterGroupsOutput,
-        DescribeDBClusterParametersInput,
         DescribeDBClusterParametersOutput,
-        DescribeDBClusterSnapshotAttributesInput,
         DescribeDBClusterSnapshotAttributesOutput,
-        DescribeDBClusterSnapshotsInput,
         DescribeDBClusterSnapshotsOutput,
-        DescribeDBClustersInput,
         DescribeDBClustersOutput,
-        DescribeDBEngineVersionsInput,
         DescribeDBEngineVersionsOutput,
-        DescribeDBInstanceAutomatedBackupsInput,
         DescribeDBInstanceAutomatedBackupsOutput,
-        DescribeDBInstancesInput,
         DescribeDBInstancesOutput,
-        DescribeDBLogFilesInput,
         DescribeDBLogFilesOutput,
-        DescribeDBMajorEngineVersionsInput,
         DescribeDBMajorEngineVersionsOutput,
-        DescribeDBParameterGroupsInput,
         DescribeDBParameterGroupsOutput,
-        DescribeDBParametersInput,
         DescribeDBParametersOutput,
-        DescribeDBProxiesInput,
         DescribeDBProxiesOutput,
-        DescribeDBProxyEndpointsInput,
         DescribeDBProxyEndpointsOutput,
-        DescribeDBProxyTargetGroupsInput,
         DescribeDBProxyTargetGroupsOutput,
-        DescribeDBProxyTargetsInput,
         DescribeDBProxyTargetsOutput,
-        DescribeDBRecommendationsInput,
         DescribeDBRecommendationsOutput,
-        DescribeDBSecurityGroupsInput,
         DescribeDBSecurityGroupsOutput,
-        DescribeDBShardGroupsInput,
         DescribeDBShardGroupsOutput,
-        DescribeDBSnapshotAttributesInput,
         DescribeDBSnapshotAttributesOutput,
-        DescribeDBSnapshotTenantDatabasesInput,
         DescribeDBSnapshotTenantDatabasesOutput,
-        DescribeDBSnapshotsInput,
         DescribeDBSnapshotsOutput,
-        DescribeDBSubnetGroupsInput,
         DescribeDBSubnetGroupsOutput,
-        DescribeEngineDefaultClusterParametersInput,
         DescribeEngineDefaultClusterParametersOutput,
-        DescribeEngineDefaultParametersInput,
         DescribeEngineDefaultParametersOutput,
-        DescribeEventCategoriesInput,
         DescribeEventCategoriesOutput,
-        DescribeEventSubscriptionsInput,
         DescribeEventSubscriptionsOutput,
-        DescribeEventsInput,
         DescribeEventsOutput,
-        DescribeExportTasksInput,
         DescribeExportTasksOutput,
-        DescribeGlobalClustersInput,
         DescribeGlobalClustersOutput,
-        DescribeIntegrationsInput,
         DescribeIntegrationsOutput,
-        DescribeOptionGroupOptionsInput,
         DescribeOptionGroupOptionsOutput,
-        DescribeOptionGroupsInput,
         DescribeOptionGroupsOutput,
-        DescribeOrderableDBInstanceOptionsInput,
         DescribeOrderableDBInstanceOptionsOutput,
-        DescribePendingMaintenanceActionsInput,
         DescribePendingMaintenanceActionsOutput,
-        DescribeReservedDBInstancesInput,
-        DescribeReservedDBInstancesOfferingsInput,
         DescribeReservedDBInstancesOfferingsOutput,
         DescribeReservedDBInstancesOutput,
-        DescribeServerlessV2PlatformVersionsInput,
         DescribeServerlessV2PlatformVersionsOutput,
-        DescribeSourceRegionsInput,
         DescribeSourceRegionsOutput,
-        DescribeTenantDatabasesInput,
         DescribeTenantDatabasesOutput,
-        DescribeValidDBInstanceModificationsInput,
         DescribeValidDBInstanceModificationsOutput,
-        DisableHttpEndpointInput,
         DisableHttpEndpointOutput,
-        DownloadDBLogFilePortionInput,
         DownloadDBLogFilePortionOutput,
-        EnableHttpEndpointInput,
         EnableHttpEndpointOutput,
-        FailoverDBClusterInput,
         FailoverDBClusterOutput,
-        FailoverGlobalClusterInput,
         FailoverGlobalClusterOutput,
-        ListTagsForResourceInput,
         ListTagsForResourceOutput,
-        ModifyActivityStreamInput,
         ModifyActivityStreamOutput,
-        ModifyCertificatesInput,
         ModifyCertificatesOutput,
-        ModifyCurrentDBClusterCapacityInput,
         ModifyCurrentDBClusterCapacityOutput,
-        ModifyCustomDBEngineVersionInput,
         ModifyCustomDBEngineVersionOutput,
-        ModifyDBCapacityReservationInput,
         ModifyDBCapacityReservationOutput,
-        ModifyDBClusterEndpointInput,
         ModifyDBClusterEndpointOutput,
-        ModifyDBClusterInput,
         ModifyDBClusterOutput,
-        ModifyDBClusterParameterGroupInput,
         ModifyDBClusterParameterGroupOutput,
-        ModifyDBClusterSnapshotAttributeInput,
         ModifyDBClusterSnapshotAttributeOutput,
-        ModifyDBInstanceInput,
         ModifyDBInstanceOutput,
-        ModifyDBParameterGroupInput,
         ModifyDBParameterGroupOutput,
-        ModifyDBProxyEndpointInput,
         ModifyDBProxyEndpointOutput,
-        ModifyDBProxyInput,
         ModifyDBProxyOutput,
-        ModifyDBProxyTargetGroupInput,
         ModifyDBProxyTargetGroupOutput,
-        ModifyDBRecommendationInput,
         ModifyDBRecommendationOutput,
-        ModifyDBShardGroupInput,
         ModifyDBShardGroupOutput,
-        ModifyDBSnapshotAttributeInput,
         ModifyDBSnapshotAttributeOutput,
-        ModifyDBSnapshotInput,
         ModifyDBSnapshotOutput,
-        ModifyDBSubnetGroupInput,
         ModifyDBSubnetGroupOutput,
-        ModifyEventSubscriptionInput,
         ModifyEventSubscriptionOutput,
-        ModifyGlobalClusterInput,
         ModifyGlobalClusterOutput,
-        ModifyIntegrationInput,
         ModifyIntegrationOutput,
-        ModifyOptionGroupInput,
         ModifyOptionGroupOutput,
-        ModifyTenantDatabaseInput,
         ModifyTenantDatabaseOutput,
-        PromoteReadReplicaDBClusterInput,
         PromoteReadReplicaDBClusterOutput,
-        PromoteReadReplicaInput,
         PromoteReadReplicaOutput,
-        PurchaseReservedDBInstancesOfferingInput,
         PurchaseReservedDBInstancesOfferingOutput,
-        RebootDBClusterInput,
         RebootDBClusterOutput,
-        RebootDBInstanceInput,
         RebootDBInstanceOutput,
-        RebootDBShardGroupInput,
         RebootDBShardGroupOutput,
-        RegisterDBProxyTargetsInput,
         RegisterDBProxyTargetsOutput,
-        RemoveFromGlobalClusterInput,
         RemoveFromGlobalClusterOutput,
-        RemoveRoleFromDBClusterInput,
         RemoveRoleFromDBClusterOutput,
-        RemoveRoleFromDBInstanceInput,
         RemoveRoleFromDBInstanceOutput,
-        RemoveSourceIdentifierFromSubscriptionInput,
         RemoveSourceIdentifierFromSubscriptionOutput,
-        RemoveTagsFromResourceInput,
         RemoveTagsFromResourceOutput,
-        ResetDBClusterParameterGroupInput,
         ResetDBClusterParameterGroupOutput,
-        ResetDBParameterGroupInput,
         ResetDBParameterGroupOutput,
-        RestoreDBClusterFromS3Input,
         RestoreDBClusterFromS3Output,
-        RestoreDBClusterFromSnapshotInput,
         RestoreDBClusterFromSnapshotOutput,
-        RestoreDBClusterToPointInTimeInput,
         RestoreDBClusterToPointInTimeOutput,
-        RestoreDBInstanceFromDBSnapshotInput,
         RestoreDBInstanceFromDBSnapshotOutput,
-        RestoreDBInstanceFromS3Input,
         RestoreDBInstanceFromS3Output,
-        RestoreDBInstanceToPointInTimeInput,
         RestoreDBInstanceToPointInTimeOutput,
-        RevokeDBSecurityGroupIngressInput,
         RevokeDBSecurityGroupIngressOutput,
-        StartActivityStreamInput,
         StartActivityStreamOutput,
-        StartDBClusterInput,
         StartDBClusterOutput,
-        StartDBInstanceAutomatedBackupsReplicationInput,
         StartDBInstanceAutomatedBackupsReplicationOutput,
-        StartDBInstanceInput,
         StartDBInstanceOutput,
-        StartExportTaskInput,
         StartExportTaskOutput,
-        StopActivityStreamInput,
         StopActivityStreamOutput,
-        StopDBClusterInput,
         StopDBClusterOutput,
-        StopDBInstanceAutomatedBackupsReplicationInput,
         StopDBInstanceAutomatedBackupsReplicationOutput,
-        StopDBInstanceInput,
         StopDBInstanceOutput,
-        SwitchoverBlueGreenDeploymentInput,
         SwitchoverBlueGreenDeploymentOutput,
-        SwitchoverGlobalClusterInput,
         SwitchoverGlobalClusterOutput,
-        SwitchoverReadReplicaInput,
         SwitchoverReadReplicaOutput,
     )
 
@@ -416,18 +248,30 @@ class RDSClient(Client[RDSConfig]):
       API](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Using_the_Query_API.html).
     """
 
-    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
+    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
 
+    @_overload
     def add_role_to_db_cluster(
-        self, input: AddRoleToDBClusterInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.AddRoleToDBClusterInput | _models.AddRoleToDBClusterInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AddRoleToDBClusterOutput: ...
+
+    @_overload
+    def add_role_to_db_cluster(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AddRoleToDBClusterInputDict],
     ) -> AddRoleToDBClusterOutput:
         """
         Associates an Identity and Access Management (IAM) role with a DB
         cluster.
 
         Args:
-            input:
-                An instance of `AddRoleToDBClusterInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -437,10 +281,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `AddRoleToDBClusterOutput`.
         """
-        return self._invoke(input, _models.ADD_ROLE_TO_DB_CLUSTER, [], plugins)
 
+    def add_role_to_db_cluster(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AddRoleToDBClusterOutput:
+        return self._invoke(
+            self._select_input(_models.ADD_ROLE_TO_DB_CLUSTER, args, kwargs),
+            _models.ADD_ROLE_TO_DB_CLUSTER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def add_role_to_db_instance(
-        self, input: AddRoleToDBInstanceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.AddRoleToDBInstanceInput
+        | _models.AddRoleToDBInstanceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AddRoleToDBInstanceOutput: ...
+
+    @_overload
+    def add_role_to_db_instance(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AddRoleToDBInstanceInputDict],
     ) -> AddRoleToDBInstanceOutput:
         """
         Associates an Amazon Web Services Identity and Access Management (IAM)
@@ -453,8 +321,6 @@ class RDSClient(Client[RDSConfig]):
         This command doesn't apply to RDS Custom.
 
         Args:
-            input:
-                An instance of `AddRoleToDBInstanceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -464,20 +330,40 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `AddRoleToDBInstanceOutput`.
         """
-        return self._invoke(input, _models.ADD_ROLE_TO_DB_INSTANCE, [], plugins)
 
+    def add_role_to_db_instance(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AddRoleToDBInstanceOutput:
+        return self._invoke(
+            self._select_input(_models.ADD_ROLE_TO_DB_INSTANCE, args, kwargs),
+            _models.ADD_ROLE_TO_DB_INSTANCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def add_source_identifier_to_subscription(
         self,
-        input: AddSourceIdentifierToSubscriptionInput,
+        request: _models.AddSourceIdentifierToSubscriptionInput
+        | _models.AddSourceIdentifierToSubscriptionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> AddSourceIdentifierToSubscriptionOutput: ...
+
+    @_overload
+    def add_source_identifier_to_subscription(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AddSourceIdentifierToSubscriptionInputDict],
     ) -> AddSourceIdentifierToSubscriptionOutput:
         """
         Adds a source identifier to an existing RDS event notification
         subscription.
 
         Args:
-            input:
-                An instance of `AddSourceIdentifierToSubscriptionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -487,12 +373,35 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `AddSourceIdentifierToSubscriptionOutput`.
         """
+
+    def add_source_identifier_to_subscription(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AddSourceIdentifierToSubscriptionOutput:
         return self._invoke(
-            input, _models.ADD_SOURCE_IDENTIFIER_TO_SUBSCRIPTION, [], plugins
+            self._select_input(
+                _models.ADD_SOURCE_IDENTIFIER_TO_SUBSCRIPTION, args, kwargs
+            ),
+            _models.ADD_SOURCE_IDENTIFIER_TO_SUBSCRIPTION,
+            [],
+            plugins,
         )
 
+    @_overload
     def add_tags_to_resource(
-        self, input: AddTagsToResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.AddTagsToResourceInput | _models.AddTagsToResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AddTagsToResourceOutput: ...
+
+    @_overload
+    def add_tags_to_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AddTagsToResourceInputDict],
     ) -> AddTagsToResourceOutput:
         """
         Adds metadata tags to an Amazon RDS resource. These tags can also be
@@ -507,8 +416,6 @@ class RDSClient(Client[RDSConfig]):
         Resources](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html).
 
         Args:
-            input:
-                An instance of `AddTagsToResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -518,20 +425,40 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `AddTagsToResourceOutput`.
         """
-        return self._invoke(input, _models.ADD_TAGS_TO_RESOURCE, [], plugins)
 
+    def add_tags_to_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AddTagsToResourceOutput:
+        return self._invoke(
+            self._select_input(_models.ADD_TAGS_TO_RESOURCE, args, kwargs),
+            _models.ADD_TAGS_TO_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def apply_pending_maintenance_action(
         self,
-        input: ApplyPendingMaintenanceActionInput,
+        request: _models.ApplyPendingMaintenanceActionInput
+        | _models.ApplyPendingMaintenanceActionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ApplyPendingMaintenanceActionOutput: ...
+
+    @_overload
+    def apply_pending_maintenance_action(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ApplyPendingMaintenanceActionInputDict],
     ) -> ApplyPendingMaintenanceActionOutput:
         """
         Applies a pending maintenance action to a resource (for example, to a DB
         instance).
 
         Args:
-            input:
-                An instance of `ApplyPendingMaintenanceActionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -541,14 +468,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `ApplyPendingMaintenanceActionOutput`.
         """
+
+    def apply_pending_maintenance_action(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ApplyPendingMaintenanceActionOutput:
         return self._invoke(
-            input, _models.APPLY_PENDING_MAINTENANCE_ACTION, [], plugins
+            self._select_input(_models.APPLY_PENDING_MAINTENANCE_ACTION, args, kwargs),
+            _models.APPLY_PENDING_MAINTENANCE_ACTION,
+            [],
+            plugins,
         )
 
+    @_overload
     def authorize_db_security_group_ingress(
         self,
-        input: AuthorizeDBSecurityGroupIngressInput,
+        request: _models.AuthorizeDBSecurityGroupIngressInput
+        | _models.AuthorizeDBSecurityGroupIngressInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> AuthorizeDBSecurityGroupIngressOutput: ...
+
+    @_overload
+    def authorize_db_security_group_ingress(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AuthorizeDBSecurityGroupIngressInputDict],
     ) -> AuthorizeDBSecurityGroupIngressOutput:
         """
         Enables ingress to a DBSecurityGroup using one of two forms of
@@ -581,8 +528,6 @@ class RDSClient(Client[RDSConfig]):
             in the *Amazon RDS User Guide*.
 
         Args:
-            input:
-                An instance of `AuthorizeDBSecurityGroupIngressInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -592,12 +537,35 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `AuthorizeDBSecurityGroupIngressOutput`.
         """
+
+    def authorize_db_security_group_ingress(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AuthorizeDBSecurityGroupIngressOutput:
         return self._invoke(
-            input, _models.AUTHORIZE_DB_SECURITY_GROUP_INGRESS, [], plugins
+            self._select_input(
+                _models.AUTHORIZE_DB_SECURITY_GROUP_INGRESS, args, kwargs
+            ),
+            _models.AUTHORIZE_DB_SECURITY_GROUP_INGRESS,
+            [],
+            plugins,
         )
 
+    @_overload
     def backtrack_db_cluster(
-        self, input: BacktrackDBClusterInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.BacktrackDBClusterInput | _models.BacktrackDBClusterInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> BacktrackDBClusterOutput: ...
+
+    @_overload
+    def backtrack_db_cluster(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.BacktrackDBClusterInputDict],
     ) -> BacktrackDBClusterOutput:
         """
         Backtracks a DB cluster to a specific time, without creating a new DB
@@ -611,8 +579,6 @@ class RDSClient(Client[RDSConfig]):
             This action applies only to Aurora MySQL DB clusters.
 
         Args:
-            input:
-                An instance of `BacktrackDBClusterInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -622,12 +588,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `BacktrackDBClusterOutput`.
         """
-        return self._invoke(input, _models.BACKTRACK_DB_CLUSTER, [], plugins)
 
+    def backtrack_db_cluster(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> BacktrackDBClusterOutput:
+        return self._invoke(
+            self._select_input(_models.BACKTRACK_DB_CLUSTER, args, kwargs),
+            _models.BACKTRACK_DB_CLUSTER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def cancel_db_capacity_reservation(
         self,
-        input: CancelDBCapacityReservationInput,
+        request: _models.CancelDBCapacityReservationInput
+        | _models.CancelDBCapacityReservationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CancelDBCapacityReservationOutput: ...
+
+    @_overload
+    def cancel_db_capacity_reservation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CancelDBCapacityReservationInputDict],
     ) -> CancelDBCapacityReservationOutput:
         """
         Cancels a DB capacity reservation. Amazon RDS changes the state of the
@@ -653,8 +641,6 @@ class RDSClient(Client[RDSConfig]):
         - The reservation must not be past its end date.
 
         Args:
-            input:
-                An instance of `CancelDBCapacityReservationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -664,10 +650,33 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `CancelDBCapacityReservationOutput`.
         """
-        return self._invoke(input, _models.CANCEL_DB_CAPACITY_RESERVATION, [], plugins)
 
+    def cancel_db_capacity_reservation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CancelDBCapacityReservationOutput:
+        return self._invoke(
+            self._select_input(_models.CANCEL_DB_CAPACITY_RESERVATION, args, kwargs),
+            _models.CANCEL_DB_CAPACITY_RESERVATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def cancel_export_task(
-        self, input: CancelExportTaskInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CancelExportTaskInput | _models.CancelExportTaskInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CancelExportTaskOutput: ...
+
+    @_overload
+    def cancel_export_task(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CancelExportTaskInputDict],
     ) -> CancelExportTaskOutput:
         """
         Cancels an export task in progress that is exporting a snapshot or
@@ -675,8 +684,6 @@ class RDSClient(Client[RDSConfig]):
         bucket isn't removed.
 
         Args:
-            input:
-                An instance of `CancelExportTaskInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -686,12 +693,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `CancelExportTaskOutput`.
         """
-        return self._invoke(input, _models.CANCEL_EXPORT_TASK, [], plugins)
 
+    def cancel_export_task(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CancelExportTaskOutput:
+        return self._invoke(
+            self._select_input(_models.CANCEL_EXPORT_TASK, args, kwargs),
+            _models.CANCEL_EXPORT_TASK,
+            [],
+            plugins,
+        )
+
+    @_overload
     def copy_db_cluster_parameter_group(
         self,
-        input: CopyDBClusterParameterGroupInput,
+        request: _models.CopyDBClusterParameterGroupInput
+        | _models.CopyDBClusterParameterGroupInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CopyDBClusterParameterGroupOutput: ...
+
+    @_overload
+    def copy_db_cluster_parameter_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CopyDBClusterParameterGroupInputDict],
     ) -> CopyDBClusterParameterGroupOutput:
         """
         Copies the specified DB cluster parameter group.
@@ -703,8 +732,6 @@ class RDSClient(Client[RDSConfig]):
             family.
 
         Args:
-            input:
-                An instance of `CopyDBClusterParameterGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -714,10 +741,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `CopyDBClusterParameterGroupOutput`.
         """
-        return self._invoke(input, _models.COPY_DB_CLUSTER_PARAMETER_GROUP, [], plugins)
 
+    def copy_db_cluster_parameter_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CopyDBClusterParameterGroupOutput:
+        return self._invoke(
+            self._select_input(_models.COPY_DB_CLUSTER_PARAMETER_GROUP, args, kwargs),
+            _models.COPY_DB_CLUSTER_PARAMETER_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def copy_db_cluster_snapshot(
-        self, input: CopyDBClusterSnapshotInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CopyDBClusterSnapshotInput
+        | _models.CopyDBClusterSnapshotInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CopyDBClusterSnapshotOutput: ...
+
+    @_overload
+    def copy_db_cluster_snapshot(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CopyDBClusterSnapshotInputDict],
     ) -> CopyDBClusterSnapshotOutput:
         """
         Copies a snapshot of a DB cluster.
@@ -765,8 +816,6 @@ class RDSClient(Client[RDSConfig]):
         in the *Amazon RDS User Guide*.
 
         Args:
-            input:
-                An instance of `CopyDBClusterSnapshotInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -776,10 +825,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `CopyDBClusterSnapshotOutput`.
         """
-        return self._invoke(input, _models.COPY_DB_CLUSTER_SNAPSHOT, [], plugins)
 
+    def copy_db_cluster_snapshot(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CopyDBClusterSnapshotOutput:
+        return self._invoke(
+            self._select_input(_models.COPY_DB_CLUSTER_SNAPSHOT, args, kwargs),
+            _models.COPY_DB_CLUSTER_SNAPSHOT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def copy_db_parameter_group(
-        self, input: CopyDBParameterGroupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CopyDBParameterGroupInput
+        | _models.CopyDBParameterGroupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CopyDBParameterGroupOutput: ...
+
+    @_overload
+    def copy_db_parameter_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CopyDBParameterGroupInputDict],
     ) -> CopyDBParameterGroupOutput:
         """
         Copies the specified DB parameter group.
@@ -790,8 +863,6 @@ class RDSClient(Client[RDSConfig]):
             values for the specified DB parameter group family.
 
         Args:
-            input:
-                An instance of `CopyDBParameterGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -801,10 +872,33 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `CopyDBParameterGroupOutput`.
         """
-        return self._invoke(input, _models.COPY_DB_PARAMETER_GROUP, [], plugins)
 
+    def copy_db_parameter_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CopyDBParameterGroupOutput:
+        return self._invoke(
+            self._select_input(_models.COPY_DB_PARAMETER_GROUP, args, kwargs),
+            _models.COPY_DB_PARAMETER_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def copy_db_snapshot(
-        self, input: CopyDBSnapshotInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CopyDBSnapshotInput | _models.CopyDBSnapshotInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CopyDBSnapshotOutput: ...
+
+    @_overload
+    def copy_db_snapshot(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CopyDBSnapshotInputDict],
     ) -> CopyDBSnapshotOutput:
         """
         Copies the specified DB snapshot. The source DB snapshot must be in the
@@ -822,8 +916,6 @@ class RDSClient(Client[RDSConfig]):
         in the *Amazon RDS User Guide*.
 
         Args:
-            input:
-                An instance of `CopyDBSnapshotInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -833,17 +925,38 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `CopyDBSnapshotOutput`.
         """
-        return self._invoke(input, _models.COPY_DB_SNAPSHOT, [], plugins)
 
+    def copy_db_snapshot(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CopyDBSnapshotOutput:
+        return self._invoke(
+            self._select_input(_models.COPY_DB_SNAPSHOT, args, kwargs),
+            _models.COPY_DB_SNAPSHOT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def copy_option_group(
-        self, input: CopyOptionGroupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CopyOptionGroupInput | _models.CopyOptionGroupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CopyOptionGroupOutput: ...
+
+    @_overload
+    def copy_option_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CopyOptionGroupInputDict],
     ) -> CopyOptionGroupOutput:
         """
         Copies the specified option group.
 
         Args:
-            input:
-                An instance of `CopyOptionGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -853,10 +966,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `CopyOptionGroupOutput`.
         """
-        return self._invoke(input, _models.COPY_OPTION_GROUP, [], plugins)
 
+    def copy_option_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CopyOptionGroupOutput:
+        return self._invoke(
+            self._select_input(_models.COPY_OPTION_GROUP, args, kwargs),
+            _models.COPY_OPTION_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_blue_green_deployment(
-        self, input: CreateBlueGreenDeploymentInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateBlueGreenDeploymentInput
+        | _models.CreateBlueGreenDeploymentInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateBlueGreenDeploymentOutput: ...
+
+    @_overload
+    def create_blue_green_deployment(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateBlueGreenDeploymentInputDict],
     ) -> CreateBlueGreenDeploymentOutput:
         """
         Creates a blue/green deployment.
@@ -884,8 +1021,6 @@ class RDSClient(Client[RDSConfig]):
         in the *Amazon Aurora User Guide*.
 
         Args:
-            input:
-                An instance of `CreateBlueGreenDeploymentInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -895,19 +1030,39 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `CreateBlueGreenDeploymentOutput`.
         """
-        return self._invoke(input, _models.CREATE_BLUE_GREEN_DEPLOYMENT, [], plugins)
 
+    def create_blue_green_deployment(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateBlueGreenDeploymentOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_BLUE_GREEN_DEPLOYMENT, args, kwargs),
+            _models.CREATE_BLUE_GREEN_DEPLOYMENT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_custom_db_engine_version(
         self,
-        input: CreateCustomDBEngineVersionInput,
+        request: _models.CreateCustomDBEngineVersionInput
+        | _models.CreateCustomDBEngineVersionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateCustomDBEngineVersionOutput: ...
+
+    @_overload
+    def create_custom_db_engine_version(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateCustomDBEngineVersionInputDict],
     ) -> CreateCustomDBEngineVersionOutput:
         """
         Creates a custom DB engine version (CEV).
 
         Args:
-            input:
-                An instance of `CreateCustomDBEngineVersionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -917,12 +1072,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `CreateCustomDBEngineVersionOutput`.
         """
-        return self._invoke(input, _models.CREATE_CUSTOM_DB_ENGINE_VERSION, [], plugins)
 
+    def create_custom_db_engine_version(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateCustomDBEngineVersionOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_CUSTOM_DB_ENGINE_VERSION, args, kwargs),
+            _models.CREATE_CUSTOM_DB_ENGINE_VERSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_db_capacity_reservation(
         self,
-        input: CreateDBCapacityReservationInput,
+        request: _models.CreateDBCapacityReservationInput
+        | _models.CreateDBCapacityReservationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateDBCapacityReservationOutput: ...
+
+    @_overload
+    def create_db_capacity_reservation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateDBCapacityReservationInputDict],
     ) -> CreateDBCapacityReservationOutput:
         """
         Creates a DB capacity reservation. A DB capacity reservation reserves
@@ -981,8 +1158,6 @@ class RDSClient(Client[RDSConfig]):
             the time that Amazon RDS schedules it until the commitment ends.
 
         Args:
-            input:
-                An instance of `CreateDBCapacityReservationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -992,10 +1167,33 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `CreateDBCapacityReservationOutput`.
         """
-        return self._invoke(input, _models.CREATE_DB_CAPACITY_RESERVATION, [], plugins)
 
+    def create_db_capacity_reservation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateDBCapacityReservationOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_DB_CAPACITY_RESERVATION, args, kwargs),
+            _models.CREATE_DB_CAPACITY_RESERVATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_db_cluster(
-        self, input: CreateDBClusterInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateDBClusterInput | _models.CreateDBClusterInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateDBClusterOutput: ...
+
+    @_overload
+    def create_db_cluster(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateDBClusterInputDict],
     ) -> CreateDBClusterOutput:
         """
         Creates a new Amazon Aurora DB cluster or Multi-AZ DB cluster.
@@ -1034,8 +1232,6 @@ class RDSClient(Client[RDSConfig]):
         and export, or Amazon Web Services Lambda for invoking functions.
 
         Args:
-            input:
-                An instance of `CreateDBClusterInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1045,10 +1241,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `CreateDBClusterOutput`.
         """
-        return self._invoke(input, _models.CREATE_DB_CLUSTER, [], plugins)
 
+    def create_db_cluster(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateDBClusterOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_DB_CLUSTER, args, kwargs),
+            _models.CREATE_DB_CLUSTER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_db_cluster_endpoint(
-        self, input: CreateDBClusterEndpointInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateDBClusterEndpointInput
+        | _models.CreateDBClusterEndpointInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateDBClusterEndpointOutput: ...
+
+    @_overload
+    def create_db_cluster_endpoint(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateDBClusterEndpointInputDict],
     ) -> CreateDBClusterEndpointOutput:
         """
         Creates a new custom endpoint and associates it with an Amazon Aurora DB
@@ -1058,8 +1278,6 @@ class RDSClient(Client[RDSConfig]):
             This action applies only to Aurora DB clusters.
 
         Args:
-            input:
-                An instance of `CreateDBClusterEndpointInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1069,12 +1287,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `CreateDBClusterEndpointOutput`.
         """
-        return self._invoke(input, _models.CREATE_DB_CLUSTER_ENDPOINT, [], plugins)
 
+    def create_db_cluster_endpoint(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateDBClusterEndpointOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_DB_CLUSTER_ENDPOINT, args, kwargs),
+            _models.CREATE_DB_CLUSTER_ENDPOINT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_db_cluster_parameter_group(
         self,
-        input: CreateDBClusterParameterGroupInput,
+        request: _models.CreateDBClusterParameterGroupInput
+        | _models.CreateDBClusterParameterGroupInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateDBClusterParameterGroupOutput: ...
+
+    @_overload
+    def create_db_cluster_parameter_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateDBClusterParameterGroupInputDict],
     ) -> CreateDBClusterParameterGroupOutput:
         """
         Creates a new DB cluster parameter group.
@@ -1121,8 +1361,6 @@ class RDSClient(Client[RDSConfig]):
         in the *Amazon RDS User Guide*.
 
         Args:
-            input:
-                An instance of `CreateDBClusterParameterGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1132,12 +1370,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `CreateDBClusterParameterGroupOutput`.
         """
+
+    def create_db_cluster_parameter_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateDBClusterParameterGroupOutput:
         return self._invoke(
-            input, _models.CREATE_DB_CLUSTER_PARAMETER_GROUP, [], plugins
+            self._select_input(_models.CREATE_DB_CLUSTER_PARAMETER_GROUP, args, kwargs),
+            _models.CREATE_DB_CLUSTER_PARAMETER_GROUP,
+            [],
+            plugins,
         )
 
+    @_overload
     def create_db_cluster_snapshot(
-        self, input: CreateDBClusterSnapshotInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateDBClusterSnapshotInput
+        | _models.CreateDBClusterSnapshotInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateDBClusterSnapshotOutput: ...
+
+    @_overload
+    def create_db_cluster_snapshot(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateDBClusterSnapshotInputDict],
     ) -> CreateDBClusterSnapshotOutput:
         """
         Creates a snapshot of a DB cluster.
@@ -1151,8 +1411,6 @@ class RDSClient(Client[RDSConfig]):
         in the *Amazon RDS User Guide*.
 
         Args:
-            input:
-                An instance of `CreateDBClusterSnapshotInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1162,10 +1420,33 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `CreateDBClusterSnapshotOutput`.
         """
-        return self._invoke(input, _models.CREATE_DB_CLUSTER_SNAPSHOT, [], plugins)
 
+    def create_db_cluster_snapshot(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateDBClusterSnapshotOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_DB_CLUSTER_SNAPSHOT, args, kwargs),
+            _models.CREATE_DB_CLUSTER_SNAPSHOT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_db_instance(
-        self, input: CreateDBInstanceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateDBInstanceInput | _models.CreateDBInstanceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateDBInstanceOutput: ...
+
+    @_overload
+    def create_db_instance(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateDBInstanceInputDict],
     ) -> CreateDBInstanceOutput:
         """
         Creates a new DB instance.
@@ -1186,8 +1467,6 @@ class RDSClient(Client[RDSConfig]):
         in the *Amazon Aurora User Guide*.
 
         Args:
-            input:
-                An instance of `CreateDBInstanceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1197,12 +1476,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `CreateDBInstanceOutput`.
         """
-        return self._invoke(input, _models.CREATE_DB_INSTANCE, [], plugins)
 
+    def create_db_instance(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateDBInstanceOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_DB_INSTANCE, args, kwargs),
+            _models.CREATE_DB_INSTANCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_db_instance_read_replica(
         self,
-        input: CreateDBInstanceReadReplicaInput,
+        request: _models.CreateDBInstanceReadReplicaInput
+        | _models.CreateDBInstanceReadReplicaInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateDBInstanceReadReplicaOutput: ...
+
+    @_overload
+    def create_db_instance_read_replica(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateDBInstanceReadReplicaInputDict],
     ) -> CreateDBInstanceReadReplicaOutput:
         """
         Creates a new DB instance that acts as a read replica for an existing
@@ -1227,8 +1528,6 @@ class RDSClient(Client[RDSConfig]):
             Your source DB instance or cluster must have backup retention enabled.
 
         Args:
-            input:
-                An instance of `CreateDBInstanceReadReplicaInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1238,10 +1537,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `CreateDBInstanceReadReplicaOutput`.
         """
-        return self._invoke(input, _models.CREATE_DB_INSTANCE_READ_REPLICA, [], plugins)
 
+    def create_db_instance_read_replica(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateDBInstanceReadReplicaOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_DB_INSTANCE_READ_REPLICA, args, kwargs),
+            _models.CREATE_DB_INSTANCE_READ_REPLICA,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_db_parameter_group(
-        self, input: CreateDBParameterGroupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateDBParameterGroupInput
+        | _models.CreateDBParameterGroupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateDBParameterGroupOutput: ...
+
+    @_overload
+    def create_db_parameter_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateDBParameterGroupInputDict],
     ) -> CreateDBParameterGroupOutput:
         """
         Creates a new DB parameter group.
@@ -1258,8 +1581,6 @@ class RDSClient(Client[RDSConfig]):
         This command doesn't apply to RDS Custom.
 
         Args:
-            input:
-                An instance of `CreateDBParameterGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1269,17 +1590,38 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `CreateDBParameterGroupOutput`.
         """
-        return self._invoke(input, _models.CREATE_DB_PARAMETER_GROUP, [], plugins)
 
+    def create_db_parameter_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateDBParameterGroupOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_DB_PARAMETER_GROUP, args, kwargs),
+            _models.CREATE_DB_PARAMETER_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_db_proxy(
-        self, input: CreateDBProxyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateDBProxyInput | _models.CreateDBProxyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateDBProxyOutput: ...
+
+    @_overload
+    def create_db_proxy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateDBProxyInputDict],
     ) -> CreateDBProxyOutput:
         """
         Creates a new DB proxy.
 
         Args:
-            input:
-                An instance of `CreateDBProxyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1289,10 +1631,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `CreateDBProxyOutput`.
         """
-        return self._invoke(input, _models.CREATE_DB_PROXY, [], plugins)
 
+    def create_db_proxy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateDBProxyOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_DB_PROXY, args, kwargs),
+            _models.CREATE_DB_PROXY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_db_proxy_endpoint(
-        self, input: CreateDBProxyEndpointInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateDBProxyEndpointInput
+        | _models.CreateDBProxyEndpointInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateDBProxyEndpointOutput: ...
+
+    @_overload
+    def create_db_proxy_endpoint(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateDBProxyEndpointInputDict],
     ) -> CreateDBProxyEndpointOutput:
         """
         Creates a `DBProxyEndpoint`. Only applies to proxies that are associated
@@ -1302,8 +1668,6 @@ class RDSClient(Client[RDSConfig]):
         proxy's default VPC.
 
         Args:
-            input:
-                An instance of `CreateDBProxyEndpointInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1313,10 +1677,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `CreateDBProxyEndpointOutput`.
         """
-        return self._invoke(input, _models.CREATE_DB_PROXY_ENDPOINT, [], plugins)
 
+    def create_db_proxy_endpoint(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateDBProxyEndpointOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_DB_PROXY_ENDPOINT, args, kwargs),
+            _models.CREATE_DB_PROXY_ENDPOINT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_db_security_group(
-        self, input: CreateDBSecurityGroupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateDBSecurityGroupInput
+        | _models.CreateDBSecurityGroupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateDBSecurityGroupOutput: ...
+
+    @_overload
+    def create_db_security_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateDBSecurityGroupInputDict],
     ) -> CreateDBSecurityGroupOutput:
         """
         Creates a new DB security group. DB security groups control access to a
@@ -1338,8 +1726,6 @@ class RDSClient(Client[RDSConfig]):
             in the *Amazon RDS User Guide*.
 
         Args:
-            input:
-                An instance of `CreateDBSecurityGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1349,10 +1735,33 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `CreateDBSecurityGroupOutput`.
         """
-        return self._invoke(input, _models.CREATE_DB_SECURITY_GROUP, [], plugins)
 
+    def create_db_security_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateDBSecurityGroupOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_DB_SECURITY_GROUP, args, kwargs),
+            _models.CREATE_DB_SECURITY_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_db_shard_group(
-        self, input: CreateDBShardGroupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateDBShardGroupInput | _models.CreateDBShardGroupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateDBShardGroupOutput: ...
+
+    @_overload
+    def create_db_shard_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateDBShardGroupInputDict],
     ) -> CreateDBShardGroupOutput:
         """
         Creates a new DB shard group for Aurora Limitless Database. You must
@@ -1361,8 +1770,6 @@ class RDSClient(Client[RDSConfig]):
         Valid for: Aurora DB clusters only
 
         Args:
-            input:
-                An instance of `CreateDBShardGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1372,18 +1779,39 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `CreateDBShardGroupOutput`.
         """
-        return self._invoke(input, _models.CREATE_DB_SHARD_GROUP, [], plugins)
 
+    def create_db_shard_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateDBShardGroupOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_DB_SHARD_GROUP, args, kwargs),
+            _models.CREATE_DB_SHARD_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_db_snapshot(
-        self, input: CreateDBSnapshotInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateDBSnapshotInput | _models.CreateDBSnapshotInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateDBSnapshotOutput: ...
+
+    @_overload
+    def create_db_snapshot(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateDBSnapshotInputDict],
     ) -> CreateDBSnapshotOutput:
         """
         Creates a snapshot of a DB instance. The source DB instance must be in
         the `available` or `storage-optimization` state.
 
         Args:
-            input:
-                An instance of `CreateDBSnapshotInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1393,18 +1821,40 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `CreateDBSnapshotOutput`.
         """
-        return self._invoke(input, _models.CREATE_DB_SNAPSHOT, [], plugins)
 
+    def create_db_snapshot(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateDBSnapshotOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_DB_SNAPSHOT, args, kwargs),
+            _models.CREATE_DB_SNAPSHOT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_db_subnet_group(
-        self, input: CreateDBSubnetGroupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateDBSubnetGroupInput
+        | _models.CreateDBSubnetGroupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateDBSubnetGroupOutput: ...
+
+    @_overload
+    def create_db_subnet_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateDBSubnetGroupInputDict],
     ) -> CreateDBSubnetGroupOutput:
         """
         Creates a new DB subnet group. DB subnet groups must contain at least
         one subnet in at least two AZs in the Amazon Web Services Region.
 
         Args:
-            input:
-                An instance of `CreateDBSubnetGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1414,10 +1864,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `CreateDBSubnetGroupOutput`.
         """
-        return self._invoke(input, _models.CREATE_DB_SUBNET_GROUP, [], plugins)
 
+    def create_db_subnet_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateDBSubnetGroupOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_DB_SUBNET_GROUP, args, kwargs),
+            _models.CREATE_DB_SUBNET_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_event_subscription(
-        self, input: CreateEventSubscriptionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateEventSubscriptionInput
+        | _models.CreateEventSubscriptionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateEventSubscriptionOutput: ...
+
+    @_overload
+    def create_event_subscription(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateEventSubscriptionInputDict],
     ) -> CreateEventSubscriptionOutput:
         """
         Creates an RDS event notification subscription. This operation requires
@@ -1454,8 +1928,6 @@ class RDSClient(Client[RDSConfig]):
         in the *Amazon Aurora User Guide*.
 
         Args:
-            input:
-                An instance of `CreateEventSubscriptionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1465,10 +1937,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `CreateEventSubscriptionOutput`.
         """
-        return self._invoke(input, _models.CREATE_EVENT_SUBSCRIPTION, [], plugins)
 
+    def create_event_subscription(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateEventSubscriptionOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_EVENT_SUBSCRIPTION, args, kwargs),
+            _models.CREATE_EVENT_SUBSCRIPTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_global_cluster(
-        self, input: CreateGlobalClusterInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateGlobalClusterInput
+        | _models.CreateGlobalClusterInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateGlobalClusterOutput: ...
+
+    @_overload
+    def create_global_cluster(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateGlobalClusterInputDict],
     ) -> CreateGlobalClusterOutput:
         """
         Creates an Aurora global database spread across multiple Amazon Web
@@ -1486,8 +1982,6 @@ class RDSClient(Client[RDSConfig]):
             This operation applies only to Aurora DB clusters.
 
         Args:
-            input:
-                An instance of `CreateGlobalClusterInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1497,17 +1991,38 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `CreateGlobalClusterOutput`.
         """
-        return self._invoke(input, _models.CREATE_GLOBAL_CLUSTER, [], plugins)
 
+    def create_global_cluster(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateGlobalClusterOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_GLOBAL_CLUSTER, args, kwargs),
+            _models.CREATE_GLOBAL_CLUSTER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_integration(
-        self, input: CreateIntegrationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateIntegrationInput | _models.CreateIntegrationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateIntegrationOutput: ...
+
+    @_overload
+    def create_integration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateIntegrationInputDict],
     ) -> CreateIntegrationOutput:
         """
         Creates a zero-ETL integration with Amazon Redshift.
 
         Args:
-            input:
-                An instance of `CreateIntegrationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1517,10 +2032,33 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `CreateIntegrationOutput`.
         """
-        return self._invoke(input, _models.CREATE_INTEGRATION, [], plugins)
 
+    def create_integration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateIntegrationOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_INTEGRATION, args, kwargs),
+            _models.CREATE_INTEGRATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_option_group(
-        self, input: CreateOptionGroupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateOptionGroupInput | _models.CreateOptionGroupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateOptionGroupOutput: ...
+
+    @_overload
+    def create_option_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateOptionGroupInputDict],
     ) -> CreateOptionGroupOutput:
         """
         Creates a new option group. You can create up to 20 option groups.
@@ -1528,8 +2066,6 @@ class RDSClient(Client[RDSConfig]):
         This command doesn't apply to RDS Custom.
 
         Args:
-            input:
-                An instance of `CreateOptionGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1539,10 +2075,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `CreateOptionGroupOutput`.
         """
-        return self._invoke(input, _models.CREATE_OPTION_GROUP, [], plugins)
 
+    def create_option_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateOptionGroupOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_OPTION_GROUP, args, kwargs),
+            _models.CREATE_OPTION_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_tenant_database(
-        self, input: CreateTenantDatabaseInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateTenantDatabaseInput
+        | _models.CreateTenantDatabaseInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateTenantDatabaseOutput: ...
+
+    @_overload
+    def create_tenant_database(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateTenantDatabaseInputDict],
     ) -> CreateTenantDatabaseOutput:
         """
         Creates a tenant database in a DB instance that uses the multi-tenant
@@ -1550,8 +2110,6 @@ class RDSClient(Client[RDSConfig]):
         are supported.
 
         Args:
-            input:
-                An instance of `CreateTenantDatabaseInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1561,10 +2119,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `CreateTenantDatabaseOutput`.
         """
-        return self._invoke(input, _models.CREATE_TENANT_DATABASE, [], plugins)
 
+    def create_tenant_database(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateTenantDatabaseOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_TENANT_DATABASE, args, kwargs),
+            _models.CREATE_TENANT_DATABASE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_blue_green_deployment(
-        self, input: DeleteBlueGreenDeploymentInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteBlueGreenDeploymentInput
+        | _models.DeleteBlueGreenDeploymentInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteBlueGreenDeploymentOutput: ...
+
+    @_overload
+    def delete_blue_green_deployment(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteBlueGreenDeploymentInputDict],
     ) -> DeleteBlueGreenDeploymentOutput:
         """
         Deletes a blue/green deployment.
@@ -1578,8 +2160,6 @@ class RDSClient(Client[RDSConfig]):
         in the *Amazon Aurora User Guide*.
 
         Args:
-            input:
-                An instance of `DeleteBlueGreenDeploymentInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1589,12 +2169,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DeleteBlueGreenDeploymentOutput`.
         """
-        return self._invoke(input, _models.DELETE_BLUE_GREEN_DEPLOYMENT, [], plugins)
 
+    def delete_blue_green_deployment(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteBlueGreenDeploymentOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_BLUE_GREEN_DEPLOYMENT, args, kwargs),
+            _models.DELETE_BLUE_GREEN_DEPLOYMENT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_custom_db_engine_version(
         self,
-        input: DeleteCustomDBEngineVersionInput,
+        request: _models.DeleteCustomDBEngineVersionInput
+        | _models.DeleteCustomDBEngineVersionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteCustomDBEngineVersionOutput: ...
+
+    @_overload
+    def delete_custom_db_engine_version(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteCustomDBEngineVersionInputDict],
     ) -> DeleteCustomDBEngineVersionOutput:
         """
         Deletes a custom engine version. To run this command, make sure you meet
@@ -1623,8 +2225,6 @@ class RDSClient(Client[RDSConfig]):
         in the *Amazon RDS User Guide*.
 
         Args:
-            input:
-                An instance of `DeleteCustomDBEngineVersionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1634,10 +2234,33 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DeleteCustomDBEngineVersionOutput`.
         """
-        return self._invoke(input, _models.DELETE_CUSTOM_DB_ENGINE_VERSION, [], plugins)
 
+    def delete_custom_db_engine_version(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteCustomDBEngineVersionOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_CUSTOM_DB_ENGINE_VERSION, args, kwargs),
+            _models.DELETE_CUSTOM_DB_ENGINE_VERSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_db_cluster(
-        self, input: DeleteDBClusterInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteDBClusterInput | _models.DeleteDBClusterInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteDBClusterOutput: ...
+
+    @_overload
+    def delete_db_cluster(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteDBClusterInputDict],
     ) -> DeleteDBClusterOutput:
         """
         The DeleteDBCluster action deletes a previously provisioned DB cluster.
@@ -1658,8 +2281,6 @@ class RDSClient(Client[RDSConfig]):
         in the *Amazon RDS User Guide*.
 
         Args:
-            input:
-                An instance of `DeleteDBClusterInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1669,12 +2290,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DeleteDBClusterOutput`.
         """
-        return self._invoke(input, _models.DELETE_DB_CLUSTER, [], plugins)
 
+    def delete_db_cluster(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteDBClusterOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_DB_CLUSTER, args, kwargs),
+            _models.DELETE_DB_CLUSTER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_db_cluster_automated_backup(
         self,
-        input: DeleteDBClusterAutomatedBackupInput,
+        request: _models.DeleteDBClusterAutomatedBackupInput
+        | _models.DeleteDBClusterAutomatedBackupInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteDBClusterAutomatedBackupOutput: ...
+
+    @_overload
+    def delete_db_cluster_automated_backup(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteDBClusterAutomatedBackupInputDict],
     ) -> DeleteDBClusterAutomatedBackupOutput:
         """
         Deletes automated backups using the `DbClusterResourceId` value of the
@@ -1682,8 +2325,6 @@ class RDSClient(Client[RDSConfig]):
         backups.
 
         Args:
-            input:
-                An instance of `DeleteDBClusterAutomatedBackupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1693,12 +2334,36 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DeleteDBClusterAutomatedBackupOutput`.
         """
+
+    def delete_db_cluster_automated_backup(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteDBClusterAutomatedBackupOutput:
         return self._invoke(
-            input, _models.DELETE_DB_CLUSTER_AUTOMATED_BACKUP, [], plugins
+            self._select_input(
+                _models.DELETE_DB_CLUSTER_AUTOMATED_BACKUP, args, kwargs
+            ),
+            _models.DELETE_DB_CLUSTER_AUTOMATED_BACKUP,
+            [],
+            plugins,
         )
 
+    @_overload
     def delete_db_cluster_endpoint(
-        self, input: DeleteDBClusterEndpointInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteDBClusterEndpointInput
+        | _models.DeleteDBClusterEndpointInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteDBClusterEndpointOutput: ...
+
+    @_overload
+    def delete_db_cluster_endpoint(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteDBClusterEndpointInputDict],
     ) -> DeleteDBClusterEndpointOutput:
         """
         Deletes a custom endpoint and removes it from an Amazon Aurora DB
@@ -1708,8 +2373,6 @@ class RDSClient(Client[RDSConfig]):
             This action only applies to Aurora DB clusters.
 
         Args:
-            input:
-                An instance of `DeleteDBClusterEndpointInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1719,12 +2382,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DeleteDBClusterEndpointOutput`.
         """
-        return self._invoke(input, _models.DELETE_DB_CLUSTER_ENDPOINT, [], plugins)
 
+    def delete_db_cluster_endpoint(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteDBClusterEndpointOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_DB_CLUSTER_ENDPOINT, args, kwargs),
+            _models.DELETE_DB_CLUSTER_ENDPOINT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_db_cluster_parameter_group(
         self,
-        input: DeleteDBClusterParameterGroupInput,
+        request: _models.DeleteDBClusterParameterGroupInput
+        | _models.DeleteDBClusterParameterGroupInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteDBClusterParameterGroupOutput: ...
+
+    @_overload
+    def delete_db_cluster_parameter_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteDBClusterParameterGroupInputDict],
     ) -> DeleteDBClusterParameterGroupOutput:
         """
         Deletes a specified DB cluster parameter group. The DB cluster parameter
@@ -1739,8 +2424,6 @@ class RDSClient(Client[RDSConfig]):
         in the *Amazon RDS User Guide*.
 
         Args:
-            input:
-                An instance of `DeleteDBClusterParameterGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1750,12 +2433,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DeleteDBClusterParameterGroupOutput`.
         """
+
+    def delete_db_cluster_parameter_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteDBClusterParameterGroupOutput:
         return self._invoke(
-            input, _models.DELETE_DB_CLUSTER_PARAMETER_GROUP, [], plugins
+            self._select_input(_models.DELETE_DB_CLUSTER_PARAMETER_GROUP, args, kwargs),
+            _models.DELETE_DB_CLUSTER_PARAMETER_GROUP,
+            [],
+            plugins,
         )
 
+    @_overload
     def delete_db_cluster_snapshot(
-        self, input: DeleteDBClusterSnapshotInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteDBClusterSnapshotInput
+        | _models.DeleteDBClusterSnapshotInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteDBClusterSnapshotOutput: ...
+
+    @_overload
+    def delete_db_cluster_snapshot(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteDBClusterSnapshotInputDict],
     ) -> DeleteDBClusterSnapshotOutput:
         """
         Deletes a DB cluster snapshot. If the snapshot is being copied, the copy
@@ -1773,8 +2478,6 @@ class RDSClient(Client[RDSConfig]):
         in the *Amazon RDS User Guide*.
 
         Args:
-            input:
-                An instance of `DeleteDBClusterSnapshotInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1784,10 +2487,33 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DeleteDBClusterSnapshotOutput`.
         """
-        return self._invoke(input, _models.DELETE_DB_CLUSTER_SNAPSHOT, [], plugins)
 
+    def delete_db_cluster_snapshot(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteDBClusterSnapshotOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_DB_CLUSTER_SNAPSHOT, args, kwargs),
+            _models.DELETE_DB_CLUSTER_SNAPSHOT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_db_instance(
-        self, input: DeleteDBInstanceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteDBInstanceInput | _models.DeleteDBInstanceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteDBInstanceOutput: ...
+
+    @_overload
+    def delete_db_instance(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteDBInstanceInputDict],
     ) -> DeleteDBInstanceOutput:
         """
         Deletes a previously provisioned DB instance. When you delete a DB
@@ -1827,8 +2553,6 @@ class RDSClient(Client[RDSConfig]):
             snapshot might fail.
 
         Args:
-            input:
-                An instance of `DeleteDBInstanceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1838,20 +2562,40 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DeleteDBInstanceOutput`.
         """
-        return self._invoke(input, _models.DELETE_DB_INSTANCE, [], plugins)
 
+    def delete_db_instance(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteDBInstanceOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_DB_INSTANCE, args, kwargs),
+            _models.DELETE_DB_INSTANCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_db_instance_automated_backup(
         self,
-        input: DeleteDBInstanceAutomatedBackupInput | None = None,
+        request: _models.DeleteDBInstanceAutomatedBackupInput
+        | _models.DeleteDBInstanceAutomatedBackupInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteDBInstanceAutomatedBackupOutput: ...
+
+    @_overload
+    def delete_db_instance_automated_backup(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteDBInstanceAutomatedBackupInputDict],
     ) -> DeleteDBInstanceAutomatedBackupOutput:
         """
         Deletes automated backups using the `DbiResourceId` value of the source
         DB instance or the Amazon Resource Name (ARN) of the automated backups.
 
         Args:
-            input:
-                An instance of `DeleteDBInstanceAutomatedBackupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1861,20 +2605,42 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DeleteDBInstanceAutomatedBackupOutput`.
         """
+
+    def delete_db_instance_automated_backup(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteDBInstanceAutomatedBackupOutput:
         return self._invoke(
-            input, _models.DELETE_DB_INSTANCE_AUTOMATED_BACKUP, [], plugins
+            self._select_input(
+                _models.DELETE_DB_INSTANCE_AUTOMATED_BACKUP, args, kwargs
+            ),
+            _models.DELETE_DB_INSTANCE_AUTOMATED_BACKUP,
+            [],
+            plugins,
         )
 
+    @_overload
     def delete_db_parameter_group(
-        self, input: DeleteDBParameterGroupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteDBParameterGroupInput
+        | _models.DeleteDBParameterGroupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteDBParameterGroupOutput: ...
+
+    @_overload
+    def delete_db_parameter_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteDBParameterGroupInputDict],
     ) -> DeleteDBParameterGroupOutput:
         """
         Deletes a specified DB parameter group. The DB parameter group to be
         deleted can't be associated with any DB instances.
 
         Args:
-            input:
-                An instance of `DeleteDBParameterGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1884,17 +2650,38 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DeleteDBParameterGroupOutput`.
         """
-        return self._invoke(input, _models.DELETE_DB_PARAMETER_GROUP, [], plugins)
 
+    def delete_db_parameter_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteDBParameterGroupOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_DB_PARAMETER_GROUP, args, kwargs),
+            _models.DELETE_DB_PARAMETER_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_db_proxy(
-        self, input: DeleteDBProxyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteDBProxyInput | _models.DeleteDBProxyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteDBProxyOutput: ...
+
+    @_overload
+    def delete_db_proxy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteDBProxyInputDict],
     ) -> DeleteDBProxyOutput:
         """
         Deletes an existing DB proxy.
 
         Args:
-            input:
-                An instance of `DeleteDBProxyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1904,10 +2691,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DeleteDBProxyOutput`.
         """
-        return self._invoke(input, _models.DELETE_DB_PROXY, [], plugins)
 
+    def delete_db_proxy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteDBProxyOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_DB_PROXY, args, kwargs),
+            _models.DELETE_DB_PROXY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_db_proxy_endpoint(
-        self, input: DeleteDBProxyEndpointInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteDBProxyEndpointInput
+        | _models.DeleteDBProxyEndpointInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteDBProxyEndpointOutput: ...
+
+    @_overload
+    def delete_db_proxy_endpoint(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteDBProxyEndpointInputDict],
     ) -> DeleteDBProxyEndpointOutput:
         """
         Deletes a `DBProxyEndpoint`. Doing so removes the ability to access the
@@ -1916,8 +2727,6 @@ class RDSClient(Client[RDSConfig]):
         operations, or using a different VPC than the DB proxy's default VPC.
 
         Args:
-            input:
-                An instance of `DeleteDBProxyEndpointInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1927,10 +2736,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DeleteDBProxyEndpointOutput`.
         """
-        return self._invoke(input, _models.DELETE_DB_PROXY_ENDPOINT, [], plugins)
 
+    def delete_db_proxy_endpoint(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteDBProxyEndpointOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_DB_PROXY_ENDPOINT, args, kwargs),
+            _models.DELETE_DB_PROXY_ENDPOINT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_db_security_group(
-        self, input: DeleteDBSecurityGroupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteDBSecurityGroupInput
+        | _models.DeleteDBSecurityGroupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteDBSecurityGroupOutput: ...
+
+    @_overload
+    def delete_db_security_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteDBSecurityGroupInputDict],
     ) -> DeleteDBSecurityGroupOutput:
         """
         Deletes a DB security group.
@@ -1951,8 +2784,6 @@ class RDSClient(Client[RDSConfig]):
             in the *Amazon RDS User Guide*.
 
         Args:
-            input:
-                An instance of `DeleteDBSecurityGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1962,17 +2793,38 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DeleteDBSecurityGroupOutput`.
         """
-        return self._invoke(input, _models.DELETE_DB_SECURITY_GROUP, [], plugins)
 
+    def delete_db_security_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteDBSecurityGroupOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_DB_SECURITY_GROUP, args, kwargs),
+            _models.DELETE_DB_SECURITY_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_db_shard_group(
-        self, input: DeleteDBShardGroupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteDBShardGroupInput | _models.DeleteDBShardGroupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteDBShardGroupOutput: ...
+
+    @_overload
+    def delete_db_shard_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteDBShardGroupInputDict],
     ) -> DeleteDBShardGroupOutput:
         """
         Deletes an Aurora Limitless Database DB shard group.
 
         Args:
-            input:
-                An instance of `DeleteDBShardGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1982,10 +2834,33 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DeleteDBShardGroupOutput`.
         """
-        return self._invoke(input, _models.DELETE_DB_SHARD_GROUP, [], plugins)
 
+    def delete_db_shard_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteDBShardGroupOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_DB_SHARD_GROUP, args, kwargs),
+            _models.DELETE_DB_SHARD_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_db_snapshot(
-        self, input: DeleteDBSnapshotInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteDBSnapshotInput | _models.DeleteDBSnapshotInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteDBSnapshotOutput: ...
+
+    @_overload
+    def delete_db_snapshot(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteDBSnapshotInputDict],
     ) -> DeleteDBSnapshotOutput:
         """
         Deletes a DB snapshot. If the snapshot is being copied, the copy
@@ -1995,8 +2870,6 @@ class RDSClient(Client[RDSConfig]):
             The DB snapshot must be in the `available` state to be deleted.
 
         Args:
-            input:
-                An instance of `DeleteDBSnapshotInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2006,10 +2879,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DeleteDBSnapshotOutput`.
         """
-        return self._invoke(input, _models.DELETE_DB_SNAPSHOT, [], plugins)
 
+    def delete_db_snapshot(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteDBSnapshotOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_DB_SNAPSHOT, args, kwargs),
+            _models.DELETE_DB_SNAPSHOT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_db_subnet_group(
-        self, input: DeleteDBSubnetGroupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteDBSubnetGroupInput
+        | _models.DeleteDBSubnetGroupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteDBSubnetGroupOutput: ...
+
+    @_overload
+    def delete_db_subnet_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteDBSubnetGroupInputDict],
     ) -> DeleteDBSubnetGroupOutput:
         """
         Deletes a DB subnet group.
@@ -2019,8 +2916,6 @@ class RDSClient(Client[RDSConfig]):
             instances.
 
         Args:
-            input:
-                An instance of `DeleteDBSubnetGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2030,17 +2925,39 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DeleteDBSubnetGroupOutput`.
         """
-        return self._invoke(input, _models.DELETE_DB_SUBNET_GROUP, [], plugins)
 
+    def delete_db_subnet_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteDBSubnetGroupOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_DB_SUBNET_GROUP, args, kwargs),
+            _models.DELETE_DB_SUBNET_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_event_subscription(
-        self, input: DeleteEventSubscriptionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteEventSubscriptionInput
+        | _models.DeleteEventSubscriptionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteEventSubscriptionOutput: ...
+
+    @_overload
+    def delete_event_subscription(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteEventSubscriptionInputDict],
     ) -> DeleteEventSubscriptionOutput:
         """
         Deletes an RDS event notification subscription.
 
         Args:
-            input:
-                An instance of `DeleteEventSubscriptionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2050,10 +2967,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DeleteEventSubscriptionOutput`.
         """
-        return self._invoke(input, _models.DELETE_EVENT_SUBSCRIPTION, [], plugins)
 
+    def delete_event_subscription(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteEventSubscriptionOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_EVENT_SUBSCRIPTION, args, kwargs),
+            _models.DELETE_EVENT_SUBSCRIPTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_global_cluster(
-        self, input: DeleteGlobalClusterInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteGlobalClusterInput
+        | _models.DeleteGlobalClusterInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteGlobalClusterOutput: ...
+
+    @_overload
+    def delete_global_cluster(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteGlobalClusterInputDict],
     ) -> DeleteGlobalClusterOutput:
         """
         Deletes a global database cluster. The primary and secondary clusters
@@ -2063,8 +3004,6 @@ class RDSClient(Client[RDSConfig]):
             This action only applies to Aurora DB clusters.
 
         Args:
-            input:
-                An instance of `DeleteGlobalClusterInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2074,17 +3013,38 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DeleteGlobalClusterOutput`.
         """
-        return self._invoke(input, _models.DELETE_GLOBAL_CLUSTER, [], plugins)
 
+    def delete_global_cluster(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteGlobalClusterOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_GLOBAL_CLUSTER, args, kwargs),
+            _models.DELETE_GLOBAL_CLUSTER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_integration(
-        self, input: DeleteIntegrationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteIntegrationInput | _models.DeleteIntegrationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteIntegrationOutput: ...
+
+    @_overload
+    def delete_integration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteIntegrationInputDict],
     ) -> DeleteIntegrationOutput:
         """
         Deletes a zero-ETL integration with Amazon Redshift.
 
         Args:
-            input:
-                An instance of `DeleteIntegrationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2094,17 +3054,38 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DeleteIntegrationOutput`.
         """
-        return self._invoke(input, _models.DELETE_INTEGRATION, [], plugins)
 
+    def delete_integration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteIntegrationOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_INTEGRATION, args, kwargs),
+            _models.DELETE_INTEGRATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_option_group(
-        self, input: DeleteOptionGroupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteOptionGroupInput | _models.DeleteOptionGroupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteOptionGroupOutput: ...
+
+    @_overload
+    def delete_option_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteOptionGroupInputDict],
     ) -> DeleteOptionGroupOutput:
         """
         Deletes an existing option group.
 
         Args:
-            input:
-                An instance of `DeleteOptionGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2114,10 +3095,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DeleteOptionGroupOutput`.
         """
-        return self._invoke(input, _models.DELETE_OPTION_GROUP, [], plugins)
 
+    def delete_option_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteOptionGroupOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_OPTION_GROUP, args, kwargs),
+            _models.DELETE_OPTION_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_tenant_database(
-        self, input: DeleteTenantDatabaseInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteTenantDatabaseInput
+        | _models.DeleteTenantDatabaseInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteTenantDatabaseOutput: ...
+
+    @_overload
+    def delete_tenant_database(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteTenantDatabaseInputDict],
     ) -> DeleteTenantDatabaseOutput:
         """
         Deletes a tenant database from your DB instance. This command only
@@ -2127,8 +3132,6 @@ class RDSClient(Client[RDSConfig]):
         instance.
 
         Args:
-            input:
-                An instance of `DeleteTenantDatabaseInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2138,18 +3141,40 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DeleteTenantDatabaseOutput`.
         """
-        return self._invoke(input, _models.DELETE_TENANT_DATABASE, [], plugins)
 
+    def delete_tenant_database(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteTenantDatabaseOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_TENANT_DATABASE, args, kwargs),
+            _models.DELETE_TENANT_DATABASE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def deregister_db_proxy_targets(
-        self, input: DeregisterDBProxyTargetsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeregisterDBProxyTargetsInput
+        | _models.DeregisterDBProxyTargetsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeregisterDBProxyTargetsOutput: ...
+
+    @_overload
+    def deregister_db_proxy_targets(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeregisterDBProxyTargetsInputDict],
     ) -> DeregisterDBProxyTargetsOutput:
         """
         Remove the association between one or more `DBProxyTarget` data
         structures and a `DBProxyTargetGroup`.
 
         Args:
-            input:
-                An instance of `DeregisterDBProxyTargetsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2159,12 +3184,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DeregisterDBProxyTargetsOutput`.
         """
-        return self._invoke(input, _models.DEREGISTER_DB_PROXY_TARGETS, [], plugins)
 
+    def deregister_db_proxy_targets(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeregisterDBProxyTargetsOutput:
+        return self._invoke(
+            self._select_input(_models.DEREGISTER_DB_PROXY_TARGETS, args, kwargs),
+            _models.DEREGISTER_DB_PROXY_TARGETS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_account_attributes(
         self,
-        input: DescribeAccountAttributesInput | None = None,
+        request: _models.DescribeAccountAttributesInput
+        | _models.DescribeAccountAttributesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeAccountAttributesOutput: ...
+
+    @_overload
+    def describe_account_attributes(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeAccountAttributesInputDict],
     ) -> DescribeAccountAttributesOutput:
         """
         Lists all of the attributes for a customer account. The attributes
@@ -2175,8 +3222,6 @@ class RDSClient(Client[RDSConfig]):
         This command doesn't take any parameters.
 
         Args:
-            input:
-                An instance of `DescribeAccountAttributesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2186,12 +3231,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeAccountAttributesOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_ACCOUNT_ATTRIBUTES, [], plugins)
 
+    def describe_account_attributes(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeAccountAttributesOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_ACCOUNT_ATTRIBUTES, args, kwargs),
+            _models.DESCRIBE_ACCOUNT_ATTRIBUTES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_blue_green_deployments(
         self,
-        input: DescribeBlueGreenDeploymentsInput | None = None,
+        request: _models.DescribeBlueGreenDeploymentsInput
+        | _models.DescribeBlueGreenDeploymentsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeBlueGreenDeploymentsOutput: ...
+
+    @_overload
+    def describe_blue_green_deployments(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeBlueGreenDeploymentsInputDict],
     ) -> DescribeBlueGreenDeploymentsOutput:
         """
         Describes one or more blue/green deployments.
@@ -2205,8 +3272,6 @@ class RDSClient(Client[RDSConfig]):
         in the *Amazon Aurora User Guide*.
 
         Args:
-            input:
-                An instance of `DescribeBlueGreenDeploymentsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2216,12 +3281,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeBlueGreenDeploymentsOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_BLUE_GREEN_DEPLOYMENTS, [], plugins)
 
+    def describe_blue_green_deployments(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeBlueGreenDeploymentsOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_BLUE_GREEN_DEPLOYMENTS, args, kwargs),
+            _models.DESCRIBE_BLUE_GREEN_DEPLOYMENTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_certificates(
         self,
-        input: DescribeCertificatesInput | None = None,
+        request: _models.DescribeCertificatesInput
+        | _models.DescribeCertificatesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeCertificatesOutput: ...
+
+    @_overload
+    def describe_certificates(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeCertificatesInputDict],
     ) -> DescribeCertificatesOutput:
         """
         Lists the set of certificate authority (CA) certificates provided by
@@ -2235,8 +3322,6 @@ class RDSClient(Client[RDSConfig]):
         in the *Amazon Aurora User Guide*.
 
         Args:
-            input:
-                An instance of `DescribeCertificatesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2246,12 +3331,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeCertificatesOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_CERTIFICATES, [], plugins)
 
+    def describe_certificates(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeCertificatesOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_CERTIFICATES, args, kwargs),
+            _models.DESCRIBE_CERTIFICATES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_db_capacity_reservations(
         self,
-        input: DescribeDBCapacityReservationsInput | None = None,
+        request: _models.DescribeDBCapacityReservationsInput
+        | _models.DescribeDBCapacityReservationsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeDBCapacityReservationsOutput: ...
+
+    @_overload
+    def describe_db_capacity_reservations(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeDBCapacityReservationsInputDict],
     ) -> DescribeDBCapacityReservationsOutput:
         """
         Describes one or more DB capacity reservations. A DB capacity
@@ -2265,8 +3372,6 @@ class RDSClient(Client[RDSConfig]):
         This operation supports pagination.
 
         Args:
-            input:
-                An instance of `DescribeDBCapacityReservationsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2276,14 +3381,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeDBCapacityReservationsOutput`.
         """
+
+    def describe_db_capacity_reservations(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeDBCapacityReservationsOutput:
         return self._invoke(
-            input, _models.DESCRIBE_DB_CAPACITY_RESERVATIONS, [], plugins
+            self._select_input(_models.DESCRIBE_DB_CAPACITY_RESERVATIONS, args, kwargs),
+            _models.DESCRIBE_DB_CAPACITY_RESERVATIONS,
+            [],
+            plugins,
         )
 
+    @_overload
     def describe_db_cluster_automated_backups(
         self,
-        input: DescribeDBClusterAutomatedBackupsInput | None = None,
+        request: _models.DescribeDBClusterAutomatedBackupsInput
+        | _models.DescribeDBClusterAutomatedBackupsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeDBClusterAutomatedBackupsOutput: ...
+
+    @_overload
+    def describe_db_cluster_automated_backups(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeDBClusterAutomatedBackupsInputDict],
     ) -> DescribeDBClusterAutomatedBackupsOutput:
         """
         Displays backups for both current and deleted DB clusters. For example,
@@ -2294,8 +3419,6 @@ class RDSClient(Client[RDSConfig]):
         All parameters are optional.
 
         Args:
-            input:
-                An instance of `DescribeDBClusterAutomatedBackupsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2305,14 +3428,36 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeDBClusterAutomatedBackupsOutput`.
         """
+
+    def describe_db_cluster_automated_backups(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeDBClusterAutomatedBackupsOutput:
         return self._invoke(
-            input, _models.DESCRIBE_DB_CLUSTER_AUTOMATED_BACKUPS, [], plugins
+            self._select_input(
+                _models.DESCRIBE_DB_CLUSTER_AUTOMATED_BACKUPS, args, kwargs
+            ),
+            _models.DESCRIBE_DB_CLUSTER_AUTOMATED_BACKUPS,
+            [],
+            plugins,
         )
 
+    @_overload
     def describe_db_cluster_backtracks(
         self,
-        input: DescribeDBClusterBacktracksInput,
+        request: _models.DescribeDBClusterBacktracksInput
+        | _models.DescribeDBClusterBacktracksInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeDBClusterBacktracksOutput: ...
+
+    @_overload
+    def describe_db_cluster_backtracks(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeDBClusterBacktracksInputDict],
     ) -> DescribeDBClusterBacktracksOutput:
         """
         Returns information about backtracks for a DB cluster.
@@ -2325,8 +3470,6 @@ class RDSClient(Client[RDSConfig]):
             This action only applies to Aurora MySQL DB clusters.
 
         Args:
-            input:
-                An instance of `DescribeDBClusterBacktracksInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2336,12 +3479,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeDBClusterBacktracksOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_DB_CLUSTER_BACKTRACKS, [], plugins)
 
+    def describe_db_cluster_backtracks(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeDBClusterBacktracksOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_DB_CLUSTER_BACKTRACKS, args, kwargs),
+            _models.DESCRIBE_DB_CLUSTER_BACKTRACKS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_db_cluster_endpoints(
         self,
-        input: DescribeDBClusterEndpointsInput | None = None,
+        request: _models.DescribeDBClusterEndpointsInput
+        | _models.DescribeDBClusterEndpointsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeDBClusterEndpointsOutput: ...
+
+    @_overload
+    def describe_db_cluster_endpoints(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeDBClusterEndpointsInputDict],
     ) -> DescribeDBClusterEndpointsOutput:
         """
         Returns information about endpoints for an Amazon Aurora DB cluster.
@@ -2350,8 +3515,6 @@ class RDSClient(Client[RDSConfig]):
             This action only applies to Aurora DB clusters.
 
         Args:
-            input:
-                An instance of `DescribeDBClusterEndpointsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2361,12 +3524,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeDBClusterEndpointsOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_DB_CLUSTER_ENDPOINTS, [], plugins)
 
+    def describe_db_cluster_endpoints(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeDBClusterEndpointsOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_DB_CLUSTER_ENDPOINTS, args, kwargs),
+            _models.DESCRIBE_DB_CLUSTER_ENDPOINTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_db_cluster_parameter_groups(
         self,
-        input: DescribeDBClusterParameterGroupsInput | None = None,
+        request: _models.DescribeDBClusterParameterGroupsInput
+        | _models.DescribeDBClusterParameterGroupsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeDBClusterParameterGroupsOutput: ...
+
+    @_overload
+    def describe_db_cluster_parameter_groups(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeDBClusterParameterGroupsInputDict],
     ) -> DescribeDBClusterParameterGroupsOutput:
         """
         Returns a list of `DBClusterParameterGroup` descriptions. If a
@@ -2383,8 +3568,6 @@ class RDSClient(Client[RDSConfig]):
         in the *Amazon RDS User Guide*.
 
         Args:
-            input:
-                An instance of `DescribeDBClusterParameterGroupsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2394,14 +3577,36 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeDBClusterParameterGroupsOutput`.
         """
+
+    def describe_db_cluster_parameter_groups(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeDBClusterParameterGroupsOutput:
         return self._invoke(
-            input, _models.DESCRIBE_DB_CLUSTER_PARAMETER_GROUPS, [], plugins
+            self._select_input(
+                _models.DESCRIBE_DB_CLUSTER_PARAMETER_GROUPS, args, kwargs
+            ),
+            _models.DESCRIBE_DB_CLUSTER_PARAMETER_GROUPS,
+            [],
+            plugins,
         )
 
+    @_overload
     def describe_db_cluster_parameters(
         self,
-        input: DescribeDBClusterParametersInput,
+        request: _models.DescribeDBClusterParametersInput
+        | _models.DescribeDBClusterParametersInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeDBClusterParametersOutput: ...
+
+    @_overload
+    def describe_db_cluster_parameters(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeDBClusterParametersInputDict],
     ) -> DescribeDBClusterParametersOutput:
         """
         Returns the detailed parameter list for a particular DB cluster
@@ -2416,8 +3621,6 @@ class RDSClient(Client[RDSConfig]):
         in the *Amazon RDS User Guide*.
 
         Args:
-            input:
-                An instance of `DescribeDBClusterParametersInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2427,12 +3630,33 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeDBClusterParametersOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_DB_CLUSTER_PARAMETERS, [], plugins)
 
+    def describe_db_cluster_parameters(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeDBClusterParametersOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_DB_CLUSTER_PARAMETERS, args, kwargs),
+            _models.DESCRIBE_DB_CLUSTER_PARAMETERS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_db_clusters(
         self,
-        input: DescribeDBClustersInput | None = None,
+        request: _models.DescribeDBClustersInput | _models.DescribeDBClustersInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeDBClustersOutput: ...
+
+    @_overload
+    def describe_db_clusters(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeDBClustersInputDict],
     ) -> DescribeDBClustersOutput:
         """
         Describes existing Amazon Aurora DB clusters and Multi-AZ DB clusters.
@@ -2450,8 +3674,6 @@ class RDSClient(Client[RDSConfig]):
         instances and Amazon DocumentDB instances.
 
         Args:
-            input:
-                An instance of `DescribeDBClustersInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2461,12 +3683,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeDBClustersOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_DB_CLUSTERS, [], plugins)
 
+    def describe_db_clusters(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeDBClustersOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_DB_CLUSTERS, args, kwargs),
+            _models.DESCRIBE_DB_CLUSTERS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_db_cluster_snapshot_attributes(
         self,
-        input: DescribeDBClusterSnapshotAttributesInput,
+        request: _models.DescribeDBClusterSnapshotAttributesInput
+        | _models.DescribeDBClusterSnapshotAttributesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeDBClusterSnapshotAttributesOutput: ...
+
+    @_overload
+    def describe_db_cluster_snapshot_attributes(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeDBClusterSnapshotAttributesInputDict],
     ) -> DescribeDBClusterSnapshotAttributesOutput:
         """
         Returns a list of DB cluster snapshot attribute names and values for a
@@ -2486,8 +3730,6 @@ class RDSClient(Client[RDSConfig]):
         API action.
 
         Args:
-            input:
-                An instance of `DescribeDBClusterSnapshotAttributesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2497,14 +3739,36 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeDBClusterSnapshotAttributesOutput`.
         """
+
+    def describe_db_cluster_snapshot_attributes(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeDBClusterSnapshotAttributesOutput:
         return self._invoke(
-            input, _models.DESCRIBE_DB_CLUSTER_SNAPSHOT_ATTRIBUTES, [], plugins
+            self._select_input(
+                _models.DESCRIBE_DB_CLUSTER_SNAPSHOT_ATTRIBUTES, args, kwargs
+            ),
+            _models.DESCRIBE_DB_CLUSTER_SNAPSHOT_ATTRIBUTES,
+            [],
+            plugins,
         )
 
+    @_overload
     def describe_db_cluster_snapshots(
         self,
-        input: DescribeDBClusterSnapshotsInput | None = None,
+        request: _models.DescribeDBClusterSnapshotsInput
+        | _models.DescribeDBClusterSnapshotsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeDBClusterSnapshotsOutput: ...
+
+    @_overload
+    def describe_db_cluster_snapshots(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeDBClusterSnapshotsInputDict],
     ) -> DescribeDBClusterSnapshotsOutput:
         """
         Returns information about DB cluster snapshots. This API action supports
@@ -2519,8 +3783,6 @@ class RDSClient(Client[RDSConfig]):
         in the *Amazon RDS User Guide*.
 
         Args:
-            input:
-                An instance of `DescribeDBClusterSnapshotsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2530,19 +3792,39 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeDBClusterSnapshotsOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_DB_CLUSTER_SNAPSHOTS, [], plugins)
 
+    def describe_db_cluster_snapshots(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeDBClusterSnapshotsOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_DB_CLUSTER_SNAPSHOTS, args, kwargs),
+            _models.DESCRIBE_DB_CLUSTER_SNAPSHOTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_db_engine_versions(
         self,
-        input: DescribeDBEngineVersionsInput | None = None,
+        request: _models.DescribeDBEngineVersionsInput
+        | _models.DescribeDBEngineVersionsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeDBEngineVersionsOutput: ...
+
+    @_overload
+    def describe_db_engine_versions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeDBEngineVersionsInputDict],
     ) -> DescribeDBEngineVersionsOutput:
         """
         Describes the properties of specific versions of DB engines.
 
         Args:
-            input:
-                An instance of `DescribeDBEngineVersionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2552,12 +3834,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeDBEngineVersionsOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_DB_ENGINE_VERSIONS, [], plugins)
 
+    def describe_db_engine_versions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeDBEngineVersionsOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_DB_ENGINE_VERSIONS, args, kwargs),
+            _models.DESCRIBE_DB_ENGINE_VERSIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_db_instance_automated_backups(
         self,
-        input: DescribeDBInstanceAutomatedBackupsInput | None = None,
+        request: _models.DescribeDBInstanceAutomatedBackupsInput
+        | _models.DescribeDBInstanceAutomatedBackupsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeDBInstanceAutomatedBackupsOutput: ...
+
+    @_overload
+    def describe_db_instance_automated_backups(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeDBInstanceAutomatedBackupsInputDict],
     ) -> DescribeDBInstanceAutomatedBackupsOutput:
         """
         Displays backups for both current and deleted instances. For example,
@@ -2570,8 +3874,6 @@ class RDSClient(Client[RDSConfig]):
         All parameters are optional.
 
         Args:
-            input:
-                An instance of `DescribeDBInstanceAutomatedBackupsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2581,14 +3883,36 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeDBInstanceAutomatedBackupsOutput`.
         """
+
+    def describe_db_instance_automated_backups(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeDBInstanceAutomatedBackupsOutput:
         return self._invoke(
-            input, _models.DESCRIBE_DB_INSTANCE_AUTOMATED_BACKUPS, [], plugins
+            self._select_input(
+                _models.DESCRIBE_DB_INSTANCE_AUTOMATED_BACKUPS, args, kwargs
+            ),
+            _models.DESCRIBE_DB_INSTANCE_AUTOMATED_BACKUPS,
+            [],
+            plugins,
         )
 
+    @_overload
     def describe_db_instances(
         self,
-        input: DescribeDBInstancesInput | None = None,
+        request: _models.DescribeDBInstancesInput
+        | _models.DescribeDBInstancesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeDBInstancesOutput: ...
+
+    @_overload
+    def describe_db_instances(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeDBInstancesInputDict],
     ) -> DescribeDBInstancesOutput:
         """
         Describes provisioned RDS instances. This API supports pagination.
@@ -2598,8 +3922,6 @@ class RDSClient(Client[RDSConfig]):
             instances and Amazon DocumentDB instances.
 
         Args:
-            input:
-                An instance of `DescribeDBInstancesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2609,10 +3931,33 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeDBInstancesOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_DB_INSTANCES, [], plugins)
 
+    def describe_db_instances(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeDBInstancesOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_DB_INSTANCES, args, kwargs),
+            _models.DESCRIBE_DB_INSTANCES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_db_log_files(
-        self, input: DescribeDBLogFilesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeDBLogFilesInput | _models.DescribeDBLogFilesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeDBLogFilesOutput: ...
+
+    @_overload
+    def describe_db_log_files(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeDBLogFilesInputDict],
     ) -> DescribeDBLogFilesOutput:
         """
         Returns a list of DB log files for the DB instance.
@@ -2620,8 +3965,6 @@ class RDSClient(Client[RDSConfig]):
         This command doesn't apply to RDS Custom.
 
         Args:
-            input:
-                An instance of `DescribeDBLogFilesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2631,19 +3974,39 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeDBLogFilesOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_DB_LOG_FILES, [], plugins)
 
+    def describe_db_log_files(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeDBLogFilesOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_DB_LOG_FILES, args, kwargs),
+            _models.DESCRIBE_DB_LOG_FILES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_db_major_engine_versions(
         self,
-        input: DescribeDBMajorEngineVersionsInput | None = None,
+        request: _models.DescribeDBMajorEngineVersionsInput
+        | _models.DescribeDBMajorEngineVersionsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeDBMajorEngineVersionsOutput: ...
+
+    @_overload
+    def describe_db_major_engine_versions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeDBMajorEngineVersionsInputDict],
     ) -> DescribeDBMajorEngineVersionsOutput:
         """
         Describes the properties of specific major versions of DB engines.
 
         Args:
-            input:
-                An instance of `DescribeDBMajorEngineVersionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2653,14 +4016,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeDBMajorEngineVersionsOutput`.
         """
+
+    def describe_db_major_engine_versions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeDBMajorEngineVersionsOutput:
         return self._invoke(
-            input, _models.DESCRIBE_DB_MAJOR_ENGINE_VERSIONS, [], plugins
+            self._select_input(_models.DESCRIBE_DB_MAJOR_ENGINE_VERSIONS, args, kwargs),
+            _models.DESCRIBE_DB_MAJOR_ENGINE_VERSIONS,
+            [],
+            plugins,
         )
 
+    @_overload
     def describe_db_parameter_groups(
         self,
-        input: DescribeDBParameterGroupsInput | None = None,
+        request: _models.DescribeDBParameterGroupsInput
+        | _models.DescribeDBParameterGroupsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeDBParameterGroupsOutput: ...
+
+    @_overload
+    def describe_db_parameter_groups(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeDBParameterGroupsInputDict],
     ) -> DescribeDBParameterGroupsOutput:
         """
         Returns a list of `DBParameterGroup` descriptions. If a
@@ -2668,8 +4051,6 @@ class RDSClient(Client[RDSConfig]):
         description of the specified DB parameter group.
 
         Args:
-            input:
-                An instance of `DescribeDBParameterGroupsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2679,17 +4060,39 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeDBParameterGroupsOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_DB_PARAMETER_GROUPS, [], plugins)
 
+    def describe_db_parameter_groups(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeDBParameterGroupsOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_DB_PARAMETER_GROUPS, args, kwargs),
+            _models.DESCRIBE_DB_PARAMETER_GROUPS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_db_parameters(
-        self, input: DescribeDBParametersInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeDBParametersInput
+        | _models.DescribeDBParametersInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeDBParametersOutput: ...
+
+    @_overload
+    def describe_db_parameters(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeDBParametersInputDict],
     ) -> DescribeDBParametersOutput:
         """
         Returns the detailed parameter list for a particular DB parameter group.
 
         Args:
-            input:
-                An instance of `DescribeDBParametersInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2699,19 +4102,38 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeDBParametersOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_DB_PARAMETERS, [], plugins)
 
+    def describe_db_parameters(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeDBParametersOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_DB_PARAMETERS, args, kwargs),
+            _models.DESCRIBE_DB_PARAMETERS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_db_proxies(
         self,
-        input: DescribeDBProxiesInput | None = None,
+        request: _models.DescribeDBProxiesInput | _models.DescribeDBProxiesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeDBProxiesOutput: ...
+
+    @_overload
+    def describe_db_proxies(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeDBProxiesInputDict],
     ) -> DescribeDBProxiesOutput:
         """
         Returns information about DB proxies.
 
         Args:
-            input:
-                An instance of `DescribeDBProxiesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2721,19 +4143,39 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeDBProxiesOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_DB_PROXIES, [], plugins)
 
+    def describe_db_proxies(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeDBProxiesOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_DB_PROXIES, args, kwargs),
+            _models.DESCRIBE_DB_PROXIES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_db_proxy_endpoints(
         self,
-        input: DescribeDBProxyEndpointsInput | None = None,
+        request: _models.DescribeDBProxyEndpointsInput
+        | _models.DescribeDBProxyEndpointsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeDBProxyEndpointsOutput: ...
+
+    @_overload
+    def describe_db_proxy_endpoints(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeDBProxyEndpointsInputDict],
     ) -> DescribeDBProxyEndpointsOutput:
         """
         Returns information about DB proxy endpoints.
 
         Args:
-            input:
-                An instance of `DescribeDBProxyEndpointsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2743,20 +4185,40 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeDBProxyEndpointsOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_DB_PROXY_ENDPOINTS, [], plugins)
 
+    def describe_db_proxy_endpoints(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeDBProxyEndpointsOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_DB_PROXY_ENDPOINTS, args, kwargs),
+            _models.DESCRIBE_DB_PROXY_ENDPOINTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_db_proxy_target_groups(
         self,
-        input: DescribeDBProxyTargetGroupsInput,
+        request: _models.DescribeDBProxyTargetGroupsInput
+        | _models.DescribeDBProxyTargetGroupsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeDBProxyTargetGroupsOutput: ...
+
+    @_overload
+    def describe_db_proxy_target_groups(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeDBProxyTargetGroupsInputDict],
     ) -> DescribeDBProxyTargetGroupsOutput:
         """
         Returns information about DB proxy target groups, represented by
         `DBProxyTargetGroup` data structures.
 
         Args:
-            input:
-                An instance of `DescribeDBProxyTargetGroupsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2766,18 +4228,40 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeDBProxyTargetGroupsOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_DB_PROXY_TARGET_GROUPS, [], plugins)
 
+    def describe_db_proxy_target_groups(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeDBProxyTargetGroupsOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_DB_PROXY_TARGET_GROUPS, args, kwargs),
+            _models.DESCRIBE_DB_PROXY_TARGET_GROUPS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_db_proxy_targets(
-        self, input: DescribeDBProxyTargetsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeDBProxyTargetsInput
+        | _models.DescribeDBProxyTargetsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeDBProxyTargetsOutput: ...
+
+    @_overload
+    def describe_db_proxy_targets(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeDBProxyTargetsInputDict],
     ) -> DescribeDBProxyTargetsOutput:
         """
         Returns information about `DBProxyTarget` objects. This API supports
         pagination.
 
         Args:
-            input:
-                An instance of `DescribeDBProxyTargetsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2787,20 +4271,40 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeDBProxyTargetsOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_DB_PROXY_TARGETS, [], plugins)
 
+    def describe_db_proxy_targets(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeDBProxyTargetsOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_DB_PROXY_TARGETS, args, kwargs),
+            _models.DESCRIBE_DB_PROXY_TARGETS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_db_recommendations(
         self,
-        input: DescribeDBRecommendationsInput | None = None,
+        request: _models.DescribeDBRecommendationsInput
+        | _models.DescribeDBRecommendationsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeDBRecommendationsOutput: ...
+
+    @_overload
+    def describe_db_recommendations(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeDBRecommendationsInputDict],
     ) -> DescribeDBRecommendationsOutput:
         """
         Describes the recommendations to resolve the issues for your DB
         instances, DB clusters, and DB parameter groups.
 
         Args:
-            input:
-                An instance of `DescribeDBRecommendationsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2810,12 +4314,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeDBRecommendationsOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_DB_RECOMMENDATIONS, [], plugins)
 
+    def describe_db_recommendations(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeDBRecommendationsOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_DB_RECOMMENDATIONS, args, kwargs),
+            _models.DESCRIBE_DB_RECOMMENDATIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_db_security_groups(
         self,
-        input: DescribeDBSecurityGroupsInput | None = None,
+        request: _models.DescribeDBSecurityGroupsInput
+        | _models.DescribeDBSecurityGroupsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeDBSecurityGroupsOutput: ...
+
+    @_overload
+    def describe_db_security_groups(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeDBSecurityGroupsInputDict],
     ) -> DescribeDBSecurityGroupsOutput:
         """
         Returns a list of `DBSecurityGroup` descriptions. If a
@@ -2835,8 +4361,6 @@ class RDSClient(Client[RDSConfig]):
             in the *Amazon RDS User Guide*.
 
         Args:
-            input:
-                An instance of `DescribeDBSecurityGroupsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2846,19 +4370,39 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeDBSecurityGroupsOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_DB_SECURITY_GROUPS, [], plugins)
 
+    def describe_db_security_groups(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeDBSecurityGroupsOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_DB_SECURITY_GROUPS, args, kwargs),
+            _models.DESCRIBE_DB_SECURITY_GROUPS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_db_shard_groups(
         self,
-        input: DescribeDBShardGroupsInput | None = None,
+        request: _models.DescribeDBShardGroupsInput
+        | _models.DescribeDBShardGroupsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeDBShardGroupsOutput: ...
+
+    @_overload
+    def describe_db_shard_groups(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeDBShardGroupsInputDict],
     ) -> DescribeDBShardGroupsOutput:
         """
         Describes existing Aurora Limitless Database DB shard groups.
 
         Args:
-            input:
-                An instance of `DescribeDBShardGroupsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2868,12 +4412,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeDBShardGroupsOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_DB_SHARD_GROUPS, [], plugins)
 
+    def describe_db_shard_groups(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeDBShardGroupsOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_DB_SHARD_GROUPS, args, kwargs),
+            _models.DESCRIBE_DB_SHARD_GROUPS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_db_snapshot_attributes(
         self,
-        input: DescribeDBSnapshotAttributesInput,
+        request: _models.DescribeDBSnapshotAttributesInput
+        | _models.DescribeDBSnapshotAttributesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeDBSnapshotAttributesOutput: ...
+
+    @_overload
+    def describe_db_snapshot_attributes(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeDBSnapshotAttributesInputDict],
     ) -> DescribeDBSnapshotAttributesOutput:
         """
         Returns a list of DB snapshot attribute names and values for a manual DB
@@ -2892,8 +4458,6 @@ class RDSClient(Client[RDSConfig]):
         or private, use the `ModifyDBSnapshotAttribute` API action.
 
         Args:
-            input:
-                An instance of `DescribeDBSnapshotAttributesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2903,20 +4467,40 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeDBSnapshotAttributesOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_DB_SNAPSHOT_ATTRIBUTES, [], plugins)
 
+    def describe_db_snapshot_attributes(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeDBSnapshotAttributesOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_DB_SNAPSHOT_ATTRIBUTES, args, kwargs),
+            _models.DESCRIBE_DB_SNAPSHOT_ATTRIBUTES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_db_snapshots(
         self,
-        input: DescribeDBSnapshotsInput | None = None,
+        request: _models.DescribeDBSnapshotsInput
+        | _models.DescribeDBSnapshotsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeDBSnapshotsOutput: ...
+
+    @_overload
+    def describe_db_snapshots(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeDBSnapshotsInputDict],
     ) -> DescribeDBSnapshotsOutput:
         """
         Returns information about DB snapshots. This API action supports
         pagination.
 
         Args:
-            input:
-                An instance of `DescribeDBSnapshotsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2926,12 +4510,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeDBSnapshotsOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_DB_SNAPSHOTS, [], plugins)
 
+    def describe_db_snapshots(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeDBSnapshotsOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_DB_SNAPSHOTS, args, kwargs),
+            _models.DESCRIBE_DB_SNAPSHOTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_db_snapshot_tenant_databases(
         self,
-        input: DescribeDBSnapshotTenantDatabasesInput | None = None,
+        request: _models.DescribeDBSnapshotTenantDatabasesInput
+        | _models.DescribeDBSnapshotTenantDatabasesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeDBSnapshotTenantDatabasesOutput: ...
+
+    @_overload
+    def describe_db_snapshot_tenant_databases(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeDBSnapshotTenantDatabasesInputDict],
     ) -> DescribeDBSnapshotTenantDatabasesOutput:
         """
         Describes the tenant databases that exist in a DB snapshot. This command
@@ -2945,8 +4551,6 @@ class RDSClient(Client[RDSConfig]):
         all its tenant databases.
 
         Args:
-            input:
-                An instance of `DescribeDBSnapshotTenantDatabasesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2956,14 +4560,36 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeDBSnapshotTenantDatabasesOutput`.
         """
+
+    def describe_db_snapshot_tenant_databases(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeDBSnapshotTenantDatabasesOutput:
         return self._invoke(
-            input, _models.DESCRIBE_DB_SNAPSHOT_TENANT_DATABASES, [], plugins
+            self._select_input(
+                _models.DESCRIBE_DB_SNAPSHOT_TENANT_DATABASES, args, kwargs
+            ),
+            _models.DESCRIBE_DB_SNAPSHOT_TENANT_DATABASES,
+            [],
+            plugins,
         )
 
+    @_overload
     def describe_db_subnet_groups(
         self,
-        input: DescribeDBSubnetGroupsInput | None = None,
+        request: _models.DescribeDBSubnetGroupsInput
+        | _models.DescribeDBSubnetGroupsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeDBSubnetGroupsOutput: ...
+
+    @_overload
+    def describe_db_subnet_groups(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeDBSubnetGroupsInputDict],
     ) -> DescribeDBSubnetGroupsOutput:
         """
         Returns a list of DBSubnetGroup descriptions. If a DBSubnetGroupName is
@@ -2974,8 +4600,6 @@ class RDSClient(Client[RDSConfig]):
         Tutorial](http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing).
 
         Args:
-            input:
-                An instance of `DescribeDBSubnetGroupsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2985,12 +4609,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeDBSubnetGroupsOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_DB_SUBNET_GROUPS, [], plugins)
 
+    def describe_db_subnet_groups(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeDBSubnetGroupsOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_DB_SUBNET_GROUPS, args, kwargs),
+            _models.DESCRIBE_DB_SUBNET_GROUPS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_engine_default_cluster_parameters(
         self,
-        input: DescribeEngineDefaultClusterParametersInput,
+        request: _models.DescribeEngineDefaultClusterParametersInput
+        | _models.DescribeEngineDefaultClusterParametersInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeEngineDefaultClusterParametersOutput: ...
+
+    @_overload
+    def describe_engine_default_cluster_parameters(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeEngineDefaultClusterParametersInputDict],
     ) -> DescribeEngineDefaultClusterParametersOutput:
         """
         Returns the default engine and system parameter information for the
@@ -3001,8 +4647,6 @@ class RDSClient(Client[RDSConfig]):
         in the *Amazon Aurora User Guide*.
 
         Args:
-            input:
-                An instance of `DescribeEngineDefaultClusterParametersInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3012,22 +4656,42 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeEngineDefaultClusterParametersOutput`.
         """
+
+    def describe_engine_default_cluster_parameters(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeEngineDefaultClusterParametersOutput:
         return self._invoke(
-            input, _models.DESCRIBE_ENGINE_DEFAULT_CLUSTER_PARAMETERS, [], plugins
+            self._select_input(
+                _models.DESCRIBE_ENGINE_DEFAULT_CLUSTER_PARAMETERS, args, kwargs
+            ),
+            _models.DESCRIBE_ENGINE_DEFAULT_CLUSTER_PARAMETERS,
+            [],
+            plugins,
         )
 
+    @_overload
     def describe_engine_default_parameters(
         self,
-        input: DescribeEngineDefaultParametersInput,
+        request: _models.DescribeEngineDefaultParametersInput
+        | _models.DescribeEngineDefaultParametersInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeEngineDefaultParametersOutput: ...
+
+    @_overload
+    def describe_engine_default_parameters(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeEngineDefaultParametersInputDict],
     ) -> DescribeEngineDefaultParametersOutput:
         """
         Returns the default engine and system parameter information for the
         specified database engine.
 
         Args:
-            input:
-                An instance of `DescribeEngineDefaultParametersInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3037,14 +4701,36 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeEngineDefaultParametersOutput`.
         """
+
+    def describe_engine_default_parameters(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeEngineDefaultParametersOutput:
         return self._invoke(
-            input, _models.DESCRIBE_ENGINE_DEFAULT_PARAMETERS, [], plugins
+            self._select_input(
+                _models.DESCRIBE_ENGINE_DEFAULT_PARAMETERS, args, kwargs
+            ),
+            _models.DESCRIBE_ENGINE_DEFAULT_PARAMETERS,
+            [],
+            plugins,
         )
 
+    @_overload
     def describe_event_categories(
         self,
-        input: DescribeEventCategoriesInput | None = None,
+        request: _models.DescribeEventCategoriesInput
+        | _models.DescribeEventCategoriesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeEventCategoriesOutput: ...
+
+    @_overload
+    def describe_event_categories(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeEventCategoriesInputDict],
     ) -> DescribeEventCategoriesOutput:
         """
         Displays a list of categories for all event source types, or, if
@@ -3057,8 +4743,6 @@ class RDSClient(Client[RDSConfig]):
         .
 
         Args:
-            input:
-                An instance of `DescribeEventCategoriesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3068,12 +4752,33 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeEventCategoriesOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_EVENT_CATEGORIES, [], plugins)
 
+    def describe_event_categories(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeEventCategoriesOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_EVENT_CATEGORIES, args, kwargs),
+            _models.DESCRIBE_EVENT_CATEGORIES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_events(
         self,
-        input: DescribeEventsInput | None = None,
+        request: _models.DescribeEventsInput | _models.DescribeEventsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeEventsOutput: ...
+
+    @_overload
+    def describe_events(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeEventsInputDict],
     ) -> DescribeEventsOutput:
         """
         Returns events related to DB instances, DB clusters, DB parameter
@@ -3093,8 +4798,6 @@ class RDSClient(Client[RDSConfig]):
             By default, RDS returns events that were generated in the past hour.
 
         Args:
-            input:
-                An instance of `DescribeEventsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3104,12 +4807,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeEventsOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_EVENTS, [], plugins)
 
+    def describe_events(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeEventsOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_EVENTS, args, kwargs),
+            _models.DESCRIBE_EVENTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_event_subscriptions(
         self,
-        input: DescribeEventSubscriptionsInput | None = None,
+        request: _models.DescribeEventSubscriptionsInput
+        | _models.DescribeEventSubscriptionsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeEventSubscriptionsOutput: ...
+
+    @_overload
+    def describe_event_subscriptions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeEventSubscriptionsInputDict],
     ) -> DescribeEventSubscriptionsOutput:
         """
         Lists all the subscription descriptions for a customer account. The
@@ -3121,8 +4846,6 @@ class RDSClient(Client[RDSConfig]):
         subscription.
 
         Args:
-            input:
-                An instance of `DescribeEventSubscriptionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3132,20 +4855,40 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeEventSubscriptionsOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_EVENT_SUBSCRIPTIONS, [], plugins)
 
+    def describe_event_subscriptions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeEventSubscriptionsOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_EVENT_SUBSCRIPTIONS, args, kwargs),
+            _models.DESCRIBE_EVENT_SUBSCRIPTIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_export_tasks(
         self,
-        input: DescribeExportTasksInput | None = None,
+        request: _models.DescribeExportTasksInput
+        | _models.DescribeExportTasksInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeExportTasksOutput: ...
+
+    @_overload
+    def describe_export_tasks(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeExportTasksInputDict],
     ) -> DescribeExportTasksOutput:
         """
         Returns information about a snapshot or cluster export to Amazon S3.
         This API operation supports pagination.
 
         Args:
-            input:
-                An instance of `DescribeExportTasksInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3155,12 +4898,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeExportTasksOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_EXPORT_TASKS, [], plugins)
 
+    def describe_export_tasks(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeExportTasksOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_EXPORT_TASKS, args, kwargs),
+            _models.DESCRIBE_EXPORT_TASKS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_global_clusters(
         self,
-        input: DescribeGlobalClustersInput | None = None,
+        request: _models.DescribeGlobalClustersInput
+        | _models.DescribeGlobalClustersInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeGlobalClustersOutput: ...
+
+    @_overload
+    def describe_global_clusters(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeGlobalClustersInputDict],
     ) -> DescribeGlobalClustersOutput:
         """
         Returns information about Aurora global database clusters. This API
@@ -3174,8 +4939,6 @@ class RDSClient(Client[RDSConfig]):
             This action only applies to Aurora DB clusters.
 
         Args:
-            input:
-                An instance of `DescribeGlobalClustersInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3185,19 +4948,39 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeGlobalClustersOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_GLOBAL_CLUSTERS, [], plugins)
 
+    def describe_global_clusters(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeGlobalClustersOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_GLOBAL_CLUSTERS, args, kwargs),
+            _models.DESCRIBE_GLOBAL_CLUSTERS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_integrations(
         self,
-        input: DescribeIntegrationsInput | None = None,
+        request: _models.DescribeIntegrationsInput
+        | _models.DescribeIntegrationsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeIntegrationsOutput: ...
+
+    @_overload
+    def describe_integrations(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeIntegrationsInputDict],
     ) -> DescribeIntegrationsOutput:
         """
         Describe one or more zero-ETL integrations with Amazon Redshift.
 
         Args:
-            input:
-                An instance of `DescribeIntegrationsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3207,19 +4990,39 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeIntegrationsOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_INTEGRATIONS, [], plugins)
 
+    def describe_integrations(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeIntegrationsOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_INTEGRATIONS, args, kwargs),
+            _models.DESCRIBE_INTEGRATIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_option_group_options(
         self,
-        input: DescribeOptionGroupOptionsInput,
+        request: _models.DescribeOptionGroupOptionsInput
+        | _models.DescribeOptionGroupOptionsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeOptionGroupOptionsOutput: ...
+
+    @_overload
+    def describe_option_group_options(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeOptionGroupOptionsInputDict],
     ) -> DescribeOptionGroupOptionsOutput:
         """
         Describes all available options for the specified engine.
 
         Args:
-            input:
-                An instance of `DescribeOptionGroupOptionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3229,19 +5032,39 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeOptionGroupOptionsOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_OPTION_GROUP_OPTIONS, [], plugins)
 
+    def describe_option_group_options(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeOptionGroupOptionsOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_OPTION_GROUP_OPTIONS, args, kwargs),
+            _models.DESCRIBE_OPTION_GROUP_OPTIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_option_groups(
         self,
-        input: DescribeOptionGroupsInput | None = None,
+        request: _models.DescribeOptionGroupsInput
+        | _models.DescribeOptionGroupsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeOptionGroupsOutput: ...
+
+    @_overload
+    def describe_option_groups(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeOptionGroupsInputDict],
     ) -> DescribeOptionGroupsOutput:
         """
         Describes the available option groups.
 
         Args:
-            input:
-                An instance of `DescribeOptionGroupsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3251,19 +5074,39 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeOptionGroupsOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_OPTION_GROUPS, [], plugins)
 
+    def describe_option_groups(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeOptionGroupsOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_OPTION_GROUPS, args, kwargs),
+            _models.DESCRIBE_OPTION_GROUPS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_orderable_db_instance_options(
         self,
-        input: DescribeOrderableDBInstanceOptionsInput,
+        request: _models.DescribeOrderableDBInstanceOptionsInput
+        | _models.DescribeOrderableDBInstanceOptionsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeOrderableDBInstanceOptionsOutput: ...
+
+    @_overload
+    def describe_orderable_db_instance_options(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeOrderableDBInstanceOptionsInputDict],
     ) -> DescribeOrderableDBInstanceOptionsOutput:
         """
         Describes the orderable DB instance options for a specified DB engine.
 
         Args:
-            input:
-                An instance of `DescribeOrderableDBInstanceOptionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3273,14 +5116,36 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeOrderableDBInstanceOptionsOutput`.
         """
+
+    def describe_orderable_db_instance_options(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeOrderableDBInstanceOptionsOutput:
         return self._invoke(
-            input, _models.DESCRIBE_ORDERABLE_DB_INSTANCE_OPTIONS, [], plugins
+            self._select_input(
+                _models.DESCRIBE_ORDERABLE_DB_INSTANCE_OPTIONS, args, kwargs
+            ),
+            _models.DESCRIBE_ORDERABLE_DB_INSTANCE_OPTIONS,
+            [],
+            plugins,
         )
 
+    @_overload
     def describe_pending_maintenance_actions(
         self,
-        input: DescribePendingMaintenanceActionsInput | None = None,
+        request: _models.DescribePendingMaintenanceActionsInput
+        | _models.DescribePendingMaintenanceActionsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribePendingMaintenanceActionsOutput: ...
+
+    @_overload
+    def describe_pending_maintenance_actions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribePendingMaintenanceActionsInputDict],
     ) -> DescribePendingMaintenanceActionsOutput:
         """
         Returns a list of resources (for example, DB instances) that have at
@@ -3293,8 +5158,6 @@ class RDSClient(Client[RDSConfig]):
         a previous API command such as `ApplyPendingMaintenanceActions`.
 
         Args:
-            input:
-                An instance of `DescribePendingMaintenanceActionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3304,22 +5167,42 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribePendingMaintenanceActionsOutput`.
         """
+
+    def describe_pending_maintenance_actions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribePendingMaintenanceActionsOutput:
         return self._invoke(
-            input, _models.DESCRIBE_PENDING_MAINTENANCE_ACTIONS, [], plugins
+            self._select_input(
+                _models.DESCRIBE_PENDING_MAINTENANCE_ACTIONS, args, kwargs
+            ),
+            _models.DESCRIBE_PENDING_MAINTENANCE_ACTIONS,
+            [],
+            plugins,
         )
 
+    @_overload
     def describe_reserved_db_instances(
         self,
-        input: DescribeReservedDBInstancesInput | None = None,
+        request: _models.DescribeReservedDBInstancesInput
+        | _models.DescribeReservedDBInstancesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeReservedDBInstancesOutput: ...
+
+    @_overload
+    def describe_reserved_db_instances(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeReservedDBInstancesInputDict],
     ) -> DescribeReservedDBInstancesOutput:
         """
         Returns information about reserved DB instances for this account, or
         about a specified reserved DB instance.
 
         Args:
-            input:
-                An instance of `DescribeReservedDBInstancesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3329,19 +5212,39 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeReservedDBInstancesOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_RESERVED_DB_INSTANCES, [], plugins)
 
+    def describe_reserved_db_instances(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeReservedDBInstancesOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_RESERVED_DB_INSTANCES, args, kwargs),
+            _models.DESCRIBE_RESERVED_DB_INSTANCES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_reserved_db_instances_offerings(
         self,
-        input: DescribeReservedDBInstancesOfferingsInput | None = None,
+        request: _models.DescribeReservedDBInstancesOfferingsInput
+        | _models.DescribeReservedDBInstancesOfferingsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeReservedDBInstancesOfferingsOutput: ...
+
+    @_overload
+    def describe_reserved_db_instances_offerings(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeReservedDBInstancesOfferingsInputDict],
     ) -> DescribeReservedDBInstancesOfferingsOutput:
         """
         Lists available reserved DB instance offerings.
 
         Args:
-            input:
-                An instance of `DescribeReservedDBInstancesOfferingsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3351,22 +5254,42 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeReservedDBInstancesOfferingsOutput`.
         """
+
+    def describe_reserved_db_instances_offerings(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeReservedDBInstancesOfferingsOutput:
         return self._invoke(
-            input, _models.DESCRIBE_RESERVED_DB_INSTANCES_OFFERINGS, [], plugins
+            self._select_input(
+                _models.DESCRIBE_RESERVED_DB_INSTANCES_OFFERINGS, args, kwargs
+            ),
+            _models.DESCRIBE_RESERVED_DB_INSTANCES_OFFERINGS,
+            [],
+            plugins,
         )
 
+    @_overload
     def describe_serverless_v2_platform_versions(
         self,
-        input: DescribeServerlessV2PlatformVersionsInput | None = None,
+        request: _models.DescribeServerlessV2PlatformVersionsInput
+        | _models.DescribeServerlessV2PlatformVersionsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeServerlessV2PlatformVersionsOutput: ...
+
+    @_overload
+    def describe_serverless_v2_platform_versions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeServerlessV2PlatformVersionsInputDict],
     ) -> DescribeServerlessV2PlatformVersionsOutput:
         """
         Describes the properties of specific platform versions for Aurora
         Serverless v2.
 
         Args:
-            input:
-                An instance of `DescribeServerlessV2PlatformVersionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3376,14 +5299,36 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeServerlessV2PlatformVersionsOutput`.
         """
+
+    def describe_serverless_v2_platform_versions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeServerlessV2PlatformVersionsOutput:
         return self._invoke(
-            input, _models.DESCRIBE_SERVERLESS_V2_PLATFORM_VERSIONS, [], plugins
+            self._select_input(
+                _models.DESCRIBE_SERVERLESS_V2_PLATFORM_VERSIONS, args, kwargs
+            ),
+            _models.DESCRIBE_SERVERLESS_V2_PLATFORM_VERSIONS,
+            [],
+            plugins,
         )
 
+    @_overload
     def describe_source_regions(
         self,
-        input: DescribeSourceRegionsInput | None = None,
+        request: _models.DescribeSourceRegionsInput
+        | _models.DescribeSourceRegionsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeSourceRegionsOutput: ...
+
+    @_overload
+    def describe_source_regions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeSourceRegionsInputDict],
     ) -> DescribeSourceRegionsOutput:
         """
         Returns a list of the source Amazon Web Services Regions where the
@@ -3401,8 +5346,6 @@ class RDSClient(Client[RDSConfig]):
         in the *Amazon EC2 API Reference*.
 
         Args:
-            input:
-                An instance of `DescribeSourceRegionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3412,12 +5355,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeSourceRegionsOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_SOURCE_REGIONS, [], plugins)
 
+    def describe_source_regions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeSourceRegionsOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_SOURCE_REGIONS, args, kwargs),
+            _models.DESCRIBE_SOURCE_REGIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_tenant_databases(
         self,
-        input: DescribeTenantDatabasesInput | None = None,
+        request: _models.DescribeTenantDatabasesInput
+        | _models.DescribeTenantDatabasesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeTenantDatabasesOutput: ...
+
+    @_overload
+    def describe_tenant_databases(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeTenantDatabasesInputDict],
     ) -> DescribeTenantDatabasesOutput:
         """
         Describes the tenant databases in a DB instance that uses the
@@ -3425,8 +5390,6 @@ class RDSClient(Client[RDSConfig]):
         supported.
 
         Args:
-            input:
-                An instance of `DescribeTenantDatabasesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3436,12 +5399,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeTenantDatabasesOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_TENANT_DATABASES, [], plugins)
 
+    def describe_tenant_databases(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeTenantDatabasesOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_TENANT_DATABASES, args, kwargs),
+            _models.DESCRIBE_TENANT_DATABASES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_valid_db_instance_modifications(
         self,
-        input: DescribeValidDBInstanceModificationsInput,
+        request: _models.DescribeValidDBInstanceModificationsInput
+        | _models.DescribeValidDBInstanceModificationsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeValidDBInstanceModificationsOutput: ...
+
+    @_overload
+    def describe_valid_db_instance_modifications(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeValidDBInstanceModificationsInputDict],
     ) -> DescribeValidDBInstanceModificationsOutput:
         """
         You can call `DescribeValidDBInstanceModifications` to learn what
@@ -3451,8 +5436,6 @@ class RDSClient(Client[RDSConfig]):
         This command doesn't apply to RDS Custom.
 
         Args:
-            input:
-                An instance of `DescribeValidDBInstanceModificationsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3462,12 +5445,36 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DescribeValidDBInstanceModificationsOutput`.
         """
+
+    def describe_valid_db_instance_modifications(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeValidDBInstanceModificationsOutput:
         return self._invoke(
-            input, _models.DESCRIBE_VALID_DB_INSTANCE_MODIFICATIONS, [], plugins
+            self._select_input(
+                _models.DESCRIBE_VALID_DB_INSTANCE_MODIFICATIONS, args, kwargs
+            ),
+            _models.DESCRIBE_VALID_DB_INSTANCE_MODIFICATIONS,
+            [],
+            plugins,
         )
 
+    @_overload
     def disable_http_endpoint(
-        self, input: DisableHttpEndpointInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DisableHttpEndpointInput
+        | _models.DisableHttpEndpointInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DisableHttpEndpointOutput: ...
+
+    @_overload
+    def disable_http_endpoint(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DisableHttpEndpointInputDict],
     ) -> DisableHttpEndpointOutput:
         """
         Disables the HTTP endpoint for the specified DB cluster. Disabling this
@@ -3484,8 +5491,6 @@ class RDSClient(Client[RDSConfig]):
             `ModifyDBCluster` operation.
 
         Args:
-            input:
-                An instance of `DisableHttpEndpointInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3495,10 +5500,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DisableHttpEndpointOutput`.
         """
-        return self._invoke(input, _models.DISABLE_HTTP_ENDPOINT, [], plugins)
 
+    def disable_http_endpoint(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DisableHttpEndpointOutput:
+        return self._invoke(
+            self._select_input(_models.DISABLE_HTTP_ENDPOINT, args, kwargs),
+            _models.DISABLE_HTTP_ENDPOINT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def download_db_log_file_portion(
-        self, input: DownloadDBLogFilePortionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DownloadDBLogFilePortionInput
+        | _models.DownloadDBLogFilePortionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DownloadDBLogFilePortionOutput: ...
+
+    @_overload
+    def download_db_log_file_portion(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DownloadDBLogFilePortionInputDict],
     ) -> DownloadDBLogFilePortionOutput:
         """
         Downloads all or a portion of the specified log file, up to 1 MB in
@@ -3514,8 +5543,6 @@ class RDSClient(Client[RDSConfig]):
             in the *Amazon CloudWatch Logs API Reference*.
 
         Args:
-            input:
-                An instance of `DownloadDBLogFilePortionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3525,10 +5552,33 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `DownloadDBLogFilePortionOutput`.
         """
-        return self._invoke(input, _models.DOWNLOAD_DB_LOG_FILE_PORTION, [], plugins)
 
+    def download_db_log_file_portion(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DownloadDBLogFilePortionOutput:
+        return self._invoke(
+            self._select_input(_models.DOWNLOAD_DB_LOG_FILE_PORTION, args, kwargs),
+            _models.DOWNLOAD_DB_LOG_FILE_PORTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def enable_http_endpoint(
-        self, input: EnableHttpEndpointInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.EnableHttpEndpointInput | _models.EnableHttpEndpointInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> EnableHttpEndpointOutput: ...
+
+    @_overload
+    def enable_http_endpoint(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.EnableHttpEndpointInputDict],
     ) -> EnableHttpEndpointOutput:
         """
         Enables the HTTP endpoint for the DB cluster. By default, the HTTP
@@ -3550,8 +5600,6 @@ class RDSClient(Client[RDSConfig]):
             `ModifyDBCluster` operation.
 
         Args:
-            input:
-                An instance of `EnableHttpEndpointInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3561,10 +5609,33 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `EnableHttpEndpointOutput`.
         """
-        return self._invoke(input, _models.ENABLE_HTTP_ENDPOINT, [], plugins)
 
+    def enable_http_endpoint(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> EnableHttpEndpointOutput:
+        return self._invoke(
+            self._select_input(_models.ENABLE_HTTP_ENDPOINT, args, kwargs),
+            _models.ENABLE_HTTP_ENDPOINT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def failover_db_cluster(
-        self, input: FailoverDBClusterInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.FailoverDBClusterInput | _models.FailoverDBClusterInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> FailoverDBClusterOutput: ...
+
+    @_overload
+    def failover_db_cluster(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.FailoverDBClusterInputDict],
     ) -> FailoverDBClusterOutput:
         """
         Forces a failover for a DB cluster.
@@ -3598,8 +5669,6 @@ class RDSClient(Client[RDSConfig]):
         in the *Amazon RDS User Guide*.
 
         Args:
-            input:
-                An instance of `FailoverDBClusterInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3609,10 +5678,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `FailoverDBClusterOutput`.
         """
-        return self._invoke(input, _models.FAILOVER_DB_CLUSTER, [], plugins)
 
+    def failover_db_cluster(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> FailoverDBClusterOutput:
+        return self._invoke(
+            self._select_input(_models.FAILOVER_DB_CLUSTER, args, kwargs),
+            _models.FAILOVER_DB_CLUSTER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def failover_global_cluster(
-        self, input: FailoverGlobalClusterInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.FailoverGlobalClusterInput
+        | _models.FailoverGlobalClusterInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> FailoverGlobalClusterOutput: ...
+
+    @_overload
+    def failover_global_cluster(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.FailoverGlobalClusterInputDict],
     ) -> FailoverGlobalClusterOutput:
         """
         Promotes the specified secondary DB cluster to be the primary DB cluster
@@ -3665,8 +5758,6 @@ class RDSClient(Client[RDSConfig]):
           in the *Amazon Aurora User Guide*.
 
         Args:
-            input:
-                An instance of `FailoverGlobalClusterInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3676,10 +5767,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `FailoverGlobalClusterOutput`.
         """
-        return self._invoke(input, _models.FAILOVER_GLOBAL_CLUSTER, [], plugins)
 
+    def failover_global_cluster(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> FailoverGlobalClusterOutput:
+        return self._invoke(
+            self._select_input(_models.FAILOVER_GLOBAL_CLUSTER, args, kwargs),
+            _models.FAILOVER_GLOBAL_CLUSTER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_tags_for_resource(
-        self, input: ListTagsForResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListTagsForResourceInput
+        | _models.ListTagsForResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListTagsForResourceOutput: ...
+
+    @_overload
+    def list_tags_for_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListTagsForResourceInputDict],
     ) -> ListTagsForResourceOutput:
         """
         Lists all tags on an Amazon RDS resource.
@@ -3692,8 +5807,6 @@ class RDSClient(Client[RDSConfig]):
         in the *Amazon Aurora User Guide*.
 
         Args:
-            input:
-                An instance of `ListTagsForResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3703,12 +5816,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `ListTagsForResourceOutput`.
         """
-        return self._invoke(input, _models.LIST_TAGS_FOR_RESOURCE, [], plugins)
 
+    def list_tags_for_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListTagsForResourceOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_TAGS_FOR_RESOURCE, args, kwargs),
+            _models.LIST_TAGS_FOR_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def modify_activity_stream(
         self,
-        input: ModifyActivityStreamInput | None = None,
+        request: _models.ModifyActivityStreamInput
+        | _models.ModifyActivityStreamInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ModifyActivityStreamOutput: ...
+
+    @_overload
+    def modify_activity_stream(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ModifyActivityStreamInputDict],
     ) -> ModifyActivityStreamOutput:
         """
         Changes the audit policy state of a database activity stream to either
@@ -3723,8 +5858,6 @@ class RDSClient(Client[RDSConfig]):
         This operation is supported for RDS for Oracle and Microsoft SQL Server.
 
         Args:
-            input:
-                An instance of `ModifyActivityStreamInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3734,12 +5867,33 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `ModifyActivityStreamOutput`.
         """
-        return self._invoke(input, _models.MODIFY_ACTIVITY_STREAM, [], plugins)
 
+    def modify_activity_stream(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ModifyActivityStreamOutput:
+        return self._invoke(
+            self._select_input(_models.MODIFY_ACTIVITY_STREAM, args, kwargs),
+            _models.MODIFY_ACTIVITY_STREAM,
+            [],
+            plugins,
+        )
+
+    @_overload
     def modify_certificates(
         self,
-        input: ModifyCertificatesInput | None = None,
+        request: _models.ModifyCertificatesInput | _models.ModifyCertificatesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ModifyCertificatesOutput: ...
+
+    @_overload
+    def modify_certificates(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ModifyCertificatesInputDict],
     ) -> ModifyCertificatesOutput:
         """
         Override the system-default Secure Sockets Layer/Transport Layer
@@ -3776,8 +5930,6 @@ class RDSClient(Client[RDSConfig]):
         in the *Amazon Aurora User Guide*.
 
         Args:
-            input:
-                An instance of `ModifyCertificatesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3787,12 +5939,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `ModifyCertificatesOutput`.
         """
-        return self._invoke(input, _models.MODIFY_CERTIFICATES, [], plugins)
 
+    def modify_certificates(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ModifyCertificatesOutput:
+        return self._invoke(
+            self._select_input(_models.MODIFY_CERTIFICATES, args, kwargs),
+            _models.MODIFY_CERTIFICATES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def modify_current_db_cluster_capacity(
         self,
-        input: ModifyCurrentDBClusterCapacityInput,
+        request: _models.ModifyCurrentDBClusterCapacityInput
+        | _models.ModifyCurrentDBClusterCapacityInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ModifyCurrentDBClusterCapacityOutput: ...
+
+    @_overload
+    def modify_current_db_cluster_capacity(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ModifyCurrentDBClusterCapacityInputDict],
     ) -> ModifyCurrentDBClusterCapacityOutput:
         """
         Set the capacity of an Aurora Serverless v1 DB cluster to a specific
@@ -3823,8 +5997,6 @@ class RDSClient(Client[RDSConfig]):
             This operation only applies to Aurora Serverless v1 DB clusters.
 
         Args:
-            input:
-                An instance of `ModifyCurrentDBClusterCapacityInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3834,14 +6006,36 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `ModifyCurrentDBClusterCapacityOutput`.
         """
+
+    def modify_current_db_cluster_capacity(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ModifyCurrentDBClusterCapacityOutput:
         return self._invoke(
-            input, _models.MODIFY_CURRENT_DB_CLUSTER_CAPACITY, [], plugins
+            self._select_input(
+                _models.MODIFY_CURRENT_DB_CLUSTER_CAPACITY, args, kwargs
+            ),
+            _models.MODIFY_CURRENT_DB_CLUSTER_CAPACITY,
+            [],
+            plugins,
         )
 
+    @_overload
     def modify_custom_db_engine_version(
         self,
-        input: ModifyCustomDBEngineVersionInput,
+        request: _models.ModifyCustomDBEngineVersionInput
+        | _models.ModifyCustomDBEngineVersionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ModifyCustomDBEngineVersionOutput: ...
+
+    @_overload
+    def modify_custom_db_engine_version(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ModifyCustomDBEngineVersionInputDict],
     ) -> ModifyCustomDBEngineVersionOutput:
         """
         Modifies the status of a custom engine version (CEV). You can find CEVs
@@ -3861,8 +6055,6 @@ class RDSClient(Client[RDSConfig]):
         in the *Amazon RDS User Guide*.
 
         Args:
-            input:
-                An instance of `ModifyCustomDBEngineVersionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3872,12 +6064,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `ModifyCustomDBEngineVersionOutput`.
         """
-        return self._invoke(input, _models.MODIFY_CUSTOM_DB_ENGINE_VERSION, [], plugins)
 
+    def modify_custom_db_engine_version(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ModifyCustomDBEngineVersionOutput:
+        return self._invoke(
+            self._select_input(_models.MODIFY_CUSTOM_DB_ENGINE_VERSION, args, kwargs),
+            _models.MODIFY_CUSTOM_DB_ENGINE_VERSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def modify_db_capacity_reservation(
         self,
-        input: ModifyDBCapacityReservationInput,
+        request: _models.ModifyDBCapacityReservationInput
+        | _models.ModifyDBCapacityReservationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ModifyDBCapacityReservationOutput: ...
+
+    @_overload
+    def modify_db_capacity_reservation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ModifyDBCapacityReservationInputDict],
     ) -> ModifyDBCapacityReservationOutput:
         """
         Modifies a DB capacity reservation. You can change the reserved capacity
@@ -3894,8 +6108,6 @@ class RDSClient(Client[RDSConfig]):
         and Amazon RDS rejects it.
 
         Args:
-            input:
-                An instance of `ModifyDBCapacityReservationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3905,10 +6117,33 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `ModifyDBCapacityReservationOutput`.
         """
-        return self._invoke(input, _models.MODIFY_DB_CAPACITY_RESERVATION, [], plugins)
 
+    def modify_db_capacity_reservation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ModifyDBCapacityReservationOutput:
+        return self._invoke(
+            self._select_input(_models.MODIFY_DB_CAPACITY_RESERVATION, args, kwargs),
+            _models.MODIFY_DB_CAPACITY_RESERVATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def modify_db_cluster(
-        self, input: ModifyDBClusterInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ModifyDBClusterInput | _models.ModifyDBClusterInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ModifyDBClusterOutput: ...
+
+    @_overload
+    def modify_db_cluster(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ModifyDBClusterInputDict],
     ) -> ModifyDBClusterOutput:
         """
         Modifies the settings of an Amazon Aurora DB cluster or a Multi-AZ DB
@@ -3924,8 +6159,6 @@ class RDSClient(Client[RDSConfig]):
         in the *Amazon RDS User Guide*.
 
         Args:
-            input:
-                An instance of `ModifyDBClusterInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3935,10 +6168,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `ModifyDBClusterOutput`.
         """
-        return self._invoke(input, _models.MODIFY_DB_CLUSTER, [], plugins)
 
+    def modify_db_cluster(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ModifyDBClusterOutput:
+        return self._invoke(
+            self._select_input(_models.MODIFY_DB_CLUSTER, args, kwargs),
+            _models.MODIFY_DB_CLUSTER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def modify_db_cluster_endpoint(
-        self, input: ModifyDBClusterEndpointInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ModifyDBClusterEndpointInput
+        | _models.ModifyDBClusterEndpointInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ModifyDBClusterEndpointOutput: ...
+
+    @_overload
+    def modify_db_cluster_endpoint(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ModifyDBClusterEndpointInputDict],
     ) -> ModifyDBClusterEndpointOutput:
         """
         Modifies the properties of an endpoint in an Amazon Aurora DB cluster.
@@ -3947,8 +6204,6 @@ class RDSClient(Client[RDSConfig]):
             This operation only applies to Aurora DB clusters.
 
         Args:
-            input:
-                An instance of `ModifyDBClusterEndpointInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3958,12 +6213,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `ModifyDBClusterEndpointOutput`.
         """
-        return self._invoke(input, _models.MODIFY_DB_CLUSTER_ENDPOINT, [], plugins)
 
+    def modify_db_cluster_endpoint(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ModifyDBClusterEndpointOutput:
+        return self._invoke(
+            self._select_input(_models.MODIFY_DB_CLUSTER_ENDPOINT, args, kwargs),
+            _models.MODIFY_DB_CLUSTER_ENDPOINT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def modify_db_cluster_parameter_group(
         self,
-        input: ModifyDBClusterParameterGroupInput,
+        request: _models.ModifyDBClusterParameterGroupInput
+        | _models.ModifyDBClusterParameterGroupInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ModifyDBClusterParameterGroupOutput: ...
+
+    @_overload
+    def modify_db_cluster_parameter_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ModifyDBClusterParameterGroupInputDict],
     ) -> ModifyDBClusterParameterGroupOutput:
         """
         Modifies the parameters of a DB cluster parameter group. To modify more
@@ -3990,8 +6267,6 @@ class RDSClient(Client[RDSConfig]):
         in the *Amazon RDS User Guide.*
 
         Args:
-            input:
-                An instance of `ModifyDBClusterParameterGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4001,14 +6276,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `ModifyDBClusterParameterGroupOutput`.
         """
+
+    def modify_db_cluster_parameter_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ModifyDBClusterParameterGroupOutput:
         return self._invoke(
-            input, _models.MODIFY_DB_CLUSTER_PARAMETER_GROUP, [], plugins
+            self._select_input(_models.MODIFY_DB_CLUSTER_PARAMETER_GROUP, args, kwargs),
+            _models.MODIFY_DB_CLUSTER_PARAMETER_GROUP,
+            [],
+            plugins,
         )
 
+    @_overload
     def modify_db_cluster_snapshot_attribute(
         self,
-        input: ModifyDBClusterSnapshotAttributeInput,
+        request: _models.ModifyDBClusterSnapshotAttributeInput
+        | _models.ModifyDBClusterSnapshotAttributeInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ModifyDBClusterSnapshotAttributeOutput: ...
+
+    @_overload
+    def modify_db_cluster_snapshot_attribute(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ModifyDBClusterSnapshotAttributeInputDict],
     ) -> ModifyDBClusterSnapshotAttributeOutput:
         """
         Adds an attribute and values to, or removes an attribute and values
@@ -4039,8 +6334,6 @@ class RDSClient(Client[RDSConfig]):
         returned as values for the `restore` attribute.
 
         Args:
-            input:
-                An instance of `ModifyDBClusterSnapshotAttributeInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4050,12 +6343,35 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `ModifyDBClusterSnapshotAttributeOutput`.
         """
+
+    def modify_db_cluster_snapshot_attribute(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ModifyDBClusterSnapshotAttributeOutput:
         return self._invoke(
-            input, _models.MODIFY_DB_CLUSTER_SNAPSHOT_ATTRIBUTE, [], plugins
+            self._select_input(
+                _models.MODIFY_DB_CLUSTER_SNAPSHOT_ATTRIBUTE, args, kwargs
+            ),
+            _models.MODIFY_DB_CLUSTER_SNAPSHOT_ATTRIBUTE,
+            [],
+            plugins,
         )
 
+    @_overload
     def modify_db_instance(
-        self, input: ModifyDBInstanceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ModifyDBInstanceInput | _models.ModifyDBInstanceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ModifyDBInstanceOutput: ...
+
+    @_overload
+    def modify_db_instance(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ModifyDBInstanceInputDict],
     ) -> ModifyDBInstanceOutput:
         """
         Modifies settings for a DB instance. You can change one or more database
@@ -4065,8 +6381,6 @@ class RDSClient(Client[RDSConfig]):
         `ModifyDBInstance`.
 
         Args:
-            input:
-                An instance of `ModifyDBInstanceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4076,10 +6390,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `ModifyDBInstanceOutput`.
         """
-        return self._invoke(input, _models.MODIFY_DB_INSTANCE, [], plugins)
 
+    def modify_db_instance(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ModifyDBInstanceOutput:
+        return self._invoke(
+            self._select_input(_models.MODIFY_DB_INSTANCE, args, kwargs),
+            _models.MODIFY_DB_INSTANCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def modify_db_parameter_group(
-        self, input: ModifyDBParameterGroupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ModifyDBParameterGroupInput
+        | _models.ModifyDBParameterGroupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ModifyDBParameterGroupOutput: ...
+
+    @_overload
+    def modify_db_parameter_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ModifyDBParameterGroupInputDict],
     ) -> ModifyDBParameterGroupOutput:
         """
         Modifies the parameters of a DB parameter group. To modify more than one
@@ -4102,8 +6440,6 @@ class RDSClient(Client[RDSConfig]):
             has been created or modified.
 
         Args:
-            input:
-                An instance of `ModifyDBParameterGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4113,17 +6449,38 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `ModifyDBParameterGroupOutput`.
         """
-        return self._invoke(input, _models.MODIFY_DB_PARAMETER_GROUP, [], plugins)
 
+    def modify_db_parameter_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ModifyDBParameterGroupOutput:
+        return self._invoke(
+            self._select_input(_models.MODIFY_DB_PARAMETER_GROUP, args, kwargs),
+            _models.MODIFY_DB_PARAMETER_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def modify_db_proxy(
-        self, input: ModifyDBProxyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ModifyDBProxyInput | _models.ModifyDBProxyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ModifyDBProxyOutput: ...
+
+    @_overload
+    def modify_db_proxy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ModifyDBProxyInputDict],
     ) -> ModifyDBProxyOutput:
         """
         Changes the settings for an existing DB proxy.
 
         Args:
-            input:
-                An instance of `ModifyDBProxyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4133,17 +6490,39 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `ModifyDBProxyOutput`.
         """
-        return self._invoke(input, _models.MODIFY_DB_PROXY, [], plugins)
 
+    def modify_db_proxy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ModifyDBProxyOutput:
+        return self._invoke(
+            self._select_input(_models.MODIFY_DB_PROXY, args, kwargs),
+            _models.MODIFY_DB_PROXY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def modify_db_proxy_endpoint(
-        self, input: ModifyDBProxyEndpointInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ModifyDBProxyEndpointInput
+        | _models.ModifyDBProxyEndpointInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ModifyDBProxyEndpointOutput: ...
+
+    @_overload
+    def modify_db_proxy_endpoint(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ModifyDBProxyEndpointInputDict],
     ) -> ModifyDBProxyEndpointOutput:
         """
         Changes the settings for an existing DB proxy endpoint.
 
         Args:
-            input:
-                An instance of `ModifyDBProxyEndpointInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4153,17 +6532,39 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `ModifyDBProxyEndpointOutput`.
         """
-        return self._invoke(input, _models.MODIFY_DB_PROXY_ENDPOINT, [], plugins)
 
+    def modify_db_proxy_endpoint(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ModifyDBProxyEndpointOutput:
+        return self._invoke(
+            self._select_input(_models.MODIFY_DB_PROXY_ENDPOINT, args, kwargs),
+            _models.MODIFY_DB_PROXY_ENDPOINT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def modify_db_proxy_target_group(
-        self, input: ModifyDBProxyTargetGroupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ModifyDBProxyTargetGroupInput
+        | _models.ModifyDBProxyTargetGroupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ModifyDBProxyTargetGroupOutput: ...
+
+    @_overload
+    def modify_db_proxy_target_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ModifyDBProxyTargetGroupInputDict],
     ) -> ModifyDBProxyTargetGroupOutput:
         """
         Modifies the properties of a `DBProxyTargetGroup`.
 
         Args:
-            input:
-                An instance of `ModifyDBProxyTargetGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4173,18 +6574,40 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `ModifyDBProxyTargetGroupOutput`.
         """
-        return self._invoke(input, _models.MODIFY_DB_PROXY_TARGET_GROUP, [], plugins)
 
+    def modify_db_proxy_target_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ModifyDBProxyTargetGroupOutput:
+        return self._invoke(
+            self._select_input(_models.MODIFY_DB_PROXY_TARGET_GROUP, args, kwargs),
+            _models.MODIFY_DB_PROXY_TARGET_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def modify_db_recommendation(
-        self, input: ModifyDBRecommendationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ModifyDBRecommendationInput
+        | _models.ModifyDBRecommendationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ModifyDBRecommendationOutput: ...
+
+    @_overload
+    def modify_db_recommendation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ModifyDBRecommendationInputDict],
     ) -> ModifyDBRecommendationOutput:
         """
         Updates the recommendation status and recommended action status for the
         specified recommendation.
 
         Args:
-            input:
-                An instance of `ModifyDBRecommendationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4194,10 +6617,33 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `ModifyDBRecommendationOutput`.
         """
-        return self._invoke(input, _models.MODIFY_DB_RECOMMENDATION, [], plugins)
 
+    def modify_db_recommendation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ModifyDBRecommendationOutput:
+        return self._invoke(
+            self._select_input(_models.MODIFY_DB_RECOMMENDATION, args, kwargs),
+            _models.MODIFY_DB_RECOMMENDATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def modify_db_shard_group(
-        self, input: ModifyDBShardGroupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ModifyDBShardGroupInput | _models.ModifyDBShardGroupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ModifyDBShardGroupOutput: ...
+
+    @_overload
+    def modify_db_shard_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ModifyDBShardGroupInputDict],
     ) -> ModifyDBShardGroupOutput:
         """
         Modifies the settings of an Aurora Limitless Database DB shard group.
@@ -4205,8 +6651,6 @@ class RDSClient(Client[RDSConfig]):
         the new values in the request.
 
         Args:
-            input:
-                An instance of `ModifyDBShardGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4216,10 +6660,33 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `ModifyDBShardGroupOutput`.
         """
-        return self._invoke(input, _models.MODIFY_DB_SHARD_GROUP, [], plugins)
 
+    def modify_db_shard_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ModifyDBShardGroupOutput:
+        return self._invoke(
+            self._select_input(_models.MODIFY_DB_SHARD_GROUP, args, kwargs),
+            _models.MODIFY_DB_SHARD_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def modify_db_snapshot(
-        self, input: ModifyDBSnapshotInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ModifyDBSnapshotInput | _models.ModifyDBSnapshotInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ModifyDBSnapshotOutput: ...
+
+    @_overload
+    def modify_db_snapshot(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ModifyDBSnapshotInputDict],
     ) -> ModifyDBSnapshotOutput:
         """
         Updates a manual DB snapshot with a new engine version. The snapshot can
@@ -4230,8 +6697,6 @@ class RDSClient(Client[RDSConfig]):
         RDS for Db2.
 
         Args:
-            input:
-                An instance of `ModifyDBSnapshotInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4241,10 +6706,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `ModifyDBSnapshotOutput`.
         """
-        return self._invoke(input, _models.MODIFY_DB_SNAPSHOT, [], plugins)
 
+    def modify_db_snapshot(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ModifyDBSnapshotOutput:
+        return self._invoke(
+            self._select_input(_models.MODIFY_DB_SNAPSHOT, args, kwargs),
+            _models.MODIFY_DB_SNAPSHOT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def modify_db_snapshot_attribute(
-        self, input: ModifyDBSnapshotAttributeInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ModifyDBSnapshotAttributeInput
+        | _models.ModifyDBSnapshotAttributeInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ModifyDBSnapshotAttributeOutput: ...
+
+    @_overload
+    def modify_db_snapshot_attribute(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ModifyDBSnapshotAttributeInputDict],
     ) -> ModifyDBSnapshotAttributeOutput:
         """
         Adds an attribute and values to, or removes an attribute and values
@@ -4273,8 +6762,6 @@ class RDSClient(Client[RDSConfig]):
         accounts are returned as values for the `restore` attribute.
 
         Args:
-            input:
-                An instance of `ModifyDBSnapshotAttributeInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4284,18 +6771,40 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `ModifyDBSnapshotAttributeOutput`.
         """
-        return self._invoke(input, _models.MODIFY_DB_SNAPSHOT_ATTRIBUTE, [], plugins)
 
+    def modify_db_snapshot_attribute(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ModifyDBSnapshotAttributeOutput:
+        return self._invoke(
+            self._select_input(_models.MODIFY_DB_SNAPSHOT_ATTRIBUTE, args, kwargs),
+            _models.MODIFY_DB_SNAPSHOT_ATTRIBUTE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def modify_db_subnet_group(
-        self, input: ModifyDBSubnetGroupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ModifyDBSubnetGroupInput
+        | _models.ModifyDBSubnetGroupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ModifyDBSubnetGroupOutput: ...
+
+    @_overload
+    def modify_db_subnet_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ModifyDBSubnetGroupInputDict],
     ) -> ModifyDBSubnetGroupOutput:
         """
         Modifies an existing DB subnet group. DB subnet groups must contain at
         least one subnet in at least two AZs in the Amazon Web Services Region.
 
         Args:
-            input:
-                An instance of `ModifyDBSubnetGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4305,10 +6814,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `ModifyDBSubnetGroupOutput`.
         """
-        return self._invoke(input, _models.MODIFY_DB_SUBNET_GROUP, [], plugins)
 
+    def modify_db_subnet_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ModifyDBSubnetGroupOutput:
+        return self._invoke(
+            self._select_input(_models.MODIFY_DB_SUBNET_GROUP, args, kwargs),
+            _models.MODIFY_DB_SUBNET_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def modify_event_subscription(
-        self, input: ModifyEventSubscriptionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ModifyEventSubscriptionInput
+        | _models.ModifyEventSubscriptionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ModifyEventSubscriptionOutput: ...
+
+    @_overload
+    def modify_event_subscription(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ModifyEventSubscriptionInputDict],
     ) -> ModifyEventSubscriptionOutput:
         """
         Modifies an existing RDS event notification subscription. You can't
@@ -4324,8 +6857,6 @@ class RDSClient(Client[RDSConfig]):
         operation.
 
         Args:
-            input:
-                An instance of `ModifyEventSubscriptionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4335,10 +6866,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `ModifyEventSubscriptionOutput`.
         """
-        return self._invoke(input, _models.MODIFY_EVENT_SUBSCRIPTION, [], plugins)
 
+    def modify_event_subscription(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ModifyEventSubscriptionOutput:
+        return self._invoke(
+            self._select_input(_models.MODIFY_EVENT_SUBSCRIPTION, args, kwargs),
+            _models.MODIFY_EVENT_SUBSCRIPTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def modify_global_cluster(
-        self, input: ModifyGlobalClusterInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ModifyGlobalClusterInput
+        | _models.ModifyGlobalClusterInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ModifyGlobalClusterOutput: ...
+
+    @_overload
+    def modify_global_cluster(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ModifyGlobalClusterInputDict],
     ) -> ModifyGlobalClusterOutput:
         """
         Modifies a setting for an Amazon Aurora global database cluster. You can
@@ -4352,8 +6907,6 @@ class RDSClient(Client[RDSConfig]):
             This operation only applies to Aurora global database clusters.
 
         Args:
-            input:
-                An instance of `ModifyGlobalClusterInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4363,17 +6916,38 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `ModifyGlobalClusterOutput`.
         """
-        return self._invoke(input, _models.MODIFY_GLOBAL_CLUSTER, [], plugins)
 
+    def modify_global_cluster(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ModifyGlobalClusterOutput:
+        return self._invoke(
+            self._select_input(_models.MODIFY_GLOBAL_CLUSTER, args, kwargs),
+            _models.MODIFY_GLOBAL_CLUSTER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def modify_integration(
-        self, input: ModifyIntegrationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ModifyIntegrationInput | _models.ModifyIntegrationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ModifyIntegrationOutput: ...
+
+    @_overload
+    def modify_integration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ModifyIntegrationInputDict],
     ) -> ModifyIntegrationOutput:
         """
         Modifies a zero-ETL integration with Amazon Redshift.
 
         Args:
-            input:
-                An instance of `ModifyIntegrationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4383,17 +6957,38 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `ModifyIntegrationOutput`.
         """
-        return self._invoke(input, _models.MODIFY_INTEGRATION, [], plugins)
 
+    def modify_integration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ModifyIntegrationOutput:
+        return self._invoke(
+            self._select_input(_models.MODIFY_INTEGRATION, args, kwargs),
+            _models.MODIFY_INTEGRATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def modify_option_group(
-        self, input: ModifyOptionGroupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ModifyOptionGroupInput | _models.ModifyOptionGroupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ModifyOptionGroupOutput: ...
+
+    @_overload
+    def modify_option_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ModifyOptionGroupInputDict],
     ) -> ModifyOptionGroupOutput:
         """
         Modifies an existing option group.
 
         Args:
-            input:
-                An instance of `ModifyOptionGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4403,10 +6998,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `ModifyOptionGroupOutput`.
         """
-        return self._invoke(input, _models.MODIFY_OPTION_GROUP, [], plugins)
 
+    def modify_option_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ModifyOptionGroupOutput:
+        return self._invoke(
+            self._select_input(_models.MODIFY_OPTION_GROUP, args, kwargs),
+            _models.MODIFY_OPTION_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def modify_tenant_database(
-        self, input: ModifyTenantDatabaseInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ModifyTenantDatabaseInput
+        | _models.ModifyTenantDatabaseInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ModifyTenantDatabaseOutput: ...
+
+    @_overload
+    def modify_tenant_database(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ModifyTenantDatabaseInputDict],
     ) -> ModifyTenantDatabaseOutput:
         """
         Modifies an existing tenant database in a DB instance. You can change
@@ -4415,8 +7034,6 @@ class RDSClient(Client[RDSConfig]):
         configuration.
 
         Args:
-            input:
-                An instance of `ModifyTenantDatabaseInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4426,10 +7043,33 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `ModifyTenantDatabaseOutput`.
         """
-        return self._invoke(input, _models.MODIFY_TENANT_DATABASE, [], plugins)
 
+    def modify_tenant_database(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ModifyTenantDatabaseOutput:
+        return self._invoke(
+            self._select_input(_models.MODIFY_TENANT_DATABASE, args, kwargs),
+            _models.MODIFY_TENANT_DATABASE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def promote_read_replica(
-        self, input: PromoteReadReplicaInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PromoteReadReplicaInput | _models.PromoteReadReplicaInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PromoteReadReplicaOutput: ...
+
+    @_overload
+    def promote_read_replica(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PromoteReadReplicaInputDict],
     ) -> PromoteReadReplicaOutput:
         """
         Promotes a read replica DB instance to a standalone DB instance.
@@ -4448,8 +7088,6 @@ class RDSClient(Client[RDSConfig]):
             Custom.
 
         Args:
-            input:
-                An instance of `PromoteReadReplicaInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4459,19 +7097,39 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `PromoteReadReplicaOutput`.
         """
-        return self._invoke(input, _models.PROMOTE_READ_REPLICA, [], plugins)
 
+    def promote_read_replica(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PromoteReadReplicaOutput:
+        return self._invoke(
+            self._select_input(_models.PROMOTE_READ_REPLICA, args, kwargs),
+            _models.PROMOTE_READ_REPLICA,
+            [],
+            plugins,
+        )
+
+    @_overload
     def promote_read_replica_db_cluster(
         self,
-        input: PromoteReadReplicaDBClusterInput,
+        request: _models.PromoteReadReplicaDBClusterInput
+        | _models.PromoteReadReplicaDBClusterInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> PromoteReadReplicaDBClusterOutput: ...
+
+    @_overload
+    def promote_read_replica_db_cluster(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PromoteReadReplicaDBClusterInputDict],
     ) -> PromoteReadReplicaDBClusterOutput:
         """
         Promotes a read replica DB cluster to a standalone DB cluster.
 
         Args:
-            input:
-                An instance of `PromoteReadReplicaDBClusterInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4481,19 +7139,39 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `PromoteReadReplicaDBClusterOutput`.
         """
-        return self._invoke(input, _models.PROMOTE_READ_REPLICA_DB_CLUSTER, [], plugins)
 
+    def promote_read_replica_db_cluster(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PromoteReadReplicaDBClusterOutput:
+        return self._invoke(
+            self._select_input(_models.PROMOTE_READ_REPLICA_DB_CLUSTER, args, kwargs),
+            _models.PROMOTE_READ_REPLICA_DB_CLUSTER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def purchase_reserved_db_instances_offering(
         self,
-        input: PurchaseReservedDBInstancesOfferingInput,
+        request: _models.PurchaseReservedDBInstancesOfferingInput
+        | _models.PurchaseReservedDBInstancesOfferingInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> PurchaseReservedDBInstancesOfferingOutput: ...
+
+    @_overload
+    def purchase_reserved_db_instances_offering(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PurchaseReservedDBInstancesOfferingInputDict],
     ) -> PurchaseReservedDBInstancesOfferingOutput:
         """
         Purchases a reserved DB instance offering.
 
         Args:
-            input:
-                An instance of `PurchaseReservedDBInstancesOfferingInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4503,12 +7181,35 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `PurchaseReservedDBInstancesOfferingOutput`.
         """
+
+    def purchase_reserved_db_instances_offering(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PurchaseReservedDBInstancesOfferingOutput:
         return self._invoke(
-            input, _models.PURCHASE_RESERVED_DB_INSTANCES_OFFERING, [], plugins
+            self._select_input(
+                _models.PURCHASE_RESERVED_DB_INSTANCES_OFFERING, args, kwargs
+            ),
+            _models.PURCHASE_RESERVED_DB_INSTANCES_OFFERING,
+            [],
+            plugins,
         )
 
+    @_overload
     def reboot_db_cluster(
-        self, input: RebootDBClusterInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RebootDBClusterInput | _models.RebootDBClusterInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RebootDBClusterOutput: ...
+
+    @_overload
+    def reboot_db_cluster(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RebootDBClusterInputDict],
     ) -> RebootDBClusterOutput:
         """
         You might need to reboot your DB cluster, usually for maintenance
@@ -4527,8 +7228,6 @@ class RDSClient(Client[RDSConfig]):
         in the *Amazon RDS User Guide.*
 
         Args:
-            input:
-                An instance of `RebootDBClusterInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4538,10 +7237,33 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `RebootDBClusterOutput`.
         """
-        return self._invoke(input, _models.REBOOT_DB_CLUSTER, [], plugins)
 
+    def reboot_db_cluster(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RebootDBClusterOutput:
+        return self._invoke(
+            self._select_input(_models.REBOOT_DB_CLUSTER, args, kwargs),
+            _models.REBOOT_DB_CLUSTER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def reboot_db_instance(
-        self, input: RebootDBInstanceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RebootDBInstanceInput | _models.RebootDBInstanceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RebootDBInstanceOutput: ...
+
+    @_overload
+    def reboot_db_instance(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RebootDBInstanceInputDict],
     ) -> RebootDBInstanceOutput:
         """
         You might need to reboot your DB instance, usually for maintenance
@@ -4563,8 +7285,6 @@ class RDSClient(Client[RDSConfig]):
         DB cluster with the `RebootDBCluster` operation.
 
         Args:
-            input:
-                An instance of `RebootDBInstanceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4574,10 +7294,33 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `RebootDBInstanceOutput`.
         """
-        return self._invoke(input, _models.REBOOT_DB_INSTANCE, [], plugins)
 
+    def reboot_db_instance(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RebootDBInstanceOutput:
+        return self._invoke(
+            self._select_input(_models.REBOOT_DB_INSTANCE, args, kwargs),
+            _models.REBOOT_DB_INSTANCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def reboot_db_shard_group(
-        self, input: RebootDBShardGroupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RebootDBShardGroupInput | _models.RebootDBShardGroupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RebootDBShardGroupOutput: ...
+
+    @_overload
+    def reboot_db_shard_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RebootDBShardGroupInputDict],
     ) -> RebootDBShardGroupOutput:
         """
         You might need to reboot your DB shard group, usually for maintenance
@@ -4588,8 +7331,6 @@ class RDSClient(Client[RDSConfig]):
         groups.
 
         Args:
-            input:
-                An instance of `RebootDBShardGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4599,18 +7340,40 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `RebootDBShardGroupOutput`.
         """
-        return self._invoke(input, _models.REBOOT_DB_SHARD_GROUP, [], plugins)
 
+    def reboot_db_shard_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RebootDBShardGroupOutput:
+        return self._invoke(
+            self._select_input(_models.REBOOT_DB_SHARD_GROUP, args, kwargs),
+            _models.REBOOT_DB_SHARD_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def register_db_proxy_targets(
-        self, input: RegisterDBProxyTargetsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RegisterDBProxyTargetsInput
+        | _models.RegisterDBProxyTargetsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RegisterDBProxyTargetsOutput: ...
+
+    @_overload
+    def register_db_proxy_targets(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RegisterDBProxyTargetsInputDict],
     ) -> RegisterDBProxyTargetsOutput:
         """
         Associate one or more `DBProxyTarget` data structures with a
         `DBProxyTargetGroup`.
 
         Args:
-            input:
-                An instance of `RegisterDBProxyTargetsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4620,10 +7383,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `RegisterDBProxyTargetsOutput`.
         """
-        return self._invoke(input, _models.REGISTER_DB_PROXY_TARGETS, [], plugins)
 
+    def register_db_proxy_targets(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RegisterDBProxyTargetsOutput:
+        return self._invoke(
+            self._select_input(_models.REGISTER_DB_PROXY_TARGETS, args, kwargs),
+            _models.REGISTER_DB_PROXY_TARGETS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def remove_from_global_cluster(
-        self, input: RemoveFromGlobalClusterInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RemoveFromGlobalClusterInput
+        | _models.RemoveFromGlobalClusterInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RemoveFromGlobalClusterOutput: ...
+
+    @_overload
+    def remove_from_global_cluster(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RemoveFromGlobalClusterInputDict],
     ) -> RemoveFromGlobalClusterOutput:
         """
         Detaches an Aurora secondary cluster from an Aurora global database
@@ -4635,8 +7422,6 @@ class RDSClient(Client[RDSConfig]):
             This operation only applies to Aurora DB clusters.
 
         Args:
-            input:
-                An instance of `RemoveFromGlobalClusterInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4646,10 +7431,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `RemoveFromGlobalClusterOutput`.
         """
-        return self._invoke(input, _models.REMOVE_FROM_GLOBAL_CLUSTER, [], plugins)
 
+    def remove_from_global_cluster(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RemoveFromGlobalClusterOutput:
+        return self._invoke(
+            self._select_input(_models.REMOVE_FROM_GLOBAL_CLUSTER, args, kwargs),
+            _models.REMOVE_FROM_GLOBAL_CLUSTER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def remove_role_from_db_cluster(
-        self, input: RemoveRoleFromDBClusterInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RemoveRoleFromDBClusterInput
+        | _models.RemoveRoleFromDBClusterInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RemoveRoleFromDBClusterOutput: ...
+
+    @_overload
+    def remove_role_from_db_cluster(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RemoveRoleFromDBClusterInputDict],
     ) -> RemoveRoleFromDBClusterOutput:
         """
         Removes the asssociation of an Amazon Web Services Identity and Access
@@ -4664,8 +7473,6 @@ class RDSClient(Client[RDSConfig]):
         in the *Amazon RDS User Guide.*
 
         Args:
-            input:
-                An instance of `RemoveRoleFromDBClusterInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4675,18 +7482,40 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `RemoveRoleFromDBClusterOutput`.
         """
-        return self._invoke(input, _models.REMOVE_ROLE_FROM_DB_CLUSTER, [], plugins)
 
+    def remove_role_from_db_cluster(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RemoveRoleFromDBClusterOutput:
+        return self._invoke(
+            self._select_input(_models.REMOVE_ROLE_FROM_DB_CLUSTER, args, kwargs),
+            _models.REMOVE_ROLE_FROM_DB_CLUSTER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def remove_role_from_db_instance(
-        self, input: RemoveRoleFromDBInstanceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RemoveRoleFromDBInstanceInput
+        | _models.RemoveRoleFromDBInstanceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RemoveRoleFromDBInstanceOutput: ...
+
+    @_overload
+    def remove_role_from_db_instance(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RemoveRoleFromDBInstanceInputDict],
     ) -> RemoveRoleFromDBInstanceOutput:
         """
         Disassociates an Amazon Web Services Identity and Access Management
         (IAM) role from a DB instance.
 
         Args:
-            input:
-                An instance of `RemoveRoleFromDBInstanceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4696,20 +7525,40 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `RemoveRoleFromDBInstanceOutput`.
         """
-        return self._invoke(input, _models.REMOVE_ROLE_FROM_DB_INSTANCE, [], plugins)
 
+    def remove_role_from_db_instance(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RemoveRoleFromDBInstanceOutput:
+        return self._invoke(
+            self._select_input(_models.REMOVE_ROLE_FROM_DB_INSTANCE, args, kwargs),
+            _models.REMOVE_ROLE_FROM_DB_INSTANCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def remove_source_identifier_from_subscription(
         self,
-        input: RemoveSourceIdentifierFromSubscriptionInput,
+        request: _models.RemoveSourceIdentifierFromSubscriptionInput
+        | _models.RemoveSourceIdentifierFromSubscriptionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> RemoveSourceIdentifierFromSubscriptionOutput: ...
+
+    @_overload
+    def remove_source_identifier_from_subscription(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RemoveSourceIdentifierFromSubscriptionInputDict],
     ) -> RemoveSourceIdentifierFromSubscriptionOutput:
         """
         Removes a source identifier from an existing RDS event notification
         subscription.
 
         Args:
-            input:
-                An instance of `RemoveSourceIdentifierFromSubscriptionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4719,12 +7568,36 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `RemoveSourceIdentifierFromSubscriptionOutput`.
         """
+
+    def remove_source_identifier_from_subscription(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RemoveSourceIdentifierFromSubscriptionOutput:
         return self._invoke(
-            input, _models.REMOVE_SOURCE_IDENTIFIER_FROM_SUBSCRIPTION, [], plugins
+            self._select_input(
+                _models.REMOVE_SOURCE_IDENTIFIER_FROM_SUBSCRIPTION, args, kwargs
+            ),
+            _models.REMOVE_SOURCE_IDENTIFIER_FROM_SUBSCRIPTION,
+            [],
+            plugins,
         )
 
+    @_overload
     def remove_tags_from_resource(
-        self, input: RemoveTagsFromResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RemoveTagsFromResourceInput
+        | _models.RemoveTagsFromResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RemoveTagsFromResourceOutput: ...
+
+    @_overload
+    def remove_tags_from_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RemoveTagsFromResourceInputDict],
     ) -> RemoveTagsFromResourceOutput:
         """
         Removes metadata tags from an Amazon RDS resource.
@@ -4737,8 +7610,6 @@ class RDSClient(Client[RDSConfig]):
         in the *Amazon Aurora User Guide*.
 
         Args:
-            input:
-                An instance of `RemoveTagsFromResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4748,12 +7619,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `RemoveTagsFromResourceOutput`.
         """
-        return self._invoke(input, _models.REMOVE_TAGS_FROM_RESOURCE, [], plugins)
 
+    def remove_tags_from_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RemoveTagsFromResourceOutput:
+        return self._invoke(
+            self._select_input(_models.REMOVE_TAGS_FROM_RESOURCE, args, kwargs),
+            _models.REMOVE_TAGS_FROM_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def reset_db_cluster_parameter_group(
         self,
-        input: ResetDBClusterParameterGroupInput,
+        request: _models.ResetDBClusterParameterGroupInput
+        | _models.ResetDBClusterParameterGroupInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ResetDBClusterParameterGroupOutput: ...
+
+    @_overload
+    def reset_db_cluster_parameter_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ResetDBClusterParameterGroupInputDict],
     ) -> ResetDBClusterParameterGroupOutput:
         """
         Modifies the parameters of a DB cluster parameter group to the default
@@ -4777,8 +7670,6 @@ class RDSClient(Client[RDSConfig]):
         in the *Amazon RDS User Guide.*
 
         Args:
-            input:
-                An instance of `ResetDBClusterParameterGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4788,12 +7679,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `ResetDBClusterParameterGroupOutput`.
         """
+
+    def reset_db_cluster_parameter_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ResetDBClusterParameterGroupOutput:
         return self._invoke(
-            input, _models.RESET_DB_CLUSTER_PARAMETER_GROUP, [], plugins
+            self._select_input(_models.RESET_DB_CLUSTER_PARAMETER_GROUP, args, kwargs),
+            _models.RESET_DB_CLUSTER_PARAMETER_GROUP,
+            [],
+            plugins,
         )
 
+    @_overload
     def reset_db_parameter_group(
-        self, input: ResetDBParameterGroupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ResetDBParameterGroupInput
+        | _models.ResetDBParameterGroupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ResetDBParameterGroupOutput: ...
+
+    @_overload
+    def reset_db_parameter_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ResetDBParameterGroupInputDict],
     ) -> ResetDBParameterGroupOutput:
         """
         Modifies the parameters of a DB parameter group to the engine/system
@@ -4806,8 +7719,6 @@ class RDSClient(Client[RDSConfig]):
         `RebootDBInstance` request.
 
         Args:
-            input:
-                An instance of `ResetDBParameterGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4817,10 +7728,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `ResetDBParameterGroupOutput`.
         """
-        return self._invoke(input, _models.RESET_DB_PARAMETER_GROUP, [], plugins)
 
+    def reset_db_parameter_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ResetDBParameterGroupOutput:
+        return self._invoke(
+            self._select_input(_models.RESET_DB_PARAMETER_GROUP, args, kwargs),
+            _models.RESET_DB_PARAMETER_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def restore_db_cluster_from_s3(
-        self, input: RestoreDBClusterFromS3Input, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RestoreDBClusterFromS3Input
+        | _models.RestoreDBClusterFromS3InputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RestoreDBClusterFromS3Output: ...
+
+    @_overload
+    def restore_db_cluster_from_s3(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RestoreDBClusterFromS3InputDict],
     ) -> RestoreDBClusterFromS3Output:
         """
         Creates an Amazon Aurora DB cluster from MySQL data stored in an Amazon
@@ -4851,8 +7786,6 @@ class RDSClient(Client[RDSConfig]):
         Aurora DB cluster when you restore it from Amazon S3.
 
         Args:
-            input:
-                An instance of `RestoreDBClusterFromS3Input`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4862,12 +7795,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `RestoreDBClusterFromS3Output`.
         """
-        return self._invoke(input, _models.RESTORE_DB_CLUSTER_FROM_S3, [], plugins)
 
+    def restore_db_cluster_from_s3(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RestoreDBClusterFromS3Output:
+        return self._invoke(
+            self._select_input(_models.RESTORE_DB_CLUSTER_FROM_S3, args, kwargs),
+            _models.RESTORE_DB_CLUSTER_FROM_S3,
+            [],
+            plugins,
+        )
+
+    @_overload
     def restore_db_cluster_from_snapshot(
         self,
-        input: RestoreDBClusterFromSnapshotInput,
+        request: _models.RestoreDBClusterFromSnapshotInput
+        | _models.RestoreDBClusterFromSnapshotInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> RestoreDBClusterFromSnapshotOutput: ...
+
+    @_overload
+    def restore_db_cluster_from_snapshot(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RestoreDBClusterFromSnapshotInputDict],
     ) -> RestoreDBClusterFromSnapshotOutput:
         """
         Creates a new DB cluster from a DB snapshot or DB cluster snapshot.
@@ -4908,8 +7863,6 @@ class RDSClient(Client[RDSConfig]):
         in the *Amazon RDS User Guide.*
 
         Args:
-            input:
-                An instance of `RestoreDBClusterFromSnapshotInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4919,14 +7872,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `RestoreDBClusterFromSnapshotOutput`.
         """
+
+    def restore_db_cluster_from_snapshot(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RestoreDBClusterFromSnapshotOutput:
         return self._invoke(
-            input, _models.RESTORE_DB_CLUSTER_FROM_SNAPSHOT, [], plugins
+            self._select_input(_models.RESTORE_DB_CLUSTER_FROM_SNAPSHOT, args, kwargs),
+            _models.RESTORE_DB_CLUSTER_FROM_SNAPSHOT,
+            [],
+            plugins,
         )
 
+    @_overload
     def restore_db_cluster_to_point_in_time(
         self,
-        input: RestoreDBClusterToPointInTimeInput,
+        request: _models.RestoreDBClusterToPointInTimeInput
+        | _models.RestoreDBClusterToPointInTimeInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> RestoreDBClusterToPointInTimeOutput: ...
+
+    @_overload
+    def restore_db_cluster_to_point_in_time(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RestoreDBClusterToPointInTimeInputDict],
     ) -> RestoreDBClusterToPointInTimeOutput:
         """
         Restores a DB cluster to an arbitrary point in time. Users can restore
@@ -4971,8 +7944,6 @@ class RDSClient(Client[RDSConfig]):
         in the *Amazon RDS User Guide.*
 
         Args:
-            input:
-                An instance of `RestoreDBClusterToPointInTimeInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4982,14 +7953,36 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `RestoreDBClusterToPointInTimeOutput`.
         """
+
+    def restore_db_cluster_to_point_in_time(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RestoreDBClusterToPointInTimeOutput:
         return self._invoke(
-            input, _models.RESTORE_DB_CLUSTER_TO_POINT_IN_TIME, [], plugins
+            self._select_input(
+                _models.RESTORE_DB_CLUSTER_TO_POINT_IN_TIME, args, kwargs
+            ),
+            _models.RESTORE_DB_CLUSTER_TO_POINT_IN_TIME,
+            [],
+            plugins,
         )
 
+    @_overload
     def restore_db_instance_from_db_snapshot(
         self,
-        input: RestoreDBInstanceFromDBSnapshotInput,
+        request: _models.RestoreDBInstanceFromDBSnapshotInput
+        | _models.RestoreDBInstanceFromDBSnapshotInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> RestoreDBInstanceFromDBSnapshotOutput: ...
+
+    @_overload
+    def restore_db_instance_from_db_snapshot(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RestoreDBInstanceFromDBSnapshotInputDict],
     ) -> RestoreDBInstanceFromDBSnapshotOutput:
         """
         Creates a new DB instance from a DB snapshot. The target database is
@@ -5027,8 +8020,6 @@ class RDSClient(Client[RDSConfig]):
             Aurora, use `RestoreDBClusterFromSnapshot`.
 
         Args:
-            input:
-                An instance of `RestoreDBInstanceFromDBSnapshotInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5038,12 +8029,36 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `RestoreDBInstanceFromDBSnapshotOutput`.
         """
+
+    def restore_db_instance_from_db_snapshot(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RestoreDBInstanceFromDBSnapshotOutput:
         return self._invoke(
-            input, _models.RESTORE_DB_INSTANCE_FROM_DB_SNAPSHOT, [], plugins
+            self._select_input(
+                _models.RESTORE_DB_INSTANCE_FROM_DB_SNAPSHOT, args, kwargs
+            ),
+            _models.RESTORE_DB_INSTANCE_FROM_DB_SNAPSHOT,
+            [],
+            plugins,
         )
 
+    @_overload
     def restore_db_instance_from_s3(
-        self, input: RestoreDBInstanceFromS3Input, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RestoreDBInstanceFromS3Input
+        | _models.RestoreDBInstanceFromS3InputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RestoreDBInstanceFromS3Output: ...
+
+    @_overload
+    def restore_db_instance_from_s3(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RestoreDBInstanceFromS3InputDict],
     ) -> RestoreDBInstanceFromS3Output:
         """
         Amazon Relational Database Service (Amazon RDS) supports importing MySQL
@@ -5058,8 +8073,6 @@ class RDSClient(Client[RDSConfig]):
         This operation doesn't apply to RDS Custom.
 
         Args:
-            input:
-                An instance of `RestoreDBInstanceFromS3Input`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5069,12 +8082,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `RestoreDBInstanceFromS3Output`.
         """
-        return self._invoke(input, _models.RESTORE_DB_INSTANCE_FROM_S3, [], plugins)
 
+    def restore_db_instance_from_s3(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RestoreDBInstanceFromS3Output:
+        return self._invoke(
+            self._select_input(_models.RESTORE_DB_INSTANCE_FROM_S3, args, kwargs),
+            _models.RESTORE_DB_INSTANCE_FROM_S3,
+            [],
+            plugins,
+        )
+
+    @_overload
     def restore_db_instance_to_point_in_time(
         self,
-        input: RestoreDBInstanceToPointInTimeInput,
+        request: _models.RestoreDBInstanceToPointInTimeInput
+        | _models.RestoreDBInstanceToPointInTimeInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> RestoreDBInstanceToPointInTimeOutput: ...
+
+    @_overload
+    def restore_db_instance_to_point_in_time(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RestoreDBInstanceToPointInTimeInputDict],
     ) -> RestoreDBInstanceToPointInTimeOutput:
         """
         Restores a DB instance to an arbitrary point in time. You can restore to
@@ -5095,8 +8130,6 @@ class RDSClient(Client[RDSConfig]):
             Aurora, use `RestoreDBClusterToPointInTime`.
 
         Args:
-            input:
-                An instance of `RestoreDBInstanceToPointInTimeInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5106,14 +8139,36 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `RestoreDBInstanceToPointInTimeOutput`.
         """
+
+    def restore_db_instance_to_point_in_time(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RestoreDBInstanceToPointInTimeOutput:
         return self._invoke(
-            input, _models.RESTORE_DB_INSTANCE_TO_POINT_IN_TIME, [], plugins
+            self._select_input(
+                _models.RESTORE_DB_INSTANCE_TO_POINT_IN_TIME, args, kwargs
+            ),
+            _models.RESTORE_DB_INSTANCE_TO_POINT_IN_TIME,
+            [],
+            plugins,
         )
 
+    @_overload
     def revoke_db_security_group_ingress(
         self,
-        input: RevokeDBSecurityGroupIngressInput,
+        request: _models.RevokeDBSecurityGroupIngressInput
+        | _models.RevokeDBSecurityGroupIngressInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> RevokeDBSecurityGroupIngressOutput: ...
+
+    @_overload
+    def revoke_db_security_group_ingress(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RevokeDBSecurityGroupIngressInputDict],
     ) -> RevokeDBSecurityGroupIngressOutput:
         """
         Revokes ingress from a DBSecurityGroup for previously authorized IP
@@ -5135,8 +8190,6 @@ class RDSClient(Client[RDSConfig]):
             in the *Amazon RDS User Guide*.
 
         Args:
-            input:
-                An instance of `RevokeDBSecurityGroupIngressInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5146,12 +8199,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `RevokeDBSecurityGroupIngressOutput`.
         """
+
+    def revoke_db_security_group_ingress(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RevokeDBSecurityGroupIngressOutput:
         return self._invoke(
-            input, _models.REVOKE_DB_SECURITY_GROUP_INGRESS, [], plugins
+            self._select_input(_models.REVOKE_DB_SECURITY_GROUP_INGRESS, args, kwargs),
+            _models.REVOKE_DB_SECURITY_GROUP_INGRESS,
+            [],
+            plugins,
         )
 
+    @_overload
     def start_activity_stream(
-        self, input: StartActivityStreamInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StartActivityStreamInput
+        | _models.StartActivityStreamInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StartActivityStreamOutput: ...
+
+    @_overload
+    def start_activity_stream(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartActivityStreamInputDict],
     ) -> StartActivityStreamOutput:
         """
         Starts a database activity stream to monitor activity on the database.
@@ -5164,8 +8239,6 @@ class RDSClient(Client[RDSConfig]):
         in the *Amazon RDS User Guide*.
 
         Args:
-            input:
-                An instance of `StartActivityStreamInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5175,10 +8248,33 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `StartActivityStreamOutput`.
         """
-        return self._invoke(input, _models.START_ACTIVITY_STREAM, [], plugins)
 
+    def start_activity_stream(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StartActivityStreamOutput:
+        return self._invoke(
+            self._select_input(_models.START_ACTIVITY_STREAM, args, kwargs),
+            _models.START_ACTIVITY_STREAM,
+            [],
+            plugins,
+        )
+
+    @_overload
     def start_db_cluster(
-        self, input: StartDBClusterInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StartDBClusterInput | _models.StartDBClusterInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StartDBClusterOutput: ...
+
+    @_overload
+    def start_db_cluster(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartDBClusterInputDict],
     ) -> StartDBClusterOutput:
         """
         Starts an Amazon Aurora DB cluster that was stopped using the Amazon Web
@@ -5193,8 +8289,6 @@ class RDSClient(Client[RDSConfig]):
             This operation only applies to Aurora DB clusters.
 
         Args:
-            input:
-                An instance of `StartDBClusterInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5204,10 +8298,33 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `StartDBClusterOutput`.
         """
-        return self._invoke(input, _models.START_DB_CLUSTER, [], plugins)
 
+    def start_db_cluster(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StartDBClusterOutput:
+        return self._invoke(
+            self._select_input(_models.START_DB_CLUSTER, args, kwargs),
+            _models.START_DB_CLUSTER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def start_db_instance(
-        self, input: StartDBInstanceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StartDBInstanceInput | _models.StartDBInstanceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StartDBInstanceOutput: ...
+
+    @_overload
+    def start_db_instance(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartDBInstanceInputDict],
     ) -> StartDBInstanceOutput:
         """
         Starts an Amazon RDS DB instance that was stopped using the Amazon Web
@@ -5224,8 +8341,6 @@ class RDSClient(Client[RDSConfig]):
             PostgreSQL. For Aurora DB clusters, use `StartDBCluster` instead.
 
         Args:
-            input:
-                An instance of `StartDBInstanceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5235,12 +8350,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `StartDBInstanceOutput`.
         """
-        return self._invoke(input, _models.START_DB_INSTANCE, [], plugins)
 
+    def start_db_instance(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StartDBInstanceOutput:
+        return self._invoke(
+            self._select_input(_models.START_DB_INSTANCE, args, kwargs),
+            _models.START_DB_INSTANCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def start_db_instance_automated_backups_replication(
         self,
-        input: StartDBInstanceAutomatedBackupsReplicationInput,
+        request: _models.StartDBInstanceAutomatedBackupsReplicationInput
+        | _models.StartDBInstanceAutomatedBackupsReplicationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> StartDBInstanceAutomatedBackupsReplicationOutput: ...
+
+    @_overload
+    def start_db_instance_automated_backups_replication(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartDBInstanceAutomatedBackupsReplicationInputDict],
     ) -> StartDBInstanceAutomatedBackupsReplicationOutput:
         """
         Enables replication of automated backups to a different Amazon Web
@@ -5254,8 +8391,6 @@ class RDSClient(Client[RDSConfig]):
         in the *Amazon RDS User Guide.*
 
         Args:
-            input:
-                An instance of `StartDBInstanceAutomatedBackupsReplicationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5265,12 +8400,35 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `StartDBInstanceAutomatedBackupsReplicationOutput`.
         """
+
+    def start_db_instance_automated_backups_replication(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StartDBInstanceAutomatedBackupsReplicationOutput:
         return self._invoke(
-            input, _models.START_DB_INSTANCE_AUTOMATED_BACKUPS_REPLICATION, [], plugins
+            self._select_input(
+                _models.START_DB_INSTANCE_AUTOMATED_BACKUPS_REPLICATION, args, kwargs
+            ),
+            _models.START_DB_INSTANCE_AUTOMATED_BACKUPS_REPLICATION,
+            [],
+            plugins,
         )
 
+    @_overload
     def start_export_task(
-        self, input: StartExportTaskInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StartExportTaskInput | _models.StartExportTaskInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StartExportTaskOutput: ...
+
+    @_overload
+    def start_export_task(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartExportTaskInputDict],
     ) -> StartExportTaskOutput:
         """
         Starts an export of DB snapshot or DB cluster data to Amazon S3. The
@@ -5295,8 +8453,6 @@ class RDSClient(Client[RDSConfig]):
         in the *Amazon Aurora User Guide*.
 
         Args:
-            input:
-                An instance of `StartExportTaskInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5306,10 +8462,33 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `StartExportTaskOutput`.
         """
-        return self._invoke(input, _models.START_EXPORT_TASK, [], plugins)
 
+    def start_export_task(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StartExportTaskOutput:
+        return self._invoke(
+            self._select_input(_models.START_EXPORT_TASK, args, kwargs),
+            _models.START_EXPORT_TASK,
+            [],
+            plugins,
+        )
+
+    @_overload
     def stop_activity_stream(
-        self, input: StopActivityStreamInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StopActivityStreamInput | _models.StopActivityStreamInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StopActivityStreamOutput: ...
+
+    @_overload
+    def stop_activity_stream(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StopActivityStreamInputDict],
     ) -> StopActivityStreamOutput:
         """
         Stops a database activity stream that was started using the Amazon Web
@@ -5325,8 +8504,6 @@ class RDSClient(Client[RDSConfig]):
         in the *Amazon RDS User Guide*.
 
         Args:
-            input:
-                An instance of `StopActivityStreamInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5336,10 +8513,33 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `StopActivityStreamOutput`.
         """
-        return self._invoke(input, _models.STOP_ACTIVITY_STREAM, [], plugins)
 
+    def stop_activity_stream(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StopActivityStreamOutput:
+        return self._invoke(
+            self._select_input(_models.STOP_ACTIVITY_STREAM, args, kwargs),
+            _models.STOP_ACTIVITY_STREAM,
+            [],
+            plugins,
+        )
+
+    @_overload
     def stop_db_cluster(
-        self, input: StopDBClusterInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StopDBClusterInput | _models.StopDBClusterInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StopDBClusterOutput: ...
+
+    @_overload
+    def stop_db_cluster(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StopDBClusterInputDict],
     ) -> StopDBClusterOutput:
         """
         Stops an Amazon Aurora DB cluster. When you stop a DB cluster, Aurora
@@ -5355,8 +8555,6 @@ class RDSClient(Client[RDSConfig]):
             This operation only applies to Aurora DB clusters.
 
         Args:
-            input:
-                An instance of `StopDBClusterInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5366,10 +8564,33 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `StopDBClusterOutput`.
         """
-        return self._invoke(input, _models.STOP_DB_CLUSTER, [], plugins)
 
+    def stop_db_cluster(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StopDBClusterOutput:
+        return self._invoke(
+            self._select_input(_models.STOP_DB_CLUSTER, args, kwargs),
+            _models.STOP_DB_CLUSTER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def stop_db_instance(
-        self, input: StopDBInstanceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StopDBInstanceInput | _models.StopDBInstanceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StopDBInstanceOutput: ...
+
+    @_overload
+    def stop_db_instance(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StopDBInstanceInputDict],
     ) -> StopDBInstanceOutput:
         """
         Stops an Amazon RDS DB instance temporarily. When you stop a DB
@@ -5387,8 +8608,6 @@ class RDSClient(Client[RDSConfig]):
             PostgreSQL. For Aurora clusters, use `StopDBCluster` instead.
 
         Args:
-            input:
-                An instance of `StopDBInstanceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5398,12 +8617,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `StopDBInstanceOutput`.
         """
-        return self._invoke(input, _models.STOP_DB_INSTANCE, [], plugins)
 
+    def stop_db_instance(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StopDBInstanceOutput:
+        return self._invoke(
+            self._select_input(_models.STOP_DB_INSTANCE, args, kwargs),
+            _models.STOP_DB_INSTANCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def stop_db_instance_automated_backups_replication(
         self,
-        input: StopDBInstanceAutomatedBackupsReplicationInput,
+        request: _models.StopDBInstanceAutomatedBackupsReplicationInput
+        | _models.StopDBInstanceAutomatedBackupsReplicationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> StopDBInstanceAutomatedBackupsReplicationOutput: ...
+
+    @_overload
+    def stop_db_instance_automated_backups_replication(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StopDBInstanceAutomatedBackupsReplicationInputDict],
     ) -> StopDBInstanceAutomatedBackupsReplicationOutput:
         """
         Stops automated backup replication for a DB instance.
@@ -5417,8 +8658,6 @@ class RDSClient(Client[RDSConfig]):
         in the *Amazon RDS User Guide.*
 
         Args:
-            input:
-                An instance of `StopDBInstanceAutomatedBackupsReplicationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5428,14 +8667,36 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `StopDBInstanceAutomatedBackupsReplicationOutput`.
         """
+
+    def stop_db_instance_automated_backups_replication(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StopDBInstanceAutomatedBackupsReplicationOutput:
         return self._invoke(
-            input, _models.STOP_DB_INSTANCE_AUTOMATED_BACKUPS_REPLICATION, [], plugins
+            self._select_input(
+                _models.STOP_DB_INSTANCE_AUTOMATED_BACKUPS_REPLICATION, args, kwargs
+            ),
+            _models.STOP_DB_INSTANCE_AUTOMATED_BACKUPS_REPLICATION,
+            [],
+            plugins,
         )
 
+    @_overload
     def switchover_blue_green_deployment(
         self,
-        input: SwitchoverBlueGreenDeploymentInput,
+        request: _models.SwitchoverBlueGreenDeploymentInput
+        | _models.SwitchoverBlueGreenDeploymentInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> SwitchoverBlueGreenDeploymentOutput: ...
+
+    @_overload
+    def switchover_blue_green_deployment(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SwitchoverBlueGreenDeploymentInputDict],
     ) -> SwitchoverBlueGreenDeploymentOutput:
         """
         Switches over a blue/green deployment.
@@ -5453,8 +8714,6 @@ class RDSClient(Client[RDSConfig]):
         in the *Amazon Aurora User Guide*.
 
         Args:
-            input:
-                An instance of `SwitchoverBlueGreenDeploymentInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5464,12 +8723,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `SwitchoverBlueGreenDeploymentOutput`.
         """
+
+    def switchover_blue_green_deployment(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SwitchoverBlueGreenDeploymentOutput:
         return self._invoke(
-            input, _models.SWITCHOVER_BLUE_GREEN_DEPLOYMENT, [], plugins
+            self._select_input(_models.SWITCHOVER_BLUE_GREEN_DEPLOYMENT, args, kwargs),
+            _models.SWITCHOVER_BLUE_GREEN_DEPLOYMENT,
+            [],
+            plugins,
         )
 
+    @_overload
     def switchover_global_cluster(
-        self, input: SwitchoverGlobalClusterInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.SwitchoverGlobalClusterInput
+        | _models.SwitchoverGlobalClusterInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> SwitchoverGlobalClusterOutput: ...
+
+    @_overload
+    def switchover_global_cluster(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SwitchoverGlobalClusterInputDict],
     ) -> SwitchoverGlobalClusterOutput:
         """
         Switches over the specified secondary DB cluster to be the new primary
@@ -5495,8 +8776,6 @@ class RDSClient(Client[RDSConfig]):
             after a global database failover.
 
         Args:
-            input:
-                An instance of `SwitchoverGlobalClusterInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5506,10 +8785,34 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `SwitchoverGlobalClusterOutput`.
         """
-        return self._invoke(input, _models.SWITCHOVER_GLOBAL_CLUSTER, [], plugins)
 
+    def switchover_global_cluster(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SwitchoverGlobalClusterOutput:
+        return self._invoke(
+            self._select_input(_models.SWITCHOVER_GLOBAL_CLUSTER, args, kwargs),
+            _models.SWITCHOVER_GLOBAL_CLUSTER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def switchover_read_replica(
-        self, input: SwitchoverReadReplicaInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.SwitchoverReadReplicaInput
+        | _models.SwitchoverReadReplicaInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> SwitchoverReadReplicaOutput: ...
+
+    @_overload
+    def switchover_read_replica(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SwitchoverReadReplicaInputDict],
     ) -> SwitchoverReadReplicaOutput:
         """
         Switches over an Oracle standby database in an Oracle Data Guard
@@ -5517,8 +8820,6 @@ class RDSClient(Client[RDSConfig]):
         the Region that hosts the current standby database.
 
         Args:
-            input:
-                An instance of `SwitchoverReadReplicaInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5528,7 +8829,16 @@ class RDSClient(Client[RDSConfig]):
         Returns:
             An instance of `SwitchoverReadReplicaOutput`.
         """
-        return self._invoke(input, _models.SWITCHOVER_READ_REPLICA, [], plugins)
+
+    def switchover_read_replica(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SwitchoverReadReplicaOutput:
+        return self._invoke(
+            self._select_input(_models.SWITCHOVER_READ_REPLICA, args, kwargs),
+            _models.SWITCHOVER_READ_REPLICA,
+            [],
+            plugins,
+        )
 
     def _new_config(self) -> RDSConfig:
         return RDSConfig.resolve()

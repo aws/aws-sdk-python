@@ -2,19 +2,26 @@
 
 from typing import Any
 
+from aws_sdk_cloudformation.aio.client import AsyncCloudFormationClient
+from aws_sdk_cloudformation.client import CloudFormationClient
 from aws_sdk_cloudformation.models import (
     AccountGateResult,
     AccountLimit,
     ActivateOrganizationsAccessInput,
+    ActivateOrganizationsAccessInputDict,
     ActivateOrganizationsAccessOutput,
     ActivateTypeInput,
+    ActivateTypeInputDict,
     ActivateTypeOutput,
     Annotation,
     AutoDeployment,
+    AutoDeploymentDict,
     BatchDescribeTypeConfigurationsError,
     BatchDescribeTypeConfigurationsInput,
+    BatchDescribeTypeConfigurationsInputDict,
     BatchDescribeTypeConfigurationsOutput,
     CancelUpdateStackInput,
+    CancelUpdateStackInputDict,
     CancelUpdateStackOutput,
     Change,
     ChangeSetHook,
@@ -22,203 +29,297 @@ from aws_sdk_cloudformation.models import (
     ChangeSetHookTargetDetails,
     ChangeSetSummary,
     ContinueUpdateRollbackInput,
+    ContinueUpdateRollbackInputDict,
     ContinueUpdateRollbackOutput,
     CreateChangeSetInput,
+    CreateChangeSetInputDict,
     CreateChangeSetOutput,
     CreateGeneratedTemplateInput,
+    CreateGeneratedTemplateInputDict,
     CreateGeneratedTemplateOutput,
     CreateStackInput,
+    CreateStackInputDict,
     CreateStackInstancesInput,
+    CreateStackInstancesInputDict,
     CreateStackInstancesOutput,
     CreateStackOutput,
     CreateStackRefactorInput,
+    CreateStackRefactorInputDict,
     CreateStackRefactorOutput,
     CreateStackSetInput,
+    CreateStackSetInputDict,
     CreateStackSetOutput,
     DeactivateOrganizationsAccessInput,
+    DeactivateOrganizationsAccessInputDict,
     DeactivateOrganizationsAccessOutput,
     DeactivateTypeInput,
+    DeactivateTypeInputDict,
     DeactivateTypeOutput,
     DeleteChangeSetInput,
+    DeleteChangeSetInputDict,
     DeleteChangeSetOutput,
     DeleteGeneratedTemplateInput,
+    DeleteGeneratedTemplateInputDict,
     DeleteGeneratedTemplateOutput,
     DeleteStackInput,
+    DeleteStackInputDict,
     DeleteStackInstancesInput,
+    DeleteStackInstancesInputDict,
     DeleteStackInstancesOutput,
     DeleteStackOutput,
     DeleteStackSetInput,
+    DeleteStackSetInputDict,
     DeleteStackSetOutput,
     DeploymentConfig,
+    DeploymentConfigDict,
     DeploymentTargets,
+    DeploymentTargetsDict,
     DeregisterTypeInput,
+    DeregisterTypeInputDict,
     DeregisterTypeOutput,
     DescribeAccountLimitsInput,
+    DescribeAccountLimitsInputDict,
     DescribeAccountLimitsOutput,
     DescribeChangeSetHooksInput,
+    DescribeChangeSetHooksInputDict,
     DescribeChangeSetHooksOutput,
     DescribeChangeSetInput,
+    DescribeChangeSetInputDict,
     DescribeChangeSetOutput,
     DescribeEventsInput,
+    DescribeEventsInputDict,
     DescribeEventsOutput,
     DescribeGeneratedTemplateInput,
+    DescribeGeneratedTemplateInputDict,
     DescribeGeneratedTemplateOutput,
     DescribeOrganizationsAccessInput,
+    DescribeOrganizationsAccessInputDict,
     DescribeOrganizationsAccessOutput,
     DescribePublisherInput,
+    DescribePublisherInputDict,
     DescribePublisherOutput,
     DescribeResourceScanInput,
+    DescribeResourceScanInputDict,
     DescribeResourceScanOutput,
     DescribeStackDriftDetectionStatusInput,
+    DescribeStackDriftDetectionStatusInputDict,
     DescribeStackDriftDetectionStatusOutput,
     DescribeStackEventsInput,
+    DescribeStackEventsInputDict,
     DescribeStackEventsOutput,
     DescribeStackInstanceInput,
+    DescribeStackInstanceInputDict,
     DescribeStackInstanceOutput,
     DescribeStackRefactorInput,
+    DescribeStackRefactorInputDict,
     DescribeStackRefactorOutput,
     DescribeStackResourceDriftsInput,
+    DescribeStackResourceDriftsInputDict,
     DescribeStackResourceDriftsOutput,
     DescribeStackResourceInput,
+    DescribeStackResourceInputDict,
     DescribeStackResourceOutput,
     DescribeStackResourcesInput,
+    DescribeStackResourcesInputDict,
     DescribeStackResourcesOutput,
     DescribeStackSetInput,
+    DescribeStackSetInputDict,
     DescribeStackSetOperationInput,
+    DescribeStackSetOperationInputDict,
     DescribeStackSetOperationOutput,
     DescribeStackSetOutput,
     DescribeStacksInput,
+    DescribeStacksInputDict,
     DescribeStacksOutput,
     DescribeTypeInput,
+    DescribeTypeInputDict,
     DescribeTypeOutput,
     DescribeTypeRegistrationInput,
+    DescribeTypeRegistrationInputDict,
     DescribeTypeRegistrationOutput,
     DetectStackDriftInput,
+    DetectStackDriftInputDict,
     DetectStackDriftOutput,
     DetectStackResourceDriftInput,
+    DetectStackResourceDriftInputDict,
     DetectStackResourceDriftOutput,
     DetectStackSetDriftInput,
+    DetectStackSetDriftInputDict,
     DetectStackSetDriftOutput,
     EstimateTemplateCostInput,
+    EstimateTemplateCostInputDict,
     EstimateTemplateCostOutput,
     EventFilter,
+    EventFilterDict,
     ExecuteChangeSetInput,
+    ExecuteChangeSetInputDict,
     ExecuteChangeSetOutput,
     ExecuteStackRefactorInput,
+    ExecuteStackRefactorInputDict,
     ExecuteStackRefactorOutput,
     Export,
     GetGeneratedTemplateInput,
+    GetGeneratedTemplateInputDict,
     GetGeneratedTemplateOutput,
     GetHookResultInput,
+    GetHookResultInputDict,
     GetHookResultOutput,
     GetStackPolicyInput,
+    GetStackPolicyInputDict,
     GetStackPolicyOutput,
     GetTemplateInput,
+    GetTemplateInputDict,
     GetTemplateOutput,
     GetTemplateSummaryInput,
+    GetTemplateSummaryInputDict,
     GetTemplateSummaryOutput,
     HookResultSummary,
     HookTarget,
     ImportStacksToStackSetInput,
+    ImportStacksToStackSetInputDict,
     ImportStacksToStackSetOutput,
     ListChangeSetsInput,
+    ListChangeSetsInputDict,
     ListChangeSetsOutput,
     ListExportsInput,
+    ListExportsInputDict,
     ListExportsOutput,
     ListGeneratedTemplatesInput,
+    ListGeneratedTemplatesInputDict,
     ListGeneratedTemplatesOutput,
     ListHookResultsInput,
+    ListHookResultsInputDict,
     ListHookResultsOutput,
     ListImportsInput,
+    ListImportsInputDict,
     ListImportsOutput,
     ListResourceScanRelatedResourcesInput,
+    ListResourceScanRelatedResourcesInputDict,
     ListResourceScanRelatedResourcesOutput,
     ListResourceScanResourcesInput,
+    ListResourceScanResourcesInputDict,
     ListResourceScanResourcesOutput,
     ListResourceScansInput,
+    ListResourceScansInputDict,
     ListResourceScansOutput,
     ListStackInstanceResourceDriftsInput,
+    ListStackInstanceResourceDriftsInputDict,
     ListStackInstanceResourceDriftsOutput,
     ListStackInstancesInput,
+    ListStackInstancesInputDict,
     ListStackInstancesOutput,
     ListStackRefactorActionsInput,
+    ListStackRefactorActionsInputDict,
     ListStackRefactorActionsOutput,
     ListStackRefactorsInput,
+    ListStackRefactorsInputDict,
     ListStackRefactorsOutput,
     ListStackResourcesInput,
+    ListStackResourcesInputDict,
     ListStackResourcesOutput,
     ListStackSetAutoDeploymentTargetsInput,
+    ListStackSetAutoDeploymentTargetsInputDict,
     ListStackSetAutoDeploymentTargetsOutput,
     ListStackSetOperationResultsInput,
+    ListStackSetOperationResultsInputDict,
     ListStackSetOperationResultsOutput,
     ListStackSetOperationsInput,
+    ListStackSetOperationsInputDict,
     ListStackSetOperationsOutput,
     ListStackSetsInput,
+    ListStackSetsInputDict,
     ListStackSetsOutput,
     ListStacksInput,
+    ListStacksInputDict,
     ListStacksOutput,
     ListTypeRegistrationsInput,
+    ListTypeRegistrationsInputDict,
     ListTypeRegistrationsOutput,
     ListTypeVersionsInput,
+    ListTypeVersionsInputDict,
     ListTypeVersionsOutput,
     ListTypesInput,
+    ListTypesInputDict,
     ListTypesOutput,
     LiveResourceDrift,
     LoggingConfig,
+    LoggingConfigDict,
     ManagedExecution,
+    ManagedExecutionDict,
     ModuleInfo,
     OperationEntry,
     OperationEvent,
     OperationResultFilter,
+    OperationResultFilterDict,
     Output,
     Parameter,
     ParameterConstraints,
     ParameterDeclaration,
+    ParameterDict,
     PhysicalResourceIdContextKeyValuePair,
     PropertyDifference,
     PublishTypeInput,
+    PublishTypeInputDict,
     PublishTypeOutput,
     RecordHandlerProgressInput,
+    RecordHandlerProgressInputDict,
     RecordHandlerProgressOutput,
     RegisterPublisherInput,
+    RegisterPublisherInputDict,
     RegisterPublisherOutput,
     RegisterTypeInput,
+    RegisterTypeInputDict,
     RegisterTypeOutput,
     RequiredActivatedType,
     ResourceChange,
     ResourceChangeDetail,
     ResourceDefinition,
+    ResourceDefinitionDict,
     ResourceDetail,
     ResourceDriftIgnoredAttribute,
     ResourceIdentifierSummary,
     ResourceLocation,
+    ResourceLocationDict,
     ResourceMapping,
+    ResourceMappingDict,
     ResourceScanSummary,
     ResourceTargetDefinition,
     ResourceToImport,
+    ResourceToImportDict,
     RollbackConfiguration,
+    RollbackConfigurationDict,
     RollbackStackInput,
+    RollbackStackInputDict,
     RollbackStackOutput,
     RollbackTrigger,
+    RollbackTriggerDict,
     ScanFilter,
+    ScanFilterDict,
     ScannedResource,
     ScannedResourceIdentifier,
+    ScannedResourceIdentifierDict,
     SetStackPolicyInput,
+    SetStackPolicyInputDict,
     SetStackPolicyOutput,
     SetTypeConfigurationInput,
+    SetTypeConfigurationInputDict,
     SetTypeConfigurationOutput,
     SetTypeDefaultVersionInput,
+    SetTypeDefaultVersionInputDict,
     SetTypeDefaultVersionOutput,
     SignalResourceInput,
+    SignalResourceInputDict,
     SignalResourceOutput,
     Stack,
     StackDefinition,
+    StackDefinitionDict,
     StackDriftInformation,
     StackDriftInformationSummary,
     StackEvent,
     StackInstance,
     StackInstanceComprehensiveStatus,
     StackInstanceFilter,
+    StackInstanceFilterDict,
     StackInstanceResourceDriftsSummary,
     StackInstanceSummary,
     StackRefactorAction,
@@ -234,39 +335,54 @@ from aws_sdk_cloudformation.models import (
     StackSetDriftDetectionDetails,
     StackSetOperation,
     StackSetOperationPreferences,
+    StackSetOperationPreferencesDict,
     StackSetOperationResultSummary,
     StackSetOperationStatusDetails,
     StackSetOperationSummary,
     StackSetSummary,
     StackSummary,
     StartResourceScanInput,
+    StartResourceScanInputDict,
     StartResourceScanOutput,
     StopStackSetOperationInput,
+    StopStackSetOperationInputDict,
     StopStackSetOperationOutput,
     Tag,
+    TagDict,
     TemplateConfiguration,
+    TemplateConfigurationDict,
     TemplateParameter,
     TemplateProgress,
     TemplateSummary,
     TemplateSummaryConfig,
+    TemplateSummaryConfigDict,
     TestTypeInput,
+    TestTypeInputDict,
     TestTypeOutput,
     TypeConfigurationDetails,
     TypeConfigurationIdentifier,
+    TypeConfigurationIdentifierDict,
     TypeFilters,
+    TypeFiltersDict,
     TypeSummary,
     TypeVersionSummary,
     UpdateGeneratedTemplateInput,
+    UpdateGeneratedTemplateInputDict,
     UpdateGeneratedTemplateOutput,
     UpdateStackInput,
+    UpdateStackInputDict,
     UpdateStackInstancesInput,
+    UpdateStackInstancesInputDict,
     UpdateStackInstancesOutput,
     UpdateStackOutput,
     UpdateStackSetInput,
+    UpdateStackSetInputDict,
     UpdateStackSetOutput,
     UpdateTerminationProtectionInput,
+    UpdateTerminationProtectionInputDict,
     UpdateTerminationProtectionOutput,
     ValidateTemplateInput,
+    ValidateTemplateInputDict,
     ValidateTemplateOutput,
     WarningDetail,
     WarningProperty,
@@ -274,8 +390,9 @@ from aws_sdk_cloudformation.models import (
 )
 
 
-# Static type fixture: pyright over this validates models.pyi.
-# Not executed as a test; it only needs to type-check.
+# Static type fixture: pyright over this validates models.pyi and the
+# client method signatures. Not executed as a test; it only needs to
+# type-check.
 
 _: Any = ...
 
@@ -547,3 +664,1045 @@ ValidateTemplateOutput()
 WarningDetail()
 WarningProperty()
 Warnings()
+_params_0: ActivateOrganizationsAccessInputDict = {}
+_params_1: ActivateTypeInputDict = {}
+_params_2: AutoDeploymentDict = {}
+_params_3: BatchDescribeTypeConfigurationsInputDict = {
+    "type_configuration_identifiers": _
+}
+_params_4: CancelUpdateStackInputDict = {"stack_name": _}
+_params_5: ContinueUpdateRollbackInputDict = {"stack_name": _}
+_params_6: CreateChangeSetInputDict = {"stack_name": _, "change_set_name": _}
+_params_7: CreateGeneratedTemplateInputDict = {"generated_template_name": _}
+_params_8: CreateStackInputDict = {"stack_name": _}
+_params_9: CreateStackInstancesInputDict = {"stack_set_name": _, "regions": _}
+_params_10: CreateStackRefactorInputDict = {"stack_definitions": _}
+_params_11: CreateStackSetInputDict = {"stack_set_name": _}
+_params_12: DeactivateOrganizationsAccessInputDict = {}
+_params_13: DeactivateTypeInputDict = {}
+_params_14: DeleteChangeSetInputDict = {"change_set_name": _}
+_params_15: DeleteGeneratedTemplateInputDict = {"generated_template_name": _}
+_params_16: DeleteStackInputDict = {"stack_name": _}
+_params_17: DeleteStackInstancesInputDict = {
+    "stack_set_name": _,
+    "regions": _,
+    "retain_stacks": _,
+}
+_params_18: DeleteStackSetInputDict = {"stack_set_name": _}
+_params_19: DeploymentConfigDict = {}
+_params_20: DeploymentTargetsDict = {}
+_params_21: DeregisterTypeInputDict = {}
+_params_22: DescribeAccountLimitsInputDict = {}
+_params_23: DescribeChangeSetHooksInputDict = {"change_set_name": _}
+_params_24: DescribeChangeSetInputDict = {"change_set_name": _}
+_params_25: DescribeEventsInputDict = {}
+_params_26: DescribeGeneratedTemplateInputDict = {"generated_template_name": _}
+_params_27: DescribeOrganizationsAccessInputDict = {}
+_params_28: DescribePublisherInputDict = {}
+_params_29: DescribeResourceScanInputDict = {"resource_scan_id": _}
+_params_30: DescribeStackDriftDetectionStatusInputDict = {"stack_drift_detection_id": _}
+_params_31: DescribeStackEventsInputDict = {"stack_name": _}
+_params_32: DescribeStackInstanceInputDict = {
+    "stack_set_name": _,
+    "stack_instance_account": _,
+    "stack_instance_region": _,
+}
+_params_33: DescribeStackRefactorInputDict = {"stack_refactor_id": _}
+_params_34: DescribeStackResourceDriftsInputDict = {"stack_name": _}
+_params_35: DescribeStackResourceInputDict = {"stack_name": _, "logical_resource_id": _}
+_params_36: DescribeStackResourcesInputDict = {}
+_params_37: DescribeStackSetInputDict = {"stack_set_name": _}
+_params_38: DescribeStackSetOperationInputDict = {
+    "stack_set_name": _,
+    "operation_id": _,
+}
+_params_39: DescribeStacksInputDict = {}
+_params_40: DescribeTypeInputDict = {}
+_params_41: DescribeTypeRegistrationInputDict = {"registration_token": _}
+_params_42: DetectStackDriftInputDict = {"stack_name": _}
+_params_43: DetectStackResourceDriftInputDict = {
+    "stack_name": _,
+    "logical_resource_id": _,
+}
+_params_44: DetectStackSetDriftInputDict = {"stack_set_name": _}
+_params_45: EstimateTemplateCostInputDict = {}
+_params_46: EventFilterDict = {}
+_params_47: ExecuteChangeSetInputDict = {"change_set_name": _}
+_params_48: ExecuteStackRefactorInputDict = {"stack_refactor_id": _}
+_params_49: GetGeneratedTemplateInputDict = {"generated_template_name": _}
+_params_50: GetHookResultInputDict = {}
+_params_51: GetStackPolicyInputDict = {"stack_name": _}
+_params_52: GetTemplateInputDict = {}
+_params_53: GetTemplateSummaryInputDict = {}
+_params_54: ImportStacksToStackSetInputDict = {"stack_set_name": _}
+_params_55: ListChangeSetsInputDict = {"stack_name": _}
+_params_56: ListExportsInputDict = {}
+_params_57: ListGeneratedTemplatesInputDict = {}
+_params_58: ListHookResultsInputDict = {}
+_params_59: ListImportsInputDict = {"export_name": _}
+_params_60: ListResourceScanRelatedResourcesInputDict = {
+    "resource_scan_id": _,
+    "resources": _,
+}
+_params_61: ListResourceScanResourcesInputDict = {"resource_scan_id": _}
+_params_62: ListResourceScansInputDict = {}
+_params_63: ListStackInstanceResourceDriftsInputDict = {
+    "stack_set_name": _,
+    "stack_instance_account": _,
+    "stack_instance_region": _,
+    "operation_id": _,
+}
+_params_64: ListStackInstancesInputDict = {"stack_set_name": _}
+_params_65: ListStackRefactorActionsInputDict = {"stack_refactor_id": _}
+_params_66: ListStackRefactorsInputDict = {}
+_params_67: ListStackResourcesInputDict = {"stack_name": _}
+_params_68: ListStackSetAutoDeploymentTargetsInputDict = {"stack_set_name": _}
+_params_69: ListStackSetOperationResultsInputDict = {
+    "stack_set_name": _,
+    "operation_id": _,
+}
+_params_70: ListStackSetOperationsInputDict = {"stack_set_name": _}
+_params_71: ListStackSetsInputDict = {}
+_params_72: ListStacksInputDict = {}
+_params_73: ListTypeRegistrationsInputDict = {}
+_params_74: ListTypesInputDict = {}
+_params_75: ListTypeVersionsInputDict = {}
+_params_76: LoggingConfigDict = {"log_role_arn": _, "log_group_name": _}
+_params_77: ManagedExecutionDict = {}
+_params_78: OperationResultFilterDict = {}
+_params_79: ParameterDict = {}
+_params_80: PublishTypeInputDict = {}
+_params_81: RecordHandlerProgressInputDict = {"bearer_token": _, "operation_status": _}
+_params_82: RegisterPublisherInputDict = {}
+_params_83: RegisterTypeInputDict = {"type_name": _, "schema_handler_package": _}
+_params_84: ResourceDefinitionDict = {"resource_type": _, "resource_identifier": _}
+_params_85: ResourceLocationDict = {"stack_name": _, "logical_resource_id": _}
+_params_86: ResourceMappingDict = {"source": _, "destination": _}
+_params_87: ResourceToImportDict = {
+    "resource_type": _,
+    "logical_resource_id": _,
+    "resource_identifier": _,
+}
+_params_88: RollbackConfigurationDict = {}
+_params_89: RollbackStackInputDict = {"stack_name": _}
+_params_90: RollbackTriggerDict = {"arn": _, "type": _}
+_params_91: ScanFilterDict = {}
+_params_92: ScannedResourceIdentifierDict = {
+    "resource_type": _,
+    "resource_identifier": _,
+}
+_params_93: SetStackPolicyInputDict = {"stack_name": _}
+_params_94: SetTypeConfigurationInputDict = {"configuration": _}
+_params_95: SetTypeDefaultVersionInputDict = {}
+_params_96: SignalResourceInputDict = {
+    "stack_name": _,
+    "logical_resource_id": _,
+    "unique_id": _,
+    "status": _,
+}
+_params_97: StackDefinitionDict = {}
+_params_98: StackInstanceFilterDict = {}
+_params_99: StackSetOperationPreferencesDict = {}
+_params_100: StartResourceScanInputDict = {}
+_params_101: StopStackSetOperationInputDict = {"stack_set_name": _, "operation_id": _}
+_params_102: TagDict = {"key": _, "value": _}
+_params_103: TemplateConfigurationDict = {}
+_params_104: TemplateSummaryConfigDict = {}
+_params_105: TestTypeInputDict = {}
+_params_106: TypeConfigurationIdentifierDict = {}
+_params_107: TypeFiltersDict = {}
+_params_108: UpdateGeneratedTemplateInputDict = {"generated_template_name": _}
+_params_109: UpdateStackInputDict = {"stack_name": _}
+_params_110: UpdateStackInstancesInputDict = {"stack_set_name": _, "regions": _}
+_params_111: UpdateStackSetInputDict = {"stack_set_name": _}
+_params_112: UpdateTerminationProtectionInputDict = {
+    "enable_termination_protection": _,
+    "stack_name": _,
+}
+_params_113: ValidateTemplateInputDict = {}
+
+
+def _request[T](form: type[T]) -> T:
+    raise NotImplementedError
+
+
+async def check_async_calls(client: AsyncCloudFormationClient) -> None:
+    pass
+    await client.activate_organizations_access()
+    await client.activate_organizations_access(
+        **_request(ActivateOrganizationsAccessInputDict)
+    )
+    await client.activate_organizations_access(
+        _request(ActivateOrganizationsAccessInput)
+    )
+    await client.activate_organizations_access(
+        _request(ActivateOrganizationsAccessInputDict)
+    )
+    await client.activate_type()
+    await client.activate_type(**_request(ActivateTypeInputDict))
+    await client.activate_type(_request(ActivateTypeInput))
+    await client.activate_type(_request(ActivateTypeInputDict))
+    await client.batch_describe_type_configurations(type_configuration_identifiers=_)
+    await client.batch_describe_type_configurations(
+        **_request(BatchDescribeTypeConfigurationsInputDict)
+    )
+    await client.batch_describe_type_configurations(
+        _request(BatchDescribeTypeConfigurationsInput)
+    )
+    await client.batch_describe_type_configurations(
+        _request(BatchDescribeTypeConfigurationsInputDict)
+    )
+    await client.cancel_update_stack(stack_name=_)
+    await client.cancel_update_stack(**_request(CancelUpdateStackInputDict))
+    await client.cancel_update_stack(_request(CancelUpdateStackInput))
+    await client.cancel_update_stack(_request(CancelUpdateStackInputDict))
+    await client.continue_update_rollback(stack_name=_)
+    await client.continue_update_rollback(**_request(ContinueUpdateRollbackInputDict))
+    await client.continue_update_rollback(_request(ContinueUpdateRollbackInput))
+    await client.continue_update_rollback(_request(ContinueUpdateRollbackInputDict))
+    await client.create_change_set(stack_name=_, change_set_name=_)
+    await client.create_change_set(**_request(CreateChangeSetInputDict))
+    await client.create_change_set(_request(CreateChangeSetInput))
+    await client.create_change_set(_request(CreateChangeSetInputDict))
+    await client.create_generated_template(generated_template_name=_)
+    await client.create_generated_template(**_request(CreateGeneratedTemplateInputDict))
+    await client.create_generated_template(_request(CreateGeneratedTemplateInput))
+    await client.create_generated_template(_request(CreateGeneratedTemplateInputDict))
+    await client.create_stack(stack_name=_)
+    await client.create_stack(**_request(CreateStackInputDict))
+    await client.create_stack(_request(CreateStackInput))
+    await client.create_stack(_request(CreateStackInputDict))
+    await client.create_stack_instances(stack_set_name=_, regions=_)
+    await client.create_stack_instances(**_request(CreateStackInstancesInputDict))
+    await client.create_stack_instances(_request(CreateStackInstancesInput))
+    await client.create_stack_instances(_request(CreateStackInstancesInputDict))
+    await client.create_stack_refactor(stack_definitions=_)
+    await client.create_stack_refactor(**_request(CreateStackRefactorInputDict))
+    await client.create_stack_refactor(_request(CreateStackRefactorInput))
+    await client.create_stack_refactor(_request(CreateStackRefactorInputDict))
+    await client.create_stack_set(stack_set_name=_)
+    await client.create_stack_set(**_request(CreateStackSetInputDict))
+    await client.create_stack_set(_request(CreateStackSetInput))
+    await client.create_stack_set(_request(CreateStackSetInputDict))
+    await client.deactivate_organizations_access()
+    await client.deactivate_organizations_access(
+        **_request(DeactivateOrganizationsAccessInputDict)
+    )
+    await client.deactivate_organizations_access(
+        _request(DeactivateOrganizationsAccessInput)
+    )
+    await client.deactivate_organizations_access(
+        _request(DeactivateOrganizationsAccessInputDict)
+    )
+    await client.deactivate_type()
+    await client.deactivate_type(**_request(DeactivateTypeInputDict))
+    await client.deactivate_type(_request(DeactivateTypeInput))
+    await client.deactivate_type(_request(DeactivateTypeInputDict))
+    await client.delete_change_set(change_set_name=_)
+    await client.delete_change_set(**_request(DeleteChangeSetInputDict))
+    await client.delete_change_set(_request(DeleteChangeSetInput))
+    await client.delete_change_set(_request(DeleteChangeSetInputDict))
+    await client.delete_generated_template(generated_template_name=_)
+    await client.delete_generated_template(**_request(DeleteGeneratedTemplateInputDict))
+    await client.delete_generated_template(_request(DeleteGeneratedTemplateInput))
+    await client.delete_generated_template(_request(DeleteGeneratedTemplateInputDict))
+    await client.delete_stack(stack_name=_)
+    await client.delete_stack(**_request(DeleteStackInputDict))
+    await client.delete_stack(_request(DeleteStackInput))
+    await client.delete_stack(_request(DeleteStackInputDict))
+    await client.delete_stack_instances(stack_set_name=_, regions=_, retain_stacks=_)
+    await client.delete_stack_instances(**_request(DeleteStackInstancesInputDict))
+    await client.delete_stack_instances(_request(DeleteStackInstancesInput))
+    await client.delete_stack_instances(_request(DeleteStackInstancesInputDict))
+    await client.delete_stack_set(stack_set_name=_)
+    await client.delete_stack_set(**_request(DeleteStackSetInputDict))
+    await client.delete_stack_set(_request(DeleteStackSetInput))
+    await client.delete_stack_set(_request(DeleteStackSetInputDict))
+    await client.deregister_type()
+    await client.deregister_type(**_request(DeregisterTypeInputDict))
+    await client.deregister_type(_request(DeregisterTypeInput))
+    await client.deregister_type(_request(DeregisterTypeInputDict))
+    await client.describe_account_limits()
+    await client.describe_account_limits(**_request(DescribeAccountLimitsInputDict))
+    await client.describe_account_limits(_request(DescribeAccountLimitsInput))
+    await client.describe_account_limits(_request(DescribeAccountLimitsInputDict))
+    await client.describe_change_set(change_set_name=_)
+    await client.describe_change_set(**_request(DescribeChangeSetInputDict))
+    await client.describe_change_set(_request(DescribeChangeSetInput))
+    await client.describe_change_set(_request(DescribeChangeSetInputDict))
+    await client.describe_change_set_hooks(change_set_name=_)
+    await client.describe_change_set_hooks(**_request(DescribeChangeSetHooksInputDict))
+    await client.describe_change_set_hooks(_request(DescribeChangeSetHooksInput))
+    await client.describe_change_set_hooks(_request(DescribeChangeSetHooksInputDict))
+    await client.describe_events()
+    await client.describe_events(**_request(DescribeEventsInputDict))
+    await client.describe_events(_request(DescribeEventsInput))
+    await client.describe_events(_request(DescribeEventsInputDict))
+    await client.describe_generated_template(generated_template_name=_)
+    await client.describe_generated_template(
+        **_request(DescribeGeneratedTemplateInputDict)
+    )
+    await client.describe_generated_template(_request(DescribeGeneratedTemplateInput))
+    await client.describe_generated_template(
+        _request(DescribeGeneratedTemplateInputDict)
+    )
+    await client.describe_organizations_access()
+    await client.describe_organizations_access(
+        **_request(DescribeOrganizationsAccessInputDict)
+    )
+    await client.describe_organizations_access(
+        _request(DescribeOrganizationsAccessInput)
+    )
+    await client.describe_organizations_access(
+        _request(DescribeOrganizationsAccessInputDict)
+    )
+    await client.describe_publisher()
+    await client.describe_publisher(**_request(DescribePublisherInputDict))
+    await client.describe_publisher(_request(DescribePublisherInput))
+    await client.describe_publisher(_request(DescribePublisherInputDict))
+    await client.describe_resource_scan(resource_scan_id=_)
+    await client.describe_resource_scan(**_request(DescribeResourceScanInputDict))
+    await client.describe_resource_scan(_request(DescribeResourceScanInput))
+    await client.describe_resource_scan(_request(DescribeResourceScanInputDict))
+    await client.describe_stack_drift_detection_status(stack_drift_detection_id=_)
+    await client.describe_stack_drift_detection_status(
+        **_request(DescribeStackDriftDetectionStatusInputDict)
+    )
+    await client.describe_stack_drift_detection_status(
+        _request(DescribeStackDriftDetectionStatusInput)
+    )
+    await client.describe_stack_drift_detection_status(
+        _request(DescribeStackDriftDetectionStatusInputDict)
+    )
+    await client.describe_stack_events(stack_name=_)
+    await client.describe_stack_events(**_request(DescribeStackEventsInputDict))
+    await client.describe_stack_events(_request(DescribeStackEventsInput))
+    await client.describe_stack_events(_request(DescribeStackEventsInputDict))
+    await client.describe_stack_instance(
+        stack_set_name=_, stack_instance_account=_, stack_instance_region=_
+    )
+    await client.describe_stack_instance(**_request(DescribeStackInstanceInputDict))
+    await client.describe_stack_instance(_request(DescribeStackInstanceInput))
+    await client.describe_stack_instance(_request(DescribeStackInstanceInputDict))
+    await client.describe_stack_refactor(stack_refactor_id=_)
+    await client.describe_stack_refactor(**_request(DescribeStackRefactorInputDict))
+    await client.describe_stack_refactor(_request(DescribeStackRefactorInput))
+    await client.describe_stack_refactor(_request(DescribeStackRefactorInputDict))
+    await client.describe_stack_resource(stack_name=_, logical_resource_id=_)
+    await client.describe_stack_resource(**_request(DescribeStackResourceInputDict))
+    await client.describe_stack_resource(_request(DescribeStackResourceInput))
+    await client.describe_stack_resource(_request(DescribeStackResourceInputDict))
+    await client.describe_stack_resource_drifts(stack_name=_)
+    await client.describe_stack_resource_drifts(
+        **_request(DescribeStackResourceDriftsInputDict)
+    )
+    await client.describe_stack_resource_drifts(
+        _request(DescribeStackResourceDriftsInput)
+    )
+    await client.describe_stack_resource_drifts(
+        _request(DescribeStackResourceDriftsInputDict)
+    )
+    await client.describe_stack_resources()
+    await client.describe_stack_resources(**_request(DescribeStackResourcesInputDict))
+    await client.describe_stack_resources(_request(DescribeStackResourcesInput))
+    await client.describe_stack_resources(_request(DescribeStackResourcesInputDict))
+    await client.describe_stacks()
+    await client.describe_stacks(**_request(DescribeStacksInputDict))
+    await client.describe_stacks(_request(DescribeStacksInput))
+    await client.describe_stacks(_request(DescribeStacksInputDict))
+    await client.describe_stack_set(stack_set_name=_)
+    await client.describe_stack_set(**_request(DescribeStackSetInputDict))
+    await client.describe_stack_set(_request(DescribeStackSetInput))
+    await client.describe_stack_set(_request(DescribeStackSetInputDict))
+    await client.describe_stack_set_operation(stack_set_name=_, operation_id=_)
+    await client.describe_stack_set_operation(
+        **_request(DescribeStackSetOperationInputDict)
+    )
+    await client.describe_stack_set_operation(_request(DescribeStackSetOperationInput))
+    await client.describe_stack_set_operation(
+        _request(DescribeStackSetOperationInputDict)
+    )
+    await client.describe_type()
+    await client.describe_type(**_request(DescribeTypeInputDict))
+    await client.describe_type(_request(DescribeTypeInput))
+    await client.describe_type(_request(DescribeTypeInputDict))
+    await client.describe_type_registration(registration_token=_)
+    await client.describe_type_registration(
+        **_request(DescribeTypeRegistrationInputDict)
+    )
+    await client.describe_type_registration(_request(DescribeTypeRegistrationInput))
+    await client.describe_type_registration(_request(DescribeTypeRegistrationInputDict))
+    await client.detect_stack_drift(stack_name=_)
+    await client.detect_stack_drift(**_request(DetectStackDriftInputDict))
+    await client.detect_stack_drift(_request(DetectStackDriftInput))
+    await client.detect_stack_drift(_request(DetectStackDriftInputDict))
+    await client.detect_stack_resource_drift(stack_name=_, logical_resource_id=_)
+    await client.detect_stack_resource_drift(
+        **_request(DetectStackResourceDriftInputDict)
+    )
+    await client.detect_stack_resource_drift(_request(DetectStackResourceDriftInput))
+    await client.detect_stack_resource_drift(
+        _request(DetectStackResourceDriftInputDict)
+    )
+    await client.detect_stack_set_drift(stack_set_name=_)
+    await client.detect_stack_set_drift(**_request(DetectStackSetDriftInputDict))
+    await client.detect_stack_set_drift(_request(DetectStackSetDriftInput))
+    await client.detect_stack_set_drift(_request(DetectStackSetDriftInputDict))
+    await client.estimate_template_cost()
+    await client.estimate_template_cost(**_request(EstimateTemplateCostInputDict))
+    await client.estimate_template_cost(_request(EstimateTemplateCostInput))
+    await client.estimate_template_cost(_request(EstimateTemplateCostInputDict))
+    await client.execute_change_set(change_set_name=_)
+    await client.execute_change_set(**_request(ExecuteChangeSetInputDict))
+    await client.execute_change_set(_request(ExecuteChangeSetInput))
+    await client.execute_change_set(_request(ExecuteChangeSetInputDict))
+    await client.execute_stack_refactor(stack_refactor_id=_)
+    await client.execute_stack_refactor(**_request(ExecuteStackRefactorInputDict))
+    await client.execute_stack_refactor(_request(ExecuteStackRefactorInput))
+    await client.execute_stack_refactor(_request(ExecuteStackRefactorInputDict))
+    await client.get_generated_template(generated_template_name=_)
+    await client.get_generated_template(**_request(GetGeneratedTemplateInputDict))
+    await client.get_generated_template(_request(GetGeneratedTemplateInput))
+    await client.get_generated_template(_request(GetGeneratedTemplateInputDict))
+    await client.get_hook_result()
+    await client.get_hook_result(**_request(GetHookResultInputDict))
+    await client.get_hook_result(_request(GetHookResultInput))
+    await client.get_hook_result(_request(GetHookResultInputDict))
+    await client.get_stack_policy(stack_name=_)
+    await client.get_stack_policy(**_request(GetStackPolicyInputDict))
+    await client.get_stack_policy(_request(GetStackPolicyInput))
+    await client.get_stack_policy(_request(GetStackPolicyInputDict))
+    await client.get_template()
+    await client.get_template(**_request(GetTemplateInputDict))
+    await client.get_template(_request(GetTemplateInput))
+    await client.get_template(_request(GetTemplateInputDict))
+    await client.get_template_summary()
+    await client.get_template_summary(**_request(GetTemplateSummaryInputDict))
+    await client.get_template_summary(_request(GetTemplateSummaryInput))
+    await client.get_template_summary(_request(GetTemplateSummaryInputDict))
+    await client.import_stacks_to_stack_set(stack_set_name=_)
+    await client.import_stacks_to_stack_set(**_request(ImportStacksToStackSetInputDict))
+    await client.import_stacks_to_stack_set(_request(ImportStacksToStackSetInput))
+    await client.import_stacks_to_stack_set(_request(ImportStacksToStackSetInputDict))
+    await client.list_change_sets(stack_name=_)
+    await client.list_change_sets(**_request(ListChangeSetsInputDict))
+    await client.list_change_sets(_request(ListChangeSetsInput))
+    await client.list_change_sets(_request(ListChangeSetsInputDict))
+    await client.list_exports()
+    await client.list_exports(**_request(ListExportsInputDict))
+    await client.list_exports(_request(ListExportsInput))
+    await client.list_exports(_request(ListExportsInputDict))
+    await client.list_generated_templates()
+    await client.list_generated_templates(**_request(ListGeneratedTemplatesInputDict))
+    await client.list_generated_templates(_request(ListGeneratedTemplatesInput))
+    await client.list_generated_templates(_request(ListGeneratedTemplatesInputDict))
+    await client.list_hook_results()
+    await client.list_hook_results(**_request(ListHookResultsInputDict))
+    await client.list_hook_results(_request(ListHookResultsInput))
+    await client.list_hook_results(_request(ListHookResultsInputDict))
+    await client.list_imports(export_name=_)
+    await client.list_imports(**_request(ListImportsInputDict))
+    await client.list_imports(_request(ListImportsInput))
+    await client.list_imports(_request(ListImportsInputDict))
+    await client.list_resource_scan_related_resources(resource_scan_id=_, resources=_)
+    await client.list_resource_scan_related_resources(
+        **_request(ListResourceScanRelatedResourcesInputDict)
+    )
+    await client.list_resource_scan_related_resources(
+        _request(ListResourceScanRelatedResourcesInput)
+    )
+    await client.list_resource_scan_related_resources(
+        _request(ListResourceScanRelatedResourcesInputDict)
+    )
+    await client.list_resource_scan_resources(resource_scan_id=_)
+    await client.list_resource_scan_resources(
+        **_request(ListResourceScanResourcesInputDict)
+    )
+    await client.list_resource_scan_resources(_request(ListResourceScanResourcesInput))
+    await client.list_resource_scan_resources(
+        _request(ListResourceScanResourcesInputDict)
+    )
+    await client.list_resource_scans()
+    await client.list_resource_scans(**_request(ListResourceScansInputDict))
+    await client.list_resource_scans(_request(ListResourceScansInput))
+    await client.list_resource_scans(_request(ListResourceScansInputDict))
+    await client.list_stack_instance_resource_drifts(
+        stack_set_name=_,
+        stack_instance_account=_,
+        stack_instance_region=_,
+        operation_id=_,
+    )
+    await client.list_stack_instance_resource_drifts(
+        **_request(ListStackInstanceResourceDriftsInputDict)
+    )
+    await client.list_stack_instance_resource_drifts(
+        _request(ListStackInstanceResourceDriftsInput)
+    )
+    await client.list_stack_instance_resource_drifts(
+        _request(ListStackInstanceResourceDriftsInputDict)
+    )
+    await client.list_stack_instances(stack_set_name=_)
+    await client.list_stack_instances(**_request(ListStackInstancesInputDict))
+    await client.list_stack_instances(_request(ListStackInstancesInput))
+    await client.list_stack_instances(_request(ListStackInstancesInputDict))
+    await client.list_stack_refactor_actions(stack_refactor_id=_)
+    await client.list_stack_refactor_actions(
+        **_request(ListStackRefactorActionsInputDict)
+    )
+    await client.list_stack_refactor_actions(_request(ListStackRefactorActionsInput))
+    await client.list_stack_refactor_actions(
+        _request(ListStackRefactorActionsInputDict)
+    )
+    await client.list_stack_refactors()
+    await client.list_stack_refactors(**_request(ListStackRefactorsInputDict))
+    await client.list_stack_refactors(_request(ListStackRefactorsInput))
+    await client.list_stack_refactors(_request(ListStackRefactorsInputDict))
+    await client.list_stack_resources(stack_name=_)
+    await client.list_stack_resources(**_request(ListStackResourcesInputDict))
+    await client.list_stack_resources(_request(ListStackResourcesInput))
+    await client.list_stack_resources(_request(ListStackResourcesInputDict))
+    await client.list_stacks()
+    await client.list_stacks(**_request(ListStacksInputDict))
+    await client.list_stacks(_request(ListStacksInput))
+    await client.list_stacks(_request(ListStacksInputDict))
+    await client.list_stack_set_auto_deployment_targets(stack_set_name=_)
+    await client.list_stack_set_auto_deployment_targets(
+        **_request(ListStackSetAutoDeploymentTargetsInputDict)
+    )
+    await client.list_stack_set_auto_deployment_targets(
+        _request(ListStackSetAutoDeploymentTargetsInput)
+    )
+    await client.list_stack_set_auto_deployment_targets(
+        _request(ListStackSetAutoDeploymentTargetsInputDict)
+    )
+    await client.list_stack_set_operation_results(stack_set_name=_, operation_id=_)
+    await client.list_stack_set_operation_results(
+        **_request(ListStackSetOperationResultsInputDict)
+    )
+    await client.list_stack_set_operation_results(
+        _request(ListStackSetOperationResultsInput)
+    )
+    await client.list_stack_set_operation_results(
+        _request(ListStackSetOperationResultsInputDict)
+    )
+    await client.list_stack_set_operations(stack_set_name=_)
+    await client.list_stack_set_operations(**_request(ListStackSetOperationsInputDict))
+    await client.list_stack_set_operations(_request(ListStackSetOperationsInput))
+    await client.list_stack_set_operations(_request(ListStackSetOperationsInputDict))
+    await client.list_stack_sets()
+    await client.list_stack_sets(**_request(ListStackSetsInputDict))
+    await client.list_stack_sets(_request(ListStackSetsInput))
+    await client.list_stack_sets(_request(ListStackSetsInputDict))
+    await client.list_type_registrations()
+    await client.list_type_registrations(**_request(ListTypeRegistrationsInputDict))
+    await client.list_type_registrations(_request(ListTypeRegistrationsInput))
+    await client.list_type_registrations(_request(ListTypeRegistrationsInputDict))
+    await client.list_types()
+    await client.list_types(**_request(ListTypesInputDict))
+    await client.list_types(_request(ListTypesInput))
+    await client.list_types(_request(ListTypesInputDict))
+    await client.list_type_versions()
+    await client.list_type_versions(**_request(ListTypeVersionsInputDict))
+    await client.list_type_versions(_request(ListTypeVersionsInput))
+    await client.list_type_versions(_request(ListTypeVersionsInputDict))
+    await client.publish_type()
+    await client.publish_type(**_request(PublishTypeInputDict))
+    await client.publish_type(_request(PublishTypeInput))
+    await client.publish_type(_request(PublishTypeInputDict))
+    await client.record_handler_progress(bearer_token=_, operation_status=_)
+    await client.record_handler_progress(**_request(RecordHandlerProgressInputDict))
+    await client.record_handler_progress(_request(RecordHandlerProgressInput))
+    await client.record_handler_progress(_request(RecordHandlerProgressInputDict))
+    await client.register_publisher()
+    await client.register_publisher(**_request(RegisterPublisherInputDict))
+    await client.register_publisher(_request(RegisterPublisherInput))
+    await client.register_publisher(_request(RegisterPublisherInputDict))
+    await client.register_type(type_name=_, schema_handler_package=_)
+    await client.register_type(**_request(RegisterTypeInputDict))
+    await client.register_type(_request(RegisterTypeInput))
+    await client.register_type(_request(RegisterTypeInputDict))
+    await client.rollback_stack(stack_name=_)
+    await client.rollback_stack(**_request(RollbackStackInputDict))
+    await client.rollback_stack(_request(RollbackStackInput))
+    await client.rollback_stack(_request(RollbackStackInputDict))
+    await client.set_stack_policy(stack_name=_)
+    await client.set_stack_policy(**_request(SetStackPolicyInputDict))
+    await client.set_stack_policy(_request(SetStackPolicyInput))
+    await client.set_stack_policy(_request(SetStackPolicyInputDict))
+    await client.set_type_configuration(configuration=_)
+    await client.set_type_configuration(**_request(SetTypeConfigurationInputDict))
+    await client.set_type_configuration(_request(SetTypeConfigurationInput))
+    await client.set_type_configuration(_request(SetTypeConfigurationInputDict))
+    await client.set_type_default_version()
+    await client.set_type_default_version(**_request(SetTypeDefaultVersionInputDict))
+    await client.set_type_default_version(_request(SetTypeDefaultVersionInput))
+    await client.set_type_default_version(_request(SetTypeDefaultVersionInputDict))
+    await client.signal_resource(
+        stack_name=_, logical_resource_id=_, unique_id=_, status=_
+    )
+    await client.signal_resource(**_request(SignalResourceInputDict))
+    await client.signal_resource(_request(SignalResourceInput))
+    await client.signal_resource(_request(SignalResourceInputDict))
+    await client.start_resource_scan()
+    await client.start_resource_scan(**_request(StartResourceScanInputDict))
+    await client.start_resource_scan(_request(StartResourceScanInput))
+    await client.start_resource_scan(_request(StartResourceScanInputDict))
+    await client.stop_stack_set_operation(stack_set_name=_, operation_id=_)
+    await client.stop_stack_set_operation(**_request(StopStackSetOperationInputDict))
+    await client.stop_stack_set_operation(_request(StopStackSetOperationInput))
+    await client.stop_stack_set_operation(_request(StopStackSetOperationInputDict))
+    await client.test_type()
+    await client.test_type(**_request(TestTypeInputDict))
+    await client.test_type(_request(TestTypeInput))
+    await client.test_type(_request(TestTypeInputDict))
+    await client.update_generated_template(generated_template_name=_)
+    await client.update_generated_template(**_request(UpdateGeneratedTemplateInputDict))
+    await client.update_generated_template(_request(UpdateGeneratedTemplateInput))
+    await client.update_generated_template(_request(UpdateGeneratedTemplateInputDict))
+    await client.update_stack(stack_name=_)
+    await client.update_stack(**_request(UpdateStackInputDict))
+    await client.update_stack(_request(UpdateStackInput))
+    await client.update_stack(_request(UpdateStackInputDict))
+    await client.update_stack_instances(stack_set_name=_, regions=_)
+    await client.update_stack_instances(**_request(UpdateStackInstancesInputDict))
+    await client.update_stack_instances(_request(UpdateStackInstancesInput))
+    await client.update_stack_instances(_request(UpdateStackInstancesInputDict))
+    await client.update_stack_set(stack_set_name=_)
+    await client.update_stack_set(**_request(UpdateStackSetInputDict))
+    await client.update_stack_set(_request(UpdateStackSetInput))
+    await client.update_stack_set(_request(UpdateStackSetInputDict))
+    await client.update_termination_protection(
+        enable_termination_protection=_, stack_name=_
+    )
+    await client.update_termination_protection(
+        **_request(UpdateTerminationProtectionInputDict)
+    )
+    await client.update_termination_protection(
+        _request(UpdateTerminationProtectionInput)
+    )
+    await client.update_termination_protection(
+        _request(UpdateTerminationProtectionInputDict)
+    )
+    await client.validate_template()
+    await client.validate_template(**_request(ValidateTemplateInputDict))
+    await client.validate_template(_request(ValidateTemplateInput))
+    await client.validate_template(_request(ValidateTemplateInputDict))
+
+
+def check_sync_calls(client: CloudFormationClient) -> None:
+    pass
+    client.activate_organizations_access()
+    client.activate_organizations_access(
+        **_request(ActivateOrganizationsAccessInputDict)
+    )
+    client.activate_organizations_access(_request(ActivateOrganizationsAccessInput))
+    client.activate_organizations_access(_request(ActivateOrganizationsAccessInputDict))
+    client.activate_type()
+    client.activate_type(**_request(ActivateTypeInputDict))
+    client.activate_type(_request(ActivateTypeInput))
+    client.activate_type(_request(ActivateTypeInputDict))
+    client.batch_describe_type_configurations(type_configuration_identifiers=_)
+    client.batch_describe_type_configurations(
+        **_request(BatchDescribeTypeConfigurationsInputDict)
+    )
+    client.batch_describe_type_configurations(
+        _request(BatchDescribeTypeConfigurationsInput)
+    )
+    client.batch_describe_type_configurations(
+        _request(BatchDescribeTypeConfigurationsInputDict)
+    )
+    client.cancel_update_stack(stack_name=_)
+    client.cancel_update_stack(**_request(CancelUpdateStackInputDict))
+    client.cancel_update_stack(_request(CancelUpdateStackInput))
+    client.cancel_update_stack(_request(CancelUpdateStackInputDict))
+    client.continue_update_rollback(stack_name=_)
+    client.continue_update_rollback(**_request(ContinueUpdateRollbackInputDict))
+    client.continue_update_rollback(_request(ContinueUpdateRollbackInput))
+    client.continue_update_rollback(_request(ContinueUpdateRollbackInputDict))
+    client.create_change_set(stack_name=_, change_set_name=_)
+    client.create_change_set(**_request(CreateChangeSetInputDict))
+    client.create_change_set(_request(CreateChangeSetInput))
+    client.create_change_set(_request(CreateChangeSetInputDict))
+    client.create_generated_template(generated_template_name=_)
+    client.create_generated_template(**_request(CreateGeneratedTemplateInputDict))
+    client.create_generated_template(_request(CreateGeneratedTemplateInput))
+    client.create_generated_template(_request(CreateGeneratedTemplateInputDict))
+    client.create_stack(stack_name=_)
+    client.create_stack(**_request(CreateStackInputDict))
+    client.create_stack(_request(CreateStackInput))
+    client.create_stack(_request(CreateStackInputDict))
+    client.create_stack_instances(stack_set_name=_, regions=_)
+    client.create_stack_instances(**_request(CreateStackInstancesInputDict))
+    client.create_stack_instances(_request(CreateStackInstancesInput))
+    client.create_stack_instances(_request(CreateStackInstancesInputDict))
+    client.create_stack_refactor(stack_definitions=_)
+    client.create_stack_refactor(**_request(CreateStackRefactorInputDict))
+    client.create_stack_refactor(_request(CreateStackRefactorInput))
+    client.create_stack_refactor(_request(CreateStackRefactorInputDict))
+    client.create_stack_set(stack_set_name=_)
+    client.create_stack_set(**_request(CreateStackSetInputDict))
+    client.create_stack_set(_request(CreateStackSetInput))
+    client.create_stack_set(_request(CreateStackSetInputDict))
+    client.deactivate_organizations_access()
+    client.deactivate_organizations_access(
+        **_request(DeactivateOrganizationsAccessInputDict)
+    )
+    client.deactivate_organizations_access(_request(DeactivateOrganizationsAccessInput))
+    client.deactivate_organizations_access(
+        _request(DeactivateOrganizationsAccessInputDict)
+    )
+    client.deactivate_type()
+    client.deactivate_type(**_request(DeactivateTypeInputDict))
+    client.deactivate_type(_request(DeactivateTypeInput))
+    client.deactivate_type(_request(DeactivateTypeInputDict))
+    client.delete_change_set(change_set_name=_)
+    client.delete_change_set(**_request(DeleteChangeSetInputDict))
+    client.delete_change_set(_request(DeleteChangeSetInput))
+    client.delete_change_set(_request(DeleteChangeSetInputDict))
+    client.delete_generated_template(generated_template_name=_)
+    client.delete_generated_template(**_request(DeleteGeneratedTemplateInputDict))
+    client.delete_generated_template(_request(DeleteGeneratedTemplateInput))
+    client.delete_generated_template(_request(DeleteGeneratedTemplateInputDict))
+    client.delete_stack(stack_name=_)
+    client.delete_stack(**_request(DeleteStackInputDict))
+    client.delete_stack(_request(DeleteStackInput))
+    client.delete_stack(_request(DeleteStackInputDict))
+    client.delete_stack_instances(stack_set_name=_, regions=_, retain_stacks=_)
+    client.delete_stack_instances(**_request(DeleteStackInstancesInputDict))
+    client.delete_stack_instances(_request(DeleteStackInstancesInput))
+    client.delete_stack_instances(_request(DeleteStackInstancesInputDict))
+    client.delete_stack_set(stack_set_name=_)
+    client.delete_stack_set(**_request(DeleteStackSetInputDict))
+    client.delete_stack_set(_request(DeleteStackSetInput))
+    client.delete_stack_set(_request(DeleteStackSetInputDict))
+    client.deregister_type()
+    client.deregister_type(**_request(DeregisterTypeInputDict))
+    client.deregister_type(_request(DeregisterTypeInput))
+    client.deregister_type(_request(DeregisterTypeInputDict))
+    client.describe_account_limits()
+    client.describe_account_limits(**_request(DescribeAccountLimitsInputDict))
+    client.describe_account_limits(_request(DescribeAccountLimitsInput))
+    client.describe_account_limits(_request(DescribeAccountLimitsInputDict))
+    client.describe_change_set(change_set_name=_)
+    client.describe_change_set(**_request(DescribeChangeSetInputDict))
+    client.describe_change_set(_request(DescribeChangeSetInput))
+    client.describe_change_set(_request(DescribeChangeSetInputDict))
+    client.describe_change_set_hooks(change_set_name=_)
+    client.describe_change_set_hooks(**_request(DescribeChangeSetHooksInputDict))
+    client.describe_change_set_hooks(_request(DescribeChangeSetHooksInput))
+    client.describe_change_set_hooks(_request(DescribeChangeSetHooksInputDict))
+    client.describe_events()
+    client.describe_events(**_request(DescribeEventsInputDict))
+    client.describe_events(_request(DescribeEventsInput))
+    client.describe_events(_request(DescribeEventsInputDict))
+    client.describe_generated_template(generated_template_name=_)
+    client.describe_generated_template(**_request(DescribeGeneratedTemplateInputDict))
+    client.describe_generated_template(_request(DescribeGeneratedTemplateInput))
+    client.describe_generated_template(_request(DescribeGeneratedTemplateInputDict))
+    client.describe_organizations_access()
+    client.describe_organizations_access(
+        **_request(DescribeOrganizationsAccessInputDict)
+    )
+    client.describe_organizations_access(_request(DescribeOrganizationsAccessInput))
+    client.describe_organizations_access(_request(DescribeOrganizationsAccessInputDict))
+    client.describe_publisher()
+    client.describe_publisher(**_request(DescribePublisherInputDict))
+    client.describe_publisher(_request(DescribePublisherInput))
+    client.describe_publisher(_request(DescribePublisherInputDict))
+    client.describe_resource_scan(resource_scan_id=_)
+    client.describe_resource_scan(**_request(DescribeResourceScanInputDict))
+    client.describe_resource_scan(_request(DescribeResourceScanInput))
+    client.describe_resource_scan(_request(DescribeResourceScanInputDict))
+    client.describe_stack_drift_detection_status(stack_drift_detection_id=_)
+    client.describe_stack_drift_detection_status(
+        **_request(DescribeStackDriftDetectionStatusInputDict)
+    )
+    client.describe_stack_drift_detection_status(
+        _request(DescribeStackDriftDetectionStatusInput)
+    )
+    client.describe_stack_drift_detection_status(
+        _request(DescribeStackDriftDetectionStatusInputDict)
+    )
+    client.describe_stack_events(stack_name=_)
+    client.describe_stack_events(**_request(DescribeStackEventsInputDict))
+    client.describe_stack_events(_request(DescribeStackEventsInput))
+    client.describe_stack_events(_request(DescribeStackEventsInputDict))
+    client.describe_stack_instance(
+        stack_set_name=_, stack_instance_account=_, stack_instance_region=_
+    )
+    client.describe_stack_instance(**_request(DescribeStackInstanceInputDict))
+    client.describe_stack_instance(_request(DescribeStackInstanceInput))
+    client.describe_stack_instance(_request(DescribeStackInstanceInputDict))
+    client.describe_stack_refactor(stack_refactor_id=_)
+    client.describe_stack_refactor(**_request(DescribeStackRefactorInputDict))
+    client.describe_stack_refactor(_request(DescribeStackRefactorInput))
+    client.describe_stack_refactor(_request(DescribeStackRefactorInputDict))
+    client.describe_stack_resource(stack_name=_, logical_resource_id=_)
+    client.describe_stack_resource(**_request(DescribeStackResourceInputDict))
+    client.describe_stack_resource(_request(DescribeStackResourceInput))
+    client.describe_stack_resource(_request(DescribeStackResourceInputDict))
+    client.describe_stack_resource_drifts(stack_name=_)
+    client.describe_stack_resource_drifts(
+        **_request(DescribeStackResourceDriftsInputDict)
+    )
+    client.describe_stack_resource_drifts(_request(DescribeStackResourceDriftsInput))
+    client.describe_stack_resource_drifts(
+        _request(DescribeStackResourceDriftsInputDict)
+    )
+    client.describe_stack_resources()
+    client.describe_stack_resources(**_request(DescribeStackResourcesInputDict))
+    client.describe_stack_resources(_request(DescribeStackResourcesInput))
+    client.describe_stack_resources(_request(DescribeStackResourcesInputDict))
+    client.describe_stacks()
+    client.describe_stacks(**_request(DescribeStacksInputDict))
+    client.describe_stacks(_request(DescribeStacksInput))
+    client.describe_stacks(_request(DescribeStacksInputDict))
+    client.describe_stack_set(stack_set_name=_)
+    client.describe_stack_set(**_request(DescribeStackSetInputDict))
+    client.describe_stack_set(_request(DescribeStackSetInput))
+    client.describe_stack_set(_request(DescribeStackSetInputDict))
+    client.describe_stack_set_operation(stack_set_name=_, operation_id=_)
+    client.describe_stack_set_operation(**_request(DescribeStackSetOperationInputDict))
+    client.describe_stack_set_operation(_request(DescribeStackSetOperationInput))
+    client.describe_stack_set_operation(_request(DescribeStackSetOperationInputDict))
+    client.describe_type()
+    client.describe_type(**_request(DescribeTypeInputDict))
+    client.describe_type(_request(DescribeTypeInput))
+    client.describe_type(_request(DescribeTypeInputDict))
+    client.describe_type_registration(registration_token=_)
+    client.describe_type_registration(**_request(DescribeTypeRegistrationInputDict))
+    client.describe_type_registration(_request(DescribeTypeRegistrationInput))
+    client.describe_type_registration(_request(DescribeTypeRegistrationInputDict))
+    client.detect_stack_drift(stack_name=_)
+    client.detect_stack_drift(**_request(DetectStackDriftInputDict))
+    client.detect_stack_drift(_request(DetectStackDriftInput))
+    client.detect_stack_drift(_request(DetectStackDriftInputDict))
+    client.detect_stack_resource_drift(stack_name=_, logical_resource_id=_)
+    client.detect_stack_resource_drift(**_request(DetectStackResourceDriftInputDict))
+    client.detect_stack_resource_drift(_request(DetectStackResourceDriftInput))
+    client.detect_stack_resource_drift(_request(DetectStackResourceDriftInputDict))
+    client.detect_stack_set_drift(stack_set_name=_)
+    client.detect_stack_set_drift(**_request(DetectStackSetDriftInputDict))
+    client.detect_stack_set_drift(_request(DetectStackSetDriftInput))
+    client.detect_stack_set_drift(_request(DetectStackSetDriftInputDict))
+    client.estimate_template_cost()
+    client.estimate_template_cost(**_request(EstimateTemplateCostInputDict))
+    client.estimate_template_cost(_request(EstimateTemplateCostInput))
+    client.estimate_template_cost(_request(EstimateTemplateCostInputDict))
+    client.execute_change_set(change_set_name=_)
+    client.execute_change_set(**_request(ExecuteChangeSetInputDict))
+    client.execute_change_set(_request(ExecuteChangeSetInput))
+    client.execute_change_set(_request(ExecuteChangeSetInputDict))
+    client.execute_stack_refactor(stack_refactor_id=_)
+    client.execute_stack_refactor(**_request(ExecuteStackRefactorInputDict))
+    client.execute_stack_refactor(_request(ExecuteStackRefactorInput))
+    client.execute_stack_refactor(_request(ExecuteStackRefactorInputDict))
+    client.get_generated_template(generated_template_name=_)
+    client.get_generated_template(**_request(GetGeneratedTemplateInputDict))
+    client.get_generated_template(_request(GetGeneratedTemplateInput))
+    client.get_generated_template(_request(GetGeneratedTemplateInputDict))
+    client.get_hook_result()
+    client.get_hook_result(**_request(GetHookResultInputDict))
+    client.get_hook_result(_request(GetHookResultInput))
+    client.get_hook_result(_request(GetHookResultInputDict))
+    client.get_stack_policy(stack_name=_)
+    client.get_stack_policy(**_request(GetStackPolicyInputDict))
+    client.get_stack_policy(_request(GetStackPolicyInput))
+    client.get_stack_policy(_request(GetStackPolicyInputDict))
+    client.get_template()
+    client.get_template(**_request(GetTemplateInputDict))
+    client.get_template(_request(GetTemplateInput))
+    client.get_template(_request(GetTemplateInputDict))
+    client.get_template_summary()
+    client.get_template_summary(**_request(GetTemplateSummaryInputDict))
+    client.get_template_summary(_request(GetTemplateSummaryInput))
+    client.get_template_summary(_request(GetTemplateSummaryInputDict))
+    client.import_stacks_to_stack_set(stack_set_name=_)
+    client.import_stacks_to_stack_set(**_request(ImportStacksToStackSetInputDict))
+    client.import_stacks_to_stack_set(_request(ImportStacksToStackSetInput))
+    client.import_stacks_to_stack_set(_request(ImportStacksToStackSetInputDict))
+    client.list_change_sets(stack_name=_)
+    client.list_change_sets(**_request(ListChangeSetsInputDict))
+    client.list_change_sets(_request(ListChangeSetsInput))
+    client.list_change_sets(_request(ListChangeSetsInputDict))
+    client.list_exports()
+    client.list_exports(**_request(ListExportsInputDict))
+    client.list_exports(_request(ListExportsInput))
+    client.list_exports(_request(ListExportsInputDict))
+    client.list_generated_templates()
+    client.list_generated_templates(**_request(ListGeneratedTemplatesInputDict))
+    client.list_generated_templates(_request(ListGeneratedTemplatesInput))
+    client.list_generated_templates(_request(ListGeneratedTemplatesInputDict))
+    client.list_hook_results()
+    client.list_hook_results(**_request(ListHookResultsInputDict))
+    client.list_hook_results(_request(ListHookResultsInput))
+    client.list_hook_results(_request(ListHookResultsInputDict))
+    client.list_imports(export_name=_)
+    client.list_imports(**_request(ListImportsInputDict))
+    client.list_imports(_request(ListImportsInput))
+    client.list_imports(_request(ListImportsInputDict))
+    client.list_resource_scan_related_resources(resource_scan_id=_, resources=_)
+    client.list_resource_scan_related_resources(
+        **_request(ListResourceScanRelatedResourcesInputDict)
+    )
+    client.list_resource_scan_related_resources(
+        _request(ListResourceScanRelatedResourcesInput)
+    )
+    client.list_resource_scan_related_resources(
+        _request(ListResourceScanRelatedResourcesInputDict)
+    )
+    client.list_resource_scan_resources(resource_scan_id=_)
+    client.list_resource_scan_resources(**_request(ListResourceScanResourcesInputDict))
+    client.list_resource_scan_resources(_request(ListResourceScanResourcesInput))
+    client.list_resource_scan_resources(_request(ListResourceScanResourcesInputDict))
+    client.list_resource_scans()
+    client.list_resource_scans(**_request(ListResourceScansInputDict))
+    client.list_resource_scans(_request(ListResourceScansInput))
+    client.list_resource_scans(_request(ListResourceScansInputDict))
+    client.list_stack_instance_resource_drifts(
+        stack_set_name=_,
+        stack_instance_account=_,
+        stack_instance_region=_,
+        operation_id=_,
+    )
+    client.list_stack_instance_resource_drifts(
+        **_request(ListStackInstanceResourceDriftsInputDict)
+    )
+    client.list_stack_instance_resource_drifts(
+        _request(ListStackInstanceResourceDriftsInput)
+    )
+    client.list_stack_instance_resource_drifts(
+        _request(ListStackInstanceResourceDriftsInputDict)
+    )
+    client.list_stack_instances(stack_set_name=_)
+    client.list_stack_instances(**_request(ListStackInstancesInputDict))
+    client.list_stack_instances(_request(ListStackInstancesInput))
+    client.list_stack_instances(_request(ListStackInstancesInputDict))
+    client.list_stack_refactor_actions(stack_refactor_id=_)
+    client.list_stack_refactor_actions(**_request(ListStackRefactorActionsInputDict))
+    client.list_stack_refactor_actions(_request(ListStackRefactorActionsInput))
+    client.list_stack_refactor_actions(_request(ListStackRefactorActionsInputDict))
+    client.list_stack_refactors()
+    client.list_stack_refactors(**_request(ListStackRefactorsInputDict))
+    client.list_stack_refactors(_request(ListStackRefactorsInput))
+    client.list_stack_refactors(_request(ListStackRefactorsInputDict))
+    client.list_stack_resources(stack_name=_)
+    client.list_stack_resources(**_request(ListStackResourcesInputDict))
+    client.list_stack_resources(_request(ListStackResourcesInput))
+    client.list_stack_resources(_request(ListStackResourcesInputDict))
+    client.list_stacks()
+    client.list_stacks(**_request(ListStacksInputDict))
+    client.list_stacks(_request(ListStacksInput))
+    client.list_stacks(_request(ListStacksInputDict))
+    client.list_stack_set_auto_deployment_targets(stack_set_name=_)
+    client.list_stack_set_auto_deployment_targets(
+        **_request(ListStackSetAutoDeploymentTargetsInputDict)
+    )
+    client.list_stack_set_auto_deployment_targets(
+        _request(ListStackSetAutoDeploymentTargetsInput)
+    )
+    client.list_stack_set_auto_deployment_targets(
+        _request(ListStackSetAutoDeploymentTargetsInputDict)
+    )
+    client.list_stack_set_operation_results(stack_set_name=_, operation_id=_)
+    client.list_stack_set_operation_results(
+        **_request(ListStackSetOperationResultsInputDict)
+    )
+    client.list_stack_set_operation_results(_request(ListStackSetOperationResultsInput))
+    client.list_stack_set_operation_results(
+        _request(ListStackSetOperationResultsInputDict)
+    )
+    client.list_stack_set_operations(stack_set_name=_)
+    client.list_stack_set_operations(**_request(ListStackSetOperationsInputDict))
+    client.list_stack_set_operations(_request(ListStackSetOperationsInput))
+    client.list_stack_set_operations(_request(ListStackSetOperationsInputDict))
+    client.list_stack_sets()
+    client.list_stack_sets(**_request(ListStackSetsInputDict))
+    client.list_stack_sets(_request(ListStackSetsInput))
+    client.list_stack_sets(_request(ListStackSetsInputDict))
+    client.list_type_registrations()
+    client.list_type_registrations(**_request(ListTypeRegistrationsInputDict))
+    client.list_type_registrations(_request(ListTypeRegistrationsInput))
+    client.list_type_registrations(_request(ListTypeRegistrationsInputDict))
+    client.list_types()
+    client.list_types(**_request(ListTypesInputDict))
+    client.list_types(_request(ListTypesInput))
+    client.list_types(_request(ListTypesInputDict))
+    client.list_type_versions()
+    client.list_type_versions(**_request(ListTypeVersionsInputDict))
+    client.list_type_versions(_request(ListTypeVersionsInput))
+    client.list_type_versions(_request(ListTypeVersionsInputDict))
+    client.publish_type()
+    client.publish_type(**_request(PublishTypeInputDict))
+    client.publish_type(_request(PublishTypeInput))
+    client.publish_type(_request(PublishTypeInputDict))
+    client.record_handler_progress(bearer_token=_, operation_status=_)
+    client.record_handler_progress(**_request(RecordHandlerProgressInputDict))
+    client.record_handler_progress(_request(RecordHandlerProgressInput))
+    client.record_handler_progress(_request(RecordHandlerProgressInputDict))
+    client.register_publisher()
+    client.register_publisher(**_request(RegisterPublisherInputDict))
+    client.register_publisher(_request(RegisterPublisherInput))
+    client.register_publisher(_request(RegisterPublisherInputDict))
+    client.register_type(type_name=_, schema_handler_package=_)
+    client.register_type(**_request(RegisterTypeInputDict))
+    client.register_type(_request(RegisterTypeInput))
+    client.register_type(_request(RegisterTypeInputDict))
+    client.rollback_stack(stack_name=_)
+    client.rollback_stack(**_request(RollbackStackInputDict))
+    client.rollback_stack(_request(RollbackStackInput))
+    client.rollback_stack(_request(RollbackStackInputDict))
+    client.set_stack_policy(stack_name=_)
+    client.set_stack_policy(**_request(SetStackPolicyInputDict))
+    client.set_stack_policy(_request(SetStackPolicyInput))
+    client.set_stack_policy(_request(SetStackPolicyInputDict))
+    client.set_type_configuration(configuration=_)
+    client.set_type_configuration(**_request(SetTypeConfigurationInputDict))
+    client.set_type_configuration(_request(SetTypeConfigurationInput))
+    client.set_type_configuration(_request(SetTypeConfigurationInputDict))
+    client.set_type_default_version()
+    client.set_type_default_version(**_request(SetTypeDefaultVersionInputDict))
+    client.set_type_default_version(_request(SetTypeDefaultVersionInput))
+    client.set_type_default_version(_request(SetTypeDefaultVersionInputDict))
+    client.signal_resource(stack_name=_, logical_resource_id=_, unique_id=_, status=_)
+    client.signal_resource(**_request(SignalResourceInputDict))
+    client.signal_resource(_request(SignalResourceInput))
+    client.signal_resource(_request(SignalResourceInputDict))
+    client.start_resource_scan()
+    client.start_resource_scan(**_request(StartResourceScanInputDict))
+    client.start_resource_scan(_request(StartResourceScanInput))
+    client.start_resource_scan(_request(StartResourceScanInputDict))
+    client.stop_stack_set_operation(stack_set_name=_, operation_id=_)
+    client.stop_stack_set_operation(**_request(StopStackSetOperationInputDict))
+    client.stop_stack_set_operation(_request(StopStackSetOperationInput))
+    client.stop_stack_set_operation(_request(StopStackSetOperationInputDict))
+    client.test_type()
+    client.test_type(**_request(TestTypeInputDict))
+    client.test_type(_request(TestTypeInput))
+    client.test_type(_request(TestTypeInputDict))
+    client.update_generated_template(generated_template_name=_)
+    client.update_generated_template(**_request(UpdateGeneratedTemplateInputDict))
+    client.update_generated_template(_request(UpdateGeneratedTemplateInput))
+    client.update_generated_template(_request(UpdateGeneratedTemplateInputDict))
+    client.update_stack(stack_name=_)
+    client.update_stack(**_request(UpdateStackInputDict))
+    client.update_stack(_request(UpdateStackInput))
+    client.update_stack(_request(UpdateStackInputDict))
+    client.update_stack_instances(stack_set_name=_, regions=_)
+    client.update_stack_instances(**_request(UpdateStackInstancesInputDict))
+    client.update_stack_instances(_request(UpdateStackInstancesInput))
+    client.update_stack_instances(_request(UpdateStackInstancesInputDict))
+    client.update_stack_set(stack_set_name=_)
+    client.update_stack_set(**_request(UpdateStackSetInputDict))
+    client.update_stack_set(_request(UpdateStackSetInput))
+    client.update_stack_set(_request(UpdateStackSetInputDict))
+    client.update_termination_protection(enable_termination_protection=_, stack_name=_)
+    client.update_termination_protection(
+        **_request(UpdateTerminationProtectionInputDict)
+    )
+    client.update_termination_protection(_request(UpdateTerminationProtectionInput))
+    client.update_termination_protection(_request(UpdateTerminationProtectionInputDict))
+    client.validate_template()
+    client.validate_template(**_request(ValidateTemplateInputDict))
+    client.validate_template(_request(ValidateTemplateInput))
+    client.validate_template(_request(ValidateTemplateInputDict))

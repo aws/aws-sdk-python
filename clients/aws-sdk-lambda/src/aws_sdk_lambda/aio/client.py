@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import cast
+from typing import Unpack as _Unpack, cast, overload as _overload
 
 from smithy_aws_core.aio.identity.chain import AsyncIdentityChain
 from smithy_aws_core.config.types import ConfigSource
@@ -15,7 +15,6 @@ from smithy_http.plugins import user_agent_plugin
 
 from .. import models as _models
 from ..models import (
-    InvokeWithResponseStreamInput,
     InvokeWithResponseStreamOutput,
     InvokeWithResponseStreamResponseEvent,
     _InvokeWithResponseStreamResponseEventDeserializer,
@@ -27,179 +26,92 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from ..models import (
-        AddLayerVersionPermissionInput,
         AddLayerVersionPermissionOutput,
-        AddPermissionInput,
         AddPermissionOutput,
-        CheckpointDurableExecutionInput,
         CheckpointDurableExecutionOutput,
-        CreateAliasInput,
         CreateAliasOutput,
-        CreateCapacityProviderInput,
         CreateCapacityProviderOutput,
-        CreateCodeSigningConfigInput,
         CreateCodeSigningConfigOutput,
-        CreateEventSourceMappingInput,
         CreateEventSourceMappingOutput,
-        CreateFunctionInput,
         CreateFunctionOutput,
-        CreateFunctionUrlConfigInput,
         CreateFunctionUrlConfigOutput,
-        DeleteAliasInput,
         DeleteAliasOutput,
-        DeleteCapacityProviderInput,
         DeleteCapacityProviderOutput,
-        DeleteCodeSigningConfigInput,
         DeleteCodeSigningConfigOutput,
-        DeleteEventSourceMappingInput,
         DeleteEventSourceMappingOutput,
-        DeleteFunctionCodeSigningConfigInput,
         DeleteFunctionCodeSigningConfigOutput,
-        DeleteFunctionConcurrencyInput,
         DeleteFunctionConcurrencyOutput,
-        DeleteFunctionEventInvokeConfigInput,
         DeleteFunctionEventInvokeConfigOutput,
-        DeleteFunctionInput,
         DeleteFunctionOutput,
-        DeleteFunctionUrlConfigInput,
         DeleteFunctionUrlConfigOutput,
-        DeleteLayerVersionInput,
         DeleteLayerVersionOutput,
-        DeleteProvisionedConcurrencyConfigInput,
         DeleteProvisionedConcurrencyConfigOutput,
-        DeleteResourcePolicyInput,
         DeleteResourcePolicyOutput,
-        GetAccountSettingsInput,
         GetAccountSettingsOutput,
-        GetAliasInput,
         GetAliasOutput,
-        GetCapacityProviderInput,
         GetCapacityProviderOutput,
-        GetCodeSigningConfigInput,
         GetCodeSigningConfigOutput,
-        GetDurableExecutionHistoryInput,
         GetDurableExecutionHistoryOutput,
-        GetDurableExecutionInput,
         GetDurableExecutionOutput,
-        GetDurableExecutionStateInput,
         GetDurableExecutionStateOutput,
-        GetEventSourceMappingInput,
         GetEventSourceMappingOutput,
-        GetFunctionCodeSigningConfigInput,
         GetFunctionCodeSigningConfigOutput,
-        GetFunctionConcurrencyInput,
         GetFunctionConcurrencyOutput,
-        GetFunctionConfigurationInput,
         GetFunctionConfigurationOutput,
-        GetFunctionEventInvokeConfigInput,
         GetFunctionEventInvokeConfigOutput,
-        GetFunctionInput,
         GetFunctionOutput,
-        GetFunctionRecursionConfigInput,
         GetFunctionRecursionConfigOutput,
-        GetFunctionScalingConfigInput,
         GetFunctionScalingConfigOutput,
-        GetFunctionUrlConfigInput,
         GetFunctionUrlConfigOutput,
-        GetLayerVersionByArnInput,
         GetLayerVersionByArnOutput,
-        GetLayerVersionInput,
         GetLayerVersionOutput,
-        GetLayerVersionPolicyInput,
         GetLayerVersionPolicyOutput,
-        GetPolicyInput,
         GetPolicyOutput,
-        GetProvisionedConcurrencyConfigInput,
         GetProvisionedConcurrencyConfigOutput,
-        GetResourcePolicyInput,
         GetResourcePolicyOutput,
-        GetRuntimeManagementConfigInput,
         GetRuntimeManagementConfigOutput,
-        InvokeAsyncInput,
         InvokeAsyncOutput,
-        InvokeInput,
         InvokeOutput,
-        ListAliasesInput,
         ListAliasesOutput,
-        ListCapacityProvidersInput,
         ListCapacityProvidersOutput,
-        ListCodeSigningConfigsInput,
         ListCodeSigningConfigsOutput,
-        ListDurableExecutionsByFunctionInput,
         ListDurableExecutionsByFunctionOutput,
-        ListEventSourceMappingsInput,
         ListEventSourceMappingsOutput,
-        ListFunctionEventInvokeConfigsInput,
         ListFunctionEventInvokeConfigsOutput,
-        ListFunctionUrlConfigsInput,
         ListFunctionUrlConfigsOutput,
-        ListFunctionVersionsByCapacityProviderInput,
         ListFunctionVersionsByCapacityProviderOutput,
-        ListFunctionsByCodeSigningConfigInput,
         ListFunctionsByCodeSigningConfigOutput,
-        ListFunctionsInput,
         ListFunctionsOutput,
-        ListLayerVersionsInput,
         ListLayerVersionsOutput,
-        ListLayersInput,
         ListLayersOutput,
-        ListProvisionedConcurrencyConfigsInput,
         ListProvisionedConcurrencyConfigsOutput,
-        ListTagsInput,
         ListTagsOutput,
-        ListVersionsByFunctionInput,
         ListVersionsByFunctionOutput,
-        PublishLayerVersionInput,
         PublishLayerVersionOutput,
-        PublishVersionInput,
         PublishVersionOutput,
-        PutFunctionCodeSigningConfigInput,
         PutFunctionCodeSigningConfigOutput,
-        PutFunctionConcurrencyInput,
         PutFunctionConcurrencyOutput,
-        PutFunctionEventInvokeConfigInput,
         PutFunctionEventInvokeConfigOutput,
-        PutFunctionRecursionConfigInput,
         PutFunctionRecursionConfigOutput,
-        PutFunctionScalingConfigInput,
         PutFunctionScalingConfigOutput,
-        PutProvisionedConcurrencyConfigInput,
         PutProvisionedConcurrencyConfigOutput,
-        PutResourcePolicyInput,
         PutResourcePolicyOutput,
-        PutRuntimeManagementConfigInput,
         PutRuntimeManagementConfigOutput,
-        RemoveLayerVersionPermissionInput,
         RemoveLayerVersionPermissionOutput,
-        RemovePermissionInput,
         RemovePermissionOutput,
-        SendDurableExecutionCallbackFailureInput,
         SendDurableExecutionCallbackFailureOutput,
-        SendDurableExecutionCallbackHeartbeatInput,
         SendDurableExecutionCallbackHeartbeatOutput,
-        SendDurableExecutionCallbackSuccessInput,
         SendDurableExecutionCallbackSuccessOutput,
-        StopDurableExecutionInput,
         StopDurableExecutionOutput,
-        TagResourceInput,
         TagResourceOutput,
-        UntagResourceInput,
         UntagResourceOutput,
-        UpdateAliasInput,
         UpdateAliasOutput,
-        UpdateCapacityProviderInput,
         UpdateCapacityProviderOutput,
-        UpdateCodeSigningConfigInput,
         UpdateCodeSigningConfigOutput,
-        UpdateEventSourceMappingInput,
         UpdateEventSourceMappingOutput,
-        UpdateFunctionCodeInput,
         UpdateFunctionCodeOutput,
-        UpdateFunctionConfigurationInput,
         UpdateFunctionConfigurationOutput,
-        UpdateFunctionEventInvokeConfigInput,
         UpdateFunctionEventInvokeConfigOutput,
-        UpdateFunctionUrlConfigInput,
         UpdateFunctionUrlConfigOutput,
     )
 
@@ -293,10 +205,25 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
     FAQs.](http://aws.amazon.com/certificate-manager/faqs/#certificates)
     """
 
-    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
+    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
 
+    @_overload
     async def add_layer_version_permission(
-        self, input: AddLayerVersionPermissionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.AddLayerVersionPermissionInput
+        | _models.AddLayerVersionPermissionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AddLayerVersionPermissionOutput: ...
+
+    @_overload
+    async def add_layer_version_permission(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AddLayerVersionPermissionInputDict],
     ) -> AddLayerVersionPermissionOutput:
         """
         Adds permissions to the resource-based policy of a version of an [Lambda
@@ -309,8 +236,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         statement ID that you specified when you added it.
 
         Args:
-            input:
-                An instance of `AddLayerVersionPermissionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -320,12 +245,33 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `AddLayerVersionPermissionOutput`.
         """
+
+    async def add_layer_version_permission(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AddLayerVersionPermissionOutput:
         return await self._invoke(
-            input, _models.ADD_LAYER_VERSION_PERMISSION, [], plugins
+            self._select_input(_models.ADD_LAYER_VERSION_PERMISSION, args, kwargs),
+            _models.ADD_LAYER_VERSION_PERMISSION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def add_permission(
-        self, input: AddPermissionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.AddPermissionInput | _models.AddPermissionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AddPermissionOutput: ...
+
+    @_overload
+    async def add_permission(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AddPermissionInputDict],
     ) -> AddPermissionOutput:
         """
         Grants a
@@ -334,7 +280,7 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         level, or specify a qualifier to restrict access to a single version or
         alias. If you use a qualifier, the invoker must use the full Amazon
         Resource Name (ARN) of that version or alias to invoke the function.
-        Note: Lambda does not support adding policies to version $$LATEST.
+        Note: Lambda does not support adding policies to version $LATEST.
 
         To grant permission to another account, specify the account ID as the
         `Principal`. To grant permission to an organization defined in
@@ -353,8 +299,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Lambda](https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html).
 
         Args:
-            input:
-                An instance of `AddPermissionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -364,12 +308,34 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `AddPermissionOutput`.
         """
-        return await self._invoke(input, _models.ADD_PERMISSION, [], plugins)
 
+    async def add_permission(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AddPermissionOutput:
+        return await self._invoke(
+            self._select_input(_models.ADD_PERMISSION, args, kwargs),
+            _models.ADD_PERMISSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def checkpoint_durable_execution(
         self,
-        input: CheckpointDurableExecutionInput,
+        request: _models.CheckpointDurableExecutionInput
+        | _models.CheckpointDurableExecutionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CheckpointDurableExecutionOutput: ...
+
+    @_overload
+    async def checkpoint_durable_execution(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CheckpointDurableExecutionInputDict],
     ) -> CheckpointDurableExecutionOutput:
         """
         Saves the progress of a [durable
@@ -385,8 +351,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         state updates.
 
         Args:
-            input:
-                An instance of `CheckpointDurableExecutionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -396,12 +360,33 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `CheckpointDurableExecutionOutput`.
         """
+
+    async def checkpoint_durable_execution(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CheckpointDurableExecutionOutput:
         return await self._invoke(
-            input, _models.CHECKPOINT_DURABLE_EXECUTION, [], plugins
+            self._select_input(_models.CHECKPOINT_DURABLE_EXECUTION, args, kwargs),
+            _models.CHECKPOINT_DURABLE_EXECUTION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def create_alias(
-        self, input: CreateAliasInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateAliasInput | _models.CreateAliasInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateAliasOutput: ...
+
+    @_overload
+    async def create_alias(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateAliasInputDict],
     ) -> CreateAliasOutput:
         """
         Creates an
@@ -414,8 +399,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         and the percentage of invocation requests that it receives.
 
         Args:
-            input:
-                An instance of `CreateAliasInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -425,18 +408,40 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `CreateAliasOutput`.
         """
-        return await self._invoke(input, _models.CREATE_ALIAS, [], plugins)
 
+    async def create_alias(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateAliasOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_ALIAS, args, kwargs),
+            _models.CREATE_ALIAS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_capacity_provider(
-        self, input: CreateCapacityProviderInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateCapacityProviderInput
+        | _models.CreateCapacityProviderInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateCapacityProviderOutput: ...
+
+    @_overload
+    async def create_capacity_provider(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateCapacityProviderInputDict],
     ) -> CreateCapacityProviderOutput:
         """
         Creates a capacity provider that manages compute resources for Lambda
         Event Functions
 
         Args:
-            input:
-                An instance of `CreateCapacityProviderInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -446,10 +451,34 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `CreateCapacityProviderOutput`.
         """
-        return await self._invoke(input, _models.CREATE_CAPACITY_PROVIDER, [], plugins)
 
+    async def create_capacity_provider(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateCapacityProviderOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_CAPACITY_PROVIDER, args, kwargs),
+            _models.CREATE_CAPACITY_PROVIDER,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_code_signing_config(
-        self, input: CreateCodeSigningConfigInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateCodeSigningConfigInput
+        | _models.CreateCodeSigningConfigInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateCodeSigningConfigOutput: ...
+
+    @_overload
+    async def create_code_signing_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateCodeSigningConfigInputDict],
     ) -> CreateCodeSigningConfigOutput:
         """
         Creates a code signing configuration. A [code signing
@@ -459,8 +488,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         fail).
 
         Args:
-            input:
-                An instance of `CreateCodeSigningConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -470,12 +497,34 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `CreateCodeSigningConfigOutput`.
         """
+
+    async def create_code_signing_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateCodeSigningConfigOutput:
         return await self._invoke(
-            input, _models.CREATE_CODE_SIGNING_CONFIG, [], plugins
+            self._select_input(_models.CREATE_CODE_SIGNING_CONFIG, args, kwargs),
+            _models.CREATE_CODE_SIGNING_CONFIG,
+            [],
+            plugins,
         )
 
+    @_overload
     async def create_event_source_mapping(
-        self, input: CreateEventSourceMappingInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateEventSourceMappingInput
+        | _models.CreateEventSourceMappingInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateEventSourceMappingOutput: ...
+
+    @_overload
+    async def create_event_source_mapping(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateEventSourceMappingInputDict],
     ) -> CreateEventSourceMappingOutput:
         """
         Creates a mapping between an event source and an Lambda Event Function.
@@ -555,8 +604,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
           DocumentDB](https://docs.aws.amazon.com/lambda/latest/dg/with-documentdb.html#docdb-configuration)
 
         Args:
-            input:
-                An instance of `CreateEventSourceMappingInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -566,12 +613,33 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `CreateEventSourceMappingOutput`.
         """
+
+    async def create_event_source_mapping(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateEventSourceMappingOutput:
         return await self._invoke(
-            input, _models.CREATE_EVENT_SOURCE_MAPPING, [], plugins
+            self._select_input(_models.CREATE_EVENT_SOURCE_MAPPING, args, kwargs),
+            _models.CREATE_EVENT_SOURCE_MAPPING,
+            [],
+            plugins,
         )
 
+    @_overload
     async def create_function(
-        self, input: CreateFunctionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateFunctionInput | _models.CreateFunctionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateFunctionOutput: ...
+
+    @_overload
+    async def create_function(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateFunctionInputDict],
     ) -> CreateFunctionOutput:
         """
         Creates a Lambda Event Function. To create a function, you need a
@@ -644,8 +712,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         functions](https://docs.aws.amazon.com/lambda/latest/dg/lambda-invocation.html).
 
         Args:
-            input:
-                An instance of `CreateFunctionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -655,10 +721,34 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `CreateFunctionOutput`.
         """
-        return await self._invoke(input, _models.CREATE_FUNCTION, [], plugins)
 
+    async def create_function(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateFunctionOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_FUNCTION, args, kwargs),
+            _models.CREATE_FUNCTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_function_url_config(
-        self, input: CreateFunctionUrlConfigInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateFunctionUrlConfigInput
+        | _models.CreateFunctionUrlConfigInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateFunctionUrlConfigOutput: ...
+
+    @_overload
+    async def create_function_url_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateFunctionUrlConfigInputDict],
     ) -> CreateFunctionUrlConfigOutput:
         """
         Creates a Lambda function URL with the specified configuration
@@ -666,8 +756,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         use to invoke your function.
 
         Args:
-            input:
-                An instance of `CreateFunctionUrlConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -677,20 +765,39 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `CreateFunctionUrlConfigOutput`.
         """
+
+    async def create_function_url_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateFunctionUrlConfigOutput:
         return await self._invoke(
-            input, _models.CREATE_FUNCTION_URL_CONFIG, [], plugins
+            self._select_input(_models.CREATE_FUNCTION_URL_CONFIG, args, kwargs),
+            _models.CREATE_FUNCTION_URL_CONFIG,
+            [],
+            plugins,
         )
 
+    @_overload
     async def delete_alias(
-        self, input: DeleteAliasInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteAliasInput | _models.DeleteAliasInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteAliasOutput: ...
+
+    @_overload
+    async def delete_alias(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteAliasInputDict],
     ) -> DeleteAliasOutput:
         """
         Deletes a Lambda Event Function
         [alias](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html).
 
         Args:
-            input:
-                An instance of `DeleteAliasInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -700,18 +807,40 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `DeleteAliasOutput`.
         """
-        return await self._invoke(input, _models.DELETE_ALIAS, [], plugins)
 
+    async def delete_alias(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteAliasOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_ALIAS, args, kwargs),
+            _models.DELETE_ALIAS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_capacity_provider(
-        self, input: DeleteCapacityProviderInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteCapacityProviderInput
+        | _models.DeleteCapacityProviderInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteCapacityProviderOutput: ...
+
+    @_overload
+    async def delete_capacity_provider(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteCapacityProviderInputDict],
     ) -> DeleteCapacityProviderOutput:
         """
         Deletes a capacity provider. You cannot delete a capacity provider that
         is currently being used by Lambda functions.
 
         Args:
-            input:
-                An instance of `DeleteCapacityProviderInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -721,18 +850,40 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `DeleteCapacityProviderOutput`.
         """
-        return await self._invoke(input, _models.DELETE_CAPACITY_PROVIDER, [], plugins)
 
+    async def delete_capacity_provider(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteCapacityProviderOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_CAPACITY_PROVIDER, args, kwargs),
+            _models.DELETE_CAPACITY_PROVIDER,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_code_signing_config(
-        self, input: DeleteCodeSigningConfigInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteCodeSigningConfigInput
+        | _models.DeleteCodeSigningConfigInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteCodeSigningConfigOutput: ...
+
+    @_overload
+    async def delete_code_signing_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteCodeSigningConfigInputDict],
     ) -> DeleteCodeSigningConfigOutput:
         """
         Deletes the code signing configuration. You can delete the code signing
         configuration only if no function is using it.
 
         Args:
-            input:
-                An instance of `DeleteCodeSigningConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -742,12 +893,34 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `DeleteCodeSigningConfigOutput`.
         """
+
+    async def delete_code_signing_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteCodeSigningConfigOutput:
         return await self._invoke(
-            input, _models.DELETE_CODE_SIGNING_CONFIG, [], plugins
+            self._select_input(_models.DELETE_CODE_SIGNING_CONFIG, args, kwargs),
+            _models.DELETE_CODE_SIGNING_CONFIG,
+            [],
+            plugins,
         )
 
+    @_overload
     async def delete_event_source_mapping(
-        self, input: DeleteEventSourceMappingInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteEventSourceMappingInput
+        | _models.DeleteEventSourceMappingInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteEventSourceMappingOutput: ...
+
+    @_overload
+    async def delete_event_source_mapping(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteEventSourceMappingInputDict],
     ) -> DeleteEventSourceMappingOutput:
         """
         Deletes an [event source
@@ -759,8 +932,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         and might not be completely deleted for several seconds.
 
         Args:
-            input:
-                An instance of `DeleteEventSourceMappingInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -770,12 +941,33 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `DeleteEventSourceMappingOutput`.
         """
+
+    async def delete_event_source_mapping(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteEventSourceMappingOutput:
         return await self._invoke(
-            input, _models.DELETE_EVENT_SOURCE_MAPPING, [], plugins
+            self._select_input(_models.DELETE_EVENT_SOURCE_MAPPING, args, kwargs),
+            _models.DELETE_EVENT_SOURCE_MAPPING,
+            [],
+            plugins,
         )
 
+    @_overload
     async def delete_function(
-        self, input: DeleteFunctionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteFunctionInput | _models.DeleteFunctionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteFunctionOutput: ...
+
+    @_overload
+    async def delete_function(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteFunctionInputDict],
     ) -> DeleteFunctionOutput:
         """
         Deletes a Lambda Event Function. To delete a specific function version,
@@ -793,8 +985,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         where you originally configured it.
 
         Args:
-            input:
-                An instance of `DeleteFunctionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -804,19 +994,39 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `DeleteFunctionOutput`.
         """
-        return await self._invoke(input, _models.DELETE_FUNCTION, [], plugins)
 
+    async def delete_function(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteFunctionOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_FUNCTION, args, kwargs),
+            _models.DELETE_FUNCTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_function_code_signing_config(
         self,
-        input: DeleteFunctionCodeSigningConfigInput,
+        request: _models.DeleteFunctionCodeSigningConfigInput
+        | _models.DeleteFunctionCodeSigningConfigInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteFunctionCodeSigningConfigOutput: ...
+
+    @_overload
+    async def delete_function_code_signing_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteFunctionCodeSigningConfigInputDict],
     ) -> DeleteFunctionCodeSigningConfigOutput:
         """
         Removes the code signing configuration from the function.
 
         Args:
-            input:
-                An instance of `DeleteFunctionCodeSigningConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -826,19 +1036,41 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `DeleteFunctionCodeSigningConfigOutput`.
         """
+
+    async def delete_function_code_signing_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteFunctionCodeSigningConfigOutput:
         return await self._invoke(
-            input, _models.DELETE_FUNCTION_CODE_SIGNING_CONFIG, [], plugins
+            self._select_input(
+                _models.DELETE_FUNCTION_CODE_SIGNING_CONFIG, args, kwargs
+            ),
+            _models.DELETE_FUNCTION_CODE_SIGNING_CONFIG,
+            [],
+            plugins,
         )
 
+    @_overload
     async def delete_function_concurrency(
-        self, input: DeleteFunctionConcurrencyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteFunctionConcurrencyInput
+        | _models.DeleteFunctionConcurrencyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteFunctionConcurrencyOutput: ...
+
+    @_overload
+    async def delete_function_concurrency(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteFunctionConcurrencyInputDict],
     ) -> DeleteFunctionConcurrencyOutput:
         """
         Removes a concurrent execution limit from a Lambda Event Function.
 
         Args:
-            input:
-                An instance of `DeleteFunctionConcurrencyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -848,14 +1080,34 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `DeleteFunctionConcurrencyOutput`.
         """
+
+    async def delete_function_concurrency(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteFunctionConcurrencyOutput:
         return await self._invoke(
-            input, _models.DELETE_FUNCTION_CONCURRENCY, [], plugins
+            self._select_input(_models.DELETE_FUNCTION_CONCURRENCY, args, kwargs),
+            _models.DELETE_FUNCTION_CONCURRENCY,
+            [],
+            plugins,
         )
 
+    @_overload
     async def delete_function_event_invoke_config(
         self,
-        input: DeleteFunctionEventInvokeConfigInput,
+        request: _models.DeleteFunctionEventInvokeConfigInput
+        | _models.DeleteFunctionEventInvokeConfigInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteFunctionEventInvokeConfigOutput: ...
+
+    @_overload
+    async def delete_function_event_invoke_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteFunctionEventInvokeConfigInputDict],
     ) -> DeleteFunctionEventInvokeConfigOutput:
         """
         Deletes the configuration for asynchronous invocation for a function,
@@ -865,8 +1117,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         PutFunctionEventInvokeConfig.
 
         Args:
-            input:
-                An instance of `DeleteFunctionEventInvokeConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -876,12 +1126,36 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `DeleteFunctionEventInvokeConfigOutput`.
         """
+
+    async def delete_function_event_invoke_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteFunctionEventInvokeConfigOutput:
         return await self._invoke(
-            input, _models.DELETE_FUNCTION_EVENT_INVOKE_CONFIG, [], plugins
+            self._select_input(
+                _models.DELETE_FUNCTION_EVENT_INVOKE_CONFIG, args, kwargs
+            ),
+            _models.DELETE_FUNCTION_EVENT_INVOKE_CONFIG,
+            [],
+            plugins,
         )
 
+    @_overload
     async def delete_function_url_config(
-        self, input: DeleteFunctionUrlConfigInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteFunctionUrlConfigInput
+        | _models.DeleteFunctionUrlConfigInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteFunctionUrlConfigOutput: ...
+
+    @_overload
+    async def delete_function_url_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteFunctionUrlConfigInputDict],
     ) -> DeleteFunctionUrlConfigOutput:
         """
         Deletes a Lambda function URL. When you delete a function URL, you
@@ -889,8 +1163,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         URL address.
 
         Args:
-            input:
-                An instance of `DeleteFunctionUrlConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -900,12 +1172,33 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `DeleteFunctionUrlConfigOutput`.
         """
+
+    async def delete_function_url_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteFunctionUrlConfigOutput:
         return await self._invoke(
-            input, _models.DELETE_FUNCTION_URL_CONFIG, [], plugins
+            self._select_input(_models.DELETE_FUNCTION_URL_CONFIG, args, kwargs),
+            _models.DELETE_FUNCTION_URL_CONFIG,
+            [],
+            plugins,
         )
 
+    @_overload
     async def delete_layer_version(
-        self, input: DeleteLayerVersionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteLayerVersionInput | _models.DeleteLayerVersionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteLayerVersionOutput: ...
+
+    @_overload
+    async def delete_layer_version(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteLayerVersionInputDict],
     ) -> DeleteLayerVersionOutput:
         """
         Deletes a version of an [Lambda
@@ -915,8 +1208,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         functions refer to it.
 
         Args:
-            input:
-                An instance of `DeleteLayerVersionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -926,19 +1217,39 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `DeleteLayerVersionOutput`.
         """
-        return await self._invoke(input, _models.DELETE_LAYER_VERSION, [], plugins)
 
+    async def delete_layer_version(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteLayerVersionOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_LAYER_VERSION, args, kwargs),
+            _models.DELETE_LAYER_VERSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_provisioned_concurrency_config(
         self,
-        input: DeleteProvisionedConcurrencyConfigInput,
+        request: _models.DeleteProvisionedConcurrencyConfigInput
+        | _models.DeleteProvisionedConcurrencyConfigInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteProvisionedConcurrencyConfigOutput: ...
+
+    @_overload
+    async def delete_provisioned_concurrency_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteProvisionedConcurrencyConfigInputDict],
     ) -> DeleteProvisionedConcurrencyConfigOutput:
         """
         Deletes the provisioned concurrency configuration for a function.
 
         Args:
-            input:
-                An instance of `DeleteProvisionedConcurrencyConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -948,12 +1259,36 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `DeleteProvisionedConcurrencyConfigOutput`.
         """
+
+    async def delete_provisioned_concurrency_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteProvisionedConcurrencyConfigOutput:
         return await self._invoke(
-            input, _models.DELETE_PROVISIONED_CONCURRENCY_CONFIG, [], plugins
+            self._select_input(
+                _models.DELETE_PROVISIONED_CONCURRENCY_CONFIG, args, kwargs
+            ),
+            _models.DELETE_PROVISIONED_CONCURRENCY_CONFIG,
+            [],
+            plugins,
         )
 
+    @_overload
     async def delete_resource_policy(
-        self, input: DeleteResourcePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteResourcePolicyInput
+        | _models.DeleteResourcePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteResourcePolicyOutput: ...
+
+    @_overload
+    async def delete_resource_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteResourcePolicyInputDict],
     ) -> DeleteResourcePolicyOutput:
         """
         Deletes a [resource-based
@@ -961,8 +1296,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         from a Lambda resource.
 
         Args:
-            input:
-                An instance of `DeleteResourcePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -972,10 +1305,33 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `DeleteResourcePolicyOutput`.
         """
-        return await self._invoke(input, _models.DELETE_RESOURCE_POLICY, [], plugins)
 
+    async def delete_resource_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteResourcePolicyOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_RESOURCE_POLICY, args, kwargs),
+            _models.DELETE_RESOURCE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_account_settings(
-        self, input: GetAccountSettingsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetAccountSettingsInput | _models.GetAccountSettingsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetAccountSettingsOutput: ...
+
+    @_overload
+    async def get_account_settings(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetAccountSettingsInputDict],
     ) -> GetAccountSettingsOutput:
         """
         Retrieves details about your account's
@@ -983,8 +1339,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         usage in an Amazon Web Services Region.
 
         Args:
-            input:
-                An instance of `GetAccountSettingsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -994,18 +1348,39 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `GetAccountSettingsOutput`.
         """
-        return await self._invoke(input, _models.GET_ACCOUNT_SETTINGS, [], plugins)
 
+    async def get_account_settings(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetAccountSettingsOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_ACCOUNT_SETTINGS, args, kwargs),
+            _models.GET_ACCOUNT_SETTINGS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_alias(
-        self, input: GetAliasInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetAliasInput | _models.GetAliasInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetAliasOutput: ...
+
+    @_overload
+    async def get_alias(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetAliasInputDict],
     ) -> GetAliasOutput:
         """
         Returns details about a Lambda Event Function
         [alias](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html).
 
         Args:
-            input:
-                An instance of `GetAliasInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1015,18 +1390,40 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `GetAliasOutput`.
         """
-        return await self._invoke(input, _models.GET_ALIAS, [], plugins)
 
+    async def get_alias(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetAliasOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_ALIAS, args, kwargs),
+            _models.GET_ALIAS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_capacity_provider(
-        self, input: GetCapacityProviderInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetCapacityProviderInput
+        | _models.GetCapacityProviderInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetCapacityProviderOutput: ...
+
+    @_overload
+    async def get_capacity_provider(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetCapacityProviderInputDict],
     ) -> GetCapacityProviderOutput:
         """
         Retrieves information about a specific capacity provider, including its
         configuration, state, and associated resources.
 
         Args:
-            input:
-                An instance of `GetCapacityProviderInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1036,17 +1433,39 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `GetCapacityProviderOutput`.
         """
-        return await self._invoke(input, _models.GET_CAPACITY_PROVIDER, [], plugins)
 
+    async def get_capacity_provider(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetCapacityProviderOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_CAPACITY_PROVIDER, args, kwargs),
+            _models.GET_CAPACITY_PROVIDER,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_code_signing_config(
-        self, input: GetCodeSigningConfigInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetCodeSigningConfigInput
+        | _models.GetCodeSigningConfigInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetCodeSigningConfigOutput: ...
+
+    @_overload
+    async def get_code_signing_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetCodeSigningConfigInputDict],
     ) -> GetCodeSigningConfigOutput:
         """
         Returns information about the specified code signing configuration.
 
         Args:
-            input:
-                An instance of `GetCodeSigningConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1056,10 +1475,34 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `GetCodeSigningConfigOutput`.
         """
-        return await self._invoke(input, _models.GET_CODE_SIGNING_CONFIG, [], plugins)
 
+    async def get_code_signing_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetCodeSigningConfigOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_CODE_SIGNING_CONFIG, args, kwargs),
+            _models.GET_CODE_SIGNING_CONFIG,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_durable_execution(
-        self, input: GetDurableExecutionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetDurableExecutionInput
+        | _models.GetDurableExecutionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetDurableExecutionOutput: ...
+
+    @_overload
+    async def get_durable_execution(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetDurableExecutionInputDict],
     ) -> GetDurableExecutionOutput:
         """
         Retrieves detailed information about a specific [durable
@@ -1069,8 +1512,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         statistics.
 
         Args:
-            input:
-                An instance of `GetDurableExecutionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1080,12 +1521,34 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `GetDurableExecutionOutput`.
         """
-        return await self._invoke(input, _models.GET_DURABLE_EXECUTION, [], plugins)
 
+    async def get_durable_execution(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetDurableExecutionOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_DURABLE_EXECUTION, args, kwargs),
+            _models.GET_DURABLE_EXECUTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_durable_execution_history(
         self,
-        input: GetDurableExecutionHistoryInput,
+        request: _models.GetDurableExecutionHistoryInput
+        | _models.GetDurableExecutionHistoryInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetDurableExecutionHistoryOutput: ...
+
+    @_overload
+    async def get_durable_execution_history(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetDurableExecutionHistoryInputDict],
     ) -> GetDurableExecutionHistoryOutput:
         """
         Retrieves the execution history for a [durable
@@ -1100,8 +1563,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         callback payloads.
 
         Args:
-            input:
-                An instance of `GetDurableExecutionHistoryInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1111,12 +1572,34 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `GetDurableExecutionHistoryOutput`.
         """
+
+    async def get_durable_execution_history(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetDurableExecutionHistoryOutput:
         return await self._invoke(
-            input, _models.GET_DURABLE_EXECUTION_HISTORY, [], plugins
+            self._select_input(_models.GET_DURABLE_EXECUTION_HISTORY, args, kwargs),
+            _models.GET_DURABLE_EXECUTION_HISTORY,
+            [],
+            plugins,
         )
 
+    @_overload
     async def get_durable_execution_state(
-        self, input: GetDurableExecutionStateInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetDurableExecutionStateInput
+        | _models.GetDurableExecutionStateInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetDurableExecutionStateOutput: ...
+
+    @_overload
+    async def get_durable_execution_state(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetDurableExecutionStateInputDict],
     ) -> GetDurableExecutionStateOutput:
         """
         Retrieves the current execution state required for the replay process
@@ -1131,8 +1614,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         operation details since they don't need to be replayed.
 
         Args:
-            input:
-                An instance of `GetDurableExecutionStateInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1142,20 +1623,40 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `GetDurableExecutionStateOutput`.
         """
+
+    async def get_durable_execution_state(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetDurableExecutionStateOutput:
         return await self._invoke(
-            input, _models.GET_DURABLE_EXECUTION_STATE, [], plugins
+            self._select_input(_models.GET_DURABLE_EXECUTION_STATE, args, kwargs),
+            _models.GET_DURABLE_EXECUTION_STATE,
+            [],
+            plugins,
         )
 
+    @_overload
     async def get_event_source_mapping(
-        self, input: GetEventSourceMappingInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetEventSourceMappingInput
+        | _models.GetEventSourceMappingInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetEventSourceMappingOutput: ...
+
+    @_overload
+    async def get_event_source_mapping(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetEventSourceMappingInputDict],
     ) -> GetEventSourceMappingOutput:
         """
         Returns details about an event source mapping. You can get the
         identifier of a mapping from the output of ListEventSourceMappings.
 
         Args:
-            input:
-                An instance of `GetEventSourceMappingInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1165,10 +1666,33 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `GetEventSourceMappingOutput`.
         """
-        return await self._invoke(input, _models.GET_EVENT_SOURCE_MAPPING, [], plugins)
 
+    async def get_event_source_mapping(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetEventSourceMappingOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_EVENT_SOURCE_MAPPING, args, kwargs),
+            _models.GET_EVENT_SOURCE_MAPPING,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_function(
-        self, input: GetFunctionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetFunctionInput | _models.GetFunctionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetFunctionOutput: ...
+
+    @_overload
+    async def get_function(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetFunctionInputDict],
     ) -> GetFunctionOutput:
         """
         Returns information about a Lambda Event Function or function version,
@@ -1177,8 +1701,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         specific to that version are returned.
 
         Args:
-            input:
-                An instance of `GetFunctionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1188,19 +1710,39 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `GetFunctionOutput`.
         """
-        return await self._invoke(input, _models.GET_FUNCTION, [], plugins)
 
+    async def get_function(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetFunctionOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_FUNCTION, args, kwargs),
+            _models.GET_FUNCTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_function_code_signing_config(
         self,
-        input: GetFunctionCodeSigningConfigInput,
+        request: _models.GetFunctionCodeSigningConfigInput
+        | _models.GetFunctionCodeSigningConfigInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetFunctionCodeSigningConfigOutput: ...
+
+    @_overload
+    async def get_function_code_signing_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetFunctionCodeSigningConfigInputDict],
     ) -> GetFunctionCodeSigningConfigOutput:
         """
         Returns the code signing configuration for the specified function.
 
         Args:
-            input:
-                An instance of `GetFunctionCodeSigningConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1210,12 +1752,34 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `GetFunctionCodeSigningConfigOutput`.
         """
+
+    async def get_function_code_signing_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetFunctionCodeSigningConfigOutput:
         return await self._invoke(
-            input, _models.GET_FUNCTION_CODE_SIGNING_CONFIG, [], plugins
+            self._select_input(_models.GET_FUNCTION_CODE_SIGNING_CONFIG, args, kwargs),
+            _models.GET_FUNCTION_CODE_SIGNING_CONFIG,
+            [],
+            plugins,
         )
 
+    @_overload
     async def get_function_concurrency(
-        self, input: GetFunctionConcurrencyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetFunctionConcurrencyInput
+        | _models.GetFunctionConcurrencyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetFunctionConcurrencyOutput: ...
+
+    @_overload
+    async def get_function_concurrency(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetFunctionConcurrencyInputDict],
     ) -> GetFunctionConcurrencyOutput:
         """
         Returns details about the reserved concurrency configuration for a
@@ -1223,8 +1787,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         PutFunctionConcurrency.
 
         Args:
-            input:
-                An instance of `GetFunctionConcurrencyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1234,10 +1796,34 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `GetFunctionConcurrencyOutput`.
         """
-        return await self._invoke(input, _models.GET_FUNCTION_CONCURRENCY, [], plugins)
 
+    async def get_function_concurrency(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetFunctionConcurrencyOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_FUNCTION_CONCURRENCY, args, kwargs),
+            _models.GET_FUNCTION_CONCURRENCY,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_function_configuration(
-        self, input: GetFunctionConfigurationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetFunctionConfigurationInput
+        | _models.GetFunctionConfigurationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetFunctionConfigurationOutput: ...
+
+    @_overload
+    async def get_function_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetFunctionConfigurationInputDict],
     ) -> GetFunctionConfigurationOutput:
         """
         Returns the version-specific settings of a Lambda Event Function or
@@ -1249,8 +1835,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         use GetFunction.
 
         Args:
-            input:
-                An instance of `GetFunctionConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1260,14 +1844,34 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `GetFunctionConfigurationOutput`.
         """
+
+    async def get_function_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetFunctionConfigurationOutput:
         return await self._invoke(
-            input, _models.GET_FUNCTION_CONFIGURATION, [], plugins
+            self._select_input(_models.GET_FUNCTION_CONFIGURATION, args, kwargs),
+            _models.GET_FUNCTION_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def get_function_event_invoke_config(
         self,
-        input: GetFunctionEventInvokeConfigInput,
+        request: _models.GetFunctionEventInvokeConfigInput
+        | _models.GetFunctionEventInvokeConfigInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetFunctionEventInvokeConfigOutput: ...
+
+    @_overload
+    async def get_function_event_invoke_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetFunctionEventInvokeConfigInputDict],
     ) -> GetFunctionEventInvokeConfigOutput:
         """
         Retrieves the configuration for asynchronous invocation for a function,
@@ -1277,8 +1881,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         PutFunctionEventInvokeConfig.
 
         Args:
-            input:
-                An instance of `GetFunctionEventInvokeConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1288,14 +1890,34 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `GetFunctionEventInvokeConfigOutput`.
         """
+
+    async def get_function_event_invoke_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetFunctionEventInvokeConfigOutput:
         return await self._invoke(
-            input, _models.GET_FUNCTION_EVENT_INVOKE_CONFIG, [], plugins
+            self._select_input(_models.GET_FUNCTION_EVENT_INVOKE_CONFIG, args, kwargs),
+            _models.GET_FUNCTION_EVENT_INVOKE_CONFIG,
+            [],
+            plugins,
         )
 
+    @_overload
     async def get_function_recursion_config(
         self,
-        input: GetFunctionRecursionConfigInput,
+        request: _models.GetFunctionRecursionConfigInput
+        | _models.GetFunctionRecursionConfigInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetFunctionRecursionConfigOutput: ...
+
+    @_overload
+    async def get_function_recursion_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetFunctionRecursionConfigInputDict],
     ) -> GetFunctionRecursionConfigOutput:
         """
         Returns your function's [recursive loop
@@ -1303,8 +1925,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         configuration.
 
         Args:
-            input:
-                An instance of `GetFunctionRecursionConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1314,20 +1934,40 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `GetFunctionRecursionConfigOutput`.
         """
+
+    async def get_function_recursion_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetFunctionRecursionConfigOutput:
         return await self._invoke(
-            input, _models.GET_FUNCTION_RECURSION_CONFIG, [], plugins
+            self._select_input(_models.GET_FUNCTION_RECURSION_CONFIG, args, kwargs),
+            _models.GET_FUNCTION_RECURSION_CONFIG,
+            [],
+            plugins,
         )
 
+    @_overload
     async def get_function_scaling_config(
-        self, input: GetFunctionScalingConfigInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetFunctionScalingConfigInput
+        | _models.GetFunctionScalingConfigInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetFunctionScalingConfigOutput: ...
+
+    @_overload
+    async def get_function_scaling_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetFunctionScalingConfigInputDict],
     ) -> GetFunctionScalingConfigOutput:
         """
         Retrieves the scaling configuration for a Lambda Managed Instances
         function.
 
         Args:
-            input:
-                An instance of `GetFunctionScalingConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1337,19 +1977,39 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `GetFunctionScalingConfigOutput`.
         """
+
+    async def get_function_scaling_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetFunctionScalingConfigOutput:
         return await self._invoke(
-            input, _models.GET_FUNCTION_SCALING_CONFIG, [], plugins
+            self._select_input(_models.GET_FUNCTION_SCALING_CONFIG, args, kwargs),
+            _models.GET_FUNCTION_SCALING_CONFIG,
+            [],
+            plugins,
         )
 
+    @_overload
     async def get_function_url_config(
-        self, input: GetFunctionUrlConfigInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetFunctionUrlConfigInput
+        | _models.GetFunctionUrlConfigInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetFunctionUrlConfigOutput: ...
+
+    @_overload
+    async def get_function_url_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetFunctionUrlConfigInputDict],
     ) -> GetFunctionUrlConfigOutput:
         """
         Returns details about a Lambda function URL.
 
         Args:
-            input:
-                An instance of `GetFunctionUrlConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1359,10 +2019,33 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `GetFunctionUrlConfigOutput`.
         """
-        return await self._invoke(input, _models.GET_FUNCTION_URL_CONFIG, [], plugins)
 
+    async def get_function_url_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetFunctionUrlConfigOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_FUNCTION_URL_CONFIG, args, kwargs),
+            _models.GET_FUNCTION_URL_CONFIG,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_layer_version(
-        self, input: GetLayerVersionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetLayerVersionInput | _models.GetLayerVersionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetLayerVersionOutput: ...
+
+    @_overload
+    async def get_layer_version(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetLayerVersionInputDict],
     ) -> GetLayerVersionOutput:
         """
         Returns information about a version of an [Lambda
@@ -1370,8 +2053,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         with a link to download the layer archive that's valid for 10 minutes.
 
         Args:
-            input:
-                An instance of `GetLayerVersionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1381,10 +2062,34 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `GetLayerVersionOutput`.
         """
-        return await self._invoke(input, _models.GET_LAYER_VERSION, [], plugins)
 
+    async def get_layer_version(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetLayerVersionOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_LAYER_VERSION, args, kwargs),
+            _models.GET_LAYER_VERSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_layer_version_by_arn(
-        self, input: GetLayerVersionByArnInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetLayerVersionByArnInput
+        | _models.GetLayerVersionByArnInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetLayerVersionByArnOutput: ...
+
+    @_overload
+    async def get_layer_version_by_arn(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetLayerVersionByArnInputDict],
     ) -> GetLayerVersionByArnOutput:
         """
         Returns information about a version of an [Lambda
@@ -1392,8 +2097,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         with a link to download the layer archive that's valid for 10 minutes.
 
         Args:
-            input:
-                An instance of `GetLayerVersionByArnInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1403,10 +2106,34 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `GetLayerVersionByArnOutput`.
         """
-        return await self._invoke(input, _models.GET_LAYER_VERSION_BY_ARN, [], plugins)
 
+    async def get_layer_version_by_arn(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetLayerVersionByArnOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_LAYER_VERSION_BY_ARN, args, kwargs),
+            _models.GET_LAYER_VERSION_BY_ARN,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_layer_version_policy(
-        self, input: GetLayerVersionPolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetLayerVersionPolicyInput
+        | _models.GetLayerVersionPolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetLayerVersionPolicyOutput: ...
+
+    @_overload
+    async def get_layer_version_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetLayerVersionPolicyInputDict],
     ) -> GetLayerVersionPolicyOutput:
         """
         Returns the permission policy for a version of an [Lambda
@@ -1414,8 +2141,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         For more information, see AddLayerVersionPermission.
 
         Args:
-            input:
-                An instance of `GetLayerVersionPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1425,10 +2150,33 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `GetLayerVersionPolicyOutput`.
         """
-        return await self._invoke(input, _models.GET_LAYER_VERSION_POLICY, [], plugins)
 
+    async def get_layer_version_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetLayerVersionPolicyOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_LAYER_VERSION_POLICY, args, kwargs),
+            _models.GET_LAYER_VERSION_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_policy(
-        self, input: GetPolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetPolicyInput | _models.GetPolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetPolicyOutput: ...
+
+    @_overload
+    async def get_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetPolicyInputDict],
     ) -> GetPolicyOutput:
         """
         Returns the [resource-based IAM
@@ -1436,8 +2184,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         for a function, version, or alias.
 
         Args:
-            input:
-                An instance of `GetPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1447,20 +2193,40 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `GetPolicyOutput`.
         """
-        return await self._invoke(input, _models.GET_POLICY, [], plugins)
 
+    async def get_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetPolicyOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_POLICY, args, kwargs),
+            _models.GET_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_provisioned_concurrency_config(
         self,
-        input: GetProvisionedConcurrencyConfigInput,
+        request: _models.GetProvisionedConcurrencyConfigInput
+        | _models.GetProvisionedConcurrencyConfigInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetProvisionedConcurrencyConfigOutput: ...
+
+    @_overload
+    async def get_provisioned_concurrency_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetProvisionedConcurrencyConfigInputDict],
     ) -> GetProvisionedConcurrencyConfigOutput:
         """
         Retrieves the provisioned concurrency configuration for a function's
         alias or version.
 
         Args:
-            input:
-                An instance of `GetProvisionedConcurrencyConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1470,12 +2236,35 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `GetProvisionedConcurrencyConfigOutput`.
         """
+
+    async def get_provisioned_concurrency_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetProvisionedConcurrencyConfigOutput:
         return await self._invoke(
-            input, _models.GET_PROVISIONED_CONCURRENCY_CONFIG, [], plugins
+            self._select_input(
+                _models.GET_PROVISIONED_CONCURRENCY_CONFIG, args, kwargs
+            ),
+            _models.GET_PROVISIONED_CONCURRENCY_CONFIG,
+            [],
+            plugins,
         )
 
+    @_overload
     async def get_resource_policy(
-        self, input: GetResourcePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetResourcePolicyInput | _models.GetResourcePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetResourcePolicyOutput: ...
+
+    @_overload
+    async def get_resource_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetResourcePolicyInputDict],
     ) -> GetResourcePolicyOutput:
         """
         Retrieves the [resource-based
@@ -1483,8 +2272,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         attached to a Lambda resource.
 
         Args:
-            input:
-                An instance of `GetResourcePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1494,12 +2281,34 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `GetResourcePolicyOutput`.
         """
-        return await self._invoke(input, _models.GET_RESOURCE_POLICY, [], plugins)
 
+    async def get_resource_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetResourcePolicyOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_RESOURCE_POLICY, args, kwargs),
+            _models.GET_RESOURCE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_runtime_management_config(
         self,
-        input: GetRuntimeManagementConfigInput,
+        request: _models.GetRuntimeManagementConfigInput
+        | _models.GetRuntimeManagementConfigInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetRuntimeManagementConfigOutput: ...
+
+    @_overload
+    async def get_runtime_management_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetRuntimeManagementConfigInputDict],
     ) -> GetRuntimeManagementConfigOutput:
         """
         Retrieves the runtime management configuration for a function's
@@ -1511,8 +2320,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         updates](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html).
 
         Args:
-            input:
-                An instance of `GetRuntimeManagementConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1522,12 +2329,33 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `GetRuntimeManagementConfigOutput`.
         """
+
+    async def get_runtime_management_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetRuntimeManagementConfigOutput:
         return await self._invoke(
-            input, _models.GET_RUNTIME_MANAGEMENT_CONFIG, [], plugins
+            self._select_input(_models.GET_RUNTIME_MANAGEMENT_CONFIG, args, kwargs),
+            _models.GET_RUNTIME_MANAGEMENT_CONFIG,
+            [],
+            plugins,
         )
 
+    @_overload
     async def invoke(
-        self, input: InvokeInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.InvokeInput | _models.InvokeInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> InvokeOutput: ...
+
+    @_overload
+    async def invoke(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.InvokeInputDict],
     ) -> InvokeOutput:
         """
         Invokes a Lambda Event Function. You can invoke a function synchronously
@@ -1587,8 +2415,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         accounts](https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html#permissions-resource-xaccountinvoke).
 
         Args:
-            input:
-                An instance of `InvokeInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1598,10 +2424,35 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `InvokeOutput`.
         """
-        return await self._invoke(input, _models.INVOKE, [], plugins)
 
+    async def invoke(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> InvokeOutput:
+        return await self._invoke(
+            self._select_input(_models.INVOKE, args, kwargs),
+            _models.INVOKE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def invoke_async(
-        self, input: InvokeAsyncInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.InvokeAsyncInput
+        | _models.InvokeAsyncInputDict
+        | _models.AsyncInvokeAsyncInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> InvokeAsyncOutput: ...
+
+    @_overload
+    async def invoke_async(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AsyncInvokeAsyncInputDict],
     ) -> InvokeAsyncOutput:
         """
         Note:
@@ -1618,8 +2469,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
             even if X-Ray active tracing is turned on.
 
         Args:
-            input:
-                An instance of `InvokeAsyncInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1629,10 +2478,36 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `InvokeAsyncOutput`.
         """
-        return await self._invoke(input, _models.INVOKE_ASYNC, [], plugins)
 
+    async def invoke_async(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> InvokeAsyncOutput:
+        return await self._invoke(
+            self._select_input(_models.INVOKE_ASYNC, args, kwargs),
+            _models.INVOKE_ASYNC,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def invoke_with_response_stream(
-        self, input: InvokeWithResponseStreamInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.InvokeWithResponseStreamInput
+        | _models.InvokeWithResponseStreamInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AsyncOutputEventStream[
+        InvokeWithResponseStreamResponseEvent, InvokeWithResponseStreamOutput
+    ]: ...
+
+    @_overload
+    async def invoke_with_response_stream(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.InvokeWithResponseStreamInputDict],
     ) -> AsyncOutputEventStream[
         InvokeWithResponseStreamResponseEvent, InvokeWithResponseStreamOutput
     ]:
@@ -1649,8 +2524,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         accounts](https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html#permissions-resource-xaccountinvoke).
 
         Args:
-            input:
-                An instance of `InvokeWithResponseStreamInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1660,8 +2533,17 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An `AsyncOutputEventStream` for server-to-client streaming.
         """
+
+    async def invoke_with_response_stream(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AsyncOutputEventStream[
+        InvokeWithResponseStreamResponseEvent, InvokeWithResponseStreamOutput
+    ]:
         pipeline, call = await self._prepare_call(
-            input, _models.INVOKE_WITH_RESPONSE_STREAM, [], plugins
+            self._select_input(_models.INVOKE_WITH_RESPONSE_STREAM, args, kwargs),
+            _models.INVOKE_WITH_RESPONSE_STREAM,
+            [],
+            plugins,
         )
         return await pipeline.output_stream(
             call,
@@ -1669,8 +2551,22 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
             _InvokeWithResponseStreamResponseEventDeserializer().deserialize,
         )
 
+    @_overload
     async def list_aliases(
-        self, input: ListAliasesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListAliasesInput | _models.ListAliasesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListAliasesOutput: ...
+
+    @_overload
+    async def list_aliases(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListAliasesInputDict],
     ) -> ListAliasesOutput:
         """
         Returns a list of
@@ -1678,8 +2574,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         for a Lambda Event Function.
 
         Args:
-            input:
-                An instance of `ListAliasesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1689,17 +2583,39 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `ListAliasesOutput`.
         """
-        return await self._invoke(input, _models.LIST_ALIASES, [], plugins)
 
+    async def list_aliases(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListAliasesOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_ALIASES, args, kwargs),
+            _models.LIST_ALIASES,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_capacity_providers(
-        self, input: ListCapacityProvidersInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListCapacityProvidersInput
+        | _models.ListCapacityProvidersInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListCapacityProvidersOutput: ...
+
+    @_overload
+    async def list_capacity_providers(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListCapacityProvidersInputDict],
     ) -> ListCapacityProvidersOutput:
         """
         Returns a list of capacity providers in your account.
 
         Args:
-            input:
-                An instance of `ListCapacityProvidersInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1709,10 +2625,34 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `ListCapacityProvidersOutput`.
         """
-        return await self._invoke(input, _models.LIST_CAPACITY_PROVIDERS, [], plugins)
 
+    async def list_capacity_providers(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListCapacityProvidersOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_CAPACITY_PROVIDERS, args, kwargs),
+            _models.LIST_CAPACITY_PROVIDERS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_code_signing_configs(
-        self, input: ListCodeSigningConfigsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListCodeSigningConfigsInput
+        | _models.ListCodeSigningConfigsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListCodeSigningConfigsOutput: ...
+
+    @_overload
+    async def list_code_signing_configs(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListCodeSigningConfigsInputDict],
     ) -> ListCodeSigningConfigsOutput:
         """
         Returns a list of [code signing
@@ -1721,8 +2661,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         `MaxItems` parameter to return fewer configurations per call.
 
         Args:
-            input:
-                An instance of `ListCodeSigningConfigsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1732,12 +2670,34 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `ListCodeSigningConfigsOutput`.
         """
-        return await self._invoke(input, _models.LIST_CODE_SIGNING_CONFIGS, [], plugins)
 
+    async def list_code_signing_configs(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListCodeSigningConfigsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_CODE_SIGNING_CONFIGS, args, kwargs),
+            _models.LIST_CODE_SIGNING_CONFIGS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_durable_executions_by_function(
         self,
-        input: ListDurableExecutionsByFunctionInput,
+        request: _models.ListDurableExecutionsByFunctionInput
+        | _models.ListDurableExecutionsByFunctionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListDurableExecutionsByFunctionOutput: ...
+
+    @_overload
+    async def list_durable_executions_by_function(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListDurableExecutionsByFunctionInputDict],
     ) -> ListDurableExecutionsByFunctionOutput:
         """
         Returns a list of [durable
@@ -1747,8 +2707,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         large result sets.
 
         Args:
-            input:
-                An instance of `ListDurableExecutionsByFunctionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1758,20 +2716,42 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `ListDurableExecutionsByFunctionOutput`.
         """
+
+    async def list_durable_executions_by_function(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListDurableExecutionsByFunctionOutput:
         return await self._invoke(
-            input, _models.LIST_DURABLE_EXECUTIONS_BY_FUNCTION, [], plugins
+            self._select_input(
+                _models.LIST_DURABLE_EXECUTIONS_BY_FUNCTION, args, kwargs
+            ),
+            _models.LIST_DURABLE_EXECUTIONS_BY_FUNCTION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def list_event_source_mappings(
-        self, input: ListEventSourceMappingsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListEventSourceMappingsInput
+        | _models.ListEventSourceMappingsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListEventSourceMappingsOutput: ...
+
+    @_overload
+    async def list_event_source_mappings(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListEventSourceMappingsInputDict],
     ) -> ListEventSourceMappingsOutput:
         """
         Lists event source mappings. Specify an `EventSourceArn` to show only
         event source mappings for a single event source.
 
         Args:
-            input:
-                An instance of `ListEventSourceMappingsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1781,14 +2761,34 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `ListEventSourceMappingsOutput`.
         """
+
+    async def list_event_source_mappings(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListEventSourceMappingsOutput:
         return await self._invoke(
-            input, _models.LIST_EVENT_SOURCE_MAPPINGS, [], plugins
+            self._select_input(_models.LIST_EVENT_SOURCE_MAPPINGS, args, kwargs),
+            _models.LIST_EVENT_SOURCE_MAPPINGS,
+            [],
+            plugins,
         )
 
+    @_overload
     async def list_function_event_invoke_configs(
         self,
-        input: ListFunctionEventInvokeConfigsInput,
+        request: _models.ListFunctionEventInvokeConfigsInput
+        | _models.ListFunctionEventInvokeConfigsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListFunctionEventInvokeConfigsOutput: ...
+
+    @_overload
+    async def list_function_event_invoke_configs(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListFunctionEventInvokeConfigsInputDict],
     ) -> ListFunctionEventInvokeConfigsOutput:
         """
         Retrieves a list of configurations for asynchronous invocation for a
@@ -1799,8 +2799,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         PutFunctionEventInvokeConfig.
 
         Args:
-            input:
-                An instance of `ListFunctionEventInvokeConfigsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1810,12 +2808,35 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `ListFunctionEventInvokeConfigsOutput`.
         """
+
+    async def list_function_event_invoke_configs(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListFunctionEventInvokeConfigsOutput:
         return await self._invoke(
-            input, _models.LIST_FUNCTION_EVENT_INVOKE_CONFIGS, [], plugins
+            self._select_input(
+                _models.LIST_FUNCTION_EVENT_INVOKE_CONFIGS, args, kwargs
+            ),
+            _models.LIST_FUNCTION_EVENT_INVOKE_CONFIGS,
+            [],
+            plugins,
         )
 
+    @_overload
     async def list_functions(
-        self, input: ListFunctionsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListFunctionsInput | _models.ListFunctionsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListFunctionsOutput: ...
+
+    @_overload
+    async def list_functions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListFunctionsInputDict],
     ) -> ListFunctionsOutput:
         """
         Returns a list of Lambda Event Functions, with the version-specific
@@ -1832,8 +2853,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
             version, use GetFunction.
 
         Args:
-            input:
-                An instance of `ListFunctionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1843,12 +2862,34 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `ListFunctionsOutput`.
         """
-        return await self._invoke(input, _models.LIST_FUNCTIONS, [], plugins)
 
+    async def list_functions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListFunctionsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_FUNCTIONS, args, kwargs),
+            _models.LIST_FUNCTIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_functions_by_code_signing_config(
         self,
-        input: ListFunctionsByCodeSigningConfigInput,
+        request: _models.ListFunctionsByCodeSigningConfigInput
+        | _models.ListFunctionsByCodeSigningConfigInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListFunctionsByCodeSigningConfigOutput: ...
+
+    @_overload
+    async def list_functions_by_code_signing_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListFunctionsByCodeSigningConfigInputDict],
     ) -> ListFunctionsByCodeSigningConfigOutput:
         """
         List the functions that use the specified code signing configuration.
@@ -1856,8 +2897,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         to verify that no functions are using it.
 
         Args:
-            input:
-                An instance of `ListFunctionsByCodeSigningConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1867,19 +2906,41 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `ListFunctionsByCodeSigningConfigOutput`.
         """
+
+    async def list_functions_by_code_signing_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListFunctionsByCodeSigningConfigOutput:
         return await self._invoke(
-            input, _models.LIST_FUNCTIONS_BY_CODE_SIGNING_CONFIG, [], plugins
+            self._select_input(
+                _models.LIST_FUNCTIONS_BY_CODE_SIGNING_CONFIG, args, kwargs
+            ),
+            _models.LIST_FUNCTIONS_BY_CODE_SIGNING_CONFIG,
+            [],
+            plugins,
         )
 
+    @_overload
     async def list_function_url_configs(
-        self, input: ListFunctionUrlConfigsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListFunctionUrlConfigsInput
+        | _models.ListFunctionUrlConfigsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListFunctionUrlConfigsOutput: ...
+
+    @_overload
+    async def list_function_url_configs(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListFunctionUrlConfigsInputDict],
     ) -> ListFunctionUrlConfigsOutput:
         """
         Returns a list of Lambda function URLs for the specified function.
 
         Args:
-            input:
-                An instance of `ListFunctionUrlConfigsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1889,20 +2950,40 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `ListFunctionUrlConfigsOutput`.
         """
-        return await self._invoke(input, _models.LIST_FUNCTION_URL_CONFIGS, [], plugins)
 
+    async def list_function_url_configs(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListFunctionUrlConfigsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_FUNCTION_URL_CONFIGS, args, kwargs),
+            _models.LIST_FUNCTION_URL_CONFIGS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_function_versions_by_capacity_provider(
         self,
-        input: ListFunctionVersionsByCapacityProviderInput,
+        request: _models.ListFunctionVersionsByCapacityProviderInput
+        | _models.ListFunctionVersionsByCapacityProviderInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListFunctionVersionsByCapacityProviderOutput: ...
+
+    @_overload
+    async def list_function_versions_by_capacity_provider(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListFunctionVersionsByCapacityProviderInputDict],
     ) -> ListFunctionVersionsByCapacityProviderOutput:
         """
         Returns a list of function versions that are configured to use a
         specific capacity provider.
 
         Args:
-            input:
-                An instance of `ListFunctionVersionsByCapacityProviderInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1912,12 +2993,35 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `ListFunctionVersionsByCapacityProviderOutput`.
         """
+
+    async def list_function_versions_by_capacity_provider(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListFunctionVersionsByCapacityProviderOutput:
         return await self._invoke(
-            input, _models.LIST_FUNCTION_VERSIONS_BY_CAPACITY_PROVIDER, [], plugins
+            self._select_input(
+                _models.LIST_FUNCTION_VERSIONS_BY_CAPACITY_PROVIDER, args, kwargs
+            ),
+            _models.LIST_FUNCTION_VERSIONS_BY_CAPACITY_PROVIDER,
+            [],
+            plugins,
         )
 
+    @_overload
     async def list_layers(
-        self, input: ListLayersInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListLayersInput | _models.ListLayersInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListLayersOutput: ...
+
+    @_overload
+    async def list_layers(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListLayersInputDict],
     ) -> ListLayersOutput:
         """
         Lists [Lambda
@@ -1931,8 +3035,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         architecture](https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html).
 
         Args:
-            input:
-                An instance of `ListLayersInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1942,10 +3044,33 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `ListLayersOutput`.
         """
-        return await self._invoke(input, _models.LIST_LAYERS, [], plugins)
 
+    async def list_layers(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListLayersOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_LAYERS, args, kwargs),
+            _models.LIST_LAYERS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_layer_versions(
-        self, input: ListLayerVersionsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListLayerVersionsInput | _models.ListLayerVersionsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListLayerVersionsOutput: ...
+
+    @_overload
+    async def list_layer_versions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListLayerVersionsInputDict],
     ) -> ListLayerVersionsOutput:
         """
         Lists the versions of an [Lambda
@@ -1957,8 +3082,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         versions that are compatible with that architecture.
 
         Args:
-            input:
-                An instance of `ListLayerVersionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1968,20 +3091,40 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `ListLayerVersionsOutput`.
         """
-        return await self._invoke(input, _models.LIST_LAYER_VERSIONS, [], plugins)
 
+    async def list_layer_versions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListLayerVersionsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_LAYER_VERSIONS, args, kwargs),
+            _models.LIST_LAYER_VERSIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_provisioned_concurrency_configs(
         self,
-        input: ListProvisionedConcurrencyConfigsInput,
+        request: _models.ListProvisionedConcurrencyConfigsInput
+        | _models.ListProvisionedConcurrencyConfigsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListProvisionedConcurrencyConfigsOutput: ...
+
+    @_overload
+    async def list_provisioned_concurrency_configs(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListProvisionedConcurrencyConfigsInputDict],
     ) -> ListProvisionedConcurrencyConfigsOutput:
         """
         Retrieves a list of provisioned concurrency configurations for a
         function.
 
         Args:
-            input:
-                An instance of `ListProvisionedConcurrencyConfigsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1991,12 +3134,35 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `ListProvisionedConcurrencyConfigsOutput`.
         """
+
+    async def list_provisioned_concurrency_configs(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListProvisionedConcurrencyConfigsOutput:
         return await self._invoke(
-            input, _models.LIST_PROVISIONED_CONCURRENCY_CONFIGS, [], plugins
+            self._select_input(
+                _models.LIST_PROVISIONED_CONCURRENCY_CONFIGS, args, kwargs
+            ),
+            _models.LIST_PROVISIONED_CONCURRENCY_CONFIGS,
+            [],
+            plugins,
         )
 
+    @_overload
     async def list_tags(
-        self, input: ListTagsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListTagsInput | _models.ListTagsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListTagsOutput: ...
+
+    @_overload
+    async def list_tags(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListTagsInputDict],
     ) -> ListTagsOutput:
         """
         Returns a function, event source mapping, or code signing
@@ -2005,8 +3171,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         can also view function tags with GetFunction.
 
         Args:
-            input:
-                An instance of `ListTagsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2016,10 +3180,34 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `ListTagsOutput`.
         """
-        return await self._invoke(input, _models.LIST_TAGS, [], plugins)
 
+    async def list_tags(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListTagsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_TAGS, args, kwargs),
+            _models.LIST_TAGS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_versions_by_function(
-        self, input: ListVersionsByFunctionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListVersionsByFunctionInput
+        | _models.ListVersionsByFunctionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListVersionsByFunctionOutput: ...
+
+    @_overload
+    async def list_versions_by_function(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListVersionsByFunctionInputDict],
     ) -> ListVersionsByFunctionOutput:
         """
         Returns a list of
@@ -2028,8 +3216,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         each. Lambda returns up to 50 versions per call.
 
         Args:
-            input:
-                An instance of `ListVersionsByFunctionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2039,10 +3225,34 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `ListVersionsByFunctionOutput`.
         """
-        return await self._invoke(input, _models.LIST_VERSIONS_BY_FUNCTION, [], plugins)
 
+    async def list_versions_by_function(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListVersionsByFunctionOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_VERSIONS_BY_FUNCTION, args, kwargs),
+            _models.LIST_VERSIONS_BY_FUNCTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def publish_layer_version(
-        self, input: PublishLayerVersionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PublishLayerVersionInput
+        | _models.PublishLayerVersionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PublishLayerVersionOutput: ...
+
+    @_overload
+    async def publish_layer_version(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PublishLayerVersionInputDict],
     ) -> PublishLayerVersionOutput:
         """
         Creates an [Lambda
@@ -2054,8 +3264,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         UpdateFunctionConfiguration.
 
         Args:
-            input:
-                An instance of `PublishLayerVersionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2065,10 +3273,33 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `PublishLayerVersionOutput`.
         """
-        return await self._invoke(input, _models.PUBLISH_LAYER_VERSION, [], plugins)
 
+    async def publish_layer_version(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PublishLayerVersionOutput:
+        return await self._invoke(
+            self._select_input(_models.PUBLISH_LAYER_VERSION, args, kwargs),
+            _models.PUBLISH_LAYER_VERSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def publish_version(
-        self, input: PublishVersionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PublishVersionInput | _models.PublishVersionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PublishVersionOutput: ...
+
+    @_overload
+    async def publish_version(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PublishVersionInputDict],
     ) -> PublishVersionOutput:
         """
         Creates a
@@ -2086,8 +3317,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         alias, use CreateAlias.
 
         Args:
-            input:
-                An instance of `PublishVersionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2097,12 +3326,34 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `PublishVersionOutput`.
         """
-        return await self._invoke(input, _models.PUBLISH_VERSION, [], plugins)
 
+    async def publish_version(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PublishVersionOutput:
+        return await self._invoke(
+            self._select_input(_models.PUBLISH_VERSION, args, kwargs),
+            _models.PUBLISH_VERSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def put_function_code_signing_config(
         self,
-        input: PutFunctionCodeSigningConfigInput,
+        request: _models.PutFunctionCodeSigningConfigInput
+        | _models.PutFunctionCodeSigningConfigInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> PutFunctionCodeSigningConfigOutput: ...
+
+    @_overload
+    async def put_function_code_signing_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutFunctionCodeSigningConfigInputDict],
     ) -> PutFunctionCodeSigningConfigOutput:
         """
         Update the code signing configuration for the function. Changes to the
@@ -2110,8 +3361,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         deploy a code package to the function.
 
         Args:
-            input:
-                An instance of `PutFunctionCodeSigningConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2121,12 +3370,34 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `PutFunctionCodeSigningConfigOutput`.
         """
+
+    async def put_function_code_signing_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutFunctionCodeSigningConfigOutput:
         return await self._invoke(
-            input, _models.PUT_FUNCTION_CODE_SIGNING_CONFIG, [], plugins
+            self._select_input(_models.PUT_FUNCTION_CODE_SIGNING_CONFIG, args, kwargs),
+            _models.PUT_FUNCTION_CODE_SIGNING_CONFIG,
+            [],
+            plugins,
         )
 
+    @_overload
     async def put_function_concurrency(
-        self, input: PutFunctionConcurrencyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutFunctionConcurrencyInput
+        | _models.PutFunctionConcurrencyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutFunctionConcurrencyOutput: ...
+
+    @_overload
+    async def put_function_concurrency(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutFunctionConcurrencyInputDict],
     ) -> PutFunctionConcurrencyOutput:
         """
         Sets the maximum number of simultaneous executions for a Lambda Event
@@ -2146,8 +3417,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         scaling](https://docs.aws.amazon.com/lambda/latest/dg/invocation-scaling.html).
 
         Args:
-            input:
-                An instance of `PutFunctionConcurrencyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2157,12 +3426,34 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `PutFunctionConcurrencyOutput`.
         """
-        return await self._invoke(input, _models.PUT_FUNCTION_CONCURRENCY, [], plugins)
 
+    async def put_function_concurrency(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutFunctionConcurrencyOutput:
+        return await self._invoke(
+            self._select_input(_models.PUT_FUNCTION_CONCURRENCY, args, kwargs),
+            _models.PUT_FUNCTION_CONCURRENCY,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def put_function_event_invoke_config(
         self,
-        input: PutFunctionEventInvokeConfigInput,
+        request: _models.PutFunctionEventInvokeConfigInput
+        | _models.PutFunctionEventInvokeConfigInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> PutFunctionEventInvokeConfigOutput: ...
+
+    @_overload
+    async def put_function_event_invoke_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutFunctionEventInvokeConfigInputDict],
     ) -> PutFunctionEventInvokeConfigOutput:
         """
         Configures options for [asynchronous
@@ -2193,8 +3484,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
             records of successful invocations, use another destination type.
 
         Args:
-            input:
-                An instance of `PutFunctionEventInvokeConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2204,14 +3493,34 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `PutFunctionEventInvokeConfigOutput`.
         """
+
+    async def put_function_event_invoke_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutFunctionEventInvokeConfigOutput:
         return await self._invoke(
-            input, _models.PUT_FUNCTION_EVENT_INVOKE_CONFIG, [], plugins
+            self._select_input(_models.PUT_FUNCTION_EVENT_INVOKE_CONFIG, args, kwargs),
+            _models.PUT_FUNCTION_EVENT_INVOKE_CONFIG,
+            [],
+            plugins,
         )
 
+    @_overload
     async def put_function_recursion_config(
         self,
-        input: PutFunctionRecursionConfigInput,
+        request: _models.PutFunctionRecursionConfigInput
+        | _models.PutFunctionRecursionConfigInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> PutFunctionRecursionConfigOutput: ...
+
+    @_overload
+    async def put_function_recursion_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutFunctionRecursionConfigInputDict],
     ) -> PutFunctionRecursionConfigOutput:
         """
         Sets the [recursive loop
@@ -2231,8 +3540,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         your function being invoked and notifies you.
 
         Args:
-            input:
-                An instance of `PutFunctionRecursionConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2242,12 +3549,34 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `PutFunctionRecursionConfigOutput`.
         """
+
+    async def put_function_recursion_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutFunctionRecursionConfigOutput:
         return await self._invoke(
-            input, _models.PUT_FUNCTION_RECURSION_CONFIG, [], plugins
+            self._select_input(_models.PUT_FUNCTION_RECURSION_CONFIG, args, kwargs),
+            _models.PUT_FUNCTION_RECURSION_CONFIG,
+            [],
+            plugins,
         )
 
+    @_overload
     async def put_function_scaling_config(
-        self, input: PutFunctionScalingConfigInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutFunctionScalingConfigInput
+        | _models.PutFunctionScalingConfigInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutFunctionScalingConfigOutput: ...
+
+    @_overload
+    async def put_function_scaling_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutFunctionScalingConfigInputDict],
     ) -> PutFunctionScalingConfigOutput:
         """
         Sets the scaling configuration for a Lambda Managed Instances function.
@@ -2256,8 +3585,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         allowing you to control scaling behavior and resource allocation.
 
         Args:
-            input:
-                An instance of `PutFunctionScalingConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2267,22 +3594,40 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `PutFunctionScalingConfigOutput`.
         """
+
+    async def put_function_scaling_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutFunctionScalingConfigOutput:
         return await self._invoke(
-            input, _models.PUT_FUNCTION_SCALING_CONFIG, [], plugins
+            self._select_input(_models.PUT_FUNCTION_SCALING_CONFIG, args, kwargs),
+            _models.PUT_FUNCTION_SCALING_CONFIG,
+            [],
+            plugins,
         )
 
+    @_overload
     async def put_provisioned_concurrency_config(
         self,
-        input: PutProvisionedConcurrencyConfigInput,
+        request: _models.PutProvisionedConcurrencyConfigInput
+        | _models.PutProvisionedConcurrencyConfigInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> PutProvisionedConcurrencyConfigOutput: ...
+
+    @_overload
+    async def put_provisioned_concurrency_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutProvisionedConcurrencyConfigInputDict],
     ) -> PutProvisionedConcurrencyConfigOutput:
         """
         Adds a provisioned concurrency configuration to a function's alias or
         version.
 
         Args:
-            input:
-                An instance of `PutProvisionedConcurrencyConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2292,12 +3637,35 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `PutProvisionedConcurrencyConfigOutput`.
         """
+
+    async def put_provisioned_concurrency_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutProvisionedConcurrencyConfigOutput:
         return await self._invoke(
-            input, _models.PUT_PROVISIONED_CONCURRENCY_CONFIG, [], plugins
+            self._select_input(
+                _models.PUT_PROVISIONED_CONCURRENCY_CONFIG, args, kwargs
+            ),
+            _models.PUT_PROVISIONED_CONCURRENCY_CONFIG,
+            [],
+            plugins,
         )
 
+    @_overload
     async def put_resource_policy(
-        self, input: PutResourcePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutResourcePolicyInput | _models.PutResourcePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutResourcePolicyOutput: ...
+
+    @_overload
+    async def put_resource_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutResourcePolicyInputDict],
     ) -> PutResourcePolicyOutput:
         """
         Adds a [resource-based
@@ -2317,8 +3685,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
             new policy overwrites those permissions.
 
         Args:
-            input:
-                An instance of `PutResourcePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2328,12 +3694,34 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `PutResourcePolicyOutput`.
         """
-        return await self._invoke(input, _models.PUT_RESOURCE_POLICY, [], plugins)
 
+    async def put_resource_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutResourcePolicyOutput:
+        return await self._invoke(
+            self._select_input(_models.PUT_RESOURCE_POLICY, args, kwargs),
+            _models.PUT_RESOURCE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def put_runtime_management_config(
         self,
-        input: PutRuntimeManagementConfigInput,
+        request: _models.PutRuntimeManagementConfigInput
+        | _models.PutRuntimeManagementConfigInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> PutRuntimeManagementConfigOutput: ...
+
+    @_overload
+    async def put_runtime_management_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutRuntimeManagementConfigInputDict],
     ) -> PutRuntimeManagementConfigOutput:
         """
         Sets the runtime management configuration for a function's version. For
@@ -2341,8 +3729,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         updates](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html).
 
         Args:
-            input:
-                An instance of `PutRuntimeManagementConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2352,14 +3738,34 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `PutRuntimeManagementConfigOutput`.
         """
+
+    async def put_runtime_management_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutRuntimeManagementConfigOutput:
         return await self._invoke(
-            input, _models.PUT_RUNTIME_MANAGEMENT_CONFIG, [], plugins
+            self._select_input(_models.PUT_RUNTIME_MANAGEMENT_CONFIG, args, kwargs),
+            _models.PUT_RUNTIME_MANAGEMENT_CONFIG,
+            [],
+            plugins,
         )
 
+    @_overload
     async def remove_layer_version_permission(
         self,
-        input: RemoveLayerVersionPermissionInput,
+        request: _models.RemoveLayerVersionPermissionInput
+        | _models.RemoveLayerVersionPermissionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> RemoveLayerVersionPermissionOutput: ...
+
+    @_overload
+    async def remove_layer_version_permission(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RemoveLayerVersionPermissionInputDict],
     ) -> RemoveLayerVersionPermissionOutput:
         """
         Removes a statement from the permissions policy for a version of an
@@ -2368,8 +3774,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         For more information, see AddLayerVersionPermission.
 
         Args:
-            input:
-                An instance of `RemoveLayerVersionPermissionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2379,12 +3783,33 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `RemoveLayerVersionPermissionOutput`.
         """
+
+    async def remove_layer_version_permission(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RemoveLayerVersionPermissionOutput:
         return await self._invoke(
-            input, _models.REMOVE_LAYER_VERSION_PERMISSION, [], plugins
+            self._select_input(_models.REMOVE_LAYER_VERSION_PERMISSION, args, kwargs),
+            _models.REMOVE_LAYER_VERSION_PERMISSION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def remove_permission(
-        self, input: RemovePermissionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RemovePermissionInput | _models.RemovePermissionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RemovePermissionOutput: ...
+
+    @_overload
+    async def remove_permission(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RemovePermissionInputDict],
     ) -> RemovePermissionOutput:
         """
         Revokes function-use permission from an Amazon Web Services service or
@@ -2392,8 +3817,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         from the output of GetPolicy.
 
         Args:
-            input:
-                An instance of `RemovePermissionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2403,12 +3826,34 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `RemovePermissionOutput`.
         """
-        return await self._invoke(input, _models.REMOVE_PERMISSION, [], plugins)
 
+    async def remove_permission(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RemovePermissionOutput:
+        return await self._invoke(
+            self._select_input(_models.REMOVE_PERMISSION, args, kwargs),
+            _models.REMOVE_PERMISSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def send_durable_execution_callback_failure(
         self,
-        input: SendDurableExecutionCallbackFailureInput,
+        request: _models.SendDurableExecutionCallbackFailureInput
+        | _models.SendDurableExecutionCallbackFailureInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> SendDurableExecutionCallbackFailureOutput: ...
+
+    @_overload
+    async def send_durable_execution_callback_failure(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SendDurableExecutionCallbackFailureInputDict],
     ) -> SendDurableExecutionCallbackFailureOutput:
         """
         Sends a failure response for a callback operation in a durable
@@ -2416,8 +3861,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         callback operation successfully.
 
         Args:
-            input:
-                An instance of `SendDurableExecutionCallbackFailureInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2427,14 +3870,36 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `SendDurableExecutionCallbackFailureOutput`.
         """
+
+    async def send_durable_execution_callback_failure(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SendDurableExecutionCallbackFailureOutput:
         return await self._invoke(
-            input, _models.SEND_DURABLE_EXECUTION_CALLBACK_FAILURE, [], plugins
+            self._select_input(
+                _models.SEND_DURABLE_EXECUTION_CALLBACK_FAILURE, args, kwargs
+            ),
+            _models.SEND_DURABLE_EXECUTION_CALLBACK_FAILURE,
+            [],
+            plugins,
         )
 
+    @_overload
     async def send_durable_execution_callback_heartbeat(
         self,
-        input: SendDurableExecutionCallbackHeartbeatInput,
+        request: _models.SendDurableExecutionCallbackHeartbeatInput
+        | _models.SendDurableExecutionCallbackHeartbeatInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> SendDurableExecutionCallbackHeartbeatOutput: ...
+
+    @_overload
+    async def send_durable_execution_callback_heartbeat(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SendDurableExecutionCallbackHeartbeatInputDict],
     ) -> SendDurableExecutionCallbackHeartbeatOutput:
         """
         Sends a heartbeat signal for a long-running callback operation to
@@ -2442,8 +3907,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         while the external operation is still in progress.
 
         Args:
-            input:
-                An instance of `SendDurableExecutionCallbackHeartbeatInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2453,14 +3916,36 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `SendDurableExecutionCallbackHeartbeatOutput`.
         """
+
+    async def send_durable_execution_callback_heartbeat(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SendDurableExecutionCallbackHeartbeatOutput:
         return await self._invoke(
-            input, _models.SEND_DURABLE_EXECUTION_CALLBACK_HEARTBEAT, [], plugins
+            self._select_input(
+                _models.SEND_DURABLE_EXECUTION_CALLBACK_HEARTBEAT, args, kwargs
+            ),
+            _models.SEND_DURABLE_EXECUTION_CALLBACK_HEARTBEAT,
+            [],
+            plugins,
         )
 
+    @_overload
     async def send_durable_execution_callback_success(
         self,
-        input: SendDurableExecutionCallbackSuccessInput,
+        request: _models.SendDurableExecutionCallbackSuccessInput
+        | _models.SendDurableExecutionCallbackSuccessInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> SendDurableExecutionCallbackSuccessOutput: ...
+
+    @_overload
+    async def send_durable_execution_callback_success(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SendDurableExecutionCallbackSuccessInputDict],
     ) -> SendDurableExecutionCallbackSuccessOutput:
         """
         Sends a successful completion response for a callback operation in a
@@ -2468,8 +3953,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         completed a callback operation.
 
         Args:
-            input:
-                An instance of `SendDurableExecutionCallbackSuccessInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2479,12 +3962,36 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `SendDurableExecutionCallbackSuccessOutput`.
         """
+
+    async def send_durable_execution_callback_success(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SendDurableExecutionCallbackSuccessOutput:
         return await self._invoke(
-            input, _models.SEND_DURABLE_EXECUTION_CALLBACK_SUCCESS, [], plugins
+            self._select_input(
+                _models.SEND_DURABLE_EXECUTION_CALLBACK_SUCCESS, args, kwargs
+            ),
+            _models.SEND_DURABLE_EXECUTION_CALLBACK_SUCCESS,
+            [],
+            plugins,
         )
 
+    @_overload
     async def stop_durable_execution(
-        self, input: StopDurableExecutionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StopDurableExecutionInput
+        | _models.StopDurableExecutionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StopDurableExecutionOutput: ...
+
+    @_overload
+    async def stop_durable_execution(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StopDurableExecutionInputDict],
     ) -> StopDurableExecutionOutput:
         """
         Stops a running [durable
@@ -2493,8 +4000,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         in-progress operations are terminated.
 
         Args:
-            input:
-                An instance of `StopDurableExecutionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2504,18 +4009,39 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `StopDurableExecutionOutput`.
         """
-        return await self._invoke(input, _models.STOP_DURABLE_EXECUTION, [], plugins)
 
+    async def stop_durable_execution(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StopDurableExecutionOutput:
+        return await self._invoke(
+            self._select_input(_models.STOP_DURABLE_EXECUTION, args, kwargs),
+            _models.STOP_DURABLE_EXECUTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def tag_resource(
-        self, input: TagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.TagResourceInput | _models.TagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> TagResourceOutput: ...
+
+    @_overload
+    async def tag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.TagResourceInputDict],
     ) -> TagResourceOutput:
         """
         Adds [tags](https://docs.aws.amazon.com/lambda/latest/dg/tagging.html)
         to a function, event source mapping, or code signing configuration.
 
         Args:
-            input:
-                An instance of `TagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2525,10 +4051,33 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `TagResourceOutput`.
         """
-        return await self._invoke(input, _models.TAG_RESOURCE, [], plugins)
 
+    async def tag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> TagResourceOutput:
+        return await self._invoke(
+            self._select_input(_models.TAG_RESOURCE, args, kwargs),
+            _models.TAG_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def untag_resource(
-        self, input: UntagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UntagResourceInput | _models.UntagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UntagResourceOutput: ...
+
+    @_overload
+    async def untag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UntagResourceInputDict],
     ) -> UntagResourceOutput:
         """
         Removes
@@ -2536,8 +4085,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         function, event source mapping, or code signing configuration.
 
         Args:
-            input:
-                An instance of `UntagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2547,18 +4094,39 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `UntagResourceOutput`.
         """
-        return await self._invoke(input, _models.UNTAG_RESOURCE, [], plugins)
 
+    async def untag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UntagResourceOutput:
+        return await self._invoke(
+            self._select_input(_models.UNTAG_RESOURCE, args, kwargs),
+            _models.UNTAG_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_alias(
-        self, input: UpdateAliasInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateAliasInput | _models.UpdateAliasInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateAliasOutput: ...
+
+    @_overload
+    async def update_alias(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateAliasInputDict],
     ) -> UpdateAliasOutput:
         """
         Updates the configuration of a Lambda Event Function
         [alias](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html).
 
         Args:
-            input:
-                An instance of `UpdateAliasInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2568,17 +4136,39 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `UpdateAliasOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_ALIAS, [], plugins)
 
+    async def update_alias(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateAliasOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_ALIAS, args, kwargs),
+            _models.UPDATE_ALIAS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_capacity_provider(
-        self, input: UpdateCapacityProviderInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateCapacityProviderInput
+        | _models.UpdateCapacityProviderInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateCapacityProviderOutput: ...
+
+    @_overload
+    async def update_capacity_provider(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateCapacityProviderInputDict],
     ) -> UpdateCapacityProviderOutput:
         """
         Updates the configuration of an existing capacity provider.
 
         Args:
-            input:
-                An instance of `UpdateCapacityProviderInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2588,10 +4178,34 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `UpdateCapacityProviderOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_CAPACITY_PROVIDER, [], plugins)
 
+    async def update_capacity_provider(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateCapacityProviderOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_CAPACITY_PROVIDER, args, kwargs),
+            _models.UPDATE_CAPACITY_PROVIDER,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_code_signing_config(
-        self, input: UpdateCodeSigningConfigInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateCodeSigningConfigInput
+        | _models.UpdateCodeSigningConfigInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateCodeSigningConfigOutput: ...
+
+    @_overload
+    async def update_code_signing_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateCodeSigningConfigInputDict],
     ) -> UpdateCodeSigningConfigOutput:
         """
         Update the code signing configuration. Changes to the code signing
@@ -2599,8 +4213,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         package to the function.
 
         Args:
-            input:
-                An instance of `UpdateCodeSigningConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2610,12 +4222,34 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `UpdateCodeSigningConfigOutput`.
         """
+
+    async def update_code_signing_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateCodeSigningConfigOutput:
         return await self._invoke(
-            input, _models.UPDATE_CODE_SIGNING_CONFIG, [], plugins
+            self._select_input(_models.UPDATE_CODE_SIGNING_CONFIG, args, kwargs),
+            _models.UPDATE_CODE_SIGNING_CONFIG,
+            [],
+            plugins,
         )
 
+    @_overload
     async def update_event_source_mapping(
-        self, input: UpdateEventSourceMappingInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateEventSourceMappingInput
+        | _models.UpdateEventSourceMappingInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateEventSourceMappingOutput: ...
+
+    @_overload
+    async def update_event_source_mapping(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateEventSourceMappingInputDict],
     ) -> UpdateEventSourceMappingOutput:
         """
         Updates an event source mapping. You can change the function that Lambda
@@ -2695,8 +4329,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
           DocumentDB](https://docs.aws.amazon.com/lambda/latest/dg/with-documentdb.html#docdb-configuration)
 
         Args:
-            input:
-                An instance of `UpdateEventSourceMappingInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2706,12 +4338,33 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `UpdateEventSourceMappingOutput`.
         """
+
+    async def update_event_source_mapping(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateEventSourceMappingOutput:
         return await self._invoke(
-            input, _models.UPDATE_EVENT_SOURCE_MAPPING, [], plugins
+            self._select_input(_models.UPDATE_EVENT_SOURCE_MAPPING, args, kwargs),
+            _models.UPDATE_EVENT_SOURCE_MAPPING,
+            [],
+            plugins,
         )
 
+    @_overload
     async def update_function_code(
-        self, input: UpdateFunctionCodeInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateFunctionCodeInput | _models.UpdateFunctionCodeInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateFunctionCodeOutput: ...
+
+    @_overload
+    async def update_function_code(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateFunctionCodeInputDict],
     ) -> UpdateFunctionCodeOutput:
         """
         Updates a Lambda Event Function's code. If code signing is enabled for
@@ -2742,8 +4395,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
             new image, Lambda does not automatically update the function.
 
         Args:
-            input:
-                An instance of `UpdateFunctionCodeInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2753,12 +4404,34 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `UpdateFunctionCodeOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_FUNCTION_CODE, [], plugins)
 
+    async def update_function_code(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateFunctionCodeOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_FUNCTION_CODE, args, kwargs),
+            _models.UPDATE_FUNCTION_CODE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_function_configuration(
         self,
-        input: UpdateFunctionConfigurationInput,
+        request: _models.UpdateFunctionConfigurationInput
+        | _models.UpdateFunctionConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateFunctionConfigurationOutput: ...
+
+    @_overload
+    async def update_function_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateFunctionConfigurationInputDict],
     ) -> UpdateFunctionConfigurationOutput:
         """
         Modifies the version-specific settings of a Lambda Event Function.
@@ -2782,8 +4455,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Services service, use AddPermission.
 
         Args:
-            input:
-                An instance of `UpdateFunctionConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2793,14 +4464,34 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `UpdateFunctionConfigurationOutput`.
         """
+
+    async def update_function_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateFunctionConfigurationOutput:
         return await self._invoke(
-            input, _models.UPDATE_FUNCTION_CONFIGURATION, [], plugins
+            self._select_input(_models.UPDATE_FUNCTION_CONFIGURATION, args, kwargs),
+            _models.UPDATE_FUNCTION_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def update_function_event_invoke_config(
         self,
-        input: UpdateFunctionEventInvokeConfigInput,
+        request: _models.UpdateFunctionEventInvokeConfigInput
+        | _models.UpdateFunctionEventInvokeConfigInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateFunctionEventInvokeConfigOutput: ...
+
+    @_overload
+    async def update_function_event_invoke_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateFunctionEventInvokeConfigInputDict],
     ) -> UpdateFunctionEventInvokeConfigOutput:
         """
         Updates the configuration for asynchronous invocation for a function,
@@ -2810,8 +4501,6 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         PutFunctionEventInvokeConfig.
 
         Args:
-            input:
-                An instance of `UpdateFunctionEventInvokeConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2821,19 +4510,41 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `UpdateFunctionEventInvokeConfigOutput`.
         """
+
+    async def update_function_event_invoke_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateFunctionEventInvokeConfigOutput:
         return await self._invoke(
-            input, _models.UPDATE_FUNCTION_EVENT_INVOKE_CONFIG, [], plugins
+            self._select_input(
+                _models.UPDATE_FUNCTION_EVENT_INVOKE_CONFIG, args, kwargs
+            ),
+            _models.UPDATE_FUNCTION_EVENT_INVOKE_CONFIG,
+            [],
+            plugins,
         )
 
+    @_overload
     async def update_function_url_config(
-        self, input: UpdateFunctionUrlConfigInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateFunctionUrlConfigInput
+        | _models.UpdateFunctionUrlConfigInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateFunctionUrlConfigOutput: ...
+
+    @_overload
+    async def update_function_url_config(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateFunctionUrlConfigInputDict],
     ) -> UpdateFunctionUrlConfigOutput:
         """
         Updates the configuration for a function URL of a Lambda Event Function.
 
         Args:
-            input:
-                An instance of `UpdateFunctionUrlConfigInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2843,8 +4554,15 @@ class AsyncLambdaClient(AsyncClient[AsyncLambdaConfig]):
         Returns:
             An instance of `UpdateFunctionUrlConfigOutput`.
         """
+
+    async def update_function_url_config(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateFunctionUrlConfigOutput:
         return await self._invoke(
-            input, _models.UPDATE_FUNCTION_URL_CONFIG, [], plugins
+            self._select_input(_models.UPDATE_FUNCTION_URL_CONFIG, args, kwargs),
+            _models.UPDATE_FUNCTION_URL_CONFIG,
+            [],
+            plugins,
         )
 
     async def _new_config(self) -> AsyncLambdaConfig:

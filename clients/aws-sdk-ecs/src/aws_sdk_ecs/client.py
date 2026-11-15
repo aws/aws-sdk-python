@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import cast
+from typing import Unpack as _Unpack, cast, overload as _overload
 
 from smithy_aws_core.config.types import ConfigSource
 from smithy_aws_core.identity.chain.resolver import IdentityChain
@@ -20,181 +20,93 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from .models import (
-        AssociateGatewayWithClusterInput,
         AssociateGatewayWithClusterOutput,
-        ContinueServiceDeploymentInput,
         ContinueServiceDeploymentOutput,
-        CreateCapacityProviderInput,
         CreateCapacityProviderOutput,
-        CreateClusterInput,
         CreateClusterOutput,
-        CreateDaemonInput,
         CreateDaemonOutput,
-        CreateExpressGatewayServiceInput,
         CreateExpressGatewayServiceOutput,
-        CreateGatewayInput,
         CreateGatewayOutput,
-        CreateServiceInput,
         CreateServiceOutput,
-        CreateTaskSetInput,
         CreateTaskSetOutput,
-        DeleteAccountSettingInput,
         DeleteAccountSettingOutput,
-        DeleteAttributesInput,
         DeleteAttributesOutput,
-        DeleteCapacityProviderInput,
         DeleteCapacityProviderOutput,
-        DeleteClusterInput,
         DeleteClusterOutput,
-        DeleteDaemonInput,
         DeleteDaemonOutput,
-        DeleteDaemonTaskDefinitionInput,
         DeleteDaemonTaskDefinitionOutput,
-        DeleteExpressGatewayServiceInput,
         DeleteExpressGatewayServiceOutput,
-        DeleteGatewayInput,
         DeleteGatewayOutput,
-        DeleteServiceInput,
         DeleteServiceOutput,
-        DeleteTaskDefinitionsInput,
         DeleteTaskDefinitionsOutput,
-        DeleteTaskSetInput,
         DeleteTaskSetOutput,
-        DeregisterContainerInstanceInput,
         DeregisterContainerInstanceOutput,
-        DeregisterTaskDefinitionInput,
         DeregisterTaskDefinitionOutput,
-        DescribeCapacityProvidersInput,
         DescribeCapacityProvidersOutput,
-        DescribeClustersInput,
         DescribeClustersOutput,
-        DescribeContainerInstancesInput,
         DescribeContainerInstancesOutput,
-        DescribeDaemonDeploymentsInput,
         DescribeDaemonDeploymentsOutput,
-        DescribeDaemonInput,
         DescribeDaemonOutput,
-        DescribeDaemonRevisionsInput,
         DescribeDaemonRevisionsOutput,
-        DescribeDaemonTaskDefinitionInput,
         DescribeDaemonTaskDefinitionOutput,
-        DescribeExpressGatewayServiceInput,
         DescribeExpressGatewayServiceOutput,
-        DescribeGatewayInput,
         DescribeGatewayOutput,
-        DescribeGatewayResourcesInput,
         DescribeGatewayResourcesOutput,
-        DescribeGatewayRouteInput,
         DescribeGatewayRouteOutput,
-        DescribeServiceDeploymentsInput,
         DescribeServiceDeploymentsOutput,
-        DescribeServiceRevisionsInput,
         DescribeServiceRevisionsOutput,
-        DescribeServicesInput,
         DescribeServicesOutput,
-        DescribeTaskDefinitionInput,
         DescribeTaskDefinitionOutput,
-        DescribeTaskSetsInput,
         DescribeTaskSetsOutput,
-        DescribeTasksInput,
         DescribeTasksOutput,
-        DisassociateGatewayFromClusterInput,
         DisassociateGatewayFromClusterOutput,
-        DiscoverPollEndpointInput,
         DiscoverPollEndpointOutput,
-        ExecuteCommandInput,
         ExecuteCommandOutput,
-        GetTaskProtectionInput,
         GetTaskProtectionOutput,
-        ListAccountSettingsInput,
         ListAccountSettingsOutput,
-        ListAttributesInput,
         ListAttributesOutput,
-        ListClustersInput,
         ListClustersOutput,
-        ListContainerInstancesInput,
         ListContainerInstancesOutput,
-        ListDaemonDeploymentsInput,
         ListDaemonDeploymentsOutput,
-        ListDaemonTaskDefinitionsInput,
         ListDaemonTaskDefinitionsOutput,
-        ListDaemonsInput,
         ListDaemonsOutput,
-        ListGatewayClusterAssociationsInput,
         ListGatewayClusterAssociationsOutput,
-        ListGatewayRoutesInput,
         ListGatewayRoutesOutput,
-        ListGatewaysInput,
         ListGatewaysOutput,
-        ListServiceDeploymentsInput,
         ListServiceDeploymentsOutput,
-        ListServicesByNamespaceInput,
         ListServicesByNamespaceOutput,
-        ListServicesInput,
         ListServicesOutput,
-        ListTagsForResourceInput,
         ListTagsForResourceOutput,
-        ListTaskDefinitionFamiliesInput,
         ListTaskDefinitionFamiliesOutput,
-        ListTaskDefinitionsInput,
         ListTaskDefinitionsOutput,
-        ListTasksInput,
         ListTasksOutput,
-        PutAccountSettingDefaultInput,
         PutAccountSettingDefaultOutput,
-        PutAccountSettingInput,
         PutAccountSettingOutput,
-        PutAttributesInput,
         PutAttributesOutput,
-        PutClusterCapacityProvidersInput,
         PutClusterCapacityProvidersOutput,
-        RegisterContainerInstanceInput,
         RegisterContainerInstanceOutput,
-        RegisterDaemonTaskDefinitionInput,
         RegisterDaemonTaskDefinitionOutput,
-        RegisterTaskDefinitionInput,
         RegisterTaskDefinitionOutput,
-        RunTaskInput,
         RunTaskOutput,
-        StartTaskInput,
         StartTaskOutput,
-        StopServiceDeploymentInput,
         StopServiceDeploymentOutput,
-        StopTaskInput,
         StopTaskOutput,
-        SubmitAttachmentStateChangesInput,
         SubmitAttachmentStateChangesOutput,
-        SubmitContainerStateChangeInput,
         SubmitContainerStateChangeOutput,
-        SubmitTaskStateChangeInput,
         SubmitTaskStateChangeOutput,
-        TagResourceInput,
         TagResourceOutput,
-        UntagResourceInput,
         UntagResourceOutput,
-        UpdateCapacityProviderInput,
         UpdateCapacityProviderOutput,
-        UpdateClusterInput,
         UpdateClusterOutput,
-        UpdateClusterSettingsInput,
         UpdateClusterSettingsOutput,
-        UpdateContainerAgentInput,
         UpdateContainerAgentOutput,
-        UpdateContainerInstancesStateInput,
         UpdateContainerInstancesStateOutput,
-        UpdateDaemonInput,
         UpdateDaemonOutput,
-        UpdateExpressGatewayServiceInput,
         UpdateExpressGatewayServiceOutput,
-        UpdateGatewayInput,
         UpdateGatewayOutput,
-        UpdateServiceInput,
         UpdateServiceOutput,
-        UpdateServicePrimaryTaskSetInput,
         UpdateServicePrimaryTaskSetOutput,
-        UpdateTaskProtectionInput,
         UpdateTaskProtectionOutput,
-        UpdateTaskSetInput,
         UpdateTaskSetOutput,
     )
 
@@ -224,12 +136,25 @@ class ECSClient(Client[ECSConfig]):
     also don't need to worry about scaling your management infrastructure.
     """
 
-    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
+    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
 
+    @_overload
     def associate_gateway_with_cluster(
         self,
-        input: AssociateGatewayWithClusterInput,
+        request: _models.AssociateGatewayWithClusterInput
+        | _models.AssociateGatewayWithClusterInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> AssociateGatewayWithClusterOutput: ...
+
+    @_overload
+    def associate_gateway_with_cluster(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AssociateGatewayWithClusterInputDict],
     ) -> AssociateGatewayWithClusterOutput:
         """
         Associates a gateway with an Amazon ECS cluster. After a cluster is
@@ -239,8 +164,6 @@ class ECSClient(Client[ECSConfig]):
         to 5 gateways.
 
         Args:
-            input:
-                An instance of `AssociateGatewayWithClusterInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -250,10 +173,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `AssociateGatewayWithClusterOutput`.
         """
-        return self._invoke(input, _models.ASSOCIATE_GATEWAY_WITH_CLUSTER, [], plugins)
 
+    def associate_gateway_with_cluster(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AssociateGatewayWithClusterOutput:
+        return self._invoke(
+            self._select_input(_models.ASSOCIATE_GATEWAY_WITH_CLUSTER, args, kwargs),
+            _models.ASSOCIATE_GATEWAY_WITH_CLUSTER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def continue_service_deployment(
-        self, input: ContinueServiceDeploymentInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ContinueServiceDeploymentInput
+        | _models.ContinueServiceDeploymentInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ContinueServiceDeploymentOutput: ...
+
+    @_overload
+    def continue_service_deployment(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ContinueServiceDeploymentInputDict],
     ) -> ContinueServiceDeploymentOutput:
         """
         Continues or rolls back an Amazon ECS service deployment that is paused
@@ -273,8 +220,6 @@ class ECSClient(Client[ECSConfig]):
         in the *Amazon Elastic Container Service Developer Guide*.
 
         Args:
-            input:
-                An instance of `ContinueServiceDeploymentInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -284,10 +229,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `ContinueServiceDeploymentOutput`.
         """
-        return self._invoke(input, _models.CONTINUE_SERVICE_DEPLOYMENT, [], plugins)
 
+    def continue_service_deployment(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ContinueServiceDeploymentOutput:
+        return self._invoke(
+            self._select_input(_models.CONTINUE_SERVICE_DEPLOYMENT, args, kwargs),
+            _models.CONTINUE_SERVICE_DEPLOYMENT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_capacity_provider(
-        self, input: CreateCapacityProviderInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateCapacityProviderInput
+        | _models.CreateCapacityProviderInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateCapacityProviderOutput: ...
+
+    @_overload
+    def create_capacity_provider(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateCapacityProviderInputDict],
     ) -> CreateCapacityProviderOutput:
         """
         Creates a capacity provider. Capacity providers are associated with a
@@ -297,8 +266,6 @@ class ECSClient(Client[ECSConfig]):
         `FARGATE` and `FARGATE_SPOT` capacity providers.
 
         Args:
-            input:
-                An instance of `CreateCapacityProviderInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -308,12 +275,33 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `CreateCapacityProviderOutput`.
         """
-        return self._invoke(input, _models.CREATE_CAPACITY_PROVIDER, [], plugins)
 
+    def create_capacity_provider(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateCapacityProviderOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_CAPACITY_PROVIDER, args, kwargs),
+            _models.CREATE_CAPACITY_PROVIDER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_cluster(
         self,
-        input: CreateClusterInput | None = None,
+        request: _models.CreateClusterInput | _models.CreateClusterInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateClusterOutput: ...
+
+    @_overload
+    def create_cluster(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateClusterInputDict],
     ) -> CreateClusterOutput:
         """
         Creates a new Amazon ECS cluster. By default, your account receives a
@@ -333,8 +321,6 @@ class ECSClient(Client[ECSConfig]):
             in the *Amazon Elastic Container Service Developer Guide*.
 
         Args:
-            input:
-                An instance of `CreateClusterInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -344,10 +330,33 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `CreateClusterOutput`.
         """
-        return self._invoke(input, _models.CREATE_CLUSTER, [], plugins)
 
+    def create_cluster(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateClusterOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_CLUSTER, args, kwargs),
+            _models.CREATE_CLUSTER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_daemon(
-        self, input: CreateDaemonInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateDaemonInput | _models.CreateDaemonInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateDaemonOutput: ...
+
+    @_overload
+    def create_daemon(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateDaemonInputDict],
     ) -> CreateDaemonOutput:
         """
         Creates a new daemon in the specified cluster and capacity providers. A
@@ -368,8 +377,6 @@ class ECSClient(Client[ECSConfig]):
             Capacity Providers.
 
         Args:
-            input:
-                An instance of `CreateDaemonInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -379,12 +386,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `CreateDaemonOutput`.
         """
-        return self._invoke(input, _models.CREATE_DAEMON, [], plugins)
 
+    def create_daemon(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateDaemonOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_DAEMON, args, kwargs),
+            _models.CREATE_DAEMON,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_express_gateway_service(
         self,
-        input: CreateExpressGatewayServiceInput,
+        request: _models.CreateExpressGatewayServiceInput
+        | _models.CreateExpressGatewayServiceInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateExpressGatewayServiceOutput: ...
+
+    @_overload
+    def create_express_gateway_service(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateExpressGatewayServiceInputDict],
     ) -> CreateExpressGatewayServiceOutput:
         """
         Creates an Express service that simplifies deploying containerized web
@@ -402,8 +431,6 @@ class ECSClient(Client[ECSConfig]):
         for managing Amazon Web Services resources on your behalf.
 
         Args:
-            input:
-                An instance of `CreateExpressGatewayServiceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -413,10 +440,33 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `CreateExpressGatewayServiceOutput`.
         """
-        return self._invoke(input, _models.CREATE_EXPRESS_GATEWAY_SERVICE, [], plugins)
 
+    def create_express_gateway_service(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateExpressGatewayServiceOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_EXPRESS_GATEWAY_SERVICE, args, kwargs),
+            _models.CREATE_EXPRESS_GATEWAY_SERVICE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_gateway(
-        self, input: CreateGatewayInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateGatewayInput | _models.CreateGatewayInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateGatewayOutput: ...
+
+    @_overload
+    def create_gateway(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateGatewayInputDict],
     ) -> CreateGatewayOutput:
         """
         Creates a gateway. A gateway defines and dynamically manages ingress
@@ -431,8 +481,6 @@ class ECSClient(Client[ECSConfig]):
         the infrastructure role that you specify in `infrastructureRoleArn`.
 
         Args:
-            input:
-                An instance of `CreateGatewayInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -442,10 +490,33 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `CreateGatewayOutput`.
         """
-        return self._invoke(input, _models.CREATE_GATEWAY, [], plugins)
 
+    def create_gateway(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateGatewayOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_GATEWAY, args, kwargs),
+            _models.CREATE_GATEWAY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_service(
-        self, input: CreateServiceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateServiceInput | _models.CreateServiceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateServiceOutput: ...
+
+    @_overload
+    def create_service(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateServiceInputDict],
     ) -> CreateServiceOutput:
         """
         Runs and maintains your desired number of tasks from a specified task
@@ -650,8 +721,6 @@ class ECSClient(Client[ECSConfig]):
         in the *Amazon Elastic Container Service Developer Guide*
 
         Args:
-            input:
-                An instance of `CreateServiceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -661,10 +730,33 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `CreateServiceOutput`.
         """
-        return self._invoke(input, _models.CREATE_SERVICE, [], plugins)
 
+    def create_service(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateServiceOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_SERVICE, args, kwargs),
+            _models.CREATE_SERVICE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_task_set(
-        self, input: CreateTaskSetInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateTaskSetInput | _models.CreateTaskSetInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateTaskSetOutput: ...
+
+    @_overload
+    def create_task_set(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateTaskSetInputDict],
     ) -> CreateTaskSetOutput:
         """
         Create a task set in the specified cluster and service. This is used
@@ -685,8 +777,6 @@ class ECSClient(Client[ECSConfig]):
         in the *Amazon Elastic Container Service Developer Guide*.
 
         Args:
-            input:
-                An instance of `CreateTaskSetInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -696,18 +786,40 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `CreateTaskSetOutput`.
         """
-        return self._invoke(input, _models.CREATE_TASK_SET, [], plugins)
 
+    def create_task_set(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateTaskSetOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_TASK_SET, args, kwargs),
+            _models.CREATE_TASK_SET,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_account_setting(
-        self, input: DeleteAccountSettingInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteAccountSettingInput
+        | _models.DeleteAccountSettingInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteAccountSettingOutput: ...
+
+    @_overload
+    def delete_account_setting(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteAccountSettingInputDict],
     ) -> DeleteAccountSettingOutput:
         """
         Disables an account setting for a specified user, role, or the root user
         for an account.
 
         Args:
-            input:
-                An instance of `DeleteAccountSettingInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -717,17 +829,38 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `DeleteAccountSettingOutput`.
         """
-        return self._invoke(input, _models.DELETE_ACCOUNT_SETTING, [], plugins)
 
+    def delete_account_setting(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteAccountSettingOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_ACCOUNT_SETTING, args, kwargs),
+            _models.DELETE_ACCOUNT_SETTING,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_attributes(
-        self, input: DeleteAttributesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteAttributesInput | _models.DeleteAttributesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteAttributesOutput: ...
+
+    @_overload
+    def delete_attributes(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteAttributesInputDict],
     ) -> DeleteAttributesOutput:
         """
         Deletes one or more custom attributes from an Amazon ECS resource.
 
         Args:
-            input:
-                An instance of `DeleteAttributesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -737,10 +870,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `DeleteAttributesOutput`.
         """
-        return self._invoke(input, _models.DELETE_ATTRIBUTES, [], plugins)
 
+    def delete_attributes(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteAttributesOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_ATTRIBUTES, args, kwargs),
+            _models.DELETE_ATTRIBUTES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_capacity_provider(
-        self, input: DeleteCapacityProviderInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteCapacityProviderInput
+        | _models.DeleteCapacityProviderInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteCapacityProviderOutput: ...
+
+    @_overload
+    def delete_capacity_provider(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteCapacityProviderInputDict],
     ) -> DeleteCapacityProviderOutput:
         """
         Deletes the specified capacity provider.
@@ -765,8 +922,6 @@ class ECSClient(Client[ECSConfig]):
         or delete the cluster.
 
         Args:
-            input:
-                An instance of `DeleteCapacityProviderInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -776,10 +931,33 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `DeleteCapacityProviderOutput`.
         """
-        return self._invoke(input, _models.DELETE_CAPACITY_PROVIDER, [], plugins)
 
+    def delete_capacity_provider(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteCapacityProviderOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_CAPACITY_PROVIDER, args, kwargs),
+            _models.DELETE_CAPACITY_PROVIDER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_cluster(
-        self, input: DeleteClusterInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteClusterInput | _models.DeleteClusterInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteClusterOutput: ...
+
+    @_overload
+    def delete_cluster(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteClusterInputDict],
     ) -> DeleteClusterOutput:
         """
         Deletes the specified cluster. The cluster transitions to the `INACTIVE`
@@ -795,8 +973,6 @@ class ECSClient(Client[ECSConfig]):
         [DeregisterContainerInstance](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeregisterContainerInstance.html).
 
         Args:
-            input:
-                An instance of `DeleteClusterInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -806,10 +982,33 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `DeleteClusterOutput`.
         """
-        return self._invoke(input, _models.DELETE_CLUSTER, [], plugins)
 
+    def delete_cluster(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteClusterOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_CLUSTER, args, kwargs),
+            _models.DELETE_CLUSTER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_daemon(
-        self, input: DeleteDaemonInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteDaemonInput | _models.DeleteDaemonInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteDaemonOutput: ...
+
+    @_overload
+    def delete_daemon(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteDaemonInputDict],
     ) -> DeleteDaemonOutput:
         """
         Deletes the specified daemon. The daemon must be in an `ACTIVE` state to
@@ -824,8 +1023,6 @@ class ECSClient(Client[ECSConfig]):
             Capacity Providers.
 
         Args:
-            input:
-                An instance of `DeleteDaemonInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -835,12 +1032,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `DeleteDaemonOutput`.
         """
-        return self._invoke(input, _models.DELETE_DAEMON, [], plugins)
 
+    def delete_daemon(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteDaemonOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_DAEMON, args, kwargs),
+            _models.DELETE_DAEMON,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_daemon_task_definition(
         self,
-        input: DeleteDaemonTaskDefinitionInput,
+        request: _models.DeleteDaemonTaskDefinitionInput
+        | _models.DeleteDaemonTaskDefinitionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteDaemonTaskDefinitionOutput: ...
+
+    @_overload
+    def delete_daemon_task_definition(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteDaemonTaskDefinitionInputDict],
     ) -> DeleteDaemonTaskDefinitionOutput:
         """
         Deletes the specified daemon task definition. After a daemon task
@@ -851,8 +1070,6 @@ class ECSClient(Client[ECSConfig]):
         A daemon task definition must be in an `ACTIVE` state to be deleted.
 
         Args:
-            input:
-                An instance of `DeleteDaemonTaskDefinitionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -862,12 +1079,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `DeleteDaemonTaskDefinitionOutput`.
         """
-        return self._invoke(input, _models.DELETE_DAEMON_TASK_DEFINITION, [], plugins)
 
+    def delete_daemon_task_definition(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteDaemonTaskDefinitionOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_DAEMON_TASK_DEFINITION, args, kwargs),
+            _models.DELETE_DAEMON_TASK_DEFINITION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_express_gateway_service(
         self,
-        input: DeleteExpressGatewayServiceInput,
+        request: _models.DeleteExpressGatewayServiceInput
+        | _models.DeleteExpressGatewayServiceInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteExpressGatewayServiceOutput: ...
+
+    @_overload
+    def delete_express_gateway_service(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteExpressGatewayServiceInputDict],
     ) -> DeleteExpressGatewayServiceOutput:
         """
         Deletes an Express service and removes all associated Amazon Web
@@ -883,8 +1122,6 @@ class ECSClient(Client[ECSConfig]):
         service is no longer needed before deletion.
 
         Args:
-            input:
-                An instance of `DeleteExpressGatewayServiceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -894,10 +1131,33 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `DeleteExpressGatewayServiceOutput`.
         """
-        return self._invoke(input, _models.DELETE_EXPRESS_GATEWAY_SERVICE, [], plugins)
 
+    def delete_express_gateway_service(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteExpressGatewayServiceOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_EXPRESS_GATEWAY_SERVICE, args, kwargs),
+            _models.DELETE_EXPRESS_GATEWAY_SERVICE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_gateway(
-        self, input: DeleteGatewayInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteGatewayInput | _models.DeleteGatewayInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteGatewayOutput: ...
+
+    @_overload
+    def delete_gateway(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteGatewayInputDict],
     ) -> DeleteGatewayOutput:
         """
         Deletes a gateway. Before you can delete a gateway, deletion protection
@@ -908,8 +1168,6 @@ class ECSClient(Client[ECSConfig]):
         subsequent requests for it return a `GatewayNotFoundException`.
 
         Args:
-            input:
-                An instance of `DeleteGatewayInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -919,10 +1177,33 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `DeleteGatewayOutput`.
         """
-        return self._invoke(input, _models.DELETE_GATEWAY, [], plugins)
 
+    def delete_gateway(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteGatewayOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_GATEWAY, args, kwargs),
+            _models.DELETE_GATEWAY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_service(
-        self, input: DeleteServiceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteServiceInput | _models.DeleteServiceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteServiceOutput: ...
+
+    @_overload
+    def delete_service(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteServiceInputDict],
     ) -> DeleteServiceOutput:
         """
         Deletes a specified service within a cluster. You can delete a service
@@ -951,8 +1232,6 @@ class ECSClient(Client[ECSConfig]):
             service in either `ACTIVE` or `DRAINING` status, you receive an error.
 
         Args:
-            input:
-                An instance of `DeleteServiceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -962,10 +1241,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `DeleteServiceOutput`.
         """
-        return self._invoke(input, _models.DELETE_SERVICE, [], plugins)
 
+    def delete_service(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteServiceOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_SERVICE, args, kwargs),
+            _models.DELETE_SERVICE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_task_definitions(
-        self, input: DeleteTaskDefinitionsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteTaskDefinitionsInput
+        | _models.DeleteTaskDefinitionsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteTaskDefinitionsOutput: ...
+
+    @_overload
+    def delete_task_definitions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteTaskDefinitionsInputDict],
     ) -> DeleteTaskDefinitionsOutput:
         """
         Deletes one or more task definitions.
@@ -997,8 +1300,6 @@ class ECSClient(Client[ECSConfig]):
         that name.
 
         Args:
-            input:
-                An instance of `DeleteTaskDefinitionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1008,10 +1309,33 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `DeleteTaskDefinitionsOutput`.
         """
-        return self._invoke(input, _models.DELETE_TASK_DEFINITIONS, [], plugins)
 
+    def delete_task_definitions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteTaskDefinitionsOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_TASK_DEFINITIONS, args, kwargs),
+            _models.DELETE_TASK_DEFINITIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_task_set(
-        self, input: DeleteTaskSetInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteTaskSetInput | _models.DeleteTaskSetInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteTaskSetOutput: ...
+
+    @_overload
+    def delete_task_set(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteTaskSetInputDict],
     ) -> DeleteTaskSetOutput:
         """
         Deletes a specified task set within a service. This is used when a
@@ -1021,8 +1345,6 @@ class ECSClient(Client[ECSConfig]):
         in the *Amazon Elastic Container Service Developer Guide*.
 
         Args:
-            input:
-                An instance of `DeleteTaskSetInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1032,12 +1354,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `DeleteTaskSetOutput`.
         """
-        return self._invoke(input, _models.DELETE_TASK_SET, [], plugins)
 
+    def delete_task_set(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteTaskSetOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_TASK_SET, args, kwargs),
+            _models.DELETE_TASK_SET,
+            [],
+            plugins,
+        )
+
+    @_overload
     def deregister_container_instance(
         self,
-        input: DeregisterContainerInstanceInput,
+        request: _models.DeregisterContainerInstanceInput
+        | _models.DeregisterContainerInstanceInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeregisterContainerInstanceOutput: ...
+
+    @_overload
+    def deregister_container_instance(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeregisterContainerInstanceInputDict],
     ) -> DeregisterContainerInstanceOutput:
         """
         Deregisters an Amazon ECS container instance from the specified cluster.
@@ -1060,8 +1404,6 @@ class ECSClient(Client[ECSConfig]):
             when terminated).
 
         Args:
-            input:
-                An instance of `DeregisterContainerInstanceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1071,10 +1413,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `DeregisterContainerInstanceOutput`.
         """
-        return self._invoke(input, _models.DEREGISTER_CONTAINER_INSTANCE, [], plugins)
 
+    def deregister_container_instance(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeregisterContainerInstanceOutput:
+        return self._invoke(
+            self._select_input(_models.DEREGISTER_CONTAINER_INSTANCE, args, kwargs),
+            _models.DEREGISTER_CONTAINER_INSTANCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def deregister_task_definition(
-        self, input: DeregisterTaskDefinitionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeregisterTaskDefinitionInput
+        | _models.DeregisterTaskDefinitionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeregisterTaskDefinitionOutput: ...
+
+    @_overload
+    def deregister_task_definition(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeregisterTaskDefinitionInputDict],
     ) -> DeregisterTaskDefinitionOutput:
         """
         Deregisters the specified task definition by family and revision. Upon
@@ -1102,8 +1468,6 @@ class ECSClient(Client[ECSConfig]):
         [DeleteTaskDefinitions](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeleteTaskDefinitions.html).
 
         Args:
-            input:
-                An instance of `DeregisterTaskDefinitionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1113,19 +1477,39 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `DeregisterTaskDefinitionOutput`.
         """
-        return self._invoke(input, _models.DEREGISTER_TASK_DEFINITION, [], plugins)
 
+    def deregister_task_definition(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeregisterTaskDefinitionOutput:
+        return self._invoke(
+            self._select_input(_models.DEREGISTER_TASK_DEFINITION, args, kwargs),
+            _models.DEREGISTER_TASK_DEFINITION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_capacity_providers(
         self,
-        input: DescribeCapacityProvidersInput | None = None,
+        request: _models.DescribeCapacityProvidersInput
+        | _models.DescribeCapacityProvidersInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeCapacityProvidersOutput: ...
+
+    @_overload
+    def describe_capacity_providers(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeCapacityProvidersInputDict],
     ) -> DescribeCapacityProvidersOutput:
         """
         Describes one or more of your capacity providers.
 
         Args:
-            input:
-                An instance of `DescribeCapacityProvidersInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1135,12 +1519,33 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `DescribeCapacityProvidersOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_CAPACITY_PROVIDERS, [], plugins)
 
+    def describe_capacity_providers(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeCapacityProvidersOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_CAPACITY_PROVIDERS, args, kwargs),
+            _models.DESCRIBE_CAPACITY_PROVIDERS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_clusters(
         self,
-        input: DescribeClustersInput | None = None,
+        request: _models.DescribeClustersInput | _models.DescribeClustersInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeClustersOutput: ...
+
+    @_overload
+    def describe_clusters(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeClustersInputDict],
     ) -> DescribeClustersOutput:
         """
         Describes one or more of your clusters.
@@ -1150,8 +1555,6 @@ class ECSClient(Client[ECSConfig]):
         on GitHub.
 
         Args:
-            input:
-                An instance of `DescribeClustersInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1161,20 +1564,40 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `DescribeClustersOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_CLUSTERS, [], plugins)
 
+    def describe_clusters(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeClustersOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_CLUSTERS, args, kwargs),
+            _models.DESCRIBE_CLUSTERS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_container_instances(
         self,
-        input: DescribeContainerInstancesInput,
+        request: _models.DescribeContainerInstancesInput
+        | _models.DescribeContainerInstancesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeContainerInstancesOutput: ...
+
+    @_overload
+    def describe_container_instances(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeContainerInstancesInputDict],
     ) -> DescribeContainerInstancesOutput:
         """
         Describes one or more container instances. Returns metadata about each
         container instance requested.
 
         Args:
-            input:
-                An instance of `DescribeContainerInstancesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1184,17 +1607,38 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `DescribeContainerInstancesOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_CONTAINER_INSTANCES, [], plugins)
 
+    def describe_container_instances(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeContainerInstancesOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_CONTAINER_INSTANCES, args, kwargs),
+            _models.DESCRIBE_CONTAINER_INSTANCES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_daemon(
-        self, input: DescribeDaemonInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeDaemonInput | _models.DescribeDaemonInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeDaemonOutput: ...
+
+    @_overload
+    def describe_daemon(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeDaemonInputDict],
     ) -> DescribeDaemonOutput:
         """
         Describes the specified daemon.
 
         Args:
-            input:
-                An instance of `DescribeDaemonInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1204,10 +1648,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `DescribeDaemonOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_DAEMON, [], plugins)
 
+    def describe_daemon(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeDaemonOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_DAEMON, args, kwargs),
+            _models.DESCRIBE_DAEMON,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_daemon_deployments(
-        self, input: DescribeDaemonDeploymentsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeDaemonDeploymentsInput
+        | _models.DescribeDaemonDeploymentsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeDaemonDeploymentsOutput: ...
+
+    @_overload
+    def describe_daemon_deployments(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeDaemonDeploymentsInputDict],
     ) -> DescribeDaemonDeploymentsOutput:
         """
         Describes one or more of your daemon deployments.
@@ -1218,8 +1686,6 @@ class ECSClient(Client[ECSConfig]):
         rollback capabilities.
 
         Args:
-            input:
-                An instance of `DescribeDaemonDeploymentsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1229,10 +1695,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `DescribeDaemonDeploymentsOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_DAEMON_DEPLOYMENTS, [], plugins)
 
+    def describe_daemon_deployments(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeDaemonDeploymentsOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_DAEMON_DEPLOYMENTS, args, kwargs),
+            _models.DESCRIBE_DAEMON_DEPLOYMENTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_daemon_revisions(
-        self, input: DescribeDaemonRevisionsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeDaemonRevisionsInput
+        | _models.DescribeDaemonRevisionsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeDaemonRevisionsOutput: ...
+
+    @_overload
+    def describe_daemon_revisions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeDaemonRevisionsInputDict],
     ) -> DescribeDaemonRevisionsOutput:
         """
         Describes one or more of your daemon revisions.
@@ -1243,8 +1733,6 @@ class ECSClient(Client[ECSConfig]):
         revisions are immutable.
 
         Args:
-            input:
-                An instance of `DescribeDaemonRevisionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1254,12 +1742,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `DescribeDaemonRevisionsOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_DAEMON_REVISIONS, [], plugins)
 
+    def describe_daemon_revisions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeDaemonRevisionsOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_DAEMON_REVISIONS, args, kwargs),
+            _models.DESCRIBE_DAEMON_REVISIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_daemon_task_definition(
         self,
-        input: DescribeDaemonTaskDefinitionInput,
+        request: _models.DescribeDaemonTaskDefinitionInput
+        | _models.DescribeDaemonTaskDefinitionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeDaemonTaskDefinitionOutput: ...
+
+    @_overload
+    def describe_daemon_task_definition(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeDaemonTaskDefinitionInputDict],
     ) -> DescribeDaemonTaskDefinitionOutput:
         """
         Describes a daemon task definition. You can specify a `family` and
@@ -1268,8 +1778,6 @@ class ECSClient(Client[ECSConfig]):
         revision in that family.
 
         Args:
-            input:
-                An instance of `DescribeDaemonTaskDefinitionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1279,12 +1787,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `DescribeDaemonTaskDefinitionOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_DAEMON_TASK_DEFINITION, [], plugins)
 
+    def describe_daemon_task_definition(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeDaemonTaskDefinitionOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_DAEMON_TASK_DEFINITION, args, kwargs),
+            _models.DESCRIBE_DAEMON_TASK_DEFINITION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_express_gateway_service(
         self,
-        input: DescribeExpressGatewayServiceInput,
+        request: _models.DescribeExpressGatewayServiceInput
+        | _models.DescribeExpressGatewayServiceInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeExpressGatewayServiceOutput: ...
+
+    @_overload
+    def describe_express_gateway_service(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeExpressGatewayServiceInputDict],
     ) -> DescribeExpressGatewayServiceOutput:
         """
         Retrieves detailed information about an Express service, including
@@ -1299,8 +1829,6 @@ class ECSClient(Client[ECSConfig]):
         resource tags.
 
         Args:
-            input:
-                An instance of `DescribeExpressGatewayServiceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1310,20 +1838,39 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `DescribeExpressGatewayServiceOutput`.
         """
+
+    def describe_express_gateway_service(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeExpressGatewayServiceOutput:
         return self._invoke(
-            input, _models.DESCRIBE_EXPRESS_GATEWAY_SERVICE, [], plugins
+            self._select_input(_models.DESCRIBE_EXPRESS_GATEWAY_SERVICE, args, kwargs),
+            _models.DESCRIBE_EXPRESS_GATEWAY_SERVICE,
+            [],
+            plugins,
         )
 
+    @_overload
     def describe_gateway(
-        self, input: DescribeGatewayInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeGatewayInput | _models.DescribeGatewayInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeGatewayOutput: ...
+
+    @_overload
+    def describe_gateway(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeGatewayInputDict],
     ) -> DescribeGatewayOutput:
         """
         Describes a gateway, including its configuration, status, and the
         type-specific infrastructure settings that it uses.
 
         Args:
-            input:
-                An instance of `DescribeGatewayInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1333,10 +1880,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `DescribeGatewayOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_GATEWAY, [], plugins)
 
+    def describe_gateway(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeGatewayOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_GATEWAY, args, kwargs),
+            _models.DESCRIBE_GATEWAY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_gateway_resources(
-        self, input: DescribeGatewayResourcesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeGatewayResourcesInput
+        | _models.DescribeGatewayResourcesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeGatewayResourcesOutput: ...
+
+    @_overload
+    def describe_gateway_resources(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeGatewayResourcesInputDict],
     ) -> DescribeGatewayResourcesOutput:
         """
         Returns the infrastructure that a gateway has created and manages, so
@@ -1349,8 +1920,6 @@ class ECSClient(Client[ECSConfig]):
         The results are paginated.
 
         Args:
-            input:
-                An instance of `DescribeGatewayResourcesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1360,10 +1929,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `DescribeGatewayResourcesOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_GATEWAY_RESOURCES, [], plugins)
 
+    def describe_gateway_resources(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeGatewayResourcesOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_GATEWAY_RESOURCES, args, kwargs),
+            _models.DESCRIBE_GATEWAY_RESOURCES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_gateway_route(
-        self, input: DescribeGatewayRouteInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeGatewayRouteInput
+        | _models.DescribeGatewayRouteInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeGatewayRouteOutput: ...
+
+    @_overload
+    def describe_gateway_route(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeGatewayRouteInputDict],
     ) -> DescribeGatewayRouteOutput:
         """
         Describes a gateway route, including its status, the service it routes
@@ -1371,8 +1964,6 @@ class ECSClient(Client[ECSConfig]):
         groups and listener rules, that the gateway manages for it.
 
         Args:
-            input:
-                An instance of `DescribeGatewayRouteInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1382,12 +1973,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `DescribeGatewayRouteOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_GATEWAY_ROUTE, [], plugins)
 
+    def describe_gateway_route(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeGatewayRouteOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_GATEWAY_ROUTE, args, kwargs),
+            _models.DESCRIBE_GATEWAY_ROUTE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_service_deployments(
         self,
-        input: DescribeServiceDeploymentsInput,
+        request: _models.DescribeServiceDeploymentsInput
+        | _models.DescribeServiceDeploymentsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeServiceDeploymentsOutput: ...
+
+    @_overload
+    def describe_service_deployments(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeServiceDeploymentsInputDict],
     ) -> DescribeServiceDeploymentsOutput:
         """
         Describes one or more of your service deployments.
@@ -1398,8 +2011,6 @@ class ECSClient(Client[ECSConfig]):
         deployments](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-deployment.html).
 
         Args:
-            input:
-                An instance of `DescribeServiceDeploymentsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1409,10 +2020,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `DescribeServiceDeploymentsOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_SERVICE_DEPLOYMENTS, [], plugins)
 
+    def describe_service_deployments(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeServiceDeploymentsOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_SERVICE_DEPLOYMENTS, args, kwargs),
+            _models.DESCRIBE_SERVICE_DEPLOYMENTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_service_revisions(
-        self, input: DescribeServiceRevisionsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeServiceRevisionsInput
+        | _models.DescribeServiceRevisionsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeServiceRevisionsOutput: ...
+
+    @_overload
+    def describe_service_revisions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeServiceRevisionsInputDict],
     ) -> DescribeServiceRevisionsOutput:
         """
         Describes one or more service revisions.
@@ -1427,8 +2062,6 @@ class ECSClient(Client[ECSConfig]):
         25, 2024.
 
         Args:
-            input:
-                An instance of `DescribeServiceRevisionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1438,17 +2071,38 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `DescribeServiceRevisionsOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_SERVICE_REVISIONS, [], plugins)
 
+    def describe_service_revisions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeServiceRevisionsOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_SERVICE_REVISIONS, args, kwargs),
+            _models.DESCRIBE_SERVICE_REVISIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_services(
-        self, input: DescribeServicesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeServicesInput | _models.DescribeServicesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeServicesOutput: ...
+
+    @_overload
+    def describe_services(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeServicesInputDict],
     ) -> DescribeServicesOutput:
         """
         Describes the specified services running in your cluster.
 
         Args:
-            input:
-                An instance of `DescribeServicesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1458,10 +2112,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `DescribeServicesOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_SERVICES, [], plugins)
 
+    def describe_services(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeServicesOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_SERVICES, args, kwargs),
+            _models.DESCRIBE_SERVICES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_task_definition(
-        self, input: DescribeTaskDefinitionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeTaskDefinitionInput
+        | _models.DescribeTaskDefinitionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeTaskDefinitionOutput: ...
+
+    @_overload
+    def describe_task_definition(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeTaskDefinitionInputDict],
     ) -> DescribeTaskDefinitionOutput:
         """
         Describes a task definition. You can specify a `family` and `revision`
@@ -1473,8 +2151,6 @@ class ECSClient(Client[ECSConfig]):
             or service references them.
 
         Args:
-            input:
-                An instance of `DescribeTaskDefinitionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1484,10 +2160,33 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `DescribeTaskDefinitionOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_TASK_DEFINITION, [], plugins)
 
+    def describe_task_definition(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeTaskDefinitionOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_TASK_DEFINITION, args, kwargs),
+            _models.DESCRIBE_TASK_DEFINITION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_tasks(
-        self, input: DescribeTasksInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeTasksInput | _models.DescribeTasksInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeTasksOutput: ...
+
+    @_overload
+    def describe_tasks(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeTasksInputDict],
     ) -> DescribeTasksOutput:
         """
         Describes a specified task or tasks.
@@ -1501,8 +2200,6 @@ class ECSClient(Client[ECSConfig]):
         the response.
 
         Args:
-            input:
-                An instance of `DescribeTasksInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1512,10 +2209,33 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `DescribeTasksOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_TASKS, [], plugins)
 
+    def describe_tasks(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeTasksOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_TASKS, args, kwargs),
+            _models.DESCRIBE_TASKS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_task_sets(
-        self, input: DescribeTaskSetsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeTaskSetsInput | _models.DescribeTaskSetsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeTaskSetsOutput: ...
+
+    @_overload
+    def describe_task_sets(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeTaskSetsInputDict],
     ) -> DescribeTaskSetsOutput:
         """
         Describes the task sets in the specified cluster and service. This is
@@ -1525,8 +2245,6 @@ class ECSClient(Client[ECSConfig]):
         in the *Amazon Elastic Container Service Developer Guide*.
 
         Args:
-            input:
-                An instance of `DescribeTaskSetsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1536,12 +2254,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `DescribeTaskSetsOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_TASK_SETS, [], plugins)
 
+    def describe_task_sets(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeTaskSetsOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_TASK_SETS, args, kwargs),
+            _models.DESCRIBE_TASK_SETS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def disassociate_gateway_from_cluster(
         self,
-        input: DisassociateGatewayFromClusterInput,
+        request: _models.DisassociateGatewayFromClusterInput
+        | _models.DisassociateGatewayFromClusterInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DisassociateGatewayFromClusterOutput: ...
+
+    @_overload
+    def disassociate_gateway_from_cluster(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DisassociateGatewayFromClusterInputDict],
     ) -> DisassociateGatewayFromClusterOutput:
         """
         Removes the association between a gateway and an Amazon ECS cluster. The
@@ -1552,8 +2292,6 @@ class ECSClient(Client[ECSConfig]):
         changes are made until the affected services are updated.
 
         Args:
-            input:
-                An instance of `DisassociateGatewayFromClusterInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1563,14 +2301,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `DisassociateGatewayFromClusterOutput`.
         """
+
+    def disassociate_gateway_from_cluster(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DisassociateGatewayFromClusterOutput:
         return self._invoke(
-            input, _models.DISASSOCIATE_GATEWAY_FROM_CLUSTER, [], plugins
+            self._select_input(_models.DISASSOCIATE_GATEWAY_FROM_CLUSTER, args, kwargs),
+            _models.DISASSOCIATE_GATEWAY_FROM_CLUSTER,
+            [],
+            plugins,
         )
 
+    @_overload
     def discover_poll_endpoint(
         self,
-        input: DiscoverPollEndpointInput | None = None,
+        request: _models.DiscoverPollEndpointInput
+        | _models.DiscoverPollEndpointInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DiscoverPollEndpointOutput: ...
+
+    @_overload
+    def discover_poll_endpoint(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DiscoverPollEndpointInputDict],
     ) -> DiscoverPollEndpointOutput:
         """
         Note:
@@ -1580,8 +2338,6 @@ class ECSClient(Client[ECSConfig]):
         Returns an endpoint for the Amazon ECS agent to poll for updates.
 
         Args:
-            input:
-                An instance of `DiscoverPollEndpointInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1591,10 +2347,33 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `DiscoverPollEndpointOutput`.
         """
-        return self._invoke(input, _models.DISCOVER_POLL_ENDPOINT, [], plugins)
 
+    def discover_poll_endpoint(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DiscoverPollEndpointOutput:
+        return self._invoke(
+            self._select_input(_models.DISCOVER_POLL_ENDPOINT, args, kwargs),
+            _models.DISCOVER_POLL_ENDPOINT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def execute_command(
-        self, input: ExecuteCommandInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ExecuteCommandInput | _models.ExecuteCommandInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ExecuteCommandOutput: ...
+
+    @_overload
+    def execute_command(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ExecuteCommandInputDict],
     ) -> ExecuteCommandOutput:
         """
         Runs a command remotely on a container within a task.
@@ -1610,8 +2389,6 @@ class ECSClient(Client[ECSConfig]):
         in the *Amazon ECS Developer Guide*.
 
         Args:
-            input:
-                An instance of `ExecuteCommandInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1621,17 +2398,38 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `ExecuteCommandOutput`.
         """
-        return self._invoke(input, _models.EXECUTE_COMMAND, [], plugins)
 
+    def execute_command(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ExecuteCommandOutput:
+        return self._invoke(
+            self._select_input(_models.EXECUTE_COMMAND, args, kwargs),
+            _models.EXECUTE_COMMAND,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_task_protection(
-        self, input: GetTaskProtectionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetTaskProtectionInput | _models.GetTaskProtectionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetTaskProtectionOutput: ...
+
+    @_overload
+    def get_task_protection(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetTaskProtectionInputDict],
     ) -> GetTaskProtectionOutput:
         """
         Retrieves the protection status of tasks in an Amazon ECS service.
 
         Args:
-            input:
-                An instance of `GetTaskProtectionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1641,19 +2439,39 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `GetTaskProtectionOutput`.
         """
-        return self._invoke(input, _models.GET_TASK_PROTECTION, [], plugins)
 
+    def get_task_protection(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetTaskProtectionOutput:
+        return self._invoke(
+            self._select_input(_models.GET_TASK_PROTECTION, args, kwargs),
+            _models.GET_TASK_PROTECTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_account_settings(
         self,
-        input: ListAccountSettingsInput | None = None,
+        request: _models.ListAccountSettingsInput
+        | _models.ListAccountSettingsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListAccountSettingsOutput: ...
+
+    @_overload
+    def list_account_settings(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListAccountSettingsInputDict],
     ) -> ListAccountSettingsOutput:
         """
         Lists the account settings for a specified principal.
 
         Args:
-            input:
-                An instance of `ListAccountSettingsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1663,10 +2481,33 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `ListAccountSettingsOutput`.
         """
-        return self._invoke(input, _models.LIST_ACCOUNT_SETTINGS, [], plugins)
 
+    def list_account_settings(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListAccountSettingsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_ACCOUNT_SETTINGS, args, kwargs),
+            _models.LIST_ACCOUNT_SETTINGS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_attributes(
-        self, input: ListAttributesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListAttributesInput | _models.ListAttributesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListAttributesOutput: ...
+
+    @_overload
+    def list_attributes(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListAttributesInputDict],
     ) -> ListAttributesOutput:
         """
         Lists the attributes for Amazon ECS resources within a specified target
@@ -1679,8 +2520,6 @@ class ECSClient(Client[ECSConfig]):
         running a Linux AMI (`ecs.os-type=linux`).
 
         Args:
-            input:
-                An instance of `ListAttributesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1690,19 +2529,38 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `ListAttributesOutput`.
         """
-        return self._invoke(input, _models.LIST_ATTRIBUTES, [], plugins)
 
+    def list_attributes(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListAttributesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_ATTRIBUTES, args, kwargs),
+            _models.LIST_ATTRIBUTES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_clusters(
         self,
-        input: ListClustersInput | None = None,
+        request: _models.ListClustersInput | _models.ListClustersInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListClustersOutput: ...
+
+    @_overload
+    def list_clusters(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListClustersInputDict],
     ) -> ListClustersOutput:
         """
         Returns a list of existing clusters.
 
         Args:
-            input:
-                An instance of `ListClustersInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1712,12 +2570,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `ListClustersOutput`.
         """
-        return self._invoke(input, _models.LIST_CLUSTERS, [], plugins)
 
+    def list_clusters(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListClustersOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_CLUSTERS, args, kwargs),
+            _models.LIST_CLUSTERS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_container_instances(
         self,
-        input: ListContainerInstancesInput | None = None,
+        request: _models.ListContainerInstancesInput
+        | _models.ListContainerInstancesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListContainerInstancesOutput: ...
+
+    @_overload
+    def list_container_instances(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListContainerInstancesInputDict],
     ) -> ListContainerInstancesOutput:
         """
         Returns a list of container instances in a specified cluster. You can
@@ -1728,8 +2608,6 @@ class ECSClient(Client[ECSConfig]):
         in the *Amazon Elastic Container Service Developer Guide*.
 
         Args:
-            input:
-                An instance of `ListContainerInstancesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1739,18 +2617,40 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `ListContainerInstancesOutput`.
         """
-        return self._invoke(input, _models.LIST_CONTAINER_INSTANCES, [], plugins)
 
+    def list_container_instances(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListContainerInstancesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_CONTAINER_INSTANCES, args, kwargs),
+            _models.LIST_CONTAINER_INSTANCES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_daemon_deployments(
-        self, input: ListDaemonDeploymentsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListDaemonDeploymentsInput
+        | _models.ListDaemonDeploymentsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListDaemonDeploymentsOutput: ...
+
+    @_overload
+    def list_daemon_deployments(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListDaemonDeploymentsInputDict],
     ) -> ListDaemonDeploymentsOutput:
         """
         Returns a list of daemon deployments for a specified daemon. You can
         filter the results by status or creation time.
 
         Args:
-            input:
-                An instance of `ListDaemonDeploymentsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1760,18 +2660,39 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `ListDaemonDeploymentsOutput`.
         """
-        return self._invoke(input, _models.LIST_DAEMON_DEPLOYMENTS, [], plugins)
 
+    def list_daemon_deployments(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListDaemonDeploymentsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_DAEMON_DEPLOYMENTS, args, kwargs),
+            _models.LIST_DAEMON_DEPLOYMENTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_daemons(
-        self, input: ListDaemonsInput | None = None, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListDaemonsInput | _models.ListDaemonsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListDaemonsOutput: ...
+
+    @_overload
+    def list_daemons(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListDaemonsInputDict],
     ) -> ListDaemonsOutput:
         """
         Returns a list of daemons. You can filter the results by cluster or
         capacity provider.
 
         Args:
-            input:
-                An instance of `ListDaemonsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1781,12 +2702,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `ListDaemonsOutput`.
         """
-        return self._invoke(input, _models.LIST_DAEMONS, [], plugins)
 
+    def list_daemons(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListDaemonsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_DAEMONS, args, kwargs),
+            _models.LIST_DAEMONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_daemon_task_definitions(
         self,
-        input: ListDaemonTaskDefinitionsInput | None = None,
+        request: _models.ListDaemonTaskDefinitionsInput
+        | _models.ListDaemonTaskDefinitionsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListDaemonTaskDefinitionsOutput: ...
+
+    @_overload
+    def list_daemon_task_definitions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListDaemonTaskDefinitionsInputDict],
     ) -> ListDaemonTaskDefinitionsOutput:
         """
         Returns a list of daemon task definitions that are registered to your
@@ -1794,8 +2737,6 @@ class ECSClient(Client[ECSConfig]):
         find daemon task definitions that match your criteria.
 
         Args:
-            input:
-                An instance of `ListDaemonTaskDefinitionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1805,12 +2746,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `ListDaemonTaskDefinitionsOutput`.
         """
-        return self._invoke(input, _models.LIST_DAEMON_TASK_DEFINITIONS, [], plugins)
 
+    def list_daemon_task_definitions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListDaemonTaskDefinitionsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_DAEMON_TASK_DEFINITIONS, args, kwargs),
+            _models.LIST_DAEMON_TASK_DEFINITIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_gateway_cluster_associations(
         self,
-        input: ListGatewayClusterAssociationsInput | None = None,
+        request: _models.ListGatewayClusterAssociationsInput
+        | _models.ListGatewayClusterAssociationsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListGatewayClusterAssociationsOutput: ...
+
+    @_overload
+    def list_gateway_cluster_associations(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListGatewayClusterAssociationsInputDict],
     ) -> ListGatewayClusterAssociationsOutput:
         """
         Returns a list of the associations between gateways and clusters. You
@@ -1819,8 +2782,6 @@ class ECSClient(Client[ECSConfig]):
         operation returns quickly and successfully.
 
         Args:
-            input:
-                An instance of `ListGatewayClusterAssociationsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1830,14 +2791,33 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `ListGatewayClusterAssociationsOutput`.
         """
+
+    def list_gateway_cluster_associations(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListGatewayClusterAssociationsOutput:
         return self._invoke(
-            input, _models.LIST_GATEWAY_CLUSTER_ASSOCIATIONS, [], plugins
+            self._select_input(_models.LIST_GATEWAY_CLUSTER_ASSOCIATIONS, args, kwargs),
+            _models.LIST_GATEWAY_CLUSTER_ASSOCIATIONS,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_gateway_routes(
         self,
-        input: ListGatewayRoutesInput | None = None,
+        request: _models.ListGatewayRoutesInput | _models.ListGatewayRoutesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListGatewayRoutesOutput: ...
+
+    @_overload
+    def list_gateway_routes(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListGatewayRoutesInputDict],
     ) -> ListGatewayRoutesOutput:
         """
         Returns a list of gateway routes. A gateway route represents the
@@ -1848,8 +2828,6 @@ class ECSClient(Client[ECSConfig]):
         operation returns quickly and successfully.
 
         Args:
-            input:
-                An instance of `ListGatewayRoutesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1859,12 +2837,33 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `ListGatewayRoutesOutput`.
         """
-        return self._invoke(input, _models.LIST_GATEWAY_ROUTES, [], plugins)
 
+    def list_gateway_routes(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListGatewayRoutesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_GATEWAY_ROUTES, args, kwargs),
+            _models.LIST_GATEWAY_ROUTES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_gateways(
         self,
-        input: ListGatewaysInput | None = None,
+        request: _models.ListGatewaysInput | _models.ListGatewaysInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListGatewaysOutput: ...
+
+    @_overload
+    def list_gateways(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListGatewaysInputDict],
     ) -> ListGatewaysOutput:
         """
         Returns a list of gateways in your account. You can filter the results
@@ -1873,8 +2872,6 @@ class ECSClient(Client[ECSConfig]):
         successfully.
 
         Args:
-            input:
-                An instance of `ListGatewaysInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1884,10 +2881,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `ListGatewaysOutput`.
         """
-        return self._invoke(input, _models.LIST_GATEWAYS, [], plugins)
 
+    def list_gateways(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListGatewaysOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_GATEWAYS, args, kwargs),
+            _models.LIST_GATEWAYS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_service_deployments(
-        self, input: ListServiceDeploymentsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListServiceDeploymentsInput
+        | _models.ListServiceDeploymentsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListServiceDeploymentsOutput: ...
+
+    @_overload
+    def list_service_deployments(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListServiceDeploymentsInputDict],
     ) -> ListServiceDeploymentsOutput:
         """
         This operation lists all the service deployments that meet the specified
@@ -1901,8 +2922,6 @@ class ECSClient(Client[ECSConfig]):
         [DescribeServiceRevisions](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeServiceRevisions.html).
 
         Args:
-            input:
-                An instance of `ListServiceDeploymentsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1912,20 +2931,39 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `ListServiceDeploymentsOutput`.
         """
-        return self._invoke(input, _models.LIST_SERVICE_DEPLOYMENTS, [], plugins)
 
+    def list_service_deployments(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListServiceDeploymentsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_SERVICE_DEPLOYMENTS, args, kwargs),
+            _models.LIST_SERVICE_DEPLOYMENTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_services(
         self,
-        input: ListServicesInput | None = None,
+        request: _models.ListServicesInput | _models.ListServicesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListServicesOutput: ...
+
+    @_overload
+    def list_services(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListServicesInputDict],
     ) -> ListServicesOutput:
         """
         Returns a list of services. You can filter the results by cluster,
         launch type, and scheduling strategy.
 
         Args:
-            input:
-                An instance of `ListServicesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1935,10 +2973,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `ListServicesOutput`.
         """
-        return self._invoke(input, _models.LIST_SERVICES, [], plugins)
 
+    def list_services(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListServicesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_SERVICES, args, kwargs),
+            _models.LIST_SERVICES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_services_by_namespace(
-        self, input: ListServicesByNamespaceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListServicesByNamespaceInput
+        | _models.ListServicesByNamespaceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListServicesByNamespaceOutput: ...
+
+    @_overload
+    def list_services_by_namespace(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListServicesByNamespaceInputDict],
     ) -> ListServicesByNamespaceOutput:
         """
         This operation lists all of the services that are associated with a
@@ -1951,8 +3013,6 @@ class ECSClient(Client[ECSConfig]):
         in the *Amazon Elastic Container Service Developer Guide*.
 
         Args:
-            input:
-                An instance of `ListServicesByNamespaceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1962,17 +3022,39 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `ListServicesByNamespaceOutput`.
         """
-        return self._invoke(input, _models.LIST_SERVICES_BY_NAMESPACE, [], plugins)
 
+    def list_services_by_namespace(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListServicesByNamespaceOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_SERVICES_BY_NAMESPACE, args, kwargs),
+            _models.LIST_SERVICES_BY_NAMESPACE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_tags_for_resource(
-        self, input: ListTagsForResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListTagsForResourceInput
+        | _models.ListTagsForResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListTagsForResourceOutput: ...
+
+    @_overload
+    def list_tags_for_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListTagsForResourceInputDict],
     ) -> ListTagsForResourceOutput:
         """
         List the tags for an Amazon ECS resource.
 
         Args:
-            input:
-                An instance of `ListTagsForResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1982,12 +3064,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `ListTagsForResourceOutput`.
         """
-        return self._invoke(input, _models.LIST_TAGS_FOR_RESOURCE, [], plugins)
 
+    def list_tags_for_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListTagsForResourceOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_TAGS_FOR_RESOURCE, args, kwargs),
+            _models.LIST_TAGS_FOR_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_task_definition_families(
         self,
-        input: ListTaskDefinitionFamiliesInput | None = None,
+        request: _models.ListTaskDefinitionFamiliesInput
+        | _models.ListTaskDefinitionFamiliesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListTaskDefinitionFamiliesOutput: ...
+
+    @_overload
+    def list_task_definition_families(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListTaskDefinitionFamiliesInputDict],
     ) -> ListTaskDefinitionFamiliesOutput:
         """
         Returns a list of task definition families that are registered to your
@@ -2000,8 +3104,6 @@ class ECSClient(Client[ECSConfig]):
         parameter.
 
         Args:
-            input:
-                An instance of `ListTaskDefinitionFamiliesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2011,12 +3113,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `ListTaskDefinitionFamiliesOutput`.
         """
-        return self._invoke(input, _models.LIST_TASK_DEFINITION_FAMILIES, [], plugins)
 
+    def list_task_definition_families(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListTaskDefinitionFamiliesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_TASK_DEFINITION_FAMILIES, args, kwargs),
+            _models.LIST_TASK_DEFINITION_FAMILIES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_task_definitions(
         self,
-        input: ListTaskDefinitionsInput | None = None,
+        request: _models.ListTaskDefinitionsInput
+        | _models.ListTaskDefinitionsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListTaskDefinitionsOutput: ...
+
+    @_overload
+    def list_task_definitions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListTaskDefinitionsInputDict],
     ) -> ListTaskDefinitionsOutput:
         """
         Returns a list of task definitions that are registered to your account.
@@ -2024,8 +3148,6 @@ class ECSClient(Client[ECSConfig]):
         parameter or by status with the `status` parameter.
 
         Args:
-            input:
-                An instance of `ListTaskDefinitionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2035,10 +3157,33 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `ListTaskDefinitionsOutput`.
         """
-        return self._invoke(input, _models.LIST_TASK_DEFINITIONS, [], plugins)
 
+    def list_task_definitions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListTaskDefinitionsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_TASK_DEFINITIONS, args, kwargs),
+            _models.LIST_TASK_DEFINITIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_tasks(
-        self, input: ListTasksInput | None = None, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListTasksInput | _models.ListTasksInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListTasksOutput: ...
+
+    @_overload
+    def list_tasks(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListTasksInputDict],
     ) -> ListTasksOutput:
         """
         Returns a list of tasks. You can filter the results by cluster, task
@@ -2048,8 +3193,6 @@ class ECSClient(Client[ECSConfig]):
         Recently stopped tasks might appear in the returned results.
 
         Args:
-            input:
-                An instance of `ListTasksInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2059,10 +3202,33 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `ListTasksOutput`.
         """
-        return self._invoke(input, _models.LIST_TASKS, [], plugins)
 
+    def list_tasks(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListTasksOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_TASKS, args, kwargs),
+            _models.LIST_TASKS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_account_setting(
-        self, input: PutAccountSettingInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutAccountSettingInput | _models.PutAccountSettingInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutAccountSettingOutput: ...
+
+    @_overload
+    def put_account_setting(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutAccountSettingInputDict],
     ) -> PutAccountSettingOutput:
         """
         Modifies an account setting. Account settings are set on a per-Region
@@ -2075,8 +3241,6 @@ class ECSClient(Client[ECSConfig]):
         in the *Amazon Elastic Container Service Developer Guide*.
 
         Args:
-            input:
-                An instance of `PutAccountSettingInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2086,10 +3250,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `PutAccountSettingOutput`.
         """
-        return self._invoke(input, _models.PUT_ACCOUNT_SETTING, [], plugins)
 
+    def put_account_setting(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutAccountSettingOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_ACCOUNT_SETTING, args, kwargs),
+            _models.PUT_ACCOUNT_SETTING,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_account_setting_default(
-        self, input: PutAccountSettingDefaultInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutAccountSettingDefaultInput
+        | _models.PutAccountSettingDefaultInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutAccountSettingDefaultOutput: ...
+
+    @_overload
+    def put_account_setting_default(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutAccountSettingDefaultInputDict],
     ) -> PutAccountSettingDefaultOutput:
         """
         Modifies an account setting for all users on an account for whom no
@@ -2097,8 +3285,6 @@ class ECSClient(Client[ECSConfig]):
         on a per-Region basis.
 
         Args:
-            input:
-                An instance of `PutAccountSettingDefaultInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2108,10 +3294,33 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `PutAccountSettingDefaultOutput`.
         """
-        return self._invoke(input, _models.PUT_ACCOUNT_SETTING_DEFAULT, [], plugins)
 
+    def put_account_setting_default(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutAccountSettingDefaultOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_ACCOUNT_SETTING_DEFAULT, args, kwargs),
+            _models.PUT_ACCOUNT_SETTING_DEFAULT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_attributes(
-        self, input: PutAttributesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutAttributesInput | _models.PutAttributesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutAttributesOutput: ...
+
+    @_overload
+    def put_attributes(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutAttributesInputDict],
     ) -> PutAttributesOutput:
         """
         Create or update an attribute on an Amazon ECS resource. If the
@@ -2123,8 +3332,6 @@ class ECSClient(Client[ECSConfig]):
         in the *Amazon Elastic Container Service Developer Guide*.
 
         Args:
-            input:
-                An instance of `PutAttributesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2134,12 +3341,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `PutAttributesOutput`.
         """
-        return self._invoke(input, _models.PUT_ATTRIBUTES, [], plugins)
 
+    def put_attributes(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutAttributesOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_ATTRIBUTES, args, kwargs),
+            _models.PUT_ATTRIBUTES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_cluster_capacity_providers(
         self,
-        input: PutClusterCapacityProvidersInput,
+        request: _models.PutClusterCapacityProvidersInput
+        | _models.PutClusterCapacityProvidersInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> PutClusterCapacityProvidersOutput: ...
+
+    @_overload
+    def put_cluster_capacity_providers(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutClusterCapacityProvidersInputDict],
     ) -> PutClusterCapacityProvidersOutput:
         """
         Modifies the available capacity providers and the default capacity
@@ -2167,8 +3396,6 @@ class ECSClient(Client[ECSConfig]):
         available only within the specified cluster.
 
         Args:
-            input:
-                An instance of `PutClusterCapacityProvidersInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2178,12 +3405,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `PutClusterCapacityProvidersOutput`.
         """
-        return self._invoke(input, _models.PUT_CLUSTER_CAPACITY_PROVIDERS, [], plugins)
 
+    def put_cluster_capacity_providers(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutClusterCapacityProvidersOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_CLUSTER_CAPACITY_PROVIDERS, args, kwargs),
+            _models.PUT_CLUSTER_CAPACITY_PROVIDERS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def register_container_instance(
         self,
-        input: RegisterContainerInstanceInput | None = None,
+        request: _models.RegisterContainerInstanceInput
+        | _models.RegisterContainerInstanceInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> RegisterContainerInstanceOutput: ...
+
+    @_overload
+    def register_container_instance(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RegisterContainerInstanceInputDict],
     ) -> RegisterContainerInstanceOutput:
         """
         Note:
@@ -2194,8 +3443,6 @@ class ECSClient(Client[ECSConfig]):
         becomes available to place containers on.
 
         Args:
-            input:
-                An instance of `RegisterContainerInstanceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2205,12 +3452,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `RegisterContainerInstanceOutput`.
         """
-        return self._invoke(input, _models.REGISTER_CONTAINER_INSTANCE, [], plugins)
 
+    def register_container_instance(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RegisterContainerInstanceOutput:
+        return self._invoke(
+            self._select_input(_models.REGISTER_CONTAINER_INSTANCE, args, kwargs),
+            _models.REGISTER_CONTAINER_INSTANCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def register_daemon_task_definition(
         self,
-        input: RegisterDaemonTaskDefinitionInput,
+        request: _models.RegisterDaemonTaskDefinitionInput
+        | _models.RegisterDaemonTaskDefinitionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> RegisterDaemonTaskDefinitionOutput: ...
+
+    @_overload
+    def register_daemon_task_definition(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RegisterDaemonTaskDefinitionInputDict],
     ) -> RegisterDaemonTaskDefinitionOutput:
         """
         Registers a new daemon task definition from the supplied `family` and
@@ -2230,8 +3499,6 @@ class ECSClient(Client[ECSConfig]):
         you register it.
 
         Args:
-            input:
-                An instance of `RegisterDaemonTaskDefinitionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2241,10 +3508,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `RegisterDaemonTaskDefinitionOutput`.
         """
-        return self._invoke(input, _models.REGISTER_DAEMON_TASK_DEFINITION, [], plugins)
 
+    def register_daemon_task_definition(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RegisterDaemonTaskDefinitionOutput:
+        return self._invoke(
+            self._select_input(_models.REGISTER_DAEMON_TASK_DEFINITION, args, kwargs),
+            _models.REGISTER_DAEMON_TASK_DEFINITION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def register_task_definition(
-        self, input: RegisterTaskDefinitionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RegisterTaskDefinitionInput
+        | _models.RegisterTaskDefinitionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RegisterTaskDefinitionOutput: ...
+
+    @_overload
+    def register_task_definition(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RegisterTaskDefinitionInputDict],
     ) -> RegisterTaskDefinitionOutput:
         """
         Registers a new task definition from the supplied `family` and
@@ -2273,8 +3564,6 @@ class ECSClient(Client[ECSConfig]):
         in the *Amazon Elastic Container Service Developer Guide*.
 
         Args:
-            input:
-                An instance of `RegisterTaskDefinitionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2284,10 +3573,33 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `RegisterTaskDefinitionOutput`.
         """
-        return self._invoke(input, _models.REGISTER_TASK_DEFINITION, [], plugins)
 
+    def register_task_definition(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RegisterTaskDefinitionOutput:
+        return self._invoke(
+            self._select_input(_models.REGISTER_TASK_DEFINITION, args, kwargs),
+            _models.REGISTER_TASK_DEFINITION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def run_task(
-        self, input: RunTaskInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RunTaskInput | _models.RunTaskInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RunTaskOutput: ...
+
+    @_overload
+    def run_task(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RunTaskInputDict],
     ) -> RunTaskOutput:
         """
         Starts a new task using the specified task definition.
@@ -2356,8 +3668,6 @@ class ECSClient(Client[ECSConfig]):
         quotas](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-quotas.html).
 
         Args:
-            input:
-                An instance of `RunTaskInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2367,10 +3677,33 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `RunTaskOutput`.
         """
-        return self._invoke(input, _models.RUN_TASK, [], plugins)
 
+    def run_task(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RunTaskOutput:
+        return self._invoke(
+            self._select_input(_models.RUN_TASK, args, kwargs),
+            _models.RUN_TASK,
+            [],
+            plugins,
+        )
+
+    @_overload
     def start_task(
-        self, input: StartTaskInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StartTaskInput | _models.StartTaskInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StartTaskOutput: ...
+
+    @_overload
+    def start_task(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartTaskInputDict],
     ) -> StartTaskOutput:
         """
         Starts a new task from the specified task definition on the specified
@@ -2396,8 +3729,6 @@ class ECSClient(Client[ECSConfig]):
         in the *Amazon Elastic Container Service Developer Guide*.
 
         Args:
-            input:
-                An instance of `StartTaskInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2407,10 +3738,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `StartTaskOutput`.
         """
-        return self._invoke(input, _models.START_TASK, [], plugins)
 
+    def start_task(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StartTaskOutput:
+        return self._invoke(
+            self._select_input(_models.START_TASK, args, kwargs),
+            _models.START_TASK,
+            [],
+            plugins,
+        )
+
+    @_overload
     def stop_service_deployment(
-        self, input: StopServiceDeploymentInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StopServiceDeploymentInput
+        | _models.StopServiceDeploymentInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StopServiceDeploymentOutput: ...
+
+    @_overload
+    def stop_service_deployment(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StopServiceDeploymentInputDict],
     ) -> StopServiceDeploymentOutput:
         """
         Stops an ongoing service deployment.
@@ -2428,8 +3783,6 @@ class ECSClient(Client[ECSConfig]):
         in the *Amazon Elastic Container Service Developer Guide*.
 
         Args:
-            input:
-                An instance of `StopServiceDeploymentInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2439,10 +3792,33 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `StopServiceDeploymentOutput`.
         """
-        return self._invoke(input, _models.STOP_SERVICE_DEPLOYMENT, [], plugins)
 
+    def stop_service_deployment(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StopServiceDeploymentOutput:
+        return self._invoke(
+            self._select_input(_models.STOP_SERVICE_DEPLOYMENT, args, kwargs),
+            _models.STOP_SERVICE_DEPLOYMENT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def stop_task(
-        self, input: StopTaskInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StopTaskInput | _models.StopTaskInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StopTaskOutput: ...
+
+    @_overload
+    def stop_task(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StopTaskInputDict],
     ) -> StopTaskOutput:
         """
         Stops a running task. Any tags associated with the task will be deleted.
@@ -2469,8 +3845,6 @@ class ECSClient(Client[ECSConfig]):
             in the *Amazon Elastic Container Service Developer Guide*.
 
         Args:
-            input:
-                An instance of `StopTaskInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2480,12 +3854,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `StopTaskOutput`.
         """
-        return self._invoke(input, _models.STOP_TASK, [], plugins)
 
+    def stop_task(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StopTaskOutput:
+        return self._invoke(
+            self._select_input(_models.STOP_TASK, args, kwargs),
+            _models.STOP_TASK,
+            [],
+            plugins,
+        )
+
+    @_overload
     def submit_attachment_state_changes(
         self,
-        input: SubmitAttachmentStateChangesInput,
+        request: _models.SubmitAttachmentStateChangesInput
+        | _models.SubmitAttachmentStateChangesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> SubmitAttachmentStateChangesOutput: ...
+
+    @_overload
+    def submit_attachment_state_changes(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SubmitAttachmentStateChangesInputDict],
     ) -> SubmitAttachmentStateChangesOutput:
         """
         Note:
@@ -2495,8 +3891,6 @@ class ECSClient(Client[ECSConfig]):
         Sent to acknowledge that an attachment changed states.
 
         Args:
-            input:
-                An instance of `SubmitAttachmentStateChangesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2506,12 +3900,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `SubmitAttachmentStateChangesOutput`.
         """
-        return self._invoke(input, _models.SUBMIT_ATTACHMENT_STATE_CHANGES, [], plugins)
 
+    def submit_attachment_state_changes(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SubmitAttachmentStateChangesOutput:
+        return self._invoke(
+            self._select_input(_models.SUBMIT_ATTACHMENT_STATE_CHANGES, args, kwargs),
+            _models.SUBMIT_ATTACHMENT_STATE_CHANGES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def submit_container_state_change(
         self,
-        input: SubmitContainerStateChangeInput | None = None,
+        request: _models.SubmitContainerStateChangeInput
+        | _models.SubmitContainerStateChangeInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> SubmitContainerStateChangeOutput: ...
+
+    @_overload
+    def submit_container_state_change(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SubmitContainerStateChangeInputDict],
     ) -> SubmitContainerStateChangeOutput:
         """
         Note:
@@ -2521,8 +3937,6 @@ class ECSClient(Client[ECSConfig]):
         Sent to acknowledge that a container changed states.
 
         Args:
-            input:
-                An instance of `SubmitContainerStateChangeInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2532,12 +3946,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `SubmitContainerStateChangeOutput`.
         """
-        return self._invoke(input, _models.SUBMIT_CONTAINER_STATE_CHANGE, [], plugins)
 
+    def submit_container_state_change(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SubmitContainerStateChangeOutput:
+        return self._invoke(
+            self._select_input(_models.SUBMIT_CONTAINER_STATE_CHANGE, args, kwargs),
+            _models.SUBMIT_CONTAINER_STATE_CHANGE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def submit_task_state_change(
         self,
-        input: SubmitTaskStateChangeInput | None = None,
+        request: _models.SubmitTaskStateChangeInput
+        | _models.SubmitTaskStateChangeInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> SubmitTaskStateChangeOutput: ...
+
+    @_overload
+    def submit_task_state_change(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SubmitTaskStateChangeInputDict],
     ) -> SubmitTaskStateChangeOutput:
         """
         Note:
@@ -2547,8 +3983,6 @@ class ECSClient(Client[ECSConfig]):
         Sent to acknowledge that a task changed states.
 
         Args:
-            input:
-                An instance of `SubmitTaskStateChangeInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2558,10 +3992,33 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `SubmitTaskStateChangeOutput`.
         """
-        return self._invoke(input, _models.SUBMIT_TASK_STATE_CHANGE, [], plugins)
 
+    def submit_task_state_change(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SubmitTaskStateChangeOutput:
+        return self._invoke(
+            self._select_input(_models.SUBMIT_TASK_STATE_CHANGE, args, kwargs),
+            _models.SUBMIT_TASK_STATE_CHANGE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def tag_resource(
-        self, input: TagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.TagResourceInput | _models.TagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> TagResourceOutput: ...
+
+    @_overload
+    def tag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.TagResourceInputDict],
     ) -> TagResourceOutput:
         """
         Associates the specified tags to a resource with the specified
@@ -2570,8 +4027,6 @@ class ECSClient(Client[ECSConfig]):
         the tags that are associated with that resource are deleted as well.
 
         Args:
-            input:
-                An instance of `TagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2581,17 +4036,38 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `TagResourceOutput`.
         """
-        return self._invoke(input, _models.TAG_RESOURCE, [], plugins)
 
+    def tag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> TagResourceOutput:
+        return self._invoke(
+            self._select_input(_models.TAG_RESOURCE, args, kwargs),
+            _models.TAG_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def untag_resource(
-        self, input: UntagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UntagResourceInput | _models.UntagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UntagResourceOutput: ...
+
+    @_overload
+    def untag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UntagResourceInputDict],
     ) -> UntagResourceOutput:
         """
         Deletes specified tags from a resource.
 
         Args:
-            input:
-                An instance of `UntagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2601,10 +4077,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `UntagResourceOutput`.
         """
-        return self._invoke(input, _models.UNTAG_RESOURCE, [], plugins)
 
+    def untag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UntagResourceOutput:
+        return self._invoke(
+            self._select_input(_models.UNTAG_RESOURCE, args, kwargs),
+            _models.UNTAG_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_capacity_provider(
-        self, input: UpdateCapacityProviderInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateCapacityProviderInput
+        | _models.UpdateCapacityProviderInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateCapacityProviderOutput: ...
+
+    @_overload
+    def update_capacity_provider(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateCapacityProviderInputDict],
     ) -> UpdateCapacityProviderOutput:
         """
         Modifies the parameters for a capacity provider.
@@ -2613,8 +4113,6 @@ class ECSClient(Client[ECSConfig]):
         instances, not existing ones.
 
         Args:
-            input:
-                An instance of `UpdateCapacityProviderInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2624,17 +4122,38 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `UpdateCapacityProviderOutput`.
         """
-        return self._invoke(input, _models.UPDATE_CAPACITY_PROVIDER, [], plugins)
 
+    def update_capacity_provider(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateCapacityProviderOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_CAPACITY_PROVIDER, args, kwargs),
+            _models.UPDATE_CAPACITY_PROVIDER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_cluster(
-        self, input: UpdateClusterInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateClusterInput | _models.UpdateClusterInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateClusterOutput: ...
+
+    @_overload
+    def update_cluster(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateClusterInputDict],
     ) -> UpdateClusterOutput:
         """
         Updates the cluster.
 
         Args:
-            input:
-                An instance of `UpdateClusterInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2644,17 +4163,39 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `UpdateClusterOutput`.
         """
-        return self._invoke(input, _models.UPDATE_CLUSTER, [], plugins)
 
+    def update_cluster(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateClusterOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_CLUSTER, args, kwargs),
+            _models.UPDATE_CLUSTER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_cluster_settings(
-        self, input: UpdateClusterSettingsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateClusterSettingsInput
+        | _models.UpdateClusterSettingsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateClusterSettingsOutput: ...
+
+    @_overload
+    def update_cluster_settings(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateClusterSettingsInputDict],
     ) -> UpdateClusterSettingsOutput:
         """
         Modifies the settings to use for a cluster.
 
         Args:
-            input:
-                An instance of `UpdateClusterSettingsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2664,10 +4205,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `UpdateClusterSettingsOutput`.
         """
-        return self._invoke(input, _models.UPDATE_CLUSTER_SETTINGS, [], plugins)
 
+    def update_cluster_settings(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateClusterSettingsOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_CLUSTER_SETTINGS, args, kwargs),
+            _models.UPDATE_CLUSTER_SETTINGS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_container_agent(
-        self, input: UpdateContainerAgentInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateContainerAgentInput
+        | _models.UpdateContainerAgentInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateContainerAgentOutput: ...
+
+    @_overload
+    def update_container_agent(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateContainerAgentInputDict],
     ) -> UpdateContainerAgentOutput:
         """
         Updates the Amazon ECS container agent on a specified container
@@ -2698,8 +4263,6 @@ class ECSClient(Client[ECSConfig]):
         in the *Amazon Elastic Container Service Developer Guide*.
 
         Args:
-            input:
-                An instance of `UpdateContainerAgentInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2709,12 +4272,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `UpdateContainerAgentOutput`.
         """
-        return self._invoke(input, _models.UPDATE_CONTAINER_AGENT, [], plugins)
 
+    def update_container_agent(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateContainerAgentOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_CONTAINER_AGENT, args, kwargs),
+            _models.UPDATE_CONTAINER_AGENT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_container_instances_state(
         self,
-        input: UpdateContainerInstancesStateInput,
+        request: _models.UpdateContainerInstancesStateInput
+        | _models.UpdateContainerInstancesStateInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateContainerInstancesStateOutput: ...
+
+    @_overload
+    def update_container_instances_state(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateContainerInstancesStateInputDict],
     ) -> UpdateContainerInstancesStateOutput:
         """
         Modifies the status of an Amazon ECS container instance.
@@ -2773,8 +4358,6 @@ class ECSClient(Client[ECSConfig]):
         Amazon ECS scheduler can begin scheduling tasks on the instance again.
 
         Args:
-            input:
-                An instance of `UpdateContainerInstancesStateInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2784,12 +4367,33 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `UpdateContainerInstancesStateOutput`.
         """
+
+    def update_container_instances_state(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateContainerInstancesStateOutput:
         return self._invoke(
-            input, _models.UPDATE_CONTAINER_INSTANCES_STATE, [], plugins
+            self._select_input(_models.UPDATE_CONTAINER_INSTANCES_STATE, args, kwargs),
+            _models.UPDATE_CONTAINER_INSTANCES_STATE,
+            [],
+            plugins,
         )
 
+    @_overload
     def update_daemon(
-        self, input: UpdateDaemonInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateDaemonInput | _models.UpdateDaemonInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateDaemonOutput: ...
+
+    @_overload
+    def update_daemon(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateDaemonInputDict],
     ) -> UpdateDaemonOutput:
         """
         Updates the specified daemon. When you update a daemon, a new deployment
@@ -2812,8 +4416,6 @@ class ECSClient(Client[ECSConfig]):
             Capacity Providers.
 
         Args:
-            input:
-                An instance of `UpdateDaemonInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2823,12 +4425,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `UpdateDaemonOutput`.
         """
-        return self._invoke(input, _models.UPDATE_DAEMON, [], plugins)
 
+    def update_daemon(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateDaemonOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_DAEMON, args, kwargs),
+            _models.UPDATE_DAEMON,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_express_gateway_service(
         self,
-        input: UpdateExpressGatewayServiceInput,
+        request: _models.UpdateExpressGatewayServiceInput
+        | _models.UpdateExpressGatewayServiceInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateExpressGatewayServiceOutput: ...
+
+    @_overload
+    def update_express_gateway_service(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateExpressGatewayServiceInputDict],
     ) -> UpdateExpressGatewayServiceOutput:
         """
         Updates an existing Express service configuration. Modifies container
@@ -2843,8 +4467,6 @@ class ECSClient(Client[ECSConfig]):
         service creation and require creating a new service.
 
         Args:
-            input:
-                An instance of `UpdateExpressGatewayServiceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2854,10 +4476,33 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `UpdateExpressGatewayServiceOutput`.
         """
-        return self._invoke(input, _models.UPDATE_EXPRESS_GATEWAY_SERVICE, [], plugins)
 
+    def update_express_gateway_service(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateExpressGatewayServiceOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_EXPRESS_GATEWAY_SERVICE, args, kwargs),
+            _models.UPDATE_EXPRESS_GATEWAY_SERVICE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_gateway(
-        self, input: UpdateGatewayInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateGatewayInput | _models.UpdateGatewayInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateGatewayOutput: ...
+
+    @_overload
+    def update_gateway(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateGatewayInputDict],
     ) -> UpdateGatewayOutput:
         """
         Modifies the configuration of a gateway. You can change only the
@@ -2876,8 +4521,6 @@ class ECSClient(Client[ECSConfig]):
         permission for that role.
 
         Args:
-            input:
-                An instance of `UpdateGatewayInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2887,10 +4530,33 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `UpdateGatewayOutput`.
         """
-        return self._invoke(input, _models.UPDATE_GATEWAY, [], plugins)
 
+    def update_gateway(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateGatewayOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_GATEWAY, args, kwargs),
+            _models.UPDATE_GATEWAY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_service(
-        self, input: UpdateServiceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateServiceInput | _models.UpdateServiceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateServiceOutput: ...
+
+    @_overload
+    def update_service(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateServiceInputDict],
     ) -> UpdateServiceOutput:
         """
         Modifies the parameters of a service.
@@ -3032,8 +4698,6 @@ class ECSClient(Client[ECSConfig]):
           largest number of running tasks for this service.
 
         Args:
-            input:
-                An instance of `UpdateServiceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3043,12 +4707,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `UpdateServiceOutput`.
         """
-        return self._invoke(input, _models.UPDATE_SERVICE, [], plugins)
 
+    def update_service(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateServiceOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_SERVICE, args, kwargs),
+            _models.UPDATE_SERVICE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_service_primary_task_set(
         self,
-        input: UpdateServicePrimaryTaskSetInput,
+        request: _models.UpdateServicePrimaryTaskSetInput
+        | _models.UpdateServicePrimaryTaskSetInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateServicePrimaryTaskSetOutput: ...
+
+    @_overload
+    def update_service_primary_task_set(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateServicePrimaryTaskSetInputDict],
     ) -> UpdateServicePrimaryTaskSetOutput:
         """
         Modifies which task set in a service is the primary task set. Any
@@ -3060,8 +4746,6 @@ class ECSClient(Client[ECSConfig]):
         in the *Amazon Elastic Container Service Developer Guide*.
 
         Args:
-            input:
-                An instance of `UpdateServicePrimaryTaskSetInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3071,10 +4755,34 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `UpdateServicePrimaryTaskSetOutput`.
         """
-        return self._invoke(input, _models.UPDATE_SERVICE_PRIMARY_TASK_SET, [], plugins)
 
+    def update_service_primary_task_set(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateServicePrimaryTaskSetOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_SERVICE_PRIMARY_TASK_SET, args, kwargs),
+            _models.UPDATE_SERVICE_PRIMARY_TASK_SET,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_task_protection(
-        self, input: UpdateTaskProtectionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateTaskProtectionInput
+        | _models.UpdateTaskProtectionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateTaskProtectionOutput: ...
+
+    @_overload
+    def update_task_protection(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateTaskProtectionInputDict],
     ) -> UpdateTaskProtectionOutput:
         """
         Updates the protection status of a task. You can set `protectionEnabled`
@@ -3111,8 +4819,6 @@ class ECSClient(Client[ECSConfig]):
             endpoint](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-scale-in-protection-endpoint.html).
 
         Args:
-            input:
-                An instance of `UpdateTaskProtectionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3122,10 +4828,33 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `UpdateTaskProtectionOutput`.
         """
-        return self._invoke(input, _models.UPDATE_TASK_PROTECTION, [], plugins)
 
+    def update_task_protection(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateTaskProtectionOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_TASK_PROTECTION, args, kwargs),
+            _models.UPDATE_TASK_PROTECTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_task_set(
-        self, input: UpdateTaskSetInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateTaskSetInput | _models.UpdateTaskSetInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateTaskSetOutput: ...
+
+    @_overload
+    def update_task_set(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateTaskSetInputDict],
     ) -> UpdateTaskSetOutput:
         """
         Modifies a task set. This is used when a service uses the `EXTERNAL`
@@ -3135,8 +4864,6 @@ class ECSClient(Client[ECSConfig]):
         in the *Amazon Elastic Container Service Developer Guide*.
 
         Args:
-            input:
-                An instance of `UpdateTaskSetInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3146,7 +4873,16 @@ class ECSClient(Client[ECSConfig]):
         Returns:
             An instance of `UpdateTaskSetOutput`.
         """
-        return self._invoke(input, _models.UPDATE_TASK_SET, [], plugins)
+
+    def update_task_set(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateTaskSetOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_TASK_SET, args, kwargs),
+            _models.UPDATE_TASK_SET,
+            [],
+            plugins,
+        )
 
     def _new_config(self) -> ECSConfig:
         return ECSConfig.resolve()

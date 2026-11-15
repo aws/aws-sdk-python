@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import cast
+from typing import Unpack as _Unpack, cast, overload as _overload
 
 from smithy_aws_core.config.types import ConfigSource
 from smithy_aws_core.identity.chain.resolver import IdentityChain
@@ -20,85 +20,45 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from .models import (
-        AddTagsToCertificateInput,
         AddTagsToCertificateOutput,
-        CreateAcmeDomainValidationInput,
         CreateAcmeDomainValidationOutput,
-        CreateAcmeEndpointInput,
         CreateAcmeEndpointOutput,
-        CreateAcmeExternalAccountBindingInput,
         CreateAcmeExternalAccountBindingOutput,
-        DeleteAcmeDomainValidationInput,
         DeleteAcmeDomainValidationOutput,
-        DeleteAcmeEndpointInput,
         DeleteAcmeEndpointOutput,
-        DeleteAcmeExternalAccountBindingInput,
         DeleteAcmeExternalAccountBindingOutput,
-        DeleteCertificateInput,
         DeleteCertificateOutput,
-        DescribeAcmeAccountInput,
         DescribeAcmeAccountOutput,
-        DescribeAcmeDomainValidationInput,
         DescribeAcmeDomainValidationOutput,
-        DescribeAcmeEndpointInput,
         DescribeAcmeEndpointOutput,
-        DescribeAcmeExternalAccountBindingInput,
         DescribeAcmeExternalAccountBindingOutput,
-        DescribeCertificateInput,
         DescribeCertificateOutput,
-        ExportCertificateInput,
         ExportCertificateOutput,
-        GetAccountConfigurationInput,
         GetAccountConfigurationOutput,
-        GetAcmeExternalAccountBindingCredentialsInput,
         GetAcmeExternalAccountBindingCredentialsOutput,
-        GetCertificateInput,
         GetCertificateOutput,
-        ImportCertificateInput,
         ImportCertificateOutput,
-        ListAcmeAccountsInput,
         ListAcmeAccountsOutput,
-        ListAcmeDomainValidationsInput,
         ListAcmeDomainValidationsOutput,
-        ListAcmeEndpointsInput,
         ListAcmeEndpointsOutput,
-        ListAcmeExternalAccountBindingsInput,
         ListAcmeExternalAccountBindingsOutput,
-        ListCertificateDomainValidationsInput,
         ListCertificateDomainValidationsOutput,
-        ListCertificatesInput,
         ListCertificatesOutput,
-        ListTagsForCertificateInput,
         ListTagsForCertificateOutput,
-        ListTagsForResourceInput,
         ListTagsForResourceOutput,
-        PutAccountConfigurationInput,
         PutAccountConfigurationOutput,
-        RemoveTagsFromCertificateInput,
         RemoveTagsFromCertificateOutput,
-        RenewCertificateInput,
         RenewCertificateOutput,
-        RequestCertificateInput,
         RequestCertificateOutput,
-        ResendValidationEmailInput,
         ResendValidationEmailOutput,
-        RevokeAcmeAccountInput,
         RevokeAcmeAccountOutput,
-        RevokeAcmeExternalAccountBindingInput,
         RevokeAcmeExternalAccountBindingOutput,
-        RevokeCertificateInput,
         RevokeCertificateOutput,
-        SearchCertificatesInput,
         SearchCertificatesOutput,
-        TagResourceInput,
         TagResourceOutput,
-        UntagResourceInput,
         UntagResourceOutput,
-        UpdateAcmeDomainValidationInput,
         UpdateAcmeDomainValidationOutput,
-        UpdateAcmeEndpointInput,
         UpdateAcmeEndpointOutput,
-        UpdateCertificateOptionsInput,
         UpdateCertificateOptionsOutput,
     )
 
@@ -114,10 +74,25 @@ class ACMClient(Client[ACMConfig]):
     Guide](https://docs.aws.amazon.com/acm/latest/userguide/).
     """
 
-    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
+    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
 
+    @_overload
     def add_tags_to_certificate(
-        self, input: AddTagsToCertificateInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.AddTagsToCertificateInput
+        | _models.AddTagsToCertificateInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AddTagsToCertificateOutput: ...
+
+    @_overload
+    def add_tags_to_certificate(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AddTagsToCertificateInputDict],
     ) -> AddTagsToCertificateOutput:
         """
         Adds one or more tags to an ACM certificate. Tags are labels that you
@@ -146,8 +121,6 @@ class ACMClient(Client[ACMConfig]):
         ListTagsForCertificate action.
 
         Args:
-            input:
-                An instance of `AddTagsToCertificateInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -157,12 +130,34 @@ class ACMClient(Client[ACMConfig]):
         Returns:
             An instance of `AddTagsToCertificateOutput`.
         """
-        return self._invoke(input, _models.ADD_TAGS_TO_CERTIFICATE, [], plugins)
 
+    def add_tags_to_certificate(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AddTagsToCertificateOutput:
+        return self._invoke(
+            self._select_input(_models.ADD_TAGS_TO_CERTIFICATE, args, kwargs),
+            _models.ADD_TAGS_TO_CERTIFICATE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_acme_domain_validation(
         self,
-        input: CreateAcmeDomainValidationInput,
+        request: _models.CreateAcmeDomainValidationInput
+        | _models.CreateAcmeDomainValidationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateAcmeDomainValidationOutput: ...
+
+    @_overload
+    def create_acme_domain_validation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateAcmeDomainValidationInputDict],
     ) -> CreateAcmeDomainValidationOutput:
         """
         Creates a domain validation for an ACME endpoint. Domain validations
@@ -170,8 +165,6 @@ class ACMClient(Client[ACMConfig]):
         You configure prevalidation to prove domain ownership.
 
         Args:
-            input:
-                An instance of `CreateAcmeDomainValidationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -181,10 +174,33 @@ class ACMClient(Client[ACMConfig]):
         Returns:
             An instance of `CreateAcmeDomainValidationOutput`.
         """
-        return self._invoke(input, _models.CREATE_ACME_DOMAIN_VALIDATION, [], plugins)
 
+    def create_acme_domain_validation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateAcmeDomainValidationOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_ACME_DOMAIN_VALIDATION, args, kwargs),
+            _models.CREATE_ACME_DOMAIN_VALIDATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_acme_endpoint(
-        self, input: CreateAcmeEndpointInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateAcmeEndpointInput | _models.CreateAcmeEndpointInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateAcmeEndpointOutput: ...
+
+    @_overload
+    def create_acme_endpoint(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateAcmeEndpointInputDict],
     ) -> CreateAcmeEndpointOutput:
         """
         Creates an ACME endpoint, which is a managed ACME server with a unique
@@ -192,8 +208,6 @@ class ACMClient(Client[ACMConfig]):
         automate certificate issuance using the ACME protocol.
 
         Args:
-            input:
-                An instance of `CreateAcmeEndpointInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -203,12 +217,34 @@ class ACMClient(Client[ACMConfig]):
         Returns:
             An instance of `CreateAcmeEndpointOutput`.
         """
-        return self._invoke(input, _models.CREATE_ACME_ENDPOINT, [], plugins)
 
+    def create_acme_endpoint(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateAcmeEndpointOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_ACME_ENDPOINT, args, kwargs),
+            _models.CREATE_ACME_ENDPOINT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_acme_external_account_binding(
         self,
-        input: CreateAcmeExternalAccountBindingInput,
+        request: _models.CreateAcmeExternalAccountBindingInput
+        | _models.CreateAcmeExternalAccountBindingInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateAcmeExternalAccountBindingOutput: ...
+
+    @_overload
+    def create_acme_external_account_binding(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateAcmeExternalAccountBindingInputDict],
     ) -> CreateAcmeExternalAccountBindingOutput:
         """
         Creates an external account binding (EAB) for an ACME endpoint. An EAB
@@ -217,8 +253,6 @@ class ACMClient(Client[ACMConfig]):
         controls what certificate operations the ACME client can perform.
 
         Args:
-            input:
-                An instance of `CreateAcmeExternalAccountBindingInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -228,22 +262,42 @@ class ACMClient(Client[ACMConfig]):
         Returns:
             An instance of `CreateAcmeExternalAccountBindingOutput`.
         """
+
+    def create_acme_external_account_binding(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateAcmeExternalAccountBindingOutput:
         return self._invoke(
-            input, _models.CREATE_ACME_EXTERNAL_ACCOUNT_BINDING, [], plugins
+            self._select_input(
+                _models.CREATE_ACME_EXTERNAL_ACCOUNT_BINDING, args, kwargs
+            ),
+            _models.CREATE_ACME_EXTERNAL_ACCOUNT_BINDING,
+            [],
+            plugins,
         )
 
+    @_overload
     def delete_acme_domain_validation(
         self,
-        input: DeleteAcmeDomainValidationInput,
+        request: _models.DeleteAcmeDomainValidationInput
+        | _models.DeleteAcmeDomainValidationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteAcmeDomainValidationOutput: ...
+
+    @_overload
+    def delete_acme_domain_validation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteAcmeDomainValidationInputDict],
     ) -> DeleteAcmeDomainValidationOutput:
         """
         Deletes a domain validation. After deletion, the ACME endpoint can no
         longer issue certificates for the associated domain.
 
         Args:
-            input:
-                An instance of `DeleteAcmeDomainValidationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -253,10 +307,33 @@ class ACMClient(Client[ACMConfig]):
         Returns:
             An instance of `DeleteAcmeDomainValidationOutput`.
         """
-        return self._invoke(input, _models.DELETE_ACME_DOMAIN_VALIDATION, [], plugins)
 
+    def delete_acme_domain_validation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteAcmeDomainValidationOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_ACME_DOMAIN_VALIDATION, args, kwargs),
+            _models.DELETE_ACME_DOMAIN_VALIDATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_acme_endpoint(
-        self, input: DeleteAcmeEndpointInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteAcmeEndpointInput | _models.DeleteAcmeEndpointInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteAcmeEndpointOutput: ...
+
+    @_overload
+    def delete_acme_endpoint(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteAcmeEndpointInputDict],
     ) -> DeleteAcmeEndpointOutput:
         """
         Deletes an ACME endpoint. After deletion, the endpoint URL is no longer
@@ -265,8 +342,6 @@ class ACMClient(Client[ACMConfig]):
         with the endpoint are also deleted.
 
         Args:
-            input:
-                An instance of `DeleteAcmeEndpointInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -276,12 +351,34 @@ class ACMClient(Client[ACMConfig]):
         Returns:
             An instance of `DeleteAcmeEndpointOutput`.
         """
-        return self._invoke(input, _models.DELETE_ACME_ENDPOINT, [], plugins)
 
+    def delete_acme_endpoint(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteAcmeEndpointOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_ACME_ENDPOINT, args, kwargs),
+            _models.DELETE_ACME_ENDPOINT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_acme_external_account_binding(
         self,
-        input: DeleteAcmeExternalAccountBindingInput,
+        request: _models.DeleteAcmeExternalAccountBindingInput
+        | _models.DeleteAcmeExternalAccountBindingInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteAcmeExternalAccountBindingOutput: ...
+
+    @_overload
+    def delete_acme_external_account_binding(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteAcmeExternalAccountBindingInputDict],
     ) -> DeleteAcmeExternalAccountBindingOutput:
         """
         Deletes an external account binding. Previously fetched credentials for
@@ -289,8 +386,6 @@ class ACMClient(Client[ACMConfig]):
         deleted binding cannot be recovered.
 
         Args:
-            input:
-                An instance of `DeleteAcmeExternalAccountBindingInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -300,12 +395,35 @@ class ACMClient(Client[ACMConfig]):
         Returns:
             An instance of `DeleteAcmeExternalAccountBindingOutput`.
         """
+
+    def delete_acme_external_account_binding(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteAcmeExternalAccountBindingOutput:
         return self._invoke(
-            input, _models.DELETE_ACME_EXTERNAL_ACCOUNT_BINDING, [], plugins
+            self._select_input(
+                _models.DELETE_ACME_EXTERNAL_ACCOUNT_BINDING, args, kwargs
+            ),
+            _models.DELETE_ACME_EXTERNAL_ACCOUNT_BINDING,
+            [],
+            plugins,
         )
 
+    @_overload
     def delete_certificate(
-        self, input: DeleteCertificateInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteCertificateInput | _models.DeleteCertificateInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteCertificateOutput: ...
+
+    @_overload
+    def delete_certificate(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteCertificateInputDict],
     ) -> DeleteCertificateOutput:
         """
         Deletes a certificate and its associated private key. If this action
@@ -339,8 +457,6 @@ class ACMClient(Client[ACMConfig]):
         in the *Amazon Web Services Private Certificate Authority User Guide*.
 
         Args:
-            input:
-                An instance of `DeleteCertificateInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -350,10 +466,34 @@ class ACMClient(Client[ACMConfig]):
         Returns:
             An instance of `DeleteCertificateOutput`.
         """
-        return self._invoke(input, _models.DELETE_CERTIFICATE, [], plugins)
 
+    def delete_certificate(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteCertificateOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_CERTIFICATE, args, kwargs),
+            _models.DELETE_CERTIFICATE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_acme_account(
-        self, input: DescribeAcmeAccountInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeAcmeAccountInput
+        | _models.DescribeAcmeAccountInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeAcmeAccountOutput: ...
+
+    @_overload
+    def describe_acme_account(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeAcmeAccountInputDict],
     ) -> DescribeAcmeAccountOutput:
         """
         Returns detailed metadata about the specified ACME account, including
@@ -361,8 +501,6 @@ class ACMClient(Client[ACMConfig]):
         binding.
 
         Args:
-            input:
-                An instance of `DescribeAcmeAccountInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -372,12 +510,34 @@ class ACMClient(Client[ACMConfig]):
         Returns:
             An instance of `DescribeAcmeAccountOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_ACME_ACCOUNT, [], plugins)
 
+    def describe_acme_account(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeAcmeAccountOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_ACME_ACCOUNT, args, kwargs),
+            _models.DESCRIBE_ACME_ACCOUNT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_acme_domain_validation(
         self,
-        input: DescribeAcmeDomainValidationInput,
+        request: _models.DescribeAcmeDomainValidationInput
+        | _models.DescribeAcmeDomainValidationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeAcmeDomainValidationOutput: ...
+
+    @_overload
+    def describe_acme_domain_validation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeAcmeDomainValidationInputDict],
     ) -> DescribeAcmeDomainValidationOutput:
         """
         Returns detailed metadata about the specified domain validation,
@@ -385,8 +545,6 @@ class ACMClient(Client[ACMConfig]):
         for validation.
 
         Args:
-            input:
-                An instance of `DescribeAcmeDomainValidationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -396,10 +554,34 @@ class ACMClient(Client[ACMConfig]):
         Returns:
             An instance of `DescribeAcmeDomainValidationOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_ACME_DOMAIN_VALIDATION, [], plugins)
 
+    def describe_acme_domain_validation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeAcmeDomainValidationOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_ACME_DOMAIN_VALIDATION, args, kwargs),
+            _models.DESCRIBE_ACME_DOMAIN_VALIDATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_acme_endpoint(
-        self, input: DescribeAcmeEndpointInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeAcmeEndpointInput
+        | _models.DescribeAcmeEndpointInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeAcmeEndpointOutput: ...
+
+    @_overload
+    def describe_acme_endpoint(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeAcmeEndpointInputDict],
     ) -> DescribeAcmeEndpointOutput:
         """
         Returns detailed metadata about the specified ACME endpoint, including
@@ -407,8 +589,6 @@ class ACMClient(Client[ACMConfig]):
         configuration.
 
         Args:
-            input:
-                An instance of `DescribeAcmeEndpointInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -418,20 +598,40 @@ class ACMClient(Client[ACMConfig]):
         Returns:
             An instance of `DescribeAcmeEndpointOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_ACME_ENDPOINT, [], plugins)
 
+    def describe_acme_endpoint(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeAcmeEndpointOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_ACME_ENDPOINT, args, kwargs),
+            _models.DESCRIBE_ACME_ENDPOINT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_acme_external_account_binding(
         self,
-        input: DescribeAcmeExternalAccountBindingInput,
+        request: _models.DescribeAcmeExternalAccountBindingInput
+        | _models.DescribeAcmeExternalAccountBindingInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeAcmeExternalAccountBindingOutput: ...
+
+    @_overload
+    def describe_acme_external_account_binding(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeAcmeExternalAccountBindingInputDict],
     ) -> DescribeAcmeExternalAccountBindingOutput:
         """
         Returns detailed metadata about the specified external account binding,
         including the associated IAM role, expiration time, and usage history.
 
         Args:
-            input:
-                An instance of `DescribeAcmeExternalAccountBindingInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -441,12 +641,36 @@ class ACMClient(Client[ACMConfig]):
         Returns:
             An instance of `DescribeAcmeExternalAccountBindingOutput`.
         """
+
+    def describe_acme_external_account_binding(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeAcmeExternalAccountBindingOutput:
         return self._invoke(
-            input, _models.DESCRIBE_ACME_EXTERNAL_ACCOUNT_BINDING, [], plugins
+            self._select_input(
+                _models.DESCRIBE_ACME_EXTERNAL_ACCOUNT_BINDING, args, kwargs
+            ),
+            _models.DESCRIBE_ACME_EXTERNAL_ACCOUNT_BINDING,
+            [],
+            plugins,
         )
 
+    @_overload
     def describe_certificate(
-        self, input: DescribeCertificateInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeCertificateInput
+        | _models.DescribeCertificateInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeCertificateOutput: ...
+
+    @_overload
+    def describe_certificate(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeCertificateInputDict],
     ) -> DescribeCertificateOutput:
         """
         Returns detailed metadata about the specified ACM certificate.
@@ -456,8 +680,6 @@ class ACMClient(Client[ACMConfig]):
         information about it.
 
         Args:
-            input:
-                An instance of `DescribeCertificateInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -467,10 +689,33 @@ class ACMClient(Client[ACMConfig]):
         Returns:
             An instance of `DescribeCertificateOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_CERTIFICATE, [], plugins)
 
+    def describe_certificate(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeCertificateOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_CERTIFICATE, args, kwargs),
+            _models.DESCRIBE_CERTIFICATE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def export_certificate(
-        self, input: ExportCertificateInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ExportCertificateInput | _models.ExportCertificateInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ExportCertificateOutput: ...
+
+    @_overload
+    def export_certificate(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ExportCertificateInputDict],
     ) -> ExportCertificateOutput:
         """
         Exports a private certificate issued by a private certificate authority
@@ -491,8 +736,6 @@ class ACMClient(Client[ACMConfig]):
             exported.
 
         Args:
-            input:
-                An instance of `ExportCertificateInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -502,20 +745,40 @@ class ACMClient(Client[ACMConfig]):
         Returns:
             An instance of `ExportCertificateOutput`.
         """
-        return self._invoke(input, _models.EXPORT_CERTIFICATE, [], plugins)
 
+    def export_certificate(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ExportCertificateOutput:
+        return self._invoke(
+            self._select_input(_models.EXPORT_CERTIFICATE, args, kwargs),
+            _models.EXPORT_CERTIFICATE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_account_configuration(
         self,
-        input: GetAccountConfigurationInput | None = None,
+        request: _models.GetAccountConfigurationInput
+        | _models.GetAccountConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetAccountConfigurationOutput: ...
+
+    @_overload
+    def get_account_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetAccountConfigurationInputDict],
     ) -> GetAccountConfigurationOutput:
         """
         Returns the account configuration options associated with an Amazon Web
         Services account.
 
         Args:
-            input:
-                An instance of `GetAccountConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -525,12 +788,34 @@ class ACMClient(Client[ACMConfig]):
         Returns:
             An instance of `GetAccountConfigurationOutput`.
         """
-        return self._invoke(input, _models.GET_ACCOUNT_CONFIGURATION, [], plugins)
 
+    def get_account_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetAccountConfigurationOutput:
+        return self._invoke(
+            self._select_input(_models.GET_ACCOUNT_CONFIGURATION, args, kwargs),
+            _models.GET_ACCOUNT_CONFIGURATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_acme_external_account_binding_credentials(
         self,
-        input: GetAcmeExternalAccountBindingCredentialsInput,
+        request: _models.GetAcmeExternalAccountBindingCredentialsInput
+        | _models.GetAcmeExternalAccountBindingCredentialsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetAcmeExternalAccountBindingCredentialsOutput: ...
+
+    @_overload
+    def get_acme_external_account_binding_credentials(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetAcmeExternalAccountBindingCredentialsInputDict],
     ) -> GetAcmeExternalAccountBindingCredentialsOutput:
         """
         Retrieves the key ID and MAC key credentials for an external account
@@ -538,8 +823,6 @@ class ACMClient(Client[ACMConfig]):
         registration to bind to the endpoint.
 
         Args:
-            input:
-                An instance of `GetAcmeExternalAccountBindingCredentialsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -549,12 +832,35 @@ class ACMClient(Client[ACMConfig]):
         Returns:
             An instance of `GetAcmeExternalAccountBindingCredentialsOutput`.
         """
+
+    def get_acme_external_account_binding_credentials(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetAcmeExternalAccountBindingCredentialsOutput:
         return self._invoke(
-            input, _models.GET_ACME_EXTERNAL_ACCOUNT_BINDING_CREDENTIALS, [], plugins
+            self._select_input(
+                _models.GET_ACME_EXTERNAL_ACCOUNT_BINDING_CREDENTIALS, args, kwargs
+            ),
+            _models.GET_ACME_EXTERNAL_ACCOUNT_BINDING_CREDENTIALS,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_certificate(
-        self, input: GetCertificateInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetCertificateInput | _models.GetCertificateInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetCertificateOutput: ...
+
+    @_overload
+    def get_certificate(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetCertificateInputDict],
     ) -> GetCertificateOutput:
         """
         Retrieves a certificate and its certificate chain. The certificate may
@@ -567,8 +873,6 @@ class ACMClient(Client[ACMConfig]):
         decode the certificates and inspect individual fields.
 
         Args:
-            input:
-                An instance of `GetCertificateInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -578,10 +882,33 @@ class ACMClient(Client[ACMConfig]):
         Returns:
             An instance of `GetCertificateOutput`.
         """
-        return self._invoke(input, _models.GET_CERTIFICATE, [], plugins)
 
+    def get_certificate(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetCertificateOutput:
+        return self._invoke(
+            self._select_input(_models.GET_CERTIFICATE, args, kwargs),
+            _models.GET_CERTIFICATE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def import_certificate(
-        self, input: ImportCertificateInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ImportCertificateInput | _models.ImportCertificateInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ImportCertificateOutput: ...
+
+    @_overload
+    def import_certificate(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ImportCertificateInputDict],
     ) -> ImportCertificateOutput:
         """
         Imports a certificate into Certificate Manager (ACM) to use with
@@ -627,8 +954,8 @@ class ACMClient(Client[ACMConfig]):
         - When you import a certificate by using the CLI, you must specify the
           certificate, the certificate chain, and the private key by their file
           names preceded by `fileb://`. For example, you can specify a
-          certificate saved in the `C:\temp` folder as
-          `fileb://C:\temp\\certificate_to_import.pem`. If you are making an HTTP
+          certificate saved in the `C:\\temp` folder as
+          `fileb://C:\\temp\\certificate_to_import.pem`. If you are making an HTTP
           or HTTPS Query request, include these arguments as BLOBs.
 
         - When you import a certificate by using an SDK, you must specify the
@@ -644,8 +971,6 @@ class ACMClient(Client[ACMConfig]):
         of the imported certificate.
 
         Args:
-            input:
-                An instance of `ImportCertificateInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -655,10 +980,33 @@ class ACMClient(Client[ACMConfig]):
         Returns:
             An instance of `ImportCertificateOutput`.
         """
-        return self._invoke(input, _models.IMPORT_CERTIFICATE, [], plugins)
 
+    def import_certificate(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ImportCertificateOutput:
+        return self._invoke(
+            self._select_input(_models.IMPORT_CERTIFICATE, args, kwargs),
+            _models.IMPORT_CERTIFICATE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_acme_accounts(
-        self, input: ListAcmeAccountsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListAcmeAccountsInput | _models.ListAcmeAccountsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListAcmeAccountsOutput: ...
+
+    @_overload
+    def list_acme_accounts(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListAcmeAccountsInputDict],
     ) -> ListAcmeAccountsOutput:
         """
         Retrieves a list of ACME accounts registered with the specified ACME
@@ -666,8 +1014,6 @@ class ACMClient(Client[ACMConfig]):
         binding credentials to register.
 
         Args:
-            input:
-                An instance of `ListAcmeAccountsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -677,17 +1023,39 @@ class ACMClient(Client[ACMConfig]):
         Returns:
             An instance of `ListAcmeAccountsOutput`.
         """
-        return self._invoke(input, _models.LIST_ACME_ACCOUNTS, [], plugins)
 
+    def list_acme_accounts(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListAcmeAccountsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_ACME_ACCOUNTS, args, kwargs),
+            _models.LIST_ACME_ACCOUNTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_acme_domain_validations(
-        self, input: ListAcmeDomainValidationsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListAcmeDomainValidationsInput
+        | _models.ListAcmeDomainValidationsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListAcmeDomainValidationsOutput: ...
+
+    @_overload
+    def list_acme_domain_validations(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListAcmeDomainValidationsInputDict],
     ) -> ListAcmeDomainValidationsOutput:
         """
         Retrieves a list of domain validations for the specified ACME endpoint.
 
         Args:
-            input:
-                An instance of `ListAcmeDomainValidationsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -697,20 +1065,39 @@ class ACMClient(Client[ACMConfig]):
         Returns:
             An instance of `ListAcmeDomainValidationsOutput`.
         """
-        return self._invoke(input, _models.LIST_ACME_DOMAIN_VALIDATIONS, [], plugins)
 
+    def list_acme_domain_validations(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListAcmeDomainValidationsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_ACME_DOMAIN_VALIDATIONS, args, kwargs),
+            _models.LIST_ACME_DOMAIN_VALIDATIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_acme_endpoints(
         self,
-        input: ListAcmeEndpointsInput | None = None,
+        request: _models.ListAcmeEndpointsInput | _models.ListAcmeEndpointsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListAcmeEndpointsOutput: ...
+
+    @_overload
+    def list_acme_endpoints(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListAcmeEndpointsInputDict],
     ) -> ListAcmeEndpointsOutput:
         """
         Retrieves a list of ACME endpoints in your account. Use this operation
         to view all configured ACME endpoints and their current status.
 
         Args:
-            input:
-                An instance of `ListAcmeEndpointsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -720,20 +1107,40 @@ class ACMClient(Client[ACMConfig]):
         Returns:
             An instance of `ListAcmeEndpointsOutput`.
         """
-        return self._invoke(input, _models.LIST_ACME_ENDPOINTS, [], plugins)
 
+    def list_acme_endpoints(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListAcmeEndpointsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_ACME_ENDPOINTS, args, kwargs),
+            _models.LIST_ACME_ENDPOINTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_acme_external_account_bindings(
         self,
-        input: ListAcmeExternalAccountBindingsInput,
+        request: _models.ListAcmeExternalAccountBindingsInput
+        | _models.ListAcmeExternalAccountBindingsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListAcmeExternalAccountBindingsOutput: ...
+
+    @_overload
+    def list_acme_external_account_bindings(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListAcmeExternalAccountBindingsInputDict],
     ) -> ListAcmeExternalAccountBindingsOutput:
         """
         Retrieves a list of external account bindings for the specified ACME
         endpoint.
 
         Args:
-            input:
-                An instance of `ListAcmeExternalAccountBindingsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -743,14 +1150,36 @@ class ACMClient(Client[ACMConfig]):
         Returns:
             An instance of `ListAcmeExternalAccountBindingsOutput`.
         """
+
+    def list_acme_external_account_bindings(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListAcmeExternalAccountBindingsOutput:
         return self._invoke(
-            input, _models.LIST_ACME_EXTERNAL_ACCOUNT_BINDINGS, [], plugins
+            self._select_input(
+                _models.LIST_ACME_EXTERNAL_ACCOUNT_BINDINGS, args, kwargs
+            ),
+            _models.LIST_ACME_EXTERNAL_ACCOUNT_BINDINGS,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_certificate_domain_validations(
         self,
-        input: ListCertificateDomainValidationsInput,
+        request: _models.ListCertificateDomainValidationsInput
+        | _models.ListCertificateDomainValidationsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListCertificateDomainValidationsOutput: ...
+
+    @_overload
+    def list_certificate_domain_validations(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListCertificateDomainValidationsInputDict],
     ) -> ListCertificateDomainValidationsOutput:
         """
         Returns per-domain validation summaries for an ACM certificate. Each
@@ -761,8 +1190,6 @@ class ACMClient(Client[ACMConfig]):
         CNAME records required for DNS validation.
 
         Args:
-            input:
-                An instance of `ListCertificateDomainValidationsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -772,14 +1199,35 @@ class ACMClient(Client[ACMConfig]):
         Returns:
             An instance of `ListCertificateDomainValidationsOutput`.
         """
+
+    def list_certificate_domain_validations(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListCertificateDomainValidationsOutput:
         return self._invoke(
-            input, _models.LIST_CERTIFICATE_DOMAIN_VALIDATIONS, [], plugins
+            self._select_input(
+                _models.LIST_CERTIFICATE_DOMAIN_VALIDATIONS, args, kwargs
+            ),
+            _models.LIST_CERTIFICATE_DOMAIN_VALIDATIONS,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_certificates(
         self,
-        input: ListCertificatesInput | None = None,
+        request: _models.ListCertificatesInput | _models.ListCertificatesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListCertificatesOutput: ...
+
+    @_overload
+    def list_certificates(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListCertificatesInputDict],
     ) -> ListCertificatesOutput:
         """
         Retrieves a list of certificate ARNs and domain names. You can request
@@ -793,8 +1241,6 @@ class ACMClient(Client[ACMConfig]):
             specify `ACME` in the `CertificateKeyPairOrigins` filter.
 
         Args:
-            input:
-                An instance of `ListCertificatesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -804,10 +1250,34 @@ class ACMClient(Client[ACMConfig]):
         Returns:
             An instance of `ListCertificatesOutput`.
         """
-        return self._invoke(input, _models.LIST_CERTIFICATES, [], plugins)
 
+    def list_certificates(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListCertificatesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_CERTIFICATES, args, kwargs),
+            _models.LIST_CERTIFICATES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_tags_for_certificate(
-        self, input: ListTagsForCertificateInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListTagsForCertificateInput
+        | _models.ListTagsForCertificateInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListTagsForCertificateOutput: ...
+
+    @_overload
+    def list_tags_for_certificate(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListTagsForCertificateInputDict],
     ) -> ListTagsForCertificateOutput:
         """
         Lists the tags that have been applied to the ACM certificate. Use the
@@ -820,8 +1290,6 @@ class ACMClient(Client[ACMConfig]):
             other ACM resource types, use ListTagsForResource instead.
 
         Args:
-            input:
-                An instance of `ListTagsForCertificateInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -831,10 +1299,34 @@ class ACMClient(Client[ACMConfig]):
         Returns:
             An instance of `ListTagsForCertificateOutput`.
         """
-        return self._invoke(input, _models.LIST_TAGS_FOR_CERTIFICATE, [], plugins)
 
+    def list_tags_for_certificate(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListTagsForCertificateOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_TAGS_FOR_CERTIFICATE, args, kwargs),
+            _models.LIST_TAGS_FOR_CERTIFICATE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_tags_for_resource(
-        self, input: ListTagsForResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListTagsForResourceInput
+        | _models.ListTagsForResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListTagsForResourceOutput: ...
+
+    @_overload
+    def list_tags_for_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListTagsForResourceInputDict],
     ) -> ListTagsForResourceOutput:
         """
         Lists the tags associated with an ACM resource.
@@ -848,8 +1340,6 @@ class ACMClient(Client[ACMConfig]):
         more tags, use the UntagResource action.
 
         Args:
-            input:
-                An instance of `ListTagsForResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -859,10 +1349,34 @@ class ACMClient(Client[ACMConfig]):
         Returns:
             An instance of `ListTagsForResourceOutput`.
         """
-        return self._invoke(input, _models.LIST_TAGS_FOR_RESOURCE, [], plugins)
 
+    def list_tags_for_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListTagsForResourceOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_TAGS_FOR_RESOURCE, args, kwargs),
+            _models.LIST_TAGS_FOR_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_account_configuration(
-        self, input: PutAccountConfigurationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutAccountConfigurationInput
+        | _models.PutAccountConfigurationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutAccountConfigurationOutput: ...
+
+    @_overload
+    def put_account_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutAccountConfigurationInputDict],
     ) -> PutAccountConfigurationOutput:
         """
         Adds or modifies account-level configurations in ACM.
@@ -874,8 +1388,6 @@ class ACMClient(Client[ACMConfig]):
         events starting 45 days before certificate expiration.
 
         Args:
-            input:
-                An instance of `PutAccountConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -885,10 +1397,34 @@ class ACMClient(Client[ACMConfig]):
         Returns:
             An instance of `PutAccountConfigurationOutput`.
         """
-        return self._invoke(input, _models.PUT_ACCOUNT_CONFIGURATION, [], plugins)
 
+    def put_account_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutAccountConfigurationOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_ACCOUNT_CONFIGURATION, args, kwargs),
+            _models.PUT_ACCOUNT_CONFIGURATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def remove_tags_from_certificate(
-        self, input: RemoveTagsFromCertificateInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RemoveTagsFromCertificateInput
+        | _models.RemoveTagsFromCertificateInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RemoveTagsFromCertificateOutput: ...
+
+    @_overload
+    def remove_tags_from_certificate(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RemoveTagsFromCertificateInputDict],
     ) -> RemoveTagsFromCertificateOutput:
         """
         Remove one or more tags from an ACM certificate. A tag consists of a
@@ -906,8 +1442,6 @@ class ACMClient(Client[ACMConfig]):
         certificate, use the ListTagsForCertificate action.
 
         Args:
-            input:
-                An instance of `RemoveTagsFromCertificateInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -917,10 +1451,33 @@ class ACMClient(Client[ACMConfig]):
         Returns:
             An instance of `RemoveTagsFromCertificateOutput`.
         """
-        return self._invoke(input, _models.REMOVE_TAGS_FROM_CERTIFICATE, [], plugins)
 
+    def remove_tags_from_certificate(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RemoveTagsFromCertificateOutput:
+        return self._invoke(
+            self._select_input(_models.REMOVE_TAGS_FROM_CERTIFICATE, args, kwargs),
+            _models.REMOVE_TAGS_FROM_CERTIFICATE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def renew_certificate(
-        self, input: RenewCertificateInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RenewCertificateInput | _models.RenewCertificateInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RenewCertificateOutput: ...
+
+    @_overload
+    def renew_certificate(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RenewCertificateInputDict],
     ) -> RenewCertificateOutput:
         """
         Renews an [eligible ACM
@@ -933,8 +1490,6 @@ class ACMClient(Client[ACMConfig]):
         in the ACM User Guide.
 
         Args:
-            input:
-                An instance of `RenewCertificateInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -944,10 +1499,33 @@ class ACMClient(Client[ACMConfig]):
         Returns:
             An instance of `RenewCertificateOutput`.
         """
-        return self._invoke(input, _models.RENEW_CERTIFICATE, [], plugins)
 
+    def renew_certificate(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RenewCertificateOutput:
+        return self._invoke(
+            self._select_input(_models.RENEW_CERTIFICATE, args, kwargs),
+            _models.RENEW_CERTIFICATE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def request_certificate(
-        self, input: RequestCertificateInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RequestCertificateInput | _models.RequestCertificateInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RequestCertificateOutput: ...
+
+    @_overload
+    def request_certificate(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RequestCertificateInputDict],
     ) -> RequestCertificateOutput:
         """
         Requests an ACM certificate for use with other Amazon Web Services
@@ -976,8 +1554,6 @@ class ACMClient(Client[ACMConfig]):
         new certificate.
 
         Args:
-            input:
-                An instance of `RequestCertificateInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -987,10 +1563,34 @@ class ACMClient(Client[ACMConfig]):
         Returns:
             An instance of `RequestCertificateOutput`.
         """
-        return self._invoke(input, _models.REQUEST_CERTIFICATE, [], plugins)
 
+    def request_certificate(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RequestCertificateOutput:
+        return self._invoke(
+            self._select_input(_models.REQUEST_CERTIFICATE, args, kwargs),
+            _models.REQUEST_CERTIFICATE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def resend_validation_email(
-        self, input: ResendValidationEmailInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ResendValidationEmailInput
+        | _models.ResendValidationEmailInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ResendValidationEmailOutput: ...
+
+    @_overload
+    def resend_validation_email(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ResendValidationEmailInputDict],
     ) -> ResendValidationEmailOutput:
         """
         Resends the email that requests domain ownership validation. The domain
@@ -1007,8 +1607,6 @@ class ACMClient(Client[ACMConfig]):
         Domain](https://docs.aws.amazon.com/acm/latest/userguide/setup-email.html).
 
         Args:
-            input:
-                An instance of `ResendValidationEmailInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1018,18 +1616,39 @@ class ACMClient(Client[ACMConfig]):
         Returns:
             An instance of `ResendValidationEmailOutput`.
         """
-        return self._invoke(input, _models.RESEND_VALIDATION_EMAIL, [], plugins)
 
+    def resend_validation_email(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ResendValidationEmailOutput:
+        return self._invoke(
+            self._select_input(_models.RESEND_VALIDATION_EMAIL, args, kwargs),
+            _models.RESEND_VALIDATION_EMAIL,
+            [],
+            plugins,
+        )
+
+    @_overload
     def revoke_acme_account(
-        self, input: RevokeAcmeAccountInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RevokeAcmeAccountInput | _models.RevokeAcmeAccountInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RevokeAcmeAccountOutput: ...
+
+    @_overload
+    def revoke_acme_account(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RevokeAcmeAccountInputDict],
     ) -> RevokeAcmeAccountOutput:
         """
         Revokes an ACME account, preventing it from requesting or revoking
         certificates. This operation is irreversible.
 
         Args:
-            input:
-                An instance of `RevokeAcmeAccountInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1039,12 +1658,34 @@ class ACMClient(Client[ACMConfig]):
         Returns:
             An instance of `RevokeAcmeAccountOutput`.
         """
-        return self._invoke(input, _models.REVOKE_ACME_ACCOUNT, [], plugins)
 
+    def revoke_acme_account(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RevokeAcmeAccountOutput:
+        return self._invoke(
+            self._select_input(_models.REVOKE_ACME_ACCOUNT, args, kwargs),
+            _models.REVOKE_ACME_ACCOUNT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def revoke_acme_external_account_binding(
         self,
-        input: RevokeAcmeExternalAccountBindingInput,
+        request: _models.RevokeAcmeExternalAccountBindingInput
+        | _models.RevokeAcmeExternalAccountBindingInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> RevokeAcmeExternalAccountBindingOutput: ...
+
+    @_overload
+    def revoke_acme_external_account_binding(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RevokeAcmeExternalAccountBindingInputDict],
     ) -> RevokeAcmeExternalAccountBindingOutput:
         """
         Revokes an external account binding, preventing new ACME accounts from
@@ -1053,8 +1694,6 @@ class ACMClient(Client[ACMConfig]):
         revoked separately.
 
         Args:
-            input:
-                An instance of `RevokeAcmeExternalAccountBindingInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1064,12 +1703,35 @@ class ACMClient(Client[ACMConfig]):
         Returns:
             An instance of `RevokeAcmeExternalAccountBindingOutput`.
         """
+
+    def revoke_acme_external_account_binding(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RevokeAcmeExternalAccountBindingOutput:
         return self._invoke(
-            input, _models.REVOKE_ACME_EXTERNAL_ACCOUNT_BINDING, [], plugins
+            self._select_input(
+                _models.REVOKE_ACME_EXTERNAL_ACCOUNT_BINDING, args, kwargs
+            ),
+            _models.REVOKE_ACME_EXTERNAL_ACCOUNT_BINDING,
+            [],
+            plugins,
         )
 
+    @_overload
     def revoke_certificate(
-        self, input: RevokeCertificateInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RevokeCertificateInput | _models.RevokeCertificateInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RevokeCertificateOutput: ...
+
+    @_overload
+    def revoke_certificate(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RevokeCertificateInputDict],
     ) -> RevokeCertificateOutput:
         """
         Revokes a public ACM certificate. You can only revoke certificates that
@@ -1080,8 +1742,6 @@ class ACMClient(Client[ACMConfig]):
             Revoking a certificate is permanent.
 
         Args:
-            input:
-                An instance of `RevokeCertificateInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1091,12 +1751,33 @@ class ACMClient(Client[ACMConfig]):
         Returns:
             An instance of `RevokeCertificateOutput`.
         """
-        return self._invoke(input, _models.REVOKE_CERTIFICATE, [], plugins)
 
+    def revoke_certificate(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RevokeCertificateOutput:
+        return self._invoke(
+            self._select_input(_models.REVOKE_CERTIFICATE, args, kwargs),
+            _models.REVOKE_CERTIFICATE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def search_certificates(
         self,
-        input: SearchCertificatesInput | None = None,
+        request: _models.SearchCertificatesInput | _models.SearchCertificatesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> SearchCertificatesOutput: ...
+
+    @_overload
+    def search_certificates(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SearchCertificatesInputDict],
     ) -> SearchCertificatesOutput:
         """
         Retrieves a list of certificates matching search criteria. You can
@@ -1106,8 +1787,6 @@ class ACMClient(Client[ACMConfig]):
         complex filter statements.
 
         Args:
-            input:
-                An instance of `SearchCertificatesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1117,10 +1796,33 @@ class ACMClient(Client[ACMConfig]):
         Returns:
             An instance of `SearchCertificatesOutput`.
         """
-        return self._invoke(input, _models.SEARCH_CERTIFICATES, [], plugins)
 
+    def search_certificates(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SearchCertificatesOutput:
+        return self._invoke(
+            self._select_input(_models.SEARCH_CERTIFICATES, args, kwargs),
+            _models.SEARCH_CERTIFICATES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def tag_resource(
-        self, input: TagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.TagResourceInput | _models.TagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> TagResourceOutput: ...
+
+    @_overload
+    def tag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.TagResourceInputDict],
     ) -> TagResourceOutput:
         """
         Adds one or more tags to an ACM resource. Tags are labels that you can
@@ -1137,8 +1839,6 @@ class ACMClient(Client[ACMConfig]):
         ListTagsForResource action.
 
         Args:
-            input:
-                An instance of `TagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1148,10 +1848,33 @@ class ACMClient(Client[ACMConfig]):
         Returns:
             An instance of `TagResourceOutput`.
         """
-        return self._invoke(input, _models.TAG_RESOURCE, [], plugins)
 
+    def tag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> TagResourceOutput:
+        return self._invoke(
+            self._select_input(_models.TAG_RESOURCE, args, kwargs),
+            _models.TAG_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def untag_resource(
-        self, input: UntagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UntagResourceInput | _models.UntagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UntagResourceOutput: ...
+
+    @_overload
+    def untag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UntagResourceInputDict],
     ) -> UntagResourceOutput:
         """
         Removes one or more tags from an ACM resource.
@@ -1166,8 +1889,6 @@ class ACMClient(Client[ACMConfig]):
         action.
 
         Args:
-            input:
-                An instance of `UntagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1177,20 +1898,40 @@ class ACMClient(Client[ACMConfig]):
         Returns:
             An instance of `UntagResourceOutput`.
         """
-        return self._invoke(input, _models.UNTAG_RESOURCE, [], plugins)
 
+    def untag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UntagResourceOutput:
+        return self._invoke(
+            self._select_input(_models.UNTAG_RESOURCE, args, kwargs),
+            _models.UNTAG_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_acme_domain_validation(
         self,
-        input: UpdateAcmeDomainValidationInput,
+        request: _models.UpdateAcmeDomainValidationInput
+        | _models.UpdateAcmeDomainValidationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateAcmeDomainValidationOutput: ...
+
+    @_overload
+    def update_acme_domain_validation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateAcmeDomainValidationInputDict],
     ) -> UpdateAcmeDomainValidationOutput:
         """
         Updates the prevalidation configuration of an existing domain
         validation.
 
         Args:
-            input:
-                An instance of `UpdateAcmeDomainValidationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1200,10 +1941,33 @@ class ACMClient(Client[ACMConfig]):
         Returns:
             An instance of `UpdateAcmeDomainValidationOutput`.
         """
-        return self._invoke(input, _models.UPDATE_ACME_DOMAIN_VALIDATION, [], plugins)
 
+    def update_acme_domain_validation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateAcmeDomainValidationOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_ACME_DOMAIN_VALIDATION, args, kwargs),
+            _models.UPDATE_ACME_DOMAIN_VALIDATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_acme_endpoint(
-        self, input: UpdateAcmeEndpointInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateAcmeEndpointInput | _models.UpdateAcmeEndpointInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateAcmeEndpointOutput: ...
+
+    @_overload
+    def update_acme_endpoint(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateAcmeEndpointInputDict],
     ) -> UpdateAcmeEndpointOutput:
         """
         Updates the configuration of an existing ACME endpoint. You can change
@@ -1211,8 +1975,6 @@ class ACMClient(Client[ACMConfig]):
         authority settings.
 
         Args:
-            input:
-                An instance of `UpdateAcmeEndpointInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1222,10 +1984,34 @@ class ACMClient(Client[ACMConfig]):
         Returns:
             An instance of `UpdateAcmeEndpointOutput`.
         """
-        return self._invoke(input, _models.UPDATE_ACME_ENDPOINT, [], plugins)
 
+    def update_acme_endpoint(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateAcmeEndpointOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_ACME_ENDPOINT, args, kwargs),
+            _models.UPDATE_ACME_ENDPOINT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_certificate_options(
-        self, input: UpdateCertificateOptionsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateCertificateOptionsInput
+        | _models.UpdateCertificateOptionsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateCertificateOptionsOutput: ...
+
+    @_overload
+    def update_certificate_options(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateCertificateOptionsInputDict],
     ) -> UpdateCertificateOptionsOutput:
         """
         Updates certificate options. You can use this operation to change the
@@ -1236,8 +2022,6 @@ class ACMClient(Client[ACMConfig]):
         Certificates](https://docs.aws.amazon.com/acm/latest/userguide/acm-exportable-certificates.html).
 
         Args:
-            input:
-                An instance of `UpdateCertificateOptionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1247,7 +2031,16 @@ class ACMClient(Client[ACMConfig]):
         Returns:
             An instance of `UpdateCertificateOptionsOutput`.
         """
-        return self._invoke(input, _models.UPDATE_CERTIFICATE_OPTIONS, [], plugins)
+
+    def update_certificate_options(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateCertificateOptionsOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_CERTIFICATE_OPTIONS, args, kwargs),
+            _models.UPDATE_CERTIFICATE_OPTIONS,
+            [],
+            plugins,
+        )
 
     def _new_config(self) -> ACMConfig:
         return ACMConfig.resolve()

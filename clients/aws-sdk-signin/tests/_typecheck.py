@@ -2,44 +2,61 @@
 
 from typing import Any
 
+from aws_sdk_signin.aio.client import AsyncSigninClient
+from aws_sdk_signin.client import SigninClient
 from aws_sdk_signin.models import (
     AccessToken,
     CreateBearerTokenInput,
+    CreateBearerTokenInputDict,
     CreateBearerTokenOutput,
     CreateOAuth2TokenInput,
+    CreateOAuth2TokenInputDict,
     CreateOAuth2TokenOutput,
     CreateOAuth2TokenRequestBody,
+    CreateOAuth2TokenRequestBodyDict,
     CreateOAuth2TokenResponseBody,
     CreateOAuth2TokenWithIAMInput,
+    CreateOAuth2TokenWithIAMInputDict,
     CreateOAuth2TokenWithIAMOutput,
     CreateOAuth2TokenWithTokenExchangeInput,
+    CreateOAuth2TokenWithTokenExchangeInputDict,
     CreateOAuth2TokenWithTokenExchangeOutput,
     DeleteConsoleAuthorizationConfigurationInput,
+    DeleteConsoleAuthorizationConfigurationInputDict,
     DeleteConsoleAuthorizationConfigurationOutput,
     DeleteResourcePermissionStatementInput,
+    DeleteResourcePermissionStatementInputDict,
     DeleteResourcePermissionStatementOutput,
     GetConsoleAuthorizationConfigurationInput,
+    GetConsoleAuthorizationConfigurationInputDict,
     GetConsoleAuthorizationConfigurationOutput,
     GetResourcePolicyInput,
+    GetResourcePolicyInputDict,
     GetResourcePolicyOutput,
     IntrospectOAuth2TokenWithIAMInput,
+    IntrospectOAuth2TokenWithIAMInputDict,
     IntrospectOAuth2TokenWithIAMOutput,
     ListResourcePermissionStatementsInput,
+    ListResourcePermissionStatementsInputDict,
     ListResourcePermissionStatementsOutput,
     PermissionStatementSummary,
     PolicyStatement,
     PutConsoleAuthorizationConfigurationInput,
+    PutConsoleAuthorizationConfigurationInputDict,
     PutConsoleAuthorizationConfigurationOutput,
     PutResourcePermissionStatementInput,
+    PutResourcePermissionStatementInputDict,
     PutResourcePermissionStatementOutput,
     RevokeOAuth2TokenWithIAMInput,
+    RevokeOAuth2TokenWithIAMInputDict,
     RevokeOAuth2TokenWithIAMOutput,
     SigninResourceBasedPolicy,
 )
 
 
-# Static type fixture: pyright over this validates models.pyi.
-# Not executed as a test; it only needs to type-check.
+# Static type fixture: pyright over this validates models.pyi and the
+# client method signatures. Not executed as a test; it only needs to
+# type-check.
 
 _: Any = ...
 
@@ -83,3 +100,237 @@ PutResourcePermissionStatementOutput(statement_id=_)
 RevokeOAuth2TokenWithIAMInput()
 RevokeOAuth2TokenWithIAMOutput()
 SigninResourceBasedPolicy()
+_params_0: CreateBearerTokenInputDict = {"grant_type": _, "resource": _}
+_params_1: CreateOAuth2TokenInputDict = {"token_input": _}
+_params_2: CreateOAuth2TokenRequestBodyDict = {"client_id": _, "grant_type": _}
+_params_3: CreateOAuth2TokenWithIAMInputDict = {"grant_type": _, "resource": _}
+_params_4: CreateOAuth2TokenWithTokenExchangeInputDict = {"grant_type": _}
+_params_5: DeleteConsoleAuthorizationConfigurationInputDict = {}
+_params_6: DeleteResourcePermissionStatementInputDict = {"statement_id": _}
+_params_7: GetConsoleAuthorizationConfigurationInputDict = {}
+_params_8: GetResourcePolicyInputDict = {}
+_params_9: IntrospectOAuth2TokenWithIAMInputDict = {"token": _}
+_params_10: ListResourcePermissionStatementsInputDict = {}
+_params_11: PutConsoleAuthorizationConfigurationInputDict = {}
+_params_12: PutResourcePermissionStatementInputDict = {}
+_params_13: RevokeOAuth2TokenWithIAMInputDict = {"token": _}
+
+
+def _request[T](form: type[T]) -> T:
+    raise NotImplementedError
+
+
+async def check_async_calls(client: AsyncSigninClient) -> None:
+    pass
+    await client.create_bearer_token(grant_type=_, resource=_)
+    await client.create_bearer_token(**_request(CreateBearerTokenInputDict))
+    await client.create_bearer_token(_request(CreateBearerTokenInput))
+    await client.create_bearer_token(_request(CreateBearerTokenInputDict))
+    await client.create_o_auth2_token(token_input=_)
+    await client.create_o_auth2_token(**_request(CreateOAuth2TokenInputDict))
+    await client.create_o_auth2_token(_request(CreateOAuth2TokenInput))
+    await client.create_o_auth2_token(_request(CreateOAuth2TokenInputDict))
+    await client.create_o_auth2_token_with_iam(grant_type=_, resource=_)
+    await client.create_o_auth2_token_with_iam(
+        **_request(CreateOAuth2TokenWithIAMInputDict)
+    )
+    await client.create_o_auth2_token_with_iam(_request(CreateOAuth2TokenWithIAMInput))
+    await client.create_o_auth2_token_with_iam(
+        _request(CreateOAuth2TokenWithIAMInputDict)
+    )
+    await client.create_o_auth2_token_with_token_exchange(grant_type=_)
+    await client.create_o_auth2_token_with_token_exchange(
+        **_request(CreateOAuth2TokenWithTokenExchangeInputDict)
+    )
+    await client.create_o_auth2_token_with_token_exchange(
+        _request(CreateOAuth2TokenWithTokenExchangeInput)
+    )
+    await client.create_o_auth2_token_with_token_exchange(
+        _request(CreateOAuth2TokenWithTokenExchangeInputDict)
+    )
+    await client.delete_console_authorization_configuration()
+    await client.delete_console_authorization_configuration(
+        **_request(DeleteConsoleAuthorizationConfigurationInputDict)
+    )
+    await client.delete_console_authorization_configuration(
+        _request(DeleteConsoleAuthorizationConfigurationInput)
+    )
+    await client.delete_console_authorization_configuration(
+        _request(DeleteConsoleAuthorizationConfigurationInputDict)
+    )
+    await client.delete_resource_permission_statement(statement_id=_)
+    await client.delete_resource_permission_statement(
+        **_request(DeleteResourcePermissionStatementInputDict)
+    )
+    await client.delete_resource_permission_statement(
+        _request(DeleteResourcePermissionStatementInput)
+    )
+    await client.delete_resource_permission_statement(
+        _request(DeleteResourcePermissionStatementInputDict)
+    )
+    await client.get_console_authorization_configuration()
+    await client.get_console_authorization_configuration(
+        **_request(GetConsoleAuthorizationConfigurationInputDict)
+    )
+    await client.get_console_authorization_configuration(
+        _request(GetConsoleAuthorizationConfigurationInput)
+    )
+    await client.get_console_authorization_configuration(
+        _request(GetConsoleAuthorizationConfigurationInputDict)
+    )
+    await client.get_resource_policy()
+    await client.get_resource_policy(**_request(GetResourcePolicyInputDict))
+    await client.get_resource_policy(_request(GetResourcePolicyInput))
+    await client.get_resource_policy(_request(GetResourcePolicyInputDict))
+    await client.introspect_o_auth2_token_with_iam(token=_)
+    await client.introspect_o_auth2_token_with_iam(
+        **_request(IntrospectOAuth2TokenWithIAMInputDict)
+    )
+    await client.introspect_o_auth2_token_with_iam(
+        _request(IntrospectOAuth2TokenWithIAMInput)
+    )
+    await client.introspect_o_auth2_token_with_iam(
+        _request(IntrospectOAuth2TokenWithIAMInputDict)
+    )
+    await client.list_resource_permission_statements()
+    await client.list_resource_permission_statements(
+        **_request(ListResourcePermissionStatementsInputDict)
+    )
+    await client.list_resource_permission_statements(
+        _request(ListResourcePermissionStatementsInput)
+    )
+    await client.list_resource_permission_statements(
+        _request(ListResourcePermissionStatementsInputDict)
+    )
+    await client.put_console_authorization_configuration()
+    await client.put_console_authorization_configuration(
+        **_request(PutConsoleAuthorizationConfigurationInputDict)
+    )
+    await client.put_console_authorization_configuration(
+        _request(PutConsoleAuthorizationConfigurationInput)
+    )
+    await client.put_console_authorization_configuration(
+        _request(PutConsoleAuthorizationConfigurationInputDict)
+    )
+    await client.put_resource_permission_statement()
+    await client.put_resource_permission_statement(
+        **_request(PutResourcePermissionStatementInputDict)
+    )
+    await client.put_resource_permission_statement(
+        _request(PutResourcePermissionStatementInput)
+    )
+    await client.put_resource_permission_statement(
+        _request(PutResourcePermissionStatementInputDict)
+    )
+    await client.revoke_o_auth2_token_with_iam(token=_)
+    await client.revoke_o_auth2_token_with_iam(
+        **_request(RevokeOAuth2TokenWithIAMInputDict)
+    )
+    await client.revoke_o_auth2_token_with_iam(_request(RevokeOAuth2TokenWithIAMInput))
+    await client.revoke_o_auth2_token_with_iam(
+        _request(RevokeOAuth2TokenWithIAMInputDict)
+    )
+
+
+def check_sync_calls(client: SigninClient) -> None:
+    pass
+    client.create_bearer_token(grant_type=_, resource=_)
+    client.create_bearer_token(**_request(CreateBearerTokenInputDict))
+    client.create_bearer_token(_request(CreateBearerTokenInput))
+    client.create_bearer_token(_request(CreateBearerTokenInputDict))
+    client.create_o_auth2_token(token_input=_)
+    client.create_o_auth2_token(**_request(CreateOAuth2TokenInputDict))
+    client.create_o_auth2_token(_request(CreateOAuth2TokenInput))
+    client.create_o_auth2_token(_request(CreateOAuth2TokenInputDict))
+    client.create_o_auth2_token_with_iam(grant_type=_, resource=_)
+    client.create_o_auth2_token_with_iam(**_request(CreateOAuth2TokenWithIAMInputDict))
+    client.create_o_auth2_token_with_iam(_request(CreateOAuth2TokenWithIAMInput))
+    client.create_o_auth2_token_with_iam(_request(CreateOAuth2TokenWithIAMInputDict))
+    client.create_o_auth2_token_with_token_exchange(grant_type=_)
+    client.create_o_auth2_token_with_token_exchange(
+        **_request(CreateOAuth2TokenWithTokenExchangeInputDict)
+    )
+    client.create_o_auth2_token_with_token_exchange(
+        _request(CreateOAuth2TokenWithTokenExchangeInput)
+    )
+    client.create_o_auth2_token_with_token_exchange(
+        _request(CreateOAuth2TokenWithTokenExchangeInputDict)
+    )
+    client.delete_console_authorization_configuration()
+    client.delete_console_authorization_configuration(
+        **_request(DeleteConsoleAuthorizationConfigurationInputDict)
+    )
+    client.delete_console_authorization_configuration(
+        _request(DeleteConsoleAuthorizationConfigurationInput)
+    )
+    client.delete_console_authorization_configuration(
+        _request(DeleteConsoleAuthorizationConfigurationInputDict)
+    )
+    client.delete_resource_permission_statement(statement_id=_)
+    client.delete_resource_permission_statement(
+        **_request(DeleteResourcePermissionStatementInputDict)
+    )
+    client.delete_resource_permission_statement(
+        _request(DeleteResourcePermissionStatementInput)
+    )
+    client.delete_resource_permission_statement(
+        _request(DeleteResourcePermissionStatementInputDict)
+    )
+    client.get_console_authorization_configuration()
+    client.get_console_authorization_configuration(
+        **_request(GetConsoleAuthorizationConfigurationInputDict)
+    )
+    client.get_console_authorization_configuration(
+        _request(GetConsoleAuthorizationConfigurationInput)
+    )
+    client.get_console_authorization_configuration(
+        _request(GetConsoleAuthorizationConfigurationInputDict)
+    )
+    client.get_resource_policy()
+    client.get_resource_policy(**_request(GetResourcePolicyInputDict))
+    client.get_resource_policy(_request(GetResourcePolicyInput))
+    client.get_resource_policy(_request(GetResourcePolicyInputDict))
+    client.introspect_o_auth2_token_with_iam(token=_)
+    client.introspect_o_auth2_token_with_iam(
+        **_request(IntrospectOAuth2TokenWithIAMInputDict)
+    )
+    client.introspect_o_auth2_token_with_iam(
+        _request(IntrospectOAuth2TokenWithIAMInput)
+    )
+    client.introspect_o_auth2_token_with_iam(
+        _request(IntrospectOAuth2TokenWithIAMInputDict)
+    )
+    client.list_resource_permission_statements()
+    client.list_resource_permission_statements(
+        **_request(ListResourcePermissionStatementsInputDict)
+    )
+    client.list_resource_permission_statements(
+        _request(ListResourcePermissionStatementsInput)
+    )
+    client.list_resource_permission_statements(
+        _request(ListResourcePermissionStatementsInputDict)
+    )
+    client.put_console_authorization_configuration()
+    client.put_console_authorization_configuration(
+        **_request(PutConsoleAuthorizationConfigurationInputDict)
+    )
+    client.put_console_authorization_configuration(
+        _request(PutConsoleAuthorizationConfigurationInput)
+    )
+    client.put_console_authorization_configuration(
+        _request(PutConsoleAuthorizationConfigurationInputDict)
+    )
+    client.put_resource_permission_statement()
+    client.put_resource_permission_statement(
+        **_request(PutResourcePermissionStatementInputDict)
+    )
+    client.put_resource_permission_statement(
+        _request(PutResourcePermissionStatementInput)
+    )
+    client.put_resource_permission_statement(
+        _request(PutResourcePermissionStatementInputDict)
+    )
+    client.revoke_o_auth2_token_with_iam(token=_)
+    client.revoke_o_auth2_token_with_iam(**_request(RevokeOAuth2TokenWithIAMInputDict))
+    client.revoke_o_auth2_token_with_iam(_request(RevokeOAuth2TokenWithIAMInput))
+    client.revoke_o_auth2_token_with_iam(_request(RevokeOAuth2TokenWithIAMInputDict))

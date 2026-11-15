@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import cast
+from typing import Unpack as _Unpack, cast, overload as _overload
 
 from smithy_aws_core.aio.identity.chain import AsyncIdentityChain
 from smithy_aws_core.config.types import ConfigSource
@@ -15,14 +15,11 @@ from smithy_http.plugins import user_agent_plugin
 
 from .. import models as _models
 from ..models import (
-    ConverseStreamInput,
     ConverseStreamOperationOutput,
     ConverseStreamOutput,
     InvokeModelWithBidirectionalStreamInput,
-    InvokeModelWithBidirectionalStreamOperationInput,
     InvokeModelWithBidirectionalStreamOperationOutput,
     InvokeModelWithBidirectionalStreamOutput,
-    InvokeModelWithResponseStreamInput,
     InvokeModelWithResponseStreamOutput,
     ResponseStream,
     _ConverseStreamOutputDeserializer,
@@ -36,21 +33,13 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from ..models import (
-        ApplyGuardrailInput,
         ApplyGuardrailOutput,
-        ConverseInput,
         ConverseOperationOutput,
-        CountTokensOperationInput,
         CountTokensOutput,
-        GetAsyncInvokeInput,
         GetAsyncInvokeOutput,
-        InvokeGuardrailChecksInput,
         InvokeGuardrailChecksOutput,
-        InvokeModelInput,
         InvokeModelOutput,
-        ListAsyncInvokesInput,
         ListAsyncInvokesOutput,
-        StartAsyncInvokeInput,
         StartAsyncInvokeOutput,
     )
 
@@ -64,10 +53,24 @@ class AsyncBedrockRuntimeClient(AsyncClient[AsyncBedrockRuntimeConfig]):
     models.
     """
 
-    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
+    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
 
+    @_overload
     async def apply_guardrail(
-        self, input: ApplyGuardrailInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ApplyGuardrailInput | _models.ApplyGuardrailInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ApplyGuardrailOutput: ...
+
+    @_overload
+    async def apply_guardrail(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ApplyGuardrailInputDict],
     ) -> ApplyGuardrailOutput:
         """
         The action to apply a guardrail.
@@ -79,8 +82,6 @@ class AsyncBedrockRuntimeClient(AsyncClient[AsyncBedrockRuntimeConfig]):
         in the Amazon Bedrock User Guide
 
         Args:
-            input:
-                An instance of `ApplyGuardrailInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -90,10 +91,33 @@ class AsyncBedrockRuntimeClient(AsyncClient[AsyncBedrockRuntimeConfig]):
         Returns:
             An instance of `ApplyGuardrailOutput`.
         """
-        return await self._invoke(input, _models.APPLY_GUARDRAIL, [], plugins)
 
+    async def apply_guardrail(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ApplyGuardrailOutput:
+        return await self._invoke(
+            self._select_input(_models.APPLY_GUARDRAIL, args, kwargs),
+            _models.APPLY_GUARDRAIL,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def converse(
-        self, input: ConverseInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ConverseInput | _models.ConverseInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ConverseOperationOutput: ...
+
+    @_overload
+    async def converse(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ConverseInputDict],
     ) -> ConverseOperationOutput:
         """
         Sends messages to the specified Amazon Bedrock model. `Converse`
@@ -148,8 +172,6 @@ class AsyncBedrockRuntimeClient(AsyncClient[AsyncBedrockRuntimeConfig]):
         in the Amazon Bedrock User Guide
 
         Args:
-            input:
-                An instance of `ConverseInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -159,10 +181,35 @@ class AsyncBedrockRuntimeClient(AsyncClient[AsyncBedrockRuntimeConfig]):
         Returns:
             An instance of `ConverseOperationOutput`.
         """
-        return await self._invoke(input, _models.CONVERSE, [], plugins)
 
+    async def converse(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ConverseOperationOutput:
+        return await self._invoke(
+            self._select_input(_models.CONVERSE, args, kwargs),
+            _models.CONVERSE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def converse_stream(
-        self, input: ConverseStreamInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ConverseStreamInput | _models.ConverseStreamInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AsyncOutputEventStream[
+        ConverseStreamOutput, ConverseStreamOperationOutput
+    ]: ...
+
+    @_overload
+    async def converse_stream(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ConverseStreamInputDict],
     ) -> AsyncOutputEventStream[ConverseStreamOutput, ConverseStreamOperationOutput]:
         """
         Sends messages to the specified Amazon Bedrock model and returns the
@@ -228,8 +275,6 @@ class AsyncBedrockRuntimeClient(AsyncClient[AsyncBedrockRuntimeConfig]):
         in the Amazon Bedrock User Guide
 
         Args:
-            input:
-                An instance of `ConverseStreamInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -239,15 +284,37 @@ class AsyncBedrockRuntimeClient(AsyncClient[AsyncBedrockRuntimeConfig]):
         Returns:
             An `AsyncOutputEventStream` for server-to-client streaming.
         """
+
+    async def converse_stream(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AsyncOutputEventStream[ConverseStreamOutput, ConverseStreamOperationOutput]:
         pipeline, call = await self._prepare_call(
-            input, _models.CONVERSE_STREAM, [], plugins
+            self._select_input(_models.CONVERSE_STREAM, args, kwargs),
+            _models.CONVERSE_STREAM,
+            [],
+            plugins,
         )
         return await pipeline.output_stream(
             call, ConverseStreamOutput, _ConverseStreamOutputDeserializer().deserialize
         )
 
+    @_overload
     async def count_tokens(
-        self, input: CountTokensOperationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CountTokensOperationInput
+        | _models.CountTokensOperationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CountTokensOutput: ...
+
+    @_overload
+    async def count_tokens(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CountTokensOperationInputDict],
     ) -> CountTokensOutput:
         """
         Returns the token count for a given inference request. This operation
@@ -281,8 +348,6 @@ class AsyncBedrockRuntimeClient(AsyncClient[AsyncBedrockRuntimeConfig]):
           Sends conversation-based inference requests to foundation models
 
         Args:
-            input:
-                An instance of `CountTokensOperationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -292,17 +357,38 @@ class AsyncBedrockRuntimeClient(AsyncClient[AsyncBedrockRuntimeConfig]):
         Returns:
             An instance of `CountTokensOutput`.
         """
-        return await self._invoke(input, _models.COUNT_TOKENS, [], plugins)
 
+    async def count_tokens(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CountTokensOutput:
+        return await self._invoke(
+            self._select_input(_models.COUNT_TOKENS, args, kwargs),
+            _models.COUNT_TOKENS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_async_invoke(
-        self, input: GetAsyncInvokeInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetAsyncInvokeInput | _models.GetAsyncInvokeInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetAsyncInvokeOutput: ...
+
+    @_overload
+    async def get_async_invoke(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetAsyncInvokeInputDict],
     ) -> GetAsyncInvokeOutput:
         """
         Retrieve information about an asynchronous invocation.
 
         Args:
-            input:
-                An instance of `GetAsyncInvokeInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -312,10 +398,34 @@ class AsyncBedrockRuntimeClient(AsyncClient[AsyncBedrockRuntimeConfig]):
         Returns:
             An instance of `GetAsyncInvokeOutput`.
         """
-        return await self._invoke(input, _models.GET_ASYNC_INVOKE, [], plugins)
 
+    async def get_async_invoke(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetAsyncInvokeOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_ASYNC_INVOKE, args, kwargs),
+            _models.GET_ASYNC_INVOKE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def invoke_guardrail_checks(
-        self, input: InvokeGuardrailChecksInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.InvokeGuardrailChecksInput
+        | _models.InvokeGuardrailChecksInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> InvokeGuardrailChecksOutput: ...
+
+    @_overload
+    async def invoke_guardrail_checks(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.InvokeGuardrailChecksInputDict],
     ) -> InvokeGuardrailChecksOutput:
         """
         Evaluates messages against inline guardrail checks. You specify the
@@ -323,8 +433,6 @@ class AsyncBedrockRuntimeClient(AsyncClient[AsyncBedrockRuntimeConfig]):
         per-check results with severity or confidence scores.
 
         Args:
-            input:
-                An instance of `InvokeGuardrailChecksInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -334,10 +442,33 @@ class AsyncBedrockRuntimeClient(AsyncClient[AsyncBedrockRuntimeConfig]):
         Returns:
             An instance of `InvokeGuardrailChecksOutput`.
         """
-        return await self._invoke(input, _models.INVOKE_GUARDRAIL_CHECKS, [], plugins)
 
+    async def invoke_guardrail_checks(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> InvokeGuardrailChecksOutput:
+        return await self._invoke(
+            self._select_input(_models.INVOKE_GUARDRAIL_CHECKS, args, kwargs),
+            _models.INVOKE_GUARDRAIL_CHECKS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def invoke_model(
-        self, input: InvokeModelInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.InvokeModelInput | _models.InvokeModelInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> InvokeModelOutput: ...
+
+    @_overload
+    async def invoke_model(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.InvokeModelInputDict],
     ) -> InvokeModelOutput:
         """
         Invokes the specified Amazon Bedrock model to run inference using the
@@ -367,8 +498,6 @@ class AsyncBedrockRuntimeClient(AsyncClient[AsyncBedrockRuntimeConfig]):
         in the Amazon Bedrock User Guide
 
         Args:
-            input:
-                An instance of `InvokeModelInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -378,12 +507,38 @@ class AsyncBedrockRuntimeClient(AsyncClient[AsyncBedrockRuntimeConfig]):
         Returns:
             An instance of `InvokeModelOutput`.
         """
-        return await self._invoke(input, _models.INVOKE_MODEL, [], plugins)
 
+    async def invoke_model(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> InvokeModelOutput:
+        return await self._invoke(
+            self._select_input(_models.INVOKE_MODEL, args, kwargs),
+            _models.INVOKE_MODEL,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def invoke_model_with_bidirectional_stream(
         self,
-        input: InvokeModelWithBidirectionalStreamOperationInput,
+        request: _models.InvokeModelWithBidirectionalStreamOperationInput
+        | _models.InvokeModelWithBidirectionalStreamOperationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> AsyncDuplexEventStream[
+        InvokeModelWithBidirectionalStreamInput,
+        InvokeModelWithBidirectionalStreamOutput,
+        InvokeModelWithBidirectionalStreamOperationOutput,
+    ]: ...
+
+    @_overload
+    async def invoke_model_with_bidirectional_stream(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.InvokeModelWithBidirectionalStreamOperationInputDict],
     ) -> AsyncDuplexEventStream[
         InvokeModelWithBidirectionalStreamInput,
         InvokeModelWithBidirectionalStreamOutput,
@@ -403,8 +558,6 @@ class AsyncBedrockRuntimeClient(AsyncClient[AsyncBedrockRuntimeConfig]):
         the new prompt.
 
         Args:
-            input:
-                An instance of `InvokeModelWithBidirectionalStreamOperationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -414,8 +567,21 @@ class AsyncBedrockRuntimeClient(AsyncClient[AsyncBedrockRuntimeConfig]):
         Returns:
             An `AsyncDuplexEventStream` for bidirectional streaming.
         """
+
+    async def invoke_model_with_bidirectional_stream(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AsyncDuplexEventStream[
+        InvokeModelWithBidirectionalStreamInput,
+        InvokeModelWithBidirectionalStreamOutput,
+        InvokeModelWithBidirectionalStreamOperationOutput,
+    ]:
         pipeline, call = await self._prepare_call(
-            input, _models.INVOKE_MODEL_WITH_BIDIRECTIONAL_STREAM, [], plugins
+            self._select_input(
+                _models.INVOKE_MODEL_WITH_BIDIRECTIONAL_STREAM, args, kwargs
+            ),
+            _models.INVOKE_MODEL_WITH_BIDIRECTIONAL_STREAM,
+            [],
+            plugins,
         )
         return await pipeline.duplex_stream(
             call,
@@ -424,10 +590,25 @@ class AsyncBedrockRuntimeClient(AsyncClient[AsyncBedrockRuntimeConfig]):
             _InvokeModelWithBidirectionalStreamOutputDeserializer().deserialize,
         )
 
+    @_overload
     async def invoke_model_with_response_stream(
         self,
-        input: InvokeModelWithResponseStreamInput,
+        request: _models.InvokeModelWithResponseStreamInput
+        | _models.InvokeModelWithResponseStreamInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> AsyncOutputEventStream[
+        ResponseStream, InvokeModelWithResponseStreamOutput
+    ]: ...
+
+    @_overload
+    async def invoke_model_with_response_stream(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.InvokeModelWithResponseStreamInputDict],
     ) -> AsyncOutputEventStream[ResponseStream, InvokeModelWithResponseStreamOutput]:
         """
         Invoke the specified Amazon Bedrock model to run inference using the
@@ -466,8 +647,6 @@ class AsyncBedrockRuntimeClient(AsyncClient[AsyncBedrockRuntimeConfig]):
         in the Amazon Bedrock User Guide
 
         Args:
-            input:
-                An instance of `InvokeModelWithResponseStreamInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -477,22 +656,41 @@ class AsyncBedrockRuntimeClient(AsyncClient[AsyncBedrockRuntimeConfig]):
         Returns:
             An `AsyncOutputEventStream` for server-to-client streaming.
         """
+
+    async def invoke_model_with_response_stream(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AsyncOutputEventStream[ResponseStream, InvokeModelWithResponseStreamOutput]:
         pipeline, call = await self._prepare_call(
-            input, _models.INVOKE_MODEL_WITH_RESPONSE_STREAM, [], plugins
+            self._select_input(_models.INVOKE_MODEL_WITH_RESPONSE_STREAM, args, kwargs),
+            _models.INVOKE_MODEL_WITH_RESPONSE_STREAM,
+            [],
+            plugins,
         )
         return await pipeline.output_stream(
             call, ResponseStream, _ResponseStreamDeserializer().deserialize
         )
 
+    @_overload
     async def list_async_invokes(
-        self, input: ListAsyncInvokesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListAsyncInvokesInput | _models.ListAsyncInvokesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListAsyncInvokesOutput: ...
+
+    @_overload
+    async def list_async_invokes(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListAsyncInvokesInputDict],
     ) -> ListAsyncInvokesOutput:
         """
         Lists asynchronous invocations.
 
         Args:
-            input:
-                An instance of `ListAsyncInvokesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -502,10 +700,33 @@ class AsyncBedrockRuntimeClient(AsyncClient[AsyncBedrockRuntimeConfig]):
         Returns:
             An instance of `ListAsyncInvokesOutput`.
         """
-        return await self._invoke(input, _models.LIST_ASYNC_INVOKES, [], plugins)
 
+    async def list_async_invokes(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListAsyncInvokesOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_ASYNC_INVOKES, args, kwargs),
+            _models.LIST_ASYNC_INVOKES,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def start_async_invoke(
-        self, input: StartAsyncInvokeInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StartAsyncInvokeInput | _models.StartAsyncInvokeInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StartAsyncInvokeOutput: ...
+
+    @_overload
+    async def start_async_invoke(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartAsyncInvokeInputDict],
     ) -> StartAsyncInvokeOutput:
         """
         Starts an asynchronous invocation.
@@ -524,8 +745,6 @@ class AsyncBedrockRuntimeClient(AsyncClient[AsyncBedrockRuntimeConfig]):
             models](https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html#security_iam_id-based-policy-examples-deny-inference).
 
         Args:
-            input:
-                An instance of `StartAsyncInvokeInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -535,7 +754,16 @@ class AsyncBedrockRuntimeClient(AsyncClient[AsyncBedrockRuntimeConfig]):
         Returns:
             An instance of `StartAsyncInvokeOutput`.
         """
-        return await self._invoke(input, _models.START_ASYNC_INVOKE, [], plugins)
+
+    async def start_async_invoke(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StartAsyncInvokeOutput:
+        return await self._invoke(
+            self._select_input(_models.START_ASYNC_INVOKE, args, kwargs),
+            _models.START_ASYNC_INVOKE,
+            [],
+            plugins,
+        )
 
     async def _new_config(self) -> AsyncBedrockRuntimeConfig:
         return await AsyncBedrockRuntimeConfig.resolve()

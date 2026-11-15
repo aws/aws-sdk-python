@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import cast
+from typing import Unpack as _Unpack, cast, overload as _overload
 
 from smithy_aws_core.config.types import ConfigSource
 from smithy_aws_core.identity.chain.resolver import IdentityChain
@@ -20,93 +20,49 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from .models import (
-        AddTagsToStreamInput,
         AddTagsToStreamOutput,
-        CreateChannelInput,
         CreateChannelOutput,
-        CreateStreamInput,
         CreateStreamOutput,
-        DecreaseStreamRetentionPeriodInput,
         DecreaseStreamRetentionPeriodOutput,
-        DeleteChannelInput,
         DeleteChannelOutput,
-        DeleteResourcePolicyInput,
         DeleteResourcePolicyOutput,
-        DeleteStreamInput,
         DeleteStreamOutput,
-        DeregisterStreamConsumerInput,
         DeregisterStreamConsumerOutput,
-        DescribeAccountSettingsInput,
         DescribeAccountSettingsOutput,
-        DescribeChannelInput,
         DescribeChannelOutput,
-        DescribeLimitsInput,
         DescribeLimitsOutput,
-        DescribeStreamConsumerInput,
         DescribeStreamConsumerOutput,
-        DescribeStreamInput,
         DescribeStreamOutput,
-        DescribeStreamSummaryInput,
         DescribeStreamSummaryOutput,
-        DisableEnhancedMonitoringInput,
         DisableEnhancedMonitoringOutput,
-        EnableEnhancedMonitoringInput,
         EnableEnhancedMonitoringOutput,
-        GetRecordsInput,
         GetRecordsOutput,
-        GetResourcePolicyInput,
         GetResourcePolicyOutput,
-        GetShardIteratorInput,
         GetShardIteratorOutput,
-        IncreaseStreamRetentionPeriodInput,
         IncreaseStreamRetentionPeriodOutput,
-        ListChannelsInput,
         ListChannelsOutput,
-        ListShardsInput,
         ListShardsOutput,
-        ListStreamConsumersInput,
         ListStreamConsumersOutput,
-        ListStreamsInput,
         ListStreamsOutput,
-        ListTagsForResourceInput,
         ListTagsForResourceOutput,
-        ListTagsForStreamInput,
         ListTagsForStreamOutput,
-        MergeShardsInput,
         MergeShardsOutput,
-        PutRecordInput,
         PutRecordOutput,
-        PutRecordsInput,
         PutRecordsOutput,
-        PutResourcePolicyInput,
         PutResourcePolicyOutput,
-        RegisterStreamConsumerInput,
         RegisterStreamConsumerOutput,
-        RemoveTagsFromStreamInput,
         RemoveTagsFromStreamOutput,
-        SplitShardInput,
         SplitShardOutput,
-        StartStreamEncryptionInput,
         StartStreamEncryptionOutput,
-        StopStreamEncryptionInput,
         StopStreamEncryptionOutput,
-        TagResourceInput,
         TagResourceOutput,
-        UntagResourceInput,
         UntagResourceOutput,
-        UpdateAccountSettingsInput,
         UpdateAccountSettingsOutput,
-        UpdateChannelInput,
         UpdateChannelOutput,
-        UpdateMaxRecordSizeInput,
         UpdateMaxRecordSizeOutput,
-        UpdateShardCountInput,
         UpdateShardCountOutput,
-        UpdateStreamModeInput,
         UpdateStreamModeOutput,
-        UpdateStreamRecordDistributionStrategyInput,
         UpdateStreamRecordDistributionStrategyOutput,
-        UpdateStreamWarmThroughputInput,
         UpdateStreamWarmThroughputOutput,
     )
 
@@ -120,10 +76,24 @@ class KinesisClient(Client[KinesisConfig]):
     for real-time processing of streaming big data.
     """
 
-    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
+    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
 
+    @_overload
     def add_tags_to_stream(
-        self, input: AddTagsToStreamInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.AddTagsToStreamInput | _models.AddTagsToStreamInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AddTagsToStreamOutput: ...
+
+    @_overload
+    def add_tags_to_stream(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AddTagsToStreamInputDict],
     ) -> AddTagsToStreamOutput:
         """
         Adds or updates tags for the specified Kinesis data stream. You can
@@ -140,8 +110,6 @@ class KinesisClient(Client[KinesisConfig]):
         AddTagsToStream has a limit of five transactions per second per account.
 
         Args:
-            input:
-                An instance of `AddTagsToStreamInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -151,10 +119,33 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `AddTagsToStreamOutput`.
         """
-        return self._invoke(input, _models.ADD_TAGS_TO_STREAM, [], plugins)
 
+    def add_tags_to_stream(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AddTagsToStreamOutput:
+        return self._invoke(
+            self._select_input(_models.ADD_TAGS_TO_STREAM, args, kwargs),
+            _models.ADD_TAGS_TO_STREAM,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_channel(
-        self, input: CreateChannelInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateChannelInput | _models.CreateChannelInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateChannelOutput: ...
+
+    @_overload
+    def create_channel(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateChannelInputDict],
     ) -> CreateChannelOutput:
         """
         Creates a channel that delivers records from a Kinesis data stream to a
@@ -183,8 +174,6 @@ class KinesisClient(Client[KinesisConfig]):
         `LimitExceededException`.
 
         Args:
-            input:
-                An instance of `CreateChannelInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -194,10 +183,33 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `CreateChannelOutput`.
         """
-        return self._invoke(input, _models.CREATE_CHANNEL, [], plugins)
 
+    def create_channel(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateChannelOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_CHANNEL, args, kwargs),
+            _models.CREATE_CHANNEL,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_stream(
-        self, input: CreateStreamInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateStreamInput | _models.CreateStreamInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateStreamOutput: ...
+
+    @_overload
+    def create_stream(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateStreamInputDict],
     ) -> CreateStreamOutput:
         """
         Creates a Kinesis data stream. A stream captures and transports data
@@ -270,8 +282,6 @@ class KinesisClient(Client[KinesisConfig]):
         is in `ACTIVE` state.
 
         Args:
-            input:
-                An instance of `CreateStreamInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -281,12 +291,34 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `CreateStreamOutput`.
         """
-        return self._invoke(input, _models.CREATE_STREAM, [], plugins)
 
+    def create_stream(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateStreamOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_STREAM, args, kwargs),
+            _models.CREATE_STREAM,
+            [],
+            plugins,
+        )
+
+    @_overload
     def decrease_stream_retention_period(
         self,
-        input: DecreaseStreamRetentionPeriodInput,
+        request: _models.DecreaseStreamRetentionPeriodInput
+        | _models.DecreaseStreamRetentionPeriodInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DecreaseStreamRetentionPeriodOutput: ...
+
+    @_overload
+    def decrease_stream_retention_period(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DecreaseStreamRetentionPeriodInputDict],
     ) -> DecreaseStreamRetentionPeriodOutput:
         """
         Decreases the Kinesis data stream's retention period, which is the
@@ -303,8 +335,6 @@ class KinesisClient(Client[KinesisConfig]):
         already in the stream that is older than 24 hours is inaccessible.
 
         Args:
-            input:
-                An instance of `DecreaseStreamRetentionPeriodInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -314,12 +344,33 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `DecreaseStreamRetentionPeriodOutput`.
         """
+
+    def decrease_stream_retention_period(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DecreaseStreamRetentionPeriodOutput:
         return self._invoke(
-            input, _models.DECREASE_STREAM_RETENTION_PERIOD, [], plugins
+            self._select_input(_models.DECREASE_STREAM_RETENTION_PERIOD, args, kwargs),
+            _models.DECREASE_STREAM_RETENTION_PERIOD,
+            [],
+            plugins,
         )
 
+    @_overload
     def delete_channel(
-        self, input: DeleteChannelInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteChannelInput | _models.DeleteChannelInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteChannelOutput: ...
+
+    @_overload
+    def delete_channel(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteChannelInputDict],
     ) -> DeleteChannelOutput:
         """
         Deletes the specified channel. Deleting a channel stops delivery from
@@ -335,8 +386,6 @@ class KinesisClient(Client[KinesisConfig]):
         `LimitExceededException`.
 
         Args:
-            input:
-                An instance of `DeleteChannelInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -346,10 +395,34 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `DeleteChannelOutput`.
         """
-        return self._invoke(input, _models.DELETE_CHANNEL, [], plugins)
 
+    def delete_channel(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteChannelOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_CHANNEL, args, kwargs),
+            _models.DELETE_CHANNEL,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_resource_policy(
-        self, input: DeleteResourcePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteResourcePolicyInput
+        | _models.DeleteResourcePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteResourcePolicyOutput: ...
+
+    @_overload
+    def delete_resource_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteResourcePolicyInputDict],
     ) -> DeleteResourcePolicyOutput:
         """
         Delete a policy for the specified data stream or consumer. Request
@@ -361,8 +434,6 @@ class KinesisClient(Client[KinesisConfig]):
           `^(arn):aws.*:kinesis:.*:\\d{12}:.*stream\\/[a-zA-Z0-9_.-]+\\/consumer\\/[a-zA-Z0-9_.-]+:[0-9]+`
 
         Args:
-            input:
-                An instance of `DeleteResourcePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -372,12 +443,33 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `DeleteResourcePolicyOutput`.
         """
-        return self._invoke(input, _models.DELETE_RESOURCE_POLICY, [], plugins)
 
+    def delete_resource_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteResourcePolicyOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_RESOURCE_POLICY, args, kwargs),
+            _models.DELETE_RESOURCE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_stream(
         self,
-        input: DeleteStreamInput | None = None,
+        request: _models.DeleteStreamInput | _models.DeleteStreamInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteStreamOutput: ...
+
+    @_overload
+    def delete_stream(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteStreamInputDict],
     ) -> DeleteStreamOutput:
         """
         Deletes a Kinesis data stream and all its shards and data. You must shut
@@ -407,8 +499,6 @@ class KinesisClient(Client[KinesisConfig]):
         DeleteStream has a limit of five transactions per second per account.
 
         Args:
-            input:
-                An instance of `DeleteStreamInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -418,12 +508,34 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `DeleteStreamOutput`.
         """
-        return self._invoke(input, _models.DELETE_STREAM, [], plugins)
 
+    def delete_stream(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteStreamOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_STREAM, args, kwargs),
+            _models.DELETE_STREAM,
+            [],
+            plugins,
+        )
+
+    @_overload
     def deregister_stream_consumer(
         self,
-        input: DeregisterStreamConsumerInput | None = None,
+        request: _models.DeregisterStreamConsumerInput
+        | _models.DeregisterStreamConsumerInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeregisterStreamConsumerOutput: ...
+
+    @_overload
+    def deregister_stream_consumer(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeregisterStreamConsumerInputDict],
     ) -> DeregisterStreamConsumerOutput:
         """
         To deregister a consumer, provide its ARN. Alternatively, you can
@@ -438,8 +550,6 @@ class KinesisClient(Client[KinesisConfig]):
         This operation has a limit of five transactions per second per stream.
 
         Args:
-            input:
-                An instance of `DeregisterStreamConsumerInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -449,12 +559,34 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `DeregisterStreamConsumerOutput`.
         """
-        return self._invoke(input, _models.DEREGISTER_STREAM_CONSUMER, [], plugins)
 
+    def deregister_stream_consumer(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeregisterStreamConsumerOutput:
+        return self._invoke(
+            self._select_input(_models.DEREGISTER_STREAM_CONSUMER, args, kwargs),
+            _models.DEREGISTER_STREAM_CONSUMER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_account_settings(
         self,
-        input: DescribeAccountSettingsInput | None = None,
+        request: _models.DescribeAccountSettingsInput
+        | _models.DescribeAccountSettingsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeAccountSettingsOutput: ...
+
+    @_overload
+    def describe_account_settings(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeAccountSettingsInputDict],
     ) -> DescribeAccountSettingsOutput:
         """
         Describes the account-level settings for Amazon Kinesis Data Streams.
@@ -466,8 +598,6 @@ class KinesisClient(Client[KinesisConfig]):
         `LimitExceededException`.
 
         Args:
-            input:
-                An instance of `DescribeAccountSettingsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -477,10 +607,33 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `DescribeAccountSettingsOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_ACCOUNT_SETTINGS, [], plugins)
 
+    def describe_account_settings(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeAccountSettingsOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_ACCOUNT_SETTINGS, args, kwargs),
+            _models.DESCRIBE_ACCOUNT_SETTINGS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_channel(
-        self, input: DescribeChannelInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeChannelInput | _models.DescribeChannelInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeChannelOutput: ...
+
+    @_overload
+    def describe_channel(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeChannelInputDict],
     ) -> DescribeChannelOutput:
         """
         Describes the specified channel, including its configuration and current
@@ -495,8 +648,6 @@ class KinesisClient(Client[KinesisConfig]):
         `LimitExceededException`.
 
         Args:
-            input:
-                An instance of `DescribeChannelInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -506,12 +657,33 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `DescribeChannelOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_CHANNEL, [], plugins)
 
+    def describe_channel(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeChannelOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_CHANNEL, args, kwargs),
+            _models.DESCRIBE_CHANNEL,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_limits(
         self,
-        input: DescribeLimitsInput | None = None,
+        request: _models.DescribeLimitsInput | _models.DescribeLimitsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeLimitsOutput: ...
+
+    @_overload
+    def describe_limits(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeLimitsInputDict],
     ) -> DescribeLimitsOutput:
         """
         Describes the shard limits and usage for the account.
@@ -522,8 +694,6 @@ class KinesisClient(Client[KinesisConfig]):
         This operation has a limit of one transaction per second per account.
 
         Args:
-            input:
-                An instance of `DescribeLimitsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -533,12 +703,33 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `DescribeLimitsOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_LIMITS, [], plugins)
 
+    def describe_limits(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeLimitsOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_LIMITS, args, kwargs),
+            _models.DESCRIBE_LIMITS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_stream(
         self,
-        input: DescribeStreamInput | None = None,
+        request: _models.DescribeStreamInput | _models.DescribeStreamInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeStreamOutput: ...
+
+    @_overload
+    def describe_stream(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeStreamInputDict],
     ) -> DescribeStreamOutput:
         """
         Describes the specified Kinesis data stream.
@@ -573,8 +764,6 @@ class KinesisClient(Client[KinesisConfig]):
         This operation has a limit of 10 transactions per second per account.
 
         Args:
-            input:
-                An instance of `DescribeStreamInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -584,12 +773,34 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `DescribeStreamOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_STREAM, [], plugins)
 
+    def describe_stream(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeStreamOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_STREAM, args, kwargs),
+            _models.DESCRIBE_STREAM,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_stream_consumer(
         self,
-        input: DescribeStreamConsumerInput | None = None,
+        request: _models.DescribeStreamConsumerInput
+        | _models.DescribeStreamConsumerInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeStreamConsumerOutput: ...
+
+    @_overload
+    def describe_stream_consumer(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeStreamConsumerInputDict],
     ) -> DescribeStreamConsumerOutput:
         """
         To get the description of a registered consumer, provide the ARN of the
@@ -608,8 +819,6 @@ class KinesisClient(Client[KinesisConfig]):
             sure to provide the ARN of the consumer.
 
         Args:
-            input:
-                An instance of `DescribeStreamConsumerInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -619,12 +828,34 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `DescribeStreamConsumerOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_STREAM_CONSUMER, [], plugins)
 
+    def describe_stream_consumer(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeStreamConsumerOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_STREAM_CONSUMER, args, kwargs),
+            _models.DESCRIBE_STREAM_CONSUMER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_stream_summary(
         self,
-        input: DescribeStreamSummaryInput | None = None,
+        request: _models.DescribeStreamSummaryInput
+        | _models.DescribeStreamSummaryInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeStreamSummaryOutput: ...
+
+    @_overload
+    def describe_stream_summary(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeStreamSummaryInputDict],
     ) -> DescribeStreamSummaryOutput:
         """
         Provides a summarized description of the specified Kinesis data stream
@@ -643,8 +874,6 @@ class KinesisClient(Client[KinesisConfig]):
         account.
 
         Args:
-            input:
-                An instance of `DescribeStreamSummaryInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -654,10 +883,34 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `DescribeStreamSummaryOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_STREAM_SUMMARY, [], plugins)
 
+    def describe_stream_summary(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeStreamSummaryOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_STREAM_SUMMARY, args, kwargs),
+            _models.DESCRIBE_STREAM_SUMMARY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def disable_enhanced_monitoring(
-        self, input: DisableEnhancedMonitoringInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DisableEnhancedMonitoringInput
+        | _models.DisableEnhancedMonitoringInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DisableEnhancedMonitoringOutput: ...
+
+    @_overload
+    def disable_enhanced_monitoring(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DisableEnhancedMonitoringInputDict],
     ) -> DisableEnhancedMonitoringOutput:
         """
         Disables enhanced monitoring.
@@ -668,8 +921,6 @@ class KinesisClient(Client[KinesisConfig]):
             `StreamARN` input parameter when you invoke this API.
 
         Args:
-            input:
-                An instance of `DisableEnhancedMonitoringInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -679,10 +930,34 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `DisableEnhancedMonitoringOutput`.
         """
-        return self._invoke(input, _models.DISABLE_ENHANCED_MONITORING, [], plugins)
 
+    def disable_enhanced_monitoring(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DisableEnhancedMonitoringOutput:
+        return self._invoke(
+            self._select_input(_models.DISABLE_ENHANCED_MONITORING, args, kwargs),
+            _models.DISABLE_ENHANCED_MONITORING,
+            [],
+            plugins,
+        )
+
+    @_overload
     def enable_enhanced_monitoring(
-        self, input: EnableEnhancedMonitoringInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.EnableEnhancedMonitoringInput
+        | _models.EnableEnhancedMonitoringInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> EnableEnhancedMonitoringOutput: ...
+
+    @_overload
+    def enable_enhanced_monitoring(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.EnableEnhancedMonitoringInputDict],
     ) -> EnableEnhancedMonitoringOutput:
         """
         Enables enhanced Kinesis data stream monitoring for shard-level metrics.
@@ -693,8 +968,6 @@ class KinesisClient(Client[KinesisConfig]):
             `StreamARN` input parameter when you invoke this API.
 
         Args:
-            input:
-                An instance of `EnableEnhancedMonitoringInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -704,10 +977,33 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `EnableEnhancedMonitoringOutput`.
         """
-        return self._invoke(input, _models.ENABLE_ENHANCED_MONITORING, [], plugins)
 
+    def enable_enhanced_monitoring(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> EnableEnhancedMonitoringOutput:
+        return self._invoke(
+            self._select_input(_models.ENABLE_ENHANCED_MONITORING, args, kwargs),
+            _models.ENABLE_ENHANCED_MONITORING,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_records(
-        self, input: GetRecordsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetRecordsInput | _models.GetRecordsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetRecordsOutput: ...
+
+    @_overload
+    def get_records(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetRecordsInputDict],
     ) -> GetRecordsOutput:
         """
         Gets data records from a Kinesis data stream's shard.
@@ -788,8 +1084,6 @@ class KinesisClient(Client[KinesisConfig]):
         This operation has a limit of five transactions per second per shard.
 
         Args:
-            input:
-                An instance of `GetRecordsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -799,10 +1093,33 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `GetRecordsOutput`.
         """
-        return self._invoke(input, _models.GET_RECORDS, [], plugins)
 
+    def get_records(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetRecordsOutput:
+        return self._invoke(
+            self._select_input(_models.GET_RECORDS, args, kwargs),
+            _models.GET_RECORDS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_resource_policy(
-        self, input: GetResourcePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetResourcePolicyInput | _models.GetResourcePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetResourcePolicyOutput: ...
+
+    @_overload
+    def get_resource_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetResourcePolicyInputDict],
     ) -> GetResourcePolicyOutput:
         """
         Returns a policy attached to the specified data stream or consumer.
@@ -814,8 +1131,6 @@ class KinesisClient(Client[KinesisConfig]):
           `^(arn):aws.*:kinesis:.*:\\d{12}:.*stream\\/[a-zA-Z0-9_.-]+\\/consumer\\/[a-zA-Z0-9_.-]+:[0-9]+`
 
         Args:
-            input:
-                An instance of `GetResourcePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -825,10 +1140,33 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `GetResourcePolicyOutput`.
         """
-        return self._invoke(input, _models.GET_RESOURCE_POLICY, [], plugins)
 
+    def get_resource_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetResourcePolicyOutput:
+        return self._invoke(
+            self._select_input(_models.GET_RESOURCE_POLICY, args, kwargs),
+            _models.GET_RESOURCE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_shard_iterator(
-        self, input: GetShardIteratorInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetShardIteratorInput | _models.GetShardIteratorInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetShardIteratorOutput: ...
+
+    @_overload
+    def get_shard_iterator(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetShardIteratorInputDict],
     ) -> GetShardIteratorOutput:
         """
         Gets an Amazon Kinesis shard iterator. A shard iterator expires 5
@@ -880,8 +1218,6 @@ class KinesisClient(Client[KinesisConfig]):
         per open shard.
 
         Args:
-            input:
-                An instance of `GetShardIteratorInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -891,12 +1227,34 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `GetShardIteratorOutput`.
         """
-        return self._invoke(input, _models.GET_SHARD_ITERATOR, [], plugins)
 
+    def get_shard_iterator(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetShardIteratorOutput:
+        return self._invoke(
+            self._select_input(_models.GET_SHARD_ITERATOR, args, kwargs),
+            _models.GET_SHARD_ITERATOR,
+            [],
+            plugins,
+        )
+
+    @_overload
     def increase_stream_retention_period(
         self,
-        input: IncreaseStreamRetentionPeriodInput,
+        request: _models.IncreaseStreamRetentionPeriodInput
+        | _models.IncreaseStreamRetentionPeriodInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> IncreaseStreamRetentionPeriodOutput: ...
+
+    @_overload
+    def increase_stream_retention_period(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.IncreaseStreamRetentionPeriodInputDict],
     ) -> IncreaseStreamRetentionPeriodOutput:
         """
         Increases the Kinesis data stream's retention period, which is the
@@ -918,8 +1276,6 @@ class KinesisClient(Client[KinesisConfig]):
         hours remains inaccessible to consumer applications.
 
         Args:
-            input:
-                An instance of `IncreaseStreamRetentionPeriodInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -929,14 +1285,33 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `IncreaseStreamRetentionPeriodOutput`.
         """
+
+    def increase_stream_retention_period(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> IncreaseStreamRetentionPeriodOutput:
         return self._invoke(
-            input, _models.INCREASE_STREAM_RETENTION_PERIOD, [], plugins
+            self._select_input(_models.INCREASE_STREAM_RETENTION_PERIOD, args, kwargs),
+            _models.INCREASE_STREAM_RETENTION_PERIOD,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_channels(
         self,
-        input: ListChannelsInput | None = None,
+        request: _models.ListChannelsInput | _models.ListChannelsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListChannelsOutput: ...
+
+    @_overload
+    def list_channels(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListChannelsInputDict],
     ) -> ListChannelsOutput:
         """
         Lists the channels in your account. You can filter the results by source
@@ -951,8 +1326,6 @@ class KinesisClient(Client[KinesisConfig]):
         `LimitExceededException`.
 
         Args:
-            input:
-                An instance of `ListChannelsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -962,10 +1335,33 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `ListChannelsOutput`.
         """
-        return self._invoke(input, _models.LIST_CHANNELS, [], plugins)
 
+    def list_channels(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListChannelsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_CHANNELS, args, kwargs),
+            _models.LIST_CHANNELS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_shards(
-        self, input: ListShardsInput | None = None, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListShardsInput | _models.ListShardsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListShardsOutput: ...
+
+    @_overload
+    def list_shards(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListShardsInputDict],
     ) -> ListShardsOutput:
         """
         Lists the shards in a stream and provides information about each shard.
@@ -990,8 +1386,6 @@ class KinesisClient(Client[KinesisConfig]):
             IAM](https://docs.aws.amazon.com/streams/latest/dev/controlling-access.html).
 
         Args:
-            input:
-                An instance of `ListShardsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1001,10 +1395,34 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `ListShardsOutput`.
         """
-        return self._invoke(input, _models.LIST_SHARDS, [], plugins)
 
+    def list_shards(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListShardsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_SHARDS, args, kwargs),
+            _models.LIST_SHARDS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_stream_consumers(
-        self, input: ListStreamConsumersInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListStreamConsumersInput
+        | _models.ListStreamConsumersInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListStreamConsumersOutput: ...
+
+    @_overload
+    def list_stream_consumers(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListStreamConsumersInputDict],
     ) -> ListStreamConsumersOutput:
         """
         Lists the consumers registered to receive data from a stream using
@@ -1013,8 +1431,6 @@ class KinesisClient(Client[KinesisConfig]):
         This operation has a limit of 5 transactions per second per stream.
 
         Args:
-            input:
-                An instance of `ListStreamConsumersInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1024,10 +1440,33 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `ListStreamConsumersOutput`.
         """
-        return self._invoke(input, _models.LIST_STREAM_CONSUMERS, [], plugins)
 
+    def list_stream_consumers(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListStreamConsumersOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_STREAM_CONSUMERS, args, kwargs),
+            _models.LIST_STREAM_CONSUMERS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_streams(
-        self, input: ListStreamsInput | None = None, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListStreamsInput | _models.ListStreamsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListStreamsOutput: ...
+
+    @_overload
+    def list_streams(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListStreamsInputDict],
     ) -> ListStreamsOutput:
         """
         Lists your Kinesis data streams.
@@ -1050,8 +1489,6 @@ class KinesisClient(Client[KinesisConfig]):
         ListStreams has a limit of five transactions per second per account.
 
         Args:
-            input:
-                An instance of `ListStreamsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1061,10 +1498,34 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `ListStreamsOutput`.
         """
-        return self._invoke(input, _models.LIST_STREAMS, [], plugins)
 
+    def list_streams(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListStreamsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_STREAMS, args, kwargs),
+            _models.LIST_STREAMS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_tags_for_resource(
-        self, input: ListTagsForResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListTagsForResourceInput
+        | _models.ListTagsForResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListTagsForResourceOutput: ...
+
+    @_overload
+    def list_tags_for_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListTagsForResourceInputDict],
     ) -> ListTagsForResourceOutput:
         """
         List all tags added to the specified Kinesis resource. Each tag is a
@@ -1076,8 +1537,6 @@ class KinesisClient(Client[KinesisConfig]):
         resources](https://docs.aws.amazon.com/streams/latest/dev/tagging.html).
 
         Args:
-            input:
-                An instance of `ListTagsForResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1087,12 +1546,33 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `ListTagsForResourceOutput`.
         """
-        return self._invoke(input, _models.LIST_TAGS_FOR_RESOURCE, [], plugins)
 
+    def list_tags_for_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListTagsForResourceOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_TAGS_FOR_RESOURCE, args, kwargs),
+            _models.LIST_TAGS_FOR_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_tags_for_stream(
         self,
-        input: ListTagsForStreamInput | None = None,
+        request: _models.ListTagsForStreamInput | _models.ListTagsForStreamInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListTagsForStreamOutput: ...
+
+    @_overload
+    def list_tags_for_stream(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListTagsForStreamInputDict],
     ) -> ListTagsForStreamOutput:
         """
         Lists the tags for the specified Kinesis data stream. This operation has
@@ -1104,8 +1584,6 @@ class KinesisClient(Client[KinesisConfig]):
             `StreamARN` input parameter when you invoke this API.
 
         Args:
-            input:
-                An instance of `ListTagsForStreamInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1115,10 +1593,33 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `ListTagsForStreamOutput`.
         """
-        return self._invoke(input, _models.LIST_TAGS_FOR_STREAM, [], plugins)
 
+    def list_tags_for_stream(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListTagsForStreamOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_TAGS_FOR_STREAM, args, kwargs),
+            _models.LIST_TAGS_FOR_STREAM,
+            [],
+            plugins,
+        )
+
+    @_overload
     def merge_shards(
-        self, input: MergeShardsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.MergeShardsInput | _models.MergeShardsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> MergeShardsOutput: ...
+
+    @_overload
+    def merge_shards(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.MergeShardsInputDict],
     ) -> MergeShardsOutput:
         """
         Merges two adjacent shards in a Kinesis data stream and combines them
@@ -1171,8 +1672,6 @@ class KinesisClient(Client[KinesisConfig]):
         `MergeShards` has a limit of five transactions per second per account.
 
         Args:
-            input:
-                An instance of `MergeShardsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1182,10 +1681,33 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `MergeShardsOutput`.
         """
-        return self._invoke(input, _models.MERGE_SHARDS, [], plugins)
 
+    def merge_shards(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> MergeShardsOutput:
+        return self._invoke(
+            self._select_input(_models.MERGE_SHARDS, args, kwargs),
+            _models.MERGE_SHARDS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_record(
-        self, input: PutRecordInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutRecordInput | _models.PutRecordInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutRecordOutput: ...
+
+    @_overload
+    def put_record(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutRecordInputDict],
     ) -> PutRecordOutput:
         """
         Writes a single data record into an Amazon Kinesis data stream. Call
@@ -1245,8 +1767,6 @@ class KinesisClient(Client[KinesisConfig]):
         DecreaseStreamRetentionPeriod to modify this retention period.
 
         Args:
-            input:
-                An instance of `PutRecordInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1256,10 +1776,33 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `PutRecordOutput`.
         """
-        return self._invoke(input, _models.PUT_RECORD, [], plugins)
 
+    def put_record(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutRecordOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_RECORD, args, kwargs),
+            _models.PUT_RECORD,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_records(
-        self, input: PutRecordsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutRecordsInput | _models.PutRecordsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutRecordsOutput: ...
+
+    @_overload
+    def put_records(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutRecordsInputDict],
     ) -> PutRecordsOutput:
         """
         Writes multiple data records into a Kinesis data stream in a single call
@@ -1342,8 +1885,6 @@ class KinesisClient(Client[KinesisConfig]):
         DecreaseStreamRetentionPeriod to modify this retention period.
 
         Args:
-            input:
-                An instance of `PutRecordsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1353,10 +1894,33 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `PutRecordsOutput`.
         """
-        return self._invoke(input, _models.PUT_RECORDS, [], plugins)
 
+    def put_records(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutRecordsOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_RECORDS, args, kwargs),
+            _models.PUT_RECORDS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_resource_policy(
-        self, input: PutResourcePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutResourcePolicyInput | _models.PutResourcePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutResourcePolicyOutput: ...
+
+    @_overload
+    def put_resource_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutResourcePolicyInputDict],
     ) -> PutResourcePolicyOutput:
         """
         Attaches a resource-based policy to a data stream or registered
@@ -1381,8 +1945,6 @@ class KinesisClient(Client[KinesisConfig]):
         IAM](https://docs.aws.amazon.com/streams/latest/dev/controlling-access.html).
 
         Args:
-            input:
-                An instance of `PutResourcePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1392,10 +1954,34 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `PutResourcePolicyOutput`.
         """
-        return self._invoke(input, _models.PUT_RESOURCE_POLICY, [], plugins)
 
+    def put_resource_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutResourcePolicyOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_RESOURCE_POLICY, args, kwargs),
+            _models.PUT_RESOURCE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def register_stream_consumer(
-        self, input: RegisterStreamConsumerInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RegisterStreamConsumerInput
+        | _models.RegisterStreamConsumerInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RegisterStreamConsumerOutput: ...
+
+    @_overload
+    def register_stream_consumer(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RegisterStreamConsumerInputDict],
     ) -> RegisterStreamConsumerOutput:
         """
         Registers a consumer with a Kinesis data stream. When you use this
@@ -1430,8 +2016,6 @@ class KinesisClient(Client[KinesisConfig]):
         a `CREATING` status results in a `LimitExceededException`.
 
         Args:
-            input:
-                An instance of `RegisterStreamConsumerInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1441,10 +2025,34 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `RegisterStreamConsumerOutput`.
         """
-        return self._invoke(input, _models.REGISTER_STREAM_CONSUMER, [], plugins)
 
+    def register_stream_consumer(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RegisterStreamConsumerOutput:
+        return self._invoke(
+            self._select_input(_models.REGISTER_STREAM_CONSUMER, args, kwargs),
+            _models.REGISTER_STREAM_CONSUMER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def remove_tags_from_stream(
-        self, input: RemoveTagsFromStreamInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RemoveTagsFromStreamInput
+        | _models.RemoveTagsFromStreamInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RemoveTagsFromStreamOutput: ...
+
+    @_overload
+    def remove_tags_from_stream(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RemoveTagsFromStreamInputDict],
     ) -> RemoveTagsFromStreamOutput:
         """
         Removes tags from the specified Kinesis data stream. Removed tags are
@@ -1462,8 +2070,6 @@ class KinesisClient(Client[KinesisConfig]):
         account.
 
         Args:
-            input:
-                An instance of `RemoveTagsFromStreamInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1473,10 +2079,33 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `RemoveTagsFromStreamOutput`.
         """
-        return self._invoke(input, _models.REMOVE_TAGS_FROM_STREAM, [], plugins)
 
+    def remove_tags_from_stream(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RemoveTagsFromStreamOutput:
+        return self._invoke(
+            self._select_input(_models.REMOVE_TAGS_FROM_STREAM, args, kwargs),
+            _models.REMOVE_TAGS_FROM_STREAM,
+            [],
+            plugins,
+        )
+
+    @_overload
     def split_shard(
-        self, input: SplitShardInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.SplitShardInput | _models.SplitShardInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> SplitShardOutput: ...
+
+    @_overload
+    def split_shard(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SplitShardInputDict],
     ) -> SplitShardOutput:
         """
         Splits a shard into two new shards in the Kinesis data stream, to
@@ -1539,8 +2168,6 @@ class KinesisClient(Client[KinesisConfig]):
         `SplitShard` has a limit of five transactions per second per account.
 
         Args:
-            input:
-                An instance of `SplitShardInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1550,10 +2177,34 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `SplitShardOutput`.
         """
-        return self._invoke(input, _models.SPLIT_SHARD, [], plugins)
 
+    def split_shard(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SplitShardOutput:
+        return self._invoke(
+            self._select_input(_models.SPLIT_SHARD, args, kwargs),
+            _models.SPLIT_SHARD,
+            [],
+            plugins,
+        )
+
+    @_overload
     def start_stream_encryption(
-        self, input: StartStreamEncryptionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StartStreamEncryptionInput
+        | _models.StartStreamEncryptionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StartStreamEncryptionOutput: ...
+
+    @_overload
+    def start_stream_encryption(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartStreamEncryptionInputDict],
     ) -> StartStreamEncryptionOutput:
         """
         Enables or updates server-side encryption using an Amazon Web Services
@@ -1582,8 +2233,6 @@ class KinesisClient(Client[KinesisConfig]):
         inspecting the API response from `PutRecord` or `PutRecords`.
 
         Args:
-            input:
-                An instance of `StartStreamEncryptionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1593,10 +2242,34 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `StartStreamEncryptionOutput`.
         """
-        return self._invoke(input, _models.START_STREAM_ENCRYPTION, [], plugins)
 
+    def start_stream_encryption(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StartStreamEncryptionOutput:
+        return self._invoke(
+            self._select_input(_models.START_STREAM_ENCRYPTION, args, kwargs),
+            _models.START_STREAM_ENCRYPTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def stop_stream_encryption(
-        self, input: StopStreamEncryptionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StopStreamEncryptionInput
+        | _models.StopStreamEncryptionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StopStreamEncryptionOutput: ...
+
+    @_overload
+    def stop_stream_encryption(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StopStreamEncryptionInputDict],
     ) -> StopStreamEncryptionOutput:
         """
         Disables server-side encryption for a specified stream.
@@ -1626,8 +2299,6 @@ class KinesisClient(Client[KinesisConfig]):
         `PutRecord` or `PutRecords`.
 
         Args:
-            input:
-                An instance of `StopStreamEncryptionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1637,10 +2308,33 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `StopStreamEncryptionOutput`.
         """
-        return self._invoke(input, _models.STOP_STREAM_ENCRYPTION, [], plugins)
 
+    def stop_stream_encryption(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StopStreamEncryptionOutput:
+        return self._invoke(
+            self._select_input(_models.STOP_STREAM_ENCRYPTION, args, kwargs),
+            _models.STOP_STREAM_ENCRYPTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def tag_resource(
-        self, input: TagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.TagResourceInput | _models.TagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> TagResourceOutput: ...
+
+    @_overload
+    def tag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.TagResourceInputDict],
     ) -> TagResourceOutput:
         """
         Adds or updates tags for the specified Kinesis resource. Each tag is a
@@ -1649,8 +2343,6 @@ class KinesisClient(Client[KinesisConfig]):
         assign up to 50 tags to a Kinesis resource.
 
         Args:
-            input:
-                An instance of `TagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1660,10 +2352,33 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `TagResourceOutput`.
         """
-        return self._invoke(input, _models.TAG_RESOURCE, [], plugins)
 
+    def tag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> TagResourceOutput:
+        return self._invoke(
+            self._select_input(_models.TAG_RESOURCE, args, kwargs),
+            _models.TAG_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def untag_resource(
-        self, input: UntagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UntagResourceInput | _models.UntagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UntagResourceOutput: ...
+
+    @_overload
+    def untag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UntagResourceInputDict],
     ) -> UntagResourceOutput:
         """
         Removes tags from the specified Kinesis resource. Removed tags are
@@ -1671,8 +2386,6 @@ class KinesisClient(Client[KinesisConfig]):
         successfully.
 
         Args:
-            input:
-                An instance of `UntagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1682,10 +2395,34 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `UntagResourceOutput`.
         """
-        return self._invoke(input, _models.UNTAG_RESOURCE, [], plugins)
 
+    def untag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UntagResourceOutput:
+        return self._invoke(
+            self._select_input(_models.UNTAG_RESOURCE, args, kwargs),
+            _models.UNTAG_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_account_settings(
-        self, input: UpdateAccountSettingsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateAccountSettingsInput
+        | _models.UpdateAccountSettingsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateAccountSettingsOutput: ...
+
+    @_overload
+    def update_account_settings(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateAccountSettingsInputDict],
     ) -> UpdateAccountSettingsOutput:
         """
         Updates the account-level settings for Amazon Kinesis Data Streams.
@@ -1705,8 +2442,6 @@ class KinesisClient(Client[KinesisConfig]):
           `LimitExceededException`.
 
         Args:
-            input:
-                An instance of `UpdateAccountSettingsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1716,10 +2451,33 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `UpdateAccountSettingsOutput`.
         """
-        return self._invoke(input, _models.UPDATE_ACCOUNT_SETTINGS, [], plugins)
 
+    def update_account_settings(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateAccountSettingsOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_ACCOUNT_SETTINGS, args, kwargs),
+            _models.UPDATE_ACCOUNT_SETTINGS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_channel(
-        self, input: UpdateChannelInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateChannelInput | _models.UpdateChannelInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateChannelOutput: ...
+
+    @_overload
+    def update_channel(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateChannelInputDict],
     ) -> UpdateChannelOutput:
         """
         Updates the data freshness interval or the Amazon CloudWatch Logs
@@ -1738,8 +2496,6 @@ class KinesisClient(Client[KinesisConfig]):
         `LimitExceededException`.
 
         Args:
-            input:
-                An instance of `UpdateChannelInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1749,10 +2505,34 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `UpdateChannelOutput`.
         """
-        return self._invoke(input, _models.UPDATE_CHANNEL, [], plugins)
 
+    def update_channel(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateChannelOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_CHANNEL, args, kwargs),
+            _models.UPDATE_CHANNEL,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_max_record_size(
-        self, input: UpdateMaxRecordSizeInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateMaxRecordSizeInput
+        | _models.UpdateMaxRecordSizeInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateMaxRecordSizeOutput: ...
+
+    @_overload
+    def update_max_record_size(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateMaxRecordSizeInputDict],
     ) -> UpdateMaxRecordSizeOutput:
         """
         This allows you to update the `MaxRecordSize` of a single record that
@@ -1760,8 +2540,6 @@ class KinesisClient(Client[KinesisConfig]):
         single records up to 10240 KiB.
 
         Args:
-            input:
-                An instance of `UpdateMaxRecordSizeInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1771,10 +2549,33 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `UpdateMaxRecordSizeOutput`.
         """
-        return self._invoke(input, _models.UPDATE_MAX_RECORD_SIZE, [], plugins)
 
+    def update_max_record_size(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateMaxRecordSizeOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_MAX_RECORD_SIZE, args, kwargs),
+            _models.UPDATE_MAX_RECORD_SIZE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_shard_count(
-        self, input: UpdateShardCountInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateShardCountInput | _models.UpdateShardCountInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateShardCountOutput: ...
+
+    @_overload
+    def update_shard_count(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateShardCountInputDict],
     ) -> UpdateShardCountOutput:
         """
         Updates the shard count of the specified stream to the specified number
@@ -1831,8 +2632,6 @@ class KinesisClient(Client[KinesisConfig]):
         form](https://console.aws.amazon.com/support/v1#/case/create?issueType=service-limit-increase&limitType=service-code-kinesis).
 
         Args:
-            input:
-                An instance of `UpdateShardCountInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1842,10 +2641,33 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `UpdateShardCountOutput`.
         """
-        return self._invoke(input, _models.UPDATE_SHARD_COUNT, [], plugins)
 
+    def update_shard_count(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateShardCountOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_SHARD_COUNT, args, kwargs),
+            _models.UPDATE_SHARD_COUNT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_stream_mode(
-        self, input: UpdateStreamModeInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateStreamModeInput | _models.UpdateStreamModeInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateStreamModeOutput: ...
+
+    @_overload
+    def update_stream_mode(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateStreamModeInputDict],
     ) -> UpdateStreamModeOutput:
         """
         Updates the capacity mode of the data stream. Currently, in Kinesis Data
@@ -1860,8 +2682,6 @@ class KinesisClient(Client[KinesisConfig]):
         stream can support in writes.
 
         Args:
-            input:
-                An instance of `UpdateStreamModeInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1871,12 +2691,34 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `UpdateStreamModeOutput`.
         """
-        return self._invoke(input, _models.UPDATE_STREAM_MODE, [], plugins)
 
+    def update_stream_mode(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateStreamModeOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_STREAM_MODE, args, kwargs),
+            _models.UPDATE_STREAM_MODE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_stream_record_distribution_strategy(
         self,
-        input: UpdateStreamRecordDistributionStrategyInput,
+        request: _models.UpdateStreamRecordDistributionStrategyInput
+        | _models.UpdateStreamRecordDistributionStrategyInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateStreamRecordDistributionStrategyOutput: ...
+
+    @_overload
+    def update_stream_record_distribution_strategy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateStreamRecordDistributionStrategyInputDict],
     ) -> UpdateStreamRecordDistributionStrategyOutput:
         """
         Updates the record distribution strategy for the specified Amazon
@@ -1913,8 +2755,6 @@ class KinesisClient(Client[KinesisConfig]):
         shard assignments and are not redistributed.
 
         Args:
-            input:
-                An instance of `UpdateStreamRecordDistributionStrategyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1924,14 +2764,36 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `UpdateStreamRecordDistributionStrategyOutput`.
         """
+
+    def update_stream_record_distribution_strategy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateStreamRecordDistributionStrategyOutput:
         return self._invoke(
-            input, _models.UPDATE_STREAM_RECORD_DISTRIBUTION_STRATEGY, [], plugins
+            self._select_input(
+                _models.UPDATE_STREAM_RECORD_DISTRIBUTION_STRATEGY, args, kwargs
+            ),
+            _models.UPDATE_STREAM_RECORD_DISTRIBUTION_STRATEGY,
+            [],
+            plugins,
         )
 
+    @_overload
     def update_stream_warm_throughput(
         self,
-        input: UpdateStreamWarmThroughputInput,
+        request: _models.UpdateStreamWarmThroughputInput
+        | _models.UpdateStreamWarmThroughputInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateStreamWarmThroughputOutput: ...
+
+    @_overload
+    def update_stream_warm_throughput(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateStreamWarmThroughputInputDict],
     ) -> UpdateStreamWarmThroughputOutput:
         """
         Updates the warm throughput configuration for the specified Amazon
@@ -1979,8 +2841,6 @@ class KinesisClient(Client[KinesisConfig]):
         form](https://console.aws.amazon.com/support/v1#/case/create?issueType=service-limit-increase&limitType=service-code-kinesis).
 
         Args:
-            input:
-                An instance of `UpdateStreamWarmThroughputInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1990,7 +2850,16 @@ class KinesisClient(Client[KinesisConfig]):
         Returns:
             An instance of `UpdateStreamWarmThroughputOutput`.
         """
-        return self._invoke(input, _models.UPDATE_STREAM_WARM_THROUGHPUT, [], plugins)
+
+    def update_stream_warm_throughput(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateStreamWarmThroughputOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_STREAM_WARM_THROUGHPUT, args, kwargs),
+            _models.UPDATE_STREAM_WARM_THROUGHPUT,
+            [],
+            plugins,
+        )
 
     def _new_config(self) -> KinesisConfig:
         return KinesisConfig.resolve()

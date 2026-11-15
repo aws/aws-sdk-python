@@ -2,69 +2,100 @@
 
 from typing import Any
 
+from aws_sdk_secrets_manager.aio.client import AsyncSecretsManagerClient
+from aws_sdk_secrets_manager.client import SecretsManagerClient
 from aws_sdk_secrets_manager.models import (
     APIErrorType,
     BatchGetSecretValueInput,
+    BatchGetSecretValueInputDict,
     BatchGetSecretValueOutput,
     CancelRotateSecretInput,
+    CancelRotateSecretInputDict,
     CancelRotateSecretOutput,
     CreateSecretInput,
+    CreateSecretInputDict,
     CreateSecretOutput,
     DeleteResourcePolicyInput,
+    DeleteResourcePolicyInputDict,
     DeleteResourcePolicyOutput,
     DeleteSecretInput,
+    DeleteSecretInputDict,
     DeleteSecretOutput,
     DescribeSecretInput,
+    DescribeSecretInputDict,
     DescribeSecretOutput,
     ExternalSecretRotationMetadataItem,
+    ExternalSecretRotationMetadataItemDict,
     Filter,
+    FilterDict,
     GetRandomPasswordInput,
+    GetRandomPasswordInputDict,
     GetRandomPasswordOutput,
     GetResourcePolicyInput,
+    GetResourcePolicyInputDict,
     GetResourcePolicyOutput,
     GetSecretValueInput,
+    GetSecretValueInputDict,
     GetSecretValueOutput,
     ListSecretVersionIdsInput,
+    ListSecretVersionIdsInputDict,
     ListSecretVersionIdsOutput,
     ListSecretsInput,
+    ListSecretsInputDict,
     ListSecretsOutput,
     PutResourcePolicyInput,
+    PutResourcePolicyInputDict,
     PutResourcePolicyOutput,
     PutSecretValueInput,
+    PutSecretValueInputDict,
     PutSecretValueOutput,
     RemoveRegionsFromReplicationInput,
+    RemoveRegionsFromReplicationInputDict,
     RemoveRegionsFromReplicationOutput,
     ReplicaRegionType,
+    ReplicaRegionTypeDict,
     ReplicateSecretToRegionsInput,
+    ReplicateSecretToRegionsInputDict,
     ReplicateSecretToRegionsOutput,
     ReplicationStatusType,
     RestoreSecretInput,
+    RestoreSecretInputDict,
     RestoreSecretOutput,
     RotateSecretInput,
+    RotateSecretInputDict,
     RotateSecretOutput,
     RotationRulesType,
+    RotationRulesTypeDict,
     SecretListEntry,
     SecretValueEntry,
     SecretVersionsListEntry,
     StopReplicationToReplicaInput,
+    StopReplicationToReplicaInputDict,
     StopReplicationToReplicaOutput,
     Tag,
+    TagDict,
     TagResourceInput,
+    TagResourceInputDict,
     TagResourceOutput,
     UntagResourceInput,
+    UntagResourceInputDict,
     UntagResourceOutput,
     UpdateSecretInput,
+    UpdateSecretInputDict,
     UpdateSecretOutput,
     UpdateSecretVersionStageInput,
+    UpdateSecretVersionStageInputDict,
     UpdateSecretVersionStageOutput,
     ValidateResourcePolicyInput,
+    ValidateResourcePolicyInputDict,
     ValidateResourcePolicyOutput,
     ValidationErrorsEntry,
 )
 
 
-# Static type fixture: pyright over this validates models.pyi.
-# Not executed as a test; it only needs to type-check.
+# Static type fixture: pyright over this validates models.pyi and the
+# client method signatures. Not executed as a test; it only needs to
+# type-check.
 
 _: Any = ...
 
@@ -125,3 +156,255 @@ UpdateSecretVersionStageOutput()
 ValidateResourcePolicyInput()
 ValidateResourcePolicyOutput()
 ValidationErrorsEntry()
+_params_0: BatchGetSecretValueInputDict = {}
+_params_1: CancelRotateSecretInputDict = {"secret_id": _}
+_params_2: CreateSecretInputDict = {"name": _}
+_params_3: DeleteResourcePolicyInputDict = {"secret_id": _}
+_params_4: DeleteSecretInputDict = {"secret_id": _}
+_params_5: DescribeSecretInputDict = {"secret_id": _}
+_params_6: ExternalSecretRotationMetadataItemDict = {}
+_params_7: FilterDict = {}
+_params_8: GetRandomPasswordInputDict = {}
+_params_9: GetResourcePolicyInputDict = {"secret_id": _}
+_params_10: GetSecretValueInputDict = {"secret_id": _}
+_params_11: ListSecretsInputDict = {}
+_params_12: ListSecretVersionIdsInputDict = {"secret_id": _}
+_params_13: PutResourcePolicyInputDict = {"secret_id": _, "resource_policy": _}
+_params_14: PutSecretValueInputDict = {"secret_id": _}
+_params_15: RemoveRegionsFromReplicationInputDict = {
+    "secret_id": _,
+    "remove_replica_regions": _,
+}
+_params_16: ReplicaRegionTypeDict = {}
+_params_17: ReplicateSecretToRegionsInputDict = {
+    "secret_id": _,
+    "add_replica_regions": _,
+}
+_params_18: RestoreSecretInputDict = {"secret_id": _}
+_params_19: RotateSecretInputDict = {"secret_id": _}
+_params_20: RotationRulesTypeDict = {}
+_params_21: StopReplicationToReplicaInputDict = {"secret_id": _}
+_params_22: TagDict = {}
+_params_23: TagResourceInputDict = {"secret_id": _, "tags": _}
+_params_24: UntagResourceInputDict = {"secret_id": _, "tag_keys": _}
+_params_25: UpdateSecretInputDict = {"secret_id": _}
+_params_26: UpdateSecretVersionStageInputDict = {"secret_id": _, "version_stage": _}
+_params_27: ValidateResourcePolicyInputDict = {"resource_policy": _}
+
+
+def _request[T](form: type[T]) -> T:
+    raise NotImplementedError
+
+
+async def check_async_calls(client: AsyncSecretsManagerClient) -> None:
+    pass
+    await client.batch_get_secret_value()
+    await client.batch_get_secret_value(**_request(BatchGetSecretValueInputDict))
+    await client.batch_get_secret_value(_request(BatchGetSecretValueInput))
+    await client.batch_get_secret_value(_request(BatchGetSecretValueInputDict))
+    await client.cancel_rotate_secret(secret_id=_)
+    await client.cancel_rotate_secret(**_request(CancelRotateSecretInputDict))
+    await client.cancel_rotate_secret(_request(CancelRotateSecretInput))
+    await client.cancel_rotate_secret(_request(CancelRotateSecretInputDict))
+    await client.create_secret(name=_)
+    await client.create_secret(**_request(CreateSecretInputDict))
+    await client.create_secret(_request(CreateSecretInput))
+    await client.create_secret(_request(CreateSecretInputDict))
+    await client.delete_resource_policy(secret_id=_)
+    await client.delete_resource_policy(**_request(DeleteResourcePolicyInputDict))
+    await client.delete_resource_policy(_request(DeleteResourcePolicyInput))
+    await client.delete_resource_policy(_request(DeleteResourcePolicyInputDict))
+    await client.delete_secret(secret_id=_)
+    await client.delete_secret(**_request(DeleteSecretInputDict))
+    await client.delete_secret(_request(DeleteSecretInput))
+    await client.delete_secret(_request(DeleteSecretInputDict))
+    await client.describe_secret(secret_id=_)
+    await client.describe_secret(**_request(DescribeSecretInputDict))
+    await client.describe_secret(_request(DescribeSecretInput))
+    await client.describe_secret(_request(DescribeSecretInputDict))
+    await client.get_random_password()
+    await client.get_random_password(**_request(GetRandomPasswordInputDict))
+    await client.get_random_password(_request(GetRandomPasswordInput))
+    await client.get_random_password(_request(GetRandomPasswordInputDict))
+    await client.get_resource_policy(secret_id=_)
+    await client.get_resource_policy(**_request(GetResourcePolicyInputDict))
+    await client.get_resource_policy(_request(GetResourcePolicyInput))
+    await client.get_resource_policy(_request(GetResourcePolicyInputDict))
+    await client.get_secret_value(secret_id=_)
+    await client.get_secret_value(**_request(GetSecretValueInputDict))
+    await client.get_secret_value(_request(GetSecretValueInput))
+    await client.get_secret_value(_request(GetSecretValueInputDict))
+    await client.list_secrets()
+    await client.list_secrets(**_request(ListSecretsInputDict))
+    await client.list_secrets(_request(ListSecretsInput))
+    await client.list_secrets(_request(ListSecretsInputDict))
+    await client.list_secret_version_ids(secret_id=_)
+    await client.list_secret_version_ids(**_request(ListSecretVersionIdsInputDict))
+    await client.list_secret_version_ids(_request(ListSecretVersionIdsInput))
+    await client.list_secret_version_ids(_request(ListSecretVersionIdsInputDict))
+    await client.put_resource_policy(secret_id=_, resource_policy=_)
+    await client.put_resource_policy(**_request(PutResourcePolicyInputDict))
+    await client.put_resource_policy(_request(PutResourcePolicyInput))
+    await client.put_resource_policy(_request(PutResourcePolicyInputDict))
+    await client.put_secret_value(secret_id=_)
+    await client.put_secret_value(**_request(PutSecretValueInputDict))
+    await client.put_secret_value(_request(PutSecretValueInput))
+    await client.put_secret_value(_request(PutSecretValueInputDict))
+    await client.remove_regions_from_replication(secret_id=_, remove_replica_regions=_)
+    await client.remove_regions_from_replication(
+        **_request(RemoveRegionsFromReplicationInputDict)
+    )
+    await client.remove_regions_from_replication(
+        _request(RemoveRegionsFromReplicationInput)
+    )
+    await client.remove_regions_from_replication(
+        _request(RemoveRegionsFromReplicationInputDict)
+    )
+    await client.replicate_secret_to_regions(secret_id=_, add_replica_regions=_)
+    await client.replicate_secret_to_regions(
+        **_request(ReplicateSecretToRegionsInputDict)
+    )
+    await client.replicate_secret_to_regions(_request(ReplicateSecretToRegionsInput))
+    await client.replicate_secret_to_regions(
+        _request(ReplicateSecretToRegionsInputDict)
+    )
+    await client.restore_secret(secret_id=_)
+    await client.restore_secret(**_request(RestoreSecretInputDict))
+    await client.restore_secret(_request(RestoreSecretInput))
+    await client.restore_secret(_request(RestoreSecretInputDict))
+    await client.rotate_secret(secret_id=_)
+    await client.rotate_secret(**_request(RotateSecretInputDict))
+    await client.rotate_secret(_request(RotateSecretInput))
+    await client.rotate_secret(_request(RotateSecretInputDict))
+    await client.stop_replication_to_replica(secret_id=_)
+    await client.stop_replication_to_replica(
+        **_request(StopReplicationToReplicaInputDict)
+    )
+    await client.stop_replication_to_replica(_request(StopReplicationToReplicaInput))
+    await client.stop_replication_to_replica(
+        _request(StopReplicationToReplicaInputDict)
+    )
+    await client.tag_resource(secret_id=_, tags=_)
+    await client.tag_resource(**_request(TagResourceInputDict))
+    await client.tag_resource(_request(TagResourceInput))
+    await client.tag_resource(_request(TagResourceInputDict))
+    await client.untag_resource(secret_id=_, tag_keys=_)
+    await client.untag_resource(**_request(UntagResourceInputDict))
+    await client.untag_resource(_request(UntagResourceInput))
+    await client.untag_resource(_request(UntagResourceInputDict))
+    await client.update_secret(secret_id=_)
+    await client.update_secret(**_request(UpdateSecretInputDict))
+    await client.update_secret(_request(UpdateSecretInput))
+    await client.update_secret(_request(UpdateSecretInputDict))
+    await client.update_secret_version_stage(secret_id=_, version_stage=_)
+    await client.update_secret_version_stage(
+        **_request(UpdateSecretVersionStageInputDict)
+    )
+    await client.update_secret_version_stage(_request(UpdateSecretVersionStageInput))
+    await client.update_secret_version_stage(
+        _request(UpdateSecretVersionStageInputDict)
+    )
+    await client.validate_resource_policy(resource_policy=_)
+    await client.validate_resource_policy(**_request(ValidateResourcePolicyInputDict))
+    await client.validate_resource_policy(_request(ValidateResourcePolicyInput))
+    await client.validate_resource_policy(_request(ValidateResourcePolicyInputDict))
+
+
+def check_sync_calls(client: SecretsManagerClient) -> None:
+    pass
+    client.batch_get_secret_value()
+    client.batch_get_secret_value(**_request(BatchGetSecretValueInputDict))
+    client.batch_get_secret_value(_request(BatchGetSecretValueInput))
+    client.batch_get_secret_value(_request(BatchGetSecretValueInputDict))
+    client.cancel_rotate_secret(secret_id=_)
+    client.cancel_rotate_secret(**_request(CancelRotateSecretInputDict))
+    client.cancel_rotate_secret(_request(CancelRotateSecretInput))
+    client.cancel_rotate_secret(_request(CancelRotateSecretInputDict))
+    client.create_secret(name=_)
+    client.create_secret(**_request(CreateSecretInputDict))
+    client.create_secret(_request(CreateSecretInput))
+    client.create_secret(_request(CreateSecretInputDict))
+    client.delete_resource_policy(secret_id=_)
+    client.delete_resource_policy(**_request(DeleteResourcePolicyInputDict))
+    client.delete_resource_policy(_request(DeleteResourcePolicyInput))
+    client.delete_resource_policy(_request(DeleteResourcePolicyInputDict))
+    client.delete_secret(secret_id=_)
+    client.delete_secret(**_request(DeleteSecretInputDict))
+    client.delete_secret(_request(DeleteSecretInput))
+    client.delete_secret(_request(DeleteSecretInputDict))
+    client.describe_secret(secret_id=_)
+    client.describe_secret(**_request(DescribeSecretInputDict))
+    client.describe_secret(_request(DescribeSecretInput))
+    client.describe_secret(_request(DescribeSecretInputDict))
+    client.get_random_password()
+    client.get_random_password(**_request(GetRandomPasswordInputDict))
+    client.get_random_password(_request(GetRandomPasswordInput))
+    client.get_random_password(_request(GetRandomPasswordInputDict))
+    client.get_resource_policy(secret_id=_)
+    client.get_resource_policy(**_request(GetResourcePolicyInputDict))
+    client.get_resource_policy(_request(GetResourcePolicyInput))
+    client.get_resource_policy(_request(GetResourcePolicyInputDict))
+    client.get_secret_value(secret_id=_)
+    client.get_secret_value(**_request(GetSecretValueInputDict))
+    client.get_secret_value(_request(GetSecretValueInput))
+    client.get_secret_value(_request(GetSecretValueInputDict))
+    client.list_secrets()
+    client.list_secrets(**_request(ListSecretsInputDict))
+    client.list_secrets(_request(ListSecretsInput))
+    client.list_secrets(_request(ListSecretsInputDict))
+    client.list_secret_version_ids(secret_id=_)
+    client.list_secret_version_ids(**_request(ListSecretVersionIdsInputDict))
+    client.list_secret_version_ids(_request(ListSecretVersionIdsInput))
+    client.list_secret_version_ids(_request(ListSecretVersionIdsInputDict))
+    client.put_resource_policy(secret_id=_, resource_policy=_)
+    client.put_resource_policy(**_request(PutResourcePolicyInputDict))
+    client.put_resource_policy(_request(PutResourcePolicyInput))
+    client.put_resource_policy(_request(PutResourcePolicyInputDict))
+    client.put_secret_value(secret_id=_)
+    client.put_secret_value(**_request(PutSecretValueInputDict))
+    client.put_secret_value(_request(PutSecretValueInput))
+    client.put_secret_value(_request(PutSecretValueInputDict))
+    client.remove_regions_from_replication(secret_id=_, remove_replica_regions=_)
+    client.remove_regions_from_replication(
+        **_request(RemoveRegionsFromReplicationInputDict)
+    )
+    client.remove_regions_from_replication(_request(RemoveRegionsFromReplicationInput))
+    client.remove_regions_from_replication(
+        _request(RemoveRegionsFromReplicationInputDict)
+    )
+    client.replicate_secret_to_regions(secret_id=_, add_replica_regions=_)
+    client.replicate_secret_to_regions(**_request(ReplicateSecretToRegionsInputDict))
+    client.replicate_secret_to_regions(_request(ReplicateSecretToRegionsInput))
+    client.replicate_secret_to_regions(_request(ReplicateSecretToRegionsInputDict))
+    client.restore_secret(secret_id=_)
+    client.restore_secret(**_request(RestoreSecretInputDict))
+    client.restore_secret(_request(RestoreSecretInput))
+    client.restore_secret(_request(RestoreSecretInputDict))
+    client.rotate_secret(secret_id=_)
+    client.rotate_secret(**_request(RotateSecretInputDict))
+    client.rotate_secret(_request(RotateSecretInput))
+    client.rotate_secret(_request(RotateSecretInputDict))
+    client.stop_replication_to_replica(secret_id=_)
+    client.stop_replication_to_replica(**_request(StopReplicationToReplicaInputDict))
+    client.stop_replication_to_replica(_request(StopReplicationToReplicaInput))
+    client.stop_replication_to_replica(_request(StopReplicationToReplicaInputDict))
+    client.tag_resource(secret_id=_, tags=_)
+    client.tag_resource(**_request(TagResourceInputDict))
+    client.tag_resource(_request(TagResourceInput))
+    client.tag_resource(_request(TagResourceInputDict))
+    client.untag_resource(secret_id=_, tag_keys=_)
+    client.untag_resource(**_request(UntagResourceInputDict))
+    client.untag_resource(_request(UntagResourceInput))
+    client.untag_resource(_request(UntagResourceInputDict))
+    client.update_secret(secret_id=_)
+    client.update_secret(**_request(UpdateSecretInputDict))
+    client.update_secret(_request(UpdateSecretInput))
+    client.update_secret(_request(UpdateSecretInputDict))
+    client.update_secret_version_stage(secret_id=_, version_stage=_)
+    client.update_secret_version_stage(**_request(UpdateSecretVersionStageInputDict))
+    client.update_secret_version_stage(_request(UpdateSecretVersionStageInput))
+    client.update_secret_version_stage(_request(UpdateSecretVersionStageInputDict))
+    client.validate_resource_policy(resource_policy=_)
+    client.validate_resource_policy(**_request(ValidateResourcePolicyInputDict))
+    client.validate_resource_policy(_request(ValidateResourcePolicyInput))
+    client.validate_resource_policy(_request(ValidateResourcePolicyInputDict))

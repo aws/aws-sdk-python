@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import cast
+from typing import Unpack as _Unpack, cast, overload as _overload
 
 from smithy_aws_core.config.types import ConfigSource
 from smithy_aws_core.identity.chain.resolver import IdentityChain
@@ -20,63 +20,34 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from .models import (
-        CheckIngestedDocumentAclInput,
         CheckIngestedDocumentAclOutput,
-        CreateInvocationInput,
         CreateInvocationOutput,
-        CreateSessionInput,
         CreateSessionOutput,
-        DeleteAgentMemoryInput,
         DeleteAgentMemoryOutput,
-        DeleteSessionInput,
         DeleteSessionOutput,
-        EndSessionInput,
         EndSessionOutput,
-        GenerateQueryInput,
         GenerateQueryOutput,
-        GetAgentMemoryInput,
         GetAgentMemoryOutput,
-        GetDocumentContentInput,
         GetDocumentContentOutput,
-        GetExecutionFlowSnapshotInput,
         GetExecutionFlowSnapshotOutput,
-        GetFlowExecutionInput,
         GetFlowExecutionOutput,
-        GetIngestedDocumentAclInput,
         GetIngestedDocumentAclOutput,
-        GetInvocationStepInput,
         GetInvocationStepOutput,
-        GetSessionInput,
         GetSessionOutput,
-        ListFlowExecutionEventsInput,
         ListFlowExecutionEventsOutput,
-        ListFlowExecutionsInput,
         ListFlowExecutionsOutput,
-        ListInvocationStepsInput,
         ListInvocationStepsOutput,
-        ListInvocationsInput,
         ListInvocationsOutput,
-        ListSessionsInput,
         ListSessionsOutput,
-        ListTagsForResourceInput,
         ListTagsForResourceOutput,
-        PutInvocationStepInput,
         PutInvocationStepOutput,
-        RerankInput,
         RerankOutput,
-        RetrieveAndGenerateOperationInput,
         RetrieveAndGenerateOperationOutput,
-        RetrieveInput,
         RetrieveOutput,
-        StartFlowExecutionInput,
         StartFlowExecutionOutput,
-        StopFlowExecutionInput,
         StopFlowExecutionOutput,
-        TagResourceInput,
         TagResourceOutput,
-        UntagResourceInput,
         UntagResourceOutput,
-        UpdateSessionInput,
         UpdateSessionOutput,
     )
 
@@ -98,10 +69,25 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
     bases.
     """
 
-    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
+    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
 
+    @_overload
     def check_ingested_document_acl(
-        self, input: CheckIngestedDocumentAclInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CheckIngestedDocumentAclInput
+        | _models.CheckIngestedDocumentAclInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CheckIngestedDocumentAclOutput: ...
+
+    @_overload
+    def check_ingested_document_acl(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CheckIngestedDocumentAclInputDict],
     ) -> CheckIngestedDocumentAclOutput:
         """
         Checks whether a user has access to a specific document by verifying
@@ -111,8 +97,6 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         `bedrock:CheckIngestedDocumentAcl` permission.
 
         Args:
-            input:
-                An instance of `CheckIngestedDocumentAclInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -122,10 +106,33 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         Returns:
             An instance of `CheckIngestedDocumentAclOutput`.
         """
-        return self._invoke(input, _models.CHECK_INGESTED_DOCUMENT_ACL, [], plugins)
 
+    def check_ingested_document_acl(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CheckIngestedDocumentAclOutput:
+        return self._invoke(
+            self._select_input(_models.CHECK_INGESTED_DOCUMENT_ACL, args, kwargs),
+            _models.CHECK_INGESTED_DOCUMENT_ACL,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_invocation(
-        self, input: CreateInvocationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateInvocationInput | _models.CreateInvocationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateInvocationOutput: ...
+
+    @_overload
+    def create_invocation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateInvocationInputDict],
     ) -> CreateInvocationOutput:
         """
         Creates a new invocation within a session. An invocation groups the
@@ -143,8 +150,6 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         - [GetSession](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_GetSession.html)
 
         Args:
-            input:
-                An instance of `CreateInvocationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -154,12 +159,33 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         Returns:
             An instance of `CreateInvocationOutput`.
         """
-        return self._invoke(input, _models.CREATE_INVOCATION, [], plugins)
 
+    def create_invocation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateInvocationOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_INVOCATION, args, kwargs),
+            _models.CREATE_INVOCATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_session(
         self,
-        input: CreateSessionInput | None = None,
+        request: _models.CreateSessionInput | _models.CreateSessionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateSessionOutput: ...
+
+    @_overload
+    def create_session(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateSessionInputDict],
     ) -> CreateSessionOutput:
         """
         Creates a session to temporarily store conversations for generative AI
@@ -194,8 +220,6 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         - [DeleteSession](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_DeleteSession.html)
 
         Args:
-            input:
-                An instance of `CreateSessionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -205,17 +229,38 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         Returns:
             An instance of `CreateSessionOutput`.
         """
-        return self._invoke(input, _models.CREATE_SESSION, [], plugins)
 
+    def create_session(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateSessionOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_SESSION, args, kwargs),
+            _models.CREATE_SESSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_agent_memory(
-        self, input: DeleteAgentMemoryInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteAgentMemoryInput | _models.DeleteAgentMemoryInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteAgentMemoryOutput: ...
+
+    @_overload
+    def delete_agent_memory(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteAgentMemoryInputDict],
     ) -> DeleteAgentMemoryOutput:
         """
         Deletes memory from the specified memory identifier.
 
         Args:
-            input:
-                An instance of `DeleteAgentMemoryInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -225,10 +270,33 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         Returns:
             An instance of `DeleteAgentMemoryOutput`.
         """
-        return self._invoke(input, _models.DELETE_AGENT_MEMORY, [], plugins)
 
+    def delete_agent_memory(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteAgentMemoryOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_AGENT_MEMORY, args, kwargs),
+            _models.DELETE_AGENT_MEMORY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_session(
-        self, input: DeleteSessionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteSessionInput | _models.DeleteSessionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteSessionOutput: ...
+
+    @_overload
+    def delete_session(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteSessionInputDict],
     ) -> DeleteSessionOutput:
         """
         Deletes a session that you ended. You can't delete a session with an
@@ -240,8 +308,6 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         sessions](https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html).
 
         Args:
-            input:
-                An instance of `DeleteSessionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -251,10 +317,33 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         Returns:
             An instance of `DeleteSessionOutput`.
         """
-        return self._invoke(input, _models.DELETE_SESSION, [], plugins)
 
+    def delete_session(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteSessionOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_SESSION, args, kwargs),
+            _models.DELETE_SESSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def end_session(
-        self, input: EndSessionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.EndSessionInput | _models.EndSessionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> EndSessionOutput: ...
+
+    @_overload
+    def end_session(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.EndSessionInputDict],
     ) -> EndSessionOutput:
         """
         Ends the session. After you end a session, you can still access its
@@ -265,8 +354,6 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         sessions](https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html).
 
         Args:
-            input:
-                An instance of `EndSessionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -276,10 +363,33 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         Returns:
             An instance of `EndSessionOutput`.
         """
-        return self._invoke(input, _models.END_SESSION, [], plugins)
 
+    def end_session(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> EndSessionOutput:
+        return self._invoke(
+            self._select_input(_models.END_SESSION, args, kwargs),
+            _models.END_SESSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def generate_query(
-        self, input: GenerateQueryInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GenerateQueryInput | _models.GenerateQueryInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GenerateQueryOutput: ...
+
+    @_overload
+    def generate_query(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GenerateQueryInputDict],
     ) -> GenerateQueryOutput:
         """
         Generates an SQL query from a natural language query. For more
@@ -288,8 +398,6 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         in the Amazon Bedrock User Guide.
 
         Args:
-            input:
-                An instance of `GenerateQueryInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -299,17 +407,38 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         Returns:
             An instance of `GenerateQueryOutput`.
         """
-        return self._invoke(input, _models.GENERATE_QUERY, [], plugins)
 
+    def generate_query(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GenerateQueryOutput:
+        return self._invoke(
+            self._select_input(_models.GENERATE_QUERY, args, kwargs),
+            _models.GENERATE_QUERY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_agent_memory(
-        self, input: GetAgentMemoryInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetAgentMemoryInput | _models.GetAgentMemoryInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetAgentMemoryOutput: ...
+
+    @_overload
+    def get_agent_memory(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetAgentMemoryInputDict],
     ) -> GetAgentMemoryOutput:
         """
         Gets the sessions stored in the memory of the agent.
 
         Args:
-            input:
-                An instance of `GetAgentMemoryInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -319,10 +448,33 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         Returns:
             An instance of `GetAgentMemoryOutput`.
         """
-        return self._invoke(input, _models.GET_AGENT_MEMORY, [], plugins)
 
+    def get_agent_memory(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetAgentMemoryOutput:
+        return self._invoke(
+            self._select_input(_models.GET_AGENT_MEMORY, args, kwargs),
+            _models.GET_AGENT_MEMORY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_document_content(
-        self, input: GetDocumentContentInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetDocumentContentInput | _models.GetDocumentContentInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetDocumentContentOutput: ...
+
+    @_overload
+    def get_document_content(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetDocumentContentInputDict],
     ) -> GetDocumentContentOutput:
         """
         Retrieves the content of an ingested document from a knowledge base, or
@@ -331,8 +483,6 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         `Retrieve` result.
 
         Args:
-            input:
-                An instance of `GetDocumentContentInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -342,10 +492,34 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         Returns:
             An instance of `GetDocumentContentOutput`.
         """
-        return self._invoke(input, _models.GET_DOCUMENT_CONTENT, [], plugins)
 
+    def get_document_content(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetDocumentContentOutput:
+        return self._invoke(
+            self._select_input(_models.GET_DOCUMENT_CONTENT, args, kwargs),
+            _models.GET_DOCUMENT_CONTENT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_execution_flow_snapshot(
-        self, input: GetExecutionFlowSnapshotInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetExecutionFlowSnapshotInput
+        | _models.GetExecutionFlowSnapshotInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetExecutionFlowSnapshotOutput: ...
+
+    @_overload
+    def get_execution_flow_snapshot(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetExecutionFlowSnapshotInputDict],
     ) -> GetExecutionFlowSnapshotOutput:
         """
         Retrieves the flow definition snapshot used for a flow execution. The
@@ -359,8 +533,6 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
             to change.
 
         Args:
-            input:
-                An instance of `GetExecutionFlowSnapshotInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -370,18 +542,39 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         Returns:
             An instance of `GetExecutionFlowSnapshotOutput`.
         """
-        return self._invoke(input, _models.GET_EXECUTION_FLOW_SNAPSHOT, [], plugins)
 
+    def get_execution_flow_snapshot(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetExecutionFlowSnapshotOutput:
+        return self._invoke(
+            self._select_input(_models.GET_EXECUTION_FLOW_SNAPSHOT, args, kwargs),
+            _models.GET_EXECUTION_FLOW_SNAPSHOT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_flow_execution(
-        self, input: GetFlowExecutionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetFlowExecutionInput | _models.GetFlowExecutionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetFlowExecutionOutput: ...
+
+    @_overload
+    def get_flow_execution(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetFlowExecutionInputDict],
     ) -> GetFlowExecutionOutput:
         """
         Retrieves details about a specific flow execution, including its status,
         start and end times, and any errors that occurred during execution.
 
         Args:
-            input:
-                An instance of `GetFlowExecutionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -391,10 +584,34 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         Returns:
             An instance of `GetFlowExecutionOutput`.
         """
-        return self._invoke(input, _models.GET_FLOW_EXECUTION, [], plugins)
 
+    def get_flow_execution(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetFlowExecutionOutput:
+        return self._invoke(
+            self._select_input(_models.GET_FLOW_EXECUTION, args, kwargs),
+            _models.GET_FLOW_EXECUTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_ingested_document_acl(
-        self, input: GetIngestedDocumentAclInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetIngestedDocumentAclInput
+        | _models.GetIngestedDocumentAclInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetIngestedDocumentAclOutput: ...
+
+    @_overload
+    def get_ingested_document_acl(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetIngestedDocumentAclInputDict],
     ) -> GetIngestedDocumentAclOutput:
         """
         Retrieves the ingested access control list (ACL) for a specific document
@@ -404,8 +621,6 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         `bedrock:GetIngestedDocumentAcl` permission.
 
         Args:
-            input:
-                An instance of `GetIngestedDocumentAclInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -415,10 +630,33 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         Returns:
             An instance of `GetIngestedDocumentAclOutput`.
         """
-        return self._invoke(input, _models.GET_INGESTED_DOCUMENT_ACL, [], plugins)
 
+    def get_ingested_document_acl(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetIngestedDocumentAclOutput:
+        return self._invoke(
+            self._select_input(_models.GET_INGESTED_DOCUMENT_ACL, args, kwargs),
+            _models.GET_INGESTED_DOCUMENT_ACL,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_invocation_step(
-        self, input: GetInvocationStepInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetInvocationStepInput | _models.GetInvocationStepInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetInvocationStepOutput: ...
+
+    @_overload
+    def get_invocation_step(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetInvocationStepInputDict],
     ) -> GetInvocationStepOutput:
         """
         Retrieves the details of a specific invocation step within an invocation
@@ -427,8 +665,6 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         sessions](https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html).
 
         Args:
-            input:
-                An instance of `GetInvocationStepInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -438,10 +674,33 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         Returns:
             An instance of `GetInvocationStepOutput`.
         """
-        return self._invoke(input, _models.GET_INVOCATION_STEP, [], plugins)
 
+    def get_invocation_step(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetInvocationStepOutput:
+        return self._invoke(
+            self._select_input(_models.GET_INVOCATION_STEP, args, kwargs),
+            _models.GET_INVOCATION_STEP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_session(
-        self, input: GetSessionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetSessionInput | _models.GetSessionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetSessionOutput: ...
+
+    @_overload
+    def get_session(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetSessionInputDict],
     ) -> GetSessionOutput:
         """
         Retrieves details about a specific session. For more information about
@@ -450,8 +709,6 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         sessions](https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html).
 
         Args:
-            input:
-                An instance of `GetSessionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -461,10 +718,34 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         Returns:
             An instance of `GetSessionOutput`.
         """
-        return self._invoke(input, _models.GET_SESSION, [], plugins)
 
+    def get_session(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetSessionOutput:
+        return self._invoke(
+            self._select_input(_models.GET_SESSION, args, kwargs),
+            _models.GET_SESSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_flow_execution_events(
-        self, input: ListFlowExecutionEventsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListFlowExecutionEventsInput
+        | _models.ListFlowExecutionEventsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListFlowExecutionEventsOutput: ...
+
+    @_overload
+    def list_flow_execution_events(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListFlowExecutionEventsInputDict],
     ) -> ListFlowExecutionEventsOutput:
         """
         Lists events that occurred during a flow execution. Events provide
@@ -477,8 +758,6 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
             to change.
 
         Args:
-            input:
-                An instance of `ListFlowExecutionEventsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -488,10 +767,33 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         Returns:
             An instance of `ListFlowExecutionEventsOutput`.
         """
-        return self._invoke(input, _models.LIST_FLOW_EXECUTION_EVENTS, [], plugins)
 
+    def list_flow_execution_events(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListFlowExecutionEventsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_FLOW_EXECUTION_EVENTS, args, kwargs),
+            _models.LIST_FLOW_EXECUTION_EVENTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_flow_executions(
-        self, input: ListFlowExecutionsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListFlowExecutionsInput | _models.ListFlowExecutionsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListFlowExecutionsOutput: ...
+
+    @_overload
+    def list_flow_executions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListFlowExecutionsInputDict],
     ) -> ListFlowExecutionsOutput:
         """
         Lists all executions of a flow. Results can be paginated and include
@@ -503,8 +805,6 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
             to change.
 
         Args:
-            input:
-                An instance of `ListFlowExecutionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -514,10 +814,33 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         Returns:
             An instance of `ListFlowExecutionsOutput`.
         """
-        return self._invoke(input, _models.LIST_FLOW_EXECUTIONS, [], plugins)
 
+    def list_flow_executions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListFlowExecutionsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_FLOW_EXECUTIONS, args, kwargs),
+            _models.LIST_FLOW_EXECUTIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_invocations(
-        self, input: ListInvocationsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListInvocationsInput | _models.ListInvocationsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListInvocationsOutput: ...
+
+    @_overload
+    def list_invocations(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListInvocationsInputDict],
     ) -> ListInvocationsOutput:
         """
         Lists all invocations associated with a specific session. For more
@@ -526,8 +849,6 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         sessions](https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html).
 
         Args:
-            input:
-                An instance of `ListInvocationsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -537,10 +858,34 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         Returns:
             An instance of `ListInvocationsOutput`.
         """
-        return self._invoke(input, _models.LIST_INVOCATIONS, [], plugins)
 
+    def list_invocations(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListInvocationsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_INVOCATIONS, args, kwargs),
+            _models.LIST_INVOCATIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_invocation_steps(
-        self, input: ListInvocationStepsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListInvocationStepsInput
+        | _models.ListInvocationStepsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListInvocationStepsOutput: ...
+
+    @_overload
+    def list_invocation_steps(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListInvocationStepsInputDict],
     ) -> ListInvocationStepsOutput:
         """
         Lists all invocation steps associated with a session and optionally, an
@@ -549,8 +894,6 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         sessions](https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html).
 
         Args:
-            input:
-                An instance of `ListInvocationStepsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -560,12 +903,33 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         Returns:
             An instance of `ListInvocationStepsOutput`.
         """
-        return self._invoke(input, _models.LIST_INVOCATION_STEPS, [], plugins)
 
+    def list_invocation_steps(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListInvocationStepsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_INVOCATION_STEPS, args, kwargs),
+            _models.LIST_INVOCATION_STEPS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_sessions(
         self,
-        input: ListSessionsInput | None = None,
+        request: _models.ListSessionsInput | _models.ListSessionsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListSessionsOutput: ...
+
+    @_overload
+    def list_sessions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListSessionsInputDict],
     ) -> ListSessionsOutput:
         """
         Lists all sessions in your Amazon Web Services account. For more
@@ -574,8 +938,6 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         sessions](https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html).
 
         Args:
-            input:
-                An instance of `ListSessionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -585,17 +947,39 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         Returns:
             An instance of `ListSessionsOutput`.
         """
-        return self._invoke(input, _models.LIST_SESSIONS, [], plugins)
 
+    def list_sessions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListSessionsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_SESSIONS, args, kwargs),
+            _models.LIST_SESSIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_tags_for_resource(
-        self, input: ListTagsForResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListTagsForResourceInput
+        | _models.ListTagsForResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListTagsForResourceOutput: ...
+
+    @_overload
+    def list_tags_for_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListTagsForResourceInputDict],
     ) -> ListTagsForResourceOutput:
         """
         List all the tags for the resource you specify.
 
         Args:
-            input:
-                An instance of `ListTagsForResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -605,10 +989,33 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         Returns:
             An instance of `ListTagsForResourceOutput`.
         """
-        return self._invoke(input, _models.LIST_TAGS_FOR_RESOURCE, [], plugins)
 
+    def list_tags_for_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListTagsForResourceOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_TAGS_FOR_RESOURCE, args, kwargs),
+            _models.LIST_TAGS_FOR_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_invocation_step(
-        self, input: PutInvocationStepInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutInvocationStepInput | _models.PutInvocationStepInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutInvocationStepOutput: ...
+
+    @_overload
+    def put_invocation_step(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutInvocationStepInputDict],
     ) -> PutInvocationStepOutput:
         """
         Add an invocation step to an invocation in a session. An invocation step
@@ -628,8 +1035,6 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         - [ListSessions](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_ListInvocations.html)
 
         Args:
-            input:
-                An instance of `PutInvocationStepInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -639,10 +1044,33 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         Returns:
             An instance of `PutInvocationStepOutput`.
         """
-        return self._invoke(input, _models.PUT_INVOCATION_STEP, [], plugins)
 
+    def put_invocation_step(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutInvocationStepOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_INVOCATION_STEP, args, kwargs),
+            _models.PUT_INVOCATION_STEP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def rerank(
-        self, input: RerankInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RerankInput | _models.RerankInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RerankOutput: ...
+
+    @_overload
+    def rerank(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RerankInputDict],
     ) -> RerankOutput:
         """
         Reranks the relevance of sources based on queries. For more information,
@@ -650,8 +1078,6 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         model](https://docs.aws.amazon.com/bedrock/latest/userguide/rerank.html).
 
         Args:
-            input:
-                An instance of `RerankInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -661,17 +1087,38 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         Returns:
             An instance of `RerankOutput`.
         """
-        return self._invoke(input, _models.RERANK, [], plugins)
 
+    def rerank(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RerankOutput:
+        return self._invoke(
+            self._select_input(_models.RERANK, args, kwargs),
+            _models.RERANK,
+            [],
+            plugins,
+        )
+
+    @_overload
     def retrieve(
-        self, input: RetrieveInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RetrieveInput | _models.RetrieveInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RetrieveOutput: ...
+
+    @_overload
+    def retrieve(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RetrieveInputDict],
     ) -> RetrieveOutput:
         """
         Queries a knowledge base and retrieves information from it.
 
         Args:
-            input:
-                An instance of `RetrieveInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -681,12 +1128,34 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         Returns:
             An instance of `RetrieveOutput`.
         """
-        return self._invoke(input, _models.RETRIEVE, [], plugins)
 
+    def retrieve(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RetrieveOutput:
+        return self._invoke(
+            self._select_input(_models.RETRIEVE, args, kwargs),
+            _models.RETRIEVE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def retrieve_and_generate(
         self,
-        input: RetrieveAndGenerateOperationInput,
+        request: _models.RetrieveAndGenerateOperationInput
+        | _models.RetrieveAndGenerateOperationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> RetrieveAndGenerateOperationOutput: ...
+
+    @_overload
+    def retrieve_and_generate(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RetrieveAndGenerateOperationInputDict],
     ) -> RetrieveAndGenerateOperationOutput:
         """
         Queries a knowledge base and generates responses based on the retrieved
@@ -702,8 +1171,6 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
             with managed knowledge bases.
 
         Args:
-            input:
-                An instance of `RetrieveAndGenerateOperationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -713,10 +1180,33 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         Returns:
             An instance of `RetrieveAndGenerateOperationOutput`.
         """
-        return self._invoke(input, _models.RETRIEVE_AND_GENERATE, [], plugins)
 
+    def retrieve_and_generate(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RetrieveAndGenerateOperationOutput:
+        return self._invoke(
+            self._select_input(_models.RETRIEVE_AND_GENERATE, args, kwargs),
+            _models.RETRIEVE_AND_GENERATE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def start_flow_execution(
-        self, input: StartFlowExecutionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StartFlowExecutionInput | _models.StartFlowExecutionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StartFlowExecutionOutput: ...
+
+    @_overload
+    def start_flow_execution(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartFlowExecutionInputDict],
     ) -> StartFlowExecutionOutput:
         """
         Starts an execution of an Amazon Bedrock flow. Unlike flows that run
@@ -732,8 +1222,6 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
             to change.
 
         Args:
-            input:
-                An instance of `StartFlowExecutionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -743,10 +1231,33 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         Returns:
             An instance of `StartFlowExecutionOutput`.
         """
-        return self._invoke(input, _models.START_FLOW_EXECUTION, [], plugins)
 
+    def start_flow_execution(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StartFlowExecutionOutput:
+        return self._invoke(
+            self._select_input(_models.START_FLOW_EXECUTION, args, kwargs),
+            _models.START_FLOW_EXECUTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def stop_flow_execution(
-        self, input: StopFlowExecutionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StopFlowExecutionInput | _models.StopFlowExecutionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StopFlowExecutionOutput: ...
+
+    @_overload
+    def stop_flow_execution(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StopFlowExecutionInputDict],
     ) -> StopFlowExecutionOutput:
         """
         Stops an Amazon Bedrock flow's execution. This operation prevents
@@ -754,8 +1265,6 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         `Aborted`.
 
         Args:
-            input:
-                An instance of `StopFlowExecutionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -765,10 +1274,33 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         Returns:
             An instance of `StopFlowExecutionOutput`.
         """
-        return self._invoke(input, _models.STOP_FLOW_EXECUTION, [], plugins)
 
+    def stop_flow_execution(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StopFlowExecutionOutput:
+        return self._invoke(
+            self._select_input(_models.STOP_FLOW_EXECUTION, args, kwargs),
+            _models.STOP_FLOW_EXECUTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def tag_resource(
-        self, input: TagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.TagResourceInput | _models.TagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> TagResourceOutput: ...
+
+    @_overload
+    def tag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.TagResourceInputDict],
     ) -> TagResourceOutput:
         """
         Associate tags with a resource. For more information, see [Tagging
@@ -776,8 +1308,6 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         in the Amazon Bedrock User Guide.
 
         Args:
-            input:
-                An instance of `TagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -787,17 +1317,38 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         Returns:
             An instance of `TagResourceOutput`.
         """
-        return self._invoke(input, _models.TAG_RESOURCE, [], plugins)
 
+    def tag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> TagResourceOutput:
+        return self._invoke(
+            self._select_input(_models.TAG_RESOURCE, args, kwargs),
+            _models.TAG_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def untag_resource(
-        self, input: UntagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UntagResourceInput | _models.UntagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UntagResourceOutput: ...
+
+    @_overload
+    def untag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UntagResourceInputDict],
     ) -> UntagResourceOutput:
         """
         Remove tags from a resource.
 
         Args:
-            input:
-                An instance of `UntagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -807,10 +1358,33 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         Returns:
             An instance of `UntagResourceOutput`.
         """
-        return self._invoke(input, _models.UNTAG_RESOURCE, [], plugins)
 
+    def untag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UntagResourceOutput:
+        return self._invoke(
+            self._select_input(_models.UNTAG_RESOURCE, args, kwargs),
+            _models.UNTAG_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_session(
-        self, input: UpdateSessionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateSessionInput | _models.UpdateSessionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateSessionOutput: ...
+
+    @_overload
+    def update_session(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateSessionInputDict],
     ) -> UpdateSessionOutput:
         """
         Updates the metadata or encryption settings of a session. For more
@@ -819,8 +1393,6 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         sessions](https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html).
 
         Args:
-            input:
-                An instance of `UpdateSessionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -830,7 +1402,16 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
         Returns:
             An instance of `UpdateSessionOutput`.
         """
-        return self._invoke(input, _models.UPDATE_SESSION, [], plugins)
+
+    def update_session(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateSessionOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_SESSION, args, kwargs),
+            _models.UPDATE_SESSION,
+            [],
+            plugins,
+        )
 
     def _new_config(self) -> BedrockAgentRuntimeConfig:
         return BedrockAgentRuntimeConfig.resolve()

@@ -1,6 +1,6 @@
 # The smithy-python commit `make clients` builds codegen from. May be any commit
 # reachable from the colocated smithy-python checkout, including a local one.
-commit = "481e1334cf29b683928f57c4bcb292f7e323b6c4"
+commit = "285aeb06dc769ed6c1861d229d706d2ede5303e1"
 # The commit this pointer moved from; with `commit` it bounds the range linked
 # in codegen sync changelog entries.
-previous_commit = "daf94021b97c3078eef0707a2e320d4344d50fc6"
+previous_commit = "481e1334cf29b683928f57c4bcb292f7e323b6c4"

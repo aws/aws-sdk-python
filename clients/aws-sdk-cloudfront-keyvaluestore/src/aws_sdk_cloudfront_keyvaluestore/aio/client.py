@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import cast
+from typing import Unpack as _Unpack, cast, overload as _overload
 
 from smithy_aws_core.aio.identity.chain import AsyncIdentityChain
 from smithy_aws_core.config.types import ConfigSource
@@ -20,17 +20,11 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from ..models import (
-        DeleteKeyInput,
         DeleteKeyOutput,
-        DescribeKeyValueStoreInput,
         DescribeKeyValueStoreOutput,
-        GetKeyInput,
         GetKeyOutput,
-        ListKeysInput,
         ListKeysOutput,
-        PutKeyInput,
         PutKeyOutput,
-        UpdateKeysInput,
         UpdateKeysOutput,
     )
 
@@ -46,17 +40,29 @@ class AsyncCloudFrontKeyValueStoreClient(
     Resource
     """
 
-    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
+    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
 
+    @_overload
     async def delete_key(
-        self, input: DeleteKeyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteKeyInput | _models.DeleteKeyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteKeyOutput: ...
+
+    @_overload
+    async def delete_key(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteKeyInputDict],
     ) -> DeleteKeyOutput:
         """
         Deletes the key value pair specified by the key.
 
         Args:
-            input:
-                An instance of `DeleteKeyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -66,17 +72,39 @@ class AsyncCloudFrontKeyValueStoreClient(
         Returns:
             An instance of `DeleteKeyOutput`.
         """
-        return await self._invoke(input, _models.DELETE_KEY, [], plugins)
 
+    async def delete_key(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteKeyOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_KEY, args, kwargs),
+            _models.DELETE_KEY,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def describe_key_value_store(
-        self, input: DescribeKeyValueStoreInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeKeyValueStoreInput
+        | _models.DescribeKeyValueStoreInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeKeyValueStoreOutput: ...
+
+    @_overload
+    async def describe_key_value_store(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeKeyValueStoreInputDict],
     ) -> DescribeKeyValueStoreOutput:
         """
         Returns metadata information about Key Value Store.
 
         Args:
-            input:
-                An instance of `DescribeKeyValueStoreInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -86,17 +114,38 @@ class AsyncCloudFrontKeyValueStoreClient(
         Returns:
             An instance of `DescribeKeyValueStoreOutput`.
         """
-        return await self._invoke(input, _models.DESCRIBE_KEY_VALUE_STORE, [], plugins)
 
+    async def describe_key_value_store(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeKeyValueStoreOutput:
+        return await self._invoke(
+            self._select_input(_models.DESCRIBE_KEY_VALUE_STORE, args, kwargs),
+            _models.DESCRIBE_KEY_VALUE_STORE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_key(
-        self, input: GetKeyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetKeyInput | _models.GetKeyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetKeyOutput: ...
+
+    @_overload
+    async def get_key(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetKeyInputDict],
     ) -> GetKeyOutput:
         """
         Returns a key value pair.
 
         Args:
-            input:
-                An instance of `GetKeyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -106,17 +155,38 @@ class AsyncCloudFrontKeyValueStoreClient(
         Returns:
             An instance of `GetKeyOutput`.
         """
-        return await self._invoke(input, _models.GET_KEY, [], plugins)
 
+    async def get_key(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetKeyOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_KEY, args, kwargs),
+            _models.GET_KEY,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_keys(
-        self, input: ListKeysInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListKeysInput | _models.ListKeysInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListKeysOutput: ...
+
+    @_overload
+    async def list_keys(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListKeysInputDict],
     ) -> ListKeysOutput:
         """
         Returns a list of key value pairs.
 
         Args:
-            input:
-                An instance of `ListKeysInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -126,17 +196,38 @@ class AsyncCloudFrontKeyValueStoreClient(
         Returns:
             An instance of `ListKeysOutput`.
         """
-        return await self._invoke(input, _models.LIST_KEYS, [], plugins)
 
+    async def list_keys(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListKeysOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_KEYS, args, kwargs),
+            _models.LIST_KEYS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def put_key(
-        self, input: PutKeyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutKeyInput | _models.PutKeyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutKeyOutput: ...
+
+    @_overload
+    async def put_key(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutKeyInputDict],
     ) -> PutKeyOutput:
         """
         Creates a new key value pair or replaces the value of an existing key.
 
         Args:
-            input:
-                An instance of `PutKeyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -146,18 +237,39 @@ class AsyncCloudFrontKeyValueStoreClient(
         Returns:
             An instance of `PutKeyOutput`.
         """
-        return await self._invoke(input, _models.PUT_KEY, [], plugins)
 
+    async def put_key(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutKeyOutput:
+        return await self._invoke(
+            self._select_input(_models.PUT_KEY, args, kwargs),
+            _models.PUT_KEY,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_keys(
-        self, input: UpdateKeysInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateKeysInput | _models.UpdateKeysInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateKeysOutput: ...
+
+    @_overload
+    async def update_keys(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateKeysInputDict],
     ) -> UpdateKeysOutput:
         """
         Puts or Deletes multiple key value pairs in a single, all-or-nothing
         operation.
 
         Args:
-            input:
-                An instance of `UpdateKeysInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -167,7 +279,16 @@ class AsyncCloudFrontKeyValueStoreClient(
         Returns:
             An instance of `UpdateKeysOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_KEYS, [], plugins)
+
+    async def update_keys(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateKeysOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_KEYS, args, kwargs),
+            _models.UPDATE_KEYS,
+            [],
+            plugins,
+        )
 
     async def _new_config(self) -> AsyncCloudFrontKeyValueStoreConfig:
         return await AsyncCloudFrontKeyValueStoreConfig.resolve()

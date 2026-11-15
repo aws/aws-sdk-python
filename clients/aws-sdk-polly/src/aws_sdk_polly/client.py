@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import cast
+from typing import Unpack as _Unpack, cast, overload as _overload
 
 from smithy_aws_core.config.types import ConfigSource
 from smithy_aws_core.identity.chain.resolver import IdentityChain
@@ -20,29 +20,17 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from .models import (
-        DeleteLexiconInput,
         DeleteLexiconOutput,
-        DescribeVoicesInput,
         DescribeVoicesOutput,
-        GetLexiconInput,
         GetLexiconOutput,
-        GetSpeechSynthesisTaskInput,
         GetSpeechSynthesisTaskOutput,
-        ListLexiconsInput,
         ListLexiconsOutput,
-        ListSpeechSynthesisTasksInput,
         ListSpeechSynthesisTasksOutput,
-        ListTagsForResourceInput,
         ListTagsForResourceOutput,
-        PutLexiconInput,
         PutLexiconOutput,
-        StartSpeechSynthesisTaskInput,
         StartSpeechSynthesisTaskOutput,
-        SynthesizeSpeechInput,
         SynthesizeSpeechOutput,
-        TagResourceInput,
         TagResourceOutput,
-        UntagResourceInput,
         UntagResourceOutput,
     )
 
@@ -67,10 +55,24 @@ class PollyClient(Client[PollyConfig]):
     in the *IAM User Guide*.
     """
 
-    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
+    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
 
+    @_overload
     def delete_lexicon(
-        self, input: DeleteLexiconInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteLexiconInput | _models.DeleteLexiconInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteLexiconOutput: ...
+
+    @_overload
+    def delete_lexicon(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteLexiconInputDict],
     ) -> DeleteLexiconOutput:
         """
         Deletes the specified pronunciation lexicon stored in an Amazon Web
@@ -82,8 +84,6 @@ class PollyClient(Client[PollyConfig]):
         Lexicons](https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html).
 
         Args:
-            input:
-                An instance of `DeleteLexiconInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -93,12 +93,33 @@ class PollyClient(Client[PollyConfig]):
         Returns:
             An instance of `DeleteLexiconOutput`.
         """
-        return self._invoke(input, _models.DELETE_LEXICON, [], plugins)
 
+    def delete_lexicon(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteLexiconOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_LEXICON, args, kwargs),
+            _models.DELETE_LEXICON,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_voices(
         self,
-        input: DescribeVoicesInput | None = None,
+        request: _models.DescribeVoicesInput | _models.DescribeVoicesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeVoicesOutput: ...
+
+    @_overload
+    def describe_voices(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeVoicesInputDict],
     ) -> DescribeVoicesOutput:
         """
         Returns the list of voices that are available for use when requesting
@@ -123,8 +144,6 @@ class PollyClient(Client[PollyConfig]):
         `polly:DescribeVoices` action.
 
         Args:
-            input:
-                An instance of `DescribeVoicesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -134,10 +153,33 @@ class PollyClient(Client[PollyConfig]):
         Returns:
             An instance of `DescribeVoicesOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_VOICES, [], plugins)
 
+    def describe_voices(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeVoicesOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_VOICES, args, kwargs),
+            _models.DESCRIBE_VOICES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_lexicon(
-        self, input: GetLexiconInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetLexiconInput | _models.GetLexiconInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetLexiconOutput: ...
+
+    @_overload
+    def get_lexicon(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetLexiconInputDict],
     ) -> GetLexiconOutput:
         """
         Returns the content of the specified pronunciation lexicon stored in an
@@ -145,8 +187,6 @@ class PollyClient(Client[PollyConfig]):
         Lexicons](https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html).
 
         Args:
-            input:
-                An instance of `GetLexiconInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -156,10 +196,34 @@ class PollyClient(Client[PollyConfig]):
         Returns:
             An instance of `GetLexiconOutput`.
         """
-        return self._invoke(input, _models.GET_LEXICON, [], plugins)
 
+    def get_lexicon(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetLexiconOutput:
+        return self._invoke(
+            self._select_input(_models.GET_LEXICON, args, kwargs),
+            _models.GET_LEXICON,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_speech_synthesis_task(
-        self, input: GetSpeechSynthesisTaskInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetSpeechSynthesisTaskInput
+        | _models.GetSpeechSynthesisTaskInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetSpeechSynthesisTaskOutput: ...
+
+    @_overload
+    def get_speech_synthesis_task(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetSpeechSynthesisTaskInputDict],
     ) -> GetSpeechSynthesisTaskOutput:
         """
         Retrieves a specific SpeechSynthesisTask object based on its TaskID.
@@ -168,8 +232,6 @@ class PollyClient(Client[PollyConfig]):
         the output of the task.
 
         Args:
-            input:
-                An instance of `GetSpeechSynthesisTaskInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -179,12 +241,33 @@ class PollyClient(Client[PollyConfig]):
         Returns:
             An instance of `GetSpeechSynthesisTaskOutput`.
         """
-        return self._invoke(input, _models.GET_SPEECH_SYNTHESIS_TASK, [], plugins)
 
+    def get_speech_synthesis_task(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetSpeechSynthesisTaskOutput:
+        return self._invoke(
+            self._select_input(_models.GET_SPEECH_SYNTHESIS_TASK, args, kwargs),
+            _models.GET_SPEECH_SYNTHESIS_TASK,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_lexicons(
         self,
-        input: ListLexiconsInput | None = None,
+        request: _models.ListLexiconsInput | _models.ListLexiconsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListLexiconsOutput: ...
+
+    @_overload
+    def list_lexicons(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListLexiconsInputDict],
     ) -> ListLexiconsOutput:
         """
         Returns a list of pronunciation lexicons stored in an Amazon Web
@@ -192,8 +275,6 @@ class PollyClient(Client[PollyConfig]):
         Lexicons](https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html).
 
         Args:
-            input:
-                An instance of `ListLexiconsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -203,12 +284,34 @@ class PollyClient(Client[PollyConfig]):
         Returns:
             An instance of `ListLexiconsOutput`.
         """
-        return self._invoke(input, _models.LIST_LEXICONS, [], plugins)
 
+    def list_lexicons(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListLexiconsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_LEXICONS, args, kwargs),
+            _models.LIST_LEXICONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_speech_synthesis_tasks(
         self,
-        input: ListSpeechSynthesisTasksInput | None = None,
+        request: _models.ListSpeechSynthesisTasksInput
+        | _models.ListSpeechSynthesisTasksInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListSpeechSynthesisTasksOutput: ...
+
+    @_overload
+    def list_speech_synthesis_tasks(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListSpeechSynthesisTasksInputDict],
     ) -> ListSpeechSynthesisTasksOutput:
         """
         Returns a list of SpeechSynthesisTask objects ordered by their creation
@@ -216,8 +319,6 @@ class PollyClient(Client[PollyConfig]):
         allowing users to list only tasks that are completed.
 
         Args:
-            input:
-                An instance of `ListSpeechSynthesisTasksInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -227,17 +328,39 @@ class PollyClient(Client[PollyConfig]):
         Returns:
             An instance of `ListSpeechSynthesisTasksOutput`.
         """
-        return self._invoke(input, _models.LIST_SPEECH_SYNTHESIS_TASKS, [], plugins)
 
+    def list_speech_synthesis_tasks(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListSpeechSynthesisTasksOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_SPEECH_SYNTHESIS_TASKS, args, kwargs),
+            _models.LIST_SPEECH_SYNTHESIS_TASKS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_tags_for_resource(
-        self, input: ListTagsForResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListTagsForResourceInput
+        | _models.ListTagsForResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListTagsForResourceOutput: ...
+
+    @_overload
+    def list_tags_for_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListTagsForResourceInputDict],
     ) -> ListTagsForResourceOutput:
         """
         Lists the tags for an Amazon Polly resource.
 
         Args:
-            input:
-                An instance of `ListTagsForResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -247,10 +370,33 @@ class PollyClient(Client[PollyConfig]):
         Returns:
             An instance of `ListTagsForResourceOutput`.
         """
-        return self._invoke(input, _models.LIST_TAGS_FOR_RESOURCE, [], plugins)
 
+    def list_tags_for_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListTagsForResourceOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_TAGS_FOR_RESOURCE, args, kwargs),
+            _models.LIST_TAGS_FOR_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_lexicon(
-        self, input: PutLexiconInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutLexiconInput | _models.PutLexiconInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutLexiconOutput: ...
+
+    @_overload
+    def put_lexicon(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutLexiconInputDict],
     ) -> PutLexiconOutput:
         """
         Stores a pronunciation lexicon in an Amazon Web Services Region. If a
@@ -269,8 +415,6 @@ class PollyClient(Client[PollyConfig]):
         Lexicons](https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html).
 
         Args:
-            input:
-                An instance of `PutLexiconInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -280,10 +424,34 @@ class PollyClient(Client[PollyConfig]):
         Returns:
             An instance of `PutLexiconOutput`.
         """
-        return self._invoke(input, _models.PUT_LEXICON, [], plugins)
 
+    def put_lexicon(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutLexiconOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_LEXICON, args, kwargs),
+            _models.PUT_LEXICON,
+            [],
+            plugins,
+        )
+
+    @_overload
     def start_speech_synthesis_task(
-        self, input: StartSpeechSynthesisTaskInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StartSpeechSynthesisTaskInput
+        | _models.StartSpeechSynthesisTaskInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StartSpeechSynthesisTaskOutput: ...
+
+    @_overload
+    def start_speech_synthesis_task(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartSpeechSynthesisTaskInputDict],
     ) -> StartSpeechSynthesisTaskOutput:
         """
         Allows the creation of an asynchronous synthesis task, by starting a new
@@ -297,8 +465,6 @@ class PollyClient(Client[PollyConfig]):
         available for 72 hours after starting the asynchronous synthesis task.
 
         Args:
-            input:
-                An instance of `StartSpeechSynthesisTaskInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -308,10 +474,33 @@ class PollyClient(Client[PollyConfig]):
         Returns:
             An instance of `StartSpeechSynthesisTaskOutput`.
         """
-        return self._invoke(input, _models.START_SPEECH_SYNTHESIS_TASK, [], plugins)
 
+    def start_speech_synthesis_task(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StartSpeechSynthesisTaskOutput:
+        return self._invoke(
+            self._select_input(_models.START_SPEECH_SYNTHESIS_TASK, args, kwargs),
+            _models.START_SPEECH_SYNTHESIS_TASK,
+            [],
+            plugins,
+        )
+
+    @_overload
     def synthesize_speech(
-        self, input: SynthesizeSpeechInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.SynthesizeSpeechInput | _models.SynthesizeSpeechInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> SynthesizeSpeechOutput: ...
+
+    @_overload
+    def synthesize_speech(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SynthesizeSpeechInputDict],
     ) -> SynthesizeSpeechOutput:
         """
         Synthesizes UTF-8 input, plain text or SSML, to a stream of bytes. SSML
@@ -322,8 +511,6 @@ class PollyClient(Client[PollyConfig]):
         Works](https://docs.aws.amazon.com/polly/latest/dg/how-text-to-speech-works.html).
 
         Args:
-            input:
-                An instance of `SynthesizeSpeechInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -333,10 +520,33 @@ class PollyClient(Client[PollyConfig]):
         Returns:
             An instance of `SynthesizeSpeechOutput`.
         """
-        return self._invoke(input, _models.SYNTHESIZE_SPEECH, [], plugins)
 
+    def synthesize_speech(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SynthesizeSpeechOutput:
+        return self._invoke(
+            self._select_input(_models.SYNTHESIZE_SPEECH, args, kwargs),
+            _models.SYNTHESIZE_SPEECH,
+            [],
+            plugins,
+        )
+
+    @_overload
     def tag_resource(
-        self, input: TagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.TagResourceInput | _models.TagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> TagResourceOutput: ...
+
+    @_overload
+    def tag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.TagResourceInputDict],
     ) -> TagResourceOutput:
         """
         Adds specified tags to a resource with the specified ARN. Existing tags
@@ -345,8 +555,6 @@ class PollyClient(Client[PollyConfig]):
         resource, the value in the request replaces the existing value.
 
         Args:
-            input:
-                An instance of `TagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -356,17 +564,38 @@ class PollyClient(Client[PollyConfig]):
         Returns:
             An instance of `TagResourceOutput`.
         """
-        return self._invoke(input, _models.TAG_RESOURCE, [], plugins)
 
+    def tag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> TagResourceOutput:
+        return self._invoke(
+            self._select_input(_models.TAG_RESOURCE, args, kwargs),
+            _models.TAG_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def untag_resource(
-        self, input: UntagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UntagResourceInput | _models.UntagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UntagResourceOutput: ...
+
+    @_overload
+    def untag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UntagResourceInputDict],
     ) -> UntagResourceOutput:
         """
         Deletes specified tags from a resource.
 
         Args:
-            input:
-                An instance of `UntagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -376,7 +605,16 @@ class PollyClient(Client[PollyConfig]):
         Returns:
             An instance of `UntagResourceOutput`.
         """
-        return self._invoke(input, _models.UNTAG_RESOURCE, [], plugins)
+
+    def untag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UntagResourceOutput:
+        return self._invoke(
+            self._select_input(_models.UNTAG_RESOURCE, args, kwargs),
+            _models.UNTAG_RESOURCE,
+            [],
+            plugins,
+        )
 
     def _new_config(self) -> PollyConfig:
         return PollyConfig.resolve()

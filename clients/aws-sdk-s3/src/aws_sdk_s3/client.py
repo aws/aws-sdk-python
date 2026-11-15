@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import cast
+from typing import Unpack as _Unpack, cast, overload as _overload
 
 from smithy_aws_core.config.types import ConfigSource
 from smithy_aws_core.identity.chain.resolver import IdentityChain
@@ -21,227 +21,116 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from .models import (
-        AbortMultipartUploadInput,
         AbortMultipartUploadOutput,
-        CompleteMultipartUploadInput,
         CompleteMultipartUploadOutput,
-        CopyObjectInput,
         CopyObjectOutput,
-        CreateBucketInput,
-        CreateBucketMetadataConfigurationInput,
         CreateBucketMetadataConfigurationOutput,
-        CreateBucketMetadataTableConfigurationInput,
         CreateBucketMetadataTableConfigurationOutput,
         CreateBucketOutput,
-        CreateMultipartUploadInput,
         CreateMultipartUploadOutput,
-        CreateSessionInput,
         CreateSessionOutput,
-        DeleteBucketAnalyticsConfigurationInput,
         DeleteBucketAnalyticsConfigurationOutput,
-        DeleteBucketCorsInput,
         DeleteBucketCorsOutput,
-        DeleteBucketEncryptionInput,
         DeleteBucketEncryptionOutput,
-        DeleteBucketInput,
-        DeleteBucketIntelligentTieringConfigurationInput,
         DeleteBucketIntelligentTieringConfigurationOutput,
-        DeleteBucketInventoryConfigurationInput,
         DeleteBucketInventoryConfigurationOutput,
-        DeleteBucketLifecycleInput,
         DeleteBucketLifecycleOutput,
-        DeleteBucketMetadataConfigurationInput,
         DeleteBucketMetadataConfigurationOutput,
-        DeleteBucketMetadataTableConfigurationInput,
         DeleteBucketMetadataTableConfigurationOutput,
-        DeleteBucketMetricsConfigurationInput,
         DeleteBucketMetricsConfigurationOutput,
         DeleteBucketOutput,
-        DeleteBucketOwnershipControlsInput,
         DeleteBucketOwnershipControlsOutput,
-        DeleteBucketPolicyInput,
         DeleteBucketPolicyOutput,
-        DeleteBucketReplicationInput,
         DeleteBucketReplicationOutput,
-        DeleteBucketTaggingInput,
         DeleteBucketTaggingOutput,
-        DeleteBucketWebsiteInput,
         DeleteBucketWebsiteOutput,
-        DeleteObjectAnnotationInput,
         DeleteObjectAnnotationOutput,
-        DeleteObjectInput,
         DeleteObjectOutput,
-        DeleteObjectTaggingInput,
         DeleteObjectTaggingOutput,
-        DeleteObjectsInput,
         DeleteObjectsOutput,
-        DeletePublicAccessBlockInput,
         DeletePublicAccessBlockOutput,
-        GetBucketAbacInput,
         GetBucketAbacOutput,
-        GetBucketAccelerateConfigurationInput,
         GetBucketAccelerateConfigurationOutput,
-        GetBucketAclInput,
         GetBucketAclOutput,
-        GetBucketAnalyticsConfigurationInput,
         GetBucketAnalyticsConfigurationOutput,
-        GetBucketCorsInput,
         GetBucketCorsOutput,
-        GetBucketEncryptionInput,
         GetBucketEncryptionOutput,
-        GetBucketIntelligentTieringConfigurationInput,
         GetBucketIntelligentTieringConfigurationOutput,
-        GetBucketInventoryConfigurationInput,
         GetBucketInventoryConfigurationOutput,
-        GetBucketLifecycleConfigurationInput,
         GetBucketLifecycleConfigurationOutput,
-        GetBucketLocationInput,
         GetBucketLocationOutput,
-        GetBucketLoggingInput,
         GetBucketLoggingOutput,
-        GetBucketMetadataConfigurationInput,
         GetBucketMetadataConfigurationOutput,
-        GetBucketMetadataTableConfigurationInput,
         GetBucketMetadataTableConfigurationOutput,
-        GetBucketMetricsConfigurationInput,
         GetBucketMetricsConfigurationOutput,
-        GetBucketNotificationConfigurationInput,
         GetBucketNotificationConfigurationOutput,
-        GetBucketOwnershipControlsInput,
         GetBucketOwnershipControlsOutput,
-        GetBucketPolicyInput,
         GetBucketPolicyOutput,
-        GetBucketPolicyStatusInput,
         GetBucketPolicyStatusOutput,
-        GetBucketReplicationInput,
         GetBucketReplicationOutput,
-        GetBucketRequestPaymentInput,
         GetBucketRequestPaymentOutput,
-        GetBucketTaggingInput,
         GetBucketTaggingOutput,
-        GetBucketVersioningInput,
         GetBucketVersioningOutput,
-        GetBucketWebsiteInput,
         GetBucketWebsiteOutput,
-        GetObjectAclInput,
         GetObjectAclOutput,
-        GetObjectAnnotationInput,
         GetObjectAnnotationOutput,
-        GetObjectAttributesInput,
         GetObjectAttributesOutput,
-        GetObjectInput,
-        GetObjectLegalHoldInput,
         GetObjectLegalHoldOutput,
-        GetObjectLockConfigurationInput,
         GetObjectLockConfigurationOutput,
         GetObjectOutput,
-        GetObjectRetentionInput,
         GetObjectRetentionOutput,
-        GetObjectTaggingInput,
         GetObjectTaggingOutput,
-        GetObjectTorrentInput,
         GetObjectTorrentOutput,
-        GetPublicAccessBlockInput,
         GetPublicAccessBlockOutput,
-        HeadBucketInput,
         HeadBucketOutput,
-        HeadObjectInput,
         HeadObjectOutput,
-        ListBucketAnalyticsConfigurationsInput,
         ListBucketAnalyticsConfigurationsOutput,
-        ListBucketIntelligentTieringConfigurationsInput,
         ListBucketIntelligentTieringConfigurationsOutput,
-        ListBucketInventoryConfigurationsInput,
         ListBucketInventoryConfigurationsOutput,
-        ListBucketMetricsConfigurationsInput,
         ListBucketMetricsConfigurationsOutput,
-        ListBucketsInput,
         ListBucketsOutput,
-        ListDirectoryBucketsInput,
         ListDirectoryBucketsOutput,
-        ListMultipartUploadsInput,
         ListMultipartUploadsOutput,
-        ListObjectAnnotationsInput,
         ListObjectAnnotationsOutput,
-        ListObjectVersionsInput,
         ListObjectVersionsOutput,
-        ListObjectsInput,
         ListObjectsOutput,
-        ListObjectsV2Input,
         ListObjectsV2Output,
-        ListPartsInput,
         ListPartsOutput,
-        PutBucketAbacInput,
         PutBucketAbacOutput,
-        PutBucketAccelerateConfigurationInput,
         PutBucketAccelerateConfigurationOutput,
-        PutBucketAclInput,
         PutBucketAclOutput,
-        PutBucketAnalyticsConfigurationInput,
         PutBucketAnalyticsConfigurationOutput,
-        PutBucketCorsInput,
         PutBucketCorsOutput,
-        PutBucketEncryptionInput,
         PutBucketEncryptionOutput,
-        PutBucketIntelligentTieringConfigurationInput,
         PutBucketIntelligentTieringConfigurationOutput,
-        PutBucketInventoryConfigurationInput,
         PutBucketInventoryConfigurationOutput,
-        PutBucketLifecycleConfigurationInput,
         PutBucketLifecycleConfigurationOutput,
-        PutBucketLoggingInput,
         PutBucketLoggingOutput,
-        PutBucketMetricsConfigurationInput,
         PutBucketMetricsConfigurationOutput,
-        PutBucketNotificationConfigurationInput,
         PutBucketNotificationConfigurationOutput,
-        PutBucketOwnershipControlsInput,
         PutBucketOwnershipControlsOutput,
-        PutBucketPolicyInput,
         PutBucketPolicyOutput,
-        PutBucketReplicationInput,
         PutBucketReplicationOutput,
-        PutBucketRequestPaymentInput,
         PutBucketRequestPaymentOutput,
-        PutBucketTaggingInput,
         PutBucketTaggingOutput,
-        PutBucketVersioningInput,
         PutBucketVersioningOutput,
-        PutBucketWebsiteInput,
         PutBucketWebsiteOutput,
-        PutObjectAclInput,
         PutObjectAclOutput,
-        PutObjectAnnotationInput,
         PutObjectAnnotationOutput,
-        PutObjectInput,
-        PutObjectLegalHoldInput,
         PutObjectLegalHoldOutput,
-        PutObjectLockConfigurationInput,
         PutObjectLockConfigurationOutput,
         PutObjectOutput,
-        PutObjectRetentionInput,
         PutObjectRetentionOutput,
-        PutObjectTaggingInput,
         PutObjectTaggingOutput,
-        PutPublicAccessBlockInput,
         PutPublicAccessBlockOutput,
-        RenameObjectInput,
         RenameObjectOutput,
-        RestoreObjectInput,
         RestoreObjectOutput,
-        UpdateBucketMetadataAnnotationTableConfigurationInput,
         UpdateBucketMetadataAnnotationTableConfigurationOutput,
-        UpdateBucketMetadataInventoryTableConfigurationInput,
         UpdateBucketMetadataInventoryTableConfigurationOutput,
-        UpdateBucketMetadataJournalTableConfigurationInput,
         UpdateBucketMetadataJournalTableConfigurationOutput,
-        UpdateObjectEncryptionInput,
         UpdateObjectEncryptionOutput,
-        UploadPartCopyInput,
         UploadPartCopyOutput,
-        UploadPartInput,
         UploadPartOutput,
-        WriteGetObjectResponseInput,
         WriteGetObjectResponseOutput,
     )
 
@@ -287,13 +176,28 @@ class S3Client(Client[S3Config]):
     """
 
     _client_plugins = (
+        user_agent_plugin,
         aws_user_agent_plugin,
         flexible_checksums_plugin,
-        user_agent_plugin,
     )
 
+    @_overload
     def abort_multipart_upload(
-        self, input: AbortMultipartUploadInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.AbortMultipartUploadInput
+        | _models.AbortMultipartUploadInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AbortMultipartUploadOutput: ...
+
+    @_overload
+    def abort_multipart_upload(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AbortMultipartUploadInputDict],
     ) -> AbortMultipartUploadOutput:
         """
         This operation aborts a multipart upload. After a multipart upload is
@@ -333,33 +237,33 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : - **General purpose bucket permissions** - For information about
-            permissions required to use the multipart upload, see [Multipart
-            Upload and
-            Permissions](https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html)
-            in the *Amazon S3 User Guide*.
+        :   - **General purpose bucket permissions** - For information about
+              permissions required to use the multipart upload, see [Multipart
+              Upload and
+              Permissions](https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html)
+              in the *Amazon S3 User Guide*.
 
-          - **Directory bucket permissions** - To grant access to this API
-            operation on a directory bucket, we recommend that you use the
-            [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
-            API operation for session-based authorization. Specifically, you
-            grant the `s3express:CreateSession` permission to the directory
-            bucket in a bucket policy or an IAM identity-based policy. Then, you
-            make the `CreateSession` API call on the bucket to obtain a session
-            token. With the session token in your request header, you can make
-            API requests to this operation. After the session token expires, you
-            make another `CreateSession` API call to generate a new session
-            token for use. Amazon Web Services CLI or SDKs create session and
-            refresh the session token automatically to avoid service
-            interruptions when a session expires. For more information about
-            authorization, see
-            [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
-            .
+            - **Directory bucket permissions** - To grant access to this API
+              operation on a directory bucket, we recommend that you use the
+              [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
+              API operation for session-based authorization. Specifically, you
+              grant the `s3express:CreateSession` permission to the directory
+              bucket in a bucket policy or an IAM identity-based policy. Then,
+              you make the `CreateSession` API call on the bucket to obtain a
+              session token. With the session token in your request header, you
+              can make API requests to this operation. After the session token
+              expires, you make another `CreateSession` API call to generate a
+              new session token for use. Amazon Web Services CLI or SDKs create
+              session and refresh the session token automatically to avoid
+              service interruptions when a session expires. For more information
+              about authorization, see
+              [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
+              .
 
         HTTP Host header syntax
 
-        : **Directory buckets** - The HTTP Host header syntax is
-          ` `*`Bucket-name`*`.s3express-`*`zone-id`*`.`*`region-code`*`.amazonaws.com`.
+        :   **Directory buckets** - The HTTP Host header syntax is
+            ` `*`Bucket-name`*`.s3express-`*`zone-id`*`.`*`region-code`*`.amazonaws.com`.
 
         The following operations are related to `AbortMultipartUpload`:
 
@@ -379,8 +283,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `AbortMultipartUploadInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -390,10 +292,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `AbortMultipartUploadOutput`.
         """
-        return self._invoke(input, _models.ABORT_MULTIPART_UPLOAD, [], plugins)
 
+    def abort_multipart_upload(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AbortMultipartUploadOutput:
+        return self._invoke(
+            self._select_input(_models.ABORT_MULTIPART_UPLOAD, args, kwargs),
+            _models.ABORT_MULTIPART_UPLOAD,
+            [],
+            plugins,
+        )
+
+    @_overload
     def complete_multipart_upload(
-        self, input: CompleteMultipartUploadInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CompleteMultipartUploadInput
+        | _models.CompleteMultipartUploadInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CompleteMultipartUploadOutput: ...
+
+    @_overload
+    def complete_multipart_upload(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CompleteMultipartUploadInputDict],
     ) -> CompleteMultipartUploadOutput:
         """
         Completes a multipart upload by assembling previously uploaded parts.
@@ -461,77 +387,77 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : - **General purpose bucket permissions** - For information about
-            permissions required to use the multipart upload API, see [Multipart
-            Upload and
-            Permissions](https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html)
-            in the *Amazon S3 User Guide*.
+        :   - **General purpose bucket permissions** - For information about
+              permissions required to use the multipart upload API, see
+              [Multipart Upload and
+              Permissions](https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html)
+              in the *Amazon S3 User Guide*.
 
-            If you provide an [additional checksum
-            value](https://docs.aws.amazon.com/AmazonS3/latest/API/API_Checksum.html)
-            in your `MultipartUpload` requests and the object is encrypted with
-            Key Management Service, you must have permission to use the
-            `kms:Decrypt` action for the `CompleteMultipartUpload` request to
-            succeed.
+              If you provide an [additional checksum
+              value](https://docs.aws.amazon.com/AmazonS3/latest/API/API_Checksum.html)
+              in your `MultipartUpload` requests and the object is encrypted
+              with Key Management Service, you must have permission to use the
+              `kms:Decrypt` action for the `CompleteMultipartUpload` request to
+              succeed.
 
-          - **Directory bucket permissions** - To grant access to this API
-            operation on a directory bucket, we recommend that you use the
-            [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
-            API operation for session-based authorization. Specifically, you
-            grant the `s3express:CreateSession` permission to the directory
-            bucket in a bucket policy or an IAM identity-based policy. Then, you
-            make the `CreateSession` API call on the bucket to obtain a session
-            token. With the session token in your request header, you can make
-            API requests to this operation. After the session token expires, you
-            make another `CreateSession` API call to generate a new session
-            token for use. Amazon Web Services CLI or SDKs create session and
-            refresh the session token automatically to avoid service
-            interruptions when a session expires. For more information about
-            authorization, see
-            [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
-            .
+            - **Directory bucket permissions** - To grant access to this API
+              operation on a directory bucket, we recommend that you use the
+              [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
+              API operation for session-based authorization. Specifically, you
+              grant the `s3express:CreateSession` permission to the directory
+              bucket in a bucket policy or an IAM identity-based policy. Then,
+              you make the `CreateSession` API call on the bucket to obtain a
+              session token. With the session token in your request header, you
+              can make API requests to this operation. After the session token
+              expires, you make another `CreateSession` API call to generate a
+              new session token for use. Amazon Web Services CLI or SDKs create
+              session and refresh the session token automatically to avoid
+              service interruptions when a session expires. For more information
+              about authorization, see
+              [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
+              .
 
-            If the object is encrypted with SSE-KMS, you must also have the
-            `kms:GenerateDataKey` and `kms:Decrypt` permissions in IAM
-            identity-based policies and KMS key policies for the KMS key.
+              If the object is encrypted with SSE-KMS, you must also have the
+              `kms:GenerateDataKey` and `kms:Decrypt` permissions in IAM
+              identity-based policies and KMS key policies for the KMS key.
 
         Special errors
 
-        : - Error Code: `EntityTooSmall`
+        :   - Error Code: `EntityTooSmall`
 
-            - Description: Your proposed upload is smaller than the minimum
-              allowed object size. Each part must be at least 5 MB in size,
-              except the last part.
+              - Description: Your proposed upload is smaller than the minimum
+                allowed object size. Each part must be at least 5 MB in size,
+                except the last part.
 
-            - HTTP Status Code: 400 Bad Request
+              - HTTP Status Code: 400 Bad Request
 
-          - Error Code: `InvalidPart`
+            - Error Code: `InvalidPart`
 
-            - Description: One or more of the specified parts could not be
-              found. The part might not have been uploaded, or the specified
-              ETag might not have matched the uploaded part's ETag.
+              - Description: One or more of the specified parts could not be
+                found. The part might not have been uploaded, or the specified
+                ETag might not have matched the uploaded part's ETag.
 
-            - HTTP Status Code: 400 Bad Request
+              - HTTP Status Code: 400 Bad Request
 
-          - Error Code: `InvalidPartOrder`
+            - Error Code: `InvalidPartOrder`
 
-            - Description: The list of parts was not in ascending order. The
-              parts list must be specified in order by part number.
+              - Description: The list of parts was not in ascending order. The
+                parts list must be specified in order by part number.
 
-            - HTTP Status Code: 400 Bad Request
+              - HTTP Status Code: 400 Bad Request
 
-          - Error Code: `NoSuchUpload`
+            - Error Code: `NoSuchUpload`
 
-            - Description: The specified multipart upload does not exist. The
-              upload ID might be invalid, or the multipart upload might have
-              been aborted or completed.
+              - Description: The specified multipart upload does not exist. The
+                upload ID might be invalid, or the multipart upload might have
+                been aborted or completed.
 
-            - HTTP Status Code: 404 Not Found
+              - HTTP Status Code: 404 Not Found
 
         HTTP Host header syntax
 
-        : **Directory buckets** - The HTTP Host header syntax is
-          ` `*`Bucket-name`*`.s3express-`*`zone-id`*`.`*`region-code`*`.amazonaws.com`.
+        :   **Directory buckets** - The HTTP Host header syntax is
+            ` `*`Bucket-name`*`.s3express-`*`zone-id`*`.`*`region-code`*`.amazonaws.com`.
 
         The following operations are related to `CompleteMultipartUpload`:
 
@@ -551,8 +477,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `CompleteMultipartUploadInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -562,10 +486,33 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `CompleteMultipartUploadOutput`.
         """
-        return self._invoke(input, _models.COMPLETE_MULTIPART_UPLOAD, [], plugins)
 
+    def complete_multipart_upload(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CompleteMultipartUploadOutput:
+        return self._invoke(
+            self._select_input(_models.COMPLETE_MULTIPART_UPLOAD, args, kwargs),
+            _models.COMPLETE_MULTIPART_UPLOAD,
+            [],
+            plugins,
+        )
+
+    @_overload
     def copy_object(
-        self, input: CopyObjectInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CopyObjectInput | _models.CopyObjectInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CopyObjectOutput: ...
+
+    @_overload
+    def copy_object(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CopyObjectInputDict],
     ) -> CopyObjectOutput:
         """
         Creates a copy of an object that is already stored in Amazon S3.
@@ -628,129 +575,129 @@ class S3Client(Client[S3Config]):
 
         Authentication and authorization
 
-        : All `CopyObject` requests must be authenticated and signed by using
-          IAM credentials (access key ID and secret access key for the IAM
-          identities). All headers with the `x-amz-` prefix, including
-          `x-amz-copy-source`, must be signed. For more information, see [REST
-          Authentication](https://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html).
+        :   All `CopyObject` requests must be authenticated and signed by using
+            IAM credentials (access key ID and secret access key for the IAM
+            identities). All headers with the `x-amz-` prefix, including
+            `x-amz-copy-source`, must be signed. For more information, see [REST
+            Authentication](https://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html).
 
-          **Directory buckets** - You must use the IAM credentials to
-          authenticate and authorize your access to the `CopyObject` API
-          operation, instead of using the temporary security credentials through
-          the `CreateSession` API operation.
+            **Directory buckets** - You must use the IAM credentials to
+            authenticate and authorize your access to the `CopyObject` API
+            operation, instead of using the temporary security credentials
+            through the `CreateSession` API operation.
 
-          Amazon Web Services CLI or SDKs handles authentication and
-          authorization on your behalf.
+            Amazon Web Services CLI or SDKs handles authentication and
+            authorization on your behalf.
 
         Permissions
 
-        : You must have *read* access to the source object and *write* access to
-          the destination bucket.
+        :   You must have *read* access to the source object and *write* access
+            to the destination bucket.
 
-          - **General purpose bucket permissions** - You must have permissions
-            in an IAM policy based on the source and destination bucket types in
-            a `CopyObject` operation.
+            - **General purpose bucket permissions** - You must have permissions
+              in an IAM policy based on the source and destination bucket types
+              in a `CopyObject` operation.
 
-            - If the source object is in a general purpose bucket, you must have
-              **`s3:GetObject`** permission to read the source object that is
-              being copied.
+              - If the source object is in a general purpose bucket, you must
+                have **`s3:GetObject`** permission to read the source object
+                that is being copied.
 
-            - If the destination bucket is a general purpose bucket, you must
-              have **`s3:PutObject`** permission to write the object copy to the
-              destination bucket.
+              - If the destination bucket is a general purpose bucket, you must
+                have **`s3:PutObject`** permission to write the object copy to
+                the destination bucket.
 
-          - **Directory bucket permissions** - You must have permissions in a
-            bucket policy or an IAM identity-based policy based on the source
-            and destination bucket types in a `CopyObject` operation.
+            - **Directory bucket permissions** - You must have permissions in a
+              bucket policy or an IAM identity-based policy based on the source
+              and destination bucket types in a `CopyObject` operation.
 
-            - If the source object that you want to copy is in a directory
-              bucket, you must have the **`s3express:CreateSession`** permission
-              in the `Action` element of a policy to read the object. If no
-              session mode is specified, the session will be created with the
-              maximum allowable privilege, attempting `ReadWrite` first, then
-              `ReadOnly` if `ReadWrite` is not permitted. If you want to
-              explicitly restrict the access to be read-only, you can set the
-              `s3express:SessionMode` condition key to `ReadOnly` on the copy
-              source bucket.
+              - If the source object that you want to copy is in a directory
+                bucket, you must have the **`s3express:CreateSession`**
+                permission in the `Action` element of a policy to read the
+                object. If no session mode is specified, the session will be
+                created with the maximum allowable privilege, attempting
+                `ReadWrite` first, then `ReadOnly` if `ReadWrite` is not
+                permitted. If you want to explicitly restrict the access to be
+                read-only, you can set the `s3express:SessionMode` condition key
+                to `ReadOnly` on the copy source bucket.
 
-            - If the copy destination is a directory bucket, you must have the
-              **`s3express:CreateSession`** permission in the `Action` element
-              of a policy to write the object to the destination. The
-              `s3express:SessionMode` condition key can't be set to `ReadOnly`
-              on the copy destination bucket.
+              - If the copy destination is a directory bucket, you must have the
+                **`s3express:CreateSession`** permission in the `Action` element
+                of a policy to write the object to the destination. The
+                `s3express:SessionMode` condition key can't be set to
+                `ReadOnly` on the copy destination bucket.
 
-            If the object is encrypted with SSE-KMS, you must also have the
-            `kms:GenerateDataKey` and `kms:Decrypt` permissions in IAM
-            identity-based policies and KMS key policies for the KMS key.
+              If the object is encrypted with SSE-KMS, you must also have the
+              `kms:GenerateDataKey` and `kms:Decrypt` permissions in IAM
+              identity-based policies and KMS key policies for the KMS key.
 
-            For example policies, see [Example bucket policies for S3 Express
-            One
-            Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-example-bucket-policies.html)
-            and [Amazon Web Services Identity and Access Management (IAM)
-            identity-based policies for S3 Express One
-            Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-identity-policies.html)
-            in the *Amazon S3 User Guide*.
+              For example policies, see [Example bucket policies for S3 Express
+              One
+              Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-example-bucket-policies.html)
+              and [Amazon Web Services Identity and Access Management (IAM)
+              identity-based policies for S3 Express One
+              Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-identity-policies.html)
+              in the *Amazon S3 User Guide*.
 
         Response and special errors
 
-        : When the request is an HTTP 1.1 request, the response is chunk
-          encoded. When the request is not an HTTP 1.1 request, the response
-          would not contain the `Content-Length`. You always need to read the
-          entire response body to check if the copy succeeds.
+        :   When the request is an HTTP 1.1 request, the response is chunk
+            encoded. When the request is not an HTTP 1.1 request, the response
+            would not contain the `Content-Length`. You always need to read the
+            entire response body to check if the copy succeeds.
 
-          - If the copy is successful, you receive a response with information
-            about the copied object.
+            - If the copy is successful, you receive a response with information
+              about the copied object.
 
-          - A copy request might return an error when Amazon S3 receives the
-            copy request or while Amazon S3 is copying the files. A `200 OK`
-            response can contain either a success or an error.
+            - A copy request might return an error when Amazon S3 receives the
+              copy request or while Amazon S3 is copying the files. A `200 OK`
+              response can contain either a success or an error.
 
-            - If the error occurs before the copy action starts, you receive a
-              standard Amazon S3 error.
+              - If the error occurs before the copy action starts, you receive a
+                standard Amazon S3 error.
 
-            - If the error occurs during the copy operation, the error response
-              is embedded in the `200 OK` response. For example, in a
-              cross-region copy, you may encounter throttling and receive a
-              `200 OK` response. For more information, see [Resolve the Error
-              200 response when copying objects to Amazon
-              S3](https://repost.aws/knowledge-center/s3-resolve-200-internalerror).
-              The `200 OK` status code means the copy was accepted, but it
-              doesn't mean the copy is complete. Another example is when you
-              disconnect from Amazon S3 before the copy is complete, Amazon S3
-              might cancel the copy and you may receive a `200 OK` response. You
-              must stay connected to Amazon S3 until the entire response is
-              successfully received and processed.
+              - If the error occurs during the copy operation, the error
+                response is embedded in the `200 OK` response. For example, in a
+                cross-region copy, you may encounter throttling and receive a
+                `200 OK` response. For more information, see [Resolve the Error
+                200 response when copying objects to Amazon
+                S3](https://repost.aws/knowledge-center/s3-resolve-200-internalerror).
+                The `200 OK` status code means the copy was accepted, but it
+                doesn't mean the copy is complete. Another example is when you
+                disconnect from Amazon S3 before the copy is complete, Amazon S3
+                might cancel the copy and you may receive a `200 OK` response.
+                You must stay connected to Amazon S3 until the entire response
+                is successfully received and processed.
 
-              If you call this API operation directly, make sure to design your
-              application to parse the content of the response and handle it
-              appropriately. If you use Amazon Web Services SDKs, SDKs handle
-              this condition. The SDKs detect the embedded error and apply error
-              handling per your configuration settings (including automatically
-              retrying the request as appropriate). If the condition persists,
-              the SDKs throw an exception (or, for the SDKs that don't use
-              exceptions, they return an error).
+                If you call this API operation directly, make sure to design
+                your application to parse the content of the response and handle
+                it appropriately. If you use Amazon Web Services SDKs, SDKs
+                handle this condition. The SDKs detect the embedded error and
+                apply error handling per your configuration settings (including
+                automatically retrying the request as appropriate). If the
+                condition persists, the SDKs throw an exception (or, for the
+                SDKs that don't use exceptions, they return an error).
 
         Charge
 
-        : The copy request charge is based on the storage class and Region that
-          you specify for the destination object. The request can also result in
-          a data retrieval charge for the source if the source storage class
-          bills for data retrieval. If the copy source is in a different region,
-          the data transfer is billed to the copy source account. For pricing
-          information, see [Amazon S3
-          pricing](http://aws.amazon.com/s3/pricing/).
+        :   The copy request charge is based on the storage class and Region
+            that you specify for the destination object. The request can also
+            result in a data retrieval charge for the source if the source
+            storage class bills for data retrieval. If the copy source is in a
+            different region, the data transfer is billed to the copy source
+            account. For pricing information, see [Amazon S3
+            pricing](http://aws.amazon.com/s3/pricing/).
 
         HTTP Host header syntax
 
-        : - **Directory buckets** - The HTTP Host header syntax is
-            ` `*`Bucket-name`*`.s3express-`*`zone-id`*`.`*`region-code`*`.amazonaws.com`.
+        :   - **Directory buckets** - The HTTP Host header syntax is
+              ` `*`Bucket-name`*`.s3express-`*`zone-id`*`.`*`region-code`*`.amazonaws.com`.
 
-          - **Amazon S3 on Outposts** - When you use this action with S3 on
-            Outposts through the REST API, you must direct requests to the S3 on
-            Outposts hostname. The S3 on Outposts hostname takes the form
-            ` `*`AccessPointName`*`-`*`AccountId`*`.`*`outpostID`*`.s3-outposts.`*`Region`*`.amazonaws.com`.
-            The hostname isn't required when you use the Amazon Web Services
-            CLI or SDKs.
+            - **Amazon S3 on Outposts** - When you use this action with S3 on
+              Outposts through the REST API, you must direct requests to the S3
+              on Outposts hostname. The S3 on Outposts hostname takes the form
+              ` `*`AccessPointName`*`-`*`AccountId`*`.`*`outpostID`*`.s3-outposts.`*`Region`*`.amazonaws.com`.
+              The hostname isn't required when you use the Amazon Web Services
+              CLI or SDKs.
 
         The following operations are related to `CopyObject`:
 
@@ -764,8 +711,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `CopyObjectInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -775,10 +720,33 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `CopyObjectOutput`.
         """
-        return self._invoke(input, _models.COPY_OBJECT, [], plugins)
 
+    def copy_object(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CopyObjectOutput:
+        return self._invoke(
+            self._select_input(_models.COPY_OBJECT, args, kwargs),
+            _models.COPY_OBJECT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_bucket(
-        self, input: CreateBucketInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateBucketInput | _models.CreateBucketInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateBucketOutput: ...
+
+    @_overload
+    def create_bucket(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateBucketInputDict],
     ) -> CreateBucketOutput:
         """
         Note:
@@ -839,41 +807,41 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : - **General purpose bucket permissions** - In addition to the
-            `s3:CreateBucket` permission, the following permissions are required
-            in a policy when your `CreateBucket` request includes specific
-            headers:
+        :   - **General purpose bucket permissions** - In addition to the
+              `s3:CreateBucket` permission, the following permissions are
+              required in a policy when your `CreateBucket` request includes
+              specific headers:
 
-            - **Access control lists (ACLs)** - In your `CreateBucket` request,
-              if you specify an access control list (ACL) and set it to
-              `public-read`, `public-read-write`, `authenticated-read`, or if
-              you explicitly specify any other custom ACLs, both
-              `s3:CreateBucket` and `s3:PutBucketAcl` permissions are required.
-              In your `CreateBucket` request, if you set the ACL to `private`,
-              or if you don't specify any ACLs, only the `s3:CreateBucket`
-              permission is required.
+              - **Access control lists (ACLs)** - In your `CreateBucket`
+                request, if you specify an access control list (ACL) and set it
+                to `public-read`, `public-read-write`, `authenticated-read`, or
+                if you explicitly specify any other custom ACLs, both
+                `s3:CreateBucket` and `s3:PutBucketAcl` permissions are
+                required. In your `CreateBucket` request, if you set the ACL to
+                `private`, or if you don't specify any ACLs, only the
+                `s3:CreateBucket` permission is required.
 
-            - **Object Lock** - In your `CreateBucket` request, if you set
-              `x-amz-bucket-object-lock-enabled` to true, the
-              `s3:PutBucketObjectLockConfiguration` and `s3:PutBucketVersioning`
-              permissions are required.
+              - **Object Lock** - In your `CreateBucket` request, if you set
+                `x-amz-bucket-object-lock-enabled` to true, the
+                `s3:PutBucketObjectLockConfiguration` and
+                `s3:PutBucketVersioning` permissions are required.
 
-            - **S3 Object Ownership** - If your `CreateBucket` request includes
-              the `x-amz-object-ownership` header, then the
-              `s3:PutBucketOwnershipControls` permission is required.
+              - **S3 Object Ownership** - If your `CreateBucket` request
+                includes the `x-amz-object-ownership` header, then the
+                `s3:PutBucketOwnershipControls` permission is required.
 
-              Warning:
-            To set an ACL on a bucket as part of a `CreateBucket` request, you
-            must explicitly set S3 Object Ownership for the bucket to a
+                Warning:
+            To set an ACL on a bucket as part of a `CreateBucket` request,
+            you must explicitly set S3 Object Ownership for the bucket to a
             different value than the default, `BucketOwnerEnforced`.
-            Additionally, if your desired bucket ACL grants public access, you
-            must first create the bucket (without the bucket ACL) and then
-            explicitly disable Block Public Access on the bucket before using
-            `PutBucketAcl` to set the ACL. If you try to create a bucket with
-            a public ACL, the request will fail.
+            Additionally, if your desired bucket ACL grants public access,
+            you must first create the bucket (without the bucket ACL) and
+            then explicitly disable Block Public Access on the bucket before
+            using `PutBucketAcl` to set the ACL. If you try to create a
+            bucket with a public ACL, the request will fail.
 
-            For the majority of modern use cases in S3, we recommend that you
-            keep all Block Public Access settings enabled and keep ACLs
+            For the majority of modern use cases in S3, we recommend that
+            you keep all Block Public Access settings enabled and keep ACLs
             disabled. If you would like to share data with users outside of
             your account, you can use bucket policies as needed. For more
             information, see [Controlling ownership of objects and disabling
@@ -883,48 +851,49 @@ class S3Client(Client[S3Config]):
             storage](https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html)
             in the *Amazon S3 User Guide*.
 
-            - **S3 Block Public Access** - If your specific use case requires
-              granting public access to your S3 resources, you can disable Block
-              Public Access. Specifically, you can create a new bucket with
-              Block Public Access enabled, then separately call the
-              [`DeletePublicAccessBlock`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeletePublicAccessBlock.html)
-              API. To use this operation, you must have the
-              `s3:PutBucketPublicAccessBlock` permission. For more information
-              about S3 Block Public Access, see [Blocking public access to your
-              Amazon S3
-              storage](https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html)
+              - **S3 Block Public Access** - If your specific use case requires
+                granting public access to your S3 resources, you can disable
+                Block Public Access. Specifically, you can create a new bucket
+                with Block Public Access enabled, then separately call the
+                [`DeletePublicAccessBlock`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeletePublicAccessBlock.html)
+                API. To use this operation, you must have the
+                `s3:PutBucketPublicAccessBlock` permission. For more information
+                about S3 Block Public Access, see [Blocking public access to
+                your Amazon S3
+                storage](https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html)
+                in the *Amazon S3 User Guide*.
+
+            - **Directory bucket permissions** - You must have the
+              `s3express:CreateBucket` permission in an IAM identity-based
+              policy instead of a bucket policy. Cross-account access to this
+              API operation isn't supported. This operation can only be
+              performed by the Amazon Web Services account that owns the
+              resource. For more information about directory bucket policies and
+              permissions, see [Amazon Web Services Identity and Access
+              Management (IAM) for S3 Express One
+              Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html)
               in the *Amazon S3 User Guide*.
 
-          - **Directory bucket permissions** - You must have the
-            `s3express:CreateBucket` permission in an IAM identity-based policy
-            instead of a bucket policy. Cross-account access to this API
-            operation isn't supported. This operation can only be performed by
-            the Amazon Web Services account that owns the resource. For more
-            information about directory bucket policies and permissions, see
-            [Amazon Web Services Identity and Access Management (IAM) for S3
-            Express One
-            Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html)
-            in the *Amazon S3 User Guide*.
-
-            Warning:
+              Warning:
             The permissions for ACLs, Object Lock, S3 Object Ownership, and S3
             Block Public Access are not supported for directory buckets. For
             directory buckets, all Block Public Access settings are enabled at
             the bucket level and S3 Object Ownership is set to Bucket owner
             enforced (ACLs disabled). These settings can't be modified.
 
-            For more information about permissions for creating and working with
-            directory buckets, see [Directory
+            For more information about permissions for creating and working
+            with directory buckets, see [Directory
             buckets](https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-overview.html)
-            in the *Amazon S3 User Guide*. For more information about supported
-            S3 features for directory buckets, see [Features of S3 Express One
+            in the *Amazon S3 User Guide*. For more information about
+            supported S3 features for directory buckets, see [Features of S3
+            Express One
             Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-one-zone.html#s3-express-features)
             in the *Amazon S3 User Guide*.
 
         HTTP Host header syntax
 
-        : **Directory buckets** - The HTTP Host header syntax is
-          `s3express-control.`*`region-code`*`.amazonaws.com`.
+        :   **Directory buckets** - The HTTP Host header syntax is
+            `s3express-control.`*`region-code`*`.amazonaws.com`.
 
         The following operations are related to `CreateBucket`:
 
@@ -938,8 +907,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `CreateBucketInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -949,12 +916,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `CreateBucketOutput`.
         """
-        return self._invoke(input, _models.CREATE_BUCKET, [], plugins)
 
+    def create_bucket(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateBucketOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_BUCKET, args, kwargs),
+            _models.CREATE_BUCKET,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_bucket_metadata_configuration(
         self,
-        input: CreateBucketMetadataConfigurationInput,
+        request: _models.CreateBucketMetadataConfigurationInput
+        | _models.CreateBucketMetadataConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateBucketMetadataConfigurationOutput: ...
+
+    @_overload
+    def create_bucket_metadata_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateBucketMetadataConfigurationInputDict],
     ) -> CreateBucketMetadataConfigurationOutput:
         """
         Creates an S3 Metadata V2 metadata configuration for a general purpose
@@ -964,54 +953,55 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : To use this operation, you must have the following permissions. For
-          more information, see [Setting up permissions for configuring metadata
-          tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html)
-          in the *Amazon S3 User Guide*.
+        :   To use this operation, you must have the following permissions. For
+            more information, see [Setting up permissions for configuring
+            metadata
+            tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html)
+            in the *Amazon S3 User Guide*.
 
-          If you want to encrypt your metadata tables with server-side
-          encryption with Key Management Service (KMS) keys (SSE-KMS), you need
-          additional permissions in your KMS key policy. For more information,
-          see [Setting up permissions for configuring metadata
-          tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html)
-          in the *Amazon S3 User Guide*.
+            If you want to encrypt your metadata tables with server-side
+            encryption with Key Management Service (KMS) keys (SSE-KMS), you
+            need additional permissions in your KMS key policy. For more
+            information, see [Setting up permissions for configuring metadata
+            tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html)
+            in the *Amazon S3 User Guide*.
 
-          If you also want to integrate your table bucket with Amazon Web
-          Services analytics services so that you can query your metadata table,
-          you need additional permissions. For more information, see
-          [Integrating Amazon S3 Tables with Amazon Web Services analytics
-          services](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-integrating-aws.html)
-          in the *Amazon S3 User Guide*.
+            If you also want to integrate your table bucket with Amazon Web
+            Services analytics services so that you can query your metadata
+            table, you need additional permissions. For more information, see
+            [Integrating Amazon S3 Tables with Amazon Web Services analytics
+            services](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-integrating-aws.html)
+            in the *Amazon S3 User Guide*.
 
-          To query your metadata tables, you need additional permissions. For
-          more information, see [Permissions for querying metadata
-          tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-bucket-query-permissions.html)
-          in the *Amazon S3 User Guide*.
+            To query your metadata tables, you need additional permissions. For
+            more information, see [Permissions for querying metadata
+            tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-bucket-query-permissions.html)
+            in the *Amazon S3 User Guide*.
 
-          - `s3:CreateBucketMetadataTableConfiguration`
+            - `s3:CreateBucketMetadataTableConfiguration`
 
-            Note:
+              Note:
             The IAM policy action name is the same for the V1 and V2 API
             operations.
 
-          - `s3tables:CreateTableBucket`
+            - `s3tables:CreateTableBucket`
 
-          - `s3tables:CreateNamespace`
+            - `s3tables:CreateNamespace`
 
-          - `s3tables:GetTable`
+            - `s3tables:GetTable`
 
-          - `s3tables:CreateTable`
+            - `s3tables:CreateTable`
 
-          - `s3tables:PutTablePolicy`
+            - `s3tables:PutTablePolicy`
 
-          - `s3tables:PutTableBucketPolicy`
+            - `s3tables:PutTableBucketPolicy`
 
-          - `s3tables:PutTableEncryption`
+            - `s3tables:PutTableEncryption`
 
-          - `kms:DescribeKey`
+            - `kms:DescribeKey`
 
-          - `iam:PassRole` - required if you include an
-            `AnnotationTableConfiguration` with an IAM role.
+            - `iam:PassRole` - required if you include an
+              `AnnotationTableConfiguration` with an IAM role.
 
         The following operations are related to
         `CreateBucketMetadataConfiguration`:
@@ -1039,8 +1029,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `CreateBucketMetadataConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1050,14 +1038,36 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `CreateBucketMetadataConfigurationOutput`.
         """
+
+    def create_bucket_metadata_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateBucketMetadataConfigurationOutput:
         return self._invoke(
-            input, _models.CREATE_BUCKET_METADATA_CONFIGURATION, [], plugins
+            self._select_input(
+                _models.CREATE_BUCKET_METADATA_CONFIGURATION, args, kwargs
+            ),
+            _models.CREATE_BUCKET_METADATA_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     def create_bucket_metadata_table_configuration(
         self,
-        input: CreateBucketMetadataTableConfigurationInput,
+        request: _models.CreateBucketMetadataTableConfigurationInput
+        | _models.CreateBucketMetadataTableConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateBucketMetadataTableConfigurationOutput: ...
+
+    @_overload
+    def create_bucket_metadata_table_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateBucketMetadataTableConfigurationInputDict],
     ) -> CreateBucketMetadataTableConfigurationOutput:
         """
         Warning:
@@ -1080,34 +1090,35 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : To use this operation, you must have the following permissions. For
-          more information, see [Setting up permissions for configuring metadata
-          tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html)
-          in the *Amazon S3 User Guide*.
+        :   To use this operation, you must have the following permissions. For
+            more information, see [Setting up permissions for configuring
+            metadata
+            tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html)
+            in the *Amazon S3 User Guide*.
 
-          If you want to encrypt your metadata tables with server-side
-          encryption with Key Management Service (KMS) keys (SSE-KMS), you need
-          additional permissions. For more information, see [Setting up
-          permissions for configuring metadata
-          tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html)
-          in the *Amazon S3 User Guide*.
+            If you want to encrypt your metadata tables with server-side
+            encryption with Key Management Service (KMS) keys (SSE-KMS), you
+            need additional permissions. For more information, see [Setting up
+            permissions for configuring metadata
+            tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html)
+            in the *Amazon S3 User Guide*.
 
-          If you also want to integrate your table bucket with Amazon Web
-          Services analytics services so that you can query your metadata table,
-          you need additional permissions. For more information, see
-          [Integrating Amazon S3 Tables with Amazon Web Services analytics
-          services](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-integrating-aws.html)
-          in the *Amazon S3 User Guide*.
+            If you also want to integrate your table bucket with Amazon Web
+            Services analytics services so that you can query your metadata
+            table, you need additional permissions. For more information, see
+            [Integrating Amazon S3 Tables with Amazon Web Services analytics
+            services](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-integrating-aws.html)
+            in the *Amazon S3 User Guide*.
 
-          - `s3:CreateBucketMetadataTableConfiguration`
+            - `s3:CreateBucketMetadataTableConfiguration`
 
-          - `s3tables:CreateNamespace`
+            - `s3tables:CreateNamespace`
 
-          - `s3tables:GetTable`
+            - `s3tables:GetTable`
 
-          - `s3tables:CreateTable`
+            - `s3tables:CreateTable`
 
-          - `s3tables:PutTablePolicy`
+            - `s3tables:PutTablePolicy`
 
         The following operations are related to
         `CreateBucketMetadataTableConfiguration`:
@@ -1122,8 +1133,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `CreateBucketMetadataTableConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1133,12 +1142,36 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `CreateBucketMetadataTableConfigurationOutput`.
         """
+
+    def create_bucket_metadata_table_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateBucketMetadataTableConfigurationOutput:
         return self._invoke(
-            input, _models.CREATE_BUCKET_METADATA_TABLE_CONFIGURATION, [], plugins
+            self._select_input(
+                _models.CREATE_BUCKET_METADATA_TABLE_CONFIGURATION, args, kwargs
+            ),
+            _models.CREATE_BUCKET_METADATA_TABLE_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     def create_multipart_upload(
-        self, input: CreateMultipartUploadInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateMultipartUploadInput
+        | _models.CreateMultipartUploadInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateMultipartUploadOutput: ...
+
+    @_overload
+    def create_multipart_upload(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateMultipartUploadInputDict],
     ) -> CreateMultipartUploadOutput:
         """
         Warning:
@@ -1197,208 +1230,210 @@ class S3Client(Client[S3Config]):
 
         Request signing
 
-        : For request signing, multipart upload is just a series of regular
-          requests. You initiate a multipart upload, send one or more requests
-          to upload parts, and then complete the multipart upload process. You
-          sign each request individually. There is nothing special about signing
-          multipart upload requests. For more information about signing, see
-          [Authenticating Requests (Amazon Web Services Signature Version
-          4)](https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html)
-          in the *Amazon S3 User Guide*.
+        :   For request signing, multipart upload is just a series of regular
+            requests. You initiate a multipart upload, send one or more requests
+            to upload parts, and then complete the multipart upload process. You
+            sign each request individually. There is nothing special about
+            signing multipart upload requests. For more information about
+            signing, see [Authenticating Requests (Amazon Web Services Signature
+            Version
+            4)](https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html)
+            in the *Amazon S3 User Guide*.
 
         Permissions
 
-        : - **General purpose bucket permissions** - To perform a multipart
-            upload with encryption using an Key Management Service (KMS) KMS
-            key, the requester must have permission to the `kms:Decrypt` and
-            `kms:GenerateDataKey` actions on the key. The requester must also
-            have permissions for the `kms:GenerateDataKey` action for the
-            `CreateMultipartUpload` API. Then, the requester needs permissions
-            for the `kms:Decrypt` action on the `UploadPart` and
-            `UploadPartCopy` APIs. These permissions are required because Amazon
-            S3 must decrypt and read data from the encrypted file parts before
-            it completes the multipart upload. For more information, see
-            [Multipart upload API and
-            permissions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html#mpuAndPermissions)
-            and [Protecting data using server-side encryption with Amazon Web
-            Services
-            KMS](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html)
-            in the *Amazon S3 User Guide*.
+        :   - **General purpose bucket permissions** - To perform a multipart
+              upload with encryption using an Key Management Service (KMS) KMS
+              key, the requester must have permission to the `kms:Decrypt` and
+              `kms:GenerateDataKey` actions on the key. The requester must also
+              have permissions for the `kms:GenerateDataKey` action for the
+              `CreateMultipartUpload` API. Then, the requester needs permissions
+              for the `kms:Decrypt` action on the `UploadPart` and
+              `UploadPartCopy` APIs. These permissions are required because
+              Amazon S3 must decrypt and read data from the encrypted file parts
+              before it completes the multipart upload. For more information,
+              see [Multipart upload API and
+              permissions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html#mpuAndPermissions)
+              and [Protecting data using server-side encryption with Amazon Web
+              Services
+              KMS](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html)
+              in the *Amazon S3 User Guide*.
 
-          - **Directory bucket permissions** - To grant access to this API
-            operation on a directory bucket, we recommend that you use the
-            [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
-            API operation for session-based authorization. Specifically, you
-            grant the `s3express:CreateSession` permission to the directory
-            bucket in a bucket policy or an IAM identity-based policy. Then, you
-            make the `CreateSession` API call on the bucket to obtain a session
-            token. With the session token in your request header, you can make
-            API requests to this operation. After the session token expires, you
-            make another `CreateSession` API call to generate a new session
-            token for use. Amazon Web Services CLI or SDKs create session and
-            refresh the session token automatically to avoid service
-            interruptions when a session expires. For more information about
-            authorization, see
-            [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
-            .
+            - **Directory bucket permissions** - To grant access to this API
+              operation on a directory bucket, we recommend that you use the
+              [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
+              API operation for session-based authorization. Specifically, you
+              grant the `s3express:CreateSession` permission to the directory
+              bucket in a bucket policy or an IAM identity-based policy. Then,
+              you make the `CreateSession` API call on the bucket to obtain a
+              session token. With the session token in your request header, you
+              can make API requests to this operation. After the session token
+              expires, you make another `CreateSession` API call to generate a
+              new session token for use. Amazon Web Services CLI or SDKs create
+              session and refresh the session token automatically to avoid
+              service interruptions when a session expires. For more information
+              about authorization, see
+              [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
+              .
 
         Encryption
 
-        : - **General purpose buckets** - Server-side encryption is for data
-            encryption at rest. Amazon S3 encrypts your data as it writes it to
-            disks in its data centers and decrypts it when you access it. Amazon
-            S3 automatically encrypts all new objects that are uploaded to an S3
-            bucket. When doing a multipart upload, if you don't specify
-            encryption information in your request, the encryption setting of
-            the uploaded parts is set to the default encryption configuration of
-            the destination bucket. By default, all buckets have a base level of
-            encryption configuration that uses server-side encryption with
-            Amazon S3 managed keys (SSE-S3). If the destination bucket has a
-            default encryption configuration that uses server-side encryption
-            with an Key Management Service (KMS) key (SSE-KMS), or a
-            customer-provided encryption key (SSE-C), Amazon S3 uses the
-            corresponding KMS key, or a customer-provided key to encrypt the
-            uploaded parts. When you perform a CreateMultipartUpload operation,
-            if you want to use a different type of encryption setting for the
-            uploaded parts, you can request that Amazon S3 encrypts the object
-            with a different encryption key (such as an Amazon S3 managed key, a
-            KMS key, or a customer-provided key). When the encryption setting in
-            your request is different from the default encryption configuration
-            of the destination bucket, the encryption setting in your request
-            takes precedence. If you choose to provide your own encryption key,
-            the request headers you provide in
-            [UploadPart](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html)
-            and
-            [UploadPartCopy](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html)
-            requests must match the headers you used in the
-            `CreateMultipartUpload` request.
+        :   - **General purpose buckets** - Server-side encryption is for data
+              encryption at rest. Amazon S3 encrypts your data as it writes it
+              to disks in its data centers and decrypts it when you access it.
+              Amazon S3 automatically encrypts all new objects that are uploaded
+              to an S3 bucket. When doing a multipart upload, if you don't
+              specify encryption information in your request, the encryption
+              setting of the uploaded parts is set to the default encryption
+              configuration of the destination bucket. By default, all buckets
+              have a base level of encryption configuration that uses
+              server-side encryption with Amazon S3 managed keys (SSE-S3). If
+              the destination bucket has a default encryption configuration that
+              uses server-side encryption with an Key Management Service (KMS)
+              key (SSE-KMS), or a customer-provided encryption key (SSE-C),
+              Amazon S3 uses the corresponding KMS key, or a customer-provided
+              key to encrypt the uploaded parts. When you perform a
+              CreateMultipartUpload operation, if you want to use a different
+              type of encryption setting for the uploaded parts, you can request
+              that Amazon S3 encrypts the object with a different encryption key
+              (such as an Amazon S3 managed key, a KMS key, or a
+              customer-provided key). When the encryption setting in your
+              request is different from the default encryption configuration of
+              the destination bucket, the encryption setting in your request
+              takes precedence. If you choose to provide your own encryption
+              key, the request headers you provide in
+              [UploadPart](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html)
+              and
+              [UploadPartCopy](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html)
+              requests must match the headers you used in the
+              `CreateMultipartUpload` request.
 
-            - Use KMS keys (SSE-KMS) that include the Amazon Web Services
-              managed key (`aws/s3`) and KMS customer managed keys stored in Key
-              Management Service (KMS) -- If you want Amazon Web Services to
-              manage the keys used to encrypt data, specify the following
-              headers in the request.
+              - Use KMS keys (SSE-KMS) that include the Amazon Web Services
+                managed key (`aws/s3`) and KMS customer managed keys stored in
+                Key Management Service (KMS) -- If you want Amazon Web Services
+                to manage the keys used to encrypt data, specify the following
+                headers in the request.
 
-              - `x-amz-server-side-encryption`
+                - `x-amz-server-side-encryption`
 
-              - `x-amz-server-side-encryption-aws-kms-key-id`
+                - `x-amz-server-side-encryption-aws-kms-key-id`
 
-              - `x-amz-server-side-encryption-context`
+                - `x-amz-server-side-encryption-context`
 
-              Note:
+                Note:
             - If you specify `x-amz-server-side-encryption:aws:kms`, but
             don't provide `x-amz-server-side-encryption-aws-kms-key-id`,
             Amazon S3 uses the Amazon Web Services managed key (`aws/s3`
             key) in KMS to protect the data.
 
-            - To perform a multipart upload with encryption by using an Amazon
-            Web Services KMS key, the requester must have permission to the
-            `kms:Decrypt` and `kms:GenerateDataKey*` actions on the key.
-            These permissions are required because Amazon S3 must decrypt
-            and read data from the encrypted file parts before it completes
-            the multipart upload. For more information, see [Multipart
-            upload API and
+            - To perform a multipart upload with encryption by using an
+            Amazon Web Services KMS key, the requester must have
+            permission to the `kms:Decrypt` and `kms:GenerateDataKey*`
+            actions on the key. These permissions are required because
+            Amazon S3 must decrypt and read data from the encrypted file
+            parts before it completes the multipart upload. For more
+            information, see [Multipart upload API and
             permissions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html#mpuAndPermissions)
             and [Protecting data using server-side encryption with Amazon
             Web Services
             KMS](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html)
             in the *Amazon S3 User Guide*.
 
-            - If your Identity and Access Management (IAM) user or role is in
-            the same Amazon Web Services account as the KMS key, then you
-            must have these permissions on the key policy. If your IAM user
-            or role is in a different account from the key, then you must
-            have the permissions on both the key policy and your IAM user or
-            role.
+            - If your Identity and Access Management (IAM) user or role is
+            in the same Amazon Web Services account as the KMS key, then
+            you must have these permissions on the key policy. If your IAM
+            user or role is in a different account from the key, then you
+            must have the permissions on both the key policy and your IAM
+            user or role.
 
-            - All `GET` and `PUT` requests for an object protected by KMS fail
-            if you don't make them by using Secure Sockets Layer (SSL),
-            Transport Layer Security (TLS), or Signature Version 4. For
-            information about configuring any of the officially supported
-            Amazon Web Services SDKs and Amazon Web Services CLI, see
-            [Specifying the Signature Version in Request
+            - All `GET` and `PUT` requests for an object protected by KMS
+            fail if you don't make them by using Secure Sockets Layer
+            (SSL), Transport Layer Security (TLS), or Signature Version 4.
+            For information about configuring any of the officially
+            supported Amazon Web Services SDKs and Amazon Web Services
+            CLI, see [Specifying the Signature Version in Request
             Authentication](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version)
             in the *Amazon S3 User Guide*.
 
-              For more information about server-side encryption with KMS keys
-              (SSE-KMS), see [Protecting Data Using Server-Side Encryption with
-              KMS
-              keys](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html)
-              in the *Amazon S3 User Guide*.
+                For more information about server-side encryption with KMS keys
+                (SSE-KMS), see [Protecting Data Using Server-Side Encryption
+                with KMS
+                keys](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html)
+                in the *Amazon S3 User Guide*.
 
-            - Use customer-provided encryption keys (SSE-C) -- If you want to
-              manage your own encryption keys, provide all the following headers
-              in the request.
+              - Use customer-provided encryption keys (SSE-C) -- If you want to
+                manage your own encryption keys, provide all the following
+                headers in the request.
 
-              - `x-amz-server-side-encryption-customer-algorithm`
+                - `x-amz-server-side-encryption-customer-algorithm`
 
-              - `x-amz-server-side-encryption-customer-key`
+                - `x-amz-server-side-encryption-customer-key`
 
-              - `x-amz-server-side-encryption-customer-key-MD5`
+                - `x-amz-server-side-encryption-customer-key-MD5`
 
-              For more information about server-side encryption with
-              customer-provided encryption keys (SSE-C), see [Protecting data
-              using server-side encryption with customer-provided encryption
-              keys
-              (SSE-C)](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerSideEncryptionCustomerKeys.html)
-              in the *Amazon S3 User Guide*.
+                For more information about server-side encryption with
+                customer-provided encryption keys (SSE-C), see [Protecting data
+                using server-side encryption with customer-provided encryption
+                keys
+                (SSE-C)](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerSideEncryptionCustomerKeys.html)
+                in the *Amazon S3 User Guide*.
 
-          - **Directory buckets** - For directory buckets, there are only two
-            supported options for server-side encryption: server-side encryption
-            with Amazon S3 managed keys (SSE-S3) (`AES256`) and server-side
-            encryption with KMS keys (SSE-KMS) (`aws:kms`). We recommend that
-            the bucket's default encryption uses the desired encryption
-            configuration and you don't override the bucket default encryption
-            in your `CreateSession` requests or `PUT` object requests. Then, new
-            objects are automatically encrypted with the desired encryption
-            settings. For more information, see [Protecting data with
-            server-side
-            encryption](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-serv-side-encryption.html)
-            in the *Amazon S3 User Guide*. For more information about the
-            encryption overriding behaviors in directory buckets, see
-            [Specifying server-side encryption with KMS for new object
-            uploads](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-specifying-kms-encryption.html).
+            - **Directory buckets** - For directory buckets, there are only two
+              supported options for server-side encryption: server-side
+              encryption with Amazon S3 managed keys (SSE-S3) (`AES256`) and
+              server-side encryption with KMS keys (SSE-KMS) (`aws:kms`). We
+              recommend that the bucket's default encryption uses the desired
+              encryption configuration and you don't override the bucket
+              default encryption in your `CreateSession` requests or `PUT`
+              object requests. Then, new objects are automatically encrypted
+              with the desired encryption settings. For more information, see
+              [Protecting data with server-side
+              encryption](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-serv-side-encryption.html)
+              in the *Amazon S3 User Guide*. For more information about the
+              encryption overriding behaviors in directory buckets, see
+              [Specifying server-side encryption with KMS for new object
+              uploads](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-specifying-kms-encryption.html).
 
-            In the Zonal endpoint API calls (except
-            [CopyObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html)
-            and
-            [UploadPartCopy](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html))
-            using the REST API, the encryption request headers must match the
-            encryption settings that are specified in the `CreateSession`
-            request. You can't override the values of the encryption settings
-            (`x-amz-server-side-encryption`,
-            `x-amz-server-side-encryption-aws-kms-key-id`,
-            `x-amz-server-side-encryption-context`, and
-            `x-amz-server-side-encryption-bucket-key-enabled`) that are
-            specified in the `CreateSession` request. You don't need to
-            explicitly specify these encryption settings values in Zonal
-            endpoint API calls, and Amazon S3 will use the encryption settings
-            values from the `CreateSession` request to protect new objects in
-            the directory bucket.
+              In the Zonal endpoint API calls (except
+              [CopyObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html)
+              and
+              [UploadPartCopy](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html))
+              using the REST API, the encryption request headers must match the
+              encryption settings that are specified in the `CreateSession`
+              request. You can't override the values of the encryption settings
+              (`x-amz-server-side-encryption`,
+              `x-amz-server-side-encryption-aws-kms-key-id`,
+              `x-amz-server-side-encryption-context`, and
+              `x-amz-server-side-encryption-bucket-key-enabled`) that are
+              specified in the `CreateSession` request. You don't need to
+              explicitly specify these encryption settings values in Zonal
+              endpoint API calls, and Amazon S3 will use the encryption settings
+              values from the `CreateSession` request to protect new objects in
+              the directory bucket.
 
-            Note:
+              Note:
             When you use the CLI or the Amazon Web Services SDKs, for
-            `CreateSession`, the session token refreshes automatically to avoid
-            service interruptions when a session expires. The CLI or the Amazon
-            Web Services SDKs use the bucket's default encryption configuration
-            for the `CreateSession` request. It's not supported to override the
-            encryption settings values in the `CreateSession` request. So in the
-            Zonal endpoint API calls (except
+            `CreateSession`, the session token refreshes automatically to
+            avoid service interruptions when a session expires. The CLI or the
+            Amazon Web Services SDKs use the bucket's default encryption
+            configuration for the `CreateSession` request. It's not supported
+            to override the encryption settings values in the `CreateSession`
+            request. So in the Zonal endpoint API calls (except
             [CopyObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html)
             and
             [UploadPartCopy](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html)),
             the encryption request headers must match the default encryption
             configuration of the directory bucket.
-            Note:
+              Note:
             For directory buckets, when you perform a `CreateMultipartUpload`
-            operation and an `UploadPartCopy` operation, the request headers you
-            provide in the `CreateMultipartUpload` request must match the
+            operation and an `UploadPartCopy` operation, the request headers
+            you provide in the `CreateMultipartUpload` request must match the
             default encryption configuration of the destination bucket.
 
         HTTP Host header syntax
 
-        : **Directory buckets** - The HTTP Host header syntax is
-          ` `*`Bucket-name`*`.s3express-`*`zone-id`*`.`*`region-code`*`.amazonaws.com`.
+        :   **Directory buckets** - The HTTP Host header syntax is
+            ` `*`Bucket-name`*`.s3express-`*`zone-id`*`.`*`region-code`*`.amazonaws.com`.
 
         The following operations are related to `CreateMultipartUpload`:
 
@@ -1418,8 +1453,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `CreateMultipartUploadInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1429,10 +1462,33 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `CreateMultipartUploadOutput`.
         """
-        return self._invoke(input, _models.CREATE_MULTIPART_UPLOAD, [], plugins)
 
+    def create_multipart_upload(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateMultipartUploadOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_MULTIPART_UPLOAD, args, kwargs),
+            _models.CREATE_MULTIPART_UPLOAD,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_session(
-        self, input: CreateSessionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateSessionInput | _models.CreateSessionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateSessionOutput: ...
+
+    @_overload
+    def create_session(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateSessionInputDict],
     ) -> CreateSessionOutput:
         """
         Creates a session that establishes temporary security credentials to
@@ -1503,88 +1559,88 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : To obtain temporary security credentials, you must create a bucket
-          policy or an IAM identity-based policy that grants
-          `s3express:CreateSession` permission to the bucket. In a policy, you
-          can have the `s3express:SessionMode` condition key to control who can
-          create a `ReadWrite` or `ReadOnly` session. For more information about
-          `ReadWrite` or `ReadOnly` sessions, see
-          [`x-amz-create-session-mode`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html#API_CreateSession_RequestParameters)
-          . For example policies, see [Example bucket policies for S3 Express
-          One
-          Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-example-bucket-policies.html)
-          and [Amazon Web Services Identity and Access Management (IAM)
-          identity-based policies for S3 Express One
-          Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-identity-policies.html)
-          in the *Amazon S3 User Guide*.
+        :   To obtain temporary security credentials, you must create a bucket
+            policy or an IAM identity-based policy that grants
+            `s3express:CreateSession` permission to the bucket. In a policy, you
+            can have the `s3express:SessionMode` condition key to control who
+            can create a `ReadWrite` or `ReadOnly` session. For more information
+            about `ReadWrite` or `ReadOnly` sessions, see
+            [`x-amz-create-session-mode`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html#API_CreateSession_RequestParameters)
+            . For example policies, see [Example bucket policies for S3 Express
+            One
+            Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-example-bucket-policies.html)
+            and [Amazon Web Services Identity and Access Management (IAM)
+            identity-based policies for S3 Express One
+            Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-identity-policies.html)
+            in the *Amazon S3 User Guide*.
 
-          To grant cross-account access to Zonal endpoint API operations, the
-          bucket policy should also grant both accounts the
-          `s3express:CreateSession` permission.
+            To grant cross-account access to Zonal endpoint API operations, the
+            bucket policy should also grant both accounts the
+            `s3express:CreateSession` permission.
 
-          If you want to encrypt objects with SSE-KMS, you must also have the
-          `kms:GenerateDataKey` and the `kms:Decrypt` permissions in IAM
-          identity-based policies and KMS key policies for the target KMS key.
+            If you want to encrypt objects with SSE-KMS, you must also have the
+            `kms:GenerateDataKey` and the `kms:Decrypt` permissions in IAM
+            identity-based policies and KMS key policies for the target KMS key.
 
         Encryption
 
-        : For directory buckets, there are only two supported options for
-          server-side encryption: server-side encryption with Amazon S3 managed
-          keys (SSE-S3) (`AES256`) and server-side encryption with KMS keys
-          (SSE-KMS) (`aws:kms`). We recommend that the bucket's default
-          encryption uses the desired encryption configuration and you don't
-          override the bucket default encryption in your `CreateSession`
-          requests or `PUT` object requests. Then, new objects are automatically
-          encrypted with the desired encryption settings. For more information,
-          see [Protecting data with server-side
-          encryption](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-serv-side-encryption.html)
-          in the *Amazon S3 User Guide*. For more information about the
-          encryption overriding behaviors in directory buckets, see [Specifying
-          server-side encryption with KMS for new object
-          uploads](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-specifying-kms-encryption.html).
+        :   For directory buckets, there are only two supported options for
+            server-side encryption: server-side encryption with Amazon S3
+            managed keys (SSE-S3) (`AES256`) and server-side encryption with KMS
+            keys (SSE-KMS) (`aws:kms`). We recommend that the bucket's default
+            encryption uses the desired encryption configuration and you don't
+            override the bucket default encryption in your `CreateSession`
+            requests or `PUT` object requests. Then, new objects are
+            automatically encrypted with the desired encryption settings. For
+            more information, see [Protecting data with server-side
+            encryption](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-serv-side-encryption.html)
+            in the *Amazon S3 User Guide*. For more information about the
+            encryption overriding behaviors in directory buckets, see
+            [Specifying server-side encryption with KMS for new object
+            uploads](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-specifying-kms-encryption.html).
 
-          For [Zonal endpoint (object-level) API
-          operations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-differences.html#s3-express-differences-api-operations)
-          except
-          [CopyObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html)
-          and
-          [UploadPartCopy](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html),
-          you authenticate and authorize requests through
-          [CreateSession](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
-          for low latency. To encrypt new objects in a directory bucket with
-          SSE-KMS, you must specify SSE-KMS as the directory bucket's default
-          encryption configuration with a KMS key (specifically, a [customer
-          managed
-          key](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk)).
-          Then, when a session is created for Zonal endpoint API operations, new
-          objects are automatically encrypted and decrypted with SSE-KMS and S3
-          Bucket Keys during the session.
+            For [Zonal endpoint (object-level) API
+            operations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-differences.html#s3-express-differences-api-operations)
+            except
+            [CopyObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html)
+            and
+            [UploadPartCopy](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html),
+            you authenticate and authorize requests through
+            [CreateSession](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
+            for low latency. To encrypt new objects in a directory bucket with
+            SSE-KMS, you must specify SSE-KMS as the directory bucket's default
+            encryption configuration with a KMS key (specifically, a [customer
+            managed
+            key](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk)).
+            Then, when a session is created for Zonal endpoint API operations,
+            new objects are automatically encrypted and decrypted with SSE-KMS
+            and S3 Bucket Keys during the session.
 
-          Note:
+            Note:
             Only 1 [customer managed
             key](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk)
-            is supported per directory bucket for the lifetime of the bucket. The
-            [Amazon Web Services managed
+            is supported per directory bucket for the lifetime of the bucket.
+            The [Amazon Web Services managed
             key](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk)
             (`aws/s3`) isn't supported. After you specify SSE-KMS as your
             bucket's default encryption configuration with a customer managed
             key, you can't change the customer managed key for the bucket's
             SSE-KMS configuration.
-          In the Zonal endpoint API calls (except
-          [CopyObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html)
-          and
-          [UploadPartCopy](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html))
-          using the REST API, you can't override the values of the encryption
-          settings (`x-amz-server-side-encryption`,
-          `x-amz-server-side-encryption-aws-kms-key-id`,
-          `x-amz-server-side-encryption-context`, and
-          `x-amz-server-side-encryption-bucket-key-enabled`) from the
-          `CreateSession` request. You don't need to explicitly specify these
-          encryption settings values in Zonal endpoint API calls, and Amazon S3
-          will use the encryption settings values from the `CreateSession`
-          request to protect new objects in the directory bucket.
+            In the Zonal endpoint API calls (except
+            [CopyObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html)
+            and
+            [UploadPartCopy](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html))
+            using the REST API, you can't override the values of the encryption
+            settings (`x-amz-server-side-encryption`,
+            `x-amz-server-side-encryption-aws-kms-key-id`,
+            `x-amz-server-side-encryption-context`, and
+            `x-amz-server-side-encryption-bucket-key-enabled`) from the
+            `CreateSession` request. You don't need to explicitly specify these
+            encryption settings values in Zonal endpoint API calls, and Amazon
+            S3 will use the encryption settings values from the `CreateSession`
+            request to protect new objects in the directory bucket.
 
-          Note:
+            Note:
             When you use the CLI or the Amazon Web Services SDKs, for
             `CreateSession`, the session token refreshes automatically to avoid
             service interruptions when a session expires. The CLI or the Amazon
@@ -1595,13 +1651,13 @@ class S3Client(Client[S3Config]):
             [CopyObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html)
             and
             [UploadPartCopy](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html)),
-            it's not supported to override the values of the encryption settings
-            from the `CreateSession` request.
+            it's not supported to override the values of the encryption
+            settings from the `CreateSession` request.
 
         HTTP Host header syntax
 
-        : **Directory buckets** - The HTTP Host header syntax is
-          ` `*`Bucket-name`*`.s3express-`*`zone-id`*`.`*`region-code`*`.amazonaws.com`.
+        :   **Directory buckets** - The HTTP Host header syntax is
+            ` `*`Bucket-name`*`.s3express-`*`zone-id`*`.`*`region-code`*`.amazonaws.com`.
 
         Warning:
             You must URL encode any signed header values that contain spaces. For
@@ -1609,8 +1665,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `CreateSessionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1620,10 +1674,33 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `CreateSessionOutput`.
         """
-        return self._invoke(input, _models.CREATE_SESSION, [], plugins)
 
+    def create_session(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateSessionOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_SESSION, args, kwargs),
+            _models.CREATE_SESSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_bucket(
-        self, input: DeleteBucketInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteBucketInput | _models.DeleteBucketInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteBucketOutput: ...
+
+    @_overload
+    def delete_bucket(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteBucketInputDict],
     ) -> DeleteBucketOutput:
         """
         Deletes the S3 bucket. All objects (including all object versions and
@@ -1650,24 +1727,24 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : - **General purpose bucket permissions** - You must have the
-            `s3:DeleteBucket` permission on the specified bucket in a policy.
+        :   - **General purpose bucket permissions** - You must have the
+              `s3:DeleteBucket` permission on the specified bucket in a policy.
 
-          - **Directory bucket permissions** - You must have the
-            `s3express:DeleteBucket` permission in an IAM identity-based policy
-            instead of a bucket policy. Cross-account access to this API
-            operation isn't supported. This operation can only be performed by
-            the Amazon Web Services account that owns the resource. For more
-            information about directory bucket policies and permissions, see
-            [Amazon Web Services Identity and Access Management (IAM) for S3
-            Express One
-            Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html)
-            in the *Amazon S3 User Guide*.
+            - **Directory bucket permissions** - You must have the
+              `s3express:DeleteBucket` permission in an IAM identity-based
+              policy instead of a bucket policy. Cross-account access to this
+              API operation isn't supported. This operation can only be
+              performed by the Amazon Web Services account that owns the
+              resource. For more information about directory bucket policies and
+              permissions, see [Amazon Web Services Identity and Access
+              Management (IAM) for S3 Express One
+              Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html)
+              in the *Amazon S3 User Guide*.
 
         HTTP Host header syntax
 
-        : **Directory buckets** - The HTTP Host header syntax is
-          `s3express-control.`*`region-code`*`.amazonaws.com`.
+        :   **Directory buckets** - The HTTP Host header syntax is
+            `s3express-control.`*`region-code`*`.amazonaws.com`.
 
         The following operations are related to `DeleteBucket`:
 
@@ -1681,8 +1758,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `DeleteBucketInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1692,12 +1767,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `DeleteBucketOutput`.
         """
-        return self._invoke(input, _models.DELETE_BUCKET, [], plugins)
 
+    def delete_bucket(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteBucketOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_BUCKET, args, kwargs),
+            _models.DELETE_BUCKET,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_bucket_analytics_configuration(
         self,
-        input: DeleteBucketAnalyticsConfigurationInput,
+        request: _models.DeleteBucketAnalyticsConfigurationInput
+        | _models.DeleteBucketAnalyticsConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteBucketAnalyticsConfigurationOutput: ...
+
+    @_overload
+    def delete_bucket_analytics_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteBucketAnalyticsConfigurationInputDict],
     ) -> DeleteBucketAnalyticsConfigurationOutput:
         """
         Note:
@@ -1734,8 +1831,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `DeleteBucketAnalyticsConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1745,12 +1840,35 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `DeleteBucketAnalyticsConfigurationOutput`.
         """
+
+    def delete_bucket_analytics_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteBucketAnalyticsConfigurationOutput:
         return self._invoke(
-            input, _models.DELETE_BUCKET_ANALYTICS_CONFIGURATION, [], plugins
+            self._select_input(
+                _models.DELETE_BUCKET_ANALYTICS_CONFIGURATION, args, kwargs
+            ),
+            _models.DELETE_BUCKET_ANALYTICS_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     def delete_bucket_cors(
-        self, input: DeleteBucketCorsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteBucketCorsInput | _models.DeleteBucketCorsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteBucketCorsOutput: ...
+
+    @_overload
+    def delete_bucket_cors(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteBucketCorsInputDict],
     ) -> DeleteBucketCorsOutput:
         """
         Note:
@@ -1778,8 +1896,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `DeleteBucketCorsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1789,10 +1905,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `DeleteBucketCorsOutput`.
         """
-        return self._invoke(input, _models.DELETE_BUCKET_CORS, [], plugins)
 
+    def delete_bucket_cors(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteBucketCorsOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_BUCKET_CORS, args, kwargs),
+            _models.DELETE_BUCKET_CORS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_bucket_encryption(
-        self, input: DeleteBucketEncryptionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteBucketEncryptionInput
+        | _models.DeleteBucketEncryptionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteBucketEncryptionOutput: ...
+
+    @_overload
+    def delete_bucket_encryption(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteBucketEncryptionInputDict],
     ) -> DeleteBucketEncryptionOutput:
         """
         This implementation of the DELETE action resets the default encryption
@@ -1814,30 +1954,31 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : - **General purpose bucket permissions** - The
-            `s3:PutEncryptionConfiguration` permission is required in a policy.
-            The bucket owner has this permission by default. The bucket owner
-            can grant this permission to others. For more information about
-            permissions, see [Permissions Related to Bucket
-            Operations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
-            and [Managing Access Permissions to Your Amazon S3
-            Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
+        :   - **General purpose bucket permissions** - The
+              `s3:PutEncryptionConfiguration` permission is required in a
+              policy. The bucket owner has this permission by default. The
+              bucket owner can grant this permission to others. For more
+              information about permissions, see [Permissions Related to Bucket
+              Operations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+              and [Managing Access Permissions to Your Amazon S3
+              Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
 
-          - **Directory bucket permissions** - To grant access to this API
-            operation, you must have the `s3express:PutEncryptionConfiguration`
-            permission in an IAM identity-based policy instead of a bucket
-            policy. Cross-account access to this API operation isn't supported.
-            This operation can only be performed by the Amazon Web Services
-            account that owns the resource. For more information about directory
-            bucket policies and permissions, see [Amazon Web Services Identity
-            and Access Management (IAM) for S3 Express One
-            Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html)
-            in the *Amazon S3 User Guide*.
+            - **Directory bucket permissions** - To grant access to this API
+              operation, you must have the
+              `s3express:PutEncryptionConfiguration` permission in an IAM
+              identity-based policy instead of a bucket policy. Cross-account
+              access to this API operation isn't supported. This operation can
+              only be performed by the Amazon Web Services account that owns the
+              resource. For more information about directory bucket policies and
+              permissions, see [Amazon Web Services Identity and Access
+              Management (IAM) for S3 Express One
+              Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html)
+              in the *Amazon S3 User Guide*.
 
         HTTP Host header syntax
 
-        : **Directory buckets** - The HTTP Host header syntax is
-          `s3express-control.`*`region-code`*`.amazonaws.com`.
+        :   **Directory buckets** - The HTTP Host header syntax is
+            `s3express-control.`*`region-code`*`.amazonaws.com`.
 
         The following operations are related to `DeleteBucketEncryption`:
 
@@ -1851,8 +1992,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `DeleteBucketEncryptionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1862,12 +2001,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `DeleteBucketEncryptionOutput`.
         """
-        return self._invoke(input, _models.DELETE_BUCKET_ENCRYPTION, [], plugins)
 
+    def delete_bucket_encryption(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteBucketEncryptionOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_BUCKET_ENCRYPTION, args, kwargs),
+            _models.DELETE_BUCKET_ENCRYPTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_bucket_intelligent_tiering_configuration(
         self,
-        input: DeleteBucketIntelligentTieringConfigurationInput,
+        request: _models.DeleteBucketIntelligentTieringConfigurationInput
+        | _models.DeleteBucketIntelligentTieringConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteBucketIntelligentTieringConfigurationOutput: ...
+
+    @_overload
+    def delete_bucket_intelligent_tiering_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteBucketIntelligentTieringConfigurationInputDict],
     ) -> DeleteBucketIntelligentTieringConfigurationOutput:
         """
         Note:
@@ -1911,8 +2072,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `DeleteBucketIntelligentTieringConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1922,14 +2081,36 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `DeleteBucketIntelligentTieringConfigurationOutput`.
         """
+
+    def delete_bucket_intelligent_tiering_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteBucketIntelligentTieringConfigurationOutput:
         return self._invoke(
-            input, _models.DELETE_BUCKET_INTELLIGENT_TIERING_CONFIGURATION, [], plugins
+            self._select_input(
+                _models.DELETE_BUCKET_INTELLIGENT_TIERING_CONFIGURATION, args, kwargs
+            ),
+            _models.DELETE_BUCKET_INTELLIGENT_TIERING_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     def delete_bucket_inventory_configuration(
         self,
-        input: DeleteBucketInventoryConfigurationInput,
+        request: _models.DeleteBucketInventoryConfigurationInput
+        | _models.DeleteBucketInventoryConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteBucketInventoryConfigurationOutput: ...
+
+    @_overload
+    def delete_bucket_inventory_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteBucketInventoryConfigurationInputDict],
     ) -> DeleteBucketInventoryConfigurationOutput:
         """
         Deletes an S3 Inventory configuration (identified by the inventory ID)
@@ -1951,35 +2132,35 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : To use this operation, you must have permissions to perform the
-          `s3:PutInventoryConfiguration` action. The bucket owner has this
-          permission by default. The bucket owner can grant this permission to
-          others. For more information about permissions, see [Permissions
-          Related to Bucket Subresource
-          Operations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
-          and [Managing Access Permissions to Your Amazon S3
-          Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
+        :   To use this operation, you must have permissions to perform the
+            `s3:PutInventoryConfiguration` action. The bucket owner has this
+            permission by default. The bucket owner can grant this permission to
+            others. For more information about permissions, see [Permissions
+            Related to Bucket Subresource
+            Operations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+            and [Managing Access Permissions to Your Amazon S3
+            Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
 
-          - **General purpose bucket permissions** - The
-            `s3:PutInventoryConfiguration` permission is required in a policy.
-            For more information about general purpose buckets permissions, see
-            [Using Bucket Policies and User
-            Policies](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html)
-            in the *Amazon S3 User Guide*.
+            - **General purpose bucket permissions** - The
+              `s3:PutInventoryConfiguration` permission is required in a policy.
+              For more information about general purpose buckets permissions,
+              see [Using Bucket Policies and User
+              Policies](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html)
+              in the *Amazon S3 User Guide*.
 
-          - **Directory bucket permissions** - To grant access to this API
-            operation, you must have the `s3express:PutInventoryConfiguration`
-            permission in an IAM identity-based policy instead of a bucket
-            policy. For more information about directory bucket policies and
-            permissions, see [Amazon Web Services Identity and Access Management
-            (IAM) for S3 Express One
-            Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html)
-            in the *Amazon S3 User Guide*.
+            - **Directory bucket permissions** - To grant access to this API
+              operation, you must have the `s3express:PutInventoryConfiguration`
+              permission in an IAM identity-based policy instead of a bucket
+              policy. For more information about directory bucket policies and
+              permissions, see [Amazon Web Services Identity and Access
+              Management (IAM) for S3 Express One
+              Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html)
+              in the *Amazon S3 User Guide*.
 
         HTTP Host header syntax
 
-        : **Directory buckets** - The HTTP Host header syntax is
-          `s3express-control.`*`region-code`*`.amazonaws.com`.
+        :   **Directory buckets** - The HTTP Host header syntax is
+            `s3express-control.`*`region-code`*`.amazonaws.com`.
 
         For information about the Amazon S3 inventory feature, see [Amazon S3
         Inventory](https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-inventory.html).
@@ -2003,8 +2184,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `DeleteBucketInventoryConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2014,12 +2193,36 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `DeleteBucketInventoryConfigurationOutput`.
         """
+
+    def delete_bucket_inventory_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteBucketInventoryConfigurationOutput:
         return self._invoke(
-            input, _models.DELETE_BUCKET_INVENTORY_CONFIGURATION, [], plugins
+            self._select_input(
+                _models.DELETE_BUCKET_INVENTORY_CONFIGURATION, args, kwargs
+            ),
+            _models.DELETE_BUCKET_INVENTORY_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     def delete_bucket_lifecycle(
-        self, input: DeleteBucketLifecycleInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteBucketLifecycleInput
+        | _models.DeleteBucketLifecycleInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteBucketLifecycleOutput: ...
+
+    @_overload
+    def delete_bucket_lifecycle(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteBucketLifecycleInputDict],
     ) -> DeleteBucketLifecycleOutput:
         """
         Deletes the lifecycle configuration from the specified bucket. Amazon S3
@@ -2030,43 +2233,44 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : - **General purpose bucket permissions** - By default, all Amazon S3
-            resources are private, including buckets, objects, and related
-            subresources (for example, lifecycle configuration and website
-            configuration). Only the resource owner (that is, the Amazon Web
-            Services account that created it) can access the resource. The
-            resource owner can optionally grant access permissions to others by
-            writing an access policy. For this operation, a user must have the
-            `s3:PutLifecycleConfiguration` permission.
+        :   - **General purpose bucket permissions** - By default, all Amazon S3
+              resources are private, including buckets, objects, and related
+              subresources (for example, lifecycle configuration and website
+              configuration). Only the resource owner (that is, the Amazon Web
+              Services account that created it) can access the resource. The
+              resource owner can optionally grant access permissions to others
+              by writing an access policy. For this operation, a user must have
+              the `s3:PutLifecycleConfiguration` permission.
 
-            For more information about permissions, see [Managing Access
-            Permissions to Your Amazon S3
-            Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
+              For more information about permissions, see [Managing Access
+              Permissions to Your Amazon S3
+              Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
 
-          - **Directory bucket permissions** - You must have the
-            `s3express:PutLifecycleConfiguration` permission in an IAM
-            identity-based policy to use this operation. Cross-account access to
-            this API operation isn't supported. The resource owner can
-            optionally grant access permissions to others by creating a role or
-            user for them as long as they are within the same account as the
-            owner and resource.
+            - **Directory bucket permissions** - You must have the
+              `s3express:PutLifecycleConfiguration` permission in an IAM
+              identity-based policy to use this operation. Cross-account access
+              to this API operation isn't supported. The resource owner can
+              optionally grant access permissions to others by creating a role
+              or user for them as long as they are within the same account as
+              the owner and resource.
 
-            For more information about directory bucket policies and
-            permissions, see [Authorizing Regional endpoint APIs with
-            IAM](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html)
-            in the *Amazon S3 User Guide*.
+              For more information about directory bucket policies and
+              permissions, see [Authorizing Regional endpoint APIs with
+              IAM](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html)
+              in the *Amazon S3 User Guide*.
 
-            Note:
+              Note:
             **Directory buckets** - For directory buckets, you must make
             requests for this API operation to the Regional endpoint. These
             endpoints support path-style requests in the format
             `https://s3express-control.`*`region-code`*`.amazonaws.com/`*`bucket-name`*` `.
             Virtual-hosted-style requests aren't supported. For more
-            information about endpoints in Availability Zones, see [Regional and
-            Zonal endpoints for directory buckets in Availability
+            information about endpoints in Availability Zones, see [Regional
+            and Zonal endpoints for directory buckets in Availability
             Zones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html)
-            in the *Amazon S3 User Guide*. For more information about endpoints
-            in Local Zones, see [Concepts for directory buckets in Local
+            in the *Amazon S3 User Guide*. For more information about
+            endpoints in Local Zones, see [Concepts for directory buckets in
+            Local
             Zones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html)
             in the *Amazon S3 User Guide*.
 
@@ -2074,8 +2278,8 @@ class S3Client(Client[S3Config]):
 
         HTTP Host header syntax
 
-        : **Directory buckets** - The HTTP Host header syntax is
-          `s3express-control.`*`region`*`.amazonaws.com`.
+        :   **Directory buckets** - The HTTP Host header syntax is
+            `s3express-control.`*`region`*`.amazonaws.com`.
 
         For more information about the object expiration, see [Elements to
         Describe Lifecycle
@@ -2093,8 +2297,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `DeleteBucketLifecycleInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2104,12 +2306,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `DeleteBucketLifecycleOutput`.
         """
-        return self._invoke(input, _models.DELETE_BUCKET_LIFECYCLE, [], plugins)
 
+    def delete_bucket_lifecycle(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteBucketLifecycleOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_BUCKET_LIFECYCLE, args, kwargs),
+            _models.DELETE_BUCKET_LIFECYCLE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_bucket_metadata_configuration(
         self,
-        input: DeleteBucketMetadataConfigurationInput,
+        request: _models.DeleteBucketMetadataConfigurationInput
+        | _models.DeleteBucketMetadataConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteBucketMetadataConfigurationOutput: ...
+
+    @_overload
+    def delete_bucket_metadata_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteBucketMetadataConfigurationInputDict],
     ) -> DeleteBucketMetadataConfigurationOutput:
         """
         Deletes an S3 Metadata configuration from a general purpose bucket. For
@@ -2125,13 +2349,13 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : To use this operation, you must have the
-          `s3:DeleteBucketMetadataTableConfiguration` permission. For more
-          information, see [Setting up permissions for configuring metadata
-          tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html)
-          in the *Amazon S3 User Guide*.
+        :   To use this operation, you must have the
+            `s3:DeleteBucketMetadataTableConfiguration` permission. For more
+            information, see [Setting up permissions for configuring metadata
+            tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html)
+            in the *Amazon S3 User Guide*.
 
-          Note:
+            Note:
             The IAM policy action name is the same for the V1 and V2 API
             operations.
 
@@ -2152,8 +2376,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `DeleteBucketMetadataConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2163,14 +2385,36 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `DeleteBucketMetadataConfigurationOutput`.
         """
+
+    def delete_bucket_metadata_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteBucketMetadataConfigurationOutput:
         return self._invoke(
-            input, _models.DELETE_BUCKET_METADATA_CONFIGURATION, [], plugins
+            self._select_input(
+                _models.DELETE_BUCKET_METADATA_CONFIGURATION, args, kwargs
+            ),
+            _models.DELETE_BUCKET_METADATA_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     def delete_bucket_metadata_table_configuration(
         self,
-        input: DeleteBucketMetadataTableConfigurationInput,
+        request: _models.DeleteBucketMetadataTableConfigurationInput
+        | _models.DeleteBucketMetadataTableConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteBucketMetadataTableConfigurationOutput: ...
+
+    @_overload
+    def delete_bucket_metadata_table_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteBucketMetadataTableConfigurationInputDict],
     ) -> DeleteBucketMetadataTableConfigurationOutput:
         """
         Warning:
@@ -2204,11 +2448,11 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : To use this operation, you must have the
-          `s3:DeleteBucketMetadataTableConfiguration` permission. For more
-          information, see [Setting up permissions for configuring metadata
-          tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html)
-          in the *Amazon S3 User Guide*.
+        :   To use this operation, you must have the
+            `s3:DeleteBucketMetadataTableConfiguration` permission. For more
+            information, see [Setting up permissions for configuring metadata
+            tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html)
+            in the *Amazon S3 User Guide*.
 
         The following operations are related to
         `DeleteBucketMetadataTableConfiguration`:
@@ -2223,8 +2467,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `DeleteBucketMetadataTableConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2234,14 +2476,36 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `DeleteBucketMetadataTableConfigurationOutput`.
         """
+
+    def delete_bucket_metadata_table_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteBucketMetadataTableConfigurationOutput:
         return self._invoke(
-            input, _models.DELETE_BUCKET_METADATA_TABLE_CONFIGURATION, [], plugins
+            self._select_input(
+                _models.DELETE_BUCKET_METADATA_TABLE_CONFIGURATION, args, kwargs
+            ),
+            _models.DELETE_BUCKET_METADATA_TABLE_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     def delete_bucket_metrics_configuration(
         self,
-        input: DeleteBucketMetricsConfigurationInput,
+        request: _models.DeleteBucketMetricsConfigurationInput
+        | _models.DeleteBucketMetricsConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteBucketMetricsConfigurationOutput: ...
+
+    @_overload
+    def delete_bucket_metrics_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteBucketMetricsConfigurationInputDict],
     ) -> DeleteBucketMetricsConfigurationOutput:
         """
         Deletes a metrics configuration for the Amazon CloudWatch request
@@ -2264,37 +2528,37 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : To use this operation, you must have permissions to perform the
-          `s3:PutMetricsConfiguration` action. The bucket owner has this
-          permission by default. The bucket owner can grant this permission to
-          others. For more information about permissions, see [Permissions
-          Related to Bucket Subresource
-          Operations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
-          and [Managing Access Permissions to Your Amazon S3
-          Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
+        :   To use this operation, you must have permissions to perform the
+            `s3:PutMetricsConfiguration` action. The bucket owner has this
+            permission by default. The bucket owner can grant this permission to
+            others. For more information about permissions, see [Permissions
+            Related to Bucket Subresource
+            Operations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+            and [Managing Access Permissions to Your Amazon S3
+            Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
 
-          - **General purpose bucket permissions** - The
-            `s3:PutMetricsConfiguration` permission is required in a policy. For
-            more information about general purpose buckets permissions, see
-            [Using Bucket Policies and User
-            Policies](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html)
-            in the *Amazon S3 User Guide*.
+            - **General purpose bucket permissions** - The
+              `s3:PutMetricsConfiguration` permission is required in a policy.
+              For more information about general purpose buckets permissions,
+              see [Using Bucket Policies and User
+              Policies](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html)
+              in the *Amazon S3 User Guide*.
 
-          - **Directory bucket permissions** - To grant access to this API
-            operation, you must have the `s3express:PutMetricsConfiguration`
-            permission in an IAM identity-based policy instead of a bucket
-            policy. Cross-account access to this API operation isn't supported.
-            This operation can only be performed by the Amazon Web Services
-            account that owns the resource. For more information about directory
-            bucket policies and permissions, see [Amazon Web Services Identity
-            and Access Management (IAM) for S3 Express One
-            Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html)
-            in the *Amazon S3 User Guide*.
+            - **Directory bucket permissions** - To grant access to this API
+              operation, you must have the `s3express:PutMetricsConfiguration`
+              permission in an IAM identity-based policy instead of a bucket
+              policy. Cross-account access to this API operation isn't
+              supported. This operation can only be performed by the Amazon Web
+              Services account that owns the resource. For more information
+              about directory bucket policies and permissions, see [Amazon Web
+              Services Identity and Access Management (IAM) for S3 Express One
+              Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html)
+              in the *Amazon S3 User Guide*.
 
         HTTP Host header syntax
 
-        : **Directory buckets** - The HTTP Host header syntax is
-          `s3express-control.`*`region-code`*`.amazonaws.com`.
+        :   **Directory buckets** - The HTTP Host header syntax is
+            `s3express-control.`*`region-code`*`.amazonaws.com`.
 
         For information about CloudWatch request metrics for Amazon S3, see
         [Monitoring Metrics with Amazon
@@ -2318,8 +2582,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `DeleteBucketMetricsConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2329,14 +2591,36 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `DeleteBucketMetricsConfigurationOutput`.
         """
+
+    def delete_bucket_metrics_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteBucketMetricsConfigurationOutput:
         return self._invoke(
-            input, _models.DELETE_BUCKET_METRICS_CONFIGURATION, [], plugins
+            self._select_input(
+                _models.DELETE_BUCKET_METRICS_CONFIGURATION, args, kwargs
+            ),
+            _models.DELETE_BUCKET_METRICS_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     def delete_bucket_ownership_controls(
         self,
-        input: DeleteBucketOwnershipControlsInput,
+        request: _models.DeleteBucketOwnershipControlsInput
+        | _models.DeleteBucketOwnershipControlsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteBucketOwnershipControlsOutput: ...
+
+    @_overload
+    def delete_bucket_ownership_controls(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteBucketOwnershipControlsInputDict],
     ) -> DeleteBucketOwnershipControlsOutput:
         """
         Note:
@@ -2363,8 +2647,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `DeleteBucketOwnershipControlsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2374,12 +2656,33 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `DeleteBucketOwnershipControlsOutput`.
         """
+
+    def delete_bucket_ownership_controls(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteBucketOwnershipControlsOutput:
         return self._invoke(
-            input, _models.DELETE_BUCKET_OWNERSHIP_CONTROLS, [], plugins
+            self._select_input(_models.DELETE_BUCKET_OWNERSHIP_CONTROLS, args, kwargs),
+            _models.DELETE_BUCKET_OWNERSHIP_CONTROLS,
+            [],
+            plugins,
         )
 
+    @_overload
     def delete_bucket_policy(
-        self, input: DeleteBucketPolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteBucketPolicyInput | _models.DeleteBucketPolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteBucketPolicyOutput: ...
+
+    @_overload
+    def delete_bucket_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteBucketPolicyInputDict],
     ) -> DeleteBucketPolicyOutput:
         """
         Deletes the policy of a specified bucket.
@@ -2400,48 +2703,49 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : If you are using an identity other than the root user of the Amazon
-          Web Services account that owns the bucket, the calling identity must
-          both have the `DeleteBucketPolicy` permissions on the specified bucket
-          and belong to the bucket owner's account in order to use this
-          operation.
+        :   If you are using an identity other than the root user of the Amazon
+            Web Services account that owns the bucket, the calling identity must
+            both have the `DeleteBucketPolicy` permissions on the specified
+            bucket and belong to the bucket owner's account in order to use
+            this operation.
 
-          If you don't have `DeleteBucketPolicy` permissions, Amazon S3 returns
-          a `403 Access Denied` error. If you have the correct permissions, but
-          you're not using an identity that belongs to the bucket owner's
-          account, Amazon S3 returns a `405 Method Not Allowed` error.
+            If you don't have `DeleteBucketPolicy` permissions, Amazon S3
+            returns a `403 Access Denied` error. If you have the correct
+            permissions, but you're not using an identity that belongs to the
+            bucket owner's account, Amazon S3 returns a
+            `405 Method Not Allowed` error.
 
-          Warning:
-            To ensure that bucket owners don't inadvertently lock themselves out
-            of their own buckets, the root principal in a bucket owner's Amazon
-            Web Services account can perform the `GetBucketPolicy`,
-            `PutBucketPolicy`, and `DeleteBucketPolicy` API actions, even if their
-            bucket policy explicitly denies the root principal's access. Bucket
-            owner root principals can only be blocked from performing these API
-            actions by VPC endpoint policies and Amazon Web Services Organizations
-            policies.
-          - **General purpose bucket permissions** - The `s3:DeleteBucketPolicy`
-            permission is required in a policy. For more information about
-            general purpose buckets bucket policies, see [Using Bucket Policies
-            and User
-            Policies](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html)
-            in the *Amazon S3 User Guide*.
+            Warning:
+            To ensure that bucket owners don't inadvertently lock themselves
+            out of their own buckets, the root principal in a bucket owner's
+            Amazon Web Services account can perform the `GetBucketPolicy`,
+            `PutBucketPolicy`, and `DeleteBucketPolicy` API actions, even if
+            their bucket policy explicitly denies the root principal's access.
+            Bucket owner root principals can only be blocked from performing
+            these API actions by VPC endpoint policies and Amazon Web Services
+            Organizations policies.
+            - **General purpose bucket permissions** - The
+              `s3:DeleteBucketPolicy` permission is required in a policy. For
+              more information about general purpose buckets bucket policies,
+              see [Using Bucket Policies and User
+              Policies](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html)
+              in the *Amazon S3 User Guide*.
 
-          - **Directory bucket permissions** - To grant access to this API
-            operation, you must have the `s3express:DeleteBucketPolicy`
-            permission in an IAM identity-based policy instead of a bucket
-            policy. Cross-account access to this API operation isn't supported.
-            This operation can only be performed by the Amazon Web Services
-            account that owns the resource. For more information about directory
-            bucket policies and permissions, see [Amazon Web Services Identity
-            and Access Management (IAM) for S3 Express One
-            Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html)
-            in the *Amazon S3 User Guide*.
+            - **Directory bucket permissions** - To grant access to this API
+              operation, you must have the `s3express:DeleteBucketPolicy`
+              permission in an IAM identity-based policy instead of a bucket
+              policy. Cross-account access to this API operation isn't
+              supported. This operation can only be performed by the Amazon Web
+              Services account that owns the resource. For more information
+              about directory bucket policies and permissions, see [Amazon Web
+              Services Identity and Access Management (IAM) for S3 Express One
+              Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html)
+              in the *Amazon S3 User Guide*.
 
         HTTP Host header syntax
 
-        : **Directory buckets** - The HTTP Host header syntax is
-          `s3express-control.`*`region-code`*`.amazonaws.com`.
+        :   **Directory buckets** - The HTTP Host header syntax is
+            `s3express-control.`*`region-code`*`.amazonaws.com`.
 
         The following operations are related to `DeleteBucketPolicy`
 
@@ -2455,8 +2759,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `DeleteBucketPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2466,10 +2768,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `DeleteBucketPolicyOutput`.
         """
-        return self._invoke(input, _models.DELETE_BUCKET_POLICY, [], plugins)
 
+    def delete_bucket_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteBucketPolicyOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_BUCKET_POLICY, args, kwargs),
+            _models.DELETE_BUCKET_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_bucket_replication(
-        self, input: DeleteBucketReplicationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteBucketReplicationInput
+        | _models.DeleteBucketReplicationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteBucketReplicationOutput: ...
+
+    @_overload
+    def delete_bucket_replication(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteBucketReplicationInputDict],
     ) -> DeleteBucketReplicationOutput:
         """
         Note:
@@ -2505,8 +2831,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `DeleteBucketReplicationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2516,10 +2840,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `DeleteBucketReplicationOutput`.
         """
-        return self._invoke(input, _models.DELETE_BUCKET_REPLICATION, [], plugins)
 
+    def delete_bucket_replication(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteBucketReplicationOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_BUCKET_REPLICATION, args, kwargs),
+            _models.DELETE_BUCKET_REPLICATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_bucket_tagging(
-        self, input: DeleteBucketTaggingInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteBucketTaggingInput
+        | _models.DeleteBucketTaggingInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteBucketTaggingOutput: ...
+
+    @_overload
+    def delete_bucket_tagging(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteBucketTaggingInputDict],
     ) -> DeleteBucketTaggingOutput:
         """
         Note:
@@ -2549,8 +2897,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `DeleteBucketTaggingInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2560,10 +2906,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `DeleteBucketTaggingOutput`.
         """
-        return self._invoke(input, _models.DELETE_BUCKET_TAGGING, [], plugins)
 
+    def delete_bucket_tagging(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteBucketTaggingOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_BUCKET_TAGGING, args, kwargs),
+            _models.DELETE_BUCKET_TAGGING,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_bucket_website(
-        self, input: DeleteBucketWebsiteInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteBucketWebsiteInput
+        | _models.DeleteBucketWebsiteInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteBucketWebsiteOutput: ...
+
+    @_overload
+    def delete_bucket_website(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteBucketWebsiteInputDict],
     ) -> DeleteBucketWebsiteOutput:
         """
         Note:
@@ -2598,8 +2968,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `DeleteBucketWebsiteInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2609,10 +2977,33 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `DeleteBucketWebsiteOutput`.
         """
-        return self._invoke(input, _models.DELETE_BUCKET_WEBSITE, [], plugins)
 
+    def delete_bucket_website(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteBucketWebsiteOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_BUCKET_WEBSITE, args, kwargs),
+            _models.DELETE_BUCKET_WEBSITE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_object(
-        self, input: DeleteObjectInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteObjectInput | _models.DeleteObjectInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteObjectOutput: ...
+
+    @_overload
+    def delete_object(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteObjectInputDict],
     ) -> DeleteObjectOutput:
         """
         Removes an object from a bucket. The behavior depends on the bucket's
@@ -2691,43 +3082,43 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : - **General purpose bucket permissions** - The following permissions
-            are required in your policies when your `DeleteObjects` request
-            includes specific headers.
+        :   - **General purpose bucket permissions** - The following permissions
+              are required in your policies when your `DeleteObjects` request
+              includes specific headers.
 
-            - **`s3:DeleteObject`** - To delete an object from a bucket, you
-              must always have the `s3:DeleteObject` permission.
+              - **`s3:DeleteObject`** - To delete an object from a bucket, you
+                must always have the `s3:DeleteObject` permission.
 
-            - **`s3:DeleteObjectVersion`** - To delete a specific version of an
-              object from a versioning-enabled bucket, you must have the
-              `s3:DeleteObjectVersion` permission.
+              - **`s3:DeleteObjectVersion`** - To delete a specific version of
+                an object from a versioning-enabled bucket, you must have the
+                `s3:DeleteObjectVersion` permission.
 
-              Note:
+                Note:
             If the `s3:DeleteObject` or `s3:DeleteObjectVersion` permissions
             are explicitly denied in your bucket policy, attempts to delete
             any unversioned objects result in a `403 Access Denied` error.
 
-          - **Directory bucket permissions** - To grant access to this API
-            operation on a directory bucket, we recommend that you use the
-            [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
-            API operation for session-based authorization. Specifically, you
-            grant the `s3express:CreateSession` permission to the directory
-            bucket in a bucket policy or an IAM identity-based policy. Then, you
-            make the `CreateSession` API call on the bucket to obtain a session
-            token. With the session token in your request header, you can make
-            API requests to this operation. After the session token expires, you
-            make another `CreateSession` API call to generate a new session
-            token for use. Amazon Web Services CLI or SDKs create session and
-            refresh the session token automatically to avoid service
-            interruptions when a session expires. For more information about
-            authorization, see
-            [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
-            .
+            - **Directory bucket permissions** - To grant access to this API
+              operation on a directory bucket, we recommend that you use the
+              [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
+              API operation for session-based authorization. Specifically, you
+              grant the `s3express:CreateSession` permission to the directory
+              bucket in a bucket policy or an IAM identity-based policy. Then,
+              you make the `CreateSession` API call on the bucket to obtain a
+              session token. With the session token in your request header, you
+              can make API requests to this operation. After the session token
+              expires, you make another `CreateSession` API call to generate a
+              new session token for use. Amazon Web Services CLI or SDKs create
+              session and refresh the session token automatically to avoid
+              service interruptions when a session expires. For more information
+              about authorization, see
+              [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
+              .
 
         HTTP Host header syntax
 
-        : **Directory buckets** - The HTTP Host header syntax is
-          ` `*`Bucket-name`*`.s3express-`*`zone-id`*`.`*`region-code`*`.amazonaws.com`.
+        :   **Directory buckets** - The HTTP Host header syntax is
+            ` `*`Bucket-name`*`.s3express-`*`zone-id`*`.`*`region-code`*`.amazonaws.com`.
 
         The following action is related to `DeleteObject`:
 
@@ -2743,8 +3134,6 @@ class S3Client(Client[S3Config]):
             supported for directory buckets.
 
         Args:
-            input:
-                An instance of `DeleteObjectInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2754,10 +3143,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `DeleteObjectOutput`.
         """
-        return self._invoke(input, _models.DELETE_OBJECT, [], plugins)
 
+    def delete_object(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteObjectOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_OBJECT, args, kwargs),
+            _models.DELETE_OBJECT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_object_annotation(
-        self, input: DeleteObjectAnnotationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteObjectAnnotationInput
+        | _models.DeleteObjectAnnotationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteObjectAnnotationOutput: ...
+
+    @_overload
+    def delete_object_annotation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteObjectAnnotationInputDict],
     ) -> DeleteObjectAnnotationOutput:
         """
         Deletes a specific annotation from an Amazon S3 object. Use the
@@ -2788,8 +3201,6 @@ class S3Client(Client[S3Config]):
         - [ListObjectAnnotations](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectAnnotations.html)
 
         Args:
-            input:
-                An instance of `DeleteObjectAnnotationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2799,10 +3210,33 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `DeleteObjectAnnotationOutput`.
         """
-        return self._invoke(input, _models.DELETE_OBJECT_ANNOTATION, [], plugins)
 
+    def delete_object_annotation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteObjectAnnotationOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_OBJECT_ANNOTATION, args, kwargs),
+            _models.DELETE_OBJECT_ANNOTATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_objects(
-        self, input: DeleteObjectsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteObjectsInput | _models.DeleteObjectsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteObjectsOutput: ...
+
+    @_overload
+    def delete_objects(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteObjectsInputDict],
     ) -> DeleteObjectsOutput:
         """
         This operation enables you to delete multiple objects from a bucket
@@ -2858,56 +3292,56 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : - **General purpose bucket permissions** - The following permissions
-            are required in your policies when your `DeleteObjects` request
-            includes specific headers.
+        :   - **General purpose bucket permissions** - The following permissions
+              are required in your policies when your `DeleteObjects` request
+              includes specific headers.
 
-            - **`s3:DeleteObject`** - To delete an object from a bucket, you
-              must always specify the `s3:DeleteObject` permission.
+              - **`s3:DeleteObject`** - To delete an object from a bucket, you
+                must always specify the `s3:DeleteObject` permission.
 
-            - **`s3:DeleteObjectVersion`** - To delete a specific version of an
-              object from a versioning-enabled bucket, you must specify the
-              `s3:DeleteObjectVersion` permission.
+              - **`s3:DeleteObjectVersion`** - To delete a specific version of
+                an object from a versioning-enabled bucket, you must specify the
+                `s3:DeleteObjectVersion` permission.
 
-              Note:
+                Note:
             If the `s3:DeleteObject` or `s3:DeleteObjectVersion` permissions
             are explicitly denied in your bucket policy, attempts to delete
             any unversioned objects result in a `403 Access Denied` error.
 
-          - **Directory bucket permissions** - To grant access to this API
-            operation on a directory bucket, we recommend that you use the
-            [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
-            API operation for session-based authorization. Specifically, you
-            grant the `s3express:CreateSession` permission to the directory
-            bucket in a bucket policy or an IAM identity-based policy. Then, you
-            make the `CreateSession` API call on the bucket to obtain a session
-            token. With the session token in your request header, you can make
-            API requests to this operation. After the session token expires, you
-            make another `CreateSession` API call to generate a new session
-            token for use. Amazon Web Services CLI or SDKs create session and
-            refresh the session token automatically to avoid service
-            interruptions when a session expires. For more information about
-            authorization, see
-            [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
-            .
+            - **Directory bucket permissions** - To grant access to this API
+              operation on a directory bucket, we recommend that you use the
+              [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
+              API operation for session-based authorization. Specifically, you
+              grant the `s3express:CreateSession` permission to the directory
+              bucket in a bucket policy or an IAM identity-based policy. Then,
+              you make the `CreateSession` API call on the bucket to obtain a
+              session token. With the session token in your request header, you
+              can make API requests to this operation. After the session token
+              expires, you make another `CreateSession` API call to generate a
+              new session token for use. Amazon Web Services CLI or SDKs create
+              session and refresh the session token automatically to avoid
+              service interruptions when a session expires. For more information
+              about authorization, see
+              [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
+              .
 
         Content-MD5 request header
 
-        : - **General purpose bucket** - The Content-MD5 request header is
-            required for all Multi-Object Delete requests. Amazon S3 uses the
-            header value to ensure that your request body has not been altered
-            in transit.
+        :   - **General purpose bucket** - The Content-MD5 request header is
+              required for all Multi-Object Delete requests. Amazon S3 uses the
+              header value to ensure that your request body has not been altered
+              in transit.
 
-          - **Directory bucket** - The Content-MD5 request header or a
-            additional checksum request header (including
-            `x-amz-checksum-crc32`, `x-amz-checksum-crc32c`,
-            `x-amz-checksum-sha1`, or `x-amz-checksum-sha256`) is required for
-            all Multi-Object Delete requests.
+            - **Directory bucket** - The Content-MD5 request header or a
+              additional checksum request header (including
+              `x-amz-checksum-crc32`, `x-amz-checksum-crc32c`,
+              `x-amz-checksum-sha1`, or `x-amz-checksum-sha256`) is required for
+              all Multi-Object Delete requests.
 
         HTTP Host header syntax
 
-        : **Directory buckets** - The HTTP Host header syntax is
-          ` `*`Bucket-name`*`.s3express-`*`zone-id`*`.`*`region-code`*`.amazonaws.com`.
+        :   **Directory buckets** - The HTTP Host header syntax is
+            ` `*`Bucket-name`*`.s3express-`*`zone-id`*`.`*`region-code`*`.amazonaws.com`.
 
         The following operations are related to `DeleteObjects`:
 
@@ -2927,8 +3361,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `DeleteObjectsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2938,10 +3370,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `DeleteObjectsOutput`.
         """
-        return self._invoke(input, _models.DELETE_OBJECTS, [], plugins)
 
+    def delete_objects(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteObjectsOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_OBJECTS, args, kwargs),
+            _models.DELETE_OBJECTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_object_tagging(
-        self, input: DeleteObjectTaggingInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteObjectTaggingInput
+        | _models.DeleteObjectTaggingInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteObjectTaggingOutput: ...
+
+    @_overload
+    def delete_object_tagging(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteObjectTaggingInputDict],
     ) -> DeleteObjectTaggingOutput:
         """
         Note:
@@ -2970,8 +3426,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `DeleteObjectTaggingInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2981,10 +3435,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `DeleteObjectTaggingOutput`.
         """
-        return self._invoke(input, _models.DELETE_OBJECT_TAGGING, [], plugins)
 
+    def delete_object_tagging(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteObjectTaggingOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_OBJECT_TAGGING, args, kwargs),
+            _models.DELETE_OBJECT_TAGGING,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_public_access_block(
-        self, input: DeletePublicAccessBlockInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeletePublicAccessBlockInput
+        | _models.DeletePublicAccessBlockInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeletePublicAccessBlockOutput: ...
+
+    @_overload
+    def delete_public_access_block(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeletePublicAccessBlockInputDict],
     ) -> DeletePublicAccessBlockOutput:
         """
         Note:
@@ -3018,8 +3496,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `DeletePublicAccessBlockInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3029,10 +3505,33 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `DeletePublicAccessBlockOutput`.
         """
-        return self._invoke(input, _models.DELETE_PUBLIC_ACCESS_BLOCK, [], plugins)
 
+    def delete_public_access_block(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeletePublicAccessBlockOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_PUBLIC_ACCESS_BLOCK, args, kwargs),
+            _models.DELETE_PUBLIC_ACCESS_BLOCK,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_bucket_abac(
-        self, input: GetBucketAbacInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetBucketAbacInput | _models.GetBucketAbacInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetBucketAbacOutput: ...
+
+    @_overload
+    def get_bucket_abac(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetBucketAbacInputDict],
     ) -> GetBucketAbacOutput:
         """
         Returns the attribute-based access control (ABAC) property of the
@@ -3042,8 +3541,6 @@ class S3Client(Client[S3Config]):
         buckets](https://docs.aws.amazon.com/AmazonS3/latest/userguide/buckets-tagging-enable-abac.html).
 
         Args:
-            input:
-                An instance of `GetBucketAbacInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3053,12 +3550,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `GetBucketAbacOutput`.
         """
-        return self._invoke(input, _models.GET_BUCKET_ABAC, [], plugins)
 
+    def get_bucket_abac(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetBucketAbacOutput:
+        return self._invoke(
+            self._select_input(_models.GET_BUCKET_ABAC, args, kwargs),
+            _models.GET_BUCKET_ABAC,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_bucket_accelerate_configuration(
         self,
-        input: GetBucketAccelerateConfigurationInput,
+        request: _models.GetBucketAccelerateConfigurationInput
+        | _models.GetBucketAccelerateConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetBucketAccelerateConfigurationOutput: ...
+
+    @_overload
+    def get_bucket_accelerate_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetBucketAccelerateConfigurationInputDict],
     ) -> GetBucketAccelerateConfigurationOutput:
         """
         Note:
@@ -3104,8 +3623,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `GetBucketAccelerateConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3115,12 +3632,35 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `GetBucketAccelerateConfigurationOutput`.
         """
+
+    def get_bucket_accelerate_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetBucketAccelerateConfigurationOutput:
         return self._invoke(
-            input, _models.GET_BUCKET_ACCELERATE_CONFIGURATION, [], plugins
+            self._select_input(
+                _models.GET_BUCKET_ACCELERATE_CONFIGURATION, args, kwargs
+            ),
+            _models.GET_BUCKET_ACCELERATE_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_bucket_acl(
-        self, input: GetBucketAclInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetBucketAclInput | _models.GetBucketAclInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetBucketAclOutput: ...
+
+    @_overload
+    def get_bucket_acl(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetBucketAclInputDict],
     ) -> GetBucketAclOutput:
         """
         Note:
@@ -3161,8 +3701,6 @@ class S3Client(Client[S3Config]):
         - [ListObjects](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjects.html)
 
         Args:
-            input:
-                An instance of `GetBucketAclInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3172,12 +3710,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `GetBucketAclOutput`.
         """
-        return self._invoke(input, _models.GET_BUCKET_ACL, [], plugins)
 
+    def get_bucket_acl(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetBucketAclOutput:
+        return self._invoke(
+            self._select_input(_models.GET_BUCKET_ACL, args, kwargs),
+            _models.GET_BUCKET_ACL,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_bucket_analytics_configuration(
         self,
-        input: GetBucketAnalyticsConfigurationInput,
+        request: _models.GetBucketAnalyticsConfigurationInput
+        | _models.GetBucketAnalyticsConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetBucketAnalyticsConfigurationOutput: ...
+
+    @_overload
+    def get_bucket_analytics_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetBucketAnalyticsConfigurationInputDict],
     ) -> GetBucketAnalyticsConfigurationOutput:
         """
         Note:
@@ -3216,8 +3776,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `GetBucketAnalyticsConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3227,12 +3785,35 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `GetBucketAnalyticsConfigurationOutput`.
         """
+
+    def get_bucket_analytics_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetBucketAnalyticsConfigurationOutput:
         return self._invoke(
-            input, _models.GET_BUCKET_ANALYTICS_CONFIGURATION, [], plugins
+            self._select_input(
+                _models.GET_BUCKET_ANALYTICS_CONFIGURATION, args, kwargs
+            ),
+            _models.GET_BUCKET_ANALYTICS_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_bucket_cors(
-        self, input: GetBucketCorsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetBucketCorsInput | _models.GetBucketCorsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetBucketCorsOutput: ...
+
+    @_overload
+    def get_bucket_cors(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetBucketCorsInputDict],
     ) -> GetBucketCorsOutput:
         """
         Note:
@@ -3271,8 +3852,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `GetBucketCorsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3282,10 +3861,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `GetBucketCorsOutput`.
         """
-        return self._invoke(input, _models.GET_BUCKET_CORS, [], plugins)
 
+    def get_bucket_cors(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetBucketCorsOutput:
+        return self._invoke(
+            self._select_input(_models.GET_BUCKET_CORS, args, kwargs),
+            _models.GET_BUCKET_CORS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_bucket_encryption(
-        self, input: GetBucketEncryptionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetBucketEncryptionInput
+        | _models.GetBucketEncryptionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetBucketEncryptionOutput: ...
+
+    @_overload
+    def get_bucket_encryption(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetBucketEncryptionInputDict],
     ) -> GetBucketEncryptionOutput:
         """
         Returns the default encryption configuration for an Amazon S3 bucket. By
@@ -3312,30 +3915,31 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : - **General purpose bucket permissions** - The
-            `s3:GetEncryptionConfiguration` permission is required in a policy.
-            The bucket owner has this permission by default. The bucket owner
-            can grant this permission to others. For more information about
-            permissions, see [Permissions Related to Bucket
-            Operations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
-            and [Managing Access Permissions to Your Amazon S3
-            Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
+        :   - **General purpose bucket permissions** - The
+              `s3:GetEncryptionConfiguration` permission is required in a
+              policy. The bucket owner has this permission by default. The
+              bucket owner can grant this permission to others. For more
+              information about permissions, see [Permissions Related to Bucket
+              Operations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+              and [Managing Access Permissions to Your Amazon S3
+              Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
 
-          - **Directory bucket permissions** - To grant access to this API
-            operation, you must have the `s3express:GetEncryptionConfiguration`
-            permission in an IAM identity-based policy instead of a bucket
-            policy. Cross-account access to this API operation isn't supported.
-            This operation can only be performed by the Amazon Web Services
-            account that owns the resource. For more information about directory
-            bucket policies and permissions, see [Amazon Web Services Identity
-            and Access Management (IAM) for S3 Express One
-            Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html)
-            in the *Amazon S3 User Guide*.
+            - **Directory bucket permissions** - To grant access to this API
+              operation, you must have the
+              `s3express:GetEncryptionConfiguration` permission in an IAM
+              identity-based policy instead of a bucket policy. Cross-account
+              access to this API operation isn't supported. This operation can
+              only be performed by the Amazon Web Services account that owns the
+              resource. For more information about directory bucket policies and
+              permissions, see [Amazon Web Services Identity and Access
+              Management (IAM) for S3 Express One
+              Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html)
+              in the *Amazon S3 User Guide*.
 
         HTTP Host header syntax
 
-        : **Directory buckets** - The HTTP Host header syntax is
-          `s3express-control.`*`region-code`*`.amazonaws.com`.
+        :   **Directory buckets** - The HTTP Host header syntax is
+            `s3express-control.`*`region-code`*`.amazonaws.com`.
 
         The following operations are related to `GetBucketEncryption`:
 
@@ -3349,8 +3953,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `GetBucketEncryptionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3360,12 +3962,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `GetBucketEncryptionOutput`.
         """
-        return self._invoke(input, _models.GET_BUCKET_ENCRYPTION, [], plugins)
 
+    def get_bucket_encryption(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetBucketEncryptionOutput:
+        return self._invoke(
+            self._select_input(_models.GET_BUCKET_ENCRYPTION, args, kwargs),
+            _models.GET_BUCKET_ENCRYPTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_bucket_intelligent_tiering_configuration(
         self,
-        input: GetBucketIntelligentTieringConfigurationInput,
+        request: _models.GetBucketIntelligentTieringConfigurationInput
+        | _models.GetBucketIntelligentTieringConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetBucketIntelligentTieringConfigurationOutput: ...
+
+    @_overload
+    def get_bucket_intelligent_tiering_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetBucketIntelligentTieringConfigurationInputDict],
     ) -> GetBucketIntelligentTieringConfigurationOutput:
         """
         Note:
@@ -3408,8 +4032,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `GetBucketIntelligentTieringConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3419,14 +4041,36 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `GetBucketIntelligentTieringConfigurationOutput`.
         """
+
+    def get_bucket_intelligent_tiering_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetBucketIntelligentTieringConfigurationOutput:
         return self._invoke(
-            input, _models.GET_BUCKET_INTELLIGENT_TIERING_CONFIGURATION, [], plugins
+            self._select_input(
+                _models.GET_BUCKET_INTELLIGENT_TIERING_CONFIGURATION, args, kwargs
+            ),
+            _models.GET_BUCKET_INTELLIGENT_TIERING_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_bucket_inventory_configuration(
         self,
-        input: GetBucketInventoryConfigurationInput,
+        request: _models.GetBucketInventoryConfigurationInput
+        | _models.GetBucketInventoryConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetBucketInventoryConfigurationOutput: ...
+
+    @_overload
+    def get_bucket_inventory_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetBucketInventoryConfigurationInputDict],
     ) -> GetBucketInventoryConfigurationOutput:
         """
         Returns an S3 Inventory configuration (identified by the inventory
@@ -3448,35 +4092,35 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : To use this operation, you must have permissions to perform the
-          `s3:GetInventoryConfiguration` action. The bucket owner has this
-          permission by default. The bucket owner can grant this permission to
-          others. For more information about permissions, see [Permissions
-          Related to Bucket Subresource
-          Operations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
-          and [Managing Access Permissions to Your Amazon S3
-          Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
+        :   To use this operation, you must have permissions to perform the
+            `s3:GetInventoryConfiguration` action. The bucket owner has this
+            permission by default. The bucket owner can grant this permission to
+            others. For more information about permissions, see [Permissions
+            Related to Bucket Subresource
+            Operations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+            and [Managing Access Permissions to Your Amazon S3
+            Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
 
-          - **General purpose bucket permissions** - The
-            `s3:GetInventoryConfiguration` permission is required in a policy.
-            For more information about general purpose buckets permissions, see
-            [Using Bucket Policies and User
-            Policies](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html)
-            in the *Amazon S3 User Guide*.
+            - **General purpose bucket permissions** - The
+              `s3:GetInventoryConfiguration` permission is required in a policy.
+              For more information about general purpose buckets permissions,
+              see [Using Bucket Policies and User
+              Policies](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html)
+              in the *Amazon S3 User Guide*.
 
-          - **Directory bucket permissions** - To grant access to this API
-            operation, you must have the `s3express:GetInventoryConfiguration`
-            permission in an IAM identity-based policy instead of a bucket
-            policy. For more information about directory bucket policies and
-            permissions, see [Amazon Web Services Identity and Access Management
-            (IAM) for S3 Express One
-            Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html)
-            in the *Amazon S3 User Guide*.
+            - **Directory bucket permissions** - To grant access to this API
+              operation, you must have the `s3express:GetInventoryConfiguration`
+              permission in an IAM identity-based policy instead of a bucket
+              policy. For more information about directory bucket policies and
+              permissions, see [Amazon Web Services Identity and Access
+              Management (IAM) for S3 Express One
+              Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html)
+              in the *Amazon S3 User Guide*.
 
         HTTP Host header syntax
 
-        : **Directory buckets** - The HTTP Host header syntax is
-          `s3express-control.`*`region-code`*`.amazonaws.com`.
+        :   **Directory buckets** - The HTTP Host header syntax is
+            `s3express-control.`*`region-code`*`.amazonaws.com`.
 
         For information about the Amazon S3 inventory feature, see [Amazon S3
         Inventory](https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-inventory.html).
@@ -3496,8 +4140,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `GetBucketInventoryConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3507,14 +4149,36 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `GetBucketInventoryConfigurationOutput`.
         """
+
+    def get_bucket_inventory_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetBucketInventoryConfigurationOutput:
         return self._invoke(
-            input, _models.GET_BUCKET_INVENTORY_CONFIGURATION, [], plugins
+            self._select_input(
+                _models.GET_BUCKET_INVENTORY_CONFIGURATION, args, kwargs
+            ),
+            _models.GET_BUCKET_INVENTORY_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_bucket_lifecycle_configuration(
         self,
-        input: GetBucketLifecycleConfigurationInput,
+        request: _models.GetBucketLifecycleConfigurationInput
+        | _models.GetBucketLifecycleConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetBucketLifecycleConfigurationOutput: ...
+
+    @_overload
+    def get_bucket_lifecycle_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetBucketLifecycleConfigurationInputDict],
     ) -> GetBucketLifecycleConfigurationOutput:
         """
         Returns the lifecycle configuration information set on the bucket. For
@@ -3537,50 +4201,51 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : - **General purpose bucket permissions** - By default, all Amazon S3
-            resources are private, including buckets, objects, and related
-            subresources (for example, lifecycle configuration and website
-            configuration). Only the resource owner (that is, the Amazon Web
-            Services account that created it) can access the resource. The
-            resource owner can optionally grant access permissions to others by
-            writing an access policy. For this operation, a user must have the
-            `s3:GetLifecycleConfiguration` permission.
+        :   - **General purpose bucket permissions** - By default, all Amazon S3
+              resources are private, including buckets, objects, and related
+              subresources (for example, lifecycle configuration and website
+              configuration). Only the resource owner (that is, the Amazon Web
+              Services account that created it) can access the resource. The
+              resource owner can optionally grant access permissions to others
+              by writing an access policy. For this operation, a user must have
+              the `s3:GetLifecycleConfiguration` permission.
 
-            For more information about permissions, see [Managing Access
-            Permissions to Your Amazon S3
-            Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
+              For more information about permissions, see [Managing Access
+              Permissions to Your Amazon S3
+              Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
 
-          - **Directory bucket permissions** - You must have the
-            `s3express:GetLifecycleConfiguration` permission in an IAM
-            identity-based policy to use this operation. Cross-account access to
-            this API operation isn't supported. The resource owner can
-            optionally grant access permissions to others by creating a role or
-            user for them as long as they are within the same account as the
-            owner and resource.
+            - **Directory bucket permissions** - You must have the
+              `s3express:GetLifecycleConfiguration` permission in an IAM
+              identity-based policy to use this operation. Cross-account access
+              to this API operation isn't supported. The resource owner can
+              optionally grant access permissions to others by creating a role
+              or user for them as long as they are within the same account as
+              the owner and resource.
 
-            For more information about directory bucket policies and
-            permissions, see [Authorizing Regional endpoint APIs with
-            IAM](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html)
-            in the *Amazon S3 User Guide*.
+              For more information about directory bucket policies and
+              permissions, see [Authorizing Regional endpoint APIs with
+              IAM](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html)
+              in the *Amazon S3 User Guide*.
 
-            Note:
+              Note:
             **Directory buckets** - For directory buckets, you must make
             requests for this API operation to the Regional endpoint. These
             endpoints support path-style requests in the format
             `https://s3express-control.`*`region-code`*`.amazonaws.com/`*`bucket-name`*` `.
             Virtual-hosted-style requests aren't supported. For more
-            information about endpoints in Availability Zones, see [Regional and
-            Zonal endpoints for directory buckets in Availability
+            information about endpoints in Availability Zones, see [Regional
+            and Zonal endpoints for directory buckets in Availability
             Zones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html)
-            in the *Amazon S3 User Guide*. For more information about endpoints
-            in Local Zones, see [Concepts for directory buckets in Local
+            in the *Amazon S3 User Guide*. For more information about
+            endpoints in Local Zones, see [Concepts for directory buckets in
+            Local
             Zones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html)
             in the *Amazon S3 User Guide*.
 
         HTTP Host header syntax
 
-        : **Directory buckets** - The HTTP Host header syntax is
-          `s3express-control.`*`region`*`.amazonaws.com`.
+        :   **Directory buckets** - The HTTP Host header syntax is
+            `s3express-control.`*`region`*`.amazonaws.com`.
 
         `GetBucketLifecycleConfiguration` has the following special error:
 
@@ -3607,8 +4272,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `GetBucketLifecycleConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3618,12 +4281,35 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `GetBucketLifecycleConfigurationOutput`.
         """
+
+    def get_bucket_lifecycle_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetBucketLifecycleConfigurationOutput:
         return self._invoke(
-            input, _models.GET_BUCKET_LIFECYCLE_CONFIGURATION, [], plugins
+            self._select_input(
+                _models.GET_BUCKET_LIFECYCLE_CONFIGURATION, args, kwargs
+            ),
+            _models.GET_BUCKET_LIFECYCLE_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_bucket_location(
-        self, input: GetBucketLocationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetBucketLocationInput | _models.GetBucketLocationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetBucketLocationOutput: ...
+
+    @_overload
+    def get_bucket_location(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetBucketLocationInputDict],
     ) -> GetBucketLocationOutput:
         """
         Warning:
@@ -3675,8 +4361,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `GetBucketLocationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3686,10 +4370,33 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `GetBucketLocationOutput`.
         """
-        return self._invoke(input, _models.GET_BUCKET_LOCATION, [], plugins)
 
+    def get_bucket_location(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetBucketLocationOutput:
+        return self._invoke(
+            self._select_input(_models.GET_BUCKET_LOCATION, args, kwargs),
+            _models.GET_BUCKET_LOCATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_bucket_logging(
-        self, input: GetBucketLoggingInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetBucketLoggingInput | _models.GetBucketLoggingInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetBucketLoggingOutput: ...
+
+    @_overload
+    def get_bucket_logging(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetBucketLoggingInputDict],
     ) -> GetBucketLoggingOutput:
         """
         Note:
@@ -3710,8 +4417,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `GetBucketLoggingInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3721,12 +4426,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `GetBucketLoggingOutput`.
         """
-        return self._invoke(input, _models.GET_BUCKET_LOGGING, [], plugins)
 
+    def get_bucket_logging(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetBucketLoggingOutput:
+        return self._invoke(
+            self._select_input(_models.GET_BUCKET_LOGGING, args, kwargs),
+            _models.GET_BUCKET_LOGGING,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_bucket_metadata_configuration(
         self,
-        input: GetBucketMetadataConfigurationInput,
+        request: _models.GetBucketMetadataConfigurationInput
+        | _models.GetBucketMetadataConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetBucketMetadataConfigurationOutput: ...
+
+    @_overload
+    def get_bucket_metadata_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetBucketMetadataConfigurationInputDict],
     ) -> GetBucketMetadataConfigurationOutput:
         """
         Retrieves the S3 Metadata configuration for a general purpose bucket.
@@ -3742,13 +4469,13 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : To use this operation, you must have the
-          `s3:GetBucketMetadataTableConfiguration` permission. For more
-          information, see [Setting up permissions for configuring metadata
-          tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html)
-          in the *Amazon S3 User Guide*.
+        :   To use this operation, you must have the
+            `s3:GetBucketMetadataTableConfiguration` permission. For more
+            information, see [Setting up permissions for configuring metadata
+            tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html)
+            in the *Amazon S3 User Guide*.
 
-          Note:
+            Note:
             The IAM policy action name is the same for the V1 and V2 API
             operations.
 
@@ -3769,8 +4496,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `GetBucketMetadataConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3780,14 +4505,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `GetBucketMetadataConfigurationOutput`.
         """
+
+    def get_bucket_metadata_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetBucketMetadataConfigurationOutput:
         return self._invoke(
-            input, _models.GET_BUCKET_METADATA_CONFIGURATION, [], plugins
+            self._select_input(_models.GET_BUCKET_METADATA_CONFIGURATION, args, kwargs),
+            _models.GET_BUCKET_METADATA_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_bucket_metadata_table_configuration(
         self,
-        input: GetBucketMetadataTableConfigurationInput,
+        request: _models.GetBucketMetadataTableConfigurationInput
+        | _models.GetBucketMetadataTableConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetBucketMetadataTableConfigurationOutput: ...
+
+    @_overload
+    def get_bucket_metadata_table_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetBucketMetadataTableConfigurationInputDict],
     ) -> GetBucketMetadataTableConfigurationOutput:
         """
         Warning:
@@ -3821,11 +4566,11 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : To use this operation, you must have the
-          `s3:GetBucketMetadataTableConfiguration` permission. For more
-          information, see [Setting up permissions for configuring metadata
-          tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html)
-          in the *Amazon S3 User Guide*.
+        :   To use this operation, you must have the
+            `s3:GetBucketMetadataTableConfiguration` permission. For more
+            information, see [Setting up permissions for configuring metadata
+            tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html)
+            in the *Amazon S3 User Guide*.
 
         The following operations are related to
         `GetBucketMetadataTableConfiguration`:
@@ -3840,8 +4585,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `GetBucketMetadataTableConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3851,14 +4594,36 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `GetBucketMetadataTableConfigurationOutput`.
         """
+
+    def get_bucket_metadata_table_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetBucketMetadataTableConfigurationOutput:
         return self._invoke(
-            input, _models.GET_BUCKET_METADATA_TABLE_CONFIGURATION, [], plugins
+            self._select_input(
+                _models.GET_BUCKET_METADATA_TABLE_CONFIGURATION, args, kwargs
+            ),
+            _models.GET_BUCKET_METADATA_TABLE_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_bucket_metrics_configuration(
         self,
-        input: GetBucketMetricsConfigurationInput,
+        request: _models.GetBucketMetricsConfigurationInput
+        | _models.GetBucketMetricsConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetBucketMetricsConfigurationOutput: ...
+
+    @_overload
+    def get_bucket_metrics_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetBucketMetricsConfigurationInputDict],
     ) -> GetBucketMetricsConfigurationOutput:
         """
         Gets a metrics configuration (specified by the metrics configuration ID)
@@ -3881,37 +4646,37 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : To use this operation, you must have permissions to perform the
-          `s3:GetMetricsConfiguration` action. The bucket owner has this
-          permission by default. The bucket owner can grant this permission to
-          others. For more information about permissions, see [Permissions
-          Related to Bucket Subresource
-          Operations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
-          and [Managing Access Permissions to Your Amazon S3
-          Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
+        :   To use this operation, you must have permissions to perform the
+            `s3:GetMetricsConfiguration` action. The bucket owner has this
+            permission by default. The bucket owner can grant this permission to
+            others. For more information about permissions, see [Permissions
+            Related to Bucket Subresource
+            Operations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+            and [Managing Access Permissions to Your Amazon S3
+            Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
 
-          - **General purpose bucket permissions** - The
-            `s3:GetMetricsConfiguration` permission is required in a policy. For
-            more information about general purpose buckets permissions, see
-            [Using Bucket Policies and User
-            Policies](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html)
-            in the *Amazon S3 User Guide*.
+            - **General purpose bucket permissions** - The
+              `s3:GetMetricsConfiguration` permission is required in a policy.
+              For more information about general purpose buckets permissions,
+              see [Using Bucket Policies and User
+              Policies](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html)
+              in the *Amazon S3 User Guide*.
 
-          - **Directory bucket permissions** - To grant access to this API
-            operation, you must have the `s3express:GetMetricsConfiguration`
-            permission in an IAM identity-based policy instead of a bucket
-            policy. Cross-account access to this API operation isn't supported.
-            This operation can only be performed by the Amazon Web Services
-            account that owns the resource. For more information about directory
-            bucket policies and permissions, see [Amazon Web Services Identity
-            and Access Management (IAM) for S3 Express One
-            Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html)
-            in the *Amazon S3 User Guide*.
+            - **Directory bucket permissions** - To grant access to this API
+              operation, you must have the `s3express:GetMetricsConfiguration`
+              permission in an IAM identity-based policy instead of a bucket
+              policy. Cross-account access to this API operation isn't
+              supported. This operation can only be performed by the Amazon Web
+              Services account that owns the resource. For more information
+              about directory bucket policies and permissions, see [Amazon Web
+              Services Identity and Access Management (IAM) for S3 Express One
+              Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html)
+              in the *Amazon S3 User Guide*.
 
         HTTP Host header syntax
 
-        : **Directory buckets** - The HTTP Host header syntax is
-          `s3express-control.`*`region-code`*`.amazonaws.com`.
+        :   **Directory buckets** - The HTTP Host header syntax is
+            `s3express-control.`*`region-code`*`.amazonaws.com`.
 
         For information about CloudWatch request metrics for Amazon S3, see
         [Monitoring Metrics with Amazon
@@ -3934,8 +4699,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `GetBucketMetricsConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -3945,14 +4708,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `GetBucketMetricsConfigurationOutput`.
         """
+
+    def get_bucket_metrics_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetBucketMetricsConfigurationOutput:
         return self._invoke(
-            input, _models.GET_BUCKET_METRICS_CONFIGURATION, [], plugins
+            self._select_input(_models.GET_BUCKET_METRICS_CONFIGURATION, args, kwargs),
+            _models.GET_BUCKET_METRICS_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_bucket_notification_configuration(
         self,
-        input: GetBucketNotificationConfigurationInput,
+        request: _models.GetBucketNotificationConfigurationInput
+        | _models.GetBucketNotificationConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetBucketNotificationConfigurationOutput: ...
+
+    @_overload
+    def get_bucket_notification_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetBucketNotificationConfigurationInputDict],
     ) -> GetBucketNotificationConfigurationOutput:
         """
         Note:
@@ -3995,8 +4778,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `GetBucketNotificationConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4006,14 +4787,36 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `GetBucketNotificationConfigurationOutput`.
         """
+
+    def get_bucket_notification_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetBucketNotificationConfigurationOutput:
         return self._invoke(
-            input, _models.GET_BUCKET_NOTIFICATION_CONFIGURATION, [], plugins
+            self._select_input(
+                _models.GET_BUCKET_NOTIFICATION_CONFIGURATION, args, kwargs
+            ),
+            _models.GET_BUCKET_NOTIFICATION_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     def get_bucket_ownership_controls(
         self,
-        input: GetBucketOwnershipControlsInput,
+        request: _models.GetBucketOwnershipControlsInput
+        | _models.GetBucketOwnershipControlsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetBucketOwnershipControlsOutput: ...
+
+    @_overload
+    def get_bucket_ownership_controls(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetBucketOwnershipControlsInputDict],
     ) -> GetBucketOwnershipControlsOutput:
         """
         Note:
@@ -4053,8 +4856,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `GetBucketOwnershipControlsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4064,10 +4865,33 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `GetBucketOwnershipControlsOutput`.
         """
-        return self._invoke(input, _models.GET_BUCKET_OWNERSHIP_CONTROLS, [], plugins)
 
+    def get_bucket_ownership_controls(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetBucketOwnershipControlsOutput:
+        return self._invoke(
+            self._select_input(_models.GET_BUCKET_OWNERSHIP_CONTROLS, args, kwargs),
+            _models.GET_BUCKET_OWNERSHIP_CONTROLS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_bucket_policy(
-        self, input: GetBucketPolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetBucketPolicyInput | _models.GetBucketPolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetBucketPolicyOutput: ...
+
+    @_overload
+    def get_bucket_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetBucketPolicyInputDict],
     ) -> GetBucketPolicyOutput:
         """
         Returns the policy of a specified bucket.
@@ -4088,60 +4912,61 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : If you are using an identity other than the root user of the Amazon
-          Web Services account that owns the bucket, the calling identity must
-          both have the `GetBucketPolicy` permissions on the specified bucket
-          and belong to the bucket owner's account in order to use this
-          operation.
+        :   If you are using an identity other than the root user of the Amazon
+            Web Services account that owns the bucket, the calling identity must
+            both have the `GetBucketPolicy` permissions on the specified bucket
+            and belong to the bucket owner's account in order to use this
+            operation.
 
-          If you don't have `GetBucketPolicy` permissions, Amazon S3 returns a
-          `403 Access Denied` error. If you have the correct permissions, but
-          you're not using an identity that belongs to the bucket owner's
-          account, Amazon S3 returns a `405 Method Not Allowed` error.
+            If you don't have `GetBucketPolicy` permissions, Amazon S3 returns
+            a `403 Access Denied` error. If you have the correct permissions,
+            but you're not using an identity that belongs to the bucket
+            owner's account, Amazon S3 returns a `405 Method Not Allowed`
+            error.
 
-          Warning:
-            To ensure that bucket owners don't inadvertently lock themselves out
-            of their own buckets, the root principal in a bucket owner's Amazon
-            Web Services account can perform the `GetBucketPolicy`,
-            `PutBucketPolicy`, and `DeleteBucketPolicy` API actions, even if their
-            bucket policy explicitly denies the root principal's access. Bucket
-            owner root principals can only be blocked from performing these API
-            actions by VPC endpoint policies and Amazon Web Services Organizations
-            policies.
-          - **General purpose bucket permissions** - The `s3:GetBucketPolicy`
-            permission is required in a policy. For more information about
-            general purpose buckets bucket policies, see [Using Bucket Policies
-            and User
-            Policies](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html)
-            in the *Amazon S3 User Guide*.
+            Warning:
+            To ensure that bucket owners don't inadvertently lock themselves
+            out of their own buckets, the root principal in a bucket owner's
+            Amazon Web Services account can perform the `GetBucketPolicy`,
+            `PutBucketPolicy`, and `DeleteBucketPolicy` API actions, even if
+            their bucket policy explicitly denies the root principal's access.
+            Bucket owner root principals can only be blocked from performing
+            these API actions by VPC endpoint policies and Amazon Web Services
+            Organizations policies.
+            - **General purpose bucket permissions** - The `s3:GetBucketPolicy`
+              permission is required in a policy. For more information about
+              general purpose buckets bucket policies, see [Using Bucket
+              Policies and User
+              Policies](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html)
+              in the *Amazon S3 User Guide*.
 
-          - **Directory bucket permissions** - To grant access to this API
-            operation, you must have the `s3express:GetBucketPolicy` permission
-            in an IAM identity-based policy instead of a bucket policy.
-            Cross-account access to this API operation isn't supported. This
-            operation can only be performed by the Amazon Web Services account
-            that owns the resource. For more information about directory bucket
-            policies and permissions, see [Amazon Web Services Identity and
-            Access Management (IAM) for S3 Express One
-            Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html)
-            in the *Amazon S3 User Guide*.
+            - **Directory bucket permissions** - To grant access to this API
+              operation, you must have the `s3express:GetBucketPolicy`
+              permission in an IAM identity-based policy instead of a bucket
+              policy. Cross-account access to this API operation isn't
+              supported. This operation can only be performed by the Amazon Web
+              Services account that owns the resource. For more information
+              about directory bucket policies and permissions, see [Amazon Web
+              Services Identity and Access Management (IAM) for S3 Express One
+              Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html)
+              in the *Amazon S3 User Guide*.
 
         Example bucket policies
 
-        : **General purpose buckets example bucket policies** - See [Bucket
-          policy
-          examples](https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.html)
-          in the *Amazon S3 User Guide*.
+        :   **General purpose buckets example bucket policies** - See [Bucket
+            policy
+            examples](https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.html)
+            in the *Amazon S3 User Guide*.
 
-          **Directory bucket example bucket policies** - See [Example bucket
-          policies for S3 Express One
-          Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-example-bucket-policies.html)
-          in the *Amazon S3 User Guide*.
+            **Directory bucket example bucket policies** - See [Example bucket
+            policies for S3 Express One
+            Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-example-bucket-policies.html)
+            in the *Amazon S3 User Guide*.
 
         HTTP Host header syntax
 
-        : **Directory buckets** - The HTTP Host header syntax is
-          `s3express-control.`*`region-code`*`.amazonaws.com`.
+        :   **Directory buckets** - The HTTP Host header syntax is
+            `s3express-control.`*`region-code`*`.amazonaws.com`.
 
         The following action is related to `GetBucketPolicy`:
 
@@ -4153,8 +4978,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `GetBucketPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4164,10 +4987,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `GetBucketPolicyOutput`.
         """
-        return self._invoke(input, _models.GET_BUCKET_POLICY, [], plugins)
 
+    def get_bucket_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetBucketPolicyOutput:
+        return self._invoke(
+            self._select_input(_models.GET_BUCKET_POLICY, args, kwargs),
+            _models.GET_BUCKET_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_bucket_policy_status(
-        self, input: GetBucketPolicyStatusInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetBucketPolicyStatusInput
+        | _models.GetBucketPolicyStatusInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetBucketPolicyStatusOutput: ...
+
+    @_overload
+    def get_bucket_policy_status(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetBucketPolicyStatusInputDict],
     ) -> GetBucketPolicyStatusOutput:
         """
         Note:
@@ -4200,8 +5047,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `GetBucketPolicyStatusInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4211,10 +5056,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `GetBucketPolicyStatusOutput`.
         """
-        return self._invoke(input, _models.GET_BUCKET_POLICY_STATUS, [], plugins)
 
+    def get_bucket_policy_status(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetBucketPolicyStatusOutput:
+        return self._invoke(
+            self._select_input(_models.GET_BUCKET_POLICY_STATUS, args, kwargs),
+            _models.GET_BUCKET_POLICY_STATUS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_bucket_replication(
-        self, input: GetBucketReplicationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetBucketReplicationInput
+        | _models.GetBucketReplicationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetBucketReplicationOutput: ...
+
+    @_overload
+    def get_bucket_replication(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetBucketReplicationInputDict],
     ) -> GetBucketReplicationOutput:
         """
         Note:
@@ -4256,8 +5125,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `GetBucketReplicationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4267,10 +5134,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `GetBucketReplicationOutput`.
         """
-        return self._invoke(input, _models.GET_BUCKET_REPLICATION, [], plugins)
 
+    def get_bucket_replication(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetBucketReplicationOutput:
+        return self._invoke(
+            self._select_input(_models.GET_BUCKET_REPLICATION, args, kwargs),
+            _models.GET_BUCKET_REPLICATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_bucket_request_payment(
-        self, input: GetBucketRequestPaymentInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetBucketRequestPaymentInput
+        | _models.GetBucketRequestPaymentInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetBucketRequestPaymentOutput: ...
+
+    @_overload
+    def get_bucket_request_payment(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetBucketRequestPaymentInputDict],
     ) -> GetBucketRequestPaymentOutput:
         """
         Note:
@@ -4291,8 +5182,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `GetBucketRequestPaymentInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4302,10 +5191,33 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `GetBucketRequestPaymentOutput`.
         """
-        return self._invoke(input, _models.GET_BUCKET_REQUEST_PAYMENT, [], plugins)
 
+    def get_bucket_request_payment(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetBucketRequestPaymentOutput:
+        return self._invoke(
+            self._select_input(_models.GET_BUCKET_REQUEST_PAYMENT, args, kwargs),
+            _models.GET_BUCKET_REQUEST_PAYMENT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_bucket_tagging(
-        self, input: GetBucketTaggingInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetBucketTaggingInput | _models.GetBucketTaggingInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetBucketTaggingOutput: ...
+
+    @_overload
+    def get_bucket_tagging(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetBucketTaggingInputDict],
     ) -> GetBucketTaggingOutput:
         """
         Note:
@@ -4335,8 +5247,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `GetBucketTaggingInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4346,10 +5256,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `GetBucketTaggingOutput`.
         """
-        return self._invoke(input, _models.GET_BUCKET_TAGGING, [], plugins)
 
+    def get_bucket_tagging(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetBucketTaggingOutput:
+        return self._invoke(
+            self._select_input(_models.GET_BUCKET_TAGGING, args, kwargs),
+            _models.GET_BUCKET_TAGGING,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_bucket_versioning(
-        self, input: GetBucketVersioningInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetBucketVersioningInput
+        | _models.GetBucketVersioningInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetBucketVersioningOutput: ...
+
+    @_overload
+    def get_bucket_versioning(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetBucketVersioningInputDict],
     ) -> GetBucketVersioningOutput:
         """
         Note:
@@ -4378,8 +5312,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `GetBucketVersioningInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4389,10 +5321,33 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `GetBucketVersioningOutput`.
         """
-        return self._invoke(input, _models.GET_BUCKET_VERSIONING, [], plugins)
 
+    def get_bucket_versioning(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetBucketVersioningOutput:
+        return self._invoke(
+            self._select_input(_models.GET_BUCKET_VERSIONING, args, kwargs),
+            _models.GET_BUCKET_VERSIONING,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_bucket_website(
-        self, input: GetBucketWebsiteInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetBucketWebsiteInput | _models.GetBucketWebsiteInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetBucketWebsiteOutput: ...
+
+    @_overload
+    def get_bucket_website(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetBucketWebsiteInputDict],
     ) -> GetBucketWebsiteOutput:
         """
         Note:
@@ -4422,8 +5377,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `GetBucketWebsiteInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4433,10 +5386,33 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `GetBucketWebsiteOutput`.
         """
-        return self._invoke(input, _models.GET_BUCKET_WEBSITE, [], plugins)
 
+    def get_bucket_website(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetBucketWebsiteOutput:
+        return self._invoke(
+            self._select_input(_models.GET_BUCKET_WEBSITE, args, kwargs),
+            _models.GET_BUCKET_WEBSITE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_object(
-        self, input: GetObjectInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetObjectInput | _models.GetObjectInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetObjectOutput: ...
+
+    @_overload
+    def get_object(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetObjectInputDict],
     ) -> GetObjectOutput:
         """
         Retrieves an object from Amazon S3.
@@ -4474,136 +5450,138 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : - **General purpose bucket permissions** - You must have the required
-            permissions in a policy. To use `GetObject`, you must have the
-            `READ` access to the object (or version). If you grant `READ` access
-            to the anonymous user, the `GetObject` operation returns the object
-            without using an authorization header. For more information, see
-            [Specifying permissions in a
-            policy](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html)
-            in the *Amazon S3 User Guide*.
+        :   - **General purpose bucket permissions** - You must have the
+              required permissions in a policy. To use `GetObject`, you must
+              have the `READ` access to the object (or version). If you grant
+              `READ` access to the anonymous user, the `GetObject` operation
+              returns the object without using an authorization header. For more
+              information, see [Specifying permissions in a
+              policy](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html)
+              in the *Amazon S3 User Guide*.
 
-            If you include a `versionId` in your request header, you must have
-            the `s3:GetObjectVersion` permission to access a specific version of
-            an object. The `s3:GetObject` permission is not required in this
-            scenario.
+              If you include a `versionId` in your request header, you must have
+              the `s3:GetObjectVersion` permission to access a specific version
+              of an object. The `s3:GetObject` permission is not required in
+              this scenario.
 
-            If you request the current version of an object without a specific
-            `versionId` in the request header, only the `s3:GetObject`
-            permission is required. The `s3:GetObjectVersion` permission is not
-            required in this scenario.
+              If you request the current version of an object without a specific
+              `versionId` in the request header, only the `s3:GetObject`
+              permission is required. The `s3:GetObjectVersion` permission is
+              not required in this scenario.
 
-            If the object that you request doesn't exist, the error that Amazon
-            S3 returns depends on whether you also have the `s3:ListBucket`
-            permission.
+              If the object that you request doesn't exist, the error that
+              Amazon S3 returns depends on whether you also have the
+              `s3:ListBucket` permission.
 
-            - If you have the `s3:ListBucket` permission on the bucket, Amazon
-              S3 returns an HTTP status code `404 Not Found` error.
+              - If you have the `s3:ListBucket` permission on the bucket, Amazon
+                S3 returns an HTTP status code `404 Not Found` error.
 
-            - If you don't have the `s3:ListBucket` permission, Amazon S3
-              returns an HTTP status code `403 Access Denied` error.
+              - If you don't have the `s3:ListBucket` permission, Amazon S3
+                returns an HTTP status code `403 Access Denied` error.
 
-          - **Directory bucket permissions** - To grant access to this API
-            operation on a directory bucket, we recommend that you use the
-            [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
-            API operation for session-based authorization. Specifically, you
-            grant the `s3express:CreateSession` permission to the directory
-            bucket in a bucket policy or an IAM identity-based policy. Then, you
-            make the `CreateSession` API call on the bucket to obtain a session
-            token. With the session token in your request header, you can make
-            API requests to this operation. After the session token expires, you
-            make another `CreateSession` API call to generate a new session
-            token for use. Amazon Web Services CLI or SDKs create session and
-            refresh the session token automatically to avoid service
-            interruptions when a session expires. For more information about
-            authorization, see
-            [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
-            .
+            - **Directory bucket permissions** - To grant access to this API
+              operation on a directory bucket, we recommend that you use the
+              [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
+              API operation for session-based authorization. Specifically, you
+              grant the `s3express:CreateSession` permission to the directory
+              bucket in a bucket policy or an IAM identity-based policy. Then,
+              you make the `CreateSession` API call on the bucket to obtain a
+              session token. With the session token in your request header, you
+              can make API requests to this operation. After the session token
+              expires, you make another `CreateSession` API call to generate a
+              new session token for use. Amazon Web Services CLI or SDKs create
+              session and refresh the session token automatically to avoid
+              service interruptions when a session expires. For more information
+              about authorization, see
+              [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
+              .
 
-            If the object is encrypted using SSE-KMS, you must also have the
-            `kms:GenerateDataKey` and `kms:Decrypt` permissions in IAM
-            identity-based policies and KMS key policies for the KMS key.
+              If the object is encrypted using SSE-KMS, you must also have the
+              `kms:GenerateDataKey` and `kms:Decrypt` permissions in IAM
+              identity-based policies and KMS key policies for the KMS key.
 
         Storage classes
 
-        : If the object you are retrieving is stored in the S3 Glacier Flexible
-          Retrieval storage class, the S3 Glacier Deep Archive storage class,
-          the S3 Intelligent-Tiering Archive Access tier, or the S3
-          Intelligent-Tiering Deep Archive Access tier, before you can retrieve
-          the object you must first restore a copy using
-          [RestoreObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_RestoreObject.html).
-          Otherwise, this operation returns an `InvalidObjectState` error. For
-          information about restoring archived objects, see [Restoring Archived
-          Objects](https://docs.aws.amazon.com/AmazonS3/latest/dev/restoring-objects.html)
-          in the *Amazon S3 User Guide*.
+        :   If the object you are retrieving is stored in the S3 Glacier
+            Flexible Retrieval storage class, the S3 Glacier Deep Archive
+            storage class, the S3 Intelligent-Tiering Archive Access tier, or
+            the S3 Intelligent-Tiering Deep Archive Access tier, before you can
+            retrieve the object you must first restore a copy using
+            [RestoreObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_RestoreObject.html).
+            Otherwise, this operation returns an `InvalidObjectState` error. For
+            information about restoring archived objects, see [Restoring
+            Archived
+            Objects](https://docs.aws.amazon.com/AmazonS3/latest/dev/restoring-objects.html)
+            in the *Amazon S3 User Guide*.
 
-          **Directory buckets** - Directory buckets only support
-          `EXPRESS_ONEZONE` (the S3 Express One Zone storage class) in
-          Availability Zones and `ONEZONE_IA` (the S3 One Zone-Infrequent Access
-          storage class) in Dedicated Local Zones. Unsupported storage class
-          values won't write a destination object and will respond with the
-          HTTP status code `400 Bad Request`.
+            **Directory buckets** - Directory buckets only support
+            `EXPRESS_ONEZONE` (the S3 Express One Zone storage class) in
+            Availability Zones and `ONEZONE_IA` (the S3 One Zone-Infrequent
+            Access storage class) in Dedicated Local Zones. Unsupported storage
+            class values won't write a destination object and will respond with
+            the HTTP status code `400 Bad Request`.
 
         Encryption
 
-        : Encryption request headers, like `x-amz-server-side-encryption`,
-          should not be sent for the `GetObject` requests, if your object uses
-          server-side encryption with Amazon S3 managed encryption keys
-          (SSE-S3), server-side encryption with Key Management Service (KMS)
-          keys (SSE-KMS), or dual-layer server-side encryption with Amazon Web
-          Services KMS keys (DSSE-KMS). If you include the header in your
-          `GetObject` requests for the object that uses these types of keys,
-          you'll get an HTTP `400 Bad Request` error.
+        :   Encryption request headers, like `x-amz-server-side-encryption`,
+            should not be sent for the `GetObject` requests, if your object uses
+            server-side encryption with Amazon S3 managed encryption keys
+            (SSE-S3), server-side encryption with Key Management Service (KMS)
+            keys (SSE-KMS), or dual-layer server-side encryption with Amazon Web
+            Services KMS keys (DSSE-KMS). If you include the header in your
+            `GetObject` requests for the object that uses these types of keys,
+            you'll get an HTTP `400 Bad Request` error.
 
-          **Directory buckets** - For directory buckets, there are only two
-          supported options for server-side encryption: SSE-S3 and SSE-KMS.
-          SSE-C isn't supported. For more information, see [Protecting data
-          with server-side
-          encryption](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-serv-side-encryption.html)
-          in the *Amazon S3 User Guide*.
+            **Directory buckets** - For directory buckets, there are only two
+            supported options for server-side encryption: SSE-S3 and SSE-KMS.
+            SSE-C isn't supported. For more information, see [Protecting data
+            with server-side
+            encryption](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-serv-side-encryption.html)
+            in the *Amazon S3 User Guide*.
 
         Overriding response header values through the request
 
-        : There are times when you want to override certain response header
-          values of a `GetObject` response. For example, you might override the
-          `Content-Disposition` response header value through your `GetObject`
-          request.
+        :   There are times when you want to override certain response header
+            values of a `GetObject` response. For example, you might override
+            the `Content-Disposition` response header value through your
+            `GetObject` request.
 
-          You can override values for a set of response headers. These modified
-          response header values are included only in a successful response,
-          that is, when the HTTP status code `200 OK` is returned. The headers
-          you can override using the following query parameters in the request
-          are a subset of the headers that Amazon S3 accepts when you create an
-          object.
+            You can override values for a set of response headers. These
+            modified response header values are included only in a successful
+            response, that is, when the HTTP status code `200 OK` is returned.
+            The headers you can override using the following query parameters in
+            the request are a subset of the headers that Amazon S3 accepts when
+            you create an object.
 
-          The response headers that you can override for the `GetObject`
-          response are `Cache-Control`, `Content-Disposition`,
-          `Content-Encoding`, `Content-Language`, `Content-Type`, and `Expires`.
+            The response headers that you can override for the `GetObject`
+            response are `Cache-Control`, `Content-Disposition`,
+            `Content-Encoding`, `Content-Language`, `Content-Type`, and
+            `Expires`.
 
-          To override values for a set of response headers in the `GetObject`
-          response, you can use the following query parameters in the request.
+            To override values for a set of response headers in the `GetObject`
+            response, you can use the following query parameters in the request.
 
-          - `response-cache-control`
+            - `response-cache-control`
 
-          - `response-content-disposition`
+            - `response-content-disposition`
 
-          - `response-content-encoding`
+            - `response-content-encoding`
 
-          - `response-content-language`
+            - `response-content-language`
 
-          - `response-content-type`
+            - `response-content-type`
 
-          - `response-expires`
+            - `response-expires`
 
-          Note:
+            Note:
             When you use these parameters, you must sign the request by using
             either an Authorization header or a presigned URL. These parameters
             cannot be used with an unsigned (anonymous) request.
 
         HTTP Host header syntax
 
-        : **Directory buckets** - The HTTP Host header syntax is
-          ` `*`Bucket-name`*`.s3express-`*`zone-id`*`.`*`region-code`*`.amazonaws.com`.
+        :   **Directory buckets** - The HTTP Host header syntax is
+            ` `*`Bucket-name`*`.s3express-`*`zone-id`*`.`*`region-code`*`.amazonaws.com`.
 
         The following operations are related to `GetObject`:
 
@@ -4617,8 +5595,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `GetObjectInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4628,10 +5604,33 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `GetObjectOutput`.
         """
-        return self._invoke(input, _models.GET_OBJECT, [], plugins)
 
+    def get_object(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetObjectOutput:
+        return self._invoke(
+            self._select_input(_models.GET_OBJECT, args, kwargs),
+            _models.GET_OBJECT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_object_acl(
-        self, input: GetObjectAclInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetObjectAclInput | _models.GetObjectAclInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetObjectAclOutput: ...
+
+    @_overload
+    def get_object_acl(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetObjectAclInputDict],
     ) -> GetObjectAclOutput:
         """
         Note:
@@ -4675,8 +5674,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `GetObjectAclInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4686,10 +5683,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `GetObjectAclOutput`.
         """
-        return self._invoke(input, _models.GET_OBJECT_ACL, [], plugins)
 
+    def get_object_acl(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetObjectAclOutput:
+        return self._invoke(
+            self._select_input(_models.GET_OBJECT_ACL, args, kwargs),
+            _models.GET_OBJECT_ACL,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_object_annotation(
-        self, input: GetObjectAnnotationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetObjectAnnotationInput
+        | _models.GetObjectAnnotationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetObjectAnnotationOutput: ...
+
+    @_overload
+    def get_object_annotation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetObjectAnnotationInputDict],
     ) -> GetObjectAnnotationOutput:
         """
         Retrieves an annotation from an Amazon S3 object. To use this operation,
@@ -4713,8 +5734,6 @@ class S3Client(Client[S3Config]):
         - [DeleteObjectAnnotation](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObjectAnnotation.html)
 
         Args:
-            input:
-                An instance of `GetObjectAnnotationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4724,10 +5743,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `GetObjectAnnotationOutput`.
         """
-        return self._invoke(input, _models.GET_OBJECT_ANNOTATION, [], plugins)
 
+    def get_object_annotation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetObjectAnnotationOutput:
+        return self._invoke(
+            self._select_input(_models.GET_OBJECT_ANNOTATION, args, kwargs),
+            _models.GET_OBJECT_ANNOTATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_object_attributes(
-        self, input: GetObjectAttributesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetObjectAttributesInput
+        | _models.GetObjectAttributesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetObjectAttributesOutput: ...
+
+    @_overload
+    def get_object_attributes(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetObjectAttributesInputDict],
     ) -> GetObjectAttributesOutput:
         """
         Retrieves all of the metadata from an object without returning the
@@ -4754,143 +5797,144 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : - **General purpose bucket permissions** - To use
-            `GetObjectAttributes`, you must have READ access to the object.
+        :   - **General purpose bucket permissions** - To use
+              `GetObjectAttributes`, you must have READ access to the object.
 
-            The other permissions that you need to use this operation depend on
-            whether the bucket is versioned and if a version ID is passed in the
-            `GetObjectAttributes` request.
+              The other permissions that you need to use this operation depend
+              on whether the bucket is versioned and if a version ID is passed
+              in the `GetObjectAttributes` request.
 
-            - If you pass a version ID in your request, you need both the
-              `s3:GetObjectVersion` and `s3:GetObjectVersionAttributes`
-              permissions.
+              - If you pass a version ID in your request, you need both the
+                `s3:GetObjectVersion` and `s3:GetObjectVersionAttributes`
+                permissions.
 
-            - If you do not pass a version ID in your request, you need the
-              `s3:GetObject` and `s3:GetObjectAttributes` permissions.
+              - If you do not pass a version ID in your request, you need the
+                `s3:GetObject` and `s3:GetObjectAttributes` permissions.
 
-            For more information, see [Specifying Permissions in a
-            Policy](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html)
-            in the *Amazon S3 User Guide*.
+              For more information, see [Specifying Permissions in a
+              Policy](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html)
+              in the *Amazon S3 User Guide*.
 
-            If the object that you request does not exist, the error Amazon S3
-            returns depends on whether you also have the `s3:ListBucket`
-            permission.
+              If the object that you request does not exist, the error Amazon S3
+              returns depends on whether you also have the `s3:ListBucket`
+              permission.
 
-            - If you have the `s3:ListBucket` permission on the bucket, Amazon
-              S3 returns an HTTP status code `404 Not Found` (\"no such key\")
-              error.
+              - If you have the `s3:ListBucket` permission on the bucket, Amazon
+                S3 returns an HTTP status code `404 Not Found` (\"no such key\")
+                error.
 
-            - If you don't have the `s3:ListBucket` permission, Amazon S3
-              returns an HTTP status code `403 Forbidden` (\"access denied\")
-              error.
+              - If you don't have the `s3:ListBucket` permission, Amazon S3
+                returns an HTTP status code `403 Forbidden` (\"access denied\")
+                error.
 
-          - **Directory bucket permissions** - To grant access to this API
-            operation on a directory bucket, we recommend that you use the
-            [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
-            API operation for session-based authorization. Specifically, you
-            grant the `s3express:CreateSession` permission to the directory
-            bucket in a bucket policy or an IAM identity-based policy. Then, you
-            make the `CreateSession` API call on the bucket to obtain a session
-            token. With the session token in your request header, you can make
-            API requests to this operation. After the session token expires, you
-            make another `CreateSession` API call to generate a new session
-            token for use. Amazon Web Services CLI or SDKs create session and
-            refresh the session token automatically to avoid service
-            interruptions when a session expires. For more information about
-            authorization, see
-            [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
-            .
+            - **Directory bucket permissions** - To grant access to this API
+              operation on a directory bucket, we recommend that you use the
+              [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
+              API operation for session-based authorization. Specifically, you
+              grant the `s3express:CreateSession` permission to the directory
+              bucket in a bucket policy or an IAM identity-based policy. Then,
+              you make the `CreateSession` API call on the bucket to obtain a
+              session token. With the session token in your request header, you
+              can make API requests to this operation. After the session token
+              expires, you make another `CreateSession` API call to generate a
+              new session token for use. Amazon Web Services CLI or SDKs create
+              session and refresh the session token automatically to avoid
+              service interruptions when a session expires. For more information
+              about authorization, see
+              [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
+              .
 
-            If the object is encrypted with SSE-KMS, you must also have the
-            `kms:GenerateDataKey` and `kms:Decrypt` permissions in IAM
-            identity-based policies and KMS key policies for the KMS key.
+              If the object is encrypted with SSE-KMS, you must also have the
+              `kms:GenerateDataKey` and `kms:Decrypt` permissions in IAM
+              identity-based policies and KMS key policies for the KMS key.
 
         Encryption
 
-        : Note:
+        :   Note:
             Encryption request headers, like `x-amz-server-side-encryption`,
-            should not be sent for `HEAD` requests if your object uses server-side
-            encryption with Key Management Service (KMS) keys (SSE-KMS),
-            dual-layer server-side encryption with Amazon Web Services KMS keys
-            (DSSE-KMS), or server-side encryption with Amazon S3 managed
-            encryption keys (SSE-S3). The `x-amz-server-side-encryption` header is
-            used when you `PUT` an object to S3 and want to specify the encryption
-            method. If you include this header in a `GET` request for an object
-            that uses these types of keys, you'll get an HTTP `400 Bad Request`
-            error. It's because the encryption method can't be changed when you
-            retrieve the object.
-          If you encrypted an object when you stored the object in Amazon S3 by
-          using server-side encryption with customer-provided encryption keys
-          (SSE-C), then when you retrieve the metadata from the object, you must
-          use the following headers. These headers provide the server with the
-          encryption key required to retrieve the object's metadata. The
-          headers are:
+            should not be sent for `HEAD` requests if your object uses
+            server-side encryption with Key Management Service (KMS) keys
+            (SSE-KMS), dual-layer server-side encryption with Amazon Web
+            Services KMS keys (DSSE-KMS), or server-side encryption with Amazon
+            S3 managed encryption keys (SSE-S3). The
+            `x-amz-server-side-encryption` header is used when you `PUT` an
+            object to S3 and want to specify the encryption method. If you
+            include this header in a `GET` request for an object that uses these
+            types of keys, you'll get an HTTP `400 Bad Request` error. It's
+            because the encryption method can't be changed when you retrieve
+            the object.
+            If you encrypted an object when you stored the object in Amazon S3
+            by using server-side encryption with customer-provided encryption
+            keys (SSE-C), then when you retrieve the metadata from the object,
+            you must use the following headers. These headers provide the server
+            with the encryption key required to retrieve the object's metadata.
+            The headers are:
 
-          - `x-amz-server-side-encryption-customer-algorithm`
+            - `x-amz-server-side-encryption-customer-algorithm`
 
-          - `x-amz-server-side-encryption-customer-key`
+            - `x-amz-server-side-encryption-customer-key`
 
-          - `x-amz-server-side-encryption-customer-key-MD5`
+            - `x-amz-server-side-encryption-customer-key-MD5`
 
-          For more information about SSE-C, see [Server-Side Encryption (Using
-          Customer-Provided Encryption
-          Keys)](https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html)
-          in the *Amazon S3 User Guide*.
+            For more information about SSE-C, see [Server-Side Encryption (Using
+            Customer-Provided Encryption
+            Keys)](https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html)
+            in the *Amazon S3 User Guide*.
 
-          Note:
+            Note:
             **Directory bucket permissions** - For directory buckets, there are
             only two supported options for server-side encryption: server-side
             encryption with Amazon S3 managed keys (SSE-S3) (`AES256`) and
             server-side encryption with KMS keys (SSE-KMS) (`aws:kms`). We
             recommend that the bucket's default encryption uses the desired
             encryption configuration and you don't override the bucket default
-            encryption in your `CreateSession` requests or `PUT` object requests.
-            Then, new objects are automatically encrypted with the desired
-            encryption settings. For more information, see [Protecting data with
-            server-side
+            encryption in your `CreateSession` requests or `PUT` object
+            requests. Then, new objects are automatically encrypted with the
+            desired encryption settings. For more information, see [Protecting
+            data with server-side
             encryption](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-serv-side-encryption.html)
             in the *Amazon S3 User Guide*. For more information about the
-            encryption overriding behaviors in directory buckets, see [Specifying
-            server-side encryption with KMS for new object
+            encryption overriding behaviors in directory buckets, see
+            [Specifying server-side encryption with KMS for new object
             uploads](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-specifying-kms-encryption.html).
 
         Versioning
 
-        : **Directory buckets** - S3 Versioning isn't enabled and supported for
-          directory buckets. For this API operation, only the `null` value of
-          the version ID is supported by directory buckets. You can only specify
-          `null` to the `versionId` query parameter in the request.
+        :   **Directory buckets** - S3 Versioning isn't enabled and supported
+            for directory buckets. For this API operation, only the `null` value
+            of the version ID is supported by directory buckets. You can only
+            specify `null` to the `versionId` query parameter in the request.
 
         Conditional request headers
 
-        : Consider the following when using request headers:
+        :   Consider the following when using request headers:
 
-          - If both of the `If-Match` and `If-Unmodified-Since` headers are
-            present in the request as follows, then Amazon S3 returns the HTTP
-            status code `200 OK` and the data requested:
+            - If both of the `If-Match` and `If-Unmodified-Since` headers are
+              present in the request as follows, then Amazon S3 returns the HTTP
+              status code `200 OK` and the data requested:
 
-            - `If-Match` condition evaluates to `true`.
+              - `If-Match` condition evaluates to `true`.
 
-            - `If-Unmodified-Since` condition evaluates to `false`.
+              - `If-Unmodified-Since` condition evaluates to `false`.
 
-            For more information about conditional requests, see [RFC
-            7232](https://tools.ietf.org/html/rfc7232).
+              For more information about conditional requests, see [RFC
+              7232](https://tools.ietf.org/html/rfc7232).
 
-          - If both of the `If-None-Match` and `If-Modified-Since` headers are
-            present in the request as follows, then Amazon S3 returns the HTTP
-            status code `304 Not Modified`:
+            - If both of the `If-None-Match` and `If-Modified-Since` headers are
+              present in the request as follows, then Amazon S3 returns the HTTP
+              status code `304 Not Modified`:
 
-            - `If-None-Match` condition evaluates to `false`.
+              - `If-None-Match` condition evaluates to `false`.
 
-            - `If-Modified-Since` condition evaluates to `true`.
+              - `If-Modified-Since` condition evaluates to `true`.
 
-            For more information about conditional requests, see [RFC
-            7232](https://tools.ietf.org/html/rfc7232).
+              For more information about conditional requests, see [RFC
+              7232](https://tools.ietf.org/html/rfc7232).
 
         HTTP Host header syntax
 
-        : **Directory buckets** - The HTTP Host header syntax is
-          ` `*`Bucket-name`*`.s3express-`*`zone-id`*`.`*`region-code`*`.amazonaws.com`.
+        :   **Directory buckets** - The HTTP Host header syntax is
+            ` `*`Bucket-name`*`.s3express-`*`zone-id`*`.`*`region-code`*`.amazonaws.com`.
 
         The following actions are related to `GetObjectAttributes`:
 
@@ -4916,8 +5960,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `GetObjectAttributesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4927,10 +5969,33 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `GetObjectAttributesOutput`.
         """
-        return self._invoke(input, _models.GET_OBJECT_ATTRIBUTES, [], plugins)
 
+    def get_object_attributes(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetObjectAttributesOutput:
+        return self._invoke(
+            self._select_input(_models.GET_OBJECT_ATTRIBUTES, args, kwargs),
+            _models.GET_OBJECT_ATTRIBUTES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_object_legal_hold(
-        self, input: GetObjectLegalHoldInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetObjectLegalHoldInput | _models.GetObjectLegalHoldInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetObjectLegalHoldOutput: ...
+
+    @_overload
+    def get_object_legal_hold(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetObjectLegalHoldInputDict],
     ) -> GetObjectLegalHoldOutput:
         """
         Note:
@@ -4952,8 +6017,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `GetObjectLegalHoldInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -4963,12 +6026,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `GetObjectLegalHoldOutput`.
         """
-        return self._invoke(input, _models.GET_OBJECT_LEGAL_HOLD, [], plugins)
 
+    def get_object_legal_hold(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetObjectLegalHoldOutput:
+        return self._invoke(
+            self._select_input(_models.GET_OBJECT_LEGAL_HOLD, args, kwargs),
+            _models.GET_OBJECT_LEGAL_HOLD,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_object_lock_configuration(
         self,
-        input: GetObjectLockConfigurationInput,
+        request: _models.GetObjectLockConfigurationInput
+        | _models.GetObjectLockConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetObjectLockConfigurationOutput: ...
+
+    @_overload
+    def get_object_lock_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetObjectLockConfigurationInputDict],
     ) -> GetObjectLockConfigurationOutput:
         """
         Note:
@@ -4990,8 +6075,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `GetObjectLockConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5001,10 +6084,33 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `GetObjectLockConfigurationOutput`.
         """
-        return self._invoke(input, _models.GET_OBJECT_LOCK_CONFIGURATION, [], plugins)
 
+    def get_object_lock_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetObjectLockConfigurationOutput:
+        return self._invoke(
+            self._select_input(_models.GET_OBJECT_LOCK_CONFIGURATION, args, kwargs),
+            _models.GET_OBJECT_LOCK_CONFIGURATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_object_retention(
-        self, input: GetObjectRetentionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetObjectRetentionInput | _models.GetObjectRetentionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetObjectRetentionOutput: ...
+
+    @_overload
+    def get_object_retention(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetObjectRetentionInputDict],
     ) -> GetObjectRetentionOutput:
         """
         Note:
@@ -5026,8 +6132,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `GetObjectRetentionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5037,10 +6141,33 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `GetObjectRetentionOutput`.
         """
-        return self._invoke(input, _models.GET_OBJECT_RETENTION, [], plugins)
 
+    def get_object_retention(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetObjectRetentionOutput:
+        return self._invoke(
+            self._select_input(_models.GET_OBJECT_RETENTION, args, kwargs),
+            _models.GET_OBJECT_RETENTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_object_tagging(
-        self, input: GetObjectTaggingInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetObjectTaggingInput | _models.GetObjectTaggingInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetObjectTaggingOutput: ...
+
+    @_overload
+    def get_object_tagging(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetObjectTaggingInputDict],
     ) -> GetObjectTaggingOutput:
         """
         Note:
@@ -5076,8 +6203,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `GetObjectTaggingInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5087,10 +6212,33 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `GetObjectTaggingOutput`.
         """
-        return self._invoke(input, _models.GET_OBJECT_TAGGING, [], plugins)
 
+    def get_object_tagging(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetObjectTaggingOutput:
+        return self._invoke(
+            self._select_input(_models.GET_OBJECT_TAGGING, args, kwargs),
+            _models.GET_OBJECT_TAGGING,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_object_torrent(
-        self, input: GetObjectTorrentInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetObjectTorrentInput | _models.GetObjectTorrentInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetObjectTorrentOutput: ...
+
+    @_overload
+    def get_object_torrent(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetObjectTorrentInputDict],
     ) -> GetObjectTorrentOutput:
         """
         Note:
@@ -5118,8 +6266,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `GetObjectTorrentInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5129,10 +6275,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `GetObjectTorrentOutput`.
         """
-        return self._invoke(input, _models.GET_OBJECT_TORRENT, [], plugins)
 
+    def get_object_torrent(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetObjectTorrentOutput:
+        return self._invoke(
+            self._select_input(_models.GET_OBJECT_TORRENT, args, kwargs),
+            _models.GET_OBJECT_TORRENT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_public_access_block(
-        self, input: GetPublicAccessBlockInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetPublicAccessBlockInput
+        | _models.GetPublicAccessBlockInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetPublicAccessBlockOutput: ...
+
+    @_overload
+    def get_public_access_block(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetPublicAccessBlockInputDict],
     ) -> GetPublicAccessBlockOutput:
         """
         Note:
@@ -5178,8 +6348,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `GetPublicAccessBlockInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5189,10 +6357,33 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `GetPublicAccessBlockOutput`.
         """
-        return self._invoke(input, _models.GET_PUBLIC_ACCESS_BLOCK, [], plugins)
 
+    def get_public_access_block(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetPublicAccessBlockOutput:
+        return self._invoke(
+            self._select_input(_models.GET_PUBLIC_ACCESS_BLOCK, args, kwargs),
+            _models.GET_PUBLIC_ACCESS_BLOCK,
+            [],
+            plugins,
+        )
+
+    @_overload
     def head_bucket(
-        self, input: HeadBucketInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.HeadBucketInput | _models.HeadBucketInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> HeadBucketOutput: ...
+
+    @_overload
+    def head_bucket(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.HeadBucketInputDict],
     ) -> HeadBucketOutput:
         """
         You can use this operation to determine if a bucket exists and if you
@@ -5212,63 +6403,64 @@ class S3Client(Client[S3Config]):
 
         Authentication and authorization
 
-        : **General purpose buckets** - Request to public buckets that grant the
-          s3:ListBucket permission publicly do not need to be signed. All other
-          `HeadBucket` requests must be authenticated and signed by using IAM
-          credentials (access key ID and secret access key for the IAM
-          identities). All headers with the `x-amz-` prefix, including
-          `x-amz-copy-source`, must be signed. For more information, see [REST
-          Authentication](https://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html).
+        :   **General purpose buckets** - Request to public buckets that grant
+            the s3:ListBucket permission publicly do not need to be signed. All
+            other `HeadBucket` requests must be authenticated and signed by
+            using IAM credentials (access key ID and secret access key for the
+            IAM identities). All headers with the `x-amz-` prefix, including
+            `x-amz-copy-source`, must be signed. For more information, see [REST
+            Authentication](https://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html).
 
-          **Directory buckets** - You must use IAM credentials to authenticate
-          and authorize your access to the `HeadBucket` API operation, instead
-          of using the temporary security credentials through the
-          `CreateSession` API operation.
+            **Directory buckets** - You must use IAM credentials to authenticate
+            and authorize your access to the `HeadBucket` API operation, instead
+            of using the temporary security credentials through the
+            `CreateSession` API operation.
 
-          Amazon Web Services CLI or SDKs handles authentication and
-          authorization on your behalf.
+            Amazon Web Services CLI or SDKs handles authentication and
+            authorization on your behalf.
 
         Permissions
 
-        : - **General purpose bucket permissions** - To use this operation, you
-            must have permissions to perform the `s3:ListBucket` action. The
-            bucket owner has this permission by default and can grant this
-            permission to others. For more information about permissions, see
-            [Managing access permissions to your Amazon S3
-            resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html)
-            in the *Amazon S3 User Guide*.
+        :   - **General purpose bucket permissions** - To use this operation,
+              you must have permissions to perform the `s3:ListBucket` action.
+              The bucket owner has this permission by default and can grant this
+              permission to others. For more information about permissions, see
+              [Managing access permissions to your Amazon S3
+              resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html)
+              in the *Amazon S3 User Guide*.
 
-          - **Directory bucket permissions** - You must have the
-            **`s3express:CreateSession`** permission in the `Action` element of
-            a policy. If no session mode is specified, the session will be
-            created with the maximum allowable privilege, attempting `ReadWrite`
-            first, then `ReadOnly` if `ReadWrite` is not permitted. If you want
-            to explicitly restrict the access to be read-only, you can set the
-            `s3express:SessionMode` condition key to `ReadOnly` on the bucket.
+            - **Directory bucket permissions** - You must have the
+              **`s3express:CreateSession`** permission in the `Action` element
+              of a policy. If no session mode is specified, the session will be
+              created with the maximum allowable privilege, attempting
+              `ReadWrite` first, then `ReadOnly` if `ReadWrite` is not
+              permitted. If you want to explicitly restrict the access to be
+              read-only, you can set the `s3express:SessionMode` condition key
+              to `ReadOnly` on the bucket.
 
-            For more information about example bucket policies, see [Example
-            bucket policies for S3 Express One
-            Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-example-bucket-policies.html)
-            and [Amazon Web Services Identity and Access Management (IAM)
-            identity-based policies for S3 Express One
-            Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-identity-policies.html)
-            in the *Amazon S3 User Guide*.
+              For more information about example bucket policies, see [Example
+              bucket policies for S3 Express One
+              Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-example-bucket-policies.html)
+              and [Amazon Web Services Identity and Access Management (IAM)
+              identity-based policies for S3 Express One
+              Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-identity-policies.html)
+              in the *Amazon S3 User Guide*.
 
         HTTP Host header syntax
 
-        : **Directory buckets** - The HTTP Host header syntax is
-          ` `*`Bucket-name`*`.s3express-`*`zone-id`*`.`*`region-code`*`.amazonaws.com`.
+        :   **Directory buckets** - The HTTP Host header syntax is
+            ` `*`Bucket-name`*`.s3express-`*`zone-id`*`.`*`region-code`*`.amazonaws.com`.
 
-          Note:
+            Note:
             You must make requests for this API operation to the Zonal endpoint.
             These endpoints support virtual-hosted-style requests in the format
             `https://`*`bucket-name`*`.s3express-`*`zone-id`*`.`*`region-code`*`.amazonaws.com`.
             Path-style requests are not supported. For more information about
-            endpoints in Availability Zones, see [Regional and Zonal endpoints for
-            directory buckets in Availability
+            endpoints in Availability Zones, see [Regional and Zonal endpoints
+            for directory buckets in Availability
             Zones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html)
-            in the *Amazon S3 User Guide*. For more information about endpoints in
-            Local Zones, see [Concepts for directory buckets in Local
+            in the *Amazon S3 User Guide*. For more information about endpoints
+            in Local Zones, see [Concepts for directory buckets in Local
             Zones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html)
             in the *Amazon S3 User Guide*.
 
@@ -5278,8 +6470,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `HeadBucketInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5289,10 +6479,33 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `HeadBucketOutput`.
         """
-        return self._invoke(input, _models.HEAD_BUCKET, [], plugins)
 
+    def head_bucket(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> HeadBucketOutput:
+        return self._invoke(
+            self._select_input(_models.HEAD_BUCKET, args, kwargs),
+            _models.HEAD_BUCKET,
+            [],
+            plugins,
+        )
+
+    @_overload
     def head_object(
-        self, input: HeadObjectInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.HeadObjectInput | _models.HeadObjectInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> HeadObjectOutput: ...
+
+    @_overload
+    def head_object(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.HeadObjectInputDict],
     ) -> HeadObjectOutput:
         """
         The `HEAD` operation retrieves metadata from an object without returning
@@ -5314,82 +6527,86 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : - **General purpose bucket permissions** - To use `HEAD`, you must
-            have the `s3:GetObject` permission. You need the relevant read
-            object (or version) permission for this operation. For more
-            information, see [Actions, resources, and condition keys for Amazon
-            S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/list_amazons3.html)
-            in the *Amazon S3 User Guide*. For more information about the
-            permissions to S3 API operations by S3 resource types, see [Required
-            permissions for Amazon S3 API
-            operations](/AmazonS3/latest/userguide/using-with-s3-policy-actions.html)
-            in the *Amazon S3 User Guide*.
+        :   - **General purpose bucket permissions** - To use `HEAD`, you must
+              have the `s3:GetObject` permission. You need the relevant read
+              object (or version) permission for this operation. For more
+              information, see [Actions, resources, and condition keys for
+              Amazon
+              S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/list_amazons3.html)
+              in the *Amazon S3 User Guide*. For more information about the
+              permissions to S3 API operations by S3 resource types, see
+              [Required permissions for Amazon S3 API
+              operations](/AmazonS3/latest/userguide/using-with-s3-policy-actions.html)
+              in the *Amazon S3 User Guide*.
 
-            If the object you request doesn't exist, the error that Amazon S3
-            returns depends on whether you also have the `s3:ListBucket`
-            permission.
+              If the object you request doesn't exist, the error that Amazon S3
+              returns depends on whether you also have the `s3:ListBucket`
+              permission.
 
-            - If you have the `s3:ListBucket` permission on the bucket, Amazon
-              S3 returns an HTTP status code `404 Not Found` error.
+              - If you have the `s3:ListBucket` permission on the bucket, Amazon
+                S3 returns an HTTP status code `404 Not Found` error.
 
-            - If you don't have the `s3:ListBucket` permission, Amazon S3
-              returns an HTTP status code `403 Forbidden` error.
+              - If you don't have the `s3:ListBucket` permission, Amazon S3
+                returns an HTTP status code `403 Forbidden` error.
 
-          - **Directory bucket permissions** - To grant access to this API
-            operation on a directory bucket, we recommend that you use the
-            [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
-            API operation for session-based authorization. Specifically, you
-            grant the `s3express:CreateSession` permission to the directory
-            bucket in a bucket policy or an IAM identity-based policy. Then, you
-            make the `CreateSession` API call on the bucket to obtain a session
-            token. With the session token in your request header, you can make
-            API requests to this operation. After the session token expires, you
-            make another `CreateSession` API call to generate a new session
-            token for use. Amazon Web Services CLI or SDKs create session and
-            refresh the session token automatically to avoid service
-            interruptions when a session expires. For more information about
-            authorization, see
-            [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
-            .
+            - **Directory bucket permissions** - To grant access to this API
+              operation on a directory bucket, we recommend that you use the
+              [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
+              API operation for session-based authorization. Specifically, you
+              grant the `s3express:CreateSession` permission to the directory
+              bucket in a bucket policy or an IAM identity-based policy. Then,
+              you make the `CreateSession` API call on the bucket to obtain a
+              session token. With the session token in your request header, you
+              can make API requests to this operation. After the session token
+              expires, you make another `CreateSession` API call to generate a
+              new session token for use. Amazon Web Services CLI or SDKs create
+              session and refresh the session token automatically to avoid
+              service interruptions when a session expires. For more information
+              about authorization, see
+              [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
+              .
 
-            If you enable `x-amz-checksum-mode` in the request and the object is
-            encrypted with Amazon Web Services Key Management Service (Amazon
-            Web Services KMS), you must also have the `kms:GenerateDataKey` and
-            `kms:Decrypt` permissions in IAM identity-based policies and KMS key
-            policies for the KMS key to retrieve the checksum of the object.
+              If you enable `x-amz-checksum-mode` in the request and the object
+              is encrypted with Amazon Web Services Key Management Service
+              (Amazon Web Services KMS), you must also have the
+              `kms:GenerateDataKey` and `kms:Decrypt` permissions in IAM
+              identity-based policies and KMS key policies for the KMS key to
+              retrieve the checksum of the object.
 
         Encryption
 
-        : Note:
+        :   Note:
             Encryption request headers, like `x-amz-server-side-encryption`,
-            should not be sent for `HEAD` requests if your object uses server-side
-            encryption with Key Management Service (KMS) keys (SSE-KMS),
-            dual-layer server-side encryption with Amazon Web Services KMS keys
-            (DSSE-KMS), or server-side encryption with Amazon S3 managed
-            encryption keys (SSE-S3). The `x-amz-server-side-encryption` header is
-            used when you `PUT` an object to S3 and want to specify the encryption
-            method. If you include this header in a `HEAD` request for an object
-            that uses these types of keys, you'll get an HTTP `400 Bad Request`
-            error. It's because the encryption method can't be changed when you
+            should not be sent for `HEAD` requests if your object uses
+            server-side encryption with Key Management Service (KMS) keys
+            (SSE-KMS), dual-layer server-side encryption with Amazon Web
+            Services KMS keys (DSSE-KMS), or server-side encryption with Amazon
+            S3 managed encryption keys (SSE-S3). The
+            `x-amz-server-side-encryption` header is used when you `PUT` an
+            object to S3 and want to specify the encryption method. If you
+            include this header in a `HEAD` request for an object that uses
+            these types of keys, you'll get an HTTP `400 Bad Request` error.
+            It's because the encryption method can't be changed when you
             retrieve the object.
-          If you encrypt an object by using server-side encryption with
-          customer-provided encryption keys (SSE-C) when you store the object in
-          Amazon S3, then when you retrieve the metadata from the object, you
-          must use the following headers to provide the encryption key for the
-          server to be able to retrieve the object's metadata. The headers are:
+            If you encrypt an object by using server-side encryption with
+            customer-provided encryption keys (SSE-C) when you store the object
+            in Amazon S3, then when you retrieve the metadata from the object,
+            you must use the following headers to provide the encryption key for
+            the server to be able to retrieve the object's metadata. The
+            headers are:
 
-          - `x-amz-server-side-encryption-customer-algorithm`
+            - `x-amz-server-side-encryption-customer-algorithm`
 
-          - `x-amz-server-side-encryption-customer-key`
+            - `x-amz-server-side-encryption-customer-key`
 
-          - `x-amz-server-side-encryption-customer-key-MD5`
+            - `x-amz-server-side-encryption-customer-key-MD5`
 
-          For more information about SSE-C, see [Server-Side Encryption (Using
-          Customer-Provided Encryption
-          Keys)](https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html)
-          in the *Amazon S3 User Guide*.
+            For more information about SSE-C, see [Server-Side Encryption (Using
+            Customer-Provided Encryption
+            Keys)](https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html)
+            in the *Amazon S3 User Guide*.
 
-          Note:
+            Note:
             **Directory bucket** - For directory buckets, there are only two
             supported options for server-side encryption: SSE-S3 and SSE-KMS.
             SSE-C isn't supported. For more information, see [Protecting data
@@ -5399,39 +6616,40 @@ class S3Client(Client[S3Config]):
 
         Versioning
 
-        : - If the current version of the object is a delete marker, Amazon S3
-            behaves as if the object was deleted and includes
-            `x-amz-delete-marker: true` in the response.
+        :   - If the current version of the object is a delete marker, Amazon S3
+              behaves as if the object was deleted and includes
+              `x-amz-delete-marker: true` in the response.
 
-          - If the specified version is a delete marker, the response returns a
-            `405 Method Not Allowed` error and the `Last-Modified: timestamp`
-            response header.
+            - If the specified version is a delete marker, the response returns
+              a `405 Method Not Allowed` error and the
+              `Last-Modified: timestamp` response header.
 
-          Note:
-            - **Directory buckets** - Delete marker is not supported for directory
-            buckets.
+            Note:
+            - **Directory buckets** - Delete marker is not supported for
+            directory buckets.
 
             - **Directory buckets** - S3 Versioning isn't enabled and supported
-            for directory buckets. For this API operation, only the `null` value
-            of the version ID is supported by directory buckets. You can only
-            specify `null` to the `versionId` query parameter in the request.
+            for directory buckets. For this API operation, only the `null`
+            value of the version ID is supported by directory buckets. You can
+            only specify `null` to the `versionId` query parameter in the
+            request.
 
         HTTP Host header syntax
 
-        : **Directory buckets** - The HTTP Host header syntax is
-          ` `*`Bucket-name`*`.s3express-`*`zone-id`*`.`*`region-code`*`.amazonaws.com`.
+        :   **Directory buckets** - The HTTP Host header syntax is
+            ` `*`Bucket-name`*`.s3express-`*`zone-id`*`.`*`region-code`*`.amazonaws.com`.
 
-          Note:
+            Note:
             For directory buckets, you must make requests for this API operation
             to the Zonal endpoint. These endpoints support virtual-hosted-style
             requests in the format
             `https://`*`amzn-s3-demo-bucket`*`.s3express-`*`zone-id`*`.`*`region-code`*`.amazonaws.com/`*`key-name`*` `.
             Path-style requests are not supported. For more information about
-            endpoints in Availability Zones, see [Regional and Zonal endpoints for
-            directory buckets in Availability
+            endpoints in Availability Zones, see [Regional and Zonal endpoints
+            for directory buckets in Availability
             Zones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html)
-            in the *Amazon S3 User Guide*. For more information about endpoints in
-            Local Zones, see [Concepts for directory buckets in Local
+            in the *Amazon S3 User Guide*. For more information about endpoints
+            in Local Zones, see [Concepts for directory buckets in Local
             Zones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html)
             in the *Amazon S3 User Guide*.
 
@@ -5447,8 +6665,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `HeadObjectInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5458,12 +6674,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `HeadObjectOutput`.
         """
-        return self._invoke(input, _models.HEAD_OBJECT, [], plugins)
 
+    def head_object(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> HeadObjectOutput:
+        return self._invoke(
+            self._select_input(_models.HEAD_OBJECT, args, kwargs),
+            _models.HEAD_OBJECT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_bucket_analytics_configurations(
         self,
-        input: ListBucketAnalyticsConfigurationsInput,
+        request: _models.ListBucketAnalyticsConfigurationsInput
+        | _models.ListBucketAnalyticsConfigurationsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListBucketAnalyticsConfigurationsOutput: ...
+
+    @_overload
+    def list_bucket_analytics_configurations(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListBucketAnalyticsConfigurationsInputDict],
     ) -> ListBucketAnalyticsConfigurationsOutput:
         """
         Note:
@@ -5509,8 +6747,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `ListBucketAnalyticsConfigurationsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5520,14 +6756,36 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `ListBucketAnalyticsConfigurationsOutput`.
         """
+
+    def list_bucket_analytics_configurations(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListBucketAnalyticsConfigurationsOutput:
         return self._invoke(
-            input, _models.LIST_BUCKET_ANALYTICS_CONFIGURATIONS, [], plugins
+            self._select_input(
+                _models.LIST_BUCKET_ANALYTICS_CONFIGURATIONS, args, kwargs
+            ),
+            _models.LIST_BUCKET_ANALYTICS_CONFIGURATIONS,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_bucket_intelligent_tiering_configurations(
         self,
-        input: ListBucketIntelligentTieringConfigurationsInput,
+        request: _models.ListBucketIntelligentTieringConfigurationsInput
+        | _models.ListBucketIntelligentTieringConfigurationsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListBucketIntelligentTieringConfigurationsOutput: ...
+
+    @_overload
+    def list_bucket_intelligent_tiering_configurations(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListBucketIntelligentTieringConfigurationsInputDict],
     ) -> ListBucketIntelligentTieringConfigurationsOutput:
         """
         Note:
@@ -5571,8 +6829,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `ListBucketIntelligentTieringConfigurationsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5582,14 +6838,36 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `ListBucketIntelligentTieringConfigurationsOutput`.
         """
+
+    def list_bucket_intelligent_tiering_configurations(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListBucketIntelligentTieringConfigurationsOutput:
         return self._invoke(
-            input, _models.LIST_BUCKET_INTELLIGENT_TIERING_CONFIGURATIONS, [], plugins
+            self._select_input(
+                _models.LIST_BUCKET_INTELLIGENT_TIERING_CONFIGURATIONS, args, kwargs
+            ),
+            _models.LIST_BUCKET_INTELLIGENT_TIERING_CONFIGURATIONS,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_bucket_inventory_configurations(
         self,
-        input: ListBucketInventoryConfigurationsInput,
+        request: _models.ListBucketInventoryConfigurationsInput
+        | _models.ListBucketInventoryConfigurationsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListBucketInventoryConfigurationsOutput: ...
+
+    @_overload
+    def list_bucket_inventory_configurations(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListBucketInventoryConfigurationsInputDict],
     ) -> ListBucketInventoryConfigurationsOutput:
         """
         Returns a list of S3 Inventory configurations for the bucket. You can
@@ -5620,35 +6898,35 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : To use this operation, you must have permissions to perform the
-          `s3:GetInventoryConfiguration` action. The bucket owner has this
-          permission by default. The bucket owner can grant this permission to
-          others. For more information about permissions, see [Permissions
-          Related to Bucket Subresource
-          Operations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
-          and [Managing Access Permissions to Your Amazon S3
-          Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
+        :   To use this operation, you must have permissions to perform the
+            `s3:GetInventoryConfiguration` action. The bucket owner has this
+            permission by default. The bucket owner can grant this permission to
+            others. For more information about permissions, see [Permissions
+            Related to Bucket Subresource
+            Operations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+            and [Managing Access Permissions to Your Amazon S3
+            Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
 
-          - **General purpose bucket permissions** - The
-            `s3:GetInventoryConfiguration` permission is required in a policy.
-            For more information about general purpose buckets permissions, see
-            [Using Bucket Policies and User
-            Policies](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html)
-            in the *Amazon S3 User Guide*.
+            - **General purpose bucket permissions** - The
+              `s3:GetInventoryConfiguration` permission is required in a policy.
+              For more information about general purpose buckets permissions,
+              see [Using Bucket Policies and User
+              Policies](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html)
+              in the *Amazon S3 User Guide*.
 
-          - **Directory bucket permissions** - To grant access to this API
-            operation, you must have the `s3express:GetInventoryConfiguration`
-            permission in an IAM identity-based policy instead of a bucket
-            policy. For more information about directory bucket policies and
-            permissions, see [Amazon Web Services Identity and Access Management
-            (IAM) for S3 Express One
-            Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html)
-            in the *Amazon S3 User Guide*.
+            - **Directory bucket permissions** - To grant access to this API
+              operation, you must have the `s3express:GetInventoryConfiguration`
+              permission in an IAM identity-based policy instead of a bucket
+              policy. For more information about directory bucket policies and
+              permissions, see [Amazon Web Services Identity and Access
+              Management (IAM) for S3 Express One
+              Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html)
+              in the *Amazon S3 User Guide*.
 
         HTTP Host header syntax
 
-        : **Directory buckets** - The HTTP Host header syntax is
-          `s3express-control.`*`region-code`*`.amazonaws.com`.
+        :   **Directory buckets** - The HTTP Host header syntax is
+            `s3express-control.`*`region-code`*`.amazonaws.com`.
 
         For information about the Amazon S3 inventory feature, see [Amazon S3
         Inventory](https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-inventory.html)
@@ -5668,8 +6946,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `ListBucketInventoryConfigurationsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5679,14 +6955,36 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `ListBucketInventoryConfigurationsOutput`.
         """
+
+    def list_bucket_inventory_configurations(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListBucketInventoryConfigurationsOutput:
         return self._invoke(
-            input, _models.LIST_BUCKET_INVENTORY_CONFIGURATIONS, [], plugins
+            self._select_input(
+                _models.LIST_BUCKET_INVENTORY_CONFIGURATIONS, args, kwargs
+            ),
+            _models.LIST_BUCKET_INVENTORY_CONFIGURATIONS,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_bucket_metrics_configurations(
         self,
-        input: ListBucketMetricsConfigurationsInput,
+        request: _models.ListBucketMetricsConfigurationsInput
+        | _models.ListBucketMetricsConfigurationsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListBucketMetricsConfigurationsOutput: ...
+
+    @_overload
+    def list_bucket_metrics_configurations(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListBucketMetricsConfigurationsInputDict],
     ) -> ListBucketMetricsConfigurationsOutput:
         """
         Lists the metrics configurations for the bucket. The metrics
@@ -5719,37 +7017,37 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : To use this operation, you must have permissions to perform the
-          `s3:GetMetricsConfiguration` action. The bucket owner has this
-          permission by default. The bucket owner can grant this permission to
-          others. For more information about permissions, see [Permissions
-          Related to Bucket Subresource
-          Operations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
-          and [Managing Access Permissions to Your Amazon S3
-          Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
+        :   To use this operation, you must have permissions to perform the
+            `s3:GetMetricsConfiguration` action. The bucket owner has this
+            permission by default. The bucket owner can grant this permission to
+            others. For more information about permissions, see [Permissions
+            Related to Bucket Subresource
+            Operations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+            and [Managing Access Permissions to Your Amazon S3
+            Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
 
-          - **General purpose bucket permissions** - The
-            `s3:GetMetricsConfiguration` permission is required in a policy. For
-            more information about general purpose buckets permissions, see
-            [Using Bucket Policies and User
-            Policies](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html)
-            in the *Amazon S3 User Guide*.
+            - **General purpose bucket permissions** - The
+              `s3:GetMetricsConfiguration` permission is required in a policy.
+              For more information about general purpose buckets permissions,
+              see [Using Bucket Policies and User
+              Policies](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html)
+              in the *Amazon S3 User Guide*.
 
-          - **Directory bucket permissions** - To grant access to this API
-            operation, you must have the `s3express:GetMetricsConfiguration`
-            permission in an IAM identity-based policy instead of a bucket
-            policy. Cross-account access to this API operation isn't supported.
-            This operation can only be performed by the Amazon Web Services
-            account that owns the resource. For more information about directory
-            bucket policies and permissions, see [Amazon Web Services Identity
-            and Access Management (IAM) for S3 Express One
-            Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html)
-            in the *Amazon S3 User Guide*.
+            - **Directory bucket permissions** - To grant access to this API
+              operation, you must have the `s3express:GetMetricsConfiguration`
+              permission in an IAM identity-based policy instead of a bucket
+              policy. Cross-account access to this API operation isn't
+              supported. This operation can only be performed by the Amazon Web
+              Services account that owns the resource. For more information
+              about directory bucket policies and permissions, see [Amazon Web
+              Services Identity and Access Management (IAM) for S3 Express One
+              Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html)
+              in the *Amazon S3 User Guide*.
 
         HTTP Host header syntax
 
-        : **Directory buckets** - The HTTP Host header syntax is
-          `s3express-control.`*`region-code`*`.amazonaws.com`.
+        :   **Directory buckets** - The HTTP Host header syntax is
+            `s3express-control.`*`region-code`*`.amazonaws.com`.
 
         For more information about metrics configurations and CloudWatch request
         metrics, see [Monitoring Metrics with Amazon
@@ -5770,8 +7068,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `ListBucketMetricsConfigurationsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5781,12 +7077,35 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `ListBucketMetricsConfigurationsOutput`.
         """
+
+    def list_bucket_metrics_configurations(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListBucketMetricsConfigurationsOutput:
         return self._invoke(
-            input, _models.LIST_BUCKET_METRICS_CONFIGURATIONS, [], plugins
+            self._select_input(
+                _models.LIST_BUCKET_METRICS_CONFIGURATIONS, args, kwargs
+            ),
+            _models.LIST_BUCKET_METRICS_CONFIGURATIONS,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_buckets(
-        self, input: ListBucketsInput | None = None, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListBucketsInput | _models.ListBucketsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListBucketsOutput: ...
+
+    @_overload
+    def list_buckets(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListBucketsInputDict],
     ) -> ListBucketsOutput:
         """
         Note:
@@ -5815,8 +7134,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `ListBucketsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5826,12 +7143,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `ListBucketsOutput`.
         """
-        return self._invoke(input, _models.LIST_BUCKETS, [], plugins)
 
+    def list_buckets(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListBucketsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_BUCKETS, args, kwargs),
+            _models.LIST_BUCKETS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_directory_buckets(
         self,
-        input: ListDirectoryBucketsInput | None = None,
+        request: _models.ListDirectoryBucketsInput
+        | _models.ListDirectoryBucketsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListDirectoryBucketsOutput: ...
+
+    @_overload
+    def list_directory_buckets(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListDirectoryBucketsInputDict],
     ) -> ListDirectoryBucketsOutput:
         """
         Returns a list of all Amazon S3 directory buckets owned by the
@@ -5856,20 +7195,20 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : You must have the `s3express:ListAllMyDirectoryBuckets` permission in
-          an IAM identity-based policy instead of a bucket policy. Cross-account
-          access to this API operation isn't supported. This operation can only
-          be performed by the Amazon Web Services account that owns the
-          resource. For more information about directory bucket policies and
-          permissions, see [Amazon Web Services Identity and Access Management
-          (IAM) for S3 Express One
-          Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html)
-          in the *Amazon S3 User Guide*.
+        :   You must have the `s3express:ListAllMyDirectoryBuckets` permission
+            in an IAM identity-based policy instead of a bucket policy.
+            Cross-account access to this API operation isn't supported. This
+            operation can only be performed by the Amazon Web Services account
+            that owns the resource. For more information about directory bucket
+            policies and permissions, see [Amazon Web Services Identity and
+            Access Management (IAM) for S3 Express One
+            Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html)
+            in the *Amazon S3 User Guide*.
 
         HTTP Host header syntax
 
-        : **Directory buckets** - The HTTP Host header syntax is
-          `s3express-control.`*`region`*`.amazonaws.com`.
+        :   **Directory buckets** - The HTTP Host header syntax is
+            `s3express-control.`*`region`*`.amazonaws.com`.
 
         Note:
             The `BucketRegion` response element is not part of the
@@ -5880,8 +7219,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `ListDirectoryBucketsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -5891,10 +7228,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `ListDirectoryBucketsOutput`.
         """
-        return self._invoke(input, _models.LIST_DIRECTORY_BUCKETS, [], plugins)
 
+    def list_directory_buckets(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListDirectoryBucketsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_DIRECTORY_BUCKETS, args, kwargs),
+            _models.LIST_DIRECTORY_BUCKETS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_multipart_uploads(
-        self, input: ListMultipartUploadsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListMultipartUploadsInput
+        | _models.ListMultipartUploadsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListMultipartUploadsOutput: ...
+
+    @_overload
+    def list_multipart_uploads(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListMultipartUploadsInputDict],
     ) -> ListMultipartUploadsOutput:
         """
         This operation lists in-progress multipart uploads in a bucket. An
@@ -5953,51 +7314,51 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : - **General purpose bucket permissions** - For information about
-            permissions required to use the multipart upload API, see [Multipart
-            Upload and
-            Permissions](https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html)
-            in the *Amazon S3 User Guide*.
+        :   - **General purpose bucket permissions** - For information about
+              permissions required to use the multipart upload API, see
+              [Multipart Upload and
+              Permissions](https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html)
+              in the *Amazon S3 User Guide*.
 
-          - **Directory bucket permissions** - To grant access to this API
-            operation on a directory bucket, we recommend that you use the
-            [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
-            API operation for session-based authorization. Specifically, you
-            grant the `s3express:CreateSession` permission to the directory
-            bucket in a bucket policy or an IAM identity-based policy. Then, you
-            make the `CreateSession` API call on the bucket to obtain a session
-            token. With the session token in your request header, you can make
-            API requests to this operation. After the session token expires, you
-            make another `CreateSession` API call to generate a new session
-            token for use. Amazon Web Services CLI or SDKs create session and
-            refresh the session token automatically to avoid service
-            interruptions when a session expires. For more information about
-            authorization, see
-            [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
-            .
+            - **Directory bucket permissions** - To grant access to this API
+              operation on a directory bucket, we recommend that you use the
+              [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
+              API operation for session-based authorization. Specifically, you
+              grant the `s3express:CreateSession` permission to the directory
+              bucket in a bucket policy or an IAM identity-based policy. Then,
+              you make the `CreateSession` API call on the bucket to obtain a
+              session token. With the session token in your request header, you
+              can make API requests to this operation. After the session token
+              expires, you make another `CreateSession` API call to generate a
+              new session token for use. Amazon Web Services CLI or SDKs create
+              session and refresh the session token automatically to avoid
+              service interruptions when a session expires. For more information
+              about authorization, see
+              [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
+              .
 
         Sorting of multipart uploads in response
 
-        : - **General purpose bucket** - In the `ListMultipartUploads` response,
-            the multipart uploads are sorted based on two criteria:
+        :   - **General purpose bucket** - In the `ListMultipartUploads`
+              response, the multipart uploads are sorted based on two criteria:
 
-            - Key-based sorting - Multipart uploads are initially sorted in
-              ascending order based on their object keys.
+              - Key-based sorting - Multipart uploads are initially sorted in
+                ascending order based on their object keys.
 
-            - Time-based sorting - For uploads that share the same object key,
-              they are further sorted in ascending order based on the upload
-              initiation time. Among uploads with the same key, the one that was
-              initiated first will appear before the ones that were initiated
-              later.
+              - Time-based sorting - For uploads that share the same object key,
+                they are further sorted in ascending order based on the upload
+                initiation time. Among uploads with the same key, the one that
+                was initiated first will appear before the ones that were
+                initiated later.
 
-          - **Directory bucket** - In the `ListMultipartUploads` response, the
-            multipart uploads aren't sorted lexicographically based on the
-            object keys.
+            - **Directory bucket** - In the `ListMultipartUploads` response, the
+              multipart uploads aren't sorted lexicographically based on the
+              object keys.
 
         HTTP Host header syntax
 
-        : **Directory buckets** - The HTTP Host header syntax is
-          ` `*`Bucket-name`*`.s3express-`*`zone-id`*`.`*`region-code`*`.amazonaws.com`.
+        :   **Directory buckets** - The HTTP Host header syntax is
+            ` `*`Bucket-name`*`.s3express-`*`zone-id`*`.`*`region-code`*`.amazonaws.com`.
 
         The following operations are related to `ListMultipartUploads`:
 
@@ -6017,8 +7378,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `ListMultipartUploadsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -6028,10 +7387,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `ListMultipartUploadsOutput`.
         """
-        return self._invoke(input, _models.LIST_MULTIPART_UPLOADS, [], plugins)
 
+    def list_multipart_uploads(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListMultipartUploadsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_MULTIPART_UPLOADS, args, kwargs),
+            _models.LIST_MULTIPART_UPLOADS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_object_annotations(
-        self, input: ListObjectAnnotationsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListObjectAnnotationsInput
+        | _models.ListObjectAnnotationsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListObjectAnnotationsOutput: ...
+
+    @_overload
+    def list_object_annotations(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListObjectAnnotationsInputDict],
     ) -> ListObjectAnnotationsOutput:
         """
         Lists the annotations attached to an Amazon S3 object. Results are
@@ -6055,8 +7438,6 @@ class S3Client(Client[S3Config]):
         - [DeleteObjectAnnotation](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObjectAnnotation.html)
 
         Args:
-            input:
-                An instance of `ListObjectAnnotationsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -6066,10 +7447,33 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `ListObjectAnnotationsOutput`.
         """
-        return self._invoke(input, _models.LIST_OBJECT_ANNOTATIONS, [], plugins)
 
+    def list_object_annotations(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListObjectAnnotationsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_OBJECT_ANNOTATIONS, args, kwargs),
+            _models.LIST_OBJECT_ANNOTATIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_objects(
-        self, input: ListObjectsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListObjectsInput | _models.ListObjectsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListObjectsOutput: ...
+
+    @_overload
+    def list_objects(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListObjectsInputDict],
     ) -> ListObjectsOutput:
         """
         Note:
@@ -6106,8 +7510,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `ListObjectsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -6117,10 +7519,33 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `ListObjectsOutput`.
         """
-        return self._invoke(input, _models.LIST_OBJECTS, [], plugins)
 
+    def list_objects(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListObjectsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_OBJECTS, args, kwargs),
+            _models.LIST_OBJECTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_objects_v2(
-        self, input: ListObjectsV2Input, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListObjectsV2Input | _models.ListObjectsV2InputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListObjectsV2Output: ...
+
+    @_overload
+    def list_objects_v2(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListObjectsV2InputDict],
     ) -> ListObjectsV2Output:
         """
         Returns some or all (up to 1,000) of the objects in a bucket with each
@@ -6157,47 +7582,47 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : - **General purpose bucket permissions** - To use this operation, you
-            must have READ access to the bucket. You must have permission to
-            perform the `s3:ListBucket` action. The bucket owner has this
-            permission by default and can grant this permission to others. For
-            more information about permissions, see [Permissions Related to
-            Bucket Subresource
-            Operations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
-            and [Managing Access Permissions to Your Amazon S3
-            Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html)
-            in the *Amazon S3 User Guide*.
+        :   - **General purpose bucket permissions** - To use this operation,
+              you must have READ access to the bucket. You must have permission
+              to perform the `s3:ListBucket` action. The bucket owner has this
+              permission by default and can grant this permission to others. For
+              more information about permissions, see [Permissions Related to
+              Bucket Subresource
+              Operations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+              and [Managing Access Permissions to Your Amazon S3
+              Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html)
+              in the *Amazon S3 User Guide*.
 
-          - **Directory bucket permissions** - To grant access to this API
-            operation on a directory bucket, we recommend that you use the
-            [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
-            API operation for session-based authorization. Specifically, you
-            grant the `s3express:CreateSession` permission to the directory
-            bucket in a bucket policy or an IAM identity-based policy. Then, you
-            make the `CreateSession` API call on the bucket to obtain a session
-            token. With the session token in your request header, you can make
-            API requests to this operation. After the session token expires, you
-            make another `CreateSession` API call to generate a new session
-            token for use. Amazon Web Services CLI or SDKs create session and
-            refresh the session token automatically to avoid service
-            interruptions when a session expires. For more information about
-            authorization, see
-            [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
-            .
+            - **Directory bucket permissions** - To grant access to this API
+              operation on a directory bucket, we recommend that you use the
+              [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
+              API operation for session-based authorization. Specifically, you
+              grant the `s3express:CreateSession` permission to the directory
+              bucket in a bucket policy or an IAM identity-based policy. Then,
+              you make the `CreateSession` API call on the bucket to obtain a
+              session token. With the session token in your request header, you
+              can make API requests to this operation. After the session token
+              expires, you make another `CreateSession` API call to generate a
+              new session token for use. Amazon Web Services CLI or SDKs create
+              session and refresh the session token automatically to avoid
+              service interruptions when a session expires. For more information
+              about authorization, see
+              [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
+              .
 
         Sorting order of returned objects
 
-        : - **General purpose bucket** - For general purpose buckets,
-            `ListObjectsV2` returns objects in lexicographical order based on
-            their key names.
+        :   - **General purpose bucket** - For general purpose buckets,
+              `ListObjectsV2` returns objects in lexicographical order based on
+              their key names.
 
-          - **Directory bucket** - For directory buckets, `ListObjectsV2` does
-            not return objects in lexicographical order.
+            - **Directory bucket** - For directory buckets, `ListObjectsV2` does
+              not return objects in lexicographical order.
 
         HTTP Host header syntax
 
-        : **Directory buckets** - The HTTP Host header syntax is
-          ` `*`Bucket-name`*`.s3express-`*`zone-id`*`.`*`region-code`*`.amazonaws.com`.
+        :   **Directory buckets** - The HTTP Host header syntax is
+            ` `*`Bucket-name`*`.s3express-`*`zone-id`*`.`*`region-code`*`.amazonaws.com`.
 
         Warning:
             This section describes the latest revision of this action. We recommend
@@ -6220,8 +7645,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `ListObjectsV2Input`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -6231,10 +7654,33 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `ListObjectsV2Output`.
         """
-        return self._invoke(input, _models.LIST_OBJECTS_V2, [], plugins)
 
+    def list_objects_v2(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListObjectsV2Output:
+        return self._invoke(
+            self._select_input(_models.LIST_OBJECTS_V2, args, kwargs),
+            _models.LIST_OBJECTS_V2,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_object_versions(
-        self, input: ListObjectVersionsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListObjectVersionsInput | _models.ListObjectVersionsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListObjectVersionsOutput: ...
+
+    @_overload
+    def list_object_versions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListObjectVersionsInputDict],
     ) -> ListObjectVersionsOutput:
         """
         Note:
@@ -6270,8 +7716,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `ListObjectVersionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -6281,10 +7725,33 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `ListObjectVersionsOutput`.
         """
-        return self._invoke(input, _models.LIST_OBJECT_VERSIONS, [], plugins)
 
+    def list_object_versions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListObjectVersionsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_OBJECT_VERSIONS, args, kwargs),
+            _models.LIST_OBJECT_VERSIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_parts(
-        self, input: ListPartsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListPartsInput | _models.ListPartsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListPartsOutput: ...
+
+    @_overload
+    def list_parts(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListPartsInputDict],
     ) -> ListPartsOutput:
         """
         Lists the parts that have been uploaded for a specific multipart upload.
@@ -6325,39 +7792,39 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : - **General purpose bucket permissions** - For information about
-            permissions required to use the multipart upload API, see [Multipart
-            Upload and
-            Permissions](https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html)
-            in the *Amazon S3 User Guide*.
+        :   - **General purpose bucket permissions** - For information about
+              permissions required to use the multipart upload API, see
+              [Multipart Upload and
+              Permissions](https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html)
+              in the *Amazon S3 User Guide*.
 
-            If the upload was created using server-side encryption with Key
-            Management Service (KMS) keys (SSE-KMS) or dual-layer server-side
-            encryption with Amazon Web Services KMS keys (DSSE-KMS), you must
-            have permission to the `kms:Decrypt` action for the `ListParts`
-            request to succeed.
+              If the upload was created using server-side encryption with Key
+              Management Service (KMS) keys (SSE-KMS) or dual-layer server-side
+              encryption with Amazon Web Services KMS keys (DSSE-KMS), you must
+              have permission to the `kms:Decrypt` action for the `ListParts`
+              request to succeed.
 
-          - **Directory bucket permissions** - To grant access to this API
-            operation on a directory bucket, we recommend that you use the
-            [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
-            API operation for session-based authorization. Specifically, you
-            grant the `s3express:CreateSession` permission to the directory
-            bucket in a bucket policy or an IAM identity-based policy. Then, you
-            make the `CreateSession` API call on the bucket to obtain a session
-            token. With the session token in your request header, you can make
-            API requests to this operation. After the session token expires, you
-            make another `CreateSession` API call to generate a new session
-            token for use. Amazon Web Services CLI or SDKs create session and
-            refresh the session token automatically to avoid service
-            interruptions when a session expires. For more information about
-            authorization, see
-            [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
-            .
+            - **Directory bucket permissions** - To grant access to this API
+              operation on a directory bucket, we recommend that you use the
+              [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
+              API operation for session-based authorization. Specifically, you
+              grant the `s3express:CreateSession` permission to the directory
+              bucket in a bucket policy or an IAM identity-based policy. Then,
+              you make the `CreateSession` API call on the bucket to obtain a
+              session token. With the session token in your request header, you
+              can make API requests to this operation. After the session token
+              expires, you make another `CreateSession` API call to generate a
+              new session token for use. Amazon Web Services CLI or SDKs create
+              session and refresh the session token automatically to avoid
+              service interruptions when a session expires. For more information
+              about authorization, see
+              [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
+              .
 
         HTTP Host header syntax
 
-        : **Directory buckets** - The HTTP Host header syntax is
-          ` `*`Bucket-name`*`.s3express-`*`zone-id`*`.`*`region-code`*`.amazonaws.com`.
+        :   **Directory buckets** - The HTTP Host header syntax is
+            ` `*`Bucket-name`*`.s3express-`*`zone-id`*`.`*`region-code`*`.amazonaws.com`.
 
         The following operations are related to `ListParts`:
 
@@ -6379,8 +7846,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `ListPartsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -6390,10 +7855,33 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `ListPartsOutput`.
         """
-        return self._invoke(input, _models.LIST_PARTS, [], plugins)
 
+    def list_parts(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListPartsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_PARTS, args, kwargs),
+            _models.LIST_PARTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_bucket_abac(
-        self, input: PutBucketAbacInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutBucketAbacInput | _models.PutBucketAbacInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutBucketAbacOutput: ...
+
+    @_overload
+    def put_bucket_abac(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutBucketAbacInputDict],
     ) -> PutBucketAbacOutput:
         """
         Sets the attribute-based access control (ABAC) property of the general
@@ -6412,8 +7900,6 @@ class S3Client(Client[S3Config]):
         buckets](https://docs.aws.amazon.com/AmazonS3/latest/userguide/buckets-tagging-enable-abac.html).
 
         Args:
-            input:
-                An instance of `PutBucketAbacInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -6423,12 +7909,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `PutBucketAbacOutput`.
         """
-        return self._invoke(input, _models.PUT_BUCKET_ABAC, [], plugins)
 
+    def put_bucket_abac(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutBucketAbacOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_BUCKET_ABAC, args, kwargs),
+            _models.PUT_BUCKET_ABAC,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_bucket_accelerate_configuration(
         self,
-        input: PutBucketAccelerateConfigurationInput,
+        request: _models.PutBucketAccelerateConfigurationInput
+        | _models.PutBucketAccelerateConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> PutBucketAccelerateConfigurationOutput: ...
+
+    @_overload
+    def put_bucket_accelerate_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutBucketAccelerateConfigurationInputDict],
     ) -> PutBucketAccelerateConfigurationOutput:
         """
         Note:
@@ -6481,8 +7989,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `PutBucketAccelerateConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -6492,12 +7998,35 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `PutBucketAccelerateConfigurationOutput`.
         """
+
+    def put_bucket_accelerate_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutBucketAccelerateConfigurationOutput:
         return self._invoke(
-            input, _models.PUT_BUCKET_ACCELERATE_CONFIGURATION, [], plugins
+            self._select_input(
+                _models.PUT_BUCKET_ACCELERATE_CONFIGURATION, args, kwargs
+            ),
+            _models.PUT_BUCKET_ACCELERATE_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     def put_bucket_acl(
-        self, input: PutBucketAclInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutBucketAclInput | _models.PutBucketAclInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutBucketAclOutput: ...
+
+    @_overload
+    def put_bucket_acl(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutBucketAclInputDict],
     ) -> PutBucketAclOutput:
         """
         Warning:
@@ -6546,37 +8075,100 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : You can set access permissions by using one of the following methods:
+        :   You can set access permissions by using one of the following
+            methods:
 
-          - Specify a canned ACL with the `x-amz-acl` request header. Amazon S3
-            supports a set of predefined ACLs, known as *canned ACLs*. Each
-            canned ACL has a predefined set of grantees and permissions. Specify
-            the canned ACL name as the value of `x-amz-acl`. If you use this
-            header, you cannot use other access control-specific headers in your
-            request. For more information, see [Canned
-            ACL](https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL).
+            - Specify a canned ACL with the `x-amz-acl` request header. Amazon
+              S3 supports a set of predefined ACLs, known as *canned ACLs*. Each
+              canned ACL has a predefined set of grantees and permissions.
+              Specify the canned ACL name as the value of `x-amz-acl`. If you
+              use this header, you cannot use other access control-specific
+              headers in your request. For more information, see [Canned
+              ACL](https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL).
 
-          - Specify access permissions explicitly with the `x-amz-grant-read`,
-            `x-amz-grant-read-acp`, `x-amz-grant-write-acp`, and
-            `x-amz-grant-full-control` headers. When using these headers, you
-            specify explicit access permissions and grantees (Amazon Web
-            Services accounts or Amazon S3 groups) who will receive the
-            permission. If you use these ACL-specific headers, you cannot use
-            the `x-amz-acl` header to set a canned ACL. These parameters map to
-            the set of permissions that Amazon S3 supports in an ACL. For more
-            information, see [Access Control List (ACL)
-            Overview](https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html).
+            - Specify access permissions explicitly with the `x-amz-grant-read`,
+              `x-amz-grant-read-acp`, `x-amz-grant-write-acp`, and
+              `x-amz-grant-full-control` headers. When using these headers, you
+              specify explicit access permissions and grantees (Amazon Web
+              Services accounts or Amazon S3 groups) who will receive the
+              permission. If you use these ACL-specific headers, you cannot use
+              the `x-amz-acl` header to set a canned ACL. These parameters map
+              to the set of permissions that Amazon S3 supports in an ACL. For
+              more information, see [Access Control List (ACL)
+              Overview](https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html).
 
-            You specify each grantee as a type=value pair, where the type is one
-            of the following:
+              You specify each grantee as a type=value pair, where the type is
+              one of the following:
 
-            - `id` -- if the value specified is the canonical user ID of an
-              Amazon Web Services account
+              - `id` -- if the value specified is the canonical user ID of an
+                Amazon Web Services account
 
-            - `uri` -- if you are granting permissions to a predefined group
+              - `uri` -- if you are granting permissions to a predefined group
 
-            - `emailAddress` -- if the value specified is the email address of
-              an Amazon Web Services account
+              - `emailAddress` -- if the value specified is the email address of
+                an Amazon Web Services account
+
+                Note:
+            Using email addresses to specify a grantee is only supported in
+            the following Amazon Web Services Regions:
+
+            - US East (N. Virginia)
+
+            - US West (N. California)
+
+            - US West (Oregon)
+
+            - Asia Pacific (Singapore)
+
+            - Asia Pacific (Sydney)
+
+            - Asia Pacific (Tokyo)
+
+            - Europe (Ireland)
+
+            - South America (São Paulo)
+
+            For a list of all the Amazon S3 supported Regions and endpoints,
+            see [Regions and
+            Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region)
+            in the Amazon Web Services General Reference.
+
+              For example, the following `x-amz-grant-write` header grants
+              create, overwrite, and delete objects permission to LogDelivery
+              group predefined by Amazon S3 and two Amazon Web Services accounts
+              identified by their email addresses.
+
+              `x-amz-grant-write: uri="http://acs.amazonaws.com/groups/s3/LogDelivery", id="111122223333", id="555566667777" `
+
+            You can use either a canned ACL or specify access permissions
+            explicitly. You cannot do both.
+
+        Grantee Values
+
+        :   You can specify the person (grantee) to whom you're assigning
+            access rights (using request elements) in the following ways. For
+            examples of how to specify these grantee values in JSON format, see
+            the Amazon Web Services CLI example in [Enabling Amazon S3 server
+            access
+            logging](https://docs.aws.amazon.com/AmazonS3/latest/userguide/enable-server-access-logging.html)
+            in the *Amazon S3 User Guide*.
+
+            - By the person's ID:
+
+              `<grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">`{=html}`<id>`{=html}`<>ID<>``</id>`{=html}`<displayname>`{=html}`<>GranteesEmail<>``</displayname>`{=html}` ``</grantee>`{=html}
+
+              DisplayName is optional and ignored in the request
+
+            - By URI:
+
+              `<grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">`{=html}`<uri>`{=html}`<>http://acs.amazonaws.com/groups/global/AuthenticatedUsers<>``</uri>`{=html}`</grantee>`{=html}
+
+            - By Email address:
+
+              `<grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="AmazonCustomerByEmail">`{=html}`<emailaddress>`{=html}`<>Grantees@email.com<>``</emailaddress>`{=html}`&``</grantee>`{=html}
+
+              The grantee is resolved to the CanonicalUser and, in a response to
+              a GET Object acl request, appears as the CanonicalUser.
 
               Note:
             Using email addresses to specify a grantee is only supported in
@@ -6603,67 +8195,6 @@ class S3Client(Client[S3Config]):
             Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region)
             in the Amazon Web Services General Reference.
 
-            For example, the following `x-amz-grant-write` header grants create,
-            overwrite, and delete objects permission to LogDelivery group
-            predefined by Amazon S3 and two Amazon Web Services accounts
-            identified by their email addresses.
-
-            `x-amz-grant-write: uri="http://acs.amazonaws.com/groups/s3/LogDelivery", id="111122223333", id="555566667777" `
-
-          You can use either a canned ACL or specify access permissions
-          explicitly. You cannot do both.
-
-        Grantee Values
-
-        : You can specify the person (grantee) to whom you're assigning access
-          rights (using request elements) in the following ways. For examples of
-          how to specify these grantee values in JSON format, see the Amazon Web
-          Services CLI example in [Enabling Amazon S3 server access
-          logging](https://docs.aws.amazon.com/AmazonS3/latest/userguide/enable-server-access-logging.html)
-          in the *Amazon S3 User Guide*.
-
-          - By the person's ID:
-
-            `<grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">`{=html}`<id>`{=html}`<>ID<>``</id>`{=html}`<displayname>`{=html}`<>GranteesEmail<>``</displayname>`{=html}` ``</grantee>`{=html}
-
-            DisplayName is optional and ignored in the request
-
-          - By URI:
-
-            `<grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">`{=html}`<uri>`{=html}`<>http://acs.amazonaws.com/groups/global/AuthenticatedUsers<>``</uri>`{=html}`</grantee>`{=html}
-
-          - By Email address:
-
-            `<grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="AmazonCustomerByEmail">`{=html}`<emailaddress>`{=html}`<>Grantees@email.com<>``</emailaddress>`{=html}`&``</grantee>`{=html}
-
-            The grantee is resolved to the CanonicalUser and, in a response to a
-            GET Object acl request, appears as the CanonicalUser.
-
-            Note:
-            Using email addresses to specify a grantee is only supported in the
-            following Amazon Web Services Regions:
-
-            - US East (N. Virginia)
-
-            - US West (N. California)
-
-            - US West (Oregon)
-
-            - Asia Pacific (Singapore)
-
-            - Asia Pacific (Sydney)
-
-            - Asia Pacific (Tokyo)
-
-            - Europe (Ireland)
-
-            - South America (São Paulo)
-
-            For a list of all the Amazon S3 supported Regions and endpoints, see
-            [Regions and
-            Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region)
-            in the Amazon Web Services General Reference.
-
         The following operations are related to `PutBucketAcl`:
 
         - [CreateBucket](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
@@ -6678,8 +8209,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `PutBucketAclInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -6689,12 +8218,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `PutBucketAclOutput`.
         """
-        return self._invoke(input, _models.PUT_BUCKET_ACL, [], plugins)
 
+    def put_bucket_acl(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutBucketAclOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_BUCKET_ACL, args, kwargs),
+            _models.PUT_BUCKET_ACL,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_bucket_analytics_configuration(
         self,
-        input: PutBucketAnalyticsConfigurationInput,
+        request: _models.PutBucketAnalyticsConfigurationInput
+        | _models.PutBucketAnalyticsConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> PutBucketAnalyticsConfigurationOutput: ...
+
+    @_overload
+    def put_bucket_analytics_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutBucketAnalyticsConfigurationInputDict],
     ) -> PutBucketAnalyticsConfigurationOutput:
         """
         Note:
@@ -6769,8 +8320,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `PutBucketAnalyticsConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -6780,12 +8329,35 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `PutBucketAnalyticsConfigurationOutput`.
         """
+
+    def put_bucket_analytics_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutBucketAnalyticsConfigurationOutput:
         return self._invoke(
-            input, _models.PUT_BUCKET_ANALYTICS_CONFIGURATION, [], plugins
+            self._select_input(
+                _models.PUT_BUCKET_ANALYTICS_CONFIGURATION, args, kwargs
+            ),
+            _models.PUT_BUCKET_ANALYTICS_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     def put_bucket_cors(
-        self, input: PutBucketCorsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutBucketCorsInput | _models.PutBucketCorsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutBucketCorsOutput: ...
+
+    @_overload
+    def put_bucket_cors(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutBucketCorsInputDict],
     ) -> PutBucketCorsOutput:
         """
         Note:
@@ -6843,8 +8415,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `PutBucketCorsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -6854,10 +8424,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `PutBucketCorsOutput`.
         """
-        return self._invoke(input, _models.PUT_BUCKET_CORS, [], plugins)
 
+    def put_bucket_cors(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutBucketCorsOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_BUCKET_CORS, args, kwargs),
+            _models.PUT_BUCKET_CORS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_bucket_encryption(
-        self, input: PutBucketEncryptionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutBucketEncryptionInput
+        | _models.PutBucketEncryptionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutBucketEncryptionOutput: ...
+
+    @_overload
+    def put_bucket_encryption(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutBucketEncryptionInputDict],
     ) -> PutBucketEncryptionOutput:
         """
         This operation configures default encryption and Amazon S3 Bucket Keys
@@ -6959,36 +8553,37 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : - **General purpose bucket permissions** - The
-            `s3:PutEncryptionConfiguration` permission is required in a policy.
-            The bucket owner has this permission by default. The bucket owner
-            can grant this permission to others. For more information about
-            permissions, see [Permissions Related to Bucket
-            Operations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
-            and [Managing Access Permissions to Your Amazon S3
-            Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html)
-            in the *Amazon S3 User Guide*.
+        :   - **General purpose bucket permissions** - The
+              `s3:PutEncryptionConfiguration` permission is required in a
+              policy. The bucket owner has this permission by default. The
+              bucket owner can grant this permission to others. For more
+              information about permissions, see [Permissions Related to Bucket
+              Operations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+              and [Managing Access Permissions to Your Amazon S3
+              Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html)
+              in the *Amazon S3 User Guide*.
 
-          - **Directory bucket permissions** - To grant access to this API
-            operation, you must have the `s3express:PutEncryptionConfiguration`
-            permission in an IAM identity-based policy instead of a bucket
-            policy. Cross-account access to this API operation isn't supported.
-            This operation can only be performed by the Amazon Web Services
-            account that owns the resource. For more information about directory
-            bucket policies and permissions, see [Amazon Web Services Identity
-            and Access Management (IAM) for S3 Express One
-            Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html)
-            in the *Amazon S3 User Guide*.
+            - **Directory bucket permissions** - To grant access to this API
+              operation, you must have the
+              `s3express:PutEncryptionConfiguration` permission in an IAM
+              identity-based policy instead of a bucket policy. Cross-account
+              access to this API operation isn't supported. This operation can
+              only be performed by the Amazon Web Services account that owns the
+              resource. For more information about directory bucket policies and
+              permissions, see [Amazon Web Services Identity and Access
+              Management (IAM) for S3 Express One
+              Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html)
+              in the *Amazon S3 User Guide*.
 
-            To set a directory bucket default encryption with SSE-KMS, you must
-            also have the `kms:GenerateDataKey` and the `kms:Decrypt`
-            permissions in IAM identity-based policies and KMS key policies for
-            the target KMS key.
+              To set a directory bucket default encryption with SSE-KMS, you
+              must also have the `kms:GenerateDataKey` and the `kms:Decrypt`
+              permissions in IAM identity-based policies and KMS key policies
+              for the target KMS key.
 
         HTTP Host header syntax
 
-        : **Directory buckets** - The HTTP Host header syntax is
-          `s3express-control.`*`region-code`*`.amazonaws.com`.
+        :   **Directory buckets** - The HTTP Host header syntax is
+            `s3express-control.`*`region-code`*`.amazonaws.com`.
 
         The following operations are related to `PutBucketEncryption`:
 
@@ -7002,8 +8597,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `PutBucketEncryptionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -7013,12 +8606,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `PutBucketEncryptionOutput`.
         """
-        return self._invoke(input, _models.PUT_BUCKET_ENCRYPTION, [], plugins)
 
+    def put_bucket_encryption(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutBucketEncryptionOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_BUCKET_ENCRYPTION, args, kwargs),
+            _models.PUT_BUCKET_ENCRYPTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_bucket_intelligent_tiering_configuration(
         self,
-        input: PutBucketIntelligentTieringConfigurationInput,
+        request: _models.PutBucketIntelligentTieringConfigurationInput
+        | _models.PutBucketIntelligentTieringConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> PutBucketIntelligentTieringConfigurationOutput: ...
+
+    @_overload
+    def put_bucket_intelligent_tiering_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutBucketIntelligentTieringConfigurationInputDict],
     ) -> PutBucketIntelligentTieringConfigurationOutput:
         """
         Note:
@@ -7066,22 +8681,22 @@ class S3Client(Client[S3Config]):
 
         HTTP 400 Bad Request Error
 
-        : *Code:* InvalidArgument
+        :   *Code:* InvalidArgument
 
-          *Cause:* Invalid Argument
+            *Cause:* Invalid Argument
 
         HTTP 400 Bad Request Error
 
-        : *Code:* TooManyConfigurations
+        :   *Code:* TooManyConfigurations
 
-          *Cause:* You are attempting to create a new configuration but have
-          already reached the 1,000-configuration limit.
+            *Cause:* You are attempting to create a new configuration but have
+            already reached the 1,000-configuration limit.
 
         HTTP 403 Forbidden Error
 
-        : *Cause:* You are not the owner of the specified bucket, or you do not
-          have the `s3:PutIntelligentTieringConfiguration` bucket permission to
-          set the configuration on the bucket.
+        :   *Cause:* You are not the owner of the specified bucket, or you do
+            not have the `s3:PutIntelligentTieringConfiguration` bucket
+            permission to set the configuration on the bucket.
 
         Warning:
             You must URL encode any signed header values that contain spaces. For
@@ -7089,8 +8704,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `PutBucketIntelligentTieringConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -7100,14 +8713,36 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `PutBucketIntelligentTieringConfigurationOutput`.
         """
+
+    def put_bucket_intelligent_tiering_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutBucketIntelligentTieringConfigurationOutput:
         return self._invoke(
-            input, _models.PUT_BUCKET_INTELLIGENT_TIERING_CONFIGURATION, [], plugins
+            self._select_input(
+                _models.PUT_BUCKET_INTELLIGENT_TIERING_CONFIGURATION, args, kwargs
+            ),
+            _models.PUT_BUCKET_INTELLIGENT_TIERING_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     def put_bucket_inventory_configuration(
         self,
-        input: PutBucketInventoryConfigurationInput,
+        request: _models.PutBucketInventoryConfigurationInput
+        | _models.PutBucketInventoryConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> PutBucketInventoryConfigurationOutput: ...
+
+    @_overload
+    def put_bucket_inventory_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutBucketInventoryConfigurationInputDict],
     ) -> PutBucketInventoryConfigurationOutput:
         """
         This implementation of the `PUT` action adds an S3 Inventory
@@ -7152,72 +8787,72 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : To use this operation, you must have permission to perform the
-          `s3:PutInventoryConfiguration` action. The bucket owner has this
-          permission by default and can grant this permission to others.
+        :   To use this operation, you must have permission to perform the
+            `s3:PutInventoryConfiguration` action. The bucket owner has this
+            permission by default and can grant this permission to others.
 
-          The `s3:PutInventoryConfiguration` permission allows a user to create
-          an [S3
-          Inventory](https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-inventory.html)
-          report that includes all object metadata fields available and to
-          specify the destination bucket to store the inventory. A user with
-          read access to objects in the destination bucket can also access all
-          object metadata fields that are available in the inventory report.
+            The `s3:PutInventoryConfiguration` permission allows a user to
+            create an [S3
+            Inventory](https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-inventory.html)
+            report that includes all object metadata fields available and to
+            specify the destination bucket to store the inventory. A user with
+            read access to objects in the destination bucket can also access all
+            object metadata fields that are available in the inventory report.
 
-          - **General purpose bucket permissions** - The
-            `s3:PutInventoryConfiguration` permission is required in a policy.
-            For more information about general purpose buckets permissions, see
-            [Using Bucket Policies and User
-            Policies](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html)
+            - **General purpose bucket permissions** - The
+              `s3:PutInventoryConfiguration` permission is required in a policy.
+              For more information about general purpose buckets permissions,
+              see [Using Bucket Policies and User
+              Policies](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html)
+              in the *Amazon S3 User Guide*.
+
+            - **Directory bucket permissions** - To grant access to this API
+              operation, you must have the `s3express:PutInventoryConfiguration`
+              permission in an IAM identity-based policy instead of a bucket
+              policy. For more information about directory bucket policies and
+              permissions, see [Amazon Web Services Identity and Access
+              Management (IAM) for S3 Express One
+              Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html)
+              in the *Amazon S3 User Guide*.
+
+            To restrict access to an inventory report, see [Restricting access
+            to an Amazon S3 Inventory
+            report](https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.html#example-bucket-policies-s3-inventory)
+            in the *Amazon S3 User Guide*. For more information about the
+            metadata fields available in S3 Inventory, see [Amazon S3 Inventory
+            lists](https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-inventory.html#storage-inventory-contents)
+            in the *Amazon S3 User Guide*. For more information about
+            permissions, see [Permissions related to bucket subresource
+            operations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+            and [Identity and access management in Amazon
+            S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html)
             in the *Amazon S3 User Guide*.
-
-          - **Directory bucket permissions** - To grant access to this API
-            operation, you must have the `s3express:PutInventoryConfiguration`
-            permission in an IAM identity-based policy instead of a bucket
-            policy. For more information about directory bucket policies and
-            permissions, see [Amazon Web Services Identity and Access Management
-            (IAM) for S3 Express One
-            Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html)
-            in the *Amazon S3 User Guide*.
-
-          To restrict access to an inventory report, see [Restricting access to
-          an Amazon S3 Inventory
-          report](https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.html#example-bucket-policies-s3-inventory)
-          in the *Amazon S3 User Guide*. For more information about the metadata
-          fields available in S3 Inventory, see [Amazon S3 Inventory
-          lists](https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-inventory.html#storage-inventory-contents)
-          in the *Amazon S3 User Guide*. For more information about permissions,
-          see [Permissions related to bucket subresource
-          operations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
-          and [Identity and access management in Amazon
-          S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html)
-          in the *Amazon S3 User Guide*.
 
         HTTP Host header syntax
 
-        : **Directory buckets** - The HTTP Host header syntax is
-          `s3express-control.`*`region-code`*`.amazonaws.com`.
+        :   **Directory buckets** - The HTTP Host header syntax is
+            `s3express-control.`*`region-code`*`.amazonaws.com`.
 
         `PutBucketInventoryConfiguration` has the following special errors:
 
         HTTP 400 Bad Request Error
 
-        : *Code:* InvalidArgument
+        :   *Code:* InvalidArgument
 
-          *Cause:* Invalid Argument
+            *Cause:* Invalid Argument
 
         HTTP 400 Bad Request Error
 
-        : *Code:* TooManyConfigurations
+        :   *Code:* TooManyConfigurations
 
-          *Cause:* You are attempting to create a new configuration but have
-          already reached the 1,000-configuration limit.
+            *Cause:* You are attempting to create a new configuration but have
+            already reached the 1,000-configuration limit.
 
         HTTP 403 Forbidden Error
 
-        : *Cause:* You are not the owner of the specified bucket, or you do not
-          have the `s3:PutInventoryConfiguration` bucket permission to set the
-          configuration on the bucket.
+        :   *Cause:* You are not the owner of the specified bucket, or you do
+            not have the `s3:PutInventoryConfiguration` bucket permission to set
+            the configuration on the bucket.
 
         The following operations are related to
         `PutBucketInventoryConfiguration`:
@@ -7234,8 +8869,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `PutBucketInventoryConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -7245,14 +8878,36 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `PutBucketInventoryConfigurationOutput`.
         """
+
+    def put_bucket_inventory_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutBucketInventoryConfigurationOutput:
         return self._invoke(
-            input, _models.PUT_BUCKET_INVENTORY_CONFIGURATION, [], plugins
+            self._select_input(
+                _models.PUT_BUCKET_INVENTORY_CONFIGURATION, args, kwargs
+            ),
+            _models.PUT_BUCKET_INVENTORY_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     def put_bucket_lifecycle_configuration(
         self,
-        input: PutBucketLifecycleConfigurationInput,
+        request: _models.PutBucketLifecycleConfigurationInput
+        | _models.PutBucketLifecycleConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> PutBucketLifecycleConfigurationOutput: ...
+
+    @_overload
+    def put_bucket_lifecycle_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutBucketLifecycleConfigurationInputDict],
     ) -> PutBucketLifecycleConfigurationOutput:
         """
         Creates a new lifecycle configuration for the bucket or replaces an
@@ -7274,109 +8929,110 @@ class S3Client(Client[S3Config]):
 
         Rules
 
-        : You specify the lifecycle configuration in your request body. The
-          lifecycle configuration is specified as XML consisting of one or more
-          rules. An Amazon S3 Lifecycle configuration can have up to 1,000
-          rules. This limit is not adjustable.
+        :   You specify the lifecycle configuration in your request body. The
+            lifecycle configuration is specified as XML consisting of one or
+            more rules. An Amazon S3 Lifecycle configuration can have up to
+            1,000 rules. This limit is not adjustable.
 
-          Bucket lifecycle configuration supports specifying a lifecycle rule
-          using an object key name prefix, one or more object tags, object size,
-          or any combination of these. Accordingly, this section describes the
-          latest API. The previous version of the API supported filtering based
-          only on an object key name prefix, which is supported for backward
-          compatibility for general purpose buckets. For the related API
-          description, see
-          [PutBucketLifecycle](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycle.html).
+            Bucket lifecycle configuration supports specifying a lifecycle rule
+            using an object key name prefix, one or more object tags, object
+            size, or any combination of these. Accordingly, this section
+            describes the latest API. The previous version of the API supported
+            filtering based only on an object key name prefix, which is
+            supported for backward compatibility for general purpose buckets.
+            For the related API description, see
+            [PutBucketLifecycle](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycle.html).
 
-          Note:
+            Note:
             Lifecyle configurations for directory buckets only support expiring
             objects and cancelling multipart uploads. Expiring of versioned
             objects,transitions and tag filters are not supported.
-          A lifecycle rule consists of the following:
+            A lifecycle rule consists of the following:
 
-          - A filter identifying a subset of objects to which the rule applies.
-            The filter can be based on a key name prefix, object tags, object
-            size, or any combination of these.
+            - A filter identifying a subset of objects to which the rule
+              applies. The filter can be based on a key name prefix, object
+              tags, object size, or any combination of these.
 
-          - A status indicating whether the rule is in effect.
+            - A status indicating whether the rule is in effect.
 
-          - One or more lifecycle transition and expiration actions that you
-            want Amazon S3 to perform on the objects identified by the filter.
-            If the state of your bucket is versioning-enabled or
-            versioning-suspended, you can have many versions of the same object
-            (one current version and zero or more noncurrent versions). Amazon
-            S3 provides predefined actions that you can specify for current and
-            noncurrent object versions.
+            - One or more lifecycle transition and expiration actions that you
+              want Amazon S3 to perform on the objects identified by the filter.
+              If the state of your bucket is versioning-enabled or
+              versioning-suspended, you can have many versions of the same
+              object (one current version and zero or more noncurrent versions).
+              Amazon S3 provides predefined actions that you can specify for
+              current and noncurrent object versions.
 
-          For more information, see [Object Lifecycle
-          Management](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html)
-          and [Lifecycle Configuration
-          Elements](https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html).
+            For more information, see [Object Lifecycle
+            Management](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html)
+            and [Lifecycle Configuration
+            Elements](https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html).
 
         Permissions
 
-        : - **General purpose bucket permissions** - By default, all Amazon S3
-            resources are private, including buckets, objects, and related
-            subresources (for example, lifecycle configuration and website
-            configuration). Only the resource owner (that is, the Amazon Web
-            Services account that created it) can access the resource. The
-            resource owner can optionally grant access permissions to others by
-            writing an access policy. For this operation, a user must have the
-            `s3:PutLifecycleConfiguration` permission.
+        :   - **General purpose bucket permissions** - By default, all Amazon S3
+              resources are private, including buckets, objects, and related
+              subresources (for example, lifecycle configuration and website
+              configuration). Only the resource owner (that is, the Amazon Web
+              Services account that created it) can access the resource. The
+              resource owner can optionally grant access permissions to others
+              by writing an access policy. For this operation, a user must have
+              the `s3:PutLifecycleConfiguration` permission.
 
-            You can also explicitly deny permissions. An explicit deny also
-            supersedes any other permissions. If you want to block users or
-            accounts from removing or deleting objects from your bucket, you
-            must deny them permissions for the following actions:
+              You can also explicitly deny permissions. An explicit deny also
+              supersedes any other permissions. If you want to block users or
+              accounts from removing or deleting objects from your bucket, you
+              must deny them permissions for the following actions:
 
-            - `s3:DeleteObject`
+              - `s3:DeleteObject`
 
-            - `s3:DeleteObjectVersion`
+              - `s3:DeleteObjectVersion`
 
-            - `s3:PutLifecycleConfiguration`
+              - `s3:PutLifecycleConfiguration`
 
-              For more information about permissions, see [Managing Access
-              Permissions to Your Amazon S3
-              Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
+                For more information about permissions, see [Managing Access
+                Permissions to Your Amazon S3
+                Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
 
-          - **Directory bucket permissions** - You must have the
-            `s3express:PutLifecycleConfiguration` permission in an IAM
-            identity-based policy to use this operation. Cross-account access to
-            this API operation isn't supported. The resource owner can
-            optionally grant access permissions to others by creating a role or
-            user for them as long as they are within the same account as the
-            owner and resource.
+            - **Directory bucket permissions** - You must have the
+              `s3express:PutLifecycleConfiguration` permission in an IAM
+              identity-based policy to use this operation. Cross-account access
+              to this API operation isn't supported. The resource owner can
+              optionally grant access permissions to others by creating a role
+              or user for them as long as they are within the same account as
+              the owner and resource.
 
-            For more information about directory bucket policies and
-            permissions, see [Authorizing Regional endpoint APIs with
-            IAM](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html)
-            in the *Amazon S3 User Guide*.
+              For more information about directory bucket policies and
+              permissions, see [Authorizing Regional endpoint APIs with
+              IAM](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html)
+              in the *Amazon S3 User Guide*.
 
-            Note:
+              Note:
             **Directory buckets** - For directory buckets, you must make
             requests for this API operation to the Regional endpoint. These
             endpoints support path-style requests in the format
             `https://s3express-control.`*`region-code`*`.amazonaws.com/`*`bucket-name`*` `.
             Virtual-hosted-style requests aren't supported. For more
-            information about endpoints in Availability Zones, see [Regional and
-            Zonal endpoints for directory buckets in Availability
+            information about endpoints in Availability Zones, see [Regional
+            and Zonal endpoints for directory buckets in Availability
             Zones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html)
-            in the *Amazon S3 User Guide*. For more information about endpoints
-            in Local Zones, see [Concepts for directory buckets in Local
+            in the *Amazon S3 User Guide*. For more information about
+            endpoints in Local Zones, see [Concepts for directory buckets in
+            Local
             Zones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html)
             in the *Amazon S3 User Guide*.
 
         HTTP Host header syntax
 
-        : **Directory buckets** - The HTTP Host header syntax is
-          `s3express-control.`*`region`*`.amazonaws.com`.
+        :   **Directory buckets** - The HTTP Host header syntax is
+            `s3express-control.`*`region`*`.amazonaws.com`.
 
-          The following operations are related to
-          `PutBucketLifecycleConfiguration`:
+            The following operations are related to
+            `PutBucketLifecycleConfiguration`:
 
-          - [GetBucketLifecycleConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLifecycleConfiguration.html)
+            - [GetBucketLifecycleConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLifecycleConfiguration.html)
 
-          - [DeleteBucketLifecycle](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketLifecycle.html)
+            - [DeleteBucketLifecycle](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketLifecycle.html)
 
         Warning:
             You must URL encode any signed header values that contain spaces. For
@@ -7384,8 +9040,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `PutBucketLifecycleConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -7395,12 +9049,35 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `PutBucketLifecycleConfigurationOutput`.
         """
+
+    def put_bucket_lifecycle_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutBucketLifecycleConfigurationOutput:
         return self._invoke(
-            input, _models.PUT_BUCKET_LIFECYCLE_CONFIGURATION, [], plugins
+            self._select_input(
+                _models.PUT_BUCKET_LIFECYCLE_CONFIGURATION, args, kwargs
+            ),
+            _models.PUT_BUCKET_LIFECYCLE_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     def put_bucket_logging(
-        self, input: PutBucketLoggingInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutBucketLoggingInput | _models.PutBucketLoggingInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutBucketLoggingOutput: ...
+
+    @_overload
+    def put_bucket_logging(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutBucketLoggingInputDict],
     ) -> PutBucketLoggingOutput:
         """
         Warning:
@@ -7436,29 +9113,30 @@ class S3Client(Client[S3Config]):
 
         Grantee Values
 
-        : You can specify the person (grantee) to whom you're assigning access
-          rights (by using request elements) in the following ways. For examples
-          of how to specify these grantee values in JSON format, see the Amazon
-          Web Services CLI example in [Enabling Amazon S3 server access
-          logging](https://docs.aws.amazon.com/AmazonS3/latest/userguide/enable-server-access-logging.html)
-          in the *Amazon S3 User Guide*.
+        :   You can specify the person (grantee) to whom you're assigning
+            access rights (by using request elements) in the following ways. For
+            examples of how to specify these grantee values in JSON format, see
+            the Amazon Web Services CLI example in [Enabling Amazon S3 server
+            access
+            logging](https://docs.aws.amazon.com/AmazonS3/latest/userguide/enable-server-access-logging.html)
+            in the *Amazon S3 User Guide*.
 
-          - By the person's ID:
+            - By the person's ID:
 
-            `<grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">`{=html}`<id>`{=html}`<>ID<>``</id>`{=html}`<displayname>`{=html}`<>GranteesEmail<>``</displayname>`{=html}` ``</grantee>`{=html}
+              `<grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">`{=html}`<id>`{=html}`<>ID<>``</id>`{=html}`<displayname>`{=html}`<>GranteesEmail<>``</displayname>`{=html}` ``</grantee>`{=html}
 
-            `DisplayName` is optional and ignored in the request.
+              `DisplayName` is optional and ignored in the request.
 
-          - By Email address:
+            - By Email address:
 
-            ` ``<grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="AmazonCustomerByEmail">`{=html}`<emailaddress>`{=html}`<>Grantees@email.com<>``</emailaddress>`{=html}`</grantee>`{=html}
+              ` ``<grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="AmazonCustomerByEmail">`{=html}`<emailaddress>`{=html}`<>Grantees@email.com<>``</emailaddress>`{=html}`</grantee>`{=html}
 
-            The grantee is resolved to the `CanonicalUser` and, in a response to
-            a `GETObjectAcl` request, appears as the CanonicalUser.
+              The grantee is resolved to the `CanonicalUser` and, in a response
+              to a `GETObjectAcl` request, appears as the CanonicalUser.
 
-          - By URI:
+            - By URI:
 
-            `<grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">`{=html}`<uri>`{=html}`<>http://acs.amazonaws.com/groups/global/AuthenticatedUsers<>``</uri>`{=html}`</grantee>`{=html}
+              `<grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">`{=html}`<uri>`{=html}`<>http://acs.amazonaws.com/groups/global/AuthenticatedUsers<>``</uri>`{=html}`</grantee>`{=html}
 
         To enable logging, you use `LoggingEnabled` and its children request
         elements. To disable logging, you use an empty `BucketLoggingStatus`
@@ -7491,8 +9169,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `PutBucketLoggingInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -7502,12 +9178,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `PutBucketLoggingOutput`.
         """
-        return self._invoke(input, _models.PUT_BUCKET_LOGGING, [], plugins)
 
+    def put_bucket_logging(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutBucketLoggingOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_BUCKET_LOGGING, args, kwargs),
+            _models.PUT_BUCKET_LOGGING,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_bucket_metrics_configuration(
         self,
-        input: PutBucketMetricsConfigurationInput,
+        request: _models.PutBucketMetricsConfigurationInput
+        | _models.PutBucketMetricsConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> PutBucketMetricsConfigurationOutput: ...
+
+    @_overload
+    def put_bucket_metrics_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutBucketMetricsConfigurationInputDict],
     ) -> PutBucketMetricsConfigurationOutput:
         """
         Sets a metrics configuration (specified by the metrics configuration ID)
@@ -7532,37 +9230,37 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : To use this operation, you must have permissions to perform the
-          `s3:PutMetricsConfiguration` action. The bucket owner has this
-          permission by default. The bucket owner can grant this permission to
-          others. For more information about permissions, see [Permissions
-          Related to Bucket Subresource
-          Operations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
-          and [Managing Access Permissions to Your Amazon S3
-          Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
+        :   To use this operation, you must have permissions to perform the
+            `s3:PutMetricsConfiguration` action. The bucket owner has this
+            permission by default. The bucket owner can grant this permission to
+            others. For more information about permissions, see [Permissions
+            Related to Bucket Subresource
+            Operations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+            and [Managing Access Permissions to Your Amazon S3
+            Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
 
-          - **General purpose bucket permissions** - The
-            `s3:PutMetricsConfiguration` permission is required in a policy. For
-            more information about general purpose buckets permissions, see
-            [Using Bucket Policies and User
-            Policies](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html)
-            in the *Amazon S3 User Guide*.
+            - **General purpose bucket permissions** - The
+              `s3:PutMetricsConfiguration` permission is required in a policy.
+              For more information about general purpose buckets permissions,
+              see [Using Bucket Policies and User
+              Policies](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html)
+              in the *Amazon S3 User Guide*.
 
-          - **Directory bucket permissions** - To grant access to this API
-            operation, you must have the `s3express:PutMetricsConfiguration`
-            permission in an IAM identity-based policy instead of a bucket
-            policy. Cross-account access to this API operation isn't supported.
-            This operation can only be performed by the Amazon Web Services
-            account that owns the resource. For more information about directory
-            bucket policies and permissions, see [Amazon Web Services Identity
-            and Access Management (IAM) for S3 Express One
-            Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html)
-            in the *Amazon S3 User Guide*.
+            - **Directory bucket permissions** - To grant access to this API
+              operation, you must have the `s3express:PutMetricsConfiguration`
+              permission in an IAM identity-based policy instead of a bucket
+              policy. Cross-account access to this API operation isn't
+              supported. This operation can only be performed by the Amazon Web
+              Services account that owns the resource. For more information
+              about directory bucket policies and permissions, see [Amazon Web
+              Services Identity and Access Management (IAM) for S3 Express One
+              Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html)
+              in the *Amazon S3 User Guide*.
 
         HTTP Host header syntax
 
-        : **Directory buckets** - The HTTP Host header syntax is
-          `s3express-control.`*`region-code`*`.amazonaws.com`.
+        :   **Directory buckets** - The HTTP Host header syntax is
+            `s3express-control.`*`region-code`*`.amazonaws.com`.
 
         For information about CloudWatch request metrics for Amazon S3, see
         [Monitoring Metrics with Amazon
@@ -7591,8 +9289,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `PutBucketMetricsConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -7602,14 +9298,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `PutBucketMetricsConfigurationOutput`.
         """
+
+    def put_bucket_metrics_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutBucketMetricsConfigurationOutput:
         return self._invoke(
-            input, _models.PUT_BUCKET_METRICS_CONFIGURATION, [], plugins
+            self._select_input(_models.PUT_BUCKET_METRICS_CONFIGURATION, args, kwargs),
+            _models.PUT_BUCKET_METRICS_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     def put_bucket_notification_configuration(
         self,
-        input: PutBucketNotificationConfigurationInput,
+        request: _models.PutBucketNotificationConfigurationInput
+        | _models.PutBucketNotificationConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> PutBucketNotificationConfigurationOutput: ...
+
+    @_overload
+    def put_bucket_notification_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutBucketNotificationConfigurationInputDict],
     ) -> PutBucketNotificationConfigurationOutput:
         """
         Note:
@@ -7683,8 +9399,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `PutBucketNotificationConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -7694,14 +9408,36 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `PutBucketNotificationConfigurationOutput`.
         """
+
+    def put_bucket_notification_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutBucketNotificationConfigurationOutput:
         return self._invoke(
-            input, _models.PUT_BUCKET_NOTIFICATION_CONFIGURATION, [], plugins
+            self._select_input(
+                _models.PUT_BUCKET_NOTIFICATION_CONFIGURATION, args, kwargs
+            ),
+            _models.PUT_BUCKET_NOTIFICATION_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     def put_bucket_ownership_controls(
         self,
-        input: PutBucketOwnershipControlsInput,
+        request: _models.PutBucketOwnershipControlsInput
+        | _models.PutBucketOwnershipControlsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> PutBucketOwnershipControlsOutput: ...
+
+    @_overload
+    def put_bucket_ownership_controls(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutBucketOwnershipControlsInputDict],
     ) -> PutBucketOwnershipControlsOutput:
         """
         Note:
@@ -7728,8 +9464,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `PutBucketOwnershipControlsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -7739,10 +9473,33 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `PutBucketOwnershipControlsOutput`.
         """
-        return self._invoke(input, _models.PUT_BUCKET_OWNERSHIP_CONTROLS, [], plugins)
 
+    def put_bucket_ownership_controls(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutBucketOwnershipControlsOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_BUCKET_OWNERSHIP_CONTROLS, args, kwargs),
+            _models.PUT_BUCKET_OWNERSHIP_CONTROLS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_bucket_policy(
-        self, input: PutBucketPolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutBucketPolicyInput | _models.PutBucketPolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutBucketPolicyOutput: ...
+
+    @_overload
+    def put_bucket_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutBucketPolicyInputDict],
     ) -> PutBucketPolicyOutput:
         """
         Applies an Amazon S3 bucket policy to an Amazon S3 bucket.
@@ -7763,60 +9520,61 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : If you are using an identity other than the root user of the Amazon
-          Web Services account that owns the bucket, the calling identity must
-          both have the `PutBucketPolicy` permissions on the specified bucket
-          and belong to the bucket owner's account in order to use this
-          operation.
+        :   If you are using an identity other than the root user of the Amazon
+            Web Services account that owns the bucket, the calling identity must
+            both have the `PutBucketPolicy` permissions on the specified bucket
+            and belong to the bucket owner's account in order to use this
+            operation.
 
-          If you don't have `PutBucketPolicy` permissions, Amazon S3 returns a
-          `403 Access Denied` error. If you have the correct permissions, but
-          you're not using an identity that belongs to the bucket owner's
-          account, Amazon S3 returns a `405 Method Not Allowed` error.
+            If you don't have `PutBucketPolicy` permissions, Amazon S3 returns
+            a `403 Access Denied` error. If you have the correct permissions,
+            but you're not using an identity that belongs to the bucket
+            owner's account, Amazon S3 returns a `405 Method Not Allowed`
+            error.
 
-          Warning:
-            To ensure that bucket owners don't inadvertently lock themselves out
-            of their own buckets, the root principal in a bucket owner's Amazon
-            Web Services account can perform the `GetBucketPolicy`,
-            `PutBucketPolicy`, and `DeleteBucketPolicy` API actions, even if their
-            bucket policy explicitly denies the root principal's access. Bucket
-            owner root principals can only be blocked from performing these API
-            actions by VPC endpoint policies and Amazon Web Services Organizations
-            policies.
-          - **General purpose bucket permissions** - The `s3:PutBucketPolicy`
-            permission is required in a policy. For more information about
-            general purpose buckets bucket policies, see [Using Bucket Policies
-            and User
-            Policies](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html)
-            in the *Amazon S3 User Guide*.
+            Warning:
+            To ensure that bucket owners don't inadvertently lock themselves
+            out of their own buckets, the root principal in a bucket owner's
+            Amazon Web Services account can perform the `GetBucketPolicy`,
+            `PutBucketPolicy`, and `DeleteBucketPolicy` API actions, even if
+            their bucket policy explicitly denies the root principal's access.
+            Bucket owner root principals can only be blocked from performing
+            these API actions by VPC endpoint policies and Amazon Web Services
+            Organizations policies.
+            - **General purpose bucket permissions** - The `s3:PutBucketPolicy`
+              permission is required in a policy. For more information about
+              general purpose buckets bucket policies, see [Using Bucket
+              Policies and User
+              Policies](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html)
+              in the *Amazon S3 User Guide*.
 
-          - **Directory bucket permissions** - To grant access to this API
-            operation, you must have the `s3express:PutBucketPolicy` permission
-            in an IAM identity-based policy instead of a bucket policy.
-            Cross-account access to this API operation isn't supported. This
-            operation can only be performed by the Amazon Web Services account
-            that owns the resource. For more information about directory bucket
-            policies and permissions, see [Amazon Web Services Identity and
-            Access Management (IAM) for S3 Express One
-            Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html)
-            in the *Amazon S3 User Guide*.
+            - **Directory bucket permissions** - To grant access to this API
+              operation, you must have the `s3express:PutBucketPolicy`
+              permission in an IAM identity-based policy instead of a bucket
+              policy. Cross-account access to this API operation isn't
+              supported. This operation can only be performed by the Amazon Web
+              Services account that owns the resource. For more information
+              about directory bucket policies and permissions, see [Amazon Web
+              Services Identity and Access Management (IAM) for S3 Express One
+              Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html)
+              in the *Amazon S3 User Guide*.
 
         Example bucket policies
 
-        : **General purpose buckets example bucket policies** - See [Bucket
-          policy
-          examples](https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.html)
-          in the *Amazon S3 User Guide*.
+        :   **General purpose buckets example bucket policies** - See [Bucket
+            policy
+            examples](https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.html)
+            in the *Amazon S3 User Guide*.
 
-          **Directory bucket example bucket policies** - See [Example bucket
-          policies for S3 Express One
-          Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-example-bucket-policies.html)
-          in the *Amazon S3 User Guide*.
+            **Directory bucket example bucket policies** - See [Example bucket
+            policies for S3 Express One
+            Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-example-bucket-policies.html)
+            in the *Amazon S3 User Guide*.
 
         HTTP Host header syntax
 
-        : **Directory buckets** - The HTTP Host header syntax is
-          `s3express-control.`*`region-code`*`.amazonaws.com`.
+        :   **Directory buckets** - The HTTP Host header syntax is
+            `s3express-control.`*`region-code`*`.amazonaws.com`.
 
         The following operations are related to `PutBucketPolicy`:
 
@@ -7830,8 +9588,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `PutBucketPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -7841,10 +9597,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `PutBucketPolicyOutput`.
         """
-        return self._invoke(input, _models.PUT_BUCKET_POLICY, [], plugins)
 
+    def put_bucket_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutBucketPolicyOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_BUCKET_POLICY, args, kwargs),
+            _models.PUT_BUCKET_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_bucket_replication(
-        self, input: PutBucketReplicationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutBucketReplicationInput
+        | _models.PutBucketReplicationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutBucketReplicationOutput: ...
+
+    @_overload
+    def put_bucket_replication(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutBucketReplicationInputDict],
     ) -> PutBucketReplicationOutput:
         """
         Note:
@@ -7887,36 +9667,36 @@ class S3Client(Client[S3Config]):
 
         Handling Replication of Encrypted Objects
 
-        : By default, Amazon S3 doesn't replicate objects that are stored at
-          rest using server-side encryption with KMS keys. To replicate Amazon
-          Web Services KMS-encrypted objects, add the following:
-          `SourceSelectionCriteria`, `SseKmsEncryptedObjects`, `Status`,
-          `EncryptionConfiguration`, and `ReplicaKmsKeyID`. For information
-          about replication configuration, see [Replicating Objects Created with
-          SSE Using KMS
-          keys](https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-config-for-kms-objects.html).
+        :   By default, Amazon S3 doesn't replicate objects that are stored at
+            rest using server-side encryption with KMS keys. To replicate Amazon
+            Web Services KMS-encrypted objects, add the following:
+            `SourceSelectionCriteria`, `SseKmsEncryptedObjects`, `Status`,
+            `EncryptionConfiguration`, and `ReplicaKmsKeyID`. For information
+            about replication configuration, see [Replicating Objects Created
+            with SSE Using KMS
+            keys](https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-config-for-kms-objects.html).
 
-          For information on `PutBucketReplication` errors, see [List of
-          replication-related error
-          codes](https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ReplicationErrorCodeList)
+            For information on `PutBucketReplication` errors, see [List of
+            replication-related error
+            codes](https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ReplicationErrorCodeList)
 
         Permissions
 
-        : To create a `PutBucketReplication` request, you must have
-          `s3:PutReplicationConfiguration` permissions for the bucket.
+        :   To create a `PutBucketReplication` request, you must have
+            `s3:PutReplicationConfiguration` permissions for the bucket.
 
-          By default, a resource owner, in this case the Amazon Web Services
-          account that created the bucket, can perform this operation. The
-          resource owner can also grant others permissions to perform the
-          operation. For more information about permissions, see [Specifying
-          Permissions in a
-          Policy](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html)
-          and [Managing Access Permissions to Your Amazon S3
-          Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
+            By default, a resource owner, in this case the Amazon Web Services
+            account that created the bucket, can perform this operation. The
+            resource owner can also grant others permissions to perform the
+            operation. For more information about permissions, see [Specifying
+            Permissions in a
+            Policy](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html)
+            and [Managing Access Permissions to Your Amazon S3
+            Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
 
-          Note:
-            To perform this operation, the user or role performing the action must
-            have the
+            Note:
+            To perform this operation, the user or role performing the action
+            must have the
             [iam:PassRole](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html)
             permission.
 
@@ -7932,8 +9712,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `PutBucketReplicationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -7943,10 +9721,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `PutBucketReplicationOutput`.
         """
-        return self._invoke(input, _models.PUT_BUCKET_REPLICATION, [], plugins)
 
+    def put_bucket_replication(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutBucketReplicationOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_BUCKET_REPLICATION, args, kwargs),
+            _models.PUT_BUCKET_REPLICATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_bucket_request_payment(
-        self, input: PutBucketRequestPaymentInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutBucketRequestPaymentInput
+        | _models.PutBucketRequestPaymentInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutBucketRequestPaymentOutput: ...
+
+    @_overload
+    def put_bucket_request_payment(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutBucketRequestPaymentInputDict],
     ) -> PutBucketRequestPaymentOutput:
         """
         Note:
@@ -7971,8 +9773,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `PutBucketRequestPaymentInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -7982,10 +9782,33 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `PutBucketRequestPaymentOutput`.
         """
-        return self._invoke(input, _models.PUT_BUCKET_REQUEST_PAYMENT, [], plugins)
 
+    def put_bucket_request_payment(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutBucketRequestPaymentOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_BUCKET_REQUEST_PAYMENT, args, kwargs),
+            _models.PUT_BUCKET_REQUEST_PAYMENT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_bucket_tagging(
-        self, input: PutBucketTaggingInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutBucketTaggingInput | _models.PutBucketTaggingInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutBucketTaggingOutput: ...
+
+    @_overload
+    def put_bucket_tagging(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutBucketTaggingInputDict],
     ) -> PutBucketTaggingOutput:
         """
         Note:
@@ -8055,8 +9878,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `PutBucketTaggingInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -8066,10 +9887,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `PutBucketTaggingOutput`.
         """
-        return self._invoke(input, _models.PUT_BUCKET_TAGGING, [], plugins)
 
+    def put_bucket_tagging(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutBucketTaggingOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_BUCKET_TAGGING, args, kwargs),
+            _models.PUT_BUCKET_TAGGING,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_bucket_versioning(
-        self, input: PutBucketVersioningInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutBucketVersioningInput
+        | _models.PutBucketVersioningInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutBucketVersioningOutput: ...
+
+    @_overload
+    def put_bucket_versioning(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutBucketVersioningInputDict],
     ) -> PutBucketVersioningOutput:
         """
         Note:
@@ -8129,8 +9974,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `PutBucketVersioningInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -8140,10 +9983,33 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `PutBucketVersioningOutput`.
         """
-        return self._invoke(input, _models.PUT_BUCKET_VERSIONING, [], plugins)
 
+    def put_bucket_versioning(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutBucketVersioningOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_BUCKET_VERSIONING, args, kwargs),
+            _models.PUT_BUCKET_VERSIONING,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_bucket_website(
-        self, input: PutBucketWebsiteInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutBucketWebsiteInput | _models.PutBucketWebsiteInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutBucketWebsiteOutput: ...
+
+    @_overload
+    def put_bucket_website(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutBucketWebsiteInputDict],
     ) -> PutBucketWebsiteOutput:
         """
         Note:
@@ -8227,8 +10093,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `PutBucketWebsiteInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -8238,10 +10102,33 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `PutBucketWebsiteOutput`.
         """
-        return self._invoke(input, _models.PUT_BUCKET_WEBSITE, [], plugins)
 
+    def put_bucket_website(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutBucketWebsiteOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_BUCKET_WEBSITE, args, kwargs),
+            _models.PUT_BUCKET_WEBSITE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_object(
-        self, input: PutObjectInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutObjectInput | _models.PutObjectInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutObjectOutput: ...
+
+    @_overload
+    def put_object(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutObjectInputDict],
     ) -> PutObjectOutput:
         """
         Warning:
@@ -8331,74 +10218,76 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : - **General purpose bucket permissions** - The following permissions
-            are required in your policies when your `PutObject` request includes
-            specific headers.
+        :   - **General purpose bucket permissions** - The following permissions
+              are required in your policies when your `PutObject` request
+              includes specific headers.
 
-            - **`s3:PutObject`** - To successfully complete the `PutObject`
-              request, you must always have the `s3:PutObject` permission on a
-              bucket to add an object to it.
+              - **`s3:PutObject`** - To successfully complete the `PutObject`
+                request, you must always have the `s3:PutObject` permission on a
+                bucket to add an object to it.
 
-            - **`s3:PutObjectAcl`** - To successfully change the objects ACL of
-              your `PutObject` request, you must have the `s3:PutObjectAcl`.
+              - **`s3:PutObjectAcl`** - To successfully change the objects ACL
+                of your `PutObject` request, you must have the
+                `s3:PutObjectAcl`.
 
-            - **`s3:PutObjectTagging`** - To successfully set the tag-set with
-              your `PutObject` request, you must have the `s3:PutObjectTagging`.
+              - **`s3:PutObjectTagging`** - To successfully set the tag-set with
+                your `PutObject` request, you must have the
+                `s3:PutObjectTagging`.
 
-          - **Directory bucket permissions** - To grant access to this API
-            operation on a directory bucket, we recommend that you use the
-            [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
-            API operation for session-based authorization. Specifically, you
-            grant the `s3express:CreateSession` permission to the directory
-            bucket in a bucket policy or an IAM identity-based policy. Then, you
-            make the `CreateSession` API call on the bucket to obtain a session
-            token. With the session token in your request header, you can make
-            API requests to this operation. After the session token expires, you
-            make another `CreateSession` API call to generate a new session
-            token for use. Amazon Web Services CLI or SDKs create session and
-            refresh the session token automatically to avoid service
-            interruptions when a session expires. For more information about
-            authorization, see
-            [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
-            .
+            - **Directory bucket permissions** - To grant access to this API
+              operation on a directory bucket, we recommend that you use the
+              [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
+              API operation for session-based authorization. Specifically, you
+              grant the `s3express:CreateSession` permission to the directory
+              bucket in a bucket policy or an IAM identity-based policy. Then,
+              you make the `CreateSession` API call on the bucket to obtain a
+              session token. With the session token in your request header, you
+              can make API requests to this operation. After the session token
+              expires, you make another `CreateSession` API call to generate a
+              new session token for use. Amazon Web Services CLI or SDKs create
+              session and refresh the session token automatically to avoid
+              service interruptions when a session expires. For more information
+              about authorization, see
+              [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
+              .
 
-            If the object is encrypted with SSE-KMS, you must also have the
-            `kms:GenerateDataKey` and `kms:Decrypt` permissions in IAM
-            identity-based policies and KMS key policies for the KMS key.
+              If the object is encrypted with SSE-KMS, you must also have the
+              `kms:GenerateDataKey` and `kms:Decrypt` permissions in IAM
+              identity-based policies and KMS key policies for the KMS key.
 
         Data integrity with Content-MD5
 
-        : - **General purpose bucket** - To ensure that data is not corrupted
-            traversing the network, use the `Content-MD5` header. When you use
-            this header, Amazon S3 checks the object against the provided MD5
-            value and, if they do not match, Amazon S3 returns an error.
-            Alternatively, when the object's ETag is its MD5 digest, you can
-            calculate the MD5 while putting the object to Amazon S3 and compare
-            the returned ETag to the calculated MD5 value.
+        :   - **General purpose bucket** - To ensure that data is not corrupted
+              traversing the network, use the `Content-MD5` header. When you use
+              this header, Amazon S3 checks the object against the provided MD5
+              value and, if they do not match, Amazon S3 returns an error.
+              Alternatively, when the object's ETag is its MD5 digest, you can
+              calculate the MD5 while putting the object to Amazon S3 and
+              compare the returned ETag to the calculated MD5 value.
 
-          - **Directory bucket** - This functionality is not supported for
-            directory buckets.
+            - **Directory bucket** - This functionality is not supported for
+              directory buckets.
 
         HTTP Host header syntax
 
-        : **Directory buckets** - The HTTP Host header syntax is
-          ` `*`Bucket-name`*`.s3express-`*`zone-id`*`.`*`region-code`*`.amazonaws.com`.
+        :   **Directory buckets** - The HTTP Host header syntax is
+            ` `*`Bucket-name`*`.s3express-`*`zone-id`*`.`*`region-code`*`.amazonaws.com`.
 
         <!-- -->
 
         Errors
 
-        : - You might receive an `InvalidRequest` error for several reasons.
-            Depending on the reason for the error, you might receive one of the
-            following messages:
+        :   - You might receive an `InvalidRequest` error for several reasons.
+              Depending on the reason for the error, you might receive one of
+              the following messages:
 
-            - Cannot specify both a write offset value and user-defined object
-              metadata for existing objects.
+              - Cannot specify both a write offset value and user-defined object
+                metadata for existing objects.
 
-            - Checksum Type mismatch occurred, expected checksum Type: sha1,
-              actual checksum Type: crc32c.
+              - Checksum Type mismatch occurred, expected checksum Type: sha1,
+                actual checksum Type: crc32c.
 
-            - Request body cannot be empty when 'write offset' is specified.
+              - Request body cannot be empty when 'write offset' is specified.
 
         For more information about related Amazon S3 APIs, see the following:
 
@@ -8412,8 +10301,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `PutObjectInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -8423,10 +10310,33 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `PutObjectOutput`.
         """
-        return self._invoke(input, _models.PUT_OBJECT, [], plugins)
 
+    def put_object(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutObjectOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_OBJECT, args, kwargs),
+            _models.PUT_OBJECT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_object_acl(
-        self, input: PutObjectAclInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutObjectAclInput | _models.PutObjectAclInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutObjectAclOutput: ...
+
+    @_overload
+    def put_object_acl(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutObjectAclInputDict],
     ) -> PutObjectAclOutput:
         """
         Warning:
@@ -8471,37 +10381,98 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : You can set access permissions using one of the following methods:
+        :   You can set access permissions using one of the following methods:
 
-          - Specify a canned ACL with the `x-amz-acl` request header. Amazon S3
-            supports a set of predefined ACLs, known as canned ACLs. Each canned
-            ACL has a predefined set of grantees and permissions. Specify the
-            canned ACL name as the value of `x-amz-ac`l. If you use this header,
-            you cannot use other access control-specific headers in your
-            request. For more information, see [Canned
-            ACL](https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL).
+            - Specify a canned ACL with the `x-amz-acl` request header. Amazon
+              S3 supports a set of predefined ACLs, known as canned ACLs. Each
+              canned ACL has a predefined set of grantees and permissions.
+              Specify the canned ACL name as the value of `x-amz-ac`l. If you
+              use this header, you cannot use other access control-specific
+              headers in your request. For more information, see [Canned
+              ACL](https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL).
 
-          - Specify access permissions explicitly with the `x-amz-grant-read`,
-            `x-amz-grant-read-acp`, `x-amz-grant-write-acp`, and
-            `x-amz-grant-full-control` headers. When using these headers, you
-            specify explicit access permissions and grantees (Amazon Web
-            Services accounts or Amazon S3 groups) who will receive the
-            permission. If you use these ACL-specific headers, you cannot use
-            `x-amz-acl` header to set a canned ACL. These parameters map to the
-            set of permissions that Amazon S3 supports in an ACL. For more
-            information, see [Access Control List (ACL)
-            Overview](https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html).
+            - Specify access permissions explicitly with the `x-amz-grant-read`,
+              `x-amz-grant-read-acp`, `x-amz-grant-write-acp`, and
+              `x-amz-grant-full-control` headers. When using these headers, you
+              specify explicit access permissions and grantees (Amazon Web
+              Services accounts or Amazon S3 groups) who will receive the
+              permission. If you use these ACL-specific headers, you cannot use
+              `x-amz-acl` header to set a canned ACL. These parameters map to
+              the set of permissions that Amazon S3 supports in an ACL. For more
+              information, see [Access Control List (ACL)
+              Overview](https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html).
 
-            You specify each grantee as a type=value pair, where the type is one
-            of the following:
+              You specify each grantee as a type=value pair, where the type is
+              one of the following:
 
-            - `id` -- if the value specified is the canonical user ID of an
-              Amazon Web Services account
+              - `id` -- if the value specified is the canonical user ID of an
+                Amazon Web Services account
 
-            - `uri` -- if you are granting permissions to a predefined group
+              - `uri` -- if you are granting permissions to a predefined group
 
-            - `emailAddress` -- if the value specified is the email address of
-              an Amazon Web Services account
+              - `emailAddress` -- if the value specified is the email address of
+                an Amazon Web Services account
+
+                Note:
+            Using email addresses to specify a grantee is only supported in
+            the following Amazon Web Services Regions:
+
+            - US East (N. Virginia)
+
+            - US West (N. California)
+
+            - US West (Oregon)
+
+            - Asia Pacific (Singapore)
+
+            - Asia Pacific (Sydney)
+
+            - Asia Pacific (Tokyo)
+
+            - Europe (Ireland)
+
+            - South America (São Paulo)
+
+            For a list of all the Amazon S3 supported Regions and endpoints,
+            see [Regions and
+            Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region)
+            in the Amazon Web Services General Reference.
+
+              For example, the following `x-amz-grant-read` header grants list
+              objects permission to the two Amazon Web Services accounts
+              identified by their email addresses.
+
+              `x-amz-grant-read: emailAddress="xyz@amazon.com", emailAddress="abc@amazon.com" `
+
+            You can use either a canned ACL or specify access permissions
+            explicitly. You cannot do both.
+
+        Grantee Values
+
+        :   You can specify the person (grantee) to whom you're assigning
+            access rights (using request elements) in the following ways. For
+            examples of how to specify these grantee values in JSON format, see
+            the Amazon Web Services CLI example in [Enabling Amazon S3 server
+            access
+            logging](https://docs.aws.amazon.com/AmazonS3/latest/userguide/enable-server-access-logging.html)
+            in the *Amazon S3 User Guide*.
+
+            - By the person's ID:
+
+              `<grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">`{=html}`<id>`{=html}`<>ID<>``</id>`{=html}`<displayname>`{=html}`<>GranteesEmail<>``</displayname>`{=html}` ``</grantee>`{=html}
+
+              DisplayName is optional and ignored in the request.
+
+            - By URI:
+
+              `<grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">`{=html}`<uri>`{=html}`<>http://acs.amazonaws.com/groups/global/AuthenticatedUsers<>``</uri>`{=html}`</grantee>`{=html}
+
+            - By Email address:
+
+              `<grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="AmazonCustomerByEmail">`{=html}`<emailaddress>`{=html}`<>Grantees@email.com<>``</emailaddress>`{=html}`lt;/Grantee>`
+
+              The grantee is resolved to the CanonicalUser and, in a response to
+              a GET Object acl request, appears as the CanonicalUser.
 
               Note:
             Using email addresses to specify a grantee is only supported in
@@ -8528,71 +10499,11 @@ class S3Client(Client[S3Config]):
             Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region)
             in the Amazon Web Services General Reference.
 
-            For example, the following `x-amz-grant-read` header grants list
-            objects permission to the two Amazon Web Services accounts
-            identified by their email addresses.
-
-            `x-amz-grant-read: emailAddress="xyz@amazon.com", emailAddress="abc@amazon.com" `
-
-          You can use either a canned ACL or specify access permissions
-          explicitly. You cannot do both.
-
-        Grantee Values
-
-        : You can specify the person (grantee) to whom you're assigning access
-          rights (using request elements) in the following ways. For examples of
-          how to specify these grantee values in JSON format, see the Amazon Web
-          Services CLI example in [Enabling Amazon S3 server access
-          logging](https://docs.aws.amazon.com/AmazonS3/latest/userguide/enable-server-access-logging.html)
-          in the *Amazon S3 User Guide*.
-
-          - By the person's ID:
-
-            `<grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">`{=html}`<id>`{=html}`<>ID<>``</id>`{=html}`<displayname>`{=html}`<>GranteesEmail<>``</displayname>`{=html}` ``</grantee>`{=html}
-
-            DisplayName is optional and ignored in the request.
-
-          - By URI:
-
-            `<grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">`{=html}`<uri>`{=html}`<>http://acs.amazonaws.com/groups/global/AuthenticatedUsers<>``</uri>`{=html}`</grantee>`{=html}
-
-          - By Email address:
-
-            `<grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="AmazonCustomerByEmail">`{=html}`<emailaddress>`{=html}`<>Grantees@email.com<>``</emailaddress>`{=html}`lt;/Grantee>`
-
-            The grantee is resolved to the CanonicalUser and, in a response to a
-            GET Object acl request, appears as the CanonicalUser.
-
-            Note:
-            Using email addresses to specify a grantee is only supported in the
-            following Amazon Web Services Regions:
-
-            - US East (N. Virginia)
-
-            - US West (N. California)
-
-            - US West (Oregon)
-
-            - Asia Pacific (Singapore)
-
-            - Asia Pacific (Sydney)
-
-            - Asia Pacific (Tokyo)
-
-            - Europe (Ireland)
-
-            - South America (São Paulo)
-
-            For a list of all the Amazon S3 supported Regions and endpoints, see
-            [Regions and
-            Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region)
-            in the Amazon Web Services General Reference.
-
         Versioning
 
-        : The ACL of an object is set at the object version level. By default,
-          PUT sets the ACL of the current version of an object. To set the ACL
-          of a different version, use the `versionId` subresource.
+        :   The ACL of an object is set at the object version level. By default,
+            PUT sets the ACL of the current version of an object. To set the ACL
+            of a different version, use the `versionId` subresource.
 
         The following operations are related to `PutObjectAcl`:
 
@@ -8606,8 +10517,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `PutObjectAclInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -8617,10 +10526,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `PutObjectAclOutput`.
         """
-        return self._invoke(input, _models.PUT_OBJECT_ACL, [], plugins)
 
+    def put_object_acl(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutObjectAclOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_OBJECT_ACL, args, kwargs),
+            _models.PUT_OBJECT_ACL,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_object_annotation(
-        self, input: PutObjectAnnotationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutObjectAnnotationInput
+        | _models.PutObjectAnnotationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutObjectAnnotationOutput: ...
+
+    @_overload
+    def put_object_annotation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutObjectAnnotationInputDict],
     ) -> PutObjectAnnotationOutput:
         """
         Attaches an annotation to an Amazon S3 object. An annotation is a named
@@ -8654,8 +10587,6 @@ class S3Client(Client[S3Config]):
         - [DeleteObjectAnnotation](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObjectAnnotation.html)
 
         Args:
-            input:
-                An instance of `PutObjectAnnotationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -8665,10 +10596,33 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `PutObjectAnnotationOutput`.
         """
-        return self._invoke(input, _models.PUT_OBJECT_ANNOTATION, [], plugins)
 
+    def put_object_annotation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutObjectAnnotationOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_OBJECT_ANNOTATION, args, kwargs),
+            _models.PUT_OBJECT_ANNOTATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_object_legal_hold(
-        self, input: PutObjectLegalHoldInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutObjectLegalHoldInput | _models.PutObjectLegalHoldInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutObjectLegalHoldOutput: ...
+
+    @_overload
+    def put_object_legal_hold(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutObjectLegalHoldInputDict],
     ) -> PutObjectLegalHoldOutput:
         """
         Note:
@@ -8686,8 +10640,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `PutObjectLegalHoldInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -8697,12 +10649,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `PutObjectLegalHoldOutput`.
         """
-        return self._invoke(input, _models.PUT_OBJECT_LEGAL_HOLD, [], plugins)
 
+    def put_object_legal_hold(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutObjectLegalHoldOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_OBJECT_LEGAL_HOLD, args, kwargs),
+            _models.PUT_OBJECT_LEGAL_HOLD,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_object_lock_configuration(
         self,
-        input: PutObjectLockConfigurationInput,
+        request: _models.PutObjectLockConfigurationInput
+        | _models.PutObjectLockConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> PutObjectLockConfigurationOutput: ...
+
+    @_overload
+    def put_object_lock_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutObjectLockConfigurationInputDict],
     ) -> PutObjectLockConfigurationOutput:
         """
         Note:
@@ -8730,8 +10704,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `PutObjectLockConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -8741,10 +10713,33 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `PutObjectLockConfigurationOutput`.
         """
-        return self._invoke(input, _models.PUT_OBJECT_LOCK_CONFIGURATION, [], plugins)
 
+    def put_object_lock_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutObjectLockConfigurationOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_OBJECT_LOCK_CONFIGURATION, args, kwargs),
+            _models.PUT_OBJECT_LOCK_CONFIGURATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_object_retention(
-        self, input: PutObjectRetentionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutObjectRetentionInput | _models.PutObjectRetentionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutObjectRetentionOutput: ...
+
+    @_overload
+    def put_object_retention(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutObjectRetentionInputDict],
     ) -> PutObjectRetentionOutput:
         """
         Note:
@@ -8766,8 +10761,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `PutObjectRetentionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -8777,10 +10770,33 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `PutObjectRetentionOutput`.
         """
-        return self._invoke(input, _models.PUT_OBJECT_RETENTION, [], plugins)
 
+    def put_object_retention(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutObjectRetentionOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_OBJECT_RETENTION, args, kwargs),
+            _models.PUT_OBJECT_RETENTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_object_tagging(
-        self, input: PutObjectTaggingInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutObjectTaggingInput | _models.PutObjectTaggingInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutObjectTaggingOutput: ...
+
+    @_overload
+    def put_object_tagging(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutObjectTaggingInputDict],
     ) -> PutObjectTaggingOutput:
         """
         Note:
@@ -8837,8 +10853,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `PutObjectTaggingInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -8848,10 +10862,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `PutObjectTaggingOutput`.
         """
-        return self._invoke(input, _models.PUT_OBJECT_TAGGING, [], plugins)
 
+    def put_object_tagging(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutObjectTaggingOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_OBJECT_TAGGING, args, kwargs),
+            _models.PUT_OBJECT_TAGGING,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_public_access_block(
-        self, input: PutPublicAccessBlockInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutPublicAccessBlockInput
+        | _models.PutPublicAccessBlockInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutPublicAccessBlockOutput: ...
+
+    @_overload
+    def put_public_access_block(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutPublicAccessBlockInputDict],
     ) -> PutPublicAccessBlockOutput:
         """
         Note:
@@ -8894,8 +10932,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `PutPublicAccessBlockInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -8905,10 +10941,33 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `PutPublicAccessBlockOutput`.
         """
-        return self._invoke(input, _models.PUT_PUBLIC_ACCESS_BLOCK, [], plugins)
 
+    def put_public_access_block(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutPublicAccessBlockOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_PUBLIC_ACCESS_BLOCK, args, kwargs),
+            _models.PUT_PUBLIC_ACCESS_BLOCK,
+            [],
+            plugins,
+        )
+
+    @_overload
     def rename_object(
-        self, input: RenameObjectInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RenameObjectInput | _models.RenameObjectInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RenameObjectOutput: ...
+
+    @_overload
+    def rename_object(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RenameObjectInputDict],
     ) -> RenameObjectOutput:
         """
         Renames an existing object in a directory bucket that uses the S3
@@ -8934,33 +10993,33 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : To grant access to the `RenameObject` operation on a directory bucket,
-          we recommend that you use the `CreateSession` operation for
-          session-based authorization. Specifically, you grant the
-          `s3express:CreateSession` permission to the directory bucket in a
-          bucket policy or an IAM identity-based policy. Then, you make the
-          `CreateSession` API call on the directory bucket to obtain a session
-          token. With the session token in your request header, you can make API
-          requests to this operation. After the session token expires, you make
-          another `CreateSession` API call to generate a new session token for
-          use. The Amazon Web Services CLI and SDKs will create and manage your
-          session including refreshing the session token automatically to avoid
-          service interruptions when a session expires. In your bucket policy,
-          you can specify the `s3express:SessionMode` condition key to control
-          who can create a `ReadWrite` or `ReadOnly` session. A `ReadWrite`
-          session is required for executing all the Zonal endpoint API
-          operations, including `RenameObject`. For more information about
-          authorization, see
-          [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
-          . To learn more about Zonal endpoint API operations, see [Authorizing
-          Zonal endpoint API operations with
-          CreateSession](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-create-session.html)
-          in the *Amazon S3 User Guide*.
+        :   To grant access to the `RenameObject` operation on a directory
+            bucket, we recommend that you use the `CreateSession` operation for
+            session-based authorization. Specifically, you grant the
+            `s3express:CreateSession` permission to the directory bucket in a
+            bucket policy or an IAM identity-based policy. Then, you make the
+            `CreateSession` API call on the directory bucket to obtain a session
+            token. With the session token in your request header, you can make
+            API requests to this operation. After the session token expires, you
+            make another `CreateSession` API call to generate a new session
+            token for use. The Amazon Web Services CLI and SDKs will create and
+            manage your session including refreshing the session token
+            automatically to avoid service interruptions when a session expires.
+            In your bucket policy, you can specify the `s3express:SessionMode`
+            condition key to control who can create a `ReadWrite` or `ReadOnly`
+            session. A `ReadWrite` session is required for executing all the
+            Zonal endpoint API operations, including `RenameObject`. For more
+            information about authorization, see
+            [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
+            . To learn more about Zonal endpoint API operations, see
+            [Authorizing Zonal endpoint API operations with
+            CreateSession](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-create-session.html)
+            in the *Amazon S3 User Guide*.
 
         HTTP Host header syntax
 
-        : **Directory buckets** - The HTTP Host header syntax is
-          ` `*`Bucket-name`*`.s3express-`*`zone-id`*`.`*`region-code`*`.amazonaws.com`.
+        :   **Directory buckets** - The HTTP Host header syntax is
+            ` `*`Bucket-name`*`.s3express-`*`zone-id`*`.`*`region-code`*`.amazonaws.com`.
 
         Warning:
             You must URL encode any signed header values that contain spaces. For
@@ -8968,8 +11027,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `RenameObjectInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -8979,10 +11036,33 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `RenameObjectOutput`.
         """
-        return self._invoke(input, _models.RENAME_OBJECT, [], plugins)
 
+    def rename_object(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RenameObjectOutput:
+        return self._invoke(
+            self._select_input(_models.RENAME_OBJECT, args, kwargs),
+            _models.RENAME_OBJECT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def restore_object(
-        self, input: RestoreObjectInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RestoreObjectInput | _models.RestoreObjectInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RestoreObjectOutput: ...
+
+    @_overload
+    def restore_object(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RestoreObjectInputDict],
     ) -> RestoreObjectOutput:
         """
         Note:
@@ -9011,140 +11091,143 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : To use this operation, you must have permissions to perform the
-          `s3:RestoreObject` action. The bucket owner has this permission by
-          default and can grant this permission to others. For more information
-          about permissions, see [Permissions Related to Bucket Subresource
-          Operations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
-          and [Managing Access Permissions to Your Amazon S3
-          Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html)
-          in the *Amazon S3 User Guide*.
+        :   To use this operation, you must have permissions to perform the
+            `s3:RestoreObject` action. The bucket owner has this permission by
+            default and can grant this permission to others. For more
+            information about permissions, see [Permissions Related to Bucket
+            Subresource
+            Operations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+            and [Managing Access Permissions to Your Amazon S3
+            Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html)
+            in the *Amazon S3 User Guide*.
 
         Restoring objects
 
-        : Objects that you archive to the S3 Glacier Flexible Retrieval or S3
-          Glacier Deep Archive storage class, and S3 Intelligent-Tiering Archive
-          or S3 Intelligent-Tiering Deep Archive tiers, are not accessible in
-          real time. For objects in the S3 Glacier Flexible Retrieval or S3
-          Glacier Deep Archive storage classes, you must first initiate a
-          restore request, and then wait until a temporary copy of the object is
-          available. If you want a permanent copy of the object, create a copy
-          of it in the Amazon S3 Standard storage class in your S3 bucket. To
-          access an archived object, you must restore the object for the
-          duration (number of days) that you specify. For objects in the Archive
-          Access or Deep Archive Access tiers of S3 Intelligent-Tiering, you
-          must first initiate a restore request, and then wait until the object
-          is moved into the Frequent Access tier.
+        :   Objects that you archive to the S3 Glacier Flexible Retrieval or S3
+            Glacier Deep Archive storage class, and S3 Intelligent-Tiering
+            Archive or S3 Intelligent-Tiering Deep Archive tiers, are not
+            accessible in real time. For objects in the S3 Glacier Flexible
+            Retrieval or S3 Glacier Deep Archive storage classes, you must first
+            initiate a restore request, and then wait until a temporary copy of
+            the object is available. If you want a permanent copy of the object,
+            create a copy of it in the Amazon S3 Standard storage class in your
+            S3 bucket. To access an archived object, you must restore the object
+            for the duration (number of days) that you specify. For objects in
+            the Archive Access or Deep Archive Access tiers of S3
+            Intelligent-Tiering, you must first initiate a restore request, and
+            then wait until the object is moved into the Frequent Access tier.
 
-          To restore a specific object version, you can provide a version ID. If
-          you don't provide a version ID, Amazon S3 restores the current
-          version.
+            To restore a specific object version, you can provide a version ID.
+            If you don't provide a version ID, Amazon S3 restores the current
+            version.
 
-          When restoring an archived object, you can specify one of the
-          following data access tier options in the `Tier` element of the
-          request body:
+            When restoring an archived object, you can specify one of the
+            following data access tier options in the `Tier` element of the
+            request body:
 
-          - `Expedited` - Expedited retrievals allow you to quickly access your
-            data stored in the S3 Glacier Flexible Retrieval storage class or S3
-            Intelligent-Tiering Archive tier when occasional urgent requests for
-            restoring archives are required. For all but the largest archived
-            objects (250 MB+), data accessed using Expedited retrievals is
-            typically made available within 1--5 minutes. Provisioned capacity
-            ensures that retrieval capacity for Expedited retrievals is
-            available when you need it. Expedited retrievals and provisioned
-            capacity are not available for objects stored in the S3 Glacier Deep
-            Archive storage class or S3 Intelligent-Tiering Deep Archive tier.
+            - `Expedited` - Expedited retrievals allow you to quickly access
+              your data stored in the S3 Glacier Flexible Retrieval storage
+              class or S3 Intelligent-Tiering Archive tier when occasional
+              urgent requests for restoring archives are required. For all but
+              the largest archived objects (250 MB+), data accessed using
+              Expedited retrievals is typically made available within 1--5
+              minutes. Provisioned capacity ensures that retrieval capacity for
+              Expedited retrievals is available when you need it. Expedited
+              retrievals and provisioned capacity are not available for objects
+              stored in the S3 Glacier Deep Archive storage class or S3
+              Intelligent-Tiering Deep Archive tier.
 
-          - `Standard` - Standard retrievals allow you to access any of your
-            archived objects within several hours. This is the default option
-            for retrieval requests that do not specify the retrieval option.
-            Standard retrievals typically finish within 3--5 hours for objects
-            stored in the S3 Glacier Flexible Retrieval storage class or S3
-            Intelligent-Tiering Archive tier. They typically finish within 12
-            hours for objects stored in the S3 Glacier Deep Archive storage
-            class or S3 Intelligent-Tiering Deep Archive tier. Standard
-            retrievals are free for objects stored in S3 Intelligent-Tiering.
+            - `Standard` - Standard retrievals allow you to access any of your
+              archived objects within several hours. This is the default option
+              for retrieval requests that do not specify the retrieval option.
+              Standard retrievals typically finish within 3--5 hours for objects
+              stored in the S3 Glacier Flexible Retrieval storage class or S3
+              Intelligent-Tiering Archive tier. They typically finish within 12
+              hours for objects stored in the S3 Glacier Deep Archive storage
+              class or S3 Intelligent-Tiering Deep Archive tier. Standard
+              retrievals are free for objects stored in S3 Intelligent-Tiering.
 
-          - `Bulk` - Bulk retrievals free for objects stored in the S3 Glacier
-            Flexible Retrieval and S3 Intelligent-Tiering storage classes,
-            enabling you to retrieve large amounts, even petabytes, of data at
-            no cost. Bulk retrievals typically finish within 5--12 hours for
-            objects stored in the S3 Glacier Flexible Retrieval storage class or
-            S3 Intelligent-Tiering Archive tier. Bulk retrievals are also the
-            lowest-cost retrieval option when restoring objects from S3 Glacier
-            Deep Archive. They typically finish within 48 hours for objects
-            stored in the S3 Glacier Deep Archive storage class or S3
-            Intelligent-Tiering Deep Archive tier.
+            - `Bulk` - Bulk retrievals free for objects stored in the S3 Glacier
+              Flexible Retrieval and S3 Intelligent-Tiering storage classes,
+              enabling you to retrieve large amounts, even petabytes, of data at
+              no cost. Bulk retrievals typically finish within 5--12 hours for
+              objects stored in the S3 Glacier Flexible Retrieval storage class
+              or S3 Intelligent-Tiering Archive tier. Bulk retrievals are also
+              the lowest-cost retrieval option when restoring objects from S3
+              Glacier Deep Archive. They typically finish within 48 hours for
+              objects stored in the S3 Glacier Deep Archive storage class or S3
+              Intelligent-Tiering Deep Archive tier.
 
-          For more information about archive retrieval options and provisioned
-          capacity for `Expedited` data access, see [Restoring Archived
-          Objects](https://docs.aws.amazon.com/AmazonS3/latest/dev/restoring-objects.html)
-          in the *Amazon S3 User Guide*.
+            For more information about archive retrieval options and provisioned
+            capacity for `Expedited` data access, see [Restoring Archived
+            Objects](https://docs.aws.amazon.com/AmazonS3/latest/dev/restoring-objects.html)
+            in the *Amazon S3 User Guide*.
 
-          You can use Amazon S3 restore speed upgrade to change the restore
-          speed to a faster speed while it is in progress. For more information,
-          see [Upgrading the speed of an in-progress
-          restore](https://docs.aws.amazon.com/AmazonS3/latest/dev/restoring-objects.html#restoring-objects-upgrade-tier.title.html)
-          in the *Amazon S3 User Guide*.
+            You can use Amazon S3 restore speed upgrade to change the restore
+            speed to a faster speed while it is in progress. For more
+            information, see [Upgrading the speed of an in-progress
+            restore](https://docs.aws.amazon.com/AmazonS3/latest/dev/restoring-objects.html#restoring-objects-upgrade-tier.title.html)
+            in the *Amazon S3 User Guide*.
 
-          To get the status of object restoration, you can send a `HEAD`
-          request. Operations return the `x-amz-restore` header, which provides
-          information about the restoration status, in the response. You can use
-          Amazon S3 event notifications to notify you when a restore is
-          initiated or completed. For more information, see [Configuring Amazon
-          S3 Event
-          Notifications](https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
-          in the *Amazon S3 User Guide*.
+            To get the status of object restoration, you can send a `HEAD`
+            request. Operations return the `x-amz-restore` header, which
+            provides information about the restoration status, in the response.
+            You can use Amazon S3 event notifications to notify you when a
+            restore is initiated or completed. For more information, see
+            [Configuring Amazon S3 Event
+            Notifications](https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
+            in the *Amazon S3 User Guide*.
 
-          After restoring an archived object, you can update the restoration
-          period by reissuing the request with a new period. Amazon S3 updates
-          the restoration period relative to the current time and charges only
-          for the request-there are no data transfer charges. You cannot update
-          the restoration period when Amazon S3 is actively processing your
-          current restore request for the object.
+            After restoring an archived object, you can update the restoration
+            period by reissuing the request with a new period. Amazon S3 updates
+            the restoration period relative to the current time and charges only
+            for the request-there are no data transfer charges. You cannot
+            update the restoration period when Amazon S3 is actively processing
+            your current restore request for the object.
 
-          If your bucket has a lifecycle configuration with a rule that includes
-          an expiration action, the object expiration overrides the life span
-          that you specify in a restore request. For example, if you restore an
-          object copy for 10 days, but the object is scheduled to expire in 3
-          days, Amazon S3 deletes the object in 3 days. For more information
-          about lifecycle configuration, see
-          [PutBucketLifecycleConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycleConfiguration.html)
-          and [Object Lifecycle
-          Management](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html)
-          in *Amazon S3 User Guide*.
+            If your bucket has a lifecycle configuration with a rule that
+            includes an expiration action, the object expiration overrides the
+            life span that you specify in a restore request. For example, if you
+            restore an object copy for 10 days, but the object is scheduled to
+            expire in 3 days, Amazon S3 deletes the object in 3 days. For more
+            information about lifecycle configuration, see
+            [PutBucketLifecycleConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycleConfiguration.html)
+            and [Object Lifecycle
+            Management](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html)
+            in *Amazon S3 User Guide*.
 
         Responses
 
-        : A successful action returns either the `200 OK` or `202 Accepted`
-          status code.
+        :   A successful action returns either the `200 OK` or `202 Accepted`
+            status code.
 
-          - If the object is not previously restored, then Amazon S3 returns
-            `202 Accepted` in the response.
+            - If the object is not previously restored, then Amazon S3 returns
+              `202 Accepted` in the response.
 
-          - If the object is previously restored, Amazon S3 returns `200 OK` in
-            the response.
+            - If the object is previously restored, Amazon S3 returns `200 OK`
+              in the response.
 
-          - Special errors:
+            - Special errors:
 
-            - *Code: RestoreAlreadyInProgress*
+              - *Code: RestoreAlreadyInProgress*
 
-            - *Cause: Object restore is already in progress.*
+              - *Cause: Object restore is already in progress.*
 
-            - *HTTP Status Code: 409 Conflict*
+              - *HTTP Status Code: 409 Conflict*
 
-            - *SOAP Fault Code Prefix: Client*
+              - *SOAP Fault Code Prefix: Client*
 
-          - - *Code: GlacierExpeditedRetrievalNotAvailable*
+            - - *Code: GlacierExpeditedRetrievalNotAvailable*
 
-            - *Cause: expedited retrievals are currently not available. Try
-              again later. (Returned if there is insufficient capacity to
-              process the Expedited request. This error applies only to
-              Expedited retrievals and not to S3 Standard or Bulk retrievals.)*
+              - *Cause: expedited retrievals are currently not available. Try
+                again later. (Returned if there is insufficient capacity to
+                process the Expedited request. This error applies only to
+                Expedited retrievals and not to S3 Standard or Bulk
+                retrievals.)*
 
-            - *HTTP Status Code: 503*
+              - *HTTP Status Code: 503*
 
-            - *SOAP Fault Code Prefix: N/A*
+              - *SOAP Fault Code Prefix: N/A*
 
         The following operations are related to `RestoreObject`:
 
@@ -9158,8 +11241,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `RestoreObjectInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -9169,12 +11250,36 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `RestoreObjectOutput`.
         """
-        return self._invoke(input, _models.RESTORE_OBJECT, [], plugins)
 
+    def restore_object(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RestoreObjectOutput:
+        return self._invoke(
+            self._select_input(_models.RESTORE_OBJECT, args, kwargs),
+            _models.RESTORE_OBJECT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_bucket_metadata_annotation_table_configuration(
         self,
-        input: UpdateBucketMetadataAnnotationTableConfigurationInput,
+        request: _models.UpdateBucketMetadataAnnotationTableConfigurationInput
+        | _models.UpdateBucketMetadataAnnotationTableConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateBucketMetadataAnnotationTableConfigurationOutput: ...
+
+    @_overload
+    def update_bucket_metadata_annotation_table_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[
+            _models.UpdateBucketMetadataAnnotationTableConfigurationInputDict
+        ],
     ) -> UpdateBucketMetadataAnnotationTableConfigurationOutput:
         """
         Updates the annotation table configuration for an Amazon S3 bucket's
@@ -9205,8 +11310,6 @@ class S3Client(Client[S3Config]):
         - [GetBucketMetadataConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetadataConfiguration.html)
 
         Args:
-            input:
-                An instance of `UpdateBucketMetadataAnnotationTableConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -9216,17 +11319,40 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `UpdateBucketMetadataAnnotationTableConfigurationOutput`.
         """
+
+    def update_bucket_metadata_annotation_table_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateBucketMetadataAnnotationTableConfigurationOutput:
         return self._invoke(
-            input,
+            self._select_input(
+                _models.UPDATE_BUCKET_METADATA_ANNOTATION_TABLE_CONFIGURATION,
+                args,
+                kwargs,
+            ),
             _models.UPDATE_BUCKET_METADATA_ANNOTATION_TABLE_CONFIGURATION,
             [],
             plugins,
         )
 
+    @_overload
     def update_bucket_metadata_inventory_table_configuration(
         self,
-        input: UpdateBucketMetadataInventoryTableConfigurationInput,
+        request: _models.UpdateBucketMetadataInventoryTableConfigurationInput
+        | _models.UpdateBucketMetadataInventoryTableConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateBucketMetadataInventoryTableConfigurationOutput: ...
+
+    @_overload
+    def update_bucket_metadata_inventory_table_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[
+            _models.UpdateBucketMetadataInventoryTableConfigurationInputDict
+        ],
     ) -> UpdateBucketMetadataInventoryTableConfigurationOutput:
         """
         Enables or disables a live inventory table for an S3 Metadata
@@ -9237,33 +11363,34 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : To use this operation, you must have the following permissions. For
-          more information, see [Setting up permissions for configuring metadata
-          tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html)
-          in the *Amazon S3 User Guide*.
+        :   To use this operation, you must have the following permissions. For
+            more information, see [Setting up permissions for configuring
+            metadata
+            tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html)
+            in the *Amazon S3 User Guide*.
 
-          If you want to encrypt your inventory table with server-side
-          encryption with Key Management Service (KMS) keys (SSE-KMS), you need
-          additional permissions in your KMS key policy. For more information,
-          see [Setting up permissions for configuring metadata
-          tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html)
-          in the *Amazon S3 User Guide*.
+            If you want to encrypt your inventory table with server-side
+            encryption with Key Management Service (KMS) keys (SSE-KMS), you
+            need additional permissions in your KMS key policy. For more
+            information, see [Setting up permissions for configuring metadata
+            tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html)
+            in the *Amazon S3 User Guide*.
 
-          - `s3:UpdateBucketMetadataInventoryTableConfiguration`
+            - `s3:UpdateBucketMetadataInventoryTableConfiguration`
 
-          - `s3tables:CreateTableBucket`
+            - `s3tables:CreateTableBucket`
 
-          - `s3tables:CreateNamespace`
+            - `s3tables:CreateNamespace`
 
-          - `s3tables:GetTable`
+            - `s3tables:GetTable`
 
-          - `s3tables:CreateTable`
+            - `s3tables:CreateTable`
 
-          - `s3tables:PutTablePolicy`
+            - `s3tables:PutTablePolicy`
 
-          - `s3tables:PutTableEncryption`
+            - `s3tables:PutTableEncryption`
 
-          - `kms:DescribeKey`
+            - `kms:DescribeKey`
 
         The following operations are related to
         `UpdateBucketMetadataInventoryTableConfiguration`:
@@ -9282,8 +11409,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `UpdateBucketMetadataInventoryTableConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -9293,17 +11418,40 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `UpdateBucketMetadataInventoryTableConfigurationOutput`.
         """
+
+    def update_bucket_metadata_inventory_table_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateBucketMetadataInventoryTableConfigurationOutput:
         return self._invoke(
-            input,
+            self._select_input(
+                _models.UPDATE_BUCKET_METADATA_INVENTORY_TABLE_CONFIGURATION,
+                args,
+                kwargs,
+            ),
             _models.UPDATE_BUCKET_METADATA_INVENTORY_TABLE_CONFIGURATION,
             [],
             plugins,
         )
 
+    @_overload
     def update_bucket_metadata_journal_table_configuration(
         self,
-        input: UpdateBucketMetadataJournalTableConfigurationInput,
+        request: _models.UpdateBucketMetadataJournalTableConfigurationInput
+        | _models.UpdateBucketMetadataJournalTableConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateBucketMetadataJournalTableConfigurationOutput: ...
+
+    @_overload
+    def update_bucket_metadata_journal_table_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[
+            _models.UpdateBucketMetadataJournalTableConfigurationInputDict
+        ],
     ) -> UpdateBucketMetadataJournalTableConfigurationOutput:
         """
         Enables or disables journal table record expiration for an S3 Metadata
@@ -9314,11 +11462,12 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : To use this operation, you must have the
-          `s3:UpdateBucketMetadataJournalTableConfiguration` permission. For
-          more information, see [Setting up permissions for configuring metadata
-          tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html)
-          in the *Amazon S3 User Guide*.
+        :   To use this operation, you must have the
+            `s3:UpdateBucketMetadataJournalTableConfiguration` permission. For
+            more information, see [Setting up permissions for configuring
+            metadata
+            tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html)
+            in the *Amazon S3 User Guide*.
 
         The following operations are related to
         `UpdateBucketMetadataJournalTableConfiguration`:
@@ -9337,8 +11486,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `UpdateBucketMetadataJournalTableConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -9348,15 +11495,36 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `UpdateBucketMetadataJournalTableConfigurationOutput`.
         """
+
+    def update_bucket_metadata_journal_table_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateBucketMetadataJournalTableConfigurationOutput:
         return self._invoke(
-            input,
+            self._select_input(
+                _models.UPDATE_BUCKET_METADATA_JOURNAL_TABLE_CONFIGURATION, args, kwargs
+            ),
             _models.UPDATE_BUCKET_METADATA_JOURNAL_TABLE_CONFIGURATION,
             [],
             plugins,
         )
 
+    @_overload
     def update_object_encryption(
-        self, input: UpdateObjectEncryptionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateObjectEncryptionInput
+        | _models.UpdateObjectEncryptionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateObjectEncryptionOutput: ...
+
+    @_overload
+    def update_object_encryption(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateObjectEncryptionInputDict],
     ) -> UpdateObjectEncryptionOutput:
         """
         Note:
@@ -9405,98 +11573,98 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : - To use the `UpdateObjectEncryption` operation, you must have the
-            following permissions:
+        :   - To use the `UpdateObjectEncryption` operation, you must have the
+              following permissions:
 
-            - `s3:UpdateObjectEncryption`
+              - `s3:UpdateObjectEncryption`
 
-            - `kms:Encrypt`
+              - `kms:Encrypt`
 
-            - `kms:Decrypt`
+              - `kms:Decrypt`
 
-            - `kms:GenerateDataKey`
+              - `kms:GenerateDataKey`
 
-            - `kms:ReEncrypt*`
+              - `kms:ReEncrypt*`
 
-          - If you're using Organizations, to use this operation with
-            customer-managed KMS keys from other Amazon Web Services accounts
-            within your organization, you must have the
-            `organizations:DescribeAccount` permission.
+            - If you're using Organizations, to use this operation with
+              customer-managed KMS keys from other Amazon Web Services accounts
+              within your organization, you must have the
+              `organizations:DescribeAccount` permission.
 
         <!-- -->
 
         Errors
 
-        : - You might receive an `InvalidRequest` error for several reasons.
-            Depending on the reason for the error, you might receive one of the
-            following messages:
+        :   - You might receive an `InvalidRequest` error for several reasons.
+              Depending on the reason for the error, you might receive one of
+              the following messages:
 
-            - The `UpdateObjectEncryption` operation doesn't supported
-              unencrypted source objects. Only source objects encrypted with
-              SSE-S3 or SSE-KMS are supported.
+              - The `UpdateObjectEncryption` operation doesn't supported
+                unencrypted source objects. Only source objects encrypted with
+                SSE-S3 or SSE-KMS are supported.
 
-            - The `UpdateObjectEncryption` operation doesn't support source
-              objects with the encryption type DSSE-KMS or SSE-C. Only source
-              objects encrypted with SSE-S3 or SSE-KMS are supported.
+              - The `UpdateObjectEncryption` operation doesn't support source
+                objects with the encryption type DSSE-KMS or SSE-C. Only source
+                objects encrypted with SSE-S3 or SSE-KMS are supported.
 
-            - The `UpdateObjectEncryption` operation doesn't support updating
-              the encryption type to DSSE-KMS or SSE-C. Modify the request to
-              specify SSE-KMS for the updated encryption type, and then try
-              again.
+              - The `UpdateObjectEncryption` operation doesn't support updating
+                the encryption type to DSSE-KMS or SSE-C. Modify the request to
+                specify SSE-KMS for the updated encryption type, and then try
+                again.
 
-            - Requests that modify an object encryption configuration require
-              Amazon Web Services Signature Version 4. Modify the request to use
-              Amazon Web Services Signature Version 4, and then try again.
+              - Requests that modify an object encryption configuration require
+                Amazon Web Services Signature Version 4. Modify the request to
+                use Amazon Web Services Signature Version 4, and then try again.
 
-            - Requests that modify an object encryption configuration require a
-              valid new encryption type. Valid values are `SSEKMS`. Modify the
-              request to specify SSE-KMS for the updated encryption type, and
-              then try again.
+              - Requests that modify an object encryption configuration require
+                a valid new encryption type. Valid values are `SSEKMS`. Modify
+                the request to specify SSE-KMS for the updated encryption type,
+                and then try again.
 
-            - Requests that modify an object's encryption type to SSE-KMS
-              require an Amazon Web Services KMS key Amazon Resource Name (ARN).
-              Modify the request to specify a KMS key ARN, and then try again.
+              - Requests that modify an object's encryption type to SSE-KMS
+                require an Amazon Web Services KMS key Amazon Resource Name
+                (ARN). Modify the request to specify a KMS key ARN, and then try
+                again.
 
-            - Requests that modify an object's encryption type to SSE-KMS
-              require a valid Amazon Web Services KMS key Amazon Resource Name
-              (ARN). Confirm that you have a correctly formatted KMS key ARN in
-              your request, and then try again.
+              - Requests that modify an object's encryption type to SSE-KMS
+                require a valid Amazon Web Services KMS key Amazon Resource Name
+                (ARN). Confirm that you have a correctly formatted KMS key ARN
+                in your request, and then try again.
 
-            - The `BucketKeyEnabled` value isn't valid. Valid values are `true`
-              or `false`. Modify the request to specify a valid value, and then
-              try again.
+              - The `BucketKeyEnabled` value isn't valid. Valid values are
+                `true` or `false`. Modify the request to specify a valid value,
+                and then try again.
 
-          - You might receive an `AccessDenied` error for several reasons.
-            Depending on the reason for the error, you might receive one of the
-            following messages:
+            - You might receive an `AccessDenied` error for several reasons.
+              Depending on the reason for the error, you might receive one of
+              the following messages:
 
-            - The Amazon Web Services KMS key in the request must be owned by
-              the same account as the bucket. Modify the request to specify a
-              KMS key from the same account, and then try again.
+              - The Amazon Web Services KMS key in the request must be owned by
+                the same account as the bucket. Modify the request to specify a
+                KMS key from the same account, and then try again.
 
-            - The bucket owner's account was approved to make
-              `UpdateObjectEncryption` requests that use any Amazon Web Services
-              KMS key in their organization, but the bucket owner's account
-              isn't part of an organization in Organizations. Make sure that
-              the bucket owner's account and the specified KMS key belong to
-              the same organization, and then try again.
+              - The bucket owner's account was approved to make
+                `UpdateObjectEncryption` requests that use any Amazon Web
+                Services KMS key in their organization, but the bucket owner's
+                account isn't part of an organization in Organizations. Make
+                sure that the bucket owner's account and the specified KMS key
+                belong to the same organization, and then try again.
 
-            - The specified Amazon Web Services KMS key must be from the same
-              organization in Organizations as the bucket. Specify a KMS key
-              that belongs to the same organization as the bucket, and then try
-              again.
+              - The specified Amazon Web Services KMS key must be from the same
+                organization in Organizations as the bucket. Specify a KMS key
+                that belongs to the same organization as the bucket, and then
+                try again.
 
-            - The encryption type for the specified object can't be updated
-              because that object is protected by S3 Object Lock. If the object
-              has a governance-mode retention period or a legal hold, you must
-              first remove the Object Lock status on the object before you issue
-              your `UpdateObjectEncryption` request. You can't use the
-              `UpdateObjectEncryption` operation with objects that have an
-              Object Lock compliance mode retention period applied to them.
+              - The encryption type for the specified object can't be updated
+                because that object is protected by S3 Object Lock. If the
+                object has a governance-mode retention period or a legal hold,
+                you must first remove the Object Lock status on the object
+                before you issue your `UpdateObjectEncryption` request. You
+                can't use the `UpdateObjectEncryption` operation with objects
+                that have an Object Lock compliance mode retention period
+                applied to them.
 
         Args:
-            input:
-                An instance of `UpdateObjectEncryptionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -9506,10 +11674,33 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `UpdateObjectEncryptionOutput`.
         """
-        return self._invoke(input, _models.UPDATE_OBJECT_ENCRYPTION, [], plugins)
 
+    def update_object_encryption(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateObjectEncryptionOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_OBJECT_ENCRYPTION, args, kwargs),
+            _models.UPDATE_OBJECT_ENCRYPTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def upload_part(
-        self, input: UploadPartInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UploadPartInput | _models.UploadPartInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UploadPartOutput: ...
+
+    @_overload
+    def upload_part(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UploadPartInputDict],
     ) -> UploadPartOutput:
         """
         Uploads a part in a multipart upload.
@@ -9566,132 +11757,135 @@ class S3Client(Client[S3Config]):
 
         Permissions
 
-        : - **General purpose bucket permissions** - To perform a multipart
-            upload with encryption using an Key Management Service key, the
-            requester must have permission to the `kms:Decrypt` and
-            `kms:GenerateDataKey` actions on the key. The requester must also
-            have permissions for the `kms:GenerateDataKey` action for the
-            `CreateMultipartUpload` API. Then, the requester needs permissions
-            for the `kms:Decrypt` action on the `UploadPart` and
-            `UploadPartCopy` APIs.
+        :   - **General purpose bucket permissions** - To perform a multipart
+              upload with encryption using an Key Management Service key, the
+              requester must have permission to the `kms:Decrypt` and
+              `kms:GenerateDataKey` actions on the key. The requester must also
+              have permissions for the `kms:GenerateDataKey` action for the
+              `CreateMultipartUpload` API. Then, the requester needs permissions
+              for the `kms:Decrypt` action on the `UploadPart` and
+              `UploadPartCopy` APIs.
 
-            These permissions are required because Amazon S3 must decrypt and
-            read data from the encrypted file parts before it completes the
-            multipart upload. For more information about KMS permissions, see
-            [Protecting data using server-side encryption with
-            KMS](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html)
-            in the *Amazon S3 User Guide*. For information about the permissions
-            required to use the multipart upload API, see [Multipart upload and
-            permissions](https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html)
-            and [Multipart upload API and
-            permissions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html#mpuAndPermissions)
-            in the *Amazon S3 User Guide*.
+              These permissions are required because Amazon S3 must decrypt and
+              read data from the encrypted file parts before it completes the
+              multipart upload. For more information about KMS permissions, see
+              [Protecting data using server-side encryption with
+              KMS](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html)
+              in the *Amazon S3 User Guide*. For information about the
+              permissions required to use the multipart upload API, see
+              [Multipart upload and
+              permissions](https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html)
+              and [Multipart upload API and
+              permissions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html#mpuAndPermissions)
+              in the *Amazon S3 User Guide*.
 
-          - **Directory bucket permissions** - To grant access to this API
-            operation on a directory bucket, we recommend that you use the
-            [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
-            API operation for session-based authorization. Specifically, you
-            grant the `s3express:CreateSession` permission to the directory
-            bucket in a bucket policy or an IAM identity-based policy. Then, you
-            make the `CreateSession` API call on the bucket to obtain a session
-            token. With the session token in your request header, you can make
-            API requests to this operation. After the session token expires, you
-            make another `CreateSession` API call to generate a new session
-            token for use. Amazon Web Services CLI or SDKs create session and
-            refresh the session token automatically to avoid service
-            interruptions when a session expires. For more information about
-            authorization, see
-            [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
-            .
+            - **Directory bucket permissions** - To grant access to this API
+              operation on a directory bucket, we recommend that you use the
+              [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
+              API operation for session-based authorization. Specifically, you
+              grant the `s3express:CreateSession` permission to the directory
+              bucket in a bucket policy or an IAM identity-based policy. Then,
+              you make the `CreateSession` API call on the bucket to obtain a
+              session token. With the session token in your request header, you
+              can make API requests to this operation. After the session token
+              expires, you make another `CreateSession` API call to generate a
+              new session token for use. Amazon Web Services CLI or SDKs create
+              session and refresh the session token automatically to avoid
+              service interruptions when a session expires. For more information
+              about authorization, see
+              [`CreateSession`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
+              .
 
-            If the object is encrypted with SSE-KMS, you must also have the
-            `kms:GenerateDataKey` and `kms:Decrypt` permissions in IAM
-            identity-based policies and KMS key policies for the KMS key.
+              If the object is encrypted with SSE-KMS, you must also have the
+              `kms:GenerateDataKey` and `kms:Decrypt` permissions in IAM
+              identity-based policies and KMS key policies for the KMS key.
 
         Data integrity
 
-        : **General purpose bucket** - To ensure that data is not corrupted
-          traversing the network, specify the `Content-MD5` header in the upload
-          part request. Amazon S3 checks the part data against the provided MD5
-          value. If they do not match, Amazon S3 returns an error. If the upload
-          request is signed with Signature Version 4, then Amazon Web Services
-          S3 uses the `x-amz-content-sha256` header as a checksum instead of
-          `Content-MD5`. For more information see [Authenticating Requests:
-          Using the Authorization Header (Amazon Web Services Signature Version
-          4)](https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-auth-using-authorization-header.html).
+        :   **General purpose bucket** - To ensure that data is not corrupted
+            traversing the network, specify the `Content-MD5` header in the
+            upload part request. Amazon S3 checks the part data against the
+            provided MD5 value. If they do not match, Amazon S3 returns an
+            error. If the upload request is signed with Signature Version 4,
+            then Amazon Web Services S3 uses the `x-amz-content-sha256` header
+            as a checksum instead of `Content-MD5`. For more information see
+            [Authenticating Requests: Using the Authorization Header (Amazon Web
+            Services Signature Version
+            4)](https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-auth-using-authorization-header.html).
 
-          Note:
-            **Directory buckets** - MD5 is not supported by directory buckets. You
-            can use checksum algorithms to check object integrity.
+            Note:
+            **Directory buckets** - MD5 is not supported by directory buckets.
+            You can use checksum algorithms to check object integrity.
 
         Encryption
 
-        : - **General purpose bucket** - Server-side encryption is for data
-            encryption at rest. Amazon S3 encrypts your data as it writes it to
-            disks in its data centers and decrypts it when you access it. You
-            have mutually exclusive options to protect data using server-side
-            encryption in Amazon S3, depending on how you choose to manage the
-            encryption keys. Specifically, the encryption key options are Amazon
-            S3 managed keys (SSE-S3), Amazon Web Services KMS keys (SSE-KMS),
-            and Customer-Provided Keys (SSE-C). Amazon S3 encrypts data with
-            server-side encryption using Amazon S3 managed keys (SSE-S3) by
-            default. You can optionally tell Amazon S3 to encrypt data at rest
-            using server-side encryption with other key options. The option you
-            use depends on whether you want to use KMS keys (SSE-KMS) or provide
-            your own encryption key (SSE-C).
+        :   - **General purpose bucket** - Server-side encryption is for data
+              encryption at rest. Amazon S3 encrypts your data as it writes it
+              to disks in its data centers and decrypts it when you access it.
+              You have mutually exclusive options to protect data using
+              server-side encryption in Amazon S3, depending on how you choose
+              to manage the encryption keys. Specifically, the encryption key
+              options are Amazon S3 managed keys (SSE-S3), Amazon Web Services
+              KMS keys (SSE-KMS), and Customer-Provided Keys (SSE-C). Amazon S3
+              encrypts data with server-side encryption using Amazon S3 managed
+              keys (SSE-S3) by default. You can optionally tell Amazon S3 to
+              encrypt data at rest using server-side encryption with other key
+              options. The option you use depends on whether you want to use KMS
+              keys (SSE-KMS) or provide your own encryption key (SSE-C).
 
-            Server-side encryption is supported by the S3 Multipart Upload
-            operations. Unless you are using a customer-provided encryption key
-            (SSE-C), you don't need to specify the encryption parameters in
-            each UploadPart request. Instead, you only need to specify the
-            server-side encryption parameters in the initial Initiate Multipart
-            request. For more information, see
-            [CreateMultipartUpload](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html).
+              Server-side encryption is supported by the S3 Multipart Upload
+              operations. Unless you are using a customer-provided encryption
+              key (SSE-C), you don't need to specify the encryption parameters
+              in each UploadPart request. Instead, you only need to specify the
+              server-side encryption parameters in the initial Initiate
+              Multipart request. For more information, see
+              [CreateMultipartUpload](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html).
 
-            Note:
+              Note:
             If you have server-side encryption with customer-provided keys
             (SSE-C) blocked for your general purpose bucket, you will get an
             HTTP 403 Access Denied error when you specify the SSE-C request
-            headers while writing new data to your bucket. For more information,
-            see [Blocking or unblocking SSE-C for a general purpose
+            headers while writing new data to your bucket. For more
+            information, see [Blocking or unblocking SSE-C for a general
+            purpose
             bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/blocking-unblocking-s3-c-encryption-gpb.html).
 
-            If you request server-side encryption using a customer-provided
-            encryption key (SSE-C) in your initiate multipart upload request,
-            you must provide identical encryption information in each part
-            upload using the following request headers.
+              If you request server-side encryption using a customer-provided
+              encryption key (SSE-C) in your initiate multipart upload request,
+              you must provide identical encryption information in each part
+              upload using the following request headers.
 
-            - x-amz-server-side-encryption-customer-algorithm
+              - x-amz-server-side-encryption-customer-algorithm
 
-            - x-amz-server-side-encryption-customer-key
+              - x-amz-server-side-encryption-customer-key
 
-            - x-amz-server-side-encryption-customer-key-MD5
+              - x-amz-server-side-encryption-customer-key-MD5
 
-            For more information, see [Using Server-Side
-            Encryption](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)
-            in the *Amazon S3 User Guide*.
+              For more information, see [Using Server-Side
+              Encryption](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)
+              in the *Amazon S3 User Guide*.
 
-          - **Directory buckets** - For directory buckets, there are only two
-            supported options for server-side encryption: server-side encryption
-            with Amazon S3 managed keys (SSE-S3) (`AES256`) and server-side
-            encryption with KMS keys (SSE-KMS) (`aws:kms`).
+            - **Directory buckets** - For directory buckets, there are only two
+              supported options for server-side encryption: server-side
+              encryption with Amazon S3 managed keys (SSE-S3) (`AES256`) and
+              server-side encryption with KMS keys (SSE-KMS) (`aws:kms`).
 
         Special errors
 
-        : - Error Code: `NoSuchUpload`
+        :   - Error Code: `NoSuchUpload`
 
-            - Description: The specified multipart upload does not exist. The
-              upload ID might be invalid, or the multipart upload might have
-              been aborted or completed.
+              - Description: The specified multipart upload does not exist. The
+                upload ID might be invalid, or the multipart upload might have
+                been aborted or completed.
 
-            - HTTP Status Code: 404 Not Found
+              - HTTP Status Code: 404 Not Found
 
-            - SOAP Fault Code Prefix: Client
+              - SOAP Fault Code Prefix: Client
 
         HTTP Host header syntax
 
-        : **Directory buckets** - The HTTP Host header syntax is
-          ` `*`Bucket-name`*`.s3express-`*`zone-id`*`.`*`region-code`*`.amazonaws.com`.
+        :   **Directory buckets** - The HTTP Host header syntax is
+            ` `*`Bucket-name`*`.s3express-`*`zone-id`*`.`*`region-code`*`.amazonaws.com`.
 
         The following operations are related to `UploadPart`:
 
@@ -9711,8 +11905,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `UploadPartInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -9722,10 +11914,33 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `UploadPartOutput`.
         """
-        return self._invoke(input, _models.UPLOAD_PART, [], plugins)
 
+    def upload_part(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UploadPartOutput:
+        return self._invoke(
+            self._select_input(_models.UPLOAD_PART, args, kwargs),
+            _models.UPLOAD_PART,
+            [],
+            plugins,
+        )
+
+    @_overload
     def upload_part_copy(
-        self, input: UploadPartCopyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UploadPartCopyInput | _models.UploadPartCopyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UploadPartCopyOutput: ...
+
+    @_overload
+    def upload_part_copy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UploadPartCopyInputDict],
     ) -> UploadPartCopyOutput:
         """
         Uploads a part by copying data from an existing object as data source.
@@ -9772,149 +11987,150 @@ class S3Client(Client[S3Config]):
 
         Authentication and authorization
 
-        : All `UploadPartCopy` requests must be authenticated and signed by
-          using IAM credentials (access key ID and secret access key for the IAM
-          identities). All headers with the `x-amz-` prefix, including
-          `x-amz-copy-source`, must be signed. For more information, see [REST
-          Authentication](https://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html).
+        :   All `UploadPartCopy` requests must be authenticated and signed by
+            using IAM credentials (access key ID and secret access key for the
+            IAM identities). All headers with the `x-amz-` prefix, including
+            `x-amz-copy-source`, must be signed. For more information, see [REST
+            Authentication](https://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html).
 
-          **Directory buckets** - You must use IAM credentials to authenticate
-          and authorize your access to the `UploadPartCopy` API operation,
-          instead of using the temporary security credentials through the
-          `CreateSession` API operation.
+            **Directory buckets** - You must use IAM credentials to authenticate
+            and authorize your access to the `UploadPartCopy` API operation,
+            instead of using the temporary security credentials through the
+            `CreateSession` API operation.
 
-          Amazon Web Services CLI or SDKs handles authentication and
-          authorization on your behalf.
+            Amazon Web Services CLI or SDKs handles authentication and
+            authorization on your behalf.
 
         Permissions
 
-        : You must have `READ` access to the source object and `WRITE` access to
-          the destination bucket.
+        :   You must have `READ` access to the source object and `WRITE` access
+            to the destination bucket.
 
-          - **General purpose bucket permissions** - You must have the
-            permissions in a policy based on the bucket types of your source
-            bucket and destination bucket in an `UploadPartCopy` operation.
+            - **General purpose bucket permissions** - You must have the
+              permissions in a policy based on the bucket types of your source
+              bucket and destination bucket in an `UploadPartCopy` operation.
 
-            - If the source object is in a general purpose bucket, you must have
-              the **`s3:GetObject`** permission to read the source object that
-              is being copied.
+              - If the source object is in a general purpose bucket, you must
+                have the **`s3:GetObject`** permission to read the source object
+                that is being copied.
 
-            - If the destination bucket is a general purpose bucket, you must
-              have the **`s3:PutObject`** permission to write the object copy to
-              the destination bucket.
+              - If the destination bucket is a general purpose bucket, you must
+                have the **`s3:PutObject`** permission to write the object copy
+                to the destination bucket.
 
-            - To perform a multipart upload with encryption using an Key
-              Management Service key, the requester must have permission to the
-              `kms:Decrypt` and `kms:GenerateDataKey` actions on the key. The
-              requester must also have permissions for the `kms:GenerateDataKey`
-              action for the `CreateMultipartUpload` API. Then, the requester
-              needs permissions for the `kms:Decrypt` action on the `UploadPart`
-              and `UploadPartCopy` APIs. These permissions are required because
-              Amazon S3 must decrypt and read data from the encrypted file parts
-              before it completes the multipart upload. For more information
-              about KMS permissions, see [Protecting data using server-side
-              encryption with
-              KMS](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html)
-              in the *Amazon S3 User Guide*. For information about the
-              permissions required to use the multipart upload API, see
-              [Multipart upload and
-              permissions](https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html)
-              and [Multipart upload API and
-              permissions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html#mpuAndPermissions)
+              - To perform a multipart upload with encryption using an Key
+                Management Service key, the requester must have permission to
+                the `kms:Decrypt` and `kms:GenerateDataKey` actions on the key.
+                The requester must also have permissions for the
+                `kms:GenerateDataKey` action for the `CreateMultipartUpload`
+                API. Then, the requester needs permissions for the `kms:Decrypt`
+                action on the `UploadPart` and `UploadPartCopy` APIs. These
+                permissions are required because Amazon S3 must decrypt and read
+                data from the encrypted file parts before it completes the
+                multipart upload. For more information about KMS permissions,
+                see [Protecting data using server-side encryption with
+                KMS](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html)
+                in the *Amazon S3 User Guide*. For information about the
+                permissions required to use the multipart upload API, see
+                [Multipart upload and
+                permissions](https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html)
+                and [Multipart upload API and
+                permissions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html#mpuAndPermissions)
+                in the *Amazon S3 User Guide*.
+
+            - **Directory bucket permissions** - You must have permissions in a
+              bucket policy or an IAM identity-based policy based on the source
+              and destination bucket types in an `UploadPartCopy` operation.
+
+              - If the source object that you want to copy is in a directory
+                bucket, you must have the **`s3express:CreateSession`**
+                permission in the `Action` element of a policy to read the
+                object. If no session mode is specified, the session will be
+                created with the maximum allowable privilege, attempting
+                `ReadWrite` first, then `ReadOnly` if `ReadWrite` is not
+                permitted. If you want to explicitly restrict the access to be
+                read-only, you can set the `s3express:SessionMode` condition key
+                to `ReadOnly` on the copy source bucket.
+
+              - If the copy destination is a directory bucket, you must have the
+                **`s3express:CreateSession`** permission in the `Action` element
+                of a policy to write the object to the destination. The
+                `s3express:SessionMode` condition key cannot be set to
+                `ReadOnly` on the copy destination.
+
+              If the object is encrypted with SSE-KMS, you must also have the
+              `kms:GenerateDataKey` and `kms:Decrypt` permissions in IAM
+              identity-based policies and KMS key policies for the KMS key.
+
+              For example policies, see [Example bucket policies for S3 Express
+              One
+              Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-example-bucket-policies.html)
+              and [Amazon Web Services Identity and Access Management (IAM)
+              identity-based policies for S3 Express One
+              Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-identity-policies.html)
               in the *Amazon S3 User Guide*.
-
-          - **Directory bucket permissions** - You must have permissions in a
-            bucket policy or an IAM identity-based policy based on the source
-            and destination bucket types in an `UploadPartCopy` operation.
-
-            - If the source object that you want to copy is in a directory
-              bucket, you must have the **`s3express:CreateSession`** permission
-              in the `Action` element of a policy to read the object. If no
-              session mode is specified, the session will be created with the
-              maximum allowable privilege, attempting `ReadWrite` first, then
-              `ReadOnly` if `ReadWrite` is not permitted. If you want to
-              explicitly restrict the access to be read-only, you can set the
-              `s3express:SessionMode` condition key to `ReadOnly` on the copy
-              source bucket.
-
-            - If the copy destination is a directory bucket, you must have the
-              **`s3express:CreateSession`** permission in the `Action` element
-              of a policy to write the object to the destination. The
-              `s3express:SessionMode` condition key cannot be set to `ReadOnly`
-              on the copy destination.
-
-            If the object is encrypted with SSE-KMS, you must also have the
-            `kms:GenerateDataKey` and `kms:Decrypt` permissions in IAM
-            identity-based policies and KMS key policies for the KMS key.
-
-            For example policies, see [Example bucket policies for S3 Express
-            One
-            Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-example-bucket-policies.html)
-            and [Amazon Web Services Identity and Access Management (IAM)
-            identity-based policies for S3 Express One
-            Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-identity-policies.html)
-            in the *Amazon S3 User Guide*.
 
         Encryption
 
-        : - **General purpose buckets** - For information about using
-            server-side encryption with customer-provided encryption keys with
-            the `UploadPartCopy` operation, see
-            [CopyObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html)
-            and
-            [UploadPart](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html).
+        :   - **General purpose buckets** - For information about using
+              server-side encryption with customer-provided encryption keys with
+              the `UploadPartCopy` operation, see
+              [CopyObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html)
+              and
+              [UploadPart](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html).
 
-            Note:
+              Note:
             If you have server-side encryption with customer-provided keys
             (SSE-C) blocked for your general purpose bucket, you will get an
             HTTP 403 Access Denied error when you specify the SSE-C request
-            headers while writing new data to your bucket. For more information,
-            see [Blocking or unblocking SSE-C for a general purpose
+            headers while writing new data to your bucket. For more
+            information, see [Blocking or unblocking SSE-C for a general
+            purpose
             bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/blocking-unblocking-s3-c-encryption-gpb.html).
 
-          - **Directory buckets** - For directory buckets, there are only two
-            supported options for server-side encryption: server-side encryption
-            with Amazon S3 managed keys (SSE-S3) (`AES256`) and server-side
-            encryption with KMS keys (SSE-KMS) (`aws:kms`). For more
-            information, see [Protecting data with server-side
-            encryption](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-serv-side-encryption.html)
-            in the *Amazon S3 User Guide*.
+            - **Directory buckets** - For directory buckets, there are only two
+              supported options for server-side encryption: server-side
+              encryption with Amazon S3 managed keys (SSE-S3) (`AES256`) and
+              server-side encryption with KMS keys (SSE-KMS) (`aws:kms`). For
+              more information, see [Protecting data with server-side
+              encryption](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-serv-side-encryption.html)
+              in the *Amazon S3 User Guide*.
 
-            Note:
+              Note:
             For directory buckets, when you perform a `CreateMultipartUpload`
-            operation and an `UploadPartCopy` operation, the request headers you
-            provide in the `CreateMultipartUpload` request must match the
+            operation and an `UploadPartCopy` operation, the request headers
+            you provide in the `CreateMultipartUpload` request must match the
             default encryption configuration of the destination bucket.
 
-            S3 Bucket Keys aren't supported, when you copy SSE-KMS encrypted
-            objects from general purpose buckets to directory buckets, from
-            directory buckets to general purpose buckets, or between directory
-            buckets, through
-            [UploadPartCopy](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html).
-            In this case, Amazon S3 makes a call to KMS every time a copy
-            request is made for a KMS-encrypted object.
+              S3 Bucket Keys aren't supported, when you copy SSE-KMS encrypted
+              objects from general purpose buckets to directory buckets, from
+              directory buckets to general purpose buckets, or between directory
+              buckets, through
+              [UploadPartCopy](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html).
+              In this case, Amazon S3 makes a call to KMS every time a copy
+              request is made for a KMS-encrypted object.
 
         Special errors
 
-        : - Error Code: `NoSuchUpload`
+        :   - Error Code: `NoSuchUpload`
 
-            - Description: The specified multipart upload does not exist. The
-              upload ID might be invalid, or the multipart upload might have
-              been aborted or completed.
+              - Description: The specified multipart upload does not exist. The
+                upload ID might be invalid, or the multipart upload might have
+                been aborted or completed.
 
-            - HTTP Status Code: 404 Not Found
+              - HTTP Status Code: 404 Not Found
 
-          - Error Code: `InvalidRequest`
+            - Error Code: `InvalidRequest`
 
-            - Description: The specified copy source is not supported as a
-              byte-range copy source.
+              - Description: The specified copy source is not supported as a
+                byte-range copy source.
 
-            - HTTP Status Code: 400 Bad Request
+              - HTTP Status Code: 400 Bad Request
 
         HTTP Host header syntax
 
-        : **Directory buckets** - The HTTP Host header syntax is
-          ` `*`Bucket-name`*`.s3express-`*`zone-id`*`.`*`region-code`*`.amazonaws.com`.
+        :   **Directory buckets** - The HTTP Host header syntax is
+            ` `*`Bucket-name`*`.s3express-`*`zone-id`*`.`*`region-code`*`.amazonaws.com`.
 
         The following operations are related to `UploadPartCopy`:
 
@@ -9936,8 +12152,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `UploadPartCopyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -9947,10 +12161,34 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `UploadPartCopyOutput`.
         """
-        return self._invoke(input, _models.UPLOAD_PART_COPY, [], plugins)
 
+    def upload_part_copy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UploadPartCopyOutput:
+        return self._invoke(
+            self._select_input(_models.UPLOAD_PART_COPY, args, kwargs),
+            _models.UPLOAD_PART_COPY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def write_get_object_response(
-        self, input: WriteGetObjectResponseInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.WriteGetObjectResponseInput
+        | _models.WriteGetObjectResponseInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> WriteGetObjectResponseOutput: ...
+
+    @_overload
+    def write_get_object_response(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.WriteGetObjectResponseInputDict],
     ) -> WriteGetObjectResponseOutput:
         """
         Note:
@@ -10014,8 +12252,6 @@ class S3Client(Client[S3Config]):
             after `my`, you must URL encode this value to `my%20%20file.txt`.
 
         Args:
-            input:
-                An instance of `WriteGetObjectResponseInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -10025,7 +12261,16 @@ class S3Client(Client[S3Config]):
         Returns:
             An instance of `WriteGetObjectResponseOutput`.
         """
-        return self._invoke(input, _models.WRITE_GET_OBJECT_RESPONSE, [], plugins)
+
+    def write_get_object_response(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> WriteGetObjectResponseOutput:
+        return self._invoke(
+            self._select_input(_models.WRITE_GET_OBJECT_RESPONSE, args, kwargs),
+            _models.WRITE_GET_OBJECT_RESPONSE,
+            [],
+            plugins,
+        )
 
     def _new_config(self) -> S3Config:
         return S3Config.resolve()

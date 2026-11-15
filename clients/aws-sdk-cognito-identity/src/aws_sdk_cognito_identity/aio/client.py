@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import cast
+from typing import Unpack as _Unpack, cast, overload as _overload
 
 from smithy_aws_core.aio.identity.chain import AsyncIdentityChain
 from smithy_aws_core.config.types import ConfigSource
@@ -20,51 +20,28 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from ..models import (
-        CreateIdentityPoolInput,
         CreateIdentityPoolOutput,
-        DeleteIdentitiesInput,
         DeleteIdentitiesOutput,
-        DeleteIdentityPoolInput,
         DeleteIdentityPoolOutput,
-        DescribeIdentityInput,
         DescribeIdentityOutput,
-        DescribeIdentityPoolInput,
         DescribeIdentityPoolOutput,
-        GetCredentialsForIdentityInput,
         GetCredentialsForIdentityOutput,
-        GetIdInput,
         GetIdOutput,
-        GetIdentityPoolRolesInput,
         GetIdentityPoolRolesOutput,
-        GetOpenIdTokenForDeveloperIdentityInput,
         GetOpenIdTokenForDeveloperIdentityOutput,
-        GetOpenIdTokenInput,
         GetOpenIdTokenOutput,
-        GetPrincipalTagAttributeMapInput,
         GetPrincipalTagAttributeMapOutput,
-        ListIdentitiesInput,
         ListIdentitiesOutput,
-        ListIdentityPoolsInput,
         ListIdentityPoolsOutput,
-        ListTagsForResourceInput,
         ListTagsForResourceOutput,
-        LookupDeveloperIdentityInput,
         LookupDeveloperIdentityOutput,
-        MergeDeveloperIdentitiesInput,
         MergeDeveloperIdentitiesOutput,
-        SetIdentityPoolRolesInput,
         SetIdentityPoolRolesOutput,
-        SetPrincipalTagAttributeMapInput,
         SetPrincipalTagAttributeMapOutput,
-        TagResourceInput,
         TagResourceOutput,
-        UnlinkDeveloperIdentityInput,
         UnlinkDeveloperIdentityOutput,
-        UnlinkIdentityInput,
         UnlinkIdentityOutput,
-        UntagResourceInput,
         UntagResourceOutput,
-        UpdateIdentityPoolInput,
         UpdateIdentityPoolOutput,
     )
 
@@ -95,10 +72,24 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
     Identities](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html).
     """
 
-    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
+    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
 
+    @_overload
     async def create_identity_pool(
-        self, input: CreateIdentityPoolInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateIdentityPoolInput | _models.CreateIdentityPoolInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateIdentityPoolOutput: ...
+
+    @_overload
+    async def create_identity_pool(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateIdentityPoolInputDict],
     ) -> CreateIdentityPoolOutput:
         """
         Creates a new identity pool. The identity pool is a store of user
@@ -125,8 +116,6 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         operation.
 
         Args:
-            input:
-                An instance of `CreateIdentityPoolInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -136,10 +125,33 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         Returns:
             An instance of `CreateIdentityPoolOutput`.
         """
-        return await self._invoke(input, _models.CREATE_IDENTITY_POOL, [], plugins)
 
+    async def create_identity_pool(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateIdentityPoolOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_IDENTITY_POOL, args, kwargs),
+            _models.CREATE_IDENTITY_POOL,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_identities(
-        self, input: DeleteIdentitiesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteIdentitiesInput | _models.DeleteIdentitiesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteIdentitiesOutput: ...
+
+    @_overload
+    async def delete_identities(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteIdentitiesInputDict],
     ) -> DeleteIdentitiesOutput:
         """
         Deletes identities from an identity pool. You can specify a list of 1-60
@@ -149,8 +161,6 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         operation.
 
         Args:
-            input:
-                An instance of `DeleteIdentitiesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -160,10 +170,33 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         Returns:
             An instance of `DeleteIdentitiesOutput`.
         """
-        return await self._invoke(input, _models.DELETE_IDENTITIES, [], plugins)
 
+    async def delete_identities(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteIdentitiesOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_IDENTITIES, args, kwargs),
+            _models.DELETE_IDENTITIES,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_identity_pool(
-        self, input: DeleteIdentityPoolInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteIdentityPoolInput | _models.DeleteIdentityPoolInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteIdentityPoolOutput: ...
+
+    @_overload
+    async def delete_identity_pool(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteIdentityPoolInputDict],
     ) -> DeleteIdentityPoolOutput:
         """
         Deletes an identity pool. Once a pool is deleted, users will not be able
@@ -173,8 +206,6 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         operation.
 
         Args:
-            input:
-                An instance of `DeleteIdentityPoolInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -184,10 +215,33 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         Returns:
             An instance of `DeleteIdentityPoolOutput`.
         """
-        return await self._invoke(input, _models.DELETE_IDENTITY_POOL, [], plugins)
 
+    async def delete_identity_pool(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteIdentityPoolOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_IDENTITY_POOL, args, kwargs),
+            _models.DELETE_IDENTITY_POOL,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def describe_identity(
-        self, input: DescribeIdentityInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeIdentityInput | _models.DescribeIdentityInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeIdentityOutput: ...
+
+    @_overload
+    async def describe_identity(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeIdentityInputDict],
     ) -> DescribeIdentityOutput:
         """
         Returns metadata related to the given identity, including when the
@@ -197,8 +251,6 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         operation.
 
         Args:
-            input:
-                An instance of `DescribeIdentityInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -208,10 +260,34 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         Returns:
             An instance of `DescribeIdentityOutput`.
         """
-        return await self._invoke(input, _models.DESCRIBE_IDENTITY, [], plugins)
 
+    async def describe_identity(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeIdentityOutput:
+        return await self._invoke(
+            self._select_input(_models.DESCRIBE_IDENTITY, args, kwargs),
+            _models.DESCRIBE_IDENTITY,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def describe_identity_pool(
-        self, input: DescribeIdentityPoolInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeIdentityPoolInput
+        | _models.DescribeIdentityPoolInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeIdentityPoolOutput: ...
+
+    @_overload
+    async def describe_identity_pool(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeIdentityPoolInputDict],
     ) -> DescribeIdentityPoolOutput:
         """
         Gets details about a particular identity pool, including the pool name,
@@ -221,8 +297,6 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         operation.
 
         Args:
-            input:
-                An instance of `DescribeIdentityPoolInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -232,10 +306,34 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         Returns:
             An instance of `DescribeIdentityPoolOutput`.
         """
-        return await self._invoke(input, _models.DESCRIBE_IDENTITY_POOL, [], plugins)
 
+    async def describe_identity_pool(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeIdentityPoolOutput:
+        return await self._invoke(
+            self._select_input(_models.DESCRIBE_IDENTITY_POOL, args, kwargs),
+            _models.DESCRIBE_IDENTITY_POOL,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_credentials_for_identity(
-        self, input: GetCredentialsForIdentityInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetCredentialsForIdentityInput
+        | _models.GetCredentialsForIdentityInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetCredentialsForIdentityOutput: ...
+
+    @_overload
+    async def get_credentials_for_identity(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetCredentialsForIdentityInputDict],
     ) -> GetCredentialsForIdentityOutput:
         """
         Returns credentials for the provided identity ID. Any provided logins
@@ -246,8 +344,6 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         This is a public API. You do not need any credentials to call this API.
 
         Args:
-            input:
-                An instance of `GetCredentialsForIdentityInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -257,12 +353,33 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         Returns:
             An instance of `GetCredentialsForIdentityOutput`.
         """
+
+    async def get_credentials_for_identity(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetCredentialsForIdentityOutput:
         return await self._invoke(
-            input, _models.GET_CREDENTIALS_FOR_IDENTITY, [], plugins
+            self._select_input(_models.GET_CREDENTIALS_FOR_IDENTITY, args, kwargs),
+            _models.GET_CREDENTIALS_FOR_IDENTITY,
+            [],
+            plugins,
         )
 
+    @_overload
     async def get_id(
-        self, input: GetIdInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetIdInput | _models.GetIdInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetIdOutput: ...
+
+    @_overload
+    async def get_id(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetIdInputDict],
     ) -> GetIdOutput:
         """
         Generates (or retrieves) IdentityID. Supplying multiple logins will
@@ -271,8 +388,6 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         This is a public API. You do not need any credentials to call this API.
 
         Args:
-            input:
-                An instance of `GetIdInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -282,10 +397,34 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         Returns:
             An instance of `GetIdOutput`.
         """
-        return await self._invoke(input, _models.GET_ID, [], plugins)
 
+    async def get_id(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetIdOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_ID, args, kwargs),
+            _models.GET_ID,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_identity_pool_roles(
-        self, input: GetIdentityPoolRolesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetIdentityPoolRolesInput
+        | _models.GetIdentityPoolRolesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetIdentityPoolRolesOutput: ...
+
+    @_overload
+    async def get_identity_pool_roles(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetIdentityPoolRolesInputDict],
     ) -> GetIdentityPoolRolesOutput:
         """
         Gets the roles for an identity pool.
@@ -294,8 +433,6 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         operation.
 
         Args:
-            input:
-                An instance of `GetIdentityPoolRolesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -305,10 +442,33 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         Returns:
             An instance of `GetIdentityPoolRolesOutput`.
         """
-        return await self._invoke(input, _models.GET_IDENTITY_POOL_ROLES, [], plugins)
 
+    async def get_identity_pool_roles(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetIdentityPoolRolesOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_IDENTITY_POOL_ROLES, args, kwargs),
+            _models.GET_IDENTITY_POOL_ROLES,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_open_id_token(
-        self, input: GetOpenIdTokenInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetOpenIdTokenInput | _models.GetOpenIdTokenInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetOpenIdTokenOutput: ...
+
+    @_overload
+    async def get_open_id_token(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetOpenIdTokenInputDict],
     ) -> GetOpenIdTokenOutput:
         """
         Gets an OpenID token, using a known Cognito ID. This known Cognito ID is
@@ -320,8 +480,6 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         This is a public API. You do not need any credentials to call this API.
 
         Args:
-            input:
-                An instance of `GetOpenIdTokenInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -331,12 +489,34 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         Returns:
             An instance of `GetOpenIdTokenOutput`.
         """
-        return await self._invoke(input, _models.GET_OPEN_ID_TOKEN, [], plugins)
 
+    async def get_open_id_token(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetOpenIdTokenOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_OPEN_ID_TOKEN, args, kwargs),
+            _models.GET_OPEN_ID_TOKEN,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_open_id_token_for_developer_identity(
         self,
-        input: GetOpenIdTokenForDeveloperIdentityInput,
+        request: _models.GetOpenIdTokenForDeveloperIdentityInput
+        | _models.GetOpenIdTokenForDeveloperIdentityInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetOpenIdTokenForDeveloperIdentityOutput: ...
+
+    @_overload
+    async def get_open_id_token_for_developer_identity(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetOpenIdTokenForDeveloperIdentityInputDict],
     ) -> GetOpenIdTokenForDeveloperIdentityOutput:
         """
         Registers (or retrieves) a Cognito `IdentityId` and an OpenID Connect
@@ -359,8 +539,6 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         operation.
 
         Args:
-            input:
-                An instance of `GetOpenIdTokenForDeveloperIdentityInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -370,22 +548,42 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         Returns:
             An instance of `GetOpenIdTokenForDeveloperIdentityOutput`.
         """
+
+    async def get_open_id_token_for_developer_identity(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetOpenIdTokenForDeveloperIdentityOutput:
         return await self._invoke(
-            input, _models.GET_OPEN_ID_TOKEN_FOR_DEVELOPER_IDENTITY, [], plugins
+            self._select_input(
+                _models.GET_OPEN_ID_TOKEN_FOR_DEVELOPER_IDENTITY, args, kwargs
+            ),
+            _models.GET_OPEN_ID_TOKEN_FOR_DEVELOPER_IDENTITY,
+            [],
+            plugins,
         )
 
+    @_overload
     async def get_principal_tag_attribute_map(
         self,
-        input: GetPrincipalTagAttributeMapInput,
+        request: _models.GetPrincipalTagAttributeMapInput
+        | _models.GetPrincipalTagAttributeMapInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetPrincipalTagAttributeMapOutput: ...
+
+    @_overload
+    async def get_principal_tag_attribute_map(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetPrincipalTagAttributeMapInputDict],
     ) -> GetPrincipalTagAttributeMapOutput:
         """
         Use `GetPrincipalTagAttributeMap` to list all mappings between
         `PrincipalTags` and user attributes.
 
         Args:
-            input:
-                An instance of `GetPrincipalTagAttributeMapInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -395,12 +593,33 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         Returns:
             An instance of `GetPrincipalTagAttributeMapOutput`.
         """
+
+    async def get_principal_tag_attribute_map(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetPrincipalTagAttributeMapOutput:
         return await self._invoke(
-            input, _models.GET_PRINCIPAL_TAG_ATTRIBUTE_MAP, [], plugins
+            self._select_input(_models.GET_PRINCIPAL_TAG_ATTRIBUTE_MAP, args, kwargs),
+            _models.GET_PRINCIPAL_TAG_ATTRIBUTE_MAP,
+            [],
+            plugins,
         )
 
+    @_overload
     async def list_identities(
-        self, input: ListIdentitiesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListIdentitiesInput | _models.ListIdentitiesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListIdentitiesOutput: ...
+
+    @_overload
+    async def list_identities(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListIdentitiesInputDict],
     ) -> ListIdentitiesOutput:
         """
         Lists the identities in an identity pool.
@@ -409,8 +628,6 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         operation.
 
         Args:
-            input:
-                An instance of `ListIdentitiesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -420,10 +637,33 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         Returns:
             An instance of `ListIdentitiesOutput`.
         """
-        return await self._invoke(input, _models.LIST_IDENTITIES, [], plugins)
 
+    async def list_identities(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListIdentitiesOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_IDENTITIES, args, kwargs),
+            _models.LIST_IDENTITIES,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_identity_pools(
-        self, input: ListIdentityPoolsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListIdentityPoolsInput | _models.ListIdentityPoolsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListIdentityPoolsOutput: ...
+
+    @_overload
+    async def list_identity_pools(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListIdentityPoolsInputDict],
     ) -> ListIdentityPoolsOutput:
         """
         Lists all of the Cognito identity pools registered for your account.
@@ -432,8 +672,6 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         operation.
 
         Args:
-            input:
-                An instance of `ListIdentityPoolsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -443,10 +681,34 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         Returns:
             An instance of `ListIdentityPoolsOutput`.
         """
-        return await self._invoke(input, _models.LIST_IDENTITY_POOLS, [], plugins)
 
+    async def list_identity_pools(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListIdentityPoolsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_IDENTITY_POOLS, args, kwargs),
+            _models.LIST_IDENTITY_POOLS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_tags_for_resource(
-        self, input: ListTagsForResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListTagsForResourceInput
+        | _models.ListTagsForResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListTagsForResourceOutput: ...
+
+    @_overload
+    async def list_tags_for_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListTagsForResourceInputDict],
     ) -> ListTagsForResourceOutput:
         """
         Lists the tags that are assigned to an Amazon Cognito identity pool.
@@ -458,8 +720,6 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         You can use this action up to 10 times per second, per account.
 
         Args:
-            input:
-                An instance of `ListTagsForResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -469,10 +729,34 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         Returns:
             An instance of `ListTagsForResourceOutput`.
         """
-        return await self._invoke(input, _models.LIST_TAGS_FOR_RESOURCE, [], plugins)
 
+    async def list_tags_for_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListTagsForResourceOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_TAGS_FOR_RESOURCE, args, kwargs),
+            _models.LIST_TAGS_FOR_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def lookup_developer_identity(
-        self, input: LookupDeveloperIdentityInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.LookupDeveloperIdentityInput
+        | _models.LookupDeveloperIdentityInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> LookupDeveloperIdentityOutput: ...
+
+    @_overload
+    async def lookup_developer_identity(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.LookupDeveloperIdentityInputDict],
     ) -> LookupDeveloperIdentityOutput:
         """
         Retrieves the `IdentityID` associated with a `DeveloperUserIdentifier`
@@ -497,8 +781,6 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         operation.
 
         Args:
-            input:
-                An instance of `LookupDeveloperIdentityInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -508,10 +790,34 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         Returns:
             An instance of `LookupDeveloperIdentityOutput`.
         """
-        return await self._invoke(input, _models.LOOKUP_DEVELOPER_IDENTITY, [], plugins)
 
+    async def lookup_developer_identity(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> LookupDeveloperIdentityOutput:
+        return await self._invoke(
+            self._select_input(_models.LOOKUP_DEVELOPER_IDENTITY, args, kwargs),
+            _models.LOOKUP_DEVELOPER_IDENTITY,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def merge_developer_identities(
-        self, input: MergeDeveloperIdentitiesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.MergeDeveloperIdentitiesInput
+        | _models.MergeDeveloperIdentitiesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> MergeDeveloperIdentitiesOutput: ...
+
+    @_overload
+    async def merge_developer_identities(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.MergeDeveloperIdentitiesInputDict],
     ) -> MergeDeveloperIdentitiesOutput:
         """
         Merges two users having different `IdentityId`s, existing in the same
@@ -532,8 +838,6 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         operation.
 
         Args:
-            input:
-                An instance of `MergeDeveloperIdentitiesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -543,12 +847,34 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         Returns:
             An instance of `MergeDeveloperIdentitiesOutput`.
         """
+
+    async def merge_developer_identities(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> MergeDeveloperIdentitiesOutput:
         return await self._invoke(
-            input, _models.MERGE_DEVELOPER_IDENTITIES, [], plugins
+            self._select_input(_models.MERGE_DEVELOPER_IDENTITIES, args, kwargs),
+            _models.MERGE_DEVELOPER_IDENTITIES,
+            [],
+            plugins,
         )
 
+    @_overload
     async def set_identity_pool_roles(
-        self, input: SetIdentityPoolRolesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.SetIdentityPoolRolesInput
+        | _models.SetIdentityPoolRolesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> SetIdentityPoolRolesOutput: ...
+
+    @_overload
+    async def set_identity_pool_roles(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SetIdentityPoolRolesInputDict],
     ) -> SetIdentityPoolRolesOutput:
         """
         Sets the roles for an identity pool. These roles are used when making
@@ -558,8 +884,6 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         operation.
 
         Args:
-            input:
-                An instance of `SetIdentityPoolRolesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -569,20 +893,40 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         Returns:
             An instance of `SetIdentityPoolRolesOutput`.
         """
-        return await self._invoke(input, _models.SET_IDENTITY_POOL_ROLES, [], plugins)
 
+    async def set_identity_pool_roles(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SetIdentityPoolRolesOutput:
+        return await self._invoke(
+            self._select_input(_models.SET_IDENTITY_POOL_ROLES, args, kwargs),
+            _models.SET_IDENTITY_POOL_ROLES,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def set_principal_tag_attribute_map(
         self,
-        input: SetPrincipalTagAttributeMapInput,
+        request: _models.SetPrincipalTagAttributeMapInput
+        | _models.SetPrincipalTagAttributeMapInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> SetPrincipalTagAttributeMapOutput: ...
+
+    @_overload
+    async def set_principal_tag_attribute_map(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SetPrincipalTagAttributeMapInputDict],
     ) -> SetPrincipalTagAttributeMapOutput:
         """
         You can use this operation to use default (username and clientID)
         attribute or custom attribute mappings.
 
         Args:
-            input:
-                An instance of `SetPrincipalTagAttributeMapInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -592,12 +936,33 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         Returns:
             An instance of `SetPrincipalTagAttributeMapOutput`.
         """
+
+    async def set_principal_tag_attribute_map(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SetPrincipalTagAttributeMapOutput:
         return await self._invoke(
-            input, _models.SET_PRINCIPAL_TAG_ATTRIBUTE_MAP, [], plugins
+            self._select_input(_models.SET_PRINCIPAL_TAG_ATTRIBUTE_MAP, args, kwargs),
+            _models.SET_PRINCIPAL_TAG_ATTRIBUTE_MAP,
+            [],
+            plugins,
         )
 
+    @_overload
     async def tag_resource(
-        self, input: TagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.TagResourceInput | _models.TagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> TagResourceOutput: ...
+
+    @_overload
+    async def tag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.TagResourceInputDict],
     ) -> TagResourceOutput:
         """
         Assigns a set of tags to the specified Amazon Cognito identity pool. A
@@ -622,8 +987,6 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         identity pool can have as many as 50 tags.
 
         Args:
-            input:
-                An instance of `TagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -633,10 +996,34 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         Returns:
             An instance of `TagResourceOutput`.
         """
-        return await self._invoke(input, _models.TAG_RESOURCE, [], plugins)
 
+    async def tag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> TagResourceOutput:
+        return await self._invoke(
+            self._select_input(_models.TAG_RESOURCE, args, kwargs),
+            _models.TAG_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def unlink_developer_identity(
-        self, input: UnlinkDeveloperIdentityInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UnlinkDeveloperIdentityInput
+        | _models.UnlinkDeveloperIdentityInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UnlinkDeveloperIdentityOutput: ...
+
+    @_overload
+    async def unlink_developer_identity(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UnlinkDeveloperIdentityInputDict],
     ) -> UnlinkDeveloperIdentityOutput:
         """
         Unlinks a `DeveloperUserIdentifier` from an existing identity. Unlinked
@@ -649,8 +1036,6 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         operation.
 
         Args:
-            input:
-                An instance of `UnlinkDeveloperIdentityInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -660,10 +1045,33 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         Returns:
             An instance of `UnlinkDeveloperIdentityOutput`.
         """
-        return await self._invoke(input, _models.UNLINK_DEVELOPER_IDENTITY, [], plugins)
 
+    async def unlink_developer_identity(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UnlinkDeveloperIdentityOutput:
+        return await self._invoke(
+            self._select_input(_models.UNLINK_DEVELOPER_IDENTITY, args, kwargs),
+            _models.UNLINK_DEVELOPER_IDENTITY,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def unlink_identity(
-        self, input: UnlinkIdentityInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UnlinkIdentityInput | _models.UnlinkIdentityInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UnlinkIdentityOutput: ...
+
+    @_overload
+    async def unlink_identity(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UnlinkIdentityInputDict],
     ) -> UnlinkIdentityOutput:
         """
         Unlinks a federated identity from an existing account. Unlinked logins
@@ -673,8 +1081,6 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         This is a public API. You do not need any credentials to call this API.
 
         Args:
-            input:
-                An instance of `UnlinkIdentityInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -684,18 +1090,39 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         Returns:
             An instance of `UnlinkIdentityOutput`.
         """
-        return await self._invoke(input, _models.UNLINK_IDENTITY, [], plugins)
 
+    async def unlink_identity(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UnlinkIdentityOutput:
+        return await self._invoke(
+            self._select_input(_models.UNLINK_IDENTITY, args, kwargs),
+            _models.UNLINK_IDENTITY,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def untag_resource(
-        self, input: UntagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UntagResourceInput | _models.UntagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UntagResourceOutput: ...
+
+    @_overload
+    async def untag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UntagResourceInputDict],
     ) -> UntagResourceOutput:
         """
         Removes the specified tags from the specified Amazon Cognito identity
         pool. You can use this action up to 5 times per second, per account
 
         Args:
-            input:
-                An instance of `UntagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -705,10 +1132,33 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         Returns:
             An instance of `UntagResourceOutput`.
         """
-        return await self._invoke(input, _models.UNTAG_RESOURCE, [], plugins)
 
+    async def untag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UntagResourceOutput:
+        return await self._invoke(
+            self._select_input(_models.UNTAG_RESOURCE, args, kwargs),
+            _models.UNTAG_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_identity_pool(
-        self, input: UpdateIdentityPoolInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateIdentityPoolInput | _models.UpdateIdentityPoolInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateIdentityPoolOutput: ...
+
+    @_overload
+    async def update_identity_pool(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateIdentityPoolInputDict],
     ) -> UpdateIdentityPoolOutput:
         """
         Updates the configuration of an identity pool.
@@ -721,8 +1171,6 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         operation.
 
         Args:
-            input:
-                An instance of `UpdateIdentityPoolInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -732,7 +1180,16 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
         Returns:
             An instance of `UpdateIdentityPoolOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_IDENTITY_POOL, [], plugins)
+
+    async def update_identity_pool(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateIdentityPoolOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_IDENTITY_POOL, args, kwargs),
+            _models.UPDATE_IDENTITY_POOL,
+            [],
+            plugins,
+        )
 
     async def _new_config(self) -> AsyncCognitoIdentityConfig:
         return await AsyncCognitoIdentityConfig.resolve()

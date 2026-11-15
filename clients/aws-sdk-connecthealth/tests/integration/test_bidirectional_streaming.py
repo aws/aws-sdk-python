@@ -11,7 +11,6 @@ from aws_sdk_connecthealth.models import (
     ClinicalNoteGenerationSettings,
     ClinicalNoteGenerationSettingsResponse,
     EncounterContext,
-    GetMedicalScribeListeningSessionInput,
     GetMedicalScribeListeningSessionOutput,
     ManagedNoteTemplate,
     ManagedTemplate,
@@ -32,7 +31,6 @@ from aws_sdk_connecthealth.models import (
     MedicalScribeStreamStatus,
     NoteTemplateSettingsManagedTemplate,
     NoteTemplateSettingsResponseManagedTemplate,
-    StartMedicalScribeListeningSessionInput,
     StartMedicalScribeListeningSessionOutput,
 )
 from smithy_core.aio.eventstream import AsyncDuplexEventStream
@@ -166,14 +164,12 @@ async def test_start_medical_scribe_listening_session(
         session_id = str(uuid.uuid4())
 
         stream = await client.start_medical_scribe_listening_session(
-            input=StartMedicalScribeListeningSessionInput(
-                session_id=session_id,
-                domain_id=domain_id,
-                subscription_id=subscription_id,
-                language_code=MedicalScribeLanguageCode.EN_US,
-                media_sample_rate_hertz=SAMPLE_RATE,
-                media_encoding=MedicalScribeMediaEncoding.PCM,
-            )
+            session_id=session_id,
+            domain_id=domain_id,
+            subscription_id=subscription_id,
+            language_code=MedicalScribeLanguageCode.EN_US,
+            media_sample_rate_hertz=SAMPLE_RATE,
+            media_encoding=MedicalScribeMediaEncoding.PCM,
         )
 
         results = await asyncio.gather(
@@ -186,11 +182,7 @@ async def test_start_medical_scribe_listening_session(
         )
 
         response = await client.get_medical_scribe_listening_session(
-            input=GetMedicalScribeListeningSessionInput(
-                session_id=session_id,
-                domain_id=domain_id,
-                subscription_id=subscription_id,
-            )
+            session_id=session_id, domain_id=domain_id, subscription_id=subscription_id
         )
         assert isinstance(response, GetMedicalScribeListeningSessionOutput)
         details = response.medical_scribe_listening_session_details

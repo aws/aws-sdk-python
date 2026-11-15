@@ -2,553 +2,853 @@
 
 from typing import Any
 
+from aws_sdk_cloudfront.aio.client import AsyncCloudFrontClient
+from aws_sdk_cloudfront.client import CloudFrontClient
 from aws_sdk_cloudfront.models import (
     ActiveTrustedKeyGroups,
     ActiveTrustedSigners,
     AliasICPRecordal,
     Aliases,
+    AliasesDict,
     AllowedMethods,
+    AllowedMethodsDict,
     AnycastIpList,
     AnycastIpListCollection,
     AnycastIpListSummary,
     AssociateAliasInput,
+    AssociateAliasInputDict,
     AssociateAliasOutput,
     AssociateDistributionTenantWebACLInput,
+    AssociateDistributionTenantWebACLInputDict,
     AssociateDistributionTenantWebACLOutput,
     AssociateDistributionWebACLInput,
+    AssociateDistributionWebACLInputDict,
     AssociateDistributionWebACLOutput,
     CaCertificatesBundleS3Location,
+    CaCertificatesBundleS3LocationDict,
+    CaCertificatesBundleSourceDict,
     CacheBehavior,
+    CacheBehaviorDict,
     CacheBehaviors,
+    CacheBehaviorsDict,
     CachePolicy,
     CachePolicyConfig,
+    CachePolicyConfigDict,
     CachePolicyCookiesConfig,
+    CachePolicyCookiesConfigDict,
     CachePolicyHeadersConfig,
+    CachePolicyHeadersConfigDict,
     CachePolicyList,
     CachePolicyQueryStringsConfig,
+    CachePolicyQueryStringsConfigDict,
     CachePolicySummary,
     CacheTagConfig,
+    CacheTagConfigDict,
     CachedMethods,
+    CachedMethodsDict,
     Certificate,
+    CertificateDict,
     CloudFrontOriginAccessIdentity,
     CloudFrontOriginAccessIdentityConfig,
+    CloudFrontOriginAccessIdentityConfigDict,
     CloudFrontOriginAccessIdentityList,
     CloudFrontOriginAccessIdentitySummary,
     ConflictingAlias,
     ConflictingAliasesList,
     ConnectionFunctionAssociation,
+    ConnectionFunctionAssociationDict,
     ConnectionFunctionSummary,
     ConnectionFunctionTestResult,
     ConnectionGroup,
     ConnectionGroupAssociationFilter,
+    ConnectionGroupAssociationFilterDict,
     ConnectionGroupSummary,
     ContentTypeProfile,
     ContentTypeProfileConfig,
+    ContentTypeProfileConfigDict,
+    ContentTypeProfileDict,
     ContentTypeProfiles,
+    ContentTypeProfilesDict,
     ContinuousDeploymentPolicy,
     ContinuousDeploymentPolicyConfig,
+    ContinuousDeploymentPolicyConfigDict,
     ContinuousDeploymentPolicyList,
     ContinuousDeploymentPolicySummary,
     ContinuousDeploymentSingleHeaderConfig,
+    ContinuousDeploymentSingleHeaderConfigDict,
     ContinuousDeploymentSingleWeightConfig,
+    ContinuousDeploymentSingleWeightConfigDict,
     CookieNames,
+    CookieNamesDict,
     CookiePreference,
+    CookiePreferenceDict,
     CopyDistributionInput,
+    CopyDistributionInputDict,
     CopyDistributionOutput,
     CreateAnycastIpListInput,
+    CreateAnycastIpListInputDict,
     CreateAnycastIpListOutput,
     CreateCachePolicyInput,
+    CreateCachePolicyInputDict,
     CreateCachePolicyOutput,
     CreateCloudFrontOriginAccessIdentityInput,
+    CreateCloudFrontOriginAccessIdentityInputDict,
     CreateCloudFrontOriginAccessIdentityOutput,
     CreateConnectionFunctionInput,
+    CreateConnectionFunctionInputDict,
     CreateConnectionFunctionOutput,
     CreateConnectionGroupInput,
+    CreateConnectionGroupInputDict,
     CreateConnectionGroupOutput,
     CreateContinuousDeploymentPolicyInput,
+    CreateContinuousDeploymentPolicyInputDict,
     CreateContinuousDeploymentPolicyOutput,
     CreateDistributionInput,
+    CreateDistributionInputDict,
     CreateDistributionOutput,
     CreateDistributionTenantInput,
+    CreateDistributionTenantInputDict,
     CreateDistributionTenantOutput,
     CreateDistributionWithTagsInput,
+    CreateDistributionWithTagsInputDict,
     CreateDistributionWithTagsOutput,
     CreateFieldLevelEncryptionConfigInput,
+    CreateFieldLevelEncryptionConfigInputDict,
     CreateFieldLevelEncryptionConfigOutput,
     CreateFieldLevelEncryptionProfileInput,
+    CreateFieldLevelEncryptionProfileInputDict,
     CreateFieldLevelEncryptionProfileOutput,
     CreateFunctionInput,
+    CreateFunctionInputDict,
     CreateFunctionOutput,
     CreateInvalidationForDistributionTenantInput,
+    CreateInvalidationForDistributionTenantInputDict,
     CreateInvalidationForDistributionTenantOutput,
     CreateInvalidationInput,
+    CreateInvalidationInputDict,
     CreateInvalidationOutput,
     CreateKeyGroupInput,
+    CreateKeyGroupInputDict,
     CreateKeyGroupOutput,
     CreateKeyValueStoreInput,
+    CreateKeyValueStoreInputDict,
     CreateKeyValueStoreOutput,
     CreateMonitoringSubscriptionInput,
+    CreateMonitoringSubscriptionInputDict,
     CreateMonitoringSubscriptionOutput,
     CreateOriginAccessControlInput,
+    CreateOriginAccessControlInputDict,
     CreateOriginAccessControlOutput,
     CreateOriginRequestPolicyInput,
+    CreateOriginRequestPolicyInputDict,
     CreateOriginRequestPolicyOutput,
     CreatePublicKeyInput,
+    CreatePublicKeyInputDict,
     CreatePublicKeyOutput,
     CreateRealtimeLogConfigInput,
+    CreateRealtimeLogConfigInputDict,
     CreateRealtimeLogConfigOutput,
     CreateResponseHeadersPolicyInput,
+    CreateResponseHeadersPolicyInputDict,
     CreateResponseHeadersPolicyOutput,
     CreateStreamingDistributionInput,
+    CreateStreamingDistributionInputDict,
     CreateStreamingDistributionOutput,
     CreateStreamingDistributionWithTagsInput,
+    CreateStreamingDistributionWithTagsInputDict,
     CreateStreamingDistributionWithTagsOutput,
     CreateTrustStoreInput,
+    CreateTrustStoreInputDict,
     CreateTrustStoreOutput,
     CreateVpcOriginInput,
+    CreateVpcOriginInputDict,
     CreateVpcOriginOutput,
     CustomErrorResponse,
+    CustomErrorResponseDict,
     CustomErrorResponses,
+    CustomErrorResponsesDict,
     CustomHeaders,
+    CustomHeadersDict,
     CustomOriginConfig,
+    CustomOriginConfigDict,
     Customizations,
+    CustomizationsDict,
     DefaultCacheBehavior,
+    DefaultCacheBehaviorDict,
     DeleteAnycastIpListInput,
+    DeleteAnycastIpListInputDict,
     DeleteAnycastIpListOutput,
     DeleteCachePolicyInput,
+    DeleteCachePolicyInputDict,
     DeleteCachePolicyOutput,
     DeleteCloudFrontOriginAccessIdentityInput,
+    DeleteCloudFrontOriginAccessIdentityInputDict,
     DeleteCloudFrontOriginAccessIdentityOutput,
     DeleteConnectionFunctionInput,
+    DeleteConnectionFunctionInputDict,
     DeleteConnectionFunctionOutput,
     DeleteConnectionGroupInput,
+    DeleteConnectionGroupInputDict,
     DeleteConnectionGroupOutput,
     DeleteContinuousDeploymentPolicyInput,
+    DeleteContinuousDeploymentPolicyInputDict,
     DeleteContinuousDeploymentPolicyOutput,
     DeleteDistributionInput,
+    DeleteDistributionInputDict,
     DeleteDistributionOutput,
     DeleteDistributionTenantInput,
+    DeleteDistributionTenantInputDict,
     DeleteDistributionTenantOutput,
     DeleteFieldLevelEncryptionConfigInput,
+    DeleteFieldLevelEncryptionConfigInputDict,
     DeleteFieldLevelEncryptionConfigOutput,
     DeleteFieldLevelEncryptionProfileInput,
+    DeleteFieldLevelEncryptionProfileInputDict,
     DeleteFieldLevelEncryptionProfileOutput,
     DeleteFunctionInput,
+    DeleteFunctionInputDict,
     DeleteFunctionOutput,
     DeleteKeyGroupInput,
+    DeleteKeyGroupInputDict,
     DeleteKeyGroupOutput,
     DeleteKeyValueStoreInput,
+    DeleteKeyValueStoreInputDict,
     DeleteKeyValueStoreOutput,
     DeleteMonitoringSubscriptionInput,
+    DeleteMonitoringSubscriptionInputDict,
     DeleteMonitoringSubscriptionOutput,
     DeleteOriginAccessControlInput,
+    DeleteOriginAccessControlInputDict,
     DeleteOriginAccessControlOutput,
     DeleteOriginRequestPolicyInput,
+    DeleteOriginRequestPolicyInputDict,
     DeleteOriginRequestPolicyOutput,
     DeletePublicKeyInput,
+    DeletePublicKeyInputDict,
     DeletePublicKeyOutput,
     DeleteRealtimeLogConfigInput,
+    DeleteRealtimeLogConfigInputDict,
     DeleteRealtimeLogConfigOutput,
     DeleteResourcePolicyInput,
+    DeleteResourcePolicyInputDict,
     DeleteResourcePolicyOutput,
     DeleteResponseHeadersPolicyInput,
+    DeleteResponseHeadersPolicyInputDict,
     DeleteResponseHeadersPolicyOutput,
     DeleteStreamingDistributionInput,
+    DeleteStreamingDistributionInputDict,
     DeleteStreamingDistributionOutput,
     DeleteTrustStoreInput,
+    DeleteTrustStoreInputDict,
     DeleteTrustStoreOutput,
     DeleteVpcOriginInput,
+    DeleteVpcOriginInputDict,
     DeleteVpcOriginOutput,
     DescribeConnectionFunctionInput,
+    DescribeConnectionFunctionInputDict,
     DescribeConnectionFunctionOutput,
     DescribeFunctionInput,
+    DescribeFunctionInputDict,
     DescribeFunctionOutput,
     DescribeKeyValueStoreInput,
+    DescribeKeyValueStoreInputDict,
     DescribeKeyValueStoreOutput,
     DisassociateDistributionTenantWebACLInput,
+    DisassociateDistributionTenantWebACLInputDict,
     DisassociateDistributionTenantWebACLOutput,
     DisassociateDistributionWebACLInput,
+    DisassociateDistributionWebACLInputDict,
     DisassociateDistributionWebACLOutput,
     Distribution,
     DistributionConfig,
+    DistributionConfigDict,
     DistributionConfigWithTags,
+    DistributionConfigWithTagsDict,
     DistributionIdList,
     DistributionIdOwner,
     DistributionIdOwnerList,
     DistributionList,
     DistributionResourceId,
+    DistributionResourceIdDict,
     DistributionSummary,
     DistributionTenant,
     DistributionTenantAssociationFilter,
+    DistributionTenantAssociationFilterDict,
     DistributionTenantSummary,
     DnsConfiguration,
     DomainConflict,
     DomainItem,
+    DomainItemDict,
     DomainResult,
     EncryptionEntities,
+    EncryptionEntitiesDict,
     EncryptionEntity,
+    EncryptionEntityDict,
     EndPoint,
+    EndPointDict,
     FieldLevelEncryption,
     FieldLevelEncryptionConfig,
+    FieldLevelEncryptionConfigDict,
     FieldLevelEncryptionList,
     FieldLevelEncryptionProfile,
     FieldLevelEncryptionProfileConfig,
+    FieldLevelEncryptionProfileConfigDict,
     FieldLevelEncryptionProfileList,
     FieldLevelEncryptionProfileSummary,
     FieldLevelEncryptionSummary,
     FieldPatterns,
+    FieldPatternsDict,
     ForwardedValues,
+    ForwardedValuesDict,
     FunctionAssociation,
+    FunctionAssociationDict,
     FunctionAssociations,
+    FunctionAssociationsDict,
     FunctionConfig,
+    FunctionConfigDict,
     FunctionList,
     FunctionMetadata,
     FunctionSummary,
     GeoRestriction,
     GeoRestrictionCustomization,
+    GeoRestrictionCustomizationDict,
+    GeoRestrictionDict,
     GetAnycastIpListInput,
+    GetAnycastIpListInputDict,
     GetAnycastIpListOutput,
     GetCachePolicyConfigInput,
+    GetCachePolicyConfigInputDict,
     GetCachePolicyConfigOutput,
     GetCachePolicyInput,
+    GetCachePolicyInputDict,
     GetCachePolicyOutput,
     GetCloudFrontOriginAccessIdentityConfigInput,
+    GetCloudFrontOriginAccessIdentityConfigInputDict,
     GetCloudFrontOriginAccessIdentityConfigOutput,
     GetCloudFrontOriginAccessIdentityInput,
+    GetCloudFrontOriginAccessIdentityInputDict,
     GetCloudFrontOriginAccessIdentityOutput,
     GetConnectionFunctionInput,
+    GetConnectionFunctionInputDict,
     GetConnectionFunctionOutput,
     GetConnectionGroupByRoutingEndpointInput,
+    GetConnectionGroupByRoutingEndpointInputDict,
     GetConnectionGroupByRoutingEndpointOutput,
     GetConnectionGroupInput,
+    GetConnectionGroupInputDict,
     GetConnectionGroupOutput,
     GetContinuousDeploymentPolicyConfigInput,
+    GetContinuousDeploymentPolicyConfigInputDict,
     GetContinuousDeploymentPolicyConfigOutput,
     GetContinuousDeploymentPolicyInput,
+    GetContinuousDeploymentPolicyInputDict,
     GetContinuousDeploymentPolicyOutput,
     GetDistributionConfigInput,
+    GetDistributionConfigInputDict,
     GetDistributionConfigOutput,
     GetDistributionInput,
+    GetDistributionInputDict,
     GetDistributionOutput,
     GetDistributionTenantByDomainInput,
+    GetDistributionTenantByDomainInputDict,
     GetDistributionTenantByDomainOutput,
     GetDistributionTenantInput,
+    GetDistributionTenantInputDict,
     GetDistributionTenantOutput,
     GetFieldLevelEncryptionConfigInput,
+    GetFieldLevelEncryptionConfigInputDict,
     GetFieldLevelEncryptionConfigOutput,
     GetFieldLevelEncryptionInput,
+    GetFieldLevelEncryptionInputDict,
     GetFieldLevelEncryptionOutput,
     GetFieldLevelEncryptionProfileConfigInput,
+    GetFieldLevelEncryptionProfileConfigInputDict,
     GetFieldLevelEncryptionProfileConfigOutput,
     GetFieldLevelEncryptionProfileInput,
+    GetFieldLevelEncryptionProfileInputDict,
     GetFieldLevelEncryptionProfileOutput,
     GetFunctionInput,
+    GetFunctionInputDict,
     GetFunctionOutput,
     GetInvalidationForDistributionTenantInput,
+    GetInvalidationForDistributionTenantInputDict,
     GetInvalidationForDistributionTenantOutput,
     GetInvalidationInput,
+    GetInvalidationInputDict,
     GetInvalidationOutput,
     GetKeyGroupConfigInput,
+    GetKeyGroupConfigInputDict,
     GetKeyGroupConfigOutput,
     GetKeyGroupInput,
+    GetKeyGroupInputDict,
     GetKeyGroupOutput,
     GetManagedCertificateDetailsInput,
+    GetManagedCertificateDetailsInputDict,
     GetManagedCertificateDetailsOutput,
     GetMonitoringSubscriptionInput,
+    GetMonitoringSubscriptionInputDict,
     GetMonitoringSubscriptionOutput,
     GetOriginAccessControlConfigInput,
+    GetOriginAccessControlConfigInputDict,
     GetOriginAccessControlConfigOutput,
     GetOriginAccessControlInput,
+    GetOriginAccessControlInputDict,
     GetOriginAccessControlOutput,
     GetOriginRequestPolicyConfigInput,
+    GetOriginRequestPolicyConfigInputDict,
     GetOriginRequestPolicyConfigOutput,
     GetOriginRequestPolicyInput,
+    GetOriginRequestPolicyInputDict,
     GetOriginRequestPolicyOutput,
     GetPublicKeyConfigInput,
+    GetPublicKeyConfigInputDict,
     GetPublicKeyConfigOutput,
     GetPublicKeyInput,
+    GetPublicKeyInputDict,
     GetPublicKeyOutput,
     GetRealtimeLogConfigInput,
+    GetRealtimeLogConfigInputDict,
     GetRealtimeLogConfigOutput,
     GetResourcePolicyInput,
+    GetResourcePolicyInputDict,
     GetResourcePolicyOutput,
     GetResponseHeadersPolicyConfigInput,
+    GetResponseHeadersPolicyConfigInputDict,
     GetResponseHeadersPolicyConfigOutput,
     GetResponseHeadersPolicyInput,
+    GetResponseHeadersPolicyInputDict,
     GetResponseHeadersPolicyOutput,
     GetStreamingDistributionConfigInput,
+    GetStreamingDistributionConfigInputDict,
     GetStreamingDistributionConfigOutput,
     GetStreamingDistributionInput,
+    GetStreamingDistributionInputDict,
     GetStreamingDistributionOutput,
     GetTrustStoreInput,
+    GetTrustStoreInputDict,
     GetTrustStoreOutput,
     GetVpcOriginInput,
+    GetVpcOriginInputDict,
     GetVpcOriginOutput,
     GrpcConfig,
+    GrpcConfigDict,
     Headers,
+    HeadersDict,
     ImportSource,
+    ImportSourceDict,
     Invalidation,
     InvalidationBatch,
+    InvalidationBatchDict,
     InvalidationList,
     InvalidationSummary,
     IpamCidrConfig,
+    IpamCidrConfigDict,
     IpamConfig,
     KGKeyPairIds,
     KeyGroup,
     KeyGroupConfig,
+    KeyGroupConfigDict,
     KeyGroupList,
     KeyGroupSummary,
     KeyPairIds,
     KeyValueStore,
     KeyValueStoreAssociation,
+    KeyValueStoreAssociationDict,
     KeyValueStoreAssociations,
+    KeyValueStoreAssociationsDict,
     KeyValueStoreList,
     KinesisStreamConfig,
+    KinesisStreamConfigDict,
     LambdaFunctionAssociation,
+    LambdaFunctionAssociationDict,
     LambdaFunctionAssociations,
+    LambdaFunctionAssociationsDict,
     ListAnycastIpListsInput,
+    ListAnycastIpListsInputDict,
     ListAnycastIpListsOutput,
     ListCachePoliciesInput,
+    ListCachePoliciesInputDict,
     ListCachePoliciesOutput,
     ListCloudFrontOriginAccessIdentitiesInput,
+    ListCloudFrontOriginAccessIdentitiesInputDict,
     ListCloudFrontOriginAccessIdentitiesOutput,
     ListConflictingAliasesInput,
+    ListConflictingAliasesInputDict,
     ListConflictingAliasesOutput,
     ListConnectionFunctionsInput,
+    ListConnectionFunctionsInputDict,
     ListConnectionFunctionsOutput,
     ListConnectionGroupsInput,
+    ListConnectionGroupsInputDict,
     ListConnectionGroupsOutput,
     ListContinuousDeploymentPoliciesInput,
+    ListContinuousDeploymentPoliciesInputDict,
     ListContinuousDeploymentPoliciesOutput,
     ListDistributionTenantsByCustomizationInput,
+    ListDistributionTenantsByCustomizationInputDict,
     ListDistributionTenantsByCustomizationOutput,
     ListDistributionTenantsInput,
+    ListDistributionTenantsInputDict,
     ListDistributionTenantsOutput,
     ListDistributionsByAnycastIpListIdInput,
+    ListDistributionsByAnycastIpListIdInputDict,
     ListDistributionsByAnycastIpListIdOutput,
     ListDistributionsByCachePolicyIdInput,
+    ListDistributionsByCachePolicyIdInputDict,
     ListDistributionsByCachePolicyIdOutput,
     ListDistributionsByConnectionFunctionInput,
+    ListDistributionsByConnectionFunctionInputDict,
     ListDistributionsByConnectionFunctionOutput,
     ListDistributionsByConnectionModeInput,
+    ListDistributionsByConnectionModeInputDict,
     ListDistributionsByConnectionModeOutput,
     ListDistributionsByKeyGroupInput,
+    ListDistributionsByKeyGroupInputDict,
     ListDistributionsByKeyGroupOutput,
     ListDistributionsByOriginRequestPolicyIdInput,
+    ListDistributionsByOriginRequestPolicyIdInputDict,
     ListDistributionsByOriginRequestPolicyIdOutput,
     ListDistributionsByOwnedResourceInput,
+    ListDistributionsByOwnedResourceInputDict,
     ListDistributionsByOwnedResourceOutput,
     ListDistributionsByRealtimeLogConfigInput,
+    ListDistributionsByRealtimeLogConfigInputDict,
     ListDistributionsByRealtimeLogConfigOutput,
     ListDistributionsByResponseHeadersPolicyIdInput,
+    ListDistributionsByResponseHeadersPolicyIdInputDict,
     ListDistributionsByResponseHeadersPolicyIdOutput,
     ListDistributionsByTrustStoreInput,
+    ListDistributionsByTrustStoreInputDict,
     ListDistributionsByTrustStoreOutput,
     ListDistributionsByVpcOriginIdInput,
+    ListDistributionsByVpcOriginIdInputDict,
     ListDistributionsByVpcOriginIdOutput,
     ListDistributionsByWebACLIdInput,
+    ListDistributionsByWebACLIdInputDict,
     ListDistributionsByWebACLIdOutput,
     ListDistributionsInput,
+    ListDistributionsInputDict,
     ListDistributionsOutput,
     ListDomainConflictsInput,
+    ListDomainConflictsInputDict,
     ListDomainConflictsOutput,
     ListFieldLevelEncryptionConfigsInput,
+    ListFieldLevelEncryptionConfigsInputDict,
     ListFieldLevelEncryptionConfigsOutput,
     ListFieldLevelEncryptionProfilesInput,
+    ListFieldLevelEncryptionProfilesInputDict,
     ListFieldLevelEncryptionProfilesOutput,
     ListFunctionsInput,
+    ListFunctionsInputDict,
     ListFunctionsOutput,
     ListInvalidationsForDistributionTenantInput,
+    ListInvalidationsForDistributionTenantInputDict,
     ListInvalidationsForDistributionTenantOutput,
     ListInvalidationsInput,
+    ListInvalidationsInputDict,
     ListInvalidationsOutput,
     ListKeyGroupsInput,
+    ListKeyGroupsInputDict,
     ListKeyGroupsOutput,
     ListKeyValueStoresInput,
+    ListKeyValueStoresInputDict,
     ListKeyValueStoresOutput,
     ListOriginAccessControlsInput,
+    ListOriginAccessControlsInputDict,
     ListOriginAccessControlsOutput,
     ListOriginRequestPoliciesInput,
+    ListOriginRequestPoliciesInputDict,
     ListOriginRequestPoliciesOutput,
     ListPublicKeysInput,
+    ListPublicKeysInputDict,
     ListPublicKeysOutput,
     ListRealtimeLogConfigsInput,
+    ListRealtimeLogConfigsInputDict,
     ListRealtimeLogConfigsOutput,
     ListResponseHeadersPoliciesInput,
+    ListResponseHeadersPoliciesInputDict,
     ListResponseHeadersPoliciesOutput,
     ListStreamingDistributionsInput,
+    ListStreamingDistributionsInputDict,
     ListStreamingDistributionsOutput,
     ListTagsForResourceInput,
+    ListTagsForResourceInputDict,
     ListTagsForResourceOutput,
     ListTrustStoresInput,
+    ListTrustStoresInputDict,
     ListTrustStoresOutput,
     ListVpcOriginsInput,
+    ListVpcOriginsInputDict,
     ListVpcOriginsOutput,
     LoggingConfig,
+    LoggingConfigDict,
     ManagedCertificateDetails,
     ManagedCertificateRequest,
+    ManagedCertificateRequestDict,
     MonitoringSubscription,
+    MonitoringSubscriptionDict,
     Origin,
     OriginAccessControl,
     OriginAccessControlConfig,
+    OriginAccessControlConfigDict,
     OriginAccessControlList,
     OriginAccessControlSummary,
     OriginCustomHeader,
+    OriginCustomHeaderDict,
+    OriginDict,
     OriginGroup,
+    OriginGroupDict,
     OriginGroupFailoverCriteria,
+    OriginGroupFailoverCriteriaDict,
     OriginGroupMember,
+    OriginGroupMemberDict,
     OriginGroupMembers,
+    OriginGroupMembersDict,
     OriginGroups,
+    OriginGroupsDict,
     OriginMtlsConfig,
+    OriginMtlsConfigDict,
     OriginRequestPolicy,
     OriginRequestPolicyConfig,
+    OriginRequestPolicyConfigDict,
     OriginRequestPolicyCookiesConfig,
+    OriginRequestPolicyCookiesConfigDict,
     OriginRequestPolicyHeadersConfig,
+    OriginRequestPolicyHeadersConfigDict,
     OriginRequestPolicyList,
     OriginRequestPolicyQueryStringsConfig,
+    OriginRequestPolicyQueryStringsConfigDict,
     OriginRequestPolicySummary,
     OriginShield,
+    OriginShieldDict,
     OriginSslProtocols,
+    OriginSslProtocolsDict,
     Origins,
+    OriginsDict,
     Parameter,
     ParameterDefinition,
+    ParameterDefinitionDict,
     ParameterDefinitionSchema,
+    ParameterDefinitionSchemaDict,
+    ParameterDict,
     ParametersInCacheKeyAndForwardedToOrigin,
+    ParametersInCacheKeyAndForwardedToOriginDict,
     Paths,
+    PathsDict,
     PublicKey,
     PublicKeyConfig,
+    PublicKeyConfigDict,
     PublicKeyList,
     PublicKeySummary,
     PublishConnectionFunctionInput,
+    PublishConnectionFunctionInputDict,
     PublishConnectionFunctionOutput,
     PublishFunctionInput,
+    PublishFunctionInputDict,
     PublishFunctionOutput,
     PutResourcePolicyInput,
+    PutResourcePolicyInputDict,
     PutResourcePolicyOutput,
     QueryArgProfile,
     QueryArgProfileConfig,
+    QueryArgProfileConfigDict,
+    QueryArgProfileDict,
     QueryArgProfiles,
+    QueryArgProfilesDict,
     QueryStringCacheKeys,
+    QueryStringCacheKeysDict,
     QueryStringNames,
+    QueryStringNamesDict,
     RealtimeLogConfig,
     RealtimeLogConfigs,
     RealtimeMetricsSubscriptionConfig,
+    RealtimeMetricsSubscriptionConfigDict,
     ResponseHeadersPolicy,
     ResponseHeadersPolicyAccessControlAllowHeaders,
+    ResponseHeadersPolicyAccessControlAllowHeadersDict,
     ResponseHeadersPolicyAccessControlAllowMethods,
+    ResponseHeadersPolicyAccessControlAllowMethodsDict,
     ResponseHeadersPolicyAccessControlAllowOrigins,
+    ResponseHeadersPolicyAccessControlAllowOriginsDict,
     ResponseHeadersPolicyAccessControlExposeHeaders,
+    ResponseHeadersPolicyAccessControlExposeHeadersDict,
     ResponseHeadersPolicyConfig,
+    ResponseHeadersPolicyConfigDict,
     ResponseHeadersPolicyContentSecurityPolicy,
+    ResponseHeadersPolicyContentSecurityPolicyDict,
     ResponseHeadersPolicyContentTypeOptions,
+    ResponseHeadersPolicyContentTypeOptionsDict,
     ResponseHeadersPolicyCorsConfig,
+    ResponseHeadersPolicyCorsConfigDict,
     ResponseHeadersPolicyCustomHeader,
+    ResponseHeadersPolicyCustomHeaderDict,
     ResponseHeadersPolicyCustomHeadersConfig,
+    ResponseHeadersPolicyCustomHeadersConfigDict,
     ResponseHeadersPolicyFrameOptions,
+    ResponseHeadersPolicyFrameOptionsDict,
     ResponseHeadersPolicyList,
     ResponseHeadersPolicyReferrerPolicy,
+    ResponseHeadersPolicyReferrerPolicyDict,
     ResponseHeadersPolicyRemoveHeader,
+    ResponseHeadersPolicyRemoveHeaderDict,
     ResponseHeadersPolicyRemoveHeadersConfig,
+    ResponseHeadersPolicyRemoveHeadersConfigDict,
     ResponseHeadersPolicySecurityHeadersConfig,
+    ResponseHeadersPolicySecurityHeadersConfigDict,
     ResponseHeadersPolicyServerTimingHeadersConfig,
+    ResponseHeadersPolicyServerTimingHeadersConfigDict,
     ResponseHeadersPolicyStrictTransportSecurity,
+    ResponseHeadersPolicyStrictTransportSecurityDict,
     ResponseHeadersPolicySummary,
     ResponseHeadersPolicyXSSProtection,
+    ResponseHeadersPolicyXSSProtectionDict,
     Restrictions,
+    RestrictionsDict,
     S3Origin,
     S3OriginConfig,
+    S3OriginConfigDict,
+    S3OriginDict,
     SessionStickinessConfig,
+    SessionStickinessConfigDict,
     Signer,
     StagingDistributionDnsNames,
+    StagingDistributionDnsNamesDict,
     StatusCodes,
+    StatusCodesDict,
     StreamingDistribution,
     StreamingDistributionConfig,
+    StreamingDistributionConfigDict,
     StreamingDistributionConfigWithTags,
+    StreamingDistributionConfigWithTagsDict,
     StreamingDistributionList,
     StreamingDistributionSummary,
     StreamingLoggingConfig,
+    StreamingLoggingConfigDict,
     StringSchemaConfig,
+    StringSchemaConfigDict,
     Tag,
+    TagDict,
     TagKeys,
+    TagKeysDict,
     TagResourceInput,
+    TagResourceInputDict,
     TagResourceOutput,
     Tags,
+    TagsDict,
     TenantConfig,
+    TenantConfigDict,
     TestConnectionFunctionInput,
+    TestConnectionFunctionInputDict,
     TestConnectionFunctionOutput,
     TestFunctionInput,
+    TestFunctionInputDict,
     TestFunctionOutput,
     TestResult,
     TrafficConfig,
+    TrafficConfigDict,
     TrustStore,
     TrustStoreConfig,
+    TrustStoreConfigDict,
     TrustStoreSummary,
     TrustedKeyGroups,
+    TrustedKeyGroupsDict,
     TrustedSigners,
+    TrustedSignersDict,
     UntagResourceInput,
+    UntagResourceInputDict,
     UntagResourceOutput,
     UpdateAnycastIpListInput,
+    UpdateAnycastIpListInputDict,
     UpdateAnycastIpListOutput,
     UpdateCachePolicyInput,
+    UpdateCachePolicyInputDict,
     UpdateCachePolicyOutput,
     UpdateCloudFrontOriginAccessIdentityInput,
+    UpdateCloudFrontOriginAccessIdentityInputDict,
     UpdateCloudFrontOriginAccessIdentityOutput,
     UpdateConnectionFunctionInput,
+    UpdateConnectionFunctionInputDict,
     UpdateConnectionFunctionOutput,
     UpdateConnectionGroupInput,
+    UpdateConnectionGroupInputDict,
     UpdateConnectionGroupOutput,
     UpdateContinuousDeploymentPolicyInput,
+    UpdateContinuousDeploymentPolicyInputDict,
     UpdateContinuousDeploymentPolicyOutput,
     UpdateDistributionInput,
+    UpdateDistributionInputDict,
     UpdateDistributionOutput,
     UpdateDistributionTenantInput,
+    UpdateDistributionTenantInputDict,
     UpdateDistributionTenantOutput,
     UpdateDistributionWithStagingConfigInput,
+    UpdateDistributionWithStagingConfigInputDict,
     UpdateDistributionWithStagingConfigOutput,
     UpdateDomainAssociationInput,
+    UpdateDomainAssociationInputDict,
     UpdateDomainAssociationOutput,
     UpdateFieldLevelEncryptionConfigInput,
+    UpdateFieldLevelEncryptionConfigInputDict,
     UpdateFieldLevelEncryptionConfigOutput,
     UpdateFieldLevelEncryptionProfileInput,
+    UpdateFieldLevelEncryptionProfileInputDict,
     UpdateFieldLevelEncryptionProfileOutput,
     UpdateFunctionInput,
+    UpdateFunctionInputDict,
     UpdateFunctionOutput,
     UpdateKeyGroupInput,
+    UpdateKeyGroupInputDict,
     UpdateKeyGroupOutput,
     UpdateKeyValueStoreInput,
+    UpdateKeyValueStoreInputDict,
     UpdateKeyValueStoreOutput,
     UpdateOriginAccessControlInput,
+    UpdateOriginAccessControlInputDict,
     UpdateOriginAccessControlOutput,
     UpdateOriginRequestPolicyInput,
+    UpdateOriginRequestPolicyInputDict,
     UpdateOriginRequestPolicyOutput,
     UpdatePublicKeyInput,
+    UpdatePublicKeyInputDict,
     UpdatePublicKeyOutput,
     UpdateRealtimeLogConfigInput,
+    UpdateRealtimeLogConfigInputDict,
     UpdateRealtimeLogConfigOutput,
     UpdateResponseHeadersPolicyInput,
+    UpdateResponseHeadersPolicyInputDict,
     UpdateResponseHeadersPolicyOutput,
     UpdateStreamingDistributionInput,
+    UpdateStreamingDistributionInputDict,
     UpdateStreamingDistributionOutput,
     UpdateTrustStoreInput,
+    UpdateTrustStoreInputDict,
     UpdateTrustStoreOutput,
     UpdateVpcOriginInput,
+    UpdateVpcOriginInputDict,
     UpdateVpcOriginOutput,
     ValidationTokenDetail,
     VerifyDnsConfigurationInput,
+    VerifyDnsConfigurationInputDict,
     VerifyDnsConfigurationOutput,
     ViewerCertificate,
+    ViewerCertificateDict,
     ViewerMtlsConfig,
+    ViewerMtlsConfigDict,
     VpcOrigin,
     VpcOriginConfig,
+    VpcOriginConfigDict,
     VpcOriginEndpointConfig,
+    VpcOriginEndpointConfigDict,
     VpcOriginList,
     VpcOriginSummary,
     WebAclCustomization,
+    WebAclCustomizationDict,
 )
 
 
-# Static type fixture: pyright over this validates models.pyi.
-# Not executed as a test; it only needs to type-check.
+# Static type fixture: pyright over this validates models.pyi and the
+# client method signatures. Not executed as a test; it only needs to
+# type-check.
 
 _: Any = ...
 
@@ -1225,3 +1525,2662 @@ VpcOriginSummary(
     origin_endpoint_arn=_,
 )
 WebAclCustomization(action=_)
+_params_0: AliasesDict = {"quantity": _}
+_params_1: AllowedMethodsDict = {"quantity": _, "items": _}
+_params_2: AssociateAliasInputDict = {"target_distribution_id": _, "alias": _}
+_params_3: AssociateDistributionTenantWebACLInputDict = {"id": _, "web_acl_arn": _}
+_params_4: AssociateDistributionWebACLInputDict = {"id": _, "web_acl_arn": _}
+_params_5: CaCertificatesBundleS3LocationDict = {"bucket": _, "key": _, "region": _}
+_params_6: CaCertificatesBundleSourceDict = {"ca_certificates_bundle_s3_location": _}
+_params_7: CacheBehaviorDict = {
+    "path_pattern": _,
+    "target_origin_id": _,
+    "viewer_protocol_policy": _,
+}
+_params_8: CacheBehaviorsDict = {"quantity": _}
+_params_9: CachedMethodsDict = {"quantity": _, "items": _}
+_params_10: CachePolicyConfigDict = {"name": _, "min_ttl": _}
+_params_11: CachePolicyCookiesConfigDict = {"cookie_behavior": _}
+_params_12: CachePolicyHeadersConfigDict = {"header_behavior": _}
+_params_13: CachePolicyQueryStringsConfigDict = {"query_string_behavior": _}
+_params_14: CacheTagConfigDict = {"header_name": _}
+_params_15: CertificateDict = {"arn": _}
+_params_16: CloudFrontOriginAccessIdentityConfigDict = {
+    "caller_reference": _,
+    "comment": _,
+}
+_params_17: ConnectionFunctionAssociationDict = {"id": _}
+_params_18: ConnectionGroupAssociationFilterDict = {}
+_params_19: ContentTypeProfileDict = {"format": _, "content_type": _}
+_params_20: ContentTypeProfileConfigDict = {"forward_when_content_type_is_unknown": _}
+_params_21: ContentTypeProfilesDict = {"quantity": _}
+_params_22: ContinuousDeploymentPolicyConfigDict = {
+    "staging_distribution_dns_names": _,
+    "enabled": _,
+}
+_params_23: ContinuousDeploymentSingleHeaderConfigDict = {"header": _, "value": _}
+_params_24: ContinuousDeploymentSingleWeightConfigDict = {"weight": _}
+_params_25: CookieNamesDict = {"quantity": _}
+_params_26: CookiePreferenceDict = {"forward": _}
+_params_27: CopyDistributionInputDict = {
+    "primary_distribution_id": _,
+    "caller_reference": _,
+}
+_params_28: CreateAnycastIpListInputDict = {"name": _, "ip_count": _}
+_params_29: CreateCachePolicyInputDict = {"cache_policy_config": _}
+_params_30: CreateCloudFrontOriginAccessIdentityInputDict = {
+    "cloud_front_origin_access_identity_config": _
+}
+_params_31: CreateConnectionFunctionInputDict = {
+    "name": _,
+    "connection_function_config": _,
+    "connection_function_code": _,
+}
+_params_32: CreateConnectionGroupInputDict = {"name": _}
+_params_33: CreateContinuousDeploymentPolicyInputDict = {
+    "continuous_deployment_policy_config": _
+}
+_params_34: CreateDistributionInputDict = {"distribution_config": _}
+_params_35: CreateDistributionTenantInputDict = {
+    "distribution_id": _,
+    "name": _,
+    "domains": _,
+}
+_params_36: CreateDistributionWithTagsInputDict = {"distribution_config_with_tags": _}
+_params_37: CreateFieldLevelEncryptionConfigInputDict = {
+    "field_level_encryption_config": _
+}
+_params_38: CreateFieldLevelEncryptionProfileInputDict = {
+    "field_level_encryption_profile_config": _
+}
+_params_39: CreateFunctionInputDict = {
+    "name": _,
+    "function_config": _,
+    "function_code": _,
+}
+_params_40: CreateInvalidationForDistributionTenantInputDict = {
+    "id": _,
+    "invalidation_batch": _,
+}
+_params_41: CreateInvalidationInputDict = {
+    "distribution_id": _,
+    "invalidation_batch": _,
+}
+_params_42: CreateKeyGroupInputDict = {"key_group_config": _}
+_params_43: CreateKeyValueStoreInputDict = {"name": _}
+_params_44: CreateMonitoringSubscriptionInputDict = {
+    "distribution_id": _,
+    "monitoring_subscription": _,
+}
+_params_45: CreateOriginAccessControlInputDict = {"origin_access_control_config": _}
+_params_46: CreateOriginRequestPolicyInputDict = {"origin_request_policy_config": _}
+_params_47: CreatePublicKeyInputDict = {"public_key_config": _}
+_params_48: CreateRealtimeLogConfigInputDict = {
+    "end_points": _,
+    "fields": _,
+    "name": _,
+    "sampling_rate": _,
+}
+_params_49: CreateResponseHeadersPolicyInputDict = {"response_headers_policy_config": _}
+_params_50: CreateStreamingDistributionInputDict = {"streaming_distribution_config": _}
+_params_51: CreateStreamingDistributionWithTagsInputDict = {
+    "streaming_distribution_config_with_tags": _
+}
+_params_52: CreateTrustStoreInputDict = {"name": _, "ca_certificates_bundle_source": _}
+_params_53: CreateVpcOriginInputDict = {"vpc_origin_endpoint_config": _}
+_params_54: CustomErrorResponseDict = {"error_code": _}
+_params_55: CustomErrorResponsesDict = {"quantity": _}
+_params_56: CustomHeadersDict = {"quantity": _}
+_params_57: CustomizationsDict = {}
+_params_58: CustomOriginConfigDict = {
+    "http_port": _,
+    "https_port": _,
+    "origin_protocol_policy": _,
+}
+_params_59: DefaultCacheBehaviorDict = {
+    "target_origin_id": _,
+    "viewer_protocol_policy": _,
+}
+_params_60: DeleteAnycastIpListInputDict = {"id": _, "if_match": _}
+_params_61: DeleteCachePolicyInputDict = {"id": _}
+_params_62: DeleteCloudFrontOriginAccessIdentityInputDict = {"id": _}
+_params_63: DeleteConnectionFunctionInputDict = {"id": _, "if_match": _}
+_params_64: DeleteConnectionGroupInputDict = {"id": _, "if_match": _}
+_params_65: DeleteContinuousDeploymentPolicyInputDict = {"id": _}
+_params_66: DeleteDistributionInputDict = {"id": _}
+_params_67: DeleteDistributionTenantInputDict = {"id": _, "if_match": _}
+_params_68: DeleteFieldLevelEncryptionConfigInputDict = {"id": _}
+_params_69: DeleteFieldLevelEncryptionProfileInputDict = {"id": _}
+_params_70: DeleteFunctionInputDict = {"name": _, "if_match": _}
+_params_71: DeleteKeyGroupInputDict = {"id": _}
+_params_72: DeleteKeyValueStoreInputDict = {"name": _, "if_match": _}
+_params_73: DeleteMonitoringSubscriptionInputDict = {"distribution_id": _}
+_params_74: DeleteOriginAccessControlInputDict = {"id": _}
+_params_75: DeleteOriginRequestPolicyInputDict = {"id": _}
+_params_76: DeletePublicKeyInputDict = {"id": _}
+_params_77: DeleteRealtimeLogConfigInputDict = {}
+_params_78: DeleteResourcePolicyInputDict = {"resource_arn": _}
+_params_79: DeleteResponseHeadersPolicyInputDict = {"id": _}
+_params_80: DeleteStreamingDistributionInputDict = {"id": _}
+_params_81: DeleteTrustStoreInputDict = {"id": _, "if_match": _}
+_params_82: DeleteVpcOriginInputDict = {"id": _, "if_match": _}
+_params_83: DescribeConnectionFunctionInputDict = {"identifier": _}
+_params_84: DescribeFunctionInputDict = {"name": _}
+_params_85: DescribeKeyValueStoreInputDict = {"name": _}
+_params_86: DisassociateDistributionTenantWebACLInputDict = {"id": _}
+_params_87: DisassociateDistributionWebACLInputDict = {"id": _}
+_params_88: DistributionConfigDict = {
+    "caller_reference": _,
+    "origins": _,
+    "default_cache_behavior": _,
+    "comment": _,
+    "enabled": _,
+}
+_params_89: DistributionConfigWithTagsDict = {"distribution_config": _, "tags": _}
+_params_90: DistributionResourceIdDict = {}
+_params_91: DistributionTenantAssociationFilterDict = {}
+_params_92: DomainItemDict = {"domain": _}
+_params_93: EncryptionEntitiesDict = {"quantity": _}
+_params_94: EncryptionEntityDict = {
+    "public_key_id": _,
+    "provider_id": _,
+    "field_patterns": _,
+}
+_params_95: EndPointDict = {"stream_type": _}
+_params_96: FieldLevelEncryptionConfigDict = {"caller_reference": _}
+_params_97: FieldLevelEncryptionProfileConfigDict = {
+    "name": _,
+    "caller_reference": _,
+    "encryption_entities": _,
+}
+_params_98: FieldPatternsDict = {"quantity": _}
+_params_99: ForwardedValuesDict = {"query_string": _, "cookies": _}
+_params_100: FunctionAssociationDict = {"function_arn": _, "event_type": _}
+_params_101: FunctionAssociationsDict = {"quantity": _}
+_params_102: FunctionConfigDict = {"comment": _, "runtime": _}
+_params_103: GeoRestrictionDict = {"restriction_type": _, "quantity": _}
+_params_104: GeoRestrictionCustomizationDict = {"restriction_type": _}
+_params_105: GetAnycastIpListInputDict = {"id": _}
+_params_106: GetCachePolicyConfigInputDict = {"id": _}
+_params_107: GetCachePolicyInputDict = {"id": _}
+_params_108: GetCloudFrontOriginAccessIdentityConfigInputDict = {"id": _}
+_params_109: GetCloudFrontOriginAccessIdentityInputDict = {"id": _}
+_params_110: GetConnectionFunctionInputDict = {"identifier": _}
+_params_111: GetConnectionGroupByRoutingEndpointInputDict = {"routing_endpoint": _}
+_params_112: GetConnectionGroupInputDict = {"identifier": _}
+_params_113: GetContinuousDeploymentPolicyConfigInputDict = {"id": _}
+_params_114: GetContinuousDeploymentPolicyInputDict = {"id": _}
+_params_115: GetDistributionConfigInputDict = {"id": _}
+_params_116: GetDistributionInputDict = {"id": _}
+_params_117: GetDistributionTenantByDomainInputDict = {"domain": _}
+_params_118: GetDistributionTenantInputDict = {"identifier": _}
+_params_119: GetFieldLevelEncryptionConfigInputDict = {"id": _}
+_params_120: GetFieldLevelEncryptionInputDict = {"id": _}
+_params_121: GetFieldLevelEncryptionProfileConfigInputDict = {"id": _}
+_params_122: GetFieldLevelEncryptionProfileInputDict = {"id": _}
+_params_123: GetFunctionInputDict = {"name": _}
+_params_124: GetInvalidationForDistributionTenantInputDict = {
+    "distribution_tenant_id": _,
+    "id": _,
+}
+_params_125: GetInvalidationInputDict = {"distribution_id": _, "id": _}
+_params_126: GetKeyGroupConfigInputDict = {"id": _}
+_params_127: GetKeyGroupInputDict = {"id": _}
+_params_128: GetManagedCertificateDetailsInputDict = {"identifier": _}
+_params_129: GetMonitoringSubscriptionInputDict = {"distribution_id": _}
+_params_130: GetOriginAccessControlConfigInputDict = {"id": _}
+_params_131: GetOriginAccessControlInputDict = {"id": _}
+_params_132: GetOriginRequestPolicyConfigInputDict = {"id": _}
+_params_133: GetOriginRequestPolicyInputDict = {"id": _}
+_params_134: GetPublicKeyConfigInputDict = {"id": _}
+_params_135: GetPublicKeyInputDict = {"id": _}
+_params_136: GetRealtimeLogConfigInputDict = {}
+_params_137: GetResourcePolicyInputDict = {"resource_arn": _}
+_params_138: GetResponseHeadersPolicyConfigInputDict = {"id": _}
+_params_139: GetResponseHeadersPolicyInputDict = {"id": _}
+_params_140: GetStreamingDistributionConfigInputDict = {"id": _}
+_params_141: GetStreamingDistributionInputDict = {"id": _}
+_params_142: GetTrustStoreInputDict = {"identifier": _}
+_params_143: GetVpcOriginInputDict = {"id": _}
+_params_144: GrpcConfigDict = {"enabled": _}
+_params_145: HeadersDict = {"quantity": _}
+_params_146: ImportSourceDict = {"source_type": _, "source_arn": _}
+_params_147: InvalidationBatchDict = {"paths": _, "caller_reference": _}
+_params_148: IpamCidrConfigDict = {"cidr": _, "ipam_pool_arn": _}
+_params_149: KeyGroupConfigDict = {"name": _, "items": _}
+_params_150: KeyValueStoreAssociationDict = {"key_value_store_arn": _}
+_params_151: KeyValueStoreAssociationsDict = {"quantity": _}
+_params_152: KinesisStreamConfigDict = {"role_arn": _, "stream_arn": _}
+_params_153: LambdaFunctionAssociationDict = {"lambda_function_arn": _, "event_type": _}
+_params_154: LambdaFunctionAssociationsDict = {"quantity": _}
+_params_155: ListAnycastIpListsInputDict = {}
+_params_156: ListCachePoliciesInputDict = {}
+_params_157: ListCloudFrontOriginAccessIdentitiesInputDict = {}
+_params_158: ListConflictingAliasesInputDict = {"distribution_id": _, "alias": _}
+_params_159: ListConnectionFunctionsInputDict = {}
+_params_160: ListConnectionGroupsInputDict = {}
+_params_161: ListContinuousDeploymentPoliciesInputDict = {}
+_params_162: ListDistributionsByAnycastIpListIdInputDict = {"anycast_ip_list_id": _}
+_params_163: ListDistributionsByCachePolicyIdInputDict = {"cache_policy_id": _}
+_params_164: ListDistributionsByConnectionFunctionInputDict = {
+    "connection_function_identifier": _
+}
+_params_165: ListDistributionsByConnectionModeInputDict = {"connection_mode": _}
+_params_166: ListDistributionsByKeyGroupInputDict = {"key_group_id": _}
+_params_167: ListDistributionsByOriginRequestPolicyIdInputDict = {
+    "origin_request_policy_id": _
+}
+_params_168: ListDistributionsByOwnedResourceInputDict = {"resource_arn": _}
+_params_169: ListDistributionsByRealtimeLogConfigInputDict = {}
+_params_170: ListDistributionsByResponseHeadersPolicyIdInputDict = {
+    "response_headers_policy_id": _
+}
+_params_171: ListDistributionsByTrustStoreInputDict = {"trust_store_identifier": _}
+_params_172: ListDistributionsByVpcOriginIdInputDict = {"vpc_origin_id": _}
+_params_173: ListDistributionsByWebACLIdInputDict = {"web_acl_id": _}
+_params_174: ListDistributionsInputDict = {}
+_params_175: ListDistributionTenantsByCustomizationInputDict = {}
+_params_176: ListDistributionTenantsInputDict = {}
+_params_177: ListDomainConflictsInputDict = {
+    "domain": _,
+    "domain_control_validation_resource": _,
+}
+_params_178: ListFieldLevelEncryptionConfigsInputDict = {}
+_params_179: ListFieldLevelEncryptionProfilesInputDict = {}
+_params_180: ListFunctionsInputDict = {}
+_params_181: ListInvalidationsForDistributionTenantInputDict = {"id": _}
+_params_182: ListInvalidationsInputDict = {"distribution_id": _}
+_params_183: ListKeyGroupsInputDict = {}
+_params_184: ListKeyValueStoresInputDict = {}
+_params_185: ListOriginAccessControlsInputDict = {}
+_params_186: ListOriginRequestPoliciesInputDict = {}
+_params_187: ListPublicKeysInputDict = {}
+_params_188: ListRealtimeLogConfigsInputDict = {}
+_params_189: ListResponseHeadersPoliciesInputDict = {}
+_params_190: ListStreamingDistributionsInputDict = {}
+_params_191: ListTagsForResourceInputDict = {"resource": _}
+_params_192: ListTrustStoresInputDict = {}
+_params_193: ListVpcOriginsInputDict = {}
+_params_194: LoggingConfigDict = {}
+_params_195: ManagedCertificateRequestDict = {"validation_token_host": _}
+_params_196: MonitoringSubscriptionDict = {}
+_params_197: OriginDict = {"id": _, "domain_name": _}
+_params_198: OriginAccessControlConfigDict = {
+    "name": _,
+    "signing_protocol": _,
+    "signing_behavior": _,
+    "origin_access_control_origin_type": _,
+}
+_params_199: OriginCustomHeaderDict = {"header_name": _, "header_value": _}
+_params_200: OriginGroupDict = {"id": _, "failover_criteria": _, "members": _}
+_params_201: OriginGroupFailoverCriteriaDict = {"status_codes": _}
+_params_202: OriginGroupMemberDict = {"origin_id": _}
+_params_203: OriginGroupMembersDict = {"quantity": _, "items": _}
+_params_204: OriginGroupsDict = {"quantity": _}
+_params_205: OriginMtlsConfigDict = {"client_certificate_arn": _}
+_params_206: OriginRequestPolicyConfigDict = {
+    "name": _,
+    "headers_config": _,
+    "cookies_config": _,
+    "query_strings_config": _,
+}
+_params_207: OriginRequestPolicyCookiesConfigDict = {"cookie_behavior": _}
+_params_208: OriginRequestPolicyHeadersConfigDict = {"header_behavior": _}
+_params_209: OriginRequestPolicyQueryStringsConfigDict = {"query_string_behavior": _}
+_params_210: OriginsDict = {"quantity": _, "items": _}
+_params_211: OriginShieldDict = {"enabled": _}
+_params_212: OriginSslProtocolsDict = {"quantity": _, "items": _}
+_params_213: ParameterDict = {"name": _, "value": _}
+_params_214: ParameterDefinitionDict = {"name": _, "definition": _}
+_params_215: ParameterDefinitionSchemaDict = {}
+_params_216: ParametersInCacheKeyAndForwardedToOriginDict = {
+    "enable_accept_encoding_gzip": _,
+    "headers_config": _,
+    "cookies_config": _,
+    "query_strings_config": _,
+}
+_params_217: PathsDict = {"quantity": _}
+_params_218: PublicKeyConfigDict = {"caller_reference": _, "name": _, "encoded_key": _}
+_params_219: PublishConnectionFunctionInputDict = {"id": _, "if_match": _}
+_params_220: PublishFunctionInputDict = {"name": _, "if_match": _}
+_params_221: PutResourcePolicyInputDict = {"resource_arn": _, "policy_document": _}
+_params_222: QueryArgProfileDict = {"query_arg": _, "profile_id": _}
+_params_223: QueryArgProfileConfigDict = {
+    "forward_when_query_arg_profile_is_unknown": _
+}
+_params_224: QueryArgProfilesDict = {"quantity": _}
+_params_225: QueryStringCacheKeysDict = {"quantity": _}
+_params_226: QueryStringNamesDict = {"quantity": _}
+_params_227: RealtimeMetricsSubscriptionConfigDict = {
+    "realtime_metrics_subscription_status": _
+}
+_params_228: ResponseHeadersPolicyAccessControlAllowHeadersDict = {
+    "quantity": _,
+    "items": _,
+}
+_params_229: ResponseHeadersPolicyAccessControlAllowMethodsDict = {
+    "quantity": _,
+    "items": _,
+}
+_params_230: ResponseHeadersPolicyAccessControlAllowOriginsDict = {
+    "quantity": _,
+    "items": _,
+}
+_params_231: ResponseHeadersPolicyAccessControlExposeHeadersDict = {"quantity": _}
+_params_232: ResponseHeadersPolicyConfigDict = {"name": _}
+_params_233: ResponseHeadersPolicyContentSecurityPolicyDict = {
+    "override": _,
+    "content_security_policy": _,
+}
+_params_234: ResponseHeadersPolicyContentTypeOptionsDict = {"override": _}
+_params_235: ResponseHeadersPolicyCorsConfigDict = {
+    "access_control_allow_origins": _,
+    "access_control_allow_headers": _,
+    "access_control_allow_methods": _,
+    "access_control_allow_credentials": _,
+    "origin_override": _,
+}
+_params_236: ResponseHeadersPolicyCustomHeaderDict = {
+    "header": _,
+    "value": _,
+    "override": _,
+}
+_params_237: ResponseHeadersPolicyCustomHeadersConfigDict = {"quantity": _}
+_params_238: ResponseHeadersPolicyFrameOptionsDict = {"override": _, "frame_option": _}
+_params_239: ResponseHeadersPolicyReferrerPolicyDict = {
+    "override": _,
+    "referrer_policy": _,
+}
+_params_240: ResponseHeadersPolicyRemoveHeaderDict = {"header": _}
+_params_241: ResponseHeadersPolicyRemoveHeadersConfigDict = {"quantity": _}
+_params_242: ResponseHeadersPolicySecurityHeadersConfigDict = {}
+_params_243: ResponseHeadersPolicyServerTimingHeadersConfigDict = {"enabled": _}
+_params_244: ResponseHeadersPolicyStrictTransportSecurityDict = {
+    "override": _,
+    "access_control_max_age_sec": _,
+}
+_params_245: ResponseHeadersPolicyXSSProtectionDict = {"override": _, "protection": _}
+_params_246: RestrictionsDict = {"geo_restriction": _}
+_params_247: S3OriginDict = {"domain_name": _, "origin_access_identity": _}
+_params_248: S3OriginConfigDict = {}
+_params_249: SessionStickinessConfigDict = {"idle_ttl": _, "maximum_ttl": _}
+_params_250: StagingDistributionDnsNamesDict = {"quantity": _}
+_params_251: StatusCodesDict = {"quantity": _, "items": _}
+_params_252: StreamingDistributionConfigDict = {
+    "caller_reference": _,
+    "s3_origin": _,
+    "comment": _,
+    "trusted_signers": _,
+    "enabled": _,
+}
+_params_253: StreamingDistributionConfigWithTagsDict = {
+    "streaming_distribution_config": _,
+    "tags": _,
+}
+_params_254: StreamingLoggingConfigDict = {"enabled": _, "bucket": _, "prefix": _}
+_params_255: StringSchemaConfigDict = {"required": _}
+_params_256: TagDict = {"key": _}
+_params_257: TagKeysDict = {}
+_params_258: TagResourceInputDict = {"resource": _, "tags": _}
+_params_259: TagsDict = {}
+_params_260: TenantConfigDict = {}
+_params_261: TestConnectionFunctionInputDict = {
+    "id": _,
+    "if_match": _,
+    "connection_object": _,
+}
+_params_262: TestFunctionInputDict = {"name": _, "if_match": _, "event_object": _}
+_params_263: TrafficConfigDict = {"type": _}
+_params_264: TrustedKeyGroupsDict = {"enabled": _, "quantity": _}
+_params_265: TrustedSignersDict = {"enabled": _, "quantity": _}
+_params_266: TrustStoreConfigDict = {"trust_store_id": _}
+_params_267: UntagResourceInputDict = {"resource": _, "tag_keys": _}
+_params_268: UpdateAnycastIpListInputDict = {"id": _, "if_match": _}
+_params_269: UpdateCachePolicyInputDict = {"cache_policy_config": _, "id": _}
+_params_270: UpdateCloudFrontOriginAccessIdentityInputDict = {
+    "cloud_front_origin_access_identity_config": _,
+    "id": _,
+}
+_params_271: UpdateConnectionFunctionInputDict = {
+    "id": _,
+    "if_match": _,
+    "connection_function_config": _,
+    "connection_function_code": _,
+}
+_params_272: UpdateConnectionGroupInputDict = {"id": _, "if_match": _}
+_params_273: UpdateContinuousDeploymentPolicyInputDict = {
+    "continuous_deployment_policy_config": _,
+    "id": _,
+}
+_params_274: UpdateDistributionInputDict = {"distribution_config": _, "id": _}
+_params_275: UpdateDistributionTenantInputDict = {"id": _, "if_match": _}
+_params_276: UpdateDistributionWithStagingConfigInputDict = {"id": _}
+_params_277: UpdateDomainAssociationInputDict = {"domain": _, "target_resource": _}
+_params_278: UpdateFieldLevelEncryptionConfigInputDict = {
+    "field_level_encryption_config": _,
+    "id": _,
+}
+_params_279: UpdateFieldLevelEncryptionProfileInputDict = {
+    "field_level_encryption_profile_config": _,
+    "id": _,
+}
+_params_280: UpdateFunctionInputDict = {
+    "name": _,
+    "if_match": _,
+    "function_config": _,
+    "function_code": _,
+}
+_params_281: UpdateKeyGroupInputDict = {"key_group_config": _, "id": _}
+_params_282: UpdateKeyValueStoreInputDict = {"name": _, "comment": _, "if_match": _}
+_params_283: UpdateOriginAccessControlInputDict = {
+    "origin_access_control_config": _,
+    "id": _,
+}
+_params_284: UpdateOriginRequestPolicyInputDict = {
+    "origin_request_policy_config": _,
+    "id": _,
+}
+_params_285: UpdatePublicKeyInputDict = {"public_key_config": _, "id": _}
+_params_286: UpdateRealtimeLogConfigInputDict = {}
+_params_287: UpdateResponseHeadersPolicyInputDict = {
+    "response_headers_policy_config": _,
+    "id": _,
+}
+_params_288: UpdateStreamingDistributionInputDict = {
+    "streaming_distribution_config": _,
+    "id": _,
+}
+_params_289: UpdateTrustStoreInputDict = {"id": _, "if_match": _}
+_params_290: UpdateVpcOriginInputDict = {
+    "vpc_origin_endpoint_config": _,
+    "id": _,
+    "if_match": _,
+}
+_params_291: VerifyDnsConfigurationInputDict = {"identifier": _}
+_params_292: ViewerCertificateDict = {}
+_params_293: ViewerMtlsConfigDict = {}
+_params_294: VpcOriginConfigDict = {"vpc_origin_id": _}
+_params_295: VpcOriginEndpointConfigDict = {
+    "name": _,
+    "arn": _,
+    "http_port": _,
+    "https_port": _,
+    "origin_protocol_policy": _,
+}
+_params_296: WebAclCustomizationDict = {"action": _}
+
+
+def _request[T](form: type[T]) -> T:
+    raise NotImplementedError
+
+
+async def check_async_calls(client: AsyncCloudFrontClient) -> None:
+    pass
+    await client.associate_alias(target_distribution_id=_, alias=_)
+    await client.associate_alias(**_request(AssociateAliasInputDict))
+    await client.associate_alias(_request(AssociateAliasInput))
+    await client.associate_alias(_request(AssociateAliasInputDict))
+    await client.associate_distribution_tenant_web_acl(id=_, web_acl_arn=_)
+    await client.associate_distribution_tenant_web_acl(
+        **_request(AssociateDistributionTenantWebACLInputDict)
+    )
+    await client.associate_distribution_tenant_web_acl(
+        _request(AssociateDistributionTenantWebACLInput)
+    )
+    await client.associate_distribution_tenant_web_acl(
+        _request(AssociateDistributionTenantWebACLInputDict)
+    )
+    await client.associate_distribution_web_acl(id=_, web_acl_arn=_)
+    await client.associate_distribution_web_acl(
+        **_request(AssociateDistributionWebACLInputDict)
+    )
+    await client.associate_distribution_web_acl(
+        _request(AssociateDistributionWebACLInput)
+    )
+    await client.associate_distribution_web_acl(
+        _request(AssociateDistributionWebACLInputDict)
+    )
+    await client.copy_distribution(primary_distribution_id=_, caller_reference=_)
+    await client.copy_distribution(**_request(CopyDistributionInputDict))
+    await client.copy_distribution(_request(CopyDistributionInput))
+    await client.copy_distribution(_request(CopyDistributionInputDict))
+    await client.create_anycast_ip_list(name=_, ip_count=_)
+    await client.create_anycast_ip_list(**_request(CreateAnycastIpListInputDict))
+    await client.create_anycast_ip_list(_request(CreateAnycastIpListInput))
+    await client.create_anycast_ip_list(_request(CreateAnycastIpListInputDict))
+    await client.create_cache_policy(cache_policy_config=_)
+    await client.create_cache_policy(**_request(CreateCachePolicyInputDict))
+    await client.create_cache_policy(_request(CreateCachePolicyInput))
+    await client.create_cache_policy(_request(CreateCachePolicyInputDict))
+    await client.create_cloud_front_origin_access_identity(
+        cloud_front_origin_access_identity_config=_
+    )
+    await client.create_cloud_front_origin_access_identity(
+        **_request(CreateCloudFrontOriginAccessIdentityInputDict)
+    )
+    await client.create_cloud_front_origin_access_identity(
+        _request(CreateCloudFrontOriginAccessIdentityInput)
+    )
+    await client.create_cloud_front_origin_access_identity(
+        _request(CreateCloudFrontOriginAccessIdentityInputDict)
+    )
+    await client.create_connection_function(
+        name=_, connection_function_config=_, connection_function_code=_
+    )
+    await client.create_connection_function(
+        **_request(CreateConnectionFunctionInputDict)
+    )
+    await client.create_connection_function(_request(CreateConnectionFunctionInput))
+    await client.create_connection_function(_request(CreateConnectionFunctionInputDict))
+    await client.create_connection_group(name=_)
+    await client.create_connection_group(**_request(CreateConnectionGroupInputDict))
+    await client.create_connection_group(_request(CreateConnectionGroupInput))
+    await client.create_connection_group(_request(CreateConnectionGroupInputDict))
+    await client.create_continuous_deployment_policy(
+        continuous_deployment_policy_config=_
+    )
+    await client.create_continuous_deployment_policy(
+        **_request(CreateContinuousDeploymentPolicyInputDict)
+    )
+    await client.create_continuous_deployment_policy(
+        _request(CreateContinuousDeploymentPolicyInput)
+    )
+    await client.create_continuous_deployment_policy(
+        _request(CreateContinuousDeploymentPolicyInputDict)
+    )
+    await client.create_distribution(distribution_config=_)
+    await client.create_distribution(**_request(CreateDistributionInputDict))
+    await client.create_distribution(_request(CreateDistributionInput))
+    await client.create_distribution(_request(CreateDistributionInputDict))
+    await client.create_distribution_tenant(distribution_id=_, name=_, domains=_)
+    await client.create_distribution_tenant(
+        **_request(CreateDistributionTenantInputDict)
+    )
+    await client.create_distribution_tenant(_request(CreateDistributionTenantInput))
+    await client.create_distribution_tenant(_request(CreateDistributionTenantInputDict))
+    await client.create_distribution_with_tags(distribution_config_with_tags=_)
+    await client.create_distribution_with_tags(
+        **_request(CreateDistributionWithTagsInputDict)
+    )
+    await client.create_distribution_with_tags(
+        _request(CreateDistributionWithTagsInput)
+    )
+    await client.create_distribution_with_tags(
+        _request(CreateDistributionWithTagsInputDict)
+    )
+    await client.create_field_level_encryption_config(field_level_encryption_config=_)
+    await client.create_field_level_encryption_config(
+        **_request(CreateFieldLevelEncryptionConfigInputDict)
+    )
+    await client.create_field_level_encryption_config(
+        _request(CreateFieldLevelEncryptionConfigInput)
+    )
+    await client.create_field_level_encryption_config(
+        _request(CreateFieldLevelEncryptionConfigInputDict)
+    )
+    await client.create_field_level_encryption_profile(
+        field_level_encryption_profile_config=_
+    )
+    await client.create_field_level_encryption_profile(
+        **_request(CreateFieldLevelEncryptionProfileInputDict)
+    )
+    await client.create_field_level_encryption_profile(
+        _request(CreateFieldLevelEncryptionProfileInput)
+    )
+    await client.create_field_level_encryption_profile(
+        _request(CreateFieldLevelEncryptionProfileInputDict)
+    )
+    await client.create_function(name=_, function_config=_, function_code=_)
+    await client.create_function(**_request(CreateFunctionInputDict))
+    await client.create_function(_request(CreateFunctionInput))
+    await client.create_function(_request(CreateFunctionInputDict))
+    await client.create_invalidation(distribution_id=_, invalidation_batch=_)
+    await client.create_invalidation(**_request(CreateInvalidationInputDict))
+    await client.create_invalidation(_request(CreateInvalidationInput))
+    await client.create_invalidation(_request(CreateInvalidationInputDict))
+    await client.create_invalidation_for_distribution_tenant(id=_, invalidation_batch=_)
+    await client.create_invalidation_for_distribution_tenant(
+        **_request(CreateInvalidationForDistributionTenantInputDict)
+    )
+    await client.create_invalidation_for_distribution_tenant(
+        _request(CreateInvalidationForDistributionTenantInput)
+    )
+    await client.create_invalidation_for_distribution_tenant(
+        _request(CreateInvalidationForDistributionTenantInputDict)
+    )
+    await client.create_key_group(key_group_config=_)
+    await client.create_key_group(**_request(CreateKeyGroupInputDict))
+    await client.create_key_group(_request(CreateKeyGroupInput))
+    await client.create_key_group(_request(CreateKeyGroupInputDict))
+    await client.create_key_value_store(name=_)
+    await client.create_key_value_store(**_request(CreateKeyValueStoreInputDict))
+    await client.create_key_value_store(_request(CreateKeyValueStoreInput))
+    await client.create_key_value_store(_request(CreateKeyValueStoreInputDict))
+    await client.create_monitoring_subscription(
+        distribution_id=_, monitoring_subscription=_
+    )
+    await client.create_monitoring_subscription(
+        **_request(CreateMonitoringSubscriptionInputDict)
+    )
+    await client.create_monitoring_subscription(
+        _request(CreateMonitoringSubscriptionInput)
+    )
+    await client.create_monitoring_subscription(
+        _request(CreateMonitoringSubscriptionInputDict)
+    )
+    await client.create_origin_access_control(origin_access_control_config=_)
+    await client.create_origin_access_control(
+        **_request(CreateOriginAccessControlInputDict)
+    )
+    await client.create_origin_access_control(_request(CreateOriginAccessControlInput))
+    await client.create_origin_access_control(
+        _request(CreateOriginAccessControlInputDict)
+    )
+    await client.create_origin_request_policy(origin_request_policy_config=_)
+    await client.create_origin_request_policy(
+        **_request(CreateOriginRequestPolicyInputDict)
+    )
+    await client.create_origin_request_policy(_request(CreateOriginRequestPolicyInput))
+    await client.create_origin_request_policy(
+        _request(CreateOriginRequestPolicyInputDict)
+    )
+    await client.create_public_key(public_key_config=_)
+    await client.create_public_key(**_request(CreatePublicKeyInputDict))
+    await client.create_public_key(_request(CreatePublicKeyInput))
+    await client.create_public_key(_request(CreatePublicKeyInputDict))
+    await client.create_realtime_log_config(
+        end_points=_, fields=_, name=_, sampling_rate=_
+    )
+    await client.create_realtime_log_config(
+        **_request(CreateRealtimeLogConfigInputDict)
+    )
+    await client.create_realtime_log_config(_request(CreateRealtimeLogConfigInput))
+    await client.create_realtime_log_config(_request(CreateRealtimeLogConfigInputDict))
+    await client.create_response_headers_policy(response_headers_policy_config=_)
+    await client.create_response_headers_policy(
+        **_request(CreateResponseHeadersPolicyInputDict)
+    )
+    await client.create_response_headers_policy(
+        _request(CreateResponseHeadersPolicyInput)
+    )
+    await client.create_response_headers_policy(
+        _request(CreateResponseHeadersPolicyInputDict)
+    )
+    await client.create_streaming_distribution(streaming_distribution_config=_)
+    await client.create_streaming_distribution(
+        **_request(CreateStreamingDistributionInputDict)
+    )
+    await client.create_streaming_distribution(
+        _request(CreateStreamingDistributionInput)
+    )
+    await client.create_streaming_distribution(
+        _request(CreateStreamingDistributionInputDict)
+    )
+    await client.create_streaming_distribution_with_tags(
+        streaming_distribution_config_with_tags=_
+    )
+    await client.create_streaming_distribution_with_tags(
+        **_request(CreateStreamingDistributionWithTagsInputDict)
+    )
+    await client.create_streaming_distribution_with_tags(
+        _request(CreateStreamingDistributionWithTagsInput)
+    )
+    await client.create_streaming_distribution_with_tags(
+        _request(CreateStreamingDistributionWithTagsInputDict)
+    )
+    await client.create_trust_store(name=_, ca_certificates_bundle_source=_)
+    await client.create_trust_store(**_request(CreateTrustStoreInputDict))
+    await client.create_trust_store(_request(CreateTrustStoreInput))
+    await client.create_trust_store(_request(CreateTrustStoreInputDict))
+    await client.create_vpc_origin(vpc_origin_endpoint_config=_)
+    await client.create_vpc_origin(**_request(CreateVpcOriginInputDict))
+    await client.create_vpc_origin(_request(CreateVpcOriginInput))
+    await client.create_vpc_origin(_request(CreateVpcOriginInputDict))
+    await client.delete_anycast_ip_list(id=_, if_match=_)
+    await client.delete_anycast_ip_list(**_request(DeleteAnycastIpListInputDict))
+    await client.delete_anycast_ip_list(_request(DeleteAnycastIpListInput))
+    await client.delete_anycast_ip_list(_request(DeleteAnycastIpListInputDict))
+    await client.delete_cache_policy(id=_)
+    await client.delete_cache_policy(**_request(DeleteCachePolicyInputDict))
+    await client.delete_cache_policy(_request(DeleteCachePolicyInput))
+    await client.delete_cache_policy(_request(DeleteCachePolicyInputDict))
+    await client.delete_cloud_front_origin_access_identity(id=_)
+    await client.delete_cloud_front_origin_access_identity(
+        **_request(DeleteCloudFrontOriginAccessIdentityInputDict)
+    )
+    await client.delete_cloud_front_origin_access_identity(
+        _request(DeleteCloudFrontOriginAccessIdentityInput)
+    )
+    await client.delete_cloud_front_origin_access_identity(
+        _request(DeleteCloudFrontOriginAccessIdentityInputDict)
+    )
+    await client.delete_connection_function(id=_, if_match=_)
+    await client.delete_connection_function(
+        **_request(DeleteConnectionFunctionInputDict)
+    )
+    await client.delete_connection_function(_request(DeleteConnectionFunctionInput))
+    await client.delete_connection_function(_request(DeleteConnectionFunctionInputDict))
+    await client.delete_connection_group(id=_, if_match=_)
+    await client.delete_connection_group(**_request(DeleteConnectionGroupInputDict))
+    await client.delete_connection_group(_request(DeleteConnectionGroupInput))
+    await client.delete_connection_group(_request(DeleteConnectionGroupInputDict))
+    await client.delete_continuous_deployment_policy(id=_)
+    await client.delete_continuous_deployment_policy(
+        **_request(DeleteContinuousDeploymentPolicyInputDict)
+    )
+    await client.delete_continuous_deployment_policy(
+        _request(DeleteContinuousDeploymentPolicyInput)
+    )
+    await client.delete_continuous_deployment_policy(
+        _request(DeleteContinuousDeploymentPolicyInputDict)
+    )
+    await client.delete_distribution(id=_)
+    await client.delete_distribution(**_request(DeleteDistributionInputDict))
+    await client.delete_distribution(_request(DeleteDistributionInput))
+    await client.delete_distribution(_request(DeleteDistributionInputDict))
+    await client.delete_distribution_tenant(id=_, if_match=_)
+    await client.delete_distribution_tenant(
+        **_request(DeleteDistributionTenantInputDict)
+    )
+    await client.delete_distribution_tenant(_request(DeleteDistributionTenantInput))
+    await client.delete_distribution_tenant(_request(DeleteDistributionTenantInputDict))
+    await client.delete_field_level_encryption_config(id=_)
+    await client.delete_field_level_encryption_config(
+        **_request(DeleteFieldLevelEncryptionConfigInputDict)
+    )
+    await client.delete_field_level_encryption_config(
+        _request(DeleteFieldLevelEncryptionConfigInput)
+    )
+    await client.delete_field_level_encryption_config(
+        _request(DeleteFieldLevelEncryptionConfigInputDict)
+    )
+    await client.delete_field_level_encryption_profile(id=_)
+    await client.delete_field_level_encryption_profile(
+        **_request(DeleteFieldLevelEncryptionProfileInputDict)
+    )
+    await client.delete_field_level_encryption_profile(
+        _request(DeleteFieldLevelEncryptionProfileInput)
+    )
+    await client.delete_field_level_encryption_profile(
+        _request(DeleteFieldLevelEncryptionProfileInputDict)
+    )
+    await client.delete_function(name=_, if_match=_)
+    await client.delete_function(**_request(DeleteFunctionInputDict))
+    await client.delete_function(_request(DeleteFunctionInput))
+    await client.delete_function(_request(DeleteFunctionInputDict))
+    await client.delete_key_group(id=_)
+    await client.delete_key_group(**_request(DeleteKeyGroupInputDict))
+    await client.delete_key_group(_request(DeleteKeyGroupInput))
+    await client.delete_key_group(_request(DeleteKeyGroupInputDict))
+    await client.delete_key_value_store(name=_, if_match=_)
+    await client.delete_key_value_store(**_request(DeleteKeyValueStoreInputDict))
+    await client.delete_key_value_store(_request(DeleteKeyValueStoreInput))
+    await client.delete_key_value_store(_request(DeleteKeyValueStoreInputDict))
+    await client.delete_monitoring_subscription(distribution_id=_)
+    await client.delete_monitoring_subscription(
+        **_request(DeleteMonitoringSubscriptionInputDict)
+    )
+    await client.delete_monitoring_subscription(
+        _request(DeleteMonitoringSubscriptionInput)
+    )
+    await client.delete_monitoring_subscription(
+        _request(DeleteMonitoringSubscriptionInputDict)
+    )
+    await client.delete_origin_access_control(id=_)
+    await client.delete_origin_access_control(
+        **_request(DeleteOriginAccessControlInputDict)
+    )
+    await client.delete_origin_access_control(_request(DeleteOriginAccessControlInput))
+    await client.delete_origin_access_control(
+        _request(DeleteOriginAccessControlInputDict)
+    )
+    await client.delete_origin_request_policy(id=_)
+    await client.delete_origin_request_policy(
+        **_request(DeleteOriginRequestPolicyInputDict)
+    )
+    await client.delete_origin_request_policy(_request(DeleteOriginRequestPolicyInput))
+    await client.delete_origin_request_policy(
+        _request(DeleteOriginRequestPolicyInputDict)
+    )
+    await client.delete_public_key(id=_)
+    await client.delete_public_key(**_request(DeletePublicKeyInputDict))
+    await client.delete_public_key(_request(DeletePublicKeyInput))
+    await client.delete_public_key(_request(DeletePublicKeyInputDict))
+    await client.delete_realtime_log_config()
+    await client.delete_realtime_log_config(
+        **_request(DeleteRealtimeLogConfigInputDict)
+    )
+    await client.delete_realtime_log_config(_request(DeleteRealtimeLogConfigInput))
+    await client.delete_realtime_log_config(_request(DeleteRealtimeLogConfigInputDict))
+    await client.delete_resource_policy(resource_arn=_)
+    await client.delete_resource_policy(**_request(DeleteResourcePolicyInputDict))
+    await client.delete_resource_policy(_request(DeleteResourcePolicyInput))
+    await client.delete_resource_policy(_request(DeleteResourcePolicyInputDict))
+    await client.delete_response_headers_policy(id=_)
+    await client.delete_response_headers_policy(
+        **_request(DeleteResponseHeadersPolicyInputDict)
+    )
+    await client.delete_response_headers_policy(
+        _request(DeleteResponseHeadersPolicyInput)
+    )
+    await client.delete_response_headers_policy(
+        _request(DeleteResponseHeadersPolicyInputDict)
+    )
+    await client.delete_streaming_distribution(id=_)
+    await client.delete_streaming_distribution(
+        **_request(DeleteStreamingDistributionInputDict)
+    )
+    await client.delete_streaming_distribution(
+        _request(DeleteStreamingDistributionInput)
+    )
+    await client.delete_streaming_distribution(
+        _request(DeleteStreamingDistributionInputDict)
+    )
+    await client.delete_trust_store(id=_, if_match=_)
+    await client.delete_trust_store(**_request(DeleteTrustStoreInputDict))
+    await client.delete_trust_store(_request(DeleteTrustStoreInput))
+    await client.delete_trust_store(_request(DeleteTrustStoreInputDict))
+    await client.delete_vpc_origin(id=_, if_match=_)
+    await client.delete_vpc_origin(**_request(DeleteVpcOriginInputDict))
+    await client.delete_vpc_origin(_request(DeleteVpcOriginInput))
+    await client.delete_vpc_origin(_request(DeleteVpcOriginInputDict))
+    await client.describe_connection_function(identifier=_)
+    await client.describe_connection_function(
+        **_request(DescribeConnectionFunctionInputDict)
+    )
+    await client.describe_connection_function(_request(DescribeConnectionFunctionInput))
+    await client.describe_connection_function(
+        _request(DescribeConnectionFunctionInputDict)
+    )
+    await client.describe_function(name=_)
+    await client.describe_function(**_request(DescribeFunctionInputDict))
+    await client.describe_function(_request(DescribeFunctionInput))
+    await client.describe_function(_request(DescribeFunctionInputDict))
+    await client.describe_key_value_store(name=_)
+    await client.describe_key_value_store(**_request(DescribeKeyValueStoreInputDict))
+    await client.describe_key_value_store(_request(DescribeKeyValueStoreInput))
+    await client.describe_key_value_store(_request(DescribeKeyValueStoreInputDict))
+    await client.disassociate_distribution_tenant_web_acl(id=_)
+    await client.disassociate_distribution_tenant_web_acl(
+        **_request(DisassociateDistributionTenantWebACLInputDict)
+    )
+    await client.disassociate_distribution_tenant_web_acl(
+        _request(DisassociateDistributionTenantWebACLInput)
+    )
+    await client.disassociate_distribution_tenant_web_acl(
+        _request(DisassociateDistributionTenantWebACLInputDict)
+    )
+    await client.disassociate_distribution_web_acl(id=_)
+    await client.disassociate_distribution_web_acl(
+        **_request(DisassociateDistributionWebACLInputDict)
+    )
+    await client.disassociate_distribution_web_acl(
+        _request(DisassociateDistributionWebACLInput)
+    )
+    await client.disassociate_distribution_web_acl(
+        _request(DisassociateDistributionWebACLInputDict)
+    )
+    await client.get_anycast_ip_list(id=_)
+    await client.get_anycast_ip_list(**_request(GetAnycastIpListInputDict))
+    await client.get_anycast_ip_list(_request(GetAnycastIpListInput))
+    await client.get_anycast_ip_list(_request(GetAnycastIpListInputDict))
+    await client.get_cache_policy(id=_)
+    await client.get_cache_policy(**_request(GetCachePolicyInputDict))
+    await client.get_cache_policy(_request(GetCachePolicyInput))
+    await client.get_cache_policy(_request(GetCachePolicyInputDict))
+    await client.get_cache_policy_config(id=_)
+    await client.get_cache_policy_config(**_request(GetCachePolicyConfigInputDict))
+    await client.get_cache_policy_config(_request(GetCachePolicyConfigInput))
+    await client.get_cache_policy_config(_request(GetCachePolicyConfigInputDict))
+    await client.get_cloud_front_origin_access_identity(id=_)
+    await client.get_cloud_front_origin_access_identity(
+        **_request(GetCloudFrontOriginAccessIdentityInputDict)
+    )
+    await client.get_cloud_front_origin_access_identity(
+        _request(GetCloudFrontOriginAccessIdentityInput)
+    )
+    await client.get_cloud_front_origin_access_identity(
+        _request(GetCloudFrontOriginAccessIdentityInputDict)
+    )
+    await client.get_cloud_front_origin_access_identity_config(id=_)
+    await client.get_cloud_front_origin_access_identity_config(
+        **_request(GetCloudFrontOriginAccessIdentityConfigInputDict)
+    )
+    await client.get_cloud_front_origin_access_identity_config(
+        _request(GetCloudFrontOriginAccessIdentityConfigInput)
+    )
+    await client.get_cloud_front_origin_access_identity_config(
+        _request(GetCloudFrontOriginAccessIdentityConfigInputDict)
+    )
+    await client.get_connection_function(identifier=_)
+    await client.get_connection_function(**_request(GetConnectionFunctionInputDict))
+    await client.get_connection_function(_request(GetConnectionFunctionInput))
+    await client.get_connection_function(_request(GetConnectionFunctionInputDict))
+    await client.get_connection_group(identifier=_)
+    await client.get_connection_group(**_request(GetConnectionGroupInputDict))
+    await client.get_connection_group(_request(GetConnectionGroupInput))
+    await client.get_connection_group(_request(GetConnectionGroupInputDict))
+    await client.get_connection_group_by_routing_endpoint(routing_endpoint=_)
+    await client.get_connection_group_by_routing_endpoint(
+        **_request(GetConnectionGroupByRoutingEndpointInputDict)
+    )
+    await client.get_connection_group_by_routing_endpoint(
+        _request(GetConnectionGroupByRoutingEndpointInput)
+    )
+    await client.get_connection_group_by_routing_endpoint(
+        _request(GetConnectionGroupByRoutingEndpointInputDict)
+    )
+    await client.get_continuous_deployment_policy(id=_)
+    await client.get_continuous_deployment_policy(
+        **_request(GetContinuousDeploymentPolicyInputDict)
+    )
+    await client.get_continuous_deployment_policy(
+        _request(GetContinuousDeploymentPolicyInput)
+    )
+    await client.get_continuous_deployment_policy(
+        _request(GetContinuousDeploymentPolicyInputDict)
+    )
+    await client.get_continuous_deployment_policy_config(id=_)
+    await client.get_continuous_deployment_policy_config(
+        **_request(GetContinuousDeploymentPolicyConfigInputDict)
+    )
+    await client.get_continuous_deployment_policy_config(
+        _request(GetContinuousDeploymentPolicyConfigInput)
+    )
+    await client.get_continuous_deployment_policy_config(
+        _request(GetContinuousDeploymentPolicyConfigInputDict)
+    )
+    await client.get_distribution(id=_)
+    await client.get_distribution(**_request(GetDistributionInputDict))
+    await client.get_distribution(_request(GetDistributionInput))
+    await client.get_distribution(_request(GetDistributionInputDict))
+    await client.get_distribution_config(id=_)
+    await client.get_distribution_config(**_request(GetDistributionConfigInputDict))
+    await client.get_distribution_config(_request(GetDistributionConfigInput))
+    await client.get_distribution_config(_request(GetDistributionConfigInputDict))
+    await client.get_distribution_tenant(identifier=_)
+    await client.get_distribution_tenant(**_request(GetDistributionTenantInputDict))
+    await client.get_distribution_tenant(_request(GetDistributionTenantInput))
+    await client.get_distribution_tenant(_request(GetDistributionTenantInputDict))
+    await client.get_distribution_tenant_by_domain(domain=_)
+    await client.get_distribution_tenant_by_domain(
+        **_request(GetDistributionTenantByDomainInputDict)
+    )
+    await client.get_distribution_tenant_by_domain(
+        _request(GetDistributionTenantByDomainInput)
+    )
+    await client.get_distribution_tenant_by_domain(
+        _request(GetDistributionTenantByDomainInputDict)
+    )
+    await client.get_field_level_encryption(id=_)
+    await client.get_field_level_encryption(
+        **_request(GetFieldLevelEncryptionInputDict)
+    )
+    await client.get_field_level_encryption(_request(GetFieldLevelEncryptionInput))
+    await client.get_field_level_encryption(_request(GetFieldLevelEncryptionInputDict))
+    await client.get_field_level_encryption_config(id=_)
+    await client.get_field_level_encryption_config(
+        **_request(GetFieldLevelEncryptionConfigInputDict)
+    )
+    await client.get_field_level_encryption_config(
+        _request(GetFieldLevelEncryptionConfigInput)
+    )
+    await client.get_field_level_encryption_config(
+        _request(GetFieldLevelEncryptionConfigInputDict)
+    )
+    await client.get_field_level_encryption_profile(id=_)
+    await client.get_field_level_encryption_profile(
+        **_request(GetFieldLevelEncryptionProfileInputDict)
+    )
+    await client.get_field_level_encryption_profile(
+        _request(GetFieldLevelEncryptionProfileInput)
+    )
+    await client.get_field_level_encryption_profile(
+        _request(GetFieldLevelEncryptionProfileInputDict)
+    )
+    await client.get_field_level_encryption_profile_config(id=_)
+    await client.get_field_level_encryption_profile_config(
+        **_request(GetFieldLevelEncryptionProfileConfigInputDict)
+    )
+    await client.get_field_level_encryption_profile_config(
+        _request(GetFieldLevelEncryptionProfileConfigInput)
+    )
+    await client.get_field_level_encryption_profile_config(
+        _request(GetFieldLevelEncryptionProfileConfigInputDict)
+    )
+    await client.get_function(name=_)
+    await client.get_function(**_request(GetFunctionInputDict))
+    await client.get_function(_request(GetFunctionInput))
+    await client.get_function(_request(GetFunctionInputDict))
+    await client.get_invalidation(distribution_id=_, id=_)
+    await client.get_invalidation(**_request(GetInvalidationInputDict))
+    await client.get_invalidation(_request(GetInvalidationInput))
+    await client.get_invalidation(_request(GetInvalidationInputDict))
+    await client.get_invalidation_for_distribution_tenant(
+        distribution_tenant_id=_, id=_
+    )
+    await client.get_invalidation_for_distribution_tenant(
+        **_request(GetInvalidationForDistributionTenantInputDict)
+    )
+    await client.get_invalidation_for_distribution_tenant(
+        _request(GetInvalidationForDistributionTenantInput)
+    )
+    await client.get_invalidation_for_distribution_tenant(
+        _request(GetInvalidationForDistributionTenantInputDict)
+    )
+    await client.get_key_group(id=_)
+    await client.get_key_group(**_request(GetKeyGroupInputDict))
+    await client.get_key_group(_request(GetKeyGroupInput))
+    await client.get_key_group(_request(GetKeyGroupInputDict))
+    await client.get_key_group_config(id=_)
+    await client.get_key_group_config(**_request(GetKeyGroupConfigInputDict))
+    await client.get_key_group_config(_request(GetKeyGroupConfigInput))
+    await client.get_key_group_config(_request(GetKeyGroupConfigInputDict))
+    await client.get_managed_certificate_details(identifier=_)
+    await client.get_managed_certificate_details(
+        **_request(GetManagedCertificateDetailsInputDict)
+    )
+    await client.get_managed_certificate_details(
+        _request(GetManagedCertificateDetailsInput)
+    )
+    await client.get_managed_certificate_details(
+        _request(GetManagedCertificateDetailsInputDict)
+    )
+    await client.get_monitoring_subscription(distribution_id=_)
+    await client.get_monitoring_subscription(
+        **_request(GetMonitoringSubscriptionInputDict)
+    )
+    await client.get_monitoring_subscription(_request(GetMonitoringSubscriptionInput))
+    await client.get_monitoring_subscription(
+        _request(GetMonitoringSubscriptionInputDict)
+    )
+    await client.get_origin_access_control(id=_)
+    await client.get_origin_access_control(**_request(GetOriginAccessControlInputDict))
+    await client.get_origin_access_control(_request(GetOriginAccessControlInput))
+    await client.get_origin_access_control(_request(GetOriginAccessControlInputDict))
+    await client.get_origin_access_control_config(id=_)
+    await client.get_origin_access_control_config(
+        **_request(GetOriginAccessControlConfigInputDict)
+    )
+    await client.get_origin_access_control_config(
+        _request(GetOriginAccessControlConfigInput)
+    )
+    await client.get_origin_access_control_config(
+        _request(GetOriginAccessControlConfigInputDict)
+    )
+    await client.get_origin_request_policy(id=_)
+    await client.get_origin_request_policy(**_request(GetOriginRequestPolicyInputDict))
+    await client.get_origin_request_policy(_request(GetOriginRequestPolicyInput))
+    await client.get_origin_request_policy(_request(GetOriginRequestPolicyInputDict))
+    await client.get_origin_request_policy_config(id=_)
+    await client.get_origin_request_policy_config(
+        **_request(GetOriginRequestPolicyConfigInputDict)
+    )
+    await client.get_origin_request_policy_config(
+        _request(GetOriginRequestPolicyConfigInput)
+    )
+    await client.get_origin_request_policy_config(
+        _request(GetOriginRequestPolicyConfigInputDict)
+    )
+    await client.get_public_key(id=_)
+    await client.get_public_key(**_request(GetPublicKeyInputDict))
+    await client.get_public_key(_request(GetPublicKeyInput))
+    await client.get_public_key(_request(GetPublicKeyInputDict))
+    await client.get_public_key_config(id=_)
+    await client.get_public_key_config(**_request(GetPublicKeyConfigInputDict))
+    await client.get_public_key_config(_request(GetPublicKeyConfigInput))
+    await client.get_public_key_config(_request(GetPublicKeyConfigInputDict))
+    await client.get_realtime_log_config()
+    await client.get_realtime_log_config(**_request(GetRealtimeLogConfigInputDict))
+    await client.get_realtime_log_config(_request(GetRealtimeLogConfigInput))
+    await client.get_realtime_log_config(_request(GetRealtimeLogConfigInputDict))
+    await client.get_resource_policy(resource_arn=_)
+    await client.get_resource_policy(**_request(GetResourcePolicyInputDict))
+    await client.get_resource_policy(_request(GetResourcePolicyInput))
+    await client.get_resource_policy(_request(GetResourcePolicyInputDict))
+    await client.get_response_headers_policy(id=_)
+    await client.get_response_headers_policy(
+        **_request(GetResponseHeadersPolicyInputDict)
+    )
+    await client.get_response_headers_policy(_request(GetResponseHeadersPolicyInput))
+    await client.get_response_headers_policy(
+        _request(GetResponseHeadersPolicyInputDict)
+    )
+    await client.get_response_headers_policy_config(id=_)
+    await client.get_response_headers_policy_config(
+        **_request(GetResponseHeadersPolicyConfigInputDict)
+    )
+    await client.get_response_headers_policy_config(
+        _request(GetResponseHeadersPolicyConfigInput)
+    )
+    await client.get_response_headers_policy_config(
+        _request(GetResponseHeadersPolicyConfigInputDict)
+    )
+    await client.get_streaming_distribution(id=_)
+    await client.get_streaming_distribution(
+        **_request(GetStreamingDistributionInputDict)
+    )
+    await client.get_streaming_distribution(_request(GetStreamingDistributionInput))
+    await client.get_streaming_distribution(_request(GetStreamingDistributionInputDict))
+    await client.get_streaming_distribution_config(id=_)
+    await client.get_streaming_distribution_config(
+        **_request(GetStreamingDistributionConfigInputDict)
+    )
+    await client.get_streaming_distribution_config(
+        _request(GetStreamingDistributionConfigInput)
+    )
+    await client.get_streaming_distribution_config(
+        _request(GetStreamingDistributionConfigInputDict)
+    )
+    await client.get_trust_store(identifier=_)
+    await client.get_trust_store(**_request(GetTrustStoreInputDict))
+    await client.get_trust_store(_request(GetTrustStoreInput))
+    await client.get_trust_store(_request(GetTrustStoreInputDict))
+    await client.get_vpc_origin(id=_)
+    await client.get_vpc_origin(**_request(GetVpcOriginInputDict))
+    await client.get_vpc_origin(_request(GetVpcOriginInput))
+    await client.get_vpc_origin(_request(GetVpcOriginInputDict))
+    await client.list_anycast_ip_lists()
+    await client.list_anycast_ip_lists(**_request(ListAnycastIpListsInputDict))
+    await client.list_anycast_ip_lists(_request(ListAnycastIpListsInput))
+    await client.list_anycast_ip_lists(_request(ListAnycastIpListsInputDict))
+    await client.list_cache_policies()
+    await client.list_cache_policies(**_request(ListCachePoliciesInputDict))
+    await client.list_cache_policies(_request(ListCachePoliciesInput))
+    await client.list_cache_policies(_request(ListCachePoliciesInputDict))
+    await client.list_cloud_front_origin_access_identities()
+    await client.list_cloud_front_origin_access_identities(
+        **_request(ListCloudFrontOriginAccessIdentitiesInputDict)
+    )
+    await client.list_cloud_front_origin_access_identities(
+        _request(ListCloudFrontOriginAccessIdentitiesInput)
+    )
+    await client.list_cloud_front_origin_access_identities(
+        _request(ListCloudFrontOriginAccessIdentitiesInputDict)
+    )
+    await client.list_conflicting_aliases(distribution_id=_, alias=_)
+    await client.list_conflicting_aliases(**_request(ListConflictingAliasesInputDict))
+    await client.list_conflicting_aliases(_request(ListConflictingAliasesInput))
+    await client.list_conflicting_aliases(_request(ListConflictingAliasesInputDict))
+    await client.list_connection_functions()
+    await client.list_connection_functions(**_request(ListConnectionFunctionsInputDict))
+    await client.list_connection_functions(_request(ListConnectionFunctionsInput))
+    await client.list_connection_functions(_request(ListConnectionFunctionsInputDict))
+    await client.list_connection_groups()
+    await client.list_connection_groups(**_request(ListConnectionGroupsInputDict))
+    await client.list_connection_groups(_request(ListConnectionGroupsInput))
+    await client.list_connection_groups(_request(ListConnectionGroupsInputDict))
+    await client.list_continuous_deployment_policies()
+    await client.list_continuous_deployment_policies(
+        **_request(ListContinuousDeploymentPoliciesInputDict)
+    )
+    await client.list_continuous_deployment_policies(
+        _request(ListContinuousDeploymentPoliciesInput)
+    )
+    await client.list_continuous_deployment_policies(
+        _request(ListContinuousDeploymentPoliciesInputDict)
+    )
+    await client.list_distributions()
+    await client.list_distributions(**_request(ListDistributionsInputDict))
+    await client.list_distributions(_request(ListDistributionsInput))
+    await client.list_distributions(_request(ListDistributionsInputDict))
+    await client.list_distributions_by_anycast_ip_list_id(anycast_ip_list_id=_)
+    await client.list_distributions_by_anycast_ip_list_id(
+        **_request(ListDistributionsByAnycastIpListIdInputDict)
+    )
+    await client.list_distributions_by_anycast_ip_list_id(
+        _request(ListDistributionsByAnycastIpListIdInput)
+    )
+    await client.list_distributions_by_anycast_ip_list_id(
+        _request(ListDistributionsByAnycastIpListIdInputDict)
+    )
+    await client.list_distributions_by_cache_policy_id(cache_policy_id=_)
+    await client.list_distributions_by_cache_policy_id(
+        **_request(ListDistributionsByCachePolicyIdInputDict)
+    )
+    await client.list_distributions_by_cache_policy_id(
+        _request(ListDistributionsByCachePolicyIdInput)
+    )
+    await client.list_distributions_by_cache_policy_id(
+        _request(ListDistributionsByCachePolicyIdInputDict)
+    )
+    await client.list_distributions_by_connection_function(
+        connection_function_identifier=_
+    )
+    await client.list_distributions_by_connection_function(
+        **_request(ListDistributionsByConnectionFunctionInputDict)
+    )
+    await client.list_distributions_by_connection_function(
+        _request(ListDistributionsByConnectionFunctionInput)
+    )
+    await client.list_distributions_by_connection_function(
+        _request(ListDistributionsByConnectionFunctionInputDict)
+    )
+    await client.list_distributions_by_connection_mode(connection_mode=_)
+    await client.list_distributions_by_connection_mode(
+        **_request(ListDistributionsByConnectionModeInputDict)
+    )
+    await client.list_distributions_by_connection_mode(
+        _request(ListDistributionsByConnectionModeInput)
+    )
+    await client.list_distributions_by_connection_mode(
+        _request(ListDistributionsByConnectionModeInputDict)
+    )
+    await client.list_distributions_by_key_group(key_group_id=_)
+    await client.list_distributions_by_key_group(
+        **_request(ListDistributionsByKeyGroupInputDict)
+    )
+    await client.list_distributions_by_key_group(
+        _request(ListDistributionsByKeyGroupInput)
+    )
+    await client.list_distributions_by_key_group(
+        _request(ListDistributionsByKeyGroupInputDict)
+    )
+    await client.list_distributions_by_origin_request_policy_id(
+        origin_request_policy_id=_
+    )
+    await client.list_distributions_by_origin_request_policy_id(
+        **_request(ListDistributionsByOriginRequestPolicyIdInputDict)
+    )
+    await client.list_distributions_by_origin_request_policy_id(
+        _request(ListDistributionsByOriginRequestPolicyIdInput)
+    )
+    await client.list_distributions_by_origin_request_policy_id(
+        _request(ListDistributionsByOriginRequestPolicyIdInputDict)
+    )
+    await client.list_distributions_by_owned_resource(resource_arn=_)
+    await client.list_distributions_by_owned_resource(
+        **_request(ListDistributionsByOwnedResourceInputDict)
+    )
+    await client.list_distributions_by_owned_resource(
+        _request(ListDistributionsByOwnedResourceInput)
+    )
+    await client.list_distributions_by_owned_resource(
+        _request(ListDistributionsByOwnedResourceInputDict)
+    )
+    await client.list_distributions_by_realtime_log_config()
+    await client.list_distributions_by_realtime_log_config(
+        **_request(ListDistributionsByRealtimeLogConfigInputDict)
+    )
+    await client.list_distributions_by_realtime_log_config(
+        _request(ListDistributionsByRealtimeLogConfigInput)
+    )
+    await client.list_distributions_by_realtime_log_config(
+        _request(ListDistributionsByRealtimeLogConfigInputDict)
+    )
+    await client.list_distributions_by_response_headers_policy_id(
+        response_headers_policy_id=_
+    )
+    await client.list_distributions_by_response_headers_policy_id(
+        **_request(ListDistributionsByResponseHeadersPolicyIdInputDict)
+    )
+    await client.list_distributions_by_response_headers_policy_id(
+        _request(ListDistributionsByResponseHeadersPolicyIdInput)
+    )
+    await client.list_distributions_by_response_headers_policy_id(
+        _request(ListDistributionsByResponseHeadersPolicyIdInputDict)
+    )
+    await client.list_distributions_by_trust_store(trust_store_identifier=_)
+    await client.list_distributions_by_trust_store(
+        **_request(ListDistributionsByTrustStoreInputDict)
+    )
+    await client.list_distributions_by_trust_store(
+        _request(ListDistributionsByTrustStoreInput)
+    )
+    await client.list_distributions_by_trust_store(
+        _request(ListDistributionsByTrustStoreInputDict)
+    )
+    await client.list_distributions_by_vpc_origin_id(vpc_origin_id=_)
+    await client.list_distributions_by_vpc_origin_id(
+        **_request(ListDistributionsByVpcOriginIdInputDict)
+    )
+    await client.list_distributions_by_vpc_origin_id(
+        _request(ListDistributionsByVpcOriginIdInput)
+    )
+    await client.list_distributions_by_vpc_origin_id(
+        _request(ListDistributionsByVpcOriginIdInputDict)
+    )
+    await client.list_distributions_by_web_acl_id(web_acl_id=_)
+    await client.list_distributions_by_web_acl_id(
+        **_request(ListDistributionsByWebACLIdInputDict)
+    )
+    await client.list_distributions_by_web_acl_id(
+        _request(ListDistributionsByWebACLIdInput)
+    )
+    await client.list_distributions_by_web_acl_id(
+        _request(ListDistributionsByWebACLIdInputDict)
+    )
+    await client.list_distribution_tenants()
+    await client.list_distribution_tenants(**_request(ListDistributionTenantsInputDict))
+    await client.list_distribution_tenants(_request(ListDistributionTenantsInput))
+    await client.list_distribution_tenants(_request(ListDistributionTenantsInputDict))
+    await client.list_distribution_tenants_by_customization()
+    await client.list_distribution_tenants_by_customization(
+        **_request(ListDistributionTenantsByCustomizationInputDict)
+    )
+    await client.list_distribution_tenants_by_customization(
+        _request(ListDistributionTenantsByCustomizationInput)
+    )
+    await client.list_distribution_tenants_by_customization(
+        _request(ListDistributionTenantsByCustomizationInputDict)
+    )
+    await client.list_domain_conflicts(domain=_, domain_control_validation_resource=_)
+    await client.list_domain_conflicts(**_request(ListDomainConflictsInputDict))
+    await client.list_domain_conflicts(_request(ListDomainConflictsInput))
+    await client.list_domain_conflicts(_request(ListDomainConflictsInputDict))
+    await client.list_field_level_encryption_configs()
+    await client.list_field_level_encryption_configs(
+        **_request(ListFieldLevelEncryptionConfigsInputDict)
+    )
+    await client.list_field_level_encryption_configs(
+        _request(ListFieldLevelEncryptionConfigsInput)
+    )
+    await client.list_field_level_encryption_configs(
+        _request(ListFieldLevelEncryptionConfigsInputDict)
+    )
+    await client.list_field_level_encryption_profiles()
+    await client.list_field_level_encryption_profiles(
+        **_request(ListFieldLevelEncryptionProfilesInputDict)
+    )
+    await client.list_field_level_encryption_profiles(
+        _request(ListFieldLevelEncryptionProfilesInput)
+    )
+    await client.list_field_level_encryption_profiles(
+        _request(ListFieldLevelEncryptionProfilesInputDict)
+    )
+    await client.list_functions()
+    await client.list_functions(**_request(ListFunctionsInputDict))
+    await client.list_functions(_request(ListFunctionsInput))
+    await client.list_functions(_request(ListFunctionsInputDict))
+    await client.list_invalidations(distribution_id=_)
+    await client.list_invalidations(**_request(ListInvalidationsInputDict))
+    await client.list_invalidations(_request(ListInvalidationsInput))
+    await client.list_invalidations(_request(ListInvalidationsInputDict))
+    await client.list_invalidations_for_distribution_tenant(id=_)
+    await client.list_invalidations_for_distribution_tenant(
+        **_request(ListInvalidationsForDistributionTenantInputDict)
+    )
+    await client.list_invalidations_for_distribution_tenant(
+        _request(ListInvalidationsForDistributionTenantInput)
+    )
+    await client.list_invalidations_for_distribution_tenant(
+        _request(ListInvalidationsForDistributionTenantInputDict)
+    )
+    await client.list_key_groups()
+    await client.list_key_groups(**_request(ListKeyGroupsInputDict))
+    await client.list_key_groups(_request(ListKeyGroupsInput))
+    await client.list_key_groups(_request(ListKeyGroupsInputDict))
+    await client.list_key_value_stores()
+    await client.list_key_value_stores(**_request(ListKeyValueStoresInputDict))
+    await client.list_key_value_stores(_request(ListKeyValueStoresInput))
+    await client.list_key_value_stores(_request(ListKeyValueStoresInputDict))
+    await client.list_origin_access_controls()
+    await client.list_origin_access_controls(
+        **_request(ListOriginAccessControlsInputDict)
+    )
+    await client.list_origin_access_controls(_request(ListOriginAccessControlsInput))
+    await client.list_origin_access_controls(
+        _request(ListOriginAccessControlsInputDict)
+    )
+    await client.list_origin_request_policies()
+    await client.list_origin_request_policies(
+        **_request(ListOriginRequestPoliciesInputDict)
+    )
+    await client.list_origin_request_policies(_request(ListOriginRequestPoliciesInput))
+    await client.list_origin_request_policies(
+        _request(ListOriginRequestPoliciesInputDict)
+    )
+    await client.list_public_keys()
+    await client.list_public_keys(**_request(ListPublicKeysInputDict))
+    await client.list_public_keys(_request(ListPublicKeysInput))
+    await client.list_public_keys(_request(ListPublicKeysInputDict))
+    await client.list_realtime_log_configs()
+    await client.list_realtime_log_configs(**_request(ListRealtimeLogConfigsInputDict))
+    await client.list_realtime_log_configs(_request(ListRealtimeLogConfigsInput))
+    await client.list_realtime_log_configs(_request(ListRealtimeLogConfigsInputDict))
+    await client.list_response_headers_policies()
+    await client.list_response_headers_policies(
+        **_request(ListResponseHeadersPoliciesInputDict)
+    )
+    await client.list_response_headers_policies(
+        _request(ListResponseHeadersPoliciesInput)
+    )
+    await client.list_response_headers_policies(
+        _request(ListResponseHeadersPoliciesInputDict)
+    )
+    await client.list_streaming_distributions()
+    await client.list_streaming_distributions(
+        **_request(ListStreamingDistributionsInputDict)
+    )
+    await client.list_streaming_distributions(_request(ListStreamingDistributionsInput))
+    await client.list_streaming_distributions(
+        _request(ListStreamingDistributionsInputDict)
+    )
+    await client.list_tags_for_resource(resource=_)
+    await client.list_tags_for_resource(**_request(ListTagsForResourceInputDict))
+    await client.list_tags_for_resource(_request(ListTagsForResourceInput))
+    await client.list_tags_for_resource(_request(ListTagsForResourceInputDict))
+    await client.list_trust_stores()
+    await client.list_trust_stores(**_request(ListTrustStoresInputDict))
+    await client.list_trust_stores(_request(ListTrustStoresInput))
+    await client.list_trust_stores(_request(ListTrustStoresInputDict))
+    await client.list_vpc_origins()
+    await client.list_vpc_origins(**_request(ListVpcOriginsInputDict))
+    await client.list_vpc_origins(_request(ListVpcOriginsInput))
+    await client.list_vpc_origins(_request(ListVpcOriginsInputDict))
+    await client.publish_connection_function(id=_, if_match=_)
+    await client.publish_connection_function(
+        **_request(PublishConnectionFunctionInputDict)
+    )
+    await client.publish_connection_function(_request(PublishConnectionFunctionInput))
+    await client.publish_connection_function(
+        _request(PublishConnectionFunctionInputDict)
+    )
+    await client.publish_function(name=_, if_match=_)
+    await client.publish_function(**_request(PublishFunctionInputDict))
+    await client.publish_function(_request(PublishFunctionInput))
+    await client.publish_function(_request(PublishFunctionInputDict))
+    await client.put_resource_policy(resource_arn=_, policy_document=_)
+    await client.put_resource_policy(**_request(PutResourcePolicyInputDict))
+    await client.put_resource_policy(_request(PutResourcePolicyInput))
+    await client.put_resource_policy(_request(PutResourcePolicyInputDict))
+    await client.tag_resource(resource=_, tags=_)
+    await client.tag_resource(**_request(TagResourceInputDict))
+    await client.tag_resource(_request(TagResourceInput))
+    await client.tag_resource(_request(TagResourceInputDict))
+    await client.test_connection_function(id=_, if_match=_, connection_object=_)
+    await client.test_connection_function(**_request(TestConnectionFunctionInputDict))
+    await client.test_connection_function(_request(TestConnectionFunctionInput))
+    await client.test_connection_function(_request(TestConnectionFunctionInputDict))
+    await client.test_function(name=_, if_match=_, event_object=_)
+    await client.test_function(**_request(TestFunctionInputDict))
+    await client.test_function(_request(TestFunctionInput))
+    await client.test_function(_request(TestFunctionInputDict))
+    await client.untag_resource(resource=_, tag_keys=_)
+    await client.untag_resource(**_request(UntagResourceInputDict))
+    await client.untag_resource(_request(UntagResourceInput))
+    await client.untag_resource(_request(UntagResourceInputDict))
+    await client.update_anycast_ip_list(id=_, if_match=_)
+    await client.update_anycast_ip_list(**_request(UpdateAnycastIpListInputDict))
+    await client.update_anycast_ip_list(_request(UpdateAnycastIpListInput))
+    await client.update_anycast_ip_list(_request(UpdateAnycastIpListInputDict))
+    await client.update_cache_policy(cache_policy_config=_, id=_)
+    await client.update_cache_policy(**_request(UpdateCachePolicyInputDict))
+    await client.update_cache_policy(_request(UpdateCachePolicyInput))
+    await client.update_cache_policy(_request(UpdateCachePolicyInputDict))
+    await client.update_cloud_front_origin_access_identity(
+        cloud_front_origin_access_identity_config=_, id=_
+    )
+    await client.update_cloud_front_origin_access_identity(
+        **_request(UpdateCloudFrontOriginAccessIdentityInputDict)
+    )
+    await client.update_cloud_front_origin_access_identity(
+        _request(UpdateCloudFrontOriginAccessIdentityInput)
+    )
+    await client.update_cloud_front_origin_access_identity(
+        _request(UpdateCloudFrontOriginAccessIdentityInputDict)
+    )
+    await client.update_connection_function(
+        id=_, if_match=_, connection_function_config=_, connection_function_code=_
+    )
+    await client.update_connection_function(
+        **_request(UpdateConnectionFunctionInputDict)
+    )
+    await client.update_connection_function(_request(UpdateConnectionFunctionInput))
+    await client.update_connection_function(_request(UpdateConnectionFunctionInputDict))
+    await client.update_connection_group(id=_, if_match=_)
+    await client.update_connection_group(**_request(UpdateConnectionGroupInputDict))
+    await client.update_connection_group(_request(UpdateConnectionGroupInput))
+    await client.update_connection_group(_request(UpdateConnectionGroupInputDict))
+    await client.update_continuous_deployment_policy(
+        continuous_deployment_policy_config=_, id=_
+    )
+    await client.update_continuous_deployment_policy(
+        **_request(UpdateContinuousDeploymentPolicyInputDict)
+    )
+    await client.update_continuous_deployment_policy(
+        _request(UpdateContinuousDeploymentPolicyInput)
+    )
+    await client.update_continuous_deployment_policy(
+        _request(UpdateContinuousDeploymentPolicyInputDict)
+    )
+    await client.update_distribution(distribution_config=_, id=_)
+    await client.update_distribution(**_request(UpdateDistributionInputDict))
+    await client.update_distribution(_request(UpdateDistributionInput))
+    await client.update_distribution(_request(UpdateDistributionInputDict))
+    await client.update_distribution_tenant(id=_, if_match=_)
+    await client.update_distribution_tenant(
+        **_request(UpdateDistributionTenantInputDict)
+    )
+    await client.update_distribution_tenant(_request(UpdateDistributionTenantInput))
+    await client.update_distribution_tenant(_request(UpdateDistributionTenantInputDict))
+    await client.update_distribution_with_staging_config(id=_)
+    await client.update_distribution_with_staging_config(
+        **_request(UpdateDistributionWithStagingConfigInputDict)
+    )
+    await client.update_distribution_with_staging_config(
+        _request(UpdateDistributionWithStagingConfigInput)
+    )
+    await client.update_distribution_with_staging_config(
+        _request(UpdateDistributionWithStagingConfigInputDict)
+    )
+    await client.update_domain_association(domain=_, target_resource=_)
+    await client.update_domain_association(**_request(UpdateDomainAssociationInputDict))
+    await client.update_domain_association(_request(UpdateDomainAssociationInput))
+    await client.update_domain_association(_request(UpdateDomainAssociationInputDict))
+    await client.update_field_level_encryption_config(
+        field_level_encryption_config=_, id=_
+    )
+    await client.update_field_level_encryption_config(
+        **_request(UpdateFieldLevelEncryptionConfigInputDict)
+    )
+    await client.update_field_level_encryption_config(
+        _request(UpdateFieldLevelEncryptionConfigInput)
+    )
+    await client.update_field_level_encryption_config(
+        _request(UpdateFieldLevelEncryptionConfigInputDict)
+    )
+    await client.update_field_level_encryption_profile(
+        field_level_encryption_profile_config=_, id=_
+    )
+    await client.update_field_level_encryption_profile(
+        **_request(UpdateFieldLevelEncryptionProfileInputDict)
+    )
+    await client.update_field_level_encryption_profile(
+        _request(UpdateFieldLevelEncryptionProfileInput)
+    )
+    await client.update_field_level_encryption_profile(
+        _request(UpdateFieldLevelEncryptionProfileInputDict)
+    )
+    await client.update_function(name=_, if_match=_, function_config=_, function_code=_)
+    await client.update_function(**_request(UpdateFunctionInputDict))
+    await client.update_function(_request(UpdateFunctionInput))
+    await client.update_function(_request(UpdateFunctionInputDict))
+    await client.update_key_group(key_group_config=_, id=_)
+    await client.update_key_group(**_request(UpdateKeyGroupInputDict))
+    await client.update_key_group(_request(UpdateKeyGroupInput))
+    await client.update_key_group(_request(UpdateKeyGroupInputDict))
+    await client.update_key_value_store(name=_, comment=_, if_match=_)
+    await client.update_key_value_store(**_request(UpdateKeyValueStoreInputDict))
+    await client.update_key_value_store(_request(UpdateKeyValueStoreInput))
+    await client.update_key_value_store(_request(UpdateKeyValueStoreInputDict))
+    await client.update_origin_access_control(origin_access_control_config=_, id=_)
+    await client.update_origin_access_control(
+        **_request(UpdateOriginAccessControlInputDict)
+    )
+    await client.update_origin_access_control(_request(UpdateOriginAccessControlInput))
+    await client.update_origin_access_control(
+        _request(UpdateOriginAccessControlInputDict)
+    )
+    await client.update_origin_request_policy(origin_request_policy_config=_, id=_)
+    await client.update_origin_request_policy(
+        **_request(UpdateOriginRequestPolicyInputDict)
+    )
+    await client.update_origin_request_policy(_request(UpdateOriginRequestPolicyInput))
+    await client.update_origin_request_policy(
+        _request(UpdateOriginRequestPolicyInputDict)
+    )
+    await client.update_public_key(public_key_config=_, id=_)
+    await client.update_public_key(**_request(UpdatePublicKeyInputDict))
+    await client.update_public_key(_request(UpdatePublicKeyInput))
+    await client.update_public_key(_request(UpdatePublicKeyInputDict))
+    await client.update_realtime_log_config()
+    await client.update_realtime_log_config(
+        **_request(UpdateRealtimeLogConfigInputDict)
+    )
+    await client.update_realtime_log_config(_request(UpdateRealtimeLogConfigInput))
+    await client.update_realtime_log_config(_request(UpdateRealtimeLogConfigInputDict))
+    await client.update_response_headers_policy(response_headers_policy_config=_, id=_)
+    await client.update_response_headers_policy(
+        **_request(UpdateResponseHeadersPolicyInputDict)
+    )
+    await client.update_response_headers_policy(
+        _request(UpdateResponseHeadersPolicyInput)
+    )
+    await client.update_response_headers_policy(
+        _request(UpdateResponseHeadersPolicyInputDict)
+    )
+    await client.update_streaming_distribution(streaming_distribution_config=_, id=_)
+    await client.update_streaming_distribution(
+        **_request(UpdateStreamingDistributionInputDict)
+    )
+    await client.update_streaming_distribution(
+        _request(UpdateStreamingDistributionInput)
+    )
+    await client.update_streaming_distribution(
+        _request(UpdateStreamingDistributionInputDict)
+    )
+    await client.update_trust_store(id=_, if_match=_)
+    await client.update_trust_store(**_request(UpdateTrustStoreInputDict))
+    await client.update_trust_store(_request(UpdateTrustStoreInput))
+    await client.update_trust_store(_request(UpdateTrustStoreInputDict))
+    await client.update_vpc_origin(vpc_origin_endpoint_config=_, id=_, if_match=_)
+    await client.update_vpc_origin(**_request(UpdateVpcOriginInputDict))
+    await client.update_vpc_origin(_request(UpdateVpcOriginInput))
+    await client.update_vpc_origin(_request(UpdateVpcOriginInputDict))
+    await client.verify_dns_configuration(identifier=_)
+    await client.verify_dns_configuration(**_request(VerifyDnsConfigurationInputDict))
+    await client.verify_dns_configuration(_request(VerifyDnsConfigurationInput))
+    await client.verify_dns_configuration(_request(VerifyDnsConfigurationInputDict))
+
+
+def check_sync_calls(client: CloudFrontClient) -> None:
+    pass
+    client.associate_alias(target_distribution_id=_, alias=_)
+    client.associate_alias(**_request(AssociateAliasInputDict))
+    client.associate_alias(_request(AssociateAliasInput))
+    client.associate_alias(_request(AssociateAliasInputDict))
+    client.associate_distribution_tenant_web_acl(id=_, web_acl_arn=_)
+    client.associate_distribution_tenant_web_acl(
+        **_request(AssociateDistributionTenantWebACLInputDict)
+    )
+    client.associate_distribution_tenant_web_acl(
+        _request(AssociateDistributionTenantWebACLInput)
+    )
+    client.associate_distribution_tenant_web_acl(
+        _request(AssociateDistributionTenantWebACLInputDict)
+    )
+    client.associate_distribution_web_acl(id=_, web_acl_arn=_)
+    client.associate_distribution_web_acl(
+        **_request(AssociateDistributionWebACLInputDict)
+    )
+    client.associate_distribution_web_acl(_request(AssociateDistributionWebACLInput))
+    client.associate_distribution_web_acl(
+        _request(AssociateDistributionWebACLInputDict)
+    )
+    client.copy_distribution(primary_distribution_id=_, caller_reference=_)
+    client.copy_distribution(**_request(CopyDistributionInputDict))
+    client.copy_distribution(_request(CopyDistributionInput))
+    client.copy_distribution(_request(CopyDistributionInputDict))
+    client.create_anycast_ip_list(name=_, ip_count=_)
+    client.create_anycast_ip_list(**_request(CreateAnycastIpListInputDict))
+    client.create_anycast_ip_list(_request(CreateAnycastIpListInput))
+    client.create_anycast_ip_list(_request(CreateAnycastIpListInputDict))
+    client.create_cache_policy(cache_policy_config=_)
+    client.create_cache_policy(**_request(CreateCachePolicyInputDict))
+    client.create_cache_policy(_request(CreateCachePolicyInput))
+    client.create_cache_policy(_request(CreateCachePolicyInputDict))
+    client.create_cloud_front_origin_access_identity(
+        cloud_front_origin_access_identity_config=_
+    )
+    client.create_cloud_front_origin_access_identity(
+        **_request(CreateCloudFrontOriginAccessIdentityInputDict)
+    )
+    client.create_cloud_front_origin_access_identity(
+        _request(CreateCloudFrontOriginAccessIdentityInput)
+    )
+    client.create_cloud_front_origin_access_identity(
+        _request(CreateCloudFrontOriginAccessIdentityInputDict)
+    )
+    client.create_connection_function(
+        name=_, connection_function_config=_, connection_function_code=_
+    )
+    client.create_connection_function(**_request(CreateConnectionFunctionInputDict))
+    client.create_connection_function(_request(CreateConnectionFunctionInput))
+    client.create_connection_function(_request(CreateConnectionFunctionInputDict))
+    client.create_connection_group(name=_)
+    client.create_connection_group(**_request(CreateConnectionGroupInputDict))
+    client.create_connection_group(_request(CreateConnectionGroupInput))
+    client.create_connection_group(_request(CreateConnectionGroupInputDict))
+    client.create_continuous_deployment_policy(continuous_deployment_policy_config=_)
+    client.create_continuous_deployment_policy(
+        **_request(CreateContinuousDeploymentPolicyInputDict)
+    )
+    client.create_continuous_deployment_policy(
+        _request(CreateContinuousDeploymentPolicyInput)
+    )
+    client.create_continuous_deployment_policy(
+        _request(CreateContinuousDeploymentPolicyInputDict)
+    )
+    client.create_distribution(distribution_config=_)
+    client.create_distribution(**_request(CreateDistributionInputDict))
+    client.create_distribution(_request(CreateDistributionInput))
+    client.create_distribution(_request(CreateDistributionInputDict))
+    client.create_distribution_tenant(distribution_id=_, name=_, domains=_)
+    client.create_distribution_tenant(**_request(CreateDistributionTenantInputDict))
+    client.create_distribution_tenant(_request(CreateDistributionTenantInput))
+    client.create_distribution_tenant(_request(CreateDistributionTenantInputDict))
+    client.create_distribution_with_tags(distribution_config_with_tags=_)
+    client.create_distribution_with_tags(
+        **_request(CreateDistributionWithTagsInputDict)
+    )
+    client.create_distribution_with_tags(_request(CreateDistributionWithTagsInput))
+    client.create_distribution_with_tags(_request(CreateDistributionWithTagsInputDict))
+    client.create_field_level_encryption_config(field_level_encryption_config=_)
+    client.create_field_level_encryption_config(
+        **_request(CreateFieldLevelEncryptionConfigInputDict)
+    )
+    client.create_field_level_encryption_config(
+        _request(CreateFieldLevelEncryptionConfigInput)
+    )
+    client.create_field_level_encryption_config(
+        _request(CreateFieldLevelEncryptionConfigInputDict)
+    )
+    client.create_field_level_encryption_profile(
+        field_level_encryption_profile_config=_
+    )
+    client.create_field_level_encryption_profile(
+        **_request(CreateFieldLevelEncryptionProfileInputDict)
+    )
+    client.create_field_level_encryption_profile(
+        _request(CreateFieldLevelEncryptionProfileInput)
+    )
+    client.create_field_level_encryption_profile(
+        _request(CreateFieldLevelEncryptionProfileInputDict)
+    )
+    client.create_function(name=_, function_config=_, function_code=_)
+    client.create_function(**_request(CreateFunctionInputDict))
+    client.create_function(_request(CreateFunctionInput))
+    client.create_function(_request(CreateFunctionInputDict))
+    client.create_invalidation(distribution_id=_, invalidation_batch=_)
+    client.create_invalidation(**_request(CreateInvalidationInputDict))
+    client.create_invalidation(_request(CreateInvalidationInput))
+    client.create_invalidation(_request(CreateInvalidationInputDict))
+    client.create_invalidation_for_distribution_tenant(id=_, invalidation_batch=_)
+    client.create_invalidation_for_distribution_tenant(
+        **_request(CreateInvalidationForDistributionTenantInputDict)
+    )
+    client.create_invalidation_for_distribution_tenant(
+        _request(CreateInvalidationForDistributionTenantInput)
+    )
+    client.create_invalidation_for_distribution_tenant(
+        _request(CreateInvalidationForDistributionTenantInputDict)
+    )
+    client.create_key_group(key_group_config=_)
+    client.create_key_group(**_request(CreateKeyGroupInputDict))
+    client.create_key_group(_request(CreateKeyGroupInput))
+    client.create_key_group(_request(CreateKeyGroupInputDict))
+    client.create_key_value_store(name=_)
+    client.create_key_value_store(**_request(CreateKeyValueStoreInputDict))
+    client.create_key_value_store(_request(CreateKeyValueStoreInput))
+    client.create_key_value_store(_request(CreateKeyValueStoreInputDict))
+    client.create_monitoring_subscription(distribution_id=_, monitoring_subscription=_)
+    client.create_monitoring_subscription(
+        **_request(CreateMonitoringSubscriptionInputDict)
+    )
+    client.create_monitoring_subscription(_request(CreateMonitoringSubscriptionInput))
+    client.create_monitoring_subscription(
+        _request(CreateMonitoringSubscriptionInputDict)
+    )
+    client.create_origin_access_control(origin_access_control_config=_)
+    client.create_origin_access_control(**_request(CreateOriginAccessControlInputDict))
+    client.create_origin_access_control(_request(CreateOriginAccessControlInput))
+    client.create_origin_access_control(_request(CreateOriginAccessControlInputDict))
+    client.create_origin_request_policy(origin_request_policy_config=_)
+    client.create_origin_request_policy(**_request(CreateOriginRequestPolicyInputDict))
+    client.create_origin_request_policy(_request(CreateOriginRequestPolicyInput))
+    client.create_origin_request_policy(_request(CreateOriginRequestPolicyInputDict))
+    client.create_public_key(public_key_config=_)
+    client.create_public_key(**_request(CreatePublicKeyInputDict))
+    client.create_public_key(_request(CreatePublicKeyInput))
+    client.create_public_key(_request(CreatePublicKeyInputDict))
+    client.create_realtime_log_config(end_points=_, fields=_, name=_, sampling_rate=_)
+    client.create_realtime_log_config(**_request(CreateRealtimeLogConfigInputDict))
+    client.create_realtime_log_config(_request(CreateRealtimeLogConfigInput))
+    client.create_realtime_log_config(_request(CreateRealtimeLogConfigInputDict))
+    client.create_response_headers_policy(response_headers_policy_config=_)
+    client.create_response_headers_policy(
+        **_request(CreateResponseHeadersPolicyInputDict)
+    )
+    client.create_response_headers_policy(_request(CreateResponseHeadersPolicyInput))
+    client.create_response_headers_policy(
+        _request(CreateResponseHeadersPolicyInputDict)
+    )
+    client.create_streaming_distribution(streaming_distribution_config=_)
+    client.create_streaming_distribution(
+        **_request(CreateStreamingDistributionInputDict)
+    )
+    client.create_streaming_distribution(_request(CreateStreamingDistributionInput))
+    client.create_streaming_distribution(_request(CreateStreamingDistributionInputDict))
+    client.create_streaming_distribution_with_tags(
+        streaming_distribution_config_with_tags=_
+    )
+    client.create_streaming_distribution_with_tags(
+        **_request(CreateStreamingDistributionWithTagsInputDict)
+    )
+    client.create_streaming_distribution_with_tags(
+        _request(CreateStreamingDistributionWithTagsInput)
+    )
+    client.create_streaming_distribution_with_tags(
+        _request(CreateStreamingDistributionWithTagsInputDict)
+    )
+    client.create_trust_store(name=_, ca_certificates_bundle_source=_)
+    client.create_trust_store(**_request(CreateTrustStoreInputDict))
+    client.create_trust_store(_request(CreateTrustStoreInput))
+    client.create_trust_store(_request(CreateTrustStoreInputDict))
+    client.create_vpc_origin(vpc_origin_endpoint_config=_)
+    client.create_vpc_origin(**_request(CreateVpcOriginInputDict))
+    client.create_vpc_origin(_request(CreateVpcOriginInput))
+    client.create_vpc_origin(_request(CreateVpcOriginInputDict))
+    client.delete_anycast_ip_list(id=_, if_match=_)
+    client.delete_anycast_ip_list(**_request(DeleteAnycastIpListInputDict))
+    client.delete_anycast_ip_list(_request(DeleteAnycastIpListInput))
+    client.delete_anycast_ip_list(_request(DeleteAnycastIpListInputDict))
+    client.delete_cache_policy(id=_)
+    client.delete_cache_policy(**_request(DeleteCachePolicyInputDict))
+    client.delete_cache_policy(_request(DeleteCachePolicyInput))
+    client.delete_cache_policy(_request(DeleteCachePolicyInputDict))
+    client.delete_cloud_front_origin_access_identity(id=_)
+    client.delete_cloud_front_origin_access_identity(
+        **_request(DeleteCloudFrontOriginAccessIdentityInputDict)
+    )
+    client.delete_cloud_front_origin_access_identity(
+        _request(DeleteCloudFrontOriginAccessIdentityInput)
+    )
+    client.delete_cloud_front_origin_access_identity(
+        _request(DeleteCloudFrontOriginAccessIdentityInputDict)
+    )
+    client.delete_connection_function(id=_, if_match=_)
+    client.delete_connection_function(**_request(DeleteConnectionFunctionInputDict))
+    client.delete_connection_function(_request(DeleteConnectionFunctionInput))
+    client.delete_connection_function(_request(DeleteConnectionFunctionInputDict))
+    client.delete_connection_group(id=_, if_match=_)
+    client.delete_connection_group(**_request(DeleteConnectionGroupInputDict))
+    client.delete_connection_group(_request(DeleteConnectionGroupInput))
+    client.delete_connection_group(_request(DeleteConnectionGroupInputDict))
+    client.delete_continuous_deployment_policy(id=_)
+    client.delete_continuous_deployment_policy(
+        **_request(DeleteContinuousDeploymentPolicyInputDict)
+    )
+    client.delete_continuous_deployment_policy(
+        _request(DeleteContinuousDeploymentPolicyInput)
+    )
+    client.delete_continuous_deployment_policy(
+        _request(DeleteContinuousDeploymentPolicyInputDict)
+    )
+    client.delete_distribution(id=_)
+    client.delete_distribution(**_request(DeleteDistributionInputDict))
+    client.delete_distribution(_request(DeleteDistributionInput))
+    client.delete_distribution(_request(DeleteDistributionInputDict))
+    client.delete_distribution_tenant(id=_, if_match=_)
+    client.delete_distribution_tenant(**_request(DeleteDistributionTenantInputDict))
+    client.delete_distribution_tenant(_request(DeleteDistributionTenantInput))
+    client.delete_distribution_tenant(_request(DeleteDistributionTenantInputDict))
+    client.delete_field_level_encryption_config(id=_)
+    client.delete_field_level_encryption_config(
+        **_request(DeleteFieldLevelEncryptionConfigInputDict)
+    )
+    client.delete_field_level_encryption_config(
+        _request(DeleteFieldLevelEncryptionConfigInput)
+    )
+    client.delete_field_level_encryption_config(
+        _request(DeleteFieldLevelEncryptionConfigInputDict)
+    )
+    client.delete_field_level_encryption_profile(id=_)
+    client.delete_field_level_encryption_profile(
+        **_request(DeleteFieldLevelEncryptionProfileInputDict)
+    )
+    client.delete_field_level_encryption_profile(
+        _request(DeleteFieldLevelEncryptionProfileInput)
+    )
+    client.delete_field_level_encryption_profile(
+        _request(DeleteFieldLevelEncryptionProfileInputDict)
+    )
+    client.delete_function(name=_, if_match=_)
+    client.delete_function(**_request(DeleteFunctionInputDict))
+    client.delete_function(_request(DeleteFunctionInput))
+    client.delete_function(_request(DeleteFunctionInputDict))
+    client.delete_key_group(id=_)
+    client.delete_key_group(**_request(DeleteKeyGroupInputDict))
+    client.delete_key_group(_request(DeleteKeyGroupInput))
+    client.delete_key_group(_request(DeleteKeyGroupInputDict))
+    client.delete_key_value_store(name=_, if_match=_)
+    client.delete_key_value_store(**_request(DeleteKeyValueStoreInputDict))
+    client.delete_key_value_store(_request(DeleteKeyValueStoreInput))
+    client.delete_key_value_store(_request(DeleteKeyValueStoreInputDict))
+    client.delete_monitoring_subscription(distribution_id=_)
+    client.delete_monitoring_subscription(
+        **_request(DeleteMonitoringSubscriptionInputDict)
+    )
+    client.delete_monitoring_subscription(_request(DeleteMonitoringSubscriptionInput))
+    client.delete_monitoring_subscription(
+        _request(DeleteMonitoringSubscriptionInputDict)
+    )
+    client.delete_origin_access_control(id=_)
+    client.delete_origin_access_control(**_request(DeleteOriginAccessControlInputDict))
+    client.delete_origin_access_control(_request(DeleteOriginAccessControlInput))
+    client.delete_origin_access_control(_request(DeleteOriginAccessControlInputDict))
+    client.delete_origin_request_policy(id=_)
+    client.delete_origin_request_policy(**_request(DeleteOriginRequestPolicyInputDict))
+    client.delete_origin_request_policy(_request(DeleteOriginRequestPolicyInput))
+    client.delete_origin_request_policy(_request(DeleteOriginRequestPolicyInputDict))
+    client.delete_public_key(id=_)
+    client.delete_public_key(**_request(DeletePublicKeyInputDict))
+    client.delete_public_key(_request(DeletePublicKeyInput))
+    client.delete_public_key(_request(DeletePublicKeyInputDict))
+    client.delete_realtime_log_config()
+    client.delete_realtime_log_config(**_request(DeleteRealtimeLogConfigInputDict))
+    client.delete_realtime_log_config(_request(DeleteRealtimeLogConfigInput))
+    client.delete_realtime_log_config(_request(DeleteRealtimeLogConfigInputDict))
+    client.delete_resource_policy(resource_arn=_)
+    client.delete_resource_policy(**_request(DeleteResourcePolicyInputDict))
+    client.delete_resource_policy(_request(DeleteResourcePolicyInput))
+    client.delete_resource_policy(_request(DeleteResourcePolicyInputDict))
+    client.delete_response_headers_policy(id=_)
+    client.delete_response_headers_policy(
+        **_request(DeleteResponseHeadersPolicyInputDict)
+    )
+    client.delete_response_headers_policy(_request(DeleteResponseHeadersPolicyInput))
+    client.delete_response_headers_policy(
+        _request(DeleteResponseHeadersPolicyInputDict)
+    )
+    client.delete_streaming_distribution(id=_)
+    client.delete_streaming_distribution(
+        **_request(DeleteStreamingDistributionInputDict)
+    )
+    client.delete_streaming_distribution(_request(DeleteStreamingDistributionInput))
+    client.delete_streaming_distribution(_request(DeleteStreamingDistributionInputDict))
+    client.delete_trust_store(id=_, if_match=_)
+    client.delete_trust_store(**_request(DeleteTrustStoreInputDict))
+    client.delete_trust_store(_request(DeleteTrustStoreInput))
+    client.delete_trust_store(_request(DeleteTrustStoreInputDict))
+    client.delete_vpc_origin(id=_, if_match=_)
+    client.delete_vpc_origin(**_request(DeleteVpcOriginInputDict))
+    client.delete_vpc_origin(_request(DeleteVpcOriginInput))
+    client.delete_vpc_origin(_request(DeleteVpcOriginInputDict))
+    client.describe_connection_function(identifier=_)
+    client.describe_connection_function(**_request(DescribeConnectionFunctionInputDict))
+    client.describe_connection_function(_request(DescribeConnectionFunctionInput))
+    client.describe_connection_function(_request(DescribeConnectionFunctionInputDict))
+    client.describe_function(name=_)
+    client.describe_function(**_request(DescribeFunctionInputDict))
+    client.describe_function(_request(DescribeFunctionInput))
+    client.describe_function(_request(DescribeFunctionInputDict))
+    client.describe_key_value_store(name=_)
+    client.describe_key_value_store(**_request(DescribeKeyValueStoreInputDict))
+    client.describe_key_value_store(_request(DescribeKeyValueStoreInput))
+    client.describe_key_value_store(_request(DescribeKeyValueStoreInputDict))
+    client.disassociate_distribution_tenant_web_acl(id=_)
+    client.disassociate_distribution_tenant_web_acl(
+        **_request(DisassociateDistributionTenantWebACLInputDict)
+    )
+    client.disassociate_distribution_tenant_web_acl(
+        _request(DisassociateDistributionTenantWebACLInput)
+    )
+    client.disassociate_distribution_tenant_web_acl(
+        _request(DisassociateDistributionTenantWebACLInputDict)
+    )
+    client.disassociate_distribution_web_acl(id=_)
+    client.disassociate_distribution_web_acl(
+        **_request(DisassociateDistributionWebACLInputDict)
+    )
+    client.disassociate_distribution_web_acl(
+        _request(DisassociateDistributionWebACLInput)
+    )
+    client.disassociate_distribution_web_acl(
+        _request(DisassociateDistributionWebACLInputDict)
+    )
+    client.get_anycast_ip_list(id=_)
+    client.get_anycast_ip_list(**_request(GetAnycastIpListInputDict))
+    client.get_anycast_ip_list(_request(GetAnycastIpListInput))
+    client.get_anycast_ip_list(_request(GetAnycastIpListInputDict))
+    client.get_cache_policy(id=_)
+    client.get_cache_policy(**_request(GetCachePolicyInputDict))
+    client.get_cache_policy(_request(GetCachePolicyInput))
+    client.get_cache_policy(_request(GetCachePolicyInputDict))
+    client.get_cache_policy_config(id=_)
+    client.get_cache_policy_config(**_request(GetCachePolicyConfigInputDict))
+    client.get_cache_policy_config(_request(GetCachePolicyConfigInput))
+    client.get_cache_policy_config(_request(GetCachePolicyConfigInputDict))
+    client.get_cloud_front_origin_access_identity(id=_)
+    client.get_cloud_front_origin_access_identity(
+        **_request(GetCloudFrontOriginAccessIdentityInputDict)
+    )
+    client.get_cloud_front_origin_access_identity(
+        _request(GetCloudFrontOriginAccessIdentityInput)
+    )
+    client.get_cloud_front_origin_access_identity(
+        _request(GetCloudFrontOriginAccessIdentityInputDict)
+    )
+    client.get_cloud_front_origin_access_identity_config(id=_)
+    client.get_cloud_front_origin_access_identity_config(
+        **_request(GetCloudFrontOriginAccessIdentityConfigInputDict)
+    )
+    client.get_cloud_front_origin_access_identity_config(
+        _request(GetCloudFrontOriginAccessIdentityConfigInput)
+    )
+    client.get_cloud_front_origin_access_identity_config(
+        _request(GetCloudFrontOriginAccessIdentityConfigInputDict)
+    )
+    client.get_connection_function(identifier=_)
+    client.get_connection_function(**_request(GetConnectionFunctionInputDict))
+    client.get_connection_function(_request(GetConnectionFunctionInput))
+    client.get_connection_function(_request(GetConnectionFunctionInputDict))
+    client.get_connection_group(identifier=_)
+    client.get_connection_group(**_request(GetConnectionGroupInputDict))
+    client.get_connection_group(_request(GetConnectionGroupInput))
+    client.get_connection_group(_request(GetConnectionGroupInputDict))
+    client.get_connection_group_by_routing_endpoint(routing_endpoint=_)
+    client.get_connection_group_by_routing_endpoint(
+        **_request(GetConnectionGroupByRoutingEndpointInputDict)
+    )
+    client.get_connection_group_by_routing_endpoint(
+        _request(GetConnectionGroupByRoutingEndpointInput)
+    )
+    client.get_connection_group_by_routing_endpoint(
+        _request(GetConnectionGroupByRoutingEndpointInputDict)
+    )
+    client.get_continuous_deployment_policy(id=_)
+    client.get_continuous_deployment_policy(
+        **_request(GetContinuousDeploymentPolicyInputDict)
+    )
+    client.get_continuous_deployment_policy(
+        _request(GetContinuousDeploymentPolicyInput)
+    )
+    client.get_continuous_deployment_policy(
+        _request(GetContinuousDeploymentPolicyInputDict)
+    )
+    client.get_continuous_deployment_policy_config(id=_)
+    client.get_continuous_deployment_policy_config(
+        **_request(GetContinuousDeploymentPolicyConfigInputDict)
+    )
+    client.get_continuous_deployment_policy_config(
+        _request(GetContinuousDeploymentPolicyConfigInput)
+    )
+    client.get_continuous_deployment_policy_config(
+        _request(GetContinuousDeploymentPolicyConfigInputDict)
+    )
+    client.get_distribution(id=_)
+    client.get_distribution(**_request(GetDistributionInputDict))
+    client.get_distribution(_request(GetDistributionInput))
+    client.get_distribution(_request(GetDistributionInputDict))
+    client.get_distribution_config(id=_)
+    client.get_distribution_config(**_request(GetDistributionConfigInputDict))
+    client.get_distribution_config(_request(GetDistributionConfigInput))
+    client.get_distribution_config(_request(GetDistributionConfigInputDict))
+    client.get_distribution_tenant(identifier=_)
+    client.get_distribution_tenant(**_request(GetDistributionTenantInputDict))
+    client.get_distribution_tenant(_request(GetDistributionTenantInput))
+    client.get_distribution_tenant(_request(GetDistributionTenantInputDict))
+    client.get_distribution_tenant_by_domain(domain=_)
+    client.get_distribution_tenant_by_domain(
+        **_request(GetDistributionTenantByDomainInputDict)
+    )
+    client.get_distribution_tenant_by_domain(
+        _request(GetDistributionTenantByDomainInput)
+    )
+    client.get_distribution_tenant_by_domain(
+        _request(GetDistributionTenantByDomainInputDict)
+    )
+    client.get_field_level_encryption(id=_)
+    client.get_field_level_encryption(**_request(GetFieldLevelEncryptionInputDict))
+    client.get_field_level_encryption(_request(GetFieldLevelEncryptionInput))
+    client.get_field_level_encryption(_request(GetFieldLevelEncryptionInputDict))
+    client.get_field_level_encryption_config(id=_)
+    client.get_field_level_encryption_config(
+        **_request(GetFieldLevelEncryptionConfigInputDict)
+    )
+    client.get_field_level_encryption_config(
+        _request(GetFieldLevelEncryptionConfigInput)
+    )
+    client.get_field_level_encryption_config(
+        _request(GetFieldLevelEncryptionConfigInputDict)
+    )
+    client.get_field_level_encryption_profile(id=_)
+    client.get_field_level_encryption_profile(
+        **_request(GetFieldLevelEncryptionProfileInputDict)
+    )
+    client.get_field_level_encryption_profile(
+        _request(GetFieldLevelEncryptionProfileInput)
+    )
+    client.get_field_level_encryption_profile(
+        _request(GetFieldLevelEncryptionProfileInputDict)
+    )
+    client.get_field_level_encryption_profile_config(id=_)
+    client.get_field_level_encryption_profile_config(
+        **_request(GetFieldLevelEncryptionProfileConfigInputDict)
+    )
+    client.get_field_level_encryption_profile_config(
+        _request(GetFieldLevelEncryptionProfileConfigInput)
+    )
+    client.get_field_level_encryption_profile_config(
+        _request(GetFieldLevelEncryptionProfileConfigInputDict)
+    )
+    client.get_function(name=_)
+    client.get_function(**_request(GetFunctionInputDict))
+    client.get_function(_request(GetFunctionInput))
+    client.get_function(_request(GetFunctionInputDict))
+    client.get_invalidation(distribution_id=_, id=_)
+    client.get_invalidation(**_request(GetInvalidationInputDict))
+    client.get_invalidation(_request(GetInvalidationInput))
+    client.get_invalidation(_request(GetInvalidationInputDict))
+    client.get_invalidation_for_distribution_tenant(distribution_tenant_id=_, id=_)
+    client.get_invalidation_for_distribution_tenant(
+        **_request(GetInvalidationForDistributionTenantInputDict)
+    )
+    client.get_invalidation_for_distribution_tenant(
+        _request(GetInvalidationForDistributionTenantInput)
+    )
+    client.get_invalidation_for_distribution_tenant(
+        _request(GetInvalidationForDistributionTenantInputDict)
+    )
+    client.get_key_group(id=_)
+    client.get_key_group(**_request(GetKeyGroupInputDict))
+    client.get_key_group(_request(GetKeyGroupInput))
+    client.get_key_group(_request(GetKeyGroupInputDict))
+    client.get_key_group_config(id=_)
+    client.get_key_group_config(**_request(GetKeyGroupConfigInputDict))
+    client.get_key_group_config(_request(GetKeyGroupConfigInput))
+    client.get_key_group_config(_request(GetKeyGroupConfigInputDict))
+    client.get_managed_certificate_details(identifier=_)
+    client.get_managed_certificate_details(
+        **_request(GetManagedCertificateDetailsInputDict)
+    )
+    client.get_managed_certificate_details(_request(GetManagedCertificateDetailsInput))
+    client.get_managed_certificate_details(
+        _request(GetManagedCertificateDetailsInputDict)
+    )
+    client.get_monitoring_subscription(distribution_id=_)
+    client.get_monitoring_subscription(**_request(GetMonitoringSubscriptionInputDict))
+    client.get_monitoring_subscription(_request(GetMonitoringSubscriptionInput))
+    client.get_monitoring_subscription(_request(GetMonitoringSubscriptionInputDict))
+    client.get_origin_access_control(id=_)
+    client.get_origin_access_control(**_request(GetOriginAccessControlInputDict))
+    client.get_origin_access_control(_request(GetOriginAccessControlInput))
+    client.get_origin_access_control(_request(GetOriginAccessControlInputDict))
+    client.get_origin_access_control_config(id=_)
+    client.get_origin_access_control_config(
+        **_request(GetOriginAccessControlConfigInputDict)
+    )
+    client.get_origin_access_control_config(_request(GetOriginAccessControlConfigInput))
+    client.get_origin_access_control_config(
+        _request(GetOriginAccessControlConfigInputDict)
+    )
+    client.get_origin_request_policy(id=_)
+    client.get_origin_request_policy(**_request(GetOriginRequestPolicyInputDict))
+    client.get_origin_request_policy(_request(GetOriginRequestPolicyInput))
+    client.get_origin_request_policy(_request(GetOriginRequestPolicyInputDict))
+    client.get_origin_request_policy_config(id=_)
+    client.get_origin_request_policy_config(
+        **_request(GetOriginRequestPolicyConfigInputDict)
+    )
+    client.get_origin_request_policy_config(_request(GetOriginRequestPolicyConfigInput))
+    client.get_origin_request_policy_config(
+        _request(GetOriginRequestPolicyConfigInputDict)
+    )
+    client.get_public_key(id=_)
+    client.get_public_key(**_request(GetPublicKeyInputDict))
+    client.get_public_key(_request(GetPublicKeyInput))
+    client.get_public_key(_request(GetPublicKeyInputDict))
+    client.get_public_key_config(id=_)
+    client.get_public_key_config(**_request(GetPublicKeyConfigInputDict))
+    client.get_public_key_config(_request(GetPublicKeyConfigInput))
+    client.get_public_key_config(_request(GetPublicKeyConfigInputDict))
+    client.get_realtime_log_config()
+    client.get_realtime_log_config(**_request(GetRealtimeLogConfigInputDict))
+    client.get_realtime_log_config(_request(GetRealtimeLogConfigInput))
+    client.get_realtime_log_config(_request(GetRealtimeLogConfigInputDict))
+    client.get_resource_policy(resource_arn=_)
+    client.get_resource_policy(**_request(GetResourcePolicyInputDict))
+    client.get_resource_policy(_request(GetResourcePolicyInput))
+    client.get_resource_policy(_request(GetResourcePolicyInputDict))
+    client.get_response_headers_policy(id=_)
+    client.get_response_headers_policy(**_request(GetResponseHeadersPolicyInputDict))
+    client.get_response_headers_policy(_request(GetResponseHeadersPolicyInput))
+    client.get_response_headers_policy(_request(GetResponseHeadersPolicyInputDict))
+    client.get_response_headers_policy_config(id=_)
+    client.get_response_headers_policy_config(
+        **_request(GetResponseHeadersPolicyConfigInputDict)
+    )
+    client.get_response_headers_policy_config(
+        _request(GetResponseHeadersPolicyConfigInput)
+    )
+    client.get_response_headers_policy_config(
+        _request(GetResponseHeadersPolicyConfigInputDict)
+    )
+    client.get_streaming_distribution(id=_)
+    client.get_streaming_distribution(**_request(GetStreamingDistributionInputDict))
+    client.get_streaming_distribution(_request(GetStreamingDistributionInput))
+    client.get_streaming_distribution(_request(GetStreamingDistributionInputDict))
+    client.get_streaming_distribution_config(id=_)
+    client.get_streaming_distribution_config(
+        **_request(GetStreamingDistributionConfigInputDict)
+    )
+    client.get_streaming_distribution_config(
+        _request(GetStreamingDistributionConfigInput)
+    )
+    client.get_streaming_distribution_config(
+        _request(GetStreamingDistributionConfigInputDict)
+    )
+    client.get_trust_store(identifier=_)
+    client.get_trust_store(**_request(GetTrustStoreInputDict))
+    client.get_trust_store(_request(GetTrustStoreInput))
+    client.get_trust_store(_request(GetTrustStoreInputDict))
+    client.get_vpc_origin(id=_)
+    client.get_vpc_origin(**_request(GetVpcOriginInputDict))
+    client.get_vpc_origin(_request(GetVpcOriginInput))
+    client.get_vpc_origin(_request(GetVpcOriginInputDict))
+    client.list_anycast_ip_lists()
+    client.list_anycast_ip_lists(**_request(ListAnycastIpListsInputDict))
+    client.list_anycast_ip_lists(_request(ListAnycastIpListsInput))
+    client.list_anycast_ip_lists(_request(ListAnycastIpListsInputDict))
+    client.list_cache_policies()
+    client.list_cache_policies(**_request(ListCachePoliciesInputDict))
+    client.list_cache_policies(_request(ListCachePoliciesInput))
+    client.list_cache_policies(_request(ListCachePoliciesInputDict))
+    client.list_cloud_front_origin_access_identities()
+    client.list_cloud_front_origin_access_identities(
+        **_request(ListCloudFrontOriginAccessIdentitiesInputDict)
+    )
+    client.list_cloud_front_origin_access_identities(
+        _request(ListCloudFrontOriginAccessIdentitiesInput)
+    )
+    client.list_cloud_front_origin_access_identities(
+        _request(ListCloudFrontOriginAccessIdentitiesInputDict)
+    )
+    client.list_conflicting_aliases(distribution_id=_, alias=_)
+    client.list_conflicting_aliases(**_request(ListConflictingAliasesInputDict))
+    client.list_conflicting_aliases(_request(ListConflictingAliasesInput))
+    client.list_conflicting_aliases(_request(ListConflictingAliasesInputDict))
+    client.list_connection_functions()
+    client.list_connection_functions(**_request(ListConnectionFunctionsInputDict))
+    client.list_connection_functions(_request(ListConnectionFunctionsInput))
+    client.list_connection_functions(_request(ListConnectionFunctionsInputDict))
+    client.list_connection_groups()
+    client.list_connection_groups(**_request(ListConnectionGroupsInputDict))
+    client.list_connection_groups(_request(ListConnectionGroupsInput))
+    client.list_connection_groups(_request(ListConnectionGroupsInputDict))
+    client.list_continuous_deployment_policies()
+    client.list_continuous_deployment_policies(
+        **_request(ListContinuousDeploymentPoliciesInputDict)
+    )
+    client.list_continuous_deployment_policies(
+        _request(ListContinuousDeploymentPoliciesInput)
+    )
+    client.list_continuous_deployment_policies(
+        _request(ListContinuousDeploymentPoliciesInputDict)
+    )
+    client.list_distributions()
+    client.list_distributions(**_request(ListDistributionsInputDict))
+    client.list_distributions(_request(ListDistributionsInput))
+    client.list_distributions(_request(ListDistributionsInputDict))
+    client.list_distributions_by_anycast_ip_list_id(anycast_ip_list_id=_)
+    client.list_distributions_by_anycast_ip_list_id(
+        **_request(ListDistributionsByAnycastIpListIdInputDict)
+    )
+    client.list_distributions_by_anycast_ip_list_id(
+        _request(ListDistributionsByAnycastIpListIdInput)
+    )
+    client.list_distributions_by_anycast_ip_list_id(
+        _request(ListDistributionsByAnycastIpListIdInputDict)
+    )
+    client.list_distributions_by_cache_policy_id(cache_policy_id=_)
+    client.list_distributions_by_cache_policy_id(
+        **_request(ListDistributionsByCachePolicyIdInputDict)
+    )
+    client.list_distributions_by_cache_policy_id(
+        _request(ListDistributionsByCachePolicyIdInput)
+    )
+    client.list_distributions_by_cache_policy_id(
+        _request(ListDistributionsByCachePolicyIdInputDict)
+    )
+    client.list_distributions_by_connection_function(connection_function_identifier=_)
+    client.list_distributions_by_connection_function(
+        **_request(ListDistributionsByConnectionFunctionInputDict)
+    )
+    client.list_distributions_by_connection_function(
+        _request(ListDistributionsByConnectionFunctionInput)
+    )
+    client.list_distributions_by_connection_function(
+        _request(ListDistributionsByConnectionFunctionInputDict)
+    )
+    client.list_distributions_by_connection_mode(connection_mode=_)
+    client.list_distributions_by_connection_mode(
+        **_request(ListDistributionsByConnectionModeInputDict)
+    )
+    client.list_distributions_by_connection_mode(
+        _request(ListDistributionsByConnectionModeInput)
+    )
+    client.list_distributions_by_connection_mode(
+        _request(ListDistributionsByConnectionModeInputDict)
+    )
+    client.list_distributions_by_key_group(key_group_id=_)
+    client.list_distributions_by_key_group(
+        **_request(ListDistributionsByKeyGroupInputDict)
+    )
+    client.list_distributions_by_key_group(_request(ListDistributionsByKeyGroupInput))
+    client.list_distributions_by_key_group(
+        _request(ListDistributionsByKeyGroupInputDict)
+    )
+    client.list_distributions_by_origin_request_policy_id(origin_request_policy_id=_)
+    client.list_distributions_by_origin_request_policy_id(
+        **_request(ListDistributionsByOriginRequestPolicyIdInputDict)
+    )
+    client.list_distributions_by_origin_request_policy_id(
+        _request(ListDistributionsByOriginRequestPolicyIdInput)
+    )
+    client.list_distributions_by_origin_request_policy_id(
+        _request(ListDistributionsByOriginRequestPolicyIdInputDict)
+    )
+    client.list_distributions_by_owned_resource(resource_arn=_)
+    client.list_distributions_by_owned_resource(
+        **_request(ListDistributionsByOwnedResourceInputDict)
+    )
+    client.list_distributions_by_owned_resource(
+        _request(ListDistributionsByOwnedResourceInput)
+    )
+    client.list_distributions_by_owned_resource(
+        _request(ListDistributionsByOwnedResourceInputDict)
+    )
+    client.list_distributions_by_realtime_log_config()
+    client.list_distributions_by_realtime_log_config(
+        **_request(ListDistributionsByRealtimeLogConfigInputDict)
+    )
+    client.list_distributions_by_realtime_log_config(
+        _request(ListDistributionsByRealtimeLogConfigInput)
+    )
+    client.list_distributions_by_realtime_log_config(
+        _request(ListDistributionsByRealtimeLogConfigInputDict)
+    )
+    client.list_distributions_by_response_headers_policy_id(
+        response_headers_policy_id=_
+    )
+    client.list_distributions_by_response_headers_policy_id(
+        **_request(ListDistributionsByResponseHeadersPolicyIdInputDict)
+    )
+    client.list_distributions_by_response_headers_policy_id(
+        _request(ListDistributionsByResponseHeadersPolicyIdInput)
+    )
+    client.list_distributions_by_response_headers_policy_id(
+        _request(ListDistributionsByResponseHeadersPolicyIdInputDict)
+    )
+    client.list_distributions_by_trust_store(trust_store_identifier=_)
+    client.list_distributions_by_trust_store(
+        **_request(ListDistributionsByTrustStoreInputDict)
+    )
+    client.list_distributions_by_trust_store(
+        _request(ListDistributionsByTrustStoreInput)
+    )
+    client.list_distributions_by_trust_store(
+        _request(ListDistributionsByTrustStoreInputDict)
+    )
+    client.list_distributions_by_vpc_origin_id(vpc_origin_id=_)
+    client.list_distributions_by_vpc_origin_id(
+        **_request(ListDistributionsByVpcOriginIdInputDict)
+    )
+    client.list_distributions_by_vpc_origin_id(
+        _request(ListDistributionsByVpcOriginIdInput)
+    )
+    client.list_distributions_by_vpc_origin_id(
+        _request(ListDistributionsByVpcOriginIdInputDict)
+    )
+    client.list_distributions_by_web_acl_id(web_acl_id=_)
+    client.list_distributions_by_web_acl_id(
+        **_request(ListDistributionsByWebACLIdInputDict)
+    )
+    client.list_distributions_by_web_acl_id(_request(ListDistributionsByWebACLIdInput))
+    client.list_distributions_by_web_acl_id(
+        _request(ListDistributionsByWebACLIdInputDict)
+    )
+    client.list_distribution_tenants()
+    client.list_distribution_tenants(**_request(ListDistributionTenantsInputDict))
+    client.list_distribution_tenants(_request(ListDistributionTenantsInput))
+    client.list_distribution_tenants(_request(ListDistributionTenantsInputDict))
+    client.list_distribution_tenants_by_customization()
+    client.list_distribution_tenants_by_customization(
+        **_request(ListDistributionTenantsByCustomizationInputDict)
+    )
+    client.list_distribution_tenants_by_customization(
+        _request(ListDistributionTenantsByCustomizationInput)
+    )
+    client.list_distribution_tenants_by_customization(
+        _request(ListDistributionTenantsByCustomizationInputDict)
+    )
+    client.list_domain_conflicts(domain=_, domain_control_validation_resource=_)
+    client.list_domain_conflicts(**_request(ListDomainConflictsInputDict))
+    client.list_domain_conflicts(_request(ListDomainConflictsInput))
+    client.list_domain_conflicts(_request(ListDomainConflictsInputDict))
+    client.list_field_level_encryption_configs()
+    client.list_field_level_encryption_configs(
+        **_request(ListFieldLevelEncryptionConfigsInputDict)
+    )
+    client.list_field_level_encryption_configs(
+        _request(ListFieldLevelEncryptionConfigsInput)
+    )
+    client.list_field_level_encryption_configs(
+        _request(ListFieldLevelEncryptionConfigsInputDict)
+    )
+    client.list_field_level_encryption_profiles()
+    client.list_field_level_encryption_profiles(
+        **_request(ListFieldLevelEncryptionProfilesInputDict)
+    )
+    client.list_field_level_encryption_profiles(
+        _request(ListFieldLevelEncryptionProfilesInput)
+    )
+    client.list_field_level_encryption_profiles(
+        _request(ListFieldLevelEncryptionProfilesInputDict)
+    )
+    client.list_functions()
+    client.list_functions(**_request(ListFunctionsInputDict))
+    client.list_functions(_request(ListFunctionsInput))
+    client.list_functions(_request(ListFunctionsInputDict))
+    client.list_invalidations(distribution_id=_)
+    client.list_invalidations(**_request(ListInvalidationsInputDict))
+    client.list_invalidations(_request(ListInvalidationsInput))
+    client.list_invalidations(_request(ListInvalidationsInputDict))
+    client.list_invalidations_for_distribution_tenant(id=_)
+    client.list_invalidations_for_distribution_tenant(
+        **_request(ListInvalidationsForDistributionTenantInputDict)
+    )
+    client.list_invalidations_for_distribution_tenant(
+        _request(ListInvalidationsForDistributionTenantInput)
+    )
+    client.list_invalidations_for_distribution_tenant(
+        _request(ListInvalidationsForDistributionTenantInputDict)
+    )
+    client.list_key_groups()
+    client.list_key_groups(**_request(ListKeyGroupsInputDict))
+    client.list_key_groups(_request(ListKeyGroupsInput))
+    client.list_key_groups(_request(ListKeyGroupsInputDict))
+    client.list_key_value_stores()
+    client.list_key_value_stores(**_request(ListKeyValueStoresInputDict))
+    client.list_key_value_stores(_request(ListKeyValueStoresInput))
+    client.list_key_value_stores(_request(ListKeyValueStoresInputDict))
+    client.list_origin_access_controls()
+    client.list_origin_access_controls(**_request(ListOriginAccessControlsInputDict))
+    client.list_origin_access_controls(_request(ListOriginAccessControlsInput))
+    client.list_origin_access_controls(_request(ListOriginAccessControlsInputDict))
+    client.list_origin_request_policies()
+    client.list_origin_request_policies(**_request(ListOriginRequestPoliciesInputDict))
+    client.list_origin_request_policies(_request(ListOriginRequestPoliciesInput))
+    client.list_origin_request_policies(_request(ListOriginRequestPoliciesInputDict))
+    client.list_public_keys()
+    client.list_public_keys(**_request(ListPublicKeysInputDict))
+    client.list_public_keys(_request(ListPublicKeysInput))
+    client.list_public_keys(_request(ListPublicKeysInputDict))
+    client.list_realtime_log_configs()
+    client.list_realtime_log_configs(**_request(ListRealtimeLogConfigsInputDict))
+    client.list_realtime_log_configs(_request(ListRealtimeLogConfigsInput))
+    client.list_realtime_log_configs(_request(ListRealtimeLogConfigsInputDict))
+    client.list_response_headers_policies()
+    client.list_response_headers_policies(
+        **_request(ListResponseHeadersPoliciesInputDict)
+    )
+    client.list_response_headers_policies(_request(ListResponseHeadersPoliciesInput))
+    client.list_response_headers_policies(
+        _request(ListResponseHeadersPoliciesInputDict)
+    )
+    client.list_streaming_distributions()
+    client.list_streaming_distributions(**_request(ListStreamingDistributionsInputDict))
+    client.list_streaming_distributions(_request(ListStreamingDistributionsInput))
+    client.list_streaming_distributions(_request(ListStreamingDistributionsInputDict))
+    client.list_tags_for_resource(resource=_)
+    client.list_tags_for_resource(**_request(ListTagsForResourceInputDict))
+    client.list_tags_for_resource(_request(ListTagsForResourceInput))
+    client.list_tags_for_resource(_request(ListTagsForResourceInputDict))
+    client.list_trust_stores()
+    client.list_trust_stores(**_request(ListTrustStoresInputDict))
+    client.list_trust_stores(_request(ListTrustStoresInput))
+    client.list_trust_stores(_request(ListTrustStoresInputDict))
+    client.list_vpc_origins()
+    client.list_vpc_origins(**_request(ListVpcOriginsInputDict))
+    client.list_vpc_origins(_request(ListVpcOriginsInput))
+    client.list_vpc_origins(_request(ListVpcOriginsInputDict))
+    client.publish_connection_function(id=_, if_match=_)
+    client.publish_connection_function(**_request(PublishConnectionFunctionInputDict))
+    client.publish_connection_function(_request(PublishConnectionFunctionInput))
+    client.publish_connection_function(_request(PublishConnectionFunctionInputDict))
+    client.publish_function(name=_, if_match=_)
+    client.publish_function(**_request(PublishFunctionInputDict))
+    client.publish_function(_request(PublishFunctionInput))
+    client.publish_function(_request(PublishFunctionInputDict))
+    client.put_resource_policy(resource_arn=_, policy_document=_)
+    client.put_resource_policy(**_request(PutResourcePolicyInputDict))
+    client.put_resource_policy(_request(PutResourcePolicyInput))
+    client.put_resource_policy(_request(PutResourcePolicyInputDict))
+    client.tag_resource(resource=_, tags=_)
+    client.tag_resource(**_request(TagResourceInputDict))
+    client.tag_resource(_request(TagResourceInput))
+    client.tag_resource(_request(TagResourceInputDict))
+    client.test_connection_function(id=_, if_match=_, connection_object=_)
+    client.test_connection_function(**_request(TestConnectionFunctionInputDict))
+    client.test_connection_function(_request(TestConnectionFunctionInput))
+    client.test_connection_function(_request(TestConnectionFunctionInputDict))
+    client.test_function(name=_, if_match=_, event_object=_)
+    client.test_function(**_request(TestFunctionInputDict))
+    client.test_function(_request(TestFunctionInput))
+    client.test_function(_request(TestFunctionInputDict))
+    client.untag_resource(resource=_, tag_keys=_)
+    client.untag_resource(**_request(UntagResourceInputDict))
+    client.untag_resource(_request(UntagResourceInput))
+    client.untag_resource(_request(UntagResourceInputDict))
+    client.update_anycast_ip_list(id=_, if_match=_)
+    client.update_anycast_ip_list(**_request(UpdateAnycastIpListInputDict))
+    client.update_anycast_ip_list(_request(UpdateAnycastIpListInput))
+    client.update_anycast_ip_list(_request(UpdateAnycastIpListInputDict))
+    client.update_cache_policy(cache_policy_config=_, id=_)
+    client.update_cache_policy(**_request(UpdateCachePolicyInputDict))
+    client.update_cache_policy(_request(UpdateCachePolicyInput))
+    client.update_cache_policy(_request(UpdateCachePolicyInputDict))
+    client.update_cloud_front_origin_access_identity(
+        cloud_front_origin_access_identity_config=_, id=_
+    )
+    client.update_cloud_front_origin_access_identity(
+        **_request(UpdateCloudFrontOriginAccessIdentityInputDict)
+    )
+    client.update_cloud_front_origin_access_identity(
+        _request(UpdateCloudFrontOriginAccessIdentityInput)
+    )
+    client.update_cloud_front_origin_access_identity(
+        _request(UpdateCloudFrontOriginAccessIdentityInputDict)
+    )
+    client.update_connection_function(
+        id=_, if_match=_, connection_function_config=_, connection_function_code=_
+    )
+    client.update_connection_function(**_request(UpdateConnectionFunctionInputDict))
+    client.update_connection_function(_request(UpdateConnectionFunctionInput))
+    client.update_connection_function(_request(UpdateConnectionFunctionInputDict))
+    client.update_connection_group(id=_, if_match=_)
+    client.update_connection_group(**_request(UpdateConnectionGroupInputDict))
+    client.update_connection_group(_request(UpdateConnectionGroupInput))
+    client.update_connection_group(_request(UpdateConnectionGroupInputDict))
+    client.update_continuous_deployment_policy(
+        continuous_deployment_policy_config=_, id=_
+    )
+    client.update_continuous_deployment_policy(
+        **_request(UpdateContinuousDeploymentPolicyInputDict)
+    )
+    client.update_continuous_deployment_policy(
+        _request(UpdateContinuousDeploymentPolicyInput)
+    )
+    client.update_continuous_deployment_policy(
+        _request(UpdateContinuousDeploymentPolicyInputDict)
+    )
+    client.update_distribution(distribution_config=_, id=_)
+    client.update_distribution(**_request(UpdateDistributionInputDict))
+    client.update_distribution(_request(UpdateDistributionInput))
+    client.update_distribution(_request(UpdateDistributionInputDict))
+    client.update_distribution_tenant(id=_, if_match=_)
+    client.update_distribution_tenant(**_request(UpdateDistributionTenantInputDict))
+    client.update_distribution_tenant(_request(UpdateDistributionTenantInput))
+    client.update_distribution_tenant(_request(UpdateDistributionTenantInputDict))
+    client.update_distribution_with_staging_config(id=_)
+    client.update_distribution_with_staging_config(
+        **_request(UpdateDistributionWithStagingConfigInputDict)
+    )
+    client.update_distribution_with_staging_config(
+        _request(UpdateDistributionWithStagingConfigInput)
+    )
+    client.update_distribution_with_staging_config(
+        _request(UpdateDistributionWithStagingConfigInputDict)
+    )
+    client.update_domain_association(domain=_, target_resource=_)
+    client.update_domain_association(**_request(UpdateDomainAssociationInputDict))
+    client.update_domain_association(_request(UpdateDomainAssociationInput))
+    client.update_domain_association(_request(UpdateDomainAssociationInputDict))
+    client.update_field_level_encryption_config(field_level_encryption_config=_, id=_)
+    client.update_field_level_encryption_config(
+        **_request(UpdateFieldLevelEncryptionConfigInputDict)
+    )
+    client.update_field_level_encryption_config(
+        _request(UpdateFieldLevelEncryptionConfigInput)
+    )
+    client.update_field_level_encryption_config(
+        _request(UpdateFieldLevelEncryptionConfigInputDict)
+    )
+    client.update_field_level_encryption_profile(
+        field_level_encryption_profile_config=_, id=_
+    )
+    client.update_field_level_encryption_profile(
+        **_request(UpdateFieldLevelEncryptionProfileInputDict)
+    )
+    client.update_field_level_encryption_profile(
+        _request(UpdateFieldLevelEncryptionProfileInput)
+    )
+    client.update_field_level_encryption_profile(
+        _request(UpdateFieldLevelEncryptionProfileInputDict)
+    )
+    client.update_function(name=_, if_match=_, function_config=_, function_code=_)
+    client.update_function(**_request(UpdateFunctionInputDict))
+    client.update_function(_request(UpdateFunctionInput))
+    client.update_function(_request(UpdateFunctionInputDict))
+    client.update_key_group(key_group_config=_, id=_)
+    client.update_key_group(**_request(UpdateKeyGroupInputDict))
+    client.update_key_group(_request(UpdateKeyGroupInput))
+    client.update_key_group(_request(UpdateKeyGroupInputDict))
+    client.update_key_value_store(name=_, comment=_, if_match=_)
+    client.update_key_value_store(**_request(UpdateKeyValueStoreInputDict))
+    client.update_key_value_store(_request(UpdateKeyValueStoreInput))
+    client.update_key_value_store(_request(UpdateKeyValueStoreInputDict))
+    client.update_origin_access_control(origin_access_control_config=_, id=_)
+    client.update_origin_access_control(**_request(UpdateOriginAccessControlInputDict))
+    client.update_origin_access_control(_request(UpdateOriginAccessControlInput))
+    client.update_origin_access_control(_request(UpdateOriginAccessControlInputDict))
+    client.update_origin_request_policy(origin_request_policy_config=_, id=_)
+    client.update_origin_request_policy(**_request(UpdateOriginRequestPolicyInputDict))
+    client.update_origin_request_policy(_request(UpdateOriginRequestPolicyInput))
+    client.update_origin_request_policy(_request(UpdateOriginRequestPolicyInputDict))
+    client.update_public_key(public_key_config=_, id=_)
+    client.update_public_key(**_request(UpdatePublicKeyInputDict))
+    client.update_public_key(_request(UpdatePublicKeyInput))
+    client.update_public_key(_request(UpdatePublicKeyInputDict))
+    client.update_realtime_log_config()
+    client.update_realtime_log_config(**_request(UpdateRealtimeLogConfigInputDict))
+    client.update_realtime_log_config(_request(UpdateRealtimeLogConfigInput))
+    client.update_realtime_log_config(_request(UpdateRealtimeLogConfigInputDict))
+    client.update_response_headers_policy(response_headers_policy_config=_, id=_)
+    client.update_response_headers_policy(
+        **_request(UpdateResponseHeadersPolicyInputDict)
+    )
+    client.update_response_headers_policy(_request(UpdateResponseHeadersPolicyInput))
+    client.update_response_headers_policy(
+        _request(UpdateResponseHeadersPolicyInputDict)
+    )
+    client.update_streaming_distribution(streaming_distribution_config=_, id=_)
+    client.update_streaming_distribution(
+        **_request(UpdateStreamingDistributionInputDict)
+    )
+    client.update_streaming_distribution(_request(UpdateStreamingDistributionInput))
+    client.update_streaming_distribution(_request(UpdateStreamingDistributionInputDict))
+    client.update_trust_store(id=_, if_match=_)
+    client.update_trust_store(**_request(UpdateTrustStoreInputDict))
+    client.update_trust_store(_request(UpdateTrustStoreInput))
+    client.update_trust_store(_request(UpdateTrustStoreInputDict))
+    client.update_vpc_origin(vpc_origin_endpoint_config=_, id=_, if_match=_)
+    client.update_vpc_origin(**_request(UpdateVpcOriginInputDict))
+    client.update_vpc_origin(_request(UpdateVpcOriginInput))
+    client.update_vpc_origin(_request(UpdateVpcOriginInputDict))
+    client.verify_dns_configuration(identifier=_)
+    client.verify_dns_configuration(**_request(VerifyDnsConfigurationInputDict))
+    client.verify_dns_configuration(_request(VerifyDnsConfigurationInput))
+    client.verify_dns_configuration(_request(VerifyDnsConfigurationInputDict))

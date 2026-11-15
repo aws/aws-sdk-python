@@ -2,107 +2,155 @@
 
 from typing import Any
 
+from aws_sdk_sns.aio.client import AsyncSNSClient
+from aws_sdk_sns.client import SNSClient
 from aws_sdk_sns.models import (
     AddPermissionInput,
+    AddPermissionInputDict,
     AddPermissionOutput,
     BatchResultErrorEntry,
     CheckIfPhoneNumberIsOptedOutInput,
+    CheckIfPhoneNumberIsOptedOutInputDict,
     CheckIfPhoneNumberIsOptedOutOutput,
     ConfirmSubscriptionInput,
+    ConfirmSubscriptionInputDict,
     ConfirmSubscriptionOutput,
     CreatePlatformApplicationInput,
+    CreatePlatformApplicationInputDict,
     CreatePlatformApplicationOutput,
     CreatePlatformEndpointInput,
+    CreatePlatformEndpointInputDict,
     CreatePlatformEndpointOutput,
     CreateSMSSandboxPhoneNumberInput,
+    CreateSMSSandboxPhoneNumberInputDict,
     CreateSMSSandboxPhoneNumberOutput,
     CreateTopicInput,
+    CreateTopicInputDict,
     CreateTopicOutput,
     DeleteEndpointInput,
+    DeleteEndpointInputDict,
     DeleteEndpointOutput,
     DeletePlatformApplicationInput,
+    DeletePlatformApplicationInputDict,
     DeletePlatformApplicationOutput,
     DeleteSMSSandboxPhoneNumberInput,
+    DeleteSMSSandboxPhoneNumberInputDict,
     DeleteSMSSandboxPhoneNumberOutput,
     DeleteTopicInput,
+    DeleteTopicInputDict,
     DeleteTopicOutput,
     Endpoint,
     GetDataProtectionPolicyInput,
+    GetDataProtectionPolicyInputDict,
     GetDataProtectionPolicyOutput,
     GetEndpointAttributesInput,
+    GetEndpointAttributesInputDict,
     GetEndpointAttributesOutput,
     GetPlatformApplicationAttributesInput,
+    GetPlatformApplicationAttributesInputDict,
     GetPlatformApplicationAttributesOutput,
     GetSMSAttributesInput,
+    GetSMSAttributesInputDict,
     GetSMSAttributesOutput,
     GetSMSSandboxAccountStatusInput,
+    GetSMSSandboxAccountStatusInputDict,
     GetSMSSandboxAccountStatusOutput,
     GetSubscriptionAttributesInput,
+    GetSubscriptionAttributesInputDict,
     GetSubscriptionAttributesOutput,
     GetTopicAttributesInput,
+    GetTopicAttributesInputDict,
     GetTopicAttributesOutput,
     ListEndpointsByPlatformApplicationInput,
+    ListEndpointsByPlatformApplicationInputDict,
     ListEndpointsByPlatformApplicationOutput,
     ListOriginationNumbersInput,
+    ListOriginationNumbersInputDict,
     ListOriginationNumbersOutput,
     ListPhoneNumbersOptedOutInput,
+    ListPhoneNumbersOptedOutInputDict,
     ListPhoneNumbersOptedOutOutput,
     ListPlatformApplicationsInput,
+    ListPlatformApplicationsInputDict,
     ListPlatformApplicationsOutput,
     ListSMSSandboxPhoneNumbersInput,
+    ListSMSSandboxPhoneNumbersInputDict,
     ListSMSSandboxPhoneNumbersOutput,
     ListSubscriptionsByTopicInput,
+    ListSubscriptionsByTopicInputDict,
     ListSubscriptionsByTopicOutput,
     ListSubscriptionsInput,
+    ListSubscriptionsInputDict,
     ListSubscriptionsOutput,
     ListTagsForResourceInput,
+    ListTagsForResourceInputDict,
     ListTagsForResourceOutput,
     ListTopicsInput,
+    ListTopicsInputDict,
     ListTopicsOutput,
     MessageAttributeValue,
+    MessageAttributeValueDict,
     OptInPhoneNumberInput,
+    OptInPhoneNumberInputDict,
     OptInPhoneNumberOutput,
     PhoneNumberInformation,
     PlatformApplication,
     PublishBatchInput,
+    PublishBatchInputDict,
     PublishBatchOutput,
     PublishBatchRequestEntry,
+    PublishBatchRequestEntryDict,
     PublishBatchResultEntry,
     PublishInput,
+    PublishInputDict,
     PublishOutput,
     PutDataProtectionPolicyInput,
+    PutDataProtectionPolicyInputDict,
     PutDataProtectionPolicyOutput,
     RemovePermissionInput,
+    RemovePermissionInputDict,
     RemovePermissionOutput,
     SMSSandboxPhoneNumber,
     SetEndpointAttributesInput,
+    SetEndpointAttributesInputDict,
     SetEndpointAttributesOutput,
     SetPlatformApplicationAttributesInput,
+    SetPlatformApplicationAttributesInputDict,
     SetPlatformApplicationAttributesOutput,
     SetSMSAttributesInput,
+    SetSMSAttributesInputDict,
     SetSMSAttributesOutput,
     SetSubscriptionAttributesInput,
+    SetSubscriptionAttributesInputDict,
     SetSubscriptionAttributesOutput,
     SetTopicAttributesInput,
+    SetTopicAttributesInputDict,
     SetTopicAttributesOutput,
     SubscribeInput,
+    SubscribeInputDict,
     SubscribeOutput,
     Subscription,
     Tag,
+    TagDict,
     TagResourceInput,
+    TagResourceInputDict,
     TagResourceOutput,
     Topic,
     UnsubscribeInput,
+    UnsubscribeInputDict,
     UnsubscribeOutput,
     UntagResourceInput,
+    UntagResourceInputDict,
     UntagResourceOutput,
     VerifySMSSandboxPhoneNumberInput,
+    VerifySMSSandboxPhoneNumberInputDict,
     VerifySMSSandboxPhoneNumberOutput,
 )
 
 
-# Static type fixture: pyright over this validates models.pyi.
-# Not executed as a test; it only needs to type-check.
+# Static type fixture: pyright over this validates models.pyi and the
+# client method signatures. Not executed as a test; it only needs to
+# type-check.
 
 _: Any = ...
 
@@ -201,3 +249,545 @@ UntagResourceInput()
 UntagResourceOutput()
 VerifySMSSandboxPhoneNumberInput()
 VerifySMSSandboxPhoneNumberOutput()
+_params_0: AddPermissionInputDict = {
+    "topic_arn": _,
+    "label": _,
+    "aws_account_id": _,
+    "action_name": _,
+}
+_params_1: CheckIfPhoneNumberIsOptedOutInputDict = {"phone_number": _}
+_params_2: ConfirmSubscriptionInputDict = {"topic_arn": _, "token": _}
+_params_3: CreatePlatformApplicationInputDict = {
+    "name": _,
+    "platform": _,
+    "attributes": _,
+}
+_params_4: CreatePlatformEndpointInputDict = {"platform_application_arn": _, "token": _}
+_params_5: CreateSMSSandboxPhoneNumberInputDict = {"phone_number": _}
+_params_6: CreateTopicInputDict = {"name": _}
+_params_7: DeleteEndpointInputDict = {"endpoint_arn": _}
+_params_8: DeletePlatformApplicationInputDict = {"platform_application_arn": _}
+_params_9: DeleteSMSSandboxPhoneNumberInputDict = {"phone_number": _}
+_params_10: DeleteTopicInputDict = {"topic_arn": _}
+_params_11: GetDataProtectionPolicyInputDict = {"resource_arn": _}
+_params_12: GetEndpointAttributesInputDict = {"endpoint_arn": _}
+_params_13: GetPlatformApplicationAttributesInputDict = {"platform_application_arn": _}
+_params_14: GetSMSAttributesInputDict = {}
+_params_15: GetSMSSandboxAccountStatusInputDict = {}
+_params_16: GetSubscriptionAttributesInputDict = {"subscription_arn": _}
+_params_17: GetTopicAttributesInputDict = {"topic_arn": _}
+_params_18: ListEndpointsByPlatformApplicationInputDict = {
+    "platform_application_arn": _
+}
+_params_19: ListOriginationNumbersInputDict = {}
+_params_20: ListPhoneNumbersOptedOutInputDict = {}
+_params_21: ListPlatformApplicationsInputDict = {}
+_params_22: ListSMSSandboxPhoneNumbersInputDict = {}
+_params_23: ListSubscriptionsByTopicInputDict = {"topic_arn": _}
+_params_24: ListSubscriptionsInputDict = {}
+_params_25: ListTagsForResourceInputDict = {"resource_arn": _}
+_params_26: ListTopicsInputDict = {}
+_params_27: MessageAttributeValueDict = {"data_type": _}
+_params_28: OptInPhoneNumberInputDict = {"phone_number": _}
+_params_29: PublishBatchInputDict = {"topic_arn": _, "publish_batch_request_entries": _}
+_params_30: PublishBatchRequestEntryDict = {"id": _, "message": _}
+_params_31: PublishInputDict = {"message": _}
+_params_32: PutDataProtectionPolicyInputDict = {
+    "resource_arn": _,
+    "data_protection_policy": _,
+}
+_params_33: RemovePermissionInputDict = {"topic_arn": _, "label": _}
+_params_34: SetEndpointAttributesInputDict = {"endpoint_arn": _, "attributes": _}
+_params_35: SetPlatformApplicationAttributesInputDict = {
+    "platform_application_arn": _,
+    "attributes": _,
+}
+_params_36: SetSMSAttributesInputDict = {"attributes": _}
+_params_37: SetSubscriptionAttributesInputDict = {
+    "subscription_arn": _,
+    "attribute_name": _,
+}
+_params_38: SetTopicAttributesInputDict = {"topic_arn": _, "attribute_name": _}
+_params_39: SubscribeInputDict = {"topic_arn": _, "protocol": _}
+_params_40: TagDict = {"key": _, "value": _}
+_params_41: TagResourceInputDict = {"resource_arn": _, "tags": _}
+_params_42: UnsubscribeInputDict = {"subscription_arn": _}
+_params_43: UntagResourceInputDict = {"resource_arn": _, "tag_keys": _}
+_params_44: VerifySMSSandboxPhoneNumberInputDict = {
+    "phone_number": _,
+    "one_time_password": _,
+}
+
+
+def _request[T](form: type[T]) -> T:
+    raise NotImplementedError
+
+
+async def check_async_calls(client: AsyncSNSClient) -> None:
+    pass
+    await client.add_permission(topic_arn=_, label=_, aws_account_id=_, action_name=_)
+    await client.add_permission(**_request(AddPermissionInputDict))
+    await client.add_permission(_request(AddPermissionInput))
+    await client.add_permission(_request(AddPermissionInputDict))
+    await client.check_if_phone_number_is_opted_out(phone_number=_)
+    await client.check_if_phone_number_is_opted_out(
+        **_request(CheckIfPhoneNumberIsOptedOutInputDict)
+    )
+    await client.check_if_phone_number_is_opted_out(
+        _request(CheckIfPhoneNumberIsOptedOutInput)
+    )
+    await client.check_if_phone_number_is_opted_out(
+        _request(CheckIfPhoneNumberIsOptedOutInputDict)
+    )
+    await client.confirm_subscription(topic_arn=_, token=_)
+    await client.confirm_subscription(**_request(ConfirmSubscriptionInputDict))
+    await client.confirm_subscription(_request(ConfirmSubscriptionInput))
+    await client.confirm_subscription(_request(ConfirmSubscriptionInputDict))
+    await client.create_platform_application(name=_, platform=_, attributes=_)
+    await client.create_platform_application(
+        **_request(CreatePlatformApplicationInputDict)
+    )
+    await client.create_platform_application(_request(CreatePlatformApplicationInput))
+    await client.create_platform_application(
+        _request(CreatePlatformApplicationInputDict)
+    )
+    await client.create_platform_endpoint(platform_application_arn=_, token=_)
+    await client.create_platform_endpoint(**_request(CreatePlatformEndpointInputDict))
+    await client.create_platform_endpoint(_request(CreatePlatformEndpointInput))
+    await client.create_platform_endpoint(_request(CreatePlatformEndpointInputDict))
+    await client.create_sms_sandbox_phone_number(phone_number=_)
+    await client.create_sms_sandbox_phone_number(
+        **_request(CreateSMSSandboxPhoneNumberInputDict)
+    )
+    await client.create_sms_sandbox_phone_number(
+        _request(CreateSMSSandboxPhoneNumberInput)
+    )
+    await client.create_sms_sandbox_phone_number(
+        _request(CreateSMSSandboxPhoneNumberInputDict)
+    )
+    await client.create_topic(name=_)
+    await client.create_topic(**_request(CreateTopicInputDict))
+    await client.create_topic(_request(CreateTopicInput))
+    await client.create_topic(_request(CreateTopicInputDict))
+    await client.delete_endpoint(endpoint_arn=_)
+    await client.delete_endpoint(**_request(DeleteEndpointInputDict))
+    await client.delete_endpoint(_request(DeleteEndpointInput))
+    await client.delete_endpoint(_request(DeleteEndpointInputDict))
+    await client.delete_platform_application(platform_application_arn=_)
+    await client.delete_platform_application(
+        **_request(DeletePlatformApplicationInputDict)
+    )
+    await client.delete_platform_application(_request(DeletePlatformApplicationInput))
+    await client.delete_platform_application(
+        _request(DeletePlatformApplicationInputDict)
+    )
+    await client.delete_sms_sandbox_phone_number(phone_number=_)
+    await client.delete_sms_sandbox_phone_number(
+        **_request(DeleteSMSSandboxPhoneNumberInputDict)
+    )
+    await client.delete_sms_sandbox_phone_number(
+        _request(DeleteSMSSandboxPhoneNumberInput)
+    )
+    await client.delete_sms_sandbox_phone_number(
+        _request(DeleteSMSSandboxPhoneNumberInputDict)
+    )
+    await client.delete_topic(topic_arn=_)
+    await client.delete_topic(**_request(DeleteTopicInputDict))
+    await client.delete_topic(_request(DeleteTopicInput))
+    await client.delete_topic(_request(DeleteTopicInputDict))
+    await client.get_data_protection_policy(resource_arn=_)
+    await client.get_data_protection_policy(
+        **_request(GetDataProtectionPolicyInputDict)
+    )
+    await client.get_data_protection_policy(_request(GetDataProtectionPolicyInput))
+    await client.get_data_protection_policy(_request(GetDataProtectionPolicyInputDict))
+    await client.get_endpoint_attributes(endpoint_arn=_)
+    await client.get_endpoint_attributes(**_request(GetEndpointAttributesInputDict))
+    await client.get_endpoint_attributes(_request(GetEndpointAttributesInput))
+    await client.get_endpoint_attributes(_request(GetEndpointAttributesInputDict))
+    await client.get_platform_application_attributes(platform_application_arn=_)
+    await client.get_platform_application_attributes(
+        **_request(GetPlatformApplicationAttributesInputDict)
+    )
+    await client.get_platform_application_attributes(
+        _request(GetPlatformApplicationAttributesInput)
+    )
+    await client.get_platform_application_attributes(
+        _request(GetPlatformApplicationAttributesInputDict)
+    )
+    await client.get_sms_attributes()
+    await client.get_sms_attributes(**_request(GetSMSAttributesInputDict))
+    await client.get_sms_attributes(_request(GetSMSAttributesInput))
+    await client.get_sms_attributes(_request(GetSMSAttributesInputDict))
+    await client.get_sms_sandbox_account_status()
+    await client.get_sms_sandbox_account_status(
+        **_request(GetSMSSandboxAccountStatusInputDict)
+    )
+    await client.get_sms_sandbox_account_status(
+        _request(GetSMSSandboxAccountStatusInput)
+    )
+    await client.get_sms_sandbox_account_status(
+        _request(GetSMSSandboxAccountStatusInputDict)
+    )
+    await client.get_subscription_attributes(subscription_arn=_)
+    await client.get_subscription_attributes(
+        **_request(GetSubscriptionAttributesInputDict)
+    )
+    await client.get_subscription_attributes(_request(GetSubscriptionAttributesInput))
+    await client.get_subscription_attributes(
+        _request(GetSubscriptionAttributesInputDict)
+    )
+    await client.get_topic_attributes(topic_arn=_)
+    await client.get_topic_attributes(**_request(GetTopicAttributesInputDict))
+    await client.get_topic_attributes(_request(GetTopicAttributesInput))
+    await client.get_topic_attributes(_request(GetTopicAttributesInputDict))
+    await client.list_endpoints_by_platform_application(platform_application_arn=_)
+    await client.list_endpoints_by_platform_application(
+        **_request(ListEndpointsByPlatformApplicationInputDict)
+    )
+    await client.list_endpoints_by_platform_application(
+        _request(ListEndpointsByPlatformApplicationInput)
+    )
+    await client.list_endpoints_by_platform_application(
+        _request(ListEndpointsByPlatformApplicationInputDict)
+    )
+    await client.list_origination_numbers()
+    await client.list_origination_numbers(**_request(ListOriginationNumbersInputDict))
+    await client.list_origination_numbers(_request(ListOriginationNumbersInput))
+    await client.list_origination_numbers(_request(ListOriginationNumbersInputDict))
+    await client.list_phone_numbers_opted_out()
+    await client.list_phone_numbers_opted_out(
+        **_request(ListPhoneNumbersOptedOutInputDict)
+    )
+    await client.list_phone_numbers_opted_out(_request(ListPhoneNumbersOptedOutInput))
+    await client.list_phone_numbers_opted_out(
+        _request(ListPhoneNumbersOptedOutInputDict)
+    )
+    await client.list_platform_applications()
+    await client.list_platform_applications(
+        **_request(ListPlatformApplicationsInputDict)
+    )
+    await client.list_platform_applications(_request(ListPlatformApplicationsInput))
+    await client.list_platform_applications(_request(ListPlatformApplicationsInputDict))
+    await client.list_sms_sandbox_phone_numbers()
+    await client.list_sms_sandbox_phone_numbers(
+        **_request(ListSMSSandboxPhoneNumbersInputDict)
+    )
+    await client.list_sms_sandbox_phone_numbers(
+        _request(ListSMSSandboxPhoneNumbersInput)
+    )
+    await client.list_sms_sandbox_phone_numbers(
+        _request(ListSMSSandboxPhoneNumbersInputDict)
+    )
+    await client.list_subscriptions()
+    await client.list_subscriptions(**_request(ListSubscriptionsInputDict))
+    await client.list_subscriptions(_request(ListSubscriptionsInput))
+    await client.list_subscriptions(_request(ListSubscriptionsInputDict))
+    await client.list_subscriptions_by_topic(topic_arn=_)
+    await client.list_subscriptions_by_topic(
+        **_request(ListSubscriptionsByTopicInputDict)
+    )
+    await client.list_subscriptions_by_topic(_request(ListSubscriptionsByTopicInput))
+    await client.list_subscriptions_by_topic(
+        _request(ListSubscriptionsByTopicInputDict)
+    )
+    await client.list_tags_for_resource(resource_arn=_)
+    await client.list_tags_for_resource(**_request(ListTagsForResourceInputDict))
+    await client.list_tags_for_resource(_request(ListTagsForResourceInput))
+    await client.list_tags_for_resource(_request(ListTagsForResourceInputDict))
+    await client.list_topics()
+    await client.list_topics(**_request(ListTopicsInputDict))
+    await client.list_topics(_request(ListTopicsInput))
+    await client.list_topics(_request(ListTopicsInputDict))
+    await client.opt_in_phone_number(phone_number=_)
+    await client.opt_in_phone_number(**_request(OptInPhoneNumberInputDict))
+    await client.opt_in_phone_number(_request(OptInPhoneNumberInput))
+    await client.opt_in_phone_number(_request(OptInPhoneNumberInputDict))
+    await client.publish(message=_)
+    await client.publish(**_request(PublishInputDict))
+    await client.publish(_request(PublishInput))
+    await client.publish(_request(PublishInputDict))
+    await client.publish_batch(topic_arn=_, publish_batch_request_entries=_)
+    await client.publish_batch(**_request(PublishBatchInputDict))
+    await client.publish_batch(_request(PublishBatchInput))
+    await client.publish_batch(_request(PublishBatchInputDict))
+    await client.put_data_protection_policy(resource_arn=_, data_protection_policy=_)
+    await client.put_data_protection_policy(
+        **_request(PutDataProtectionPolicyInputDict)
+    )
+    await client.put_data_protection_policy(_request(PutDataProtectionPolicyInput))
+    await client.put_data_protection_policy(_request(PutDataProtectionPolicyInputDict))
+    await client.remove_permission(topic_arn=_, label=_)
+    await client.remove_permission(**_request(RemovePermissionInputDict))
+    await client.remove_permission(_request(RemovePermissionInput))
+    await client.remove_permission(_request(RemovePermissionInputDict))
+    await client.set_endpoint_attributes(endpoint_arn=_, attributes=_)
+    await client.set_endpoint_attributes(**_request(SetEndpointAttributesInputDict))
+    await client.set_endpoint_attributes(_request(SetEndpointAttributesInput))
+    await client.set_endpoint_attributes(_request(SetEndpointAttributesInputDict))
+    await client.set_platform_application_attributes(
+        platform_application_arn=_, attributes=_
+    )
+    await client.set_platform_application_attributes(
+        **_request(SetPlatformApplicationAttributesInputDict)
+    )
+    await client.set_platform_application_attributes(
+        _request(SetPlatformApplicationAttributesInput)
+    )
+    await client.set_platform_application_attributes(
+        _request(SetPlatformApplicationAttributesInputDict)
+    )
+    await client.set_sms_attributes(attributes=_)
+    await client.set_sms_attributes(**_request(SetSMSAttributesInputDict))
+    await client.set_sms_attributes(_request(SetSMSAttributesInput))
+    await client.set_sms_attributes(_request(SetSMSAttributesInputDict))
+    await client.set_subscription_attributes(subscription_arn=_, attribute_name=_)
+    await client.set_subscription_attributes(
+        **_request(SetSubscriptionAttributesInputDict)
+    )
+    await client.set_subscription_attributes(_request(SetSubscriptionAttributesInput))
+    await client.set_subscription_attributes(
+        _request(SetSubscriptionAttributesInputDict)
+    )
+    await client.set_topic_attributes(topic_arn=_, attribute_name=_)
+    await client.set_topic_attributes(**_request(SetTopicAttributesInputDict))
+    await client.set_topic_attributes(_request(SetTopicAttributesInput))
+    await client.set_topic_attributes(_request(SetTopicAttributesInputDict))
+    await client.subscribe(topic_arn=_, protocol=_)
+    await client.subscribe(**_request(SubscribeInputDict))
+    await client.subscribe(_request(SubscribeInput))
+    await client.subscribe(_request(SubscribeInputDict))
+    await client.tag_resource(resource_arn=_, tags=_)
+    await client.tag_resource(**_request(TagResourceInputDict))
+    await client.tag_resource(_request(TagResourceInput))
+    await client.tag_resource(_request(TagResourceInputDict))
+    await client.unsubscribe(subscription_arn=_)
+    await client.unsubscribe(**_request(UnsubscribeInputDict))
+    await client.unsubscribe(_request(UnsubscribeInput))
+    await client.unsubscribe(_request(UnsubscribeInputDict))
+    await client.untag_resource(resource_arn=_, tag_keys=_)
+    await client.untag_resource(**_request(UntagResourceInputDict))
+    await client.untag_resource(_request(UntagResourceInput))
+    await client.untag_resource(_request(UntagResourceInputDict))
+    await client.verify_sms_sandbox_phone_number(phone_number=_, one_time_password=_)
+    await client.verify_sms_sandbox_phone_number(
+        **_request(VerifySMSSandboxPhoneNumberInputDict)
+    )
+    await client.verify_sms_sandbox_phone_number(
+        _request(VerifySMSSandboxPhoneNumberInput)
+    )
+    await client.verify_sms_sandbox_phone_number(
+        _request(VerifySMSSandboxPhoneNumberInputDict)
+    )
+
+
+def check_sync_calls(client: SNSClient) -> None:
+    pass
+    client.add_permission(topic_arn=_, label=_, aws_account_id=_, action_name=_)
+    client.add_permission(**_request(AddPermissionInputDict))
+    client.add_permission(_request(AddPermissionInput))
+    client.add_permission(_request(AddPermissionInputDict))
+    client.check_if_phone_number_is_opted_out(phone_number=_)
+    client.check_if_phone_number_is_opted_out(
+        **_request(CheckIfPhoneNumberIsOptedOutInputDict)
+    )
+    client.check_if_phone_number_is_opted_out(
+        _request(CheckIfPhoneNumberIsOptedOutInput)
+    )
+    client.check_if_phone_number_is_opted_out(
+        _request(CheckIfPhoneNumberIsOptedOutInputDict)
+    )
+    client.confirm_subscription(topic_arn=_, token=_)
+    client.confirm_subscription(**_request(ConfirmSubscriptionInputDict))
+    client.confirm_subscription(_request(ConfirmSubscriptionInput))
+    client.confirm_subscription(_request(ConfirmSubscriptionInputDict))
+    client.create_platform_application(name=_, platform=_, attributes=_)
+    client.create_platform_application(**_request(CreatePlatformApplicationInputDict))
+    client.create_platform_application(_request(CreatePlatformApplicationInput))
+    client.create_platform_application(_request(CreatePlatformApplicationInputDict))
+    client.create_platform_endpoint(platform_application_arn=_, token=_)
+    client.create_platform_endpoint(**_request(CreatePlatformEndpointInputDict))
+    client.create_platform_endpoint(_request(CreatePlatformEndpointInput))
+    client.create_platform_endpoint(_request(CreatePlatformEndpointInputDict))
+    client.create_sms_sandbox_phone_number(phone_number=_)
+    client.create_sms_sandbox_phone_number(
+        **_request(CreateSMSSandboxPhoneNumberInputDict)
+    )
+    client.create_sms_sandbox_phone_number(_request(CreateSMSSandboxPhoneNumberInput))
+    client.create_sms_sandbox_phone_number(
+        _request(CreateSMSSandboxPhoneNumberInputDict)
+    )
+    client.create_topic(name=_)
+    client.create_topic(**_request(CreateTopicInputDict))
+    client.create_topic(_request(CreateTopicInput))
+    client.create_topic(_request(CreateTopicInputDict))
+    client.delete_endpoint(endpoint_arn=_)
+    client.delete_endpoint(**_request(DeleteEndpointInputDict))
+    client.delete_endpoint(_request(DeleteEndpointInput))
+    client.delete_endpoint(_request(DeleteEndpointInputDict))
+    client.delete_platform_application(platform_application_arn=_)
+    client.delete_platform_application(**_request(DeletePlatformApplicationInputDict))
+    client.delete_platform_application(_request(DeletePlatformApplicationInput))
+    client.delete_platform_application(_request(DeletePlatformApplicationInputDict))
+    client.delete_sms_sandbox_phone_number(phone_number=_)
+    client.delete_sms_sandbox_phone_number(
+        **_request(DeleteSMSSandboxPhoneNumberInputDict)
+    )
+    client.delete_sms_sandbox_phone_number(_request(DeleteSMSSandboxPhoneNumberInput))
+    client.delete_sms_sandbox_phone_number(
+        _request(DeleteSMSSandboxPhoneNumberInputDict)
+    )
+    client.delete_topic(topic_arn=_)
+    client.delete_topic(**_request(DeleteTopicInputDict))
+    client.delete_topic(_request(DeleteTopicInput))
+    client.delete_topic(_request(DeleteTopicInputDict))
+    client.get_data_protection_policy(resource_arn=_)
+    client.get_data_protection_policy(**_request(GetDataProtectionPolicyInputDict))
+    client.get_data_protection_policy(_request(GetDataProtectionPolicyInput))
+    client.get_data_protection_policy(_request(GetDataProtectionPolicyInputDict))
+    client.get_endpoint_attributes(endpoint_arn=_)
+    client.get_endpoint_attributes(**_request(GetEndpointAttributesInputDict))
+    client.get_endpoint_attributes(_request(GetEndpointAttributesInput))
+    client.get_endpoint_attributes(_request(GetEndpointAttributesInputDict))
+    client.get_platform_application_attributes(platform_application_arn=_)
+    client.get_platform_application_attributes(
+        **_request(GetPlatformApplicationAttributesInputDict)
+    )
+    client.get_platform_application_attributes(
+        _request(GetPlatformApplicationAttributesInput)
+    )
+    client.get_platform_application_attributes(
+        _request(GetPlatformApplicationAttributesInputDict)
+    )
+    client.get_sms_attributes()
+    client.get_sms_attributes(**_request(GetSMSAttributesInputDict))
+    client.get_sms_attributes(_request(GetSMSAttributesInput))
+    client.get_sms_attributes(_request(GetSMSAttributesInputDict))
+    client.get_sms_sandbox_account_status()
+    client.get_sms_sandbox_account_status(
+        **_request(GetSMSSandboxAccountStatusInputDict)
+    )
+    client.get_sms_sandbox_account_status(_request(GetSMSSandboxAccountStatusInput))
+    client.get_sms_sandbox_account_status(_request(GetSMSSandboxAccountStatusInputDict))
+    client.get_subscription_attributes(subscription_arn=_)
+    client.get_subscription_attributes(**_request(GetSubscriptionAttributesInputDict))
+    client.get_subscription_attributes(_request(GetSubscriptionAttributesInput))
+    client.get_subscription_attributes(_request(GetSubscriptionAttributesInputDict))
+    client.get_topic_attributes(topic_arn=_)
+    client.get_topic_attributes(**_request(GetTopicAttributesInputDict))
+    client.get_topic_attributes(_request(GetTopicAttributesInput))
+    client.get_topic_attributes(_request(GetTopicAttributesInputDict))
+    client.list_endpoints_by_platform_application(platform_application_arn=_)
+    client.list_endpoints_by_platform_application(
+        **_request(ListEndpointsByPlatformApplicationInputDict)
+    )
+    client.list_endpoints_by_platform_application(
+        _request(ListEndpointsByPlatformApplicationInput)
+    )
+    client.list_endpoints_by_platform_application(
+        _request(ListEndpointsByPlatformApplicationInputDict)
+    )
+    client.list_origination_numbers()
+    client.list_origination_numbers(**_request(ListOriginationNumbersInputDict))
+    client.list_origination_numbers(_request(ListOriginationNumbersInput))
+    client.list_origination_numbers(_request(ListOriginationNumbersInputDict))
+    client.list_phone_numbers_opted_out()
+    client.list_phone_numbers_opted_out(**_request(ListPhoneNumbersOptedOutInputDict))
+    client.list_phone_numbers_opted_out(_request(ListPhoneNumbersOptedOutInput))
+    client.list_phone_numbers_opted_out(_request(ListPhoneNumbersOptedOutInputDict))
+    client.list_platform_applications()
+    client.list_platform_applications(**_request(ListPlatformApplicationsInputDict))
+    client.list_platform_applications(_request(ListPlatformApplicationsInput))
+    client.list_platform_applications(_request(ListPlatformApplicationsInputDict))
+    client.list_sms_sandbox_phone_numbers()
+    client.list_sms_sandbox_phone_numbers(
+        **_request(ListSMSSandboxPhoneNumbersInputDict)
+    )
+    client.list_sms_sandbox_phone_numbers(_request(ListSMSSandboxPhoneNumbersInput))
+    client.list_sms_sandbox_phone_numbers(_request(ListSMSSandboxPhoneNumbersInputDict))
+    client.list_subscriptions()
+    client.list_subscriptions(**_request(ListSubscriptionsInputDict))
+    client.list_subscriptions(_request(ListSubscriptionsInput))
+    client.list_subscriptions(_request(ListSubscriptionsInputDict))
+    client.list_subscriptions_by_topic(topic_arn=_)
+    client.list_subscriptions_by_topic(**_request(ListSubscriptionsByTopicInputDict))
+    client.list_subscriptions_by_topic(_request(ListSubscriptionsByTopicInput))
+    client.list_subscriptions_by_topic(_request(ListSubscriptionsByTopicInputDict))
+    client.list_tags_for_resource(resource_arn=_)
+    client.list_tags_for_resource(**_request(ListTagsForResourceInputDict))
+    client.list_tags_for_resource(_request(ListTagsForResourceInput))
+    client.list_tags_for_resource(_request(ListTagsForResourceInputDict))
+    client.list_topics()
+    client.list_topics(**_request(ListTopicsInputDict))
+    client.list_topics(_request(ListTopicsInput))
+    client.list_topics(_request(ListTopicsInputDict))
+    client.opt_in_phone_number(phone_number=_)
+    client.opt_in_phone_number(**_request(OptInPhoneNumberInputDict))
+    client.opt_in_phone_number(_request(OptInPhoneNumberInput))
+    client.opt_in_phone_number(_request(OptInPhoneNumberInputDict))
+    client.publish(message=_)
+    client.publish(**_request(PublishInputDict))
+    client.publish(_request(PublishInput))
+    client.publish(_request(PublishInputDict))
+    client.publish_batch(topic_arn=_, publish_batch_request_entries=_)
+    client.publish_batch(**_request(PublishBatchInputDict))
+    client.publish_batch(_request(PublishBatchInput))
+    client.publish_batch(_request(PublishBatchInputDict))
+    client.put_data_protection_policy(resource_arn=_, data_protection_policy=_)
+    client.put_data_protection_policy(**_request(PutDataProtectionPolicyInputDict))
+    client.put_data_protection_policy(_request(PutDataProtectionPolicyInput))
+    client.put_data_protection_policy(_request(PutDataProtectionPolicyInputDict))
+    client.remove_permission(topic_arn=_, label=_)
+    client.remove_permission(**_request(RemovePermissionInputDict))
+    client.remove_permission(_request(RemovePermissionInput))
+    client.remove_permission(_request(RemovePermissionInputDict))
+    client.set_endpoint_attributes(endpoint_arn=_, attributes=_)
+    client.set_endpoint_attributes(**_request(SetEndpointAttributesInputDict))
+    client.set_endpoint_attributes(_request(SetEndpointAttributesInput))
+    client.set_endpoint_attributes(_request(SetEndpointAttributesInputDict))
+    client.set_platform_application_attributes(platform_application_arn=_, attributes=_)
+    client.set_platform_application_attributes(
+        **_request(SetPlatformApplicationAttributesInputDict)
+    )
+    client.set_platform_application_attributes(
+        _request(SetPlatformApplicationAttributesInput)
+    )
+    client.set_platform_application_attributes(
+        _request(SetPlatformApplicationAttributesInputDict)
+    )
+    client.set_sms_attributes(attributes=_)
+    client.set_sms_attributes(**_request(SetSMSAttributesInputDict))
+    client.set_sms_attributes(_request(SetSMSAttributesInput))
+    client.set_sms_attributes(_request(SetSMSAttributesInputDict))
+    client.set_subscription_attributes(subscription_arn=_, attribute_name=_)
+    client.set_subscription_attributes(**_request(SetSubscriptionAttributesInputDict))
+    client.set_subscription_attributes(_request(SetSubscriptionAttributesInput))
+    client.set_subscription_attributes(_request(SetSubscriptionAttributesInputDict))
+    client.set_topic_attributes(topic_arn=_, attribute_name=_)
+    client.set_topic_attributes(**_request(SetTopicAttributesInputDict))
+    client.set_topic_attributes(_request(SetTopicAttributesInput))
+    client.set_topic_attributes(_request(SetTopicAttributesInputDict))
+    client.subscribe(topic_arn=_, protocol=_)
+    client.subscribe(**_request(SubscribeInputDict))
+    client.subscribe(_request(SubscribeInput))
+    client.subscribe(_request(SubscribeInputDict))
+    client.tag_resource(resource_arn=_, tags=_)
+    client.tag_resource(**_request(TagResourceInputDict))
+    client.tag_resource(_request(TagResourceInput))
+    client.tag_resource(_request(TagResourceInputDict))
+    client.unsubscribe(subscription_arn=_)
+    client.unsubscribe(**_request(UnsubscribeInputDict))
+    client.unsubscribe(_request(UnsubscribeInput))
+    client.unsubscribe(_request(UnsubscribeInputDict))
+    client.untag_resource(resource_arn=_, tag_keys=_)
+    client.untag_resource(**_request(UntagResourceInputDict))
+    client.untag_resource(_request(UntagResourceInput))
+    client.untag_resource(_request(UntagResourceInputDict))
+    client.verify_sms_sandbox_phone_number(phone_number=_, one_time_password=_)
+    client.verify_sms_sandbox_phone_number(
+        **_request(VerifySMSSandboxPhoneNumberInputDict)
+    )
+    client.verify_sms_sandbox_phone_number(_request(VerifySMSSandboxPhoneNumberInput))
+    client.verify_sms_sandbox_phone_number(
+        _request(VerifySMSSandboxPhoneNumberInputDict)
+    )

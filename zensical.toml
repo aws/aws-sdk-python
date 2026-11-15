@@ -23,7 +23,9 @@ nav = [
   { Contributing = "contributing.md" },
   { "Available Clients" = [
     "clients/index.md",
+    { "ACM" = "clients/acm/index.md" },
     { "API Gateway" = "clients/api-gateway/index.md" },
+    { "AppConfigData" = "clients/appconfigdata/index.md" },
     { "Bedrock" = "clients/bedrock/index.md" },
     { "Bedrock Agent" = "clients/bedrock-agent/index.md" },
     { "Bedrock Agent Runtime" = "clients/bedrock-agent-runtime/index.md" },
@@ -32,17 +34,28 @@ nav = [
     { "Bedrock Data Automation" = "clients/bedrock-data-automation/index.md" },
     { "Bedrock Data Automation Runtime" = "clients/bedrock-data-automation-runtime/index.md" },
     { "Bedrock Runtime" = "clients/bedrock-runtime/index.md" },
+    { "CloudFormation" = "clients/cloudformation/index.md" },
+    { "CloudFront" = "clients/cloudfront/index.md" },
+    { "CloudFront KeyValueStore" = "clients/cloudfront-keyvaluestore/index.md" },
     { "CloudTrail" = "clients/cloudtrail/index.md" },
     { "Cognito Identity" = "clients/cognito-identity/index.md" },
     { "ConnectHealth" = "clients/connecthealth/index.md" },
     { "DynamoDB" = "clients/dynamodb/index.md" },
+    { "EC2" = "clients/ec2/index.md" },
+    { "ECS" = "clients/ecs/index.md" },
     { "GuardDuty" = "clients/guardduty/index.md" },
+    { "IAM" = "clients/iam/index.md" },
+    { "Kinesis" = "clients/kinesis/index.md" },
+    { "KMS" = "clients/kms/index.md" },
     { "Lambda" = "clients/lambda/index.md" },
     { "Lex Runtime V2" = "clients/lex-runtime-v2/index.md" },
     { "Polly" = "clients/polly/index.md" },
     { "QBusiness" = "clients/qbusiness/index.md" },
+    { "RDS" = "clients/rds/index.md" },
+    { "S3" = "clients/s3/index.md" },
     { "SageMaker Runtime HTTP2" = "clients/sagemaker-runtime-http2/index.md" },
     { "Secrets Manager" = "clients/secrets-manager/index.md" },
+    { "Signin" = "clients/signin/index.md" },
     { "SNS" = "clients/sns/index.md" },
     { "SQS" = "clients/sqs/index.md" },
     { "STS" = "clients/sts/index.md" },
@@ -224,9 +237,10 @@ check_paths = true
 
 [project.plugins.mkdocstrings.handlers.python]
 inventories = ["https://docs.python.org/3/objects.inv"]
-paths = ["src"]
+paths = ["clients/*/src", "packages/*/src"]
 
 [project.plugins.mkdocstrings.handlers.python.options]
+extensions = ["scripts/docs/griffe_extensions.py:OverloadDocstrings"]
 docstring_style = "google"
 inherited_members = true
 show_source = false
@@ -241,6 +255,7 @@ show_if_no_docstring = true
 show_category_heading = true
 group_by_category = true
 separate_signature = true
+overloads_only = true
 signature_crossrefs = true
 filters = [
   "!^_",

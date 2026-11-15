@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import cast
+from typing import Unpack as _Unpack, cast, overload as _overload
 
 from smithy_aws_core.aio.identity.chain import AsyncIdentityChain
 from smithy_aws_core.config.types import ConfigSource
@@ -21,253 +21,129 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from ..models import (
-        CreateApiKeyInput,
         CreateApiKeyOutput,
-        CreateAuthorizerInput,
         CreateAuthorizerOutput,
-        CreateBasePathMappingInput,
         CreateBasePathMappingOutput,
-        CreateDeploymentInput,
         CreateDeploymentOutput,
-        CreateDocumentationPartInput,
         CreateDocumentationPartOutput,
-        CreateDocumentationVersionInput,
         CreateDocumentationVersionOutput,
-        CreateDomainNameAccessAssociationInput,
         CreateDomainNameAccessAssociationOutput,
-        CreateDomainNameInput,
         CreateDomainNameOutput,
-        CreateModelInput,
         CreateModelOutput,
-        CreateRequestValidatorInput,
         CreateRequestValidatorOutput,
-        CreateResourceInput,
         CreateResourceOutput,
-        CreateRestApiInput,
         CreateRestApiOutput,
-        CreateStageInput,
         CreateStageOutput,
-        CreateUsagePlanInput,
-        CreateUsagePlanKeyInput,
         CreateUsagePlanKeyOutput,
         CreateUsagePlanOutput,
-        CreateVpcLinkInput,
         CreateVpcLinkOutput,
-        DeleteApiKeyInput,
         DeleteApiKeyOutput,
-        DeleteAuthorizerInput,
         DeleteAuthorizerOutput,
-        DeleteBasePathMappingInput,
         DeleteBasePathMappingOutput,
-        DeleteClientCertificateInput,
         DeleteClientCertificateOutput,
-        DeleteDeploymentInput,
         DeleteDeploymentOutput,
-        DeleteDocumentationPartInput,
         DeleteDocumentationPartOutput,
-        DeleteDocumentationVersionInput,
         DeleteDocumentationVersionOutput,
-        DeleteDomainNameAccessAssociationInput,
         DeleteDomainNameAccessAssociationOutput,
-        DeleteDomainNameInput,
         DeleteDomainNameOutput,
-        DeleteGatewayResponseInput,
         DeleteGatewayResponseOutput,
-        DeleteIntegrationInput,
         DeleteIntegrationOutput,
-        DeleteIntegrationResponseInput,
         DeleteIntegrationResponseOutput,
-        DeleteMethodInput,
         DeleteMethodOutput,
-        DeleteMethodResponseInput,
         DeleteMethodResponseOutput,
-        DeleteModelInput,
         DeleteModelOutput,
-        DeleteRequestValidatorInput,
         DeleteRequestValidatorOutput,
-        DeleteResourceInput,
         DeleteResourceOutput,
-        DeleteRestApiInput,
         DeleteRestApiOutput,
-        DeleteStageInput,
         DeleteStageOutput,
-        DeleteUsagePlanInput,
-        DeleteUsagePlanKeyInput,
         DeleteUsagePlanKeyOutput,
         DeleteUsagePlanOutput,
-        DeleteVpcLinkInput,
         DeleteVpcLinkOutput,
-        FlushStageAuthorizersCacheInput,
         FlushStageAuthorizersCacheOutput,
-        FlushStageCacheInput,
         FlushStageCacheOutput,
-        GenerateClientCertificateInput,
         GenerateClientCertificateOutput,
-        GetAccountInput,
         GetAccountOutput,
-        GetApiKeyInput,
         GetApiKeyOutput,
-        GetApiKeysInput,
         GetApiKeysOutput,
-        GetAuthorizerInput,
         GetAuthorizerOutput,
-        GetAuthorizersInput,
         GetAuthorizersOutput,
-        GetBasePathMappingInput,
         GetBasePathMappingOutput,
-        GetBasePathMappingsInput,
         GetBasePathMappingsOutput,
-        GetClientCertificateInput,
         GetClientCertificateOutput,
-        GetClientCertificatesInput,
         GetClientCertificatesOutput,
-        GetDeploymentInput,
         GetDeploymentOutput,
-        GetDeploymentsInput,
         GetDeploymentsOutput,
-        GetDocumentationPartInput,
         GetDocumentationPartOutput,
-        GetDocumentationPartsInput,
         GetDocumentationPartsOutput,
-        GetDocumentationVersionInput,
         GetDocumentationVersionOutput,
-        GetDocumentationVersionsInput,
         GetDocumentationVersionsOutput,
-        GetDomainNameAccessAssociationsInput,
         GetDomainNameAccessAssociationsOutput,
-        GetDomainNameInput,
         GetDomainNameOutput,
-        GetDomainNamesInput,
         GetDomainNamesOutput,
-        GetExportInput,
         GetExportOutput,
-        GetGatewayResponseInput,
         GetGatewayResponseOutput,
-        GetGatewayResponsesInput,
         GetGatewayResponsesOutput,
-        GetIntegrationInput,
         GetIntegrationOutput,
-        GetIntegrationResponseInput,
         GetIntegrationResponseOutput,
-        GetMethodInput,
         GetMethodOutput,
-        GetMethodResponseInput,
         GetMethodResponseOutput,
-        GetModelInput,
         GetModelOutput,
-        GetModelTemplateInput,
         GetModelTemplateOutput,
-        GetModelsInput,
         GetModelsOutput,
-        GetRequestValidatorInput,
         GetRequestValidatorOutput,
-        GetRequestValidatorsInput,
         GetRequestValidatorsOutput,
-        GetResourceInput,
         GetResourceOutput,
-        GetResourcesInput,
         GetResourcesOutput,
-        GetRestApiInput,
         GetRestApiOutput,
-        GetRestApisInput,
         GetRestApisOutput,
-        GetSdkInput,
         GetSdkOutput,
-        GetSdkTypeInput,
         GetSdkTypeOutput,
-        GetSdkTypesInput,
         GetSdkTypesOutput,
-        GetStageInput,
         GetStageOutput,
-        GetStagesInput,
         GetStagesOutput,
-        GetTagsInput,
         GetTagsOutput,
-        GetUsageInput,
         GetUsageOutput,
-        GetUsagePlanInput,
-        GetUsagePlanKeyInput,
         GetUsagePlanKeyOutput,
-        GetUsagePlanKeysInput,
         GetUsagePlanKeysOutput,
         GetUsagePlanOutput,
-        GetUsagePlansInput,
         GetUsagePlansOutput,
-        GetVpcLinkInput,
         GetVpcLinkOutput,
-        GetVpcLinksInput,
         GetVpcLinksOutput,
-        ImportApiKeysInput,
         ImportApiKeysOutput,
-        ImportDocumentationPartsInput,
         ImportDocumentationPartsOutput,
-        ImportRestApiInput,
         ImportRestApiOutput,
-        PutGatewayResponseInput,
         PutGatewayResponseOutput,
-        PutIntegrationInput,
         PutIntegrationOutput,
-        PutIntegrationResponseInput,
         PutIntegrationResponseOutput,
-        PutMethodInput,
         PutMethodOutput,
-        PutMethodResponseInput,
         PutMethodResponseOutput,
-        PutRestApiInput,
         PutRestApiOutput,
-        RejectDomainNameAccessAssociationInput,
         RejectDomainNameAccessAssociationOutput,
-        TagResourceInput,
         TagResourceOutput,
-        TestInvokeAuthorizerInput,
         TestInvokeAuthorizerOutput,
-        TestInvokeMethodInput,
         TestInvokeMethodOutput,
-        UntagResourceInput,
         UntagResourceOutput,
-        UpdateAccountInput,
         UpdateAccountOutput,
-        UpdateApiKeyInput,
         UpdateApiKeyOutput,
-        UpdateAuthorizerInput,
         UpdateAuthorizerOutput,
-        UpdateBasePathMappingInput,
         UpdateBasePathMappingOutput,
-        UpdateClientCertificateInput,
         UpdateClientCertificateOutput,
-        UpdateDeploymentInput,
         UpdateDeploymentOutput,
-        UpdateDocumentationPartInput,
         UpdateDocumentationPartOutput,
-        UpdateDocumentationVersionInput,
         UpdateDocumentationVersionOutput,
-        UpdateDomainNameInput,
         UpdateDomainNameOutput,
-        UpdateGatewayResponseInput,
         UpdateGatewayResponseOutput,
-        UpdateIntegrationInput,
         UpdateIntegrationOutput,
-        UpdateIntegrationResponseInput,
         UpdateIntegrationResponseOutput,
-        UpdateMethodInput,
         UpdateMethodOutput,
-        UpdateMethodResponseInput,
         UpdateMethodResponseOutput,
-        UpdateModelInput,
         UpdateModelOutput,
-        UpdateRequestValidatorInput,
         UpdateRequestValidatorOutput,
-        UpdateResourceInput,
         UpdateResourceOutput,
-        UpdateRestApiInput,
         UpdateRestApiOutput,
-        UpdateStageInput,
         UpdateStageOutput,
-        UpdateUsageInput,
         UpdateUsageOutput,
-        UpdateUsagePlanInput,
         UpdateUsagePlanOutput,
-        UpdateVpcLinkInput,
         UpdateVpcLinkOutput,
     )
 
@@ -284,17 +160,29 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
     outside of AWS.
     """
 
-    _client_plugins = (accept_header_plugin, aws_user_agent_plugin, user_agent_plugin)
+    _client_plugins = (user_agent_plugin, accept_header_plugin, aws_user_agent_plugin)
 
+    @_overload
     async def create_api_key(
-        self, input: CreateApiKeyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateApiKeyInput | _models.CreateApiKeyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateApiKeyOutput: ...
+
+    @_overload
+    async def create_api_key(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateApiKeyInputDict],
     ) -> CreateApiKeyOutput:
         """
         Create an ApiKey resource.
 
         Args:
-            input:
-                An instance of `CreateApiKeyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -304,17 +192,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `CreateApiKeyOutput`.
         """
-        return await self._invoke(input, _models.CREATE_API_KEY, [], plugins)
 
+    async def create_api_key(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateApiKeyOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_API_KEY, args, kwargs),
+            _models.CREATE_API_KEY,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_authorizer(
-        self, input: CreateAuthorizerInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateAuthorizerInput | _models.CreateAuthorizerInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateAuthorizerOutput: ...
+
+    @_overload
+    async def create_authorizer(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateAuthorizerInputDict],
     ) -> CreateAuthorizerOutput:
         """
         Adds a new Authorizer resource to an existing RestApi resource.
 
         Args:
-            input:
-                An instance of `CreateAuthorizerInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -324,17 +233,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `CreateAuthorizerOutput`.
         """
-        return await self._invoke(input, _models.CREATE_AUTHORIZER, [], plugins)
 
+    async def create_authorizer(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateAuthorizerOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_AUTHORIZER, args, kwargs),
+            _models.CREATE_AUTHORIZER,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_base_path_mapping(
-        self, input: CreateBasePathMappingInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateBasePathMappingInput
+        | _models.CreateBasePathMappingInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateBasePathMappingOutput: ...
+
+    @_overload
+    async def create_base_path_mapping(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateBasePathMappingInputDict],
     ) -> CreateBasePathMappingOutput:
         """
         Creates a new BasePathMapping resource.
 
         Args:
-            input:
-                An instance of `CreateBasePathMappingInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -344,18 +275,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `CreateBasePathMappingOutput`.
         """
-        return await self._invoke(input, _models.CREATE_BASE_PATH_MAPPING, [], plugins)
 
+    async def create_base_path_mapping(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateBasePathMappingOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_BASE_PATH_MAPPING, args, kwargs),
+            _models.CREATE_BASE_PATH_MAPPING,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_deployment(
-        self, input: CreateDeploymentInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateDeploymentInput | _models.CreateDeploymentInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateDeploymentOutput: ...
+
+    @_overload
+    async def create_deployment(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateDeploymentInputDict],
     ) -> CreateDeploymentOutput:
         """
         Creates a Deployment resource, which makes a specified RestApi callable
         over the internet.
 
         Args:
-            input:
-                An instance of `CreateDeploymentInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -365,17 +317,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `CreateDeploymentOutput`.
         """
-        return await self._invoke(input, _models.CREATE_DEPLOYMENT, [], plugins)
 
+    async def create_deployment(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateDeploymentOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_DEPLOYMENT, args, kwargs),
+            _models.CREATE_DEPLOYMENT,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_documentation_part(
-        self, input: CreateDocumentationPartInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateDocumentationPartInput
+        | _models.CreateDocumentationPartInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateDocumentationPartOutput: ...
+
+    @_overload
+    async def create_documentation_part(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateDocumentationPartInputDict],
     ) -> CreateDocumentationPartOutput:
         """
         Creates a documentation part.
 
         Args:
-            input:
-                An instance of `CreateDocumentationPartInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -385,19 +359,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `CreateDocumentationPartOutput`.
         """
-        return await self._invoke(input, _models.CREATE_DOCUMENTATION_PART, [], plugins)
 
+    async def create_documentation_part(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateDocumentationPartOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_DOCUMENTATION_PART, args, kwargs),
+            _models.CREATE_DOCUMENTATION_PART,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_documentation_version(
         self,
-        input: CreateDocumentationVersionInput,
+        request: _models.CreateDocumentationVersionInput
+        | _models.CreateDocumentationVersionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateDocumentationVersionOutput: ...
+
+    @_overload
+    async def create_documentation_version(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateDocumentationVersionInputDict],
     ) -> CreateDocumentationVersionOutput:
         """
         Creates a documentation version
 
         Args:
-            input:
-                An instance of `CreateDocumentationVersionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -407,19 +401,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `CreateDocumentationVersionOutput`.
         """
+
+    async def create_documentation_version(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateDocumentationVersionOutput:
         return await self._invoke(
-            input, _models.CREATE_DOCUMENTATION_VERSION, [], plugins
+            self._select_input(_models.CREATE_DOCUMENTATION_VERSION, args, kwargs),
+            _models.CREATE_DOCUMENTATION_VERSION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def create_domain_name(
-        self, input: CreateDomainNameInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateDomainNameInput | _models.CreateDomainNameInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateDomainNameOutput: ...
+
+    @_overload
+    async def create_domain_name(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateDomainNameInputDict],
     ) -> CreateDomainNameOutput:
         """
         Creates a new domain name.
 
         Args:
-            input:
-                An instance of `CreateDomainNameInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -429,20 +442,40 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `CreateDomainNameOutput`.
         """
-        return await self._invoke(input, _models.CREATE_DOMAIN_NAME, [], plugins)
 
+    async def create_domain_name(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateDomainNameOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_DOMAIN_NAME, args, kwargs),
+            _models.CREATE_DOMAIN_NAME,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_domain_name_access_association(
         self,
-        input: CreateDomainNameAccessAssociationInput,
+        request: _models.CreateDomainNameAccessAssociationInput
+        | _models.CreateDomainNameAccessAssociationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateDomainNameAccessAssociationOutput: ...
+
+    @_overload
+    async def create_domain_name_access_association(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateDomainNameAccessAssociationInputDict],
     ) -> CreateDomainNameAccessAssociationOutput:
         """
         Creates a domain name access association resource between an access
         association source and a private custom domain name.
 
         Args:
-            input:
-                An instance of `CreateDomainNameAccessAssociationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -452,19 +485,40 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `CreateDomainNameAccessAssociationOutput`.
         """
+
+    async def create_domain_name_access_association(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateDomainNameAccessAssociationOutput:
         return await self._invoke(
-            input, _models.CREATE_DOMAIN_NAME_ACCESS_ASSOCIATION, [], plugins
+            self._select_input(
+                _models.CREATE_DOMAIN_NAME_ACCESS_ASSOCIATION, args, kwargs
+            ),
+            _models.CREATE_DOMAIN_NAME_ACCESS_ASSOCIATION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def create_model(
-        self, input: CreateModelInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateModelInput | _models.CreateModelInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateModelOutput: ...
+
+    @_overload
+    async def create_model(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateModelInputDict],
     ) -> CreateModelOutput:
         """
         Adds a new Model resource to an existing RestApi resource.
 
         Args:
-            input:
-                An instance of `CreateModelInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -474,17 +528,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `CreateModelOutput`.
         """
-        return await self._invoke(input, _models.CREATE_MODEL, [], plugins)
 
+    async def create_model(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateModelOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_MODEL, args, kwargs),
+            _models.CREATE_MODEL,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_request_validator(
-        self, input: CreateRequestValidatorInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateRequestValidatorInput
+        | _models.CreateRequestValidatorInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateRequestValidatorOutput: ...
+
+    @_overload
+    async def create_request_validator(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateRequestValidatorInputDict],
     ) -> CreateRequestValidatorOutput:
         """
         Creates a RequestValidator of a given RestApi.
 
         Args:
-            input:
-                An instance of `CreateRequestValidatorInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -494,17 +570,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `CreateRequestValidatorOutput`.
         """
-        return await self._invoke(input, _models.CREATE_REQUEST_VALIDATOR, [], plugins)
 
+    async def create_request_validator(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateRequestValidatorOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_REQUEST_VALIDATOR, args, kwargs),
+            _models.CREATE_REQUEST_VALIDATOR,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_resource(
-        self, input: CreateResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateResourceInput | _models.CreateResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateResourceOutput: ...
+
+    @_overload
+    async def create_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateResourceInputDict],
     ) -> CreateResourceOutput:
         """
         Creates a Resource resource.
 
         Args:
-            input:
-                An instance of `CreateResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -514,17 +611,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `CreateResourceOutput`.
         """
-        return await self._invoke(input, _models.CREATE_RESOURCE, [], plugins)
 
+    async def create_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateResourceOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_RESOURCE, args, kwargs),
+            _models.CREATE_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_rest_api(
-        self, input: CreateRestApiInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateRestApiInput | _models.CreateRestApiInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateRestApiOutput: ...
+
+    @_overload
+    async def create_rest_api(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateRestApiInputDict],
     ) -> CreateRestApiOutput:
         """
         Creates a new RestApi resource.
 
         Args:
-            input:
-                An instance of `CreateRestApiInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -534,18 +652,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `CreateRestApiOutput`.
         """
-        return await self._invoke(input, _models.CREATE_REST_API, [], plugins)
 
+    async def create_rest_api(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateRestApiOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_REST_API, args, kwargs),
+            _models.CREATE_REST_API,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_stage(
-        self, input: CreateStageInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateStageInput | _models.CreateStageInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateStageOutput: ...
+
+    @_overload
+    async def create_stage(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateStageInputDict],
     ) -> CreateStageOutput:
         """
         Creates a new Stage resource that references a pre-existing Deployment
         for the API.
 
         Args:
-            input:
-                An instance of `CreateStageInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -555,18 +694,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `CreateStageOutput`.
         """
-        return await self._invoke(input, _models.CREATE_STAGE, [], plugins)
 
+    async def create_stage(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateStageOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_STAGE, args, kwargs),
+            _models.CREATE_STAGE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_usage_plan(
-        self, input: CreateUsagePlanInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateUsagePlanInput | _models.CreateUsagePlanInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateUsagePlanOutput: ...
+
+    @_overload
+    async def create_usage_plan(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateUsagePlanInputDict],
     ) -> CreateUsagePlanOutput:
         """
         Creates a usage plan with the throttle and quota limits, as well as the
         associated API stages, specified in the payload.
 
         Args:
-            input:
-                An instance of `CreateUsagePlanInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -576,17 +736,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `CreateUsagePlanOutput`.
         """
-        return await self._invoke(input, _models.CREATE_USAGE_PLAN, [], plugins)
 
+    async def create_usage_plan(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateUsagePlanOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_USAGE_PLAN, args, kwargs),
+            _models.CREATE_USAGE_PLAN,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_usage_plan_key(
-        self, input: CreateUsagePlanKeyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateUsagePlanKeyInput | _models.CreateUsagePlanKeyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateUsagePlanKeyOutput: ...
+
+    @_overload
+    async def create_usage_plan_key(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateUsagePlanKeyInputDict],
     ) -> CreateUsagePlanKeyOutput:
         """
         Creates a usage plan key for adding an existing API key to a usage plan.
 
         Args:
-            input:
-                An instance of `CreateUsagePlanKeyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -596,10 +777,33 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `CreateUsagePlanKeyOutput`.
         """
-        return await self._invoke(input, _models.CREATE_USAGE_PLAN_KEY, [], plugins)
 
+    async def create_usage_plan_key(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateUsagePlanKeyOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_USAGE_PLAN_KEY, args, kwargs),
+            _models.CREATE_USAGE_PLAN_KEY,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_vpc_link(
-        self, input: CreateVpcLinkInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateVpcLinkInput | _models.CreateVpcLinkInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateVpcLinkOutput: ...
+
+    @_overload
+    async def create_vpc_link(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateVpcLinkInputDict],
     ) -> CreateVpcLinkOutput:
         """
         Creates a VPC link, under the caller's account in a selected region, in
@@ -608,8 +812,6 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         update VPC Endpoint services.
 
         Args:
-            input:
-                An instance of `CreateVpcLinkInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -619,17 +821,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `CreateVpcLinkOutput`.
         """
-        return await self._invoke(input, _models.CREATE_VPC_LINK, [], plugins)
 
+    async def create_vpc_link(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateVpcLinkOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_VPC_LINK, args, kwargs),
+            _models.CREATE_VPC_LINK,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_api_key(
-        self, input: DeleteApiKeyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteApiKeyInput | _models.DeleteApiKeyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteApiKeyOutput: ...
+
+    @_overload
+    async def delete_api_key(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteApiKeyInputDict],
     ) -> DeleteApiKeyOutput:
         """
         Deletes the ApiKey resource.
 
         Args:
-            input:
-                An instance of `DeleteApiKeyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -639,17 +862,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `DeleteApiKeyOutput`.
         """
-        return await self._invoke(input, _models.DELETE_API_KEY, [], plugins)
 
+    async def delete_api_key(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteApiKeyOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_API_KEY, args, kwargs),
+            _models.DELETE_API_KEY,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_authorizer(
-        self, input: DeleteAuthorizerInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteAuthorizerInput | _models.DeleteAuthorizerInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteAuthorizerOutput: ...
+
+    @_overload
+    async def delete_authorizer(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteAuthorizerInputDict],
     ) -> DeleteAuthorizerOutput:
         """
         Deletes an existing Authorizer resource.
 
         Args:
-            input:
-                An instance of `DeleteAuthorizerInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -659,17 +903,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `DeleteAuthorizerOutput`.
         """
-        return await self._invoke(input, _models.DELETE_AUTHORIZER, [], plugins)
 
+    async def delete_authorizer(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteAuthorizerOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_AUTHORIZER, args, kwargs),
+            _models.DELETE_AUTHORIZER,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_base_path_mapping(
-        self, input: DeleteBasePathMappingInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteBasePathMappingInput
+        | _models.DeleteBasePathMappingInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteBasePathMappingOutput: ...
+
+    @_overload
+    async def delete_base_path_mapping(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteBasePathMappingInputDict],
     ) -> DeleteBasePathMappingOutput:
         """
         Deletes the BasePathMapping resource.
 
         Args:
-            input:
-                An instance of `DeleteBasePathMappingInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -679,17 +945,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `DeleteBasePathMappingOutput`.
         """
-        return await self._invoke(input, _models.DELETE_BASE_PATH_MAPPING, [], plugins)
 
+    async def delete_base_path_mapping(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteBasePathMappingOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_BASE_PATH_MAPPING, args, kwargs),
+            _models.DELETE_BASE_PATH_MAPPING,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_client_certificate(
-        self, input: DeleteClientCertificateInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteClientCertificateInput
+        | _models.DeleteClientCertificateInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteClientCertificateOutput: ...
+
+    @_overload
+    async def delete_client_certificate(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteClientCertificateInputDict],
     ) -> DeleteClientCertificateOutput:
         """
         Deletes the ClientCertificate resource.
 
         Args:
-            input:
-                An instance of `DeleteClientCertificateInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -699,18 +987,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `DeleteClientCertificateOutput`.
         """
-        return await self._invoke(input, _models.DELETE_CLIENT_CERTIFICATE, [], plugins)
 
+    async def delete_client_certificate(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteClientCertificateOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_CLIENT_CERTIFICATE, args, kwargs),
+            _models.DELETE_CLIENT_CERTIFICATE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_deployment(
-        self, input: DeleteDeploymentInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteDeploymentInput | _models.DeleteDeploymentInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteDeploymentOutput: ...
+
+    @_overload
+    async def delete_deployment(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteDeploymentInputDict],
     ) -> DeleteDeploymentOutput:
         """
         Deletes a Deployment resource. Deleting a deployment will only succeed
         if there are no Stage resources associated with it.
 
         Args:
-            input:
-                An instance of `DeleteDeploymentInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -720,17 +1029,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `DeleteDeploymentOutput`.
         """
-        return await self._invoke(input, _models.DELETE_DEPLOYMENT, [], plugins)
 
+    async def delete_deployment(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteDeploymentOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_DEPLOYMENT, args, kwargs),
+            _models.DELETE_DEPLOYMENT,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_documentation_part(
-        self, input: DeleteDocumentationPartInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteDocumentationPartInput
+        | _models.DeleteDocumentationPartInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteDocumentationPartOutput: ...
+
+    @_overload
+    async def delete_documentation_part(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteDocumentationPartInputDict],
     ) -> DeleteDocumentationPartOutput:
         """
         Deletes a documentation part
 
         Args:
-            input:
-                An instance of `DeleteDocumentationPartInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -740,19 +1071,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `DeleteDocumentationPartOutput`.
         """
-        return await self._invoke(input, _models.DELETE_DOCUMENTATION_PART, [], plugins)
 
+    async def delete_documentation_part(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteDocumentationPartOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_DOCUMENTATION_PART, args, kwargs),
+            _models.DELETE_DOCUMENTATION_PART,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_documentation_version(
         self,
-        input: DeleteDocumentationVersionInput,
+        request: _models.DeleteDocumentationVersionInput
+        | _models.DeleteDocumentationVersionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteDocumentationVersionOutput: ...
+
+    @_overload
+    async def delete_documentation_version(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteDocumentationVersionInputDict],
     ) -> DeleteDocumentationVersionOutput:
         """
         Deletes a documentation version.
 
         Args:
-            input:
-                An instance of `DeleteDocumentationVersionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -762,19 +1113,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `DeleteDocumentationVersionOutput`.
         """
+
+    async def delete_documentation_version(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteDocumentationVersionOutput:
         return await self._invoke(
-            input, _models.DELETE_DOCUMENTATION_VERSION, [], plugins
+            self._select_input(_models.DELETE_DOCUMENTATION_VERSION, args, kwargs),
+            _models.DELETE_DOCUMENTATION_VERSION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def delete_domain_name(
-        self, input: DeleteDomainNameInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteDomainNameInput | _models.DeleteDomainNameInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteDomainNameOutput: ...
+
+    @_overload
+    async def delete_domain_name(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteDomainNameInputDict],
     ) -> DeleteDomainNameOutput:
         """
         Deletes the DomainName resource.
 
         Args:
-            input:
-                An instance of `DeleteDomainNameInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -784,12 +1154,34 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `DeleteDomainNameOutput`.
         """
-        return await self._invoke(input, _models.DELETE_DOMAIN_NAME, [], plugins)
 
+    async def delete_domain_name(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteDomainNameOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_DOMAIN_NAME, args, kwargs),
+            _models.DELETE_DOMAIN_NAME,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_domain_name_access_association(
         self,
-        input: DeleteDomainNameAccessAssociationInput,
+        request: _models.DeleteDomainNameAccessAssociationInput
+        | _models.DeleteDomainNameAccessAssociationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteDomainNameAccessAssociationOutput: ...
+
+    @_overload
+    async def delete_domain_name_access_association(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteDomainNameAccessAssociationInputDict],
     ) -> DeleteDomainNameAccessAssociationOutput:
         """
         Deletes the DomainNameAccessAssociation resource.
@@ -800,8 +1192,6 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         RejectDomainNameAccessAssociation operation.
 
         Args:
-            input:
-                An instance of `DeleteDomainNameAccessAssociationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -811,20 +1201,42 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `DeleteDomainNameAccessAssociationOutput`.
         """
+
+    async def delete_domain_name_access_association(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteDomainNameAccessAssociationOutput:
         return await self._invoke(
-            input, _models.DELETE_DOMAIN_NAME_ACCESS_ASSOCIATION, [], plugins
+            self._select_input(
+                _models.DELETE_DOMAIN_NAME_ACCESS_ASSOCIATION, args, kwargs
+            ),
+            _models.DELETE_DOMAIN_NAME_ACCESS_ASSOCIATION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def delete_gateway_response(
-        self, input: DeleteGatewayResponseInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteGatewayResponseInput
+        | _models.DeleteGatewayResponseInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteGatewayResponseOutput: ...
+
+    @_overload
+    async def delete_gateway_response(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteGatewayResponseInputDict],
     ) -> DeleteGatewayResponseOutput:
         """
         Clears any customization of a GatewayResponse of a specified response
         type on the given RestApi and resets it with the default settings.
 
         Args:
-            input:
-                An instance of `DeleteGatewayResponseInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -834,17 +1246,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `DeleteGatewayResponseOutput`.
         """
-        return await self._invoke(input, _models.DELETE_GATEWAY_RESPONSE, [], plugins)
 
+    async def delete_gateway_response(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteGatewayResponseOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_GATEWAY_RESPONSE, args, kwargs),
+            _models.DELETE_GATEWAY_RESPONSE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_integration(
-        self, input: DeleteIntegrationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteIntegrationInput | _models.DeleteIntegrationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteIntegrationOutput: ...
+
+    @_overload
+    async def delete_integration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteIntegrationInputDict],
     ) -> DeleteIntegrationOutput:
         """
         Represents a delete integration.
 
         Args:
-            input:
-                An instance of `DeleteIntegrationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -854,17 +1287,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `DeleteIntegrationOutput`.
         """
-        return await self._invoke(input, _models.DELETE_INTEGRATION, [], plugins)
 
+    async def delete_integration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteIntegrationOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_INTEGRATION, args, kwargs),
+            _models.DELETE_INTEGRATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_integration_response(
-        self, input: DeleteIntegrationResponseInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteIntegrationResponseInput
+        | _models.DeleteIntegrationResponseInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteIntegrationResponseOutput: ...
+
+    @_overload
+    async def delete_integration_response(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteIntegrationResponseInputDict],
     ) -> DeleteIntegrationResponseOutput:
         """
         Represents a delete integration response.
 
         Args:
-            input:
-                An instance of `DeleteIntegrationResponseInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -874,19 +1329,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `DeleteIntegrationResponseOutput`.
         """
+
+    async def delete_integration_response(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteIntegrationResponseOutput:
         return await self._invoke(
-            input, _models.DELETE_INTEGRATION_RESPONSE, [], plugins
+            self._select_input(_models.DELETE_INTEGRATION_RESPONSE, args, kwargs),
+            _models.DELETE_INTEGRATION_RESPONSE,
+            [],
+            plugins,
         )
 
+    @_overload
     async def delete_method(
-        self, input: DeleteMethodInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteMethodInput | _models.DeleteMethodInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteMethodOutput: ...
+
+    @_overload
+    async def delete_method(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteMethodInputDict],
     ) -> DeleteMethodOutput:
         """
         Deletes an existing Method resource.
 
         Args:
-            input:
-                An instance of `DeleteMethodInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -896,17 +1370,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `DeleteMethodOutput`.
         """
-        return await self._invoke(input, _models.DELETE_METHOD, [], plugins)
 
+    async def delete_method(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteMethodOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_METHOD, args, kwargs),
+            _models.DELETE_METHOD,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_method_response(
-        self, input: DeleteMethodResponseInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteMethodResponseInput
+        | _models.DeleteMethodResponseInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteMethodResponseOutput: ...
+
+    @_overload
+    async def delete_method_response(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteMethodResponseInputDict],
     ) -> DeleteMethodResponseOutput:
         """
         Deletes an existing MethodResponse resource.
 
         Args:
-            input:
-                An instance of `DeleteMethodResponseInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -916,17 +1412,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `DeleteMethodResponseOutput`.
         """
-        return await self._invoke(input, _models.DELETE_METHOD_RESPONSE, [], plugins)
 
+    async def delete_method_response(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteMethodResponseOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_METHOD_RESPONSE, args, kwargs),
+            _models.DELETE_METHOD_RESPONSE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_model(
-        self, input: DeleteModelInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteModelInput | _models.DeleteModelInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteModelOutput: ...
+
+    @_overload
+    async def delete_model(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteModelInputDict],
     ) -> DeleteModelOutput:
         """
         Deletes a model.
 
         Args:
-            input:
-                An instance of `DeleteModelInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -936,17 +1453,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `DeleteModelOutput`.
         """
-        return await self._invoke(input, _models.DELETE_MODEL, [], plugins)
 
+    async def delete_model(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteModelOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_MODEL, args, kwargs),
+            _models.DELETE_MODEL,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_request_validator(
-        self, input: DeleteRequestValidatorInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteRequestValidatorInput
+        | _models.DeleteRequestValidatorInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteRequestValidatorOutput: ...
+
+    @_overload
+    async def delete_request_validator(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteRequestValidatorInputDict],
     ) -> DeleteRequestValidatorOutput:
         """
         Deletes a RequestValidator of a given RestApi.
 
         Args:
-            input:
-                An instance of `DeleteRequestValidatorInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -956,17 +1495,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `DeleteRequestValidatorOutput`.
         """
-        return await self._invoke(input, _models.DELETE_REQUEST_VALIDATOR, [], plugins)
 
+    async def delete_request_validator(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteRequestValidatorOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_REQUEST_VALIDATOR, args, kwargs),
+            _models.DELETE_REQUEST_VALIDATOR,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_resource(
-        self, input: DeleteResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteResourceInput | _models.DeleteResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteResourceOutput: ...
+
+    @_overload
+    async def delete_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteResourceInputDict],
     ) -> DeleteResourceOutput:
         """
         Deletes a Resource resource.
 
         Args:
-            input:
-                An instance of `DeleteResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -976,17 +1536,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `DeleteResourceOutput`.
         """
-        return await self._invoke(input, _models.DELETE_RESOURCE, [], plugins)
 
+    async def delete_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteResourceOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_RESOURCE, args, kwargs),
+            _models.DELETE_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_rest_api(
-        self, input: DeleteRestApiInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteRestApiInput | _models.DeleteRestApiInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteRestApiOutput: ...
+
+    @_overload
+    async def delete_rest_api(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteRestApiInputDict],
     ) -> DeleteRestApiOutput:
         """
         Deletes the specified API.
 
         Args:
-            input:
-                An instance of `DeleteRestApiInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -996,17 +1577,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `DeleteRestApiOutput`.
         """
-        return await self._invoke(input, _models.DELETE_REST_API, [], plugins)
 
+    async def delete_rest_api(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteRestApiOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_REST_API, args, kwargs),
+            _models.DELETE_REST_API,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_stage(
-        self, input: DeleteStageInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteStageInput | _models.DeleteStageInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteStageOutput: ...
+
+    @_overload
+    async def delete_stage(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteStageInputDict],
     ) -> DeleteStageOutput:
         """
         Deletes a Stage resource.
 
         Args:
-            input:
-                An instance of `DeleteStageInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1016,17 +1618,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `DeleteStageOutput`.
         """
-        return await self._invoke(input, _models.DELETE_STAGE, [], plugins)
 
+    async def delete_stage(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteStageOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_STAGE, args, kwargs),
+            _models.DELETE_STAGE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_usage_plan(
-        self, input: DeleteUsagePlanInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteUsagePlanInput | _models.DeleteUsagePlanInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteUsagePlanOutput: ...
+
+    @_overload
+    async def delete_usage_plan(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteUsagePlanInputDict],
     ) -> DeleteUsagePlanOutput:
         """
         Deletes a usage plan of a given plan Id.
 
         Args:
-            input:
-                An instance of `DeleteUsagePlanInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1036,18 +1659,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `DeleteUsagePlanOutput`.
         """
-        return await self._invoke(input, _models.DELETE_USAGE_PLAN, [], plugins)
 
+    async def delete_usage_plan(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteUsagePlanOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_USAGE_PLAN, args, kwargs),
+            _models.DELETE_USAGE_PLAN,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_usage_plan_key(
-        self, input: DeleteUsagePlanKeyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteUsagePlanKeyInput | _models.DeleteUsagePlanKeyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteUsagePlanKeyOutput: ...
+
+    @_overload
+    async def delete_usage_plan_key(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteUsagePlanKeyInputDict],
     ) -> DeleteUsagePlanKeyOutput:
         """
         Deletes a usage plan key and remove the underlying API key from the
         associated usage plan.
 
         Args:
-            input:
-                An instance of `DeleteUsagePlanKeyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1057,17 +1701,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `DeleteUsagePlanKeyOutput`.
         """
-        return await self._invoke(input, _models.DELETE_USAGE_PLAN_KEY, [], plugins)
 
+    async def delete_usage_plan_key(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteUsagePlanKeyOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_USAGE_PLAN_KEY, args, kwargs),
+            _models.DELETE_USAGE_PLAN_KEY,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_vpc_link(
-        self, input: DeleteVpcLinkInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteVpcLinkInput | _models.DeleteVpcLinkInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteVpcLinkOutput: ...
+
+    @_overload
+    async def delete_vpc_link(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteVpcLinkInputDict],
     ) -> DeleteVpcLinkOutput:
         """
         Deletes an existing VpcLink of a specified identifier.
 
         Args:
-            input:
-                An instance of `DeleteVpcLinkInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1077,19 +1742,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `DeleteVpcLinkOutput`.
         """
-        return await self._invoke(input, _models.DELETE_VPC_LINK, [], plugins)
 
+    async def delete_vpc_link(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteVpcLinkOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_VPC_LINK, args, kwargs),
+            _models.DELETE_VPC_LINK,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def flush_stage_authorizers_cache(
         self,
-        input: FlushStageAuthorizersCacheInput,
+        request: _models.FlushStageAuthorizersCacheInput
+        | _models.FlushStageAuthorizersCacheInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> FlushStageAuthorizersCacheOutput: ...
+
+    @_overload
+    async def flush_stage_authorizers_cache(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.FlushStageAuthorizersCacheInputDict],
     ) -> FlushStageAuthorizersCacheOutput:
         """
         Flushes all authorizer cache entries on a stage.
 
         Args:
-            input:
-                An instance of `FlushStageAuthorizersCacheInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1099,19 +1784,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `FlushStageAuthorizersCacheOutput`.
         """
+
+    async def flush_stage_authorizers_cache(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> FlushStageAuthorizersCacheOutput:
         return await self._invoke(
-            input, _models.FLUSH_STAGE_AUTHORIZERS_CACHE, [], plugins
+            self._select_input(_models.FLUSH_STAGE_AUTHORIZERS_CACHE, args, kwargs),
+            _models.FLUSH_STAGE_AUTHORIZERS_CACHE,
+            [],
+            plugins,
         )
 
+    @_overload
     async def flush_stage_cache(
-        self, input: FlushStageCacheInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.FlushStageCacheInput | _models.FlushStageCacheInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> FlushStageCacheOutput: ...
+
+    @_overload
+    async def flush_stage_cache(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.FlushStageCacheInputDict],
     ) -> FlushStageCacheOutput:
         """
         Flushes a stage's cache.
 
         Args:
-            input:
-                An instance of `FlushStageCacheInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1121,17 +1825,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `FlushStageCacheOutput`.
         """
-        return await self._invoke(input, _models.FLUSH_STAGE_CACHE, [], plugins)
 
+    async def flush_stage_cache(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> FlushStageCacheOutput:
+        return await self._invoke(
+            self._select_input(_models.FLUSH_STAGE_CACHE, args, kwargs),
+            _models.FLUSH_STAGE_CACHE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def generate_client_certificate(
-        self, input: GenerateClientCertificateInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GenerateClientCertificateInput
+        | _models.GenerateClientCertificateInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GenerateClientCertificateOutput: ...
+
+    @_overload
+    async def generate_client_certificate(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GenerateClientCertificateInputDict],
     ) -> GenerateClientCertificateOutput:
         """
         Generates a ClientCertificate resource.
 
         Args:
-            input:
-                An instance of `GenerateClientCertificateInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1141,19 +1867,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GenerateClientCertificateOutput`.
         """
+
+    async def generate_client_certificate(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GenerateClientCertificateOutput:
         return await self._invoke(
-            input, _models.GENERATE_CLIENT_CERTIFICATE, [], plugins
+            self._select_input(_models.GENERATE_CLIENT_CERTIFICATE, args, kwargs),
+            _models.GENERATE_CLIENT_CERTIFICATE,
+            [],
+            plugins,
         )
 
+    @_overload
     async def get_account(
-        self, input: GetAccountInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetAccountInput | _models.GetAccountInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetAccountOutput: ...
+
+    @_overload
+    async def get_account(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetAccountInputDict],
     ) -> GetAccountOutput:
         """
         Gets information about the current Account resource.
 
         Args:
-            input:
-                An instance of `GetAccountInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1163,17 +1908,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetAccountOutput`.
         """
-        return await self._invoke(input, _models.GET_ACCOUNT, [], plugins)
 
+    async def get_account(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetAccountOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_ACCOUNT, args, kwargs),
+            _models.GET_ACCOUNT,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_api_key(
-        self, input: GetApiKeyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetApiKeyInput | _models.GetApiKeyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetApiKeyOutput: ...
+
+    @_overload
+    async def get_api_key(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetApiKeyInputDict],
     ) -> GetApiKeyOutput:
         """
         Gets information about the current ApiKey resource.
 
         Args:
-            input:
-                An instance of `GetApiKeyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1183,17 +1949,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetApiKeyOutput`.
         """
-        return await self._invoke(input, _models.GET_API_KEY, [], plugins)
 
+    async def get_api_key(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetApiKeyOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_API_KEY, args, kwargs),
+            _models.GET_API_KEY,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_api_keys(
-        self, input: GetApiKeysInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetApiKeysInput | _models.GetApiKeysInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetApiKeysOutput: ...
+
+    @_overload
+    async def get_api_keys(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetApiKeysInputDict],
     ) -> GetApiKeysOutput:
         """
         Gets information about the current ApiKeys resource.
 
         Args:
-            input:
-                An instance of `GetApiKeysInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1203,17 +1990,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetApiKeysOutput`.
         """
-        return await self._invoke(input, _models.GET_API_KEYS, [], plugins)
 
+    async def get_api_keys(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetApiKeysOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_API_KEYS, args, kwargs),
+            _models.GET_API_KEYS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_authorizer(
-        self, input: GetAuthorizerInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetAuthorizerInput | _models.GetAuthorizerInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetAuthorizerOutput: ...
+
+    @_overload
+    async def get_authorizer(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetAuthorizerInputDict],
     ) -> GetAuthorizerOutput:
         """
         Describe an existing Authorizer resource.
 
         Args:
-            input:
-                An instance of `GetAuthorizerInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1223,17 +2031,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetAuthorizerOutput`.
         """
-        return await self._invoke(input, _models.GET_AUTHORIZER, [], plugins)
 
+    async def get_authorizer(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetAuthorizerOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_AUTHORIZER, args, kwargs),
+            _models.GET_AUTHORIZER,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_authorizers(
-        self, input: GetAuthorizersInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetAuthorizersInput | _models.GetAuthorizersInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetAuthorizersOutput: ...
+
+    @_overload
+    async def get_authorizers(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetAuthorizersInputDict],
     ) -> GetAuthorizersOutput:
         """
         Describe an existing Authorizers resource.
 
         Args:
-            input:
-                An instance of `GetAuthorizersInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1243,17 +2072,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetAuthorizersOutput`.
         """
-        return await self._invoke(input, _models.GET_AUTHORIZERS, [], plugins)
 
+    async def get_authorizers(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetAuthorizersOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_AUTHORIZERS, args, kwargs),
+            _models.GET_AUTHORIZERS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_base_path_mapping(
-        self, input: GetBasePathMappingInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetBasePathMappingInput | _models.GetBasePathMappingInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetBasePathMappingOutput: ...
+
+    @_overload
+    async def get_base_path_mapping(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetBasePathMappingInputDict],
     ) -> GetBasePathMappingOutput:
         """
         Describe a BasePathMapping resource.
 
         Args:
-            input:
-                An instance of `GetBasePathMappingInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1263,17 +2113,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetBasePathMappingOutput`.
         """
-        return await self._invoke(input, _models.GET_BASE_PATH_MAPPING, [], plugins)
 
+    async def get_base_path_mapping(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetBasePathMappingOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_BASE_PATH_MAPPING, args, kwargs),
+            _models.GET_BASE_PATH_MAPPING,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_base_path_mappings(
-        self, input: GetBasePathMappingsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetBasePathMappingsInput
+        | _models.GetBasePathMappingsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetBasePathMappingsOutput: ...
+
+    @_overload
+    async def get_base_path_mappings(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetBasePathMappingsInputDict],
     ) -> GetBasePathMappingsOutput:
         """
         Represents a collection of BasePathMapping resources.
 
         Args:
-            input:
-                An instance of `GetBasePathMappingsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1283,17 +2155,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetBasePathMappingsOutput`.
         """
-        return await self._invoke(input, _models.GET_BASE_PATH_MAPPINGS, [], plugins)
 
+    async def get_base_path_mappings(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetBasePathMappingsOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_BASE_PATH_MAPPINGS, args, kwargs),
+            _models.GET_BASE_PATH_MAPPINGS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_client_certificate(
-        self, input: GetClientCertificateInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetClientCertificateInput
+        | _models.GetClientCertificateInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetClientCertificateOutput: ...
+
+    @_overload
+    async def get_client_certificate(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetClientCertificateInputDict],
     ) -> GetClientCertificateOutput:
         """
         Gets information about the current ClientCertificate resource.
 
         Args:
-            input:
-                An instance of `GetClientCertificateInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1303,17 +2197,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetClientCertificateOutput`.
         """
-        return await self._invoke(input, _models.GET_CLIENT_CERTIFICATE, [], plugins)
 
+    async def get_client_certificate(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetClientCertificateOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_CLIENT_CERTIFICATE, args, kwargs),
+            _models.GET_CLIENT_CERTIFICATE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_client_certificates(
-        self, input: GetClientCertificatesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetClientCertificatesInput
+        | _models.GetClientCertificatesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetClientCertificatesOutput: ...
+
+    @_overload
+    async def get_client_certificates(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetClientCertificatesInputDict],
     ) -> GetClientCertificatesOutput:
         """
         Gets a collection of ClientCertificate resources.
 
         Args:
-            input:
-                An instance of `GetClientCertificatesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1323,17 +2239,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetClientCertificatesOutput`.
         """
-        return await self._invoke(input, _models.GET_CLIENT_CERTIFICATES, [], plugins)
 
+    async def get_client_certificates(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetClientCertificatesOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_CLIENT_CERTIFICATES, args, kwargs),
+            _models.GET_CLIENT_CERTIFICATES,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_deployment(
-        self, input: GetDeploymentInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetDeploymentInput | _models.GetDeploymentInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetDeploymentOutput: ...
+
+    @_overload
+    async def get_deployment(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetDeploymentInputDict],
     ) -> GetDeploymentOutput:
         """
         Gets information about a Deployment resource.
 
         Args:
-            input:
-                An instance of `GetDeploymentInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1343,17 +2280,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetDeploymentOutput`.
         """
-        return await self._invoke(input, _models.GET_DEPLOYMENT, [], plugins)
 
+    async def get_deployment(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetDeploymentOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_DEPLOYMENT, args, kwargs),
+            _models.GET_DEPLOYMENT,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_deployments(
-        self, input: GetDeploymentsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetDeploymentsInput | _models.GetDeploymentsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetDeploymentsOutput: ...
+
+    @_overload
+    async def get_deployments(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetDeploymentsInputDict],
     ) -> GetDeploymentsOutput:
         """
         Gets information about a Deployments collection.
 
         Args:
-            input:
-                An instance of `GetDeploymentsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1363,17 +2321,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetDeploymentsOutput`.
         """
-        return await self._invoke(input, _models.GET_DEPLOYMENTS, [], plugins)
 
+    async def get_deployments(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetDeploymentsOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_DEPLOYMENTS, args, kwargs),
+            _models.GET_DEPLOYMENTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_documentation_part(
-        self, input: GetDocumentationPartInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetDocumentationPartInput
+        | _models.GetDocumentationPartInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetDocumentationPartOutput: ...
+
+    @_overload
+    async def get_documentation_part(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetDocumentationPartInputDict],
     ) -> GetDocumentationPartOutput:
         """
         Gets a documentation part.
 
         Args:
-            input:
-                An instance of `GetDocumentationPartInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1383,17 +2363,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetDocumentationPartOutput`.
         """
-        return await self._invoke(input, _models.GET_DOCUMENTATION_PART, [], plugins)
 
+    async def get_documentation_part(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetDocumentationPartOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_DOCUMENTATION_PART, args, kwargs),
+            _models.GET_DOCUMENTATION_PART,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_documentation_parts(
-        self, input: GetDocumentationPartsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetDocumentationPartsInput
+        | _models.GetDocumentationPartsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetDocumentationPartsOutput: ...
+
+    @_overload
+    async def get_documentation_parts(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetDocumentationPartsInputDict],
     ) -> GetDocumentationPartsOutput:
         """
         Gets documentation parts.
 
         Args:
-            input:
-                An instance of `GetDocumentationPartsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1403,17 +2405,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetDocumentationPartsOutput`.
         """
-        return await self._invoke(input, _models.GET_DOCUMENTATION_PARTS, [], plugins)
 
+    async def get_documentation_parts(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetDocumentationPartsOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_DOCUMENTATION_PARTS, args, kwargs),
+            _models.GET_DOCUMENTATION_PARTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_documentation_version(
-        self, input: GetDocumentationVersionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetDocumentationVersionInput
+        | _models.GetDocumentationVersionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetDocumentationVersionOutput: ...
+
+    @_overload
+    async def get_documentation_version(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetDocumentationVersionInputDict],
     ) -> GetDocumentationVersionOutput:
         """
         Gets a documentation version.
 
         Args:
-            input:
-                An instance of `GetDocumentationVersionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1423,17 +2447,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetDocumentationVersionOutput`.
         """
-        return await self._invoke(input, _models.GET_DOCUMENTATION_VERSION, [], plugins)
 
+    async def get_documentation_version(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetDocumentationVersionOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_DOCUMENTATION_VERSION, args, kwargs),
+            _models.GET_DOCUMENTATION_VERSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_documentation_versions(
-        self, input: GetDocumentationVersionsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetDocumentationVersionsInput
+        | _models.GetDocumentationVersionsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetDocumentationVersionsOutput: ...
+
+    @_overload
+    async def get_documentation_versions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetDocumentationVersionsInputDict],
     ) -> GetDocumentationVersionsOutput:
         """
         Gets documentation versions.
 
         Args:
-            input:
-                An instance of `GetDocumentationVersionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1443,20 +2489,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetDocumentationVersionsOutput`.
         """
+
+    async def get_documentation_versions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetDocumentationVersionsOutput:
         return await self._invoke(
-            input, _models.GET_DOCUMENTATION_VERSIONS, [], plugins
+            self._select_input(_models.GET_DOCUMENTATION_VERSIONS, args, kwargs),
+            _models.GET_DOCUMENTATION_VERSIONS,
+            [],
+            plugins,
         )
 
+    @_overload
     async def get_domain_name(
-        self, input: GetDomainNameInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetDomainNameInput | _models.GetDomainNameInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetDomainNameOutput: ...
+
+    @_overload
+    async def get_domain_name(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetDomainNameInputDict],
     ) -> GetDomainNameOutput:
         """
         Represents a domain name that is contained in a simpler, more intuitive
         URL that can be called.
 
         Args:
-            input:
-                An instance of `GetDomainNameInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1466,19 +2531,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetDomainNameOutput`.
         """
-        return await self._invoke(input, _models.GET_DOMAIN_NAME, [], plugins)
 
+    async def get_domain_name(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetDomainNameOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_DOMAIN_NAME, args, kwargs),
+            _models.GET_DOMAIN_NAME,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_domain_name_access_associations(
         self,
-        input: GetDomainNameAccessAssociationsInput,
+        request: _models.GetDomainNameAccessAssociationsInput
+        | _models.GetDomainNameAccessAssociationsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetDomainNameAccessAssociationsOutput: ...
+
+    @_overload
+    async def get_domain_name_access_associations(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetDomainNameAccessAssociationsInputDict],
     ) -> GetDomainNameAccessAssociationsOutput:
         """
         Represents a collection on DomainNameAccessAssociations resources.
 
         Args:
-            input:
-                An instance of `GetDomainNameAccessAssociationsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1488,19 +2573,40 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetDomainNameAccessAssociationsOutput`.
         """
+
+    async def get_domain_name_access_associations(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetDomainNameAccessAssociationsOutput:
         return await self._invoke(
-            input, _models.GET_DOMAIN_NAME_ACCESS_ASSOCIATIONS, [], plugins
+            self._select_input(
+                _models.GET_DOMAIN_NAME_ACCESS_ASSOCIATIONS, args, kwargs
+            ),
+            _models.GET_DOMAIN_NAME_ACCESS_ASSOCIATIONS,
+            [],
+            plugins,
         )
 
+    @_overload
     async def get_domain_names(
-        self, input: GetDomainNamesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetDomainNamesInput | _models.GetDomainNamesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetDomainNamesOutput: ...
+
+    @_overload
+    async def get_domain_names(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetDomainNamesInputDict],
     ) -> GetDomainNamesOutput:
         """
         Represents a collection of DomainName resources.
 
         Args:
-            input:
-                An instance of `GetDomainNamesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1510,17 +2616,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetDomainNamesOutput`.
         """
-        return await self._invoke(input, _models.GET_DOMAIN_NAMES, [], plugins)
 
+    async def get_domain_names(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetDomainNamesOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_DOMAIN_NAMES, args, kwargs),
+            _models.GET_DOMAIN_NAMES,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_export(
-        self, input: GetExportInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetExportInput | _models.GetExportInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetExportOutput: ...
+
+    @_overload
+    async def get_export(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetExportInputDict],
     ) -> GetExportOutput:
         """
         Exports a deployed version of a RestApi in a specified format.
 
         Args:
-            input:
-                An instance of `GetExportInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1530,18 +2657,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetExportOutput`.
         """
-        return await self._invoke(input, _models.GET_EXPORT, [], plugins)
 
+    async def get_export(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetExportOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_EXPORT, args, kwargs),
+            _models.GET_EXPORT,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_gateway_response(
-        self, input: GetGatewayResponseInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetGatewayResponseInput | _models.GetGatewayResponseInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetGatewayResponseOutput: ...
+
+    @_overload
+    async def get_gateway_response(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetGatewayResponseInputDict],
     ) -> GetGatewayResponseOutput:
         """
         Gets a GatewayResponse of a specified response type on the given
         RestApi.
 
         Args:
-            input:
-                An instance of `GetGatewayResponseInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1551,10 +2699,34 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetGatewayResponseOutput`.
         """
-        return await self._invoke(input, _models.GET_GATEWAY_RESPONSE, [], plugins)
 
+    async def get_gateway_response(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetGatewayResponseOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_GATEWAY_RESPONSE, args, kwargs),
+            _models.GET_GATEWAY_RESPONSE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_gateway_responses(
-        self, input: GetGatewayResponsesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetGatewayResponsesInput
+        | _models.GetGatewayResponsesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetGatewayResponsesOutput: ...
+
+    @_overload
+    async def get_gateway_responses(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetGatewayResponsesInputDict],
     ) -> GetGatewayResponsesOutput:
         """
         Gets the GatewayResponses collection on the given RestApi. If an API
@@ -1563,8 +2735,6 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         collection for the supported response types.
 
         Args:
-            input:
-                An instance of `GetGatewayResponsesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1574,17 +2744,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetGatewayResponsesOutput`.
         """
-        return await self._invoke(input, _models.GET_GATEWAY_RESPONSES, [], plugins)
 
+    async def get_gateway_responses(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetGatewayResponsesOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_GATEWAY_RESPONSES, args, kwargs),
+            _models.GET_GATEWAY_RESPONSES,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_integration(
-        self, input: GetIntegrationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetIntegrationInput | _models.GetIntegrationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetIntegrationOutput: ...
+
+    @_overload
+    async def get_integration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetIntegrationInputDict],
     ) -> GetIntegrationOutput:
         """
         Get the integration settings.
 
         Args:
-            input:
-                An instance of `GetIntegrationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1594,17 +2785,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetIntegrationOutput`.
         """
-        return await self._invoke(input, _models.GET_INTEGRATION, [], plugins)
 
+    async def get_integration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetIntegrationOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_INTEGRATION, args, kwargs),
+            _models.GET_INTEGRATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_integration_response(
-        self, input: GetIntegrationResponseInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetIntegrationResponseInput
+        | _models.GetIntegrationResponseInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetIntegrationResponseOutput: ...
+
+    @_overload
+    async def get_integration_response(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetIntegrationResponseInputDict],
     ) -> GetIntegrationResponseOutput:
         """
         Represents a get integration response.
 
         Args:
-            input:
-                An instance of `GetIntegrationResponseInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1614,17 +2827,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetIntegrationResponseOutput`.
         """
-        return await self._invoke(input, _models.GET_INTEGRATION_RESPONSE, [], plugins)
 
+    async def get_integration_response(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetIntegrationResponseOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_INTEGRATION_RESPONSE, args, kwargs),
+            _models.GET_INTEGRATION_RESPONSE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_method(
-        self, input: GetMethodInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetMethodInput | _models.GetMethodInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetMethodOutput: ...
+
+    @_overload
+    async def get_method(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetMethodInputDict],
     ) -> GetMethodOutput:
         """
         Describe an existing Method resource.
 
         Args:
-            input:
-                An instance of `GetMethodInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1634,17 +2868,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetMethodOutput`.
         """
-        return await self._invoke(input, _models.GET_METHOD, [], plugins)
 
+    async def get_method(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetMethodOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_METHOD, args, kwargs),
+            _models.GET_METHOD,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_method_response(
-        self, input: GetMethodResponseInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetMethodResponseInput | _models.GetMethodResponseInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetMethodResponseOutput: ...
+
+    @_overload
+    async def get_method_response(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetMethodResponseInputDict],
     ) -> GetMethodResponseOutput:
         """
         Describes a MethodResponse resource.
 
         Args:
-            input:
-                An instance of `GetMethodResponseInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1654,17 +2909,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetMethodResponseOutput`.
         """
-        return await self._invoke(input, _models.GET_METHOD_RESPONSE, [], plugins)
 
+    async def get_method_response(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetMethodResponseOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_METHOD_RESPONSE, args, kwargs),
+            _models.GET_METHOD_RESPONSE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_model(
-        self, input: GetModelInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetModelInput | _models.GetModelInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetModelOutput: ...
+
+    @_overload
+    async def get_model(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetModelInputDict],
     ) -> GetModelOutput:
         """
         Describes an existing model defined for a RestApi resource.
 
         Args:
-            input:
-                An instance of `GetModelInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1674,17 +2950,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetModelOutput`.
         """
-        return await self._invoke(input, _models.GET_MODEL, [], plugins)
 
+    async def get_model(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetModelOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_MODEL, args, kwargs),
+            _models.GET_MODEL,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_models(
-        self, input: GetModelsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetModelsInput | _models.GetModelsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetModelsOutput: ...
+
+    @_overload
+    async def get_models(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetModelsInputDict],
     ) -> GetModelsOutput:
         """
         Describes existing Models defined for a RestApi resource.
 
         Args:
-            input:
-                An instance of `GetModelsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1694,18 +2991,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetModelsOutput`.
         """
-        return await self._invoke(input, _models.GET_MODELS, [], plugins)
 
+    async def get_models(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetModelsOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_MODELS, args, kwargs),
+            _models.GET_MODELS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_model_template(
-        self, input: GetModelTemplateInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetModelTemplateInput | _models.GetModelTemplateInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetModelTemplateOutput: ...
+
+    @_overload
+    async def get_model_template(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetModelTemplateInputDict],
     ) -> GetModelTemplateOutput:
         """
         Generates a sample mapping template that can be used to transform a
         payload into the structure of a model.
 
         Args:
-            input:
-                An instance of `GetModelTemplateInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1715,17 +3033,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetModelTemplateOutput`.
         """
-        return await self._invoke(input, _models.GET_MODEL_TEMPLATE, [], plugins)
 
+    async def get_model_template(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetModelTemplateOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_MODEL_TEMPLATE, args, kwargs),
+            _models.GET_MODEL_TEMPLATE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_request_validator(
-        self, input: GetRequestValidatorInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetRequestValidatorInput
+        | _models.GetRequestValidatorInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetRequestValidatorOutput: ...
+
+    @_overload
+    async def get_request_validator(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetRequestValidatorInputDict],
     ) -> GetRequestValidatorOutput:
         """
         Gets a RequestValidator of a given RestApi.
 
         Args:
-            input:
-                An instance of `GetRequestValidatorInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1735,17 +3075,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetRequestValidatorOutput`.
         """
-        return await self._invoke(input, _models.GET_REQUEST_VALIDATOR, [], plugins)
 
+    async def get_request_validator(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetRequestValidatorOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_REQUEST_VALIDATOR, args, kwargs),
+            _models.GET_REQUEST_VALIDATOR,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_request_validators(
-        self, input: GetRequestValidatorsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetRequestValidatorsInput
+        | _models.GetRequestValidatorsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetRequestValidatorsOutput: ...
+
+    @_overload
+    async def get_request_validators(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetRequestValidatorsInputDict],
     ) -> GetRequestValidatorsOutput:
         """
         Gets the RequestValidators collection of a given RestApi.
 
         Args:
-            input:
-                An instance of `GetRequestValidatorsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1755,17 +3117,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetRequestValidatorsOutput`.
         """
-        return await self._invoke(input, _models.GET_REQUEST_VALIDATORS, [], plugins)
 
+    async def get_request_validators(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetRequestValidatorsOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_REQUEST_VALIDATORS, args, kwargs),
+            _models.GET_REQUEST_VALIDATORS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_resource(
-        self, input: GetResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetResourceInput | _models.GetResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetResourceOutput: ...
+
+    @_overload
+    async def get_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetResourceInputDict],
     ) -> GetResourceOutput:
         """
         Lists information about a resource.
 
         Args:
-            input:
-                An instance of `GetResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1775,17 +3158,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetResourceOutput`.
         """
-        return await self._invoke(input, _models.GET_RESOURCE, [], plugins)
 
+    async def get_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetResourceOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_RESOURCE, args, kwargs),
+            _models.GET_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_resources(
-        self, input: GetResourcesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetResourcesInput | _models.GetResourcesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetResourcesOutput: ...
+
+    @_overload
+    async def get_resources(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetResourcesInputDict],
     ) -> GetResourcesOutput:
         """
         Lists information about a collection of Resource resources.
 
         Args:
-            input:
-                An instance of `GetResourcesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1795,17 +3199,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetResourcesOutput`.
         """
-        return await self._invoke(input, _models.GET_RESOURCES, [], plugins)
 
+    async def get_resources(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetResourcesOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_RESOURCES, args, kwargs),
+            _models.GET_RESOURCES,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_rest_api(
-        self, input: GetRestApiInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetRestApiInput | _models.GetRestApiInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetRestApiOutput: ...
+
+    @_overload
+    async def get_rest_api(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetRestApiInputDict],
     ) -> GetRestApiOutput:
         """
         Lists the RestApi resource in the collection.
 
         Args:
-            input:
-                An instance of `GetRestApiInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1815,17 +3240,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetRestApiOutput`.
         """
-        return await self._invoke(input, _models.GET_REST_API, [], plugins)
 
+    async def get_rest_api(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetRestApiOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_REST_API, args, kwargs),
+            _models.GET_REST_API,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_rest_apis(
-        self, input: GetRestApisInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetRestApisInput | _models.GetRestApisInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetRestApisOutput: ...
+
+    @_overload
+    async def get_rest_apis(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetRestApisInputDict],
     ) -> GetRestApisOutput:
         """
         Lists the RestApis resources for your collection.
 
         Args:
-            input:
-                An instance of `GetRestApisInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1835,17 +3281,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetRestApisOutput`.
         """
-        return await self._invoke(input, _models.GET_REST_APIS, [], plugins)
 
+    async def get_rest_apis(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetRestApisOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_REST_APIS, args, kwargs),
+            _models.GET_REST_APIS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_sdk(
-        self, input: GetSdkInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetSdkInput | _models.GetSdkInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetSdkOutput: ...
+
+    @_overload
+    async def get_sdk(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetSdkInputDict],
     ) -> GetSdkOutput:
         """
         Generates a client SDK for a RestApi and Stage.
 
         Args:
-            input:
-                An instance of `GetSdkInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1855,17 +3322,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetSdkOutput`.
         """
-        return await self._invoke(input, _models.GET_SDK, [], plugins)
 
+    async def get_sdk(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetSdkOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_SDK, args, kwargs),
+            _models.GET_SDK,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_sdk_type(
-        self, input: GetSdkTypeInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetSdkTypeInput | _models.GetSdkTypeInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetSdkTypeOutput: ...
+
+    @_overload
+    async def get_sdk_type(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetSdkTypeInputDict],
     ) -> GetSdkTypeOutput:
         """
         Gets an SDK type.
 
         Args:
-            input:
-                An instance of `GetSdkTypeInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1875,17 +3363,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetSdkTypeOutput`.
         """
-        return await self._invoke(input, _models.GET_SDK_TYPE, [], plugins)
 
+    async def get_sdk_type(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetSdkTypeOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_SDK_TYPE, args, kwargs),
+            _models.GET_SDK_TYPE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_sdk_types(
-        self, input: GetSdkTypesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetSdkTypesInput | _models.GetSdkTypesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetSdkTypesOutput: ...
+
+    @_overload
+    async def get_sdk_types(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetSdkTypesInputDict],
     ) -> GetSdkTypesOutput:
         """
         Gets SDK types
 
         Args:
-            input:
-                An instance of `GetSdkTypesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1895,17 +3404,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetSdkTypesOutput`.
         """
-        return await self._invoke(input, _models.GET_SDK_TYPES, [], plugins)
 
+    async def get_sdk_types(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetSdkTypesOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_SDK_TYPES, args, kwargs),
+            _models.GET_SDK_TYPES,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_stage(
-        self, input: GetStageInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetStageInput | _models.GetStageInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetStageOutput: ...
+
+    @_overload
+    async def get_stage(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetStageInputDict],
     ) -> GetStageOutput:
         """
         Gets information about a Stage resource.
 
         Args:
-            input:
-                An instance of `GetStageInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1915,17 +3445,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetStageOutput`.
         """
-        return await self._invoke(input, _models.GET_STAGE, [], plugins)
 
+    async def get_stage(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetStageOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_STAGE, args, kwargs),
+            _models.GET_STAGE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_stages(
-        self, input: GetStagesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetStagesInput | _models.GetStagesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetStagesOutput: ...
+
+    @_overload
+    async def get_stages(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetStagesInputDict],
     ) -> GetStagesOutput:
         """
         Gets information about one or more Stage resources.
 
         Args:
-            input:
-                An instance of `GetStagesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1935,17 +3486,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetStagesOutput`.
         """
-        return await self._invoke(input, _models.GET_STAGES, [], plugins)
 
+    async def get_stages(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetStagesOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_STAGES, args, kwargs),
+            _models.GET_STAGES,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_tags(
-        self, input: GetTagsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetTagsInput | _models.GetTagsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetTagsOutput: ...
+
+    @_overload
+    async def get_tags(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetTagsInputDict],
     ) -> GetTagsOutput:
         """
         Gets the Tags collection for a given resource.
 
         Args:
-            input:
-                An instance of `GetTagsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1955,17 +3527,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetTagsOutput`.
         """
-        return await self._invoke(input, _models.GET_TAGS, [], plugins)
 
+    async def get_tags(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetTagsOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_TAGS, args, kwargs),
+            _models.GET_TAGS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_usage(
-        self, input: GetUsageInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetUsageInput | _models.GetUsageInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetUsageOutput: ...
+
+    @_overload
+    async def get_usage(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetUsageInputDict],
     ) -> GetUsageOutput:
         """
         Gets the usage data of a usage plan in a specified time interval.
 
         Args:
-            input:
-                An instance of `GetUsageInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1975,17 +3568,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetUsageOutput`.
         """
-        return await self._invoke(input, _models.GET_USAGE, [], plugins)
 
+    async def get_usage(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetUsageOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_USAGE, args, kwargs),
+            _models.GET_USAGE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_usage_plan(
-        self, input: GetUsagePlanInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetUsagePlanInput | _models.GetUsagePlanInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetUsagePlanOutput: ...
+
+    @_overload
+    async def get_usage_plan(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetUsagePlanInputDict],
     ) -> GetUsagePlanOutput:
         """
         Gets a usage plan of a given plan identifier.
 
         Args:
-            input:
-                An instance of `GetUsagePlanInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1995,17 +3609,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetUsagePlanOutput`.
         """
-        return await self._invoke(input, _models.GET_USAGE_PLAN, [], plugins)
 
+    async def get_usage_plan(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetUsagePlanOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_USAGE_PLAN, args, kwargs),
+            _models.GET_USAGE_PLAN,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_usage_plan_key(
-        self, input: GetUsagePlanKeyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetUsagePlanKeyInput | _models.GetUsagePlanKeyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetUsagePlanKeyOutput: ...
+
+    @_overload
+    async def get_usage_plan_key(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetUsagePlanKeyInputDict],
     ) -> GetUsagePlanKeyOutput:
         """
         Gets a usage plan key of a given key identifier.
 
         Args:
-            input:
-                An instance of `GetUsagePlanKeyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2015,18 +3650,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetUsagePlanKeyOutput`.
         """
-        return await self._invoke(input, _models.GET_USAGE_PLAN_KEY, [], plugins)
 
+    async def get_usage_plan_key(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetUsagePlanKeyOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_USAGE_PLAN_KEY, args, kwargs),
+            _models.GET_USAGE_PLAN_KEY,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_usage_plan_keys(
-        self, input: GetUsagePlanKeysInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetUsagePlanKeysInput | _models.GetUsagePlanKeysInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetUsagePlanKeysOutput: ...
+
+    @_overload
+    async def get_usage_plan_keys(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetUsagePlanKeysInputDict],
     ) -> GetUsagePlanKeysOutput:
         """
         Gets all the usage plan keys representing the API keys added to a
         specified usage plan.
 
         Args:
-            input:
-                An instance of `GetUsagePlanKeysInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2036,17 +3692,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetUsagePlanKeysOutput`.
         """
-        return await self._invoke(input, _models.GET_USAGE_PLAN_KEYS, [], plugins)
 
+    async def get_usage_plan_keys(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetUsagePlanKeysOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_USAGE_PLAN_KEYS, args, kwargs),
+            _models.GET_USAGE_PLAN_KEYS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_usage_plans(
-        self, input: GetUsagePlansInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetUsagePlansInput | _models.GetUsagePlansInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetUsagePlansOutput: ...
+
+    @_overload
+    async def get_usage_plans(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetUsagePlansInputDict],
     ) -> GetUsagePlansOutput:
         """
         Gets all the usage plans of the caller's account.
 
         Args:
-            input:
-                An instance of `GetUsagePlansInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2056,17 +3733,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetUsagePlansOutput`.
         """
-        return await self._invoke(input, _models.GET_USAGE_PLANS, [], plugins)
 
+    async def get_usage_plans(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetUsagePlansOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_USAGE_PLANS, args, kwargs),
+            _models.GET_USAGE_PLANS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_vpc_link(
-        self, input: GetVpcLinkInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetVpcLinkInput | _models.GetVpcLinkInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetVpcLinkOutput: ...
+
+    @_overload
+    async def get_vpc_link(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetVpcLinkInputDict],
     ) -> GetVpcLinkOutput:
         """
         Gets a specified VPC link under the caller's account in a region.
 
         Args:
-            input:
-                An instance of `GetVpcLinkInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2076,18 +3774,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetVpcLinkOutput`.
         """
-        return await self._invoke(input, _models.GET_VPC_LINK, [], plugins)
 
+    async def get_vpc_link(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetVpcLinkOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_VPC_LINK, args, kwargs),
+            _models.GET_VPC_LINK,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_vpc_links(
-        self, input: GetVpcLinksInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetVpcLinksInput | _models.GetVpcLinksInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetVpcLinksOutput: ...
+
+    @_overload
+    async def get_vpc_links(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetVpcLinksInputDict],
     ) -> GetVpcLinksOutput:
         """
         Gets the VpcLinks collection under the caller's account in a selected
         region.
 
         Args:
-            input:
-                An instance of `GetVpcLinksInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2097,17 +3816,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `GetVpcLinksOutput`.
         """
-        return await self._invoke(input, _models.GET_VPC_LINKS, [], plugins)
 
+    async def get_vpc_links(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetVpcLinksOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_VPC_LINKS, args, kwargs),
+            _models.GET_VPC_LINKS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def import_api_keys(
-        self, input: ImportApiKeysInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ImportApiKeysInput | _models.ImportApiKeysInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ImportApiKeysOutput: ...
+
+    @_overload
+    async def import_api_keys(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ImportApiKeysInputDict],
     ) -> ImportApiKeysOutput:
         """
         Import API keys from an external source, such as a CSV-formatted file.
 
         Args:
-            input:
-                An instance of `ImportApiKeysInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2117,17 +3857,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `ImportApiKeysOutput`.
         """
-        return await self._invoke(input, _models.IMPORT_API_KEYS, [], plugins)
 
+    async def import_api_keys(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ImportApiKeysOutput:
+        return await self._invoke(
+            self._select_input(_models.IMPORT_API_KEYS, args, kwargs),
+            _models.IMPORT_API_KEYS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def import_documentation_parts(
-        self, input: ImportDocumentationPartsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ImportDocumentationPartsInput
+        | _models.ImportDocumentationPartsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ImportDocumentationPartsOutput: ...
+
+    @_overload
+    async def import_documentation_parts(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ImportDocumentationPartsInputDict],
     ) -> ImportDocumentationPartsOutput:
         """
         Imports documentation parts
 
         Args:
-            input:
-                An instance of `ImportDocumentationPartsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2137,20 +3899,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `ImportDocumentationPartsOutput`.
         """
+
+    async def import_documentation_parts(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ImportDocumentationPartsOutput:
         return await self._invoke(
-            input, _models.IMPORT_DOCUMENTATION_PARTS, [], plugins
+            self._select_input(_models.IMPORT_DOCUMENTATION_PARTS, args, kwargs),
+            _models.IMPORT_DOCUMENTATION_PARTS,
+            [],
+            plugins,
         )
 
+    @_overload
     async def import_rest_api(
-        self, input: ImportRestApiInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ImportRestApiInput | _models.ImportRestApiInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ImportRestApiOutput: ...
+
+    @_overload
+    async def import_rest_api(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ImportRestApiInputDict],
     ) -> ImportRestApiOutput:
         """
         A feature of the API Gateway control service for creating a new API from
         an external API definition file.
 
         Args:
-            input:
-                An instance of `ImportRestApiInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2160,18 +3941,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `ImportRestApiOutput`.
         """
-        return await self._invoke(input, _models.IMPORT_REST_API, [], plugins)
 
+    async def import_rest_api(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ImportRestApiOutput:
+        return await self._invoke(
+            self._select_input(_models.IMPORT_REST_API, args, kwargs),
+            _models.IMPORT_REST_API,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def put_gateway_response(
-        self, input: PutGatewayResponseInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutGatewayResponseInput | _models.PutGatewayResponseInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutGatewayResponseOutput: ...
+
+    @_overload
+    async def put_gateway_response(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutGatewayResponseInputDict],
     ) -> PutGatewayResponseOutput:
         """
         Creates a customization of a GatewayResponse of a specified response
         type and status code on the given RestApi.
 
         Args:
-            input:
-                An instance of `PutGatewayResponseInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2181,17 +3983,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `PutGatewayResponseOutput`.
         """
-        return await self._invoke(input, _models.PUT_GATEWAY_RESPONSE, [], plugins)
 
+    async def put_gateway_response(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutGatewayResponseOutput:
+        return await self._invoke(
+            self._select_input(_models.PUT_GATEWAY_RESPONSE, args, kwargs),
+            _models.PUT_GATEWAY_RESPONSE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def put_integration(
-        self, input: PutIntegrationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutIntegrationInput | _models.PutIntegrationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutIntegrationOutput: ...
+
+    @_overload
+    async def put_integration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutIntegrationInputDict],
     ) -> PutIntegrationOutput:
         """
         Sets up a method's integration.
 
         Args:
-            input:
-                An instance of `PutIntegrationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2201,17 +4024,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `PutIntegrationOutput`.
         """
-        return await self._invoke(input, _models.PUT_INTEGRATION, [], plugins)
 
+    async def put_integration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutIntegrationOutput:
+        return await self._invoke(
+            self._select_input(_models.PUT_INTEGRATION, args, kwargs),
+            _models.PUT_INTEGRATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def put_integration_response(
-        self, input: PutIntegrationResponseInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutIntegrationResponseInput
+        | _models.PutIntegrationResponseInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutIntegrationResponseOutput: ...
+
+    @_overload
+    async def put_integration_response(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutIntegrationResponseInputDict],
     ) -> PutIntegrationResponseOutput:
         """
         Represents a put integration.
 
         Args:
-            input:
-                An instance of `PutIntegrationResponseInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2221,17 +4066,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `PutIntegrationResponseOutput`.
         """
-        return await self._invoke(input, _models.PUT_INTEGRATION_RESPONSE, [], plugins)
 
+    async def put_integration_response(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutIntegrationResponseOutput:
+        return await self._invoke(
+            self._select_input(_models.PUT_INTEGRATION_RESPONSE, args, kwargs),
+            _models.PUT_INTEGRATION_RESPONSE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def put_method(
-        self, input: PutMethodInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutMethodInput | _models.PutMethodInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutMethodOutput: ...
+
+    @_overload
+    async def put_method(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutMethodInputDict],
     ) -> PutMethodOutput:
         """
         Add a method to an existing Resource resource.
 
         Args:
-            input:
-                An instance of `PutMethodInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2241,17 +4107,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `PutMethodOutput`.
         """
-        return await self._invoke(input, _models.PUT_METHOD, [], plugins)
 
+    async def put_method(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutMethodOutput:
+        return await self._invoke(
+            self._select_input(_models.PUT_METHOD, args, kwargs),
+            _models.PUT_METHOD,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def put_method_response(
-        self, input: PutMethodResponseInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutMethodResponseInput | _models.PutMethodResponseInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutMethodResponseOutput: ...
+
+    @_overload
+    async def put_method_response(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutMethodResponseInputDict],
     ) -> PutMethodResponseOutput:
         """
         Adds a MethodResponse to an existing Method resource.
 
         Args:
-            input:
-                An instance of `PutMethodResponseInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2261,10 +4148,33 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `PutMethodResponseOutput`.
         """
-        return await self._invoke(input, _models.PUT_METHOD_RESPONSE, [], plugins)
 
+    async def put_method_response(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutMethodResponseOutput:
+        return await self._invoke(
+            self._select_input(_models.PUT_METHOD_RESPONSE, args, kwargs),
+            _models.PUT_METHOD_RESPONSE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def put_rest_api(
-        self, input: PutRestApiInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutRestApiInput | _models.PutRestApiInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutRestApiOutput: ...
+
+    @_overload
+    async def put_rest_api(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutRestApiInputDict],
     ) -> PutRestApiOutput:
         """
         A feature of the API Gateway control service for updating an existing
@@ -2273,8 +4183,6 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         overwriting the existing API.
 
         Args:
-            input:
-                An instance of `PutRestApiInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2284,12 +4192,34 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `PutRestApiOutput`.
         """
-        return await self._invoke(input, _models.PUT_REST_API, [], plugins)
 
+    async def put_rest_api(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutRestApiOutput:
+        return await self._invoke(
+            self._select_input(_models.PUT_REST_API, args, kwargs),
+            _models.PUT_REST_API,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def reject_domain_name_access_association(
         self,
-        input: RejectDomainNameAccessAssociationInput,
+        request: _models.RejectDomainNameAccessAssociationInput
+        | _models.RejectDomainNameAccessAssociationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> RejectDomainNameAccessAssociationOutput: ...
+
+    @_overload
+    async def reject_domain_name_access_association(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RejectDomainNameAccessAssociationInputDict],
     ) -> RejectDomainNameAccessAssociationOutput:
         """
         Rejects a domain name access association with a private custom domain
@@ -2301,8 +4231,6 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         account, use the DeleteDomainNameAccessAssociation operation.
 
         Args:
-            input:
-                An instance of `RejectDomainNameAccessAssociationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2312,19 +4240,40 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `RejectDomainNameAccessAssociationOutput`.
         """
+
+    async def reject_domain_name_access_association(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RejectDomainNameAccessAssociationOutput:
         return await self._invoke(
-            input, _models.REJECT_DOMAIN_NAME_ACCESS_ASSOCIATION, [], plugins
+            self._select_input(
+                _models.REJECT_DOMAIN_NAME_ACCESS_ASSOCIATION, args, kwargs
+            ),
+            _models.REJECT_DOMAIN_NAME_ACCESS_ASSOCIATION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def tag_resource(
-        self, input: TagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.TagResourceInput | _models.TagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> TagResourceOutput: ...
+
+    @_overload
+    async def tag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.TagResourceInputDict],
     ) -> TagResourceOutput:
         """
         Adds or updates a tag on a given resource.
 
         Args:
-            input:
-                An instance of `TagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2334,18 +4283,40 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `TagResourceOutput`.
         """
-        return await self._invoke(input, _models.TAG_RESOURCE, [], plugins)
 
+    async def tag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> TagResourceOutput:
+        return await self._invoke(
+            self._select_input(_models.TAG_RESOURCE, args, kwargs),
+            _models.TAG_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def test_invoke_authorizer(
-        self, input: TestInvokeAuthorizerInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.TestInvokeAuthorizerInput
+        | _models.TestInvokeAuthorizerInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> TestInvokeAuthorizerOutput: ...
+
+    @_overload
+    async def test_invoke_authorizer(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.TestInvokeAuthorizerInputDict],
     ) -> TestInvokeAuthorizerOutput:
         """
         Simulate the execution of an Authorizer in your RestApi with headers,
         parameters, and an incoming request body.
 
         Args:
-            input:
-                An instance of `TestInvokeAuthorizerInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2355,18 +4326,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `TestInvokeAuthorizerOutput`.
         """
-        return await self._invoke(input, _models.TEST_INVOKE_AUTHORIZER, [], plugins)
 
+    async def test_invoke_authorizer(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> TestInvokeAuthorizerOutput:
+        return await self._invoke(
+            self._select_input(_models.TEST_INVOKE_AUTHORIZER, args, kwargs),
+            _models.TEST_INVOKE_AUTHORIZER,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def test_invoke_method(
-        self, input: TestInvokeMethodInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.TestInvokeMethodInput | _models.TestInvokeMethodInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> TestInvokeMethodOutput: ...
+
+    @_overload
+    async def test_invoke_method(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.TestInvokeMethodInputDict],
     ) -> TestInvokeMethodOutput:
         """
         Simulate the invocation of a Method in your RestApi with headers,
         parameters, and an incoming request body.
 
         Args:
-            input:
-                An instance of `TestInvokeMethodInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2376,17 +4368,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `TestInvokeMethodOutput`.
         """
-        return await self._invoke(input, _models.TEST_INVOKE_METHOD, [], plugins)
 
+    async def test_invoke_method(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> TestInvokeMethodOutput:
+        return await self._invoke(
+            self._select_input(_models.TEST_INVOKE_METHOD, args, kwargs),
+            _models.TEST_INVOKE_METHOD,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def untag_resource(
-        self, input: UntagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UntagResourceInput | _models.UntagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UntagResourceOutput: ...
+
+    @_overload
+    async def untag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UntagResourceInputDict],
     ) -> UntagResourceOutput:
         """
         Removes a tag from a given resource.
 
         Args:
-            input:
-                An instance of `UntagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2396,17 +4409,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `UntagResourceOutput`.
         """
-        return await self._invoke(input, _models.UNTAG_RESOURCE, [], plugins)
 
+    async def untag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UntagResourceOutput:
+        return await self._invoke(
+            self._select_input(_models.UNTAG_RESOURCE, args, kwargs),
+            _models.UNTAG_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_account(
-        self, input: UpdateAccountInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateAccountInput | _models.UpdateAccountInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateAccountOutput: ...
+
+    @_overload
+    async def update_account(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateAccountInputDict],
     ) -> UpdateAccountOutput:
         """
         Changes information about the current Account resource.
 
         Args:
-            input:
-                An instance of `UpdateAccountInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2416,17 +4450,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `UpdateAccountOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_ACCOUNT, [], plugins)
 
+    async def update_account(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateAccountOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_ACCOUNT, args, kwargs),
+            _models.UPDATE_ACCOUNT,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_api_key(
-        self, input: UpdateApiKeyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateApiKeyInput | _models.UpdateApiKeyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateApiKeyOutput: ...
+
+    @_overload
+    async def update_api_key(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateApiKeyInputDict],
     ) -> UpdateApiKeyOutput:
         """
         Changes information about an ApiKey resource.
 
         Args:
-            input:
-                An instance of `UpdateApiKeyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2436,17 +4491,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `UpdateApiKeyOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_API_KEY, [], plugins)
 
+    async def update_api_key(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateApiKeyOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_API_KEY, args, kwargs),
+            _models.UPDATE_API_KEY,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_authorizer(
-        self, input: UpdateAuthorizerInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateAuthorizerInput | _models.UpdateAuthorizerInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateAuthorizerOutput: ...
+
+    @_overload
+    async def update_authorizer(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateAuthorizerInputDict],
     ) -> UpdateAuthorizerOutput:
         """
         Updates an existing Authorizer resource.
 
         Args:
-            input:
-                An instance of `UpdateAuthorizerInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2456,17 +4532,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `UpdateAuthorizerOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_AUTHORIZER, [], plugins)
 
+    async def update_authorizer(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateAuthorizerOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_AUTHORIZER, args, kwargs),
+            _models.UPDATE_AUTHORIZER,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_base_path_mapping(
-        self, input: UpdateBasePathMappingInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateBasePathMappingInput
+        | _models.UpdateBasePathMappingInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateBasePathMappingOutput: ...
+
+    @_overload
+    async def update_base_path_mapping(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateBasePathMappingInputDict],
     ) -> UpdateBasePathMappingOutput:
         """
         Changes information about the BasePathMapping resource.
 
         Args:
-            input:
-                An instance of `UpdateBasePathMappingInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2476,17 +4574,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `UpdateBasePathMappingOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_BASE_PATH_MAPPING, [], plugins)
 
+    async def update_base_path_mapping(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateBasePathMappingOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_BASE_PATH_MAPPING, args, kwargs),
+            _models.UPDATE_BASE_PATH_MAPPING,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_client_certificate(
-        self, input: UpdateClientCertificateInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateClientCertificateInput
+        | _models.UpdateClientCertificateInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateClientCertificateOutput: ...
+
+    @_overload
+    async def update_client_certificate(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateClientCertificateInputDict],
     ) -> UpdateClientCertificateOutput:
         """
         Changes information about an ClientCertificate resource.
 
         Args:
-            input:
-                An instance of `UpdateClientCertificateInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2496,17 +4616,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `UpdateClientCertificateOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_CLIENT_CERTIFICATE, [], plugins)
 
+    async def update_client_certificate(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateClientCertificateOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_CLIENT_CERTIFICATE, args, kwargs),
+            _models.UPDATE_CLIENT_CERTIFICATE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_deployment(
-        self, input: UpdateDeploymentInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateDeploymentInput | _models.UpdateDeploymentInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateDeploymentOutput: ...
+
+    @_overload
+    async def update_deployment(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateDeploymentInputDict],
     ) -> UpdateDeploymentOutput:
         """
         Changes information about a Deployment resource.
 
         Args:
-            input:
-                An instance of `UpdateDeploymentInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2516,17 +4657,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `UpdateDeploymentOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_DEPLOYMENT, [], plugins)
 
+    async def update_deployment(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateDeploymentOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_DEPLOYMENT, args, kwargs),
+            _models.UPDATE_DEPLOYMENT,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_documentation_part(
-        self, input: UpdateDocumentationPartInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateDocumentationPartInput
+        | _models.UpdateDocumentationPartInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateDocumentationPartOutput: ...
+
+    @_overload
+    async def update_documentation_part(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateDocumentationPartInputDict],
     ) -> UpdateDocumentationPartOutput:
         """
         Updates a documentation part.
 
         Args:
-            input:
-                An instance of `UpdateDocumentationPartInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2536,19 +4699,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `UpdateDocumentationPartOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_DOCUMENTATION_PART, [], plugins)
 
+    async def update_documentation_part(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateDocumentationPartOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_DOCUMENTATION_PART, args, kwargs),
+            _models.UPDATE_DOCUMENTATION_PART,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_documentation_version(
         self,
-        input: UpdateDocumentationVersionInput,
+        request: _models.UpdateDocumentationVersionInput
+        | _models.UpdateDocumentationVersionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateDocumentationVersionOutput: ...
+
+    @_overload
+    async def update_documentation_version(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateDocumentationVersionInputDict],
     ) -> UpdateDocumentationVersionOutput:
         """
         Updates a documentation version.
 
         Args:
-            input:
-                An instance of `UpdateDocumentationVersionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2558,19 +4741,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `UpdateDocumentationVersionOutput`.
         """
+
+    async def update_documentation_version(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateDocumentationVersionOutput:
         return await self._invoke(
-            input, _models.UPDATE_DOCUMENTATION_VERSION, [], plugins
+            self._select_input(_models.UPDATE_DOCUMENTATION_VERSION, args, kwargs),
+            _models.UPDATE_DOCUMENTATION_VERSION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def update_domain_name(
-        self, input: UpdateDomainNameInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateDomainNameInput | _models.UpdateDomainNameInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateDomainNameOutput: ...
+
+    @_overload
+    async def update_domain_name(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateDomainNameInputDict],
     ) -> UpdateDomainNameOutput:
         """
         Changes information about the DomainName resource.
 
         Args:
-            input:
-                An instance of `UpdateDomainNameInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2580,18 +4782,40 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `UpdateDomainNameOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_DOMAIN_NAME, [], plugins)
 
+    async def update_domain_name(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateDomainNameOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_DOMAIN_NAME, args, kwargs),
+            _models.UPDATE_DOMAIN_NAME,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_gateway_response(
-        self, input: UpdateGatewayResponseInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateGatewayResponseInput
+        | _models.UpdateGatewayResponseInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateGatewayResponseOutput: ...
+
+    @_overload
+    async def update_gateway_response(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateGatewayResponseInputDict],
     ) -> UpdateGatewayResponseOutput:
         """
         Updates a GatewayResponse of a specified response type on the given
         RestApi.
 
         Args:
-            input:
-                An instance of `UpdateGatewayResponseInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2601,17 +4825,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `UpdateGatewayResponseOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_GATEWAY_RESPONSE, [], plugins)
 
+    async def update_gateway_response(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateGatewayResponseOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_GATEWAY_RESPONSE, args, kwargs),
+            _models.UPDATE_GATEWAY_RESPONSE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_integration(
-        self, input: UpdateIntegrationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateIntegrationInput | _models.UpdateIntegrationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateIntegrationOutput: ...
+
+    @_overload
+    async def update_integration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateIntegrationInputDict],
     ) -> UpdateIntegrationOutput:
         """
         Represents an update integration.
 
         Args:
-            input:
-                An instance of `UpdateIntegrationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2621,17 +4866,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `UpdateIntegrationOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_INTEGRATION, [], plugins)
 
+    async def update_integration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateIntegrationOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_INTEGRATION, args, kwargs),
+            _models.UPDATE_INTEGRATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_integration_response(
-        self, input: UpdateIntegrationResponseInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateIntegrationResponseInput
+        | _models.UpdateIntegrationResponseInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateIntegrationResponseOutput: ...
+
+    @_overload
+    async def update_integration_response(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateIntegrationResponseInputDict],
     ) -> UpdateIntegrationResponseOutput:
         """
         Represents an update integration response.
 
         Args:
-            input:
-                An instance of `UpdateIntegrationResponseInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2641,19 +4908,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `UpdateIntegrationResponseOutput`.
         """
+
+    async def update_integration_response(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateIntegrationResponseOutput:
         return await self._invoke(
-            input, _models.UPDATE_INTEGRATION_RESPONSE, [], plugins
+            self._select_input(_models.UPDATE_INTEGRATION_RESPONSE, args, kwargs),
+            _models.UPDATE_INTEGRATION_RESPONSE,
+            [],
+            plugins,
         )
 
+    @_overload
     async def update_method(
-        self, input: UpdateMethodInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateMethodInput | _models.UpdateMethodInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateMethodOutput: ...
+
+    @_overload
+    async def update_method(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateMethodInputDict],
     ) -> UpdateMethodOutput:
         """
         Updates an existing Method resource.
 
         Args:
-            input:
-                An instance of `UpdateMethodInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2663,17 +4949,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `UpdateMethodOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_METHOD, [], plugins)
 
+    async def update_method(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateMethodOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_METHOD, args, kwargs),
+            _models.UPDATE_METHOD,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_method_response(
-        self, input: UpdateMethodResponseInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateMethodResponseInput
+        | _models.UpdateMethodResponseInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateMethodResponseOutput: ...
+
+    @_overload
+    async def update_method_response(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateMethodResponseInputDict],
     ) -> UpdateMethodResponseOutput:
         """
         Updates an existing MethodResponse resource.
 
         Args:
-            input:
-                An instance of `UpdateMethodResponseInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2683,18 +4991,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `UpdateMethodResponseOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_METHOD_RESPONSE, [], plugins)
 
+    async def update_method_response(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateMethodResponseOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_METHOD_RESPONSE, args, kwargs),
+            _models.UPDATE_METHOD_RESPONSE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_model(
-        self, input: UpdateModelInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateModelInput | _models.UpdateModelInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateModelOutput: ...
+
+    @_overload
+    async def update_model(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateModelInputDict],
     ) -> UpdateModelOutput:
         """
         Changes information about a model. The maximum size of the model is 400
         KB.
 
         Args:
-            input:
-                An instance of `UpdateModelInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2704,17 +5033,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `UpdateModelOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_MODEL, [], plugins)
 
+    async def update_model(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateModelOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_MODEL, args, kwargs),
+            _models.UPDATE_MODEL,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_request_validator(
-        self, input: UpdateRequestValidatorInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateRequestValidatorInput
+        | _models.UpdateRequestValidatorInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateRequestValidatorOutput: ...
+
+    @_overload
+    async def update_request_validator(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateRequestValidatorInputDict],
     ) -> UpdateRequestValidatorOutput:
         """
         Updates a RequestValidator of a given RestApi.
 
         Args:
-            input:
-                An instance of `UpdateRequestValidatorInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2724,17 +5075,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `UpdateRequestValidatorOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_REQUEST_VALIDATOR, [], plugins)
 
+    async def update_request_validator(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateRequestValidatorOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_REQUEST_VALIDATOR, args, kwargs),
+            _models.UPDATE_REQUEST_VALIDATOR,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_resource(
-        self, input: UpdateResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateResourceInput | _models.UpdateResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateResourceOutput: ...
+
+    @_overload
+    async def update_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateResourceInputDict],
     ) -> UpdateResourceOutput:
         """
         Changes information about a Resource resource.
 
         Args:
-            input:
-                An instance of `UpdateResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2744,17 +5116,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `UpdateResourceOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_RESOURCE, [], plugins)
 
+    async def update_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateResourceOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_RESOURCE, args, kwargs),
+            _models.UPDATE_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_rest_api(
-        self, input: UpdateRestApiInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateRestApiInput | _models.UpdateRestApiInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateRestApiOutput: ...
+
+    @_overload
+    async def update_rest_api(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateRestApiInputDict],
     ) -> UpdateRestApiOutput:
         """
         Changes information about the specified API.
 
         Args:
-            input:
-                An instance of `UpdateRestApiInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2764,17 +5157,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `UpdateRestApiOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_REST_API, [], plugins)
 
+    async def update_rest_api(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateRestApiOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_REST_API, args, kwargs),
+            _models.UPDATE_REST_API,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_stage(
-        self, input: UpdateStageInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateStageInput | _models.UpdateStageInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateStageOutput: ...
+
+    @_overload
+    async def update_stage(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateStageInputDict],
     ) -> UpdateStageOutput:
         """
         Changes information about a Stage resource.
 
         Args:
-            input:
-                An instance of `UpdateStageInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2784,18 +5198,39 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `UpdateStageOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_STAGE, [], plugins)
 
+    async def update_stage(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateStageOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_STAGE, args, kwargs),
+            _models.UPDATE_STAGE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_usage(
-        self, input: UpdateUsageInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateUsageInput | _models.UpdateUsageInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateUsageOutput: ...
+
+    @_overload
+    async def update_usage(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateUsageInputDict],
     ) -> UpdateUsageOutput:
         """
         Grants a temporary extension to the remaining quota of a usage plan
         associated with a specified API key.
 
         Args:
-            input:
-                An instance of `UpdateUsageInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2805,17 +5240,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `UpdateUsageOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_USAGE, [], plugins)
 
+    async def update_usage(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateUsageOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_USAGE, args, kwargs),
+            _models.UPDATE_USAGE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_usage_plan(
-        self, input: UpdateUsagePlanInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateUsagePlanInput | _models.UpdateUsagePlanInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateUsagePlanOutput: ...
+
+    @_overload
+    async def update_usage_plan(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateUsagePlanInputDict],
     ) -> UpdateUsagePlanOutput:
         """
         Updates a usage plan of a given plan Id.
 
         Args:
-            input:
-                An instance of `UpdateUsagePlanInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2825,17 +5281,38 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `UpdateUsagePlanOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_USAGE_PLAN, [], plugins)
 
+    async def update_usage_plan(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateUsagePlanOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_USAGE_PLAN, args, kwargs),
+            _models.UPDATE_USAGE_PLAN,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_vpc_link(
-        self, input: UpdateVpcLinkInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateVpcLinkInput | _models.UpdateVpcLinkInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateVpcLinkOutput: ...
+
+    @_overload
+    async def update_vpc_link(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateVpcLinkInputDict],
     ) -> UpdateVpcLinkOutput:
         """
         Updates an existing VpcLink of a specified identifier.
 
         Args:
-            input:
-                An instance of `UpdateVpcLinkInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2845,7 +5322,16 @@ class AsyncAPIGatewayClient(AsyncClient[AsyncAPIGatewayConfig]):
         Returns:
             An instance of `UpdateVpcLinkOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_VPC_LINK, [], plugins)
+
+    async def update_vpc_link(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateVpcLinkOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_VPC_LINK, args, kwargs),
+            _models.UPDATE_VPC_LINK,
+            [],
+            plugins,
+        )
 
     async def _new_config(self) -> AsyncAPIGatewayConfig:
         return await AsyncAPIGatewayConfig.resolve()

@@ -2,357 +2,588 @@
 
 from typing import Any
 
+from aws_sdk_bedrock_agentcore.aio.client import AsyncBedrockAgentCoreClient
+from aws_sdk_bedrock_agentcore.client import BedrockAgentCoreClient
 from aws_sdk_bedrock_agentcore.models import (
     A2aDescriptor,
+    ABTestEvaluationConfigDict,
     ABTestResults,
     ABTestSummary,
     ActorSummary,
     AffectedSession,
     AgentCardDefinition,
     AgentSkillsDescriptor,
+    AgentTracesConfigDict,
     Amount,
+    AmountDict,
     AutomationStream,
     AutomationStreamUpdate,
+    AutomationStreamUpdateDict,
     AvailableLimits,
     BasicAuth,
+    BasicAuthDict,
     BatchCreateMemoryRecordsInput,
+    BatchCreateMemoryRecordsInputDict,
     BatchCreateMemoryRecordsOutput,
     BatchDeleteMemoryRecordsInput,
+    BatchDeleteMemoryRecordsInputDict,
     BatchDeleteMemoryRecordsOutput,
     BatchEvaluationSummary,
     BatchEvaluationTraceConfig,
+    BatchEvaluationTraceConfigDict,
     BatchUpdateMemoryRecordsInput,
+    BatchUpdateMemoryRecordsInputDict,
     BatchUpdateMemoryRecordsOutput,
     Branch,
+    BranchDict,
     BranchFilter,
+    BranchFilterDict,
+    BrowserActionDict,
     BrowserEnterprisePolicy,
+    BrowserEnterprisePolicyDict,
     BrowserExtension,
+    BrowserExtensionDict,
     BrowserProfileConfiguration,
+    BrowserProfileConfigurationDict,
     BrowserSessionStream,
     BrowserSessionSummary,
     Certificate,
+    CertificateDict,
+    CertificateLocationDict,
     CloudWatchFilterConfig,
+    CloudWatchFilterConfigDict,
     CloudWatchLogsFilter,
+    CloudWatchLogsFilterDict,
     CloudWatchLogsRule,
+    CloudWatchLogsRuleDict,
     CloudWatchLogsSource,
+    CloudWatchLogsSourceDict,
     CloudWatchLogsTraceConfig,
+    CloudWatchLogsTraceConfigDict,
     CloudWatchOutputConfig,
+    CloudWatchOutputConfigDict,
     CodeInterpreterResult,
     CodeInterpreterSessionSummary,
     CoinbaseCdpTokenRequestInput,
+    CoinbaseCdpTokenRequestInputDict,
     CoinbaseCdpTokenResponseOutput,
     CompleteResourceTokenAuthInput,
+    CompleteResourceTokenAuthInputDict,
     CompleteResourceTokenAuthOutput,
     ConfidenceInterval,
     ConfigurationBundleRef,
+    ConfigurationBundleRefDict,
     ConfigurationBundleToolEntry,
+    ConfigurationBundleToolEntryDict,
     ContentBlock,
     ContentDeltaEvent,
+    ContentDict,
+    ContentSourceDict,
     ContentStartEvent,
     ContentStopEvent,
+    ContextDict,
     ControlStats,
     Conversational,
+    ConversationalDict,
     CreateABTestInput,
+    CreateABTestInputDict,
     CreateABTestOutput,
     CreateEventInput,
+    CreateEventInputDict,
     CreateEventOutput,
     CreatePaymentInstrumentInput,
+    CreatePaymentInstrumentInputDict,
     CreatePaymentInstrumentOutput,
     CreatePaymentSessionInput,
+    CreatePaymentSessionInputDict,
     CreatePaymentSessionOutput,
     CryptoX402PaymentInput,
+    CryptoX402PaymentInputDict,
     CryptoX402PaymentOutput,
     CustomDescriptor,
+    DataSourceConfigDict,
     DeleteABTestInput,
+    DeleteABTestInputDict,
     DeleteABTestOutput,
     DeleteBatchEvaluationInput,
+    DeleteBatchEvaluationInputDict,
     DeleteBatchEvaluationOutput,
     DeleteCapacityProviderSessionInput,
+    DeleteCapacityProviderSessionInputDict,
     DeleteCapacityProviderSessionOutput,
     DeleteEventInput,
+    DeleteEventInputDict,
     DeleteEventOutput,
     DeleteMemoryRecordInput,
+    DeleteMemoryRecordInputDict,
     DeleteMemoryRecordOutput,
     DeletePaymentInstrumentInput,
+    DeletePaymentInstrumentInputDict,
     DeletePaymentInstrumentOutput,
     DeletePaymentSessionInput,
+    DeletePaymentSessionInputDict,
     DeletePaymentSessionOutput,
     DeleteRecommendationInput,
+    DeleteRecommendationInputDict,
     DeleteRecommendationOutput,
     Descriptors,
     DomainFilter,
+    DomainFilterDict,
     EfsConfiguration,
+    EfsConfigurationDict,
     EmbeddedCryptoWallet,
+    EmbeddedCryptoWalletDict,
     EvaluateInput,
+    EvaluateInputDict,
     EvaluateOutput,
+    EvaluationContentDict,
     EvaluationExpectedTrajectory,
+    EvaluationExpectedTrajectoryDict,
+    EvaluationInputDict,
     EvaluationJobResults,
+    EvaluationMetadataDict,
     EvaluationReferenceInput,
+    EvaluationReferenceInputDict,
     EvaluationResultContent,
+    EvaluationTargetDict,
     Evaluator,
+    EvaluatorDict,
     EvaluatorMetric,
     EvaluatorStatistics,
     EvaluatorSummary,
     Event,
     EventMetadataFilterExpression,
+    EventMetadataFilterExpressionDict,
     ExecutionSummaryAffectedSession,
     ExecutionSummaryCluster,
     ExecutionSummaryClusteringResultContent,
     ExternalProxy,
+    ExternalProxyDict,
     ExtractionConfig,
+    ExtractionConfigDict,
     ExtractionJob,
+    ExtractionJobDict,
     ExtractionJobFilterInput,
+    ExtractionJobFilterInputDict,
     ExtractionJobMetadata,
     FailureAnalysisResultContent,
     FailureCategoryCluster,
     FailureSpanDetail,
     FailureSubCategoryCluster,
     FilterInput,
+    FilterInputDict,
+    FilterValueDict,
     GatewayFilter,
+    GatewayFilterDict,
     GetABTestInput,
+    GetABTestInputDict,
     GetABTestOutput,
     GetAgentCardInput,
+    GetAgentCardInputDict,
     GetAgentCardOutput,
     GetBatchEvaluationInput,
+    GetBatchEvaluationInputDict,
     GetBatchEvaluationOutput,
     GetBrowserSessionInput,
+    GetBrowserSessionInputDict,
     GetBrowserSessionOutput,
     GetCodeInterpreterSessionInput,
+    GetCodeInterpreterSessionInputDict,
     GetCodeInterpreterSessionOutput,
     GetEventInput,
+    GetEventInputDict,
     GetEventOutput,
     GetMemoryRecordInput,
+    GetMemoryRecordInputDict,
     GetMemoryRecordOutput,
     GetPaymentInstrumentBalanceInput,
+    GetPaymentInstrumentBalanceInputDict,
     GetPaymentInstrumentBalanceOutput,
     GetPaymentInstrumentInput,
+    GetPaymentInstrumentInputDict,
     GetPaymentInstrumentOutput,
     GetPaymentSessionInput,
+    GetPaymentSessionInputDict,
     GetPaymentSessionOutput,
     GetRecommendationInput,
+    GetRecommendationInputDict,
     GetRecommendationOutput,
     GetResourceApiKeyInput,
+    GetResourceApiKeyInputDict,
     GetResourceApiKeyOutput,
     GetResourceOauth2TokenInput,
+    GetResourceOauth2TokenInputDict,
     GetResourceOauth2TokenOutput,
     GetResourcePaymentTokenInput,
+    GetResourcePaymentTokenInputDict,
     GetResourcePaymentTokenOutput,
     GetWorkloadAccessTokenForJWTInput,
+    GetWorkloadAccessTokenForJWTInputDict,
     GetWorkloadAccessTokenForJWTOutput,
     GetWorkloadAccessTokenForUserIdInput,
+    GetWorkloadAccessTokenForUserIdInputDict,
     GetWorkloadAccessTokenForUserIdOutput,
     GetWorkloadAccessTokenInput,
+    GetWorkloadAccessTokenInputDict,
     GetWorkloadAccessTokenOutput,
+    GroundTruthSourceDict,
     GroundTruthTurn,
+    GroundTruthTurnDict,
+    GroundTruthTurnInputDict,
     HarnessAgentCoreBrowserConfig,
+    HarnessAgentCoreBrowserConfigDict,
     HarnessAgentCoreCodeInterpreterConfig,
+    HarnessAgentCoreCodeInterpreterConfigDict,
     HarnessAgentCoreGatewayConfig,
+    HarnessAgentCoreGatewayConfigDict,
     HarnessBedrockModelConfig,
+    HarnessBedrockModelConfigDict,
     HarnessContentBlockDeltaEvent,
+    HarnessContentBlockDict,
     HarnessContentBlockStartEvent,
     HarnessContentBlockStopEvent,
+    HarnessGatewayOutboundAuthDict,
     HarnessGeminiModelConfig,
+    HarnessGeminiModelConfigDict,
     HarnessHookEvent,
     HarnessInlineFunctionConfig,
+    HarnessInlineFunctionConfigDict,
     HarnessLiteLlmModelConfig,
+    HarnessLiteLlmModelConfigDict,
     HarnessMessage,
+    HarnessMessageDict,
     HarnessMessageStartEvent,
     HarnessMessageStopEvent,
     HarnessMetadataEvent,
+    HarnessModelConfigurationDict,
     HarnessOpenAiModelConfig,
+    HarnessOpenAiModelConfigDict,
+    HarnessReasoningContentBlockDict,
     HarnessReasoningTextBlock,
+    HarnessReasoningTextBlockDict,
     HarnessRemoteMcpConfig,
+    HarnessRemoteMcpConfigDict,
+    HarnessRemoteMcpOutboundAuthDict,
     HarnessSkillAwsSkillsSource,
+    HarnessSkillAwsSkillsSourceDict,
+    HarnessSkillDict,
     HarnessSkillGitAuth,
+    HarnessSkillGitAuthDict,
     HarnessSkillGitSource,
+    HarnessSkillGitSourceDict,
     HarnessSkillS3Source,
+    HarnessSkillS3SourceDict,
     HarnessStreamMetrics,
+    HarnessSystemContentBlockDict,
     HarnessTokenUsage,
     HarnessTool,
+    HarnessToolConfigurationDict,
+    HarnessToolDict,
     HarnessToolResultBlock,
+    HarnessToolResultBlockDict,
     HarnessToolResultBlockStart,
+    HarnessToolResultContentBlockDict,
     HarnessToolResultMetadataBlockDelta,
     HarnessToolUseBlock,
     HarnessToolUseBlockDelta,
+    HarnessToolUseBlockDict,
     HarnessToolUseBlockStart,
     IamCredentialProvider,
+    IamCredentialProviderDict,
     IngestDataInput,
+    IngestDataInputDict,
     IngestDataOutput,
+    IngestPayloadTypeDict,
     InlineGroundTruth,
+    InlineGroundTruthDict,
     InlineMemoryContent,
+    InlineMemoryContentDict,
     InputContentBlock,
+    InputContentBlockDict,
     Insight,
+    InsightDict,
     InsightResult,
     InsightRootCause,
     InsightsFailureSignal,
     InvokeAgentRuntimeCommandInput,
+    InvokeAgentRuntimeCommandInputDict,
     InvokeAgentRuntimeCommandOutput,
     InvokeAgentRuntimeCommandRequestBody,
+    InvokeAgentRuntimeCommandRequestBodyDict,
     InvokeAgentRuntimeInput,
+    InvokeAgentRuntimeInputDict,
     InvokeAgentRuntimeOutput,
     InvokeBrowserInput,
+    InvokeBrowserInputDict,
     InvokeBrowserOutput,
     InvokeCodeInterpreterInput,
+    InvokeCodeInterpreterInputDict,
     InvokeCodeInterpreterOutput,
     InvokeHarnessInput,
+    InvokeHarnessInputDict,
     InvokeHarnessOutput,
     InvokeWebSearchInput,
+    InvokeWebSearchInputDict,
     InvokeWebSearchOutput,
     KeyPressArguments,
+    KeyPressArgumentsDict,
     KeyPressResult,
     KeyShortcutArguments,
+    KeyShortcutArgumentsDict,
     KeyShortcutResult,
     KeyTypeArguments,
+    KeyTypeArgumentsDict,
     KeyTypeResult,
+    LeftExpressionDict,
     LinkedAccountDeveloperJwt,
+    LinkedAccountDeveloperJwtDict,
+    LinkedAccountDict,
     LinkedAccountEmail,
+    LinkedAccountEmailDict,
+    LinkedAccountOAuth2Dict,
     LinkedAccountSms,
+    LinkedAccountSmsDict,
     ListABTestsInput,
+    ListABTestsInputDict,
     ListABTestsOutput,
     ListActorsInput,
+    ListActorsInputDict,
     ListActorsOutput,
     ListBatchEvaluationsInput,
+    ListBatchEvaluationsInputDict,
     ListBatchEvaluationsOutput,
     ListBrowserSessionsInput,
+    ListBrowserSessionsInputDict,
     ListBrowserSessionsOutput,
     ListCodeInterpreterSessionsInput,
+    ListCodeInterpreterSessionsInputDict,
     ListCodeInterpreterSessionsOutput,
     ListEventsInput,
+    ListEventsInputDict,
     ListEventsOutput,
     ListMemoryExtractionJobsInput,
+    ListMemoryExtractionJobsInputDict,
     ListMemoryExtractionJobsOutput,
     ListMemoryRecordsInput,
+    ListMemoryRecordsInputDict,
     ListMemoryRecordsOutput,
     ListPaymentInstrumentsInput,
+    ListPaymentInstrumentsInputDict,
     ListPaymentInstrumentsOutput,
     ListPaymentSessionsInput,
+    ListPaymentSessionsInputDict,
     ListPaymentSessionsOutput,
     ListRecommendationsInput,
+    ListRecommendationsInputDict,
     ListRecommendationsOutput,
     ListSessionsInput,
+    ListSessionsInputDict,
     ListSessionsOutput,
     LiveViewStream,
     McpDescriptor,
+    MemoryContentDict,
     MemoryJsonData,
+    MemoryJsonDataDict,
     MemoryMetadataFilterExpression,
+    MemoryMetadataFilterExpressionDict,
     MemoryRecord,
     MemoryRecordCreateInput,
+    MemoryRecordCreateInputDict,
     MemoryRecordDeleteInput,
+    MemoryRecordDeleteInputDict,
+    MemoryRecordLeftExpressionDict,
+    MemoryRecordMetadataValueDict,
     MemoryRecordOutput,
+    MemoryRecordRightExpressionDict,
     MemoryRecordSummary,
     MemoryRecordUpdateInput,
+    MemoryRecordUpdateInputDict,
     MessageMetadata,
+    MetadataValueDict,
     MouseClickArguments,
+    MouseClickArgumentsDict,
     MouseClickResult,
     MouseDragArguments,
+    MouseDragArgumentsDict,
     MouseDragResult,
     MouseMoveArguments,
+    MouseMoveArgumentsDict,
     MouseMoveResult,
     MouseScrollArguments,
+    MouseScrollArgumentsDict,
     MouseScrollResult,
     MppPaymentInput,
+    MppPaymentInputDict,
     MppPaymentOutput,
     OAuth2Authentication,
+    OAuth2AuthenticationDict,
     OAuthCredentialProvider,
+    OAuthCredentialProviderDict,
     OnlineEvaluationConfigSource,
+    OnlineEvaluationConfigSourceDict,
     OnlineEvaluationTraceConfig,
+    OnlineEvaluationTraceConfigDict,
+    OutputConfigDict,
+    PayloadTypeDict,
+    PaymentInputDict,
     PaymentInstrument,
+    PaymentInstrumentDetailsDict,
     PaymentInstrumentSummary,
     PaymentSession,
     PaymentSessionSummary,
+    PaymentTokenRequestInputDict,
     PerVariantOnlineEvaluationConfig,
+    PerVariantOnlineEvaluationConfigDict,
     ProcessPaymentInput,
+    ProcessPaymentInputDict,
     ProcessPaymentOutput,
     ProxyBypass,
+    ProxyBypassDict,
     ProxyConfiguration,
+    ProxyConfigurationDict,
+    ProxyCredentialsDict,
+    ProxyDict,
     PublishedDateFilter,
+    PublishedDateFilterDict,
+    RecommendationConfigDict,
     RecommendationEvaluationConfig,
+    RecommendationEvaluationConfigDict,
     RecommendationEvaluatorReference,
+    RecommendationEvaluatorReferenceDict,
     RecommendationResultConfigurationBundle,
     RecommendationSummary,
+    RecordExpirySpecificationDict,
     RegistryRecordSummary,
     ResourceContent,
+    ResourceLocationDict,
     ResponseChunk,
     RetrieveMemoryRecordsInput,
+    RetrieveMemoryRecordsInputDict,
     RetrieveMemoryRecordsOutput,
+    RightExpressionDict,
     RootCauseCluster,
     S3FilesConfiguration,
+    S3FilesConfigurationDict,
     S3Location,
+    S3LocationDict,
     SampleSession,
     SaveBrowserSessionProfileInput,
+    SaveBrowserSessionProfileInputDict,
     SaveBrowserSessionProfileOutput,
     ScreenshotArguments,
+    ScreenshotArgumentsDict,
     ScreenshotResult,
     SearchCriteria,
+    SearchCriteriaDict,
     SearchRegistryRecordsInput,
+    SearchRegistryRecordsInputDict,
     SearchRegistryRecordsOutput,
     SecretsManagerLocation,
+    SecretsManagerLocationDict,
     ServerDefinition,
     SessionFilter,
     SessionFilterConfig,
+    SessionFilterConfigDict,
+    SessionFilterDict,
     SessionFinding,
     SessionLimits,
+    SessionLimitsDict,
     SessionMetadataShape,
+    SessionMetadataShapeDict,
     SessionSummary,
     SessionTraceIds,
+    SessionTraceIdsDict,
     SkillDefinition,
     SkillMdDefinition,
     SpanContext,
+    SpanContextDict,
     StartBatchEvaluationInput,
+    StartBatchEvaluationInputDict,
     StartBatchEvaluationOutput,
     StartBrowserSessionInput,
+    StartBrowserSessionInputDict,
     StartBrowserSessionOutput,
     StartCodeInterpreterSessionInput,
+    StartCodeInterpreterSessionInputDict,
     StartCodeInterpreterSessionOutput,
     StartMemoryExtractionJobInput,
+    StartMemoryExtractionJobInputDict,
     StartMemoryExtractionJobOutput,
     StartRecommendationInput,
+    StartRecommendationInputDict,
     StartRecommendationOutput,
     StopBatchEvaluationInput,
+    StopBatchEvaluationInputDict,
     StopBatchEvaluationOutput,
     StopBrowserSessionInput,
+    StopBrowserSessionInputDict,
     StopBrowserSessionOutput,
     StopCodeInterpreterSessionInput,
+    StopCodeInterpreterSessionInputDict,
     StopCodeInterpreterSessionOutput,
     StopRuntimeSessionInput,
+    StopRuntimeSessionInputDict,
     StopRuntimeSessionOutput,
+    StreamUpdateDict,
     StripePrivyTokenRequestInput,
+    StripePrivyTokenRequestInputDict,
     StripePrivyTokenResponseOutput,
+    SystemPromptConfigDict,
     SystemPromptConfigurationBundle,
+    SystemPromptConfigurationBundleDict,
     SystemPromptRecommendationConfig,
+    SystemPromptRecommendationConfigDict,
     SystemPromptRecommendationResult,
     TargetRef,
+    TargetRefDict,
     TokenBalance,
     TokenUsage,
     ToolArguments,
+    ToolArgumentsDict,
+    ToolDescriptionConfigDict,
     ToolDescriptionConfigurationBundle,
+    ToolDescriptionConfigurationBundleDict,
     ToolDescriptionInput,
+    ToolDescriptionInputDict,
     ToolDescriptionOutput,
     ToolDescriptionRecommendationConfig,
+    ToolDescriptionRecommendationConfigDict,
     ToolDescriptionRecommendationResult,
+    ToolDescriptionSourceDict,
     ToolDescriptionTextInput,
+    ToolDescriptionTextInputDict,
     ToolResultStructuredContent,
     ToolsDefinition,
+    ToolsFileSystemConfigurationDict,
     Unit,
+    UnitDict,
     UpdateABTestInput,
+    UpdateABTestInputDict,
     UpdateABTestOutput,
     UpdateBrowserStreamInput,
+    UpdateBrowserStreamInputDict,
     UpdateBrowserStreamOutput,
+    UserIdentifierDict,
     UserIntentAffectedSession,
     UserIntentCluster,
     UserIntentClusteringResultContent,
     ValidationExceptionField,
     Variant,
     VariantConfiguration,
+    VariantConfigurationDict,
+    VariantDict,
     VariantResult,
     ViewPort,
+    ViewPortDict,
     WebSearchFilters,
+    WebSearchFiltersDict,
     WebSearchResult,
 )
 
 
-# Static type fixture: pyright over this validates models.pyi.
-# Not executed as a test; it only needs to type-check.
+# Static type fixture: pyright over this validates models.pyi and the
+# client method signatures. Not executed as a test; it only needs to
+# type-check.
 
 _: Any = ...
 
@@ -853,3 +1084,1126 @@ ViewPort(width=_, height=_)
 WebSearchFilters()
 WebSearchResult(text=_)
 Unit()
+_params_0: ABTestEvaluationConfigDict = {"online_evaluation_config_arn": _}
+_params_1: AgentTracesConfigDict = {"session_spans": _}
+_params_2: AmountDict = {"value": _, "currency": _}
+_params_3: AutomationStreamUpdateDict = {}
+_params_4: BasicAuthDict = {"secret_arn": _}
+_params_5: BatchCreateMemoryRecordsInputDict = {"memory_id": _, "records": _}
+_params_6: BatchDeleteMemoryRecordsInputDict = {"memory_id": _, "records": _}
+_params_7: BatchEvaluationTraceConfigDict = {"batch_evaluation_arn": _}
+_params_8: BatchUpdateMemoryRecordsInputDict = {"memory_id": _, "records": _}
+_params_9: BranchDict = {"name": _}
+_params_10: BranchFilterDict = {"name": _}
+_params_11: BrowserActionDict = {"mouse_click": _}
+_params_12: BrowserEnterprisePolicyDict = {"location": _}
+_params_13: BrowserExtensionDict = {"location": _}
+_params_14: BrowserProfileConfigurationDict = {"profile_identifier": _}
+_params_15: CertificateDict = {"location": _}
+_params_16: CertificateLocationDict = {"secrets_manager": _}
+_params_17: CloudWatchFilterConfigDict = {}
+_params_18: CloudWatchLogsFilterDict = {"key": _, "operator": _, "value": _}
+_params_19: CloudWatchLogsRuleDict = {}
+_params_20: CloudWatchLogsSourceDict = {"service_names": _}
+_params_21: CloudWatchLogsTraceConfigDict = {
+    "log_group_arns": _,
+    "service_names": _,
+    "start_time": _,
+    "end_time": _,
+}
+_params_22: CloudWatchOutputConfigDict = {}
+_params_23: CoinbaseCdpTokenRequestInputDict = {"request_method": _, "request_path": _}
+_params_24: CompleteResourceTokenAuthInputDict = {
+    "user_identifier": _,
+    "session_uri": _,
+}
+_params_25: ConfigurationBundleRefDict = {"bundle_arn": _, "bundle_version": _}
+_params_26: ConfigurationBundleToolEntryDict = {
+    "tool_name": _,
+    "tool_description_json_path": _,
+}
+_params_27: ContentDict = {"text": _}
+_params_28: ContentSourceDict = {"inline": _}
+_params_29: ContextDict = {"span_context": _}
+_params_30: ConversationalDict = {"content": _, "role": _}
+_params_31: CreateABTestInputDict = {
+    "name": _,
+    "gateway_arn": _,
+    "variants": _,
+    "evaluation_config": _,
+    "role_arn": _,
+}
+_params_32: CreateEventInputDict = {
+    "memory_id": _,
+    "actor_id": _,
+    "event_timestamp": _,
+    "payload": _,
+}
+_params_33: CreatePaymentInstrumentInputDict = {
+    "payment_manager_arn": _,
+    "payment_connector_id": _,
+    "payment_instrument_type": _,
+    "payment_instrument_details": _,
+}
+_params_34: CreatePaymentSessionInputDict = {
+    "payment_manager_arn": _,
+    "expiry_time_in_minutes": _,
+}
+_params_35: CryptoX402PaymentInputDict = {"version": _, "payload": _}
+_params_36: DataSourceConfigDict = {"cloud_watch_logs": _}
+_params_37: DeleteABTestInputDict = {"ab_test_id": _}
+_params_38: DeleteBatchEvaluationInputDict = {"batch_evaluation_id": _}
+_params_39: DeleteCapacityProviderSessionInputDict = {
+    "capacity_provider_id": _,
+    "session_id": _,
+}
+_params_40: DeleteEventInputDict = {
+    "memory_id": _,
+    "session_id": _,
+    "event_id": _,
+    "actor_id": _,
+}
+_params_41: DeleteMemoryRecordInputDict = {"memory_id": _, "memory_record_id": _}
+_params_42: DeletePaymentInstrumentInputDict = {
+    "payment_manager_arn": _,
+    "payment_connector_id": _,
+    "payment_instrument_id": _,
+}
+_params_43: DeletePaymentSessionInputDict = {
+    "payment_manager_arn": _,
+    "payment_session_id": _,
+}
+_params_44: DeleteRecommendationInputDict = {"recommendation_id": _}
+_params_45: DomainFilterDict = {}
+_params_46: EfsConfigurationDict = {
+    "access_point_arn": _,
+    "mount_path": _,
+    "file_system_arn": _,
+}
+_params_47: EmbeddedCryptoWalletDict = {"network": _, "linked_accounts": _}
+_params_48: EvaluateInputDict = {"evaluator_id": _, "evaluation_input": _}
+_params_49: EvaluationContentDict = {"text": _}
+_params_50: EvaluationExpectedTrajectoryDict = {}
+_params_51: EvaluationInputDict = {"session_spans": _}
+_params_52: EvaluationMetadataDict = {"session_metadata": _}
+_params_53: EvaluationReferenceInputDict = {"context": _}
+_params_54: EvaluationTargetDict = {"span_ids": _}
+_params_55: EvaluatorDict = {"evaluator_id": _}
+_params_56: EventMetadataFilterExpressionDict = {"left": _, "operator": _}
+_params_57: ExternalProxyDict = {"server": _, "port": _}
+_params_58: ExtractionConfigDict = {}
+_params_59: ExtractionJobDict = {"job_id": _}
+_params_60: ExtractionJobFilterInputDict = {}
+_params_61: FilterInputDict = {}
+_params_62: FilterValueDict = {"string_value": _}
+_params_63: GatewayFilterDict = {}
+_params_64: GetABTestInputDict = {"ab_test_id": _}
+_params_65: GetAgentCardInputDict = {"agent_runtime_arn": _}
+_params_66: GetBatchEvaluationInputDict = {"batch_evaluation_id": _}
+_params_67: GetBrowserSessionInputDict = {"browser_identifier": _, "session_id": _}
+_params_68: GetCodeInterpreterSessionInputDict = {
+    "code_interpreter_identifier": _,
+    "session_id": _,
+}
+_params_69: GetEventInputDict = {
+    "memory_id": _,
+    "session_id": _,
+    "actor_id": _,
+    "event_id": _,
+}
+_params_70: GetMemoryRecordInputDict = {"memory_id": _, "memory_record_id": _}
+_params_71: GetPaymentInstrumentBalanceInputDict = {
+    "payment_manager_arn": _,
+    "payment_connector_id": _,
+    "payment_instrument_id": _,
+    "chain": _,
+    "token": _,
+}
+_params_72: GetPaymentInstrumentInputDict = {
+    "payment_manager_arn": _,
+    "payment_instrument_id": _,
+}
+_params_73: GetPaymentSessionInputDict = {
+    "payment_manager_arn": _,
+    "payment_session_id": _,
+}
+_params_74: GetRecommendationInputDict = {"recommendation_id": _}
+_params_75: GetResourceApiKeyInputDict = {
+    "workload_identity_token": _,
+    "resource_credential_provider_name": _,
+}
+_params_76: GetResourceOauth2TokenInputDict = {
+    "workload_identity_token": _,
+    "resource_credential_provider_name": _,
+    "scopes": _,
+    "oauth2_flow": _,
+}
+_params_77: GetResourcePaymentTokenInputDict = {
+    "workload_identity_token": _,
+    "resource_credential_provider_name": _,
+    "payment_token_request": _,
+}
+_params_78: GetWorkloadAccessTokenForJWTInputDict = {
+    "workload_name": _,
+    "user_token": _,
+}
+_params_79: GetWorkloadAccessTokenForUserIdInputDict = {
+    "workload_name": _,
+    "user_id": _,
+}
+_params_80: GetWorkloadAccessTokenInputDict = {"workload_name": _}
+_params_81: GroundTruthSourceDict = {"inline": _}
+_params_82: GroundTruthTurnDict = {}
+_params_83: GroundTruthTurnInputDict = {"prompt": _}
+_params_84: HarnessAgentCoreBrowserConfigDict = {}
+_params_85: HarnessAgentCoreCodeInterpreterConfigDict = {}
+_params_86: HarnessAgentCoreGatewayConfigDict = {"gateway_arn": _}
+_params_87: HarnessBedrockModelConfigDict = {"model_id": _}
+_params_88: HarnessContentBlockDict = {"text": _}
+_params_89: HarnessGatewayOutboundAuthDict = {"aws_iam": _}
+_params_90: HarnessGeminiModelConfigDict = {"model_id": _, "api_key_arn": _}
+_params_91: HarnessInlineFunctionConfigDict = {"description": _, "input_schema": _}
+_params_92: HarnessLiteLlmModelConfigDict = {"model_id": _}
+_params_93: HarnessMessageDict = {"role": _, "content": _}
+_params_94: HarnessModelConfigurationDict = {"bedrock_model_config": _}
+_params_95: HarnessOpenAiModelConfigDict = {"model_id": _, "api_key_arn": _}
+_params_96: HarnessReasoningContentBlockDict = {"reasoning_text": _}
+_params_97: HarnessReasoningTextBlockDict = {"text": _}
+_params_98: HarnessRemoteMcpConfigDict = {"url": _}
+_params_99: HarnessRemoteMcpOutboundAuthDict = {"aws_iam": _}
+_params_100: HarnessSkillDict = {"path": _}
+_params_101: HarnessSkillAwsSkillsSourceDict = {}
+_params_102: HarnessSkillGitAuthDict = {"credential_arn": _}
+_params_103: HarnessSkillGitSourceDict = {"url": _}
+_params_104: HarnessSkillS3SourceDict = {"uri": _}
+_params_105: HarnessSystemContentBlockDict = {"text": _}
+_params_106: HarnessToolDict = {"type": _}
+_params_107: HarnessToolConfigurationDict = {"remote_mcp": _}
+_params_108: HarnessToolResultBlockDict = {"tool_use_id": _, "content": _}
+_params_109: HarnessToolResultContentBlockDict = {"text": _}
+_params_110: HarnessToolUseBlockDict = {"name": _, "tool_use_id": _, "input": _}
+_params_111: IamCredentialProviderDict = {"service": _}
+_params_112: IngestDataInputDict = {
+    "memory_id": _,
+    "source": _,
+    "content_timestamp": _,
+    "actor_id": _,
+}
+_params_113: IngestPayloadTypeDict = {"conversational": _}
+_params_114: InlineGroundTruthDict = {}
+_params_115: InlineMemoryContentDict = {"payload": _}
+_params_116: InputContentBlockDict = {"path": _}
+_params_117: InsightDict = {"insight_id": _}
+_params_118: InvokeAgentRuntimeCommandInputDict = {"agent_runtime_arn": _, "body": _}
+_params_119: InvokeAgentRuntimeCommandRequestBodyDict = {"command": _}
+_params_120: InvokeAgentRuntimeInputDict = {"agent_runtime_arn": _, "payload": _}
+_params_121: InvokeBrowserInputDict = {
+    "browser_identifier": _,
+    "session_id": _,
+    "action": _,
+}
+_params_122: InvokeCodeInterpreterInputDict = {
+    "code_interpreter_identifier": _,
+    "name": _,
+}
+_params_123: InvokeHarnessInputDict = {
+    "harness_arn": _,
+    "runtime_session_id": _,
+    "messages": _,
+}
+_params_124: InvokeWebSearchInputDict = {"web_search_id": _, "search_query": _}
+_params_125: KeyPressArgumentsDict = {"key": _}
+_params_126: KeyShortcutArgumentsDict = {"keys": _}
+_params_127: KeyTypeArgumentsDict = {"text": _}
+_params_128: LeftExpressionDict = {"metadata_key": _}
+_params_129: LinkedAccountDict = {"email": _}
+_params_130: LinkedAccountDeveloperJwtDict = {"kid": _, "sub": _}
+_params_131: LinkedAccountEmailDict = {"email_address": _}
+_params_132: LinkedAccountOAuth2Dict = {"google": _}
+_params_133: LinkedAccountSmsDict = {"phone_number": _}
+_params_134: ListABTestsInputDict = {}
+_params_135: ListActorsInputDict = {"memory_id": _}
+_params_136: ListBatchEvaluationsInputDict = {}
+_params_137: ListBrowserSessionsInputDict = {"browser_identifier": _}
+_params_138: ListCodeInterpreterSessionsInputDict = {"code_interpreter_identifier": _}
+_params_139: ListEventsInputDict = {"memory_id": _, "session_id": _, "actor_id": _}
+_params_140: ListMemoryExtractionJobsInputDict = {"memory_id": _}
+_params_141: ListMemoryRecordsInputDict = {"memory_id": _}
+_params_142: ListPaymentInstrumentsInputDict = {"payment_manager_arn": _}
+_params_143: ListPaymentSessionsInputDict = {"payment_manager_arn": _}
+_params_144: ListRecommendationsInputDict = {}
+_params_145: ListSessionsInputDict = {"memory_id": _, "actor_id": _}
+_params_146: MemoryContentDict = {"text": _}
+_params_147: MemoryJsonDataDict = {"content": _}
+_params_148: MemoryMetadataFilterExpressionDict = {"left": _, "operator": _}
+_params_149: MemoryRecordCreateInputDict = {
+    "request_identifier": _,
+    "namespaces": _,
+    "content": _,
+    "timestamp": _,
+}
+_params_150: MemoryRecordDeleteInputDict = {"memory_record_id": _}
+_params_151: MemoryRecordLeftExpressionDict = {"metadata_key": _}
+_params_152: MemoryRecordMetadataValueDict = {"string_value": _}
+_params_153: MemoryRecordRightExpressionDict = {"metadata_value": _}
+_params_154: MemoryRecordUpdateInputDict = {"memory_record_id": _, "timestamp": _}
+_params_155: MetadataValueDict = {"string_value": _}
+_params_156: MouseClickArgumentsDict = {"x": _, "y": _}
+_params_157: MouseDragArgumentsDict = {
+    "end_x": _,
+    "end_y": _,
+    "start_x": _,
+    "start_y": _,
+}
+_params_158: MouseMoveArgumentsDict = {"x": _, "y": _}
+_params_159: MouseScrollArgumentsDict = {"x": _, "y": _}
+_params_160: MppPaymentInputDict = {"version": _, "www_authenticate_headers": _}
+_params_161: OAuth2AuthenticationDict = {"sub": _}
+_params_162: OAuthCredentialProviderDict = {"provider_arn": _, "scopes": _}
+_params_163: OnlineEvaluationConfigSourceDict = {"online_evaluation_config_arn": _}
+_params_164: OnlineEvaluationTraceConfigDict = {
+    "online_evaluation_config_arn": _,
+    "start_time": _,
+    "end_time": _,
+}
+_params_165: OutputConfigDict = {"cloud_watch_config": _}
+_params_166: PayloadTypeDict = {"conversational": _}
+_params_167: PaymentInputDict = {"crypto_x402": _}
+_params_168: PaymentInstrumentDetailsDict = {"embedded_crypto_wallet": _}
+_params_169: PaymentTokenRequestInputDict = {"coinbase_cdp_token_request": _}
+_params_170: PerVariantOnlineEvaluationConfigDict = {
+    "name": _,
+    "online_evaluation_config_arn": _,
+}
+_params_171: ProcessPaymentInputDict = {
+    "payment_manager_arn": _,
+    "payment_session_id": _,
+    "payment_instrument_id": _,
+    "payment_type": _,
+    "payment_input": _,
+}
+_params_172: ProxyDict = {"external_proxy": _}
+_params_173: ProxyBypassDict = {}
+_params_174: ProxyConfigurationDict = {"proxies": _}
+_params_175: ProxyCredentialsDict = {"basic_auth": _}
+_params_176: PublishedDateFilterDict = {}
+_params_177: RecommendationConfigDict = {"system_prompt_recommendation_config": _}
+_params_178: RecommendationEvaluationConfigDict = {"evaluators": _}
+_params_179: RecommendationEvaluatorReferenceDict = {"evaluator_arn": _}
+_params_180: RecordExpirySpecificationDict = {"record_expiry_duration_days": _}
+_params_181: ResourceLocationDict = {"s3": _}
+_params_182: RetrieveMemoryRecordsInputDict = {"memory_id": _, "search_criteria": _}
+_params_183: RightExpressionDict = {"metadata_value": _}
+_params_184: S3FilesConfigurationDict = {
+    "access_point_arn": _,
+    "mount_path": _,
+    "file_system_arn": _,
+}
+_params_185: S3LocationDict = {"bucket": _, "prefix": _}
+_params_186: SaveBrowserSessionProfileInputDict = {
+    "profile_identifier": _,
+    "browser_identifier": _,
+    "session_id": _,
+}
+_params_187: ScreenshotArgumentsDict = {}
+_params_188: SearchCriteriaDict = {"search_query": _}
+_params_189: SearchRegistryRecordsInputDict = {"search_query": _, "registry_ids": _}
+_params_190: SecretsManagerLocationDict = {"secret_arn": _}
+_params_191: SessionFilterDict = {}
+_params_192: SessionFilterConfigDict = {}
+_params_193: SessionLimitsDict = {"max_spend_amount": _}
+_params_194: SessionMetadataShapeDict = {"session_id": _}
+_params_195: SessionTraceIdsDict = {"session_id": _, "trace_ids": _}
+_params_196: SpanContextDict = {"session_id": _}
+_params_197: StartBatchEvaluationInputDict = {
+    "batch_evaluation_name": _,
+    "data_source_config": _,
+}
+_params_198: StartBrowserSessionInputDict = {"browser_identifier": _}
+_params_199: StartCodeInterpreterSessionInputDict = {"code_interpreter_identifier": _}
+_params_200: StartMemoryExtractionJobInputDict = {"memory_id": _, "extraction_job": _}
+_params_201: StartRecommendationInputDict = {
+    "name": _,
+    "type": _,
+    "recommendation_config": _,
+}
+_params_202: StopBatchEvaluationInputDict = {"batch_evaluation_id": _}
+_params_203: StopBrowserSessionInputDict = {"browser_identifier": _, "session_id": _}
+_params_204: StopCodeInterpreterSessionInputDict = {
+    "code_interpreter_identifier": _,
+    "session_id": _,
+}
+_params_205: StopRuntimeSessionInputDict = {
+    "runtime_session_id": _,
+    "agent_runtime_arn": _,
+}
+_params_206: StreamUpdateDict = {"automation_stream_update": _}
+_params_207: StripePrivyTokenRequestInputDict = {"request_path": _, "request_body": _}
+_params_208: SystemPromptConfigDict = {"text": _}
+_params_209: SystemPromptConfigurationBundleDict = {
+    "bundle_arn": _,
+    "version_id": _,
+    "system_prompt_json_path": _,
+}
+_params_210: SystemPromptRecommendationConfigDict = {
+    "system_prompt": _,
+    "agent_traces": _,
+}
+_params_211: TargetRefDict = {"name": _}
+_params_212: ToolArgumentsDict = {}
+_params_213: ToolDescriptionConfigDict = {"text": _}
+_params_214: ToolDescriptionConfigurationBundleDict = {
+    "bundle_arn": _,
+    "version_id": _,
+    "tools": _,
+}
+_params_215: ToolDescriptionInputDict = {"tool_name": _, "tool_description": _}
+_params_216: ToolDescriptionRecommendationConfigDict = {
+    "tool_description": _,
+    "agent_traces": _,
+}
+_params_217: ToolDescriptionSourceDict = {"tool_description_text": _}
+_params_218: ToolDescriptionTextInputDict = {"tools": _}
+_params_219: ToolsFileSystemConfigurationDict = {"s3_files_configuration": _}
+_params_220: UpdateABTestInputDict = {"ab_test_id": _}
+_params_221: UpdateBrowserStreamInputDict = {
+    "browser_identifier": _,
+    "session_id": _,
+    "stream_update": _,
+}
+_params_222: UserIdentifierDict = {"user_token": _}
+_params_223: VariantDict = {"name": _, "weight": _, "variant_configuration": _}
+_params_224: VariantConfigurationDict = {}
+_params_225: ViewPortDict = {"width": _, "height": _}
+_params_226: WebSearchFiltersDict = {}
+_params_227: UnitDict = {}
+
+
+def _request[T](form: type[T]) -> T:
+    raise NotImplementedError
+
+
+async def check_async_calls(client: AsyncBedrockAgentCoreClient) -> None:
+    pass
+    await client.batch_create_memory_records(memory_id=_, records=_)
+    await client.batch_create_memory_records(
+        **_request(BatchCreateMemoryRecordsInputDict)
+    )
+    await client.batch_create_memory_records(_request(BatchCreateMemoryRecordsInput))
+    await client.batch_create_memory_records(
+        _request(BatchCreateMemoryRecordsInputDict)
+    )
+    await client.batch_delete_memory_records(memory_id=_, records=_)
+    await client.batch_delete_memory_records(
+        **_request(BatchDeleteMemoryRecordsInputDict)
+    )
+    await client.batch_delete_memory_records(_request(BatchDeleteMemoryRecordsInput))
+    await client.batch_delete_memory_records(
+        _request(BatchDeleteMemoryRecordsInputDict)
+    )
+    await client.batch_update_memory_records(memory_id=_, records=_)
+    await client.batch_update_memory_records(
+        **_request(BatchUpdateMemoryRecordsInputDict)
+    )
+    await client.batch_update_memory_records(_request(BatchUpdateMemoryRecordsInput))
+    await client.batch_update_memory_records(
+        _request(BatchUpdateMemoryRecordsInputDict)
+    )
+    await client.complete_resource_token_auth(user_identifier=_, session_uri=_)
+    await client.complete_resource_token_auth(
+        **_request(CompleteResourceTokenAuthInputDict)
+    )
+    await client.complete_resource_token_auth(_request(CompleteResourceTokenAuthInput))
+    await client.complete_resource_token_auth(
+        _request(CompleteResourceTokenAuthInputDict)
+    )
+    await client.create_ab_test(
+        name=_, gateway_arn=_, variants=_, evaluation_config=_, role_arn=_
+    )
+    await client.create_ab_test(**_request(CreateABTestInputDict))
+    await client.create_ab_test(_request(CreateABTestInput))
+    await client.create_ab_test(_request(CreateABTestInputDict))
+    await client.create_event(memory_id=_, actor_id=_, event_timestamp=_, payload=_)
+    await client.create_event(**_request(CreateEventInputDict))
+    await client.create_event(_request(CreateEventInput))
+    await client.create_event(_request(CreateEventInputDict))
+    await client.create_payment_instrument(
+        payment_manager_arn=_,
+        payment_connector_id=_,
+        payment_instrument_type=_,
+        payment_instrument_details=_,
+    )
+    await client.create_payment_instrument(**_request(CreatePaymentInstrumentInputDict))
+    await client.create_payment_instrument(_request(CreatePaymentInstrumentInput))
+    await client.create_payment_instrument(_request(CreatePaymentInstrumentInputDict))
+    await client.create_payment_session(payment_manager_arn=_, expiry_time_in_minutes=_)
+    await client.create_payment_session(**_request(CreatePaymentSessionInputDict))
+    await client.create_payment_session(_request(CreatePaymentSessionInput))
+    await client.create_payment_session(_request(CreatePaymentSessionInputDict))
+    await client.delete_ab_test(ab_test_id=_)
+    await client.delete_ab_test(**_request(DeleteABTestInputDict))
+    await client.delete_ab_test(_request(DeleteABTestInput))
+    await client.delete_ab_test(_request(DeleteABTestInputDict))
+    await client.delete_batch_evaluation(batch_evaluation_id=_)
+    await client.delete_batch_evaluation(**_request(DeleteBatchEvaluationInputDict))
+    await client.delete_batch_evaluation(_request(DeleteBatchEvaluationInput))
+    await client.delete_batch_evaluation(_request(DeleteBatchEvaluationInputDict))
+    await client.delete_capacity_provider_session(capacity_provider_id=_, session_id=_)
+    await client.delete_capacity_provider_session(
+        **_request(DeleteCapacityProviderSessionInputDict)
+    )
+    await client.delete_capacity_provider_session(
+        _request(DeleteCapacityProviderSessionInput)
+    )
+    await client.delete_capacity_provider_session(
+        _request(DeleteCapacityProviderSessionInputDict)
+    )
+    await client.delete_event(memory_id=_, session_id=_, event_id=_, actor_id=_)
+    await client.delete_event(**_request(DeleteEventInputDict))
+    await client.delete_event(_request(DeleteEventInput))
+    await client.delete_event(_request(DeleteEventInputDict))
+    await client.delete_memory_record(memory_id=_, memory_record_id=_)
+    await client.delete_memory_record(**_request(DeleteMemoryRecordInputDict))
+    await client.delete_memory_record(_request(DeleteMemoryRecordInput))
+    await client.delete_memory_record(_request(DeleteMemoryRecordInputDict))
+    await client.delete_payment_instrument(
+        payment_manager_arn=_, payment_connector_id=_, payment_instrument_id=_
+    )
+    await client.delete_payment_instrument(**_request(DeletePaymentInstrumentInputDict))
+    await client.delete_payment_instrument(_request(DeletePaymentInstrumentInput))
+    await client.delete_payment_instrument(_request(DeletePaymentInstrumentInputDict))
+    await client.delete_payment_session(payment_manager_arn=_, payment_session_id=_)
+    await client.delete_payment_session(**_request(DeletePaymentSessionInputDict))
+    await client.delete_payment_session(_request(DeletePaymentSessionInput))
+    await client.delete_payment_session(_request(DeletePaymentSessionInputDict))
+    await client.delete_recommendation(recommendation_id=_)
+    await client.delete_recommendation(**_request(DeleteRecommendationInputDict))
+    await client.delete_recommendation(_request(DeleteRecommendationInput))
+    await client.delete_recommendation(_request(DeleteRecommendationInputDict))
+    await client.evaluate(evaluator_id=_, evaluation_input=_)
+    await client.evaluate(**_request(EvaluateInputDict))
+    await client.evaluate(_request(EvaluateInput))
+    await client.evaluate(_request(EvaluateInputDict))
+    await client.get_ab_test(ab_test_id=_)
+    await client.get_ab_test(**_request(GetABTestInputDict))
+    await client.get_ab_test(_request(GetABTestInput))
+    await client.get_ab_test(_request(GetABTestInputDict))
+    await client.get_agent_card(agent_runtime_arn=_)
+    await client.get_agent_card(**_request(GetAgentCardInputDict))
+    await client.get_agent_card(_request(GetAgentCardInput))
+    await client.get_agent_card(_request(GetAgentCardInputDict))
+    await client.get_batch_evaluation(batch_evaluation_id=_)
+    await client.get_batch_evaluation(**_request(GetBatchEvaluationInputDict))
+    await client.get_batch_evaluation(_request(GetBatchEvaluationInput))
+    await client.get_batch_evaluation(_request(GetBatchEvaluationInputDict))
+    await client.get_browser_session(browser_identifier=_, session_id=_)
+    await client.get_browser_session(**_request(GetBrowserSessionInputDict))
+    await client.get_browser_session(_request(GetBrowserSessionInput))
+    await client.get_browser_session(_request(GetBrowserSessionInputDict))
+    await client.get_code_interpreter_session(
+        code_interpreter_identifier=_, session_id=_
+    )
+    await client.get_code_interpreter_session(
+        **_request(GetCodeInterpreterSessionInputDict)
+    )
+    await client.get_code_interpreter_session(_request(GetCodeInterpreterSessionInput))
+    await client.get_code_interpreter_session(
+        _request(GetCodeInterpreterSessionInputDict)
+    )
+    await client.get_event(memory_id=_, session_id=_, actor_id=_, event_id=_)
+    await client.get_event(**_request(GetEventInputDict))
+    await client.get_event(_request(GetEventInput))
+    await client.get_event(_request(GetEventInputDict))
+    await client.get_memory_record(memory_id=_, memory_record_id=_)
+    await client.get_memory_record(**_request(GetMemoryRecordInputDict))
+    await client.get_memory_record(_request(GetMemoryRecordInput))
+    await client.get_memory_record(_request(GetMemoryRecordInputDict))
+    await client.get_payment_instrument(payment_manager_arn=_, payment_instrument_id=_)
+    await client.get_payment_instrument(**_request(GetPaymentInstrumentInputDict))
+    await client.get_payment_instrument(_request(GetPaymentInstrumentInput))
+    await client.get_payment_instrument(_request(GetPaymentInstrumentInputDict))
+    await client.get_payment_instrument_balance(
+        payment_manager_arn=_,
+        payment_connector_id=_,
+        payment_instrument_id=_,
+        chain=_,
+        token=_,
+    )
+    await client.get_payment_instrument_balance(
+        **_request(GetPaymentInstrumentBalanceInputDict)
+    )
+    await client.get_payment_instrument_balance(
+        _request(GetPaymentInstrumentBalanceInput)
+    )
+    await client.get_payment_instrument_balance(
+        _request(GetPaymentInstrumentBalanceInputDict)
+    )
+    await client.get_payment_session(payment_manager_arn=_, payment_session_id=_)
+    await client.get_payment_session(**_request(GetPaymentSessionInputDict))
+    await client.get_payment_session(_request(GetPaymentSessionInput))
+    await client.get_payment_session(_request(GetPaymentSessionInputDict))
+    await client.get_recommendation(recommendation_id=_)
+    await client.get_recommendation(**_request(GetRecommendationInputDict))
+    await client.get_recommendation(_request(GetRecommendationInput))
+    await client.get_recommendation(_request(GetRecommendationInputDict))
+    await client.get_resource_api_key(
+        workload_identity_token=_, resource_credential_provider_name=_
+    )
+    await client.get_resource_api_key(**_request(GetResourceApiKeyInputDict))
+    await client.get_resource_api_key(_request(GetResourceApiKeyInput))
+    await client.get_resource_api_key(_request(GetResourceApiKeyInputDict))
+    await client.get_resource_oauth2_token(
+        workload_identity_token=_,
+        resource_credential_provider_name=_,
+        scopes=_,
+        oauth2_flow=_,
+    )
+    await client.get_resource_oauth2_token(**_request(GetResourceOauth2TokenInputDict))
+    await client.get_resource_oauth2_token(_request(GetResourceOauth2TokenInput))
+    await client.get_resource_oauth2_token(_request(GetResourceOauth2TokenInputDict))
+    await client.get_resource_payment_token(
+        workload_identity_token=_,
+        resource_credential_provider_name=_,
+        payment_token_request=_,
+    )
+    await client.get_resource_payment_token(
+        **_request(GetResourcePaymentTokenInputDict)
+    )
+    await client.get_resource_payment_token(_request(GetResourcePaymentTokenInput))
+    await client.get_resource_payment_token(_request(GetResourcePaymentTokenInputDict))
+    await client.get_workload_access_token(workload_name=_)
+    await client.get_workload_access_token(**_request(GetWorkloadAccessTokenInputDict))
+    await client.get_workload_access_token(_request(GetWorkloadAccessTokenInput))
+    await client.get_workload_access_token(_request(GetWorkloadAccessTokenInputDict))
+    await client.get_workload_access_token_for_jwt(workload_name=_, user_token=_)
+    await client.get_workload_access_token_for_jwt(
+        **_request(GetWorkloadAccessTokenForJWTInputDict)
+    )
+    await client.get_workload_access_token_for_jwt(
+        _request(GetWorkloadAccessTokenForJWTInput)
+    )
+    await client.get_workload_access_token_for_jwt(
+        _request(GetWorkloadAccessTokenForJWTInputDict)
+    )
+    await client.get_workload_access_token_for_user_id(workload_name=_, user_id=_)
+    await client.get_workload_access_token_for_user_id(
+        **_request(GetWorkloadAccessTokenForUserIdInputDict)
+    )
+    await client.get_workload_access_token_for_user_id(
+        _request(GetWorkloadAccessTokenForUserIdInput)
+    )
+    await client.get_workload_access_token_for_user_id(
+        _request(GetWorkloadAccessTokenForUserIdInputDict)
+    )
+    await client.ingest_data(memory_id=_, source=_, content_timestamp=_, actor_id=_)
+    await client.ingest_data(**_request(IngestDataInputDict))
+    await client.ingest_data(_request(IngestDataInput))
+    await client.ingest_data(_request(IngestDataInputDict))
+    await client.invoke_agent_runtime(agent_runtime_arn=_, payload=_)
+    await client.invoke_agent_runtime(**_request(InvokeAgentRuntimeInputDict))
+    await client.invoke_agent_runtime(_request(InvokeAgentRuntimeInput))
+    await client.invoke_agent_runtime(_request(InvokeAgentRuntimeInputDict))
+    await client.invoke_agent_runtime_command(agent_runtime_arn=_, body=_)
+    await client.invoke_agent_runtime_command(
+        **_request(InvokeAgentRuntimeCommandInputDict)
+    )
+    await client.invoke_agent_runtime_command(_request(InvokeAgentRuntimeCommandInput))
+    await client.invoke_agent_runtime_command(
+        _request(InvokeAgentRuntimeCommandInputDict)
+    )
+    await client.invoke_browser(browser_identifier=_, session_id=_, action=_)
+    await client.invoke_browser(**_request(InvokeBrowserInputDict))
+    await client.invoke_browser(_request(InvokeBrowserInput))
+    await client.invoke_browser(_request(InvokeBrowserInputDict))
+    await client.invoke_code_interpreter(code_interpreter_identifier=_, name=_)
+    await client.invoke_code_interpreter(**_request(InvokeCodeInterpreterInputDict))
+    await client.invoke_code_interpreter(_request(InvokeCodeInterpreterInput))
+    await client.invoke_code_interpreter(_request(InvokeCodeInterpreterInputDict))
+    await client.invoke_harness(harness_arn=_, runtime_session_id=_, messages=_)
+    await client.invoke_harness(**_request(InvokeHarnessInputDict))
+    await client.invoke_harness(_request(InvokeHarnessInput))
+    await client.invoke_harness(_request(InvokeHarnessInputDict))
+    await client.invoke_web_search(web_search_id=_, search_query=_)
+    await client.invoke_web_search(**_request(InvokeWebSearchInputDict))
+    await client.invoke_web_search(_request(InvokeWebSearchInput))
+    await client.invoke_web_search(_request(InvokeWebSearchInputDict))
+    await client.list_ab_tests()
+    await client.list_ab_tests(**_request(ListABTestsInputDict))
+    await client.list_ab_tests(_request(ListABTestsInput))
+    await client.list_ab_tests(_request(ListABTestsInputDict))
+    await client.list_actors(memory_id=_)
+    await client.list_actors(**_request(ListActorsInputDict))
+    await client.list_actors(_request(ListActorsInput))
+    await client.list_actors(_request(ListActorsInputDict))
+    await client.list_batch_evaluations()
+    await client.list_batch_evaluations(**_request(ListBatchEvaluationsInputDict))
+    await client.list_batch_evaluations(_request(ListBatchEvaluationsInput))
+    await client.list_batch_evaluations(_request(ListBatchEvaluationsInputDict))
+    await client.list_browser_sessions(browser_identifier=_)
+    await client.list_browser_sessions(**_request(ListBrowserSessionsInputDict))
+    await client.list_browser_sessions(_request(ListBrowserSessionsInput))
+    await client.list_browser_sessions(_request(ListBrowserSessionsInputDict))
+    await client.list_code_interpreter_sessions(code_interpreter_identifier=_)
+    await client.list_code_interpreter_sessions(
+        **_request(ListCodeInterpreterSessionsInputDict)
+    )
+    await client.list_code_interpreter_sessions(
+        _request(ListCodeInterpreterSessionsInput)
+    )
+    await client.list_code_interpreter_sessions(
+        _request(ListCodeInterpreterSessionsInputDict)
+    )
+    await client.list_events(memory_id=_, session_id=_, actor_id=_)
+    await client.list_events(**_request(ListEventsInputDict))
+    await client.list_events(_request(ListEventsInput))
+    await client.list_events(_request(ListEventsInputDict))
+    await client.list_memory_extraction_jobs(memory_id=_)
+    await client.list_memory_extraction_jobs(
+        **_request(ListMemoryExtractionJobsInputDict)
+    )
+    await client.list_memory_extraction_jobs(_request(ListMemoryExtractionJobsInput))
+    await client.list_memory_extraction_jobs(
+        _request(ListMemoryExtractionJobsInputDict)
+    )
+    await client.list_memory_records(memory_id=_)
+    await client.list_memory_records(**_request(ListMemoryRecordsInputDict))
+    await client.list_memory_records(_request(ListMemoryRecordsInput))
+    await client.list_memory_records(_request(ListMemoryRecordsInputDict))
+    await client.list_payment_instruments(payment_manager_arn=_)
+    await client.list_payment_instruments(**_request(ListPaymentInstrumentsInputDict))
+    await client.list_payment_instruments(_request(ListPaymentInstrumentsInput))
+    await client.list_payment_instruments(_request(ListPaymentInstrumentsInputDict))
+    await client.list_payment_sessions(payment_manager_arn=_)
+    await client.list_payment_sessions(**_request(ListPaymentSessionsInputDict))
+    await client.list_payment_sessions(_request(ListPaymentSessionsInput))
+    await client.list_payment_sessions(_request(ListPaymentSessionsInputDict))
+    await client.list_recommendations()
+    await client.list_recommendations(**_request(ListRecommendationsInputDict))
+    await client.list_recommendations(_request(ListRecommendationsInput))
+    await client.list_recommendations(_request(ListRecommendationsInputDict))
+    await client.list_sessions(memory_id=_, actor_id=_)
+    await client.list_sessions(**_request(ListSessionsInputDict))
+    await client.list_sessions(_request(ListSessionsInput))
+    await client.list_sessions(_request(ListSessionsInputDict))
+    await client.process_payment(
+        payment_manager_arn=_,
+        payment_session_id=_,
+        payment_instrument_id=_,
+        payment_type=_,
+        payment_input=_,
+    )
+    await client.process_payment(**_request(ProcessPaymentInputDict))
+    await client.process_payment(_request(ProcessPaymentInput))
+    await client.process_payment(_request(ProcessPaymentInputDict))
+    await client.retrieve_memory_records(memory_id=_, search_criteria=_)
+    await client.retrieve_memory_records(**_request(RetrieveMemoryRecordsInputDict))
+    await client.retrieve_memory_records(_request(RetrieveMemoryRecordsInput))
+    await client.retrieve_memory_records(_request(RetrieveMemoryRecordsInputDict))
+    await client.save_browser_session_profile(
+        profile_identifier=_, browser_identifier=_, session_id=_
+    )
+    await client.save_browser_session_profile(
+        **_request(SaveBrowserSessionProfileInputDict)
+    )
+    await client.save_browser_session_profile(_request(SaveBrowserSessionProfileInput))
+    await client.save_browser_session_profile(
+        _request(SaveBrowserSessionProfileInputDict)
+    )
+    await client.search_registry_records(search_query=_, registry_ids=_)
+    await client.search_registry_records(**_request(SearchRegistryRecordsInputDict))
+    await client.search_registry_records(_request(SearchRegistryRecordsInput))
+    await client.search_registry_records(_request(SearchRegistryRecordsInputDict))
+    await client.start_batch_evaluation(batch_evaluation_name=_, data_source_config=_)
+    await client.start_batch_evaluation(**_request(StartBatchEvaluationInputDict))
+    await client.start_batch_evaluation(_request(StartBatchEvaluationInput))
+    await client.start_batch_evaluation(_request(StartBatchEvaluationInputDict))
+    await client.start_browser_session(browser_identifier=_)
+    await client.start_browser_session(**_request(StartBrowserSessionInputDict))
+    await client.start_browser_session(_request(StartBrowserSessionInput))
+    await client.start_browser_session(_request(StartBrowserSessionInputDict))
+    await client.start_code_interpreter_session(code_interpreter_identifier=_)
+    await client.start_code_interpreter_session(
+        **_request(StartCodeInterpreterSessionInputDict)
+    )
+    await client.start_code_interpreter_session(
+        _request(StartCodeInterpreterSessionInput)
+    )
+    await client.start_code_interpreter_session(
+        _request(StartCodeInterpreterSessionInputDict)
+    )
+    await client.start_memory_extraction_job(memory_id=_, extraction_job=_)
+    await client.start_memory_extraction_job(
+        **_request(StartMemoryExtractionJobInputDict)
+    )
+    await client.start_memory_extraction_job(_request(StartMemoryExtractionJobInput))
+    await client.start_memory_extraction_job(
+        _request(StartMemoryExtractionJobInputDict)
+    )
+    await client.start_recommendation(name=_, type=_, recommendation_config=_)
+    await client.start_recommendation(**_request(StartRecommendationInputDict))
+    await client.start_recommendation(_request(StartRecommendationInput))
+    await client.start_recommendation(_request(StartRecommendationInputDict))
+    await client.stop_batch_evaluation(batch_evaluation_id=_)
+    await client.stop_batch_evaluation(**_request(StopBatchEvaluationInputDict))
+    await client.stop_batch_evaluation(_request(StopBatchEvaluationInput))
+    await client.stop_batch_evaluation(_request(StopBatchEvaluationInputDict))
+    await client.stop_browser_session(browser_identifier=_, session_id=_)
+    await client.stop_browser_session(**_request(StopBrowserSessionInputDict))
+    await client.stop_browser_session(_request(StopBrowserSessionInput))
+    await client.stop_browser_session(_request(StopBrowserSessionInputDict))
+    await client.stop_code_interpreter_session(
+        code_interpreter_identifier=_, session_id=_
+    )
+    await client.stop_code_interpreter_session(
+        **_request(StopCodeInterpreterSessionInputDict)
+    )
+    await client.stop_code_interpreter_session(
+        _request(StopCodeInterpreterSessionInput)
+    )
+    await client.stop_code_interpreter_session(
+        _request(StopCodeInterpreterSessionInputDict)
+    )
+    await client.stop_runtime_session(runtime_session_id=_, agent_runtime_arn=_)
+    await client.stop_runtime_session(**_request(StopRuntimeSessionInputDict))
+    await client.stop_runtime_session(_request(StopRuntimeSessionInput))
+    await client.stop_runtime_session(_request(StopRuntimeSessionInputDict))
+    await client.update_ab_test(ab_test_id=_)
+    await client.update_ab_test(**_request(UpdateABTestInputDict))
+    await client.update_ab_test(_request(UpdateABTestInput))
+    await client.update_ab_test(_request(UpdateABTestInputDict))
+    await client.update_browser_stream(
+        browser_identifier=_, session_id=_, stream_update=_
+    )
+    await client.update_browser_stream(**_request(UpdateBrowserStreamInputDict))
+    await client.update_browser_stream(_request(UpdateBrowserStreamInput))
+    await client.update_browser_stream(_request(UpdateBrowserStreamInputDict))
+
+
+def check_sync_calls(client: BedrockAgentCoreClient) -> None:
+    pass
+    client.batch_create_memory_records(memory_id=_, records=_)
+    client.batch_create_memory_records(**_request(BatchCreateMemoryRecordsInputDict))
+    client.batch_create_memory_records(_request(BatchCreateMemoryRecordsInput))
+    client.batch_create_memory_records(_request(BatchCreateMemoryRecordsInputDict))
+    client.batch_delete_memory_records(memory_id=_, records=_)
+    client.batch_delete_memory_records(**_request(BatchDeleteMemoryRecordsInputDict))
+    client.batch_delete_memory_records(_request(BatchDeleteMemoryRecordsInput))
+    client.batch_delete_memory_records(_request(BatchDeleteMemoryRecordsInputDict))
+    client.batch_update_memory_records(memory_id=_, records=_)
+    client.batch_update_memory_records(**_request(BatchUpdateMemoryRecordsInputDict))
+    client.batch_update_memory_records(_request(BatchUpdateMemoryRecordsInput))
+    client.batch_update_memory_records(_request(BatchUpdateMemoryRecordsInputDict))
+    client.complete_resource_token_auth(user_identifier=_, session_uri=_)
+    client.complete_resource_token_auth(**_request(CompleteResourceTokenAuthInputDict))
+    client.complete_resource_token_auth(_request(CompleteResourceTokenAuthInput))
+    client.complete_resource_token_auth(_request(CompleteResourceTokenAuthInputDict))
+    client.create_ab_test(
+        name=_, gateway_arn=_, variants=_, evaluation_config=_, role_arn=_
+    )
+    client.create_ab_test(**_request(CreateABTestInputDict))
+    client.create_ab_test(_request(CreateABTestInput))
+    client.create_ab_test(_request(CreateABTestInputDict))
+    client.create_event(memory_id=_, actor_id=_, event_timestamp=_, payload=_)
+    client.create_event(**_request(CreateEventInputDict))
+    client.create_event(_request(CreateEventInput))
+    client.create_event(_request(CreateEventInputDict))
+    client.create_payment_instrument(
+        payment_manager_arn=_,
+        payment_connector_id=_,
+        payment_instrument_type=_,
+        payment_instrument_details=_,
+    )
+    client.create_payment_instrument(**_request(CreatePaymentInstrumentInputDict))
+    client.create_payment_instrument(_request(CreatePaymentInstrumentInput))
+    client.create_payment_instrument(_request(CreatePaymentInstrumentInputDict))
+    client.create_payment_session(payment_manager_arn=_, expiry_time_in_minutes=_)
+    client.create_payment_session(**_request(CreatePaymentSessionInputDict))
+    client.create_payment_session(_request(CreatePaymentSessionInput))
+    client.create_payment_session(_request(CreatePaymentSessionInputDict))
+    client.delete_ab_test(ab_test_id=_)
+    client.delete_ab_test(**_request(DeleteABTestInputDict))
+    client.delete_ab_test(_request(DeleteABTestInput))
+    client.delete_ab_test(_request(DeleteABTestInputDict))
+    client.delete_batch_evaluation(batch_evaluation_id=_)
+    client.delete_batch_evaluation(**_request(DeleteBatchEvaluationInputDict))
+    client.delete_batch_evaluation(_request(DeleteBatchEvaluationInput))
+    client.delete_batch_evaluation(_request(DeleteBatchEvaluationInputDict))
+    client.delete_capacity_provider_session(capacity_provider_id=_, session_id=_)
+    client.delete_capacity_provider_session(
+        **_request(DeleteCapacityProviderSessionInputDict)
+    )
+    client.delete_capacity_provider_session(
+        _request(DeleteCapacityProviderSessionInput)
+    )
+    client.delete_capacity_provider_session(
+        _request(DeleteCapacityProviderSessionInputDict)
+    )
+    client.delete_event(memory_id=_, session_id=_, event_id=_, actor_id=_)
+    client.delete_event(**_request(DeleteEventInputDict))
+    client.delete_event(_request(DeleteEventInput))
+    client.delete_event(_request(DeleteEventInputDict))
+    client.delete_memory_record(memory_id=_, memory_record_id=_)
+    client.delete_memory_record(**_request(DeleteMemoryRecordInputDict))
+    client.delete_memory_record(_request(DeleteMemoryRecordInput))
+    client.delete_memory_record(_request(DeleteMemoryRecordInputDict))
+    client.delete_payment_instrument(
+        payment_manager_arn=_, payment_connector_id=_, payment_instrument_id=_
+    )
+    client.delete_payment_instrument(**_request(DeletePaymentInstrumentInputDict))
+    client.delete_payment_instrument(_request(DeletePaymentInstrumentInput))
+    client.delete_payment_instrument(_request(DeletePaymentInstrumentInputDict))
+    client.delete_payment_session(payment_manager_arn=_, payment_session_id=_)
+    client.delete_payment_session(**_request(DeletePaymentSessionInputDict))
+    client.delete_payment_session(_request(DeletePaymentSessionInput))
+    client.delete_payment_session(_request(DeletePaymentSessionInputDict))
+    client.delete_recommendation(recommendation_id=_)
+    client.delete_recommendation(**_request(DeleteRecommendationInputDict))
+    client.delete_recommendation(_request(DeleteRecommendationInput))
+    client.delete_recommendation(_request(DeleteRecommendationInputDict))
+    client.evaluate(evaluator_id=_, evaluation_input=_)
+    client.evaluate(**_request(EvaluateInputDict))
+    client.evaluate(_request(EvaluateInput))
+    client.evaluate(_request(EvaluateInputDict))
+    client.get_ab_test(ab_test_id=_)
+    client.get_ab_test(**_request(GetABTestInputDict))
+    client.get_ab_test(_request(GetABTestInput))
+    client.get_ab_test(_request(GetABTestInputDict))
+    client.get_agent_card(agent_runtime_arn=_)
+    client.get_agent_card(**_request(GetAgentCardInputDict))
+    client.get_agent_card(_request(GetAgentCardInput))
+    client.get_agent_card(_request(GetAgentCardInputDict))
+    client.get_batch_evaluation(batch_evaluation_id=_)
+    client.get_batch_evaluation(**_request(GetBatchEvaluationInputDict))
+    client.get_batch_evaluation(_request(GetBatchEvaluationInput))
+    client.get_batch_evaluation(_request(GetBatchEvaluationInputDict))
+    client.get_browser_session(browser_identifier=_, session_id=_)
+    client.get_browser_session(**_request(GetBrowserSessionInputDict))
+    client.get_browser_session(_request(GetBrowserSessionInput))
+    client.get_browser_session(_request(GetBrowserSessionInputDict))
+    client.get_code_interpreter_session(code_interpreter_identifier=_, session_id=_)
+    client.get_code_interpreter_session(**_request(GetCodeInterpreterSessionInputDict))
+    client.get_code_interpreter_session(_request(GetCodeInterpreterSessionInput))
+    client.get_code_interpreter_session(_request(GetCodeInterpreterSessionInputDict))
+    client.get_event(memory_id=_, session_id=_, actor_id=_, event_id=_)
+    client.get_event(**_request(GetEventInputDict))
+    client.get_event(_request(GetEventInput))
+    client.get_event(_request(GetEventInputDict))
+    client.get_memory_record(memory_id=_, memory_record_id=_)
+    client.get_memory_record(**_request(GetMemoryRecordInputDict))
+    client.get_memory_record(_request(GetMemoryRecordInput))
+    client.get_memory_record(_request(GetMemoryRecordInputDict))
+    client.get_payment_instrument(payment_manager_arn=_, payment_instrument_id=_)
+    client.get_payment_instrument(**_request(GetPaymentInstrumentInputDict))
+    client.get_payment_instrument(_request(GetPaymentInstrumentInput))
+    client.get_payment_instrument(_request(GetPaymentInstrumentInputDict))
+    client.get_payment_instrument_balance(
+        payment_manager_arn=_,
+        payment_connector_id=_,
+        payment_instrument_id=_,
+        chain=_,
+        token=_,
+    )
+    client.get_payment_instrument_balance(
+        **_request(GetPaymentInstrumentBalanceInputDict)
+    )
+    client.get_payment_instrument_balance(_request(GetPaymentInstrumentBalanceInput))
+    client.get_payment_instrument_balance(
+        _request(GetPaymentInstrumentBalanceInputDict)
+    )
+    client.get_payment_session(payment_manager_arn=_, payment_session_id=_)
+    client.get_payment_session(**_request(GetPaymentSessionInputDict))
+    client.get_payment_session(_request(GetPaymentSessionInput))
+    client.get_payment_session(_request(GetPaymentSessionInputDict))
+    client.get_recommendation(recommendation_id=_)
+    client.get_recommendation(**_request(GetRecommendationInputDict))
+    client.get_recommendation(_request(GetRecommendationInput))
+    client.get_recommendation(_request(GetRecommendationInputDict))
+    client.get_resource_api_key(
+        workload_identity_token=_, resource_credential_provider_name=_
+    )
+    client.get_resource_api_key(**_request(GetResourceApiKeyInputDict))
+    client.get_resource_api_key(_request(GetResourceApiKeyInput))
+    client.get_resource_api_key(_request(GetResourceApiKeyInputDict))
+    client.get_resource_oauth2_token(
+        workload_identity_token=_,
+        resource_credential_provider_name=_,
+        scopes=_,
+        oauth2_flow=_,
+    )
+    client.get_resource_oauth2_token(**_request(GetResourceOauth2TokenInputDict))
+    client.get_resource_oauth2_token(_request(GetResourceOauth2TokenInput))
+    client.get_resource_oauth2_token(_request(GetResourceOauth2TokenInputDict))
+    client.get_resource_payment_token(
+        workload_identity_token=_,
+        resource_credential_provider_name=_,
+        payment_token_request=_,
+    )
+    client.get_resource_payment_token(**_request(GetResourcePaymentTokenInputDict))
+    client.get_resource_payment_token(_request(GetResourcePaymentTokenInput))
+    client.get_resource_payment_token(_request(GetResourcePaymentTokenInputDict))
+    client.get_workload_access_token(workload_name=_)
+    client.get_workload_access_token(**_request(GetWorkloadAccessTokenInputDict))
+    client.get_workload_access_token(_request(GetWorkloadAccessTokenInput))
+    client.get_workload_access_token(_request(GetWorkloadAccessTokenInputDict))
+    client.get_workload_access_token_for_jwt(workload_name=_, user_token=_)
+    client.get_workload_access_token_for_jwt(
+        **_request(GetWorkloadAccessTokenForJWTInputDict)
+    )
+    client.get_workload_access_token_for_jwt(
+        _request(GetWorkloadAccessTokenForJWTInput)
+    )
+    client.get_workload_access_token_for_jwt(
+        _request(GetWorkloadAccessTokenForJWTInputDict)
+    )
+    client.get_workload_access_token_for_user_id(workload_name=_, user_id=_)
+    client.get_workload_access_token_for_user_id(
+        **_request(GetWorkloadAccessTokenForUserIdInputDict)
+    )
+    client.get_workload_access_token_for_user_id(
+        _request(GetWorkloadAccessTokenForUserIdInput)
+    )
+    client.get_workload_access_token_for_user_id(
+        _request(GetWorkloadAccessTokenForUserIdInputDict)
+    )
+    client.ingest_data(memory_id=_, source=_, content_timestamp=_, actor_id=_)
+    client.ingest_data(**_request(IngestDataInputDict))
+    client.ingest_data(_request(IngestDataInput))
+    client.ingest_data(_request(IngestDataInputDict))
+    client.invoke_agent_runtime(agent_runtime_arn=_, payload=_)
+    client.invoke_agent_runtime(**_request(InvokeAgentRuntimeInputDict))
+    client.invoke_agent_runtime(_request(InvokeAgentRuntimeInput))
+    client.invoke_agent_runtime(_request(InvokeAgentRuntimeInputDict))
+    client.invoke_browser(browser_identifier=_, session_id=_, action=_)
+    client.invoke_browser(**_request(InvokeBrowserInputDict))
+    client.invoke_browser(_request(InvokeBrowserInput))
+    client.invoke_browser(_request(InvokeBrowserInputDict))
+    client.invoke_web_search(web_search_id=_, search_query=_)
+    client.invoke_web_search(**_request(InvokeWebSearchInputDict))
+    client.invoke_web_search(_request(InvokeWebSearchInput))
+    client.invoke_web_search(_request(InvokeWebSearchInputDict))
+    client.list_ab_tests()
+    client.list_ab_tests(**_request(ListABTestsInputDict))
+    client.list_ab_tests(_request(ListABTestsInput))
+    client.list_ab_tests(_request(ListABTestsInputDict))
+    client.list_actors(memory_id=_)
+    client.list_actors(**_request(ListActorsInputDict))
+    client.list_actors(_request(ListActorsInput))
+    client.list_actors(_request(ListActorsInputDict))
+    client.list_batch_evaluations()
+    client.list_batch_evaluations(**_request(ListBatchEvaluationsInputDict))
+    client.list_batch_evaluations(_request(ListBatchEvaluationsInput))
+    client.list_batch_evaluations(_request(ListBatchEvaluationsInputDict))
+    client.list_browser_sessions(browser_identifier=_)
+    client.list_browser_sessions(**_request(ListBrowserSessionsInputDict))
+    client.list_browser_sessions(_request(ListBrowserSessionsInput))
+    client.list_browser_sessions(_request(ListBrowserSessionsInputDict))
+    client.list_code_interpreter_sessions(code_interpreter_identifier=_)
+    client.list_code_interpreter_sessions(
+        **_request(ListCodeInterpreterSessionsInputDict)
+    )
+    client.list_code_interpreter_sessions(_request(ListCodeInterpreterSessionsInput))
+    client.list_code_interpreter_sessions(
+        _request(ListCodeInterpreterSessionsInputDict)
+    )
+    client.list_events(memory_id=_, session_id=_, actor_id=_)
+    client.list_events(**_request(ListEventsInputDict))
+    client.list_events(_request(ListEventsInput))
+    client.list_events(_request(ListEventsInputDict))
+    client.list_memory_extraction_jobs(memory_id=_)
+    client.list_memory_extraction_jobs(**_request(ListMemoryExtractionJobsInputDict))
+    client.list_memory_extraction_jobs(_request(ListMemoryExtractionJobsInput))
+    client.list_memory_extraction_jobs(_request(ListMemoryExtractionJobsInputDict))
+    client.list_memory_records(memory_id=_)
+    client.list_memory_records(**_request(ListMemoryRecordsInputDict))
+    client.list_memory_records(_request(ListMemoryRecordsInput))
+    client.list_memory_records(_request(ListMemoryRecordsInputDict))
+    client.list_payment_instruments(payment_manager_arn=_)
+    client.list_payment_instruments(**_request(ListPaymentInstrumentsInputDict))
+    client.list_payment_instruments(_request(ListPaymentInstrumentsInput))
+    client.list_payment_instruments(_request(ListPaymentInstrumentsInputDict))
+    client.list_payment_sessions(payment_manager_arn=_)
+    client.list_payment_sessions(**_request(ListPaymentSessionsInputDict))
+    client.list_payment_sessions(_request(ListPaymentSessionsInput))
+    client.list_payment_sessions(_request(ListPaymentSessionsInputDict))
+    client.list_recommendations()
+    client.list_recommendations(**_request(ListRecommendationsInputDict))
+    client.list_recommendations(_request(ListRecommendationsInput))
+    client.list_recommendations(_request(ListRecommendationsInputDict))
+    client.list_sessions(memory_id=_, actor_id=_)
+    client.list_sessions(**_request(ListSessionsInputDict))
+    client.list_sessions(_request(ListSessionsInput))
+    client.list_sessions(_request(ListSessionsInputDict))
+    client.process_payment(
+        payment_manager_arn=_,
+        payment_session_id=_,
+        payment_instrument_id=_,
+        payment_type=_,
+        payment_input=_,
+    )
+    client.process_payment(**_request(ProcessPaymentInputDict))
+    client.process_payment(_request(ProcessPaymentInput))
+    client.process_payment(_request(ProcessPaymentInputDict))
+    client.retrieve_memory_records(memory_id=_, search_criteria=_)
+    client.retrieve_memory_records(**_request(RetrieveMemoryRecordsInputDict))
+    client.retrieve_memory_records(_request(RetrieveMemoryRecordsInput))
+    client.retrieve_memory_records(_request(RetrieveMemoryRecordsInputDict))
+    client.save_browser_session_profile(
+        profile_identifier=_, browser_identifier=_, session_id=_
+    )
+    client.save_browser_session_profile(**_request(SaveBrowserSessionProfileInputDict))
+    client.save_browser_session_profile(_request(SaveBrowserSessionProfileInput))
+    client.save_browser_session_profile(_request(SaveBrowserSessionProfileInputDict))
+    client.search_registry_records(search_query=_, registry_ids=_)
+    client.search_registry_records(**_request(SearchRegistryRecordsInputDict))
+    client.search_registry_records(_request(SearchRegistryRecordsInput))
+    client.search_registry_records(_request(SearchRegistryRecordsInputDict))
+    client.start_batch_evaluation(batch_evaluation_name=_, data_source_config=_)
+    client.start_batch_evaluation(**_request(StartBatchEvaluationInputDict))
+    client.start_batch_evaluation(_request(StartBatchEvaluationInput))
+    client.start_batch_evaluation(_request(StartBatchEvaluationInputDict))
+    client.start_browser_session(browser_identifier=_)
+    client.start_browser_session(**_request(StartBrowserSessionInputDict))
+    client.start_browser_session(_request(StartBrowserSessionInput))
+    client.start_browser_session(_request(StartBrowserSessionInputDict))
+    client.start_code_interpreter_session(code_interpreter_identifier=_)
+    client.start_code_interpreter_session(
+        **_request(StartCodeInterpreterSessionInputDict)
+    )
+    client.start_code_interpreter_session(_request(StartCodeInterpreterSessionInput))
+    client.start_code_interpreter_session(
+        _request(StartCodeInterpreterSessionInputDict)
+    )
+    client.start_memory_extraction_job(memory_id=_, extraction_job=_)
+    client.start_memory_extraction_job(**_request(StartMemoryExtractionJobInputDict))
+    client.start_memory_extraction_job(_request(StartMemoryExtractionJobInput))
+    client.start_memory_extraction_job(_request(StartMemoryExtractionJobInputDict))
+    client.start_recommendation(name=_, type=_, recommendation_config=_)
+    client.start_recommendation(**_request(StartRecommendationInputDict))
+    client.start_recommendation(_request(StartRecommendationInput))
+    client.start_recommendation(_request(StartRecommendationInputDict))
+    client.stop_batch_evaluation(batch_evaluation_id=_)
+    client.stop_batch_evaluation(**_request(StopBatchEvaluationInputDict))
+    client.stop_batch_evaluation(_request(StopBatchEvaluationInput))
+    client.stop_batch_evaluation(_request(StopBatchEvaluationInputDict))
+    client.stop_browser_session(browser_identifier=_, session_id=_)
+    client.stop_browser_session(**_request(StopBrowserSessionInputDict))
+    client.stop_browser_session(_request(StopBrowserSessionInput))
+    client.stop_browser_session(_request(StopBrowserSessionInputDict))
+    client.stop_code_interpreter_session(code_interpreter_identifier=_, session_id=_)
+    client.stop_code_interpreter_session(
+        **_request(StopCodeInterpreterSessionInputDict)
+    )
+    client.stop_code_interpreter_session(_request(StopCodeInterpreterSessionInput))
+    client.stop_code_interpreter_session(_request(StopCodeInterpreterSessionInputDict))
+    client.stop_runtime_session(runtime_session_id=_, agent_runtime_arn=_)
+    client.stop_runtime_session(**_request(StopRuntimeSessionInputDict))
+    client.stop_runtime_session(_request(StopRuntimeSessionInput))
+    client.stop_runtime_session(_request(StopRuntimeSessionInputDict))
+    client.update_ab_test(ab_test_id=_)
+    client.update_ab_test(**_request(UpdateABTestInputDict))
+    client.update_ab_test(_request(UpdateABTestInput))
+    client.update_ab_test(_request(UpdateABTestInputDict))
+    client.update_browser_stream(browser_identifier=_, session_id=_, stream_update=_)
+    client.update_browser_stream(**_request(UpdateBrowserStreamInputDict))
+    client.update_browser_stream(_request(UpdateBrowserStreamInput))
+    client.update_browser_stream(_request(UpdateBrowserStreamInputDict))

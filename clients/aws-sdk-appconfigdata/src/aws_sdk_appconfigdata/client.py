@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import cast
+from typing import Unpack as _Unpack, cast, overload as _overload
 
 from smithy_aws_core.config.types import ConfigSource
 from smithy_aws_core.identity.chain.resolver import IdentityChain
@@ -19,12 +19,7 @@ from .user_agent import aws_user_agent_plugin
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from .models import (
-        GetLatestConfigurationInput,
-        GetLatestConfigurationOutput,
-        StartConfigurationSessionInput,
-        StartConfigurationSessionOutput,
-    )
+    from .models import GetLatestConfigurationOutput, StartConfigurationSessionOutput
 
 
 logger = logging.getLogger(__name__)
@@ -89,10 +84,25 @@ class AppConfigDataClient(Client[AppConfigDataConfig]):
     in the *AppConfig User Guide*.
     """
 
-    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
+    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
 
+    @_overload
     def get_latest_configuration(
-        self, input: GetLatestConfigurationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetLatestConfigurationInput
+        | _models.GetLatestConfigurationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetLatestConfigurationOutput: ...
+
+    @_overload
+    def get_latest_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetLatestConfigurationInputDict],
     ) -> GetLatestConfigurationOutput:
         """
         Retrieves the latest deployed configuration. This API may return empty
@@ -116,8 +126,6 @@ class AppConfigDataClient(Client[AppConfigDataConfig]):
             [Pricing](https://aws.amazon.com/systems-manager/pricing/).
 
         Args:
-            input:
-                An instance of `GetLatestConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -127,10 +135,34 @@ class AppConfigDataClient(Client[AppConfigDataConfig]):
         Returns:
             An instance of `GetLatestConfigurationOutput`.
         """
-        return self._invoke(input, _models.GET_LATEST_CONFIGURATION, [], plugins)
 
+    def get_latest_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetLatestConfigurationOutput:
+        return self._invoke(
+            self._select_input(_models.GET_LATEST_CONFIGURATION, args, kwargs),
+            _models.GET_LATEST_CONFIGURATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def start_configuration_session(
-        self, input: StartConfigurationSessionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StartConfigurationSessionInput
+        | _models.StartConfigurationSessionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StartConfigurationSessionOutput: ...
+
+    @_overload
+    def start_configuration_session(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartConfigurationSessionInputDict],
     ) -> StartConfigurationSessionOutput:
         """
         Starts a configuration session used to retrieve a deployed
@@ -141,8 +173,6 @@ class AppConfigDataClient(Client[AppConfigDataConfig]):
         in the *AppConfig User Guide*.
 
         Args:
-            input:
-                An instance of `StartConfigurationSessionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -152,7 +182,16 @@ class AppConfigDataClient(Client[AppConfigDataConfig]):
         Returns:
             An instance of `StartConfigurationSessionOutput`.
         """
-        return self._invoke(input, _models.START_CONFIGURATION_SESSION, [], plugins)
+
+    def start_configuration_session(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StartConfigurationSessionOutput:
+        return self._invoke(
+            self._select_input(_models.START_CONFIGURATION_SESSION, args, kwargs),
+            _models.START_CONFIGURATION_SESSION,
+            [],
+            plugins,
+        )
 
     def _new_config(self) -> AppConfigDataConfig:
         return AppConfigDataConfig.resolve()

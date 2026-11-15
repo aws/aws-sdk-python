@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import cast
+from typing import Unpack as _Unpack, cast, overload as _overload
 
 from smithy_aws_core.config.types import ConfigSource
 from smithy_aws_core.identity.chain.resolver import IdentityChain
@@ -20,169 +20,87 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from .models import (
-        AssociatePermissionInput,
         AssociatePermissionOutput,
-        BatchDeleteDocumentInput,
         BatchDeleteDocumentOutput,
-        BatchPutDocumentInput,
         BatchPutDocumentOutput,
-        CancelSubscriptionInput,
         CancelSubscriptionOutput,
-        ChatSyncInput,
         ChatSyncOutput,
-        CheckDocumentAccessInput,
         CheckDocumentAccessOutput,
-        CreateAnonymousWebExperienceUrlInput,
         CreateAnonymousWebExperienceUrlOutput,
-        CreateApplicationInput,
         CreateApplicationOutput,
-        CreateChatResponseConfigurationInput,
         CreateChatResponseConfigurationOutput,
-        CreateDataAccessorInput,
         CreateDataAccessorOutput,
-        CreateDataSourceInput,
         CreateDataSourceOutput,
-        CreateIndexInput,
         CreateIndexOutput,
-        CreatePluginInput,
         CreatePluginOutput,
-        CreateRetrieverInput,
         CreateRetrieverOutput,
-        CreateSubscriptionInput,
         CreateSubscriptionOutput,
-        CreateUserInput,
         CreateUserOutput,
-        CreateWebExperienceInput,
         CreateWebExperienceOutput,
-        DeleteApplicationInput,
         DeleteApplicationOutput,
-        DeleteAttachmentInput,
         DeleteAttachmentOutput,
-        DeleteChatControlsConfigurationInput,
         DeleteChatControlsConfigurationOutput,
-        DeleteChatResponseConfigurationInput,
         DeleteChatResponseConfigurationOutput,
-        DeleteConversationInput,
         DeleteConversationOutput,
-        DeleteDataAccessorInput,
         DeleteDataAccessorOutput,
-        DeleteDataSourceInput,
         DeleteDataSourceOutput,
-        DeleteGroupInput,
         DeleteGroupOutput,
-        DeleteIndexInput,
         DeleteIndexOutput,
-        DeletePluginInput,
         DeletePluginOutput,
-        DeleteRetrieverInput,
         DeleteRetrieverOutput,
-        DeleteUserInput,
         DeleteUserOutput,
-        DeleteWebExperienceInput,
         DeleteWebExperienceOutput,
-        DisassociatePermissionInput,
         DisassociatePermissionOutput,
-        GetApplicationInput,
         GetApplicationOutput,
-        GetChatControlsConfigurationInput,
         GetChatControlsConfigurationOutput,
-        GetChatResponseConfigurationInput,
         GetChatResponseConfigurationOutput,
-        GetDataAccessorInput,
         GetDataAccessorOutput,
-        GetDataSourceInput,
         GetDataSourceOutput,
-        GetDocumentContentInput,
         GetDocumentContentOutput,
-        GetGroupInput,
         GetGroupOutput,
-        GetIndexInput,
         GetIndexOutput,
-        GetMediaInput,
         GetMediaOutput,
-        GetPluginInput,
         GetPluginOutput,
-        GetPolicyInput,
         GetPolicyOutput,
-        GetRetrieverInput,
         GetRetrieverOutput,
-        GetUserInput,
         GetUserOutput,
-        GetWebExperienceInput,
         GetWebExperienceOutput,
-        ListApplicationsInput,
         ListApplicationsOutput,
-        ListAttachmentsInput,
         ListAttachmentsOutput,
-        ListChatResponseConfigurationsInput,
         ListChatResponseConfigurationsOutput,
-        ListConversationsInput,
         ListConversationsOutput,
-        ListDataAccessorsInput,
         ListDataAccessorsOutput,
-        ListDataSourceSyncJobsInput,
         ListDataSourceSyncJobsOutput,
-        ListDataSourcesInput,
         ListDataSourcesOutput,
-        ListDocumentsInput,
         ListDocumentsOutput,
-        ListGroupsInput,
         ListGroupsOutput,
-        ListIndicesInput,
         ListIndicesOutput,
-        ListMessagesInput,
         ListMessagesOutput,
-        ListPluginActionsInput,
         ListPluginActionsOutput,
-        ListPluginTypeActionsInput,
         ListPluginTypeActionsOutput,
-        ListPluginTypeMetadataInput,
         ListPluginTypeMetadataOutput,
-        ListPluginsInput,
         ListPluginsOutput,
-        ListRetrieversInput,
         ListRetrieversOutput,
-        ListSubscriptionsInput,
         ListSubscriptionsOutput,
-        ListTagsForResourceInput,
         ListTagsForResourceOutput,
-        ListWebExperiencesInput,
         ListWebExperiencesOutput,
-        PutFeedbackInput,
         PutFeedbackOutput,
-        PutGroupInput,
         PutGroupOutput,
-        SearchRelevantContentInput,
         SearchRelevantContentOutput,
-        StartDataSourceSyncJobInput,
         StartDataSourceSyncJobOutput,
-        StopDataSourceSyncJobInput,
         StopDataSourceSyncJobOutput,
-        TagResourceInput,
         TagResourceOutput,
-        UntagResourceInput,
         UntagResourceOutput,
-        UpdateApplicationInput,
         UpdateApplicationOutput,
-        UpdateChatControlsConfigurationInput,
         UpdateChatControlsConfigurationOutput,
-        UpdateChatResponseConfigurationInput,
         UpdateChatResponseConfigurationOutput,
-        UpdateDataAccessorInput,
         UpdateDataAccessorOutput,
-        UpdateDataSourceInput,
         UpdateDataSourceOutput,
-        UpdateIndexInput,
         UpdateIndexOutput,
-        UpdatePluginInput,
         UpdatePluginOutput,
-        UpdateRetrieverInput,
         UpdateRetrieverOutput,
-        UpdateSubscriptionInput,
         UpdateSubscriptionOutput,
-        UpdateUserInput,
         UpdateUserOutput,
-        UpdateWebExperienceInput,
         UpdateWebExperienceOutput,
     )
 
@@ -226,10 +144,25 @@ class QBusinessClient(Client[QBusinessConfig]):
       Reference](https://docs.aws.amazon.com/general/latest/gr/amazonq.html)*
     """
 
-    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
+    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
 
+    @_overload
     def associate_permission(
-        self, input: AssociatePermissionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.AssociatePermissionInput
+        | _models.AssociatePermissionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AssociatePermissionOutput: ...
+
+    @_overload
+    def associate_permission(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AssociatePermissionInputDict],
     ) -> AssociatePermissionOutput:
         """
         Adds or updates a permission policy for a Amazon Q Business application,
@@ -239,8 +172,6 @@ class QBusinessClient(Client[QBusinessConfig]):
         perform on the Amazon Q Business application's resources.
 
         Args:
-            input:
-                An instance of `AssociatePermissionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -250,10 +181,34 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `AssociatePermissionOutput`.
         """
-        return self._invoke(input, _models.ASSOCIATE_PERMISSION, [], plugins)
 
+    def associate_permission(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AssociatePermissionOutput:
+        return self._invoke(
+            self._select_input(_models.ASSOCIATE_PERMISSION, args, kwargs),
+            _models.ASSOCIATE_PERMISSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def batch_delete_document(
-        self, input: BatchDeleteDocumentInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.BatchDeleteDocumentInput
+        | _models.BatchDeleteDocumentInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> BatchDeleteDocumentOutput: ...
+
+    @_overload
+    def batch_delete_document(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.BatchDeleteDocumentInputDict],
     ) -> BatchDeleteDocumentOutput:
         """
         Asynchronously deletes one or more documents added using the
@@ -263,8 +218,6 @@ class QBusinessClient(Client[QBusinessConfig]):
         to the process, by using CloudWatch.
 
         Args:
-            input:
-                An instance of `BatchDeleteDocumentInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -274,10 +227,33 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `BatchDeleteDocumentOutput`.
         """
-        return self._invoke(input, _models.BATCH_DELETE_DOCUMENT, [], plugins)
 
+    def batch_delete_document(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> BatchDeleteDocumentOutput:
+        return self._invoke(
+            self._select_input(_models.BATCH_DELETE_DOCUMENT, args, kwargs),
+            _models.BATCH_DELETE_DOCUMENT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def batch_put_document(
-        self, input: BatchPutDocumentInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.BatchPutDocumentInput | _models.BatchPutDocumentInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> BatchPutDocumentOutput: ...
+
+    @_overload
+    def batch_put_document(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.BatchPutDocumentInputDict],
     ) -> BatchPutDocumentOutput:
         """
         Adds one or more documents to an Amazon Q Business index.
@@ -296,8 +272,6 @@ class QBusinessClient(Client[QBusinessConfig]):
         to the process, by using CloudWatch.
 
         Args:
-            input:
-                An instance of `BatchPutDocumentInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -307,10 +281,33 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `BatchPutDocumentOutput`.
         """
-        return self._invoke(input, _models.BATCH_PUT_DOCUMENT, [], plugins)
 
+    def batch_put_document(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> BatchPutDocumentOutput:
+        return self._invoke(
+            self._select_input(_models.BATCH_PUT_DOCUMENT, args, kwargs),
+            _models.BATCH_PUT_DOCUMENT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def cancel_subscription(
-        self, input: CancelSubscriptionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CancelSubscriptionInput | _models.CancelSubscriptionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CancelSubscriptionOutput: ...
+
+    @_overload
+    def cancel_subscription(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CancelSubscriptionInputDict],
     ) -> CancelSubscriptionOutput:
         """
         Unsubscribes a user or a group from their pricing tier in an Amazon Q
@@ -318,8 +315,6 @@ class QBusinessClient(Client[QBusinessConfig]):
         Business feature access at the start of next month.
 
         Args:
-            input:
-                An instance of `CancelSubscriptionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -329,17 +324,38 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `CancelSubscriptionOutput`.
         """
-        return self._invoke(input, _models.CANCEL_SUBSCRIPTION, [], plugins)
 
+    def cancel_subscription(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CancelSubscriptionOutput:
+        return self._invoke(
+            self._select_input(_models.CANCEL_SUBSCRIPTION, args, kwargs),
+            _models.CANCEL_SUBSCRIPTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def chat_sync(
-        self, input: ChatSyncInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ChatSyncInput | _models.ChatSyncInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ChatSyncOutput: ...
+
+    @_overload
+    def chat_sync(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ChatSyncInputDict],
     ) -> ChatSyncOutput:
         """
         Starts or continues a non-streaming Amazon Q Business conversation.
 
         Args:
-            input:
-                An instance of `ChatSyncInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -349,10 +365,34 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `ChatSyncOutput`.
         """
-        return self._invoke(input, _models.CHAT_SYNC, [], plugins)
 
+    def chat_sync(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ChatSyncOutput:
+        return self._invoke(
+            self._select_input(_models.CHAT_SYNC, args, kwargs),
+            _models.CHAT_SYNC,
+            [],
+            plugins,
+        )
+
+    @_overload
     def check_document_access(
-        self, input: CheckDocumentAccessInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CheckDocumentAccessInput
+        | _models.CheckDocumentAccessInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CheckDocumentAccessOutput: ...
+
+    @_overload
+    def check_document_access(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CheckDocumentAccessInputDict],
     ) -> CheckDocumentAccessOutput:
         """
         Verifies if a user has access permissions for a specified document and
@@ -360,8 +400,6 @@ class QBusinessClient(Client[QBusinessConfig]):
         the document via user aliases and groups when verifying user access.
 
         Args:
-            input:
-                An instance of `CheckDocumentAccessInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -371,12 +409,34 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `CheckDocumentAccessOutput`.
         """
-        return self._invoke(input, _models.CHECK_DOCUMENT_ACCESS, [], plugins)
 
+    def check_document_access(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CheckDocumentAccessOutput:
+        return self._invoke(
+            self._select_input(_models.CHECK_DOCUMENT_ACCESS, args, kwargs),
+            _models.CHECK_DOCUMENT_ACCESS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_anonymous_web_experience_url(
         self,
-        input: CreateAnonymousWebExperienceUrlInput,
+        request: _models.CreateAnonymousWebExperienceUrlInput
+        | _models.CreateAnonymousWebExperienceUrlInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateAnonymousWebExperienceUrlOutput: ...
+
+    @_overload
+    def create_anonymous_web_experience_url(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateAnonymousWebExperienceUrlInputDict],
     ) -> CreateAnonymousWebExperienceUrlOutput:
         """
         Creates a unique URL for anonymous Amazon Q Business web experience.
@@ -384,8 +444,6 @@ class QBusinessClient(Client[QBusinessConfig]):
         it's generated.
 
         Args:
-            input:
-                An instance of `CreateAnonymousWebExperienceUrlInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -395,12 +453,35 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `CreateAnonymousWebExperienceUrlOutput`.
         """
+
+    def create_anonymous_web_experience_url(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateAnonymousWebExperienceUrlOutput:
         return self._invoke(
-            input, _models.CREATE_ANONYMOUS_WEB_EXPERIENCE_URL, [], plugins
+            self._select_input(
+                _models.CREATE_ANONYMOUS_WEB_EXPERIENCE_URL, args, kwargs
+            ),
+            _models.CREATE_ANONYMOUS_WEB_EXPERIENCE_URL,
+            [],
+            plugins,
         )
 
+    @_overload
     def create_application(
-        self, input: CreateApplicationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateApplicationInput | _models.CreateApplicationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateApplicationOutput: ...
+
+    @_overload
+    def create_application(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateApplicationInputDict],
     ) -> CreateApplicationOutput:
         """
         Creates an Amazon Q Business application.
@@ -426,8 +507,6 @@ class QBusinessClient(Client[QBusinessConfig]):
             Business](https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/cross-region-inference.html).
 
         Args:
-            input:
-                An instance of `CreateApplicationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -437,12 +516,34 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `CreateApplicationOutput`.
         """
-        return self._invoke(input, _models.CREATE_APPLICATION, [], plugins)
 
+    def create_application(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateApplicationOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_APPLICATION, args, kwargs),
+            _models.CREATE_APPLICATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_chat_response_configuration(
         self,
-        input: CreateChatResponseConfigurationInput,
+        request: _models.CreateChatResponseConfigurationInput
+        | _models.CreateChatResponseConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateChatResponseConfigurationOutput: ...
+
+    @_overload
+    def create_chat_response_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateChatResponseConfigurationInputDict],
     ) -> CreateChatResponseConfigurationOutput:
         """
         Creates a new chat response configuration for an Amazon Q Business
@@ -451,8 +552,6 @@ class QBusinessClient(Client[QBusinessConfig]):
         interactions.
 
         Args:
-            input:
-                An instance of `CreateChatResponseConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -462,12 +561,35 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `CreateChatResponseConfigurationOutput`.
         """
+
+    def create_chat_response_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateChatResponseConfigurationOutput:
         return self._invoke(
-            input, _models.CREATE_CHAT_RESPONSE_CONFIGURATION, [], plugins
+            self._select_input(
+                _models.CREATE_CHAT_RESPONSE_CONFIGURATION, args, kwargs
+            ),
+            _models.CREATE_CHAT_RESPONSE_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     def create_data_accessor(
-        self, input: CreateDataAccessorInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateDataAccessorInput | _models.CreateDataAccessorInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateDataAccessorOutput: ...
+
+    @_overload
+    def create_data_accessor(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateDataAccessorInputDict],
     ) -> CreateDataAccessorOutput:
         """
         Creates a new data accessor for an ISV to access data from a Amazon Q
@@ -481,8 +603,6 @@ class QBusinessClient(Client[QBusinessConfig]):
         Business application.
 
         Args:
-            input:
-                An instance of `CreateDataAccessorInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -492,10 +612,33 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `CreateDataAccessorOutput`.
         """
-        return self._invoke(input, _models.CREATE_DATA_ACCESSOR, [], plugins)
 
+    def create_data_accessor(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateDataAccessorOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_DATA_ACCESSOR, args, kwargs),
+            _models.CREATE_DATA_ACCESSOR,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_data_source(
-        self, input: CreateDataSourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateDataSourceInput | _models.CreateDataSourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateDataSourceOutput: ...
+
+    @_overload
+    def create_data_source(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateDataSourceInputDict],
     ) -> CreateDataSourceOutput:
         """
         Creates a data source connector for an Amazon Q Business application.
@@ -505,8 +648,6 @@ class QBusinessClient(Client[QBusinessConfig]):
         raised.
 
         Args:
-            input:
-                An instance of `CreateDataSourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -516,10 +657,33 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `CreateDataSourceOutput`.
         """
-        return self._invoke(input, _models.CREATE_DATA_SOURCE, [], plugins)
 
+    def create_data_source(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateDataSourceOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_DATA_SOURCE, args, kwargs),
+            _models.CREATE_DATA_SOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_index(
-        self, input: CreateIndexInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateIndexInput | _models.CreateIndexInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateIndexOutput: ...
+
+    @_overload
+    def create_index(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateIndexInputDict],
     ) -> CreateIndexOutput:
         """
         Creates an Amazon Q Business index.
@@ -535,8 +699,6 @@ class QBusinessClient(Client[QBusinessConfig]):
         API.
 
         Args:
-            input:
-                An instance of `CreateIndexInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -546,17 +708,38 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `CreateIndexOutput`.
         """
-        return self._invoke(input, _models.CREATE_INDEX, [], plugins)
 
+    def create_index(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateIndexOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_INDEX, args, kwargs),
+            _models.CREATE_INDEX,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_plugin(
-        self, input: CreatePluginInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreatePluginInput | _models.CreatePluginInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreatePluginOutput: ...
+
+    @_overload
+    def create_plugin(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreatePluginInputDict],
     ) -> CreatePluginOutput:
         """
         Creates an Amazon Q Business plugin.
 
         Args:
-            input:
-                An instance of `CreatePluginInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -566,17 +749,38 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `CreatePluginOutput`.
         """
-        return self._invoke(input, _models.CREATE_PLUGIN, [], plugins)
 
+    def create_plugin(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreatePluginOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_PLUGIN, args, kwargs),
+            _models.CREATE_PLUGIN,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_retriever(
-        self, input: CreateRetrieverInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateRetrieverInput | _models.CreateRetrieverInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateRetrieverOutput: ...
+
+    @_overload
+    def create_retriever(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateRetrieverInputDict],
     ) -> CreateRetrieverOutput:
         """
         Adds a retriever to your Amazon Q Business application.
 
         Args:
-            input:
-                An instance of `CreateRetrieverInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -586,10 +790,33 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `CreateRetrieverOutput`.
         """
-        return self._invoke(input, _models.CREATE_RETRIEVER, [], plugins)
 
+    def create_retriever(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateRetrieverOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_RETRIEVER, args, kwargs),
+            _models.CREATE_RETRIEVER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_subscription(
-        self, input: CreateSubscriptionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateSubscriptionInput | _models.CreateSubscriptionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateSubscriptionOutput: ...
+
+    @_overload
+    def create_subscription(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateSubscriptionInputDict],
     ) -> CreateSubscriptionOutput:
         """
         Subscribes an IAM Identity Center user or a group to a pricing tier for
@@ -607,8 +834,6 @@ class QBusinessClient(Client[QBusinessConfig]):
             in the Amazon Q Business User Guide.
 
         Args:
-            input:
-                An instance of `CreateSubscriptionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -618,18 +843,39 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `CreateSubscriptionOutput`.
         """
-        return self._invoke(input, _models.CREATE_SUBSCRIPTION, [], plugins)
 
+    def create_subscription(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateSubscriptionOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_SUBSCRIPTION, args, kwargs),
+            _models.CREATE_SUBSCRIPTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_user(
-        self, input: CreateUserInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateUserInput | _models.CreateUserInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateUserOutput: ...
+
+    @_overload
+    def create_user(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateUserInputDict],
     ) -> CreateUserOutput:
         """
         Creates a universally unique identifier (UUID) mapped to a list of local
         user ids within an application.
 
         Args:
-            input:
-                An instance of `CreateUserInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -639,17 +885,39 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `CreateUserOutput`.
         """
-        return self._invoke(input, _models.CREATE_USER, [], plugins)
 
+    def create_user(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateUserOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_USER, args, kwargs),
+            _models.CREATE_USER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_web_experience(
-        self, input: CreateWebExperienceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateWebExperienceInput
+        | _models.CreateWebExperienceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateWebExperienceOutput: ...
+
+    @_overload
+    def create_web_experience(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateWebExperienceInputDict],
     ) -> CreateWebExperienceOutput:
         """
         Creates an Amazon Q Business web experience.
 
         Args:
-            input:
-                An instance of `CreateWebExperienceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -659,17 +927,38 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `CreateWebExperienceOutput`.
         """
-        return self._invoke(input, _models.CREATE_WEB_EXPERIENCE, [], plugins)
 
+    def create_web_experience(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateWebExperienceOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_WEB_EXPERIENCE, args, kwargs),
+            _models.CREATE_WEB_EXPERIENCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_application(
-        self, input: DeleteApplicationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteApplicationInput | _models.DeleteApplicationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteApplicationOutput: ...
+
+    @_overload
+    def delete_application(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteApplicationInputDict],
     ) -> DeleteApplicationOutput:
         """
         Deletes an Amazon Q Business application.
 
         Args:
-            input:
-                An instance of `DeleteApplicationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -679,18 +968,39 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `DeleteApplicationOutput`.
         """
-        return self._invoke(input, _models.DELETE_APPLICATION, [], plugins)
 
+    def delete_application(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteApplicationOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_APPLICATION, args, kwargs),
+            _models.DELETE_APPLICATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_attachment(
-        self, input: DeleteAttachmentInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteAttachmentInput | _models.DeleteAttachmentInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteAttachmentOutput: ...
+
+    @_overload
+    def delete_attachment(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteAttachmentInputDict],
     ) -> DeleteAttachmentOutput:
         """
         Deletes an attachment associated with a specific Amazon Q Business
         conversation.
 
         Args:
-            input:
-                An instance of `DeleteAttachmentInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -700,20 +1010,40 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `DeleteAttachmentOutput`.
         """
-        return self._invoke(input, _models.DELETE_ATTACHMENT, [], plugins)
 
+    def delete_attachment(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteAttachmentOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_ATTACHMENT, args, kwargs),
+            _models.DELETE_ATTACHMENT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_chat_controls_configuration(
         self,
-        input: DeleteChatControlsConfigurationInput,
+        request: _models.DeleteChatControlsConfigurationInput
+        | _models.DeleteChatControlsConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteChatControlsConfigurationOutput: ...
+
+    @_overload
+    def delete_chat_controls_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteChatControlsConfigurationInputDict],
     ) -> DeleteChatControlsConfigurationOutput:
         """
         Deletes chat controls configured for an existing Amazon Q Business
         application.
 
         Args:
-            input:
-                An instance of `DeleteChatControlsConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -723,22 +1053,42 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `DeleteChatControlsConfigurationOutput`.
         """
+
+    def delete_chat_controls_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteChatControlsConfigurationOutput:
         return self._invoke(
-            input, _models.DELETE_CHAT_CONTROLS_CONFIGURATION, [], plugins
+            self._select_input(
+                _models.DELETE_CHAT_CONTROLS_CONFIGURATION, args, kwargs
+            ),
+            _models.DELETE_CHAT_CONTROLS_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     def delete_chat_response_configuration(
         self,
-        input: DeleteChatResponseConfigurationInput,
+        request: _models.DeleteChatResponseConfigurationInput
+        | _models.DeleteChatResponseConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteChatResponseConfigurationOutput: ...
+
+    @_overload
+    def delete_chat_response_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteChatResponseConfigurationInputDict],
     ) -> DeleteChatResponseConfigurationOutput:
         """
         Deletes a specified chat response configuration from an Amazon Q
         Business application.
 
         Args:
-            input:
-                An instance of `DeleteChatResponseConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -748,19 +1098,40 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `DeleteChatResponseConfigurationOutput`.
         """
+
+    def delete_chat_response_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteChatResponseConfigurationOutput:
         return self._invoke(
-            input, _models.DELETE_CHAT_RESPONSE_CONFIGURATION, [], plugins
+            self._select_input(
+                _models.DELETE_CHAT_RESPONSE_CONFIGURATION, args, kwargs
+            ),
+            _models.DELETE_CHAT_RESPONSE_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     def delete_conversation(
-        self, input: DeleteConversationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteConversationInput | _models.DeleteConversationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteConversationOutput: ...
+
+    @_overload
+    def delete_conversation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteConversationInputDict],
     ) -> DeleteConversationOutput:
         """
         Deletes an Amazon Q Business web experience conversation.
 
         Args:
-            input:
-                An instance of `DeleteConversationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -770,10 +1141,33 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `DeleteConversationOutput`.
         """
-        return self._invoke(input, _models.DELETE_CONVERSATION, [], plugins)
 
+    def delete_conversation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteConversationOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_CONVERSATION, args, kwargs),
+            _models.DELETE_CONVERSATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_data_accessor(
-        self, input: DeleteDataAccessorInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteDataAccessorInput | _models.DeleteDataAccessorInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteDataAccessorOutput: ...
+
+    @_overload
+    def delete_data_accessor(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteDataAccessorInputDict],
     ) -> DeleteDataAccessorOutput:
         """
         Deletes a specified data accessor. This operation permanently removes
@@ -782,8 +1176,6 @@ class QBusinessClient(Client[QBusinessConfig]):
         revoked.
 
         Args:
-            input:
-                An instance of `DeleteDataAccessorInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -793,10 +1185,33 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `DeleteDataAccessorOutput`.
         """
-        return self._invoke(input, _models.DELETE_DATA_ACCESSOR, [], plugins)
 
+    def delete_data_accessor(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteDataAccessorOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_DATA_ACCESSOR, args, kwargs),
+            _models.DELETE_DATA_ACCESSOR,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_data_source(
-        self, input: DeleteDataSourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteDataSourceInput | _models.DeleteDataSourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteDataSourceOutput: ...
+
+    @_overload
+    def delete_data_source(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteDataSourceInputDict],
     ) -> DeleteDataSourceOutput:
         """
         Deletes an Amazon Q Business data source connector. While the data
@@ -804,8 +1219,6 @@ class QBusinessClient(Client[QBusinessConfig]):
         `DescribeDataSource` API is set to `DELETING`.
 
         Args:
-            input:
-                An instance of `DeleteDataSourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -815,10 +1228,33 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `DeleteDataSourceOutput`.
         """
-        return self._invoke(input, _models.DELETE_DATA_SOURCE, [], plugins)
 
+    def delete_data_source(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteDataSourceOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_DATA_SOURCE, args, kwargs),
+            _models.DELETE_DATA_SOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_group(
-        self, input: DeleteGroupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteGroupInput | _models.DeleteGroupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteGroupOutput: ...
+
+    @_overload
+    def delete_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteGroupInputDict],
     ) -> DeleteGroupOutput:
         """
         Deletes a group so that all users and sub groups that belong to the
@@ -834,8 +1270,6 @@ class QBusinessClient(Client[QBusinessConfig]):
         groups that belong to the \"Engineering\" group when calling `PutGroup`.
 
         Args:
-            input:
-                An instance of `DeleteGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -845,17 +1279,38 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `DeleteGroupOutput`.
         """
-        return self._invoke(input, _models.DELETE_GROUP, [], plugins)
 
+    def delete_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteGroupOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_GROUP, args, kwargs),
+            _models.DELETE_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_index(
-        self, input: DeleteIndexInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteIndexInput | _models.DeleteIndexInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteIndexOutput: ...
+
+    @_overload
+    def delete_index(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteIndexInputDict],
     ) -> DeleteIndexOutput:
         """
         Deletes an Amazon Q Business index.
 
         Args:
-            input:
-                An instance of `DeleteIndexInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -865,17 +1320,38 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `DeleteIndexOutput`.
         """
-        return self._invoke(input, _models.DELETE_INDEX, [], plugins)
 
+    def delete_index(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteIndexOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_INDEX, args, kwargs),
+            _models.DELETE_INDEX,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_plugin(
-        self, input: DeletePluginInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeletePluginInput | _models.DeletePluginInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeletePluginOutput: ...
+
+    @_overload
+    def delete_plugin(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeletePluginInputDict],
     ) -> DeletePluginOutput:
         """
         Deletes an Amazon Q Business plugin.
 
         Args:
-            input:
-                An instance of `DeletePluginInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -885,17 +1361,38 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `DeletePluginOutput`.
         """
-        return self._invoke(input, _models.DELETE_PLUGIN, [], plugins)
 
+    def delete_plugin(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeletePluginOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_PLUGIN, args, kwargs),
+            _models.DELETE_PLUGIN,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_retriever(
-        self, input: DeleteRetrieverInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteRetrieverInput | _models.DeleteRetrieverInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteRetrieverOutput: ...
+
+    @_overload
+    def delete_retriever(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteRetrieverInputDict],
     ) -> DeleteRetrieverOutput:
         """
         Deletes the retriever used by an Amazon Q Business application.
 
         Args:
-            input:
-                An instance of `DeleteRetrieverInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -905,17 +1402,38 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `DeleteRetrieverOutput`.
         """
-        return self._invoke(input, _models.DELETE_RETRIEVER, [], plugins)
 
+    def delete_retriever(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteRetrieverOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_RETRIEVER, args, kwargs),
+            _models.DELETE_RETRIEVER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_user(
-        self, input: DeleteUserInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteUserInput | _models.DeleteUserInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteUserOutput: ...
+
+    @_overload
+    def delete_user(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteUserInputDict],
     ) -> DeleteUserOutput:
         """
         Deletes a user by email id.
 
         Args:
-            input:
-                An instance of `DeleteUserInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -925,17 +1443,39 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `DeleteUserOutput`.
         """
-        return self._invoke(input, _models.DELETE_USER, [], plugins)
 
+    def delete_user(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteUserOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_USER, args, kwargs),
+            _models.DELETE_USER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_web_experience(
-        self, input: DeleteWebExperienceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteWebExperienceInput
+        | _models.DeleteWebExperienceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteWebExperienceOutput: ...
+
+    @_overload
+    def delete_web_experience(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteWebExperienceInputDict],
     ) -> DeleteWebExperienceOutput:
         """
         Deletes an Amazon Q Business web experience.
 
         Args:
-            input:
-                An instance of `DeleteWebExperienceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -945,10 +1485,34 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `DeleteWebExperienceOutput`.
         """
-        return self._invoke(input, _models.DELETE_WEB_EXPERIENCE, [], plugins)
 
+    def delete_web_experience(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteWebExperienceOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_WEB_EXPERIENCE, args, kwargs),
+            _models.DELETE_WEB_EXPERIENCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def disassociate_permission(
-        self, input: DisassociatePermissionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DisassociatePermissionInput
+        | _models.DisassociatePermissionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DisassociatePermissionOutput: ...
+
+    @_overload
+    def disassociate_permission(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DisassociatePermissionInputDict],
     ) -> DisassociatePermissionOutput:
         """
         Removes a permission policy from a Amazon Q Business application,
@@ -957,8 +1521,6 @@ class QBusinessClient(Client[QBusinessConfig]):
         application's permission policy.
 
         Args:
-            input:
-                An instance of `DisassociatePermissionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -968,17 +1530,38 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `DisassociatePermissionOutput`.
         """
-        return self._invoke(input, _models.DISASSOCIATE_PERMISSION, [], plugins)
 
+    def disassociate_permission(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DisassociatePermissionOutput:
+        return self._invoke(
+            self._select_input(_models.DISASSOCIATE_PERMISSION, args, kwargs),
+            _models.DISASSOCIATE_PERMISSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_application(
-        self, input: GetApplicationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetApplicationInput | _models.GetApplicationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetApplicationOutput: ...
+
+    @_overload
+    def get_application(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetApplicationInputDict],
     ) -> GetApplicationOutput:
         """
         Gets information about an existing Amazon Q Business application.
 
         Args:
-            input:
-                An instance of `GetApplicationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -988,20 +1571,40 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `GetApplicationOutput`.
         """
-        return self._invoke(input, _models.GET_APPLICATION, [], plugins)
 
+    def get_application(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetApplicationOutput:
+        return self._invoke(
+            self._select_input(_models.GET_APPLICATION, args, kwargs),
+            _models.GET_APPLICATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_chat_controls_configuration(
         self,
-        input: GetChatControlsConfigurationInput,
+        request: _models.GetChatControlsConfigurationInput
+        | _models.GetChatControlsConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetChatControlsConfigurationOutput: ...
+
+    @_overload
+    def get_chat_controls_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetChatControlsConfigurationInputDict],
     ) -> GetChatControlsConfigurationOutput:
         """
         Gets information about chat controls configured for an existing Amazon Q
         Business application.
 
         Args:
-            input:
-                An instance of `GetChatControlsConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1011,12 +1614,34 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `GetChatControlsConfigurationOutput`.
         """
-        return self._invoke(input, _models.GET_CHAT_CONTROLS_CONFIGURATION, [], plugins)
 
+    def get_chat_controls_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetChatControlsConfigurationOutput:
+        return self._invoke(
+            self._select_input(_models.GET_CHAT_CONTROLS_CONFIGURATION, args, kwargs),
+            _models.GET_CHAT_CONTROLS_CONFIGURATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_chat_response_configuration(
         self,
-        input: GetChatResponseConfigurationInput,
+        request: _models.GetChatResponseConfigurationInput
+        | _models.GetChatResponseConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetChatResponseConfigurationOutput: ...
+
+    @_overload
+    def get_chat_response_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetChatResponseConfigurationInputDict],
     ) -> GetChatResponseConfigurationOutput:
         """
         Retrieves detailed information about a specific chat response
@@ -1024,8 +1649,6 @@ class QBusinessClient(Client[QBusinessConfig]):
         returns the complete configuration settings and metadata.
 
         Args:
-            input:
-                An instance of `GetChatResponseConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1035,10 +1658,33 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `GetChatResponseConfigurationOutput`.
         """
-        return self._invoke(input, _models.GET_CHAT_RESPONSE_CONFIGURATION, [], plugins)
 
+    def get_chat_response_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetChatResponseConfigurationOutput:
+        return self._invoke(
+            self._select_input(_models.GET_CHAT_RESPONSE_CONFIGURATION, args, kwargs),
+            _models.GET_CHAT_RESPONSE_CONFIGURATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_data_accessor(
-        self, input: GetDataAccessorInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetDataAccessorInput | _models.GetDataAccessorInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetDataAccessorOutput: ...
+
+    @_overload
+    def get_data_accessor(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetDataAccessorInputDict],
     ) -> GetDataAccessorOutput:
         """
         Retrieves information about a specified data accessor. This operation
@@ -1049,8 +1695,6 @@ class QBusinessClient(Client[QBusinessConfig]):
         data accessor was created and last updated.
 
         Args:
-            input:
-                An instance of `GetDataAccessorInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1060,18 +1704,39 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `GetDataAccessorOutput`.
         """
-        return self._invoke(input, _models.GET_DATA_ACCESSOR, [], plugins)
 
+    def get_data_accessor(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetDataAccessorOutput:
+        return self._invoke(
+            self._select_input(_models.GET_DATA_ACCESSOR, args, kwargs),
+            _models.GET_DATA_ACCESSOR,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_data_source(
-        self, input: GetDataSourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetDataSourceInput | _models.GetDataSourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetDataSourceOutput: ...
+
+    @_overload
+    def get_data_source(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetDataSourceInputDict],
     ) -> GetDataSourceOutput:
         """
         Gets information about an existing Amazon Q Business data source
         connector.
 
         Args:
-            input:
-                An instance of `GetDataSourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1081,10 +1746,33 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `GetDataSourceOutput`.
         """
-        return self._invoke(input, _models.GET_DATA_SOURCE, [], plugins)
 
+    def get_data_source(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetDataSourceOutput:
+        return self._invoke(
+            self._select_input(_models.GET_DATA_SOURCE, args, kwargs),
+            _models.GET_DATA_SOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_document_content(
-        self, input: GetDocumentContentInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetDocumentContentInput | _models.GetDocumentContentInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetDocumentContentOutput: ...
+
+    @_overload
+    def get_document_content(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetDocumentContentInputDict],
     ) -> GetDocumentContentOutput:
         """
         Retrieves the content of a document that was ingested into Amazon Q
@@ -1094,8 +1782,6 @@ class QBusinessClient(Client[QBusinessConfig]):
         the URL.
 
         Args:
-            input:
-                An instance of `GetDocumentContentInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1105,17 +1791,38 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `GetDocumentContentOutput`.
         """
-        return self._invoke(input, _models.GET_DOCUMENT_CONTENT, [], plugins)
 
+    def get_document_content(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetDocumentContentOutput:
+        return self._invoke(
+            self._select_input(_models.GET_DOCUMENT_CONTENT, args, kwargs),
+            _models.GET_DOCUMENT_CONTENT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_group(
-        self, input: GetGroupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetGroupInput | _models.GetGroupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetGroupOutput: ...
+
+    @_overload
+    def get_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetGroupInputDict],
     ) -> GetGroupOutput:
         """
         Describes a group by group name.
 
         Args:
-            input:
-                An instance of `GetGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1125,17 +1832,38 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `GetGroupOutput`.
         """
-        return self._invoke(input, _models.GET_GROUP, [], plugins)
 
+    def get_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetGroupOutput:
+        return self._invoke(
+            self._select_input(_models.GET_GROUP, args, kwargs),
+            _models.GET_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_index(
-        self, input: GetIndexInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetIndexInput | _models.GetIndexInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetIndexOutput: ...
+
+    @_overload
+    def get_index(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetIndexInputDict],
     ) -> GetIndexOutput:
         """
         Gets information about an existing Amazon Q Business index.
 
         Args:
-            input:
-                An instance of `GetIndexInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1145,10 +1873,33 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `GetIndexOutput`.
         """
-        return self._invoke(input, _models.GET_INDEX, [], plugins)
 
+    def get_index(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetIndexOutput:
+        return self._invoke(
+            self._select_input(_models.GET_INDEX, args, kwargs),
+            _models.GET_INDEX,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_media(
-        self, input: GetMediaInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetMediaInput | _models.GetMediaInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetMediaOutput: ...
+
+    @_overload
+    def get_media(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetMediaInputDict],
     ) -> GetMediaOutput:
         """
         Returns the image bytes corresponding to a media object. If you have
@@ -1161,8 +1912,6 @@ class QBusinessClient(Client[QBusinessConfig]):
         visuals](https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/extracting-meaning-from-images.html).
 
         Args:
-            input:
-                An instance of `GetMediaInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1172,17 +1921,38 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `GetMediaOutput`.
         """
-        return self._invoke(input, _models.GET_MEDIA, [], plugins)
 
+    def get_media(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetMediaOutput:
+        return self._invoke(
+            self._select_input(_models.GET_MEDIA, args, kwargs),
+            _models.GET_MEDIA,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_plugin(
-        self, input: GetPluginInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetPluginInput | _models.GetPluginInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetPluginOutput: ...
+
+    @_overload
+    def get_plugin(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetPluginInputDict],
     ) -> GetPluginOutput:
         """
         Gets information about an existing Amazon Q Business plugin.
 
         Args:
-            input:
-                An instance of `GetPluginInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1192,10 +1962,33 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `GetPluginOutput`.
         """
-        return self._invoke(input, _models.GET_PLUGIN, [], plugins)
 
+    def get_plugin(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetPluginOutput:
+        return self._invoke(
+            self._select_input(_models.GET_PLUGIN, args, kwargs),
+            _models.GET_PLUGIN,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_policy(
-        self, input: GetPolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetPolicyInput | _models.GetPolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetPolicyOutput: ...
+
+    @_overload
+    def get_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetPolicyInputDict],
     ) -> GetPolicyOutput:
         """
         Retrieves the current permission policy for a Amazon Q Business
@@ -1204,8 +1997,6 @@ class QBusinessClient(Client[QBusinessConfig]):
         application's resources.
 
         Args:
-            input:
-                An instance of `GetPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1215,18 +2006,39 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `GetPolicyOutput`.
         """
-        return self._invoke(input, _models.GET_POLICY, [], plugins)
 
+    def get_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetPolicyOutput:
+        return self._invoke(
+            self._select_input(_models.GET_POLICY, args, kwargs),
+            _models.GET_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_retriever(
-        self, input: GetRetrieverInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetRetrieverInput | _models.GetRetrieverInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetRetrieverOutput: ...
+
+    @_overload
+    def get_retriever(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetRetrieverInputDict],
     ) -> GetRetrieverOutput:
         """
         Gets information about an existing retriever used by an Amazon Q
         Business application.
 
         Args:
-            input:
-                An instance of `GetRetrieverInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1236,18 +2048,39 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `GetRetrieverOutput`.
         """
-        return self._invoke(input, _models.GET_RETRIEVER, [], plugins)
 
+    def get_retriever(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetRetrieverOutput:
+        return self._invoke(
+            self._select_input(_models.GET_RETRIEVER, args, kwargs),
+            _models.GET_RETRIEVER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_user(
-        self, input: GetUserInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetUserInput | _models.GetUserInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetUserOutput: ...
+
+    @_overload
+    def get_user(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetUserInputDict],
     ) -> GetUserOutput:
         """
         Describes the universally unique identifier (UUID) associated with a
         local user in a data source.
 
         Args:
-            input:
-                An instance of `GetUserInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1257,17 +2090,38 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `GetUserOutput`.
         """
-        return self._invoke(input, _models.GET_USER, [], plugins)
 
+    def get_user(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetUserOutput:
+        return self._invoke(
+            self._select_input(_models.GET_USER, args, kwargs),
+            _models.GET_USER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_web_experience(
-        self, input: GetWebExperienceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetWebExperienceInput | _models.GetWebExperienceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetWebExperienceOutput: ...
+
+    @_overload
+    def get_web_experience(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetWebExperienceInputDict],
     ) -> GetWebExperienceOutput:
         """
         Gets information about an existing Amazon Q Business web experience.
 
         Args:
-            input:
-                An instance of `GetWebExperienceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1277,12 +2131,33 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `GetWebExperienceOutput`.
         """
-        return self._invoke(input, _models.GET_WEB_EXPERIENCE, [], plugins)
 
+    def get_web_experience(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetWebExperienceOutput:
+        return self._invoke(
+            self._select_input(_models.GET_WEB_EXPERIENCE, args, kwargs),
+            _models.GET_WEB_EXPERIENCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_applications(
         self,
-        input: ListApplicationsInput | None = None,
+        request: _models.ListApplicationsInput | _models.ListApplicationsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListApplicationsOutput: ...
+
+    @_overload
+    def list_applications(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListApplicationsInputDict],
     ) -> ListApplicationsOutput:
         """
         Lists Amazon Q Business applications.
@@ -1294,8 +2169,6 @@ class QBusinessClient(Client[QBusinessConfig]):
             Business](https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/cross-region-inference.html).
 
         Args:
-            input:
-                An instance of `ListApplicationsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1305,10 +2178,33 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `ListApplicationsOutput`.
         """
-        return self._invoke(input, _models.LIST_APPLICATIONS, [], plugins)
 
+    def list_applications(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListApplicationsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_APPLICATIONS, args, kwargs),
+            _models.LIST_APPLICATIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_attachments(
-        self, input: ListAttachmentsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListAttachmentsInput | _models.ListAttachmentsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListAttachmentsOutput: ...
+
+    @_overload
+    def list_attachments(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListAttachmentsInputDict],
     ) -> ListAttachmentsOutput:
         """
         Gets a list of attachments associated with an Amazon Q Business web
@@ -1316,8 +2212,6 @@ class QBusinessClient(Client[QBusinessConfig]):
         Business conversation.
 
         Args:
-            input:
-                An instance of `ListAttachmentsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1327,12 +2221,34 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `ListAttachmentsOutput`.
         """
-        return self._invoke(input, _models.LIST_ATTACHMENTS, [], plugins)
 
+    def list_attachments(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListAttachmentsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_ATTACHMENTS, args, kwargs),
+            _models.LIST_ATTACHMENTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_chat_response_configurations(
         self,
-        input: ListChatResponseConfigurationsInput,
+        request: _models.ListChatResponseConfigurationsInput
+        | _models.ListChatResponseConfigurationsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListChatResponseConfigurationsOutput: ...
+
+    @_overload
+    def list_chat_response_configurations(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListChatResponseConfigurationsInputDict],
     ) -> ListChatResponseConfigurationsOutput:
         """
         Retrieves a list of all chat response configurations available in a
@@ -1341,8 +2257,6 @@ class QBusinessClient(Client[QBusinessConfig]):
         select appropriate response settings.
 
         Args:
-            input:
-                An instance of `ListChatResponseConfigurationsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1352,19 +2266,38 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `ListChatResponseConfigurationsOutput`.
         """
+
+    def list_chat_response_configurations(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListChatResponseConfigurationsOutput:
         return self._invoke(
-            input, _models.LIST_CHAT_RESPONSE_CONFIGURATIONS, [], plugins
+            self._select_input(_models.LIST_CHAT_RESPONSE_CONFIGURATIONS, args, kwargs),
+            _models.LIST_CHAT_RESPONSE_CONFIGURATIONS,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_conversations(
-        self, input: ListConversationsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListConversationsInput | _models.ListConversationsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListConversationsOutput: ...
+
+    @_overload
+    def list_conversations(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListConversationsInputDict],
     ) -> ListConversationsOutput:
         """
         Lists one or more Amazon Q Business conversations.
 
         Args:
-            input:
-                An instance of `ListConversationsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1374,10 +2307,33 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `ListConversationsOutput`.
         """
-        return self._invoke(input, _models.LIST_CONVERSATIONS, [], plugins)
 
+    def list_conversations(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListConversationsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_CONVERSATIONS, args, kwargs),
+            _models.LIST_CONVERSATIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_data_accessors(
-        self, input: ListDataAccessorsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListDataAccessorsInput | _models.ListDataAccessorsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListDataAccessorsOutput: ...
+
+    @_overload
+    def list_data_accessors(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListDataAccessorsInputDict],
     ) -> ListDataAccessorsOutput:
         """
         Lists the data accessors for a Amazon Q Business application. This
@@ -1386,8 +2342,6 @@ class QBusinessClient(Client[QBusinessConfig]):
         creation/update timestamps for each data accessor.
 
         Args:
-            input:
-                An instance of `ListDataAccessorsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1397,18 +2351,39 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `ListDataAccessorsOutput`.
         """
-        return self._invoke(input, _models.LIST_DATA_ACCESSORS, [], plugins)
 
+    def list_data_accessors(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListDataAccessorsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_DATA_ACCESSORS, args, kwargs),
+            _models.LIST_DATA_ACCESSORS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_data_sources(
-        self, input: ListDataSourcesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListDataSourcesInput | _models.ListDataSourcesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListDataSourcesOutput: ...
+
+    @_overload
+    def list_data_sources(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListDataSourcesInputDict],
     ) -> ListDataSourcesOutput:
         """
         Lists the Amazon Q Business data source connectors that you have
         created.
 
         Args:
-            input:
-                An instance of `ListDataSourcesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1418,18 +2393,40 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `ListDataSourcesOutput`.
         """
-        return self._invoke(input, _models.LIST_DATA_SOURCES, [], plugins)
 
+    def list_data_sources(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListDataSourcesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_DATA_SOURCES, args, kwargs),
+            _models.LIST_DATA_SOURCES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_data_source_sync_jobs(
-        self, input: ListDataSourceSyncJobsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListDataSourceSyncJobsInput
+        | _models.ListDataSourceSyncJobsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListDataSourceSyncJobsOutput: ...
+
+    @_overload
+    def list_data_source_sync_jobs(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListDataSourceSyncJobsInputDict],
     ) -> ListDataSourceSyncJobsOutput:
         """
         Get information about an Amazon Q Business data source connector
         synchronization.
 
         Args:
-            input:
-                An instance of `ListDataSourceSyncJobsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1439,17 +2436,38 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `ListDataSourceSyncJobsOutput`.
         """
-        return self._invoke(input, _models.LIST_DATA_SOURCE_SYNC_JOBS, [], plugins)
 
+    def list_data_source_sync_jobs(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListDataSourceSyncJobsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_DATA_SOURCE_SYNC_JOBS, args, kwargs),
+            _models.LIST_DATA_SOURCE_SYNC_JOBS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_documents(
-        self, input: ListDocumentsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListDocumentsInput | _models.ListDocumentsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListDocumentsOutput: ...
+
+    @_overload
+    def list_documents(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListDocumentsInputDict],
     ) -> ListDocumentsOutput:
         """
         A list of documents attached to an index.
 
         Args:
-            input:
-                An instance of `ListDocumentsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1459,17 +2477,38 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `ListDocumentsOutput`.
         """
-        return self._invoke(input, _models.LIST_DOCUMENTS, [], plugins)
 
+    def list_documents(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListDocumentsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_DOCUMENTS, args, kwargs),
+            _models.LIST_DOCUMENTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_groups(
-        self, input: ListGroupsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListGroupsInput | _models.ListGroupsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListGroupsOutput: ...
+
+    @_overload
+    def list_groups(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListGroupsInputDict],
     ) -> ListGroupsOutput:
         """
         Provides a list of groups that are mapped to users.
 
         Args:
-            input:
-                An instance of `ListGroupsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1479,17 +2518,38 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `ListGroupsOutput`.
         """
-        return self._invoke(input, _models.LIST_GROUPS, [], plugins)
 
+    def list_groups(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListGroupsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_GROUPS, args, kwargs),
+            _models.LIST_GROUPS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_indices(
-        self, input: ListIndicesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListIndicesInput | _models.ListIndicesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListIndicesOutput: ...
+
+    @_overload
+    def list_indices(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListIndicesInputDict],
     ) -> ListIndicesOutput:
         """
         Lists the Amazon Q Business indices you have created.
 
         Args:
-            input:
-                An instance of `ListIndicesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1499,18 +2559,39 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `ListIndicesOutput`.
         """
-        return self._invoke(input, _models.LIST_INDICES, [], plugins)
 
+    def list_indices(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListIndicesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_INDICES, args, kwargs),
+            _models.LIST_INDICES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_messages(
-        self, input: ListMessagesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListMessagesInput | _models.ListMessagesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListMessagesOutput: ...
+
+    @_overload
+    def list_messages(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListMessagesInputDict],
     ) -> ListMessagesOutput:
         """
         Gets a list of messages associated with an Amazon Q Business web
         experience.
 
         Args:
-            input:
-                An instance of `ListMessagesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1520,18 +2601,39 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `ListMessagesOutput`.
         """
-        return self._invoke(input, _models.LIST_MESSAGES, [], plugins)
 
+    def list_messages(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListMessagesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_MESSAGES, args, kwargs),
+            _models.LIST_MESSAGES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_plugin_actions(
-        self, input: ListPluginActionsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListPluginActionsInput | _models.ListPluginActionsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListPluginActionsOutput: ...
+
+    @_overload
+    def list_plugin_actions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListPluginActionsInputDict],
     ) -> ListPluginActionsOutput:
         """
         Lists configured Amazon Q Business actions for a specific plugin in an
         Amazon Q Business application.
 
         Args:
-            input:
-                An instance of `ListPluginActionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1541,17 +2643,38 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `ListPluginActionsOutput`.
         """
-        return self._invoke(input, _models.LIST_PLUGIN_ACTIONS, [], plugins)
 
+    def list_plugin_actions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListPluginActionsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_PLUGIN_ACTIONS, args, kwargs),
+            _models.LIST_PLUGIN_ACTIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_plugins(
-        self, input: ListPluginsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListPluginsInput | _models.ListPluginsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListPluginsOutput: ...
+
+    @_overload
+    def list_plugins(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListPluginsInputDict],
     ) -> ListPluginsOutput:
         """
         Lists configured Amazon Q Business plugins.
 
         Args:
-            input:
-                An instance of `ListPluginsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1561,18 +2684,40 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `ListPluginsOutput`.
         """
-        return self._invoke(input, _models.LIST_PLUGINS, [], plugins)
 
+    def list_plugins(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListPluginsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_PLUGINS, args, kwargs),
+            _models.LIST_PLUGINS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_plugin_type_actions(
-        self, input: ListPluginTypeActionsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListPluginTypeActionsInput
+        | _models.ListPluginTypeActionsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListPluginTypeActionsOutput: ...
+
+    @_overload
+    def list_plugin_type_actions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListPluginTypeActionsInputDict],
     ) -> ListPluginTypeActionsOutput:
         """
         Lists configured Amazon Q Business actions for any plugin type---both
         built-in and custom.
 
         Args:
-            input:
-                An instance of `ListPluginTypeActionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1582,19 +2727,39 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `ListPluginTypeActionsOutput`.
         """
-        return self._invoke(input, _models.LIST_PLUGIN_TYPE_ACTIONS, [], plugins)
 
+    def list_plugin_type_actions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListPluginTypeActionsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_PLUGIN_TYPE_ACTIONS, args, kwargs),
+            _models.LIST_PLUGIN_TYPE_ACTIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_plugin_type_metadata(
         self,
-        input: ListPluginTypeMetadataInput | None = None,
+        request: _models.ListPluginTypeMetadataInput
+        | _models.ListPluginTypeMetadataInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListPluginTypeMetadataOutput: ...
+
+    @_overload
+    def list_plugin_type_metadata(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListPluginTypeMetadataInputDict],
     ) -> ListPluginTypeMetadataOutput:
         """
         Lists metadata for all Amazon Q Business plugin types.
 
         Args:
-            input:
-                An instance of `ListPluginTypeMetadataInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1604,17 +2769,38 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `ListPluginTypeMetadataOutput`.
         """
-        return self._invoke(input, _models.LIST_PLUGIN_TYPE_METADATA, [], plugins)
 
+    def list_plugin_type_metadata(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListPluginTypeMetadataOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_PLUGIN_TYPE_METADATA, args, kwargs),
+            _models.LIST_PLUGIN_TYPE_METADATA,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_retrievers(
-        self, input: ListRetrieversInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListRetrieversInput | _models.ListRetrieversInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListRetrieversOutput: ...
+
+    @_overload
+    def list_retrievers(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListRetrieversInputDict],
     ) -> ListRetrieversOutput:
         """
         Lists the retriever used by an Amazon Q Business application.
 
         Args:
-            input:
-                An instance of `ListRetrieversInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1624,17 +2810,38 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `ListRetrieversOutput`.
         """
-        return self._invoke(input, _models.LIST_RETRIEVERS, [], plugins)
 
+    def list_retrievers(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListRetrieversOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_RETRIEVERS, args, kwargs),
+            _models.LIST_RETRIEVERS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_subscriptions(
-        self, input: ListSubscriptionsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListSubscriptionsInput | _models.ListSubscriptionsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListSubscriptionsOutput: ...
+
+    @_overload
+    def list_subscriptions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListSubscriptionsInputDict],
     ) -> ListSubscriptionsOutput:
         """
         Lists all subscriptions created in an Amazon Q Business application.
 
         Args:
-            input:
-                An instance of `ListSubscriptionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1644,10 +2851,34 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `ListSubscriptionsOutput`.
         """
-        return self._invoke(input, _models.LIST_SUBSCRIPTIONS, [], plugins)
 
+    def list_subscriptions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListSubscriptionsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_SUBSCRIPTIONS, args, kwargs),
+            _models.LIST_SUBSCRIPTIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_tags_for_resource(
-        self, input: ListTagsForResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListTagsForResourceInput
+        | _models.ListTagsForResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListTagsForResourceOutput: ...
+
+    @_overload
+    def list_tags_for_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListTagsForResourceInputDict],
     ) -> ListTagsForResourceOutput:
         """
         Gets a list of tags associated with a specified resource. Amazon Q
@@ -1655,8 +2886,6 @@ class QBusinessClient(Client[QBusinessConfig]):
         them.
 
         Args:
-            input:
-                An instance of `ListTagsForResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1666,17 +2895,38 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `ListTagsForResourceOutput`.
         """
-        return self._invoke(input, _models.LIST_TAGS_FOR_RESOURCE, [], plugins)
 
+    def list_tags_for_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListTagsForResourceOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_TAGS_FOR_RESOURCE, args, kwargs),
+            _models.LIST_TAGS_FOR_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_web_experiences(
-        self, input: ListWebExperiencesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListWebExperiencesInput | _models.ListWebExperiencesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListWebExperiencesOutput: ...
+
+    @_overload
+    def list_web_experiences(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListWebExperiencesInputDict],
     ) -> ListWebExperiencesOutput:
         """
         Lists one or more Amazon Q Business Web Experiences.
 
         Args:
-            input:
-                An instance of `ListWebExperiencesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1686,18 +2936,39 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `ListWebExperiencesOutput`.
         """
-        return self._invoke(input, _models.LIST_WEB_EXPERIENCES, [], plugins)
 
+    def list_web_experiences(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListWebExperiencesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_WEB_EXPERIENCES, args, kwargs),
+            _models.LIST_WEB_EXPERIENCES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_feedback(
-        self, input: PutFeedbackInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutFeedbackInput | _models.PutFeedbackInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutFeedbackOutput: ...
+
+    @_overload
+    def put_feedback(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutFeedbackInputDict],
     ) -> PutFeedbackOutput:
         """
         Enables your end user to provide feedback on their Amazon Q Business
         generated chat responses.
 
         Args:
-            input:
-                An instance of `PutFeedbackInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1707,10 +2978,33 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `PutFeedbackOutput`.
         """
-        return self._invoke(input, _models.PUT_FEEDBACK, [], plugins)
 
+    def put_feedback(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutFeedbackOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_FEEDBACK, args, kwargs),
+            _models.PUT_FEEDBACK,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_group(
-        self, input: PutGroupInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutGroupInput | _models.PutGroupInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutGroupOutput: ...
+
+    @_overload
+    def put_group(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutGroupInputDict],
     ) -> PutGroupOutput:
         """
         Create, or updates, a mapping of users---who have access to a
@@ -1732,8 +3026,6 @@ class QBusinessClient(Client[QBusinessConfig]):
         `RoleArn` for Amazon Q Buisness to access the file.
 
         Args:
-            input:
-                An instance of `PutGroupInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1743,10 +3035,34 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `PutGroupOutput`.
         """
-        return self._invoke(input, _models.PUT_GROUP, [], plugins)
 
+    def put_group(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutGroupOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_GROUP, args, kwargs),
+            _models.PUT_GROUP,
+            [],
+            plugins,
+        )
+
+    @_overload
     def search_relevant_content(
-        self, input: SearchRelevantContentInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.SearchRelevantContentInput
+        | _models.SearchRelevantContentInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> SearchRelevantContentOutput: ...
+
+    @_overload
+    def search_relevant_content(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SearchRelevantContentInputDict],
     ) -> SearchRelevantContentOutput:
         """
         Searches for relevant content in a Amazon Q Business application based
@@ -1759,8 +3075,6 @@ class QBusinessClient(Client[QBusinessConfig]):
         level of the relevance.
 
         Args:
-            input:
-                An instance of `SearchRelevantContentInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1770,10 +3084,34 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `SearchRelevantContentOutput`.
         """
-        return self._invoke(input, _models.SEARCH_RELEVANT_CONTENT, [], plugins)
 
+    def search_relevant_content(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SearchRelevantContentOutput:
+        return self._invoke(
+            self._select_input(_models.SEARCH_RELEVANT_CONTENT, args, kwargs),
+            _models.SEARCH_RELEVANT_CONTENT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def start_data_source_sync_job(
-        self, input: StartDataSourceSyncJobInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StartDataSourceSyncJobInput
+        | _models.StartDataSourceSyncJobInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StartDataSourceSyncJobOutput: ...
+
+    @_overload
+    def start_data_source_sync_job(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartDataSourceSyncJobInputDict],
     ) -> StartDataSourceSyncJobOutput:
         """
         Starts a data source connector synchronization job. If a synchronization
@@ -1781,8 +3119,6 @@ class QBusinessClient(Client[QBusinessConfig]):
         `ConflictException`.
 
         Args:
-            input:
-                An instance of `StartDataSourceSyncJobInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1792,18 +3128,40 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `StartDataSourceSyncJobOutput`.
         """
-        return self._invoke(input, _models.START_DATA_SOURCE_SYNC_JOB, [], plugins)
 
+    def start_data_source_sync_job(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StartDataSourceSyncJobOutput:
+        return self._invoke(
+            self._select_input(_models.START_DATA_SOURCE_SYNC_JOB, args, kwargs),
+            _models.START_DATA_SOURCE_SYNC_JOB,
+            [],
+            plugins,
+        )
+
+    @_overload
     def stop_data_source_sync_job(
-        self, input: StopDataSourceSyncJobInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StopDataSourceSyncJobInput
+        | _models.StopDataSourceSyncJobInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StopDataSourceSyncJobOutput: ...
+
+    @_overload
+    def stop_data_source_sync_job(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StopDataSourceSyncJobInputDict],
     ) -> StopDataSourceSyncJobOutput:
         """
         Stops an Amazon Q Business data source connector synchronization job
         already in progress.
 
         Args:
-            input:
-                An instance of `StopDataSourceSyncJobInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1813,10 +3171,33 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `StopDataSourceSyncJobOutput`.
         """
-        return self._invoke(input, _models.STOP_DATA_SOURCE_SYNC_JOB, [], plugins)
 
+    def stop_data_source_sync_job(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StopDataSourceSyncJobOutput:
+        return self._invoke(
+            self._select_input(_models.STOP_DATA_SOURCE_SYNC_JOB, args, kwargs),
+            _models.STOP_DATA_SOURCE_SYNC_JOB,
+            [],
+            plugins,
+        )
+
+    @_overload
     def tag_resource(
-        self, input: TagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.TagResourceInput | _models.TagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> TagResourceOutput: ...
+
+    @_overload
+    def tag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.TagResourceInputDict],
     ) -> TagResourceOutput:
         """
         Adds the specified tag to the specified Amazon Q Business application or
@@ -1824,8 +3205,6 @@ class QBusinessClient(Client[QBusinessConfig]):
         replaced with the new value.
 
         Args:
-            input:
-                An instance of `TagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1835,17 +3214,38 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `TagResourceOutput`.
         """
-        return self._invoke(input, _models.TAG_RESOURCE, [], plugins)
 
+    def tag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> TagResourceOutput:
+        return self._invoke(
+            self._select_input(_models.TAG_RESOURCE, args, kwargs),
+            _models.TAG_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def untag_resource(
-        self, input: UntagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UntagResourceInput | _models.UntagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UntagResourceOutput: ...
+
+    @_overload
+    def untag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UntagResourceInputDict],
     ) -> UntagResourceOutput:
         """
         Removes a tag from an Amazon Q Business application or a data source.
 
         Args:
-            input:
-                An instance of `UntagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1855,10 +3255,33 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `UntagResourceOutput`.
         """
-        return self._invoke(input, _models.UNTAG_RESOURCE, [], plugins)
 
+    def untag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UntagResourceOutput:
+        return self._invoke(
+            self._select_input(_models.UNTAG_RESOURCE, args, kwargs),
+            _models.UNTAG_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_application(
-        self, input: UpdateApplicationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateApplicationInput | _models.UpdateApplicationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateApplicationOutput: ...
+
+    @_overload
+    def update_application(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateApplicationInputDict],
     ) -> UpdateApplicationOutput:
         """
         Updates an existing Amazon Q Business application.
@@ -1875,8 +3298,6 @@ class QBusinessClient(Client[QBusinessConfig]):
             Apps](https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/using-service-linked-roles-qapps.html).
 
         Args:
-            input:
-                An instance of `UpdateApplicationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1886,20 +3307,40 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `UpdateApplicationOutput`.
         """
-        return self._invoke(input, _models.UPDATE_APPLICATION, [], plugins)
 
+    def update_application(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateApplicationOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_APPLICATION, args, kwargs),
+            _models.UPDATE_APPLICATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_chat_controls_configuration(
         self,
-        input: UpdateChatControlsConfigurationInput,
+        request: _models.UpdateChatControlsConfigurationInput
+        | _models.UpdateChatControlsConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateChatControlsConfigurationOutput: ...
+
+    @_overload
+    def update_chat_controls_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateChatControlsConfigurationInputDict],
     ) -> UpdateChatControlsConfigurationOutput:
         """
         Updates a set of chat controls configured for an existing Amazon Q
         Business application.
 
         Args:
-            input:
-                An instance of `UpdateChatControlsConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1909,14 +3350,36 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `UpdateChatControlsConfigurationOutput`.
         """
+
+    def update_chat_controls_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateChatControlsConfigurationOutput:
         return self._invoke(
-            input, _models.UPDATE_CHAT_CONTROLS_CONFIGURATION, [], plugins
+            self._select_input(
+                _models.UPDATE_CHAT_CONTROLS_CONFIGURATION, args, kwargs
+            ),
+            _models.UPDATE_CHAT_CONTROLS_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     def update_chat_response_configuration(
         self,
-        input: UpdateChatResponseConfigurationInput,
+        request: _models.UpdateChatResponseConfigurationInput
+        | _models.UpdateChatResponseConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateChatResponseConfigurationOutput: ...
+
+    @_overload
+    def update_chat_response_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateChatResponseConfigurationInputDict],
     ) -> UpdateChatResponseConfigurationOutput:
         """
         Updates an existing chat response configuration in an Amazon Q Business
@@ -1925,8 +3388,6 @@ class QBusinessClient(Client[QBusinessConfig]):
         how the system generates responses.
 
         Args:
-            input:
-                An instance of `UpdateChatResponseConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1936,12 +3397,35 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `UpdateChatResponseConfigurationOutput`.
         """
+
+    def update_chat_response_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateChatResponseConfigurationOutput:
         return self._invoke(
-            input, _models.UPDATE_CHAT_RESPONSE_CONFIGURATION, [], plugins
+            self._select_input(
+                _models.UPDATE_CHAT_RESPONSE_CONFIGURATION, args, kwargs
+            ),
+            _models.UPDATE_CHAT_RESPONSE_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     def update_data_accessor(
-        self, input: UpdateDataAccessorInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateDataAccessorInput | _models.UpdateDataAccessorInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateDataAccessorOutput: ...
+
+    @_overload
+    def update_data_accessor(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateDataAccessorInputDict],
     ) -> UpdateDataAccessorOutput:
         """
         Updates an existing data accessor. This operation allows modifying the
@@ -1951,8 +3435,6 @@ class QBusinessClient(Client[QBusinessConfig]):
         the data accessor.
 
         Args:
-            input:
-                An instance of `UpdateDataAccessorInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1962,17 +3444,38 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `UpdateDataAccessorOutput`.
         """
-        return self._invoke(input, _models.UPDATE_DATA_ACCESSOR, [], plugins)
 
+    def update_data_accessor(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateDataAccessorOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_DATA_ACCESSOR, args, kwargs),
+            _models.UPDATE_DATA_ACCESSOR,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_data_source(
-        self, input: UpdateDataSourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateDataSourceInput | _models.UpdateDataSourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateDataSourceOutput: ...
+
+    @_overload
+    def update_data_source(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateDataSourceInputDict],
     ) -> UpdateDataSourceOutput:
         """
         Updates an existing Amazon Q Business data source connector.
 
         Args:
-            input:
-                An instance of `UpdateDataSourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1982,17 +3485,38 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `UpdateDataSourceOutput`.
         """
-        return self._invoke(input, _models.UPDATE_DATA_SOURCE, [], plugins)
 
+    def update_data_source(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateDataSourceOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_DATA_SOURCE, args, kwargs),
+            _models.UPDATE_DATA_SOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_index(
-        self, input: UpdateIndexInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateIndexInput | _models.UpdateIndexInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateIndexOutput: ...
+
+    @_overload
+    def update_index(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateIndexInputDict],
     ) -> UpdateIndexOutput:
         """
         Updates an Amazon Q Business index.
 
         Args:
-            input:
-                An instance of `UpdateIndexInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2002,17 +3526,38 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `UpdateIndexOutput`.
         """
-        return self._invoke(input, _models.UPDATE_INDEX, [], plugins)
 
+    def update_index(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateIndexOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_INDEX, args, kwargs),
+            _models.UPDATE_INDEX,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_plugin(
-        self, input: UpdatePluginInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdatePluginInput | _models.UpdatePluginInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdatePluginOutput: ...
+
+    @_overload
+    def update_plugin(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdatePluginInputDict],
     ) -> UpdatePluginOutput:
         """
         Updates an Amazon Q Business plugin.
 
         Args:
-            input:
-                An instance of `UpdatePluginInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2022,17 +3567,38 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `UpdatePluginOutput`.
         """
-        return self._invoke(input, _models.UPDATE_PLUGIN, [], plugins)
 
+    def update_plugin(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdatePluginOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_PLUGIN, args, kwargs),
+            _models.UPDATE_PLUGIN,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_retriever(
-        self, input: UpdateRetrieverInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateRetrieverInput | _models.UpdateRetrieverInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateRetrieverOutput: ...
+
+    @_overload
+    def update_retriever(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateRetrieverInputDict],
     ) -> UpdateRetrieverOutput:
         """
         Updates the retriever used for your Amazon Q Business application.
 
         Args:
-            input:
-                An instance of `UpdateRetrieverInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2042,10 +3608,33 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `UpdateRetrieverOutput`.
         """
-        return self._invoke(input, _models.UPDATE_RETRIEVER, [], plugins)
 
+    def update_retriever(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateRetrieverOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_RETRIEVER, args, kwargs),
+            _models.UPDATE_RETRIEVER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_subscription(
-        self, input: UpdateSubscriptionInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateSubscriptionInput | _models.UpdateSubscriptionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateSubscriptionOutput: ...
+
+    @_overload
+    def update_subscription(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateSubscriptionInputDict],
     ) -> UpdateSubscriptionOutput:
         """
         Updates the pricing tier for an Amazon Q Business subscription. Upgrades
@@ -2055,8 +3644,6 @@ class QBusinessClient(Client[QBusinessConfig]):
         pricing](https://aws.amazon.com/q/business/pricing/).
 
         Args:
-            input:
-                An instance of `UpdateSubscriptionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2066,17 +3653,38 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `UpdateSubscriptionOutput`.
         """
-        return self._invoke(input, _models.UPDATE_SUBSCRIPTION, [], plugins)
 
+    def update_subscription(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateSubscriptionOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_SUBSCRIPTION, args, kwargs),
+            _models.UPDATE_SUBSCRIPTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_user(
-        self, input: UpdateUserInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateUserInput | _models.UpdateUserInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateUserOutput: ...
+
+    @_overload
+    def update_user(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateUserInputDict],
     ) -> UpdateUserOutput:
         """
         Updates a information associated with a user id.
 
         Args:
-            input:
-                An instance of `UpdateUserInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2086,17 +3694,39 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `UpdateUserOutput`.
         """
-        return self._invoke(input, _models.UPDATE_USER, [], plugins)
 
+    def update_user(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateUserOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_USER, args, kwargs),
+            _models.UPDATE_USER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_web_experience(
-        self, input: UpdateWebExperienceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateWebExperienceInput
+        | _models.UpdateWebExperienceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateWebExperienceOutput: ...
+
+    @_overload
+    def update_web_experience(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateWebExperienceInputDict],
     ) -> UpdateWebExperienceOutput:
         """
         Updates an Amazon Q Business web experience.
 
         Args:
-            input:
-                An instance of `UpdateWebExperienceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2106,7 +3736,16 @@ class QBusinessClient(Client[QBusinessConfig]):
         Returns:
             An instance of `UpdateWebExperienceOutput`.
         """
-        return self._invoke(input, _models.UPDATE_WEB_EXPERIENCE, [], plugins)
+
+    def update_web_experience(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateWebExperienceOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_WEB_EXPERIENCE, args, kwargs),
+            _models.UPDATE_WEB_EXPERIENCE,
+            [],
+            plugins,
+        )
 
     def _new_config(self) -> QBusinessConfig:
         return QBusinessConfig.resolve()

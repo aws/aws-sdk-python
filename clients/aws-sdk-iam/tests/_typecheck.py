@@ -2,290 +2,425 @@
 
 from typing import Any
 
+from aws_sdk_iam.aio.client import AsyncIAMClient
+from aws_sdk_iam.client import IAMClient
 from aws_sdk_iam.models import (
     AcceptDelegationRequestInput,
+    AcceptDelegationRequestInputDict,
     AcceptDelegationRequestOutput,
     AccessDetail,
     AccessKey,
     AccessKeyLastUsed,
     AccessKeyMetadata,
     AcquireRoleInput,
+    AcquireRoleInputDict,
     AcquireRoleOutput,
     AddClientIDToOpenIDConnectProviderInput,
+    AddClientIDToOpenIDConnectProviderInputDict,
     AddClientIDToOpenIDConnectProviderOutput,
     AddRoleToInstanceProfileInput,
+    AddRoleToInstanceProfileInputDict,
     AddRoleToInstanceProfileOutput,
     AddUserToGroupInput,
+    AddUserToGroupInputDict,
     AddUserToGroupOutput,
     AssociateDelegationRequestInput,
+    AssociateDelegationRequestInputDict,
     AssociateDelegationRequestOutput,
     AttachGroupPolicyInput,
+    AttachGroupPolicyInputDict,
     AttachGroupPolicyOutput,
     AttachRolePolicyInput,
+    AttachRolePolicyInputDict,
     AttachRolePolicyOutput,
     AttachUserPolicyInput,
+    AttachUserPolicyInputDict,
     AttachUserPolicyOutput,
     AttachedPermissionsBoundary,
     AttachedPolicy,
     ChangePasswordInput,
+    ChangePasswordInputDict,
     ChangePasswordOutput,
     ContextEntry,
+    ContextEntryDict,
     CreateAccessKeyInput,
+    CreateAccessKeyInputDict,
     CreateAccessKeyOutput,
     CreateAccountAliasInput,
+    CreateAccountAliasInputDict,
     CreateAccountAliasOutput,
     CreateDelegationRequestInput,
+    CreateDelegationRequestInputDict,
     CreateDelegationRequestOutput,
     CreateGroupInput,
+    CreateGroupInputDict,
     CreateGroupOutput,
     CreateInstanceProfileInput,
+    CreateInstanceProfileInputDict,
     CreateInstanceProfileOutput,
     CreateLoginProfileInput,
+    CreateLoginProfileInputDict,
     CreateLoginProfileOutput,
     CreateOpenIDConnectProviderInput,
+    CreateOpenIDConnectProviderInputDict,
     CreateOpenIDConnectProviderOutput,
     CreatePolicyInput,
+    CreatePolicyInputDict,
     CreatePolicyOutput,
     CreatePolicyVersionInput,
+    CreatePolicyVersionInputDict,
     CreatePolicyVersionOutput,
     CreateRoleInput,
+    CreateRoleInputDict,
     CreateRoleOutput,
     CreateSAMLProviderInput,
+    CreateSAMLProviderInputDict,
     CreateSAMLProviderOutput,
     CreateServiceLinkedRoleInput,
+    CreateServiceLinkedRoleInputDict,
     CreateServiceLinkedRoleOutput,
     CreateServiceSpecificCredentialInput,
+    CreateServiceSpecificCredentialInputDict,
     CreateServiceSpecificCredentialOutput,
     CreateUserInput,
+    CreateUserInputDict,
     CreateUserOutput,
     CreateVirtualMFADeviceInput,
+    CreateVirtualMFADeviceInputDict,
     CreateVirtualMFADeviceOutput,
     DeactivateMFADeviceInput,
+    DeactivateMFADeviceInputDict,
     DeactivateMFADeviceOutput,
     DelegationPermission,
+    DelegationPermissionDict,
     DelegationRequest,
     DeleteAccessKeyInput,
+    DeleteAccessKeyInputDict,
     DeleteAccessKeyOutput,
     DeleteAccountAliasInput,
+    DeleteAccountAliasInputDict,
     DeleteAccountAliasOutput,
     DeleteAccountPasswordPolicyInput,
+    DeleteAccountPasswordPolicyInputDict,
     DeleteAccountPasswordPolicyOutput,
     DeleteGroupInput,
+    DeleteGroupInputDict,
     DeleteGroupOutput,
     DeleteGroupPolicyInput,
+    DeleteGroupPolicyInputDict,
     DeleteGroupPolicyOutput,
     DeleteInstanceProfileInput,
+    DeleteInstanceProfileInputDict,
     DeleteInstanceProfileOutput,
     DeleteLoginProfileInput,
+    DeleteLoginProfileInputDict,
     DeleteLoginProfileOutput,
     DeleteOpenIDConnectProviderInput,
+    DeleteOpenIDConnectProviderInputDict,
     DeleteOpenIDConnectProviderOutput,
     DeletePolicyInput,
+    DeletePolicyInputDict,
     DeletePolicyOutput,
     DeletePolicyVersionInput,
+    DeletePolicyVersionInputDict,
     DeletePolicyVersionOutput,
     DeleteRoleInput,
+    DeleteRoleInputDict,
     DeleteRoleOutput,
     DeleteRolePermissionsBoundaryInput,
+    DeleteRolePermissionsBoundaryInputDict,
     DeleteRolePermissionsBoundaryOutput,
     DeleteRolePolicyInput,
+    DeleteRolePolicyInputDict,
     DeleteRolePolicyOutput,
     DeleteSAMLProviderInput,
+    DeleteSAMLProviderInputDict,
     DeleteSAMLProviderOutput,
     DeleteSSHPublicKeyInput,
+    DeleteSSHPublicKeyInputDict,
     DeleteSSHPublicKeyOutput,
     DeleteServerCertificateInput,
+    DeleteServerCertificateInputDict,
     DeleteServerCertificateOutput,
     DeleteServiceLinkedRoleInput,
+    DeleteServiceLinkedRoleInputDict,
     DeleteServiceLinkedRoleOutput,
     DeleteServiceSpecificCredentialInput,
+    DeleteServiceSpecificCredentialInputDict,
     DeleteServiceSpecificCredentialOutput,
     DeleteSigningCertificateInput,
+    DeleteSigningCertificateInputDict,
     DeleteSigningCertificateOutput,
     DeleteUserInput,
+    DeleteUserInputDict,
     DeleteUserOutput,
     DeleteUserPermissionsBoundaryInput,
+    DeleteUserPermissionsBoundaryInputDict,
     DeleteUserPermissionsBoundaryOutput,
     DeleteUserPolicyInput,
+    DeleteUserPolicyInputDict,
     DeleteUserPolicyOutput,
     DeleteVirtualMFADeviceInput,
+    DeleteVirtualMFADeviceInputDict,
     DeleteVirtualMFADeviceOutput,
     DeletionTaskFailureReasonType,
     DetachGroupPolicyInput,
+    DetachGroupPolicyInputDict,
     DetachGroupPolicyOutput,
     DetachRolePolicyInput,
+    DetachRolePolicyInputDict,
     DetachRolePolicyOutput,
     DetachUserPolicyInput,
+    DetachUserPolicyInputDict,
     DetachUserPolicyOutput,
     DisableOrganizationsRootCredentialsManagementInput,
+    DisableOrganizationsRootCredentialsManagementInputDict,
     DisableOrganizationsRootCredentialsManagementOutput,
     DisableOrganizationsRootSessionsInput,
+    DisableOrganizationsRootSessionsInputDict,
     DisableOrganizationsRootSessionsOutput,
     DisableOutboundWebIdentityFederationInput,
+    DisableOutboundWebIdentityFederationInputDict,
     DisableOutboundWebIdentityFederationOutput,
     EnableMFADeviceInput,
+    EnableMFADeviceInputDict,
     EnableMFADeviceOutput,
     EnableOrganizationsRootCredentialsManagementInput,
+    EnableOrganizationsRootCredentialsManagementInputDict,
     EnableOrganizationsRootCredentialsManagementOutput,
     EnableOrganizationsRootSessionsInput,
+    EnableOrganizationsRootSessionsInputDict,
     EnableOrganizationsRootSessionsOutput,
     EnableOutboundWebIdentityFederationInput,
+    EnableOutboundWebIdentityFederationInputDict,
     EnableOutboundWebIdentityFederationOutput,
     EntityDetails,
     EntityInfo,
     ErrorDetails,
     EvaluationResult,
     GenerateCredentialReportInput,
+    GenerateCredentialReportInputDict,
     GenerateCredentialReportOutput,
     GenerateOrganizationsAccessReportInput,
+    GenerateOrganizationsAccessReportInputDict,
     GenerateOrganizationsAccessReportOutput,
     GenerateServiceLastAccessedDetailsInput,
+    GenerateServiceLastAccessedDetailsInputDict,
     GenerateServiceLastAccessedDetailsOutput,
     GetAccessKeyLastUsedInput,
+    GetAccessKeyLastUsedInputDict,
     GetAccessKeyLastUsedOutput,
     GetAccountAuthorizationDetailsInput,
+    GetAccountAuthorizationDetailsInputDict,
     GetAccountAuthorizationDetailsOutput,
     GetAccountPasswordPolicyInput,
+    GetAccountPasswordPolicyInputDict,
     GetAccountPasswordPolicyOutput,
     GetAccountPropertiesInput,
+    GetAccountPropertiesInputDict,
     GetAccountPropertiesOutput,
     GetAccountSummaryInput,
+    GetAccountSummaryInputDict,
     GetAccountSummaryOutput,
     GetContextKeysForCustomPolicyInput,
+    GetContextKeysForCustomPolicyInputDict,
     GetContextKeysForCustomPolicyOutput,
     GetContextKeysForPrincipalPolicyInput,
+    GetContextKeysForPrincipalPolicyInputDict,
     GetContextKeysForPrincipalPolicyOutput,
     GetCredentialReportInput,
+    GetCredentialReportInputDict,
     GetCredentialReportOutput,
     GetDelegationRequestInput,
+    GetDelegationRequestInputDict,
     GetDelegationRequestOutput,
     GetGroupInput,
+    GetGroupInputDict,
     GetGroupOutput,
     GetGroupPolicyInput,
+    GetGroupPolicyInputDict,
     GetGroupPolicyOutput,
     GetHumanReadableSummaryInput,
+    GetHumanReadableSummaryInputDict,
     GetHumanReadableSummaryOutput,
     GetInstanceProfileInput,
+    GetInstanceProfileInputDict,
     GetInstanceProfileOutput,
     GetLoginProfileInput,
+    GetLoginProfileInputDict,
     GetLoginProfileOutput,
     GetMFADeviceInput,
+    GetMFADeviceInputDict,
     GetMFADeviceOutput,
     GetOpenIDConnectProviderInput,
+    GetOpenIDConnectProviderInputDict,
     GetOpenIDConnectProviderOutput,
     GetOrganizationsAccessReportInput,
+    GetOrganizationsAccessReportInputDict,
     GetOrganizationsAccessReportOutput,
     GetOutboundWebIdentityFederationInfoInput,
+    GetOutboundWebIdentityFederationInfoInputDict,
     GetOutboundWebIdentityFederationInfoOutput,
     GetPolicyInput,
+    GetPolicyInputDict,
     GetPolicyOutput,
     GetPolicyVersionInput,
+    GetPolicyVersionInputDict,
     GetPolicyVersionOutput,
     GetRoleInput,
+    GetRoleInputDict,
     GetRoleOutput,
     GetRolePolicyInput,
+    GetRolePolicyInputDict,
     GetRolePolicyOutput,
     GetRoleTemplateVersionInput,
+    GetRoleTemplateVersionInputDict,
     GetRoleTemplateVersionOutput,
     GetSAMLProviderInput,
+    GetSAMLProviderInputDict,
     GetSAMLProviderOutput,
     GetSSHPublicKeyInput,
+    GetSSHPublicKeyInputDict,
     GetSSHPublicKeyOutput,
     GetServerCertificateInput,
+    GetServerCertificateInputDict,
     GetServerCertificateOutput,
     GetServiceLastAccessedDetailsInput,
+    GetServiceLastAccessedDetailsInputDict,
     GetServiceLastAccessedDetailsOutput,
     GetServiceLastAccessedDetailsWithEntitiesInput,
+    GetServiceLastAccessedDetailsWithEntitiesInputDict,
     GetServiceLastAccessedDetailsWithEntitiesOutput,
     GetServiceLinkedRoleDeletionStatusInput,
+    GetServiceLinkedRoleDeletionStatusInputDict,
     GetServiceLinkedRoleDeletionStatusOutput,
     GetUserInput,
+    GetUserInputDict,
     GetUserOutput,
     GetUserPolicyInput,
+    GetUserPolicyInputDict,
     GetUserPolicyOutput,
     Group,
     GroupDetail,
     InlinePolicy,
     InlinePolicyIdentifierType,
+    InlinePolicyIdentifierTypeDict,
     InstanceProfile,
     ListAccessKeysInput,
+    ListAccessKeysInputDict,
     ListAccessKeysOutput,
     ListAccountAliasesInput,
+    ListAccountAliasesInputDict,
     ListAccountAliasesOutput,
     ListAttachedGroupPoliciesInput,
+    ListAttachedGroupPoliciesInputDict,
     ListAttachedGroupPoliciesOutput,
     ListAttachedRolePoliciesInput,
+    ListAttachedRolePoliciesInputDict,
     ListAttachedRolePoliciesOutput,
     ListAttachedUserPoliciesInput,
+    ListAttachedUserPoliciesInputDict,
     ListAttachedUserPoliciesOutput,
     ListDelegationRequestsInput,
+    ListDelegationRequestsInputDict,
     ListDelegationRequestsOutput,
     ListEntitiesForPolicyInput,
+    ListEntitiesForPolicyInputDict,
     ListEntitiesForPolicyOutput,
     ListGroupPoliciesInput,
+    ListGroupPoliciesInputDict,
     ListGroupPoliciesOutput,
     ListGroupsForUserInput,
+    ListGroupsForUserInputDict,
     ListGroupsForUserOutput,
     ListGroupsInput,
+    ListGroupsInputDict,
     ListGroupsOutput,
     ListInstanceProfileTagsInput,
+    ListInstanceProfileTagsInputDict,
     ListInstanceProfileTagsOutput,
     ListInstanceProfilesForRoleInput,
+    ListInstanceProfilesForRoleInputDict,
     ListInstanceProfilesForRoleOutput,
     ListInstanceProfilesInput,
+    ListInstanceProfilesInputDict,
     ListInstanceProfilesOutput,
     ListMFADeviceTagsInput,
+    ListMFADeviceTagsInputDict,
     ListMFADeviceTagsOutput,
     ListMFADevicesInput,
+    ListMFADevicesInputDict,
     ListMFADevicesOutput,
     ListOpenIDConnectProviderTagsInput,
+    ListOpenIDConnectProviderTagsInputDict,
     ListOpenIDConnectProviderTagsOutput,
     ListOpenIDConnectProvidersInput,
+    ListOpenIDConnectProvidersInputDict,
     ListOpenIDConnectProvidersOutput,
     ListOrganizationsFeaturesInput,
+    ListOrganizationsFeaturesInputDict,
     ListOrganizationsFeaturesOutput,
     ListPoliciesGrantingServiceAccessEntry,
     ListPoliciesGrantingServiceAccessInput,
+    ListPoliciesGrantingServiceAccessInputDict,
     ListPoliciesGrantingServiceAccessOutput,
     ListPoliciesInput,
+    ListPoliciesInputDict,
     ListPoliciesOutput,
     ListPolicyTagsInput,
+    ListPolicyTagsInputDict,
     ListPolicyTagsOutput,
     ListPolicyVersionsInput,
+    ListPolicyVersionsInputDict,
     ListPolicyVersionsOutput,
     ListRolePoliciesInput,
+    ListRolePoliciesInputDict,
     ListRolePoliciesOutput,
     ListRoleTagsInput,
+    ListRoleTagsInputDict,
     ListRoleTagsOutput,
     ListRolesInput,
+    ListRolesInputDict,
     ListRolesOutput,
     ListSAMLProviderTagsInput,
+    ListSAMLProviderTagsInputDict,
     ListSAMLProviderTagsOutput,
     ListSAMLProvidersInput,
+    ListSAMLProvidersInputDict,
     ListSAMLProvidersOutput,
     ListSSHPublicKeysInput,
+    ListSSHPublicKeysInputDict,
     ListSSHPublicKeysOutput,
     ListServerCertificateTagsInput,
+    ListServerCertificateTagsInputDict,
     ListServerCertificateTagsOutput,
     ListServerCertificatesInput,
+    ListServerCertificatesInputDict,
     ListServerCertificatesOutput,
     ListServiceSpecificCredentialsInput,
+    ListServiceSpecificCredentialsInputDict,
     ListServiceSpecificCredentialsOutput,
     ListSigningCertificatesInput,
+    ListSigningCertificatesInputDict,
     ListSigningCertificatesOutput,
     ListUserPoliciesInput,
+    ListUserPoliciesInputDict,
     ListUserPoliciesOutput,
     ListUserTagsInput,
+    ListUserTagsInputDict,
     ListUserTagsOutput,
     ListUsersInput,
+    ListUsersInputDict,
     ListUsersOutput,
     ListVirtualMFADevicesInput,
+    ListVirtualMFADevicesInputDict,
     ListVirtualMFADevicesOutput,
     LoginProfile,
     MFADevice,
     ManagedPolicyDetail,
     OpenIDConnectProviderListEntry,
     OrderedOrganizationPolicyType,
+    OrderedOrganizationPolicyTypeDict,
     OrganizationsDecisionDetail,
     ParameterDefinition,
     PasswordPolicy,
@@ -294,36 +429,51 @@ from aws_sdk_iam.models import (
     PolicyDetail,
     PolicyGrantingServiceAccess,
     PolicyGroup,
+    PolicyIdentifierDict,
     PolicyParameter,
+    PolicyParameterDict,
     PolicyRole,
     PolicyUser,
     PolicyVersion,
     Position,
     PutAccountPropertiesInput,
+    PutAccountPropertiesInputDict,
     PutAccountPropertiesOutput,
     PutGroupPolicyInput,
+    PutGroupPolicyInputDict,
     PutGroupPolicyOutput,
     PutRolePermissionsBoundaryInput,
+    PutRolePermissionsBoundaryInputDict,
     PutRolePermissionsBoundaryOutput,
     PutRolePolicyInput,
+    PutRolePolicyInputDict,
     PutRolePolicyOutput,
     PutUserPermissionsBoundaryInput,
+    PutUserPermissionsBoundaryInputDict,
     PutUserPermissionsBoundaryOutput,
     PutUserPolicyInput,
+    PutUserPolicyInputDict,
     PutUserPolicyOutput,
     RejectDelegationRequestInput,
+    RejectDelegationRequestInputDict,
     RejectDelegationRequestOutput,
     RemoveClientIDFromOpenIDConnectProviderInput,
+    RemoveClientIDFromOpenIDConnectProviderInputDict,
     RemoveClientIDFromOpenIDConnectProviderOutput,
     RemoveRoleFromInstanceProfileInput,
+    RemoveRoleFromInstanceProfileInputDict,
     RemoveRoleFromInstanceProfileOutput,
     RemoveUserFromGroupInput,
+    RemoveUserFromGroupInputDict,
     RemoveUserFromGroupOutput,
     ReplacementValueEntry,
+    ReplacementValueEntryDict,
     ResetServiceSpecificCredentialInput,
+    ResetServiceSpecificCredentialInputDict,
     ResetServiceSpecificCredentialOutput,
     ResourceSpecificResult,
     ResyncMFADeviceInput,
+    ResyncMFADeviceInputDict,
     ResyncMFADeviceOutput,
     Role,
     RoleDetail,
@@ -335,6 +485,7 @@ from aws_sdk_iam.models import (
     SSHPublicKey,
     SSHPublicKeyMetadata,
     SendDelegationTokenInput,
+    SendDelegationTokenInputDict,
     SendDelegationTokenOutput,
     ServerCertificate,
     ServerCertificateMetadata,
@@ -342,86 +493,125 @@ from aws_sdk_iam.models import (
     ServiceSpecificCredential,
     ServiceSpecificCredentialMetadata,
     SetDefaultPolicyVersionInput,
+    SetDefaultPolicyVersionInputDict,
     SetDefaultPolicyVersionOutput,
     SetSecurityTokenServicePreferencesInput,
+    SetSecurityTokenServicePreferencesInputDict,
     SetSecurityTokenServicePreferencesOutput,
     SigningCertificate,
     SimulateCustomPolicyInput,
+    SimulateCustomPolicyInputDict,
     SimulateCustomPolicyOutput,
     SimulatePrincipalPolicyInput,
+    SimulatePrincipalPolicyInputDict,
     SimulatePrincipalPolicyOutput,
     SourceRoleTemplate,
     Statement,
     Tag,
+    TagDict,
     TagInstanceProfileInput,
+    TagInstanceProfileInputDict,
     TagInstanceProfileOutput,
     TagMFADeviceInput,
+    TagMFADeviceInputDict,
     TagMFADeviceOutput,
     TagOpenIDConnectProviderInput,
+    TagOpenIDConnectProviderInputDict,
     TagOpenIDConnectProviderOutput,
     TagPolicyInput,
+    TagPolicyInputDict,
     TagPolicyOutput,
     TagRoleInput,
+    TagRoleInputDict,
     TagRoleOutput,
     TagSAMLProviderInput,
+    TagSAMLProviderInputDict,
     TagSAMLProviderOutput,
     TagServerCertificateInput,
+    TagServerCertificateInputDict,
     TagServerCertificateOutput,
     TagTemplate,
     TagUserInput,
+    TagUserInputDict,
     TagUserOutput,
     TrackedActionLastAccessed,
     UntagInstanceProfileInput,
+    UntagInstanceProfileInputDict,
     UntagInstanceProfileOutput,
     UntagMFADeviceInput,
+    UntagMFADeviceInputDict,
     UntagMFADeviceOutput,
     UntagOpenIDConnectProviderInput,
+    UntagOpenIDConnectProviderInputDict,
     UntagOpenIDConnectProviderOutput,
     UntagPolicyInput,
+    UntagPolicyInputDict,
     UntagPolicyOutput,
     UntagRoleInput,
+    UntagRoleInputDict,
     UntagRoleOutput,
     UntagSAMLProviderInput,
+    UntagSAMLProviderInputDict,
     UntagSAMLProviderOutput,
     UntagServerCertificateInput,
+    UntagServerCertificateInputDict,
     UntagServerCertificateOutput,
     UntagUserInput,
+    UntagUserInputDict,
     UntagUserOutput,
     UpdateAccessKeyInput,
+    UpdateAccessKeyInputDict,
     UpdateAccessKeyOutput,
     UpdateAccountPasswordPolicyInput,
+    UpdateAccountPasswordPolicyInputDict,
     UpdateAccountPasswordPolicyOutput,
     UpdateAssumeRolePolicyInput,
+    UpdateAssumeRolePolicyInputDict,
     UpdateAssumeRolePolicyOutput,
     UpdateDelegationRequestInput,
+    UpdateDelegationRequestInputDict,
     UpdateDelegationRequestOutput,
     UpdateGroupInput,
+    UpdateGroupInputDict,
     UpdateGroupOutput,
     UpdateLoginProfileInput,
+    UpdateLoginProfileInputDict,
     UpdateLoginProfileOutput,
     UpdateOpenIDConnectProviderThumbprintInput,
+    UpdateOpenIDConnectProviderThumbprintInputDict,
     UpdateOpenIDConnectProviderThumbprintOutput,
     UpdateRoleDescriptionInput,
+    UpdateRoleDescriptionInputDict,
     UpdateRoleDescriptionOutput,
     UpdateRoleInput,
+    UpdateRoleInputDict,
     UpdateRoleOutput,
     UpdateSAMLProviderInput,
+    UpdateSAMLProviderInputDict,
     UpdateSAMLProviderOutput,
     UpdateSSHPublicKeyInput,
+    UpdateSSHPublicKeyInputDict,
     UpdateSSHPublicKeyOutput,
     UpdateServerCertificateInput,
+    UpdateServerCertificateInputDict,
     UpdateServerCertificateOutput,
     UpdateServiceSpecificCredentialInput,
+    UpdateServiceSpecificCredentialInputDict,
     UpdateServiceSpecificCredentialOutput,
     UpdateSigningCertificateInput,
+    UpdateSigningCertificateInputDict,
     UpdateSigningCertificateOutput,
     UpdateUserInput,
+    UpdateUserInputDict,
     UpdateUserOutput,
     UploadSSHPublicKeyInput,
+    UploadSSHPublicKeyInputDict,
     UploadSSHPublicKeyOutput,
     UploadServerCertificateInput,
+    UploadServerCertificateInputDict,
     UploadServerCertificateOutput,
     UploadSigningCertificateInput,
+    UploadSigningCertificateInputDict,
     UploadSigningCertificateOutput,
     User,
     UserDetail,
@@ -429,8 +619,9 @@ from aws_sdk_iam.models import (
 )
 
 
-# Static type fixture: pyright over this validates models.pyi.
-# Not executed as a test; it only needs to type-check.
+# Static type fixture: pyright over this validates models.pyi and the
+# client method signatures. Not executed as a test; it only needs to
+# type-check.
 
 _: Any = ...
 
@@ -884,3 +1075,2284 @@ UploadSSHPublicKeyOutput()
 User(path=_, user_name=_, user_id=_, arn=_, create_date=_)
 UserDetail()
 VirtualMFADevice(serial_number=_)
+_params_0: AcceptDelegationRequestInputDict = {"delegation_request_id": _}
+_params_1: AcquireRoleInputDict = {"template_arn": _}
+_params_2: AddClientIDToOpenIDConnectProviderInputDict = {
+    "open_id_connect_provider_arn": _,
+    "client_id": _,
+}
+_params_3: AddRoleToInstanceProfileInputDict = {
+    "instance_profile_name": _,
+    "role_name": _,
+}
+_params_4: AddUserToGroupInputDict = {"group_name": _, "user_name": _}
+_params_5: AssociateDelegationRequestInputDict = {"delegation_request_id": _}
+_params_6: AttachGroupPolicyInputDict = {"group_name": _, "policy_arn": _}
+_params_7: AttachRolePolicyInputDict = {"role_name": _, "policy_arn": _}
+_params_8: AttachUserPolicyInputDict = {"user_name": _, "policy_arn": _}
+_params_9: ChangePasswordInputDict = {"old_password": _, "new_password": _}
+_params_10: ContextEntryDict = {}
+_params_11: CreateAccessKeyInputDict = {}
+_params_12: CreateAccountAliasInputDict = {"account_alias": _}
+_params_13: CreateDelegationRequestInputDict = {
+    "description": _,
+    "permissions": _,
+    "requestor_workflow_id": _,
+    "notification_channel": _,
+    "session_duration": _,
+}
+_params_14: CreateGroupInputDict = {"group_name": _}
+_params_15: CreateInstanceProfileInputDict = {"instance_profile_name": _}
+_params_16: CreateLoginProfileInputDict = {}
+_params_17: CreateOpenIDConnectProviderInputDict = {"url": _}
+_params_18: CreatePolicyInputDict = {"policy_name": _, "policy_document": _}
+_params_19: CreatePolicyVersionInputDict = {"policy_arn": _, "policy_document": _}
+_params_20: CreateRoleInputDict = {"role_name": _, "assume_role_policy_document": _}
+_params_21: CreateSAMLProviderInputDict = {"saml_metadata_document": _, "name": _}
+_params_22: CreateServiceLinkedRoleInputDict = {"aws_service_name": _}
+_params_23: CreateServiceSpecificCredentialInputDict = {
+    "user_name": _,
+    "service_name": _,
+}
+_params_24: CreateUserInputDict = {"user_name": _}
+_params_25: CreateVirtualMFADeviceInputDict = {"virtual_mfa_device_name": _}
+_params_26: DeactivateMFADeviceInputDict = {"serial_number": _}
+_params_27: DelegationPermissionDict = {}
+_params_28: DeleteAccessKeyInputDict = {"access_key_id": _}
+_params_29: DeleteAccountAliasInputDict = {"account_alias": _}
+_params_30: DeleteAccountPasswordPolicyInputDict = {}
+_params_31: DeleteGroupInputDict = {"group_name": _}
+_params_32: DeleteGroupPolicyInputDict = {"group_name": _, "policy_name": _}
+_params_33: DeleteInstanceProfileInputDict = {"instance_profile_name": _}
+_params_34: DeleteLoginProfileInputDict = {}
+_params_35: DeleteOpenIDConnectProviderInputDict = {"open_id_connect_provider_arn": _}
+_params_36: DeletePolicyInputDict = {"policy_arn": _}
+_params_37: DeletePolicyVersionInputDict = {"policy_arn": _, "version_id": _}
+_params_38: DeleteRoleInputDict = {"role_name": _}
+_params_39: DeleteRolePermissionsBoundaryInputDict = {"role_name": _}
+_params_40: DeleteRolePolicyInputDict = {"role_name": _, "policy_name": _}
+_params_41: DeleteSAMLProviderInputDict = {"saml_provider_arn": _}
+_params_42: DeleteServerCertificateInputDict = {"server_certificate_name": _}
+_params_43: DeleteServiceLinkedRoleInputDict = {"role_name": _}
+_params_44: DeleteServiceSpecificCredentialInputDict = {
+    "service_specific_credential_id": _
+}
+_params_45: DeleteSigningCertificateInputDict = {"certificate_id": _}
+_params_46: DeleteSSHPublicKeyInputDict = {"user_name": _, "ssh_public_key_id": _}
+_params_47: DeleteUserInputDict = {"user_name": _}
+_params_48: DeleteUserPermissionsBoundaryInputDict = {"user_name": _}
+_params_49: DeleteUserPolicyInputDict = {"user_name": _, "policy_name": _}
+_params_50: DeleteVirtualMFADeviceInputDict = {"serial_number": _}
+_params_51: DetachGroupPolicyInputDict = {"group_name": _, "policy_arn": _}
+_params_52: DetachRolePolicyInputDict = {"role_name": _, "policy_arn": _}
+_params_53: DetachUserPolicyInputDict = {"user_name": _, "policy_arn": _}
+_params_54: DisableOrganizationsRootCredentialsManagementInputDict = {}
+_params_55: DisableOrganizationsRootSessionsInputDict = {}
+_params_56: DisableOutboundWebIdentityFederationInputDict = {}
+_params_57: EnableMFADeviceInputDict = {
+    "user_name": _,
+    "serial_number": _,
+    "authentication_code1": _,
+    "authentication_code2": _,
+}
+_params_58: EnableOrganizationsRootCredentialsManagementInputDict = {}
+_params_59: EnableOrganizationsRootSessionsInputDict = {}
+_params_60: EnableOutboundWebIdentityFederationInputDict = {}
+_params_61: GenerateCredentialReportInputDict = {}
+_params_62: GenerateOrganizationsAccessReportInputDict = {"entity_path": _}
+_params_63: GenerateServiceLastAccessedDetailsInputDict = {"arn": _}
+_params_64: GetAccessKeyLastUsedInputDict = {"access_key_id": _}
+_params_65: GetAccountAuthorizationDetailsInputDict = {}
+_params_66: GetAccountPasswordPolicyInputDict = {}
+_params_67: GetAccountPropertiesInputDict = {}
+_params_68: GetAccountSummaryInputDict = {}
+_params_69: GetContextKeysForCustomPolicyInputDict = {"policy_input_list": _}
+_params_70: GetContextKeysForPrincipalPolicyInputDict = {"policy_source_arn": _}
+_params_71: GetCredentialReportInputDict = {}
+_params_72: GetDelegationRequestInputDict = {"delegation_request_id": _}
+_params_73: GetGroupInputDict = {"group_name": _}
+_params_74: GetGroupPolicyInputDict = {"group_name": _, "policy_name": _}
+_params_75: GetHumanReadableSummaryInputDict = {"entity_arn": _}
+_params_76: GetInstanceProfileInputDict = {"instance_profile_name": _}
+_params_77: GetLoginProfileInputDict = {}
+_params_78: GetMFADeviceInputDict = {"serial_number": _}
+_params_79: GetOpenIDConnectProviderInputDict = {"open_id_connect_provider_arn": _}
+_params_80: GetOrganizationsAccessReportInputDict = {"job_id": _}
+_params_81: GetOutboundWebIdentityFederationInfoInputDict = {}
+_params_82: GetPolicyInputDict = {"policy_arn": _}
+_params_83: GetPolicyVersionInputDict = {"policy_arn": _, "version_id": _}
+_params_84: GetRoleInputDict = {"role_name": _}
+_params_85: GetRolePolicyInputDict = {"role_name": _, "policy_name": _}
+_params_86: GetRoleTemplateVersionInputDict = {"template_arn": _}
+_params_87: GetSAMLProviderInputDict = {"saml_provider_arn": _}
+_params_88: GetServerCertificateInputDict = {"server_certificate_name": _}
+_params_89: GetServiceLastAccessedDetailsInputDict = {"job_id": _}
+_params_90: GetServiceLastAccessedDetailsWithEntitiesInputDict = {
+    "job_id": _,
+    "service_namespace": _,
+}
+_params_91: GetServiceLinkedRoleDeletionStatusInputDict = {"deletion_task_id": _}
+_params_92: GetSSHPublicKeyInputDict = {
+    "user_name": _,
+    "ssh_public_key_id": _,
+    "encoding": _,
+}
+_params_93: GetUserInputDict = {}
+_params_94: GetUserPolicyInputDict = {"user_name": _, "policy_name": _}
+_params_95: InlinePolicyIdentifierTypeDict = {
+    "policy_name": _,
+    "attachment_type": _,
+    "attachment_name": _,
+}
+_params_96: ListAccessKeysInputDict = {}
+_params_97: ListAccountAliasesInputDict = {}
+_params_98: ListAttachedGroupPoliciesInputDict = {"group_name": _}
+_params_99: ListAttachedRolePoliciesInputDict = {"role_name": _}
+_params_100: ListAttachedUserPoliciesInputDict = {"user_name": _}
+_params_101: ListDelegationRequestsInputDict = {}
+_params_102: ListEntitiesForPolicyInputDict = {"policy_arn": _}
+_params_103: ListGroupPoliciesInputDict = {"group_name": _}
+_params_104: ListGroupsForUserInputDict = {"user_name": _}
+_params_105: ListGroupsInputDict = {}
+_params_106: ListInstanceProfilesForRoleInputDict = {"role_name": _}
+_params_107: ListInstanceProfilesInputDict = {}
+_params_108: ListInstanceProfileTagsInputDict = {"instance_profile_name": _}
+_params_109: ListMFADevicesInputDict = {}
+_params_110: ListMFADeviceTagsInputDict = {"serial_number": _}
+_params_111: ListOpenIDConnectProvidersInputDict = {}
+_params_112: ListOpenIDConnectProviderTagsInputDict = {
+    "open_id_connect_provider_arn": _
+}
+_params_113: ListOrganizationsFeaturesInputDict = {}
+_params_114: ListPoliciesGrantingServiceAccessInputDict = {
+    "arn": _,
+    "service_namespaces": _,
+}
+_params_115: ListPoliciesInputDict = {}
+_params_116: ListPolicyTagsInputDict = {"policy_arn": _}
+_params_117: ListPolicyVersionsInputDict = {"policy_arn": _}
+_params_118: ListRolePoliciesInputDict = {"role_name": _}
+_params_119: ListRolesInputDict = {}
+_params_120: ListRoleTagsInputDict = {"role_name": _}
+_params_121: ListSAMLProvidersInputDict = {}
+_params_122: ListSAMLProviderTagsInputDict = {"saml_provider_arn": _}
+_params_123: ListServerCertificatesInputDict = {}
+_params_124: ListServerCertificateTagsInputDict = {"server_certificate_name": _}
+_params_125: ListServiceSpecificCredentialsInputDict = {}
+_params_126: ListSigningCertificatesInputDict = {}
+_params_127: ListSSHPublicKeysInputDict = {}
+_params_128: ListUserPoliciesInputDict = {"user_name": _}
+_params_129: ListUsersInputDict = {}
+_params_130: ListUserTagsInputDict = {"user_name": _}
+_params_131: ListVirtualMFADevicesInputDict = {}
+_params_132: OrderedOrganizationPolicyTypeDict = {}
+_params_133: PolicyIdentifierDict = {"policy_type": _}
+_params_134: PolicyParameterDict = {}
+_params_135: PutAccountPropertiesInputDict = {"properties": _}
+_params_136: PutGroupPolicyInputDict = {
+    "group_name": _,
+    "policy_name": _,
+    "policy_document": _,
+}
+_params_137: PutRolePermissionsBoundaryInputDict = {
+    "role_name": _,
+    "permissions_boundary": _,
+}
+_params_138: PutRolePolicyInputDict = {
+    "role_name": _,
+    "policy_name": _,
+    "policy_document": _,
+}
+_params_139: PutUserPermissionsBoundaryInputDict = {
+    "user_name": _,
+    "permissions_boundary": _,
+}
+_params_140: PutUserPolicyInputDict = {
+    "user_name": _,
+    "policy_name": _,
+    "policy_document": _,
+}
+_params_141: RejectDelegationRequestInputDict = {"delegation_request_id": _}
+_params_142: RemoveClientIDFromOpenIDConnectProviderInputDict = {
+    "open_id_connect_provider_arn": _,
+    "client_id": _,
+}
+_params_143: RemoveRoleFromInstanceProfileInputDict = {
+    "instance_profile_name": _,
+    "role_name": _,
+}
+_params_144: RemoveUserFromGroupInputDict = {"group_name": _, "user_name": _}
+_params_145: ReplacementValueEntryDict = {"values": _}
+_params_146: ResetServiceSpecificCredentialInputDict = {
+    "service_specific_credential_id": _
+}
+_params_147: ResyncMFADeviceInputDict = {
+    "user_name": _,
+    "serial_number": _,
+    "authentication_code1": _,
+    "authentication_code2": _,
+}
+_params_148: SendDelegationTokenInputDict = {"delegation_request_id": _}
+_params_149: SetDefaultPolicyVersionInputDict = {"policy_arn": _, "version_id": _}
+_params_150: SetSecurityTokenServicePreferencesInputDict = {
+    "global_endpoint_token_version": _
+}
+_params_151: SimulateCustomPolicyInputDict = {"policy_input_list": _, "action_names": _}
+_params_152: SimulatePrincipalPolicyInputDict = {
+    "policy_source_arn": _,
+    "action_names": _,
+}
+_params_153: TagDict = {"key": _, "value": _}
+_params_154: TagInstanceProfileInputDict = {"instance_profile_name": _, "tags": _}
+_params_155: TagMFADeviceInputDict = {"serial_number": _, "tags": _}
+_params_156: TagOpenIDConnectProviderInputDict = {
+    "open_id_connect_provider_arn": _,
+    "tags": _,
+}
+_params_157: TagPolicyInputDict = {"policy_arn": _, "tags": _}
+_params_158: TagRoleInputDict = {"role_name": _, "tags": _}
+_params_159: TagSAMLProviderInputDict = {"saml_provider_arn": _, "tags": _}
+_params_160: TagServerCertificateInputDict = {"server_certificate_name": _, "tags": _}
+_params_161: TagUserInputDict = {"user_name": _, "tags": _}
+_params_162: UntagInstanceProfileInputDict = {"instance_profile_name": _, "tag_keys": _}
+_params_163: UntagMFADeviceInputDict = {"serial_number": _, "tag_keys": _}
+_params_164: UntagOpenIDConnectProviderInputDict = {
+    "open_id_connect_provider_arn": _,
+    "tag_keys": _,
+}
+_params_165: UntagPolicyInputDict = {"policy_arn": _, "tag_keys": _}
+_params_166: UntagRoleInputDict = {"role_name": _, "tag_keys": _}
+_params_167: UntagSAMLProviderInputDict = {"saml_provider_arn": _, "tag_keys": _}
+_params_168: UntagServerCertificateInputDict = {
+    "server_certificate_name": _,
+    "tag_keys": _,
+}
+_params_169: UntagUserInputDict = {"user_name": _, "tag_keys": _}
+_params_170: UpdateAccessKeyInputDict = {"access_key_id": _, "status": _}
+_params_171: UpdateAccountPasswordPolicyInputDict = {}
+_params_172: UpdateAssumeRolePolicyInputDict = {"role_name": _, "policy_document": _}
+_params_173: UpdateDelegationRequestInputDict = {"delegation_request_id": _}
+_params_174: UpdateGroupInputDict = {"group_name": _}
+_params_175: UpdateLoginProfileInputDict = {"user_name": _}
+_params_176: UpdateOpenIDConnectProviderThumbprintInputDict = {
+    "open_id_connect_provider_arn": _,
+    "thumbprint_list": _,
+}
+_params_177: UpdateRoleDescriptionInputDict = {"role_name": _, "description": _}
+_params_178: UpdateRoleInputDict = {"role_name": _}
+_params_179: UpdateSAMLProviderInputDict = {"saml_provider_arn": _}
+_params_180: UpdateServerCertificateInputDict = {"server_certificate_name": _}
+_params_181: UpdateServiceSpecificCredentialInputDict = {
+    "service_specific_credential_id": _,
+    "status": _,
+}
+_params_182: UpdateSigningCertificateInputDict = {"certificate_id": _, "status": _}
+_params_183: UpdateSSHPublicKeyInputDict = {
+    "user_name": _,
+    "ssh_public_key_id": _,
+    "status": _,
+}
+_params_184: UpdateUserInputDict = {"user_name": _}
+_params_185: UploadServerCertificateInputDict = {
+    "server_certificate_name": _,
+    "certificate_body": _,
+    "private_key": _,
+}
+_params_186: UploadSigningCertificateInputDict = {"certificate_body": _}
+_params_187: UploadSSHPublicKeyInputDict = {"user_name": _, "ssh_public_key_body": _}
+
+
+def _request[T](form: type[T]) -> T:
+    raise NotImplementedError
+
+
+async def check_async_calls(client: AsyncIAMClient) -> None:
+    pass
+    await client.accept_delegation_request(delegation_request_id=_)
+    await client.accept_delegation_request(**_request(AcceptDelegationRequestInputDict))
+    await client.accept_delegation_request(_request(AcceptDelegationRequestInput))
+    await client.accept_delegation_request(_request(AcceptDelegationRequestInputDict))
+    await client.acquire_role(template_arn=_)
+    await client.acquire_role(**_request(AcquireRoleInputDict))
+    await client.acquire_role(_request(AcquireRoleInput))
+    await client.acquire_role(_request(AcquireRoleInputDict))
+    await client.add_client_id_to_open_id_connect_provider(
+        open_id_connect_provider_arn=_, client_id=_
+    )
+    await client.add_client_id_to_open_id_connect_provider(
+        **_request(AddClientIDToOpenIDConnectProviderInputDict)
+    )
+    await client.add_client_id_to_open_id_connect_provider(
+        _request(AddClientIDToOpenIDConnectProviderInput)
+    )
+    await client.add_client_id_to_open_id_connect_provider(
+        _request(AddClientIDToOpenIDConnectProviderInputDict)
+    )
+    await client.add_role_to_instance_profile(instance_profile_name=_, role_name=_)
+    await client.add_role_to_instance_profile(
+        **_request(AddRoleToInstanceProfileInputDict)
+    )
+    await client.add_role_to_instance_profile(_request(AddRoleToInstanceProfileInput))
+    await client.add_role_to_instance_profile(
+        _request(AddRoleToInstanceProfileInputDict)
+    )
+    await client.add_user_to_group(group_name=_, user_name=_)
+    await client.add_user_to_group(**_request(AddUserToGroupInputDict))
+    await client.add_user_to_group(_request(AddUserToGroupInput))
+    await client.add_user_to_group(_request(AddUserToGroupInputDict))
+    await client.associate_delegation_request(delegation_request_id=_)
+    await client.associate_delegation_request(
+        **_request(AssociateDelegationRequestInputDict)
+    )
+    await client.associate_delegation_request(_request(AssociateDelegationRequestInput))
+    await client.associate_delegation_request(
+        _request(AssociateDelegationRequestInputDict)
+    )
+    await client.attach_group_policy(group_name=_, policy_arn=_)
+    await client.attach_group_policy(**_request(AttachGroupPolicyInputDict))
+    await client.attach_group_policy(_request(AttachGroupPolicyInput))
+    await client.attach_group_policy(_request(AttachGroupPolicyInputDict))
+    await client.attach_role_policy(role_name=_, policy_arn=_)
+    await client.attach_role_policy(**_request(AttachRolePolicyInputDict))
+    await client.attach_role_policy(_request(AttachRolePolicyInput))
+    await client.attach_role_policy(_request(AttachRolePolicyInputDict))
+    await client.attach_user_policy(user_name=_, policy_arn=_)
+    await client.attach_user_policy(**_request(AttachUserPolicyInputDict))
+    await client.attach_user_policy(_request(AttachUserPolicyInput))
+    await client.attach_user_policy(_request(AttachUserPolicyInputDict))
+    await client.change_password(old_password=_, new_password=_)
+    await client.change_password(**_request(ChangePasswordInputDict))
+    await client.change_password(_request(ChangePasswordInput))
+    await client.change_password(_request(ChangePasswordInputDict))
+    await client.create_access_key()
+    await client.create_access_key(**_request(CreateAccessKeyInputDict))
+    await client.create_access_key(_request(CreateAccessKeyInput))
+    await client.create_access_key(_request(CreateAccessKeyInputDict))
+    await client.create_account_alias(account_alias=_)
+    await client.create_account_alias(**_request(CreateAccountAliasInputDict))
+    await client.create_account_alias(_request(CreateAccountAliasInput))
+    await client.create_account_alias(_request(CreateAccountAliasInputDict))
+    await client.create_delegation_request(
+        description=_,
+        permissions=_,
+        requestor_workflow_id=_,
+        notification_channel=_,
+        session_duration=_,
+    )
+    await client.create_delegation_request(**_request(CreateDelegationRequestInputDict))
+    await client.create_delegation_request(_request(CreateDelegationRequestInput))
+    await client.create_delegation_request(_request(CreateDelegationRequestInputDict))
+    await client.create_group(group_name=_)
+    await client.create_group(**_request(CreateGroupInputDict))
+    await client.create_group(_request(CreateGroupInput))
+    await client.create_group(_request(CreateGroupInputDict))
+    await client.create_instance_profile(instance_profile_name=_)
+    await client.create_instance_profile(**_request(CreateInstanceProfileInputDict))
+    await client.create_instance_profile(_request(CreateInstanceProfileInput))
+    await client.create_instance_profile(_request(CreateInstanceProfileInputDict))
+    await client.create_login_profile()
+    await client.create_login_profile(**_request(CreateLoginProfileInputDict))
+    await client.create_login_profile(_request(CreateLoginProfileInput))
+    await client.create_login_profile(_request(CreateLoginProfileInputDict))
+    await client.create_open_id_connect_provider(url=_)
+    await client.create_open_id_connect_provider(
+        **_request(CreateOpenIDConnectProviderInputDict)
+    )
+    await client.create_open_id_connect_provider(
+        _request(CreateOpenIDConnectProviderInput)
+    )
+    await client.create_open_id_connect_provider(
+        _request(CreateOpenIDConnectProviderInputDict)
+    )
+    await client.create_policy(policy_name=_, policy_document=_)
+    await client.create_policy(**_request(CreatePolicyInputDict))
+    await client.create_policy(_request(CreatePolicyInput))
+    await client.create_policy(_request(CreatePolicyInputDict))
+    await client.create_policy_version(policy_arn=_, policy_document=_)
+    await client.create_policy_version(**_request(CreatePolicyVersionInputDict))
+    await client.create_policy_version(_request(CreatePolicyVersionInput))
+    await client.create_policy_version(_request(CreatePolicyVersionInputDict))
+    await client.create_role(role_name=_, assume_role_policy_document=_)
+    await client.create_role(**_request(CreateRoleInputDict))
+    await client.create_role(_request(CreateRoleInput))
+    await client.create_role(_request(CreateRoleInputDict))
+    await client.create_saml_provider(saml_metadata_document=_, name=_)
+    await client.create_saml_provider(**_request(CreateSAMLProviderInputDict))
+    await client.create_saml_provider(_request(CreateSAMLProviderInput))
+    await client.create_saml_provider(_request(CreateSAMLProviderInputDict))
+    await client.create_service_linked_role(aws_service_name=_)
+    await client.create_service_linked_role(
+        **_request(CreateServiceLinkedRoleInputDict)
+    )
+    await client.create_service_linked_role(_request(CreateServiceLinkedRoleInput))
+    await client.create_service_linked_role(_request(CreateServiceLinkedRoleInputDict))
+    await client.create_service_specific_credential(user_name=_, service_name=_)
+    await client.create_service_specific_credential(
+        **_request(CreateServiceSpecificCredentialInputDict)
+    )
+    await client.create_service_specific_credential(
+        _request(CreateServiceSpecificCredentialInput)
+    )
+    await client.create_service_specific_credential(
+        _request(CreateServiceSpecificCredentialInputDict)
+    )
+    await client.create_user(user_name=_)
+    await client.create_user(**_request(CreateUserInputDict))
+    await client.create_user(_request(CreateUserInput))
+    await client.create_user(_request(CreateUserInputDict))
+    await client.create_virtual_mfa_device(virtual_mfa_device_name=_)
+    await client.create_virtual_mfa_device(**_request(CreateVirtualMFADeviceInputDict))
+    await client.create_virtual_mfa_device(_request(CreateVirtualMFADeviceInput))
+    await client.create_virtual_mfa_device(_request(CreateVirtualMFADeviceInputDict))
+    await client.deactivate_mfa_device(serial_number=_)
+    await client.deactivate_mfa_device(**_request(DeactivateMFADeviceInputDict))
+    await client.deactivate_mfa_device(_request(DeactivateMFADeviceInput))
+    await client.deactivate_mfa_device(_request(DeactivateMFADeviceInputDict))
+    await client.delete_access_key(access_key_id=_)
+    await client.delete_access_key(**_request(DeleteAccessKeyInputDict))
+    await client.delete_access_key(_request(DeleteAccessKeyInput))
+    await client.delete_access_key(_request(DeleteAccessKeyInputDict))
+    await client.delete_account_alias(account_alias=_)
+    await client.delete_account_alias(**_request(DeleteAccountAliasInputDict))
+    await client.delete_account_alias(_request(DeleteAccountAliasInput))
+    await client.delete_account_alias(_request(DeleteAccountAliasInputDict))
+    await client.delete_account_password_policy()
+    await client.delete_account_password_policy(
+        **_request(DeleteAccountPasswordPolicyInputDict)
+    )
+    await client.delete_account_password_policy(
+        _request(DeleteAccountPasswordPolicyInput)
+    )
+    await client.delete_account_password_policy(
+        _request(DeleteAccountPasswordPolicyInputDict)
+    )
+    await client.delete_group(group_name=_)
+    await client.delete_group(**_request(DeleteGroupInputDict))
+    await client.delete_group(_request(DeleteGroupInput))
+    await client.delete_group(_request(DeleteGroupInputDict))
+    await client.delete_group_policy(group_name=_, policy_name=_)
+    await client.delete_group_policy(**_request(DeleteGroupPolicyInputDict))
+    await client.delete_group_policy(_request(DeleteGroupPolicyInput))
+    await client.delete_group_policy(_request(DeleteGroupPolicyInputDict))
+    await client.delete_instance_profile(instance_profile_name=_)
+    await client.delete_instance_profile(**_request(DeleteInstanceProfileInputDict))
+    await client.delete_instance_profile(_request(DeleteInstanceProfileInput))
+    await client.delete_instance_profile(_request(DeleteInstanceProfileInputDict))
+    await client.delete_login_profile()
+    await client.delete_login_profile(**_request(DeleteLoginProfileInputDict))
+    await client.delete_login_profile(_request(DeleteLoginProfileInput))
+    await client.delete_login_profile(_request(DeleteLoginProfileInputDict))
+    await client.delete_open_id_connect_provider(open_id_connect_provider_arn=_)
+    await client.delete_open_id_connect_provider(
+        **_request(DeleteOpenIDConnectProviderInputDict)
+    )
+    await client.delete_open_id_connect_provider(
+        _request(DeleteOpenIDConnectProviderInput)
+    )
+    await client.delete_open_id_connect_provider(
+        _request(DeleteOpenIDConnectProviderInputDict)
+    )
+    await client.delete_policy(policy_arn=_)
+    await client.delete_policy(**_request(DeletePolicyInputDict))
+    await client.delete_policy(_request(DeletePolicyInput))
+    await client.delete_policy(_request(DeletePolicyInputDict))
+    await client.delete_policy_version(policy_arn=_, version_id=_)
+    await client.delete_policy_version(**_request(DeletePolicyVersionInputDict))
+    await client.delete_policy_version(_request(DeletePolicyVersionInput))
+    await client.delete_policy_version(_request(DeletePolicyVersionInputDict))
+    await client.delete_role(role_name=_)
+    await client.delete_role(**_request(DeleteRoleInputDict))
+    await client.delete_role(_request(DeleteRoleInput))
+    await client.delete_role(_request(DeleteRoleInputDict))
+    await client.delete_role_permissions_boundary(role_name=_)
+    await client.delete_role_permissions_boundary(
+        **_request(DeleteRolePermissionsBoundaryInputDict)
+    )
+    await client.delete_role_permissions_boundary(
+        _request(DeleteRolePermissionsBoundaryInput)
+    )
+    await client.delete_role_permissions_boundary(
+        _request(DeleteRolePermissionsBoundaryInputDict)
+    )
+    await client.delete_role_policy(role_name=_, policy_name=_)
+    await client.delete_role_policy(**_request(DeleteRolePolicyInputDict))
+    await client.delete_role_policy(_request(DeleteRolePolicyInput))
+    await client.delete_role_policy(_request(DeleteRolePolicyInputDict))
+    await client.delete_saml_provider(saml_provider_arn=_)
+    await client.delete_saml_provider(**_request(DeleteSAMLProviderInputDict))
+    await client.delete_saml_provider(_request(DeleteSAMLProviderInput))
+    await client.delete_saml_provider(_request(DeleteSAMLProviderInputDict))
+    await client.delete_server_certificate(server_certificate_name=_)
+    await client.delete_server_certificate(**_request(DeleteServerCertificateInputDict))
+    await client.delete_server_certificate(_request(DeleteServerCertificateInput))
+    await client.delete_server_certificate(_request(DeleteServerCertificateInputDict))
+    await client.delete_service_linked_role(role_name=_)
+    await client.delete_service_linked_role(
+        **_request(DeleteServiceLinkedRoleInputDict)
+    )
+    await client.delete_service_linked_role(_request(DeleteServiceLinkedRoleInput))
+    await client.delete_service_linked_role(_request(DeleteServiceLinkedRoleInputDict))
+    await client.delete_service_specific_credential(service_specific_credential_id=_)
+    await client.delete_service_specific_credential(
+        **_request(DeleteServiceSpecificCredentialInputDict)
+    )
+    await client.delete_service_specific_credential(
+        _request(DeleteServiceSpecificCredentialInput)
+    )
+    await client.delete_service_specific_credential(
+        _request(DeleteServiceSpecificCredentialInputDict)
+    )
+    await client.delete_signing_certificate(certificate_id=_)
+    await client.delete_signing_certificate(
+        **_request(DeleteSigningCertificateInputDict)
+    )
+    await client.delete_signing_certificate(_request(DeleteSigningCertificateInput))
+    await client.delete_signing_certificate(_request(DeleteSigningCertificateInputDict))
+    await client.delete_ssh_public_key(user_name=_, ssh_public_key_id=_)
+    await client.delete_ssh_public_key(**_request(DeleteSSHPublicKeyInputDict))
+    await client.delete_ssh_public_key(_request(DeleteSSHPublicKeyInput))
+    await client.delete_ssh_public_key(_request(DeleteSSHPublicKeyInputDict))
+    await client.delete_user(user_name=_)
+    await client.delete_user(**_request(DeleteUserInputDict))
+    await client.delete_user(_request(DeleteUserInput))
+    await client.delete_user(_request(DeleteUserInputDict))
+    await client.delete_user_permissions_boundary(user_name=_)
+    await client.delete_user_permissions_boundary(
+        **_request(DeleteUserPermissionsBoundaryInputDict)
+    )
+    await client.delete_user_permissions_boundary(
+        _request(DeleteUserPermissionsBoundaryInput)
+    )
+    await client.delete_user_permissions_boundary(
+        _request(DeleteUserPermissionsBoundaryInputDict)
+    )
+    await client.delete_user_policy(user_name=_, policy_name=_)
+    await client.delete_user_policy(**_request(DeleteUserPolicyInputDict))
+    await client.delete_user_policy(_request(DeleteUserPolicyInput))
+    await client.delete_user_policy(_request(DeleteUserPolicyInputDict))
+    await client.delete_virtual_mfa_device(serial_number=_)
+    await client.delete_virtual_mfa_device(**_request(DeleteVirtualMFADeviceInputDict))
+    await client.delete_virtual_mfa_device(_request(DeleteVirtualMFADeviceInput))
+    await client.delete_virtual_mfa_device(_request(DeleteVirtualMFADeviceInputDict))
+    await client.detach_group_policy(group_name=_, policy_arn=_)
+    await client.detach_group_policy(**_request(DetachGroupPolicyInputDict))
+    await client.detach_group_policy(_request(DetachGroupPolicyInput))
+    await client.detach_group_policy(_request(DetachGroupPolicyInputDict))
+    await client.detach_role_policy(role_name=_, policy_arn=_)
+    await client.detach_role_policy(**_request(DetachRolePolicyInputDict))
+    await client.detach_role_policy(_request(DetachRolePolicyInput))
+    await client.detach_role_policy(_request(DetachRolePolicyInputDict))
+    await client.detach_user_policy(user_name=_, policy_arn=_)
+    await client.detach_user_policy(**_request(DetachUserPolicyInputDict))
+    await client.detach_user_policy(_request(DetachUserPolicyInput))
+    await client.detach_user_policy(_request(DetachUserPolicyInputDict))
+    await client.disable_organizations_root_credentials_management()
+    await client.disable_organizations_root_credentials_management(
+        **_request(DisableOrganizationsRootCredentialsManagementInputDict)
+    )
+    await client.disable_organizations_root_credentials_management(
+        _request(DisableOrganizationsRootCredentialsManagementInput)
+    )
+    await client.disable_organizations_root_credentials_management(
+        _request(DisableOrganizationsRootCredentialsManagementInputDict)
+    )
+    await client.disable_organizations_root_sessions()
+    await client.disable_organizations_root_sessions(
+        **_request(DisableOrganizationsRootSessionsInputDict)
+    )
+    await client.disable_organizations_root_sessions(
+        _request(DisableOrganizationsRootSessionsInput)
+    )
+    await client.disable_organizations_root_sessions(
+        _request(DisableOrganizationsRootSessionsInputDict)
+    )
+    await client.disable_outbound_web_identity_federation()
+    await client.disable_outbound_web_identity_federation(
+        **_request(DisableOutboundWebIdentityFederationInputDict)
+    )
+    await client.disable_outbound_web_identity_federation(
+        _request(DisableOutboundWebIdentityFederationInput)
+    )
+    await client.disable_outbound_web_identity_federation(
+        _request(DisableOutboundWebIdentityFederationInputDict)
+    )
+    await client.enable_mfa_device(
+        user_name=_, serial_number=_, authentication_code1=_, authentication_code2=_
+    )
+    await client.enable_mfa_device(**_request(EnableMFADeviceInputDict))
+    await client.enable_mfa_device(_request(EnableMFADeviceInput))
+    await client.enable_mfa_device(_request(EnableMFADeviceInputDict))
+    await client.enable_organizations_root_credentials_management()
+    await client.enable_organizations_root_credentials_management(
+        **_request(EnableOrganizationsRootCredentialsManagementInputDict)
+    )
+    await client.enable_organizations_root_credentials_management(
+        _request(EnableOrganizationsRootCredentialsManagementInput)
+    )
+    await client.enable_organizations_root_credentials_management(
+        _request(EnableOrganizationsRootCredentialsManagementInputDict)
+    )
+    await client.enable_organizations_root_sessions()
+    await client.enable_organizations_root_sessions(
+        **_request(EnableOrganizationsRootSessionsInputDict)
+    )
+    await client.enable_organizations_root_sessions(
+        _request(EnableOrganizationsRootSessionsInput)
+    )
+    await client.enable_organizations_root_sessions(
+        _request(EnableOrganizationsRootSessionsInputDict)
+    )
+    await client.enable_outbound_web_identity_federation()
+    await client.enable_outbound_web_identity_federation(
+        **_request(EnableOutboundWebIdentityFederationInputDict)
+    )
+    await client.enable_outbound_web_identity_federation(
+        _request(EnableOutboundWebIdentityFederationInput)
+    )
+    await client.enable_outbound_web_identity_federation(
+        _request(EnableOutboundWebIdentityFederationInputDict)
+    )
+    await client.generate_credential_report()
+    await client.generate_credential_report(
+        **_request(GenerateCredentialReportInputDict)
+    )
+    await client.generate_credential_report(_request(GenerateCredentialReportInput))
+    await client.generate_credential_report(_request(GenerateCredentialReportInputDict))
+    await client.generate_organizations_access_report(entity_path=_)
+    await client.generate_organizations_access_report(
+        **_request(GenerateOrganizationsAccessReportInputDict)
+    )
+    await client.generate_organizations_access_report(
+        _request(GenerateOrganizationsAccessReportInput)
+    )
+    await client.generate_organizations_access_report(
+        _request(GenerateOrganizationsAccessReportInputDict)
+    )
+    await client.generate_service_last_accessed_details(arn=_)
+    await client.generate_service_last_accessed_details(
+        **_request(GenerateServiceLastAccessedDetailsInputDict)
+    )
+    await client.generate_service_last_accessed_details(
+        _request(GenerateServiceLastAccessedDetailsInput)
+    )
+    await client.generate_service_last_accessed_details(
+        _request(GenerateServiceLastAccessedDetailsInputDict)
+    )
+    await client.get_access_key_last_used(access_key_id=_)
+    await client.get_access_key_last_used(**_request(GetAccessKeyLastUsedInputDict))
+    await client.get_access_key_last_used(_request(GetAccessKeyLastUsedInput))
+    await client.get_access_key_last_used(_request(GetAccessKeyLastUsedInputDict))
+    await client.get_account_authorization_details()
+    await client.get_account_authorization_details(
+        **_request(GetAccountAuthorizationDetailsInputDict)
+    )
+    await client.get_account_authorization_details(
+        _request(GetAccountAuthorizationDetailsInput)
+    )
+    await client.get_account_authorization_details(
+        _request(GetAccountAuthorizationDetailsInputDict)
+    )
+    await client.get_account_password_policy()
+    await client.get_account_password_policy(
+        **_request(GetAccountPasswordPolicyInputDict)
+    )
+    await client.get_account_password_policy(_request(GetAccountPasswordPolicyInput))
+    await client.get_account_password_policy(
+        _request(GetAccountPasswordPolicyInputDict)
+    )
+    await client.get_account_properties()
+    await client.get_account_properties(**_request(GetAccountPropertiesInputDict))
+    await client.get_account_properties(_request(GetAccountPropertiesInput))
+    await client.get_account_properties(_request(GetAccountPropertiesInputDict))
+    await client.get_account_summary()
+    await client.get_account_summary(**_request(GetAccountSummaryInputDict))
+    await client.get_account_summary(_request(GetAccountSummaryInput))
+    await client.get_account_summary(_request(GetAccountSummaryInputDict))
+    await client.get_context_keys_for_custom_policy(policy_input_list=_)
+    await client.get_context_keys_for_custom_policy(
+        **_request(GetContextKeysForCustomPolicyInputDict)
+    )
+    await client.get_context_keys_for_custom_policy(
+        _request(GetContextKeysForCustomPolicyInput)
+    )
+    await client.get_context_keys_for_custom_policy(
+        _request(GetContextKeysForCustomPolicyInputDict)
+    )
+    await client.get_context_keys_for_principal_policy(policy_source_arn=_)
+    await client.get_context_keys_for_principal_policy(
+        **_request(GetContextKeysForPrincipalPolicyInputDict)
+    )
+    await client.get_context_keys_for_principal_policy(
+        _request(GetContextKeysForPrincipalPolicyInput)
+    )
+    await client.get_context_keys_for_principal_policy(
+        _request(GetContextKeysForPrincipalPolicyInputDict)
+    )
+    await client.get_credential_report()
+    await client.get_credential_report(**_request(GetCredentialReportInputDict))
+    await client.get_credential_report(_request(GetCredentialReportInput))
+    await client.get_credential_report(_request(GetCredentialReportInputDict))
+    await client.get_delegation_request(delegation_request_id=_)
+    await client.get_delegation_request(**_request(GetDelegationRequestInputDict))
+    await client.get_delegation_request(_request(GetDelegationRequestInput))
+    await client.get_delegation_request(_request(GetDelegationRequestInputDict))
+    await client.get_group(group_name=_)
+    await client.get_group(**_request(GetGroupInputDict))
+    await client.get_group(_request(GetGroupInput))
+    await client.get_group(_request(GetGroupInputDict))
+    await client.get_group_policy(group_name=_, policy_name=_)
+    await client.get_group_policy(**_request(GetGroupPolicyInputDict))
+    await client.get_group_policy(_request(GetGroupPolicyInput))
+    await client.get_group_policy(_request(GetGroupPolicyInputDict))
+    await client.get_human_readable_summary(entity_arn=_)
+    await client.get_human_readable_summary(
+        **_request(GetHumanReadableSummaryInputDict)
+    )
+    await client.get_human_readable_summary(_request(GetHumanReadableSummaryInput))
+    await client.get_human_readable_summary(_request(GetHumanReadableSummaryInputDict))
+    await client.get_instance_profile(instance_profile_name=_)
+    await client.get_instance_profile(**_request(GetInstanceProfileInputDict))
+    await client.get_instance_profile(_request(GetInstanceProfileInput))
+    await client.get_instance_profile(_request(GetInstanceProfileInputDict))
+    await client.get_login_profile()
+    await client.get_login_profile(**_request(GetLoginProfileInputDict))
+    await client.get_login_profile(_request(GetLoginProfileInput))
+    await client.get_login_profile(_request(GetLoginProfileInputDict))
+    await client.get_mfa_device(serial_number=_)
+    await client.get_mfa_device(**_request(GetMFADeviceInputDict))
+    await client.get_mfa_device(_request(GetMFADeviceInput))
+    await client.get_mfa_device(_request(GetMFADeviceInputDict))
+    await client.get_open_id_connect_provider(open_id_connect_provider_arn=_)
+    await client.get_open_id_connect_provider(
+        **_request(GetOpenIDConnectProviderInputDict)
+    )
+    await client.get_open_id_connect_provider(_request(GetOpenIDConnectProviderInput))
+    await client.get_open_id_connect_provider(
+        _request(GetOpenIDConnectProviderInputDict)
+    )
+    await client.get_organizations_access_report(job_id=_)
+    await client.get_organizations_access_report(
+        **_request(GetOrganizationsAccessReportInputDict)
+    )
+    await client.get_organizations_access_report(
+        _request(GetOrganizationsAccessReportInput)
+    )
+    await client.get_organizations_access_report(
+        _request(GetOrganizationsAccessReportInputDict)
+    )
+    await client.get_outbound_web_identity_federation_info()
+    await client.get_outbound_web_identity_federation_info(
+        **_request(GetOutboundWebIdentityFederationInfoInputDict)
+    )
+    await client.get_outbound_web_identity_federation_info(
+        _request(GetOutboundWebIdentityFederationInfoInput)
+    )
+    await client.get_outbound_web_identity_federation_info(
+        _request(GetOutboundWebIdentityFederationInfoInputDict)
+    )
+    await client.get_policy(policy_arn=_)
+    await client.get_policy(**_request(GetPolicyInputDict))
+    await client.get_policy(_request(GetPolicyInput))
+    await client.get_policy(_request(GetPolicyInputDict))
+    await client.get_policy_version(policy_arn=_, version_id=_)
+    await client.get_policy_version(**_request(GetPolicyVersionInputDict))
+    await client.get_policy_version(_request(GetPolicyVersionInput))
+    await client.get_policy_version(_request(GetPolicyVersionInputDict))
+    await client.get_role(role_name=_)
+    await client.get_role(**_request(GetRoleInputDict))
+    await client.get_role(_request(GetRoleInput))
+    await client.get_role(_request(GetRoleInputDict))
+    await client.get_role_policy(role_name=_, policy_name=_)
+    await client.get_role_policy(**_request(GetRolePolicyInputDict))
+    await client.get_role_policy(_request(GetRolePolicyInput))
+    await client.get_role_policy(_request(GetRolePolicyInputDict))
+    await client.get_role_template_version(template_arn=_)
+    await client.get_role_template_version(**_request(GetRoleTemplateVersionInputDict))
+    await client.get_role_template_version(_request(GetRoleTemplateVersionInput))
+    await client.get_role_template_version(_request(GetRoleTemplateVersionInputDict))
+    await client.get_saml_provider(saml_provider_arn=_)
+    await client.get_saml_provider(**_request(GetSAMLProviderInputDict))
+    await client.get_saml_provider(_request(GetSAMLProviderInput))
+    await client.get_saml_provider(_request(GetSAMLProviderInputDict))
+    await client.get_server_certificate(server_certificate_name=_)
+    await client.get_server_certificate(**_request(GetServerCertificateInputDict))
+    await client.get_server_certificate(_request(GetServerCertificateInput))
+    await client.get_server_certificate(_request(GetServerCertificateInputDict))
+    await client.get_service_last_accessed_details(job_id=_)
+    await client.get_service_last_accessed_details(
+        **_request(GetServiceLastAccessedDetailsInputDict)
+    )
+    await client.get_service_last_accessed_details(
+        _request(GetServiceLastAccessedDetailsInput)
+    )
+    await client.get_service_last_accessed_details(
+        _request(GetServiceLastAccessedDetailsInputDict)
+    )
+    await client.get_service_last_accessed_details_with_entities(
+        job_id=_, service_namespace=_
+    )
+    await client.get_service_last_accessed_details_with_entities(
+        **_request(GetServiceLastAccessedDetailsWithEntitiesInputDict)
+    )
+    await client.get_service_last_accessed_details_with_entities(
+        _request(GetServiceLastAccessedDetailsWithEntitiesInput)
+    )
+    await client.get_service_last_accessed_details_with_entities(
+        _request(GetServiceLastAccessedDetailsWithEntitiesInputDict)
+    )
+    await client.get_service_linked_role_deletion_status(deletion_task_id=_)
+    await client.get_service_linked_role_deletion_status(
+        **_request(GetServiceLinkedRoleDeletionStatusInputDict)
+    )
+    await client.get_service_linked_role_deletion_status(
+        _request(GetServiceLinkedRoleDeletionStatusInput)
+    )
+    await client.get_service_linked_role_deletion_status(
+        _request(GetServiceLinkedRoleDeletionStatusInputDict)
+    )
+    await client.get_ssh_public_key(user_name=_, ssh_public_key_id=_, encoding=_)
+    await client.get_ssh_public_key(**_request(GetSSHPublicKeyInputDict))
+    await client.get_ssh_public_key(_request(GetSSHPublicKeyInput))
+    await client.get_ssh_public_key(_request(GetSSHPublicKeyInputDict))
+    await client.get_user()
+    await client.get_user(**_request(GetUserInputDict))
+    await client.get_user(_request(GetUserInput))
+    await client.get_user(_request(GetUserInputDict))
+    await client.get_user_policy(user_name=_, policy_name=_)
+    await client.get_user_policy(**_request(GetUserPolicyInputDict))
+    await client.get_user_policy(_request(GetUserPolicyInput))
+    await client.get_user_policy(_request(GetUserPolicyInputDict))
+    await client.list_access_keys()
+    await client.list_access_keys(**_request(ListAccessKeysInputDict))
+    await client.list_access_keys(_request(ListAccessKeysInput))
+    await client.list_access_keys(_request(ListAccessKeysInputDict))
+    await client.list_account_aliases()
+    await client.list_account_aliases(**_request(ListAccountAliasesInputDict))
+    await client.list_account_aliases(_request(ListAccountAliasesInput))
+    await client.list_account_aliases(_request(ListAccountAliasesInputDict))
+    await client.list_attached_group_policies(group_name=_)
+    await client.list_attached_group_policies(
+        **_request(ListAttachedGroupPoliciesInputDict)
+    )
+    await client.list_attached_group_policies(_request(ListAttachedGroupPoliciesInput))
+    await client.list_attached_group_policies(
+        _request(ListAttachedGroupPoliciesInputDict)
+    )
+    await client.list_attached_role_policies(role_name=_)
+    await client.list_attached_role_policies(
+        **_request(ListAttachedRolePoliciesInputDict)
+    )
+    await client.list_attached_role_policies(_request(ListAttachedRolePoliciesInput))
+    await client.list_attached_role_policies(
+        _request(ListAttachedRolePoliciesInputDict)
+    )
+    await client.list_attached_user_policies(user_name=_)
+    await client.list_attached_user_policies(
+        **_request(ListAttachedUserPoliciesInputDict)
+    )
+    await client.list_attached_user_policies(_request(ListAttachedUserPoliciesInput))
+    await client.list_attached_user_policies(
+        _request(ListAttachedUserPoliciesInputDict)
+    )
+    await client.list_delegation_requests()
+    await client.list_delegation_requests(**_request(ListDelegationRequestsInputDict))
+    await client.list_delegation_requests(_request(ListDelegationRequestsInput))
+    await client.list_delegation_requests(_request(ListDelegationRequestsInputDict))
+    await client.list_entities_for_policy(policy_arn=_)
+    await client.list_entities_for_policy(**_request(ListEntitiesForPolicyInputDict))
+    await client.list_entities_for_policy(_request(ListEntitiesForPolicyInput))
+    await client.list_entities_for_policy(_request(ListEntitiesForPolicyInputDict))
+    await client.list_group_policies(group_name=_)
+    await client.list_group_policies(**_request(ListGroupPoliciesInputDict))
+    await client.list_group_policies(_request(ListGroupPoliciesInput))
+    await client.list_group_policies(_request(ListGroupPoliciesInputDict))
+    await client.list_groups()
+    await client.list_groups(**_request(ListGroupsInputDict))
+    await client.list_groups(_request(ListGroupsInput))
+    await client.list_groups(_request(ListGroupsInputDict))
+    await client.list_groups_for_user(user_name=_)
+    await client.list_groups_for_user(**_request(ListGroupsForUserInputDict))
+    await client.list_groups_for_user(_request(ListGroupsForUserInput))
+    await client.list_groups_for_user(_request(ListGroupsForUserInputDict))
+    await client.list_instance_profiles()
+    await client.list_instance_profiles(**_request(ListInstanceProfilesInputDict))
+    await client.list_instance_profiles(_request(ListInstanceProfilesInput))
+    await client.list_instance_profiles(_request(ListInstanceProfilesInputDict))
+    await client.list_instance_profiles_for_role(role_name=_)
+    await client.list_instance_profiles_for_role(
+        **_request(ListInstanceProfilesForRoleInputDict)
+    )
+    await client.list_instance_profiles_for_role(
+        _request(ListInstanceProfilesForRoleInput)
+    )
+    await client.list_instance_profiles_for_role(
+        _request(ListInstanceProfilesForRoleInputDict)
+    )
+    await client.list_instance_profile_tags(instance_profile_name=_)
+    await client.list_instance_profile_tags(
+        **_request(ListInstanceProfileTagsInputDict)
+    )
+    await client.list_instance_profile_tags(_request(ListInstanceProfileTagsInput))
+    await client.list_instance_profile_tags(_request(ListInstanceProfileTagsInputDict))
+    await client.list_mfa_devices()
+    await client.list_mfa_devices(**_request(ListMFADevicesInputDict))
+    await client.list_mfa_devices(_request(ListMFADevicesInput))
+    await client.list_mfa_devices(_request(ListMFADevicesInputDict))
+    await client.list_mfa_device_tags(serial_number=_)
+    await client.list_mfa_device_tags(**_request(ListMFADeviceTagsInputDict))
+    await client.list_mfa_device_tags(_request(ListMFADeviceTagsInput))
+    await client.list_mfa_device_tags(_request(ListMFADeviceTagsInputDict))
+    await client.list_open_id_connect_providers()
+    await client.list_open_id_connect_providers(
+        **_request(ListOpenIDConnectProvidersInputDict)
+    )
+    await client.list_open_id_connect_providers(
+        _request(ListOpenIDConnectProvidersInput)
+    )
+    await client.list_open_id_connect_providers(
+        _request(ListOpenIDConnectProvidersInputDict)
+    )
+    await client.list_open_id_connect_provider_tags(open_id_connect_provider_arn=_)
+    await client.list_open_id_connect_provider_tags(
+        **_request(ListOpenIDConnectProviderTagsInputDict)
+    )
+    await client.list_open_id_connect_provider_tags(
+        _request(ListOpenIDConnectProviderTagsInput)
+    )
+    await client.list_open_id_connect_provider_tags(
+        _request(ListOpenIDConnectProviderTagsInputDict)
+    )
+    await client.list_organizations_features()
+    await client.list_organizations_features(
+        **_request(ListOrganizationsFeaturesInputDict)
+    )
+    await client.list_organizations_features(_request(ListOrganizationsFeaturesInput))
+    await client.list_organizations_features(
+        _request(ListOrganizationsFeaturesInputDict)
+    )
+    await client.list_policies()
+    await client.list_policies(**_request(ListPoliciesInputDict))
+    await client.list_policies(_request(ListPoliciesInput))
+    await client.list_policies(_request(ListPoliciesInputDict))
+    await client.list_policies_granting_service_access(arn=_, service_namespaces=_)
+    await client.list_policies_granting_service_access(
+        **_request(ListPoliciesGrantingServiceAccessInputDict)
+    )
+    await client.list_policies_granting_service_access(
+        _request(ListPoliciesGrantingServiceAccessInput)
+    )
+    await client.list_policies_granting_service_access(
+        _request(ListPoliciesGrantingServiceAccessInputDict)
+    )
+    await client.list_policy_tags(policy_arn=_)
+    await client.list_policy_tags(**_request(ListPolicyTagsInputDict))
+    await client.list_policy_tags(_request(ListPolicyTagsInput))
+    await client.list_policy_tags(_request(ListPolicyTagsInputDict))
+    await client.list_policy_versions(policy_arn=_)
+    await client.list_policy_versions(**_request(ListPolicyVersionsInputDict))
+    await client.list_policy_versions(_request(ListPolicyVersionsInput))
+    await client.list_policy_versions(_request(ListPolicyVersionsInputDict))
+    await client.list_role_policies(role_name=_)
+    await client.list_role_policies(**_request(ListRolePoliciesInputDict))
+    await client.list_role_policies(_request(ListRolePoliciesInput))
+    await client.list_role_policies(_request(ListRolePoliciesInputDict))
+    await client.list_roles()
+    await client.list_roles(**_request(ListRolesInputDict))
+    await client.list_roles(_request(ListRolesInput))
+    await client.list_roles(_request(ListRolesInputDict))
+    await client.list_role_tags(role_name=_)
+    await client.list_role_tags(**_request(ListRoleTagsInputDict))
+    await client.list_role_tags(_request(ListRoleTagsInput))
+    await client.list_role_tags(_request(ListRoleTagsInputDict))
+    await client.list_saml_providers()
+    await client.list_saml_providers(**_request(ListSAMLProvidersInputDict))
+    await client.list_saml_providers(_request(ListSAMLProvidersInput))
+    await client.list_saml_providers(_request(ListSAMLProvidersInputDict))
+    await client.list_saml_provider_tags(saml_provider_arn=_)
+    await client.list_saml_provider_tags(**_request(ListSAMLProviderTagsInputDict))
+    await client.list_saml_provider_tags(_request(ListSAMLProviderTagsInput))
+    await client.list_saml_provider_tags(_request(ListSAMLProviderTagsInputDict))
+    await client.list_server_certificates()
+    await client.list_server_certificates(**_request(ListServerCertificatesInputDict))
+    await client.list_server_certificates(_request(ListServerCertificatesInput))
+    await client.list_server_certificates(_request(ListServerCertificatesInputDict))
+    await client.list_server_certificate_tags(server_certificate_name=_)
+    await client.list_server_certificate_tags(
+        **_request(ListServerCertificateTagsInputDict)
+    )
+    await client.list_server_certificate_tags(_request(ListServerCertificateTagsInput))
+    await client.list_server_certificate_tags(
+        _request(ListServerCertificateTagsInputDict)
+    )
+    await client.list_service_specific_credentials()
+    await client.list_service_specific_credentials(
+        **_request(ListServiceSpecificCredentialsInputDict)
+    )
+    await client.list_service_specific_credentials(
+        _request(ListServiceSpecificCredentialsInput)
+    )
+    await client.list_service_specific_credentials(
+        _request(ListServiceSpecificCredentialsInputDict)
+    )
+    await client.list_signing_certificates()
+    await client.list_signing_certificates(**_request(ListSigningCertificatesInputDict))
+    await client.list_signing_certificates(_request(ListSigningCertificatesInput))
+    await client.list_signing_certificates(_request(ListSigningCertificatesInputDict))
+    await client.list_ssh_public_keys()
+    await client.list_ssh_public_keys(**_request(ListSSHPublicKeysInputDict))
+    await client.list_ssh_public_keys(_request(ListSSHPublicKeysInput))
+    await client.list_ssh_public_keys(_request(ListSSHPublicKeysInputDict))
+    await client.list_user_policies(user_name=_)
+    await client.list_user_policies(**_request(ListUserPoliciesInputDict))
+    await client.list_user_policies(_request(ListUserPoliciesInput))
+    await client.list_user_policies(_request(ListUserPoliciesInputDict))
+    await client.list_users()
+    await client.list_users(**_request(ListUsersInputDict))
+    await client.list_users(_request(ListUsersInput))
+    await client.list_users(_request(ListUsersInputDict))
+    await client.list_user_tags(user_name=_)
+    await client.list_user_tags(**_request(ListUserTagsInputDict))
+    await client.list_user_tags(_request(ListUserTagsInput))
+    await client.list_user_tags(_request(ListUserTagsInputDict))
+    await client.list_virtual_mfa_devices()
+    await client.list_virtual_mfa_devices(**_request(ListVirtualMFADevicesInputDict))
+    await client.list_virtual_mfa_devices(_request(ListVirtualMFADevicesInput))
+    await client.list_virtual_mfa_devices(_request(ListVirtualMFADevicesInputDict))
+    await client.put_account_properties(properties=_)
+    await client.put_account_properties(**_request(PutAccountPropertiesInputDict))
+    await client.put_account_properties(_request(PutAccountPropertiesInput))
+    await client.put_account_properties(_request(PutAccountPropertiesInputDict))
+    await client.put_group_policy(group_name=_, policy_name=_, policy_document=_)
+    await client.put_group_policy(**_request(PutGroupPolicyInputDict))
+    await client.put_group_policy(_request(PutGroupPolicyInput))
+    await client.put_group_policy(_request(PutGroupPolicyInputDict))
+    await client.put_role_permissions_boundary(role_name=_, permissions_boundary=_)
+    await client.put_role_permissions_boundary(
+        **_request(PutRolePermissionsBoundaryInputDict)
+    )
+    await client.put_role_permissions_boundary(
+        _request(PutRolePermissionsBoundaryInput)
+    )
+    await client.put_role_permissions_boundary(
+        _request(PutRolePermissionsBoundaryInputDict)
+    )
+    await client.put_role_policy(role_name=_, policy_name=_, policy_document=_)
+    await client.put_role_policy(**_request(PutRolePolicyInputDict))
+    await client.put_role_policy(_request(PutRolePolicyInput))
+    await client.put_role_policy(_request(PutRolePolicyInputDict))
+    await client.put_user_permissions_boundary(user_name=_, permissions_boundary=_)
+    await client.put_user_permissions_boundary(
+        **_request(PutUserPermissionsBoundaryInputDict)
+    )
+    await client.put_user_permissions_boundary(
+        _request(PutUserPermissionsBoundaryInput)
+    )
+    await client.put_user_permissions_boundary(
+        _request(PutUserPermissionsBoundaryInputDict)
+    )
+    await client.put_user_policy(user_name=_, policy_name=_, policy_document=_)
+    await client.put_user_policy(**_request(PutUserPolicyInputDict))
+    await client.put_user_policy(_request(PutUserPolicyInput))
+    await client.put_user_policy(_request(PutUserPolicyInputDict))
+    await client.reject_delegation_request(delegation_request_id=_)
+    await client.reject_delegation_request(**_request(RejectDelegationRequestInputDict))
+    await client.reject_delegation_request(_request(RejectDelegationRequestInput))
+    await client.reject_delegation_request(_request(RejectDelegationRequestInputDict))
+    await client.remove_client_id_from_open_id_connect_provider(
+        open_id_connect_provider_arn=_, client_id=_
+    )
+    await client.remove_client_id_from_open_id_connect_provider(
+        **_request(RemoveClientIDFromOpenIDConnectProviderInputDict)
+    )
+    await client.remove_client_id_from_open_id_connect_provider(
+        _request(RemoveClientIDFromOpenIDConnectProviderInput)
+    )
+    await client.remove_client_id_from_open_id_connect_provider(
+        _request(RemoveClientIDFromOpenIDConnectProviderInputDict)
+    )
+    await client.remove_role_from_instance_profile(instance_profile_name=_, role_name=_)
+    await client.remove_role_from_instance_profile(
+        **_request(RemoveRoleFromInstanceProfileInputDict)
+    )
+    await client.remove_role_from_instance_profile(
+        _request(RemoveRoleFromInstanceProfileInput)
+    )
+    await client.remove_role_from_instance_profile(
+        _request(RemoveRoleFromInstanceProfileInputDict)
+    )
+    await client.remove_user_from_group(group_name=_, user_name=_)
+    await client.remove_user_from_group(**_request(RemoveUserFromGroupInputDict))
+    await client.remove_user_from_group(_request(RemoveUserFromGroupInput))
+    await client.remove_user_from_group(_request(RemoveUserFromGroupInputDict))
+    await client.reset_service_specific_credential(service_specific_credential_id=_)
+    await client.reset_service_specific_credential(
+        **_request(ResetServiceSpecificCredentialInputDict)
+    )
+    await client.reset_service_specific_credential(
+        _request(ResetServiceSpecificCredentialInput)
+    )
+    await client.reset_service_specific_credential(
+        _request(ResetServiceSpecificCredentialInputDict)
+    )
+    await client.resync_mfa_device(
+        user_name=_, serial_number=_, authentication_code1=_, authentication_code2=_
+    )
+    await client.resync_mfa_device(**_request(ResyncMFADeviceInputDict))
+    await client.resync_mfa_device(_request(ResyncMFADeviceInput))
+    await client.resync_mfa_device(_request(ResyncMFADeviceInputDict))
+    await client.send_delegation_token(delegation_request_id=_)
+    await client.send_delegation_token(**_request(SendDelegationTokenInputDict))
+    await client.send_delegation_token(_request(SendDelegationTokenInput))
+    await client.send_delegation_token(_request(SendDelegationTokenInputDict))
+    await client.set_default_policy_version(policy_arn=_, version_id=_)
+    await client.set_default_policy_version(
+        **_request(SetDefaultPolicyVersionInputDict)
+    )
+    await client.set_default_policy_version(_request(SetDefaultPolicyVersionInput))
+    await client.set_default_policy_version(_request(SetDefaultPolicyVersionInputDict))
+    await client.set_security_token_service_preferences(global_endpoint_token_version=_)
+    await client.set_security_token_service_preferences(
+        **_request(SetSecurityTokenServicePreferencesInputDict)
+    )
+    await client.set_security_token_service_preferences(
+        _request(SetSecurityTokenServicePreferencesInput)
+    )
+    await client.set_security_token_service_preferences(
+        _request(SetSecurityTokenServicePreferencesInputDict)
+    )
+    await client.simulate_custom_policy(policy_input_list=_, action_names=_)
+    await client.simulate_custom_policy(**_request(SimulateCustomPolicyInputDict))
+    await client.simulate_custom_policy(_request(SimulateCustomPolicyInput))
+    await client.simulate_custom_policy(_request(SimulateCustomPolicyInputDict))
+    await client.simulate_principal_policy(policy_source_arn=_, action_names=_)
+    await client.simulate_principal_policy(**_request(SimulatePrincipalPolicyInputDict))
+    await client.simulate_principal_policy(_request(SimulatePrincipalPolicyInput))
+    await client.simulate_principal_policy(_request(SimulatePrincipalPolicyInputDict))
+    await client.tag_instance_profile(instance_profile_name=_, tags=_)
+    await client.tag_instance_profile(**_request(TagInstanceProfileInputDict))
+    await client.tag_instance_profile(_request(TagInstanceProfileInput))
+    await client.tag_instance_profile(_request(TagInstanceProfileInputDict))
+    await client.tag_mfa_device(serial_number=_, tags=_)
+    await client.tag_mfa_device(**_request(TagMFADeviceInputDict))
+    await client.tag_mfa_device(_request(TagMFADeviceInput))
+    await client.tag_mfa_device(_request(TagMFADeviceInputDict))
+    await client.tag_open_id_connect_provider(open_id_connect_provider_arn=_, tags=_)
+    await client.tag_open_id_connect_provider(
+        **_request(TagOpenIDConnectProviderInputDict)
+    )
+    await client.tag_open_id_connect_provider(_request(TagOpenIDConnectProviderInput))
+    await client.tag_open_id_connect_provider(
+        _request(TagOpenIDConnectProviderInputDict)
+    )
+    await client.tag_policy(policy_arn=_, tags=_)
+    await client.tag_policy(**_request(TagPolicyInputDict))
+    await client.tag_policy(_request(TagPolicyInput))
+    await client.tag_policy(_request(TagPolicyInputDict))
+    await client.tag_role(role_name=_, tags=_)
+    await client.tag_role(**_request(TagRoleInputDict))
+    await client.tag_role(_request(TagRoleInput))
+    await client.tag_role(_request(TagRoleInputDict))
+    await client.tag_saml_provider(saml_provider_arn=_, tags=_)
+    await client.tag_saml_provider(**_request(TagSAMLProviderInputDict))
+    await client.tag_saml_provider(_request(TagSAMLProviderInput))
+    await client.tag_saml_provider(_request(TagSAMLProviderInputDict))
+    await client.tag_server_certificate(server_certificate_name=_, tags=_)
+    await client.tag_server_certificate(**_request(TagServerCertificateInputDict))
+    await client.tag_server_certificate(_request(TagServerCertificateInput))
+    await client.tag_server_certificate(_request(TagServerCertificateInputDict))
+    await client.tag_user(user_name=_, tags=_)
+    await client.tag_user(**_request(TagUserInputDict))
+    await client.tag_user(_request(TagUserInput))
+    await client.tag_user(_request(TagUserInputDict))
+    await client.untag_instance_profile(instance_profile_name=_, tag_keys=_)
+    await client.untag_instance_profile(**_request(UntagInstanceProfileInputDict))
+    await client.untag_instance_profile(_request(UntagInstanceProfileInput))
+    await client.untag_instance_profile(_request(UntagInstanceProfileInputDict))
+    await client.untag_mfa_device(serial_number=_, tag_keys=_)
+    await client.untag_mfa_device(**_request(UntagMFADeviceInputDict))
+    await client.untag_mfa_device(_request(UntagMFADeviceInput))
+    await client.untag_mfa_device(_request(UntagMFADeviceInputDict))
+    await client.untag_open_id_connect_provider(
+        open_id_connect_provider_arn=_, tag_keys=_
+    )
+    await client.untag_open_id_connect_provider(
+        **_request(UntagOpenIDConnectProviderInputDict)
+    )
+    await client.untag_open_id_connect_provider(
+        _request(UntagOpenIDConnectProviderInput)
+    )
+    await client.untag_open_id_connect_provider(
+        _request(UntagOpenIDConnectProviderInputDict)
+    )
+    await client.untag_policy(policy_arn=_, tag_keys=_)
+    await client.untag_policy(**_request(UntagPolicyInputDict))
+    await client.untag_policy(_request(UntagPolicyInput))
+    await client.untag_policy(_request(UntagPolicyInputDict))
+    await client.untag_role(role_name=_, tag_keys=_)
+    await client.untag_role(**_request(UntagRoleInputDict))
+    await client.untag_role(_request(UntagRoleInput))
+    await client.untag_role(_request(UntagRoleInputDict))
+    await client.untag_saml_provider(saml_provider_arn=_, tag_keys=_)
+    await client.untag_saml_provider(**_request(UntagSAMLProviderInputDict))
+    await client.untag_saml_provider(_request(UntagSAMLProviderInput))
+    await client.untag_saml_provider(_request(UntagSAMLProviderInputDict))
+    await client.untag_server_certificate(server_certificate_name=_, tag_keys=_)
+    await client.untag_server_certificate(**_request(UntagServerCertificateInputDict))
+    await client.untag_server_certificate(_request(UntagServerCertificateInput))
+    await client.untag_server_certificate(_request(UntagServerCertificateInputDict))
+    await client.untag_user(user_name=_, tag_keys=_)
+    await client.untag_user(**_request(UntagUserInputDict))
+    await client.untag_user(_request(UntagUserInput))
+    await client.untag_user(_request(UntagUserInputDict))
+    await client.update_access_key(access_key_id=_, status=_)
+    await client.update_access_key(**_request(UpdateAccessKeyInputDict))
+    await client.update_access_key(_request(UpdateAccessKeyInput))
+    await client.update_access_key(_request(UpdateAccessKeyInputDict))
+    await client.update_account_password_policy()
+    await client.update_account_password_policy(
+        **_request(UpdateAccountPasswordPolicyInputDict)
+    )
+    await client.update_account_password_policy(
+        _request(UpdateAccountPasswordPolicyInput)
+    )
+    await client.update_account_password_policy(
+        _request(UpdateAccountPasswordPolicyInputDict)
+    )
+    await client.update_assume_role_policy(role_name=_, policy_document=_)
+    await client.update_assume_role_policy(**_request(UpdateAssumeRolePolicyInputDict))
+    await client.update_assume_role_policy(_request(UpdateAssumeRolePolicyInput))
+    await client.update_assume_role_policy(_request(UpdateAssumeRolePolicyInputDict))
+    await client.update_delegation_request(delegation_request_id=_)
+    await client.update_delegation_request(**_request(UpdateDelegationRequestInputDict))
+    await client.update_delegation_request(_request(UpdateDelegationRequestInput))
+    await client.update_delegation_request(_request(UpdateDelegationRequestInputDict))
+    await client.update_group(group_name=_)
+    await client.update_group(**_request(UpdateGroupInputDict))
+    await client.update_group(_request(UpdateGroupInput))
+    await client.update_group(_request(UpdateGroupInputDict))
+    await client.update_login_profile(user_name=_)
+    await client.update_login_profile(**_request(UpdateLoginProfileInputDict))
+    await client.update_login_profile(_request(UpdateLoginProfileInput))
+    await client.update_login_profile(_request(UpdateLoginProfileInputDict))
+    await client.update_open_id_connect_provider_thumbprint(
+        open_id_connect_provider_arn=_, thumbprint_list=_
+    )
+    await client.update_open_id_connect_provider_thumbprint(
+        **_request(UpdateOpenIDConnectProviderThumbprintInputDict)
+    )
+    await client.update_open_id_connect_provider_thumbprint(
+        _request(UpdateOpenIDConnectProviderThumbprintInput)
+    )
+    await client.update_open_id_connect_provider_thumbprint(
+        _request(UpdateOpenIDConnectProviderThumbprintInputDict)
+    )
+    await client.update_role(role_name=_)
+    await client.update_role(**_request(UpdateRoleInputDict))
+    await client.update_role(_request(UpdateRoleInput))
+    await client.update_role(_request(UpdateRoleInputDict))
+    await client.update_role_description(role_name=_, description=_)
+    await client.update_role_description(**_request(UpdateRoleDescriptionInputDict))
+    await client.update_role_description(_request(UpdateRoleDescriptionInput))
+    await client.update_role_description(_request(UpdateRoleDescriptionInputDict))
+    await client.update_saml_provider(saml_provider_arn=_)
+    await client.update_saml_provider(**_request(UpdateSAMLProviderInputDict))
+    await client.update_saml_provider(_request(UpdateSAMLProviderInput))
+    await client.update_saml_provider(_request(UpdateSAMLProviderInputDict))
+    await client.update_server_certificate(server_certificate_name=_)
+    await client.update_server_certificate(**_request(UpdateServerCertificateInputDict))
+    await client.update_server_certificate(_request(UpdateServerCertificateInput))
+    await client.update_server_certificate(_request(UpdateServerCertificateInputDict))
+    await client.update_service_specific_credential(
+        service_specific_credential_id=_, status=_
+    )
+    await client.update_service_specific_credential(
+        **_request(UpdateServiceSpecificCredentialInputDict)
+    )
+    await client.update_service_specific_credential(
+        _request(UpdateServiceSpecificCredentialInput)
+    )
+    await client.update_service_specific_credential(
+        _request(UpdateServiceSpecificCredentialInputDict)
+    )
+    await client.update_signing_certificate(certificate_id=_, status=_)
+    await client.update_signing_certificate(
+        **_request(UpdateSigningCertificateInputDict)
+    )
+    await client.update_signing_certificate(_request(UpdateSigningCertificateInput))
+    await client.update_signing_certificate(_request(UpdateSigningCertificateInputDict))
+    await client.update_ssh_public_key(user_name=_, ssh_public_key_id=_, status=_)
+    await client.update_ssh_public_key(**_request(UpdateSSHPublicKeyInputDict))
+    await client.update_ssh_public_key(_request(UpdateSSHPublicKeyInput))
+    await client.update_ssh_public_key(_request(UpdateSSHPublicKeyInputDict))
+    await client.update_user(user_name=_)
+    await client.update_user(**_request(UpdateUserInputDict))
+    await client.update_user(_request(UpdateUserInput))
+    await client.update_user(_request(UpdateUserInputDict))
+    await client.upload_server_certificate(
+        server_certificate_name=_, certificate_body=_, private_key=_
+    )
+    await client.upload_server_certificate(**_request(UploadServerCertificateInputDict))
+    await client.upload_server_certificate(_request(UploadServerCertificateInput))
+    await client.upload_server_certificate(_request(UploadServerCertificateInputDict))
+    await client.upload_signing_certificate(certificate_body=_)
+    await client.upload_signing_certificate(
+        **_request(UploadSigningCertificateInputDict)
+    )
+    await client.upload_signing_certificate(_request(UploadSigningCertificateInput))
+    await client.upload_signing_certificate(_request(UploadSigningCertificateInputDict))
+    await client.upload_ssh_public_key(user_name=_, ssh_public_key_body=_)
+    await client.upload_ssh_public_key(**_request(UploadSSHPublicKeyInputDict))
+    await client.upload_ssh_public_key(_request(UploadSSHPublicKeyInput))
+    await client.upload_ssh_public_key(_request(UploadSSHPublicKeyInputDict))
+
+
+def check_sync_calls(client: IAMClient) -> None:
+    pass
+    client.accept_delegation_request(delegation_request_id=_)
+    client.accept_delegation_request(**_request(AcceptDelegationRequestInputDict))
+    client.accept_delegation_request(_request(AcceptDelegationRequestInput))
+    client.accept_delegation_request(_request(AcceptDelegationRequestInputDict))
+    client.acquire_role(template_arn=_)
+    client.acquire_role(**_request(AcquireRoleInputDict))
+    client.acquire_role(_request(AcquireRoleInput))
+    client.acquire_role(_request(AcquireRoleInputDict))
+    client.add_client_id_to_open_id_connect_provider(
+        open_id_connect_provider_arn=_, client_id=_
+    )
+    client.add_client_id_to_open_id_connect_provider(
+        **_request(AddClientIDToOpenIDConnectProviderInputDict)
+    )
+    client.add_client_id_to_open_id_connect_provider(
+        _request(AddClientIDToOpenIDConnectProviderInput)
+    )
+    client.add_client_id_to_open_id_connect_provider(
+        _request(AddClientIDToOpenIDConnectProviderInputDict)
+    )
+    client.add_role_to_instance_profile(instance_profile_name=_, role_name=_)
+    client.add_role_to_instance_profile(**_request(AddRoleToInstanceProfileInputDict))
+    client.add_role_to_instance_profile(_request(AddRoleToInstanceProfileInput))
+    client.add_role_to_instance_profile(_request(AddRoleToInstanceProfileInputDict))
+    client.add_user_to_group(group_name=_, user_name=_)
+    client.add_user_to_group(**_request(AddUserToGroupInputDict))
+    client.add_user_to_group(_request(AddUserToGroupInput))
+    client.add_user_to_group(_request(AddUserToGroupInputDict))
+    client.associate_delegation_request(delegation_request_id=_)
+    client.associate_delegation_request(**_request(AssociateDelegationRequestInputDict))
+    client.associate_delegation_request(_request(AssociateDelegationRequestInput))
+    client.associate_delegation_request(_request(AssociateDelegationRequestInputDict))
+    client.attach_group_policy(group_name=_, policy_arn=_)
+    client.attach_group_policy(**_request(AttachGroupPolicyInputDict))
+    client.attach_group_policy(_request(AttachGroupPolicyInput))
+    client.attach_group_policy(_request(AttachGroupPolicyInputDict))
+    client.attach_role_policy(role_name=_, policy_arn=_)
+    client.attach_role_policy(**_request(AttachRolePolicyInputDict))
+    client.attach_role_policy(_request(AttachRolePolicyInput))
+    client.attach_role_policy(_request(AttachRolePolicyInputDict))
+    client.attach_user_policy(user_name=_, policy_arn=_)
+    client.attach_user_policy(**_request(AttachUserPolicyInputDict))
+    client.attach_user_policy(_request(AttachUserPolicyInput))
+    client.attach_user_policy(_request(AttachUserPolicyInputDict))
+    client.change_password(old_password=_, new_password=_)
+    client.change_password(**_request(ChangePasswordInputDict))
+    client.change_password(_request(ChangePasswordInput))
+    client.change_password(_request(ChangePasswordInputDict))
+    client.create_access_key()
+    client.create_access_key(**_request(CreateAccessKeyInputDict))
+    client.create_access_key(_request(CreateAccessKeyInput))
+    client.create_access_key(_request(CreateAccessKeyInputDict))
+    client.create_account_alias(account_alias=_)
+    client.create_account_alias(**_request(CreateAccountAliasInputDict))
+    client.create_account_alias(_request(CreateAccountAliasInput))
+    client.create_account_alias(_request(CreateAccountAliasInputDict))
+    client.create_delegation_request(
+        description=_,
+        permissions=_,
+        requestor_workflow_id=_,
+        notification_channel=_,
+        session_duration=_,
+    )
+    client.create_delegation_request(**_request(CreateDelegationRequestInputDict))
+    client.create_delegation_request(_request(CreateDelegationRequestInput))
+    client.create_delegation_request(_request(CreateDelegationRequestInputDict))
+    client.create_group(group_name=_)
+    client.create_group(**_request(CreateGroupInputDict))
+    client.create_group(_request(CreateGroupInput))
+    client.create_group(_request(CreateGroupInputDict))
+    client.create_instance_profile(instance_profile_name=_)
+    client.create_instance_profile(**_request(CreateInstanceProfileInputDict))
+    client.create_instance_profile(_request(CreateInstanceProfileInput))
+    client.create_instance_profile(_request(CreateInstanceProfileInputDict))
+    client.create_login_profile()
+    client.create_login_profile(**_request(CreateLoginProfileInputDict))
+    client.create_login_profile(_request(CreateLoginProfileInput))
+    client.create_login_profile(_request(CreateLoginProfileInputDict))
+    client.create_open_id_connect_provider(url=_)
+    client.create_open_id_connect_provider(
+        **_request(CreateOpenIDConnectProviderInputDict)
+    )
+    client.create_open_id_connect_provider(_request(CreateOpenIDConnectProviderInput))
+    client.create_open_id_connect_provider(
+        _request(CreateOpenIDConnectProviderInputDict)
+    )
+    client.create_policy(policy_name=_, policy_document=_)
+    client.create_policy(**_request(CreatePolicyInputDict))
+    client.create_policy(_request(CreatePolicyInput))
+    client.create_policy(_request(CreatePolicyInputDict))
+    client.create_policy_version(policy_arn=_, policy_document=_)
+    client.create_policy_version(**_request(CreatePolicyVersionInputDict))
+    client.create_policy_version(_request(CreatePolicyVersionInput))
+    client.create_policy_version(_request(CreatePolicyVersionInputDict))
+    client.create_role(role_name=_, assume_role_policy_document=_)
+    client.create_role(**_request(CreateRoleInputDict))
+    client.create_role(_request(CreateRoleInput))
+    client.create_role(_request(CreateRoleInputDict))
+    client.create_saml_provider(saml_metadata_document=_, name=_)
+    client.create_saml_provider(**_request(CreateSAMLProviderInputDict))
+    client.create_saml_provider(_request(CreateSAMLProviderInput))
+    client.create_saml_provider(_request(CreateSAMLProviderInputDict))
+    client.create_service_linked_role(aws_service_name=_)
+    client.create_service_linked_role(**_request(CreateServiceLinkedRoleInputDict))
+    client.create_service_linked_role(_request(CreateServiceLinkedRoleInput))
+    client.create_service_linked_role(_request(CreateServiceLinkedRoleInputDict))
+    client.create_service_specific_credential(user_name=_, service_name=_)
+    client.create_service_specific_credential(
+        **_request(CreateServiceSpecificCredentialInputDict)
+    )
+    client.create_service_specific_credential(
+        _request(CreateServiceSpecificCredentialInput)
+    )
+    client.create_service_specific_credential(
+        _request(CreateServiceSpecificCredentialInputDict)
+    )
+    client.create_user(user_name=_)
+    client.create_user(**_request(CreateUserInputDict))
+    client.create_user(_request(CreateUserInput))
+    client.create_user(_request(CreateUserInputDict))
+    client.create_virtual_mfa_device(virtual_mfa_device_name=_)
+    client.create_virtual_mfa_device(**_request(CreateVirtualMFADeviceInputDict))
+    client.create_virtual_mfa_device(_request(CreateVirtualMFADeviceInput))
+    client.create_virtual_mfa_device(_request(CreateVirtualMFADeviceInputDict))
+    client.deactivate_mfa_device(serial_number=_)
+    client.deactivate_mfa_device(**_request(DeactivateMFADeviceInputDict))
+    client.deactivate_mfa_device(_request(DeactivateMFADeviceInput))
+    client.deactivate_mfa_device(_request(DeactivateMFADeviceInputDict))
+    client.delete_access_key(access_key_id=_)
+    client.delete_access_key(**_request(DeleteAccessKeyInputDict))
+    client.delete_access_key(_request(DeleteAccessKeyInput))
+    client.delete_access_key(_request(DeleteAccessKeyInputDict))
+    client.delete_account_alias(account_alias=_)
+    client.delete_account_alias(**_request(DeleteAccountAliasInputDict))
+    client.delete_account_alias(_request(DeleteAccountAliasInput))
+    client.delete_account_alias(_request(DeleteAccountAliasInputDict))
+    client.delete_account_password_policy()
+    client.delete_account_password_policy(
+        **_request(DeleteAccountPasswordPolicyInputDict)
+    )
+    client.delete_account_password_policy(_request(DeleteAccountPasswordPolicyInput))
+    client.delete_account_password_policy(
+        _request(DeleteAccountPasswordPolicyInputDict)
+    )
+    client.delete_group(group_name=_)
+    client.delete_group(**_request(DeleteGroupInputDict))
+    client.delete_group(_request(DeleteGroupInput))
+    client.delete_group(_request(DeleteGroupInputDict))
+    client.delete_group_policy(group_name=_, policy_name=_)
+    client.delete_group_policy(**_request(DeleteGroupPolicyInputDict))
+    client.delete_group_policy(_request(DeleteGroupPolicyInput))
+    client.delete_group_policy(_request(DeleteGroupPolicyInputDict))
+    client.delete_instance_profile(instance_profile_name=_)
+    client.delete_instance_profile(**_request(DeleteInstanceProfileInputDict))
+    client.delete_instance_profile(_request(DeleteInstanceProfileInput))
+    client.delete_instance_profile(_request(DeleteInstanceProfileInputDict))
+    client.delete_login_profile()
+    client.delete_login_profile(**_request(DeleteLoginProfileInputDict))
+    client.delete_login_profile(_request(DeleteLoginProfileInput))
+    client.delete_login_profile(_request(DeleteLoginProfileInputDict))
+    client.delete_open_id_connect_provider(open_id_connect_provider_arn=_)
+    client.delete_open_id_connect_provider(
+        **_request(DeleteOpenIDConnectProviderInputDict)
+    )
+    client.delete_open_id_connect_provider(_request(DeleteOpenIDConnectProviderInput))
+    client.delete_open_id_connect_provider(
+        _request(DeleteOpenIDConnectProviderInputDict)
+    )
+    client.delete_policy(policy_arn=_)
+    client.delete_policy(**_request(DeletePolicyInputDict))
+    client.delete_policy(_request(DeletePolicyInput))
+    client.delete_policy(_request(DeletePolicyInputDict))
+    client.delete_policy_version(policy_arn=_, version_id=_)
+    client.delete_policy_version(**_request(DeletePolicyVersionInputDict))
+    client.delete_policy_version(_request(DeletePolicyVersionInput))
+    client.delete_policy_version(_request(DeletePolicyVersionInputDict))
+    client.delete_role(role_name=_)
+    client.delete_role(**_request(DeleteRoleInputDict))
+    client.delete_role(_request(DeleteRoleInput))
+    client.delete_role(_request(DeleteRoleInputDict))
+    client.delete_role_permissions_boundary(role_name=_)
+    client.delete_role_permissions_boundary(
+        **_request(DeleteRolePermissionsBoundaryInputDict)
+    )
+    client.delete_role_permissions_boundary(
+        _request(DeleteRolePermissionsBoundaryInput)
+    )
+    client.delete_role_permissions_boundary(
+        _request(DeleteRolePermissionsBoundaryInputDict)
+    )
+    client.delete_role_policy(role_name=_, policy_name=_)
+    client.delete_role_policy(**_request(DeleteRolePolicyInputDict))
+    client.delete_role_policy(_request(DeleteRolePolicyInput))
+    client.delete_role_policy(_request(DeleteRolePolicyInputDict))
+    client.delete_saml_provider(saml_provider_arn=_)
+    client.delete_saml_provider(**_request(DeleteSAMLProviderInputDict))
+    client.delete_saml_provider(_request(DeleteSAMLProviderInput))
+    client.delete_saml_provider(_request(DeleteSAMLProviderInputDict))
+    client.delete_server_certificate(server_certificate_name=_)
+    client.delete_server_certificate(**_request(DeleteServerCertificateInputDict))
+    client.delete_server_certificate(_request(DeleteServerCertificateInput))
+    client.delete_server_certificate(_request(DeleteServerCertificateInputDict))
+    client.delete_service_linked_role(role_name=_)
+    client.delete_service_linked_role(**_request(DeleteServiceLinkedRoleInputDict))
+    client.delete_service_linked_role(_request(DeleteServiceLinkedRoleInput))
+    client.delete_service_linked_role(_request(DeleteServiceLinkedRoleInputDict))
+    client.delete_service_specific_credential(service_specific_credential_id=_)
+    client.delete_service_specific_credential(
+        **_request(DeleteServiceSpecificCredentialInputDict)
+    )
+    client.delete_service_specific_credential(
+        _request(DeleteServiceSpecificCredentialInput)
+    )
+    client.delete_service_specific_credential(
+        _request(DeleteServiceSpecificCredentialInputDict)
+    )
+    client.delete_signing_certificate(certificate_id=_)
+    client.delete_signing_certificate(**_request(DeleteSigningCertificateInputDict))
+    client.delete_signing_certificate(_request(DeleteSigningCertificateInput))
+    client.delete_signing_certificate(_request(DeleteSigningCertificateInputDict))
+    client.delete_ssh_public_key(user_name=_, ssh_public_key_id=_)
+    client.delete_ssh_public_key(**_request(DeleteSSHPublicKeyInputDict))
+    client.delete_ssh_public_key(_request(DeleteSSHPublicKeyInput))
+    client.delete_ssh_public_key(_request(DeleteSSHPublicKeyInputDict))
+    client.delete_user(user_name=_)
+    client.delete_user(**_request(DeleteUserInputDict))
+    client.delete_user(_request(DeleteUserInput))
+    client.delete_user(_request(DeleteUserInputDict))
+    client.delete_user_permissions_boundary(user_name=_)
+    client.delete_user_permissions_boundary(
+        **_request(DeleteUserPermissionsBoundaryInputDict)
+    )
+    client.delete_user_permissions_boundary(
+        _request(DeleteUserPermissionsBoundaryInput)
+    )
+    client.delete_user_permissions_boundary(
+        _request(DeleteUserPermissionsBoundaryInputDict)
+    )
+    client.delete_user_policy(user_name=_, policy_name=_)
+    client.delete_user_policy(**_request(DeleteUserPolicyInputDict))
+    client.delete_user_policy(_request(DeleteUserPolicyInput))
+    client.delete_user_policy(_request(DeleteUserPolicyInputDict))
+    client.delete_virtual_mfa_device(serial_number=_)
+    client.delete_virtual_mfa_device(**_request(DeleteVirtualMFADeviceInputDict))
+    client.delete_virtual_mfa_device(_request(DeleteVirtualMFADeviceInput))
+    client.delete_virtual_mfa_device(_request(DeleteVirtualMFADeviceInputDict))
+    client.detach_group_policy(group_name=_, policy_arn=_)
+    client.detach_group_policy(**_request(DetachGroupPolicyInputDict))
+    client.detach_group_policy(_request(DetachGroupPolicyInput))
+    client.detach_group_policy(_request(DetachGroupPolicyInputDict))
+    client.detach_role_policy(role_name=_, policy_arn=_)
+    client.detach_role_policy(**_request(DetachRolePolicyInputDict))
+    client.detach_role_policy(_request(DetachRolePolicyInput))
+    client.detach_role_policy(_request(DetachRolePolicyInputDict))
+    client.detach_user_policy(user_name=_, policy_arn=_)
+    client.detach_user_policy(**_request(DetachUserPolicyInputDict))
+    client.detach_user_policy(_request(DetachUserPolicyInput))
+    client.detach_user_policy(_request(DetachUserPolicyInputDict))
+    client.disable_organizations_root_credentials_management()
+    client.disable_organizations_root_credentials_management(
+        **_request(DisableOrganizationsRootCredentialsManagementInputDict)
+    )
+    client.disable_organizations_root_credentials_management(
+        _request(DisableOrganizationsRootCredentialsManagementInput)
+    )
+    client.disable_organizations_root_credentials_management(
+        _request(DisableOrganizationsRootCredentialsManagementInputDict)
+    )
+    client.disable_organizations_root_sessions()
+    client.disable_organizations_root_sessions(
+        **_request(DisableOrganizationsRootSessionsInputDict)
+    )
+    client.disable_organizations_root_sessions(
+        _request(DisableOrganizationsRootSessionsInput)
+    )
+    client.disable_organizations_root_sessions(
+        _request(DisableOrganizationsRootSessionsInputDict)
+    )
+    client.disable_outbound_web_identity_federation()
+    client.disable_outbound_web_identity_federation(
+        **_request(DisableOutboundWebIdentityFederationInputDict)
+    )
+    client.disable_outbound_web_identity_federation(
+        _request(DisableOutboundWebIdentityFederationInput)
+    )
+    client.disable_outbound_web_identity_federation(
+        _request(DisableOutboundWebIdentityFederationInputDict)
+    )
+    client.enable_mfa_device(
+        user_name=_, serial_number=_, authentication_code1=_, authentication_code2=_
+    )
+    client.enable_mfa_device(**_request(EnableMFADeviceInputDict))
+    client.enable_mfa_device(_request(EnableMFADeviceInput))
+    client.enable_mfa_device(_request(EnableMFADeviceInputDict))
+    client.enable_organizations_root_credentials_management()
+    client.enable_organizations_root_credentials_management(
+        **_request(EnableOrganizationsRootCredentialsManagementInputDict)
+    )
+    client.enable_organizations_root_credentials_management(
+        _request(EnableOrganizationsRootCredentialsManagementInput)
+    )
+    client.enable_organizations_root_credentials_management(
+        _request(EnableOrganizationsRootCredentialsManagementInputDict)
+    )
+    client.enable_organizations_root_sessions()
+    client.enable_organizations_root_sessions(
+        **_request(EnableOrganizationsRootSessionsInputDict)
+    )
+    client.enable_organizations_root_sessions(
+        _request(EnableOrganizationsRootSessionsInput)
+    )
+    client.enable_organizations_root_sessions(
+        _request(EnableOrganizationsRootSessionsInputDict)
+    )
+    client.enable_outbound_web_identity_federation()
+    client.enable_outbound_web_identity_federation(
+        **_request(EnableOutboundWebIdentityFederationInputDict)
+    )
+    client.enable_outbound_web_identity_federation(
+        _request(EnableOutboundWebIdentityFederationInput)
+    )
+    client.enable_outbound_web_identity_federation(
+        _request(EnableOutboundWebIdentityFederationInputDict)
+    )
+    client.generate_credential_report()
+    client.generate_credential_report(**_request(GenerateCredentialReportInputDict))
+    client.generate_credential_report(_request(GenerateCredentialReportInput))
+    client.generate_credential_report(_request(GenerateCredentialReportInputDict))
+    client.generate_organizations_access_report(entity_path=_)
+    client.generate_organizations_access_report(
+        **_request(GenerateOrganizationsAccessReportInputDict)
+    )
+    client.generate_organizations_access_report(
+        _request(GenerateOrganizationsAccessReportInput)
+    )
+    client.generate_organizations_access_report(
+        _request(GenerateOrganizationsAccessReportInputDict)
+    )
+    client.generate_service_last_accessed_details(arn=_)
+    client.generate_service_last_accessed_details(
+        **_request(GenerateServiceLastAccessedDetailsInputDict)
+    )
+    client.generate_service_last_accessed_details(
+        _request(GenerateServiceLastAccessedDetailsInput)
+    )
+    client.generate_service_last_accessed_details(
+        _request(GenerateServiceLastAccessedDetailsInputDict)
+    )
+    client.get_access_key_last_used(access_key_id=_)
+    client.get_access_key_last_used(**_request(GetAccessKeyLastUsedInputDict))
+    client.get_access_key_last_used(_request(GetAccessKeyLastUsedInput))
+    client.get_access_key_last_used(_request(GetAccessKeyLastUsedInputDict))
+    client.get_account_authorization_details()
+    client.get_account_authorization_details(
+        **_request(GetAccountAuthorizationDetailsInputDict)
+    )
+    client.get_account_authorization_details(
+        _request(GetAccountAuthorizationDetailsInput)
+    )
+    client.get_account_authorization_details(
+        _request(GetAccountAuthorizationDetailsInputDict)
+    )
+    client.get_account_password_policy()
+    client.get_account_password_policy(**_request(GetAccountPasswordPolicyInputDict))
+    client.get_account_password_policy(_request(GetAccountPasswordPolicyInput))
+    client.get_account_password_policy(_request(GetAccountPasswordPolicyInputDict))
+    client.get_account_properties()
+    client.get_account_properties(**_request(GetAccountPropertiesInputDict))
+    client.get_account_properties(_request(GetAccountPropertiesInput))
+    client.get_account_properties(_request(GetAccountPropertiesInputDict))
+    client.get_account_summary()
+    client.get_account_summary(**_request(GetAccountSummaryInputDict))
+    client.get_account_summary(_request(GetAccountSummaryInput))
+    client.get_account_summary(_request(GetAccountSummaryInputDict))
+    client.get_context_keys_for_custom_policy(policy_input_list=_)
+    client.get_context_keys_for_custom_policy(
+        **_request(GetContextKeysForCustomPolicyInputDict)
+    )
+    client.get_context_keys_for_custom_policy(
+        _request(GetContextKeysForCustomPolicyInput)
+    )
+    client.get_context_keys_for_custom_policy(
+        _request(GetContextKeysForCustomPolicyInputDict)
+    )
+    client.get_context_keys_for_principal_policy(policy_source_arn=_)
+    client.get_context_keys_for_principal_policy(
+        **_request(GetContextKeysForPrincipalPolicyInputDict)
+    )
+    client.get_context_keys_for_principal_policy(
+        _request(GetContextKeysForPrincipalPolicyInput)
+    )
+    client.get_context_keys_for_principal_policy(
+        _request(GetContextKeysForPrincipalPolicyInputDict)
+    )
+    client.get_credential_report()
+    client.get_credential_report(**_request(GetCredentialReportInputDict))
+    client.get_credential_report(_request(GetCredentialReportInput))
+    client.get_credential_report(_request(GetCredentialReportInputDict))
+    client.get_delegation_request(delegation_request_id=_)
+    client.get_delegation_request(**_request(GetDelegationRequestInputDict))
+    client.get_delegation_request(_request(GetDelegationRequestInput))
+    client.get_delegation_request(_request(GetDelegationRequestInputDict))
+    client.get_group(group_name=_)
+    client.get_group(**_request(GetGroupInputDict))
+    client.get_group(_request(GetGroupInput))
+    client.get_group(_request(GetGroupInputDict))
+    client.get_group_policy(group_name=_, policy_name=_)
+    client.get_group_policy(**_request(GetGroupPolicyInputDict))
+    client.get_group_policy(_request(GetGroupPolicyInput))
+    client.get_group_policy(_request(GetGroupPolicyInputDict))
+    client.get_human_readable_summary(entity_arn=_)
+    client.get_human_readable_summary(**_request(GetHumanReadableSummaryInputDict))
+    client.get_human_readable_summary(_request(GetHumanReadableSummaryInput))
+    client.get_human_readable_summary(_request(GetHumanReadableSummaryInputDict))
+    client.get_instance_profile(instance_profile_name=_)
+    client.get_instance_profile(**_request(GetInstanceProfileInputDict))
+    client.get_instance_profile(_request(GetInstanceProfileInput))
+    client.get_instance_profile(_request(GetInstanceProfileInputDict))
+    client.get_login_profile()
+    client.get_login_profile(**_request(GetLoginProfileInputDict))
+    client.get_login_profile(_request(GetLoginProfileInput))
+    client.get_login_profile(_request(GetLoginProfileInputDict))
+    client.get_mfa_device(serial_number=_)
+    client.get_mfa_device(**_request(GetMFADeviceInputDict))
+    client.get_mfa_device(_request(GetMFADeviceInput))
+    client.get_mfa_device(_request(GetMFADeviceInputDict))
+    client.get_open_id_connect_provider(open_id_connect_provider_arn=_)
+    client.get_open_id_connect_provider(**_request(GetOpenIDConnectProviderInputDict))
+    client.get_open_id_connect_provider(_request(GetOpenIDConnectProviderInput))
+    client.get_open_id_connect_provider(_request(GetOpenIDConnectProviderInputDict))
+    client.get_organizations_access_report(job_id=_)
+    client.get_organizations_access_report(
+        **_request(GetOrganizationsAccessReportInputDict)
+    )
+    client.get_organizations_access_report(_request(GetOrganizationsAccessReportInput))
+    client.get_organizations_access_report(
+        _request(GetOrganizationsAccessReportInputDict)
+    )
+    client.get_outbound_web_identity_federation_info()
+    client.get_outbound_web_identity_federation_info(
+        **_request(GetOutboundWebIdentityFederationInfoInputDict)
+    )
+    client.get_outbound_web_identity_federation_info(
+        _request(GetOutboundWebIdentityFederationInfoInput)
+    )
+    client.get_outbound_web_identity_federation_info(
+        _request(GetOutboundWebIdentityFederationInfoInputDict)
+    )
+    client.get_policy(policy_arn=_)
+    client.get_policy(**_request(GetPolicyInputDict))
+    client.get_policy(_request(GetPolicyInput))
+    client.get_policy(_request(GetPolicyInputDict))
+    client.get_policy_version(policy_arn=_, version_id=_)
+    client.get_policy_version(**_request(GetPolicyVersionInputDict))
+    client.get_policy_version(_request(GetPolicyVersionInput))
+    client.get_policy_version(_request(GetPolicyVersionInputDict))
+    client.get_role(role_name=_)
+    client.get_role(**_request(GetRoleInputDict))
+    client.get_role(_request(GetRoleInput))
+    client.get_role(_request(GetRoleInputDict))
+    client.get_role_policy(role_name=_, policy_name=_)
+    client.get_role_policy(**_request(GetRolePolicyInputDict))
+    client.get_role_policy(_request(GetRolePolicyInput))
+    client.get_role_policy(_request(GetRolePolicyInputDict))
+    client.get_role_template_version(template_arn=_)
+    client.get_role_template_version(**_request(GetRoleTemplateVersionInputDict))
+    client.get_role_template_version(_request(GetRoleTemplateVersionInput))
+    client.get_role_template_version(_request(GetRoleTemplateVersionInputDict))
+    client.get_saml_provider(saml_provider_arn=_)
+    client.get_saml_provider(**_request(GetSAMLProviderInputDict))
+    client.get_saml_provider(_request(GetSAMLProviderInput))
+    client.get_saml_provider(_request(GetSAMLProviderInputDict))
+    client.get_server_certificate(server_certificate_name=_)
+    client.get_server_certificate(**_request(GetServerCertificateInputDict))
+    client.get_server_certificate(_request(GetServerCertificateInput))
+    client.get_server_certificate(_request(GetServerCertificateInputDict))
+    client.get_service_last_accessed_details(job_id=_)
+    client.get_service_last_accessed_details(
+        **_request(GetServiceLastAccessedDetailsInputDict)
+    )
+    client.get_service_last_accessed_details(
+        _request(GetServiceLastAccessedDetailsInput)
+    )
+    client.get_service_last_accessed_details(
+        _request(GetServiceLastAccessedDetailsInputDict)
+    )
+    client.get_service_last_accessed_details_with_entities(
+        job_id=_, service_namespace=_
+    )
+    client.get_service_last_accessed_details_with_entities(
+        **_request(GetServiceLastAccessedDetailsWithEntitiesInputDict)
+    )
+    client.get_service_last_accessed_details_with_entities(
+        _request(GetServiceLastAccessedDetailsWithEntitiesInput)
+    )
+    client.get_service_last_accessed_details_with_entities(
+        _request(GetServiceLastAccessedDetailsWithEntitiesInputDict)
+    )
+    client.get_service_linked_role_deletion_status(deletion_task_id=_)
+    client.get_service_linked_role_deletion_status(
+        **_request(GetServiceLinkedRoleDeletionStatusInputDict)
+    )
+    client.get_service_linked_role_deletion_status(
+        _request(GetServiceLinkedRoleDeletionStatusInput)
+    )
+    client.get_service_linked_role_deletion_status(
+        _request(GetServiceLinkedRoleDeletionStatusInputDict)
+    )
+    client.get_ssh_public_key(user_name=_, ssh_public_key_id=_, encoding=_)
+    client.get_ssh_public_key(**_request(GetSSHPublicKeyInputDict))
+    client.get_ssh_public_key(_request(GetSSHPublicKeyInput))
+    client.get_ssh_public_key(_request(GetSSHPublicKeyInputDict))
+    client.get_user()
+    client.get_user(**_request(GetUserInputDict))
+    client.get_user(_request(GetUserInput))
+    client.get_user(_request(GetUserInputDict))
+    client.get_user_policy(user_name=_, policy_name=_)
+    client.get_user_policy(**_request(GetUserPolicyInputDict))
+    client.get_user_policy(_request(GetUserPolicyInput))
+    client.get_user_policy(_request(GetUserPolicyInputDict))
+    client.list_access_keys()
+    client.list_access_keys(**_request(ListAccessKeysInputDict))
+    client.list_access_keys(_request(ListAccessKeysInput))
+    client.list_access_keys(_request(ListAccessKeysInputDict))
+    client.list_account_aliases()
+    client.list_account_aliases(**_request(ListAccountAliasesInputDict))
+    client.list_account_aliases(_request(ListAccountAliasesInput))
+    client.list_account_aliases(_request(ListAccountAliasesInputDict))
+    client.list_attached_group_policies(group_name=_)
+    client.list_attached_group_policies(**_request(ListAttachedGroupPoliciesInputDict))
+    client.list_attached_group_policies(_request(ListAttachedGroupPoliciesInput))
+    client.list_attached_group_policies(_request(ListAttachedGroupPoliciesInputDict))
+    client.list_attached_role_policies(role_name=_)
+    client.list_attached_role_policies(**_request(ListAttachedRolePoliciesInputDict))
+    client.list_attached_role_policies(_request(ListAttachedRolePoliciesInput))
+    client.list_attached_role_policies(_request(ListAttachedRolePoliciesInputDict))
+    client.list_attached_user_policies(user_name=_)
+    client.list_attached_user_policies(**_request(ListAttachedUserPoliciesInputDict))
+    client.list_attached_user_policies(_request(ListAttachedUserPoliciesInput))
+    client.list_attached_user_policies(_request(ListAttachedUserPoliciesInputDict))
+    client.list_delegation_requests()
+    client.list_delegation_requests(**_request(ListDelegationRequestsInputDict))
+    client.list_delegation_requests(_request(ListDelegationRequestsInput))
+    client.list_delegation_requests(_request(ListDelegationRequestsInputDict))
+    client.list_entities_for_policy(policy_arn=_)
+    client.list_entities_for_policy(**_request(ListEntitiesForPolicyInputDict))
+    client.list_entities_for_policy(_request(ListEntitiesForPolicyInput))
+    client.list_entities_for_policy(_request(ListEntitiesForPolicyInputDict))
+    client.list_group_policies(group_name=_)
+    client.list_group_policies(**_request(ListGroupPoliciesInputDict))
+    client.list_group_policies(_request(ListGroupPoliciesInput))
+    client.list_group_policies(_request(ListGroupPoliciesInputDict))
+    client.list_groups()
+    client.list_groups(**_request(ListGroupsInputDict))
+    client.list_groups(_request(ListGroupsInput))
+    client.list_groups(_request(ListGroupsInputDict))
+    client.list_groups_for_user(user_name=_)
+    client.list_groups_for_user(**_request(ListGroupsForUserInputDict))
+    client.list_groups_for_user(_request(ListGroupsForUserInput))
+    client.list_groups_for_user(_request(ListGroupsForUserInputDict))
+    client.list_instance_profiles()
+    client.list_instance_profiles(**_request(ListInstanceProfilesInputDict))
+    client.list_instance_profiles(_request(ListInstanceProfilesInput))
+    client.list_instance_profiles(_request(ListInstanceProfilesInputDict))
+    client.list_instance_profiles_for_role(role_name=_)
+    client.list_instance_profiles_for_role(
+        **_request(ListInstanceProfilesForRoleInputDict)
+    )
+    client.list_instance_profiles_for_role(_request(ListInstanceProfilesForRoleInput))
+    client.list_instance_profiles_for_role(
+        _request(ListInstanceProfilesForRoleInputDict)
+    )
+    client.list_instance_profile_tags(instance_profile_name=_)
+    client.list_instance_profile_tags(**_request(ListInstanceProfileTagsInputDict))
+    client.list_instance_profile_tags(_request(ListInstanceProfileTagsInput))
+    client.list_instance_profile_tags(_request(ListInstanceProfileTagsInputDict))
+    client.list_mfa_devices()
+    client.list_mfa_devices(**_request(ListMFADevicesInputDict))
+    client.list_mfa_devices(_request(ListMFADevicesInput))
+    client.list_mfa_devices(_request(ListMFADevicesInputDict))
+    client.list_mfa_device_tags(serial_number=_)
+    client.list_mfa_device_tags(**_request(ListMFADeviceTagsInputDict))
+    client.list_mfa_device_tags(_request(ListMFADeviceTagsInput))
+    client.list_mfa_device_tags(_request(ListMFADeviceTagsInputDict))
+    client.list_open_id_connect_providers()
+    client.list_open_id_connect_providers(
+        **_request(ListOpenIDConnectProvidersInputDict)
+    )
+    client.list_open_id_connect_providers(_request(ListOpenIDConnectProvidersInput))
+    client.list_open_id_connect_providers(_request(ListOpenIDConnectProvidersInputDict))
+    client.list_open_id_connect_provider_tags(open_id_connect_provider_arn=_)
+    client.list_open_id_connect_provider_tags(
+        **_request(ListOpenIDConnectProviderTagsInputDict)
+    )
+    client.list_open_id_connect_provider_tags(
+        _request(ListOpenIDConnectProviderTagsInput)
+    )
+    client.list_open_id_connect_provider_tags(
+        _request(ListOpenIDConnectProviderTagsInputDict)
+    )
+    client.list_organizations_features()
+    client.list_organizations_features(**_request(ListOrganizationsFeaturesInputDict))
+    client.list_organizations_features(_request(ListOrganizationsFeaturesInput))
+    client.list_organizations_features(_request(ListOrganizationsFeaturesInputDict))
+    client.list_policies()
+    client.list_policies(**_request(ListPoliciesInputDict))
+    client.list_policies(_request(ListPoliciesInput))
+    client.list_policies(_request(ListPoliciesInputDict))
+    client.list_policies_granting_service_access(arn=_, service_namespaces=_)
+    client.list_policies_granting_service_access(
+        **_request(ListPoliciesGrantingServiceAccessInputDict)
+    )
+    client.list_policies_granting_service_access(
+        _request(ListPoliciesGrantingServiceAccessInput)
+    )
+    client.list_policies_granting_service_access(
+        _request(ListPoliciesGrantingServiceAccessInputDict)
+    )
+    client.list_policy_tags(policy_arn=_)
+    client.list_policy_tags(**_request(ListPolicyTagsInputDict))
+    client.list_policy_tags(_request(ListPolicyTagsInput))
+    client.list_policy_tags(_request(ListPolicyTagsInputDict))
+    client.list_policy_versions(policy_arn=_)
+    client.list_policy_versions(**_request(ListPolicyVersionsInputDict))
+    client.list_policy_versions(_request(ListPolicyVersionsInput))
+    client.list_policy_versions(_request(ListPolicyVersionsInputDict))
+    client.list_role_policies(role_name=_)
+    client.list_role_policies(**_request(ListRolePoliciesInputDict))
+    client.list_role_policies(_request(ListRolePoliciesInput))
+    client.list_role_policies(_request(ListRolePoliciesInputDict))
+    client.list_roles()
+    client.list_roles(**_request(ListRolesInputDict))
+    client.list_roles(_request(ListRolesInput))
+    client.list_roles(_request(ListRolesInputDict))
+    client.list_role_tags(role_name=_)
+    client.list_role_tags(**_request(ListRoleTagsInputDict))
+    client.list_role_tags(_request(ListRoleTagsInput))
+    client.list_role_tags(_request(ListRoleTagsInputDict))
+    client.list_saml_providers()
+    client.list_saml_providers(**_request(ListSAMLProvidersInputDict))
+    client.list_saml_providers(_request(ListSAMLProvidersInput))
+    client.list_saml_providers(_request(ListSAMLProvidersInputDict))
+    client.list_saml_provider_tags(saml_provider_arn=_)
+    client.list_saml_provider_tags(**_request(ListSAMLProviderTagsInputDict))
+    client.list_saml_provider_tags(_request(ListSAMLProviderTagsInput))
+    client.list_saml_provider_tags(_request(ListSAMLProviderTagsInputDict))
+    client.list_server_certificates()
+    client.list_server_certificates(**_request(ListServerCertificatesInputDict))
+    client.list_server_certificates(_request(ListServerCertificatesInput))
+    client.list_server_certificates(_request(ListServerCertificatesInputDict))
+    client.list_server_certificate_tags(server_certificate_name=_)
+    client.list_server_certificate_tags(**_request(ListServerCertificateTagsInputDict))
+    client.list_server_certificate_tags(_request(ListServerCertificateTagsInput))
+    client.list_server_certificate_tags(_request(ListServerCertificateTagsInputDict))
+    client.list_service_specific_credentials()
+    client.list_service_specific_credentials(
+        **_request(ListServiceSpecificCredentialsInputDict)
+    )
+    client.list_service_specific_credentials(
+        _request(ListServiceSpecificCredentialsInput)
+    )
+    client.list_service_specific_credentials(
+        _request(ListServiceSpecificCredentialsInputDict)
+    )
+    client.list_signing_certificates()
+    client.list_signing_certificates(**_request(ListSigningCertificatesInputDict))
+    client.list_signing_certificates(_request(ListSigningCertificatesInput))
+    client.list_signing_certificates(_request(ListSigningCertificatesInputDict))
+    client.list_ssh_public_keys()
+    client.list_ssh_public_keys(**_request(ListSSHPublicKeysInputDict))
+    client.list_ssh_public_keys(_request(ListSSHPublicKeysInput))
+    client.list_ssh_public_keys(_request(ListSSHPublicKeysInputDict))
+    client.list_user_policies(user_name=_)
+    client.list_user_policies(**_request(ListUserPoliciesInputDict))
+    client.list_user_policies(_request(ListUserPoliciesInput))
+    client.list_user_policies(_request(ListUserPoliciesInputDict))
+    client.list_users()
+    client.list_users(**_request(ListUsersInputDict))
+    client.list_users(_request(ListUsersInput))
+    client.list_users(_request(ListUsersInputDict))
+    client.list_user_tags(user_name=_)
+    client.list_user_tags(**_request(ListUserTagsInputDict))
+    client.list_user_tags(_request(ListUserTagsInput))
+    client.list_user_tags(_request(ListUserTagsInputDict))
+    client.list_virtual_mfa_devices()
+    client.list_virtual_mfa_devices(**_request(ListVirtualMFADevicesInputDict))
+    client.list_virtual_mfa_devices(_request(ListVirtualMFADevicesInput))
+    client.list_virtual_mfa_devices(_request(ListVirtualMFADevicesInputDict))
+    client.put_account_properties(properties=_)
+    client.put_account_properties(**_request(PutAccountPropertiesInputDict))
+    client.put_account_properties(_request(PutAccountPropertiesInput))
+    client.put_account_properties(_request(PutAccountPropertiesInputDict))
+    client.put_group_policy(group_name=_, policy_name=_, policy_document=_)
+    client.put_group_policy(**_request(PutGroupPolicyInputDict))
+    client.put_group_policy(_request(PutGroupPolicyInput))
+    client.put_group_policy(_request(PutGroupPolicyInputDict))
+    client.put_role_permissions_boundary(role_name=_, permissions_boundary=_)
+    client.put_role_permissions_boundary(
+        **_request(PutRolePermissionsBoundaryInputDict)
+    )
+    client.put_role_permissions_boundary(_request(PutRolePermissionsBoundaryInput))
+    client.put_role_permissions_boundary(_request(PutRolePermissionsBoundaryInputDict))
+    client.put_role_policy(role_name=_, policy_name=_, policy_document=_)
+    client.put_role_policy(**_request(PutRolePolicyInputDict))
+    client.put_role_policy(_request(PutRolePolicyInput))
+    client.put_role_policy(_request(PutRolePolicyInputDict))
+    client.put_user_permissions_boundary(user_name=_, permissions_boundary=_)
+    client.put_user_permissions_boundary(
+        **_request(PutUserPermissionsBoundaryInputDict)
+    )
+    client.put_user_permissions_boundary(_request(PutUserPermissionsBoundaryInput))
+    client.put_user_permissions_boundary(_request(PutUserPermissionsBoundaryInputDict))
+    client.put_user_policy(user_name=_, policy_name=_, policy_document=_)
+    client.put_user_policy(**_request(PutUserPolicyInputDict))
+    client.put_user_policy(_request(PutUserPolicyInput))
+    client.put_user_policy(_request(PutUserPolicyInputDict))
+    client.reject_delegation_request(delegation_request_id=_)
+    client.reject_delegation_request(**_request(RejectDelegationRequestInputDict))
+    client.reject_delegation_request(_request(RejectDelegationRequestInput))
+    client.reject_delegation_request(_request(RejectDelegationRequestInputDict))
+    client.remove_client_id_from_open_id_connect_provider(
+        open_id_connect_provider_arn=_, client_id=_
+    )
+    client.remove_client_id_from_open_id_connect_provider(
+        **_request(RemoveClientIDFromOpenIDConnectProviderInputDict)
+    )
+    client.remove_client_id_from_open_id_connect_provider(
+        _request(RemoveClientIDFromOpenIDConnectProviderInput)
+    )
+    client.remove_client_id_from_open_id_connect_provider(
+        _request(RemoveClientIDFromOpenIDConnectProviderInputDict)
+    )
+    client.remove_role_from_instance_profile(instance_profile_name=_, role_name=_)
+    client.remove_role_from_instance_profile(
+        **_request(RemoveRoleFromInstanceProfileInputDict)
+    )
+    client.remove_role_from_instance_profile(
+        _request(RemoveRoleFromInstanceProfileInput)
+    )
+    client.remove_role_from_instance_profile(
+        _request(RemoveRoleFromInstanceProfileInputDict)
+    )
+    client.remove_user_from_group(group_name=_, user_name=_)
+    client.remove_user_from_group(**_request(RemoveUserFromGroupInputDict))
+    client.remove_user_from_group(_request(RemoveUserFromGroupInput))
+    client.remove_user_from_group(_request(RemoveUserFromGroupInputDict))
+    client.reset_service_specific_credential(service_specific_credential_id=_)
+    client.reset_service_specific_credential(
+        **_request(ResetServiceSpecificCredentialInputDict)
+    )
+    client.reset_service_specific_credential(
+        _request(ResetServiceSpecificCredentialInput)
+    )
+    client.reset_service_specific_credential(
+        _request(ResetServiceSpecificCredentialInputDict)
+    )
+    client.resync_mfa_device(
+        user_name=_, serial_number=_, authentication_code1=_, authentication_code2=_
+    )
+    client.resync_mfa_device(**_request(ResyncMFADeviceInputDict))
+    client.resync_mfa_device(_request(ResyncMFADeviceInput))
+    client.resync_mfa_device(_request(ResyncMFADeviceInputDict))
+    client.send_delegation_token(delegation_request_id=_)
+    client.send_delegation_token(**_request(SendDelegationTokenInputDict))
+    client.send_delegation_token(_request(SendDelegationTokenInput))
+    client.send_delegation_token(_request(SendDelegationTokenInputDict))
+    client.set_default_policy_version(policy_arn=_, version_id=_)
+    client.set_default_policy_version(**_request(SetDefaultPolicyVersionInputDict))
+    client.set_default_policy_version(_request(SetDefaultPolicyVersionInput))
+    client.set_default_policy_version(_request(SetDefaultPolicyVersionInputDict))
+    client.set_security_token_service_preferences(global_endpoint_token_version=_)
+    client.set_security_token_service_preferences(
+        **_request(SetSecurityTokenServicePreferencesInputDict)
+    )
+    client.set_security_token_service_preferences(
+        _request(SetSecurityTokenServicePreferencesInput)
+    )
+    client.set_security_token_service_preferences(
+        _request(SetSecurityTokenServicePreferencesInputDict)
+    )
+    client.simulate_custom_policy(policy_input_list=_, action_names=_)
+    client.simulate_custom_policy(**_request(SimulateCustomPolicyInputDict))
+    client.simulate_custom_policy(_request(SimulateCustomPolicyInput))
+    client.simulate_custom_policy(_request(SimulateCustomPolicyInputDict))
+    client.simulate_principal_policy(policy_source_arn=_, action_names=_)
+    client.simulate_principal_policy(**_request(SimulatePrincipalPolicyInputDict))
+    client.simulate_principal_policy(_request(SimulatePrincipalPolicyInput))
+    client.simulate_principal_policy(_request(SimulatePrincipalPolicyInputDict))
+    client.tag_instance_profile(instance_profile_name=_, tags=_)
+    client.tag_instance_profile(**_request(TagInstanceProfileInputDict))
+    client.tag_instance_profile(_request(TagInstanceProfileInput))
+    client.tag_instance_profile(_request(TagInstanceProfileInputDict))
+    client.tag_mfa_device(serial_number=_, tags=_)
+    client.tag_mfa_device(**_request(TagMFADeviceInputDict))
+    client.tag_mfa_device(_request(TagMFADeviceInput))
+    client.tag_mfa_device(_request(TagMFADeviceInputDict))
+    client.tag_open_id_connect_provider(open_id_connect_provider_arn=_, tags=_)
+    client.tag_open_id_connect_provider(**_request(TagOpenIDConnectProviderInputDict))
+    client.tag_open_id_connect_provider(_request(TagOpenIDConnectProviderInput))
+    client.tag_open_id_connect_provider(_request(TagOpenIDConnectProviderInputDict))
+    client.tag_policy(policy_arn=_, tags=_)
+    client.tag_policy(**_request(TagPolicyInputDict))
+    client.tag_policy(_request(TagPolicyInput))
+    client.tag_policy(_request(TagPolicyInputDict))
+    client.tag_role(role_name=_, tags=_)
+    client.tag_role(**_request(TagRoleInputDict))
+    client.tag_role(_request(TagRoleInput))
+    client.tag_role(_request(TagRoleInputDict))
+    client.tag_saml_provider(saml_provider_arn=_, tags=_)
+    client.tag_saml_provider(**_request(TagSAMLProviderInputDict))
+    client.tag_saml_provider(_request(TagSAMLProviderInput))
+    client.tag_saml_provider(_request(TagSAMLProviderInputDict))
+    client.tag_server_certificate(server_certificate_name=_, tags=_)
+    client.tag_server_certificate(**_request(TagServerCertificateInputDict))
+    client.tag_server_certificate(_request(TagServerCertificateInput))
+    client.tag_server_certificate(_request(TagServerCertificateInputDict))
+    client.tag_user(user_name=_, tags=_)
+    client.tag_user(**_request(TagUserInputDict))
+    client.tag_user(_request(TagUserInput))
+    client.tag_user(_request(TagUserInputDict))
+    client.untag_instance_profile(instance_profile_name=_, tag_keys=_)
+    client.untag_instance_profile(**_request(UntagInstanceProfileInputDict))
+    client.untag_instance_profile(_request(UntagInstanceProfileInput))
+    client.untag_instance_profile(_request(UntagInstanceProfileInputDict))
+    client.untag_mfa_device(serial_number=_, tag_keys=_)
+    client.untag_mfa_device(**_request(UntagMFADeviceInputDict))
+    client.untag_mfa_device(_request(UntagMFADeviceInput))
+    client.untag_mfa_device(_request(UntagMFADeviceInputDict))
+    client.untag_open_id_connect_provider(open_id_connect_provider_arn=_, tag_keys=_)
+    client.untag_open_id_connect_provider(
+        **_request(UntagOpenIDConnectProviderInputDict)
+    )
+    client.untag_open_id_connect_provider(_request(UntagOpenIDConnectProviderInput))
+    client.untag_open_id_connect_provider(_request(UntagOpenIDConnectProviderInputDict))
+    client.untag_policy(policy_arn=_, tag_keys=_)
+    client.untag_policy(**_request(UntagPolicyInputDict))
+    client.untag_policy(_request(UntagPolicyInput))
+    client.untag_policy(_request(UntagPolicyInputDict))
+    client.untag_role(role_name=_, tag_keys=_)
+    client.untag_role(**_request(UntagRoleInputDict))
+    client.untag_role(_request(UntagRoleInput))
+    client.untag_role(_request(UntagRoleInputDict))
+    client.untag_saml_provider(saml_provider_arn=_, tag_keys=_)
+    client.untag_saml_provider(**_request(UntagSAMLProviderInputDict))
+    client.untag_saml_provider(_request(UntagSAMLProviderInput))
+    client.untag_saml_provider(_request(UntagSAMLProviderInputDict))
+    client.untag_server_certificate(server_certificate_name=_, tag_keys=_)
+    client.untag_server_certificate(**_request(UntagServerCertificateInputDict))
+    client.untag_server_certificate(_request(UntagServerCertificateInput))
+    client.untag_server_certificate(_request(UntagServerCertificateInputDict))
+    client.untag_user(user_name=_, tag_keys=_)
+    client.untag_user(**_request(UntagUserInputDict))
+    client.untag_user(_request(UntagUserInput))
+    client.untag_user(_request(UntagUserInputDict))
+    client.update_access_key(access_key_id=_, status=_)
+    client.update_access_key(**_request(UpdateAccessKeyInputDict))
+    client.update_access_key(_request(UpdateAccessKeyInput))
+    client.update_access_key(_request(UpdateAccessKeyInputDict))
+    client.update_account_password_policy()
+    client.update_account_password_policy(
+        **_request(UpdateAccountPasswordPolicyInputDict)
+    )
+    client.update_account_password_policy(_request(UpdateAccountPasswordPolicyInput))
+    client.update_account_password_policy(
+        _request(UpdateAccountPasswordPolicyInputDict)
+    )
+    client.update_assume_role_policy(role_name=_, policy_document=_)
+    client.update_assume_role_policy(**_request(UpdateAssumeRolePolicyInputDict))
+    client.update_assume_role_policy(_request(UpdateAssumeRolePolicyInput))
+    client.update_assume_role_policy(_request(UpdateAssumeRolePolicyInputDict))
+    client.update_delegation_request(delegation_request_id=_)
+    client.update_delegation_request(**_request(UpdateDelegationRequestInputDict))
+    client.update_delegation_request(_request(UpdateDelegationRequestInput))
+    client.update_delegation_request(_request(UpdateDelegationRequestInputDict))
+    client.update_group(group_name=_)
+    client.update_group(**_request(UpdateGroupInputDict))
+    client.update_group(_request(UpdateGroupInput))
+    client.update_group(_request(UpdateGroupInputDict))
+    client.update_login_profile(user_name=_)
+    client.update_login_profile(**_request(UpdateLoginProfileInputDict))
+    client.update_login_profile(_request(UpdateLoginProfileInput))
+    client.update_login_profile(_request(UpdateLoginProfileInputDict))
+    client.update_open_id_connect_provider_thumbprint(
+        open_id_connect_provider_arn=_, thumbprint_list=_
+    )
+    client.update_open_id_connect_provider_thumbprint(
+        **_request(UpdateOpenIDConnectProviderThumbprintInputDict)
+    )
+    client.update_open_id_connect_provider_thumbprint(
+        _request(UpdateOpenIDConnectProviderThumbprintInput)
+    )
+    client.update_open_id_connect_provider_thumbprint(
+        _request(UpdateOpenIDConnectProviderThumbprintInputDict)
+    )
+    client.update_role(role_name=_)
+    client.update_role(**_request(UpdateRoleInputDict))
+    client.update_role(_request(UpdateRoleInput))
+    client.update_role(_request(UpdateRoleInputDict))
+    client.update_role_description(role_name=_, description=_)
+    client.update_role_description(**_request(UpdateRoleDescriptionInputDict))
+    client.update_role_description(_request(UpdateRoleDescriptionInput))
+    client.update_role_description(_request(UpdateRoleDescriptionInputDict))
+    client.update_saml_provider(saml_provider_arn=_)
+    client.update_saml_provider(**_request(UpdateSAMLProviderInputDict))
+    client.update_saml_provider(_request(UpdateSAMLProviderInput))
+    client.update_saml_provider(_request(UpdateSAMLProviderInputDict))
+    client.update_server_certificate(server_certificate_name=_)
+    client.update_server_certificate(**_request(UpdateServerCertificateInputDict))
+    client.update_server_certificate(_request(UpdateServerCertificateInput))
+    client.update_server_certificate(_request(UpdateServerCertificateInputDict))
+    client.update_service_specific_credential(
+        service_specific_credential_id=_, status=_
+    )
+    client.update_service_specific_credential(
+        **_request(UpdateServiceSpecificCredentialInputDict)
+    )
+    client.update_service_specific_credential(
+        _request(UpdateServiceSpecificCredentialInput)
+    )
+    client.update_service_specific_credential(
+        _request(UpdateServiceSpecificCredentialInputDict)
+    )
+    client.update_signing_certificate(certificate_id=_, status=_)
+    client.update_signing_certificate(**_request(UpdateSigningCertificateInputDict))
+    client.update_signing_certificate(_request(UpdateSigningCertificateInput))
+    client.update_signing_certificate(_request(UpdateSigningCertificateInputDict))
+    client.update_ssh_public_key(user_name=_, ssh_public_key_id=_, status=_)
+    client.update_ssh_public_key(**_request(UpdateSSHPublicKeyInputDict))
+    client.update_ssh_public_key(_request(UpdateSSHPublicKeyInput))
+    client.update_ssh_public_key(_request(UpdateSSHPublicKeyInputDict))
+    client.update_user(user_name=_)
+    client.update_user(**_request(UpdateUserInputDict))
+    client.update_user(_request(UpdateUserInput))
+    client.update_user(_request(UpdateUserInputDict))
+    client.upload_server_certificate(
+        server_certificate_name=_, certificate_body=_, private_key=_
+    )
+    client.upload_server_certificate(**_request(UploadServerCertificateInputDict))
+    client.upload_server_certificate(_request(UploadServerCertificateInput))
+    client.upload_server_certificate(_request(UploadServerCertificateInputDict))
+    client.upload_signing_certificate(certificate_body=_)
+    client.upload_signing_certificate(**_request(UploadSigningCertificateInputDict))
+    client.upload_signing_certificate(_request(UploadSigningCertificateInput))
+    client.upload_signing_certificate(_request(UploadSigningCertificateInputDict))
+    client.upload_ssh_public_key(user_name=_, ssh_public_key_body=_)
+    client.upload_ssh_public_key(**_request(UploadSSHPublicKeyInputDict))
+    client.upload_ssh_public_key(_request(UploadSSHPublicKeyInput))
+    client.upload_ssh_public_key(_request(UploadSSHPublicKeyInputDict))

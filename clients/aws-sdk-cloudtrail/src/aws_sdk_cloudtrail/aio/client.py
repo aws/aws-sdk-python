@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import cast
+from typing import Unpack as _Unpack, cast, overload as _overload
 
 from smithy_aws_core.aio.identity.chain import AsyncIdentityChain
 from smithy_aws_core.config.types import ConfigSource
@@ -20,125 +20,65 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from ..models import (
-        AddTagsInput,
         AddTagsOutput,
-        CancelQueryInput,
         CancelQueryOutput,
-        CreateChannelInput,
         CreateChannelOutput,
-        CreateDashboardInput,
         CreateDashboardOutput,
-        CreateEventDataStoreInput,
         CreateEventDataStoreOutput,
-        CreateTrailInput,
         CreateTrailOutput,
-        DeleteChannelInput,
         DeleteChannelOutput,
-        DeleteDashboardInput,
         DeleteDashboardOutput,
-        DeleteEventDataStoreInput,
         DeleteEventDataStoreOutput,
-        DeleteResourcePolicyInput,
         DeleteResourcePolicyOutput,
-        DeleteTrailInput,
         DeleteTrailOutput,
-        DeregisterOrganizationDelegatedAdminInput,
         DeregisterOrganizationDelegatedAdminOutput,
-        DescribeQueryInput,
         DescribeQueryOutput,
-        DescribeTrailsInput,
         DescribeTrailsOutput,
-        DisableFederationInput,
         DisableFederationOutput,
-        EnableFederationInput,
         EnableFederationOutput,
-        GenerateQueryInput,
         GenerateQueryOutput,
-        GetChannelInput,
         GetChannelOutput,
-        GetDashboardInput,
         GetDashboardOutput,
-        GetEventConfigurationInput,
         GetEventConfigurationOutput,
-        GetEventDataStoreInput,
         GetEventDataStoreOutput,
-        GetEventSelectorsInput,
         GetEventSelectorsOutput,
-        GetImportInput,
         GetImportOutput,
-        GetInsightSelectorsInput,
         GetInsightSelectorsOutput,
-        GetQueryResultsInput,
         GetQueryResultsOutput,
-        GetResourcePolicyInput,
         GetResourcePolicyOutput,
-        GetTrailInput,
         GetTrailOutput,
-        GetTrailStatusInput,
         GetTrailStatusOutput,
-        ListChannelsInput,
         ListChannelsOutput,
-        ListDashboardsInput,
         ListDashboardsOutput,
-        ListEventDataStoresInput,
         ListEventDataStoresOutput,
-        ListImportFailuresInput,
         ListImportFailuresOutput,
-        ListImportsInput,
         ListImportsOutput,
-        ListInsightsDataInput,
         ListInsightsDataOutput,
-        ListInsightsMetricDataInput,
         ListInsightsMetricDataOutput,
-        ListPublicKeysInput,
         ListPublicKeysOutput,
-        ListQueriesInput,
         ListQueriesOutput,
-        ListTagsInput,
         ListTagsOutput,
-        ListTrailsInput,
         ListTrailsOutput,
-        LookupEventsInput,
         LookupEventsOutput,
-        PutEventConfigurationInput,
         PutEventConfigurationOutput,
-        PutEventSelectorsInput,
         PutEventSelectorsOutput,
-        PutInsightSelectorsInput,
         PutInsightSelectorsOutput,
-        PutResourcePolicyInput,
         PutResourcePolicyOutput,
-        RegisterOrganizationDelegatedAdminInput,
         RegisterOrganizationDelegatedAdminOutput,
-        RemoveTagsInput,
         RemoveTagsOutput,
-        RestoreEventDataStoreInput,
         RestoreEventDataStoreOutput,
-        SearchSampleQueriesInput,
         SearchSampleQueriesOutput,
-        StartDashboardRefreshInput,
         StartDashboardRefreshOutput,
-        StartEventDataStoreIngestionInput,
         StartEventDataStoreIngestionOutput,
-        StartImportInput,
         StartImportOutput,
-        StartLoggingInput,
         StartLoggingOutput,
-        StartQueryInput,
         StartQueryOutput,
-        StopEventDataStoreIngestionInput,
         StopEventDataStoreIngestionOutput,
-        StopImportInput,
         StopImportOutput,
-        StopLoggingInput,
         StopLoggingOutput,
-        UpdateChannelInput,
         UpdateChannelOutput,
-        UpdateDashboardInput,
         UpdateDashboardOutput,
-        UpdateEventDataStoreInput,
         UpdateEventDataStoreOutput,
-        UpdateTrailInput,
         UpdateTrailOutput,
     )
 
@@ -175,10 +115,24 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
     Services API call listed in the log files.
     """
 
-    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
+    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
 
+    @_overload
     async def add_tags(
-        self, input: AddTagsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.AddTagsInput | _models.AddTagsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AddTagsOutput: ...
+
+    @_overload
+    async def add_tags(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AddTagsInputDict],
     ) -> AddTagsOutput:
         """
         Adds one or more tags to a trail, event data store, dashboard, or
@@ -192,8 +146,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         its home Region).
 
         Args:
-            input:
-                An instance of `AddTagsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -203,10 +155,33 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `AddTagsOutput`.
         """
-        return await self._invoke(input, _models.ADD_TAGS, [], plugins)
 
+    async def add_tags(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AddTagsOutput:
+        return await self._invoke(
+            self._select_input(_models.ADD_TAGS, args, kwargs),
+            _models.ADD_TAGS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def cancel_query(
-        self, input: CancelQueryInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CancelQueryInput | _models.CancelQueryInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CancelQueryOutput: ...
+
+    @_overload
+    async def cancel_query(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CancelQueryInputDict],
     ) -> CancelQueryOutput:
         """
         Warning:
@@ -223,8 +198,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         might show as `CANCELLED` even if the operation is not yet finished.
 
         Args:
-            input:
-                An instance of `CancelQueryInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -234,10 +207,33 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `CancelQueryOutput`.
         """
-        return await self._invoke(input, _models.CANCEL_QUERY, [], plugins)
 
+    async def cancel_query(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CancelQueryOutput:
+        return await self._invoke(
+            self._select_input(_models.CANCEL_QUERY, args, kwargs),
+            _models.CANCEL_QUERY,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_channel(
-        self, input: CreateChannelInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateChannelInput | _models.CreateChannelInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateChannelOutput: ...
+
+    @_overload
+    async def create_channel(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateChannelInputDict],
     ) -> CreateChannelOutput:
         """
         Warning:
@@ -252,8 +248,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         data store can log events from the partner or source that you specify.
 
         Args:
-            input:
-                An instance of `CreateChannelInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -263,10 +257,33 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `CreateChannelOutput`.
         """
-        return await self._invoke(input, _models.CREATE_CHANNEL, [], plugins)
 
+    async def create_channel(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateChannelOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_CHANNEL, args, kwargs),
+            _models.CREATE_CHANNEL,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_dashboard(
-        self, input: CreateDashboardInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateDashboardInput | _models.CreateDashboardInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateDashboardOutput: ...
+
+    @_overload
+    async def create_dashboard(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateDashboardInputDict],
     ) -> CreateDashboardOutput:
         """
         Warning:
@@ -311,8 +328,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         in the *CloudTrail User Guide*.
 
         Args:
-            input:
-                An instance of `CreateDashboardInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -322,10 +337,34 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `CreateDashboardOutput`.
         """
-        return await self._invoke(input, _models.CREATE_DASHBOARD, [], plugins)
 
+    async def create_dashboard(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateDashboardOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_DASHBOARD, args, kwargs),
+            _models.CREATE_DASHBOARD,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_event_data_store(
-        self, input: CreateEventDataStoreInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateEventDataStoreInput
+        | _models.CreateEventDataStoreInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateEventDataStoreOutput: ...
+
+    @_overload
+    async def create_event_data_store(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateEventDataStoreInputDict],
     ) -> CreateEventDataStoreOutput:
         """
         Warning:
@@ -338,8 +377,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Creates a new event data store.
 
         Args:
-            input:
-                An instance of `CreateEventDataStoreInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -349,18 +386,39 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `CreateEventDataStoreOutput`.
         """
-        return await self._invoke(input, _models.CREATE_EVENT_DATA_STORE, [], plugins)
 
+    async def create_event_data_store(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateEventDataStoreOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_EVENT_DATA_STORE, args, kwargs),
+            _models.CREATE_EVENT_DATA_STORE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_trail(
-        self, input: CreateTrailInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateTrailInput | _models.CreateTrailInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateTrailOutput: ...
+
+    @_overload
+    async def create_trail(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateTrailInputDict],
     ) -> CreateTrailOutput:
         """
         Creates a trail that specifies the settings for delivery of log data to
         an Amazon S3 bucket.
 
         Args:
-            input:
-                An instance of `CreateTrailInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -370,10 +428,33 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `CreateTrailOutput`.
         """
-        return await self._invoke(input, _models.CREATE_TRAIL, [], plugins)
 
+    async def create_trail(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateTrailOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_TRAIL, args, kwargs),
+            _models.CREATE_TRAIL,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_channel(
-        self, input: DeleteChannelInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteChannelInput | _models.DeleteChannelInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteChannelOutput: ...
+
+    @_overload
+    async def delete_channel(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteChannelInputDict],
     ) -> DeleteChannelOutput:
         """
         Warning:
@@ -386,8 +467,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Deletes a channel.
 
         Args:
-            input:
-                An instance of `DeleteChannelInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -397,10 +476,33 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `DeleteChannelOutput`.
         """
-        return await self._invoke(input, _models.DELETE_CHANNEL, [], plugins)
 
+    async def delete_channel(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteChannelOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_CHANNEL, args, kwargs),
+            _models.DELETE_CHANNEL,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_dashboard(
-        self, input: DeleteDashboardInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteDashboardInput | _models.DeleteDashboardInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteDashboardOutput: ...
+
+    @_overload
+    async def delete_dashboard(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteDashboardInputDict],
     ) -> DeleteDashboardOutput:
         """
         Warning:
@@ -414,8 +516,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         termination protection enabled.
 
         Args:
-            input:
-                An instance of `DeleteDashboardInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -425,10 +525,34 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `DeleteDashboardOutput`.
         """
-        return await self._invoke(input, _models.DELETE_DASHBOARD, [], plugins)
 
+    async def delete_dashboard(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteDashboardOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_DASHBOARD, args, kwargs),
+            _models.DELETE_DASHBOARD,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_event_data_store(
-        self, input: DeleteEventDataStoreInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteEventDataStoreInput
+        | _models.DeleteEventDataStoreInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteEventDataStoreOutput: ...
+
+    @_overload
+    async def delete_event_data_store(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteEventDataStoreInputDict],
     ) -> DeleteEventDataStoreOutput:
         """
         Warning:
@@ -453,8 +577,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         data store in the `PENDING_DELETION` state does not incur costs.
 
         Args:
-            input:
-                An instance of `DeleteEventDataStoreInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -464,18 +586,40 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `DeleteEventDataStoreOutput`.
         """
-        return await self._invoke(input, _models.DELETE_EVENT_DATA_STORE, [], plugins)
 
+    async def delete_event_data_store(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteEventDataStoreOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_EVENT_DATA_STORE, args, kwargs),
+            _models.DELETE_EVENT_DATA_STORE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_resource_policy(
-        self, input: DeleteResourcePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteResourcePolicyInput
+        | _models.DeleteResourcePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteResourcePolicyOutput: ...
+
+    @_overload
+    async def delete_resource_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteResourcePolicyInputDict],
     ) -> DeleteResourcePolicyOutput:
         """
         Deletes the resource-based policy attached to the CloudTrail event data
         store, dashboard, or channel.
 
         Args:
-            input:
-                An instance of `DeleteResourcePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -485,10 +629,33 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `DeleteResourcePolicyOutput`.
         """
-        return await self._invoke(input, _models.DELETE_RESOURCE_POLICY, [], plugins)
 
+    async def delete_resource_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteResourcePolicyOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_RESOURCE_POLICY, args, kwargs),
+            _models.DELETE_RESOURCE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_trail(
-        self, input: DeleteTrailInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteTrailInput | _models.DeleteTrailInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteTrailOutput: ...
+
+    @_overload
+    async def delete_trail(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteTrailInputDict],
     ) -> DeleteTrailOutput:
         """
         Deletes a trail. This operation must be called from the Region in which
@@ -512,8 +679,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
             <https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-account-closure.html>.
 
         Args:
-            input:
-                An instance of `DeleteTrailInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -523,20 +688,40 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `DeleteTrailOutput`.
         """
-        return await self._invoke(input, _models.DELETE_TRAIL, [], plugins)
 
+    async def delete_trail(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteTrailOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_TRAIL, args, kwargs),
+            _models.DELETE_TRAIL,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def deregister_organization_delegated_admin(
         self,
-        input: DeregisterOrganizationDelegatedAdminInput,
+        request: _models.DeregisterOrganizationDelegatedAdminInput
+        | _models.DeregisterOrganizationDelegatedAdminInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeregisterOrganizationDelegatedAdminOutput: ...
+
+    @_overload
+    async def deregister_organization_delegated_admin(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeregisterOrganizationDelegatedAdminInputDict],
     ) -> DeregisterOrganizationDelegatedAdminOutput:
         """
         Removes CloudTrail delegated administrator permissions from a member
         account in an organization.
 
         Args:
-            input:
-                An instance of `DeregisterOrganizationDelegatedAdminInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -546,12 +731,35 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `DeregisterOrganizationDelegatedAdminOutput`.
         """
+
+    async def deregister_organization_delegated_admin(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeregisterOrganizationDelegatedAdminOutput:
         return await self._invoke(
-            input, _models.DEREGISTER_ORGANIZATION_DELEGATED_ADMIN, [], plugins
+            self._select_input(
+                _models.DEREGISTER_ORGANIZATION_DELEGATED_ADMIN, args, kwargs
+            ),
+            _models.DEREGISTER_ORGANIZATION_DELEGATED_ADMIN,
+            [],
+            plugins,
         )
 
+    @_overload
     async def describe_query(
-        self, input: DescribeQueryInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeQueryInput | _models.DescribeQueryInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeQueryOutput: ...
+
+    @_overload
+    async def describe_query(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeQueryInputDict],
     ) -> DescribeQueryOutput:
         """
         Warning:
@@ -572,8 +780,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         the query results of a dashboard query for the specified `RefreshId`.
 
         Args:
-            input:
-                An instance of `DescribeQueryInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -583,18 +789,39 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `DescribeQueryOutput`.
         """
-        return await self._invoke(input, _models.DESCRIBE_QUERY, [], plugins)
 
+    async def describe_query(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeQueryOutput:
+        return await self._invoke(
+            self._select_input(_models.DESCRIBE_QUERY, args, kwargs),
+            _models.DESCRIBE_QUERY,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def describe_trails(
-        self, input: DescribeTrailsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeTrailsInput | _models.DescribeTrailsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeTrailsOutput: ...
+
+    @_overload
+    async def describe_trails(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeTrailsInputDict],
     ) -> DescribeTrailsOutput:
         """
         Retrieves settings for one or more trails associated with the current
         Region for your account.
 
         Args:
-            input:
-                An instance of `DescribeTrailsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -604,10 +831,33 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `DescribeTrailsOutput`.
         """
-        return await self._invoke(input, _models.DESCRIBE_TRAILS, [], plugins)
 
+    async def describe_trails(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeTrailsOutput:
+        return await self._invoke(
+            self._select_input(_models.DESCRIBE_TRAILS, args, kwargs),
+            _models.DESCRIBE_TRAILS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def disable_federation(
-        self, input: DisableFederationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DisableFederationInput | _models.DisableFederationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DisableFederationOutput: ...
+
+    @_overload
+    async def disable_federation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DisableFederationInputDict],
     ) -> DisableFederationOutput:
         """
         Warning:
@@ -626,8 +876,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         can continue to run queries in CloudTrail Lake.
 
         Args:
-            input:
-                An instance of `DisableFederationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -637,10 +885,33 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `DisableFederationOutput`.
         """
-        return await self._invoke(input, _models.DISABLE_FEDERATION, [], plugins)
 
+    async def disable_federation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DisableFederationOutput:
+        return await self._invoke(
+            self._select_input(_models.DISABLE_FEDERATION, args, kwargs),
+            _models.DISABLE_FEDERATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def enable_federation(
-        self, input: EnableFederationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.EnableFederationInput | _models.EnableFederationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> EnableFederationOutput: ...
+
+    @_overload
+    async def enable_federation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.EnableFederationInputDict],
     ) -> EnableFederationOutput:
         """
         Warning:
@@ -673,8 +944,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         store](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation.html).
 
         Args:
-            input:
-                An instance of `EnableFederationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -684,10 +953,33 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `EnableFederationOutput`.
         """
-        return await self._invoke(input, _models.ENABLE_FEDERATION, [], plugins)
 
+    async def enable_federation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> EnableFederationOutput:
+        return await self._invoke(
+            self._select_input(_models.ENABLE_FEDERATION, args, kwargs),
+            _models.ENABLE_FEDERATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def generate_query(
-        self, input: GenerateQueryInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GenerateQueryInput | _models.GenerateQueryInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GenerateQueryOutput: ...
+
+    @_overload
+    async def generate_query(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GenerateQueryInputDict],
     ) -> GenerateQueryOutput:
         """
         Warning:
@@ -720,8 +1012,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
             recommend double-checking the LLM response.
 
         Args:
-            input:
-                An instance of `GenerateQueryInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -731,10 +1021,33 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `GenerateQueryOutput`.
         """
-        return await self._invoke(input, _models.GENERATE_QUERY, [], plugins)
 
+    async def generate_query(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GenerateQueryOutput:
+        return await self._invoke(
+            self._select_input(_models.GENERATE_QUERY, args, kwargs),
+            _models.GENERATE_QUERY,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_channel(
-        self, input: GetChannelInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetChannelInput | _models.GetChannelInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetChannelOutput: ...
+
+    @_overload
+    async def get_channel(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetChannelInputDict],
     ) -> GetChannelOutput:
         """
         Warning:
@@ -747,8 +1060,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns information about a specific channel.
 
         Args:
-            input:
-                An instance of `GetChannelInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -758,10 +1069,33 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `GetChannelOutput`.
         """
-        return await self._invoke(input, _models.GET_CHANNEL, [], plugins)
 
+    async def get_channel(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetChannelOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_CHANNEL, args, kwargs),
+            _models.GET_CHANNEL,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_dashboard(
-        self, input: GetDashboardInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetDashboardInput | _models.GetDashboardInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetDashboardOutput: ...
+
+    @_overload
+    async def get_dashboard(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetDashboardInputDict],
     ) -> GetDashboardOutput:
         """
         Warning:
@@ -774,8 +1108,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns the specified dashboard.
 
         Args:
-            input:
-                An instance of `GetDashboardInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -785,10 +1117,34 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `GetDashboardOutput`.
         """
-        return await self._invoke(input, _models.GET_DASHBOARD, [], plugins)
 
+    async def get_dashboard(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetDashboardOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_DASHBOARD, args, kwargs),
+            _models.GET_DASHBOARD,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_event_configuration(
-        self, input: GetEventConfigurationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetEventConfigurationInput
+        | _models.GetEventConfigurationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetEventConfigurationOutput: ...
+
+    @_overload
+    async def get_event_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetEventConfigurationInputDict],
     ) -> GetEventConfigurationOutput:
         """
         Retrieves the current event configuration settings for the specified
@@ -797,8 +1153,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         store, and any aggregation settings configured for the trail.
 
         Args:
-            input:
-                An instance of `GetEventConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -808,10 +1162,33 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `GetEventConfigurationOutput`.
         """
-        return await self._invoke(input, _models.GET_EVENT_CONFIGURATION, [], plugins)
 
+    async def get_event_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetEventConfigurationOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_EVENT_CONFIGURATION, args, kwargs),
+            _models.GET_EVENT_CONFIGURATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_event_data_store(
-        self, input: GetEventDataStoreInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetEventDataStoreInput | _models.GetEventDataStoreInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetEventDataStoreOutput: ...
+
+    @_overload
+    async def get_event_data_store(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetEventDataStoreInputDict],
     ) -> GetEventDataStoreOutput:
         """
         Warning:
@@ -825,8 +1202,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         or the ID portion of the ARN.
 
         Args:
-            input:
-                An instance of `GetEventDataStoreInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -836,10 +1211,33 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `GetEventDataStoreOutput`.
         """
-        return await self._invoke(input, _models.GET_EVENT_DATA_STORE, [], plugins)
 
+    async def get_event_data_store(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetEventDataStoreOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_EVENT_DATA_STORE, args, kwargs),
+            _models.GET_EVENT_DATA_STORE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_event_selectors(
-        self, input: GetEventSelectorsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetEventSelectorsInput | _models.GetEventSelectorsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetEventSelectorsOutput: ...
+
+    @_overload
+    async def get_event_selectors(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetEventSelectorsInputDict],
     ) -> GetEventSelectorsOutput:
         """
         Describes the settings for the event selectors that you configured for
@@ -872,8 +1270,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
           events](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-network-events-with-cloudtrail.html)
 
         Args:
-            input:
-                An instance of `GetEventSelectorsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -883,10 +1279,33 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `GetEventSelectorsOutput`.
         """
-        return await self._invoke(input, _models.GET_EVENT_SELECTORS, [], plugins)
 
+    async def get_event_selectors(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetEventSelectorsOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_EVENT_SELECTORS, args, kwargs),
+            _models.GET_EVENT_SELECTORS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_import(
-        self, input: GetImportInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetImportInput | _models.GetImportInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetImportOutput: ...
+
+    @_overload
+    async def get_import(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetImportInputDict],
     ) -> GetImportOutput:
         """
         Warning:
@@ -899,8 +1318,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns information about a specific import.
 
         Args:
-            input:
-                An instance of `GetImportInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -910,10 +1327,34 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `GetImportOutput`.
         """
-        return await self._invoke(input, _models.GET_IMPORT, [], plugins)
 
+    async def get_import(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetImportOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_IMPORT, args, kwargs),
+            _models.GET_IMPORT,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_insight_selectors(
-        self, input: GetInsightSelectorsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetInsightSelectorsInput
+        | _models.GetInsightSelectorsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetInsightSelectorsOutput: ...
+
+    @_overload
+    async def get_insight_selectors(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetInsightSelectorsInputDict],
     ) -> GetInsightSelectorsOutput:
         """
         Describes the settings for the Insights event selectors that you
@@ -934,8 +1375,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         in the *CloudTrail User Guide*.
 
         Args:
-            input:
-                An instance of `GetInsightSelectorsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -945,10 +1384,33 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `GetInsightSelectorsOutput`.
         """
-        return await self._invoke(input, _models.GET_INSIGHT_SELECTORS, [], plugins)
 
+    async def get_insight_selectors(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetInsightSelectorsOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_INSIGHT_SELECTORS, args, kwargs),
+            _models.GET_INSIGHT_SELECTORS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_query_results(
-        self, input: GetQueryResultsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetQueryResultsInput | _models.GetQueryResultsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetQueryResultsOutput: ...
+
+    @_overload
+    async def get_query_results(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetQueryResultsInputDict],
     ) -> GetQueryResultsOutput:
         """
         Warning:
@@ -962,8 +1424,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         returned by the `StartQuery` operation.
 
         Args:
-            input:
-                An instance of `GetQueryResultsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -973,18 +1433,39 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `GetQueryResultsOutput`.
         """
-        return await self._invoke(input, _models.GET_QUERY_RESULTS, [], plugins)
 
+    async def get_query_results(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetQueryResultsOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_QUERY_RESULTS, args, kwargs),
+            _models.GET_QUERY_RESULTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_resource_policy(
-        self, input: GetResourcePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetResourcePolicyInput | _models.GetResourcePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetResourcePolicyOutput: ...
+
+    @_overload
+    async def get_resource_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetResourcePolicyInputDict],
     ) -> GetResourcePolicyOutput:
         """
         Retrieves the JSON text of the resource-based policy document attached
         to the CloudTrail event data store, dashboard, or channel.
 
         Args:
-            input:
-                An instance of `GetResourcePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -994,17 +1475,38 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `GetResourcePolicyOutput`.
         """
-        return await self._invoke(input, _models.GET_RESOURCE_POLICY, [], plugins)
 
+    async def get_resource_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetResourcePolicyOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_RESOURCE_POLICY, args, kwargs),
+            _models.GET_RESOURCE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_trail(
-        self, input: GetTrailInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetTrailInput | _models.GetTrailInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetTrailOutput: ...
+
+    @_overload
+    async def get_trail(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetTrailInputDict],
     ) -> GetTrailOutput:
         """
         Returns settings information for a specified trail.
 
         Args:
-            input:
-                An instance of `GetTrailInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1014,10 +1516,33 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `GetTrailOutput`.
         """
-        return await self._invoke(input, _models.GET_TRAIL, [], plugins)
 
+    async def get_trail(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetTrailOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_TRAIL, args, kwargs),
+            _models.GET_TRAIL,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_trail_status(
-        self, input: GetTrailStatusInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetTrailStatusInput | _models.GetTrailStatusInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetTrailStatusOutput: ...
+
+    @_overload
+    async def get_trail_status(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetTrailStatusInputDict],
     ) -> GetTrailStatusOutput:
         """
         Returns a JSON-formatted list of information about the specified trail.
@@ -1027,8 +1552,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         all Regions, you must call the operation on each Region.
 
         Args:
-            input:
-                An instance of `GetTrailStatusInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1038,10 +1561,33 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `GetTrailStatusOutput`.
         """
-        return await self._invoke(input, _models.GET_TRAIL_STATUS, [], plugins)
 
+    async def get_trail_status(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetTrailStatusOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_TRAIL_STATUS, args, kwargs),
+            _models.GET_TRAIL_STATUS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_channels(
-        self, input: ListChannelsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListChannelsInput | _models.ListChannelsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListChannelsOutput: ...
+
+    @_overload
+    async def list_channels(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListChannelsInputDict],
     ) -> ListChannelsOutput:
         """
         Warning:
@@ -1054,8 +1600,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Lists the channels in the current account, and their source names.
 
         Args:
-            input:
-                An instance of `ListChannelsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1065,10 +1609,33 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `ListChannelsOutput`.
         """
-        return await self._invoke(input, _models.LIST_CHANNELS, [], plugins)
 
+    async def list_channels(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListChannelsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_CHANNELS, args, kwargs),
+            _models.LIST_CHANNELS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_dashboards(
-        self, input: ListDashboardsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListDashboardsInput | _models.ListDashboardsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListDashboardsOutput: ...
+
+    @_overload
+    async def list_dashboards(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListDashboardsInputDict],
     ) -> ListDashboardsOutput:
         """
         Warning:
@@ -1082,8 +1649,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Region.
 
         Args:
-            input:
-                An instance of `ListDashboardsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1093,10 +1658,34 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `ListDashboardsOutput`.
         """
-        return await self._invoke(input, _models.LIST_DASHBOARDS, [], plugins)
 
+    async def list_dashboards(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListDashboardsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_DASHBOARDS, args, kwargs),
+            _models.LIST_DASHBOARDS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_event_data_stores(
-        self, input: ListEventDataStoresInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListEventDataStoresInput
+        | _models.ListEventDataStoresInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListEventDataStoresOutput: ...
+
+    @_overload
+    async def list_event_data_stores(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListEventDataStoresInputDict],
     ) -> ListEventDataStoresOutput:
         """
         Warning:
@@ -1110,8 +1699,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         current Region.
 
         Args:
-            input:
-                An instance of `ListEventDataStoresInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1121,10 +1708,33 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `ListEventDataStoresOutput`.
         """
-        return await self._invoke(input, _models.LIST_EVENT_DATA_STORES, [], plugins)
 
+    async def list_event_data_stores(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListEventDataStoresOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_EVENT_DATA_STORES, args, kwargs),
+            _models.LIST_EVENT_DATA_STORES,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_import_failures(
-        self, input: ListImportFailuresInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListImportFailuresInput | _models.ListImportFailuresInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListImportFailuresOutput: ...
+
+    @_overload
+    async def list_import_failures(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListImportFailuresInputDict],
     ) -> ListImportFailuresOutput:
         """
         Warning:
@@ -1137,8 +1747,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns a list of failures for the specified import.
 
         Args:
-            input:
-                An instance of `ListImportFailuresInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1148,10 +1756,33 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `ListImportFailuresOutput`.
         """
-        return await self._invoke(input, _models.LIST_IMPORT_FAILURES, [], plugins)
 
+    async def list_import_failures(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListImportFailuresOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_IMPORT_FAILURES, args, kwargs),
+            _models.LIST_IMPORT_FAILURES,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_imports(
-        self, input: ListImportsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListImportsInput | _models.ListImportsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListImportsOutput: ...
+
+    @_overload
+    async def list_imports(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListImportsInputDict],
     ) -> ListImportsOutput:
         """
         Warning:
@@ -1165,8 +1796,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         `ImportStatus` or `Destination`.
 
         Args:
-            input:
-                An instance of `ListImportsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1176,10 +1805,33 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `ListImportsOutput`.
         """
-        return await self._invoke(input, _models.LIST_IMPORTS, [], plugins)
 
+    async def list_imports(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListImportsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_IMPORTS, args, kwargs),
+            _models.LIST_IMPORTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_insights_data(
-        self, input: ListInsightsDataInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListInsightsDataInput | _models.ListInsightsDataInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListInsightsDataOutput: ...
+
+    @_overload
+    async def list_insights_data(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListInsightsDataInputDict],
     ) -> ListInsightsDataOutput:
         """
         Returns Insights events generated on a trail that logs data events. You
@@ -1210,8 +1862,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
             on organization trails.
 
         Args:
-            input:
-                An instance of `ListInsightsDataInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1221,10 +1871,34 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `ListInsightsDataOutput`.
         """
-        return await self._invoke(input, _models.LIST_INSIGHTS_DATA, [], plugins)
 
+    async def list_insights_data(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListInsightsDataOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_INSIGHTS_DATA, args, kwargs),
+            _models.LIST_INSIGHTS_DATA,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_insights_metric_data(
-        self, input: ListInsightsMetricDataInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListInsightsMetricDataInput
+        | _models.ListInsightsMetricDataInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListInsightsMetricDataOutput: ...
+
+    @_overload
+    async def list_insights_metric_data(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListInsightsMetricDataInputDict],
     ) -> ListInsightsMetricDataOutput:
         """
         Returns Insights metrics data for trails that have enabled Insights. The
@@ -1269,8 +1943,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
             this API on organization trails.
 
         Args:
-            input:
-                An instance of `ListInsightsMetricDataInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1280,10 +1952,33 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `ListInsightsMetricDataOutput`.
         """
-        return await self._invoke(input, _models.LIST_INSIGHTS_METRIC_DATA, [], plugins)
 
+    async def list_insights_metric_data(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListInsightsMetricDataOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_INSIGHTS_METRIC_DATA, args, kwargs),
+            _models.LIST_INSIGHTS_METRIC_DATA,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_public_keys(
-        self, input: ListPublicKeysInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListPublicKeysInput | _models.ListPublicKeysInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListPublicKeysOutput: ...
+
+    @_overload
+    async def list_public_keys(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListPublicKeysInputDict],
     ) -> ListPublicKeysOutput:
         """
         Returns all public keys whose private keys were used to sign the digest
@@ -1298,8 +1993,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
             Region for its corresponding public key.
 
         Args:
-            input:
-                An instance of `ListPublicKeysInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1309,10 +2002,33 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `ListPublicKeysOutput`.
         """
-        return await self._invoke(input, _models.LIST_PUBLIC_KEYS, [], plugins)
 
+    async def list_public_keys(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListPublicKeysOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_PUBLIC_KEYS, args, kwargs),
+            _models.LIST_PUBLIC_KEYS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_queries(
-        self, input: ListQueriesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListQueriesInput | _models.ListQueriesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListQueriesOutput: ...
+
+    @_overload
+    async def list_queries(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListQueriesInputDict],
     ) -> ListQueriesOutput:
         """
         Warning:
@@ -1330,8 +2046,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         `RUNNING`, `FINISHED`, `FAILED`, `TIMED_OUT`, or `CANCELLED`.
 
         Args:
-            input:
-                An instance of `ListQueriesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1341,18 +2055,39 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `ListQueriesOutput`.
         """
-        return await self._invoke(input, _models.LIST_QUERIES, [], plugins)
 
+    async def list_queries(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListQueriesOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_QUERIES, args, kwargs),
+            _models.LIST_QUERIES,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_tags(
-        self, input: ListTagsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListTagsInput | _models.ListTagsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListTagsOutput: ...
+
+    @_overload
+    async def list_tags(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListTagsInputDict],
     ) -> ListTagsOutput:
         """
         Lists the tags for the specified trails, event data stores, dashboards,
         or channels in the current Region.
 
         Args:
-            input:
-                An instance of `ListTagsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1362,17 +2097,38 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `ListTagsOutput`.
         """
-        return await self._invoke(input, _models.LIST_TAGS, [], plugins)
 
+    async def list_tags(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListTagsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_TAGS, args, kwargs),
+            _models.LIST_TAGS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_trails(
-        self, input: ListTrailsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListTrailsInput | _models.ListTrailsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListTrailsOutput: ...
+
+    @_overload
+    async def list_trails(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListTrailsInputDict],
     ) -> ListTrailsOutput:
         """
         Lists trails that are in the current account.
 
         Args:
-            input:
-                An instance of `ListTrailsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1382,10 +2138,33 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `ListTrailsOutput`.
         """
-        return await self._invoke(input, _models.LIST_TRAILS, [], plugins)
 
+    async def list_trails(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListTrailsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_TRAILS, args, kwargs),
+            _models.LIST_TRAILS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def lookup_events(
-        self, input: LookupEventsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.LookupEventsInput | _models.LookupEventsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> LookupEventsOutput: ...
+
+    @_overload
+    async def lookup_events(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.LookupEventsInputDict],
     ) -> LookupEventsOutput:
         """
         Looks up [management
@@ -1436,8 +2215,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
             per Region. If this limit is exceeded, a throttling error occurs.
 
         Args:
-            input:
-                An instance of `LookupEventsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1447,10 +2224,34 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `LookupEventsOutput`.
         """
-        return await self._invoke(input, _models.LOOKUP_EVENTS, [], plugins)
 
+    async def lookup_events(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> LookupEventsOutput:
+        return await self._invoke(
+            self._select_input(_models.LOOKUP_EVENTS, args, kwargs),
+            _models.LOOKUP_EVENTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def put_event_configuration(
-        self, input: PutEventConfigurationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutEventConfigurationInput
+        | _models.PutEventConfigurationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutEventConfigurationOutput: ...
+
+    @_overload
+    async def put_event_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutEventConfigurationInputDict],
     ) -> PutEventConfigurationOutput:
         """
         Updates the event configuration settings for the specified event data
@@ -1459,8 +2260,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         configuring aggregation settings for the trail.
 
         Args:
-            input:
-                An instance of `PutEventConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1470,10 +2269,33 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `PutEventConfigurationOutput`.
         """
-        return await self._invoke(input, _models.PUT_EVENT_CONFIGURATION, [], plugins)
 
+    async def put_event_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutEventConfigurationOutput:
+        return await self._invoke(
+            self._select_input(_models.PUT_EVENT_CONFIGURATION, args, kwargs),
+            _models.PUT_EVENT_CONFIGURATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def put_event_selectors(
-        self, input: PutEventSelectorsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutEventSelectorsInput | _models.PutEventSelectorsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutEventSelectorsOutput: ...
+
+    @_overload
+    async def put_event_selectors(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutEventSelectorsInputDict],
     ) -> PutEventSelectorsOutput:
         """
         Configures event selectors (also referred to as *basic event selectors*)
@@ -1546,8 +2368,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         in the *CloudTrail User Guide*.
 
         Args:
-            input:
-                An instance of `PutEventSelectorsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1557,10 +2377,34 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `PutEventSelectorsOutput`.
         """
-        return await self._invoke(input, _models.PUT_EVENT_SELECTORS, [], plugins)
 
+    async def put_event_selectors(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutEventSelectorsOutput:
+        return await self._invoke(
+            self._select_input(_models.PUT_EVENT_SELECTORS, args, kwargs),
+            _models.PUT_EVENT_SELECTORS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def put_insight_selectors(
-        self, input: PutInsightSelectorsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutInsightSelectorsInput
+        | _models.PutInsightSelectorsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutInsightSelectorsOutput: ...
+
+    @_overload
+    async def put_insight_selectors(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutInsightSelectorsInputDict],
     ) -> PutInsightSelectorsOutput:
         """
         Lets you enable Insights event logging on specific event categories by
@@ -1610,8 +2454,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         in the *CloudTrail User Guide*.
 
         Args:
-            input:
-                An instance of `PutInsightSelectorsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1621,10 +2463,33 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `PutInsightSelectorsOutput`.
         """
-        return await self._invoke(input, _models.PUT_INSIGHT_SELECTORS, [], plugins)
 
+    async def put_insight_selectors(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutInsightSelectorsOutput:
+        return await self._invoke(
+            self._select_input(_models.PUT_INSIGHT_SELECTORS, args, kwargs),
+            _models.PUT_INSIGHT_SELECTORS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def put_resource_policy(
-        self, input: PutResourcePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutResourcePolicyInput | _models.PutResourcePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutResourcePolicyOutput: ...
+
+    @_overload
+    async def put_resource_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutResourcePolicyInputDict],
     ) -> PutResourcePolicyOutput:
         """
         Attaches a resource-based permission policy to a CloudTrail event data
@@ -1634,8 +2499,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         in the *CloudTrail User Guide*.
 
         Args:
-            input:
-                An instance of `PutResourcePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1645,20 +2508,40 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `PutResourcePolicyOutput`.
         """
-        return await self._invoke(input, _models.PUT_RESOURCE_POLICY, [], plugins)
 
+    async def put_resource_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutResourcePolicyOutput:
+        return await self._invoke(
+            self._select_input(_models.PUT_RESOURCE_POLICY, args, kwargs),
+            _models.PUT_RESOURCE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def register_organization_delegated_admin(
         self,
-        input: RegisterOrganizationDelegatedAdminInput,
+        request: _models.RegisterOrganizationDelegatedAdminInput
+        | _models.RegisterOrganizationDelegatedAdminInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> RegisterOrganizationDelegatedAdminOutput: ...
+
+    @_overload
+    async def register_organization_delegated_admin(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RegisterOrganizationDelegatedAdminInputDict],
     ) -> RegisterOrganizationDelegatedAdminOutput:
         """
         Registers an organization's member account as the CloudTrail [delegated
         administrator](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-delegated-administrator.html).
 
         Args:
-            input:
-                An instance of `RegisterOrganizationDelegatedAdminInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1668,20 +2551,41 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `RegisterOrganizationDelegatedAdminOutput`.
         """
+
+    async def register_organization_delegated_admin(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RegisterOrganizationDelegatedAdminOutput:
         return await self._invoke(
-            input, _models.REGISTER_ORGANIZATION_DELEGATED_ADMIN, [], plugins
+            self._select_input(
+                _models.REGISTER_ORGANIZATION_DELEGATED_ADMIN, args, kwargs
+            ),
+            _models.REGISTER_ORGANIZATION_DELEGATED_ADMIN,
+            [],
+            plugins,
         )
 
+    @_overload
     async def remove_tags(
-        self, input: RemoveTagsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RemoveTagsInput | _models.RemoveTagsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RemoveTagsOutput: ...
+
+    @_overload
+    async def remove_tags(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RemoveTagsInputDict],
     ) -> RemoveTagsOutput:
         """
         Removes the specified tags from a trail, event data store, dashboard, or
         channel.
 
         Args:
-            input:
-                An instance of `RemoveTagsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1691,10 +2595,34 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `RemoveTagsOutput`.
         """
-        return await self._invoke(input, _models.REMOVE_TAGS, [], plugins)
 
+    async def remove_tags(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RemoveTagsOutput:
+        return await self._invoke(
+            self._select_input(_models.REMOVE_TAGS, args, kwargs),
+            _models.REMOVE_TAGS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def restore_event_data_store(
-        self, input: RestoreEventDataStoreInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RestoreEventDataStoreInput
+        | _models.RestoreEventDataStoreInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RestoreEventDataStoreOutput: ...
+
+    @_overload
+    async def restore_event_data_store(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RestoreEventDataStoreInputDict],
     ) -> RestoreEventDataStoreOutput:
         """
         Warning:
@@ -1711,8 +2639,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         event data store.
 
         Args:
-            input:
-                An instance of `RestoreEventDataStoreInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1722,10 +2648,34 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `RestoreEventDataStoreOutput`.
         """
-        return await self._invoke(input, _models.RESTORE_EVENT_DATA_STORE, [], plugins)
 
+    async def restore_event_data_store(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RestoreEventDataStoreOutput:
+        return await self._invoke(
+            self._select_input(_models.RESTORE_EVENT_DATA_STORE, args, kwargs),
+            _models.RESTORE_EVENT_DATA_STORE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def search_sample_queries(
-        self, input: SearchSampleQueriesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.SearchSampleQueriesInput
+        | _models.SearchSampleQueriesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> SearchSampleQueriesOutput: ...
+
+    @_overload
+    async def search_sample_queries(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SearchSampleQueriesInputDict],
     ) -> SearchSampleQueriesOutput:
         """
         Warning:
@@ -1740,8 +2690,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         language `SearchPhrase` in English.
 
         Args:
-            input:
-                An instance of `SearchSampleQueriesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1751,10 +2699,34 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `SearchSampleQueriesOutput`.
         """
-        return await self._invoke(input, _models.SEARCH_SAMPLE_QUERIES, [], plugins)
 
+    async def search_sample_queries(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SearchSampleQueriesOutput:
+        return await self._invoke(
+            self._select_input(_models.SEARCH_SAMPLE_QUERIES, args, kwargs),
+            _models.SEARCH_SAMPLE_QUERIES,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def start_dashboard_refresh(
-        self, input: StartDashboardRefreshInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StartDashboardRefreshInput
+        | _models.StartDashboardRefreshInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StartDashboardRefreshOutput: ...
+
+    @_overload
+    async def start_dashboard_refresh(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartDashboardRefreshInputDict],
     ) -> StartDashboardRefreshOutput:
         """
         Warning:
@@ -1776,8 +2748,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         in the *CloudTrail User Guide*.
 
         Args:
-            input:
-                An instance of `StartDashboardRefreshInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1787,12 +2757,34 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `StartDashboardRefreshOutput`.
         """
-        return await self._invoke(input, _models.START_DASHBOARD_REFRESH, [], plugins)
 
+    async def start_dashboard_refresh(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StartDashboardRefreshOutput:
+        return await self._invoke(
+            self._select_input(_models.START_DASHBOARD_REFRESH, args, kwargs),
+            _models.START_DASHBOARD_REFRESH,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def start_event_data_store_ingestion(
         self,
-        input: StartEventDataStoreIngestionInput,
+        request: _models.StartEventDataStoreIngestionInput
+        | _models.StartEventDataStoreIngestionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> StartEventDataStoreIngestionOutput: ...
+
+    @_overload
+    async def start_event_data_store_ingestion(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartEventDataStoreIngestionInputDict],
     ) -> StartEventDataStoreIngestionOutput:
         """
         Warning:
@@ -1809,8 +2801,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         `ConfigurationItem`.
 
         Args:
-            input:
-                An instance of `StartEventDataStoreIngestionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1820,12 +2810,33 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `StartEventDataStoreIngestionOutput`.
         """
+
+    async def start_event_data_store_ingestion(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StartEventDataStoreIngestionOutput:
         return await self._invoke(
-            input, _models.START_EVENT_DATA_STORE_INGESTION, [], plugins
+            self._select_input(_models.START_EVENT_DATA_STORE_INGESTION, args, kwargs),
+            _models.START_EVENT_DATA_STORE_INGESTION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def start_import(
-        self, input: StartImportInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StartImportInput | _models.StartImportInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StartImportOutput: ...
+
+    @_overload
+    async def start_import(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartImportInputDict],
     ) -> StartImportOutput:
         """
         Warning:
@@ -1861,8 +2872,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
             delegated administrator account for the organization.
 
         Args:
-            input:
-                An instance of `StartImportInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1872,10 +2881,33 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `StartImportOutput`.
         """
-        return await self._invoke(input, _models.START_IMPORT, [], plugins)
 
+    async def start_import(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StartImportOutput:
+        return await self._invoke(
+            self._select_input(_models.START_IMPORT, args, kwargs),
+            _models.START_IMPORT,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def start_logging(
-        self, input: StartLoggingInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StartLoggingInput | _models.StartLoggingInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StartLoggingOutput: ...
+
+    @_overload
+    async def start_logging(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartLoggingInputDict],
     ) -> StartLoggingOutput:
         """
         Starts the recording of Amazon Web Services API calls and log file
@@ -1885,8 +2917,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         in other Regions) of a trail that is enabled in all Regions.
 
         Args:
-            input:
-                An instance of `StartLoggingInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1896,10 +2926,33 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `StartLoggingOutput`.
         """
-        return await self._invoke(input, _models.START_LOGGING, [], plugins)
 
+    async def start_logging(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StartLoggingOutput:
+        return await self._invoke(
+            self._select_input(_models.START_LOGGING, args, kwargs),
+            _models.START_LOGGING,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def start_query(
-        self, input: StartQueryInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StartQueryInput | _models.StartQueryInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StartQueryOutput: ...
+
+    @_overload
+    async def start_query(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartQueryInputDict],
     ) -> StartQueryOutput:
         """
         Warning:
@@ -1920,8 +2973,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         queries that populate the CloudTrail Lake dashboards.
 
         Args:
-            input:
-                An instance of `StartQueryInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1931,12 +2982,34 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `StartQueryOutput`.
         """
-        return await self._invoke(input, _models.START_QUERY, [], plugins)
 
+    async def start_query(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StartQueryOutput:
+        return await self._invoke(
+            self._select_input(_models.START_QUERY, args, kwargs),
+            _models.START_QUERY,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def stop_event_data_store_ingestion(
         self,
-        input: StopEventDataStoreIngestionInput,
+        request: _models.StopEventDataStoreIngestionInput
+        | _models.StopEventDataStoreIngestionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> StopEventDataStoreIngestionOutput: ...
+
+    @_overload
+    async def stop_event_data_store_ingestion(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StopEventDataStoreIngestionInputDict],
     ) -> StopEventDataStoreIngestionOutput:
         """
         Warning:
@@ -1952,8 +3025,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         `Management`, `Data`, `NetworkActivity`, or `ConfigurationItem`.
 
         Args:
-            input:
-                An instance of `StopEventDataStoreIngestionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1963,12 +3034,33 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `StopEventDataStoreIngestionOutput`.
         """
+
+    async def stop_event_data_store_ingestion(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StopEventDataStoreIngestionOutput:
         return await self._invoke(
-            input, _models.STOP_EVENT_DATA_STORE_INGESTION, [], plugins
+            self._select_input(_models.STOP_EVENT_DATA_STORE_INGESTION, args, kwargs),
+            _models.STOP_EVENT_DATA_STORE_INGESTION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def stop_import(
-        self, input: StopImportInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StopImportInput | _models.StopImportInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StopImportOutput: ...
+
+    @_overload
+    async def stop_import(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StopImportInputDict],
     ) -> StopImportOutput:
         """
         Warning:
@@ -1981,8 +3073,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Stops a specified import.
 
         Args:
-            input:
-                An instance of `StopImportInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1992,10 +3082,33 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `StopImportOutput`.
         """
-        return await self._invoke(input, _models.STOP_IMPORT, [], plugins)
 
+    async def stop_import(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StopImportOutput:
+        return await self._invoke(
+            self._select_input(_models.STOP_IMPORT, args, kwargs),
+            _models.STOP_IMPORT,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def stop_logging(
-        self, input: StopLoggingInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StopLoggingInput | _models.StopLoggingInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StopLoggingOutput: ...
+
+    @_overload
+    async def stop_logging(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StopLoggingInputDict],
     ) -> StopLoggingOutput:
         """
         Suspends the recording of Amazon Web Services API calls and log file
@@ -2008,8 +3121,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         trails in other Regions) of a trail enabled in all Regions.
 
         Args:
-            input:
-                An instance of `StopLoggingInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2019,10 +3130,33 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `StopLoggingOutput`.
         """
-        return await self._invoke(input, _models.STOP_LOGGING, [], plugins)
 
+    async def stop_logging(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StopLoggingOutput:
+        return await self._invoke(
+            self._select_input(_models.STOP_LOGGING, args, kwargs),
+            _models.STOP_LOGGING,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_channel(
-        self, input: UpdateChannelInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateChannelInput | _models.UpdateChannelInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateChannelOutput: ...
+
+    @_overload
+    async def update_channel(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateChannelInputDict],
     ) -> UpdateChannelOutput:
         """
         Warning:
@@ -2035,8 +3169,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Updates a channel specified by a required channel ARN or UUID.
 
         Args:
-            input:
-                An instance of `UpdateChannelInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2046,10 +3178,33 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `UpdateChannelOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_CHANNEL, [], plugins)
 
+    async def update_channel(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateChannelOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_CHANNEL, args, kwargs),
+            _models.UPDATE_CHANNEL,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_dashboard(
-        self, input: UpdateDashboardInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateDashboardInput | _models.UpdateDashboardInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateDashboardOutput: ...
+
+    @_overload
+    async def update_dashboard(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateDashboardInputDict],
     ) -> UpdateDashboardOutput:
         """
         Warning:
@@ -2079,8 +3234,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         in the *CloudTrail User Guide*.
 
         Args:
-            input:
-                An instance of `UpdateDashboardInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2090,10 +3243,34 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `UpdateDashboardOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_DASHBOARD, [], plugins)
 
+    async def update_dashboard(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateDashboardOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_DASHBOARD, args, kwargs),
+            _models.UPDATE_DASHBOARD,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_event_data_store(
-        self, input: UpdateEventDataStoreInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateEventDataStoreInput
+        | _models.UpdateEventDataStoreInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateEventDataStoreOutput: ...
+
+    @_overload
+    async def update_event_data_store(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateEventDataStoreInputDict],
     ) -> UpdateEventDataStoreOutput:
         """
         Warning:
@@ -2124,8 +3301,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         event data store.
 
         Args:
-            input:
-                An instance of `UpdateEventDataStoreInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2135,10 +3310,33 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `UpdateEventDataStoreOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_EVENT_DATA_STORE, [], plugins)
 
+    async def update_event_data_store(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateEventDataStoreOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_EVENT_DATA_STORE, args, kwargs),
+            _models.UPDATE_EVENT_DATA_STORE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_trail(
-        self, input: UpdateTrailInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateTrailInput | _models.UpdateTrailInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateTrailOutput: ...
+
+    @_overload
+    async def update_trail(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateTrailInputDict],
     ) -> UpdateTrailOutput:
         """
         Updates trail settings that control what events you are logging, and how
@@ -2150,8 +3348,6 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         otherwise, an `InvalidHomeRegionException` is thrown.
 
         Args:
-            input:
-                An instance of `UpdateTrailInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2161,7 +3357,16 @@ class AsyncCloudTrailClient(AsyncClient[AsyncCloudTrailConfig]):
         Returns:
             An instance of `UpdateTrailOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_TRAIL, [], plugins)
+
+    async def update_trail(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateTrailOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_TRAIL, args, kwargs),
+            _models.UPDATE_TRAIL,
+            [],
+            plugins,
+        )
 
     async def _new_config(self) -> AsyncCloudTrailConfig:
         return await AsyncCloudTrailConfig.resolve()

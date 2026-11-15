@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import cast
+from typing import Unpack as _Unpack, cast, overload as _overload
 
 from smithy_aws_core.aio.identity.chain import AsyncIdentityChain
 from smithy_aws_core.config.types import ConfigSource
@@ -20,209 +20,107 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from ..models import (
-        AcceptAdministratorInvitationInput,
         AcceptAdministratorInvitationOutput,
-        AcceptInvitationInput,
         AcceptInvitationOutput,
-        ArchiveFindingsInput,
         ArchiveFindingsOutput,
-        CreateCustomDetectionRuleAssociationInput,
         CreateCustomDetectionRuleAssociationOutput,
-        CreateCustomDetectionRuleOrgConfigurationInput,
         CreateCustomDetectionRuleOrgConfigurationOutput,
-        CreateDetectorInput,
         CreateDetectorOutput,
-        CreateFilterInput,
         CreateFilterOutput,
-        CreateIPSetInput,
         CreateIPSetOutput,
-        CreateInvestigationInput,
         CreateInvestigationOutput,
-        CreateMalwareProtectionPlanInput,
         CreateMalwareProtectionPlanOutput,
-        CreateMembersInput,
         CreateMembersOutput,
-        CreatePublishingDestinationInput,
         CreatePublishingDestinationOutput,
-        CreateSampleFindingsInput,
         CreateSampleFindingsOutput,
-        CreateThreatEntitySetInput,
         CreateThreatEntitySetOutput,
-        CreateThreatIntelSetInput,
         CreateThreatIntelSetOutput,
-        CreateTrustedEntitySetInput,
         CreateTrustedEntitySetOutput,
-        DeclineInvitationsInput,
         DeclineInvitationsOutput,
-        DeleteCustomDetectionRuleAssociationInput,
         DeleteCustomDetectionRuleAssociationOutput,
-        DeleteCustomDetectionRuleOrgConfigurationInput,
         DeleteCustomDetectionRuleOrgConfigurationOutput,
-        DeleteDetectorInput,
         DeleteDetectorOutput,
-        DeleteFilterInput,
         DeleteFilterOutput,
-        DeleteIPSetInput,
         DeleteIPSetOutput,
-        DeleteInvitationsInput,
         DeleteInvitationsOutput,
-        DeleteMalwareProtectionPlanInput,
         DeleteMalwareProtectionPlanOutput,
-        DeleteMembersInput,
         DeleteMembersOutput,
-        DeletePublishingDestinationInput,
         DeletePublishingDestinationOutput,
-        DeleteThreatEntitySetInput,
         DeleteThreatEntitySetOutput,
-        DeleteThreatIntelSetInput,
         DeleteThreatIntelSetOutput,
-        DeleteTrustedEntitySetInput,
         DeleteTrustedEntitySetOutput,
-        DescribeMalwareScansInput,
         DescribeMalwareScansOutput,
-        DescribeOrganizationConfigurationInput,
         DescribeOrganizationConfigurationOutput,
-        DescribePublishingDestinationInput,
         DescribePublishingDestinationOutput,
-        DisableOrganizationAdminAccountInput,
         DisableOrganizationAdminAccountOutput,
-        DisassociateFromAdministratorAccountInput,
         DisassociateFromAdministratorAccountOutput,
-        DisassociateFromMasterAccountInput,
         DisassociateFromMasterAccountOutput,
-        DisassociateMembersInput,
         DisassociateMembersOutput,
-        EnableOrganizationAdminAccountInput,
         EnableOrganizationAdminAccountOutput,
-        GetAdministratorAccountInput,
         GetAdministratorAccountOutput,
-        GetCoverageStatisticsInput,
         GetCoverageStatisticsOutput,
-        GetCustomDetectionRuleAssociationInput,
         GetCustomDetectionRuleAssociationOutput,
-        GetCustomDetectionRuleInput,
-        GetCustomDetectionRuleOrgConfigurationInput,
         GetCustomDetectionRuleOrgConfigurationOutput,
         GetCustomDetectionRuleOutput,
-        GetDetectorInput,
         GetDetectorOutput,
-        GetFilterInput,
         GetFilterOutput,
-        GetFindingsInput,
         GetFindingsOutput,
-        GetFindingsStatisticsInput,
         GetFindingsStatisticsOutput,
-        GetIPSetInput,
         GetIPSetOutput,
-        GetInvestigationInput,
         GetInvestigationOutput,
-        GetInvitationsCountInput,
         GetInvitationsCountOutput,
-        GetMalwareProtectionPlanInput,
         GetMalwareProtectionPlanOutput,
-        GetMalwareScanInput,
         GetMalwareScanOutput,
-        GetMalwareScanSettingsInput,
         GetMalwareScanSettingsOutput,
-        GetMasterAccountInput,
         GetMasterAccountOutput,
-        GetMemberDetectorsInput,
         GetMemberDetectorsOutput,
-        GetMembersInput,
         GetMembersOutput,
-        GetOrganizationStatisticsInput,
         GetOrganizationStatisticsOutput,
-        GetRemainingFreeTrialDaysInput,
         GetRemainingFreeTrialDaysOutput,
-        GetThreatEntitySetInput,
         GetThreatEntitySetOutput,
-        GetThreatIntelSetInput,
         GetThreatIntelSetOutput,
-        GetTrustedEntitySetInput,
         GetTrustedEntitySetOutput,
-        GetUsageStatisticsInput,
         GetUsageStatisticsOutput,
-        InviteMembersInput,
         InviteMembersOutput,
-        ListCoverageInput,
         ListCoverageOutput,
-        ListCustomDetectionRuleAssociationsInput,
         ListCustomDetectionRuleAssociationsOutput,
-        ListCustomDetectionRuleOrgConfigurationsInput,
         ListCustomDetectionRuleOrgConfigurationsOutput,
-        ListCustomDetectionRulesInput,
         ListCustomDetectionRulesOutput,
-        ListDetectorsInput,
         ListDetectorsOutput,
-        ListFiltersInput,
         ListFiltersOutput,
-        ListFindingsInput,
         ListFindingsOutput,
-        ListIPSetsInput,
         ListIPSetsOutput,
-        ListInvestigationsInput,
         ListInvestigationsOutput,
-        ListInvitationsInput,
         ListInvitationsOutput,
-        ListMalwareProtectionPlansInput,
         ListMalwareProtectionPlansOutput,
-        ListMalwareScansInput,
         ListMalwareScansOutput,
-        ListMembersInput,
         ListMembersOutput,
-        ListOrganizationAdminAccountsInput,
         ListOrganizationAdminAccountsOutput,
-        ListPublishingDestinationsInput,
         ListPublishingDestinationsOutput,
-        ListTagsForResourceInput,
         ListTagsForResourceOutput,
-        ListThreatEntitySetsInput,
         ListThreatEntitySetsOutput,
-        ListThreatIntelSetsInput,
         ListThreatIntelSetsOutput,
-        ListTrustedEntitySetsInput,
         ListTrustedEntitySetsOutput,
-        SendObjectMalwareScanInput,
         SendObjectMalwareScanOutput,
-        StartMalwareScanInput,
         StartMalwareScanOutput,
-        StartMonitoringMembersInput,
         StartMonitoringMembersOutput,
-        StopMonitoringMembersInput,
         StopMonitoringMembersOutput,
-        TagResourceInput,
         TagResourceOutput,
-        UnarchiveFindingsInput,
         UnarchiveFindingsOutput,
-        UntagResourceInput,
         UntagResourceOutput,
-        UpdateCustomDetectionRuleAssociationInput,
         UpdateCustomDetectionRuleAssociationOutput,
-        UpdateCustomDetectionRuleOrgConfigurationInput,
         UpdateCustomDetectionRuleOrgConfigurationOutput,
-        UpdateDetectorInput,
         UpdateDetectorOutput,
-        UpdateFilterInput,
         UpdateFilterOutput,
-        UpdateFindingsFeedbackInput,
         UpdateFindingsFeedbackOutput,
-        UpdateIPSetInput,
         UpdateIPSetOutput,
-        UpdateMalwareProtectionPlanInput,
         UpdateMalwareProtectionPlanOutput,
-        UpdateMalwareScanSettingsInput,
         UpdateMalwareScanSettingsOutput,
-        UpdateMemberDetectorsInput,
         UpdateMemberDetectorsOutput,
-        UpdateOrganizationConfigurationInput,
         UpdateOrganizationConfigurationOutput,
-        UpdatePublishingDestinationInput,
         UpdatePublishingDestinationOutput,
-        UpdateThreatEntitySetInput,
         UpdateThreatEntitySetOutput,
-        UpdateThreatIntelSetInput,
         UpdateThreatIntelSetOutput,
-        UpdateTrustedEntitySetInput,
         UpdateTrustedEntitySetOutput,
     )
 
@@ -262,20 +160,31 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
     .
     """
 
-    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
+    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
 
+    @_overload
     async def accept_administrator_invitation(
         self,
-        input: AcceptAdministratorInvitationInput,
+        request: _models.AcceptAdministratorInvitationInput
+        | _models.AcceptAdministratorInvitationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> AcceptAdministratorInvitationOutput: ...
+
+    @_overload
+    async def accept_administrator_invitation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AcceptAdministratorInvitationInputDict],
     ) -> AcceptAdministratorInvitationOutput:
         """
         Accepts the invitation to be a member account and get monitored by a
         GuardDuty administrator account that sent the invitation.
 
         Args:
-            input:
-                An instance of `AcceptAdministratorInvitationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -285,20 +194,39 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `AcceptAdministratorInvitationOutput`.
         """
+
+    async def accept_administrator_invitation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AcceptAdministratorInvitationOutput:
         return await self._invoke(
-            input, _models.ACCEPT_ADMINISTRATOR_INVITATION, [], plugins
+            self._select_input(_models.ACCEPT_ADMINISTRATOR_INVITATION, args, kwargs),
+            _models.ACCEPT_ADMINISTRATOR_INVITATION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def accept_invitation(
-        self, input: AcceptInvitationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.AcceptInvitationInput | _models.AcceptInvitationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AcceptInvitationOutput: ...
+
+    @_overload
+    async def accept_invitation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AcceptInvitationInputDict],
     ) -> AcceptInvitationOutput:
         """
         Accepts the invitation to be monitored by a GuardDuty administrator
         account.
 
         Args:
-            input:
-                An instance of `AcceptInvitationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -308,10 +236,33 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `AcceptInvitationOutput`.
         """
-        return await self._invoke(input, _models.ACCEPT_INVITATION, [], plugins)
 
+    async def accept_invitation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AcceptInvitationOutput:
+        return await self._invoke(
+            self._select_input(_models.ACCEPT_INVITATION, args, kwargs),
+            _models.ACCEPT_INVITATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def archive_findings(
-        self, input: ArchiveFindingsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ArchiveFindingsInput | _models.ArchiveFindingsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ArchiveFindingsOutput: ...
+
+    @_overload
+    async def archive_findings(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ArchiveFindingsInputDict],
     ) -> ArchiveFindingsOutput:
         """
         Archives GuardDuty findings that are specified by the list of finding
@@ -322,8 +273,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
             don't have permission to archive findings from their accounts.
 
         Args:
-            input:
-                An instance of `ArchiveFindingsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -333,20 +282,40 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `ArchiveFindingsOutput`.
         """
-        return await self._invoke(input, _models.ARCHIVE_FINDINGS, [], plugins)
 
+    async def archive_findings(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ArchiveFindingsOutput:
+        return await self._invoke(
+            self._select_input(_models.ARCHIVE_FINDINGS, args, kwargs),
+            _models.ARCHIVE_FINDINGS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_custom_detection_rule_association(
         self,
-        input: CreateCustomDetectionRuleAssociationInput,
+        request: _models.CreateCustomDetectionRuleAssociationInput
+        | _models.CreateCustomDetectionRuleAssociationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateCustomDetectionRuleAssociationOutput: ...
+
+    @_overload
+    async def create_custom_detection_rule_association(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateCustomDetectionRuleAssociationInputDict],
     ) -> CreateCustomDetectionRuleAssociationOutput:
         """
         Enables a custom detection rule for your account by creating an
         association. You specify the rule and the mode in which it operates.
 
         Args:
-            input:
-                An instance of `CreateCustomDetectionRuleAssociationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -356,14 +325,36 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `CreateCustomDetectionRuleAssociationOutput`.
         """
+
+    async def create_custom_detection_rule_association(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateCustomDetectionRuleAssociationOutput:
         return await self._invoke(
-            input, _models.CREATE_CUSTOM_DETECTION_RULE_ASSOCIATION, [], plugins
+            self._select_input(
+                _models.CREATE_CUSTOM_DETECTION_RULE_ASSOCIATION, args, kwargs
+            ),
+            _models.CREATE_CUSTOM_DETECTION_RULE_ASSOCIATION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def create_custom_detection_rule_org_configuration(
         self,
-        input: CreateCustomDetectionRuleOrgConfigurationInput,
+        request: _models.CreateCustomDetectionRuleOrgConfigurationInput
+        | _models.CreateCustomDetectionRuleOrgConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateCustomDetectionRuleOrgConfigurationOutput: ...
+
+    @_overload
+    async def create_custom_detection_rule_org_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateCustomDetectionRuleOrgConfigurationInputDict],
     ) -> CreateCustomDetectionRuleOrgConfigurationOutput:
         """
         Creates an organization-level configuration that enables a custom
@@ -371,8 +362,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         only to the delegated administrator account.
 
         Args:
-            input:
-                An instance of `CreateCustomDetectionRuleOrgConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -382,12 +371,35 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `CreateCustomDetectionRuleOrgConfigurationOutput`.
         """
+
+    async def create_custom_detection_rule_org_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateCustomDetectionRuleOrgConfigurationOutput:
         return await self._invoke(
-            input, _models.CREATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION, [], plugins
+            self._select_input(
+                _models.CREATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION, args, kwargs
+            ),
+            _models.CREATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def create_detector(
-        self, input: CreateDetectorInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateDetectorInput | _models.CreateDetectorInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateDetectorOutput: ...
+
+    @_overload
+    async def create_detector(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateDetectorInputDict],
     ) -> CreateDetectorOutput:
         """
         Creates a single GuardDuty detector. A detector is a resource that
@@ -417,8 +429,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         endpoints](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
 
         Args:
-            input:
-                An instance of `CreateDetectorInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -428,10 +438,33 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `CreateDetectorOutput`.
         """
-        return await self._invoke(input, _models.CREATE_DETECTOR, [], plugins)
 
+    async def create_detector(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateDetectorOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_DETECTOR, args, kwargs),
+            _models.CREATE_DETECTOR,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_filter(
-        self, input: CreateFilterInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateFilterInput | _models.CreateFilterInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateFilterOutput: ...
+
+    @_overload
+    async def create_filter(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateFilterInputDict],
     ) -> CreateFilterOutput:
         """
         Creates a filter using the specified finding criteria. The maximum
@@ -440,8 +473,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         GuardDuty](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_limits.html).
 
         Args:
-            input:
-                An instance of `CreateFilterInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -451,10 +482,34 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `CreateFilterOutput`.
         """
-        return await self._invoke(input, _models.CREATE_FILTER, [], plugins)
 
+    async def create_filter(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateFilterOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_FILTER, args, kwargs),
+            _models.CREATE_FILTER,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_investigation(
-        self, input: CreateInvestigationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateInvestigationInput
+        | _models.CreateInvestigationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateInvestigationOutput: ...
+
+    @_overload
+    async def create_investigation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateInvestigationInputDict],
     ) -> CreateInvestigationOutput:
         """
         This API is currently available as a preview. During the preview, you
@@ -490,8 +545,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Investigation](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-investigation.html).
 
         Args:
-            input:
-                An instance of `CreateInvestigationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -501,10 +554,33 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `CreateInvestigationOutput`.
         """
-        return await self._invoke(input, _models.CREATE_INVESTIGATION, [], plugins)
 
+    async def create_investigation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateInvestigationOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_INVESTIGATION, args, kwargs),
+            _models.CREATE_INVESTIGATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_ip_set(
-        self, input: CreateIPSetInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateIPSetInput | _models.CreateIPSetInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateIPSetOutput: ...
+
+    @_overload
+    async def create_ip_set(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateIPSetInputDict],
     ) -> CreateIPSetOutput:
         """
         Creates a new IPSet, which is called a trusted IP list in the console
@@ -515,8 +591,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         use this operation.
 
         Args:
-            input:
-                An instance of `CreateIPSetInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -526,12 +600,34 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `CreateIPSetOutput`.
         """
-        return await self._invoke(input, _models.CREATE_IP_SET, [], plugins)
 
+    async def create_ip_set(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateIPSetOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_IP_SET, args, kwargs),
+            _models.CREATE_IP_SET,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_malware_protection_plan(
         self,
-        input: CreateMalwareProtectionPlanInput,
+        request: _models.CreateMalwareProtectionPlanInput
+        | _models.CreateMalwareProtectionPlanInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreateMalwareProtectionPlanOutput: ...
+
+    @_overload
+    async def create_malware_protection_plan(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateMalwareProtectionPlanInputDict],
     ) -> CreateMalwareProtectionPlanOutput:
         """
         Creates a new Malware Protection plan for the protected resource.
@@ -543,8 +639,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Protection](http://aws.amazon.com/service-terms/#87._Amazon_GuardDuty).
 
         Args:
-            input:
-                An instance of `CreateMalwareProtectionPlanInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -554,12 +648,33 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `CreateMalwareProtectionPlanOutput`.
         """
+
+    async def create_malware_protection_plan(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateMalwareProtectionPlanOutput:
         return await self._invoke(
-            input, _models.CREATE_MALWARE_PROTECTION_PLAN, [], plugins
+            self._select_input(_models.CREATE_MALWARE_PROTECTION_PLAN, args, kwargs),
+            _models.CREATE_MALWARE_PROTECTION_PLAN,
+            [],
+            plugins,
         )
 
+    @_overload
     async def create_members(
-        self, input: CreateMembersInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateMembersInput | _models.CreateMembersInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateMembersOutput: ...
+
+    @_overload
+    async def create_members(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateMembersInputDict],
     ) -> CreateMembersOutput:
         """
         Creates member accounts of the current Amazon Web Services account by
@@ -596,8 +711,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         accounts again only by calling the CreateMembers API.
 
         Args:
-            input:
-                An instance of `CreateMembersInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -607,12 +720,34 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `CreateMembersOutput`.
         """
-        return await self._invoke(input, _models.CREATE_MEMBERS, [], plugins)
 
+    async def create_members(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateMembersOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_MEMBERS, args, kwargs),
+            _models.CREATE_MEMBERS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_publishing_destination(
         self,
-        input: CreatePublishingDestinationInput,
+        request: _models.CreatePublishingDestinationInput
+        | _models.CreatePublishingDestinationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> CreatePublishingDestinationOutput: ...
+
+    @_overload
+    async def create_publishing_destination(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreatePublishingDestinationInputDict],
     ) -> CreatePublishingDestinationOutput:
         """
         Creates a publishing destination where you can export your GuardDuty
@@ -620,8 +755,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         resource must exist.
 
         Args:
-            input:
-                An instance of `CreatePublishingDestinationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -631,12 +764,34 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `CreatePublishingDestinationOutput`.
         """
+
+    async def create_publishing_destination(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreatePublishingDestinationOutput:
         return await self._invoke(
-            input, _models.CREATE_PUBLISHING_DESTINATION, [], plugins
+            self._select_input(_models.CREATE_PUBLISHING_DESTINATION, args, kwargs),
+            _models.CREATE_PUBLISHING_DESTINATION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def create_sample_findings(
-        self, input: CreateSampleFindingsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateSampleFindingsInput
+        | _models.CreateSampleFindingsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateSampleFindingsOutput: ...
+
+    @_overload
+    async def create_sample_findings(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateSampleFindingsInputDict],
     ) -> CreateSampleFindingsOutput:
         """
         Generates sample findings of types specified by the list of finding
@@ -644,8 +799,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         sample findings of all supported finding types.
 
         Args:
-            input:
-                An instance of `CreateSampleFindingsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -655,10 +808,34 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `CreateSampleFindingsOutput`.
         """
-        return await self._invoke(input, _models.CREATE_SAMPLE_FINDINGS, [], plugins)
 
+    async def create_sample_findings(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateSampleFindingsOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_SAMPLE_FINDINGS, args, kwargs),
+            _models.CREATE_SAMPLE_FINDINGS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_threat_entity_set(
-        self, input: CreateThreatEntitySetInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateThreatEntitySetInput
+        | _models.CreateThreatEntitySetInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateThreatEntitySetOutput: ...
+
+    @_overload
+    async def create_threat_entity_set(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateThreatEntitySetInputDict],
     ) -> CreateThreatEntitySetOutput:
         """
         Creates a new threat entity set. In a threat entity set, you can provide
@@ -668,8 +845,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         entity sets, which automatically apply to member accounts.
 
         Args:
-            input:
-                An instance of `CreateThreatEntitySetInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -679,10 +854,34 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `CreateThreatEntitySetOutput`.
         """
-        return await self._invoke(input, _models.CREATE_THREAT_ENTITY_SET, [], plugins)
 
+    async def create_threat_entity_set(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateThreatEntitySetOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_THREAT_ENTITY_SET, args, kwargs),
+            _models.CREATE_THREAT_ENTITY_SET,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_threat_intel_set(
-        self, input: CreateThreatIntelSetInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateThreatIntelSetInput
+        | _models.CreateThreatIntelSetInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateThreatIntelSetOutput: ...
+
+    @_overload
+    async def create_threat_intel_set(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateThreatIntelSetInputDict],
     ) -> CreateThreatIntelSetOutput:
         """
         Creates a new ThreatIntelSet. ThreatIntelSets consist of known malicious
@@ -690,8 +889,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Only users of the administrator account can use this operation.
 
         Args:
-            input:
-                An instance of `CreateThreatIntelSetInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -701,10 +898,34 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `CreateThreatIntelSetOutput`.
         """
-        return await self._invoke(input, _models.CREATE_THREAT_INTEL_SET, [], plugins)
 
+    async def create_threat_intel_set(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateThreatIntelSetOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_THREAT_INTEL_SET, args, kwargs),
+            _models.CREATE_THREAT_INTEL_SET,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_trusted_entity_set(
-        self, input: CreateTrustedEntitySetInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateTrustedEntitySetInput
+        | _models.CreateTrustedEntitySetInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateTrustedEntitySetOutput: ...
+
+    @_overload
+    async def create_trusted_entity_set(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateTrustedEntitySetInputDict],
     ) -> CreateTrustedEntitySetOutput:
         """
         Creates a new trusted entity set. In the trusted entity set, you can
@@ -717,8 +938,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         which automatically apply to member accounts.
 
         Args:
-            input:
-                An instance of `CreateTrustedEntitySetInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -728,18 +947,39 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `CreateTrustedEntitySetOutput`.
         """
-        return await self._invoke(input, _models.CREATE_TRUSTED_ENTITY_SET, [], plugins)
 
+    async def create_trusted_entity_set(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateTrustedEntitySetOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_TRUSTED_ENTITY_SET, args, kwargs),
+            _models.CREATE_TRUSTED_ENTITY_SET,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def decline_invitations(
-        self, input: DeclineInvitationsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeclineInvitationsInput | _models.DeclineInvitationsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeclineInvitationsOutput: ...
+
+    @_overload
+    async def decline_invitations(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeclineInvitationsInputDict],
     ) -> DeclineInvitationsOutput:
         """
         Declines invitations sent to the current member account by Amazon Web
         Services accounts specified by their account IDs.
 
         Args:
-            input:
-                An instance of `DeclineInvitationsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -749,20 +989,40 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `DeclineInvitationsOutput`.
         """
-        return await self._invoke(input, _models.DECLINE_INVITATIONS, [], plugins)
 
+    async def decline_invitations(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeclineInvitationsOutput:
+        return await self._invoke(
+            self._select_input(_models.DECLINE_INVITATIONS, args, kwargs),
+            _models.DECLINE_INVITATIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_custom_detection_rule_association(
         self,
-        input: DeleteCustomDetectionRuleAssociationInput,
+        request: _models.DeleteCustomDetectionRuleAssociationInput
+        | _models.DeleteCustomDetectionRuleAssociationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteCustomDetectionRuleAssociationOutput: ...
+
+    @_overload
+    async def delete_custom_detection_rule_association(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteCustomDetectionRuleAssociationInputDict],
     ) -> DeleteCustomDetectionRuleAssociationOutput:
         """
         Disables a custom detection rule by deleting its association. This
         operation is idempotent.
 
         Args:
-            input:
-                An instance of `DeleteCustomDetectionRuleAssociationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -772,14 +1032,36 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `DeleteCustomDetectionRuleAssociationOutput`.
         """
+
+    async def delete_custom_detection_rule_association(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteCustomDetectionRuleAssociationOutput:
         return await self._invoke(
-            input, _models.DELETE_CUSTOM_DETECTION_RULE_ASSOCIATION, [], plugins
+            self._select_input(
+                _models.DELETE_CUSTOM_DETECTION_RULE_ASSOCIATION, args, kwargs
+            ),
+            _models.DELETE_CUSTOM_DETECTION_RULE_ASSOCIATION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def delete_custom_detection_rule_org_configuration(
         self,
-        input: DeleteCustomDetectionRuleOrgConfigurationInput,
+        request: _models.DeleteCustomDetectionRuleOrgConfigurationInput
+        | _models.DeleteCustomDetectionRuleOrgConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteCustomDetectionRuleOrgConfigurationOutput: ...
+
+    @_overload
+    async def delete_custom_detection_rule_org_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteCustomDetectionRuleOrgConfigurationInputDict],
     ) -> DeleteCustomDetectionRuleOrgConfigurationOutput:
         """
         Deletes the organization-level configuration for a custom detection
@@ -787,8 +1069,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         account.
 
         Args:
-            input:
-                An instance of `DeleteCustomDetectionRuleOrgConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -798,20 +1078,41 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `DeleteCustomDetectionRuleOrgConfigurationOutput`.
         """
+
+    async def delete_custom_detection_rule_org_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteCustomDetectionRuleOrgConfigurationOutput:
         return await self._invoke(
-            input, _models.DELETE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION, [], plugins
+            self._select_input(
+                _models.DELETE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION, args, kwargs
+            ),
+            _models.DELETE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def delete_detector(
-        self, input: DeleteDetectorInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteDetectorInput | _models.DeleteDetectorInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteDetectorOutput: ...
+
+    @_overload
+    async def delete_detector(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteDetectorInputDict],
     ) -> DeleteDetectorOutput:
         """
         Deletes an Amazon GuardDuty detector that is specified by the detector
         ID.
 
         Args:
-            input:
-                An instance of `DeleteDetectorInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -821,17 +1122,38 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `DeleteDetectorOutput`.
         """
-        return await self._invoke(input, _models.DELETE_DETECTOR, [], plugins)
 
+    async def delete_detector(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteDetectorOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_DETECTOR, args, kwargs),
+            _models.DELETE_DETECTOR,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_filter(
-        self, input: DeleteFilterInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteFilterInput | _models.DeleteFilterInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteFilterOutput: ...
+
+    @_overload
+    async def delete_filter(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteFilterInputDict],
     ) -> DeleteFilterOutput:
         """
         Deletes the filter specified by the filter name.
 
         Args:
-            input:
-                An instance of `DeleteFilterInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -841,18 +1163,39 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `DeleteFilterOutput`.
         """
-        return await self._invoke(input, _models.DELETE_FILTER, [], plugins)
 
+    async def delete_filter(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteFilterOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_FILTER, args, kwargs),
+            _models.DELETE_FILTER,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_invitations(
-        self, input: DeleteInvitationsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteInvitationsInput | _models.DeleteInvitationsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteInvitationsOutput: ...
+
+    @_overload
+    async def delete_invitations(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteInvitationsInputDict],
     ) -> DeleteInvitationsOutput:
         """
         Deletes invitations sent to the current member account by Amazon Web
         Services accounts specified by their account IDs.
 
         Args:
-            input:
-                An instance of `DeleteInvitationsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -862,18 +1205,39 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `DeleteInvitationsOutput`.
         """
-        return await self._invoke(input, _models.DELETE_INVITATIONS, [], plugins)
 
+    async def delete_invitations(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteInvitationsOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_INVITATIONS, args, kwargs),
+            _models.DELETE_INVITATIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_ip_set(
-        self, input: DeleteIPSetInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteIPSetInput | _models.DeleteIPSetInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteIPSetOutput: ...
+
+    @_overload
+    async def delete_ip_set(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteIPSetInputDict],
     ) -> DeleteIPSetOutput:
         """
         Deletes the IPSet specified by the `ipSetId`. IPSets are called trusted
         IP lists in the console user interface.
 
         Args:
-            input:
-                An instance of `DeleteIPSetInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -883,12 +1247,34 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `DeleteIPSetOutput`.
         """
-        return await self._invoke(input, _models.DELETE_IP_SET, [], plugins)
 
+    async def delete_ip_set(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteIPSetOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_IP_SET, args, kwargs),
+            _models.DELETE_IP_SET,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_malware_protection_plan(
         self,
-        input: DeleteMalwareProtectionPlanInput,
+        request: _models.DeleteMalwareProtectionPlanInput
+        | _models.DeleteMalwareProtectionPlanInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeleteMalwareProtectionPlanOutput: ...
+
+    @_overload
+    async def delete_malware_protection_plan(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteMalwareProtectionPlanInputDict],
     ) -> DeleteMalwareProtectionPlanOutput:
         """
         Deletes the Malware Protection plan ID associated with the Malware
@@ -896,8 +1282,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         protect the resource associated with this Malware Protection plan ID.
 
         Args:
-            input:
-                An instance of `DeleteMalwareProtectionPlanInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -907,12 +1291,33 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `DeleteMalwareProtectionPlanOutput`.
         """
+
+    async def delete_malware_protection_plan(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteMalwareProtectionPlanOutput:
         return await self._invoke(
-            input, _models.DELETE_MALWARE_PROTECTION_PLAN, [], plugins
+            self._select_input(_models.DELETE_MALWARE_PROTECTION_PLAN, args, kwargs),
+            _models.DELETE_MALWARE_PROTECTION_PLAN,
+            [],
+            plugins,
         )
 
+    @_overload
     async def delete_members(
-        self, input: DeleteMembersInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteMembersInput | _models.DeleteMembersInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteMembersOutput: ...
+
+    @_overload
+    async def delete_members(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteMembersInputDict],
     ) -> DeleteMembersOutput:
         """
         Deletes GuardDuty member accounts (to the current GuardDuty
@@ -923,8 +1328,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         GuardDuty for a member account in your organization.
 
         Args:
-            input:
-                An instance of `DeleteMembersInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -934,19 +1337,39 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `DeleteMembersOutput`.
         """
-        return await self._invoke(input, _models.DELETE_MEMBERS, [], plugins)
 
+    async def delete_members(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteMembersOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_MEMBERS, args, kwargs),
+            _models.DELETE_MEMBERS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_publishing_destination(
         self,
-        input: DeletePublishingDestinationInput,
+        request: _models.DeletePublishingDestinationInput
+        | _models.DeletePublishingDestinationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeletePublishingDestinationOutput: ...
+
+    @_overload
+    async def delete_publishing_destination(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeletePublishingDestinationInputDict],
     ) -> DeletePublishingDestinationOutput:
         """
         Deletes the publishing definition with the specified `destinationId`.
 
         Args:
-            input:
-                An instance of `DeletePublishingDestinationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -956,20 +1379,40 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `DeletePublishingDestinationOutput`.
         """
+
+    async def delete_publishing_destination(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeletePublishingDestinationOutput:
         return await self._invoke(
-            input, _models.DELETE_PUBLISHING_DESTINATION, [], plugins
+            self._select_input(_models.DELETE_PUBLISHING_DESTINATION, args, kwargs),
+            _models.DELETE_PUBLISHING_DESTINATION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def delete_threat_entity_set(
-        self, input: DeleteThreatEntitySetInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteThreatEntitySetInput
+        | _models.DeleteThreatEntitySetInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteThreatEntitySetOutput: ...
+
+    @_overload
+    async def delete_threat_entity_set(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteThreatEntitySetInputDict],
     ) -> DeleteThreatEntitySetOutput:
         """
         Deletes the threat entity set that is associated with the specified
         `threatEntitySetId`.
 
         Args:
-            input:
-                An instance of `DeleteThreatEntitySetInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -979,17 +1422,39 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `DeleteThreatEntitySetOutput`.
         """
-        return await self._invoke(input, _models.DELETE_THREAT_ENTITY_SET, [], plugins)
 
+    async def delete_threat_entity_set(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteThreatEntitySetOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_THREAT_ENTITY_SET, args, kwargs),
+            _models.DELETE_THREAT_ENTITY_SET,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_threat_intel_set(
-        self, input: DeleteThreatIntelSetInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteThreatIntelSetInput
+        | _models.DeleteThreatIntelSetInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteThreatIntelSetOutput: ...
+
+    @_overload
+    async def delete_threat_intel_set(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteThreatIntelSetInputDict],
     ) -> DeleteThreatIntelSetOutput:
         """
         Deletes the ThreatIntelSet specified by the ThreatIntelSet ID.
 
         Args:
-            input:
-                An instance of `DeleteThreatIntelSetInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -999,18 +1464,40 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `DeleteThreatIntelSetOutput`.
         """
-        return await self._invoke(input, _models.DELETE_THREAT_INTEL_SET, [], plugins)
 
+    async def delete_threat_intel_set(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteThreatIntelSetOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_THREAT_INTEL_SET, args, kwargs),
+            _models.DELETE_THREAT_INTEL_SET,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_trusted_entity_set(
-        self, input: DeleteTrustedEntitySetInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteTrustedEntitySetInput
+        | _models.DeleteTrustedEntitySetInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteTrustedEntitySetOutput: ...
+
+    @_overload
+    async def delete_trusted_entity_set(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteTrustedEntitySetInputDict],
     ) -> DeleteTrustedEntitySetOutput:
         """
         Deletes the trusted entity set that is associated with the specified
         `trustedEntitySetId`.
 
         Args:
-            input:
-                An instance of `DeleteTrustedEntitySetInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1020,10 +1507,34 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `DeleteTrustedEntitySetOutput`.
         """
-        return await self._invoke(input, _models.DELETE_TRUSTED_ENTITY_SET, [], plugins)
 
+    async def delete_trusted_entity_set(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteTrustedEntitySetOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_TRUSTED_ENTITY_SET, args, kwargs),
+            _models.DELETE_TRUSTED_ENTITY_SET,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def describe_malware_scans(
-        self, input: DescribeMalwareScansInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeMalwareScansInput
+        | _models.DescribeMalwareScansInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeMalwareScansOutput: ...
+
+    @_overload
+    async def describe_malware_scans(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeMalwareScansInputDict],
     ) -> DescribeMalwareScansOutput:
         """
         Returns a list of malware scans. Each member account can view the
@@ -1036,8 +1547,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         endpoints](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
 
         Args:
-            input:
-                An instance of `DescribeMalwareScansInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1047,12 +1556,34 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `DescribeMalwareScansOutput`.
         """
-        return await self._invoke(input, _models.DESCRIBE_MALWARE_SCANS, [], plugins)
 
+    async def describe_malware_scans(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeMalwareScansOutput:
+        return await self._invoke(
+            self._select_input(_models.DESCRIBE_MALWARE_SCANS, args, kwargs),
+            _models.DESCRIBE_MALWARE_SCANS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def describe_organization_configuration(
         self,
-        input: DescribeOrganizationConfigurationInput,
+        request: _models.DescribeOrganizationConfigurationInput
+        | _models.DescribeOrganizationConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeOrganizationConfigurationOutput: ...
+
+    @_overload
+    async def describe_organization_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeOrganizationConfigurationInputDict],
     ) -> DescribeOrganizationConfigurationOutput:
         """
         Returns information about the account selected as the delegated
@@ -1064,8 +1595,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         endpoints](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
 
         Args:
-            input:
-                An instance of `DescribeOrganizationConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1075,22 +1604,42 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `DescribeOrganizationConfigurationOutput`.
         """
+
+    async def describe_organization_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeOrganizationConfigurationOutput:
         return await self._invoke(
-            input, _models.DESCRIBE_ORGANIZATION_CONFIGURATION, [], plugins
+            self._select_input(
+                _models.DESCRIBE_ORGANIZATION_CONFIGURATION, args, kwargs
+            ),
+            _models.DESCRIBE_ORGANIZATION_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def describe_publishing_destination(
         self,
-        input: DescribePublishingDestinationInput,
+        request: _models.DescribePublishingDestinationInput
+        | _models.DescribePublishingDestinationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribePublishingDestinationOutput: ...
+
+    @_overload
+    async def describe_publishing_destination(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribePublishingDestinationInputDict],
     ) -> DescribePublishingDestinationOutput:
         """
         Returns information about the publishing destination specified by the
         provided `destinationId`.
 
         Args:
-            input:
-                An instance of `DescribePublishingDestinationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1100,14 +1649,34 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `DescribePublishingDestinationOutput`.
         """
+
+    async def describe_publishing_destination(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribePublishingDestinationOutput:
         return await self._invoke(
-            input, _models.DESCRIBE_PUBLISHING_DESTINATION, [], plugins
+            self._select_input(_models.DESCRIBE_PUBLISHING_DESTINATION, args, kwargs),
+            _models.DESCRIBE_PUBLISHING_DESTINATION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def disable_organization_admin_account(
         self,
-        input: DisableOrganizationAdminAccountInput,
+        request: _models.DisableOrganizationAdminAccountInput
+        | _models.DisableOrganizationAdminAccountInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DisableOrganizationAdminAccountOutput: ...
+
+    @_overload
+    async def disable_organization_admin_account(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DisableOrganizationAdminAccountInputDict],
     ) -> DisableOrganizationAdminAccountOutput:
         """
         Removes the existing GuardDuty delegated administrator of the
@@ -1115,8 +1684,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         API operation.
 
         Args:
-            input:
-                An instance of `DisableOrganizationAdminAccountInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1126,14 +1693,36 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `DisableOrganizationAdminAccountOutput`.
         """
+
+    async def disable_organization_admin_account(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DisableOrganizationAdminAccountOutput:
         return await self._invoke(
-            input, _models.DISABLE_ORGANIZATION_ADMIN_ACCOUNT, [], plugins
+            self._select_input(
+                _models.DISABLE_ORGANIZATION_ADMIN_ACCOUNT, args, kwargs
+            ),
+            _models.DISABLE_ORGANIZATION_ADMIN_ACCOUNT,
+            [],
+            plugins,
         )
 
+    @_overload
     async def disassociate_from_administrator_account(
         self,
-        input: DisassociateFromAdministratorAccountInput,
+        request: _models.DisassociateFromAdministratorAccountInput
+        | _models.DisassociateFromAdministratorAccountInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DisassociateFromAdministratorAccountOutput: ...
+
+    @_overload
+    async def disassociate_from_administrator_account(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DisassociateFromAdministratorAccountInputDict],
     ) -> DisassociateFromAdministratorAccountOutput:
         """
         Disassociates the current GuardDuty member account from its
@@ -1156,8 +1745,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         GuardDuty in a member account.
 
         Args:
-            input:
-                An instance of `DisassociateFromAdministratorAccountInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1167,14 +1754,36 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `DisassociateFromAdministratorAccountOutput`.
         """
+
+    async def disassociate_from_administrator_account(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DisassociateFromAdministratorAccountOutput:
         return await self._invoke(
-            input, _models.DISASSOCIATE_FROM_ADMINISTRATOR_ACCOUNT, [], plugins
+            self._select_input(
+                _models.DISASSOCIATE_FROM_ADMINISTRATOR_ACCOUNT, args, kwargs
+            ),
+            _models.DISASSOCIATE_FROM_ADMINISTRATOR_ACCOUNT,
+            [],
+            plugins,
         )
 
+    @_overload
     async def disassociate_from_master_account(
         self,
-        input: DisassociateFromMasterAccountInput,
+        request: _models.DisassociateFromMasterAccountInput
+        | _models.DisassociateFromMasterAccountInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DisassociateFromMasterAccountOutput: ...
+
+    @_overload
+    async def disassociate_from_master_account(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DisassociateFromMasterAccountInputDict],
     ) -> DisassociateFromMasterAccountOutput:
         """
         Disassociates the current GuardDuty member account from its
@@ -1193,8 +1802,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         API.
 
         Args:
-            input:
-                An instance of `DisassociateFromMasterAccountInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1204,12 +1811,34 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `DisassociateFromMasterAccountOutput`.
         """
+
+    async def disassociate_from_master_account(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DisassociateFromMasterAccountOutput:
         return await self._invoke(
-            input, _models.DISASSOCIATE_FROM_MASTER_ACCOUNT, [], plugins
+            self._select_input(_models.DISASSOCIATE_FROM_MASTER_ACCOUNT, args, kwargs),
+            _models.DISASSOCIATE_FROM_MASTER_ACCOUNT,
+            [],
+            plugins,
         )
 
+    @_overload
     async def disassociate_members(
-        self, input: DisassociateMembersInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DisassociateMembersInput
+        | _models.DisassociateMembersInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DisassociateMembersOutput: ...
+
+    @_overload
+    async def disassociate_members(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DisassociateMembersInputDict],
     ) -> DisassociateMembersOutput:
         """
         Disassociates GuardDuty member accounts (from the current administrator
@@ -1248,8 +1877,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         accounts again only by calling the CreateMembers API.
 
         Args:
-            input:
-                An instance of `DisassociateMembersInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1259,12 +1886,34 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `DisassociateMembersOutput`.
         """
-        return await self._invoke(input, _models.DISASSOCIATE_MEMBERS, [], plugins)
 
+    async def disassociate_members(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DisassociateMembersOutput:
+        return await self._invoke(
+            self._select_input(_models.DISASSOCIATE_MEMBERS, args, kwargs),
+            _models.DISASSOCIATE_MEMBERS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def enable_organization_admin_account(
         self,
-        input: EnableOrganizationAdminAccountInput,
+        request: _models.EnableOrganizationAdminAccountInput
+        | _models.EnableOrganizationAdminAccountInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> EnableOrganizationAdminAccountOutput: ...
+
+    @_overload
+    async def enable_organization_admin_account(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.EnableOrganizationAdminAccountInputDict],
     ) -> EnableOrganizationAdminAccountOutput:
         """
         Designates an Amazon Web Services account within the organization as
@@ -1272,8 +1921,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         management account can run this API operation.
 
         Args:
-            input:
-                An instance of `EnableOrganizationAdminAccountInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1283,12 +1930,34 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `EnableOrganizationAdminAccountOutput`.
         """
+
+    async def enable_organization_admin_account(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> EnableOrganizationAdminAccountOutput:
         return await self._invoke(
-            input, _models.ENABLE_ORGANIZATION_ADMIN_ACCOUNT, [], plugins
+            self._select_input(_models.ENABLE_ORGANIZATION_ADMIN_ACCOUNT, args, kwargs),
+            _models.ENABLE_ORGANIZATION_ADMIN_ACCOUNT,
+            [],
+            plugins,
         )
 
+    @_overload
     async def get_administrator_account(
-        self, input: GetAdministratorAccountInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetAdministratorAccountInput
+        | _models.GetAdministratorAccountInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetAdministratorAccountOutput: ...
+
+    @_overload
+    async def get_administrator_account(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetAdministratorAccountInputDict],
     ) -> GetAdministratorAccountOutput:
         """
         Provides the details of the GuardDuty administrator account associated
@@ -1308,8 +1977,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
           this API, it will return success (`HTTP 200`) but no content.
 
         Args:
-            input:
-                An instance of `GetAdministratorAccountInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1319,10 +1986,34 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `GetAdministratorAccountOutput`.
         """
-        return await self._invoke(input, _models.GET_ADMINISTRATOR_ACCOUNT, [], plugins)
 
+    async def get_administrator_account(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetAdministratorAccountOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_ADMINISTRATOR_ACCOUNT, args, kwargs),
+            _models.GET_ADMINISTRATOR_ACCOUNT,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_coverage_statistics(
-        self, input: GetCoverageStatisticsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetCoverageStatisticsInput
+        | _models.GetCoverageStatisticsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetCoverageStatisticsOutput: ...
+
+    @_overload
+    async def get_coverage_statistics(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetCoverageStatisticsInputDict],
     ) -> GetCoverageStatisticsOutput:
         """
         Retrieves aggregated statistics for your account. If you are a GuardDuty
@@ -1332,8 +2023,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         on their resources.
 
         Args:
-            input:
-                An instance of `GetCoverageStatisticsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1343,18 +2032,40 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `GetCoverageStatisticsOutput`.
         """
-        return await self._invoke(input, _models.GET_COVERAGE_STATISTICS, [], plugins)
 
+    async def get_coverage_statistics(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetCoverageStatisticsOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_COVERAGE_STATISTICS, args, kwargs),
+            _models.GET_COVERAGE_STATISTICS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_custom_detection_rule(
-        self, input: GetCustomDetectionRuleInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetCustomDetectionRuleInput
+        | _models.GetCustomDetectionRuleInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetCustomDetectionRuleOutput: ...
+
+    @_overload
+    async def get_custom_detection_rule(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetCustomDetectionRuleInputDict],
     ) -> GetCustomDetectionRuleOutput:
         """
         Returns details for a custom detection rule in GuardDuty, including its
         detection logic.
 
         Args:
-            input:
-                An instance of `GetCustomDetectionRuleInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1364,19 +2075,39 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `GetCustomDetectionRuleOutput`.
         """
-        return await self._invoke(input, _models.GET_CUSTOM_DETECTION_RULE, [], plugins)
 
+    async def get_custom_detection_rule(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetCustomDetectionRuleOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_CUSTOM_DETECTION_RULE, args, kwargs),
+            _models.GET_CUSTOM_DETECTION_RULE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_custom_detection_rule_association(
         self,
-        input: GetCustomDetectionRuleAssociationInput,
+        request: _models.GetCustomDetectionRuleAssociationInput
+        | _models.GetCustomDetectionRuleAssociationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetCustomDetectionRuleAssociationOutput: ...
+
+    @_overload
+    async def get_custom_detection_rule_association(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetCustomDetectionRuleAssociationInputDict],
     ) -> GetCustomDetectionRuleAssociationOutput:
         """
         Returns details for a custom detection rule association.
 
         Args:
-            input:
-                An instance of `GetCustomDetectionRuleAssociationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1386,22 +2117,42 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `GetCustomDetectionRuleAssociationOutput`.
         """
+
+    async def get_custom_detection_rule_association(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetCustomDetectionRuleAssociationOutput:
         return await self._invoke(
-            input, _models.GET_CUSTOM_DETECTION_RULE_ASSOCIATION, [], plugins
+            self._select_input(
+                _models.GET_CUSTOM_DETECTION_RULE_ASSOCIATION, args, kwargs
+            ),
+            _models.GET_CUSTOM_DETECTION_RULE_ASSOCIATION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def get_custom_detection_rule_org_configuration(
         self,
-        input: GetCustomDetectionRuleOrgConfigurationInput,
+        request: _models.GetCustomDetectionRuleOrgConfigurationInput
+        | _models.GetCustomDetectionRuleOrgConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetCustomDetectionRuleOrgConfigurationOutput: ...
+
+    @_overload
+    async def get_custom_detection_rule_org_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetCustomDetectionRuleOrgConfigurationInputDict],
     ) -> GetCustomDetectionRuleOrgConfigurationOutput:
         """
         Returns the organization-level configuration for a custom detection
         rule.
 
         Args:
-            input:
-                An instance of `GetCustomDetectionRuleOrgConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1411,12 +2162,35 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `GetCustomDetectionRuleOrgConfigurationOutput`.
         """
+
+    async def get_custom_detection_rule_org_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetCustomDetectionRuleOrgConfigurationOutput:
         return await self._invoke(
-            input, _models.GET_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION, [], plugins
+            self._select_input(
+                _models.GET_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION, args, kwargs
+            ),
+            _models.GET_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def get_detector(
-        self, input: GetDetectorInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetDetectorInput | _models.GetDetectorInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetDetectorOutput: ...
+
+    @_overload
+    async def get_detector(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetDetectorInputDict],
     ) -> GetDetectorOutput:
         """
         Retrieves a GuardDuty detector specified by the detectorId.
@@ -1427,8 +2201,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         endpoints](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
 
         Args:
-            input:
-                An instance of `GetDetectorInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1438,17 +2210,38 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `GetDetectorOutput`.
         """
-        return await self._invoke(input, _models.GET_DETECTOR, [], plugins)
 
+    async def get_detector(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetDetectorOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_DETECTOR, args, kwargs),
+            _models.GET_DETECTOR,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_filter(
-        self, input: GetFilterInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetFilterInput | _models.GetFilterInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetFilterOutput: ...
+
+    @_overload
+    async def get_filter(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetFilterInputDict],
     ) -> GetFilterOutput:
         """
         Returns the details of the filter specified by the filter name.
 
         Args:
-            input:
-                An instance of `GetFilterInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1458,17 +2251,38 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `GetFilterOutput`.
         """
-        return await self._invoke(input, _models.GET_FILTER, [], plugins)
 
+    async def get_filter(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetFilterOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_FILTER, args, kwargs),
+            _models.GET_FILTER,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_findings(
-        self, input: GetFindingsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetFindingsInput | _models.GetFindingsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetFindingsOutput: ...
+
+    @_overload
+    async def get_findings(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetFindingsInputDict],
     ) -> GetFindingsOutput:
         """
         Describes Amazon GuardDuty findings specified by finding IDs.
 
         Args:
-            input:
-                An instance of `GetFindingsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1478,10 +2292,34 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `GetFindingsOutput`.
         """
-        return await self._invoke(input, _models.GET_FINDINGS, [], plugins)
 
+    async def get_findings(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetFindingsOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_FINDINGS, args, kwargs),
+            _models.GET_FINDINGS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_findings_statistics(
-        self, input: GetFindingsStatisticsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetFindingsStatisticsInput
+        | _models.GetFindingsStatisticsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetFindingsStatisticsOutput: ...
+
+    @_overload
+    async def get_findings_statistics(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetFindingsStatisticsInputDict],
     ) -> GetFindingsStatisticsOutput:
         """
         Lists GuardDuty findings statistics for the specified detector ID.
@@ -1496,8 +2334,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         endpoints](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
 
         Args:
-            input:
-                An instance of `GetFindingsStatisticsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1507,10 +2343,33 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `GetFindingsStatisticsOutput`.
         """
-        return await self._invoke(input, _models.GET_FINDINGS_STATISTICS, [], plugins)
 
+    async def get_findings_statistics(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetFindingsStatisticsOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_FINDINGS_STATISTICS, args, kwargs),
+            _models.GET_FINDINGS_STATISTICS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_investigation(
-        self, input: GetInvestigationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetInvestigationInput | _models.GetInvestigationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetInvestigationOutput: ...
+
+    @_overload
+    async def get_investigation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetInvestigationInputDict],
     ) -> GetInvestigationOutput:
         """
         This API is currently available as a preview. This feature is available
@@ -1526,8 +2385,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         belong to them.
 
         Args:
-            input:
-                An instance of `GetInvestigationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1537,18 +2394,40 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `GetInvestigationOutput`.
         """
-        return await self._invoke(input, _models.GET_INVESTIGATION, [], plugins)
 
+    async def get_investigation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetInvestigationOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_INVESTIGATION, args, kwargs),
+            _models.GET_INVESTIGATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_invitations_count(
-        self, input: GetInvitationsCountInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetInvitationsCountInput
+        | _models.GetInvitationsCountInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetInvitationsCountOutput: ...
+
+    @_overload
+    async def get_invitations_count(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetInvitationsCountInputDict],
     ) -> GetInvitationsCountOutput:
         """
         Returns the count of all GuardDuty membership invitations that were sent
         to the current member account except the currently accepted invitation.
 
         Args:
-            input:
-                An instance of `GetInvitationsCountInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1558,17 +2437,38 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `GetInvitationsCountOutput`.
         """
-        return await self._invoke(input, _models.GET_INVITATIONS_COUNT, [], plugins)
 
+    async def get_invitations_count(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetInvitationsCountOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_INVITATIONS_COUNT, args, kwargs),
+            _models.GET_INVITATIONS_COUNT,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_ip_set(
-        self, input: GetIPSetInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetIPSetInput | _models.GetIPSetInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetIPSetOutput: ...
+
+    @_overload
+    async def get_ip_set(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetIPSetInputDict],
     ) -> GetIPSetOutput:
         """
         Retrieves the IPSet specified by the `ipSetId`.
 
         Args:
-            input:
-                An instance of `GetIPSetInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1578,18 +2478,40 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `GetIPSetOutput`.
         """
-        return await self._invoke(input, _models.GET_IP_SET, [], plugins)
 
+    async def get_ip_set(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetIPSetOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_IP_SET, args, kwargs),
+            _models.GET_IP_SET,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_malware_protection_plan(
-        self, input: GetMalwareProtectionPlanInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetMalwareProtectionPlanInput
+        | _models.GetMalwareProtectionPlanInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetMalwareProtectionPlanOutput: ...
+
+    @_overload
+    async def get_malware_protection_plan(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetMalwareProtectionPlanInputDict],
     ) -> GetMalwareProtectionPlanOutput:
         """
         Retrieves the Malware Protection plan details associated with a Malware
         Protection plan ID.
 
         Args:
-            input:
-                An instance of `GetMalwareProtectionPlanInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1599,12 +2521,33 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `GetMalwareProtectionPlanOutput`.
         """
+
+    async def get_malware_protection_plan(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetMalwareProtectionPlanOutput:
         return await self._invoke(
-            input, _models.GET_MALWARE_PROTECTION_PLAN, [], plugins
+            self._select_input(_models.GET_MALWARE_PROTECTION_PLAN, args, kwargs),
+            _models.GET_MALWARE_PROTECTION_PLAN,
+            [],
+            plugins,
         )
 
+    @_overload
     async def get_malware_scan(
-        self, input: GetMalwareScanInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetMalwareScanInput | _models.GetMalwareScanInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetMalwareScanOutput: ...
+
+    @_overload
+    async def get_malware_scan(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetMalwareScanInputDict],
     ) -> GetMalwareScanOutput:
         """
         Retrieves the detailed information for a specific malware scan. Each
@@ -1618,8 +2561,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         endpoints](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
 
         Args:
-            input:
-                An instance of `GetMalwareScanInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1629,10 +2570,34 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `GetMalwareScanOutput`.
         """
-        return await self._invoke(input, _models.GET_MALWARE_SCAN, [], plugins)
 
+    async def get_malware_scan(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetMalwareScanOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_MALWARE_SCAN, args, kwargs),
+            _models.GET_MALWARE_SCAN,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_malware_scan_settings(
-        self, input: GetMalwareScanSettingsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetMalwareScanSettingsInput
+        | _models.GetMalwareScanSettingsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetMalwareScanSettingsOutput: ...
+
+    @_overload
+    async def get_malware_scan_settings(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetMalwareScanSettingsInputDict],
     ) -> GetMalwareScanSettingsOutput:
         """
         Returns the details of the malware scan settings.
@@ -1643,8 +2608,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         endpoints](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
 
         Args:
-            input:
-                An instance of `GetMalwareScanSettingsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1654,18 +2617,39 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `GetMalwareScanSettingsOutput`.
         """
-        return await self._invoke(input, _models.GET_MALWARE_SCAN_SETTINGS, [], plugins)
 
+    async def get_malware_scan_settings(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetMalwareScanSettingsOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_MALWARE_SCAN_SETTINGS, args, kwargs),
+            _models.GET_MALWARE_SCAN_SETTINGS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_master_account(
-        self, input: GetMasterAccountInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetMasterAccountInput | _models.GetMasterAccountInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetMasterAccountOutput: ...
+
+    @_overload
+    async def get_master_account(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetMasterAccountInputDict],
     ) -> GetMasterAccountOutput:
         """
         Provides the details for the GuardDuty administrator account associated
         with the current GuardDuty member account.
 
         Args:
-            input:
-                An instance of `GetMasterAccountInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1675,10 +2659,33 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `GetMasterAccountOutput`.
         """
-        return await self._invoke(input, _models.GET_MASTER_ACCOUNT, [], plugins)
 
+    async def get_master_account(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetMasterAccountOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_MASTER_ACCOUNT, args, kwargs),
+            _models.GET_MASTER_ACCOUNT,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_member_detectors(
-        self, input: GetMemberDetectorsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetMemberDetectorsInput | _models.GetMemberDetectorsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetMemberDetectorsOutput: ...
+
+    @_overload
+    async def get_member_detectors(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetMemberDetectorsInputDict],
     ) -> GetMemberDetectorsOutput:
         """
         Describes which data sources are enabled for the member account's
@@ -1690,8 +2697,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         endpoints](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
 
         Args:
-            input:
-                An instance of `GetMemberDetectorsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1701,18 +2706,39 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `GetMemberDetectorsOutput`.
         """
-        return await self._invoke(input, _models.GET_MEMBER_DETECTORS, [], plugins)
 
+    async def get_member_detectors(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetMemberDetectorsOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_MEMBER_DETECTORS, args, kwargs),
+            _models.GET_MEMBER_DETECTORS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_members(
-        self, input: GetMembersInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetMembersInput | _models.GetMembersInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetMembersOutput: ...
+
+    @_overload
+    async def get_members(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetMembersInputDict],
     ) -> GetMembersOutput:
         """
         Retrieves GuardDuty member accounts (of the current GuardDuty
         administrator account) specified by the account IDs.
 
         Args:
-            input:
-                An instance of `GetMembersInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1722,10 +2748,34 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `GetMembersOutput`.
         """
-        return await self._invoke(input, _models.GET_MEMBERS, [], plugins)
 
+    async def get_members(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetMembersOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_MEMBERS, args, kwargs),
+            _models.GET_MEMBERS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_organization_statistics(
-        self, input: GetOrganizationStatisticsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetOrganizationStatisticsInput
+        | _models.GetOrganizationStatisticsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetOrganizationStatisticsOutput: ...
+
+    @_overload
+    async def get_organization_statistics(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetOrganizationStatisticsInputDict],
     ) -> GetOrganizationStatisticsOutput:
         """
         Retrieves how many active member accounts have each feature enabled
@@ -1736,8 +2786,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         generate the statistics for the entire organization.
 
         Args:
-            input:
-                An instance of `GetOrganizationStatisticsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1747,20 +2795,40 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `GetOrganizationStatisticsOutput`.
         """
+
+    async def get_organization_statistics(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetOrganizationStatisticsOutput:
         return await self._invoke(
-            input, _models.GET_ORGANIZATION_STATISTICS, [], plugins
+            self._select_input(_models.GET_ORGANIZATION_STATISTICS, args, kwargs),
+            _models.GET_ORGANIZATION_STATISTICS,
+            [],
+            plugins,
         )
 
+    @_overload
     async def get_remaining_free_trial_days(
-        self, input: GetRemainingFreeTrialDaysInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetRemainingFreeTrialDaysInput
+        | _models.GetRemainingFreeTrialDaysInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetRemainingFreeTrialDaysOutput: ...
+
+    @_overload
+    async def get_remaining_free_trial_days(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetRemainingFreeTrialDaysInputDict],
     ) -> GetRemainingFreeTrialDaysOutput:
         """
         Provides the number of days left for each data source used in the free
         trial period.
 
         Args:
-            input:
-                An instance of `GetRemainingFreeTrialDaysInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1770,20 +2838,39 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `GetRemainingFreeTrialDaysOutput`.
         """
+
+    async def get_remaining_free_trial_days(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetRemainingFreeTrialDaysOutput:
         return await self._invoke(
-            input, _models.GET_REMAINING_FREE_TRIAL_DAYS, [], plugins
+            self._select_input(_models.GET_REMAINING_FREE_TRIAL_DAYS, args, kwargs),
+            _models.GET_REMAINING_FREE_TRIAL_DAYS,
+            [],
+            plugins,
         )
 
+    @_overload
     async def get_threat_entity_set(
-        self, input: GetThreatEntitySetInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetThreatEntitySetInput | _models.GetThreatEntitySetInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetThreatEntitySetOutput: ...
+
+    @_overload
+    async def get_threat_entity_set(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetThreatEntitySetInputDict],
     ) -> GetThreatEntitySetOutput:
         """
         Retrieves the threat entity set associated with the specified
         `threatEntitySetId`.
 
         Args:
-            input:
-                An instance of `GetThreatEntitySetInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1793,17 +2880,38 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `GetThreatEntitySetOutput`.
         """
-        return await self._invoke(input, _models.GET_THREAT_ENTITY_SET, [], plugins)
 
+    async def get_threat_entity_set(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetThreatEntitySetOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_THREAT_ENTITY_SET, args, kwargs),
+            _models.GET_THREAT_ENTITY_SET,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_threat_intel_set(
-        self, input: GetThreatIntelSetInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetThreatIntelSetInput | _models.GetThreatIntelSetInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetThreatIntelSetOutput: ...
+
+    @_overload
+    async def get_threat_intel_set(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetThreatIntelSetInputDict],
     ) -> GetThreatIntelSetOutput:
         """
         Retrieves the ThreatIntelSet that is specified by the ThreatIntelSet ID.
 
         Args:
-            input:
-                An instance of `GetThreatIntelSetInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1813,18 +2921,40 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `GetThreatIntelSetOutput`.
         """
-        return await self._invoke(input, _models.GET_THREAT_INTEL_SET, [], plugins)
 
+    async def get_threat_intel_set(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetThreatIntelSetOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_THREAT_INTEL_SET, args, kwargs),
+            _models.GET_THREAT_INTEL_SET,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_trusted_entity_set(
-        self, input: GetTrustedEntitySetInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetTrustedEntitySetInput
+        | _models.GetTrustedEntitySetInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetTrustedEntitySetOutput: ...
+
+    @_overload
+    async def get_trusted_entity_set(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetTrustedEntitySetInputDict],
     ) -> GetTrustedEntitySetOutput:
         """
         Retrieves the trusted entity set associated with the specified
         `trustedEntitySetId`.
 
         Args:
-            input:
-                An instance of `GetTrustedEntitySetInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1834,10 +2964,33 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `GetTrustedEntitySetOutput`.
         """
-        return await self._invoke(input, _models.GET_TRUSTED_ENTITY_SET, [], plugins)
 
+    async def get_trusted_entity_set(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetTrustedEntitySetOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_TRUSTED_ENTITY_SET, args, kwargs),
+            _models.GET_TRUSTED_ENTITY_SET,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_usage_statistics(
-        self, input: GetUsageStatisticsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetUsageStatisticsInput | _models.GetUsageStatisticsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetUsageStatisticsOutput: ...
+
+    @_overload
+    async def get_usage_statistics(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetUsageStatisticsInputDict],
     ) -> GetUsageStatisticsOutput:
         """
         Lists Amazon GuardDuty usage statistics over the last 30 days for the
@@ -1849,8 +3002,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Calculated](https://docs.aws.amazon.com/guardduty/latest/ug/monitoring_costs.html#usage-calculations).
 
         Args:
-            input:
-                An instance of `GetUsageStatisticsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1860,10 +3011,33 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `GetUsageStatisticsOutput`.
         """
-        return await self._invoke(input, _models.GET_USAGE_STATISTICS, [], plugins)
 
+    async def get_usage_statistics(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetUsageStatisticsOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_USAGE_STATISTICS, args, kwargs),
+            _models.GET_USAGE_STATISTICS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def invite_members(
-        self, input: InviteMembersInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.InviteMembersInput | _models.InviteMembersInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> InviteMembersOutput: ...
+
+    @_overload
+    async def invite_members(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.InviteMembersInputDict],
     ) -> InviteMembersOutput:
         """
         Invites Amazon Web Services accounts to become members of an
@@ -1912,8 +3086,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         accounts again only by calling the CreateMembers API.
 
         Args:
-            input:
-                An instance of `InviteMembersInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1923,10 +3095,33 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `InviteMembersOutput`.
         """
-        return await self._invoke(input, _models.INVITE_MEMBERS, [], plugins)
 
+    async def invite_members(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> InviteMembersOutput:
+        return await self._invoke(
+            self._select_input(_models.INVITE_MEMBERS, args, kwargs),
+            _models.INVITE_MEMBERS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_coverage(
-        self, input: ListCoverageInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListCoverageInput | _models.ListCoverageInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListCoverageOutput: ...
+
+    @_overload
+    async def list_coverage(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListCoverageInputDict],
     ) -> ListCoverageOutput:
         """
         Lists coverage details for your GuardDuty account. If you're a
@@ -1937,8 +3132,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         agent running on their resources.
 
         Args:
-            input:
-                An instance of `ListCoverageInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1948,20 +3141,40 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `ListCoverageOutput`.
         """
-        return await self._invoke(input, _models.LIST_COVERAGE, [], plugins)
 
+    async def list_coverage(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListCoverageOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_COVERAGE, args, kwargs),
+            _models.LIST_COVERAGE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_custom_detection_rule_associations(
         self,
-        input: ListCustomDetectionRuleAssociationsInput,
+        request: _models.ListCustomDetectionRuleAssociationsInput
+        | _models.ListCustomDetectionRuleAssociationsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListCustomDetectionRuleAssociationsOutput: ...
+
+    @_overload
+    async def list_custom_detection_rule_associations(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListCustomDetectionRuleAssociationsInputDict],
     ) -> ListCustomDetectionRuleAssociationsOutput:
         """
         Returns all custom detection rule associations for your account. You can
         filter by rule ID and mode.
 
         Args:
-            input:
-                An instance of `ListCustomDetectionRuleAssociationsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1971,22 +3184,42 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `ListCustomDetectionRuleAssociationsOutput`.
         """
+
+    async def list_custom_detection_rule_associations(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListCustomDetectionRuleAssociationsOutput:
         return await self._invoke(
-            input, _models.LIST_CUSTOM_DETECTION_RULE_ASSOCIATIONS, [], plugins
+            self._select_input(
+                _models.LIST_CUSTOM_DETECTION_RULE_ASSOCIATIONS, args, kwargs
+            ),
+            _models.LIST_CUSTOM_DETECTION_RULE_ASSOCIATIONS,
+            [],
+            plugins,
         )
 
+    @_overload
     async def list_custom_detection_rule_org_configurations(
         self,
-        input: ListCustomDetectionRuleOrgConfigurationsInput,
+        request: _models.ListCustomDetectionRuleOrgConfigurationsInput
+        | _models.ListCustomDetectionRuleOrgConfigurationsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListCustomDetectionRuleOrgConfigurationsOutput: ...
+
+    @_overload
+    async def list_custom_detection_rule_org_configurations(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListCustomDetectionRuleOrgConfigurationsInputDict],
     ) -> ListCustomDetectionRuleOrgConfigurationsOutput:
         """
         Returns all organization-level configurations for custom detection
         rules. You can filter the results by status.
 
         Args:
-            input:
-                An instance of `ListCustomDetectionRuleOrgConfigurationsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1996,12 +3229,36 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `ListCustomDetectionRuleOrgConfigurationsOutput`.
         """
+
+    async def list_custom_detection_rule_org_configurations(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListCustomDetectionRuleOrgConfigurationsOutput:
         return await self._invoke(
-            input, _models.LIST_CUSTOM_DETECTION_RULE_ORG_CONFIGURATIONS, [], plugins
+            self._select_input(
+                _models.LIST_CUSTOM_DETECTION_RULE_ORG_CONFIGURATIONS, args, kwargs
+            ),
+            _models.LIST_CUSTOM_DETECTION_RULE_ORG_CONFIGURATIONS,
+            [],
+            plugins,
         )
 
+    @_overload
     async def list_custom_detection_rules(
-        self, input: ListCustomDetectionRulesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListCustomDetectionRulesInput
+        | _models.ListCustomDetectionRulesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListCustomDetectionRulesOutput: ...
+
+    @_overload
+    async def list_custom_detection_rules(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListCustomDetectionRulesInputDict],
     ) -> ListCustomDetectionRulesOutput:
         """
         Returns all available custom detection rules in GuardDuty. You can
@@ -2009,8 +3266,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         service.
 
         Args:
-            input:
-                An instance of `ListCustomDetectionRulesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2020,20 +3275,39 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `ListCustomDetectionRulesOutput`.
         """
+
+    async def list_custom_detection_rules(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListCustomDetectionRulesOutput:
         return await self._invoke(
-            input, _models.LIST_CUSTOM_DETECTION_RULES, [], plugins
+            self._select_input(_models.LIST_CUSTOM_DETECTION_RULES, args, kwargs),
+            _models.LIST_CUSTOM_DETECTION_RULES,
+            [],
+            plugins,
         )
 
+    @_overload
     async def list_detectors(
-        self, input: ListDetectorsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListDetectorsInput | _models.ListDetectorsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListDetectorsOutput: ...
+
+    @_overload
+    async def list_detectors(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListDetectorsInputDict],
     ) -> ListDetectorsOutput:
         """
         Lists detectorIds of all the existing Amazon GuardDuty detector
         resources.
 
         Args:
-            input:
-                An instance of `ListDetectorsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2043,17 +3317,38 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `ListDetectorsOutput`.
         """
-        return await self._invoke(input, _models.LIST_DETECTORS, [], plugins)
 
+    async def list_detectors(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListDetectorsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_DETECTORS, args, kwargs),
+            _models.LIST_DETECTORS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_filters(
-        self, input: ListFiltersInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListFiltersInput | _models.ListFiltersInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListFiltersOutput: ...
+
+    @_overload
+    async def list_filters(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListFiltersInputDict],
     ) -> ListFiltersOutput:
         """
         Returns a paginated list of the current filters.
 
         Args:
-            input:
-                An instance of `ListFiltersInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2063,10 +3358,33 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `ListFiltersOutput`.
         """
-        return await self._invoke(input, _models.LIST_FILTERS, [], plugins)
 
+    async def list_filters(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListFiltersOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_FILTERS, args, kwargs),
+            _models.LIST_FILTERS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_findings(
-        self, input: ListFindingsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListFindingsInput | _models.ListFindingsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListFindingsOutput: ...
+
+    @_overload
+    async def list_findings(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListFindingsInputDict],
     ) -> ListFindingsOutput:
         """
         Lists GuardDuty findings for the specified detector ID.
@@ -2077,8 +3395,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         endpoints](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
 
         Args:
-            input:
-                An instance of `ListFindingsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2088,10 +3404,33 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `ListFindingsOutput`.
         """
-        return await self._invoke(input, _models.LIST_FINDINGS, [], plugins)
 
+    async def list_findings(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListFindingsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_FINDINGS, args, kwargs),
+            _models.LIST_FINDINGS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_investigations(
-        self, input: ListInvestigationsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListInvestigationsInput | _models.ListInvestigationsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListInvestigationsOutput: ...
+
+    @_overload
+    async def list_investigations(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListInvestigationsInputDict],
     ) -> ListInvestigationsOutput:
         """
         This API is currently available as a preview. This feature is available
@@ -2108,8 +3447,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         them.
 
         Args:
-            input:
-                An instance of `ListInvestigationsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2119,18 +3456,39 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `ListInvestigationsOutput`.
         """
-        return await self._invoke(input, _models.LIST_INVESTIGATIONS, [], plugins)
 
+    async def list_investigations(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListInvestigationsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_INVESTIGATIONS, args, kwargs),
+            _models.LIST_INVESTIGATIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_invitations(
-        self, input: ListInvitationsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListInvitationsInput | _models.ListInvitationsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListInvitationsOutput: ...
+
+    @_overload
+    async def list_invitations(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListInvitationsInputDict],
     ) -> ListInvitationsOutput:
         """
         Lists all GuardDuty membership invitations that were sent to the current
         Amazon Web Services account.
 
         Args:
-            input:
-                An instance of `ListInvitationsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2140,10 +3498,33 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `ListInvitationsOutput`.
         """
-        return await self._invoke(input, _models.LIST_INVITATIONS, [], plugins)
 
+    async def list_invitations(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListInvitationsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_INVITATIONS, args, kwargs),
+            _models.LIST_INVITATIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_ip_sets(
-        self, input: ListIPSetsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListIPSetsInput | _models.ListIPSetsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListIPSetsOutput: ...
+
+    @_overload
+    async def list_ip_sets(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListIPSetsInputDict],
     ) -> ListIPSetsOutput:
         """
         Lists the IPSets of the GuardDuty service specified by the detector ID.
@@ -2151,8 +3532,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         the IPSets from the associated administrator account.
 
         Args:
-            input:
-                An instance of `ListIPSetsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2162,20 +3541,40 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `ListIPSetsOutput`.
         """
-        return await self._invoke(input, _models.LIST_IP_SETS, [], plugins)
 
+    async def list_ip_sets(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListIPSetsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_IP_SETS, args, kwargs),
+            _models.LIST_IP_SETS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_malware_protection_plans(
         self,
-        input: ListMalwareProtectionPlansInput,
+        request: _models.ListMalwareProtectionPlansInput
+        | _models.ListMalwareProtectionPlansInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListMalwareProtectionPlansOutput: ...
+
+    @_overload
+    async def list_malware_protection_plans(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListMalwareProtectionPlansInputDict],
     ) -> ListMalwareProtectionPlansOutput:
         """
         Lists the Malware Protection plan IDs associated with the protected
         resources in your Amazon Web Services account.
 
         Args:
-            input:
-                An instance of `ListMalwareProtectionPlansInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2185,12 +3584,33 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `ListMalwareProtectionPlansOutput`.
         """
+
+    async def list_malware_protection_plans(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListMalwareProtectionPlansOutput:
         return await self._invoke(
-            input, _models.LIST_MALWARE_PROTECTION_PLANS, [], plugins
+            self._select_input(_models.LIST_MALWARE_PROTECTION_PLANS, args, kwargs),
+            _models.LIST_MALWARE_PROTECTION_PLANS,
+            [],
+            plugins,
         )
 
+    @_overload
     async def list_malware_scans(
-        self, input: ListMalwareScansInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListMalwareScansInput | _models.ListMalwareScansInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListMalwareScansOutput: ...
+
+    @_overload
+    async def list_malware_scans(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListMalwareScansInputDict],
     ) -> ListMalwareScansOutput:
         """
         Returns a list of malware scans. Each member account can view the
@@ -2198,8 +3618,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         malware scans for all of its members' accounts.
 
         Args:
-            input:
-                An instance of `ListMalwareScansInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2209,18 +3627,39 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `ListMalwareScansOutput`.
         """
-        return await self._invoke(input, _models.LIST_MALWARE_SCANS, [], plugins)
 
+    async def list_malware_scans(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListMalwareScansOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_MALWARE_SCANS, args, kwargs),
+            _models.LIST_MALWARE_SCANS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_members(
-        self, input: ListMembersInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListMembersInput | _models.ListMembersInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListMembersOutput: ...
+
+    @_overload
+    async def list_members(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListMembersInputDict],
     ) -> ListMembersOutput:
         """
         Lists details about all member accounts for the current GuardDuty
         administrator account.
 
         Args:
-            input:
-                An instance of `ListMembersInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2230,20 +3669,40 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `ListMembersOutput`.
         """
-        return await self._invoke(input, _models.LIST_MEMBERS, [], plugins)
 
+    async def list_members(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListMembersOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_MEMBERS, args, kwargs),
+            _models.LIST_MEMBERS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_organization_admin_accounts(
         self,
-        input: ListOrganizationAdminAccountsInput,
+        request: _models.ListOrganizationAdminAccountsInput
+        | _models.ListOrganizationAdminAccountsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListOrganizationAdminAccountsOutput: ...
+
+    @_overload
+    async def list_organization_admin_accounts(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListOrganizationAdminAccountsInputDict],
     ) -> ListOrganizationAdminAccountsOutput:
         """
         Lists the accounts designated as GuardDuty delegated administrators.
         Only the organization's management account can run this API operation.
 
         Args:
-            input:
-                An instance of `ListOrganizationAdminAccountsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2253,22 +3712,40 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `ListOrganizationAdminAccountsOutput`.
         """
+
+    async def list_organization_admin_accounts(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListOrganizationAdminAccountsOutput:
         return await self._invoke(
-            input, _models.LIST_ORGANIZATION_ADMIN_ACCOUNTS, [], plugins
+            self._select_input(_models.LIST_ORGANIZATION_ADMIN_ACCOUNTS, args, kwargs),
+            _models.LIST_ORGANIZATION_ADMIN_ACCOUNTS,
+            [],
+            plugins,
         )
 
+    @_overload
     async def list_publishing_destinations(
         self,
-        input: ListPublishingDestinationsInput,
+        request: _models.ListPublishingDestinationsInput
+        | _models.ListPublishingDestinationsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListPublishingDestinationsOutput: ...
+
+    @_overload
+    async def list_publishing_destinations(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListPublishingDestinationsInputDict],
     ) -> ListPublishingDestinationsOutput:
         """
         Returns a list of publishing destinations associated with the specified
         `detectorId`.
 
         Args:
-            input:
-                An instance of `ListPublishingDestinationsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2278,12 +3755,34 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `ListPublishingDestinationsOutput`.
         """
+
+    async def list_publishing_destinations(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListPublishingDestinationsOutput:
         return await self._invoke(
-            input, _models.LIST_PUBLISHING_DESTINATIONS, [], plugins
+            self._select_input(_models.LIST_PUBLISHING_DESTINATIONS, args, kwargs),
+            _models.LIST_PUBLISHING_DESTINATIONS,
+            [],
+            plugins,
         )
 
+    @_overload
     async def list_tags_for_resource(
-        self, input: ListTagsForResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListTagsForResourceInput
+        | _models.ListTagsForResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListTagsForResourceOutput: ...
+
+    @_overload
+    async def list_tags_for_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListTagsForResourceInputDict],
     ) -> ListTagsForResourceOutput:
         """
         Lists tags for a resource. Tagging is currently supported for detectors,
@@ -2292,8 +3791,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         returns all assigned tags for a given resource.
 
         Args:
-            input:
-                An instance of `ListTagsForResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2303,10 +3800,34 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `ListTagsForResourceOutput`.
         """
-        return await self._invoke(input, _models.LIST_TAGS_FOR_RESOURCE, [], plugins)
 
+    async def list_tags_for_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListTagsForResourceOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_TAGS_FOR_RESOURCE, args, kwargs),
+            _models.LIST_TAGS_FOR_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_threat_entity_sets(
-        self, input: ListThreatEntitySetsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListThreatEntitySetsInput
+        | _models.ListThreatEntitySetsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListThreatEntitySetsOutput: ...
+
+    @_overload
+    async def list_threat_entity_sets(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListThreatEntitySetsInputDict],
     ) -> ListThreatEntitySetsOutput:
         """
         Lists the threat entity sets associated with the specified GuardDuty
@@ -2315,8 +3836,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         account.
 
         Args:
-            input:
-                An instance of `ListThreatEntitySetsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2326,10 +3845,34 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `ListThreatEntitySetsOutput`.
         """
-        return await self._invoke(input, _models.LIST_THREAT_ENTITY_SETS, [], plugins)
 
+    async def list_threat_entity_sets(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListThreatEntitySetsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_THREAT_ENTITY_SETS, args, kwargs),
+            _models.LIST_THREAT_ENTITY_SETS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_threat_intel_sets(
-        self, input: ListThreatIntelSetsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListThreatIntelSetsInput
+        | _models.ListThreatIntelSetsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListThreatIntelSetsOutput: ...
+
+    @_overload
+    async def list_threat_intel_sets(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListThreatIntelSetsInputDict],
     ) -> ListThreatIntelSetsOutput:
         """
         Lists the ThreatIntelSets of the GuardDuty service specified by the
@@ -2337,8 +3880,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         ThreatIntelSets associated with the administrator account are returned.
 
         Args:
-            input:
-                An instance of `ListThreatIntelSetsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2348,10 +3889,34 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `ListThreatIntelSetsOutput`.
         """
-        return await self._invoke(input, _models.LIST_THREAT_INTEL_SETS, [], plugins)
 
+    async def list_threat_intel_sets(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListThreatIntelSetsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_THREAT_INTEL_SETS, args, kwargs),
+            _models.LIST_THREAT_INTEL_SETS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_trusted_entity_sets(
-        self, input: ListTrustedEntitySetsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListTrustedEntitySetsInput
+        | _models.ListTrustedEntitySetsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListTrustedEntitySetsOutput: ...
+
+    @_overload
+    async def list_trusted_entity_sets(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListTrustedEntitySetsInputDict],
     ) -> ListTrustedEntitySetsOutput:
         """
         Lists the trusted entity sets associated with the specified GuardDuty
@@ -2360,8 +3925,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         administrator account.
 
         Args:
-            input:
-                An instance of `ListTrustedEntitySetsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2371,10 +3934,34 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `ListTrustedEntitySetsOutput`.
         """
-        return await self._invoke(input, _models.LIST_TRUSTED_ENTITY_SETS, [], plugins)
 
+    async def list_trusted_entity_sets(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListTrustedEntitySetsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_TRUSTED_ENTITY_SETS, args, kwargs),
+            _models.LIST_TRUSTED_ENTITY_SETS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def send_object_malware_scan(
-        self, input: SendObjectMalwareScanInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.SendObjectMalwareScanInput
+        | _models.SendObjectMalwareScanInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> SendObjectMalwareScanOutput: ...
+
+    @_overload
+    async def send_object_malware_scan(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SendObjectMalwareScanInputDict],
     ) -> SendObjectMalwareScanOutput:
         """
         Initiates a malware scan for a specific S3 object. This API allows you
@@ -2387,8 +3974,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Protection](http://aws.amazon.com/service-terms/#87._Amazon_GuardDuty).
 
         Args:
-            input:
-                An instance of `SendObjectMalwareScanInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2398,10 +3983,33 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `SendObjectMalwareScanOutput`.
         """
-        return await self._invoke(input, _models.SEND_OBJECT_MALWARE_SCAN, [], plugins)
 
+    async def send_object_malware_scan(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SendObjectMalwareScanOutput:
+        return await self._invoke(
+            self._select_input(_models.SEND_OBJECT_MALWARE_SCAN, args, kwargs),
+            _models.SEND_OBJECT_MALWARE_SCAN,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def start_malware_scan(
-        self, input: StartMalwareScanInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StartMalwareScanInput | _models.StartMalwareScanInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StartMalwareScanOutput: ...
+
+    @_overload
+    async def start_malware_scan(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartMalwareScanInputDict],
     ) -> StartMalwareScanOutput:
         """
         Initiates the malware scan. Invoking this API will automatically create
@@ -2422,8 +4030,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Protection](http://aws.amazon.com/service-terms/#87._Amazon_GuardDuty).
 
         Args:
-            input:
-                An instance of `StartMalwareScanInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2433,10 +4039,34 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `StartMalwareScanOutput`.
         """
-        return await self._invoke(input, _models.START_MALWARE_SCAN, [], plugins)
 
+    async def start_malware_scan(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StartMalwareScanOutput:
+        return await self._invoke(
+            self._select_input(_models.START_MALWARE_SCAN, args, kwargs),
+            _models.START_MALWARE_SCAN,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def start_monitoring_members(
-        self, input: StartMonitoringMembersInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StartMonitoringMembersInput
+        | _models.StartMonitoringMembersInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StartMonitoringMembersOutput: ...
+
+    @_overload
+    async def start_monitoring_members(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartMonitoringMembersInputDict],
     ) -> StartMonitoringMembersOutput:
         """
         Turns on GuardDuty monitoring of the specified member accounts. Use this
@@ -2446,8 +4076,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         operation.
 
         Args:
-            input:
-                An instance of `StartMonitoringMembersInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2457,10 +4085,34 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `StartMonitoringMembersOutput`.
         """
-        return await self._invoke(input, _models.START_MONITORING_MEMBERS, [], plugins)
 
+    async def start_monitoring_members(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StartMonitoringMembersOutput:
+        return await self._invoke(
+            self._select_input(_models.START_MONITORING_MEMBERS, args, kwargs),
+            _models.START_MONITORING_MEMBERS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def stop_monitoring_members(
-        self, input: StopMonitoringMembersInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StopMonitoringMembersInput
+        | _models.StopMonitoringMembersInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StopMonitoringMembersOutput: ...
+
+    @_overload
+    async def stop_monitoring_members(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StopMonitoringMembersInputDict],
     ) -> StopMonitoringMembersOutput:
         """
         Stops GuardDuty monitoring for the specified member accounts. Use the
@@ -2472,8 +4124,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         the member accounts in your organization.
 
         Args:
-            input:
-                An instance of `StopMonitoringMembersInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2483,17 +4133,38 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `StopMonitoringMembersOutput`.
         """
-        return await self._invoke(input, _models.STOP_MONITORING_MEMBERS, [], plugins)
 
+    async def stop_monitoring_members(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StopMonitoringMembersOutput:
+        return await self._invoke(
+            self._select_input(_models.STOP_MONITORING_MEMBERS, args, kwargs),
+            _models.STOP_MONITORING_MEMBERS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def tag_resource(
-        self, input: TagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.TagResourceInput | _models.TagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> TagResourceOutput: ...
+
+    @_overload
+    async def tag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.TagResourceInputDict],
     ) -> TagResourceOutput:
         """
         Adds tags to a resource.
 
         Args:
-            input:
-                An instance of `TagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2503,17 +4174,38 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `TagResourceOutput`.
         """
-        return await self._invoke(input, _models.TAG_RESOURCE, [], plugins)
 
+    async def tag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> TagResourceOutput:
+        return await self._invoke(
+            self._select_input(_models.TAG_RESOURCE, args, kwargs),
+            _models.TAG_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def unarchive_findings(
-        self, input: UnarchiveFindingsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UnarchiveFindingsInput | _models.UnarchiveFindingsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UnarchiveFindingsOutput: ...
+
+    @_overload
+    async def unarchive_findings(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UnarchiveFindingsInputDict],
     ) -> UnarchiveFindingsOutput:
         """
         Unarchives GuardDuty findings specified by the `findingIds`.
 
         Args:
-            input:
-                An instance of `UnarchiveFindingsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2523,17 +4215,38 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `UnarchiveFindingsOutput`.
         """
-        return await self._invoke(input, _models.UNARCHIVE_FINDINGS, [], plugins)
 
+    async def unarchive_findings(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UnarchiveFindingsOutput:
+        return await self._invoke(
+            self._select_input(_models.UNARCHIVE_FINDINGS, args, kwargs),
+            _models.UNARCHIVE_FINDINGS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def untag_resource(
-        self, input: UntagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UntagResourceInput | _models.UntagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UntagResourceOutput: ...
+
+    @_overload
+    async def untag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UntagResourceInputDict],
     ) -> UntagResourceOutput:
         """
         Removes tags from a resource.
 
         Args:
-            input:
-                An instance of `UntagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2543,19 +4256,39 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `UntagResourceOutput`.
         """
-        return await self._invoke(input, _models.UNTAG_RESOURCE, [], plugins)
 
+    async def untag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UntagResourceOutput:
+        return await self._invoke(
+            self._select_input(_models.UNTAG_RESOURCE, args, kwargs),
+            _models.UNTAG_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_custom_detection_rule_association(
         self,
-        input: UpdateCustomDetectionRuleAssociationInput,
+        request: _models.UpdateCustomDetectionRuleAssociationInput
+        | _models.UpdateCustomDetectionRuleAssociationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateCustomDetectionRuleAssociationOutput: ...
+
+    @_overload
+    async def update_custom_detection_rule_association(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateCustomDetectionRuleAssociationInputDict],
     ) -> UpdateCustomDetectionRuleAssociationOutput:
         """
         Updates the mode of an existing custom detection rule association.
 
         Args:
-            input:
-                An instance of `UpdateCustomDetectionRuleAssociationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2565,22 +4298,42 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `UpdateCustomDetectionRuleAssociationOutput`.
         """
+
+    async def update_custom_detection_rule_association(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateCustomDetectionRuleAssociationOutput:
         return await self._invoke(
-            input, _models.UPDATE_CUSTOM_DETECTION_RULE_ASSOCIATION, [], plugins
+            self._select_input(
+                _models.UPDATE_CUSTOM_DETECTION_RULE_ASSOCIATION, args, kwargs
+            ),
+            _models.UPDATE_CUSTOM_DETECTION_RULE_ASSOCIATION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def update_custom_detection_rule_org_configuration(
         self,
-        input: UpdateCustomDetectionRuleOrgConfigurationInput,
+        request: _models.UpdateCustomDetectionRuleOrgConfigurationInput
+        | _models.UpdateCustomDetectionRuleOrgConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateCustomDetectionRuleOrgConfigurationOutput: ...
+
+    @_overload
+    async def update_custom_detection_rule_org_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateCustomDetectionRuleOrgConfigurationInputDict],
     ) -> UpdateCustomDetectionRuleOrgConfigurationOutput:
         """
         Updates the organization-level configuration for a custom detection
         rule, including the mode and include/exclude account lists.
 
         Args:
-            input:
-                An instance of `UpdateCustomDetectionRuleOrgConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2590,12 +4343,35 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `UpdateCustomDetectionRuleOrgConfigurationOutput`.
         """
+
+    async def update_custom_detection_rule_org_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateCustomDetectionRuleOrgConfigurationOutput:
         return await self._invoke(
-            input, _models.UPDATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION, [], plugins
+            self._select_input(
+                _models.UPDATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION, args, kwargs
+            ),
+            _models.UPDATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def update_detector(
-        self, input: UpdateDetectorInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateDetectorInput | _models.UpdateDetectorInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateDetectorOutput: ...
+
+    @_overload
+    async def update_detector(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateDetectorInputDict],
     ) -> UpdateDetectorOutput:
         """
         Updates the GuardDuty detector specified by the detector ID.
@@ -2613,8 +4389,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         endpoints](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
 
         Args:
-            input:
-                An instance of `UpdateDetectorInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2624,17 +4398,38 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `UpdateDetectorOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_DETECTOR, [], plugins)
 
+    async def update_detector(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateDetectorOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_DETECTOR, args, kwargs),
+            _models.UPDATE_DETECTOR,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_filter(
-        self, input: UpdateFilterInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateFilterInput | _models.UpdateFilterInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateFilterOutput: ...
+
+    @_overload
+    async def update_filter(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateFilterInputDict],
     ) -> UpdateFilterOutput:
         """
         Updates the filter specified by the filter name.
 
         Args:
-            input:
-                An instance of `UpdateFilterInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2644,17 +4439,39 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `UpdateFilterOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_FILTER, [], plugins)
 
+    async def update_filter(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateFilterOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_FILTER, args, kwargs),
+            _models.UPDATE_FILTER,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_findings_feedback(
-        self, input: UpdateFindingsFeedbackInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateFindingsFeedbackInput
+        | _models.UpdateFindingsFeedbackInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateFindingsFeedbackOutput: ...
+
+    @_overload
+    async def update_findings_feedback(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateFindingsFeedbackInputDict],
     ) -> UpdateFindingsFeedbackOutput:
         """
         Marks the specified GuardDuty findings as useful or not useful.
 
         Args:
-            input:
-                An instance of `UpdateFindingsFeedbackInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2664,17 +4481,38 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `UpdateFindingsFeedbackOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_FINDINGS_FEEDBACK, [], plugins)
 
+    async def update_findings_feedback(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateFindingsFeedbackOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_FINDINGS_FEEDBACK, args, kwargs),
+            _models.UPDATE_FINDINGS_FEEDBACK,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_ip_set(
-        self, input: UpdateIPSetInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateIPSetInput | _models.UpdateIPSetInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateIPSetOutput: ...
+
+    @_overload
+    async def update_ip_set(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateIPSetInputDict],
     ) -> UpdateIPSetOutput:
         """
         Updates the IPSet specified by the IPSet ID.
 
         Args:
-            input:
-                An instance of `UpdateIPSetInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2684,19 +4522,39 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `UpdateIPSetOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_IP_SET, [], plugins)
 
+    async def update_ip_set(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateIPSetOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_IP_SET, args, kwargs),
+            _models.UPDATE_IP_SET,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_malware_protection_plan(
         self,
-        input: UpdateMalwareProtectionPlanInput,
+        request: _models.UpdateMalwareProtectionPlanInput
+        | _models.UpdateMalwareProtectionPlanInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateMalwareProtectionPlanOutput: ...
+
+    @_overload
+    async def update_malware_protection_plan(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateMalwareProtectionPlanInputDict],
     ) -> UpdateMalwareProtectionPlanOutput:
         """
         Updates an existing Malware Protection plan resource.
 
         Args:
-            input:
-                An instance of `UpdateMalwareProtectionPlanInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2706,12 +4564,34 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `UpdateMalwareProtectionPlanOutput`.
         """
+
+    async def update_malware_protection_plan(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateMalwareProtectionPlanOutput:
         return await self._invoke(
-            input, _models.UPDATE_MALWARE_PROTECTION_PLAN, [], plugins
+            self._select_input(_models.UPDATE_MALWARE_PROTECTION_PLAN, args, kwargs),
+            _models.UPDATE_MALWARE_PROTECTION_PLAN,
+            [],
+            plugins,
         )
 
+    @_overload
     async def update_malware_scan_settings(
-        self, input: UpdateMalwareScanSettingsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateMalwareScanSettingsInput
+        | _models.UpdateMalwareScanSettingsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateMalwareScanSettingsOutput: ...
+
+    @_overload
+    async def update_malware_scan_settings(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateMalwareScanSettingsInputDict],
     ) -> UpdateMalwareScanSettingsOutput:
         """
         Updates the malware scan settings.
@@ -2722,8 +4602,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         endpoints](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
 
         Args:
-            input:
-                An instance of `UpdateMalwareScanSettingsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2733,12 +4611,34 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `UpdateMalwareScanSettingsOutput`.
         """
+
+    async def update_malware_scan_settings(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateMalwareScanSettingsOutput:
         return await self._invoke(
-            input, _models.UPDATE_MALWARE_SCAN_SETTINGS, [], plugins
+            self._select_input(_models.UPDATE_MALWARE_SCAN_SETTINGS, args, kwargs),
+            _models.UPDATE_MALWARE_SCAN_SETTINGS,
+            [],
+            plugins,
         )
 
+    @_overload
     async def update_member_detectors(
-        self, input: UpdateMemberDetectorsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateMemberDetectorsInput
+        | _models.UpdateMemberDetectorsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateMemberDetectorsOutput: ...
+
+    @_overload
+    async def update_member_detectors(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateMemberDetectorsInputDict],
     ) -> UpdateMemberDetectorsOutput:
         """
         Contains information on member accounts to be updated.
@@ -2756,8 +4656,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         endpoints](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
 
         Args:
-            input:
-                An instance of `UpdateMemberDetectorsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2767,12 +4665,34 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `UpdateMemberDetectorsOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_MEMBER_DETECTORS, [], plugins)
 
+    async def update_member_detectors(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateMemberDetectorsOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_MEMBER_DETECTORS, args, kwargs),
+            _models.UPDATE_MEMBER_DETECTORS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_organization_configuration(
         self,
-        input: UpdateOrganizationConfigurationInput,
+        request: _models.UpdateOrganizationConfigurationInput
+        | _models.UpdateOrganizationConfigurationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateOrganizationConfigurationOutput: ...
+
+    @_overload
+    async def update_organization_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateOrganizationConfigurationInputDict],
     ) -> UpdateOrganizationConfigurationOutput:
         """
         Configures the delegated administrator account with the provided values.
@@ -2792,8 +4712,6 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         endpoints](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
 
         Args:
-            input:
-                An instance of `UpdateOrganizationConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2803,22 +4721,40 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `UpdateOrganizationConfigurationOutput`.
         """
+
+    async def update_organization_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateOrganizationConfigurationOutput:
         return await self._invoke(
-            input, _models.UPDATE_ORGANIZATION_CONFIGURATION, [], plugins
+            self._select_input(_models.UPDATE_ORGANIZATION_CONFIGURATION, args, kwargs),
+            _models.UPDATE_ORGANIZATION_CONFIGURATION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def update_publishing_destination(
         self,
-        input: UpdatePublishingDestinationInput,
+        request: _models.UpdatePublishingDestinationInput
+        | _models.UpdatePublishingDestinationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdatePublishingDestinationOutput: ...
+
+    @_overload
+    async def update_publishing_destination(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdatePublishingDestinationInputDict],
     ) -> UpdatePublishingDestinationOutput:
         """
         Updates information about the publishing destination specified by the
         `destinationId`.
 
         Args:
-            input:
-                An instance of `UpdatePublishingDestinationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2828,20 +4764,40 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `UpdatePublishingDestinationOutput`.
         """
+
+    async def update_publishing_destination(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdatePublishingDestinationOutput:
         return await self._invoke(
-            input, _models.UPDATE_PUBLISHING_DESTINATION, [], plugins
+            self._select_input(_models.UPDATE_PUBLISHING_DESTINATION, args, kwargs),
+            _models.UPDATE_PUBLISHING_DESTINATION,
+            [],
+            plugins,
         )
 
+    @_overload
     async def update_threat_entity_set(
-        self, input: UpdateThreatEntitySetInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateThreatEntitySetInput
+        | _models.UpdateThreatEntitySetInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateThreatEntitySetOutput: ...
+
+    @_overload
+    async def update_threat_entity_set(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateThreatEntitySetInputDict],
     ) -> UpdateThreatEntitySetOutput:
         """
         Updates the threat entity set associated with the specified
         `threatEntitySetId`.
 
         Args:
-            input:
-                An instance of `UpdateThreatEntitySetInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2851,17 +4807,39 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `UpdateThreatEntitySetOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_THREAT_ENTITY_SET, [], plugins)
 
+    async def update_threat_entity_set(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateThreatEntitySetOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_THREAT_ENTITY_SET, args, kwargs),
+            _models.UPDATE_THREAT_ENTITY_SET,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_threat_intel_set(
-        self, input: UpdateThreatIntelSetInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateThreatIntelSetInput
+        | _models.UpdateThreatIntelSetInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateThreatIntelSetOutput: ...
+
+    @_overload
+    async def update_threat_intel_set(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateThreatIntelSetInputDict],
     ) -> UpdateThreatIntelSetOutput:
         """
         Updates the ThreatIntelSet specified by the ThreatIntelSet ID.
 
         Args:
-            input:
-                An instance of `UpdateThreatIntelSetInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2871,18 +4849,40 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `UpdateThreatIntelSetOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_THREAT_INTEL_SET, [], plugins)
 
+    async def update_threat_intel_set(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateThreatIntelSetOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_THREAT_INTEL_SET, args, kwargs),
+            _models.UPDATE_THREAT_INTEL_SET,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def update_trusted_entity_set(
-        self, input: UpdateTrustedEntitySetInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateTrustedEntitySetInput
+        | _models.UpdateTrustedEntitySetInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateTrustedEntitySetOutput: ...
+
+    @_overload
+    async def update_trusted_entity_set(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateTrustedEntitySetInputDict],
     ) -> UpdateTrustedEntitySetOutput:
         """
         Updates the trusted entity set associated with the specified
         `trustedEntitySetId`.
 
         Args:
-            input:
-                An instance of `UpdateTrustedEntitySetInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2892,7 +4892,16 @@ class AsyncGuardDutyClient(AsyncClient[AsyncGuardDutyConfig]):
         Returns:
             An instance of `UpdateTrustedEntitySetOutput`.
         """
-        return await self._invoke(input, _models.UPDATE_TRUSTED_ENTITY_SET, [], plugins)
+
+    async def update_trusted_entity_set(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateTrustedEntitySetOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_TRUSTED_ENTITY_SET, args, kwargs),
+            _models.UPDATE_TRUSTED_ENTITY_SET,
+            [],
+            plugins,
+        )
 
     async def _new_config(self) -> AsyncGuardDutyConfig:
         return await AsyncGuardDutyConfig.resolve()

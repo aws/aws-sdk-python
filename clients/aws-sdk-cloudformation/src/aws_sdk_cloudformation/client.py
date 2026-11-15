@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import cast
+from typing import Unpack as _Unpack, cast, overload as _overload
 
 from smithy_aws_core.config.types import ConfigSource
 from smithy_aws_core.identity.chain.resolver import IdentityChain
@@ -20,185 +20,95 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from .models import (
-        ActivateOrganizationsAccessInput,
         ActivateOrganizationsAccessOutput,
-        ActivateTypeInput,
         ActivateTypeOutput,
-        BatchDescribeTypeConfigurationsInput,
         BatchDescribeTypeConfigurationsOutput,
-        CancelUpdateStackInput,
         CancelUpdateStackOutput,
-        ContinueUpdateRollbackInput,
         ContinueUpdateRollbackOutput,
-        CreateChangeSetInput,
         CreateChangeSetOutput,
-        CreateGeneratedTemplateInput,
         CreateGeneratedTemplateOutput,
-        CreateStackInput,
-        CreateStackInstancesInput,
         CreateStackInstancesOutput,
         CreateStackOutput,
-        CreateStackRefactorInput,
         CreateStackRefactorOutput,
-        CreateStackSetInput,
         CreateStackSetOutput,
-        DeactivateOrganizationsAccessInput,
         DeactivateOrganizationsAccessOutput,
-        DeactivateTypeInput,
         DeactivateTypeOutput,
-        DeleteChangeSetInput,
         DeleteChangeSetOutput,
-        DeleteGeneratedTemplateInput,
         DeleteGeneratedTemplateOutput,
-        DeleteStackInput,
-        DeleteStackInstancesInput,
         DeleteStackInstancesOutput,
         DeleteStackOutput,
-        DeleteStackSetInput,
         DeleteStackSetOutput,
-        DeregisterTypeInput,
         DeregisterTypeOutput,
-        DescribeAccountLimitsInput,
         DescribeAccountLimitsOutput,
-        DescribeChangeSetHooksInput,
         DescribeChangeSetHooksOutput,
-        DescribeChangeSetInput,
         DescribeChangeSetOutput,
-        DescribeEventsInput,
         DescribeEventsOutput,
-        DescribeGeneratedTemplateInput,
         DescribeGeneratedTemplateOutput,
-        DescribeOrganizationsAccessInput,
         DescribeOrganizationsAccessOutput,
-        DescribePublisherInput,
         DescribePublisherOutput,
-        DescribeResourceScanInput,
         DescribeResourceScanOutput,
-        DescribeStackDriftDetectionStatusInput,
         DescribeStackDriftDetectionStatusOutput,
-        DescribeStackEventsInput,
         DescribeStackEventsOutput,
-        DescribeStackInstanceInput,
         DescribeStackInstanceOutput,
-        DescribeStackRefactorInput,
         DescribeStackRefactorOutput,
-        DescribeStackResourceDriftsInput,
         DescribeStackResourceDriftsOutput,
-        DescribeStackResourceInput,
         DescribeStackResourceOutput,
-        DescribeStackResourcesInput,
         DescribeStackResourcesOutput,
-        DescribeStackSetInput,
-        DescribeStackSetOperationInput,
         DescribeStackSetOperationOutput,
         DescribeStackSetOutput,
-        DescribeStacksInput,
         DescribeStacksOutput,
-        DescribeTypeInput,
         DescribeTypeOutput,
-        DescribeTypeRegistrationInput,
         DescribeTypeRegistrationOutput,
-        DetectStackDriftInput,
         DetectStackDriftOutput,
-        DetectStackResourceDriftInput,
         DetectStackResourceDriftOutput,
-        DetectStackSetDriftInput,
         DetectStackSetDriftOutput,
-        EstimateTemplateCostInput,
         EstimateTemplateCostOutput,
-        ExecuteChangeSetInput,
         ExecuteChangeSetOutput,
-        ExecuteStackRefactorInput,
         ExecuteStackRefactorOutput,
-        GetGeneratedTemplateInput,
         GetGeneratedTemplateOutput,
-        GetHookResultInput,
         GetHookResultOutput,
-        GetStackPolicyInput,
         GetStackPolicyOutput,
-        GetTemplateInput,
         GetTemplateOutput,
-        GetTemplateSummaryInput,
         GetTemplateSummaryOutput,
-        ImportStacksToStackSetInput,
         ImportStacksToStackSetOutput,
-        ListChangeSetsInput,
         ListChangeSetsOutput,
-        ListExportsInput,
         ListExportsOutput,
-        ListGeneratedTemplatesInput,
         ListGeneratedTemplatesOutput,
-        ListHookResultsInput,
         ListHookResultsOutput,
-        ListImportsInput,
         ListImportsOutput,
-        ListResourceScanRelatedResourcesInput,
         ListResourceScanRelatedResourcesOutput,
-        ListResourceScanResourcesInput,
         ListResourceScanResourcesOutput,
-        ListResourceScansInput,
         ListResourceScansOutput,
-        ListStackInstanceResourceDriftsInput,
         ListStackInstanceResourceDriftsOutput,
-        ListStackInstancesInput,
         ListStackInstancesOutput,
-        ListStackRefactorActionsInput,
         ListStackRefactorActionsOutput,
-        ListStackRefactorsInput,
         ListStackRefactorsOutput,
-        ListStackResourcesInput,
         ListStackResourcesOutput,
-        ListStackSetAutoDeploymentTargetsInput,
         ListStackSetAutoDeploymentTargetsOutput,
-        ListStackSetOperationResultsInput,
         ListStackSetOperationResultsOutput,
-        ListStackSetOperationsInput,
         ListStackSetOperationsOutput,
-        ListStackSetsInput,
         ListStackSetsOutput,
-        ListStacksInput,
         ListStacksOutput,
-        ListTypeRegistrationsInput,
         ListTypeRegistrationsOutput,
-        ListTypeVersionsInput,
         ListTypeVersionsOutput,
-        ListTypesInput,
         ListTypesOutput,
-        PublishTypeInput,
         PublishTypeOutput,
-        RecordHandlerProgressInput,
         RecordHandlerProgressOutput,
-        RegisterPublisherInput,
         RegisterPublisherOutput,
-        RegisterTypeInput,
         RegisterTypeOutput,
-        RollbackStackInput,
         RollbackStackOutput,
-        SetStackPolicyInput,
         SetStackPolicyOutput,
-        SetTypeConfigurationInput,
         SetTypeConfigurationOutput,
-        SetTypeDefaultVersionInput,
         SetTypeDefaultVersionOutput,
-        SignalResourceInput,
         SignalResourceOutput,
-        StartResourceScanInput,
         StartResourceScanOutput,
-        StopStackSetOperationInput,
         StopStackSetOperationOutput,
-        TestTypeInput,
         TestTypeOutput,
-        UpdateGeneratedTemplateInput,
         UpdateGeneratedTemplateOutput,
-        UpdateStackInput,
-        UpdateStackInstancesInput,
         UpdateStackInstancesOutput,
         UpdateStackOutput,
-        UpdateStackSetInput,
         UpdateStackSetOutput,
-        UpdateTerminationProtectionInput,
         UpdateTerminationProtectionOutput,
-        ValidateTemplateInput,
         ValidateTemplateOutput,
     )
 
@@ -232,12 +142,25 @@ class CloudFormationClient(Client[CloudFormationConfig]):
     [docs.aws.amazon.com](https://docs.aws.amazon.com/).
     """
 
-    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
+    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
 
+    @_overload
     def activate_organizations_access(
         self,
-        input: ActivateOrganizationsAccessInput | None = None,
+        request: _models.ActivateOrganizationsAccessInput
+        | _models.ActivateOrganizationsAccessInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ActivateOrganizationsAccessOutput: ...
+
+    @_overload
+    def activate_organizations_access(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ActivateOrganizationsAccessInputDict],
     ) -> ActivateOrganizationsAccessOutput:
         """
         Activate trusted access with Organizations. With trusted access between
@@ -245,8 +168,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         permissions to create and manage StackSets for your organization.
 
         Args:
-            input:
-                An instance of `ActivateOrganizationsAccessInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -256,12 +177,33 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `ActivateOrganizationsAccessOutput`.
         """
-        return self._invoke(input, _models.ACTIVATE_ORGANIZATIONS_ACCESS, [], plugins)
 
+    def activate_organizations_access(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ActivateOrganizationsAccessOutput:
+        return self._invoke(
+            self._select_input(_models.ACTIVATE_ORGANIZATIONS_ACCESS, args, kwargs),
+            _models.ACTIVATE_ORGANIZATIONS_ACCESS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def activate_type(
         self,
-        input: ActivateTypeInput | None = None,
+        request: _models.ActivateTypeInput | _models.ActivateTypeInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ActivateTypeOutput: ...
+
+    @_overload
+    def activate_type(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ActivateTypeInputDict],
     ) -> ActivateTypeOutput:
         """
         Activates a public third-party extension, such as a resource or module,
@@ -288,8 +230,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Guide](https://docs.aws.amazon.com/cloudformation-cli/latest/hooks-userguide/what-is-cloudformation-hooks.html).
 
         Args:
-            input:
-                An instance of `ActivateTypeInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -299,12 +239,34 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `ActivateTypeOutput`.
         """
-        return self._invoke(input, _models.ACTIVATE_TYPE, [], plugins)
 
+    def activate_type(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ActivateTypeOutput:
+        return self._invoke(
+            self._select_input(_models.ACTIVATE_TYPE, args, kwargs),
+            _models.ACTIVATE_TYPE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def batch_describe_type_configurations(
         self,
-        input: BatchDescribeTypeConfigurationsInput,
+        request: _models.BatchDescribeTypeConfigurationsInput
+        | _models.BatchDescribeTypeConfigurationsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> BatchDescribeTypeConfigurationsOutput: ...
+
+    @_overload
+    def batch_describe_type_configurations(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.BatchDescribeTypeConfigurationsInputDict],
     ) -> BatchDescribeTypeConfigurationsOutput:
         """
         Returns configuration data for the specified CloudFormation extensions,
@@ -316,8 +278,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         in the *CloudFormation User Guide*.
 
         Args:
-            input:
-                An instance of `BatchDescribeTypeConfigurationsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -327,12 +287,35 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `BatchDescribeTypeConfigurationsOutput`.
         """
+
+    def batch_describe_type_configurations(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> BatchDescribeTypeConfigurationsOutput:
         return self._invoke(
-            input, _models.BATCH_DESCRIBE_TYPE_CONFIGURATIONS, [], plugins
+            self._select_input(
+                _models.BATCH_DESCRIBE_TYPE_CONFIGURATIONS, args, kwargs
+            ),
+            _models.BATCH_DESCRIBE_TYPE_CONFIGURATIONS,
+            [],
+            plugins,
         )
 
+    @_overload
     def cancel_update_stack(
-        self, input: CancelUpdateStackInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CancelUpdateStackInput | _models.CancelUpdateStackInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CancelUpdateStackOutput: ...
+
+    @_overload
+    def cancel_update_stack(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CancelUpdateStackInputDict],
     ) -> CancelUpdateStackOutput:
         """
         Cancels an update on the specified stack. If the call completes
@@ -343,8 +326,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
             You can cancel only stacks that are in the `UPDATE_IN_PROGRESS` state.
 
         Args:
-            input:
-                An instance of `CancelUpdateStackInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -354,10 +335,34 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `CancelUpdateStackOutput`.
         """
-        return self._invoke(input, _models.CANCEL_UPDATE_STACK, [], plugins)
 
+    def cancel_update_stack(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CancelUpdateStackOutput:
+        return self._invoke(
+            self._select_input(_models.CANCEL_UPDATE_STACK, args, kwargs),
+            _models.CANCEL_UPDATE_STACK,
+            [],
+            plugins,
+        )
+
+    @_overload
     def continue_update_rollback(
-        self, input: ContinueUpdateRollbackInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ContinueUpdateRollbackInput
+        | _models.ContinueUpdateRollbackInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ContinueUpdateRollbackOutput: ...
+
+    @_overload
+    def continue_update_rollback(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ContinueUpdateRollbackInputDict],
     ) -> ContinueUpdateRollbackOutput:
         """
         Continues rolling back a stack from `UPDATE_ROLLBACK_FAILED` to
@@ -382,11 +387,9 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         failed](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed).
 
         `ForceRollback` and `ResourcesToSkip` are mutually exclusive. For
-        details, see ContinueUpdateRollbackInput$$ForceRollback.
+        details, see ContinueUpdateRollbackInput$ForceRollback.
 
         Args:
-            input:
-                An instance of `ContinueUpdateRollbackInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -396,10 +399,33 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `ContinueUpdateRollbackOutput`.
         """
-        return self._invoke(input, _models.CONTINUE_UPDATE_ROLLBACK, [], plugins)
 
+    def continue_update_rollback(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ContinueUpdateRollbackOutput:
+        return self._invoke(
+            self._select_input(_models.CONTINUE_UPDATE_ROLLBACK, args, kwargs),
+            _models.CONTINUE_UPDATE_ROLLBACK,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_change_set(
-        self, input: CreateChangeSetInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateChangeSetInput | _models.CreateChangeSetInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateChangeSetOutput: ...
+
+    @_overload
+    def create_change_set(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateChangeSetInputDict],
     ) -> CreateChangeSetOutput:
         """
         Creates a list of changes that will be applied to a stack so that you
@@ -430,8 +456,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         `IncludeNestedStacks` to `True`.
 
         Args:
-            input:
-                An instance of `CreateChangeSetInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -441,10 +465,34 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `CreateChangeSetOutput`.
         """
-        return self._invoke(input, _models.CREATE_CHANGE_SET, [], plugins)
 
+    def create_change_set(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateChangeSetOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_CHANGE_SET, args, kwargs),
+            _models.CREATE_CHANGE_SET,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_generated_template(
-        self, input: CreateGeneratedTemplateInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateGeneratedTemplateInput
+        | _models.CreateGeneratedTemplateInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateGeneratedTemplateOutput: ...
+
+    @_overload
+    def create_generated_template(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateGeneratedTemplateInputDict],
     ) -> CreateGeneratedTemplateOutput:
         """
         Creates a template from existing resources that are not already managed
@@ -452,8 +500,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         using the `DescribeGeneratedTemplate` API action.
 
         Args:
-            input:
-                An instance of `CreateGeneratedTemplateInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -463,10 +509,33 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `CreateGeneratedTemplateOutput`.
         """
-        return self._invoke(input, _models.CREATE_GENERATED_TEMPLATE, [], plugins)
 
+    def create_generated_template(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateGeneratedTemplateOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_GENERATED_TEMPLATE, args, kwargs),
+            _models.CREATE_GENERATED_TEMPLATE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_stack(
-        self, input: CreateStackInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateStackInput | _models.CreateStackInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateStackOutput: ...
+
+    @_overload
+    def create_stack(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateStackInputDict],
     ) -> CreateStackOutput:
         """
         Creates a stack as specified in the template. After the call completes
@@ -480,8 +549,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         in the *CloudFormation User Guide*.
 
         Args:
-            input:
-                An instance of `CreateStackInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -491,10 +558,34 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `CreateStackOutput`.
         """
-        return self._invoke(input, _models.CREATE_STACK, [], plugins)
 
+    def create_stack(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateStackOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_STACK, args, kwargs),
+            _models.CREATE_STACK,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_stack_instances(
-        self, input: CreateStackInstancesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateStackInstancesInput
+        | _models.CreateStackInstancesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateStackInstancesOutput: ...
+
+    @_overload
+    def create_stack_instances(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateStackInstancesInputDict],
     ) -> CreateStackInstancesOutput:
         """
         Creates stack instances for the specified accounts, within the specified
@@ -517,8 +608,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
             target a parent OU that contains all desired child OUs.
 
         Args:
-            input:
-                An instance of `CreateStackInstancesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -528,18 +617,40 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `CreateStackInstancesOutput`.
         """
-        return self._invoke(input, _models.CREATE_STACK_INSTANCES, [], plugins)
 
+    def create_stack_instances(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateStackInstancesOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_STACK_INSTANCES, args, kwargs),
+            _models.CREATE_STACK_INSTANCES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_stack_refactor(
-        self, input: CreateStackRefactorInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateStackRefactorInput
+        | _models.CreateStackRefactorInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateStackRefactorOutput: ...
+
+    @_overload
+    def create_stack_refactor(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateStackRefactorInputDict],
     ) -> CreateStackRefactorOutput:
         """
         Creates a refactor across multiple stacks, with the list of stacks and
         resources that are affected.
 
         Args:
-            input:
-                An instance of `CreateStackRefactorInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -549,17 +660,38 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `CreateStackRefactorOutput`.
         """
-        return self._invoke(input, _models.CREATE_STACK_REFACTOR, [], plugins)
 
+    def create_stack_refactor(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateStackRefactorOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_STACK_REFACTOR, args, kwargs),
+            _models.CREATE_STACK_REFACTOR,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_stack_set(
-        self, input: CreateStackSetInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateStackSetInput | _models.CreateStackSetInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateStackSetOutput: ...
+
+    @_overload
+    def create_stack_set(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateStackSetInputDict],
     ) -> CreateStackSetOutput:
         """
         Creates a StackSet.
 
         Args:
-            input:
-                An instance of `CreateStackSetInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -569,12 +701,34 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `CreateStackSetOutput`.
         """
-        return self._invoke(input, _models.CREATE_STACK_SET, [], plugins)
 
+    def create_stack_set(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateStackSetOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_STACK_SET, args, kwargs),
+            _models.CREATE_STACK_SET,
+            [],
+            plugins,
+        )
+
+    @_overload
     def deactivate_organizations_access(
         self,
-        input: DeactivateOrganizationsAccessInput | None = None,
+        request: _models.DeactivateOrganizationsAccessInput
+        | _models.DeactivateOrganizationsAccessInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeactivateOrganizationsAccessOutput: ...
+
+    @_overload
+    def deactivate_organizations_access(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeactivateOrganizationsAccessInputDict],
     ) -> DeactivateOrganizationsAccessOutput:
         """
         Deactivates trusted access with Organizations. If trusted access is
@@ -582,8 +736,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         and manage service-managed StackSets for your organization.
 
         Args:
-            input:
-                An instance of `DeactivateOrganizationsAccessInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -593,12 +745,33 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `DeactivateOrganizationsAccessOutput`.
         """
-        return self._invoke(input, _models.DEACTIVATE_ORGANIZATIONS_ACCESS, [], plugins)
 
+    def deactivate_organizations_access(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeactivateOrganizationsAccessOutput:
+        return self._invoke(
+            self._select_input(_models.DEACTIVATE_ORGANIZATIONS_ACCESS, args, kwargs),
+            _models.DEACTIVATE_ORGANIZATIONS_ACCESS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def deactivate_type(
         self,
-        input: DeactivateTypeInput | None = None,
+        request: _models.DeactivateTypeInput | _models.DeactivateTypeInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeactivateTypeOutput: ...
+
+    @_overload
+    def deactivate_type(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeactivateTypeInputDict],
     ) -> DeactivateTypeOutput:
         """
         Deactivates a public third-party extension, such as a resource or
@@ -619,8 +792,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         [ListTypes](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ListTypes.html).
 
         Args:
-            input:
-                An instance of `DeactivateTypeInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -630,10 +801,33 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `DeactivateTypeOutput`.
         """
-        return self._invoke(input, _models.DEACTIVATE_TYPE, [], plugins)
 
+    def deactivate_type(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeactivateTypeOutput:
+        return self._invoke(
+            self._select_input(_models.DEACTIVATE_TYPE, args, kwargs),
+            _models.DEACTIVATE_TYPE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_change_set(
-        self, input: DeleteChangeSetInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteChangeSetInput | _models.DeleteChangeSetInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteChangeSetOutput: ...
+
+    @_overload
+    def delete_change_set(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteChangeSetInputDict],
     ) -> DeleteChangeSetOutput:
         """
         Deletes the specified change set. Deleting change sets ensures that no
@@ -648,8 +842,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         for nested stacks with the status of `REVIEW_IN_PROGRESS`.
 
         Args:
-            input:
-                An instance of `DeleteChangeSetInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -659,17 +851,39 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `DeleteChangeSetOutput`.
         """
-        return self._invoke(input, _models.DELETE_CHANGE_SET, [], plugins)
 
+    def delete_change_set(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteChangeSetOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_CHANGE_SET, args, kwargs),
+            _models.DELETE_CHANGE_SET,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_generated_template(
-        self, input: DeleteGeneratedTemplateInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteGeneratedTemplateInput
+        | _models.DeleteGeneratedTemplateInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteGeneratedTemplateOutput: ...
+
+    @_overload
+    def delete_generated_template(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteGeneratedTemplateInputDict],
     ) -> DeleteGeneratedTemplateOutput:
         """
         Deleted a generated template.
 
         Args:
-            input:
-                An instance of `DeleteGeneratedTemplateInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -679,10 +893,33 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `DeleteGeneratedTemplateOutput`.
         """
-        return self._invoke(input, _models.DELETE_GENERATED_TEMPLATE, [], plugins)
 
+    def delete_generated_template(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteGeneratedTemplateOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_GENERATED_TEMPLATE, args, kwargs),
+            _models.DELETE_GENERATED_TEMPLATE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_stack(
-        self, input: DeleteStackInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteStackInput | _models.DeleteStackInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteStackOutput: ...
+
+    @_overload
+    def delete_stack(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteStackInputDict],
     ) -> DeleteStackOutput:
         """
         Deletes a specified stack. Once the call completes successfully, stack
@@ -695,8 +932,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         in the *CloudFormation User Guide*.
 
         Args:
-            input:
-                An instance of `DeleteStackInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -706,10 +941,34 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `DeleteStackOutput`.
         """
-        return self._invoke(input, _models.DELETE_STACK, [], plugins)
 
+    def delete_stack(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteStackOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_STACK, args, kwargs),
+            _models.DELETE_STACK,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_stack_instances(
-        self, input: DeleteStackInstancesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteStackInstancesInput
+        | _models.DeleteStackInstancesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteStackInstancesOutput: ...
+
+    @_overload
+    def delete_stack_instances(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteStackInstancesInputDict],
     ) -> DeleteStackInstancesOutput:
         """
         Deletes stack instances for the specified accounts, in the specified
@@ -729,8 +988,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
             target a parent OU that contains all desired child OUs.
 
         Args:
-            input:
-                An instance of `DeleteStackInstancesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -740,10 +997,33 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `DeleteStackInstancesOutput`.
         """
-        return self._invoke(input, _models.DELETE_STACK_INSTANCES, [], plugins)
 
+    def delete_stack_instances(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteStackInstancesOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_STACK_INSTANCES, args, kwargs),
+            _models.DELETE_STACK_INSTANCES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_stack_set(
-        self, input: DeleteStackSetInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteStackSetInput | _models.DeleteStackSetInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteStackSetOutput: ...
+
+    @_overload
+    def delete_stack_set(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteStackSetInputDict],
     ) -> DeleteStackSetOutput:
         """
         Deletes a StackSet. Before you can delete a StackSet, all its member
@@ -751,8 +1031,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         complete this, see DeleteStackInstances.
 
         Args:
-            input:
-                An instance of `DeleteStackSetInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -762,12 +1040,33 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `DeleteStackSetOutput`.
         """
-        return self._invoke(input, _models.DELETE_STACK_SET, [], plugins)
 
+    def delete_stack_set(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteStackSetOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_STACK_SET, args, kwargs),
+            _models.DELETE_STACK_SET,
+            [],
+            plugins,
+        )
+
+    @_overload
     def deregister_type(
         self,
-        input: DeregisterTypeInput | None = None,
+        request: _models.DeregisterTypeInput | _models.DeregisterTypeInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DeregisterTypeOutput: ...
+
+    @_overload
+    def deregister_type(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeregisterTypeInputDict],
     ) -> DeregisterTypeOutput:
         """
         Marks an extension or extension version as `DEPRECATED` in the
@@ -794,8 +1093,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         in the *CloudFormation User Guide*.
 
         Args:
-            input:
-                An instance of `DeregisterTypeInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -805,12 +1102,34 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `DeregisterTypeOutput`.
         """
-        return self._invoke(input, _models.DEREGISTER_TYPE, [], plugins)
 
+    def deregister_type(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeregisterTypeOutput:
+        return self._invoke(
+            self._select_input(_models.DEREGISTER_TYPE, args, kwargs),
+            _models.DEREGISTER_TYPE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_account_limits(
         self,
-        input: DescribeAccountLimitsInput | None = None,
+        request: _models.DescribeAccountLimitsInput
+        | _models.DescribeAccountLimitsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeAccountLimitsOutput: ...
+
+    @_overload
+    def describe_account_limits(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeAccountLimitsInputDict],
     ) -> DescribeAccountLimitsOutput:
         """
         Retrieves your account's CloudFormation limits, such as the maximum
@@ -820,8 +1139,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         in the *CloudFormation User Guide*.
 
         Args:
-            input:
-                An instance of `DescribeAccountLimitsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -831,10 +1148,33 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `DescribeAccountLimitsOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_ACCOUNT_LIMITS, [], plugins)
 
+    def describe_account_limits(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeAccountLimitsOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_ACCOUNT_LIMITS, args, kwargs),
+            _models.DESCRIBE_ACCOUNT_LIMITS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_change_set(
-        self, input: DescribeChangeSetInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeChangeSetInput | _models.DescribeChangeSetInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeChangeSetOutput: ...
+
+    @_overload
+    def describe_change_set(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeChangeSetInputDict],
     ) -> DescribeChangeSetOutput:
         """
         Returns the inputs for the change set and a list of changes that
@@ -844,8 +1184,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         in the *CloudFormation User Guide*.
 
         Args:
-            input:
-                An instance of `DescribeChangeSetInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -855,18 +1193,40 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `DescribeChangeSetOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_CHANGE_SET, [], plugins)
 
+    def describe_change_set(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeChangeSetOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_CHANGE_SET, args, kwargs),
+            _models.DESCRIBE_CHANGE_SET,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_change_set_hooks(
-        self, input: DescribeChangeSetHooksInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeChangeSetHooksInput
+        | _models.DescribeChangeSetHooksInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeChangeSetHooksOutput: ...
+
+    @_overload
+    def describe_change_set_hooks(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeChangeSetHooksInputDict],
     ) -> DescribeChangeSetHooksOutput:
         """
         Returns Hook-related information for the change set and a list of
         changes that CloudFormation makes when you run the change set.
 
         Args:
-            input:
-                An instance of `DescribeChangeSetHooksInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -876,12 +1236,33 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `DescribeChangeSetHooksOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_CHANGE_SET_HOOKS, [], plugins)
 
+    def describe_change_set_hooks(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeChangeSetHooksOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_CHANGE_SET_HOOKS, args, kwargs),
+            _models.DESCRIBE_CHANGE_SET_HOOKS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_events(
         self,
-        input: DescribeEventsInput | None = None,
+        request: _models.DescribeEventsInput | _models.DescribeEventsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeEventsOutput: ...
+
+    @_overload
+    def describe_events(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeEventsInputDict],
     ) -> DescribeEventsOutput:
         """
         Returns CloudFormation events based on flexible query criteria. Groups
@@ -911,8 +1292,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
             as input.
 
         Args:
-            input:
-                An instance of `DescribeEventsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -922,10 +1301,34 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `DescribeEventsOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_EVENTS, [], plugins)
 
+    def describe_events(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeEventsOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_EVENTS, args, kwargs),
+            _models.DESCRIBE_EVENTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_generated_template(
-        self, input: DescribeGeneratedTemplateInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeGeneratedTemplateInput
+        | _models.DescribeGeneratedTemplateInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeGeneratedTemplateOutput: ...
+
+    @_overload
+    def describe_generated_template(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeGeneratedTemplateInputDict],
     ) -> DescribeGeneratedTemplateOutput:
         """
         Describes a generated template. The output includes details about the
@@ -934,8 +1337,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         template started with an `UpdateGeneratedTemplate` API action.
 
         Args:
-            input:
-                An instance of `DescribeGeneratedTemplateInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -945,12 +1346,34 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `DescribeGeneratedTemplateOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_GENERATED_TEMPLATE, [], plugins)
 
+    def describe_generated_template(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeGeneratedTemplateOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_GENERATED_TEMPLATE, args, kwargs),
+            _models.DESCRIBE_GENERATED_TEMPLATE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_organizations_access(
         self,
-        input: DescribeOrganizationsAccessInput | None = None,
+        request: _models.DescribeOrganizationsAccessInput
+        | _models.DescribeOrganizationsAccessInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeOrganizationsAccessOutput: ...
+
+    @_overload
+    def describe_organizations_access(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeOrganizationsAccessInputDict],
     ) -> DescribeOrganizationsAccessOutput:
         """
         Retrieves information about the account's `OrganizationAccess` status.
@@ -959,8 +1382,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         called without the `CallAs` parameter by the management account.
 
         Args:
-            input:
-                An instance of `DescribeOrganizationsAccessInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -970,12 +1391,33 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `DescribeOrganizationsAccessOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_ORGANIZATIONS_ACCESS, [], plugins)
 
+    def describe_organizations_access(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeOrganizationsAccessOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_ORGANIZATIONS_ACCESS, args, kwargs),
+            _models.DESCRIBE_ORGANIZATIONS_ACCESS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_publisher(
         self,
-        input: DescribePublisherInput | None = None,
+        request: _models.DescribePublisherInput | _models.DescribePublisherInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribePublisherOutput: ...
+
+    @_overload
+    def describe_publisher(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribePublisherInputDict],
     ) -> DescribePublisherOutput:
         """
         Returns information about a CloudFormation extension publisher.
@@ -993,8 +1435,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
           in the *CloudFormation Command Line Interface (CLI) User Guide*
 
         Args:
-            input:
-                An instance of `DescribePublisherInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1004,17 +1444,39 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `DescribePublisherOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_PUBLISHER, [], plugins)
 
+    def describe_publisher(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribePublisherOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_PUBLISHER, args, kwargs),
+            _models.DESCRIBE_PUBLISHER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_resource_scan(
-        self, input: DescribeResourceScanInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeResourceScanInput
+        | _models.DescribeResourceScanInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeResourceScanOutput: ...
+
+    @_overload
+    def describe_resource_scan(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeResourceScanInputDict],
     ) -> DescribeResourceScanOutput:
         """
         Describes details of a resource scan.
 
         Args:
-            input:
-                An instance of `DescribeResourceScanInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1024,12 +1486,34 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `DescribeResourceScanOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_RESOURCE_SCAN, [], plugins)
 
+    def describe_resource_scan(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeResourceScanOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_RESOURCE_SCAN, args, kwargs),
+            _models.DESCRIBE_RESOURCE_SCAN,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_stack_drift_detection_status(
         self,
-        input: DescribeStackDriftDetectionStatusInput,
+        request: _models.DescribeStackDriftDetectionStatusInput
+        | _models.DescribeStackDriftDetectionStatusInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeStackDriftDetectionStatusOutput: ...
+
+    @_overload
+    def describe_stack_drift_detection_status(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeStackDriftDetectionStatusInputDict],
     ) -> DescribeStackDriftDetectionStatusOutput:
         """
         Returns information about a stack drift detection operation. A stack
@@ -1050,8 +1534,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         information about the stack and its resources.
 
         Args:
-            input:
-                An instance of `DescribeStackDriftDetectionStatusInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1061,12 +1543,36 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `DescribeStackDriftDetectionStatusOutput`.
         """
+
+    def describe_stack_drift_detection_status(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeStackDriftDetectionStatusOutput:
         return self._invoke(
-            input, _models.DESCRIBE_STACK_DRIFT_DETECTION_STATUS, [], plugins
+            self._select_input(
+                _models.DESCRIBE_STACK_DRIFT_DETECTION_STATUS, args, kwargs
+            ),
+            _models.DESCRIBE_STACK_DRIFT_DETECTION_STATUS,
+            [],
+            plugins,
         )
 
+    @_overload
     def describe_stack_events(
-        self, input: DescribeStackEventsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeStackEventsInput
+        | _models.DescribeStackEventsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeStackEventsOutput: ...
+
+    @_overload
+    def describe_stack_events(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeStackEventsInputDict],
     ) -> DescribeStackEventsOutput:
         """
         Returns all stack related events for a specified stack in reverse
@@ -1080,8 +1586,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
             deleted by specifying the unique stack identifier (stack ID).
 
         Args:
-            input:
-                An instance of `DescribeStackEventsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1091,10 +1595,34 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `DescribeStackEventsOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_STACK_EVENTS, [], plugins)
 
+    def describe_stack_events(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeStackEventsOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_STACK_EVENTS, args, kwargs),
+            _models.DESCRIBE_STACK_EVENTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_stack_instance(
-        self, input: DescribeStackInstanceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeStackInstanceInput
+        | _models.DescribeStackInstanceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeStackInstanceOutput: ...
+
+    @_overload
+    def describe_stack_instance(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeStackInstanceInputDict],
     ) -> DescribeStackInstanceOutput:
         """
         Returns the stack instance that's associated with the specified
@@ -1104,8 +1632,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         StackSet, use ListStackInstances.
 
         Args:
-            input:
-                An instance of `DescribeStackInstanceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1115,17 +1641,39 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `DescribeStackInstanceOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_STACK_INSTANCE, [], plugins)
 
+    def describe_stack_instance(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeStackInstanceOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_STACK_INSTANCE, args, kwargs),
+            _models.DESCRIBE_STACK_INSTANCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_stack_refactor(
-        self, input: DescribeStackRefactorInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeStackRefactorInput
+        | _models.DescribeStackRefactorInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeStackRefactorOutput: ...
+
+    @_overload
+    def describe_stack_refactor(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeStackRefactorInputDict],
     ) -> DescribeStackRefactorOutput:
         """
         Describes the stack refactor status.
 
         Args:
-            input:
-                An instance of `DescribeStackRefactorInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1135,10 +1683,34 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `DescribeStackRefactorOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_STACK_REFACTOR, [], plugins)
 
+    def describe_stack_refactor(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeStackRefactorOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_STACK_REFACTOR, args, kwargs),
+            _models.DESCRIBE_STACK_REFACTOR,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_stack_resource(
-        self, input: DescribeStackResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeStackResourceInput
+        | _models.DescribeStackResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeStackResourceOutput: ...
+
+    @_overload
+    def describe_stack_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeStackResourceInputDict],
     ) -> DescribeStackResourceOutput:
         """
         Returns a description of the specified resource in the specified stack.
@@ -1147,8 +1719,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         for up to 90 days after the stack has been deleted.
 
         Args:
-            input:
-                An instance of `DescribeStackResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1158,12 +1728,34 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `DescribeStackResourceOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_STACK_RESOURCE, [], plugins)
 
+    def describe_stack_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeStackResourceOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_STACK_RESOURCE, args, kwargs),
+            _models.DESCRIBE_STACK_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_stack_resource_drifts(
         self,
-        input: DescribeStackResourceDriftsInput,
+        request: _models.DescribeStackResourceDriftsInput
+        | _models.DescribeStackResourceDriftsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeStackResourceDriftsOutput: ...
+
+    @_overload
+    def describe_stack_resource_drifts(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeStackResourceDriftsInputDict],
     ) -> DescribeStackResourceDriftsOutput:
         """
         Returns drift information for the resources that have been checked for
@@ -1184,8 +1776,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         stack.
 
         Args:
-            input:
-                An instance of `DescribeStackResourceDriftsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1195,12 +1785,34 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `DescribeStackResourceDriftsOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_STACK_RESOURCE_DRIFTS, [], plugins)
 
+    def describe_stack_resource_drifts(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeStackResourceDriftsOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_STACK_RESOURCE_DRIFTS, args, kwargs),
+            _models.DESCRIBE_STACK_RESOURCE_DRIFTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_stack_resources(
         self,
-        input: DescribeStackResourcesInput | None = None,
+        request: _models.DescribeStackResourcesInput
+        | _models.DescribeStackResourcesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeStackResourcesOutput: ...
+
+    @_overload
+    def describe_stack_resources(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeStackResourcesInputDict],
     ) -> DescribeStackResourcesOutput:
         """
         Returns Amazon Web Services resource descriptions for running and
@@ -1228,8 +1840,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
             `PhysicalResourceId` in the same request.
 
         Args:
-            input:
-                An instance of `DescribeStackResourcesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1239,12 +1849,33 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `DescribeStackResourcesOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_STACK_RESOURCES, [], plugins)
 
+    def describe_stack_resources(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeStackResourcesOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_STACK_RESOURCES, args, kwargs),
+            _models.DESCRIBE_STACK_RESOURCES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_stacks(
         self,
-        input: DescribeStacksInput | None = None,
+        request: _models.DescribeStacksInput | _models.DescribeStacksInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeStacksOutput: ...
+
+    @_overload
+    def describe_stacks(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeStacksInputDict],
     ) -> DescribeStacksOutput:
         """
         Returns the description for the specified stack; if no stack name was
@@ -1258,8 +1889,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
             If the stack doesn't exist, a `ValidationError` is returned.
 
         Args:
-            input:
-                An instance of `DescribeStacksInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1269,10 +1898,33 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `DescribeStacksOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_STACKS, [], plugins)
 
+    def describe_stacks(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeStacksOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_STACKS, args, kwargs),
+            _models.DESCRIBE_STACKS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_stack_set(
-        self, input: DescribeStackSetInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeStackSetInput | _models.DescribeStackSetInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeStackSetOutput: ...
+
+    @_overload
+    def describe_stack_set(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeStackSetInputDict],
     ) -> DescribeStackSetOutput:
         """
         Returns the description of the specified StackSet.
@@ -1282,8 +1934,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
             return the most up-to-date data.
 
         Args:
-            input:
-                An instance of `DescribeStackSetInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1293,10 +1943,34 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `DescribeStackSetOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_STACK_SET, [], plugins)
 
+    def describe_stack_set(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeStackSetOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_STACK_SET, args, kwargs),
+            _models.DESCRIBE_STACK_SET,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_stack_set_operation(
-        self, input: DescribeStackSetOperationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeStackSetOperationInput
+        | _models.DescribeStackSetOperationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeStackSetOperationOutput: ...
+
+    @_overload
+    def describe_stack_set_operation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeStackSetOperationInputDict],
     ) -> DescribeStackSetOperationOutput:
         """
         Returns the description of the specified StackSet operation.
@@ -1306,8 +1980,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
             return the most up-to-date data.
 
         Args:
-            input:
-                An instance of `DescribeStackSetOperationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1317,12 +1989,33 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `DescribeStackSetOperationOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_STACK_SET_OPERATION, [], plugins)
 
+    def describe_stack_set_operation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeStackSetOperationOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_STACK_SET_OPERATION, args, kwargs),
+            _models.DESCRIBE_STACK_SET_OPERATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_type(
         self,
-        input: DescribeTypeInput | None = None,
+        request: _models.DescribeTypeInput | _models.DescribeTypeInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> DescribeTypeOutput: ...
+
+    @_overload
+    def describe_type(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeTypeInputDict],
     ) -> DescribeTypeOutput:
         """
         Returns detailed information about an extension from the CloudFormation
@@ -1338,8 +2031,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         in the *CloudFormation User Guide*.
 
         Args:
-            input:
-                An instance of `DescribeTypeInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1349,10 +2040,34 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `DescribeTypeOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_TYPE, [], plugins)
 
+    def describe_type(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeTypeOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_TYPE, args, kwargs),
+            _models.DESCRIBE_TYPE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_type_registration(
-        self, input: DescribeTypeRegistrationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeTypeRegistrationInput
+        | _models.DescribeTypeRegistrationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeTypeRegistrationOutput: ...
+
+    @_overload
+    def describe_type_registration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeTypeRegistrationInputDict],
     ) -> DescribeTypeRegistrationOutput:
         """
         Returns information about an extension's registration, including its
@@ -1366,8 +2081,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         detailed information about an extension.
 
         Args:
-            input:
-                An instance of `DescribeTypeRegistrationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1377,10 +2090,33 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `DescribeTypeRegistrationOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_TYPE_REGISTRATION, [], plugins)
 
+    def describe_type_registration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeTypeRegistrationOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_TYPE_REGISTRATION, args, kwargs),
+            _models.DESCRIBE_TYPE_REGISTRATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def detect_stack_drift(
-        self, input: DetectStackDriftInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DetectStackDriftInput | _models.DetectStackDriftInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DetectStackDriftOutput: ...
+
+    @_overload
+    def detect_stack_drift(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DetectStackDriftInputDict],
     ) -> DetectStackDriftOutput:
         """
         Detects whether a stack's actual configuration differs, or has
@@ -1415,8 +2151,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         directly on the nested stack itself.
 
         Args:
-            input:
-                An instance of `DetectStackDriftInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1426,10 +2160,34 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `DetectStackDriftOutput`.
         """
-        return self._invoke(input, _models.DETECT_STACK_DRIFT, [], plugins)
 
+    def detect_stack_drift(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DetectStackDriftOutput:
+        return self._invoke(
+            self._select_input(_models.DETECT_STACK_DRIFT, args, kwargs),
+            _models.DETECT_STACK_DRIFT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def detect_stack_resource_drift(
-        self, input: DetectStackResourceDriftInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DetectStackResourceDriftInput
+        | _models.DetectStackResourceDriftInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DetectStackResourceDriftOutput: ...
+
+    @_overload
+    def detect_stack_resource_drift(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DetectStackResourceDriftInputDict],
     ) -> DetectStackResourceDriftOutput:
         """
         Returns information about whether a resource's actual configuration
@@ -1452,8 +2210,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         detection](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import-supported-resources.html).
 
         Args:
-            input:
-                An instance of `DetectStackResourceDriftInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1463,10 +2219,34 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `DetectStackResourceDriftOutput`.
         """
-        return self._invoke(input, _models.DETECT_STACK_RESOURCE_DRIFT, [], plugins)
 
+    def detect_stack_resource_drift(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DetectStackResourceDriftOutput:
+        return self._invoke(
+            self._select_input(_models.DETECT_STACK_RESOURCE_DRIFT, args, kwargs),
+            _models.DETECT_STACK_RESOURCE_DRIFT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def detect_stack_set_drift(
-        self, input: DetectStackSetDriftInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DetectStackSetDriftInput
+        | _models.DetectStackSetDriftInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DetectStackSetDriftOutput: ...
+
+    @_overload
+    def detect_stack_set_drift(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DetectStackSetDriftInputDict],
     ) -> DetectStackSetDriftOutput:
         """
         Detect drift on a StackSet. When CloudFormation performs drift detection
@@ -1504,8 +2284,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         To stop a drift detection StackSet operation, use StopStackSetOperation.
 
         Args:
-            input:
-                An instance of `DetectStackSetDriftInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1515,12 +2293,34 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `DetectStackSetDriftOutput`.
         """
-        return self._invoke(input, _models.DETECT_STACK_SET_DRIFT, [], plugins)
 
+    def detect_stack_set_drift(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DetectStackSetDriftOutput:
+        return self._invoke(
+            self._select_input(_models.DETECT_STACK_SET_DRIFT, args, kwargs),
+            _models.DETECT_STACK_SET_DRIFT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def estimate_template_cost(
         self,
-        input: EstimateTemplateCostInput | None = None,
+        request: _models.EstimateTemplateCostInput
+        | _models.EstimateTemplateCostInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> EstimateTemplateCostOutput: ...
+
+    @_overload
+    def estimate_template_cost(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.EstimateTemplateCostInputDict],
     ) -> EstimateTemplateCostOutput:
         """
         Returns the estimated monthly cost of a template. The return value is an
@@ -1528,8 +2328,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         that describes the resources required to run the template.
 
         Args:
-            input:
-                An instance of `EstimateTemplateCostInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1539,10 +2337,33 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `EstimateTemplateCostOutput`.
         """
-        return self._invoke(input, _models.ESTIMATE_TEMPLATE_COST, [], plugins)
 
+    def estimate_template_cost(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> EstimateTemplateCostOutput:
+        return self._invoke(
+            self._select_input(_models.ESTIMATE_TEMPLATE_COST, args, kwargs),
+            _models.ESTIMATE_TEMPLATE_COST,
+            [],
+            plugins,
+        )
+
+    @_overload
     def execute_change_set(
-        self, input: ExecuteChangeSetInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ExecuteChangeSetInput | _models.ExecuteChangeSetInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ExecuteChangeSetOutput: ...
+
+    @_overload
+    def execute_change_set(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ExecuteChangeSetInputDict],
     ) -> ExecuteChangeSetOutput:
         """
         Updates a stack using the input information that was provided when the
@@ -1562,8 +2383,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         `IncludeNestedStacks` must have been set to `True`.
 
         Args:
-            input:
-                An instance of `ExecuteChangeSetInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1573,17 +2392,39 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `ExecuteChangeSetOutput`.
         """
-        return self._invoke(input, _models.EXECUTE_CHANGE_SET, [], plugins)
 
+    def execute_change_set(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ExecuteChangeSetOutput:
+        return self._invoke(
+            self._select_input(_models.EXECUTE_CHANGE_SET, args, kwargs),
+            _models.EXECUTE_CHANGE_SET,
+            [],
+            plugins,
+        )
+
+    @_overload
     def execute_stack_refactor(
-        self, input: ExecuteStackRefactorInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ExecuteStackRefactorInput
+        | _models.ExecuteStackRefactorInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ExecuteStackRefactorOutput: ...
+
+    @_overload
+    def execute_stack_refactor(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ExecuteStackRefactorInputDict],
     ) -> ExecuteStackRefactorOutput:
         """
         Executes the stack refactor operation.
 
         Args:
-            input:
-                An instance of `ExecuteStackRefactorInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1593,10 +2434,34 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `ExecuteStackRefactorOutput`.
         """
-        return self._invoke(input, _models.EXECUTE_STACK_REFACTOR, [], plugins)
 
+    def execute_stack_refactor(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ExecuteStackRefactorOutput:
+        return self._invoke(
+            self._select_input(_models.EXECUTE_STACK_REFACTOR, args, kwargs),
+            _models.EXECUTE_STACK_REFACTOR,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_generated_template(
-        self, input: GetGeneratedTemplateInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetGeneratedTemplateInput
+        | _models.GetGeneratedTemplateInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetGeneratedTemplateOutput: ...
+
+    @_overload
+    def get_generated_template(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetGeneratedTemplateInputDict],
     ) -> GetGeneratedTemplateOutput:
         """
         Retrieves a generated template. If the template is in an `InProgress` or
@@ -1605,8 +2470,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         yet been in a `Complete` status then an empty template will be returned.
 
         Args:
-            input:
-                An instance of `GetGeneratedTemplateInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1616,12 +2479,33 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `GetGeneratedTemplateOutput`.
         """
-        return self._invoke(input, _models.GET_GENERATED_TEMPLATE, [], plugins)
 
+    def get_generated_template(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetGeneratedTemplateOutput:
+        return self._invoke(
+            self._select_input(_models.GET_GENERATED_TEMPLATE, args, kwargs),
+            _models.GET_GENERATED_TEMPLATE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_hook_result(
         self,
-        input: GetHookResultInput | None = None,
+        request: _models.GetHookResultInput | _models.GetHookResultInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetHookResultOutput: ...
+
+    @_overload
+    def get_hook_result(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetHookResultInputDict],
     ) -> GetHookResultOutput:
         """
         Retrieves detailed information and remediation guidance for a Hook
@@ -1635,8 +2519,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         in the *CloudFormation Hooks User Guide*.
 
         Args:
-            input:
-                An instance of `GetHookResultInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1646,18 +2528,39 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `GetHookResultOutput`.
         """
-        return self._invoke(input, _models.GET_HOOK_RESULT, [], plugins)
 
+    def get_hook_result(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetHookResultOutput:
+        return self._invoke(
+            self._select_input(_models.GET_HOOK_RESULT, args, kwargs),
+            _models.GET_HOOK_RESULT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_stack_policy(
-        self, input: GetStackPolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetStackPolicyInput | _models.GetStackPolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetStackPolicyOutput: ...
+
+    @_overload
+    def get_stack_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetStackPolicyInputDict],
     ) -> GetStackPolicyOutput:
         """
         Returns the stack policy for a specified stack. If a stack doesn't have
         a policy, a null value is returned.
 
         Args:
-            input:
-                An instance of `GetStackPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1667,10 +2570,33 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `GetStackPolicyOutput`.
         """
-        return self._invoke(input, _models.GET_STACK_POLICY, [], plugins)
 
+    def get_stack_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetStackPolicyOutput:
+        return self._invoke(
+            self._select_input(_models.GET_STACK_POLICY, args, kwargs),
+            _models.GET_STACK_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_template(
-        self, input: GetTemplateInput | None = None, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetTemplateInput | _models.GetTemplateInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetTemplateOutput: ...
+
+    @_overload
+    def get_template(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetTemplateInputDict],
     ) -> GetTemplateOutput:
         """
         Returns the template body for a specified stack. You can get the
@@ -1683,8 +2609,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
             If the template doesn't exist, a `ValidationError` is returned.
 
         Args:
-            input:
-                An instance of `GetTemplateInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1694,12 +2618,33 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `GetTemplateOutput`.
         """
-        return self._invoke(input, _models.GET_TEMPLATE, [], plugins)
 
+    def get_template(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetTemplateOutput:
+        return self._invoke(
+            self._select_input(_models.GET_TEMPLATE, args, kwargs),
+            _models.GET_TEMPLATE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_template_summary(
         self,
-        input: GetTemplateSummaryInput | None = None,
+        request: _models.GetTemplateSummaryInput | _models.GetTemplateSummaryInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetTemplateSummaryOutput: ...
+
+    @_overload
+    def get_template_summary(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetTemplateSummaryInputDict],
     ) -> GetTemplateSummaryOutput:
         """
         Returns information about a new or existing template. The
@@ -1716,8 +2661,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         template doesn't exist, a `ValidationError` is returned.
 
         Args:
-            input:
-                An instance of `GetTemplateSummaryInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1727,10 +2670,34 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `GetTemplateSummaryOutput`.
         """
-        return self._invoke(input, _models.GET_TEMPLATE_SUMMARY, [], plugins)
 
+    def get_template_summary(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetTemplateSummaryOutput:
+        return self._invoke(
+            self._select_input(_models.GET_TEMPLATE_SUMMARY, args, kwargs),
+            _models.GET_TEMPLATE_SUMMARY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def import_stacks_to_stack_set(
-        self, input: ImportStacksToStackSetInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ImportStacksToStackSetInput
+        | _models.ImportStacksToStackSetInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ImportStacksToStackSetOutput: ...
+
+    @_overload
+    def import_stacks_to_stack_set(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ImportStacksToStackSetInputDict],
     ) -> ImportStacksToStackSetOutput:
         """
         Import existing stacks into a new StackSets. Use the stack import
@@ -1739,8 +2706,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Region, by specifying the stack ID of the stack you intend to import.
 
         Args:
-            input:
-                An instance of `ImportStacksToStackSetInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1750,10 +2715,33 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `ImportStacksToStackSetOutput`.
         """
-        return self._invoke(input, _models.IMPORT_STACKS_TO_STACK_SET, [], plugins)
 
+    def import_stacks_to_stack_set(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ImportStacksToStackSetOutput:
+        return self._invoke(
+            self._select_input(_models.IMPORT_STACKS_TO_STACK_SET, args, kwargs),
+            _models.IMPORT_STACKS_TO_STACK_SET,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_change_sets(
-        self, input: ListChangeSetsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListChangeSetsInput | _models.ListChangeSetsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListChangeSetsOutput: ...
+
+    @_overload
+    def list_change_sets(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListChangeSetsInputDict],
     ) -> ListChangeSetsOutput:
         """
         Returns the ID and status of each active change set for a stack. For
@@ -1761,8 +2749,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         `CREATE_IN_PROGRESS` or `CREATE_PENDING` state.
 
         Args:
-            input:
-                An instance of `ListChangeSetsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1772,10 +2758,33 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `ListChangeSetsOutput`.
         """
-        return self._invoke(input, _models.LIST_CHANGE_SETS, [], plugins)
 
+    def list_change_sets(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListChangeSetsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_CHANGE_SETS, args, kwargs),
+            _models.LIST_CHANGE_SETS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_exports(
-        self, input: ListExportsInput | None = None, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListExportsInput | _models.ListExportsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListExportsOutput: ...
+
+    @_overload
+    def list_exports(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListExportsInputDict],
     ) -> ListExportsOutput:
         """
         Lists all exported output values in the account and Region in which you
@@ -1789,8 +2798,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         stack](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-exports.html).
 
         Args:
-            input:
-                An instance of `ListExportsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1800,19 +2807,39 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `ListExportsOutput`.
         """
-        return self._invoke(input, _models.LIST_EXPORTS, [], plugins)
 
+    def list_exports(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListExportsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_EXPORTS, args, kwargs),
+            _models.LIST_EXPORTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_generated_templates(
         self,
-        input: ListGeneratedTemplatesInput | None = None,
+        request: _models.ListGeneratedTemplatesInput
+        | _models.ListGeneratedTemplatesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListGeneratedTemplatesOutput: ...
+
+    @_overload
+    def list_generated_templates(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListGeneratedTemplatesInputDict],
     ) -> ListGeneratedTemplatesOutput:
         """
         Lists your generated templates in this Region.
 
         Args:
-            input:
-                An instance of `ListGeneratedTemplatesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1822,12 +2849,33 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `ListGeneratedTemplatesOutput`.
         """
-        return self._invoke(input, _models.LIST_GENERATED_TEMPLATES, [], plugins)
 
+    def list_generated_templates(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListGeneratedTemplatesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_GENERATED_TEMPLATES, args, kwargs),
+            _models.LIST_GENERATED_TEMPLATES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_hook_results(
         self,
-        input: ListHookResultsInput | None = None,
+        request: _models.ListHookResultsInput | _models.ListHookResultsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListHookResultsOutput: ...
+
+    @_overload
+    def list_hook_results(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListHookResultsInputDict],
     ) -> ListHookResultsOutput:
         """
         Returns summaries of invoked Hooks. For more information, see [View
@@ -1848,8 +2896,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
           invocation target.
 
         Args:
-            input:
-                An instance of `ListHookResultsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1859,10 +2905,33 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `ListHookResultsOutput`.
         """
-        return self._invoke(input, _models.LIST_HOOK_RESULTS, [], plugins)
 
+    def list_hook_results(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListHookResultsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_HOOK_RESULTS, args, kwargs),
+            _models.LIST_HOOK_RESULTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_imports(
-        self, input: ListImportsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListImportsInput | _models.ListImportsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListImportsOutput: ...
+
+    @_overload
+    def list_imports(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListImportsInputDict],
     ) -> ListImportsOutput:
         """
         Lists all stacks that are importing an exported output value. To modify
@@ -1875,8 +2944,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         function.
 
         Args:
-            input:
-                An instance of `ListImportsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1886,12 +2953,34 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `ListImportsOutput`.
         """
-        return self._invoke(input, _models.LIST_IMPORTS, [], plugins)
 
+    def list_imports(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListImportsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_IMPORTS, args, kwargs),
+            _models.LIST_IMPORTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_resource_scan_related_resources(
         self,
-        input: ListResourceScanRelatedResourcesInput,
+        request: _models.ListResourceScanRelatedResourcesInput
+        | _models.ListResourceScanRelatedResourcesInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListResourceScanRelatedResourcesOutput: ...
+
+    @_overload
+    def list_resource_scan_related_resources(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListResourceScanRelatedResourcesInputDict],
     ) -> ListResourceScanRelatedResourcesOutput:
         """
         Lists the related resources for a list of resources from a resource
@@ -1899,8 +2988,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         managed by CloudFormation.
 
         Args:
-            input:
-                An instance of `ListResourceScanRelatedResourcesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1910,12 +2997,36 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `ListResourceScanRelatedResourcesOutput`.
         """
+
+    def list_resource_scan_related_resources(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListResourceScanRelatedResourcesOutput:
         return self._invoke(
-            input, _models.LIST_RESOURCE_SCAN_RELATED_RESOURCES, [], plugins
+            self._select_input(
+                _models.LIST_RESOURCE_SCAN_RELATED_RESOURCES, args, kwargs
+            ),
+            _models.LIST_RESOURCE_SCAN_RELATED_RESOURCES,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_resource_scan_resources(
-        self, input: ListResourceScanResourcesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListResourceScanResourcesInput
+        | _models.ListResourceScanResourcesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListResourceScanResourcesOutput: ...
+
+    @_overload
+    def list_resource_scan_resources(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListResourceScanResourcesInputDict],
     ) -> ListResourceScanResourcesOutput:
         """
         Lists the resources from a resource scan. The results can be filtered by
@@ -1925,8 +3036,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         CloudFormation.
 
         Args:
-            input:
-                An instance of `ListResourceScanResourcesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1936,20 +3045,39 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `ListResourceScanResourcesOutput`.
         """
-        return self._invoke(input, _models.LIST_RESOURCE_SCAN_RESOURCES, [], plugins)
 
+    def list_resource_scan_resources(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListResourceScanResourcesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_RESOURCE_SCAN_RESOURCES, args, kwargs),
+            _models.LIST_RESOURCE_SCAN_RESOURCES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_resource_scans(
         self,
-        input: ListResourceScansInput | None = None,
+        request: _models.ListResourceScansInput | _models.ListResourceScansInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListResourceScansOutput: ...
+
+    @_overload
+    def list_resource_scans(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListResourceScansInputDict],
     ) -> ListResourceScansOutput:
         """
         List the resource scans from newest to oldest. By default it will return
         up to 10 resource scans.
 
         Args:
-            input:
-                An instance of `ListResourceScansInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1959,12 +3087,34 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `ListResourceScansOutput`.
         """
-        return self._invoke(input, _models.LIST_RESOURCE_SCANS, [], plugins)
 
+    def list_resource_scans(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListResourceScansOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_RESOURCE_SCANS, args, kwargs),
+            _models.LIST_RESOURCE_SCANS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_stack_instance_resource_drifts(
         self,
-        input: ListStackInstanceResourceDriftsInput,
+        request: _models.ListStackInstanceResourceDriftsInput
+        | _models.ListStackInstanceResourceDriftsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListStackInstanceResourceDriftsOutput: ...
+
+    @_overload
+    def list_stack_instance_resource_drifts(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListStackInstanceResourceDriftsInputDict],
     ) -> ListStackInstanceResourceDriftsOutput:
         """
         Returns drift information for resources in a stack instance.
@@ -1975,8 +3125,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
             only return partial results.
 
         Args:
-            input:
-                An instance of `ListStackInstanceResourceDriftsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1986,12 +3134,35 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `ListStackInstanceResourceDriftsOutput`.
         """
+
+    def list_stack_instance_resource_drifts(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListStackInstanceResourceDriftsOutput:
         return self._invoke(
-            input, _models.LIST_STACK_INSTANCE_RESOURCE_DRIFTS, [], plugins
+            self._select_input(
+                _models.LIST_STACK_INSTANCE_RESOURCE_DRIFTS, args, kwargs
+            ),
+            _models.LIST_STACK_INSTANCE_RESOURCE_DRIFTS,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_stack_instances(
-        self, input: ListStackInstancesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListStackInstancesInput | _models.ListStackInstancesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListStackInstancesOutput: ...
+
+    @_overload
+    def list_stack_instances(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListStackInstancesInputDict],
     ) -> ListStackInstancesOutput:
         """
         Returns summary information about stack instances that are associated
@@ -2000,8 +3171,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         or that have a specific status.
 
         Args:
-            input:
-                An instance of `ListStackInstancesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2011,18 +3180,40 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `ListStackInstancesOutput`.
         """
-        return self._invoke(input, _models.LIST_STACK_INSTANCES, [], plugins)
 
+    def list_stack_instances(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListStackInstancesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_STACK_INSTANCES, args, kwargs),
+            _models.LIST_STACK_INSTANCES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_stack_refactor_actions(
-        self, input: ListStackRefactorActionsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListStackRefactorActionsInput
+        | _models.ListStackRefactorActionsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListStackRefactorActionsOutput: ...
+
+    @_overload
+    def list_stack_refactor_actions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListStackRefactorActionsInputDict],
     ) -> ListStackRefactorActionsOutput:
         """
         Lists the stack refactor actions that will be taken after calling the
         ExecuteStackRefactor action.
 
         Args:
-            input:
-                An instance of `ListStackRefactorActionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2032,19 +3223,38 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `ListStackRefactorActionsOutput`.
         """
-        return self._invoke(input, _models.LIST_STACK_REFACTOR_ACTIONS, [], plugins)
 
+    def list_stack_refactor_actions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListStackRefactorActionsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_STACK_REFACTOR_ACTIONS, args, kwargs),
+            _models.LIST_STACK_REFACTOR_ACTIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_stack_refactors(
         self,
-        input: ListStackRefactorsInput | None = None,
+        request: _models.ListStackRefactorsInput | _models.ListStackRefactorsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListStackRefactorsOutput: ...
+
+    @_overload
+    def list_stack_refactors(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListStackRefactorsInputDict],
     ) -> ListStackRefactorsOutput:
         """
         Lists all account stack refactor operations and their statuses.
 
         Args:
-            input:
-                An instance of `ListStackRefactorsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2054,10 +3264,33 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `ListStackRefactorsOutput`.
         """
-        return self._invoke(input, _models.LIST_STACK_REFACTORS, [], plugins)
 
+    def list_stack_refactors(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListStackRefactorsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_STACK_REFACTORS, args, kwargs),
+            _models.LIST_STACK_REFACTORS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_stack_resources(
-        self, input: ListStackResourcesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListStackResourcesInput | _models.ListStackResourcesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListStackResourcesOutput: ...
+
+    @_overload
+    def list_stack_resources(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListStackResourcesInputDict],
     ) -> ListStackResourcesOutput:
         """
         Returns descriptions of all resources of the specified stack.
@@ -2066,8 +3299,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         up to 90 days after the stack has been deleted.
 
         Args:
-            input:
-                An instance of `ListStackResourcesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2077,10 +3308,33 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `ListStackResourcesOutput`.
         """
-        return self._invoke(input, _models.LIST_STACK_RESOURCES, [], plugins)
 
+    def list_stack_resources(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListStackResourcesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_STACK_RESOURCES, args, kwargs),
+            _models.LIST_STACK_RESOURCES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_stacks(
-        self, input: ListStacksInput | None = None, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListStacksInput | _models.ListStacksInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListStacksOutput: ...
+
+    @_overload
+    def list_stacks(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListStacksInputDict],
     ) -> ListStacksOutput:
         """
         Returns the summary information for stacks whose status matches the
@@ -2090,8 +3344,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         returned (including existing stacks and stacks that have been deleted).
 
         Args:
-            input:
-                An instance of `ListStacksInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2101,19 +3353,39 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `ListStacksOutput`.
         """
-        return self._invoke(input, _models.LIST_STACKS, [], plugins)
 
+    def list_stacks(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListStacksOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_STACKS, args, kwargs),
+            _models.LIST_STACKS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_stack_set_auto_deployment_targets(
         self,
-        input: ListStackSetAutoDeploymentTargetsInput,
+        request: _models.ListStackSetAutoDeploymentTargetsInput
+        | _models.ListStackSetAutoDeploymentTargetsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListStackSetAutoDeploymentTargetsOutput: ...
+
+    @_overload
+    def list_stack_set_auto_deployment_targets(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListStackSetAutoDeploymentTargetsInputDict],
     ) -> ListStackSetAutoDeploymentTargetsOutput:
         """
         Returns summary information about deployment targets for a StackSet.
 
         Args:
-            input:
-                An instance of `ListStackSetAutoDeploymentTargetsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2123,14 +3395,36 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `ListStackSetAutoDeploymentTargetsOutput`.
         """
+
+    def list_stack_set_auto_deployment_targets(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListStackSetAutoDeploymentTargetsOutput:
         return self._invoke(
-            input, _models.LIST_STACK_SET_AUTO_DEPLOYMENT_TARGETS, [], plugins
+            self._select_input(
+                _models.LIST_STACK_SET_AUTO_DEPLOYMENT_TARGETS, args, kwargs
+            ),
+            _models.LIST_STACK_SET_AUTO_DEPLOYMENT_TARGETS,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_stack_set_operation_results(
         self,
-        input: ListStackSetOperationResultsInput,
+        request: _models.ListStackSetOperationResultsInput
+        | _models.ListStackSetOperationResultsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListStackSetOperationResultsOutput: ...
+
+    @_overload
+    def list_stack_set_operation_results(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListStackSetOperationResultsInputDict],
     ) -> ListStackSetOperationResultsOutput:
         """
         Returns summary information about the results of a StackSet operation.
@@ -2140,8 +3434,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
             time but will eventually return the most up-to-date data.
 
         Args:
-            input:
-                An instance of `ListStackSetOperationResultsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2151,12 +3443,34 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `ListStackSetOperationResultsOutput`.
         """
+
+    def list_stack_set_operation_results(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListStackSetOperationResultsOutput:
         return self._invoke(
-            input, _models.LIST_STACK_SET_OPERATION_RESULTS, [], plugins
+            self._select_input(_models.LIST_STACK_SET_OPERATION_RESULTS, args, kwargs),
+            _models.LIST_STACK_SET_OPERATION_RESULTS,
+            [],
+            plugins,
         )
 
+    @_overload
     def list_stack_set_operations(
-        self, input: ListStackSetOperationsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListStackSetOperationsInput
+        | _models.ListStackSetOperationsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListStackSetOperationsOutput: ...
+
+    @_overload
+    def list_stack_set_operations(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListStackSetOperationsInputDict],
     ) -> ListStackSetOperationsOutput:
         """
         Returns summary information about operations performed on a StackSet.
@@ -2166,8 +3480,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
             time but will eventually return the most up-to-date data.
 
         Args:
-            input:
-                An instance of `ListStackSetOperationsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2177,12 +3489,33 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `ListStackSetOperationsOutput`.
         """
-        return self._invoke(input, _models.LIST_STACK_SET_OPERATIONS, [], plugins)
 
+    def list_stack_set_operations(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListStackSetOperationsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_STACK_SET_OPERATIONS, args, kwargs),
+            _models.LIST_STACK_SET_OPERATIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_stack_sets(
         self,
-        input: ListStackSetsInput | None = None,
+        request: _models.ListStackSetsInput | _models.ListStackSetsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListStackSetsOutput: ...
+
+    @_overload
+    def list_stack_sets(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListStackSetsInputDict],
     ) -> ListStackSetsOutput:
         """
         Returns summary information about StackSets that are associated with the
@@ -2207,8 +3540,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
           in the management account.
 
         Args:
-            input:
-                An instance of `ListStackSetsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2218,19 +3549,39 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `ListStackSetsOutput`.
         """
-        return self._invoke(input, _models.LIST_STACK_SETS, [], plugins)
 
+    def list_stack_sets(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListStackSetsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_STACK_SETS, args, kwargs),
+            _models.LIST_STACK_SETS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_type_registrations(
         self,
-        input: ListTypeRegistrationsInput | None = None,
+        request: _models.ListTypeRegistrationsInput
+        | _models.ListTypeRegistrationsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListTypeRegistrationsOutput: ...
+
+    @_overload
+    def list_type_registrations(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListTypeRegistrationsInputDict],
     ) -> ListTypeRegistrationsOutput:
         """
         Returns a list of registration tokens for the specified extension(s).
 
         Args:
-            input:
-                An instance of `ListTypeRegistrationsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2240,10 +3591,33 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `ListTypeRegistrationsOutput`.
         """
-        return self._invoke(input, _models.LIST_TYPE_REGISTRATIONS, [], plugins)
 
+    def list_type_registrations(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListTypeRegistrationsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_TYPE_REGISTRATIONS, args, kwargs),
+            _models.LIST_TYPE_REGISTRATIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_types(
-        self, input: ListTypesInput | None = None, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListTypesInput | _models.ListTypesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListTypesOutput: ...
+
+    @_overload
+    def list_types(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListTypesInputDict],
     ) -> ListTypesOutput:
         """
         Returns summary information about all extensions, including your private
@@ -2251,8 +3625,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Amazon Web Services and third-party publishers.
 
         Args:
-            input:
-                An instance of `ListTypesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2262,19 +3634,38 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `ListTypesOutput`.
         """
-        return self._invoke(input, _models.LIST_TYPES, [], plugins)
 
+    def list_types(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListTypesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_TYPES, args, kwargs),
+            _models.LIST_TYPES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_type_versions(
         self,
-        input: ListTypeVersionsInput | None = None,
+        request: _models.ListTypeVersionsInput | _models.ListTypeVersionsInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ListTypeVersionsOutput: ...
+
+    @_overload
+    def list_type_versions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListTypeVersionsInputDict],
     ) -> ListTypeVersionsOutput:
         """
         Returns summary information about the versions of an extension.
 
         Args:
-            input:
-                An instance of `ListTypeVersionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2284,10 +3675,33 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `ListTypeVersionsOutput`.
         """
-        return self._invoke(input, _models.LIST_TYPE_VERSIONS, [], plugins)
 
+    def list_type_versions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListTypeVersionsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_TYPE_VERSIONS, args, kwargs),
+            _models.LIST_TYPE_VERSIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def publish_type(
-        self, input: PublishTypeInput | None = None, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PublishTypeInput | _models.PublishTypeInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PublishTypeOutput: ...
+
+    @_overload
+    def publish_type(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PublishTypeInputDict],
     ) -> PublishTypeOutput:
         """
         Publishes the specified extension to the CloudFormation registry as a
@@ -2302,8 +3716,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         [RegisterPublisher](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterPublisher.html).
 
         Args:
-            input:
-                An instance of `PublishTypeInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2313,10 +3725,34 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `PublishTypeOutput`.
         """
-        return self._invoke(input, _models.PUBLISH_TYPE, [], plugins)
 
+    def publish_type(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PublishTypeOutput:
+        return self._invoke(
+            self._select_input(_models.PUBLISH_TYPE, args, kwargs),
+            _models.PUBLISH_TYPE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def record_handler_progress(
-        self, input: RecordHandlerProgressInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RecordHandlerProgressInput
+        | _models.RecordHandlerProgressInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RecordHandlerProgressOutput: ...
+
+    @_overload
+    def record_handler_progress(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RecordHandlerProgressInputDict],
     ) -> RecordHandlerProgressOutput:
         """
         Reports progress of a resource handler to CloudFormation.
@@ -2326,8 +3762,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Don't use this API in your code.
 
         Args:
-            input:
-                An instance of `RecordHandlerProgressInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2337,12 +3771,33 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `RecordHandlerProgressOutput`.
         """
-        return self._invoke(input, _models.RECORD_HANDLER_PROGRESS, [], plugins)
 
+    def record_handler_progress(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RecordHandlerProgressOutput:
+        return self._invoke(
+            self._select_input(_models.RECORD_HANDLER_PROGRESS, args, kwargs),
+            _models.RECORD_HANDLER_PROGRESS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def register_publisher(
         self,
-        input: RegisterPublisherInput | None = None,
+        request: _models.RegisterPublisherInput | _models.RegisterPublisherInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> RegisterPublisherOutput: ...
+
+    @_overload
+    def register_publisher(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RegisterPublisherInputDict],
     ) -> RegisterPublisherOutput:
         """
         Registers your account as a publisher of public extensions in the
@@ -2357,8 +3812,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         in the *CloudFormation Command Line Interface (CLI) User Guide*.
 
         Args:
-            input:
-                An instance of `RegisterPublisherInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2368,10 +3821,33 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `RegisterPublisherOutput`.
         """
-        return self._invoke(input, _models.REGISTER_PUBLISHER, [], plugins)
 
+    def register_publisher(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RegisterPublisherOutput:
+        return self._invoke(
+            self._select_input(_models.REGISTER_PUBLISHER, args, kwargs),
+            _models.REGISTER_PUBLISHER,
+            [],
+            plugins,
+        )
+
+    @_overload
     def register_type(
-        self, input: RegisterTypeInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RegisterTypeInput | _models.RegisterTypeInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RegisterTypeOutput: ...
+
+    @_overload
+    def register_type(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RegisterTypeInputDict],
     ) -> RegisterTypeOutput:
         """
         Registers an extension with the CloudFormation service. Registering an
@@ -2408,8 +3884,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         in the *CloudFormation User Guide*.
 
         Args:
-            input:
-                An instance of `RegisterTypeInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2419,10 +3893,33 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `RegisterTypeOutput`.
         """
-        return self._invoke(input, _models.REGISTER_TYPE, [], plugins)
 
+    def register_type(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RegisterTypeOutput:
+        return self._invoke(
+            self._select_input(_models.REGISTER_TYPE, args, kwargs),
+            _models.REGISTER_TYPE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def rollback_stack(
-        self, input: RollbackStackInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RollbackStackInput | _models.RollbackStackInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RollbackStackOutput: ...
+
+    @_overload
+    def rollback_stack(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RollbackStackInputDict],
     ) -> RollbackStackOutput:
         """
         When specifying `RollbackStack`, you preserve the state of previously
@@ -2447,8 +3944,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         - `IMPORT_ROLLBACK_COMPLETE`
 
         Args:
-            input:
-                An instance of `RollbackStackInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2458,17 +3953,38 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `RollbackStackOutput`.
         """
-        return self._invoke(input, _models.ROLLBACK_STACK, [], plugins)
 
+    def rollback_stack(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RollbackStackOutput:
+        return self._invoke(
+            self._select_input(_models.ROLLBACK_STACK, args, kwargs),
+            _models.ROLLBACK_STACK,
+            [],
+            plugins,
+        )
+
+    @_overload
     def set_stack_policy(
-        self, input: SetStackPolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.SetStackPolicyInput | _models.SetStackPolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> SetStackPolicyOutput: ...
+
+    @_overload
+    def set_stack_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SetStackPolicyInputDict],
     ) -> SetStackPolicyOutput:
         """
         Sets a stack policy for a specified stack.
 
         Args:
-            input:
-                An instance of `SetStackPolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2478,10 +3994,34 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `SetStackPolicyOutput`.
         """
-        return self._invoke(input, _models.SET_STACK_POLICY, [], plugins)
 
+    def set_stack_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SetStackPolicyOutput:
+        return self._invoke(
+            self._select_input(_models.SET_STACK_POLICY, args, kwargs),
+            _models.SET_STACK_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def set_type_configuration(
-        self, input: SetTypeConfigurationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.SetTypeConfigurationInput
+        | _models.SetTypeConfigurationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> SetTypeConfigurationOutput: ...
+
+    @_overload
+    def set_type_configuration(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SetTypeConfigurationInputDict],
     ) -> SetTypeConfigurationOutput:
         """
         Specifies the configuration data for a CloudFormation extension, such as
@@ -2513,8 +4053,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Guide](https://docs.aws.amazon.com/cloudformation-cli/latest/hooks-userguide/what-is-cloudformation-hooks.html).
 
         Args:
-            input:
-                An instance of `SetTypeConfigurationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2524,20 +4062,40 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `SetTypeConfigurationOutput`.
         """
-        return self._invoke(input, _models.SET_TYPE_CONFIGURATION, [], plugins)
 
+    def set_type_configuration(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SetTypeConfigurationOutput:
+        return self._invoke(
+            self._select_input(_models.SET_TYPE_CONFIGURATION, args, kwargs),
+            _models.SET_TYPE_CONFIGURATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def set_type_default_version(
         self,
-        input: SetTypeDefaultVersionInput | None = None,
+        request: _models.SetTypeDefaultVersionInput
+        | _models.SetTypeDefaultVersionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> SetTypeDefaultVersionOutput: ...
+
+    @_overload
+    def set_type_default_version(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SetTypeDefaultVersionInputDict],
     ) -> SetTypeDefaultVersionOutput:
         """
         Specify the default version of an extension. The default version of an
         extension will be used in CloudFormation operations.
 
         Args:
-            input:
-                An instance of `SetTypeDefaultVersionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2547,10 +4105,33 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `SetTypeDefaultVersionOutput`.
         """
-        return self._invoke(input, _models.SET_TYPE_DEFAULT_VERSION, [], plugins)
 
+    def set_type_default_version(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SetTypeDefaultVersionOutput:
+        return self._invoke(
+            self._select_input(_models.SET_TYPE_DEFAULT_VERSION, args, kwargs),
+            _models.SET_TYPE_DEFAULT_VERSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def signal_resource(
-        self, input: SignalResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.SignalResourceInput | _models.SignalResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> SignalResourceOutput: ...
+
+    @_overload
+    def signal_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SignalResourceInputDict],
     ) -> SignalResourceOutput:
         """
         Sends a signal to the specified resource with a success or failure
@@ -2562,8 +4143,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         anywhere other than an Amazon EC2 instance.
 
         Args:
-            input:
-                An instance of `SignalResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2573,20 +4152,39 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `SignalResourceOutput`.
         """
-        return self._invoke(input, _models.SIGNAL_RESOURCE, [], plugins)
 
+    def signal_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SignalResourceOutput:
+        return self._invoke(
+            self._select_input(_models.SIGNAL_RESOURCE, args, kwargs),
+            _models.SIGNAL_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def start_resource_scan(
         self,
-        input: StartResourceScanInput | None = None,
+        request: _models.StartResourceScanInput | _models.StartResourceScanInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> StartResourceScanOutput: ...
+
+    @_overload
+    def start_resource_scan(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartResourceScanInputDict],
     ) -> StartResourceScanOutput:
         """
         Starts a scan of the resources in this account in this Region. You can
         the status of a scan using the `ListResourceScans` API action.
 
         Args:
-            input:
-                An instance of `StartResourceScanInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2596,10 +4194,34 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `StartResourceScanOutput`.
         """
-        return self._invoke(input, _models.START_RESOURCE_SCAN, [], plugins)
 
+    def start_resource_scan(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StartResourceScanOutput:
+        return self._invoke(
+            self._select_input(_models.START_RESOURCE_SCAN, args, kwargs),
+            _models.START_RESOURCE_SCAN,
+            [],
+            plugins,
+        )
+
+    @_overload
     def stop_stack_set_operation(
-        self, input: StopStackSetOperationInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StopStackSetOperationInput
+        | _models.StopStackSetOperationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StopStackSetOperationOutput: ...
+
+    @_overload
+    def stop_stack_set_operation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StopStackSetOperationInputDict],
     ) -> StopStackSetOperationOutput:
         """
         Stops an in-progress operation on a StackSet and its associated stack
@@ -2607,8 +4229,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         deployments and wait for those are in-progress to complete.
 
         Args:
-            input:
-                An instance of `StopStackSetOperationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2618,10 +4238,33 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `StopStackSetOperationOutput`.
         """
-        return self._invoke(input, _models.STOP_STACK_SET_OPERATION, [], plugins)
 
+    def stop_stack_set_operation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StopStackSetOperationOutput:
+        return self._invoke(
+            self._select_input(_models.STOP_STACK_SET_OPERATION, args, kwargs),
+            _models.STOP_STACK_SET_OPERATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def test_type(
-        self, input: TestTypeInput | None = None, plugins: list[Plugin] | None = None
+        self,
+        request: _models.TestTypeInput | _models.TestTypeInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> TestTypeOutput: ...
+
+    @_overload
+    def test_type(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.TestTypeInputDict],
     ) -> TestTypeOutput:
         """
         Tests a registered extension to make sure it meets all necessary
@@ -2657,8 +4300,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         in the *CloudFormation Command Line Interface (CLI) User Guide*.
 
         Args:
-            input:
-                An instance of `TestTypeInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2668,10 +4309,34 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `TestTypeOutput`.
         """
-        return self._invoke(input, _models.TEST_TYPE, [], plugins)
 
+    def test_type(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> TestTypeOutput:
+        return self._invoke(
+            self._select_input(_models.TEST_TYPE, args, kwargs),
+            _models.TEST_TYPE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_generated_template(
-        self, input: UpdateGeneratedTemplateInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateGeneratedTemplateInput
+        | _models.UpdateGeneratedTemplateInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateGeneratedTemplateOutput: ...
+
+    @_overload
+    def update_generated_template(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateGeneratedTemplateInputDict],
     ) -> UpdateGeneratedTemplateOutput:
         """
         Updates a generated template. This can be used to change the name, add
@@ -2681,8 +4346,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         API action.
 
         Args:
-            input:
-                An instance of `UpdateGeneratedTemplateInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2692,10 +4355,33 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `UpdateGeneratedTemplateOutput`.
         """
-        return self._invoke(input, _models.UPDATE_GENERATED_TEMPLATE, [], plugins)
 
+    def update_generated_template(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateGeneratedTemplateOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_GENERATED_TEMPLATE, args, kwargs),
+            _models.UPDATE_GENERATED_TEMPLATE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_stack(
-        self, input: UpdateStackInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateStackInput | _models.UpdateStackInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateStackOutput: ...
+
+    @_overload
+    def update_stack(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateStackInputDict],
     ) -> UpdateStackOutput:
         """
         Updates a stack as specified in the template. After the call completes
@@ -2712,8 +4398,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         in the *CloudFormation User Guide*.
 
         Args:
-            input:
-                An instance of `UpdateStackInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2723,10 +4407,34 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `UpdateStackOutput`.
         """
-        return self._invoke(input, _models.UPDATE_STACK, [], plugins)
 
+    def update_stack(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateStackOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_STACK, args, kwargs),
+            _models.UPDATE_STACK,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_stack_instances(
-        self, input: UpdateStackInstancesInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateStackInstancesInput
+        | _models.UpdateStackInstancesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateStackInstancesOutput: ...
+
+    @_overload
+    def update_stack_instances(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateStackInstancesInputDict],
     ) -> UpdateStackInstancesOutput:
         """
         Updates the parameter values for stack instances for the specified
@@ -2767,8 +4475,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
             target a parent OU that contains all desired child OUs.
 
         Args:
-            input:
-                An instance of `UpdateStackInstancesInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2778,10 +4484,33 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `UpdateStackInstancesOutput`.
         """
-        return self._invoke(input, _models.UPDATE_STACK_INSTANCES, [], plugins)
 
+    def update_stack_instances(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateStackInstancesOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_STACK_INSTANCES, args, kwargs),
+            _models.UPDATE_STACK_INSTANCES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_stack_set(
-        self, input: UpdateStackSetInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateStackSetInput | _models.UpdateStackSetInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateStackSetOutput: ...
+
+    @_overload
+    def update_stack_set(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateStackSetInputDict],
     ) -> UpdateStackSetOutput:
         """
         Updates the StackSet and associated stack instances in the specified
@@ -2807,8 +4536,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
             target a parent OU that contains all desired child OUs.
 
         Args:
-            input:
-                An instance of `UpdateStackSetInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2818,12 +4545,34 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `UpdateStackSetOutput`.
         """
-        return self._invoke(input, _models.UPDATE_STACK_SET, [], plugins)
 
+    def update_stack_set(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateStackSetOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_STACK_SET, args, kwargs),
+            _models.UPDATE_STACK_SET,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_termination_protection(
         self,
-        input: UpdateTerminationProtectionInput,
+        request: _models.UpdateTerminationProtectionInput
+        | _models.UpdateTerminationProtectionInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> UpdateTerminationProtectionOutput: ...
+
+    @_overload
+    def update_termination_protection(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateTerminationProtectionInputDict],
     ) -> UpdateTerminationProtectionOutput:
         """
         Updates termination protection for the specified stack. If a user
@@ -2839,8 +4588,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         directly on the nested stack.
 
         Args:
-            input:
-                An instance of `UpdateTerminationProtectionInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2850,12 +4597,33 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `UpdateTerminationProtectionOutput`.
         """
-        return self._invoke(input, _models.UPDATE_TERMINATION_PROTECTION, [], plugins)
 
+    def update_termination_protection(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateTerminationProtectionOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_TERMINATION_PROTECTION, args, kwargs),
+            _models.UPDATE_TERMINATION_PROTECTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def validate_template(
         self,
-        input: ValidateTemplateInput | None = None,
+        request: _models.ValidateTemplateInput | _models.ValidateTemplateInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> ValidateTemplateOutput: ...
+
+    @_overload
+    def validate_template(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ValidateTemplateInputDict],
     ) -> ValidateTemplateOutput:
         """
         Validates a specified template. CloudFormation first checks if the
@@ -2864,8 +4632,6 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         returns a template validation error.
 
         Args:
-            input:
-                An instance of `ValidateTemplateInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -2875,7 +4641,16 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         Returns:
             An instance of `ValidateTemplateOutput`.
         """
-        return self._invoke(input, _models.VALIDATE_TEMPLATE, [], plugins)
+
+    def validate_template(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ValidateTemplateOutput:
+        return self._invoke(
+            self._select_input(_models.VALIDATE_TEMPLATE, args, kwargs),
+            _models.VALIDATE_TEMPLATE,
+            [],
+            plugins,
+        )
 
     def _new_config(self) -> CloudFormationConfig:
         return CloudFormationConfig.resolve()

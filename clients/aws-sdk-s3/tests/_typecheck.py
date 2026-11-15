@@ -2,397 +2,644 @@
 
 from typing import Any
 
+from aws_sdk_s3.aio.client import AsyncS3Client
+from aws_sdk_s3.client import S3Client
 from aws_sdk_s3.models import (
     AbacStatus,
+    AbacStatusDict,
     AbortIncompleteMultipartUpload,
+    AbortIncompleteMultipartUploadDict,
     AbortMultipartUploadInput,
+    AbortMultipartUploadInputDict,
     AbortMultipartUploadOutput,
     AccelerateConfiguration,
+    AccelerateConfigurationDict,
     AccessControlPolicy,
+    AccessControlPolicyDict,
     AccessControlTranslation,
+    AccessControlTranslationDict,
     AnalyticsAndOperator,
+    AnalyticsAndOperatorDict,
     AnalyticsConfiguration,
+    AnalyticsConfigurationDict,
     AnalyticsExportDestination,
+    AnalyticsExportDestinationDict,
+    AnalyticsFilterDict,
     AnalyticsS3BucketDestination,
+    AnalyticsS3BucketDestinationDict,
     AnnotationEntry,
     AnnotationTableConfiguration,
+    AnnotationTableConfigurationDict,
     AnnotationTableConfigurationResult,
     AnnotationTableConfigurationUpdates,
+    AnnotationTableConfigurationUpdatesDict,
+    AsyncPutObjectAnnotationInputDict,
+    AsyncPutObjectInputDict,
+    AsyncUploadPartInputDict,
+    AsyncWriteGetObjectResponseInputDict,
     BlockedEncryptionTypes,
+    BlockedEncryptionTypesDict,
     Bucket,
     BucketInfo,
+    BucketInfoDict,
     BucketLifecycleConfiguration,
+    BucketLifecycleConfigurationDict,
     BucketLoggingStatus,
+    BucketLoggingStatusDict,
     CORSConfiguration,
+    CORSConfigurationDict,
     CORSRule,
+    CORSRuleDict,
     CSVInput,
+    CSVInputDict,
     CSVOutput,
+    CSVOutputDict,
     Checksum,
     CommonPrefix,
     CompleteMultipartUploadInput,
+    CompleteMultipartUploadInputDict,
     CompleteMultipartUploadOutput,
     CompletedMultipartUpload,
+    CompletedMultipartUploadDict,
     CompletedPart,
+    CompletedPartDict,
     Condition,
+    ConditionDict,
     ContinuationEvent,
     CopyObjectInput,
+    CopyObjectInputDict,
     CopyObjectOutput,
     CopyObjectResult,
     CopyPartResult,
     CreateBucketConfiguration,
+    CreateBucketConfigurationDict,
     CreateBucketInput,
+    CreateBucketInputDict,
     CreateBucketMetadataConfigurationInput,
+    CreateBucketMetadataConfigurationInputDict,
     CreateBucketMetadataConfigurationOutput,
     CreateBucketMetadataTableConfigurationInput,
+    CreateBucketMetadataTableConfigurationInputDict,
     CreateBucketMetadataTableConfigurationOutput,
     CreateBucketOutput,
     CreateMultipartUploadInput,
+    CreateMultipartUploadInputDict,
     CreateMultipartUploadOutput,
     CreateSessionInput,
+    CreateSessionInputDict,
     CreateSessionOutput,
     DefaultRetention,
+    DefaultRetentionDict,
     Delete,
     DeleteBucketAnalyticsConfigurationInput,
+    DeleteBucketAnalyticsConfigurationInputDict,
     DeleteBucketAnalyticsConfigurationOutput,
     DeleteBucketCorsInput,
+    DeleteBucketCorsInputDict,
     DeleteBucketCorsOutput,
     DeleteBucketEncryptionInput,
+    DeleteBucketEncryptionInputDict,
     DeleteBucketEncryptionOutput,
     DeleteBucketInput,
+    DeleteBucketInputDict,
     DeleteBucketIntelligentTieringConfigurationInput,
+    DeleteBucketIntelligentTieringConfigurationInputDict,
     DeleteBucketIntelligentTieringConfigurationOutput,
     DeleteBucketInventoryConfigurationInput,
+    DeleteBucketInventoryConfigurationInputDict,
     DeleteBucketInventoryConfigurationOutput,
     DeleteBucketLifecycleInput,
+    DeleteBucketLifecycleInputDict,
     DeleteBucketLifecycleOutput,
     DeleteBucketMetadataConfigurationInput,
+    DeleteBucketMetadataConfigurationInputDict,
     DeleteBucketMetadataConfigurationOutput,
     DeleteBucketMetadataTableConfigurationInput,
+    DeleteBucketMetadataTableConfigurationInputDict,
     DeleteBucketMetadataTableConfigurationOutput,
     DeleteBucketMetricsConfigurationInput,
+    DeleteBucketMetricsConfigurationInputDict,
     DeleteBucketMetricsConfigurationOutput,
     DeleteBucketOutput,
     DeleteBucketOwnershipControlsInput,
+    DeleteBucketOwnershipControlsInputDict,
     DeleteBucketOwnershipControlsOutput,
     DeleteBucketPolicyInput,
+    DeleteBucketPolicyInputDict,
     DeleteBucketPolicyOutput,
     DeleteBucketReplicationInput,
+    DeleteBucketReplicationInputDict,
     DeleteBucketReplicationOutput,
     DeleteBucketTaggingInput,
+    DeleteBucketTaggingInputDict,
     DeleteBucketTaggingOutput,
     DeleteBucketWebsiteInput,
+    DeleteBucketWebsiteInputDict,
     DeleteBucketWebsiteOutput,
+    DeleteDict,
     DeleteMarkerEntry,
     DeleteMarkerReplication,
+    DeleteMarkerReplicationDict,
     DeleteObjectAnnotationInput,
+    DeleteObjectAnnotationInputDict,
     DeleteObjectAnnotationOutput,
     DeleteObjectInput,
+    DeleteObjectInputDict,
     DeleteObjectOutput,
     DeleteObjectTaggingInput,
+    DeleteObjectTaggingInputDict,
     DeleteObjectTaggingOutput,
     DeleteObjectsInput,
+    DeleteObjectsInputDict,
     DeleteObjectsOutput,
     DeletePublicAccessBlockInput,
+    DeletePublicAccessBlockInputDict,
     DeletePublicAccessBlockOutput,
     DeletedObject,
     Destination,
+    DestinationDict,
     DestinationResult,
     Encryption,
     EncryptionConfiguration,
+    EncryptionConfigurationDict,
+    EncryptionDict,
     EndEvent,
     Error,
     ErrorDetails,
     ErrorDocument,
+    ErrorDocumentDict,
     EventBridgeConfiguration,
+    EventBridgeConfigurationDict,
     EventHoldDuration,
+    EventHoldDurationDict,
     ExistingObjectReplication,
+    ExistingObjectReplicationDict,
     FilterRule,
+    FilterRuleDict,
     GetBucketAbacInput,
+    GetBucketAbacInputDict,
     GetBucketAbacOutput,
     GetBucketAccelerateConfigurationInput,
+    GetBucketAccelerateConfigurationInputDict,
     GetBucketAccelerateConfigurationOutput,
     GetBucketAclInput,
+    GetBucketAclInputDict,
     GetBucketAclOutput,
     GetBucketAnalyticsConfigurationInput,
+    GetBucketAnalyticsConfigurationInputDict,
     GetBucketAnalyticsConfigurationOutput,
     GetBucketCorsInput,
+    GetBucketCorsInputDict,
     GetBucketCorsOutput,
     GetBucketEncryptionInput,
+    GetBucketEncryptionInputDict,
     GetBucketEncryptionOutput,
     GetBucketIntelligentTieringConfigurationInput,
+    GetBucketIntelligentTieringConfigurationInputDict,
     GetBucketIntelligentTieringConfigurationOutput,
     GetBucketInventoryConfigurationInput,
+    GetBucketInventoryConfigurationInputDict,
     GetBucketInventoryConfigurationOutput,
     GetBucketLifecycleConfigurationInput,
+    GetBucketLifecycleConfigurationInputDict,
     GetBucketLifecycleConfigurationOutput,
     GetBucketLocationInput,
+    GetBucketLocationInputDict,
     GetBucketLocationOutput,
     GetBucketLoggingInput,
+    GetBucketLoggingInputDict,
     GetBucketLoggingOutput,
     GetBucketMetadataConfigurationInput,
+    GetBucketMetadataConfigurationInputDict,
     GetBucketMetadataConfigurationOutput,
     GetBucketMetadataConfigurationResult,
     GetBucketMetadataTableConfigurationInput,
+    GetBucketMetadataTableConfigurationInputDict,
     GetBucketMetadataTableConfigurationOutput,
     GetBucketMetadataTableConfigurationResult,
     GetBucketMetricsConfigurationInput,
+    GetBucketMetricsConfigurationInputDict,
     GetBucketMetricsConfigurationOutput,
     GetBucketNotificationConfigurationInput,
+    GetBucketNotificationConfigurationInputDict,
     GetBucketNotificationConfigurationOutput,
     GetBucketOwnershipControlsInput,
+    GetBucketOwnershipControlsInputDict,
     GetBucketOwnershipControlsOutput,
     GetBucketPolicyInput,
+    GetBucketPolicyInputDict,
     GetBucketPolicyOutput,
     GetBucketPolicyStatusInput,
+    GetBucketPolicyStatusInputDict,
     GetBucketPolicyStatusOutput,
     GetBucketReplicationInput,
+    GetBucketReplicationInputDict,
     GetBucketReplicationOutput,
     GetBucketRequestPaymentInput,
+    GetBucketRequestPaymentInputDict,
     GetBucketRequestPaymentOutput,
     GetBucketTaggingInput,
+    GetBucketTaggingInputDict,
     GetBucketTaggingOutput,
     GetBucketVersioningInput,
+    GetBucketVersioningInputDict,
     GetBucketVersioningOutput,
     GetBucketWebsiteInput,
+    GetBucketWebsiteInputDict,
     GetBucketWebsiteOutput,
     GetObjectAclInput,
+    GetObjectAclInputDict,
     GetObjectAclOutput,
     GetObjectAnnotationInput,
+    GetObjectAnnotationInputDict,
     GetObjectAnnotationOutput,
     GetObjectAttributesInput,
+    GetObjectAttributesInputDict,
     GetObjectAttributesOutput,
     GetObjectAttributesParts,
     GetObjectInput,
+    GetObjectInputDict,
     GetObjectLegalHoldInput,
+    GetObjectLegalHoldInputDict,
     GetObjectLegalHoldOutput,
     GetObjectLockConfigurationInput,
+    GetObjectLockConfigurationInputDict,
     GetObjectLockConfigurationOutput,
     GetObjectOutput,
     GetObjectRetentionInput,
+    GetObjectRetentionInputDict,
     GetObjectRetentionOutput,
     GetObjectTaggingInput,
+    GetObjectTaggingInputDict,
     GetObjectTaggingOutput,
     GetObjectTorrentInput,
+    GetObjectTorrentInputDict,
     GetObjectTorrentOutput,
     GetPublicAccessBlockInput,
+    GetPublicAccessBlockInputDict,
     GetPublicAccessBlockOutput,
     GlacierJobParameters,
+    GlacierJobParametersDict,
     Grant,
+    GrantDict,
     Grantee,
+    GranteeDict,
     HeadBucketInput,
+    HeadBucketInputDict,
     HeadBucketOutput,
     HeadObjectInput,
+    HeadObjectInputDict,
     HeadObjectOutput,
     IndexDocument,
+    IndexDocumentDict,
     Initiator,
     InputSerialization,
+    InputSerializationDict,
     IntelligentTieringAndOperator,
+    IntelligentTieringAndOperatorDict,
     IntelligentTieringConfiguration,
+    IntelligentTieringConfigurationDict,
     IntelligentTieringFilter,
+    IntelligentTieringFilterDict,
     InventoryConfiguration,
+    InventoryConfigurationDict,
     InventoryDestination,
+    InventoryDestinationDict,
     InventoryEncryption,
+    InventoryEncryptionDict,
     InventoryFilter,
+    InventoryFilterDict,
     InventoryS3BucketDestination,
+    InventoryS3BucketDestinationDict,
     InventorySchedule,
+    InventoryScheduleDict,
     InventoryTableConfiguration,
+    InventoryTableConfigurationDict,
     InventoryTableConfigurationResult,
     InventoryTableConfigurationUpdates,
+    InventoryTableConfigurationUpdatesDict,
     JSONInput,
+    JSONInputDict,
     JSONOutput,
+    JSONOutputDict,
     JournalTableConfiguration,
+    JournalTableConfigurationDict,
     JournalTableConfigurationResult,
     JournalTableConfigurationUpdates,
+    JournalTableConfigurationUpdatesDict,
     LambdaFunctionConfiguration,
+    LambdaFunctionConfigurationDict,
     LifecycleExpiration,
+    LifecycleExpirationDict,
     LifecycleRule,
     LifecycleRuleAndOperator,
+    LifecycleRuleAndOperatorDict,
+    LifecycleRuleDict,
     LifecycleRuleFilter,
+    LifecycleRuleFilterDict,
     ListBucketAnalyticsConfigurationsInput,
+    ListBucketAnalyticsConfigurationsInputDict,
     ListBucketAnalyticsConfigurationsOutput,
     ListBucketIntelligentTieringConfigurationsInput,
+    ListBucketIntelligentTieringConfigurationsInputDict,
     ListBucketIntelligentTieringConfigurationsOutput,
     ListBucketInventoryConfigurationsInput,
+    ListBucketInventoryConfigurationsInputDict,
     ListBucketInventoryConfigurationsOutput,
     ListBucketMetricsConfigurationsInput,
+    ListBucketMetricsConfigurationsInputDict,
     ListBucketMetricsConfigurationsOutput,
     ListBucketsInput,
+    ListBucketsInputDict,
     ListBucketsOutput,
     ListDirectoryBucketsInput,
+    ListDirectoryBucketsInputDict,
     ListDirectoryBucketsOutput,
     ListMultipartUploadsInput,
+    ListMultipartUploadsInputDict,
     ListMultipartUploadsOutput,
     ListObjectAnnotationsInput,
+    ListObjectAnnotationsInputDict,
     ListObjectAnnotationsOutput,
     ListObjectVersionsInput,
+    ListObjectVersionsInputDict,
     ListObjectVersionsOutput,
     ListObjectsInput,
+    ListObjectsInputDict,
     ListObjectsOutput,
     ListObjectsV2Input,
+    ListObjectsV2InputDict,
     ListObjectsV2Output,
     ListPartsInput,
+    ListPartsInputDict,
     ListPartsOutput,
     LocationInfo,
+    LocationInfoDict,
     LoggingEnabled,
+    LoggingEnabledDict,
     MetadataConfiguration,
+    MetadataConfigurationDict,
     MetadataConfigurationResult,
     MetadataEntry,
+    MetadataEntryDict,
     MetadataTableConfiguration,
+    MetadataTableConfigurationDict,
     MetadataTableConfigurationResult,
     MetadataTableEncryptionConfiguration,
+    MetadataTableEncryptionConfigurationDict,
     Metrics,
     MetricsAndOperator,
+    MetricsAndOperatorDict,
     MetricsConfiguration,
+    MetricsConfigurationDict,
+    MetricsDict,
+    MetricsFilterDict,
     MultipartUpload,
     NoncurrentVersionExpiration,
+    NoncurrentVersionExpirationDict,
     NoncurrentVersionTransition,
+    NoncurrentVersionTransitionDict,
     NotificationConfiguration,
+    NotificationConfigurationDict,
     NotificationConfigurationFilter,
+    NotificationConfigurationFilterDict,
     Object,
+    ObjectEncryptionDict,
     ObjectIdentifier,
+    ObjectIdentifierDict,
     ObjectLockConfiguration,
+    ObjectLockConfigurationDict,
     ObjectLockLegalHold,
+    ObjectLockLegalHoldDict,
     ObjectLockRetention,
+    ObjectLockRetentionDict,
     ObjectLockRule,
+    ObjectLockRuleDict,
     ObjectPart,
     ObjectVersion,
     OutputLocation,
+    OutputLocationDict,
     OutputSerialization,
+    OutputSerializationDict,
     Owner,
+    OwnerDict,
     OwnershipControls,
+    OwnershipControlsDict,
     OwnershipControlsRule,
+    OwnershipControlsRuleDict,
     ParquetInput,
+    ParquetInputDict,
     Part,
     PartitionedPrefix,
+    PartitionedPrefixDict,
     PolicyStatus,
     Progress,
     ProgressEvent,
     PublicAccessBlockConfiguration,
+    PublicAccessBlockConfigurationDict,
     PutBucketAbacInput,
+    PutBucketAbacInputDict,
     PutBucketAbacOutput,
     PutBucketAccelerateConfigurationInput,
+    PutBucketAccelerateConfigurationInputDict,
     PutBucketAccelerateConfigurationOutput,
     PutBucketAclInput,
+    PutBucketAclInputDict,
     PutBucketAclOutput,
     PutBucketAnalyticsConfigurationInput,
+    PutBucketAnalyticsConfigurationInputDict,
     PutBucketAnalyticsConfigurationOutput,
     PutBucketCorsInput,
+    PutBucketCorsInputDict,
     PutBucketCorsOutput,
     PutBucketEncryptionInput,
+    PutBucketEncryptionInputDict,
     PutBucketEncryptionOutput,
     PutBucketIntelligentTieringConfigurationInput,
+    PutBucketIntelligentTieringConfigurationInputDict,
     PutBucketIntelligentTieringConfigurationOutput,
     PutBucketInventoryConfigurationInput,
+    PutBucketInventoryConfigurationInputDict,
     PutBucketInventoryConfigurationOutput,
     PutBucketLifecycleConfigurationInput,
+    PutBucketLifecycleConfigurationInputDict,
     PutBucketLifecycleConfigurationOutput,
     PutBucketLoggingInput,
+    PutBucketLoggingInputDict,
     PutBucketLoggingOutput,
     PutBucketMetricsConfigurationInput,
+    PutBucketMetricsConfigurationInputDict,
     PutBucketMetricsConfigurationOutput,
     PutBucketNotificationConfigurationInput,
+    PutBucketNotificationConfigurationInputDict,
     PutBucketNotificationConfigurationOutput,
     PutBucketOwnershipControlsInput,
+    PutBucketOwnershipControlsInputDict,
     PutBucketOwnershipControlsOutput,
     PutBucketPolicyInput,
+    PutBucketPolicyInputDict,
     PutBucketPolicyOutput,
     PutBucketReplicationInput,
+    PutBucketReplicationInputDict,
     PutBucketReplicationOutput,
     PutBucketRequestPaymentInput,
+    PutBucketRequestPaymentInputDict,
     PutBucketRequestPaymentOutput,
     PutBucketTaggingInput,
+    PutBucketTaggingInputDict,
     PutBucketTaggingOutput,
     PutBucketVersioningInput,
+    PutBucketVersioningInputDict,
     PutBucketVersioningOutput,
     PutBucketWebsiteInput,
+    PutBucketWebsiteInputDict,
     PutBucketWebsiteOutput,
     PutObjectAclInput,
+    PutObjectAclInputDict,
     PutObjectAclOutput,
     PutObjectAnnotationInput,
+    PutObjectAnnotationInputDict,
     PutObjectAnnotationOutput,
     PutObjectInput,
+    PutObjectInputDict,
     PutObjectLegalHoldInput,
+    PutObjectLegalHoldInputDict,
     PutObjectLegalHoldOutput,
     PutObjectLockConfigurationInput,
+    PutObjectLockConfigurationInputDict,
     PutObjectLockConfigurationOutput,
     PutObjectOutput,
     PutObjectRetentionInput,
+    PutObjectRetentionInputDict,
     PutObjectRetentionOutput,
     PutObjectTaggingInput,
+    PutObjectTaggingInputDict,
     PutObjectTaggingOutput,
     PutPublicAccessBlockInput,
+    PutPublicAccessBlockInputDict,
     PutPublicAccessBlockOutput,
     QueueConfiguration,
+    QueueConfigurationDict,
     RecordExpiration,
+    RecordExpirationDict,
     RecordsEvent,
     Redirect,
     RedirectAllRequestsTo,
+    RedirectAllRequestsToDict,
+    RedirectDict,
     RenameObjectInput,
+    RenameObjectInputDict,
     RenameObjectOutput,
     ReplicaModifications,
+    ReplicaModificationsDict,
     ReplicationConfiguration,
+    ReplicationConfigurationDict,
     ReplicationRule,
     ReplicationRuleAndOperator,
+    ReplicationRuleAndOperatorDict,
+    ReplicationRuleDict,
     ReplicationRuleFilter,
+    ReplicationRuleFilterDict,
     ReplicationTime,
+    ReplicationTimeDict,
     ReplicationTimeValue,
+    ReplicationTimeValueDict,
     RequestPaymentConfiguration,
+    RequestPaymentConfigurationDict,
     RequestProgress,
+    RequestProgressDict,
     RestoreObjectInput,
+    RestoreObjectInputDict,
     RestoreObjectOutput,
     RestoreRequest,
+    RestoreRequestDict,
     RestoreStatus,
     RoutingRule,
+    RoutingRuleDict,
     S3KeyFilter,
+    S3KeyFilterDict,
     S3Location,
+    S3LocationDict,
     S3TablesDestination,
+    S3TablesDestinationDict,
     S3TablesDestinationResult,
     SSEKMS,
+    SSEKMSDict,
     SSEKMSEncryption,
+    SSEKMSEncryptionDict,
     SSES3,
+    SSES3Dict,
     ScanRange,
+    ScanRangeDict,
     SelectObjectContentInput,
+    SelectObjectContentInputDict,
     SelectObjectContentOutput,
     SelectParameters,
+    SelectParametersDict,
     ServerSideEncryptionByDefault,
+    ServerSideEncryptionByDefaultDict,
     ServerSideEncryptionConfiguration,
+    ServerSideEncryptionConfigurationDict,
     ServerSideEncryptionRule,
+    ServerSideEncryptionRuleDict,
     SessionCredentials,
     SimplePrefix,
+    SimplePrefixDict,
     SourceSelectionCriteria,
+    SourceSelectionCriteriaDict,
     SseKmsEncryptedObjects,
+    SseKmsEncryptedObjectsDict,
     Stats,
     StatsEvent,
     StorageClassAnalysis,
     StorageClassAnalysisDataExport,
+    StorageClassAnalysisDataExportDict,
+    StorageClassAnalysisDict,
     Tag,
+    TagDict,
     Tagging,
+    TaggingDict,
     TargetGrant,
+    TargetGrantDict,
     TargetObjectKeyFormat,
+    TargetObjectKeyFormatDict,
     Tiering,
+    TieringDict,
     TopicConfiguration,
+    TopicConfigurationDict,
     Transition,
+    TransitionDict,
     UpdateBucketMetadataAnnotationTableConfigurationInput,
+    UpdateBucketMetadataAnnotationTableConfigurationInputDict,
     UpdateBucketMetadataAnnotationTableConfigurationOutput,
     UpdateBucketMetadataInventoryTableConfigurationInput,
+    UpdateBucketMetadataInventoryTableConfigurationInputDict,
     UpdateBucketMetadataInventoryTableConfigurationOutput,
     UpdateBucketMetadataJournalTableConfigurationInput,
+    UpdateBucketMetadataJournalTableConfigurationInputDict,
     UpdateBucketMetadataJournalTableConfigurationOutput,
     UpdateObjectEncryptionInput,
+    UpdateObjectEncryptionInputDict,
     UpdateObjectEncryptionOutput,
     UploadPartCopyInput,
+    UploadPartCopyInputDict,
     UploadPartCopyOutput,
     UploadPartInput,
+    UploadPartInputDict,
     UploadPartOutput,
     VersioningConfiguration,
+    VersioningConfigurationDict,
     WebsiteConfiguration,
+    WebsiteConfigurationDict,
     WriteGetObjectResponseInput,
+    WriteGetObjectResponseInputDict,
     WriteGetObjectResponseOutput,
 )
 
 
-# Static type fixture: pyright over this validates models.pyi.
-# Not executed as a test; it only needs to type-check.
+# Static type fixture: pyright over this validates models.pyi and the
+# client method signatures. Not executed as a test; it only needs to
+# type-check.
 
 _: Any = ...
 
@@ -789,3 +1036,1730 @@ VersioningConfiguration()
 WebsiteConfiguration()
 WriteGetObjectResponseInput()
 WriteGetObjectResponseOutput()
+_params_0: AbacStatusDict = {}
+_params_1: AbortIncompleteMultipartUploadDict = {}
+_params_2: AbortMultipartUploadInputDict = {"bucket": _, "key": _, "upload_id": _}
+_params_3: AccelerateConfigurationDict = {}
+_params_4: AccessControlPolicyDict = {}
+_params_5: AccessControlTranslationDict = {"owner": _}
+_params_6: AnalyticsAndOperatorDict = {}
+_params_7: AnalyticsConfigurationDict = {"id": _, "storage_class_analysis": _}
+_params_8: AnalyticsExportDestinationDict = {"s3_bucket_destination": _}
+_params_9: AnalyticsFilterDict = {"prefix": _}
+_params_10: AnalyticsS3BucketDestinationDict = {"format": _, "bucket": _}
+_params_11: AnnotationTableConfigurationDict = {"configuration_state": _}
+_params_12: AnnotationTableConfigurationUpdatesDict = {"configuration_state": _}
+_params_13: BlockedEncryptionTypesDict = {}
+_params_14: BucketInfoDict = {}
+_params_15: BucketLifecycleConfigurationDict = {"rules": _}
+_params_16: BucketLoggingStatusDict = {}
+_params_17: CompletedMultipartUploadDict = {}
+_params_18: CompletedPartDict = {}
+_params_19: CompleteMultipartUploadInputDict = {"bucket": _, "key": _, "upload_id": _}
+_params_20: ConditionDict = {}
+_params_21: CopyObjectInputDict = {"bucket": _, "copy_source": _, "key": _}
+_params_22: CORSConfigurationDict = {"cors_rules": _}
+_params_23: CORSRuleDict = {"allowed_methods": _, "allowed_origins": _}
+_params_24: CreateBucketConfigurationDict = {}
+_params_25: CreateBucketInputDict = {"bucket": _}
+_params_26: CreateBucketMetadataConfigurationInputDict = {
+    "bucket": _,
+    "metadata_configuration": _,
+}
+_params_27: CreateBucketMetadataTableConfigurationInputDict = {
+    "bucket": _,
+    "metadata_table_configuration": _,
+}
+_params_28: CreateMultipartUploadInputDict = {"bucket": _, "key": _}
+_params_29: CreateSessionInputDict = {"bucket": _}
+_params_30: CSVInputDict = {}
+_params_31: CSVOutputDict = {}
+_params_32: DefaultRetentionDict = {}
+_params_33: DeleteDict = {"objects": _}
+_params_34: DeleteBucketAnalyticsConfigurationInputDict = {"bucket": _, "id": _}
+_params_35: DeleteBucketCorsInputDict = {"bucket": _}
+_params_36: DeleteBucketEncryptionInputDict = {"bucket": _}
+_params_37: DeleteBucketInputDict = {"bucket": _}
+_params_38: DeleteBucketIntelligentTieringConfigurationInputDict = {
+    "bucket": _,
+    "id": _,
+}
+_params_39: DeleteBucketInventoryConfigurationInputDict = {"bucket": _, "id": _}
+_params_40: DeleteBucketLifecycleInputDict = {"bucket": _}
+_params_41: DeleteBucketMetadataConfigurationInputDict = {"bucket": _}
+_params_42: DeleteBucketMetadataTableConfigurationInputDict = {"bucket": _}
+_params_43: DeleteBucketMetricsConfigurationInputDict = {"bucket": _, "id": _}
+_params_44: DeleteBucketOwnershipControlsInputDict = {"bucket": _}
+_params_45: DeleteBucketPolicyInputDict = {"bucket": _}
+_params_46: DeleteBucketReplicationInputDict = {"bucket": _}
+_params_47: DeleteBucketTaggingInputDict = {"bucket": _}
+_params_48: DeleteBucketWebsiteInputDict = {"bucket": _}
+_params_49: DeleteMarkerReplicationDict = {}
+_params_50: DeleteObjectAnnotationInputDict = {
+    "bucket": _,
+    "key": _,
+    "annotation_name": _,
+}
+_params_51: DeleteObjectInputDict = {"bucket": _, "key": _}
+_params_52: DeleteObjectsInputDict = {"bucket": _, "delete": _}
+_params_53: DeleteObjectTaggingInputDict = {"bucket": _, "key": _}
+_params_54: DeletePublicAccessBlockInputDict = {"bucket": _}
+_params_55: DestinationDict = {"bucket": _}
+_params_56: EncryptionDict = {"encryption_type": _}
+_params_57: EncryptionConfigurationDict = {}
+_params_58: ErrorDocumentDict = {"key": _}
+_params_59: EventBridgeConfigurationDict = {}
+_params_60: EventHoldDurationDict = {}
+_params_61: ExistingObjectReplicationDict = {"status": _}
+_params_62: FilterRuleDict = {}
+_params_63: GetBucketAbacInputDict = {"bucket": _}
+_params_64: GetBucketAccelerateConfigurationInputDict = {"bucket": _}
+_params_65: GetBucketAclInputDict = {"bucket": _}
+_params_66: GetBucketAnalyticsConfigurationInputDict = {"bucket": _, "id": _}
+_params_67: GetBucketCorsInputDict = {"bucket": _}
+_params_68: GetBucketEncryptionInputDict = {"bucket": _}
+_params_69: GetBucketIntelligentTieringConfigurationInputDict = {"bucket": _, "id": _}
+_params_70: GetBucketInventoryConfigurationInputDict = {"bucket": _, "id": _}
+_params_71: GetBucketLifecycleConfigurationInputDict = {"bucket": _}
+_params_72: GetBucketLocationInputDict = {"bucket": _}
+_params_73: GetBucketLoggingInputDict = {"bucket": _}
+_params_74: GetBucketMetadataConfigurationInputDict = {"bucket": _}
+_params_75: GetBucketMetadataTableConfigurationInputDict = {"bucket": _}
+_params_76: GetBucketMetricsConfigurationInputDict = {"bucket": _, "id": _}
+_params_77: GetBucketNotificationConfigurationInputDict = {"bucket": _}
+_params_78: GetBucketOwnershipControlsInputDict = {"bucket": _}
+_params_79: GetBucketPolicyInputDict = {"bucket": _}
+_params_80: GetBucketPolicyStatusInputDict = {"bucket": _}
+_params_81: GetBucketReplicationInputDict = {"bucket": _}
+_params_82: GetBucketRequestPaymentInputDict = {"bucket": _}
+_params_83: GetBucketTaggingInputDict = {"bucket": _}
+_params_84: GetBucketVersioningInputDict = {"bucket": _}
+_params_85: GetBucketWebsiteInputDict = {"bucket": _}
+_params_86: GetObjectAclInputDict = {"bucket": _, "key": _}
+_params_87: GetObjectAnnotationInputDict = {"bucket": _, "key": _, "annotation_name": _}
+_params_88: GetObjectAttributesInputDict = {
+    "bucket": _,
+    "key": _,
+    "object_attributes": _,
+}
+_params_89: GetObjectInputDict = {"bucket": _, "key": _}
+_params_90: GetObjectLegalHoldInputDict = {"bucket": _, "key": _}
+_params_91: GetObjectLockConfigurationInputDict = {"bucket": _}
+_params_92: GetObjectRetentionInputDict = {"bucket": _, "key": _}
+_params_93: GetObjectTaggingInputDict = {"bucket": _, "key": _}
+_params_94: GetObjectTorrentInputDict = {"bucket": _, "key": _}
+_params_95: GetPublicAccessBlockInputDict = {"bucket": _}
+_params_96: GlacierJobParametersDict = {"tier": _}
+_params_97: GrantDict = {}
+_params_98: GranteeDict = {"type": _}
+_params_99: HeadBucketInputDict = {"bucket": _}
+_params_100: HeadObjectInputDict = {"bucket": _, "key": _}
+_params_101: IndexDocumentDict = {"suffix": _}
+_params_102: InputSerializationDict = {}
+_params_103: IntelligentTieringAndOperatorDict = {}
+_params_104: IntelligentTieringConfigurationDict = {"id": _, "status": _, "tierings": _}
+_params_105: IntelligentTieringFilterDict = {}
+_params_106: InventoryConfigurationDict = {
+    "destination": _,
+    "is_enabled": _,
+    "id": _,
+    "included_object_versions": _,
+    "schedule": _,
+}
+_params_107: InventoryDestinationDict = {"s3_bucket_destination": _}
+_params_108: InventoryEncryptionDict = {}
+_params_109: InventoryFilterDict = {"prefix": _}
+_params_110: InventoryS3BucketDestinationDict = {"bucket": _, "format": _}
+_params_111: InventoryScheduleDict = {"frequency": _}
+_params_112: InventoryTableConfigurationDict = {"configuration_state": _}
+_params_113: InventoryTableConfigurationUpdatesDict = {"configuration_state": _}
+_params_114: JournalTableConfigurationDict = {"record_expiration": _}
+_params_115: JournalTableConfigurationUpdatesDict = {"record_expiration": _}
+_params_116: JSONInputDict = {}
+_params_117: JSONOutputDict = {}
+_params_118: LambdaFunctionConfigurationDict = {"lambda_function_arn": _, "events": _}
+_params_119: LifecycleExpirationDict = {}
+_params_120: LifecycleRuleDict = {"status": _}
+_params_121: LifecycleRuleAndOperatorDict = {}
+_params_122: LifecycleRuleFilterDict = {}
+_params_123: ListBucketAnalyticsConfigurationsInputDict = {"bucket": _}
+_params_124: ListBucketIntelligentTieringConfigurationsInputDict = {"bucket": _}
+_params_125: ListBucketInventoryConfigurationsInputDict = {"bucket": _}
+_params_126: ListBucketMetricsConfigurationsInputDict = {"bucket": _}
+_params_127: ListBucketsInputDict = {}
+_params_128: ListDirectoryBucketsInputDict = {}
+_params_129: ListMultipartUploadsInputDict = {"bucket": _}
+_params_130: ListObjectAnnotationsInputDict = {"bucket": _, "key": _}
+_params_131: ListObjectsInputDict = {"bucket": _}
+_params_132: ListObjectsV2InputDict = {"bucket": _}
+_params_133: ListObjectVersionsInputDict = {"bucket": _}
+_params_134: ListPartsInputDict = {"bucket": _, "key": _, "upload_id": _}
+_params_135: LocationInfoDict = {}
+_params_136: LoggingEnabledDict = {"target_bucket": _, "target_prefix": _}
+_params_137: MetadataConfigurationDict = {"journal_table_configuration": _}
+_params_138: MetadataEntryDict = {}
+_params_139: MetadataTableConfigurationDict = {"s3_tables_destination": _}
+_params_140: MetadataTableEncryptionConfigurationDict = {"sse_algorithm": _}
+_params_141: MetricsDict = {"status": _}
+_params_142: MetricsAndOperatorDict = {}
+_params_143: MetricsConfigurationDict = {"id": _}
+_params_144: MetricsFilterDict = {"prefix": _}
+_params_145: NoncurrentVersionExpirationDict = {}
+_params_146: NoncurrentVersionTransitionDict = {}
+_params_147: NotificationConfigurationDict = {}
+_params_148: NotificationConfigurationFilterDict = {}
+_params_149: ObjectEncryptionDict = {"ssekms": _}
+_params_150: ObjectIdentifierDict = {"key": _}
+_params_151: ObjectLockConfigurationDict = {}
+_params_152: ObjectLockLegalHoldDict = {}
+_params_153: ObjectLockRetentionDict = {}
+_params_154: ObjectLockRuleDict = {}
+_params_155: OutputLocationDict = {}
+_params_156: OutputSerializationDict = {}
+_params_157: OwnerDict = {}
+_params_158: OwnershipControlsDict = {"rules": _}
+_params_159: OwnershipControlsRuleDict = {"object_ownership": _}
+_params_160: ParquetInputDict = {}
+_params_161: PartitionedPrefixDict = {}
+_params_162: PublicAccessBlockConfigurationDict = {}
+_params_163: PutBucketAbacInputDict = {"bucket": _, "abac_status": _}
+_params_164: PutBucketAccelerateConfigurationInputDict = {
+    "bucket": _,
+    "accelerate_configuration": _,
+}
+_params_165: PutBucketAclInputDict = {"bucket": _}
+_params_166: PutBucketAnalyticsConfigurationInputDict = {
+    "bucket": _,
+    "id": _,
+    "analytics_configuration": _,
+}
+_params_167: PutBucketCorsInputDict = {"bucket": _, "cors_configuration": _}
+_params_168: PutBucketEncryptionInputDict = {
+    "bucket": _,
+    "server_side_encryption_configuration": _,
+}
+_params_169: PutBucketIntelligentTieringConfigurationInputDict = {
+    "bucket": _,
+    "id": _,
+    "intelligent_tiering_configuration": _,
+}
+_params_170: PutBucketInventoryConfigurationInputDict = {
+    "bucket": _,
+    "id": _,
+    "inventory_configuration": _,
+}
+_params_171: PutBucketLifecycleConfigurationInputDict = {"bucket": _}
+_params_172: PutBucketLoggingInputDict = {"bucket": _, "bucket_logging_status": _}
+_params_173: PutBucketMetricsConfigurationInputDict = {
+    "bucket": _,
+    "id": _,
+    "metrics_configuration": _,
+}
+_params_174: PutBucketNotificationConfigurationInputDict = {
+    "bucket": _,
+    "notification_configuration": _,
+}
+_params_175: PutBucketOwnershipControlsInputDict = {
+    "bucket": _,
+    "ownership_controls": _,
+}
+_params_176: PutBucketPolicyInputDict = {"bucket": _, "policy": _}
+_params_177: PutBucketReplicationInputDict = {
+    "bucket": _,
+    "replication_configuration": _,
+}
+_params_178: PutBucketRequestPaymentInputDict = {
+    "bucket": _,
+    "request_payment_configuration": _,
+}
+_params_179: PutBucketTaggingInputDict = {"bucket": _, "tagging": _}
+_params_180: PutBucketVersioningInputDict = {"bucket": _, "versioning_configuration": _}
+_params_181: PutBucketWebsiteInputDict = {"bucket": _, "website_configuration": _}
+_params_182: PutObjectAclInputDict = {"bucket": _, "key": _}
+_params_183: PutObjectAnnotationInputDict = {
+    "bucket": _,
+    "key": _,
+    "annotation_name": _,
+    "annotation_payload": _,
+}
+_params_184: PutObjectInputDict = {"bucket": _, "key": _}
+_params_185: PutObjectLegalHoldInputDict = {"bucket": _, "key": _}
+_params_186: PutObjectLockConfigurationInputDict = {"bucket": _}
+_params_187: PutObjectRetentionInputDict = {"bucket": _, "key": _}
+_params_188: PutObjectTaggingInputDict = {"bucket": _, "key": _, "tagging": _}
+_params_189: PutPublicAccessBlockInputDict = {
+    "bucket": _,
+    "public_access_block_configuration": _,
+}
+_params_190: QueueConfigurationDict = {"queue_arn": _, "events": _}
+_params_191: RecordExpirationDict = {"expiration": _}
+_params_192: RedirectDict = {}
+_params_193: RedirectAllRequestsToDict = {"host_name": _}
+_params_194: RenameObjectInputDict = {"bucket": _, "key": _, "rename_source": _}
+_params_195: ReplicaModificationsDict = {"status": _}
+_params_196: ReplicationConfigurationDict = {"role": _, "rules": _}
+_params_197: ReplicationRuleDict = {"status": _, "destination": _}
+_params_198: ReplicationRuleAndOperatorDict = {}
+_params_199: ReplicationRuleFilterDict = {}
+_params_200: ReplicationTimeDict = {"status": _, "time": _}
+_params_201: ReplicationTimeValueDict = {}
+_params_202: RequestPaymentConfigurationDict = {"payer": _}
+_params_203: RequestProgressDict = {}
+_params_204: RestoreObjectInputDict = {"bucket": _, "key": _}
+_params_205: RestoreRequestDict = {}
+_params_206: RoutingRuleDict = {"redirect": _}
+_params_207: S3KeyFilterDict = {}
+_params_208: S3LocationDict = {"bucket_name": _, "prefix": _}
+_params_209: S3TablesDestinationDict = {"table_bucket_arn": _, "table_name": _}
+_params_210: ScanRangeDict = {}
+_params_211: SelectObjectContentInputDict = {
+    "bucket": _,
+    "key": _,
+    "expression": _,
+    "expression_type": _,
+    "input_serialization": _,
+    "output_serialization": _,
+}
+_params_212: SelectParametersDict = {
+    "input_serialization": _,
+    "expression_type": _,
+    "expression": _,
+    "output_serialization": _,
+}
+_params_213: ServerSideEncryptionByDefaultDict = {"sse_algorithm": _}
+_params_214: ServerSideEncryptionConfigurationDict = {"rules": _}
+_params_215: ServerSideEncryptionRuleDict = {}
+_params_216: SimplePrefixDict = {}
+_params_217: SourceSelectionCriteriaDict = {}
+_params_218: SSEKMSDict = {"key_id": _}
+_params_219: SseKmsEncryptedObjectsDict = {"status": _}
+_params_220: SSEKMSEncryptionDict = {"kms_key_arn": _}
+_params_221: SSES3Dict = {}
+_params_222: StorageClassAnalysisDict = {}
+_params_223: StorageClassAnalysisDataExportDict = {
+    "output_schema_version": _,
+    "destination": _,
+}
+_params_224: TagDict = {"key": _, "value": _}
+_params_225: TaggingDict = {"tag_set": _}
+_params_226: TargetGrantDict = {}
+_params_227: TargetObjectKeyFormatDict = {}
+_params_228: TieringDict = {"days": _, "access_tier": _}
+_params_229: TopicConfigurationDict = {"topic_arn": _, "events": _}
+_params_230: TransitionDict = {}
+_params_231: UpdateBucketMetadataAnnotationTableConfigurationInputDict = {
+    "bucket": _,
+    "annotation_table_configuration": _,
+}
+_params_232: UpdateBucketMetadataInventoryTableConfigurationInputDict = {
+    "bucket": _,
+    "inventory_table_configuration": _,
+}
+_params_233: UpdateBucketMetadataJournalTableConfigurationInputDict = {
+    "bucket": _,
+    "journal_table_configuration": _,
+}
+_params_234: UpdateObjectEncryptionInputDict = {
+    "bucket": _,
+    "key": _,
+    "object_encryption": _,
+}
+_params_235: UploadPartCopyInputDict = {
+    "bucket": _,
+    "copy_source": _,
+    "key": _,
+    "part_number": _,
+    "upload_id": _,
+}
+_params_236: UploadPartInputDict = {
+    "bucket": _,
+    "key": _,
+    "part_number": _,
+    "upload_id": _,
+}
+_params_237: VersioningConfigurationDict = {}
+_params_238: WebsiteConfigurationDict = {}
+_params_239: WriteGetObjectResponseInputDict = {"request_route": _, "request_token": _}
+
+
+def _request[T](form: type[T]) -> T:
+    raise NotImplementedError
+
+
+async def check_async_calls(client: AsyncS3Client) -> None:
+    pass
+    await client.abort_multipart_upload(bucket=_, key=_, upload_id=_)
+    await client.abort_multipart_upload(**_request(AbortMultipartUploadInputDict))
+    await client.abort_multipart_upload(_request(AbortMultipartUploadInput))
+    await client.abort_multipart_upload(_request(AbortMultipartUploadInputDict))
+    await client.complete_multipart_upload(bucket=_, key=_, upload_id=_)
+    await client.complete_multipart_upload(**_request(CompleteMultipartUploadInputDict))
+    await client.complete_multipart_upload(_request(CompleteMultipartUploadInput))
+    await client.complete_multipart_upload(_request(CompleteMultipartUploadInputDict))
+    await client.copy_object(bucket=_, copy_source=_, key=_)
+    await client.copy_object(**_request(CopyObjectInputDict))
+    await client.copy_object(_request(CopyObjectInput))
+    await client.copy_object(_request(CopyObjectInputDict))
+    await client.create_bucket(bucket=_)
+    await client.create_bucket(**_request(CreateBucketInputDict))
+    await client.create_bucket(_request(CreateBucketInput))
+    await client.create_bucket(_request(CreateBucketInputDict))
+    await client.create_bucket_metadata_configuration(
+        bucket=_, metadata_configuration=_
+    )
+    await client.create_bucket_metadata_configuration(
+        **_request(CreateBucketMetadataConfigurationInputDict)
+    )
+    await client.create_bucket_metadata_configuration(
+        _request(CreateBucketMetadataConfigurationInput)
+    )
+    await client.create_bucket_metadata_configuration(
+        _request(CreateBucketMetadataConfigurationInputDict)
+    )
+    await client.create_bucket_metadata_table_configuration(
+        bucket=_, metadata_table_configuration=_
+    )
+    await client.create_bucket_metadata_table_configuration(
+        **_request(CreateBucketMetadataTableConfigurationInputDict)
+    )
+    await client.create_bucket_metadata_table_configuration(
+        _request(CreateBucketMetadataTableConfigurationInput)
+    )
+    await client.create_bucket_metadata_table_configuration(
+        _request(CreateBucketMetadataTableConfigurationInputDict)
+    )
+    await client.create_multipart_upload(bucket=_, key=_)
+    await client.create_multipart_upload(**_request(CreateMultipartUploadInputDict))
+    await client.create_multipart_upload(_request(CreateMultipartUploadInput))
+    await client.create_multipart_upload(_request(CreateMultipartUploadInputDict))
+    await client.create_session(bucket=_)
+    await client.create_session(**_request(CreateSessionInputDict))
+    await client.create_session(_request(CreateSessionInput))
+    await client.create_session(_request(CreateSessionInputDict))
+    await client.delete_bucket(bucket=_)
+    await client.delete_bucket(**_request(DeleteBucketInputDict))
+    await client.delete_bucket(_request(DeleteBucketInput))
+    await client.delete_bucket(_request(DeleteBucketInputDict))
+    await client.delete_bucket_analytics_configuration(bucket=_, id=_)
+    await client.delete_bucket_analytics_configuration(
+        **_request(DeleteBucketAnalyticsConfigurationInputDict)
+    )
+    await client.delete_bucket_analytics_configuration(
+        _request(DeleteBucketAnalyticsConfigurationInput)
+    )
+    await client.delete_bucket_analytics_configuration(
+        _request(DeleteBucketAnalyticsConfigurationInputDict)
+    )
+    await client.delete_bucket_cors(bucket=_)
+    await client.delete_bucket_cors(**_request(DeleteBucketCorsInputDict))
+    await client.delete_bucket_cors(_request(DeleteBucketCorsInput))
+    await client.delete_bucket_cors(_request(DeleteBucketCorsInputDict))
+    await client.delete_bucket_encryption(bucket=_)
+    await client.delete_bucket_encryption(**_request(DeleteBucketEncryptionInputDict))
+    await client.delete_bucket_encryption(_request(DeleteBucketEncryptionInput))
+    await client.delete_bucket_encryption(_request(DeleteBucketEncryptionInputDict))
+    await client.delete_bucket_intelligent_tiering_configuration(bucket=_, id=_)
+    await client.delete_bucket_intelligent_tiering_configuration(
+        **_request(DeleteBucketIntelligentTieringConfigurationInputDict)
+    )
+    await client.delete_bucket_intelligent_tiering_configuration(
+        _request(DeleteBucketIntelligentTieringConfigurationInput)
+    )
+    await client.delete_bucket_intelligent_tiering_configuration(
+        _request(DeleteBucketIntelligentTieringConfigurationInputDict)
+    )
+    await client.delete_bucket_inventory_configuration(bucket=_, id=_)
+    await client.delete_bucket_inventory_configuration(
+        **_request(DeleteBucketInventoryConfigurationInputDict)
+    )
+    await client.delete_bucket_inventory_configuration(
+        _request(DeleteBucketInventoryConfigurationInput)
+    )
+    await client.delete_bucket_inventory_configuration(
+        _request(DeleteBucketInventoryConfigurationInputDict)
+    )
+    await client.delete_bucket_lifecycle(bucket=_)
+    await client.delete_bucket_lifecycle(**_request(DeleteBucketLifecycleInputDict))
+    await client.delete_bucket_lifecycle(_request(DeleteBucketLifecycleInput))
+    await client.delete_bucket_lifecycle(_request(DeleteBucketLifecycleInputDict))
+    await client.delete_bucket_metadata_configuration(bucket=_)
+    await client.delete_bucket_metadata_configuration(
+        **_request(DeleteBucketMetadataConfigurationInputDict)
+    )
+    await client.delete_bucket_metadata_configuration(
+        _request(DeleteBucketMetadataConfigurationInput)
+    )
+    await client.delete_bucket_metadata_configuration(
+        _request(DeleteBucketMetadataConfigurationInputDict)
+    )
+    await client.delete_bucket_metadata_table_configuration(bucket=_)
+    await client.delete_bucket_metadata_table_configuration(
+        **_request(DeleteBucketMetadataTableConfigurationInputDict)
+    )
+    await client.delete_bucket_metadata_table_configuration(
+        _request(DeleteBucketMetadataTableConfigurationInput)
+    )
+    await client.delete_bucket_metadata_table_configuration(
+        _request(DeleteBucketMetadataTableConfigurationInputDict)
+    )
+    await client.delete_bucket_metrics_configuration(bucket=_, id=_)
+    await client.delete_bucket_metrics_configuration(
+        **_request(DeleteBucketMetricsConfigurationInputDict)
+    )
+    await client.delete_bucket_metrics_configuration(
+        _request(DeleteBucketMetricsConfigurationInput)
+    )
+    await client.delete_bucket_metrics_configuration(
+        _request(DeleteBucketMetricsConfigurationInputDict)
+    )
+    await client.delete_bucket_ownership_controls(bucket=_)
+    await client.delete_bucket_ownership_controls(
+        **_request(DeleteBucketOwnershipControlsInputDict)
+    )
+    await client.delete_bucket_ownership_controls(
+        _request(DeleteBucketOwnershipControlsInput)
+    )
+    await client.delete_bucket_ownership_controls(
+        _request(DeleteBucketOwnershipControlsInputDict)
+    )
+    await client.delete_bucket_policy(bucket=_)
+    await client.delete_bucket_policy(**_request(DeleteBucketPolicyInputDict))
+    await client.delete_bucket_policy(_request(DeleteBucketPolicyInput))
+    await client.delete_bucket_policy(_request(DeleteBucketPolicyInputDict))
+    await client.delete_bucket_replication(bucket=_)
+    await client.delete_bucket_replication(**_request(DeleteBucketReplicationInputDict))
+    await client.delete_bucket_replication(_request(DeleteBucketReplicationInput))
+    await client.delete_bucket_replication(_request(DeleteBucketReplicationInputDict))
+    await client.delete_bucket_tagging(bucket=_)
+    await client.delete_bucket_tagging(**_request(DeleteBucketTaggingInputDict))
+    await client.delete_bucket_tagging(_request(DeleteBucketTaggingInput))
+    await client.delete_bucket_tagging(_request(DeleteBucketTaggingInputDict))
+    await client.delete_bucket_website(bucket=_)
+    await client.delete_bucket_website(**_request(DeleteBucketWebsiteInputDict))
+    await client.delete_bucket_website(_request(DeleteBucketWebsiteInput))
+    await client.delete_bucket_website(_request(DeleteBucketWebsiteInputDict))
+    await client.delete_object(bucket=_, key=_)
+    await client.delete_object(**_request(DeleteObjectInputDict))
+    await client.delete_object(_request(DeleteObjectInput))
+    await client.delete_object(_request(DeleteObjectInputDict))
+    await client.delete_object_annotation(bucket=_, key=_, annotation_name=_)
+    await client.delete_object_annotation(**_request(DeleteObjectAnnotationInputDict))
+    await client.delete_object_annotation(_request(DeleteObjectAnnotationInput))
+    await client.delete_object_annotation(_request(DeleteObjectAnnotationInputDict))
+    await client.delete_objects(bucket=_, delete=_)
+    await client.delete_objects(**_request(DeleteObjectsInputDict))
+    await client.delete_objects(_request(DeleteObjectsInput))
+    await client.delete_objects(_request(DeleteObjectsInputDict))
+    await client.delete_object_tagging(bucket=_, key=_)
+    await client.delete_object_tagging(**_request(DeleteObjectTaggingInputDict))
+    await client.delete_object_tagging(_request(DeleteObjectTaggingInput))
+    await client.delete_object_tagging(_request(DeleteObjectTaggingInputDict))
+    await client.delete_public_access_block(bucket=_)
+    await client.delete_public_access_block(
+        **_request(DeletePublicAccessBlockInputDict)
+    )
+    await client.delete_public_access_block(_request(DeletePublicAccessBlockInput))
+    await client.delete_public_access_block(_request(DeletePublicAccessBlockInputDict))
+    await client.get_bucket_abac(bucket=_)
+    await client.get_bucket_abac(**_request(GetBucketAbacInputDict))
+    await client.get_bucket_abac(_request(GetBucketAbacInput))
+    await client.get_bucket_abac(_request(GetBucketAbacInputDict))
+    await client.get_bucket_accelerate_configuration(bucket=_)
+    await client.get_bucket_accelerate_configuration(
+        **_request(GetBucketAccelerateConfigurationInputDict)
+    )
+    await client.get_bucket_accelerate_configuration(
+        _request(GetBucketAccelerateConfigurationInput)
+    )
+    await client.get_bucket_accelerate_configuration(
+        _request(GetBucketAccelerateConfigurationInputDict)
+    )
+    await client.get_bucket_acl(bucket=_)
+    await client.get_bucket_acl(**_request(GetBucketAclInputDict))
+    await client.get_bucket_acl(_request(GetBucketAclInput))
+    await client.get_bucket_acl(_request(GetBucketAclInputDict))
+    await client.get_bucket_analytics_configuration(bucket=_, id=_)
+    await client.get_bucket_analytics_configuration(
+        **_request(GetBucketAnalyticsConfigurationInputDict)
+    )
+    await client.get_bucket_analytics_configuration(
+        _request(GetBucketAnalyticsConfigurationInput)
+    )
+    await client.get_bucket_analytics_configuration(
+        _request(GetBucketAnalyticsConfigurationInputDict)
+    )
+    await client.get_bucket_cors(bucket=_)
+    await client.get_bucket_cors(**_request(GetBucketCorsInputDict))
+    await client.get_bucket_cors(_request(GetBucketCorsInput))
+    await client.get_bucket_cors(_request(GetBucketCorsInputDict))
+    await client.get_bucket_encryption(bucket=_)
+    await client.get_bucket_encryption(**_request(GetBucketEncryptionInputDict))
+    await client.get_bucket_encryption(_request(GetBucketEncryptionInput))
+    await client.get_bucket_encryption(_request(GetBucketEncryptionInputDict))
+    await client.get_bucket_intelligent_tiering_configuration(bucket=_, id=_)
+    await client.get_bucket_intelligent_tiering_configuration(
+        **_request(GetBucketIntelligentTieringConfigurationInputDict)
+    )
+    await client.get_bucket_intelligent_tiering_configuration(
+        _request(GetBucketIntelligentTieringConfigurationInput)
+    )
+    await client.get_bucket_intelligent_tiering_configuration(
+        _request(GetBucketIntelligentTieringConfigurationInputDict)
+    )
+    await client.get_bucket_inventory_configuration(bucket=_, id=_)
+    await client.get_bucket_inventory_configuration(
+        **_request(GetBucketInventoryConfigurationInputDict)
+    )
+    await client.get_bucket_inventory_configuration(
+        _request(GetBucketInventoryConfigurationInput)
+    )
+    await client.get_bucket_inventory_configuration(
+        _request(GetBucketInventoryConfigurationInputDict)
+    )
+    await client.get_bucket_lifecycle_configuration(bucket=_)
+    await client.get_bucket_lifecycle_configuration(
+        **_request(GetBucketLifecycleConfigurationInputDict)
+    )
+    await client.get_bucket_lifecycle_configuration(
+        _request(GetBucketLifecycleConfigurationInput)
+    )
+    await client.get_bucket_lifecycle_configuration(
+        _request(GetBucketLifecycleConfigurationInputDict)
+    )
+    await client.get_bucket_location(bucket=_)
+    await client.get_bucket_location(**_request(GetBucketLocationInputDict))
+    await client.get_bucket_location(_request(GetBucketLocationInput))
+    await client.get_bucket_location(_request(GetBucketLocationInputDict))
+    await client.get_bucket_logging(bucket=_)
+    await client.get_bucket_logging(**_request(GetBucketLoggingInputDict))
+    await client.get_bucket_logging(_request(GetBucketLoggingInput))
+    await client.get_bucket_logging(_request(GetBucketLoggingInputDict))
+    await client.get_bucket_metadata_configuration(bucket=_)
+    await client.get_bucket_metadata_configuration(
+        **_request(GetBucketMetadataConfigurationInputDict)
+    )
+    await client.get_bucket_metadata_configuration(
+        _request(GetBucketMetadataConfigurationInput)
+    )
+    await client.get_bucket_metadata_configuration(
+        _request(GetBucketMetadataConfigurationInputDict)
+    )
+    await client.get_bucket_metadata_table_configuration(bucket=_)
+    await client.get_bucket_metadata_table_configuration(
+        **_request(GetBucketMetadataTableConfigurationInputDict)
+    )
+    await client.get_bucket_metadata_table_configuration(
+        _request(GetBucketMetadataTableConfigurationInput)
+    )
+    await client.get_bucket_metadata_table_configuration(
+        _request(GetBucketMetadataTableConfigurationInputDict)
+    )
+    await client.get_bucket_metrics_configuration(bucket=_, id=_)
+    await client.get_bucket_metrics_configuration(
+        **_request(GetBucketMetricsConfigurationInputDict)
+    )
+    await client.get_bucket_metrics_configuration(
+        _request(GetBucketMetricsConfigurationInput)
+    )
+    await client.get_bucket_metrics_configuration(
+        _request(GetBucketMetricsConfigurationInputDict)
+    )
+    await client.get_bucket_notification_configuration(bucket=_)
+    await client.get_bucket_notification_configuration(
+        **_request(GetBucketNotificationConfigurationInputDict)
+    )
+    await client.get_bucket_notification_configuration(
+        _request(GetBucketNotificationConfigurationInput)
+    )
+    await client.get_bucket_notification_configuration(
+        _request(GetBucketNotificationConfigurationInputDict)
+    )
+    await client.get_bucket_ownership_controls(bucket=_)
+    await client.get_bucket_ownership_controls(
+        **_request(GetBucketOwnershipControlsInputDict)
+    )
+    await client.get_bucket_ownership_controls(
+        _request(GetBucketOwnershipControlsInput)
+    )
+    await client.get_bucket_ownership_controls(
+        _request(GetBucketOwnershipControlsInputDict)
+    )
+    await client.get_bucket_policy(bucket=_)
+    await client.get_bucket_policy(**_request(GetBucketPolicyInputDict))
+    await client.get_bucket_policy(_request(GetBucketPolicyInput))
+    await client.get_bucket_policy(_request(GetBucketPolicyInputDict))
+    await client.get_bucket_policy_status(bucket=_)
+    await client.get_bucket_policy_status(**_request(GetBucketPolicyStatusInputDict))
+    await client.get_bucket_policy_status(_request(GetBucketPolicyStatusInput))
+    await client.get_bucket_policy_status(_request(GetBucketPolicyStatusInputDict))
+    await client.get_bucket_replication(bucket=_)
+    await client.get_bucket_replication(**_request(GetBucketReplicationInputDict))
+    await client.get_bucket_replication(_request(GetBucketReplicationInput))
+    await client.get_bucket_replication(_request(GetBucketReplicationInputDict))
+    await client.get_bucket_request_payment(bucket=_)
+    await client.get_bucket_request_payment(
+        **_request(GetBucketRequestPaymentInputDict)
+    )
+    await client.get_bucket_request_payment(_request(GetBucketRequestPaymentInput))
+    await client.get_bucket_request_payment(_request(GetBucketRequestPaymentInputDict))
+    await client.get_bucket_tagging(bucket=_)
+    await client.get_bucket_tagging(**_request(GetBucketTaggingInputDict))
+    await client.get_bucket_tagging(_request(GetBucketTaggingInput))
+    await client.get_bucket_tagging(_request(GetBucketTaggingInputDict))
+    await client.get_bucket_versioning(bucket=_)
+    await client.get_bucket_versioning(**_request(GetBucketVersioningInputDict))
+    await client.get_bucket_versioning(_request(GetBucketVersioningInput))
+    await client.get_bucket_versioning(_request(GetBucketVersioningInputDict))
+    await client.get_bucket_website(bucket=_)
+    await client.get_bucket_website(**_request(GetBucketWebsiteInputDict))
+    await client.get_bucket_website(_request(GetBucketWebsiteInput))
+    await client.get_bucket_website(_request(GetBucketWebsiteInputDict))
+    await client.get_object(bucket=_, key=_)
+    await client.get_object(**_request(GetObjectInputDict))
+    await client.get_object(_request(GetObjectInput))
+    await client.get_object(_request(GetObjectInputDict))
+    await client.get_object_acl(bucket=_, key=_)
+    await client.get_object_acl(**_request(GetObjectAclInputDict))
+    await client.get_object_acl(_request(GetObjectAclInput))
+    await client.get_object_acl(_request(GetObjectAclInputDict))
+    await client.get_object_annotation(bucket=_, key=_, annotation_name=_)
+    await client.get_object_annotation(**_request(GetObjectAnnotationInputDict))
+    await client.get_object_annotation(_request(GetObjectAnnotationInput))
+    await client.get_object_annotation(_request(GetObjectAnnotationInputDict))
+    await client.get_object_attributes(bucket=_, key=_, object_attributes=_)
+    await client.get_object_attributes(**_request(GetObjectAttributesInputDict))
+    await client.get_object_attributes(_request(GetObjectAttributesInput))
+    await client.get_object_attributes(_request(GetObjectAttributesInputDict))
+    await client.get_object_legal_hold(bucket=_, key=_)
+    await client.get_object_legal_hold(**_request(GetObjectLegalHoldInputDict))
+    await client.get_object_legal_hold(_request(GetObjectLegalHoldInput))
+    await client.get_object_legal_hold(_request(GetObjectLegalHoldInputDict))
+    await client.get_object_lock_configuration(bucket=_)
+    await client.get_object_lock_configuration(
+        **_request(GetObjectLockConfigurationInputDict)
+    )
+    await client.get_object_lock_configuration(
+        _request(GetObjectLockConfigurationInput)
+    )
+    await client.get_object_lock_configuration(
+        _request(GetObjectLockConfigurationInputDict)
+    )
+    await client.get_object_retention(bucket=_, key=_)
+    await client.get_object_retention(**_request(GetObjectRetentionInputDict))
+    await client.get_object_retention(_request(GetObjectRetentionInput))
+    await client.get_object_retention(_request(GetObjectRetentionInputDict))
+    await client.get_object_tagging(bucket=_, key=_)
+    await client.get_object_tagging(**_request(GetObjectTaggingInputDict))
+    await client.get_object_tagging(_request(GetObjectTaggingInput))
+    await client.get_object_tagging(_request(GetObjectTaggingInputDict))
+    await client.get_object_torrent(bucket=_, key=_)
+    await client.get_object_torrent(**_request(GetObjectTorrentInputDict))
+    await client.get_object_torrent(_request(GetObjectTorrentInput))
+    await client.get_object_torrent(_request(GetObjectTorrentInputDict))
+    await client.get_public_access_block(bucket=_)
+    await client.get_public_access_block(**_request(GetPublicAccessBlockInputDict))
+    await client.get_public_access_block(_request(GetPublicAccessBlockInput))
+    await client.get_public_access_block(_request(GetPublicAccessBlockInputDict))
+    await client.head_bucket(bucket=_)
+    await client.head_bucket(**_request(HeadBucketInputDict))
+    await client.head_bucket(_request(HeadBucketInput))
+    await client.head_bucket(_request(HeadBucketInputDict))
+    await client.head_object(bucket=_, key=_)
+    await client.head_object(**_request(HeadObjectInputDict))
+    await client.head_object(_request(HeadObjectInput))
+    await client.head_object(_request(HeadObjectInputDict))
+    await client.list_bucket_analytics_configurations(bucket=_)
+    await client.list_bucket_analytics_configurations(
+        **_request(ListBucketAnalyticsConfigurationsInputDict)
+    )
+    await client.list_bucket_analytics_configurations(
+        _request(ListBucketAnalyticsConfigurationsInput)
+    )
+    await client.list_bucket_analytics_configurations(
+        _request(ListBucketAnalyticsConfigurationsInputDict)
+    )
+    await client.list_bucket_intelligent_tiering_configurations(bucket=_)
+    await client.list_bucket_intelligent_tiering_configurations(
+        **_request(ListBucketIntelligentTieringConfigurationsInputDict)
+    )
+    await client.list_bucket_intelligent_tiering_configurations(
+        _request(ListBucketIntelligentTieringConfigurationsInput)
+    )
+    await client.list_bucket_intelligent_tiering_configurations(
+        _request(ListBucketIntelligentTieringConfigurationsInputDict)
+    )
+    await client.list_bucket_inventory_configurations(bucket=_)
+    await client.list_bucket_inventory_configurations(
+        **_request(ListBucketInventoryConfigurationsInputDict)
+    )
+    await client.list_bucket_inventory_configurations(
+        _request(ListBucketInventoryConfigurationsInput)
+    )
+    await client.list_bucket_inventory_configurations(
+        _request(ListBucketInventoryConfigurationsInputDict)
+    )
+    await client.list_bucket_metrics_configurations(bucket=_)
+    await client.list_bucket_metrics_configurations(
+        **_request(ListBucketMetricsConfigurationsInputDict)
+    )
+    await client.list_bucket_metrics_configurations(
+        _request(ListBucketMetricsConfigurationsInput)
+    )
+    await client.list_bucket_metrics_configurations(
+        _request(ListBucketMetricsConfigurationsInputDict)
+    )
+    await client.list_buckets()
+    await client.list_buckets(**_request(ListBucketsInputDict))
+    await client.list_buckets(_request(ListBucketsInput))
+    await client.list_buckets(_request(ListBucketsInputDict))
+    await client.list_directory_buckets()
+    await client.list_directory_buckets(**_request(ListDirectoryBucketsInputDict))
+    await client.list_directory_buckets(_request(ListDirectoryBucketsInput))
+    await client.list_directory_buckets(_request(ListDirectoryBucketsInputDict))
+    await client.list_multipart_uploads(bucket=_)
+    await client.list_multipart_uploads(**_request(ListMultipartUploadsInputDict))
+    await client.list_multipart_uploads(_request(ListMultipartUploadsInput))
+    await client.list_multipart_uploads(_request(ListMultipartUploadsInputDict))
+    await client.list_object_annotations(bucket=_, key=_)
+    await client.list_object_annotations(**_request(ListObjectAnnotationsInputDict))
+    await client.list_object_annotations(_request(ListObjectAnnotationsInput))
+    await client.list_object_annotations(_request(ListObjectAnnotationsInputDict))
+    await client.list_objects(bucket=_)
+    await client.list_objects(**_request(ListObjectsInputDict))
+    await client.list_objects(_request(ListObjectsInput))
+    await client.list_objects(_request(ListObjectsInputDict))
+    await client.list_objects_v2(bucket=_)
+    await client.list_objects_v2(**_request(ListObjectsV2InputDict))
+    await client.list_objects_v2(_request(ListObjectsV2Input))
+    await client.list_objects_v2(_request(ListObjectsV2InputDict))
+    await client.list_object_versions(bucket=_)
+    await client.list_object_versions(**_request(ListObjectVersionsInputDict))
+    await client.list_object_versions(_request(ListObjectVersionsInput))
+    await client.list_object_versions(_request(ListObjectVersionsInputDict))
+    await client.list_parts(bucket=_, key=_, upload_id=_)
+    await client.list_parts(**_request(ListPartsInputDict))
+    await client.list_parts(_request(ListPartsInput))
+    await client.list_parts(_request(ListPartsInputDict))
+    await client.put_bucket_abac(bucket=_, abac_status=_)
+    await client.put_bucket_abac(**_request(PutBucketAbacInputDict))
+    await client.put_bucket_abac(_request(PutBucketAbacInput))
+    await client.put_bucket_abac(_request(PutBucketAbacInputDict))
+    await client.put_bucket_accelerate_configuration(
+        bucket=_, accelerate_configuration=_
+    )
+    await client.put_bucket_accelerate_configuration(
+        **_request(PutBucketAccelerateConfigurationInputDict)
+    )
+    await client.put_bucket_accelerate_configuration(
+        _request(PutBucketAccelerateConfigurationInput)
+    )
+    await client.put_bucket_accelerate_configuration(
+        _request(PutBucketAccelerateConfigurationInputDict)
+    )
+    await client.put_bucket_acl(bucket=_)
+    await client.put_bucket_acl(**_request(PutBucketAclInputDict))
+    await client.put_bucket_acl(_request(PutBucketAclInput))
+    await client.put_bucket_acl(_request(PutBucketAclInputDict))
+    await client.put_bucket_analytics_configuration(
+        bucket=_, id=_, analytics_configuration=_
+    )
+    await client.put_bucket_analytics_configuration(
+        **_request(PutBucketAnalyticsConfigurationInputDict)
+    )
+    await client.put_bucket_analytics_configuration(
+        _request(PutBucketAnalyticsConfigurationInput)
+    )
+    await client.put_bucket_analytics_configuration(
+        _request(PutBucketAnalyticsConfigurationInputDict)
+    )
+    await client.put_bucket_cors(bucket=_, cors_configuration=_)
+    await client.put_bucket_cors(**_request(PutBucketCorsInputDict))
+    await client.put_bucket_cors(_request(PutBucketCorsInput))
+    await client.put_bucket_cors(_request(PutBucketCorsInputDict))
+    await client.put_bucket_encryption(bucket=_, server_side_encryption_configuration=_)
+    await client.put_bucket_encryption(**_request(PutBucketEncryptionInputDict))
+    await client.put_bucket_encryption(_request(PutBucketEncryptionInput))
+    await client.put_bucket_encryption(_request(PutBucketEncryptionInputDict))
+    await client.put_bucket_intelligent_tiering_configuration(
+        bucket=_, id=_, intelligent_tiering_configuration=_
+    )
+    await client.put_bucket_intelligent_tiering_configuration(
+        **_request(PutBucketIntelligentTieringConfigurationInputDict)
+    )
+    await client.put_bucket_intelligent_tiering_configuration(
+        _request(PutBucketIntelligentTieringConfigurationInput)
+    )
+    await client.put_bucket_intelligent_tiering_configuration(
+        _request(PutBucketIntelligentTieringConfigurationInputDict)
+    )
+    await client.put_bucket_inventory_configuration(
+        bucket=_, id=_, inventory_configuration=_
+    )
+    await client.put_bucket_inventory_configuration(
+        **_request(PutBucketInventoryConfigurationInputDict)
+    )
+    await client.put_bucket_inventory_configuration(
+        _request(PutBucketInventoryConfigurationInput)
+    )
+    await client.put_bucket_inventory_configuration(
+        _request(PutBucketInventoryConfigurationInputDict)
+    )
+    await client.put_bucket_lifecycle_configuration(bucket=_)
+    await client.put_bucket_lifecycle_configuration(
+        **_request(PutBucketLifecycleConfigurationInputDict)
+    )
+    await client.put_bucket_lifecycle_configuration(
+        _request(PutBucketLifecycleConfigurationInput)
+    )
+    await client.put_bucket_lifecycle_configuration(
+        _request(PutBucketLifecycleConfigurationInputDict)
+    )
+    await client.put_bucket_logging(bucket=_, bucket_logging_status=_)
+    await client.put_bucket_logging(**_request(PutBucketLoggingInputDict))
+    await client.put_bucket_logging(_request(PutBucketLoggingInput))
+    await client.put_bucket_logging(_request(PutBucketLoggingInputDict))
+    await client.put_bucket_metrics_configuration(
+        bucket=_, id=_, metrics_configuration=_
+    )
+    await client.put_bucket_metrics_configuration(
+        **_request(PutBucketMetricsConfigurationInputDict)
+    )
+    await client.put_bucket_metrics_configuration(
+        _request(PutBucketMetricsConfigurationInput)
+    )
+    await client.put_bucket_metrics_configuration(
+        _request(PutBucketMetricsConfigurationInputDict)
+    )
+    await client.put_bucket_notification_configuration(
+        bucket=_, notification_configuration=_
+    )
+    await client.put_bucket_notification_configuration(
+        **_request(PutBucketNotificationConfigurationInputDict)
+    )
+    await client.put_bucket_notification_configuration(
+        _request(PutBucketNotificationConfigurationInput)
+    )
+    await client.put_bucket_notification_configuration(
+        _request(PutBucketNotificationConfigurationInputDict)
+    )
+    await client.put_bucket_ownership_controls(bucket=_, ownership_controls=_)
+    await client.put_bucket_ownership_controls(
+        **_request(PutBucketOwnershipControlsInputDict)
+    )
+    await client.put_bucket_ownership_controls(
+        _request(PutBucketOwnershipControlsInput)
+    )
+    await client.put_bucket_ownership_controls(
+        _request(PutBucketOwnershipControlsInputDict)
+    )
+    await client.put_bucket_policy(bucket=_, policy=_)
+    await client.put_bucket_policy(**_request(PutBucketPolicyInputDict))
+    await client.put_bucket_policy(_request(PutBucketPolicyInput))
+    await client.put_bucket_policy(_request(PutBucketPolicyInputDict))
+    await client.put_bucket_replication(bucket=_, replication_configuration=_)
+    await client.put_bucket_replication(**_request(PutBucketReplicationInputDict))
+    await client.put_bucket_replication(_request(PutBucketReplicationInput))
+    await client.put_bucket_replication(_request(PutBucketReplicationInputDict))
+    await client.put_bucket_request_payment(bucket=_, request_payment_configuration=_)
+    await client.put_bucket_request_payment(
+        **_request(PutBucketRequestPaymentInputDict)
+    )
+    await client.put_bucket_request_payment(_request(PutBucketRequestPaymentInput))
+    await client.put_bucket_request_payment(_request(PutBucketRequestPaymentInputDict))
+    await client.put_bucket_tagging(bucket=_, tagging=_)
+    await client.put_bucket_tagging(**_request(PutBucketTaggingInputDict))
+    await client.put_bucket_tagging(_request(PutBucketTaggingInput))
+    await client.put_bucket_tagging(_request(PutBucketTaggingInputDict))
+    await client.put_bucket_versioning(bucket=_, versioning_configuration=_)
+    await client.put_bucket_versioning(**_request(PutBucketVersioningInputDict))
+    await client.put_bucket_versioning(_request(PutBucketVersioningInput))
+    await client.put_bucket_versioning(_request(PutBucketVersioningInputDict))
+    await client.put_bucket_website(bucket=_, website_configuration=_)
+    await client.put_bucket_website(**_request(PutBucketWebsiteInputDict))
+    await client.put_bucket_website(_request(PutBucketWebsiteInput))
+    await client.put_bucket_website(_request(PutBucketWebsiteInputDict))
+    await client.put_object(bucket=_, key=_)
+    await client.put_object(**_request(PutObjectInputDict))
+    await client.put_object(_request(PutObjectInput))
+    await client.put_object(_request(PutObjectInputDict))
+    await client.put_object(**_request(AsyncPutObjectInputDict))
+    await client.put_object(_request(AsyncPutObjectInputDict))
+    await client.put_object_acl(bucket=_, key=_)
+    await client.put_object_acl(**_request(PutObjectAclInputDict))
+    await client.put_object_acl(_request(PutObjectAclInput))
+    await client.put_object_acl(_request(PutObjectAclInputDict))
+    await client.put_object_annotation(
+        bucket=_, key=_, annotation_name=_, annotation_payload=_
+    )
+    await client.put_object_annotation(**_request(PutObjectAnnotationInputDict))
+    await client.put_object_annotation(_request(PutObjectAnnotationInput))
+    await client.put_object_annotation(_request(PutObjectAnnotationInputDict))
+    await client.put_object_annotation(**_request(AsyncPutObjectAnnotationInputDict))
+    await client.put_object_annotation(_request(AsyncPutObjectAnnotationInputDict))
+    await client.put_object_legal_hold(bucket=_, key=_)
+    await client.put_object_legal_hold(**_request(PutObjectLegalHoldInputDict))
+    await client.put_object_legal_hold(_request(PutObjectLegalHoldInput))
+    await client.put_object_legal_hold(_request(PutObjectLegalHoldInputDict))
+    await client.put_object_lock_configuration(bucket=_)
+    await client.put_object_lock_configuration(
+        **_request(PutObjectLockConfigurationInputDict)
+    )
+    await client.put_object_lock_configuration(
+        _request(PutObjectLockConfigurationInput)
+    )
+    await client.put_object_lock_configuration(
+        _request(PutObjectLockConfigurationInputDict)
+    )
+    await client.put_object_retention(bucket=_, key=_)
+    await client.put_object_retention(**_request(PutObjectRetentionInputDict))
+    await client.put_object_retention(_request(PutObjectRetentionInput))
+    await client.put_object_retention(_request(PutObjectRetentionInputDict))
+    await client.put_object_tagging(bucket=_, key=_, tagging=_)
+    await client.put_object_tagging(**_request(PutObjectTaggingInputDict))
+    await client.put_object_tagging(_request(PutObjectTaggingInput))
+    await client.put_object_tagging(_request(PutObjectTaggingInputDict))
+    await client.put_public_access_block(bucket=_, public_access_block_configuration=_)
+    await client.put_public_access_block(**_request(PutPublicAccessBlockInputDict))
+    await client.put_public_access_block(_request(PutPublicAccessBlockInput))
+    await client.put_public_access_block(_request(PutPublicAccessBlockInputDict))
+    await client.rename_object(bucket=_, key=_, rename_source=_)
+    await client.rename_object(**_request(RenameObjectInputDict))
+    await client.rename_object(_request(RenameObjectInput))
+    await client.rename_object(_request(RenameObjectInputDict))
+    await client.restore_object(bucket=_, key=_)
+    await client.restore_object(**_request(RestoreObjectInputDict))
+    await client.restore_object(_request(RestoreObjectInput))
+    await client.restore_object(_request(RestoreObjectInputDict))
+    await client.select_object_content(
+        bucket=_,
+        key=_,
+        expression=_,
+        expression_type=_,
+        input_serialization=_,
+        output_serialization=_,
+    )
+    await client.select_object_content(**_request(SelectObjectContentInputDict))
+    await client.select_object_content(_request(SelectObjectContentInput))
+    await client.select_object_content(_request(SelectObjectContentInputDict))
+    await client.update_bucket_metadata_annotation_table_configuration(
+        bucket=_, annotation_table_configuration=_
+    )
+    await client.update_bucket_metadata_annotation_table_configuration(
+        **_request(UpdateBucketMetadataAnnotationTableConfigurationInputDict)
+    )
+    await client.update_bucket_metadata_annotation_table_configuration(
+        _request(UpdateBucketMetadataAnnotationTableConfigurationInput)
+    )
+    await client.update_bucket_metadata_annotation_table_configuration(
+        _request(UpdateBucketMetadataAnnotationTableConfigurationInputDict)
+    )
+    await client.update_bucket_metadata_inventory_table_configuration(
+        bucket=_, inventory_table_configuration=_
+    )
+    await client.update_bucket_metadata_inventory_table_configuration(
+        **_request(UpdateBucketMetadataInventoryTableConfigurationInputDict)
+    )
+    await client.update_bucket_metadata_inventory_table_configuration(
+        _request(UpdateBucketMetadataInventoryTableConfigurationInput)
+    )
+    await client.update_bucket_metadata_inventory_table_configuration(
+        _request(UpdateBucketMetadataInventoryTableConfigurationInputDict)
+    )
+    await client.update_bucket_metadata_journal_table_configuration(
+        bucket=_, journal_table_configuration=_
+    )
+    await client.update_bucket_metadata_journal_table_configuration(
+        **_request(UpdateBucketMetadataJournalTableConfigurationInputDict)
+    )
+    await client.update_bucket_metadata_journal_table_configuration(
+        _request(UpdateBucketMetadataJournalTableConfigurationInput)
+    )
+    await client.update_bucket_metadata_journal_table_configuration(
+        _request(UpdateBucketMetadataJournalTableConfigurationInputDict)
+    )
+    await client.update_object_encryption(bucket=_, key=_, object_encryption=_)
+    await client.update_object_encryption(**_request(UpdateObjectEncryptionInputDict))
+    await client.update_object_encryption(_request(UpdateObjectEncryptionInput))
+    await client.update_object_encryption(_request(UpdateObjectEncryptionInputDict))
+    await client.upload_part(bucket=_, key=_, part_number=_, upload_id=_)
+    await client.upload_part(**_request(UploadPartInputDict))
+    await client.upload_part(_request(UploadPartInput))
+    await client.upload_part(_request(UploadPartInputDict))
+    await client.upload_part(**_request(AsyncUploadPartInputDict))
+    await client.upload_part(_request(AsyncUploadPartInputDict))
+    await client.upload_part_copy(
+        bucket=_, copy_source=_, key=_, part_number=_, upload_id=_
+    )
+    await client.upload_part_copy(**_request(UploadPartCopyInputDict))
+    await client.upload_part_copy(_request(UploadPartCopyInput))
+    await client.upload_part_copy(_request(UploadPartCopyInputDict))
+    await client.write_get_object_response(request_route=_, request_token=_)
+    await client.write_get_object_response(**_request(WriteGetObjectResponseInputDict))
+    await client.write_get_object_response(_request(WriteGetObjectResponseInput))
+    await client.write_get_object_response(_request(WriteGetObjectResponseInputDict))
+    await client.write_get_object_response(
+        **_request(AsyncWriteGetObjectResponseInputDict)
+    )
+    await client.write_get_object_response(
+        _request(AsyncWriteGetObjectResponseInputDict)
+    )
+
+
+def check_sync_calls(client: S3Client) -> None:
+    pass
+    client.abort_multipart_upload(bucket=_, key=_, upload_id=_)
+    client.abort_multipart_upload(**_request(AbortMultipartUploadInputDict))
+    client.abort_multipart_upload(_request(AbortMultipartUploadInput))
+    client.abort_multipart_upload(_request(AbortMultipartUploadInputDict))
+    client.complete_multipart_upload(bucket=_, key=_, upload_id=_)
+    client.complete_multipart_upload(**_request(CompleteMultipartUploadInputDict))
+    client.complete_multipart_upload(_request(CompleteMultipartUploadInput))
+    client.complete_multipart_upload(_request(CompleteMultipartUploadInputDict))
+    client.copy_object(bucket=_, copy_source=_, key=_)
+    client.copy_object(**_request(CopyObjectInputDict))
+    client.copy_object(_request(CopyObjectInput))
+    client.copy_object(_request(CopyObjectInputDict))
+    client.create_bucket(bucket=_)
+    client.create_bucket(**_request(CreateBucketInputDict))
+    client.create_bucket(_request(CreateBucketInput))
+    client.create_bucket(_request(CreateBucketInputDict))
+    client.create_bucket_metadata_configuration(bucket=_, metadata_configuration=_)
+    client.create_bucket_metadata_configuration(
+        **_request(CreateBucketMetadataConfigurationInputDict)
+    )
+    client.create_bucket_metadata_configuration(
+        _request(CreateBucketMetadataConfigurationInput)
+    )
+    client.create_bucket_metadata_configuration(
+        _request(CreateBucketMetadataConfigurationInputDict)
+    )
+    client.create_bucket_metadata_table_configuration(
+        bucket=_, metadata_table_configuration=_
+    )
+    client.create_bucket_metadata_table_configuration(
+        **_request(CreateBucketMetadataTableConfigurationInputDict)
+    )
+    client.create_bucket_metadata_table_configuration(
+        _request(CreateBucketMetadataTableConfigurationInput)
+    )
+    client.create_bucket_metadata_table_configuration(
+        _request(CreateBucketMetadataTableConfigurationInputDict)
+    )
+    client.create_multipart_upload(bucket=_, key=_)
+    client.create_multipart_upload(**_request(CreateMultipartUploadInputDict))
+    client.create_multipart_upload(_request(CreateMultipartUploadInput))
+    client.create_multipart_upload(_request(CreateMultipartUploadInputDict))
+    client.create_session(bucket=_)
+    client.create_session(**_request(CreateSessionInputDict))
+    client.create_session(_request(CreateSessionInput))
+    client.create_session(_request(CreateSessionInputDict))
+    client.delete_bucket(bucket=_)
+    client.delete_bucket(**_request(DeleteBucketInputDict))
+    client.delete_bucket(_request(DeleteBucketInput))
+    client.delete_bucket(_request(DeleteBucketInputDict))
+    client.delete_bucket_analytics_configuration(bucket=_, id=_)
+    client.delete_bucket_analytics_configuration(
+        **_request(DeleteBucketAnalyticsConfigurationInputDict)
+    )
+    client.delete_bucket_analytics_configuration(
+        _request(DeleteBucketAnalyticsConfigurationInput)
+    )
+    client.delete_bucket_analytics_configuration(
+        _request(DeleteBucketAnalyticsConfigurationInputDict)
+    )
+    client.delete_bucket_cors(bucket=_)
+    client.delete_bucket_cors(**_request(DeleteBucketCorsInputDict))
+    client.delete_bucket_cors(_request(DeleteBucketCorsInput))
+    client.delete_bucket_cors(_request(DeleteBucketCorsInputDict))
+    client.delete_bucket_encryption(bucket=_)
+    client.delete_bucket_encryption(**_request(DeleteBucketEncryptionInputDict))
+    client.delete_bucket_encryption(_request(DeleteBucketEncryptionInput))
+    client.delete_bucket_encryption(_request(DeleteBucketEncryptionInputDict))
+    client.delete_bucket_intelligent_tiering_configuration(bucket=_, id=_)
+    client.delete_bucket_intelligent_tiering_configuration(
+        **_request(DeleteBucketIntelligentTieringConfigurationInputDict)
+    )
+    client.delete_bucket_intelligent_tiering_configuration(
+        _request(DeleteBucketIntelligentTieringConfigurationInput)
+    )
+    client.delete_bucket_intelligent_tiering_configuration(
+        _request(DeleteBucketIntelligentTieringConfigurationInputDict)
+    )
+    client.delete_bucket_inventory_configuration(bucket=_, id=_)
+    client.delete_bucket_inventory_configuration(
+        **_request(DeleteBucketInventoryConfigurationInputDict)
+    )
+    client.delete_bucket_inventory_configuration(
+        _request(DeleteBucketInventoryConfigurationInput)
+    )
+    client.delete_bucket_inventory_configuration(
+        _request(DeleteBucketInventoryConfigurationInputDict)
+    )
+    client.delete_bucket_lifecycle(bucket=_)
+    client.delete_bucket_lifecycle(**_request(DeleteBucketLifecycleInputDict))
+    client.delete_bucket_lifecycle(_request(DeleteBucketLifecycleInput))
+    client.delete_bucket_lifecycle(_request(DeleteBucketLifecycleInputDict))
+    client.delete_bucket_metadata_configuration(bucket=_)
+    client.delete_bucket_metadata_configuration(
+        **_request(DeleteBucketMetadataConfigurationInputDict)
+    )
+    client.delete_bucket_metadata_configuration(
+        _request(DeleteBucketMetadataConfigurationInput)
+    )
+    client.delete_bucket_metadata_configuration(
+        _request(DeleteBucketMetadataConfigurationInputDict)
+    )
+    client.delete_bucket_metadata_table_configuration(bucket=_)
+    client.delete_bucket_metadata_table_configuration(
+        **_request(DeleteBucketMetadataTableConfigurationInputDict)
+    )
+    client.delete_bucket_metadata_table_configuration(
+        _request(DeleteBucketMetadataTableConfigurationInput)
+    )
+    client.delete_bucket_metadata_table_configuration(
+        _request(DeleteBucketMetadataTableConfigurationInputDict)
+    )
+    client.delete_bucket_metrics_configuration(bucket=_, id=_)
+    client.delete_bucket_metrics_configuration(
+        **_request(DeleteBucketMetricsConfigurationInputDict)
+    )
+    client.delete_bucket_metrics_configuration(
+        _request(DeleteBucketMetricsConfigurationInput)
+    )
+    client.delete_bucket_metrics_configuration(
+        _request(DeleteBucketMetricsConfigurationInputDict)
+    )
+    client.delete_bucket_ownership_controls(bucket=_)
+    client.delete_bucket_ownership_controls(
+        **_request(DeleteBucketOwnershipControlsInputDict)
+    )
+    client.delete_bucket_ownership_controls(
+        _request(DeleteBucketOwnershipControlsInput)
+    )
+    client.delete_bucket_ownership_controls(
+        _request(DeleteBucketOwnershipControlsInputDict)
+    )
+    client.delete_bucket_policy(bucket=_)
+    client.delete_bucket_policy(**_request(DeleteBucketPolicyInputDict))
+    client.delete_bucket_policy(_request(DeleteBucketPolicyInput))
+    client.delete_bucket_policy(_request(DeleteBucketPolicyInputDict))
+    client.delete_bucket_replication(bucket=_)
+    client.delete_bucket_replication(**_request(DeleteBucketReplicationInputDict))
+    client.delete_bucket_replication(_request(DeleteBucketReplicationInput))
+    client.delete_bucket_replication(_request(DeleteBucketReplicationInputDict))
+    client.delete_bucket_tagging(bucket=_)
+    client.delete_bucket_tagging(**_request(DeleteBucketTaggingInputDict))
+    client.delete_bucket_tagging(_request(DeleteBucketTaggingInput))
+    client.delete_bucket_tagging(_request(DeleteBucketTaggingInputDict))
+    client.delete_bucket_website(bucket=_)
+    client.delete_bucket_website(**_request(DeleteBucketWebsiteInputDict))
+    client.delete_bucket_website(_request(DeleteBucketWebsiteInput))
+    client.delete_bucket_website(_request(DeleteBucketWebsiteInputDict))
+    client.delete_object(bucket=_, key=_)
+    client.delete_object(**_request(DeleteObjectInputDict))
+    client.delete_object(_request(DeleteObjectInput))
+    client.delete_object(_request(DeleteObjectInputDict))
+    client.delete_object_annotation(bucket=_, key=_, annotation_name=_)
+    client.delete_object_annotation(**_request(DeleteObjectAnnotationInputDict))
+    client.delete_object_annotation(_request(DeleteObjectAnnotationInput))
+    client.delete_object_annotation(_request(DeleteObjectAnnotationInputDict))
+    client.delete_objects(bucket=_, delete=_)
+    client.delete_objects(**_request(DeleteObjectsInputDict))
+    client.delete_objects(_request(DeleteObjectsInput))
+    client.delete_objects(_request(DeleteObjectsInputDict))
+    client.delete_object_tagging(bucket=_, key=_)
+    client.delete_object_tagging(**_request(DeleteObjectTaggingInputDict))
+    client.delete_object_tagging(_request(DeleteObjectTaggingInput))
+    client.delete_object_tagging(_request(DeleteObjectTaggingInputDict))
+    client.delete_public_access_block(bucket=_)
+    client.delete_public_access_block(**_request(DeletePublicAccessBlockInputDict))
+    client.delete_public_access_block(_request(DeletePublicAccessBlockInput))
+    client.delete_public_access_block(_request(DeletePublicAccessBlockInputDict))
+    client.get_bucket_abac(bucket=_)
+    client.get_bucket_abac(**_request(GetBucketAbacInputDict))
+    client.get_bucket_abac(_request(GetBucketAbacInput))
+    client.get_bucket_abac(_request(GetBucketAbacInputDict))
+    client.get_bucket_accelerate_configuration(bucket=_)
+    client.get_bucket_accelerate_configuration(
+        **_request(GetBucketAccelerateConfigurationInputDict)
+    )
+    client.get_bucket_accelerate_configuration(
+        _request(GetBucketAccelerateConfigurationInput)
+    )
+    client.get_bucket_accelerate_configuration(
+        _request(GetBucketAccelerateConfigurationInputDict)
+    )
+    client.get_bucket_acl(bucket=_)
+    client.get_bucket_acl(**_request(GetBucketAclInputDict))
+    client.get_bucket_acl(_request(GetBucketAclInput))
+    client.get_bucket_acl(_request(GetBucketAclInputDict))
+    client.get_bucket_analytics_configuration(bucket=_, id=_)
+    client.get_bucket_analytics_configuration(
+        **_request(GetBucketAnalyticsConfigurationInputDict)
+    )
+    client.get_bucket_analytics_configuration(
+        _request(GetBucketAnalyticsConfigurationInput)
+    )
+    client.get_bucket_analytics_configuration(
+        _request(GetBucketAnalyticsConfigurationInputDict)
+    )
+    client.get_bucket_cors(bucket=_)
+    client.get_bucket_cors(**_request(GetBucketCorsInputDict))
+    client.get_bucket_cors(_request(GetBucketCorsInput))
+    client.get_bucket_cors(_request(GetBucketCorsInputDict))
+    client.get_bucket_encryption(bucket=_)
+    client.get_bucket_encryption(**_request(GetBucketEncryptionInputDict))
+    client.get_bucket_encryption(_request(GetBucketEncryptionInput))
+    client.get_bucket_encryption(_request(GetBucketEncryptionInputDict))
+    client.get_bucket_intelligent_tiering_configuration(bucket=_, id=_)
+    client.get_bucket_intelligent_tiering_configuration(
+        **_request(GetBucketIntelligentTieringConfigurationInputDict)
+    )
+    client.get_bucket_intelligent_tiering_configuration(
+        _request(GetBucketIntelligentTieringConfigurationInput)
+    )
+    client.get_bucket_intelligent_tiering_configuration(
+        _request(GetBucketIntelligentTieringConfigurationInputDict)
+    )
+    client.get_bucket_inventory_configuration(bucket=_, id=_)
+    client.get_bucket_inventory_configuration(
+        **_request(GetBucketInventoryConfigurationInputDict)
+    )
+    client.get_bucket_inventory_configuration(
+        _request(GetBucketInventoryConfigurationInput)
+    )
+    client.get_bucket_inventory_configuration(
+        _request(GetBucketInventoryConfigurationInputDict)
+    )
+    client.get_bucket_lifecycle_configuration(bucket=_)
+    client.get_bucket_lifecycle_configuration(
+        **_request(GetBucketLifecycleConfigurationInputDict)
+    )
+    client.get_bucket_lifecycle_configuration(
+        _request(GetBucketLifecycleConfigurationInput)
+    )
+    client.get_bucket_lifecycle_configuration(
+        _request(GetBucketLifecycleConfigurationInputDict)
+    )
+    client.get_bucket_location(bucket=_)
+    client.get_bucket_location(**_request(GetBucketLocationInputDict))
+    client.get_bucket_location(_request(GetBucketLocationInput))
+    client.get_bucket_location(_request(GetBucketLocationInputDict))
+    client.get_bucket_logging(bucket=_)
+    client.get_bucket_logging(**_request(GetBucketLoggingInputDict))
+    client.get_bucket_logging(_request(GetBucketLoggingInput))
+    client.get_bucket_logging(_request(GetBucketLoggingInputDict))
+    client.get_bucket_metadata_configuration(bucket=_)
+    client.get_bucket_metadata_configuration(
+        **_request(GetBucketMetadataConfigurationInputDict)
+    )
+    client.get_bucket_metadata_configuration(
+        _request(GetBucketMetadataConfigurationInput)
+    )
+    client.get_bucket_metadata_configuration(
+        _request(GetBucketMetadataConfigurationInputDict)
+    )
+    client.get_bucket_metadata_table_configuration(bucket=_)
+    client.get_bucket_metadata_table_configuration(
+        **_request(GetBucketMetadataTableConfigurationInputDict)
+    )
+    client.get_bucket_metadata_table_configuration(
+        _request(GetBucketMetadataTableConfigurationInput)
+    )
+    client.get_bucket_metadata_table_configuration(
+        _request(GetBucketMetadataTableConfigurationInputDict)
+    )
+    client.get_bucket_metrics_configuration(bucket=_, id=_)
+    client.get_bucket_metrics_configuration(
+        **_request(GetBucketMetricsConfigurationInputDict)
+    )
+    client.get_bucket_metrics_configuration(
+        _request(GetBucketMetricsConfigurationInput)
+    )
+    client.get_bucket_metrics_configuration(
+        _request(GetBucketMetricsConfigurationInputDict)
+    )
+    client.get_bucket_notification_configuration(bucket=_)
+    client.get_bucket_notification_configuration(
+        **_request(GetBucketNotificationConfigurationInputDict)
+    )
+    client.get_bucket_notification_configuration(
+        _request(GetBucketNotificationConfigurationInput)
+    )
+    client.get_bucket_notification_configuration(
+        _request(GetBucketNotificationConfigurationInputDict)
+    )
+    client.get_bucket_ownership_controls(bucket=_)
+    client.get_bucket_ownership_controls(
+        **_request(GetBucketOwnershipControlsInputDict)
+    )
+    client.get_bucket_ownership_controls(_request(GetBucketOwnershipControlsInput))
+    client.get_bucket_ownership_controls(_request(GetBucketOwnershipControlsInputDict))
+    client.get_bucket_policy(bucket=_)
+    client.get_bucket_policy(**_request(GetBucketPolicyInputDict))
+    client.get_bucket_policy(_request(GetBucketPolicyInput))
+    client.get_bucket_policy(_request(GetBucketPolicyInputDict))
+    client.get_bucket_policy_status(bucket=_)
+    client.get_bucket_policy_status(**_request(GetBucketPolicyStatusInputDict))
+    client.get_bucket_policy_status(_request(GetBucketPolicyStatusInput))
+    client.get_bucket_policy_status(_request(GetBucketPolicyStatusInputDict))
+    client.get_bucket_replication(bucket=_)
+    client.get_bucket_replication(**_request(GetBucketReplicationInputDict))
+    client.get_bucket_replication(_request(GetBucketReplicationInput))
+    client.get_bucket_replication(_request(GetBucketReplicationInputDict))
+    client.get_bucket_request_payment(bucket=_)
+    client.get_bucket_request_payment(**_request(GetBucketRequestPaymentInputDict))
+    client.get_bucket_request_payment(_request(GetBucketRequestPaymentInput))
+    client.get_bucket_request_payment(_request(GetBucketRequestPaymentInputDict))
+    client.get_bucket_tagging(bucket=_)
+    client.get_bucket_tagging(**_request(GetBucketTaggingInputDict))
+    client.get_bucket_tagging(_request(GetBucketTaggingInput))
+    client.get_bucket_tagging(_request(GetBucketTaggingInputDict))
+    client.get_bucket_versioning(bucket=_)
+    client.get_bucket_versioning(**_request(GetBucketVersioningInputDict))
+    client.get_bucket_versioning(_request(GetBucketVersioningInput))
+    client.get_bucket_versioning(_request(GetBucketVersioningInputDict))
+    client.get_bucket_website(bucket=_)
+    client.get_bucket_website(**_request(GetBucketWebsiteInputDict))
+    client.get_bucket_website(_request(GetBucketWebsiteInput))
+    client.get_bucket_website(_request(GetBucketWebsiteInputDict))
+    client.get_object(bucket=_, key=_)
+    client.get_object(**_request(GetObjectInputDict))
+    client.get_object(_request(GetObjectInput))
+    client.get_object(_request(GetObjectInputDict))
+    client.get_object_acl(bucket=_, key=_)
+    client.get_object_acl(**_request(GetObjectAclInputDict))
+    client.get_object_acl(_request(GetObjectAclInput))
+    client.get_object_acl(_request(GetObjectAclInputDict))
+    client.get_object_annotation(bucket=_, key=_, annotation_name=_)
+    client.get_object_annotation(**_request(GetObjectAnnotationInputDict))
+    client.get_object_annotation(_request(GetObjectAnnotationInput))
+    client.get_object_annotation(_request(GetObjectAnnotationInputDict))
+    client.get_object_attributes(bucket=_, key=_, object_attributes=_)
+    client.get_object_attributes(**_request(GetObjectAttributesInputDict))
+    client.get_object_attributes(_request(GetObjectAttributesInput))
+    client.get_object_attributes(_request(GetObjectAttributesInputDict))
+    client.get_object_legal_hold(bucket=_, key=_)
+    client.get_object_legal_hold(**_request(GetObjectLegalHoldInputDict))
+    client.get_object_legal_hold(_request(GetObjectLegalHoldInput))
+    client.get_object_legal_hold(_request(GetObjectLegalHoldInputDict))
+    client.get_object_lock_configuration(bucket=_)
+    client.get_object_lock_configuration(
+        **_request(GetObjectLockConfigurationInputDict)
+    )
+    client.get_object_lock_configuration(_request(GetObjectLockConfigurationInput))
+    client.get_object_lock_configuration(_request(GetObjectLockConfigurationInputDict))
+    client.get_object_retention(bucket=_, key=_)
+    client.get_object_retention(**_request(GetObjectRetentionInputDict))
+    client.get_object_retention(_request(GetObjectRetentionInput))
+    client.get_object_retention(_request(GetObjectRetentionInputDict))
+    client.get_object_tagging(bucket=_, key=_)
+    client.get_object_tagging(**_request(GetObjectTaggingInputDict))
+    client.get_object_tagging(_request(GetObjectTaggingInput))
+    client.get_object_tagging(_request(GetObjectTaggingInputDict))
+    client.get_object_torrent(bucket=_, key=_)
+    client.get_object_torrent(**_request(GetObjectTorrentInputDict))
+    client.get_object_torrent(_request(GetObjectTorrentInput))
+    client.get_object_torrent(_request(GetObjectTorrentInputDict))
+    client.get_public_access_block(bucket=_)
+    client.get_public_access_block(**_request(GetPublicAccessBlockInputDict))
+    client.get_public_access_block(_request(GetPublicAccessBlockInput))
+    client.get_public_access_block(_request(GetPublicAccessBlockInputDict))
+    client.head_bucket(bucket=_)
+    client.head_bucket(**_request(HeadBucketInputDict))
+    client.head_bucket(_request(HeadBucketInput))
+    client.head_bucket(_request(HeadBucketInputDict))
+    client.head_object(bucket=_, key=_)
+    client.head_object(**_request(HeadObjectInputDict))
+    client.head_object(_request(HeadObjectInput))
+    client.head_object(_request(HeadObjectInputDict))
+    client.list_bucket_analytics_configurations(bucket=_)
+    client.list_bucket_analytics_configurations(
+        **_request(ListBucketAnalyticsConfigurationsInputDict)
+    )
+    client.list_bucket_analytics_configurations(
+        _request(ListBucketAnalyticsConfigurationsInput)
+    )
+    client.list_bucket_analytics_configurations(
+        _request(ListBucketAnalyticsConfigurationsInputDict)
+    )
+    client.list_bucket_intelligent_tiering_configurations(bucket=_)
+    client.list_bucket_intelligent_tiering_configurations(
+        **_request(ListBucketIntelligentTieringConfigurationsInputDict)
+    )
+    client.list_bucket_intelligent_tiering_configurations(
+        _request(ListBucketIntelligentTieringConfigurationsInput)
+    )
+    client.list_bucket_intelligent_tiering_configurations(
+        _request(ListBucketIntelligentTieringConfigurationsInputDict)
+    )
+    client.list_bucket_inventory_configurations(bucket=_)
+    client.list_bucket_inventory_configurations(
+        **_request(ListBucketInventoryConfigurationsInputDict)
+    )
+    client.list_bucket_inventory_configurations(
+        _request(ListBucketInventoryConfigurationsInput)
+    )
+    client.list_bucket_inventory_configurations(
+        _request(ListBucketInventoryConfigurationsInputDict)
+    )
+    client.list_bucket_metrics_configurations(bucket=_)
+    client.list_bucket_metrics_configurations(
+        **_request(ListBucketMetricsConfigurationsInputDict)
+    )
+    client.list_bucket_metrics_configurations(
+        _request(ListBucketMetricsConfigurationsInput)
+    )
+    client.list_bucket_metrics_configurations(
+        _request(ListBucketMetricsConfigurationsInputDict)
+    )
+    client.list_buckets()
+    client.list_buckets(**_request(ListBucketsInputDict))
+    client.list_buckets(_request(ListBucketsInput))
+    client.list_buckets(_request(ListBucketsInputDict))
+    client.list_directory_buckets()
+    client.list_directory_buckets(**_request(ListDirectoryBucketsInputDict))
+    client.list_directory_buckets(_request(ListDirectoryBucketsInput))
+    client.list_directory_buckets(_request(ListDirectoryBucketsInputDict))
+    client.list_multipart_uploads(bucket=_)
+    client.list_multipart_uploads(**_request(ListMultipartUploadsInputDict))
+    client.list_multipart_uploads(_request(ListMultipartUploadsInput))
+    client.list_multipart_uploads(_request(ListMultipartUploadsInputDict))
+    client.list_object_annotations(bucket=_, key=_)
+    client.list_object_annotations(**_request(ListObjectAnnotationsInputDict))
+    client.list_object_annotations(_request(ListObjectAnnotationsInput))
+    client.list_object_annotations(_request(ListObjectAnnotationsInputDict))
+    client.list_objects(bucket=_)
+    client.list_objects(**_request(ListObjectsInputDict))
+    client.list_objects(_request(ListObjectsInput))
+    client.list_objects(_request(ListObjectsInputDict))
+    client.list_objects_v2(bucket=_)
+    client.list_objects_v2(**_request(ListObjectsV2InputDict))
+    client.list_objects_v2(_request(ListObjectsV2Input))
+    client.list_objects_v2(_request(ListObjectsV2InputDict))
+    client.list_object_versions(bucket=_)
+    client.list_object_versions(**_request(ListObjectVersionsInputDict))
+    client.list_object_versions(_request(ListObjectVersionsInput))
+    client.list_object_versions(_request(ListObjectVersionsInputDict))
+    client.list_parts(bucket=_, key=_, upload_id=_)
+    client.list_parts(**_request(ListPartsInputDict))
+    client.list_parts(_request(ListPartsInput))
+    client.list_parts(_request(ListPartsInputDict))
+    client.put_bucket_abac(bucket=_, abac_status=_)
+    client.put_bucket_abac(**_request(PutBucketAbacInputDict))
+    client.put_bucket_abac(_request(PutBucketAbacInput))
+    client.put_bucket_abac(_request(PutBucketAbacInputDict))
+    client.put_bucket_accelerate_configuration(bucket=_, accelerate_configuration=_)
+    client.put_bucket_accelerate_configuration(
+        **_request(PutBucketAccelerateConfigurationInputDict)
+    )
+    client.put_bucket_accelerate_configuration(
+        _request(PutBucketAccelerateConfigurationInput)
+    )
+    client.put_bucket_accelerate_configuration(
+        _request(PutBucketAccelerateConfigurationInputDict)
+    )
+    client.put_bucket_acl(bucket=_)
+    client.put_bucket_acl(**_request(PutBucketAclInputDict))
+    client.put_bucket_acl(_request(PutBucketAclInput))
+    client.put_bucket_acl(_request(PutBucketAclInputDict))
+    client.put_bucket_analytics_configuration(bucket=_, id=_, analytics_configuration=_)
+    client.put_bucket_analytics_configuration(
+        **_request(PutBucketAnalyticsConfigurationInputDict)
+    )
+    client.put_bucket_analytics_configuration(
+        _request(PutBucketAnalyticsConfigurationInput)
+    )
+    client.put_bucket_analytics_configuration(
+        _request(PutBucketAnalyticsConfigurationInputDict)
+    )
+    client.put_bucket_cors(bucket=_, cors_configuration=_)
+    client.put_bucket_cors(**_request(PutBucketCorsInputDict))
+    client.put_bucket_cors(_request(PutBucketCorsInput))
+    client.put_bucket_cors(_request(PutBucketCorsInputDict))
+    client.put_bucket_encryption(bucket=_, server_side_encryption_configuration=_)
+    client.put_bucket_encryption(**_request(PutBucketEncryptionInputDict))
+    client.put_bucket_encryption(_request(PutBucketEncryptionInput))
+    client.put_bucket_encryption(_request(PutBucketEncryptionInputDict))
+    client.put_bucket_intelligent_tiering_configuration(
+        bucket=_, id=_, intelligent_tiering_configuration=_
+    )
+    client.put_bucket_intelligent_tiering_configuration(
+        **_request(PutBucketIntelligentTieringConfigurationInputDict)
+    )
+    client.put_bucket_intelligent_tiering_configuration(
+        _request(PutBucketIntelligentTieringConfigurationInput)
+    )
+    client.put_bucket_intelligent_tiering_configuration(
+        _request(PutBucketIntelligentTieringConfigurationInputDict)
+    )
+    client.put_bucket_inventory_configuration(bucket=_, id=_, inventory_configuration=_)
+    client.put_bucket_inventory_configuration(
+        **_request(PutBucketInventoryConfigurationInputDict)
+    )
+    client.put_bucket_inventory_configuration(
+        _request(PutBucketInventoryConfigurationInput)
+    )
+    client.put_bucket_inventory_configuration(
+        _request(PutBucketInventoryConfigurationInputDict)
+    )
+    client.put_bucket_lifecycle_configuration(bucket=_)
+    client.put_bucket_lifecycle_configuration(
+        **_request(PutBucketLifecycleConfigurationInputDict)
+    )
+    client.put_bucket_lifecycle_configuration(
+        _request(PutBucketLifecycleConfigurationInput)
+    )
+    client.put_bucket_lifecycle_configuration(
+        _request(PutBucketLifecycleConfigurationInputDict)
+    )
+    client.put_bucket_logging(bucket=_, bucket_logging_status=_)
+    client.put_bucket_logging(**_request(PutBucketLoggingInputDict))
+    client.put_bucket_logging(_request(PutBucketLoggingInput))
+    client.put_bucket_logging(_request(PutBucketLoggingInputDict))
+    client.put_bucket_metrics_configuration(bucket=_, id=_, metrics_configuration=_)
+    client.put_bucket_metrics_configuration(
+        **_request(PutBucketMetricsConfigurationInputDict)
+    )
+    client.put_bucket_metrics_configuration(
+        _request(PutBucketMetricsConfigurationInput)
+    )
+    client.put_bucket_metrics_configuration(
+        _request(PutBucketMetricsConfigurationInputDict)
+    )
+    client.put_bucket_notification_configuration(bucket=_, notification_configuration=_)
+    client.put_bucket_notification_configuration(
+        **_request(PutBucketNotificationConfigurationInputDict)
+    )
+    client.put_bucket_notification_configuration(
+        _request(PutBucketNotificationConfigurationInput)
+    )
+    client.put_bucket_notification_configuration(
+        _request(PutBucketNotificationConfigurationInputDict)
+    )
+    client.put_bucket_ownership_controls(bucket=_, ownership_controls=_)
+    client.put_bucket_ownership_controls(
+        **_request(PutBucketOwnershipControlsInputDict)
+    )
+    client.put_bucket_ownership_controls(_request(PutBucketOwnershipControlsInput))
+    client.put_bucket_ownership_controls(_request(PutBucketOwnershipControlsInputDict))
+    client.put_bucket_policy(bucket=_, policy=_)
+    client.put_bucket_policy(**_request(PutBucketPolicyInputDict))
+    client.put_bucket_policy(_request(PutBucketPolicyInput))
+    client.put_bucket_policy(_request(PutBucketPolicyInputDict))
+    client.put_bucket_replication(bucket=_, replication_configuration=_)
+    client.put_bucket_replication(**_request(PutBucketReplicationInputDict))
+    client.put_bucket_replication(_request(PutBucketReplicationInput))
+    client.put_bucket_replication(_request(PutBucketReplicationInputDict))
+    client.put_bucket_request_payment(bucket=_, request_payment_configuration=_)
+    client.put_bucket_request_payment(**_request(PutBucketRequestPaymentInputDict))
+    client.put_bucket_request_payment(_request(PutBucketRequestPaymentInput))
+    client.put_bucket_request_payment(_request(PutBucketRequestPaymentInputDict))
+    client.put_bucket_tagging(bucket=_, tagging=_)
+    client.put_bucket_tagging(**_request(PutBucketTaggingInputDict))
+    client.put_bucket_tagging(_request(PutBucketTaggingInput))
+    client.put_bucket_tagging(_request(PutBucketTaggingInputDict))
+    client.put_bucket_versioning(bucket=_, versioning_configuration=_)
+    client.put_bucket_versioning(**_request(PutBucketVersioningInputDict))
+    client.put_bucket_versioning(_request(PutBucketVersioningInput))
+    client.put_bucket_versioning(_request(PutBucketVersioningInputDict))
+    client.put_bucket_website(bucket=_, website_configuration=_)
+    client.put_bucket_website(**_request(PutBucketWebsiteInputDict))
+    client.put_bucket_website(_request(PutBucketWebsiteInput))
+    client.put_bucket_website(_request(PutBucketWebsiteInputDict))
+    client.put_object(bucket=_, key=_)
+    client.put_object(**_request(PutObjectInputDict))
+    client.put_object(_request(PutObjectInput))
+    client.put_object(_request(PutObjectInputDict))
+    client.put_object_acl(bucket=_, key=_)
+    client.put_object_acl(**_request(PutObjectAclInputDict))
+    client.put_object_acl(_request(PutObjectAclInput))
+    client.put_object_acl(_request(PutObjectAclInputDict))
+    client.put_object_annotation(
+        bucket=_, key=_, annotation_name=_, annotation_payload=_
+    )
+    client.put_object_annotation(**_request(PutObjectAnnotationInputDict))
+    client.put_object_annotation(_request(PutObjectAnnotationInput))
+    client.put_object_annotation(_request(PutObjectAnnotationInputDict))
+    client.put_object_legal_hold(bucket=_, key=_)
+    client.put_object_legal_hold(**_request(PutObjectLegalHoldInputDict))
+    client.put_object_legal_hold(_request(PutObjectLegalHoldInput))
+    client.put_object_legal_hold(_request(PutObjectLegalHoldInputDict))
+    client.put_object_lock_configuration(bucket=_)
+    client.put_object_lock_configuration(
+        **_request(PutObjectLockConfigurationInputDict)
+    )
+    client.put_object_lock_configuration(_request(PutObjectLockConfigurationInput))
+    client.put_object_lock_configuration(_request(PutObjectLockConfigurationInputDict))
+    client.put_object_retention(bucket=_, key=_)
+    client.put_object_retention(**_request(PutObjectRetentionInputDict))
+    client.put_object_retention(_request(PutObjectRetentionInput))
+    client.put_object_retention(_request(PutObjectRetentionInputDict))
+    client.put_object_tagging(bucket=_, key=_, tagging=_)
+    client.put_object_tagging(**_request(PutObjectTaggingInputDict))
+    client.put_object_tagging(_request(PutObjectTaggingInput))
+    client.put_object_tagging(_request(PutObjectTaggingInputDict))
+    client.put_public_access_block(bucket=_, public_access_block_configuration=_)
+    client.put_public_access_block(**_request(PutPublicAccessBlockInputDict))
+    client.put_public_access_block(_request(PutPublicAccessBlockInput))
+    client.put_public_access_block(_request(PutPublicAccessBlockInputDict))
+    client.rename_object(bucket=_, key=_, rename_source=_)
+    client.rename_object(**_request(RenameObjectInputDict))
+    client.rename_object(_request(RenameObjectInput))
+    client.rename_object(_request(RenameObjectInputDict))
+    client.restore_object(bucket=_, key=_)
+    client.restore_object(**_request(RestoreObjectInputDict))
+    client.restore_object(_request(RestoreObjectInput))
+    client.restore_object(_request(RestoreObjectInputDict))
+    client.update_bucket_metadata_annotation_table_configuration(
+        bucket=_, annotation_table_configuration=_
+    )
+    client.update_bucket_metadata_annotation_table_configuration(
+        **_request(UpdateBucketMetadataAnnotationTableConfigurationInputDict)
+    )
+    client.update_bucket_metadata_annotation_table_configuration(
+        _request(UpdateBucketMetadataAnnotationTableConfigurationInput)
+    )
+    client.update_bucket_metadata_annotation_table_configuration(
+        _request(UpdateBucketMetadataAnnotationTableConfigurationInputDict)
+    )
+    client.update_bucket_metadata_inventory_table_configuration(
+        bucket=_, inventory_table_configuration=_
+    )
+    client.update_bucket_metadata_inventory_table_configuration(
+        **_request(UpdateBucketMetadataInventoryTableConfigurationInputDict)
+    )
+    client.update_bucket_metadata_inventory_table_configuration(
+        _request(UpdateBucketMetadataInventoryTableConfigurationInput)
+    )
+    client.update_bucket_metadata_inventory_table_configuration(
+        _request(UpdateBucketMetadataInventoryTableConfigurationInputDict)
+    )
+    client.update_bucket_metadata_journal_table_configuration(
+        bucket=_, journal_table_configuration=_
+    )
+    client.update_bucket_metadata_journal_table_configuration(
+        **_request(UpdateBucketMetadataJournalTableConfigurationInputDict)
+    )
+    client.update_bucket_metadata_journal_table_configuration(
+        _request(UpdateBucketMetadataJournalTableConfigurationInput)
+    )
+    client.update_bucket_metadata_journal_table_configuration(
+        _request(UpdateBucketMetadataJournalTableConfigurationInputDict)
+    )
+    client.update_object_encryption(bucket=_, key=_, object_encryption=_)
+    client.update_object_encryption(**_request(UpdateObjectEncryptionInputDict))
+    client.update_object_encryption(_request(UpdateObjectEncryptionInput))
+    client.update_object_encryption(_request(UpdateObjectEncryptionInputDict))
+    client.upload_part(bucket=_, key=_, part_number=_, upload_id=_)
+    client.upload_part(**_request(UploadPartInputDict))
+    client.upload_part(_request(UploadPartInput))
+    client.upload_part(_request(UploadPartInputDict))
+    client.upload_part_copy(bucket=_, copy_source=_, key=_, part_number=_, upload_id=_)
+    client.upload_part_copy(**_request(UploadPartCopyInputDict))
+    client.upload_part_copy(_request(UploadPartCopyInput))
+    client.upload_part_copy(_request(UploadPartCopyInputDict))
+    client.write_get_object_response(request_route=_, request_token=_)
+    client.write_get_object_response(**_request(WriteGetObjectResponseInputDict))
+    client.write_get_object_response(_request(WriteGetObjectResponseInput))
+    client.write_get_object_response(_request(WriteGetObjectResponseInputDict))
