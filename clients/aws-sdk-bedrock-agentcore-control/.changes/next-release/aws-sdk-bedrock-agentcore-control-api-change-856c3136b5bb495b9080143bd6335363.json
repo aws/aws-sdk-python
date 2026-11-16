@@ -1,0 +1,4 @@
+{
+  "type": "api-change",
+  "description": "This release supports scoping Amazon Bedrock AgentCore Gateway rate limits by request header or request body field."
+}

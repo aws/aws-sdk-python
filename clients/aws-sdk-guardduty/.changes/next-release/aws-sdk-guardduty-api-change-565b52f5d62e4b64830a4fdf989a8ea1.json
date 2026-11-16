@@ -1,0 +1,4 @@
+{
+  "type": "api-change",
+  "description": "Adding a new Expected Bucket Owner optional field for GuardDuty publishing destination APIs"
+}

@@ -1,0 +1,4 @@
+{
+  "type": "api-change",
+  "description": "AgentCore Memory now supports configuring Long-Term Memory Time-to-Live (TTL) on Memory Strategies."
+}

@@ -1,0 +1,4 @@
+{
+  "type": "api-change",
+  "description": "Doc updates to reposition Lambda Functions as Lambda Event Functions"
+}
