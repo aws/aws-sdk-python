@@ -149,6 +149,8 @@ _registry = ModelRegistry(
         "AssociateIpamResourceDiscoveryOutput": "ASSOCIATE_IPAM_RESOURCE_DISCOVERY_OUTPUT",
         "AssociateNatGatewayAddressInput": "ASSOCIATE_NAT_GATEWAY_ADDRESS_INPUT",
         "AssociateNatGatewayAddressOutput": "ASSOCIATE_NAT_GATEWAY_ADDRESS_OUTPUT",
+        "AssociateNetworkingFlexCostAllocationPolicyInput": "ASSOCIATE_NETWORKING_FLEX_COST_ALLOCATION_POLICY_INPUT",
+        "AssociateNetworkingFlexCostAllocationPolicyOutput": "ASSOCIATE_NETWORKING_FLEX_COST_ALLOCATION_POLICY_OUTPUT",
         "AssociateRouteServerInput": "ASSOCIATE_ROUTE_SERVER_INPUT",
         "AssociateRouteServerOutput": "ASSOCIATE_ROUTE_SERVER_OUTPUT",
         "AssociateRouteTableInput": "ASSOCIATE_ROUTE_TABLE_INPUT",
@@ -498,12 +500,16 @@ _registry = ModelRegistry(
         "CreateMacSystemIntegrityProtectionModificationTaskOutput": "CREATE_MAC_SYSTEM_INTEGRITY_PROTECTION_MODIFICATION_TASK_OUTPUT",
         "CreateManagedPrefixListInput": "CREATE_MANAGED_PREFIX_LIST_INPUT",
         "CreateManagedPrefixListOutput": "CREATE_MANAGED_PREFIX_LIST_OUTPUT",
+        "CreateMetricCategoryInput": "CREATE_METRIC_CATEGORY_INPUT",
+        "CreateMetricCategoryOutput": "CREATE_METRIC_CATEGORY_OUTPUT",
         "CreateNatGatewayInput": "CREATE_NAT_GATEWAY_INPUT",
         "CreateNatGatewayOutput": "CREATE_NAT_GATEWAY_OUTPUT",
         "CreateNetworkAclEntryInput": "CREATE_NETWORK_ACL_ENTRY_INPUT",
         "CreateNetworkAclEntryOutput": "CREATE_NETWORK_ACL_ENTRY_OUTPUT",
         "CreateNetworkAclInput": "CREATE_NETWORK_ACL_INPUT",
         "CreateNetworkAclOutput": "CREATE_NETWORK_ACL_OUTPUT",
+        "CreateNetworkingFlexCostAllocationPolicyInput": "CREATE_NETWORKING_FLEX_COST_ALLOCATION_POLICY_INPUT",
+        "CreateNetworkingFlexCostAllocationPolicyOutput": "CREATE_NETWORKING_FLEX_COST_ALLOCATION_POLICY_OUTPUT",
         "CreateNetworkInsightsAccessScopeInput": "CREATE_NETWORK_INSIGHTS_ACCESS_SCOPE_INPUT",
         "CreateNetworkInsightsAccessScopeOutput": "CREATE_NETWORK_INSIGHTS_ACCESS_SCOPE_OUTPUT",
         "CreateNetworkInsightsPathInput": "CREATE_NETWORK_INSIGHTS_PATH_INPUT",
@@ -735,12 +741,16 @@ _registry = ModelRegistry(
         "DeleteLocalGatewayVirtualInterfaceOutput": "DELETE_LOCAL_GATEWAY_VIRTUAL_INTERFACE_OUTPUT",
         "DeleteManagedPrefixListInput": "DELETE_MANAGED_PREFIX_LIST_INPUT",
         "DeleteManagedPrefixListOutput": "DELETE_MANAGED_PREFIX_LIST_OUTPUT",
+        "DeleteMetricCategoryInput": "DELETE_METRIC_CATEGORY_INPUT",
+        "DeleteMetricCategoryOutput": "DELETE_METRIC_CATEGORY_OUTPUT",
         "DeleteNatGatewayInput": "DELETE_NAT_GATEWAY_INPUT",
         "DeleteNatGatewayOutput": "DELETE_NAT_GATEWAY_OUTPUT",
         "DeleteNetworkAclEntryInput": "DELETE_NETWORK_ACL_ENTRY_INPUT",
         "DeleteNetworkAclEntryOutput": "DELETE_NETWORK_ACL_ENTRY_OUTPUT",
         "DeleteNetworkAclInput": "DELETE_NETWORK_ACL_INPUT",
         "DeleteNetworkAclOutput": "DELETE_NETWORK_ACL_OUTPUT",
+        "DeleteNetworkingFlexCostAllocationPoliciesInput": "DELETE_NETWORKING_FLEX_COST_ALLOCATION_POLICIES_INPUT",
+        "DeleteNetworkingFlexCostAllocationPoliciesOutput": "DELETE_NETWORKING_FLEX_COST_ALLOCATION_POLICIES_OUTPUT",
         "DeleteNetworkInsightsAccessScopeAnalysisInput": "DELETE_NETWORK_INSIGHTS_ACCESS_SCOPE_ANALYSIS_INPUT",
         "DeleteNetworkInsightsAccessScopeAnalysisOutput": "DELETE_NETWORK_INSIGHTS_ACCESS_SCOPE_ANALYSIS_OUTPUT",
         "DeleteNetworkInsightsAccessScopeInput": "DELETE_NETWORK_INSIGHTS_ACCESS_SCOPE_INPUT",
@@ -1085,12 +1095,18 @@ _registry = ModelRegistry(
         "DescribeMacModificationTasksOutput": "DESCRIBE_MAC_MODIFICATION_TASKS_OUTPUT",
         "DescribeManagedPrefixListsInput": "DESCRIBE_MANAGED_PREFIX_LISTS_INPUT",
         "DescribeManagedPrefixListsOutput": "DESCRIBE_MANAGED_PREFIX_LISTS_OUTPUT",
+        "DescribeMetricCategoriesInput": "DESCRIBE_METRIC_CATEGORIES_INPUT",
+        "DescribeMetricCategoriesOutput": "DESCRIBE_METRIC_CATEGORIES_OUTPUT",
         "DescribeMovingAddressesInput": "DESCRIBE_MOVING_ADDRESSES_INPUT",
         "DescribeMovingAddressesOutput": "DESCRIBE_MOVING_ADDRESSES_OUTPUT",
         "DescribeNatGatewaysInput": "DESCRIBE_NAT_GATEWAYS_INPUT",
         "DescribeNatGatewaysOutput": "DESCRIBE_NAT_GATEWAYS_OUTPUT",
         "DescribeNetworkAclsInput": "DESCRIBE_NETWORK_ACLS_INPUT",
         "DescribeNetworkAclsOutput": "DESCRIBE_NETWORK_ACLS_OUTPUT",
+        "DescribeNetworkingFlexCostAllocationPoliciesInput": "DESCRIBE_NETWORKING_FLEX_COST_ALLOCATION_POLICIES_INPUT",
+        "DescribeNetworkingFlexCostAllocationPoliciesOutput": "DESCRIBE_NETWORKING_FLEX_COST_ALLOCATION_POLICIES_OUTPUT",
+        "DescribeNetworkingFlexCostAllocationPolicyAssociationsInput": "DESCRIBE_NETWORKING_FLEX_COST_ALLOCATION_POLICY_ASSOCIATIONS_INPUT",
+        "DescribeNetworkingFlexCostAllocationPolicyAssociationsOutput": "DESCRIBE_NETWORKING_FLEX_COST_ALLOCATION_POLICY_ASSOCIATIONS_OUTPUT",
         "DescribeNetworkInsightsAccessScopeAnalysesInput": "DESCRIBE_NETWORK_INSIGHTS_ACCESS_SCOPE_ANALYSES_INPUT",
         "DescribeNetworkInsightsAccessScopeAnalysesOutput": "DESCRIBE_NETWORK_INSIGHTS_ACCESS_SCOPE_ANALYSES_OUTPUT",
         "DescribeNetworkInsightsAccessScopesInput": "DESCRIBE_NETWORK_INSIGHTS_ACCESS_SCOPES_INPUT",
@@ -1362,6 +1378,8 @@ _registry = ModelRegistry(
         "DisassociateIpamResourceDiscoveryOutput": "DISASSOCIATE_IPAM_RESOURCE_DISCOVERY_OUTPUT",
         "DisassociateNatGatewayAddressInput": "DISASSOCIATE_NAT_GATEWAY_ADDRESS_INPUT",
         "DisassociateNatGatewayAddressOutput": "DISASSOCIATE_NAT_GATEWAY_ADDRESS_OUTPUT",
+        "DisassociateNetworkingFlexCostAllocationPolicyInput": "DISASSOCIATE_NETWORKING_FLEX_COST_ALLOCATION_POLICY_INPUT",
+        "DisassociateNetworkingFlexCostAllocationPolicyOutput": "DISASSOCIATE_NETWORKING_FLEX_COST_ALLOCATION_POLICY_OUTPUT",
         "DisassociateRouteServerInput": "DISASSOCIATE_ROUTE_SERVER_INPUT",
         "DisassociateRouteServerOutput": "DISASSOCIATE_ROUTE_SERVER_OUTPUT",
         "DisassociateRouteTableInput": "DISASSOCIATE_ROUTE_TABLE_INPUT",
@@ -1561,6 +1579,18 @@ _registry = ModelRegistry(
         "FleetSpotMaintenanceStrategiesRequest": "FLEET_SPOT_MAINTENANCE_STRATEGIES_REQUEST",
         "FleetStateCode": "FLEET_STATE_CODE",
         "FleetType": "FLEET_TYPE",
+        "FlexCostAllocationAssociationMode": "FLEX_COST_ALLOCATION_ASSOCIATION_MODE",
+        "FlexCostAllocationCidrMapping": "FLEX_COST_ALLOCATION_CIDR_MAPPING",
+        "FlexCostAllocationCidrRangeSpecifications": "FLEX_COST_ALLOCATION_CIDR_RANGE_SPECIFICATIONS",
+        "FlexCostAllocationCostDimension": "FLEX_COST_ALLOCATION_COST_DIMENSION",
+        "FlexCostAllocationNetworkResourceScope": "FLEX_COST_ALLOCATION_NETWORK_RESOURCE_SCOPE",
+        "FlexCostAllocationNetworkResourceScopeType": "FLEX_COST_ALLOCATION_NETWORK_RESOURCE_SCOPE_TYPE",
+        "FlexCostAllocationNetworkResourceType": "FLEX_COST_ALLOCATION_NETWORK_RESOURCE_TYPE",
+        "FlexCostAllocationOperationFailure": "FLEX_COST_ALLOCATION_OPERATION_FAILURE",
+        "FlexCostAllocationPolicyAssociationDescription": "FLEX_COST_ALLOCATION_POLICY_ASSOCIATION_DESCRIPTION",
+        "FlexCostAllocationPolicyDescription": "FLEX_COST_ALLOCATION_POLICY_DESCRIPTION",
+        "FlexCostAllocationPolicyVersion": "FLEX_COST_ALLOCATION_POLICY_VERSION",
+        "FlexCostAllocationReportingGranularity": "FLEX_COST_ALLOCATION_REPORTING_GRANULARITY",
         "FlexibleEnaQueuesSupport": "FLEXIBLE_ENA_QUEUES_SUPPORT",
         "FlowLog": "FLOW_LOG",
         "FlowLogsResourceType": "FLOW_LOGS_RESOURCE_TYPE",
@@ -1680,6 +1710,8 @@ _registry = ModelRegistry(
         "GetManagedPrefixListEntriesOutput": "GET_MANAGED_PREFIX_LIST_ENTRIES_OUTPUT",
         "GetManagedResourceVisibilityInput": "GET_MANAGED_RESOURCE_VISIBILITY_INPUT",
         "GetManagedResourceVisibilityOutput": "GET_MANAGED_RESOURCE_VISIBILITY_OUTPUT",
+        "GetNetworkingFlexCostAllocationPolicyVersionsInput": "GET_NETWORKING_FLEX_COST_ALLOCATION_POLICY_VERSIONS_INPUT",
+        "GetNetworkingFlexCostAllocationPolicyVersionsOutput": "GET_NETWORKING_FLEX_COST_ALLOCATION_POLICY_VERSIONS_OUTPUT",
         "GetNetworkInsightsAccessScopeAnalysisFindingsInput": "GET_NETWORK_INSIGHTS_ACCESS_SCOPE_ANALYSIS_FINDINGS_INPUT",
         "GetNetworkInsightsAccessScopeAnalysisFindingsOutput": "GET_NETWORK_INSIGHTS_ACCESS_SCOPE_ANALYSIS_FINDINGS_OUTPUT",
         "GetNetworkInsightsAccessScopeContentInput": "GET_NETWORK_INSIGHTS_ACCESS_SCOPE_CONTENT_INPUT",
@@ -1853,6 +1885,7 @@ _registry = ModelRegistry(
         "InstanceEventWindowTimeRangeRequest": "INSTANCE_EVENT_WINDOW_TIME_RANGE_REQUEST",
         "InstanceExportDetails": "INSTANCE_EXPORT_DETAILS",
         "InstanceFamilyCreditSpecification": "INSTANCE_FAMILY_CREDIT_SPECIFICATION",
+        "InstanceFlexCostAllocationPolicyDocument": "INSTANCE_FLEX_COST_ALLOCATION_POLICY_DOCUMENT",
         "InstanceGeneration": "INSTANCE_GENERATION",
         "InstanceHealthStatus": "INSTANCE_HEALTH_STATUS",
         "InstanceImageMetadata": "INSTANCE_IMAGE_METADATA",
@@ -2153,6 +2186,7 @@ _registry = ModelRegistry(
         "MemoryMiBRequest": "MEMORY_MI_B_REQUEST",
         "MetadataDefaultHttpTokensState": "METADATA_DEFAULT_HTTP_TOKENS_STATE",
         "Metric": "METRIC",
+        "MetricCategory": "METRIC_CATEGORY",
         "MetricDataResult": "METRIC_DATA_RESULT",
         "MetricPoint": "METRIC_POINT",
         "MetricType": "METRIC_TYPE",
@@ -2245,6 +2279,10 @@ _registry = ModelRegistry(
         "ModifyManagedPrefixListOutput": "MODIFY_MANAGED_PREFIX_LIST_OUTPUT",
         "ModifyManagedResourceVisibilityInput": "MODIFY_MANAGED_RESOURCE_VISIBILITY_INPUT",
         "ModifyManagedResourceVisibilityOutput": "MODIFY_MANAGED_RESOURCE_VISIBILITY_OUTPUT",
+        "ModifyMetricCategoryInput": "MODIFY_METRIC_CATEGORY_INPUT",
+        "ModifyMetricCategoryOutput": "MODIFY_METRIC_CATEGORY_OUTPUT",
+        "ModifyNetworkingFlexCostAllocationPolicyInput": "MODIFY_NETWORKING_FLEX_COST_ALLOCATION_POLICY_INPUT",
+        "ModifyNetworkingFlexCostAllocationPolicyOutput": "MODIFY_NETWORKING_FLEX_COST_ALLOCATION_POLICY_OUTPUT",
         "ModifyNetworkInterfaceAttributeInput": "MODIFY_NETWORK_INTERFACE_ATTRIBUTE_INPUT",
         "ModifyNetworkInterfaceAttributeOutput": "MODIFY_NETWORK_INTERFACE_ATTRIBUTE_OUTPUT",
         "ModifyPrivateDnsNameOptionsInput": "MODIFY_PRIVATE_DNS_NAME_OPTIONS_INPUT",
@@ -2357,6 +2395,7 @@ _registry = ModelRegistry(
         "MoveStatus": "MOVE_STATUS",
         "MovingAddressStatus": "MOVING_ADDRESS_STATUS",
         "MulticastSupportValue": "MULTICAST_SUPPORT_VALUE",
+        "NatFlexCostAllocationPolicyDocument": "NAT_FLEX_COST_ALLOCATION_POLICY_DOCUMENT",
         "NatGateway": "NAT_GATEWAY",
         "NatGatewayAddress": "NAT_GATEWAY_ADDRESS",
         "NatGatewayAddressStatus": "NAT_GATEWAY_ADDRESS_STATUS",
@@ -2429,6 +2468,7 @@ _registry = ModelRegistry(
         "PayerResponsibilityType": "PAYER_RESPONSIBILITY_TYPE",
         "PaymentOption": "PAYMENT_OPTION",
         "PciId": "PCI_ID",
+        "PcxFlexCostAllocationPolicyDocument": "PCX_FLEX_COST_ALLOCATION_POLICY_DOCUMENT",
         "PeeringAttachmentStatus": "PEERING_ATTACHMENT_STATUS",
         "PeeringConnectionOptions": "PEERING_CONNECTION_OPTIONS",
         "PeeringConnectionOptionsRequest": "PEERING_CONNECTION_OPTIONS_REQUEST",
@@ -3245,6 +3285,8 @@ _registry = ModelRegistry(
             "AssociateIpamResourceDiscoveryOutput",
             "AssociateNatGatewayAddressInput",
             "AssociateNatGatewayAddressOutput",
+            "AssociateNetworkingFlexCostAllocationPolicyInput",
+            "AssociateNetworkingFlexCostAllocationPolicyOutput",
             "AssociateRouteServerInput",
             "AssociateRouteServerOutput",
             "AssociateRouteTableInput",
@@ -3597,6 +3639,8 @@ _registry = ModelRegistry(
             "CreateMacSystemIntegrityProtectionModificationTaskOutput",
             "CreateManagedPrefixListInput",
             "CreateManagedPrefixListOutput",
+            "CreateMetricCategoryInput",
+            "CreateMetricCategoryOutput",
             "CreateNatGatewayInput",
             "CreateNatGatewayOutput",
             "CreateNetworkAclEntryInput",
@@ -3611,6 +3655,8 @@ _registry = ModelRegistry(
             "CreateNetworkInterfaceOutput",
             "CreateNetworkInterfacePermissionInput",
             "CreateNetworkInterfacePermissionOutput",
+            "CreateNetworkingFlexCostAllocationPolicyInput",
+            "CreateNetworkingFlexCostAllocationPolicyOutput",
             "CreatePlacementGroupInput",
             "CreatePlacementGroupOutput",
             "CreatePublicIpv4PoolInput",
@@ -3834,6 +3880,8 @@ _registry = ModelRegistry(
             "DeleteLocalGatewayVirtualInterfaceOutput",
             "DeleteManagedPrefixListInput",
             "DeleteManagedPrefixListOutput",
+            "DeleteMetricCategoryInput",
+            "DeleteMetricCategoryOutput",
             "DeleteNatGatewayInput",
             "DeleteNatGatewayOutput",
             "DeleteNetworkAclEntryInput",
@@ -3852,6 +3900,8 @@ _registry = ModelRegistry(
             "DeleteNetworkInterfaceOutput",
             "DeleteNetworkInterfacePermissionInput",
             "DeleteNetworkInterfacePermissionOutput",
+            "DeleteNetworkingFlexCostAllocationPoliciesInput",
+            "DeleteNetworkingFlexCostAllocationPoliciesOutput",
             "DeletePlacementGroupInput",
             "DeletePlacementGroupOutput",
             "DeletePublicIpv4PoolInput",
@@ -4184,6 +4234,8 @@ _registry = ModelRegistry(
             "DescribeMacModificationTasksOutput",
             "DescribeManagedPrefixListsInput",
             "DescribeManagedPrefixListsOutput",
+            "DescribeMetricCategoriesInput",
+            "DescribeMetricCategoriesOutput",
             "DescribeMovingAddressesInput",
             "DescribeMovingAddressesOutput",
             "DescribeNatGatewaysInput",
@@ -4204,6 +4256,10 @@ _registry = ModelRegistry(
             "DescribeNetworkInterfacePermissionsOutput",
             "DescribeNetworkInterfacesInput",
             "DescribeNetworkInterfacesOutput",
+            "DescribeNetworkingFlexCostAllocationPoliciesInput",
+            "DescribeNetworkingFlexCostAllocationPoliciesOutput",
+            "DescribeNetworkingFlexCostAllocationPolicyAssociationsInput",
+            "DescribeNetworkingFlexCostAllocationPolicyAssociationsOutput",
             "DescribeOutpostLagsInput",
             "DescribeOutpostLagsOutput",
             "DescribePlacementGroupsInput",
@@ -4461,6 +4517,8 @@ _registry = ModelRegistry(
             "DisassociateIpamResourceDiscoveryOutput",
             "DisassociateNatGatewayAddressInput",
             "DisassociateNatGatewayAddressOutput",
+            "DisassociateNetworkingFlexCostAllocationPolicyInput",
+            "DisassociateNetworkingFlexCostAllocationPolicyOutput",
             "DisassociateRouteServerInput",
             "DisassociateRouteServerOutput",
             "DisassociateRouteTableInput",
@@ -4660,6 +4718,18 @@ _registry = ModelRegistry(
             "FleetSpotMaintenanceStrategiesRequest",
             "FleetStateCode",
             "FleetType",
+            "FlexCostAllocationAssociationMode",
+            "FlexCostAllocationCidrMapping",
+            "FlexCostAllocationCidrRangeSpecifications",
+            "FlexCostAllocationCostDimension",
+            "FlexCostAllocationNetworkResourceScope",
+            "FlexCostAllocationNetworkResourceScopeType",
+            "FlexCostAllocationNetworkResourceType",
+            "FlexCostAllocationOperationFailure",
+            "FlexCostAllocationPolicyAssociationDescription",
+            "FlexCostAllocationPolicyDescription",
+            "FlexCostAllocationPolicyVersion",
+            "FlexCostAllocationReportingGranularity",
             "FlexibleEnaQueuesSupport",
             "FlowLog",
             "FlowLogsResourceType",
@@ -4783,6 +4853,8 @@ _registry = ModelRegistry(
             "GetNetworkInsightsAccessScopeAnalysisFindingsOutput",
             "GetNetworkInsightsAccessScopeContentInput",
             "GetNetworkInsightsAccessScopeContentOutput",
+            "GetNetworkingFlexCostAllocationPolicyVersionsInput",
+            "GetNetworkingFlexCostAllocationPolicyVersionsOutput",
             "GetPasswordDataInput",
             "GetPasswordDataOutput",
             "GetReservedInstancesExchangeQuoteInput",
@@ -4952,6 +5024,7 @@ _registry = ModelRegistry(
             "InstanceEventWindowTimeRangeRequest",
             "InstanceExportDetails",
             "InstanceFamilyCreditSpecification",
+            "InstanceFlexCostAllocationPolicyDocument",
             "InstanceGeneration",
             "InstanceHealthStatus",
             "InstanceImageMetadata",
@@ -5252,6 +5325,7 @@ _registry = ModelRegistry(
             "MemoryMiBRequest",
             "MetadataDefaultHttpTokensState",
             "Metric",
+            "MetricCategory",
             "MetricDataResult",
             "MetricPoint",
             "MetricType",
@@ -5344,8 +5418,12 @@ _registry = ModelRegistry(
             "ModifyManagedPrefixListOutput",
             "ModifyManagedResourceVisibilityInput",
             "ModifyManagedResourceVisibilityOutput",
+            "ModifyMetricCategoryInput",
+            "ModifyMetricCategoryOutput",
             "ModifyNetworkInterfaceAttributeInput",
             "ModifyNetworkInterfaceAttributeOutput",
+            "ModifyNetworkingFlexCostAllocationPolicyInput",
+            "ModifyNetworkingFlexCostAllocationPolicyOutput",
             "ModifyPrivateDnsNameOptionsInput",
             "ModifyPrivateDnsNameOptionsOutput",
             "ModifyPublicIpDnsNameOptionsInput",
@@ -5456,6 +5534,7 @@ _registry = ModelRegistry(
             "MoveStatus",
             "MovingAddressStatus",
             "MulticastSupportValue",
+            "NatFlexCostAllocationPolicyDocument",
             "NatGateway",
             "NatGatewayAddress",
             "NatGatewayAddressStatus",
@@ -5528,6 +5607,7 @@ _registry = ModelRegistry(
             "PayerResponsibilityType",
             "PaymentOption",
             "PciId",
+            "PcxFlexCostAllocationPolicyDocument",
             "PeeringAttachmentStatus",
             "PeeringConnectionOptions",
             "PeeringConnectionOptionsRequest",
@@ -6250,6 +6330,7 @@ _operation_names = (
     "ASSOCIATE_IPAM_BYOASN",
     "ASSOCIATE_IPAM_RESOURCE_DISCOVERY",
     "ASSOCIATE_NAT_GATEWAY_ADDRESS",
+    "ASSOCIATE_NETWORKING_FLEX_COST_ALLOCATION_POLICY",
     "ASSOCIATE_ROUTE_SERVER",
     "ASSOCIATE_ROUTE_TABLE",
     "ASSOCIATE_SECURITY_GROUP_VPC",
@@ -6336,9 +6417,11 @@ _operation_names = (
     "CREATE_LOCAL_GATEWAY_VIRTUAL_INTERFACE_GROUP",
     "CREATE_MAC_SYSTEM_INTEGRITY_PROTECTION_MODIFICATION_TASK",
     "CREATE_MANAGED_PREFIX_LIST",
+    "CREATE_METRIC_CATEGORY",
     "CREATE_NAT_GATEWAY",
     "CREATE_NETWORK_ACL",
     "CREATE_NETWORK_ACL_ENTRY",
+    "CREATE_NETWORKING_FLEX_COST_ALLOCATION_POLICY",
     "CREATE_NETWORK_INSIGHTS_ACCESS_SCOPE",
     "CREATE_NETWORK_INSIGHTS_PATH",
     "CREATE_NETWORK_INTERFACE",
@@ -6435,9 +6518,11 @@ _operation_names = (
     "DELETE_LOCAL_GATEWAY_VIRTUAL_INTERFACE",
     "DELETE_LOCAL_GATEWAY_VIRTUAL_INTERFACE_GROUP",
     "DELETE_MANAGED_PREFIX_LIST",
+    "DELETE_METRIC_CATEGORY",
     "DELETE_NAT_GATEWAY",
     "DELETE_NETWORK_ACL",
     "DELETE_NETWORK_ACL_ENTRY",
+    "DELETE_NETWORKING_FLEX_COST_ALLOCATION_POLICIES",
     "DELETE_NETWORK_INSIGHTS_ACCESS_SCOPE",
     "DELETE_NETWORK_INSIGHTS_ACCESS_SCOPE_ANALYSIS",
     "DELETE_NETWORK_INSIGHTS_ANALYSIS",
@@ -6605,9 +6690,12 @@ _operation_names = (
     "DESCRIBE_MAC_HOSTS",
     "DESCRIBE_MAC_MODIFICATION_TASKS",
     "DESCRIBE_MANAGED_PREFIX_LISTS",
+    "DESCRIBE_METRIC_CATEGORIES",
     "DESCRIBE_MOVING_ADDRESSES",
     "DESCRIBE_NAT_GATEWAYS",
     "DESCRIBE_NETWORK_ACLS",
+    "DESCRIBE_NETWORKING_FLEX_COST_ALLOCATION_POLICIES",
+    "DESCRIBE_NETWORKING_FLEX_COST_ALLOCATION_POLICY_ASSOCIATIONS",
     "DESCRIBE_NETWORK_INSIGHTS_ACCESS_SCOPE_ANALYSES",
     "DESCRIBE_NETWORK_INSIGHTS_ACCESS_SCOPES",
     "DESCRIBE_NETWORK_INSIGHTS_ANALYSES",
@@ -6735,6 +6823,7 @@ _operation_names = (
     "DISASSOCIATE_IPAM_BYOASN",
     "DISASSOCIATE_IPAM_RESOURCE_DISCOVERY",
     "DISASSOCIATE_NAT_GATEWAY_ADDRESS",
+    "DISASSOCIATE_NETWORKING_FLEX_COST_ALLOCATION_POLICY",
     "DISASSOCIATE_ROUTE_SERVER",
     "DISASSOCIATE_ROUTE_TABLE",
     "DISASSOCIATE_SECURITY_GROUP_VPC",
@@ -6827,6 +6916,7 @@ _operation_names = (
     "GET_MANAGED_PREFIX_LIST_ASSOCIATIONS",
     "GET_MANAGED_PREFIX_LIST_ENTRIES",
     "GET_MANAGED_RESOURCE_VISIBILITY",
+    "GET_NETWORKING_FLEX_COST_ALLOCATION_POLICY_VERSIONS",
     "GET_NETWORK_INSIGHTS_ACCESS_SCOPE_ANALYSIS_FINDINGS",
     "GET_NETWORK_INSIGHTS_ACCESS_SCOPE_CONTENT",
     "GET_PASSWORD_DATA",
@@ -6907,6 +6997,8 @@ _operation_names = (
     "MODIFY_LOCAL_GATEWAY_ROUTE",
     "MODIFY_MANAGED_PREFIX_LIST",
     "MODIFY_MANAGED_RESOURCE_VISIBILITY",
+    "MODIFY_METRIC_CATEGORY",
+    "MODIFY_NETWORKING_FLEX_COST_ALLOCATION_POLICY",
     "MODIFY_NETWORK_INTERFACE_ATTRIBUTE",
     "MODIFY_PRIVATE_DNS_NAME_OPTIONS",
     "MODIFY_PUBLIC_IP_DNS_NAME_OPTIONS",
@@ -7210,6 +7302,12 @@ _operation_data["ASSOCIATE_IPAM_RESOURCE_DISCOVERY"] = (
 
 _operation_data["ASSOCIATE_NAT_GATEWAY_ADDRESS"] = (
     "ASSOCIATE_NAT_GATEWAY_ADDRESS",
+    (),
+    ("aws.auth#sigv4",),
+)
+
+_operation_data["ASSOCIATE_NETWORKING_FLEX_COST_ALLOCATION_POLICY"] = (
+    "ASSOCIATE_NETWORKING_FLEX_COST_ALLOCATION_POLICY",
     (),
     ("aws.auth#sigv4",),
 )
@@ -7644,12 +7742,24 @@ _operation_data["CREATE_MANAGED_PREFIX_LIST"] = (
     ("aws.auth#sigv4",),
 )
 
+_operation_data["CREATE_METRIC_CATEGORY"] = (
+    "CREATE_METRIC_CATEGORY",
+    (),
+    ("aws.auth#sigv4",),
+)
+
 _operation_data["CREATE_NAT_GATEWAY"] = ("CREATE_NAT_GATEWAY", (), ("aws.auth#sigv4",))
 
 _operation_data["CREATE_NETWORK_ACL"] = ("CREATE_NETWORK_ACL", (), ("aws.auth#sigv4",))
 
 _operation_data["CREATE_NETWORK_ACL_ENTRY"] = (
     "CREATE_NETWORK_ACL_ENTRY",
+    (),
+    ("aws.auth#sigv4",),
+)
+
+_operation_data["CREATE_NETWORKING_FLEX_COST_ALLOCATION_POLICY"] = (
+    "CREATE_NETWORKING_FLEX_COST_ALLOCATION_POLICY",
     (),
     ("aws.auth#sigv4",),
 )
@@ -8156,12 +8266,24 @@ _operation_data["DELETE_MANAGED_PREFIX_LIST"] = (
     ("aws.auth#sigv4",),
 )
 
+_operation_data["DELETE_METRIC_CATEGORY"] = (
+    "DELETE_METRIC_CATEGORY",
+    (),
+    ("aws.auth#sigv4",),
+)
+
 _operation_data["DELETE_NAT_GATEWAY"] = ("DELETE_NAT_GATEWAY", (), ("aws.auth#sigv4",))
 
 _operation_data["DELETE_NETWORK_ACL"] = ("DELETE_NETWORK_ACL", (), ("aws.auth#sigv4",))
 
 _operation_data["DELETE_NETWORK_ACL_ENTRY"] = (
     "DELETE_NETWORK_ACL_ENTRY",
+    (),
+    ("aws.auth#sigv4",),
+)
+
+_operation_data["DELETE_NETWORKING_FLEX_COST_ALLOCATION_POLICIES"] = (
+    "DELETE_NETWORKING_FLEX_COST_ALLOCATION_POLICIES",
     (),
     ("aws.auth#sigv4",),
 )
@@ -9094,6 +9216,12 @@ _operation_data["DESCRIBE_MANAGED_PREFIX_LISTS"] = (
     ("aws.auth#sigv4",),
 )
 
+_operation_data["DESCRIBE_METRIC_CATEGORIES"] = (
+    "DESCRIBE_METRIC_CATEGORIES",
+    (),
+    ("aws.auth#sigv4",),
+)
+
 _operation_data["DESCRIBE_MOVING_ADDRESSES"] = (
     "DESCRIBE_MOVING_ADDRESSES",
     (),
@@ -9108,6 +9236,18 @@ _operation_data["DESCRIBE_NAT_GATEWAYS"] = (
 
 _operation_data["DESCRIBE_NETWORK_ACLS"] = (
     "DESCRIBE_NETWORK_ACLS",
+    (),
+    ("aws.auth#sigv4",),
+)
+
+_operation_data["DESCRIBE_NETWORKING_FLEX_COST_ALLOCATION_POLICIES"] = (
+    "DESCRIBE_NETWORKING_FLEX_COST_ALLOCATION_POLICIES",
+    (),
+    ("aws.auth#sigv4",),
+)
+
+_operation_data["DESCRIBE_NETWORKING_FLEX_COST_ALLOCATION_POLICY_ASSOCIATIONS"] = (
+    "DESCRIBE_NETWORKING_FLEX_COST_ALLOCATION_POLICY_ASSOCIATIONS",
     (),
     ("aws.auth#sigv4",),
 )
@@ -9838,6 +9978,12 @@ _operation_data["DISASSOCIATE_NAT_GATEWAY_ADDRESS"] = (
     ("aws.auth#sigv4",),
 )
 
+_operation_data["DISASSOCIATE_NETWORKING_FLEX_COST_ALLOCATION_POLICY"] = (
+    "DISASSOCIATE_NETWORKING_FLEX_COST_ALLOCATION_POLICY",
+    (),
+    ("aws.auth#sigv4",),
+)
+
 _operation_data["DISASSOCIATE_ROUTE_SERVER"] = (
     "DISASSOCIATE_ROUTE_SERVER",
     (),
@@ -10358,6 +10504,12 @@ _operation_data["GET_MANAGED_RESOURCE_VISIBILITY"] = (
     ("aws.auth#sigv4",),
 )
 
+_operation_data["GET_NETWORKING_FLEX_COST_ALLOCATION_POLICY_VERSIONS"] = (
+    "GET_NETWORKING_FLEX_COST_ALLOCATION_POLICY_VERSIONS",
+    (),
+    ("aws.auth#sigv4",),
+)
+
 _operation_data["GET_NETWORK_INSIGHTS_ACCESS_SCOPE_ANALYSIS_FINDINGS"] = (
     "GET_NETWORK_INSIGHTS_ACCESS_SCOPE_ANALYSIS_FINDINGS",
     (),
@@ -10782,6 +10934,18 @@ _operation_data["MODIFY_MANAGED_PREFIX_LIST"] = (
 
 _operation_data["MODIFY_MANAGED_RESOURCE_VISIBILITY"] = (
     "MODIFY_MANAGED_RESOURCE_VISIBILITY",
+    (),
+    ("aws.auth#sigv4",),
+)
+
+_operation_data["MODIFY_METRIC_CATEGORY"] = (
+    "MODIFY_METRIC_CATEGORY",
+    (),
+    ("aws.auth#sigv4",),
+)
+
+_operation_data["MODIFY_NETWORKING_FLEX_COST_ALLOCATION_POLICY"] = (
+    "MODIFY_NETWORKING_FLEX_COST_ALLOCATION_POLICY",
     (),
     ("aws.auth#sigv4",),
 )

@@ -151,7 +151,7 @@ class AsyncQBusinessClient(AsyncClient[AsyncQBusinessConfig]):
       Reference](https://docs.aws.amazon.com/general/latest/gr/amazonq.html)*
     """
 
-    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
+    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
 
     @_overload
     async def associate_permission(

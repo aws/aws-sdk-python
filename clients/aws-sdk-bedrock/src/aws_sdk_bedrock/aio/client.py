@@ -140,7 +140,7 @@ class AsyncBedrockClient(AsyncClient[AsyncBedrockConfig]):
     evaluating Amazon Bedrock models.
     """
 
-    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
+    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
 
     @_overload
     async def batch_delete_advanced_prompt_optimization_job(

@@ -248,7 +248,7 @@ class AsyncRDSClient(AsyncClient[AsyncRDSConfig]):
       API](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Using_the_Query_API.html).
     """
 
-    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
+    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
 
     @_overload
     async def add_role_to_db_cluster(

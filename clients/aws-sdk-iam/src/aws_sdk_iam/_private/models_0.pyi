@@ -3710,7 +3710,7 @@ class DeleteServiceLinkedRoleOutput(_SerdeShape):
     """
     The deletion task identifier that you can use to check the status of the
     deletion. This identifier is returned in the format
-    `task/aws-service-role/``<service-principal-name>`{=html}`/``<role-name>`{=html}`/``<task-uuid>`{=html}.
+    `task/aws-service-role/<service-principal-name>/<role-name>/<task-uuid>`.
     """
     response_metadata: ResponseMetadata = ...
     """
@@ -6843,7 +6843,7 @@ class GetServiceLinkedRoleDeletionStatusInput(_SerdeShape):
     The deletion task identifier. This identifier is returned by the
     [DeleteServiceLinkedRole](https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteServiceLinkedRole.html)
     operation in the format
-    `task/aws-service-role/``<service-principal-name>`{=html}`/``<role-name>`{=html}`/``<task-uuid>`{=html}.
+    `task/aws-service-role/<service-principal-name>/<role-name>/<task-uuid>`.
     """
 
 class GetServiceLinkedRoleDeletionStatusInputDict(TypedDict, total=False):
@@ -6854,7 +6854,7 @@ class GetServiceLinkedRoleDeletionStatusInputDict(TypedDict, total=False):
     The deletion task identifier. This identifier is returned by the
     [DeleteServiceLinkedRole](https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteServiceLinkedRole.html)
     operation in the format
-    `task/aws-service-role/``<service-principal-name>`{=html}`/``<role-name>`{=html}`/``<task-uuid>`{=html}.
+    `task/aws-service-role/<service-principal-name>/<role-name>/<task-uuid>`.
     """
 
 @dataclass(kw_only=True)

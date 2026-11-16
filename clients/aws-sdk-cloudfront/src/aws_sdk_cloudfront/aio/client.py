@@ -202,7 +202,7 @@ class AsyncCloudFrontClient(AsyncClient[AsyncCloudFrontConfig]):
     Guide](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html).
     """
 
-    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
+    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
 
     @_overload
     async def associate_alias(

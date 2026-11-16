@@ -21,12 +21,16 @@ _registry = ModelRegistry(
     renames={},
     index={
         "APIErrorType": "API_ERROR_TYPE",
+        "AssociateCrossAccountReplicaInput": "ASSOCIATE_CROSS_ACCOUNT_REPLICA_INPUT",
+        "AssociateCrossAccountReplicaOutput": "ASSOCIATE_CROSS_ACCOUNT_REPLICA_OUTPUT",
         "BatchGetSecretValueInput": "BATCH_GET_SECRET_VALUE_INPUT",
         "BatchGetSecretValueOutput": "BATCH_GET_SECRET_VALUE_OUTPUT",
         "CancelRotateSecretInput": "CANCEL_ROTATE_SECRET_INPUT",
         "CancelRotateSecretOutput": "CANCEL_ROTATE_SECRET_OUTPUT",
         "CreateSecretInput": "CREATE_SECRET_INPUT",
         "CreateSecretOutput": "CREATE_SECRET_OUTPUT",
+        "CrossAccountPrimaryType": "CROSS_ACCOUNT_PRIMARY_TYPE",
+        "CrossAccountReplicaEntry": "CROSS_ACCOUNT_REPLICA_ENTRY",
         "DecryptionFailure": "DECRYPTION_FAILURE",
         "DeleteResourcePolicyInput": "DELETE_RESOURCE_POLICY_INPUT",
         "DeleteResourcePolicyOutput": "DELETE_RESOURCE_POLICY_OUTPUT",
@@ -34,6 +38,8 @@ _registry = ModelRegistry(
         "DeleteSecretOutput": "DELETE_SECRET_OUTPUT",
         "DescribeSecretInput": "DESCRIBE_SECRET_INPUT",
         "DescribeSecretOutput": "DESCRIBE_SECRET_OUTPUT",
+        "DisassociateCrossAccountReplicaInput": "DISASSOCIATE_CROSS_ACCOUNT_REPLICA_INPUT",
+        "DisassociateCrossAccountReplicaOutput": "DISASSOCIATE_CROSS_ACCOUNT_REPLICA_OUTPUT",
         "EncryptionFailure": "ENCRYPTION_FAILURE",
         "ExternalSecretRotationMetadataItem": "EXTERNAL_SECRET_ROTATION_METADATA_ITEM",
         "Filter": "FILTER",
@@ -49,6 +55,8 @@ _registry = ModelRegistry(
         "InvalidParameterException": "INVALID_PARAMETER_EXCEPTION",
         "InvalidRequestException": "INVALID_REQUEST_EXCEPTION",
         "LimitExceededException": "LIMIT_EXCEEDED_EXCEPTION",
+        "ListResourcePoliciesInput": "LIST_RESOURCE_POLICIES_INPUT",
+        "ListResourcePoliciesOutput": "LIST_RESOURCE_POLICIES_OUTPUT",
         "ListSecretsInput": "LIST_SECRETS_INPUT",
         "ListSecretsOutput": "LIST_SECRETS_OUTPUT",
         "ListSecretVersionIdsInput": "LIST_SECRET_VERSION_IDS_INPUT",
@@ -63,11 +71,13 @@ _registry = ModelRegistry(
         "RemoveRegionsFromReplicationInput": "REMOVE_REGIONS_FROM_REPLICATION_INPUT",
         "RemoveRegionsFromReplicationOutput": "REMOVE_REGIONS_FROM_REPLICATION_OUTPUT",
         "ReplicaRegionType": "REPLICA_REGION_TYPE",
+        "ReplicaRestrictionType": "REPLICA_RESTRICTION_TYPE",
         "ReplicateSecretToRegionsInput": "REPLICATE_SECRET_TO_REGIONS_INPUT",
         "ReplicateSecretToRegionsOutput": "REPLICATE_SECRET_TO_REGIONS_OUTPUT",
         "ReplicationStatusType": "REPLICATION_STATUS_TYPE",
         "ResourceExistsException": "RESOURCE_EXISTS_EXCEPTION",
         "ResourceNotFoundException": "RESOURCE_NOT_FOUND_EXCEPTION",
+        "ResourcePolicySummary": "RESOURCE_POLICY_SUMMARY",
         "RestoreSecretInput": "RESTORE_SECRET_INPUT",
         "RestoreSecretOutput": "RESTORE_SECRET_OUTPUT",
         "RotateSecretInput": "ROTATE_SECRET_INPUT",
@@ -97,12 +107,16 @@ _registry = ModelRegistry(
     shape_names=frozenset(
         {
             "APIErrorType",
+            "AssociateCrossAccountReplicaInput",
+            "AssociateCrossAccountReplicaOutput",
             "BatchGetSecretValueInput",
             "BatchGetSecretValueOutput",
             "CancelRotateSecretInput",
             "CancelRotateSecretOutput",
             "CreateSecretInput",
             "CreateSecretOutput",
+            "CrossAccountPrimaryType",
+            "CrossAccountReplicaEntry",
             "DecryptionFailure",
             "DeleteResourcePolicyInput",
             "DeleteResourcePolicyOutput",
@@ -110,6 +124,8 @@ _registry = ModelRegistry(
             "DeleteSecretOutput",
             "DescribeSecretInput",
             "DescribeSecretOutput",
+            "DisassociateCrossAccountReplicaInput",
+            "DisassociateCrossAccountReplicaOutput",
             "EncryptionFailure",
             "ExternalSecretRotationMetadataItem",
             "Filter",
@@ -125,6 +141,8 @@ _registry = ModelRegistry(
             "InvalidParameterException",
             "InvalidRequestException",
             "LimitExceededException",
+            "ListResourcePoliciesInput",
+            "ListResourcePoliciesOutput",
             "ListSecretVersionIdsInput",
             "ListSecretVersionIdsOutput",
             "ListSecretsInput",
@@ -139,11 +157,13 @@ _registry = ModelRegistry(
             "RemoveRegionsFromReplicationInput",
             "RemoveRegionsFromReplicationOutput",
             "ReplicaRegionType",
+            "ReplicaRestrictionType",
             "ReplicateSecretToRegionsInput",
             "ReplicateSecretToRegionsOutput",
             "ReplicationStatusType",
             "ResourceExistsException",
             "ResourceNotFoundException",
+            "ResourcePolicySummary",
             "RestoreSecretInput",
             "RestoreSecretOutput",
             "RotateSecretInput",
@@ -176,15 +196,18 @@ _registry = ModelRegistry(
 
 _operation_data = {}
 _operation_names = (
+    "ASSOCIATE_CROSS_ACCOUNT_REPLICA",
     "BATCH_GET_SECRET_VALUE",
     "CANCEL_ROTATE_SECRET",
     "CREATE_SECRET",
     "DELETE_RESOURCE_POLICY",
     "DELETE_SECRET",
     "DESCRIBE_SECRET",
+    "DISASSOCIATE_CROSS_ACCOUNT_REPLICA",
     "GET_RANDOM_PASSWORD",
     "GET_RESOURCE_POLICY",
     "GET_SECRET_VALUE",
+    "LIST_RESOURCE_POLICIES",
     "LIST_SECRETS",
     "LIST_SECRET_VERSION_IDS",
     "PUT_RESOURCE_POLICY",
@@ -223,6 +246,18 @@ def __getattr__(name: str):
 def __dir__():
     return sorted({*globals(), *_operation_names})
 
+
+_operation_data["ASSOCIATE_CROSS_ACCOUNT_REPLICA"] = (
+    "ASSOCIATE_CROSS_ACCOUNT_REPLICA",
+    (
+        "com.amazonaws.secretsmanager#InternalServiceError",
+        "com.amazonaws.secretsmanager#InvalidParameterException",
+        "com.amazonaws.secretsmanager#InvalidRequestException",
+        "com.amazonaws.secretsmanager#LimitExceededException",
+        "com.amazonaws.secretsmanager#ResourceNotFoundException",
+    ),
+    ("aws.auth#sigv4",),
+)
 
 _operation_data["BATCH_GET_SECRET_VALUE"] = (
     "BATCH_GET_SECRET_VALUE",
@@ -297,6 +332,17 @@ _operation_data["DESCRIBE_SECRET"] = (
     ("aws.auth#sigv4",),
 )
 
+_operation_data["DISASSOCIATE_CROSS_ACCOUNT_REPLICA"] = (
+    "DISASSOCIATE_CROSS_ACCOUNT_REPLICA",
+    (
+        "com.amazonaws.secretsmanager#InternalServiceError",
+        "com.amazonaws.secretsmanager#InvalidParameterException",
+        "com.amazonaws.secretsmanager#InvalidRequestException",
+        "com.amazonaws.secretsmanager#ResourceNotFoundException",
+    ),
+    ("aws.auth#sigv4",),
+)
+
 _operation_data["GET_RANDOM_PASSWORD"] = (
     "GET_RANDOM_PASSWORD",
     (
@@ -323,6 +369,18 @@ _operation_data["GET_SECRET_VALUE"] = (
     (
         "com.amazonaws.secretsmanager#DecryptionFailure",
         "com.amazonaws.secretsmanager#InternalServiceError",
+        "com.amazonaws.secretsmanager#InvalidParameterException",
+        "com.amazonaws.secretsmanager#InvalidRequestException",
+        "com.amazonaws.secretsmanager#ResourceNotFoundException",
+    ),
+    ("aws.auth#sigv4",),
+)
+
+_operation_data["LIST_RESOURCE_POLICIES"] = (
+    "LIST_RESOURCE_POLICIES",
+    (
+        "com.amazonaws.secretsmanager#InternalServiceError",
+        "com.amazonaws.secretsmanager#InvalidNextTokenException",
         "com.amazonaws.secretsmanager#InvalidParameterException",
         "com.amazonaws.secretsmanager#InvalidRequestException",
         "com.amazonaws.secretsmanager#ResourceNotFoundException",

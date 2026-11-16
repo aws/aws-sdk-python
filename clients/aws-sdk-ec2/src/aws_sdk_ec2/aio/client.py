@@ -48,6 +48,7 @@ if TYPE_CHECKING:
         AssociateIpamByoasnOutput,
         AssociateIpamResourceDiscoveryOutput,
         AssociateNatGatewayAddressOutput,
+        AssociateNetworkingFlexCostAllocationPolicyOutput,
         AssociateRouteServerOutput,
         AssociateRouteTableOutput,
         AssociateSecurityGroupVpcOutput,
@@ -134,6 +135,7 @@ if TYPE_CHECKING:
         CreateLocalGatewayVirtualInterfaceOutput,
         CreateMacSystemIntegrityProtectionModificationTaskOutput,
         CreateManagedPrefixListOutput,
+        CreateMetricCategoryOutput,
         CreateNatGatewayOutput,
         CreateNetworkAclEntryOutput,
         CreateNetworkAclOutput,
@@ -141,6 +143,7 @@ if TYPE_CHECKING:
         CreateNetworkInsightsPathOutput,
         CreateNetworkInterfaceOutput,
         CreateNetworkInterfacePermissionOutput,
+        CreateNetworkingFlexCostAllocationPolicyOutput,
         CreatePlacementGroupOutput,
         CreatePublicIpv4PoolOutput,
         CreateReplaceRootVolumeTaskOutput,
@@ -233,6 +236,7 @@ if TYPE_CHECKING:
         DeleteLocalGatewayVirtualInterfaceGroupOutput,
         DeleteLocalGatewayVirtualInterfaceOutput,
         DeleteManagedPrefixListOutput,
+        DeleteMetricCategoryOutput,
         DeleteNatGatewayOutput,
         DeleteNetworkAclEntryOutput,
         DeleteNetworkAclOutput,
@@ -242,6 +246,7 @@ if TYPE_CHECKING:
         DeleteNetworkInsightsPathOutput,
         DeleteNetworkInterfaceOutput,
         DeleteNetworkInterfacePermissionOutput,
+        DeleteNetworkingFlexCostAllocationPoliciesOutput,
         DeletePlacementGroupOutput,
         DeletePublicIpv4PoolOutput,
         DeleteQueuedReservedInstancesOutput,
@@ -403,6 +408,7 @@ if TYPE_CHECKING:
         DescribeMacHostsOutput,
         DescribeMacModificationTasksOutput,
         DescribeManagedPrefixListsOutput,
+        DescribeMetricCategoriesOutput,
         DescribeMovingAddressesOutput,
         DescribeNatGatewaysOutput,
         DescribeNetworkAclsOutput,
@@ -413,6 +419,8 @@ if TYPE_CHECKING:
         DescribeNetworkInterfaceAttributeOutput,
         DescribeNetworkInterfacePermissionsOutput,
         DescribeNetworkInterfacesOutput,
+        DescribeNetworkingFlexCostAllocationPoliciesOutput,
+        DescribeNetworkingFlexCostAllocationPolicyAssociationsOutput,
         DescribeOutpostLagsOutput,
         DescribePlacementGroupsOutput,
         DescribePrefixListsOutput,
@@ -533,6 +541,7 @@ if TYPE_CHECKING:
         DisassociateIpamByoasnOutput,
         DisassociateIpamResourceDiscoveryOutput,
         DisassociateNatGatewayAddressOutput,
+        DisassociateNetworkingFlexCostAllocationPolicyOutput,
         DisassociateRouteServerOutput,
         DisassociateRouteTableOutput,
         DisassociateSecurityGroupVpcOutput,
@@ -627,6 +636,7 @@ if TYPE_CHECKING:
         GetManagedResourceVisibilityOutput,
         GetNetworkInsightsAccessScopeAnalysisFindingsOutput,
         GetNetworkInsightsAccessScopeContentOutput,
+        GetNetworkingFlexCostAllocationPolicyVersionsOutput,
         GetPasswordDataOutput,
         GetReservedInstancesExchangeQuoteOutput,
         GetRouteServerAssociationsOutput,
@@ -705,7 +715,9 @@ if TYPE_CHECKING:
         ModifyLocalGatewayRouteOutput,
         ModifyManagedPrefixListOutput,
         ModifyManagedResourceVisibilityOutput,
+        ModifyMetricCategoryOutput,
         ModifyNetworkInterfaceAttributeOutput,
+        ModifyNetworkingFlexCostAllocationPolicyOutput,
         ModifyPrivateDnsNameOptionsOutput,
         ModifyPublicIpDnsNameOptionsOutput,
         ModifyReservedInstancesOutput,
@@ -879,7 +891,7 @@ class AsyncEC2Client(AsyncClient[AsyncEC2Config]):
     - [Amazon Web Services SDKs](https://builder.aws.com/build/tools)
     """
 
-    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
+    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
 
     @_overload
     async def accept_address_transfer(
@@ -2343,6 +2355,63 @@ class AsyncEC2Client(AsyncClient[AsyncEC2Config]):
         return await self._invoke(
             self._select_input(_models.ASSOCIATE_NAT_GATEWAY_ADDRESS, args, kwargs),
             _models.ASSOCIATE_NAT_GATEWAY_ADDRESS,
+            [],
+            plugins,
+        )
+
+    @_overload
+    async def associate_networking_flex_cost_allocation_policy(
+        self,
+        request: _models.AssociateNetworkingFlexCostAllocationPolicyInput
+        | _models.AssociateNetworkingFlexCostAllocationPolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AssociateNetworkingFlexCostAllocationPolicyOutput: ...
+
+    @_overload
+    async def associate_networking_flex_cost_allocation_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AssociateNetworkingFlexCostAllocationPolicyInputDict],
+    ) -> AssociateNetworkingFlexCostAllocationPolicyOutput:
+        """
+        Associates a flex cost allocation policy with one or more network
+        resources. You can associate the policy directly with specific resources
+        by resource ID, or you can associate it with a scope of resources in an
+        account, Amazon VPC, or subnet.
+
+        The following limits apply:
+
+        - A request can associate up to 20 resources.
+
+        - A policy can have up to 100 active associations.
+
+        - A network resource can have only one active association, across all
+          policies. If a resource is already associated, the response includes
+          it in the failures with the code `ResourceAlreadyAssociated`.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `AssociateNetworkingFlexCostAllocationPolicyOutput`.
+        """
+
+    async def associate_networking_flex_cost_allocation_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AssociateNetworkingFlexCostAllocationPolicyOutput:
+        return await self._invoke(
+            self._select_input(
+                _models.ASSOCIATE_NETWORKING_FLEX_COST_ALLOCATION_POLICY, args, kwargs
+            ),
+            _models.ASSOCIATE_NETWORKING_FLEX_COST_ALLOCATION_POLICY,
             [],
             plugins,
         )
@@ -5478,7 +5547,8 @@ class AsyncEC2Client(AsyncClient[AsyncEC2Config]):
         Creates a report that shows how your image is used across other Amazon
         Web Services accounts. The report provides visibility into which
         accounts are using the specified image, and how many resources (EC2
-        instances or launch templates) are referencing it.
+        instances, EC2 launch templates, Image Builder image recipes, or Image
+        Builder container recipes) are referencing it.
 
         For more information, see [View your AMI
         usage](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/your-ec2-ami-usage.html)
@@ -6845,6 +6915,54 @@ class AsyncEC2Client(AsyncClient[AsyncEC2Config]):
         )
 
     @_overload
+    async def create_metric_category(
+        self,
+        request: _models.CreateMetricCategoryInput
+        | _models.CreateMetricCategoryInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateMetricCategoryOutput: ...
+
+    @_overload
+    async def create_metric_category(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateMetricCategoryInputDict],
+    ) -> CreateMetricCategoryOutput:
+        """
+        Creates a metric category. A metric category is a set of additional
+        metrics that you can associate with an instance that has detailed
+        monitoring enabled.
+
+        For more information, see [Use metric categories for additional
+        metrics](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-detailed-monitoring.html#detailed-monitoring-metric-categories)
+        in the *Amazon EC2 User Guide*.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `CreateMetricCategoryOutput`.
+        """
+
+    async def create_metric_category(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateMetricCategoryOutput:
+        return await self._invoke(
+            self._select_input(_models.CREATE_METRIC_CATEGORY, args, kwargs),
+            _models.CREATE_METRIC_CATEGORY,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def create_nat_gateway(
         self,
         request: _models.CreateNatGatewayInput | _models.CreateNatGatewayInputDict,
@@ -7017,6 +7135,62 @@ class AsyncEC2Client(AsyncClient[AsyncEC2Config]):
         return await self._invoke(
             self._select_input(_models.CREATE_NETWORK_ACL_ENTRY, args, kwargs),
             _models.CREATE_NETWORK_ACL_ENTRY,
+            [],
+            plugins,
+        )
+
+    @_overload
+    async def create_networking_flex_cost_allocation_policy(
+        self,
+        request: _models.CreateNetworkingFlexCostAllocationPolicyInput
+        | _models.CreateNetworkingFlexCostAllocationPolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateNetworkingFlexCostAllocationPolicyOutput: ...
+
+    @_overload
+    async def create_networking_flex_cost_allocation_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateNetworkingFlexCostAllocationPolicyInputDict],
+    ) -> CreateNetworkingFlexCostAllocationPolicyOutput:
+        """
+        Creates a flex cost allocation policy for Networking Flexible Cost
+        Allocation (FCA), a feature of Amazon Virtual Private Cloud (Amazon
+        VPC). The policy allocates the charges of a shared networking resource
+        at the reporting granularity that you specify. You can create a policy
+        for one of the following resource types: NAT gateways, Amazon VPC
+        peering connections, or EC2 instances. Policies can allocate data
+        transfer charges for all three types, and data processing charges for
+        NAT gateways.
+
+        You can have up to 100 policies per account in each Amazon Web Services
+        Region, plus one additional policy per network resource type created by
+        a declarative policy, for a maximum of 103 policies in an Amazon Web
+        Services Region.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `CreateNetworkingFlexCostAllocationPolicyOutput`.
+        """
+
+    async def create_networking_flex_cost_allocation_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateNetworkingFlexCostAllocationPolicyOutput:
+        return await self._invoke(
+            self._select_input(
+                _models.CREATE_NETWORKING_FLEX_COST_ALLOCATION_POLICY, args, kwargs
+            ),
+            _models.CREATE_NETWORKING_FLEX_COST_ALLOCATION_POLICY,
             [],
             plugins,
         )
@@ -11807,6 +11981,53 @@ class AsyncEC2Client(AsyncClient[AsyncEC2Config]):
         )
 
     @_overload
+    async def delete_metric_category(
+        self,
+        request: _models.DeleteMetricCategoryInput
+        | _models.DeleteMetricCategoryInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteMetricCategoryOutput: ...
+
+    @_overload
+    async def delete_metric_category(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteMetricCategoryInputDict],
+    ) -> DeleteMetricCategoryOutput:
+        """
+        Deletes the specified metric category. Associations between the metric
+        category and your instances are removed asynchronously.
+
+        For more information, see [Use metric categories for additional
+        metrics](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-detailed-monitoring.html#detailed-monitoring-metric-categories)
+        in the *Amazon EC2 User Guide*.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `DeleteMetricCategoryOutput`.
+        """
+
+    async def delete_metric_category(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteMetricCategoryOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_METRIC_CATEGORY, args, kwargs),
+            _models.DELETE_METRIC_CATEGORY,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_nat_gateway(
         self,
         request: _models.DeleteNatGatewayInput | _models.DeleteNatGatewayInputDict,
@@ -11931,6 +12152,50 @@ class AsyncEC2Client(AsyncClient[AsyncEC2Config]):
         return await self._invoke(
             self._select_input(_models.DELETE_NETWORK_ACL_ENTRY, args, kwargs),
             _models.DELETE_NETWORK_ACL_ENTRY,
+            [],
+            plugins,
+        )
+
+    @_overload
+    async def delete_networking_flex_cost_allocation_policies(
+        self,
+        request: _models.DeleteNetworkingFlexCostAllocationPoliciesInput
+        | _models.DeleteNetworkingFlexCostAllocationPoliciesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteNetworkingFlexCostAllocationPoliciesOutput: ...
+
+    @_overload
+    async def delete_networking_flex_cost_allocation_policies(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteNetworkingFlexCostAllocationPoliciesInputDict],
+    ) -> DeleteNetworkingFlexCostAllocationPoliciesOutput:
+        """
+        Deletes one or more flex cost allocation policies.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `DeleteNetworkingFlexCostAllocationPoliciesOutput`.
+        """
+
+    async def delete_networking_flex_cost_allocation_policies(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteNetworkingFlexCostAllocationPoliciesOutput:
+        return await self._invoke(
+            self._select_input(
+                _models.DELETE_NETWORKING_FLEX_COST_ALLOCATION_POLICIES, args, kwargs
+            ),
+            _models.DELETE_NETWORKING_FLEX_COST_ALLOCATION_POLICIES,
             [],
             plugins,
         )
@@ -19891,6 +20156,53 @@ class AsyncEC2Client(AsyncClient[AsyncEC2Config]):
         )
 
     @_overload
+    async def describe_metric_categories(
+        self,
+        request: _models.DescribeMetricCategoriesInput
+        | _models.DescribeMetricCategoriesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeMetricCategoriesOutput: ...
+
+    @_overload
+    async def describe_metric_categories(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeMetricCategoriesInputDict],
+    ) -> DescribeMetricCategoriesOutput:
+        """
+        Describes the specified metric categories, or all of your metric
+        categories.
+
+        For more information, see [Use metric categories for additional
+        metrics](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-detailed-monitoring.html#detailed-monitoring-metric-categories)
+        in the *Amazon EC2 User Guide*.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `DescribeMetricCategoriesOutput`.
+        """
+
+    async def describe_metric_categories(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeMetricCategoriesOutput:
+        return await self._invoke(
+            self._select_input(_models.DESCRIBE_METRIC_CATEGORIES, args, kwargs),
+            _models.DESCRIBE_METRIC_CATEGORIES,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def describe_moving_addresses(
         self,
         request: _models.DescribeMovingAddressesInput
@@ -20027,6 +20339,104 @@ class AsyncEC2Client(AsyncClient[AsyncEC2Config]):
         return await self._invoke(
             self._select_input(_models.DESCRIBE_NETWORK_ACLS, args, kwargs),
             _models.DESCRIBE_NETWORK_ACLS,
+            [],
+            plugins,
+        )
+
+    @_overload
+    async def describe_networking_flex_cost_allocation_policies(
+        self,
+        request: _models.DescribeNetworkingFlexCostAllocationPoliciesInput
+        | _models.DescribeNetworkingFlexCostAllocationPoliciesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeNetworkingFlexCostAllocationPoliciesOutput: ...
+
+    @_overload
+    async def describe_networking_flex_cost_allocation_policies(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[
+            _models.DescribeNetworkingFlexCostAllocationPoliciesInputDict
+        ],
+    ) -> DescribeNetworkingFlexCostAllocationPoliciesOutput:
+        """
+        Describes one or more of your flex cost allocation policies. We
+        recommend using pagination to ensure that the operation returns quickly
+        and successfully.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `DescribeNetworkingFlexCostAllocationPoliciesOutput`.
+        """
+
+    async def describe_networking_flex_cost_allocation_policies(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeNetworkingFlexCostAllocationPoliciesOutput:
+        return await self._invoke(
+            self._select_input(
+                _models.DESCRIBE_NETWORKING_FLEX_COST_ALLOCATION_POLICIES, args, kwargs
+            ),
+            _models.DESCRIBE_NETWORKING_FLEX_COST_ALLOCATION_POLICIES,
+            [],
+            plugins,
+        )
+
+    @_overload
+    async def describe_networking_flex_cost_allocation_policy_associations(
+        self,
+        request: _models.DescribeNetworkingFlexCostAllocationPolicyAssociationsInput
+        | _models.DescribeNetworkingFlexCostAllocationPolicyAssociationsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeNetworkingFlexCostAllocationPolicyAssociationsOutput: ...
+
+    @_overload
+    async def describe_networking_flex_cost_allocation_policy_associations(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[
+            _models.DescribeNetworkingFlexCostAllocationPolicyAssociationsInputDict
+        ],
+    ) -> DescribeNetworkingFlexCostAllocationPolicyAssociationsOutput:
+        """
+        Describes the associations between your flex cost allocation policies
+        and network resources. We recommend using pagination to ensure that the
+        operation returns quickly and successfully.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `DescribeNetworkingFlexCostAllocationPolicyAssociationsOutput`.
+        """
+
+    async def describe_networking_flex_cost_allocation_policy_associations(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeNetworkingFlexCostAllocationPolicyAssociationsOutput:
+        return await self._invoke(
+            self._select_input(
+                _models.DESCRIBE_NETWORKING_FLEX_COST_ALLOCATION_POLICY_ASSOCIATIONS,
+                args,
+                kwargs,
+            ),
+            _models.DESCRIBE_NETWORKING_FLEX_COST_ALLOCATION_POLICY_ASSOCIATIONS,
             [],
             plugins,
         )
@@ -20317,9 +20727,9 @@ class AsyncEC2Client(AsyncClient[AsyncEC2Config]):
         interfaces.
 
         If you have a large number of network interfaces, the operation fails
-        unless you use pagination or one of the following filters: `group-id`,
-        `mac-address`, `private-dns-name`, `private-ip-address`, `subnet-id`, or
-        `vpc-id`.
+        unless you use pagination or one of the following filters:
+        `attachment.instance-id`, `group-id`, `mac-address`, `private-dns-name`,
+        `private-ip-address`, `subnet-id`, or `vpc-id`.
 
         Warning:
             We strongly recommend using only paginated requests. Unpaginated
@@ -26249,6 +26659,55 @@ class AsyncEC2Client(AsyncClient[AsyncEC2Config]):
         )
 
     @_overload
+    async def disassociate_networking_flex_cost_allocation_policy(
+        self,
+        request: _models.DisassociateNetworkingFlexCostAllocationPolicyInput
+        | _models.DisassociateNetworkingFlexCostAllocationPolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DisassociateNetworkingFlexCostAllocationPolicyOutput: ...
+
+    @_overload
+    async def disassociate_networking_flex_cost_allocation_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[
+            _models.DisassociateNetworkingFlexCostAllocationPolicyInputDict
+        ],
+    ) -> DisassociateNetworkingFlexCostAllocationPolicyOutput:
+        """
+        Disassociates a flex cost allocation policy from one or more network
+        resources.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `DisassociateNetworkingFlexCostAllocationPolicyOutput`.
+        """
+
+    async def disassociate_networking_flex_cost_allocation_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DisassociateNetworkingFlexCostAllocationPolicyOutput:
+        return await self._invoke(
+            self._select_input(
+                _models.DISASSOCIATE_NETWORKING_FLEX_COST_ALLOCATION_POLICY,
+                args,
+                kwargs,
+            ),
+            _models.DISASSOCIATE_NETWORKING_FLEX_COST_ALLOCATION_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def disassociate_route_server(
         self,
         request: _models.DisassociateRouteServerInput
@@ -30745,6 +31204,54 @@ class AsyncEC2Client(AsyncClient[AsyncEC2Config]):
         )
 
     @_overload
+    async def get_networking_flex_cost_allocation_policy_versions(
+        self,
+        request: _models.GetNetworkingFlexCostAllocationPolicyVersionsInput
+        | _models.GetNetworkingFlexCostAllocationPolicyVersionsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetNetworkingFlexCostAllocationPolicyVersionsOutput: ...
+
+    @_overload
+    async def get_networking_flex_cost_allocation_policy_versions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[
+            _models.GetNetworkingFlexCostAllocationPolicyVersionsInputDict
+        ],
+    ) -> GetNetworkingFlexCostAllocationPolicyVersionsOutput:
+        """
+        Retrieves the versions of a flex cost allocation policy.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `GetNetworkingFlexCostAllocationPolicyVersionsOutput`.
+        """
+
+    async def get_networking_flex_cost_allocation_policy_versions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetNetworkingFlexCostAllocationPolicyVersionsOutput:
+        return await self._invoke(
+            self._select_input(
+                _models.GET_NETWORKING_FLEX_COST_ALLOCATION_POLICY_VERSIONS,
+                args,
+                kwargs,
+            ),
+            _models.GET_NETWORKING_FLEX_COST_ALLOCATION_POLICY_VERSIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_network_insights_access_scope_analysis_findings(
         self,
         request: _models.GetNetworkInsightsAccessScopeAnalysisFindingsInput
@@ -34728,6 +35235,107 @@ class AsyncEC2Client(AsyncClient[AsyncEC2Config]):
                 _models.MODIFY_MANAGED_RESOURCE_VISIBILITY, args, kwargs
             ),
             _models.MODIFY_MANAGED_RESOURCE_VISIBILITY,
+            [],
+            plugins,
+        )
+
+    @_overload
+    async def modify_metric_category(
+        self,
+        request: _models.ModifyMetricCategoryInput
+        | _models.ModifyMetricCategoryInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ModifyMetricCategoryOutput: ...
+
+    @_overload
+    async def modify_metric_category(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ModifyMetricCategoryInputDict],
+    ) -> ModifyMetricCategoryOutput:
+        """
+        Modifies the metrics in the specified metric category. The metrics that
+        you specify replace the existing metrics.
+
+        Instances that are associated with the metric category are updated
+        asynchronously.
+
+        For more information, see [Use metric categories for additional
+        metrics](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-detailed-monitoring.html#detailed-monitoring-metric-categories)
+        in the *Amazon EC2 User Guide*.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `ModifyMetricCategoryOutput`.
+        """
+
+    async def modify_metric_category(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ModifyMetricCategoryOutput:
+        return await self._invoke(
+            self._select_input(_models.MODIFY_METRIC_CATEGORY, args, kwargs),
+            _models.MODIFY_METRIC_CATEGORY,
+            [],
+            plugins,
+        )
+
+    @_overload
+    async def modify_networking_flex_cost_allocation_policy(
+        self,
+        request: _models.ModifyNetworkingFlexCostAllocationPolicyInput
+        | _models.ModifyNetworkingFlexCostAllocationPolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ModifyNetworkingFlexCostAllocationPolicyOutput: ...
+
+    @_overload
+    async def modify_networking_flex_cost_allocation_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ModifyNetworkingFlexCostAllocationPolicyInputDict],
+    ) -> ModifyNetworkingFlexCostAllocationPolicyOutput:
+        """
+        Modifies a flex cost allocation policy. Changing a policy document or
+        `ShowBackEnabled` creates a new version of the policy. Changing only the
+        description doesn't create a new version.
+
+        A policy can have up to 100 versions. Versions are never removed, so
+        after a policy reaches 100 versions, you can't change its policy
+        document or `ShowBackEnabled`. Policies that are managed by a
+        declarative policy aren't subject to this limit.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `ModifyNetworkingFlexCostAllocationPolicyOutput`.
+        """
+
+    async def modify_networking_flex_cost_allocation_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ModifyNetworkingFlexCostAllocationPolicyOutput:
+        return await self._invoke(
+            self._select_input(
+                _models.MODIFY_NETWORKING_FLEX_COST_ALLOCATION_POLICY, args, kwargs
+            ),
+            _models.MODIFY_NETWORKING_FLEX_COST_ALLOCATION_POLICY,
             [],
             plugins,
         )

@@ -346,6 +346,9 @@ from ._private.models_0 import (
 
 from ._private.models_1 import (
     RegistryType as RegistryType,
+    RemoveAliasInput as RemoveAliasInput,
+    RemoveAliasInputDict as RemoveAliasInputDict,
+    RemoveAliasOutput as RemoveAliasOutput,
     Replacement as Replacement,
     RequiredActivatedType as RequiredActivatedType,
     RequiresRecreation as RequiresRecreation,
@@ -384,6 +387,9 @@ from ._private.models_1 import (
     ScannedResourceIdentifier as ScannedResourceIdentifier,
     ScannedResourceIdentifierDict as ScannedResourceIdentifierDict,
     ScanType as ScanType,
+    SetAliasInput as SetAliasInput,
+    SetAliasInputDict as SetAliasInputDict,
+    SetAliasOutput as SetAliasOutput,
     SetStackPolicyInput as SetStackPolicyInput,
     SetStackPolicyInputDict as SetStackPolicyInputDict,
     SetStackPolicyOutput as SetStackPolicyOutput,
@@ -674,7 +680,9 @@ RECORD_HANDLER_PROGRESS: APIOperation[
 ]
 REGISTER_PUBLISHER: APIOperation[RegisterPublisherInput, RegisterPublisherOutput]
 REGISTER_TYPE: APIOperation[RegisterTypeInput, RegisterTypeOutput]
+REMOVE_ALIAS: APIOperation[RemoveAliasInput, RemoveAliasOutput]
 ROLLBACK_STACK: APIOperation[RollbackStackInput, RollbackStackOutput]
+SET_ALIAS: APIOperation[SetAliasInput, SetAliasOutput]
 SET_STACK_POLICY: APIOperation[SetStackPolicyInput, SetStackPolicyOutput]
 SET_TYPE_CONFIGURATION: APIOperation[
     SetTypeConfigurationInput, SetTypeConfigurationOutput

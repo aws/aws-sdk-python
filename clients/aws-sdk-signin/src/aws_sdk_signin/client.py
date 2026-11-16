@@ -45,7 +45,7 @@ class SigninClient(Client[SigninConfig]):
     2.0, providing secure token exchange and refresh capabilities.
     """
 
-    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
+    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
 
     @_overload
     def create_bearer_token(

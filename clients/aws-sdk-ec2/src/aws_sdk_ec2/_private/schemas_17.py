@@ -12,9 +12,6 @@ _sV = "smithy.api#enumValue"
 _me = "member"
 _i = "item"
 _RT = "ResourceType"
-_ni = "network_interface"
-_ni_ = "network-interface"
-_vp = "vpc"
 _TS = "TagSpecification"
 _rT = "resourceType"
 _Tag = "Tags"
@@ -38,21 +35,15 @@ _st = "state"
 _CT = "CreationTime"
 _cT = "creationTime"
 _TGMDI = "TransitGatewayMulticastDomainId"
-_SI = "SubnetIds"
-_fa = "failed"
-_SIu = "SubnetId"
 _tGMDI = "transitGatewayMulticastDomainId"
 _RIe = "ResourceId"
 _rI = "resourceId"
-_CNI = "CoreNetworkId"
-_cNI = "coreNetworkId"
 _OIw = "OwnerId"
 _oI = "ownerId"
 _e = "enable"
 _disa = "disable"
 _DRy = "DynamicRouting"
 _mo = "modifying"
-_fai = "failing"
 _TGPA = "TransitGatewayPeeringAttachment"
 _O = "Options"
 _o = "options"
@@ -60,21 +51,12 @@ _TSag = "TagSet"
 _tS = "tagSet"
 _tGPA = "transitGatewayPeeringAttachment"
 _DS = "DnsSupport"
+_dS = "dnsSupport"
 _SGRS = "SecurityGroupReferencingSupport"
-_IS = "Ipv6Support"
-_AMSp = "ApplianceModeSupport"
-_TGVA = "TransitGatewayVpcAttachment"
-_VI = "VpcId"
-_tGVA = "transitGatewayVpcAttachment"
+_sGRS = "securityGroupReferencingSupport"
 _act = "active"
-_PR = "PortRange"
-_Ci = "Cidr"
-_ci = "cidr"
 _P = "Protocol"
 _pro = "protocol"
-_Po = "Port"
-_NII = "NetworkInterfaceId"
-_SGI = "SecurityGroupId"
 _PLI = "PrefixListId"
 _pLI = "prefixListId"
 _SPR = "SourcePortRange"
@@ -83,8 +65,7 @@ _DPR = "DestinationPortRange"
 _dPR = "destinationPortRange"
 _TRTI = "TargetRouteTableId"
 _tRTI = "targetRouteTableId"
-_LBA = "LoadBalancerArn"
-_PRo = "PortRanges"
+_TGr = "TransitGateway"
 _TGRT = "TransitGatewayRouteTable"
 _tGRT = "transitGatewayRouteTable"
 _TGPT = "TransitGatewayPolicyTable"
@@ -93,25 +74,17 @@ _TGPTE = "TransitGatewayPolicyTableEntry"
 _tGPTE = "transitGatewayPolicyTableEntry"
 _TGA = "TransitGatewayAttachment"
 _tGA = "transitGatewayAttachment"
-_tc = "tcp"
 _en = "enabling"
 _ena = "enabled"
 _disab = "disabling"
 _Des = "Description"
-_rd = "rds"
-_CTl = "ClientToken"
-_sT = "smithy.api#idempotencyToken"
-_SGIe = "SecurityGroupIds"
-_CAe = "CertificateArn"
+_desc = "description"
 _TGPTI = "TransitGatewayPolicyTableId"
 _tGPTI = "transitGatewayPolicyTableId"
 _TGRTI = "TransitGatewayRouteTableId"
 _tGRTI = "transitGatewayRouteTableId"
-_SSs = "SseSpecification"
-_FP = "FromPort"
-_TP = "ToPort"
-_ht = "http"
-_htt = "https"
+_SMta = "StateMessage"
+_sMta = "stateMessage"
 _Ty = "Type"
 _DCB = "DestinationCidrBlock"
 _ty = "type"
@@ -123,10 +96,87 @@ _prop = "propagated"
 _dCB = "destinationCidrBlock"
 _Rou = "Route"
 _rou = "route"
-_lb = "load_balancer"
+_PAe = "PeerAddress"
+_pAe = "peerAddress"
+_ASA = "AmazonSideAsn"
+_aSA = "amazonSideAsn"
+_PAee = "PeerAsn"
+_BO = "BgpOptions"
+_up_ = "up"
+_dow = "down"
+_pAee = "peerAsn"
+_BSg = "BgpStatus"
+_bSg = "bgpStatus"
 _SCB = "SourceCidrBlock"
 _sCB = "sourceCidrBlock"
+_AASA = "AutoAcceptSharedAttachments"
+_DRTA = "DefaultRouteTableAssociation"
+_DRTP = "DefaultRouteTablePropagation"
+_VESp = "VpnEcmpSupport"
+_MSu = "MulticastSupport"
+_TGCB = "TransitGatewayCidrBlocks"
+_ESV = "EncryptionStateValue"
+_ESnc = "EncryptionSupport"
+_ESncr = "EncryptionState"
+_eSnc = "encryptionState"
+_TGO = "TransitGatewayOptions"
+_tGCB = "transitGatewayCidrBlocks"
+_aASA = "autoAcceptSharedAttachments"
+_dRTA = "defaultRouteTableAssociation"
+_ADRTI = "AssociationDefaultRouteTableId"
+_aDRTI = "associationDefaultRouteTableId"
+_dRTP = "defaultRouteTablePropagation"
+_PDRTI = "PropagationDefaultRouteTableId"
+_pDRTI = "propagationDefaultRouteTableId"
+_vESp = "vpnEcmpSupport"
+_mSu = "multicastSupport"
+_eSncr = "encryptionSupport"
+_TGS = "TransitGatewayState"
+_TGAra = "TransitGatewayArn"
+_tGAr = "transitGatewayArn"
+_PVrot = "ProtocolValue"
+_gre = "gre"
+_CTGCRO = "CreateTransitGatewayConnectRequestOptions"
+_CTGCI = "CreateTransitGatewayConnectInput"
+_cCTGCR = "com.amazonaws.ec2#CreateTransitGatewayConnectRequest"
+_TTGAI = "TransportTransitGatewayAttachmentId"
+_TGCO = "TransitGatewayConnectOptions"
+_TGCr = "TransitGatewayConnect"
+_tTGAI = "transportTransitGatewayAttachmentId"
+_CTGCO = "CreateTransitGatewayConnectOutput"
+_cCTGCRo = "com.amazonaws.ec2#CreateTransitGatewayConnectResult"
+_tGC = "transitGatewayConnect"
+_CTGC = "CreateTransitGatewayConnect"
+_TGCRBO = "TransitGatewayConnectRequestBgpOptions"
+_ICBSL = "InsideCidrBlocksStringList"
+_CTGCPI = "CreateTransitGatewayConnectPeerInput"
+_cCTGCPR = "com.amazonaws.ec2#CreateTransitGatewayConnectPeerRequest"
+_TGAran = "TransitGatewayAddress"
+_ICBn = "InsideCidrBlocks"
+_TGABC = "TransitGatewayAttachmentBgpConfiguration"
+_TGArans = "TransitGatewayAsn"
+_tGAra = "transitGatewayAsn"
+_tGAran = "transitGatewayAddress"
+_TGABCL = "TransitGatewayAttachmentBgpConfigurationList"
+_TGCPC = "TransitGatewayConnectPeerConfiguration"
+_iCBn = "insideCidrBlocks"
+_BCg = "BgpConfigurations"
+_bCg = "bgpConfigurations"
+_TGCPS = "TransitGatewayConnectPeerState"
+_TGCPI = "TransitGatewayConnectPeerId"
+_TGCP = "TransitGatewayConnectPeer"
+_tGCPI = "transitGatewayConnectPeerId"
+_CPC = "ConnectPeerConfiguration"
+_cPC = "connectPeerConfiguration"
+_CTGCPO = "CreateTransitGatewayConnectPeerOutput"
+_cCTGCPRo = "com.amazonaws.ec2#CreateTransitGatewayConnectPeerResult"
+_tGCP = "transitGatewayConnectPeer"
+_CTGCP = "CreateTransitGatewayConnectPeer"
+_TGAISL = "TransitGatewayAttachmentIdStringList"
+_CTGMPI = "CreateTransitGatewayMeteringPolicyInput"
+_cCTGMPR = "com.amazonaws.ec2#CreateTransitGatewayMeteringPolicyRequest"
 _MAIi = "MiddleboxAttachmentIds"
+_MAIid = "MiddleboxAttachmentId"
 _TGMPS = "TransitGatewayMeteringPolicyState"
 _TGMPI = "TransitGatewayMeteringPolicyId"
 _TGMP = "TransitGatewayMeteringPolicy"
@@ -135,6 +185,10 @@ _MAIS = "MiddleboxAttachmentIdSet"
 _mAIS = "middleboxAttachmentIdSet"
 _UEA = "UpdateEffectiveAt"
 _uEA = "updateEffectiveAt"
+_CTGMPO = "CreateTransitGatewayMeteringPolicyOutput"
+_cCTGMPRo = "com.amazonaws.ec2#CreateTransitGatewayMeteringPolicyResult"
+_tGMP = "transitGatewayMeteringPolicy"
+_CTGMP = "CreateTransitGatewayMeteringPolicy"
 _TGMPT = "TransitGatewayMeteringPayerType"
 _sao = "source_attachment_owner"
 _sao_ = "source-attachment-owner"
@@ -249,75 +303,341 @@ _cCTGRRo = "com.amazonaws.ec2#CreateTransitGatewayRouteResult"
 _CTGR = "CreateTransitGatewayRoute"
 _CTGRTI = "CreateTransitGatewayRouteTableInput"
 _cCTGRTR = "com.amazonaws.ec2#CreateTransitGatewayRouteTableRequest"
-_TGRTS = "TransitGatewayRouteTableState"
-_DART = "DefaultAssociationRouteTable"
-_dART = "defaultAssociationRouteTable"
-_DPRT = "DefaultPropagationRouteTable"
-_dPRT = "defaultPropagationRouteTable"
 _CTGRTO = "CreateTransitGatewayRouteTableOutput"
 _cCTGRTRo = "com.amazonaws.ec2#CreateTransitGatewayRouteTableResult"
 _CTGRT = "CreateTransitGatewayRouteTable"
-_CTGRTAI = "CreateTransitGatewayRouteTableAnnouncementInput"
-_cCTGRTAR = "com.amazonaws.ec2#CreateTransitGatewayRouteTableAnnouncementRequest"
-_PAIe = "PeeringAttachmentId"
-_TGRTAD = "TransitGatewayRouteTableAnnouncementDirection"
-_ou = "outgoing"
-_incom = "incoming"
-_TGRTAS = "TransitGatewayRouteTableAnnouncementState"
-_TGRTA = "TransitGatewayRouteTableAnnouncement"
-_pTGI = "peerTransitGatewayId"
-_PCNI = "PeerCoreNetworkId"
-_pCNI = "peerCoreNetworkId"
-_pAI = "peeringAttachmentId"
-_ADn = "AnnouncementDirection"
-_aDn = "announcementDirection"
-_CTGRTAO = "CreateTransitGatewayRouteTableAnnouncementOutput"
-_cCTGRTARo = "com.amazonaws.ec2#CreateTransitGatewayRouteTableAnnouncementResult"
-_tGRTA = "transitGatewayRouteTableAnnouncement"
-_CTGRTA = "CreateTransitGatewayRouteTableAnnouncement"
-_CTGVARO = "CreateTransitGatewayVpcAttachmentRequestOptions"
-_CTGVAI = "CreateTransitGatewayVpcAttachmentInput"
-_cCTGVAR = "com.amazonaws.ec2#CreateTransitGatewayVpcAttachmentRequest"
-_CTGVAO = "CreateTransitGatewayVpcAttachmentOutput"
-_cCTGVARo = "com.amazonaws.ec2#CreateTransitGatewayVpcAttachmentResult"
-_CTGVA = "CreateTransitGatewayVpcAttachment"
-_VAEAT = "VerifiedAccessEndpointAttachmentType"
-_VAEPN = "VerifiedAccessEndpointPortNumber"
-_CVAEPR = "CreateVerifiedAccessEndpointPortRange"
-_CVAEPRL = "CreateVerifiedAccessEndpointPortRangeList"
-_VAEP = "VerifiedAccessEndpointProtocol"
-_CVAESIL = "CreateVerifiedAccessEndpointSubnetIdList"
-_CVAECO = "CreateVerifiedAccessEndpointCidrOptions"
-_VAET = "VerifiedAccessEndpointType"
-_lb_ = "load-balancer"
-_CVAELBO = "CreateVerifiedAccessEndpointLoadBalancerOptions"
-_CVAEEO = "CreateVerifiedAccessEndpointEniOptions"
-_RDCA = "RdsDbClusterArn"
-_RDIA = "RdsDbInstanceArn"
-_RDPA = "RdsDbProxyArn"
-_CVAERO = "CreateVerifiedAccessEndpointRdsOptions"
-_REd = "RdsEndpoint"
-_SGIL = "SecurityGroupIdList"
-_VAGI = "VerifiedAccessGroupId"
-_CVAEI = "CreateVerifiedAccessEndpointInput"
-_cCVAER = "com.amazonaws.ec2#CreateVerifiedAccessEndpointRequest"
-_ETn = "EndpointType"
-_ATtta = "AttachmentType"
-_DCA = "DomainCertificateArn"
-_ADp = "ApplicationDomain"
-_EDP = "EndpointDomainPrefix"
-_LBO = "LoadBalancerOptions"
-_NIO = "NetworkInterfaceOptions"
-_PDo = "PolicyDocument"
-_ROd = "RdsOptions"
-_COi = "CidrOptions"
-_VAE = "VerifiedAccessEndpoint"
-_CVAEO = "CreateVerifiedAccessEndpointOutput"
-_cCVAERo = "com.amazonaws.ec2#CreateVerifiedAccessEndpointResult"
-_vAE = "verifiedAccessEndpoint"
-_CVAE = "CreateVerifiedAccessEndpoint"
+_TGMR = "TransitGatewayMaxResults"
 _TGPS = "TransitGatewayPropagationState"
 _TGP = "TransitGatewayPropagation"
+
+ENCRYPTION_STATE_VALUE: StaticSchema = (
+    14,
+    n0,
+    _ESV,
+    0,
+    (_en, _ena, _disab, _d),
+    ((-1, {_sV: _en}), (-1, {_sV: _ena}), (-1, {_sV: _disab}), (-1, {_sV: _d})),
+)
+
+ENCRYPTION_SUPPORT: StaticSchema = (
+    18,
+    n0,
+    _ESnc,
+    0,
+    (_ESncr, _SMta),
+    (
+        (ENCRYPTION_STATE_VALUE, {_aQN: _ESncr, _sN: _eSnc}),
+        (lambda: schemas.STRING, {_aQN: _SMta, _sN: _sMta}),
+    ),
+)
+
+TRANSIT_GATEWAY_OPTIONS: StaticSchema = (
+    18,
+    n0,
+    _TGO,
+    0,
+    (_ASA, _TGCB, _AASA, _DRTA, _ADRTI, _DRTP, _PDRTI, _VESp, _DS, _SGRS, _MSu, _ESnc),
+    (
+        (lambda: schemas.LONG, {_aQN: _ASA, _sN: _aSA}),
+        (lambda: schemas.VALUE_STRING_LIST, {_aQN: _TGCB, _sN: _tGCB}),
+        (
+            lambda: schemas.AUTO_ACCEPT_SHARED_ATTACHMENTS_VALUE,
+            {_aQN: _AASA, _sN: _aASA},
+        ),
+        (
+            lambda: schemas.DEFAULT_ROUTE_TABLE_ASSOCIATION_VALUE,
+            {_aQN: _DRTA, _sN: _dRTA},
+        ),
+        (lambda: schemas.STRING, {_aQN: _ADRTI, _sN: _aDRTI}),
+        (
+            lambda: schemas.DEFAULT_ROUTE_TABLE_PROPAGATION_VALUE,
+            {_aQN: _DRTP, _sN: _dRTP},
+        ),
+        (lambda: schemas.STRING, {_aQN: _PDRTI, _sN: _pDRTI}),
+        (lambda: schemas.VPN_ECMP_SUPPORT_VALUE, {_aQN: _VESp, _sN: _vESp}),
+        (lambda: schemas.DNS_SUPPORT_VALUE, {_aQN: _DS, _sN: _dS}),
+        (
+            lambda: schemas.SECURITY_GROUP_REFERENCING_SUPPORT_VALUE,
+            {_aQN: _SGRS, _sN: _sGRS},
+        ),
+        (lambda: schemas.MULTICAST_SUPPORT_VALUE, {_aQN: _MSu, _sN: _mSu}),
+        (ENCRYPTION_SUPPORT, {_aQN: _ESnc, _sN: _eSncr}),
+    ),
+)
+
+TRANSIT_GATEWAY_STATE: StaticSchema = (
+    14,
+    n0,
+    _TGS,
+    0,
+    (_p, _av, _mo, _de, _del),
+    (
+        (-1, {_sV: _p}),
+        (-1, {_sV: _av}),
+        (-1, {_sV: _mo}),
+        (-1, {_sV: _de}),
+        (-1, {_sV: _del}),
+    ),
+)
+
+TRANSIT_GATEWAY: StaticSchema = (
+    18,
+    n0,
+    _TGr,
+    0,
+    (_TGI, _TGAra, _St, _OIw, _Des, _CT, _O, _Tag),
+    (
+        (lambda: schemas.STRING, {_aQN: _TGI, _sN: _tGI}),
+        (lambda: schemas.STRING, {_aQN: _TGAra, _sN: _tGAr}),
+        (TRANSIT_GATEWAY_STATE, {_aQN: _St, _sN: _st}),
+        (lambda: schemas.STRING, {_aQN: _OIw, _sN: _oI}),
+        (lambda: schemas.STRING, {_aQN: _Des, _sN: _desc}),
+        (lambda: schemas.DATE_TIME, {_aQN: _CT, _sN: _cT}),
+        (TRANSIT_GATEWAY_OPTIONS, {_aQN: _O, _sN: _o}),
+        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
+    ),
+)
+
+PROTOCOL_VALUE: StaticSchema = (14, n0, _PVrot, 0, (_gre,), ((-1, {_sV: _gre}),))
+
+CREATE_TRANSIT_GATEWAY_CONNECT_REQUEST_OPTIONS: StaticSchema = (
+    18,
+    n0,
+    _CTGCRO,
+    0,
+    (_P,),
+    ((PROTOCOL_VALUE, 1),),
+)
+
+CREATE_TRANSIT_GATEWAY_CONNECT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CTGCI,
+    {_sSI: _cCTGCR, _sm: None},
+    (_TTGAI, _O, _TSa, _DR),
+    (
+        (lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, 1),
+        (CREATE_TRANSIT_GATEWAY_CONNECT_REQUEST_OPTIONS, 1),
+        (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+CREATE_TRANSIT_GATEWAY_CONNECT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CTGCO,
+    {_sSI: _cCTGCRo, _smit: None},
+    (_TGCr,),
+    ((lambda: TRANSIT_GATEWAY_CONNECT, {_aQN: _TGCr, _sN: _tGC}),),
+)
+
+CREATE_TRANSIT_GATEWAY_CONNECT: StaticOperationSchema = (
+    23,
+    n0,
+    _CTGC,
+    0,
+    CREATE_TRANSIT_GATEWAY_CONNECT_INPUT,
+    CREATE_TRANSIT_GATEWAY_CONNECT_OUTPUT,
+    (),
+)
+
+TRANSIT_GATEWAY_CONNECT_OPTIONS: StaticSchema = (
+    18,
+    n0,
+    _TGCO,
+    0,
+    (_P,),
+    ((PROTOCOL_VALUE, {_aQN: _P, _sN: _pro}),),
+)
+
+TRANSIT_GATEWAY_CONNECT: StaticSchema = (
+    18,
+    n0,
+    _TGCr,
+    0,
+    (_TGAI, _TTGAI, _TGI, _St, _CT, _O, _Tag),
+    (
+        (lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, {_aQN: _TGAI, _sN: _tGAI}),
+        (lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, {_aQN: _TTGAI, _sN: _tTGAI}),
+        (lambda: schemas.TRANSIT_GATEWAY_ID, {_aQN: _TGI, _sN: _tGI}),
+        (lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_STATE, {_aQN: _St, _sN: _st}),
+        (lambda: schemas.DATE_TIME, {_aQN: _CT, _sN: _cT}),
+        (TRANSIT_GATEWAY_CONNECT_OPTIONS, {_aQN: _O, _sN: _o}),
+        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
+    ),
+)
+
+TRANSIT_GATEWAY_CONNECT_REQUEST_BGP_OPTIONS: StaticSchema = (
+    18,
+    n0,
+    _TGCRBO,
+    0,
+    (_PAee,),
+    ((lambda: schemas.LONG, 0),),
+)
+
+INSIDE_CIDR_BLOCKS_STRING_LIST: StaticSchema = (
+    16,
+    n0,
+    _ICBSL,
+    0,
+    (_me,),
+    ((lambda: schemas.STRING, {_sN: _i}),),
+)
+
+CREATE_TRANSIT_GATEWAY_CONNECT_PEER_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CTGCPI,
+    {_sSI: _cCTGCPR, _sm: None},
+    (_TGAI, _TGAran, _PAe, _BO, _ICBn, _TSa, _DR),
+    (
+        (lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, 1),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 1),
+        (TRANSIT_GATEWAY_CONNECT_REQUEST_BGP_OPTIONS, 0),
+        (INSIDE_CIDR_BLOCKS_STRING_LIST, 1),
+        (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+CREATE_TRANSIT_GATEWAY_CONNECT_PEER_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CTGCPO,
+    {_sSI: _cCTGCPRo, _smit: None},
+    (_TGCP,),
+    ((lambda: TRANSIT_GATEWAY_CONNECT_PEER, {_aQN: _TGCP, _sN: _tGCP}),),
+)
+
+CREATE_TRANSIT_GATEWAY_CONNECT_PEER: StaticOperationSchema = (
+    23,
+    n0,
+    _CTGCP,
+    0,
+    CREATE_TRANSIT_GATEWAY_CONNECT_PEER_INPUT,
+    CREATE_TRANSIT_GATEWAY_CONNECT_PEER_OUTPUT,
+    (),
+)
+
+BGP_STATUS: StaticSchema = (
+    14,
+    n0,
+    _BSg,
+    0,
+    (_up_, _dow),
+    ((-1, {_sV: _up_}), (-1, {_sV: _dow})),
+)
+
+TRANSIT_GATEWAY_ATTACHMENT_BGP_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _TGABC,
+    0,
+    (_TGArans, _PAee, _TGAran, _PAe, _BSg),
+    (
+        (lambda: schemas.LONG, {_aQN: _TGArans, _sN: _tGAra}),
+        (lambda: schemas.LONG, {_aQN: _PAee, _sN: _pAee}),
+        (lambda: schemas.STRING, {_aQN: _TGAran, _sN: _tGAran}),
+        (lambda: schemas.STRING, {_aQN: _PAe, _sN: _pAe}),
+        (BGP_STATUS, {_aQN: _BSg, _sN: _bSg}),
+    ),
+)
+
+TRANSIT_GATEWAY_ATTACHMENT_BGP_CONFIGURATION_LIST: StaticSchema = (
+    16,
+    n0,
+    _TGABCL,
+    0,
+    (_me,),
+    ((TRANSIT_GATEWAY_ATTACHMENT_BGP_CONFIGURATION, {_sN: _i}),),
+)
+
+TRANSIT_GATEWAY_CONNECT_PEER_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _TGCPC,
+    0,
+    (_TGAran, _PAe, _ICBn, _P, _BCg),
+    (
+        (lambda: schemas.STRING, {_aQN: _TGAran, _sN: _tGAran}),
+        (lambda: schemas.STRING, {_aQN: _PAe, _sN: _pAe}),
+        (INSIDE_CIDR_BLOCKS_STRING_LIST, {_aQN: _ICBn, _sN: _iCBn}),
+        (PROTOCOL_VALUE, {_aQN: _P, _sN: _pro}),
+        (TRANSIT_GATEWAY_ATTACHMENT_BGP_CONFIGURATION_LIST, {_aQN: _BCg, _sN: _bCg}),
+    ),
+)
+
+TRANSIT_GATEWAY_CONNECT_PEER_STATE: StaticSchema = (
+    14,
+    n0,
+    _TGCPS,
+    0,
+    (_p, _av, _de, _del),
+    ((-1, {_sV: _p}), (-1, {_sV: _av}), (-1, {_sV: _de}), (-1, {_sV: _del})),
+)
+
+TRANSIT_GATEWAY_CONNECT_PEER_ID: StaticSchema = (3, n0, _TGCPI, 0)
+
+TRANSIT_GATEWAY_CONNECT_PEER: StaticSchema = (
+    18,
+    n0,
+    _TGCP,
+    0,
+    (_TGAI, _TGCPI, _St, _CT, _CPC, _Tag),
+    (
+        (lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, {_aQN: _TGAI, _sN: _tGAI}),
+        (TRANSIT_GATEWAY_CONNECT_PEER_ID, {_aQN: _TGCPI, _sN: _tGCPI}),
+        (TRANSIT_GATEWAY_CONNECT_PEER_STATE, {_aQN: _St, _sN: _st}),
+        (lambda: schemas.DATE_TIME, {_aQN: _CT, _sN: _cT}),
+        (TRANSIT_GATEWAY_CONNECT_PEER_CONFIGURATION, {_aQN: _CPC, _sN: _cPC}),
+        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
+    ),
+)
+
+TRANSIT_GATEWAY_ATTACHMENT_ID_STRING_LIST: StaticSchema = (
+    16,
+    n0,
+    _TGAISL,
+    0,
+    (_me,),
+    ((lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, 0),),
+)
+
+CREATE_TRANSIT_GATEWAY_METERING_POLICY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CTGMPI,
+    {_sSI: _cCTGMPR, _sm: None},
+    (_TGI, _MAIi, _TSa, _DR),
+    (
+        (lambda: schemas.TRANSIT_GATEWAY_ID, 1),
+        (TRANSIT_GATEWAY_ATTACHMENT_ID_STRING_LIST, {_sN: _MAIid}),
+        (lambda: schemas.TAG_SPECIFICATION_LIST, 0),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+CREATE_TRANSIT_GATEWAY_METERING_POLICY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CTGMPO,
+    {_sSI: _cCTGMPRo, _smit: None},
+    (_TGMP,),
+    ((lambda: TRANSIT_GATEWAY_METERING_POLICY, {_aQN: _TGMP, _sN: _tGMP}),),
+)
+
+CREATE_TRANSIT_GATEWAY_METERING_POLICY: StaticOperationSchema = (
+    23,
+    n0,
+    _CTGMP,
+    0,
+    CREATE_TRANSIT_GATEWAY_METERING_POLICY_INPUT,
+    CREATE_TRANSIT_GATEWAY_METERING_POLICY_OUTPUT,
+    (),
+)
 
 TRANSIT_GATEWAY_METERING_POLICY_STATE: StaticSchema = (
     14,
@@ -988,7 +1308,7 @@ CREATE_TRANSIT_GATEWAY_ROUTE_TABLE_OUTPUT: StaticSchema = (
     _CTGRTO,
     {_sSI: _cCTGRTRo, _smit: None},
     (_TGRT,),
-    ((lambda: TRANSIT_GATEWAY_ROUTE_TABLE, {_aQN: _TGRT, _sN: _tGRT}),),
+    ((lambda: schemas.TRANSIT_GATEWAY_ROUTE_TABLE, {_aQN: _TGRT, _sN: _tGRT}),),
 )
 
 CREATE_TRANSIT_GATEWAY_ROUTE_TABLE: StaticOperationSchema = (
@@ -1001,361 +1321,7 @@ CREATE_TRANSIT_GATEWAY_ROUTE_TABLE: StaticOperationSchema = (
     (),
 )
 
-TRANSIT_GATEWAY_ROUTE_TABLE_STATE: StaticSchema = (
-    14,
-    n0,
-    _TGRTS,
-    0,
-    (_p, _av, _de, _del),
-    ((-1, {_sV: _p}), (-1, {_sV: _av}), (-1, {_sV: _de}), (-1, {_sV: _del})),
-)
-
-TRANSIT_GATEWAY_ROUTE_TABLE: StaticSchema = (
-    18,
-    n0,
-    _TGRT,
-    0,
-    (_TGRTI, _TGI, _St, _DART, _DPRT, _CT, _Tag),
-    (
-        (lambda: schemas.STRING, {_aQN: _TGRTI, _sN: _tGRTI}),
-        (lambda: schemas.STRING, {_aQN: _TGI, _sN: _tGI}),
-        (TRANSIT_GATEWAY_ROUTE_TABLE_STATE, {_aQN: _St, _sN: _st}),
-        (lambda: schemas.BOOLEAN, {_aQN: _DART, _sN: _dART}),
-        (lambda: schemas.BOOLEAN, {_aQN: _DPRT, _sN: _dPRT}),
-        (lambda: schemas.DATE_TIME, {_aQN: _CT, _sN: _cT}),
-        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
-    ),
-)
-
-CREATE_TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENT_INPUT: StaticSchema = (
-    18,
-    n0,
-    _CTGRTAI,
-    {_sSI: _cCTGRTAR, _sm: None},
-    (_TGRTI, _PAIe, _TSa, _DR),
-    (
-        (lambda: schemas.TRANSIT_GATEWAY_ROUTE_TABLE_ID, 1),
-        (lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, 1),
-        (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-CREATE_TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENT_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _CTGRTAO,
-    {_sSI: _cCTGRTARo, _smit: None},
-    (_TGRTA,),
-    ((lambda: TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENT, {_aQN: _TGRTA, _sN: _tGRTA}),),
-)
-
-CREATE_TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENT: StaticOperationSchema = (
-    23,
-    n0,
-    _CTGRTA,
-    0,
-    CREATE_TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENT_INPUT,
-    CREATE_TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENT_OUTPUT,
-    (),
-)
-
-TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENT_DIRECTION: StaticSchema = (
-    14,
-    n0,
-    _TGRTAD,
-    0,
-    (_ou, _incom),
-    ((-1, {_sV: _ou}), (-1, {_sV: _incom})),
-)
-
-TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENT_STATE: StaticSchema = (
-    14,
-    n0,
-    _TGRTAS,
-    0,
-    (_av, _p, _fai, _fa, _de, _del),
-    (
-        (-1, {_sV: _av}),
-        (-1, {_sV: _p}),
-        (-1, {_sV: _fai}),
-        (-1, {_sV: _fa}),
-        (-1, {_sV: _de}),
-        (-1, {_sV: _del}),
-    ),
-)
-
-TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENT: StaticSchema = (
-    18,
-    n0,
-    _TGRTA,
-    0,
-    (_TGRTAI, _TGI, _CNI, _PTGI, _PCNI, _PAIe, _ADn, _TGRTI, _St, _CT, _Tag),
-    (
-        (TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENT_ID, {_aQN: _TGRTAI, _sN: _tGRTAI}),
-        (lambda: schemas.TRANSIT_GATEWAY_ID, {_aQN: _TGI, _sN: _tGI}),
-        (lambda: schemas.STRING, {_aQN: _CNI, _sN: _cNI}),
-        (lambda: schemas.TRANSIT_GATEWAY_ID, {_aQN: _PTGI, _sN: _pTGI}),
-        (lambda: schemas.STRING, {_aQN: _PCNI, _sN: _pCNI}),
-        (lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, {_aQN: _PAIe, _sN: _pAI}),
-        (TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENT_DIRECTION, {_aQN: _ADn, _sN: _aDn}),
-        (lambda: schemas.TRANSIT_GATEWAY_ROUTE_TABLE_ID, {_aQN: _TGRTI, _sN: _tGRTI}),
-        (TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENT_STATE, {_aQN: _St, _sN: _st}),
-        (lambda: schemas.DATE_TIME, {_aQN: _CT, _sN: _cT}),
-        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
-    ),
-)
-
-CREATE_TRANSIT_GATEWAY_VPC_ATTACHMENT_REQUEST_OPTIONS: StaticSchema = (
-    18,
-    n0,
-    _CTGVARO,
-    0,
-    (_DS, _SGRS, _IS, _AMSp),
-    (
-        (lambda: schemas.DNS_SUPPORT_VALUE, 0),
-        (lambda: schemas.SECURITY_GROUP_REFERENCING_SUPPORT_VALUE, 0),
-        (lambda: schemas.IPV6_SUPPORT_VALUE, 0),
-        (lambda: schemas.APPLIANCE_MODE_SUPPORT_VALUE, 0),
-    ),
-)
-
-CREATE_TRANSIT_GATEWAY_VPC_ATTACHMENT_INPUT: StaticSchema = (
-    18,
-    n0,
-    _CTGVAI,
-    {_sSI: _cCTGVAR, _sm: None},
-    (_TGI, _VI, _SI, _O, _TSa, _DR),
-    (
-        (lambda: schemas.TRANSIT_GATEWAY_ID, 1),
-        (lambda: schemas.VPC_ID, 1),
-        (lambda: schemas.TRANSIT_GATEWAY_SUBNET_ID_LIST, 1),
-        (CREATE_TRANSIT_GATEWAY_VPC_ATTACHMENT_REQUEST_OPTIONS, 0),
-        (lambda: schemas.TAG_SPECIFICATION_LIST, 0),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-CREATE_TRANSIT_GATEWAY_VPC_ATTACHMENT_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _CTGVAO,
-    {_sSI: _cCTGVARo, _smit: None},
-    (_TGVA,),
-    ((lambda: schemas.TRANSIT_GATEWAY_VPC_ATTACHMENT, {_aQN: _TGVA, _sN: _tGVA}),),
-)
-
-CREATE_TRANSIT_GATEWAY_VPC_ATTACHMENT: StaticOperationSchema = (
-    23,
-    n0,
-    _CTGVA,
-    0,
-    CREATE_TRANSIT_GATEWAY_VPC_ATTACHMENT_INPUT,
-    CREATE_TRANSIT_GATEWAY_VPC_ATTACHMENT_OUTPUT,
-    (),
-)
-
-VERIFIED_ACCESS_ENDPOINT_ATTACHMENT_TYPE: StaticSchema = (
-    14,
-    n0,
-    _VAEAT,
-    0,
-    (_vp,),
-    ((-1, {_sV: _vp}),),
-)
-
-VERIFIED_ACCESS_ENDPOINT_PORT_NUMBER: StaticSchema = (7, n0, _VAEPN, 0)
-
-CREATE_VERIFIED_ACCESS_ENDPOINT_PORT_RANGE: StaticSchema = (
-    18,
-    n0,
-    _CVAEPR,
-    0,
-    (_FP, _TP),
-    (
-        (VERIFIED_ACCESS_ENDPOINT_PORT_NUMBER, 0),
-        (VERIFIED_ACCESS_ENDPOINT_PORT_NUMBER, 0),
-    ),
-)
-
-CREATE_VERIFIED_ACCESS_ENDPOINT_PORT_RANGE_LIST: StaticSchema = (
-    16,
-    n0,
-    _CVAEPRL,
-    0,
-    (_me,),
-    ((CREATE_VERIFIED_ACCESS_ENDPOINT_PORT_RANGE, {_sN: _i}),),
-)
-
-VERIFIED_ACCESS_ENDPOINT_PROTOCOL: StaticSchema = (
-    14,
-    n0,
-    _VAEP,
-    0,
-    (_ht, _htt, _tc),
-    ((-1, {_sV: _ht}), (-1, {_sV: _htt}), (-1, {_sV: _tc})),
-)
-
-CREATE_VERIFIED_ACCESS_ENDPOINT_SUBNET_ID_LIST: StaticSchema = (
-    16,
-    n0,
-    _CVAESIL,
-    0,
-    (_me,),
-    ((lambda: schemas.SUBNET_ID, {_sN: _i}),),
-)
-
-CREATE_VERIFIED_ACCESS_ENDPOINT_CIDR_OPTIONS: StaticSchema = (
-    18,
-    n0,
-    _CVAECO,
-    0,
-    (_P, _SI, _Ci, _PRo),
-    (
-        (VERIFIED_ACCESS_ENDPOINT_PROTOCOL, 0),
-        (CREATE_VERIFIED_ACCESS_ENDPOINT_SUBNET_ID_LIST, {_sN: _SIu}),
-        (lambda: schemas.STRING, 0),
-        (CREATE_VERIFIED_ACCESS_ENDPOINT_PORT_RANGE_LIST, {_sN: _PR}),
-    ),
-)
-
-CERTIFICATE_ARN: StaticSchema = (3, n0, _CAe, 0)
-
-VERIFIED_ACCESS_ENDPOINT_TYPE: StaticSchema = (
-    14,
-    n0,
-    _VAET,
-    0,
-    (_lb, _ni, _rd, _ci),
-    ((-1, {_sV: _lb_}), (-1, {_sV: _ni_}), (-1, {_sV: _rd}), (-1, {_sV: _ci})),
-)
-
-LOAD_BALANCER_ARN: StaticSchema = (3, n0, _LBA, 0)
-
-CREATE_VERIFIED_ACCESS_ENDPOINT_LOAD_BALANCER_OPTIONS: StaticSchema = (
-    18,
-    n0,
-    _CVAELBO,
-    0,
-    (_P, _Po, _LBA, _SI, _PRo),
-    (
-        (VERIFIED_ACCESS_ENDPOINT_PROTOCOL, 0),
-        (VERIFIED_ACCESS_ENDPOINT_PORT_NUMBER, 0),
-        (LOAD_BALANCER_ARN, 0),
-        (CREATE_VERIFIED_ACCESS_ENDPOINT_SUBNET_ID_LIST, {_sN: _SIu}),
-        (CREATE_VERIFIED_ACCESS_ENDPOINT_PORT_RANGE_LIST, {_sN: _PR}),
-    ),
-)
-
-CREATE_VERIFIED_ACCESS_ENDPOINT_ENI_OPTIONS: StaticSchema = (
-    18,
-    n0,
-    _CVAEEO,
-    0,
-    (_NII, _P, _Po, _PRo),
-    (
-        (lambda: schemas.NETWORK_INTERFACE_ID, 0),
-        (VERIFIED_ACCESS_ENDPOINT_PROTOCOL, 0),
-        (VERIFIED_ACCESS_ENDPOINT_PORT_NUMBER, 0),
-        (CREATE_VERIFIED_ACCESS_ENDPOINT_PORT_RANGE_LIST, {_sN: _PR}),
-    ),
-)
-
-RDS_DB_CLUSTER_ARN: StaticSchema = (3, n0, _RDCA, 0)
-
-RDS_DB_INSTANCE_ARN: StaticSchema = (3, n0, _RDIA, 0)
-
-RDS_DB_PROXY_ARN: StaticSchema = (3, n0, _RDPA, 0)
-
-CREATE_VERIFIED_ACCESS_ENDPOINT_RDS_OPTIONS: StaticSchema = (
-    18,
-    n0,
-    _CVAERO,
-    0,
-    (_P, _Po, _RDIA, _RDCA, _RDPA, _REd, _SI),
-    (
-        (VERIFIED_ACCESS_ENDPOINT_PROTOCOL, 0),
-        (VERIFIED_ACCESS_ENDPOINT_PORT_NUMBER, 0),
-        (RDS_DB_INSTANCE_ARN, 0),
-        (RDS_DB_CLUSTER_ARN, 0),
-        (RDS_DB_PROXY_ARN, 0),
-        (lambda: schemas.STRING, 0),
-        (CREATE_VERIFIED_ACCESS_ENDPOINT_SUBNET_ID_LIST, {_sN: _SIu}),
-    ),
-)
-
-SECURITY_GROUP_ID_LIST: StaticSchema = (
-    16,
-    n0,
-    _SGIL,
-    0,
-    (_me,),
-    ((lambda: schemas.SECURITY_GROUP_ID, {_sN: _i}),),
-)
-
-CREATE_VERIFIED_ACCESS_ENDPOINT_INPUT: StaticSchema = (
-    18,
-    n0,
-    _CVAEI,
-    {_sSI: _cCVAER, _sm: None},
-    (
-        _VAGI,
-        _ETn,
-        _ATtta,
-        _DCA,
-        _ADp,
-        _EDP,
-        _SGIe,
-        _LBO,
-        _NIO,
-        _Des,
-        _PDo,
-        _TSa,
-        _CTl,
-        _DR,
-        _SSs,
-        _ROd,
-        _COi,
-    ),
-    (
-        (lambda: schemas.VERIFIED_ACCESS_GROUP_ID, 1),
-        (VERIFIED_ACCESS_ENDPOINT_TYPE, 1),
-        (VERIFIED_ACCESS_ENDPOINT_ATTACHMENT_TYPE, 1),
-        (CERTIFICATE_ARN, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (SECURITY_GROUP_ID_LIST, {_sN: _SGI}),
-        (CREATE_VERIFIED_ACCESS_ENDPOINT_LOAD_BALANCER_OPTIONS, 0),
-        (CREATE_VERIFIED_ACCESS_ENDPOINT_ENI_OPTIONS, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
-        (lambda: schemas.STRING, 2),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.VERIFIED_ACCESS_SSE_SPECIFICATION_REQUEST, 0),
-        (CREATE_VERIFIED_ACCESS_ENDPOINT_RDS_OPTIONS, 0),
-        (CREATE_VERIFIED_ACCESS_ENDPOINT_CIDR_OPTIONS, 0),
-    ),
-)
-
-CREATE_VERIFIED_ACCESS_ENDPOINT_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _CVAEO,
-    {_sSI: _cCVAERo, _smit: None},
-    (_VAE,),
-    ((lambda: schemas.VERIFIED_ACCESS_ENDPOINT, {_aQN: _VAE, _sN: _vAE}),),
-)
-
-CREATE_VERIFIED_ACCESS_ENDPOINT: StaticOperationSchema = (
-    23,
-    n0,
-    _CVAE,
-    0,
-    CREATE_VERIFIED_ACCESS_ENDPOINT_INPUT,
-    CREATE_VERIFIED_ACCESS_ENDPOINT_OUTPUT,
-    (),
-)
+TRANSIT_GATEWAY_MAX_RESULTS: StaticSchema = (7, n0, _TGMR, 0)
 
 TRANSIT_GATEWAY_PROPAGATION_STATE: StaticSchema = (
     14,

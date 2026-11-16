@@ -252,6 +252,12 @@ _javaal_ = "java11al2023"
 _javaal__ = "java11.al2023"
 _javaal___ = "java17al2023"
 _javaal____ = "java17.al2023"
+_cu = "custom"
+_FRA = "FunctionRuntimeAlias"
+_FRAu = "FunctionRuntimeArn"
+_FRC = "FunctionRuntimeConfig"
+_RAu = "RuntimeArn"
+_RAun = "RuntimeAlias"
 _SSAO = "SnapStartApplyOn"
 _PV = "PublishedVersions"
 _SSn = "SnapStart"
@@ -272,6 +278,7 @@ _Pu = "Publish"
 _PTu = "PublishTo"
 _La = "Layers"
 _FSCi = "FileSystemConfigs"
+_RCu = "RuntimeConfig"
 _ICR = "ImageConfigResponse"
 _LUS = "LastUpdateStatus"
 _LUSR = "LastUpdateStatusReason"
@@ -955,6 +962,7 @@ RUNTIME: StaticSchema = (
         _javaa,
         _javaal_,
         _javaal___,
+        _cu,
     ),
     (
         (-1, {_sV: _n}),
@@ -1008,7 +1016,21 @@ RUNTIME: StaticSchema = (
         (-1, {_sV: _javaal}),
         (-1, {_sV: _javaal__}),
         (-1, {_sV: _javaal____}),
+        (-1, {_sV: _cu}),
     ),
+)
+
+FUNCTION_RUNTIME_ALIAS: StaticSchema = (3, n0, _FRA, 0)
+
+FUNCTION_RUNTIME_ARN: StaticSchema = (3, n0, _FRAu, 0)
+
+FUNCTION_RUNTIME_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _FRC,
+    0,
+    (_RAu, _RAun),
+    ((FUNCTION_RUNTIME_ARN, 1), (FUNCTION_RUNTIME_ALIAS, 1)),
 )
 
 SNAP_START_APPLY_ON: StaticSchema = (
@@ -1095,6 +1117,7 @@ CREATE_FUNCTION_INPUT: StaticSchema = (
         _TCe,
         _CPC,
         _DC,
+        _RCu,
     ),
     (
         (FUNCTION_NAME, 1),
@@ -1125,6 +1148,7 @@ CREATE_FUNCTION_INPUT: StaticSchema = (
         (TENANCY_CONFIG, 0),
         (CAPACITY_PROVIDER_CONFIG, 0),
         (lambda: schemas.DURABLE_CONFIG, 0),
+        (FUNCTION_RUNTIME_CONFIG, 0),
     ),
 )
 
@@ -1174,6 +1198,7 @@ CREATE_FUNCTION_OUTPUT: StaticSchema = (
         _CPC,
         _CSon,
         _DC,
+        _RCu,
     ),
     (
         (lambda: schemas.NAMESPACED_FUNCTION_NAME, 0),
@@ -1216,6 +1241,7 @@ CREATE_FUNCTION_OUTPUT: StaticSchema = (
         (CAPACITY_PROVIDER_CONFIG, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.DURABLE_CONFIG, 0),
+        (FUNCTION_RUNTIME_CONFIG, 0),
     ),
 )
 

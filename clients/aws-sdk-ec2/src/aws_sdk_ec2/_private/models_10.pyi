@@ -11,10 +11,19 @@ from smithy_core.types import UnknownEnumMixin
 
 from ..models import (
     AddressAttribute,
+    AsnAuthorizationContext,
+    AsnAuthorizationContextDict,
     BlockDeviceMapping,
     BlockDeviceMappingDict,
+    Byoasn,
+    ByoipCidr,
+    CapacityBlock,
+    CapacityBlockExtension,
+    CapacityReservation,
     CapacityReservationSpecification,
     CapacityReservationSpecificationDict,
+    CidrAuthorizationContext,
+    CidrAuthorizationContextDict,
     ClientVpnAuthorizationRuleStatus,
     CpuOptionsRequest,
     CpuOptionsRequestDict,
@@ -66,6 +75,9 @@ from ..models import (
     InstanceTypeSpecificationRequestDict,
     IpPermission,
     IpPermissionDict,
+    IpamCidrAuthorizationContext,
+    IpamCidrAuthorizationContextDict,
+    IpamPoolCidr,
     LaunchTemplateBlockDeviceMapping,
     LaunchTemplateBlockDeviceMappingRequest,
     LaunchTemplateBlockDeviceMappingRequestDict,
@@ -135,19 +147,14 @@ from ..models import (
     PortRangeDict,
     PriceSchedule,
     PricingDetail,
-    PrivateDnsDetails,
-    PrivateDnsNameConfiguration,
     PrivateDnsNameOptionsRequest,
     PrivateDnsNameOptionsRequestDict,
-    PropagatingVgw,
-    RecurringCharge,
-    ReferencedSecurityGroup,
+    SecondarySubnetIpv4CidrBlockAssociation,
     SpotFleetRequestConfigData,
     SpotFleetRequestConfigDataDict,
     SpotInstanceRequest,
     SpotPlacement,
     SpotPlacementDict,
-    SupportedRegionDetail,
     Tag,
     TagSpecification,
     TagSpecificationDict,
@@ -160,11 +167,1371 @@ from ..models import (
     TransitGatewayRoute,
     TransitGatewayVpcAttachment,
     UnsuccessfulItem,
-    UserBucket,
-    UserBucketDetails,
-    UserBucketDict,
     _SerdeShape,
 )
+
+@dataclass(kw_only=True)
+class PropagatingVgw(_SerdeShape):
+    """Describes a virtual private gateway propagating route."""
+
+    gateway_id: str | None = ...
+    """The ID of the virtual private gateway."""
+
+class Protocol(UnknownEnumMixin, StrEnum):
+    TCP = "tcp"
+    UDP = "udp"
+
+class ProtocolValue(UnknownEnumMixin, StrEnum):
+    GRE = "gre"
+
+@dataclass(kw_only=True)
+class ProvisionByoipCidrInput(_SerdeShape):
+    """Dataclass for ProvisionByoipCidrInput structure."""
+
+    cidr: str | None = ...
+    """
+    The public IPv4 or IPv6 address range, in CIDR notation. The most
+    specific IPv4 prefix that you can specify is /24. The most specific IPv6
+    address range that you can bring is /48 for CIDRs that are publicly
+    advertisable and /56 for CIDRs that are not publicly advertisable. The
+    address range cannot overlap with another address range that you've
+    brought to this or another Region.
+    """
+    cidr_authorization_context: CidrAuthorizationContext | None = ...
+    """
+    A signed document that proves that you are authorized to bring the
+    specified IP address range to Amazon using BYOIP.
+    """
+    publicly_advertisable: bool | None = ...
+    """
+    (IPv6 only) Indicate whether the address range will be publicly
+    advertised to the internet.
+
+    Default: true
+    """
+    description: str | None = ...
+    """A description for the address range and the address pool."""
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    pool_tag_specifications: list[TagSpecification] | None = ...
+    """The tags to apply to the address pool."""
+    multi_region: bool | None = ...
+    """Reserved."""
+    network_border_group: str | None = ...
+    """
+    If you have [Local
+    Zones](https://docs.aws.amazon.com/local-zones/latest/ug/how-local-zones-work.html)
+    enabled, you can choose a network border group for Local Zones when you
+    provision and advertise a BYOIPv4 CIDR. Choose the network border group
+    carefully as the EIP and the Amazon Web Services resource it is
+    associated with must reside in the same network border group.
+
+    You can provision BYOIP address ranges to and advertise them in the
+    following Local Zone network border groups:
+
+    - us-east-1-dfw-2
+
+    - us-west-2-lax-1
+
+    - us-west-2-phx-2
+
+    Note:
+        You cannot provision or advertise BYOIPv6 address ranges in Local Zones
+        at this time.
+    """
+
+class ProvisionByoipCidrInputDict(TypedDict, total=False):
+    """Dictionary form of `ProvisionByoipCidrInput`."""
+
+    cidr: Required[str]
+    """
+    The public IPv4 or IPv6 address range, in CIDR notation. The most
+    specific IPv4 prefix that you can specify is /24. The most specific IPv6
+    address range that you can bring is /48 for CIDRs that are publicly
+    advertisable and /56 for CIDRs that are not publicly advertisable. The
+    address range cannot overlap with another address range that you've
+    brought to this or another Region.
+    """
+    cidr_authorization_context: (
+        CidrAuthorizationContext | CidrAuthorizationContextDict | None
+    )
+    """
+    A signed document that proves that you are authorized to bring the
+    specified IP address range to Amazon using BYOIP.
+    """
+    publicly_advertisable: bool | None
+    """
+    (IPv6 only) Indicate whether the address range will be publicly
+    advertised to the internet.
+
+    Default: true
+    """
+    description: str | None
+    """A description for the address range and the address pool."""
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    pool_tag_specifications: Sequence[TagSpecification | TagSpecificationDict] | None
+    """The tags to apply to the address pool."""
+    multi_region: bool | None
+    """Reserved."""
+    network_border_group: str | None
+    """
+    If you have [Local
+    Zones](https://docs.aws.amazon.com/local-zones/latest/ug/how-local-zones-work.html)
+    enabled, you can choose a network border group for Local Zones when you
+    provision and advertise a BYOIPv4 CIDR. Choose the network border group
+    carefully as the EIP and the Amazon Web Services resource it is
+    associated with must reside in the same network border group.
+
+    You can provision BYOIP address ranges to and advertise them in the
+    following Local Zone network border groups:
+
+    - us-east-1-dfw-2
+
+    - us-west-2-lax-1
+
+    - us-west-2-phx-2
+
+    Note:
+        You cannot provision or advertise BYOIPv6 address ranges in Local Zones
+        at this time.
+    """
+
+@dataclass(kw_only=True)
+class ProvisionByoipCidrOutput(_SerdeShape):
+    """Dataclass for ProvisionByoipCidrOutput structure."""
+
+    byoip_cidr: ByoipCidr | None = ...
+    """Information about the address range."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ProvisionedBandwidth(_SerdeShape):
+    """
+    Reserved. If you need to sustain traffic greater than the [documented
+    limits](https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-gateways),
+    contact Amazon Web Services Support.
+    """
+
+    provision_time: datetime | None = ...
+    """Reserved."""
+    provisioned: str | None = ...
+    """Reserved."""
+    request_time: datetime | None = ...
+    """Reserved."""
+    requested: str | None = ...
+    """Reserved."""
+    status: str | None = ...
+    """Reserved."""
+
+@dataclass(kw_only=True)
+class ProvisionIpamByoasnInput(_SerdeShape):
+    """Dataclass for ProvisionIpamByoasnInput structure."""
+
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    ipam_id: str | None = ...
+    """An IPAM ID."""
+    asn: str | None = ...
+    """A public 2-byte or 4-byte ASN."""
+    asn_authorization_context: AsnAuthorizationContext | None = ...
+    """An ASN authorization context."""
+
+class ProvisionIpamByoasnInputDict(TypedDict, total=False):
+    """Dictionary form of `ProvisionIpamByoasnInput`."""
+
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    ipam_id: Required[str]
+    """An IPAM ID."""
+    asn: Required[str]
+    """A public 2-byte or 4-byte ASN."""
+    asn_authorization_context: Required[
+        AsnAuthorizationContext | AsnAuthorizationContextDict
+    ]
+    """An ASN authorization context."""
+
+@dataclass(kw_only=True)
+class ProvisionIpamByoasnOutput(_SerdeShape):
+    """Dataclass for ProvisionIpamByoasnOutput structure."""
+
+    byoasn: Byoasn | None = ...
+    """An ASN and BYOIP CIDR association."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ProvisionIpamPoolCidrInput(_SerdeShape):
+    """Dataclass for ProvisionIpamPoolCidrInput structure."""
+
+    dry_run: bool | None = ...
+    """
+    A check for whether you have the required permissions for the action
+    without actually making the request and provides an error response. If
+    you have the required permissions, the error response is
+    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    """
+    ipam_pool_id: str | None = ...
+    """The ID of the IPAM pool to which you want to assign a CIDR."""
+    cidr: str | None = ...
+    """
+    The CIDR you want to assign to the IPAM pool. Either \"NetmaskLength\"
+    or \"Cidr\" is required. This value will be null if you specify
+    \"NetmaskLength\" and will be filled in during the provisioning process.
+    """
+    cidr_authorization_context: IpamCidrAuthorizationContext | None = ...
+    """
+    A signed document that proves that you are authorized to bring a
+    specified IP address range to Amazon using BYOIP. This option only
+    applies to IPv4 and IPv6 pools in the public scope.
+    """
+    netmask_length: int | None = ...
+    """
+    The netmask length of the CIDR you'd like to provision to a pool. Can
+    be used for provisioning Amazon-provided IPv6 CIDRs to top-level pools
+    and for provisioning CIDRs to pools with source pools. Cannot be used to
+    provision BYOIP CIDRs to top-level pools. Either \"NetmaskLength\" or
+    \"Cidr\" is required.
+    """
+    client_token: str | None = ...
+    """
+    A unique, case-sensitive identifier that you provide to ensure the
+    idempotency of the request. For more information, see [Ensuring
+    idempotency](https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html).
+
+    This field is autopopulated if not provided.
+    """
+    verification_method: str | None = ...
+    """
+    The method for verifying control of a public IP address range. Defaults
+    to `remarks-x509` if not specified. This option only applies to IPv4 and
+    IPv6 pools in the public scope.
+    """
+    ipam_external_resource_verification_token_id: str | None = ...
+    """
+    Verification token ID. This option only applies to IPv4 and IPv6 pools
+    in the public scope.
+    """
+
+class ProvisionIpamPoolCidrInputDict(TypedDict, total=False):
+    """Dictionary form of `ProvisionIpamPoolCidrInput`."""
+
+    dry_run: bool | None
+    """
+    A check for whether you have the required permissions for the action
+    without actually making the request and provides an error response. If
+    you have the required permissions, the error response is
+    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    """
+    ipam_pool_id: Required[str]
+    """The ID of the IPAM pool to which you want to assign a CIDR."""
+    cidr: str | None
+    """
+    The CIDR you want to assign to the IPAM pool. Either \"NetmaskLength\"
+    or \"Cidr\" is required. This value will be null if you specify
+    \"NetmaskLength\" and will be filled in during the provisioning process.
+    """
+    cidr_authorization_context: (
+        IpamCidrAuthorizationContext | IpamCidrAuthorizationContextDict | None
+    )
+    """
+    A signed document that proves that you are authorized to bring a
+    specified IP address range to Amazon using BYOIP. This option only
+    applies to IPv4 and IPv6 pools in the public scope.
+    """
+    netmask_length: int | None
+    """
+    The netmask length of the CIDR you'd like to provision to a pool. Can
+    be used for provisioning Amazon-provided IPv6 CIDRs to top-level pools
+    and for provisioning CIDRs to pools with source pools. Cannot be used to
+    provision BYOIP CIDRs to top-level pools. Either \"NetmaskLength\" or
+    \"Cidr\" is required.
+    """
+    client_token: str | None
+    """
+    A unique, case-sensitive identifier that you provide to ensure the
+    idempotency of the request. For more information, see [Ensuring
+    idempotency](https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html).
+
+    This field is autopopulated if not provided.
+    """
+    verification_method: str | None
+    """
+    The method for verifying control of a public IP address range. Defaults
+    to `remarks-x509` if not specified. This option only applies to IPv4 and
+    IPv6 pools in the public scope.
+    """
+    ipam_external_resource_verification_token_id: str | None
+    """
+    Verification token ID. This option only applies to IPv4 and IPv6 pools
+    in the public scope.
+    """
+
+@dataclass(kw_only=True)
+class ProvisionIpamPoolCidrOutput(_SerdeShape):
+    """Dataclass for ProvisionIpamPoolCidrOutput structure."""
+
+    ipam_pool_cidr: IpamPoolCidr | None = ...
+    """Information about the provisioned CIDR."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ProvisionPublicIpv4PoolCidrInput(_SerdeShape):
+    """Dataclass for ProvisionPublicIpv4PoolCidrInput structure."""
+
+    dry_run: bool | None = ...
+    """
+    A check for whether you have the required permissions for the action
+    without actually making the request and provides an error response. If
+    you have the required permissions, the error response is
+    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    """
+    ipam_pool_id: str | None = ...
+    """The ID of the IPAM pool you would like to use to allocate this CIDR."""
+    pool_id: str | None = ...
+    """The ID of the public IPv4 pool you would like to use for this CIDR."""
+    netmask_length: int | None = ...
+    """
+    The netmask length of the CIDR you would like to allocate to the public
+    IPv4 pool. The least specific netmask length you can define is 24.
+    """
+    network_border_group: str | None = ...
+    """
+    The Availability Zone (AZ) or Local Zone (LZ) network border group that
+    the resource that the IP address is assigned to is in. Defaults to an AZ
+    network border group. For more information on available Local Zones, see
+    [Local Zone
+    availability](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#byoip-zone-avail)
+    in the *Amazon EC2 User Guide*.
+    """
+
+class ProvisionPublicIpv4PoolCidrInputDict(TypedDict, total=False):
+    """Dictionary form of `ProvisionPublicIpv4PoolCidrInput`."""
+
+    dry_run: bool | None
+    """
+    A check for whether you have the required permissions for the action
+    without actually making the request and provides an error response. If
+    you have the required permissions, the error response is
+    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    """
+    ipam_pool_id: Required[str]
+    """The ID of the IPAM pool you would like to use to allocate this CIDR."""
+    pool_id: Required[str]
+    """The ID of the public IPv4 pool you would like to use for this CIDR."""
+    netmask_length: Required[int]
+    """
+    The netmask length of the CIDR you would like to allocate to the public
+    IPv4 pool. The least specific netmask length you can define is 24.
+    """
+    network_border_group: str | None
+    """
+    The Availability Zone (AZ) or Local Zone (LZ) network border group that
+    the resource that the IP address is assigned to is in. Defaults to an AZ
+    network border group. For more information on available Local Zones, see
+    [Local Zone
+    availability](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#byoip-zone-avail)
+    in the *Amazon EC2 User Guide*.
+    """
+
+@dataclass(kw_only=True)
+class ProvisionPublicIpv4PoolCidrOutput(_SerdeShape):
+    """Dataclass for ProvisionPublicIpv4PoolCidrOutput structure."""
+
+    pool_id: str | None = ...
+    """The ID of the pool that you want to provision the CIDR to."""
+    pool_address_range: PublicIpv4PoolRange | None = ...
+    """Information about the address range of the public IPv4 pool."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class PtrUpdateStatus(_SerdeShape):
+    """The status of an updated pointer (PTR) record for an Elastic IP address."""
+
+    value: str | None = ...
+    """The value for the PTR record update."""
+    status: str | None = ...
+    """The status of the PTR record update."""
+    reason: str | None = ...
+    """The reason for the PTR record update."""
+
+@dataclass(kw_only=True)
+class PublicIpDnsNameOptions(_SerdeShape):
+    """
+    Public hostname type options. For more information, see [EC2 instance
+    hostnames, DNS names, and
+    domains](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html)
+    in the *Amazon EC2 User Guide*.
+    """
+
+    dns_hostname_type: str | None = ...
+    """
+    The public hostname type. For more information, see [EC2 instance
+    hostnames, DNS names, and
+    domains](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html)
+    in the *Amazon EC2 User Guide*.
+    """
+    public_ipv4_dns_name: str | None = ...
+    """
+    An IPv4-enabled public hostname for a network interface. Requests from
+    within the VPC resolve to the private primary IPv4 address of the
+    network interface. Requests from the internet resolve to the public IPv4
+    address of the network interface.
+    """
+    public_ipv6_dns_name: str | None = ...
+    """
+    An IPv6-enabled public hostname for a network interface. Requests from
+    within the VPC or from the internet resolve to the IPv6 GUA of the
+    network interface.
+    """
+    public_dual_stack_dns_name: str | None = ...
+    """
+    A dual-stack public hostname for a network interface. Requests from
+    within the VPC resolve to both the private IPv4 address and the IPv6
+    Global Unicast Address of the network interface. Requests from the
+    internet resolve to both the public IPv4 and the IPv6 GUA address of the
+    network interface.
+    """
+
+class PublicIpDnsOption(UnknownEnumMixin, StrEnum):
+    PUBLIC_DUAL_STACK_DNS_NAME = "public-dual-stack-dns-name"
+    PUBLIC_IPV4_DNS_NAME = "public-ipv4-dns-name"
+    PUBLIC_IPV6_DNS_NAME = "public-ipv6-dns-name"
+
+@dataclass(kw_only=True)
+class PublicIpv4Pool(_SerdeShape):
+    """Describes an IPv4 address pool."""
+
+    pool_id: str | None = ...
+    """The ID of the address pool."""
+    description: str | None = ...
+    """A description of the address pool."""
+    pool_address_ranges: list[PublicIpv4PoolRange] | None = ...
+    """The address ranges."""
+    total_address_count: int | None = ...
+    """The total number of addresses."""
+    total_available_address_count: int | None = ...
+    """The total number of available addresses."""
+    network_border_group: str | None = ...
+    """
+    The name of the location from which the address pool is advertised. A
+    network border group is a unique set of Availability Zones or Local
+    Zones from where Amazon Web Services advertises public IP addresses.
+    """
+    tags: list[Tag] | None = ...
+    """Any tags for the address pool."""
+
+@dataclass(kw_only=True)
+class PublicIpv4PoolRange(_SerdeShape):
+    """Describes an address range of an IPv4 address pool."""
+
+    first_address: str | None = ...
+    """The first IP address in the range."""
+    last_address: str | None = ...
+    """The last IP address in the range."""
+    address_count: int | None = ...
+    """The number of addresses in the range."""
+    available_address_count: int | None = ...
+    """The number of available addresses in the range."""
+
+@dataclass(kw_only=True)
+class Purchase(_SerdeShape):
+    """Describes the result of the purchase."""
+
+    currency_code: str | None = ...
+    """
+    The currency in which the `UpfrontPrice` and `HourlyPrice` amounts are
+    specified. At this time, the only supported currency is `USD`.
+    """
+    duration: int | None = ...
+    """The duration of the reservation's term in seconds."""
+    host_id_set: list[str] | None = ...
+    """The IDs of the Dedicated Hosts associated with the reservation."""
+    host_reservation_id: str | None = ...
+    """The ID of the reservation."""
+    hourly_price: str | None = ...
+    """The hourly price of the reservation per hour."""
+    instance_family: str | None = ...
+    """
+    The instance family on the Dedicated Host that the reservation can be
+    associated with.
+    """
+    payment_option: str | None = ...
+    """The payment option for the reservation."""
+    upfront_price: str | None = ...
+    """The upfront price of the reservation."""
+
+@dataclass(kw_only=True)
+class PurchaseCapacityBlockExtensionInput(_SerdeShape):
+    """Dataclass for PurchaseCapacityBlockExtensionInput structure."""
+
+    capacity_block_extension_offering_id: str | None = ...
+    """The ID of the Capacity Block extension offering to purchase."""
+    capacity_reservation_id: str | None = ...
+    """The ID of the Capacity reservation to be extended."""
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class PurchaseCapacityBlockExtensionInputDict(TypedDict, total=False):
+    """Dictionary form of `PurchaseCapacityBlockExtensionInput`."""
+
+    capacity_block_extension_offering_id: Required[str]
+    """The ID of the Capacity Block extension offering to purchase."""
+    capacity_reservation_id: Required[str]
+    """The ID of the Capacity reservation to be extended."""
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class PurchaseCapacityBlockExtensionOutput(_SerdeShape):
+    """Dataclass for PurchaseCapacityBlockExtensionOutput structure."""
+
+    capacity_block_extensions: list[CapacityBlockExtension] | None = ...
+    """The purchased Capacity Block extensions."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class PurchaseCapacityBlockInput(_SerdeShape):
+    """Dataclass for PurchaseCapacityBlockInput structure."""
+
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    tag_specifications: list[TagSpecification] | None = ...
+    """The tags to apply to the Capacity Block during launch."""
+    capacity_block_offering_id: str | None = ...
+    """The ID of the Capacity Block offering."""
+    instance_platform: str | None = ...
+    """The type of operating system for which to reserve capacity."""
+
+class PurchaseCapacityBlockInputDict(TypedDict, total=False):
+    """Dictionary form of `PurchaseCapacityBlockInput`."""
+
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    tag_specifications: Sequence[TagSpecification | TagSpecificationDict] | None
+    """The tags to apply to the Capacity Block during launch."""
+    capacity_block_offering_id: Required[str]
+    """The ID of the Capacity Block offering."""
+    instance_platform: Required[str]
+    """The type of operating system for which to reserve capacity."""
+
+@dataclass(kw_only=True)
+class PurchaseCapacityBlockOutput(_SerdeShape):
+    """Dataclass for PurchaseCapacityBlockOutput structure."""
+
+    capacity_reservation: CapacityReservation | None = ...
+    """The Capacity Reservation."""
+    capacity_blocks: list[CapacityBlock] | None = ...
+    """The Capacity Block."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class PurchaseHostReservationInput(_SerdeShape):
+    """Dataclass for PurchaseHostReservationInput structure."""
+
+    client_token: str | None = ...
+    """
+    Unique, case-sensitive identifier that you provide to ensure the
+    idempotency of the request. For more information, see [Ensuring
+    Idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+    """
+    currency_code: str | None = ...
+    """
+    The currency in which the `totalUpfrontPrice`, `LimitPrice`, and
+    `totalHourlyPrice` amounts are specified. At this time, the only
+    supported currency is `USD`.
+    """
+    host_id_set: list[str] | None = ...
+    """
+    The IDs of the Dedicated Hosts with which the reservation will be
+    associated.
+    """
+    limit_price: str | None = ...
+    """
+    The specified limit is checked against the total upfront cost of the
+    reservation (calculated as the offering's upfront cost multiplied by
+    the host count). If the total upfront cost is greater than the specified
+    price limit, the request fails. This is used to ensure that the purchase
+    does not exceed the expected upfront cost of the purchase. At this time,
+    the only supported currency is `USD`. For example, to indicate a limit
+    price of USD 100, specify 100.00.
+    """
+    offering_id: str | None = ...
+    """The ID of the offering."""
+    tag_specifications: list[TagSpecification] | None = ...
+    """The tags to apply to the Dedicated Host Reservation during purchase."""
+
+class PurchaseHostReservationInputDict(TypedDict, total=False):
+    """Dictionary form of `PurchaseHostReservationInput`."""
+
+    client_token: str | None
+    """
+    Unique, case-sensitive identifier that you provide to ensure the
+    idempotency of the request. For more information, see [Ensuring
+    Idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+    """
+    currency_code: str | None
+    """
+    The currency in which the `totalUpfrontPrice`, `LimitPrice`, and
+    `totalHourlyPrice` amounts are specified. At this time, the only
+    supported currency is `USD`.
+    """
+    host_id_set: Required[Sequence[str]]
+    """
+    The IDs of the Dedicated Hosts with which the reservation will be
+    associated.
+    """
+    limit_price: str | None
+    """
+    The specified limit is checked against the total upfront cost of the
+    reservation (calculated as the offering's upfront cost multiplied by
+    the host count). If the total upfront cost is greater than the specified
+    price limit, the request fails. This is used to ensure that the purchase
+    does not exceed the expected upfront cost of the purchase. At this time,
+    the only supported currency is `USD`. For example, to indicate a limit
+    price of USD 100, specify 100.00.
+    """
+    offering_id: Required[str]
+    """The ID of the offering."""
+    tag_specifications: Sequence[TagSpecification | TagSpecificationDict] | None
+    """The tags to apply to the Dedicated Host Reservation during purchase."""
+
+@dataclass(kw_only=True)
+class PurchaseHostReservationOutput(_SerdeShape):
+    """Dataclass for PurchaseHostReservationOutput structure."""
+
+    client_token: str | None = ...
+    """
+    Unique, case-sensitive identifier that you provide to ensure the
+    idempotency of the request. For more information, see [Ensuring
+    Idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+    """
+    currency_code: str | None = ...
+    """
+    The currency in which the `totalUpfrontPrice` and `totalHourlyPrice`
+    amounts are specified. At this time, the only supported currency is
+    `USD`.
+    """
+    purchase: list[Purchase] | None = ...
+    """Describes the details of the purchase."""
+    total_hourly_price: str | None = ...
+    """The total hourly price of the reservation calculated per hour."""
+    total_upfront_price: str | None = ...
+    """
+    The total amount charged to your account when you purchase the
+    reservation.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class PurchaseRequest(_SerdeShape):
+    """Describes a request to purchase Scheduled Instances."""
+
+    instance_count: int | None = ...
+    """The number of instances."""
+    purchase_token: str | None = ...
+    """The purchase token."""
+
+class PurchaseRequestDict(TypedDict, total=False):
+    """Dictionary form of `PurchaseRequest`."""
+
+    instance_count: Required[int]
+    """The number of instances."""
+    purchase_token: Required[str]
+    """The purchase token."""
+
+@dataclass(kw_only=True)
+class PurchaseReservedInstancesOfferingInput(_SerdeShape):
+    """Contains the parameters for PurchaseReservedInstancesOffering."""
+
+    instance_count: int | None = ...
+    """The number of Reserved Instances to purchase."""
+    reserved_instances_offering_id: str | None = ...
+    """The ID of the Reserved Instance offering to purchase."""
+    purchase_time: datetime | None = ...
+    """
+    The time at which to purchase the Reserved Instance, in UTC format (for
+    example, *YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z).
+    """
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    limit_price: ReservedInstanceLimitPrice | None = ...
+    """
+    Specified for Reserved Instance Marketplace offerings to limit the total
+    order and ensure that the Reserved Instances are not purchased at
+    unexpected prices.
+    """
+
+class PurchaseReservedInstancesOfferingInputDict(TypedDict, total=False):
+    """Dictionary form of `PurchaseReservedInstancesOfferingInput`."""
+
+    instance_count: Required[int]
+    """The number of Reserved Instances to purchase."""
+    reserved_instances_offering_id: Required[str]
+    """The ID of the Reserved Instance offering to purchase."""
+    purchase_time: datetime | None
+    """
+    The time at which to purchase the Reserved Instance, in UTC format (for
+    example, *YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z).
+    """
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    limit_price: ReservedInstanceLimitPrice | ReservedInstanceLimitPriceDict | None
+    """
+    Specified for Reserved Instance Marketplace offerings to limit the total
+    order and ensure that the Reserved Instances are not purchased at
+    unexpected prices.
+    """
+
+@dataclass(kw_only=True)
+class PurchaseReservedInstancesOfferingOutput(_SerdeShape):
+    """Contains the output of PurchaseReservedInstancesOffering."""
+
+    reserved_instances_id: str | None = ...
+    """
+    The IDs of the purchased Reserved Instances. If your purchase crosses
+    into a discounted pricing tier, the final Reserved Instances IDs might
+    change. For more information, see [Crossing pricing
+    tiers](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts-reserved-instances-application.html#crossing-pricing-tiers)
+    in the *Amazon EC2 User Guide*.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class PurchaseScheduledInstancesInput(_SerdeShape):
+    """Contains the parameters for PurchaseScheduledInstances."""
+
+    client_token: str | None = ...
+    """
+    Unique, case-sensitive identifier that ensures the idempotency of the
+    request. For more information, see [Ensuring
+    Idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+
+    This field is autopopulated if not provided.
+    """
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    purchase_requests: list[PurchaseRequest] | None = ...
+    """The purchase requests."""
+
+class PurchaseScheduledInstancesInputDict(TypedDict, total=False):
+    """Dictionary form of `PurchaseScheduledInstancesInput`."""
+
+    client_token: str | None
+    """
+    Unique, case-sensitive identifier that ensures the idempotency of the
+    request. For more information, see [Ensuring
+    Idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+
+    This field is autopopulated if not provided.
+    """
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    purchase_requests: Required[Sequence[PurchaseRequest | PurchaseRequestDict]]
+    """The purchase requests."""
+
+@dataclass(kw_only=True)
+class PurchaseScheduledInstancesOutput(_SerdeShape):
+    """Contains the output of PurchaseScheduledInstances."""
+
+    scheduled_instance_set: list[ScheduledInstance] | None = ...
+    """Information about the Scheduled Instances."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class RebootInstancesInput(_SerdeShape):
+    """Dataclass for RebootInstancesInput structure."""
+
+    instance_ids: list[str] | None = ...
+    """The instance IDs."""
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the operation,
+    without actually making the request, and provides an error response. If
+    you have the required permissions, the error response is
+    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class RebootInstancesInputDict(TypedDict, total=False):
+    """Dictionary form of `RebootInstancesInput`."""
+
+    instance_ids: Required[Sequence[str]]
+    """The instance IDs."""
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the operation,
+    without actually making the request, and provides an error response. If
+    you have the required permissions, the error response is
+    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class RebootInstancesOutput(_SerdeShape):
+    """Dataclass for RebootInstancesOutput structure."""
+
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+class RebootMigrationSupport(UnknownEnumMixin, StrEnum):
+    UNSUPPORTED = "unsupported"
+    SUPPORTED = "supported"
+
+@dataclass(kw_only=True)
+class RecurringCharge(_SerdeShape):
+    """Describes a recurring charge."""
+
+    amount: float | None = ...
+    """The amount of the recurring charge."""
+    frequency: str | None = ...
+    """The frequency of the recurring charge."""
+
+class RecurringChargeFrequency(UnknownEnumMixin, StrEnum):
+    HOURLY = "Hourly"
+
+@dataclass(kw_only=True)
+class ReferencedSecurityGroup(_SerdeShape):
+    """
+    Describes the security group that is referenced in the security group
+    rule.
+    """
+
+    group_id: str | None = ...
+    """The ID of the security group."""
+    peering_status: str | None = ...
+    """The status of a VPC peering connection, if applicable."""
+    user_id: str | None = ...
+    """The Amazon Web Services account ID."""
+    vpc_id: str | None = ...
+    """The ID of the VPC."""
+    vpc_peering_connection_id: str | None = ...
+    """The ID of the VPC peering connection (if applicable)."""
+
+@dataclass(kw_only=True)
+class Region(_SerdeShape):
+    """Describes a Region."""
+
+    opt_in_status: str | None = ...
+    """
+    The Region opt-in status. The possible values are `opt-in-not-required`,
+    `opted-in`, and `not-opted-in`.
+    """
+    geography: list[RegionGeography] | None = ...
+    """
+    The geography information for the Region. The geography is returned as a
+    list.
+    """
+    region_name: str | None = ...
+    """The name of the Region."""
+    endpoint: str | None = ...
+    """The Region service endpoint."""
+
+@dataclass(kw_only=True)
+class RegionalSummary(_SerdeShape):
+    """A summary report for the attribute for a Region."""
+
+    region_name: str | None = ...
+    """The Amazon Web Services Region."""
+    number_of_matched_accounts: int | None = ...
+    """
+    The number of accounts in the Region with the same configuration value
+    for the attribute that is most frequently observed.
+    """
+    number_of_unmatched_accounts: int | None = ...
+    """
+    The number of accounts in the Region with a configuration value
+    different from the most frequently observed value for the attribute.
+    """
+
+@dataclass(kw_only=True)
+class RegionGeography(_SerdeShape):
+    """Describes the geography information for a Region."""
+
+    name: str | None = ...
+    """The name of the geography, for example, `United States of America`."""
+
+@dataclass(kw_only=True)
+class RegisteredInstance(_SerdeShape):
+    """
+    Describes an Amazon EC2 instance that is enabled for SQL Server High
+    Availability standby detection monitoring.
+    """
+
+    instance_id: str | None = ...
+    """The ID of the SQL Server High Availability instance."""
+    sql_server_license_usage: str | None = ...
+    """
+    The license type for the SQL Server license. Valid values include:
+
+    - `full` - The SQL Server High Availability instance is using a full SQL
+      Server license.
+
+    - `waived` - The SQL Server High Availability instance is waived from
+      the SQL Server license.
+    """
+    ha_status: str | None = ...
+    """
+    The SQL Server High Availability status of the instance. Valid values
+    are:
+
+    - `processing` - The SQL Server High Availability status for the SQL
+      Server High Availability instance is being updated.
+
+    - `active` - The SQL Server High Availability instance is an active node
+      in an SQL Server High Availability cluster.
+
+    - `standby` - The SQL Server High Availability instance is a standby
+      failover node in an SQL Server High Availability cluster.
+
+    - `invalid` - An error occurred due to misconfigured permissions, or
+      unable to dertemine SQL Server High Availability status for the SQL
+      Server High Availability instance.
+    """
+    processing_status: str | None = ...
+    """
+    A brief description of the SQL Server High Availability status. If the
+    instance is in the `invalid` High Availability status, this parameter
+    includes the error message.
+    """
+    last_updated_time: datetime | None = ...
+    """
+    The date and time when the instance's SQL Server High Availability
+    status was last updated, in the ISO 8601 format in the UTC time zone
+    (`YYYY-MM-DDThh:mm:ss.sssZ`).
+    """
+    sql_server_credentials: str | None = ...
+    """
+    The ARN of the Secrets Manager secret containing the SQL Server access
+    credentials for the SQL Server High Availability instance. If not
+    specified, deafult local user credentials will be used by the Amazon Web
+    Services Systems Manager agent.
+    """
+    tags: list[Tag] | None = ...
+    """The tags assigned to the SQL Server High Availability instance."""
+
+@dataclass(kw_only=True)
+class RegisterImageInput(_SerdeShape):
+    """Contains the parameters for RegisterImage."""
+
+    image_location: str | None = ...
+    """
+    The full path to your AMI manifest in Amazon S3 storage. The specified
+    bucket must have the `aws-exec-read` canned access control list (ACL) to
+    ensure that it can be accessed by Amazon EC2. For more information, see
+    [Canned
+    ACL](https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl)
+    in the *Amazon S3 Service Developer Guide*.
+    """
+    billing_products: list[str] | None = ...
+    """
+    The billing product codes. Your account must be authorized to specify
+    billing product codes.
+
+    If your account is not authorized to specify billing product codes, you
+    can publish AMIs that include billable software and list them on the
+    Amazon Web Services Marketplace. You must first register as a seller on
+    the Amazon Web Services Marketplace. For more information, see [Getting
+    started as an Amazon Web Services Marketplace
+    seller](https://docs.aws.amazon.com/marketplace/latest/userguide/user-guide-for-sellers.html)
+    and [AMI-based products in Amazon Web Services
+    Marketplace](https://docs.aws.amazon.com/marketplace/latest/userguide/ami-products.html)
+    in the *Amazon Web Services Marketplace Seller Guide*.
+    """
+    boot_mode: str | None = ...
+    """
+    The boot mode of the AMI. A value of `uefi-preferred` indicates that the
+    AMI supports both UEFI and Legacy BIOS.
+
+    Note:
+        The operating system contained in the AMI must be configured to support
+        the specified boot mode.
+
+    For more information, see [Instance launch behavior with Amazon EC2 boot
+    modes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html)
+    in the *Amazon EC2 User Guide*.
+    """
+    tpm_support: str | None = ...
+    """
+    Set to `v2.0` to enable Trusted Platform Module (TPM) support. For more
+    information, see
+    [NitroTPM](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitrotpm.html)
+    in the *Amazon EC2 User Guide*.
+    """
+    uefi_data: str | None = ...
+    """
+    Base64 representation of the non-volatile UEFI variable store. To
+    retrieve the UEFI data, use the
+    [GetInstanceUefiData](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceUefiData)
+    command. You can inspect and modify the UEFI data by using the
+    [python-uefivars tool](https://github.com/awslabs/python-uefivars) on
+    GitHub. For more information, see [UEFI Secure Boot for Amazon EC2
+    instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/uefi-secure-boot.html)
+    in the *Amazon EC2 User Guide*.
+    """
+    imds_support: str | None = ...
+    """
+    Set to `v2.0` to indicate that IMDSv2 is specified in the AMI. Instances
+    launched from this AMI will have `HttpTokens` automatically set to
+    `required` so that, by default, the instance requires that IMDSv2 is
+    used when requesting instance metadata. In addition,
+    `HttpPutResponseHopLimit` is set to `2`. For more information, see
+    [Configure the
+    AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-IMDS-new-instances.html#configure-IMDS-new-instances-ami-configuration)
+    in the *Amazon EC2 User Guide*.
+
+    Note:
+        If you set the value to `v2.0`, make sure that your AMI software can
+        support IMDSv2.
+    """
+    tag_specifications: list[TagSpecification] | None = ...
+    """
+    The tags to apply to the AMI.
+
+    To tag the AMI, the value for `ResourceType` must be `image`. If you
+    specify another value for `ResourceType`, the request fails.
+
+    To tag an AMI after it has been registered, see
+    [CreateTags](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html).
+    """
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    name: str | None = ...
+    """
+    A name for your AMI.
+
+    Constraints: 3-128 alphanumeric characters, parentheses (()), square
+    brackets ([]), spaces ( ), periods (.), slashes (/), dashes (-),
+    single quotes ('), at-signs (@), or underscores(_)
+    """
+    description: str | None = ...
+    """A description for your AMI."""
+    architecture: str | None = ...
+    """
+    The architecture of the AMI.
+
+    Default: For Amazon EBS-backed AMIs, `i386`. For instance store-backed
+    AMIs, the architecture specified in the manifest file.
+    """
+    kernel_id: str | None = ...
+    """The ID of the kernel."""
+    ramdisk_id: str | None = ...
+    """The ID of the RAM disk."""
+    root_device_name: str | None = ...
+    """The device name of the root device volume (for example, `/dev/sda1`)."""
+    block_device_mappings: list[BlockDeviceMapping] | None = ...
+    """
+    The block device mapping entries.
+
+    If you specify an Amazon EBS volume using the ID of an Amazon EBS
+    snapshot, you can't specify the encryption state of the volume.
+
+    If you create an AMI on an Outpost, then all backing snapshots must be
+    on the same Outpost or in the Region of that Outpost. AMIs on an Outpost
+    that include local snapshots can be used to launch instances on the same
+    Outpost only. For more information, [Create AMIs from local
+    snapshots](https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#ami)
+    in the *Amazon EBS User Guide*.
+    """
+    virtualization_type: str | None = ...
+    """
+    The type of virtualization (`hvm` | `paravirtual`).
+
+    Default: `paravirtual`
+    """
+    sriov_net_support: str | None = ...
+    """
+    Set to `simple` to enable enhanced networking with the Intel 82599
+    Virtual Function interface for the AMI and any instances that you launch
+    from the AMI.
+
+    There is no way to disable `sriovNetSupport` at this time.
+
+    This option is supported only for HVM AMIs. Specifying this option with
+    a PV AMI can make instances launched from the AMI unreachable.
+    """
+    ena_support: bool | None = ...
+    """
+    Set to `true` to enable enhanced networking with ENA for the AMI and any
+    instances that you launch from the AMI.
+
+    This option is supported only for HVM AMIs. Specifying this option with
+    a PV AMI can make instances launched from the AMI unreachable.
+    """
+
+class RegisterImageInputDict(TypedDict, total=False):
+    """Dictionary form of `RegisterImageInput`."""
+
+    image_location: str | None
+    """
+    The full path to your AMI manifest in Amazon S3 storage. The specified
+    bucket must have the `aws-exec-read` canned access control list (ACL) to
+    ensure that it can be accessed by Amazon EC2. For more information, see
+    [Canned
+    ACL](https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl)
+    in the *Amazon S3 Service Developer Guide*.
+    """
+    billing_products: Sequence[str] | None
+    """
+    The billing product codes. Your account must be authorized to specify
+    billing product codes.
+
+    If your account is not authorized to specify billing product codes, you
+    can publish AMIs that include billable software and list them on the
+    Amazon Web Services Marketplace. You must first register as a seller on
+    the Amazon Web Services Marketplace. For more information, see [Getting
+    started as an Amazon Web Services Marketplace
+    seller](https://docs.aws.amazon.com/marketplace/latest/userguide/user-guide-for-sellers.html)
+    and [AMI-based products in Amazon Web Services
+    Marketplace](https://docs.aws.amazon.com/marketplace/latest/userguide/ami-products.html)
+    in the *Amazon Web Services Marketplace Seller Guide*.
+    """
+    boot_mode: str | None
+    """
+    The boot mode of the AMI. A value of `uefi-preferred` indicates that the
+    AMI supports both UEFI and Legacy BIOS.
+
+    Note:
+        The operating system contained in the AMI must be configured to support
+        the specified boot mode.
+
+    For more information, see [Instance launch behavior with Amazon EC2 boot
+    modes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html)
+    in the *Amazon EC2 User Guide*.
+    """
+    tpm_support: str | None
+    """
+    Set to `v2.0` to enable Trusted Platform Module (TPM) support. For more
+    information, see
+    [NitroTPM](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitrotpm.html)
+    in the *Amazon EC2 User Guide*.
+    """
+    uefi_data: str | None
+    """
+    Base64 representation of the non-volatile UEFI variable store. To
+    retrieve the UEFI data, use the
+    [GetInstanceUefiData](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceUefiData)
+    command. You can inspect and modify the UEFI data by using the
+    [python-uefivars tool](https://github.com/awslabs/python-uefivars) on
+    GitHub. For more information, see [UEFI Secure Boot for Amazon EC2
+    instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/uefi-secure-boot.html)
+    in the *Amazon EC2 User Guide*.
+    """
+    imds_support: str | None
+    """
+    Set to `v2.0` to indicate that IMDSv2 is specified in the AMI. Instances
+    launched from this AMI will have `HttpTokens` automatically set to
+    `required` so that, by default, the instance requires that IMDSv2 is
+    used when requesting instance metadata. In addition,
+    `HttpPutResponseHopLimit` is set to `2`. For more information, see
+    [Configure the
+    AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-IMDS-new-instances.html#configure-IMDS-new-instances-ami-configuration)
+    in the *Amazon EC2 User Guide*.
+
+    Note:
+        If you set the value to `v2.0`, make sure that your AMI software can
+        support IMDSv2.
+    """
+    tag_specifications: Sequence[TagSpecification | TagSpecificationDict] | None
+    """
+    The tags to apply to the AMI.
+
+    To tag the AMI, the value for `ResourceType` must be `image`. If you
+    specify another value for `ResourceType`, the request fails.
+
+    To tag an AMI after it has been registered, see
+    [CreateTags](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html).
+    """
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    name: Required[str]
+    """
+    A name for your AMI.
+
+    Constraints: 3-128 alphanumeric characters, parentheses (()), square
+    brackets ([]), spaces ( ), periods (.), slashes (/), dashes (-),
+    single quotes ('), at-signs (@), or underscores(_)
+    """
+    description: str | None
+    """A description for your AMI."""
+    architecture: str | None
+    """
+    The architecture of the AMI.
+
+    Default: For Amazon EBS-backed AMIs, `i386`. For instance store-backed
+    AMIs, the architecture specified in the manifest file.
+    """
+    kernel_id: str | None
+    """The ID of the kernel."""
+    ramdisk_id: str | None
+    """The ID of the RAM disk."""
+    root_device_name: str | None
+    """The device name of the root device volume (for example, `/dev/sda1`)."""
+    block_device_mappings: Sequence[BlockDeviceMapping | BlockDeviceMappingDict] | None
+    """
+    The block device mapping entries.
+
+    If you specify an Amazon EBS volume using the ID of an Amazon EBS
+    snapshot, you can't specify the encryption state of the volume.
+
+    If you create an AMI on an Outpost, then all backing snapshots must be
+    on the same Outpost or in the Region of that Outpost. AMIs on an Outpost
+    that include local snapshots can be used to launch instances on the same
+    Outpost only. For more information, [Create AMIs from local
+    snapshots](https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#ami)
+    in the *Amazon EBS User Guide*.
+    """
+    virtualization_type: str | None
+    """
+    The type of virtualization (`hvm` | `paravirtual`).
+
+    Default: `paravirtual`
+    """
+    sriov_net_support: str | None
+    """
+    Set to `simple` to enable enhanced networking with the Intel 82599
+    Virtual Function interface for the AMI and any instances that you launch
+    from the AMI.
+
+    There is no way to disable `sriovNetSupport` at this time.
+
+    This option is supported only for HVM AMIs. Specifying this option with
+    a PV AMI can make instances launched from the AMI unreachable.
+    """
+    ena_support: bool | None
+    """
+    Set to `true` to enable enhanced networking with ENA for the AMI and any
+    instances that you launch from the AMI.
+
+    This option is supported only for HVM AMIs. Specifying this option with
+    a PV AMI can make instances launched from the AMI unreachable.
+    """
 
 @dataclass(kw_only=True)
 class RegisterImageOutput(_SerdeShape):
@@ -3923,6 +5290,7 @@ class ResourceType(UnknownEnumMixin, StrEnum):
     ELASTIC_GPU = "elastic-gpu"
     EXPORT_IMAGE_TASK = "export-image-task"
     EXPORT_INSTANCE_TASK = "export-instance-task"
+    FCA_POLICY = "fca-policy"
     FLEET = "fleet"
     FPGA_IMAGE = "fpga-image"
     HOST_RESERVATION = "host-reservation"
@@ -4030,6 +5398,7 @@ class ResourceType(UnknownEnumMixin, StrEnum):
     CAPACITY_RESERVATION_CANCELLATION_QUOTE = "capacity-reservation-cancellation-quote"
     APPLICATION_STATUS_CHECK = "application-status-check"
     CAPACITY_RESERVATION_MODIFICATION_QUOTE = "capacity-reservation-modification-quote"
+    METRIC_CATEGORY = "metric-category"
 
 @dataclass(kw_only=True)
 class ResourceTypeOption(_SerdeShape):
@@ -6303,6 +7672,11 @@ class RunInstancesInputDict(TypedDict, total=False):
 class RunInstancesMonitoringEnabled(_SerdeShape):
     """Describes the monitoring of an instance."""
 
+    metric_category_ids: list[str] | None = ...
+    """
+    The IDs of the metric categories to associate with the instance. To
+    specify metric categories, you must also enable detailed monitoring.
+    """
     enabled: bool | None = ...
     """
     Indicates whether detailed monitoring is enabled. Otherwise, basic
@@ -6312,6 +7686,11 @@ class RunInstancesMonitoringEnabled(_SerdeShape):
 class RunInstancesMonitoringEnabledDict(TypedDict, total=False):
     """Dictionary form of `RunInstancesMonitoringEnabled`."""
 
+    metric_category_ids: Sequence[str] | None
+    """
+    The IDs of the metric categories to associate with the instance. To
+    specify metric categories, you must also enable detailed monitoring.
+    """
     enabled: Required[bool]
     """
     Indicates whether detailed monitoring is enabled. Otherwise, basic
@@ -8096,938 +9475,3 @@ class SecondarySubnet(_SerdeShape):
     """The reason for the current state of the secondary subnet."""
     tags: list[Tag] | None = ...
     """The tags assigned to the secondary subnet."""
-
-class SecondarySubnetCidrBlockAssociationState(UnknownEnumMixin, StrEnum):
-    ASSOCIATING = "associating"
-    ASSOCIATED = "associated"
-    ASSOCIATION_FAILED = "association-failed"
-    DISASSOCIATING = "disassociating"
-    DISASSOCIATED = "disassociated"
-    DISASSOCIATION_FAILED = "disassociation-failed"
-
-@dataclass(kw_only=True)
-class SecondarySubnetIpv4CidrBlockAssociation(_SerdeShape):
-    """Describes an IPv4 CIDR block associated with a secondary subnet."""
-
-    association_id: str | None = ...
-    """The association ID for the IPv4 CIDR block."""
-    cidr_block: str | None = ...
-    """The IPv4 CIDR block."""
-    state: str | None = ...
-    """The state of the CIDR block association."""
-    state_reason: str | None = ...
-    """The reason for the current state of the CIDR block association."""
-
-class SecondarySubnetState(UnknownEnumMixin, StrEnum):
-    CREATE_IN_PROGRESS = "create-in-progress"
-    CREATE_COMPLETE = "create-complete"
-    CREATE_FAILED = "create-failed"
-    DELETE_IN_PROGRESS = "delete-in-progress"
-    DELETE_COMPLETE = "delete-complete"
-    DELETE_FAILED = "delete-failed"
-
-@dataclass(kw_only=True)
-class SecureBlobAttributeValue(_SerdeShape):
-    """
-    Describes a value for a resource attribute that is a Base64-encoded
-    binary data object.
-    """
-
-    value: bytes | None = ...
-    """The attribute value."""
-
-class SecureBlobAttributeValueDict(TypedDict, total=False):
-    """Dictionary form of `SecureBlobAttributeValue`."""
-
-    value: bytes | None
-    """The attribute value."""
-
-@dataclass(kw_only=True)
-class SecurityGroup(_SerdeShape):
-    """Describes a security group."""
-
-    group_id: str | None = ...
-    """The ID of the security group."""
-    ip_permissions_egress: list[IpPermission] | None = ...
-    """The outbound rules associated with the security group."""
-    tags: list[Tag] | None = ...
-    """Any tags assigned to the security group."""
-    vpc_id: str | None = ...
-    """The ID of the VPC for the security group."""
-    security_group_arn: str | None = ...
-    """The ARN of the security group."""
-    owner_id: str | None = ...
-    """The Amazon Web Services account ID of the owner of the security group."""
-    group_name: str | None = ...
-    """The name of the security group."""
-    description: str | None = ...
-    """A description of the security group."""
-    ip_permissions: list[IpPermission] | None = ...
-    """The inbound rules associated with the security group."""
-
-@dataclass(kw_only=True)
-class SecurityGroupForVpc(_SerdeShape):
-    """A security group that can be used by interfaces in the VPC."""
-
-    description: str | None = ...
-    """The security group's description."""
-    group_name: str | None = ...
-    """The security group name."""
-    owner_id: str | None = ...
-    """The security group owner ID."""
-    group_id: str | None = ...
-    """The security group ID."""
-    tags: list[Tag] | None = ...
-    """The security group tags."""
-    primary_vpc_id: str | None = ...
-    """The VPC ID in which the security group was created."""
-
-@dataclass(kw_only=True)
-class SecurityGroupIdentifier(_SerdeShape):
-    """Describes a security group."""
-
-    group_id: str | None = ...
-    """The ID of the security group."""
-    group_name: str | None = ...
-    """The name of the security group."""
-
-@dataclass(kw_only=True)
-class SecurityGroupReference(_SerdeShape):
-    """
-    Describes a VPC with a security group that references your security
-    group.
-    """
-
-    group_id: str | None = ...
-    """The ID of your security group."""
-    referencing_vpc_id: str | None = ...
-    """The ID of the VPC with the referencing security group."""
-    vpc_peering_connection_id: str | None = ...
-    """
-    The ID of the VPC peering connection (if applicable). For more
-    information about security group referencing for peering connections,
-    see [Update your security groups to reference peer security
-    groups](https://docs.aws.amazon.com/vpc/latest/peering/vpc-peering-security-groups.html)
-    in the *VPC Peering Guide*.
-    """
-    transit_gateway_id: str | None = ...
-    """The ID of the transit gateway (if applicable)."""
-
-class SecurityGroupReferencingSupportValue(UnknownEnumMixin, StrEnum):
-    ENABLE = "enable"
-    DISABLE = "disable"
-
-@dataclass(kw_only=True)
-class SecurityGroupRule(_SerdeShape):
-    """Describes a security group rule."""
-
-    security_group_rule_id: str | None = ...
-    """The ID of the security group rule."""
-    group_id: str | None = ...
-    """The ID of the security group."""
-    group_owner_id: str | None = ...
-    """The ID of the Amazon Web Services account that owns the security group."""
-    is_egress: bool | None = ...
-    """Indicates whether the security group rule is an outbound rule."""
-    ip_protocol: str | None = ...
-    """
-    The IP protocol name (`tcp`, `udp`, `icmp`, `icmpv6`) or number (see
-    [Protocol
-    Numbers](http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)).
-
-    Use `-1` to specify all protocols.
-    """
-    from_port: int | None = ...
-    """
-    If the protocol is TCP or UDP, this is the start of the port range. If
-    the protocol is ICMP or ICMPv6, this is the ICMP type or -1 (all ICMP
-    types).
-    """
-    to_port: int | None = ...
-    """
-    If the protocol is TCP or UDP, this is the end of the port range. If the
-    protocol is ICMP or ICMPv6, this is the ICMP code or -1 (all ICMP
-    codes). If the start port is -1 (all ICMP types), then the end port must
-    be -1 (all ICMP codes).
-    """
-    cidr_ipv4: str | None = ...
-    """The IPv4 CIDR range."""
-    cidr_ipv6: str | None = ...
-    """The IPv6 CIDR range."""
-    prefix_list_id: str | None = ...
-    """The ID of the prefix list."""
-    referenced_group_info: ReferencedSecurityGroup | None = ...
-    """Describes the security group that is referenced in the rule."""
-    description: str | None = ...
-    """The security group rule description."""
-    tags: list[Tag] | None = ...
-    """The tags applied to the security group rule."""
-    security_group_rule_arn: str | None = ...
-    """The ARN of the security group rule."""
-
-@dataclass(kw_only=True)
-class SecurityGroupRuleDescription(_SerdeShape):
-    """
-    Describes the description of a security group rule.
-
-    You can use this when you want to update the security group rule
-    description for either an inbound or outbound rule.
-    """
-
-    security_group_rule_id: str | None = ...
-    """The ID of the security group rule."""
-    description: str | None = ...
-    """The description of the security group rule."""
-
-class SecurityGroupRuleDescriptionDict(TypedDict, total=False):
-    """Dictionary form of `SecurityGroupRuleDescription`."""
-
-    security_group_rule_id: str | None
-    """The ID of the security group rule."""
-    description: str | None
-    """The description of the security group rule."""
-
-@dataclass(kw_only=True)
-class SecurityGroupRuleRequest(_SerdeShape):
-    """
-    Describes a security group rule.
-
-    You must specify exactly one of the following parameters, based on the
-    rule type:
-
-    - CidrIpv4
-
-    - CidrIpv6
-
-    - PrefixListId
-
-    - ReferencedGroupId
-
-    Note:
-        Amazon Web Services
-        [canonicalizes](https://en.wikipedia.org/wiki/Canonicalization) IPv4 and
-        IPv6 CIDRs. For example, if you specify 100.68.0.18/18 for the CIDR
-        block, Amazon Web Services canonicalizes the CIDR block to
-        100.68.0.0/18. Any subsequent DescribeSecurityGroups and
-        DescribeSecurityGroupRules calls will return the canonicalized form of
-        the CIDR block. Additionally, if you attempt to add another rule with
-        the non-canonical form of the CIDR (such as 100.68.0.18/18) and there is
-        already a rule for the canonicalized form of the CIDR block (such as
-        100.68.0.0/18), the API throws an duplicate rule error.
-
-    When you modify a rule, you cannot change the rule type. For example, if
-    the rule uses an IPv4 address range, you must use `CidrIpv4` to specify
-    a new IPv4 address range.
-    """
-
-    ip_protocol: str | None = ...
-    """
-    The IP protocol name (`tcp`, `udp`, `icmp`, `icmpv6`) or number (see
-    [Protocol
-    Numbers](http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)).
-
-    Use `-1` to specify all protocols.
-    """
-    from_port: int | None = ...
-    """
-    If the protocol is TCP or UDP, this is the start of the port range. If
-    the protocol is ICMP or ICMPv6, this is the ICMP type or -1 (all ICMP
-    types).
-    """
-    to_port: int | None = ...
-    """
-    If the protocol is TCP or UDP, this is the end of the port range. If the
-    protocol is ICMP or ICMPv6, this is the ICMP code or -1 (all ICMP
-    codes). If the start port is -1 (all ICMP types), then the end port must
-    be -1 (all ICMP codes).
-    """
-    cidr_ipv4: str | None = ...
-    """
-    The IPv4 CIDR range. To specify a single IPv4 address, use the /32
-    prefix length.
-    """
-    cidr_ipv6: str | None = ...
-    """
-    The IPv6 CIDR range. To specify a single IPv6 address, use the /128
-    prefix length.
-    """
-    prefix_list_id: str | None = ...
-    """The ID of the prefix list."""
-    referenced_group_id: str | None = ...
-    """
-    The ID of the security group that is referenced in the security group
-    rule.
-    """
-    description: str | None = ...
-    """The description of the security group rule."""
-
-class SecurityGroupRuleRequestDict(TypedDict, total=False):
-    """Dictionary form of `SecurityGroupRuleRequest`."""
-
-    ip_protocol: str | None
-    """
-    The IP protocol name (`tcp`, `udp`, `icmp`, `icmpv6`) or number (see
-    [Protocol
-    Numbers](http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)).
-
-    Use `-1` to specify all protocols.
-    """
-    from_port: int | None
-    """
-    If the protocol is TCP or UDP, this is the start of the port range. If
-    the protocol is ICMP or ICMPv6, this is the ICMP type or -1 (all ICMP
-    types).
-    """
-    to_port: int | None
-    """
-    If the protocol is TCP or UDP, this is the end of the port range. If the
-    protocol is ICMP or ICMPv6, this is the ICMP code or -1 (all ICMP
-    codes). If the start port is -1 (all ICMP types), then the end port must
-    be -1 (all ICMP codes).
-    """
-    cidr_ipv4: str | None
-    """
-    The IPv4 CIDR range. To specify a single IPv4 address, use the /32
-    prefix length.
-    """
-    cidr_ipv6: str | None
-    """
-    The IPv6 CIDR range. To specify a single IPv6 address, use the /128
-    prefix length.
-    """
-    prefix_list_id: str | None
-    """The ID of the prefix list."""
-    referenced_group_id: str | None
-    """
-    The ID of the security group that is referenced in the security group
-    rule.
-    """
-    description: str | None
-    """The description of the security group rule."""
-
-@dataclass(kw_only=True)
-class SecurityGroupRuleUpdate(_SerdeShape):
-    """Describes an update to a security group rule."""
-
-    security_group_rule_id: str | None = ...
-    """The ID of the security group rule."""
-    security_group_rule: SecurityGroupRuleRequest | None = ...
-    """Information about the security group rule."""
-
-class SecurityGroupRuleUpdateDict(TypedDict, total=False):
-    """Dictionary form of `SecurityGroupRuleUpdate`."""
-
-    security_group_rule_id: Required[str]
-    """The ID of the security group rule."""
-    security_group_rule: SecurityGroupRuleRequest | SecurityGroupRuleRequestDict | None
-    """Information about the security group rule."""
-
-@dataclass(kw_only=True)
-class SecurityGroupVpcAssociation(_SerdeShape):
-    """
-    A security group association with a VPC that you made with
-    [AssociateSecurityGroupVpc](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateSecurityGroupVpc.html).
-    """
-
-    group_id: str | None = ...
-    """The association's security group ID."""
-    vpc_id: str | None = ...
-    """The association's VPC ID."""
-    vpc_owner_id: str | None = ...
-    """The Amazon Web Services account ID of the owner of the VPC."""
-    state: str | None = ...
-    """The association's state."""
-    state_reason: str | None = ...
-    """The association's state reason."""
-    group_owner_id: str | None = ...
-    """The Amazon Web Services account ID of the owner of the security group."""
-
-class SecurityGroupVpcAssociationState(UnknownEnumMixin, StrEnum):
-    ASSOCIATING = "associating"
-    ASSOCIATED = "associated"
-    ASSOCIATION_FAILED = "association-failed"
-    DISASSOCIATING = "disassociating"
-    DISASSOCIATED = "disassociated"
-    DISASSOCIATION_FAILED = "disassociation-failed"
-
-class SelfServicePortal(UnknownEnumMixin, StrEnum):
-    ENABLED = "enabled"
-    DISABLED = "disabled"
-
-@dataclass(kw_only=True)
-class SendDiagnosticInterruptInput(_SerdeShape):
-    """Dataclass for SendDiagnosticInterruptInput structure."""
-
-    instance_id: str | None = ...
-    """The ID of the instance."""
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the operation,
-    without actually making the request, and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-
-class SendDiagnosticInterruptInputDict(TypedDict, total=False):
-    """Dictionary form of `SendDiagnosticInterruptInput`."""
-
-    instance_id: Required[str]
-    """The ID of the instance."""
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the operation,
-    without actually making the request, and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-
-@dataclass(kw_only=True)
-class SendDiagnosticInterruptOutput(_SerdeShape):
-    """Dataclass for SendDiagnosticInterruptOutput structure."""
-
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class ServiceConfiguration(_SerdeShape):
-    """Describes a service configuration for a VPC endpoint service."""
-
-    service_type: list[ServiceTypeDetail] | None = ...
-    """The type of service."""
-    service_id: str | None = ...
-    """The ID of the service."""
-    service_name: str | None = ...
-    """The name of the service."""
-    service_state: str | None = ...
-    """The service state."""
-    availability_zone_ids: list[str] | None = ...
-    """
-    The IDs of the Availability Zones in which the service is available.
-
-    Either `AvailabilityZone` or `AvailabilityZoneId` can be specified, but
-    not both
-    """
-    availability_zones: list[str] | None = ...
-    """
-    The Availability Zones in which the service is available.
-
-    Either `AvailabilityZone` or `AvailabilityZoneId` can be specified, but
-    not both
-    """
-    acceptance_required: bool | None = ...
-    """
-    Indicates whether requests from other Amazon Web Services accounts to
-    create an endpoint to the service must first be accepted.
-    """
-    manages_vpc_endpoints: bool | None = ...
-    """
-    Indicates whether the service manages its VPC endpoints. Management of
-    the service VPC endpoints using the VPC endpoint API is restricted.
-    """
-    network_load_balancer_arns: list[str] | None = ...
-    """
-    The Amazon Resource Names (ARNs) of the Network Load Balancers for the
-    service.
-    """
-    gateway_load_balancer_arns: list[str] | None = ...
-    """
-    The Amazon Resource Names (ARNs) of the Gateway Load Balancers for the
-    service.
-    """
-    supported_ip_address_types: list[str] | None = ...
-    """The supported IP address types."""
-    base_endpoint_dns_names: list[str] | None = ...
-    """The DNS names for the service."""
-    private_dns_name: str | None = ...
-    """The private DNS name for the service."""
-    private_dns_name_configuration: PrivateDnsNameConfiguration | None = ...
-    """Information about the endpoint service private DNS name configuration."""
-    payer_responsibility: str | None = ...
-    """The payer responsibility."""
-    tags: list[Tag] | None = ...
-    """The tags assigned to the service."""
-    supported_regions: list[SupportedRegionDetail] | None = ...
-    """The supported Regions."""
-    remote_access_enabled: bool | None = ...
-    """
-    Indicates whether consumers can access the service from a Region other
-    than the Region where the service is hosted.
-    """
-
-class ServiceConnectivityType(UnknownEnumMixin, StrEnum):
-    IPV4 = "ipv4"
-    IPV6 = "ipv6"
-
-@dataclass(kw_only=True)
-class ServiceDetail(_SerdeShape):
-    """Describes a VPC endpoint service."""
-
-    service_name: str | None = ...
-    """The name of the service."""
-    service_id: str | None = ...
-    """The ID of the endpoint service."""
-    service_type: list[ServiceTypeDetail] | None = ...
-    """The type of service."""
-    service_region: str | None = ...
-    """The Region where the service is hosted."""
-    availability_zone_ids: list[str] | None = ...
-    """
-    The IDs of the Availability Zones in which the service is available.
-
-    Either `AvailabilityZone` or `AvailabilityZoneId` can be specified, but
-    not both
-    """
-    availability_zones: list[str] | None = ...
-    """
-    The Availability Zones in which the service is available.
-
-    Either `AvailabilityZone` or `AvailabilityZoneId` can be specified, but
-    not both
-    """
-    owner: str | None = ...
-    """The Amazon Web Services account ID of the service owner."""
-    base_endpoint_dns_names: list[str] | None = ...
-    """The DNS names for the service."""
-    private_dns_name: str | None = ...
-    """The private DNS name for the service."""
-    private_dns_names: list[PrivateDnsDetails] | None = ...
-    """The private DNS names assigned to the VPC endpoint service."""
-    vpc_endpoint_policy_supported: bool | None = ...
-    """Indicates whether the service supports endpoint policies."""
-    acceptance_required: bool | None = ...
-    """
-    Indicates whether VPC endpoint connection requests to the service must
-    be accepted by the service owner.
-    """
-    manages_vpc_endpoints: bool | None = ...
-    """
-    Indicates whether the service manages its VPC endpoints. Management of
-    the service VPC endpoints using the VPC endpoint API is restricted.
-    """
-    payer_responsibility: str | None = ...
-    """The payer responsibility."""
-    tags: list[Tag] | None = ...
-    """The tags assigned to the service."""
-    private_dns_name_verification_state: str | None = ...
-    """
-    The verification state of the VPC endpoint service.
-
-    Consumers of the endpoint service cannot use the private name when the
-    state is not `verified`.
-    """
-    supported_ip_address_types: list[str] | None = ...
-    """The supported IP address types."""
-
-@dataclass(kw_only=True)
-class ServiceLinkVirtualInterface(_SerdeShape):
-    """
-    Describes the service link virtual interfaces that establish
-    connectivity between Amazon Web Services Outpost and on-premises
-    networks.
-    """
-
-    service_link_virtual_interface_id: str | None = ...
-    """The ID of the service link virtual interface."""
-    service_link_virtual_interface_arn: str | None = ...
-    """The Amazon Resource Number (ARN) for the service link virtual interface."""
-    outpost_id: str | None = ...
-    """The Outpost ID for the service link virtual interface."""
-    outpost_arn: str | None = ...
-    """
-    The Outpost Amazon Resource Number (ARN) for the service link virtual
-    interface.
-    """
-    owner_id: str | None = ...
-    """
-    The ID of the Amazon Web Services account that owns the service link
-    virtual interface..
-    """
-    local_address: str | None = ...
-    """
-    The IPv4 address assigned to the local gateway virtual interface on the
-    Outpost side.
-    """
-    peer_address: str | None = ...
-    """The IPv4 peer address for the service link virtual interface."""
-    peer_bgp_asn: int | None = ...
-    """
-    The ASN for the Border Gateway Protocol (BGP) associated with the
-    service link virtual interface.
-    """
-    vlan: int | None = ...
-    """The virtual local area network for the service link virtual interface."""
-    outpost_lag_id: str | None = ...
-    """
-    The link aggregation group (LAG) ID for the service link virtual
-    interface.
-    """
-    tags: list[Tag] | None = ...
-    """The tags associated with the service link virtual interface."""
-    configuration_state: str | None = ...
-    """The current state of the service link virtual interface."""
-
-class ServiceLinkVirtualInterfaceConfigurationState(UnknownEnumMixin, StrEnum):
-    PENDING = "pending"
-    AVAILABLE = "available"
-    DELETING = "deleting"
-    DELETED = "deleted"
-
-class ServiceManaged(UnknownEnumMixin, StrEnum):
-    ALB = "alb"
-    NLB = "nlb"
-    RNAT = "rnat"
-    RDS = "rds"
-
-class ServiceState(UnknownEnumMixin, StrEnum):
-    PENDING = "Pending"
-    AVAILABLE = "Available"
-    DELETING = "Deleting"
-    DELETED = "Deleted"
-    FAILED = "Failed"
-
-class ServiceType(UnknownEnumMixin, StrEnum):
-    INTERFACE = "Interface"
-    GATEWAY = "Gateway"
-    GATEWAY_LOAD_BALANCER = "GatewayLoadBalancer"
-
-@dataclass(kw_only=True)
-class ServiceTypeDetail(_SerdeShape):
-    """Describes the type of service for a VPC endpoint."""
-
-    service_type: str | None = ...
-    """The type of service."""
-
-class SeverityLabel(UnknownEnumMixin, StrEnum):
-    INFORMATIONAL = "informational"
-    LOW = "low"
-    MEDIUM = "medium"
-    HIGH = "high"
-    CRITICAL = "critical"
-
-class ShutdownBehavior(UnknownEnumMixin, StrEnum):
-    STOP = "stop"
-    TERMINATE = "terminate"
-
-@dataclass(kw_only=True)
-class SlotDateTimeRangeRequest(_SerdeShape):
-    """
-    Describes the time period for a Scheduled Instance to start its first
-    schedule. The time period must span less than one day.
-    """
-
-    earliest_time: datetime | None = ...
-    """The earliest date and time, in UTC, for the Scheduled Instance to start."""
-    latest_time: datetime | None = ...
-    """
-    The latest date and time, in UTC, for the Scheduled Instance to start.
-    This value must be later than or equal to the earliest date and at most
-    three months in the future.
-    """
-
-class SlotDateTimeRangeRequestDict(TypedDict, total=False):
-    """Dictionary form of `SlotDateTimeRangeRequest`."""
-
-    earliest_time: Required[datetime]
-    """The earliest date and time, in UTC, for the Scheduled Instance to start."""
-    latest_time: Required[datetime]
-    """
-    The latest date and time, in UTC, for the Scheduled Instance to start.
-    This value must be later than or equal to the earliest date and at most
-    three months in the future.
-    """
-
-@dataclass(kw_only=True)
-class SlotStartTimeRangeRequest(_SerdeShape):
-    """
-    Describes the time period for a Scheduled Instance to start its first
-    schedule.
-    """
-
-    earliest_time: datetime | None = ...
-    """The earliest date and time, in UTC, for the Scheduled Instance to start."""
-    latest_time: datetime | None = ...
-    """The latest date and time, in UTC, for the Scheduled Instance to start."""
-
-class SlotStartTimeRangeRequestDict(TypedDict, total=False):
-    """Dictionary form of `SlotStartTimeRangeRequest`."""
-
-    earliest_time: datetime | None
-    """The earliest date and time, in UTC, for the Scheduled Instance to start."""
-    latest_time: datetime | None
-    """The latest date and time, in UTC, for the Scheduled Instance to start."""
-
-@dataclass(kw_only=True)
-class Snapshot(_SerdeShape):
-    """Describes a snapshot."""
-
-    owner_alias: str | None = ...
-    """
-    The Amazon Web Services owner alias, from an Amazon-maintained list
-    (`amazon`). This is not the user-configured Amazon Web Services account
-    alias set using the IAM console.
-    """
-    outpost_arn: str | None = ...
-    """
-    The ARN of the Outpost on which the snapshot is stored. For more
-    information, see [Amazon EBS local snapshots on
-    Outposts](https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html)
-    in the *Amazon EBS User Guide*.
-    """
-    tags: list[Tag] | None = ...
-    """Any tags assigned to the snapshot."""
-    storage_tier: str | None = ...
-    """
-    The storage tier in which the snapshot is stored. `standard` indicates
-    that the snapshot is stored in the standard snapshot storage tier and
-    that it is ready for use. `archive` indicates that the snapshot is
-    currently archived and that it must be restored before it can be used.
-    """
-    restore_expiry_time: datetime | None = ...
-    """
-    Only for archived snapshots that are temporarily restored. Indicates the
-    date and time when a temporarily restored snapshot will be automatically
-    re-archived.
-    """
-    sse_type: str | None = ...
-    """Reserved for future use."""
-    availability_zone: str | None = ...
-    """
-    The Availability Zone or Local Zone of the snapshot. For example,
-    `us-west-1a` (Availability Zone) or `us-west-2-lax-1a` (Local Zone).
-    """
-    transfer_type: str | None = ...
-    """
-    Note:
-        Only for snapshot copies.
-
-    Indicates whether the snapshot copy was created with a standard or
-    time-based snapshot copy operation. Time-based snapshot copy operations
-    complete within the completion duration specified in the request.
-    Standard snapshot copy operations are completed on a best-effort basis.
-
-    - `standard` - The snapshot copy was created with a standard snapshot
-      copy operation.
-
-    - `time-based` - The snapshot copy was created with a time-based
-      snapshot copy operation.
-    """
-    completion_duration_minutes: int | None = ...
-    """
-    Note:
-        Only for snapshot copies created with time-based snapshot copy
-        operations.
-
-    The completion duration requested for the time-based snapshot copy
-    operation.
-    """
-    completion_time: datetime | None = ...
-    """The time stamp when the snapshot was completed."""
-    full_snapshot_size_in_bytes: int | None = ...
-    """
-    The full size of the snapshot, in bytes.
-
-    Warning:
-        This is **not** the incremental size of the snapshot. This is the full
-        snapshot size and represents the size of all the blocks that were
-        written to the source volume at the time the snapshot was created.
-    """
-    snapshot_id: str | None = ...
-    """
-    The ID of the snapshot. Each snapshot receives a unique identifier when
-    it is created.
-    """
-    volume_id: str | None = ...
-    """
-    The ID of the volume that was used to create the snapshot. Snapshots
-    created by a copy snapshot operation have an arbitrary volume ID that
-    you should not use for any purpose.
-    """
-    state: str | None = ...
-    """The snapshot state."""
-    state_message: str | None = ...
-    """
-    Encrypted Amazon EBS snapshots are copied asynchronously. If a snapshot
-    copy operation fails (for example, if the proper KMS permissions are not
-    obtained) this field displays error state details to help you diagnose
-    why the error occurred. This parameter is only returned by
-    DescribeSnapshots.
-    """
-    start_time: datetime | None = ...
-    """The time stamp when the snapshot was initiated."""
-    progress: str | None = ...
-    """The progress of the snapshot, as a percentage."""
-    owner_id: str | None = ...
-    """The ID of the Amazon Web Services account that owns the EBS snapshot."""
-    description: str | None = ...
-    """The description for the snapshot."""
-    volume_size: int | None = ...
-    """The size of the volume, in GiB."""
-    encrypted: bool | None = ...
-    """Indicates whether the snapshot is encrypted."""
-    kms_key_id: str | None = ...
-    """
-    The Amazon Resource Name (ARN) of the KMS key that was used to protect
-    the volume encryption key for the parent volume.
-    """
-    data_encryption_key_id: str | None = ...
-    """
-    The data encryption key identifier for the snapshot. This value is a
-    unique identifier that corresponds to the data encryption key that was
-    used to encrypt the original volume or snapshot copy. Because data
-    encryption keys are inherited by volumes created from snapshots, and
-    vice versa, if snapshots share the same data encryption key identifier,
-    then they belong to the same volume/snapshot lineage. This parameter is
-    only returned by DescribeSnapshots.
-    """
-
-class SnapshotAttributeName(UnknownEnumMixin, StrEnum):
-    PRODUCT_CODES = "productCodes"
-    CREATE_VOLUME_PERMISSION = "createVolumePermission"
-
-class SnapshotBlockPublicAccessState(UnknownEnumMixin, StrEnum):
-    BLOCK_ALL_SHARING = "block-all-sharing"
-    BLOCK_NEW_SHARING = "block-new-sharing"
-    UNBLOCKED = "unblocked"
-
-@dataclass(kw_only=True)
-class SnapshotDetail(_SerdeShape):
-    """Describes the snapshot created from the imported disk."""
-
-    description: str | None = ...
-    """A description for the snapshot."""
-    device_name: str | None = ...
-    """The block device mapping for the snapshot."""
-    disk_image_size: float | None = ...
-    """The size of the disk in the snapshot, in GiB."""
-    format: str | None = ...
-    """The format of the disk image from which the snapshot is created."""
-    progress: str | None = ...
-    """The percentage of progress for the task."""
-    snapshot_id: str | None = ...
-    """The snapshot ID of the disk being imported."""
-    status: str | None = ...
-    """A brief status of the snapshot creation."""
-    status_message: str | None = ...
-    """A detailed status message for the snapshot creation."""
-    url: str | None = ...
-    """The URL used to access the disk image."""
-    user_bucket: UserBucketDetails | None = ...
-    """The Amazon S3 bucket for the disk image."""
-
-@dataclass(kw_only=True)
-class SnapshotDiskContainer(_SerdeShape):
-    """The disk container object for the import snapshot request."""
-
-    description: str | None = ...
-    """The description of the disk image being imported."""
-    format: str | None = ...
-    """
-    The format of the disk image being imported.
-
-    Valid values: `VHD` | `VMDK` | `RAW`
-    """
-    url: str | None = ...
-    """
-    The URL to the Amazon S3-based disk image being imported. It can either
-    be a https URL (https://..) or an Amazon S3 URL (s3://..).
-    """
-    user_bucket: UserBucket | None = ...
-    """The Amazon S3 bucket for the disk image."""
-
-class SnapshotDiskContainerDict(TypedDict, total=False):
-    """Dictionary form of `SnapshotDiskContainer`."""
-
-    description: str | None
-    """The description of the disk image being imported."""
-    format: str | None
-    """
-    The format of the disk image being imported.
-
-    Valid values: `VHD` | `VMDK` | `RAW`
-    """
-    url: str | None
-    """
-    The URL to the Amazon S3-based disk image being imported. It can either
-    be a https URL (https://..) or an Amazon S3 URL (s3://..).
-    """
-    user_bucket: UserBucket | UserBucketDict | None
-    """The Amazon S3 bucket for the disk image."""
-
-@dataclass(kw_only=True)
-class SnapshotInfo(_SerdeShape):
-    """Information about a snapshot."""
-
-    description: str | None = ...
-    """
-    Description specified by the CreateSnapshotRequest that has been applied
-    to all snapshots.
-    """
-    tags: list[Tag] | None = ...
-    """Tags associated with this snapshot."""
-    encrypted: bool | None = ...
-    """Indicates whether the snapshot is encrypted."""
-    volume_id: str | None = ...
-    """Source volume from which this snapshot was created."""
-    state: str | None = ...
-    """Current state of the snapshot."""
-    volume_size: int | None = ...
-    """Size of the volume from which this snapshot was created."""
-    start_time: datetime | None = ...
-    """
-    Time this snapshot was started. This is the same for all snapshots
-    initiated by the same request.
-    """
-    progress: str | None = ...
-    """Progress this snapshot has made towards completing."""
-    owner_id: str | None = ...
-    """Account id used when creating this snapshot."""
-    snapshot_id: str | None = ...
-    """Snapshot id that can be used to describe this snapshot."""
-    outpost_arn: str | None = ...
-    """
-    The ARN of the Outpost on which the snapshot is stored. For more
-    information, see [Amazon EBS local snapshots on
-    Outposts](https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html)
-    in the *Amazon EBS User Guide*.
-    """
-    sse_type: str | None = ...
-    """Reserved for future use."""
-    availability_zone: str | None = ...
-    """
-    The Availability Zone or Local Zone of the snapshots. For example,
-    `us-west-1a` (Availability Zone) or `us-west-2-lax-1a` (Local Zone).
-    """
-
-class SnapshotLocationEnum(UnknownEnumMixin, StrEnum):
-    REGIONAL = "regional"
-    LOCAL = "local"
-
-@dataclass(kw_only=True)
-class SnapshotRecycleBinInfo(_SerdeShape):
-    """Information about a snapshot that is currently in the Recycle Bin."""
-
-    snapshot_id: str | None = ...
-    """The ID of the snapshot."""
-    recycle_bin_enter_time: datetime | None = ...
-    """The date and time when the snapshot entered the Recycle Bin."""
-    recycle_bin_exit_time: datetime | None = ...
-    """
-    The date and time when the snapshot is to be permanently deleted from
-    the Recycle Bin.
-    """
-    description: str | None = ...
-    """The description for the snapshot."""
-    volume_id: str | None = ...
-    """The ID of the volume from which the snapshot was created."""
-
-class SnapshotReturnCodes(UnknownEnumMixin, StrEnum):
-    SUCCESS = "success"
-    WARN_SKIPPED = "skipped"
-    ERROR_MISSING_PERMISSIONS = "missing-permissions"
-    ERROR_CODE_INTERNAL_ERROR = "internal-error"
-    ERROR_CODE_CLIENT_ERROR = "client-error"

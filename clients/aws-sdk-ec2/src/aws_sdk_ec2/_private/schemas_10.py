@@ -12,7 +12,10 @@ _sV = "smithy.api#enumValue"
 _me = "member"
 _i = "item"
 _RT = "ResourceType"
+_ins = "instance"
 _ip = "ipam"
+_ni = "network_interface"
+_ni_ = "network-interface"
 _Ke = "Key"
 _TS = "TagSpecification"
 _Tag = "Tags"
@@ -84,12 +87,12 @@ _IApa = "IpamArn"
 _iAp = "ipamArn"
 _IR = "IpamRegion"
 _iRp = "ipamRegion"
+_RIes = "ResourceIds"
 _IIm = "ImageId"
 _ECI = "EbsCardIndex"
 _DOT = "DeleteOnTermination"
 _dOT = "deleteOnTermination"
 _UIs = "UserId"
-_IIRAI = "IpamInternetRegistryAssociationId"
 _SMta = "StateMessage"
 _sMta = "stateMessage"
 _Bu = "Bucket"
@@ -110,7 +113,7 @@ _sIn = "snapshotId"
 _VT = "VolumeType"
 _Io = "Iops"
 _Th = "Throughput"
-_oA = "outpostArn"
+_oAu = "outpostArn"
 _iop = "iops"
 _vT = "volumeType"
 _thr = "throughput"
@@ -139,6 +142,9 @@ _vN = "virtualName"
 _eb = "ebs"
 _nD = "noDevice"
 _LDT = "LogDestinationType"
+_TRT = "TaggableResourceType"
+_asg = "auto_scaling_group"
+_asg_ = "auto-scaling-group"
 _TK = "TagKey"
 _TKL = "TagKeyList"
 _TFSR = "TagFieldSpecificationRequest"
@@ -153,7 +159,6 @@ _cCFLR = "com.amazonaws.ec2#CreateFlowLogsRequest"
 _DLPA = "DeliverLogsPermissionArn"
 _DCAR = "DeliverCrossAccountRole"
 _LGN = "LogGroupName"
-_RIes = "ResourceIds"
 _LD = "LogDestination"
 _LF = "LogFormat"
 _MAI = "MaxAggregationInterval"
@@ -334,8 +339,8 @@ _IORS = "IpamOperatingRegionSet"
 _ISpa = "IpamState"
 _mip__ = "modify_in_progress"
 _mip___ = "modify-in-progress"
-_mc = "modify_complete"
-_mc_ = "modify-complete"
+_mc__ = "modify_complete"
+_mc___ = "modify-complete"
 _mf__________________________ = "modify_failed"
 _mf___________________________ = "modify-failed"
 _iip_ = "isolate_in_progress"
@@ -413,17 +418,19 @@ _dc____ = "disable-complete"
 _df_____ = "disable_failed"
 _df______ = "disable-failed"
 _IIRA = "IpamInternetRegistryAssociation"
-_iIRAI = "ipamInternetRegistryAssociationId"
-_IIRAA = "IpamInternetRegistryAssociationArn"
-_iIRAA = "ipamInternetRegistryAssociationArn"
-_rir = "rir"
-_oHr = "organizationHandle"
-_CRX = "ChildRequestXml"
-_cRX = "childRequestXml"
 _CIIRAO = "CreateIpamInternetRegistryAssociationOutput"
 _cCIIRARo = "com.amazonaws.ec2#CreateIpamInternetRegistryAssociationResult"
 _iIRA = "ipamInternetRegistryAssociation"
 _CIIRA = "CreateIpamInternetRegistryAssociation"
+
+TAGGABLE_RESOURCE_TYPE: StaticSchema = (
+    14,
+    n0,
+    _TRT,
+    0,
+    (_ni, _ins, _asg),
+    ((-1, {_sV: _ni_}), (-1, {_sV: _ins}), (-1, {_sV: _asg_})),
+)
 
 TAG_KEY: StaticSchema = (3, n0, _TK, 0)
 
@@ -435,7 +442,7 @@ TAG_FIELD_SPECIFICATION_REQUEST: StaticSchema = (
     _TFSR,
     0,
     (_RT, _TKa),
-    ((lambda: schemas.TAGGABLE_RESOURCE_TYPE, 0), (TAG_KEY_LIST, {_sN: _TK})),
+    ((TAGGABLE_RESOURCE_TYPE, 0), (TAG_KEY_LIST, {_sN: _TK})),
 )
 
 TAG_FIELD_SPECIFICATION_LIST_REQUEST: StaticSchema = (
@@ -582,7 +589,7 @@ EBS_BLOCK_DEVICE: StaticSchema = (
         (lambda: schemas.VOLUME_TYPE, {_aQN: _VT, _sN: _vT}),
         (lambda: schemas.STRING, {_aQN: _KKI, _sN: _kKI}),
         (lambda: schemas.INTEGER, {_aQN: _Th, _sN: _thr}),
-        (lambda: schemas.STRING, {_aQN: _OA, _sN: _oA}),
+        (lambda: schemas.STRING, {_aQN: _OA, _sN: _oAu}),
         (lambda: schemas.STRING, {_aQN: _AZ, _sN: _aZ}),
         (lambda: schemas.BOOLEAN, {_aQN: _En, _sN: _enc}),
         (lambda: schemas.INTEGER, 0),
@@ -1256,7 +1263,7 @@ IPAM_STATE: StaticSchema = (
         _cc_,
         _cf________________________,
         _mip__,
-        _mc,
+        _mc__,
         _mf__________________________,
         _dip_,
         _dc_,
@@ -1270,7 +1277,7 @@ IPAM_STATE: StaticSchema = (
         (-1, {_sV: _cc__}),
         (-1, {_sV: _cf_________________________}),
         (-1, {_sV: _mip___}),
-        (-1, {_sV: _mc_}),
+        (-1, {_sV: _mc___}),
         (-1, {_sV: _mf___________________________}),
         (-1, {_sV: _dip__}),
         (-1, {_sV: _dc__}),
@@ -1450,7 +1457,7 @@ CREATE_IPAM_INTERNET_REGISTRY_ASSOCIATION_OUTPUT: StaticSchema = (
     _CIIRAO,
     {_sSI: _cCIIRARo, _smit: None},
     (_IIRA,),
-    ((lambda: IPAM_INTERNET_REGISTRY_ASSOCIATION, {_aQN: _IIRA, _sN: _iIRA}),),
+    ((lambda: schemas.IPAM_INTERNET_REGISTRY_ASSOCIATION, {_aQN: _IIRA, _sN: _iIRA}),),
 )
 
 CREATE_IPAM_INTERNET_REGISTRY_ASSOCIATION: StaticOperationSchema = (
@@ -1495,30 +1502,5 @@ IPAM_INTERNET_REGISTRY_ASSOCIATION_STATE: StaticSchema = (
         (-1, {_sV: _dip__}),
         (-1, {_sV: _dc__}),
         (-1, {_sV: _df____}),
-    ),
-)
-
-IPAM_INTERNET_REGISTRY_ASSOCIATION: StaticSchema = (
-    18,
-    n0,
-    _IIRA,
-    0,
-    (_OIw, _IIRAI, _IIRAA, _IIp, _IR, _Ri, _OHr, _Des, _St, _SMta, _CRX, _Tag),
-    (
-        (lambda: schemas.STRING, {_aQN: _OIw, _sN: _oI}),
-        (
-            lambda: schemas.IPAM_INTERNET_REGISTRY_ASSOCIATION_ID,
-            {_aQN: _IIRAI, _sN: _iIRAI},
-        ),
-        (lambda: schemas.RESOURCE_ARN, {_aQN: _IIRAA, _sN: _iIRAA}),
-        (lambda: schemas.IPAM_ID, {_aQN: _IIp, _sN: _iIp}),
-        (lambda: schemas.STRING, {_aQN: _IR, _sN: _iRp}),
-        (RIR, {_aQN: _Ri, _sN: _rir}),
-        (lambda: schemas.STRING, {_aQN: _OHr, _sN: _oHr}),
-        (lambda: schemas.STRING, {_aQN: _Des, _sN: _desc}),
-        (IPAM_INTERNET_REGISTRY_ASSOCIATION_STATE, {_aQN: _St, _sN: _st}),
-        (lambda: schemas.STRING, {_aQN: _SMta, _sN: _sMta}),
-        (lambda: schemas.STRING, {_aQN: _CRX, _sN: _cRX}),
-        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
     ),
 )

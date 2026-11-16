@@ -271,6 +271,8 @@ _registry = ModelRegistry(
         "RegisterTypeOutput": "REGISTER_TYPE_OUTPUT",
         "RegistrationStatus": "REGISTRATION_STATUS",
         "RegistryType": "REGISTRY_TYPE",
+        "RemoveAliasInput": "REMOVE_ALIAS_INPUT",
+        "RemoveAliasOutput": "REMOVE_ALIAS_OUTPUT",
         "Replacement": "REPLACEMENT",
         "RequiredActivatedType": "REQUIRED_ACTIVATED_TYPE",
         "RequiresRecreation": "REQUIRES_RECREATION",
@@ -300,6 +302,8 @@ _registry = ModelRegistry(
         "ScannedResource": "SCANNED_RESOURCE",
         "ScannedResourceIdentifier": "SCANNED_RESOURCE_IDENTIFIER",
         "ScanType": "SCAN_TYPE",
+        "SetAliasInput": "SET_ALIAS_INPUT",
+        "SetAliasOutput": "SET_ALIAS_OUTPUT",
         "SetStackPolicyInput": "SET_STACK_POLICY_INPUT",
         "SetStackPolicyOutput": "SET_STACK_POLICY_OUTPUT",
         "SetTypeConfigurationInput": "SET_TYPE_CONFIGURATION_INPUT",
@@ -657,6 +661,8 @@ _registry = ModelRegistry(
             "RegisterTypeOutput",
             "RegistrationStatus",
             "RegistryType",
+            "RemoveAliasInput",
+            "RemoveAliasOutput",
             "Replacement",
             "RequiredActivatedType",
             "RequiresRecreation",
@@ -686,6 +692,8 @@ _registry = ModelRegistry(
             "ScanType",
             "ScannedResource",
             "ScannedResourceIdentifier",
+            "SetAliasInput",
+            "SetAliasOutput",
             "SetStackPolicyInput",
             "SetStackPolicyOutput",
             "SetTypeConfigurationInput",
@@ -872,7 +880,9 @@ _operation_names = (
     "RECORD_HANDLER_PROGRESS",
     "REGISTER_PUBLISHER",
     "REGISTER_TYPE",
+    "REMOVE_ALIAS",
     "ROLLBACK_STACK",
+    "SET_ALIAS",
     "SET_STACK_POLICY",
     "SET_TYPE_CONFIGURATION",
     "SET_TYPE_DEFAULT_VERSION",
@@ -1433,9 +1443,20 @@ _operation_data["REGISTER_TYPE"] = (
     ("aws.auth#sigv4",),
 )
 
+_operation_data["REMOVE_ALIAS"] = ("REMOVE_ALIAS", (), ("aws.auth#sigv4",))
+
 _operation_data["ROLLBACK_STACK"] = (
     "ROLLBACK_STACK",
     ("com.amazonaws.cloudformation#TokenAlreadyExistsException",),
+    ("aws.auth#sigv4",),
+)
+
+_operation_data["SET_ALIAS"] = (
+    "SET_ALIAS",
+    (
+        "com.amazonaws.cloudformation#AlreadyExistsException",
+        "com.amazonaws.cloudformation#LimitExceededException",
+    ),
     ("aws.auth#sigv4",),
 )
 

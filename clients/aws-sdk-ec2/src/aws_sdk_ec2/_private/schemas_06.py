@@ -22,6 +22,7 @@ _i = "item"
 _AN = "AcceleratorName"
 _ATMMB = "AcceleratorTotalMemoryMiB"
 _AT = "AcceleratorType"
+_cb_ = "capacity-block"
 _TS = "TagSpecification"
 _Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
@@ -33,33 +34,127 @@ _p = "pending"
 _smit = "smithy.api#output"
 _CRI = "CapacityReservationId"
 _IC = "InstanceCount"
+_St = "State"
+_st = "state"
+_fa = "failed"
+_OIw = "OwnerId"
+_oI = "ownerId"
 _TSag = "TagSet"
 _tS = "tagSet"
 _act = "active"
 _ex = "expired"
 _ET = "ExpirationTime"
 _eT = "expirationTime"
+_AZ = "AvailabilityZone"
+_aZ = "availabilityZone"
+_AZI = "AvailabilityZoneId"
+_aZI = "availabilityZoneId"
+_IT = "InstanceType"
+_iT = "instanceType"
+_def = "default"
 _INCLUDED = "INCLUDED"
 _inc = "included"
 _EXCLUDED = "EXCLUDED"
 _excl = "excluded"
 _IF = "InstanceFamily"
+_OA = "OutpostArn"
 _CTl = "ClientToken"
 _sT = "smithy.api#idempotencyToken"
+_ca = "cancelling"
 _AIT = "AllowedInstanceType"
+_URBOI = "UnusedReservationBillingOwnerId"
+_BI = "BoxedInteger"
 _CRCQI = "CapacityReservationCancellationQuoteId"
+_CRFI = "CapacityReservationFleetId"
+_cRFI = "capacityReservationFleetId"
+_can = "cancelled"
 _iC = "instanceCount"
+_CD = "CreateDate"
+_cD = "createDate"
 _op = "open"
+_oAu = "outpostArn"
 _CTr = "CreateTime"
 _cTr = "createTime"
+_EDT = "EndDateType"
+_IMC = "InstanceMatchCriteria"
+_PGA = "PlacementGroupArn"
+_CRT = "CapacityReservationTenancy"
+_ded = "dedicated"
+_IPns = "InstancePlatform"
+_Ten = "Tenancy"
+_EO = "EbsOptimized"
+_ESp = "EphemeralStorage"
+_ED = "EndDate"
 _SDt = "StartDate"
+_DPel = "DeliveryPreference"
 _sDt = "startDate"
+_eD = "endDate"
+_eDT = "endDateType"
+_CAap = "CapacityAllocations"
+_CBI = "CapacityBlockId"
 _CIC = "CommittedInstanceCount"
 _cIC = "committedInstanceCount"
+_ITnt = "InterruptionType"
+_ZSP = "ZeroSizePreference"
+_ICA = "InterruptibleCapacityAllocation"
+_iTn = "interruptionType"
+_zSP = "zeroSizePreference"
+_IInt = "InterruptionInfo"
 _SCRI = "SourceCapacityReservationId"
+_sCRI = "sourceCapacityReservationId"
+_CRLS = "CapacityReservationLaunchStatus"
+_LAUNCHABLE = "LAUNCHABLE"
+_lau = "launchable"
+_UNLAUNCHABLE = "UNLAUNCHABLE"
+_unla = "unlaunchable"
+_CRTa = "CapacityReservationType"
+_DEFAULT = "DEFAULT"
+_CB_ = "CAPACITY_BLOCK"
+_CRS = "CapacityReservationState"
+_sch = "scheduled"
+_pp__ = "payment_pending"
+_pp___ = "payment-pending"
+_pf____ = "payment_failed"
+_pf_____ = "payment-failed"
+_asse = "assessing"
+_dela = "delayed"
+_uns = "unsupported"
+_unav = "unavailable"
+_CRap = "CapacityReservation"
 _cRI = "capacityReservationId"
+_CRA = "CapacityReservationArn"
+_cRA = "capacityReservationArn"
+_iPns = "instancePlatform"
+_ten = "tenancy"
+_TICo = "TotalInstanceCount"
+_tICo = "totalInstanceCount"
+_AIC = "AvailableInstanceCount"
+_aIC = "availableInstanceCount"
+_eO = "ebsOptimized"
+_eSp = "ephemeralStorage"
+_iMC = "instanceMatchCriteria"
+_pGA = "placementGroupArn"
+_CAS = "CapacityAllocationSet"
+_cAS = "capacityAllocationSet"
+_RTes = "ReservationType"
+_rTe = "reservationType"
+_uRBOI = "unusedReservationBillingOwnerId"
+_CIom = "CommitmentInfo"
+_cIom = "commitmentInfo"
+_dP = "deliveryPreference"
+_cBI = "capacityBlockId"
+_Inte = "Interruptible"
+_inte = "interruptible"
+_iCA = "interruptibleCapacityAllocation"
+_iIn = "interruptionInfo"
+_ASd = "AdjustmentStatus"
+_aSd = "adjustmentStatus"
+_ADdj = "AdjustmentDetails"
+_aD = "adjustmentDetails"
 _OSD = "OriginalStartDate"
 _oSD = "originalStartDate"
+_LSa = "LaunchStatus"
+_lS = "launchStatus"
 _CCRBSI = "CreateCapacityReservationBySplittingInput"
 _cCCRBSR = "com.amazonaws.ec2#CreateCapacityReservationBySplittingRequest"
 _CCRBSO = "CreateCapacityReservationBySplittingOutput"
@@ -180,6 +275,168 @@ _MSPAPOOODP = "MaxSpotPriceAsPercentageOfOptimalOnDemandPrice"
 _BPF = "BaselinePerformanceFactors"
 _REIT = "RequireEncryptionInTransit"
 
+BOXED_INTEGER: StaticSchema = (7, n0, _BI, 0)
+
+CAPACITY_RESERVATION_TENANCY: StaticSchema = (
+    14,
+    n0,
+    _CRT,
+    0,
+    (_def, _ded),
+    ((-1, {_sV: _def}), (-1, {_sV: _ded})),
+)
+
+INTERRUPTION_INFO: StaticSchema = (
+    18,
+    n0,
+    _IInt,
+    0,
+    (_SCRI, _ITnt),
+    (
+        (lambda: schemas.STRING, {_aQN: _SCRI, _sN: _sCRI}),
+        (lambda: schemas.INTERRUPTION_TYPE, {_aQN: _ITnt, _sN: _iTn}),
+    ),
+)
+
+CAPACITY_RESERVATION_LAUNCH_STATUS: StaticSchema = (
+    14,
+    n0,
+    _CRLS,
+    0,
+    (_LAUNCHABLE, _UNLAUNCHABLE),
+    ((-1, {_sV: _lau}), (-1, {_sV: _unla})),
+)
+
+CAPACITY_RESERVATION_TYPE: StaticSchema = (
+    14,
+    n0,
+    _CRTa,
+    0,
+    (_DEFAULT, _CB_),
+    ((-1, {_sV: _def}), (-1, {_sV: _cb_})),
+)
+
+CAPACITY_RESERVATION_STATE: StaticSchema = (
+    14,
+    n0,
+    _CRS,
+    0,
+    (_act, _ex, _can, _p, _fa, _sch, _pp__, _pf____, _asse, _dela, _uns, _ca, _unav),
+    (
+        (-1, {_sV: _act}),
+        (-1, {_sV: _ex}),
+        (-1, {_sV: _can}),
+        (-1, {_sV: _p}),
+        (-1, {_sV: _fa}),
+        (-1, {_sV: _sch}),
+        (-1, {_sV: _pp___}),
+        (-1, {_sV: _pf_____}),
+        (-1, {_sV: _asse}),
+        (-1, {_sV: _dela}),
+        (-1, {_sV: _uns}),
+        (-1, {_sV: _ca}),
+        (-1, {_sV: _unav}),
+    ),
+)
+
+CAPACITY_RESERVATION: StaticSchema = (
+    18,
+    n0,
+    _CRap,
+    0,
+    (
+        _CRI,
+        _OIw,
+        _CRA,
+        _AZI,
+        _IT,
+        _IPns,
+        _AZ,
+        _Ten,
+        _TICo,
+        _AIC,
+        _EO,
+        _ESp,
+        _St,
+        _SDt,
+        _ED,
+        _EDT,
+        _IMC,
+        _CD,
+        _Tag,
+        _OA,
+        _CRFI,
+        _PGA,
+        _CAap,
+        _RTes,
+        _URBOI,
+        _CIom,
+        _DPel,
+        _CBI,
+        _Inte,
+        _ICA,
+        _IInt,
+        _ASd,
+        _ADdj,
+        _OSD,
+        _ZSP,
+        _LSa,
+    ),
+    (
+        (lambda: schemas.STRING, {_aQN: _CRI, _sN: _cRI}),
+        (lambda: schemas.STRING, {_aQN: _OIw, _sN: _oI}),
+        (lambda: schemas.STRING, {_aQN: _CRA, _sN: _cRA}),
+        (lambda: schemas.STRING, {_aQN: _AZI, _sN: _aZI}),
+        (lambda: schemas.STRING, {_aQN: _IT, _sN: _iT}),
+        (
+            lambda: schemas.CAPACITY_RESERVATION_INSTANCE_PLATFORM,
+            {_aQN: _IPns, _sN: _iPns},
+        ),
+        (lambda: schemas.STRING, {_aQN: _AZ, _sN: _aZ}),
+        (CAPACITY_RESERVATION_TENANCY, {_aQN: _Ten, _sN: _ten}),
+        (lambda: schemas.INTEGER, {_aQN: _TICo, _sN: _tICo}),
+        (lambda: schemas.INTEGER, {_aQN: _AIC, _sN: _aIC}),
+        (lambda: schemas.BOOLEAN, {_aQN: _EO, _sN: _eO}),
+        (lambda: schemas.BOOLEAN, {_aQN: _ESp, _sN: _eSp}),
+        (CAPACITY_RESERVATION_STATE, {_aQN: _St, _sN: _st}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _SDt, _sN: _sDt}),
+        (lambda: schemas.DATE_TIME, {_aQN: _ED, _sN: _eD}),
+        (lambda: schemas.END_DATE_TYPE, {_aQN: _EDT, _sN: _eDT}),
+        (lambda: schemas.INSTANCE_MATCH_CRITERIA, {_aQN: _IMC, _sN: _iMC}),
+        (lambda: schemas.DATE_TIME, {_aQN: _CD, _sN: _cD}),
+        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
+        (lambda: schemas.OUTPOST_ARN, {_aQN: _OA, _sN: _oAu}),
+        (lambda: schemas.STRING, {_aQN: _CRFI, _sN: _cRFI}),
+        (lambda: schemas.PLACEMENT_GROUP_ARN, {_aQN: _PGA, _sN: _pGA}),
+        (lambda: schemas.CAPACITY_ALLOCATIONS, {_aQN: _CAS, _sN: _cAS}),
+        (CAPACITY_RESERVATION_TYPE, {_aQN: _RTes, _sN: _rTe}),
+        (lambda: schemas.ACCOUNT_ID, {_aQN: _URBOI, _sN: _uRBOI}),
+        (
+            lambda: schemas.CAPACITY_RESERVATION_COMMITMENT_INFO,
+            {_aQN: _CIom, _sN: _cIom},
+        ),
+        (
+            lambda: schemas.CAPACITY_RESERVATION_DELIVERY_PREFERENCE,
+            {_aQN: _DPel, _sN: _dP},
+        ),
+        (lambda: schemas.CAPACITY_BLOCK_ID, {_aQN: _CBI, _sN: _cBI}),
+        (lambda: schemas.BOXED_BOOLEAN, {_aQN: _Inte, _sN: _inte}),
+        (lambda: schemas.INTERRUPTIBLE_CAPACITY_ALLOCATION, {_aQN: _ICA, _sN: _iCA}),
+        (INTERRUPTION_INFO, {_aQN: _IInt, _sN: _iIn}),
+        (
+            lambda: schemas.CAPACITY_RESERVATION_ADJUSTMENT_STATUS,
+            {_aQN: _ASd, _sN: _aSd},
+        ),
+        (
+            lambda: schemas.CAPACITY_RESERVATION_ADJUSTMENT_DETAILS,
+            {_aQN: _ADdj, _sN: _aD},
+        ),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _OSD, _sN: _oSD}),
+        (lambda: schemas.ZERO_SIZE_PREFERENCE, {_aQN: _ZSP, _sN: _zSP}),
+        (CAPACITY_RESERVATION_LAUNCH_STATUS, {_aQN: _LSa, _sN: _lS}),
+    ),
+)
+
 CREATE_CAPACITY_RESERVATION_BY_SPLITTING_INPUT: StaticSchema = (
     18,
     n0,
@@ -202,8 +459,8 @@ CREATE_CAPACITY_RESERVATION_BY_SPLITTING_OUTPUT: StaticSchema = (
     {_sSI: _cCCRBSRo, _smit: None},
     (_SCR, _DCR, _IC),
     (
-        (lambda: schemas.CAPACITY_RESERVATION, {_aQN: _SCR, _sN: _sCR}),
-        (lambda: schemas.CAPACITY_RESERVATION, {_aQN: _DCR, _sN: _dCR}),
+        (CAPACITY_RESERVATION, {_aQN: _SCR, _sN: _sCR}),
+        (CAPACITY_RESERVATION, {_aQN: _DCR, _sN: _dCR}),
         (lambda: schemas.INTEGER, {_aQN: _IC, _sN: _iC}),
     ),
 )
@@ -260,7 +517,7 @@ CANCELLATION_TERMS: StaticSchema = (
     (
         (lambda: schemas.APPLY_CANCELLATION_CHARGES, {_aQN: _CTan, _sN: _cTa}),
         (lambda: schemas.STRING, {_aQN: _RSes, _sN: _rSes}),
-        (lambda: schemas.BOXED_INTEGER, {_aQN: _CIC, _sN: _cIC}),
+        (BOXED_INTEGER, {_aQN: _CIC, _sN: _cIC}),
         (lambda: schemas.BOXED_LONG, {_aQN: _CCDH, _sN: _cCDH}),
         (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _CEDh, _sN: _cEDh}),
     ),
@@ -376,7 +633,7 @@ MODIFICATION_RESERVATION_UPDATE: StaticSchema = (
     (
         (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _NCED, _sN: _nCED}),
         (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _NSD, _sN: _nSD}),
-        (lambda: schemas.BOXED_INTEGER, {_aQN: _NCD, _sN: _nCD}),
+        (BOXED_INTEGER, {_aQN: _NCD, _sN: _nCD}),
     ),
 )
 

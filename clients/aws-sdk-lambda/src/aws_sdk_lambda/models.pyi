@@ -200,6 +200,8 @@ from ._private.models_0 import (
     FunctionConfiguration as FunctionConfiguration,
     FunctionEventInvokeConfig as FunctionEventInvokeConfig,
     FunctionResponseType as FunctionResponseType,
+    FunctionRuntimeConfig as FunctionRuntimeConfig,
+    FunctionRuntimeConfigDict as FunctionRuntimeConfigDict,
     FunctionScalingConfig as FunctionScalingConfig,
     FunctionScalingConfigDict as FunctionScalingConfigDict,
     FunctionUrlAuthType as FunctionUrlAuthType,
@@ -350,10 +352,10 @@ from ._private.models_0 import (
     ListEventSourceMappingsOutput as ListEventSourceMappingsOutput,
     ListFunctionEventInvokeConfigsInput as ListFunctionEventInvokeConfigsInput,
     ListFunctionEventInvokeConfigsInputDict as ListFunctionEventInvokeConfigsInputDict,
-    ListFunctionEventInvokeConfigsOutput as ListFunctionEventInvokeConfigsOutput,
 )
 
 from ._private.models_1 import (
+    ListFunctionEventInvokeConfigsOutput as ListFunctionEventInvokeConfigsOutput,
     ListFunctionsByCodeSigningConfigInput as ListFunctionsByCodeSigningConfigInput,
     ListFunctionsByCodeSigningConfigInputDict as ListFunctionsByCodeSigningConfigInputDict,
     ListFunctionsByCodeSigningConfigOutput as ListFunctionsByCodeSigningConfigOutput,
@@ -456,7 +458,9 @@ from ._private.models_1 import (
     ResponseStreamingInvocationType as ResponseStreamingInvocationType,
     RetryDetails as RetryDetails,
     Runtime as Runtime,
+    RuntimeAliasDeletedException as RuntimeAliasDeletedException,
     RuntimeVersionConfig as RuntimeVersionConfig,
+    RuntimeVersionDeletedException as RuntimeVersionDeletedException,
     RuntimeVersionError as RuntimeVersionError,
     S3FilesConfig as S3FilesConfig,
     S3FilesConfigDict as S3FilesConfigDict,

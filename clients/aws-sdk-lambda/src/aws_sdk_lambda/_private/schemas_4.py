@@ -76,6 +76,7 @@ _Ro = "Role"
 _Cod = "Code"
 _La = "Layers"
 _FSCi = "FileSystemConfigs"
+_RCu = "RuntimeConfig"
 _SSe = "SensitiveString"
 _EEn = "EnvironmentError"
 _ERn = "EnvironmentResponse"
@@ -925,6 +926,7 @@ FUNCTION_CONFIGURATION: StaticSchema = (
         _CPC,
         _CSon,
         _DC,
+        _RCu,
     ),
     (
         (lambda: schemas.NAMESPACED_FUNCTION_NAME, 0),
@@ -967,6 +969,7 @@ FUNCTION_CONFIGURATION: StaticSchema = (
         (lambda: schemas.CAPACITY_PROVIDER_CONFIG, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.DURABLE_CONFIG, 0),
+        (lambda: schemas.FUNCTION_RUNTIME_CONFIG, 0),
     ),
 )
 
@@ -1124,6 +1127,7 @@ GET_FUNCTION_CONFIGURATION_OUTPUT: StaticSchema = (
         _CPC,
         _CSon,
         _DC,
+        _RCu,
     ),
     (
         (lambda: schemas.NAMESPACED_FUNCTION_NAME, 0),
@@ -1166,6 +1170,7 @@ GET_FUNCTION_CONFIGURATION_OUTPUT: StaticSchema = (
         (lambda: schemas.CAPACITY_PROVIDER_CONFIG, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.DURABLE_CONFIG, 0),
+        (lambda: schemas.FUNCTION_RUNTIME_CONFIG, 0),
     ),
 )
 

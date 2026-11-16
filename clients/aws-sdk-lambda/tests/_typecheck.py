@@ -164,6 +164,8 @@ from aws_sdk_lambda.models import (
     FunctionCodeLocationError,
     FunctionConfiguration,
     FunctionEventInvokeConfig,
+    FunctionRuntimeConfig,
+    FunctionRuntimeConfigDict,
     FunctionScalingConfig,
     FunctionScalingConfigDict,
     FunctionUrlConfig,
@@ -580,6 +582,7 @@ FunctionCodeLocation()
 FunctionCodeLocationError()
 FunctionConfiguration()
 FunctionEventInvokeConfig()
+FunctionRuntimeConfig(runtime_arn=_, runtime_alias=_)
 FunctionScalingConfig()
 FunctionUrlConfig(
     function_url=_, function_arn=_, creation_time=_, last_modified_time=_, auth_type=_
@@ -860,131 +863,132 @@ _params_44: FileSystemConfigDict = {"arn": _, "local_mount_path": _}
 _params_45: FilterDict = {}
 _params_46: FilterCriteriaDict = {}
 _params_47: FunctionCodeDict = {}
-_params_48: FunctionScalingConfigDict = {}
-_params_49: GetAccountSettingsInputDict = {}
-_params_50: GetAliasInputDict = {"function_name": _, "name": _}
-_params_51: GetCapacityProviderInputDict = {"capacity_provider_name": _}
-_params_52: GetCodeSigningConfigInputDict = {"code_signing_config_arn": _}
-_params_53: GetDurableExecutionHistoryInputDict = {"durable_execution_arn": _}
-_params_54: GetDurableExecutionInputDict = {"durable_execution_arn": _}
-_params_55: GetDurableExecutionStateInputDict = {
+_params_48: FunctionRuntimeConfigDict = {"runtime_arn": _, "runtime_alias": _}
+_params_49: FunctionScalingConfigDict = {}
+_params_50: GetAccountSettingsInputDict = {}
+_params_51: GetAliasInputDict = {"function_name": _, "name": _}
+_params_52: GetCapacityProviderInputDict = {"capacity_provider_name": _}
+_params_53: GetCodeSigningConfigInputDict = {"code_signing_config_arn": _}
+_params_54: GetDurableExecutionHistoryInputDict = {"durable_execution_arn": _}
+_params_55: GetDurableExecutionInputDict = {"durable_execution_arn": _}
+_params_56: GetDurableExecutionStateInputDict = {
     "durable_execution_arn": _,
     "checkpoint_token": _,
 }
-_params_56: GetEventSourceMappingInputDict = {"uuid": _}
-_params_57: GetFunctionCodeSigningConfigInputDict = {"function_name": _}
-_params_58: GetFunctionConcurrencyInputDict = {"function_name": _}
-_params_59: GetFunctionConfigurationInputDict = {"function_name": _}
-_params_60: GetFunctionEventInvokeConfigInputDict = {"function_name": _}
-_params_61: GetFunctionInputDict = {"function_name": _}
-_params_62: GetFunctionRecursionConfigInputDict = {"function_name": _}
-_params_63: GetFunctionScalingConfigInputDict = {"function_name": _, "qualifier": _}
-_params_64: GetFunctionUrlConfigInputDict = {"function_name": _}
-_params_65: GetLayerVersionByArnInputDict = {"arn": _}
-_params_66: GetLayerVersionInputDict = {"layer_name": _}
-_params_67: GetLayerVersionPolicyInputDict = {"layer_name": _}
-_params_68: GetPolicyInputDict = {"function_name": _}
-_params_69: GetProvisionedConcurrencyConfigInputDict = {
+_params_57: GetEventSourceMappingInputDict = {"uuid": _}
+_params_58: GetFunctionCodeSigningConfigInputDict = {"function_name": _}
+_params_59: GetFunctionConcurrencyInputDict = {"function_name": _}
+_params_60: GetFunctionConfigurationInputDict = {"function_name": _}
+_params_61: GetFunctionEventInvokeConfigInputDict = {"function_name": _}
+_params_62: GetFunctionInputDict = {"function_name": _}
+_params_63: GetFunctionRecursionConfigInputDict = {"function_name": _}
+_params_64: GetFunctionScalingConfigInputDict = {"function_name": _, "qualifier": _}
+_params_65: GetFunctionUrlConfigInputDict = {"function_name": _}
+_params_66: GetLayerVersionByArnInputDict = {"arn": _}
+_params_67: GetLayerVersionInputDict = {"layer_name": _}
+_params_68: GetLayerVersionPolicyInputDict = {"layer_name": _}
+_params_69: GetPolicyInputDict = {"function_name": _}
+_params_70: GetProvisionedConcurrencyConfigInputDict = {
     "function_name": _,
     "qualifier": _,
 }
-_params_70: GetResourcePolicyInputDict = {"resource_arn": _}
-_params_71: GetRuntimeManagementConfigInputDict = {"function_name": _}
-_params_72: ImageConfigDict = {}
-_params_73: InstanceRequirementsDict = {}
-_params_74: InvokeAsyncInputDict = {"function_name": _, "invoke_args": _}
-_params_75: InvokeInputDict = {"function_name": _}
-_params_76: InvokeWithResponseStreamInputDict = {"function_name": _}
-_params_77: KafkaSchemaRegistryAccessConfigDict = {}
-_params_78: KafkaSchemaRegistryConfigDict = {}
-_params_79: KafkaSchemaValidationConfigDict = {}
-_params_80: LambdaManagedInstancesCapacityProviderConfigDict = {
+_params_71: GetResourcePolicyInputDict = {"resource_arn": _}
+_params_72: GetRuntimeManagementConfigInputDict = {"function_name": _}
+_params_73: ImageConfigDict = {}
+_params_74: InstanceRequirementsDict = {}
+_params_75: InvokeAsyncInputDict = {"function_name": _, "invoke_args": _}
+_params_76: InvokeInputDict = {"function_name": _}
+_params_77: InvokeWithResponseStreamInputDict = {"function_name": _}
+_params_78: KafkaSchemaRegistryAccessConfigDict = {}
+_params_79: KafkaSchemaRegistryConfigDict = {}
+_params_80: KafkaSchemaValidationConfigDict = {}
+_params_81: LambdaManagedInstancesCapacityProviderConfigDict = {
     "capacity_provider_arn": _
 }
-_params_81: LayerVersionContentInputDict = {}
-_params_82: ListAliasesInputDict = {"function_name": _}
-_params_83: ListCapacityProvidersInputDict = {}
-_params_84: ListCodeSigningConfigsInputDict = {}
-_params_85: ListDurableExecutionsByFunctionInputDict = {"function_name": _}
-_params_86: ListEventSourceMappingsInputDict = {}
-_params_87: ListFunctionEventInvokeConfigsInputDict = {"function_name": _}
-_params_88: ListFunctionsByCodeSigningConfigInputDict = {"code_signing_config_arn": _}
-_params_89: ListFunctionsInputDict = {}
-_params_90: ListFunctionUrlConfigsInputDict = {"function_name": _}
-_params_91: ListFunctionVersionsByCapacityProviderInputDict = {
+_params_82: LayerVersionContentInputDict = {}
+_params_83: ListAliasesInputDict = {"function_name": _}
+_params_84: ListCapacityProvidersInputDict = {}
+_params_85: ListCodeSigningConfigsInputDict = {}
+_params_86: ListDurableExecutionsByFunctionInputDict = {"function_name": _}
+_params_87: ListEventSourceMappingsInputDict = {}
+_params_88: ListFunctionEventInvokeConfigsInputDict = {"function_name": _}
+_params_89: ListFunctionsByCodeSigningConfigInputDict = {"code_signing_config_arn": _}
+_params_90: ListFunctionsInputDict = {}
+_params_91: ListFunctionUrlConfigsInputDict = {"function_name": _}
+_params_92: ListFunctionVersionsByCapacityProviderInputDict = {
     "capacity_provider_name": _
 }
-_params_92: ListLayersInputDict = {}
-_params_93: ListLayerVersionsInputDict = {"layer_name": _}
-_params_94: ListProvisionedConcurrencyConfigsInputDict = {"function_name": _}
-_params_95: ListTagsInputDict = {"resource": _}
-_params_96: ListVersionsByFunctionInputDict = {"function_name": _}
-_params_97: LoggingConfigDict = {}
-_params_98: OnFailureDict = {}
-_params_99: OnSuccessDict = {}
-_params_100: OperationUpdateDict = {"id": _, "type": _, "action": _}
-_params_101: PropagateTagsDict = {}
-_params_102: ProvisionedPollerConfigDict = {}
-_params_103: PublishLayerVersionInputDict = {"layer_name": _, "content": _}
-_params_104: PublishVersionInputDict = {"function_name": _}
-_params_105: PutFunctionCodeSigningConfigInputDict = {
+_params_93: ListLayersInputDict = {}
+_params_94: ListLayerVersionsInputDict = {"layer_name": _}
+_params_95: ListProvisionedConcurrencyConfigsInputDict = {"function_name": _}
+_params_96: ListTagsInputDict = {"resource": _}
+_params_97: ListVersionsByFunctionInputDict = {"function_name": _}
+_params_98: LoggingConfigDict = {}
+_params_99: OnFailureDict = {}
+_params_100: OnSuccessDict = {}
+_params_101: OperationUpdateDict = {"id": _, "type": _, "action": _}
+_params_102: PropagateTagsDict = {}
+_params_103: ProvisionedPollerConfigDict = {}
+_params_104: PublishLayerVersionInputDict = {"layer_name": _, "content": _}
+_params_105: PublishVersionInputDict = {"function_name": _}
+_params_106: PutFunctionCodeSigningConfigInputDict = {
     "code_signing_config_arn": _,
     "function_name": _,
 }
-_params_106: PutFunctionConcurrencyInputDict = {
+_params_107: PutFunctionConcurrencyInputDict = {
     "function_name": _,
     "reserved_concurrent_executions": _,
 }
-_params_107: PutFunctionEventInvokeConfigInputDict = {"function_name": _}
-_params_108: PutFunctionRecursionConfigInputDict = {
+_params_108: PutFunctionEventInvokeConfigInputDict = {"function_name": _}
+_params_109: PutFunctionRecursionConfigInputDict = {
     "function_name": _,
     "recursive_loop": _,
 }
-_params_109: PutFunctionScalingConfigInputDict = {"function_name": _, "qualifier": _}
-_params_110: PutProvisionedConcurrencyConfigInputDict = {
+_params_110: PutFunctionScalingConfigInputDict = {"function_name": _, "qualifier": _}
+_params_111: PutProvisionedConcurrencyConfigInputDict = {
     "function_name": _,
     "qualifier": _,
     "provisioned_concurrent_executions": _,
 }
-_params_111: PutResourcePolicyInputDict = {"resource_arn": _, "policy": _}
-_params_112: PutRuntimeManagementConfigInputDict = {
+_params_112: PutResourcePolicyInputDict = {"resource_arn": _, "policy": _}
+_params_113: PutRuntimeManagementConfigInputDict = {
     "function_name": _,
     "update_runtime_on": _,
 }
-_params_113: RemoveLayerVersionPermissionInputDict = {
+_params_114: RemoveLayerVersionPermissionInputDict = {
     "layer_name": _,
     "statement_id": _,
 }
-_params_114: RemovePermissionInputDict = {"function_name": _, "statement_id": _}
-_params_115: S3FilesConfigDict = {}
-_params_116: ScalingConfigDict = {}
-_params_117: SelfManagedEventSourceDict = {}
-_params_118: SelfManagedKafkaEventSourceConfigDict = {}
-_params_119: SendDurableExecutionCallbackFailureInputDict = {"callback_id": _}
-_params_120: SendDurableExecutionCallbackHeartbeatInputDict = {"callback_id": _}
-_params_121: SendDurableExecutionCallbackSuccessInputDict = {"callback_id": _}
-_params_122: SnapStartDict = {}
-_params_123: SourceAccessConfigurationDict = {}
-_params_124: StepOptionsDict = {}
-_params_125: StopDurableExecutionInputDict = {"durable_execution_arn": _}
-_params_126: TagResourceInputDict = {"resource": _, "tags": _}
-_params_127: TargetTrackingScalingPolicyDict = {
+_params_115: RemovePermissionInputDict = {"function_name": _, "statement_id": _}
+_params_116: S3FilesConfigDict = {}
+_params_117: ScalingConfigDict = {}
+_params_118: SelfManagedEventSourceDict = {}
+_params_119: SelfManagedKafkaEventSourceConfigDict = {}
+_params_120: SendDurableExecutionCallbackFailureInputDict = {"callback_id": _}
+_params_121: SendDurableExecutionCallbackHeartbeatInputDict = {"callback_id": _}
+_params_122: SendDurableExecutionCallbackSuccessInputDict = {"callback_id": _}
+_params_123: SnapStartDict = {}
+_params_124: SourceAccessConfigurationDict = {}
+_params_125: StepOptionsDict = {}
+_params_126: StopDurableExecutionInputDict = {"durable_execution_arn": _}
+_params_127: TagResourceInputDict = {"resource": _, "tags": _}
+_params_128: TargetTrackingScalingPolicyDict = {
     "predefined_metric_type": _,
     "target_value": _,
 }
-_params_128: TenancyConfigDict = {"tenant_isolation_mode": _}
-_params_129: TracingConfigDict = {}
-_params_130: UntagResourceInputDict = {"resource": _, "tag_keys": _}
-_params_131: UpdateAliasInputDict = {"function_name": _, "name": _}
-_params_132: UpdateCapacityProviderInputDict = {"capacity_provider_name": _}
-_params_133: UpdateCodeSigningConfigInputDict = {"code_signing_config_arn": _}
-_params_134: UpdateEventSourceMappingInputDict = {"uuid": _}
-_params_135: UpdateFunctionCodeInputDict = {"function_name": _}
-_params_136: UpdateFunctionConfigurationInputDict = {"function_name": _}
-_params_137: UpdateFunctionEventInvokeConfigInputDict = {"function_name": _}
-_params_138: UpdateFunctionUrlConfigInputDict = {"function_name": _}
-_params_139: VpcConfigDict = {}
-_params_140: WaitOptionsDict = {}
+_params_129: TenancyConfigDict = {"tenant_isolation_mode": _}
+_params_130: TracingConfigDict = {}
+_params_131: UntagResourceInputDict = {"resource": _, "tag_keys": _}
+_params_132: UpdateAliasInputDict = {"function_name": _, "name": _}
+_params_133: UpdateCapacityProviderInputDict = {"capacity_provider_name": _}
+_params_134: UpdateCodeSigningConfigInputDict = {"code_signing_config_arn": _}
+_params_135: UpdateEventSourceMappingInputDict = {"uuid": _}
+_params_136: UpdateFunctionCodeInputDict = {"function_name": _}
+_params_137: UpdateFunctionConfigurationInputDict = {"function_name": _}
+_params_138: UpdateFunctionEventInvokeConfigInputDict = {"function_name": _}
+_params_139: UpdateFunctionUrlConfigInputDict = {"function_name": _}
+_params_140: VpcConfigDict = {}
+_params_141: WaitOptionsDict = {}
 
 
 def _request[T](form: type[T]) -> T:

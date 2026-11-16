@@ -52,6 +52,8 @@ from ..auth import HTTPAuthSchemeResolver
 if TYPE_CHECKING:
     from smithy_core.interceptors import Interceptor
     from ..models import (
+        AssociateCrossAccountReplicaInput,
+        AssociateCrossAccountReplicaOutput,
         BatchGetSecretValueInput,
         BatchGetSecretValueOutput,
         CancelRotateSecretInput,
@@ -64,12 +66,16 @@ if TYPE_CHECKING:
         DeleteSecretOutput,
         DescribeSecretInput,
         DescribeSecretOutput,
+        DisassociateCrossAccountReplicaInput,
+        DisassociateCrossAccountReplicaOutput,
         GetRandomPasswordInput,
         GetRandomPasswordOutput,
         GetResourcePolicyInput,
         GetResourcePolicyOutput,
         GetSecretValueInput,
         GetSecretValueOutput,
+        ListResourcePoliciesInput,
+        ListResourcePoliciesOutput,
         ListSecretVersionIdsInput,
         ListSecretVersionIdsOutput,
         ListSecretsInput,
@@ -101,15 +107,28 @@ if TYPE_CHECKING:
     )
 
     _ServiceInterceptor = Union[
+        Interceptor[
+            AssociateCrossAccountReplicaInput,
+            AssociateCrossAccountReplicaOutput,
+            Any,
+            Any,
+        ],
         Interceptor[BatchGetSecretValueInput, BatchGetSecretValueOutput, Any, Any],
         Interceptor[CancelRotateSecretInput, CancelRotateSecretOutput, Any, Any],
         Interceptor[CreateSecretInput, CreateSecretOutput, Any, Any],
         Interceptor[DeleteResourcePolicyInput, DeleteResourcePolicyOutput, Any, Any],
         Interceptor[DeleteSecretInput, DeleteSecretOutput, Any, Any],
         Interceptor[DescribeSecretInput, DescribeSecretOutput, Any, Any],
+        Interceptor[
+            DisassociateCrossAccountReplicaInput,
+            DisassociateCrossAccountReplicaOutput,
+            Any,
+            Any,
+        ],
         Interceptor[GetRandomPasswordInput, GetRandomPasswordOutput, Any, Any],
         Interceptor[GetResourcePolicyInput, GetResourcePolicyOutput, Any, Any],
         Interceptor[GetSecretValueInput, GetSecretValueOutput, Any, Any],
+        Interceptor[ListResourcePoliciesInput, ListResourcePoliciesOutput, Any, Any],
         Interceptor[ListSecretsInput, ListSecretsOutput, Any, Any],
         Interceptor[ListSecretVersionIdsInput, ListSecretVersionIdsOutput, Any, Any],
         Interceptor[PutResourcePolicyInput, PutResourcePolicyOutput, Any, Any],

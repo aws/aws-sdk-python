@@ -11,8 +11,6 @@ _sN = "smithy.api#xmlName"
 _sV = "smithy.api#enumValue"
 _me = "member"
 _i = "item"
-_Ta = "Tag"
-_Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
 _smi = "smithy.api#required"
@@ -20,20 +18,12 @@ _DR = "DryRun"
 _smit = "smithy.api#output"
 _R = "Return"
 _r = "return"
-_TGAI = "TransitGatewayAttachmentId"
-_TGI = "TransitGatewayId"
-_TGCVA = "TransitGatewayClientVpnAttachment"
-_tGCVA = "transitGatewayClientVpnAttachment"
-_TGMDI = "TransitGatewayMulticastDomainId"
+_fa = "failed"
 _SIu = "SubnetId"
-_RIe = "ResourceId"
-_rI = "resourceId"
 _C = "Code"
 _co = "code"
 _Me = "Message"
 _mes = "message"
-_TGPA = "TransitGatewayPeeringAttachment"
-_tGPA = "transitGatewayPeeringAttachment"
 _E = "Error"
 _er = "error"
 _dRr = "dryRun"
@@ -42,22 +32,17 @@ _egr = "egress"
 _RN = "RuleNumber"
 _rN = "ruleNumber"
 _DPLI = "DestinationPrefixListId"
+_NGI = "NatGatewayId"
+_nGI = "natGatewayId"
 _NII = "NetworkInterfaceId"
 _nII = "networkInterfaceId"
 _PLI = "PrefixListId"
-_TGr = "TransitGateway"
-_tG = "transitGateway"
-_TGRT = "TransitGatewayRouteTable"
-_tGRT = "transitGatewayRouteTable"
-_TGPT = "TransitGatewayPolicyTable"
-_tGPT = "transitGatewayPolicyTable"
-_TGPTE = "TransitGatewayPolicyTableEntry"
-_tGPTE = "transitGatewayPolicyTableEntry"
+_PL = "PrefixList"
+_pL = "prefixList"
 _NIASAI = "NetworkInsightsAccessScopeAnalysisId"
 _NIASI = "NetworkInsightsAccessScopeId"
 _nIASAI = "networkInsightsAccessScopeAnalysisId"
 _nIASI = "networkInsightsAccessScopeId"
-_Res = "Resources"
 _NBG = "NetworkBorderGroup"
 _PIo = "PoolId"
 _CTl = "ClientToken"
@@ -68,8 +53,6 @@ _RSI = "RouteServerId"
 _RTIo = "RouteTableId"
 _rTIo = "routeTableId"
 _GIr = "GroupId"
-_TGPTI = "TransitGatewayPolicyTableId"
-_TGRTI = "TransitGatewayRouteTableId"
 _gIr = "groupId"
 _GN = "GroupName"
 _gN = "groupName"
@@ -77,12 +60,46 @@ _Fo = "Force"
 _RIIes = "ReservedInstancesId"
 _rII = "reservedInstancesId"
 _UE = "UNEXPECTED_ERROR"
+_uE = "unexpectedError"
 _SIn = "SnapshotId"
 _DCB = "DestinationCidrBlock"
+_LGRTI = "LocalGatewayRouteTableId"
+_succ = "successful"
+_LTI = "LaunchTemplateId"
+_LTN = "LaunchTemplateName"
+_KN = "KeyName"
+_lTI = "launchTemplateId"
+_lTN = "launchTemplateName"
+_ISI = "IpamScopeId"
+_ISpam = "IpamScope"
+_iSpa = "ipamScope"
+_KPI = "KeyPairId"
+_kPI = "keyPairId"
+_MCI = "MetricCategoryId"
 _SSIe = "SecondarySubnetId"
+_LT = "LaunchTemplate"
+_lT = "launchTemplate"
+_LTV = "LaunchTemplateVersion"
+_VNe = "VersionNumber"
+_vNe = "versionNumber"
+_LGVIGI = "LocalGatewayVirtualInterfaceGroupId"
 _dCB = "destinationCidrBlock"
 _Rou = "Route"
 _rou = "route"
+_LGRTo = "LocalGatewayRouteTable"
+_lGRT = "localGatewayRouteTable"
+_LGRTVIGAI = "LocalGatewayRouteTableVirtualInterfaceGroupAssociationId"
+_LGRTVIGA = "LocalGatewayRouteTableVirtualInterfaceGroupAssociation"
+_lGRTVIGA = "localGatewayRouteTableVirtualInterfaceGroupAssociation"
+_LGRTVAI = "LocalGatewayRouteTableVpcAssociationId"
+_LGRTVA = "LocalGatewayRouteTableVpcAssociation"
+_lGRTVA = "localGatewayRouteTableVpcAssociation"
+_LGVII = "LocalGatewayVirtualInterfaceId"
+_LGVI = "LocalGatewayVirtualInterface"
+_lGVI = "localGatewayVirtualInterface"
+_LGVIG = "LocalGatewayVirtualInterfaceGroup"
+_lGVIG = "localGatewayVirtualInterfaceGroup"
+_mCI = "metricCategoryId"
 _NAI = "NetworkAclId"
 _nAI = "networkAclId"
 _NIPI = "NetworkInsightsPathId"
@@ -103,34 +120,113 @@ _SNec = "SecondaryNetwork"
 _sNec = "secondaryNetwork"
 _SSe = "SecondarySubnet"
 _sSe = "secondarySubnet"
-_SCRIu = "SubnetCidrReservationId"
-_TMFRI = "TrafficMirrorFilterRuleId"
-_tMFRI = "trafficMirrorFilterRuleId"
-_TMFI = "TrafficMirrorFilterId"
-_tMFI = "trafficMirrorFilterId"
-_TMTI = "TrafficMirrorTargetId"
-_TMSI = "TrafficMirrorSessionId"
-_tMSI = "trafficMirrorSessionId"
-_tMTI = "trafficMirrorTargetId"
-_TGCr = "TransitGatewayConnect"
-_tGC = "transitGatewayConnect"
-_TGCPI = "TransitGatewayConnectPeerId"
-_TGCP = "TransitGatewayConnectPeer"
-_tGCP = "transitGatewayConnectPeer"
-_TGMPI = "TransitGatewayMeteringPolicyId"
-_TGMP = "TransitGatewayMeteringPolicy"
-_tGMP = "transitGatewayMeteringPolicy"
-_PRNo = "PolicyRuleNumber"
-_TGMPE = "TransitGatewayMeteringPolicyEntry"
-_tGMPE = "transitGatewayMeteringPolicyEntry"
-_TGMD = "TransitGatewayMulticastDomain"
-_tGMD = "transitGatewayMulticastDomain"
-_TGPLR = "TransitGatewayPrefixListReference"
-_tGPLR = "transitGatewayPrefixListReference"
+_Fai = "Failed"
+_DISI = "DeleteIpamScopeInput"
+_cDISR = "com.amazonaws.ec2#DeleteIpamScopeRequest"
+_DISO = "DeleteIpamScopeOutput"
+_cDISRo = "com.amazonaws.ec2#DeleteIpamScopeResult"
+_DIS = "DeleteIpamScope"
+_KPNWR = "KeyPairNameWithResolver"
+_DKPI = "DeleteKeyPairInput"
+_cDKPR = "com.amazonaws.ec2#DeleteKeyPairRequest"
+_DKPO = "DeleteKeyPairOutput"
+_cDKPRo = "com.amazonaws.ec2#DeleteKeyPairResult"
+_DKP = "DeleteKeyPair"
+_DLTI = "DeleteLaunchTemplateInput"
+_cDLTR = "com.amazonaws.ec2#DeleteLaunchTemplateRequest"
+_DLTO = "DeleteLaunchTemplateOutput"
+_cDLTRo = "com.amazonaws.ec2#DeleteLaunchTemplateResult"
+_DLT = "DeleteLaunchTemplate"
+_DLTVI = "DeleteLaunchTemplateVersionsInput"
+_cDLTVR = "com.amazonaws.ec2#DeleteLaunchTemplateVersionsRequest"
+_Vers = "Versions"
+_DLTVRSI = "DeleteLaunchTemplateVersionsResponseSuccessItem"
+_DLTVRSS = "DeleteLaunchTemplateVersionsResponseSuccessSet"
+_LTEC = "LaunchTemplateErrorCode"
+_LTIDNE = "LAUNCH_TEMPLATE_ID_DOES_NOT_EXIST"
+_lTIDNE = "launchTemplateIdDoesNotExist"
+_LTIM = "LAUNCH_TEMPLATE_ID_MALFORMED"
+_lTIM = "launchTemplateIdMalformed"
+_LTNDNE = "LAUNCH_TEMPLATE_NAME_DOES_NOT_EXIST"
+_lTNDNE = "launchTemplateNameDoesNotExist"
+_LTNM = "LAUNCH_TEMPLATE_NAME_MALFORMED"
+_lTNM = "launchTemplateNameMalformed"
+_LTVDNE = "LAUNCH_TEMPLATE_VERSION_DOES_NOT_EXIST"
+_lTVDNE = "launchTemplateVersionDoesNotExist"
+_REe = "ResponseError"
+_DLTVREI = "DeleteLaunchTemplateVersionsResponseErrorItem"
+_rEe = "responseError"
+_DLTVRES = "DeleteLaunchTemplateVersionsResponseErrorSet"
+_DLTVO = "DeleteLaunchTemplateVersionsOutput"
+_cDLTVRo = "com.amazonaws.ec2#DeleteLaunchTemplateVersionsResult"
+_SDLTV = "SuccessfullyDeletedLaunchTemplateVersions"
+_SDLTVS = "SuccessfullyDeletedLaunchTemplateVersionSet"
+_sDLTVS = "successfullyDeletedLaunchTemplateVersionSet"
+_UDLTV = "UnsuccessfullyDeletedLaunchTemplateVersions"
+_UDLTVS = "UnsuccessfullyDeletedLaunchTemplateVersionSet"
+_uDLTVS = "unsuccessfullyDeletedLaunchTemplateVersionSet"
+_DLTV = "DeleteLaunchTemplateVersions"
+_DLGRI = "DeleteLocalGatewayRouteInput"
+_cDLGRR = "com.amazonaws.ec2#DeleteLocalGatewayRouteRequest"
+_DLGRO = "DeleteLocalGatewayRouteOutput"
+_cDLGRRo = "com.amazonaws.ec2#DeleteLocalGatewayRouteResult"
+_DLGR = "DeleteLocalGatewayRoute"
+_DLGRTI = "DeleteLocalGatewayRouteTableInput"
+_cDLGRTR = "com.amazonaws.ec2#DeleteLocalGatewayRouteTableRequest"
+_DLGRTO = "DeleteLocalGatewayRouteTableOutput"
+_cDLGRTRo = "com.amazonaws.ec2#DeleteLocalGatewayRouteTableResult"
+_DLGRT = "DeleteLocalGatewayRouteTable"
+_DLGRTVIGAI = "DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationInput"
+_cDLGRTVIGAR = "com.amazonaws.ec2#DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationRequest"
+_DLGRTVIGAO = "DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationOutput"
+_cDLGRTVIGARo = "com.amazonaws.ec2#DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationResult"
+_DLGRTVIGA = "DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociation"
+_DLGRTVAI = "DeleteLocalGatewayRouteTableVpcAssociationInput"
+_cDLGRTVAR = "com.amazonaws.ec2#DeleteLocalGatewayRouteTableVpcAssociationRequest"
+_DLGRTVAO = "DeleteLocalGatewayRouteTableVpcAssociationOutput"
+_cDLGRTVARo = "com.amazonaws.ec2#DeleteLocalGatewayRouteTableVpcAssociationResult"
+_DLGRTVA = "DeleteLocalGatewayRouteTableVpcAssociation"
+_DLGVII = "DeleteLocalGatewayVirtualInterfaceInput"
+_cDLGVIR = "com.amazonaws.ec2#DeleteLocalGatewayVirtualInterfaceRequest"
+_DLGVIO = "DeleteLocalGatewayVirtualInterfaceOutput"
+_cDLGVIRo = "com.amazonaws.ec2#DeleteLocalGatewayVirtualInterfaceResult"
+_DLGVI = "DeleteLocalGatewayVirtualInterface"
+_DLGVIGI = "DeleteLocalGatewayVirtualInterfaceGroupInput"
+_cDLGVIGR = "com.amazonaws.ec2#DeleteLocalGatewayVirtualInterfaceGroupRequest"
+_DLGVIGO = "DeleteLocalGatewayVirtualInterfaceGroupOutput"
+_cDLGVIGRo = "com.amazonaws.ec2#DeleteLocalGatewayVirtualInterfaceGroupResult"
+_DLGVIG = "DeleteLocalGatewayVirtualInterfaceGroup"
+_DMPLI = "DeleteManagedPrefixListInput"
+_cDMPLR = "com.amazonaws.ec2#DeleteManagedPrefixListRequest"
+_DMPLO = "DeleteManagedPrefixListOutput"
+_cDMPLRo = "com.amazonaws.ec2#DeleteManagedPrefixListResult"
+_DMPL = "DeleteManagedPrefixList"
+_DMCI = "DeleteMetricCategoryInput"
+_cDMCR = "com.amazonaws.ec2#DeleteMetricCategoryRequest"
+_DMCO = "DeleteMetricCategoryOutput"
+_cDMCRo = "com.amazonaws.ec2#DeleteMetricCategoryResult"
+_DMC = "DeleteMetricCategory"
+_DNGI = "DeleteNatGatewayInput"
+_cDNGR = "com.amazonaws.ec2#DeleteNatGatewayRequest"
+_DNGO = "DeleteNatGatewayOutput"
+_cDNGRo = "com.amazonaws.ec2#DeleteNatGatewayResult"
+_DNG = "DeleteNatGateway"
+_DNAI = "DeleteNetworkAclInput"
+_cDNAR = "com.amazonaws.ec2#DeleteNetworkAclRequest"
+_DNAO = "DeleteNetworkAclOutput"
+_DNA = "DeleteNetworkAcl"
 _DNAEI = "DeleteNetworkAclEntryInput"
 _cDNAER = "com.amazonaws.ec2#DeleteNetworkAclEntryRequest"
 _DNAEO = "DeleteNetworkAclEntryOutput"
 _DNAE = "DeleteNetworkAclEntry"
+_FCAPIL = "FlexCostAllocationPolicyIdList"
+_DNFCAPI = "DeleteNetworkingFlexCostAllocationPoliciesInput"
+_cDNFCAPR = "com.amazonaws.ec2#DeleteNetworkingFlexCostAllocationPoliciesRequest"
+_FPIc = "FcaPolicyIds"
+_DNFCAPO = "DeleteNetworkingFlexCostAllocationPoliciesOutput"
+_cDNFCAPRo = "com.amazonaws.ec2#DeleteNetworkingFlexCostAllocationPoliciesResult"
+_Suc = "Successful"
+_DNFCAP = "DeleteNetworkingFlexCostAllocationPolicies"
 _DNIASI = "DeleteNetworkInsightsAccessScopeInput"
 _cDNIASR = "com.amazonaws.ec2#DeleteNetworkInsightsAccessScopeRequest"
 _DNIASO = "DeleteNetworkInsightsAccessScopeOutput"
@@ -246,103 +342,538 @@ _DSIe = "DeleteSubnetInput"
 _cDSRo = "com.amazonaws.ec2#DeleteSubnetRequest"
 _DSOe = "DeleteSubnetOutput"
 _DSele = "DeleteSubnet"
-_DSCRI = "DeleteSubnetCidrReservationInput"
-_cDSCRR = "com.amazonaws.ec2#DeleteSubnetCidrReservationRequest"
-_DSCRO = "DeleteSubnetCidrReservationOutput"
-_cDSCRRo = "com.amazonaws.ec2#DeleteSubnetCidrReservationResult"
-_DSCR = "DeletedSubnetCidrReservation"
-_dSCR = "deletedSubnetCidrReservation"
-_DSCRe = "DeleteSubnetCidrReservation"
-_DTIe = "DeleteTagsInput"
-_cDTR = "com.amazonaws.ec2#DeleteTagsRequest"
-_tag = "tag"
-_DTO = "DeleteTagsOutput"
-_DTelet = "DeleteTags"
-_DTMFI = "DeleteTrafficMirrorFilterInput"
-_cDTMFR = "com.amazonaws.ec2#DeleteTrafficMirrorFilterRequest"
-_DTMFO = "DeleteTrafficMirrorFilterOutput"
-_cDTMFRo = "com.amazonaws.ec2#DeleteTrafficMirrorFilterResult"
-_DTMF = "DeleteTrafficMirrorFilter"
-_DTMFRI = "DeleteTrafficMirrorFilterRuleInput"
-_cDTMFRR = "com.amazonaws.ec2#DeleteTrafficMirrorFilterRuleRequest"
-_DTMFRO = "DeleteTrafficMirrorFilterRuleOutput"
-_cDTMFRRo = "com.amazonaws.ec2#DeleteTrafficMirrorFilterRuleResult"
-_DTMFR = "DeleteTrafficMirrorFilterRule"
-_DTMSI = "DeleteTrafficMirrorSessionInput"
-_cDTMSR = "com.amazonaws.ec2#DeleteTrafficMirrorSessionRequest"
-_DTMSO = "DeleteTrafficMirrorSessionOutput"
-_cDTMSRo = "com.amazonaws.ec2#DeleteTrafficMirrorSessionResult"
-_DTMS = "DeleteTrafficMirrorSession"
-_DTMTI = "DeleteTrafficMirrorTargetInput"
-_cDTMTR = "com.amazonaws.ec2#DeleteTrafficMirrorTargetRequest"
-_DTMTO = "DeleteTrafficMirrorTargetOutput"
-_cDTMTRo = "com.amazonaws.ec2#DeleteTrafficMirrorTargetResult"
-_DTMT = "DeleteTrafficMirrorTarget"
-_DTGI = "DeleteTransitGatewayInput"
-_cDTGR = "com.amazonaws.ec2#DeleteTransitGatewayRequest"
-_DTGO = "DeleteTransitGatewayOutput"
-_cDTGRo = "com.amazonaws.ec2#DeleteTransitGatewayResult"
-_DTG = "DeleteTransitGateway"
-_DTGCVAI = "DeleteTransitGatewayClientVpnAttachmentInput"
-_cDTGCVAR = "com.amazonaws.ec2#DeleteTransitGatewayClientVpnAttachmentRequest"
-_DTGCVAO = "DeleteTransitGatewayClientVpnAttachmentOutput"
-_cDTGCVARo = "com.amazonaws.ec2#DeleteTransitGatewayClientVpnAttachmentResult"
-_DTGCVA = "DeleteTransitGatewayClientVpnAttachment"
-_DTGCI = "DeleteTransitGatewayConnectInput"
-_cDTGCR = "com.amazonaws.ec2#DeleteTransitGatewayConnectRequest"
-_DTGCO = "DeleteTransitGatewayConnectOutput"
-_cDTGCRo = "com.amazonaws.ec2#DeleteTransitGatewayConnectResult"
-_DTGC = "DeleteTransitGatewayConnect"
-_DTGCPI = "DeleteTransitGatewayConnectPeerInput"
-_cDTGCPR = "com.amazonaws.ec2#DeleteTransitGatewayConnectPeerRequest"
-_DTGCPO = "DeleteTransitGatewayConnectPeerOutput"
-_cDTGCPRo = "com.amazonaws.ec2#DeleteTransitGatewayConnectPeerResult"
-_DTGCP = "DeleteTransitGatewayConnectPeer"
-_DTGMPI = "DeleteTransitGatewayMeteringPolicyInput"
-_cDTGMPR = "com.amazonaws.ec2#DeleteTransitGatewayMeteringPolicyRequest"
-_DTGMPO = "DeleteTransitGatewayMeteringPolicyOutput"
-_cDTGMPRo = "com.amazonaws.ec2#DeleteTransitGatewayMeteringPolicyResult"
-_DTGMP = "DeleteTransitGatewayMeteringPolicy"
-_DTGMPEI = "DeleteTransitGatewayMeteringPolicyEntryInput"
-_cDTGMPER = "com.amazonaws.ec2#DeleteTransitGatewayMeteringPolicyEntryRequest"
-_DTGMPEO = "DeleteTransitGatewayMeteringPolicyEntryOutput"
-_cDTGMPERo = "com.amazonaws.ec2#DeleteTransitGatewayMeteringPolicyEntryResult"
-_DTGMPE = "DeleteTransitGatewayMeteringPolicyEntry"
-_DTGMDI = "DeleteTransitGatewayMulticastDomainInput"
-_cDTGMDR = "com.amazonaws.ec2#DeleteTransitGatewayMulticastDomainRequest"
-_DTGMDO = "DeleteTransitGatewayMulticastDomainOutput"
-_cDTGMDRo = "com.amazonaws.ec2#DeleteTransitGatewayMulticastDomainResult"
-_DTGMD = "DeleteTransitGatewayMulticastDomain"
-_DTGPAI = "DeleteTransitGatewayPeeringAttachmentInput"
-_cDTGPAR = "com.amazonaws.ec2#DeleteTransitGatewayPeeringAttachmentRequest"
-_DTGPAO = "DeleteTransitGatewayPeeringAttachmentOutput"
-_cDTGPARo = "com.amazonaws.ec2#DeleteTransitGatewayPeeringAttachmentResult"
-_DTGPA = "DeleteTransitGatewayPeeringAttachment"
-_DTGPTI = "DeleteTransitGatewayPolicyTableInput"
-_cDTGPTR = "com.amazonaws.ec2#DeleteTransitGatewayPolicyTableRequest"
-_DTGPTO = "DeleteTransitGatewayPolicyTableOutput"
-_cDTGPTRo = "com.amazonaws.ec2#DeleteTransitGatewayPolicyTableResult"
-_DTGPT = "DeleteTransitGatewayPolicyTable"
-_DTGPTEI = "DeleteTransitGatewayPolicyTableEntryInput"
-_cDTGPTER = "com.amazonaws.ec2#DeleteTransitGatewayPolicyTableEntryRequest"
-_DTGPTEO = "DeleteTransitGatewayPolicyTableEntryOutput"
-_cDTGPTERo = "com.amazonaws.ec2#DeleteTransitGatewayPolicyTableEntryResult"
-_DTGPTE = "DeleteTransitGatewayPolicyTableEntry"
-_DTGPLRI = "DeleteTransitGatewayPrefixListReferenceInput"
-_cDTGPLRR = "com.amazonaws.ec2#DeleteTransitGatewayPrefixListReferenceRequest"
-_DTGPLRO = "DeleteTransitGatewayPrefixListReferenceOutput"
-_cDTGPLRRo = "com.amazonaws.ec2#DeleteTransitGatewayPrefixListReferenceResult"
-_DTGPLR = "DeleteTransitGatewayPrefixListReference"
-_DTGRI = "DeleteTransitGatewayRouteInput"
-_cDTGRR = "com.amazonaws.ec2#DeleteTransitGatewayRouteRequest"
-_DTGRO = "DeleteTransitGatewayRouteOutput"
-_cDTGRRo = "com.amazonaws.ec2#DeleteTransitGatewayRouteResult"
-_DTGR = "DeleteTransitGatewayRoute"
-_DTGRTI = "DeleteTransitGatewayRouteTableInput"
-_cDTGRTR = "com.amazonaws.ec2#DeleteTransitGatewayRouteTableRequest"
-_DTGRTO = "DeleteTransitGatewayRouteTableOutput"
-_cDTGRTRo = "com.amazonaws.ec2#DeleteTransitGatewayRouteTableResult"
-_DTGRT = "DeleteTransitGatewayRouteTable"
+
+DELETE_IPAM_SCOPE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DISI,
+    {_sSI: _cDISR, _sm: None},
+    (_DR, _ISI),
+    ((lambda: schemas.BOOLEAN, 0), (lambda: schemas.IPAM_SCOPE_ID, 1)),
+)
+
+DELETE_IPAM_SCOPE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DISO,
+    {_sSI: _cDISRo, _smit: None},
+    (_ISpam,),
+    ((lambda: schemas.IPAM_SCOPE, {_aQN: _ISpam, _sN: _iSpa}),),
+)
+
+DELETE_IPAM_SCOPE: StaticOperationSchema = (
+    23,
+    n0,
+    _DIS,
+    0,
+    DELETE_IPAM_SCOPE_INPUT,
+    DELETE_IPAM_SCOPE_OUTPUT,
+    (),
+)
+
+KEY_PAIR_NAME_WITH_RESOLVER: StaticSchema = (3, n0, _KPNWR, 0)
+
+KEY_PAIR_ID: StaticSchema = (3, n0, _KPI, 0)
+
+DELETE_KEY_PAIR_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DKPI,
+    {_sSI: _cDKPR, _sm: None},
+    (_KN, _KPI, _DR),
+    (
+        (KEY_PAIR_NAME_WITH_RESOLVER, 0),
+        (KEY_PAIR_ID, 0),
+        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
+    ),
+)
+
+DELETE_KEY_PAIR_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DKPO,
+    {_sSI: _cDKPRo, _smit: None},
+    (_R, _KPI),
+    (
+        (lambda: schemas.BOOLEAN, {_aQN: _R, _sN: _r}),
+        (lambda: schemas.STRING, {_aQN: _KPI, _sN: _kPI}),
+    ),
+)
+
+DELETE_KEY_PAIR: StaticOperationSchema = (
+    23,
+    n0,
+    _DKP,
+    0,
+    DELETE_KEY_PAIR_INPUT,
+    DELETE_KEY_PAIR_OUTPUT,
+    (),
+)
+
+DELETE_LAUNCH_TEMPLATE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DLTI,
+    {_sSI: _cDLTR, _sm: None},
+    (_DR, _LTI, _LTN),
+    (
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.LAUNCH_TEMPLATE_ID, 0),
+        (lambda: schemas.LAUNCH_TEMPLATE_NAME, 0),
+    ),
+)
+
+DELETE_LAUNCH_TEMPLATE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DLTO,
+    {_sSI: _cDLTRo, _smit: None},
+    (_LT,),
+    ((lambda: schemas.LAUNCH_TEMPLATE, {_aQN: _LT, _sN: _lT}),),
+)
+
+DELETE_LAUNCH_TEMPLATE: StaticOperationSchema = (
+    23,
+    n0,
+    _DLT,
+    0,
+    DELETE_LAUNCH_TEMPLATE_INPUT,
+    DELETE_LAUNCH_TEMPLATE_OUTPUT,
+    (),
+)
+
+DELETE_LAUNCH_TEMPLATE_VERSIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DLTVI,
+    {_sSI: _cDLTVR, _sm: None},
+    (_DR, _LTI, _LTN, _Vers),
+    (
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.LAUNCH_TEMPLATE_ID, 0),
+        (lambda: schemas.LAUNCH_TEMPLATE_NAME, 0),
+        (lambda: schemas.VERSION_STRING_LIST, {_sN: _LTV, _smi: None}),
+    ),
+)
+
+DELETE_LAUNCH_TEMPLATE_VERSIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DLTVO,
+    {_sSI: _cDLTVRo, _smit: None},
+    (_SDLTV, _UDLTV),
+    (
+        (
+            lambda: DELETE_LAUNCH_TEMPLATE_VERSIONS_RESPONSE_SUCCESS_SET,
+            {_aQN: _SDLTVS, _sN: _sDLTVS},
+        ),
+        (
+            lambda: DELETE_LAUNCH_TEMPLATE_VERSIONS_RESPONSE_ERROR_SET,
+            {_aQN: _UDLTVS, _sN: _uDLTVS},
+        ),
+    ),
+)
+
+DELETE_LAUNCH_TEMPLATE_VERSIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _DLTV,
+    0,
+    DELETE_LAUNCH_TEMPLATE_VERSIONS_INPUT,
+    DELETE_LAUNCH_TEMPLATE_VERSIONS_OUTPUT,
+    (),
+)
+
+DELETE_LAUNCH_TEMPLATE_VERSIONS_RESPONSE_SUCCESS_ITEM: StaticSchema = (
+    18,
+    n0,
+    _DLTVRSI,
+    0,
+    (_LTI, _LTN, _VNe),
+    (
+        (lambda: schemas.STRING, {_aQN: _LTI, _sN: _lTI}),
+        (lambda: schemas.STRING, {_aQN: _LTN, _sN: _lTN}),
+        (lambda: schemas.LONG, {_aQN: _VNe, _sN: _vNe}),
+    ),
+)
+
+DELETE_LAUNCH_TEMPLATE_VERSIONS_RESPONSE_SUCCESS_SET: StaticSchema = (
+    16,
+    n0,
+    _DLTVRSS,
+    0,
+    (_me,),
+    ((DELETE_LAUNCH_TEMPLATE_VERSIONS_RESPONSE_SUCCESS_ITEM, {_sN: _i}),),
+)
+
+LAUNCH_TEMPLATE_ERROR_CODE: StaticSchema = (
+    14,
+    n0,
+    _LTEC,
+    0,
+    (_LTIDNE, _LTIM, _LTNDNE, _LTNM, _LTVDNE, _UE),
+    (
+        (-1, {_sV: _lTIDNE}),
+        (-1, {_sV: _lTIM}),
+        (-1, {_sV: _lTNDNE}),
+        (-1, {_sV: _lTNM}),
+        (-1, {_sV: _lTVDNE}),
+        (-1, {_sV: _uE}),
+    ),
+)
+
+RESPONSE_ERROR: StaticSchema = (
+    18,
+    n0,
+    _REe,
+    0,
+    (_C, _Me),
+    (
+        (LAUNCH_TEMPLATE_ERROR_CODE, {_aQN: _C, _sN: _co}),
+        (lambda: schemas.STRING, {_aQN: _Me, _sN: _mes}),
+    ),
+)
+
+DELETE_LAUNCH_TEMPLATE_VERSIONS_RESPONSE_ERROR_ITEM: StaticSchema = (
+    18,
+    n0,
+    _DLTVREI,
+    0,
+    (_LTI, _LTN, _VNe, _REe),
+    (
+        (lambda: schemas.STRING, {_aQN: _LTI, _sN: _lTI}),
+        (lambda: schemas.STRING, {_aQN: _LTN, _sN: _lTN}),
+        (lambda: schemas.LONG, {_aQN: _VNe, _sN: _vNe}),
+        (RESPONSE_ERROR, {_aQN: _REe, _sN: _rEe}),
+    ),
+)
+
+DELETE_LAUNCH_TEMPLATE_VERSIONS_RESPONSE_ERROR_SET: StaticSchema = (
+    16,
+    n0,
+    _DLTVRES,
+    0,
+    (_me,),
+    ((DELETE_LAUNCH_TEMPLATE_VERSIONS_RESPONSE_ERROR_ITEM, {_sN: _i}),),
+)
+
+DELETE_LOCAL_GATEWAY_ROUTE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DLGRI,
+    {_sSI: _cDLGRR, _sm: None},
+    (_DCB, _LGRTI, _DR, _DPLI),
+    (
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.LOCAL_GATEWAY_ROUTETABLE_ID, 1),
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.PREFIX_LIST_RESOURCE_ID, 0),
+    ),
+)
+
+DELETE_LOCAL_GATEWAY_ROUTE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DLGRO,
+    {_sSI: _cDLGRRo, _smit: None},
+    (_Rou,),
+    ((lambda: schemas.LOCAL_GATEWAY_ROUTE, {_aQN: _Rou, _sN: _rou}),),
+)
+
+DELETE_LOCAL_GATEWAY_ROUTE: StaticOperationSchema = (
+    23,
+    n0,
+    _DLGR,
+    0,
+    DELETE_LOCAL_GATEWAY_ROUTE_INPUT,
+    DELETE_LOCAL_GATEWAY_ROUTE_OUTPUT,
+    (),
+)
+
+DELETE_LOCAL_GATEWAY_ROUTE_TABLE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DLGRTI,
+    {_sSI: _cDLGRTR, _sm: None},
+    (_LGRTI, _DR),
+    ((lambda: schemas.LOCAL_GATEWAY_ROUTETABLE_ID, 1), (lambda: schemas.BOOLEAN, 0)),
+)
+
+DELETE_LOCAL_GATEWAY_ROUTE_TABLE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DLGRTO,
+    {_sSI: _cDLGRTRo, _smit: None},
+    (_LGRTo,),
+    ((lambda: schemas.LOCAL_GATEWAY_ROUTE_TABLE, {_aQN: _LGRTo, _sN: _lGRT}),),
+)
+
+DELETE_LOCAL_GATEWAY_ROUTE_TABLE: StaticOperationSchema = (
+    23,
+    n0,
+    _DLGRT,
+    0,
+    DELETE_LOCAL_GATEWAY_ROUTE_TABLE_INPUT,
+    DELETE_LOCAL_GATEWAY_ROUTE_TABLE_OUTPUT,
+    (),
+)
+
+DELETE_LOCAL_GATEWAY_ROUTE_TABLE_VIRTUAL_INTERFACE_GROUP_ASSOCIATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DLGRTVIGAI,
+    {_sSI: _cDLGRTVIGAR, _sm: None},
+    (_LGRTVIGAI, _DR),
+    (
+        (
+            lambda: (
+                schemas.LOCAL_GATEWAY_ROUTE_TABLE_VIRTUAL_INTERFACE_GROUP_ASSOCIATION_ID
+            ),
+            1,
+        ),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+DELETE_LOCAL_GATEWAY_ROUTE_TABLE_VIRTUAL_INTERFACE_GROUP_ASSOCIATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DLGRTVIGAO,
+    {_sSI: _cDLGRTVIGARo, _smit: None},
+    (_LGRTVIGA,),
+    (
+        (
+            lambda: (
+                schemas.LOCAL_GATEWAY_ROUTE_TABLE_VIRTUAL_INTERFACE_GROUP_ASSOCIATION
+            ),
+            {_aQN: _LGRTVIGA, _sN: _lGRTVIGA},
+        ),
+    ),
+)
+
+DELETE_LOCAL_GATEWAY_ROUTE_TABLE_VIRTUAL_INTERFACE_GROUP_ASSOCIATION: StaticOperationSchema = (
+    23,
+    n0,
+    _DLGRTVIGA,
+    0,
+    DELETE_LOCAL_GATEWAY_ROUTE_TABLE_VIRTUAL_INTERFACE_GROUP_ASSOCIATION_INPUT,
+    DELETE_LOCAL_GATEWAY_ROUTE_TABLE_VIRTUAL_INTERFACE_GROUP_ASSOCIATION_OUTPUT,
+    (),
+)
+
+DELETE_LOCAL_GATEWAY_ROUTE_TABLE_VPC_ASSOCIATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DLGRTVAI,
+    {_sSI: _cDLGRTVAR, _sm: None},
+    (_LGRTVAI, _DR),
+    (
+        (lambda: schemas.LOCAL_GATEWAY_ROUTE_TABLE_VPC_ASSOCIATION_ID, 1),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+DELETE_LOCAL_GATEWAY_ROUTE_TABLE_VPC_ASSOCIATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DLGRTVAO,
+    {_sSI: _cDLGRTVARo, _smit: None},
+    (_LGRTVA,),
+    (
+        (
+            lambda: schemas.LOCAL_GATEWAY_ROUTE_TABLE_VPC_ASSOCIATION,
+            {_aQN: _LGRTVA, _sN: _lGRTVA},
+        ),
+    ),
+)
+
+DELETE_LOCAL_GATEWAY_ROUTE_TABLE_VPC_ASSOCIATION: StaticOperationSchema = (
+    23,
+    n0,
+    _DLGRTVA,
+    0,
+    DELETE_LOCAL_GATEWAY_ROUTE_TABLE_VPC_ASSOCIATION_INPUT,
+    DELETE_LOCAL_GATEWAY_ROUTE_TABLE_VPC_ASSOCIATION_OUTPUT,
+    (),
+)
+
+DELETE_LOCAL_GATEWAY_VIRTUAL_INTERFACE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DLGVII,
+    {_sSI: _cDLGVIR, _sm: None},
+    (_LGVII, _DR),
+    (
+        (lambda: schemas.LOCAL_GATEWAY_VIRTUAL_INTERFACE_ID, 1),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+DELETE_LOCAL_GATEWAY_VIRTUAL_INTERFACE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DLGVIO,
+    {_sSI: _cDLGVIRo, _smit: None},
+    (_LGVI,),
+    ((lambda: schemas.LOCAL_GATEWAY_VIRTUAL_INTERFACE, {_aQN: _LGVI, _sN: _lGVI}),),
+)
+
+DELETE_LOCAL_GATEWAY_VIRTUAL_INTERFACE: StaticOperationSchema = (
+    23,
+    n0,
+    _DLGVI,
+    0,
+    DELETE_LOCAL_GATEWAY_VIRTUAL_INTERFACE_INPUT,
+    DELETE_LOCAL_GATEWAY_VIRTUAL_INTERFACE_OUTPUT,
+    (),
+)
+
+DELETE_LOCAL_GATEWAY_VIRTUAL_INTERFACE_GROUP_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DLGVIGI,
+    {_sSI: _cDLGVIGR, _sm: None},
+    (_LGVIGI, _DR),
+    (
+        (lambda: schemas.LOCAL_GATEWAY_VIRTUAL_INTERFACE_GROUP_ID, 1),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+DELETE_LOCAL_GATEWAY_VIRTUAL_INTERFACE_GROUP_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DLGVIGO,
+    {_sSI: _cDLGVIGRo, _smit: None},
+    (_LGVIG,),
+    (
+        (
+            lambda: schemas.LOCAL_GATEWAY_VIRTUAL_INTERFACE_GROUP,
+            {_aQN: _LGVIG, _sN: _lGVIG},
+        ),
+    ),
+)
+
+DELETE_LOCAL_GATEWAY_VIRTUAL_INTERFACE_GROUP: StaticOperationSchema = (
+    23,
+    n0,
+    _DLGVIG,
+    0,
+    DELETE_LOCAL_GATEWAY_VIRTUAL_INTERFACE_GROUP_INPUT,
+    DELETE_LOCAL_GATEWAY_VIRTUAL_INTERFACE_GROUP_OUTPUT,
+    (),
+)
+
+DELETE_MANAGED_PREFIX_LIST_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DMPLI,
+    {_sSI: _cDMPLR, _sm: None},
+    (_DR, _PLI),
+    ((lambda: schemas.BOOLEAN, 0), (lambda: schemas.PREFIX_LIST_RESOURCE_ID, 1)),
+)
+
+DELETE_MANAGED_PREFIX_LIST_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DMPLO,
+    {_sSI: _cDMPLRo, _smit: None},
+    (_PL,),
+    ((lambda: schemas.MANAGED_PREFIX_LIST, {_aQN: _PL, _sN: _pL}),),
+)
+
+DELETE_MANAGED_PREFIX_LIST: StaticOperationSchema = (
+    23,
+    n0,
+    _DMPL,
+    0,
+    DELETE_MANAGED_PREFIX_LIST_INPUT,
+    DELETE_MANAGED_PREFIX_LIST_OUTPUT,
+    (),
+)
+
+DELETE_METRIC_CATEGORY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DMCI,
+    {_sSI: _cDMCR, _sm: None},
+    (_MCI, _DR),
+    ((lambda: schemas.METRIC_CATEGORY_ID, 1), (lambda: schemas.BOOLEAN, 0)),
+)
+
+DELETE_METRIC_CATEGORY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DMCO,
+    {_sSI: _cDMCRo, _smit: None},
+    (_MCI,),
+    ((lambda: schemas.METRIC_CATEGORY_ID, {_aQN: _MCI, _sN: _mCI}),),
+)
+
+DELETE_METRIC_CATEGORY: StaticOperationSchema = (
+    23,
+    n0,
+    _DMC,
+    0,
+    DELETE_METRIC_CATEGORY_INPUT,
+    DELETE_METRIC_CATEGORY_OUTPUT,
+    (),
+)
+
+DELETE_NAT_GATEWAY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DNGI,
+    {_sSI: _cDNGR, _sm: None},
+    (_DR, _NGI),
+    (
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.NAT_GATEWAY_ID, {_sN: _NGI, _smi: None}),
+    ),
+)
+
+DELETE_NAT_GATEWAY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DNGO,
+    {_sSI: _cDNGRo, _smit: None},
+    (_NGI,),
+    ((lambda: schemas.STRING, {_aQN: _NGI, _sN: _nGI}),),
+)
+
+DELETE_NAT_GATEWAY: StaticOperationSchema = (
+    23,
+    n0,
+    _DNG,
+    0,
+    DELETE_NAT_GATEWAY_INPUT,
+    DELETE_NAT_GATEWAY_OUTPUT,
+    (),
+)
+
+DELETE_NETWORK_ACL_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DNAI,
+    {_sSI: _cDNAR, _sm: None},
+    (_DR, _NAI),
+    (
+        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
+        (lambda: schemas.NETWORK_ACL_ID, {_aQN: _NAI, _sN: _nAI, _smi: None}),
+    ),
+)
+
+DELETE_NETWORK_ACL_OUTPUT: StaticSchema = (18, n0, _DNAO, {_sSI: _sU, _smit: None})
+
+DELETE_NETWORK_ACL: StaticOperationSchema = (
+    23,
+    n0,
+    _DNA,
+    0,
+    DELETE_NETWORK_ACL_INPUT,
+    DELETE_NETWORK_ACL_OUTPUT,
+    (),
+)
 
 DELETE_NETWORK_ACL_ENTRY_INPUT: StaticSchema = (
     18,
@@ -372,6 +903,49 @@ DELETE_NETWORK_ACL_ENTRY: StaticOperationSchema = (
     0,
     DELETE_NETWORK_ACL_ENTRY_INPUT,
     DELETE_NETWORK_ACL_ENTRY_OUTPUT,
+    (),
+)
+
+FLEX_COST_ALLOCATION_POLICY_ID_LIST: StaticSchema = (
+    16,
+    n0,
+    _FCAPIL,
+    0,
+    (_me,),
+    ((lambda: schemas.FLEX_COST_ALLOCATION_POLICY_ID, {_sN: _i}),),
+)
+
+DELETE_NETWORKING_FLEX_COST_ALLOCATION_POLICIES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DNFCAPI,
+    {_sSI: _cDNFCAPR, _sm: None},
+    (_FPIc, _DR),
+    ((FLEX_COST_ALLOCATION_POLICY_ID_LIST, 1), (lambda: schemas.BOOLEAN, 0)),
+)
+
+DELETE_NETWORKING_FLEX_COST_ALLOCATION_POLICIES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DNFCAPO,
+    {_sSI: _cDNFCAPRo, _smit: None},
+    (_Suc, _Fai),
+    (
+        (FLEX_COST_ALLOCATION_POLICY_ID_LIST, {_aQN: _Suc, _sN: _succ}),
+        (
+            lambda: schemas.FLEX_COST_ALLOCATION_OPERATION_FAILURE_LIST,
+            {_aQN: _Fai, _sN: _fa},
+        ),
+    ),
+)
+
+DELETE_NETWORKING_FLEX_COST_ALLOCATION_POLICIES: StaticOperationSchema = (
+    23,
+    n0,
+    _DNFCAP,
+    0,
+    DELETE_NETWORKING_FLEX_COST_ALLOCATION_POLICIES_INPUT,
+    DELETE_NETWORKING_FLEX_COST_ALLOCATION_POLICIES_OUTPUT,
     (),
 )
 
@@ -1030,585 +1604,5 @@ DELETE_SUBNET: StaticOperationSchema = (
     0,
     DELETE_SUBNET_INPUT,
     DELETE_SUBNET_OUTPUT,
-    (),
-)
-
-DELETE_SUBNET_CIDR_RESERVATION_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DSCRI,
-    {_sSI: _cDSCRR, _sm: None},
-    (_SCRIu, _DR),
-    ((lambda: schemas.SUBNET_CIDR_RESERVATION_ID, 1), (lambda: schemas.BOOLEAN, 0)),
-)
-
-DELETE_SUBNET_CIDR_RESERVATION_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DSCRO,
-    {_sSI: _cDSCRRo, _smit: None},
-    (_DSCR,),
-    ((lambda: schemas.SUBNET_CIDR_RESERVATION, {_aQN: _DSCR, _sN: _dSCR}),),
-)
-
-DELETE_SUBNET_CIDR_RESERVATION: StaticOperationSchema = (
-    23,
-    n0,
-    _DSCRe,
-    0,
-    DELETE_SUBNET_CIDR_RESERVATION_INPUT,
-    DELETE_SUBNET_CIDR_RESERVATION_OUTPUT,
-    (),
-)
-
-DELETE_TAGS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTIe,
-    {_sSI: _cDTR, _sm: None},
-    (_DR, _Res, _Tag),
-    (
-        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (lambda: schemas.RESOURCE_ID_LIST, {_aQN: _RIe, _sN: _rI, _smi: None}),
-        (lambda: schemas.TAG_LIST, {_aQN: _Ta, _sN: _tag}),
-    ),
-)
-
-DELETE_TAGS_OUTPUT: StaticSchema = (18, n0, _DTO, {_sSI: _sU, _smit: None})
-
-DELETE_TAGS: StaticOperationSchema = (
-    23,
-    n0,
-    _DTelet,
-    0,
-    DELETE_TAGS_INPUT,
-    DELETE_TAGS_OUTPUT,
-    (),
-)
-
-DELETE_TRAFFIC_MIRROR_FILTER_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTMFI,
-    {_sSI: _cDTMFR, _sm: None},
-    (_TMFI, _DR),
-    ((lambda: schemas.TRAFFIC_MIRROR_FILTER_ID, 1), (lambda: schemas.BOOLEAN, 0)),
-)
-
-DELETE_TRAFFIC_MIRROR_FILTER_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DTMFO,
-    {_sSI: _cDTMFRo, _smit: None},
-    (_TMFI,),
-    ((lambda: schemas.STRING, {_aQN: _TMFI, _sN: _tMFI}),),
-)
-
-DELETE_TRAFFIC_MIRROR_FILTER: StaticOperationSchema = (
-    23,
-    n0,
-    _DTMF,
-    0,
-    DELETE_TRAFFIC_MIRROR_FILTER_INPUT,
-    DELETE_TRAFFIC_MIRROR_FILTER_OUTPUT,
-    (),
-)
-
-DELETE_TRAFFIC_MIRROR_FILTER_RULE_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTMFRI,
-    {_sSI: _cDTMFRR, _sm: None},
-    (_TMFRI, _DR),
-    (
-        (lambda: schemas.TRAFFIC_MIRROR_FILTER_RULE_ID_WITH_RESOLVER, 1),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DELETE_TRAFFIC_MIRROR_FILTER_RULE_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DTMFRO,
-    {_sSI: _cDTMFRRo, _smit: None},
-    (_TMFRI,),
-    ((lambda: schemas.STRING, {_aQN: _TMFRI, _sN: _tMFRI}),),
-)
-
-DELETE_TRAFFIC_MIRROR_FILTER_RULE: StaticOperationSchema = (
-    23,
-    n0,
-    _DTMFR,
-    0,
-    DELETE_TRAFFIC_MIRROR_FILTER_RULE_INPUT,
-    DELETE_TRAFFIC_MIRROR_FILTER_RULE_OUTPUT,
-    (),
-)
-
-DELETE_TRAFFIC_MIRROR_SESSION_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTMSI,
-    {_sSI: _cDTMSR, _sm: None},
-    (_TMSI, _DR),
-    ((lambda: schemas.TRAFFIC_MIRROR_SESSION_ID, 1), (lambda: schemas.BOOLEAN, 0)),
-)
-
-DELETE_TRAFFIC_MIRROR_SESSION_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DTMSO,
-    {_sSI: _cDTMSRo, _smit: None},
-    (_TMSI,),
-    ((lambda: schemas.STRING, {_aQN: _TMSI, _sN: _tMSI}),),
-)
-
-DELETE_TRAFFIC_MIRROR_SESSION: StaticOperationSchema = (
-    23,
-    n0,
-    _DTMS,
-    0,
-    DELETE_TRAFFIC_MIRROR_SESSION_INPUT,
-    DELETE_TRAFFIC_MIRROR_SESSION_OUTPUT,
-    (),
-)
-
-DELETE_TRAFFIC_MIRROR_TARGET_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTMTI,
-    {_sSI: _cDTMTR, _sm: None},
-    (_TMTI, _DR),
-    ((lambda: schemas.TRAFFIC_MIRROR_TARGET_ID, 1), (lambda: schemas.BOOLEAN, 0)),
-)
-
-DELETE_TRAFFIC_MIRROR_TARGET_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DTMTO,
-    {_sSI: _cDTMTRo, _smit: None},
-    (_TMTI,),
-    ((lambda: schemas.STRING, {_aQN: _TMTI, _sN: _tMTI}),),
-)
-
-DELETE_TRAFFIC_MIRROR_TARGET: StaticOperationSchema = (
-    23,
-    n0,
-    _DTMT,
-    0,
-    DELETE_TRAFFIC_MIRROR_TARGET_INPUT,
-    DELETE_TRAFFIC_MIRROR_TARGET_OUTPUT,
-    (),
-)
-
-DELETE_TRANSIT_GATEWAY_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGI,
-    {_sSI: _cDTGR, _sm: None},
-    (_TGI, _DR),
-    ((lambda: schemas.TRANSIT_GATEWAY_ID, 1), (lambda: schemas.BOOLEAN, 0)),
-)
-
-DELETE_TRANSIT_GATEWAY_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGO,
-    {_sSI: _cDTGRo, _smit: None},
-    (_TGr,),
-    ((lambda: schemas.TRANSIT_GATEWAY, {_aQN: _TGr, _sN: _tG}),),
-)
-
-DELETE_TRANSIT_GATEWAY: StaticOperationSchema = (
-    23,
-    n0,
-    _DTG,
-    0,
-    DELETE_TRANSIT_GATEWAY_INPUT,
-    DELETE_TRANSIT_GATEWAY_OUTPUT,
-    (),
-)
-
-DELETE_TRANSIT_GATEWAY_CLIENT_VPN_ATTACHMENT_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGCVAI,
-    {_sSI: _cDTGCVAR, _sm: None},
-    (_TGAI, _DR),
-    ((lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, 1), (lambda: schemas.BOOLEAN, 0)),
-)
-
-DELETE_TRANSIT_GATEWAY_CLIENT_VPN_ATTACHMENT_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGCVAO,
-    {_sSI: _cDTGCVARo, _smit: None},
-    (_TGCVA,),
-    (
-        (
-            lambda: schemas.TRANSIT_GATEWAY_CLIENT_VPN_ATTACHMENT,
-            {_aQN: _TGCVA, _sN: _tGCVA},
-        ),
-    ),
-)
-
-DELETE_TRANSIT_GATEWAY_CLIENT_VPN_ATTACHMENT: StaticOperationSchema = (
-    23,
-    n0,
-    _DTGCVA,
-    0,
-    DELETE_TRANSIT_GATEWAY_CLIENT_VPN_ATTACHMENT_INPUT,
-    DELETE_TRANSIT_GATEWAY_CLIENT_VPN_ATTACHMENT_OUTPUT,
-    (),
-)
-
-DELETE_TRANSIT_GATEWAY_CONNECT_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGCI,
-    {_sSI: _cDTGCR, _sm: None},
-    (_TGAI, _DR),
-    ((lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, 1), (lambda: schemas.BOOLEAN, 0)),
-)
-
-DELETE_TRANSIT_GATEWAY_CONNECT_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGCO,
-    {_sSI: _cDTGCRo, _smit: None},
-    (_TGCr,),
-    ((lambda: schemas.TRANSIT_GATEWAY_CONNECT, {_aQN: _TGCr, _sN: _tGC}),),
-)
-
-DELETE_TRANSIT_GATEWAY_CONNECT: StaticOperationSchema = (
-    23,
-    n0,
-    _DTGC,
-    0,
-    DELETE_TRANSIT_GATEWAY_CONNECT_INPUT,
-    DELETE_TRANSIT_GATEWAY_CONNECT_OUTPUT,
-    (),
-)
-
-DELETE_TRANSIT_GATEWAY_CONNECT_PEER_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGCPI,
-    {_sSI: _cDTGCPR, _sm: None},
-    (_TGCPI, _DR),
-    (
-        (lambda: schemas.TRANSIT_GATEWAY_CONNECT_PEER_ID, 1),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DELETE_TRANSIT_GATEWAY_CONNECT_PEER_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGCPO,
-    {_sSI: _cDTGCPRo, _smit: None},
-    (_TGCP,),
-    ((lambda: schemas.TRANSIT_GATEWAY_CONNECT_PEER, {_aQN: _TGCP, _sN: _tGCP}),),
-)
-
-DELETE_TRANSIT_GATEWAY_CONNECT_PEER: StaticOperationSchema = (
-    23,
-    n0,
-    _DTGCP,
-    0,
-    DELETE_TRANSIT_GATEWAY_CONNECT_PEER_INPUT,
-    DELETE_TRANSIT_GATEWAY_CONNECT_PEER_OUTPUT,
-    (),
-)
-
-DELETE_TRANSIT_GATEWAY_METERING_POLICY_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGMPI,
-    {_sSI: _cDTGMPR, _sm: None},
-    (_TGMPI, _DR),
-    (
-        (lambda: schemas.TRANSIT_GATEWAY_METERING_POLICY_ID, 1),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DELETE_TRANSIT_GATEWAY_METERING_POLICY_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGMPO,
-    {_sSI: _cDTGMPRo, _smit: None},
-    (_TGMP,),
-    ((lambda: schemas.TRANSIT_GATEWAY_METERING_POLICY, {_aQN: _TGMP, _sN: _tGMP}),),
-)
-
-DELETE_TRANSIT_GATEWAY_METERING_POLICY: StaticOperationSchema = (
-    23,
-    n0,
-    _DTGMP,
-    0,
-    DELETE_TRANSIT_GATEWAY_METERING_POLICY_INPUT,
-    DELETE_TRANSIT_GATEWAY_METERING_POLICY_OUTPUT,
-    (),
-)
-
-DELETE_TRANSIT_GATEWAY_METERING_POLICY_ENTRY_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGMPEI,
-    {_sSI: _cDTGMPER, _sm: None},
-    (_TGMPI, _PRNo, _DR),
-    (
-        (lambda: schemas.TRANSIT_GATEWAY_METERING_POLICY_ID, 1),
-        (lambda: schemas.INTEGER, 1),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DELETE_TRANSIT_GATEWAY_METERING_POLICY_ENTRY_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGMPEO,
-    {_sSI: _cDTGMPERo, _smit: None},
-    (_TGMPE,),
-    (
-        (
-            lambda: schemas.TRANSIT_GATEWAY_METERING_POLICY_ENTRY,
-            {_aQN: _TGMPE, _sN: _tGMPE},
-        ),
-    ),
-)
-
-DELETE_TRANSIT_GATEWAY_METERING_POLICY_ENTRY: StaticOperationSchema = (
-    23,
-    n0,
-    _DTGMPE,
-    0,
-    DELETE_TRANSIT_GATEWAY_METERING_POLICY_ENTRY_INPUT,
-    DELETE_TRANSIT_GATEWAY_METERING_POLICY_ENTRY_OUTPUT,
-    (),
-)
-
-DELETE_TRANSIT_GATEWAY_MULTICAST_DOMAIN_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGMDI,
-    {_sSI: _cDTGMDR, _sm: None},
-    (_TGMDI, _DR),
-    (
-        (lambda: schemas.TRANSIT_GATEWAY_MULTICAST_DOMAIN_ID, 1),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DELETE_TRANSIT_GATEWAY_MULTICAST_DOMAIN_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGMDO,
-    {_sSI: _cDTGMDRo, _smit: None},
-    (_TGMD,),
-    ((lambda: schemas.TRANSIT_GATEWAY_MULTICAST_DOMAIN, {_aQN: _TGMD, _sN: _tGMD}),),
-)
-
-DELETE_TRANSIT_GATEWAY_MULTICAST_DOMAIN: StaticOperationSchema = (
-    23,
-    n0,
-    _DTGMD,
-    0,
-    DELETE_TRANSIT_GATEWAY_MULTICAST_DOMAIN_INPUT,
-    DELETE_TRANSIT_GATEWAY_MULTICAST_DOMAIN_OUTPUT,
-    (),
-)
-
-DELETE_TRANSIT_GATEWAY_PEERING_ATTACHMENT_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGPAI,
-    {_sSI: _cDTGPAR, _sm: None},
-    (_TGAI, _DR),
-    ((lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, 1), (lambda: schemas.BOOLEAN, 0)),
-)
-
-DELETE_TRANSIT_GATEWAY_PEERING_ATTACHMENT_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGPAO,
-    {_sSI: _cDTGPARo, _smit: None},
-    (_TGPA,),
-    ((lambda: schemas.TRANSIT_GATEWAY_PEERING_ATTACHMENT, {_aQN: _TGPA, _sN: _tGPA}),),
-)
-
-DELETE_TRANSIT_GATEWAY_PEERING_ATTACHMENT: StaticOperationSchema = (
-    23,
-    n0,
-    _DTGPA,
-    0,
-    DELETE_TRANSIT_GATEWAY_PEERING_ATTACHMENT_INPUT,
-    DELETE_TRANSIT_GATEWAY_PEERING_ATTACHMENT_OUTPUT,
-    (),
-)
-
-DELETE_TRANSIT_GATEWAY_POLICY_TABLE_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGPTI,
-    {_sSI: _cDTGPTR, _sm: None},
-    (_TGPTI, _DR),
-    (
-        (lambda: schemas.TRANSIT_GATEWAY_POLICY_TABLE_ID, 1),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DELETE_TRANSIT_GATEWAY_POLICY_TABLE_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGPTO,
-    {_sSI: _cDTGPTRo, _smit: None},
-    (_TGPT,),
-    ((lambda: schemas.TRANSIT_GATEWAY_POLICY_TABLE, {_aQN: _TGPT, _sN: _tGPT}),),
-)
-
-DELETE_TRANSIT_GATEWAY_POLICY_TABLE: StaticOperationSchema = (
-    23,
-    n0,
-    _DTGPT,
-    0,
-    DELETE_TRANSIT_GATEWAY_POLICY_TABLE_INPUT,
-    DELETE_TRANSIT_GATEWAY_POLICY_TABLE_OUTPUT,
-    (),
-)
-
-DELETE_TRANSIT_GATEWAY_POLICY_TABLE_ENTRY_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGPTEI,
-    {_sSI: _cDTGPTER, _sm: None},
-    (_TGPTI, _PRNo, _DR),
-    (
-        (lambda: schemas.TRANSIT_GATEWAY_POLICY_TABLE_ID, 1),
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DELETE_TRANSIT_GATEWAY_POLICY_TABLE_ENTRY_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGPTEO,
-    {_sSI: _cDTGPTERo, _smit: None},
-    (_TGPTE,),
-    (
-        (
-            lambda: schemas.TRANSIT_GATEWAY_POLICY_TABLE_ENTRY,
-            {_aQN: _TGPTE, _sN: _tGPTE},
-        ),
-    ),
-)
-
-DELETE_TRANSIT_GATEWAY_POLICY_TABLE_ENTRY: StaticOperationSchema = (
-    23,
-    n0,
-    _DTGPTE,
-    0,
-    DELETE_TRANSIT_GATEWAY_POLICY_TABLE_ENTRY_INPUT,
-    DELETE_TRANSIT_GATEWAY_POLICY_TABLE_ENTRY_OUTPUT,
-    (),
-)
-
-DELETE_TRANSIT_GATEWAY_PREFIX_LIST_REFERENCE_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGPLRI,
-    {_sSI: _cDTGPLRR, _sm: None},
-    (_TGRTI, _PLI, _DR),
-    (
-        (lambda: schemas.TRANSIT_GATEWAY_ROUTE_TABLE_ID, 1),
-        (lambda: schemas.PREFIX_LIST_RESOURCE_ID, 1),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DELETE_TRANSIT_GATEWAY_PREFIX_LIST_REFERENCE_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGPLRO,
-    {_sSI: _cDTGPLRRo, _smit: None},
-    (_TGPLR,),
-    (
-        (
-            lambda: schemas.TRANSIT_GATEWAY_PREFIX_LIST_REFERENCE,
-            {_aQN: _TGPLR, _sN: _tGPLR},
-        ),
-    ),
-)
-
-DELETE_TRANSIT_GATEWAY_PREFIX_LIST_REFERENCE: StaticOperationSchema = (
-    23,
-    n0,
-    _DTGPLR,
-    0,
-    DELETE_TRANSIT_GATEWAY_PREFIX_LIST_REFERENCE_INPUT,
-    DELETE_TRANSIT_GATEWAY_PREFIX_LIST_REFERENCE_OUTPUT,
-    (),
-)
-
-DELETE_TRANSIT_GATEWAY_ROUTE_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGRI,
-    {_sSI: _cDTGRR, _sm: None},
-    (_TGRTI, _DCB, _DR),
-    (
-        (lambda: schemas.TRANSIT_GATEWAY_ROUTE_TABLE_ID, 1),
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DELETE_TRANSIT_GATEWAY_ROUTE_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGRO,
-    {_sSI: _cDTGRRo, _smit: None},
-    (_Rou,),
-    ((lambda: schemas.TRANSIT_GATEWAY_ROUTE, {_aQN: _Rou, _sN: _rou}),),
-)
-
-DELETE_TRANSIT_GATEWAY_ROUTE: StaticOperationSchema = (
-    23,
-    n0,
-    _DTGR,
-    0,
-    DELETE_TRANSIT_GATEWAY_ROUTE_INPUT,
-    DELETE_TRANSIT_GATEWAY_ROUTE_OUTPUT,
-    (),
-)
-
-DELETE_TRANSIT_GATEWAY_ROUTE_TABLE_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGRTI,
-    {_sSI: _cDTGRTR, _sm: None},
-    (_TGRTI, _DR),
-    ((lambda: schemas.TRANSIT_GATEWAY_ROUTE_TABLE_ID, 1), (lambda: schemas.BOOLEAN, 0)),
-)
-
-DELETE_TRANSIT_GATEWAY_ROUTE_TABLE_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGRTO,
-    {_sSI: _cDTGRTRo, _smit: None},
-    (_TGRT,),
-    ((lambda: schemas.TRANSIT_GATEWAY_ROUTE_TABLE, {_aQN: _TGRT, _sN: _tGRT}),),
-)
-
-DELETE_TRANSIT_GATEWAY_ROUTE_TABLE: StaticOperationSchema = (
-    23,
-    n0,
-    _DTGRT,
-    0,
-    DELETE_TRANSIT_GATEWAY_ROUTE_TABLE_INPUT,
-    DELETE_TRANSIT_GATEWAY_ROUTE_TABLE_OUTPUT,
     (),
 )

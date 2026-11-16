@@ -48,6 +48,119 @@ class APIErrorType(_SerdeShape):
     """A message describing the error."""
 
 @dataclass(kw_only=True)
+class AssociateCrossAccountReplicaInput(_SerdeShape):
+    """Dataclass for AssociateCrossAccountReplicaInput structure."""
+
+    secret_id: str | None = ...
+    """
+    The ARN or name of the primary secret in your account to replicate.
+
+    For an ARN, we recommend that you specify a complete ARN rather than a
+    partial ARN. See [Finding a secret from a partial
+    ARN](https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen).
+    """
+    cross_account_replica_arn: str | None = ...
+    """
+    The ARN of the replica secret in the other Amazon Web Services account.
+    The replica secret must be in the same Region and partition as the
+    primary secret. Additionally, the replica account owner must have
+    created the replica secret as a cross-account replica of the primary
+    secret. For more information see CreateSecret.
+    """
+    replica_restriction: str | None = ...
+    """
+    Whether the replica account must belong to the same Amazon Web Services
+    organization as the primary account:
+
+    - `SameOrg`, which requires the replica account to be in the same
+      organization as the primary account. This is the default.
+
+    - `NoRestriction`, which allows the replica account to be in any
+      organization.
+    """
+    replication_role_arn: str | None = ...
+    """
+    The ARN of an IAM role in the primary account that Secrets Manager
+    assumes to perform replication. If you don't include this field,
+    Secrets Manager replicates using the credentials of caller who updates
+    the primary secret. For more information, see [Cross-account replication
+    permissions](https://docs.aws.amazon.com/secretsmanager/latest/userguide/cross-account-replicate-permissions.html).
+    """
+
+class AssociateCrossAccountReplicaInputDict(TypedDict, total=False):
+    """Dictionary form of `AssociateCrossAccountReplicaInput`."""
+
+    secret_id: Required[str]
+    """
+    The ARN or name of the primary secret in your account to replicate.
+
+    For an ARN, we recommend that you specify a complete ARN rather than a
+    partial ARN. See [Finding a secret from a partial
+    ARN](https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen).
+    """
+    cross_account_replica_arn: Required[str]
+    """
+    The ARN of the replica secret in the other Amazon Web Services account.
+    The replica secret must be in the same Region and partition as the
+    primary secret. Additionally, the replica account owner must have
+    created the replica secret as a cross-account replica of the primary
+    secret. For more information see CreateSecret.
+    """
+    replica_restriction: str | None
+    """
+    Whether the replica account must belong to the same Amazon Web Services
+    organization as the primary account:
+
+    - `SameOrg`, which requires the replica account to be in the same
+      organization as the primary account. This is the default.
+
+    - `NoRestriction`, which allows the replica account to be in any
+      organization.
+    """
+    replication_role_arn: str | None
+    """
+    The ARN of an IAM role in the primary account that Secrets Manager
+    assumes to perform replication. If you don't include this field,
+    Secrets Manager replicates using the credentials of caller who updates
+    the primary secret. For more information, see [Cross-account replication
+    permissions](https://docs.aws.amazon.com/secretsmanager/latest/userguide/cross-account-replicate-permissions.html).
+    """
+
+@dataclass(kw_only=True)
+class AssociateCrossAccountReplicaOutput(_SerdeShape):
+    """Dataclass for AssociateCrossAccountReplicaOutput structure."""
+
+    arn: str | None = ...
+    """The ARN of the primary secret."""
+    cross_account_replica_arn: str | None = ...
+    """The ARN of the replica secret in the other account."""
+    replication_status: str | None = ...
+    """
+    The status of replication to the replica secret. Possible values:
+
+    - `InSync`, which indicates that replication to the replica completed
+      successfully and the replica is up to date.
+
+    - `Failed`, which indicates that replication to the replica did not
+      succeed.
+
+    - `InProgress`, which indicates that Secrets Manager is replicating to
+      the replica.
+
+    - `Pending`, which indicates that replication has not yet started.
+
+    - `Detached`, which indicates that primary secret is no longer linked to
+      the replica secret.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
 class BatchGetSecretValueInput(_SerdeShape):
     """Dataclass for BatchGetSecretValueInput structure."""
 
@@ -336,6 +449,16 @@ class CreateSecretInput(_SerdeShape):
     external
     secrets](https://docs.aws.amazon.com/secretsmanager/latest/userguide/managed-external-secrets.html).
     """
+    cross_account_primary_arn: str | None = ...
+    """
+    The ARN of a primary secret in another Amazon Web Services account.
+    Include this field to create a cross-account replica secret that
+    receives replicated data from that primary secret. The primary secret
+    must be in the same Amazon Web Services Region and partition as the
+    replica, and you must specify a customer managed KMS key in `KmsKeyId`.
+    You can't include `SecretString`, `SecretBinary`, `Description`,
+    `AddReplicaRegions`, or `Type`.
+    """
 
 class CreateSecretInputDict(TypedDict, total=False):
     """Dictionary form of `CreateSecretInput`."""
@@ -489,6 +612,16 @@ class CreateSecretInputDict(TypedDict, total=False):
     external
     secrets](https://docs.aws.amazon.com/secretsmanager/latest/userguide/managed-external-secrets.html).
     """
+    cross_account_primary_arn: str | None
+    """
+    The ARN of a primary secret in another Amazon Web Services account.
+    Include this field to create a cross-account replica secret that
+    receives replicated data from that primary secret. The primary secret
+    must be in the same Amazon Web Services Region and partition as the
+    replica, and you must specify a customer managed KMS key in `KmsKeyId`.
+    You can't include `SecretString`, `SecretBinary`, `Description`,
+    `AddReplicaRegions`, or `Type`.
+    """
 
 @dataclass(kw_only=True)
 class CreateSecretOutput(_SerdeShape):
@@ -526,6 +659,76 @@ class CreateSecretOutput(_SerdeShape):
     """
 
 @dataclass(kw_only=True)
+class CrossAccountPrimaryType(_SerdeShape):
+    """
+    Contains information about the primary secret that a cross-account
+    replica secret replicates from, including its ARN and replication
+    status. This information is only available for cross-account replica
+    secrets.
+    """
+
+    primary_secret_arn: str | None = ...
+    """The ARN of the primary secret replicating into this replica secret."""
+    replication_status: str | None = ...
+    """
+    The status of replication from the primary secret to this replica. The
+    status can be:
+
+    - `InSync`: Replication to the replica secret is complete.
+
+    - `Failed`: Replication to the replica secret was unable to be
+      completed.
+
+    - `InProgress`: Replication to the replica secret has started but is not
+      complete.
+
+    - `Pending`: Replication has not yet started for the replica secret.
+
+    - `Detached`: Replication to the replica secret was stopped by the
+      primary.
+    """
+    status_message: str | None = ...
+    """
+    A message that describes the replication status, if Secrets Manager has
+    more information to provide.
+    """
+
+@dataclass(kw_only=True)
+class CrossAccountReplicaEntry(_SerdeShape):
+    """
+    Information about a cross-account replica secret. This information is
+    only available for cross-account primary secrets.
+    """
+
+    replica_secret_arn: str | None = ...
+    """The ARN of the replica secret."""
+    replication_role_arn: str | None = ...
+    """
+    The ARN of the IAM role that Secrets Manager assumes to replicate to
+    this replica, if one was specified when the replica was associated.
+    """
+    replication_status: str | None = ...
+    """
+    The status of replication from this primary secret. The status can be:
+
+    - `InSync`: Replication from the primary secret is complete.
+
+    - `Failed`: Replication from the primary secret was unable to be
+      completed.
+
+    - `InProgress`: Replication from the primary secret has started but is
+      not complete.
+
+    - `Detached`: Replication from the primary secret was stopped by the
+      replica.
+    """
+    status_message: str | None = ...
+    """
+    A message that describes the replication status, if Secrets Manager has
+    more information to provide.
+    """
+
+@dataclass(kw_only=True)
 class DecryptionFailure(ServiceError, _SerdeShape):
     """
     Secrets Manager can't decrypt the protected secret text using the
@@ -553,6 +756,13 @@ class DeleteResourcePolicyInput(_SerdeShape):
     partial ARN. See [Finding a secret from a partial
     ARN](https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen).
     """
+    policy_name: str | None = ...
+    """
+    The name of the resource policy to delete. If you don't specify this
+    field, Secrets Manager uses `default`. You can only delete the `default`
+    policy; if you specify any other name, the operation returns an
+    `InvalidParameterException`.
+    """
 
 class DeleteResourcePolicyInputDict(TypedDict, total=False):
     """Dictionary form of `DeleteResourcePolicyInput`."""
@@ -566,6 +776,13 @@ class DeleteResourcePolicyInputDict(TypedDict, total=False):
     partial ARN. See [Finding a secret from a partial
     ARN](https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen).
     """
+    policy_name: str | None
+    """
+    The name of the resource policy to delete. If you don't specify this
+    field, Secrets Manager uses `default`. You can only delete the `default`
+    policy; if you specify any other name, the operation returns an
+    `InvalidParameterException`.
+    """
 
 @dataclass(kw_only=True)
 class DeleteResourcePolicyOutput(_SerdeShape):
@@ -575,6 +792,11 @@ class DeleteResourcePolicyOutput(_SerdeShape):
     """The ARN of the secret that the resource-based policy was deleted for."""
     name: str | None = ...
     """The name of the secret that the resource-based policy was deleted for."""
+    policy_name: str | None = ...
+    """
+    The name of the deleted resource policy. If you didn't specify
+    `PolicyName` in the request, this is `default`.
+    """
     response_metadata: ResponseMetadata = ...
     """
     Metadata about the response that produced this output. Use this to
@@ -871,6 +1093,71 @@ class DescribeSecretOutput(_SerdeShape):
 
     - `InSync`, which indicates that the replica was created.
     """
+    cross_account_primary: CrossAccountPrimaryType | None = ...
+    """
+    Information about the primary secret in the other Amazon Web Services
+    account that this cross-account replica secret replicates from,
+    including the primary secret ARN and the replication status. This field
+    is omitted if the secret is not a cross-account replica.
+    """
+    cross_account_replicas: list[CrossAccountReplicaEntry] | None = ...
+    """
+    A list of this secret's cross-account replica secrets and their
+    replication status, if this secret is the primary for cross-account
+    replication. This field is omitted if the secret has no cross-account
+    replicas.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DisassociateCrossAccountReplicaInput(_SerdeShape):
+    """Dataclass for DisassociateCrossAccountReplicaInput structure."""
+
+    secret_id: str | None = ...
+    """
+    The ARN or name of the primary secret in your account.
+
+    For an ARN, we recommend that you specify a complete ARN rather than a
+    partial ARN. See [Finding a secret from a partial
+    ARN](https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen).
+    """
+    cross_account_replica_arn: str | None = ...
+    """
+    The ARN of the cross-account replica secret to unlink from the primary
+    secret.
+    """
+
+class DisassociateCrossAccountReplicaInputDict(TypedDict, total=False):
+    """Dictionary form of `DisassociateCrossAccountReplicaInput`."""
+
+    secret_id: Required[str]
+    """
+    The ARN or name of the primary secret in your account.
+
+    For an ARN, we recommend that you specify a complete ARN rather than a
+    partial ARN. See [Finding a secret from a partial
+    ARN](https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen).
+    """
+    cross_account_replica_arn: Required[str]
+    """
+    The ARN of the cross-account replica secret to unlink from the primary
+    secret.
+    """
+
+@dataclass(kw_only=True)
+class DisassociateCrossAccountReplicaOutput(_SerdeShape):
+    """Dataclass for DisassociateCrossAccountReplicaOutput structure."""
+
+    arn: str | None = ...
+    """The ARN of the primary secret."""
+    cross_account_replica_arn: str | None = ...
+    """The ARN of the replica secret that was unlinked from the primary secret."""
     response_metadata: ResponseMetadata = ...
     """
     Metadata about the response that produced this output. Use this to
@@ -1109,6 +1396,13 @@ class GetResourcePolicyInput(_SerdeShape):
     partial ARN. See [Finding a secret from a partial
     ARN](https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen).
     """
+    policy_name: str | None = ...
+    """
+    The name of the resource policy to retrieve. If you don't specify this
+    field, Secrets Manager uses `default`. If you specify a name other than
+    `default` and no policy with that name exists, the operation returns a
+    `ResourceNotFoundException`.
+    """
 
 class GetResourcePolicyInputDict(TypedDict, total=False):
     """Dictionary form of `GetResourcePolicyInput`."""
@@ -1121,6 +1415,13 @@ class GetResourcePolicyInputDict(TypedDict, total=False):
     For an ARN, we recommend that you specify a complete ARN rather than a
     partial ARN. See [Finding a secret from a partial
     ARN](https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen).
+    """
+    policy_name: str | None
+    """
+    The name of the resource policy to retrieve. If you don't specify this
+    field, Secrets Manager uses `default`. If you specify a name other than
+    `default` and no policy with that name exists, the operation returns a
+    `ResourceNotFoundException`.
     """
 
 @dataclass(kw_only=True)
@@ -1137,6 +1438,11 @@ class GetResourcePolicyOutput(_SerdeShape):
     the secret. For more information about permissions policies, see
     [Authentication and access control for Secrets
     Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
+    """
+    policy_name: str | None = ...
+    """
+    The name of the resource policy. If you didn't specify `PolicyName` in
+    the request, this is `default`.
     """
     response_metadata: ResponseMetadata = ...
     """
@@ -1343,6 +1649,81 @@ class LimitExceededException(ServiceError, _SerdeShape):
     quotas.
     """
 
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ListResourcePoliciesInput(_SerdeShape):
+    """Dataclass for ListResourcePoliciesInput structure."""
+
+    secret_id: str | None = ...
+    """
+    The ARN or name of the secret.
+
+    For an ARN, we recommend that you specify a complete ARN rather than a
+    partial ARN. See [Finding a secret from a partial
+    ARN](https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen).
+    """
+    max_results: int | None = ...
+    """
+    The number of results to include in the response. If you don't specify
+    this value, the service returns up to 100 results.
+
+    If there are more results available, in the response, Secrets Manager
+    includes `NextToken`. To get the next results, call
+    `ListResourcePolicies` again with the value from `NextToken`.
+    """
+    next_token: str | None = ...
+    """
+    A token that indicates where the output should continue from, if a
+    previous call did not show all results. To get the next results, call
+    `ListResourcePolicies` again with this value.
+    """
+
+class ListResourcePoliciesInputDict(TypedDict, total=False):
+    """Dictionary form of `ListResourcePoliciesInput`."""
+
+    secret_id: Required[str]
+    """
+    The ARN or name of the secret.
+
+    For an ARN, we recommend that you specify a complete ARN rather than a
+    partial ARN. See [Finding a secret from a partial
+    ARN](https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen).
+    """
+    max_results: int | None
+    """
+    The number of results to include in the response. If you don't specify
+    this value, the service returns up to 100 results.
+
+    If there are more results available, in the response, Secrets Manager
+    includes `NextToken`. To get the next results, call
+    `ListResourcePolicies` again with the value from `NextToken`.
+    """
+    next_token: str | None
+    """
+    A token that indicates where the output should continue from, if a
+    previous call did not show all results. To get the next results, call
+    `ListResourcePolicies` again with this value.
+    """
+
+@dataclass(kw_only=True)
+class ListResourcePoliciesOutput(_SerdeShape):
+    """Dataclass for ListResourcePoliciesOutput structure."""
+
+    resource_policies: list[ResourcePolicySummary]
+    """A list of the resource policies attached to the secret."""
+    next_token: str | None = ...
+    """
+    Secrets Manager includes this value if there's more output available
+    than what is included in the current response. To get the next results,
+    call `ListResourcePolicies` again with this value.
+    """
     response_metadata: ResponseMetadata = ...
     """
     Metadata about the response that produced this output. Use this to
@@ -1585,6 +1966,13 @@ class PutResourcePolicyInput(_SerdeShape):
     policy. For example policies, see [Permissions policy
     examples](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access_examples.html).
     """
+    policy_name: str | None = ...
+    """
+    The name of the resource policy to attach. If you don't specify this
+    field, Secrets Manager uses `default`. You can only attach the `default`
+    policy; if you specify any other name, the operation returns an
+    `InvalidParameterException`.
+    """
     block_public_policy: bool | None = ...
     """
     Specifies whether to block resource-based policies that allow broad
@@ -1626,6 +2014,13 @@ class PutResourcePolicyInputDict(TypedDict, total=False):
     policy. For example policies, see [Permissions policy
     examples](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access_examples.html).
     """
+    policy_name: str | None
+    """
+    The name of the resource policy to attach. If you don't specify this
+    field, Secrets Manager uses `default`. You can only attach the `default`
+    policy; if you specify any other name, the operation returns an
+    `InvalidParameterException`.
+    """
     block_public_policy: bool | None
     """
     Specifies whether to block resource-based policies that allow broad
@@ -1658,6 +2053,11 @@ class PutResourcePolicyOutput(_SerdeShape):
     """The ARN of the secret."""
     name: str | None = ...
     """The name of the secret."""
+    policy_name: str | None = ...
+    """
+    The name of the resource policy. If you didn't specify `PolicyName` in
+    the request, this is `default`.
+    """
     response_metadata: ResponseMetadata = ...
     """
     Metadata about the response that produced this output. Use this to
@@ -1978,6 +2378,10 @@ class ReplicaRegionTypeDict(TypedDict, total=False):
     don't include this field, Secrets Manager uses `aws/secretsmanager`.
     """
 
+class ReplicaRestrictionType(UnknownEnumMixin, StrEnum):
+    SAME_ORG = "SameOrg"
+    NO_RESTRICTION = "NoRestriction"
+
 @dataclass(kw_only=True)
 class ReplicateSecretToRegionsInput(_SerdeShape):
     """Dataclass for ReplicateSecretToRegionsInput structure."""
@@ -2068,6 +2472,19 @@ class ResourceNotFoundException(ServiceError, _SerdeShape):
     to investigate a call. Members of the metadata are individually
     optional.
     """
+
+@dataclass(kw_only=True)
+class ResourcePolicySummary(_SerdeShape):
+    """
+    A structure that contains details about a resource policy attached to a
+    secret. It does not contain the contents of the resource policy. To view
+    the contents of the policy, use
+    [GetResourcePolicy](https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetResourcePolicy.html)
+    .
+    """
+
+    policy_name: str | None = ...
+    """The name of the resource policy."""
 
 @dataclass(kw_only=True)
 class RestoreSecretInput(_SerdeShape):
@@ -2650,6 +3067,8 @@ class StatusType(UnknownEnumMixin, StrEnum):
     IN_SYNC = "InSync"
     FAILED = "Failed"
     IN_PROGRESS = "InProgress"
+    PENDING = "Pending"
+    DETACHED = "Detached"
 
 @dataclass(kw_only=True)
 class StopReplicationToReplicaInput(_SerdeShape):
@@ -2657,9 +3076,12 @@ class StopReplicationToReplicaInput(_SerdeShape):
 
     secret_id: str | None = ...
     """
-    The name of the secret or the replica ARN. The replica ARN is the same
-    as the original primary secret ARN expect the Region is changed to the
-    replica Region.
+    The ARN or name of the replica secret.
+
+    For a cross-region replica, the replica ARN is the same as the original
+    primary secret ARN except that the Region is changed to the replica
+    Region. For a cross-account replica, this is the ARN or name of the
+    replica secret in your account.
     """
 
 class StopReplicationToReplicaInputDict(TypedDict, total=False):
@@ -2667,9 +3089,12 @@ class StopReplicationToReplicaInputDict(TypedDict, total=False):
 
     secret_id: Required[str]
     """
-    The name of the secret or the replica ARN. The replica ARN is the same
-    as the original primary secret ARN expect the Region is changed to the
-    replica Region.
+    The ARN or name of the replica secret.
+
+    For a cross-region replica, the replica ARN is the same as the original
+    primary secret ARN except that the Region is changed to the replica
+    Region. For a cross-account replica, this is the ARN or name of the
+    replica secret in your account.
     """
 
 @dataclass(kw_only=True)
@@ -2678,8 +3103,10 @@ class StopReplicationToReplicaOutput(_SerdeShape):
 
     arn: str | None = ...
     """
-    The ARN of the promoted secret. The ARN is the same as the original
-    primary secret except the Region is changed.
+    The ARN of the promoted secret. For a cross-region replica, this ARN is
+    the same as the original primary secret's ARN except that the Region is
+    changed. For a cross-account replica, this is the ARN of the promoted
+    secret in your account.
     """
     response_metadata: ResponseMetadata = ...
     """
@@ -3199,6 +3626,9 @@ class ValidationErrorsEntry(_SerdeShape):
     validation of the resource policy.
     """
 
+ASSOCIATE_CROSS_ACCOUNT_REPLICA: APIOperation[
+    AssociateCrossAccountReplicaInput, AssociateCrossAccountReplicaOutput
+]
 BATCH_GET_SECRET_VALUE: APIOperation[
     BatchGetSecretValueInput, BatchGetSecretValueOutput
 ]
@@ -3209,9 +3639,15 @@ DELETE_RESOURCE_POLICY: APIOperation[
 ]
 DELETE_SECRET: APIOperation[DeleteSecretInput, DeleteSecretOutput]
 DESCRIBE_SECRET: APIOperation[DescribeSecretInput, DescribeSecretOutput]
+DISASSOCIATE_CROSS_ACCOUNT_REPLICA: APIOperation[
+    DisassociateCrossAccountReplicaInput, DisassociateCrossAccountReplicaOutput
+]
 GET_RANDOM_PASSWORD: APIOperation[GetRandomPasswordInput, GetRandomPasswordOutput]
 GET_RESOURCE_POLICY: APIOperation[GetResourcePolicyInput, GetResourcePolicyOutput]
 GET_SECRET_VALUE: APIOperation[GetSecretValueInput, GetSecretValueOutput]
+LIST_RESOURCE_POLICIES: APIOperation[
+    ListResourcePoliciesInput, ListResourcePoliciesOutput
+]
 LIST_SECRETS: APIOperation[ListSecretsInput, ListSecretsOutput]
 LIST_SECRET_VERSION_IDS: APIOperation[
     ListSecretVersionIdsInput, ListSecretVersionIdsOutput

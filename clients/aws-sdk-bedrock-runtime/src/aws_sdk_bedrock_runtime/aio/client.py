@@ -53,7 +53,7 @@ class AsyncBedrockRuntimeClient(AsyncClient[AsyncBedrockRuntimeConfig]):
     models.
     """
 
-    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
+    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
 
     @_overload
     async def apply_guardrail(

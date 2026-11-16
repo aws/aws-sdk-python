@@ -15,8 +15,6 @@ _RT = "ResourceType"
 _ins = "instance"
 _su = "subnet"
 _vp = "vpc"
-_Va = "Value"
-_va = "value"
 _rT = "resourceType"
 _Tag = "Tags"
 _Ad = "Address"
@@ -26,7 +24,12 @@ _PI = "PublicIp"
 _pI = "publicIp"
 _AI = "AllocationId"
 _aI = "allocationId"
+_pa = "pending_acceptance"
+_pa_ = "pending-acceptance"
+_re = "rejected"
 _av = "available"
+_de = "deleting"
+_del = "deleted"
 _TGI = "TransitGatewayId"
 _tGI = "transitGatewayId"
 _St = "State"
@@ -48,6 +51,12 @@ _SIe = "ServiceId"
 _er = "error"
 _VPCI = "VpcPeeringConnectionId"
 _vPCI = "vpcPeeringConnectionId"
+_VPCSRC = "VpcPeeringConnectionStateReasonCode"
+_ir = "initiating_request"
+_ir_ = "initiating-request"
+_act = "active"
+_ex = "expired"
+_pr = "provisioning"
 _VPCSR = "VpcPeeringConnectionStateReason"
 _VPC = "VpcPeeringConnection"
 _AVI = "AccepterVpcInfo"
@@ -413,6 +422,10 @@ _VL = "VpcLattice"
 _vL = "vpcLattice"
 _EFS = "ElasticFileSystem"
 _eFS = "elasticFileSystem"
+_GA = "GlobalAccelerator"
+_gA = "globalAccelerator"
+_AGV = "ApiGatewayV2"
+_aGV = "apiGatewayV2"
 _MB = "ManagedBy"
 _AVECM = "AccountVpcEncryptionControlMode"
 _unm = "unmanaged"
@@ -499,8 +512,6 @@ _AFNI = "AdditionalFlexibleNetworkInterfaces"
 _APLE = "AddPrefixListEntry"
 _Des = "Description"
 _APLEd = "AddPrefixListEntries"
-_DTo = "DomainType"
-_stan = "standard"
 _SM = "ServiceManaged"
 _al = "alb"
 _nl = "nlb"
@@ -525,18 +536,6 @@ _cOIP = "customerOwnedIpv4Pool"
 _CI = "CarrierIp"
 _cI = "carrierIp"
 _sM = "serviceManaged"
-_PUS = "PtrUpdateStatus"
-_Rea = "Reason"
-_rea = "reason"
-_PIAu = "PublicIpAddress"
-_AAd = "AddressAttribute"
-_PRt = "PtrRecord"
-_pRt = "ptrRecord"
-_PRU = "PtrRecordUpdate"
-_pRU = "ptrRecordUpdate"
-_AANd = "AddressAttributeName"
-_dn = "domain_name"
-_dn_ = "domain-name"
 _AF = "AddressFamily"
 _ipv = "ipv4"
 _ipv_ = "ipv6"
@@ -561,8 +560,26 @@ _ePS = "excludePathSet"
 _NIPI = "NetworkInsightsPathId"
 _NIAI = "NetworkInsightsAnalysisId"
 _ru = "running"
-_NIMR = "NetworkInsightsMaxResults"
 _ASn = "AnalysisStatus"
+
+VPC_PEERING_CONNECTION_STATE_REASON_CODE: StaticSchema = (
+    14,
+    n0,
+    _VPCSRC,
+    0,
+    (_ir, _pa, _act, _del, _re, _fa, _ex, _pr, _de),
+    (
+        (-1, {_sV: _ir_}),
+        (-1, {_sV: _pa_}),
+        (-1, {_sV: _act}),
+        (-1, {_sV: _del}),
+        (-1, {_sV: _re}),
+        (-1, {_sV: _fa}),
+        (-1, {_sV: _ex}),
+        (-1, {_sV: _pr}),
+        (-1, {_sV: _de}),
+    ),
+)
 
 VPC_PEERING_CONNECTION_STATE_REASON: StaticSchema = (
     18,
@@ -571,10 +588,7 @@ VPC_PEERING_CONNECTION_STATE_REASON: StaticSchema = (
     0,
     (_C, _Me),
     (
-        (
-            lambda: schemas.VPC_PEERING_CONNECTION_STATE_REASON_CODE,
-            {_aQN: _C, _sN: _co},
-        ),
+        (VPC_PEERING_CONNECTION_STATE_REASON_CODE, {_aQN: _C, _sN: _co}),
         (lambda: schemas.STRING, {_aQN: _Me, _sN: _mes}),
     ),
 )
@@ -1353,7 +1367,7 @@ ACCOUNT_VPC_ENCRYPTION_CONTROL_EXCLUSIONS: StaticSchema = (
     n0,
     _AVECE,
     0,
-    (_IG, _EOIG, _NG, _VPG, _VP, _La, _VL, _EFS),
+    (_IG, _EOIG, _NG, _VPG, _VP, _La, _VL, _EFS, _GA, _AGV),
     (
         (lambda: schemas.VPC_ENCRYPTION_CONTROL_EXCLUSION_STATE, {_aQN: _IG, _sN: _iG}),
         (
@@ -1371,6 +1385,11 @@ ACCOUNT_VPC_ENCRYPTION_CONTROL_EXCLUSIONS: StaticSchema = (
         (
             lambda: schemas.VPC_ENCRYPTION_CONTROL_EXCLUSION_STATE,
             {_aQN: _EFS, _sN: _eFS},
+        ),
+        (lambda: schemas.VPC_ENCRYPTION_CONTROL_EXCLUSION_STATE, {_aQN: _GA, _sN: _gA}),
+        (
+            lambda: schemas.VPC_ENCRYPTION_CONTROL_EXCLUSION_STATE,
+            {_aQN: _AGV, _sN: _aGV},
         ),
     ),
 )
@@ -1562,15 +1581,6 @@ ADD_PREFIX_LIST_ENTRIES: StaticSchema = (
     ((ADD_PREFIX_LIST_ENTRY, 0),),
 )
 
-DOMAIN_TYPE: StaticSchema = (
-    14,
-    n0,
-    _DTo,
-    0,
-    (_vp, _stan),
-    ((-1, {_sV: _vp}), (-1, {_sV: _stan})),
-)
-
 SERVICE_MANAGED: StaticSchema = (
     14,
     n0,
@@ -1606,7 +1616,7 @@ ADDRESS: StaticSchema = (
     (
         (lambda: schemas.STRING, {_aQN: _AI, _sN: _aI}),
         (lambda: schemas.STRING, {_aQN: _AIs, _sN: _aIs}),
-        (DOMAIN_TYPE, {_aQN: _Do, _sN: _dom}),
+        (lambda: schemas.DOMAIN_TYPE, {_aQN: _Do, _sN: _dom}),
         (lambda: schemas.STRING, {_aQN: _NII, _sN: _nII}),
         (lambda: schemas.STRING, {_aQN: _NIOI, _sN: _nIOI}),
         (lambda: schemas.STRING, {_aQN: _PIAr, _sN: _pIAr}),
@@ -1622,37 +1632,6 @@ ADDRESS: StaticSchema = (
         (lambda: schemas.STRING, {_aQN: _PI, _sN: _pI}),
     ),
 )
-
-PTR_UPDATE_STATUS: StaticSchema = (
-    18,
-    n0,
-    _PUS,
-    0,
-    (_Va, _Sta, _Rea),
-    (
-        (lambda: schemas.STRING, {_aQN: _Va, _sN: _va}),
-        (lambda: schemas.STRING, {_aQN: _Sta, _sN: _sta}),
-        (lambda: schemas.STRING, {_aQN: _Rea, _sN: _rea}),
-    ),
-)
-
-PUBLIC_IP_ADDRESS: StaticSchema = (3, n0, _PIAu, 0)
-
-ADDRESS_ATTRIBUTE: StaticSchema = (
-    18,
-    n0,
-    _AAd,
-    0,
-    (_PI, _AI, _PRt, _PRU),
-    (
-        (PUBLIC_IP_ADDRESS, {_aQN: _PI, _sN: _pI}),
-        (lambda: schemas.ALLOCATION_ID, {_aQN: _AI, _sN: _aI}),
-        (lambda: schemas.STRING, {_aQN: _PRt, _sN: _pRt}),
-        (PTR_UPDATE_STATUS, {_aQN: _PRU, _sN: _pRU}),
-    ),
-)
-
-ADDRESS_ATTRIBUTE_NAME: StaticSchema = (14, n0, _AANd, 0, (_dn,), ((-1, {_sV: _dn_}),))
 
 ADDRESS_FAMILY: StaticSchema = (
     14,
@@ -1700,8 +1679,6 @@ NETWORK_INSIGHTS_ACCESS_SCOPE_CONTENT: StaticSchema = (
 NETWORK_INSIGHTS_PATH_ID: StaticSchema = (3, n0, _NIPI, 0)
 
 NETWORK_INSIGHTS_ANALYSIS_ID: StaticSchema = (3, n0, _NIAI, 0)
-
-NETWORK_INSIGHTS_MAX_RESULTS: StaticSchema = (7, n0, _NIMR, 0)
 
 ANALYSIS_STATUS: StaticSchema = (
     14,

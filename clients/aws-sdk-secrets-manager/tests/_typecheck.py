@@ -6,6 +6,9 @@ from aws_sdk_secrets_manager.aio.client import AsyncSecretsManagerClient
 from aws_sdk_secrets_manager.client import SecretsManagerClient
 from aws_sdk_secrets_manager.models import (
     APIErrorType,
+    AssociateCrossAccountReplicaInput,
+    AssociateCrossAccountReplicaInputDict,
+    AssociateCrossAccountReplicaOutput,
     BatchGetSecretValueInput,
     BatchGetSecretValueInputDict,
     BatchGetSecretValueOutput,
@@ -15,6 +18,8 @@ from aws_sdk_secrets_manager.models import (
     CreateSecretInput,
     CreateSecretInputDict,
     CreateSecretOutput,
+    CrossAccountPrimaryType,
+    CrossAccountReplicaEntry,
     DeleteResourcePolicyInput,
     DeleteResourcePolicyInputDict,
     DeleteResourcePolicyOutput,
@@ -24,6 +29,9 @@ from aws_sdk_secrets_manager.models import (
     DescribeSecretInput,
     DescribeSecretInputDict,
     DescribeSecretOutput,
+    DisassociateCrossAccountReplicaInput,
+    DisassociateCrossAccountReplicaInputDict,
+    DisassociateCrossAccountReplicaOutput,
     ExternalSecretRotationMetadataItem,
     ExternalSecretRotationMetadataItemDict,
     Filter,
@@ -37,6 +45,9 @@ from aws_sdk_secrets_manager.models import (
     GetSecretValueInput,
     GetSecretValueInputDict,
     GetSecretValueOutput,
+    ListResourcePoliciesInput,
+    ListResourcePoliciesInputDict,
+    ListResourcePoliciesOutput,
     ListSecretVersionIdsInput,
     ListSecretVersionIdsInputDict,
     ListSecretVersionIdsOutput,
@@ -58,6 +69,7 @@ from aws_sdk_secrets_manager.models import (
     ReplicateSecretToRegionsInputDict,
     ReplicateSecretToRegionsOutput,
     ReplicationStatusType,
+    ResourcePolicySummary,
     RestoreSecretInput,
     RestoreSecretInputDict,
     RestoreSecretOutput,
@@ -100,18 +112,24 @@ from aws_sdk_secrets_manager.models import (
 _: Any = ...
 
 APIErrorType()
+AssociateCrossAccountReplicaInput()
+AssociateCrossAccountReplicaOutput()
 BatchGetSecretValueInput()
 BatchGetSecretValueOutput()
 CancelRotateSecretInput()
 CancelRotateSecretOutput()
 CreateSecretInput()
 CreateSecretOutput()
+CrossAccountPrimaryType()
+CrossAccountReplicaEntry()
 DeleteResourcePolicyInput()
 DeleteResourcePolicyOutput()
 DeleteSecretInput()
 DeleteSecretOutput()
 DescribeSecretInput()
 DescribeSecretOutput()
+DisassociateCrossAccountReplicaInput()
+DisassociateCrossAccountReplicaOutput()
 ExternalSecretRotationMetadataItem()
 Filter()
 GetRandomPasswordInput()
@@ -120,6 +138,8 @@ GetResourcePolicyInput()
 GetResourcePolicyOutput()
 GetSecretValueInput()
 GetSecretValueOutput()
+ListResourcePoliciesInput()
+ListResourcePoliciesOutput(resource_policies=_)
 ListSecretsInput()
 ListSecretsOutput()
 ListSecretVersionIdsInput()
@@ -134,6 +154,7 @@ ReplicaRegionType()
 ReplicateSecretToRegionsInput()
 ReplicateSecretToRegionsOutput()
 ReplicationStatusType()
+ResourcePolicySummary()
 RestoreSecretInput()
 RestoreSecretOutput()
 RotateSecretInput()
@@ -156,40 +177,49 @@ UpdateSecretVersionStageOutput()
 ValidateResourcePolicyInput()
 ValidateResourcePolicyOutput()
 ValidationErrorsEntry()
-_params_0: BatchGetSecretValueInputDict = {}
-_params_1: CancelRotateSecretInputDict = {"secret_id": _}
-_params_2: CreateSecretInputDict = {"name": _}
-_params_3: DeleteResourcePolicyInputDict = {"secret_id": _}
-_params_4: DeleteSecretInputDict = {"secret_id": _}
-_params_5: DescribeSecretInputDict = {"secret_id": _}
-_params_6: ExternalSecretRotationMetadataItemDict = {}
-_params_7: FilterDict = {}
-_params_8: GetRandomPasswordInputDict = {}
-_params_9: GetResourcePolicyInputDict = {"secret_id": _}
-_params_10: GetSecretValueInputDict = {"secret_id": _}
-_params_11: ListSecretsInputDict = {}
-_params_12: ListSecretVersionIdsInputDict = {"secret_id": _}
-_params_13: PutResourcePolicyInputDict = {"secret_id": _, "resource_policy": _}
-_params_14: PutSecretValueInputDict = {"secret_id": _}
-_params_15: RemoveRegionsFromReplicationInputDict = {
+_params_0: AssociateCrossAccountReplicaInputDict = {
+    "secret_id": _,
+    "cross_account_replica_arn": _,
+}
+_params_1: BatchGetSecretValueInputDict = {}
+_params_2: CancelRotateSecretInputDict = {"secret_id": _}
+_params_3: CreateSecretInputDict = {"name": _}
+_params_4: DeleteResourcePolicyInputDict = {"secret_id": _}
+_params_5: DeleteSecretInputDict = {"secret_id": _}
+_params_6: DescribeSecretInputDict = {"secret_id": _}
+_params_7: DisassociateCrossAccountReplicaInputDict = {
+    "secret_id": _,
+    "cross_account_replica_arn": _,
+}
+_params_8: ExternalSecretRotationMetadataItemDict = {}
+_params_9: FilterDict = {}
+_params_10: GetRandomPasswordInputDict = {}
+_params_11: GetResourcePolicyInputDict = {"secret_id": _}
+_params_12: GetSecretValueInputDict = {"secret_id": _}
+_params_13: ListResourcePoliciesInputDict = {"secret_id": _}
+_params_14: ListSecretsInputDict = {}
+_params_15: ListSecretVersionIdsInputDict = {"secret_id": _}
+_params_16: PutResourcePolicyInputDict = {"secret_id": _, "resource_policy": _}
+_params_17: PutSecretValueInputDict = {"secret_id": _}
+_params_18: RemoveRegionsFromReplicationInputDict = {
     "secret_id": _,
     "remove_replica_regions": _,
 }
-_params_16: ReplicaRegionTypeDict = {}
-_params_17: ReplicateSecretToRegionsInputDict = {
+_params_19: ReplicaRegionTypeDict = {}
+_params_20: ReplicateSecretToRegionsInputDict = {
     "secret_id": _,
     "add_replica_regions": _,
 }
-_params_18: RestoreSecretInputDict = {"secret_id": _}
-_params_19: RotateSecretInputDict = {"secret_id": _}
-_params_20: RotationRulesTypeDict = {}
-_params_21: StopReplicationToReplicaInputDict = {"secret_id": _}
-_params_22: TagDict = {}
-_params_23: TagResourceInputDict = {"secret_id": _, "tags": _}
-_params_24: UntagResourceInputDict = {"secret_id": _, "tag_keys": _}
-_params_25: UpdateSecretInputDict = {"secret_id": _}
-_params_26: UpdateSecretVersionStageInputDict = {"secret_id": _, "version_stage": _}
-_params_27: ValidateResourcePolicyInputDict = {"resource_policy": _}
+_params_21: RestoreSecretInputDict = {"secret_id": _}
+_params_22: RotateSecretInputDict = {"secret_id": _}
+_params_23: RotationRulesTypeDict = {}
+_params_24: StopReplicationToReplicaInputDict = {"secret_id": _}
+_params_25: TagDict = {}
+_params_26: TagResourceInputDict = {"secret_id": _, "tags": _}
+_params_27: UntagResourceInputDict = {"secret_id": _, "tag_keys": _}
+_params_28: UpdateSecretInputDict = {"secret_id": _}
+_params_29: UpdateSecretVersionStageInputDict = {"secret_id": _, "version_stage": _}
+_params_30: ValidateResourcePolicyInputDict = {"resource_policy": _}
 
 
 def _request[T](form: type[T]) -> T:
@@ -198,6 +228,18 @@ def _request[T](form: type[T]) -> T:
 
 async def check_async_calls(client: AsyncSecretsManagerClient) -> None:
     pass
+    await client.associate_cross_account_replica(
+        secret_id=_, cross_account_replica_arn=_
+    )
+    await client.associate_cross_account_replica(
+        **_request(AssociateCrossAccountReplicaInputDict)
+    )
+    await client.associate_cross_account_replica(
+        _request(AssociateCrossAccountReplicaInput)
+    )
+    await client.associate_cross_account_replica(
+        _request(AssociateCrossAccountReplicaInputDict)
+    )
     await client.batch_get_secret_value()
     await client.batch_get_secret_value(**_request(BatchGetSecretValueInputDict))
     await client.batch_get_secret_value(_request(BatchGetSecretValueInput))
@@ -222,6 +264,18 @@ async def check_async_calls(client: AsyncSecretsManagerClient) -> None:
     await client.describe_secret(**_request(DescribeSecretInputDict))
     await client.describe_secret(_request(DescribeSecretInput))
     await client.describe_secret(_request(DescribeSecretInputDict))
+    await client.disassociate_cross_account_replica(
+        secret_id=_, cross_account_replica_arn=_
+    )
+    await client.disassociate_cross_account_replica(
+        **_request(DisassociateCrossAccountReplicaInputDict)
+    )
+    await client.disassociate_cross_account_replica(
+        _request(DisassociateCrossAccountReplicaInput)
+    )
+    await client.disassociate_cross_account_replica(
+        _request(DisassociateCrossAccountReplicaInputDict)
+    )
     await client.get_random_password()
     await client.get_random_password(**_request(GetRandomPasswordInputDict))
     await client.get_random_password(_request(GetRandomPasswordInput))
@@ -234,6 +288,10 @@ async def check_async_calls(client: AsyncSecretsManagerClient) -> None:
     await client.get_secret_value(**_request(GetSecretValueInputDict))
     await client.get_secret_value(_request(GetSecretValueInput))
     await client.get_secret_value(_request(GetSecretValueInputDict))
+    await client.list_resource_policies(secret_id=_)
+    await client.list_resource_policies(**_request(ListResourcePoliciesInputDict))
+    await client.list_resource_policies(_request(ListResourcePoliciesInput))
+    await client.list_resource_policies(_request(ListResourcePoliciesInputDict))
     await client.list_secrets()
     await client.list_secrets(**_request(ListSecretsInputDict))
     await client.list_secrets(_request(ListSecretsInput))
@@ -312,6 +370,14 @@ async def check_async_calls(client: AsyncSecretsManagerClient) -> None:
 
 def check_sync_calls(client: SecretsManagerClient) -> None:
     pass
+    client.associate_cross_account_replica(secret_id=_, cross_account_replica_arn=_)
+    client.associate_cross_account_replica(
+        **_request(AssociateCrossAccountReplicaInputDict)
+    )
+    client.associate_cross_account_replica(_request(AssociateCrossAccountReplicaInput))
+    client.associate_cross_account_replica(
+        _request(AssociateCrossAccountReplicaInputDict)
+    )
     client.batch_get_secret_value()
     client.batch_get_secret_value(**_request(BatchGetSecretValueInputDict))
     client.batch_get_secret_value(_request(BatchGetSecretValueInput))
@@ -336,6 +402,16 @@ def check_sync_calls(client: SecretsManagerClient) -> None:
     client.describe_secret(**_request(DescribeSecretInputDict))
     client.describe_secret(_request(DescribeSecretInput))
     client.describe_secret(_request(DescribeSecretInputDict))
+    client.disassociate_cross_account_replica(secret_id=_, cross_account_replica_arn=_)
+    client.disassociate_cross_account_replica(
+        **_request(DisassociateCrossAccountReplicaInputDict)
+    )
+    client.disassociate_cross_account_replica(
+        _request(DisassociateCrossAccountReplicaInput)
+    )
+    client.disassociate_cross_account_replica(
+        _request(DisassociateCrossAccountReplicaInputDict)
+    )
     client.get_random_password()
     client.get_random_password(**_request(GetRandomPasswordInputDict))
     client.get_random_password(_request(GetRandomPasswordInput))
@@ -348,6 +424,10 @@ def check_sync_calls(client: SecretsManagerClient) -> None:
     client.get_secret_value(**_request(GetSecretValueInputDict))
     client.get_secret_value(_request(GetSecretValueInput))
     client.get_secret_value(_request(GetSecretValueInputDict))
+    client.list_resource_policies(secret_id=_)
+    client.list_resource_policies(**_request(ListResourcePoliciesInputDict))
+    client.list_resource_policies(_request(ListResourcePoliciesInput))
+    client.list_resource_policies(_request(ListResourcePoliciesInputDict))
     client.list_secrets()
     client.list_secrets(**_request(ListSecretsInputDict))
     client.list_secrets(_request(ListSecretsInput))

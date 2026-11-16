@@ -28,6 +28,7 @@ _T = "Type"
 _PTA = "PublicTypeArn"
 _ERA = "ExecutionRoleArn"
 _Ar = "Arn"
+_AN = "AliasName"
 _SM = "StatusMessage"
 _AD = "AutoDeployment"
 _TA = "TypeArn"
@@ -42,7 +43,6 @@ _sSI = "smithy.synthetic#originalShapeId"
 _sU = "smithy.api#Unit"
 _Cap = "Capabilities"
 _CR = "CapabilitiesReason"
-_Cat = "Category"
 _Ta = "Tags"
 _LRI = "LogicalResourceId"
 _Des = "Description"
@@ -101,8 +101,6 @@ _TVA = "TypeVersionArn"
 _NEo = "NoEcho"
 _DVe = "DefaultValue"
 _DTec = "DeclaredTransforms"
-_TNP = "TypeNamePrefix"
-_TFy = "TypeFilters"
 _LTI = "ListTypesInput"
 _PNu = "PublisherName"
 _TSy = "TypeSummary"
@@ -158,9 +156,15 @@ _RTIeg = "RegisterTypeInput"
 _SHP = "SchemaHandlerPackage"
 _RTO = "RegisterTypeOutput"
 _RTegis = "RegisterType"
+_RAI = "RemoveAliasInput"
+_RAO = "RemoveAliasOutput"
+_RAem = "RemoveAlias"
 _RSIo = "RollbackStackInput"
 _RSO = "RollbackStackOutput"
 _RSo = "RollbackStack"
+_SAI = "SetAliasInput"
+_SAO = "SetAliasOutput"
+_SAe = "SetAlias"
 _SSPI = "SetStackPolicyInput"
 _SSPO = "SetStackPolicyOutput"
 _SSP = "SetStackPolicy"
@@ -224,21 +228,6 @@ _aQ = "aws.protocols#awsQuery"
 _aw = "aws.api#service"
 _sN = "smithy.api#xmlNamespace"
 
-TYPE_NAME_PREFIX: StaticSchema = (3, n0, _TNP, 0)
-
-TYPE_FILTERS: StaticSchema = (
-    18,
-    n0,
-    _TFy,
-    0,
-    (_Cat, _PI, _TNP),
-    (
-        (lambda: schemas.CATEGORY, 0),
-        (lambda: schemas.PUBLISHER_ID, 0),
-        (TYPE_NAME_PREFIX, 0),
-    ),
-)
-
 LIST_TYPES_INPUT: StaticSchema = (
     18,
     n0,
@@ -250,7 +239,7 @@ LIST_TYPES_INPUT: StaticSchema = (
         (lambda: schemas.PROVISIONING_TYPE, 0),
         (lambda: schemas.DEPRECATED_STATUS, 0),
         (lambda: schemas.REGISTRY_TYPE, 0),
-        (TYPE_FILTERS, 0),
+        (lambda: schemas.TYPE_FILTERS, 0),
         (lambda: schemas.MAX_RESULTS, 0),
         (lambda: schemas.NEXT_TOKEN, 0),
     ),
@@ -593,6 +582,27 @@ REGISTER_TYPE: StaticOperationSchema = (
     (lambda: schemas.CFN_REGISTRY_EXCEPTION,),
 )
 
+REMOVE_ALIAS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _RAI,
+    {_s: None},
+    (_AN,),
+    ((lambda: schemas.ALIAS_NAME, 1),),
+)
+
+REMOVE_ALIAS_OUTPUT: StaticSchema = (18, n0, _RAO, {_sSI: _sU, _sm: None})
+
+REMOVE_ALIAS: StaticOperationSchema = (
+    23,
+    n0,
+    _RAem,
+    0,
+    REMOVE_ALIAS_INPUT,
+    REMOVE_ALIAS_OUTPUT,
+    (),
+)
+
 ROLLBACK_STACK_INPUT: StaticSchema = (
     18,
     n0,
@@ -625,6 +635,30 @@ ROLLBACK_STACK: StaticOperationSchema = (
     ROLLBACK_STACK_INPUT,
     ROLLBACK_STACK_OUTPUT,
     (lambda: schemas.TOKEN_ALREADY_EXISTS_EXCEPTION,),
+)
+
+SET_ALIAS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SAI,
+    {_s: None},
+    (_SN, _AN),
+    ((lambda: schemas.STACK_NAME, 1), (lambda: schemas.ALIAS_NAME, 1)),
+)
+
+SET_ALIAS_OUTPUT: StaticSchema = (18, n0, _SAO, {_sSI: _sU, _sm: None})
+
+SET_ALIAS: StaticOperationSchema = (
+    23,
+    n0,
+    _SAe,
+    0,
+    SET_ALIAS_INPUT,
+    SET_ALIAS_OUTPUT,
+    (
+        lambda: schemas.ALREADY_EXISTS_EXCEPTION,
+        lambda: schemas.LIMIT_EXCEEDED_EXCEPTION,
+    ),
 )
 
 SET_STACK_POLICY_INPUT: StaticSchema = (

@@ -18,10 +18,43 @@ _APIET = "APIErrorType"
 _SI = "SecretId"
 _M = "Message"
 _APIELT = "APIErrorListType"
+_SARNT = "SecretARNType"
+_RRTe = "ReplicaRestrictionType"
+_SO = "SameOrg"
+_sV = "smithy.api#enumValue"
+_NR = "NoRestriction"
+_RARNT = "RoleARNType"
+_ACARI = "AssociateCrossAccountReplicaInput"
+_sSI = "smithy.synthetic#originalShapeId"
+_cACARR = "com.amazonaws.secretsmanager#AssociateCrossAccountReplicaRequest"
+_s = "smithy.api#input"
+_sm = "smithy.api#required"
+_CARARN = "CrossAccountReplicaARN"
+_RR = "ReplicaRestriction"
+_RRARN = "ReplicationRoleARN"
+_ST = "StatusType"
+_IS = "InSync"
+_F = "Failed"
+_IP = "InProgress"
+_P = "Pending"
+_D = "Detached"
+_ACARO = "AssociateCrossAccountReplicaOutput"
+_cACARRo = "com.amazonaws.secretsmanager#AssociateCrossAccountReplicaResponse"
+_smi = "smithy.api#output"
+_ARN = "ARN"
+_RS = "ReplicationStatus"
+_ISE = "InternalServiceError"
+_smit = "smithy.api#error"
+_se = "server"
+_IPE = "InvalidParameterException"
+_c = "client"
+_IRE = "InvalidRequestException"
+_LEE = "LimitExceededException"
+_RNFE = "ResourceNotFoundException"
+_ACAR = "AssociateCrossAccountReplica"
 _ARADT = "AutomaticallyRotateAfterDaysType"
 _FNST = "FilterNameStringType"
 _d = "description"
-_sV = "smithy.api#enumValue"
 _n = "name"
 _tk = "tag_key"
 _tk_ = "tag-key"
@@ -34,7 +67,7 @@ _os_ = "owning-service"
 _a = "all"
 _FVST = "FilterValueStringType"
 _FVSL = "FilterValuesStringList"
-_F = "Filter"
+_Fi = "Filter"
 _K = "Key"
 _V = "Values"
 _FLT = "FiltersListType"
@@ -42,24 +75,20 @@ _MRBT = "MaxResultsBatchType"
 _NTT = "NextTokenType"
 _SILT = "SecretIdListType"
 _BGSVI = "BatchGetSecretValueInput"
-_sSI = "smithy.synthetic#originalShapeId"
 _cBGSVR = "com.amazonaws.secretsmanager#BatchGetSecretValueRequest"
-_s = "smithy.api#input"
 _SIL = "SecretIdList"
-_Fi = "Filters"
+_Fil = "Filters"
 _MR = "MaxResults"
 _NT = "NextToken"
-_SARNT = "SecretARNType"
 _CDT = "CreatedDateType"
 _SNT = "SecretNameType"
 _SBT = "SecretBinaryType"
-_sm = "smithy.api#sensitive"
+_smith = "smithy.api#sensitive"
 _SST = "SecretStringType"
 _SVIT = "SecretVersionIdType"
 _SVST = "SecretVersionStageType"
 _SVSTe = "SecretVersionStagesType"
 _SVE = "SecretValueEntry"
-_ARN = "ARN"
 _N = "Name"
 _VI = "VersionId"
 _SB = "SecretBinary"
@@ -69,24 +98,15 @@ _CD = "CreatedDate"
 _SVT = "SecretValuesType"
 _BGSVO = "BatchGetSecretValueOutput"
 _cBGSVRo = "com.amazonaws.secretsmanager#BatchGetSecretValueResponse"
-_smi = "smithy.api#output"
 _SV = "SecretValues"
 _E = "Errors"
 _DF = "DecryptionFailure"
-_smit = "smithy.api#error"
-_c = "client"
-_ISE = "InternalServiceError"
-_se = "server"
 _INTE = "InvalidNextTokenException"
-_IPE = "InvalidParameterException"
-_IRE = "InvalidRequestException"
-_RNFE = "ResourceNotFoundException"
 _BGSV = "BatchGetSecretValue"
 _BT = "BooleanType"
-_smith = "smithy.api#default"
+_smithy = "smithy.api#default"
 _CRSI = "CancelRotateSecretInput"
 _cCRSR = "com.amazonaws.secretsmanager#CancelRotateSecretRequest"
-_smithy = "smithy.api#required"
 _CRSO = "CancelRotateSecretOutput"
 _cCRSRo = "com.amazonaws.secretsmanager#CancelRotateSecretResponse"
 _CRS = "CancelRotateSecret"
@@ -103,16 +123,13 @@ _CSI = "CreateSecretInput"
 _cCSR = "com.amazonaws.secretsmanager#CreateSecretRequest"
 _CRT = "ClientRequestToken"
 _sT = "smithy.api#idempotencyToken"
-_D = "Description"
+_De = "Description"
 _Ta = "Tags"
 _ARR = "AddReplicaRegions"
 _FORS = "ForceOverwriteReplicaSecret"
 _Ty = "Type"
+_CAPARN = "CrossAccountPrimaryARN"
 _LADT = "LastAccessedDateType"
-_ST = "StatusType"
-_IS = "InSync"
-_Fa = "Failed"
-_IP = "InProgress"
 _SMT = "StatusMessageType"
 _RST = "ReplicationStatusType"
 _S = "Status"
@@ -121,16 +138,21 @@ _LAD = "LastAccessedDate"
 _RSLT = "ReplicationStatusListType"
 _CSO = "CreateSecretOutput"
 _cCSRo = "com.amazonaws.secretsmanager#CreateSecretResponse"
-_RS = "ReplicationStatus"
 _EF = "EncryptionFailure"
-_LEE = "LimitExceededException"
 _MPDE = "MalformedPolicyDocumentException"
 _PNME = "PreconditionNotMetException"
 _REE = "ResourceExistsException"
 _CS = "CreateSecret"
+_CAPT = "CrossAccountPrimaryType"
+_PSARN = "PrimarySecretARN"
+_CARE = "CrossAccountReplicaEntry"
+_RSARN = "ReplicaSecretARN"
+_CARLT = "CrossAccountReplicaListType"
 _DDT = "DeletedDateType"
+_RPNT = "ResourcePolicyNameType"
 _DRPI = "DeleteResourcePolicyInput"
 _cDRPR = "com.amazonaws.secretsmanager#DeleteResourcePolicyRequest"
+_PN = "PolicyName"
 _DRPO = "DeleteResourcePolicyOutput"
 _cDRPRo = "com.amazonaws.secretsmanager#DeleteResourcePolicyResponse"
 _DRP = "DeleteResourcePolicy"
@@ -151,7 +173,6 @@ _ESRMIKT = "ExternalSecretRotationMetadataItemKeyType"
 _ESRMIVT = "ExternalSecretRotationMetadataItemValueType"
 _ESRMI = "ExternalSecretRotationMetadataItem"
 _ESRMT = "ExternalSecretRotationMetadataType"
-_RARNT = "RoleARNType"
 _LCDT = "LastChangedDateType"
 _LRDT = "LastRotatedDateType"
 _NRDT = "NextRotationDateType"
@@ -171,7 +192,7 @@ _DSOe = "DescribeSecretOutput"
 _cDSRoma = "com.amazonaws.secretsmanager#DescribeSecretResponse"
 _RE = "RotationEnabled"
 _RLARN = "RotationLambdaARN"
-_RR = "RotationRules"
+_RRo = "RotationRules"
 _ESRM = "ExternalSecretRotationMetadata"
 _ESRRA = "ExternalSecretRotationRoleArn"
 _LRD = "LastRotatedDate"
@@ -181,15 +202,18 @@ _NRD = "NextRotationDate"
 _VITS = "VersionIdsToStages"
 _OS = "OwningService"
 _PR = "PrimaryRegion"
+_CAP = "CrossAccountPrimary"
+_CAR = "CrossAccountReplicas"
 _DSe = "DescribeSecret"
+_DCARI = "DisassociateCrossAccountReplicaInput"
+_cDCARR = "com.amazonaws.secretsmanager#DisassociateCrossAccountReplicaRequest"
+_DCARO = "DisassociateCrossAccountReplicaOutput"
+_cDCARRo = "com.amazonaws.secretsmanager#DisassociateCrossAccountReplicaResponse"
+_DCAR = "DisassociateCrossAccountReplica"
 _ECT = "ExcludeCharactersType"
 _ELT = "ExcludeLowercaseType"
 _ENT = "ExcludeNumbersType"
 _EPT = "ExcludePunctuationType"
-_EUT = "ExcludeUppercaseType"
-_IST = "IncludeSpaceType"
-_PLT = "PasswordLengthType"
-_REITT = "RequireEachIncludedTypeType"
 
 KMS_KEY_ID_TYPE: StaticSchema = (3, n0, _KKIT, 0)
 
@@ -230,6 +254,118 @@ API_ERROR_TYPE: StaticSchema = (
 
 API_ERROR_LIST_TYPE: StaticSchema = (16, n0, _APIELT, 0, (_m,), ((API_ERROR_TYPE, 0),))
 
+SECRET_ARN_TYPE: StaticSchema = (3, n0, _SARNT, 0)
+
+REPLICA_RESTRICTION_TYPE: StaticSchema = (
+    14,
+    n0,
+    _RRTe,
+    0,
+    (_SO, _NR),
+    ((-1, {_sV: _SO}), (-1, {_sV: _NR})),
+)
+
+ROLE_ARN_TYPE: StaticSchema = (3, n0, _RARNT, 0)
+
+ASSOCIATE_CROSS_ACCOUNT_REPLICA_INPUT: StaticSchema = (
+    18,
+    n0,
+    _ACARI,
+    {_sSI: _cACARR, _s: None},
+    (_SI, _CARARN, _RR, _RRARN),
+    (
+        (SECRET_ID_TYPE, 1),
+        (SECRET_ARN_TYPE, 1),
+        (REPLICA_RESTRICTION_TYPE, 0),
+        (ROLE_ARN_TYPE, 0),
+    ),
+)
+
+ASSOCIATE_CROSS_ACCOUNT_REPLICA_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _ACARO,
+    {_sSI: _cACARRo, _smi: None},
+    (_ARN, _CARARN, _RS),
+    ((SECRET_ARN_TYPE, 0), (SECRET_ARN_TYPE, 0), (lambda: STATUS_TYPE, 0)),
+)
+
+ASSOCIATE_CROSS_ACCOUNT_REPLICA: StaticOperationSchema = (
+    23,
+    n0,
+    _ACAR,
+    0,
+    ASSOCIATE_CROSS_ACCOUNT_REPLICA_INPUT,
+    ASSOCIATE_CROSS_ACCOUNT_REPLICA_OUTPUT,
+    (
+        lambda: INTERNAL_SERVICE_ERROR,
+        lambda: INVALID_PARAMETER_EXCEPTION,
+        lambda: INVALID_REQUEST_EXCEPTION,
+        lambda: LIMIT_EXCEEDED_EXCEPTION,
+        lambda: RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+STATUS_TYPE: StaticSchema = (
+    14,
+    n0,
+    _ST,
+    0,
+    (_IS, _F, _IP, _P, _D),
+    (
+        (-1, {_sV: _IS}),
+        (-1, {_sV: _F}),
+        (-1, {_sV: _IP}),
+        (-1, {_sV: _P}),
+        (-1, {_sV: _D}),
+    ),
+)
+
+INTERNAL_SERVICE_ERROR: StaticSchema = (
+    18,
+    n0,
+    _ISE,
+    {_smit: _se},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+INVALID_PARAMETER_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IPE,
+    {_smit: _c},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+INVALID_REQUEST_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IRE,
+    {_smit: _c},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+LIMIT_EXCEEDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _LEE,
+    {_smit: _c},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+RESOURCE_NOT_FOUND_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _RNFE,
+    {_smit: _c},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
 AUTOMATICALLY_ROTATE_AFTER_DAYS_TYPE: StaticSchema = (8, n0, _ARADT, 0)
 
 FILTER_NAME_STRING_TYPE: StaticSchema = (
@@ -263,7 +399,7 @@ FILTER_VALUES_STRING_LIST: StaticSchema = (
 FILTER: StaticSchema = (
     18,
     n0,
-    _F,
+    _Fi,
     0,
     (_K, _V),
     ((FILTER_NAME_STRING_TYPE, 0), (FILTER_VALUES_STRING_LIST, 0)),
@@ -282,7 +418,7 @@ BATCH_GET_SECRET_VALUE_INPUT: StaticSchema = (
     n0,
     _BGSVI,
     {_sSI: _cBGSVR, _s: None},
-    (_SIL, _Fi, _MR, _NT),
+    (_SIL, _Fil, _MR, _NT),
     (
         (SECRET_ID_LIST_TYPE, 0),
         (FILTERS_LIST_TYPE, 0),
@@ -309,15 +445,13 @@ BATCH_GET_SECRET_VALUE: StaticOperationSchema = (
     BATCH_GET_SECRET_VALUE_OUTPUT,
     (
         lambda: DECRYPTION_FAILURE,
-        lambda: INTERNAL_SERVICE_ERROR,
+        INTERNAL_SERVICE_ERROR,
         lambda: INVALID_NEXT_TOKEN_EXCEPTION,
-        lambda: INVALID_PARAMETER_EXCEPTION,
-        lambda: INVALID_REQUEST_EXCEPTION,
-        lambda: RESOURCE_NOT_FOUND_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_REQUEST_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
     ),
 )
-
-SECRET_ARN_TYPE: StaticSchema = (3, n0, _SARNT, 0)
 
 CREATED_DATE_TYPE: StaticSchema = (4, n0, _CDT, 0)
 
@@ -368,15 +502,6 @@ DECRYPTION_FAILURE: StaticSchema = (
     ((ERROR_MESSAGE, 0),),
 )
 
-INTERNAL_SERVICE_ERROR: StaticSchema = (
-    18,
-    n0,
-    _ISE,
-    {_smit: _se},
-    (_M,),
-    ((ERROR_MESSAGE, 0),),
-)
-
 INVALID_NEXT_TOKEN_EXCEPTION: StaticSchema = (
     18,
     n0,
@@ -386,34 +511,7 @@ INVALID_NEXT_TOKEN_EXCEPTION: StaticSchema = (
     ((ERROR_MESSAGE, 0),),
 )
 
-INVALID_PARAMETER_EXCEPTION: StaticSchema = (
-    18,
-    n0,
-    _IPE,
-    {_smit: _c},
-    (_M,),
-    ((ERROR_MESSAGE, 0),),
-)
-
-INVALID_REQUEST_EXCEPTION: StaticSchema = (
-    18,
-    n0,
-    _IRE,
-    {_smit: _c},
-    (_M,),
-    ((ERROR_MESSAGE, 0),),
-)
-
-RESOURCE_NOT_FOUND_EXCEPTION: StaticSchema = (
-    18,
-    n0,
-    _RNFE,
-    {_smit: _c},
-    (_M,),
-    ((ERROR_MESSAGE, 0),),
-)
-
-BOOLEAN_TYPE: StaticSchema = (2, n0, _BT, {_smith: False})
+BOOLEAN_TYPE: StaticSchema = (2, n0, _BT, {_smithy: False})
 
 CANCEL_ROTATE_SECRET_INPUT: StaticSchema = (
     18,
@@ -469,7 +567,7 @@ CREATE_SECRET_INPUT: StaticSchema = (
     n0,
     _CSI,
     {_sSI: _cCSR, _s: None},
-    (_N, _CRT, _D, _KKI, _SB, _SS, _Ta, _ARR, _FORS, _Ty),
+    (_N, _CRT, _De, _KKI, _SB, _SS, _Ta, _ARR, _FORS, _Ty, _CAPARN),
     (
         (NAME_TYPE, 1),
         (CLIENT_REQUEST_TOKEN_TYPE, 2),
@@ -479,8 +577,9 @@ CREATE_SECRET_INPUT: StaticSchema = (
         (SECRET_STRING_TYPE, 0),
         (TAG_LIST_TYPE, 0),
         (ADD_REPLICA_REGION_LIST_TYPE, 0),
-        (BOOLEAN_TYPE, {_smith: False}),
+        (BOOLEAN_TYPE, {_smithy: False}),
         (MEDEA_TYPE_TYPE, 0),
+        (SECRET_ARN_TYPE, 0),
     ),
 )
 
@@ -511,7 +610,7 @@ CREATE_SECRET: StaticOperationSchema = (
         INTERNAL_SERVICE_ERROR,
         INVALID_PARAMETER_EXCEPTION,
         INVALID_REQUEST_EXCEPTION,
-        lambda: LIMIT_EXCEEDED_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
         lambda: MALFORMED_POLICY_DOCUMENT_EXCEPTION,
         lambda: PRECONDITION_NOT_MET_EXCEPTION,
         lambda: RESOURCE_EXISTS_EXCEPTION,
@@ -520,15 +619,6 @@ CREATE_SECRET: StaticOperationSchema = (
 )
 
 LAST_ACCESSED_DATE_TYPE: StaticSchema = (4, n0, _LADT, 0)
-
-STATUS_TYPE: StaticSchema = (
-    14,
-    n0,
-    _ST,
-    0,
-    (_IS, _Fa, _IP),
-    ((-1, {_sV: _IS}), (-1, {_sV: _Fa}), (-1, {_sV: _IP})),
-)
 
 STATUS_MESSAGE_TYPE: StaticSchema = (3, n0, _SMT, 0)
 
@@ -565,15 +655,6 @@ ENCRYPTION_FAILURE: StaticSchema = (
     ((ERROR_MESSAGE, 0),),
 )
 
-LIMIT_EXCEEDED_EXCEPTION: StaticSchema = (
-    18,
-    n0,
-    _LEE,
-    {_smit: _c},
-    (_M,),
-    ((ERROR_MESSAGE, 0),),
-)
-
 MALFORMED_POLICY_DOCUMENT_EXCEPTION: StaticSchema = (
     18,
     n0,
@@ -601,15 +682,49 @@ RESOURCE_EXISTS_EXCEPTION: StaticSchema = (
     ((ERROR_MESSAGE, 0),),
 )
 
+CROSS_ACCOUNT_PRIMARY_TYPE: StaticSchema = (
+    18,
+    n0,
+    _CAPT,
+    0,
+    (_PSARN, _RS, _SM),
+    ((SECRET_ARN_TYPE, 0), (STATUS_TYPE, 0), (STATUS_MESSAGE_TYPE, 0)),
+)
+
+CROSS_ACCOUNT_REPLICA_ENTRY: StaticSchema = (
+    18,
+    n0,
+    _CARE,
+    0,
+    (_RSARN, _RRARN, _RS, _SM),
+    (
+        (SECRET_ARN_TYPE, 0),
+        (ROLE_ARN_TYPE, 0),
+        (STATUS_TYPE, 0),
+        (STATUS_MESSAGE_TYPE, 0),
+    ),
+)
+
+CROSS_ACCOUNT_REPLICA_LIST_TYPE: StaticSchema = (
+    16,
+    n0,
+    _CARLT,
+    0,
+    (_m,),
+    ((CROSS_ACCOUNT_REPLICA_ENTRY, 0),),
+)
+
 DELETED_DATE_TYPE: StaticSchema = (4, n0, _DDT, 0)
+
+RESOURCE_POLICY_NAME_TYPE: StaticSchema = (3, n0, _RPNT, 0)
 
 DELETE_RESOURCE_POLICY_INPUT: StaticSchema = (
     18,
     n0,
     _DRPI,
     {_sSI: _cDRPR, _s: None},
-    (_SI,),
-    ((SECRET_ID_TYPE, 1),),
+    (_SI, _PN),
+    ((SECRET_ID_TYPE, 1), (RESOURCE_POLICY_NAME_TYPE, 0)),
 )
 
 DELETE_RESOURCE_POLICY_OUTPUT: StaticSchema = (
@@ -617,8 +732,8 @@ DELETE_RESOURCE_POLICY_OUTPUT: StaticSchema = (
     n0,
     _DRPO,
     {_sSI: _cDRPRo, _smi: None},
-    (_ARN, _N),
-    ((SECRET_ARN_TYPE, 0), (NAME_TYPE, 0)),
+    (_ARN, _N, _PN),
+    ((SECRET_ARN_TYPE, 0), (NAME_TYPE, 0), (RESOURCE_POLICY_NAME_TYPE, 0)),
 )
 
 DELETE_RESOURCE_POLICY: StaticOperationSchema = (
@@ -636,7 +751,7 @@ DELETE_RESOURCE_POLICY: StaticOperationSchema = (
     ),
 )
 
-RECOVERY_WINDOW_IN_DAYS_TYPE: StaticSchema = (8, n0, _RWIDT, {_smith: 0})
+RECOVERY_WINDOW_IN_DAYS_TYPE: StaticSchema = (8, n0, _RWIDT, {_smithy: 0})
 
 DELETE_SECRET_INPUT: StaticSchema = (
     18,
@@ -646,8 +761,8 @@ DELETE_SECRET_INPUT: StaticSchema = (
     (_SI, _RWID, _FDWR),
     (
         (SECRET_ID_TYPE, 1),
-        (RECOVERY_WINDOW_IN_DAYS_TYPE, {_smith: None}),
-        (BOOLEAN_TYPE, {_smith: None}),
+        (RECOVERY_WINDOW_IN_DAYS_TYPE, {_smithy: None}),
+        (BOOLEAN_TYPE, {_smithy: None}),
     ),
 )
 
@@ -695,11 +810,11 @@ DESCRIBE_SECRET_OUTPUT: StaticSchema = (
         _ARN,
         _N,
         _Ty,
-        _D,
+        _De,
         _KKI,
         _RE,
         _RLARN,
-        _RR,
+        _RRo,
         _ESRM,
         _ESRRA,
         _LRD,
@@ -713,6 +828,8 @@ DESCRIBE_SECRET_OUTPUT: StaticSchema = (
         _CD,
         _PR,
         _RS,
+        _CAP,
+        _CAR,
     ),
     (
         (SECRET_ARN_TYPE, 0),
@@ -720,11 +837,11 @@ DESCRIBE_SECRET_OUTPUT: StaticSchema = (
         (MEDEA_TYPE_TYPE, 0),
         (DESCRIPTION_TYPE, 0),
         (KMS_KEY_ID_TYPE, 0),
-        (lambda: ROTATION_ENABLED_TYPE, {_smith: None}),
+        (lambda: ROTATION_ENABLED_TYPE, {_smithy: None}),
         (lambda: ROTATION_LAMBDA_ARN_TYPE, 0),
         (lambda: ROTATION_RULES_TYPE, 0),
         (lambda: EXTERNAL_SECRET_ROTATION_METADATA_TYPE, 0),
-        (lambda: ROLE_ARN_TYPE, 0),
+        (ROLE_ARN_TYPE, 0),
         (lambda: LAST_ROTATED_DATE_TYPE, 0),
         (lambda: LAST_CHANGED_DATE_TYPE, 0),
         (LAST_ACCESSED_DATE_TYPE, 0),
@@ -736,6 +853,8 @@ DESCRIBE_SECRET_OUTPUT: StaticSchema = (
         (lambda: TIMESTAMP_TYPE, 0),
         (REGION_TYPE, 0),
         (REPLICATION_STATUS_LIST_TYPE, 0),
+        (CROSS_ACCOUNT_PRIMARY_TYPE, 0),
+        (CROSS_ACCOUNT_REPLICA_LIST_TYPE, 0),
     ),
 )
 
@@ -776,8 +895,6 @@ EXTERNAL_SECRET_ROTATION_METADATA_TYPE: StaticSchema = (
     ((EXTERNAL_SECRET_ROTATION_METADATA_ITEM, 0),),
 )
 
-ROLE_ARN_TYPE: StaticSchema = (3, n0, _RARNT, 0)
-
 LAST_CHANGED_DATE_TYPE: StaticSchema = (4, n0, _LCDT, 0)
 
 LAST_ROTATED_DATE_TYPE: StaticSchema = (4, n0, _LRDT, 0)
@@ -786,7 +903,7 @@ NEXT_ROTATION_DATE_TYPE: StaticSchema = (4, n0, _NRDT, 0)
 
 OWNING_SERVICE_TYPE: StaticSchema = (3, n0, _OST, 0)
 
-ROTATION_ENABLED_TYPE: StaticSchema = (2, n0, _RET, {_smith: False})
+ROTATION_ENABLED_TYPE: StaticSchema = (2, n0, _RET, {_smithy: False})
 
 ROTATION_LAMBDA_ARN_TYPE: StaticSchema = (3, n0, _RLARNT, 0)
 
@@ -816,18 +933,43 @@ SECRET_VERSIONS_TO_STAGES_MAP_TYPE: StaticSchema = (
     ((SECRET_VERSION_ID_TYPE, 0), (SECRET_VERSION_STAGES_TYPE, 0)),
 )
 
+DISASSOCIATE_CROSS_ACCOUNT_REPLICA_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DCARI,
+    {_sSI: _cDCARR, _s: None},
+    (_SI, _CARARN),
+    ((SECRET_ID_TYPE, 1), (SECRET_ARN_TYPE, 1)),
+)
+
+DISASSOCIATE_CROSS_ACCOUNT_REPLICA_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DCARO,
+    {_sSI: _cDCARRo, _smi: None},
+    (_ARN, _CARARN),
+    ((SECRET_ARN_TYPE, 0), (SECRET_ARN_TYPE, 0)),
+)
+
+DISASSOCIATE_CROSS_ACCOUNT_REPLICA: StaticOperationSchema = (
+    23,
+    n0,
+    _DCAR,
+    0,
+    DISASSOCIATE_CROSS_ACCOUNT_REPLICA_INPUT,
+    DISASSOCIATE_CROSS_ACCOUNT_REPLICA_OUTPUT,
+    (
+        INTERNAL_SERVICE_ERROR,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_REQUEST_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
 EXCLUDE_CHARACTERS_TYPE: StaticSchema = (3, n0, _ECT, 0)
 
-EXCLUDE_LOWERCASE_TYPE: StaticSchema = (2, n0, _ELT, {_smith: False})
+EXCLUDE_LOWERCASE_TYPE: StaticSchema = (2, n0, _ELT, {_smithy: False})
 
-EXCLUDE_NUMBERS_TYPE: StaticSchema = (2, n0, _ENT, {_smith: False})
+EXCLUDE_NUMBERS_TYPE: StaticSchema = (2, n0, _ENT, {_smithy: False})
 
-EXCLUDE_PUNCTUATION_TYPE: StaticSchema = (2, n0, _EPT, {_smith: False})
-
-EXCLUDE_UPPERCASE_TYPE: StaticSchema = (2, n0, _EUT, {_smith: False})
-
-INCLUDE_SPACE_TYPE: StaticSchema = (2, n0, _IST, {_smith: False})
-
-PASSWORD_LENGTH_TYPE: StaticSchema = (8, n0, _PLT, 0)
-
-REQUIRE_EACH_INCLUDED_TYPE_TYPE: StaticSchema = (2, n0, _REITT, {_smith: False})
+EXCLUDE_PUNCTUATION_TYPE: StaticSchema = (2, n0, _EPT, {_smithy: False})

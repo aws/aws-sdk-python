@@ -26,8 +26,6 @@ _r = "return"
 _IC = "InstanceCount"
 _CVEI = "ClientVpnEndpointId"
 _av = "available"
-_de = "deleting"
-_del = "deleted"
 _St = "State"
 _st = "state"
 _CT = "CreationTime"
@@ -57,11 +55,8 @@ _PLI = "PrefixListId"
 _pLI = "prefixListId"
 _SGR = "SecurityGroupRule"
 _Des = "Description"
-_SMt = "StatusMessage"
-_sMt = "statusMessage"
 _desc = "description"
 _CTl = "ClientToken"
-_cTl = "clientToken"
 _sT = "smithy.api#idempotencyToken"
 _ATl = "AllocationType"
 _us = "used"
@@ -69,26 +64,58 @@ _fut = "future"
 _ca = "cancelling"
 _FAILED = "FAILED"
 _sU = "smithy.api#Unit"
-_cre = "creating"
 _ACTIVE = "ACTIVE"
+_sc = "scope"
 _GIr = "GroupId"
-_no = "none"
 _gIr = "groupId"
 _G = "Groups"
 _IIm = "ImageId"
+_VAII = "VerifiedAccessInstanceId"
 _VATPI = "VerifiedAccessTrustProviderId"
+_AVATPI = "AttachVerifiedAccessTrustProviderInput"
+_cAVATPR = "com.amazonaws.ec2#AttachVerifiedAccessTrustProviderRequest"
+_VAICSD = "VerifiedAccessInstanceCustomSubDomain"
+_SD = "SubDomain"
+_sD = "subDomain"
+_Na = "Nameservers"
+_NS = "NameserverSet"
+_nS = "nameserverSet"
 _DTPT = "DeviceTrustProviderType"
+_j = "jamf"
+_cro = "crowdstrike"
+_ju = "jumpcloud"
 _TPT = "TrustProviderType"
+_use = "user"
 _dev = "device"
 _UTPT = "UserTrustProviderType"
+_iic = "iam_identity_center"
+_iic_ = "iam-identity-center"
+_oi = "oidc"
+_VATPC = "VerifiedAccessTrustProviderCondensed"
 _vATPI = "verifiedAccessTrustProviderId"
 _tPT = "trustProviderType"
 _uTPT = "userTrustProviderType"
 _dTPT = "deviceTrustProviderType"
+_VATPCL = "VerifiedAccessTrustProviderCondensedList"
+_VAI = "VerifiedAccessInstance"
+_vAII = "verifiedAccessInstanceId"
+_VATP = "VerifiedAccessTrustProviders"
+_VATPS = "VerifiedAccessTrustProviderSet"
+_vATPS = "verifiedAccessTrustProviderSet"
 _LUTa = "LastUpdatedTime"
 _lUTa = "lastUpdatedTime"
+_FE = "FipsEnabled"
+_fE = "fipsEnabled"
+_CECSD = "CidrEndpointsCustomSubDomain"
+_cECSD = "cidrEndpointsCustomSubDomain"
 _DO = "DeviceOptions"
+_TI = "TenantId"
+_tI = "tenantId"
+_PSKU = "PublicSigningKeyUrl"
+_pSKU = "publicSigningKeyUrl"
 _NAOO = "NativeApplicationOidcOptions"
+_PSKE = "PublicSigningKeyEndpoint"
+_pSKE = "publicSigningKeyEndpoint"
 _Is = "Issuer"
 _iss = "issuer"
 _AE = "AuthorizationEndpoint"
@@ -100,7 +127,7 @@ _uIE = "userInfoEndpoint"
 _CIl = "ClientId"
 _cIl = "clientId"
 _Sc = "Scope"
-_sc = "scope"
+_CST = "ClientSecretType"
 _smith = "smithy.api#sensitive"
 _OO = "OidcOptions"
 _CSl = "ClientSecret"
@@ -118,17 +145,16 @@ _pRN = "policyReferenceName"
 _SSs = "SseSpecification"
 _sSs = "sseSpecification"
 _nAOO = "nativeApplicationOidcOptions"
+_AVATPO = "AttachVerifiedAccessTrustProviderOutput"
+_cAVATPRo = "com.amazonaws.ec2#AttachVerifiedAccessTrustProviderResult"
+_vATP = "verifiedAccessTrustProvider"
+_vAI = "verifiedAccessInstance"
+_AVATP = "AttachVerifiedAccessTrustProvider"
 _VIo = "VolumeId"
 _AVIt = "AttachVolumeInput"
 _cAVR = "com.amazonaws.ec2#AttachVolumeRequest"
 _Dev = "Device"
 _ECI = "EbsCardIndex"
-_VAS = "VolumeAttachmentState"
-_at = "attaching"
-_att = "attached"
-_det = "detaching"
-_deta = "detached"
-_bu = "busy"
 _AVO = "AttachVolumeOutput"
 _cVA = "com.amazonaws.ec2#VolumeAttachment"
 _DOT = "DeleteOnTermination"
@@ -382,123 +408,26 @@ _rILI = "reservedInstancesListingId"
 _LSi = "ListingState"
 _sol = "sold"
 _iC = "instanceCount"
-_ICL = "InstanceCountList"
-_CCV = "CurrencyCodeValues"
-_USD = "USD"
-_Lo = "Long"
-_PSri = "PriceSchedule"
-_Act = "Active"
-_CC = "CurrencyCode"
-_cC = "currencyCode"
-_Pric = "Price"
-_pric = "price"
-_Te = "Term"
-_te = "term"
-_PSL = "PriceScheduleList"
-_LSis = "ListingStatus"
-_cl = "closed"
-_RIL = "ReservedInstancesListing"
-_CD = "CreateDate"
-_cD = "createDate"
-_ICn = "InstanceCounts"
-_iCn = "instanceCounts"
-_PSric = "PriceSchedules"
-_pSri = "priceSchedules"
-_RIIes = "ReservedInstancesId"
-_rII = "reservedInstancesId"
-_UD = "UpdateDate"
-_uD = "updateDate"
-_RILL = "ReservedInstancesListingList"
 _CRILO = "CancelReservedInstancesListingOutput"
 _cCRILRo = "com.amazonaws.ec2#CancelReservedInstancesListingResult"
 _RILe = "ReservedInstancesListings"
 _RILS = "ReservedInstancesListingsSet"
 _rILS = "reservedInstancesListingsSet"
 _CRIL = "CancelReservedInstancesListing"
-_SFRI = "SpotFleetRequestId"
-_SFRIL = "SpotFleetRequestIdList"
-_CSFRI = "CancelSpotFleetRequestsInput"
-_cCSFRR = "com.amazonaws.ec2#CancelSpotFleetRequestsRequest"
-_SFRIp = "SpotFleetRequestIds"
-_sFRI = "spotFleetRequestId"
-_TIe = "TerminateInstances"
-_tIe = "terminateInstances"
-_BS = "BatchState"
-_CR_ = "CANCELLED_RUNNING"
-_cr__ = "cancelled_running"
-_CTI_ = "CANCELLED_TERMINATING_INSTANCES"
-_ct = "cancelled_terminating"
-_CSFRSI = "CancelSpotFleetRequestsSuccessItem"
-_CSFRS = "CurrentSpotFleetRequestState"
-_cSFRS = "currentSpotFleetRequestState"
-_PSFRS = "PreviousSpotFleetRequestState"
-_pSFRS = "previousSpotFleetRequestState"
-_CSFRSS = "CancelSpotFleetRequestsSuccessSet"
-_CSFRO = "CancelSpotFleetRequestsOutput"
-_cCSFRRo = "com.amazonaws.ec2#CancelSpotFleetRequestsResponse"
-_SFR = "SuccessfulFleetRequests"
-_SFRS = "SuccessfulFleetRequestSet"
-_sFRS = "successfulFleetRequestSet"
-_UFR = "UnsuccessfulFleetRequests"
-_UFRS = "UnsuccessfulFleetRequestSet"
-_uFRS = "unsuccessfulFleetRequestSet"
-_CSFR = "CancelSpotFleetRequests"
-_compl = "completed"
-_SSET = "SSEType"
-_se = "sse_ebs"
-_se_ = "sse-ebs"
-_sk = "sse_kms"
-_sk_ = "sse-kms"
-_VS = "VolumeState"
-_iu = "in_use"
-_iu_ = "in-use"
-_CRIP = "CapacityReservationInstancePlatform"
-_LU = "LINUX_UNIX"
-_LUNIX = "Linux/UNIX"
-_RHEL = "RED_HAT_ENTERPRISE_LINUX"
-_RHEL_ = "Red Hat Enterprise Linux"
-_SL_ = "SUSE_LINUX"
-_SL__ = "SUSE Linux"
-_WINDOWS = "WINDOWS"
-_W = "Windows"
-_WWSS = "WINDOWS_WITH_SQL_SERVER"
-_WwSS = "Windows with SQL Server"
-_WWSSE = "WINDOWS_WITH_SQL_SERVER_ENTERPRISE"
-_WwSSE = "Windows with SQL Server Enterprise"
-_WWSSS = "WINDOWS_WITH_SQL_SERVER_STANDARD"
-_WwSSS = "Windows with SQL Server Standard"
-_WWSSW = "WINDOWS_WITH_SQL_SERVER_WEB"
-_WwSSW = "Windows with SQL Server Web"
-_LWSSS = "LINUX_WITH_SQL_SERVER_STANDARD"
-_LwSSS = "Linux with SQL Server Standard"
-_LWSSW = "LINUX_WITH_SQL_SERVER_WEB"
-_LwSSW = "Linux with SQL Server Web"
-_LWSSE = "LINUX_WITH_SQL_SERVER_ENTERPRISE"
-_LwSSE = "Linux with SQL Server Enterprise"
-_RWSSS = "RHEL_WITH_SQL_SERVER_STANDARD"
-_RwSSS = "RHEL with SQL Server Standard"
-_RWSSE = "RHEL_WITH_SQL_SERVER_ENTERPRISE"
-_RwSSE = "RHEL with SQL Server Enterprise"
-_RWSSW = "RHEL_WITH_SQL_SERVER_WEB"
-_RwSSW = "RHEL with SQL Server Web"
-_RWH = "RHEL_WITH_HA"
-_RwH = "RHEL with HA"
-_RWHASSS = "RHEL_WITH_HA_AND_SQL_SERVER_STANDARD"
-_RwHaSSS = "RHEL with HA and SQL Server Standard"
-_RWHASSE = "RHEL_WITH_HA_AND_SQL_SERVER_ENTERPRISE"
-_RwHaSSE = "RHEL with HA and SQL Server Enterprise"
-_UPL = "UBUNTU_PRO_LINUX"
-_UP_ = "Ubuntu Pro"
+_DTe = "DeletionTime"
+_dT = "deletionTime"
 _BL = "BoxedLong"
-_SLE = "SnapshotLocationEnum"
-_REGIONAL = "REGIONAL"
-_regi = "regional"
-_LOCAL = "LOCAL"
-_lo = "local"
-_SSn = "SnapshotState"
-_rec = "recoverable"
-_reco = "recovering"
-_VISL = "VolumeIdStringList"
+_VASSRe = "VerifiedAccessSseSpecificationRequest"
+_VAGI = "VerifiedAccessGroupId"
+_vAGI = "verifiedAccessGroupId"
+_VAEI = "VerifiedAccessEndpointId"
+_VAG = "VerifiedAccessGroup"
+_Ow = "Owner"
+_ow = "owner"
+_VAGA = "VerifiedAccessGroupArn"
+_vAGA = "verifiedAccessGroupArn"
+_PLMR = "PrefixListMaxResults"
+_SGRIL = "SecurityGroupRuleIdList"
 
 ALLOCATION_TYPE: StaticSchema = (
     14,
@@ -508,6 +437,158 @@ ALLOCATION_TYPE: StaticSchema = (
     (_us, _fut, _ca),
     ((-1, {_sV: _us}), (-1, {_sV: _fut}), (-1, {_sV: _ca})),
 )
+
+VERIFIED_ACCESS_INSTANCE_ID: StaticSchema = (3, n0, _VAII, 0)
+
+VERIFIED_ACCESS_TRUST_PROVIDER_ID: StaticSchema = (3, n0, _VATPI, 0)
+
+ATTACH_VERIFIED_ACCESS_TRUST_PROVIDER_INPUT: StaticSchema = (
+    18,
+    n0,
+    _AVATPI,
+    {_sSI: _cAVATPR, _sm: None},
+    (_VAII, _VATPI, _CTl, _DR),
+    (
+        (VERIFIED_ACCESS_INSTANCE_ID, 1),
+        (VERIFIED_ACCESS_TRUST_PROVIDER_ID, 1),
+        (lambda: schemas.STRING, 2),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+ATTACH_VERIFIED_ACCESS_TRUST_PROVIDER_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _AVATPO,
+    {_sSI: _cAVATPRo, _smit: None},
+    (_VATPe, _VAI),
+    (
+        (lambda: VERIFIED_ACCESS_TRUST_PROVIDER, {_aQN: _VATPe, _sN: _vATP}),
+        (lambda: VERIFIED_ACCESS_INSTANCE, {_aQN: _VAI, _sN: _vAI}),
+    ),
+)
+
+ATTACH_VERIFIED_ACCESS_TRUST_PROVIDER: StaticOperationSchema = (
+    23,
+    n0,
+    _AVATP,
+    0,
+    ATTACH_VERIFIED_ACCESS_TRUST_PROVIDER_INPUT,
+    ATTACH_VERIFIED_ACCESS_TRUST_PROVIDER_OUTPUT,
+    (),
+)
+
+VERIFIED_ACCESS_INSTANCE_CUSTOM_SUB_DOMAIN: StaticSchema = (
+    18,
+    n0,
+    _VAICSD,
+    0,
+    (_SD, _Na),
+    (
+        (lambda: schemas.STRING, {_aQN: _SD, _sN: _sD}),
+        (lambda: schemas.VALUE_STRING_LIST, {_aQN: _NS, _sN: _nS}),
+    ),
+)
+
+DEVICE_TRUST_PROVIDER_TYPE: StaticSchema = (
+    14,
+    n0,
+    _DTPT,
+    0,
+    (_j, _cro, _ju),
+    ((-1, {_sV: _j}), (-1, {_sV: _cro}), (-1, {_sV: _ju})),
+)
+
+TRUST_PROVIDER_TYPE: StaticSchema = (
+    14,
+    n0,
+    _TPT,
+    0,
+    (_use, _dev),
+    ((-1, {_sV: _use}), (-1, {_sV: _dev})),
+)
+
+USER_TRUST_PROVIDER_TYPE: StaticSchema = (
+    14,
+    n0,
+    _UTPT,
+    0,
+    (_iic, _oi),
+    ((-1, {_sV: _iic_}), (-1, {_sV: _oi})),
+)
+
+VERIFIED_ACCESS_TRUST_PROVIDER_CONDENSED: StaticSchema = (
+    18,
+    n0,
+    _VATPC,
+    0,
+    (_VATPI, _Des, _TPT, _UTPT, _DTPT),
+    (
+        (lambda: schemas.STRING, {_aQN: _VATPI, _sN: _vATPI}),
+        (lambda: schemas.STRING, {_aQN: _Des, _sN: _desc}),
+        (TRUST_PROVIDER_TYPE, {_aQN: _TPT, _sN: _tPT}),
+        (USER_TRUST_PROVIDER_TYPE, {_aQN: _UTPT, _sN: _uTPT}),
+        (DEVICE_TRUST_PROVIDER_TYPE, {_aQN: _DTPT, _sN: _dTPT}),
+    ),
+)
+
+VERIFIED_ACCESS_TRUST_PROVIDER_CONDENSED_LIST: StaticSchema = (
+    16,
+    n0,
+    _VATPCL,
+    0,
+    (_me,),
+    ((VERIFIED_ACCESS_TRUST_PROVIDER_CONDENSED, {_sN: _i}),),
+)
+
+VERIFIED_ACCESS_INSTANCE: StaticSchema = (
+    18,
+    n0,
+    _VAI,
+    0,
+    (_VAII, _Des, _VATP, _CT, _LUTa, _Tag, _FE, _CECSD),
+    (
+        (lambda: schemas.STRING, {_aQN: _VAII, _sN: _vAII}),
+        (lambda: schemas.STRING, {_aQN: _Des, _sN: _desc}),
+        (VERIFIED_ACCESS_TRUST_PROVIDER_CONDENSED_LIST, {_aQN: _VATPS, _sN: _vATPS}),
+        (lambda: schemas.STRING, {_aQN: _CT, _sN: _cT}),
+        (lambda: schemas.STRING, {_aQN: _LUTa, _sN: _lUTa}),
+        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
+        (lambda: schemas.BOOLEAN, {_aQN: _FE, _sN: _fE}),
+        (VERIFIED_ACCESS_INSTANCE_CUSTOM_SUB_DOMAIN, {_aQN: _CECSD, _sN: _cECSD}),
+    ),
+)
+
+DEVICE_OPTIONS: StaticSchema = (
+    18,
+    n0,
+    _DO,
+    0,
+    (_TI, _PSKU),
+    (
+        (lambda: schemas.STRING, {_aQN: _TI, _sN: _tI}),
+        (lambda: schemas.STRING, {_aQN: _PSKU, _sN: _pSKU}),
+    ),
+)
+
+NATIVE_APPLICATION_OIDC_OPTIONS: StaticSchema = (
+    18,
+    n0,
+    _NAOO,
+    0,
+    (_PSKE, _Is, _AE, _TE, _UIEs, _CIl, _Sc),
+    (
+        (lambda: schemas.STRING, {_aQN: _PSKE, _sN: _pSKE}),
+        (lambda: schemas.STRING, {_aQN: _Is, _sN: _iss}),
+        (lambda: schemas.STRING, {_aQN: _AE, _sN: _aE}),
+        (lambda: schemas.STRING, {_aQN: _TE, _sN: _tE}),
+        (lambda: schemas.STRING, {_aQN: _UIEs, _sN: _uIE}),
+        (lambda: schemas.STRING, {_aQN: _CIl, _sN: _cIl}),
+        (lambda: schemas.STRING, {_aQN: _Sc, _sN: _sc}),
+    ),
+)
+
+CLIENT_SECRET_TYPE: StaticSchema = (3, n0, _CST, 4)
 
 OIDC_OPTIONS: StaticSchema = (
     18,
@@ -521,7 +602,7 @@ OIDC_OPTIONS: StaticSchema = (
         (lambda: schemas.STRING, {_aQN: _TE, _sN: _tE}),
         (lambda: schemas.STRING, {_aQN: _UIEs, _sN: _uIE}),
         (lambda: schemas.STRING, {_aQN: _CIl, _sN: _cIl}),
-        (lambda: schemas.CLIENT_SECRET_TYPE, {_aQN: _CSl, _sN: _cSl}),
+        (CLIENT_SECRET_TYPE, {_aQN: _CSl, _sN: _cSl}),
         (lambda: schemas.STRING, {_aQN: _Sc, _sN: _sc}),
     ),
 )
@@ -549,21 +630,19 @@ VERIFIED_ACCESS_TRUST_PROVIDER: StaticSchema = (
     (
         (lambda: schemas.STRING, {_aQN: _VATPI, _sN: _vATPI}),
         (lambda: schemas.STRING, {_aQN: _Des, _sN: _desc}),
-        (lambda: schemas.TRUST_PROVIDER_TYPE, {_aQN: _TPT, _sN: _tPT}),
-        (lambda: schemas.USER_TRUST_PROVIDER_TYPE, {_aQN: _UTPT, _sN: _uTPT}),
-        (lambda: schemas.DEVICE_TRUST_PROVIDER_TYPE, {_aQN: _DTPT, _sN: _dTPT}),
+        (TRUST_PROVIDER_TYPE, {_aQN: _TPT, _sN: _tPT}),
+        (USER_TRUST_PROVIDER_TYPE, {_aQN: _UTPT, _sN: _uTPT}),
+        (DEVICE_TRUST_PROVIDER_TYPE, {_aQN: _DTPT, _sN: _dTPT}),
         (OIDC_OPTIONS, {_aQN: _OO, _sN: _oO}),
-        (lambda: schemas.DEVICE_OPTIONS, {_aQN: _DO, _sN: _dO}),
+        (DEVICE_OPTIONS, {_aQN: _DO, _sN: _dO}),
         (lambda: schemas.STRING, {_aQN: _PRN, _sN: _pRN}),
         (lambda: schemas.STRING, {_aQN: _CT, _sN: _cT}),
         (lambda: schemas.STRING, {_aQN: _LUTa, _sN: _lUTa}),
         (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
         (VERIFIED_ACCESS_SSE_SPECIFICATION_RESPONSE, {_aQN: _SSs, _sN: _sSs}),
-        (lambda: schemas.NATIVE_APPLICATION_OIDC_OPTIONS, {_aQN: _NAOO, _sN: _nAOO}),
+        (NATIVE_APPLICATION_OIDC_OPTIONS, {_aQN: _NAOO, _sN: _nAOO}),
     ),
 )
-
-VOLUME_ID: StaticSchema = (3, n0, _VIo, 0)
 
 ATTACH_VOLUME_INPUT: StaticSchema = (
     18,
@@ -574,7 +653,7 @@ ATTACH_VOLUME_INPUT: StaticSchema = (
     (
         (lambda: schemas.STRING, 1),
         (lambda: schemas.INSTANCE_ID, 1),
-        (VOLUME_ID, 1),
+        (lambda: schemas.VOLUME_ID, 1),
         (lambda: schemas.BOXED_INTEGER, 0),
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
     ),
@@ -594,7 +673,7 @@ ATTACH_VOLUME_OUTPUT: StaticSchema = (
         (lambda: schemas.STRING, {_aQN: _VIo, _sN: _vIo}),
         (lambda: schemas.STRING, {_aQN: _II, _sN: _iI}),
         (lambda: schemas.STRING, {_aQN: _Dev, _sN: _dev}),
-        (lambda: VOLUME_ATTACHMENT_STATE, {_aQN: _Sta, _sN: _sta}),
+        (lambda: schemas.VOLUME_ATTACHMENT_STATE, {_aQN: _Sta, _sN: _sta}),
         (lambda: schemas.DATE_TIME, {_aQN: _ATtt, _sN: _aTtt}),
     ),
 )
@@ -607,21 +686,6 @@ ATTACH_VOLUME: StaticOperationSchema = (
     ATTACH_VOLUME_INPUT,
     ATTACH_VOLUME_OUTPUT,
     (),
-)
-
-VOLUME_ATTACHMENT_STATE: StaticSchema = (
-    14,
-    n0,
-    _VAS,
-    0,
-    (_at, _att, _det, _deta, _bu),
-    (
-        (-1, {_sV: _at}),
-        (-1, {_sV: _att}),
-        (-1, {_sV: _det}),
-        (-1, {_sV: _deta}),
-        (-1, {_sV: _bu}),
-    ),
 )
 
 ATTACH_VPN_GATEWAY_INPUT: StaticSchema = (
@@ -643,7 +707,7 @@ ATTACH_VPN_GATEWAY_OUTPUT: StaticSchema = (
     _AVGO,
     {_sSI: _cAVGRo, _smit: None},
     (_VA,),
-    ((lambda: VPC_ATTACHMENT, {_aQN: _At, _sN: _atta}),),
+    ((lambda: schemas.VPC_ATTACHMENT, {_aQN: _At, _sN: _atta}),),
 )
 
 ATTACH_VPN_GATEWAY: StaticOperationSchema = (
@@ -654,18 +718,6 @@ ATTACH_VPN_GATEWAY: StaticOperationSchema = (
     ATTACH_VPN_GATEWAY_INPUT,
     ATTACH_VPN_GATEWAY_OUTPUT,
     (),
-)
-
-VPC_ATTACHMENT: StaticSchema = (
-    18,
-    n0,
-    _VA,
-    0,
-    (_VI, _St),
-    (
-        (lambda: schemas.STRING, {_aQN: _VI, _sN: _vI}),
-        (lambda: schemas.ATTACHMENT_STATUS, {_aQN: _St, _sN: _st}),
-    ),
 )
 
 AUTHORIZE_CLIENT_VPN_INGRESS_INPUT: StaticSchema = (
@@ -963,8 +1015,6 @@ AUTHORIZE_SECURITY_GROUP_INGRESS: StaticOperationSchema = (
 
 BOXED_BOOLEAN: StaticSchema = (2, n0, _BB, 0)
 
-IPAM_INTERNET_REGISTRY_ASSOCIATION_ID: StaticSchema = (3, n0, _IIRAI, 0)
-
 BATCH_MODIFY_IPAM_ROUTING_POLICY_REGISTRATIONS_INPUT: StaticSchema = (
     18,
     n0,
@@ -973,7 +1023,7 @@ BATCH_MODIFY_IPAM_ROUTING_POLICY_REGISTRATIONS_INPUT: StaticSchema = (
     (_DR, _IIRAI, _DJ, _Fo, _CTl),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (IPAM_INTERNET_REGISTRY_ASSOCIATION_ID, 1),
+        (lambda: schemas.IPAM_INTERNET_REGISTRY_ASSOCIATION_ID, 1),
         (lambda: schemas.STRING, 1),
         (BOXED_BOOLEAN, 0),
         (lambda: schemas.STRING, 2),
@@ -1494,7 +1544,7 @@ CANCEL_RESERVED_INSTANCES_LISTING_OUTPUT: StaticSchema = (
     _CRILO,
     {_sSI: _cCRILRo, _smit: None},
     (_RILe,),
-    ((lambda: RESERVED_INSTANCES_LISTING_LIST, {_aQN: _RILS, _sN: _rILS}),),
+    ((lambda: schemas.RESERVED_INSTANCES_LISTING_LIST, {_aQN: _RILS, _sN: _rILS}),),
 )
 
 CANCEL_RESERVED_INSTANCES_LISTING: StaticOperationSchema = (
@@ -1528,269 +1578,48 @@ INSTANCE_COUNT: StaticSchema = (
     ),
 )
 
-INSTANCE_COUNT_LIST: StaticSchema = (
-    16,
-    n0,
-    _ICL,
-    0,
-    (_me,),
-    ((INSTANCE_COUNT, {_sN: _i}),),
-)
-
-CURRENCY_CODE_VALUES: StaticSchema = (14, n0, _CCV, 0, (_USD,), ((-1, {_sV: _USD}),))
-
-LONG: StaticSchema = (8, n0, _Lo, 0)
-
-PRICE_SCHEDULE: StaticSchema = (
-    18,
-    n0,
-    _PSri,
-    0,
-    (_Act, _CC, _Pric, _Te),
-    (
-        (lambda: schemas.BOOLEAN, {_aQN: _Act, _sN: _act}),
-        (CURRENCY_CODE_VALUES, {_aQN: _CC, _sN: _cC}),
-        (lambda: schemas.DOUBLE, {_aQN: _Pric, _sN: _pric}),
-        (LONG, {_aQN: _Te, _sN: _te}),
-    ),
-)
-
-PRICE_SCHEDULE_LIST: StaticSchema = (
-    16,
-    n0,
-    _PSL,
-    0,
-    (_me,),
-    ((PRICE_SCHEDULE, {_sN: _i}),),
-)
-
-LISTING_STATUS: StaticSchema = (
-    14,
-    n0,
-    _LSis,
-    0,
-    (_act, _p, _can, _cl),
-    ((-1, {_sV: _act}), (-1, {_sV: _p}), (-1, {_sV: _can}), (-1, {_sV: _cl})),
-)
-
-RESERVED_INSTANCES_LISTING: StaticSchema = (
-    18,
-    n0,
-    _RIL,
-    0,
-    (_CTl, _CD, _ICn, _PSric, _RIIes, _RILI, _Sta, _SMt, _Tag, _UD),
-    (
-        (lambda: schemas.STRING, {_aQN: _CTl, _sN: _cTl}),
-        (lambda: schemas.DATE_TIME, {_aQN: _CD, _sN: _cD}),
-        (INSTANCE_COUNT_LIST, {_aQN: _ICn, _sN: _iCn}),
-        (PRICE_SCHEDULE_LIST, {_aQN: _PSric, _sN: _pSri}),
-        (lambda: schemas.STRING, {_aQN: _RIIes, _sN: _rII}),
-        (lambda: schemas.STRING, {_aQN: _RILI, _sN: _rILI}),
-        (LISTING_STATUS, {_aQN: _Sta, _sN: _sta}),
-        (lambda: schemas.STRING, {_aQN: _SMt, _sN: _sMt}),
-        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
-        (lambda: schemas.DATE_TIME, {_aQN: _UD, _sN: _uD}),
-    ),
-)
-
-RESERVED_INSTANCES_LISTING_LIST: StaticSchema = (
-    16,
-    n0,
-    _RILL,
-    0,
-    (_me,),
-    ((RESERVED_INSTANCES_LISTING, {_sN: _i}),),
-)
-
-SPOT_FLEET_REQUEST_ID_LIST: StaticSchema = (
-    16,
-    n0,
-    _SFRIL,
-    0,
-    (_me,),
-    ((lambda: schemas.SPOT_FLEET_REQUEST_ID, {_sN: _i}),),
-)
-
-CANCEL_SPOT_FLEET_REQUESTS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _CSFRI,
-    {_sSI: _cCSFRR, _sm: None},
-    (_DR, _SFRIp, _TIe),
-    (
-        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (SPOT_FLEET_REQUEST_ID_LIST, {_aQN: _SFRI, _sN: _sFRI, _smi: None}),
-        (lambda: schemas.BOOLEAN, {_aQN: _TIe, _sN: _tIe, _smi: None}),
-    ),
-)
-
-CANCEL_SPOT_FLEET_REQUESTS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _CSFRO,
-    {_sSI: _cCSFRRo, _smit: None},
-    (_SFR, _UFR),
-    (
-        (lambda: CANCEL_SPOT_FLEET_REQUESTS_SUCCESS_SET, {_aQN: _SFRS, _sN: _sFRS}),
-        (
-            lambda: schemas.CANCEL_SPOT_FLEET_REQUESTS_ERROR_SET,
-            {_aQN: _UFRS, _sN: _uFRS},
-        ),
-    ),
-)
-
-CANCEL_SPOT_FLEET_REQUESTS: StaticOperationSchema = (
-    23,
-    n0,
-    _CSFR,
-    0,
-    CANCEL_SPOT_FLEET_REQUESTS_INPUT,
-    CANCEL_SPOT_FLEET_REQUESTS_OUTPUT,
-    (),
-)
-
-BATCH_STATE: StaticSchema = (
-    14,
-    n0,
-    _BS,
-    0,
-    (_SUBMITTED, _ACTIVE, _CANCELLED, _FAILED, _CR_, _CTI_, _MODIFYING),
-    (
-        (-1, {_sV: _subm}),
-        (-1, {_sV: _act}),
-        (-1, {_sV: _can}),
-        (-1, {_sV: _fa}),
-        (-1, {_sV: _cr__}),
-        (-1, {_sV: _ct}),
-        (-1, {_sV: _mo}),
-    ),
-)
-
-CANCEL_SPOT_FLEET_REQUESTS_SUCCESS_ITEM: StaticSchema = (
-    18,
-    n0,
-    _CSFRSI,
-    0,
-    (_CSFRS, _PSFRS, _SFRI),
-    (
-        (BATCH_STATE, {_aQN: _CSFRS, _sN: _cSFRS}),
-        (BATCH_STATE, {_aQN: _PSFRS, _sN: _pSFRS}),
-        (lambda: schemas.STRING, {_aQN: _SFRI, _sN: _sFRI}),
-    ),
-)
-
-CANCEL_SPOT_FLEET_REQUESTS_SUCCESS_SET: StaticSchema = (
-    16,
-    n0,
-    _CSFRSS,
-    0,
-    (_me,),
-    ((CANCEL_SPOT_FLEET_REQUESTS_SUCCESS_ITEM, {_sN: _i}),),
-)
-
-SSE_TYPE: StaticSchema = (
-    14,
-    n0,
-    _SSET,
-    0,
-    (_se, _sk, _no),
-    ((-1, {_sV: _se_}), (-1, {_sV: _sk_}), (-1, {_sV: _no})),
-)
-
-VOLUME_STATE: StaticSchema = (
-    14,
-    n0,
-    _VS,
-    0,
-    (_cre, _av, _iu, _de, _del, _er),
-    (
-        (-1, {_sV: _cre}),
-        (-1, {_sV: _av}),
-        (-1, {_sV: _iu_}),
-        (-1, {_sV: _de}),
-        (-1, {_sV: _del}),
-        (-1, {_sV: _er}),
-    ),
-)
-
-CAPACITY_RESERVATION_INSTANCE_PLATFORM: StaticSchema = (
-    14,
-    n0,
-    _CRIP,
-    0,
-    (
-        _LU,
-        _RHEL,
-        _SL_,
-        _WINDOWS,
-        _WWSS,
-        _WWSSE,
-        _WWSSS,
-        _WWSSW,
-        _LWSSS,
-        _LWSSW,
-        _LWSSE,
-        _RWSSS,
-        _RWSSE,
-        _RWSSW,
-        _RWH,
-        _RWHASSS,
-        _RWHASSE,
-        _UPL,
-    ),
-    (
-        (-1, {_sV: _LUNIX}),
-        (-1, {_sV: _RHEL_}),
-        (-1, {_sV: _SL__}),
-        (-1, {_sV: _W}),
-        (-1, {_sV: _WwSS}),
-        (-1, {_sV: _WwSSE}),
-        (-1, {_sV: _WwSSS}),
-        (-1, {_sV: _WwSSW}),
-        (-1, {_sV: _LwSSS}),
-        (-1, {_sV: _LwSSW}),
-        (-1, {_sV: _LwSSE}),
-        (-1, {_sV: _RwSSS}),
-        (-1, {_sV: _RwSSE}),
-        (-1, {_sV: _RwSSW}),
-        (-1, {_sV: _RwH}),
-        (-1, {_sV: _RwHaSSS}),
-        (-1, {_sV: _RwHaSSE}),
-        (-1, {_sV: _UP_}),
-    ),
-)
-
 BOXED_LONG: StaticSchema = (8, n0, _BL, 0)
 
-SNAPSHOT_LOCATION_ENUM: StaticSchema = (
-    14,
+VERIFIED_ACCESS_SSE_SPECIFICATION_REQUEST: StaticSchema = (
+    18,
     n0,
-    _SLE,
+    _VASSRe,
     0,
-    (_REGIONAL, _LOCAL),
-    ((-1, {_sV: _regi}), (-1, {_sV: _lo})),
+    (_CMKE, _KKA),
+    ((lambda: schemas.BOOLEAN, 0), (KMS_KEY_ARN, 0)),
 )
 
-SNAPSHOT_STATE: StaticSchema = (
-    14,
+VERIFIED_ACCESS_GROUP_ID: StaticSchema = (3, n0, _VAGI, 0)
+
+VERIFIED_ACCESS_GROUP: StaticSchema = (
+    18,
     n0,
-    _SSn,
+    _VAG,
     0,
-    (_p, _compl, _er, _rec, _reco),
+    (_VAGI, _VAII, _Des, _Ow, _VAGA, _CT, _LUTa, _DTe, _Tag, _SSs),
     (
-        (-1, {_sV: _p}),
-        (-1, {_sV: _compl}),
-        (-1, {_sV: _er}),
-        (-1, {_sV: _rec}),
-        (-1, {_sV: _reco}),
+        (lambda: schemas.STRING, {_aQN: _VAGI, _sN: _vAGI}),
+        (lambda: schemas.STRING, {_aQN: _VAII, _sN: _vAII}),
+        (lambda: schemas.STRING, {_aQN: _Des, _sN: _desc}),
+        (lambda: schemas.STRING, {_aQN: _Ow, _sN: _ow}),
+        (lambda: schemas.STRING, {_aQN: _VAGA, _sN: _vAGA}),
+        (lambda: schemas.STRING, {_aQN: _CT, _sN: _cT}),
+        (lambda: schemas.STRING, {_aQN: _LUTa, _sN: _lUTa}),
+        (lambda: schemas.STRING, {_aQN: _DTe, _sN: _dT}),
+        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
+        (VERIFIED_ACCESS_SSE_SPECIFICATION_RESPONSE, {_aQN: _SSs, _sN: _sSs}),
     ),
 )
 
-VOLUME_ID_STRING_LIST: StaticSchema = (
+VERIFIED_ACCESS_ENDPOINT_ID: StaticSchema = (3, n0, _VAEI, 0)
+
+PREFIX_LIST_MAX_RESULTS: StaticSchema = (7, n0, _PLMR, 0)
+
+SECURITY_GROUP_RULE_ID_LIST: StaticSchema = (
     16,
     n0,
-    _VISL,
+    _SGRIL,
     0,
     (_me,),
-    ((VOLUME_ID, {_sN: _VIo}),),
+    ((lambda: schemas.STRING, {_sN: _i}),),
 )

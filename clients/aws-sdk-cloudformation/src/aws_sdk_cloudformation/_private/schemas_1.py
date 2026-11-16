@@ -169,7 +169,6 @@ _CCSI = "CreateChangeSetInput"
 _CCSO = "CreateChangeSetOutput"
 _Id = "Id"
 _ICE = "InsufficientCapabilitiesException"
-_LEE = "LimitExceededException"
 _CCS = "CreateChangeSet"
 _CRLEE = "ConcurrentResourcesLimitExceededException"
 _GTN = "GeneratedTemplateName"
@@ -716,7 +715,7 @@ CREATE_CHANGE_SET: StaticOperationSchema = (
     (
         lambda: schemas.ALREADY_EXISTS_EXCEPTION,
         lambda: INSUFFICIENT_CAPABILITIES_EXCEPTION,
-        lambda: LIMIT_EXCEEDED_EXCEPTION,
+        lambda: schemas.LIMIT_EXCEEDED_EXCEPTION,
     ),
 )
 
@@ -729,21 +728,6 @@ INSUFFICIENT_CAPABILITIES_EXCEPTION: StaticSchema = (
         _sE: 400,
         _aQE: MappingProxyType(
             {"code": "InsufficientCapabilitiesException", "httpResponseCode": 400}
-        ),
-    },
-    (_M,),
-    ((lambda: schemas.ERROR_MESSAGE, 0),),
-)
-
-LIMIT_EXCEEDED_EXCEPTION: StaticSchema = (
-    18,
-    n0,
-    _LEE,
-    {
-        _smi: _c,
-        _sE: 400,
-        _aQE: MappingProxyType(
-            {"code": "LimitExceededException", "httpResponseCode": 400}
         ),
     },
     (_M,),
@@ -852,7 +836,7 @@ CREATE_GENERATED_TEMPLATE: StaticOperationSchema = (
     (
         lambda: schemas.ALREADY_EXISTS_EXCEPTION,
         CONCURRENT_RESOURCES_LIMIT_EXCEEDED_EXCEPTION,
-        LIMIT_EXCEEDED_EXCEPTION,
+        lambda: schemas.LIMIT_EXCEEDED_EXCEPTION,
     ),
 )
 
@@ -943,7 +927,7 @@ CREATE_STACK: StaticOperationSchema = (
     (
         lambda: schemas.ALREADY_EXISTS_EXCEPTION,
         INSUFFICIENT_CAPABILITIES_EXCEPTION,
-        LIMIT_EXCEEDED_EXCEPTION,
+        lambda: schemas.LIMIT_EXCEEDED_EXCEPTION,
         lambda: schemas.TOKEN_ALREADY_EXISTS_EXCEPTION,
     ),
 )

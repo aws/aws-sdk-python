@@ -18,6 +18,7 @@ _m = "member"
 _s = "smithy.api#input"
 _sm = "smithy.api#output"
 _smit = "smithy.api#required"
+_PI = "PublisherId"
 _RESOURCE = "RESOURCE"
 _TN = "TypeName"
 _T = "Type"
@@ -26,6 +27,7 @@ _TA = "TypeArn"
 _Ti = "Timestamp"
 _CA = "CallAs"
 _SN = "StackName"
+_Cat = "Category"
 _LRI = "LogicalResourceId"
 _MI = "ModuleInfo"
 _PRI = "PhysicalResourceId"
@@ -194,6 +196,8 @@ _RSF = "RegistrationStatusFilter"
 _RTL = "RegistrationTokenList"
 _LTRO = "ListTypeRegistrationsOutput"
 _LTR = "ListTypeRegistrations"
+_TNP = "TypeNamePrefix"
+_TFy = "TypeFilters"
 
 RESOURCE_SCANNER_MAX_RESULTS: StaticSchema = (7, n0, _RSMR, 0)
 
@@ -1117,4 +1121,19 @@ REGISTRATION_TOKEN_LIST: StaticSchema = (
     0,
     (_m,),
     ((lambda: schemas.REGISTRATION_TOKEN, 0),),
+)
+
+TYPE_NAME_PREFIX: StaticSchema = (3, n0, _TNP, 0)
+
+TYPE_FILTERS: StaticSchema = (
+    18,
+    n0,
+    _TFy,
+    0,
+    (_Cat, _PI, _TNP),
+    (
+        (lambda: schemas.CATEGORY, 0),
+        (lambda: schemas.PUBLISHER_ID, 0),
+        (TYPE_NAME_PREFIX, 0),
+    ),
 )

@@ -86,7 +86,6 @@ _nII = "networkInterfaceId"
 _CGI = "CarrierGatewayId"
 _SGI = "SecurityGroupId"
 _AS = "AddressSet"
-_AV = "AttributeValue"
 _ena = "enabled"
 _IT = "InstanceType"
 _iT = "instanceType"
@@ -114,8 +113,18 @@ _COIP = "CustomerOwnedIpv4Pool"
 _cOIP = "customerOwnedIpv4Pool"
 _CI = "CarrierIp"
 _cI = "carrierIp"
+_PUS = "PtrUpdateStatus"
 _Rea = "Reason"
 _rea = "reason"
+_PIAu = "PublicIpAddress"
+_AAd = "AddressAttribute"
+_PRt = "PtrRecord"
+_pRt = "ptrRecord"
+_PRU = "PtrRecordUpdate"
+_pRU = "ptrRecordUpdate"
+_AANd = "AddressAttributeName"
+_dn = "domain_name"
+_dn_ = "domain-name"
 _AL = "AddressList"
 _AMR = "AddressMaxResults"
 _ATL = "AddressTransferList"
@@ -142,8 +151,8 @@ _adv = "advertised"
 _dep = "deprovisioned"
 _fd__ = "failed_deprovision"
 _fd___ = "failed-deprovision"
-_fp = "failed_provision"
-_fp_ = "failed-provision"
+_fp__ = "failed_provision"
+_fp___ = "failed-provision"
 _pa____ = "pending_advertising"
 _pa_____ = "pending-advertising"
 _pd__ = "pending_deprovision"
@@ -197,7 +206,6 @@ _CTl = "ClientToken"
 _cTl = "clientToken"
 _Q = "Quantity"
 _q = "quantity"
-_RHIL = "ResponseHostIdList"
 _AHO = "AllocateHostsOutput"
 _cAHRo = "com.amazonaws.ec2#AllocateHostsResult"
 _HI = "HostIds"
@@ -434,12 +442,6 @@ _AIIPO = "AssociateIamInstanceProfileOutput"
 _cAIIPRo = "com.amazonaws.ec2#AssociateIamInstanceProfileResult"
 _iIPA = "iamInstanceProfileAssociation"
 _AIIP = "AssociateIamInstanceProfile"
-_DHI = "DedicatedHostId"
-_DHIL = "DedicatedHostIdList"
-_IEWAR = "InstanceEventWindowAssociationRequest"
-_ITn = "InstanceTags"
-_ITns = "InstanceTag"
-_DHIe = "DedicatedHostIds"
 _RGI = "RouteGatewayId"
 _GIr = "GroupId"
 _TGSIL = "TransitGatewaySubnetIdList"
@@ -450,6 +452,7 @@ _att = "attached"
 _det = "detaching"
 _deta = "detached"
 _ASt = "AttachmentStatus"
+_VA = "VpcAttachment"
 _UIGP = "UserIdGroupPair"
 _UIs = "UserId"
 _uI = "userId"
@@ -458,7 +461,6 @@ _gN = "groupName"
 _PSe = "PeeringStatus"
 _pSe = "peeringStatus"
 _SGN = "SecurityGroupName"
-_Dou = "Double"
 _ded = "dedicated"
 _Ten = "Tenancy"
 _CPIo = "CoipPoolId"
@@ -467,13 +469,38 @@ _in_ = "ip_name"
 _in__ = "ip-name"
 _rn_ = "resource_name"
 _rn__ = "resource-name"
-_TCUT = "TargetCapacityUnitType"
-_VCPU = "VCPU"
-_vcp = "vcpu"
-_MM = "MEMORY_MIB"
-_mm_____________________________________________________________________ = "memory-mib"
-_UNITS = "UNITS"
-_uni = "units"
+_ABV = "AttributeBooleanValue"
+
+PTR_UPDATE_STATUS: StaticSchema = (
+    18,
+    n0,
+    _PUS,
+    0,
+    (_Va, _Sta, _Rea),
+    (
+        (lambda: schemas.STRING, {_aQN: _Va, _sN: _va}),
+        (lambda: schemas.STRING, {_aQN: _Sta, _sN: _sta}),
+        (lambda: schemas.STRING, {_aQN: _Rea, _sN: _rea}),
+    ),
+)
+
+PUBLIC_IP_ADDRESS: StaticSchema = (3, n0, _PIAu, 0)
+
+ADDRESS_ATTRIBUTE: StaticSchema = (
+    18,
+    n0,
+    _AAd,
+    0,
+    (_PI, _AI, _PRt, _PRU),
+    (
+        (PUBLIC_IP_ADDRESS, {_aQN: _PI, _sN: _pI}),
+        (lambda: schemas.ALLOCATION_ID, {_aQN: _AI, _sN: _aI}),
+        (lambda: schemas.STRING, {_aQN: _PRt, _sN: _pRt}),
+        (PTR_UPDATE_STATUS, {_aQN: _PRU, _sN: _pRU}),
+    ),
+)
+
+ADDRESS_ATTRIBUTE_NAME: StaticSchema = (14, n0, _AANd, 0, (_dn,), ((-1, {_sV: _dn_}),))
 
 ADDRESS_LIST: StaticSchema = (
     16,
@@ -486,14 +513,7 @@ ADDRESS_LIST: StaticSchema = (
 
 ADDRESS_MAX_RESULTS: StaticSchema = (7, n0, _AMR, 0)
 
-ADDRESS_SET: StaticSchema = (
-    16,
-    n0,
-    _AS,
-    0,
-    (_me,),
-    ((lambda: schemas.ADDRESS_ATTRIBUTE, {_sN: _i}),),
-)
+ADDRESS_SET: StaticSchema = (16, n0, _AS, 0, (_me,), ((ADDRESS_ATTRIBUTE, {_sN: _i}),))
 
 ADDRESS_TRANSFER_LIST: StaticSchema = (
     16,
@@ -581,12 +601,12 @@ BYOIP_CIDR_STATE: StaticSchema = (
     n0,
     _BCS,
     0,
-    (_adv, _dep, _fd__, _fp, _pa____, _pd__, _pp, _pw, _prov, _pnpa),
+    (_adv, _dep, _fd__, _fp__, _pa____, _pd__, _pp, _pw, _prov, _pnpa),
     (
         (-1, {_sV: _adv}),
         (-1, {_sV: _dep}),
         (-1, {_sV: _fd___}),
-        (-1, {_sV: _fp_}),
+        (-1, {_sV: _fp___}),
         (-1, {_sV: _pa_____}),
         (-1, {_sV: _pd___}),
         (-1, {_sV: _pp_}),
@@ -632,7 +652,7 @@ ALLOCATE_ADDRESS_INPUT: StaticSchema = (
     (_Do, _Ad, _PIP, _NBG, _COIP, _TSa, _IPI, _DR),
     (
         (lambda: schemas.DOMAIN_TYPE, 0),
-        (lambda: schemas.PUBLIC_IP_ADDRESS, 0),
+        (PUBLIC_IP_ADDRESS, 0),
         (lambda: schemas.IPV4_POOL_EC2_ID, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 0),
@@ -752,7 +772,7 @@ ALLOCATE_HOSTS_OUTPUT: StaticSchema = (
     _AHO,
     {_sSI: _cAHRo, _smit: None},
     (_HI,),
-    ((lambda: RESPONSE_HOST_ID_LIST, {_aQN: _HIS, _sN: _hIS}),),
+    ((lambda: schemas.RESPONSE_HOST_ID_LIST, {_aQN: _HIS, _sN: _hIS}),),
 )
 
 ALLOCATE_HOSTS: StaticOperationSchema = (
@@ -763,15 +783,6 @@ ALLOCATE_HOSTS: StaticOperationSchema = (
     ALLOCATE_HOSTS_INPUT,
     ALLOCATE_HOSTS_OUTPUT,
     (),
-)
-
-RESPONSE_HOST_ID_LIST: StaticSchema = (
-    16,
-    n0,
-    _RHIL,
-    0,
-    (_me,),
-    ((lambda: schemas.STRING, {_sN: _i}),),
 )
 
 IPAM_POOL_ALLOCATION_ALLOWED_CIDRS: StaticSchema = (
@@ -1650,28 +1661,6 @@ IAM_INSTANCE_PROFILE_ASSOCIATION: StaticSchema = (
     ),
 )
 
-DEDICATED_HOST_ID_LIST: StaticSchema = (
-    16,
-    n0,
-    _DHIL,
-    0,
-    (_me,),
-    ((lambda: schemas.DEDICATED_HOST_ID, {_sN: _i}),),
-)
-
-INSTANCE_EVENT_WINDOW_ASSOCIATION_REQUEST: StaticSchema = (
-    18,
-    n0,
-    _IEWAR,
-    0,
-    (_IIn, _ITn, _DHIe),
-    (
-        (INSTANCE_ID_LIST, {_sN: _II}),
-        (lambda: schemas.TAG_LIST, {_sN: _ITns}),
-        (DEDICATED_HOST_ID_LIST, {_sN: _DHI}),
-    ),
-)
-
 ROUTE_GATEWAY_ID: StaticSchema = (3, n0, _RGI, 0)
 
 TRANSIT_GATEWAY_SUBNET_ID_LIST: StaticSchema = (
@@ -1701,6 +1690,18 @@ ATTACHMENT_STATUS: StaticSchema = (
     ((-1, {_sV: _at}), (-1, {_sV: _att}), (-1, {_sV: _det}), (-1, {_sV: _deta})),
 )
 
+VPC_ATTACHMENT: StaticSchema = (
+    18,
+    n0,
+    _VA,
+    0,
+    (_VI, _St),
+    (
+        (lambda: schemas.STRING, {_aQN: _VI, _sN: _vI}),
+        (ATTACHMENT_STATUS, {_aQN: _St, _sN: _st}),
+    ),
+)
+
 USER_ID_GROUP_PAIR: StaticSchema = (
     18,
     n0,
@@ -1719,8 +1720,6 @@ USER_ID_GROUP_PAIR: StaticSchema = (
 )
 
 SECURITY_GROUP_NAME: StaticSchema = (3, n0, _SGN, 0)
-
-DOUBLE: StaticSchema = (10, n0, _Dou, 0)
 
 CARRIER_GATEWAY_ID: StaticSchema = (3, n0, _CGI, 0)
 
@@ -1744,31 +1743,13 @@ TENANCY: StaticSchema = (
     ((-1, {_sV: _def}), (-1, {_sV: _ded}), (-1, {_sV: _ho})),
 )
 
-ATTRIBUTE_VALUE: StaticSchema = (
-    18,
-    n0,
-    _AV,
-    0,
-    (_Va,),
-    ((lambda: schemas.STRING, {_aQN: _Va, _sN: _va}),),
-)
-
 EGRESS_ONLY_INTERNET_GATEWAY_ID: StaticSchema = (3, n0, _EOIGI, 0)
 
-TARGET_CAPACITY_UNIT_TYPE: StaticSchema = (
-    14,
+ATTRIBUTE_BOOLEAN_VALUE: StaticSchema = (
+    18,
     n0,
-    _TCUT,
+    _ABV,
     0,
-    (_VCPU, _MM, _UNITS),
-    (
-        (-1, {_sV: _vcp}),
-        (
-            -1,
-            {
-                _sV: _mm_____________________________________________________________________
-            },
-        ),
-        (-1, {_sV: _uni}),
-    ),
+    (_Va,),
+    ((lambda: schemas.BOOLEAN, {_aQN: _Va, _sN: _va}),),
 )

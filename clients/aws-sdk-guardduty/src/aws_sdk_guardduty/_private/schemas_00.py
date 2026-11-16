@@ -63,15 +63,118 @@ _U = "Uid"
 _u = "uid"
 _N = "Name"
 _a = "account"
+_I = "Integer"
+_IRT = "InvestigationResourceType"
+_EI = "EC2_INSTANCE"
+_sV = "smithy.api#enumValue"
+_EV = "EBS_VOLUME"
+_SB = "S3_BUCKET"
+_IR = "IAM_ROLE"
+_IU = "IAM_USER"
+_IAK = "IAM_ACCESS_KEY"
+_LF = "LAMBDA_FUNCTION"
+_EC = "EKS_CLUSTER"
+_EC_ = "ECS_CLUSTER"
+_KW = "KUBERNETES_WORKLOAD"
+_RI = "RDS_INSTANCE"
+_RDU = "RDS_DB_USER"
+_ESG = "EC2_SECURITY_GROUP"
+_AAR = "AccountAffectedResource"
+_Id = "Identifier"
+_i = "identifier"
+_FC = "FindingCount"
+_fC = "findingCount"
+_AARc = "AccountAffectedResources"
+_me = "member"
+_Ti = "Timestamp"
+_TWG = "TimeWindowGroup"
+_ST = "StartTime"
+_sT = "startTime"
+_ET = "EndTime"
+_eT = "endTime"
+_TWGi = "TimeWindowGroups"
+_SBe = "SeverityBreakdown"
+_C = "Critical"
+_cr = "critical"
+_H = "High"
+_h = "high"
+_Me = "Medium"
+_med = "medium"
+_L = "Low"
+_l = "low"
+_In = "Info"
+_in = "info"
+_FTC = "FindingTypeCount"
+_FT = "FindingType"
+_fT = "findingType"
+_Co = "Count"
+_co = "count"
+_FTCi = "FindingTypeCounts"
+_FS = "FindingsSummary"
+_TF = "TotalFindings"
+_tF = "totalFindings"
+_sB = "severityBreakdown"
+_TFT = "TopFindingTypes"
+_tFT = "topFindingTypes"
+_BTW = "ByTimeWindow"
+_bTW = "byTimeWindow"
+_FTN = "FindingTypeNames"
+_APN = "AttackPhaseName"
+_RECONNAISSANCE = "RECONNAISSANCE"
+_R = "Reconnaissance"
+_RD = "RESOURCE_DEVELOPMENT"
+_RD_ = "Resource Development"
+_IA = "INITIAL_ACCESS"
+_IA_ = "Initial Access"
+_EXECUTION = "EXECUTION"
+_E = "Execution"
+_PERSISTENCE = "PERSISTENCE"
+_P = "Persistence"
+_PE = "PRIVILEGE_ESCALATION"
+_PE_ = "Privilege Escalation"
+_DE = "DEFENSE_EVASION"
+_DE_ = "Defense Evasion"
+_CA = "CREDENTIAL_ACCESS"
+_CA_ = "Credential Access"
+_DISCOVERY = "DISCOVERY"
+_D = "Discovery"
+_LM = "LATERAL_MOVEMENT"
+_LM_ = "Lateral Movement"
+_COLLECTION = "COLLECTION"
+_Col = "Collection"
+_CAC = "COMMAND_AND_CONTROL"
+_CaC = "Command and Control"
+_EXFILTRATION = "EXFILTRATION"
+_Ex = "Exfiltration"
+_IMPACT = "IMPACT"
+_Im = "Impact"
+_MTI = "MitreThreatId"
+_TR = "ThreatReference"
+_n = "name"
+_TC = "TechniqueCoverage"
+_Te = "Technique"
+_te = "technique"
+_FTi = "FindingTypes"
+_fTi = "findingTypes"
+_TCe = "TechniqueCoverages"
+_TCa = "TacticCoverage"
+_Ph = "Phase"
+_p = "phase"
+_Tec = "Techniques"
+_tec = "techniques"
+_TCac = "TacticCoverages"
+_AA = "AccountAnalysis"
+_fS = "findingsSummary"
+_tC = "tacticCoverage"
+_AR = "AffectedResources"
+_aR = "affectedResources"
 _AIcc = "AccountId"
-_E = "Email"
+_Em = "Email"
 _smithy = "smithy.api#sensitive"
 _AD = "AccountDetail"
 _aIc = "accountId"
 _e = "email"
 _ADc = "AccountDetails"
-_me = "member"
-_I = "Integer"
 _DSFT = "DataSourceFreeTrial"
 _FTDR = "FreeTrialDaysRemaining"
 _fTDR = "freeTrialDaysRemaining"
@@ -96,7 +199,6 @@ _MP = "MalwareProtection"
 _mP = "malwareProtection"
 _FTFR = "FreeTrialFeatureResult"
 _FL_ = "FLOW_LOGS"
-_sV = "smithy.api#enumValue"
 _CT_ = "CLOUD_TRAIL"
 _DL_ = "DNS_LOGS"
 _SDE = "S3_DATA_EVENTS"
@@ -109,7 +211,6 @@ _ERM_ = "EC2_RUNTIME_MONITORING"
 _FRM = "FARGATE_RUNTIME_MONITORING"
 _AP = "AI_PROTECTION"
 _FTFCR = "FreeTrialFeatureConfigurationResult"
-_n = "name"
 _FTFCRr = "FreeTrialFeatureConfigurationsResults"
 _AFTI = "AccountFreeTrialInfo"
 _DS = "DataSources"
@@ -129,50 +230,76 @@ _BPP = "BlockPublicPolicy"
 _bPP = "blockPublicPolicy"
 _ALP = "AccountLevelPermissions"
 _bPAl = "blockPublicAccess"
-_Ti = "Timestamp"
-_AS = "AccountStatistics"
+_RL = "RiskLevel"
+_INFO = "INFO"
+_LOW = "LOW"
+_MEDIUM = "MEDIUM"
+_HIGH = "HIGH"
+_CRITICAL = "CRITICAL"
+_IT = "InvestigationText"
+_MAR = "MemberAccountRanking"
+_Ra = "Rank"
+_r = "rank"
+_rL = "riskLevel"
+_RR = "RiskRationale"
+_rR = "riskRationale"
+_MARe = "MemberAccountRankings"
+_AO = "AccountOverview"
+_AS = "AccountStatus"
+_aS = "accountStatus"
+_dI = "detectorId"
+_Re = "Region"
+_re = "region"
+_DAAI = "DelegatedAdminAccountId"
+_dAAI = "delegatedAdminAccountId"
+_TMA = "TotalMemberAccounts"
+_tMA = "totalMemberAccounts"
+_AAC = "AffectedAccountCount"
+_aAC = "affectedAccountCount"
+_ARc = "AccountRankings"
+_aRc = "accountRankings"
+_ASc = "AccountStatistics"
 _LGA = "LastGeneratedAt"
 _lGA = "lastGeneratedAt"
-_TF = "TotalFindings"
-_tF = "totalFindings"
-_AR = "AffectedResources"
+_AScc = "AccountSummary"
+_AScco = "AccountSummaries"
 _ke = "key"
 _v = "value"
 _DD = "DomainDetails"
-_D = "Domain"
+_Do = "Domain"
 _d = "domain"
 _RAD = "RemoteAccountDetails"
 _Af = "Affiliated"
 _af = "affiliated"
 _ASN = "AwsServiceName"
 _aSN = "awsServiceName"
-_C = "City"
+_Ci = "City"
 _CN = "CityName"
 _cN = "cityName"
-_Co = "Country"
+_Cou = "Country"
 _CC = "CountryCode"
 _cC = "countryCode"
 _CNo = "CountryName"
 _cNo = "countryName"
-_Do = "Double"
+_Dou = "Double"
 _GL = "GeoLocation"
-_L = "Lat"
-_l = "lat"
+_La = "Lat"
+_la = "lat"
 _Lo = "Lon"
 _lo = "lon"
 _SS = "SensitiveString"
 _O = "Organization"
 _As = "Asn"
 _as = "asn"
-_AO = "AsnOrg"
+_AOs = "AsnOrg"
 _aO = "asnOrg"
 _Is = "Isp"
-_i = "isp"
+_is = "isp"
 _Or = "Org"
 _o = "org"
 _RID = "RemoteIpDetails"
 _ci = "city"
-_co = "country"
+_cou = "country"
 _gL = "geoLocation"
 _IAV = "IpAddressV4"
 _iAV = "ipAddressV4"
@@ -185,7 +312,7 @@ _ap = "api"
 _CTa = "CallerType"
 _cTa = "callerType"
 _dD = "domainDetails"
-_EC = "ErrorCode"
+_ECr = "ErrorCode"
 _eC = "errorCode"
 _UA = "UserAgent"
 _uA = "userAgent"
@@ -193,10 +320,9 @@ _rID = "remoteIpDetails"
 _SN = "ServiceName"
 _sNe = "serviceName"
 _rAD = "remoteAccountDetails"
-_aR = "affectedResources"
 _DRA = "DnsRequestAction"
-_P = "Protocol"
-_p = "protocol"
+_Pr = "Protocol"
+_pr = "protocol"
 _Bl = "Blocked"
 _b = "blocked"
 _DWS = "DomainWithSuffix"
@@ -209,8 +335,8 @@ _RU = "RequestUri"
 _rU = "requestUri"
 _V = "Verb"
 _ve = "verb"
-_R = "Resource"
-_r = "resource"
+_Res = "Resource"
+_res = "resource"
 _Su = "Subresource"
 _su = "subresource"
 _Na = "Namespace"
@@ -275,6 +401,10 @@ _kPCD = "kubernetesPermissionCheckedDetails"
 _kRBD = "kubernetesRoleBindingDetails"
 _kRD = "kubernetesRoleDetails"
 _rLAA = "rdsLoginAttemptAction"
+_APc = "ActionPriority"
+_IMMEDIATE = "IMMEDIATE"
+_ST_ = "SHORT_TERM"
+_STRATEGIC = "STRATEGIC"
 _AC = "ApiCall"
 _Op = "Operation"
 _op = "operation"
@@ -286,10 +416,15 @@ _ATc = "ActivityType"
 _AC_ = "API_CALL"
 _Act = "Activity"
 _Acti = "Activities"
+_AW = "ActivityWindow"
+_FSA = "FirstSeenAt"
+_fSA = "firstSeenAt"
+_LSA = "LastSeenAt"
+_lSA = "lastSeenAt"
 _PNr = "ProcessName"
 _PP = "ProcessPath"
 _PS = "ProcessSha256"
-_APc = "ActorProcess"
+_APct = "ActorProcess"
 _Pat = "Path"
 _pat = "path"
 _Sh = "Sha256"
@@ -302,119 +437,19 @@ _mS = "mfaStatus"
 _CTr = "CreatedTime"
 _cTr = "createdTime"
 _Iss = "Issuer"
-_is = "issuer"
+_iss = "issuer"
 _CU = "CredentialUid"
 _cU = "credentialUid"
 _Acto = "Actor"
-_Id = "Id"
+_Id_ = "Id"
 _id = "id"
 _ses = "session"
-_Pr = "Process"
-_pr = "process"
-_AIct = "ActorIds"
-_Actor = "Actors"
+_Pro = "Process"
+_pro = "process"
 _NES = "NonEmptyString"
-_AId = "AdditionalInfo"
-_VI = "VersionId"
-_vI = "versionId"
-_DN = "DeviceName"
-_dN = "deviceName"
-_FT = "FindingType"
-_AST = "AdditionalSequenceTypes"
-_ADd = "AddonDetails"
-_AV = "AddonVersion"
-_aV = "addonVersion"
-_ASd = "AddonStatus"
-_aS = "addonStatus"
-_ASdm = "AdminStatus"
-_DIP = "DISABLE_IN_PROGRESS"
-_AA = "AdminAccount"
-_AAId = "AdminAccountId"
-_aAI = "adminAccountId"
-_aSd = "adminStatus"
-_AAd = "AdminAccounts"
-_Ad = "Administrator"
-_RS = "RelationshipStatus"
-_rS = "relationshipStatus"
-_IA = "InvitedAt"
-_iA = "invitedAt"
-_ADg = "AgentDetails"
-_Ve = "Version"
-_ver = "version"
 _Lon = "Long"
-_ON = "ObservationNumbers"
-_OT = "ObservationTexts"
-_Ob = "Observations"
-_Te = "Text"
-_te = "text"
-_Nu = "Number"
-_nu = "number"
-_PSr = "ProfileSubtype"
-_FREQUENT = "FREQUENT"
-_INFREQUENT = "INFREQUENT"
-_UNSEEN = "UNSEEN"
-_RARE = "RARE"
-_COUNT = "COUNT"
-_AVERAGE = "AVERAGE"
-_PT = "ProfileType"
-_FREQUENCY = "FREQUENCY"
-_VOLUME = "VOLUME"
-_AOn = "AnomalyObject"
-_pT = "profileType"
-_pS = "profileSubtype"
-_ob = "observations"
-_APFO = "AnomalyProfileFeatureObjects"
-_APF = "AnomalyProfileFeatures"
-_APn = "AnomalyProfiles"
-_AUBF = "AnomalyUnusualBehaviorFeature"
-_Be = "Behavior"
-_AU = "AnomalyUnusual"
-_be = "behavior"
-_An = "Anomaly"
-_Pro = "Profiles"
-_pro = "profiles"
-_Un = "Unusual"
-_un = "unusual"
-_FI = "FindingId"
-_FIi = "FindingIds"
-_AFI = "ArchiveFindingsInput"
-_cAFR = "com.amazonaws.guardduty#ArchiveFindingsRequest"
-_fI = "findingIds"
-_AFO = "ArchiveFindingsOutput"
-_cAFRo = "com.amazonaws.guardduty#ArchiveFindingsResponse"
-_AF = "ArchiveFindings"
-_DRAe = "DetectionRuleArn"
-_AIs = "AssociationId"
-_AM = "AssociationMode"
-_LIVE = "LIVE"
-_DR = "DRY_RUN"
-_RI = "RuleId"
-_ADs = "AssociationDetail"
-_aIs = "associationId"
-_Ar = "Arn"
-_ar = "arn"
-_rI = "ruleId"
-_Mo = "Mode"
-_mo = "mode"
-_CA = "CreatedAt"
-_cA = "createdAt"
-_UAp = "UpdatedAt"
-_uAp = "updatedAt"
-_EA = "ExpiresAt"
-_eA = "expiresAt"
-_ASs = "AssociationSummary"
-_ASL = "AssociationSummaryList"
-_AEM = "AutoEnableMembers"
-_NEW = "NEW"
-_ALL = "ALL"
-_NONE = "NONE"
-_ASu = "AutonomousSystem"
-_EIU = "Ec2InstanceUid"
-_EIUc = "Ec2InstanceUids"
 _CTl = "ClientToken"
-_OB = "OrderBy"
-_ASC = "ASC"
-_DESC = "DESC"
+_CE = "ConflictException"
 _FN = "FilterName"
 _EBO = "ExpectedBucketOwner"
 _eBO = "expectedBucketOwner"
@@ -423,8 +458,11 @@ _DA = "DestinationArn"
 _dA = "destinationArn"
 _KKA = "KmsKeyArn"
 _kKA = "kmsKeyArn"
-_DT = "DestinationType"
+_DTes = "DestinationType"
 _S_ = "S3"
+_ISD = "IncrementalScanDetails"
+_BRA = "BaselineResourceArn"
+_bRA = "baselineResourceArn"
 
 STRING: StaticSchema = (3, n0, _S, 0)
 
@@ -567,22 +605,230 @@ ACCOUNT: StaticSchema = (
     ((STRING, {_sN: _u, _sm: None}), (STRING, {_sN: _a})),
 )
 
+INTEGER: StaticSchema = (7, n0, _I, 0)
+
+INVESTIGATION_RESOURCE_TYPE: StaticSchema = (
+    14,
+    n0,
+    _IRT,
+    0,
+    (_EI, _EV, _SB, _IR, _IU, _IAK, _LF, _EC, _EC_, _KW, _RI, _RDU, _ESG),
+    (
+        (-1, {_sV: _EI}),
+        (-1, {_sV: _EV}),
+        (-1, {_sV: _SB}),
+        (-1, {_sV: _IR}),
+        (-1, {_sV: _IU}),
+        (-1, {_sV: _IAK}),
+        (-1, {_sV: _LF}),
+        (-1, {_sV: _EC}),
+        (-1, {_sV: _EC_}),
+        (-1, {_sV: _KW}),
+        (-1, {_sV: _RI}),
+        (-1, {_sV: _RDU}),
+        (-1, {_sV: _ESG}),
+    ),
+)
+
+ACCOUNT_AFFECTED_RESOURCE: StaticSchema = (
+    18,
+    n0,
+    _AAR,
+    0,
+    (_Id, _T, _FC),
+    (
+        (STRING, {_sN: _i}),
+        (INVESTIGATION_RESOURCE_TYPE, {_sN: _t}),
+        (INTEGER, {_sN: _fC}),
+    ),
+)
+
+ACCOUNT_AFFECTED_RESOURCES: StaticSchema = (
+    16,
+    n0,
+    _AARc,
+    0,
+    (_me,),
+    ((ACCOUNT_AFFECTED_RESOURCE, 0),),
+)
+
+TIMESTAMP: StaticSchema = (4, n0, _Ti, 0)
+
+TIME_WINDOW_GROUP: StaticSchema = (
+    18,
+    n0,
+    _TWG,
+    0,
+    (_ST, _ET, _FC),
+    ((TIMESTAMP, {_sN: _sT}), (TIMESTAMP, {_sN: _eT}), (INTEGER, {_sN: _fC})),
+)
+
+TIME_WINDOW_GROUPS: StaticSchema = (16, n0, _TWGi, 0, (_me,), ((TIME_WINDOW_GROUP, 0),))
+
+SEVERITY_BREAKDOWN: StaticSchema = (
+    18,
+    n0,
+    _SBe,
+    0,
+    (_C, _H, _Me, _L, _In),
+    (
+        (INTEGER, {_sN: _cr}),
+        (INTEGER, {_sN: _h}),
+        (INTEGER, {_sN: _med}),
+        (INTEGER, {_sN: _l}),
+        (INTEGER, {_sN: _in}),
+    ),
+)
+
+FINDING_TYPE_COUNT: StaticSchema = (
+    18,
+    n0,
+    _FTC,
+    0,
+    (_FT, _Co),
+    ((STRING, {_sN: _fT}), (INTEGER, {_sN: _co})),
+)
+
+FINDING_TYPE_COUNTS: StaticSchema = (
+    16,
+    n0,
+    _FTCi,
+    0,
+    (_me,),
+    ((FINDING_TYPE_COUNT, 0),),
+)
+
+FINDINGS_SUMMARY: StaticSchema = (
+    18,
+    n0,
+    _FS,
+    0,
+    (_TF, _SBe, _TFT, _BTW),
+    (
+        (INTEGER, {_sN: _tF}),
+        (SEVERITY_BREAKDOWN, {_sN: _sB}),
+        (FINDING_TYPE_COUNTS, {_sN: _tFT}),
+        (TIME_WINDOW_GROUPS, {_sN: _bTW}),
+    ),
+)
+
+FINDING_TYPE_NAMES: StaticSchema = (16, n0, _FTN, 0, (_me,), ((STRING, 0),))
+
+ATTACK_PHASE_NAME: StaticSchema = (
+    14,
+    n0,
+    _APN,
+    0,
+    (
+        _RECONNAISSANCE,
+        _RD,
+        _IA,
+        _EXECUTION,
+        _PERSISTENCE,
+        _PE,
+        _DE,
+        _CA,
+        _DISCOVERY,
+        _LM,
+        _COLLECTION,
+        _CAC,
+        _EXFILTRATION,
+        _IMPACT,
+    ),
+    (
+        (-1, {_sV: _R}),
+        (-1, {_sV: _RD_}),
+        (-1, {_sV: _IA_}),
+        (-1, {_sV: _E}),
+        (-1, {_sV: _P}),
+        (-1, {_sV: _PE_}),
+        (-1, {_sV: _DE_}),
+        (-1, {_sV: _CA_}),
+        (-1, {_sV: _D}),
+        (-1, {_sV: _LM_}),
+        (-1, {_sV: _Col}),
+        (-1, {_sV: _CaC}),
+        (-1, {_sV: _Ex}),
+        (-1, {_sV: _Im}),
+    ),
+)
+
+MITRE_THREAT_ID: StaticSchema = (3, n0, _MTI, 0)
+
+THREAT_REFERENCE: StaticSchema = (
+    18,
+    n0,
+    _TR,
+    0,
+    (_N, _U),
+    ((STRING, {_sN: _n}), (MITRE_THREAT_ID, {_sN: _u})),
+)
+
+TECHNIQUE_COVERAGE: StaticSchema = (
+    18,
+    n0,
+    _TC,
+    0,
+    (_Te, _FC, _FTi),
+    (
+        (THREAT_REFERENCE, {_sN: _te}),
+        (INTEGER, {_sN: _fC}),
+        (FINDING_TYPE_NAMES, {_sN: _fTi}),
+    ),
+)
+
+TECHNIQUE_COVERAGES: StaticSchema = (
+    16,
+    n0,
+    _TCe,
+    0,
+    (_me,),
+    ((TECHNIQUE_COVERAGE, 0),),
+)
+
+TACTIC_COVERAGE: StaticSchema = (
+    18,
+    n0,
+    _TCa,
+    0,
+    (_Ph, _FC, _FTi, _Tec),
+    (
+        (ATTACK_PHASE_NAME, {_sN: _p}),
+        (INTEGER, {_sN: _fC}),
+        (FINDING_TYPE_NAMES, {_sN: _fTi}),
+        (TECHNIQUE_COVERAGES, {_sN: _tec}),
+    ),
+)
+
+TACTIC_COVERAGES: StaticSchema = (16, n0, _TCac, 0, (_me,), ((TACTIC_COVERAGE, 0),))
+
+ACCOUNT_ANALYSIS: StaticSchema = (
+    18,
+    n0,
+    _AA,
+    0,
+    (_FS, _TCa, _AR),
+    (
+        (FINDINGS_SUMMARY, {_sN: _fS}),
+        (TACTIC_COVERAGES, {_sN: _tC}),
+        (ACCOUNT_AFFECTED_RESOURCES, {_sN: _aR}),
+    ),
+)
+
 ACCOUNT_ID: StaticSchema = (3, n0, _AIcc, 0)
 
-EMAIL: StaticSchema = (3, n0, _E, 4)
+EMAIL: StaticSchema = (3, n0, _Em, 4)
 
 ACCOUNT_DETAIL: StaticSchema = (
     18,
     n0,
     _AD,
     0,
-    (_AIcc, _E),
+    (_AIcc, _Em),
     ((ACCOUNT_ID, {_sN: _aIc, _sm: None}), (EMAIL, {_sN: _e, _sm: None})),
 )
 
 ACCOUNT_DETAILS: StaticSchema = (16, n0, _ADc, 0, (_me,), ((ACCOUNT_DETAIL, 0),))
-
-INTEGER: StaticSchema = (7, n0, _I, 0)
 
 DATA_SOURCE_FREE_TRIAL: StaticSchema = (
     18,
@@ -714,16 +960,87 @@ ACCOUNT_LEVEL_PERMISSIONS: StaticSchema = (
     ((BLOCK_PUBLIC_ACCESS, {_sN: _bPAl}),),
 )
 
-TIMESTAMP: StaticSchema = (4, n0, _Ti, 0)
+COUNT: StaticSchema = (8, n0, _Co, 0)
+
+RISK_LEVEL: StaticSchema = (
+    14,
+    n0,
+    _RL,
+    0,
+    (_INFO, _LOW, _MEDIUM, _HIGH, _CRITICAL),
+    (
+        (-1, {_sV: _In}),
+        (-1, {_sV: _L}),
+        (-1, {_sV: _Me}),
+        (-1, {_sV: _H}),
+        (-1, {_sV: _C}),
+    ),
+)
+
+INVESTIGATION_TEXT: StaticSchema = (3, n0, _IT, 0)
+
+MEMBER_ACCOUNT_RANKING: StaticSchema = (
+    18,
+    n0,
+    _MAR,
+    0,
+    (_Ra, _AIcc, _FC, _RL, _RR),
+    (
+        (INTEGER, {_sN: _r}),
+        (STRING, {_sN: _aIc}),
+        (COUNT, {_sN: _fC}),
+        (RISK_LEVEL, {_sN: _rL}),
+        (INVESTIGATION_TEXT, {_sN: _rR}),
+    ),
+)
+
+MEMBER_ACCOUNT_RANKINGS: StaticSchema = (
+    16,
+    n0,
+    _MARe,
+    0,
+    (_me,),
+    ((MEMBER_ACCOUNT_RANKING, 0),),
+)
+
+ACCOUNT_OVERVIEW: StaticSchema = (
+    18,
+    n0,
+    _AO,
+    0,
+    (_AIcc, _AS, _DI, _Re, _DAAI, _TMA, _TF, _AAC, _ARc),
+    (
+        (STRING, {_sN: _aIc}),
+        (STRING, {_sN: _aS}),
+        (DETECTOR_ID, {_sN: _dI}),
+        (STRING, {_sN: _re}),
+        (STRING, {_sN: _dAAI}),
+        (COUNT, {_sN: _tMA}),
+        (COUNT, {_sN: _tF}),
+        (COUNT, {_sN: _aAC}),
+        (MEMBER_ACCOUNT_RANKINGS, {_sN: _aRc}),
+    ),
+)
 
 ACCOUNT_STATISTICS: StaticSchema = (
     18,
     n0,
-    _AS,
+    _ASc,
     0,
     (_AIcc, _LGA, _TF),
     ((STRING, {_sN: _aIc}), (TIMESTAMP, {_sN: _lGA}), (INTEGER, {_sN: _tF})),
 )
+
+ACCOUNT_SUMMARY: StaticSchema = (
+    18,
+    n0,
+    _AScc,
+    0,
+    (_AIcc, _FC),
+    ((STRING, {_sN: _aIc}), (INTEGER, {_sN: _fC})),
+)
+
+ACCOUNT_SUMMARIES: StaticSchema = (16, n0, _AScco, 0, (_me,), ((ACCOUNT_SUMMARY, 0),))
 
 AFFECTED_RESOURCES: StaticSchema = (
     17,
@@ -734,7 +1051,7 @@ AFFECTED_RESOURCES: StaticSchema = (
     ((STRING, 0), (STRING, 0)),
 )
 
-DOMAIN_DETAILS: StaticSchema = (18, n0, _DD, 0, (_D,), ((STRING, {_sN: _d}),))
+DOMAIN_DETAILS: StaticSchema = (18, n0, _DD, 0, (_Do,), ((STRING, {_sN: _d}),))
 
 REMOTE_ACCOUNT_DETAILS: StaticSchema = (
     18,
@@ -745,26 +1062,26 @@ REMOTE_ACCOUNT_DETAILS: StaticSchema = (
     ((STRING, {_sN: _aIc}), (BOOLEAN, {_sN: _af}), (STRING, {_sN: _aSN})),
 )
 
-CITY: StaticSchema = (18, n0, _C, 0, (_CN,), ((STRING, {_sN: _cN}),))
+CITY: StaticSchema = (18, n0, _Ci, 0, (_CN,), ((STRING, {_sN: _cN}),))
 
 COUNTRY: StaticSchema = (
     18,
     n0,
-    _Co,
+    _Cou,
     0,
     (_CC, _CNo),
     ((STRING, {_sN: _cC}), (STRING, {_sN: _cNo})),
 )
 
-DOUBLE: StaticSchema = (10, n0, _Do, 0)
+DOUBLE: StaticSchema = (10, n0, _Dou, 0)
 
 GEO_LOCATION: StaticSchema = (
     18,
     n0,
     _GL,
     0,
-    (_L, _Lo),
-    ((DOUBLE, {_sN: _l}), (DOUBLE, {_sN: _lo})),
+    (_La, _Lo),
+    ((DOUBLE, {_sN: _la}), (DOUBLE, {_sN: _lo})),
 )
 
 SENSITIVE_STRING: StaticSchema = (3, n0, _SS, 4)
@@ -774,11 +1091,11 @@ ORGANIZATION: StaticSchema = (
     n0,
     _O,
     0,
-    (_As, _AO, _Is, _Or),
+    (_As, _AOs, _Is, _Or),
     (
         (STRING, {_sN: _as}),
         (STRING, {_sN: _aO}),
-        (STRING, {_sN: _i}),
+        (STRING, {_sN: _is}),
         (STRING, {_sN: _o}),
     ),
 )
@@ -788,10 +1105,10 @@ REMOTE_IP_DETAILS: StaticSchema = (
     n0,
     _RID,
     0,
-    (_C, _Co, _GL, _IAV, _IAVp, _O),
+    (_Ci, _Cou, _GL, _IAV, _IAVp, _O),
     (
         (CITY, {_sN: _ci}),
-        (COUNTRY, {_sN: _co}),
+        (COUNTRY, {_sN: _cou}),
         (GEO_LOCATION, {_sN: _gL}),
         (SENSITIVE_STRING, {_sN: _iAV}),
         (SENSITIVE_STRING, {_sN: _iAVp}),
@@ -804,7 +1121,7 @@ AWS_API_CALL_ACTION: StaticSchema = (
     n0,
     _AACA,
     0,
-    (_Ap, _CTa, _DD, _EC, _UA, _RID, _SN, _RAD, _AR),
+    (_Ap, _CTa, _DD, _ECr, _UA, _RID, _SN, _RAD, _AR),
     (
         (STRING, {_sN: _ap}),
         (STRING, {_sN: _cTa}),
@@ -823,10 +1140,10 @@ DNS_REQUEST_ACTION: StaticSchema = (
     n0,
     _DRA,
     0,
-    (_D, _P, _Bl, _DWS, _VOAI),
+    (_Do, _Pr, _Bl, _DWS, _VOAI),
     (
         (STRING, {_sN: _d}),
-        (STRING, {_sN: _p}),
+        (STRING, {_sN: _pr}),
         (BOOLEAN, {_sN: _b}),
         (STRING, {_sN: _dWS}),
         (ACCOUNT_ID, {_sN: _vOAI}),
@@ -840,11 +1157,11 @@ KUBERNETES_API_CALL_ACTION: StaticSchema = (
     n0,
     _KACA,
     0,
-    (_RU, _V, _R, _Su, _Na, _RN, _SI, _UA, _RID, _SC, _Pa),
+    (_RU, _V, _Res, _Su, _Na, _RN, _SI, _UA, _RID, _SC, _Pa),
     (
         (STRING, {_sN: _rU}),
         (STRING, {_sN: _ve}),
-        (STRING, {_sN: _r}),
+        (STRING, {_sN: _res}),
         (STRING, {_sN: _su}),
         (STRING, {_sN: _na}),
         (STRING, {_sN: _rN}),
@@ -861,10 +1178,10 @@ KUBERNETES_PERMISSION_CHECKED_DETAILS: StaticSchema = (
     n0,
     _KPCD,
     0,
-    (_V, _R, _Na, _Al),
+    (_V, _Res, _Na, _Al),
     (
         (STRING, {_sN: _ve}),
-        (STRING, {_sN: _r}),
+        (STRING, {_sN: _res}),
         (STRING, {_sN: _na}),
         (BOOLEAN, {_sN: _al}),
     ),
@@ -926,12 +1243,12 @@ NETWORK_CONNECTION_ACTION: StaticSchema = (
     n0,
     _NCA,
     0,
-    (_Bl, _CD, _LPD, _P, _LID, _LNI, _RID, _RPD),
+    (_Bl, _CD, _LPD, _Pr, _LID, _LNI, _RID, _RPD),
     (
         (BOOLEAN, {_sN: _b}),
         (STRING, {_sN: _cD}),
         (LOCAL_PORT_DETAILS, {_sN: _lPD}),
-        (STRING, {_sN: _p}),
+        (STRING, {_sN: _pr}),
         (LOCAL_IP_DETAILS, {_sN: _lID}),
         (STRING, {_sN: _lNI}),
         (REMOTE_IP_DETAILS, {_sN: _rID}),
@@ -1008,6 +1325,15 @@ ACTION: StaticSchema = (
     ),
 )
 
+ACTION_PRIORITY: StaticSchema = (
+    14,
+    n0,
+    _APc,
+    0,
+    (_IMMEDIATE, _ST_, _STRATEGIC),
+    ((-1, {_sV: _IMMEDIATE}), (-1, {_sV: _ST_}), (-1, {_sV: _STRATEGIC})),
+)
+
 API_CALL: StaticSchema = (
     18,
     n0,
@@ -1035,6 +1361,15 @@ ACTIVITY: StaticSchema = (
 
 ACTIVITIES: StaticSchema = (16, n0, _Acti, 0, (_me,), ((ACTIVITY, 0),))
 
+ACTIVITY_WINDOW: StaticSchema = (
+    18,
+    n0,
+    _AW,
+    0,
+    (_FSA, _LSA),
+    ((TIMESTAMP, {_sN: _fSA}), (TIMESTAMP, {_sN: _lSA})),
+)
+
 PROCESS_NAME: StaticSchema = (3, n0, _PNr, 0)
 
 PROCESS_PATH: StaticSchema = (3, n0, _PP, 0)
@@ -1044,7 +1379,7 @@ PROCESS_SHA256: StaticSchema = (3, n0, _PS, 0)
 ACTOR_PROCESS: StaticSchema = (
     18,
     n0,
-    _APc,
+    _APct,
     0,
     (_N, _Pat, _Sh),
     (
@@ -1073,7 +1408,7 @@ SESSION: StaticSchema = (
         (STRING, {_sN: _u}),
         (MFA_STATUS, {_sN: _mS}),
         (TIMESTAMP, {_sN: _cTr}),
-        (STRING, {_sN: _is}),
+        (STRING, {_sN: _iss}),
     ),
 )
 
@@ -1097,318 +1432,28 @@ ACTOR: StaticSchema = (
     n0,
     _Acto,
     0,
-    (_Id, _Us, _Ses, _Pr),
+    (_Id_, _Us, _Ses, _Pro),
     (
         (STRING, {_sN: _id, _sm: None}),
         (USER, {_sN: _us}),
         (SESSION, {_sN: _ses}),
-        (ACTOR_PROCESS, {_sN: _pr}),
+        (ACTOR_PROCESS, {_sN: _pro}),
     ),
 )
-
-ACTOR_IDS: StaticSchema = (16, n0, _AIct, 0, (_me,), ((STRING, 0),))
-
-ACTORS: StaticSchema = (16, n0, _Actor, 0, (_me,), ((ACTOR, 0),))
 
 NON_EMPTY_STRING: StaticSchema = (3, n0, _NES, 0)
 
-ADDITIONAL_INFO: StaticSchema = (
-    18,
-    n0,
-    _AId,
-    0,
-    (_VI, _DN),
-    ((NON_EMPTY_STRING, {_sN: _vI}), (NON_EMPTY_STRING, {_sN: _dN})),
-)
-
-FINDING_TYPE: StaticSchema = (3, n0, _FT, 0)
-
-ADDITIONAL_SEQUENCE_TYPES: StaticSchema = (
-    16,
-    n0,
-    _AST,
-    0,
-    (_me,),
-    ((FINDING_TYPE, 0),),
-)
-
-ADDON_DETAILS: StaticSchema = (
-    18,
-    n0,
-    _ADd,
-    0,
-    (_AV, _ASd),
-    ((STRING, {_sN: _aV}), (STRING, {_sN: _aS})),
-)
-
-ADMIN_STATUS: StaticSchema = (
-    14,
-    n0,
-    _ASdm,
-    0,
-    (_ENABLED, _DIP),
-    ((-1, {_sV: _ENABLED}), (-1, {_sV: _DIP})),
-)
-
-ADMIN_ACCOUNT: StaticSchema = (
-    18,
-    n0,
-    _AA,
-    0,
-    (_AAId, _ASdm),
-    ((STRING, {_sN: _aAI}), (ADMIN_STATUS, {_sN: _aSd})),
-)
-
-ADMIN_ACCOUNTS: StaticSchema = (16, n0, _AAd, 0, (_me,), ((ADMIN_ACCOUNT, 0),))
-
-ADMINISTRATOR: StaticSchema = (
-    18,
-    n0,
-    _Ad,
-    0,
-    (_AIcc, _II, _RS, _IA),
-    (
-        (ACCOUNT_ID, {_sN: _aIc}),
-        (STRING, {_sN: _iI}),
-        (STRING, {_sN: _rS}),
-        (STRING, {_sN: _iA}),
-    ),
-)
-
-AGENT_DETAILS: StaticSchema = (18, n0, _ADg, 0, (_Ve,), ((STRING, {_sN: _ver}),))
-
 LONG: StaticSchema = (8, n0, _Lon, 0)
-
-OBSERVATION_NUMBERS: StaticSchema = (16, n0, _ON, 0, (_me,), ((LONG, 0),))
-
-OBSERVATION_TEXTS: StaticSchema = (16, n0, _OT, 0, (_me,), ((STRING, 0),))
-
-OBSERVATIONS: StaticSchema = (
-    18,
-    n0,
-    _Ob,
-    0,
-    (_Te, _Nu),
-    ((OBSERVATION_TEXTS, {_sN: _te}), (OBSERVATION_NUMBERS, {_sN: _nu})),
-)
-
-PROFILE_SUBTYPE: StaticSchema = (
-    14,
-    n0,
-    _PSr,
-    0,
-    (_FREQUENT, _INFREQUENT, _UNSEEN, _RARE, _COUNT, _AVERAGE),
-    (
-        (-1, {_sV: _FREQUENT}),
-        (-1, {_sV: _INFREQUENT}),
-        (-1, {_sV: _UNSEEN}),
-        (-1, {_sV: _RARE}),
-        (-1, {_sV: _COUNT}),
-        (-1, {_sV: _AVERAGE}),
-    ),
-)
-
-PROFILE_TYPE: StaticSchema = (
-    14,
-    n0,
-    _PT,
-    0,
-    (_FREQUENCY, _VOLUME),
-    ((-1, {_sV: _FREQUENCY}), (-1, {_sV: _VOLUME})),
-)
-
-ANOMALY_OBJECT: StaticSchema = (
-    18,
-    n0,
-    _AOn,
-    0,
-    (_PT, _PSr, _Ob),
-    (
-        (PROFILE_TYPE, {_sN: _pT}),
-        (PROFILE_SUBTYPE, {_sN: _pS}),
-        (OBSERVATIONS, {_sN: _ob}),
-    ),
-)
-
-ANOMALY_PROFILE_FEATURE_OBJECTS: StaticSchema = (
-    16,
-    n0,
-    _APFO,
-    0,
-    (_me,),
-    ((ANOMALY_OBJECT, 0),),
-)
-
-ANOMALY_PROFILE_FEATURES: StaticSchema = (
-    17,
-    n0,
-    _APF,
-    0,
-    (_ke, _v),
-    ((STRING, 0), (ANOMALY_PROFILE_FEATURE_OBJECTS, 0)),
-)
-
-ANOMALY_PROFILES: StaticSchema = (
-    17,
-    n0,
-    _APn,
-    0,
-    (_ke, _v),
-    ((STRING, 0), (ANOMALY_PROFILE_FEATURES, 0)),
-)
-
-ANOMALY_UNUSUAL_BEHAVIOR_FEATURE: StaticSchema = (
-    17,
-    n0,
-    _AUBF,
-    0,
-    (_ke, _v),
-    ((STRING, 0), (ANOMALY_OBJECT, 0)),
-)
-
-BEHAVIOR: StaticSchema = (
-    17,
-    n0,
-    _Be,
-    0,
-    (_ke, _v),
-    ((STRING, 0), (ANOMALY_UNUSUAL_BEHAVIOR_FEATURE, 0)),
-)
-
-ANOMALY_UNUSUAL: StaticSchema = (18, n0, _AU, 0, (_Be,), ((BEHAVIOR, {_sN: _be}),))
-
-ANOMALY: StaticSchema = (
-    18,
-    n0,
-    _An,
-    0,
-    (_Pro, _Un),
-    ((ANOMALY_PROFILES, {_sN: _pro}), (ANOMALY_UNUSUAL, {_sN: _un})),
-)
-
-FINDING_ID: StaticSchema = (3, n0, _FI, 0)
-
-FINDING_IDS: StaticSchema = (16, n0, _FIi, 0, (_me,), ((FINDING_ID, 0),))
-
-ARCHIVE_FINDINGS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _AFI,
-    {_sSI: _cAFR, _s: None},
-    (_DI, _FIi),
-    ((DETECTOR_ID, 9), (FINDING_IDS, {_sN: _fI, _sm: None})),
-)
-
-ARCHIVE_FINDINGS_OUTPUT: StaticSchema = (18, n0, _AFO, {_sSI: _cAFRo, _smi: None})
-
-ARCHIVE_FINDINGS: StaticOperationSchema = (
-    23,
-    n0,
-    _AF,
-    {
-        _smith: MappingProxyType(
-            {
-                "method": "POST",
-                "uri": "/detector/{DetectorId}/findings/archive",
-                "code": 200,
-            }
-        )
-    },
-    ARCHIVE_FINDINGS_INPUT,
-    ARCHIVE_FINDINGS_OUTPUT,
-    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
-)
-
-DETECTION_RULE_ARN: StaticSchema = (3, n0, _DRAe, 0)
-
-ASSOCIATION_ID: StaticSchema = (3, n0, _AIs, 0)
-
-ASSOCIATION_MODE: StaticSchema = (
-    14,
-    n0,
-    _AM,
-    0,
-    (_LIVE, _DR),
-    ((-1, {_sV: _LIVE}), (-1, {_sV: _DR})),
-)
-
-RULE_ID: StaticSchema = (3, n0, _RI, 0)
-
-ASSOCIATION_DETAIL: StaticSchema = (
-    18,
-    n0,
-    _ADs,
-    0,
-    (_AIs, _Ar, _RI, _AIcc, _Mo, _CA, _UAp, _EA),
-    (
-        (ASSOCIATION_ID, {_sN: _aIs, _sm: None}),
-        (DETECTION_RULE_ARN, {_sN: _ar, _sm: None}),
-        (RULE_ID, {_sN: _rI, _sm: None}),
-        (ACCOUNT_ID, {_sN: _aIc, _sm: None}),
-        (ASSOCIATION_MODE, {_sN: _mo, _sm: None}),
-        (TIMESTAMP, {_sN: _cA, _sm: None}),
-        (TIMESTAMP, {_sN: _uAp, _sm: None}),
-        (TIMESTAMP, {_sN: _eA}),
-    ),
-)
-
-ASSOCIATION_SUMMARY: StaticSchema = (
-    18,
-    n0,
-    _ASs,
-    0,
-    (_AIs, _Ar, _RI, _Mo, _CA, _UAp, _EA),
-    (
-        (ASSOCIATION_ID, {_sN: _aIs, _sm: None}),
-        (DETECTION_RULE_ARN, {_sN: _ar, _sm: None}),
-        (RULE_ID, {_sN: _rI, _sm: None}),
-        (ASSOCIATION_MODE, {_sN: _mo, _sm: None}),
-        (TIMESTAMP, {_sN: _cA, _sm: None}),
-        (TIMESTAMP, {_sN: _uAp, _sm: None}),
-        (TIMESTAMP, {_sN: _eA}),
-    ),
-)
-
-ASSOCIATION_SUMMARY_LIST: StaticSchema = (
-    16,
-    n0,
-    _ASL,
-    0,
-    (_me,),
-    ((ASSOCIATION_SUMMARY, 0),),
-)
-
-AUTO_ENABLE_MEMBERS: StaticSchema = (
-    14,
-    n0,
-    _AEM,
-    0,
-    (_NEW, _ALL, _NONE),
-    ((-1, {_sV: _NEW}), (-1, {_sV: _ALL}), (-1, {_sV: _NONE})),
-)
-
-AUTONOMOUS_SYSTEM: StaticSchema = (
-    18,
-    n0,
-    _ASu,
-    0,
-    (_N, _Nu),
-    ((STRING, {_sN: _n, _sm: None}), (INTEGER, {_sN: _nu, _sm: None})),
-)
-
-EC2_INSTANCE_UID: StaticSchema = (3, n0, _EIU, 0)
-
-EC2_INSTANCE_UIDS: StaticSchema = (16, n0, _EIUc, 0, (_me,), ((EC2_INSTANCE_UID, 0),))
 
 CLIENT_TOKEN: StaticSchema = (3, n0, _CTl, 0)
 
-ORDER_BY: StaticSchema = (
-    14,
+CONFLICT_EXCEPTION: StaticSchema = (
+    18,
     n0,
-    _OB,
-    0,
-    (_ASC, _DESC),
-    ((-1, {_sV: _ASC}), (-1, {_sV: _DESC})),
+    _CE,
+    {_smit: _c, _sE: 409},
+    (_M, _T),
+    ((STRING, {_sN: _m}), (STRING, {_sN: _t})),
 )
 
 FILTER_NAME: StaticSchema = (3, n0, _FN, 0)
@@ -1422,4 +1467,13 @@ DESTINATION_PROPERTIES: StaticSchema = (
     ((STRING, {_sN: _dA}), (STRING, {_sN: _kKA}), (ACCOUNT_ID, {_sN: _eBO})),
 )
 
-DESTINATION_TYPE: StaticSchema = (14, n0, _DT, 0, (_S_,), ((-1, {_sV: _S_}),))
+DESTINATION_TYPE: StaticSchema = (14, n0, _DTes, 0, (_S_,), ((-1, {_sV: _S_}),))
+
+INCREMENTAL_SCAN_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _ISD,
+    0,
+    (_BRA,),
+    ((NON_EMPTY_STRING, {_sN: _bRA, _sm: None}),),
+)

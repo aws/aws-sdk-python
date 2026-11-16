@@ -20,7 +20,7 @@ from ..models import (
     DnsOptionsSpecification,
     DnsOptionsSpecificationDict,
     Ec2InstanceConnectEndpoint,
-    FailedQueuedPurchaseDeletion,
+    FlexCostAllocationOperationFailure,
     InstanceEventWindowStateChange,
     InstanceSpecification,
     InstanceSpecificationDict,
@@ -46,6 +46,10 @@ from ..models import (
     OperatorRequest,
     OperatorRequestDict,
     OperatorResponse,
+    PriceScheduleSpecification,
+    PriceScheduleSpecificationDict,
+    ReplaceRootVolumeTask,
+    ReservedInstancesListing,
     ResponseError,
     RouteServer,
     RouteServerBgpOptionsRequest,
@@ -64,7 +68,6 @@ from ..models import (
     SubnetCidrReservation,
     SubnetConfiguration,
     SubnetConfigurationDict,
-    SuccessfulQueuedPurchaseDeletion,
     Tag,
     TagDict,
     TagSpecification,
@@ -117,6 +120,345 @@ from ..models import (
     VpnGateway,
     _SerdeShape,
 )
+
+@dataclass(kw_only=True)
+class CreatePublicIpv4PoolInput(_SerdeShape):
+    """Dataclass for CreatePublicIpv4PoolInput structure."""
+
+    dry_run: bool | None = ...
+    """
+    A check for whether you have the required permissions for the action
+    without actually making the request and provides an error response. If
+    you have the required permissions, the error response is
+    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    """
+    tag_specifications: list[TagSpecification] | None = ...
+    """
+    The key/value combination of a tag assigned to the resource. Use the tag
+    key in the filter name and the tag value as the filter value. For
+    example, to find all resources that have a tag with the key `Owner` and
+    the value `TeamA`, specify `tag:Owner` for the filter name and `TeamA`
+    for the filter value.
+    """
+    network_border_group: str | None = ...
+    """
+    The Availability Zone (AZ) or Local Zone (LZ) network border group that
+    the resource that the IP address is assigned to is in. Defaults to an AZ
+    network border group. For more information on available Local Zones, see
+    [Local Zone
+    availability](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#byoip-zone-avail)
+    in the *Amazon EC2 User Guide*.
+    """
+
+class CreatePublicIpv4PoolInputDict(TypedDict, total=False):
+    """Dictionary form of `CreatePublicIpv4PoolInput`."""
+
+    dry_run: bool | None
+    """
+    A check for whether you have the required permissions for the action
+    without actually making the request and provides an error response. If
+    you have the required permissions, the error response is
+    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    """
+    tag_specifications: Sequence[TagSpecification | TagSpecificationDict] | None
+    """
+    The key/value combination of a tag assigned to the resource. Use the tag
+    key in the filter name and the tag value as the filter value. For
+    example, to find all resources that have a tag with the key `Owner` and
+    the value `TeamA`, specify `tag:Owner` for the filter name and `TeamA`
+    for the filter value.
+    """
+    network_border_group: str | None
+    """
+    The Availability Zone (AZ) or Local Zone (LZ) network border group that
+    the resource that the IP address is assigned to is in. Defaults to an AZ
+    network border group. For more information on available Local Zones, see
+    [Local Zone
+    availability](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#byoip-zone-avail)
+    in the *Amazon EC2 User Guide*.
+    """
+
+@dataclass(kw_only=True)
+class CreatePublicIpv4PoolOutput(_SerdeShape):
+    """Dataclass for CreatePublicIpv4PoolOutput structure."""
+
+    pool_id: str | None = ...
+    """The ID of the public IPv4 pool."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class CreateReplaceRootVolumeTaskInput(_SerdeShape):
+    """Dataclass for CreateReplaceRootVolumeTaskInput structure."""
+
+    instance_id: str | None = ...
+    """The ID of the instance for which to replace the root volume."""
+    snapshot_id: str | None = ...
+    """
+    The ID of the snapshot from which to restore the replacement root
+    volume. The specified snapshot must be a snapshot that you previously
+    created from the original root volume.
+
+    If you want to restore the replacement root volume to the initial launch
+    state, if you want to restore the replacement root volume from an AMI,
+    or if you want to replace the root volume with a specified volume, omit
+    this parameter.
+    """
+    client_token: str | None = ...
+    """
+    Unique, case-sensitive identifier you provide to ensure the idempotency
+    of the request. If you do not specify a client token, a randomly
+    generated token is used for the request to ensure idempotency. For more
+    information, see [Ensuring
+    idempotency](https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html).
+
+    This field is autopopulated if not provided.
+    """
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    tag_specifications: list[TagSpecification] | None = ...
+    """The tags to apply to the root volume replacement task."""
+    image_id: str | None = ...
+    """
+    The ID of the AMI to use to restore the root volume. The specified AMI
+    must have the same product code, billing information, architecture type,
+    and virtualization type as that of the instance.
+
+    If you want to restore the replacement volume from a specific snapshot,
+    if you want to restore it to its launch state, or if you want to replace
+    the root volume with a specified volume, omit this parameter.
+    """
+    delete_replaced_root_volume: bool | None = ...
+    """
+    Indicates whether to automatically delete the original root volume after
+    the root volume replacement task completes. To delete the original root
+    volume, specify `true`. If you choose to keep the original root volume
+    after the replacement task completes, you must manually delete it when
+    you no longer need it.
+    """
+    volume_initialization_rate: int | None = ...
+    """
+    Specifies the Amazon EBS Provisioned Rate for Volume Initialization
+    (volume initialization rate), in MiB/s, at which to download the
+    snapshot blocks from Amazon S3 to the replacement root volume. This is
+    also known as *volume initialization*. Specifying a volume
+    initialization rate ensures that the volume is initialized at a
+    predictable and consistent rate after creation.
+
+    Omit this parameter if:
+
+    - You want to create the volume using fast snapshot restore. You must
+      specify a snapshot that is enabled for fast snapshot restore. In this
+      case, the volume is fully initialized at creation.
+
+      Note:
+        If you specify a snapshot that is enabled for fast snapshot restore
+        and a volume initialization rate, the volume will be initialized at
+        the specified rate instead of fast snapshot restore.
+
+    - You want to create a volume that is initialized at the default rate.
+
+    For more information, see [Initialize Amazon EBS
+    volumes](https://docs.aws.amazon.com/ebs/latest/userguide/initalize-volume.html)
+    in the *Amazon EC2 User Guide*.
+
+    Valid range: 100 - 300 MiB/s
+    """
+    volume_id: str | None = ...
+    """
+    The ID of the volume to use as the replacement root volume. The
+    specified volume must be in the same Availability Zone as the instance,
+    must be in the `available` state, and must not be attached to an
+    instance. If the original root volume is encrypted, the specified volume
+    must also be encrypted.
+
+    If you want to restore the replacement root volume from a specific
+    snapshot, an AMI, or to its launch state, omit this parameter.
+    """
+
+class CreateReplaceRootVolumeTaskInputDict(TypedDict, total=False):
+    """Dictionary form of `CreateReplaceRootVolumeTaskInput`."""
+
+    instance_id: Required[str]
+    """The ID of the instance for which to replace the root volume."""
+    snapshot_id: str | None
+    """
+    The ID of the snapshot from which to restore the replacement root
+    volume. The specified snapshot must be a snapshot that you previously
+    created from the original root volume.
+
+    If you want to restore the replacement root volume to the initial launch
+    state, if you want to restore the replacement root volume from an AMI,
+    or if you want to replace the root volume with a specified volume, omit
+    this parameter.
+    """
+    client_token: str | None
+    """
+    Unique, case-sensitive identifier you provide to ensure the idempotency
+    of the request. If you do not specify a client token, a randomly
+    generated token is used for the request to ensure idempotency. For more
+    information, see [Ensuring
+    idempotency](https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html).
+
+    This field is autopopulated if not provided.
+    """
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    tag_specifications: Sequence[TagSpecification | TagSpecificationDict] | None
+    """The tags to apply to the root volume replacement task."""
+    image_id: str | None
+    """
+    The ID of the AMI to use to restore the root volume. The specified AMI
+    must have the same product code, billing information, architecture type,
+    and virtualization type as that of the instance.
+
+    If you want to restore the replacement volume from a specific snapshot,
+    if you want to restore it to its launch state, or if you want to replace
+    the root volume with a specified volume, omit this parameter.
+    """
+    delete_replaced_root_volume: bool | None
+    """
+    Indicates whether to automatically delete the original root volume after
+    the root volume replacement task completes. To delete the original root
+    volume, specify `true`. If you choose to keep the original root volume
+    after the replacement task completes, you must manually delete it when
+    you no longer need it.
+    """
+    volume_initialization_rate: int | None
+    """
+    Specifies the Amazon EBS Provisioned Rate for Volume Initialization
+    (volume initialization rate), in MiB/s, at which to download the
+    snapshot blocks from Amazon S3 to the replacement root volume. This is
+    also known as *volume initialization*. Specifying a volume
+    initialization rate ensures that the volume is initialized at a
+    predictable and consistent rate after creation.
+
+    Omit this parameter if:
+
+    - You want to create the volume using fast snapshot restore. You must
+      specify a snapshot that is enabled for fast snapshot restore. In this
+      case, the volume is fully initialized at creation.
+
+      Note:
+        If you specify a snapshot that is enabled for fast snapshot restore
+        and a volume initialization rate, the volume will be initialized at
+        the specified rate instead of fast snapshot restore.
+
+    - You want to create a volume that is initialized at the default rate.
+
+    For more information, see [Initialize Amazon EBS
+    volumes](https://docs.aws.amazon.com/ebs/latest/userguide/initalize-volume.html)
+    in the *Amazon EC2 User Guide*.
+
+    Valid range: 100 - 300 MiB/s
+    """
+    volume_id: str | None
+    """
+    The ID of the volume to use as the replacement root volume. The
+    specified volume must be in the same Availability Zone as the instance,
+    must be in the `available` state, and must not be attached to an
+    instance. If the original root volume is encrypted, the specified volume
+    must also be encrypted.
+
+    If you want to restore the replacement root volume from a specific
+    snapshot, an AMI, or to its launch state, omit this parameter.
+    """
+
+@dataclass(kw_only=True)
+class CreateReplaceRootVolumeTaskOutput(_SerdeShape):
+    """Dataclass for CreateReplaceRootVolumeTaskOutput structure."""
+
+    replace_root_volume_task: ReplaceRootVolumeTask | None = ...
+    """Information about the root volume replacement task."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class CreateReservedInstancesListingInput(_SerdeShape):
+    """Contains the parameters for CreateReservedInstancesListing."""
+
+    reserved_instances_id: str | None = ...
+    """The ID of the active Standard Reserved Instance."""
+    instance_count: int | None = ...
+    """
+    The number of instances that are a part of a Reserved Instance account
+    to be listed in the Reserved Instance Marketplace. This number should be
+    less than or equal to the instance count associated with the Reserved
+    Instance ID specified in this call.
+    """
+    price_schedules: list[PriceScheduleSpecification] | None = ...
+    """
+    A list specifying the price of the Standard Reserved Instance for each
+    month remaining in the Reserved Instance term.
+    """
+    client_token: str | None = ...
+    """
+    Unique, case-sensitive identifier you provide to ensure idempotency of
+    your listings. This helps avoid duplicate listings. For more
+    information, see [Ensuring
+    Idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+    """
+
+class CreateReservedInstancesListingInputDict(TypedDict, total=False):
+    """Dictionary form of `CreateReservedInstancesListingInput`."""
+
+    reserved_instances_id: Required[str]
+    """The ID of the active Standard Reserved Instance."""
+    instance_count: Required[int]
+    """
+    The number of instances that are a part of a Reserved Instance account
+    to be listed in the Reserved Instance Marketplace. This number should be
+    less than or equal to the instance count associated with the Reserved
+    Instance ID specified in this call.
+    """
+    price_schedules: Required[
+        Sequence[PriceScheduleSpecification | PriceScheduleSpecificationDict]
+    ]
+    """
+    A list specifying the price of the Standard Reserved Instance for each
+    month remaining in the Reserved Instance term.
+    """
+    client_token: Required[str]
+    """
+    Unique, case-sensitive identifier you provide to ensure idempotency of
+    your listings. This helps avoid duplicate listings. For more
+    information, see [Ensuring
+    Idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+    """
+
+@dataclass(kw_only=True)
+class CreateReservedInstancesListingOutput(_SerdeShape):
+    """Contains the output of CreateReservedInstancesListing."""
+
+    reserved_instances_listings: list[ReservedInstancesListing] | None = ...
+    """Information about the Standard Reserved Instance listing."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
 @dataclass(kw_only=True)
 class CreateRestoreImageTaskInput(_SerdeShape):
@@ -7796,6 +8138,47 @@ class DeleteManagedPrefixListOutput(_SerdeShape):
     """
 
 @dataclass(kw_only=True)
+class DeleteMetricCategoryInput(_SerdeShape):
+    """Dataclass for DeleteMetricCategoryInput structure."""
+
+    metric_category_id: str | None = ...
+    """The ID of the metric category."""
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the operation,
+    without actually making the request, and provides an error response. If
+    you have the required permissions, the error response is
+    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class DeleteMetricCategoryInputDict(TypedDict, total=False):
+    """Dictionary form of `DeleteMetricCategoryInput`."""
+
+    metric_category_id: Required[str]
+    """The ID of the metric category."""
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the operation,
+    without actually making the request, and provides an error response. If
+    you have the required permissions, the error response is
+    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class DeleteMetricCategoryOutput(_SerdeShape):
+    """Dataclass for DeleteMetricCategoryOutput structure."""
+
+    metric_category_id: str | None = ...
+    """The ID of the metric category that was deleted."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
 class DeleteNatGatewayInput(_SerdeShape):
     """Dataclass for DeleteNatGatewayInput structure."""
 
@@ -7914,6 +8297,58 @@ class DeleteNetworkAclInputDict(TypedDict, total=False):
 class DeleteNetworkAclOutput(_SerdeShape):
     """Dataclass for DeleteNetworkAclOutput structure."""
 
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DeleteNetworkingFlexCostAllocationPoliciesInput(_SerdeShape):
+    """Dataclass for DeleteNetworkingFlexCostAllocationPoliciesInput structure."""
+
+    fca_policy_ids: list[str] | None = ...
+    """
+    The IDs of the flex cost allocation policies to delete. You can specify
+    up to 50 policy IDs. This parameter is required.
+    """
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class DeleteNetworkingFlexCostAllocationPoliciesInputDict(TypedDict, total=False):
+    """Dictionary form of `DeleteNetworkingFlexCostAllocationPoliciesInput`."""
+
+    fca_policy_ids: Required[Sequence[str]]
+    """
+    The IDs of the flex cost allocation policies to delete. You can specify
+    up to 50 policy IDs. This parameter is required.
+    """
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class DeleteNetworkingFlexCostAllocationPoliciesOutput(_SerdeShape):
+    """
+    Dataclass for DeleteNetworkingFlexCostAllocationPoliciesOutput
+    structure.
+    """
+
+    successful: list[str] | None = ...
+    """The IDs of the policies that were successfully deleted."""
+    failed: list[FlexCostAllocationOperationFailure] | None = ...
+    """Information about the policies that could not be deleted."""
     response_metadata: ResponseMetadata = ...
     """
     Metadata about the response that produced this output. Use this to
@@ -8317,234 +8752,3 @@ class DeleteQueuedReservedInstancesInputDict(TypedDict, total=False):
     """
     reserved_instances_ids: Required[Sequence[str]]
     """The IDs of the Reserved Instances."""
-
-@dataclass(kw_only=True)
-class DeleteQueuedReservedInstancesOutput(_SerdeShape):
-    """Dataclass for DeleteQueuedReservedInstancesOutput structure."""
-
-    successful_queued_purchase_deletions: (
-        list[SuccessfulQueuedPurchaseDeletion] | None
-    ) = ...
-    """Information about the queued purchases that were successfully deleted."""
-    failed_queued_purchase_deletions: list[FailedQueuedPurchaseDeletion] | None = ...
-    """Information about the queued purchases that could not be deleted."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class DeleteRouteInput(_SerdeShape):
-    """Dataclass for DeleteRouteInput structure."""
-
-    destination_prefix_list_id: str | None = ...
-    """The ID of the prefix list for the route."""
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    route_table_id: str | None = ...
-    """The ID of the route table."""
-    destination_cidr_block: str | None = ...
-    """
-    The IPv4 CIDR range for the route. The value you specify must match the
-    CIDR for the route exactly.
-    """
-    destination_ipv6_cidr_block: str | None = ...
-    """
-    The IPv6 CIDR range for the route. The value you specify must match the
-    CIDR for the route exactly.
-    """
-
-class DeleteRouteInputDict(TypedDict, total=False):
-    """Dictionary form of `DeleteRouteInput`."""
-
-    destination_prefix_list_id: str | None
-    """The ID of the prefix list for the route."""
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    route_table_id: Required[str]
-    """The ID of the route table."""
-    destination_cidr_block: str | None
-    """
-    The IPv4 CIDR range for the route. The value you specify must match the
-    CIDR for the route exactly.
-    """
-    destination_ipv6_cidr_block: str | None
-    """
-    The IPv6 CIDR range for the route. The value you specify must match the
-    CIDR for the route exactly.
-    """
-
-@dataclass(kw_only=True)
-class DeleteRouteOutput(_SerdeShape):
-    """Dataclass for DeleteRouteOutput structure."""
-
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class DeleteRouteServerEndpointInput(_SerdeShape):
-    """Dataclass for DeleteRouteServerEndpointInput structure."""
-
-    route_server_endpoint_id: str | None = ...
-    """The ID of the route server endpoint to delete."""
-    dry_run: bool | None = ...
-    """
-    A check for whether you have the required permissions for the action
-    without actually making the request and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-
-class DeleteRouteServerEndpointInputDict(TypedDict, total=False):
-    """Dictionary form of `DeleteRouteServerEndpointInput`."""
-
-    route_server_endpoint_id: Required[str]
-    """The ID of the route server endpoint to delete."""
-    dry_run: bool | None
-    """
-    A check for whether you have the required permissions for the action
-    without actually making the request and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-
-@dataclass(kw_only=True)
-class DeleteRouteServerEndpointOutput(_SerdeShape):
-    """Dataclass for DeleteRouteServerEndpointOutput structure."""
-
-    route_server_endpoint: RouteServerEndpoint | None = ...
-    """Information about the deleted route server endpoint."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class DeleteRouteServerInput(_SerdeShape):
-    """Dataclass for DeleteRouteServerInput structure."""
-
-    route_server_id: str | None = ...
-    """The ID of the route server to delete."""
-    dry_run: bool | None = ...
-    """
-    A check for whether you have the required permissions for the action
-    without actually making the request and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-
-class DeleteRouteServerInputDict(TypedDict, total=False):
-    """Dictionary form of `DeleteRouteServerInput`."""
-
-    route_server_id: Required[str]
-    """The ID of the route server to delete."""
-    dry_run: bool | None
-    """
-    A check for whether you have the required permissions for the action
-    without actually making the request and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-
-@dataclass(kw_only=True)
-class DeleteRouteServerOutput(_SerdeShape):
-    """Dataclass for DeleteRouteServerOutput structure."""
-
-    route_server: RouteServer | None = ...
-    """Information about the deleted route server."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class DeleteRouteServerPeerInput(_SerdeShape):
-    """Dataclass for DeleteRouteServerPeerInput structure."""
-
-    route_server_peer_id: str | None = ...
-    """The ID of the route server peer to delete."""
-    dry_run: bool | None = ...
-    """
-    A check for whether you have the required permissions for the action
-    without actually making the request and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-
-class DeleteRouteServerPeerInputDict(TypedDict, total=False):
-    """Dictionary form of `DeleteRouteServerPeerInput`."""
-
-    route_server_peer_id: Required[str]
-    """The ID of the route server peer to delete."""
-    dry_run: bool | None
-    """
-    A check for whether you have the required permissions for the action
-    without actually making the request and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-
-@dataclass(kw_only=True)
-class DeleteRouteServerPeerOutput(_SerdeShape):
-    """Dataclass for DeleteRouteServerPeerOutput structure."""
-
-    route_server_peer: RouteServerPeer | None = ...
-    """Information about the deleted route server peer."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class DeleteRouteTableInput(_SerdeShape):
-    """Dataclass for DeleteRouteTableInput structure."""
-
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    route_table_id: str | None = ...
-    """The ID of the route table."""
-
-class DeleteRouteTableInputDict(TypedDict, total=False):
-    """Dictionary form of `DeleteRouteTableInput`."""
-
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    route_table_id: Required[str]
-    """The ID of the route table."""

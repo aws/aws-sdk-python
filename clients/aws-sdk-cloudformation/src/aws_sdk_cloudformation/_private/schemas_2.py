@@ -22,6 +22,9 @@ _sE = "smithy.api#httpError"
 _aQE = "aws.protocols#awsQueryError"
 _M = "Message"
 _smit = "smithy.api#required"
+_RESOURCE = "RESOURCE"
+_MODULE = "MODULE"
+_HOOK = "HOOK"
 _TN = "TypeName"
 _T = "Type"
 _Ar = "Arn"
@@ -40,6 +43,7 @@ _Rea = "Reason"
 _SRDS = "StackResourceDriftStatus"
 _DELETED = "DELETED"
 _Cha = "Changes"
+_TVI = "TypeVersionId"
 _CSN = "ChangeSetName"
 _CIP = "CREATE_IN_PROGRESS"
 _CC = "CREATE_COMPLETE"
@@ -142,6 +146,7 @@ _DSSI = "DeleteStackSetInput"
 _DSSO = "DeleteStackSetOutput"
 _SSNEE = "StackSetNotEmptyException"
 _DSS = "DeleteStackSet"
+_RTeg = "RegistryType"
 _DTIe = "DeregisterTypeInput"
 _VI = "VersionId"
 _DTOe = "DeregisterTypeOutput"
@@ -217,6 +222,7 @@ _RSR = "ResourceStatusReason"
 _VN = "ValidationName"
 _VP = "ValidationPath"
 _VS = "ValidationStatus"
+_VSR = "ValidationStatusReason"
 _OEp = "OperationEvents"
 _DEO = "DescribeEventsOutput"
 _DE = "DescribeEvents"
@@ -756,6 +762,17 @@ STACK_SET_NOT_EMPTY_EXCEPTION: StaticSchema = (
     ((lambda: schemas.ERROR_MESSAGE, 0),),
 )
 
+REGISTRY_TYPE: StaticSchema = (
+    14,
+    n0,
+    _RTeg,
+    0,
+    (_RESOURCE, _MODULE, _HOOK),
+    ((-1, {_sV: _RESOURCE}), (-1, {_sV: _MODULE}), (-1, {_sV: _HOOK})),
+)
+
+TYPE_VERSION_ID: StaticSchema = (3, n0, _TVI, 0)
+
 DEREGISTER_TYPE_INPUT: StaticSchema = (
     18,
     n0,
@@ -764,9 +781,9 @@ DEREGISTER_TYPE_INPUT: StaticSchema = (
     (_Ar, _T, _TN, _VI),
     (
         (lambda: schemas.PRIVATE_TYPE_ARN, 0),
-        (lambda: schemas.REGISTRY_TYPE, 0),
+        (REGISTRY_TYPE, 0),
         (lambda: schemas.TYPE_NAME, 0),
-        (lambda: schemas.TYPE_VERSION_ID, 0),
+        (TYPE_VERSION_ID, 0),
     ),
 )
 
@@ -1114,6 +1131,8 @@ VALIDATION_STATUS: StaticSchema = (
     (_FAILED, _SKIPPED),
     ((-1, {_sV: _FAILED}), (-1, {_sV: _SKIPPED})),
 )
+
+VALIDATION_STATUS_REASON: StaticSchema = (3, n0, _VSR, 0)
 
 TEMPLATE_STATUS_REASON: StaticSchema = (3, n0, _TSR, 0)
 

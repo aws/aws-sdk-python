@@ -14,37 +14,38 @@ _EM = "ErrorMessage"
 _SI = "SecretId"
 _M = "Message"
 _sV = "smithy.api#enumValue"
-_n = "name"
 _sSI = "smithy.synthetic#originalShapeId"
 _s = "smithy.api#input"
-_Fi = "Filters"
+_sm = "smithy.api#required"
+_smi = "smithy.api#output"
+_ARN = "ARN"
+_RS = "ReplicationStatus"
+_smit = "smithy.api#error"
+_c = "client"
+_n = "name"
+_Fil = "Filters"
 _MR = "MaxResults"
 _NT = "NextToken"
-_sm = "smithy.api#sensitive"
-_ARN = "ARN"
+_smith = "smithy.api#sensitive"
 _N = "Name"
 _VI = "VersionId"
 _SB = "SecretBinary"
 _SS = "SecretString"
 _VS = "VersionStages"
 _CD = "CreatedDate"
-_smi = "smithy.api#output"
-_smit = "smithy.api#error"
-_c = "client"
-_smith = "smithy.api#default"
-_smithy = "smithy.api#required"
+_smithy = "smithy.api#default"
 _CRT = "ClientRequestToken"
 _sT = "smithy.api#idempotencyToken"
-_D = "Description"
+_De = "Description"
 _Ta = "Tags"
 _ARR = "AddReplicaRegions"
 _FORS = "ForceOverwriteReplicaSecret"
 _Ty = "Type"
 _LAD = "LastAccessedDate"
-_RS = "ReplicationStatus"
+_PN = "PolicyName"
 _RE = "RotationEnabled"
 _RLARN = "RotationLambdaARN"
-_RR = "RotationRules"
+_RRo = "RotationRules"
 _ESRM = "ExternalSecretRotationMetadata"
 _ESRRA = "ExternalSecretRotationRoleArn"
 _LRD = "LastRotatedDate"
@@ -53,6 +54,10 @@ _DDe = "DeletedDate"
 _NRD = "NextRotationDate"
 _OS = "OwningService"
 _PR = "PrimaryRegion"
+_EUT = "ExcludeUppercaseType"
+_IST = "IncludeSpaceType"
+_PLT = "PasswordLengthType"
+_REITT = "RequireEachIncludedTypeType"
 _GRPI = "GetRandomPasswordInput"
 _cGRPR = "com.amazonaws.secretsmanager#GetRandomPasswordRequest"
 _PL = "PasswordLength"
@@ -83,6 +88,14 @@ _cGSVRo = "com.amazonaws.secretsmanager#GetSecretValueResponse"
 _GSV = "GetSecretValue"
 _KKILT = "KmsKeyIdListType"
 _MRT = "MaxResultsType"
+_LRPI = "ListResourcePoliciesInput"
+_cLRPR = "com.amazonaws.secretsmanager#ListResourcePoliciesRequest"
+_RPS = "ResourcePolicySummary"
+_RPSLT = "ResourcePolicySummaryListType"
+_LRPO = "ListResourcePoliciesOutput"
+_cLRPRo = "com.amazonaws.secretsmanager#ListResourcePoliciesResponse"
+_RPes = "ResourcePolicies"
+_LRP = "ListResourcePolicies"
 _SBTo = "SortByType"
 _cd = "created_date"
 _cd_ = "created-date"
@@ -96,7 +109,7 @@ _de = "desc"
 _LSI = "ListSecretsInput"
 _cLSR = "com.amazonaws.secretsmanager#ListSecretsRequest"
 _IPD = "IncludePlannedDeletion"
-_SO = "SortOrder"
+_SOo = "SortOrder"
 _SBo = "SortBy"
 _SLE = "SecretListEntry"
 _SVTS = "SecretVersionsToStages"
@@ -195,6 +208,14 @@ _aw = "aws.auth#sigv4"
 _a_ = "aws.protocols#awsJson1_1"
 _aws = "aws.api#service"
 
+EXCLUDE_UPPERCASE_TYPE: StaticSchema = (2, n0, _EUT, {_smithy: False})
+
+INCLUDE_SPACE_TYPE: StaticSchema = (2, n0, _IST, {_smithy: False})
+
+PASSWORD_LENGTH_TYPE: StaticSchema = (8, n0, _PLT, 0)
+
+REQUIRE_EACH_INCLUDED_TYPE_TYPE: StaticSchema = (2, n0, _REITT, {_smithy: False})
+
 GET_RANDOM_PASSWORD_INPUT: StaticSchema = (
     18,
     n0,
@@ -202,14 +223,14 @@ GET_RANDOM_PASSWORD_INPUT: StaticSchema = (
     {_sSI: _cGRPR, _s: None},
     (_PL, _ECx, _EN, _EP, _EU, _EL, _ISn, _REIT),
     (
-        (lambda: schemas.PASSWORD_LENGTH_TYPE, 0),
+        (PASSWORD_LENGTH_TYPE, 0),
         (lambda: schemas.EXCLUDE_CHARACTERS_TYPE, 0),
-        (lambda: schemas.EXCLUDE_NUMBERS_TYPE, {_smith: None}),
-        (lambda: schemas.EXCLUDE_PUNCTUATION_TYPE, {_smith: None}),
-        (lambda: schemas.EXCLUDE_UPPERCASE_TYPE, {_smith: None}),
-        (lambda: schemas.EXCLUDE_LOWERCASE_TYPE, {_smith: None}),
-        (lambda: schemas.INCLUDE_SPACE_TYPE, {_smith: None}),
-        (lambda: schemas.REQUIRE_EACH_INCLUDED_TYPE_TYPE, {_smith: None}),
+        (lambda: schemas.EXCLUDE_NUMBERS_TYPE, {_smithy: None}),
+        (lambda: schemas.EXCLUDE_PUNCTUATION_TYPE, {_smithy: None}),
+        (EXCLUDE_UPPERCASE_TYPE, {_smithy: None}),
+        (lambda: schemas.EXCLUDE_LOWERCASE_TYPE, {_smithy: None}),
+        (INCLUDE_SPACE_TYPE, {_smithy: None}),
+        (REQUIRE_EACH_INCLUDED_TYPE_TYPE, {_smithy: None}),
     ),
 )
 
@@ -243,8 +264,11 @@ GET_RESOURCE_POLICY_INPUT: StaticSchema = (
     n0,
     _GRPIe,
     {_sSI: _cGRPRom, _s: None},
-    (_SI,),
-    ((lambda: schemas.SECRET_ID_TYPE, 1),),
+    (_SI, _PN),
+    (
+        (lambda: schemas.SECRET_ID_TYPE, 1),
+        (lambda: schemas.RESOURCE_POLICY_NAME_TYPE, 0),
+    ),
 )
 
 GET_RESOURCE_POLICY_OUTPUT: StaticSchema = (
@@ -252,11 +276,12 @@ GET_RESOURCE_POLICY_OUTPUT: StaticSchema = (
     n0,
     _GRPOe,
     {_sSI: _cGRPRoma, _smi: None},
-    (_ARN, _N, _RPe),
+    (_ARN, _N, _RPe, _PN),
     (
         (lambda: schemas.SECRET_ARN_TYPE, 0),
         (lambda: schemas.NAME_TYPE, 0),
         (lambda: NON_EMPTY_RESOURCE_POLICY_TYPE, 0),
+        (lambda: schemas.RESOURCE_POLICY_NAME_TYPE, 0),
     ),
 )
 
@@ -334,6 +359,65 @@ KMS_KEY_ID_LIST_TYPE: StaticSchema = (
 
 MAX_RESULTS_TYPE: StaticSchema = (7, n0, _MRT, 0)
 
+LIST_RESOURCE_POLICIES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LRPI,
+    {_sSI: _cLRPR, _s: None},
+    (_SI, _MR, _NT),
+    (
+        (lambda: schemas.SECRET_ID_TYPE, 1),
+        (MAX_RESULTS_TYPE, 0),
+        (lambda: schemas.NEXT_TOKEN_TYPE, 0),
+    ),
+)
+
+LIST_RESOURCE_POLICIES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LRPO,
+    {_sSI: _cLRPRo, _smi: None},
+    (_RPes, _NT),
+    (
+        (lambda: RESOURCE_POLICY_SUMMARY_LIST_TYPE, 1),
+        (lambda: schemas.NEXT_TOKEN_TYPE, 0),
+    ),
+)
+
+LIST_RESOURCE_POLICIES: StaticOperationSchema = (
+    23,
+    n0,
+    _LRP,
+    0,
+    LIST_RESOURCE_POLICIES_INPUT,
+    LIST_RESOURCE_POLICIES_OUTPUT,
+    (
+        lambda: schemas.INTERNAL_SERVICE_ERROR,
+        lambda: schemas.INVALID_NEXT_TOKEN_EXCEPTION,
+        lambda: schemas.INVALID_PARAMETER_EXCEPTION,
+        lambda: schemas.INVALID_REQUEST_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+RESOURCE_POLICY_SUMMARY: StaticSchema = (
+    18,
+    n0,
+    _RPS,
+    0,
+    (_PN,),
+    ((lambda: schemas.RESOURCE_POLICY_NAME_TYPE, 0),),
+)
+
+RESOURCE_POLICY_SUMMARY_LIST_TYPE: StaticSchema = (
+    16,
+    n0,
+    _RPSLT,
+    0,
+    (_m,),
+    ((RESOURCE_POLICY_SUMMARY, 0),),
+)
+
 SORT_BY_TYPE: StaticSchema = (
     14,
     n0,
@@ -357,9 +441,9 @@ LIST_SECRETS_INPUT: StaticSchema = (
     n0,
     _LSI,
     {_sSI: _cLSR, _s: None},
-    (_IPD, _MR, _NT, _Fi, _SO, _SBo),
+    (_IPD, _MR, _NT, _Fil, _SOo, _SBo),
     (
-        (lambda: schemas.BOOLEAN_TYPE, {_smith: None}),
+        (lambda: schemas.BOOLEAN_TYPE, {_smithy: None}),
         (MAX_RESULTS_TYPE, 0),
         (lambda: schemas.NEXT_TOKEN_TYPE, 0),
         (lambda: schemas.FILTERS_LIST_TYPE, 0),
@@ -401,11 +485,11 @@ SECRET_LIST_ENTRY: StaticSchema = (
         _ARN,
         _N,
         _Ty,
-        _D,
+        _De,
         _KKI,
         _RE,
         _RLARN,
-        _RR,
+        _RRo,
         _ESRM,
         _ESRRA,
         _LRD,
@@ -425,7 +509,7 @@ SECRET_LIST_ENTRY: StaticSchema = (
         (lambda: schemas.MEDEA_TYPE_TYPE, 0),
         (lambda: schemas.DESCRIPTION_TYPE, 0),
         (lambda: schemas.KMS_KEY_ID_TYPE, 0),
-        (lambda: schemas.ROTATION_ENABLED_TYPE, {_smith: None}),
+        (lambda: schemas.ROTATION_ENABLED_TYPE, {_smithy: None}),
         (lambda: schemas.ROTATION_LAMBDA_ARN_TYPE, 0),
         (lambda: schemas.ROTATION_RULES_TYPE, 0),
         (lambda: schemas.EXTERNAL_SECRET_ROTATION_METADATA_TYPE, 0),
@@ -455,7 +539,7 @@ LIST_SECRET_VERSION_IDS_INPUT: StaticSchema = (
         (lambda: schemas.SECRET_ID_TYPE, 1),
         (MAX_RESULTS_TYPE, 0),
         (lambda: schemas.NEXT_TOKEN_TYPE, 0),
-        (lambda: schemas.BOOLEAN_TYPE, {_smith: None}),
+        (lambda: schemas.BOOLEAN_TYPE, {_smithy: None}),
     ),
 )
 
@@ -526,11 +610,12 @@ PUT_RESOURCE_POLICY_INPUT: StaticSchema = (
     n0,
     _PRPI,
     {_sSI: _cPRPR, _s: None},
-    (_SI, _RPe, _BPP),
+    (_SI, _RPe, _PN, _BPP),
     (
         (lambda: schemas.SECRET_ID_TYPE, 1),
         (NON_EMPTY_RESOURCE_POLICY_TYPE, 1),
-        (lambda: schemas.BOOLEAN_TYPE, {_smith: None}),
+        (lambda: schemas.RESOURCE_POLICY_NAME_TYPE, 0),
+        (lambda: schemas.BOOLEAN_TYPE, {_smithy: None}),
     ),
 )
 
@@ -539,8 +624,12 @@ PUT_RESOURCE_POLICY_OUTPUT: StaticSchema = (
     n0,
     _PRPO,
     {_sSI: _cPRPRo, _smi: None},
-    (_ARN, _N),
-    ((lambda: schemas.SECRET_ARN_TYPE, 0), (lambda: schemas.NAME_TYPE, 0)),
+    (_ARN, _N, _PN),
+    (
+        (lambda: schemas.SECRET_ARN_TYPE, 0),
+        (lambda: schemas.NAME_TYPE, 0),
+        (lambda: schemas.RESOURCE_POLICY_NAME_TYPE, 0),
+    ),
 )
 
 PUT_RESOURCE_POLICY: StaticOperationSchema = (
@@ -665,7 +754,7 @@ REPLICATE_SECRET_TO_REGIONS_INPUT: StaticSchema = (
     (
         (lambda: schemas.SECRET_ID_TYPE, 1),
         (lambda: schemas.ADD_REPLICA_REGION_LIST_TYPE, 1),
-        (lambda: schemas.BOOLEAN_TYPE, {_smith: False}),
+        (lambda: schemas.BOOLEAN_TYPE, {_smithy: False}),
     ),
 )
 
@@ -734,7 +823,7 @@ ROTATE_SECRET_INPUT: StaticSchema = (
     n0,
     _RSIo,
     {_sSI: _cRSRom, _s: None},
-    (_SI, _CRT, _RLARN, _RR, _ESRM, _ESRRA, _RI),
+    (_SI, _CRT, _RLARN, _RRo, _ESRM, _ESRRA, _RI),
     (
         (lambda: schemas.SECRET_ID_TYPE, 1),
         (lambda: schemas.CLIENT_REQUEST_TOKEN_TYPE, 2),
@@ -742,7 +831,7 @@ ROTATE_SECRET_INPUT: StaticSchema = (
         (lambda: schemas.ROTATION_RULES_TYPE, 0),
         (lambda: schemas.EXTERNAL_SECRET_ROTATION_METADATA_TYPE, 0),
         (lambda: schemas.ROLE_ARN_TYPE, 0),
-        (lambda: schemas.BOOLEAN_TYPE, {_smith: None}),
+        (lambda: schemas.BOOLEAN_TYPE, {_smithy: None}),
     ),
 )
 
@@ -873,7 +962,7 @@ UPDATE_SECRET_INPUT: StaticSchema = (
     n0,
     _USI,
     {_sSI: _cUSR, _s: None},
-    (_SI, _CRT, _D, _KKI, _SB, _SS, _Ty),
+    (_SI, _CRT, _De, _KKI, _SB, _SS, _Ty),
     (
         (lambda: schemas.SECRET_ID_TYPE, 1),
         (lambda: schemas.CLIENT_REQUEST_TOKEN_TYPE, 2),
@@ -974,7 +1063,7 @@ VALIDATE_RESOURCE_POLICY_OUTPUT: StaticSchema = (
     {_sSI: _cVRPRo, _smi: None},
     (_PVP, _VE),
     (
-        (lambda: schemas.BOOLEAN_TYPE, {_smith: False}),
+        (lambda: schemas.BOOLEAN_TYPE, {_smithy: False}),
         (lambda: VALIDATION_ERRORS_TYPE, 0),
     ),
 )

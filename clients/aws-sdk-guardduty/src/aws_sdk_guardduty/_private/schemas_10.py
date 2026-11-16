@@ -18,6 +18,7 @@ _smi = "smithy.api#output"
 _smith = "smithy.api#http"
 _N = "Name"
 _me = "member"
+_n = "name"
 _AL = "AuditLogs"
 _aL = "auditLogs"
 _SEIWF = "ScanEc2InstanceWithFindings"
@@ -28,20 +29,23 @@ _K = "Kubernetes"
 _k = "kubernetes"
 _MP = "MalwareProtection"
 _mP = "malwareProtection"
-_n = "name"
 _DS = "DataSources"
 _dS = "dataSources"
 _F = "Features"
 _f = "features"
 _AIcco = "AccountIds"
+_Ra = "Rank"
+_r = "rank"
 _ke = "key"
 _Ac = "Action"
 _VI = "VersionId"
 _vI = "versionId"
+_De = "Description"
+_de = "description"
 _FIi = "FindingIds"
 _fI = "findingIds"
 _AIs = "AssociationId"
-_RI = "RuleId"
+_RIu = "RuleId"
 _Mo = "Mode"
 _mo = "mode"
 _ac = "action"
@@ -49,46 +53,42 @@ _CTl = "ClientToken"
 _St = "Status"
 _st = "status"
 _CSD = "ContinuousScanDetails"
+_Actio = "Actions"
+_act = "actions"
 _sTm = "smithy.api#idempotencyToken"
 _cTl = "clientToken"
-_Ta = "Tags"
-_ta = "tags"
+_Tag = "Tags"
+_tag = "tags"
 _IAI = "IncludeAccountIds"
 _iAI = "includeAccountIds"
 _EAI = "ExcludeAccountIds"
 _eAI = "excludeAccountIds"
 _En = "Enable"
 _en = "enable"
-_EV = "EbsVolumes"
-_eV = "ebsVolumes"
+_EVb = "EbsVolumes"
+_eVb = "ebsVolumes"
 _ACd = "AdditionalConfiguration"
-_aC = "additionalConfiguration"
+_aCd = "additionalConfiguration"
 _FPF = "FindingPublishingFrequency"
 _fPF = "findingPublishingFrequency"
 _FCin = "FindingCriteria"
 _FN = "FilterName"
-_De = "Description"
-_de = "description"
-_Ra = "Rank"
-_ra = "rank"
 _fCin = "findingCriteria"
 _Loc = "Location"
 _loc = "location"
 _Activ = "Activate"
-_act = "activate"
+_acti = "activate"
 _EBO = "ExpectedBucketOwner"
 _eBO = "expectedBucketOwner"
 _ISI = "IpSetId"
 _OP = "ObjectPrefixes"
 _oP = "objectPrefixes"
-_SB = "S3Bucket"
-_sB = "s3Bucket"
+_SBu = "S3Bucket"
+_sBu = "s3Bucket"
 _Ro = "Role"
 _ro = "role"
 _PR = "ProtectedResource"
 _pR = "protectedResource"
-_Actio = "Actions"
-_acti = "actions"
 _MPPI = "MalwareProtectionPlanId"
 _UAnp = "UnprocessedAccounts"
 _uAn = "unprocessedAccounts"
@@ -106,7 +106,7 @@ _nT = "nextToken"
 _MR = "MaxResults"
 _mR = "maxResults"
 _SIc = "ScanId"
-_sI = "scanId"
+_sIc = "scanId"
 _AE = "AutoEnable"
 _aE = "autoEnable"
 _AEOM = "AutoEnableOrganizationMembers"
@@ -362,8 +362,8 @@ LIST_TAGS_FOR_RESOURCE_OUTPUT: StaticSchema = (
     n0,
     _LTFRO,
     {_sSI: _cLTFRRo, _smi: None},
-    (_Ta,),
-    ((lambda: schemas.TAG_MAP, {_sN: _ta}),),
+    (_Tag,),
+    ((lambda: schemas.TAG_MAP, {_sN: _tag}),),
 )
 
 LIST_TAGS_FOR_RESOURCE: StaticOperationSchema = (
@@ -642,7 +642,7 @@ START_MALWARE_SCAN_OUTPUT: StaticSchema = (
     _SMSO,
     {_sSI: _cSMSRo, _smi: None},
     (_SIc,),
-    ((lambda: schemas.NON_EMPTY_STRING, {_sN: _sI}),),
+    ((lambda: schemas.NON_EMPTY_STRING, {_sN: _sIc}),),
 )
 
 START_MALWARE_SCAN: StaticOperationSchema = (
@@ -748,8 +748,8 @@ TAG_RESOURCE_INPUT: StaticSchema = (
     n0,
     _TRI,
     {_sSI: _cTRR, _s: None},
-    (_RAe, _Ta),
-    ((GUARD_DUTY_ARN, 9), (lambda: schemas.TAG_MAP, {_sN: _ta, _sm: None})),
+    (_RAe, _Tag),
+    ((GUARD_DUTY_ARN, 9), (lambda: schemas.TAG_MAP, {_sN: _tag, _sm: None})),
 )
 
 TAG_RESOURCE_OUTPUT: StaticSchema = (18, n0, _TRO, {_sSI: _cTRRo, _smi: None})
@@ -843,7 +843,7 @@ UPDATE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT: StaticSchema = (
     n0,
     _UCDRAI,
     {_sSI: _cUCDRAR, _s: None},
-    (_RI, _AIs, _Mo),
+    (_RIu, _AIs, _Mo),
     (
         (lambda: schemas.RULE_ID, 9),
         (lambda: schemas.ASSOCIATION_ID, 9),
@@ -887,7 +887,7 @@ UPDATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT: StaticSchema = (
     n0,
     _UCDROCI,
     {_sSI: _cUCDROCR, _s: None},
-    (_RI, _Mo, _IAI, _EAI),
+    (_RIu, _Mo, _IAI, _EAI),
     (
         (lambda: schemas.RULE_ID, 9),
         (lambda: schemas.ASSOCIATION_MODE, {_sN: _mo, _sm: None}),
@@ -972,7 +972,7 @@ UPDATE_FILTER_INPUT: StaticSchema = (
         (lambda: schemas.STRING, 9),
         (lambda: schemas.FILTER_DESCRIPTION, {_sN: _de}),
         (lambda: schemas.FILTER_ACTION, {_sN: _ac}),
-        (lambda: schemas.FILTER_RANK, {_sN: _ra}),
+        (lambda: schemas.FILTER_RANK, {_sN: _r}),
         (lambda: schemas.FINDING_CRITERIA, {_sN: _fCin}),
     ),
 )
@@ -1060,7 +1060,7 @@ UPDATE_IP_SET_INPUT: StaticSchema = (
         (lambda: schemas.STRING, 9),
         (lambda: schemas.NAME, {_sN: _n}),
         (lambda: schemas.LOCATION, {_sN: _loc}),
-        (lambda: schemas.BOOLEAN, {_sN: _act}),
+        (lambda: schemas.BOOLEAN, {_sN: _acti}),
         (lambda: schemas.ACCOUNT_ID, {_sN: _eBO}),
     ),
 )
@@ -1103,8 +1103,8 @@ UPDATE_PROTECTED_RESOURCE: StaticSchema = (
     n0,
     _UPR,
     0,
-    (_SB,),
-    ((UPDATE_S3_BUCKET_RESOURCE, {_sN: _sB}),),
+    (_SBu,),
+    ((UPDATE_S3_BUCKET_RESOURCE, {_sN: _sBu}),),
 )
 
 UPDATE_MALWARE_PROTECTION_PLAN_INPUT: StaticSchema = (
@@ -1116,7 +1116,7 @@ UPDATE_MALWARE_PROTECTION_PLAN_INPUT: StaticSchema = (
     (
         (lambda: schemas.STRING, 9),
         (lambda: schemas.STRING, {_sN: _ro}),
-        (lambda: schemas.MALWARE_PROTECTION_PLAN_ACTIONS, {_sN: _acti}),
+        (lambda: schemas.MALWARE_PROTECTION_PLAN_ACTIONS, {_sN: _act}),
         (UPDATE_PROTECTED_RESOURCE, {_sN: _pR}),
     ),
 )
@@ -1222,7 +1222,7 @@ MEMBER_FEATURES_CONFIGURATION: StaticSchema = (
     (
         (lambda: schemas.ORG_FEATURE, {_sN: _n}),
         (lambda: schemas.FEATURE_STATUS, {_sN: _st}),
-        (MEMBER_ADDITIONAL_CONFIGURATIONS, {_sN: _aC}),
+        (MEMBER_ADDITIONAL_CONFIGURATIONS, {_sN: _aCd}),
     ),
 )
 
@@ -1311,8 +1311,8 @@ ORGANIZATION_SCAN_EC2_INSTANCE_WITH_FINDINGS: StaticSchema = (
     n0,
     _OSEIWF,
     0,
-    (_EV,),
-    ((ORGANIZATION_EBS_VOLUMES, {_sN: _eV}),),
+    (_EVb,),
+    ((ORGANIZATION_EBS_VOLUMES, {_sN: _eVb}),),
 )
 
 ORGANIZATION_MALWARE_PROTECTION_CONFIGURATION: StaticSchema = (
@@ -1376,7 +1376,7 @@ ORGANIZATION_FEATURE_CONFIGURATION: StaticSchema = (
     (
         (lambda: schemas.ORG_FEATURE, {_sN: _n}),
         (lambda: schemas.ORG_FEATURE_STATUS, {_sN: _aE}),
-        (ORGANIZATION_ADDITIONAL_CONFIGURATIONS, {_sN: _aC}),
+        (ORGANIZATION_ADDITIONAL_CONFIGURATIONS, {_sN: _aCd}),
     ),
 )
 
@@ -1481,7 +1481,7 @@ UPDATE_THREAT_ENTITY_SET_INPUT: StaticSchema = (
         (lambda: schemas.NAME, {_sN: _n}),
         (lambda: schemas.LOCATION, {_sN: _loc}),
         (lambda: schemas.EXPECTED_BUCKET_OWNER, {_sN: _eBO}),
-        (lambda: schemas.BOOLEAN, {_sN: _act}),
+        (lambda: schemas.BOOLEAN, {_sN: _acti}),
     ),
 )
 
@@ -1524,7 +1524,7 @@ UPDATE_THREAT_INTEL_SET_INPUT: StaticSchema = (
         (lambda: schemas.STRING, 9),
         (lambda: schemas.NAME, {_sN: _n}),
         (lambda: schemas.LOCATION, {_sN: _loc}),
-        (lambda: schemas.BOOLEAN, {_sN: _act}),
+        (lambda: schemas.BOOLEAN, {_sN: _acti}),
         (lambda: schemas.ACCOUNT_ID, {_sN: _eBO}),
     ),
 )
@@ -1570,7 +1570,7 @@ UPDATE_TRUSTED_ENTITY_SET_INPUT: StaticSchema = (
         (lambda: schemas.NAME, {_sN: _n}),
         (lambda: schemas.LOCATION, {_sN: _loc}),
         (lambda: schemas.EXPECTED_BUCKET_OWNER, {_sN: _eBO}),
-        (lambda: schemas.BOOLEAN, {_sN: _act}),
+        (lambda: schemas.BOOLEAN, {_sN: _acti}),
     ),
 )
 
