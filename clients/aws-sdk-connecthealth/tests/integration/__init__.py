@@ -6,7 +6,6 @@ from pathlib import Path
 from aws_sdk_connecthealth.aio.client import AsyncConnectHealthClient
 from aws_sdk_connecthealth.aio.config import AsyncConnectHealthConfig
 from smithy_aws_core.aio.config import AsyncAwsConfigOverrides
-from smithy_aws_core.aio.identity import AsyncEnvironmentCredentialsResolver
 from smithy_http.aio.interfaces import AsyncHTTPClient
 
 REGION = "us-east-1"
@@ -22,7 +21,6 @@ async def create_connecthealth_client(
     overrides: AsyncAwsConfigOverrides = {
         "endpoint_uri": f"https://health-agent.{region}.api.aws",
         "region": region,
-        "aws_credentials_identity_resolver": AsyncEnvironmentCredentialsResolver(),
     }
     if transport is not None:
         overrides["transport"] = transport

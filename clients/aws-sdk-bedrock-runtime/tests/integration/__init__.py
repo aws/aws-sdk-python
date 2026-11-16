@@ -7,7 +7,6 @@ from pathlib import Path
 from aws_sdk_bedrock_runtime.aio.client import AsyncBedrockRuntimeClient
 from aws_sdk_bedrock_runtime.aio.config import AsyncBedrockRuntimeConfig
 from smithy_aws_core.aio.config import AsyncAwsConfigOverrides
-from smithy_aws_core.aio.identity import AsyncEnvironmentCredentialsResolver
 from smithy_http.aio.interfaces import AsyncHTTPClient
 
 MODEL_ID = "global.amazon.nova-2-lite-v1:0"
@@ -23,7 +22,6 @@ async def create_bedrock_client(
     overrides: AsyncAwsConfigOverrides = {
         "endpoint_uri": f"https://bedrock-runtime.{region}.amazonaws.com",
         "region": region,
-        "aws_credentials_identity_resolver": AsyncEnvironmentCredentialsResolver(),
     }
     if transport is not None:
         overrides["transport"] = transport

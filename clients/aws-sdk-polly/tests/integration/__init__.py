@@ -4,7 +4,6 @@
 from aws_sdk_polly.aio.client import AsyncPollyClient
 from aws_sdk_polly.aio.config import AsyncPollyConfig
 from smithy_aws_core.aio.config import AsyncAwsConfigOverrides
-from smithy_aws_core.aio.identity import AsyncEnvironmentCredentialsResolver
 from smithy_http.aio.interfaces import AsyncHTTPClient
 
 REGION = "us-east-1"
@@ -22,7 +21,6 @@ async def create_polly_client(
     overrides: AsyncAwsConfigOverrides = {
         "endpoint_uri": f"https://polly.{region}.amazonaws.com",
         "region": region,
-        "aws_credentials_identity_resolver": AsyncEnvironmentCredentialsResolver(),
     }
     if transport is not None:
         overrides["transport"] = transport
