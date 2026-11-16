@@ -32,14 +32,8 @@ INTEGRATION_SKIP := clients/aws-sdk-qbusiness
 
 static-analysis:
 	$(MAKE) meta-package-check
-	@set -e; for p in $(PROJECTS); do \
-		dirs=$$(ls -d $$p/src $$p/tests 2>/dev/null || true); \
-		group=$$(grep -q '^test = \[' $$p/pyproject.toml && echo --group test || true); \
-		echo "== $$p"; \
-		uvx ruff@$(RUFF_VERSION) check --config $$p/pyproject.toml $$dirs; \
-		uvx ruff@$(RUFF_VERSION) format --check --config $$p/pyproject.toml $$dirs; \
-		$(UV_RUN) $$p $$group --with pyright==$(PYRIGHT_VERSION) pyright -p $$p $$dirs; \
-	done
+	uv run --no-project --python $(PYTHON_VERSION) python scripts/project-checks/project_checks.py \
+		$(RUFF_VERSION) $(PYRIGHT_VERSION) $(PYTHON_VERSION) $(PROJECTS)
 	$(MAKE) aio-check
 	$(MAKE) check-imports
 	$(MAKE) check-conventions

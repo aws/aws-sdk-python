@@ -14,29 +14,34 @@ import ast
 
 from _common import (
     Finding,
+    Module,
     analyzed_modules,
     import_call_aliases,
     is_import_call,
     main,
+    module_findings,
 )
 
 
 def check() -> list[Finding]:
+    return module_findings(_module_findings, analyzed_modules())
+
+
+def _module_findings(module: Module) -> list[Finding]:
     findings: list[Finding] = []
-    for module in analyzed_modules():
-        aliases = import_call_aliases(module.tree)
-        for node in ast.walk(module.tree):
-            if not isinstance(node, ast.Call) or not is_import_call(node.func, aliases):
-                continue
-            first = node.args[0] if node.args else None
-            if not (isinstance(first, ast.Constant) and isinstance(first.value, str)):
-                findings.append(
-                    Finding(
-                        f"dynamic import with non-literal target: {ast.unparse(node)[:120]}",
-                        module.path,
-                        node.lineno,
-                    )
+    aliases = import_call_aliases(module.tree)
+    for node in ast.walk(module.tree):
+        if not isinstance(node, ast.Call) or not is_import_call(node.func, aliases):
+            continue
+        first = node.args[0] if node.args else None
+        if not (isinstance(first, ast.Constant) and isinstance(first.value, str)):
+            findings.append(
+                Finding(
+                    f"dynamic import with non-literal target: {ast.unparse(node)[:120]}",
+                    module.path,
+                    node.lineno,
                 )
+            )
     return findings
 
 

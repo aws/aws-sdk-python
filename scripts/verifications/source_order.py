@@ -18,25 +18,23 @@ public one's place in the order.
 import ast
 from pathlib import Path
 
-from _common import Finding, analyzed_modules, main
+from _common import Finding, Module, analyzed_modules, main, module_findings
 
 type _Def = ast.FunctionDef | ast.AsyncFunctionDef | ast.ClassDef
 
 
 def check() -> list[Finding]:
-    findings: list[Finding] = []
-    for module in analyzed_modules():
-        lazy = _lazy_annotations(module.tree)
-        findings.extend(
-            _order(module.path, module.tree.body, scope="module", lazy=lazy)
-        )
-        for node in ast.walk(module.tree):
-            if isinstance(node, ast.ClassDef):
-                findings.extend(
-                    _order(
-                        module.path, node.body, scope=f"class {node.name}", lazy=lazy
-                    )
-                )
+    return module_findings(_module_findings, analyzed_modules())
+
+
+def _module_findings(module: Module) -> list[Finding]:
+    lazy = _lazy_annotations(module.tree)
+    findings = _order(module.path, module.tree.body, scope="module", lazy=lazy)
+    for node in ast.walk(module.tree):
+        if isinstance(node, ast.ClassDef):
+            findings.extend(
+                _order(module.path, node.body, scope=f"class {node.name}", lazy=lazy)
+            )
     return findings
 
 
