@@ -1,0 +1,4 @@
+{
+  "type": "feature",
+  "description": "Resolve endpoints from the service's endpoint rules instead of the standard regional endpoint pattern. The default endpoint changes, such as to `us-east-1.signin.aws.amazon.com`, and OAuth operations use `us-east-1.oauth.signin.aws`. Add the `use_fips_endpoint` and `use_dualstack_endpoint` configuration options to select FIPS and dual-stack endpoints, also read from the `AWS_USE_FIPS_ENDPOINT` and `AWS_USE_DUALSTACK_ENDPOINT` environment variables and the `use_fips_endpoint` and `use_dualstack_endpoint` profile keys."
+}

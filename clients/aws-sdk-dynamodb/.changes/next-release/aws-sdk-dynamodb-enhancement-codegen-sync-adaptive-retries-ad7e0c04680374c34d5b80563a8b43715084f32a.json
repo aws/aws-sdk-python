@@ -1,0 +1,4 @@
+{
+  "type": "enhancement",
+  "description": "Apply DynamoDB's retry defaults in the `adaptive` retry mode as well as the `standard` retry mode."
+}
