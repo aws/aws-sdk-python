@@ -5,8 +5,8 @@
 The `aws-sdk-kms` package provides a client for making
 requests to AWS Key Management Service.
 
-> **Note:** This SDK is experimental and in early development. Breaking changes
-> may occur prior to the release of version 1.0.0.
+> **Note:** This SDK is in Developer Preview. Breaking changes may occur prior
+> to the release of version 1.0.0.
 
 ## Installation
 

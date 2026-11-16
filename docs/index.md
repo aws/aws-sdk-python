@@ -3,12 +3,12 @@
 The AWS SDK for Python v4 provides asynchronous clients for supported AWS services.
 Each service has its own package.
 
-!!! warning "Experimental: Not for production use"
+!!! warning "Developer Preview"
 
-    Use this SDK for evaluation and pre-production testing. Interfaces and
-    behavior may change before general availability. Use
+    The AWS SDK for Python v4 is intended for evaluation and testing only. Do
+    not use it for production workloads; use
     [Boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html)
-    for production workloads.
+    instead.
 
 [Browse clients](clients/index.md){ .md-button .md-button--primary }
 [View source](https://github.com/aws/aws-sdk-python){ .md-button }
@@ -83,8 +83,7 @@ tables in `us-east-1`:
 ```python
 import asyncio
 
-from aws_sdk_dynamodb.aio.client import AsyncDynamoDBClient
-from aws_sdk_dynamodb.aio.config import AsyncDynamoDBConfig
+from aws_sdk_dynamodb import AsyncDynamoDBClient, AsyncDynamoDBConfig
 
 
 async def main():
