@@ -1,0 +1,4 @@
+{
+  "type": "enhancement",
+  "description": "Load models, schemas, and operations lazily on first use."
+}

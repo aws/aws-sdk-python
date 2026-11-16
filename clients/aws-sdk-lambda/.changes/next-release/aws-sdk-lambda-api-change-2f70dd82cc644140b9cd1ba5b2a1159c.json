@@ -1,0 +1,4 @@
+{
+  "type": "api-change",
+  "description": "AWS Lambda now supports an optional X-Ray trace header for chained invocations in durable executions, enabling child invocations to be linked to the initiating span."
+}

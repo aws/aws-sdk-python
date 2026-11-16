@@ -1,0 +1,4 @@
+{
+  "type": "breaking",
+  "description": "Codegen sync for [smithy-python b8ecead...d185e3b](https://github.com/smithy-lang/smithy-python/compare/b8eceadb0573bd0c757def9a2b26fe7bf938b239...d185e3b5b5ef2e24661a6256be721101631bdcb2): Add the synchronous `BedrockAgentCoreClient` and `BedrockAgentCoreConfig` in `aws_sdk_bedrock_agentcore.client` and `aws_sdk_bedrock_agentcore.config`. The async `AsyncBedrockAgentCoreClient` and `AsyncBedrockAgentCoreConfig` moved to `aws_sdk_bedrock_agentcore.aio.client` and `aws_sdk_bedrock_agentcore.aio.config`; update async imports to the `aio` paths. All four are also exported from `aws_sdk_bedrock_agentcore`. Event stream operations are only available on the async client."
+}

@@ -1,0 +1,4 @@
+{
+  "type": "api-change",
+  "description": "Amazon Polly now supports tagging lexicons. Use the new TagResource, UntagResource and ListTagsForResource APIs, or add tags when creating a lexicon with PutLexicon, to organize lexicons and control access with tag-based (ABAC) IAM policies."
+}

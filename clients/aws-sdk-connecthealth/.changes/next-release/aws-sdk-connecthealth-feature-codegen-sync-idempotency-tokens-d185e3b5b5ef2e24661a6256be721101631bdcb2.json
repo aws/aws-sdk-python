@@ -1,0 +1,4 @@
+{
+  "type": "feature",
+  "description": "Generate an operation's idempotency token when it is omitted or `None`. It is generated once per call, so every retry sends the same token, and a token passed by the caller is sent unchanged."
+}
