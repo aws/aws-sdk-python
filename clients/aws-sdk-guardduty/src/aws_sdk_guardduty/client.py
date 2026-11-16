@@ -90,6 +90,7 @@ if TYPE_CHECKING:
         ListFiltersOutput,
         ListFindingsOutput,
         ListIPSetsOutput,
+        ListInvestigationRecordsOutput,
         ListInvestigationsOutput,
         ListInvitationsOutput,
         ListMalwareProtectionPlansOutput,
@@ -160,7 +161,7 @@ class GuardDutyClient(Client[GuardDutyConfig]):
     .
     """
 
-    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
+    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
 
     @_overload
     def accept_administrator_invitation(
@@ -2380,6 +2381,12 @@ class GuardDutyClient(Client[GuardDutyConfig]):
 
         Retrieves the results and status of a specific GuardDuty investigation.
 
+        GuardDuty returns the results, including the summary and the scope of
+        the investigation, only when the investigation status is `COMPLETED`. By
+        default, GuardDuty returns the summary as text in `Summary`. To return a
+        typed summary in `SummaryData` instead, set `SummaryFormat` to
+        `STRUCTURED`.
+
         An administrator account can retrieve any investigation within the
         organization. Member accounts can only retrieve investigations that
         belong to them.
@@ -3416,6 +3423,60 @@ class GuardDutyClient(Client[GuardDutyConfig]):
         )
 
     @_overload
+    def list_investigation_records(
+        self,
+        request: _models.ListInvestigationRecordsInput
+        | _models.ListInvestigationRecordsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListInvestigationRecordsOutput: ...
+
+    @_overload
+    def list_investigation_records(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListInvestigationRecordsInputDict],
+    ) -> ListInvestigationRecordsOutput:
+        """
+        This API is currently available as a preview. This feature is available
+        in the following Amazon Web Services Regions: US East (N. Virginia), US
+        East (Ohio), US West (Oregon), Canada (Central), Europe (Frankfurt),
+        Europe (Ireland), Europe (London), Europe (Paris), Europe (Stockholm),
+        and Asia Pacific (Tokyo).
+
+        Returns the records for a specific GuardDuty investigation. Each record
+        is one step in the reasoning that GuardDuty followed to reach the
+        results of the investigation.
+
+        An administrator account can list the records of any investigation
+        within the organization. Member accounts can only list the records of
+        investigations that belong to them.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `ListInvestigationRecordsOutput`.
+        """
+
+    def list_investigation_records(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListInvestigationRecordsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_INVESTIGATION_RECORDS, args, kwargs),
+            _models.LIST_INVESTIGATION_RECORDS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_investigations(
         self,
         request: _models.ListInvestigationsInput | _models.ListInvestigationsInputDict,
@@ -3440,7 +3501,9 @@ class GuardDutyClient(Client[GuardDutyConfig]):
         and Asia Pacific (Tokyo).
 
         Returns a list of investigations associated with the specified GuardDuty
-        detector.
+        detector. You can filter the investigations by status, risk level,
+        confidence, finding ID, and investigation type, and sort them by start
+        time, end time, status, risk level, or confidence.
 
         An administrator account sees all investigations across the
         organization. Member accounts see only the investigations that belong to

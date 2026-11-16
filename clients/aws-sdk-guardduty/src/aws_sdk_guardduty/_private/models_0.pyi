@@ -10,14 +10,24 @@ from smithy_core.response import ResponseMetadata
 from smithy_core.types import UnknownEnumMixin
 
 from ..models import (
+    FindingTypeClassification,
+    FindingTypeCount,
+    FindingTypeDocumentation,
+    FindingsSummary,
+    FlowLogsConfigurationResult,
+    FreeTrialFeatureConfigurationResult,
     IamInstanceProfile,
-    Investigation,
+    InvestigationAccountAnalysis,
+    InvestigationDetectorFeatureConfiguration,
+    InvestigationIndicator,
+    InvestigationThreatAssessment,
     KubernetesApiCallAction,
     KubernetesConfiguration,
     KubernetesConfigurationDict,
     KubernetesConfigurationResult,
     KubernetesDataSourceFreeTrial,
     KubernetesPermissionCheckedDetails,
+    KubernetesPolicyViolation,
     KubernetesRoleBindingDetails,
     KubernetesRoleDetails,
     MalwareProtectionConfiguration,
@@ -26,20 +36,22 @@ from ..models import (
     MalwareProtectionDataSourceFreeTrial,
     MalwareProtectionPlanActions,
     MalwareProtectionPlanActionsDict,
-    MalwareProtectionPlanStatusReason,
+    MemberAccountRanking,
     NetworkConnectionAction,
     Observations,
     OrganizationDataSourceConfigurationsResult,
     OrganizationFeatureConfigurationResult,
     PortProbeAction,
     PrivateIpAddressDetails,
+    Process,
     ProductCode,
+    ProtectionPlan,
     RdsLoginAttemptAction,
     RemoteAccountDetails,
     RemoteIpDetails,
     Resource,
-    ResourceStatistics,
-    RuleDetail,
+    ResourceDistribution,
+    S3Analysis,
     S3LogsConfiguration,
     S3LogsConfigurationDict,
     S3LogsConfigurationResult,
@@ -51,11 +63,16 @@ from ..models import (
     Service,
     ServiceError,
     Session,
-    SeverityStatistics,
+    SeverityBreakdown,
+    SharedBehavior,
+    SharedResource,
     SortCriteria,
     SortCriteriaDict,
+    TacticCoverage,
     Tag,
     ThreatIntelligenceDetail,
+    ThreatReference,
+    TypeDistribution,
     UnprocessedAccount,
     UnprocessedDataSourcesResult,
     User,
@@ -241,6 +258,36 @@ class Account(_SerdeShape):
     """Name of the member's Amazon Web Services account."""
 
 @dataclass(kw_only=True)
+class AccountAffectedResource(_SerdeShape):
+    """Contains the number of findings associated with a resource."""
+
+    identifier: str | None = ...
+    """The identifier of the resource."""
+    type: str | None = ...
+    """
+    The type of the resource. Possible values are `EC2_INSTANCE`,
+    `EBS_VOLUME`, `S3_BUCKET`, `IAM_ROLE`, `IAM_USER`, `IAM_ACCESS_KEY`,
+    `LAMBDA_FUNCTION`, `EKS_CLUSTER`, `ECS_CLUSTER`, `KUBERNETES_WORKLOAD`,
+    `RDS_INSTANCE`, `RDS_DB_USER`, and `EC2_SECURITY_GROUP`.
+    """
+    finding_count: int | None = ...
+    """The number of findings associated with the resource."""
+
+@dataclass(kw_only=True)
+class AccountAnalysis(_SerdeShape):
+    """Contains an analysis of the findings in an Amazon Web Services account."""
+
+    findings_summary: FindingsSummary | None = ...
+    """A summary of the findings in the account."""
+    tactic_coverage: list[TacticCoverage] | None = ...
+    """
+    The findings in the account, mapped to MITRE ATT&CK tactics and
+    techniques.
+    """
+    affected_resources: list[AccountAffectedResource] | None = ...
+    """The resources in the account that are associated with findings."""
+
+@dataclass(kw_only=True)
 class AccountDetail(_SerdeShape):
     """Contains information about the account."""
 
@@ -333,6 +380,32 @@ class AccountLevelPermissions(_SerdeShape):
     """
 
 @dataclass(kw_only=True)
+class AccountOverview(_SerdeShape):
+    """
+    Contains overview information about an account, including its findings
+    and, for an organization, its member accounts.
+    """
+
+    account_id: str | None = ...
+    """The Amazon Web Services account ID."""
+    account_status: str | None = ...
+    """The status of the account."""
+    detector_id: str | None = ...
+    """The ID of the detector of the account."""
+    region: str | None = ...
+    """The Amazon Web Services Region of the detector."""
+    delegated_admin_account_id: str | None = ...
+    """The account ID of the GuardDuty delegated administrator account."""
+    total_member_accounts: int | None = ...
+    """The total number of member accounts."""
+    total_findings: int | None = ...
+    """The total number of findings."""
+    affected_account_count: int | None = ...
+    """The number of accounts that have findings."""
+    account_rankings: list[MemberAccountRanking] | None = ...
+    """A ranking of member accounts."""
+
+@dataclass(kw_only=True)
 class AccountStatistics(_SerdeShape):
     """
     Represents a list of map of accounts with the number of findings
@@ -345,6 +418,15 @@ class AccountStatistics(_SerdeShape):
     """The timestamp at which the finding for this account was last generated."""
     total_findings: int | None = ...
     """The total number of findings associated with an account."""
+
+@dataclass(kw_only=True)
+class AccountSummary(_SerdeShape):
+    """Contains the number of findings in an Amazon Web Services account."""
+
+    account_id: str | None = ...
+    """The ID of the Amazon Web Services account."""
+    finding_count: int | None = ...
+    """The number of findings in the account."""
 
 @dataclass(kw_only=True)
 class Action(_SerdeShape):
@@ -385,6 +467,11 @@ class Action(_SerdeShape):
     rds_login_attempt_action: RdsLoginAttemptAction | None = ...
     """Information about `RDS_LOGIN_ATTEMPT` action described in this finding."""
 
+class ActionPriority(UnknownEnumMixin, StrEnum):
+    IMMEDIATE = "IMMEDIATE"
+    SHORT_TERM = "SHORT_TERM"
+    STRATEGIC = "STRATEGIC"
+
 @dataclass(kw_only=True)
 class Activity(_SerdeShape):
     """
@@ -405,6 +492,15 @@ class ActivityType(UnknownEnumMixin, StrEnum):
 
     API_CALL = "API_CALL"
     """The observed activity is an API call."""
+
+@dataclass(kw_only=True)
+class ActivityWindow(_SerdeShape):
+    """Contains the time range during which activity was observed."""
+
+    first_seen_at: datetime | None = ...
+    """The timestamp at which the activity was first observed."""
+    last_seen_at: datetime | None = ...
+    """The timestamp at which the activity was last observed."""
 
 @dataclass(kw_only=True)
 class Actor(_SerdeShape):
@@ -502,11 +598,89 @@ class AdminStatus(UnknownEnumMixin, StrEnum):
     DISABLE_IN_PROGRESS = "DISABLE_IN_PROGRESS"
 
 @dataclass(kw_only=True)
+class AffectedResource(_SerdeShape):
+    """Contains information about a resource that an action applies to."""
+
+    identifier: str | None = ...
+    """The identifier of the resource."""
+    type: str | None = ...
+    """
+    The type of the resource. Possible values are `EC2_INSTANCE`,
+    `EBS_VOLUME`, `S3_BUCKET`, `IAM_ROLE`, `IAM_USER`, `IAM_ACCESS_KEY`,
+    `LAMBDA_FUNCTION`, `EKS_CLUSTER`, `ECS_CLUSTER`, `KUBERNETES_WORKLOAD`,
+    `RDS_INSTANCE`, `RDS_DB_USER`, and `EC2_SECURITY_GROUP`.
+    """
+    arn: str | None = ...
+    """The Amazon Resource Name (ARN) of the resource."""
+
+@dataclass(kw_only=True)
 class AgentDetails(_SerdeShape):
     """Information about the installed GuardDuty security agent."""
 
     version: str | None = ...
     """Version of the installed GuardDuty security agent."""
+
+@dataclass(kw_only=True)
+class AnalysisRecord(_SerdeShape):
+    """
+    Contains an assessment that GuardDuty derived from the data during an
+    investigation, such as a threat assessment, a comparison against normal
+    behavior, or a process lineage. The record contains at most one of the
+    payload members, the one that corresponds to `AnalysisType`.
+    `Indicators` can accompany any analysis type.
+    """
+
+    analysis_type: str | None = ...
+    """
+    The kind of analysis. The value identifies the payload member that can
+    be set: `REPUTATION`, `THREAT_ASSESSMENT`, and `RDS_THREAT_ASSESSMENT`
+    (`ThreatAssessment`); `KUBERNETES_POLICY_VIOLATION`
+    (`KubernetesPolicyViolation`); `S3_EXPOSURE`, `S3_ACTOR_CONTEXT`, and
+    `S3_PEN_TEST` (`S3Analysis`); `PROCESS_LINEAGE` (`Processes`); and
+    `TREND` and `BASELINE` (`AccountAnalysis`).
+    """
+    threat_assessment: InvestigationThreatAssessment | None = ...
+    """
+    A threat assessment. Set when `AnalysisType` is `REPUTATION`,
+    `THREAT_ASSESSMENT`, or `RDS_THREAT_ASSESSMENT`.
+    """
+    kubernetes_policy_violation: KubernetesPolicyViolation | None = ...
+    """
+    An assessment of a Kubernetes policy violation. Set when `AnalysisType`
+    is `KUBERNETES_POLICY_VIOLATION`.
+    """
+    s3_analysis: S3Analysis | None = ...
+    """
+    An analysis of Amazon S3 activity or exposure. Set when `AnalysisType`
+    is `S3_EXPOSURE`, `S3_ACTOR_CONTEXT`, or `S3_PEN_TEST`.
+    """
+    processes: list[Process] | None = ...
+    """
+    The processes in a process lineage. Set when `AnalysisType` is
+    `PROCESS_LINEAGE`.
+    """
+    account_analysis: InvestigationAccountAnalysis | None = ...
+    """
+    An analysis of the findings in an account over time. Set when
+    `AnalysisType` is `TREND` or `BASELINE`.
+    """
+    indicators: list[InvestigationIndicator] | None = ...
+    """
+    The threat indicators associated with the analysis, such as an IP
+    address, a domain, or a file hash.
+    """
+
+class AnalysisType(UnknownEnumMixin, StrEnum):
+    REPUTATION = "REPUTATION"
+    THREAT_ASSESSMENT = "THREAT_ASSESSMENT"
+    RDS_THREAT_ASSESSMENT = "RDS_THREAT_ASSESSMENT"
+    KUBERNETES_POLICY_VIOLATION = "KUBERNETES_POLICY_VIOLATION"
+    S3_EXPOSURE = "S3_EXPOSURE"
+    S3_ACTOR_CONTEXT = "S3_ACTOR_CONTEXT"
+    S3_PEN_TEST = "S3_PEN_TEST"
+    PROCESS_LINEAGE = "PROCESS_LINEAGE"
+    TREND = "TREND"
+    BASELINE = "BASELINE"
 
 @dataclass(kw_only=True)
 class Anomaly(_SerdeShape):
@@ -556,6 +730,19 @@ class ApiCall(_SerdeShape):
     """The error code that was returned, if the API call failed."""
     user_agent: str | None = ...
     """User agent in the request to the API operation"""
+
+@dataclass(kw_only=True)
+class ArchiveDistribution(_SerdeShape):
+    """Contains the number and percentage of archived and unarchived findings."""
+
+    archived_count: int | None = ...
+    """The number of archived findings."""
+    unarchived_count: int | None = ...
+    """The number of unarchived findings."""
+    archived_percentage: float | None = ...
+    """The percentage of findings that are archived, from 0 to 100."""
+    unarchived_percentage: float | None = ...
+    """The percentage of findings that are unarchived, from 0 to 100."""
 
 @dataclass(kw_only=True)
 class ArchiveFindingsInput(_SerdeShape):
@@ -649,6 +836,61 @@ class AssociationSummary(_SerdeShape):
     expires_at: datetime | None = ...
     """The timestamp when the association expires."""
 
+@dataclass(kw_only=True)
+class Attack(_SerdeShape):
+    """
+    Contains a MITRE ATT&CK tactic and technique observed during an attack,
+    with the findings that are associated with them.
+    """
+
+    tactic: ThreatReference | None = ...
+    """The MITRE ATT&CK tactic."""
+    technique: ThreatReference | None = ...
+    """The MITRE ATT&CK technique."""
+    findings: list[FindingReference] | None = ...
+    """The findings associated with the tactic and technique."""
+    version: str | None = ...
+    """
+    The version of the attack framework that the tactic and technique
+    classification uses.
+    """
+
+@dataclass(kw_only=True)
+class AttackPhase(_SerdeShape):
+    """Contains information about one phase of an attack."""
+
+    phase: str | None = ...
+    """
+    The MITRE ATT&CK tactic of the phase. Possible values are
+    `Reconnaissance`, `Resource Development`, `Initial Access`, `Execution`,
+    `Persistence`, `Privilege Escalation`, `Defense Evasion`,
+    `Credential Access`, `Discovery`, `Lateral Movement`, `Collection`,
+    `Command and Control`, `Exfiltration`, and `Impact`.
+    """
+    description: str | None = ...
+    """A description of the activity in this phase."""
+    attacks: list[Attack] | None = ...
+    """
+    The MITRE ATT&CK tactics and techniques observed in this phase, with the
+    findings that are associated with them.
+    """
+
+class AttackPhaseName(UnknownEnumMixin, StrEnum):
+    RECONNAISSANCE = "Reconnaissance"
+    RESOURCE_DEVELOPMENT = "Resource Development"
+    INITIAL_ACCESS = "Initial Access"
+    EXECUTION = "Execution"
+    PERSISTENCE = "Persistence"
+    PRIVILEGE_ESCALATION = "Privilege Escalation"
+    DEFENSE_EVASION = "Defense Evasion"
+    CREDENTIAL_ACCESS = "Credential Access"
+    DISCOVERY = "Discovery"
+    LATERAL_MOVEMENT = "Lateral Movement"
+    COLLECTION = "Collection"
+    COMMAND_AND_CONTROL = "Command and Control"
+    EXFILTRATION = "Exfiltration"
+    IMPACT = "Impact"
+
 class AutoEnableMembers(UnknownEnumMixin, StrEnum):
     NEW = "NEW"
     ALL = "ALL"
@@ -725,6 +967,20 @@ class BadRequestException(ServiceError, _SerdeShape):
     to investigate a call. Members of the metadata are individually
     optional.
     """
+
+@dataclass(kw_only=True)
+class Baseline(_SerdeShape):
+    """
+    Contains a comparison of findings against the normal behavior of an
+    account.
+    """
+
+    total_findings: int | None = ...
+    """The total number of findings."""
+    baseline_findings: list[FindingTypeClassification] | None = ...
+    """The finding types that are consistent with normal behavior."""
+    anomalous_findings: list[FindingTypeClassification] | None = ...
+    """The finding types that deviate from normal behavior."""
 
 @dataclass(kw_only=True)
 class BedrockGuardrail(_SerdeShape):
@@ -1223,6 +1479,95 @@ class ContinuousScanDetailsDict(TypedDict, total=False):
     """
     end_time: Required[datetime]
     """The timestamp representing the end of the time range to scan."""
+
+@dataclass(kw_only=True)
+class CorrelatedFinding(_SerdeShape):
+    """
+    Contains information about a group of correlated findings that have the
+    same finding type.
+    """
+
+    finding_type: str | None = ...
+    """The finding type of the group."""
+    count: int | None = ...
+    """
+    The number of correlated findings of this type. This value can be
+    greater than the number of IDs in `FindingIds`.
+    """
+    severity_max: float | None = ...
+    """
+    The highest severity score among the findings in the group, from 0 to
+    10.
+    """
+    correlation_reasons: list[str] | None = ...
+    """
+    The reasons why GuardDuty correlated the findings. Possible values are
+    `HIGH_SEVERITY`, `SAME_RESOURCE`, and `SAME_BEHAVIOR`. A value can
+    appear more than once.
+    """
+    finding_ids: list[str] | None = ...
+    """A sample of the IDs of the findings in the group."""
+    shared_resources: list[SharedResource] | None = ...
+    """
+    The resources that the findings in the group share with the investigated
+    activity.
+    """
+    shared_behaviors: list[SharedBehavior] | None = ...
+    """
+    The behaviors that the findings in the group share with the investigated
+    activity.
+    """
+
+class CorrelationReason(UnknownEnumMixin, StrEnum):
+    HIGH_SEVERITY = "HIGH_SEVERITY"
+    SAME_RESOURCE = "SAME_RESOURCE"
+    SAME_BEHAVIOR = "SAME_BEHAVIOR"
+
+@dataclass(kw_only=True)
+class Countermeasure(_SerdeShape):
+    """Contains the actions that you can take for one defensive tactic."""
+
+    defense_tactic: str | None = ...
+    """
+    The defensive tactic. Possible values are `Isolate`, `Evict`, `Restore`,
+    `Harden`, and `Detect`.
+    """
+    actions: list[CountermeasureAction] | None = ...
+    """The actions for the defensive tactic."""
+    description: str | None = ...
+    """A description of the countermeasure."""
+
+@dataclass(kw_only=True)
+class CountermeasureAction(_SerdeShape):
+    """Contains an action that you can take to respond to a threat."""
+
+    title: str | None = ...
+    """A short title for the action."""
+    description: str | None = ...
+    """A description of the action."""
+    priority: str | None = ...
+    """
+    The priority of the action. Possible values are `IMMEDIATE`,
+    `SHORT_TERM`, and `STRATEGIC`.
+    """
+    defense_technique: str | None = ...
+    """The defensive technique that the action applies."""
+    mitigates: list[str] | None = ...
+    """
+    The MITRE ATT&CK technique IDs that the action mitigates, such as
+    `T1059.004`.
+    """
+    cli_commands: list[str] | None = ...
+    """CLI commands that you can run to carry out the action."""
+    disposition_id: int | None = ...
+    """The numeric identifier of the action's disposition."""
+    disposition: str | None = ...
+    """
+    The outcome of the action. Possible values are `Isolated`, `Blocked`,
+    `Deleted`, `Access Revoked`, and `Logged`.
+    """
+    affected_resources: list[AffectedResource] | None = ...
+    """The resources that the action applies to."""
 
 @dataclass(kw_only=True)
 class Country(_SerdeShape):
@@ -5480,6 +5825,13 @@ class DefaultServerSideEncryption(_SerdeShape):
     if the bucket `EncryptionType` is `aws:kms`.
     """
 
+class DefenseTactic(UnknownEnumMixin, StrEnum):
+    ISOLATE = "Isolate"
+    EVICT = "Evict"
+    RESTORE = "Restore"
+    HARDEN = "Harden"
+    DETECT = "Detect"
+
 @dataclass(kw_only=True)
 class DeleteCustomDetectionRuleAssociationInput(_SerdeShape):
     """Dataclass for DeleteCustomDetectionRuleAssociationInput structure."""
@@ -6371,6 +6723,28 @@ class Detection(_SerdeShape):
     sequence: _aws_sdk_guardduty_models_Sequence | None = ...
     """The details about the attack sequence."""
 
+@dataclass(kw_only=True)
+class DetectionCoverage(_SerdeShape):
+    """
+    Contains information about your detection coverage, such as the status
+    of protection plans and foundational data sources.
+    """
+
+    protection_plans: list[ProtectionPlan] | None = ...
+    """The protection plans and their status."""
+    foundational_data_sources: list[str] | None = ...
+    """
+    The foundational data sources, such as `CLOUD_TRAIL`, `DNS_LOGS`, and
+    `FLOW_LOGS`.
+    """
+    coverage_gaps: str | None = ...
+    """
+    A description of the gaps in detection coverage. A record doesn't
+    include both `CoverageGaps` and `KeyObservation`.
+    """
+    key_observation: str | None = ...
+    """A key observation about detection coverage."""
+
 class DetectionRuleConfigurationStatus(UnknownEnumMixin, StrEnum):
     ACTIVE = "ACTIVE"
     PROCESSING = "PROCESSING"
@@ -6816,6 +7190,60 @@ class DisassociateMembersOutput(_SerdeShape):
     optional.
     """
 
+class Disposition(UnknownEnumMixin, StrEnum):
+    ISOLATED = "Isolated"
+    BLOCKED = "Blocked"
+    DELETED = "Deleted"
+    ACCESS_REVOKED = "Access Revoked"
+    LOGGED = "Logged"
+
+@dataclass(kw_only=True)
+class Distribution(_SerdeShape):
+    """
+    Contains a breakdown of findings along a dimension, such as severity or
+    finding type.
+    """
+
+    dimension: str | None = ...
+    """
+    The dimension of the breakdown. The value identifies the breakdown that
+    the record describes: `SEVERITY` (`SeverityBreakdown`), `TYPE`
+    (`FindingTypes` or `TopFindingTypes`), `RESOURCE` (`Resources`),
+    `ATTACK_VECTOR` (`AttackVectors`), and `ARCHIVE` (`Archive`).
+    """
+    total_findings: int | None = ...
+    """The total number of findings in the breakdown."""
+    severity_breakdown: SeverityBreakdown | None = ...
+    """The number of findings at each severity level."""
+    finding_types: list[TypeDistribution] | None = ...
+    """The findings broken down by finding type, with counts and percentages."""
+    top_finding_types: list[FindingTypeCount] | None = ...
+    """The finding types that have the most findings, with counts."""
+    resources: list[ResourceDistribution] | None = ...
+    """The findings broken down by affected resource."""
+    attack_vectors: list[TacticCoverage] | None = ...
+    """The findings broken down by MITRE ATT&CK tactic."""
+    archive: ArchiveDistribution | None = ...
+    """The number and percentage of archived and unarchived findings."""
+
+class DistributionDimension(UnknownEnumMixin, StrEnum):
+    SEVERITY = "SEVERITY"
+    TYPE = "TYPE"
+    RESOURCE = "RESOURCE"
+    ATTACK_VECTOR = "ATTACK_VECTOR"
+    ARCHIVE = "ARCHIVE"
+
+@dataclass(kw_only=True)
+class DnsContext(_SerdeShape):
+    """Contains DNS details about network activity."""
+
+    domain_suffix: str | None = ...
+    """The suffix of the domain that was queried."""
+    other_domains: str | None = ...
+    """Other domains that were queried."""
+    resolver_history: str | None = ...
+    """The DNS resolution history for the domain."""
+
 @dataclass(kw_only=True)
 class DNSLogsConfigurationResult(_SerdeShape):
     """Contains information on the status of DNS logs as a data source."""
@@ -7207,6 +7635,25 @@ class EnableOrganizationAdminAccountOutput(_SerdeShape):
     """
 
 @dataclass(kw_only=True)
+class Enrichment(_SerdeShape):
+    """
+    Contains additional context about activity, such as geolocation and
+    threat intelligence information. Not every member is set.
+    """
+
+    country_name: str | None = ...
+    """The name of the country associated with the activity."""
+    asn_org: str | None = ...
+    """
+    The name of the organization that owns the autonomous system number
+    (ASN).
+    """
+    threat_list_name: str | None = ...
+    """The name of the threat list that contains the indicator."""
+    threat_name: str | None = ...
+    """The name of the threat."""
+
+@dataclass(kw_only=True)
 class Evidence(_SerdeShape):
     """Contains information about the reason that the finding was generated."""
 
@@ -7258,6 +7705,160 @@ class FeatureStatus(UnknownEnumMixin, StrEnum):
 class Feedback(UnknownEnumMixin, StrEnum):
     USEFUL = "USEFUL"
     NOT_USEFUL = "NOT_USEFUL"
+
+@dataclass(kw_only=True)
+class FetchCriterion(_SerdeShape):
+    """
+    Contains a filter condition that GuardDuty applied when it retrieved
+    data.
+    """
+
+    field: str | None = ...
+    """The name of the field that the condition applies to."""
+    condition: str | None = ...
+    """
+    The comparison operator of the condition. Possible values are `EQUALS`,
+    `NOT_EQUALS`, `GREATER_THAN`, `GREATER_THAN_OR_EQUAL`, `LESS_THAN`, and
+    `LESS_THAN_OR_EQUAL`.
+    """
+    values: list[str] | None = ...
+    """
+    The values that the field is compared against. Numeric and Boolean
+    values are represented as strings.
+    """
+
+class FetchCriterionCondition(UnknownEnumMixin, StrEnum):
+    EQUALS = "EQUALS"
+    NOT_EQUALS = "NOT_EQUALS"
+    GREATER_THAN = "GREATER_THAN"
+    GREATER_THAN_OR_EQUAL = "GREATER_THAN_OR_EQUAL"
+    LESS_THAN = "LESS_THAN"
+    LESS_THAN_OR_EQUAL = "LESS_THAN_OR_EQUAL"
+
+@dataclass(kw_only=True)
+class FetchQuery(_SerdeShape):
+    """
+    Contains the parameters of a request that GuardDuty made to retrieve
+    data during an investigation. The members that are set depend on the
+    `FetchType` of the record.
+    """
+
+    criteria: list[FetchCriterion] | None = ...
+    """The filter criteria that GuardDuty applied to the request."""
+    time_window: FetchTimeWindow | None = ...
+    """The time range of the data that GuardDuty requested."""
+    row_limit: int | None = ...
+    """
+    The maximum number of rows that GuardDuty requested. Valid values are 1
+    to 1,000.
+    """
+    account_id: str | None = ...
+    """The Amazon Web Services account ID that the request was made for."""
+    indicator: str | None = ...
+    """
+    The threat indicator that GuardDuty looked up, such as an IP address, a
+    domain, or a file hash.
+    """
+    indicator_type: str | None = ...
+    """
+    The type of the threat indicator. Possible values are `IP`, `DOMAIN`,
+    and `FILE`.
+    """
+    finding_type: str | None = ...
+    """The finding type whose documentation GuardDuty retrieved."""
+    finding_id: str | None = ...
+    """The ID of the finding that GuardDuty retrieved."""
+
+@dataclass(kw_only=True)
+class FetchRecord(_SerdeShape):
+    """
+    Contains information about data that GuardDuty retrieved during an
+    investigation, including what GuardDuty requested and what it received.
+    """
+
+    fetch_type: str | None = ...
+    """
+    The kind of data that GuardDuty retrieved. The value determines which
+    members of `Query` and `Result` can be set. Possible values:
+
+    - `FINDINGS` -- GuardDuty findings.
+
+    - `DETECTOR` -- The configuration of a GuardDuty detector.
+
+    - `REPUTATION` -- Reputation information about a threat indicator, such
+      as an IP address, a domain, or a file hash.
+
+    - `FINDING_TYPE_DOCUMENTATION` -- The documentation for a finding type.
+
+    - `CLOUD_TRAIL_RAW_EVENTS` -- Amazon Web Services CloudTrail events.
+
+    - `RUNTIME_SIGNALS` -- Runtime signals.
+
+    - `MEMBER_ACCOUNTS` -- A list of member accounts.
+    """
+    query: FetchQuery | None = ...
+    """The request that GuardDuty made. Not every record includes a query."""
+    result: FetchResult | None = ...
+    """
+    The data that GuardDuty received in response to the request. Not every
+    record includes a result.
+    """
+
+@dataclass(kw_only=True)
+class FetchResult(_SerdeShape):
+    """
+    Contains the data that GuardDuty received in response to a request
+    during an investigation. The members that are set depend on the
+    `FetchType` of the record.
+    """
+
+    item_ids: list[str] | None = ...
+    """
+    The identifiers of the items that were returned, such as finding IDs,
+    event IDs, signal IDs, or account IDs, depending on `FetchType`. The
+    list contains at most 50 identifiers; `TotalCount` can be larger.
+    """
+    total_count: int | None = ...
+    """
+    The total number of items that were returned. This value can be greater
+    than the number of identifiers in `ItemIds`.
+    """
+    features: list[InvestigationDetectorFeatureConfiguration] | None = ...
+    """The configuration of the detector features that GuardDuty retrieved."""
+    verdict: str | None = ...
+    """
+    The reputation verdict for the threat indicator. Possible values are
+    `THREAT`, `BENIGN`, and `NEUTRAL`. If the lookup returned more than one
+    result, the verdict describes the first result.
+    """
+    documentation: FindingTypeDocumentation | None = ...
+    """The documentation for the finding type that GuardDuty retrieved."""
+
+@dataclass(kw_only=True)
+class FetchTimeWindow(_SerdeShape):
+    """
+    Contains the time range of the data that GuardDuty requested. The range
+    is defined by a start time and a duration.
+    """
+
+    started_at: datetime | None = ...
+    """The timestamp at which the time range starts."""
+    duration_in_minutes: int | None = ...
+    """The length of the time range, in minutes. Valid values are 1 to 120."""
+
+class FetchType(UnknownEnumMixin, StrEnum):
+    FINDINGS = "FINDINGS"
+    DETECTOR = "DETECTOR"
+    REPUTATION = "REPUTATION"
+    FINDING_TYPE_DOCUMENTATION = "FINDING_TYPE_DOCUMENTATION"
+    CLOUD_TRAIL_RAW_EVENTS = "CLOUD_TRAIL_RAW_EVENTS"
+    RUNTIME_SIGNALS = "RUNTIME_SIGNALS"
+    MEMBER_ACCOUNTS = "MEMBER_ACCOUNTS"
+
+class FetchVerdict(UnknownEnumMixin, StrEnum):
+    THREAT = "THREAT"
+    BENIGN = "BENIGN"
+    NEUTRAL = "NEUTRAL"
 
 class FilterAction(UnknownEnumMixin, StrEnum):
     NOOP = "NOOP"
@@ -7437,809 +8038,36 @@ class FindingCriteriaDict(TypedDict, total=False):
     and values when querying findings.
     """
 
+@dataclass(kw_only=True)
+class FindingDetail(_SerdeShape):
+    """Contains details about a GuardDuty finding."""
+
+    finding_id: str | None = ...
+    """The ID of the finding."""
+    finding_type: str | None = ...
+    """The type of the finding."""
+    severity: str | None = ...
+    """The severity of the finding."""
+    account_id: str | None = ...
+    """
+    The ID of the Amazon Web Services account in which the finding was
+    generated.
+    """
+    region: str | None = ...
+    """The Amazon Web Services Region in which the finding was generated."""
+    activity_window: ActivityWindow | None = ...
+    """The time range of the activity that the finding describes."""
+
 class FindingPublishingFrequency(UnknownEnumMixin, StrEnum):
     FIFTEEN_MINUTES = "FIFTEEN_MINUTES"
     ONE_HOUR = "ONE_HOUR"
     SIX_HOURS = "SIX_HOURS"
 
-class FindingResourceType(UnknownEnumMixin, StrEnum):
-    EC2_INSTANCE = "EC2_INSTANCE"
-    EC2_NETWORK_INTERFACE = "EC2_NETWORK_INTERFACE"
-    S3_BUCKET = "S3_BUCKET"
-    S3_OBJECT = "S3_OBJECT"
-    ACCESS_KEY = "ACCESS_KEY"
-    EKS_CLUSTER = "EKS_CLUSTER"
-    KUBERNETES_WORKLOAD = "KUBERNETES_WORKLOAD"
-    CONTAINER = "CONTAINER"
-    ECS_CLUSTER = "ECS_CLUSTER"
-    ECS_TASK = "ECS_TASK"
-    AUTOSCALING_AUTO_SCALING_GROUP = "AUTOSCALING_AUTO_SCALING_GROUP"
-    IAM_INSTANCE_PROFILE = "IAM_INSTANCE_PROFILE"
-    CLOUDFORMATION_STACK = "CLOUDFORMATION_STACK"
-    EC2_LAUNCH_TEMPLATE = "EC2_LAUNCH_TEMPLATE"
-    EC2_VPC = "EC2_VPC"
-    EC2_IMAGE = "EC2_IMAGE"
-    BEDROCK_CUSTOM_MODEL = "BEDROCK_CUSTOM_MODEL"
-    """An Amazon Bedrock custom model fine-tuned by the customer."""
-    BEDROCK_IMPORTED_MODEL = "BEDROCK_IMPORTED_MODEL"
-    """An Amazon Bedrock imported model brought in from an external source."""
-    BEDROCK_PROVISIONED_MODEL = "BEDROCK_PROVISIONED_MODEL"
-    """An Amazon Bedrock model with provisioned throughput."""
-    BEDROCK_CUSTOM_MODEL_DEPLOYMENT = "BEDROCK_CUSTOM_MODEL_DEPLOYMENT"
-    """A deployment of an Amazon Bedrock custom model."""
-    BEDROCK_INFERENCE_PROFILE = "BEDROCK_INFERENCE_PROFILE"
-    """
-    An Amazon Bedrock inference profile that routes model invocations across
-    Regions.
-    """
-    BEDROCK_APPLICATION_INFERENCE_PROFILE = "BEDROCK_APPLICATION_INFERENCE_PROFILE"
-    """
-    An application-scoped Amazon Bedrock inference profile used to track
-    invocation usage.
-    """
-    BEDROCK_PROMPT = "BEDROCK_PROMPT"
-    """A managed prompt stored in Amazon Bedrock Prompt Management."""
-    BEDROCK_PROMPT_ROUTER = "BEDROCK_PROMPT_ROUTER"
-    """An Amazon Bedrock prompt router that selects a model per request."""
-    BEDROCK_GUARDRAIL = "BEDROCK_GUARDRAIL"
-    """An Amazon Bedrock guardrail evaluated during a model invocation."""
-    SAGEMAKER_ENDPOINT = "SAGEMAKER_ENDPOINT"
-    """An Amazon SageMaker inference endpoint."""
-
 @dataclass(kw_only=True)
-class FindingStatistics(_SerdeShape):
-    """Contains information about finding statistics."""
-
-    count_by_severity: dict[str, int] | None = ...
-    """
-    Represents a list of map of severity to count statistics for a set of
-    findings.
-    """
-    grouped_by_account: list[AccountStatistics] | None = ...
-    """
-    Represents a list of map of accounts with a findings count associated
-    with each account.
-    """
-    grouped_by_date: list[DateStatistics] | None = ...
-    """
-    Represents a list of map of dates with a count of total findings
-    generated on each date per severity level.
-    """
-    grouped_by_finding_type: list[FindingTypeStatistics] | None = ...
-    """
-    Represents a list of map of finding types with a count of total findings
-    generated for each type.
-
-    Based on the `orderBy` parameter, this request returns either the most
-    occurring finding types or the least occurring finding types. If the
-    `orderBy` parameter is `ASC`, this will represent the least occurring
-    finding types in your account; otherwise, this will represent the most
-    occurring finding types. The default value of `orderBy` is `DESC`.
-    """
-    grouped_by_resource: list[ResourceStatistics] | None = ...
-    """
-    Represents a list of map of top resources with a count of total
-    findings.
-    """
-    grouped_by_severity: list[SeverityStatistics] | None = ...
-    """Represents a list of map of total findings for each severity level."""
-
-class FindingStatisticType(UnknownEnumMixin, StrEnum):
-    COUNT_BY_SEVERITY = "COUNT_BY_SEVERITY"
-
-@dataclass(kw_only=True)
-class FindingTypeStatistics(_SerdeShape):
-    """
-    Information about each finding type associated with the
-    `groupedByFindingType` statistics.
-    """
+class FindingReference(_SerdeShape):
+    """Contains a reference to a GuardDuty finding."""
 
     finding_type: str | None = ...
-    """Name of the finding type."""
-    last_generated_at: datetime | None = ...
-    """
-    The timestamp at which this finding type was last generated in your
-    environment.
-    """
-    total_findings: int | None = ...
-    """
-    The total number of findings associated with generated for each distinct
-    finding type.
-    """
-
-@dataclass(kw_only=True)
-class FlowLogsConfigurationResult(_SerdeShape):
-    """Contains information on the status of VPC flow logs as a data source."""
-
-    status: str | None = ...
-    """Denotes whether VPC flow logs is enabled as a data source."""
-
-@dataclass(kw_only=True)
-class FreeTrialFeatureConfigurationResult(_SerdeShape):
-    """Contains information about the free trial period for a feature."""
-
-    name: str | None = ...
-    """The name of the feature for which the free trial is configured."""
-    free_trial_days_remaining: int | None = ...
-    """The number of the remaining free trial days for the feature."""
-
-class FreeTrialFeatureResult(UnknownEnumMixin, StrEnum):
-    FLOW_LOGS = "FLOW_LOGS"
-    CLOUD_TRAIL = "CLOUD_TRAIL"
-    DNS_LOGS = "DNS_LOGS"
-    S3_DATA_EVENTS = "S3_DATA_EVENTS"
-    EKS_AUDIT_LOGS = "EKS_AUDIT_LOGS"
-    EBS_MALWARE_PROTECTION = "EBS_MALWARE_PROTECTION"
-    RDS_LOGIN_EVENTS = "RDS_LOGIN_EVENTS"
-    LAMBDA_NETWORK_LOGS = "LAMBDA_NETWORK_LOGS"
-    EKS_RUNTIME_MONITORING = "EKS_RUNTIME_MONITORING"
-    EC2_RUNTIME_MONITORING = "EC2_RUNTIME_MONITORING"
-    FARGATE_RUNTIME_MONITORING = "FARGATE_RUNTIME_MONITORING"
-    AI_PROTECTION = "AI_PROTECTION"
-
-@dataclass(kw_only=True)
-class GeoLocation(_SerdeShape):
-    """
-    Contains information about the location of the remote IP address. By
-    default, GuardDuty returns `Geolocation` with `Lat` and `Lon` as `0.0`.
-    """
-
-    lat: float | None = ...
-    """The latitude information of the remote IP address."""
-    lon: float | None = ...
-    """The longitude information of the remote IP address."""
-
-@dataclass(kw_only=True)
-class GetAdministratorAccountInput(_SerdeShape):
-    """Dataclass for GetAdministratorAccountInput structure."""
-
-    detector_id: str | None = ...
-    """The unique ID of the detector of the GuardDuty member account."""
-
-class GetAdministratorAccountInputDict(TypedDict, total=False):
-    """Dictionary form of `GetAdministratorAccountInput`."""
-
-    detector_id: Required[str]
-    """The unique ID of the detector of the GuardDuty member account."""
-
-@dataclass(kw_only=True)
-class GetAdministratorAccountOutput(_SerdeShape):
-    """Dataclass for GetAdministratorAccountOutput structure."""
-
-    administrator: Administrator | None = ...
-    """The administrator account details."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class GetCoverageStatisticsInput(_SerdeShape):
-    """Dataclass for GetCoverageStatisticsInput structure."""
-
-    detector_id: str | None = ...
-    """
-    The unique ID of the GuardDuty detector.
-
-    To find the `detectorId` in the current Region, see the Settings page in
-    the GuardDuty console, or run the
-    [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html)
-    API.
-    """
-    filter_criteria: CoverageFilterCriteria | None = ...
-    """Represents the criteria used to filter the coverage statistics."""
-    statistics_type: list[str] | None = ...
-    """Represents the statistics type used to aggregate the coverage details."""
-
-class GetCoverageStatisticsInputDict(TypedDict, total=False):
-    """Dictionary form of `GetCoverageStatisticsInput`."""
-
-    detector_id: Required[str]
-    """
-    The unique ID of the GuardDuty detector.
-
-    To find the `detectorId` in the current Region, see the Settings page in
-    the GuardDuty console, or run the
-    [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html)
-    API.
-    """
-    filter_criteria: CoverageFilterCriteria | CoverageFilterCriteriaDict | None
-    """Represents the criteria used to filter the coverage statistics."""
-    statistics_type: Required[_collections_abc_Sequence[str]]
-    """Represents the statistics type used to aggregate the coverage details."""
-
-@dataclass(kw_only=True)
-class GetCoverageStatisticsOutput(_SerdeShape):
-    """Dataclass for GetCoverageStatisticsOutput structure."""
-
-    coverage_statistics: CoverageStatistics | None = ...
-    """Represents the count aggregated by the `statusCode` and `resourceType`."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class GetCustomDetectionRuleAssociationInput(_SerdeShape):
-    """Dataclass for GetCustomDetectionRuleAssociationInput structure."""
-
-    rule_id: str | None = ...
-    """The unique identifier for the custom detection rule."""
-    association_id: str | None = ...
-    """The unique identifier for the association."""
-
-class GetCustomDetectionRuleAssociationInputDict(TypedDict, total=False):
-    """Dictionary form of `GetCustomDetectionRuleAssociationInput`."""
-
-    rule_id: Required[str]
-    """The unique identifier for the custom detection rule."""
-    association_id: Required[str]
-    """The unique identifier for the association."""
-
-@dataclass(kw_only=True)
-class GetCustomDetectionRuleAssociationOutput(_SerdeShape):
-    """Dataclass for GetCustomDetectionRuleAssociationOutput structure."""
-
-    rule_association: AssociationDetail | None = ...
-    """The details of the custom detection rule association."""
-    tags: dict[str, str] | None = ...
-    """The tags associated with the custom detection rule association resource."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class GetCustomDetectionRuleInput(_SerdeShape):
-    """Dataclass for GetCustomDetectionRuleInput structure."""
-
-    rule_id: str | None = ...
-    """The unique identifier for the custom detection rule."""
-
-class GetCustomDetectionRuleInputDict(TypedDict, total=False):
-    """Dictionary form of `GetCustomDetectionRuleInput`."""
-
-    rule_id: Required[str]
-    """The unique identifier for the custom detection rule."""
-
-@dataclass(kw_only=True)
-class GetCustomDetectionRuleOrgConfigurationInput(_SerdeShape):
-    """Dataclass for GetCustomDetectionRuleOrgConfigurationInput structure."""
-
-    rule_id: str | None = ...
-    """The unique identifier for the custom detection rule."""
-    mode: str | None = ...
-    """
-    The execution mode of the organization configuration to retrieve. Valid
-    values: `LIVE` | `DRY_RUN`.
-    """
-
-class GetCustomDetectionRuleOrgConfigurationInputDict(TypedDict, total=False):
-    """Dictionary form of `GetCustomDetectionRuleOrgConfigurationInput`."""
-
-    rule_id: Required[str]
-    """The unique identifier for the custom detection rule."""
-    mode: Required[str]
-    """
-    The execution mode of the organization configuration to retrieve. Valid
-    values: `LIVE` | `DRY_RUN`.
-    """
-
-@dataclass(kw_only=True)
-class GetCustomDetectionRuleOrgConfigurationOutput(_SerdeShape):
-    """Dataclass for GetCustomDetectionRuleOrgConfigurationOutput structure."""
-
-    configuration: DetectionRuleOrgConfiguration | None = ...
-    """The details of the organization configuration."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class GetCustomDetectionRuleOutput(_SerdeShape):
-    """Dataclass for GetCustomDetectionRuleOutput structure."""
-
-    rule: RuleDetail | None = ...
-    """The details of the custom detection rule."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class GetDetectorInput(_SerdeShape):
-    """Dataclass for GetDetectorInput structure."""
-
-    detector_id: str | None = ...
-    """
-    The unique ID of the detector that you want to get.
-
-    To find the `detectorId` in the current Region, see the Settings page in
-    the GuardDuty console, or run the
-    [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html)
-    API.
-    """
-
-class GetDetectorInputDict(TypedDict, total=False):
-    """Dictionary form of `GetDetectorInput`."""
-
-    detector_id: Required[str]
-    """
-    The unique ID of the detector that you want to get.
-
-    To find the `detectorId` in the current Region, see the Settings page in
-    the GuardDuty console, or run the
-    [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html)
-    API.
-    """
-
-@dataclass(kw_only=True)
-class GetDetectorOutput(_SerdeShape):
-    """Dataclass for GetDetectorOutput structure."""
-
-    created_at: str | None = ...
-    """The timestamp of when the detector was created."""
-    finding_publishing_frequency: str | None = ...
-    """The publishing frequency of the finding."""
-    service_role: str | None = ...
-    """The GuardDuty service role."""
-    status: str | None = ...
-    """The detector status."""
-    updated_at: str | None = ...
-    """The last-updated timestamp for the detector."""
-    data_sources: DataSourceConfigurationsResult | None = ...
-    """Describes which data sources are enabled for the detector."""
-    tags: dict[str, str] | None = ...
-    """The tags of the detector resource."""
-    features: list[DetectorFeatureConfigurationResult] | None = ...
-    """Describes the features that have been enabled for the detector."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class GetFilterInput(_SerdeShape):
-    """Dataclass for GetFilterInput structure."""
-
-    detector_id: str | None = ...
-    """
-    The unique ID of the detector that is associated with this filter.
-
-    To find the `detectorId` in the current Region, see the Settings page in
-    the GuardDuty console, or run the
-    [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html)
-    API.
-    """
-    filter_name: str | None = ...
-    """The name of the filter you want to get."""
-
-class GetFilterInputDict(TypedDict, total=False):
-    """Dictionary form of `GetFilterInput`."""
-
-    detector_id: Required[str]
-    """
-    The unique ID of the detector that is associated with this filter.
-
-    To find the `detectorId` in the current Region, see the Settings page in
-    the GuardDuty console, or run the
-    [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html)
-    API.
-    """
-    filter_name: Required[str]
-    """The name of the filter you want to get."""
-
-@dataclass(kw_only=True)
-class GetFilterOutput(_SerdeShape):
-    """Dataclass for GetFilterOutput structure."""
-
-    name: str | None = ...
-    """The name of the filter."""
-    description: str | None = ...
-    """The description of the filter."""
-    action: str | None = ...
-    """
-    Specifies the action that is to be applied to the findings that match
-    the filter.
-    """
-    rank: int | None = ...
-    """
-    Specifies the position of the filter in the list of current filters.
-    Also specifies the order in which this filter is applied to the
-    findings.
-    """
-    finding_criteria: FindingCriteria | None = ...
-    """Represents the criteria to be used in the filter for querying findings."""
-    tags: dict[str, str] | None = ...
-    """The tags of the filter resource."""
-    created_at: datetime | None = ...
-    """
-    The timestamp when the filter was created. This field is not available
-    for filters that were created before the lifecycle metadata feature was
-    enabled (legacy filters).
-    """
-    updated_at: datetime | None = ...
-    """
-    The timestamp when the filter was last updated. For legacy filters, this
-    field is present only after the filter has been updated at least once
-    since the lifecycle metadata feature was enabled.
-    """
-    version: int | None = ...
-    """
-    The version of the filter. Every time the filter is updated, the version
-    increments by 1. This field is not available for legacy filters that
-    were created before the lifecycle metadata feature was enabled.
-    """
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class GetFindingsInput(_SerdeShape):
-    """Dataclass for GetFindingsInput structure."""
-
-    detector_id: str | None = ...
-    """
-    The ID of the detector that specifies the GuardDuty service whose
-    findings you want to retrieve.
-
-    To find the `detectorId` in the current Region, see the Settings page in
-    the GuardDuty console, or run the
-    [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html)
-    API.
-    """
-    finding_ids: list[str] | None = ...
-    """The IDs of the findings that you want to retrieve."""
-    sort_criteria: SortCriteria | None = ...
-    """Represents the criteria used for sorting findings."""
-
-class GetFindingsInputDict(TypedDict, total=False):
-    """Dictionary form of `GetFindingsInput`."""
-
-    detector_id: Required[str]
-    """
-    The ID of the detector that specifies the GuardDuty service whose
-    findings you want to retrieve.
-
-    To find the `detectorId` in the current Region, see the Settings page in
-    the GuardDuty console, or run the
-    [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html)
-    API.
-    """
-    finding_ids: Required[_collections_abc_Sequence[str]]
-    """The IDs of the findings that you want to retrieve."""
-    sort_criteria: SortCriteria | SortCriteriaDict | None
-    """Represents the criteria used for sorting findings."""
-
-@dataclass(kw_only=True)
-class GetFindingsOutput(_SerdeShape):
-    """Dataclass for GetFindingsOutput structure."""
-
-    findings: list[Finding] | None = ...
-    """A list of findings."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class GetFindingsStatisticsInput(_SerdeShape):
-    """Dataclass for GetFindingsStatisticsInput structure."""
-
-    detector_id: str | None = ...
-    """
-    The ID of the detector whose findings statistics you want to retrieve.
-
-    To find the `detectorId` in the current Region, see the Settings page in
-    the GuardDuty console, or run the
-    [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html)
-    API.
-    """
-    finding_statistic_types: list[str] | None = ...
-    """The types of finding statistics to retrieve."""
-    finding_criteria: FindingCriteria | None = ...
-    """Represents the criteria that is used for querying findings."""
-    group_by: str | None = ...
-    """
-    Displays the findings statistics grouped by one of the listed valid
-    values.
-    """
-    order_by: str | None = ...
-    """
-    Displays the sorted findings in the requested order. The default value
-    of `orderBy` is `DESC`.
-
-    You can use this parameter only with the `groupBy` parameter.
-    """
-    max_results: int | None = ...
-    """
-    The maximum number of results to be returned in the response. The
-    default value is 25.
-
-    You can use this parameter only with the `groupBy` parameter.
-    """
-
-class GetFindingsStatisticsInputDict(TypedDict, total=False):
-    """Dictionary form of `GetFindingsStatisticsInput`."""
-
-    detector_id: Required[str]
-    """
-    The ID of the detector whose findings statistics you want to retrieve.
-
-    To find the `detectorId` in the current Region, see the Settings page in
-    the GuardDuty console, or run the
-    [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html)
-    API.
-    """
-    finding_statistic_types: _collections_abc_Sequence[str] | None
-    """The types of finding statistics to retrieve."""
-    finding_criteria: FindingCriteria | FindingCriteriaDict | None
-    """Represents the criteria that is used for querying findings."""
-    group_by: str | None
-    """
-    Displays the findings statistics grouped by one of the listed valid
-    values.
-    """
-    order_by: str | None
-    """
-    Displays the sorted findings in the requested order. The default value
-    of `orderBy` is `DESC`.
-
-    You can use this parameter only with the `groupBy` parameter.
-    """
-    max_results: int | None
-    """
-    The maximum number of results to be returned in the response. The
-    default value is 25.
-
-    You can use this parameter only with the `groupBy` parameter.
-    """
-
-@dataclass(kw_only=True)
-class GetFindingsStatisticsOutput(_SerdeShape):
-    """Dataclass for GetFindingsStatisticsOutput structure."""
-
-    finding_statistics: FindingStatistics | None = ...
-    """The finding statistics object."""
-    next_token: str | None = ...
-    """
-    The pagination parameter to be used on the next list operation to
-    retrieve more items.
-
-    This parameter is currently not supported.
-    """
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class GetInvestigationInput(_SerdeShape):
-    """Dataclass for GetInvestigationInput structure."""
-
-    detector_id: str | None = ...
-    """
-    The unique ID of the GuardDuty detector associated with the
-    investigation.
-
-    To find the `detectorId` in the current Region, see the Settings page in
-    the GuardDuty console, or run the
-    [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html)
-    API.
-    """
-    investigation_id: str | None = ...
-    """The unique identifier of the investigation to retrieve."""
-
-class GetInvestigationInputDict(TypedDict, total=False):
-    """Dictionary form of `GetInvestigationInput`."""
-
-    detector_id: Required[str]
-    """
-    The unique ID of the GuardDuty detector associated with the
-    investigation.
-
-    To find the `detectorId` in the current Region, see the Settings page in
-    the GuardDuty console, or run the
-    [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html)
-    API.
-    """
-    investigation_id: Required[str]
-    """The unique identifier of the investigation to retrieve."""
-
-@dataclass(kw_only=True)
-class GetInvestigationOutput(_SerdeShape):
-    """Dataclass for GetInvestigationOutput structure."""
-
-    investigation: Investigation | None = ...
-    """The details and results of the requested investigation."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class GetInvitationsCountInput(_SerdeShape):
-    """Dataclass for GetInvitationsCountInput structure."""
-
-class GetInvitationsCountInputDict(TypedDict, total=False):
-    """Dictionary form of `GetInvitationsCountInput`."""
-
-@dataclass(kw_only=True)
-class GetInvitationsCountOutput(_SerdeShape):
-    """Dataclass for GetInvitationsCountOutput structure."""
-
-    invitations_count: int | None = ...
-    """The number of received invitations."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class GetIPSetInput(_SerdeShape):
-    """Dataclass for GetIPSetInput structure."""
-
-    detector_id: str | None = ...
-    """
-    The unique ID of the detector that is associated with the IPSet.
-
-    To find the `detectorId` in the current Region, see the Settings page in
-    the GuardDuty console, or run the
-    [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html)
-    API.
-    """
-    ip_set_id: str | None = ...
-    """The unique ID of the IPSet to retrieve."""
-
-class GetIPSetInputDict(TypedDict, total=False):
-    """Dictionary form of `GetIPSetInput`."""
-
-    detector_id: Required[str]
-    """
-    The unique ID of the detector that is associated with the IPSet.
-
-    To find the `detectorId` in the current Region, see the Settings page in
-    the GuardDuty console, or run the
-    [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html)
-    API.
-    """
-    ip_set_id: Required[str]
-    """The unique ID of the IPSet to retrieve."""
-
-@dataclass(kw_only=True)
-class GetIPSetOutput(_SerdeShape):
-    """Dataclass for GetIPSetOutput structure."""
-
-    name: str | None = ...
-    """The user-friendly name for the IPSet."""
-    format: str | None = ...
-    """The format of the file that contains the IPSet."""
-    location: str | None = ...
-    """The URI of the file that contains the IPSet."""
-    status: str | None = ...
-    """The status of IPSet file that was uploaded."""
-    tags: dict[str, str] | None = ...
-    """The tags of the IPSet resource."""
-    expected_bucket_owner: str | None = ...
-    """
-    The Amazon Web Services account ID that owns the Amazon S3 bucket
-    specified in the **location** parameter. This field appears in the
-    response only if it was provided during IPSet creation or update.
-    """
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class GetMalwareProtectionPlanInput(_SerdeShape):
-    """Dataclass for GetMalwareProtectionPlanInput structure."""
-
-    malware_protection_plan_id: str | None = ...
-    """A unique identifier associated with Malware Protection plan resource."""
-
-class GetMalwareProtectionPlanInputDict(TypedDict, total=False):
-    """Dictionary form of `GetMalwareProtectionPlanInput`."""
-
-    malware_protection_plan_id: Required[str]
-    """A unique identifier associated with Malware Protection plan resource."""
-
-@dataclass(kw_only=True)
-class GetMalwareProtectionPlanOutput(_SerdeShape):
-    """Dataclass for GetMalwareProtectionPlanOutput structure."""
-
-    arn: str | None = ...
-    """Amazon Resource Name (ARN) of the protected resource."""
-    role: str | None = ...
-    """
-    Amazon Resource Name (ARN) of the IAM role that includes the permissions
-    to scan and add tags to the associated protected resource.
-    """
-    protected_resource: CreateProtectedResource | None = ...
-    """
-    Information about the protected resource that is associated with the
-    created Malware Protection plan. Presently, `S3Bucket` is the only
-    supported protected resource.
-    """
-    actions: MalwareProtectionPlanActions | None = ...
-    """
-    Information about whether the tags will be added to the S3 object after
-    scanning.
-    """
-    created_at: datetime | None = ...
-    """The timestamp when the Malware Protection plan resource was created."""
-    status: str | None = ...
-    """Malware Protection plan status."""
-    status_reasons: list[MalwareProtectionPlanStatusReason] | None = ...
-    """
-    Information about the issue code and message associated to the status of
-    your Malware Protection plan.
-    """
-    tags: dict[str, str] | None = ...
-    """Tags added to the Malware Protection plan resource."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class GetMalwareScanInput(_SerdeShape):
-    """Dataclass for GetMalwareScanInput structure."""
-
-    scan_id: str | None = ...
-    """
-    A unique identifier that gets generated when you invoke the API without
-    any error. Each malware scan has a corresponding scan ID. Using this
-    scan ID, you can monitor the status of your malware scan.
-    """
-
-class GetMalwareScanInputDict(TypedDict, total=False):
-    """Dictionary form of `GetMalwareScanInput`."""
-
-    scan_id: Required[str]
-    """
-    A unique identifier that gets generated when you invoke the API without
-    any error. Each malware scan has a corresponding scan ID. Using this
-    scan ID, you can monitor the status of your malware scan.
-    """
+    """The type of the finding."""
+    uid: str | None = ...
+    """The ID of the finding."""

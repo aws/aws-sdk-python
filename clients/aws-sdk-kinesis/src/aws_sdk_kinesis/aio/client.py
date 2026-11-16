@@ -82,7 +82,7 @@ class AsyncKinesisClient(AsyncClient[AsyncKinesisConfig]):
     for real-time processing of streaming big data.
     """
 
-    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
+    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
 
     @_overload
     async def add_tags_to_stream(

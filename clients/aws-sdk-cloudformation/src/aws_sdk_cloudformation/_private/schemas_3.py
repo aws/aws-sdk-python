@@ -211,8 +211,6 @@ _DSROe = "DescribeStackResourceOutput"
 _DSRes = "DescribeStackResource"
 _RSIPE = "ResourceScanInProgressException"
 
-VALIDATION_STATUS_REASON: StaticSchema = (3, n0, _VSR, 0)
-
 OPERATION_EVENT: StaticSchema = (
     18,
     n0,
@@ -273,7 +271,7 @@ OPERATION_EVENT: StaticSchema = (
         (lambda: schemas.HOOK_FAILURE_MODE, 0),
         (lambda: schemas.VALIDATION_NAME, 0),
         (lambda: schemas.VALIDATION_STATUS, 0),
-        (VALIDATION_STATUS_REASON, 0),
+        (lambda: schemas.VALIDATION_STATUS_REASON, 0),
         (lambda: schemas.VALIDATION_PATH, 0),
     ),
 )

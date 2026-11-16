@@ -201,7 +201,7 @@ class AsyncKMSClient(AsyncClient[AsyncKMSConfig]):
     - GenerateDataKeyWithoutPlaintext
     """
 
-    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
+    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
 
     @_overload
     async def cancel_key_deletion(

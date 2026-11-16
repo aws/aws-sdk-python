@@ -11,7 +11,6 @@ _sN = "smithy.api#xmlName"
 _sV = "smithy.api#enumValue"
 _me = "member"
 _i = "item"
-_cb_ = "capacity-block"
 _Ke = "Key"
 _ke = "key"
 _Va = "Value"
@@ -30,6 +29,9 @@ _R = "Return"
 _r = "return"
 _IC = "InstanceCount"
 _re = "rejected"
+_av = "available"
+_de = "deleting"
+_del = "deleted"
 _St = "State"
 _st = "state"
 _CT = "CreationTime"
@@ -39,6 +41,7 @@ _SIu = "SubnetId"
 _sI = "subnetId"
 _OIw = "OwnerId"
 _oI = "ownerId"
+_mo = "modifying"
 _C = "Code"
 _co = "code"
 _Me = "Message"
@@ -51,7 +54,6 @@ _E = "Error"
 _er = "error"
 _dRr = "dryRun"
 _act = "active"
-_ex = "expired"
 _P = "Protocol"
 _pro = "protocol"
 _N = "Name"
@@ -71,13 +73,19 @@ _sGI = "securityGroupId"
 _De = "Destination"
 _Sou = "Source"
 _so = "source"
+_AV = "AttributeValue"
 _IT = "InstanceType"
 _iT = "instanceType"
 _SIRI = "SpotInstanceRequestId"
 _sIRI = "spotInstanceRequestId"
+_Pri = "Principal"
+_prin = "principal"
 _Des = "Description"
+_stan = "standard"
 _ipv = "ipv4"
 _ipv_ = "ipv6"
+_SMt = "StatusMessage"
+_sMt = "statusMessage"
 _def = "default"
 _ASE = "AggregationStatusEnum"
 _INCLUDED = "INCLUDED"
@@ -86,13 +94,16 @@ _EXCLUDED = "EXCLUDED"
 _excl = "excluded"
 _OA = "OutpostArn"
 _CTl = "ClientToken"
+_cTl = "clientToken"
 _sT = "smithy.api#idempotencyToken"
 _ATl = "AllocationType"
-_ca = "cancelling"
+_FAILED = "FAILED"
 _ASCI = "ApplicationStatusCheckId"
 _TTA = "TargetTagAssociations"
 _aSCI = "applicationStatusCheckId"
-_URBOI = "UnusedReservationBillingOwnerId"
+_cre = "creating"
+_ACTIVE = "ACTIVE"
+_no = "none"
 _priv = "private"
 _IIm = "ImageId"
 _DI = "DeviceIndex"
@@ -102,6 +113,12 @@ _smith = "smithy.api#sensitive"
 _VIo = "VolumeId"
 _Dev = "Device"
 _ECI = "EbsCardIndex"
+_VAS = "VolumeAttachmentState"
+_at = "attaching"
+_att = "attached"
+_det = "detaching"
+_deta = "detached"
+_bu = "busy"
 _DOT = "DeleteOnTermination"
 _dOT = "deleteOnTermination"
 _ARs = "AssociatedResource"
@@ -112,15 +129,61 @@ _eCI = "ebsCardIndex"
 _vIo = "volumeId"
 _ATtt = "AttachTime"
 _aTtt = "attachTime"
-_CRFI = "CapacityReservationFleetId"
-_cRFI = "capacityReservationFleetId"
+_SUBMITTED = "SUBMITTED"
+_subm = "submitted"
+_MODIFYING = "MODIFYING"
+_CANCELLED = "CANCELLED"
 _can = "cancelled"
+_RILI = "ReservedInstancesListingId"
+_rILI = "reservedInstancesListingId"
 _iC = "instanceCount"
+_ICL = "InstanceCountList"
+_CCV = "CurrencyCodeValues"
+_USD = "USD"
+_Dou = "Double"
+_Lo = "Long"
+_PSri = "PriceSchedule"
+_Act = "Active"
+_CC = "CurrencyCode"
+_cC = "currencyCode"
+_Pric = "Price"
+_pric = "price"
+_Te = "Term"
+_te = "term"
+_PSL = "PriceScheduleList"
+_LSis = "ListingStatus"
 _cl = "closed"
+_RIL = "ReservedInstancesListing"
 _CD = "CreateDate"
 _cD = "createDate"
+_ICn = "InstanceCounts"
+_iCn = "instanceCounts"
+_PSric = "PriceSchedules"
+_pSri = "priceSchedules"
+_RIIes = "ReservedInstancesId"
+_rII = "reservedInstancesId"
+_UD = "UpdateDate"
+_uD = "updateDate"
+_RILL = "ReservedInstancesListingList"
 _SFRI = "SpotFleetRequestId"
+_SFRIL = "SpotFleetRequestIdList"
+_CSFRI = "CancelSpotFleetRequestsInput"
+_cCSFRR = "com.amazonaws.ec2#CancelSpotFleetRequestsRequest"
+_SFRIp = "SpotFleetRequestIds"
 _sFRI = "spotFleetRequestId"
+_TIe = "TerminateInstances"
+_tIe = "terminateInstances"
+_BS = "BatchState"
+_CR_ = "CANCELLED_RUNNING"
+_cr__ = "cancelled_running"
+_CTI_ = "CANCELLED_TERMINATING_INSTANCES"
+_ct = "cancelled_terminating"
+_CSFRSI = "CancelSpotFleetRequestsSuccessItem"
+_CSFRS = "CurrentSpotFleetRequestState"
+_cSFRS = "currentSpotFleetRequestState"
+_PSFRS = "PreviousSpotFleetRequestState"
+_pSFRS = "previousSpotFleetRequestState"
+_CSFRSS = "CancelSpotFleetRequestsSuccessSet"
 _CBEC = "CancelBatchErrorCode"
 _FRIDNE = "FLEET_REQUEST_ID_DOES_NOT_EXIST"
 _fRIDNE = "fleetRequestIdDoesNotExist"
@@ -133,6 +196,15 @@ _uE = "unexpectedError"
 _CSFRE = "CancelSpotFleetRequestsError"
 _CSFREI = "CancelSpotFleetRequestsErrorItem"
 _CSFRES = "CancelSpotFleetRequestsErrorSet"
+_CSFRO = "CancelSpotFleetRequestsOutput"
+_cCSFRRo = "com.amazonaws.ec2#CancelSpotFleetRequestsResponse"
+_SFR = "SuccessfulFleetRequests"
+_SFRS = "SuccessfulFleetRequestSet"
+_sFRS = "successfulFleetRequestSet"
+_UFR = "UnsuccessfulFleetRequests"
+_UFRS = "UnsuccessfulFleetRequestSet"
+_uFRS = "unsuccessfulFleetRequestSet"
+_CSFR = "CancelSpotFleetRequests"
 _SIRIL = "SpotInstanceRequestIdList"
 _CSIRI = "CancelSpotInstanceRequestsInput"
 _cCSIRR = "com.amazonaws.ec2#CancelSpotInstanceRequestsRequest"
@@ -198,6 +270,12 @@ _SIn = "SnapshotId"
 _sIn = "snapshotId"
 _CSo = "CopySnapshot"
 _VT = "VolumeType"
+_io = "io1"
+_io_ = "io2"
+_gp = "gp2"
+_sc_ = "sc1"
+_st_ = "st1"
+_gp_ = "gp3"
 _CVI = "CopyVolumesInput"
 _cCVR = "com.amazonaws.ec2#CopyVolumesRequest"
 _SVI = "SourceVolumeId"
@@ -207,13 +285,26 @@ _MAE = "MultiAttachEnabled"
 _Th = "Throughput"
 _VAo = "VolumeAttachment"
 _VAL = "VolumeAttachmentList"
+_OR = "OperatorResponse"
+_Man = "Managed"
+_man = "managed"
+_HBD = "HiddenByDefault"
+_hBD = "hiddenByDefault"
+_SSET = "SSEType"
+_se = "sse_ebs"
+_se_ = "sse-ebs"
+_sk = "sse_kms"
+_sk_ = "sse-kms"
+_VS = "VolumeState"
+_iu = "in_use"
+_iu_ = "in-use"
 _Vo = "Volume"
-_oA = "outpostArn"
+_oAu = "outpostArn"
 _sVI = "sourceVolumeId"
 _iop = "iops"
 _vT = "volumeType"
-_FR = "FastRestored"
-_fR = "fastRestored"
+_FRa = "FastRestored"
+_fRa = "fastRestored"
 _mAE = "multiAttachEnabled"
 _thr = "throughput"
 _STs = "SseType"
@@ -328,9 +419,44 @@ _unl = "unlimited"
 _li = "limited"
 _IMC = "InstanceMatchCriteria"
 _ta = "targeted"
+_CRIP = "CapacityReservationInstancePlatform"
+_LU = "LINUX_UNIX"
+_LUNIX = "Linux/UNIX"
+_RHEL = "RED_HAT_ENTERPRISE_LINUX"
+_RHEL_ = "Red Hat Enterprise Linux"
+_SL_ = "SUSE_LINUX"
+_SL__ = "SUSE Linux"
+_WINDOWS = "WINDOWS"
+_W = "Windows"
+_WWSS = "WINDOWS_WITH_SQL_SERVER"
+_WwSS = "Windows with SQL Server"
+_WWSSE = "WINDOWS_WITH_SQL_SERVER_ENTERPRISE"
+_WwSSE = "Windows with SQL Server Enterprise"
+_WWSSS = "WINDOWS_WITH_SQL_SERVER_STANDARD"
+_WwSSS = "Windows with SQL Server Standard"
+_WWSSW = "WINDOWS_WITH_SQL_SERVER_WEB"
+_WwSSW = "Windows with SQL Server Web"
+_LWSSS = "LINUX_WITH_SQL_SERVER_STANDARD"
+_LwSSS = "Linux with SQL Server Standard"
+_LWSSW = "LINUX_WITH_SQL_SERVER_WEB"
+_LwSSW = "Linux with SQL Server Web"
+_LWSSE = "LINUX_WITH_SQL_SERVER_ENTERPRISE"
+_LwSSE = "Linux with SQL Server Enterprise"
+_RWSSS = "RHEL_WITH_SQL_SERVER_STANDARD"
+_RwSSS = "RHEL with SQL Server Standard"
+_RWSSE = "RHEL_WITH_SQL_SERVER_ENTERPRISE"
+_RwSSE = "RHEL with SQL Server Enterprise"
+_RWSSW = "RHEL_WITH_SQL_SERVER_WEB"
+_RwSSW = "RHEL with SQL Server Web"
+_RWH = "RHEL_WITH_HA"
+_RwH = "RHEL with HA"
+_RWHASSS = "RHEL_WITH_HA_AND_SQL_SERVER_STANDARD"
+_RwHaSSS = "RHEL with HA and SQL Server Standard"
+_RWHASSE = "RHEL_WITH_HA_AND_SQL_SERVER_ENTERPRISE"
+_RwHaSSE = "RHEL with HA and SQL Server Enterprise"
+_UPL = "UBUNTU_PRO_LINUX"
+_UP_ = "Ubuntu Pro"
 _PGA = "PlacementGroupArn"
-_CRT = "CapacityReservationTenancy"
-_ded = "dedicated"
 _CCRIr = "CreateCapacityReservationInput"
 _cCCRRom = "com.amazonaws.ec2#CreateCapacityReservationRequest"
 _IPns = "InstancePlatform"
@@ -380,67 +506,71 @@ _ICRI = "InterruptibleCapacityReservationId"
 _iCRI = "interruptibleCapacityReservationId"
 _iTn = "interruptionType"
 _zSP = "zeroSizePreference"
-_IInt = "InterruptionInfo"
-_SCRI = "SourceCapacityReservationId"
-_sCRI = "sourceCapacityReservationId"
-_CRLS = "CapacityReservationLaunchStatus"
-_LAUNCHABLE = "LAUNCHABLE"
-_lau = "launchable"
-_UNLAUNCHABLE = "UNLAUNCHABLE"
-_unla = "unlaunchable"
-_CRTa = "CapacityReservationType"
-_DEFAULT = "DEFAULT"
-_CB_ = "CAPACITY_BLOCK"
-_CRS = "CapacityReservationState"
-_sch = "scheduled"
-_pp__ = "payment_pending"
-_pp___ = "payment-pending"
-_pf____ = "payment_failed"
-_pf_____ = "payment-failed"
-_asse = "assessing"
-_dela = "delayed"
-_uns = "unsupported"
-_unav = "unavailable"
 _CRap = "CapacityReservation"
-_cRI = "capacityReservationId"
-_CRA = "CapacityReservationArn"
-_cRA = "capacityReservationArn"
-_iPns = "instancePlatform"
-_ten = "tenancy"
-_TICo = "TotalInstanceCount"
-_tICo = "totalInstanceCount"
-_AIC = "AvailableInstanceCount"
-_aIC = "availableInstanceCount"
 _eO = "ebsOptimized"
-_eSp = "ephemeralStorage"
-_iMC = "instanceMatchCriteria"
-_pGA = "placementGroupArn"
-_CAS = "CapacityAllocationSet"
-_cAS = "capacityAllocationSet"
-_RTes = "ReservationType"
-_rTe = "reservationType"
-_uRBOI = "unusedReservationBillingOwnerId"
-_CIom = "CommitmentInfo"
-_cIom = "commitmentInfo"
-_dP = "deliveryPreference"
-_cBI = "capacityBlockId"
-_Inte = "Interruptible"
-_inte = "interruptible"
-_iCA = "interruptibleCapacityAllocation"
-_iIn = "interruptionInfo"
-_ASd = "AdjustmentStatus"
-_aSd = "adjustmentStatus"
-_ADdj = "AdjustmentDetails"
-_aD = "adjustmentDetails"
-_OSD = "OriginalStartDate"
-_oSD = "originalStartDate"
-_LSa = "LaunchStatus"
-_lS = "launchStatus"
 _CCROr = "CreateCapacityReservationOutput"
 _cCCRRoma = "com.amazonaws.ec2#CreateCapacityReservationResult"
 _cRa = "capacityReservation"
 _CCRr = "CreateCapacityReservation"
-_CRIS = "CapacityReservationIdSet"
+_CRRGAa = "CapacityReservationResourceGroupArn"
+_CRTap = "CapacityReservationTarget"
+_TCUT = "TargetCapacityUnitType"
+_VCPU = "VCPU"
+_vcp = "vcpu"
+_MM = "MEMORY_MIB"
+_mm_____________________________________________________________________ = "memory-mib"
+_UNITS = "UNITS"
+_uni = "units"
+_PV = "PlatformValues"
+_ue = "uefi"
+_SLE = "SnapshotLocationEnum"
+_REGIONAL = "REGIONAL"
+_regi = "regional"
+_LOCAL = "LOCAL"
+_lo = "local"
+_bDM = "blockDeviceMapping"
+_DIF = "DiskImageFormat"
+_VMDK = "VMDK"
+_RAW = "RAW"
+_VHD = "VHD"
+_CRP = "CapacityReservationPreference"
+_cro_ = "capacity_reservations_only"
+_cro__ = "capacity-reservations-only"
+_ORper = "OperatorRequest"
+_gS = "groupSet"
+_dAT = "disableApiTermination"
+_iISB = "instanceInitiatedShutdownBehavior"
+_uDs = "userData"
+_eOn = "enclaveOptions"
+_dASi = "disableApiStop"
+_sDC = "sourceDestCheck"
+_SSn = "SnapshotState"
+_rec = "recoverable"
+_reco = "recovering"
+_STt = "StorageTier"
+_arc = "archive"
+_VISL = "VolumeIdStringList"
+_pCr = "productCodes"
+_ker = "kernel"
+_ramd = "ramdisk"
+_sNS = "sriovNetSupport"
+_i__________________________________________________________________________ = "i386"
+_x______________________________________________________ = "x86_64"
+_arm = "arm64"
+_xm____________ = "x86_64_mac"
+_am______ = "arm64_mac"
+_BMV = "BootModeValues"
+_lb__ = "legacy_bios"
+_lb___ = "legacy-bios"
+_up__ = "uefi_preferred"
+_up___ = "uefi-preferred"
+_VTi = "VirtualizationType"
+_hv = "hvm"
+_para = "paravirtual"
+_eSna = "enaSupport"
+_rDN = "rootDeviceName"
+_IANn = "InstanceAttributeName"
+_ATr = "ArchitectureType"
 
 AGGREGATION_STATUS_ENUM: StaticSchema = (
     14,
@@ -449,6 +579,182 @@ AGGREGATION_STATUS_ENUM: StaticSchema = (
     0,
     (_INCLUDED, _EXCLUDED),
     ((-1, {_sV: _inc}), (-1, {_sV: _excl})),
+)
+
+VOLUME_ID: StaticSchema = (3, n0, _VIo, 0)
+
+VOLUME_ATTACHMENT_STATE: StaticSchema = (
+    14,
+    n0,
+    _VAS,
+    0,
+    (_at, _att, _det, _deta, _bu),
+    (
+        (-1, {_sV: _at}),
+        (-1, {_sV: _att}),
+        (-1, {_sV: _det}),
+        (-1, {_sV: _deta}),
+        (-1, {_sV: _bu}),
+    ),
+)
+
+INSTANCE_COUNT_LIST: StaticSchema = (
+    16,
+    n0,
+    _ICL,
+    0,
+    (_me,),
+    ((lambda: schemas.INSTANCE_COUNT, {_sN: _i}),),
+)
+
+CURRENCY_CODE_VALUES: StaticSchema = (14, n0, _CCV, 0, (_USD,), ((-1, {_sV: _USD}),))
+
+DOUBLE: StaticSchema = (10, n0, _Dou, 0)
+
+LONG: StaticSchema = (8, n0, _Lo, 0)
+
+PRICE_SCHEDULE: StaticSchema = (
+    18,
+    n0,
+    _PSri,
+    0,
+    (_Act, _CC, _Pric, _Te),
+    (
+        (lambda: schemas.BOOLEAN, {_aQN: _Act, _sN: _act}),
+        (CURRENCY_CODE_VALUES, {_aQN: _CC, _sN: _cC}),
+        (DOUBLE, {_aQN: _Pric, _sN: _pric}),
+        (LONG, {_aQN: _Te, _sN: _te}),
+    ),
+)
+
+PRICE_SCHEDULE_LIST: StaticSchema = (
+    16,
+    n0,
+    _PSL,
+    0,
+    (_me,),
+    ((PRICE_SCHEDULE, {_sN: _i}),),
+)
+
+LISTING_STATUS: StaticSchema = (
+    14,
+    n0,
+    _LSis,
+    0,
+    (_act, _p, _can, _cl),
+    ((-1, {_sV: _act}), (-1, {_sV: _p}), (-1, {_sV: _can}), (-1, {_sV: _cl})),
+)
+
+RESERVED_INSTANCES_LISTING: StaticSchema = (
+    18,
+    n0,
+    _RIL,
+    0,
+    (_CTl, _CD, _ICn, _PSric, _RIIes, _RILI, _Sta, _SMt, _Tag, _UD),
+    (
+        (lambda: schemas.STRING, {_aQN: _CTl, _sN: _cTl}),
+        (lambda: schemas.DATE_TIME, {_aQN: _CD, _sN: _cD}),
+        (INSTANCE_COUNT_LIST, {_aQN: _ICn, _sN: _iCn}),
+        (PRICE_SCHEDULE_LIST, {_aQN: _PSric, _sN: _pSri}),
+        (lambda: schemas.STRING, {_aQN: _RIIes, _sN: _rII}),
+        (lambda: schemas.STRING, {_aQN: _RILI, _sN: _rILI}),
+        (LISTING_STATUS, {_aQN: _Sta, _sN: _sta}),
+        (lambda: schemas.STRING, {_aQN: _SMt, _sN: _sMt}),
+        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
+        (lambda: schemas.DATE_TIME, {_aQN: _UD, _sN: _uD}),
+    ),
+)
+
+RESERVED_INSTANCES_LISTING_LIST: StaticSchema = (
+    16,
+    n0,
+    _RILL,
+    0,
+    (_me,),
+    ((RESERVED_INSTANCES_LISTING, {_sN: _i}),),
+)
+
+SPOT_FLEET_REQUEST_ID_LIST: StaticSchema = (
+    16,
+    n0,
+    _SFRIL,
+    0,
+    (_me,),
+    ((lambda: schemas.SPOT_FLEET_REQUEST_ID, {_sN: _i}),),
+)
+
+CANCEL_SPOT_FLEET_REQUESTS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CSFRI,
+    {_sSI: _cCSFRR, _sm: None},
+    (_DR, _SFRIp, _TIe),
+    (
+        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
+        (SPOT_FLEET_REQUEST_ID_LIST, {_aQN: _SFRI, _sN: _sFRI, _smi: None}),
+        (lambda: schemas.BOOLEAN, {_aQN: _TIe, _sN: _tIe, _smi: None}),
+    ),
+)
+
+CANCEL_SPOT_FLEET_REQUESTS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CSFRO,
+    {_sSI: _cCSFRRo, _smit: None},
+    (_SFR, _UFR),
+    (
+        (lambda: CANCEL_SPOT_FLEET_REQUESTS_SUCCESS_SET, {_aQN: _SFRS, _sN: _sFRS}),
+        (lambda: CANCEL_SPOT_FLEET_REQUESTS_ERROR_SET, {_aQN: _UFRS, _sN: _uFRS}),
+    ),
+)
+
+CANCEL_SPOT_FLEET_REQUESTS: StaticOperationSchema = (
+    23,
+    n0,
+    _CSFR,
+    0,
+    CANCEL_SPOT_FLEET_REQUESTS_INPUT,
+    CANCEL_SPOT_FLEET_REQUESTS_OUTPUT,
+    (),
+)
+
+BATCH_STATE: StaticSchema = (
+    14,
+    n0,
+    _BS,
+    0,
+    (_SUBMITTED, _ACTIVE, _CANCELLED, _FAILED, _CR_, _CTI_, _MODIFYING),
+    (
+        (-1, {_sV: _subm}),
+        (-1, {_sV: _act}),
+        (-1, {_sV: _can}),
+        (-1, {_sV: _fa}),
+        (-1, {_sV: _cr__}),
+        (-1, {_sV: _ct}),
+        (-1, {_sV: _mo}),
+    ),
+)
+
+CANCEL_SPOT_FLEET_REQUESTS_SUCCESS_ITEM: StaticSchema = (
+    18,
+    n0,
+    _CSFRSI,
+    0,
+    (_CSFRS, _PSFRS, _SFRI),
+    (
+        (BATCH_STATE, {_aQN: _CSFRS, _sN: _cSFRS}),
+        (BATCH_STATE, {_aQN: _PSFRS, _sN: _pSFRS}),
+        (lambda: schemas.STRING, {_aQN: _SFRI, _sN: _sFRI}),
+    ),
+)
+
+CANCEL_SPOT_FLEET_REQUESTS_SUCCESS_SET: StaticSchema = (
+    16,
+    n0,
+    _CSFRSS,
+    0,
+    (_me,),
+    ((CANCEL_SPOT_FLEET_REQUESTS_SUCCESS_ITEM, {_sN: _i}),),
 )
 
 CANCEL_BATCH_ERROR_CODE: StaticSchema = (
@@ -645,6 +951,8 @@ COPY_IMAGE_CLIENT_TOKEN: StaticSchema = (3, n0, _CICT, 0)
 
 IMAGE_DESCRIPTION_REQUEST: StaticSchema = (3, n0, _IDR, 0)
 
+KMS_KEY_ID: StaticSchema = (3, n0, _KKI, 0)
+
 IMAGE_NAME_REQUEST: StaticSchema = (3, n0, _INR, 0)
 
 COPY_IMAGE_INPUT: StaticSchema = (
@@ -672,14 +980,14 @@ COPY_IMAGE_INPUT: StaticSchema = (
         (COPY_IMAGE_CLIENT_TOKEN, 2),
         (IMAGE_DESCRIPTION_REQUEST, 0),
         (lambda: schemas.BOOLEAN, {_aQN: _En, _sN: _enc}),
-        (lambda: schemas.KMS_KEY_ID, {_aQN: _KKI, _sN: _kKI}),
+        (KMS_KEY_ID, {_aQN: _KKI, _sN: _kKI}),
         (IMAGE_NAME_REQUEST, 1),
         (lambda: schemas.STRING, 1),
         (lambda: schemas.STRING, 1),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
-        (lambda: schemas.LONG, 0),
+        (LONG, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
@@ -720,7 +1028,7 @@ COPY_SNAPSHOT_INPUT: StaticSchema = (
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, {_aQN: _DRe, _sN: _dRe}),
         (lambda: schemas.BOOLEAN, {_aQN: _En, _sN: _enc}),
-        (lambda: schemas.KMS_KEY_ID, {_aQN: _KKI, _sN: _kKI}),
+        (KMS_KEY_ID, {_aQN: _KKI, _sN: _kKI}),
         (COPY_SNAPSHOT_REQUEST_PSU, {_aQN: _PU, _sN: _pU}),
         (lambda: schemas.STRING, 1),
         (lambda: schemas.STRING, 1),
@@ -753,6 +1061,23 @@ COPY_SNAPSHOT: StaticOperationSchema = (
     (),
 )
 
+VOLUME_TYPE: StaticSchema = (
+    14,
+    n0,
+    _VT,
+    0,
+    (_stan, _io, _io_, _gp, _sc_, _st_, _gp_),
+    (
+        (-1, {_sV: _stan}),
+        (-1, {_sV: _io}),
+        (-1, {_sV: _io_}),
+        (-1, {_sV: _gp}),
+        (-1, {_sV: _sc_}),
+        (-1, {_sV: _st_}),
+        (-1, {_sV: _gp_}),
+    ),
+)
+
 COPY_VOLUMES_INPUT: StaticSchema = (
     18,
     n0,
@@ -760,17 +1085,17 @@ COPY_VOLUMES_INPUT: StaticSchema = (
     {_sSI: _cCVR, _sm: None},
     (_SVI, _Io, _Si, _VT, _DR, _TSa, _MAE, _Th, _CTl, _En, _KKI),
     (
-        (lambda: schemas.VOLUME_ID, 1),
+        (VOLUME_ID, 1),
         (lambda: schemas.INTEGER, 0),
         (lambda: schemas.INTEGER, 0),
-        (lambda: schemas.VOLUME_TYPE, 0),
+        (VOLUME_TYPE, 0),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.INTEGER, 0),
         (lambda: schemas.STRING, 2),
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.KMS_KEY_ID, 0),
+        (KMS_KEY_ID, 0),
     ),
 )
 
@@ -807,7 +1132,7 @@ VOLUME_ATTACHMENT: StaticSchema = (
         (lambda: schemas.STRING, {_aQN: _VIo, _sN: _vIo}),
         (lambda: schemas.STRING, {_aQN: _II, _sN: _iI}),
         (lambda: schemas.STRING, {_aQN: _Dev, _sN: _dev}),
-        (lambda: schemas.VOLUME_ATTACHMENT_STATE, {_aQN: _Sta, _sN: _sta}),
+        (VOLUME_ATTACHMENT_STATE, {_aQN: _Sta, _sN: _sta}),
         (lambda: schemas.DATE_TIME, {_aQN: _ATtt, _sN: _aTtt}),
     ),
 )
@@ -819,6 +1144,44 @@ VOLUME_ATTACHMENT_LIST: StaticSchema = (
     0,
     (_me,),
     ((VOLUME_ATTACHMENT, {_sN: _i}),),
+)
+
+OPERATOR_RESPONSE: StaticSchema = (
+    18,
+    n0,
+    _OR,
+    0,
+    (_Man, _Pri, _HBD),
+    (
+        (lambda: schemas.BOOLEAN, {_aQN: _Man, _sN: _man}),
+        (lambda: schemas.STRING, {_aQN: _Pri, _sN: _prin}),
+        (lambda: schemas.BOOLEAN, {_aQN: _HBD, _sN: _hBD}),
+    ),
+)
+
+SSE_TYPE: StaticSchema = (
+    14,
+    n0,
+    _SSET,
+    0,
+    (_se, _sk, _no),
+    ((-1, {_sV: _se_}), (-1, {_sV: _sk_}), (-1, {_sV: _no})),
+)
+
+VOLUME_STATE: StaticSchema = (
+    14,
+    n0,
+    _VS,
+    0,
+    (_cre, _av, _iu, _de, _del, _er),
+    (
+        (-1, {_sV: _cre}),
+        (-1, {_sV: _av}),
+        (-1, {_sV: _iu_}),
+        (-1, {_sV: _de}),
+        (-1, {_sV: _del}),
+        (-1, {_sV: _er}),
+    ),
 )
 
 VOLUME: StaticSchema = (
@@ -833,7 +1196,7 @@ VOLUME: StaticSchema = (
         _Io,
         _Tag,
         _VT,
-        _FR,
+        _FRa,
         _MAE,
         _Th,
         _STs,
@@ -853,16 +1216,16 @@ VOLUME: StaticSchema = (
     ),
     (
         (lambda: schemas.STRING, {_aQN: _AZI, _sN: _aZI}),
-        (lambda: schemas.STRING, {_aQN: _OA, _sN: _oA}),
+        (lambda: schemas.STRING, {_aQN: _OA, _sN: _oAu}),
         (lambda: schemas.STRING, {_aQN: _SVI, _sN: _sVI}),
         (lambda: schemas.INTEGER, {_aQN: _Io, _sN: _iop}),
         (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
-        (lambda: schemas.VOLUME_TYPE, {_aQN: _VT, _sN: _vT}),
-        (lambda: schemas.BOOLEAN, {_aQN: _FR, _sN: _fR}),
+        (VOLUME_TYPE, {_aQN: _VT, _sN: _vT}),
+        (lambda: schemas.BOOLEAN, {_aQN: _FRa, _sN: _fRa}),
         (lambda: schemas.BOOLEAN, {_aQN: _MAE, _sN: _mAE}),
         (lambda: schemas.INTEGER, {_aQN: _Th, _sN: _thr}),
-        (lambda: schemas.SSE_TYPE, {_aQN: _STs, _sN: _sTs}),
-        (lambda: schemas.OPERATOR_RESPONSE, {_aQN: _Op, _sN: _ope}),
+        (SSE_TYPE, {_aQN: _STs, _sN: _sTs}),
+        (OPERATOR_RESPONSE, {_aQN: _Op, _sN: _ope}),
         (lambda: schemas.INTEGER, {_aQN: _VIR, _sN: _vIR}),
         (lambda: schemas.STRING, {_aQN: _VAol, _sN: _vA}),
         (lambda: schemas.STRING, {_aQN: _OIw, _sN: _oI}),
@@ -870,7 +1233,7 @@ VOLUME: StaticSchema = (
         (lambda: schemas.INTEGER, {_aQN: _Si, _sN: _siz}),
         (lambda: schemas.STRING, {_aQN: _SIn, _sN: _sIn}),
         (lambda: schemas.STRING, {_aQN: _AZ, _sN: _aZ}),
-        (lambda: schemas.VOLUME_STATE, {_aQN: _Sta, _sN: _sta}),
+        (VOLUME_STATE, {_aQN: _Sta, _sN: _sta}),
         (lambda: schemas.DATE_TIME, {_aQN: _CTr, _sN: _cTr}),
         (VOLUME_ATTACHMENT_LIST, {_aQN: _AStt, _sN: _aSt}),
         (lambda: schemas.BOOLEAN, {_aQN: _En, _sN: _enc}),
@@ -1222,18 +1585,56 @@ INSTANCE_MATCH_CRITERIA: StaticSchema = (
     ((-1, {_sV: _op}), (-1, {_sV: _ta})),
 )
 
+CAPACITY_RESERVATION_INSTANCE_PLATFORM: StaticSchema = (
+    14,
+    n0,
+    _CRIP,
+    0,
+    (
+        _LU,
+        _RHEL,
+        _SL_,
+        _WINDOWS,
+        _WWSS,
+        _WWSSE,
+        _WWSSS,
+        _WWSSW,
+        _LWSSS,
+        _LWSSW,
+        _LWSSE,
+        _RWSSS,
+        _RWSSE,
+        _RWSSW,
+        _RWH,
+        _RWHASSS,
+        _RWHASSE,
+        _UPL,
+    ),
+    (
+        (-1, {_sV: _LUNIX}),
+        (-1, {_sV: _RHEL_}),
+        (-1, {_sV: _SL__}),
+        (-1, {_sV: _W}),
+        (-1, {_sV: _WwSS}),
+        (-1, {_sV: _WwSSE}),
+        (-1, {_sV: _WwSSS}),
+        (-1, {_sV: _WwSSW}),
+        (-1, {_sV: _LwSSS}),
+        (-1, {_sV: _LwSSW}),
+        (-1, {_sV: _LwSSE}),
+        (-1, {_sV: _RwSSS}),
+        (-1, {_sV: _RwSSE}),
+        (-1, {_sV: _RwSSW}),
+        (-1, {_sV: _RwH}),
+        (-1, {_sV: _RwHaSSS}),
+        (-1, {_sV: _RwHaSSE}),
+        (-1, {_sV: _UP_}),
+    ),
+)
+
 OUTPOST_ARN: StaticSchema = (3, n0, _OA, 0)
 
 PLACEMENT_GROUP_ARN: StaticSchema = (3, n0, _PGA, 0)
-
-CAPACITY_RESERVATION_TENANCY: StaticSchema = (
-    14,
-    n0,
-    _CRT,
-    0,
-    (_def, _ded),
-    ((-1, {_sV: _def}), (-1, {_sV: _ded})),
-)
 
 CREATE_CAPACITY_RESERVATION_INPUT: StaticSchema = (
     18,
@@ -1264,10 +1665,10 @@ CREATE_CAPACITY_RESERVATION_INPUT: StaticSchema = (
     (
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 1),
-        (lambda: schemas.CAPACITY_RESERVATION_INSTANCE_PLATFORM, 1),
+        (CAPACITY_RESERVATION_INSTANCE_PLATFORM, 1),
         (lambda: schemas.AVAILABILITY_ZONE_NAME, 0),
         (lambda: schemas.AVAILABILITY_ZONE_ID, 0),
-        (CAPACITY_RESERVATION_TENANCY, 0),
+        (lambda: schemas.CAPACITY_RESERVATION_TENANCY, 0),
         (lambda: schemas.INTEGER, 1),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.BOOLEAN, 0),
@@ -1290,7 +1691,7 @@ CREATE_CAPACITY_RESERVATION_OUTPUT: StaticSchema = (
     _CCROr,
     {_sSI: _cCCRRoma, _smit: None},
     (_CRap,),
-    ((lambda: CAPACITY_RESERVATION, {_aQN: _CRap, _sN: _cRa}),),
+    ((lambda: schemas.CAPACITY_RESERVATION, {_aQN: _CRap, _sN: _cRa}),),
 )
 
 CREATE_CAPACITY_RESERVATION: StaticOperationSchema = (
@@ -1428,150 +1829,196 @@ INTERRUPTIBLE_CAPACITY_ALLOCATION: StaticSchema = (
     ),
 )
 
-INTERRUPTION_INFO: StaticSchema = (
+ATTRIBUTE_VALUE: StaticSchema = (
     18,
     n0,
-    _IInt,
+    _AV,
     0,
-    (_SCRI, _ITnt),
-    (
-        (lambda: schemas.STRING, {_aQN: _SCRI, _sN: _sCRI}),
-        (INTERRUPTION_TYPE, {_aQN: _ITnt, _sN: _iTn}),
-    ),
+    (_Va,),
+    ((lambda: schemas.STRING, {_aQN: _Va, _sN: _va}),),
 )
 
-CAPACITY_RESERVATION_LAUNCH_STATUS: StaticSchema = (
+TARGET_CAPACITY_UNIT_TYPE: StaticSchema = (
     14,
     n0,
-    _CRLS,
+    _TCUT,
     0,
-    (_LAUNCHABLE, _UNLAUNCHABLE),
-    ((-1, {_sV: _lau}), (-1, {_sV: _unla})),
-)
-
-CAPACITY_RESERVATION_TYPE: StaticSchema = (
-    14,
-    n0,
-    _CRTa,
-    0,
-    (_DEFAULT, _CB_),
-    ((-1, {_sV: _def}), (-1, {_sV: _cb_})),
-)
-
-CAPACITY_RESERVATION_STATE: StaticSchema = (
-    14,
-    n0,
-    _CRS,
-    0,
-    (_act, _ex, _can, _p, _fa, _sch, _pp__, _pf____, _asse, _dela, _uns, _ca, _unav),
+    (_VCPU, _MM, _UNITS),
     (
-        (-1, {_sV: _act}),
-        (-1, {_sV: _ex}),
-        (-1, {_sV: _can}),
-        (-1, {_sV: _p}),
-        (-1, {_sV: _fa}),
-        (-1, {_sV: _sch}),
-        (-1, {_sV: _pp___}),
-        (-1, {_sV: _pf_____}),
-        (-1, {_sV: _asse}),
-        (-1, {_sV: _dela}),
-        (-1, {_sV: _uns}),
-        (-1, {_sV: _ca}),
-        (-1, {_sV: _unav}),
-    ),
-)
-
-CAPACITY_RESERVATION: StaticSchema = (
-    18,
-    n0,
-    _CRap,
-    0,
-    (
-        _CRI,
-        _OIw,
-        _CRA,
-        _AZI,
-        _IT,
-        _IPns,
-        _AZ,
-        _Ten,
-        _TICo,
-        _AIC,
-        _EO,
-        _ESp,
-        _St,
-        _SDt,
-        _ED,
-        _EDT,
-        _IMC,
-        _CD,
-        _Tag,
-        _OA,
-        _CRFI,
-        _PGA,
-        _CAap,
-        _RTes,
-        _URBOI,
-        _CIom,
-        _DPel,
-        _CBI,
-        _Inte,
-        _ICA,
-        _IInt,
-        _ASd,
-        _ADdj,
-        _OSD,
-        _ZSP,
-        _LSa,
-    ),
-    (
-        (lambda: schemas.STRING, {_aQN: _CRI, _sN: _cRI}),
-        (lambda: schemas.STRING, {_aQN: _OIw, _sN: _oI}),
-        (lambda: schemas.STRING, {_aQN: _CRA, _sN: _cRA}),
-        (lambda: schemas.STRING, {_aQN: _AZI, _sN: _aZI}),
-        (lambda: schemas.STRING, {_aQN: _IT, _sN: _iT}),
+        (-1, {_sV: _vcp}),
         (
-            lambda: schemas.CAPACITY_RESERVATION_INSTANCE_PLATFORM,
-            {_aQN: _IPns, _sN: _iPns},
+            -1,
+            {
+                _sV: _mm_____________________________________________________________________
+            },
         ),
-        (lambda: schemas.STRING, {_aQN: _AZ, _sN: _aZ}),
-        (CAPACITY_RESERVATION_TENANCY, {_aQN: _Ten, _sN: _ten}),
-        (lambda: schemas.INTEGER, {_aQN: _TICo, _sN: _tICo}),
-        (lambda: schemas.INTEGER, {_aQN: _AIC, _sN: _aIC}),
-        (lambda: schemas.BOOLEAN, {_aQN: _EO, _sN: _eO}),
-        (lambda: schemas.BOOLEAN, {_aQN: _ESp, _sN: _eSp}),
-        (CAPACITY_RESERVATION_STATE, {_aQN: _St, _sN: _st}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _SDt, _sN: _sDt}),
-        (lambda: schemas.DATE_TIME, {_aQN: _ED, _sN: _eD}),
-        (END_DATE_TYPE, {_aQN: _EDT, _sN: _eDT}),
-        (INSTANCE_MATCH_CRITERIA, {_aQN: _IMC, _sN: _iMC}),
-        (lambda: schemas.DATE_TIME, {_aQN: _CD, _sN: _cD}),
-        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
-        (OUTPOST_ARN, {_aQN: _OA, _sN: _oA}),
-        (lambda: schemas.STRING, {_aQN: _CRFI, _sN: _cRFI}),
-        (PLACEMENT_GROUP_ARN, {_aQN: _PGA, _sN: _pGA}),
-        (CAPACITY_ALLOCATIONS, {_aQN: _CAS, _sN: _cAS}),
-        (CAPACITY_RESERVATION_TYPE, {_aQN: _RTes, _sN: _rTe}),
-        (lambda: schemas.ACCOUNT_ID, {_aQN: _URBOI, _sN: _uRBOI}),
-        (CAPACITY_RESERVATION_COMMITMENT_INFO, {_aQN: _CIom, _sN: _cIom}),
-        (CAPACITY_RESERVATION_DELIVERY_PREFERENCE, {_aQN: _DPel, _sN: _dP}),
-        (CAPACITY_BLOCK_ID, {_aQN: _CBI, _sN: _cBI}),
-        (lambda: schemas.BOXED_BOOLEAN, {_aQN: _Inte, _sN: _inte}),
-        (INTERRUPTIBLE_CAPACITY_ALLOCATION, {_aQN: _ICA, _sN: _iCA}),
-        (INTERRUPTION_INFO, {_aQN: _IInt, _sN: _iIn}),
-        (CAPACITY_RESERVATION_ADJUSTMENT_STATUS, {_aQN: _ASd, _sN: _aSd}),
-        (CAPACITY_RESERVATION_ADJUSTMENT_DETAILS, {_aQN: _ADdj, _sN: _aD}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _OSD, _sN: _oSD}),
-        (ZERO_SIZE_PREFERENCE, {_aQN: _ZSP, _sN: _zSP}),
-        (CAPACITY_RESERVATION_LAUNCH_STATUS, {_aQN: _LSa, _sN: _lS}),
+        (-1, {_sV: _uni}),
     ),
 )
 
-CAPACITY_RESERVATION_ID_SET: StaticSchema = (
+PLATFORM_VALUES: StaticSchema = (14, n0, _PV, 0, (_W,), ((-1, {_sV: _W}),))
+
+SNAPSHOT_LOCATION_ENUM: StaticSchema = (
+    14,
+    n0,
+    _SLE,
+    0,
+    (_REGIONAL, _LOCAL),
+    ((-1, {_sV: _regi}), (-1, {_sV: _lo})),
+)
+
+DISK_IMAGE_FORMAT: StaticSchema = (
+    14,
+    n0,
+    _DIF,
+    0,
+    (_VMDK, _RAW, _VHD),
+    ((-1, {_sV: _VMDK}), (-1, {_sV: _RAW}), (-1, {_sV: _VHD})),
+)
+
+CAPACITY_RESERVATION_PREFERENCE: StaticSchema = (
+    14,
+    n0,
+    _CRP,
+    0,
+    (_cro_, _op, _no),
+    ((-1, {_sV: _cro__}), (-1, {_sV: _op}), (-1, {_sV: _no})),
+)
+
+CAPACITY_RESERVATION_TARGET: StaticSchema = (
+    18,
+    n0,
+    _CRTap,
+    0,
+    (_CRI, _CRRGAa),
+    ((lambda: schemas.CAPACITY_RESERVATION_ID, 0), (lambda: schemas.STRING, 0)),
+)
+
+OPERATOR_REQUEST: StaticSchema = (
+    18,
+    n0,
+    _ORper,
+    0,
+    (_Pri,),
+    ((lambda: schemas.STRING, 0),),
+)
+
+SNAPSHOT_STATE: StaticSchema = (
+    14,
+    n0,
+    _SSn,
+    0,
+    (_p, _compl, _er, _rec, _reco),
+    (
+        (-1, {_sV: _p}),
+        (-1, {_sV: _compl}),
+        (-1, {_sV: _er}),
+        (-1, {_sV: _rec}),
+        (-1, {_sV: _reco}),
+    ),
+)
+
+STORAGE_TIER: StaticSchema = (
+    14,
+    n0,
+    _STt,
+    0,
+    (_arc, _stan),
+    ((-1, {_sV: _arc}), (-1, {_sV: _stan})),
+)
+
+VOLUME_ID_STRING_LIST: StaticSchema = (
     16,
     n0,
-    _CRIS,
+    _VISL,
     0,
     (_me,),
-    ((lambda: schemas.CAPACITY_RESERVATION_ID, {_sN: _i}),),
+    ((VOLUME_ID, {_sN: _VIo}),),
+)
+
+BOOT_MODE_VALUES: StaticSchema = (
+    14,
+    n0,
+    _BMV,
+    0,
+    (_lb__, _ue, _up__),
+    ((-1, {_sV: _lb___}), (-1, {_sV: _ue}), (-1, {_sV: _up___})),
+)
+
+VIRTUALIZATION_TYPE: StaticSchema = (
+    14,
+    n0,
+    _VTi,
+    0,
+    (_hv, _para),
+    ((-1, {_sV: _hv}), (-1, {_sV: _para})),
+)
+
+INSTANCE_ATTRIBUTE_NAME: StaticSchema = (
+    14,
+    n0,
+    _IANn,
+    0,
+    (
+        _iT,
+        _ker,
+        _ramd,
+        _uDs,
+        _dAT,
+        _iISB,
+        _rDN,
+        _bDM,
+        _pCr,
+        _sDC,
+        _gS,
+        _eO,
+        _sNS,
+        _eSna,
+        _eOn,
+        _dASi,
+    ),
+    (
+        (-1, {_sV: _iT}),
+        (-1, {_sV: _ker}),
+        (-1, {_sV: _ramd}),
+        (-1, {_sV: _uDs}),
+        (-1, {_sV: _dAT}),
+        (-1, {_sV: _iISB}),
+        (-1, {_sV: _rDN}),
+        (-1, {_sV: _bDM}),
+        (-1, {_sV: _pCr}),
+        (-1, {_sV: _sDC}),
+        (-1, {_sV: _gS}),
+        (-1, {_sV: _eO}),
+        (-1, {_sV: _sNS}),
+        (-1, {_sV: _eSna}),
+        (-1, {_sV: _eOn}),
+        (-1, {_sV: _dASi}),
+    ),
+)
+
+ARCHITECTURE_TYPE: StaticSchema = (
+    14,
+    n0,
+    _ATr,
+    0,
+    (
+        _i__________________________________________________________________________,
+        _x______________________________________________________,
+        _arm,
+        _xm____________,
+        _am______,
+    ),
+    (
+        (
+            -1,
+            {
+                _sV: _i__________________________________________________________________________
+            },
+        ),
+        (-1, {_sV: _x______________________________________________________}),
+        (-1, {_sV: _arm}),
+        (-1, {_sV: _xm____________}),
+        (-1, {_sV: _am______}),
+    ),
 )

@@ -14,8 +14,8 @@ from ..models import (
     ActiveVpnTunnelStatus,
     AssociatedRole,
     AttributeSummary,
-    AvailableCapacity,
     BlockDeviceMappingResponse,
+    CancelCapacityReservationFleetError,
     CapacityManagerCondition,
     CapacityManagerConditionDict,
     CapacityManagerDimension,
@@ -26,14 +26,16 @@ from ..models import (
     DataQuery,
     DataQueryDict,
     DataResponse,
+    DeleteQueuedReservedInstancesError,
     DescribeFleetError,
     DescribeFleetsInstances,
     DestinationOptionsResponse,
-    EventInformation,
     ImageAncestryEntry,
     ImageCriterion,
     ImageFinding,
+    InstanceExportDetails,
     InstanceFamilyCreditSpecification,
+    InstanceFlexCostAllocationPolicyDocument,
     InstanceMetadataDefaultsResponse,
     InstanceRequirements,
     InstanceRequirementsRequest,
@@ -70,9 +72,11 @@ from ..models import (
     MaintenanceDetails,
     ManagedResourceVisibilitySettings,
     MetricDataResult,
+    NatFlexCostAllocationPolicyDocument,
     NetworkInsightsAccessScopeContent,
     OnDemandOptions,
     PciId,
+    PcxFlexCostAllocationPolicyDocument,
     Placement,
     PlacementDict,
     PlacementResponse,
@@ -110,10 +114,475 @@ from ..models import (
     TransitGatewayRouteTableAssociation,
     TransitGatewayRouteTablePropagation,
     VerifiedAccessEndpointTarget,
+    VerifiedAccessInstanceOpenVpnClientConfiguration,
+    VerifiedAccessInstanceUserTrustProviderClientConfiguration,
     VpcEncryptionNonCompliantResource,
     VpnConnectionDeviceType,
     _SerdeShape,
 )
+
+@dataclass(kw_only=True)
+class ExportImageTask(_SerdeShape):
+    """Describes an export image task."""
+
+    description: str | None = ...
+    """A description of the image being exported."""
+    export_image_task_id: str | None = ...
+    """The ID of the export image task."""
+    image_id: str | None = ...
+    """The ID of the image."""
+    progress: str | None = ...
+    """The percent complete of the export image task."""
+    s3_export_location: ExportTaskS3Location | None = ...
+    """Information about the destination Amazon S3 bucket."""
+    status: str | None = ...
+    """
+    The status of the export image task. The possible values are `active`,
+    `completed`, `deleting`, and `deleted`.
+    """
+    status_message: str | None = ...
+    """The status message for the export image task."""
+    tags: list[Tag] | None = ...
+    """Any tags assigned to the export image task."""
+
+@dataclass(kw_only=True)
+class ExportTask(_SerdeShape):
+    """Describes an export instance task."""
+
+    description: str | None = ...
+    """A description of the resource being exported."""
+    export_task_id: str | None = ...
+    """The ID of the export task."""
+    export_to_s3_task: ExportToS3Task | None = ...
+    """Information about the export task."""
+    instance_export_details: InstanceExportDetails | None = ...
+    """Information about the instance to export."""
+    state: str | None = ...
+    """The state of the export task."""
+    status_message: str | None = ...
+    """The status message related to the export task."""
+    tags: list[Tag] | None = ...
+    """The tags for the export task."""
+
+@dataclass(kw_only=True)
+class ExportTaskS3Location(_SerdeShape):
+    """Describes the destination for an export image task."""
+
+    s3_bucket: str | None = ...
+    """The destination Amazon S3 bucket."""
+    s3_prefix: str | None = ...
+    """The prefix (logical hierarchy) in the bucket."""
+
+@dataclass(kw_only=True)
+class ExportTaskS3LocationRequest(_SerdeShape):
+    """Describes the destination for an export image task."""
+
+    s3_bucket: str | None = ...
+    """The destination Amazon S3 bucket."""
+    s3_prefix: str | None = ...
+    """The prefix (logical hierarchy) in the bucket."""
+
+class ExportTaskS3LocationRequestDict(TypedDict, total=False):
+    """Dictionary form of `ExportTaskS3LocationRequest`."""
+
+    s3_bucket: Required[str]
+    """The destination Amazon S3 bucket."""
+    s3_prefix: str | None
+    """The prefix (logical hierarchy) in the bucket."""
+
+class ExportTaskState(UnknownEnumMixin, StrEnum):
+    ACTIVE = "active"
+    CANCELLING = "cancelling"
+    CANCELLED = "cancelled"
+    COMPLETED = "completed"
+
+@dataclass(kw_only=True)
+class ExportToS3Task(_SerdeShape):
+    """Describes the format and location for the export task."""
+
+    container_format: str | None = ...
+    """
+    The container format used to combine disk images with metadata (such as
+    OVF). If absent, only the disk image is exported.
+    """
+    disk_image_format: str | None = ...
+    """The format for the exported image."""
+    s3_bucket: str | None = ...
+    """
+    The Amazon S3 bucket for the destination image. The destination bucket
+    must exist and have an access control list (ACL) attached that specifies
+    the Region-specific canonical account ID for the `Grantee`. For more
+    information about the ACL to your S3 bucket, see
+    [Prerequisites](https://docs.aws.amazon.com/vm-import/latest/userguide/vmexport.html#vmexport-prerequisites)
+    in the VM Import/Export User Guide.
+    """
+    s3_key: str | None = ...
+    """The encryption key for your S3 bucket."""
+
+@dataclass(kw_only=True)
+class ExportToS3TaskSpecification(_SerdeShape):
+    """Describes an export instance task."""
+
+    disk_image_format: str | None = ...
+    """The format for the exported image."""
+    container_format: str | None = ...
+    """
+    The container format used to combine disk images with metadata (such as
+    OVF). If absent, only the disk image is exported.
+    """
+    s3_bucket: str | None = ...
+    """
+    The Amazon S3 bucket for the destination image. The destination bucket
+    must exist and have an access control list (ACL) attached that specifies
+    the Region-specific canonical account ID for the `Grantee`. For more
+    information about the ACL to your S3 bucket, see
+    [Prerequisites](https://docs.aws.amazon.com/vm-import/latest/userguide/vmexport.html#vmexport-prerequisites)
+    in the VM Import/Export User Guide.
+    """
+    s3_prefix: str | None = ...
+    """
+    The image is written to a single object in the Amazon S3 bucket at the
+    S3 key s3prefix + exportTaskId + '.' + diskImageFormat.
+    """
+
+class ExportToS3TaskSpecificationDict(TypedDict, total=False):
+    """Dictionary form of `ExportToS3TaskSpecification`."""
+
+    disk_image_format: str | None
+    """The format for the exported image."""
+    container_format: str | None
+    """
+    The container format used to combine disk images with metadata (such as
+    OVF). If absent, only the disk image is exported.
+    """
+    s3_bucket: str | None
+    """
+    The Amazon S3 bucket for the destination image. The destination bucket
+    must exist and have an access control list (ACL) attached that specifies
+    the Region-specific canonical account ID for the `Grantee`. For more
+    information about the ACL to your S3 bucket, see
+    [Prerequisites](https://docs.aws.amazon.com/vm-import/latest/userguide/vmexport.html#vmexport-prerequisites)
+    in the VM Import/Export User Guide.
+    """
+    s3_prefix: str | None
+    """
+    The image is written to a single object in the Amazon S3 bucket at the
+    S3 key s3prefix + exportTaskId + '.' + diskImageFormat.
+    """
+
+@dataclass(kw_only=True)
+class ExportTransitGatewayRoutesInput(_SerdeShape):
+    """Dataclass for ExportTransitGatewayRoutesInput structure."""
+
+    transit_gateway_route_table_id: str | None = ...
+    """The ID of the route table."""
+    filters: list[Filter] | None = ...
+    """
+    One or more filters. The possible values are:
+
+    - `attachment.transit-gateway-attachment-id` - The id of the transit
+      gateway attachment.
+
+    - `attachment.resource-id` - The resource id of the transit gateway
+      attachment.
+
+    - `route-search.exact-match` - The exact match of the specified filter.
+
+    - `route-search.longest-prefix-match` - The longest prefix that matches
+      the route.
+
+    - `route-search.subnet-of-match` - The routes with a subnet that match
+      the specified CIDR filter.
+
+    - `route-search.supernet-of-match` - The routes with a CIDR that
+      encompass the CIDR filter. For example, if you have 10.0.1.0/29 and
+      10.0.1.0/31 routes in your route table and you specify
+      supernet-of-match as 10.0.1.0/30, then the result returns 10.0.1.0/29.
+
+    - `state` - The state of the route (`active` | `blackhole`).
+
+    - `transit-gateway-route-destination-cidr-block` - The CIDR range.
+
+    - `type` - The type of route (`propagated` | `static`).
+    """
+    s3_bucket: str | None = ...
+    """The name of the S3 bucket."""
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class ExportTransitGatewayRoutesInputDict(TypedDict, total=False):
+    """Dictionary form of `ExportTransitGatewayRoutesInput`."""
+
+    transit_gateway_route_table_id: Required[str]
+    """The ID of the route table."""
+    filters: Sequence[Filter | FilterDict] | None
+    """
+    One or more filters. The possible values are:
+
+    - `attachment.transit-gateway-attachment-id` - The id of the transit
+      gateway attachment.
+
+    - `attachment.resource-id` - The resource id of the transit gateway
+      attachment.
+
+    - `route-search.exact-match` - The exact match of the specified filter.
+
+    - `route-search.longest-prefix-match` - The longest prefix that matches
+      the route.
+
+    - `route-search.subnet-of-match` - The routes with a subnet that match
+      the specified CIDR filter.
+
+    - `route-search.supernet-of-match` - The routes with a CIDR that
+      encompass the CIDR filter. For example, if you have 10.0.1.0/29 and
+      10.0.1.0/31 routes in your route table and you specify
+      supernet-of-match as 10.0.1.0/30, then the result returns 10.0.1.0/29.
+
+    - `state` - The state of the route (`active` | `blackhole`).
+
+    - `transit-gateway-route-destination-cidr-block` - The CIDR range.
+
+    - `type` - The type of route (`propagated` | `static`).
+    """
+    s3_bucket: Required[str]
+    """The name of the S3 bucket."""
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class ExportTransitGatewayRoutesOutput(_SerdeShape):
+    """Dataclass for ExportTransitGatewayRoutesOutput structure."""
+
+    s3_location: str | None = ...
+    """
+    The URL of the exported file in Amazon S3. For example,
+    s3://*bucket_name*/VPCTransitGateway/TransitGatewayRouteTables/*file_name*.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ExportVerifiedAccessInstanceClientConfigurationInput(_SerdeShape):
+    """
+    Dataclass for ExportVerifiedAccessInstanceClientConfigurationInput
+    structure.
+    """
+
+    verified_access_instance_id: str | None = ...
+    """The ID of the Verified Access instance."""
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class ExportVerifiedAccessInstanceClientConfigurationInputDict(TypedDict, total=False):
+    """Dictionary form of `ExportVerifiedAccessInstanceClientConfigurationInput`."""
+
+    verified_access_instance_id: Required[str]
+    """The ID of the Verified Access instance."""
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class ExportVerifiedAccessInstanceClientConfigurationOutput(_SerdeShape):
+    """
+    Dataclass for ExportVerifiedAccessInstanceClientConfigurationOutput
+    structure.
+    """
+
+    version: str | None = ...
+    """The version."""
+    verified_access_instance_id: str | None = ...
+    """The ID of the Verified Access instance."""
+    region: str | None = ...
+    """The Region."""
+    device_trust_providers: list[str] | None = ...
+    """The device trust providers."""
+    user_trust_provider: (
+        VerifiedAccessInstanceUserTrustProviderClientConfiguration | None
+    ) = ...
+    """The user identity trust provider."""
+    open_vpn_configurations: (
+        list[VerifiedAccessInstanceOpenVpnClientConfiguration] | None
+    ) = ...
+    """The Open VPN configuration."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ExternalAuthorityConfiguration(_SerdeShape):
+    """
+    The configuration that links an Amazon VPC IPAM scope to an external
+    authority system. It specifies the type of external system and the
+    external resource identifier that identifies your account or instance in
+    that system.
+
+    For more information, see [Integrate VPC IPAM with Infoblox
+    infrastructure](https://docs.aws.amazon.com/vpc/latest/ipam/integrate-infoblox-ipam.html)
+    in the *Amazon VPC IPAM User Guide*.
+    """
+
+    type: str | None = ...
+    """The type of external authority."""
+    external_resource_identifier: str | None = ...
+    """
+    The identifier for the external resource managing this scope. For
+    Infoblox integrations, this is the Infoblox resource identifier in the
+    format
+    `<version>`{=html}`.identity.account.``<entity_realm>`{=html}`.``<entity_id>`{=html}.
+    """
+
+class ExternalAuthorityConfigurationDict(TypedDict, total=False):
+    """Dictionary form of `ExternalAuthorityConfiguration`."""
+
+    type: str | None
+    """The type of external authority."""
+    external_resource_identifier: str | None
+    """
+    The identifier for the external resource managing this scope. For
+    Infoblox integrations, this is the Infoblox resource identifier in the
+    format
+    `<version>`{=html}`.identity.account.``<entity_realm>`{=html}`.``<entity_id>`{=html}.
+    """
+
+@dataclass(kw_only=True)
+class FailedCapacityReservationFleetCancellationResult(_SerdeShape):
+    """Describes a Capacity Reservation Fleet that could not be cancelled."""
+
+    capacity_reservation_fleet_id: str | None = ...
+    """The ID of the Capacity Reservation Fleet that could not be cancelled."""
+    cancel_capacity_reservation_fleet_error: (
+        CancelCapacityReservationFleetError | None
+    ) = ...
+    """Information about the Capacity Reservation Fleet cancellation error."""
+
+@dataclass(kw_only=True)
+class FailedQueuedPurchaseDeletion(_SerdeShape):
+    """Describes a Reserved Instance whose queued purchase was not deleted."""
+
+    error: DeleteQueuedReservedInstancesError | None = ...
+    """The error."""
+    reserved_instances_id: str | None = ...
+    """The ID of the Reserved Instance."""
+
+@dataclass(kw_only=True)
+class FastLaunchLaunchTemplateSpecificationRequest(_SerdeShape):
+    """
+    Request to create a launch template for a Windows fast launch enabled
+    AMI.
+
+    Note:
+        Note - You can specify either the `LaunchTemplateName` or the
+        `LaunchTemplateId`, but not both.
+    """
+
+    launch_template_id: str | None = ...
+    """
+    Specify the ID of the launch template that the AMI should use for
+    Windows fast launch.
+    """
+    launch_template_name: str | None = ...
+    """
+    Specify the name of the launch template that the AMI should use for
+    Windows fast launch.
+    """
+    version: str | None = ...
+    """
+    Specify the version of the launch template that the AMI should use for
+    Windows fast launch.
+    """
+
+class FastLaunchLaunchTemplateSpecificationRequestDict(TypedDict, total=False):
+    """Dictionary form of `FastLaunchLaunchTemplateSpecificationRequest`."""
+
+    launch_template_id: str | None
+    """
+    Specify the ID of the launch template that the AMI should use for
+    Windows fast launch.
+    """
+    launch_template_name: str | None
+    """
+    Specify the name of the launch template that the AMI should use for
+    Windows fast launch.
+    """
+    version: Required[str]
+    """
+    Specify the version of the launch template that the AMI should use for
+    Windows fast launch.
+    """
+
+@dataclass(kw_only=True)
+class FastLaunchLaunchTemplateSpecificationResponse(_SerdeShape):
+    """
+    Identifies the launch template that the AMI uses for Windows fast
+    launch.
+    """
+
+    launch_template_id: str | None = ...
+    """The ID of the launch template that the AMI uses for Windows fast launch."""
+    launch_template_name: str | None = ...
+    """
+    The name of the launch template that the AMI uses for Windows fast
+    launch.
+    """
+    version: str | None = ...
+    """
+    The version of the launch template that the AMI uses for Windows fast
+    launch.
+    """
+
+class FastLaunchResourceType(UnknownEnumMixin, StrEnum):
+    SNAPSHOT = "snapshot"
+
+@dataclass(kw_only=True)
+class FastLaunchSnapshotConfigurationRequest(_SerdeShape):
+    """
+    Configuration settings for creating and managing pre-provisioned
+    snapshots for a Windows fast launch enabled AMI.
+    """
+
+    target_resource_count: int | None = ...
+    """
+    The number of pre-provisioned snapshots to keep on hand for a Windows
+    fast launch enabled AMI.
+    """
+
+class FastLaunchSnapshotConfigurationRequestDict(TypedDict, total=False):
+    """Dictionary form of `FastLaunchSnapshotConfigurationRequest`."""
+
+    target_resource_count: int | None
+    """
+    The number of pre-provisioned snapshots to keep on hand for a Windows
+    fast launch enabled AMI.
+    """
 
 @dataclass(kw_only=True)
 class FastLaunchSnapshotConfigurationResponse(_SerdeShape):
@@ -1887,6 +2356,323 @@ class FleetType(UnknownEnumMixin, StrEnum):
     REQUEST = "request"
     MAINTAIN = "maintain"
     INSTANT = "instant"
+
+class FlexCostAllocationAssociationMode(UnknownEnumMixin, StrEnum):
+    """
+    The mode of a policy association. Valid values:
+
+    - `direct` - The policy is associated with specific resources by
+      resource ID.
+
+    - `scope` - The policy is associated with a scope of resources.
+    """
+
+    DIRECT = "direct"
+    SCOPE = "scope"
+
+@dataclass(kw_only=True)
+class FlexCostAllocationCidrMapping(_SerdeShape):
+    """Maps a CIDR range to a label for cost allocation reporting."""
+
+    cidr_range: str | None = ...
+    """The CIDR range. This parameter is required."""
+    cidr_label: str | None = ...
+    """
+    The label to assign to the CIDR range. The label can be up to 64
+    characters long. It can contain letters, numbers, hyphens (`-`), and
+    underscores (`_`), and must start with a letter or a number. This
+    parameter is required.
+    """
+
+class FlexCostAllocationCidrMappingDict(TypedDict, total=False):
+    """Dictionary form of `FlexCostAllocationCidrMapping`."""
+
+    cidr_range: Required[str]
+    """The CIDR range. This parameter is required."""
+    cidr_label: Required[str]
+    """
+    The label to assign to the CIDR range. The label can be up to 64
+    characters long. It can contain letters, numbers, hyphens (`-`), and
+    underscores (`_`), and must start with a letter or a number. This
+    parameter is required.
+    """
+
+@dataclass(kw_only=True)
+class FlexCostAllocationCidrRangeSpecifications(_SerdeShape):
+    """
+    Specifies the CIDR ranges and labels to use for cost allocation when the
+    reporting granularity is `cidr`.
+    """
+
+    prefixes_type: str | None = ...
+    """
+    The type of prefixes to use. This parameter is required. Valid values
+    are `source-prefixes` and `destination-prefixes`.
+    """
+    prefixes: list[FlexCostAllocationCidrMapping] | None = ...
+    """
+    The CIDR range to label mappings. You can specify from 1 to 100
+    mappings. This parameter is required.
+    """
+
+class FlexCostAllocationCidrRangeSpecificationsDict(TypedDict, total=False):
+    """Dictionary form of `FlexCostAllocationCidrRangeSpecifications`."""
+
+    prefixes_type: Required[str]
+    """
+    The type of prefixes to use. This parameter is required. Valid values
+    are `source-prefixes` and `destination-prefixes`.
+    """
+    prefixes: Required[
+        Sequence[FlexCostAllocationCidrMapping | FlexCostAllocationCidrMappingDict]
+    ]
+    """
+    The CIDR range to label mappings. You can specify from 1 to 100
+    mappings. This parameter is required.
+    """
+
+class FlexCostAllocationCostDimension(UnknownEnumMixin, StrEnum):
+    """
+    A cost dimension used for allocation. Valid values are `data-transfer`
+    and `data-processing`. `data-processing` is valid only in a
+    `NatFcaPolicyDocument`.
+    """
+
+    DATA_TRANSFER = "data-transfer"
+    DATA_PROCESSING = "data-processing"
+
+@dataclass(kw_only=True)
+class FlexCostAllocationNetworkResourceScope(_SerdeShape):
+    """
+    Specifies a scope of network resources for a scope-based policy
+    association.
+    """
+
+    resource_type: str | None = ...
+    """
+    The type of scope. This parameter is required. Valid values are
+    `account`, `vpc`, and `subnet`.
+    """
+    resource_ids: list[str] | None = ...
+    """
+    The IDs of the resources owned by you that define the scope. You can
+    specify from 1 to 20 IDs. This parameter is required.
+    """
+
+class FlexCostAllocationNetworkResourceScopeDict(TypedDict, total=False):
+    """Dictionary form of `FlexCostAllocationNetworkResourceScope`."""
+
+    resource_type: Required[str]
+    """
+    The type of scope. This parameter is required. Valid values are
+    `account`, `vpc`, and `subnet`.
+    """
+    resource_ids: Required[Sequence[str]]
+    """
+    The IDs of the resources owned by you that define the scope. You can
+    specify from 1 to 20 IDs. This parameter is required.
+    """
+
+class FlexCostAllocationNetworkResourceScopeType(UnknownEnumMixin, StrEnum):
+    """
+    The type of scope used for a scope-based policy association. Valid
+    values are `account`, `vpc`, and `subnet`.
+    """
+
+    ACCOUNT = "account"
+    VPC = "vpc"
+    SUBNET = "subnet"
+
+class FlexCostAllocationNetworkResourceType(UnknownEnumMixin, StrEnum):
+    """
+    The type of network resource that a flex cost allocation policy applies
+    to. Valid values are `natgw` (NAT gateway), `pcx` (Amazon VPC peering
+    connection), and `ec2` (EC2 instance).
+    """
+
+    NATGW = "natgw"
+    PCX = "pcx"
+    EC2 = "ec2"
+
+@dataclass(kw_only=True)
+class FlexCostAllocationOperationFailure(_SerdeShape):
+    """
+    Describes a policy, association, or network resource that a Networking
+    Flexible Cost Allocation operation failed to process.
+    """
+
+    resource_id: str | None = ...
+    """The ID of the resource that could not be processed."""
+    failure_code: str | None = ...
+    """
+    The code that identifies the type of failure. Possible values are:
+
+    - `ResourceNotFound` - (`DeleteNetworkingFlexCostAllocationPolicies`)
+      The policy doesn't exist or isn't owned by your account.
+
+    - `InvalidResourceState` -
+      (`DeleteNetworkingFlexCostAllocationPolicies`) The policy has active
+      associations.
+
+    - `InvalidResource` - (`AssociateNetworkingFlexCostAllocationPolicy`)
+      The resource ID is malformed, the resource type doesn't match the
+      policy, or the scope is an account other than yours.
+      (`DisassociateNetworkingFlexCostAllocationPolicy`) The association
+      doesn't exist or was already removed.
+
+    - `ResourceAlreadyAssociated` -
+      (`AssociateNetworkingFlexCostAllocationPolicy`) The resource already
+      has an active association.
+
+    - `InternalError` - An internal error occurred. Retry the request.
+    """
+    failure_reason: str | None = ...
+    """The reason for the failure."""
+
+@dataclass(kw_only=True)
+class FlexCostAllocationPolicyAssociationDescription(_SerdeShape):
+    """
+    Describes an association between a flex cost allocation policy and a
+    network resource.
+    """
+
+    fca_policy_association_id: str | None = ...
+    """The ID of the policy association."""
+    fca_policy_id: str | None = ...
+    """The ID of the policy."""
+    network_resource_id: str | None = ...
+    """The ID of the associated network resource."""
+    owner_account: str | None = ...
+    """The ID of the account that owns the association."""
+    associated_at: datetime | None = ...
+    """The date and time when the association was created."""
+    expected_effective_at: datetime | None = ...
+    """
+    The date and time when the association is expected to apply to network
+    traffic.
+    """
+    association_mode: str | None = ...
+    """
+    The mode of the association. Valid values:
+
+    - `direct` - The policy is associated with specific resources by
+      resource ID.
+
+    - `scope` - The policy is associated with a scope of resources in an
+      account, Amazon VPC, or subnet.
+    """
+    managed_by: str | None = ...
+    """
+    The entity that manages the association. Valid values are:
+
+    - `account` - The account that owns the association created it.
+
+    - `declarative-policy` - An Amazon Web Services Organizations
+      declarative policy created the association. You can't remove the
+      association.
+    """
+
+@dataclass(kw_only=True)
+class FlexCostAllocationPolicyDescription(_SerdeShape):
+    """Describes a flex cost allocation policy."""
+
+    fca_policy_id: str | None = ...
+    """The ID of the policy."""
+    fca_policy_arn: str | None = ...
+    """The Amazon Resource Name (ARN) of the policy."""
+    network_resource_type: str | None = ...
+    """The type of network resource that the policy applies to."""
+    nat_fca_policy_document: NatFlexCostAllocationPolicyDocument | None = ...
+    """The policy document that defines cost allocation for NAT gateways."""
+    instance_fca_policy_document: InstanceFlexCostAllocationPolicyDocument | None = ...
+    """The policy document that defines cost allocation for EC2 instances."""
+    pcx_fca_policy_document: PcxFlexCostAllocationPolicyDocument | None = ...
+    """
+    The policy document that defines cost allocation for Amazon VPC peering
+    connections.
+    """
+    show_back_enabled: bool | None = ...
+    """Indicates whether showback reporting is enabled for the policy."""
+    owner_account: str | None = ...
+    """The ID of the account that owns the policy."""
+    description: str | None = ...
+    """The description of the policy."""
+    latest_version: int | None = ...
+    """The number of the latest version of the policy."""
+    version_expected_effective_at: datetime | None = ...
+    """
+    The date and time when the latest version of the policy is expected to
+    apply to network traffic. The policy configuration in this response is
+    from the latest version.
+    """
+    policy_created_at: datetime | None = ...
+    """The date and time when the policy was created."""
+    updated_at: datetime | None = ...
+    """The date and time when the policy was last updated."""
+    managed_by: str | None = ...
+    """
+    The entity that manages the policy. Valid values are:
+
+    - `account` - The account that owns the policy created it.
+
+    - `declarative-policy` - An Amazon Web Services Organizations
+      declarative policy created the policy. You can't modify or delete the
+      policy.
+    """
+    tags: list[Tag] | None = ...
+    """The tags assigned to the policy."""
+
+@dataclass(kw_only=True)
+class FlexCostAllocationPolicyVersion(_SerdeShape):
+    """Describes a version of a flex cost allocation policy."""
+
+    fca_policy_id: str | None = ...
+    """The ID of the policy."""
+    version: int | None = ...
+    """The version number."""
+    network_resource_type: str | None = ...
+    """The type of network resource that the policy applies to."""
+    nat_fca_policy_document: NatFlexCostAllocationPolicyDocument | None = ...
+    """The policy document that defines cost allocation for NAT gateways."""
+    instance_fca_policy_document: InstanceFlexCostAllocationPolicyDocument | None = ...
+    """The policy document that defines cost allocation for EC2 instances."""
+    pcx_fca_policy_document: PcxFlexCostAllocationPolicyDocument | None = ...
+    """
+    The policy document that defines cost allocation for Amazon VPC peering
+    connections.
+    """
+    show_back_enabled: bool | None = ...
+    """
+    Indicates whether showback reporting is enabled for this version of the
+    policy.
+    """
+    description: str | None = ...
+    """The description of this version of the policy."""
+    expected_effective_at: datetime | None = ...
+    """
+    The date and time when this version of the policy is expected to apply
+    to network traffic.
+    """
+    created_at: datetime | None = ...
+    """The date and time when this version of the policy was created."""
+
+class FlexCostAllocationReportingGranularity(UnknownEnumMixin, StrEnum):
+    """
+    The resource granularity level at which networking costs are allocated.
+    Valid values are `eni`, `ec2`, `subnet`, `vpc`, `account`, `peering-id`,
+    and `cidr`.
+
+    Which values you can use depends on the policy document. `peering-id` is
+    valid only in a `PcxFcaPolicyDocument`.
+    """
+
+    ENI = "eni"
+    EC2 = "ec2"
+    SUBNET = "subnet"
+    VPC = "vpc"
+    ACCOUNT = "account"
+    PEERING_ID = "peering-id"
+    CIDR = "cidr"
 
 class FlexibleEnaQueuesSupport(UnknownEnumMixin, StrEnum):
     UNSUPPORTED = "unsupported"
@@ -5765,6 +6551,57 @@ class GetManagedResourceVisibilityOutput(_SerdeShape):
     """
 
 @dataclass(kw_only=True)
+class GetNetworkingFlexCostAllocationPolicyVersionsInput(_SerdeShape):
+    """
+    Dataclass for GetNetworkingFlexCostAllocationPolicyVersionsInput
+    structure.
+    """
+
+    fca_policy_id: str | None = ...
+    """The ID of the flex cost allocation policy. This parameter is required."""
+    versions_to_include: list[int] | None = ...
+    """The policy versions to include in the results."""
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class GetNetworkingFlexCostAllocationPolicyVersionsInputDict(TypedDict, total=False):
+    """Dictionary form of `GetNetworkingFlexCostAllocationPolicyVersionsInput`."""
+
+    fca_policy_id: Required[str]
+    """The ID of the flex cost allocation policy. This parameter is required."""
+    versions_to_include: Sequence[int] | None
+    """The policy versions to include in the results."""
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class GetNetworkingFlexCostAllocationPolicyVersionsOutput(_SerdeShape):
+    """
+    Dataclass for GetNetworkingFlexCostAllocationPolicyVersionsOutput
+    structure.
+    """
+
+    fca_policy_versions: list[FlexCostAllocationPolicyVersion] | None = ...
+    """Information about the policy versions."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
 class GetNetworkInsightsAccessScopeAnalysisFindingsInput(_SerdeShape):
     """
     Dataclass for GetNetworkInsightsAccessScopeAnalysisFindingsInput
@@ -7886,564 +8723,3 @@ class GpuDeviceMemoryInfo(_SerdeShape):
 
     size_in_mi_b: int | None = ...
     """The size of the memory available to the GPU accelerator, in MiB."""
-
-@dataclass(kw_only=True)
-class GpuInfo(_SerdeShape):
-    """Describes the GPU accelerators for the instance type."""
-
-    gpus: list[GpuDeviceInfo] | None = ...
-    """Describes the GPU accelerators for the instance type."""
-    total_gpu_memory_in_mi_b: int | None = ...
-    """
-    The total size of the memory for the GPU accelerators for the instance
-    type, in MiB.
-    """
-
-class GroupBy(UnknownEnumMixin, StrEnum):
-    RESOURCE_REGION = "resource-region"
-    AVAILABILITY_ZONE_ID = "availability-zone-id"
-    ACCOUNT_ID = "account-id"
-    ACCOUNT_NAME = "account-name"
-    INSTANCE_FAMILY = "instance-family"
-    INSTANCE_TYPE = "instance-type"
-    INSTANCE_PLATFORM = "instance-platform"
-    RESERVATION_ARN = "reservation-arn"
-    RESERVATION_ID = "reservation-id"
-    RESERVATION_TYPE = "reservation-type"
-    RESERVATION_CREATE_TIMESTAMP = "reservation-create-timestamp"
-    RESERVATION_START_TIMESTAMP = "reservation-start-timestamp"
-    RESERVATION_END_TIMESTAMP = "reservation-end-timestamp"
-    RESERVATION_END_DATE_TYPE = "reservation-end-date-type"
-    TENANCY = "tenancy"
-    RESERVATION_STATE = "reservation-state"
-    RESERVATION_INSTANCE_MATCH_CRITERIA = "reservation-instance-match-criteria"
-    RESERVATION_UNUSED_FINANCIAL_OWNER = "reservation-unused-financial-owner"
-
-@dataclass(kw_only=True)
-class GroupIdentifier(_SerdeShape):
-    """Describes a security group."""
-
-    group_id: str | None = ...
-    """The ID of the security group."""
-    group_name: str | None = ...
-    """The name of the security group."""
-
-class GroupIdentifierDict(TypedDict, total=False):
-    """Dictionary form of `GroupIdentifier`."""
-
-    group_id: str | None
-    """The ID of the security group."""
-    group_name: str | None
-    """The name of the security group."""
-
-class HaStatus(UnknownEnumMixin, StrEnum):
-    PROCESSING = "processing"
-    ACTIVE = "active"
-    STANDBY = "standby"
-    INVALID = "invalid"
-
-@dataclass(kw_only=True)
-class HealthCheckPathDestinationRequestObject(_SerdeShape):
-    """
-    Describes a destination for a health check path in a request.
-    Destinations can be in a different Availability Zone than the source
-    (cross-AZ) or in a Local Zone (AZ to Local Zone), enabling remote health
-    validation of your application.
-    """
-
-    subnet_id: str | None = ...
-    """The ID of the subnet for the destination."""
-    security_group_id: str | None = ...
-    """The ID of the security group for the destination."""
-
-class HealthCheckPathDestinationRequestObjectDict(TypedDict, total=False):
-    """Dictionary form of `HealthCheckPathDestinationRequestObject`."""
-
-    subnet_id: str | None
-    """The ID of the subnet for the destination."""
-    security_group_id: str | None
-    """The ID of the security group for the destination."""
-
-@dataclass(kw_only=True)
-class HealthCheckPathDestinationResponseObject(_SerdeShape):
-    """Describes a destination for a health check path."""
-
-    subnet_id: str | None = ...
-    """The ID of the subnet for the destination."""
-    security_group_id: str | None = ...
-    """The ID of the security group for the destination."""
-
-@dataclass(kw_only=True)
-class HealthCheckPathRequestObject(_SerdeShape):
-    """Describes a health check path for an application status check request."""
-
-    source: HealthCheckPathSourceRequestObject | None = ...
-    """The source for the health check path."""
-    destinations: list[HealthCheckPathDestinationRequestObject] | None = ...
-    """The destinations for the health check path."""
-
-class HealthCheckPathRequestObjectDict(TypedDict, total=False):
-    """Dictionary form of `HealthCheckPathRequestObject`."""
-
-    source: (
-        HealthCheckPathSourceRequestObject
-        | HealthCheckPathSourceRequestObjectDict
-        | None
-    )
-    """The source for the health check path."""
-    destinations: (
-        Sequence[
-            HealthCheckPathDestinationRequestObject
-            | HealthCheckPathDestinationRequestObjectDict
-        ]
-        | None
-    )
-    """The destinations for the health check path."""
-
-@dataclass(kw_only=True)
-class HealthCheckPathResponseObject(_SerdeShape):
-    """Describes a health check path for an application status check."""
-
-    source: HealthCheckPathSourceResponseObject | None = ...
-    """The source for the health check path."""
-    destinations: list[HealthCheckPathDestinationResponseObject] | None = ...
-    """The destinations for the health check path."""
-
-@dataclass(kw_only=True)
-class HealthCheckPathSourceRequestObject(_SerdeShape):
-    """
-    Describes the source for a health check path in a request. The source
-    defines the subnet and security group where a health check elastic
-    network interface (ENI) is created to originate health check traffic.
-    """
-
-    subnet_id: str | None = ...
-    """The ID of the subnet for the source."""
-    security_group_id: str | None = ...
-    """The ID of the security group for the source."""
-
-class HealthCheckPathSourceRequestObjectDict(TypedDict, total=False):
-    """Dictionary form of `HealthCheckPathSourceRequestObject`."""
-
-    subnet_id: str | None
-    """The ID of the subnet for the source."""
-    security_group_id: str | None
-    """The ID of the security group for the source."""
-
-@dataclass(kw_only=True)
-class HealthCheckPathSourceResponseObject(_SerdeShape):
-    """Describes the source for a health check path."""
-
-    subnet_id: str | None = ...
-    """The ID of the subnet for the source."""
-    security_group_id: str | None = ...
-    """The ID of the security group for the source."""
-
-@dataclass(kw_only=True)
-class HibernationOptions(_SerdeShape):
-    """
-    Indicates whether your instance is configured for hibernation. This
-    parameter is valid only if the instance meets the [hibernation
-    prerequisites](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/hibernating-prerequisites.html).
-    For more information, see [Hibernate your Amazon EC2
-    instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html)
-    in the *Amazon EC2 User Guide*.
-    """
-
-    configured: bool | None = ...
-    """
-    If `true`, your instance is enabled for hibernation; otherwise, it is
-    not enabled for hibernation.
-    """
-
-@dataclass(kw_only=True)
-class HibernationOptionsRequest(_SerdeShape):
-    """
-    Indicates whether your instance is configured for hibernation. This
-    parameter is valid only if the instance meets the [hibernation
-    prerequisites](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/hibernating-prerequisites.html).
-    For more information, see [Hibernate your Amazon EC2
-    instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html)
-    in the *Amazon EC2 User Guide*.
-    """
-
-    configured: bool | None = ...
-    """
-    Set to `true` to enable your instance for hibernation.
-
-    For Spot Instances, if you set `Configured` to `true`, either omit the
-    `InstanceInterruptionBehavior` parameter (for
-    [`SpotMarketOptions`](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SpotMarketOptions.html)
-    ), or set it to `hibernate`. When `Configured` is true:
-
-    - If you omit `InstanceInterruptionBehavior`, it defaults to
-      `hibernate`.
-
-    - If you set `InstanceInterruptionBehavior` to a value other than
-      `hibernate`, you'll get an error.
-
-    Default: `false`
-    """
-
-class HibernationOptionsRequestDict(TypedDict, total=False):
-    """Dictionary form of `HibernationOptionsRequest`."""
-
-    configured: bool | None
-    """
-    Set to `true` to enable your instance for hibernation.
-
-    For Spot Instances, if you set `Configured` to `true`, either omit the
-    `InstanceInterruptionBehavior` parameter (for
-    [`SpotMarketOptions`](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SpotMarketOptions.html)
-    ), or set it to `hibernate`. When `Configured` is true:
-
-    - If you omit `InstanceInterruptionBehavior`, it defaults to
-      `hibernate`.
-
-    - If you set `InstanceInterruptionBehavior` to a value other than
-      `hibernate`, you'll get an error.
-
-    Default: `false`
-    """
-
-@dataclass(kw_only=True)
-class HistoryRecord(_SerdeShape):
-    """Describes an event in the history of the Spot Fleet request."""
-
-    event_information: EventInformation | None = ...
-    """Information about the event."""
-    event_type: str | None = ...
-    """
-    The event type.
-
-    - `error` - An error with the Spot Fleet request.
-
-    - `fleetRequestChange` - A change in the status or configuration of the
-      Spot Fleet request.
-
-    - `instanceChange` - An instance was launched or terminated.
-
-    - `Information` - An informational event.
-    """
-    timestamp: datetime | None = ...
-    """
-    The date and time of the event, in UTC format (for example,
-    *YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z).
-    """
-
-@dataclass(kw_only=True)
-class HistoryRecordEntry(_SerdeShape):
-    """Describes an event in the history of an EC2 Fleet."""
-
-    event_information: EventInformation | None = ...
-    """Information about the event."""
-    event_type: str | None = ...
-    """The event type."""
-    timestamp: datetime | None = ...
-    """
-    The date and time of the event, in UTC format (for example,
-    *YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z).
-    """
-
-@dataclass(kw_only=True)
-class Host(_SerdeShape):
-    """Describes the properties of the Dedicated Host."""
-
-    auto_placement: str | None = ...
-    """Whether auto-placement is on or off."""
-    availability_zone: str | None = ...
-    """The Availability Zone of the Dedicated Host."""
-    available_capacity: AvailableCapacity | None = ...
-    """Information about the instances running on the Dedicated Host."""
-    client_token: str | None = ...
-    """
-    Unique, case-sensitive identifier that you provide to ensure the
-    idempotency of the request. For more information, see [Ensuring
-    Idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-    """
-    host_id: str | None = ...
-    """The ID of the Dedicated Host."""
-    host_properties: HostProperties | None = ...
-    """The hardware specifications of the Dedicated Host."""
-    host_reservation_id: str | None = ...
-    """
-    The reservation ID of the Dedicated Host. This returns a `null` response
-    if the Dedicated Host doesn't have an associated reservation.
-    """
-    instances: list[HostInstance] | None = ...
-    """
-    The IDs and instance type that are currently running on the Dedicated
-    Host.
-    """
-    state: str | None = ...
-    """The Dedicated Host's state."""
-    allocation_time: datetime | None = ...
-    """The time that the Dedicated Host was allocated."""
-    release_time: datetime | None = ...
-    """The time that the Dedicated Host was released."""
-    tags: list[Tag] | None = ...
-    """Any tags assigned to the Dedicated Host."""
-    host_recovery: str | None = ...
-    """
-    Indicates whether host recovery is enabled or disabled for the Dedicated
-    Host.
-    """
-    allows_multiple_instance_types: str | None = ...
-    """
-    Indicates whether the Dedicated Host supports multiple instance types of
-    the same instance family. If the value is `on`, the Dedicated Host
-    supports multiple instance types in the instance family. If the value is
-    `off`, the Dedicated Host supports a single instance type only.
-    """
-    owner_id: str | None = ...
-    """The ID of the Amazon Web Services account that owns the Dedicated Host."""
-    availability_zone_id: str | None = ...
-    """
-    The ID of the Availability Zone in which the Dedicated Host is
-    allocated.
-    """
-    member_of_service_linked_resource_group: bool | None = ...
-    """
-    Indicates whether the Dedicated Host is in a host resource group. If
-    **memberOfServiceLinkedResourceGroup** is `true`, the host is in a host
-    resource group; otherwise, it is not.
-    """
-    outpost_arn: str | None = ...
-    """
-    The Amazon Resource Name (ARN) of the Amazon Web Services Outpost on
-    which the Dedicated Host is allocated.
-    """
-    host_maintenance: str | None = ...
-    """
-    Indicates whether host maintenance is enabled or disabled for the
-    Dedicated Host.
-    """
-    asset_id: str | None = ...
-    """
-    The ID of the Outpost hardware asset on which the Dedicated Host is
-    allocated.
-    """
-    cpu_options: HostCpuOptions | None = ...
-    """
-    The CPU options for the Dedicated Host, including AMD Secure Encrypted
-    Virtualization-Secure Nested Paging (AMD SEV-SNP) settings.
-    """
-
-@dataclass(kw_only=True)
-class HostCpuOptions(_SerdeShape):
-    """
-    Contains the CPU options for a Dedicated Host, including AMD Secure
-    Encrypted Virtualization-Secure Nested Paging (AMD SEV-SNP) settings.
-    """
-
-    amd_sev_snp: str | None = ...
-    """
-    Specifies whether AMD Secure Encrypted Virtualization-Secure Nested
-    Paging (AMD SEV-SNP) is enabled or disabled for the Dedicated Host. If
-    you don't specify a value, AMD SEV-SNP is `disabled`.
-    """
-
-@dataclass(kw_only=True)
-class HostCpuOptionsRequest(_SerdeShape):
-    """
-    Contains the CPU configuration options for a Dedicated Host allocation
-    request. Options include AMD Secure Encrypted Virtualization-Secure
-    Nested Paging (AMD SEV-SNP) settings.
-    """
-
-    amd_sev_snp: str | None = ...
-    """
-    Specifies whether AMD Secure Encrypted Virtualization-Secure Nested
-    Paging (AMD SEV-SNP) is enabled or disabled for the Dedicated Host. If
-    you don't specify a value, AMD SEV-SNP is `disabled`.
-    """
-
-class HostCpuOptionsRequestDict(TypedDict, total=False):
-    """Dictionary form of `HostCpuOptionsRequest`."""
-
-    amd_sev_snp: str | None
-    """
-    Specifies whether AMD Secure Encrypted Virtualization-Secure Nested
-    Paging (AMD SEV-SNP) is enabled or disabled for the Dedicated Host. If
-    you don't specify a value, AMD SEV-SNP is `disabled`.
-    """
-
-@dataclass(kw_only=True)
-class HostInstance(_SerdeShape):
-    """Describes an instance running on a Dedicated Host."""
-
-    instance_id: str | None = ...
-    """The ID of instance that is running on the Dedicated Host."""
-    instance_type: str | None = ...
-    """The instance type (for example, `m3.medium`) of the running instance."""
-    owner_id: str | None = ...
-    """The ID of the Amazon Web Services account that owns the instance."""
-
-class HostMaintenance(UnknownEnumMixin, StrEnum):
-    ON = "on"
-    OFF = "off"
-
-class HostnameType(UnknownEnumMixin, StrEnum):
-    IP_NAME = "ip-name"
-    RESOURCE_NAME = "resource-name"
-
-@dataclass(kw_only=True)
-class HostOffering(_SerdeShape):
-    """Details about the Dedicated Host Reservation offering."""
-
-    currency_code: str | None = ...
-    """The currency of the offering."""
-    duration: int | None = ...
-    """The duration of the offering (in seconds)."""
-    hourly_price: str | None = ...
-    """The hourly price of the offering."""
-    instance_family: str | None = ...
-    """The instance family of the offering."""
-    offering_id: str | None = ...
-    """The ID of the offering."""
-    payment_option: str | None = ...
-    """The available payment option."""
-    upfront_price: str | None = ...
-    """
-    The upfront price of the offering. Does not apply to No Upfront
-    offerings.
-    """
-
-@dataclass(kw_only=True)
-class HostProperties(_SerdeShape):
-    """Describes the properties of a Dedicated Host."""
-
-    cores: int | None = ...
-    """The number of cores on the Dedicated Host."""
-    instance_type: str | None = ...
-    """
-    The instance type supported by the Dedicated Host. For example,
-    `m5.large`. If the host supports multiple instance types, no
-    **instanceType** is returned.
-    """
-    instance_family: str | None = ...
-    """The instance family supported by the Dedicated Host. For example, `m5`."""
-    sockets: int | None = ...
-    """The number of sockets on the Dedicated Host."""
-    total_v_cpus: int | None = ...
-    """The total number of vCPUs on the Dedicated Host."""
-
-class HostRecovery(UnknownEnumMixin, StrEnum):
-    ON = "on"
-    OFF = "off"
-
-@dataclass(kw_only=True)
-class HostReservation(_SerdeShape):
-    """
-    Details about the Dedicated Host Reservation and associated Dedicated
-    Hosts.
-    """
-
-    count: int | None = ...
-    """The number of Dedicated Hosts the reservation is associated with."""
-    currency_code: str | None = ...
-    """
-    The currency in which the `upfrontPrice` and `hourlyPrice` amounts are
-    specified. At this time, the only supported currency is `USD`.
-    """
-    duration: int | None = ...
-    """
-    The length of the reservation's term, specified in seconds. Can be
-    `31536000 (1 year)` | `94608000 (3 years)`.
-    """
-    end: datetime | None = ...
-    """The date and time that the reservation ends."""
-    host_id_set: list[str] | None = ...
-    """The IDs of the Dedicated Hosts associated with the reservation."""
-    host_reservation_id: str | None = ...
-    """The ID of the reservation that specifies the associated Dedicated Hosts."""
-    hourly_price: str | None = ...
-    """The hourly price of the reservation."""
-    instance_family: str | None = ...
-    """
-    The instance family of the Dedicated Host Reservation. The instance
-    family on the Dedicated Host must be the same in order for it to benefit
-    from the reservation.
-    """
-    offering_id: str | None = ...
-    """
-    The ID of the reservation. This remains the same regardless of which
-    Dedicated Hosts are associated with it.
-    """
-    payment_option: str | None = ...
-    """The payment option selected for this reservation."""
-    start: datetime | None = ...
-    """The date and time that the reservation started."""
-    state: str | None = ...
-    """The state of the reservation."""
-    upfront_price: str | None = ...
-    """The upfront price of the reservation."""
-    tags: list[Tag] | None = ...
-    """Any tags assigned to the Dedicated Host Reservation."""
-
-class HostTenancy(UnknownEnumMixin, StrEnum):
-    DEFAULT = "default"
-    DEDICATED = "dedicated"
-    HOST = "host"
-
-class HttpTokensEnforcedState(UnknownEnumMixin, StrEnum):
-    DISABLED = "disabled"
-    ENABLED = "enabled"
-
-class HttpTokensState(UnknownEnumMixin, StrEnum):
-    OPTIONAL = "optional"
-    REQUIRED = "required"
-
-class HypervisorType(UnknownEnumMixin, StrEnum):
-    OVM = "ovm"
-    XEN = "xen"
-
-@dataclass(kw_only=True)
-class IamInstanceProfile(_SerdeShape):
-    """Describes an IAM instance profile."""
-
-    arn: str | None = ...
-    """The Amazon Resource Name (ARN) of the instance profile."""
-    id: str | None = ...
-    """The ID of the instance profile."""
-
-@dataclass(kw_only=True)
-class IamInstanceProfileAssociation(_SerdeShape):
-    """
-    Describes an association between an IAM instance profile and an
-    instance.
-    """
-
-    association_id: str | None = ...
-    """The ID of the association."""
-    instance_id: str | None = ...
-    """The ID of the instance."""
-    iam_instance_profile: IamInstanceProfile | None = ...
-    """The IAM instance profile."""
-    state: str | None = ...
-    """The state of the association."""
-    timestamp: datetime | None = ...
-    """The time the IAM instance profile was associated with the instance."""
-
-class IamInstanceProfileAssociationState(UnknownEnumMixin, StrEnum):
-    ASSOCIATING = "associating"
-    ASSOCIATED = "associated"
-    DISASSOCIATING = "disassociating"
-    DISASSOCIATED = "disassociated"
-
-@dataclass(kw_only=True)
-class IamInstanceProfileSpecification(_SerdeShape):
-    """Describes an IAM instance profile."""
-
-    arn: str | None = ...
-    """The Amazon Resource Name (ARN) of the instance profile."""
-    name: str | None = ...
-    """The name of the instance profile."""
-
-class IamInstanceProfileSpecificationDict(TypedDict, total=False):
-    """Dictionary form of `IamInstanceProfileSpecification`."""
-
-    arn: str | None
-    """The Amazon Resource Name (ARN) of the instance profile."""
-    name: str | None
-    """The name of the instance profile."""

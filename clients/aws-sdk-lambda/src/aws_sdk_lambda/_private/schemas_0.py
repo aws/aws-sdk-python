@@ -24,7 +24,7 @@ _AVW = "AdditionalVersionWeights"
 _k = "key"
 _v = "value"
 _LPAA = "LayerPermissionAllowedAction"
-_LN = "LayerName"
+_LNOA = "LayerNameOrArn"
 _OI = "OrganizationId"
 _LPAP = "LayerPermissionAllowedPrincipal"
 _S = "String"
@@ -34,6 +34,7 @@ _ALVPI = "AddLayerVersionPermissionInput"
 _sSI = "smithy.synthetic#originalShapeId"
 _cALVPR = "com.amazonaws.lambda#AddLayerVersionPermissionRequest"
 _sm = "smithy.api#input"
+_LN = "LayerName"
 _smi = "smithy.api#required"
 _sL = "smithy.api#httpLabel"
 _VN = "VersionNumber"
@@ -306,7 +307,7 @@ ADDITIONAL_VERSION_WEIGHTS: StaticSchema = (
 
 LAYER_PERMISSION_ALLOWED_ACTION: StaticSchema = (3, n0, _LPAA, 0)
 
-LAYER_NAME: StaticSchema = (3, n0, _LN, 0)
+LAYER_NAME_OR_ARN: StaticSchema = (3, n0, _LNOA, 0)
 
 ORGANIZATION_ID: StaticSchema = (3, n0, _OI, 0)
 
@@ -325,7 +326,7 @@ ADD_LAYER_VERSION_PERMISSION_INPUT: StaticSchema = (
     {_sSI: _cALVPR, _sm: None},
     (_LN, _VN, _SI, _A, _P, _OI, _RI),
     (
-        (LAYER_NAME, 9),
+        (LAYER_NAME_OR_ARN, 9),
         (LAYER_VERSION_NUMBER, {_s: None, _smi: None, _sL: None}),
         (STATEMENT_ID, 1),
         (LAYER_PERMISSION_ALLOWED_ACTION, 1),

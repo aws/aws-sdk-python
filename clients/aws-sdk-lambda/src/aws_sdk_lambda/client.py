@@ -199,7 +199,7 @@ class LambdaClient(Client[LambdaConfig]):
     FAQs.](http://aws.amazon.com/certificate-manager/faqs/#certificates)
     """
 
-    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
+    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
 
     @_overload
     def add_layer_version_permission(

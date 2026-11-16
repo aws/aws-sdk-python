@@ -11,6 +11,9 @@ _sN = "smithy.api#xmlName"
 _sV = "smithy.api#enumValue"
 _me = "member"
 _i = "item"
+_RT = "ResourceType"
+_su = "subnet"
+_vp = "vpc"
 _TS = "TagSpecification"
 _Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
@@ -27,8 +30,6 @@ _de = "deleting"
 _del = "deleted"
 _St = "State"
 _st = "state"
-_CT = "CreationTime"
-_cT = "creationTime"
 _TGMDI = "TransitGatewayMulticastDomainId"
 _SI = "SubnetIds"
 _as = "associating"
@@ -38,6 +39,8 @@ _dis = "disassociated"
 _fa = "failed"
 _SIu = "SubnetId"
 _sI = "subnetId"
+_RIe = "ResourceId"
+_rI = "resourceId"
 _As = "Associations"
 _asso = "associations"
 _OIw = "OwnerId"
@@ -68,7 +71,9 @@ _nII = "networkInterfaceId"
 _SGI = "SecurityGroupId"
 _AIt = "AttachmentId"
 _aIt = "attachmentId"
-_Des = "Description"
+_MB = "ManagedBy"
+_acc = "account"
+_mB = "managedBy"
 _AIs = "AssociationId"
 _aIs = "associationId"
 _PIAr = "PrivateIpAddress"
@@ -79,7 +84,6 @@ _Asn = "Asn"
 _AAs = "AsnAssociation"
 _SMt = "StatusMessage"
 _sMt = "statusMessage"
-_desc = "description"
 _CTl = "ClientToken"
 _cTl = "clientToken"
 _NL = "NetmaskLength"
@@ -94,6 +98,11 @@ _nGAS = "natGatewayAddressSet"
 _IIn = "InstanceIds"
 _sU = "smithy.api#Unit"
 _ASSOCIATED = "ASSOCIATED"
+_DHI = "DedicatedHostId"
+_DHIL = "DedicatedHostIdList"
+_IEWAR = "InstanceEventWindowAssociationRequest"
+_ITn = "InstanceTags"
+_ITns = "InstanceTag"
 _DHIe = "DedicatedHostIds"
 _IEWI = "InstanceEventWindowId"
 _AIEWI = "AssociateInstanceEventWindowInput"
@@ -195,6 +204,54 @@ _cANGAR = "com.amazonaws.ec2#AssociateNatGatewayAddressRequest"
 _ANGAO = "AssociateNatGatewayAddressOutput"
 _cANGARo = "com.amazonaws.ec2#AssociateNatGatewayAddressResult"
 _ANGA = "AssociateNatGatewayAddress"
+_FCANRI = "FlexCostAllocationNetworkResourceId"
+_FCANRIL = "FlexCostAllocationNetworkResourceIdList"
+_FCANRSIL = "FlexCostAllocationNetworkResourceScopeIdList"
+_FCANRST = "FlexCostAllocationNetworkResourceScopeType"
+_ACCOUNT = "ACCOUNT"
+_VPC_ = "VPC"
+_SUBNET = "SUBNET"
+_FCANRS = "FlexCostAllocationNetworkResourceScope"
+_RIes = "ResourceIds"
+_ANFCAPI = "AssociateNetworkingFlexCostAllocationPolicyInput"
+_cANFCAPR = "com.amazonaws.ec2#AssociateNetworkingFlexCostAllocationPolicyRequest"
+_FPI = "FcaPolicyId"
+_NRI = "NetworkResourceIds"
+_NRS = "NetworkResourceScope"
+_FCAOF = "FlexCostAllocationOperationFailure"
+_FCa = "FailureCode"
+_fC = "failureCode"
+_FR = "FailureReason"
+_fR = "failureReason"
+_FCAOFL = "FlexCostAllocationOperationFailureList"
+_FCAAM = "FlexCostAllocationAssociationMode"
+_DIRECT = "DIRECT"
+_dire = "direct"
+_SCOPE = "SCOPE"
+_sc = "scope"
+_FCAPAI = "FlexCostAllocationPolicyAssociationId"
+_FCAPAD = "FlexCostAllocationPolicyAssociationDescription"
+_FPAI = "FcaPolicyAssociationId"
+_fPAI = "fcaPolicyAssociationId"
+_fPI = "fcaPolicyId"
+_NRIe = "NetworkResourceId"
+_nRI = "networkResourceId"
+_OAw = "OwnerAccount"
+_oA = "ownerAccount"
+_AAsso = "AssociatedAt"
+_aAs = "associatedAt"
+_EEA = "ExpectedEffectiveAt"
+_eEA = "expectedEffectiveAt"
+_AMs = "AssociationMode"
+_aM = "associationMode"
+_FCAPAS = "FlexCostAllocationPolicyAssociationSet"
+_ANFCAPO = "AssociateNetworkingFlexCostAllocationPolicyOutput"
+_cANFCAPRo = "com.amazonaws.ec2#AssociateNetworkingFlexCostAllocationPolicyResult"
+_FPA = "FcaPolicyAssociations"
+_fPA = "fcaPolicyAssociations"
+_FPAF = "FcaPolicyAssociationFailures"
+_fPAF = "fcaPolicyAssociationFailures"
+_ANFCAP = "AssociateNetworkingFlexCostAllocationPolicy"
 _RSI = "RouteServerId"
 _ARSI = "AssociateRouteServerInput"
 _cARSR = "com.amazonaws.ec2#AssociateRouteServerRequest"
@@ -342,73 +399,30 @@ _ANIO = "AttachNetworkInterfaceOutput"
 _cANIRo = "com.amazonaws.ec2#AttachNetworkInterfaceResult"
 _nCI = "networkCardIndex"
 _ANI = "AttachNetworkInterface"
-_VAII = "VerifiedAccessInstanceId"
-_VATPI = "VerifiedAccessTrustProviderId"
-_AVATPI = "AttachVerifiedAccessTrustProviderInput"
-_cAVATPR = "com.amazonaws.ec2#AttachVerifiedAccessTrustProviderRequest"
-_VAICSD = "VerifiedAccessInstanceCustomSubDomain"
-_SD = "SubDomain"
-_sD = "subDomain"
-_Na = "Nameservers"
-_NS = "NameserverSet"
-_nS = "nameserverSet"
-_DTPT = "DeviceTrustProviderType"
-_j = "jamf"
-_cro = "crowdstrike"
-_ju = "jumpcloud"
-_TPT = "TrustProviderType"
-_use = "user"
-_dev = "device"
-_UTPT = "UserTrustProviderType"
-_iic = "iam_identity_center"
-_iic_ = "iam-identity-center"
-_oi = "oidc"
-_VATPC = "VerifiedAccessTrustProviderCondensed"
-_vATPI = "verifiedAccessTrustProviderId"
-_tPT = "trustProviderType"
-_uTPT = "userTrustProviderType"
-_dTPT = "deviceTrustProviderType"
-_VATPCL = "VerifiedAccessTrustProviderCondensedList"
-_VAI = "VerifiedAccessInstance"
-_vAII = "verifiedAccessInstanceId"
-_VATP = "VerifiedAccessTrustProviders"
-_VATPS = "VerifiedAccessTrustProviderSet"
-_vATPS = "verifiedAccessTrustProviderSet"
-_LUTa = "LastUpdatedTime"
-_lUTa = "lastUpdatedTime"
-_FE = "FipsEnabled"
-_fE = "fipsEnabled"
-_CECSD = "CidrEndpointsCustomSubDomain"
-_cECSD = "cidrEndpointsCustomSubDomain"
-_DO = "DeviceOptions"
-_TI = "TenantId"
-_tI = "tenantId"
-_PSKU = "PublicSigningKeyUrl"
-_pSKU = "publicSigningKeyUrl"
-_NAOO = "NativeApplicationOidcOptions"
-_PSKE = "PublicSigningKeyEndpoint"
-_pSKE = "publicSigningKeyEndpoint"
-_Is = "Issuer"
-_iss = "issuer"
-_AE = "AuthorizationEndpoint"
-_aE = "authorizationEndpoint"
-_TE = "TokenEndpoint"
-_tE = "tokenEndpoint"
-_UIEs = "UserInfoEndpoint"
-_uIE = "userInfoEndpoint"
-_CIl = "ClientId"
-_cIl = "clientId"
-_Sc = "Scope"
-_sc = "scope"
-_CST = "ClientSecretType"
-_smith = "smithy.api#sensitive"
-_VATPe = "VerifiedAccessTrustProvider"
-_AVATPO = "AttachVerifiedAccessTrustProviderOutput"
-_cAVATPRo = "com.amazonaws.ec2#AttachVerifiedAccessTrustProviderResult"
-_vATP = "verifiedAccessTrustProvider"
-_vAI = "verifiedAccessInstance"
-_AVATP = "AttachVerifiedAccessTrustProvider"
 _IISLm = "ImageIdStringList"
+_FCAPAIL = "FlexCostAllocationPolicyAssociationIdList"
+
+DEDICATED_HOST_ID_LIST: StaticSchema = (
+    16,
+    n0,
+    _DHIL,
+    0,
+    (_me,),
+    ((lambda: schemas.DEDICATED_HOST_ID, {_sN: _i}),),
+)
+
+INSTANCE_EVENT_WINDOW_ASSOCIATION_REQUEST: StaticSchema = (
+    18,
+    n0,
+    _IEWAR,
+    0,
+    (_IIn, _ITn, _DHIe),
+    (
+        (lambda: schemas.INSTANCE_ID_LIST, {_sN: _II}),
+        (lambda: schemas.TAG_LIST, {_sN: _ITns}),
+        (DEDICATED_HOST_ID_LIST, {_sN: _DHI}),
+    ),
+)
 
 INSTANCE_EVENT_WINDOW_ID: StaticSchema = (3, n0, _IEWI, 0)
 
@@ -421,7 +435,7 @@ ASSOCIATE_INSTANCE_EVENT_WINDOW_INPUT: StaticSchema = (
     (
         (lambda: schemas.BOOLEAN, 0),
         (INSTANCE_EVENT_WINDOW_ID, 1),
-        (lambda: schemas.INSTANCE_EVENT_WINDOW_ASSOCIATION_REQUEST, 1),
+        (INSTANCE_EVENT_WINDOW_ASSOCIATION_REQUEST, 1),
     ),
 )
 
@@ -453,7 +467,7 @@ INSTANCE_EVENT_WINDOW_ASSOCIATION_TARGET: StaticSchema = (
     (
         (lambda: schemas.INSTANCE_ID_LIST, {_aQN: _IIS, _sN: _iIS}),
         (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
-        (lambda: schemas.DEDICATED_HOST_ID_LIST, {_aQN: _DHIS, _sN: _dHIS}),
+        (DEDICATED_HOST_ID_LIST, {_aQN: _DHIS, _sN: _dHIS}),
     ),
 )
 
@@ -681,6 +695,147 @@ ASSOCIATE_NAT_GATEWAY_ADDRESS: StaticOperationSchema = (
     ASSOCIATE_NAT_GATEWAY_ADDRESS_INPUT,
     ASSOCIATE_NAT_GATEWAY_ADDRESS_OUTPUT,
     (),
+)
+
+FLEX_COST_ALLOCATION_NETWORK_RESOURCE_ID: StaticSchema = (3, n0, _FCANRI, 0)
+
+FLEX_COST_ALLOCATION_NETWORK_RESOURCE_ID_LIST: StaticSchema = (
+    16,
+    n0,
+    _FCANRIL,
+    0,
+    (_me,),
+    ((FLEX_COST_ALLOCATION_NETWORK_RESOURCE_ID, {_sN: _i}),),
+)
+
+FLEX_COST_ALLOCATION_NETWORK_RESOURCE_SCOPE_ID_LIST: StaticSchema = (
+    16,
+    n0,
+    _FCANRSIL,
+    0,
+    (_me,),
+    ((lambda: schemas.STRING, {_sN: _i}),),
+)
+
+FLEX_COST_ALLOCATION_NETWORK_RESOURCE_SCOPE_TYPE: StaticSchema = (
+    14,
+    n0,
+    _FCANRST,
+    0,
+    (_ACCOUNT, _VPC_, _SUBNET),
+    ((-1, {_sV: _acc}), (-1, {_sV: _vp}), (-1, {_sV: _su})),
+)
+
+FLEX_COST_ALLOCATION_NETWORK_RESOURCE_SCOPE: StaticSchema = (
+    18,
+    n0,
+    _FCANRS,
+    0,
+    (_RT, _RIes),
+    (
+        (FLEX_COST_ALLOCATION_NETWORK_RESOURCE_SCOPE_TYPE, 1),
+        (FLEX_COST_ALLOCATION_NETWORK_RESOURCE_SCOPE_ID_LIST, 1),
+    ),
+)
+
+ASSOCIATE_NETWORKING_FLEX_COST_ALLOCATION_POLICY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _ANFCAPI,
+    {_sSI: _cANFCAPR, _sm: None},
+    (_FPI, _NRI, _NRS, _CTl, _DR),
+    (
+        (lambda: schemas.FLEX_COST_ALLOCATION_POLICY_ID, 1),
+        (FLEX_COST_ALLOCATION_NETWORK_RESOURCE_ID_LIST, 0),
+        (FLEX_COST_ALLOCATION_NETWORK_RESOURCE_SCOPE, 0),
+        (lambda: schemas.STRING, 2),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+ASSOCIATE_NETWORKING_FLEX_COST_ALLOCATION_POLICY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _ANFCAPO,
+    {_sSI: _cANFCAPRo, _smit: None},
+    (_FPA, _FPAF),
+    (
+        (lambda: FLEX_COST_ALLOCATION_POLICY_ASSOCIATION_SET, {_aQN: _FPA, _sN: _fPA}),
+        (
+            lambda: FLEX_COST_ALLOCATION_OPERATION_FAILURE_LIST,
+            {_aQN: _FPAF, _sN: _fPAF},
+        ),
+    ),
+)
+
+ASSOCIATE_NETWORKING_FLEX_COST_ALLOCATION_POLICY: StaticOperationSchema = (
+    23,
+    n0,
+    _ANFCAP,
+    0,
+    ASSOCIATE_NETWORKING_FLEX_COST_ALLOCATION_POLICY_INPUT,
+    ASSOCIATE_NETWORKING_FLEX_COST_ALLOCATION_POLICY_OUTPUT,
+    (),
+)
+
+FLEX_COST_ALLOCATION_OPERATION_FAILURE: StaticSchema = (
+    18,
+    n0,
+    _FCAOF,
+    0,
+    (_RIe, _FCa, _FR),
+    (
+        (lambda: schemas.STRING, {_aQN: _RIe, _sN: _rI}),
+        (lambda: schemas.STRING, {_aQN: _FCa, _sN: _fC}),
+        (lambda: schemas.STRING, {_aQN: _FR, _sN: _fR}),
+    ),
+)
+
+FLEX_COST_ALLOCATION_OPERATION_FAILURE_LIST: StaticSchema = (
+    16,
+    n0,
+    _FCAOFL,
+    0,
+    (_me,),
+    ((FLEX_COST_ALLOCATION_OPERATION_FAILURE, {_sN: _i}),),
+)
+
+FLEX_COST_ALLOCATION_ASSOCIATION_MODE: StaticSchema = (
+    14,
+    n0,
+    _FCAAM,
+    0,
+    (_DIRECT, _SCOPE),
+    ((-1, {_sV: _dire}), (-1, {_sV: _sc})),
+)
+
+FLEX_COST_ALLOCATION_POLICY_ASSOCIATION_ID: StaticSchema = (3, n0, _FCAPAI, 0)
+
+FLEX_COST_ALLOCATION_POLICY_ASSOCIATION_DESCRIPTION: StaticSchema = (
+    18,
+    n0,
+    _FCAPAD,
+    0,
+    (_FPAI, _FPI, _NRIe, _OAw, _AAsso, _EEA, _AMs, _MB),
+    (
+        (FLEX_COST_ALLOCATION_POLICY_ASSOCIATION_ID, {_aQN: _FPAI, _sN: _fPAI}),
+        (lambda: schemas.FLEX_COST_ALLOCATION_POLICY_ID, {_aQN: _FPI, _sN: _fPI}),
+        (lambda: schemas.STRING, {_aQN: _NRIe, _sN: _nRI}),
+        (lambda: schemas.STRING, {_aQN: _OAw, _sN: _oA}),
+        (lambda: schemas.DATE_TIME, {_aQN: _AAsso, _sN: _aAs}),
+        (lambda: schemas.DATE_TIME, {_aQN: _EEA, _sN: _eEA}),
+        (FLEX_COST_ALLOCATION_ASSOCIATION_MODE, {_aQN: _AMs, _sN: _aM}),
+        (lambda: schemas.MANAGED_BY, {_aQN: _MB, _sN: _mB}),
+    ),
+)
+
+FLEX_COST_ALLOCATION_POLICY_ASSOCIATION_SET: StaticSchema = (
+    16,
+    n0,
+    _FCAPAS,
+    0,
+    (_me,),
+    ((FLEX_COST_ALLOCATION_POLICY_ASSOCIATION_DESCRIPTION, {_sN: _i}),),
 )
 
 ASSOCIATE_ROUTE_SERVER_INPUT: StaticSchema = (
@@ -1353,156 +1508,6 @@ ATTACH_NETWORK_INTERFACE: StaticOperationSchema = (
     (),
 )
 
-VERIFIED_ACCESS_TRUST_PROVIDER_ID: StaticSchema = (3, n0, _VATPI, 0)
-
-ATTACH_VERIFIED_ACCESS_TRUST_PROVIDER_INPUT: StaticSchema = (
-    18,
-    n0,
-    _AVATPI,
-    {_sSI: _cAVATPR, _sm: None},
-    (_VAII, _VATPI, _CTl, _DR),
-    (
-        (lambda: schemas.VERIFIED_ACCESS_INSTANCE_ID, 1),
-        (VERIFIED_ACCESS_TRUST_PROVIDER_ID, 1),
-        (lambda: schemas.STRING, 2),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-ATTACH_VERIFIED_ACCESS_TRUST_PROVIDER_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _AVATPO,
-    {_sSI: _cAVATPRo, _smit: None},
-    (_VATPe, _VAI),
-    (
-        (lambda: schemas.VERIFIED_ACCESS_TRUST_PROVIDER, {_aQN: _VATPe, _sN: _vATP}),
-        (lambda: VERIFIED_ACCESS_INSTANCE, {_aQN: _VAI, _sN: _vAI}),
-    ),
-)
-
-ATTACH_VERIFIED_ACCESS_TRUST_PROVIDER: StaticOperationSchema = (
-    23,
-    n0,
-    _AVATP,
-    0,
-    ATTACH_VERIFIED_ACCESS_TRUST_PROVIDER_INPUT,
-    ATTACH_VERIFIED_ACCESS_TRUST_PROVIDER_OUTPUT,
-    (),
-)
-
-VERIFIED_ACCESS_INSTANCE_CUSTOM_SUB_DOMAIN: StaticSchema = (
-    18,
-    n0,
-    _VAICSD,
-    0,
-    (_SD, _Na),
-    (
-        (lambda: schemas.STRING, {_aQN: _SD, _sN: _sD}),
-        (lambda: schemas.VALUE_STRING_LIST, {_aQN: _NS, _sN: _nS}),
-    ),
-)
-
-DEVICE_TRUST_PROVIDER_TYPE: StaticSchema = (
-    14,
-    n0,
-    _DTPT,
-    0,
-    (_j, _cro, _ju),
-    ((-1, {_sV: _j}), (-1, {_sV: _cro}), (-1, {_sV: _ju})),
-)
-
-TRUST_PROVIDER_TYPE: StaticSchema = (
-    14,
-    n0,
-    _TPT,
-    0,
-    (_use, _dev),
-    ((-1, {_sV: _use}), (-1, {_sV: _dev})),
-)
-
-USER_TRUST_PROVIDER_TYPE: StaticSchema = (
-    14,
-    n0,
-    _UTPT,
-    0,
-    (_iic, _oi),
-    ((-1, {_sV: _iic_}), (-1, {_sV: _oi})),
-)
-
-VERIFIED_ACCESS_TRUST_PROVIDER_CONDENSED: StaticSchema = (
-    18,
-    n0,
-    _VATPC,
-    0,
-    (_VATPI, _Des, _TPT, _UTPT, _DTPT),
-    (
-        (lambda: schemas.STRING, {_aQN: _VATPI, _sN: _vATPI}),
-        (lambda: schemas.STRING, {_aQN: _Des, _sN: _desc}),
-        (TRUST_PROVIDER_TYPE, {_aQN: _TPT, _sN: _tPT}),
-        (USER_TRUST_PROVIDER_TYPE, {_aQN: _UTPT, _sN: _uTPT}),
-        (DEVICE_TRUST_PROVIDER_TYPE, {_aQN: _DTPT, _sN: _dTPT}),
-    ),
-)
-
-VERIFIED_ACCESS_TRUST_PROVIDER_CONDENSED_LIST: StaticSchema = (
-    16,
-    n0,
-    _VATPCL,
-    0,
-    (_me,),
-    ((VERIFIED_ACCESS_TRUST_PROVIDER_CONDENSED, {_sN: _i}),),
-)
-
-VERIFIED_ACCESS_INSTANCE: StaticSchema = (
-    18,
-    n0,
-    _VAI,
-    0,
-    (_VAII, _Des, _VATP, _CT, _LUTa, _Tag, _FE, _CECSD),
-    (
-        (lambda: schemas.STRING, {_aQN: _VAII, _sN: _vAII}),
-        (lambda: schemas.STRING, {_aQN: _Des, _sN: _desc}),
-        (VERIFIED_ACCESS_TRUST_PROVIDER_CONDENSED_LIST, {_aQN: _VATPS, _sN: _vATPS}),
-        (lambda: schemas.STRING, {_aQN: _CT, _sN: _cT}),
-        (lambda: schemas.STRING, {_aQN: _LUTa, _sN: _lUTa}),
-        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
-        (lambda: schemas.BOOLEAN, {_aQN: _FE, _sN: _fE}),
-        (VERIFIED_ACCESS_INSTANCE_CUSTOM_SUB_DOMAIN, {_aQN: _CECSD, _sN: _cECSD}),
-    ),
-)
-
-DEVICE_OPTIONS: StaticSchema = (
-    18,
-    n0,
-    _DO,
-    0,
-    (_TI, _PSKU),
-    (
-        (lambda: schemas.STRING, {_aQN: _TI, _sN: _tI}),
-        (lambda: schemas.STRING, {_aQN: _PSKU, _sN: _pSKU}),
-    ),
-)
-
-NATIVE_APPLICATION_OIDC_OPTIONS: StaticSchema = (
-    18,
-    n0,
-    _NAOO,
-    0,
-    (_PSKE, _Is, _AE, _TE, _UIEs, _CIl, _Sc),
-    (
-        (lambda: schemas.STRING, {_aQN: _PSKE, _sN: _pSKE}),
-        (lambda: schemas.STRING, {_aQN: _Is, _sN: _iss}),
-        (lambda: schemas.STRING, {_aQN: _AE, _sN: _aE}),
-        (lambda: schemas.STRING, {_aQN: _TE, _sN: _tE}),
-        (lambda: schemas.STRING, {_aQN: _UIEs, _sN: _uIE}),
-        (lambda: schemas.STRING, {_aQN: _CIl, _sN: _cIl}),
-        (lambda: schemas.STRING, {_aQN: _Sc, _sN: _sc}),
-    ),
-)
-
-CLIENT_SECRET_TYPE: StaticSchema = (3, n0, _CST, 4)
-
 IMAGE_ID_STRING_LIST: StaticSchema = (
     16,
     n0,
@@ -1510,4 +1515,13 @@ IMAGE_ID_STRING_LIST: StaticSchema = (
     0,
     (_me,),
     ((IMAGE_ID, {_sN: _IIm}),),
+)
+
+FLEX_COST_ALLOCATION_POLICY_ASSOCIATION_ID_LIST: StaticSchema = (
+    16,
+    n0,
+    _FCAPAIL,
+    0,
+    (_me,),
+    ((FLEX_COST_ALLOCATION_POLICY_ASSOCIATION_ID, {_sN: _i}),),
 )

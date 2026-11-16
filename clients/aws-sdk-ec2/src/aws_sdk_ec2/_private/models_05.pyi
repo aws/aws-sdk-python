@@ -21,25 +21,31 @@ from ..models import (
     AsnAssociation,
     AssociationStatus,
     AttributeValue,
-    CancelCapacityReservationFleetError,
     ClientCertificateRevocationListStatus,
     ClientVpnTrustProvider,
     ClientVpnTrustProviderRequest,
     ClientVpnTrustProviderRequestDict,
     CustomTagKeyValueRequestPair,
     CustomTagKeyValueRequestPairDict,
-    DeleteQueuedReservedInstancesError,
+    ExportTaskS3Location,
+    ExportTaskS3LocationRequest,
+    ExportTaskS3LocationRequestDict,
+    FastLaunchLaunchTemplateSpecificationRequest,
+    FastLaunchLaunchTemplateSpecificationRequestDict,
+    FastLaunchLaunchTemplateSpecificationResponse,
+    FastLaunchSnapshotConfigurationRequest,
+    FastLaunchSnapshotConfigurationRequestDict,
     FastLaunchSnapshotConfigurationResponse,
     Filter,
     FilterDict,
     FirewallStatefulRule,
     FirewallStatelessRule,
+    FlexCostAllocationOperationFailure,
     IamInstanceProfileAssociation,
     InstanceConnectEndpointPublicDnsNames,
     InstanceEventWindow,
     InstanceEventWindowDisassociationRequest,
     InstanceEventWindowDisassociationRequestDict,
-    InstanceExportDetails,
     InternetGatewayAttachment,
     IpamInternetRegistryAssociation,
     IpamResourceDiscoveryAssociation,
@@ -49,6 +55,7 @@ from ..models import (
     RegisteredInstance,
     RouteServerAssociation,
     RouteServerPropagation,
+    ServiceDetail,
     SubnetIpv6CidrBlockAssociation,
     SuccessfulAssociationResponseObject,
     SuccessfulSuppressionResponseObject,
@@ -63,15 +70,883 @@ from ..models import (
     UnsuccessfulAssociationResponseObject,
     UnsuccessfulSuppressionResponseObject,
     VerifiedAccessInstance,
-    VerifiedAccessInstanceOpenVpnClientConfiguration,
-    VerifiedAccessInstanceUserTrustProviderClientConfiguration,
     VerifiedAccessTrustProvider,
     VolumeDetail,
     VolumeDetailDict,
+    Vpc,
     VpcCidrBlockAssociation,
+    VpcEndpoint,
     VpcIpv6CidrBlockAssociation,
+    VpcPeeringConnection,
+    VpnConcentrator,
+    VpnConnection,
+    VpnGateway,
     _SerdeShape,
 )
+
+@dataclass(kw_only=True)
+class DescribeVpcEndpointServicesOutput(_SerdeShape):
+    """Dataclass for DescribeVpcEndpointServicesOutput structure."""
+
+    service_names: list[str] | None = ...
+    """The supported services."""
+    service_details: list[ServiceDetail] | None = ...
+    """Information about the service."""
+    next_token: str | None = ...
+    """
+    The token to use when requesting the next set of items. If there are no
+    additional items to return, the string is empty.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DescribeVpcEndpointsInput(_SerdeShape):
+    """Dataclass for DescribeVpcEndpointsInput structure."""
+
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    vpc_endpoint_ids: list[str] | None = ...
+    """The IDs of the VPC endpoints."""
+    filters: list[Filter] | None = ...
+    """
+    The filters.
+
+    - `ip-address-type` - The IP address type (`ipv4` | `ipv6`).
+
+    - `service-name` - The name of the service.
+
+    - `service-region` - The Region of the service.
+
+    - `tag`:`<key>`{=html} - The key/value combination of a tag assigned to
+      the resource. Use the tag key in the filter name and the tag value as
+      the filter value. For example, to find all resources that have a tag
+      with the key `Owner` and the value `TeamA`, specify `tag:Owner` for
+      the filter name and `TeamA` for the filter value.
+
+    - `tag-key` - The key of a tag assigned to the resource. Use this filter
+      to find all resources assigned a tag with a specific key, regardless
+      of the tag value.
+
+    - `vpc-id` - The ID of the VPC in which the endpoint resides.
+
+    - `vpc-endpoint-id` - The ID of the endpoint.
+
+    - `vpc-endpoint-state` - The state of the endpoint (`pendingAcceptance`
+      | `pending` | `available` | `deleting` | `deleted` | `rejected`
+      | `failed`).
+
+    - `vpc-endpoint-type` - The type of VPC endpoint (`Interface` |
+      `Gateway` | `GatewayLoadBalancer` | `Resource` | `ServiceNetwork`
+      | `Tunnel`).
+    """
+    max_results: int | None = ...
+    """
+    The maximum number of items to return for this request. The request
+    returns a token that you can specify in a subsequent call to get the
+    next set of results.
+
+    Constraint: If the value is greater than 1,000, we return only 1,000
+    items.
+    """
+    next_token: str | None = ...
+    """
+    The token for the next set of items to return. (You received this token
+    from a prior call.)
+    """
+
+class DescribeVpcEndpointsInputDict(TypedDict, total=False):
+    """Dictionary form of `DescribeVpcEndpointsInput`."""
+
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    vpc_endpoint_ids: Sequence[str] | None
+    """The IDs of the VPC endpoints."""
+    filters: Sequence[Filter | FilterDict] | None
+    """
+    The filters.
+
+    - `ip-address-type` - The IP address type (`ipv4` | `ipv6`).
+
+    - `service-name` - The name of the service.
+
+    - `service-region` - The Region of the service.
+
+    - `tag`:`<key>`{=html} - The key/value combination of a tag assigned to
+      the resource. Use the tag key in the filter name and the tag value as
+      the filter value. For example, to find all resources that have a tag
+      with the key `Owner` and the value `TeamA`, specify `tag:Owner` for
+      the filter name and `TeamA` for the filter value.
+
+    - `tag-key` - The key of a tag assigned to the resource. Use this filter
+      to find all resources assigned a tag with a specific key, regardless
+      of the tag value.
+
+    - `vpc-id` - The ID of the VPC in which the endpoint resides.
+
+    - `vpc-endpoint-id` - The ID of the endpoint.
+
+    - `vpc-endpoint-state` - The state of the endpoint (`pendingAcceptance`
+      | `pending` | `available` | `deleting` | `deleted` | `rejected`
+      | `failed`).
+
+    - `vpc-endpoint-type` - The type of VPC endpoint (`Interface` |
+      `Gateway` | `GatewayLoadBalancer` | `Resource` | `ServiceNetwork`
+      | `Tunnel`).
+    """
+    max_results: int | None
+    """
+    The maximum number of items to return for this request. The request
+    returns a token that you can specify in a subsequent call to get the
+    next set of results.
+
+    Constraint: If the value is greater than 1,000, we return only 1,000
+    items.
+    """
+    next_token: str | None
+    """
+    The token for the next set of items to return. (You received this token
+    from a prior call.)
+    """
+
+@dataclass(kw_only=True)
+class DescribeVpcEndpointsOutput(_SerdeShape):
+    """Dataclass for DescribeVpcEndpointsOutput structure."""
+
+    vpc_endpoints: list[VpcEndpoint] | None = ...
+    """Information about the VPC endpoints."""
+    next_token: str | None = ...
+    """
+    The token to use when requesting the next set of items. If there are no
+    additional items to return, the string is empty.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DescribeVpcPeeringConnectionsInput(_SerdeShape):
+    """Dataclass for DescribeVpcPeeringConnectionsInput structure."""
+
+    next_token: str | None = ...
+    """
+    The token returned from a previous paginated request. Pagination
+    continues from the end of the items returned by the previous request.
+    """
+    max_results: int | None = ...
+    """
+    The maximum number of items to return for this request. To get the next
+    page of items, make another request with the token returned in the
+    output. For more information, see
+    [Pagination](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+    """
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    vpc_peering_connection_ids: list[str] | None = ...
+    """
+    The IDs of the VPC peering connections.
+
+    Default: Describes all your VPC peering connections.
+    """
+    filters: list[Filter] | None = ...
+    """
+    The filters.
+
+    - `accepter-vpc-info.cidr-block` - The IPv4 CIDR block of the accepter
+      VPC.
+
+    - `accepter-vpc-info.owner-id` - The ID of the Amazon Web Services
+      account that owns the accepter VPC.
+
+    - `accepter-vpc-info.vpc-id` - The ID of the accepter VPC.
+
+    - `expiration-time` - The expiration date and time for the VPC peering
+      connection.
+
+    - `requester-vpc-info.cidr-block` - The IPv4 CIDR block of the
+      requester's VPC.
+
+    - `requester-vpc-info.owner-id` - The ID of the Amazon Web Services
+      account that owns the requester VPC.
+
+    - `requester-vpc-info.vpc-id` - The ID of the requester VPC.
+
+    - `status-code` - The status of the VPC peering connection
+      (`pending-acceptance` | `failed` | `expired` | `provisioning` |
+      `active` | `deleting` | `deleted` | `rejected`).
+
+    - `status-message` - A message that provides more information about the
+      status of the VPC peering connection, if applicable.
+
+    - `tag` - The key/value combination of a tag assigned to the resource.
+      Use the tag key in the filter name and the tag value as the filter
+      value. For example, to find all resources that have a tag with the key
+      `Owner` and the value `TeamA`, specify `tag:Owner` for the filter name
+      and `TeamA` for the filter value.
+
+    - `tag-key` - The key of a tag assigned to the resource. Use this filter
+      to find all resources assigned a tag with a specific key, regardless
+      of the tag value.
+
+    - `vpc-peering-connection-id` - The ID of the VPC peering connection.
+    """
+
+class DescribeVpcPeeringConnectionsInputDict(TypedDict, total=False):
+    """Dictionary form of `DescribeVpcPeeringConnectionsInput`."""
+
+    next_token: str | None
+    """
+    The token returned from a previous paginated request. Pagination
+    continues from the end of the items returned by the previous request.
+    """
+    max_results: int | None
+    """
+    The maximum number of items to return for this request. To get the next
+    page of items, make another request with the token returned in the
+    output. For more information, see
+    [Pagination](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+    """
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    vpc_peering_connection_ids: Sequence[str] | None
+    """
+    The IDs of the VPC peering connections.
+
+    Default: Describes all your VPC peering connections.
+    """
+    filters: Sequence[Filter | FilterDict] | None
+    """
+    The filters.
+
+    - `accepter-vpc-info.cidr-block` - The IPv4 CIDR block of the accepter
+      VPC.
+
+    - `accepter-vpc-info.owner-id` - The ID of the Amazon Web Services
+      account that owns the accepter VPC.
+
+    - `accepter-vpc-info.vpc-id` - The ID of the accepter VPC.
+
+    - `expiration-time` - The expiration date and time for the VPC peering
+      connection.
+
+    - `requester-vpc-info.cidr-block` - The IPv4 CIDR block of the
+      requester's VPC.
+
+    - `requester-vpc-info.owner-id` - The ID of the Amazon Web Services
+      account that owns the requester VPC.
+
+    - `requester-vpc-info.vpc-id` - The ID of the requester VPC.
+
+    - `status-code` - The status of the VPC peering connection
+      (`pending-acceptance` | `failed` | `expired` | `provisioning` |
+      `active` | `deleting` | `deleted` | `rejected`).
+
+    - `status-message` - A message that provides more information about the
+      status of the VPC peering connection, if applicable.
+
+    - `tag` - The key/value combination of a tag assigned to the resource.
+      Use the tag key in the filter name and the tag value as the filter
+      value. For example, to find all resources that have a tag with the key
+      `Owner` and the value `TeamA`, specify `tag:Owner` for the filter name
+      and `TeamA` for the filter value.
+
+    - `tag-key` - The key of a tag assigned to the resource. Use this filter
+      to find all resources assigned a tag with a specific key, regardless
+      of the tag value.
+
+    - `vpc-peering-connection-id` - The ID of the VPC peering connection.
+    """
+
+@dataclass(kw_only=True)
+class DescribeVpcPeeringConnectionsOutput(_SerdeShape):
+    """Dataclass for DescribeVpcPeeringConnectionsOutput structure."""
+
+    vpc_peering_connections: list[VpcPeeringConnection] | None = ...
+    """Information about the VPC peering connections."""
+    next_token: str | None = ...
+    """
+    The token to include in another request to get the next page of items.
+    This value is `null` when there are no more items to return.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DescribeVpcsInput(_SerdeShape):
+    """Dataclass for DescribeVpcsInput structure."""
+
+    filters: list[Filter] | None = ...
+    """
+    The filters.
+
+    - `cidr` - The primary IPv4 CIDR block of the VPC. The CIDR block you
+      specify must exactly match the VPC's CIDR block for information to be
+      returned for the VPC. Must contain the slash followed by one or two
+      digits (for example, `/28`).
+
+    - `cidr-block-association.cidr-block` - An IPv4 CIDR block associated
+      with the VPC.
+
+    - `cidr-block-association.association-id` - The association ID for an
+      IPv4 CIDR block associated with the VPC.
+
+    - `cidr-block-association.state` - The state of an IPv4 CIDR block
+      associated with the VPC.
+
+    - `dhcp-options-id` - The ID of a set of DHCP options.
+
+    - `ipv6-cidr-block-association.ipv6-cidr-block` - An IPv6 CIDR block
+      associated with the VPC.
+
+    - `ipv6-cidr-block-association.ipv6-pool` - The ID of the IPv6 address
+      pool from which the IPv6 CIDR block is allocated.
+
+    - `ipv6-cidr-block-association.association-id` - The association ID for
+      an IPv6 CIDR block associated with the VPC.
+
+    - `ipv6-cidr-block-association.state` - The state of an IPv6 CIDR block
+      associated with the VPC.
+
+    - `is-default` - Indicates whether the VPC is the default VPC.
+
+    - `owner-id` - The ID of the Amazon Web Services account that owns the
+      VPC.
+
+    - `state` - The state of the VPC (`pending` | `available`).
+
+    - `tag` - The key/value combination of a tag assigned to the resource.
+      Use the tag key in the filter name and the tag value as the filter
+      value. For example, to find all resources that have a tag with the key
+      `Owner` and the value `TeamA`, specify `tag:Owner` for the filter name
+      and `TeamA` for the filter value.
+
+    - `tag-key` - The key of a tag assigned to the resource. Use this filter
+      to find all resources assigned a tag with a specific key, regardless
+      of the tag value.
+
+    - `vpc-id` - The ID of the VPC.
+    """
+    vpc_ids: list[str] | None = ...
+    """The IDs of the VPCs."""
+    next_token: str | None = ...
+    """
+    The token returned from a previous paginated request. Pagination
+    continues from the end of the items returned by the previous request.
+    """
+    max_results: int | None = ...
+    """
+    The maximum number of items to return for this request. To get the next
+    page of items, make another request with the token returned in the
+    output. For more information, see
+    [Pagination](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+    """
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class DescribeVpcsInputDict(TypedDict, total=False):
+    """Dictionary form of `DescribeVpcsInput`."""
+
+    filters: Sequence[Filter | FilterDict] | None
+    """
+    The filters.
+
+    - `cidr` - The primary IPv4 CIDR block of the VPC. The CIDR block you
+      specify must exactly match the VPC's CIDR block for information to be
+      returned for the VPC. Must contain the slash followed by one or two
+      digits (for example, `/28`).
+
+    - `cidr-block-association.cidr-block` - An IPv4 CIDR block associated
+      with the VPC.
+
+    - `cidr-block-association.association-id` - The association ID for an
+      IPv4 CIDR block associated with the VPC.
+
+    - `cidr-block-association.state` - The state of an IPv4 CIDR block
+      associated with the VPC.
+
+    - `dhcp-options-id` - The ID of a set of DHCP options.
+
+    - `ipv6-cidr-block-association.ipv6-cidr-block` - An IPv6 CIDR block
+      associated with the VPC.
+
+    - `ipv6-cidr-block-association.ipv6-pool` - The ID of the IPv6 address
+      pool from which the IPv6 CIDR block is allocated.
+
+    - `ipv6-cidr-block-association.association-id` - The association ID for
+      an IPv6 CIDR block associated with the VPC.
+
+    - `ipv6-cidr-block-association.state` - The state of an IPv6 CIDR block
+      associated with the VPC.
+
+    - `is-default` - Indicates whether the VPC is the default VPC.
+
+    - `owner-id` - The ID of the Amazon Web Services account that owns the
+      VPC.
+
+    - `state` - The state of the VPC (`pending` | `available`).
+
+    - `tag` - The key/value combination of a tag assigned to the resource.
+      Use the tag key in the filter name and the tag value as the filter
+      value. For example, to find all resources that have a tag with the key
+      `Owner` and the value `TeamA`, specify `tag:Owner` for the filter name
+      and `TeamA` for the filter value.
+
+    - `tag-key` - The key of a tag assigned to the resource. Use this filter
+      to find all resources assigned a tag with a specific key, regardless
+      of the tag value.
+
+    - `vpc-id` - The ID of the VPC.
+    """
+    vpc_ids: Sequence[str] | None
+    """The IDs of the VPCs."""
+    next_token: str | None
+    """
+    The token returned from a previous paginated request. Pagination
+    continues from the end of the items returned by the previous request.
+    """
+    max_results: int | None
+    """
+    The maximum number of items to return for this request. To get the next
+    page of items, make another request with the token returned in the
+    output. For more information, see
+    [Pagination](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+    """
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class DescribeVpcsOutput(_SerdeShape):
+    """Dataclass for DescribeVpcsOutput structure."""
+
+    next_token: str | None = ...
+    """
+    The token to include in another request to get the next page of items.
+    This value is `null` when there are no more items to return.
+    """
+    vpcs: list[Vpc] | None = ...
+    """Information about the VPCs."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DescribeVpnConcentratorsInput(_SerdeShape):
+    """Dataclass for DescribeVpnConcentratorsInput structure."""
+
+    vpn_concentrator_ids: list[str] | None = ...
+    """One or more VPN concentrator IDs."""
+    filters: list[Filter] | None = ...
+    """One or more filters to limit the results."""
+    max_results: int | None = ...
+    """
+    The maximum number of results to return with a single call. To retrieve
+    the remaining results, make another call with the returned `nextToken`
+    value.
+    """
+    next_token: str | None = ...
+    """The token for the next page of results."""
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class DescribeVpnConcentratorsInputDict(TypedDict, total=False):
+    """Dictionary form of `DescribeVpnConcentratorsInput`."""
+
+    vpn_concentrator_ids: Sequence[str] | None
+    """One or more VPN concentrator IDs."""
+    filters: Sequence[Filter | FilterDict] | None
+    """One or more filters to limit the results."""
+    max_results: int | None
+    """
+    The maximum number of results to return with a single call. To retrieve
+    the remaining results, make another call with the returned `nextToken`
+    value.
+    """
+    next_token: str | None
+    """The token for the next page of results."""
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class DescribeVpnConcentratorsOutput(_SerdeShape):
+    """Dataclass for DescribeVpnConcentratorsOutput structure."""
+
+    vpn_concentrators: list[VpnConcentrator] | None = ...
+    """Information about the VPN concentrators."""
+    next_token: str | None = ...
+    """
+    The token to use to retrieve the next page of results. This value is
+    `null` when there are no more results to return.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DescribeVpnConnectionsInput(_SerdeShape):
+    """Contains the parameters for DescribeVpnConnections."""
+
+    filters: list[Filter] | None = ...
+    """
+    One or more filters.
+
+    - `customer-gateway-configuration` - The configuration information for
+      the customer gateway.
+
+    - `customer-gateway-id` - The ID of a customer gateway associated with
+      the VPN connection.
+
+    - `state` - The state of the VPN connection (`pending` | `available` |
+      `deleting` | `deleted`).
+
+    - `option.static-routes-only` - Indicates whether the connection has
+      static routes only. Used for devices that do not support Border
+      Gateway Protocol (BGP).
+
+    - `route.destination-cidr-block` - The destination CIDR block. This
+      corresponds to the subnet used in a customer data center.
+
+    - `bgp-asn` - The BGP Autonomous System Number (ASN) associated with a
+      BGP device.
+
+    - `tag`:`<key>`{=html} - The key/value combination of a tag assigned to
+      the resource. Use the tag key in the filter name and the tag value as
+      the filter value. For example, to find all resources that have a tag
+      with the key `Owner` and the value `TeamA`, specify `tag:Owner` for
+      the filter name and `TeamA` for the filter value.
+
+    - `tag-key` - The key of a tag assigned to the resource. Use this filter
+      to find all resources assigned a tag with a specific key, regardless
+      of the tag value.
+
+    - `type` - The type of VPN connection. Currently the only supported type
+      is `ipsec.1`.
+
+    - `vpn-connection-id` - The ID of the VPN connection.
+
+    - `vpn-gateway-id` - The ID of a virtual private gateway associated with
+      the VPN connection.
+
+    - `transit-gateway-id` - The ID of a transit gateway associated with the
+      VPN connection.
+    """
+    vpn_connection_ids: list[str] | None = ...
+    """
+    One or more VPN connection IDs.
+
+    Default: Describes your VPN connections.
+    """
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class DescribeVpnConnectionsInputDict(TypedDict, total=False):
+    """Dictionary form of `DescribeVpnConnectionsInput`."""
+
+    filters: Sequence[Filter | FilterDict] | None
+    """
+    One or more filters.
+
+    - `customer-gateway-configuration` - The configuration information for
+      the customer gateway.
+
+    - `customer-gateway-id` - The ID of a customer gateway associated with
+      the VPN connection.
+
+    - `state` - The state of the VPN connection (`pending` | `available` |
+      `deleting` | `deleted`).
+
+    - `option.static-routes-only` - Indicates whether the connection has
+      static routes only. Used for devices that do not support Border
+      Gateway Protocol (BGP).
+
+    - `route.destination-cidr-block` - The destination CIDR block. This
+      corresponds to the subnet used in a customer data center.
+
+    - `bgp-asn` - The BGP Autonomous System Number (ASN) associated with a
+      BGP device.
+
+    - `tag`:`<key>`{=html} - The key/value combination of a tag assigned to
+      the resource. Use the tag key in the filter name and the tag value as
+      the filter value. For example, to find all resources that have a tag
+      with the key `Owner` and the value `TeamA`, specify `tag:Owner` for
+      the filter name and `TeamA` for the filter value.
+
+    - `tag-key` - The key of a tag assigned to the resource. Use this filter
+      to find all resources assigned a tag with a specific key, regardless
+      of the tag value.
+
+    - `type` - The type of VPN connection. Currently the only supported type
+      is `ipsec.1`.
+
+    - `vpn-connection-id` - The ID of the VPN connection.
+
+    - `vpn-gateway-id` - The ID of a virtual private gateway associated with
+      the VPN connection.
+
+    - `transit-gateway-id` - The ID of a transit gateway associated with the
+      VPN connection.
+    """
+    vpn_connection_ids: Sequence[str] | None
+    """
+    One or more VPN connection IDs.
+
+    Default: Describes your VPN connections.
+    """
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class DescribeVpnConnectionsOutput(_SerdeShape):
+    """Contains the output of DescribeVpnConnections."""
+
+    vpn_connections: list[VpnConnection] | None = ...
+    """Information about one or more VPN connections."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DescribeVpnGatewaysInput(_SerdeShape):
+    """Contains the parameters for DescribeVpnGateways."""
+
+    filters: list[Filter] | None = ...
+    """
+    One or more filters.
+
+    - `amazon-side-asn` - The Autonomous System Number (ASN) for the Amazon
+      side of the gateway.
+
+    - `attachment.state` - The current state of the attachment between the
+      gateway and the VPC (`attaching` | `attached` | `detaching` |
+      `detached`).
+
+    - `attachment.vpc-id` - The ID of an attached VPC.
+
+    - `availability-zone` - The Availability Zone for the virtual private
+      gateway (if applicable).
+
+    - `state` - The state of the virtual private gateway (`pending` |
+      `available` | `deleting` | `deleted`).
+
+    - `tag`:`<key>`{=html} - The key/value combination of a tag assigned to
+      the resource. Use the tag key in the filter name and the tag value as
+      the filter value. For example, to find all resources that have a tag
+      with the key `Owner` and the value `TeamA`, specify `tag:Owner` for
+      the filter name and `TeamA` for the filter value.
+
+    - `tag-key` - The key of a tag assigned to the resource. Use this filter
+      to find all resources assigned a tag with a specific key, regardless
+      of the tag value.
+
+    - `type` - The type of virtual private gateway. Currently the only
+      supported type is `ipsec.1`.
+
+    - `vpn-gateway-id` - The ID of the virtual private gateway.
+    """
+    vpn_gateway_ids: list[str] | None = ...
+    """
+    One or more virtual private gateway IDs.
+
+    Default: Describes all your virtual private gateways.
+    """
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class DescribeVpnGatewaysInputDict(TypedDict, total=False):
+    """Dictionary form of `DescribeVpnGatewaysInput`."""
+
+    filters: Sequence[Filter | FilterDict] | None
+    """
+    One or more filters.
+
+    - `amazon-side-asn` - The Autonomous System Number (ASN) for the Amazon
+      side of the gateway.
+
+    - `attachment.state` - The current state of the attachment between the
+      gateway and the VPC (`attaching` | `attached` | `detaching` |
+      `detached`).
+
+    - `attachment.vpc-id` - The ID of an attached VPC.
+
+    - `availability-zone` - The Availability Zone for the virtual private
+      gateway (if applicable).
+
+    - `state` - The state of the virtual private gateway (`pending` |
+      `available` | `deleting` | `deleted`).
+
+    - `tag`:`<key>`{=html} - The key/value combination of a tag assigned to
+      the resource. Use the tag key in the filter name and the tag value as
+      the filter value. For example, to find all resources that have a tag
+      with the key `Owner` and the value `TeamA`, specify `tag:Owner` for
+      the filter name and `TeamA` for the filter value.
+
+    - `tag-key` - The key of a tag assigned to the resource. Use this filter
+      to find all resources assigned a tag with a specific key, regardless
+      of the tag value.
+
+    - `type` - The type of virtual private gateway. Currently the only
+      supported type is `ipsec.1`.
+
+    - `vpn-gateway-id` - The ID of the virtual private gateway.
+    """
+    vpn_gateway_ids: Sequence[str] | None
+    """
+    One or more virtual private gateway IDs.
+
+    Default: Describes all your virtual private gateways.
+    """
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class DescribeVpnGatewaysOutput(_SerdeShape):
+    """Contains the output of DescribeVpnGateways."""
+
+    vpn_gateways: list[VpnGateway] | None = ...
+    """Information about one or more virtual private gateways."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+class DestinationFileFormat(UnknownEnumMixin, StrEnum):
+    PLAIN_TEXT = "plain-text"
+    PARQUET = "parquet"
+
+@dataclass(kw_only=True)
+class DestinationOptionsRequest(_SerdeShape):
+    """Describes the destination options for a flow log."""
+
+    file_format: str | None = ...
+    """The format for the flow log. The default is `plain-text`."""
+    hive_compatible_partitions: bool | None = ...
+    """
+    Indicates whether to use Hive-compatible prefixes for flow logs stored
+    in Amazon S3. The default is `false`.
+    """
+    per_hour_partition: bool | None = ...
+    """
+    Indicates whether to partition the flow log per hour. This reduces the
+    cost and response time for queries. The default is `false`.
+    """
+
+class DestinationOptionsRequestDict(TypedDict, total=False):
+    """Dictionary form of `DestinationOptionsRequest`."""
+
+    file_format: str | None
+    """The format for the flow log. The default is `plain-text`."""
+    hive_compatible_partitions: bool | None
+    """
+    Indicates whether to use Hive-compatible prefixes for flow logs stored
+    in Amazon S3. The default is `false`.
+    """
+    per_hour_partition: bool | None
+    """
+    Indicates whether to partition the flow log per hour. This reduces the
+    cost and response time for queries. The default is `false`.
+    """
+
+@dataclass(kw_only=True)
+class DestinationOptionsResponse(_SerdeShape):
+    """Describes the destination options for a flow log."""
+
+    file_format: str | None = ...
+    """The format for the flow log."""
+    hive_compatible_partitions: bool | None = ...
+    """
+    Indicates whether to use Hive-compatible prefixes for flow logs stored
+    in Amazon S3.
+    """
+    per_hour_partition: bool | None = ...
+    """Indicates whether to partition the flow log per hour."""
 
 @dataclass(kw_only=True)
 class DetachClassicLinkVpcInput(_SerdeShape):
@@ -2319,6 +3194,63 @@ class DisassociateNatGatewayAddressOutput(_SerdeShape):
     """The ID of the NAT gateway."""
     nat_gateway_addresses: list[NatGatewayAddress] | None = ...
     """Information about the NAT gateway IP addresses."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DisassociateNetworkingFlexCostAllocationPolicyInput(_SerdeShape):
+    """
+    Dataclass for DisassociateNetworkingFlexCostAllocationPolicyInput
+    structure.
+    """
+
+    fca_policy_association_ids: list[str] | None = ...
+    """
+    The IDs of the policy associations to remove. You can specify up to 100
+    association IDs. This parameter is required.
+    """
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class DisassociateNetworkingFlexCostAllocationPolicyInputDict(TypedDict, total=False):
+    """Dictionary form of `DisassociateNetworkingFlexCostAllocationPolicyInput`."""
+
+    fca_policy_association_ids: Required[Sequence[str]]
+    """
+    The IDs of the policy associations to remove. You can specify up to 100
+    association IDs. This parameter is required.
+    """
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class DisassociateNetworkingFlexCostAllocationPolicyOutput(_SerdeShape):
+    """
+    Dataclass for DisassociateNetworkingFlexCostAllocationPolicyOutput
+    structure.
+    """
+
+    fca_policy_disassociations: list[str] | None = ...
+    """The IDs of the policy associations that were removed."""
+    fca_policy_disassociation_failures: (
+        list[FlexCostAllocationOperationFailure] | None
+    ) = ...
+    """Information about the policy associations that could not be removed."""
     response_metadata: ResponseMetadata = ...
     """
     Metadata about the response that produced this output. Use this to
@@ -6187,467 +7119,4 @@ class ExportImageOutput(_SerdeShape):
     recover the request identifiers a service's support team needs in order
     to investigate a call. Members of the metadata are individually
     optional.
-    """
-
-@dataclass(kw_only=True)
-class ExportImageTask(_SerdeShape):
-    """Describes an export image task."""
-
-    description: str | None = ...
-    """A description of the image being exported."""
-    export_image_task_id: str | None = ...
-    """The ID of the export image task."""
-    image_id: str | None = ...
-    """The ID of the image."""
-    progress: str | None = ...
-    """The percent complete of the export image task."""
-    s3_export_location: ExportTaskS3Location | None = ...
-    """Information about the destination Amazon S3 bucket."""
-    status: str | None = ...
-    """
-    The status of the export image task. The possible values are `active`,
-    `completed`, `deleting`, and `deleted`.
-    """
-    status_message: str | None = ...
-    """The status message for the export image task."""
-    tags: list[Tag] | None = ...
-    """Any tags assigned to the export image task."""
-
-@dataclass(kw_only=True)
-class ExportTask(_SerdeShape):
-    """Describes an export instance task."""
-
-    description: str | None = ...
-    """A description of the resource being exported."""
-    export_task_id: str | None = ...
-    """The ID of the export task."""
-    export_to_s3_task: ExportToS3Task | None = ...
-    """Information about the export task."""
-    instance_export_details: InstanceExportDetails | None = ...
-    """Information about the instance to export."""
-    state: str | None = ...
-    """The state of the export task."""
-    status_message: str | None = ...
-    """The status message related to the export task."""
-    tags: list[Tag] | None = ...
-    """The tags for the export task."""
-
-@dataclass(kw_only=True)
-class ExportTaskS3Location(_SerdeShape):
-    """Describes the destination for an export image task."""
-
-    s3_bucket: str | None = ...
-    """The destination Amazon S3 bucket."""
-    s3_prefix: str | None = ...
-    """The prefix (logical hierarchy) in the bucket."""
-
-@dataclass(kw_only=True)
-class ExportTaskS3LocationRequest(_SerdeShape):
-    """Describes the destination for an export image task."""
-
-    s3_bucket: str | None = ...
-    """The destination Amazon S3 bucket."""
-    s3_prefix: str | None = ...
-    """The prefix (logical hierarchy) in the bucket."""
-
-class ExportTaskS3LocationRequestDict(TypedDict, total=False):
-    """Dictionary form of `ExportTaskS3LocationRequest`."""
-
-    s3_bucket: Required[str]
-    """The destination Amazon S3 bucket."""
-    s3_prefix: str | None
-    """The prefix (logical hierarchy) in the bucket."""
-
-class ExportTaskState(UnknownEnumMixin, StrEnum):
-    ACTIVE = "active"
-    CANCELLING = "cancelling"
-    CANCELLED = "cancelled"
-    COMPLETED = "completed"
-
-@dataclass(kw_only=True)
-class ExportToS3Task(_SerdeShape):
-    """Describes the format and location for the export task."""
-
-    container_format: str | None = ...
-    """
-    The container format used to combine disk images with metadata (such as
-    OVF). If absent, only the disk image is exported.
-    """
-    disk_image_format: str | None = ...
-    """The format for the exported image."""
-    s3_bucket: str | None = ...
-    """
-    The Amazon S3 bucket for the destination image. The destination bucket
-    must exist and have an access control list (ACL) attached that specifies
-    the Region-specific canonical account ID for the `Grantee`. For more
-    information about the ACL to your S3 bucket, see
-    [Prerequisites](https://docs.aws.amazon.com/vm-import/latest/userguide/vmexport.html#vmexport-prerequisites)
-    in the VM Import/Export User Guide.
-    """
-    s3_key: str | None = ...
-    """The encryption key for your S3 bucket."""
-
-@dataclass(kw_only=True)
-class ExportToS3TaskSpecification(_SerdeShape):
-    """Describes an export instance task."""
-
-    disk_image_format: str | None = ...
-    """The format for the exported image."""
-    container_format: str | None = ...
-    """
-    The container format used to combine disk images with metadata (such as
-    OVF). If absent, only the disk image is exported.
-    """
-    s3_bucket: str | None = ...
-    """
-    The Amazon S3 bucket for the destination image. The destination bucket
-    must exist and have an access control list (ACL) attached that specifies
-    the Region-specific canonical account ID for the `Grantee`. For more
-    information about the ACL to your S3 bucket, see
-    [Prerequisites](https://docs.aws.amazon.com/vm-import/latest/userguide/vmexport.html#vmexport-prerequisites)
-    in the VM Import/Export User Guide.
-    """
-    s3_prefix: str | None = ...
-    """
-    The image is written to a single object in the Amazon S3 bucket at the
-    S3 key s3prefix + exportTaskId + '.' + diskImageFormat.
-    """
-
-class ExportToS3TaskSpecificationDict(TypedDict, total=False):
-    """Dictionary form of `ExportToS3TaskSpecification`."""
-
-    disk_image_format: str | None
-    """The format for the exported image."""
-    container_format: str | None
-    """
-    The container format used to combine disk images with metadata (such as
-    OVF). If absent, only the disk image is exported.
-    """
-    s3_bucket: str | None
-    """
-    The Amazon S3 bucket for the destination image. The destination bucket
-    must exist and have an access control list (ACL) attached that specifies
-    the Region-specific canonical account ID for the `Grantee`. For more
-    information about the ACL to your S3 bucket, see
-    [Prerequisites](https://docs.aws.amazon.com/vm-import/latest/userguide/vmexport.html#vmexport-prerequisites)
-    in the VM Import/Export User Guide.
-    """
-    s3_prefix: str | None
-    """
-    The image is written to a single object in the Amazon S3 bucket at the
-    S3 key s3prefix + exportTaskId + '.' + diskImageFormat.
-    """
-
-@dataclass(kw_only=True)
-class ExportTransitGatewayRoutesInput(_SerdeShape):
-    """Dataclass for ExportTransitGatewayRoutesInput structure."""
-
-    transit_gateway_route_table_id: str | None = ...
-    """The ID of the route table."""
-    filters: list[Filter] | None = ...
-    """
-    One or more filters. The possible values are:
-
-    - `attachment.transit-gateway-attachment-id` - The id of the transit
-      gateway attachment.
-
-    - `attachment.resource-id` - The resource id of the transit gateway
-      attachment.
-
-    - `route-search.exact-match` - The exact match of the specified filter.
-
-    - `route-search.longest-prefix-match` - The longest prefix that matches
-      the route.
-
-    - `route-search.subnet-of-match` - The routes with a subnet that match
-      the specified CIDR filter.
-
-    - `route-search.supernet-of-match` - The routes with a CIDR that
-      encompass the CIDR filter. For example, if you have 10.0.1.0/29 and
-      10.0.1.0/31 routes in your route table and you specify
-      supernet-of-match as 10.0.1.0/30, then the result returns 10.0.1.0/29.
-
-    - `state` - The state of the route (`active` | `blackhole`).
-
-    - `transit-gateway-route-destination-cidr-block` - The CIDR range.
-
-    - `type` - The type of route (`propagated` | `static`).
-    """
-    s3_bucket: str | None = ...
-    """The name of the S3 bucket."""
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-class ExportTransitGatewayRoutesInputDict(TypedDict, total=False):
-    """Dictionary form of `ExportTransitGatewayRoutesInput`."""
-
-    transit_gateway_route_table_id: Required[str]
-    """The ID of the route table."""
-    filters: Sequence[Filter | FilterDict] | None
-    """
-    One or more filters. The possible values are:
-
-    - `attachment.transit-gateway-attachment-id` - The id of the transit
-      gateway attachment.
-
-    - `attachment.resource-id` - The resource id of the transit gateway
-      attachment.
-
-    - `route-search.exact-match` - The exact match of the specified filter.
-
-    - `route-search.longest-prefix-match` - The longest prefix that matches
-      the route.
-
-    - `route-search.subnet-of-match` - The routes with a subnet that match
-      the specified CIDR filter.
-
-    - `route-search.supernet-of-match` - The routes with a CIDR that
-      encompass the CIDR filter. For example, if you have 10.0.1.0/29 and
-      10.0.1.0/31 routes in your route table and you specify
-      supernet-of-match as 10.0.1.0/30, then the result returns 10.0.1.0/29.
-
-    - `state` - The state of the route (`active` | `blackhole`).
-
-    - `transit-gateway-route-destination-cidr-block` - The CIDR range.
-
-    - `type` - The type of route (`propagated` | `static`).
-    """
-    s3_bucket: Required[str]
-    """The name of the S3 bucket."""
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-@dataclass(kw_only=True)
-class ExportTransitGatewayRoutesOutput(_SerdeShape):
-    """Dataclass for ExportTransitGatewayRoutesOutput structure."""
-
-    s3_location: str | None = ...
-    """
-    The URL of the exported file in Amazon S3. For example,
-    s3://*bucket_name*/VPCTransitGateway/TransitGatewayRouteTables/*file_name*.
-    """
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class ExportVerifiedAccessInstanceClientConfigurationInput(_SerdeShape):
-    """
-    Dataclass for ExportVerifiedAccessInstanceClientConfigurationInput
-    structure.
-    """
-
-    verified_access_instance_id: str | None = ...
-    """The ID of the Verified Access instance."""
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-class ExportVerifiedAccessInstanceClientConfigurationInputDict(TypedDict, total=False):
-    """Dictionary form of `ExportVerifiedAccessInstanceClientConfigurationInput`."""
-
-    verified_access_instance_id: Required[str]
-    """The ID of the Verified Access instance."""
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-@dataclass(kw_only=True)
-class ExportVerifiedAccessInstanceClientConfigurationOutput(_SerdeShape):
-    """
-    Dataclass for ExportVerifiedAccessInstanceClientConfigurationOutput
-    structure.
-    """
-
-    version: str | None = ...
-    """The version."""
-    verified_access_instance_id: str | None = ...
-    """The ID of the Verified Access instance."""
-    region: str | None = ...
-    """The Region."""
-    device_trust_providers: list[str] | None = ...
-    """The device trust providers."""
-    user_trust_provider: (
-        VerifiedAccessInstanceUserTrustProviderClientConfiguration | None
-    ) = ...
-    """The user identity trust provider."""
-    open_vpn_configurations: (
-        list[VerifiedAccessInstanceOpenVpnClientConfiguration] | None
-    ) = ...
-    """The Open VPN configuration."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class ExternalAuthorityConfiguration(_SerdeShape):
-    """
-    The configuration that links an Amazon VPC IPAM scope to an external
-    authority system. It specifies the type of external system and the
-    external resource identifier that identifies your account or instance in
-    that system.
-
-    For more information, see [Integrate VPC IPAM with Infoblox
-    infrastructure](https://docs.aws.amazon.com/vpc/latest/ipam/integrate-infoblox-ipam.html)
-    in the *Amazon VPC IPAM User Guide*.
-    """
-
-    type: str | None = ...
-    """The type of external authority."""
-    external_resource_identifier: str | None = ...
-    """
-    The identifier for the external resource managing this scope. For
-    Infoblox integrations, this is the Infoblox resource identifier in the
-    format
-    `<version>`{=html}`.identity.account.``<entity_realm>`{=html}`.``<entity_id>`{=html}.
-    """
-
-class ExternalAuthorityConfigurationDict(TypedDict, total=False):
-    """Dictionary form of `ExternalAuthorityConfiguration`."""
-
-    type: str | None
-    """The type of external authority."""
-    external_resource_identifier: str | None
-    """
-    The identifier for the external resource managing this scope. For
-    Infoblox integrations, this is the Infoblox resource identifier in the
-    format
-    `<version>`{=html}`.identity.account.``<entity_realm>`{=html}`.``<entity_id>`{=html}.
-    """
-
-@dataclass(kw_only=True)
-class FailedCapacityReservationFleetCancellationResult(_SerdeShape):
-    """Describes a Capacity Reservation Fleet that could not be cancelled."""
-
-    capacity_reservation_fleet_id: str | None = ...
-    """The ID of the Capacity Reservation Fleet that could not be cancelled."""
-    cancel_capacity_reservation_fleet_error: (
-        CancelCapacityReservationFleetError | None
-    ) = ...
-    """Information about the Capacity Reservation Fleet cancellation error."""
-
-@dataclass(kw_only=True)
-class FailedQueuedPurchaseDeletion(_SerdeShape):
-    """Describes a Reserved Instance whose queued purchase was not deleted."""
-
-    error: DeleteQueuedReservedInstancesError | None = ...
-    """The error."""
-    reserved_instances_id: str | None = ...
-    """The ID of the Reserved Instance."""
-
-@dataclass(kw_only=True)
-class FastLaunchLaunchTemplateSpecificationRequest(_SerdeShape):
-    """
-    Request to create a launch template for a Windows fast launch enabled
-    AMI.
-
-    Note:
-        Note - You can specify either the `LaunchTemplateName` or the
-        `LaunchTemplateId`, but not both.
-    """
-
-    launch_template_id: str | None = ...
-    """
-    Specify the ID of the launch template that the AMI should use for
-    Windows fast launch.
-    """
-    launch_template_name: str | None = ...
-    """
-    Specify the name of the launch template that the AMI should use for
-    Windows fast launch.
-    """
-    version: str | None = ...
-    """
-    Specify the version of the launch template that the AMI should use for
-    Windows fast launch.
-    """
-
-class FastLaunchLaunchTemplateSpecificationRequestDict(TypedDict, total=False):
-    """Dictionary form of `FastLaunchLaunchTemplateSpecificationRequest`."""
-
-    launch_template_id: str | None
-    """
-    Specify the ID of the launch template that the AMI should use for
-    Windows fast launch.
-    """
-    launch_template_name: str | None
-    """
-    Specify the name of the launch template that the AMI should use for
-    Windows fast launch.
-    """
-    version: Required[str]
-    """
-    Specify the version of the launch template that the AMI should use for
-    Windows fast launch.
-    """
-
-@dataclass(kw_only=True)
-class FastLaunchLaunchTemplateSpecificationResponse(_SerdeShape):
-    """
-    Identifies the launch template that the AMI uses for Windows fast
-    launch.
-    """
-
-    launch_template_id: str | None = ...
-    """The ID of the launch template that the AMI uses for Windows fast launch."""
-    launch_template_name: str | None = ...
-    """
-    The name of the launch template that the AMI uses for Windows fast
-    launch.
-    """
-    version: str | None = ...
-    """
-    The version of the launch template that the AMI uses for Windows fast
-    launch.
-    """
-
-class FastLaunchResourceType(UnknownEnumMixin, StrEnum):
-    SNAPSHOT = "snapshot"
-
-@dataclass(kw_only=True)
-class FastLaunchSnapshotConfigurationRequest(_SerdeShape):
-    """
-    Configuration settings for creating and managing pre-provisioned
-    snapshots for a Windows fast launch enabled AMI.
-    """
-
-    target_resource_count: int | None = ...
-    """
-    The number of pre-provisioned snapshots to keep on hand for a Windows
-    fast launch enabled AMI.
-    """
-
-class FastLaunchSnapshotConfigurationRequestDict(TypedDict, total=False):
-    """Dictionary form of `FastLaunchSnapshotConfigurationRequest`."""
-
-    target_resource_count: int | None
-    """
-    The number of pre-provisioned snapshots to keep on hand for a Windows
-    fast launch enabled AMI.
     """

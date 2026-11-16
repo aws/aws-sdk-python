@@ -29,7 +29,6 @@ _CRI = "CapacityReservationId"
 _St = "State"
 _st = "state"
 _SIu = "SubnetId"
-_sI = "subnetId"
 _C = "Code"
 _co = "code"
 _Me = "Message"
@@ -41,7 +40,6 @@ _nam = "name"
 _AZ = "AvailabilityZone"
 _AZI = "AvailabilityZoneId"
 _NII = "NetworkInterfaceId"
-_nII = "networkInterfaceId"
 _SGI = "SecurityGroupId"
 _NI = "NetworkInterface"
 _SG = "SecurityGroup"
@@ -51,7 +49,6 @@ _IT = "InstanceType"
 _Des = "Description"
 _PIAr = "PrivateIpAddress"
 _pIAr = "privateIpAddress"
-_desc = "description"
 _Af = "Affinity"
 _def = "default"
 _ASS = "AmdSevSnp"
@@ -64,13 +61,11 @@ _IPp = "Ipv6Prefixes"
 _IPpv = "Ipv6Prefix"
 _IAp = "Ipv6Addresses"
 _IAC = "Ipv6AddressCount"
-_iAC = "ipv6AddressCount"
 _IPpvr = "Ipv4Prefixes"
 _IPpvre = "Ipv4Prefix"
 _IPCp = "Ipv4PrefixCount"
 _PIAri = "PrivateIpAddresses"
 _SPIAC = "SecondaryPrivateIpAddressCount"
-_sPIAC = "secondaryPrivateIpAddressCount"
 _iPp = "ipv4Prefix"
 _PIAC = "PrivateIpAddressCount"
 _IIP = "IamInstanceProfile"
@@ -84,8 +79,6 @@ _ESE = "EnaSrdEnabled"
 _NCI = "NetworkCardIndex"
 _EQC = "EnaQueueCount"
 _DI = "DeviceIndex"
-_dI = "deviceIndex"
-_nCI = "networkCardIndex"
 _ECI = "EbsCardIndex"
 _DOT = "DeleteOnTermination"
 _dOT = "deleteOnTermination"
@@ -164,9 +157,14 @@ _Er = "Errors"
 _ESr = "ErrorSet"
 _eSr = "errorSet"
 _CRP = "CapacityReservationPreference"
+_LTCRSR = "LaunchTemplateCapacityReservationSpecificationRequest"
+_ASSS = "AmdSevSnpSpecification"
+_NVS = "NestedVirtualizationSpecification"
+_LTCOR = "LaunchTemplateCpuOptionsRequest"
 _CCor = "CoreCount"
 _TPC = "ThreadsPerCore"
 _NV = "NestedVirtualization"
+_CSR = "CreditSpecificationRequest"
 _CCp = "CpuCredits"
 _EGS = "ElasticGpuSpecification"
 _EGSL = "ElasticGpuSpecificationList"
@@ -202,7 +200,10 @@ _LTIMTS = "LaunchTemplateInstanceMetadataTagsState"
 _LTIMORau = "LaunchTemplateInstanceMetadataOptionsRequest"
 _HPI = "HttpProtocolIpv6"
 _IMT = "InstanceMetadataTags"
+_MCI = "MetricCategoryId"
+_MCIL = "MetricCategoryIdList"
 _LTMR = "LaunchTemplatesMonitoringRequest"
+_MCIe = "MetricCategoryIds"
 _CTSR = "ConnectionTrackingSpecificationRequest"
 _TET = "TcpEstablishedTimeout"
 _UST = "UdpStreamTimeout"
@@ -336,6 +337,8 @@ _hE = "httpEndpoint"
 _hPI = "httpProtocolIpv6"
 _iMT = "instanceMetadataTags"
 _LTM = "LaunchTemplatesMonitoring"
+_MCIS = "MetricCategoryIdSet"
+_mCIS = "metricCategoryIdSet"
 _tET = "tcpEstablishedTimeout"
 _uTd = "udpTimeout"
 _uST = "udpStreamTimeout"
@@ -353,34 +356,64 @@ _IIAL = "InstanceIpv6AddressList"
 _IPSRpvre = "Ipv6PrefixSpecificationResponse"
 _iPpvr = "ipv6Prefix"
 _IPLRpv = "Ipv6PrefixListResponse"
-_LTINIS = "LaunchTemplateInstanceNetworkInterfaceSpecification"
-_aCIA = "associateCarrierIpAddress"
-_aPIA = "associatePublicIpAddress"
-_GS = "GroupSet"
-_gS = "groupSet"
-_iTnt = "interfaceType"
-_IAS = "Ipv6AddressesSet"
-_iAS = "ipv6AddressesSet"
-_PIASr = "PrivateIpAddressesSet"
-_pIAS = "privateIpAddressesSet"
-_IPSpv = "Ipv4PrefixSet"
-_iPS = "ipv4PrefixSet"
-_iPC = "ipv4PrefixCount"
-_IPSpvr = "Ipv6PrefixSet"
-_iPSp = "ipv6PrefixSet"
-_iPCp = "ipv6PrefixCount"
-_pIri = "primaryIpv6"
-_eSS = "enaSrdSpecification"
-_cTSo = "connectionTrackingSpecification"
-_eQC = "enaQueueCount"
-_LTINISL = "LaunchTemplateInstanceNetworkInterfaceSpecificationList"
-_LTNPO = "LaunchTemplateNetworkPerformanceOptions"
-_bW = "bandwidthWeighting"
 _LTV = "LaunchTemplateVersion"
 _CLTVO = "CreateLaunchTemplateVersionOutput"
 _cCLTVRo = "com.amazonaws.ec2#CreateLaunchTemplateVersionResult"
 _lTV = "launchTemplateVersion"
 _CLTV = "CreateLaunchTemplateVersion"
+
+LAUNCH_TEMPLATE_CAPACITY_RESERVATION_SPECIFICATION_REQUEST: StaticSchema = (
+    18,
+    n0,
+    _LTCRSR,
+    0,
+    (_CRP, _CRTap),
+    (
+        (lambda: schemas.CAPACITY_RESERVATION_PREFERENCE, 0),
+        (lambda: schemas.CAPACITY_RESERVATION_TARGET, 0),
+    ),
+)
+
+AMD_SEV_SNP_SPECIFICATION: StaticSchema = (
+    14,
+    n0,
+    _ASSS,
+    0,
+    (_ena, _d),
+    ((-1, {_sV: _ena}), (-1, {_sV: _d})),
+)
+
+NESTED_VIRTUALIZATION_SPECIFICATION: StaticSchema = (
+    14,
+    n0,
+    _NVS,
+    0,
+    (_ena, _d),
+    ((-1, {_sV: _ena}), (-1, {_sV: _d})),
+)
+
+LAUNCH_TEMPLATE_CPU_OPTIONS_REQUEST: StaticSchema = (
+    18,
+    n0,
+    _LTCOR,
+    0,
+    (_CCor, _TPC, _ASS, _NV),
+    (
+        (lambda: schemas.INTEGER, 0),
+        (lambda: schemas.INTEGER, 0),
+        (AMD_SEV_SNP_SPECIFICATION, 0),
+        (NESTED_VIRTUALIZATION_SPECIFICATION, 0),
+    ),
+)
+
+CREDIT_SPECIFICATION_REQUEST: StaticSchema = (
+    18,
+    n0,
+    _CSR,
+    0,
+    (_CCp,),
+    ((lambda: schemas.STRING, 1),),
+)
 
 ELASTIC_GPU_SPECIFICATION: StaticSchema = (
     18,
@@ -601,13 +634,24 @@ LAUNCH_TEMPLATE_INSTANCE_METADATA_OPTIONS_REQUEST: StaticSchema = (
     ),
 )
 
+METRIC_CATEGORY_ID: StaticSchema = (3, n0, _MCI, 0)
+
+METRIC_CATEGORY_ID_LIST: StaticSchema = (
+    16,
+    n0,
+    _MCIL,
+    0,
+    (_me,),
+    ((METRIC_CATEGORY_ID, {_sN: _i}),),
+)
+
 LAUNCH_TEMPLATES_MONITORING_REQUEST: StaticSchema = (
     18,
     n0,
     _LTMR,
     0,
-    (_Ena,),
-    ((lambda: schemas.BOOLEAN, 0),),
+    (_Ena, _MCIe),
+    ((lambda: schemas.BOOLEAN, 0), (METRIC_CATEGORY_ID_LIST, {_sN: _MCI})),
 )
 
 CONNECTION_TRACKING_SPECIFICATION_REQUEST: StaticSchema = (
@@ -1002,9 +1046,9 @@ REQUEST_LAUNCH_TEMPLATE_DATA: StaticSchema = (
         (SECURITY_GROUP_ID_STRING_LIST, {_sN: _SGI}),
         (SECURITY_GROUP_STRING_LIST, {_sN: _SG}),
         (LAUNCH_TEMPLATE_INSTANCE_MARKET_OPTIONS_REQUEST, 0),
-        (lambda: schemas.CREDIT_SPECIFICATION_REQUEST, 0),
-        (lambda: schemas.LAUNCH_TEMPLATE_CPU_OPTIONS_REQUEST, 0),
-        (lambda: schemas.LAUNCH_TEMPLATE_CAPACITY_RESERVATION_SPECIFICATION_REQUEST, 0),
+        (CREDIT_SPECIFICATION_REQUEST, 0),
+        (LAUNCH_TEMPLATE_CPU_OPTIONS_REQUEST, 0),
+        (LAUNCH_TEMPLATE_CAPACITY_RESERVATION_SPECIFICATION_REQUEST, 0),
         (LAUNCH_TEMPLATE_LICENSE_SPECIFICATION_LIST_REQUEST, {_sN: _LSice}),
         (LAUNCH_TEMPLATE_HIBERNATION_OPTIONS_REQUEST, 0),
         (LAUNCH_TEMPLATE_INSTANCE_METADATA_OPTIONS_REQUEST, 0),
@@ -1202,8 +1246,8 @@ LAUNCH_TEMPLATE_CPU_OPTIONS: StaticSchema = (
     (
         (lambda: schemas.INTEGER, {_aQN: _CCor, _sN: _cCor}),
         (lambda: schemas.INTEGER, {_aQN: _TPC, _sN: _tPC}),
-        (lambda: schemas.AMD_SEV_SNP_SPECIFICATION, {_aQN: _ASS, _sN: _aSS}),
-        (lambda: schemas.NESTED_VIRTUALIZATION_SPECIFICATION, {_aQN: _NV, _sN: _nV}),
+        (AMD_SEV_SNP_SPECIFICATION, {_aQN: _ASS, _sN: _aSS}),
+        (NESTED_VIRTUALIZATION_SPECIFICATION, {_aQN: _NV, _sN: _nV}),
     ),
 )
 
@@ -1369,8 +1413,11 @@ LAUNCH_TEMPLATES_MONITORING: StaticSchema = (
     n0,
     _LTM,
     0,
-    (_Ena,),
-    ((lambda: schemas.BOOLEAN, {_aQN: _Ena, _sN: _ena}),),
+    (_Ena, _MCIe),
+    (
+        (lambda: schemas.BOOLEAN, {_aQN: _Ena, _sN: _ena}),
+        (METRIC_CATEGORY_ID_LIST, {_aQN: _MCIS, _sN: _mCIS}),
+    ),
 )
 
 CONNECTION_TRACKING_SPECIFICATION: StaticSchema = (
@@ -1462,79 +1509,4 @@ IPV6_PREFIX_LIST_RESPONSE: StaticSchema = (
     0,
     (_me,),
     ((IPV6_PREFIX_SPECIFICATION_RESPONSE, {_sN: _i}),),
-)
-
-LAUNCH_TEMPLATE_INSTANCE_NETWORK_INTERFACE_SPECIFICATION: StaticSchema = (
-    18,
-    n0,
-    _LTINIS,
-    0,
-    (
-        _ACIA,
-        _APIAsso,
-        _DOT,
-        _Des,
-        _DI,
-        _G,
-        _ITnte,
-        _IAC,
-        _IAp,
-        _NII,
-        _PIAr,
-        _PIAri,
-        _SPIAC,
-        _SIu,
-        _NCI,
-        _IPpvr,
-        _IPCp,
-        _IPp,
-        _IPC,
-        _PIrim,
-        _ESS,
-        _CTSo,
-        _EQC,
-    ),
-    (
-        (lambda: schemas.BOOLEAN, {_aQN: _ACIA, _sN: _aCIA}),
-        (lambda: schemas.BOOLEAN, {_aQN: _APIAsso, _sN: _aPIA}),
-        (lambda: schemas.BOOLEAN, {_aQN: _DOT, _sN: _dOT}),
-        (lambda: schemas.STRING, {_aQN: _Des, _sN: _desc}),
-        (lambda: schemas.INTEGER, {_aQN: _DI, _sN: _dI}),
-        (lambda: schemas.GROUP_ID_STRING_LIST, {_aQN: _GS, _sN: _gS}),
-        (lambda: schemas.STRING, {_aQN: _ITnte, _sN: _iTnt}),
-        (lambda: schemas.INTEGER, {_aQN: _IAC, _sN: _iAC}),
-        (INSTANCE_IPV6_ADDRESS_LIST, {_aQN: _IAS, _sN: _iAS}),
-        (lambda: schemas.NETWORK_INTERFACE_ID, {_aQN: _NII, _sN: _nII}),
-        (lambda: schemas.STRING, {_aQN: _PIAr, _sN: _pIAr}),
-        (PRIVATE_IP_ADDRESS_SPECIFICATION_LIST, {_aQN: _PIASr, _sN: _pIAS}),
-        (lambda: schemas.INTEGER, {_aQN: _SPIAC, _sN: _sPIAC}),
-        (lambda: schemas.SUBNET_ID, {_aQN: _SIu, _sN: _sI}),
-        (lambda: schemas.INTEGER, {_aQN: _NCI, _sN: _nCI}),
-        (IPV4_PREFIX_LIST_RESPONSE, {_aQN: _IPSpv, _sN: _iPS}),
-        (lambda: schemas.INTEGER, {_aQN: _IPCp, _sN: _iPC}),
-        (IPV6_PREFIX_LIST_RESPONSE, {_aQN: _IPSpvr, _sN: _iPSp}),
-        (lambda: schemas.INTEGER, {_aQN: _IPC, _sN: _iPCp}),
-        (lambda: schemas.BOOLEAN, {_aQN: _PIrim, _sN: _pIri}),
-        (LAUNCH_TEMPLATE_ENA_SRD_SPECIFICATION, {_aQN: _ESS, _sN: _eSS}),
-        (CONNECTION_TRACKING_SPECIFICATION, {_aQN: _CTSo, _sN: _cTSo}),
-        (lambda: schemas.INTEGER, {_aQN: _EQC, _sN: _eQC}),
-    ),
-)
-
-LAUNCH_TEMPLATE_INSTANCE_NETWORK_INTERFACE_SPECIFICATION_LIST: StaticSchema = (
-    16,
-    n0,
-    _LTINISL,
-    0,
-    (_me,),
-    ((LAUNCH_TEMPLATE_INSTANCE_NETWORK_INTERFACE_SPECIFICATION, {_sN: _i}),),
-)
-
-LAUNCH_TEMPLATE_NETWORK_PERFORMANCE_OPTIONS: StaticSchema = (
-    18,
-    n0,
-    _LTNPO,
-    0,
-    (_BW,),
-    ((INSTANCE_BANDWIDTH_WEIGHTING, {_aQN: _BW, _sN: _bW}),),
 )

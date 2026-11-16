@@ -96,7 +96,9 @@ if TYPE_CHECKING:
         RecordHandlerProgressOutput,
         RegisterPublisherOutput,
         RegisterTypeOutput,
+        RemoveAliasOutput,
         RollbackStackOutput,
+        SetAliasOutput,
         SetStackPolicyOutput,
         SetTypeConfigurationOutput,
         SetTypeDefaultVersionOutput,
@@ -142,7 +144,7 @@ class CloudFormationClient(Client[CloudFormationConfig]):
     [docs.aws.amazon.com](https://docs.aws.amazon.com/).
     """
 
-    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
+    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
 
     @_overload
     def activate_organizations_access(
@@ -3905,6 +3907,48 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         )
 
     @_overload
+    def remove_alias(
+        self,
+        request: _models.RemoveAliasInput | _models.RemoveAliasInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RemoveAliasOutput: ...
+
+    @_overload
+    def remove_alias(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RemoveAliasInputDict],
+    ) -> RemoveAliasOutput:
+        """
+        Removes an alias from a stack. After the alias is removed successfully,
+        it can no longer be used to reference the stack in API calls.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `RemoveAliasOutput`.
+        """
+
+    def remove_alias(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RemoveAliasOutput:
+        return self._invoke(
+            self._select_input(_models.REMOVE_ALIAS, args, kwargs),
+            _models.REMOVE_ALIAS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def rollback_stack(
         self,
         request: _models.RollbackStackInput | _models.RollbackStackInputDict,
@@ -3960,6 +4004,58 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         return self._invoke(
             self._select_input(_models.ROLLBACK_STACK, args, kwargs),
             _models.ROLLBACK_STACK,
+            [],
+            plugins,
+        )
+
+    @_overload
+    def set_alias(
+        self,
+        request: _models.SetAliasInput | _models.SetAliasInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> SetAliasOutput: ...
+
+    @_overload
+    def set_alias(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SetAliasInputDict],
+    ) -> SetAliasOutput:
+        """
+        Assigns an alias to an existing stack. An alias is an alternative name
+        for a stack that can be used in place of the stack name in any
+        CloudFormation API call that accepts the `StackName` parameter. This
+        enables you to effectively rename a stack without recreating it.
+
+        After setting an alias, both the original stack name and the alias
+        resolve to the same stack. Setting an alias does not change the stack's
+        ARN, physical resource IDs, or any deployed resources.
+
+        Note:
+            Each stack can have at most one alias. To change a stack's alias, first
+            remove the existing alias using RemoveAlias, then set a new one.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `SetAliasOutput`.
+        """
+
+    def set_alias(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SetAliasOutput:
+        return self._invoke(
+            self._select_input(_models.SET_ALIAS, args, kwargs),
+            _models.SET_ALIAS,
             [],
             plugins,
         )

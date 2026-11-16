@@ -76,7 +76,7 @@ class STSClient(Client[STSConfig]):
     in the *IAM User Guide*.
     """
 
-    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
+    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
 
     @_overload
     def assume_role(

@@ -15,8 +15,21 @@ _Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
 _DR = "DryRun"
+_p = "pending"
+_d = "disabled"
+_PI = "PublicIp"
+_pI = "publicIp"
 _smit = "smithy.api#output"
+_CRI = "CapacityReservationId"
+_RI = "ReservationId"
+_av = "available"
+_St = "State"
+_st = "state"
 _fa = "failed"
+_SIu = "SubnetId"
+_sI = "subnetId"
+_OIw = "OwnerId"
+_oI = "ownerId"
 _reg = "region"
 _C = "Code"
 _co = "code"
@@ -24,56 +37,206 @@ _Sta = "Status"
 _sta = "status"
 _TSag = "TagSet"
 _tS = "tagSet"
+_VI = "VpcId"
+_vI = "vpcId"
 _dRr = "dryRun"
 _act = "active"
 _N = "Name"
 _nam = "name"
+_IA = "IpAddress"
 _AZ = "AvailabilityZone"
 _aZ = "availabilityZone"
 _AZI = "AvailabilityZoneId"
 _aZI = "availabilityZoneId"
+_In = "Instance"
 _II = "InstanceId"
 _iI = "instanceId"
+_NII = "NetworkInterfaceId"
+_nII = "networkInterfaceId"
+_AIt = "AttachmentId"
+_aIt = "attachmentId"
+_SGe = "SecurityGroups"
+_ena = "enabled"
+_disab = "disabling"
 _IT = "InstanceType"
 _iT = "instanceType"
+_SIRI = "SpotInstanceRequestId"
+_sIRI = "spotInstanceRequestId"
 _Des = "Description"
+_PIAr = "PrivateIpAddress"
+_pIAr = "privateIpAddress"
+_COI = "CustomerOwnedIp"
+_cOI = "customerOwnedIp"
+_CI = "CarrierIp"
+_cI = "carrierIp"
+_Rea = "Reason"
+_rea = "reason"
+_PIAu = "PublicIpAddress"
 _desc = "description"
-_def = "default"
 _OA = "OutpostArn"
+_CO = "CpuOptions"
+_CTl = "ClientToken"
+_cTl = "clientToken"
+_IPp = "Ipv6Prefixes"
+_IPpv = "Ipv6Prefix"
+_IAp = "Ipv6Addresses"
+_IPpvr = "Ipv4Prefixes"
+_IPpvre = "Ipv4Prefix"
+_PIAri = "PrivateIpAddresses"
+_iPp = "ipv4Prefix"
 _IIn = "InstanceIds"
+_IIP = "IamInstanceProfile"
+_iIP = "iamInstanceProfile"
+_Ass = "Association"
+_assoc = "association"
+_G = "Groups"
+_IIm = "ImageId"
+_ESUS = "EnaSrdUdpSpecification"
+_ESUE = "EnaSrdUdpEnabled"
+_ESS = "EnaSrdSpecification"
+_ESE = "EnaSrdEnabled"
+_NCI = "NetworkCardIndex"
+_EQC = "EnaQueueCount"
+_DI = "DeviceIndex"
+_dI = "deviceIndex"
+_nCI = "networkCardIndex"
 _LUTa = "LastUpdatedTime"
 _lUTa = "lastUpdatedTime"
-_ECI = "EbsCardIndex"
-_eCI = "ebsCardIndex"
+_DOT = "DeleteOnTermination"
+_dOT = "deleteOnTermination"
+_ATtt = "AttachTime"
+_aTtt = "attachTime"
+_At = "Attachment"
+_atta = "attachment"
 _GN = "GroupName"
 _gN = "groupName"
 _ST = "StartTime"
-_oA = "outpostArn"
+_iIm = "imageId"
+_iu = "in_use"
+_iu_ = "in-use"
+_oAu = "outpostArn"
 _Op = "Operator"
 _ope = "operator"
-_ded = "dedicated"
-_Cou = "Count"
-_cou = "count"
+_EO = "EbsOptimized"
+_ap = "applied"
 _CBI = "CapacityBlockId"
-_DEFAULT = "DEFAULT"
-_uns = "unsupported"
+_cRI = "capacityReservationId"
+_eO = "ebsOptimized"
 _cBI = "capacityBlockId"
-_REQUIRED = "REQUIRED"
-_requ = "required"
-_hd = "hdd"
-_ssd = "ssd"
-_Ty = "Type"
-_ty = "type"
+_DN = "DnsName"
+_dN = "dnsName"
+_iApd = "ipAddress"
+_HT = "HostnameType"
+_hT = "hostnameType"
+_ERNDAR = "EnableResourceNameDnsARecord"
+_eRNDAR = "enableResourceNameDnsARecord"
+_ERNDAAAAR = "EnableResourceNameDnsAAAARecord"
+_eRNDAAAAR = "enableResourceNameDnsAAAARecord"
+_BDM = "BlockDeviceMapping"
+_HTt = "HttpTokens"
+_HPRHL = "HttpPutResponseHopLimit"
+_HE = "HttpEndpoint"
+_Pl = "Placement"
+_KN = "KeyName"
+_BDMl = "BlockDeviceMappings"
+_MO = "MetadataOptions"
+_pla = "placement"
+_ILn = "InstanceLifecycle"
+_Pla = "Platform"
+_plat = "platform"
 _Ins = "Instances"
+_bDM = "blockDeviceMapping"
 _NA = "NotAfter"
 _nA = "notAfter"
-_V_ = "VPC_1"
-_v_____ = "vpc-1"
-_E_ = "EBS_1"
-_e_ = "ebs-1"
+_kN = "keyName"
+_KI = "KernelId"
+_HPI = "HttpProtocolIpv6"
+_IMT = "InstanceMetadataTags"
+_MCIe = "MetricCategoryIds"
+_TET = "TcpEstablishedTimeout"
+_UST = "UdpStreamTimeout"
+_UTd = "UdpTimeout"
+_IApv = "Ipv6Address"
+_Prim = "Primary"
+_prim = "primary"
+_ITnte = "InterfaceType"
+_BW = "BandwidthWeighting"
+_RIa = "RamdiskId"
+_SSIe = "SecondarySubnetId"
+_NIe = "NetworkInterfaces"
+_Mon = "Monitoring"
+_CRSa = "CapacityReservationSpecification"
+_HO = "HibernationOptions"
+_EOn = "EnclaveOptions"
+_PDNO = "PrivateDnsNameOptions"
+_MOa = "MaintenanceOptions"
+_NPO = "NetworkPerformanceOptions"
+_SIec = "SecondaryInterfaces"
+_hTt = "httpTokens"
+_hPRHL = "httpPutResponseHopLimit"
+_hE = "httpEndpoint"
+_hPI = "httpProtocolIpv6"
+_iMT = "instanceMetadataTags"
+_MCIS = "MetricCategoryIdSet"
+_mCIS = "metricCategoryIdSet"
+_tET = "tcpEstablishedTimeout"
+_uTd = "udpTimeout"
+_uST = "udpStreamTimeout"
+_eSUE = "enaSrdUdpEnabled"
+_eSE = "enaSrdEnabled"
+_eSUS = "enaSrdUdpSpecification"
+_iApv = "ipv6Address"
+_iPpvr = "ipv6Prefix"
+_GS = "GroupSet"
+_gS = "groupSet"
+_iTnt = "interfaceType"
+_IAS = "Ipv6AddressesSet"
+_iAS = "ipv6AddressesSet"
+_PIASr = "PrivateIpAddressesSet"
+_pIAS = "privateIpAddressesSet"
+_IPSpv = "Ipv4PrefixSet"
+_iPS = "ipv4PrefixSet"
+_IPSpvr = "Ipv6PrefixSet"
+_iPSp = "ipv6PrefixSet"
+_eSS = "enaSrdSpecification"
+_eQC = "enaQueueCount"
+_bW = "bandwidthWeighting"
+_sSIe = "secondarySubnetId"
+_kI = "kernelId"
+_NIS = "NetworkInterfaceSet"
+_nIS = "networkInterfaceSet"
+_monit = "monitoring"
+_cOp = "cpuOptions"
+_cRS = "capacityReservationSpecification"
+_LSicen = "LicenseSet"
+_lSi = "licenseSet"
+_hO = "hibernationOptions"
+_mO = "metadataOptions"
+_eOn = "enclaveOptions"
+_pDNO = "privateDnsNameOptions"
+_mOa = "maintenanceOptions"
+_nPO = "networkPerformanceOptions"
+_SIS = "SecondaryInterfaceSet"
+_sIS = "secondaryInterfaceSet"
+_SRt = "StateReason"
+_sRt = "stateReason"
+_IOI = "IpOwnerId"
+_iOI = "ipOwnerId"
+_PDNu = "PublicDnsName"
+_pDNu = "publicDnsName"
+_CTC = "ConnectionTrackingConfiguration"
+_PDNr = "PrivateDnsName"
+_pDNr = "privateDnsName"
+_cTC = "connectionTrackingConfiguration"
+_MAa = "MacAddress"
+_mAa = "macAddress"
+_RIeq = "RequesterId"
+_rIeq = "requesterId"
+_SDC = "SourceDestCheck"
+_sDC = "sourceDestCheck"
+_SNI = "SecondaryNetworkId"
+_sNI = "secondaryNetworkId"
 _Loca = "Location"
-_ESnc = "EncryptionSupport"
-_eSncr = "encryptionSupport"
 _Fi = "Filter"
 _Fil = "Filters"
 _NTex = "NextToken"
@@ -96,15 +259,89 @@ _id__ = "insufficient_data"
 _NNS = "NetworkNodeSet"
 _NN = "NetworkNodes"
 _nNS = "networkNodeSet"
+_ISnst = "InstancesSet"
+_iSns = "instancesSet"
 _ETnd = "EndTime"
+_STR = "StateTransitionReason"
+_pCr = "productCodes"
+_PCro = "ProductCodes"
 _ITnsta = "InstanceTypes"
-_UNSUPPORTED = "UNSUPPORTED"
-_xen = "xen"
+_sNS = "sriovNetSupport"
+_bMo = "bootMode"
+_tSp = "tpmSupport"
+_SNSr = "SriovNetSupport"
+_BMo = "BootMode"
+_TSp = "TpmSupport"
 _inv = "invalid"
+_VTi = "VirtualizationType"
+_PDl = "PlatformDetails"
+_pDl = "platformDetails"
+_UO = "UsageOperation"
+_uO = "usageOperation"
 _ESna = "EnaSupport"
+_eSna = "enaSupport"
+_Hy = "Hypervisor"
+_hy = "hypervisor"
+_RDN = "RootDeviceName"
+_rDN = "rootDeviceName"
+_RDT = "RootDeviceType"
+_rDT = "rootDeviceType"
+_vTi = "virtualizationType"
+_Arc = "Architecture"
+_arch = "architecture"
+_rIa = "ramdiskId"
 _ISnsta = "InstanceState"
+_LTa = "LaunchTime"
+_lTa = "launchTime"
 _iSnst = "instanceState"
 _IMR = "IncludeManagedResources"
+_IMOS = "InstanceMetadataOptionsState"
+_IMOR = "InstanceMetadataOptionsResponse"
+_MSon = "MonitoringState"
+_INIA = "InstanceNetworkInterfaceAssociation"
+_IAESUS = "InstanceAttachmentEnaSrdUdpSpecification"
+_IAESS = "InstanceAttachmentEnaSrdSpecification"
+_INIAn = "InstanceNetworkInterfaceAttachment"
+_CTSRo = "ConnectionTrackingSpecificationResponse"
+_IIPn = "InstanceIpv4Prefix"
+_IIPL = "InstanceIpv4PrefixList"
+_IIPns = "InstanceIpv6Prefix"
+_IIPLn = "InstanceIpv6PrefixList"
+_IPIA = "InstancePrivateIpAddress"
+_IPIAL = "InstancePrivateIpAddressList"
+_INI = "InstanceNetworkInterface"
+_INIL = "InstanceNetworkInterfaceList"
+_INPO = "InstanceNetworkPerformanceOptions"
+_PDNOR = "PrivateDnsNameOptionsResponse"
+_ISIA = "InstanceSecondaryInterfaceAttachment"
+_ISIPIA = "InstanceSecondaryInterfacePrivateIpAddress"
+_ISIPIAL = "InstanceSecondaryInterfacePrivateIpAddressList"
+_SIIe = "SecondaryInterfaceId"
+_SISe = "SecondaryInterfaceStatus"
+_ISIn = "InstanceSecondaryInterface"
+_sIIe = "secondaryInterfaceId"
+_PIASri = "PrivateIpAddressSet"
+_pIASr = "privateIpAddressSet"
+_ISIL = "InstanceSecondaryInterfaceList"
+_iLn = "instanceLifecycle"
+_EGAl = "ElasticGpuAssociations"
+_EGASl = "ElasticGpuAssociationSet"
+_eGASl = "elasticGpuAssociationSet"
+_EIAAla = "ElasticInferenceAcceleratorAssociations"
+_EIAASl = "ElasticInferenceAcceleratorAssociationSet"
+_eIAASl = "elasticInferenceAcceleratorAssociationSet"
+_Lic = "Licenses"
+_UOUT = "UsageOperationUpdateTime"
+_uOUT = "usageOperationUpdateTime"
+_CIBM = "CurrentInstanceBootMode"
+_cIBM = "currentInstanceBootMode"
+_ALI = "AmiLaunchIndex"
+_aLI = "amiLaunchIndex"
+_ILns = "InstanceList"
+_Rese = "Reservation"
+_rIes = "reservationId"
+_RLe = "ReservationList"
+_DISHSRMRI = "DescribeInstanceSqlHaStatesRequestMaxResultsInteger"
 _DISHHSI = "DescribeInstanceSqlHaHistoryStatesInput"
 _cDISHHSR = "com.amazonaws.ec2#DescribeInstanceSqlHaHistoryStatesRequest"
 _HSa = "HaStatus"
@@ -227,162 +464,508 @@ _ARF = "AutoRecoveryFlag"
 _BMF = "BareMetalFlag"
 _BPFu = "BurstablePerformanceFlag"
 _CGF = "CurrentGenerationFlag"
-_DHF = "DedicatedHostFlag"
-_ALT = "AttachmentLimitType"
-_SHARED = "SHARED"
-_sh = "shared"
-_DEDICATED = "DEDICATED"
-_BBIM = "BaselineBandwidthInMbps"
-_BIa = "BaselineIops"
-_BTIMB = "BaselineThroughputInMBps"
-_MBIM = "MaximumBandwidthInMbps"
-_MI = "MaximumIops"
-_MTIMB = "MaximumThroughputInMBps"
-_ECIb = "EbsCardInfo"
-_bBIM = "baselineBandwidthInMbps"
-_bTIMB = "baselineThroughputInMBps"
-_bIa = "baselineIops"
-_mBIM = "maximumBandwidthInMbps"
-_mTIMB = "maximumThroughputInMBps"
-_mI = "maximumIops"
-_ECIL = "EbsCardInfoList"
-_EOI = "EbsOptimizedInfo"
-_EOS = "EbsOptimizedSupport"
-_supp = "supported"
-_EES = "EbsEncryptionSupport"
-_MEA = "MaximumEbsAttachments"
-_MEC = "MaximumEbsCards"
-_ENS = "EbsNvmeSupport"
-_SUPPORTED = "SUPPORTED"
-_EIb = "EbsInfo"
-_eOS = "ebsOptimizedSupport"
-_eOI = "ebsOptimizedInfo"
-_NSv = "NvmeSupport"
-_nSv = "nvmeSupport"
-_mEA = "maximumEbsAttachments"
-_aLT = "attachmentLimitType"
-_mEC = "maximumEbsCards"
-_ECb = "EbsCards"
-_ECS = "EbsCardSet"
-_eCS = "ebsCardSet"
-_FDC = "FpgaDeviceCount"
-_FDMN = "FpgaDeviceManufacturerName"
-_FDMS = "FpgaDeviceMemorySize"
-_FDMI = "FpgaDeviceMemoryInfo"
-_SIMB = "SizeInMiB"
-_sIMB = "sizeInMiB"
-_FDNp = "FpgaDeviceName"
-_FDI = "FpgaDeviceInfo"
-_Manu = "Manufacturer"
-_manu = "manufacturer"
-_MIe = "MemoryInfo"
-_mIe = "memoryInfo"
-_FDIL = "FpgaDeviceInfoList"
-_tFM = "totalFpgaMemory"
-_FIpga = "FpgaInfo"
-_Fp = "Fpgas"
-_fpg = "fpgas"
-_TFMIMB = "TotalFpgaMemoryInMiB"
-_tFMIMB = "totalFpgaMemoryInMiB"
-_FTEF = "FreeTierEligibleFlag"
-_GDC = "GpuDeviceCount"
-_GPS = "GpuPartitionSize"
-_LGC = "LogicalGpuCount"
-_GDMN = "GpuDeviceManufacturerName"
-_GDMS = "GpuDeviceMemorySize"
-_GDMI = "GpuDeviceMemoryInfo"
-_GDN = "GpuDeviceName"
-_Wo = "Workload"
-_WL = "WorkloadsList"
-_GDI = "GpuDeviceInfo"
-_lGC = "logicalGpuCount"
-_gPS = "gpuPartitionSize"
-_Wor = "Workloads"
-_WSo = "WorkloadSet"
-_wS = "workloadSet"
-_GDIL = "GpuDeviceInfoList"
-_tGM = "totalGpuMemory"
-_GIp = "GpuInfo"
-_Gp = "Gpus"
-_gpu = "gpus"
-_TGMIMB = "TotalGpuMemoryInMiB"
-_tGMIMB = "totalGpuMemoryInMiB"
-_HF = "HibernationFlag"
-_ITH = "InstanceTypeHypervisor"
-_NITRO = "NITRO"
-_nit = "nitro"
-_XEN = "XEN"
-_IDC = "InferenceDeviceCount"
-_IDMN = "InferenceDeviceManufacturerName"
-_IDMS = "InferenceDeviceMemorySize"
-_IDMI = "InferenceDeviceMemoryInfo"
-_IDN = "InferenceDeviceName"
-_IDI = "InferenceDeviceInfo"
-_IDIL = "InferenceDeviceInfoList"
-_tIM = "totalInferenceMemory"
-_IAIn = "InferenceAcceleratorInfo"
-_Acce = "Accelerators"
-_accel = "accelerators"
-_TIMIMB = "TotalInferenceMemoryInMiB"
-_tIMIMB = "totalInferenceMemoryInMiB"
-_DCisk = "DiskCount"
-_DSi = "DiskSize"
-_DTisk = "DiskType"
-_DIis = "DiskInfo"
-_SIGB = "SizeInGB"
-_sIGB = "sizeInGB"
-_DIL = "DiskInfoList"
-_ISES = "InstanceStorageEncryptionSupport"
-_ENSp = "EphemeralNvmeSupport"
-_ISIns = "InstanceStorageInfo"
-_TSIGB = "TotalSizeInGB"
-_tSIGB = "totalSizeInGB"
-_Disk = "Disks"
-_disk = "disks"
-_ISF = "InstanceStorageFlag"
-_MDC = "MediaDeviceCount"
-_MDMN = "MediaDeviceManufacturerName"
-_MDMS = "MediaDeviceMemorySize"
-_MDMI = "MediaDeviceMemoryInfo"
-_MDN = "MediaDeviceName"
-_MDI = "MediaDeviceInfo"
-_MDIL = "MediaDeviceInfoList"
-_TMM = "TotalMediaMemory"
-_MAIe = "MediaAcceleratorInfo"
-_TMMIMB = "TotalMediaMemoryInMiB"
-_tMMIMB = "totalMediaMemoryInMiB"
-_MSem = "MemorySize"
-_BWT = "BandwidthWeightingType"
-_BWTL = "BandwidthWeightingTypeList"
-_DTET = "DefaultTcpEstablishedTimeout"
-_DUST = "DefaultUdpStreamTimeout"
-_DUT = "DefaultUdpTimeout"
-_DCTC = "DefaultConnectionTrackingConfiguration"
-_dTET = "defaultTcpEstablishedTimeout"
-_dUT = "defaultUdpTimeout"
-_dUST = "defaultUdpStreamTimeout"
-_DNCI = "DefaultNetworkCardIndex"
-_MEI = "MaximumEfaInterfaces"
-_EIf = "EfaInfo"
-_mEI = "maximumEfaInterfaces"
-_ESF = "EfaSupportedFlag"
-_ESSn = "EnaSrdSupported"
-_EITSn = "EncryptionInTransitSupported"
-_FEQS = "FlexibleEnaQueuesSupport"
-_MIAPI = "MaxIpv4AddrPerInterface"
-_IAPSI = "Ipv4AddressesPerSecondaryInterface"
-_MIAPIa = "MaxIpv6AddrPerInterface"
-_IFp = "Ipv6Flag"
-_MNC = "MaximumNetworkCards"
-_MNI = "MaxNetworkInterfaces"
-_MSNI = "MaximumSecondaryNetworkInterfaces"
-_BBIG = "BaselineBandwidthInGbps"
-_DEQCPI = "DefaultEnaQueueCountPerInterface"
 _DITOes = "DescribeInstanceTypesOutput"
 _cDITRoma = "com.amazonaws.ec2#DescribeInstanceTypesResult"
 _ITSns = "InstanceTypeSet"
 _iTSns = "instanceTypeSet"
 _DITe = "DescribeInstanceTypes"
+_IIUSL = "InstanceIdUpdateStringList"
+
+INSTANCE_METADATA_OPTIONS_STATE: StaticSchema = (
+    14,
+    n0,
+    _IMOS,
+    0,
+    (_p, _ap),
+    ((-1, {_sV: _p}), (-1, {_sV: _ap})),
+)
+
+INSTANCE_METADATA_OPTIONS_RESPONSE: StaticSchema = (
+    18,
+    n0,
+    _IMOR,
+    0,
+    (_St, _HTt, _HPRHL, _HE, _HPI, _IMT),
+    (
+        (INSTANCE_METADATA_OPTIONS_STATE, {_aQN: _St, _sN: _st}),
+        (lambda: schemas.HTTP_TOKENS_STATE, {_aQN: _HTt, _sN: _hTt}),
+        (lambda: schemas.INTEGER, {_aQN: _HPRHL, _sN: _hPRHL}),
+        (lambda: schemas.INSTANCE_METADATA_ENDPOINT_STATE, {_aQN: _HE, _sN: _hE}),
+        (lambda: schemas.INSTANCE_METADATA_PROTOCOL_STATE, {_aQN: _HPI, _sN: _hPI}),
+        (lambda: schemas.INSTANCE_METADATA_TAGS_STATE, {_aQN: _IMT, _sN: _iMT}),
+    ),
+)
+
+MONITORING_STATE: StaticSchema = (
+    14,
+    n0,
+    _MSon,
+    0,
+    (_d, _disab, _ena, _p),
+    ((-1, {_sV: _d}), (-1, {_sV: _disab}), (-1, {_sV: _ena}), (-1, {_sV: _p})),
+)
+
+MONITORING: StaticSchema = (
+    18,
+    n0,
+    _Mon,
+    0,
+    (_MCIe, _St),
+    (
+        (lambda: schemas.METRIC_CATEGORY_ID_LIST, {_aQN: _MCIS, _sN: _mCIS}),
+        (MONITORING_STATE, {_aQN: _St, _sN: _st}),
+    ),
+)
+
+INSTANCE_NETWORK_INTERFACE_ASSOCIATION: StaticSchema = (
+    18,
+    n0,
+    _INIA,
+    0,
+    (_CI, _COI, _IOI, _PDNu, _PI),
+    (
+        (lambda: schemas.STRING, {_aQN: _CI, _sN: _cI}),
+        (lambda: schemas.STRING, {_aQN: _COI, _sN: _cOI}),
+        (lambda: schemas.STRING, {_aQN: _IOI, _sN: _iOI}),
+        (lambda: schemas.STRING, {_aQN: _PDNu, _sN: _pDNu}),
+        (lambda: schemas.STRING, {_aQN: _PI, _sN: _pI}),
+    ),
+)
+
+INSTANCE_ATTACHMENT_ENA_SRD_UDP_SPECIFICATION: StaticSchema = (
+    18,
+    n0,
+    _IAESUS,
+    0,
+    (_ESUE,),
+    ((lambda: schemas.BOOLEAN, {_aQN: _ESUE, _sN: _eSUE}),),
+)
+
+INSTANCE_ATTACHMENT_ENA_SRD_SPECIFICATION: StaticSchema = (
+    18,
+    n0,
+    _IAESS,
+    0,
+    (_ESE, _ESUS),
+    (
+        (lambda: schemas.BOOLEAN, {_aQN: _ESE, _sN: _eSE}),
+        (INSTANCE_ATTACHMENT_ENA_SRD_UDP_SPECIFICATION, {_aQN: _ESUS, _sN: _eSUS}),
+    ),
+)
+
+INSTANCE_NETWORK_INTERFACE_ATTACHMENT: StaticSchema = (
+    18,
+    n0,
+    _INIAn,
+    0,
+    (_ATtt, _AIt, _DOT, _DI, _Sta, _NCI, _ESS, _EQC),
+    (
+        (lambda: schemas.DATE_TIME, {_aQN: _ATtt, _sN: _aTtt}),
+        (lambda: schemas.STRING, {_aQN: _AIt, _sN: _aIt}),
+        (lambda: schemas.BOOLEAN, {_aQN: _DOT, _sN: _dOT}),
+        (lambda: schemas.INTEGER, {_aQN: _DI, _sN: _dI}),
+        (lambda: schemas.ATTACHMENT_STATUS, {_aQN: _Sta, _sN: _sta}),
+        (lambda: schemas.INTEGER, {_aQN: _NCI, _sN: _nCI}),
+        (INSTANCE_ATTACHMENT_ENA_SRD_SPECIFICATION, {_aQN: _ESS, _sN: _eSS}),
+        (lambda: schemas.INTEGER, {_aQN: _EQC, _sN: _eQC}),
+    ),
+)
+
+CONNECTION_TRACKING_SPECIFICATION_RESPONSE: StaticSchema = (
+    18,
+    n0,
+    _CTSRo,
+    0,
+    (_TET, _UST, _UTd),
+    (
+        (lambda: schemas.INTEGER, {_aQN: _TET, _sN: _tET}),
+        (lambda: schemas.INTEGER, {_aQN: _UST, _sN: _uST}),
+        (lambda: schemas.INTEGER, {_aQN: _UTd, _sN: _uTd}),
+    ),
+)
+
+INSTANCE_IPV4_PREFIX: StaticSchema = (
+    18,
+    n0,
+    _IIPn,
+    0,
+    (_IPpvre,),
+    ((lambda: schemas.STRING, {_aQN: _IPpvre, _sN: _iPp}),),
+)
+
+INSTANCE_IPV4_PREFIX_LIST: StaticSchema = (
+    16,
+    n0,
+    _IIPL,
+    0,
+    (_me,),
+    ((INSTANCE_IPV4_PREFIX, {_sN: _i}),),
+)
+
+INSTANCE_IPV6_PREFIX: StaticSchema = (
+    18,
+    n0,
+    _IIPns,
+    0,
+    (_IPpv,),
+    ((lambda: schemas.STRING, {_aQN: _IPpv, _sN: _iPpvr}),),
+)
+
+INSTANCE_IPV6_PREFIX_LIST: StaticSchema = (
+    16,
+    n0,
+    _IIPLn,
+    0,
+    (_me,),
+    ((INSTANCE_IPV6_PREFIX, {_sN: _i}),),
+)
+
+INSTANCE_PRIVATE_IP_ADDRESS: StaticSchema = (
+    18,
+    n0,
+    _IPIA,
+    0,
+    (_Ass, _Prim, _PDNr, _PIAr),
+    (
+        (INSTANCE_NETWORK_INTERFACE_ASSOCIATION, {_aQN: _Ass, _sN: _assoc}),
+        (lambda: schemas.BOOLEAN, {_aQN: _Prim, _sN: _prim}),
+        (lambda: schemas.STRING, {_aQN: _PDNr, _sN: _pDNr}),
+        (lambda: schemas.STRING, {_aQN: _PIAr, _sN: _pIAr}),
+    ),
+)
+
+INSTANCE_PRIVATE_IP_ADDRESS_LIST: StaticSchema = (
+    16,
+    n0,
+    _IPIAL,
+    0,
+    (_me,),
+    ((INSTANCE_PRIVATE_IP_ADDRESS, {_sN: _i}),),
+)
+
+INSTANCE_NETWORK_INTERFACE: StaticSchema = (
+    18,
+    n0,
+    _INI,
+    0,
+    (
+        _Ass,
+        _At,
+        _Des,
+        _G,
+        _IAp,
+        _MAa,
+        _NII,
+        _OIw,
+        _PDNr,
+        _PIAr,
+        _PIAri,
+        _SDC,
+        _Sta,
+        _SIu,
+        _VI,
+        _ITnte,
+        _IPpvr,
+        _IPp,
+        _CTC,
+        _Op,
+    ),
+    (
+        (INSTANCE_NETWORK_INTERFACE_ASSOCIATION, {_aQN: _Ass, _sN: _assoc}),
+        (INSTANCE_NETWORK_INTERFACE_ATTACHMENT, {_aQN: _At, _sN: _atta}),
+        (lambda: schemas.STRING, {_aQN: _Des, _sN: _desc}),
+        (lambda: schemas.GROUP_IDENTIFIER_LIST, {_aQN: _GS, _sN: _gS}),
+        (lambda: schemas.INSTANCE_IPV6_ADDRESS_LIST, {_aQN: _IAS, _sN: _iAS}),
+        (lambda: schemas.STRING, {_aQN: _MAa, _sN: _mAa}),
+        (lambda: schemas.STRING, {_aQN: _NII, _sN: _nII}),
+        (lambda: schemas.STRING, {_aQN: _OIw, _sN: _oI}),
+        (lambda: schemas.STRING, {_aQN: _PDNr, _sN: _pDNr}),
+        (lambda: schemas.STRING, {_aQN: _PIAr, _sN: _pIAr}),
+        (INSTANCE_PRIVATE_IP_ADDRESS_LIST, {_aQN: _PIASr, _sN: _pIAS}),
+        (lambda: schemas.BOOLEAN, {_aQN: _SDC, _sN: _sDC}),
+        (lambda: schemas.NETWORK_INTERFACE_STATUS, {_aQN: _Sta, _sN: _sta}),
+        (lambda: schemas.STRING, {_aQN: _SIu, _sN: _sI}),
+        (lambda: schemas.STRING, {_aQN: _VI, _sN: _vI}),
+        (lambda: schemas.STRING, {_aQN: _ITnte, _sN: _iTnt}),
+        (INSTANCE_IPV4_PREFIX_LIST, {_aQN: _IPSpv, _sN: _iPS}),
+        (INSTANCE_IPV6_PREFIX_LIST, {_aQN: _IPSpvr, _sN: _iPSp}),
+        (CONNECTION_TRACKING_SPECIFICATION_RESPONSE, {_aQN: _CTC, _sN: _cTC}),
+        (lambda: schemas.OPERATOR_RESPONSE, {_aQN: _Op, _sN: _ope}),
+    ),
+)
+
+INSTANCE_NETWORK_INTERFACE_LIST: StaticSchema = (
+    16,
+    n0,
+    _INIL,
+    0,
+    (_me,),
+    ((INSTANCE_NETWORK_INTERFACE, {_sN: _i}),),
+)
+
+INSTANCE_NETWORK_PERFORMANCE_OPTIONS: StaticSchema = (
+    18,
+    n0,
+    _INPO,
+    0,
+    (_BW,),
+    ((lambda: schemas.INSTANCE_BANDWIDTH_WEIGHTING, {_aQN: _BW, _sN: _bW}),),
+)
+
+PRIVATE_DNS_NAME_OPTIONS_RESPONSE: StaticSchema = (
+    18,
+    n0,
+    _PDNOR,
+    0,
+    (_HT, _ERNDAR, _ERNDAAAAR),
+    (
+        (lambda: schemas.HOSTNAME_TYPE, {_aQN: _HT, _sN: _hT}),
+        (lambda: schemas.BOOLEAN, {_aQN: _ERNDAR, _sN: _eRNDAR}),
+        (lambda: schemas.BOOLEAN, {_aQN: _ERNDAAAAR, _sN: _eRNDAAAAR}),
+    ),
+)
+
+INSTANCE_SECONDARY_INTERFACE_ATTACHMENT: StaticSchema = (
+    18,
+    n0,
+    _ISIA,
+    0,
+    (_ATtt, _AIt, _DOT, _DI, _Sta, _NCI),
+    (
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _ATtt, _sN: _aTtt}),
+        (lambda: schemas.STRING, {_aQN: _AIt, _sN: _aIt}),
+        (lambda: schemas.BOOLEAN, {_aQN: _DOT, _sN: _dOT}),
+        (lambda: schemas.INTEGER, {_aQN: _DI, _sN: _dI}),
+        (lambda: schemas.ATTACHMENT_STATUS, {_aQN: _Sta, _sN: _sta}),
+        (lambda: schemas.INTEGER, {_aQN: _NCI, _sN: _nCI}),
+    ),
+)
+
+INSTANCE_SECONDARY_INTERFACE_PRIVATE_IP_ADDRESS: StaticSchema = (
+    18,
+    n0,
+    _ISIPIA,
+    0,
+    (_PIAr,),
+    ((lambda: schemas.STRING, {_aQN: _PIAr, _sN: _pIAr}),),
+)
+
+INSTANCE_SECONDARY_INTERFACE_PRIVATE_IP_ADDRESS_LIST: StaticSchema = (
+    16,
+    n0,
+    _ISIPIAL,
+    0,
+    (_me,),
+    ((INSTANCE_SECONDARY_INTERFACE_PRIVATE_IP_ADDRESS, {_sN: _i}),),
+)
+
+SECONDARY_INTERFACE_ID: StaticSchema = (3, n0, _SIIe, 0)
+
+SECONDARY_INTERFACE_STATUS: StaticSchema = (
+    14,
+    n0,
+    _SISe,
+    0,
+    (_av, _iu),
+    ((-1, {_sV: _av}), (-1, {_sV: _iu_})),
+)
+
+INSTANCE_SECONDARY_INTERFACE: StaticSchema = (
+    18,
+    n0,
+    _ISIn,
+    0,
+    (_At, _MAa, _SIIe, _OIw, _PIAri, _SDC, _Sta, _SSIe, _SNI, _ITnte),
+    (
+        (INSTANCE_SECONDARY_INTERFACE_ATTACHMENT, {_aQN: _At, _sN: _atta}),
+        (lambda: schemas.STRING, {_aQN: _MAa, _sN: _mAa}),
+        (SECONDARY_INTERFACE_ID, {_aQN: _SIIe, _sN: _sIIe}),
+        (lambda: schemas.STRING, {_aQN: _OIw, _sN: _oI}),
+        (
+            INSTANCE_SECONDARY_INTERFACE_PRIVATE_IP_ADDRESS_LIST,
+            {_aQN: _PIASri, _sN: _pIASr},
+        ),
+        (lambda: schemas.BOOLEAN, {_aQN: _SDC, _sN: _sDC}),
+        (SECONDARY_INTERFACE_STATUS, {_aQN: _Sta, _sN: _sta}),
+        (lambda: schemas.SECONDARY_SUBNET_ID, {_aQN: _SSIe, _sN: _sSIe}),
+        (lambda: schemas.SECONDARY_NETWORK_ID, {_aQN: _SNI, _sN: _sNI}),
+        (lambda: schemas.SECONDARY_INTERFACE_TYPE, {_aQN: _ITnte, _sN: _iTnt}),
+    ),
+)
+
+INSTANCE_SECONDARY_INTERFACE_LIST: StaticSchema = (
+    16,
+    n0,
+    _ISIL,
+    0,
+    (_me,),
+    ((INSTANCE_SECONDARY_INTERFACE, {_sN: _i}),),
+)
+
+INSTANCE: StaticSchema = (
+    18,
+    n0,
+    _In,
+    0,
+    (
+        _Arc,
+        _BDMl,
+        _CTl,
+        _EO,
+        _ESna,
+        _Hy,
+        _IIP,
+        _ILn,
+        _EGAl,
+        _EIAAla,
+        _NIe,
+        _OA,
+        _RDN,
+        _RDT,
+        _SGe,
+        _SDC,
+        _SIRI,
+        _SNSr,
+        _SRt,
+        _Tag,
+        _VTi,
+        _CO,
+        _CBI,
+        _CRI,
+        _CRSa,
+        _HO,
+        _Lic,
+        _MO,
+        _EOn,
+        _BMo,
+        _PDl,
+        _UO,
+        _UOUT,
+        _PDNO,
+        _IApv,
+        _TSp,
+        _MOa,
+        _CIBM,
+        _NPO,
+        _Op,
+        _SIec,
+        _II,
+        _IIm,
+        _St,
+        _PDNr,
+        _PDNu,
+        _STR,
+        _KN,
+        _ALI,
+        _PCro,
+        _IT,
+        _LTa,
+        _Pl,
+        _KI,
+        _RIa,
+        _Pla,
+        _Mon,
+        _SIu,
+        _VI,
+        _PIAr,
+        _PIAu,
+    ),
+    (
+        (lambda: schemas.ARCHITECTURE_VALUES, {_aQN: _Arc, _sN: _arch}),
+        (lambda: schemas.INSTANCE_BLOCK_DEVICE_MAPPING_LIST, {_aQN: _BDM, _sN: _bDM}),
+        (lambda: schemas.STRING, {_aQN: _CTl, _sN: _cTl}),
+        (lambda: schemas.BOOLEAN, {_aQN: _EO, _sN: _eO}),
+        (lambda: schemas.BOOLEAN, {_aQN: _ESna, _sN: _eSna}),
+        (lambda: schemas.HYPERVISOR_TYPE, {_aQN: _Hy, _sN: _hy}),
+        (lambda: schemas.IAM_INSTANCE_PROFILE, {_aQN: _IIP, _sN: _iIP}),
+        (lambda: schemas.INSTANCE_LIFECYCLE_TYPE, {_aQN: _ILn, _sN: _iLn}),
+        (lambda: schemas.ELASTIC_GPU_ASSOCIATION_LIST, {_aQN: _EGASl, _sN: _eGASl}),
+        (
+            lambda: schemas.ELASTIC_INFERENCE_ACCELERATOR_ASSOCIATION_LIST,
+            {_aQN: _EIAASl, _sN: _eIAASl},
+        ),
+        (INSTANCE_NETWORK_INTERFACE_LIST, {_aQN: _NIS, _sN: _nIS}),
+        (lambda: schemas.STRING, {_aQN: _OA, _sN: _oAu}),
+        (lambda: schemas.STRING, {_aQN: _RDN, _sN: _rDN}),
+        (lambda: schemas.DEVICE_TYPE, {_aQN: _RDT, _sN: _rDT}),
+        (lambda: schemas.GROUP_IDENTIFIER_LIST, {_aQN: _GS, _sN: _gS}),
+        (lambda: schemas.BOOLEAN, {_aQN: _SDC, _sN: _sDC}),
+        (lambda: schemas.STRING, {_aQN: _SIRI, _sN: _sIRI}),
+        (lambda: schemas.STRING, {_aQN: _SNSr, _sN: _sNS}),
+        (lambda: schemas.STATE_REASON, {_aQN: _SRt, _sN: _sRt}),
+        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
+        (lambda: schemas.VIRTUALIZATION_TYPE, {_aQN: _VTi, _sN: _vTi}),
+        (lambda: schemas.CPU_OPTIONS, {_aQN: _CO, _sN: _cOp}),
+        (lambda: schemas.STRING, {_aQN: _CBI, _sN: _cBI}),
+        (lambda: schemas.STRING, {_aQN: _CRI, _sN: _cRI}),
+        (
+            lambda: schemas.CAPACITY_RESERVATION_SPECIFICATION_RESPONSE,
+            {_aQN: _CRSa, _sN: _cRS},
+        ),
+        (lambda: schemas.HIBERNATION_OPTIONS, {_aQN: _HO, _sN: _hO}),
+        (lambda: schemas.LICENSE_LIST, {_aQN: _LSicen, _sN: _lSi}),
+        (INSTANCE_METADATA_OPTIONS_RESPONSE, {_aQN: _MO, _sN: _mO}),
+        (lambda: schemas.ENCLAVE_OPTIONS, {_aQN: _EOn, _sN: _eOn}),
+        (lambda: schemas.BOOT_MODE_VALUES, {_aQN: _BMo, _sN: _bMo}),
+        (lambda: schemas.STRING, {_aQN: _PDl, _sN: _pDl}),
+        (lambda: schemas.STRING, {_aQN: _UO, _sN: _uO}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _UOUT, _sN: _uOUT}),
+        (PRIVATE_DNS_NAME_OPTIONS_RESPONSE, {_aQN: _PDNO, _sN: _pDNO}),
+        (lambda: schemas.STRING, {_aQN: _IApv, _sN: _iApv}),
+        (lambda: schemas.STRING, {_aQN: _TSp, _sN: _tSp}),
+        (lambda: schemas.INSTANCE_MAINTENANCE_OPTIONS, {_aQN: _MOa, _sN: _mOa}),
+        (lambda: schemas.INSTANCE_BOOT_MODE_VALUES, {_aQN: _CIBM, _sN: _cIBM}),
+        (INSTANCE_NETWORK_PERFORMANCE_OPTIONS, {_aQN: _NPO, _sN: _nPO}),
+        (lambda: schemas.OPERATOR_RESPONSE, {_aQN: _Op, _sN: _ope}),
+        (INSTANCE_SECONDARY_INTERFACE_LIST, {_aQN: _SIS, _sN: _sIS}),
+        (lambda: schemas.STRING, {_aQN: _II, _sN: _iI}),
+        (lambda: schemas.STRING, {_aQN: _IIm, _sN: _iIm}),
+        (lambda: schemas.INSTANCE_STATE, {_aQN: _ISnsta, _sN: _iSnst}),
+        (lambda: schemas.STRING, {_aQN: _PDNr, _sN: _pDNr}),
+        (lambda: schemas.STRING, {_aQN: _DN, _sN: _dN}),
+        (lambda: schemas.STRING, {_aQN: _Rea, _sN: _rea}),
+        (lambda: schemas.STRING, {_aQN: _KN, _sN: _kN}),
+        (lambda: schemas.INTEGER, {_aQN: _ALI, _sN: _aLI}),
+        (lambda: schemas.PRODUCT_CODE_LIST, {_aQN: _PCro, _sN: _pCr}),
+        (lambda: schemas.INSTANCE_TYPE, {_aQN: _IT, _sN: _iT}),
+        (lambda: schemas.DATE_TIME, {_aQN: _LTa, _sN: _lTa}),
+        (lambda: schemas.PLACEMENT, {_aQN: _Pl, _sN: _pla}),
+        (lambda: schemas.STRING, {_aQN: _KI, _sN: _kI}),
+        (lambda: schemas.STRING, {_aQN: _RIa, _sN: _rIa}),
+        (lambda: schemas.PLATFORM_VALUES, {_aQN: _Pla, _sN: _plat}),
+        (MONITORING, {_aQN: _Mon, _sN: _monit}),
+        (lambda: schemas.STRING, {_aQN: _SIu, _sN: _sI}),
+        (lambda: schemas.STRING, {_aQN: _VI, _sN: _vI}),
+        (lambda: schemas.STRING, {_aQN: _PIAr, _sN: _pIAr}),
+        (lambda: schemas.STRING, {_aQN: _IA, _sN: _iApd}),
+    ),
+)
+
+INSTANCE_LIST: StaticSchema = (16, n0, _ILns, 0, (_me,), ((INSTANCE, {_sN: _i}),))
+
+RESERVATION: StaticSchema = (
+    18,
+    n0,
+    _Rese,
+    0,
+    (_RI, _OIw, _RIeq, _G, _Ins),
+    (
+        (lambda: schemas.STRING, {_aQN: _RI, _sN: _rIes}),
+        (lambda: schemas.STRING, {_aQN: _OIw, _sN: _oI}),
+        (lambda: schemas.STRING, {_aQN: _RIeq, _sN: _rIeq}),
+        (lambda: schemas.GROUP_IDENTIFIER_LIST, {_aQN: _GS, _sN: _gS}),
+        (INSTANCE_LIST, {_aQN: _ISnst, _sN: _iSns}),
+    ),
+)
+
+RESERVATION_LIST: StaticSchema = (16, n0, _RLe, 0, (_me,), ((RESERVATION, {_sN: _i}),))
+
+DESCRIBE_INSTANCE_SQL_HA_STATES_REQUEST_MAX_RESULTS_INTEGER: StaticSchema = (
+    7,
+    n0,
+    _DISHSRMRI,
+    0,
+)
 
 DESCRIBE_INSTANCE_SQL_HA_HISTORY_STATES_INPUT: StaticSchema = (
     18,
@@ -395,10 +978,7 @@ DESCRIBE_INSTANCE_SQL_HA_HISTORY_STATES_INPUT: StaticSchema = (
         (lambda: schemas.MILLISECOND_DATE_TIME, 0),
         (lambda: schemas.MILLISECOND_DATE_TIME, 0),
         (lambda: schemas.NEXT_TOKEN, 0),
-        (
-            lambda: schemas.DESCRIBE_INSTANCE_SQL_HA_STATES_REQUEST_MAX_RESULTS_INTEGER,
-            0,
-        ),
+        (DESCRIBE_INSTANCE_SQL_HA_STATES_REQUEST_MAX_RESULTS_INTEGER, 0),
         (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
         (lambda: schemas.BOOLEAN, 0),
     ),
@@ -479,10 +1059,7 @@ DESCRIBE_INSTANCE_SQL_HA_STATES_INPUT: StaticSchema = (
     (
         (lambda: schemas.INSTANCE_ID_STRING_LIST, {_sN: _II}),
         (lambda: schemas.NEXT_TOKEN, 0),
-        (
-            lambda: schemas.DESCRIBE_INSTANCE_SQL_HA_STATES_REQUEST_MAX_RESULTS_INTEGER,
-            0,
-        ),
+        (DESCRIBE_INSTANCE_SQL_HA_STATES_REQUEST_MAX_RESULTS_INTEGER, 0),
         (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
         (lambda: schemas.BOOLEAN, 0),
     ),
@@ -719,7 +1296,7 @@ INSTANCE_STATUS: StaticSchema = (
     (
         (lambda: schemas.STRING, {_aQN: _AZ, _sN: _aZ}),
         (lambda: schemas.AVAILABILITY_ZONE_ID, {_aQN: _AZI, _sN: _aZI}),
-        (lambda: schemas.STRING, {_aQN: _OA, _sN: _oA}),
+        (lambda: schemas.STRING, {_aQN: _OA, _sN: _oAu}),
         (lambda: schemas.OPERATOR_RESPONSE, {_aQN: _Op, _sN: _ope}),
         (INSTANCE_STATUS_EVENT_LIST, {_aQN: _ESv, _sN: _eSv}),
         (lambda: schemas.STRING, {_aQN: _II, _sN: _iI}),
@@ -965,523 +1542,11 @@ BURSTABLE_PERFORMANCE_FLAG: StaticSchema = (2, n0, _BPFu, 0)
 
 CURRENT_GENERATION_FLAG: StaticSchema = (2, n0, _CGF, 0)
 
-DEDICATED_HOST_FLAG: StaticSchema = (2, n0, _DHF, 0)
-
-ATTACHMENT_LIMIT_TYPE: StaticSchema = (
-    14,
-    n0,
-    _ALT,
-    0,
-    (_SHARED, _DEDICATED),
-    ((-1, {_sV: _sh}), (-1, {_sV: _ded})),
-)
-
-BASELINE_BANDWIDTH_IN_MBPS: StaticSchema = (7, n0, _BBIM, 0)
-
-BASELINE_IOPS: StaticSchema = (7, n0, _BIa, 0)
-
-BASELINE_THROUGHPUT_IN_M_BPS: StaticSchema = (10, n0, _BTIMB, 0)
-
-EBS_CARD_INDEX: StaticSchema = (7, n0, _ECI, 0)
-
-MAXIMUM_BANDWIDTH_IN_MBPS: StaticSchema = (7, n0, _MBIM, 0)
-
-MAXIMUM_IOPS: StaticSchema = (7, n0, _MI, 0)
-
-MAXIMUM_THROUGHPUT_IN_M_BPS: StaticSchema = (10, n0, _MTIMB, 0)
-
-EBS_CARD_INFO: StaticSchema = (
-    18,
-    n0,
-    _ECIb,
-    0,
-    (_ECI, _BBIM, _BTIMB, _BIa, _MBIM, _MTIMB, _MI),
-    (
-        (EBS_CARD_INDEX, {_aQN: _ECI, _sN: _eCI}),
-        (BASELINE_BANDWIDTH_IN_MBPS, {_aQN: _BBIM, _sN: _bBIM}),
-        (BASELINE_THROUGHPUT_IN_M_BPS, {_aQN: _BTIMB, _sN: _bTIMB}),
-        (BASELINE_IOPS, {_aQN: _BIa, _sN: _bIa}),
-        (MAXIMUM_BANDWIDTH_IN_MBPS, {_aQN: _MBIM, _sN: _mBIM}),
-        (MAXIMUM_THROUGHPUT_IN_M_BPS, {_aQN: _MTIMB, _sN: _mTIMB}),
-        (MAXIMUM_IOPS, {_aQN: _MI, _sN: _mI}),
-    ),
-)
-
-EBS_CARD_INFO_LIST: StaticSchema = (
+INSTANCE_ID_UPDATE_STRING_LIST: StaticSchema = (
     16,
     n0,
-    _ECIL,
+    _IIUSL,
     0,
     (_me,),
-    ((EBS_CARD_INFO, {_sN: _i}),),
+    ((lambda: schemas.INSTANCE_ID, {_sN: _i}),),
 )
-
-EBS_OPTIMIZED_INFO: StaticSchema = (
-    18,
-    n0,
-    _EOI,
-    0,
-    (_BBIM, _BTIMB, _BIa, _MBIM, _MTIMB, _MI),
-    (
-        (BASELINE_BANDWIDTH_IN_MBPS, {_aQN: _BBIM, _sN: _bBIM}),
-        (BASELINE_THROUGHPUT_IN_M_BPS, {_aQN: _BTIMB, _sN: _bTIMB}),
-        (BASELINE_IOPS, {_aQN: _BIa, _sN: _bIa}),
-        (MAXIMUM_BANDWIDTH_IN_MBPS, {_aQN: _MBIM, _sN: _mBIM}),
-        (MAXIMUM_THROUGHPUT_IN_M_BPS, {_aQN: _MTIMB, _sN: _mTIMB}),
-        (MAXIMUM_IOPS, {_aQN: _MI, _sN: _mI}),
-    ),
-)
-
-EBS_OPTIMIZED_SUPPORT: StaticSchema = (
-    14,
-    n0,
-    _EOS,
-    0,
-    (_uns, _supp, _def),
-    ((-1, {_sV: _uns}), (-1, {_sV: _supp}), (-1, {_sV: _def})),
-)
-
-EBS_ENCRYPTION_SUPPORT: StaticSchema = (
-    14,
-    n0,
-    _EES,
-    0,
-    (_uns, _supp),
-    ((-1, {_sV: _uns}), (-1, {_sV: _supp})),
-)
-
-MAXIMUM_EBS_ATTACHMENTS: StaticSchema = (7, n0, _MEA, 0)
-
-MAXIMUM_EBS_CARDS: StaticSchema = (7, n0, _MEC, 0)
-
-EBS_NVME_SUPPORT: StaticSchema = (
-    14,
-    n0,
-    _ENS,
-    0,
-    (_UNSUPPORTED, _SUPPORTED, _REQUIRED),
-    ((-1, {_sV: _uns}), (-1, {_sV: _supp}), (-1, {_sV: _requ})),
-)
-
-EBS_INFO: StaticSchema = (
-    18,
-    n0,
-    _EIb,
-    0,
-    (_EOS, _ESnc, _EOI, _NSv, _MEA, _ALT, _MEC, _ECb),
-    (
-        (EBS_OPTIMIZED_SUPPORT, {_aQN: _EOS, _sN: _eOS}),
-        (EBS_ENCRYPTION_SUPPORT, {_aQN: _ESnc, _sN: _eSncr}),
-        (EBS_OPTIMIZED_INFO, {_aQN: _EOI, _sN: _eOI}),
-        (EBS_NVME_SUPPORT, {_aQN: _NSv, _sN: _nSv}),
-        (MAXIMUM_EBS_ATTACHMENTS, {_aQN: _MEA, _sN: _mEA}),
-        (ATTACHMENT_LIMIT_TYPE, {_aQN: _ALT, _sN: _aLT}),
-        (MAXIMUM_EBS_CARDS, {_aQN: _MEC, _sN: _mEC}),
-        (EBS_CARD_INFO_LIST, {_aQN: _ECS, _sN: _eCS}),
-    ),
-)
-
-FPGA_DEVICE_COUNT: StaticSchema = (7, n0, _FDC, 0)
-
-FPGA_DEVICE_MANUFACTURER_NAME: StaticSchema = (3, n0, _FDMN, 0)
-
-FPGA_DEVICE_MEMORY_SIZE: StaticSchema = (7, n0, _FDMS, 0)
-
-FPGA_DEVICE_MEMORY_INFO: StaticSchema = (
-    18,
-    n0,
-    _FDMI,
-    0,
-    (_SIMB,),
-    ((FPGA_DEVICE_MEMORY_SIZE, {_aQN: _SIMB, _sN: _sIMB}),),
-)
-
-FPGA_DEVICE_NAME: StaticSchema = (3, n0, _FDNp, 0)
-
-FPGA_DEVICE_INFO: StaticSchema = (
-    18,
-    n0,
-    _FDI,
-    0,
-    (_N, _Manu, _Cou, _MIe),
-    (
-        (FPGA_DEVICE_NAME, {_aQN: _N, _sN: _nam}),
-        (FPGA_DEVICE_MANUFACTURER_NAME, {_aQN: _Manu, _sN: _manu}),
-        (FPGA_DEVICE_COUNT, {_aQN: _Cou, _sN: _cou}),
-        (FPGA_DEVICE_MEMORY_INFO, {_aQN: _MIe, _sN: _mIe}),
-    ),
-)
-
-FPGA_DEVICE_INFO_LIST: StaticSchema = (
-    16,
-    n0,
-    _FDIL,
-    0,
-    (_me,),
-    ((FPGA_DEVICE_INFO, {_sN: _i}),),
-)
-
-TOTAL_FPGA_MEMORY: StaticSchema = (7, n0, _tFM, 0)
-
-FPGA_INFO: StaticSchema = (
-    18,
-    n0,
-    _FIpga,
-    0,
-    (_Fp, _TFMIMB),
-    (
-        (FPGA_DEVICE_INFO_LIST, {_aQN: _Fp, _sN: _fpg}),
-        (TOTAL_FPGA_MEMORY, {_aQN: _TFMIMB, _sN: _tFMIMB}),
-    ),
-)
-
-FREE_TIER_ELIGIBLE_FLAG: StaticSchema = (2, n0, _FTEF, 0)
-
-GPU_DEVICE_COUNT: StaticSchema = (7, n0, _GDC, 0)
-
-GPU_PARTITION_SIZE: StaticSchema = (10, n0, _GPS, 0)
-
-LOGICAL_GPU_COUNT: StaticSchema = (7, n0, _LGC, 0)
-
-GPU_DEVICE_MANUFACTURER_NAME: StaticSchema = (3, n0, _GDMN, 0)
-
-GPU_DEVICE_MEMORY_SIZE: StaticSchema = (7, n0, _GDMS, 0)
-
-GPU_DEVICE_MEMORY_INFO: StaticSchema = (
-    18,
-    n0,
-    _GDMI,
-    0,
-    (_SIMB,),
-    ((GPU_DEVICE_MEMORY_SIZE, {_aQN: _SIMB, _sN: _sIMB}),),
-)
-
-GPU_DEVICE_NAME: StaticSchema = (3, n0, _GDN, 0)
-
-WORKLOAD: StaticSchema = (3, n0, _Wo, 0)
-
-WORKLOADS_LIST: StaticSchema = (16, n0, _WL, 0, (_me,), ((WORKLOAD, {_sN: _i}),))
-
-GPU_DEVICE_INFO: StaticSchema = (
-    18,
-    n0,
-    _GDI,
-    0,
-    (_N, _Manu, _Cou, _LGC, _GPS, _Wor, _MIe),
-    (
-        (GPU_DEVICE_NAME, {_aQN: _N, _sN: _nam}),
-        (GPU_DEVICE_MANUFACTURER_NAME, {_aQN: _Manu, _sN: _manu}),
-        (GPU_DEVICE_COUNT, {_aQN: _Cou, _sN: _cou}),
-        (LOGICAL_GPU_COUNT, {_aQN: _LGC, _sN: _lGC}),
-        (GPU_PARTITION_SIZE, {_aQN: _GPS, _sN: _gPS}),
-        (WORKLOADS_LIST, {_aQN: _WSo, _sN: _wS}),
-        (GPU_DEVICE_MEMORY_INFO, {_aQN: _MIe, _sN: _mIe}),
-    ),
-)
-
-GPU_DEVICE_INFO_LIST: StaticSchema = (
-    16,
-    n0,
-    _GDIL,
-    0,
-    (_me,),
-    ((GPU_DEVICE_INFO, {_sN: _i}),),
-)
-
-TOTAL_GPU_MEMORY: StaticSchema = (7, n0, _tGM, 0)
-
-GPU_INFO: StaticSchema = (
-    18,
-    n0,
-    _GIp,
-    0,
-    (_Gp, _TGMIMB),
-    (
-        (GPU_DEVICE_INFO_LIST, {_aQN: _Gp, _sN: _gpu}),
-        (TOTAL_GPU_MEMORY, {_aQN: _TGMIMB, _sN: _tGMIMB}),
-    ),
-)
-
-HIBERNATION_FLAG: StaticSchema = (2, n0, _HF, 0)
-
-INSTANCE_TYPE_HYPERVISOR: StaticSchema = (
-    14,
-    n0,
-    _ITH,
-    0,
-    (_NITRO, _XEN),
-    ((-1, {_sV: _nit}), (-1, {_sV: _xen})),
-)
-
-INFERENCE_DEVICE_COUNT: StaticSchema = (7, n0, _IDC, 0)
-
-INFERENCE_DEVICE_MANUFACTURER_NAME: StaticSchema = (3, n0, _IDMN, 0)
-
-INFERENCE_DEVICE_MEMORY_SIZE: StaticSchema = (7, n0, _IDMS, 0)
-
-INFERENCE_DEVICE_MEMORY_INFO: StaticSchema = (
-    18,
-    n0,
-    _IDMI,
-    0,
-    (_SIMB,),
-    ((INFERENCE_DEVICE_MEMORY_SIZE, {_aQN: _SIMB, _sN: _sIMB}),),
-)
-
-INFERENCE_DEVICE_NAME: StaticSchema = (3, n0, _IDN, 0)
-
-INFERENCE_DEVICE_INFO: StaticSchema = (
-    18,
-    n0,
-    _IDI,
-    0,
-    (_Cou, _N, _Manu, _MIe),
-    (
-        (INFERENCE_DEVICE_COUNT, {_aQN: _Cou, _sN: _cou}),
-        (INFERENCE_DEVICE_NAME, {_aQN: _N, _sN: _nam}),
-        (INFERENCE_DEVICE_MANUFACTURER_NAME, {_aQN: _Manu, _sN: _manu}),
-        (INFERENCE_DEVICE_MEMORY_INFO, {_aQN: _MIe, _sN: _mIe}),
-    ),
-)
-
-INFERENCE_DEVICE_INFO_LIST: StaticSchema = (
-    16,
-    n0,
-    _IDIL,
-    0,
-    (_me,),
-    ((INFERENCE_DEVICE_INFO, 0),),
-)
-
-TOTAL_INFERENCE_MEMORY: StaticSchema = (7, n0, _tIM, 0)
-
-INFERENCE_ACCELERATOR_INFO: StaticSchema = (
-    18,
-    n0,
-    _IAIn,
-    0,
-    (_Acce, _TIMIMB),
-    (
-        (INFERENCE_DEVICE_INFO_LIST, {_aQN: _Acce, _sN: _accel}),
-        (TOTAL_INFERENCE_MEMORY, {_aQN: _TIMIMB, _sN: _tIMIMB}),
-    ),
-)
-
-DISK_COUNT: StaticSchema = (7, n0, _DCisk, 0)
-
-DISK_SIZE: StaticSchema = (8, n0, _DSi, 0)
-
-DISK_TYPE: StaticSchema = (
-    14,
-    n0,
-    _DTisk,
-    0,
-    (_hd, _ssd),
-    ((-1, {_sV: _hd}), (-1, {_sV: _ssd})),
-)
-
-DISK_INFO: StaticSchema = (
-    18,
-    n0,
-    _DIis,
-    0,
-    (_SIGB, _Cou, _Ty),
-    (
-        (DISK_SIZE, {_aQN: _SIGB, _sN: _sIGB}),
-        (DISK_COUNT, {_aQN: _Cou, _sN: _cou}),
-        (DISK_TYPE, {_aQN: _Ty, _sN: _ty}),
-    ),
-)
-
-DISK_INFO_LIST: StaticSchema = (16, n0, _DIL, 0, (_me,), ((DISK_INFO, {_sN: _i}),))
-
-INSTANCE_STORAGE_ENCRYPTION_SUPPORT: StaticSchema = (
-    14,
-    n0,
-    _ISES,
-    0,
-    (_uns, _requ),
-    ((-1, {_sV: _uns}), (-1, {_sV: _requ})),
-)
-
-EPHEMERAL_NVME_SUPPORT: StaticSchema = (
-    14,
-    n0,
-    _ENSp,
-    0,
-    (_UNSUPPORTED, _SUPPORTED, _REQUIRED),
-    ((-1, {_sV: _uns}), (-1, {_sV: _supp}), (-1, {_sV: _requ})),
-)
-
-INSTANCE_STORAGE_INFO: StaticSchema = (
-    18,
-    n0,
-    _ISIns,
-    0,
-    (_TSIGB, _Disk, _NSv, _ESnc),
-    (
-        (DISK_SIZE, {_aQN: _TSIGB, _sN: _tSIGB}),
-        (DISK_INFO_LIST, {_aQN: _Disk, _sN: _disk}),
-        (EPHEMERAL_NVME_SUPPORT, {_aQN: _NSv, _sN: _nSv}),
-        (INSTANCE_STORAGE_ENCRYPTION_SUPPORT, {_aQN: _ESnc, _sN: _eSncr}),
-    ),
-)
-
-INSTANCE_STORAGE_FLAG: StaticSchema = (2, n0, _ISF, 0)
-
-MEDIA_DEVICE_COUNT: StaticSchema = (7, n0, _MDC, 0)
-
-MEDIA_DEVICE_MANUFACTURER_NAME: StaticSchema = (3, n0, _MDMN, 0)
-
-MEDIA_DEVICE_MEMORY_SIZE: StaticSchema = (7, n0, _MDMS, 0)
-
-MEDIA_DEVICE_MEMORY_INFO: StaticSchema = (
-    18,
-    n0,
-    _MDMI,
-    0,
-    (_SIMB,),
-    ((MEDIA_DEVICE_MEMORY_SIZE, {_aQN: _SIMB, _sN: _sIMB}),),
-)
-
-MEDIA_DEVICE_NAME: StaticSchema = (3, n0, _MDN, 0)
-
-MEDIA_DEVICE_INFO: StaticSchema = (
-    18,
-    n0,
-    _MDI,
-    0,
-    (_Cou, _N, _Manu, _MIe),
-    (
-        (MEDIA_DEVICE_COUNT, {_aQN: _Cou, _sN: _cou}),
-        (MEDIA_DEVICE_NAME, {_aQN: _N, _sN: _nam}),
-        (MEDIA_DEVICE_MANUFACTURER_NAME, {_aQN: _Manu, _sN: _manu}),
-        (MEDIA_DEVICE_MEMORY_INFO, {_aQN: _MIe, _sN: _mIe}),
-    ),
-)
-
-MEDIA_DEVICE_INFO_LIST: StaticSchema = (
-    16,
-    n0,
-    _MDIL,
-    0,
-    (_me,),
-    ((MEDIA_DEVICE_INFO, {_sN: _i}),),
-)
-
-TOTAL_MEDIA_MEMORY: StaticSchema = (7, n0, _TMM, 0)
-
-MEDIA_ACCELERATOR_INFO: StaticSchema = (
-    18,
-    n0,
-    _MAIe,
-    0,
-    (_Acce, _TMMIMB),
-    (
-        (MEDIA_DEVICE_INFO_LIST, {_aQN: _Acce, _sN: _accel}),
-        (TOTAL_MEDIA_MEMORY, {_aQN: _TMMIMB, _sN: _tMMIMB}),
-    ),
-)
-
-MEMORY_SIZE: StaticSchema = (8, n0, _MSem, 0)
-
-MEMORY_INFO: StaticSchema = (
-    18,
-    n0,
-    _MIe,
-    0,
-    (_SIMB,),
-    ((MEMORY_SIZE, {_aQN: _SIMB, _sN: _sIMB}),),
-)
-
-BANDWIDTH_WEIGHTING_TYPE: StaticSchema = (
-    14,
-    n0,
-    _BWT,
-    0,
-    (_DEFAULT, _V_, _E_),
-    ((-1, {_sV: _def}), (-1, {_sV: _v_____}), (-1, {_sV: _e_})),
-)
-
-BANDWIDTH_WEIGHTING_TYPE_LIST: StaticSchema = (
-    16,
-    n0,
-    _BWTL,
-    0,
-    (_me,),
-    ((BANDWIDTH_WEIGHTING_TYPE, {_sN: _i}),),
-)
-
-DEFAULT_TCP_ESTABLISHED_TIMEOUT: StaticSchema = (7, n0, _DTET, 0)
-
-DEFAULT_UDP_STREAM_TIMEOUT: StaticSchema = (7, n0, _DUST, 0)
-
-DEFAULT_UDP_TIMEOUT: StaticSchema = (7, n0, _DUT, 0)
-
-DEFAULT_CONNECTION_TRACKING_CONFIGURATION: StaticSchema = (
-    18,
-    n0,
-    _DCTC,
-    0,
-    (_DTET, _DUT, _DUST),
-    (
-        (DEFAULT_TCP_ESTABLISHED_TIMEOUT, {_aQN: _DTET, _sN: _dTET}),
-        (DEFAULT_UDP_TIMEOUT, {_aQN: _DUT, _sN: _dUT}),
-        (DEFAULT_UDP_STREAM_TIMEOUT, {_aQN: _DUST, _sN: _dUST}),
-    ),
-)
-
-DEFAULT_NETWORK_CARD_INDEX: StaticSchema = (7, n0, _DNCI, 0)
-
-MAXIMUM_EFA_INTERFACES: StaticSchema = (7, n0, _MEI, 0)
-
-EFA_INFO: StaticSchema = (
-    18,
-    n0,
-    _EIf,
-    0,
-    (_MEI,),
-    ((MAXIMUM_EFA_INTERFACES, {_aQN: _MEI, _sN: _mEI}),),
-)
-
-EFA_SUPPORTED_FLAG: StaticSchema = (2, n0, _ESF, 0)
-
-ENA_SRD_SUPPORTED: StaticSchema = (2, n0, _ESSn, 0)
-
-ENA_SUPPORT: StaticSchema = (
-    14,
-    n0,
-    _ESna,
-    0,
-    (_uns, _supp, _requ),
-    ((-1, {_sV: _uns}), (-1, {_sV: _supp}), (-1, {_sV: _requ})),
-)
-
-ENCRYPTION_IN_TRANSIT_SUPPORTED: StaticSchema = (2, n0, _EITSn, 0)
-
-FLEXIBLE_ENA_QUEUES_SUPPORT: StaticSchema = (
-    14,
-    n0,
-    _FEQS,
-    0,
-    (_UNSUPPORTED, _SUPPORTED),
-    ((-1, {_sV: _uns}), (-1, {_sV: _supp})),
-)
-
-MAX_IPV4_ADDR_PER_INTERFACE: StaticSchema = (7, n0, _MIAPI, 0)
-
-IPV4_ADDRESSES_PER_SECONDARY_INTERFACE: StaticSchema = (7, n0, _IAPSI, 0)
-
-MAX_IPV6_ADDR_PER_INTERFACE: StaticSchema = (7, n0, _MIAPIa, 0)
-
-IPV6_FLAG: StaticSchema = (2, n0, _IFp, 0)
-
-MAXIMUM_NETWORK_CARDS: StaticSchema = (7, n0, _MNC, 0)
-
-MAX_NETWORK_INTERFACES: StaticSchema = (7, n0, _MNI, 0)
-
-MAXIMUM_SECONDARY_NETWORK_INTERFACES: StaticSchema = (7, n0, _MSNI, 0)
-
-BASELINE_BANDWIDTH_IN_GBPS: StaticSchema = (10, n0, _BBIG, 0)
-
-DEFAULT_ENA_QUEUE_COUNT_PER_INTERFACE: StaticSchema = (7, n0, _DEQCPI, 0)

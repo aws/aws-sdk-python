@@ -25,6 +25,10 @@ from ..models import (
     EnaSrdSpecification,
     EnaSrdSpecificationDict,
     FailedCapacityReservationFleetCancellationResult,
+    FlexCostAllocationNetworkResourceScope,
+    FlexCostAllocationNetworkResourceScopeDict,
+    FlexCostAllocationOperationFailure,
+    FlexCostAllocationPolicyAssociationDescription,
     HealthCheckPathResponseObject,
     HostCpuOptionsRequest,
     HostCpuOptionsRequestDict,
@@ -818,6 +822,10 @@ class AccountVpcEncryptionControlExclusions(_SerdeShape):
     """The exclusion configuration for VPC Lattice service."""
     elastic_file_system: str | None = ...
     """The exclusion configuration for Elastic File System service."""
+    global_accelerator: str | None = ...
+    """The exclusion configuration for AWS Global Accelerator."""
+    api_gateway_v2: str | None = ...
+    """The exclusion configuration for Amazon API Gateway V2."""
 
 class AccountVpcEncryptionControlMode(UnknownEnumMixin, StrEnum):
     UNMANAGED = "unmanaged"
@@ -3446,6 +3454,120 @@ class AssociateNatGatewayAddressOutput(_SerdeShape):
     """The ID of the NAT gateway."""
     nat_gateway_addresses: list[NatGatewayAddress] | None = ...
     """The IP addresses."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class AssociateNetworkingFlexCostAllocationPolicyInput(_SerdeShape):
+    """
+    Dataclass for AssociateNetworkingFlexCostAllocationPolicyInput
+    structure.
+    """
+
+    fca_policy_id: str | None = ...
+    """
+    The ID of the flex cost allocation policy to associate. This parameter
+    is required.
+    """
+    network_resource_ids: list[str] | None = ...
+    """
+    The IDs of the network resources to associate with the policy. You can
+    specify from 1 to 20 resource IDs.
+
+    You must specify `NetworkResourceIds`, `NetworkResourceScope`, or both.
+    A request can include at most 20 distinct resources in total.
+    """
+    network_resource_scope: FlexCostAllocationNetworkResourceScope | None = ...
+    """
+    The scope of network resources to associate with the policy. Use a scope
+    to associate the policy with the resources in an account, Amazon VPC, or
+    subnet.
+
+    You must specify `NetworkResourceScope`, `NetworkResourceIds`, or both.
+    """
+    client_token: str | None = ...
+    """
+    Unique, case-sensitive identifier that you provide to ensure the
+    idempotency of the request. For more information, see [Ensuring
+    idempotency](https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html).
+
+    This field is autopopulated if not provided.
+    """
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class AssociateNetworkingFlexCostAllocationPolicyInputDict(TypedDict, total=False):
+    """Dictionary form of `AssociateNetworkingFlexCostAllocationPolicyInput`."""
+
+    fca_policy_id: Required[str]
+    """
+    The ID of the flex cost allocation policy to associate. This parameter
+    is required.
+    """
+    network_resource_ids: Sequence[str] | None
+    """
+    The IDs of the network resources to associate with the policy. You can
+    specify from 1 to 20 resource IDs.
+
+    You must specify `NetworkResourceIds`, `NetworkResourceScope`, or both.
+    A request can include at most 20 distinct resources in total.
+    """
+    network_resource_scope: (
+        FlexCostAllocationNetworkResourceScope
+        | FlexCostAllocationNetworkResourceScopeDict
+        | None
+    )
+    """
+    The scope of network resources to associate with the policy. Use a scope
+    to associate the policy with the resources in an account, Amazon VPC, or
+    subnet.
+
+    You must specify `NetworkResourceScope`, `NetworkResourceIds`, or both.
+    """
+    client_token: str | None
+    """
+    Unique, case-sensitive identifier that you provide to ensure the
+    idempotency of the request. For more information, see [Ensuring
+    idempotency](https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html).
+
+    This field is autopopulated if not provided.
+    """
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class AssociateNetworkingFlexCostAllocationPolicyOutput(_SerdeShape):
+    """
+    Dataclass for AssociateNetworkingFlexCostAllocationPolicyOutput
+    structure.
+    """
+
+    fca_policy_associations: (
+        list[FlexCostAllocationPolicyAssociationDescription] | None
+    ) = ...
+    """Information about the policy associations that were created."""
+    fca_policy_association_failures: (
+        list[FlexCostAllocationOperationFailure] | None
+    ) = ...
+    """
+    Information about the network resources that could not be associated
+    with the policy.
+    """
     response_metadata: ResponseMetadata = ...
     """
     Metadata about the response that produced this output. Use this to
@@ -6444,24 +6566,3 @@ class CancelSpotInstanceRequestsInputDict(TypedDict, total=False):
     """
     spot_instance_request_ids: Required[Sequence[str]]
     """The IDs of the Spot Instance requests."""
-
-@dataclass(kw_only=True)
-class CancelSpotInstanceRequestsOutput(_SerdeShape):
-    """Contains the output of CancelSpotInstanceRequests."""
-
-    cancelled_spot_instance_requests: list[CancelledSpotInstanceRequest] | None = ...
-    """The Spot Instance requests."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-class CancelSpotInstanceRequestState(UnknownEnumMixin, StrEnum):
-    ACTIVE = "active"
-    OPEN = "open"
-    CLOSED = "closed"
-    CANCELLED = "cancelled"
-    COMPLETED = "completed"

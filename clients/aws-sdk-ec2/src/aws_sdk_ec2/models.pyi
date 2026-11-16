@@ -174,6 +174,9 @@ from ._private.models_00 import (
     AssociateNatGatewayAddressInput as AssociateNatGatewayAddressInput,
     AssociateNatGatewayAddressInputDict as AssociateNatGatewayAddressInputDict,
     AssociateNatGatewayAddressOutput as AssociateNatGatewayAddressOutput,
+    AssociateNetworkingFlexCostAllocationPolicyInput as AssociateNetworkingFlexCostAllocationPolicyInput,
+    AssociateNetworkingFlexCostAllocationPolicyInputDict as AssociateNetworkingFlexCostAllocationPolicyInputDict,
+    AssociateNetworkingFlexCostAllocationPolicyOutput as AssociateNetworkingFlexCostAllocationPolicyOutput,
     AssociateRouteServerInput as AssociateRouteServerInput,
     AssociateRouteServerInputDict as AssociateRouteServerInputDict,
     AssociateRouteServerOutput as AssociateRouteServerOutput,
@@ -334,11 +337,11 @@ from ._private.models_00 import (
     CancelSpotFleetRequestsSuccessItem as CancelSpotFleetRequestsSuccessItem,
     CancelSpotInstanceRequestsInput as CancelSpotInstanceRequestsInput,
     CancelSpotInstanceRequestsInputDict as CancelSpotInstanceRequestsInputDict,
-    CancelSpotInstanceRequestsOutput as CancelSpotInstanceRequestsOutput,
-    CancelSpotInstanceRequestState as CancelSpotInstanceRequestState,
 )
 
 from ._private.models_01 import (
+    CancelSpotInstanceRequestsOutput as CancelSpotInstanceRequestsOutput,
+    CancelSpotInstanceRequestState as CancelSpotInstanceRequestState,
     CapacityAllocation as CapacityAllocation,
     CapacityAllocationMetadataEntry as CapacityAllocationMetadataEntry,
     CapacityBlock as CapacityBlock,
@@ -641,6 +644,9 @@ from ._private.models_01 import (
     CreateManagedPrefixListInput as CreateManagedPrefixListInput,
     CreateManagedPrefixListInputDict as CreateManagedPrefixListInputDict,
     CreateManagedPrefixListOutput as CreateManagedPrefixListOutput,
+    CreateMetricCategoryInput as CreateMetricCategoryInput,
+    CreateMetricCategoryInputDict as CreateMetricCategoryInputDict,
+    CreateMetricCategoryOutput as CreateMetricCategoryOutput,
     CreateNatGatewayInput as CreateNatGatewayInput,
     CreateNatGatewayInputDict as CreateNatGatewayInputDict,
     CreateNatGatewayOutput as CreateNatGatewayOutput,
@@ -650,6 +656,9 @@ from ._private.models_01 import (
     CreateNetworkAclInput as CreateNetworkAclInput,
     CreateNetworkAclInputDict as CreateNetworkAclInputDict,
     CreateNetworkAclOutput as CreateNetworkAclOutput,
+    CreateNetworkingFlexCostAllocationPolicyInput as CreateNetworkingFlexCostAllocationPolicyInput,
+    CreateNetworkingFlexCostAllocationPolicyInputDict as CreateNetworkingFlexCostAllocationPolicyInputDict,
+    CreateNetworkingFlexCostAllocationPolicyOutput as CreateNetworkingFlexCostAllocationPolicyOutput,
     CreateNetworkInsightsAccessScopeInput as CreateNetworkInsightsAccessScopeInput,
     CreateNetworkInsightsAccessScopeInputDict as CreateNetworkInsightsAccessScopeInputDict,
     CreateNetworkInsightsAccessScopeOutput as CreateNetworkInsightsAccessScopeOutput,
@@ -665,6 +674,9 @@ from ._private.models_01 import (
     CreatePlacementGroupInput as CreatePlacementGroupInput,
     CreatePlacementGroupInputDict as CreatePlacementGroupInputDict,
     CreatePlacementGroupOutput as CreatePlacementGroupOutput,
+)
+
+from ._private.models_02 import (
     CreatePublicIpv4PoolInput as CreatePublicIpv4PoolInput,
     CreatePublicIpv4PoolInputDict as CreatePublicIpv4PoolInputDict,
     CreatePublicIpv4PoolOutput as CreatePublicIpv4PoolOutput,
@@ -674,9 +686,6 @@ from ._private.models_01 import (
     CreateReservedInstancesListingInput as CreateReservedInstancesListingInput,
     CreateReservedInstancesListingInputDict as CreateReservedInstancesListingInputDict,
     CreateReservedInstancesListingOutput as CreateReservedInstancesListingOutput,
-)
-
-from ._private.models_02 import (
     CreateRestoreImageTaskInput as CreateRestoreImageTaskInput,
     CreateRestoreImageTaskInputDict as CreateRestoreImageTaskInputDict,
     CreateRestoreImageTaskOutput as CreateRestoreImageTaskOutput,
@@ -998,6 +1007,9 @@ from ._private.models_02 import (
     DeleteManagedPrefixListInput as DeleteManagedPrefixListInput,
     DeleteManagedPrefixListInputDict as DeleteManagedPrefixListInputDict,
     DeleteManagedPrefixListOutput as DeleteManagedPrefixListOutput,
+    DeleteMetricCategoryInput as DeleteMetricCategoryInput,
+    DeleteMetricCategoryInputDict as DeleteMetricCategoryInputDict,
+    DeleteMetricCategoryOutput as DeleteMetricCategoryOutput,
     DeleteNatGatewayInput as DeleteNatGatewayInput,
     DeleteNatGatewayInputDict as DeleteNatGatewayInputDict,
     DeleteNatGatewayOutput as DeleteNatGatewayOutput,
@@ -1007,6 +1019,9 @@ from ._private.models_02 import (
     DeleteNetworkAclInput as DeleteNetworkAclInput,
     DeleteNetworkAclInputDict as DeleteNetworkAclInputDict,
     DeleteNetworkAclOutput as DeleteNetworkAclOutput,
+    DeleteNetworkingFlexCostAllocationPoliciesInput as DeleteNetworkingFlexCostAllocationPoliciesInput,
+    DeleteNetworkingFlexCostAllocationPoliciesInputDict as DeleteNetworkingFlexCostAllocationPoliciesInputDict,
+    DeleteNetworkingFlexCostAllocationPoliciesOutput as DeleteNetworkingFlexCostAllocationPoliciesOutput,
     DeleteNetworkInsightsAccessScopeAnalysisInput as DeleteNetworkInsightsAccessScopeAnalysisInput,
     DeleteNetworkInsightsAccessScopeAnalysisInputDict as DeleteNetworkInsightsAccessScopeAnalysisInputDict,
     DeleteNetworkInsightsAccessScopeAnalysisOutput as DeleteNetworkInsightsAccessScopeAnalysisOutput,
@@ -1035,6 +1050,9 @@ from ._private.models_02 import (
     DeleteQueuedReservedInstancesErrorCode as DeleteQueuedReservedInstancesErrorCode,
     DeleteQueuedReservedInstancesInput as DeleteQueuedReservedInstancesInput,
     DeleteQueuedReservedInstancesInputDict as DeleteQueuedReservedInstancesInputDict,
+)
+
+from ._private.models_03 import (
     DeleteQueuedReservedInstancesOutput as DeleteQueuedReservedInstancesOutput,
     DeleteRouteInput as DeleteRouteInput,
     DeleteRouteInputDict as DeleteRouteInputDict,
@@ -1050,9 +1068,6 @@ from ._private.models_02 import (
     DeleteRouteServerPeerOutput as DeleteRouteServerPeerOutput,
     DeleteRouteTableInput as DeleteRouteTableInput,
     DeleteRouteTableInputDict as DeleteRouteTableInputDict,
-)
-
-from ._private.models_03 import (
     DeleteRouteTableOutput as DeleteRouteTableOutput,
     DeleteSecondaryNetworkInput as DeleteSecondaryNetworkInput,
     DeleteSecondaryNetworkInputDict as DeleteSecondaryNetworkInputDict,
@@ -1411,6 +1426,9 @@ from ._private.models_03 import (
     DescribeInstanceConnectEndpointsOutput as DescribeInstanceConnectEndpointsOutput,
     DescribeInstanceCreditSpecificationsInput as DescribeInstanceCreditSpecificationsInput,
     DescribeInstanceCreditSpecificationsInputDict as DescribeInstanceCreditSpecificationsInputDict,
+)
+
+from ._private.models_04 import (
     DescribeInstanceCreditSpecificationsOutput as DescribeInstanceCreditSpecificationsOutput,
     DescribeInstanceEventNotificationAttributesInput as DescribeInstanceEventNotificationAttributesInput,
     DescribeInstanceEventNotificationAttributesInputDict as DescribeInstanceEventNotificationAttributesInputDict,
@@ -1426,9 +1444,6 @@ from ._private.models_03 import (
     DescribeInstancesOutput as DescribeInstancesOutput,
     DescribeInstanceSqlHaHistoryStatesInput as DescribeInstanceSqlHaHistoryStatesInput,
     DescribeInstanceSqlHaHistoryStatesInputDict as DescribeInstanceSqlHaHistoryStatesInputDict,
-)
-
-from ._private.models_04 import (
     DescribeInstanceSqlHaHistoryStatesOutput as DescribeInstanceSqlHaHistoryStatesOutput,
     DescribeInstanceSqlHaStatesInput as DescribeInstanceSqlHaStatesInput,
     DescribeInstanceSqlHaStatesInputDict as DescribeInstanceSqlHaStatesInputDict,
@@ -1526,6 +1541,9 @@ from ._private.models_04 import (
     DescribeManagedPrefixListsInput as DescribeManagedPrefixListsInput,
     DescribeManagedPrefixListsInputDict as DescribeManagedPrefixListsInputDict,
     DescribeManagedPrefixListsOutput as DescribeManagedPrefixListsOutput,
+    DescribeMetricCategoriesInput as DescribeMetricCategoriesInput,
+    DescribeMetricCategoriesInputDict as DescribeMetricCategoriesInputDict,
+    DescribeMetricCategoriesOutput as DescribeMetricCategoriesOutput,
     DescribeMovingAddressesInput as DescribeMovingAddressesInput,
     DescribeMovingAddressesInputDict as DescribeMovingAddressesInputDict,
     DescribeMovingAddressesOutput as DescribeMovingAddressesOutput,
@@ -1535,6 +1553,12 @@ from ._private.models_04 import (
     DescribeNetworkAclsInput as DescribeNetworkAclsInput,
     DescribeNetworkAclsInputDict as DescribeNetworkAclsInputDict,
     DescribeNetworkAclsOutput as DescribeNetworkAclsOutput,
+    DescribeNetworkingFlexCostAllocationPoliciesInput as DescribeNetworkingFlexCostAllocationPoliciesInput,
+    DescribeNetworkingFlexCostAllocationPoliciesInputDict as DescribeNetworkingFlexCostAllocationPoliciesInputDict,
+    DescribeNetworkingFlexCostAllocationPoliciesOutput as DescribeNetworkingFlexCostAllocationPoliciesOutput,
+    DescribeNetworkingFlexCostAllocationPolicyAssociationsInput as DescribeNetworkingFlexCostAllocationPolicyAssociationsInput,
+    DescribeNetworkingFlexCostAllocationPolicyAssociationsInputDict as DescribeNetworkingFlexCostAllocationPolicyAssociationsInputDict,
+    DescribeNetworkingFlexCostAllocationPolicyAssociationsOutput as DescribeNetworkingFlexCostAllocationPolicyAssociationsOutput,
     DescribeNetworkInsightsAccessScopeAnalysesInput as DescribeNetworkInsightsAccessScopeAnalysesInput,
     DescribeNetworkInsightsAccessScopeAnalysesInputDict as DescribeNetworkInsightsAccessScopeAnalysesInputDict,
     DescribeNetworkInsightsAccessScopeAnalysesOutput as DescribeNetworkInsightsAccessScopeAnalysesOutput,
@@ -1780,6 +1804,9 @@ from ._private.models_04 import (
     DescribeVpcEndpointServicePermissionsOutput as DescribeVpcEndpointServicePermissionsOutput,
     DescribeVpcEndpointServicesInput as DescribeVpcEndpointServicesInput,
     DescribeVpcEndpointServicesInputDict as DescribeVpcEndpointServicesInputDict,
+)
+
+from ._private.models_05 import (
     DescribeVpcEndpointServicesOutput as DescribeVpcEndpointServicesOutput,
     DescribeVpcEndpointsInput as DescribeVpcEndpointsInput,
     DescribeVpcEndpointsInputDict as DescribeVpcEndpointsInputDict,
@@ -1803,9 +1830,6 @@ from ._private.models_04 import (
     DestinationOptionsRequest as DestinationOptionsRequest,
     DestinationOptionsRequestDict as DestinationOptionsRequestDict,
     DestinationOptionsResponse as DestinationOptionsResponse,
-)
-
-from ._private.models_05 import (
     DetachClassicLinkVpcInput as DetachClassicLinkVpcInput,
     DetachClassicLinkVpcInputDict as DetachClassicLinkVpcInputDict,
     DetachClassicLinkVpcOutput as DetachClassicLinkVpcOutput,
@@ -1940,6 +1964,9 @@ from ._private.models_05 import (
     DisassociateNatGatewayAddressInput as DisassociateNatGatewayAddressInput,
     DisassociateNatGatewayAddressInputDict as DisassociateNatGatewayAddressInputDict,
     DisassociateNatGatewayAddressOutput as DisassociateNatGatewayAddressOutput,
+    DisassociateNetworkingFlexCostAllocationPolicyInput as DisassociateNetworkingFlexCostAllocationPolicyInput,
+    DisassociateNetworkingFlexCostAllocationPolicyInputDict as DisassociateNetworkingFlexCostAllocationPolicyInputDict,
+    DisassociateNetworkingFlexCostAllocationPolicyOutput as DisassociateNetworkingFlexCostAllocationPolicyOutput,
     DisassociateRouteServerInput as DisassociateRouteServerInput,
     DisassociateRouteServerInputDict as DisassociateRouteServerInputDict,
     DisassociateRouteServerOutput as DisassociateRouteServerOutput,
@@ -2130,6 +2157,9 @@ from ._private.models_05 import (
     ExportImageInput as ExportImageInput,
     ExportImageInputDict as ExportImageInputDict,
     ExportImageOutput as ExportImageOutput,
+)
+
+from ._private.models_06 import (
     ExportImageTask as ExportImageTask,
     ExportTask as ExportTask,
     ExportTaskS3Location as ExportTaskS3Location,
@@ -2155,9 +2185,6 @@ from ._private.models_05 import (
     FastLaunchResourceType as FastLaunchResourceType,
     FastLaunchSnapshotConfigurationRequest as FastLaunchSnapshotConfigurationRequest,
     FastLaunchSnapshotConfigurationRequestDict as FastLaunchSnapshotConfigurationRequestDict,
-)
-
-from ._private.models_06 import (
     FastLaunchSnapshotConfigurationResponse as FastLaunchSnapshotConfigurationResponse,
     FastLaunchStateCode as FastLaunchStateCode,
     FastSnapshotRestoreStateCode as FastSnapshotRestoreStateCode,
@@ -2212,6 +2239,21 @@ from ._private.models_06 import (
     FleetSpotMaintenanceStrategiesRequestDict as FleetSpotMaintenanceStrategiesRequestDict,
     FleetStateCode as FleetStateCode,
     FleetType as FleetType,
+    FlexCostAllocationAssociationMode as FlexCostAllocationAssociationMode,
+    FlexCostAllocationCidrMapping as FlexCostAllocationCidrMapping,
+    FlexCostAllocationCidrMappingDict as FlexCostAllocationCidrMappingDict,
+    FlexCostAllocationCidrRangeSpecifications as FlexCostAllocationCidrRangeSpecifications,
+    FlexCostAllocationCidrRangeSpecificationsDict as FlexCostAllocationCidrRangeSpecificationsDict,
+    FlexCostAllocationCostDimension as FlexCostAllocationCostDimension,
+    FlexCostAllocationNetworkResourceScope as FlexCostAllocationNetworkResourceScope,
+    FlexCostAllocationNetworkResourceScopeDict as FlexCostAllocationNetworkResourceScopeDict,
+    FlexCostAllocationNetworkResourceScopeType as FlexCostAllocationNetworkResourceScopeType,
+    FlexCostAllocationNetworkResourceType as FlexCostAllocationNetworkResourceType,
+    FlexCostAllocationOperationFailure as FlexCostAllocationOperationFailure,
+    FlexCostAllocationPolicyAssociationDescription as FlexCostAllocationPolicyAssociationDescription,
+    FlexCostAllocationPolicyDescription as FlexCostAllocationPolicyDescription,
+    FlexCostAllocationPolicyVersion as FlexCostAllocationPolicyVersion,
+    FlexCostAllocationReportingGranularity as FlexCostAllocationReportingGranularity,
     FlexibleEnaQueuesSupport as FlexibleEnaQueuesSupport,
     FlowLog as FlowLog,
     FlowLogsResourceType as FlowLogsResourceType,
@@ -2384,6 +2426,9 @@ from ._private.models_06 import (
     GetManagedResourceVisibilityInput as GetManagedResourceVisibilityInput,
     GetManagedResourceVisibilityInputDict as GetManagedResourceVisibilityInputDict,
     GetManagedResourceVisibilityOutput as GetManagedResourceVisibilityOutput,
+    GetNetworkingFlexCostAllocationPolicyVersionsInput as GetNetworkingFlexCostAllocationPolicyVersionsInput,
+    GetNetworkingFlexCostAllocationPolicyVersionsInputDict as GetNetworkingFlexCostAllocationPolicyVersionsInputDict,
+    GetNetworkingFlexCostAllocationPolicyVersionsOutput as GetNetworkingFlexCostAllocationPolicyVersionsOutput,
     GetNetworkInsightsAccessScopeAnalysisFindingsInput as GetNetworkInsightsAccessScopeAnalysisFindingsInput,
     GetNetworkInsightsAccessScopeAnalysisFindingsInputDict as GetNetworkInsightsAccessScopeAnalysisFindingsInputDict,
     GetNetworkInsightsAccessScopeAnalysisFindingsOutput as GetNetworkInsightsAccessScopeAnalysisFindingsOutput,
@@ -2470,6 +2515,9 @@ from ._private.models_06 import (
     GetVpnTunnelReplacementStatusOutput as GetVpnTunnelReplacementStatusOutput,
     GpuDeviceInfo as GpuDeviceInfo,
     GpuDeviceMemoryInfo as GpuDeviceMemoryInfo,
+)
+
+from ._private.models_07 import (
     GpuInfo as GpuInfo,
     GroupBy as GroupBy,
     GroupIdentifier as GroupIdentifier,
@@ -2509,9 +2557,6 @@ from ._private.models_06 import (
     IamInstanceProfileAssociationState as IamInstanceProfileAssociationState,
     IamInstanceProfileSpecification as IamInstanceProfileSpecification,
     IamInstanceProfileSpecificationDict as IamInstanceProfileSpecificationDict,
-)
-
-from ._private.models_07 import (
     IcmpTypeCode as IcmpTypeCode,
     IcmpTypeCodeDict as IcmpTypeCodeDict,
     IdFormat as IdFormat,
@@ -2615,6 +2660,8 @@ from ._private.models_07 import (
     InstanceEventWindowTimeRangeRequestDict as InstanceEventWindowTimeRangeRequestDict,
     InstanceExportDetails as InstanceExportDetails,
     InstanceFamilyCreditSpecification as InstanceFamilyCreditSpecification,
+    InstanceFlexCostAllocationPolicyDocument as InstanceFlexCostAllocationPolicyDocument,
+    InstanceFlexCostAllocationPolicyDocumentDict as InstanceFlexCostAllocationPolicyDocumentDict,
     InstanceGeneration as InstanceGeneration,
     InstanceHealthStatus as InstanceHealthStatus,
     InstanceImageMetadata as InstanceImageMetadata,
@@ -2769,6 +2816,9 @@ from ._private.models_07 import (
     IpamPublicAddressAssociationStatus as IpamPublicAddressAssociationStatus,
     IpamPublicAddressAwsService as IpamPublicAddressAwsService,
     IpamPublicAddressSecurityGroup as IpamPublicAddressSecurityGroup,
+)
+
+from ._private.models_08 import (
     IpamPublicAddressTag as IpamPublicAddressTag,
     IpamPublicAddressTags as IpamPublicAddressTags,
     IpamPublicAddressType as IpamPublicAddressType,
@@ -2804,9 +2854,6 @@ from ._private.models_07 import (
     IpScopeEnum as IpScopeEnum,
     IpSource as IpSource,
     Ipv4PrefixSpecification as Ipv4PrefixSpecification,
-)
-
-from ._private.models_08 import (
     Ipv4PrefixSpecificationRequest as Ipv4PrefixSpecificationRequest,
     Ipv4PrefixSpecificationRequestDict as Ipv4PrefixSpecificationRequestDict,
     Ipv4PrefixSpecificationResponse as Ipv4PrefixSpecificationResponse,
@@ -2981,6 +3028,7 @@ from ._private.models_08 import (
     MemoryMiBRequestDict as MemoryMiBRequestDict,
     MetadataDefaultHttpTokensState as MetadataDefaultHttpTokensState,
     Metric as Metric,
+    MetricCategory as MetricCategory,
     MetricDataResult as MetricDataResult,
     MetricPoint as MetricPoint,
     MetricType as MetricType,
@@ -3102,6 +3150,9 @@ from ._private.models_08 import (
     ModifyIpamRoutingPolicyRegistrationOutput as ModifyIpamRoutingPolicyRegistrationOutput,
     ModifyIpamScopeInput as ModifyIpamScopeInput,
     ModifyIpamScopeInputDict as ModifyIpamScopeInputDict,
+)
+
+from ._private.models_09 import (
     ModifyIpamScopeOutput as ModifyIpamScopeOutput,
     ModifyLaunchTemplateInput as ModifyLaunchTemplateInput,
     ModifyLaunchTemplateInputDict as ModifyLaunchTemplateInputDict,
@@ -3115,6 +3166,12 @@ from ._private.models_08 import (
     ModifyManagedResourceVisibilityInput as ModifyManagedResourceVisibilityInput,
     ModifyManagedResourceVisibilityInputDict as ModifyManagedResourceVisibilityInputDict,
     ModifyManagedResourceVisibilityOutput as ModifyManagedResourceVisibilityOutput,
+    ModifyMetricCategoryInput as ModifyMetricCategoryInput,
+    ModifyMetricCategoryInputDict as ModifyMetricCategoryInputDict,
+    ModifyMetricCategoryOutput as ModifyMetricCategoryOutput,
+    ModifyNetworkingFlexCostAllocationPolicyInput as ModifyNetworkingFlexCostAllocationPolicyInput,
+    ModifyNetworkingFlexCostAllocationPolicyInputDict as ModifyNetworkingFlexCostAllocationPolicyInputDict,
+    ModifyNetworkingFlexCostAllocationPolicyOutput as ModifyNetworkingFlexCostAllocationPolicyOutput,
     ModifyNetworkInterfaceAttributeInput as ModifyNetworkInterfaceAttributeInput,
     ModifyNetworkInterfaceAttributeInputDict as ModifyNetworkInterfaceAttributeInputDict,
     ModifyNetworkInterfaceAttributeOutput as ModifyNetworkInterfaceAttributeOutput,
@@ -3153,9 +3210,6 @@ from ._private.models_08 import (
     ModifyTrafficMirrorFilterRuleOutput as ModifyTrafficMirrorFilterRuleOutput,
     ModifyTrafficMirrorSessionInput as ModifyTrafficMirrorSessionInput,
     ModifyTrafficMirrorSessionInputDict as ModifyTrafficMirrorSessionInputDict,
-)
-
-from ._private.models_09 import (
     ModifyTrafficMirrorSessionOutput as ModifyTrafficMirrorSessionOutput,
     ModifyTransitGatewayAttachmentNatConfigurationInput as ModifyTransitGatewayAttachmentNatConfigurationInput,
     ModifyTransitGatewayAttachmentNatConfigurationInputDict as ModifyTransitGatewayAttachmentNatConfigurationInputDict,
@@ -3289,6 +3343,8 @@ from ._private.models_09 import (
     MoveStatus as MoveStatus,
     MovingAddressStatus as MovingAddressStatus,
     MulticastSupportValue as MulticastSupportValue,
+    NatFlexCostAllocationPolicyDocument as NatFlexCostAllocationPolicyDocument,
+    NatFlexCostAllocationPolicyDocumentDict as NatFlexCostAllocationPolicyDocumentDict,
     NatGateway as NatGateway,
     NatGatewayAddress as NatGatewayAddress,
     NatGatewayAddressStatus as NatGatewayAddressStatus,
@@ -3372,6 +3428,8 @@ from ._private.models_09 import (
     PayerResponsibilityType as PayerResponsibilityType,
     PaymentOption as PaymentOption,
     PciId as PciId,
+    PcxFlexCostAllocationPolicyDocument as PcxFlexCostAllocationPolicyDocument,
+    PcxFlexCostAllocationPolicyDocumentDict as PcxFlexCostAllocationPolicyDocumentDict,
     PeeringAttachmentStatus as PeeringAttachmentStatus,
     PeeringConnectionOptions as PeeringConnectionOptions,
     PeeringConnectionOptionsRequest as PeeringConnectionOptionsRequest,
@@ -3438,6 +3496,9 @@ from ._private.models_09 import (
     ProcessorInfo as ProcessorInfo,
     ProductCode as ProductCode,
     ProductCodeValues as ProductCodeValues,
+)
+
+from ._private.models_10 import (
     PropagatingVgw as PropagatingVgw,
     Protocol as Protocol,
     ProtocolValue as ProtocolValue,
@@ -3490,9 +3551,6 @@ from ._private.models_09 import (
     RegisteredInstance as RegisteredInstance,
     RegisterImageInput as RegisterImageInput,
     RegisterImageInputDict as RegisterImageInputDict,
-)
-
-from ._private.models_10 import (
     RegisterImageOutput as RegisterImageOutput,
     RegisterInstanceEventNotificationAttributesInput as RegisterInstanceEventNotificationAttributesInput,
     RegisterInstanceEventNotificationAttributesInputDict as RegisterInstanceEventNotificationAttributesInputDict,
@@ -3781,6 +3839,9 @@ from ._private.models_10 import (
     SecondaryNetworkState as SecondaryNetworkState,
     SecondaryNetworkType as SecondaryNetworkType,
     SecondarySubnet as SecondarySubnet,
+)
+
+from ._private.models_11 import (
     SecondarySubnetCidrBlockAssociationState as SecondarySubnetCidrBlockAssociationState,
     SecondarySubnetIpv4CidrBlockAssociation as SecondarySubnetIpv4CidrBlockAssociation,
     SecondarySubnetState as SecondarySubnetState,
@@ -3829,9 +3890,6 @@ from ._private.models_10 import (
     SnapshotLocationEnum as SnapshotLocationEnum,
     SnapshotRecycleBinInfo as SnapshotRecycleBinInfo,
     SnapshotReturnCodes as SnapshotReturnCodes,
-)
-
-from ._private.models_11 import (
     SnapshotState as SnapshotState,
     SnapshotTaskDetail as SnapshotTaskDetail,
     SnapshotTierStatus as SnapshotTierStatus,
@@ -4084,6 +4142,9 @@ from ._private.models_11 import (
     UnmonitorInstancesOutput as UnmonitorInstancesOutput,
     UnsuccessfulAssociationResponseObject as UnsuccessfulAssociationResponseObject,
     UnsuccessfulInstanceCreditSpecificationErrorCode as UnsuccessfulInstanceCreditSpecificationErrorCode,
+)
+
+from ._private.models_12 import (
     UnsuccessfulInstanceCreditSpecificationItem as UnsuccessfulInstanceCreditSpecificationItem,
     UnsuccessfulInstanceCreditSpecificationItemError as UnsuccessfulInstanceCreditSpecificationItemError,
     UnsuccessfulItem as UnsuccessfulItem,
@@ -4135,9 +4196,6 @@ from ._private.models_11 import (
     VerifiedAccessEndpointStatus as VerifiedAccessEndpointStatus,
     VerifiedAccessEndpointStatusCode as VerifiedAccessEndpointStatusCode,
     VerifiedAccessEndpointTarget as VerifiedAccessEndpointTarget,
-)
-
-from ._private.models_12 import (
     VerifiedAccessEndpointType as VerifiedAccessEndpointType,
     VerifiedAccessGroup as VerifiedAccessGroup,
     VerifiedAccessInstance as VerifiedAccessInstance,
@@ -4339,6 +4397,10 @@ ASSOCIATE_IPAM_RESOURCE_DISCOVERY: APIOperation[
 ]
 ASSOCIATE_NAT_GATEWAY_ADDRESS: APIOperation[
     AssociateNatGatewayAddressInput, AssociateNatGatewayAddressOutput
+]
+ASSOCIATE_NETWORKING_FLEX_COST_ALLOCATION_POLICY: APIOperation[
+    AssociateNetworkingFlexCostAllocationPolicyInput,
+    AssociateNetworkingFlexCostAllocationPolicyOutput,
 ]
 ASSOCIATE_ROUTE_SERVER: APIOperation[
     AssociateRouteServerInput, AssociateRouteServerOutput
@@ -4561,10 +4623,17 @@ CREATE_MAC_SYSTEM_INTEGRITY_PROTECTION_MODIFICATION_TASK: APIOperation[
 CREATE_MANAGED_PREFIX_LIST: APIOperation[
     CreateManagedPrefixListInput, CreateManagedPrefixListOutput
 ]
+CREATE_METRIC_CATEGORY: APIOperation[
+    CreateMetricCategoryInput, CreateMetricCategoryOutput
+]
 CREATE_NAT_GATEWAY: APIOperation[CreateNatGatewayInput, CreateNatGatewayOutput]
 CREATE_NETWORK_ACL: APIOperation[CreateNetworkAclInput, CreateNetworkAclOutput]
 CREATE_NETWORK_ACL_ENTRY: APIOperation[
     CreateNetworkAclEntryInput, CreateNetworkAclEntryOutput
+]
+CREATE_NETWORKING_FLEX_COST_ALLOCATION_POLICY: APIOperation[
+    CreateNetworkingFlexCostAllocationPolicyInput,
+    CreateNetworkingFlexCostAllocationPolicyOutput,
 ]
 CREATE_NETWORK_INSIGHTS_ACCESS_SCOPE: APIOperation[
     CreateNetworkInsightsAccessScopeInput, CreateNetworkInsightsAccessScopeOutput
@@ -4819,10 +4888,17 @@ DELETE_LOCAL_GATEWAY_VIRTUAL_INTERFACE_GROUP: APIOperation[
 DELETE_MANAGED_PREFIX_LIST: APIOperation[
     DeleteManagedPrefixListInput, DeleteManagedPrefixListOutput
 ]
+DELETE_METRIC_CATEGORY: APIOperation[
+    DeleteMetricCategoryInput, DeleteMetricCategoryOutput
+]
 DELETE_NAT_GATEWAY: APIOperation[DeleteNatGatewayInput, DeleteNatGatewayOutput]
 DELETE_NETWORK_ACL: APIOperation[DeleteNetworkAclInput, DeleteNetworkAclOutput]
 DELETE_NETWORK_ACL_ENTRY: APIOperation[
     DeleteNetworkAclEntryInput, DeleteNetworkAclEntryOutput
+]
+DELETE_NETWORKING_FLEX_COST_ALLOCATION_POLICIES: APIOperation[
+    DeleteNetworkingFlexCostAllocationPoliciesInput,
+    DeleteNetworkingFlexCostAllocationPoliciesOutput,
 ]
 DELETE_NETWORK_INSIGHTS_ACCESS_SCOPE: APIOperation[
     DeleteNetworkInsightsAccessScopeInput, DeleteNetworkInsightsAccessScopeOutput
@@ -5287,11 +5363,22 @@ DESCRIBE_MAC_MODIFICATION_TASKS: APIOperation[
 DESCRIBE_MANAGED_PREFIX_LISTS: APIOperation[
     DescribeManagedPrefixListsInput, DescribeManagedPrefixListsOutput
 ]
+DESCRIBE_METRIC_CATEGORIES: APIOperation[
+    DescribeMetricCategoriesInput, DescribeMetricCategoriesOutput
+]
 DESCRIBE_MOVING_ADDRESSES: APIOperation[
     DescribeMovingAddressesInput, DescribeMovingAddressesOutput
 ]
 DESCRIBE_NAT_GATEWAYS: APIOperation[DescribeNatGatewaysInput, DescribeNatGatewaysOutput]
 DESCRIBE_NETWORK_ACLS: APIOperation[DescribeNetworkAclsInput, DescribeNetworkAclsOutput]
+DESCRIBE_NETWORKING_FLEX_COST_ALLOCATION_POLICIES: APIOperation[
+    DescribeNetworkingFlexCostAllocationPoliciesInput,
+    DescribeNetworkingFlexCostAllocationPoliciesOutput,
+]
+DESCRIBE_NETWORKING_FLEX_COST_ALLOCATION_POLICY_ASSOCIATIONS: APIOperation[
+    DescribeNetworkingFlexCostAllocationPolicyAssociationsInput,
+    DescribeNetworkingFlexCostAllocationPolicyAssociationsOutput,
+]
 DESCRIBE_NETWORK_INSIGHTS_ACCESS_SCOPE_ANALYSES: APIOperation[
     DescribeNetworkInsightsAccessScopeAnalysesInput,
     DescribeNetworkInsightsAccessScopeAnalysesOutput,
@@ -5664,6 +5751,10 @@ DISASSOCIATE_IPAM_RESOURCE_DISCOVERY: APIOperation[
 DISASSOCIATE_NAT_GATEWAY_ADDRESS: APIOperation[
     DisassociateNatGatewayAddressInput, DisassociateNatGatewayAddressOutput
 ]
+DISASSOCIATE_NETWORKING_FLEX_COST_ALLOCATION_POLICY: APIOperation[
+    DisassociateNetworkingFlexCostAllocationPolicyInput,
+    DisassociateNetworkingFlexCostAllocationPolicyOutput,
+]
 DISASSOCIATE_ROUTE_SERVER: APIOperation[
     DisassociateRouteServerInput, DisassociateRouteServerOutput
 ]
@@ -5939,6 +6030,10 @@ GET_MANAGED_PREFIX_LIST_ENTRIES: APIOperation[
 GET_MANAGED_RESOURCE_VISIBILITY: APIOperation[
     GetManagedResourceVisibilityInput, GetManagedResourceVisibilityOutput
 ]
+GET_NETWORKING_FLEX_COST_ALLOCATION_POLICY_VERSIONS: APIOperation[
+    GetNetworkingFlexCostAllocationPolicyVersionsInput,
+    GetNetworkingFlexCostAllocationPolicyVersionsOutput,
+]
 GET_NETWORK_INSIGHTS_ACCESS_SCOPE_ANALYSIS_FINDINGS: APIOperation[
     GetNetworkInsightsAccessScopeAnalysisFindingsInput,
     GetNetworkInsightsAccessScopeAnalysisFindingsOutput,
@@ -6168,6 +6263,13 @@ MODIFY_MANAGED_PREFIX_LIST: APIOperation[
 ]
 MODIFY_MANAGED_RESOURCE_VISIBILITY: APIOperation[
     ModifyManagedResourceVisibilityInput, ModifyManagedResourceVisibilityOutput
+]
+MODIFY_METRIC_CATEGORY: APIOperation[
+    ModifyMetricCategoryInput, ModifyMetricCategoryOutput
+]
+MODIFY_NETWORKING_FLEX_COST_ALLOCATION_POLICY: APIOperation[
+    ModifyNetworkingFlexCostAllocationPolicyInput,
+    ModifyNetworkingFlexCostAllocationPolicyOutput,
 ]
 MODIFY_NETWORK_INTERFACE_ATTRIBUTE: APIOperation[
     ModifyNetworkInterfaceAttributeInput, ModifyNetworkInterfaceAttributeOutput

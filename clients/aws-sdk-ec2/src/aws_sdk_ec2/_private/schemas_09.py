@@ -20,9 +20,6 @@ _i = "item"
 _ANS = "AcceleratorNameSet"
 _ATMMB = "AcceleratorTotalMemoryMiB"
 _ATS = "AcceleratorTypeSet"
-_ins = "instance"
-_ni = "network_interface"
-_ni_ = "network-interface"
 _cb_ = "capacity-block"
 _Ke = "Key"
 _ke = "key"
@@ -34,11 +31,13 @@ _sm = "smithy.api#input"
 _smi = "smithy.api#required"
 _TSa = "TagSpecifications"
 _DR = "DryRun"
+_p = "pending"
 _d = "disabled"
 _smit = "smithy.api#output"
 _CRI = "CapacityReservationId"
 _St = "State"
 _st = "state"
+_fa = "failed"
 _SIu = "SubnetId"
 _sI = "subnetId"
 _OIw = "OwnerId"
@@ -72,9 +71,6 @@ _EOIG = "EgressOnlyInternetGateway"
 _eOIG = "egressOnlyInternetGateway"
 _IT = "InstanceType"
 _iT = "instanceType"
-_Pri = "Principal"
-_prin = "principal"
-_stan = "standard"
 _Af = "Affinity"
 _IF = "InstanceFamily"
 _CTl = "ClientToken"
@@ -91,6 +87,7 @@ _AITS = "AllowedInstanceTypeSet"
 _IIn = "InstanceIds"
 _DOI = "DhcpOptionsId"
 _IIP = "IamInstanceProfile"
+_VPC_ = "VPC"
 _GIr = "GroupId"
 _gIr = "groupId"
 _IIm = "ImageId"
@@ -111,19 +108,8 @@ _iIm = "imageId"
 _SIn = "SnapshotId"
 _sIn = "snapshotId"
 _VT = "VolumeType"
-_io = "io1"
-_io_ = "io2"
-_gp = "gp2"
-_sc_ = "sc1"
-_st_ = "st1"
-_gp_ = "gp3"
 _Io = "Iops"
 _Th = "Throughput"
-_OR = "OperatorResponse"
-_Man = "Managed"
-_man = "managed"
-_HBD = "HiddenByDefault"
-_hBD = "hiddenByDefault"
 _iop = "iops"
 _vT = "volumeType"
 _thr = "throughput"
@@ -135,7 +121,6 @@ _Att = "Attachments"
 _AStt = "AttachmentSet"
 _aSt = "attachmentSet"
 _par = "parquet"
-_W = "Windows"
 _Ten = "Tenancy"
 _CB_ = "CAPACITY_BLOCK"
 _ten = "tenancy"
@@ -179,6 +164,10 @@ _DNe = "DeviceName"
 _dNe = "deviceName"
 _dOI = "dhcpOptionsId"
 _MMTI = "MacModificationTaskId"
+_MMTS = "MacModificationTaskState"
+_succ = "successful"
+_inp = "inprogress"
+_ip_____ = "in-progress"
 _MMTT = "MacModificationTaskType"
 _SIPM = "SIPModification"
 _sm_ = "sip-modification"
@@ -430,7 +419,6 @@ _eM = "errorMessage"
 _CFES = "CreateFleetErrorsSet"
 _FIl = "FleetId"
 _IISn = "InstanceIdsSet"
-_PV = "PlatformValues"
 _CFIre = "CreateFleetInstance"
 _iIns = "instanceIds"
 _Pla = "Platform"
@@ -462,15 +450,10 @@ _kdf_ = "kinesis-data-firehose"
 _FLRI = "FlowLogResourceId"
 _FLRIl = "FlowLogResourceIds"
 _FLRT = "FlowLogsResourceType"
-_VPC_ = "VPC"
 _RNG = "RegionalNatGateway"
 _CN = "CoreNetwork"
 _CNE = "CoreNetworkEdge"
 _CNAo = "CoreNetworkAttachment"
-_TRT = "TaggableResourceType"
-_asg = "auto_scaling_group"
-_asg_ = "auto-scaling-group"
-_ORper = "OperatorRequest"
 _LT = "LaunchTemplate"
 _CBr = "CreatedBy"
 _cBr = "createdBy"
@@ -478,15 +461,7 @@ _DVN = "DefaultVersionNumber"
 _dVN = "defaultVersionNumber"
 _LVN = "LatestVersionNumber"
 _lVN = "latestVersionNumber"
-_DRRV = "DeleteReplacedRootVolume"
-_RRVTI = "ReplaceRootVolumeTaskId"
-_RRVT = "ReplaceRootVolumeTask"
-_rRVTI = "replaceRootVolumeTaskId"
-_CTom = "CompleteTime"
-_cTom = "completeTime"
-_dRRV = "deleteReplacedRootVolume"
 _VSLe = "VersionStringList"
-_EGI = "ElasticGpuId"
 _FSRSC = "FastSnapshotRestoreStateCode"
 _opti = "optimizing"
 _pCr = "productCodes"
@@ -507,36 +482,13 @@ _SISL = "SnapshotIdStringList"
 _SAN = "SnapshotAttributeName"
 _cVP = "createVolumePermission"
 
-KMS_KEY_ID: StaticSchema = (3, n0, _KKI, 0)
-
-VOLUME_TYPE: StaticSchema = (
+MAC_MODIFICATION_TASK_STATE: StaticSchema = (
     14,
     n0,
-    _VT,
+    _MMTS,
     0,
-    (_stan, _io, _io_, _gp, _sc_, _st_, _gp_),
-    (
-        (-1, {_sV: _stan}),
-        (-1, {_sV: _io}),
-        (-1, {_sV: _io_}),
-        (-1, {_sV: _gp}),
-        (-1, {_sV: _sc_}),
-        (-1, {_sV: _st_}),
-        (-1, {_sV: _gp_}),
-    ),
-)
-
-OPERATOR_RESPONSE: StaticSchema = (
-    18,
-    n0,
-    _OR,
-    0,
-    (_Man, _Pri, _HBD),
-    (
-        (lambda: schemas.BOOLEAN, {_aQN: _Man, _sN: _man}),
-        (lambda: schemas.STRING, {_aQN: _Pri, _sN: _prin}),
-        (lambda: schemas.BOOLEAN, {_aQN: _HBD, _sN: _hBD}),
-    ),
+    (_succ, _fa, _inp, _p),
+    ((-1, {_sV: _succ}), (-1, {_sV: _fa}), (-1, {_sV: _ip_____}), (-1, {_sV: _p})),
 )
 
 MAC_MODIFICATION_TASK_TYPE: StaticSchema = (
@@ -563,7 +515,7 @@ MAC_MODIFICATION_TASK: StaticSchema = (
         ),
         (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _ST, _sN: _sTt}),
         (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
-        (lambda: schemas.MAC_MODIFICATION_TASK_STATE, {_aQN: _TSas, _sN: _tSa}),
+        (MAC_MODIFICATION_TASK_STATE, {_aQN: _TSas, _sN: _tSa}),
         (MAC_MODIFICATION_TASK_TYPE, {_aQN: _TT, _sN: _tT}),
     ),
 )
@@ -777,10 +729,10 @@ FLEET_EBS_BLOCK_DEVICE_REQUEST: StaticSchema = (
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.INTEGER, 0),
         (lambda: schemas.INTEGER, 0),
-        (KMS_KEY_ID, 0),
+        (lambda: schemas.KMS_KEY_ID, 0),
         (SNAPSHOT_ID, 0),
         (lambda: schemas.INTEGER, 0),
-        (VOLUME_TYPE, 0),
+        (lambda: schemas.VOLUME_TYPE, 0),
     ),
 )
 
@@ -1249,10 +1201,10 @@ EBS_BLOCK_DEVICE_RESPONSE: StaticSchema = (
         (lambda: schemas.BOOLEAN, {_aQN: _DOT, _sN: _dOT}),
         (lambda: schemas.INTEGER, {_aQN: _Io, _sN: _iop}),
         (lambda: schemas.INTEGER, {_aQN: _Th, _sN: _thr}),
-        (KMS_KEY_ID, {_aQN: _KKI, _sN: _kKI}),
+        (lambda: schemas.KMS_KEY_ID, {_aQN: _KKI, _sN: _kKI}),
         (SNAPSHOT_ID, {_aQN: _SIn, _sN: _sIn}),
         (lambda: schemas.INTEGER, {_aQN: _VSol, _sN: _vSo}),
-        (VOLUME_TYPE, {_aQN: _VT, _sN: _vT}),
+        (lambda: schemas.VOLUME_TYPE, {_aQN: _VT, _sN: _vT}),
     ),
 )
 
@@ -1547,8 +1499,6 @@ INSTANCE_IDS_SET: StaticSchema = (
     ((lambda: schemas.INSTANCE_ID, {_sN: _i}),),
 )
 
-PLATFORM_VALUES: StaticSchema = (14, n0, _PV, 0, (_W,), ((-1, {_sV: _W}),))
-
 CREATE_FLEET_INSTANCE: StaticSchema = (
     18,
     n0,
@@ -1560,7 +1510,7 @@ CREATE_FLEET_INSTANCE: StaticSchema = (
         (INSTANCE_LIFECYCLE, {_aQN: _Li, _sN: _lif}),
         (INSTANCE_IDS_SET, {_aQN: _IIn, _sN: _iIns}),
         (lambda: schemas.INSTANCE_TYPE, {_aQN: _IT, _sN: _iT}),
-        (PLATFORM_VALUES, {_aQN: _Pla, _sN: _plat}),
+        (lambda: schemas.PLATFORM_VALUES, {_aQN: _Pla, _sN: _plat}),
         (lambda: schemas.AVAILABILITY_ZONE_ID, {_aQN: _AZI, _sN: _aZI}),
         (lambda: schemas.AVAILABILITY_ZONE_NAME, {_aQN: _AZ, _sN: _aZ}),
         (lambda: schemas.SUBNET_ID, {_aQN: _SIu, _sN: _sI}),
@@ -1637,15 +1587,6 @@ FLOW_LOGS_RESOURCE_TYPE: StaticSchema = (
     ),
 )
 
-TAGGABLE_RESOURCE_TYPE: StaticSchema = (
-    14,
-    n0,
-    _TRT,
-    0,
-    (_ni, _ins, _asg),
-    ((-1, {_sV: _ni_}), (-1, {_sV: _ins}), (-1, {_sV: _asg_})),
-)
-
 INTERNET_GATEWAY: StaticSchema = (
     18,
     n0,
@@ -1658,15 +1599,6 @@ INTERNET_GATEWAY: StaticSchema = (
         (lambda: schemas.STRING, {_aQN: _OIw, _sN: _oI}),
         (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
     ),
-)
-
-OPERATOR_REQUEST: StaticSchema = (
-    18,
-    n0,
-    _ORper,
-    0,
-    (_Pri,),
-    ((lambda: schemas.STRING, 0),),
 )
 
 LAUNCH_TEMPLATE: StaticSchema = (
@@ -1683,26 +1615,7 @@ LAUNCH_TEMPLATE: StaticSchema = (
         (lambda: schemas.LONG, {_aQN: _DVN, _sN: _dVN}),
         (lambda: schemas.LONG, {_aQN: _LVN, _sN: _lVN}),
         (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
-        (OPERATOR_RESPONSE, {_aQN: _Op, _sN: _ope}),
-    ),
-)
-
-REPLACE_ROOT_VOLUME_TASK: StaticSchema = (
-    18,
-    n0,
-    _RRVT,
-    0,
-    (_RRVTI, _II, _TSas, _ST, _CTom, _Tag, _IIm, _SIn, _DRRV),
-    (
-        (lambda: schemas.REPLACE_ROOT_VOLUME_TASK_ID, {_aQN: _RRVTI, _sN: _rRVTI}),
-        (lambda: schemas.STRING, {_aQN: _II, _sN: _iI}),
-        (lambda: schemas.REPLACE_ROOT_VOLUME_TASK_STATE, {_aQN: _TSas, _sN: _tSa}),
-        (lambda: schemas.STRING, {_aQN: _ST, _sN: _sTt}),
-        (lambda: schemas.STRING, {_aQN: _CTom, _sN: _cTom}),
-        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
-        (lambda: schemas.IMAGE_ID, {_aQN: _IIm, _sN: _iIm}),
-        (SNAPSHOT_ID, {_aQN: _SIn, _sN: _sIn}),
-        (lambda: schemas.BOOLEAN, {_aQN: _DRRV, _sN: _dRRV}),
+        (lambda: schemas.OPERATOR_RESPONSE, {_aQN: _Op, _sN: _ope}),
     ),
 )
 
@@ -1714,8 +1627,6 @@ VERSION_STRING_LIST: StaticSchema = (
     (_me,),
     ((lambda: schemas.STRING, {_sN: _i}),),
 )
-
-ELASTIC_GPU_ID: StaticSchema = (3, n0, _EGI, 0)
 
 FAST_SNAPSHOT_RESTORE_STATE_CODE: StaticSchema = (
     14,

@@ -35,7 +35,7 @@ logger = logging.getLogger(__name__)
 class BedrockDataAutomationRuntimeClient(Client[BedrockDataAutomationRuntimeConfig]):
     """Amazon Bedrock Data Automation Runtime"""
 
-    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
+    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
 
     @_overload
     def get_data_automation_status(

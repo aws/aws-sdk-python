@@ -126,6 +126,8 @@ _NPVE = "NoPublishedVersionException"
 _RIE = "RecursiveInvocationException"
 _RTLE = "RequestTooLargeException"
 _RNRE = "ResourceNotReadyException"
+_RADE = "RuntimeAliasDeletedException"
+_RVDE = "RuntimeVersionDeletedException"
 _SFMCE = "S3FilesMountConnectivityException"
 _SFMFE = "S3FilesMountFailureException"
 _SFMTE = "S3FilesMountTimeoutException"
@@ -623,6 +625,8 @@ INVOKE: StaticOperationSchema = (
         lambda: schemas.RESOURCE_CONFLICT_EXCEPTION,
         lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
         lambda: RESOURCE_NOT_READY_EXCEPTION,
+        lambda: RUNTIME_ALIAS_DELETED_EXCEPTION,
+        lambda: RUNTIME_VERSION_DELETED_EXCEPTION,
         lambda: S3_FILES_MOUNT_CONNECTIVITY_EXCEPTION,
         lambda: S3_FILES_MOUNT_FAILURE_EXCEPTION,
         lambda: S3_FILES_MOUNT_TIMEOUT_EXCEPTION,
@@ -680,6 +684,24 @@ RESOURCE_NOT_READY_EXCEPTION: StaticSchema = (
     n0,
     _RNRE,
     {_smith: _se, _sE: 502},
+    (_T, _m),
+    ((lambda: schemas.STRING, 0), (lambda: schemas.STRING, 0)),
+)
+
+RUNTIME_ALIAS_DELETED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _RADE,
+    {_smith: _c, _sE: 409},
+    (_T, _m),
+    ((lambda: schemas.STRING, 0), (lambda: schemas.STRING, 0)),
+)
+
+RUNTIME_VERSION_DELETED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _RVDE,
+    {_smith: _c, _sE: 409},
     (_T, _m),
     ((lambda: schemas.STRING, 0), (lambda: schemas.STRING, 0)),
 )
@@ -936,6 +958,8 @@ INVOKE_WITH_RESPONSE_STREAM: StaticOperationSchema = (
         lambda: schemas.RESOURCE_CONFLICT_EXCEPTION,
         lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
         RESOURCE_NOT_READY_EXCEPTION,
+        RUNTIME_ALIAS_DELETED_EXCEPTION,
+        RUNTIME_VERSION_DELETED_EXCEPTION,
         S3_FILES_MOUNT_CONNECTIVITY_EXCEPTION,
         S3_FILES_MOUNT_FAILURE_EXCEPTION,
         S3_FILES_MOUNT_TIMEOUT_EXCEPTION,

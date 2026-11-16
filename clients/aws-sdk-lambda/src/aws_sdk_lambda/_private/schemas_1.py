@@ -231,6 +231,7 @@ _EI = "EventInput"
 _CISD = "ChainedInvokeStartedDetails"
 _Inp = "Input"
 _EV = "ExecutedVersion"
+_CISDh = "ChainedInvokeStoppedDetails"
 _Eve = "Events"
 _GDEHO = "GetDurableExecutionHistoryOutput"
 _cGDEHRo = "com.amazonaws.lambda#GetDurableExecutionHistoryResponse"
@@ -1270,6 +1271,15 @@ CHAINED_INVOKE_STARTED_DETAILS: StaticSchema = (
         (VERSION_WITH_LATEST_PUBLISHED, 0),
         (DURABLE_EXECUTION_ARN, 0),
     ),
+)
+
+CHAINED_INVOKE_STOPPED_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _CISDh,
+    0,
+    (_E,),
+    ((EVENT_ERROR, 1),),
 )
 
 BLOB: StaticSchema = (1, n0, _B, 4)

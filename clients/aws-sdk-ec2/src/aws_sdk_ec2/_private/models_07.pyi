@@ -22,6 +22,7 @@ from ..models import (
     ApplicationStatusSummary,
     AthenaIntegration,
     AthenaIntegrationDict,
+    AvailableCapacity,
     BaselineEbsBandwidthMbps,
     BaselineEbsBandwidthMbpsDict,
     BaselineEbsBandwidthMbpsRequest,
@@ -62,17 +63,17 @@ from ..models import (
     EnaSrdSpecificationRequest,
     EnaSrdSpecificationRequestDict,
     EnclaveOptions,
+    EventInformation,
+    FlexCostAllocationCidrRangeSpecifications,
+    FlexCostAllocationCidrRangeSpecificationsDict,
     FpgaInfo,
-    GpuInfo,
-    GroupIdentifier,
-    HibernationOptions,
-    IamInstanceProfile,
+    GpuDeviceInfo,
+    IpamPublicAddressTags,
+    IpamResourceTag,
     Ipv4PrefixSpecificationRequest,
     Ipv4PrefixSpecificationRequestDict,
     Ipv6PrefixSpecificationRequest,
     Ipv6PrefixSpecificationRequestDict,
-    Ipv6Range,
-    Ipv6RangeDict,
     LicenseConfiguration,
     MediaAcceleratorInfo,
     MemoryGiBPerVCpu,
@@ -101,8 +102,6 @@ from ..models import (
     Placement,
     PlacementDict,
     PlacementGroupInfo,
-    PrefixListId,
-    PrefixListIdDict,
     PrivateDnsNameOptionsResponse,
     PrivateIpAddressSpecification,
     PrivateIpAddressSpecificationDict,
@@ -133,8 +132,6 @@ from ..models import (
     UserBucketDict,
     UserData,
     UserDataDict,
-    UserIdGroupPair,
-    UserIdGroupPairDict,
     VCpuCountRange,
     VCpuCountRangeDict,
     VCpuCountRangeRequest,
@@ -144,6 +141,567 @@ from ..models import (
     VolumeDetailDict,
     _SerdeShape,
 )
+
+@dataclass(kw_only=True)
+class GpuInfo(_SerdeShape):
+    """Describes the GPU accelerators for the instance type."""
+
+    gpus: list[GpuDeviceInfo] | None = ...
+    """Describes the GPU accelerators for the instance type."""
+    total_gpu_memory_in_mi_b: int | None = ...
+    """
+    The total size of the memory for the GPU accelerators for the instance
+    type, in MiB.
+    """
+
+class GroupBy(UnknownEnumMixin, StrEnum):
+    RESOURCE_REGION = "resource-region"
+    AVAILABILITY_ZONE_ID = "availability-zone-id"
+    ACCOUNT_ID = "account-id"
+    ACCOUNT_NAME = "account-name"
+    INSTANCE_FAMILY = "instance-family"
+    INSTANCE_TYPE = "instance-type"
+    INSTANCE_PLATFORM = "instance-platform"
+    RESERVATION_ARN = "reservation-arn"
+    RESERVATION_ID = "reservation-id"
+    RESERVATION_TYPE = "reservation-type"
+    RESERVATION_CREATE_TIMESTAMP = "reservation-create-timestamp"
+    RESERVATION_START_TIMESTAMP = "reservation-start-timestamp"
+    RESERVATION_END_TIMESTAMP = "reservation-end-timestamp"
+    RESERVATION_END_DATE_TYPE = "reservation-end-date-type"
+    TENANCY = "tenancy"
+    RESERVATION_STATE = "reservation-state"
+    RESERVATION_INSTANCE_MATCH_CRITERIA = "reservation-instance-match-criteria"
+    RESERVATION_UNUSED_FINANCIAL_OWNER = "reservation-unused-financial-owner"
+
+@dataclass(kw_only=True)
+class GroupIdentifier(_SerdeShape):
+    """Describes a security group."""
+
+    group_id: str | None = ...
+    """The ID of the security group."""
+    group_name: str | None = ...
+    """The name of the security group."""
+
+class GroupIdentifierDict(TypedDict, total=False):
+    """Dictionary form of `GroupIdentifier`."""
+
+    group_id: str | None
+    """The ID of the security group."""
+    group_name: str | None
+    """The name of the security group."""
+
+class HaStatus(UnknownEnumMixin, StrEnum):
+    PROCESSING = "processing"
+    ACTIVE = "active"
+    STANDBY = "standby"
+    INVALID = "invalid"
+
+@dataclass(kw_only=True)
+class HealthCheckPathDestinationRequestObject(_SerdeShape):
+    """
+    Describes a destination for a health check path in a request.
+    Destinations can be in a different Availability Zone than the source
+    (cross-AZ) or in a Local Zone (AZ to Local Zone), enabling remote health
+    validation of your application.
+    """
+
+    subnet_id: str | None = ...
+    """The ID of the subnet for the destination."""
+    security_group_id: str | None = ...
+    """The ID of the security group for the destination."""
+
+class HealthCheckPathDestinationRequestObjectDict(TypedDict, total=False):
+    """Dictionary form of `HealthCheckPathDestinationRequestObject`."""
+
+    subnet_id: str | None
+    """The ID of the subnet for the destination."""
+    security_group_id: str | None
+    """The ID of the security group for the destination."""
+
+@dataclass(kw_only=True)
+class HealthCheckPathDestinationResponseObject(_SerdeShape):
+    """Describes a destination for a health check path."""
+
+    subnet_id: str | None = ...
+    """The ID of the subnet for the destination."""
+    security_group_id: str | None = ...
+    """The ID of the security group for the destination."""
+
+@dataclass(kw_only=True)
+class HealthCheckPathRequestObject(_SerdeShape):
+    """Describes a health check path for an application status check request."""
+
+    source: HealthCheckPathSourceRequestObject | None = ...
+    """The source for the health check path."""
+    destinations: list[HealthCheckPathDestinationRequestObject] | None = ...
+    """The destinations for the health check path."""
+
+class HealthCheckPathRequestObjectDict(TypedDict, total=False):
+    """Dictionary form of `HealthCheckPathRequestObject`."""
+
+    source: (
+        HealthCheckPathSourceRequestObject
+        | HealthCheckPathSourceRequestObjectDict
+        | None
+    )
+    """The source for the health check path."""
+    destinations: (
+        Sequence[
+            HealthCheckPathDestinationRequestObject
+            | HealthCheckPathDestinationRequestObjectDict
+        ]
+        | None
+    )
+    """The destinations for the health check path."""
+
+@dataclass(kw_only=True)
+class HealthCheckPathResponseObject(_SerdeShape):
+    """Describes a health check path for an application status check."""
+
+    source: HealthCheckPathSourceResponseObject | None = ...
+    """The source for the health check path."""
+    destinations: list[HealthCheckPathDestinationResponseObject] | None = ...
+    """The destinations for the health check path."""
+
+@dataclass(kw_only=True)
+class HealthCheckPathSourceRequestObject(_SerdeShape):
+    """
+    Describes the source for a health check path in a request. The source
+    defines the subnet and security group where a health check elastic
+    network interface (ENI) is created to originate health check traffic.
+    """
+
+    subnet_id: str | None = ...
+    """The ID of the subnet for the source."""
+    security_group_id: str | None = ...
+    """The ID of the security group for the source."""
+
+class HealthCheckPathSourceRequestObjectDict(TypedDict, total=False):
+    """Dictionary form of `HealthCheckPathSourceRequestObject`."""
+
+    subnet_id: str | None
+    """The ID of the subnet for the source."""
+    security_group_id: str | None
+    """The ID of the security group for the source."""
+
+@dataclass(kw_only=True)
+class HealthCheckPathSourceResponseObject(_SerdeShape):
+    """Describes the source for a health check path."""
+
+    subnet_id: str | None = ...
+    """The ID of the subnet for the source."""
+    security_group_id: str | None = ...
+    """The ID of the security group for the source."""
+
+@dataclass(kw_only=True)
+class HibernationOptions(_SerdeShape):
+    """
+    Indicates whether your instance is configured for hibernation. This
+    parameter is valid only if the instance meets the [hibernation
+    prerequisites](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/hibernating-prerequisites.html).
+    For more information, see [Hibernate your Amazon EC2
+    instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html)
+    in the *Amazon EC2 User Guide*.
+    """
+
+    configured: bool | None = ...
+    """
+    If `true`, your instance is enabled for hibernation; otherwise, it is
+    not enabled for hibernation.
+    """
+
+@dataclass(kw_only=True)
+class HibernationOptionsRequest(_SerdeShape):
+    """
+    Indicates whether your instance is configured for hibernation. This
+    parameter is valid only if the instance meets the [hibernation
+    prerequisites](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/hibernating-prerequisites.html).
+    For more information, see [Hibernate your Amazon EC2
+    instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html)
+    in the *Amazon EC2 User Guide*.
+    """
+
+    configured: bool | None = ...
+    """
+    Set to `true` to enable your instance for hibernation.
+
+    For Spot Instances, if you set `Configured` to `true`, either omit the
+    `InstanceInterruptionBehavior` parameter (for
+    [`SpotMarketOptions`](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SpotMarketOptions.html)
+    ), or set it to `hibernate`. When `Configured` is true:
+
+    - If you omit `InstanceInterruptionBehavior`, it defaults to
+      `hibernate`.
+
+    - If you set `InstanceInterruptionBehavior` to a value other than
+      `hibernate`, you'll get an error.
+
+    Default: `false`
+    """
+
+class HibernationOptionsRequestDict(TypedDict, total=False):
+    """Dictionary form of `HibernationOptionsRequest`."""
+
+    configured: bool | None
+    """
+    Set to `true` to enable your instance for hibernation.
+
+    For Spot Instances, if you set `Configured` to `true`, either omit the
+    `InstanceInterruptionBehavior` parameter (for
+    [`SpotMarketOptions`](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SpotMarketOptions.html)
+    ), or set it to `hibernate`. When `Configured` is true:
+
+    - If you omit `InstanceInterruptionBehavior`, it defaults to
+      `hibernate`.
+
+    - If you set `InstanceInterruptionBehavior` to a value other than
+      `hibernate`, you'll get an error.
+
+    Default: `false`
+    """
+
+@dataclass(kw_only=True)
+class HistoryRecord(_SerdeShape):
+    """Describes an event in the history of the Spot Fleet request."""
+
+    event_information: EventInformation | None = ...
+    """Information about the event."""
+    event_type: str | None = ...
+    """
+    The event type.
+
+    - `error` - An error with the Spot Fleet request.
+
+    - `fleetRequestChange` - A change in the status or configuration of the
+      Spot Fleet request.
+
+    - `instanceChange` - An instance was launched or terminated.
+
+    - `Information` - An informational event.
+    """
+    timestamp: datetime | None = ...
+    """
+    The date and time of the event, in UTC format (for example,
+    *YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z).
+    """
+
+@dataclass(kw_only=True)
+class HistoryRecordEntry(_SerdeShape):
+    """Describes an event in the history of an EC2 Fleet."""
+
+    event_information: EventInformation | None = ...
+    """Information about the event."""
+    event_type: str | None = ...
+    """The event type."""
+    timestamp: datetime | None = ...
+    """
+    The date and time of the event, in UTC format (for example,
+    *YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z).
+    """
+
+@dataclass(kw_only=True)
+class Host(_SerdeShape):
+    """Describes the properties of the Dedicated Host."""
+
+    auto_placement: str | None = ...
+    """Whether auto-placement is on or off."""
+    availability_zone: str | None = ...
+    """The Availability Zone of the Dedicated Host."""
+    available_capacity: AvailableCapacity | None = ...
+    """Information about the instances running on the Dedicated Host."""
+    client_token: str | None = ...
+    """
+    Unique, case-sensitive identifier that you provide to ensure the
+    idempotency of the request. For more information, see [Ensuring
+    Idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+    """
+    host_id: str | None = ...
+    """The ID of the Dedicated Host."""
+    host_properties: HostProperties | None = ...
+    """The hardware specifications of the Dedicated Host."""
+    host_reservation_id: str | None = ...
+    """
+    The reservation ID of the Dedicated Host. This returns a `null` response
+    if the Dedicated Host doesn't have an associated reservation.
+    """
+    instances: list[HostInstance] | None = ...
+    """
+    The IDs and instance type that are currently running on the Dedicated
+    Host.
+    """
+    state: str | None = ...
+    """The Dedicated Host's state."""
+    allocation_time: datetime | None = ...
+    """The time that the Dedicated Host was allocated."""
+    release_time: datetime | None = ...
+    """The time that the Dedicated Host was released."""
+    tags: list[Tag] | None = ...
+    """Any tags assigned to the Dedicated Host."""
+    host_recovery: str | None = ...
+    """
+    Indicates whether host recovery is enabled or disabled for the Dedicated
+    Host.
+    """
+    allows_multiple_instance_types: str | None = ...
+    """
+    Indicates whether the Dedicated Host supports multiple instance types of
+    the same instance family. If the value is `on`, the Dedicated Host
+    supports multiple instance types in the instance family. If the value is
+    `off`, the Dedicated Host supports a single instance type only.
+    """
+    owner_id: str | None = ...
+    """The ID of the Amazon Web Services account that owns the Dedicated Host."""
+    availability_zone_id: str | None = ...
+    """
+    The ID of the Availability Zone in which the Dedicated Host is
+    allocated.
+    """
+    member_of_service_linked_resource_group: bool | None = ...
+    """
+    Indicates whether the Dedicated Host is in a host resource group. If
+    **memberOfServiceLinkedResourceGroup** is `true`, the host is in a host
+    resource group; otherwise, it is not.
+    """
+    outpost_arn: str | None = ...
+    """
+    The Amazon Resource Name (ARN) of the Amazon Web Services Outpost on
+    which the Dedicated Host is allocated.
+    """
+    host_maintenance: str | None = ...
+    """
+    Indicates whether host maintenance is enabled or disabled for the
+    Dedicated Host.
+    """
+    asset_id: str | None = ...
+    """
+    The ID of the Outpost hardware asset on which the Dedicated Host is
+    allocated.
+    """
+    cpu_options: HostCpuOptions | None = ...
+    """
+    The CPU options for the Dedicated Host, including AMD Secure Encrypted
+    Virtualization-Secure Nested Paging (AMD SEV-SNP) settings.
+    """
+
+@dataclass(kw_only=True)
+class HostCpuOptions(_SerdeShape):
+    """
+    Contains the CPU options for a Dedicated Host, including AMD Secure
+    Encrypted Virtualization-Secure Nested Paging (AMD SEV-SNP) settings.
+    """
+
+    amd_sev_snp: str | None = ...
+    """
+    Specifies whether AMD Secure Encrypted Virtualization-Secure Nested
+    Paging (AMD SEV-SNP) is enabled or disabled for the Dedicated Host. If
+    you don't specify a value, AMD SEV-SNP is `disabled`.
+    """
+
+@dataclass(kw_only=True)
+class HostCpuOptionsRequest(_SerdeShape):
+    """
+    Contains the CPU configuration options for a Dedicated Host allocation
+    request. Options include AMD Secure Encrypted Virtualization-Secure
+    Nested Paging (AMD SEV-SNP) settings.
+    """
+
+    amd_sev_snp: str | None = ...
+    """
+    Specifies whether AMD Secure Encrypted Virtualization-Secure Nested
+    Paging (AMD SEV-SNP) is enabled or disabled for the Dedicated Host. If
+    you don't specify a value, AMD SEV-SNP is `disabled`.
+    """
+
+class HostCpuOptionsRequestDict(TypedDict, total=False):
+    """Dictionary form of `HostCpuOptionsRequest`."""
+
+    amd_sev_snp: str | None
+    """
+    Specifies whether AMD Secure Encrypted Virtualization-Secure Nested
+    Paging (AMD SEV-SNP) is enabled or disabled for the Dedicated Host. If
+    you don't specify a value, AMD SEV-SNP is `disabled`.
+    """
+
+@dataclass(kw_only=True)
+class HostInstance(_SerdeShape):
+    """Describes an instance running on a Dedicated Host."""
+
+    instance_id: str | None = ...
+    """The ID of instance that is running on the Dedicated Host."""
+    instance_type: str | None = ...
+    """The instance type (for example, `m3.medium`) of the running instance."""
+    owner_id: str | None = ...
+    """The ID of the Amazon Web Services account that owns the instance."""
+
+class HostMaintenance(UnknownEnumMixin, StrEnum):
+    ON = "on"
+    OFF = "off"
+
+class HostnameType(UnknownEnumMixin, StrEnum):
+    IP_NAME = "ip-name"
+    RESOURCE_NAME = "resource-name"
+
+@dataclass(kw_only=True)
+class HostOffering(_SerdeShape):
+    """Details about the Dedicated Host Reservation offering."""
+
+    currency_code: str | None = ...
+    """The currency of the offering."""
+    duration: int | None = ...
+    """The duration of the offering (in seconds)."""
+    hourly_price: str | None = ...
+    """The hourly price of the offering."""
+    instance_family: str | None = ...
+    """The instance family of the offering."""
+    offering_id: str | None = ...
+    """The ID of the offering."""
+    payment_option: str | None = ...
+    """The available payment option."""
+    upfront_price: str | None = ...
+    """
+    The upfront price of the offering. Does not apply to No Upfront
+    offerings.
+    """
+
+@dataclass(kw_only=True)
+class HostProperties(_SerdeShape):
+    """Describes the properties of a Dedicated Host."""
+
+    cores: int | None = ...
+    """The number of cores on the Dedicated Host."""
+    instance_type: str | None = ...
+    """
+    The instance type supported by the Dedicated Host. For example,
+    `m5.large`. If the host supports multiple instance types, no
+    **instanceType** is returned.
+    """
+    instance_family: str | None = ...
+    """The instance family supported by the Dedicated Host. For example, `m5`."""
+    sockets: int | None = ...
+    """The number of sockets on the Dedicated Host."""
+    total_v_cpus: int | None = ...
+    """The total number of vCPUs on the Dedicated Host."""
+
+class HostRecovery(UnknownEnumMixin, StrEnum):
+    ON = "on"
+    OFF = "off"
+
+@dataclass(kw_only=True)
+class HostReservation(_SerdeShape):
+    """
+    Details about the Dedicated Host Reservation and associated Dedicated
+    Hosts.
+    """
+
+    count: int | None = ...
+    """The number of Dedicated Hosts the reservation is associated with."""
+    currency_code: str | None = ...
+    """
+    The currency in which the `upfrontPrice` and `hourlyPrice` amounts are
+    specified. At this time, the only supported currency is `USD`.
+    """
+    duration: int | None = ...
+    """
+    The length of the reservation's term, specified in seconds. Can be
+    `31536000 (1 year)` | `94608000 (3 years)`.
+    """
+    end: datetime | None = ...
+    """The date and time that the reservation ends."""
+    host_id_set: list[str] | None = ...
+    """The IDs of the Dedicated Hosts associated with the reservation."""
+    host_reservation_id: str | None = ...
+    """The ID of the reservation that specifies the associated Dedicated Hosts."""
+    hourly_price: str | None = ...
+    """The hourly price of the reservation."""
+    instance_family: str | None = ...
+    """
+    The instance family of the Dedicated Host Reservation. The instance
+    family on the Dedicated Host must be the same in order for it to benefit
+    from the reservation.
+    """
+    offering_id: str | None = ...
+    """
+    The ID of the reservation. This remains the same regardless of which
+    Dedicated Hosts are associated with it.
+    """
+    payment_option: str | None = ...
+    """The payment option selected for this reservation."""
+    start: datetime | None = ...
+    """The date and time that the reservation started."""
+    state: str | None = ...
+    """The state of the reservation."""
+    upfront_price: str | None = ...
+    """The upfront price of the reservation."""
+    tags: list[Tag] | None = ...
+    """Any tags assigned to the Dedicated Host Reservation."""
+
+class HostTenancy(UnknownEnumMixin, StrEnum):
+    DEFAULT = "default"
+    DEDICATED = "dedicated"
+    HOST = "host"
+
+class HttpTokensEnforcedState(UnknownEnumMixin, StrEnum):
+    DISABLED = "disabled"
+    ENABLED = "enabled"
+
+class HttpTokensState(UnknownEnumMixin, StrEnum):
+    OPTIONAL = "optional"
+    REQUIRED = "required"
+
+class HypervisorType(UnknownEnumMixin, StrEnum):
+    OVM = "ovm"
+    XEN = "xen"
+
+@dataclass(kw_only=True)
+class IamInstanceProfile(_SerdeShape):
+    """Describes an IAM instance profile."""
+
+    arn: str | None = ...
+    """The Amazon Resource Name (ARN) of the instance profile."""
+    id: str | None = ...
+    """The ID of the instance profile."""
+
+@dataclass(kw_only=True)
+class IamInstanceProfileAssociation(_SerdeShape):
+    """
+    Describes an association between an IAM instance profile and an
+    instance.
+    """
+
+    association_id: str | None = ...
+    """The ID of the association."""
+    instance_id: str | None = ...
+    """The ID of the instance."""
+    iam_instance_profile: IamInstanceProfile | None = ...
+    """The IAM instance profile."""
+    state: str | None = ...
+    """The state of the association."""
+    timestamp: datetime | None = ...
+    """The time the IAM instance profile was associated with the instance."""
+
+class IamInstanceProfileAssociationState(UnknownEnumMixin, StrEnum):
+    ASSOCIATING = "associating"
+    ASSOCIATED = "associated"
+    DISASSOCIATING = "disassociating"
+    DISASSOCIATED = "disassociated"
+
+@dataclass(kw_only=True)
+class IamInstanceProfileSpecification(_SerdeShape):
+    """Describes an IAM instance profile."""
+
+    arn: str | None = ...
+    """The Amazon Resource Name (ARN) of the instance profile."""
+    name: str | None = ...
+    """The name of the instance profile."""
+
+class IamInstanceProfileSpecificationDict(TypedDict, total=False):
+    """Dictionary form of `IamInstanceProfileSpecification`."""
+
+    arn: str | None
+    """The Amazon Resource Name (ARN) of the instance profile."""
+    name: str | None
+    """The name of the instance profile."""
 
 @dataclass(kw_only=True)
 class IcmpTypeCode(_SerdeShape):
@@ -960,7 +1518,10 @@ class ImageUsageReportEntry(_SerdeShape):
     """
 
     resource_type: str | None = ...
-    """The type of resource (`ec2:Instance` or `ec2:LaunchTemplate`)."""
+    """
+    The type of resource (`ec2:Instance` | `ec2:LaunchTemplate` |
+    `imagebuilder:ImageRecipe` | `imagebuilder:ContainerRecipe`).
+    """
     report_id: str | None = ...
     """The ID of the report."""
     usage_count: int | None = ...
@@ -986,7 +1547,8 @@ class ImageUsageResourceType(_SerdeShape):
     """
     The resource type.
 
-    Valid values: `ec2:Instance` | `ec2:LaunchTemplate`
+    Valid values: `ec2:Instance` | `ec2:LaunchTemplate` |
+    `imagebuilder:ImageRecipe` | `imagebuilder:ContainerRecipe`
     """
     resource_type_options: list[ImageUsageResourceTypeOption] | None = ...
     """
@@ -1053,7 +1615,8 @@ class ImageUsageResourceTypeRequest(_SerdeShape):
     """
     The resource type.
 
-    Valid values: `ec2:Instance` | `ec2:LaunchTemplate`
+    Valid values: `ec2:Instance` | `ec2:LaunchTemplate` |
+    `imagebuilder:ImageRecipe` | `imagebuilder:ContainerRecipe`
     """
     resource_type_options: list[ImageUsageResourceTypeOptionRequest] | None = ...
     """
@@ -1068,7 +1631,8 @@ class ImageUsageResourceTypeRequestDict(TypedDict, total=False):
     """
     The resource type.
 
-    Valid values: `ec2:Instance` | `ec2:LaunchTemplate`
+    Valid values: `ec2:Instance` | `ec2:LaunchTemplate` |
+    `imagebuilder:ImageRecipe` | `imagebuilder:ContainerRecipe`
     """
     resource_type_options: (
         Sequence[
@@ -2921,6 +3485,51 @@ class InstanceFamilyCreditSpecification(_SerdeShape):
     """
     The default credit option for CPU usage of the instance family. Valid
     values are `standard` and `unlimited`.
+    """
+
+@dataclass(kw_only=True)
+class InstanceFlexCostAllocationPolicyDocument(_SerdeShape):
+    """Describes the cost allocation policy document for EC2 instances."""
+
+    reporting_granularity: list[str] | None = ...
+    """
+    The resource granularity level at which networking costs are allocated.
+    This parameter is required. Specify exactly one value. Valid values are
+    `eni`, `ec2`, `subnet`, `vpc`, `account`, and `cidr`.
+    """
+    dimensions: list[str] | None = ...
+    """
+    The cost dimensions to report. This parameter is required. The only
+    valid value is `data-transfer`.
+    """
+    cidr_range_specifications: FlexCostAllocationCidrRangeSpecifications | None = ...
+    """
+    The CIDR range mappings to use for cost allocation. Specify this value
+    when `ReportingGranularity` is `cidr`, and omit it otherwise.
+    """
+
+class InstanceFlexCostAllocationPolicyDocumentDict(TypedDict, total=False):
+    """Dictionary form of `InstanceFlexCostAllocationPolicyDocument`."""
+
+    reporting_granularity: Required[Sequence[str]]
+    """
+    The resource granularity level at which networking costs are allocated.
+    This parameter is required. Specify exactly one value. Valid values are
+    `eni`, `ec2`, `subnet`, `vpc`, `account`, and `cidr`.
+    """
+    dimensions: Required[Sequence[str]]
+    """
+    The cost dimensions to report. This parameter is required. The only
+    valid value is `data-transfer`.
+    """
+    cidr_range_specifications: (
+        FlexCostAllocationCidrRangeSpecifications
+        | FlexCostAllocationCidrRangeSpecificationsDict
+        | None
+    )
+    """
+    The CIDR range mappings to use for cost allocation. Specify this value
+    when `ReportingGranularity` is `cidr`, and omit it otherwise.
     """
 
 class InstanceGeneration(UnknownEnumMixin, StrEnum):
@@ -8345,7 +8954,7 @@ class IpamInternetRegistryAssociation(_SerdeShape):
     """The Amazon Web Services Region of the IPAM."""
     rir: str | None = ...
     """
-    The Regional Internet Registry. Possible values:
+    The internet registry. Possible values:
 
     - `ripe` - RIPE NCC (Europe, the Middle East, and Central Asia).
 
@@ -8354,6 +8963,8 @@ class IpamInternetRegistryAssociation(_SerdeShape):
     - `arin` - ARIN (North America).
 
     - `lacnic` - LACNIC (Latin America and the Caribbean).
+
+    - `nicbr` - NIC.br (Brazil).
     """
     organization_handle: str | None = ...
     """The organization handle at the internet registry."""
@@ -8362,10 +8973,10 @@ class IpamInternetRegistryAssociation(_SerdeShape):
     state: str | None = ...
     """
     The state of the internet registry association. Valid values:
-    `pending-activation` | `pending-enable` | `create-in-progress` |
-    `create-failed` | `enable-in-progress` | `enable-complete` |
-    `enable-failed` | `delete-in-progress` | `delete-complete` |
-    `delete-failed`.
+    `pending-enable` | `create-in-progress` | `create-failed` |
+    `enable-in-progress` | `enable-complete` | `enable-failed` |
+    `disable-in-progress` | `disable-complete` | `disable-failed` |
+    `delete-in-progress` | `delete-complete` | `delete-failed`.
     """
     state_message: str | None = ...
     """
@@ -9572,809 +10183,3 @@ class IpamPublicAddressSecurityGroup(_SerdeShape):
     """The security group's name."""
     group_id: str | None = ...
     """The security group's ID."""
-
-@dataclass(kw_only=True)
-class IpamPublicAddressTag(_SerdeShape):
-    """A tag for a public IP address discovered by IPAM."""
-
-    key: str | None = ...
-    """The tag's key."""
-    value: str | None = ...
-    """The tag's value."""
-
-@dataclass(kw_only=True)
-class IpamPublicAddressTags(_SerdeShape):
-    """Tags for a public IP address discovered by IPAM."""
-
-    eip_tags: list[IpamPublicAddressTag] | None = ...
-    """Tags for an Elastic IP address."""
-
-class IpamPublicAddressType(UnknownEnumMixin, StrEnum):
-    SERVICE_MANAGED_IP = "service-managed-ip"
-    SERVICE_MANAGED_BYOIP = "service-managed-byoip"
-    AMAZON_OWNED_EIP = "amazon-owned-eip"
-    AMAZON_OWNED_CONTIG = "amazon-owned-contig"
-    BYOIP = "byoip"
-    EC2_PUBLIC_IP = "ec2-public-ip"
-    ANYCAST_IP_LIST_IP = "anycast-ip-list-ip"
-
-@dataclass(kw_only=True)
-class IpamResourceCidr(_SerdeShape):
-    """The CIDR for an IPAM resource."""
-
-    ipam_id: str | None = ...
-    """The IPAM ID for an IPAM resource."""
-    ipam_scope_id: str | None = ...
-    """The scope ID for an IPAM resource."""
-    ipam_pool_id: str | None = ...
-    """The pool ID for an IPAM resource."""
-    resource_region: str | None = ...
-    """The Amazon Web Services Region for an IPAM resource."""
-    resource_owner_id: str | None = ...
-    """The Amazon Web Services account number of the owner of an IPAM resource."""
-    resource_id: str | None = ...
-    """The ID of an IPAM resource."""
-    resource_name: str | None = ...
-    """The name of an IPAM resource."""
-    resource_cidr: str | None = ...
-    """The CIDR for an IPAM resource."""
-    resource_type: str | None = ...
-    """The type of IPAM resource."""
-    resource_tags: list[IpamResourceTag] | None = ...
-    """The tags for an IPAM resource."""
-    ip_usage: float | None = ...
-    """
-    The percentage of IP address space in use. To convert the decimal to a
-    percentage, multiply the decimal by 100. Note the following:
-
-    - For resources that are VPCs, this is the percentage of IP address
-      space in the VPC that's taken up by subnet CIDRs.
-
-    - For resources that are subnets, if the subnet has an IPv4 CIDR
-      provisioned to it, this is the percentage of IPv4 address space in the
-      subnet that's in use. If the subnet has an IPv6 CIDR provisioned to
-      it, the percentage of IPv6 address space in use is not represented.
-      The percentage of IPv6 address space in use cannot currently be
-      calculated.
-
-    - For resources that are public IPv4 pools, this is the percentage of IP
-      address space in the pool that's been allocated to Elastic IP
-      addresses (EIPs).
-    """
-    compliance_status: str | None = ...
-    """
-    The compliance status of the IPAM resource. For more information on
-    compliance statuses, see [Monitor CIDR usage by
-    resource](https://docs.aws.amazon.com/vpc/latest/ipam/monitor-cidr-compliance-ipam.html)
-    in the *Amazon VPC IPAM User Guide*.
-    """
-    management_state: str | None = ...
-    """
-    The management state of the resource. For more information about
-    management states, see [Monitor CIDR usage by
-    resource](https://docs.aws.amazon.com/vpc/latest/ipam/monitor-cidr-compliance-ipam.html)
-    in the *Amazon VPC IPAM User Guide*.
-    """
-    overlap_status: str | None = ...
-    """
-    The overlap status of an IPAM resource. The overlap status tells you if
-    the CIDR for a resource overlaps with another CIDR in the scope. For
-    more information on overlap statuses, see [Monitor CIDR usage by
-    resource](https://docs.aws.amazon.com/vpc/latest/ipam/monitor-cidr-compliance-ipam.html)
-    in the *Amazon VPC IPAM User Guide*.
-    """
-    vpc_id: str | None = ...
-    """The ID of a VPC."""
-    availability_zone_id: str | None = ...
-    """The Availability Zone ID."""
-
-class IpamResourceCidrIpSource(UnknownEnumMixin, StrEnum):
-    AMAZON = "amazon"
-    BYOIP = "byoip"
-    NONE = "none"
-
-@dataclass(kw_only=True)
-class IpamResourceDiscovery(_SerdeShape):
-    """
-    A resource discovery is an IPAM component that enables IPAM to manage
-    and monitor resources that belong to the owning account.
-    """
-
-    owner_id: str | None = ...
-    """The ID of the owner."""
-    ipam_resource_discovery_id: str | None = ...
-    """The resource discovery ID."""
-    ipam_resource_discovery_arn: str | None = ...
-    """The resource discovery Amazon Resource Name (ARN)."""
-    ipam_resource_discovery_region: str | None = ...
-    """The resource discovery Region."""
-    description: str | None = ...
-    """The resource discovery description."""
-    operating_regions: list[IpamOperatingRegion] | None = ...
-    """
-    The operating Regions for the resource discovery. Operating Regions are
-    Amazon Web Services Regions where the IPAM is allowed to manage IP
-    address CIDRs. IPAM only discovers and monitors resources in the Amazon
-    Web Services Regions you select as operating Regions.
-    """
-    is_default: bool | None = ...
-    """
-    Defines if the resource discovery is the default. The default resource
-    discovery is the resource discovery automatically created when you
-    create an IPAM.
-    """
-    state: str | None = ...
-    """
-    The lifecycle state of the resource discovery.
-
-    - `create-in-progress` - Resource discovery is being created.
-
-    - `create-complete` - Resource discovery creation is complete.
-
-    - `create-failed` - Resource discovery creation has failed.
-
-    - `modify-in-progress` - Resource discovery is being modified.
-
-    - `modify-complete` - Resource discovery modification is complete.
-
-    - `modify-failed` - Resource discovery modification has failed.
-
-    - `delete-in-progress` - Resource discovery is being deleted.
-
-    - `delete-complete` - Resource discovery deletion is complete.
-
-    - `delete-failed` - Resource discovery deletion has failed.
-
-    - `isolate-in-progress` - Amazon Web Services account that created the
-      resource discovery has been removed and the resource discovery is
-      being isolated.
-
-    - `isolate-complete` - Resource discovery isolation is complete.
-
-    - `restore-in-progress` - Amazon Web Services account that created the
-      resource discovery and was isolated has been restored.
-    """
-    tags: list[Tag] | None = ...
-    """
-    A tag is a label that you assign to an Amazon Web Services resource.
-    Each tag consists of a key and an optional value. You can use tags to
-    search and filter your resources or track your Amazon Web Services
-    costs.
-    """
-    organizational_unit_exclusions: list[IpamOrganizationalUnitExclusion] | None = ...
-    """
-    If your IPAM is integrated with Amazon Web Services Organizations and
-    you add an organizational unit (OU) exclusion, IPAM will not manage the
-    IP addresses in accounts in that OU exclusion.
-    """
-
-@dataclass(kw_only=True)
-class IpamResourceDiscoveryAssociation(_SerdeShape):
-    """
-    An IPAM resource discovery association. An associated resource discovery
-    is a resource discovery that has been associated with an IPAM. IPAM
-    aggregates the resource CIDRs discovered by the associated resource
-    discovery.
-    """
-
-    owner_id: str | None = ...
-    """The Amazon Web Services account ID of the resource discovery owner."""
-    ipam_resource_discovery_association_id: str | None = ...
-    """The resource discovery association ID."""
-    ipam_resource_discovery_association_arn: str | None = ...
-    """The resource discovery association Amazon Resource Name (ARN)."""
-    ipam_resource_discovery_id: str | None = ...
-    """The resource discovery ID."""
-    ipam_id: str | None = ...
-    """The IPAM ID."""
-    ipam_arn: str | None = ...
-    """The IPAM ARN."""
-    ipam_region: str | None = ...
-    """The IPAM home Region."""
-    is_default: bool | None = ...
-    """
-    Defines if the resource discovery is the default. When you create an
-    IPAM, a default resource discovery is created for your IPAM and it's
-    associated with your IPAM.
-    """
-    resource_discovery_status: str | None = ...
-    """
-    The resource discovery status.
-
-    - `active` - Connection or permissions required to read the results of
-      the resource discovery are intact.
-
-    - `not-found` - Connection or permissions required to read the results
-      of the resource discovery are broken. This may happen if the owner of
-      the resource discovery stopped sharing it or deleted the resource
-      discovery. Verify the resource discovery still exists and the Amazon
-      Web Services RAM resource share is still intact.
-    """
-    state: str | None = ...
-    """
-    The lifecycle state of the association when you associate or
-    disassociate a resource discovery.
-
-    - `associate-in-progress` - Resource discovery is being associated.
-
-    - `associate-complete` - Resource discovery association is complete.
-
-    - `associate-failed` - Resource discovery association has failed.
-
-    - `disassociate-in-progress` - Resource discovery is being
-      disassociated.
-
-    - `disassociate-complete` - Resource discovery disassociation is
-      complete.
-
-    - `disassociate-failed ` - Resource discovery disassociation has failed.
-
-    - `isolate-in-progress` - Amazon Web Services account that created the
-      resource discovery association has been removed and the resource
-      discovery association is being isolated.
-
-    - `isolate-complete` - Resource discovery isolation is complete.
-
-    - `restore-in-progress` - Resource discovery is being restored.
-    """
-    tags: list[Tag] | None = ...
-    """
-    A tag is a label that you assign to an Amazon Web Services resource.
-    Each tag consists of a key and an optional value. You can use tags to
-    search and filter your resources or track your Amazon Web Services
-    costs.
-    """
-
-class IpamResourceDiscoveryAssociationState(UnknownEnumMixin, StrEnum):
-    ASSOCIATE_IN_PROGRESS = "associate-in-progress"
-    ASSOCIATE_COMPLETE = "associate-complete"
-    ASSOCIATE_FAILED = "associate-failed"
-    DISASSOCIATE_IN_PROGRESS = "disassociate-in-progress"
-    DISASSOCIATE_COMPLETE = "disassociate-complete"
-    DISASSOCIATE_FAILED = "disassociate-failed"
-    ISOLATE_IN_PROGRESS = "isolate-in-progress"
-    ISOLATE_COMPLETE = "isolate-complete"
-    RESTORE_IN_PROGRESS = "restore-in-progress"
-
-class IpamResourceDiscoveryState(UnknownEnumMixin, StrEnum):
-    CREATE_IN_PROGRESS = "create-in-progress"
-    CREATE_COMPLETE = "create-complete"
-    CREATE_FAILED = "create-failed"
-    MODIFY_IN_PROGRESS = "modify-in-progress"
-    MODIFY_COMPLETE = "modify-complete"
-    MODIFY_FAILED = "modify-failed"
-    DELETE_IN_PROGRESS = "delete-in-progress"
-    DELETE_COMPLETE = "delete-complete"
-    DELETE_FAILED = "delete-failed"
-    ISOLATE_IN_PROGRESS = "isolate-in-progress"
-    ISOLATE_COMPLETE = "isolate-complete"
-    RESTORE_IN_PROGRESS = "restore-in-progress"
-
-@dataclass(kw_only=True)
-class IpamResourceTag(_SerdeShape):
-    """
-    The key/value combination of a tag assigned to the resource. Use the tag
-    key in the filter name and the tag value as the filter value. For
-    example, to find all resources that have a tag with the key `Owner` and
-    the value `TeamA`, specify `tag:Owner` for the filter name and `TeamA`
-    for the filter value.
-    """
-
-    key: str | None = ...
-    """
-    The key of a tag assigned to the resource. Use this filter to find all
-    resources assigned a tag with a specific key, regardless of the tag
-    value.
-    """
-    value: str | None = ...
-    """The value of the tag."""
-
-class IpamResourceType(UnknownEnumMixin, StrEnum):
-    VPC = "vpc"
-    SUBNET = "subnet"
-    EIP = "eip"
-    PUBLIC_IPV4_POOL = "public-ipv4-pool"
-    IPV6_POOL = "ipv6-pool"
-    ENI = "eni"
-    ANYCAST_IP_LIST = "anycast-ip-list"
-
-@dataclass(kw_only=True)
-class IpamRouteOriginAuthorization(_SerdeShape):
-    """
-    Contains information about a Route Origin Authorization (ROA) published
-    in the RPKI. A ROA cryptographically attests that a specific ASN is
-    authorized to originate a specific IP address prefix.
-    """
-
-    asn: str | None = ...
-    """The Autonomous System Number (ASN) authorized by the ROA."""
-    prefix: str | None = ...
-    """The IP address prefix authorized by the ROA in CIDR notation."""
-    max_length: int | None = ...
-    """The maximum prefix length that the ASN is authorized to announce."""
-    match: bool | None = ...
-    """Specifies whether the ROA matches the route announcement."""
-    expiration: datetime | None = ...
-    """The expiration date of the ROA."""
-
-@dataclass(kw_only=True)
-class IpamRouteOriginAuthorizationInfo(_SerdeShape):
-    """
-    Contains information about a Route Origin Authorization (ROA) currently
-    published in the RPKI.
-    """
-
-    cidr: str | None = ...
-    """The IP address prefix in CIDR notation authorized by the ROA."""
-    asn: str | None = ...
-    """The Autonomous System Number (ASN) authorized to originate the prefix."""
-    max_length: int | None = ...
-    """The maximum prefix length that the ASN is authorized to announce."""
-
-@dataclass(kw_only=True)
-class IpamRouteOverlap(_SerdeShape):
-    """
-    Contains information about an overlapping route detected for a BYOIP
-    prefix.
-    """
-
-    prefix: str | None = ...
-    """The overlapping IP address prefix in CIDR notation."""
-    asn: str | None = ...
-    """The ASN originating the overlapping route."""
-    detected_at: datetime | None = ...
-    """The time when the overlap was detected."""
-
-@dataclass(kw_only=True)
-class IpamRouteProtectionFinding(_SerdeShape):
-    """
-    Contains information about a route protection finding, including the
-    RPKI validation status of a BYOIP route announcement.
-    """
-
-    resource_owner_id: str | None = ...
-    """The ID of the resource owner."""
-    resource_region: str | None = ...
-    """The Amazon Web Services Region of the resource."""
-    ipam_pool_id: str | None = ...
-    """The ID of the IPAM pool associated with the finding."""
-    cidr: str | None = ...
-    """The IP address prefix in CIDR notation."""
-    state: str | None = ...
-    """
-    The state of the BYOIP CIDR. Possible values:
-
-    - `advertised` - The CIDR is being advertised.
-
-    - `deprovisioned` - The CIDR has been deprovisioned.
-
-    - `failed-deprovision` - Deprovisioning failed.
-
-    - `failed-provision` - Provisioning failed.
-
-    - `pending-deprovision` - Deprovisioning is in progress.
-
-    - `pending-provision` - Provisioning is in progress.
-
-    - `provisioned` - The CIDR is provisioned.
-
-    - `provisioned-not-publicly-advertisable` - The CIDR is provisioned but
-      not publicly advertisable.
-    """
-    advertisement_type: str | None = ...
-    """
-    The advertisement type. Possible values:
-
-    - `regional` - The IP address is advertised from a single location
-      (regional services such as Amazon EC2).
-
-    - `global` - The IP address is advertised from multiple global locations
-      simultaneously (global services such as Amazon CloudFront).
-    """
-    network_border_group: str | None = ...
-    """The network border group."""
-    pool_id: str | None = ...
-    """The ID of the BYOIP pool."""
-    asn: str | None = ...
-    """The Autonomous System Number (ASN) that originates the route."""
-    rpki_status: str | None = ...
-    """
-    The RPKI validation status of the route. Possible values:
-
-    - `valid` - The route has a matching ROA that covers the prefix and
-      origin ASN.
-
-    - `invalid` - The route has a ROA for the prefix, but the origin ASN or
-      prefix length does not match.
-
-    - `unknown` - No ROA exists for the prefix, so RPKI validation cannot be
-      performed.
-    """
-    rpki_strength: str | None = ...
-    """
-    The RPKI enforcement strength for the route. Possible values:
-
-    - `strict` - Invalid routes are rejected.
-
-    - `permissive` - Invalid routes are accepted but flagged.
-    """
-    roas: list[IpamRouteOriginAuthorization] | None = ...
-    """The Route Origin Authorizations (ROAs) that cover the prefix."""
-    route_overlaps: list[IpamRouteOverlap] | None = ...
-    """The overlapping routes detected for this prefix."""
-    sample_time: datetime | None = ...
-    """The time when the route was last sampled."""
-    roa_sample_time: datetime | None = ...
-    """The time when the ROA data was last sampled."""
-
-@dataclass(kw_only=True)
-class IpamRoutingPolicyRegistration(_SerdeShape):
-    """
-    Contains information about a routing policy registration that represents
-    a Route Origin Authorization (ROA) managed through IPAM.
-    """
-
-    cidr: str | None = ...
-    """The IP address prefix in CIDR notation authorized by the ROA."""
-    asns: list[str] | None = ...
-    """The Autonomous System Numbers (ASNs) authorized to originate the prefix."""
-    permit_more_specific_announcements: bool | None = ...
-    """
-    Specifies whether to permit more specific route announcements than the
-    CIDR prefix. When enabled, ASNs can announce sub-prefixes of the
-    authorized CIDR up to the specified maximum length. Default: `false`.
-    """
-    max_length: int | None = ...
-    """The maximum prefix length that the ASNs are authorized to announce."""
-    description: str | None = ...
-    """The description of the routing policy registration."""
-    latest_delta_id: str | None = ...
-    """The ID of the most recent delta that modified this registration."""
-    state: str | None = ...
-    """
-    The state of the routing policy registration. Valid values:
-    `pending-activate` | `activate-failed` | `create-in-progress` |
-    `create-complete` | `update-in-progress` | `update-complete` |
-    `delete-in-progress` | `delete-complete`.
-    """
-
-@dataclass(kw_only=True)
-class IpamRoutingPolicyRegistrationDelta(_SerdeShape):
-    """
-    Contains information about a routing policy registration change,
-    including the changes applied and their publication state.
-    """
-
-    delta_id: str | None = ...
-    """The unique identifier of the delta."""
-    delta_json: str | None = ...
-    """The JSON specification describing the changes applied in this delta."""
-    state: str | None = ...
-    """
-    The state of the delta. Valid values: `pending` | `published` |
-    `failed`.
-    """
-    state_message: str | None = ...
-    """
-    A message describing the current state, including error information if
-    the delta failed.
-    """
-
-class IpamRoutingPolicyRegistrationDeltaState(UnknownEnumMixin, StrEnum):
-    """The state of a routing policy registration delta."""
-
-    PENDING = "pending"
-    PUBLISHED = "published"
-    FAILED = "failed"
-
-class IpamRoutingPolicyRegistrationState(UnknownEnumMixin, StrEnum):
-    """The state of a routing policy registration."""
-
-    PENDING_ACTIVATE = "pending-activate"
-    ACTIVATE_FAILED = "activate-failed"
-    CREATE_IN_PROGRESS = "create-in-progress"
-    CREATE_COMPLETE = "create-complete"
-    UPDATE_IN_PROGRESS = "update-in-progress"
-    UPDATE_COMPLETE = "update-complete"
-    DELETE_IN_PROGRESS = "delete-in-progress"
-    DELETE_COMPLETE = "delete-complete"
-
-class IpamRpkiStatus(UnknownEnumMixin, StrEnum):
-    """The RPKI validation status of a BGP route."""
-
-    VALID = "valid"
-    INVALID = "invalid"
-    UNKNOWN = "unknown"
-
-class IpamRpkiStrength(UnknownEnumMixin, StrEnum):
-    """The RPKI enforcement strength for route protection."""
-
-    STRICT = "strict"
-    PERMISSIVE = "permissive"
-
-@dataclass(kw_only=True)
-class IpamScope(_SerdeShape):
-    """
-    In IPAM, a scope is the highest-level container within IPAM. An IPAM
-    contains two default scopes. Each scope represents the IP space for a
-    single network. The private scope is intended for all private IP address
-    space. The public scope is intended for all public IP address space.
-    Scopes enable you to reuse IP addresses across multiple unconnected
-    networks without causing IP address overlap or conflict.
-
-    For more information, see [How IPAM
-    works](https://docs.aws.amazon.com/vpc/latest/ipam/how-it-works-ipam.html)
-    in the *Amazon VPC IPAM User Guide*.
-    """
-
-    owner_id: str | None = ...
-    """The Amazon Web Services account ID of the owner of the scope."""
-    ipam_scope_id: str | None = ...
-    """The ID of the scope."""
-    ipam_scope_arn: str | None = ...
-    """The Amazon Resource Name (ARN) of the scope."""
-    ipam_arn: str | None = ...
-    """The ARN of the IPAM."""
-    ipam_region: str | None = ...
-    """The Amazon Web Services Region of the IPAM scope."""
-    ipam_scope_type: str | None = ...
-    """The type of the scope."""
-    is_default: bool | None = ...
-    """Defines if the scope is the default scope or not."""
-    description: str | None = ...
-    """The description of the scope."""
-    pool_count: int | None = ...
-    """The number of pools in the scope."""
-    state: str | None = ...
-    """The state of the IPAM scope."""
-    tags: list[Tag] | None = ...
-    """
-    The key/value combination of a tag assigned to the resource. Use the tag
-    key in the filter name and the tag value as the filter value. For
-    example, to find all resources that have a tag with the key `Owner` and
-    the value `TeamA`, specify `tag:Owner` for the filter name and `TeamA`
-    for the filter value.
-    """
-    external_authority_configuration: (
-        IpamScopeExternalAuthorityConfiguration | None
-    ) = ...
-    """
-    The external authority configuration for this IPAM scope, if configured.
-
-    The configuration that links an Amazon VPC IPAM scope to an external
-    authority system. It specifies the type of external system and the
-    external resource identifier that identifies your account or instance in
-    that system.
-
-    In IPAM, an external authority is a third-party IP address management
-    system that provides CIDR blocks when you provision address space for
-    top-level IPAM pools. This allows you to use your existing IP management
-    system to control which address ranges are allocated to Amazon Web
-    Services while using Amazon VPC IPAM to manage subnets within those
-    ranges.
-    """
-
-@dataclass(kw_only=True)
-class IpamScopeExternalAuthorityConfiguration(_SerdeShape):
-    """
-    The configuration that links an Amazon VPC IPAM scope to an external
-    authority system. It specifies the type of external system and the
-    external resource identifier that identifies your account or instance in
-    that system.
-
-    In IPAM, an external authority is a third-party IP address management
-    system that provides CIDR blocks when you provision address space for
-    top-level IPAM pools. This allows you to use your existing IP management
-    system to control which address ranges are allocated to Amazon Web
-    Services while using Amazon VPC IPAM to manage subnets within those
-    ranges.
-    """
-
-    type: str | None = ...
-    """
-    The type of external authority managing this scope. Currently supports
-    `Infoblox` for integration with Infoblox Universal DDI.
-    """
-    external_resource_identifier: str | None = ...
-    """
-    The identifier for the external resource managing this scope. For
-    Infoblox integrations, this is the Infoblox resource identifier in the
-    format
-    `<version>`{=html}`.identity.account.``<entity_realm>`{=html}`.``<entity_id>`{=html}.
-    """
-
-class IpamScopeExternalAuthorityType(UnknownEnumMixin, StrEnum):
-    INFOBLOX = "infoblox"
-
-class IpamScopeState(UnknownEnumMixin, StrEnum):
-    CREATE_IN_PROGRESS = "create-in-progress"
-    CREATE_COMPLETE = "create-complete"
-    CREATE_FAILED = "create-failed"
-    MODIFY_IN_PROGRESS = "modify-in-progress"
-    MODIFY_COMPLETE = "modify-complete"
-    MODIFY_FAILED = "modify-failed"
-    DELETE_IN_PROGRESS = "delete-in-progress"
-    DELETE_COMPLETE = "delete-complete"
-    DELETE_FAILED = "delete-failed"
-    ISOLATE_IN_PROGRESS = "isolate-in-progress"
-    ISOLATE_COMPLETE = "isolate-complete"
-    RESTORE_IN_PROGRESS = "restore-in-progress"
-
-class IpamScopeType(UnknownEnumMixin, StrEnum):
-    PUBLIC = "public"
-    PRIVATE = "private"
-
-class IpamState(UnknownEnumMixin, StrEnum):
-    CREATE_IN_PROGRESS = "create-in-progress"
-    CREATE_COMPLETE = "create-complete"
-    CREATE_FAILED = "create-failed"
-    MODIFY_IN_PROGRESS = "modify-in-progress"
-    MODIFY_COMPLETE = "modify-complete"
-    MODIFY_FAILED = "modify-failed"
-    DELETE_IN_PROGRESS = "delete-in-progress"
-    DELETE_COMPLETE = "delete-complete"
-    DELETE_FAILED = "delete-failed"
-    ISOLATE_IN_PROGRESS = "isolate-in-progress"
-    ISOLATE_COMPLETE = "isolate-complete"
-    RESTORE_IN_PROGRESS = "restore-in-progress"
-
-class IpamTier(UnknownEnumMixin, StrEnum):
-    FREE = "free"
-    ADVANCED = "advanced"
-
-@dataclass(kw_only=True)
-class IpPermission(_SerdeShape):
-    """Describes the permissions for a security group rule."""
-
-    ip_protocol: str | None = ...
-    """
-    The IP protocol name (`tcp`, `udp`, `icmp`, `icmpv6`) or number (see
-    [Protocol
-    Numbers](http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)).
-
-    Use `-1` to specify all protocols. When authorizing security group
-    rules, specifying `-1` or a protocol number other than `tcp`, `udp`,
-    `icmp`, or `icmpv6` allows traffic on all ports, regardless of any port
-    range you specify. For `tcp`, `udp`, and `icmp`, you must specify a port
-    range. For `icmpv6`, the port range is optional; if you omit the port
-    range, traffic for all types and codes is allowed.
-    """
-    from_port: int | None = ...
-    """
-    If the protocol is TCP or UDP, this is the start of the port range. If
-    the protocol is ICMP or ICMPv6, this is the ICMP type or -1 (all ICMP
-    types).
-    """
-    to_port: int | None = ...
-    """
-    If the protocol is TCP or UDP, this is the end of the port range. If the
-    protocol is ICMP or ICMPv6, this is the ICMP code or -1 (all ICMP
-    codes). If the start port is -1 (all ICMP types), then the end port must
-    be -1 (all ICMP codes).
-    """
-    user_id_group_pairs: list[UserIdGroupPair] | None = ...
-    """The security group and Amazon Web Services account ID pairs."""
-    ip_ranges: list[IpRange] | None = ...
-    """The IPv4 address ranges."""
-    ipv6_ranges: list[Ipv6Range] | None = ...
-    """The IPv6 address ranges."""
-    prefix_list_ids: list[PrefixListId] | None = ...
-    """The prefix list IDs."""
-
-class IpPermissionDict(TypedDict, total=False):
-    """Dictionary form of `IpPermission`."""
-
-    ip_protocol: str | None
-    """
-    The IP protocol name (`tcp`, `udp`, `icmp`, `icmpv6`) or number (see
-    [Protocol
-    Numbers](http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)).
-
-    Use `-1` to specify all protocols. When authorizing security group
-    rules, specifying `-1` or a protocol number other than `tcp`, `udp`,
-    `icmp`, or `icmpv6` allows traffic on all ports, regardless of any port
-    range you specify. For `tcp`, `udp`, and `icmp`, you must specify a port
-    range. For `icmpv6`, the port range is optional; if you omit the port
-    range, traffic for all types and codes is allowed.
-    """
-    from_port: int | None
-    """
-    If the protocol is TCP or UDP, this is the start of the port range. If
-    the protocol is ICMP or ICMPv6, this is the ICMP type or -1 (all ICMP
-    types).
-    """
-    to_port: int | None
-    """
-    If the protocol is TCP or UDP, this is the end of the port range. If the
-    protocol is ICMP or ICMPv6, this is the ICMP code or -1 (all ICMP
-    codes). If the start port is -1 (all ICMP types), then the end port must
-    be -1 (all ICMP codes).
-    """
-    user_id_group_pairs: Sequence[UserIdGroupPair | UserIdGroupPairDict] | None
-    """The security group and Amazon Web Services account ID pairs."""
-    ip_ranges: Sequence[IpRange | IpRangeDict] | None
-    """The IPv4 address ranges."""
-    ipv6_ranges: Sequence[Ipv6Range | Ipv6RangeDict] | None
-    """The IPv6 address ranges."""
-    prefix_list_ids: Sequence[PrefixListId | PrefixListIdDict] | None
-    """The prefix list IDs."""
-
-@dataclass(kw_only=True)
-class IpRange(_SerdeShape):
-    """Describes an IPv4 address range."""
-
-    description: str | None = ...
-    """
-    A description for the security group rule that references this IPv4
-    address range.
-
-    Constraints: Up to 255 characters in length. Allowed characters are a-z,
-    A-Z, 0-9, spaces, and ._-:/()#,@[]+=&;{}!$*
-    """
-    cidr_ip: str | None = ...
-    """
-    The IPv4 address range. You can either specify a CIDR block or a source
-    security group, not both. To specify a single IPv4 address, use the /32
-    prefix length.
-
-    Note:
-        Amazon Web Services
-        [canonicalizes](https://en.wikipedia.org/wiki/Canonicalization) IPv4 and
-        IPv6 CIDRs. For example, if you specify 100.68.0.18/18 for the CIDR
-        block, Amazon Web Services canonicalizes the CIDR block to
-        100.68.0.0/18. Any subsequent DescribeSecurityGroups and
-        DescribeSecurityGroupRules calls will return the canonicalized form of
-        the CIDR block. Additionally, if you attempt to add another rule with
-        the non-canonical form of the CIDR (such as 100.68.0.18/18) and there is
-        already a rule for the canonicalized form of the CIDR block (such as
-        100.68.0.0/18), the API throws an duplicate rule error.
-    """
-
-class IpRangeDict(TypedDict, total=False):
-    """Dictionary form of `IpRange`."""
-
-    description: str | None
-    """
-    A description for the security group rule that references this IPv4
-    address range.
-
-    Constraints: Up to 255 characters in length. Allowed characters are a-z,
-    A-Z, 0-9, spaces, and ._-:/()#,@[]+=&;{}!$*
-    """
-    cidr_ip: str | None
-    """
-    The IPv4 address range. You can either specify a CIDR block or a source
-    security group, not both. To specify a single IPv4 address, use the /32
-    prefix length.
-
-    Note:
-        Amazon Web Services
-        [canonicalizes](https://en.wikipedia.org/wiki/Canonicalization) IPv4 and
-        IPv6 CIDRs. For example, if you specify 100.68.0.18/18 for the CIDR
-        block, Amazon Web Services canonicalizes the CIDR block to
-        100.68.0.0/18. Any subsequent DescribeSecurityGroups and
-        DescribeSecurityGroupRules calls will return the canonicalized form of
-        the CIDR block. Additionally, if you attempt to add another rule with
-        the non-canonical form of the CIDR (such as 100.68.0.18/18) and there is
-        already a rule for the canonicalized form of the CIDR block (such as
-        100.68.0.0/18), the API throws an duplicate rule error.
-    """
-
-class IpScopeEnum(UnknownEnumMixin, StrEnum):
-    PRIVATE = "private"
-
-class IpSource(UnknownEnumMixin, StrEnum):
-    AMAZON = "amazon"
-    BYOIP = "byoip"
-    NONE = "none"
-
-@dataclass(kw_only=True)
-class Ipv4PrefixSpecification(_SerdeShape):
-    """Describes an IPv4 prefix."""
-
-    ipv4_prefix: str | None = ...
-    """
-    The IPv4 prefix. For information, see [Assigning prefixes to network
-    interfaces](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html)
-    in the *Amazon EC2 User Guide*.
-    """

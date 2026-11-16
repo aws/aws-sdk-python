@@ -76,10 +76,11 @@ _AC = "AfterContext"
 _AV = "AfterValue"
 _AVF = "AfterValueFrom"
 _TEMPLATE = "TEMPLATE"
+_AN = "AliasName"
 _AVl = "AllowedValue"
 _AVll = "AllowedValues"
 _AEE = "AlreadyExistsException"
-_AN = "AnnotationName"
+_ANn = "AnnotationName"
 _ARL = "AnnotationRemediationLink"
 _RMRM = "RemediationMessageRemediationMessage"
 _ASL = "AnnotationSeverityLevel"
@@ -238,12 +239,11 @@ _NC = "NOT_CHECKED"
 _UNKNOWN = "UNKNOWN"
 _UNSUPPORTED = "UNSUPPORTED"
 _RT = "ResourceType"
-_TVI = "TypeVersionId"
 _CTl = "ClientToken"
 _RTe = "ResourceTypes"
+_LEE = "LimitExceededException"
 _SPB = "StackPolicyBody"
 _SPURL = "StackPolicyURL"
-_RTeg = "RegistryType"
 
 ACCEPT_TERMS_AND_CONDITIONS: StaticSchema = (2, n0, _ATAC, 0)
 
@@ -473,6 +473,8 @@ AFTER_VALUE_FROM: StaticSchema = (
     ((-1, {_sV: _TEMPLATE}),),
 )
 
+ALIAS_NAME: StaticSchema = (3, n0, _AN, 0)
+
 ALLOWED_VALUE: StaticSchema = (3, n0, _AVl, 0)
 
 ALLOWED_VALUES: StaticSchema = (16, n0, _AVll, 0, (_m,), ((ALLOWED_VALUE, 0),))
@@ -492,7 +494,7 @@ ALREADY_EXISTS_EXCEPTION: StaticSchema = (
     ((ERROR_MESSAGE, 0),),
 )
 
-ANNOTATION_NAME: StaticSchema = (3, n0, _AN, 0)
+ANNOTATION_NAME: StaticSchema = (3, n0, _ANn, 0)
 
 ANNOTATION_REMEDIATION_LINK: StaticSchema = (3, n0, _ARL, 0)
 
@@ -529,7 +531,7 @@ ANNOTATION: StaticSchema = (
     n0,
     _An,
     0,
-    (_AN, _S, _SM, _RM, _RL, _SL),
+    (_ANn, _S, _SM, _RM, _RL, _SL),
     (
         (ANNOTATION_NAME, 0),
         (ANNOTATION_STATUS, 0),
@@ -1044,17 +1046,21 @@ CLIENT_TOKEN: StaticSchema = (3, n0, _CTl, 0)
 
 RESOURCE_TYPES: StaticSchema = (16, n0, _RTe, 0, (_m,), ((RESOURCE_TYPE, 0),))
 
+LIMIT_EXCEEDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _LEE,
+    {
+        _smi: _c,
+        _sE: 400,
+        _aQE: MappingProxyType(
+            {"code": "LimitExceededException", "httpResponseCode": 400}
+        ),
+    },
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
 STACK_POLICY_BODY: StaticSchema = (3, n0, _SPB, 0)
 
 STACK_POLICY_URL: StaticSchema = (3, n0, _SPURL, 0)
-
-REGISTRY_TYPE: StaticSchema = (
-    14,
-    n0,
-    _RTeg,
-    0,
-    (_RESOURCE, _MODULE, _HOOK),
-    ((-1, {_sV: _RESOURCE}), (-1, {_sV: _MODULE}), (-1, {_sV: _HOOK})),
-)
-
-TYPE_VERSION_ID: StaticSchema = (3, n0, _TVI, 0)

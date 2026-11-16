@@ -176,9 +176,9 @@ class S3Client(Client[S3Config]):
     """
 
     _client_plugins = (
-        user_agent_plugin,
         aws_user_agent_plugin,
         flexible_checksums_plugin,
+        user_agent_plugin,
     )
 
     @_overload

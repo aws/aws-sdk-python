@@ -56,7 +56,7 @@ logger = logging.getLogger(__name__)
 class AsyncBedrockDataAutomationClient(AsyncClient[AsyncBedrockDataAutomationConfig]):
     """Amazon Bedrock Data Automation BuildTime"""
 
-    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
+    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
 
     @_overload
     async def copy_blueprint_stage(

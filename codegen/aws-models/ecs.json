@@ -5679,8 +5679,8 @@
                                 "computedDesiredCount": 0,
                                 "pendingCount": 0,
                                 "runningCount": 0,
-                                "createdAt": 1557128360.711,
-                                "updatedAt": 1557128360.711,
+                                "createdAt": 1.557128360711E9,
+                                "updatedAt": 1.557128360711E9,
                                 "launchType": "EC2",
                                 "networkConfiguration": {
                                     "awsvpcConfiguration": {
@@ -5700,7 +5700,7 @@
                                     "unit": "PERCENT"
                                 },
                                 "stabilityStatus": "STABILIZING",
-                                "stabilityStatusAt": 1557128360.711
+                                "stabilityStatusAt": 1.557128360711E9
                             }
                         }
                     }
@@ -8409,8 +8409,8 @@
                                 "computedDesiredCount": 0,
                                 "pendingCount": 0,
                                 "runningCount": 0,
-                                "createdAt": 1557130260.276,
-                                "updatedAt": 1557130290.707,
+                                "createdAt": 1.557130260276E9,
+                                "updatedAt": 1.557130290707E9,
                                 "launchType": "EC2",
                                 "networkConfiguration": {
                                     "awsvpcConfiguration": {
@@ -8430,7 +8430,7 @@
                                     "unit": "PERCENT"
                                 },
                                 "stabilityStatus": "STABILIZING",
-                                "stabilityStatusAt": 1557130290.707
+                                "stabilityStatusAt": 1.557130290707E9
                             }
                         }
                     }
@@ -11846,8 +11846,8 @@
                                     "computedDesiredCount": 0,
                                     "pendingCount": 0,
                                     "runningCount": 0,
-                                    "createdAt": 1557207715.195,
-                                    "updatedAt": 1557207740.014,
+                                    "createdAt": 1.557207715195E9,
+                                    "updatedAt": 1.557207740014E9,
                                     "launchType": "EC2",
                                     "networkConfiguration": {
                                         "awsvpcConfiguration": {
@@ -11867,7 +11867,7 @@
                                         "unit": "PERCENT"
                                     },
                                     "stabilityStatus": "STEADY_STATE",
-                                    "stabilityStatusAt": 1557207740.014
+                                    "stabilityStatusAt": 1.557207740014E9
                                 }
                             ],
                             "failures": []
@@ -23969,7 +23969,7 @@
                                             "taskArn": "arn:aws:ecs:us-east-1:012345678910:task/default/fdf2c302-468c-4e55-b884-5331d816e7fb"
                                         }
                                     ],
-                                    "createdAt": 1479765460.842,
+                                    "createdAt": 1.479765460842E9,
                                     "desiredStatus": "RUNNING",
                                     "lastStatus": "PENDING",
                                     "overrides": {
@@ -24311,7 +24311,7 @@
                                         "taskArn": "arn:aws:ecs:us-east-1:012345678910:task/MyCluster/1dc5c17a-422b-4dc4-b493-371970c6c4d6"
                                     }
                                 ],
-                                "createdAt": 1476822811.295,
+                                "createdAt": 1.476822811295E9,
                                 "desiredStatus": "STOPPED",
                                 "lastStatus": "RUNNING",
                                 "overrides": {
@@ -24324,7 +24324,7 @@
                                         }
                                     ]
                                 },
-                                "startedAt": 1476822833.998,
+                                "startedAt": 1.476822833998E9,
                                 "startedBy": "ecs-svc/9223370560032507596",
                                 "stoppedReason": "testing stop task.",
                                 "taskArn": "arn:aws:ecs:us-east-1:012345678910:task/1dc5c17a-422b-4dc4-b493-371970c6c4d6",
@@ -28232,8 +28232,8 @@
                                 "computedDesiredCount": 1,
                                 "pendingCount": 0,
                                 "runningCount": 0,
-                                "createdAt": 1557128360.711,
-                                "updatedAt": 1557129412.653,
+                                "createdAt": 1.557128360711E9,
+                                "updatedAt": 1.557129412653E9,
                                 "launchType": "EC2",
                                 "networkConfiguration": {
                                     "awsvpcConfiguration": {
@@ -28253,7 +28253,7 @@
                                     "unit": "PERCENT"
                                 },
                                 "stabilityStatus": "STABILIZING",
-                                "stabilityStatusAt": 1557129279.914
+                                "stabilityStatusAt": 1.557129279914E9
                             }
                         }
                     }
@@ -28723,8 +28723,8 @@
                                 "computedDesiredCount": 0,
                                 "pendingCount": 0,
                                 "runningCount": 0,
-                                "createdAt": 1557128360.711,
-                                "updatedAt": 1557129279.914,
+                                "createdAt": 1.557128360711E9,
+                                "updatedAt": 1.557129279914E9,
                                 "launchType": "EC2",
                                 "networkConfiguration": {
                                     "awsvpcConfiguration": {
@@ -28744,7 +28744,7 @@
                                     "unit": "PERCENT"
                                 },
                                 "stabilityStatus": "STABILIZING",
-                                "stabilityStatusAt": 1557129279.914
+                                "stabilityStatusAt": 1.557129279914E9
                             }
                         }
                     }

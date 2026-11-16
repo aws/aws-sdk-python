@@ -27,9 +27,7 @@ _smi = "smithy.api#required"
 _TSa = "TagSpecifications"
 _DR = "DryRun"
 _p = "pending"
-_d = "disabled"
 _smit = "smithy.api#output"
-_CRI = "CapacityReservationId"
 _St = "State"
 _st = "state"
 _RIe = "ResourceId"
@@ -42,7 +40,6 @@ _dRr = "dryRun"
 _Ci = "Cidr"
 _PLI = "PrefixListId"
 _pLI = "prefixListId"
-_ena = "enabled"
 _OEP = "OrganizationsEntityPath"
 _Des = "Description"
 _AF = "AddressFamily"
@@ -50,7 +47,6 @@ _Asn = "Asn"
 _IPI = "IpamPoolId"
 _desc = "description"
 _iPI = "ipamPoolId"
-_ASS = "AmdSevSnp"
 _CTl = "ClientToken"
 _sT = "smithy.api#idempotencyToken"
 _eip = "eip"
@@ -78,7 +74,6 @@ _ID = "IsDefault"
 _iD = "isDefault"
 _ama = "amazon"
 _b = "byoip"
-_no = "none"
 _pu = "public"
 _priv = "private"
 _ECI = "EbsCardIndex"
@@ -89,7 +84,6 @@ _IRPRD = "IpamRoutingPolicyRegistrationDelta"
 _SMta = "StateMessage"
 _sMta = "stateMessage"
 _iRPRD = "ipamRoutingPolicyRegistrationDelta"
-_op = "open"
 _KKI = "KmsKeyId"
 _En = "Encrypted"
 _SIn = "SnapshotId"
@@ -108,8 +102,6 @@ _Eb = "Ebs"
 _ND = "NoDevice"
 _BDM = "BlockDeviceMapping"
 _KN = "KeyName"
-_CRRGAa = "CapacityReservationResourceGroupArn"
-_CRTap = "CapacityReservationTarget"
 _cip = "create_in_progress"
 _cip_ = "create-in-progress"
 _cc_ = "create_complete"
@@ -125,8 +117,8 @@ _ORpe = "OperatingRegion"
 _ISI = "IpamScopeId"
 _mip__ = "modify_in_progress"
 _mip___ = "modify-in-progress"
-_mc = "modify_complete"
-_mc_ = "modify-complete"
+_mc__ = "modify_complete"
+_mc___ = "modify-complete"
 _mf__________________________ = "modify_failed"
 _mf___________________________ = "modify-failed"
 _iip_ = "isolate_in_progress"
@@ -140,6 +132,16 @@ _CF_ = "CREATE_FAILED"
 _DIP_ = "DELETE_IN_PROGRESS"
 _DC__ = "DELETE_COMPLETE"
 _DF_ = "DELETE_FAILED"
+_Ri = "Rir"
+_OHr = "OrganizationHandle"
+_IIRA = "IpamInternetRegistryAssociation"
+_iIRAI = "ipamInternetRegistryAssociationId"
+_IIRAA = "IpamInternetRegistryAssociationArn"
+_iIRAA = "ipamInternetRegistryAssociationArn"
+_rir = "rir"
+_oHr = "organizationHandle"
+_CRX = "ChildRequestXml"
+_cRX = "childRequestXml"
 _CIPI = "CreateIpamPolicyInput"
 _cCIPR = "com.amazonaws.ec2#CreateIpamPolicyRequest"
 _IPIp = "IpamPolicyId"
@@ -354,19 +356,33 @@ _CKP = "CreateKeyPair"
 _LTEBDR = "LaunchTemplateEbsBlockDeviceRequest"
 _LTBDMR = "LaunchTemplateBlockDeviceMappingRequest"
 _LTBDMRL = "LaunchTemplateBlockDeviceMappingRequestList"
-_CRP = "CapacityReservationPreference"
-_cro_ = "capacity_reservations_only"
-_cro__ = "capacity-reservations-only"
-_LTCRSR = "LaunchTemplateCapacityReservationSpecificationRequest"
-_ASSS = "AmdSevSnpSpecification"
-_NVS = "NestedVirtualizationSpecification"
-_LTCOR = "LaunchTemplateCpuOptionsRequest"
-_CCor = "CoreCount"
-_TPC = "ThreadsPerCore"
-_NV = "NestedVirtualization"
-_CSR = "CreditSpecificationRequest"
-_CCp = "CpuCredits"
-_CRSa = "CapacityReservationSpecification"
+
+IPAM_INTERNET_REGISTRY_ASSOCIATION_ID: StaticSchema = (3, n0, _IIRAI, 0)
+
+IPAM_INTERNET_REGISTRY_ASSOCIATION: StaticSchema = (
+    18,
+    n0,
+    _IIRA,
+    0,
+    (_OIw, _IIRAI, _IIRAA, _IIp, _IR, _Ri, _OHr, _Des, _St, _SMta, _CRX, _Tag),
+    (
+        (lambda: schemas.STRING, {_aQN: _OIw, _sN: _oI}),
+        (IPAM_INTERNET_REGISTRY_ASSOCIATION_ID, {_aQN: _IIRAI, _sN: _iIRAI}),
+        (lambda: schemas.RESOURCE_ARN, {_aQN: _IIRAA, _sN: _iIRAA}),
+        (lambda: schemas.IPAM_ID, {_aQN: _IIp, _sN: _iIp}),
+        (lambda: schemas.STRING, {_aQN: _IR, _sN: _iRp}),
+        (lambda: schemas.RIR, {_aQN: _Ri, _sN: _rir}),
+        (lambda: schemas.STRING, {_aQN: _OHr, _sN: _oHr}),
+        (lambda: schemas.STRING, {_aQN: _Des, _sN: _desc}),
+        (
+            lambda: schemas.IPAM_INTERNET_REGISTRY_ASSOCIATION_STATE,
+            {_aQN: _St, _sN: _st},
+        ),
+        (lambda: schemas.STRING, {_aQN: _SMta, _sN: _sMta}),
+        (lambda: schemas.STRING, {_aQN: _CRX, _sN: _cRX}),
+        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
+    ),
+)
 
 CREATE_IPAM_POLICY_INPUT: StaticSchema = (
     18,
@@ -401,6 +417,8 @@ CREATE_IPAM_POLICY: StaticOperationSchema = (
     (),
 )
 
+IPAM_POLICY_ID: StaticSchema = (3, n0, _IPIp, 0)
+
 IPAM_POLICY_STATE: StaticSchema = (
     14,
     n0,
@@ -411,7 +429,7 @@ IPAM_POLICY_STATE: StaticSchema = (
         _cc_,
         _cf________________________,
         _mip__,
-        _mc,
+        _mc__,
         _mf__________________________,
         _dip_,
         _dc_,
@@ -425,7 +443,7 @@ IPAM_POLICY_STATE: StaticSchema = (
         (-1, {_sV: _cc__}),
         (-1, {_sV: _cf_________________________}),
         (-1, {_sV: _mip___}),
-        (-1, {_sV: _mc_}),
+        (-1, {_sV: _mc___}),
         (-1, {_sV: _mf___________________________}),
         (-1, {_sV: _dip__}),
         (-1, {_sV: _dc__}),
@@ -444,7 +462,7 @@ IPAM_POLICY: StaticSchema = (
     (_OIw, _IPIp, _IPAp, _IPR, _St, _SMta, _Tag, _IIp),
     (
         (lambda: schemas.STRING, {_aQN: _OIw, _sN: _oI}),
-        (lambda: schemas.IPAM_POLICY_ID, {_aQN: _IPIp, _sN: _iPIp}),
+        (IPAM_POLICY_ID, {_aQN: _IPIp, _sN: _iPIp}),
         (lambda: schemas.RESOURCE_ARN, {_aQN: _IPAp, _sN: _iPAp}),
         (lambda: schemas.STRING, {_aQN: _IPR, _sN: _iPR}),
         (IPAM_POLICY_STATE, {_aQN: _St, _sN: _st}),
@@ -633,7 +651,7 @@ IPAM_POOL_STATE: StaticSchema = (
         _cc_,
         _cf________________________,
         _mip__,
-        _mc,
+        _mc__,
         _mf__________________________,
         _dip_,
         _dc_,
@@ -647,7 +665,7 @@ IPAM_POOL_STATE: StaticSchema = (
         (-1, {_sV: _cc__}),
         (-1, {_sV: _cf_________________________}),
         (-1, {_sV: _mip___}),
-        (-1, {_sV: _mc_}),
+        (-1, {_sV: _mc___}),
         (-1, {_sV: _mf___________________________}),
         (-1, {_sV: _dip__}),
         (-1, {_sV: _dc__}),
@@ -859,7 +877,7 @@ IPAM_PREFIX_LIST_RESOLVER_STATE: StaticSchema = (
         _cc_,
         _cf________________________,
         _mip__,
-        _mc,
+        _mc__,
         _mf__________________________,
         _dip_,
         _dc_,
@@ -873,7 +891,7 @@ IPAM_PREFIX_LIST_RESOLVER_STATE: StaticSchema = (
         (-1, {_sV: _cc__}),
         (-1, {_sV: _cf_________________________}),
         (-1, {_sV: _mip___}),
-        (-1, {_sV: _mc_}),
+        (-1, {_sV: _mc___}),
         (-1, {_sV: _mf___________________________}),
         (-1, {_sV: _dip__}),
         (-1, {_sV: _dc__}),
@@ -954,7 +972,7 @@ IPAM_PREFIX_LIST_RESOLVER_TARGET_STATE: StaticSchema = (
         _cc_,
         _cf________________________,
         _mip__,
-        _mc,
+        _mc__,
         _mf__________________________,
         _sip,
         _sc____,
@@ -971,7 +989,7 @@ IPAM_PREFIX_LIST_RESOLVER_TARGET_STATE: StaticSchema = (
         (-1, {_sV: _cc__}),
         (-1, {_sV: _cf_________________________}),
         (-1, {_sV: _mip___}),
-        (-1, {_sV: _mc_}),
+        (-1, {_sV: _mc___}),
         (-1, {_sV: _mf___________________________}),
         (-1, {_sV: _sip_}),
         (-1, {_sV: _sc_____}),
@@ -1070,7 +1088,7 @@ IPAM_RESOURCE_DISCOVERY_STATE: StaticSchema = (
         (-1, {_sV: _cc__}),
         (-1, {_sV: _cf_________________________}),
         (-1, {_sV: _mip___}),
-        (-1, {_sV: _mc_}),
+        (-1, {_sV: _mc___}),
         (-1, {_sV: _mf___________________________}),
         (-1, {_sV: _dip__}),
         (-1, {_sV: _dc__}),
@@ -1120,7 +1138,7 @@ CREATE_IPAM_ROUTING_POLICY_REGISTRATION_INPUT: StaticSchema = (
     (_DR, _IIRAI, _Ci, _Asns, _PMSA, _ML, _Des, _Fo, _CTl),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_INTERNET_REGISTRY_ASSOCIATION_ID, 1),
+        (IPAM_INTERNET_REGISTRY_ASSOCIATION_ID, 1),
         (lambda: schemas.STRING, 1),
         (ASN_LIST, {_sN: _Asn, _smi: None}),
         (lambda: schemas.BOXED_BOOLEAN, 0),
@@ -1230,7 +1248,7 @@ IPAM_SCOPE_STATE: StaticSchema = (
         _cc_,
         _cf________________________,
         _mip__,
-        _mc,
+        _mc__,
         _mf__________________________,
         _dip_,
         _dc_,
@@ -1244,7 +1262,7 @@ IPAM_SCOPE_STATE: StaticSchema = (
         (-1, {_sV: _cc__}),
         (-1, {_sV: _cf_________________________}),
         (-1, {_sV: _mip___}),
-        (-1, {_sV: _mc_}),
+        (-1, {_sV: _mc___}),
         (-1, {_sV: _mf___________________________}),
         (-1, {_sV: _dip__}),
         (-1, {_sV: _dc__}),
@@ -1376,81 +1394,4 @@ LAUNCH_TEMPLATE_BLOCK_DEVICE_MAPPING_REQUEST_LIST: StaticSchema = (
     0,
     (_me,),
     ((LAUNCH_TEMPLATE_BLOCK_DEVICE_MAPPING_REQUEST, {_sN: _BDM}),),
-)
-
-CAPACITY_RESERVATION_PREFERENCE: StaticSchema = (
-    14,
-    n0,
-    _CRP,
-    0,
-    (_cro_, _op, _no),
-    ((-1, {_sV: _cro__}), (-1, {_sV: _op}), (-1, {_sV: _no})),
-)
-
-CAPACITY_RESERVATION_TARGET: StaticSchema = (
-    18,
-    n0,
-    _CRTap,
-    0,
-    (_CRI, _CRRGAa),
-    ((lambda: schemas.CAPACITY_RESERVATION_ID, 0), (lambda: schemas.STRING, 0)),
-)
-
-LAUNCH_TEMPLATE_CAPACITY_RESERVATION_SPECIFICATION_REQUEST: StaticSchema = (
-    18,
-    n0,
-    _LTCRSR,
-    0,
-    (_CRP, _CRTap),
-    ((CAPACITY_RESERVATION_PREFERENCE, 0), (CAPACITY_RESERVATION_TARGET, 0)),
-)
-
-AMD_SEV_SNP_SPECIFICATION: StaticSchema = (
-    14,
-    n0,
-    _ASSS,
-    0,
-    (_ena, _d),
-    ((-1, {_sV: _ena}), (-1, {_sV: _d})),
-)
-
-NESTED_VIRTUALIZATION_SPECIFICATION: StaticSchema = (
-    14,
-    n0,
-    _NVS,
-    0,
-    (_ena, _d),
-    ((-1, {_sV: _ena}), (-1, {_sV: _d})),
-)
-
-LAUNCH_TEMPLATE_CPU_OPTIONS_REQUEST: StaticSchema = (
-    18,
-    n0,
-    _LTCOR,
-    0,
-    (_CCor, _TPC, _ASS, _NV),
-    (
-        (lambda: schemas.INTEGER, 0),
-        (lambda: schemas.INTEGER, 0),
-        (AMD_SEV_SNP_SPECIFICATION, 0),
-        (NESTED_VIRTUALIZATION_SPECIFICATION, 0),
-    ),
-)
-
-CREDIT_SPECIFICATION_REQUEST: StaticSchema = (
-    18,
-    n0,
-    _CSR,
-    0,
-    (_CCp,),
-    ((lambda: schemas.STRING, 1),),
-)
-
-CAPACITY_RESERVATION_SPECIFICATION: StaticSchema = (
-    18,
-    n0,
-    _CRSa,
-    0,
-    (_CRP, _CRTap),
-    ((CAPACITY_RESERVATION_PREFERENCE, 0), (CAPACITY_RESERVATION_TARGET, 0)),
 )

@@ -8,62 +8,108 @@ from . import schemas
 n0 = "com.amazonaws.ec2"
 _aQN = "aws.protocols#ec2QueryName"
 _sN = "smithy.api#xmlName"
+_sV = "smithy.api#enumValue"
 _me = "member"
 _i = "item"
 _RT = "ResourceType"
+_Ta = "Tag"
 _Ke = "Key"
 _ke = "key"
 _Va = "Value"
 _va = "value"
+_TS = "TagSpecification"
 _rT = "resourceType"
 _Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
 _smi = "smithy.api#required"
+_TSa = "TagSpecifications"
 _DR = "DryRun"
+_d = "disabled"
 _smit = "smithy.api#output"
-_TGAI = "TransitGatewayAttachmentId"
-_TGI = "TransitGatewayId"
-_tGAI = "transitGatewayAttachmentId"
-_tGI = "transitGatewayId"
 _St = "State"
 _st = "state"
-_CT = "CreationTime"
-_cT = "creationTime"
 _SI = "SubnetIds"
+_fa = "failed"
 _SIu = "SubnetId"
+_sI = "subnetId"
 _RIe = "ResourceId"
 _rI = "resourceId"
-_ROI = "ResourceOwnerId"
-_rOI = "resourceOwnerId"
 _Su = "Subnets"
+_C = "Code"
+_co = "code"
+_Me = "Message"
+_mes = "message"
+_Sta = "Status"
+_sta = "status"
 _TSag = "TagSet"
 _tS = "tagSet"
 _VI = "VpcId"
 _vI = "vpcId"
+_er = "error"
 _dRr = "dryRun"
+_act = "active"
+_Ar = "Arn"
+_ar = "arn"
+_N = "Name"
+_nam = "name"
+_Pr = "Priority"
+_pri = "priority"
 _AZ = "AvailabilityZone"
 _aZ = "availabilityZone"
 _AZI = "AvailabilityZoneId"
 _aZI = "availabilityZoneId"
-_TGA = "TransitGatewayAttachment"
+_II = "InstanceId"
+_iI = "instanceId"
+_NII = "NetworkInterfaceId"
+_nII = "networkInterfaceId"
+_SGI = "SecurityGroupId"
+_SGe = "SecurityGroups"
+_ena = "enabled"
 _IT = "InstanceType"
 _iT = "instanceType"
+_SIRI = "SpotInstanceRequestId"
+_sIRI = "spotInstanceRequestId"
+_AIS = "ActiveInstanceSet"
+_ASc = "ActivityStatus"
+_ERROR = "ERROR"
 _Des = "Description"
-_AIs = "AssociationId"
+_PIAr = "PrivateIpAddress"
+_pIAr = "privateIpAddress"
 _desc = "description"
+_def = "default"
+_CTl = "ClientToken"
+_cTl = "clientToken"
+_ASll = "AllocationStrategy"
+_LP = "LOWEST_PRICE"
+_lP = "lowestPrice"
+_IPC = "Ipv6PrefixCount"
+_IPp = "Ipv6Prefixes"
+_IPpv = "Ipv6Prefix"
+_IAp = "Ipv6Addresses"
+_IAC = "Ipv6AddressCount"
+_iAC = "ipv6AddressCount"
+_IPpvr = "Ipv4Prefixes"
+_IPpvre = "Ipv4Prefix"
+_IPCp = "Ipv4PrefixCount"
+_PIAri = "PrivateIpAddresses"
+_SPIAC = "SecondaryPrivateIpAddressCount"
+_sPIAC = "secondaryPrivateIpAddressCount"
+_IIP = "IamInstanceProfile"
+_iIP = "iamInstanceProfile"
 _Ti = "Timestamp"
 _ti = "timestamp"
 _GIr = "GroupId"
-_TGPTI = "TransitGatewayPolicyTableId"
-_tGPTI = "transitGatewayPolicyTableId"
-_Ass = "Association"
-_assoc = "association"
-_TGRTI = "TransitGatewayRouteTableId"
-_tGRTI = "transitGatewayRouteTableId"
 _gIr = "groupId"
 _G = "Groups"
 _IIm = "ImageId"
+_ESS = "EnaSrdSpecification"
+_NCI = "NetworkCardIndex"
+_EQC = "EnaQueueCount"
+_DI = "DeviceIndex"
+_dI = "deviceIndex"
+_DOT = "DeleteOnTermination"
+_dOT = "deleteOnTermination"
 _GN = "GroupName"
 _gN = "groupName"
 _IPpr = "IpProtocol"
@@ -80,26 +126,249 @@ _PLIr = "PrefixListIds"
 _pLIr = "prefixListIds"
 _Bu = "Bucket"
 _buc = "bucket"
-_TMFRI = "TrafficMirrorFilterRuleId"
-_TMFI = "TrafficMirrorFilterId"
-_TMTI = "TrafficMirrorTargetId"
-_TMSI = "TrafficMirrorSessionId"
-_TGAISL = "TransitGatewayAttachmentIdStringList"
-_TGAransi = "TransitGatewayAttachments"
-_tGArans = "transitGatewayAttachments"
+_ST = "StartTime"
+_sTt = "startTime"
+_UT = "UpdateTime"
+_uT = "updateTime"
+_can = "cancelled"
+_cl = "closed"
+_SFRI = "SpotFleetRequestId"
+_SFRIp = "SpotFleetRequestIds"
+_sFRI = "spotFleetRequestId"
+_SIRIp = "SpotInstanceRequestIds"
+_op = "open"
+_SIRS = "SpotInstanceRequestSet"
+_sIRS = "spotInstanceRequestSet"
+_iIm = "imageId"
+_CTr = "CreateTime"
+_cTr = "createTime"
+_Ten = "Tenancy"
+_EO = "EbsOptimized"
+_DEFAULT = "DEFAULT"
+_ten = "tenancy"
+_eO = "ebsOptimized"
+_IRn = "InstanceRequirements"
+_FCu = "FulfilledCapacity"
+_fCu = "fulfilledCapacity"
+_aSl = "allocationStrategy"
+_Ty = "Type"
+_Ena = "Enabled"
+_ty = "type"
+_NT = "NO_TERMINATION"
+_BDM = "BlockDeviceMapping"
+_Pl = "Placement"
+_WC = "WeightedCapacity"
+_KN = "KeyName"
+_BDMl = "BlockDeviceMappings"
+_LTS = "LaunchTemplateSpecification"
+_Ov = "Overrides"
+_PRIORITIZED = "PRIORITIZED"
+_prio = "prioritized"
+_LAUNCH = "LAUNCH"
+_laun = "launch"
+_LBT_ = "LAUNCH_BEFORE_TERMINATE"
+_lbt = "launch-before-terminate"
+_RSep = "ReplacementStrategy"
+_TD = "TerminationDelay"
+_CRapa = "CapacityRebalance"
+_IIB = "InstanceInterruptionBehavior"
+_IPTUC = "InstancePoolsToUseCount"
+_TCUT = "TargetCapacityUnitType"
+_ODTC = "OnDemandTargetCapacity"
+_ECTP = "ExcessCapacityTerminationPolicy"
+_LTC = "LaunchTemplateConfigs"
+_TIWE = "TerminateInstancesWithExpiration"
+_VF = "ValidFrom"
+_VU = "ValidUntil"
+_RUI = "ReplaceUnhealthyInstances"
+_Con = "Context"
+_wC = "weightedCapacity"
+_pla = "placement"
+_iRn = "instanceRequirements"
+_lTS = "launchTemplateSpecification"
+_ov = "overrides"
+_bDM = "blockDeviceMapping"
+_kN = "keyName"
+_BDMlo = "BlockDurationMinutes"
+_KI = "KernelId"
+_MCI = "MetricCategoryId"
+_MCIe = "MetricCategoryIds"
+_ACIA = "AssociateCarrierIpAddress"
+_APIAsso = "AssociatePublicIpAddress"
+_ITnte = "InterfaceType"
+_PIrim = "PrimaryIpv6"
+_CTSo = "ConnectionTrackingSpecification"
+_INIS = "InstanceNetworkInterfaceSpecification"
+_RIa = "RamdiskId"
+_NIe = "NetworkInterfaces"
+_Mon = "Monitoring"
+_UDs = "UserData"
+_bDMl = "blockDurationMinutes"
+_vU = "validUntil"
+_iIB = "instanceInterruptionBehavior"
+_aPIA = "associatePublicIpAddress"
+_GS = "GroupSet"
+_gS = "groupSet"
+_iAS = "ipv6AddressesSet"
+_pIAS = "privateIpAddressesSet"
+_kI = "kernelId"
+_NIS = "NetworkInterfaceSet"
+_nIS = "networkInterfaceSet"
+_monit = "monitoring"
+_uDs = "userData"
+_TSS = "TagSpecificationSet"
+_tSS = "tagSpecificationSet"
+_Fa = "Fault"
+_fau = "fault"
+_tag = "tag"
 _Fi = "Filter"
 _Fil = "Filters"
 _NTex = "NextToken"
 _MR = "MaxResults"
 _nT = "nextToken"
+_infor = "information"
 _mR = "maxResults"
-_AIsso = "AssociationIds"
+_ETnd = "EndTime"
+_eTnd = "endTime"
 _IIma = "ImageIds"
+_IC__ = "INSTANCE_CHANGE"
+_ETv = "EventType"
+_EIv = "EventInformation"
+_eIv = "eventInformation"
+_eTv = "eventType"
+_HRS = "HistoryRecordSet"
+_HRi = "HistoryRecords"
+_hRS = "historyRecordSet"
+_LET = "LastEvaluatedTime"
+_lET = "lastEvaluatedTime"
+_AIct = "ActiveInstances"
+_aIS = "activeInstanceSet"
+_rSepl = "replacementStrategy"
+_tDe = "terminationDelay"
+_cRap = "capacityRebalance"
+_iPTUC = "instancePoolsToUseCount"
+_oDTC = "onDemandTargetCapacity"
+_tCUT = "targetCapacityUnitType"
+_aSc = "activityStatus"
+_eCTP = "excessCapacityTerminationPolicy"
+_lTC = "launchTemplateConfigs"
+_tIWE = "terminateInstancesWithExpiration"
+_vF = "validFrom"
+_rUI = "replaceUnhealthyInstances"
+_cont = "context"
+_ITnsta = "InstanceTypes"
+_rIa = "ramdiskId"
 _PDr = "ProductDescription"
 _pDr = "productDescription"
+_DSFII = "DescribeSpotFleetInstancesInput"
+_cDSFIR = "com.amazonaws.ec2#DescribeSpotFleetInstancesRequest"
+_DSFIO = "DescribeSpotFleetInstancesOutput"
+_cDSFIRo = "com.amazonaws.ec2#DescribeSpotFleetInstancesResponse"
+_DSFI = "DescribeSpotFleetInstances"
+_iCns = "instanceChange"
+_BC_ = "BATCH_CHANGE"
+_fRC = "fleetRequestChange"
+_INFORMATION = "INFORMATION"
+_DSFRHMR = "DescribeSpotFleetRequestHistoryMaxResults"
+_DSFRHI = "DescribeSpotFleetRequestHistoryInput"
+_cDSFRHR = "com.amazonaws.ec2#DescribeSpotFleetRequestHistoryRequest"
+_HRis = "HistoryRecord"
+_DSFRHO = "DescribeSpotFleetRequestHistoryOutput"
+_cDSFRHRo = "com.amazonaws.ec2#DescribeSpotFleetRequestHistoryResponse"
+_DSFRH = "DescribeSpotFleetRequestHistory"
+_DSFRI = "DescribeSpotFleetRequestsInput"
+_cDSFRR = "com.amazonaws.ec2#DescribeSpotFleetRequestsRequest"
+_nTo = "noTermination"
+_SFM = "SpotFleetMonitoring"
+_INISL = "InstanceNetworkInterfaceSpecificationList"
+_SPp = "SpotPlacement"
+_SFTS = "SpotFleetTagSpecification"
+_SFTSL = "SpotFleetTagSpecificationList"
+_SFLS = "SpotFleetLaunchSpecification"
+_ATddr = "AddressingType"
+_aTdd = "addressingType"
 _SPpo = "SpotPrice"
 _sPp = "spotPrice"
+_LSLa = "LaunchSpecsList"
+_LTO = "LaunchTemplateOverrides"
+_LTOL = "LaunchTemplateOverridesList"
+_LTCa = "LaunchTemplateConfig"
+_LTCL = "LaunchTemplateConfigList"
+_CLB = "ClassicLoadBalancer"
+_CLBl = "ClassicLoadBalancers"
+_CLBC = "ClassicLoadBalancersConfig"
+_cLB = "classicLoadBalancers"
+_TGa = "TargetGroup"
+_TGar = "TargetGroups"
+_TGCa = "TargetGroupsConfig"
+_tGa = "targetGroups"
+_LBC = "LoadBalancersConfig"
+_cLBC = "classicLoadBalancersConfig"
+_tGCa = "targetGroupsConfig"
+_ODAS = "OnDemandAllocationStrategy"
+_SCRp = "SpotCapacityRebalance"
+_SMS = "SpotMaintenanceStrategies"
+_SFRCD = "SpotFleetRequestConfigData"
+_oDAS = "onDemandAllocationStrategy"
+_sMS = "spotMaintenanceStrategies"
+_ODFC = "OnDemandFulfilledCapacity"
+_oDFC = "onDemandFulfilledCapacity"
+_IFRa = "IamFleetRole"
+_iFR = "iamFleetRole"
+_LSau = "LaunchSpecifications"
+_lSa = "launchSpecifications"
+_TCar = "TargetCapacity"
+_tCar = "targetCapacity"
+_ODMTP = "OnDemandMaxTotalPrice"
+_oDMTP = "onDemandMaxTotalPrice"
+_SMTP = "SpotMaxTotalPrice"
+_sMTP = "spotMaxTotalPrice"
+_lBC = "loadBalancersConfig"
+_SFRC = "SpotFleetRequestConfig"
+_sFRC = "spotFleetRequestConfig"
+_SFRSp = "SpotFleetRequestState"
+_sFRSp = "spotFleetRequestState"
+_SFRCS = "SpotFleetRequestConfigSet"
+_DSFRO = "DescribeSpotFleetRequestsOutput"
+_cDSFRRo = "com.amazonaws.ec2#DescribeSpotFleetRequestsResponse"
+_SFRCp = "SpotFleetRequestConfigs"
+_sFRCS = "spotFleetRequestConfigSet"
+_DSFR = "DescribeSpotFleetRequests"
+_DSIRI = "DescribeSpotInstanceRequestsInput"
+_cDSIRR = "com.amazonaws.ec2#DescribeSpotInstanceRequestsRequest"
+_RIME = "RunInstancesMonitoringEnabled"
+_LSaun = "LaunchSpecification"
+_SISp = "SpotInstanceState"
+_SISpo = "SpotInstanceStatus"
+_SIRp = "SpotInstanceRequest"
+_ABHP = "ActualBlockHourlyPrice"
+_aBHP = "actualBlockHourlyPrice"
+_AZGv = "AvailabilityZoneGroup"
+_aZG = "availabilityZoneGroup"
+_LGa = "LaunchGroup"
+_lG = "launchGroup"
+_lSau = "launchSpecification"
+_LAZ = "LaunchedAvailabilityZone"
+_lAZ = "launchedAvailabilityZone"
+_LAZI = "LaunchedAvailabilityZoneId"
+_lAZI = "launchedAvailabilityZoneId"
+_SIRL = "SpotInstanceRequestList"
+_DSIRO = "DescribeSpotInstanceRequestsOutput"
+_cDSIRRo = "com.amazonaws.ec2#DescribeSpotInstanceRequestsResult"
+_SIRpo = "SpotInstanceRequests"
+_DSIR = "DescribeSpotInstanceRequests"
+_ITLn = "InstanceTypeList"
+_PDLr = "ProductDescriptionList"
+_DSPHI = "DescribeSpotPriceHistoryInput"
+_cDSPHR = "com.amazonaws.ec2#DescribeSpotPriceHistoryRequest"
+_PDro = "ProductDescriptions"
 _SPHL = "SpotPriceHistoryList"
+_DSPHO = "DescribeSpotPriceHistoryOutput"
+_cDSPHRo = "com.amazonaws.ec2#DescribeSpotPriceHistoryResult"
+_SPH = "SpotPriceHistory"
+_SPHS = "SpotPriceHistorySet"
+_sPHS = "spotPriceHistorySet"
+_DSPH = "DescribeSpotPriceHistory"
 _DSSGMR = "DescribeStaleSecurityGroupsMaxResults"
 _DSSGNT = "DescribeStaleSecurityGroupsNextToken"
 _DSSGI = "DescribeStaleSecurityGroupsInput"
@@ -158,176 +427,811 @@ _TDL = "TagDescriptionList"
 _DTOe = "DescribeTagsOutput"
 _cDTRom = "com.amazonaws.ec2#DescribeTagsResult"
 _DTes = "DescribeTags"
-_TMMR = "TrafficMirroringMaxResults"
 _TMFRIL = "TrafficMirrorFilterRuleIdList"
-_DTMFRIe = "DescribeTrafficMirrorFilterRulesInput"
-_cDTMFRRom = "com.amazonaws.ec2#DescribeTrafficMirrorFilterRulesRequest"
-_TMFRIr = "TrafficMirrorFilterRuleIds"
-_TMFRS = "TrafficMirrorFilterRuleSet"
-_DTMFROe = "DescribeTrafficMirrorFilterRulesOutput"
-_cDTMFRRoma = "com.amazonaws.ec2#DescribeTrafficMirrorFilterRulesResult"
-_TMFRr = "TrafficMirrorFilterRules"
-_tMFRS = "trafficMirrorFilterRuleSet"
-_DTMFRe = "DescribeTrafficMirrorFilterRules"
-_TMFIL = "TrafficMirrorFilterIdList"
-_DTMFIe = "DescribeTrafficMirrorFiltersInput"
-_cDTMFRom = "com.amazonaws.ec2#DescribeTrafficMirrorFiltersRequest"
-_TMFIr = "TrafficMirrorFilterIds"
-_TMFS = "TrafficMirrorFilterSet"
-_DTMFOe = "DescribeTrafficMirrorFiltersOutput"
-_cDTMFRoma = "com.amazonaws.ec2#DescribeTrafficMirrorFiltersResult"
-_TMFr = "TrafficMirrorFilters"
-_tMFS = "trafficMirrorFilterSet"
-_DTMFe = "DescribeTrafficMirrorFilters"
-_TMSIL = "TrafficMirrorSessionIdList"
-_DTMSIe = "DescribeTrafficMirrorSessionsInput"
-_cDTMSRom = "com.amazonaws.ec2#DescribeTrafficMirrorSessionsRequest"
-_TMSIr = "TrafficMirrorSessionIds"
-_TMSS = "TrafficMirrorSessionSet"
-_DTMSOe = "DescribeTrafficMirrorSessionsOutput"
-_cDTMSRoma = "com.amazonaws.ec2#DescribeTrafficMirrorSessionsResult"
-_TMSr = "TrafficMirrorSessions"
-_tMSS = "trafficMirrorSessionSet"
-_DTMSe = "DescribeTrafficMirrorSessions"
-_TMTIL = "TrafficMirrorTargetIdList"
-_DTMTIe = "DescribeTrafficMirrorTargetsInput"
-_cDTMTRom = "com.amazonaws.ec2#DescribeTrafficMirrorTargetsRequest"
-_TMTIr = "TrafficMirrorTargetIds"
-_TMTS = "TrafficMirrorTargetSet"
-_DTMTOe = "DescribeTrafficMirrorTargetsOutput"
-_cDTMTRoma = "com.amazonaws.ec2#DescribeTrafficMirrorTargetsResult"
-_TMTr = "TrafficMirrorTargets"
-_tMTS = "trafficMirrorTargetSet"
-_DTMTe = "DescribeTrafficMirrorTargets"
-_TGMR = "TransitGatewayMaxResults"
-_DTGAIe = "DescribeTransitGatewayAttachmentsInput"
-_cDTGAR = "com.amazonaws.ec2#DescribeTransitGatewayAttachmentsRequest"
-_TGAIr = "TransitGatewayAttachmentIds"
-_TGAA = "TransitGatewayAttachmentAssociation"
-_TGOI = "TransitGatewayOwnerId"
-_tGOI = "transitGatewayOwnerId"
-_NGSat = "NatGatewaySupport"
-_nGSa = "natGatewaySupport"
-_TGAL = "TransitGatewayAttachmentList"
-_DTGAO = "DescribeTransitGatewayAttachmentsOutput"
-_cDTGARo = "com.amazonaws.ec2#DescribeTransitGatewayAttachmentsResult"
-_DTGA = "DescribeTransitGatewayAttachments"
-_TGCPISL = "TransitGatewayConnectPeerIdStringList"
-_DTGCPIe = "DescribeTransitGatewayConnectPeersInput"
-_cDTGCPRom = "com.amazonaws.ec2#DescribeTransitGatewayConnectPeersRequest"
-_TGCPIr = "TransitGatewayConnectPeerIds"
-_TGCPL = "TransitGatewayConnectPeerList"
-_DTGCPOe = "DescribeTransitGatewayConnectPeersOutput"
-_cDTGCPRoma = "com.amazonaws.ec2#DescribeTransitGatewayConnectPeersResult"
-_TGCPr = "TransitGatewayConnectPeers"
-_TGCPSr = "TransitGatewayConnectPeerSet"
-_tGCPS = "transitGatewayConnectPeerSet"
-_DTGCPe = "DescribeTransitGatewayConnectPeers"
-_DTGCIe = "DescribeTransitGatewayConnectsInput"
-_cDTGCRom = "com.amazonaws.ec2#DescribeTransitGatewayConnectsRequest"
-_TGCL = "TransitGatewayConnectList"
-_DTGCOe = "DescribeTransitGatewayConnectsOutput"
-_cDTGCRoma = "com.amazonaws.ec2#DescribeTransitGatewayConnectsResult"
-_TGCra = "TransitGatewayConnects"
-_TGCS = "TransitGatewayConnectSet"
-_tGCS = "transitGatewayConnectSet"
-_DTGCe = "DescribeTransitGatewayConnects"
-_TGMPISL = "TransitGatewayMeteringPolicyIdStringList"
-_DTGMPIe = "DescribeTransitGatewayMeteringPoliciesInput"
-_cDTGMPRom = "com.amazonaws.ec2#DescribeTransitGatewayMeteringPoliciesRequest"
-_TGMPIr = "TransitGatewayMeteringPolicyIds"
-_TGMPL = "TransitGatewayMeteringPolicyList"
-_DTGMPOe = "DescribeTransitGatewayMeteringPoliciesOutput"
-_cDTGMPRoma = "com.amazonaws.ec2#DescribeTransitGatewayMeteringPoliciesResult"
-_TGMPr = "TransitGatewayMeteringPolicies"
-_tGMPr = "transitGatewayMeteringPolicies"
-_DTGMPe = "DescribeTransitGatewayMeteringPolicies"
-_TGMDISL = "TransitGatewayMulticastDomainIdStringList"
-_DTGMDIe = "DescribeTransitGatewayMulticastDomainsInput"
-_cDTGMDRom = "com.amazonaws.ec2#DescribeTransitGatewayMulticastDomainsRequest"
-_TGMDIr = "TransitGatewayMulticastDomainIds"
-_TGMDL = "TransitGatewayMulticastDomainList"
-_DTGMDOe = "DescribeTransitGatewayMulticastDomainsOutput"
-_cDTGMDRoma = "com.amazonaws.ec2#DescribeTransitGatewayMulticastDomainsResult"
-_TGMDr = "TransitGatewayMulticastDomains"
-_tGMDr = "transitGatewayMulticastDomains"
-_DTGMDe = "DescribeTransitGatewayMulticastDomains"
-_DTGPAIe = "DescribeTransitGatewayPeeringAttachmentsInput"
-_cDTGPARom = "com.amazonaws.ec2#DescribeTransitGatewayPeeringAttachmentsRequest"
-_TGPAL = "TransitGatewayPeeringAttachmentList"
-_DTGPAOe = "DescribeTransitGatewayPeeringAttachmentsOutput"
-_cDTGPARoma = "com.amazonaws.ec2#DescribeTransitGatewayPeeringAttachmentsResult"
-_TGPAr = "TransitGatewayPeeringAttachments"
-_tGPAr = "transitGatewayPeeringAttachments"
-_DTGPAe = "DescribeTransitGatewayPeeringAttachments"
-_TGPTISL = "TransitGatewayPolicyTableIdStringList"
-_DTGPTIe = "DescribeTransitGatewayPolicyTablesInput"
-_cDTGPTRom = "com.amazonaws.ec2#DescribeTransitGatewayPolicyTablesRequest"
-_TGPTIr = "TransitGatewayPolicyTableIds"
-_TGPTL = "TransitGatewayPolicyTableList"
-_DTGPTOe = "DescribeTransitGatewayPolicyTablesOutput"
-_cDTGPTRoma = "com.amazonaws.ec2#DescribeTransitGatewayPolicyTablesResult"
-_TGPTr = "TransitGatewayPolicyTables"
-_tGPTr = "transitGatewayPolicyTables"
-_DTGPTe = "DescribeTransitGatewayPolicyTables"
-_TGRTAISL = "TransitGatewayRouteTableAnnouncementIdStringList"
-_DTGRTAIe = "DescribeTransitGatewayRouteTableAnnouncementsInput"
-_cDTGRTARom = "com.amazonaws.ec2#DescribeTransitGatewayRouteTableAnnouncementsRequest"
-_TGRTAIr = "TransitGatewayRouteTableAnnouncementIds"
-_TGRTAL = "TransitGatewayRouteTableAnnouncementList"
-_DTGRTAOe = "DescribeTransitGatewayRouteTableAnnouncementsOutput"
-_cDTGRTARoma = "com.amazonaws.ec2#DescribeTransitGatewayRouteTableAnnouncementsResult"
-_TGRTAr = "TransitGatewayRouteTableAnnouncements"
-_tGRTAr = "transitGatewayRouteTableAnnouncements"
-_DTGRTAe = "DescribeTransitGatewayRouteTableAnnouncements"
-_TGRTISL = "TransitGatewayRouteTableIdStringList"
-_DTGRTIe = "DescribeTransitGatewayRouteTablesInput"
-_cDTGRTRom = "com.amazonaws.ec2#DescribeTransitGatewayRouteTablesRequest"
-_TGRTIr = "TransitGatewayRouteTableIds"
-_TGRTL = "TransitGatewayRouteTableList"
-_DTGRTOe = "DescribeTransitGatewayRouteTablesOutput"
-_cDTGRTRoma = "com.amazonaws.ec2#DescribeTransitGatewayRouteTablesResult"
-_TGRTra = "TransitGatewayRouteTables"
-_tGRTr = "transitGatewayRouteTables"
-_DTGRTe = "DescribeTransitGatewayRouteTables"
-_TGISL = "TransitGatewayIdStringList"
-_DTGIe = "DescribeTransitGatewaysInput"
-_cDTGRom = "com.amazonaws.ec2#DescribeTransitGatewaysRequest"
-_TGIr = "TransitGatewayIds"
-_TGL = "TransitGatewayList"
-_DTGOe = "DescribeTransitGatewaysOutput"
-_cDTGRoma = "com.amazonaws.ec2#DescribeTransitGatewaysResult"
-_TGra = "TransitGateways"
-_TGSr = "TransitGatewaySet"
-_tGS = "transitGatewaySet"
-_DTGe = "DescribeTransitGateways"
-_DTGVAIe = "DescribeTransitGatewayVpcAttachmentsInput"
-_cDTGVARom = "com.amazonaws.ec2#DescribeTransitGatewayVpcAttachmentsRequest"
-_TGVAL = "TransitGatewayVpcAttachmentList"
-_DTGVAOe = "DescribeTransitGatewayVpcAttachmentsOutput"
-_cDTGVARoma = "com.amazonaws.ec2#DescribeTransitGatewayVpcAttachmentsResult"
-_TGVAr = "TransitGatewayVpcAttachments"
-_tGVAr = "transitGatewayVpcAttachments"
-_DTGVAe = "DescribeTransitGatewayVpcAttachments"
-_TIAIL = "TrunkInterfaceAssociationIdList"
-_DTIAMR = "DescribeTrunkInterfaceAssociationsMaxResults"
-_DTIAI = "DescribeTrunkInterfaceAssociationsInput"
-_cDTIAR = "com.amazonaws.ec2#DescribeTrunkInterfaceAssociationsRequest"
-_TIAL = "TrunkInterfaceAssociationList"
-_DTIAO = "DescribeTrunkInterfaceAssociationsOutput"
-_cDTIARo = "com.amazonaws.ec2#DescribeTrunkInterfaceAssociationsResult"
-_IAnt = "InterfaceAssociations"
-_IASnt = "InterfaceAssociationSet"
-_iASn = "interfaceAssociationSet"
-_DTIA = "DescribeTrunkInterfaceAssociations"
 
-TRANSIT_GATEWAY_ATTACHMENT_ID_STRING_LIST: StaticSchema = (
+SPOT_FLEET_REQUEST_ID: StaticSchema = (3, n0, _SFRI, 0)
+
+DESCRIBE_SPOT_FLEET_INSTANCES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DSFII,
+    {_sSI: _cDSFIR, _sm: None},
+    (_DR, _SFRI, _NTex, _MR),
+    (
+        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
+        (SPOT_FLEET_REQUEST_ID, {_aQN: _SFRI, _sN: _sFRI, _smi: None}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+        (
+            lambda: schemas.DESCRIBE_SPOT_FLEET_INSTANCES_MAX_RESULTS,
+            {_aQN: _MR, _sN: _mR},
+        ),
+    ),
+)
+
+DESCRIBE_SPOT_FLEET_INSTANCES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DSFIO,
+    {_sSI: _cDSFIRo, _smit: None},
+    (_AIct, _NTex, _SFRI),
+    (
+        (lambda: schemas.ACTIVE_INSTANCE_SET, {_aQN: _AIS, _sN: _aIS}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+        (lambda: schemas.STRING, {_aQN: _SFRI, _sN: _sFRI}),
+    ),
+)
+
+DESCRIBE_SPOT_FLEET_INSTANCES: StaticOperationSchema = (
+    23,
+    n0,
+    _DSFI,
+    0,
+    DESCRIBE_SPOT_FLEET_INSTANCES_INPUT,
+    DESCRIBE_SPOT_FLEET_INSTANCES_OUTPUT,
+    (),
+)
+
+EVENT_TYPE: StaticSchema = (
+    14,
+    n0,
+    _ETv,
+    0,
+    (_IC__, _BC_, _ERROR, _INFORMATION),
+    ((-1, {_sV: _iCns}), (-1, {_sV: _fRC}), (-1, {_sV: _er}), (-1, {_sV: _infor})),
+)
+
+DESCRIBE_SPOT_FLEET_REQUEST_HISTORY_MAX_RESULTS: StaticSchema = (7, n0, _DSFRHMR, 0)
+
+DESCRIBE_SPOT_FLEET_REQUEST_HISTORY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DSFRHI,
+    {_sSI: _cDSFRHR, _sm: None},
+    (_DR, _SFRI, _ETv, _ST, _NTex, _MR),
+    (
+        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
+        (SPOT_FLEET_REQUEST_ID, {_aQN: _SFRI, _sN: _sFRI, _smi: None}),
+        (EVENT_TYPE, {_aQN: _ETv, _sN: _eTv}),
+        (lambda: schemas.DATE_TIME, {_aQN: _ST, _sN: _sTt, _smi: None}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+        (DESCRIBE_SPOT_FLEET_REQUEST_HISTORY_MAX_RESULTS, {_aQN: _MR, _sN: _mR}),
+    ),
+)
+
+DESCRIBE_SPOT_FLEET_REQUEST_HISTORY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DSFRHO,
+    {_sSI: _cDSFRHRo, _smit: None},
+    (_HRi, _LET, _NTex, _SFRI, _ST),
+    (
+        (lambda: HISTORY_RECORDS, {_aQN: _HRS, _sN: _hRS}),
+        (lambda: schemas.DATE_TIME, {_aQN: _LET, _sN: _lET}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+        (lambda: schemas.STRING, {_aQN: _SFRI, _sN: _sFRI}),
+        (lambda: schemas.DATE_TIME, {_aQN: _ST, _sN: _sTt}),
+    ),
+)
+
+DESCRIBE_SPOT_FLEET_REQUEST_HISTORY: StaticOperationSchema = (
+    23,
+    n0,
+    _DSFRH,
+    0,
+    DESCRIBE_SPOT_FLEET_REQUEST_HISTORY_INPUT,
+    DESCRIBE_SPOT_FLEET_REQUEST_HISTORY_OUTPUT,
+    (),
+)
+
+HISTORY_RECORD: StaticSchema = (
+    18,
+    n0,
+    _HRis,
+    0,
+    (_EIv, _ETv, _Ti),
+    (
+        (lambda: schemas.EVENT_INFORMATION, {_aQN: _EIv, _sN: _eIv}),
+        (EVENT_TYPE, {_aQN: _ETv, _sN: _eTv}),
+        (lambda: schemas.DATE_TIME, {_aQN: _Ti, _sN: _ti}),
+    ),
+)
+
+HISTORY_RECORDS: StaticSchema = (
     16,
     n0,
-    _TGAISL,
+    _HRi,
     0,
     (_me,),
-    ((lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, 0),),
+    ((HISTORY_RECORD, {_sN: _i}),),
+)
+
+DESCRIBE_SPOT_FLEET_REQUESTS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DSFRI,
+    {_sSI: _cDSFRR, _sm: None},
+    (_DR, _SFRIp, _NTex, _MR),
+    (
+        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
+        (lambda: schemas.SPOT_FLEET_REQUEST_ID_LIST, {_aQN: _SFRI, _sN: _sFRI}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+        (lambda: schemas.INTEGER, {_aQN: _MR, _sN: _mR}),
+    ),
+)
+
+DESCRIBE_SPOT_FLEET_REQUESTS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DSFRO,
+    {_sSI: _cDSFRRo, _smit: None},
+    (_NTex, _SFRCp),
+    (
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+        (lambda: SPOT_FLEET_REQUEST_CONFIG_SET, {_aQN: _SFRCS, _sN: _sFRCS}),
+    ),
+)
+
+DESCRIBE_SPOT_FLEET_REQUESTS: StaticOperationSchema = (
+    23,
+    n0,
+    _DSFR,
+    0,
+    DESCRIBE_SPOT_FLEET_REQUESTS_INPUT,
+    DESCRIBE_SPOT_FLEET_REQUESTS_OUTPUT,
+    (),
+)
+
+EXCESS_CAPACITY_TERMINATION_POLICY: StaticSchema = (
+    14,
+    n0,
+    _ECTP,
+    0,
+    (_NT, _DEFAULT),
+    ((-1, {_sV: _nTo}), (-1, {_sV: _def})),
+)
+
+SPOT_FLEET_MONITORING: StaticSchema = (
+    18,
+    n0,
+    _SFM,
+    0,
+    (_Ena,),
+    ((lambda: schemas.BOOLEAN, {_aQN: _Ena, _sN: _ena}),),
+)
+
+INSTANCE_NETWORK_INTERFACE_SPECIFICATION: StaticSchema = (
+    18,
+    n0,
+    _INIS,
+    0,
+    (
+        _APIAsso,
+        _DOT,
+        _Des,
+        _DI,
+        _G,
+        _IAC,
+        _IAp,
+        _NII,
+        _PIAr,
+        _PIAri,
+        _SPIAC,
+        _SIu,
+        _ACIA,
+        _ITnte,
+        _NCI,
+        _IPpvr,
+        _IPCp,
+        _IPp,
+        _IPC,
+        _PIrim,
+        _ESS,
+        _CTSo,
+        _EQC,
+    ),
+    (
+        (lambda: schemas.BOOLEAN, {_aQN: _APIAsso, _sN: _aPIA}),
+        (lambda: schemas.BOOLEAN, {_aQN: _DOT, _sN: _dOT}),
+        (lambda: schemas.STRING, {_aQN: _Des, _sN: _desc}),
+        (lambda: schemas.INTEGER, {_aQN: _DI, _sN: _dI}),
+        (lambda: schemas.SECURITY_GROUP_ID_STRING_LIST, {_sN: _SGI}),
+        (lambda: schemas.INTEGER, {_aQN: _IAC, _sN: _iAC}),
+        (lambda: schemas.INSTANCE_IPV6_ADDRESS_LIST, {_aQN: _IAp, _sN: _iAS}),
+        (lambda: schemas.NETWORK_INTERFACE_ID, {_aQN: _NII, _sN: _nII}),
+        (lambda: schemas.STRING, {_aQN: _PIAr, _sN: _pIAr}),
+        (
+            lambda: schemas.PRIVATE_IP_ADDRESS_SPECIFICATION_LIST,
+            {_aQN: _PIAri, _sN: _pIAS},
+        ),
+        (lambda: schemas.INTEGER, {_aQN: _SPIAC, _sN: _sPIAC}),
+        (lambda: schemas.STRING, {_aQN: _SIu, _sN: _sI}),
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.INTEGER, 0),
+        (lambda: schemas.IPV4_PREFIX_LIST, {_sN: _IPpvre}),
+        (lambda: schemas.INTEGER, 0),
+        (lambda: schemas.IPV6_PREFIX_LIST, {_sN: _IPpv}),
+        (lambda: schemas.INTEGER, 0),
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.ENA_SRD_SPECIFICATION_REQUEST, 0),
+        (lambda: schemas.CONNECTION_TRACKING_SPECIFICATION_REQUEST, 0),
+        (lambda: schemas.INTEGER, 0),
+    ),
+)
+
+INSTANCE_NETWORK_INTERFACE_SPECIFICATION_LIST: StaticSchema = (
+    16,
+    n0,
+    _INISL,
+    0,
+    (_me,),
+    ((INSTANCE_NETWORK_INTERFACE_SPECIFICATION, {_sN: _i}),),
+)
+
+SPOT_PLACEMENT: StaticSchema = (
+    18,
+    n0,
+    _SPp,
+    0,
+    (_AZ, _GN, _Ten, _AZI),
+    (
+        (lambda: schemas.STRING, {_aQN: _AZ, _sN: _aZ}),
+        (lambda: schemas.PLACEMENT_GROUP_NAME, {_aQN: _GN, _sN: _gN}),
+        (lambda: schemas.TENANCY, {_aQN: _Ten, _sN: _ten}),
+        (lambda: schemas.STRING, {_aQN: _AZI, _sN: _aZI}),
+    ),
+)
+
+SPOT_FLEET_TAG_SPECIFICATION: StaticSchema = (
+    18,
+    n0,
+    _SFTS,
+    0,
+    (_RT, _Tag),
+    (
+        (lambda: schemas.RESOURCE_TYPE, {_aQN: _RT, _sN: _rT}),
+        (lambda: schemas.TAG_LIST, {_aQN: _Ta, _sN: _tag}),
+    ),
+)
+
+SPOT_FLEET_TAG_SPECIFICATION_LIST: StaticSchema = (
+    16,
+    n0,
+    _SFTSL,
+    0,
+    (_me,),
+    ((SPOT_FLEET_TAG_SPECIFICATION, {_sN: _i}),),
+)
+
+SPOT_FLEET_LAUNCH_SPECIFICATION: StaticSchema = (
+    18,
+    n0,
+    _SFLS,
+    0,
+    (
+        _ATddr,
+        _BDMl,
+        _EO,
+        _IIP,
+        _IIm,
+        _IT,
+        _KI,
+        _KN,
+        _Mon,
+        _NIe,
+        _Pl,
+        _RIa,
+        _SPpo,
+        _SIu,
+        _UDs,
+        _WC,
+        _TSa,
+        _IRn,
+        _SGe,
+    ),
+    (
+        (lambda: schemas.STRING, {_aQN: _ATddr, _sN: _aTdd}),
+        (lambda: schemas.BLOCK_DEVICE_MAPPING_LIST, {_aQN: _BDM, _sN: _bDM}),
+        (lambda: schemas.BOOLEAN, {_aQN: _EO, _sN: _eO}),
+        (lambda: schemas.IAM_INSTANCE_PROFILE_SPECIFICATION, {_aQN: _IIP, _sN: _iIP}),
+        (lambda: schemas.IMAGE_ID, {_aQN: _IIm, _sN: _iIm}),
+        (lambda: schemas.INSTANCE_TYPE, {_aQN: _IT, _sN: _iT}),
+        (lambda: schemas.STRING, {_aQN: _KI, _sN: _kI}),
+        (lambda: schemas.KEY_PAIR_NAME, {_aQN: _KN, _sN: _kN}),
+        (SPOT_FLEET_MONITORING, {_aQN: _Mon, _sN: _monit}),
+        (INSTANCE_NETWORK_INTERFACE_SPECIFICATION_LIST, {_aQN: _NIS, _sN: _nIS}),
+        (SPOT_PLACEMENT, {_aQN: _Pl, _sN: _pla}),
+        (lambda: schemas.STRING, {_aQN: _RIa, _sN: _rIa}),
+        (lambda: schemas.STRING, {_aQN: _SPpo, _sN: _sPp}),
+        (lambda: schemas.SUBNET_ID, {_aQN: _SIu, _sN: _sI}),
+        (lambda: schemas.SENSITIVE_USER_DATA, {_aQN: _UDs, _sN: _uDs}),
+        (lambda: schemas.DOUBLE, {_aQN: _WC, _sN: _wC}),
+        (SPOT_FLEET_TAG_SPECIFICATION_LIST, {_aQN: _TSS, _sN: _tSS}),
+        (lambda: schemas.INSTANCE_REQUIREMENTS, {_aQN: _IRn, _sN: _iRn}),
+        (lambda: schemas.GROUP_IDENTIFIER_LIST, {_aQN: _GS, _sN: _gS}),
+    ),
+)
+
+LAUNCH_SPECS_LIST: StaticSchema = (
+    16,
+    n0,
+    _LSLa,
+    0,
+    (_me,),
+    ((SPOT_FLEET_LAUNCH_SPECIFICATION, {_sN: _i}),),
+)
+
+LAUNCH_TEMPLATE_OVERRIDES: StaticSchema = (
+    18,
+    n0,
+    _LTO,
+    0,
+    (_IT, _SPpo, _SIu, _AZ, _WC, _Pr, _IRn, _AZI),
+    (
+        (lambda: schemas.INSTANCE_TYPE, {_aQN: _IT, _sN: _iT}),
+        (lambda: schemas.STRING, {_aQN: _SPpo, _sN: _sPp}),
+        (lambda: schemas.SUBNET_ID, {_aQN: _SIu, _sN: _sI}),
+        (lambda: schemas.STRING, {_aQN: _AZ, _sN: _aZ}),
+        (lambda: schemas.DOUBLE, {_aQN: _WC, _sN: _wC}),
+        (lambda: schemas.DOUBLE, {_aQN: _Pr, _sN: _pri}),
+        (lambda: schemas.INSTANCE_REQUIREMENTS, {_aQN: _IRn, _sN: _iRn}),
+        (lambda: schemas.AVAILABILITY_ZONE_ID, {_aQN: _AZI, _sN: _aZI}),
+    ),
+)
+
+LAUNCH_TEMPLATE_OVERRIDES_LIST: StaticSchema = (
+    16,
+    n0,
+    _LTOL,
+    0,
+    (_me,),
+    ((LAUNCH_TEMPLATE_OVERRIDES, {_sN: _i}),),
+)
+
+LAUNCH_TEMPLATE_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _LTCa,
+    0,
+    (_LTS, _Ov),
+    (
+        (lambda: schemas.FLEET_LAUNCH_TEMPLATE_SPECIFICATION, {_aQN: _LTS, _sN: _lTS}),
+        (LAUNCH_TEMPLATE_OVERRIDES_LIST, {_aQN: _Ov, _sN: _ov}),
+    ),
+)
+
+LAUNCH_TEMPLATE_CONFIG_LIST: StaticSchema = (
+    16,
+    n0,
+    _LTCL,
+    0,
+    (_me,),
+    ((LAUNCH_TEMPLATE_CONFIG, {_sN: _i}),),
+)
+
+CLASSIC_LOAD_BALANCER: StaticSchema = (
+    18,
+    n0,
+    _CLB,
+    0,
+    (_N,),
+    ((lambda: schemas.STRING, {_aQN: _N, _sN: _nam}),),
+)
+
+CLASSIC_LOAD_BALANCERS: StaticSchema = (
+    16,
+    n0,
+    _CLBl,
+    0,
+    (_me,),
+    ((CLASSIC_LOAD_BALANCER, {_sN: _i}),),
+)
+
+CLASSIC_LOAD_BALANCERS_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _CLBC,
+    0,
+    (_CLBl,),
+    ((CLASSIC_LOAD_BALANCERS, {_aQN: _CLBl, _sN: _cLB}),),
+)
+
+TARGET_GROUP: StaticSchema = (
+    18,
+    n0,
+    _TGa,
+    0,
+    (_Ar,),
+    ((lambda: schemas.STRING, {_aQN: _Ar, _sN: _ar}),),
+)
+
+TARGET_GROUPS: StaticSchema = (16, n0, _TGar, 0, (_me,), ((TARGET_GROUP, {_sN: _i}),))
+
+TARGET_GROUPS_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _TGCa,
+    0,
+    (_TGar,),
+    ((TARGET_GROUPS, {_aQN: _TGar, _sN: _tGa}),),
+)
+
+LOAD_BALANCERS_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _LBC,
+    0,
+    (_CLBC, _TGCa),
+    (
+        (CLASSIC_LOAD_BALANCERS_CONFIG, {_aQN: _CLBC, _sN: _cLBC}),
+        (TARGET_GROUPS_CONFIG, {_aQN: _TGCa, _sN: _tGCa}),
+    ),
+)
+
+ON_DEMAND_ALLOCATION_STRATEGY: StaticSchema = (
+    14,
+    n0,
+    _ODAS,
+    0,
+    (_LP, _PRIORITIZED),
+    ((-1, {_sV: _lP}), (-1, {_sV: _prio})),
+)
+
+REPLACEMENT_STRATEGY: StaticSchema = (
+    14,
+    n0,
+    _RSep,
+    0,
+    (_LAUNCH, _LBT_),
+    ((-1, {_sV: _laun}), (-1, {_sV: _lbt})),
+)
+
+SPOT_CAPACITY_REBALANCE: StaticSchema = (
+    18,
+    n0,
+    _SCRp,
+    0,
+    (_RSep, _TD),
+    (
+        (REPLACEMENT_STRATEGY, {_aQN: _RSep, _sN: _rSepl}),
+        (lambda: schemas.INTEGER, {_aQN: _TD, _sN: _tDe}),
+    ),
+)
+
+SPOT_MAINTENANCE_STRATEGIES: StaticSchema = (
+    18,
+    n0,
+    _SMS,
+    0,
+    (_CRapa,),
+    ((SPOT_CAPACITY_REBALANCE, {_aQN: _CRapa, _sN: _cRap}),),
+)
+
+SPOT_FLEET_REQUEST_CONFIG_DATA: StaticSchema = (
+    18,
+    n0,
+    _SFRCD,
+    0,
+    (
+        _ASll,
+        _ODAS,
+        _SMS,
+        _CTl,
+        _ECTP,
+        _FCu,
+        _ODFC,
+        _IFRa,
+        _LSau,
+        _LTC,
+        _SPpo,
+        _TCar,
+        _ODTC,
+        _ODMTP,
+        _SMTP,
+        _TIWE,
+        _Ty,
+        _VF,
+        _VU,
+        _RUI,
+        _IIB,
+        _LBC,
+        _IPTUC,
+        _Con,
+        _TCUT,
+        _TSa,
+    ),
+    (
+        (lambda: schemas.ALLOCATION_STRATEGY, {_aQN: _ASll, _sN: _aSl}),
+        (ON_DEMAND_ALLOCATION_STRATEGY, {_aQN: _ODAS, _sN: _oDAS}),
+        (SPOT_MAINTENANCE_STRATEGIES, {_aQN: _SMS, _sN: _sMS}),
+        (lambda: schemas.STRING, {_aQN: _CTl, _sN: _cTl}),
+        (EXCESS_CAPACITY_TERMINATION_POLICY, {_aQN: _ECTP, _sN: _eCTP}),
+        (lambda: schemas.DOUBLE, {_aQN: _FCu, _sN: _fCu}),
+        (lambda: schemas.DOUBLE, {_aQN: _ODFC, _sN: _oDFC}),
+        (lambda: schemas.STRING, {_aQN: _IFRa, _sN: _iFR, _smi: None}),
+        (LAUNCH_SPECS_LIST, {_aQN: _LSau, _sN: _lSa}),
+        (LAUNCH_TEMPLATE_CONFIG_LIST, {_aQN: _LTC, _sN: _lTC}),
+        (lambda: schemas.STRING, {_aQN: _SPpo, _sN: _sPp}),
+        (lambda: schemas.INTEGER, {_aQN: _TCar, _sN: _tCar, _smi: None}),
+        (lambda: schemas.INTEGER, {_aQN: _ODTC, _sN: _oDTC}),
+        (lambda: schemas.STRING, {_aQN: _ODMTP, _sN: _oDMTP}),
+        (lambda: schemas.STRING, {_aQN: _SMTP, _sN: _sMTP}),
+        (lambda: schemas.BOOLEAN, {_aQN: _TIWE, _sN: _tIWE}),
+        (lambda: schemas.FLEET_TYPE, {_aQN: _Ty, _sN: _ty}),
+        (lambda: schemas.DATE_TIME, {_aQN: _VF, _sN: _vF}),
+        (lambda: schemas.DATE_TIME, {_aQN: _VU, _sN: _vU}),
+        (lambda: schemas.BOOLEAN, {_aQN: _RUI, _sN: _rUI}),
+        (lambda: schemas.INSTANCE_INTERRUPTION_BEHAVIOR, {_aQN: _IIB, _sN: _iIB}),
+        (LOAD_BALANCERS_CONFIG, {_aQN: _LBC, _sN: _lBC}),
+        (lambda: schemas.INTEGER, {_aQN: _IPTUC, _sN: _iPTUC}),
+        (lambda: schemas.STRING, {_aQN: _Con, _sN: _cont}),
+        (lambda: schemas.TARGET_CAPACITY_UNIT_TYPE, {_aQN: _TCUT, _sN: _tCUT}),
+        (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
+    ),
+)
+
+SPOT_FLEET_REQUEST_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _SFRC,
+    0,
+    (_ASc, _CTr, _SFRC, _SFRI, _SFRSp, _Tag),
+    (
+        (lambda: schemas.ACTIVITY_STATUS, {_aQN: _ASc, _sN: _aSc}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _CTr, _sN: _cTr}),
+        (SPOT_FLEET_REQUEST_CONFIG_DATA, {_aQN: _SFRC, _sN: _sFRC}),
+        (lambda: schemas.STRING, {_aQN: _SFRI, _sN: _sFRI}),
+        (lambda: schemas.BATCH_STATE, {_aQN: _SFRSp, _sN: _sFRSp}),
+        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
+    ),
+)
+
+SPOT_FLEET_REQUEST_CONFIG_SET: StaticSchema = (
+    16,
+    n0,
+    _SFRCS,
+    0,
+    (_me,),
+    ((SPOT_FLEET_REQUEST_CONFIG, {_sN: _i}),),
+)
+
+DESCRIBE_SPOT_INSTANCE_REQUESTS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DSIRI,
+    {_sSI: _cDSIRR, _sm: None},
+    (_NTex, _MR, _DR, _SIRIp, _Fil),
+    (
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.INTEGER, 0),
+        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
+        (lambda: schemas.SPOT_INSTANCE_REQUEST_ID_LIST, {_sN: _SIRI}),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+    ),
+)
+
+DESCRIBE_SPOT_INSTANCE_REQUESTS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DSIRO,
+    {_sSI: _cDSIRRo, _smit: None},
+    (_SIRpo, _NTex),
+    (
+        (lambda: SPOT_INSTANCE_REQUEST_LIST, {_aQN: _SIRS, _sN: _sIRS}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+    ),
+)
+
+DESCRIBE_SPOT_INSTANCE_REQUESTS: StaticOperationSchema = (
+    23,
+    n0,
+    _DSIR,
+    0,
+    DESCRIBE_SPOT_INSTANCE_REQUESTS_INPUT,
+    DESCRIBE_SPOT_INSTANCE_REQUESTS_OUTPUT,
+    (),
+)
+
+RUN_INSTANCES_MONITORING_ENABLED: StaticSchema = (
+    18,
+    n0,
+    _RIME,
+    0,
+    (_MCIe, _Ena),
+    (
+        (lambda: schemas.METRIC_CATEGORY_ID_LIST, {_sN: _MCI}),
+        (lambda: schemas.BOOLEAN, {_aQN: _Ena, _sN: _ena, _smi: None}),
+    ),
+)
+
+LAUNCH_SPECIFICATION: StaticSchema = (
+    18,
+    n0,
+    _LSaun,
+    0,
+    (
+        _UDs,
+        _ATddr,
+        _BDMl,
+        _EO,
+        _IIP,
+        _IIm,
+        _IT,
+        _KI,
+        _KN,
+        _NIe,
+        _Pl,
+        _RIa,
+        _SIu,
+        _SGe,
+        _Mon,
+    ),
+    (
+        (lambda: schemas.SENSITIVE_USER_DATA, {_aQN: _UDs, _sN: _uDs}),
+        (lambda: schemas.STRING, {_aQN: _ATddr, _sN: _aTdd}),
+        (lambda: schemas.BLOCK_DEVICE_MAPPING_LIST, {_aQN: _BDM, _sN: _bDM}),
+        (lambda: schemas.BOOLEAN, {_aQN: _EO, _sN: _eO}),
+        (lambda: schemas.IAM_INSTANCE_PROFILE_SPECIFICATION, {_aQN: _IIP, _sN: _iIP}),
+        (lambda: schemas.STRING, {_aQN: _IIm, _sN: _iIm}),
+        (lambda: schemas.INSTANCE_TYPE, {_aQN: _IT, _sN: _iT}),
+        (lambda: schemas.STRING, {_aQN: _KI, _sN: _kI}),
+        (lambda: schemas.STRING, {_aQN: _KN, _sN: _kN}),
+        (INSTANCE_NETWORK_INTERFACE_SPECIFICATION_LIST, {_aQN: _NIS, _sN: _nIS}),
+        (SPOT_PLACEMENT, {_aQN: _Pl, _sN: _pla}),
+        (lambda: schemas.STRING, {_aQN: _RIa, _sN: _rIa}),
+        (lambda: schemas.STRING, {_aQN: _SIu, _sN: _sI}),
+        (lambda: schemas.GROUP_IDENTIFIER_LIST, {_aQN: _GS, _sN: _gS}),
+        (RUN_INSTANCES_MONITORING_ENABLED, {_aQN: _Mon, _sN: _monit}),
+    ),
+)
+
+SPOT_INSTANCE_STATE: StaticSchema = (
+    14,
+    n0,
+    _SISp,
+    0,
+    (_op, _act, _cl, _can, _fa, _d),
+    (
+        (-1, {_sV: _op}),
+        (-1, {_sV: _act}),
+        (-1, {_sV: _cl}),
+        (-1, {_sV: _can}),
+        (-1, {_sV: _fa}),
+        (-1, {_sV: _d}),
+    ),
+)
+
+SPOT_INSTANCE_STATUS: StaticSchema = (
+    18,
+    n0,
+    _SISpo,
+    0,
+    (_C, _Me, _UT),
+    (
+        (lambda: schemas.STRING, {_aQN: _C, _sN: _co}),
+        (lambda: schemas.STRING, {_aQN: _Me, _sN: _mes}),
+        (lambda: schemas.DATE_TIME, {_aQN: _UT, _sN: _uT}),
+    ),
+)
+
+SPOT_INSTANCE_REQUEST: StaticSchema = (
+    18,
+    n0,
+    _SIRp,
+    0,
+    (
+        _ABHP,
+        _AZGv,
+        _BDMlo,
+        _CTr,
+        _Fa,
+        _II,
+        _LGa,
+        _LSaun,
+        _LAZ,
+        _LAZI,
+        _PDr,
+        _SIRI,
+        _SPpo,
+        _St,
+        _Sta,
+        _Tag,
+        _Ty,
+        _VF,
+        _VU,
+        _IIB,
+    ),
+    (
+        (lambda: schemas.STRING, {_aQN: _ABHP, _sN: _aBHP}),
+        (lambda: schemas.STRING, {_aQN: _AZGv, _sN: _aZG}),
+        (lambda: schemas.INTEGER, {_aQN: _BDMlo, _sN: _bDMl}),
+        (lambda: schemas.DATE_TIME, {_aQN: _CTr, _sN: _cTr}),
+        (lambda: schemas.SPOT_INSTANCE_STATE_FAULT, {_aQN: _Fa, _sN: _fau}),
+        (lambda: schemas.INSTANCE_ID, {_aQN: _II, _sN: _iI}),
+        (lambda: schemas.STRING, {_aQN: _LGa, _sN: _lG}),
+        (LAUNCH_SPECIFICATION, {_aQN: _LSaun, _sN: _lSau}),
+        (lambda: schemas.STRING, {_aQN: _LAZ, _sN: _lAZ}),
+        (lambda: schemas.STRING, {_aQN: _LAZI, _sN: _lAZI}),
+        (lambda: schemas.RI_PRODUCT_DESCRIPTION, {_aQN: _PDr, _sN: _pDr}),
+        (lambda: schemas.STRING, {_aQN: _SIRI, _sN: _sIRI}),
+        (lambda: schemas.STRING, {_aQN: _SPpo, _sN: _sPp}),
+        (SPOT_INSTANCE_STATE, {_aQN: _St, _sN: _st}),
+        (SPOT_INSTANCE_STATUS, {_aQN: _Sta, _sN: _sta}),
+        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
+        (lambda: schemas.SPOT_INSTANCE_TYPE, {_aQN: _Ty, _sN: _ty}),
+        (lambda: schemas.DATE_TIME, {_aQN: _VF, _sN: _vF}),
+        (lambda: schemas.DATE_TIME, {_aQN: _VU, _sN: _vU}),
+        (lambda: schemas.INSTANCE_INTERRUPTION_BEHAVIOR, {_aQN: _IIB, _sN: _iIB}),
+    ),
+)
+
+SPOT_INSTANCE_REQUEST_LIST: StaticSchema = (
+    16,
+    n0,
+    _SIRL,
+    0,
+    (_me,),
+    ((SPOT_INSTANCE_REQUEST, {_sN: _i}),),
+)
+
+INSTANCE_TYPE_LIST: StaticSchema = (
+    16,
+    n0,
+    _ITLn,
+    0,
+    (_me,),
+    ((lambda: schemas.INSTANCE_TYPE, 0),),
+)
+
+PRODUCT_DESCRIPTION_LIST: StaticSchema = (
+    16,
+    n0,
+    _PDLr,
+    0,
+    (_me,),
+    ((lambda: schemas.STRING, 0),),
+)
+
+DESCRIBE_SPOT_PRICE_HISTORY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DSPHI,
+    {_sSI: _cDSPHR, _sm: None},
+    (_AZI, _DR, _ST, _ETnd, _ITnsta, _PDro, _Fil, _AZ, _MR, _NTex),
+    (
+        (lambda: schemas.AVAILABILITY_ZONE_ID, 0),
+        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
+        (lambda: schemas.DATE_TIME, {_aQN: _ST, _sN: _sTt}),
+        (lambda: schemas.DATE_TIME, {_aQN: _ETnd, _sN: _eTnd}),
+        (INSTANCE_TYPE_LIST, {_sN: _IT}),
+        (PRODUCT_DESCRIPTION_LIST, {_sN: _PDr}),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+        (lambda: schemas.STRING, {_aQN: _AZ, _sN: _aZ}),
+        (lambda: schemas.INTEGER, {_aQN: _MR, _sN: _mR}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+    ),
+)
+
+DESCRIBE_SPOT_PRICE_HISTORY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DSPHO,
+    {_sSI: _cDSPHRo, _smit: None},
+    (_NTex, _SPH),
+    (
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+        (lambda: SPOT_PRICE_HISTORY_LIST, {_aQN: _SPHS, _sN: _sPHS}),
+    ),
+)
+
+DESCRIBE_SPOT_PRICE_HISTORY: StaticOperationSchema = (
+    23,
+    n0,
+    _DSPH,
+    0,
+    DESCRIBE_SPOT_PRICE_HISTORY_INPUT,
+    DESCRIBE_SPOT_PRICE_HISTORY_OUTPUT,
+    (),
 )
 
 SPOT_PRICE: StaticSchema = (
@@ -662,8 +1566,6 @@ TAG_DESCRIPTION_LIST: StaticSchema = (
     ((TAG_DESCRIPTION, {_sN: _i}),),
 )
 
-TRAFFIC_MIRRORING_MAX_RESULTS: StaticSchema = (7, n0, _TMMR, 0)
-
 TRAFFIC_MIRROR_FILTER_RULE_ID_LIST: StaticSchema = (
     16,
     n0,
@@ -671,887 +1573,4 @@ TRAFFIC_MIRROR_FILTER_RULE_ID_LIST: StaticSchema = (
     0,
     (_me,),
     ((lambda: schemas.TRAFFIC_MIRROR_FILTER_RULE_ID_WITH_RESOLVER, {_sN: _i}),),
-)
-
-DESCRIBE_TRAFFIC_MIRROR_FILTER_RULES_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTMFRIe,
-    {_sSI: _cDTMFRRom, _sm: None},
-    (_TMFRIr, _TMFI, _DR, _Fil, _MR, _NTex),
-    (
-        (TRAFFIC_MIRROR_FILTER_RULE_ID_LIST, {_sN: _TMFRI}),
-        (lambda: schemas.TRAFFIC_MIRROR_FILTER_ID, 0),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (TRAFFIC_MIRRORING_MAX_RESULTS, 0),
-        (lambda: schemas.NEXT_TOKEN, 0),
-    ),
-)
-
-DESCRIBE_TRAFFIC_MIRROR_FILTER_RULES_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DTMFROe,
-    {_sSI: _cDTMFRRoma, _smit: None},
-    (_TMFRr, _NTex),
-    (
-        (lambda: TRAFFIC_MIRROR_FILTER_RULE_SET, {_aQN: _TMFRS, _sN: _tMFRS}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_TRAFFIC_MIRROR_FILTER_RULES: StaticOperationSchema = (
-    23,
-    n0,
-    _DTMFRe,
-    0,
-    DESCRIBE_TRAFFIC_MIRROR_FILTER_RULES_INPUT,
-    DESCRIBE_TRAFFIC_MIRROR_FILTER_RULES_OUTPUT,
-    (),
-)
-
-TRAFFIC_MIRROR_FILTER_RULE_SET: StaticSchema = (
-    16,
-    n0,
-    _TMFRS,
-    0,
-    (_me,),
-    ((lambda: schemas.TRAFFIC_MIRROR_FILTER_RULE, {_sN: _i}),),
-)
-
-TRAFFIC_MIRROR_FILTER_ID_LIST: StaticSchema = (
-    16,
-    n0,
-    _TMFIL,
-    0,
-    (_me,),
-    ((lambda: schemas.TRAFFIC_MIRROR_FILTER_ID, {_sN: _i}),),
-)
-
-DESCRIBE_TRAFFIC_MIRROR_FILTERS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTMFIe,
-    {_sSI: _cDTMFRom, _sm: None},
-    (_TMFIr, _DR, _Fil, _MR, _NTex),
-    (
-        (TRAFFIC_MIRROR_FILTER_ID_LIST, {_sN: _TMFI}),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (TRAFFIC_MIRRORING_MAX_RESULTS, 0),
-        (lambda: schemas.NEXT_TOKEN, 0),
-    ),
-)
-
-DESCRIBE_TRAFFIC_MIRROR_FILTERS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DTMFOe,
-    {_sSI: _cDTMFRoma, _smit: None},
-    (_TMFr, _NTex),
-    (
-        (lambda: TRAFFIC_MIRROR_FILTER_SET, {_aQN: _TMFS, _sN: _tMFS}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_TRAFFIC_MIRROR_FILTERS: StaticOperationSchema = (
-    23,
-    n0,
-    _DTMFe,
-    0,
-    DESCRIBE_TRAFFIC_MIRROR_FILTERS_INPUT,
-    DESCRIBE_TRAFFIC_MIRROR_FILTERS_OUTPUT,
-    (),
-)
-
-TRAFFIC_MIRROR_FILTER_SET: StaticSchema = (
-    16,
-    n0,
-    _TMFS,
-    0,
-    (_me,),
-    ((lambda: schemas.TRAFFIC_MIRROR_FILTER, {_sN: _i}),),
-)
-
-TRAFFIC_MIRROR_SESSION_ID_LIST: StaticSchema = (
-    16,
-    n0,
-    _TMSIL,
-    0,
-    (_me,),
-    ((lambda: schemas.TRAFFIC_MIRROR_SESSION_ID, {_sN: _i}),),
-)
-
-DESCRIBE_TRAFFIC_MIRROR_SESSIONS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTMSIe,
-    {_sSI: _cDTMSRom, _sm: None},
-    (_TMSIr, _DR, _Fil, _MR, _NTex),
-    (
-        (TRAFFIC_MIRROR_SESSION_ID_LIST, {_sN: _TMSI}),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (TRAFFIC_MIRRORING_MAX_RESULTS, 0),
-        (lambda: schemas.NEXT_TOKEN, 0),
-    ),
-)
-
-DESCRIBE_TRAFFIC_MIRROR_SESSIONS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DTMSOe,
-    {_sSI: _cDTMSRoma, _smit: None},
-    (_TMSr, _NTex),
-    (
-        (lambda: TRAFFIC_MIRROR_SESSION_SET, {_aQN: _TMSS, _sN: _tMSS}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_TRAFFIC_MIRROR_SESSIONS: StaticOperationSchema = (
-    23,
-    n0,
-    _DTMSe,
-    0,
-    DESCRIBE_TRAFFIC_MIRROR_SESSIONS_INPUT,
-    DESCRIBE_TRAFFIC_MIRROR_SESSIONS_OUTPUT,
-    (),
-)
-
-TRAFFIC_MIRROR_SESSION_SET: StaticSchema = (
-    16,
-    n0,
-    _TMSS,
-    0,
-    (_me,),
-    ((lambda: schemas.TRAFFIC_MIRROR_SESSION, {_sN: _i}),),
-)
-
-TRAFFIC_MIRROR_TARGET_ID_LIST: StaticSchema = (
-    16,
-    n0,
-    _TMTIL,
-    0,
-    (_me,),
-    ((lambda: schemas.TRAFFIC_MIRROR_TARGET_ID, {_sN: _i}),),
-)
-
-DESCRIBE_TRAFFIC_MIRROR_TARGETS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTMTIe,
-    {_sSI: _cDTMTRom, _sm: None},
-    (_TMTIr, _DR, _Fil, _MR, _NTex),
-    (
-        (TRAFFIC_MIRROR_TARGET_ID_LIST, {_sN: _TMTI}),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (TRAFFIC_MIRRORING_MAX_RESULTS, 0),
-        (lambda: schemas.NEXT_TOKEN, 0),
-    ),
-)
-
-DESCRIBE_TRAFFIC_MIRROR_TARGETS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DTMTOe,
-    {_sSI: _cDTMTRoma, _smit: None},
-    (_TMTr, _NTex),
-    (
-        (lambda: TRAFFIC_MIRROR_TARGET_SET, {_aQN: _TMTS, _sN: _tMTS}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_TRAFFIC_MIRROR_TARGETS: StaticOperationSchema = (
-    23,
-    n0,
-    _DTMTe,
-    0,
-    DESCRIBE_TRAFFIC_MIRROR_TARGETS_INPUT,
-    DESCRIBE_TRAFFIC_MIRROR_TARGETS_OUTPUT,
-    (),
-)
-
-TRAFFIC_MIRROR_TARGET_SET: StaticSchema = (
-    16,
-    n0,
-    _TMTS,
-    0,
-    (_me,),
-    ((lambda: schemas.TRAFFIC_MIRROR_TARGET, {_sN: _i}),),
-)
-
-TRANSIT_GATEWAY_MAX_RESULTS: StaticSchema = (7, n0, _TGMR, 0)
-
-DESCRIBE_TRANSIT_GATEWAY_ATTACHMENTS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGAIe,
-    {_sSI: _cDTGAR, _sm: None},
-    (_TGAIr, _Fil, _MR, _NTex, _DR),
-    (
-        (TRANSIT_GATEWAY_ATTACHMENT_ID_STRING_LIST, 0),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (TRANSIT_GATEWAY_MAX_RESULTS, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DESCRIBE_TRANSIT_GATEWAY_ATTACHMENTS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGAO,
-    {_sSI: _cDTGARo, _smit: None},
-    (_TGAransi, _NTex),
-    (
-        (lambda: TRANSIT_GATEWAY_ATTACHMENT_LIST, {_aQN: _TGAransi, _sN: _tGArans}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_TRANSIT_GATEWAY_ATTACHMENTS: StaticOperationSchema = (
-    23,
-    n0,
-    _DTGA,
-    0,
-    DESCRIBE_TRANSIT_GATEWAY_ATTACHMENTS_INPUT,
-    DESCRIBE_TRANSIT_GATEWAY_ATTACHMENTS_OUTPUT,
-    (),
-)
-
-TRANSIT_GATEWAY_ATTACHMENT_ASSOCIATION: StaticSchema = (
-    18,
-    n0,
-    _TGAA,
-    0,
-    (_TGRTI, _TGPTI, _St),
-    (
-        (lambda: schemas.STRING, {_aQN: _TGRTI, _sN: _tGRTI}),
-        (lambda: schemas.STRING, {_aQN: _TGPTI, _sN: _tGPTI}),
-        (lambda: schemas.TRANSIT_GATEWAY_ASSOCIATION_STATE, {_aQN: _St, _sN: _st}),
-    ),
-)
-
-TRANSIT_GATEWAY_ATTACHMENT: StaticSchema = (
-    18,
-    n0,
-    _TGA,
-    0,
-    (_TGAI, _TGI, _TGOI, _ROI, _RT, _RIe, _St, _Ass, _CT, _Tag, _NGSat),
-    (
-        (lambda: schemas.STRING, {_aQN: _TGAI, _sN: _tGAI}),
-        (lambda: schemas.STRING, {_aQN: _TGI, _sN: _tGI}),
-        (lambda: schemas.STRING, {_aQN: _TGOI, _sN: _tGOI}),
-        (lambda: schemas.STRING, {_aQN: _ROI, _sN: _rOI}),
-        (
-            lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_RESOURCE_TYPE,
-            {_aQN: _RT, _sN: _rT},
-        ),
-        (lambda: schemas.STRING, {_aQN: _RIe, _sN: _rI}),
-        (lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_STATE, {_aQN: _St, _sN: _st}),
-        (TRANSIT_GATEWAY_ATTACHMENT_ASSOCIATION, {_aQN: _Ass, _sN: _assoc}),
-        (lambda: schemas.DATE_TIME, {_aQN: _CT, _sN: _cT}),
-        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
-        (
-            lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_NAT_GATEWAY_SUPPORT_STATE,
-            {_aQN: _NGSat, _sN: _nGSa},
-        ),
-    ),
-)
-
-TRANSIT_GATEWAY_ATTACHMENT_LIST: StaticSchema = (
-    16,
-    n0,
-    _TGAL,
-    0,
-    (_me,),
-    ((TRANSIT_GATEWAY_ATTACHMENT, {_sN: _i}),),
-)
-
-TRANSIT_GATEWAY_CONNECT_PEER_ID_STRING_LIST: StaticSchema = (
-    16,
-    n0,
-    _TGCPISL,
-    0,
-    (_me,),
-    ((lambda: schemas.TRANSIT_GATEWAY_CONNECT_PEER_ID, {_sN: _i}),),
-)
-
-DESCRIBE_TRANSIT_GATEWAY_CONNECT_PEERS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGCPIe,
-    {_sSI: _cDTGCPRom, _sm: None},
-    (_TGCPIr, _Fil, _MR, _NTex, _DR),
-    (
-        (TRANSIT_GATEWAY_CONNECT_PEER_ID_STRING_LIST, 0),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (TRANSIT_GATEWAY_MAX_RESULTS, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DESCRIBE_TRANSIT_GATEWAY_CONNECT_PEERS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGCPOe,
-    {_sSI: _cDTGCPRoma, _smit: None},
-    (_TGCPr, _NTex),
-    (
-        (lambda: TRANSIT_GATEWAY_CONNECT_PEER_LIST, {_aQN: _TGCPSr, _sN: _tGCPS}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_TRANSIT_GATEWAY_CONNECT_PEERS: StaticOperationSchema = (
-    23,
-    n0,
-    _DTGCPe,
-    0,
-    DESCRIBE_TRANSIT_GATEWAY_CONNECT_PEERS_INPUT,
-    DESCRIBE_TRANSIT_GATEWAY_CONNECT_PEERS_OUTPUT,
-    (),
-)
-
-TRANSIT_GATEWAY_CONNECT_PEER_LIST: StaticSchema = (
-    16,
-    n0,
-    _TGCPL,
-    0,
-    (_me,),
-    ((lambda: schemas.TRANSIT_GATEWAY_CONNECT_PEER, {_sN: _i}),),
-)
-
-DESCRIBE_TRANSIT_GATEWAY_CONNECTS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGCIe,
-    {_sSI: _cDTGCRom, _sm: None},
-    (_TGAIr, _Fil, _MR, _NTex, _DR),
-    (
-        (TRANSIT_GATEWAY_ATTACHMENT_ID_STRING_LIST, 0),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (TRANSIT_GATEWAY_MAX_RESULTS, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DESCRIBE_TRANSIT_GATEWAY_CONNECTS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGCOe,
-    {_sSI: _cDTGCRoma, _smit: None},
-    (_TGCra, _NTex),
-    (
-        (lambda: TRANSIT_GATEWAY_CONNECT_LIST, {_aQN: _TGCS, _sN: _tGCS}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_TRANSIT_GATEWAY_CONNECTS: StaticOperationSchema = (
-    23,
-    n0,
-    _DTGCe,
-    0,
-    DESCRIBE_TRANSIT_GATEWAY_CONNECTS_INPUT,
-    DESCRIBE_TRANSIT_GATEWAY_CONNECTS_OUTPUT,
-    (),
-)
-
-TRANSIT_GATEWAY_CONNECT_LIST: StaticSchema = (
-    16,
-    n0,
-    _TGCL,
-    0,
-    (_me,),
-    ((lambda: schemas.TRANSIT_GATEWAY_CONNECT, {_sN: _i}),),
-)
-
-TRANSIT_GATEWAY_METERING_POLICY_ID_STRING_LIST: StaticSchema = (
-    16,
-    n0,
-    _TGMPISL,
-    0,
-    (_me,),
-    ((lambda: schemas.TRANSIT_GATEWAY_METERING_POLICY_ID, {_sN: _i}),),
-)
-
-DESCRIBE_TRANSIT_GATEWAY_METERING_POLICIES_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGMPIe,
-    {_sSI: _cDTGMPRom, _sm: None},
-    (_TGMPIr, _Fil, _MR, _NTex, _DR),
-    (
-        (TRANSIT_GATEWAY_METERING_POLICY_ID_STRING_LIST, 0),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (TRANSIT_GATEWAY_MAX_RESULTS, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DESCRIBE_TRANSIT_GATEWAY_METERING_POLICIES_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGMPOe,
-    {_sSI: _cDTGMPRoma, _smit: None},
-    (_TGMPr, _NTex),
-    (
-        (lambda: TRANSIT_GATEWAY_METERING_POLICY_LIST, {_aQN: _TGMPr, _sN: _tGMPr}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_TRANSIT_GATEWAY_METERING_POLICIES: StaticOperationSchema = (
-    23,
-    n0,
-    _DTGMPe,
-    0,
-    DESCRIBE_TRANSIT_GATEWAY_METERING_POLICIES_INPUT,
-    DESCRIBE_TRANSIT_GATEWAY_METERING_POLICIES_OUTPUT,
-    (),
-)
-
-TRANSIT_GATEWAY_METERING_POLICY_LIST: StaticSchema = (
-    16,
-    n0,
-    _TGMPL,
-    0,
-    (_me,),
-    ((lambda: schemas.TRANSIT_GATEWAY_METERING_POLICY, {_sN: _i}),),
-)
-
-TRANSIT_GATEWAY_MULTICAST_DOMAIN_ID_STRING_LIST: StaticSchema = (
-    16,
-    n0,
-    _TGMDISL,
-    0,
-    (_me,),
-    ((lambda: schemas.TRANSIT_GATEWAY_MULTICAST_DOMAIN_ID, {_sN: _i}),),
-)
-
-DESCRIBE_TRANSIT_GATEWAY_MULTICAST_DOMAINS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGMDIe,
-    {_sSI: _cDTGMDRom, _sm: None},
-    (_TGMDIr, _Fil, _MR, _NTex, _DR),
-    (
-        (TRANSIT_GATEWAY_MULTICAST_DOMAIN_ID_STRING_LIST, 0),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (TRANSIT_GATEWAY_MAX_RESULTS, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DESCRIBE_TRANSIT_GATEWAY_MULTICAST_DOMAINS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGMDOe,
-    {_sSI: _cDTGMDRoma, _smit: None},
-    (_TGMDr, _NTex),
-    (
-        (lambda: TRANSIT_GATEWAY_MULTICAST_DOMAIN_LIST, {_aQN: _TGMDr, _sN: _tGMDr}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_TRANSIT_GATEWAY_MULTICAST_DOMAINS: StaticOperationSchema = (
-    23,
-    n0,
-    _DTGMDe,
-    0,
-    DESCRIBE_TRANSIT_GATEWAY_MULTICAST_DOMAINS_INPUT,
-    DESCRIBE_TRANSIT_GATEWAY_MULTICAST_DOMAINS_OUTPUT,
-    (),
-)
-
-TRANSIT_GATEWAY_MULTICAST_DOMAIN_LIST: StaticSchema = (
-    16,
-    n0,
-    _TGMDL,
-    0,
-    (_me,),
-    ((lambda: schemas.TRANSIT_GATEWAY_MULTICAST_DOMAIN, {_sN: _i}),),
-)
-
-DESCRIBE_TRANSIT_GATEWAY_PEERING_ATTACHMENTS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGPAIe,
-    {_sSI: _cDTGPARom, _sm: None},
-    (_TGAIr, _Fil, _MR, _NTex, _DR),
-    (
-        (TRANSIT_GATEWAY_ATTACHMENT_ID_STRING_LIST, 0),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (TRANSIT_GATEWAY_MAX_RESULTS, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DESCRIBE_TRANSIT_GATEWAY_PEERING_ATTACHMENTS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGPAOe,
-    {_sSI: _cDTGPARoma, _smit: None},
-    (_TGPAr, _NTex),
-    (
-        (lambda: TRANSIT_GATEWAY_PEERING_ATTACHMENT_LIST, {_aQN: _TGPAr, _sN: _tGPAr}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_TRANSIT_GATEWAY_PEERING_ATTACHMENTS: StaticOperationSchema = (
-    23,
-    n0,
-    _DTGPAe,
-    0,
-    DESCRIBE_TRANSIT_GATEWAY_PEERING_ATTACHMENTS_INPUT,
-    DESCRIBE_TRANSIT_GATEWAY_PEERING_ATTACHMENTS_OUTPUT,
-    (),
-)
-
-TRANSIT_GATEWAY_PEERING_ATTACHMENT_LIST: StaticSchema = (
-    16,
-    n0,
-    _TGPAL,
-    0,
-    (_me,),
-    ((lambda: schemas.TRANSIT_GATEWAY_PEERING_ATTACHMENT, {_sN: _i}),),
-)
-
-TRANSIT_GATEWAY_POLICY_TABLE_ID_STRING_LIST: StaticSchema = (
-    16,
-    n0,
-    _TGPTISL,
-    0,
-    (_me,),
-    ((lambda: schemas.TRANSIT_GATEWAY_POLICY_TABLE_ID, {_sN: _i}),),
-)
-
-DESCRIBE_TRANSIT_GATEWAY_POLICY_TABLES_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGPTIe,
-    {_sSI: _cDTGPTRom, _sm: None},
-    (_TGPTIr, _Fil, _MR, _NTex, _DR),
-    (
-        (TRANSIT_GATEWAY_POLICY_TABLE_ID_STRING_LIST, 0),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (TRANSIT_GATEWAY_MAX_RESULTS, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DESCRIBE_TRANSIT_GATEWAY_POLICY_TABLES_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGPTOe,
-    {_sSI: _cDTGPTRoma, _smit: None},
-    (_TGPTr, _NTex),
-    (
-        (lambda: TRANSIT_GATEWAY_POLICY_TABLE_LIST, {_aQN: _TGPTr, _sN: _tGPTr}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_TRANSIT_GATEWAY_POLICY_TABLES: StaticOperationSchema = (
-    23,
-    n0,
-    _DTGPTe,
-    0,
-    DESCRIBE_TRANSIT_GATEWAY_POLICY_TABLES_INPUT,
-    DESCRIBE_TRANSIT_GATEWAY_POLICY_TABLES_OUTPUT,
-    (),
-)
-
-TRANSIT_GATEWAY_POLICY_TABLE_LIST: StaticSchema = (
-    16,
-    n0,
-    _TGPTL,
-    0,
-    (_me,),
-    ((lambda: schemas.TRANSIT_GATEWAY_POLICY_TABLE, {_sN: _i}),),
-)
-
-TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENT_ID_STRING_LIST: StaticSchema = (
-    16,
-    n0,
-    _TGRTAISL,
-    0,
-    (_me,),
-    ((lambda: schemas.TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENT_ID, {_sN: _i}),),
-)
-
-DESCRIBE_TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENTS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGRTAIe,
-    {_sSI: _cDTGRTARom, _sm: None},
-    (_TGRTAIr, _Fil, _MR, _NTex, _DR),
-    (
-        (TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENT_ID_STRING_LIST, 0),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (TRANSIT_GATEWAY_MAX_RESULTS, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DESCRIBE_TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENTS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGRTAOe,
-    {_sSI: _cDTGRTARoma, _smit: None},
-    (_TGRTAr, _NTex),
-    (
-        (
-            lambda: TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENT_LIST,
-            {_aQN: _TGRTAr, _sN: _tGRTAr},
-        ),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENTS: StaticOperationSchema = (
-    23,
-    n0,
-    _DTGRTAe,
-    0,
-    DESCRIBE_TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENTS_INPUT,
-    DESCRIBE_TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENTS_OUTPUT,
-    (),
-)
-
-TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENT_LIST: StaticSchema = (
-    16,
-    n0,
-    _TGRTAL,
-    0,
-    (_me,),
-    ((lambda: schemas.TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENT, {_sN: _i}),),
-)
-
-TRANSIT_GATEWAY_ROUTE_TABLE_ID_STRING_LIST: StaticSchema = (
-    16,
-    n0,
-    _TGRTISL,
-    0,
-    (_me,),
-    ((lambda: schemas.TRANSIT_GATEWAY_ROUTE_TABLE_ID, {_sN: _i}),),
-)
-
-DESCRIBE_TRANSIT_GATEWAY_ROUTE_TABLES_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGRTIe,
-    {_sSI: _cDTGRTRom, _sm: None},
-    (_TGRTIr, _Fil, _MR, _NTex, _DR),
-    (
-        (TRANSIT_GATEWAY_ROUTE_TABLE_ID_STRING_LIST, 0),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (TRANSIT_GATEWAY_MAX_RESULTS, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DESCRIBE_TRANSIT_GATEWAY_ROUTE_TABLES_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGRTOe,
-    {_sSI: _cDTGRTRoma, _smit: None},
-    (_TGRTra, _NTex),
-    (
-        (lambda: TRANSIT_GATEWAY_ROUTE_TABLE_LIST, {_aQN: _TGRTra, _sN: _tGRTr}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_TRANSIT_GATEWAY_ROUTE_TABLES: StaticOperationSchema = (
-    23,
-    n0,
-    _DTGRTe,
-    0,
-    DESCRIBE_TRANSIT_GATEWAY_ROUTE_TABLES_INPUT,
-    DESCRIBE_TRANSIT_GATEWAY_ROUTE_TABLES_OUTPUT,
-    (),
-)
-
-TRANSIT_GATEWAY_ROUTE_TABLE_LIST: StaticSchema = (
-    16,
-    n0,
-    _TGRTL,
-    0,
-    (_me,),
-    ((lambda: schemas.TRANSIT_GATEWAY_ROUTE_TABLE, {_sN: _i}),),
-)
-
-TRANSIT_GATEWAY_ID_STRING_LIST: StaticSchema = (
-    16,
-    n0,
-    _TGISL,
-    0,
-    (_me,),
-    ((lambda: schemas.TRANSIT_GATEWAY_ID, {_sN: _i}),),
-)
-
-DESCRIBE_TRANSIT_GATEWAYS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGIe,
-    {_sSI: _cDTGRom, _sm: None},
-    (_TGIr, _Fil, _MR, _NTex, _DR),
-    (
-        (TRANSIT_GATEWAY_ID_STRING_LIST, 0),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (TRANSIT_GATEWAY_MAX_RESULTS, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DESCRIBE_TRANSIT_GATEWAYS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGOe,
-    {_sSI: _cDTGRoma, _smit: None},
-    (_TGra, _NTex),
-    (
-        (lambda: TRANSIT_GATEWAY_LIST, {_aQN: _TGSr, _sN: _tGS}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_TRANSIT_GATEWAYS: StaticOperationSchema = (
-    23,
-    n0,
-    _DTGe,
-    0,
-    DESCRIBE_TRANSIT_GATEWAYS_INPUT,
-    DESCRIBE_TRANSIT_GATEWAYS_OUTPUT,
-    (),
-)
-
-TRANSIT_GATEWAY_LIST: StaticSchema = (
-    16,
-    n0,
-    _TGL,
-    0,
-    (_me,),
-    ((lambda: schemas.TRANSIT_GATEWAY, {_sN: _i}),),
-)
-
-DESCRIBE_TRANSIT_GATEWAY_VPC_ATTACHMENTS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGVAIe,
-    {_sSI: _cDTGVARom, _sm: None},
-    (_TGAIr, _Fil, _MR, _NTex, _DR),
-    (
-        (TRANSIT_GATEWAY_ATTACHMENT_ID_STRING_LIST, 0),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (TRANSIT_GATEWAY_MAX_RESULTS, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DESCRIBE_TRANSIT_GATEWAY_VPC_ATTACHMENTS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DTGVAOe,
-    {_sSI: _cDTGVARoma, _smit: None},
-    (_TGVAr, _NTex),
-    (
-        (lambda: TRANSIT_GATEWAY_VPC_ATTACHMENT_LIST, {_aQN: _TGVAr, _sN: _tGVAr}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_TRANSIT_GATEWAY_VPC_ATTACHMENTS: StaticOperationSchema = (
-    23,
-    n0,
-    _DTGVAe,
-    0,
-    DESCRIBE_TRANSIT_GATEWAY_VPC_ATTACHMENTS_INPUT,
-    DESCRIBE_TRANSIT_GATEWAY_VPC_ATTACHMENTS_OUTPUT,
-    (),
-)
-
-TRANSIT_GATEWAY_VPC_ATTACHMENT_LIST: StaticSchema = (
-    16,
-    n0,
-    _TGVAL,
-    0,
-    (_me,),
-    ((lambda: schemas.TRANSIT_GATEWAY_VPC_ATTACHMENT, {_sN: _i}),),
-)
-
-TRUNK_INTERFACE_ASSOCIATION_ID_LIST: StaticSchema = (
-    16,
-    n0,
-    _TIAIL,
-    0,
-    (_me,),
-    ((lambda: schemas.TRUNK_INTERFACE_ASSOCIATION_ID, {_sN: _i}),),
-)
-
-DESCRIBE_TRUNK_INTERFACE_ASSOCIATIONS_MAX_RESULTS: StaticSchema = (7, n0, _DTIAMR, 0)
-
-DESCRIBE_TRUNK_INTERFACE_ASSOCIATIONS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTIAI,
-    {_sSI: _cDTIAR, _sm: None},
-    (_AIsso, _DR, _Fil, _NTex, _MR),
-    (
-        (TRUNK_INTERFACE_ASSOCIATION_ID_LIST, {_sN: _AIs}),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (lambda: schemas.STRING, 0),
-        (DESCRIBE_TRUNK_INTERFACE_ASSOCIATIONS_MAX_RESULTS, 0),
-    ),
-)
-
-DESCRIBE_TRUNK_INTERFACE_ASSOCIATIONS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DTIAO,
-    {_sSI: _cDTIARo, _smit: None},
-    (_IAnt, _NTex),
-    (
-        (lambda: TRUNK_INTERFACE_ASSOCIATION_LIST, {_aQN: _IASnt, _sN: _iASn}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_TRUNK_INTERFACE_ASSOCIATIONS: StaticOperationSchema = (
-    23,
-    n0,
-    _DTIA,
-    0,
-    DESCRIBE_TRUNK_INTERFACE_ASSOCIATIONS_INPUT,
-    DESCRIBE_TRUNK_INTERFACE_ASSOCIATIONS_OUTPUT,
-    (),
-)
-
-TRUNK_INTERFACE_ASSOCIATION_LIST: StaticSchema = (
-    16,
-    n0,
-    _TIAL,
-    0,
-    (_me,),
-    ((lambda: schemas.TRUNK_INTERFACE_ASSOCIATION, {_sN: _i}),),
 )

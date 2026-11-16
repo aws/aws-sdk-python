@@ -136,7 +136,7 @@ class AsyncECSClient(AsyncClient[AsyncECSConfig]):
     also don't need to worry about scaling your management infrastructure.
     """
 
-    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
+    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
 
     @_overload
     async def associate_gateway_with_cluster(

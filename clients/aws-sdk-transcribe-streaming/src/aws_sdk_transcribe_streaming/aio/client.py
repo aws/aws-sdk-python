@@ -65,7 +65,7 @@ class AsyncTranscribeStreamingClient(AsyncClient[AsyncTranscribeStreamingConfig]
       AI. Refer to [here] for details.
     """
 
-    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
+    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
 
     @_overload
     async def get_medical_scribe_stream(

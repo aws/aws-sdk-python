@@ -57,7 +57,7 @@ class ConnectHealthClient(Client[ConnectHealthConfig]):
     Amazon Connect Health.
     """
 
-    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
+    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
 
     @_overload
     def activate_subscription(

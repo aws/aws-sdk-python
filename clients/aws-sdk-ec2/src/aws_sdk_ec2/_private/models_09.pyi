@@ -11,6 +11,8 @@ from smithy_core.types import UnknownEnumMixin
 
 from ..models import (
     AccessScopePath,
+    AddPrefixListEntry,
+    AddPrefixListEntryDict,
     AddedPrincipal,
     AdditionalDetail,
     AlternatePathHint,
@@ -20,56 +22,72 @@ from ..models import (
     AnalysisRouteTableRoute,
     AnalysisSecurityGroupRule,
     AnalysisTransitGatewayPolicyTableEntry,
-    AsnAuthorizationContext,
-    AsnAuthorizationContextDict,
     AttachmentEnaSrdSpecification,
     AttributeBooleanValue,
     AttributeBooleanValueDict,
-    BlockDeviceMapping,
-    BlockDeviceMappingDict,
-    Byoasn,
+    AttributeValue,
+    AttributeValueDict,
     ByoipCidr,
-    CapacityBlock,
-    CapacityBlockExtension,
     CapacityReservation,
     CapacityReservationOptions,
     CapacityReservationOptionsRequest,
     CapacityReservationOptionsRequestDict,
-    CidrAuthorizationContext,
-    CidrAuthorizationContextDict,
     ConnectionTrackingConfiguration,
+    ConnectionTrackingSpecificationRequest,
+    ConnectionTrackingSpecificationRequestDict,
+    CreateVolumePermissionModifications,
+    CreateVolumePermissionModificationsDict,
     DefaultConnectionTrackingConfiguration,
     DnsOptionsSpecification,
     DnsOptionsSpecificationDict,
     EfaInfo,
+    EnaSrdSpecification,
+    EnaSrdSpecificationDict,
     Explanation,
     FilterPortRange,
     FirewallStatefulRule,
     FirewallStatelessRule,
+    FlexCostAllocationCidrRangeSpecifications,
+    FlexCostAllocationCidrRangeSpecificationsDict,
     GroupIdentifier,
     IKEVersionsRequestListValue,
     IKEVersionsRequestListValueDict,
     IcmpTypeCode,
     IdFormat,
+    InstanceFlexCostAllocationPolicyDocument,
+    InstanceFlexCostAllocationPolicyDocumentDict,
     InstanceMonitoring,
-    IpamCidrAuthorizationContext,
-    IpamCidrAuthorizationContextDict,
-    IpamPoolCidr,
+    IpamScope,
     Ipv4PrefixSpecification,
     Ipv6PrefixSpecification,
+    LaunchTemplate,
+    LaunchTemplateConfig,
+    LaunchTemplateConfigDict,
+    LocalGatewayRoute,
+    ManagedPrefixList,
+    ManagedResourceVisibilitySettings,
+    MetricCategory,
+    ProvisionedBandwidth,
+    PublicIpDnsNameOptions,
+    RemovePrefixListEntry,
+    RemovePrefixListEntryDict,
     RequestFilterPortRange,
     RequestFilterPortRangeDict,
-    ReservedInstanceLimitPrice,
-    ReservedInstanceLimitPriceDict,
+    ReservedInstancesConfiguration,
+    ReservedInstancesConfigurationDict,
     ResourceStatement,
     ResourceStatementRequest,
     ResourceStatementRequestDict,
-    ScheduledInstance,
+    RouteServer,
+    SecurityGroupRuleUpdate,
+    SecurityGroupRuleUpdateDict,
     SubnetConfiguration,
     SubnetConfigurationDict,
     Tag,
-    TagSpecification,
-    TagSpecificationDict,
+    TrafficMirrorFilter,
+    TrafficMirrorFilterRule,
+    TrafficMirrorPortRangeRequest,
+    TrafficMirrorPortRangeRequestDict,
     TrafficMirrorSession,
     TransitGateway,
     TransitGatewayMeteringPolicy,
@@ -101,6 +119,1709 @@ from ..models import (
     VpnTunnelLogOptionsSpecificationDict,
     _SerdeShape,
 )
+
+@dataclass(kw_only=True)
+class ModifyIpamScopeOutput(_SerdeShape):
+    """Dataclass for ModifyIpamScopeOutput structure."""
+
+    ipam_scope: IpamScope | None = ...
+    """The results of the modification."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ModifyLaunchTemplateInput(_SerdeShape):
+    """Dataclass for ModifyLaunchTemplateInput structure."""
+
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    client_token: str | None = ...
+    """
+    Unique, case-sensitive identifier you provide to ensure the idempotency
+    of the request. If a client token isn't specified, a randomly generated
+    token is used in the request to ensure idempotency.
+
+    For more information, see [Ensuring
+    idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+
+    Constraint: Maximum 128 ASCII characters.
+
+    This field is autopopulated if not provided.
+    """
+    launch_template_id: str | None = ...
+    """
+    The ID of the launch template.
+
+    You must specify either the launch template ID or the launch template
+    name, but not both.
+    """
+    launch_template_name: str | None = ...
+    """
+    The name of the launch template.
+
+    You must specify either the launch template ID or the launch template
+    name, but not both.
+    """
+    default_version: str | None = ...
+    """The version number of the launch template to set as the default version."""
+
+class ModifyLaunchTemplateInputDict(TypedDict, total=False):
+    """Dictionary form of `ModifyLaunchTemplateInput`."""
+
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    client_token: str | None
+    """
+    Unique, case-sensitive identifier you provide to ensure the idempotency
+    of the request. If a client token isn't specified, a randomly generated
+    token is used in the request to ensure idempotency.
+
+    For more information, see [Ensuring
+    idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+
+    Constraint: Maximum 128 ASCII characters.
+
+    This field is autopopulated if not provided.
+    """
+    launch_template_id: str | None
+    """
+    The ID of the launch template.
+
+    You must specify either the launch template ID or the launch template
+    name, but not both.
+    """
+    launch_template_name: str | None
+    """
+    The name of the launch template.
+
+    You must specify either the launch template ID or the launch template
+    name, but not both.
+    """
+    default_version: str | None
+    """The version number of the launch template to set as the default version."""
+
+@dataclass(kw_only=True)
+class ModifyLaunchTemplateOutput(_SerdeShape):
+    """Dataclass for ModifyLaunchTemplateOutput structure."""
+
+    launch_template: LaunchTemplate | None = ...
+    """Information about the launch template."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ModifyLocalGatewayRouteInput(_SerdeShape):
+    """Dataclass for ModifyLocalGatewayRouteInput structure."""
+
+    destination_cidr_block: str | None = ...
+    """
+    The CIDR block used for destination matches. The value that you provide
+    must match the CIDR of an existing route in the table.
+    """
+    local_gateway_route_table_id: str | None = ...
+    """The ID of the local gateway route table."""
+    local_gateway_virtual_interface_group_id: str | None = ...
+    """The ID of the virtual interface group."""
+    network_interface_id: str | None = ...
+    """The ID of the network interface."""
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    destination_prefix_list_id: str | None = ...
+    """
+    The ID of the prefix list. Use a prefix list in place of
+    `DestinationCidrBlock`. You cannot use `DestinationPrefixListId` and
+    `DestinationCidrBlock` in the same request.
+    """
+
+class ModifyLocalGatewayRouteInputDict(TypedDict, total=False):
+    """Dictionary form of `ModifyLocalGatewayRouteInput`."""
+
+    destination_cidr_block: str | None
+    """
+    The CIDR block used for destination matches. The value that you provide
+    must match the CIDR of an existing route in the table.
+    """
+    local_gateway_route_table_id: Required[str]
+    """The ID of the local gateway route table."""
+    local_gateway_virtual_interface_group_id: str | None
+    """The ID of the virtual interface group."""
+    network_interface_id: str | None
+    """The ID of the network interface."""
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    destination_prefix_list_id: str | None
+    """
+    The ID of the prefix list. Use a prefix list in place of
+    `DestinationCidrBlock`. You cannot use `DestinationPrefixListId` and
+    `DestinationCidrBlock` in the same request.
+    """
+
+@dataclass(kw_only=True)
+class ModifyLocalGatewayRouteOutput(_SerdeShape):
+    """Dataclass for ModifyLocalGatewayRouteOutput structure."""
+
+    route: LocalGatewayRoute | None = ...
+    """Information about the local gateway route table."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ModifyManagedPrefixListInput(_SerdeShape):
+    """Dataclass for ModifyManagedPrefixListInput structure."""
+
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    prefix_list_id: str | None = ...
+    """The ID of the prefix list."""
+    current_version: int | None = ...
+    """The current version of the prefix list."""
+    prefix_list_name: str | None = ...
+    """A name for the prefix list."""
+    add_entries: list[AddPrefixListEntry] | None = ...
+    """One or more entries to add to the prefix list."""
+    remove_entries: list[RemovePrefixListEntry] | None = ...
+    """One or more entries to remove from the prefix list."""
+    max_entries: int | None = ...
+    """
+    The maximum number of entries for the prefix list. You cannot modify the
+    entries of a prefix list and modify the size of a prefix list at the
+    same time.
+
+    If any of the resources that reference the prefix list cannot support
+    the new maximum size, the modify operation fails. Check the state
+    message for the IDs of the first ten resources that do not support the
+    new maximum size.
+    """
+    ipam_prefix_list_resolver_sync_enabled: bool | None = ...
+    """
+    Indicates whether synchronization with an IPAM prefix list resolver
+    should be enabled for this managed prefix list. When enabled, the prefix
+    list CIDRs are automatically updated based on the associated resolver's
+    CIDR selection rules.
+    """
+
+class ModifyManagedPrefixListInputDict(TypedDict, total=False):
+    """Dictionary form of `ModifyManagedPrefixListInput`."""
+
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    prefix_list_id: Required[str]
+    """The ID of the prefix list."""
+    current_version: int | None
+    """The current version of the prefix list."""
+    prefix_list_name: str | None
+    """A name for the prefix list."""
+    add_entries: Sequence[AddPrefixListEntry | AddPrefixListEntryDict] | None
+    """One or more entries to add to the prefix list."""
+    remove_entries: Sequence[RemovePrefixListEntry | RemovePrefixListEntryDict] | None
+    """One or more entries to remove from the prefix list."""
+    max_entries: int | None
+    """
+    The maximum number of entries for the prefix list. You cannot modify the
+    entries of a prefix list and modify the size of a prefix list at the
+    same time.
+
+    If any of the resources that reference the prefix list cannot support
+    the new maximum size, the modify operation fails. Check the state
+    message for the IDs of the first ten resources that do not support the
+    new maximum size.
+    """
+    ipam_prefix_list_resolver_sync_enabled: bool | None
+    """
+    Indicates whether synchronization with an IPAM prefix list resolver
+    should be enabled for this managed prefix list. When enabled, the prefix
+    list CIDRs are automatically updated based on the associated resolver's
+    CIDR selection rules.
+    """
+
+@dataclass(kw_only=True)
+class ModifyManagedPrefixListOutput(_SerdeShape):
+    """Dataclass for ModifyManagedPrefixListOutput structure."""
+
+    prefix_list: ManagedPrefixList | None = ...
+    """Information about the prefix list."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ModifyManagedResourceVisibilityInput(_SerdeShape):
+    """Dataclass for ModifyManagedResourceVisibilityInput structure."""
+
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the operation,
+    without actually making the request, and provides an error response. If
+    you have the required permissions, the error response is
+    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    """
+    default_visibility: str | None = ...
+    """
+    The default visibility setting for managed resources. Valid values:
+    `hidden` | `visible`.
+    """
+
+class ModifyManagedResourceVisibilityInputDict(TypedDict, total=False):
+    """Dictionary form of `ModifyManagedResourceVisibilityInput`."""
+
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the operation,
+    without actually making the request, and provides an error response. If
+    you have the required permissions, the error response is
+    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    """
+    default_visibility: Required[str]
+    """
+    The default visibility setting for managed resources. Valid values:
+    `hidden` | `visible`.
+    """
+
+@dataclass(kw_only=True)
+class ModifyManagedResourceVisibilityOutput(_SerdeShape):
+    """Dataclass for ModifyManagedResourceVisibilityOutput structure."""
+
+    visibility: ManagedResourceVisibilitySettings | None = ...
+    """The updated managed resource visibility settings for the account."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ModifyMetricCategoryInput(_SerdeShape):
+    """Dataclass for ModifyMetricCategoryInput structure."""
+
+    metric_category_id: str | None = ...
+    """The ID of the metric category."""
+    metrics: list[str] | None = ...
+    """
+    The names of the metrics for the metric category. These metrics replace
+    the existing metrics, and must differ from the current set.
+
+    Specify each metric by its Amazon CloudWatch metric name or its
+    OpenTelemetry metric name. The two names for a measurement are separate
+    entries, and you can include both.
+
+    In Regions where Amazon CloudWatch OpenTelemetry metrics aren't
+    available, you can't specify OpenTelemetry metric names.
+    """
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the operation,
+    without actually making the request, and provides an error response. If
+    you have the required permissions, the error response is
+    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class ModifyMetricCategoryInputDict(TypedDict, total=False):
+    """Dictionary form of `ModifyMetricCategoryInput`."""
+
+    metric_category_id: Required[str]
+    """The ID of the metric category."""
+    metrics: Required[Sequence[str]]
+    """
+    The names of the metrics for the metric category. These metrics replace
+    the existing metrics, and must differ from the current set.
+
+    Specify each metric by its Amazon CloudWatch metric name or its
+    OpenTelemetry metric name. The two names for a measurement are separate
+    entries, and you can include both.
+
+    In Regions where Amazon CloudWatch OpenTelemetry metrics aren't
+    available, you can't specify OpenTelemetry metric names.
+    """
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the operation,
+    without actually making the request, and provides an error response. If
+    you have the required permissions, the error response is
+    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class ModifyMetricCategoryOutput(_SerdeShape):
+    """Dataclass for ModifyMetricCategoryOutput structure."""
+
+    metric_category: MetricCategory | None = ...
+    """Information about the metric category."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ModifyNetworkingFlexCostAllocationPolicyInput(_SerdeShape):
+    """Dataclass for ModifyNetworkingFlexCostAllocationPolicyInput structure."""
+
+    fca_policy_id: str | None = ...
+    """
+    The ID of the flex cost allocation policy to modify. This parameter is
+    required.
+    """
+    nat_fca_policy_document: NatFlexCostAllocationPolicyDocument | None = ...
+    """
+    The updated policy document that defines cost allocation for NAT
+    gateways.
+    """
+    instance_fca_policy_document: InstanceFlexCostAllocationPolicyDocument | None = ...
+    """
+    The updated policy document that defines cost allocation for EC2
+    instances.
+    """
+    pcx_fca_policy_document: PcxFlexCostAllocationPolicyDocument | None = ...
+    """
+    The updated policy document that defines cost allocation for Amazon VPC
+    peering connections.
+    """
+    show_back_enabled: bool | None = ...
+    """
+    Specifies whether showback reporting is enabled for the policy. If you
+    omit this parameter, the current setting is unchanged.
+    """
+    description: str | None = ...
+    """
+    A description for the policy. The description can be up to 1024
+    characters long.
+    """
+    client_token: str | None = ...
+    """
+    Unique, case-sensitive identifier that you provide to ensure the
+    idempotency of the request. For more information, see [Ensuring
+    idempotency](https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html).
+
+    This field is autopopulated if not provided.
+    """
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class ModifyNetworkingFlexCostAllocationPolicyInputDict(TypedDict, total=False):
+    """Dictionary form of `ModifyNetworkingFlexCostAllocationPolicyInput`."""
+
+    fca_policy_id: Required[str]
+    """
+    The ID of the flex cost allocation policy to modify. This parameter is
+    required.
+    """
+    nat_fca_policy_document: (
+        NatFlexCostAllocationPolicyDocument
+        | NatFlexCostAllocationPolicyDocumentDict
+        | None
+    )
+    """
+    The updated policy document that defines cost allocation for NAT
+    gateways.
+    """
+    instance_fca_policy_document: (
+        InstanceFlexCostAllocationPolicyDocument
+        | InstanceFlexCostAllocationPolicyDocumentDict
+        | None
+    )
+    """
+    The updated policy document that defines cost allocation for EC2
+    instances.
+    """
+    pcx_fca_policy_document: (
+        PcxFlexCostAllocationPolicyDocument
+        | PcxFlexCostAllocationPolicyDocumentDict
+        | None
+    )
+    """
+    The updated policy document that defines cost allocation for Amazon VPC
+    peering connections.
+    """
+    show_back_enabled: bool | None
+    """
+    Specifies whether showback reporting is enabled for the policy. If you
+    omit this parameter, the current setting is unchanged.
+    """
+    description: str | None
+    """
+    A description for the policy. The description can be up to 1024
+    characters long.
+    """
+    client_token: str | None
+    """
+    Unique, case-sensitive identifier that you provide to ensure the
+    idempotency of the request. For more information, see [Ensuring
+    idempotency](https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html).
+
+    This field is autopopulated if not provided.
+    """
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class ModifyNetworkingFlexCostAllocationPolicyOutput(_SerdeShape):
+    """Dataclass for ModifyNetworkingFlexCostAllocationPolicyOutput structure."""
+
+    fca_policy_id: str | None = ...
+    """The ID of the flex cost allocation policy."""
+    updated_at: datetime | None = ...
+    """The date and time when the policy was updated."""
+    version: int | None = ...
+    """The version number of the policy that this modification created."""
+    version_expected_effective_at: datetime | None = ...
+    """
+    The date and time when the new version of the policy is expected to
+    apply to network traffic.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ModifyNetworkInterfaceAttributeInput(_SerdeShape):
+    """Contains the parameters for ModifyNetworkInterfaceAttribute."""
+
+    ena_srd_specification: EnaSrdSpecification | None = ...
+    """
+    Updates the ENA Express configuration for the network interface that's
+    attached to the instance.
+    """
+    enable_primary_ipv6: bool | None = ...
+    """
+    If you're modifying a network interface in a dual-stack or IPv6-only
+    subnet, you have the option to assign a primary IPv6 IP address. A
+    primary IPv6 address is an IPv6 GUA address associated with an ENI that
+    you have enabled to use a primary IPv6 address. Use this option if the
+    instance that this ENI will be attached to relies on its IPv6 address
+    not changing. Amazon Web Services will automatically assign an IPv6
+    address associated with the ENI attached to your instance to be the
+    primary IPv6 address. Once you enable an IPv6 GUA address to be a
+    primary IPv6, you cannot disable it. When you enable an IPv6 GUA address
+    to be a primary IPv6, the first IPv6 GUA will be made the primary IPv6
+    address until the instance is terminated or the network interface is
+    detached. If you have multiple IPv6 addresses associated with an ENI
+    attached to your instance and you enable a primary IPv6 address, the
+    first IPv6 GUA address associated with the ENI becomes the primary IPv6
+    address.
+    """
+    connection_tracking_specification: (
+        ConnectionTrackingSpecificationRequest | None
+    ) = ...
+    """A connection tracking specification."""
+    associate_public_ip_address: bool | None = ...
+    """
+    Indicates whether to assign a public IPv4 address to a network
+    interface. This option can be enabled for any network interface but will
+    only apply to the primary network interface (eth0).
+    """
+    associated_subnet_ids: list[str] | None = ...
+    """A list of subnet IDs to associate with the network interface."""
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    network_interface_id: str | None = ...
+    """The ID of the network interface."""
+    description: AttributeValue | None = ...
+    """A description for the network interface."""
+    source_dest_check: AttributeBooleanValue | None = ...
+    """
+    Enable or disable source/destination checks, which ensure that the
+    instance is either the source or the destination of any traffic that it
+    receives. If the value is `true`, source/destination checks are enabled;
+    otherwise, they are disabled. The default value is `true`. You must
+    disable source/destination checks if the instance runs services such as
+    network address translation, routing, or firewalls.
+    """
+    groups: list[str] | None = ...
+    """
+    Changes the security groups for the network interface. The new set of
+    groups you specify replaces the current set. You must specify at least
+    one group, even if it's just the default security group in the VPC. You
+    must specify the ID of the security group, not the name.
+    """
+    attachment: NetworkInterfaceAttachmentChanges | None = ...
+    """
+    Information about the interface attachment. If modifying the
+    `delete on termination` attribute, you must specify the ID of the
+    interface attachment.
+    """
+
+class ModifyNetworkInterfaceAttributeInputDict(TypedDict, total=False):
+    """Dictionary form of `ModifyNetworkInterfaceAttributeInput`."""
+
+    ena_srd_specification: EnaSrdSpecification | EnaSrdSpecificationDict | None
+    """
+    Updates the ENA Express configuration for the network interface that's
+    attached to the instance.
+    """
+    enable_primary_ipv6: bool | None
+    """
+    If you're modifying a network interface in a dual-stack or IPv6-only
+    subnet, you have the option to assign a primary IPv6 IP address. A
+    primary IPv6 address is an IPv6 GUA address associated with an ENI that
+    you have enabled to use a primary IPv6 address. Use this option if the
+    instance that this ENI will be attached to relies on its IPv6 address
+    not changing. Amazon Web Services will automatically assign an IPv6
+    address associated with the ENI attached to your instance to be the
+    primary IPv6 address. Once you enable an IPv6 GUA address to be a
+    primary IPv6, you cannot disable it. When you enable an IPv6 GUA address
+    to be a primary IPv6, the first IPv6 GUA will be made the primary IPv6
+    address until the instance is terminated or the network interface is
+    detached. If you have multiple IPv6 addresses associated with an ENI
+    attached to your instance and you enable a primary IPv6 address, the
+    first IPv6 GUA address associated with the ENI becomes the primary IPv6
+    address.
+    """
+    connection_tracking_specification: (
+        ConnectionTrackingSpecificationRequest
+        | ConnectionTrackingSpecificationRequestDict
+        | None
+    )
+    """A connection tracking specification."""
+    associate_public_ip_address: bool | None
+    """
+    Indicates whether to assign a public IPv4 address to a network
+    interface. This option can be enabled for any network interface but will
+    only apply to the primary network interface (eth0).
+    """
+    associated_subnet_ids: Sequence[str] | None
+    """A list of subnet IDs to associate with the network interface."""
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    network_interface_id: Required[str]
+    """The ID of the network interface."""
+    description: AttributeValue | AttributeValueDict | None
+    """A description for the network interface."""
+    source_dest_check: AttributeBooleanValue | AttributeBooleanValueDict | None
+    """
+    Enable or disable source/destination checks, which ensure that the
+    instance is either the source or the destination of any traffic that it
+    receives. If the value is `true`, source/destination checks are enabled;
+    otherwise, they are disabled. The default value is `true`. You must
+    disable source/destination checks if the instance runs services such as
+    network address translation, routing, or firewalls.
+    """
+    groups: Sequence[str] | None
+    """
+    Changes the security groups for the network interface. The new set of
+    groups you specify replaces the current set. You must specify at least
+    one group, even if it's just the default security group in the VPC. You
+    must specify the ID of the security group, not the name.
+    """
+    attachment: (
+        NetworkInterfaceAttachmentChanges | NetworkInterfaceAttachmentChangesDict | None
+    )
+    """
+    Information about the interface attachment. If modifying the
+    `delete on termination` attribute, you must specify the ID of the
+    interface attachment.
+    """
+
+@dataclass(kw_only=True)
+class ModifyNetworkInterfaceAttributeOutput(_SerdeShape):
+    """Dataclass for ModifyNetworkInterfaceAttributeOutput structure."""
+
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ModifyPrivateDnsNameOptionsInput(_SerdeShape):
+    """Dataclass for ModifyPrivateDnsNameOptionsInput structure."""
+
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    instance_id: str | None = ...
+    """The ID of the instance."""
+    private_dns_hostname_type: str | None = ...
+    """
+    The type of hostname for EC2 instances. For IPv4 only subnets, an
+    instance DNS name must be based on the instance IPv4 address. For IPv6
+    only subnets, an instance DNS name must be based on the instance ID. For
+    dual-stack subnets, you can specify whether DNS names use the instance
+    IPv4 address or the instance ID.
+    """
+    enable_resource_name_dns_a_record: bool | None = ...
+    """
+    Indicates whether to respond to DNS queries for instance hostnames with
+    DNS A records.
+    """
+    enable_resource_name_dns_aaaa_record: bool | None = ...
+    """
+    Indicates whether to respond to DNS queries for instance hostnames with
+    DNS AAAA records.
+    """
+
+class ModifyPrivateDnsNameOptionsInputDict(TypedDict, total=False):
+    """Dictionary form of `ModifyPrivateDnsNameOptionsInput`."""
+
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    instance_id: Required[str]
+    """The ID of the instance."""
+    private_dns_hostname_type: str | None
+    """
+    The type of hostname for EC2 instances. For IPv4 only subnets, an
+    instance DNS name must be based on the instance IPv4 address. For IPv6
+    only subnets, an instance DNS name must be based on the instance ID. For
+    dual-stack subnets, you can specify whether DNS names use the instance
+    IPv4 address or the instance ID.
+    """
+    enable_resource_name_dns_a_record: bool | None
+    """
+    Indicates whether to respond to DNS queries for instance hostnames with
+    DNS A records.
+    """
+    enable_resource_name_dns_aaaa_record: bool | None
+    """
+    Indicates whether to respond to DNS queries for instance hostnames with
+    DNS AAAA records.
+    """
+
+@dataclass(kw_only=True)
+class ModifyPrivateDnsNameOptionsOutput(_SerdeShape):
+    """Dataclass for ModifyPrivateDnsNameOptionsOutput structure."""
+
+    return_: bool | None = ...
+    """Returns `true` if the request succeeds; otherwise, it returns an error."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ModifyPublicIpDnsNameOptionsInput(_SerdeShape):
+    """Dataclass for ModifyPublicIpDnsNameOptionsInput structure."""
+
+    network_interface_id: str | None = ...
+    """A network interface ID."""
+    hostname_type: str | None = ...
+    """
+    The public hostname type. For more information, see [EC2 instance
+    hostnames, DNS names, and
+    domains](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html)
+    in the *Amazon EC2 User Guide*.
+
+    - `public-dual-stack-dns-name`: A dual-stack public hostname for a
+      network interface. Requests from within the VPC resolve to both the
+      private IPv4 address and the IPv6 Global Unicast Address of the
+      network interface. Requests from the internet resolve to both the
+      public IPv4 and the IPv6 GUA address of the network interface.
+
+    - `public-ipv4-dns-name`: An IPv4-enabled public hostname for a network
+      interface. Requests from within the VPC resolve to the private primary
+      IPv4 address of the network interface. Requests from the internet
+      resolve to the public IPv4 address of the network interface.
+
+    - `public-ipv6-dns-name`: An IPv6-enabled public hostname for a network
+      interface. Requests from within the VPC or from the internet resolve
+      to the IPv6 GUA of the network interface.
+    """
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the operation,
+    without actually making the request, and provides an error response. If
+    you have the required permissions, the error response is
+    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class ModifyPublicIpDnsNameOptionsInputDict(TypedDict, total=False):
+    """Dictionary form of `ModifyPublicIpDnsNameOptionsInput`."""
+
+    network_interface_id: Required[str]
+    """A network interface ID."""
+    hostname_type: Required[str]
+    """
+    The public hostname type. For more information, see [EC2 instance
+    hostnames, DNS names, and
+    domains](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html)
+    in the *Amazon EC2 User Guide*.
+
+    - `public-dual-stack-dns-name`: A dual-stack public hostname for a
+      network interface. Requests from within the VPC resolve to both the
+      private IPv4 address and the IPv6 Global Unicast Address of the
+      network interface. Requests from the internet resolve to both the
+      public IPv4 and the IPv6 GUA address of the network interface.
+
+    - `public-ipv4-dns-name`: An IPv4-enabled public hostname for a network
+      interface. Requests from within the VPC resolve to the private primary
+      IPv4 address of the network interface. Requests from the internet
+      resolve to the public IPv4 address of the network interface.
+
+    - `public-ipv6-dns-name`: An IPv6-enabled public hostname for a network
+      interface. Requests from within the VPC or from the internet resolve
+      to the IPv6 GUA of the network interface.
+    """
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the operation,
+    without actually making the request, and provides an error response. If
+    you have the required permissions, the error response is
+    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class ModifyPublicIpDnsNameOptionsOutput(_SerdeShape):
+    """Dataclass for ModifyPublicIpDnsNameOptionsOutput structure."""
+
+    successful: bool | None = ...
+    """Whether or not the request was successful."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ModifyReservedInstancesInput(_SerdeShape):
+    """Contains the parameters for ModifyReservedInstances."""
+
+    reserved_instances_ids: list[str] | None = ...
+    """The IDs of the Reserved Instances to modify."""
+    client_token: str | None = ...
+    """
+    A unique, case-sensitive token you provide to ensure idempotency of your
+    modification request. For more information, see [Ensuring
+    Idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+    """
+    target_configurations: list[ReservedInstancesConfiguration] | None = ...
+    """The configuration settings for the Reserved Instances to modify."""
+
+class ModifyReservedInstancesInputDict(TypedDict, total=False):
+    """Dictionary form of `ModifyReservedInstancesInput`."""
+
+    reserved_instances_ids: Required[Sequence[str]]
+    """The IDs of the Reserved Instances to modify."""
+    client_token: str | None
+    """
+    A unique, case-sensitive token you provide to ensure idempotency of your
+    modification request. For more information, see [Ensuring
+    Idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+    """
+    target_configurations: Required[
+        Sequence[ReservedInstancesConfiguration | ReservedInstancesConfigurationDict]
+    ]
+    """The configuration settings for the Reserved Instances to modify."""
+
+@dataclass(kw_only=True)
+class ModifyReservedInstancesOutput(_SerdeShape):
+    """Contains the output of ModifyReservedInstances."""
+
+    reserved_instances_modification_id: str | None = ...
+    """The ID for the modification."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ModifyRouteServerInput(_SerdeShape):
+    """Dataclass for ModifyRouteServerInput structure."""
+
+    route_server_id: str | None = ...
+    """The ID of the route server to modify."""
+    persist_routes: str | None = ...
+    """
+    Specifies whether to persist routes after all BGP sessions are
+    terminated.
+
+    - enable: Routes will be persisted in FIB and RIB after all BGP sessions
+      are terminated.
+
+    - disable: Routes will not be persisted in FIB and RIB after all BGP
+      sessions are terminated.
+
+    - reset: If a route server has persisted routes due to all BGP sessions
+      having ended, reset will withdraw all routes and reset route server to
+      an empty FIB and RIB.
+    """
+    persist_routes_duration: int | None = ...
+    """
+    The number of minutes a route server will wait after BGP is
+    re-established to unpersist the routes in the FIB and RIB. Value must be
+    in the range of 1-5. Required if PersistRoutes is `enabled`.
+
+    If you set the duration to 1 minute, then when your network appliance
+    re-establishes BGP with route server, it has 1 minute to relearn it's
+    adjacent network and advertise those routes to route server before route
+    server resumes normal functionality. In most cases, 1 minute is probably
+    sufficient. If, however, you have concerns that your BGP network may not
+    be capable of fully re-establishing and re-learning everything in 1
+    minute, you can increase the duration up to 5 minutes.
+    """
+    sns_notifications_enabled: bool | None = ...
+    """
+    Specifies whether to enable SNS notifications for route server events.
+    Enabling SNS notifications persists BGP status changes to an SNS topic
+    provisioned by Amazon Web Services.
+    """
+    dry_run: bool | None = ...
+    """
+    A check for whether you have the required permissions for the action
+    without actually making the request and provides an error response. If
+    you have the required permissions, the error response is
+    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class ModifyRouteServerInputDict(TypedDict, total=False):
+    """Dictionary form of `ModifyRouteServerInput`."""
+
+    route_server_id: Required[str]
+    """The ID of the route server to modify."""
+    persist_routes: str | None
+    """
+    Specifies whether to persist routes after all BGP sessions are
+    terminated.
+
+    - enable: Routes will be persisted in FIB and RIB after all BGP sessions
+      are terminated.
+
+    - disable: Routes will not be persisted in FIB and RIB after all BGP
+      sessions are terminated.
+
+    - reset: If a route server has persisted routes due to all BGP sessions
+      having ended, reset will withdraw all routes and reset route server to
+      an empty FIB and RIB.
+    """
+    persist_routes_duration: int | None
+    """
+    The number of minutes a route server will wait after BGP is
+    re-established to unpersist the routes in the FIB and RIB. Value must be
+    in the range of 1-5. Required if PersistRoutes is `enabled`.
+
+    If you set the duration to 1 minute, then when your network appliance
+    re-establishes BGP with route server, it has 1 minute to relearn it's
+    adjacent network and advertise those routes to route server before route
+    server resumes normal functionality. In most cases, 1 minute is probably
+    sufficient. If, however, you have concerns that your BGP network may not
+    be capable of fully re-establishing and re-learning everything in 1
+    minute, you can increase the duration up to 5 minutes.
+    """
+    sns_notifications_enabled: bool | None
+    """
+    Specifies whether to enable SNS notifications for route server events.
+    Enabling SNS notifications persists BGP status changes to an SNS topic
+    provisioned by Amazon Web Services.
+    """
+    dry_run: bool | None
+    """
+    A check for whether you have the required permissions for the action
+    without actually making the request and provides an error response. If
+    you have the required permissions, the error response is
+    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class ModifyRouteServerOutput(_SerdeShape):
+    """Dataclass for ModifyRouteServerOutput structure."""
+
+    route_server: RouteServer | None = ...
+    """Information about the modified route server."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ModifySecurityGroupRulesInput(_SerdeShape):
+    """Dataclass for ModifySecurityGroupRulesInput structure."""
+
+    group_id: str | None = ...
+    """The ID of the security group."""
+    security_group_rules: list[SecurityGroupRuleUpdate] | None = ...
+    """Information about the security group properties to update."""
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class ModifySecurityGroupRulesInputDict(TypedDict, total=False):
+    """Dictionary form of `ModifySecurityGroupRulesInput`."""
+
+    group_id: Required[str]
+    """The ID of the security group."""
+    security_group_rules: Required[
+        Sequence[SecurityGroupRuleUpdate | SecurityGroupRuleUpdateDict]
+    ]
+    """Information about the security group properties to update."""
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class ModifySecurityGroupRulesOutput(_SerdeShape):
+    """Dataclass for ModifySecurityGroupRulesOutput structure."""
+
+    return_: bool | None = ...
+    """Returns `true` if the request succeeds; otherwise, returns an error."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ModifySnapshotAttributeInput(_SerdeShape):
+    """Dataclass for ModifySnapshotAttributeInput structure."""
+
+    attribute: str | None = ...
+    """
+    The snapshot attribute to modify. Only volume creation permissions can
+    be modified.
+    """
+    create_volume_permission: CreateVolumePermissionModifications | None = ...
+    """A JSON representation of the snapshot attribute modification."""
+    group_names: list[str] | None = ...
+    """The group to modify for the snapshot."""
+    operation_type: str | None = ...
+    """The type of operation to perform to the attribute."""
+    snapshot_id: str | None = ...
+    """The ID of the snapshot."""
+    user_ids: list[str] | None = ...
+    """The account ID to modify for the snapshot."""
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class ModifySnapshotAttributeInputDict(TypedDict, total=False):
+    """Dictionary form of `ModifySnapshotAttributeInput`."""
+
+    attribute: str | None
+    """
+    The snapshot attribute to modify. Only volume creation permissions can
+    be modified.
+    """
+    create_volume_permission: (
+        CreateVolumePermissionModifications
+        | CreateVolumePermissionModificationsDict
+        | None
+    )
+    """A JSON representation of the snapshot attribute modification."""
+    group_names: Sequence[str] | None
+    """The group to modify for the snapshot."""
+    operation_type: str | None
+    """The type of operation to perform to the attribute."""
+    snapshot_id: Required[str]
+    """The ID of the snapshot."""
+    user_ids: Sequence[str] | None
+    """The account ID to modify for the snapshot."""
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class ModifySnapshotAttributeOutput(_SerdeShape):
+    """Dataclass for ModifySnapshotAttributeOutput structure."""
+
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ModifySnapshotTierInput(_SerdeShape):
+    """Dataclass for ModifySnapshotTierInput structure."""
+
+    snapshot_id: str | None = ...
+    """The ID of the snapshot."""
+    storage_tier: str | None = ...
+    """The name of the storage tier. You must specify `archive`."""
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class ModifySnapshotTierInputDict(TypedDict, total=False):
+    """Dictionary form of `ModifySnapshotTierInput`."""
+
+    snapshot_id: Required[str]
+    """The ID of the snapshot."""
+    storage_tier: str | None
+    """The name of the storage tier. You must specify `archive`."""
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class ModifySnapshotTierOutput(_SerdeShape):
+    """Dataclass for ModifySnapshotTierOutput structure."""
+
+    snapshot_id: str | None = ...
+    """The ID of the snapshot."""
+    tiering_start_time: datetime | None = ...
+    """The date and time when the archive process was started."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ModifySpotFleetRequestInput(_SerdeShape):
+    """Contains the parameters for ModifySpotFleetRequest."""
+
+    launch_template_configs: list[LaunchTemplateConfig] | None = ...
+    """
+    The launch template and overrides. You can only use this parameter if
+    you specified a launch template (`LaunchTemplateConfigs`) in your Spot
+    Fleet request. If you specified `LaunchSpecifications` in your Spot
+    Fleet request, then omit this parameter.
+    """
+    on_demand_target_capacity: int | None = ...
+    """The number of On-Demand Instances in the fleet."""
+    context: str | None = ...
+    """Reserved."""
+    spot_fleet_request_id: str | None = ...
+    """The ID of the Spot Fleet request."""
+    target_capacity: int | None = ...
+    """The size of the fleet."""
+    excess_capacity_termination_policy: str | None = ...
+    """
+    Indicates whether running instances should be terminated if the target
+    capacity of the Spot Fleet request is decreased below the current size
+    of the Spot Fleet.
+
+    Supported only for fleets of type `maintain`.
+    """
+
+class ModifySpotFleetRequestInputDict(TypedDict, total=False):
+    """Dictionary form of `ModifySpotFleetRequestInput`."""
+
+    launch_template_configs: (
+        Sequence[LaunchTemplateConfig | LaunchTemplateConfigDict] | None
+    )
+    """
+    The launch template and overrides. You can only use this parameter if
+    you specified a launch template (`LaunchTemplateConfigs`) in your Spot
+    Fleet request. If you specified `LaunchSpecifications` in your Spot
+    Fleet request, then omit this parameter.
+    """
+    on_demand_target_capacity: int | None
+    """The number of On-Demand Instances in the fleet."""
+    context: str | None
+    """Reserved."""
+    spot_fleet_request_id: Required[str]
+    """The ID of the Spot Fleet request."""
+    target_capacity: int | None
+    """The size of the fleet."""
+    excess_capacity_termination_policy: str | None
+    """
+    Indicates whether running instances should be terminated if the target
+    capacity of the Spot Fleet request is decreased below the current size
+    of the Spot Fleet.
+
+    Supported only for fleets of type `maintain`.
+    """
+
+@dataclass(kw_only=True)
+class ModifySpotFleetRequestOutput(_SerdeShape):
+    """Contains the output of ModifySpotFleetRequest."""
+
+    return_: bool | None = ...
+    """
+    If the request succeeds, the response returns `true`. If the request
+    fails, no response is returned, and instead an error message is
+    returned.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ModifySubnetAttributeInput(_SerdeShape):
+    """Dataclass for ModifySubnetAttributeInput structure."""
+
+    assign_ipv6_address_on_creation: AttributeBooleanValue | None = ...
+    """
+    Specify `true` to indicate that network interfaces created in the
+    specified subnet should be assigned an IPv6 address. This includes a
+    network interface that's created when launching an instance into the
+    subnet (the instance therefore receives an IPv6 address).
+
+    If you enable the IPv6 addressing feature for your subnet, your network
+    interface or instance only receives an IPv6 address if it's created
+    using version `2016-11-15` or later of the Amazon EC2 API.
+    """
+    map_public_ip_on_launch: AttributeBooleanValue | None = ...
+    """
+    Specify `true` to indicate that network interfaces attached to instances
+    created in the specified subnet should be assigned a public IPv4
+    address.
+
+    Amazon Web Services charges for all public IPv4 addresses, including
+    public IPv4 addresses associated with running instances and Elastic IP
+    addresses. For more information, see the *Public IPv4 Address* tab on
+    the [Amazon VPC pricing page](http://aws.amazon.com/vpc/pricing/).
+    """
+    subnet_id: str | None = ...
+    """The ID of the subnet."""
+    map_customer_owned_ip_on_launch: AttributeBooleanValue | None = ...
+    """
+    Specify `true` to indicate that network interfaces attached to instances
+    created in the specified subnet should be assigned a customer-owned IPv4
+    address.
+
+    When this value is `true`, you must specify the customer-owned IP pool
+    using `CustomerOwnedIpv4Pool`.
+    """
+    customer_owned_ipv4_pool: str | None = ...
+    """
+    The customer-owned IPv4 address pool associated with the subnet.
+
+    You must set this value when you specify `true` for
+    `MapCustomerOwnedIpOnLaunch`.
+    """
+    enable_dns64: AttributeBooleanValue | None = ...
+    """
+    Indicates whether DNS queries made to the Amazon-provided DNS Resolver
+    in this subnet should return synthetic IPv6 addresses for IPv4-only
+    destinations.
+
+    You must first configure a NAT gateway in a public subnet (separate from
+    the subnet containing the IPv6-only workloads). For example, the subnet
+    containing the NAT gateway should have a `0.0.0.0/0` route pointing to
+    the internet gateway. For more information, see [Configure DNS64 and
+    NAT64](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-nat64-dns64.html#nat-gateway-nat64-dns64-walkthrough)
+    in the *Amazon VPC User Guide*.
+    """
+    private_dns_hostname_type_on_launch: str | None = ...
+    """
+    The type of hostname to assign to instances in the subnet at launch. For
+    IPv4-only and dual-stack (IPv4 and IPv6) subnets, an instance DNS name
+    can be based on the instance IPv4 address (ip-name) or the instance ID
+    (resource-name). For IPv6 only subnets, an instance DNS name must be
+    based on the instance ID (resource-name).
+    """
+    enable_resource_name_dns_a_record_on_launch: AttributeBooleanValue | None = ...
+    """
+    Indicates whether to respond to DNS queries for instance hostnames with
+    DNS A records.
+    """
+    enable_resource_name_dns_aaaa_record_on_launch: AttributeBooleanValue | None = ...
+    """
+    Indicates whether to respond to DNS queries for instance hostnames with
+    DNS AAAA records.
+    """
+    enable_lni_at_device_index: int | None = ...
+    """
+    Indicates the device position for local network interfaces in this
+    subnet. For example, `1` indicates local network interfaces in this
+    subnet are the secondary network interface (eth1). A local network
+    interface cannot be the primary network interface (eth0).
+    """
+    disable_lni_at_device_index: AttributeBooleanValue | None = ...
+    """
+    Specify `true` to indicate that local network interfaces at the current
+    position should be disabled.
+    """
+
+class ModifySubnetAttributeInputDict(TypedDict, total=False):
+    """Dictionary form of `ModifySubnetAttributeInput`."""
+
+    assign_ipv6_address_on_creation: (
+        AttributeBooleanValue | AttributeBooleanValueDict | None
+    )
+    """
+    Specify `true` to indicate that network interfaces created in the
+    specified subnet should be assigned an IPv6 address. This includes a
+    network interface that's created when launching an instance into the
+    subnet (the instance therefore receives an IPv6 address).
+
+    If you enable the IPv6 addressing feature for your subnet, your network
+    interface or instance only receives an IPv6 address if it's created
+    using version `2016-11-15` or later of the Amazon EC2 API.
+    """
+    map_public_ip_on_launch: AttributeBooleanValue | AttributeBooleanValueDict | None
+    """
+    Specify `true` to indicate that network interfaces attached to instances
+    created in the specified subnet should be assigned a public IPv4
+    address.
+
+    Amazon Web Services charges for all public IPv4 addresses, including
+    public IPv4 addresses associated with running instances and Elastic IP
+    addresses. For more information, see the *Public IPv4 Address* tab on
+    the [Amazon VPC pricing page](http://aws.amazon.com/vpc/pricing/).
+    """
+    subnet_id: Required[str]
+    """The ID of the subnet."""
+    map_customer_owned_ip_on_launch: (
+        AttributeBooleanValue | AttributeBooleanValueDict | None
+    )
+    """
+    Specify `true` to indicate that network interfaces attached to instances
+    created in the specified subnet should be assigned a customer-owned IPv4
+    address.
+
+    When this value is `true`, you must specify the customer-owned IP pool
+    using `CustomerOwnedIpv4Pool`.
+    """
+    customer_owned_ipv4_pool: str | None
+    """
+    The customer-owned IPv4 address pool associated with the subnet.
+
+    You must set this value when you specify `true` for
+    `MapCustomerOwnedIpOnLaunch`.
+    """
+    enable_dns64: AttributeBooleanValue | AttributeBooleanValueDict | None
+    """
+    Indicates whether DNS queries made to the Amazon-provided DNS Resolver
+    in this subnet should return synthetic IPv6 addresses for IPv4-only
+    destinations.
+
+    You must first configure a NAT gateway in a public subnet (separate from
+    the subnet containing the IPv6-only workloads). For example, the subnet
+    containing the NAT gateway should have a `0.0.0.0/0` route pointing to
+    the internet gateway. For more information, see [Configure DNS64 and
+    NAT64](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-nat64-dns64.html#nat-gateway-nat64-dns64-walkthrough)
+    in the *Amazon VPC User Guide*.
+    """
+    private_dns_hostname_type_on_launch: str | None
+    """
+    The type of hostname to assign to instances in the subnet at launch. For
+    IPv4-only and dual-stack (IPv4 and IPv6) subnets, an instance DNS name
+    can be based on the instance IPv4 address (ip-name) or the instance ID
+    (resource-name). For IPv6 only subnets, an instance DNS name must be
+    based on the instance ID (resource-name).
+    """
+    enable_resource_name_dns_a_record_on_launch: (
+        AttributeBooleanValue | AttributeBooleanValueDict | None
+    )
+    """
+    Indicates whether to respond to DNS queries for instance hostnames with
+    DNS A records.
+    """
+    enable_resource_name_dns_aaaa_record_on_launch: (
+        AttributeBooleanValue | AttributeBooleanValueDict | None
+    )
+    """
+    Indicates whether to respond to DNS queries for instance hostnames with
+    DNS AAAA records.
+    """
+    enable_lni_at_device_index: int | None
+    """
+    Indicates the device position for local network interfaces in this
+    subnet. For example, `1` indicates local network interfaces in this
+    subnet are the secondary network interface (eth1). A local network
+    interface cannot be the primary network interface (eth0).
+    """
+    disable_lni_at_device_index: (
+        AttributeBooleanValue | AttributeBooleanValueDict | None
+    )
+    """
+    Specify `true` to indicate that local network interfaces at the current
+    position should be disabled.
+    """
+
+@dataclass(kw_only=True)
+class ModifySubnetAttributeOutput(_SerdeShape):
+    """Dataclass for ModifySubnetAttributeOutput structure."""
+
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ModifyTrafficMirrorFilterNetworkServicesInput(_SerdeShape):
+    """Dataclass for ModifyTrafficMirrorFilterNetworkServicesInput structure."""
+
+    traffic_mirror_filter_id: str | None = ...
+    """The ID of the Traffic Mirror filter."""
+    add_network_services: list[str] | None = ...
+    """The network service, for example Amazon DNS, that you want to mirror."""
+    remove_network_services: list[str] | None = ...
+    """
+    The network service, for example Amazon DNS, that you no longer want to
+    mirror.
+    """
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class ModifyTrafficMirrorFilterNetworkServicesInputDict(TypedDict, total=False):
+    """Dictionary form of `ModifyTrafficMirrorFilterNetworkServicesInput`."""
+
+    traffic_mirror_filter_id: Required[str]
+    """The ID of the Traffic Mirror filter."""
+    add_network_services: Sequence[str] | None
+    """The network service, for example Amazon DNS, that you want to mirror."""
+    remove_network_services: Sequence[str] | None
+    """
+    The network service, for example Amazon DNS, that you no longer want to
+    mirror.
+    """
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class ModifyTrafficMirrorFilterNetworkServicesOutput(_SerdeShape):
+    """Dataclass for ModifyTrafficMirrorFilterNetworkServicesOutput structure."""
+
+    traffic_mirror_filter: TrafficMirrorFilter | None = ...
+    """The Traffic Mirror filter that the network service is associated with."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ModifyTrafficMirrorFilterRuleInput(_SerdeShape):
+    """Dataclass for ModifyTrafficMirrorFilterRuleInput structure."""
+
+    traffic_mirror_filter_rule_id: str | None = ...
+    """The ID of the Traffic Mirror rule."""
+    traffic_direction: str | None = ...
+    """The type of traffic to assign to the rule."""
+    rule_number: int | None = ...
+    """
+    The number of the Traffic Mirror rule. This number must be unique for
+    each Traffic Mirror rule in a given direction. The rules are processed
+    in ascending order by rule number.
+    """
+    rule_action: str | None = ...
+    """The action to assign to the rule."""
+    destination_port_range: TrafficMirrorPortRangeRequest | None = ...
+    """The destination ports that are associated with the Traffic Mirror rule."""
+    source_port_range: TrafficMirrorPortRangeRequest | None = ...
+    """The port range to assign to the Traffic Mirror rule."""
+    protocol: int | None = ...
+    """The protocol, for example TCP, to assign to the Traffic Mirror rule."""
+    destination_cidr_block: str | None = ...
+    """The destination CIDR block to assign to the Traffic Mirror rule."""
+    source_cidr_block: str | None = ...
+    """The source CIDR block to assign to the Traffic Mirror rule."""
+    description: str | None = ...
+    """The description to assign to the Traffic Mirror rule."""
+    remove_fields: list[str] | None = ...
+    """
+    The properties that you want to remove from the Traffic Mirror filter
+    rule.
+
+    When you remove a property from a Traffic Mirror filter rule, the
+    property is set to the default.
+    """
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class ModifyTrafficMirrorFilterRuleInputDict(TypedDict, total=False):
+    """Dictionary form of `ModifyTrafficMirrorFilterRuleInput`."""
+
+    traffic_mirror_filter_rule_id: Required[str]
+    """The ID of the Traffic Mirror rule."""
+    traffic_direction: str | None
+    """The type of traffic to assign to the rule."""
+    rule_number: int | None
+    """
+    The number of the Traffic Mirror rule. This number must be unique for
+    each Traffic Mirror rule in a given direction. The rules are processed
+    in ascending order by rule number.
+    """
+    rule_action: str | None
+    """The action to assign to the rule."""
+    destination_port_range: (
+        TrafficMirrorPortRangeRequest | TrafficMirrorPortRangeRequestDict | None
+    )
+    """The destination ports that are associated with the Traffic Mirror rule."""
+    source_port_range: (
+        TrafficMirrorPortRangeRequest | TrafficMirrorPortRangeRequestDict | None
+    )
+    """The port range to assign to the Traffic Mirror rule."""
+    protocol: int | None
+    """The protocol, for example TCP, to assign to the Traffic Mirror rule."""
+    destination_cidr_block: str | None
+    """The destination CIDR block to assign to the Traffic Mirror rule."""
+    source_cidr_block: str | None
+    """The source CIDR block to assign to the Traffic Mirror rule."""
+    description: str | None
+    """The description to assign to the Traffic Mirror rule."""
+    remove_fields: Sequence[str] | None
+    """
+    The properties that you want to remove from the Traffic Mirror filter
+    rule.
+
+    When you remove a property from a Traffic Mirror filter rule, the
+    property is set to the default.
+    """
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class ModifyTrafficMirrorFilterRuleOutput(_SerdeShape):
+    """Dataclass for ModifyTrafficMirrorFilterRuleOutput structure."""
+
+    traffic_mirror_filter_rule: TrafficMirrorFilterRule | None = ...
+    """
+    Note:
+        Tags are not returned for ModifyTrafficMirrorFilterRule.
+
+    A Traffic Mirror rule.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ModifyTrafficMirrorSessionInput(_SerdeShape):
+    """Dataclass for ModifyTrafficMirrorSessionInput structure."""
+
+    traffic_mirror_session_id: str | None = ...
+    """The ID of the Traffic Mirror session."""
+    traffic_mirror_target_id: str | None = ...
+    """
+    The Traffic Mirror target. The target must be in the same VPC as the
+    source, or have a VPC peering connection with the source.
+    """
+    traffic_mirror_filter_id: str | None = ...
+    """The ID of the Traffic Mirror filter."""
+    packet_length: int | None = ...
+    """
+    The number of bytes in each packet to mirror. These are bytes after the
+    VXLAN header. To mirror a subset, set this to the length (in bytes) to
+    mirror. For example, if you set this value to 100, then the first 100
+    bytes that meet the filter criteria are copied to the target. Do not
+    specify this parameter when you want to mirror the entire packet.
+
+    For sessions with Network Load Balancer (NLB) traffic mirror targets,
+    the default `PacketLength` will be set to 8500. Valid values are 1-8500.
+    Setting a `PacketLength` greater than 8500 will result in an error
+    response.
+    """
+    session_number: int | None = ...
+    """
+    The session number determines the order in which sessions are evaluated
+    when an interface is used by multiple sessions. The first session with a
+    matching filter is the one that mirrors the packets.
+
+    Valid values are 1-32766.
+    """
+    virtual_network_id: int | None = ...
+    """The virtual network ID of the Traffic Mirror session."""
+    description: str | None = ...
+    """The description to assign to the Traffic Mirror session."""
+    remove_fields: list[str] | None = ...
+    """
+    The properties that you want to remove from the Traffic Mirror session.
+
+    When you remove a property from a Traffic Mirror session, the property
+    is set to the default.
+    """
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class ModifyTrafficMirrorSessionInputDict(TypedDict, total=False):
+    """Dictionary form of `ModifyTrafficMirrorSessionInput`."""
+
+    traffic_mirror_session_id: Required[str]
+    """The ID of the Traffic Mirror session."""
+    traffic_mirror_target_id: str | None
+    """
+    The Traffic Mirror target. The target must be in the same VPC as the
+    source, or have a VPC peering connection with the source.
+    """
+    traffic_mirror_filter_id: str | None
+    """The ID of the Traffic Mirror filter."""
+    packet_length: int | None
+    """
+    The number of bytes in each packet to mirror. These are bytes after the
+    VXLAN header. To mirror a subset, set this to the length (in bytes) to
+    mirror. For example, if you set this value to 100, then the first 100
+    bytes that meet the filter criteria are copied to the target. Do not
+    specify this parameter when you want to mirror the entire packet.
+
+    For sessions with Network Load Balancer (NLB) traffic mirror targets,
+    the default `PacketLength` will be set to 8500. Valid values are 1-8500.
+    Setting a `PacketLength` greater than 8500 will result in an error
+    response.
+    """
+    session_number: int | None
+    """
+    The session number determines the order in which sessions are evaluated
+    when an interface is used by multiple sessions. The first session with a
+    matching filter is the one that mirrors the packets.
+
+    Valid values are 1-32766.
+    """
+    virtual_network_id: int | None
+    """The virtual network ID of the Traffic Mirror session."""
+    description: str | None
+    """The description to assign to the Traffic Mirror session."""
+    remove_fields: Sequence[str] | None
+    """
+    The properties that you want to remove from the Traffic Mirror session.
+
+    When you remove a property from a Traffic Mirror session, the property
+    is set to the default.
+    """
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
 
 @dataclass(kw_only=True)
 class ModifyTrafficMirrorSessionOutput(_SerdeShape):
@@ -2029,6 +3750,16 @@ class ModifyVpcEncryptionControlInput(_SerdeShape):
     Specifies whether to exclude Elastic File System traffic from encryption
     enforcement.
     """
+    global_accelerator_exclusion: str | None = ...
+    """
+    Specifies whether to exclude AWS Global Accelerator traffic from
+    encryption enforcement.
+    """
+    api_gateway_v2_exclusion: str | None = ...
+    """
+    Specifies whether to exclude Amazon API Gateway V2 traffic from
+    encryption enforcement.
+    """
 
 class ModifyVpcEncryptionControlInputDict(TypedDict, total=False):
     """Dictionary form of `ModifyVpcEncryptionControlInput`."""
@@ -2083,6 +3814,16 @@ class ModifyVpcEncryptionControlInputDict(TypedDict, total=False):
     """
     Specifies whether to exclude Elastic File System traffic from encryption
     enforcement.
+    """
+    global_accelerator_exclusion: str | None
+    """
+    Specifies whether to exclude AWS Global Accelerator traffic from
+    encryption enforcement.
+    """
+    api_gateway_v2_exclusion: str | None
+    """
+    Specifies whether to exclude Amazon API Gateway V2 traffic from
+    encryption enforcement.
     """
 
 @dataclass(kw_only=True)
@@ -3418,6 +5159,8 @@ class ModifyVpnTunnelOptionsSpecificationDict(TypedDict, total=False):
 class Monitoring(_SerdeShape):
     """Describes the monitoring of an instance."""
 
+    metric_category_ids: list[str] | None = ...
+    """The IDs of the metric categories that are associated with the instance."""
     state: str | None = ...
     """
     Indicates whether detailed monitoring is enabled. Otherwise, basic
@@ -3436,6 +5179,12 @@ class MonitorInstancesInput(_SerdeShape):
 
     instance_ids: list[str] | None = ...
     """The IDs of the instances."""
+    metric_category_ids: list[str] | None = ...
+    """
+    The IDs of the metric categories to associate with the instances. The
+    specified metric categories are added to any metric categories that are
+    already associated with the instances.
+    """
     dry_run: bool | None = ...
     """
     Checks whether you have the required permissions for the operation,
@@ -3449,6 +5198,12 @@ class MonitorInstancesInputDict(TypedDict, total=False):
 
     instance_ids: Required[Sequence[str]]
     """The IDs of the instances."""
+    metric_category_ids: Sequence[str] | None
+    """
+    The IDs of the metric categories to associate with the instances. The
+    specified metric categories are added to any metric categories that are
+    already associated with the instances.
+    """
     dry_run: bool | None
     """
     Checks whether you have the required permissions for the operation,
@@ -3662,6 +5417,51 @@ class MovingAddressStatus(_SerdeShape):
 class MulticastSupportValue(UnknownEnumMixin, StrEnum):
     ENABLE = "enable"
     DISABLE = "disable"
+
+@dataclass(kw_only=True)
+class NatFlexCostAllocationPolicyDocument(_SerdeShape):
+    """Describes the cost allocation policy document for NAT gateways."""
+
+    reporting_granularity: list[str] | None = ...
+    """
+    The resource granularity level at which networking costs are allocated.
+    This parameter is required. Specify exactly one value. Valid values are
+    `eni`, `ec2`, `subnet`, `vpc`, `account`, and `cidr`.
+    """
+    dimensions: list[str] | None = ...
+    """
+    The cost dimensions to report. This parameter is required. Valid values
+    are `data-transfer` and `data-processing`.
+    """
+    cidr_range_specifications: FlexCostAllocationCidrRangeSpecifications | None = ...
+    """
+    The CIDR range mappings to use for cost allocation. Specify this value
+    when `ReportingGranularity` is `cidr`, and omit it otherwise.
+    """
+
+class NatFlexCostAllocationPolicyDocumentDict(TypedDict, total=False):
+    """Dictionary form of `NatFlexCostAllocationPolicyDocument`."""
+
+    reporting_granularity: Required[Sequence[str]]
+    """
+    The resource granularity level at which networking costs are allocated.
+    This parameter is required. Specify exactly one value. Valid values are
+    `eni`, `ec2`, `subnet`, `vpc`, `account`, and `cidr`.
+    """
+    dimensions: Required[Sequence[str]]
+    """
+    The cost dimensions to report. This parameter is required. Valid values
+    are `data-transfer` and `data-processing`.
+    """
+    cidr_range_specifications: (
+        FlexCostAllocationCidrRangeSpecifications
+        | FlexCostAllocationCidrRangeSpecificationsDict
+        | None
+    )
+    """
+    The CIDR range mappings to use for cost allocation. Specify this value
+    when `ReportingGranularity` is `cidr`, and omit it otherwise.
+    """
 
 @dataclass(kw_only=True)
 class NatGateway(_SerdeShape):
@@ -5286,6 +7086,54 @@ class PciId(_SerdeShape):
     """The ID of the vendor for the subsystem."""
 
 @dataclass(kw_only=True)
+class PcxFlexCostAllocationPolicyDocument(_SerdeShape):
+    """
+    Describes the cost allocation policy document for Amazon VPC peering
+    connections.
+    """
+
+    reporting_granularity: list[str] | None = ...
+    """
+    The resource granularity level at which networking costs are allocated.
+    This parameter is required. Specify exactly one value. Valid values are
+    `eni`, `ec2`, `subnet`, `vpc`, `account`, `peering-id`, and `cidr`.
+    """
+    dimensions: list[str] | None = ...
+    """
+    The cost dimensions to report. This parameter is required. The only
+    valid value is `data-transfer`.
+    """
+    cidr_range_specifications: FlexCostAllocationCidrRangeSpecifications | None = ...
+    """
+    The CIDR range mappings to use for cost allocation. Specify this value
+    when `ReportingGranularity` is `cidr`, and omit it otherwise.
+    """
+
+class PcxFlexCostAllocationPolicyDocumentDict(TypedDict, total=False):
+    """Dictionary form of `PcxFlexCostAllocationPolicyDocument`."""
+
+    reporting_granularity: Required[Sequence[str]]
+    """
+    The resource granularity level at which networking costs are allocated.
+    This parameter is required. Specify exactly one value. Valid values are
+    `eni`, `ec2`, `subnet`, `vpc`, `account`, `peering-id`, and `cidr`.
+    """
+    dimensions: Required[Sequence[str]]
+    """
+    The cost dimensions to report. This parameter is required. The only
+    valid value is `data-transfer`.
+    """
+    cidr_range_specifications: (
+        FlexCostAllocationCidrRangeSpecifications
+        | FlexCostAllocationCidrRangeSpecificationsDict
+        | None
+    )
+    """
+    The CIDR range mappings to use for cost allocation. Specify this value
+    when `ReportingGranularity` is `cidr`, and omit it otherwise.
+    """
+
+@dataclass(kw_only=True)
 class PeeringAttachmentStatus(_SerdeShape):
     """The status of the transit gateway peering attachment."""
 
@@ -6339,1366 +8187,3 @@ class ProductCode(_SerdeShape):
 class ProductCodeValues(UnknownEnumMixin, StrEnum):
     DEVPAY = "devpay"
     MARKETPLACE = "marketplace"
-
-@dataclass(kw_only=True)
-class PropagatingVgw(_SerdeShape):
-    """Describes a virtual private gateway propagating route."""
-
-    gateway_id: str | None = ...
-    """The ID of the virtual private gateway."""
-
-class Protocol(UnknownEnumMixin, StrEnum):
-    TCP = "tcp"
-    UDP = "udp"
-
-class ProtocolValue(UnknownEnumMixin, StrEnum):
-    GRE = "gre"
-
-@dataclass(kw_only=True)
-class ProvisionByoipCidrInput(_SerdeShape):
-    """Dataclass for ProvisionByoipCidrInput structure."""
-
-    cidr: str | None = ...
-    """
-    The public IPv4 or IPv6 address range, in CIDR notation. The most
-    specific IPv4 prefix that you can specify is /24. The most specific IPv6
-    address range that you can bring is /48 for CIDRs that are publicly
-    advertisable and /56 for CIDRs that are not publicly advertisable. The
-    address range cannot overlap with another address range that you've
-    brought to this or another Region.
-    """
-    cidr_authorization_context: CidrAuthorizationContext | None = ...
-    """
-    A signed document that proves that you are authorized to bring the
-    specified IP address range to Amazon using BYOIP.
-    """
-    publicly_advertisable: bool | None = ...
-    """
-    (IPv6 only) Indicate whether the address range will be publicly
-    advertised to the internet.
-
-    Default: true
-    """
-    description: str | None = ...
-    """A description for the address range and the address pool."""
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    pool_tag_specifications: list[TagSpecification] | None = ...
-    """The tags to apply to the address pool."""
-    multi_region: bool | None = ...
-    """Reserved."""
-    network_border_group: str | None = ...
-    """
-    If you have [Local
-    Zones](https://docs.aws.amazon.com/local-zones/latest/ug/how-local-zones-work.html)
-    enabled, you can choose a network border group for Local Zones when you
-    provision and advertise a BYOIPv4 CIDR. Choose the network border group
-    carefully as the EIP and the Amazon Web Services resource it is
-    associated with must reside in the same network border group.
-
-    You can provision BYOIP address ranges to and advertise them in the
-    following Local Zone network border groups:
-
-    - us-east-1-dfw-2
-
-    - us-west-2-lax-1
-
-    - us-west-2-phx-2
-
-    Note:
-        You cannot provision or advertise BYOIPv6 address ranges in Local Zones
-        at this time.
-    """
-
-class ProvisionByoipCidrInputDict(TypedDict, total=False):
-    """Dictionary form of `ProvisionByoipCidrInput`."""
-
-    cidr: Required[str]
-    """
-    The public IPv4 or IPv6 address range, in CIDR notation. The most
-    specific IPv4 prefix that you can specify is /24. The most specific IPv6
-    address range that you can bring is /48 for CIDRs that are publicly
-    advertisable and /56 for CIDRs that are not publicly advertisable. The
-    address range cannot overlap with another address range that you've
-    brought to this or another Region.
-    """
-    cidr_authorization_context: (
-        CidrAuthorizationContext | CidrAuthorizationContextDict | None
-    )
-    """
-    A signed document that proves that you are authorized to bring the
-    specified IP address range to Amazon using BYOIP.
-    """
-    publicly_advertisable: bool | None
-    """
-    (IPv6 only) Indicate whether the address range will be publicly
-    advertised to the internet.
-
-    Default: true
-    """
-    description: str | None
-    """A description for the address range and the address pool."""
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    pool_tag_specifications: Sequence[TagSpecification | TagSpecificationDict] | None
-    """The tags to apply to the address pool."""
-    multi_region: bool | None
-    """Reserved."""
-    network_border_group: str | None
-    """
-    If you have [Local
-    Zones](https://docs.aws.amazon.com/local-zones/latest/ug/how-local-zones-work.html)
-    enabled, you can choose a network border group for Local Zones when you
-    provision and advertise a BYOIPv4 CIDR. Choose the network border group
-    carefully as the EIP and the Amazon Web Services resource it is
-    associated with must reside in the same network border group.
-
-    You can provision BYOIP address ranges to and advertise them in the
-    following Local Zone network border groups:
-
-    - us-east-1-dfw-2
-
-    - us-west-2-lax-1
-
-    - us-west-2-phx-2
-
-    Note:
-        You cannot provision or advertise BYOIPv6 address ranges in Local Zones
-        at this time.
-    """
-
-@dataclass(kw_only=True)
-class ProvisionByoipCidrOutput(_SerdeShape):
-    """Dataclass for ProvisionByoipCidrOutput structure."""
-
-    byoip_cidr: ByoipCidr | None = ...
-    """Information about the address range."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class ProvisionedBandwidth(_SerdeShape):
-    """
-    Reserved. If you need to sustain traffic greater than the [documented
-    limits](https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-gateways),
-    contact Amazon Web Services Support.
-    """
-
-    provision_time: datetime | None = ...
-    """Reserved."""
-    provisioned: str | None = ...
-    """Reserved."""
-    request_time: datetime | None = ...
-    """Reserved."""
-    requested: str | None = ...
-    """Reserved."""
-    status: str | None = ...
-    """Reserved."""
-
-@dataclass(kw_only=True)
-class ProvisionIpamByoasnInput(_SerdeShape):
-    """Dataclass for ProvisionIpamByoasnInput structure."""
-
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    ipam_id: str | None = ...
-    """An IPAM ID."""
-    asn: str | None = ...
-    """A public 2-byte or 4-byte ASN."""
-    asn_authorization_context: AsnAuthorizationContext | None = ...
-    """An ASN authorization context."""
-
-class ProvisionIpamByoasnInputDict(TypedDict, total=False):
-    """Dictionary form of `ProvisionIpamByoasnInput`."""
-
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    ipam_id: Required[str]
-    """An IPAM ID."""
-    asn: Required[str]
-    """A public 2-byte or 4-byte ASN."""
-    asn_authorization_context: Required[
-        AsnAuthorizationContext | AsnAuthorizationContextDict
-    ]
-    """An ASN authorization context."""
-
-@dataclass(kw_only=True)
-class ProvisionIpamByoasnOutput(_SerdeShape):
-    """Dataclass for ProvisionIpamByoasnOutput structure."""
-
-    byoasn: Byoasn | None = ...
-    """An ASN and BYOIP CIDR association."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class ProvisionIpamPoolCidrInput(_SerdeShape):
-    """Dataclass for ProvisionIpamPoolCidrInput structure."""
-
-    dry_run: bool | None = ...
-    """
-    A check for whether you have the required permissions for the action
-    without actually making the request and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-    ipam_pool_id: str | None = ...
-    """The ID of the IPAM pool to which you want to assign a CIDR."""
-    cidr: str | None = ...
-    """
-    The CIDR you want to assign to the IPAM pool. Either \"NetmaskLength\"
-    or \"Cidr\" is required. This value will be null if you specify
-    \"NetmaskLength\" and will be filled in during the provisioning process.
-    """
-    cidr_authorization_context: IpamCidrAuthorizationContext | None = ...
-    """
-    A signed document that proves that you are authorized to bring a
-    specified IP address range to Amazon using BYOIP. This option only
-    applies to IPv4 and IPv6 pools in the public scope.
-    """
-    netmask_length: int | None = ...
-    """
-    The netmask length of the CIDR you'd like to provision to a pool. Can
-    be used for provisioning Amazon-provided IPv6 CIDRs to top-level pools
-    and for provisioning CIDRs to pools with source pools. Cannot be used to
-    provision BYOIP CIDRs to top-level pools. Either \"NetmaskLength\" or
-    \"Cidr\" is required.
-    """
-    client_token: str | None = ...
-    """
-    A unique, case-sensitive identifier that you provide to ensure the
-    idempotency of the request. For more information, see [Ensuring
-    idempotency](https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html).
-
-    This field is autopopulated if not provided.
-    """
-    verification_method: str | None = ...
-    """
-    The method for verifying control of a public IP address range. Defaults
-    to `remarks-x509` if not specified. This option only applies to IPv4 and
-    IPv6 pools in the public scope.
-    """
-    ipam_external_resource_verification_token_id: str | None = ...
-    """
-    Verification token ID. This option only applies to IPv4 and IPv6 pools
-    in the public scope.
-    """
-
-class ProvisionIpamPoolCidrInputDict(TypedDict, total=False):
-    """Dictionary form of `ProvisionIpamPoolCidrInput`."""
-
-    dry_run: bool | None
-    """
-    A check for whether you have the required permissions for the action
-    without actually making the request and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-    ipam_pool_id: Required[str]
-    """The ID of the IPAM pool to which you want to assign a CIDR."""
-    cidr: str | None
-    """
-    The CIDR you want to assign to the IPAM pool. Either \"NetmaskLength\"
-    or \"Cidr\" is required. This value will be null if you specify
-    \"NetmaskLength\" and will be filled in during the provisioning process.
-    """
-    cidr_authorization_context: (
-        IpamCidrAuthorizationContext | IpamCidrAuthorizationContextDict | None
-    )
-    """
-    A signed document that proves that you are authorized to bring a
-    specified IP address range to Amazon using BYOIP. This option only
-    applies to IPv4 and IPv6 pools in the public scope.
-    """
-    netmask_length: int | None
-    """
-    The netmask length of the CIDR you'd like to provision to a pool. Can
-    be used for provisioning Amazon-provided IPv6 CIDRs to top-level pools
-    and for provisioning CIDRs to pools with source pools. Cannot be used to
-    provision BYOIP CIDRs to top-level pools. Either \"NetmaskLength\" or
-    \"Cidr\" is required.
-    """
-    client_token: str | None
-    """
-    A unique, case-sensitive identifier that you provide to ensure the
-    idempotency of the request. For more information, see [Ensuring
-    idempotency](https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html).
-
-    This field is autopopulated if not provided.
-    """
-    verification_method: str | None
-    """
-    The method for verifying control of a public IP address range. Defaults
-    to `remarks-x509` if not specified. This option only applies to IPv4 and
-    IPv6 pools in the public scope.
-    """
-    ipam_external_resource_verification_token_id: str | None
-    """
-    Verification token ID. This option only applies to IPv4 and IPv6 pools
-    in the public scope.
-    """
-
-@dataclass(kw_only=True)
-class ProvisionIpamPoolCidrOutput(_SerdeShape):
-    """Dataclass for ProvisionIpamPoolCidrOutput structure."""
-
-    ipam_pool_cidr: IpamPoolCidr | None = ...
-    """Information about the provisioned CIDR."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class ProvisionPublicIpv4PoolCidrInput(_SerdeShape):
-    """Dataclass for ProvisionPublicIpv4PoolCidrInput structure."""
-
-    dry_run: bool | None = ...
-    """
-    A check for whether you have the required permissions for the action
-    without actually making the request and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-    ipam_pool_id: str | None = ...
-    """The ID of the IPAM pool you would like to use to allocate this CIDR."""
-    pool_id: str | None = ...
-    """The ID of the public IPv4 pool you would like to use for this CIDR."""
-    netmask_length: int | None = ...
-    """
-    The netmask length of the CIDR you would like to allocate to the public
-    IPv4 pool. The least specific netmask length you can define is 24.
-    """
-    network_border_group: str | None = ...
-    """
-    The Availability Zone (AZ) or Local Zone (LZ) network border group that
-    the resource that the IP address is assigned to is in. Defaults to an AZ
-    network border group. For more information on available Local Zones, see
-    [Local Zone
-    availability](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#byoip-zone-avail)
-    in the *Amazon EC2 User Guide*.
-    """
-
-class ProvisionPublicIpv4PoolCidrInputDict(TypedDict, total=False):
-    """Dictionary form of `ProvisionPublicIpv4PoolCidrInput`."""
-
-    dry_run: bool | None
-    """
-    A check for whether you have the required permissions for the action
-    without actually making the request and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-    ipam_pool_id: Required[str]
-    """The ID of the IPAM pool you would like to use to allocate this CIDR."""
-    pool_id: Required[str]
-    """The ID of the public IPv4 pool you would like to use for this CIDR."""
-    netmask_length: Required[int]
-    """
-    The netmask length of the CIDR you would like to allocate to the public
-    IPv4 pool. The least specific netmask length you can define is 24.
-    """
-    network_border_group: str | None
-    """
-    The Availability Zone (AZ) or Local Zone (LZ) network border group that
-    the resource that the IP address is assigned to is in. Defaults to an AZ
-    network border group. For more information on available Local Zones, see
-    [Local Zone
-    availability](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#byoip-zone-avail)
-    in the *Amazon EC2 User Guide*.
-    """
-
-@dataclass(kw_only=True)
-class ProvisionPublicIpv4PoolCidrOutput(_SerdeShape):
-    """Dataclass for ProvisionPublicIpv4PoolCidrOutput structure."""
-
-    pool_id: str | None = ...
-    """The ID of the pool that you want to provision the CIDR to."""
-    pool_address_range: PublicIpv4PoolRange | None = ...
-    """Information about the address range of the public IPv4 pool."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class PtrUpdateStatus(_SerdeShape):
-    """The status of an updated pointer (PTR) record for an Elastic IP address."""
-
-    value: str | None = ...
-    """The value for the PTR record update."""
-    status: str | None = ...
-    """The status of the PTR record update."""
-    reason: str | None = ...
-    """The reason for the PTR record update."""
-
-@dataclass(kw_only=True)
-class PublicIpDnsNameOptions(_SerdeShape):
-    """
-    Public hostname type options. For more information, see [EC2 instance
-    hostnames, DNS names, and
-    domains](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html)
-    in the *Amazon EC2 User Guide*.
-    """
-
-    dns_hostname_type: str | None = ...
-    """
-    The public hostname type. For more information, see [EC2 instance
-    hostnames, DNS names, and
-    domains](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html)
-    in the *Amazon EC2 User Guide*.
-    """
-    public_ipv4_dns_name: str | None = ...
-    """
-    An IPv4-enabled public hostname for a network interface. Requests from
-    within the VPC resolve to the private primary IPv4 address of the
-    network interface. Requests from the internet resolve to the public IPv4
-    address of the network interface.
-    """
-    public_ipv6_dns_name: str | None = ...
-    """
-    An IPv6-enabled public hostname for a network interface. Requests from
-    within the VPC or from the internet resolve to the IPv6 GUA of the
-    network interface.
-    """
-    public_dual_stack_dns_name: str | None = ...
-    """
-    A dual-stack public hostname for a network interface. Requests from
-    within the VPC resolve to both the private IPv4 address and the IPv6
-    Global Unicast Address of the network interface. Requests from the
-    internet resolve to both the public IPv4 and the IPv6 GUA address of the
-    network interface.
-    """
-
-class PublicIpDnsOption(UnknownEnumMixin, StrEnum):
-    PUBLIC_DUAL_STACK_DNS_NAME = "public-dual-stack-dns-name"
-    PUBLIC_IPV4_DNS_NAME = "public-ipv4-dns-name"
-    PUBLIC_IPV6_DNS_NAME = "public-ipv6-dns-name"
-
-@dataclass(kw_only=True)
-class PublicIpv4Pool(_SerdeShape):
-    """Describes an IPv4 address pool."""
-
-    pool_id: str | None = ...
-    """The ID of the address pool."""
-    description: str | None = ...
-    """A description of the address pool."""
-    pool_address_ranges: list[PublicIpv4PoolRange] | None = ...
-    """The address ranges."""
-    total_address_count: int | None = ...
-    """The total number of addresses."""
-    total_available_address_count: int | None = ...
-    """The total number of available addresses."""
-    network_border_group: str | None = ...
-    """
-    The name of the location from which the address pool is advertised. A
-    network border group is a unique set of Availability Zones or Local
-    Zones from where Amazon Web Services advertises public IP addresses.
-    """
-    tags: list[Tag] | None = ...
-    """Any tags for the address pool."""
-
-@dataclass(kw_only=True)
-class PublicIpv4PoolRange(_SerdeShape):
-    """Describes an address range of an IPv4 address pool."""
-
-    first_address: str | None = ...
-    """The first IP address in the range."""
-    last_address: str | None = ...
-    """The last IP address in the range."""
-    address_count: int | None = ...
-    """The number of addresses in the range."""
-    available_address_count: int | None = ...
-    """The number of available addresses in the range."""
-
-@dataclass(kw_only=True)
-class Purchase(_SerdeShape):
-    """Describes the result of the purchase."""
-
-    currency_code: str | None = ...
-    """
-    The currency in which the `UpfrontPrice` and `HourlyPrice` amounts are
-    specified. At this time, the only supported currency is `USD`.
-    """
-    duration: int | None = ...
-    """The duration of the reservation's term in seconds."""
-    host_id_set: list[str] | None = ...
-    """The IDs of the Dedicated Hosts associated with the reservation."""
-    host_reservation_id: str | None = ...
-    """The ID of the reservation."""
-    hourly_price: str | None = ...
-    """The hourly price of the reservation per hour."""
-    instance_family: str | None = ...
-    """
-    The instance family on the Dedicated Host that the reservation can be
-    associated with.
-    """
-    payment_option: str | None = ...
-    """The payment option for the reservation."""
-    upfront_price: str | None = ...
-    """The upfront price of the reservation."""
-
-@dataclass(kw_only=True)
-class PurchaseCapacityBlockExtensionInput(_SerdeShape):
-    """Dataclass for PurchaseCapacityBlockExtensionInput structure."""
-
-    capacity_block_extension_offering_id: str | None = ...
-    """The ID of the Capacity Block extension offering to purchase."""
-    capacity_reservation_id: str | None = ...
-    """The ID of the Capacity reservation to be extended."""
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-class PurchaseCapacityBlockExtensionInputDict(TypedDict, total=False):
-    """Dictionary form of `PurchaseCapacityBlockExtensionInput`."""
-
-    capacity_block_extension_offering_id: Required[str]
-    """The ID of the Capacity Block extension offering to purchase."""
-    capacity_reservation_id: Required[str]
-    """The ID of the Capacity reservation to be extended."""
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-@dataclass(kw_only=True)
-class PurchaseCapacityBlockExtensionOutput(_SerdeShape):
-    """Dataclass for PurchaseCapacityBlockExtensionOutput structure."""
-
-    capacity_block_extensions: list[CapacityBlockExtension] | None = ...
-    """The purchased Capacity Block extensions."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class PurchaseCapacityBlockInput(_SerdeShape):
-    """Dataclass for PurchaseCapacityBlockInput structure."""
-
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    tag_specifications: list[TagSpecification] | None = ...
-    """The tags to apply to the Capacity Block during launch."""
-    capacity_block_offering_id: str | None = ...
-    """The ID of the Capacity Block offering."""
-    instance_platform: str | None = ...
-    """The type of operating system for which to reserve capacity."""
-
-class PurchaseCapacityBlockInputDict(TypedDict, total=False):
-    """Dictionary form of `PurchaseCapacityBlockInput`."""
-
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    tag_specifications: Sequence[TagSpecification | TagSpecificationDict] | None
-    """The tags to apply to the Capacity Block during launch."""
-    capacity_block_offering_id: Required[str]
-    """The ID of the Capacity Block offering."""
-    instance_platform: Required[str]
-    """The type of operating system for which to reserve capacity."""
-
-@dataclass(kw_only=True)
-class PurchaseCapacityBlockOutput(_SerdeShape):
-    """Dataclass for PurchaseCapacityBlockOutput structure."""
-
-    capacity_reservation: CapacityReservation | None = ...
-    """The Capacity Reservation."""
-    capacity_blocks: list[CapacityBlock] | None = ...
-    """The Capacity Block."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class PurchaseHostReservationInput(_SerdeShape):
-    """Dataclass for PurchaseHostReservationInput structure."""
-
-    client_token: str | None = ...
-    """
-    Unique, case-sensitive identifier that you provide to ensure the
-    idempotency of the request. For more information, see [Ensuring
-    Idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-    """
-    currency_code: str | None = ...
-    """
-    The currency in which the `totalUpfrontPrice`, `LimitPrice`, and
-    `totalHourlyPrice` amounts are specified. At this time, the only
-    supported currency is `USD`.
-    """
-    host_id_set: list[str] | None = ...
-    """
-    The IDs of the Dedicated Hosts with which the reservation will be
-    associated.
-    """
-    limit_price: str | None = ...
-    """
-    The specified limit is checked against the total upfront cost of the
-    reservation (calculated as the offering's upfront cost multiplied by
-    the host count). If the total upfront cost is greater than the specified
-    price limit, the request fails. This is used to ensure that the purchase
-    does not exceed the expected upfront cost of the purchase. At this time,
-    the only supported currency is `USD`. For example, to indicate a limit
-    price of USD 100, specify 100.00.
-    """
-    offering_id: str | None = ...
-    """The ID of the offering."""
-    tag_specifications: list[TagSpecification] | None = ...
-    """The tags to apply to the Dedicated Host Reservation during purchase."""
-
-class PurchaseHostReservationInputDict(TypedDict, total=False):
-    """Dictionary form of `PurchaseHostReservationInput`."""
-
-    client_token: str | None
-    """
-    Unique, case-sensitive identifier that you provide to ensure the
-    idempotency of the request. For more information, see [Ensuring
-    Idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-    """
-    currency_code: str | None
-    """
-    The currency in which the `totalUpfrontPrice`, `LimitPrice`, and
-    `totalHourlyPrice` amounts are specified. At this time, the only
-    supported currency is `USD`.
-    """
-    host_id_set: Required[Sequence[str]]
-    """
-    The IDs of the Dedicated Hosts with which the reservation will be
-    associated.
-    """
-    limit_price: str | None
-    """
-    The specified limit is checked against the total upfront cost of the
-    reservation (calculated as the offering's upfront cost multiplied by
-    the host count). If the total upfront cost is greater than the specified
-    price limit, the request fails. This is used to ensure that the purchase
-    does not exceed the expected upfront cost of the purchase. At this time,
-    the only supported currency is `USD`. For example, to indicate a limit
-    price of USD 100, specify 100.00.
-    """
-    offering_id: Required[str]
-    """The ID of the offering."""
-    tag_specifications: Sequence[TagSpecification | TagSpecificationDict] | None
-    """The tags to apply to the Dedicated Host Reservation during purchase."""
-
-@dataclass(kw_only=True)
-class PurchaseHostReservationOutput(_SerdeShape):
-    """Dataclass for PurchaseHostReservationOutput structure."""
-
-    client_token: str | None = ...
-    """
-    Unique, case-sensitive identifier that you provide to ensure the
-    idempotency of the request. For more information, see [Ensuring
-    Idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-    """
-    currency_code: str | None = ...
-    """
-    The currency in which the `totalUpfrontPrice` and `totalHourlyPrice`
-    amounts are specified. At this time, the only supported currency is
-    `USD`.
-    """
-    purchase: list[Purchase] | None = ...
-    """Describes the details of the purchase."""
-    total_hourly_price: str | None = ...
-    """The total hourly price of the reservation calculated per hour."""
-    total_upfront_price: str | None = ...
-    """
-    The total amount charged to your account when you purchase the
-    reservation.
-    """
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class PurchaseRequest(_SerdeShape):
-    """Describes a request to purchase Scheduled Instances."""
-
-    instance_count: int | None = ...
-    """The number of instances."""
-    purchase_token: str | None = ...
-    """The purchase token."""
-
-class PurchaseRequestDict(TypedDict, total=False):
-    """Dictionary form of `PurchaseRequest`."""
-
-    instance_count: Required[int]
-    """The number of instances."""
-    purchase_token: Required[str]
-    """The purchase token."""
-
-@dataclass(kw_only=True)
-class PurchaseReservedInstancesOfferingInput(_SerdeShape):
-    """Contains the parameters for PurchaseReservedInstancesOffering."""
-
-    instance_count: int | None = ...
-    """The number of Reserved Instances to purchase."""
-    reserved_instances_offering_id: str | None = ...
-    """The ID of the Reserved Instance offering to purchase."""
-    purchase_time: datetime | None = ...
-    """
-    The time at which to purchase the Reserved Instance, in UTC format (for
-    example, *YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z).
-    """
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    limit_price: ReservedInstanceLimitPrice | None = ...
-    """
-    Specified for Reserved Instance Marketplace offerings to limit the total
-    order and ensure that the Reserved Instances are not purchased at
-    unexpected prices.
-    """
-
-class PurchaseReservedInstancesOfferingInputDict(TypedDict, total=False):
-    """Dictionary form of `PurchaseReservedInstancesOfferingInput`."""
-
-    instance_count: Required[int]
-    """The number of Reserved Instances to purchase."""
-    reserved_instances_offering_id: Required[str]
-    """The ID of the Reserved Instance offering to purchase."""
-    purchase_time: datetime | None
-    """
-    The time at which to purchase the Reserved Instance, in UTC format (for
-    example, *YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z).
-    """
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    limit_price: ReservedInstanceLimitPrice | ReservedInstanceLimitPriceDict | None
-    """
-    Specified for Reserved Instance Marketplace offerings to limit the total
-    order and ensure that the Reserved Instances are not purchased at
-    unexpected prices.
-    """
-
-@dataclass(kw_only=True)
-class PurchaseReservedInstancesOfferingOutput(_SerdeShape):
-    """Contains the output of PurchaseReservedInstancesOffering."""
-
-    reserved_instances_id: str | None = ...
-    """
-    The IDs of the purchased Reserved Instances. If your purchase crosses
-    into a discounted pricing tier, the final Reserved Instances IDs might
-    change. For more information, see [Crossing pricing
-    tiers](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts-reserved-instances-application.html#crossing-pricing-tiers)
-    in the *Amazon EC2 User Guide*.
-    """
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class PurchaseScheduledInstancesInput(_SerdeShape):
-    """Contains the parameters for PurchaseScheduledInstances."""
-
-    client_token: str | None = ...
-    """
-    Unique, case-sensitive identifier that ensures the idempotency of the
-    request. For more information, see [Ensuring
-    Idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-
-    This field is autopopulated if not provided.
-    """
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    purchase_requests: list[PurchaseRequest] | None = ...
-    """The purchase requests."""
-
-class PurchaseScheduledInstancesInputDict(TypedDict, total=False):
-    """Dictionary form of `PurchaseScheduledInstancesInput`."""
-
-    client_token: str | None
-    """
-    Unique, case-sensitive identifier that ensures the idempotency of the
-    request. For more information, see [Ensuring
-    Idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-
-    This field is autopopulated if not provided.
-    """
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    purchase_requests: Required[Sequence[PurchaseRequest | PurchaseRequestDict]]
-    """The purchase requests."""
-
-@dataclass(kw_only=True)
-class PurchaseScheduledInstancesOutput(_SerdeShape):
-    """Contains the output of PurchaseScheduledInstances."""
-
-    scheduled_instance_set: list[ScheduledInstance] | None = ...
-    """Information about the Scheduled Instances."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class RebootInstancesInput(_SerdeShape):
-    """Dataclass for RebootInstancesInput structure."""
-
-    instance_ids: list[str] | None = ...
-    """The instance IDs."""
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the operation,
-    without actually making the request, and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-
-class RebootInstancesInputDict(TypedDict, total=False):
-    """Dictionary form of `RebootInstancesInput`."""
-
-    instance_ids: Required[Sequence[str]]
-    """The instance IDs."""
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the operation,
-    without actually making the request, and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-
-@dataclass(kw_only=True)
-class RebootInstancesOutput(_SerdeShape):
-    """Dataclass for RebootInstancesOutput structure."""
-
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-class RebootMigrationSupport(UnknownEnumMixin, StrEnum):
-    UNSUPPORTED = "unsupported"
-    SUPPORTED = "supported"
-
-@dataclass(kw_only=True)
-class RecurringCharge(_SerdeShape):
-    """Describes a recurring charge."""
-
-    amount: float | None = ...
-    """The amount of the recurring charge."""
-    frequency: str | None = ...
-    """The frequency of the recurring charge."""
-
-class RecurringChargeFrequency(UnknownEnumMixin, StrEnum):
-    HOURLY = "Hourly"
-
-@dataclass(kw_only=True)
-class ReferencedSecurityGroup(_SerdeShape):
-    """
-    Describes the security group that is referenced in the security group
-    rule.
-    """
-
-    group_id: str | None = ...
-    """The ID of the security group."""
-    peering_status: str | None = ...
-    """The status of a VPC peering connection, if applicable."""
-    user_id: str | None = ...
-    """The Amazon Web Services account ID."""
-    vpc_id: str | None = ...
-    """The ID of the VPC."""
-    vpc_peering_connection_id: str | None = ...
-    """The ID of the VPC peering connection (if applicable)."""
-
-@dataclass(kw_only=True)
-class Region(_SerdeShape):
-    """Describes a Region."""
-
-    opt_in_status: str | None = ...
-    """
-    The Region opt-in status. The possible values are `opt-in-not-required`,
-    `opted-in`, and `not-opted-in`.
-    """
-    geography: list[RegionGeography] | None = ...
-    """
-    The geography information for the Region. The geography is returned as a
-    list.
-    """
-    region_name: str | None = ...
-    """The name of the Region."""
-    endpoint: str | None = ...
-    """The Region service endpoint."""
-
-@dataclass(kw_only=True)
-class RegionalSummary(_SerdeShape):
-    """A summary report for the attribute for a Region."""
-
-    region_name: str | None = ...
-    """The Amazon Web Services Region."""
-    number_of_matched_accounts: int | None = ...
-    """
-    The number of accounts in the Region with the same configuration value
-    for the attribute that is most frequently observed.
-    """
-    number_of_unmatched_accounts: int | None = ...
-    """
-    The number of accounts in the Region with a configuration value
-    different from the most frequently observed value for the attribute.
-    """
-
-@dataclass(kw_only=True)
-class RegionGeography(_SerdeShape):
-    """Describes the geography information for a Region."""
-
-    name: str | None = ...
-    """The name of the geography, for example, `United States of America`."""
-
-@dataclass(kw_only=True)
-class RegisteredInstance(_SerdeShape):
-    """
-    Describes an Amazon EC2 instance that is enabled for SQL Server High
-    Availability standby detection monitoring.
-    """
-
-    instance_id: str | None = ...
-    """The ID of the SQL Server High Availability instance."""
-    sql_server_license_usage: str | None = ...
-    """
-    The license type for the SQL Server license. Valid values include:
-
-    - `full` - The SQL Server High Availability instance is using a full SQL
-      Server license.
-
-    - `waived` - The SQL Server High Availability instance is waived from
-      the SQL Server license.
-    """
-    ha_status: str | None = ...
-    """
-    The SQL Server High Availability status of the instance. Valid values
-    are:
-
-    - `processing` - The SQL Server High Availability status for the SQL
-      Server High Availability instance is being updated.
-
-    - `active` - The SQL Server High Availability instance is an active node
-      in an SQL Server High Availability cluster.
-
-    - `standby` - The SQL Server High Availability instance is a standby
-      failover node in an SQL Server High Availability cluster.
-
-    - `invalid` - An error occurred due to misconfigured permissions, or
-      unable to dertemine SQL Server High Availability status for the SQL
-      Server High Availability instance.
-    """
-    processing_status: str | None = ...
-    """
-    A brief description of the SQL Server High Availability status. If the
-    instance is in the `invalid` High Availability status, this parameter
-    includes the error message.
-    """
-    last_updated_time: datetime | None = ...
-    """
-    The date and time when the instance's SQL Server High Availability
-    status was last updated, in the ISO 8601 format in the UTC time zone
-    (`YYYY-MM-DDThh:mm:ss.sssZ`).
-    """
-    sql_server_credentials: str | None = ...
-    """
-    The ARN of the Secrets Manager secret containing the SQL Server access
-    credentials for the SQL Server High Availability instance. If not
-    specified, deafult local user credentials will be used by the Amazon Web
-    Services Systems Manager agent.
-    """
-    tags: list[Tag] | None = ...
-    """The tags assigned to the SQL Server High Availability instance."""
-
-@dataclass(kw_only=True)
-class RegisterImageInput(_SerdeShape):
-    """Contains the parameters for RegisterImage."""
-
-    image_location: str | None = ...
-    """
-    The full path to your AMI manifest in Amazon S3 storage. The specified
-    bucket must have the `aws-exec-read` canned access control list (ACL) to
-    ensure that it can be accessed by Amazon EC2. For more information, see
-    [Canned
-    ACL](https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl)
-    in the *Amazon S3 Service Developer Guide*.
-    """
-    billing_products: list[str] | None = ...
-    """
-    The billing product codes. Your account must be authorized to specify
-    billing product codes.
-
-    If your account is not authorized to specify billing product codes, you
-    can publish AMIs that include billable software and list them on the
-    Amazon Web Services Marketplace. You must first register as a seller on
-    the Amazon Web Services Marketplace. For more information, see [Getting
-    started as an Amazon Web Services Marketplace
-    seller](https://docs.aws.amazon.com/marketplace/latest/userguide/user-guide-for-sellers.html)
-    and [AMI-based products in Amazon Web Services
-    Marketplace](https://docs.aws.amazon.com/marketplace/latest/userguide/ami-products.html)
-    in the *Amazon Web Services Marketplace Seller Guide*.
-    """
-    boot_mode: str | None = ...
-    """
-    The boot mode of the AMI. A value of `uefi-preferred` indicates that the
-    AMI supports both UEFI and Legacy BIOS.
-
-    Note:
-        The operating system contained in the AMI must be configured to support
-        the specified boot mode.
-
-    For more information, see [Instance launch behavior with Amazon EC2 boot
-    modes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html)
-    in the *Amazon EC2 User Guide*.
-    """
-    tpm_support: str | None = ...
-    """
-    Set to `v2.0` to enable Trusted Platform Module (TPM) support. For more
-    information, see
-    [NitroTPM](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitrotpm.html)
-    in the *Amazon EC2 User Guide*.
-    """
-    uefi_data: str | None = ...
-    """
-    Base64 representation of the non-volatile UEFI variable store. To
-    retrieve the UEFI data, use the
-    [GetInstanceUefiData](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceUefiData)
-    command. You can inspect and modify the UEFI data by using the
-    [python-uefivars tool](https://github.com/awslabs/python-uefivars) on
-    GitHub. For more information, see [UEFI Secure Boot for Amazon EC2
-    instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/uefi-secure-boot.html)
-    in the *Amazon EC2 User Guide*.
-    """
-    imds_support: str | None = ...
-    """
-    Set to `v2.0` to indicate that IMDSv2 is specified in the AMI. Instances
-    launched from this AMI will have `HttpTokens` automatically set to
-    `required` so that, by default, the instance requires that IMDSv2 is
-    used when requesting instance metadata. In addition,
-    `HttpPutResponseHopLimit` is set to `2`. For more information, see
-    [Configure the
-    AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-IMDS-new-instances.html#configure-IMDS-new-instances-ami-configuration)
-    in the *Amazon EC2 User Guide*.
-
-    Note:
-        If you set the value to `v2.0`, make sure that your AMI software can
-        support IMDSv2.
-    """
-    tag_specifications: list[TagSpecification] | None = ...
-    """
-    The tags to apply to the AMI.
-
-    To tag the AMI, the value for `ResourceType` must be `image`. If you
-    specify another value for `ResourceType`, the request fails.
-
-    To tag an AMI after it has been registered, see
-    [CreateTags](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html).
-    """
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    name: str | None = ...
-    """
-    A name for your AMI.
-
-    Constraints: 3-128 alphanumeric characters, parentheses (()), square
-    brackets ([]), spaces ( ), periods (.), slashes (/), dashes (-),
-    single quotes ('), at-signs (@), or underscores(_)
-    """
-    description: str | None = ...
-    """A description for your AMI."""
-    architecture: str | None = ...
-    """
-    The architecture of the AMI.
-
-    Default: For Amazon EBS-backed AMIs, `i386`. For instance store-backed
-    AMIs, the architecture specified in the manifest file.
-    """
-    kernel_id: str | None = ...
-    """The ID of the kernel."""
-    ramdisk_id: str | None = ...
-    """The ID of the RAM disk."""
-    root_device_name: str | None = ...
-    """The device name of the root device volume (for example, `/dev/sda1`)."""
-    block_device_mappings: list[BlockDeviceMapping] | None = ...
-    """
-    The block device mapping entries.
-
-    If you specify an Amazon EBS volume using the ID of an Amazon EBS
-    snapshot, you can't specify the encryption state of the volume.
-
-    If you create an AMI on an Outpost, then all backing snapshots must be
-    on the same Outpost or in the Region of that Outpost. AMIs on an Outpost
-    that include local snapshots can be used to launch instances on the same
-    Outpost only. For more information, [Create AMIs from local
-    snapshots](https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#ami)
-    in the *Amazon EBS User Guide*.
-    """
-    virtualization_type: str | None = ...
-    """
-    The type of virtualization (`hvm` | `paravirtual`).
-
-    Default: `paravirtual`
-    """
-    sriov_net_support: str | None = ...
-    """
-    Set to `simple` to enable enhanced networking with the Intel 82599
-    Virtual Function interface for the AMI and any instances that you launch
-    from the AMI.
-
-    There is no way to disable `sriovNetSupport` at this time.
-
-    This option is supported only for HVM AMIs. Specifying this option with
-    a PV AMI can make instances launched from the AMI unreachable.
-    """
-    ena_support: bool | None = ...
-    """
-    Set to `true` to enable enhanced networking with ENA for the AMI and any
-    instances that you launch from the AMI.
-
-    This option is supported only for HVM AMIs. Specifying this option with
-    a PV AMI can make instances launched from the AMI unreachable.
-    """
-
-class RegisterImageInputDict(TypedDict, total=False):
-    """Dictionary form of `RegisterImageInput`."""
-
-    image_location: str | None
-    """
-    The full path to your AMI manifest in Amazon S3 storage. The specified
-    bucket must have the `aws-exec-read` canned access control list (ACL) to
-    ensure that it can be accessed by Amazon EC2. For more information, see
-    [Canned
-    ACL](https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl)
-    in the *Amazon S3 Service Developer Guide*.
-    """
-    billing_products: Sequence[str] | None
-    """
-    The billing product codes. Your account must be authorized to specify
-    billing product codes.
-
-    If your account is not authorized to specify billing product codes, you
-    can publish AMIs that include billable software and list them on the
-    Amazon Web Services Marketplace. You must first register as a seller on
-    the Amazon Web Services Marketplace. For more information, see [Getting
-    started as an Amazon Web Services Marketplace
-    seller](https://docs.aws.amazon.com/marketplace/latest/userguide/user-guide-for-sellers.html)
-    and [AMI-based products in Amazon Web Services
-    Marketplace](https://docs.aws.amazon.com/marketplace/latest/userguide/ami-products.html)
-    in the *Amazon Web Services Marketplace Seller Guide*.
-    """
-    boot_mode: str | None
-    """
-    The boot mode of the AMI. A value of `uefi-preferred` indicates that the
-    AMI supports both UEFI and Legacy BIOS.
-
-    Note:
-        The operating system contained in the AMI must be configured to support
-        the specified boot mode.
-
-    For more information, see [Instance launch behavior with Amazon EC2 boot
-    modes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html)
-    in the *Amazon EC2 User Guide*.
-    """
-    tpm_support: str | None
-    """
-    Set to `v2.0` to enable Trusted Platform Module (TPM) support. For more
-    information, see
-    [NitroTPM](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitrotpm.html)
-    in the *Amazon EC2 User Guide*.
-    """
-    uefi_data: str | None
-    """
-    Base64 representation of the non-volatile UEFI variable store. To
-    retrieve the UEFI data, use the
-    [GetInstanceUefiData](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceUefiData)
-    command. You can inspect and modify the UEFI data by using the
-    [python-uefivars tool](https://github.com/awslabs/python-uefivars) on
-    GitHub. For more information, see [UEFI Secure Boot for Amazon EC2
-    instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/uefi-secure-boot.html)
-    in the *Amazon EC2 User Guide*.
-    """
-    imds_support: str | None
-    """
-    Set to `v2.0` to indicate that IMDSv2 is specified in the AMI. Instances
-    launched from this AMI will have `HttpTokens` automatically set to
-    `required` so that, by default, the instance requires that IMDSv2 is
-    used when requesting instance metadata. In addition,
-    `HttpPutResponseHopLimit` is set to `2`. For more information, see
-    [Configure the
-    AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-IMDS-new-instances.html#configure-IMDS-new-instances-ami-configuration)
-    in the *Amazon EC2 User Guide*.
-
-    Note:
-        If you set the value to `v2.0`, make sure that your AMI software can
-        support IMDSv2.
-    """
-    tag_specifications: Sequence[TagSpecification | TagSpecificationDict] | None
-    """
-    The tags to apply to the AMI.
-
-    To tag the AMI, the value for `ResourceType` must be `image`. If you
-    specify another value for `ResourceType`, the request fails.
-
-    To tag an AMI after it has been registered, see
-    [CreateTags](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html).
-    """
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    name: Required[str]
-    """
-    A name for your AMI.
-
-    Constraints: 3-128 alphanumeric characters, parentheses (()), square
-    brackets ([]), spaces ( ), periods (.), slashes (/), dashes (-),
-    single quotes ('), at-signs (@), or underscores(_)
-    """
-    description: str | None
-    """A description for your AMI."""
-    architecture: str | None
-    """
-    The architecture of the AMI.
-
-    Default: For Amazon EBS-backed AMIs, `i386`. For instance store-backed
-    AMIs, the architecture specified in the manifest file.
-    """
-    kernel_id: str | None
-    """The ID of the kernel."""
-    ramdisk_id: str | None
-    """The ID of the RAM disk."""
-    root_device_name: str | None
-    """The device name of the root device volume (for example, `/dev/sda1`)."""
-    block_device_mappings: Sequence[BlockDeviceMapping | BlockDeviceMappingDict] | None
-    """
-    The block device mapping entries.
-
-    If you specify an Amazon EBS volume using the ID of an Amazon EBS
-    snapshot, you can't specify the encryption state of the volume.
-
-    If you create an AMI on an Outpost, then all backing snapshots must be
-    on the same Outpost or in the Region of that Outpost. AMIs on an Outpost
-    that include local snapshots can be used to launch instances on the same
-    Outpost only. For more information, [Create AMIs from local
-    snapshots](https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#ami)
-    in the *Amazon EBS User Guide*.
-    """
-    virtualization_type: str | None
-    """
-    The type of virtualization (`hvm` | `paravirtual`).
-
-    Default: `paravirtual`
-    """
-    sriov_net_support: str | None
-    """
-    Set to `simple` to enable enhanced networking with the Intel 82599
-    Virtual Function interface for the AMI and any instances that you launch
-    from the AMI.
-
-    There is no way to disable `sriovNetSupport` at this time.
-
-    This option is supported only for HVM AMIs. Specifying this option with
-    a PV AMI can make instances launched from the AMI unreachable.
-    """
-    ena_support: bool | None
-    """
-    Set to `true` to enable enhanced networking with ENA for the AMI and any
-    instances that you launch from the AMI.
-
-    This option is supported only for HVM AMIs. Specifying this option with
-    a PV AMI can make instances launched from the AMI unreachable.
-    """

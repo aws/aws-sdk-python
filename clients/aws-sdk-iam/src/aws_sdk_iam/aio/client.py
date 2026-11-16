@@ -273,7 +273,7 @@ class AsyncIAMClient(AsyncClient[AsyncIAMConfig]):
       using an access key ID and secret access key.
     """
 
-    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
+    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
 
     @_overload
     async def accept_delegation_request(

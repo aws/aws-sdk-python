@@ -160,7 +160,7 @@ class APIGatewayClient(Client[APIGatewayConfig]):
     outside of AWS.
     """
 
-    _client_plugins = (user_agent_plugin, accept_header_plugin, aws_user_agent_plugin)
+    _client_plugins = (accept_header_plugin, aws_user_agent_plugin, user_agent_plugin)
 
     @_overload
     def create_api_key(

@@ -40,7 +40,7 @@ class BedrockRuntimeClient(Client[BedrockRuntimeConfig]):
     models.
     """
 
-    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
+    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
 
     @_overload
     def apply_guardrail(

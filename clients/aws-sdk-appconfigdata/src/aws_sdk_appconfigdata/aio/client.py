@@ -84,7 +84,7 @@ class AsyncAppConfigDataClient(AsyncClient[AsyncAppConfigDataConfig]):
     in the *AppConfig User Guide*.
     """
 
-    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
+    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
 
     @_overload
     async def get_latest_configuration(

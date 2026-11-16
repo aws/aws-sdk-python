@@ -139,6 +139,9 @@ from aws_sdk_ec2.models import (
     AssociateNatGatewayAddressInput,
     AssociateNatGatewayAddressInputDict,
     AssociateNatGatewayAddressOutput,
+    AssociateNetworkingFlexCostAllocationPolicyInput,
+    AssociateNetworkingFlexCostAllocationPolicyInputDict,
+    AssociateNetworkingFlexCostAllocationPolicyOutput,
     AssociateRouteServerInput,
     AssociateRouteServerInputDict,
     AssociateRouteServerOutput,
@@ -539,6 +542,9 @@ from aws_sdk_ec2.models import (
     CreateManagedPrefixListInput,
     CreateManagedPrefixListInputDict,
     CreateManagedPrefixListOutput,
+    CreateMetricCategoryInput,
+    CreateMetricCategoryInputDict,
+    CreateMetricCategoryOutput,
     CreateNatGatewayInput,
     CreateNatGatewayInputDict,
     CreateNatGatewayOutput,
@@ -560,6 +566,9 @@ from aws_sdk_ec2.models import (
     CreateNetworkInterfacePermissionInput,
     CreateNetworkInterfacePermissionInputDict,
     CreateNetworkInterfacePermissionOutput,
+    CreateNetworkingFlexCostAllocationPolicyInput,
+    CreateNetworkingFlexCostAllocationPolicyInputDict,
+    CreateNetworkingFlexCostAllocationPolicyOutput,
     CreatePlacementGroupInput,
     CreatePlacementGroupInputDict,
     CreatePlacementGroupOutput,
@@ -884,6 +893,9 @@ from aws_sdk_ec2.models import (
     DeleteManagedPrefixListInput,
     DeleteManagedPrefixListInputDict,
     DeleteManagedPrefixListOutput,
+    DeleteMetricCategoryInput,
+    DeleteMetricCategoryInputDict,
+    DeleteMetricCategoryOutput,
     DeleteNatGatewayInput,
     DeleteNatGatewayInputDict,
     DeleteNatGatewayOutput,
@@ -911,6 +923,9 @@ from aws_sdk_ec2.models import (
     DeleteNetworkInterfacePermissionInput,
     DeleteNetworkInterfacePermissionInputDict,
     DeleteNetworkInterfacePermissionOutput,
+    DeleteNetworkingFlexCostAllocationPoliciesInput,
+    DeleteNetworkingFlexCostAllocationPoliciesInputDict,
+    DeleteNetworkingFlexCostAllocationPoliciesOutput,
     DeletePlacementGroupInput,
     DeletePlacementGroupInputDict,
     DeletePlacementGroupOutput,
@@ -1405,6 +1420,9 @@ from aws_sdk_ec2.models import (
     DescribeManagedPrefixListsInput,
     DescribeManagedPrefixListsInputDict,
     DescribeManagedPrefixListsOutput,
+    DescribeMetricCategoriesInput,
+    DescribeMetricCategoriesInputDict,
+    DescribeMetricCategoriesOutput,
     DescribeMovingAddressesInput,
     DescribeMovingAddressesInputDict,
     DescribeMovingAddressesOutput,
@@ -1435,6 +1453,12 @@ from aws_sdk_ec2.models import (
     DescribeNetworkInterfacesInput,
     DescribeNetworkInterfacesInputDict,
     DescribeNetworkInterfacesOutput,
+    DescribeNetworkingFlexCostAllocationPoliciesInput,
+    DescribeNetworkingFlexCostAllocationPoliciesInputDict,
+    DescribeNetworkingFlexCostAllocationPoliciesOutput,
+    DescribeNetworkingFlexCostAllocationPolicyAssociationsInput,
+    DescribeNetworkingFlexCostAllocationPolicyAssociationsInputDict,
+    DescribeNetworkingFlexCostAllocationPolicyAssociationsOutput,
     DescribeOutpostLagsInput,
     DescribeOutpostLagsInputDict,
     DescribeOutpostLagsOutput,
@@ -1813,6 +1837,9 @@ from aws_sdk_ec2.models import (
     DisassociateNatGatewayAddressInput,
     DisassociateNatGatewayAddressInputDict,
     DisassociateNatGatewayAddressOutput,
+    DisassociateNetworkingFlexCostAllocationPolicyInput,
+    DisassociateNetworkingFlexCostAllocationPolicyInputDict,
+    DisassociateNetworkingFlexCostAllocationPolicyOutput,
     DisassociateRouteServerInput,
     DisassociateRouteServerInputDict,
     DisassociateRouteServerOutput,
@@ -2038,6 +2065,16 @@ from aws_sdk_ec2.models import (
     FleetSpotMaintenanceStrategies,
     FleetSpotMaintenanceStrategiesRequest,
     FleetSpotMaintenanceStrategiesRequestDict,
+    FlexCostAllocationCidrMapping,
+    FlexCostAllocationCidrMappingDict,
+    FlexCostAllocationCidrRangeSpecifications,
+    FlexCostAllocationCidrRangeSpecificationsDict,
+    FlexCostAllocationNetworkResourceScope,
+    FlexCostAllocationNetworkResourceScopeDict,
+    FlexCostAllocationOperationFailure,
+    FlexCostAllocationPolicyAssociationDescription,
+    FlexCostAllocationPolicyDescription,
+    FlexCostAllocationPolicyVersion,
     FlowLog,
     FpgaDeviceInfo,
     FpgaDeviceMemoryInfo,
@@ -2210,6 +2247,9 @@ from aws_sdk_ec2.models import (
     GetNetworkInsightsAccessScopeContentInput,
     GetNetworkInsightsAccessScopeContentInputDict,
     GetNetworkInsightsAccessScopeContentOutput,
+    GetNetworkingFlexCostAllocationPolicyVersionsInput,
+    GetNetworkingFlexCostAllocationPolicyVersionsInputDict,
+    GetNetworkingFlexCostAllocationPolicyVersionsOutput,
     GetPasswordDataInput,
     GetPasswordDataInputDict,
     GetPasswordDataOutput,
@@ -2406,6 +2446,8 @@ from aws_sdk_ec2.models import (
     InstanceEventWindowTimeRangeRequestDict,
     InstanceExportDetails,
     InstanceFamilyCreditSpecification,
+    InstanceFlexCostAllocationPolicyDocument,
+    InstanceFlexCostAllocationPolicyDocumentDict,
     InstanceImageMetadata,
     InstanceIpv4Prefix,
     InstanceIpv6Address,
@@ -2668,6 +2710,7 @@ from aws_sdk_ec2.models import (
     MemoryMiBDict,
     MemoryMiBRequest,
     MemoryMiBRequestDict,
+    MetricCategory,
     MetricDataResult,
     MetricPoint,
     MetricValue,
@@ -2800,9 +2843,15 @@ from aws_sdk_ec2.models import (
     ModifyManagedResourceVisibilityInput,
     ModifyManagedResourceVisibilityInputDict,
     ModifyManagedResourceVisibilityOutput,
+    ModifyMetricCategoryInput,
+    ModifyMetricCategoryInputDict,
+    ModifyMetricCategoryOutput,
     ModifyNetworkInterfaceAttributeInput,
     ModifyNetworkInterfaceAttributeInputDict,
     ModifyNetworkInterfaceAttributeOutput,
+    ModifyNetworkingFlexCostAllocationPolicyInput,
+    ModifyNetworkingFlexCostAllocationPolicyInputDict,
+    ModifyNetworkingFlexCostAllocationPolicyOutput,
     ModifyPrivateDnsNameOptionsInput,
     ModifyPrivateDnsNameOptionsInputDict,
     ModifyPrivateDnsNameOptionsOutput,
@@ -2968,6 +3017,8 @@ from aws_sdk_ec2.models import (
     MoveCapacityReservationInstancesInputDict,
     MoveCapacityReservationInstancesOutput,
     MovingAddressStatus,
+    NatFlexCostAllocationPolicyDocument,
+    NatFlexCostAllocationPolicyDocumentDict,
     NatGateway,
     NatGatewayAddress,
     NatGatewayAttachedAppliance,
@@ -3026,6 +3077,8 @@ from aws_sdk_ec2.models import (
     PathStatementRequestDict,
     PayerResponsibilityEntry,
     PciId,
+    PcxFlexCostAllocationPolicyDocument,
+    PcxFlexCostAllocationPolicyDocumentDict,
     PeeringAttachmentStatus,
     PeeringConnectionOptions,
     PeeringConnectionOptionsRequest,
@@ -3821,6 +3874,8 @@ AssociateIpamResourceDiscoveryInput()
 AssociateIpamResourceDiscoveryOutput()
 AssociateNatGatewayAddressInput()
 AssociateNatGatewayAddressOutput()
+AssociateNetworkingFlexCostAllocationPolicyInput()
+AssociateNetworkingFlexCostAllocationPolicyOutput()
 AssociateRouteServerInput()
 AssociateRouteServerOutput()
 AssociateRouteTableInput()
@@ -4104,12 +4159,16 @@ CreateMacSystemIntegrityProtectionModificationTaskInput()
 CreateMacSystemIntegrityProtectionModificationTaskOutput()
 CreateManagedPrefixListInput()
 CreateManagedPrefixListOutput()
+CreateMetricCategoryInput()
+CreateMetricCategoryOutput()
 CreateNatGatewayInput()
 CreateNatGatewayOutput()
 CreateNetworkAclEntryInput()
 CreateNetworkAclEntryOutput()
 CreateNetworkAclInput()
 CreateNetworkAclOutput()
+CreateNetworkingFlexCostAllocationPolicyInput()
+CreateNetworkingFlexCostAllocationPolicyOutput()
 CreateNetworkInsightsAccessScopeInput()
 CreateNetworkInsightsAccessScopeOutput()
 CreateNetworkInsightsPathInput()
@@ -4332,12 +4391,16 @@ DeleteLocalGatewayVirtualInterfaceInput()
 DeleteLocalGatewayVirtualInterfaceOutput()
 DeleteManagedPrefixListInput()
 DeleteManagedPrefixListOutput()
+DeleteMetricCategoryInput()
+DeleteMetricCategoryOutput()
 DeleteNatGatewayInput()
 DeleteNatGatewayOutput()
 DeleteNetworkAclEntryInput()
 DeleteNetworkAclEntryOutput()
 DeleteNetworkAclInput()
 DeleteNetworkAclOutput()
+DeleteNetworkingFlexCostAllocationPoliciesInput()
+DeleteNetworkingFlexCostAllocationPoliciesOutput()
 DeleteNetworkInsightsAccessScopeAnalysisInput()
 DeleteNetworkInsightsAccessScopeAnalysisOutput()
 DeleteNetworkInsightsAccessScopeInput()
@@ -4681,12 +4744,18 @@ DescribeMacModificationTasksInput()
 DescribeMacModificationTasksOutput()
 DescribeManagedPrefixListsInput()
 DescribeManagedPrefixListsOutput()
+DescribeMetricCategoriesInput()
+DescribeMetricCategoriesOutput()
 DescribeMovingAddressesInput()
 DescribeMovingAddressesOutput()
 DescribeNatGatewaysInput()
 DescribeNatGatewaysOutput()
 DescribeNetworkAclsInput()
 DescribeNetworkAclsOutput()
+DescribeNetworkingFlexCostAllocationPoliciesInput()
+DescribeNetworkingFlexCostAllocationPoliciesOutput()
+DescribeNetworkingFlexCostAllocationPolicyAssociationsInput()
+DescribeNetworkingFlexCostAllocationPolicyAssociationsOutput()
 DescribeNetworkInsightsAccessScopeAnalysesInput()
 DescribeNetworkInsightsAccessScopeAnalysesOutput()
 DescribeNetworkInsightsAccessScopesInput()
@@ -4955,6 +5024,8 @@ DisassociateIpamResourceDiscoveryInput()
 DisassociateIpamResourceDiscoveryOutput()
 DisassociateNatGatewayAddressInput()
 DisassociateNatGatewayAddressOutput()
+DisassociateNetworkingFlexCostAllocationPolicyInput()
+DisassociateNetworkingFlexCostAllocationPolicyOutput()
 DisassociateRouteServerInput()
 DisassociateRouteServerOutput()
 DisassociateRouteTableInput()
@@ -5110,6 +5181,13 @@ FleetSpotCapacityRebalance()
 FleetSpotCapacityRebalanceRequest()
 FleetSpotMaintenanceStrategies()
 FleetSpotMaintenanceStrategiesRequest()
+FlexCostAllocationCidrMapping()
+FlexCostAllocationCidrRangeSpecifications()
+FlexCostAllocationNetworkResourceScope()
+FlexCostAllocationOperationFailure()
+FlexCostAllocationPolicyAssociationDescription()
+FlexCostAllocationPolicyDescription()
+FlexCostAllocationPolicyVersion()
 FlowLog()
 FpgaDeviceInfo()
 FpgaDeviceMemoryInfo()
@@ -5223,6 +5301,8 @@ GetManagedPrefixListEntriesInput()
 GetManagedPrefixListEntriesOutput()
 GetManagedResourceVisibilityInput()
 GetManagedResourceVisibilityOutput()
+GetNetworkingFlexCostAllocationPolicyVersionsInput()
+GetNetworkingFlexCostAllocationPolicyVersionsOutput()
 GetNetworkInsightsAccessScopeAnalysisFindingsInput()
 GetNetworkInsightsAccessScopeAnalysisFindingsOutput()
 GetNetworkInsightsAccessScopeContentInput()
@@ -5370,6 +5450,7 @@ InstanceEventWindowTimeRange()
 InstanceEventWindowTimeRangeRequest()
 InstanceExportDetails()
 InstanceFamilyCreditSpecification()
+InstanceFlexCostAllocationPolicyDocument()
 InstanceImageMetadata()
 InstanceIpv4Prefix()
 InstanceIpv6Address()
@@ -5569,6 +5650,7 @@ MemoryGiBPerVCpuRequest()
 MemoryInfo()
 MemoryMiB()
 MemoryMiBRequest()
+MetricCategory()
 MetricDataResult()
 MetricPoint()
 MetricValue()
@@ -5659,6 +5741,10 @@ ModifyManagedPrefixListInput()
 ModifyManagedPrefixListOutput()
 ModifyManagedResourceVisibilityInput()
 ModifyManagedResourceVisibilityOutput()
+ModifyMetricCategoryInput()
+ModifyMetricCategoryOutput()
+ModifyNetworkingFlexCostAllocationPolicyInput()
+ModifyNetworkingFlexCostAllocationPolicyOutput()
 ModifyNetworkInterfaceAttributeInput()
 ModifyNetworkInterfaceAttributeOutput()
 ModifyPrivateDnsNameOptionsInput()
@@ -5768,6 +5854,7 @@ MoveByoipCidrToIpamOutput()
 MoveCapacityReservationInstancesInput()
 MoveCapacityReservationInstancesOutput()
 MovingAddressStatus()
+NatFlexCostAllocationPolicyDocument()
 NatGateway()
 NatGatewayAddress()
 NatGatewayAttachedAppliance()
@@ -5815,6 +5902,7 @@ PathStatement()
 PathStatementRequest()
 PayerResponsibilityEntry()
 PciId()
+PcxFlexCostAllocationPolicyDocument()
 PeeringAttachmentStatus()
 PeeringConnectionOptions()
 PeeringConnectionOptionsRequest()
@@ -6397,282 +6485,287 @@ _params_36: AssociateNatGatewayAddressInputDict = {
     "nat_gateway_id": _,
     "allocation_ids": _,
 }
-_params_37: AssociateRouteServerInputDict = {"route_server_id": _, "vpc_id": _}
-_params_38: AssociateRouteTableInputDict = {"route_table_id": _}
-_params_39: AssociateSecurityGroupVpcInputDict = {"group_id": _, "vpc_id": _}
-_params_40: AssociateSubnetCidrBlockInputDict = {"subnet_id": _}
-_params_41: AssociateTransitGatewayMulticastDomainInputDict = {
+_params_37: AssociateNetworkingFlexCostAllocationPolicyInputDict = {"fca_policy_id": _}
+_params_38: AssociateRouteServerInputDict = {"route_server_id": _, "vpc_id": _}
+_params_39: AssociateRouteTableInputDict = {"route_table_id": _}
+_params_40: AssociateSecurityGroupVpcInputDict = {"group_id": _, "vpc_id": _}
+_params_41: AssociateSubnetCidrBlockInputDict = {"subnet_id": _}
+_params_42: AssociateTransitGatewayMulticastDomainInputDict = {
     "transit_gateway_multicast_domain_id": _,
     "transit_gateway_attachment_id": _,
     "subnet_ids": _,
 }
-_params_42: AssociateTransitGatewayPolicyTableInputDict = {
+_params_43: AssociateTransitGatewayPolicyTableInputDict = {
     "transit_gateway_policy_table_id": _,
     "transit_gateway_attachment_id": _,
 }
-_params_43: AssociateTransitGatewayRouteTableInputDict = {
+_params_44: AssociateTransitGatewayRouteTableInputDict = {
     "transit_gateway_route_table_id": _,
     "transit_gateway_attachment_id": _,
 }
-_params_44: AssociateTrunkInterfaceInputDict = {
+_params_45: AssociateTrunkInterfaceInputDict = {
     "branch_interface_id": _,
     "trunk_interface_id": _,
 }
-_params_45: AssociateVpcCidrBlockInputDict = {"vpc_id": _}
-_params_46: AthenaIntegrationDict = {
+_params_46: AssociateVpcCidrBlockInputDict = {"vpc_id": _}
+_params_47: AthenaIntegrationDict = {
     "integration_result_s3_destination_arn": _,
     "partition_load_frequency": _,
 }
-_params_47: AttachClassicLinkVpcInputDict = {"instance_id": _, "vpc_id": _, "groups": _}
-_params_48: AttachImageWatermarkInputDict = {"image_id": _, "watermark_name": _}
-_params_49: AttachInternetGatewayInputDict = {"internet_gateway_id": _, "vpc_id": _}
-_params_50: AttachNetworkInterfaceInputDict = {
+_params_48: AttachClassicLinkVpcInputDict = {"instance_id": _, "vpc_id": _, "groups": _}
+_params_49: AttachImageWatermarkInputDict = {"image_id": _, "watermark_name": _}
+_params_50: AttachInternetGatewayInputDict = {"internet_gateway_id": _, "vpc_id": _}
+_params_51: AttachNetworkInterfaceInputDict = {
     "network_interface_id": _,
     "instance_id": _,
     "device_index": _,
 }
-_params_51: AttachVerifiedAccessTrustProviderInputDict = {
+_params_52: AttachVerifiedAccessTrustProviderInputDict = {
     "verified_access_instance_id": _,
     "verified_access_trust_provider_id": _,
 }
-_params_52: AttachVolumeInputDict = {"device": _, "instance_id": _, "volume_id": _}
-_params_53: AttachVpnGatewayInputDict = {"vpc_id": _, "vpn_gateway_id": _}
-_params_54: AttributeBooleanValueDict = {}
-_params_55: AttributeValueDict = {}
-_params_56: AuthorizeClientVpnIngressInputDict = {
+_params_53: AttachVolumeInputDict = {"device": _, "instance_id": _, "volume_id": _}
+_params_54: AttachVpnGatewayInputDict = {"vpc_id": _, "vpn_gateway_id": _}
+_params_55: AttributeBooleanValueDict = {}
+_params_56: AttributeValueDict = {}
+_params_57: AuthorizeClientVpnIngressInputDict = {
     "client_vpn_endpoint_id": _,
     "target_network_cidr": _,
 }
-_params_57: AuthorizeSecurityGroupEgressInputDict = {"group_id": _}
-_params_58: AuthorizeSecurityGroupIngressInputDict = {}
-_params_59: AvailabilityZoneAddressDict = {}
-_params_60: BaselineEbsBandwidthMbpsDict = {}
-_params_61: BaselineEbsBandwidthMbpsRequestDict = {}
-_params_62: BaselinePerformanceFactorsDict = {}
-_params_63: BaselinePerformanceFactorsRequestDict = {}
-_params_64: BatchModifyIpamRoutingPolicyRegistrationsInputDict = {
+_params_58: AuthorizeSecurityGroupEgressInputDict = {"group_id": _}
+_params_59: AuthorizeSecurityGroupIngressInputDict = {}
+_params_60: AvailabilityZoneAddressDict = {}
+_params_61: BaselineEbsBandwidthMbpsDict = {}
+_params_62: BaselineEbsBandwidthMbpsRequestDict = {}
+_params_63: BaselinePerformanceFactorsDict = {}
+_params_64: BaselinePerformanceFactorsRequestDict = {}
+_params_65: BatchModifyIpamRoutingPolicyRegistrationsInputDict = {
     "ipam_internet_registry_association_id": _,
     "delta_json": _,
 }
-_params_65: BlockDeviceMappingDict = {}
-_params_66: BundleInstanceInputDict = {"instance_id": _, "storage": _}
-_params_67: CancelBundleTaskInputDict = {"bundle_id": _}
-_params_68: CancelCapacityReservationFleetsInputDict = {
+_params_66: BlockDeviceMappingDict = {}
+_params_67: BundleInstanceInputDict = {"instance_id": _, "storage": _}
+_params_68: CancelBundleTaskInputDict = {"bundle_id": _}
+_params_69: CancelCapacityReservationFleetsInputDict = {
     "capacity_reservation_fleet_ids": _
 }
-_params_69: CancelCapacityReservationInputDict = {"capacity_reservation_id": _}
-_params_70: CancelConversionTaskInputDict = {"conversion_task_id": _}
-_params_71: CancelDeclarativePoliciesReportInputDict = {"report_id": _}
-_params_72: CancelExportTaskInputDict = {"export_task_id": _}
-_params_73: CancelImageLaunchPermissionInputDict = {"image_id": _}
-_params_74: CancelImportTaskInputDict = {}
-_params_75: CancelReservedInstancesListingInputDict = {
+_params_70: CancelCapacityReservationInputDict = {"capacity_reservation_id": _}
+_params_71: CancelConversionTaskInputDict = {"conversion_task_id": _}
+_params_72: CancelDeclarativePoliciesReportInputDict = {"report_id": _}
+_params_73: CancelExportTaskInputDict = {"export_task_id": _}
+_params_74: CancelImageLaunchPermissionInputDict = {"image_id": _}
+_params_75: CancelImportTaskInputDict = {}
+_params_76: CancelReservedInstancesListingInputDict = {
     "reserved_instances_listing_id": _
 }
-_params_76: CancelSpotFleetRequestsInputDict = {
+_params_77: CancelSpotFleetRequestsInputDict = {
     "spot_fleet_request_ids": _,
     "terminate_instances": _,
 }
-_params_77: CancelSpotInstanceRequestsInputDict = {"spot_instance_request_ids": _}
-_params_78: CapacityManagerConditionDict = {}
-_params_79: CapacityReservationOptionsRequestDict = {}
-_params_80: CapacityReservationSpecificationDict = {}
-_params_81: CapacityReservationTargetDict = {}
-_params_82: CertificateAuthenticationRequestDict = {}
-_params_83: CidrAuthorizationContextDict = {"message": _, "signature": _}
-_params_84: ClassicLoadBalancerDict = {}
-_params_85: ClassicLoadBalancersConfigDict = {}
-_params_86: ClientConnectOptionsDict = {}
-_params_87: ClientDataDict = {}
-_params_88: ClientLoginBannerOptionsDict = {}
-_params_89: ClientRouteEnforcementOptionsDict = {}
-_params_90: ClientVpnAuthenticationRequestDict = {}
-_params_91: ClientVpnTrustProviderRequestDict = {}
-_params_92: CloudWatchLogOptionsSpecificationDict = {}
-_params_93: ConfirmProductInstanceInputDict = {"instance_id": _, "product_code": _}
-_params_94: ConnectionLogOptionsDict = {}
-_params_95: ConnectionTrackingSpecificationRequestDict = {}
-_params_96: CopyFpgaImageInputDict = {"source_fpga_image_id": _, "source_region": _}
-_params_97: CopyImageInputDict = {"name": _, "source_image_id": _, "source_region": _}
-_params_98: CopySnapshotInputDict = {"source_region": _, "source_snapshot_id": _}
-_params_99: CopyVolumesInputDict = {"source_volume_id": _}
-_params_100: CpuOptionsRequestDict = {}
-_params_101: CpuPerformanceFactorDict = {}
-_params_102: CpuPerformanceFactorRequestDict = {}
-_params_103: CreateApplicationStatusCheckInputDict = {"protocol": _, "port": _}
-_params_104: CreateCapacityManagerDataExportInputDict = {
+_params_78: CancelSpotInstanceRequestsInputDict = {"spot_instance_request_ids": _}
+_params_79: CapacityManagerConditionDict = {}
+_params_80: CapacityReservationOptionsRequestDict = {}
+_params_81: CapacityReservationSpecificationDict = {}
+_params_82: CapacityReservationTargetDict = {}
+_params_83: CertificateAuthenticationRequestDict = {}
+_params_84: CidrAuthorizationContextDict = {"message": _, "signature": _}
+_params_85: ClassicLoadBalancerDict = {}
+_params_86: ClassicLoadBalancersConfigDict = {}
+_params_87: ClientConnectOptionsDict = {}
+_params_88: ClientDataDict = {}
+_params_89: ClientLoginBannerOptionsDict = {}
+_params_90: ClientRouteEnforcementOptionsDict = {}
+_params_91: ClientVpnAuthenticationRequestDict = {}
+_params_92: ClientVpnTrustProviderRequestDict = {}
+_params_93: CloudWatchLogOptionsSpecificationDict = {}
+_params_94: ConfirmProductInstanceInputDict = {"instance_id": _, "product_code": _}
+_params_95: ConnectionLogOptionsDict = {}
+_params_96: ConnectionTrackingSpecificationRequestDict = {}
+_params_97: CopyFpgaImageInputDict = {"source_fpga_image_id": _, "source_region": _}
+_params_98: CopyImageInputDict = {"name": _, "source_image_id": _, "source_region": _}
+_params_99: CopySnapshotInputDict = {"source_region": _, "source_snapshot_id": _}
+_params_100: CopyVolumesInputDict = {"source_volume_id": _}
+_params_101: CpuOptionsRequestDict = {}
+_params_102: CpuPerformanceFactorDict = {}
+_params_103: CpuPerformanceFactorRequestDict = {}
+_params_104: CreateApplicationStatusCheckInputDict = {"protocol": _, "port": _}
+_params_105: CreateCapacityManagerDataExportInputDict = {
     "s3_bucket_name": _,
     "schedule": _,
     "output_format": _,
 }
-_params_105: CreateCapacityReservationBySplittingInputDict = {
+_params_106: CreateCapacityReservationBySplittingInputDict = {
     "source_capacity_reservation_id": _,
     "instance_count": _,
 }
-_params_106: CreateCapacityReservationCancellationQuoteInputDict = {
+_params_107: CreateCapacityReservationCancellationQuoteInputDict = {
     "capacity_reservation_id": _
 }
-_params_107: CreateCapacityReservationDateChangeQuoteInputDict = {
+_params_108: CreateCapacityReservationDateChangeQuoteInputDict = {
     "capacity_reservation_id": _,
     "new_start_date": _,
 }
-_params_108: CreateCapacityReservationFleetInputDict = {"total_target_capacity": _}
-_params_109: CreateCapacityReservationInputDict = {
+_params_109: CreateCapacityReservationFleetInputDict = {"total_target_capacity": _}
+_params_110: CreateCapacityReservationInputDict = {
     "instance_type": _,
     "instance_platform": _,
     "instance_count": _,
 }
-_params_110: CreateCarrierGatewayInputDict = {"vpc_id": _}
-_params_111: CreateClientVpnEndpointInputDict = {
+_params_111: CreateCarrierGatewayInputDict = {"vpc_id": _}
+_params_112: CreateClientVpnEndpointInputDict = {
     "server_certificate_arn": _,
     "authentication_options": _,
     "connection_log_options": _,
 }
-_params_112: CreateClientVpnRouteInputDict = {
+_params_113: CreateClientVpnRouteInputDict = {
     "client_vpn_endpoint_id": _,
     "destination_cidr_block": _,
 }
-_params_113: CreateCoipCidrInputDict = {"cidr": _, "coip_pool_id": _}
-_params_114: CreateCoipPoolInputDict = {"local_gateway_route_table_id": _}
-_params_115: CreateCustomerGatewayInputDict = {"type": _}
-_params_116: CreateDefaultSubnetInputDict = {}
-_params_117: CreateDefaultVpcInputDict = {}
-_params_118: CreateDelegateMacVolumeOwnershipTaskInputDict = {
+_params_114: CreateCoipCidrInputDict = {"cidr": _, "coip_pool_id": _}
+_params_115: CreateCoipPoolInputDict = {"local_gateway_route_table_id": _}
+_params_116: CreateCustomerGatewayInputDict = {"type": _}
+_params_117: CreateDefaultSubnetInputDict = {}
+_params_118: CreateDefaultVpcInputDict = {}
+_params_119: CreateDelegateMacVolumeOwnershipTaskInputDict = {
     "instance_id": _,
     "mac_credentials": _,
 }
-_params_119: CreateDhcpOptionsInputDict = {"dhcp_configurations": _}
-_params_120: CreateEgressOnlyInternetGatewayInputDict = {"vpc_id": _}
-_params_121: CreateFleetInputDict = {
+_params_120: CreateDhcpOptionsInputDict = {"dhcp_configurations": _}
+_params_121: CreateEgressOnlyInternetGatewayInputDict = {"vpc_id": _}
+_params_122: CreateFleetInputDict = {
     "launch_template_configs": _,
     "target_capacity_specification": _,
 }
-_params_122: CreateFlowLogsInputDict = {"resource_ids": _, "resource_type": _}
-_params_123: CreateFpgaImageInputDict = {"input_storage_location": _}
-_params_124: CreateImageInputDict = {"instance_id": _, "name": _}
-_params_125: CreateImageUsageReportInputDict = {"image_id": _, "resource_types": _}
-_params_126: CreateInstanceConnectEndpointInputDict = {"subnet_id": _}
-_params_127: CreateInstanceEventWindowInputDict = {}
-_params_128: CreateInstanceExportTaskInputDict = {
+_params_123: CreateFlowLogsInputDict = {"resource_ids": _, "resource_type": _}
+_params_124: CreateFpgaImageInputDict = {"input_storage_location": _}
+_params_125: CreateImageInputDict = {"instance_id": _, "name": _}
+_params_126: CreateImageUsageReportInputDict = {"image_id": _, "resource_types": _}
+_params_127: CreateInstanceConnectEndpointInputDict = {"subnet_id": _}
+_params_128: CreateInstanceEventWindowInputDict = {}
+_params_129: CreateInstanceExportTaskInputDict = {
     "instance_id": _,
     "target_environment": _,
     "export_to_s3_task": _,
 }
-_params_129: CreateInternetGatewayInputDict = {}
-_params_130: CreateInterruptibleCapacityReservationAllocationInputDict = {
+_params_130: CreateInternetGatewayInputDict = {}
+_params_131: CreateInterruptibleCapacityReservationAllocationInputDict = {
     "capacity_reservation_id": _,
     "instance_count": _,
 }
-_params_131: CreateIpamExternalResourceVerificationTokenInputDict = {"ipam_id": _}
-_params_132: CreateIpamInputDict = {}
-_params_133: CreateIpamInternetRegistryAssociationInputDict = {
+_params_132: CreateIpamExternalResourceVerificationTokenInputDict = {"ipam_id": _}
+_params_133: CreateIpamInputDict = {}
+_params_134: CreateIpamInternetRegistryAssociationInputDict = {
     "ipam_id": _,
     "rir": _,
     "organization_handle": _,
 }
-_params_134: CreateIpamPolicyInputDict = {"ipam_id": _}
-_params_135: CreateIpamPoolInputDict = {"ipam_scope_id": _, "address_family": _}
-_params_136: CreateIpamPrefixListResolverInputDict = {"ipam_id": _, "address_family": _}
-_params_137: CreateIpamPrefixListResolverTargetInputDict = {
+_params_135: CreateIpamPolicyInputDict = {"ipam_id": _}
+_params_136: CreateIpamPoolInputDict = {"ipam_scope_id": _, "address_family": _}
+_params_137: CreateIpamPrefixListResolverInputDict = {"ipam_id": _, "address_family": _}
+_params_138: CreateIpamPrefixListResolverTargetInputDict = {
     "ipam_prefix_list_resolver_id": _,
     "prefix_list_id": _,
     "prefix_list_region": _,
     "track_latest_version": _,
 }
-_params_138: CreateIpamResourceDiscoveryInputDict = {}
-_params_139: CreateIpamRoutingPolicyRegistrationInputDict = {
+_params_139: CreateIpamResourceDiscoveryInputDict = {}
+_params_140: CreateIpamRoutingPolicyRegistrationInputDict = {
     "ipam_internet_registry_association_id": _,
     "cidr": _,
     "asns": _,
 }
-_params_140: CreateIpamScopeInputDict = {"ipam_id": _}
-_params_141: CreateKeyPairInputDict = {"key_name": _}
-_params_142: CreateLaunchTemplateInputDict = {
+_params_141: CreateIpamScopeInputDict = {"ipam_id": _}
+_params_142: CreateKeyPairInputDict = {"key_name": _}
+_params_143: CreateLaunchTemplateInputDict = {
     "launch_template_name": _,
     "launch_template_data": _,
 }
-_params_143: CreateLaunchTemplateVersionInputDict = {"launch_template_data": _}
-_params_144: CreateLocalGatewayRouteInputDict = {"local_gateway_route_table_id": _}
-_params_145: CreateLocalGatewayRouteTableInputDict = {"local_gateway_id": _}
-_params_146: CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationInputDict = {
+_params_144: CreateLaunchTemplateVersionInputDict = {"launch_template_data": _}
+_params_145: CreateLocalGatewayRouteInputDict = {"local_gateway_route_table_id": _}
+_params_146: CreateLocalGatewayRouteTableInputDict = {"local_gateway_id": _}
+_params_147: CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationInputDict = {
     "local_gateway_route_table_id": _,
     "local_gateway_virtual_interface_group_id": _,
 }
-_params_147: CreateLocalGatewayRouteTableVpcAssociationInputDict = {
+_params_148: CreateLocalGatewayRouteTableVpcAssociationInputDict = {
     "local_gateway_route_table_id": _,
     "vpc_id": _,
 }
-_params_148: CreateLocalGatewayVirtualInterfaceGroupInputDict = {"local_gateway_id": _}
-_params_149: CreateLocalGatewayVirtualInterfaceInputDict = {
+_params_149: CreateLocalGatewayVirtualInterfaceGroupInputDict = {"local_gateway_id": _}
+_params_150: CreateLocalGatewayVirtualInterfaceInputDict = {
     "local_gateway_virtual_interface_group_id": _,
     "outpost_lag_id": _,
     "vlan": _,
     "local_address": _,
     "peer_address": _,
 }
-_params_150: CreateMacSystemIntegrityProtectionModificationTaskInputDict = {
+_params_151: CreateMacSystemIntegrityProtectionModificationTaskInputDict = {
     "instance_id": _,
     "mac_system_integrity_protection_status": _,
 }
-_params_151: CreateManagedPrefixListInputDict = {
+_params_152: CreateManagedPrefixListInputDict = {
     "prefix_list_name": _,
     "max_entries": _,
     "address_family": _,
 }
-_params_152: CreateNatGatewayInputDict = {}
-_params_153: CreateNetworkAclEntryInputDict = {
+_params_153: CreateMetricCategoryInputDict = {"metrics": _}
+_params_154: CreateNatGatewayInputDict = {}
+_params_155: CreateNetworkAclEntryInputDict = {
     "network_acl_id": _,
     "rule_number": _,
     "protocol": _,
     "rule_action": _,
     "egress": _,
 }
-_params_154: CreateNetworkAclInputDict = {"vpc_id": _}
-_params_155: CreateNetworkInsightsAccessScopeInputDict = {}
-_params_156: CreateNetworkInsightsPathInputDict = {"source": _, "protocol": _}
-_params_157: CreateNetworkInterfaceInputDict = {"subnet_id": _}
-_params_158: CreateNetworkInterfacePermissionInputDict = {
+_params_156: CreateNetworkAclInputDict = {"vpc_id": _}
+_params_157: CreateNetworkingFlexCostAllocationPolicyInputDict = {
+    "network_resource_type": _
+}
+_params_158: CreateNetworkInsightsAccessScopeInputDict = {}
+_params_159: CreateNetworkInsightsPathInputDict = {"source": _, "protocol": _}
+_params_160: CreateNetworkInterfaceInputDict = {"subnet_id": _}
+_params_161: CreateNetworkInterfacePermissionInputDict = {
     "network_interface_id": _,
     "permission": _,
 }
-_params_159: CreatePlacementGroupInputDict = {}
-_params_160: CreatePublicIpv4PoolInputDict = {}
-_params_161: CreateReplaceRootVolumeTaskInputDict = {"instance_id": _}
-_params_162: CreateReservedInstancesListingInputDict = {
+_params_162: CreatePlacementGroupInputDict = {}
+_params_163: CreatePublicIpv4PoolInputDict = {}
+_params_164: CreateReplaceRootVolumeTaskInputDict = {"instance_id": _}
+_params_165: CreateReservedInstancesListingInputDict = {
     "reserved_instances_id": _,
     "instance_count": _,
     "price_schedules": _,
     "client_token": _,
 }
-_params_163: CreateRestoreImageTaskInputDict = {"bucket": _, "object_key": _}
-_params_164: CreateRouteInputDict = {"route_table_id": _}
-_params_165: CreateRouteServerEndpointInputDict = {"route_server_id": _, "subnet_id": _}
-_params_166: CreateRouteServerInputDict = {"amazon_side_asn": _}
-_params_167: CreateRouteServerPeerInputDict = {
+_params_166: CreateRestoreImageTaskInputDict = {"bucket": _, "object_key": _}
+_params_167: CreateRouteInputDict = {"route_table_id": _}
+_params_168: CreateRouteServerEndpointInputDict = {"route_server_id": _, "subnet_id": _}
+_params_169: CreateRouteServerInputDict = {"amazon_side_asn": _}
+_params_170: CreateRouteServerPeerInputDict = {
     "route_server_endpoint_id": _,
     "peer_address": _,
     "bgp_options": _,
 }
-_params_168: CreateRouteTableInputDict = {"vpc_id": _}
-_params_169: CreateSecondaryNetworkInputDict = {"ipv4_cidr_block": _, "network_type": _}
-_params_170: CreateSecondarySubnetInputDict = {
+_params_171: CreateRouteTableInputDict = {"vpc_id": _}
+_params_172: CreateSecondaryNetworkInputDict = {"ipv4_cidr_block": _, "network_type": _}
+_params_173: CreateSecondarySubnetInputDict = {
     "ipv4_cidr_block": _,
     "secondary_network_id": _,
 }
-_params_171: CreateSecurityGroupInputDict = {"description": _, "group_name": _}
-_params_172: CreateSnapshotInputDict = {"volume_id": _}
-_params_173: CreateSnapshotsInputDict = {"instance_specification": _}
-_params_174: CreateSpotDatafeedSubscriptionInputDict = {"bucket": _}
-_params_175: CreateStoreImageTaskInputDict = {"image_id": _, "bucket": _}
-_params_176: CreateSubnetCidrReservationInputDict = {
+_params_174: CreateSecurityGroupInputDict = {"description": _, "group_name": _}
+_params_175: CreateSnapshotInputDict = {"volume_id": _}
+_params_176: CreateSnapshotsInputDict = {"instance_specification": _}
+_params_177: CreateSpotDatafeedSubscriptionInputDict = {"bucket": _}
+_params_178: CreateStoreImageTaskInputDict = {"image_id": _, "bucket": _}
+_params_179: CreateSubnetCidrReservationInputDict = {
     "subnet_id": _,
     "cidr": _,
     "reservation_type": _,
 }
-_params_177: CreateSubnetInputDict = {"vpc_id": _}
-_params_178: CreateTagsInputDict = {"resources": _, "tags": _}
-_params_179: CreateTrafficMirrorFilterInputDict = {}
-_params_180: CreateTrafficMirrorFilterRuleInputDict = {
+_params_180: CreateSubnetInputDict = {"vpc_id": _}
+_params_181: CreateTagsInputDict = {"resources": _, "tags": _}
+_params_182: CreateTrafficMirrorFilterInputDict = {}
+_params_183: CreateTrafficMirrorFilterRuleInputDict = {
     "traffic_mirror_filter_id": _,
     "traffic_direction": _,
     "rule_number": _,
@@ -6680,623 +6773,631 @@ _params_180: CreateTrafficMirrorFilterRuleInputDict = {
     "destination_cidr_block": _,
     "source_cidr_block": _,
 }
-_params_181: CreateTrafficMirrorSessionInputDict = {
+_params_184: CreateTrafficMirrorSessionInputDict = {
     "network_interface_id": _,
     "traffic_mirror_target_id": _,
     "traffic_mirror_filter_id": _,
     "session_number": _,
 }
-_params_182: CreateTrafficMirrorTargetInputDict = {}
-_params_183: CreateTransitGatewayConnectInputDict = {
+_params_185: CreateTrafficMirrorTargetInputDict = {}
+_params_186: CreateTransitGatewayConnectInputDict = {
     "transport_transit_gateway_attachment_id": _,
     "options": _,
 }
-_params_184: CreateTransitGatewayConnectPeerInputDict = {
+_params_187: CreateTransitGatewayConnectPeerInputDict = {
     "transit_gateway_attachment_id": _,
     "peer_address": _,
     "inside_cidr_blocks": _,
 }
-_params_185: CreateTransitGatewayConnectRequestOptionsDict = {"protocol": _}
-_params_186: CreateTransitGatewayInputDict = {}
-_params_187: CreateTransitGatewayMeteringPolicyEntryInputDict = {
+_params_188: CreateTransitGatewayConnectRequestOptionsDict = {"protocol": _}
+_params_189: CreateTransitGatewayInputDict = {}
+_params_190: CreateTransitGatewayMeteringPolicyEntryInputDict = {
     "transit_gateway_metering_policy_id": _,
     "policy_rule_number": _,
     "metered_account": _,
 }
-_params_188: CreateTransitGatewayMeteringPolicyInputDict = {"transit_gateway_id": _}
-_params_189: CreateTransitGatewayMulticastDomainInputDict = {"transit_gateway_id": _}
-_params_190: CreateTransitGatewayMulticastDomainRequestOptionsDict = {}
-_params_191: CreateTransitGatewayPeeringAttachmentInputDict = {
+_params_191: CreateTransitGatewayMeteringPolicyInputDict = {"transit_gateway_id": _}
+_params_192: CreateTransitGatewayMulticastDomainInputDict = {"transit_gateway_id": _}
+_params_193: CreateTransitGatewayMulticastDomainRequestOptionsDict = {}
+_params_194: CreateTransitGatewayPeeringAttachmentInputDict = {
     "transit_gateway_id": _,
     "peer_transit_gateway_id": _,
     "peer_account_id": _,
     "peer_region": _,
 }
-_params_192: CreateTransitGatewayPeeringAttachmentRequestOptionsDict = {}
-_params_193: CreateTransitGatewayPolicyTableEntryInputDict = {
+_params_195: CreateTransitGatewayPeeringAttachmentRequestOptionsDict = {}
+_params_196: CreateTransitGatewayPolicyTableEntryInputDict = {
     "transit_gateway_policy_table_id": _,
     "policy_rule_number": _,
     "target_route_table_id": _,
 }
-_params_194: CreateTransitGatewayPolicyTableInputDict = {"transit_gateway_id": _}
-_params_195: CreateTransitGatewayPrefixListReferenceInputDict = {
+_params_197: CreateTransitGatewayPolicyTableInputDict = {"transit_gateway_id": _}
+_params_198: CreateTransitGatewayPrefixListReferenceInputDict = {
     "transit_gateway_route_table_id": _,
     "prefix_list_id": _,
 }
-_params_196: CreateTransitGatewayRouteInputDict = {
+_params_199: CreateTransitGatewayRouteInputDict = {
     "destination_cidr_block": _,
     "transit_gateway_route_table_id": _,
 }
-_params_197: CreateTransitGatewayRouteTableAnnouncementInputDict = {
+_params_200: CreateTransitGatewayRouteTableAnnouncementInputDict = {
     "transit_gateway_route_table_id": _,
     "peering_attachment_id": _,
 }
-_params_198: CreateTransitGatewayRouteTableInputDict = {"transit_gateway_id": _}
-_params_199: CreateTransitGatewayVpcAttachmentInputDict = {
+_params_201: CreateTransitGatewayRouteTableInputDict = {"transit_gateway_id": _}
+_params_202: CreateTransitGatewayVpcAttachmentInputDict = {
     "transit_gateway_id": _,
     "vpc_id": _,
     "subnet_ids": _,
 }
-_params_200: CreateTransitGatewayVpcAttachmentRequestOptionsDict = {}
-_params_201: CreateVerifiedAccessEndpointCidrOptionsDict = {}
-_params_202: CreateVerifiedAccessEndpointEniOptionsDict = {}
-_params_203: CreateVerifiedAccessEndpointInputDict = {
+_params_203: CreateTransitGatewayVpcAttachmentRequestOptionsDict = {}
+_params_204: CreateVerifiedAccessEndpointCidrOptionsDict = {}
+_params_205: CreateVerifiedAccessEndpointEniOptionsDict = {}
+_params_206: CreateVerifiedAccessEndpointInputDict = {
     "verified_access_group_id": _,
     "endpoint_type": _,
     "attachment_type": _,
 }
-_params_204: CreateVerifiedAccessEndpointLoadBalancerOptionsDict = {}
-_params_205: CreateVerifiedAccessEndpointPortRangeDict = {}
-_params_206: CreateVerifiedAccessEndpointRdsOptionsDict = {}
-_params_207: CreateVerifiedAccessGroupInputDict = {"verified_access_instance_id": _}
-_params_208: CreateVerifiedAccessInstanceInputDict = {}
-_params_209: CreateVerifiedAccessNativeApplicationOidcOptionsDict = {}
-_params_210: CreateVerifiedAccessTrustProviderDeviceOptionsDict = {}
-_params_211: CreateVerifiedAccessTrustProviderInputDict = {
+_params_207: CreateVerifiedAccessEndpointLoadBalancerOptionsDict = {}
+_params_208: CreateVerifiedAccessEndpointPortRangeDict = {}
+_params_209: CreateVerifiedAccessEndpointRdsOptionsDict = {}
+_params_210: CreateVerifiedAccessGroupInputDict = {"verified_access_instance_id": _}
+_params_211: CreateVerifiedAccessInstanceInputDict = {}
+_params_212: CreateVerifiedAccessNativeApplicationOidcOptionsDict = {}
+_params_213: CreateVerifiedAccessTrustProviderDeviceOptionsDict = {}
+_params_214: CreateVerifiedAccessTrustProviderInputDict = {
     "trust_provider_type": _,
     "policy_reference_name": _,
 }
-_params_212: CreateVerifiedAccessTrustProviderOidcOptionsDict = {}
-_params_213: CreateVolumeInputDict = {}
-_params_214: CreateVolumePermissionDict = {}
-_params_215: CreateVolumePermissionModificationsDict = {}
-_params_216: CreateVpcBlockPublicAccessExclusionInputDict = {
+_params_215: CreateVerifiedAccessTrustProviderOidcOptionsDict = {}
+_params_216: CreateVolumeInputDict = {}
+_params_217: CreateVolumePermissionDict = {}
+_params_218: CreateVolumePermissionModificationsDict = {}
+_params_219: CreateVpcBlockPublicAccessExclusionInputDict = {
     "internet_gateway_exclusion_mode": _
 }
-_params_217: CreateVpcEncryptionControlInputDict = {"vpc_id": _}
-_params_218: CreateVpcEndpointConnectionNotificationInputDict = {
+_params_220: CreateVpcEncryptionControlInputDict = {"vpc_id": _}
+_params_221: CreateVpcEndpointConnectionNotificationInputDict = {
     "connection_notification_arn": _,
     "connection_events": _,
 }
-_params_219: CreateVpcEndpointInputDict = {"vpc_id": _}
-_params_220: CreateVpcEndpointServiceConfigurationInputDict = {}
-_params_221: CreateVpcInputDict = {}
-_params_222: CreateVpcPeeringConnectionInputDict = {"vpc_id": _}
-_params_223: CreateVpnConcentratorInputDict = {"type": _}
-_params_224: CreateVpnConnectionInputDict = {"customer_gateway_id": _, "type": _}
-_params_225: CreateVpnConnectionRouteInputDict = {
+_params_222: CreateVpcEndpointInputDict = {"vpc_id": _}
+_params_223: CreateVpcEndpointServiceConfigurationInputDict = {}
+_params_224: CreateVpcInputDict = {}
+_params_225: CreateVpcPeeringConnectionInputDict = {"vpc_id": _}
+_params_226: CreateVpnConcentratorInputDict = {"type": _}
+_params_227: CreateVpnConnectionInputDict = {"customer_gateway_id": _, "type": _}
+_params_228: CreateVpnConnectionRouteInputDict = {
     "destination_cidr_block": _,
     "vpn_connection_id": _,
 }
-_params_226: CreateVpnGatewayInputDict = {"type": _}
-_params_227: CreationDateConditionRequestDict = {}
-_params_228: CreditSpecificationRequestDict = {"cpu_credits": _}
-_params_229: CustomTagKeyValueRequestPairDict = {}
-_params_230: DataQueryDict = {}
-_params_231: DeleteApplicationStatusCheckInputDict = {"application_status_check_id": _}
-_params_232: DeleteCapacityManagerDataExportInputDict = {
+_params_229: CreateVpnGatewayInputDict = {"type": _}
+_params_230: CreationDateConditionRequestDict = {}
+_params_231: CreditSpecificationRequestDict = {"cpu_credits": _}
+_params_232: CustomTagKeyValueRequestPairDict = {}
+_params_233: DataQueryDict = {}
+_params_234: DeleteApplicationStatusCheckInputDict = {"application_status_check_id": _}
+_params_235: DeleteCapacityManagerDataExportInputDict = {
     "capacity_manager_data_export_id": _
 }
-_params_233: DeleteCarrierGatewayInputDict = {"carrier_gateway_id": _}
-_params_234: DeleteClientVpnEndpointAuthorizationPolicyInputDict = {
+_params_236: DeleteCarrierGatewayInputDict = {"carrier_gateway_id": _}
+_params_237: DeleteClientVpnEndpointAuthorizationPolicyInputDict = {
     "client_vpn_endpoint_id": _
 }
-_params_235: DeleteClientVpnEndpointInputDict = {"client_vpn_endpoint_id": _}
-_params_236: DeleteClientVpnRouteInputDict = {
+_params_238: DeleteClientVpnEndpointInputDict = {"client_vpn_endpoint_id": _}
+_params_239: DeleteClientVpnRouteInputDict = {
     "client_vpn_endpoint_id": _,
     "destination_cidr_block": _,
 }
-_params_237: DeleteCoipCidrInputDict = {"cidr": _, "coip_pool_id": _}
-_params_238: DeleteCoipPoolInputDict = {"coip_pool_id": _}
-_params_239: DeleteCustomerGatewayInputDict = {"customer_gateway_id": _}
-_params_240: DeleteDhcpOptionsInputDict = {"dhcp_options_id": _}
-_params_241: DeleteEgressOnlyInternetGatewayInputDict = {
+_params_240: DeleteCoipCidrInputDict = {"cidr": _, "coip_pool_id": _}
+_params_241: DeleteCoipPoolInputDict = {"coip_pool_id": _}
+_params_242: DeleteCustomerGatewayInputDict = {"customer_gateway_id": _}
+_params_243: DeleteDhcpOptionsInputDict = {"dhcp_options_id": _}
+_params_244: DeleteEgressOnlyInternetGatewayInputDict = {
     "egress_only_internet_gateway_id": _
 }
-_params_242: DeleteFleetsInputDict = {"fleet_ids": _, "terminate_instances": _}
-_params_243: DeleteFlowLogsInputDict = {"flow_log_ids": _}
-_params_244: DeleteFpgaImageInputDict = {"fpga_image_id": _}
-_params_245: DeleteImageUsageReportInputDict = {"report_id": _}
-_params_246: DeleteInstanceConnectEndpointInputDict = {
+_params_245: DeleteFleetsInputDict = {"fleet_ids": _, "terminate_instances": _}
+_params_246: DeleteFlowLogsInputDict = {"flow_log_ids": _}
+_params_247: DeleteFpgaImageInputDict = {"fpga_image_id": _}
+_params_248: DeleteImageUsageReportInputDict = {"report_id": _}
+_params_249: DeleteInstanceConnectEndpointInputDict = {
     "instance_connect_endpoint_id": _
 }
-_params_247: DeleteInstanceEventWindowInputDict = {"instance_event_window_id": _}
-_params_248: DeleteInternetGatewayInputDict = {"internet_gateway_id": _}
-_params_249: DeleteIpamExternalResourceVerificationTokenInputDict = {
+_params_250: DeleteInstanceEventWindowInputDict = {"instance_event_window_id": _}
+_params_251: DeleteInternetGatewayInputDict = {"internet_gateway_id": _}
+_params_252: DeleteIpamExternalResourceVerificationTokenInputDict = {
     "ipam_external_resource_verification_token_id": _
 }
-_params_250: DeleteIpamInputDict = {"ipam_id": _}
-_params_251: DeleteIpamInternetRegistryAssociationInputDict = {
+_params_253: DeleteIpamInputDict = {"ipam_id": _}
+_params_254: DeleteIpamInternetRegistryAssociationInputDict = {
     "ipam_internet_registry_association_id": _
 }
-_params_252: DeleteIpamPolicyInputDict = {"ipam_policy_id": _}
-_params_253: DeleteIpamPoolInputDict = {"ipam_pool_id": _}
-_params_254: DeleteIpamPrefixListResolverInputDict = {"ipam_prefix_list_resolver_id": _}
-_params_255: DeleteIpamPrefixListResolverTargetInputDict = {
+_params_255: DeleteIpamPolicyInputDict = {"ipam_policy_id": _}
+_params_256: DeleteIpamPoolInputDict = {"ipam_pool_id": _}
+_params_257: DeleteIpamPrefixListResolverInputDict = {"ipam_prefix_list_resolver_id": _}
+_params_258: DeleteIpamPrefixListResolverTargetInputDict = {
     "ipam_prefix_list_resolver_target_id": _
 }
-_params_256: DeleteIpamResourceDiscoveryInputDict = {"ipam_resource_discovery_id": _}
-_params_257: DeleteIpamRoutingPolicyRegistrationInputDict = {
+_params_259: DeleteIpamResourceDiscoveryInputDict = {"ipam_resource_discovery_id": _}
+_params_260: DeleteIpamRoutingPolicyRegistrationInputDict = {
     "ipam_internet_registry_association_id": _,
     "cidr": _,
 }
-_params_258: DeleteIpamScopeInputDict = {"ipam_scope_id": _}
-_params_259: DeleteKeyPairInputDict = {}
-_params_260: DeleteLaunchTemplateInputDict = {}
-_params_261: DeleteLaunchTemplateVersionsInputDict = {"versions": _}
-_params_262: DeleteLocalGatewayRouteInputDict = {"local_gateway_route_table_id": _}
-_params_263: DeleteLocalGatewayRouteTableInputDict = {"local_gateway_route_table_id": _}
-_params_264: DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationInputDict = {
+_params_261: DeleteIpamScopeInputDict = {"ipam_scope_id": _}
+_params_262: DeleteKeyPairInputDict = {}
+_params_263: DeleteLaunchTemplateInputDict = {}
+_params_264: DeleteLaunchTemplateVersionsInputDict = {"versions": _}
+_params_265: DeleteLocalGatewayRouteInputDict = {"local_gateway_route_table_id": _}
+_params_266: DeleteLocalGatewayRouteTableInputDict = {"local_gateway_route_table_id": _}
+_params_267: DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationInputDict = {
     "local_gateway_route_table_virtual_interface_group_association_id": _
 }
-_params_265: DeleteLocalGatewayRouteTableVpcAssociationInputDict = {
+_params_268: DeleteLocalGatewayRouteTableVpcAssociationInputDict = {
     "local_gateway_route_table_vpc_association_id": _
 }
-_params_266: DeleteLocalGatewayVirtualInterfaceGroupInputDict = {
+_params_269: DeleteLocalGatewayVirtualInterfaceGroupInputDict = {
     "local_gateway_virtual_interface_group_id": _
 }
-_params_267: DeleteLocalGatewayVirtualInterfaceInputDict = {
+_params_270: DeleteLocalGatewayVirtualInterfaceInputDict = {
     "local_gateway_virtual_interface_id": _
 }
-_params_268: DeleteManagedPrefixListInputDict = {"prefix_list_id": _}
-_params_269: DeleteNatGatewayInputDict = {"nat_gateway_id": _}
-_params_270: DeleteNetworkAclEntryInputDict = {
+_params_271: DeleteManagedPrefixListInputDict = {"prefix_list_id": _}
+_params_272: DeleteMetricCategoryInputDict = {"metric_category_id": _}
+_params_273: DeleteNatGatewayInputDict = {"nat_gateway_id": _}
+_params_274: DeleteNetworkAclEntryInputDict = {
     "network_acl_id": _,
     "rule_number": _,
     "egress": _,
 }
-_params_271: DeleteNetworkAclInputDict = {"network_acl_id": _}
-_params_272: DeleteNetworkInsightsAccessScopeAnalysisInputDict = {
+_params_275: DeleteNetworkAclInputDict = {"network_acl_id": _}
+_params_276: DeleteNetworkingFlexCostAllocationPoliciesInputDict = {"fca_policy_ids": _}
+_params_277: DeleteNetworkInsightsAccessScopeAnalysisInputDict = {
     "network_insights_access_scope_analysis_id": _
 }
-_params_273: DeleteNetworkInsightsAccessScopeInputDict = {
+_params_278: DeleteNetworkInsightsAccessScopeInputDict = {
     "network_insights_access_scope_id": _
 }
-_params_274: DeleteNetworkInsightsAnalysisInputDict = {
+_params_279: DeleteNetworkInsightsAnalysisInputDict = {
     "network_insights_analysis_id": _
 }
-_params_275: DeleteNetworkInsightsPathInputDict = {"network_insights_path_id": _}
-_params_276: DeleteNetworkInterfaceInputDict = {"network_interface_id": _}
-_params_277: DeleteNetworkInterfacePermissionInputDict = {
+_params_280: DeleteNetworkInsightsPathInputDict = {"network_insights_path_id": _}
+_params_281: DeleteNetworkInterfaceInputDict = {"network_interface_id": _}
+_params_282: DeleteNetworkInterfacePermissionInputDict = {
     "network_interface_permission_id": _
 }
-_params_278: DeletePlacementGroupInputDict = {"group_name": _}
-_params_279: DeletePublicIpv4PoolInputDict = {"pool_id": _}
-_params_280: DeleteQueuedReservedInstancesInputDict = {"reserved_instances_ids": _}
-_params_281: DeleteRouteInputDict = {"route_table_id": _}
-_params_282: DeleteRouteServerEndpointInputDict = {"route_server_endpoint_id": _}
-_params_283: DeleteRouteServerInputDict = {"route_server_id": _}
-_params_284: DeleteRouteServerPeerInputDict = {"route_server_peer_id": _}
-_params_285: DeleteRouteTableInputDict = {"route_table_id": _}
-_params_286: DeleteSecondaryNetworkInputDict = {"secondary_network_id": _}
-_params_287: DeleteSecondarySubnetInputDict = {"secondary_subnet_id": _}
-_params_288: DeleteSecurityGroupInputDict = {}
-_params_289: DeleteSnapshotInputDict = {"snapshot_id": _}
-_params_290: DeleteSpotDatafeedSubscriptionInputDict = {}
-_params_291: DeleteSubnetCidrReservationInputDict = {"subnet_cidr_reservation_id": _}
-_params_292: DeleteSubnetInputDict = {"subnet_id": _}
-_params_293: DeleteTagsInputDict = {"resources": _}
-_params_294: DeleteTrafficMirrorFilterInputDict = {"traffic_mirror_filter_id": _}
-_params_295: DeleteTrafficMirrorFilterRuleInputDict = {
+_params_283: DeletePlacementGroupInputDict = {"group_name": _}
+_params_284: DeletePublicIpv4PoolInputDict = {"pool_id": _}
+_params_285: DeleteQueuedReservedInstancesInputDict = {"reserved_instances_ids": _}
+_params_286: DeleteRouteInputDict = {"route_table_id": _}
+_params_287: DeleteRouteServerEndpointInputDict = {"route_server_endpoint_id": _}
+_params_288: DeleteRouteServerInputDict = {"route_server_id": _}
+_params_289: DeleteRouteServerPeerInputDict = {"route_server_peer_id": _}
+_params_290: DeleteRouteTableInputDict = {"route_table_id": _}
+_params_291: DeleteSecondaryNetworkInputDict = {"secondary_network_id": _}
+_params_292: DeleteSecondarySubnetInputDict = {"secondary_subnet_id": _}
+_params_293: DeleteSecurityGroupInputDict = {}
+_params_294: DeleteSnapshotInputDict = {"snapshot_id": _}
+_params_295: DeleteSpotDatafeedSubscriptionInputDict = {}
+_params_296: DeleteSubnetCidrReservationInputDict = {"subnet_cidr_reservation_id": _}
+_params_297: DeleteSubnetInputDict = {"subnet_id": _}
+_params_298: DeleteTagsInputDict = {"resources": _}
+_params_299: DeleteTrafficMirrorFilterInputDict = {"traffic_mirror_filter_id": _}
+_params_300: DeleteTrafficMirrorFilterRuleInputDict = {
     "traffic_mirror_filter_rule_id": _
 }
-_params_296: DeleteTrafficMirrorSessionInputDict = {"traffic_mirror_session_id": _}
-_params_297: DeleteTrafficMirrorTargetInputDict = {"traffic_mirror_target_id": _}
-_params_298: DeleteTransitGatewayClientVpnAttachmentInputDict = {
+_params_301: DeleteTrafficMirrorSessionInputDict = {"traffic_mirror_session_id": _}
+_params_302: DeleteTrafficMirrorTargetInputDict = {"traffic_mirror_target_id": _}
+_params_303: DeleteTransitGatewayClientVpnAttachmentInputDict = {
     "transit_gateway_attachment_id": _
 }
-_params_299: DeleteTransitGatewayConnectInputDict = {"transit_gateway_attachment_id": _}
-_params_300: DeleteTransitGatewayConnectPeerInputDict = {
+_params_304: DeleteTransitGatewayConnectInputDict = {"transit_gateway_attachment_id": _}
+_params_305: DeleteTransitGatewayConnectPeerInputDict = {
     "transit_gateway_connect_peer_id": _
 }
-_params_301: DeleteTransitGatewayInputDict = {"transit_gateway_id": _}
-_params_302: DeleteTransitGatewayMeteringPolicyEntryInputDict = {
+_params_306: DeleteTransitGatewayInputDict = {"transit_gateway_id": _}
+_params_307: DeleteTransitGatewayMeteringPolicyEntryInputDict = {
     "transit_gateway_metering_policy_id": _,
     "policy_rule_number": _,
 }
-_params_303: DeleteTransitGatewayMeteringPolicyInputDict = {
+_params_308: DeleteTransitGatewayMeteringPolicyInputDict = {
     "transit_gateway_metering_policy_id": _
 }
-_params_304: DeleteTransitGatewayMulticastDomainInputDict = {
+_params_309: DeleteTransitGatewayMulticastDomainInputDict = {
     "transit_gateway_multicast_domain_id": _
 }
-_params_305: DeleteTransitGatewayPeeringAttachmentInputDict = {
+_params_310: DeleteTransitGatewayPeeringAttachmentInputDict = {
     "transit_gateway_attachment_id": _
 }
-_params_306: DeleteTransitGatewayPolicyTableEntryInputDict = {
+_params_311: DeleteTransitGatewayPolicyTableEntryInputDict = {
     "transit_gateway_policy_table_id": _,
     "policy_rule_number": _,
 }
-_params_307: DeleteTransitGatewayPolicyTableInputDict = {
+_params_312: DeleteTransitGatewayPolicyTableInputDict = {
     "transit_gateway_policy_table_id": _
 }
-_params_308: DeleteTransitGatewayPrefixListReferenceInputDict = {
+_params_313: DeleteTransitGatewayPrefixListReferenceInputDict = {
     "transit_gateway_route_table_id": _,
     "prefix_list_id": _,
 }
-_params_309: DeleteTransitGatewayRouteInputDict = {
+_params_314: DeleteTransitGatewayRouteInputDict = {
     "transit_gateway_route_table_id": _,
     "destination_cidr_block": _,
 }
-_params_310: DeleteTransitGatewayRouteTableAnnouncementInputDict = {
+_params_315: DeleteTransitGatewayRouteTableAnnouncementInputDict = {
     "transit_gateway_route_table_announcement_id": _
 }
-_params_311: DeleteTransitGatewayRouteTableInputDict = {
+_params_316: DeleteTransitGatewayRouteTableInputDict = {
     "transit_gateway_route_table_id": _
 }
-_params_312: DeleteTransitGatewayVpcAttachmentInputDict = {
+_params_317: DeleteTransitGatewayVpcAttachmentInputDict = {
     "transit_gateway_attachment_id": _
 }
-_params_313: DeleteVerifiedAccessEndpointInputDict = {"verified_access_endpoint_id": _}
-_params_314: DeleteVerifiedAccessGroupInputDict = {"verified_access_group_id": _}
-_params_315: DeleteVerifiedAccessInstanceInputDict = {"verified_access_instance_id": _}
-_params_316: DeleteVerifiedAccessTrustProviderInputDict = {
+_params_318: DeleteVerifiedAccessEndpointInputDict = {"verified_access_endpoint_id": _}
+_params_319: DeleteVerifiedAccessGroupInputDict = {"verified_access_group_id": _}
+_params_320: DeleteVerifiedAccessInstanceInputDict = {"verified_access_instance_id": _}
+_params_321: DeleteVerifiedAccessTrustProviderInputDict = {
     "verified_access_trust_provider_id": _
 }
-_params_317: DeleteVolumeInputDict = {"volume_id": _}
-_params_318: DeleteVpcBlockPublicAccessExclusionInputDict = {"exclusion_id": _}
-_params_319: DeleteVpcEncryptionControlInputDict = {"vpc_encryption_control_id": _}
-_params_320: DeleteVpcEndpointConnectionNotificationsInputDict = {
+_params_322: DeleteVolumeInputDict = {"volume_id": _}
+_params_323: DeleteVpcBlockPublicAccessExclusionInputDict = {"exclusion_id": _}
+_params_324: DeleteVpcEncryptionControlInputDict = {"vpc_encryption_control_id": _}
+_params_325: DeleteVpcEndpointConnectionNotificationsInputDict = {
     "connection_notification_ids": _
 }
-_params_321: DeleteVpcEndpointServiceConfigurationsInputDict = {"service_ids": _}
-_params_322: DeleteVpcEndpointsInputDict = {"vpc_endpoint_ids": _}
-_params_323: DeleteVpcInputDict = {"vpc_id": _}
-_params_324: DeleteVpcPeeringConnectionInputDict = {"vpc_peering_connection_id": _}
-_params_325: DeleteVpnConcentratorInputDict = {"vpn_concentrator_id": _}
-_params_326: DeleteVpnConnectionInputDict = {"vpn_connection_id": _}
-_params_327: DeleteVpnConnectionRouteInputDict = {
+_params_326: DeleteVpcEndpointServiceConfigurationsInputDict = {"service_ids": _}
+_params_327: DeleteVpcEndpointsInputDict = {"vpc_endpoint_ids": _}
+_params_328: DeleteVpcInputDict = {"vpc_id": _}
+_params_329: DeleteVpcPeeringConnectionInputDict = {"vpc_peering_connection_id": _}
+_params_330: DeleteVpnConcentratorInputDict = {"vpn_concentrator_id": _}
+_params_331: DeleteVpnConnectionInputDict = {"vpn_connection_id": _}
+_params_332: DeleteVpnConnectionRouteInputDict = {
     "destination_cidr_block": _,
     "vpn_connection_id": _,
 }
-_params_328: DeleteVpnGatewayInputDict = {"vpn_gateway_id": _}
-_params_329: DeprecationTimeConditionRequestDict = {}
-_params_330: DeprovisionByoipCidrInputDict = {"cidr": _}
-_params_331: DeprovisionIpamByoasnInputDict = {"ipam_id": _, "asn": _}
-_params_332: DeprovisionIpamPoolCidrInputDict = {"ipam_pool_id": _}
-_params_333: DeprovisionPublicIpv4PoolCidrInputDict = {"pool_id": _, "cidr": _}
-_params_334: DeregisterImageInputDict = {"image_id": _}
-_params_335: DeregisterInstanceEventNotificationAttributesInputDict = {
+_params_333: DeleteVpnGatewayInputDict = {"vpn_gateway_id": _}
+_params_334: DeprecationTimeConditionRequestDict = {}
+_params_335: DeprovisionByoipCidrInputDict = {"cidr": _}
+_params_336: DeprovisionIpamByoasnInputDict = {"ipam_id": _, "asn": _}
+_params_337: DeprovisionIpamPoolCidrInputDict = {"ipam_pool_id": _}
+_params_338: DeprovisionPublicIpv4PoolCidrInputDict = {"pool_id": _, "cidr": _}
+_params_339: DeregisterImageInputDict = {"image_id": _}
+_params_340: DeregisterInstanceEventNotificationAttributesInputDict = {
     "instance_tag_attribute": _
 }
-_params_336: DeregisterInstanceTagAttributeRequestDict = {}
-_params_337: DeregisterTransitGatewayMulticastGroupMembersInputDict = {}
-_params_338: DeregisterTransitGatewayMulticastGroupSourcesInputDict = {}
-_params_339: DescribeAccountAttributesInputDict = {}
-_params_340: DescribeAccountVpcEncryptionControlInputDict = {}
-_params_341: DescribeAddressesAttributeInputDict = {}
-_params_342: DescribeAddressesInputDict = {}
-_params_343: DescribeAddressTransfersInputDict = {}
-_params_344: DescribeAggregateIdFormatInputDict = {}
-_params_345: DescribeApplicationStatusCheckAssociationsInputDict = {}
-_params_346: DescribeApplicationStatusChecksInputDict = {}
-_params_347: DescribeApplicationStatusInputDict = {}
-_params_348: DescribeAvailabilityZonesInputDict = {}
-_params_349: DescribeAwsNetworkPerformanceMetricSubscriptionsInputDict = {}
-_params_350: DescribeBundleTasksInputDict = {}
-_params_351: DescribeByoipCidrsInputDict = {"max_results": _}
-_params_352: DescribeCapacityBlockExtensionHistoryInputDict = {}
-_params_353: DescribeCapacityBlockExtensionOfferingsInputDict = {
+_params_341: DeregisterInstanceTagAttributeRequestDict = {}
+_params_342: DeregisterTransitGatewayMulticastGroupMembersInputDict = {}
+_params_343: DeregisterTransitGatewayMulticastGroupSourcesInputDict = {}
+_params_344: DescribeAccountAttributesInputDict = {}
+_params_345: DescribeAccountVpcEncryptionControlInputDict = {}
+_params_346: DescribeAddressesAttributeInputDict = {}
+_params_347: DescribeAddressesInputDict = {}
+_params_348: DescribeAddressTransfersInputDict = {}
+_params_349: DescribeAggregateIdFormatInputDict = {}
+_params_350: DescribeApplicationStatusCheckAssociationsInputDict = {}
+_params_351: DescribeApplicationStatusChecksInputDict = {}
+_params_352: DescribeApplicationStatusInputDict = {}
+_params_353: DescribeAvailabilityZonesInputDict = {}
+_params_354: DescribeAwsNetworkPerformanceMetricSubscriptionsInputDict = {}
+_params_355: DescribeBundleTasksInputDict = {}
+_params_356: DescribeByoipCidrsInputDict = {"max_results": _}
+_params_357: DescribeCapacityBlockExtensionHistoryInputDict = {}
+_params_358: DescribeCapacityBlockExtensionOfferingsInputDict = {
     "capacity_block_extension_duration_hours": _,
     "capacity_reservation_id": _,
 }
-_params_354: DescribeCapacityBlockOfferingsInputDict = {"capacity_duration_hours": _}
-_params_355: DescribeCapacityBlocksInputDict = {}
-_params_356: DescribeCapacityBlockStatusInputDict = {}
-_params_357: DescribeCapacityManagerDataExportsInputDict = {}
-_params_358: DescribeCapacityReservationBillingRequestsInputDict = {"role": _}
-_params_359: DescribeCapacityReservationCancellationQuotesInputDict = {}
-_params_360: DescribeCapacityReservationDateChangeQuotesInputDict = {}
-_params_361: DescribeCapacityReservationFleetsInputDict = {}
-_params_362: DescribeCapacityReservationsInputDict = {}
-_params_363: DescribeCapacityReservationTopologyInputDict = {}
-_params_364: DescribeCarrierGatewaysInputDict = {}
-_params_365: DescribeClassicLinkInstancesInputDict = {}
-_params_366: DescribeClientVpnAuthorizationRulesInputDict = {
+_params_359: DescribeCapacityBlockOfferingsInputDict = {"capacity_duration_hours": _}
+_params_360: DescribeCapacityBlocksInputDict = {}
+_params_361: DescribeCapacityBlockStatusInputDict = {}
+_params_362: DescribeCapacityManagerDataExportsInputDict = {}
+_params_363: DescribeCapacityReservationBillingRequestsInputDict = {"role": _}
+_params_364: DescribeCapacityReservationCancellationQuotesInputDict = {}
+_params_365: DescribeCapacityReservationDateChangeQuotesInputDict = {}
+_params_366: DescribeCapacityReservationFleetsInputDict = {}
+_params_367: DescribeCapacityReservationsInputDict = {}
+_params_368: DescribeCapacityReservationTopologyInputDict = {}
+_params_369: DescribeCarrierGatewaysInputDict = {}
+_params_370: DescribeClassicLinkInstancesInputDict = {}
+_params_371: DescribeClientVpnAuthorizationRulesInputDict = {
     "client_vpn_endpoint_id": _
 }
-_params_367: DescribeClientVpnConnectionsInputDict = {"client_vpn_endpoint_id": _}
-_params_368: DescribeClientVpnEndpointsInputDict = {}
-_params_369: DescribeClientVpnRoutesInputDict = {"client_vpn_endpoint_id": _}
-_params_370: DescribeClientVpnTargetNetworksInputDict = {"client_vpn_endpoint_id": _}
-_params_371: DescribeCoipPoolsInputDict = {}
-_params_372: DescribeConversionTasksInputDict = {}
-_params_373: DescribeCustomerGatewaysInputDict = {}
-_params_374: DescribeDeclarativePoliciesReportsInputDict = {}
-_params_375: DescribeDhcpOptionsInputDict = {}
-_params_376: DescribeEgressOnlyInternetGatewaysInputDict = {}
-_params_377: DescribeElasticGpusInputDict = {}
-_params_378: DescribeExportImageTasksInputDict = {}
-_params_379: DescribeExportTasksInputDict = {}
-_params_380: DescribeFastLaunchImagesInputDict = {}
-_params_381: DescribeFastSnapshotRestoresInputDict = {}
-_params_382: DescribeFleetHistoryInputDict = {"fleet_id": _, "start_time": _}
-_params_383: DescribeFleetInstancesInputDict = {"fleet_id": _}
-_params_384: DescribeFleetsInputDict = {}
-_params_385: DescribeFlowLogsInputDict = {}
-_params_386: DescribeFpgaImageAttributeInputDict = {"fpga_image_id": _, "attribute": _}
-_params_387: DescribeFpgaImagesInputDict = {}
-_params_388: DescribeHostReservationOfferingsInputDict = {}
-_params_389: DescribeHostReservationsInputDict = {}
-_params_390: DescribeHostsInputDict = {}
-_params_391: DescribeIamInstanceProfileAssociationsInputDict = {}
-_params_392: DescribeIdentityIdFormatInputDict = {"principal_arn": _}
-_params_393: DescribeIdFormatInputDict = {}
-_params_394: DescribeImageAttributeInputDict = {"attribute": _, "image_id": _}
-_params_395: DescribeImageReferencesInputDict = {"image_ids": _}
-_params_396: DescribeImagesInputDict = {}
-_params_397: DescribeImageUsageReportEntriesInputDict = {}
-_params_398: DescribeImageUsageReportsInputDict = {}
-_params_399: DescribeImportImageTasksInputDict = {}
-_params_400: DescribeImportSnapshotTasksInputDict = {}
-_params_401: DescribeInstanceAttributeInputDict = {"instance_id": _, "attribute": _}
-_params_402: DescribeInstanceConnectEndpointsInputDict = {}
-_params_403: DescribeInstanceCreditSpecificationsInputDict = {}
-_params_404: DescribeInstanceEventNotificationAttributesInputDict = {}
-_params_405: DescribeInstanceEventWindowsInputDict = {}
-_params_406: DescribeInstanceImageMetadataInputDict = {}
-_params_407: DescribeInstancesInputDict = {}
-_params_408: DescribeInstanceSqlHaHistoryStatesInputDict = {}
-_params_409: DescribeInstanceSqlHaStatesInputDict = {}
-_params_410: DescribeInstanceStatusInputDict = {}
-_params_411: DescribeInstanceTopologyInputDict = {}
-_params_412: DescribeInstanceTypeOfferingsInputDict = {}
-_params_413: DescribeInstanceTypesInputDict = {}
-_params_414: DescribeInternetGatewaysInputDict = {}
-_params_415: DescribeIpamByoasnInputDict = {}
-_params_416: DescribeIpamExternalResourceVerificationTokensInputDict = {}
-_params_417: DescribeIpamInternetRegistryAssociationsInputDict = {}
-_params_418: DescribeIpamPoliciesInputDict = {}
-_params_419: DescribeIpamPoolAllocationsInputDict = {}
-_params_420: DescribeIpamPoolsInputDict = {}
-_params_421: DescribeIpamPrefixListResolversInputDict = {}
-_params_422: DescribeIpamPrefixListResolverTargetsInputDict = {}
-_params_423: DescribeIpamResourceDiscoveriesInputDict = {}
-_params_424: DescribeIpamResourceDiscoveryAssociationsInputDict = {}
-_params_425: DescribeIpamScopesInputDict = {}
-_params_426: DescribeIpamsInputDict = {}
-_params_427: DescribeIpv6PoolsInputDict = {}
-_params_428: DescribeKeyPairsInputDict = {}
-_params_429: DescribeLaunchTemplatesInputDict = {}
-_params_430: DescribeLaunchTemplateVersionsInputDict = {}
-_params_431: DescribeLocalGatewayRouteTablesInputDict = {}
-_params_432: DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsInputDict = {}
-_params_433: DescribeLocalGatewayRouteTableVpcAssociationsInputDict = {}
-_params_434: DescribeLocalGatewaysInputDict = {}
-_params_435: DescribeLocalGatewayVirtualInterfaceGroupsInputDict = {}
-_params_436: DescribeLocalGatewayVirtualInterfacesInputDict = {}
-_params_437: DescribeLockedSnapshotsInputDict = {}
-_params_438: DescribeMacHostsInputDict = {}
-_params_439: DescribeMacModificationTasksInputDict = {}
-_params_440: DescribeManagedPrefixListsInputDict = {}
-_params_441: DescribeMovingAddressesInputDict = {}
-_params_442: DescribeNatGatewaysInputDict = {}
-_params_443: DescribeNetworkAclsInputDict = {}
-_params_444: DescribeNetworkInsightsAccessScopeAnalysesInputDict = {}
-_params_445: DescribeNetworkInsightsAccessScopesInputDict = {}
-_params_446: DescribeNetworkInsightsAnalysesInputDict = {}
-_params_447: DescribeNetworkInsightsPathsInputDict = {}
-_params_448: DescribeNetworkInterfaceAttributeInputDict = {"network_interface_id": _}
-_params_449: DescribeNetworkInterfacePermissionsInputDict = {}
-_params_450: DescribeNetworkInterfacesInputDict = {}
-_params_451: DescribeOutpostLagsInputDict = {}
-_params_452: DescribePlacementGroupsInputDict = {}
-_params_453: DescribePrefixListsInputDict = {}
-_params_454: DescribePrincipalIdFormatInputDict = {}
-_params_455: DescribePublicIpv4PoolsInputDict = {}
-_params_456: DescribeRegionsInputDict = {}
-_params_457: DescribeReplaceRootVolumeTasksInputDict = {}
-_params_458: DescribeReservedInstancesInputDict = {}
-_params_459: DescribeReservedInstancesListingsInputDict = {}
-_params_460: DescribeReservedInstancesModificationsInputDict = {}
-_params_461: DescribeReservedInstancesOfferingsInputDict = {}
-_params_462: DescribeRouteServerEndpointsInputDict = {}
-_params_463: DescribeRouteServerPeersInputDict = {}
-_params_464: DescribeRouteServersInputDict = {}
-_params_465: DescribeRouteTablesInputDict = {}
-_params_466: DescribeScheduledInstanceAvailabilityInputDict = {
+_params_372: DescribeClientVpnConnectionsInputDict = {"client_vpn_endpoint_id": _}
+_params_373: DescribeClientVpnEndpointsInputDict = {}
+_params_374: DescribeClientVpnRoutesInputDict = {"client_vpn_endpoint_id": _}
+_params_375: DescribeClientVpnTargetNetworksInputDict = {"client_vpn_endpoint_id": _}
+_params_376: DescribeCoipPoolsInputDict = {}
+_params_377: DescribeConversionTasksInputDict = {}
+_params_378: DescribeCustomerGatewaysInputDict = {}
+_params_379: DescribeDeclarativePoliciesReportsInputDict = {}
+_params_380: DescribeDhcpOptionsInputDict = {}
+_params_381: DescribeEgressOnlyInternetGatewaysInputDict = {}
+_params_382: DescribeElasticGpusInputDict = {}
+_params_383: DescribeExportImageTasksInputDict = {}
+_params_384: DescribeExportTasksInputDict = {}
+_params_385: DescribeFastLaunchImagesInputDict = {}
+_params_386: DescribeFastSnapshotRestoresInputDict = {}
+_params_387: DescribeFleetHistoryInputDict = {"fleet_id": _, "start_time": _}
+_params_388: DescribeFleetInstancesInputDict = {"fleet_id": _}
+_params_389: DescribeFleetsInputDict = {}
+_params_390: DescribeFlowLogsInputDict = {}
+_params_391: DescribeFpgaImageAttributeInputDict = {"fpga_image_id": _, "attribute": _}
+_params_392: DescribeFpgaImagesInputDict = {}
+_params_393: DescribeHostReservationOfferingsInputDict = {}
+_params_394: DescribeHostReservationsInputDict = {}
+_params_395: DescribeHostsInputDict = {}
+_params_396: DescribeIamInstanceProfileAssociationsInputDict = {}
+_params_397: DescribeIdentityIdFormatInputDict = {"principal_arn": _}
+_params_398: DescribeIdFormatInputDict = {}
+_params_399: DescribeImageAttributeInputDict = {"attribute": _, "image_id": _}
+_params_400: DescribeImageReferencesInputDict = {"image_ids": _}
+_params_401: DescribeImagesInputDict = {}
+_params_402: DescribeImageUsageReportEntriesInputDict = {}
+_params_403: DescribeImageUsageReportsInputDict = {}
+_params_404: DescribeImportImageTasksInputDict = {}
+_params_405: DescribeImportSnapshotTasksInputDict = {}
+_params_406: DescribeInstanceAttributeInputDict = {"instance_id": _, "attribute": _}
+_params_407: DescribeInstanceConnectEndpointsInputDict = {}
+_params_408: DescribeInstanceCreditSpecificationsInputDict = {}
+_params_409: DescribeInstanceEventNotificationAttributesInputDict = {}
+_params_410: DescribeInstanceEventWindowsInputDict = {}
+_params_411: DescribeInstanceImageMetadataInputDict = {}
+_params_412: DescribeInstancesInputDict = {}
+_params_413: DescribeInstanceSqlHaHistoryStatesInputDict = {}
+_params_414: DescribeInstanceSqlHaStatesInputDict = {}
+_params_415: DescribeInstanceStatusInputDict = {}
+_params_416: DescribeInstanceTopologyInputDict = {}
+_params_417: DescribeInstanceTypeOfferingsInputDict = {}
+_params_418: DescribeInstanceTypesInputDict = {}
+_params_419: DescribeInternetGatewaysInputDict = {}
+_params_420: DescribeIpamByoasnInputDict = {}
+_params_421: DescribeIpamExternalResourceVerificationTokensInputDict = {}
+_params_422: DescribeIpamInternetRegistryAssociationsInputDict = {}
+_params_423: DescribeIpamPoliciesInputDict = {}
+_params_424: DescribeIpamPoolAllocationsInputDict = {}
+_params_425: DescribeIpamPoolsInputDict = {}
+_params_426: DescribeIpamPrefixListResolversInputDict = {}
+_params_427: DescribeIpamPrefixListResolverTargetsInputDict = {}
+_params_428: DescribeIpamResourceDiscoveriesInputDict = {}
+_params_429: DescribeIpamResourceDiscoveryAssociationsInputDict = {}
+_params_430: DescribeIpamScopesInputDict = {}
+_params_431: DescribeIpamsInputDict = {}
+_params_432: DescribeIpv6PoolsInputDict = {}
+_params_433: DescribeKeyPairsInputDict = {}
+_params_434: DescribeLaunchTemplatesInputDict = {}
+_params_435: DescribeLaunchTemplateVersionsInputDict = {}
+_params_436: DescribeLocalGatewayRouteTablesInputDict = {}
+_params_437: DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsInputDict = {}
+_params_438: DescribeLocalGatewayRouteTableVpcAssociationsInputDict = {}
+_params_439: DescribeLocalGatewaysInputDict = {}
+_params_440: DescribeLocalGatewayVirtualInterfaceGroupsInputDict = {}
+_params_441: DescribeLocalGatewayVirtualInterfacesInputDict = {}
+_params_442: DescribeLockedSnapshotsInputDict = {}
+_params_443: DescribeMacHostsInputDict = {}
+_params_444: DescribeMacModificationTasksInputDict = {}
+_params_445: DescribeManagedPrefixListsInputDict = {}
+_params_446: DescribeMetricCategoriesInputDict = {}
+_params_447: DescribeMovingAddressesInputDict = {}
+_params_448: DescribeNatGatewaysInputDict = {}
+_params_449: DescribeNetworkAclsInputDict = {}
+_params_450: DescribeNetworkingFlexCostAllocationPoliciesInputDict = {}
+_params_451: DescribeNetworkingFlexCostAllocationPolicyAssociationsInputDict = {}
+_params_452: DescribeNetworkInsightsAccessScopeAnalysesInputDict = {}
+_params_453: DescribeNetworkInsightsAccessScopesInputDict = {}
+_params_454: DescribeNetworkInsightsAnalysesInputDict = {}
+_params_455: DescribeNetworkInsightsPathsInputDict = {}
+_params_456: DescribeNetworkInterfaceAttributeInputDict = {"network_interface_id": _}
+_params_457: DescribeNetworkInterfacePermissionsInputDict = {}
+_params_458: DescribeNetworkInterfacesInputDict = {}
+_params_459: DescribeOutpostLagsInputDict = {}
+_params_460: DescribePlacementGroupsInputDict = {}
+_params_461: DescribePrefixListsInputDict = {}
+_params_462: DescribePrincipalIdFormatInputDict = {}
+_params_463: DescribePublicIpv4PoolsInputDict = {}
+_params_464: DescribeRegionsInputDict = {}
+_params_465: DescribeReplaceRootVolumeTasksInputDict = {}
+_params_466: DescribeReservedInstancesInputDict = {}
+_params_467: DescribeReservedInstancesListingsInputDict = {}
+_params_468: DescribeReservedInstancesModificationsInputDict = {}
+_params_469: DescribeReservedInstancesOfferingsInputDict = {}
+_params_470: DescribeRouteServerEndpointsInputDict = {}
+_params_471: DescribeRouteServerPeersInputDict = {}
+_params_472: DescribeRouteServersInputDict = {}
+_params_473: DescribeRouteTablesInputDict = {}
+_params_474: DescribeScheduledInstanceAvailabilityInputDict = {
     "first_slot_start_time_range": _,
     "recurrence": _,
 }
-_params_467: DescribeScheduledInstancesInputDict = {}
-_params_468: DescribeSecondaryInterfacesInputDict = {}
-_params_469: DescribeSecondaryNetworksInputDict = {}
-_params_470: DescribeSecondarySubnetsInputDict = {}
-_params_471: DescribeSecurityGroupReferencesInputDict = {"group_id": _}
-_params_472: DescribeSecurityGroupRulesInputDict = {}
-_params_473: DescribeSecurityGroupsInputDict = {}
-_params_474: DescribeSecurityGroupVpcAssociationsInputDict = {}
-_params_475: DescribeServiceLinkVirtualInterfacesInputDict = {}
-_params_476: DescribeSnapshotAttributeInputDict = {"attribute": _, "snapshot_id": _}
-_params_477: DescribeSnapshotsInputDict = {}
-_params_478: DescribeSnapshotTierStatusInputDict = {}
-_params_479: DescribeSpotDatafeedSubscriptionInputDict = {}
-_params_480: DescribeSpotFleetInstancesInputDict = {"spot_fleet_request_id": _}
-_params_481: DescribeSpotFleetRequestHistoryInputDict = {
+_params_475: DescribeScheduledInstancesInputDict = {}
+_params_476: DescribeSecondaryInterfacesInputDict = {}
+_params_477: DescribeSecondaryNetworksInputDict = {}
+_params_478: DescribeSecondarySubnetsInputDict = {}
+_params_479: DescribeSecurityGroupReferencesInputDict = {"group_id": _}
+_params_480: DescribeSecurityGroupRulesInputDict = {}
+_params_481: DescribeSecurityGroupsInputDict = {}
+_params_482: DescribeSecurityGroupVpcAssociationsInputDict = {}
+_params_483: DescribeServiceLinkVirtualInterfacesInputDict = {}
+_params_484: DescribeSnapshotAttributeInputDict = {"attribute": _, "snapshot_id": _}
+_params_485: DescribeSnapshotsInputDict = {}
+_params_486: DescribeSnapshotTierStatusInputDict = {}
+_params_487: DescribeSpotDatafeedSubscriptionInputDict = {}
+_params_488: DescribeSpotFleetInstancesInputDict = {"spot_fleet_request_id": _}
+_params_489: DescribeSpotFleetRequestHistoryInputDict = {
     "spot_fleet_request_id": _,
     "start_time": _,
 }
-_params_482: DescribeSpotFleetRequestsInputDict = {}
-_params_483: DescribeSpotInstanceRequestsInputDict = {}
-_params_484: DescribeSpotPriceHistoryInputDict = {}
-_params_485: DescribeStaleSecurityGroupsInputDict = {"vpc_id": _}
-_params_486: DescribeStoreImageTasksInputDict = {}
-_params_487: DescribeSubnetsInputDict = {}
-_params_488: DescribeTagsInputDict = {}
-_params_489: DescribeTrafficMirrorFilterRulesInputDict = {}
-_params_490: DescribeTrafficMirrorFiltersInputDict = {}
-_params_491: DescribeTrafficMirrorSessionsInputDict = {}
-_params_492: DescribeTrafficMirrorTargetsInputDict = {}
-_params_493: DescribeTransitGatewayAttachmentsInputDict = {}
-_params_494: DescribeTransitGatewayConnectPeersInputDict = {}
-_params_495: DescribeTransitGatewayConnectsInputDict = {}
-_params_496: DescribeTransitGatewayMeteringPoliciesInputDict = {}
-_params_497: DescribeTransitGatewayMulticastDomainsInputDict = {}
-_params_498: DescribeTransitGatewayPeeringAttachmentsInputDict = {}
-_params_499: DescribeTransitGatewayPolicyTablesInputDict = {}
-_params_500: DescribeTransitGatewayRouteTableAnnouncementsInputDict = {}
-_params_501: DescribeTransitGatewayRouteTablesInputDict = {}
-_params_502: DescribeTransitGatewaysInputDict = {}
-_params_503: DescribeTransitGatewayVpcAttachmentsInputDict = {}
-_params_504: DescribeTrunkInterfaceAssociationsInputDict = {}
-_params_505: DescribeVerifiedAccessEndpointsInputDict = {}
-_params_506: DescribeVerifiedAccessGroupsInputDict = {}
-_params_507: DescribeVerifiedAccessInstanceLoggingConfigurationsInputDict = {}
-_params_508: DescribeVerifiedAccessInstancesInputDict = {}
-_params_509: DescribeVerifiedAccessTrustProvidersInputDict = {}
-_params_510: DescribeVolumeAttributeInputDict = {"attribute": _, "volume_id": _}
-_params_511: DescribeVolumesInputDict = {}
-_params_512: DescribeVolumesModificationsInputDict = {}
-_params_513: DescribeVolumeStatusInputDict = {}
-_params_514: DescribeVpcAttributeInputDict = {"attribute": _, "vpc_id": _}
-_params_515: DescribeVpcBlockPublicAccessExclusionsInputDict = {}
-_params_516: DescribeVpcBlockPublicAccessOptionsInputDict = {}
-_params_517: DescribeVpcClassicLinkDnsSupportInputDict = {}
-_params_518: DescribeVpcClassicLinkInputDict = {}
-_params_519: DescribeVpcEncryptionControlsInputDict = {}
-_params_520: DescribeVpcEndpointAssociationsInputDict = {}
-_params_521: DescribeVpcEndpointConnectionNotificationsInputDict = {}
-_params_522: DescribeVpcEndpointConnectionsInputDict = {}
-_params_523: DescribeVpcEndpointServiceConfigurationsInputDict = {}
-_params_524: DescribeVpcEndpointServicePermissionsInputDict = {"service_id": _}
-_params_525: DescribeVpcEndpointServicesInputDict = {}
-_params_526: DescribeVpcEndpointsInputDict = {}
-_params_527: DescribeVpcPeeringConnectionsInputDict = {}
-_params_528: DescribeVpcsInputDict = {}
-_params_529: DescribeVpnConcentratorsInputDict = {}
-_params_530: DescribeVpnConnectionsInputDict = {}
-_params_531: DescribeVpnGatewaysInputDict = {}
-_params_532: DestinationOptionsRequestDict = {}
-_params_533: DetachClassicLinkVpcInputDict = {"instance_id": _, "vpc_id": _}
-_params_534: DetachImageWatermarkInputDict = {"image_id": _, "watermark_key": _}
-_params_535: DetachInternetGatewayInputDict = {"internet_gateway_id": _, "vpc_id": _}
-_params_536: DetachNetworkInterfaceInputDict = {"attachment_id": _}
-_params_537: DetachVerifiedAccessTrustProviderInputDict = {
+_params_490: DescribeSpotFleetRequestsInputDict = {}
+_params_491: DescribeSpotInstanceRequestsInputDict = {}
+_params_492: DescribeSpotPriceHistoryInputDict = {}
+_params_493: DescribeStaleSecurityGroupsInputDict = {"vpc_id": _}
+_params_494: DescribeStoreImageTasksInputDict = {}
+_params_495: DescribeSubnetsInputDict = {}
+_params_496: DescribeTagsInputDict = {}
+_params_497: DescribeTrafficMirrorFilterRulesInputDict = {}
+_params_498: DescribeTrafficMirrorFiltersInputDict = {}
+_params_499: DescribeTrafficMirrorSessionsInputDict = {}
+_params_500: DescribeTrafficMirrorTargetsInputDict = {}
+_params_501: DescribeTransitGatewayAttachmentsInputDict = {}
+_params_502: DescribeTransitGatewayConnectPeersInputDict = {}
+_params_503: DescribeTransitGatewayConnectsInputDict = {}
+_params_504: DescribeTransitGatewayMeteringPoliciesInputDict = {}
+_params_505: DescribeTransitGatewayMulticastDomainsInputDict = {}
+_params_506: DescribeTransitGatewayPeeringAttachmentsInputDict = {}
+_params_507: DescribeTransitGatewayPolicyTablesInputDict = {}
+_params_508: DescribeTransitGatewayRouteTableAnnouncementsInputDict = {}
+_params_509: DescribeTransitGatewayRouteTablesInputDict = {}
+_params_510: DescribeTransitGatewaysInputDict = {}
+_params_511: DescribeTransitGatewayVpcAttachmentsInputDict = {}
+_params_512: DescribeTrunkInterfaceAssociationsInputDict = {}
+_params_513: DescribeVerifiedAccessEndpointsInputDict = {}
+_params_514: DescribeVerifiedAccessGroupsInputDict = {}
+_params_515: DescribeVerifiedAccessInstanceLoggingConfigurationsInputDict = {}
+_params_516: DescribeVerifiedAccessInstancesInputDict = {}
+_params_517: DescribeVerifiedAccessTrustProvidersInputDict = {}
+_params_518: DescribeVolumeAttributeInputDict = {"attribute": _, "volume_id": _}
+_params_519: DescribeVolumesInputDict = {}
+_params_520: DescribeVolumesModificationsInputDict = {}
+_params_521: DescribeVolumeStatusInputDict = {}
+_params_522: DescribeVpcAttributeInputDict = {"attribute": _, "vpc_id": _}
+_params_523: DescribeVpcBlockPublicAccessExclusionsInputDict = {}
+_params_524: DescribeVpcBlockPublicAccessOptionsInputDict = {}
+_params_525: DescribeVpcClassicLinkDnsSupportInputDict = {}
+_params_526: DescribeVpcClassicLinkInputDict = {}
+_params_527: DescribeVpcEncryptionControlsInputDict = {}
+_params_528: DescribeVpcEndpointAssociationsInputDict = {}
+_params_529: DescribeVpcEndpointConnectionNotificationsInputDict = {}
+_params_530: DescribeVpcEndpointConnectionsInputDict = {}
+_params_531: DescribeVpcEndpointServiceConfigurationsInputDict = {}
+_params_532: DescribeVpcEndpointServicePermissionsInputDict = {"service_id": _}
+_params_533: DescribeVpcEndpointServicesInputDict = {}
+_params_534: DescribeVpcEndpointsInputDict = {}
+_params_535: DescribeVpcPeeringConnectionsInputDict = {}
+_params_536: DescribeVpcsInputDict = {}
+_params_537: DescribeVpnConcentratorsInputDict = {}
+_params_538: DescribeVpnConnectionsInputDict = {}
+_params_539: DescribeVpnGatewaysInputDict = {}
+_params_540: DestinationOptionsRequestDict = {}
+_params_541: DetachClassicLinkVpcInputDict = {"instance_id": _, "vpc_id": _}
+_params_542: DetachImageWatermarkInputDict = {"image_id": _, "watermark_key": _}
+_params_543: DetachInternetGatewayInputDict = {"internet_gateway_id": _, "vpc_id": _}
+_params_544: DetachNetworkInterfaceInputDict = {"attachment_id": _}
+_params_545: DetachVerifiedAccessTrustProviderInputDict = {
     "verified_access_instance_id": _,
     "verified_access_trust_provider_id": _,
 }
-_params_538: DetachVolumeInputDict = {"volume_id": _}
-_params_539: DetachVpnGatewayInputDict = {"vpc_id": _, "vpn_gateway_id": _}
-_params_540: DevicePostureOptionsDict = {}
-_params_541: DimensionConditionDict = {}
-_params_542: DirectoryServiceAuthenticationRequestDict = {}
-_params_543: DisableAddressTransferInputDict = {"allocation_id": _}
-_params_544: DisableAllowedImagesSettingsInputDict = {}
-_params_545: DisableApplicationStatusCheckSuppressionInputDict = {}
-_params_546: DisableAwsNetworkPerformanceMetricSubscriptionInputDict = {}
-_params_547: DisableCapacityManagerInputDict = {}
-_params_548: DisableEbsEncryptionByDefaultInputDict = {}
-_params_549: DisableFastLaunchInputDict = {"image_id": _}
-_params_550: DisableFastSnapshotRestoresInputDict = {"source_snapshot_ids": _}
-_params_551: DisableImageBlockPublicAccessInputDict = {}
-_params_552: DisableImageDeprecationInputDict = {"image_id": _}
-_params_553: DisableImageDeregistrationProtectionInputDict = {"image_id": _}
-_params_554: DisableImageInputDict = {"image_id": _}
-_params_555: DisableInstanceSqlHaStandbyDetectionsInputDict = {"instance_ids": _}
-_params_556: DisableIpamOrganizationAdminAccountInputDict = {
+_params_546: DetachVolumeInputDict = {"volume_id": _}
+_params_547: DetachVpnGatewayInputDict = {"vpc_id": _, "vpn_gateway_id": _}
+_params_548: DevicePostureOptionsDict = {}
+_params_549: DimensionConditionDict = {}
+_params_550: DirectoryServiceAuthenticationRequestDict = {}
+_params_551: DisableAddressTransferInputDict = {"allocation_id": _}
+_params_552: DisableAllowedImagesSettingsInputDict = {}
+_params_553: DisableApplicationStatusCheckSuppressionInputDict = {}
+_params_554: DisableAwsNetworkPerformanceMetricSubscriptionInputDict = {}
+_params_555: DisableCapacityManagerInputDict = {}
+_params_556: DisableEbsEncryptionByDefaultInputDict = {}
+_params_557: DisableFastLaunchInputDict = {"image_id": _}
+_params_558: DisableFastSnapshotRestoresInputDict = {"source_snapshot_ids": _}
+_params_559: DisableImageBlockPublicAccessInputDict = {}
+_params_560: DisableImageDeprecationInputDict = {"image_id": _}
+_params_561: DisableImageDeregistrationProtectionInputDict = {"image_id": _}
+_params_562: DisableImageInputDict = {"image_id": _}
+_params_563: DisableInstanceSqlHaStandbyDetectionsInputDict = {"instance_ids": _}
+_params_564: DisableIpamOrganizationAdminAccountInputDict = {
     "delegated_admin_account_id": _
 }
-_params_557: DisableIpamPolicyInputDict = {"ipam_policy_id": _}
-_params_558: DisableRouteServerPropagationInputDict = {
+_params_565: DisableIpamPolicyInputDict = {"ipam_policy_id": _}
+_params_566: DisableRouteServerPropagationInputDict = {
     "route_server_id": _,
     "route_table_id": _,
 }
-_params_559: DisableSerialConsoleAccessInputDict = {}
-_params_560: DisableSnapshotBlockPublicAccessInputDict = {}
-_params_561: DisableTransitGatewayRouteTablePropagationInputDict = {
+_params_567: DisableSerialConsoleAccessInputDict = {}
+_params_568: DisableSnapshotBlockPublicAccessInputDict = {}
+_params_569: DisableTransitGatewayRouteTablePropagationInputDict = {
     "transit_gateway_route_table_id": _
 }
-_params_562: DisableVgwRoutePropagationInputDict = {
+_params_570: DisableVgwRoutePropagationInputDict = {
     "gateway_id": _,
     "route_table_id": _,
 }
-_params_563: DisableVpcClassicLinkDnsSupportInputDict = {}
-_params_564: DisableVpcClassicLinkInputDict = {"vpc_id": _}
-_params_565: DisassociateAddressInputDict = {}
-_params_566: DisassociateApplicationStatusCheckInputDict = {
+_params_571: DisableVpcClassicLinkDnsSupportInputDict = {}
+_params_572: DisableVpcClassicLinkInputDict = {"vpc_id": _}
+_params_573: DisassociateAddressInputDict = {}
+_params_574: DisassociateApplicationStatusCheckInputDict = {
     "application_status_check_id": _
 }
-_params_567: DisassociateCapacityReservationBillingOwnerInputDict = {
+_params_575: DisassociateCapacityReservationBillingOwnerInputDict = {
     "capacity_reservation_id": _,
     "unused_reservation_billing_owner_id": _,
 }
-_params_568: DisassociateClientVpnTargetNetworkInputDict = {
+_params_576: DisassociateClientVpnTargetNetworkInputDict = {
     "client_vpn_endpoint_id": _,
     "association_id": _,
 }
-_params_569: DisassociateEnclaveCertificateIamRoleInputDict = {
+_params_577: DisassociateEnclaveCertificateIamRoleInputDict = {
     "certificate_arn": _,
     "role_arn": _,
 }
-_params_570: DisassociateIamInstanceProfileInputDict = {"association_id": _}
-_params_571: DisassociateInstanceEventWindowInputDict = {
+_params_578: DisassociateIamInstanceProfileInputDict = {"association_id": _}
+_params_579: DisassociateInstanceEventWindowInputDict = {
     "instance_event_window_id": _,
     "association_target": _,
 }
-_params_572: DisassociateIpamByoasnInputDict = {"asn": _, "cidr": _}
-_params_573: DisassociateIpamResourceDiscoveryInputDict = {
+_params_580: DisassociateIpamByoasnInputDict = {"asn": _, "cidr": _}
+_params_581: DisassociateIpamResourceDiscoveryInputDict = {
     "ipam_resource_discovery_association_id": _
 }
-_params_574: DisassociateNatGatewayAddressInputDict = {
+_params_582: DisassociateNatGatewayAddressInputDict = {
     "nat_gateway_id": _,
     "association_ids": _,
 }
-_params_575: DisassociateRouteServerInputDict = {"route_server_id": _, "vpc_id": _}
-_params_576: DisassociateRouteTableInputDict = {"association_id": _}
-_params_577: DisassociateSecurityGroupVpcInputDict = {"group_id": _, "vpc_id": _}
-_params_578: DisassociateSubnetCidrBlockInputDict = {"association_id": _}
-_params_579: DisassociateTransitGatewayMulticastDomainInputDict = {
+_params_583: DisassociateNetworkingFlexCostAllocationPolicyInputDict = {
+    "fca_policy_association_ids": _
+}
+_params_584: DisassociateRouteServerInputDict = {"route_server_id": _, "vpc_id": _}
+_params_585: DisassociateRouteTableInputDict = {"association_id": _}
+_params_586: DisassociateSecurityGroupVpcInputDict = {"group_id": _, "vpc_id": _}
+_params_587: DisassociateSubnetCidrBlockInputDict = {"association_id": _}
+_params_588: DisassociateTransitGatewayMulticastDomainInputDict = {
     "transit_gateway_multicast_domain_id": _,
     "transit_gateway_attachment_id": _,
     "subnet_ids": _,
 }
-_params_580: DisassociateTransitGatewayPolicyTableInputDict = {
+_params_589: DisassociateTransitGatewayPolicyTableInputDict = {
     "transit_gateway_policy_table_id": _,
     "transit_gateway_attachment_id": _,
 }
-_params_581: DisassociateTransitGatewayRouteTableInputDict = {
+_params_590: DisassociateTransitGatewayRouteTableInputDict = {
     "transit_gateway_route_table_id": _,
     "transit_gateway_attachment_id": _,
 }
-_params_582: DisassociateTrunkInterfaceInputDict = {"association_id": _}
-_params_583: DisassociateVpcCidrBlockInputDict = {"association_id": _}
-_params_584: DiskImageDict = {}
-_params_585: DiskImageDetailDict = {"format": _, "bytes_": _, "import_manifest_url": _}
-_params_586: DnsOptionsSpecificationDict = {}
-_params_587: DnsServersOptionsModifyStructureDict = {}
-_params_588: EbsBlockDeviceDict = {}
-_params_589: EbsInstanceBlockDeviceSpecificationDict = {}
-_params_590: ElasticGpuSpecificationDict = {"type": _}
-_params_591: ElasticInferenceAcceleratorDict = {"type": _}
-_params_592: EnableAddressTransferInputDict = {
+_params_591: DisassociateTrunkInterfaceInputDict = {"association_id": _}
+_params_592: DisassociateVpcCidrBlockInputDict = {"association_id": _}
+_params_593: DiskImageDict = {}
+_params_594: DiskImageDetailDict = {"format": _, "bytes_": _, "import_manifest_url": _}
+_params_595: DnsOptionsSpecificationDict = {}
+_params_596: DnsServersOptionsModifyStructureDict = {}
+_params_597: EbsBlockDeviceDict = {}
+_params_598: EbsInstanceBlockDeviceSpecificationDict = {}
+_params_599: ElasticGpuSpecificationDict = {"type": _}
+_params_600: ElasticInferenceAcceleratorDict = {"type": _}
+_params_601: EnableAddressTransferInputDict = {
     "allocation_id": _,
     "transfer_account_id": _,
 }
-_params_593: EnableAllowedImagesSettingsInputDict = {"allowed_images_settings_state": _}
-_params_594: EnableApplicationStatusCheckSuppressionInputDict = {}
-_params_595: EnableAwsNetworkPerformanceMetricSubscriptionInputDict = {}
-_params_596: EnableCapacityManagerInputDict = {}
-_params_597: EnableEbsEncryptionByDefaultInputDict = {}
-_params_598: EnableFastLaunchInputDict = {"image_id": _}
-_params_599: EnableFastSnapshotRestoresInputDict = {"source_snapshot_ids": _}
-_params_600: EnableImageBlockPublicAccessInputDict = {
+_params_602: EnableAllowedImagesSettingsInputDict = {"allowed_images_settings_state": _}
+_params_603: EnableApplicationStatusCheckSuppressionInputDict = {}
+_params_604: EnableAwsNetworkPerformanceMetricSubscriptionInputDict = {}
+_params_605: EnableCapacityManagerInputDict = {}
+_params_606: EnableEbsEncryptionByDefaultInputDict = {}
+_params_607: EnableFastLaunchInputDict = {"image_id": _}
+_params_608: EnableFastSnapshotRestoresInputDict = {"source_snapshot_ids": _}
+_params_609: EnableImageBlockPublicAccessInputDict = {
     "image_block_public_access_state": _
 }
-_params_601: EnableImageDeprecationInputDict = {"image_id": _, "deprecate_at": _}
-_params_602: EnableImageDeregistrationProtectionInputDict = {"image_id": _}
-_params_603: EnableImageInputDict = {"image_id": _}
-_params_604: EnableInstanceSqlHaStandbyDetectionsInputDict = {"instance_ids": _}
-_params_605: EnableIpamInternetRegistryAssociationInputDict = {
+_params_610: EnableImageDeprecationInputDict = {"image_id": _, "deprecate_at": _}
+_params_611: EnableImageDeregistrationProtectionInputDict = {"image_id": _}
+_params_612: EnableImageInputDict = {"image_id": _}
+_params_613: EnableInstanceSqlHaStandbyDetectionsInputDict = {"instance_ids": _}
+_params_614: EnableIpamInternetRegistryAssociationInputDict = {
     "ipam_internet_registry_association_id": _,
     "rpki_version": _,
     "service_uri": _,
@@ -7304,827 +7405,853 @@ _params_605: EnableIpamInternetRegistryAssociationInputDict = {
     "parent_handle": _,
     "parent_bpki_ta": _,
 }
-_params_606: EnableIpamOrganizationAdminAccountInputDict = {
+_params_615: EnableIpamOrganizationAdminAccountInputDict = {
     "delegated_admin_account_id": _
 }
-_params_607: EnableIpamPolicyInputDict = {"ipam_policy_id": _}
-_params_608: EnableReachabilityAnalyzerOrganizationSharingInputDict = {}
-_params_609: EnableRouteServerPropagationInputDict = {
+_params_616: EnableIpamPolicyInputDict = {"ipam_policy_id": _}
+_params_617: EnableReachabilityAnalyzerOrganizationSharingInputDict = {}
+_params_618: EnableRouteServerPropagationInputDict = {
     "route_server_id": _,
     "route_table_id": _,
 }
-_params_610: EnableSerialConsoleAccessInputDict = {}
-_params_611: EnableSnapshotBlockPublicAccessInputDict = {"state": _}
-_params_612: EnableTransitGatewayRouteTablePropagationInputDict = {
+_params_619: EnableSerialConsoleAccessInputDict = {}
+_params_620: EnableSnapshotBlockPublicAccessInputDict = {"state": _}
+_params_621: EnableTransitGatewayRouteTablePropagationInputDict = {
     "transit_gateway_route_table_id": _
 }
-_params_613: EnableVgwRoutePropagationInputDict = {"gateway_id": _, "route_table_id": _}
-_params_614: EnableVolumeIOInputDict = {"volume_id": _}
-_params_615: EnableVpcClassicLinkDnsSupportInputDict = {}
-_params_616: EnableVpcClassicLinkInputDict = {"vpc_id": _}
-_params_617: EnaSrdSpecificationDict = {}
-_params_618: EnaSrdSpecificationRequestDict = {}
-_params_619: EnaSrdUdpSpecificationDict = {}
-_params_620: EnaSrdUdpSpecificationRequestDict = {}
-_params_621: EnclaveOptionsRequestDict = {}
-_params_622: ExportClientVpnClientCertificateRevocationListInputDict = {
+_params_622: EnableVgwRoutePropagationInputDict = {"gateway_id": _, "route_table_id": _}
+_params_623: EnableVolumeIOInputDict = {"volume_id": _}
+_params_624: EnableVpcClassicLinkDnsSupportInputDict = {}
+_params_625: EnableVpcClassicLinkInputDict = {"vpc_id": _}
+_params_626: EnaSrdSpecificationDict = {}
+_params_627: EnaSrdSpecificationRequestDict = {}
+_params_628: EnaSrdUdpSpecificationDict = {}
+_params_629: EnaSrdUdpSpecificationRequestDict = {}
+_params_630: EnclaveOptionsRequestDict = {}
+_params_631: ExportClientVpnClientCertificateRevocationListInputDict = {
     "client_vpn_endpoint_id": _
 }
-_params_623: ExportClientVpnClientConfigurationInputDict = {"client_vpn_endpoint_id": _}
-_params_624: ExportImageInputDict = {
+_params_632: ExportClientVpnClientConfigurationInputDict = {"client_vpn_endpoint_id": _}
+_params_633: ExportImageInputDict = {
     "disk_image_format": _,
     "image_id": _,
     "s3_export_location": _,
 }
-_params_625: ExportTaskS3LocationRequestDict = {"s3_bucket": _}
-_params_626: ExportToS3TaskSpecificationDict = {}
-_params_627: ExportTransitGatewayRoutesInputDict = {
+_params_634: ExportTaskS3LocationRequestDict = {"s3_bucket": _}
+_params_635: ExportToS3TaskSpecificationDict = {}
+_params_636: ExportTransitGatewayRoutesInputDict = {
     "transit_gateway_route_table_id": _,
     "s3_bucket": _,
 }
-_params_628: ExportVerifiedAccessInstanceClientConfigurationInputDict = {
+_params_637: ExportVerifiedAccessInstanceClientConfigurationInputDict = {
     "verified_access_instance_id": _
 }
-_params_629: ExternalAuthorityConfigurationDict = {}
-_params_630: FastLaunchLaunchTemplateSpecificationRequestDict = {"version": _}
-_params_631: FastLaunchSnapshotConfigurationRequestDict = {}
-_params_632: FederatedAuthenticationRequestDict = {}
-_params_633: FilterDict = {}
-_params_634: FleetBlockDeviceMappingRequestDict = {}
-_params_635: FleetCapacityReservationTargetRequestDict = {}
-_params_636: FleetEbsBlockDeviceRequestDict = {}
-_params_637: FleetIamInstanceProfileSpecificationRequestDict = {}
-_params_638: FleetInstanceMetadataOptionsRequestDict = {}
-_params_639: FleetLaunchTemplateConfigRequestDict = {}
-_params_640: FleetLaunchTemplateOverridesRequestDict = {}
-_params_641: FleetLaunchTemplateSpecificationDict = {}
-_params_642: FleetLaunchTemplateSpecificationRequestDict = {}
-_params_643: FleetSpotCapacityRebalanceRequestDict = {}
-_params_644: FleetSpotMaintenanceStrategiesRequestDict = {}
-_params_645: GetActiveVpnTunnelStatusInputDict = {
+_params_638: ExternalAuthorityConfigurationDict = {}
+_params_639: FastLaunchLaunchTemplateSpecificationRequestDict = {"version": _}
+_params_640: FastLaunchSnapshotConfigurationRequestDict = {}
+_params_641: FederatedAuthenticationRequestDict = {}
+_params_642: FilterDict = {}
+_params_643: FleetBlockDeviceMappingRequestDict = {}
+_params_644: FleetCapacityReservationTargetRequestDict = {}
+_params_645: FleetEbsBlockDeviceRequestDict = {}
+_params_646: FleetIamInstanceProfileSpecificationRequestDict = {}
+_params_647: FleetInstanceMetadataOptionsRequestDict = {}
+_params_648: FleetLaunchTemplateConfigRequestDict = {}
+_params_649: FleetLaunchTemplateOverridesRequestDict = {}
+_params_650: FleetLaunchTemplateSpecificationDict = {}
+_params_651: FleetLaunchTemplateSpecificationRequestDict = {}
+_params_652: FleetSpotCapacityRebalanceRequestDict = {}
+_params_653: FleetSpotMaintenanceStrategiesRequestDict = {}
+_params_654: FlexCostAllocationCidrMappingDict = {"cidr_range": _, "cidr_label": _}
+_params_655: FlexCostAllocationCidrRangeSpecificationsDict = {
+    "prefixes_type": _,
+    "prefixes": _,
+}
+_params_656: FlexCostAllocationNetworkResourceScopeDict = {
+    "resource_type": _,
+    "resource_ids": _,
+}
+_params_657: GetActiveVpnTunnelStatusInputDict = {
     "vpn_connection_id": _,
     "vpn_tunnel_outside_ip_address": _,
 }
-_params_646: GetAllowedImagesSettingsInputDict = {}
-_params_647: GetAssociatedEnclaveCertificateIamRolesInputDict = {"certificate_arn": _}
-_params_648: GetAssociatedIpv6PoolCidrsInputDict = {"pool_id": _}
-_params_649: GetAwsNetworkPerformanceDataInputDict = {}
-_params_650: GetCapacityManagerAttributesInputDict = {}
-_params_651: GetCapacityManagerMetricDataInputDict = {
+_params_658: GetAllowedImagesSettingsInputDict = {}
+_params_659: GetAssociatedEnclaveCertificateIamRolesInputDict = {"certificate_arn": _}
+_params_660: GetAssociatedIpv6PoolCidrsInputDict = {"pool_id": _}
+_params_661: GetAwsNetworkPerformanceDataInputDict = {}
+_params_662: GetCapacityManagerAttributesInputDict = {}
+_params_663: GetCapacityManagerMetricDataInputDict = {
     "metric_names": _,
     "start_time": _,
     "end_time": _,
     "period": _,
 }
-_params_652: GetCapacityManagerMetricDimensionsInputDict = {
+_params_664: GetCapacityManagerMetricDimensionsInputDict = {
     "group_by": _,
     "start_time": _,
     "end_time": _,
     "metric_names": _,
 }
-_params_653: GetCapacityManagerMonitoredTagKeysInputDict = {}
-_params_654: GetCapacityManagerSupportabilityScoresInputDict = {
+_params_665: GetCapacityManagerMonitoredTagKeysInputDict = {}
+_params_666: GetCapacityManagerSupportabilityScoresInputDict = {
     "market_type": _,
     "capacity_amount": _,
     "capacity_unit": _,
     "capacity_availability_zone_ids": _,
 }
-_params_655: GetCapacityReservationUsageInputDict = {"capacity_reservation_id": _}
-_params_656: GetClientVpnEndpointAuthorizationPolicyInputDict = {
+_params_667: GetCapacityReservationUsageInputDict = {"capacity_reservation_id": _}
+_params_668: GetClientVpnEndpointAuthorizationPolicyInputDict = {
     "client_vpn_endpoint_id": _
 }
-_params_657: GetCoipPoolUsageInputDict = {"pool_id": _}
-_params_658: GetConsoleOutputInputDict = {"instance_id": _}
-_params_659: GetConsoleScreenshotInputDict = {"instance_id": _}
-_params_660: GetDeclarativePoliciesReportSummaryInputDict = {"report_id": _}
-_params_661: GetDefaultCreditSpecificationInputDict = {"instance_family": _}
-_params_662: GetEbsDefaultKmsKeyIdInputDict = {}
-_params_663: GetEbsEncryptionByDefaultInputDict = {}
-_params_664: GetEnabledIpamPolicyInputDict = {}
-_params_665: GetFlowLogsIntegrationTemplateInputDict = {
+_params_669: GetCoipPoolUsageInputDict = {"pool_id": _}
+_params_670: GetConsoleOutputInputDict = {"instance_id": _}
+_params_671: GetConsoleScreenshotInputDict = {"instance_id": _}
+_params_672: GetDeclarativePoliciesReportSummaryInputDict = {"report_id": _}
+_params_673: GetDefaultCreditSpecificationInputDict = {"instance_family": _}
+_params_674: GetEbsDefaultKmsKeyIdInputDict = {}
+_params_675: GetEbsEncryptionByDefaultInputDict = {}
+_params_676: GetEnabledIpamPolicyInputDict = {}
+_params_677: GetFlowLogsIntegrationTemplateInputDict = {
     "flow_log_id": _,
     "config_delivery_s3_destination_arn": _,
     "integrate_services": _,
 }
-_params_666: GetGroupsForCapacityReservationInputDict = {"capacity_reservation_id": _}
-_params_667: GetHostReservationPurchasePreviewInputDict = {
+_params_678: GetGroupsForCapacityReservationInputDict = {"capacity_reservation_id": _}
+_params_679: GetHostReservationPurchasePreviewInputDict = {
     "host_id_set": _,
     "offering_id": _,
 }
-_params_668: GetImageAncestryInputDict = {"image_id": _}
-_params_669: GetImageBlockPublicAccessStateInputDict = {}
-_params_670: GetImageFindingsInputDict = {"image_id": _}
-_params_671: GetInstanceMetadataDefaultsInputDict = {}
-_params_672: GetInstanceTpmEkPubInputDict = {
+_params_680: GetImageAncestryInputDict = {"image_id": _}
+_params_681: GetImageBlockPublicAccessStateInputDict = {}
+_params_682: GetImageFindingsInputDict = {"image_id": _}
+_params_683: GetInstanceMetadataDefaultsInputDict = {}
+_params_684: GetInstanceTpmEkPubInputDict = {
     "instance_id": _,
     "key_type": _,
     "key_format": _,
 }
-_params_673: GetInstanceTypesFromInstanceRequirementsInputDict = {
+_params_685: GetInstanceTypesFromInstanceRequirementsInputDict = {
     "architecture_types": _,
     "virtualization_types": _,
     "instance_requirements": _,
 }
-_params_674: GetInstanceUefiDataInputDict = {"instance_id": _}
-_params_675: GetIpamAddressHistoryInputDict = {"cidr": _, "ipam_scope_id": _}
-_params_676: GetIpamDiscoveredAccountsInputDict = {
+_params_686: GetInstanceUefiDataInputDict = {"instance_id": _}
+_params_687: GetIpamAddressHistoryInputDict = {"cidr": _, "ipam_scope_id": _}
+_params_688: GetIpamDiscoveredAccountsInputDict = {
     "ipam_resource_discovery_id": _,
     "discovery_region": _,
 }
-_params_677: GetIpamDiscoveredPublicAddressesInputDict = {
+_params_689: GetIpamDiscoveredPublicAddressesInputDict = {
     "ipam_resource_discovery_id": _,
     "address_region": _,
 }
-_params_678: GetIpamDiscoveredResourceCidrsInputDict = {
+_params_690: GetIpamDiscoveredResourceCidrsInputDict = {
     "ipam_resource_discovery_id": _,
     "resource_region": _,
 }
-_params_679: GetIpamDiscoveredRoutesInputDict = {
+_params_691: GetIpamDiscoveredRoutesInputDict = {
     "ipam_resource_discovery_id": _,
     "resource_region": _,
 }
-_params_680: GetIpamInternetRegistryAssociationAsnsInputDict = {
+_params_692: GetIpamInternetRegistryAssociationAsnsInputDict = {
     "ipam_internet_registry_association_id": _
 }
-_params_681: GetIpamInternetRegistryAssociationCidrsInputDict = {
+_params_693: GetIpamInternetRegistryAssociationCidrsInputDict = {
     "ipam_internet_registry_association_id": _
 }
-_params_682: GetIpamPolicyAllocationRulesInputDict = {"ipam_policy_id": _}
-_params_683: GetIpamPolicyOrganizationTargetsInputDict = {"ipam_policy_id": _}
-_params_684: GetIpamPoolAllocationsInputDict = {"ipam_pool_id": _}
-_params_685: GetIpamPoolCidrsInputDict = {"ipam_pool_id": _}
-_params_686: GetIpamPrefixListResolverRulesInputDict = {
+_params_694: GetIpamPolicyAllocationRulesInputDict = {"ipam_policy_id": _}
+_params_695: GetIpamPolicyOrganizationTargetsInputDict = {"ipam_policy_id": _}
+_params_696: GetIpamPoolAllocationsInputDict = {"ipam_pool_id": _}
+_params_697: GetIpamPoolCidrsInputDict = {"ipam_pool_id": _}
+_params_698: GetIpamPrefixListResolverRulesInputDict = {
     "ipam_prefix_list_resolver_id": _
 }
-_params_687: GetIpamPrefixListResolverVersionEntriesInputDict = {
+_params_699: GetIpamPrefixListResolverVersionEntriesInputDict = {
     "ipam_prefix_list_resolver_id": _,
     "ipam_prefix_list_resolver_version": _,
 }
-_params_688: GetIpamPrefixListResolverVersionsInputDict = {
+_params_700: GetIpamPrefixListResolverVersionsInputDict = {
     "ipam_prefix_list_resolver_id": _
 }
-_params_689: GetIpamResourceCidrsInputDict = {"ipam_scope_id": _}
-_params_690: GetIpamRouteOriginAuthorizationsInputDict = {
+_params_701: GetIpamResourceCidrsInputDict = {"ipam_scope_id": _}
+_params_702: GetIpamRouteOriginAuthorizationsInputDict = {
     "ipam_internet_registry_association_id": _
 }
-_params_691: GetIpamRouteProtectionFindingsInputDict = {"ipam_id": _}
-_params_692: GetIpamRoutingPolicyRegistrationDeltasInputDict = {
+_params_703: GetIpamRouteProtectionFindingsInputDict = {"ipam_id": _}
+_params_704: GetIpamRoutingPolicyRegistrationDeltasInputDict = {
     "ipam_internet_registry_association_id": _
 }
-_params_693: GetIpamRoutingPolicyRegistrationsInputDict = {
+_params_705: GetIpamRoutingPolicyRegistrationsInputDict = {
     "ipam_internet_registry_association_id": _
 }
-_params_694: GetLaunchTemplateDataInputDict = {"instance_id": _}
-_params_695: GetManagedPrefixListAssociationsInputDict = {"prefix_list_id": _}
-_params_696: GetManagedPrefixListEntriesInputDict = {"prefix_list_id": _}
-_params_697: GetManagedResourceVisibilityInputDict = {}
-_params_698: GetNetworkInsightsAccessScopeAnalysisFindingsInputDict = {
+_params_706: GetLaunchTemplateDataInputDict = {"instance_id": _}
+_params_707: GetManagedPrefixListAssociationsInputDict = {"prefix_list_id": _}
+_params_708: GetManagedPrefixListEntriesInputDict = {"prefix_list_id": _}
+_params_709: GetManagedResourceVisibilityInputDict = {}
+_params_710: GetNetworkingFlexCostAllocationPolicyVersionsInputDict = {
+    "fca_policy_id": _
+}
+_params_711: GetNetworkInsightsAccessScopeAnalysisFindingsInputDict = {
     "network_insights_access_scope_analysis_id": _
 }
-_params_699: GetNetworkInsightsAccessScopeContentInputDict = {
+_params_712: GetNetworkInsightsAccessScopeContentInputDict = {
     "network_insights_access_scope_id": _
 }
-_params_700: GetPasswordDataInputDict = {"instance_id": _}
-_params_701: GetReservedInstancesExchangeQuoteInputDict = {"reserved_instance_ids": _}
-_params_702: GetRouteServerAssociationsInputDict = {"route_server_id": _}
-_params_703: GetRouteServerPropagationsInputDict = {"route_server_id": _}
-_params_704: GetRouteServerRoutingDatabaseInputDict = {"route_server_id": _}
-_params_705: GetSecurityGroupsForVpcInputDict = {"vpc_id": _}
-_params_706: GetSerialConsoleAccessStatusInputDict = {}
-_params_707: GetSnapshotBlockPublicAccessStateInputDict = {}
-_params_708: GetSpotPlacementScoresInputDict = {"target_capacity": _}
-_params_709: GetSubnetCidrReservationsInputDict = {"subnet_id": _}
-_params_710: GetTransitGatewayAttachmentNatConfigurationInputDict = {
+_params_713: GetPasswordDataInputDict = {"instance_id": _}
+_params_714: GetReservedInstancesExchangeQuoteInputDict = {"reserved_instance_ids": _}
+_params_715: GetRouteServerAssociationsInputDict = {"route_server_id": _}
+_params_716: GetRouteServerPropagationsInputDict = {"route_server_id": _}
+_params_717: GetRouteServerRoutingDatabaseInputDict = {"route_server_id": _}
+_params_718: GetSecurityGroupsForVpcInputDict = {"vpc_id": _}
+_params_719: GetSerialConsoleAccessStatusInputDict = {}
+_params_720: GetSnapshotBlockPublicAccessStateInputDict = {}
+_params_721: GetSpotPlacementScoresInputDict = {"target_capacity": _}
+_params_722: GetSubnetCidrReservationsInputDict = {"subnet_id": _}
+_params_723: GetTransitGatewayAttachmentNatConfigurationInputDict = {
     "transit_gateway_attachment_id": _
 }
-_params_711: GetTransitGatewayAttachmentPropagationsInputDict = {
+_params_724: GetTransitGatewayAttachmentPropagationsInputDict = {
     "transit_gateway_attachment_id": _
 }
-_params_712: GetTransitGatewayMeteringPolicyEntriesInputDict = {
+_params_725: GetTransitGatewayMeteringPolicyEntriesInputDict = {
     "transit_gateway_metering_policy_id": _
 }
-_params_713: GetTransitGatewayMulticastDomainAssociationsInputDict = {
+_params_726: GetTransitGatewayMulticastDomainAssociationsInputDict = {
     "transit_gateway_multicast_domain_id": _
 }
-_params_714: GetTransitGatewayPolicyTableAssociationsInputDict = {
+_params_727: GetTransitGatewayPolicyTableAssociationsInputDict = {
     "transit_gateway_policy_table_id": _
 }
-_params_715: GetTransitGatewayPolicyTableEntriesInputDict = {
+_params_728: GetTransitGatewayPolicyTableEntriesInputDict = {
     "transit_gateway_policy_table_id": _
 }
-_params_716: GetTransitGatewayPrefixListReferencesInputDict = {
+_params_729: GetTransitGatewayPrefixListReferencesInputDict = {
     "transit_gateway_route_table_id": _
 }
-_params_717: GetTransitGatewayRouteTableAssociationsInputDict = {
+_params_730: GetTransitGatewayRouteTableAssociationsInputDict = {
     "transit_gateway_route_table_id": _
 }
-_params_718: GetTransitGatewayRouteTablePropagationsInputDict = {
+_params_731: GetTransitGatewayRouteTablePropagationsInputDict = {
     "transit_gateway_route_table_id": _
 }
-_params_719: GetVerifiedAccessEndpointPolicyInputDict = {
+_params_732: GetVerifiedAccessEndpointPolicyInputDict = {
     "verified_access_endpoint_id": _
 }
-_params_720: GetVerifiedAccessEndpointTargetsInputDict = {
+_params_733: GetVerifiedAccessEndpointTargetsInputDict = {
     "verified_access_endpoint_id": _
 }
-_params_721: GetVerifiedAccessGroupPolicyInputDict = {"verified_access_group_id": _}
-_params_722: GetVpcResourcesBlockingEncryptionEnforcementInputDict = {"vpc_id": _}
-_params_723: GetVpnConnectionDeviceSampleConfigurationInputDict = {
+_params_734: GetVerifiedAccessGroupPolicyInputDict = {"verified_access_group_id": _}
+_params_735: GetVpcResourcesBlockingEncryptionEnforcementInputDict = {"vpc_id": _}
+_params_736: GetVpnConnectionDeviceSampleConfigurationInputDict = {
     "vpn_connection_id": _,
     "vpn_connection_device_type_id": _,
 }
-_params_724: GetVpnConnectionDeviceTypesInputDict = {}
-_params_725: GetVpnTunnelReplacementStatusInputDict = {
+_params_737: GetVpnConnectionDeviceTypesInputDict = {}
+_params_738: GetVpnTunnelReplacementStatusInputDict = {
     "vpn_connection_id": _,
     "vpn_tunnel_outside_ip_address": _,
 }
-_params_726: GroupIdentifierDict = {}
-_params_727: HealthCheckPathDestinationRequestObjectDict = {}
-_params_728: HealthCheckPathRequestObjectDict = {}
-_params_729: HealthCheckPathSourceRequestObjectDict = {}
-_params_730: HibernationOptionsRequestDict = {}
-_params_731: HostCpuOptionsRequestDict = {}
-_params_732: IamInstanceProfileSpecificationDict = {}
-_params_733: IcmpTypeCodeDict = {}
-_params_734: IKEVersionsRequestListValueDict = {}
-_params_735: ImageCriterionRequestDict = {}
-_params_736: ImageDiskContainerDict = {}
-_params_737: ImageUsageResourceTypeOptionRequestDict = {}
-_params_738: ImageUsageResourceTypeRequestDict = {}
-_params_739: ImageWatermarkFilterRequestDict = {}
-_params_740: ImportClientVpnClientCertificateRevocationListInputDict = {
+_params_739: GroupIdentifierDict = {}
+_params_740: HealthCheckPathDestinationRequestObjectDict = {}
+_params_741: HealthCheckPathRequestObjectDict = {}
+_params_742: HealthCheckPathSourceRequestObjectDict = {}
+_params_743: HibernationOptionsRequestDict = {}
+_params_744: HostCpuOptionsRequestDict = {}
+_params_745: IamInstanceProfileSpecificationDict = {}
+_params_746: IcmpTypeCodeDict = {}
+_params_747: IKEVersionsRequestListValueDict = {}
+_params_748: ImageCriterionRequestDict = {}
+_params_749: ImageDiskContainerDict = {}
+_params_750: ImageUsageResourceTypeOptionRequestDict = {}
+_params_751: ImageUsageResourceTypeRequestDict = {}
+_params_752: ImageWatermarkFilterRequestDict = {}
+_params_753: ImportClientVpnClientCertificateRevocationListInputDict = {
     "client_vpn_endpoint_id": _,
     "certificate_revocation_list": _,
 }
-_params_741: ImportImageInputDict = {}
-_params_742: ImportImageLicenseConfigurationRequestDict = {}
-_params_743: ImportInstanceInputDict = {"platform": _}
-_params_744: ImportInstanceLaunchSpecificationDict = {}
-_params_745: ImportKeyPairInputDict = {"key_name": _, "public_key_material": _}
-_params_746: ImportSnapshotInputDict = {}
-_params_747: ImportVolumeInputDict = {"image": _, "volume": _}
-_params_748: InstanceBlockDeviceMappingSpecificationDict = {}
-_params_749: InstanceCreditSpecificationRequestDict = {"instance_id": _}
-_params_750: InstanceEventWindowAssociationRequestDict = {}
-_params_751: InstanceEventWindowDisassociationRequestDict = {}
-_params_752: InstanceEventWindowTimeRangeRequestDict = {}
-_params_753: InstanceIpv6AddressDict = {}
-_params_754: InstanceIpv6AddressRequestDict = {}
-_params_755: InstanceMaintenanceOptionsRequestDict = {}
-_params_756: InstanceMarketOptionsRequestDict = {}
-_params_757: InstanceMetadataOptionsRequestDict = {}
-_params_758: InstanceNetworkInterfaceSpecificationDict = {}
-_params_759: InstanceNetworkPerformanceOptionsRequestDict = {}
-_params_760: InstanceRequirementsDict = {}
-_params_761: InstanceRequirementsRequestDict = {"v_cpu_count": _, "memory_mi_b": _}
-_params_762: InstanceRequirementsWithMetadataRequestDict = {}
-_params_763: InstanceSecondaryInterfacePrivateIpAddressRequestDict = {
+_params_754: ImportImageInputDict = {}
+_params_755: ImportImageLicenseConfigurationRequestDict = {}
+_params_756: ImportInstanceInputDict = {"platform": _}
+_params_757: ImportInstanceLaunchSpecificationDict = {}
+_params_758: ImportKeyPairInputDict = {"key_name": _, "public_key_material": _}
+_params_759: ImportSnapshotInputDict = {}
+_params_760: ImportVolumeInputDict = {"image": _, "volume": _}
+_params_761: InstanceBlockDeviceMappingSpecificationDict = {}
+_params_762: InstanceCreditSpecificationRequestDict = {"instance_id": _}
+_params_763: InstanceEventWindowAssociationRequestDict = {}
+_params_764: InstanceEventWindowDisassociationRequestDict = {}
+_params_765: InstanceEventWindowTimeRangeRequestDict = {}
+_params_766: InstanceFlexCostAllocationPolicyDocumentDict = {
+    "reporting_granularity": _,
+    "dimensions": _,
+}
+_params_767: InstanceIpv6AddressDict = {}
+_params_768: InstanceIpv6AddressRequestDict = {}
+_params_769: InstanceMaintenanceOptionsRequestDict = {}
+_params_770: InstanceMarketOptionsRequestDict = {}
+_params_771: InstanceMetadataOptionsRequestDict = {}
+_params_772: InstanceNetworkInterfaceSpecificationDict = {}
+_params_773: InstanceNetworkPerformanceOptionsRequestDict = {}
+_params_774: InstanceRequirementsDict = {}
+_params_775: InstanceRequirementsRequestDict = {"v_cpu_count": _, "memory_mi_b": _}
+_params_776: InstanceRequirementsWithMetadataRequestDict = {}
+_params_777: InstanceSecondaryInterfacePrivateIpAddressRequestDict = {
     "private_ip_address": _
 }
-_params_764: InstanceSecondaryInterfaceSpecificationRequestDict = {}
-_params_765: InstanceSpecificationDict = {"instance_id": _}
-_params_766: InstanceTypeSpecificationRequestDict = {}
-_params_767: IntegrateServicesDict = {}
-_params_768: IpamCidrAuthorizationContextDict = {}
-_params_769: IpamPolicyAllocationRuleRequestDict = {}
-_params_770: IpamPoolSourceResourceRequestDict = {}
-_params_771: IpamPrefixListResolverRuleConditionRequestDict = {"operation": _}
-_params_772: IpamPrefixListResolverRuleRequestDict = {"rule_type": _}
-_params_773: IpPermissionDict = {}
-_params_774: IpRangeDict = {}
-_params_775: Ipv4PrefixSpecificationRequestDict = {}
-_params_776: Ipv6PrefixSpecificationRequestDict = {}
-_params_777: Ipv6RangeDict = {}
-_params_778: LaunchPermissionDict = {}
-_params_779: LaunchPermissionModificationsDict = {}
-_params_780: LaunchTemplateBlockDeviceMappingRequestDict = {}
-_params_781: LaunchTemplateCapacityReservationSpecificationRequestDict = {}
-_params_782: LaunchTemplateConfigDict = {}
-_params_783: LaunchTemplateCpuOptionsRequestDict = {}
-_params_784: LaunchTemplateEbsBlockDeviceRequestDict = {}
-_params_785: LaunchTemplateElasticInferenceAcceleratorDict = {"type": _}
-_params_786: LaunchTemplateEnclaveOptionsRequestDict = {}
-_params_787: LaunchTemplateHibernationOptionsRequestDict = {}
-_params_788: LaunchTemplateIamInstanceProfileSpecificationRequestDict = {}
-_params_789: LaunchTemplateInstanceMaintenanceOptionsRequestDict = {}
-_params_790: LaunchTemplateInstanceMarketOptionsRequestDict = {}
-_params_791: LaunchTemplateInstanceMetadataOptionsRequestDict = {}
-_params_792: LaunchTemplateInstanceNetworkInterfaceSpecificationRequestDict = {}
-_params_793: LaunchTemplateInstanceSecondaryInterfaceSpecificationRequestDict = {}
-_params_794: LaunchTemplateLicenseConfigurationRequestDict = {}
-_params_795: LaunchTemplateNetworkPerformanceOptionsRequestDict = {}
-_params_796: LaunchTemplateOverridesDict = {}
-_params_797: LaunchTemplatePlacementRequestDict = {}
-_params_798: LaunchTemplatePrivateDnsNameOptionsRequestDict = {}
-_params_799: LaunchTemplatesMonitoringRequestDict = {}
-_params_800: LaunchTemplateSpecificationDict = {}
-_params_801: LaunchTemplateSpotMarketOptionsRequestDict = {}
-_params_802: LaunchTemplateTagSpecificationRequestDict = {}
-_params_803: LicenseConfigurationRequestDict = {}
-_params_804: ListImagesInRecycleBinInputDict = {}
-_params_805: ListSnapshotsInRecycleBinInputDict = {}
-_params_806: ListVolumesInRecycleBinInputDict = {}
-_params_807: LoadBalancersConfigDict = {}
-_params_808: LoadPermissionModificationsDict = {}
-_params_809: LoadPermissionRequestDict = {}
-_params_810: LockSnapshotInputDict = {"snapshot_id": _, "lock_mode": _}
-_params_811: MacSystemIntegrityProtectionConfigurationRequestDict = {}
-_params_812: MemoryGiBPerVCpuDict = {}
-_params_813: MemoryGiBPerVCpuRequestDict = {}
-_params_814: MemoryMiBDict = {}
-_params_815: MemoryMiBRequestDict = {"min": _}
-_params_816: ModifyAccountVpcEncryptionControlInputDict = {}
-_params_817: ModifyAddressAttributeInputDict = {"allocation_id": _}
-_params_818: ModifyApplicationStatusCheckInputDict = {"application_status_check_id": _}
-_params_819: ModifyAvailabilityZoneGroupInputDict = {
+_params_778: InstanceSecondaryInterfaceSpecificationRequestDict = {}
+_params_779: InstanceSpecificationDict = {"instance_id": _}
+_params_780: InstanceTypeSpecificationRequestDict = {}
+_params_781: IntegrateServicesDict = {}
+_params_782: IpamCidrAuthorizationContextDict = {}
+_params_783: IpamPolicyAllocationRuleRequestDict = {}
+_params_784: IpamPoolSourceResourceRequestDict = {}
+_params_785: IpamPrefixListResolverRuleConditionRequestDict = {"operation": _}
+_params_786: IpamPrefixListResolverRuleRequestDict = {"rule_type": _}
+_params_787: IpPermissionDict = {}
+_params_788: IpRangeDict = {}
+_params_789: Ipv4PrefixSpecificationRequestDict = {}
+_params_790: Ipv6PrefixSpecificationRequestDict = {}
+_params_791: Ipv6RangeDict = {}
+_params_792: LaunchPermissionDict = {}
+_params_793: LaunchPermissionModificationsDict = {}
+_params_794: LaunchTemplateBlockDeviceMappingRequestDict = {}
+_params_795: LaunchTemplateCapacityReservationSpecificationRequestDict = {}
+_params_796: LaunchTemplateConfigDict = {}
+_params_797: LaunchTemplateCpuOptionsRequestDict = {}
+_params_798: LaunchTemplateEbsBlockDeviceRequestDict = {}
+_params_799: LaunchTemplateElasticInferenceAcceleratorDict = {"type": _}
+_params_800: LaunchTemplateEnclaveOptionsRequestDict = {}
+_params_801: LaunchTemplateHibernationOptionsRequestDict = {}
+_params_802: LaunchTemplateIamInstanceProfileSpecificationRequestDict = {}
+_params_803: LaunchTemplateInstanceMaintenanceOptionsRequestDict = {}
+_params_804: LaunchTemplateInstanceMarketOptionsRequestDict = {}
+_params_805: LaunchTemplateInstanceMetadataOptionsRequestDict = {}
+_params_806: LaunchTemplateInstanceNetworkInterfaceSpecificationRequestDict = {}
+_params_807: LaunchTemplateInstanceSecondaryInterfaceSpecificationRequestDict = {}
+_params_808: LaunchTemplateLicenseConfigurationRequestDict = {}
+_params_809: LaunchTemplateNetworkPerformanceOptionsRequestDict = {}
+_params_810: LaunchTemplateOverridesDict = {}
+_params_811: LaunchTemplatePlacementRequestDict = {}
+_params_812: LaunchTemplatePrivateDnsNameOptionsRequestDict = {}
+_params_813: LaunchTemplatesMonitoringRequestDict = {}
+_params_814: LaunchTemplateSpecificationDict = {}
+_params_815: LaunchTemplateSpotMarketOptionsRequestDict = {}
+_params_816: LaunchTemplateTagSpecificationRequestDict = {}
+_params_817: LicenseConfigurationRequestDict = {}
+_params_818: ListImagesInRecycleBinInputDict = {}
+_params_819: ListSnapshotsInRecycleBinInputDict = {}
+_params_820: ListVolumesInRecycleBinInputDict = {}
+_params_821: LoadBalancersConfigDict = {}
+_params_822: LoadPermissionModificationsDict = {}
+_params_823: LoadPermissionRequestDict = {}
+_params_824: LockSnapshotInputDict = {"snapshot_id": _, "lock_mode": _}
+_params_825: MacSystemIntegrityProtectionConfigurationRequestDict = {}
+_params_826: MemoryGiBPerVCpuDict = {}
+_params_827: MemoryGiBPerVCpuRequestDict = {}
+_params_828: MemoryMiBDict = {}
+_params_829: MemoryMiBRequestDict = {"min": _}
+_params_830: ModifyAccountVpcEncryptionControlInputDict = {}
+_params_831: ModifyAddressAttributeInputDict = {"allocation_id": _}
+_params_832: ModifyApplicationStatusCheckInputDict = {"application_status_check_id": _}
+_params_833: ModifyAvailabilityZoneGroupInputDict = {
     "group_name": _,
     "opt_in_status": _,
 }
-_params_820: ModifyCapacityReservationFleetInputDict = {
+_params_834: ModifyCapacityReservationFleetInputDict = {
     "capacity_reservation_fleet_id": _
 }
-_params_821: ModifyCapacityReservationInputDict = {"capacity_reservation_id": _}
-_params_822: ModifyClientVpnEndpointAuthorizationPolicyInputDict = {
+_params_835: ModifyCapacityReservationInputDict = {"capacity_reservation_id": _}
+_params_836: ModifyClientVpnEndpointAuthorizationPolicyInputDict = {
     "client_vpn_endpoint_id": _
 }
-_params_823: ModifyClientVpnEndpointInputDict = {"client_vpn_endpoint_id": _}
-_params_824: ModifyDefaultCreditSpecificationInputDict = {
+_params_837: ModifyClientVpnEndpointInputDict = {"client_vpn_endpoint_id": _}
+_params_838: ModifyDefaultCreditSpecificationInputDict = {
     "instance_family": _,
     "cpu_credits": _,
 }
-_params_825: ModifyEbsDefaultKmsKeyIdInputDict = {"kms_key_id": _}
-_params_826: ModifyFleetInputDict = {"fleet_id": _}
-_params_827: ModifyFpgaImageAttributeInputDict = {"fpga_image_id": _}
-_params_828: ModifyHostsInputDict = {"host_ids": _}
-_params_829: ModifyIdentityIdFormatInputDict = {
+_params_839: ModifyEbsDefaultKmsKeyIdInputDict = {"kms_key_id": _}
+_params_840: ModifyFleetInputDict = {"fleet_id": _}
+_params_841: ModifyFpgaImageAttributeInputDict = {"fpga_image_id": _}
+_params_842: ModifyHostsInputDict = {"host_ids": _}
+_params_843: ModifyIdentityIdFormatInputDict = {
     "resource": _,
     "use_long_ids": _,
     "principal_arn": _,
 }
-_params_830: ModifyIdFormatInputDict = {"resource": _, "use_long_ids": _}
-_params_831: ModifyImageAttributeInputDict = {"image_id": _}
-_params_832: ModifyInstanceAttributeInputDict = {"instance_id": _}
-_params_833: ModifyInstanceCapacityReservationAttributesInputDict = {
+_params_844: ModifyIdFormatInputDict = {"resource": _, "use_long_ids": _}
+_params_845: ModifyImageAttributeInputDict = {"image_id": _}
+_params_846: ModifyInstanceAttributeInputDict = {"instance_id": _}
+_params_847: ModifyInstanceCapacityReservationAttributesInputDict = {
     "instance_id": _,
     "capacity_reservation_specification": _,
 }
-_params_834: ModifyInstanceConnectEndpointInputDict = {
+_params_848: ModifyInstanceConnectEndpointInputDict = {
     "instance_connect_endpoint_id": _
 }
-_params_835: ModifyInstanceCpuOptionsInputDict = {"instance_id": _}
-_params_836: ModifyInstanceCreditSpecificationInputDict = {
+_params_849: ModifyInstanceCpuOptionsInputDict = {"instance_id": _}
+_params_850: ModifyInstanceCreditSpecificationInputDict = {
     "instance_credit_specifications": _
 }
-_params_837: ModifyInstanceEventStartTimeInputDict = {
+_params_851: ModifyInstanceEventStartTimeInputDict = {
     "instance_id": _,
     "instance_event_id": _,
     "not_before": _,
 }
-_params_838: ModifyInstanceEventWindowInputDict = {"instance_event_window_id": _}
-_params_839: ModifyInstanceMaintenanceOptionsInputDict = {"instance_id": _}
-_params_840: ModifyInstanceMetadataDefaultsInputDict = {}
-_params_841: ModifyInstanceMetadataOptionsInputDict = {"instance_id": _}
-_params_842: ModifyInstanceNetworkPerformanceOptionsInputDict = {
+_params_852: ModifyInstanceEventWindowInputDict = {"instance_event_window_id": _}
+_params_853: ModifyInstanceMaintenanceOptionsInputDict = {"instance_id": _}
+_params_854: ModifyInstanceMetadataDefaultsInputDict = {}
+_params_855: ModifyInstanceMetadataOptionsInputDict = {"instance_id": _}
+_params_856: ModifyInstanceNetworkPerformanceOptionsInputDict = {
     "instance_id": _,
     "bandwidth_weighting": _,
 }
-_params_843: ModifyInstancePlacementInputDict = {"instance_id": _}
-_params_844: ModifyIpamInputDict = {"ipam_id": _}
-_params_845: ModifyIpamPolicyAllocationRulesInputDict = {
+_params_857: ModifyInstancePlacementInputDict = {"instance_id": _}
+_params_858: ModifyIpamInputDict = {"ipam_id": _}
+_params_859: ModifyIpamPolicyAllocationRulesInputDict = {
     "ipam_policy_id": _,
     "locale": _,
     "resource_type": _,
 }
-_params_846: ModifyIpamPoolAllocationInputDict = {"ipam_pool_allocation_id": _}
-_params_847: ModifyIpamPoolInputDict = {"ipam_pool_id": _}
-_params_848: ModifyIpamPrefixListResolverInputDict = {"ipam_prefix_list_resolver_id": _}
-_params_849: ModifyIpamPrefixListResolverTargetInputDict = {
+_params_860: ModifyIpamPoolAllocationInputDict = {"ipam_pool_allocation_id": _}
+_params_861: ModifyIpamPoolInputDict = {"ipam_pool_id": _}
+_params_862: ModifyIpamPrefixListResolverInputDict = {"ipam_prefix_list_resolver_id": _}
+_params_863: ModifyIpamPrefixListResolverTargetInputDict = {
     "ipam_prefix_list_resolver_target_id": _
 }
-_params_850: ModifyIpamResourceCidrInputDict = {
+_params_864: ModifyIpamResourceCidrInputDict = {
     "resource_id": _,
     "resource_cidr": _,
     "resource_region": _,
     "current_ipam_scope_id": _,
     "monitored": _,
 }
-_params_851: ModifyIpamResourceDiscoveryInputDict = {"ipam_resource_discovery_id": _}
-_params_852: ModifyIpamRoutingPolicyRegistrationInputDict = {
+_params_865: ModifyIpamResourceDiscoveryInputDict = {"ipam_resource_discovery_id": _}
+_params_866: ModifyIpamRoutingPolicyRegistrationInputDict = {
     "ipam_internet_registry_association_id": _,
     "cidr": _,
     "asns": _,
 }
-_params_853: ModifyIpamScopeInputDict = {"ipam_scope_id": _}
-_params_854: ModifyLaunchTemplateInputDict = {}
-_params_855: ModifyLocalGatewayRouteInputDict = {"local_gateway_route_table_id": _}
-_params_856: ModifyManagedPrefixListInputDict = {"prefix_list_id": _}
-_params_857: ModifyManagedResourceVisibilityInputDict = {"default_visibility": _}
-_params_858: ModifyNetworkInterfaceAttributeInputDict = {"network_interface_id": _}
-_params_859: ModifyPrivateDnsNameOptionsInputDict = {"instance_id": _}
-_params_860: ModifyPublicIpDnsNameOptionsInputDict = {
+_params_867: ModifyIpamScopeInputDict = {"ipam_scope_id": _}
+_params_868: ModifyLaunchTemplateInputDict = {}
+_params_869: ModifyLocalGatewayRouteInputDict = {"local_gateway_route_table_id": _}
+_params_870: ModifyManagedPrefixListInputDict = {"prefix_list_id": _}
+_params_871: ModifyManagedResourceVisibilityInputDict = {"default_visibility": _}
+_params_872: ModifyMetricCategoryInputDict = {"metric_category_id": _, "metrics": _}
+_params_873: ModifyNetworkingFlexCostAllocationPolicyInputDict = {"fca_policy_id": _}
+_params_874: ModifyNetworkInterfaceAttributeInputDict = {"network_interface_id": _}
+_params_875: ModifyPrivateDnsNameOptionsInputDict = {"instance_id": _}
+_params_876: ModifyPublicIpDnsNameOptionsInputDict = {
     "network_interface_id": _,
     "hostname_type": _,
 }
-_params_861: ModifyReservedInstancesInputDict = {
+_params_877: ModifyReservedInstancesInputDict = {
     "reserved_instances_ids": _,
     "target_configurations": _,
 }
-_params_862: ModifyRouteServerInputDict = {"route_server_id": _}
-_params_863: ModifySecurityGroupRulesInputDict = {
+_params_878: ModifyRouteServerInputDict = {"route_server_id": _}
+_params_879: ModifySecurityGroupRulesInputDict = {
     "group_id": _,
     "security_group_rules": _,
 }
-_params_864: ModifySnapshotAttributeInputDict = {"snapshot_id": _}
-_params_865: ModifySnapshotTierInputDict = {"snapshot_id": _}
-_params_866: ModifySpotFleetRequestInputDict = {"spot_fleet_request_id": _}
-_params_867: ModifySubnetAttributeInputDict = {"subnet_id": _}
-_params_868: ModifyTrafficMirrorFilterNetworkServicesInputDict = {
+_params_880: ModifySnapshotAttributeInputDict = {"snapshot_id": _}
+_params_881: ModifySnapshotTierInputDict = {"snapshot_id": _}
+_params_882: ModifySpotFleetRequestInputDict = {"spot_fleet_request_id": _}
+_params_883: ModifySubnetAttributeInputDict = {"subnet_id": _}
+_params_884: ModifyTrafficMirrorFilterNetworkServicesInputDict = {
     "traffic_mirror_filter_id": _
 }
-_params_869: ModifyTrafficMirrorFilterRuleInputDict = {
+_params_885: ModifyTrafficMirrorFilterRuleInputDict = {
     "traffic_mirror_filter_rule_id": _
 }
-_params_870: ModifyTrafficMirrorSessionInputDict = {"traffic_mirror_session_id": _}
-_params_871: ModifyTransitGatewayAttachmentNatConfigurationInputDict = {
+_params_886: ModifyTrafficMirrorSessionInputDict = {"traffic_mirror_session_id": _}
+_params_887: ModifyTransitGatewayAttachmentNatConfigurationInputDict = {
     "transit_gateway_attachment_id": _
 }
-_params_872: ModifyTransitGatewayInputDict = {"transit_gateway_id": _}
-_params_873: ModifyTransitGatewayMeteringPolicyInputDict = {
+_params_888: ModifyTransitGatewayInputDict = {"transit_gateway_id": _}
+_params_889: ModifyTransitGatewayMeteringPolicyInputDict = {
     "transit_gateway_metering_policy_id": _
 }
-_params_874: ModifyTransitGatewayOptionsDict = {}
-_params_875: ModifyTransitGatewayPolicyTableEntryInputDict = {
+_params_890: ModifyTransitGatewayOptionsDict = {}
+_params_891: ModifyTransitGatewayPolicyTableEntryInputDict = {
     "transit_gateway_policy_table_id": _,
     "policy_rule_number": _,
 }
-_params_876: ModifyTransitGatewayPrefixListReferenceInputDict = {
+_params_892: ModifyTransitGatewayPrefixListReferenceInputDict = {
     "transit_gateway_route_table_id": _,
     "prefix_list_id": _,
 }
-_params_877: ModifyTransitGatewayVpcAttachmentInputDict = {
+_params_893: ModifyTransitGatewayVpcAttachmentInputDict = {
     "transit_gateway_attachment_id": _
 }
-_params_878: ModifyTransitGatewayVpcAttachmentRequestOptionsDict = {}
-_params_879: ModifyVerifiedAccessEndpointCidrOptionsDict = {}
-_params_880: ModifyVerifiedAccessEndpointEniOptionsDict = {}
-_params_881: ModifyVerifiedAccessEndpointInputDict = {"verified_access_endpoint_id": _}
-_params_882: ModifyVerifiedAccessEndpointLoadBalancerOptionsDict = {}
-_params_883: ModifyVerifiedAccessEndpointPolicyInputDict = {
+_params_894: ModifyTransitGatewayVpcAttachmentRequestOptionsDict = {}
+_params_895: ModifyVerifiedAccessEndpointCidrOptionsDict = {}
+_params_896: ModifyVerifiedAccessEndpointEniOptionsDict = {}
+_params_897: ModifyVerifiedAccessEndpointInputDict = {"verified_access_endpoint_id": _}
+_params_898: ModifyVerifiedAccessEndpointLoadBalancerOptionsDict = {}
+_params_899: ModifyVerifiedAccessEndpointPolicyInputDict = {
     "verified_access_endpoint_id": _
 }
-_params_884: ModifyVerifiedAccessEndpointPortRangeDict = {}
-_params_885: ModifyVerifiedAccessEndpointRdsOptionsDict = {}
-_params_886: ModifyVerifiedAccessGroupInputDict = {"verified_access_group_id": _}
-_params_887: ModifyVerifiedAccessGroupPolicyInputDict = {"verified_access_group_id": _}
-_params_888: ModifyVerifiedAccessInstanceInputDict = {"verified_access_instance_id": _}
-_params_889: ModifyVerifiedAccessInstanceLoggingConfigurationInputDict = {
+_params_900: ModifyVerifiedAccessEndpointPortRangeDict = {}
+_params_901: ModifyVerifiedAccessEndpointRdsOptionsDict = {}
+_params_902: ModifyVerifiedAccessGroupInputDict = {"verified_access_group_id": _}
+_params_903: ModifyVerifiedAccessGroupPolicyInputDict = {"verified_access_group_id": _}
+_params_904: ModifyVerifiedAccessInstanceInputDict = {"verified_access_instance_id": _}
+_params_905: ModifyVerifiedAccessInstanceLoggingConfigurationInputDict = {
     "verified_access_instance_id": _,
     "access_logs": _,
 }
-_params_890: ModifyVerifiedAccessNativeApplicationOidcOptionsDict = {}
-_params_891: ModifyVerifiedAccessTrustProviderDeviceOptionsDict = {}
-_params_892: ModifyVerifiedAccessTrustProviderInputDict = {
+_params_906: ModifyVerifiedAccessNativeApplicationOidcOptionsDict = {}
+_params_907: ModifyVerifiedAccessTrustProviderDeviceOptionsDict = {}
+_params_908: ModifyVerifiedAccessTrustProviderInputDict = {
     "verified_access_trust_provider_id": _
 }
-_params_893: ModifyVerifiedAccessTrustProviderOidcOptionsDict = {}
-_params_894: ModifyVolumeAttributeInputDict = {"volume_id": _}
-_params_895: ModifyVolumeInputDict = {"volume_id": _}
-_params_896: ModifyVpcAttributeInputDict = {"vpc_id": _}
-_params_897: ModifyVpcBlockPublicAccessExclusionInputDict = {
+_params_909: ModifyVerifiedAccessTrustProviderOidcOptionsDict = {}
+_params_910: ModifyVolumeAttributeInputDict = {"volume_id": _}
+_params_911: ModifyVolumeInputDict = {"volume_id": _}
+_params_912: ModifyVpcAttributeInputDict = {"vpc_id": _}
+_params_913: ModifyVpcBlockPublicAccessExclusionInputDict = {
     "exclusion_id": _,
     "internet_gateway_exclusion_mode": _,
 }
-_params_898: ModifyVpcBlockPublicAccessOptionsInputDict = {
+_params_914: ModifyVpcBlockPublicAccessOptionsInputDict = {
     "internet_gateway_block_mode": _
 }
-_params_899: ModifyVpcEncryptionControlInputDict = {"vpc_encryption_control_id": _}
-_params_900: ModifyVpcEndpointConnectionNotificationInputDict = {
+_params_915: ModifyVpcEncryptionControlInputDict = {"vpc_encryption_control_id": _}
+_params_916: ModifyVpcEndpointConnectionNotificationInputDict = {
     "connection_notification_id": _
 }
-_params_901: ModifyVpcEndpointInputDict = {"vpc_endpoint_id": _}
-_params_902: ModifyVpcEndpointPayerResponsibilityInputDict = {
+_params_917: ModifyVpcEndpointInputDict = {"vpc_endpoint_id": _}
+_params_918: ModifyVpcEndpointPayerResponsibilityInputDict = {
     "vpc_endpoint_id": _,
     "payer_responsibility": _,
     "scope": _,
 }
-_params_903: ModifyVpcEndpointServiceConfigurationInputDict = {"service_id": _}
-_params_904: ModifyVpcEndpointServicePayerResponsibilityInputDict = {
+_params_919: ModifyVpcEndpointServiceConfigurationInputDict = {"service_id": _}
+_params_920: ModifyVpcEndpointServicePayerResponsibilityInputDict = {
     "service_id": _,
     "payer_responsibility": _,
 }
-_params_905: ModifyVpcEndpointServicePermissionsInputDict = {"service_id": _}
-_params_906: ModifyVpcPeeringConnectionOptionsInputDict = {
+_params_921: ModifyVpcEndpointServicePermissionsInputDict = {"service_id": _}
+_params_922: ModifyVpcPeeringConnectionOptionsInputDict = {
     "vpc_peering_connection_id": _
 }
-_params_907: ModifyVpcTenancyInputDict = {"vpc_id": _, "instance_tenancy": _}
-_params_908: ModifyVpnConnectionInputDict = {"vpn_connection_id": _}
-_params_909: ModifyVpnConnectionOptionsInputDict = {"vpn_connection_id": _}
-_params_910: ModifyVpnTunnelCertificateInputDict = {
+_params_923: ModifyVpcTenancyInputDict = {"vpc_id": _, "instance_tenancy": _}
+_params_924: ModifyVpnConnectionInputDict = {"vpn_connection_id": _}
+_params_925: ModifyVpnConnectionOptionsInputDict = {"vpn_connection_id": _}
+_params_926: ModifyVpnTunnelCertificateInputDict = {
     "vpn_connection_id": _,
     "vpn_tunnel_outside_ip_address": _,
 }
-_params_911: ModifyVpnTunnelOptionsInputDict = {
+_params_927: ModifyVpnTunnelOptionsInputDict = {
     "vpn_connection_id": _,
     "vpn_tunnel_outside_ip_address": _,
     "tunnel_options": _,
 }
-_params_912: ModifyVpnTunnelOptionsSpecificationDict = {}
-_params_913: MonitorInstancesInputDict = {"instance_ids": _}
-_params_914: MoveAddressToVpcInputDict = {"public_ip": _}
-_params_915: MoveByoipCidrToIpamInputDict = {
+_params_928: ModifyVpnTunnelOptionsSpecificationDict = {}
+_params_929: MonitorInstancesInputDict = {"instance_ids": _}
+_params_930: MoveAddressToVpcInputDict = {"public_ip": _}
+_params_931: MoveByoipCidrToIpamInputDict = {
     "cidr": _,
     "ipam_pool_id": _,
     "ipam_pool_owner": _,
 }
-_params_916: MoveCapacityReservationInstancesInputDict = {
+_params_932: MoveCapacityReservationInstancesInputDict = {
     "source_capacity_reservation_id": _,
     "destination_capacity_reservation_id": _,
     "instance_count": _,
 }
-_params_917: NetworkBandwidthGbpsDict = {}
-_params_918: NetworkBandwidthGbpsRequestDict = {}
-_params_919: NetworkInterfaceAttachmentChangesDict = {}
-_params_920: NetworkInterfaceCountDict = {}
-_params_921: NetworkInterfaceCountRequestDict = {}
-_params_922: NewDhcpConfigurationDict = {}
-_params_923: OnDemandOptionsRequestDict = {}
-_params_924: OperatorRequestDict = {}
-_params_925: PacketHeaderStatementRequestDict = {}
-_params_926: PathRequestFilterDict = {}
-_params_927: PathStatementRequestDict = {}
-_params_928: PeeringConnectionOptionsRequestDict = {}
-_params_929: PerformanceFactorReferenceDict = {}
-_params_930: PerformanceFactorReferenceRequestDict = {}
-_params_931: Phase1DHGroupNumbersRequestListValueDict = {}
-_params_932: Phase1EncryptionAlgorithmsRequestListValueDict = {}
-_params_933: Phase1IntegrityAlgorithmsRequestListValueDict = {}
-_params_934: Phase2DHGroupNumbersRequestListValueDict = {}
-_params_935: Phase2EncryptionAlgorithmsRequestListValueDict = {}
-_params_936: Phase2IntegrityAlgorithmsRequestListValueDict = {}
-_params_937: PlacementDict = {}
-_params_938: PortRangeDict = {}
-_params_939: PrefixListIdDict = {}
-_params_940: PriceScheduleSpecificationDict = {}
-_params_941: PrivateDnsNameOptionsRequestDict = {}
-_params_942: PrivateIpAddressSpecificationDict = {}
-_params_943: ProvisionByoipCidrInputDict = {"cidr": _}
-_params_944: ProvisionIpamByoasnInputDict = {
+_params_933: NatFlexCostAllocationPolicyDocumentDict = {
+    "reporting_granularity": _,
+    "dimensions": _,
+}
+_params_934: NetworkBandwidthGbpsDict = {}
+_params_935: NetworkBandwidthGbpsRequestDict = {}
+_params_936: NetworkInterfaceAttachmentChangesDict = {}
+_params_937: NetworkInterfaceCountDict = {}
+_params_938: NetworkInterfaceCountRequestDict = {}
+_params_939: NewDhcpConfigurationDict = {}
+_params_940: OnDemandOptionsRequestDict = {}
+_params_941: OperatorRequestDict = {}
+_params_942: PacketHeaderStatementRequestDict = {}
+_params_943: PathRequestFilterDict = {}
+_params_944: PathStatementRequestDict = {}
+_params_945: PcxFlexCostAllocationPolicyDocumentDict = {
+    "reporting_granularity": _,
+    "dimensions": _,
+}
+_params_946: PeeringConnectionOptionsRequestDict = {}
+_params_947: PerformanceFactorReferenceDict = {}
+_params_948: PerformanceFactorReferenceRequestDict = {}
+_params_949: Phase1DHGroupNumbersRequestListValueDict = {}
+_params_950: Phase1EncryptionAlgorithmsRequestListValueDict = {}
+_params_951: Phase1IntegrityAlgorithmsRequestListValueDict = {}
+_params_952: Phase2DHGroupNumbersRequestListValueDict = {}
+_params_953: Phase2EncryptionAlgorithmsRequestListValueDict = {}
+_params_954: Phase2IntegrityAlgorithmsRequestListValueDict = {}
+_params_955: PlacementDict = {}
+_params_956: PortRangeDict = {}
+_params_957: PrefixListIdDict = {}
+_params_958: PriceScheduleSpecificationDict = {}
+_params_959: PrivateDnsNameOptionsRequestDict = {}
+_params_960: PrivateIpAddressSpecificationDict = {}
+_params_961: ProvisionByoipCidrInputDict = {"cidr": _}
+_params_962: ProvisionIpamByoasnInputDict = {
     "ipam_id": _,
     "asn": _,
     "asn_authorization_context": _,
 }
-_params_945: ProvisionIpamPoolCidrInputDict = {"ipam_pool_id": _}
-_params_946: ProvisionPublicIpv4PoolCidrInputDict = {
+_params_963: ProvisionIpamPoolCidrInputDict = {"ipam_pool_id": _}
+_params_964: ProvisionPublicIpv4PoolCidrInputDict = {
     "ipam_pool_id": _,
     "pool_id": _,
     "netmask_length": _,
 }
-_params_947: PurchaseCapacityBlockExtensionInputDict = {
+_params_965: PurchaseCapacityBlockExtensionInputDict = {
     "capacity_block_extension_offering_id": _,
     "capacity_reservation_id": _,
 }
-_params_948: PurchaseCapacityBlockInputDict = {
+_params_966: PurchaseCapacityBlockInputDict = {
     "capacity_block_offering_id": _,
     "instance_platform": _,
 }
-_params_949: PurchaseHostReservationInputDict = {"host_id_set": _, "offering_id": _}
-_params_950: PurchaseRequestDict = {"instance_count": _, "purchase_token": _}
-_params_951: PurchaseReservedInstancesOfferingInputDict = {
+_params_967: PurchaseHostReservationInputDict = {"host_id_set": _, "offering_id": _}
+_params_968: PurchaseRequestDict = {"instance_count": _, "purchase_token": _}
+_params_969: PurchaseReservedInstancesOfferingInputDict = {
     "instance_count": _,
     "reserved_instances_offering_id": _,
 }
-_params_952: PurchaseScheduledInstancesInputDict = {"purchase_requests": _}
-_params_953: RebootInstancesInputDict = {"instance_ids": _}
-_params_954: RegisterImageInputDict = {"name": _}
-_params_955: RegisterInstanceEventNotificationAttributesInputDict = {
+_params_970: PurchaseScheduledInstancesInputDict = {"purchase_requests": _}
+_params_971: RebootInstancesInputDict = {"instance_ids": _}
+_params_972: RegisterImageInputDict = {"name": _}
+_params_973: RegisterInstanceEventNotificationAttributesInputDict = {
     "instance_tag_attribute": _
 }
-_params_956: RegisterInstanceTagAttributeRequestDict = {}
-_params_957: RegisterTransitGatewayMulticastGroupMembersInputDict = {
+_params_974: RegisterInstanceTagAttributeRequestDict = {}
+_params_975: RegisterTransitGatewayMulticastGroupMembersInputDict = {
     "transit_gateway_multicast_domain_id": _,
     "network_interface_ids": _,
 }
-_params_958: RegisterTransitGatewayMulticastGroupSourcesInputDict = {
+_params_976: RegisterTransitGatewayMulticastGroupSourcesInputDict = {
     "transit_gateway_multicast_domain_id": _,
     "network_interface_ids": _,
 }
-_params_959: RejectCapacityReservationBillingOwnershipInputDict = {
+_params_977: RejectCapacityReservationBillingOwnershipInputDict = {
     "capacity_reservation_id": _
 }
-_params_960: RejectTransitGatewayClientVpnAttachmentInputDict = {
+_params_978: RejectTransitGatewayClientVpnAttachmentInputDict = {
     "transit_gateway_attachment_id": _
 }
-_params_961: RejectTransitGatewayMulticastDomainAssociationsInputDict = {}
-_params_962: RejectTransitGatewayPeeringAttachmentInputDict = {
+_params_979: RejectTransitGatewayMulticastDomainAssociationsInputDict = {}
+_params_980: RejectTransitGatewayPeeringAttachmentInputDict = {
     "transit_gateway_attachment_id": _
 }
-_params_963: RejectTransitGatewayVpcAttachmentInputDict = {
+_params_981: RejectTransitGatewayVpcAttachmentInputDict = {
     "transit_gateway_attachment_id": _
 }
-_params_964: RejectVpcEndpointConnectionsInputDict = {
+_params_982: RejectVpcEndpointConnectionsInputDict = {
     "service_id": _,
     "vpc_endpoint_ids": _,
 }
-_params_965: RejectVpcPeeringConnectionInputDict = {"vpc_peering_connection_id": _}
-_params_966: ReleaseAddressInputDict = {}
-_params_967: ReleaseHostsInputDict = {"host_ids": _}
-_params_968: ReleaseIpamPoolAllocationInputDict = {
+_params_983: RejectVpcPeeringConnectionInputDict = {"vpc_peering_connection_id": _}
+_params_984: ReleaseAddressInputDict = {}
+_params_985: ReleaseHostsInputDict = {"host_ids": _}
+_params_986: ReleaseIpamPoolAllocationInputDict = {
     "ipam_pool_id": _,
     "cidr": _,
     "ipam_pool_allocation_id": _,
 }
-_params_969: RemoveIpamOperatingRegionDict = {}
-_params_970: RemoveIpamOrganizationalUnitExclusionDict = {}
-_params_971: RemovePrefixListEntryDict = {"cidr": _}
-_params_972: ReplaceIamInstanceProfileAssociationInputDict = {
+_params_987: RemoveIpamOperatingRegionDict = {}
+_params_988: RemoveIpamOrganizationalUnitExclusionDict = {}
+_params_989: RemovePrefixListEntryDict = {"cidr": _}
+_params_990: ReplaceIamInstanceProfileAssociationInputDict = {
     "iam_instance_profile": _,
     "association_id": _,
 }
-_params_973: ReplaceImageCriteriaInAllowedImagesSettingsInputDict = {}
-_params_974: ReplaceImageInstanceTypeSpecificationInputDict = {"image_id": _}
-_params_975: ReplaceNetworkAclAssociationInputDict = {
+_params_991: ReplaceImageCriteriaInAllowedImagesSettingsInputDict = {}
+_params_992: ReplaceImageInstanceTypeSpecificationInputDict = {"image_id": _}
+_params_993: ReplaceNetworkAclAssociationInputDict = {
     "association_id": _,
     "network_acl_id": _,
 }
-_params_976: ReplaceNetworkAclEntryInputDict = {
+_params_994: ReplaceNetworkAclEntryInputDict = {
     "network_acl_id": _,
     "rule_number": _,
     "protocol": _,
     "rule_action": _,
     "egress": _,
 }
-_params_977: ReplaceRouteInputDict = {"route_table_id": _}
-_params_978: ReplaceRouteTableAssociationInputDict = {
+_params_995: ReplaceRouteInputDict = {"route_table_id": _}
+_params_996: ReplaceRouteTableAssociationInputDict = {
     "association_id": _,
     "route_table_id": _,
 }
-_params_979: ReplaceTransitGatewayRouteInputDict = {
+_params_997: ReplaceTransitGatewayRouteInputDict = {
     "destination_cidr_block": _,
     "transit_gateway_route_table_id": _,
 }
-_params_980: ReplaceVpnTunnelInputDict = {
+_params_998: ReplaceVpnTunnelInputDict = {
     "vpn_connection_id": _,
     "vpn_tunnel_outside_ip_address": _,
 }
-_params_981: ReportInstanceStatusInputDict = {
+_params_999: ReportInstanceStatusInputDict = {
     "instances": _,
     "status": _,
     "reason_codes": _,
 }
-_params_982: RequestFilterPortRangeDict = {}
-_params_983: RequestIpamResourceTagDict = {}
-_params_984: RequestLaunchTemplateDataDict = {}
-_params_985: RequestSpotFleetInputDict = {"spot_fleet_request_config": _}
-_params_986: RequestSpotInstancesInputDict = {}
-_params_987: RequestSpotLaunchSpecificationDict = {}
-_params_988: ReservationFleetInstanceSpecificationDict = {}
-_params_989: ReservedCapacityFallbackOptionsRequestDict = {}
-_params_990: ReservedCapacityOptionsRequestDict = {}
-_params_991: ReservedInstanceLimitPriceDict = {}
-_params_992: ReservedInstancesConfigurationDict = {}
-_params_993: ResetAddressAttributeInputDict = {"allocation_id": _, "attribute": _}
-_params_994: ResetEbsDefaultKmsKeyIdInputDict = {}
-_params_995: ResetFpgaImageAttributeInputDict = {"fpga_image_id": _}
-_params_996: ResetImageAttributeInputDict = {"attribute": _, "image_id": _}
-_params_997: ResetInstanceAttributeInputDict = {"instance_id": _, "attribute": _}
-_params_998: ResetNetworkInterfaceAttributeInputDict = {"network_interface_id": _}
-_params_999: ResetSnapshotAttributeInputDict = {"attribute": _, "snapshot_id": _}
-_params_1000: ResourceStatementRequestDict = {}
-_params_1001: ResourceTypeOptionDict = {}
-_params_1002: ResourceTypeRequestDict = {}
-_params_1003: RestoreAddressToClassicInputDict = {"public_ip": _}
-_params_1004: RestoreImageFromRecycleBinInputDict = {"image_id": _}
-_params_1005: RestoreManagedPrefixListVersionInputDict = {
+_params_1000: RequestFilterPortRangeDict = {}
+_params_1001: RequestIpamResourceTagDict = {}
+_params_1002: RequestLaunchTemplateDataDict = {}
+_params_1003: RequestSpotFleetInputDict = {"spot_fleet_request_config": _}
+_params_1004: RequestSpotInstancesInputDict = {}
+_params_1005: RequestSpotLaunchSpecificationDict = {}
+_params_1006: ReservationFleetInstanceSpecificationDict = {}
+_params_1007: ReservedCapacityFallbackOptionsRequestDict = {}
+_params_1008: ReservedCapacityOptionsRequestDict = {}
+_params_1009: ReservedInstanceLimitPriceDict = {}
+_params_1010: ReservedInstancesConfigurationDict = {}
+_params_1011: ResetAddressAttributeInputDict = {"allocation_id": _, "attribute": _}
+_params_1012: ResetEbsDefaultKmsKeyIdInputDict = {}
+_params_1013: ResetFpgaImageAttributeInputDict = {"fpga_image_id": _}
+_params_1014: ResetImageAttributeInputDict = {"attribute": _, "image_id": _}
+_params_1015: ResetInstanceAttributeInputDict = {"instance_id": _, "attribute": _}
+_params_1016: ResetNetworkInterfaceAttributeInputDict = {"network_interface_id": _}
+_params_1017: ResetSnapshotAttributeInputDict = {"attribute": _, "snapshot_id": _}
+_params_1018: ResourceStatementRequestDict = {}
+_params_1019: ResourceTypeOptionDict = {}
+_params_1020: ResourceTypeRequestDict = {}
+_params_1021: RestoreAddressToClassicInputDict = {"public_ip": _}
+_params_1022: RestoreImageFromRecycleBinInputDict = {"image_id": _}
+_params_1023: RestoreManagedPrefixListVersionInputDict = {
     "prefix_list_id": _,
     "previous_version": _,
     "current_version": _,
 }
-_params_1006: RestoreSnapshotFromRecycleBinInputDict = {"snapshot_id": _}
-_params_1007: RestoreSnapshotTierInputDict = {"snapshot_id": _}
-_params_1008: RestoreVolumeFromRecycleBinInputDict = {"volume_id": _}
-_params_1009: RevokeClientVpnIngressInputDict = {
+_params_1024: RestoreSnapshotFromRecycleBinInputDict = {"snapshot_id": _}
+_params_1025: RestoreSnapshotTierInputDict = {"snapshot_id": _}
+_params_1026: RestoreVolumeFromRecycleBinInputDict = {"volume_id": _}
+_params_1027: RevokeClientVpnIngressInputDict = {
     "client_vpn_endpoint_id": _,
     "target_network_cidr": _,
 }
-_params_1010: RevokeSecurityGroupEgressInputDict = {"group_id": _}
-_params_1011: RevokeSecurityGroupIngressInputDict = {}
-_params_1012: RouteServerBgpOptionsRequestDict = {"peer_asn": _}
-_params_1013: RunInstancesInputDict = {"max_count": _, "min_count": _}
-_params_1014: RunInstancesMonitoringEnabledDict = {"enabled": _}
-_params_1015: RunScheduledInstancesInputDict = {
+_params_1028: RevokeSecurityGroupEgressInputDict = {"group_id": _}
+_params_1029: RevokeSecurityGroupIngressInputDict = {}
+_params_1030: RouteServerBgpOptionsRequestDict = {"peer_asn": _}
+_params_1031: RunInstancesInputDict = {"max_count": _, "min_count": _}
+_params_1032: RunInstancesMonitoringEnabledDict = {"enabled": _}
+_params_1033: RunScheduledInstancesInputDict = {
     "launch_specification": _,
     "scheduled_instance_id": _,
 }
-_params_1016: S3ObjectTagDict = {}
-_params_1017: S3StorageDict = {}
-_params_1018: ScanResultConditionRequestDict = {}
-_params_1019: ScheduledInstanceRecurrenceRequestDict = {}
-_params_1020: ScheduledInstancesBlockDeviceMappingDict = {}
-_params_1021: ScheduledInstancesEbsDict = {}
-_params_1022: ScheduledInstancesIamInstanceProfileDict = {}
-_params_1023: ScheduledInstancesIpv6AddressDict = {}
-_params_1024: ScheduledInstancesLaunchSpecificationDict = {"image_id": _}
-_params_1025: ScheduledInstancesMonitoringDict = {}
-_params_1026: ScheduledInstancesNetworkInterfaceDict = {}
-_params_1027: ScheduledInstancesPlacementDict = {}
-_params_1028: ScheduledInstancesPrivateIpAddressConfigDict = {}
-_params_1029: SearchLocalGatewayRoutesInputDict = {"local_gateway_route_table_id": _}
-_params_1030: SearchTransitGatewayMulticastGroupsInputDict = {
+_params_1034: S3ObjectTagDict = {}
+_params_1035: S3StorageDict = {}
+_params_1036: ScanResultConditionRequestDict = {}
+_params_1037: ScheduledInstanceRecurrenceRequestDict = {}
+_params_1038: ScheduledInstancesBlockDeviceMappingDict = {}
+_params_1039: ScheduledInstancesEbsDict = {}
+_params_1040: ScheduledInstancesIamInstanceProfileDict = {}
+_params_1041: ScheduledInstancesIpv6AddressDict = {}
+_params_1042: ScheduledInstancesLaunchSpecificationDict = {"image_id": _}
+_params_1043: ScheduledInstancesMonitoringDict = {}
+_params_1044: ScheduledInstancesNetworkInterfaceDict = {}
+_params_1045: ScheduledInstancesPlacementDict = {}
+_params_1046: ScheduledInstancesPrivateIpAddressConfigDict = {}
+_params_1047: SearchLocalGatewayRoutesInputDict = {"local_gateway_route_table_id": _}
+_params_1048: SearchTransitGatewayMulticastGroupsInputDict = {
     "transit_gateway_multicast_domain_id": _
 }
-_params_1031: SearchTransitGatewayRoutesInputDict = {
+_params_1049: SearchTransitGatewayRoutesInputDict = {
     "transit_gateway_route_table_id": _,
     "filters": _,
 }
-_params_1032: SecondaryInterfacePrivateIpAddressSpecificationRequestDict = {}
-_params_1033: SecureBlobAttributeValueDict = {}
-_params_1034: SecurityGroupRuleDescriptionDict = {}
-_params_1035: SecurityGroupRuleRequestDict = {}
-_params_1036: SecurityGroupRuleUpdateDict = {"security_group_rule_id": _}
-_params_1037: SendDiagnosticInterruptInputDict = {"instance_id": _}
-_params_1038: SlotDateTimeRangeRequestDict = {"earliest_time": _, "latest_time": _}
-_params_1039: SlotStartTimeRangeRequestDict = {}
-_params_1040: SnapshotDiskContainerDict = {}
-_params_1041: SpotCapacityRebalanceDict = {}
-_params_1042: SpotFleetLaunchSpecificationDict = {}
-_params_1043: SpotFleetMonitoringDict = {}
-_params_1044: SpotFleetRequestConfigDataDict = {
+_params_1050: SecondaryInterfacePrivateIpAddressSpecificationRequestDict = {}
+_params_1051: SecureBlobAttributeValueDict = {}
+_params_1052: SecurityGroupRuleDescriptionDict = {}
+_params_1053: SecurityGroupRuleRequestDict = {}
+_params_1054: SecurityGroupRuleUpdateDict = {"security_group_rule_id": _}
+_params_1055: SendDiagnosticInterruptInputDict = {"instance_id": _}
+_params_1056: SlotDateTimeRangeRequestDict = {"earliest_time": _, "latest_time": _}
+_params_1057: SlotStartTimeRangeRequestDict = {}
+_params_1058: SnapshotDiskContainerDict = {}
+_params_1059: SpotCapacityRebalanceDict = {}
+_params_1060: SpotFleetLaunchSpecificationDict = {}
+_params_1061: SpotFleetMonitoringDict = {}
+_params_1062: SpotFleetRequestConfigDataDict = {
     "iam_fleet_role": _,
     "target_capacity": _,
 }
-_params_1045: SpotFleetTagSpecificationDict = {}
-_params_1046: SpotMaintenanceStrategiesDict = {}
-_params_1047: SpotMarketOptionsDict = {}
-_params_1048: SpotOptionsRequestDict = {}
-_params_1049: SpotPlacementDict = {}
-_params_1050: StartDeclarativePoliciesReportInputDict = {"s3_bucket": _, "target_id": _}
-_params_1051: StartInstancesInputDict = {"instance_ids": _}
-_params_1052: StartNetworkInsightsAccessScopeAnalysisInputDict = {
+_params_1063: SpotFleetTagSpecificationDict = {}
+_params_1064: SpotMaintenanceStrategiesDict = {}
+_params_1065: SpotMarketOptionsDict = {}
+_params_1066: SpotOptionsRequestDict = {}
+_params_1067: SpotPlacementDict = {}
+_params_1068: StartDeclarativePoliciesReportInputDict = {"s3_bucket": _, "target_id": _}
+_params_1069: StartInstancesInputDict = {"instance_ids": _}
+_params_1070: StartNetworkInsightsAccessScopeAnalysisInputDict = {
     "network_insights_access_scope_id": _
 }
-_params_1053: StartNetworkInsightsAnalysisInputDict = {"network_insights_path_id": _}
-_params_1054: StartVpcEndpointServicePrivateDnsVerificationInputDict = {"service_id": _}
-_params_1055: StopInstancesInputDict = {"instance_ids": _}
-_params_1056: StorageDict = {}
-_params_1057: StorageLocationDict = {}
-_params_1058: SubnetConfigurationDict = {}
-_params_1059: TagDict = {}
-_params_1060: TagFieldSpecificationRequestDict = {}
-_params_1061: TagSpecificationDict = {}
-_params_1062: TargetCapacitySpecificationRequestDict = {"total_target_capacity": _}
-_params_1063: TargetConfigurationRequestDict = {"offering_id": _}
-_params_1064: TargetGroupDict = {}
-_params_1065: TargetGroupsConfigDict = {}
-_params_1066: TerminateClientVpnConnectionsInputDict = {"client_vpn_endpoint_id": _}
-_params_1067: TerminateInstancesInputDict = {"instance_ids": _}
-_params_1068: ThroughResourcesStatementRequestDict = {}
-_params_1069: TotalLocalStorageGBDict = {}
-_params_1070: TotalLocalStorageGBRequestDict = {}
-_params_1071: TrafficMirrorPortRangeRequestDict = {}
-_params_1072: TransitGatewayConfigurationInputStructureDict = {}
-_params_1073: TransitGatewayConnectRequestBgpOptionsDict = {}
-_params_1074: TransitGatewayNatRuleRequestDict = {}
-_params_1075: TransitGatewayRequestOptionsDict = {}
-_params_1076: TransitGatewayRequestPolicyRuleDict = {}
-_params_1077: TransitGatewayRequestPolicyRuleMetaDataDict = {}
-_params_1078: UnassignIpv6AddressesInputDict = {"network_interface_id": _}
-_params_1079: UnassignPrivateIpAddressesInputDict = {"network_interface_id": _}
-_params_1080: UnassignPrivateNatGatewayAddressInputDict = {
+_params_1071: StartNetworkInsightsAnalysisInputDict = {"network_insights_path_id": _}
+_params_1072: StartVpcEndpointServicePrivateDnsVerificationInputDict = {"service_id": _}
+_params_1073: StopInstancesInputDict = {"instance_ids": _}
+_params_1074: StorageDict = {}
+_params_1075: StorageLocationDict = {}
+_params_1076: SubnetConfigurationDict = {}
+_params_1077: TagDict = {}
+_params_1078: TagFieldSpecificationRequestDict = {}
+_params_1079: TagSpecificationDict = {}
+_params_1080: TargetCapacitySpecificationRequestDict = {"total_target_capacity": _}
+_params_1081: TargetConfigurationRequestDict = {"offering_id": _}
+_params_1082: TargetGroupDict = {}
+_params_1083: TargetGroupsConfigDict = {}
+_params_1084: TerminateClientVpnConnectionsInputDict = {"client_vpn_endpoint_id": _}
+_params_1085: TerminateInstancesInputDict = {"instance_ids": _}
+_params_1086: ThroughResourcesStatementRequestDict = {}
+_params_1087: TotalLocalStorageGBDict = {}
+_params_1088: TotalLocalStorageGBRequestDict = {}
+_params_1089: TrafficMirrorPortRangeRequestDict = {}
+_params_1090: TransitGatewayConfigurationInputStructureDict = {}
+_params_1091: TransitGatewayConnectRequestBgpOptionsDict = {}
+_params_1092: TransitGatewayNatRuleRequestDict = {}
+_params_1093: TransitGatewayRequestOptionsDict = {}
+_params_1094: TransitGatewayRequestPolicyRuleDict = {}
+_params_1095: TransitGatewayRequestPolicyRuleMetaDataDict = {}
+_params_1096: UnassignIpv6AddressesInputDict = {"network_interface_id": _}
+_params_1097: UnassignPrivateIpAddressesInputDict = {"network_interface_id": _}
+_params_1098: UnassignPrivateNatGatewayAddressInputDict = {
     "nat_gateway_id": _,
     "private_ip_addresses": _,
 }
-_params_1081: UnlockSnapshotInputDict = {"snapshot_id": _}
-_params_1082: UnmonitorInstancesInputDict = {"instance_ids": _}
-_params_1083: UpdateCapacityManagerMonitoredTagKeysInputDict = {}
-_params_1084: UpdateCapacityManagerOrganizationsAccessInputDict = {
+_params_1099: UnlockSnapshotInputDict = {"snapshot_id": _}
+_params_1100: UnmonitorInstancesInputDict = {"instance_ids": _}
+_params_1101: UpdateCapacityManagerMonitoredTagKeysInputDict = {}
+_params_1102: UpdateCapacityManagerOrganizationsAccessInputDict = {
     "organizations_access": _
 }
-_params_1085: UpdateInterruptibleCapacityReservationAllocationInputDict = {
+_params_1103: UpdateInterruptibleCapacityReservationAllocationInputDict = {
     "capacity_reservation_id": _
 }
-_params_1086: UpdateSecurityGroupRuleDescriptionsEgressInputDict = {}
-_params_1087: UpdateSecurityGroupRuleDescriptionsIngressInputDict = {}
-_params_1088: UserBucketDict = {}
-_params_1089: UserDataDict = {}
-_params_1090: UserIdGroupPairDict = {}
-_params_1091: ValidateSecurityGroupQuotasForInterfaceInputDict = {
+_params_1104: UpdateSecurityGroupRuleDescriptionsEgressInputDict = {}
+_params_1105: UpdateSecurityGroupRuleDescriptionsIngressInputDict = {}
+_params_1106: UserBucketDict = {}
+_params_1107: UserDataDict = {}
+_params_1108: UserIdGroupPairDict = {}
+_params_1109: ValidateSecurityGroupQuotasForInterfaceInputDict = {
     "security_group_ids": _
 }
-_params_1092: VCpuCountRangeDict = {}
-_params_1093: VCpuCountRangeRequestDict = {"min": _}
-_params_1094: VerifiedAccessLogCloudWatchLogsDestinationOptionsDict = {"enabled": _}
-_params_1095: VerifiedAccessLogKinesisDataFirehoseDestinationOptionsDict = {
+_params_1110: VCpuCountRangeDict = {}
+_params_1111: VCpuCountRangeRequestDict = {"min": _}
+_params_1112: VerifiedAccessLogCloudWatchLogsDestinationOptionsDict = {"enabled": _}
+_params_1113: VerifiedAccessLogKinesisDataFirehoseDestinationOptionsDict = {
     "enabled": _
 }
-_params_1096: VerifiedAccessLogOptionsDict = {}
-_params_1097: VerifiedAccessLogS3DestinationOptionsDict = {"enabled": _}
-_params_1098: VerifiedAccessSseSpecificationRequestDict = {}
-_params_1099: VolumeDetailDict = {"size": _}
-_params_1100: VpcEncryptionControlConfigurationDict = {"mode": _}
-_params_1101: VpnConnectionOptionsSpecificationDict = {}
-_params_1102: VpnTunnelLogOptionsSpecificationDict = {}
-_params_1103: VpnTunnelOptionsSpecificationDict = {}
-_params_1104: WithdrawByoipCidrInputDict = {"cidr": _}
+_params_1114: VerifiedAccessLogOptionsDict = {}
+_params_1115: VerifiedAccessLogS3DestinationOptionsDict = {"enabled": _}
+_params_1116: VerifiedAccessSseSpecificationRequestDict = {}
+_params_1117: VolumeDetailDict = {"size": _}
+_params_1118: VpcEncryptionControlConfigurationDict = {"mode": _}
+_params_1119: VpnConnectionOptionsSpecificationDict = {}
+_params_1120: VpnTunnelLogOptionsSpecificationDict = {}
+_params_1121: VpnTunnelOptionsSpecificationDict = {}
+_params_1122: WithdrawByoipCidrInputDict = {"cidr": _}
 
 
 def _request[T](form: type[T]) -> T:
@@ -8370,6 +8497,16 @@ async def check_async_calls(client: AsyncEC2Client) -> None:
     )
     await client.associate_nat_gateway_address(
         _request(AssociateNatGatewayAddressInputDict)
+    )
+    await client.associate_networking_flex_cost_allocation_policy(fca_policy_id=_)
+    await client.associate_networking_flex_cost_allocation_policy(
+        **_request(AssociateNetworkingFlexCostAllocationPolicyInputDict)
+    )
+    await client.associate_networking_flex_cost_allocation_policy(
+        _request(AssociateNetworkingFlexCostAllocationPolicyInput)
+    )
+    await client.associate_networking_flex_cost_allocation_policy(
+        _request(AssociateNetworkingFlexCostAllocationPolicyInputDict)
     )
     await client.associate_route_server(route_server_id=_, vpc_id=_)
     await client.associate_route_server(**_request(AssociateRouteServerInputDict))
@@ -9026,6 +9163,10 @@ async def check_async_calls(client: AsyncEC2Client) -> None:
     )
     await client.create_managed_prefix_list(_request(CreateManagedPrefixListInput))
     await client.create_managed_prefix_list(_request(CreateManagedPrefixListInputDict))
+    await client.create_metric_category(metrics=_)
+    await client.create_metric_category(**_request(CreateMetricCategoryInputDict))
+    await client.create_metric_category(_request(CreateMetricCategoryInput))
+    await client.create_metric_category(_request(CreateMetricCategoryInputDict))
     await client.create_nat_gateway()
     await client.create_nat_gateway(**_request(CreateNatGatewayInputDict))
     await client.create_nat_gateway(_request(CreateNatGatewayInput))
@@ -9040,6 +9181,16 @@ async def check_async_calls(client: AsyncEC2Client) -> None:
     await client.create_network_acl_entry(**_request(CreateNetworkAclEntryInputDict))
     await client.create_network_acl_entry(_request(CreateNetworkAclEntryInput))
     await client.create_network_acl_entry(_request(CreateNetworkAclEntryInputDict))
+    await client.create_networking_flex_cost_allocation_policy(network_resource_type=_)
+    await client.create_networking_flex_cost_allocation_policy(
+        **_request(CreateNetworkingFlexCostAllocationPolicyInputDict)
+    )
+    await client.create_networking_flex_cost_allocation_policy(
+        _request(CreateNetworkingFlexCostAllocationPolicyInput)
+    )
+    await client.create_networking_flex_cost_allocation_policy(
+        _request(CreateNetworkingFlexCostAllocationPolicyInputDict)
+    )
     await client.create_network_insights_access_scope()
     await client.create_network_insights_access_scope(
         **_request(CreateNetworkInsightsAccessScopeInputDict)
@@ -9803,6 +9954,10 @@ async def check_async_calls(client: AsyncEC2Client) -> None:
     )
     await client.delete_managed_prefix_list(_request(DeleteManagedPrefixListInput))
     await client.delete_managed_prefix_list(_request(DeleteManagedPrefixListInputDict))
+    await client.delete_metric_category(metric_category_id=_)
+    await client.delete_metric_category(**_request(DeleteMetricCategoryInputDict))
+    await client.delete_metric_category(_request(DeleteMetricCategoryInput))
+    await client.delete_metric_category(_request(DeleteMetricCategoryInputDict))
     await client.delete_nat_gateway(nat_gateway_id=_)
     await client.delete_nat_gateway(**_request(DeleteNatGatewayInputDict))
     await client.delete_nat_gateway(_request(DeleteNatGatewayInput))
@@ -9815,6 +9970,16 @@ async def check_async_calls(client: AsyncEC2Client) -> None:
     await client.delete_network_acl_entry(**_request(DeleteNetworkAclEntryInputDict))
     await client.delete_network_acl_entry(_request(DeleteNetworkAclEntryInput))
     await client.delete_network_acl_entry(_request(DeleteNetworkAclEntryInputDict))
+    await client.delete_networking_flex_cost_allocation_policies(fca_policy_ids=_)
+    await client.delete_networking_flex_cost_allocation_policies(
+        **_request(DeleteNetworkingFlexCostAllocationPoliciesInputDict)
+    )
+    await client.delete_networking_flex_cost_allocation_policies(
+        _request(DeleteNetworkingFlexCostAllocationPoliciesInput)
+    )
+    await client.delete_networking_flex_cost_allocation_policies(
+        _request(DeleteNetworkingFlexCostAllocationPoliciesInputDict)
+    )
     await client.delete_network_insights_access_scope(
         network_insights_access_scope_id=_
     )
@@ -11125,6 +11290,12 @@ async def check_async_calls(client: AsyncEC2Client) -> None:
     await client.describe_managed_prefix_lists(
         _request(DescribeManagedPrefixListsInputDict)
     )
+    await client.describe_metric_categories()
+    await client.describe_metric_categories(
+        **_request(DescribeMetricCategoriesInputDict)
+    )
+    await client.describe_metric_categories(_request(DescribeMetricCategoriesInput))
+    await client.describe_metric_categories(_request(DescribeMetricCategoriesInputDict))
     await client.describe_moving_addresses()
     await client.describe_moving_addresses(**_request(DescribeMovingAddressesInputDict))
     await client.describe_moving_addresses(_request(DescribeMovingAddressesInput))
@@ -11137,6 +11308,26 @@ async def check_async_calls(client: AsyncEC2Client) -> None:
     await client.describe_network_acls(**_request(DescribeNetworkAclsInputDict))
     await client.describe_network_acls(_request(DescribeNetworkAclsInput))
     await client.describe_network_acls(_request(DescribeNetworkAclsInputDict))
+    await client.describe_networking_flex_cost_allocation_policies()
+    await client.describe_networking_flex_cost_allocation_policies(
+        **_request(DescribeNetworkingFlexCostAllocationPoliciesInputDict)
+    )
+    await client.describe_networking_flex_cost_allocation_policies(
+        _request(DescribeNetworkingFlexCostAllocationPoliciesInput)
+    )
+    await client.describe_networking_flex_cost_allocation_policies(
+        _request(DescribeNetworkingFlexCostAllocationPoliciesInputDict)
+    )
+    await client.describe_networking_flex_cost_allocation_policy_associations()
+    await client.describe_networking_flex_cost_allocation_policy_associations(
+        **_request(DescribeNetworkingFlexCostAllocationPolicyAssociationsInputDict)
+    )
+    await client.describe_networking_flex_cost_allocation_policy_associations(
+        _request(DescribeNetworkingFlexCostAllocationPolicyAssociationsInput)
+    )
+    await client.describe_networking_flex_cost_allocation_policy_associations(
+        _request(DescribeNetworkingFlexCostAllocationPolicyAssociationsInputDict)
+    )
     await client.describe_network_insights_access_scope_analyses()
     await client.describe_network_insights_access_scope_analyses(
         **_request(DescribeNetworkInsightsAccessScopeAnalysesInputDict)
@@ -12181,6 +12372,18 @@ async def check_async_calls(client: AsyncEC2Client) -> None:
     await client.disassociate_nat_gateway_address(
         _request(DisassociateNatGatewayAddressInputDict)
     )
+    await client.disassociate_networking_flex_cost_allocation_policy(
+        fca_policy_association_ids=_
+    )
+    await client.disassociate_networking_flex_cost_allocation_policy(
+        **_request(DisassociateNetworkingFlexCostAllocationPolicyInputDict)
+    )
+    await client.disassociate_networking_flex_cost_allocation_policy(
+        _request(DisassociateNetworkingFlexCostAllocationPolicyInput)
+    )
+    await client.disassociate_networking_flex_cost_allocation_policy(
+        _request(DisassociateNetworkingFlexCostAllocationPolicyInputDict)
+    )
     await client.disassociate_route_server(route_server_id=_, vpc_id=_)
     await client.disassociate_route_server(**_request(DisassociateRouteServerInputDict))
     await client.disassociate_route_server(_request(DisassociateRouteServerInput))
@@ -12989,6 +13192,16 @@ async def check_async_calls(client: AsyncEC2Client) -> None:
     await client.get_managed_resource_visibility(
         _request(GetManagedResourceVisibilityInputDict)
     )
+    await client.get_networking_flex_cost_allocation_policy_versions(fca_policy_id=_)
+    await client.get_networking_flex_cost_allocation_policy_versions(
+        **_request(GetNetworkingFlexCostAllocationPolicyVersionsInputDict)
+    )
+    await client.get_networking_flex_cost_allocation_policy_versions(
+        _request(GetNetworkingFlexCostAllocationPolicyVersionsInput)
+    )
+    await client.get_networking_flex_cost_allocation_policy_versions(
+        _request(GetNetworkingFlexCostAllocationPolicyVersionsInputDict)
+    )
     await client.get_network_insights_access_scope_analysis_findings(
         network_insights_access_scope_analysis_id=_
     )
@@ -13668,6 +13881,20 @@ async def check_async_calls(client: AsyncEC2Client) -> None:
     )
     await client.modify_managed_resource_visibility(
         _request(ModifyManagedResourceVisibilityInputDict)
+    )
+    await client.modify_metric_category(metric_category_id=_, metrics=_)
+    await client.modify_metric_category(**_request(ModifyMetricCategoryInputDict))
+    await client.modify_metric_category(_request(ModifyMetricCategoryInput))
+    await client.modify_metric_category(_request(ModifyMetricCategoryInputDict))
+    await client.modify_networking_flex_cost_allocation_policy(fca_policy_id=_)
+    await client.modify_networking_flex_cost_allocation_policy(
+        **_request(ModifyNetworkingFlexCostAllocationPolicyInputDict)
+    )
+    await client.modify_networking_flex_cost_allocation_policy(
+        _request(ModifyNetworkingFlexCostAllocationPolicyInput)
+    )
+    await client.modify_networking_flex_cost_allocation_policy(
+        _request(ModifyNetworkingFlexCostAllocationPolicyInputDict)
     )
     await client.modify_network_interface_attribute(network_interface_id=_)
     await client.modify_network_interface_attribute(
@@ -14915,6 +15142,16 @@ def check_sync_calls(client: EC2Client) -> None:
     )
     client.associate_nat_gateway_address(_request(AssociateNatGatewayAddressInput))
     client.associate_nat_gateway_address(_request(AssociateNatGatewayAddressInputDict))
+    client.associate_networking_flex_cost_allocation_policy(fca_policy_id=_)
+    client.associate_networking_flex_cost_allocation_policy(
+        **_request(AssociateNetworkingFlexCostAllocationPolicyInputDict)
+    )
+    client.associate_networking_flex_cost_allocation_policy(
+        _request(AssociateNetworkingFlexCostAllocationPolicyInput)
+    )
+    client.associate_networking_flex_cost_allocation_policy(
+        _request(AssociateNetworkingFlexCostAllocationPolicyInputDict)
+    )
     client.associate_route_server(route_server_id=_, vpc_id=_)
     client.associate_route_server(**_request(AssociateRouteServerInputDict))
     client.associate_route_server(_request(AssociateRouteServerInput))
@@ -15504,6 +15741,10 @@ def check_sync_calls(client: EC2Client) -> None:
     client.create_managed_prefix_list(**_request(CreateManagedPrefixListInputDict))
     client.create_managed_prefix_list(_request(CreateManagedPrefixListInput))
     client.create_managed_prefix_list(_request(CreateManagedPrefixListInputDict))
+    client.create_metric_category(metrics=_)
+    client.create_metric_category(**_request(CreateMetricCategoryInputDict))
+    client.create_metric_category(_request(CreateMetricCategoryInput))
+    client.create_metric_category(_request(CreateMetricCategoryInputDict))
     client.create_nat_gateway()
     client.create_nat_gateway(**_request(CreateNatGatewayInputDict))
     client.create_nat_gateway(_request(CreateNatGatewayInput))
@@ -15518,6 +15759,16 @@ def check_sync_calls(client: EC2Client) -> None:
     client.create_network_acl_entry(**_request(CreateNetworkAclEntryInputDict))
     client.create_network_acl_entry(_request(CreateNetworkAclEntryInput))
     client.create_network_acl_entry(_request(CreateNetworkAclEntryInputDict))
+    client.create_networking_flex_cost_allocation_policy(network_resource_type=_)
+    client.create_networking_flex_cost_allocation_policy(
+        **_request(CreateNetworkingFlexCostAllocationPolicyInputDict)
+    )
+    client.create_networking_flex_cost_allocation_policy(
+        _request(CreateNetworkingFlexCostAllocationPolicyInput)
+    )
+    client.create_networking_flex_cost_allocation_policy(
+        _request(CreateNetworkingFlexCostAllocationPolicyInputDict)
+    )
     client.create_network_insights_access_scope()
     client.create_network_insights_access_scope(
         **_request(CreateNetworkInsightsAccessScopeInputDict)
@@ -16199,6 +16450,10 @@ def check_sync_calls(client: EC2Client) -> None:
     client.delete_managed_prefix_list(**_request(DeleteManagedPrefixListInputDict))
     client.delete_managed_prefix_list(_request(DeleteManagedPrefixListInput))
     client.delete_managed_prefix_list(_request(DeleteManagedPrefixListInputDict))
+    client.delete_metric_category(metric_category_id=_)
+    client.delete_metric_category(**_request(DeleteMetricCategoryInputDict))
+    client.delete_metric_category(_request(DeleteMetricCategoryInput))
+    client.delete_metric_category(_request(DeleteMetricCategoryInputDict))
     client.delete_nat_gateway(nat_gateway_id=_)
     client.delete_nat_gateway(**_request(DeleteNatGatewayInputDict))
     client.delete_nat_gateway(_request(DeleteNatGatewayInput))
@@ -16211,6 +16466,16 @@ def check_sync_calls(client: EC2Client) -> None:
     client.delete_network_acl_entry(**_request(DeleteNetworkAclEntryInputDict))
     client.delete_network_acl_entry(_request(DeleteNetworkAclEntryInput))
     client.delete_network_acl_entry(_request(DeleteNetworkAclEntryInputDict))
+    client.delete_networking_flex_cost_allocation_policies(fca_policy_ids=_)
+    client.delete_networking_flex_cost_allocation_policies(
+        **_request(DeleteNetworkingFlexCostAllocationPoliciesInputDict)
+    )
+    client.delete_networking_flex_cost_allocation_policies(
+        _request(DeleteNetworkingFlexCostAllocationPoliciesInput)
+    )
+    client.delete_networking_flex_cost_allocation_policies(
+        _request(DeleteNetworkingFlexCostAllocationPoliciesInputDict)
+    )
     client.delete_network_insights_access_scope(network_insights_access_scope_id=_)
     client.delete_network_insights_access_scope(
         **_request(DeleteNetworkInsightsAccessScopeInputDict)
@@ -17357,6 +17622,10 @@ def check_sync_calls(client: EC2Client) -> None:
     )
     client.describe_managed_prefix_lists(_request(DescribeManagedPrefixListsInput))
     client.describe_managed_prefix_lists(_request(DescribeManagedPrefixListsInputDict))
+    client.describe_metric_categories()
+    client.describe_metric_categories(**_request(DescribeMetricCategoriesInputDict))
+    client.describe_metric_categories(_request(DescribeMetricCategoriesInput))
+    client.describe_metric_categories(_request(DescribeMetricCategoriesInputDict))
     client.describe_moving_addresses()
     client.describe_moving_addresses(**_request(DescribeMovingAddressesInputDict))
     client.describe_moving_addresses(_request(DescribeMovingAddressesInput))
@@ -17369,6 +17638,26 @@ def check_sync_calls(client: EC2Client) -> None:
     client.describe_network_acls(**_request(DescribeNetworkAclsInputDict))
     client.describe_network_acls(_request(DescribeNetworkAclsInput))
     client.describe_network_acls(_request(DescribeNetworkAclsInputDict))
+    client.describe_networking_flex_cost_allocation_policies()
+    client.describe_networking_flex_cost_allocation_policies(
+        **_request(DescribeNetworkingFlexCostAllocationPoliciesInputDict)
+    )
+    client.describe_networking_flex_cost_allocation_policies(
+        _request(DescribeNetworkingFlexCostAllocationPoliciesInput)
+    )
+    client.describe_networking_flex_cost_allocation_policies(
+        _request(DescribeNetworkingFlexCostAllocationPoliciesInputDict)
+    )
+    client.describe_networking_flex_cost_allocation_policy_associations()
+    client.describe_networking_flex_cost_allocation_policy_associations(
+        **_request(DescribeNetworkingFlexCostAllocationPolicyAssociationsInputDict)
+    )
+    client.describe_networking_flex_cost_allocation_policy_associations(
+        _request(DescribeNetworkingFlexCostAllocationPolicyAssociationsInput)
+    )
+    client.describe_networking_flex_cost_allocation_policy_associations(
+        _request(DescribeNetworkingFlexCostAllocationPolicyAssociationsInputDict)
+    )
     client.describe_network_insights_access_scope_analyses()
     client.describe_network_insights_access_scope_analyses(
         **_request(DescribeNetworkInsightsAccessScopeAnalysesInputDict)
@@ -18319,6 +18608,18 @@ def check_sync_calls(client: EC2Client) -> None:
     client.disassociate_nat_gateway_address(
         _request(DisassociateNatGatewayAddressInputDict)
     )
+    client.disassociate_networking_flex_cost_allocation_policy(
+        fca_policy_association_ids=_
+    )
+    client.disassociate_networking_flex_cost_allocation_policy(
+        **_request(DisassociateNetworkingFlexCostAllocationPolicyInputDict)
+    )
+    client.disassociate_networking_flex_cost_allocation_policy(
+        _request(DisassociateNetworkingFlexCostAllocationPolicyInput)
+    )
+    client.disassociate_networking_flex_cost_allocation_policy(
+        _request(DisassociateNetworkingFlexCostAllocationPolicyInputDict)
+    )
     client.disassociate_route_server(route_server_id=_, vpc_id=_)
     client.disassociate_route_server(**_request(DisassociateRouteServerInputDict))
     client.disassociate_route_server(_request(DisassociateRouteServerInput))
@@ -19047,6 +19348,16 @@ def check_sync_calls(client: EC2Client) -> None:
     client.get_managed_resource_visibility(
         _request(GetManagedResourceVisibilityInputDict)
     )
+    client.get_networking_flex_cost_allocation_policy_versions(fca_policy_id=_)
+    client.get_networking_flex_cost_allocation_policy_versions(
+        **_request(GetNetworkingFlexCostAllocationPolicyVersionsInputDict)
+    )
+    client.get_networking_flex_cost_allocation_policy_versions(
+        _request(GetNetworkingFlexCostAllocationPolicyVersionsInput)
+    )
+    client.get_networking_flex_cost_allocation_policy_versions(
+        _request(GetNetworkingFlexCostAllocationPolicyVersionsInputDict)
+    )
     client.get_network_insights_access_scope_analysis_findings(
         network_insights_access_scope_analysis_id=_
     )
@@ -19650,6 +19961,20 @@ def check_sync_calls(client: EC2Client) -> None:
     )
     client.modify_managed_resource_visibility(
         _request(ModifyManagedResourceVisibilityInputDict)
+    )
+    client.modify_metric_category(metric_category_id=_, metrics=_)
+    client.modify_metric_category(**_request(ModifyMetricCategoryInputDict))
+    client.modify_metric_category(_request(ModifyMetricCategoryInput))
+    client.modify_metric_category(_request(ModifyMetricCategoryInputDict))
+    client.modify_networking_flex_cost_allocation_policy(fca_policy_id=_)
+    client.modify_networking_flex_cost_allocation_policy(
+        **_request(ModifyNetworkingFlexCostAllocationPolicyInputDict)
+    )
+    client.modify_networking_flex_cost_allocation_policy(
+        _request(ModifyNetworkingFlexCostAllocationPolicyInput)
+    )
+    client.modify_networking_flex_cost_allocation_policy(
+        _request(ModifyNetworkingFlexCostAllocationPolicyInputDict)
     )
     client.modify_network_interface_attribute(network_interface_id=_)
     client.modify_network_interface_attribute(

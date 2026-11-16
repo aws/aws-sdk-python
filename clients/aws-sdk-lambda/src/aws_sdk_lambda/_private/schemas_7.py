@@ -9,10 +9,10 @@ from . import schemas
 
 n0 = "com.amazonaws.lambda"
 _s = "smithy.api#default"
-_LN = "LayerName"
 _SI = "StatementId"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
+_LN = "LayerName"
 _smi = "smithy.api#required"
 _sL = "smithy.api#httpLabel"
 _VN = "VersionNumber"
@@ -289,13 +289,15 @@ LAYER_VERSIONS_LIST_ITEM: StaticSchema = (
 
 LAYER_ARN: StaticSchema = (3, n0, _LAa, 0)
 
+LAYER_NAME: StaticSchema = (3, n0, _LN, 0)
+
 LAYERS_LIST_ITEM: StaticSchema = (
     18,
     n0,
     _LLIa,
     0,
     (_LN, _LAa, _LMV),
-    ((lambda: schemas.LAYER_NAME, 0), (LAYER_ARN, 0), (LAYER_VERSIONS_LIST_ITEM, 0)),
+    ((LAYER_NAME, 0), (LAYER_ARN, 0), (LAYER_VERSIONS_LIST_ITEM, 0)),
 )
 
 LAYERS_LIST: StaticSchema = (16, n0, _LLa, 0, (_me,), ((LAYERS_LIST_ITEM, 0),))
@@ -307,7 +309,7 @@ DELETE_LAYER_VERSION_INPUT: StaticSchema = (
     {_sSI: _cDLVR, _sm: None},
     (_LN, _VN),
     (
-        (lambda: schemas.LAYER_NAME, 9),
+        (lambda: schemas.LAYER_NAME_OR_ARN, 9),
         (lambda: schemas.LAYER_VERSION_NUMBER, {_s: None, _smi: None, _sL: None}),
     ),
 )
@@ -344,7 +346,7 @@ GET_LAYER_VERSION_INPUT: StaticSchema = (
     {_sSI: _cGLVR, _sm: None},
     (_LN, _VN),
     (
-        (lambda: schemas.LAYER_NAME, 9),
+        (lambda: schemas.LAYER_NAME_OR_ARN, 9),
         (lambda: schemas.LAYER_VERSION_NUMBER, {_s: None, _smi: None, _sL: None}),
     ),
 )
@@ -465,7 +467,7 @@ GET_LAYER_VERSION_POLICY_INPUT: StaticSchema = (
     {_sSI: _cGLVPR, _sm: None},
     (_LN, _VN),
     (
-        (lambda: schemas.LAYER_NAME, 9),
+        (lambda: schemas.LAYER_NAME_OR_ARN, 9),
         (lambda: schemas.LAYER_VERSION_NUMBER, {_s: None, _smi: None, _sL: None}),
     ),
 )
@@ -511,7 +513,7 @@ LIST_LAYER_VERSIONS_INPUT: StaticSchema = (
     (
         (lambda: schemas.ARCHITECTURE, {_sQ: _CAo}),
         (lambda: schemas.RUNTIME, {_sQ: _CR}),
-        (lambda: schemas.LAYER_NAME, 9),
+        (lambda: schemas.LAYER_NAME_OR_ARN, 9),
         (lambda: schemas.STRING, {_sQ: _Mar}),
         (MAX_LAYER_LIST_ITEMS, {_sQ: _MI}),
     ),
@@ -580,7 +582,7 @@ PUBLISH_LAYER_VERSION_INPUT: StaticSchema = (
     {_sSI: _cPLVR, _sm: None},
     (_LN, _D, _Cont, _CAom, _CRo, _LI),
     (
-        (lambda: schemas.LAYER_NAME, 9),
+        (lambda: schemas.LAYER_NAME_OR_ARN, 9),
         (lambda: schemas.DESCRIPTION, 0),
         (LAYER_VERSION_CONTENT_INPUT, 1),
         (COMPATIBLE_ARCHITECTURES, 0),
@@ -639,7 +641,7 @@ REMOVE_LAYER_VERSION_PERMISSION_INPUT: StaticSchema = (
     {_sSI: _cRLVPR, _sm: None},
     (_LN, _VN, _SI, _RI),
     (
-        (lambda: schemas.LAYER_NAME, 9),
+        (lambda: schemas.LAYER_NAME_OR_ARN, 9),
         (lambda: schemas.LAYER_VERSION_NUMBER, {_s: None, _smi: None, _sL: None}),
         (lambda: schemas.STATEMENT_ID, 9),
         (lambda: schemas.STRING, {_sQ: _RI}),
@@ -671,6 +673,7 @@ REMOVE_LAYER_VERSION_PERMISSION: StaticOperationSchema = (
     (
         lambda: schemas.INVALID_PARAMETER_VALUE_EXCEPTION,
         lambda: schemas.PRECONDITION_FAILED_EXCEPTION,
+        lambda: schemas.RESOURCE_CONFLICT_EXCEPTION,
         lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
         lambda: schemas.SERVICE_EXCEPTION,
         lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,

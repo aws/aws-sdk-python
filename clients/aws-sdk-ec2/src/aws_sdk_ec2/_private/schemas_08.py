@@ -92,6 +92,10 @@ _VL = "VpcLattice"
 _vL = "vpcLattice"
 _EFS = "ElasticFileSystem"
 _eFS = "elasticFileSystem"
+_GA = "GlobalAccelerator"
+_gA = "globalAccelerator"
+_AGV = "ApiGatewayV2"
+_aGV = "apiGatewayV2"
 _Mo = "Mode"
 _mod = "mode"
 _IT = "InstanceType"
@@ -128,7 +132,7 @@ _CRFI = "CapacityReservationFleetId"
 _cRFI = "capacityReservationFleetId"
 _CD = "CreateDate"
 _cD = "createDate"
-_oA = "outpostArn"
+_oAu = "outpostArn"
 _CTr = "CreateTime"
 _cTr = "createTime"
 _IMC = "InstanceMatchCriteria"
@@ -159,7 +163,7 @@ _IRn = "InstanceRequirements"
 _TTC = "TotalTargetCapacity"
 _FCR = "FleetCapacityReservation"
 _FCu = "FulfilledCapacity"
-_fC = "fulfilledCapacity"
+_fCu = "fulfilledCapacity"
 _we = "weight"
 _FCRS = "FleetCapacityReservationSet"
 _CCRFOr = "CreateCapacityReservationFleetOutput"
@@ -391,10 +395,6 @@ _KS = "KextSigning"
 _kS = "kextSigning"
 _NP = "NvramProtections"
 _nP = "nvramProtections"
-_MMTS = "MacModificationTaskState"
-_succ = "successful"
-_inp = "inprogress"
-_ip_____ = "in-progress"
 _MMT = "MacModificationTask"
 _CDMVOTO = "CreateDelegateMacVolumeOwnershipTaskOutput"
 _cCDMVOTRo = "com.amazonaws.ec2#CreateDelegateMacVolumeOwnershipTaskResult"
@@ -511,7 +511,7 @@ FLEET_CAPACITY_RESERVATION: StaticSchema = (
         ),
         (lambda: schemas.STRING, {_aQN: _AZ, _sN: _aZ}),
         (lambda: schemas.INTEGER, {_aQN: _TICo, _sN: _tICo}),
-        (lambda: schemas.DOUBLE, {_aQN: _FCu, _sN: _fC}),
+        (lambda: schemas.DOUBLE, {_aQN: _FCu, _sN: _fCu}),
         (lambda: schemas.BOOLEAN, {_aQN: _EO, _sN: _eO}),
         (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _CD, _sN: _cD}),
         (DOUBLE_WITH_CONSTRAINTS, {_aQN: _We, _sN: _we}),
@@ -1216,7 +1216,7 @@ SUBNET: StaticSchema = (
         (SUBNET_IPV6_CIDR_BLOCK_ASSOCIATION_SET, {_aQN: _ICBAS, _sN: _iCBAS}),
         (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
         (lambda: schemas.STRING, {_aQN: _SAu, _sN: _sA}),
-        (lambda: schemas.STRING, {_aQN: _OA, _sN: _oA}),
+        (lambda: schemas.STRING, {_aQN: _OA, _sN: _oAu}),
         (lambda: schemas.BOOLEAN, {_aQN: _EDn, _sN: _eDn}),
         (lambda: schemas.BOOLEAN, {_aQN: _IN, _sN: _iN}),
         (PRIVATE_DNS_NAME_OPTIONS_ON_LAUNCH, {_aQN: _PDNOOL, _sN: _pDNOOL}),
@@ -1296,7 +1296,7 @@ VPC_ENCRYPTION_CONTROL_EXCLUSIONS: StaticSchema = (
     n0,
     _VECEp,
     0,
-    (_IG, _EOIG, _NG, _VPG, _VP, _La, _VL, _EFS),
+    (_IG, _EOIG, _NG, _VPG, _VP, _La, _VL, _EFS, _GA, _AGV),
     (
         (VPC_ENCRYPTION_CONTROL_EXCLUSION, {_aQN: _IG, _sN: _iG}),
         (VPC_ENCRYPTION_CONTROL_EXCLUSION, {_aQN: _EOIG, _sN: _eOIG}),
@@ -1306,6 +1306,8 @@ VPC_ENCRYPTION_CONTROL_EXCLUSIONS: StaticSchema = (
         (VPC_ENCRYPTION_CONTROL_EXCLUSION, {_aQN: _La, _sN: _la}),
         (VPC_ENCRYPTION_CONTROL_EXCLUSION, {_aQN: _VL, _sN: _vL}),
         (VPC_ENCRYPTION_CONTROL_EXCLUSION, {_aQN: _EFS, _sN: _eFS}),
+        (VPC_ENCRYPTION_CONTROL_EXCLUSION, {_aQN: _GA, _sN: _gA}),
+        (VPC_ENCRYPTION_CONTROL_EXCLUSION, {_aQN: _AGV, _sN: _aGV}),
     ),
 )
 
@@ -1450,15 +1452,6 @@ MAC_SYSTEM_INTEGRITY_PROTECTION_CONFIGURATION: StaticSchema = (
         (MAC_SYSTEM_INTEGRITY_PROTECTION_SETTING_STATUS, {_aQN: _NP, _sN: _nP}),
         (MAC_SYSTEM_INTEGRITY_PROTECTION_SETTING_STATUS, {_aQN: _Sta, _sN: _sta}),
     ),
-)
-
-MAC_MODIFICATION_TASK_STATE: StaticSchema = (
-    14,
-    n0,
-    _MMTS,
-    0,
-    (_succ, _fa, _inp, _p),
-    ((-1, {_sV: _succ}), (-1, {_sV: _fa}), (-1, {_sV: _ip_____}), (-1, {_sV: _p})),
 )
 
 VPC_ENCRYPTION_CONTROL_EXCLUSION_STATE_INPUT: StaticSchema = (

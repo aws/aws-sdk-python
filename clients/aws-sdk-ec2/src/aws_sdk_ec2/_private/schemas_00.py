@@ -111,6 +111,8 @@ _eit = "export_image_task"
 _eit_ = "export-image-task"
 _eit__ = "export_instance_task"
 _eit___ = "export-instance-task"
+_fp = "fca_policy"
+_fp_ = "fca-policy"
 _fl = "fleet"
 _fi = "fpga_image"
 _fi_ = "fpga-image"
@@ -300,6 +302,8 @@ _asc = "application_status_check"
 _asc_ = "application-status-check"
 _crmq = "capacity_reservation_modification_quote"
 _crmq_ = "capacity-reservation-modification-quote"
+_mc = "metric_category"
+_mc_ = "metric-category"
 _Ta = "Tag"
 _Ke = "Key"
 _ke = "key"
@@ -544,12 +548,6 @@ _iCBS = "ipv6CidrBlockSet"
 _cBS = "cidrBlockSet"
 _PO = "PeeringOptions"
 _pO = "peeringOptions"
-_VPCSRC = "VpcPeeringConnectionStateReasonCode"
-_ir = "initiating_request"
-_ir_ = "initiating-request"
-_act = "active"
-_ex = "expired"
-_pr = "provisioning"
 _VPC = "VpcPeeringConnection"
 _AVPCO = "AcceptVpcPeeringConnectionOutput"
 _cAVPCRo = "com.amazonaws.ec2#AcceptVpcPeeringConnectionResult"
@@ -579,8 +577,11 @@ _OU = "OrganizationUnit"
 _Acc = "Account"
 _Us = "User"
 _Ro = "Role"
+_DTo = "DomainType"
+_stan = "standard"
 _IPI = "IpamPoolId"
 _IPEI = "Ipv4PoolEc2Id"
+_RHIL = "ResponseHostIdList"
 _IPAI = "IpamPoolAllocationId"
 _EAPI = "EipAllocationPublicIp"
 _ASCI = "ApplicationStatusCheckId"
@@ -591,6 +592,7 @@ _RIo = "RoleId"
 _DHI = "DedicatedHostId"
 _IIp = "IpamId"
 _IRDI = "IpamResourceDiscoveryId"
+_FCAPI = "FlexCostAllocationPolicyId"
 _RSI = "RouteServerId"
 _RTIo = "RouteTableId"
 _SGVAS = "SecurityGroupVpcAssociationState"
@@ -606,8 +608,6 @@ _tGRTI = "transitGatewayRouteTableId"
 _TIAI = "TrunkInterfaceAssociationId"
 _IPEIp = "Ipv6PoolEc2Id"
 _IGI = "InternetGatewayId"
-_VAII = "VerifiedAccessInstanceId"
-_BI = "BoxedInteger"
 
 INTEGER: StaticSchema = (7, n0, _I, 0)
 
@@ -770,6 +770,7 @@ RESOURCE_TYPE: StaticSchema = (
         _eg,
         _eit,
         _eit__,
+        _fp,
         _fl,
         _fi,
         _hr,
@@ -869,6 +870,7 @@ RESOURCE_TYPE: StaticSchema = (
         _crcq,
         _asc,
         _crmq,
+        _mc,
     ),
     (
         (-1, {_sV: _cr_}),
@@ -884,6 +886,7 @@ RESOURCE_TYPE: StaticSchema = (
         (-1, {_sV: _eg_}),
         (-1, {_sV: _eit_}),
         (-1, {_sV: _eit___}),
+        (-1, {_sV: _fp_}),
         (-1, {_sV: _fl}),
         (-1, {_sV: _fi_}),
         (-1, {_sV: _hr_}),
@@ -983,6 +986,7 @@ RESOURCE_TYPE: StaticSchema = (
         (-1, {_sV: _crcq_}),
         (-1, {_sV: _asc_}),
         (-1, {_sV: _crmq_}),
+        (-1, {_sV: _mc_}),
     ),
 )
 
@@ -1709,25 +1713,6 @@ VPC_PEERING_CONNECTION_VPC_INFO: StaticSchema = (
     ),
 )
 
-VPC_PEERING_CONNECTION_STATE_REASON_CODE: StaticSchema = (
-    14,
-    n0,
-    _VPCSRC,
-    0,
-    (_ir, _pa, _act, _del, _re, _fa, _ex, _pr, _de),
-    (
-        (-1, {_sV: _ir_}),
-        (-1, {_sV: _pa_}),
-        (-1, {_sV: _act}),
-        (-1, {_sV: _del}),
-        (-1, {_sV: _re}),
-        (-1, {_sV: _fa}),
-        (-1, {_sV: _ex}),
-        (-1, {_sV: _pr}),
-        (-1, {_sV: _de}),
-    ),
-)
-
 PORT_RANGE: StaticSchema = (
     18,
     n0,
@@ -1777,11 +1762,22 @@ PRINCIPAL_TYPE: StaticSchema = (
     ),
 )
 
+DOMAIN_TYPE: StaticSchema = (
+    14,
+    n0,
+    _DTo,
+    0,
+    (_vp, _stan),
+    ((-1, {_sV: _vp}), (-1, {_sV: _stan})),
+)
+
 ALLOCATION_ID: StaticSchema = (3, n0, _AI, 0)
 
 IPAM_POOL_ID: StaticSchema = (3, n0, _IPI, 0)
 
 IPV4_POOL_EC2_ID: StaticSchema = (3, n0, _IPEI, 0)
+
+RESPONSE_HOST_ID_LIST: StaticSchema = (16, n0, _RHIL, 0, (_me,), ((STRING, {_sN: _i}),))
 
 IPAM_POOL_ALLOCATION_ID: StaticSchema = (3, n0, _IPAI, 0)
 
@@ -1800,6 +1796,8 @@ DEDICATED_HOST_ID: StaticSchema = (3, n0, _DHI, 0)
 IPAM_ID: StaticSchema = (3, n0, _IIp, 0)
 
 IPAM_RESOURCE_DISCOVERY_ID: StaticSchema = (3, n0, _IRDI, 0)
+
+FLEX_COST_ALLOCATION_POLICY_ID: StaticSchema = (3, n0, _FCAPI, 0)
 
 ROUTE_SERVER_ID: StaticSchema = (3, n0, _RSI, 0)
 
@@ -1869,7 +1867,3 @@ TRUNK_INTERFACE_ASSOCIATION_ID: StaticSchema = (3, n0, _TIAI, 0)
 IPV6_POOL_EC2_ID: StaticSchema = (3, n0, _IPEIp, 0)
 
 INTERNET_GATEWAY_ID: StaticSchema = (3, n0, _IGI, 0)
-
-VERIFIED_ACCESS_INSTANCE_ID: StaticSchema = (3, n0, _VAII, 0)
-
-BOXED_INTEGER: StaticSchema = (7, n0, _BI, 0)

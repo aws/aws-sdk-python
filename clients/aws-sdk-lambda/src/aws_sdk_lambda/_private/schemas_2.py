@@ -238,15 +238,6 @@ _DESMO = "DeleteEventSourceMappingOutput"
 _RIUE = "ResourceInUseException"
 _DESM = "DeleteEventSourceMapping"
 
-CHAINED_INVOKE_STOPPED_DETAILS: StaticSchema = (
-    18,
-    n0,
-    _CISDh,
-    0,
-    (_E,),
-    ((lambda: schemas.EVENT_ERROR, 1),),
-)
-
 CHAINED_INVOKE_SUCCEEDED_DETAILS: StaticSchema = (
     18,
     n0,
@@ -525,7 +516,7 @@ EVENT: StaticSchema = (
         (CHAINED_INVOKE_SUCCEEDED_DETAILS, 0),
         (lambda: schemas.CHAINED_INVOKE_FAILED_DETAILS, 0),
         (CHAINED_INVOKE_TIMED_OUT_DETAILS, 0),
-        (CHAINED_INVOKE_STOPPED_DETAILS, 0),
+        (lambda: schemas.CHAINED_INVOKE_STOPPED_DETAILS, 0),
         (lambda: schemas.CALLBACK_STARTED_DETAILS, 0),
         (lambda: schemas.CALLBACK_SUCCEEDED_DETAILS, 0),
         (lambda: schemas.CALLBACK_FAILED_DETAILS, 0),

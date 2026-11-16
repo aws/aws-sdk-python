@@ -69,7 +69,7 @@ class BedrockAgentRuntimeClient(Client[BedrockAgentRuntimeConfig]):
     bases.
     """
 
-    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
+    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
 
     @_overload
     def check_ingested_document_acl(

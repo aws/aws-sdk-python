@@ -270,6 +270,9 @@ from aws_sdk_cloudformation.models import (
     RegisterTypeInput,
     RegisterTypeInputDict,
     RegisterTypeOutput,
+    RemoveAliasInput,
+    RemoveAliasInputDict,
+    RemoveAliasOutput,
     RequiredActivatedType,
     ResourceChange,
     ResourceChangeDetail,
@@ -298,6 +301,9 @@ from aws_sdk_cloudformation.models import (
     ScannedResource,
     ScannedResourceIdentifier,
     ScannedResourceIdentifierDict,
+    SetAliasInput,
+    SetAliasInputDict,
+    SetAliasOutput,
     SetStackPolicyInput,
     SetStackPolicyInputDict,
     SetStackPolicyOutput,
@@ -577,6 +583,8 @@ RegisterPublisherInput()
 RegisterPublisherOutput()
 RegisterTypeInput()
 RegisterTypeOutput()
+RemoveAliasInput()
+RemoveAliasOutput()
 RequiredActivatedType()
 ResourceChange()
 ResourceChangeDetail()
@@ -596,6 +604,8 @@ RollbackTrigger()
 ScanFilter()
 ScannedResource()
 ScannedResourceIdentifier()
+SetAliasInput()
+SetAliasOutput()
 SetStackPolicyInput()
 SetStackPolicyOutput()
 SetTypeConfigurationInput()
@@ -775,51 +785,53 @@ _params_80: PublishTypeInputDict = {}
 _params_81: RecordHandlerProgressInputDict = {"bearer_token": _, "operation_status": _}
 _params_82: RegisterPublisherInputDict = {}
 _params_83: RegisterTypeInputDict = {"type_name": _, "schema_handler_package": _}
-_params_84: ResourceDefinitionDict = {"resource_type": _, "resource_identifier": _}
-_params_85: ResourceLocationDict = {"stack_name": _, "logical_resource_id": _}
-_params_86: ResourceMappingDict = {"source": _, "destination": _}
-_params_87: ResourceToImportDict = {
+_params_84: RemoveAliasInputDict = {"alias_name": _}
+_params_85: ResourceDefinitionDict = {"resource_type": _, "resource_identifier": _}
+_params_86: ResourceLocationDict = {"stack_name": _, "logical_resource_id": _}
+_params_87: ResourceMappingDict = {"source": _, "destination": _}
+_params_88: ResourceToImportDict = {
     "resource_type": _,
     "logical_resource_id": _,
     "resource_identifier": _,
 }
-_params_88: RollbackConfigurationDict = {}
-_params_89: RollbackStackInputDict = {"stack_name": _}
-_params_90: RollbackTriggerDict = {"arn": _, "type": _}
-_params_91: ScanFilterDict = {}
-_params_92: ScannedResourceIdentifierDict = {
+_params_89: RollbackConfigurationDict = {}
+_params_90: RollbackStackInputDict = {"stack_name": _}
+_params_91: RollbackTriggerDict = {"arn": _, "type": _}
+_params_92: ScanFilterDict = {}
+_params_93: ScannedResourceIdentifierDict = {
     "resource_type": _,
     "resource_identifier": _,
 }
-_params_93: SetStackPolicyInputDict = {"stack_name": _}
-_params_94: SetTypeConfigurationInputDict = {"configuration": _}
-_params_95: SetTypeDefaultVersionInputDict = {}
-_params_96: SignalResourceInputDict = {
+_params_94: SetAliasInputDict = {"stack_name": _, "alias_name": _}
+_params_95: SetStackPolicyInputDict = {"stack_name": _}
+_params_96: SetTypeConfigurationInputDict = {"configuration": _}
+_params_97: SetTypeDefaultVersionInputDict = {}
+_params_98: SignalResourceInputDict = {
     "stack_name": _,
     "logical_resource_id": _,
     "unique_id": _,
     "status": _,
 }
-_params_97: StackDefinitionDict = {}
-_params_98: StackInstanceFilterDict = {}
-_params_99: StackSetOperationPreferencesDict = {}
-_params_100: StartResourceScanInputDict = {}
-_params_101: StopStackSetOperationInputDict = {"stack_set_name": _, "operation_id": _}
-_params_102: TagDict = {"key": _, "value": _}
-_params_103: TemplateConfigurationDict = {}
-_params_104: TemplateSummaryConfigDict = {}
-_params_105: TestTypeInputDict = {}
-_params_106: TypeConfigurationIdentifierDict = {}
-_params_107: TypeFiltersDict = {}
-_params_108: UpdateGeneratedTemplateInputDict = {"generated_template_name": _}
-_params_109: UpdateStackInputDict = {"stack_name": _}
-_params_110: UpdateStackInstancesInputDict = {"stack_set_name": _, "regions": _}
-_params_111: UpdateStackSetInputDict = {"stack_set_name": _}
-_params_112: UpdateTerminationProtectionInputDict = {
+_params_99: StackDefinitionDict = {}
+_params_100: StackInstanceFilterDict = {}
+_params_101: StackSetOperationPreferencesDict = {}
+_params_102: StartResourceScanInputDict = {}
+_params_103: StopStackSetOperationInputDict = {"stack_set_name": _, "operation_id": _}
+_params_104: TagDict = {"key": _, "value": _}
+_params_105: TemplateConfigurationDict = {}
+_params_106: TemplateSummaryConfigDict = {}
+_params_107: TestTypeInputDict = {}
+_params_108: TypeConfigurationIdentifierDict = {}
+_params_109: TypeFiltersDict = {}
+_params_110: UpdateGeneratedTemplateInputDict = {"generated_template_name": _}
+_params_111: UpdateStackInputDict = {"stack_name": _}
+_params_112: UpdateStackInstancesInputDict = {"stack_set_name": _, "regions": _}
+_params_113: UpdateStackSetInputDict = {"stack_set_name": _}
+_params_114: UpdateTerminationProtectionInputDict = {
     "enable_termination_protection": _,
     "stack_name": _,
 }
-_params_113: ValidateTemplateInputDict = {}
+_params_115: ValidateTemplateInputDict = {}
 
 
 def _request[T](form: type[T]) -> T:
@@ -1221,10 +1233,18 @@ async def check_async_calls(client: AsyncCloudFormationClient) -> None:
     await client.register_type(**_request(RegisterTypeInputDict))
     await client.register_type(_request(RegisterTypeInput))
     await client.register_type(_request(RegisterTypeInputDict))
+    await client.remove_alias(alias_name=_)
+    await client.remove_alias(**_request(RemoveAliasInputDict))
+    await client.remove_alias(_request(RemoveAliasInput))
+    await client.remove_alias(_request(RemoveAliasInputDict))
     await client.rollback_stack(stack_name=_)
     await client.rollback_stack(**_request(RollbackStackInputDict))
     await client.rollback_stack(_request(RollbackStackInput))
     await client.rollback_stack(_request(RollbackStackInputDict))
+    await client.set_alias(stack_name=_, alias_name=_)
+    await client.set_alias(**_request(SetAliasInputDict))
+    await client.set_alias(_request(SetAliasInput))
+    await client.set_alias(_request(SetAliasInputDict))
     await client.set_stack_policy(stack_name=_)
     await client.set_stack_policy(**_request(SetStackPolicyInputDict))
     await client.set_stack_policy(_request(SetStackPolicyInput))
@@ -1648,10 +1668,18 @@ def check_sync_calls(client: CloudFormationClient) -> None:
     client.register_type(**_request(RegisterTypeInputDict))
     client.register_type(_request(RegisterTypeInput))
     client.register_type(_request(RegisterTypeInputDict))
+    client.remove_alias(alias_name=_)
+    client.remove_alias(**_request(RemoveAliasInputDict))
+    client.remove_alias(_request(RemoveAliasInput))
+    client.remove_alias(_request(RemoveAliasInputDict))
     client.rollback_stack(stack_name=_)
     client.rollback_stack(**_request(RollbackStackInputDict))
     client.rollback_stack(_request(RollbackStackInput))
     client.rollback_stack(_request(RollbackStackInputDict))
+    client.set_alias(stack_name=_, alias_name=_)
+    client.set_alias(**_request(SetAliasInputDict))
+    client.set_alias(_request(SetAliasInput))
+    client.set_alias(_request(SetAliasInputDict))
     client.set_stack_policy(stack_name=_)
     client.set_stack_policy(**_request(SetStackPolicyInputDict))
     client.set_stack_policy(_request(SetStackPolicyInput))

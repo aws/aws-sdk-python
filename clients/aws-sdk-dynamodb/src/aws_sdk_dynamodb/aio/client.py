@@ -113,7 +113,7 @@ class AsyncDynamoDBClient(AsyncClient[AsyncDynamoDBConfig]):
     Region, providing built-in high availability and data durability.
     """
 
-    _client_plugins = (user_agent_plugin, aws_user_agent_plugin, dynamodb_retry_plugin)
+    _client_plugins = (aws_user_agent_plugin, dynamodb_retry_plugin, user_agent_plugin)
 
     @_overload
     async def batch_execute_statement(

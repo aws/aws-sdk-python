@@ -23,6 +23,7 @@ from ..models import (
     BlockDeviceMapping,
     BlockDeviceMappingDict,
     CancellationTerms,
+    CancelledSpotInstanceRequest,
     CustomerGateway,
     DestinationOptionsRequest,
     DestinationOptionsRequestDict,
@@ -60,6 +61,8 @@ from ..models import (
     InstanceEventWindow,
     InstanceEventWindowTimeRangeRequest,
     InstanceEventWindowTimeRangeRequestDict,
+    InstanceFlexCostAllocationPolicyDocument,
+    InstanceFlexCostAllocationPolicyDocumentDict,
     InstanceIpv6Address,
     InstanceIpv6AddressDict,
     InstanceRequirementsRequest,
@@ -98,8 +101,11 @@ from ..models import (
     MacSystemIntegrityProtectionConfigurationRequest,
     MacSystemIntegrityProtectionConfigurationRequestDict,
     ManagedPrefixList,
+    MetricCategory,
     ModificationQuoteCurrentConfiguration,
     ModificationTerms,
+    NatFlexCostAllocationPolicyDocument,
+    NatFlexCostAllocationPolicyDocumentDict,
     NatGateway,
     NetworkAcl,
     NetworkInsightsAccessScope,
@@ -115,6 +121,8 @@ from ..models import (
     OperatorRequestDict,
     PathRequestFilter,
     PathRequestFilterDict,
+    PcxFlexCostAllocationPolicyDocument,
+    PcxFlexCostAllocationPolicyDocumentDict,
     PerformanceFactorReference,
     PerformanceFactorReferenceDict,
     PerformanceFactorReferenceRequest,
@@ -122,11 +130,8 @@ from ..models import (
     PlacementGroup,
     PortRange,
     PortRangeDict,
-    PriceScheduleSpecification,
-    PriceScheduleSpecificationDict,
     PrivateIpAddressSpecification,
     PrivateIpAddressSpecificationDict,
-    ReplaceRootVolumeTask,
     RequestIpamResourceTag,
     RequestIpamResourceTagDict,
     RequestLaunchTemplateData,
@@ -135,7 +140,6 @@ from ..models import (
     ReservationFleetInstanceSpecificationDict,
     ReservedCapacityOptionsRequest,
     ReservedCapacityOptionsRequestDict,
-    ReservedInstancesListing,
     SpotOptionsRequest,
     SpotOptionsRequestDict,
     StorageLocation,
@@ -157,6 +161,27 @@ from ..models import (
     Vpc,
     _SerdeShape,
 )
+
+@dataclass(kw_only=True)
+class CancelSpotInstanceRequestsOutput(_SerdeShape):
+    """Contains the output of CancelSpotInstanceRequests."""
+
+    cancelled_spot_instance_requests: list[CancelledSpotInstanceRequest] | None = ...
+    """The Spot Instance requests."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+class CancelSpotInstanceRequestState(UnknownEnumMixin, StrEnum):
+    ACTIVE = "active"
+    OPEN = "open"
+    CLOSED = "closed"
+    CANCELLED = "cancelled"
+    COMPLETED = "completed"
 
 @dataclass(kw_only=True)
 class CapacityAllocation(_SerdeShape):
@@ -3414,16 +3439,7 @@ class CopySnapshotInput(_SerdeShape):
     in the *Amazon EBS User Guide*.
     """
     destination_region: str | None = ...
-    """
-    The destination Region to use in the `PresignedUrl` parameter of a
-    snapshot copy operation. This parameter is only valid for specifying the
-    destination Region in a `PresignedUrl` parameter, where it is required.
-
-    The snapshot copy is sent to the regional endpoint that you sent the
-    HTTP request to (for example, `ec2.us-east-1.amazonaws.com`). With the
-    CLI, this is specified using the `--region` parameter or the default
-    Region in your Amazon Web Services configuration file.
-    """
+    """Deprecated."""
     encrypted: bool | None = ...
     """
     To encrypt a copy of an unencrypted snapshot if encryption by default is
@@ -3457,25 +3473,7 @@ class CopySnapshotInput(_SerdeShape):
     appear to complete, but eventually fails.
     """
     presigned_url: str | None = ...
-    """
-    When you copy an encrypted source snapshot using the Amazon EC2 Query
-    API, you must supply a pre-signed URL. This parameter is optional for
-    unencrypted snapshots. For more information, see [Query
-    requests](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html).
-
-    The `PresignedUrl` should use the snapshot source endpoint, the
-    `CopySnapshot` action, and include the `SourceRegion`,
-    `SourceSnapshotId`, and `DestinationRegion` parameters. The
-    `PresignedUrl` must be signed using Amazon Web Services Signature
-    Version 4. Because EBS snapshots are stored in Amazon S3, the signing
-    algorithm for this parameter uses the same logic that is described in
-    [Authenticating Requests: Using Query Parameters (Amazon Web Services
-    Signature Version
-    4)](https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html)
-    in the *Amazon S3 API Reference*. An invalid or improperly signed
-    `PresignedUrl` will cause the copy operation to fail asynchronously, and
-    the snapshot will move to an `error` state.
-    """
+    """Deprecated."""
     source_region: str | None = ...
     """The ID of the Region that contains the snapshot to be copied."""
     source_snapshot_id: str | None = ...
@@ -3530,16 +3528,7 @@ class CopySnapshotInputDict(TypedDict, total=False):
     in the *Amazon EBS User Guide*.
     """
     destination_region: str | None
-    """
-    The destination Region to use in the `PresignedUrl` parameter of a
-    snapshot copy operation. This parameter is only valid for specifying the
-    destination Region in a `PresignedUrl` parameter, where it is required.
-
-    The snapshot copy is sent to the regional endpoint that you sent the
-    HTTP request to (for example, `ec2.us-east-1.amazonaws.com`). With the
-    CLI, this is specified using the `--region` parameter or the default
-    Region in your Amazon Web Services configuration file.
-    """
+    """Deprecated."""
     encrypted: bool | None
     """
     To encrypt a copy of an unencrypted snapshot if encryption by default is
@@ -3573,25 +3562,7 @@ class CopySnapshotInputDict(TypedDict, total=False):
     appear to complete, but eventually fails.
     """
     presigned_url: str | None
-    """
-    When you copy an encrypted source snapshot using the Amazon EC2 Query
-    API, you must supply a pre-signed URL. This parameter is optional for
-    unencrypted snapshots. For more information, see [Query
-    requests](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html).
-
-    The `PresignedUrl` should use the snapshot source endpoint, the
-    `CopySnapshot` action, and include the `SourceRegion`,
-    `SourceSnapshotId`, and `DestinationRegion` parameters. The
-    `PresignedUrl` must be signed using Amazon Web Services Signature
-    Version 4. Because EBS snapshots are stored in Amazon S3, the signing
-    algorithm for this parameter uses the same logic that is described in
-    [Authenticating Requests: Using Query Parameters (Amazon Web Services
-    Signature Version
-    4)](https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html)
-    in the *Amazon S3 API Reference*. An invalid or improperly signed
-    `PresignedUrl` will cause the copy operation to fail asynchronously, and
-    the snapshot will move to an `error` state.
-    """
+    """Deprecated."""
     source_region: Required[str]
     """The ID of the Region that contains the snapshot to be copied."""
     source_snapshot_id: Required[str]
@@ -8022,7 +7993,7 @@ class CreateIpamInternetRegistryAssociationInput(_SerdeShape):
     """The ID of the IPAM to associate with the internet registry."""
     rir: str | None = ...
     """
-    The Regional Internet Registry to associate with. Possible values:
+    The internet registry to associate with. Possible values:
 
     - `ripe` - RIPE NCC (Europe, the Middle East, and Central Asia).
 
@@ -8031,6 +8002,8 @@ class CreateIpamInternetRegistryAssociationInput(_SerdeShape):
     - `arin` - ARIN (North America).
 
     - `lacnic` - LACNIC (Latin America and the Caribbean).
+
+    - `nicbr` - NIC.br (Brazil).
     """
     organization_handle: str | None = ...
     """
@@ -8065,7 +8038,7 @@ class CreateIpamInternetRegistryAssociationInputDict(TypedDict, total=False):
     """The ID of the IPAM to associate with the internet registry."""
     rir: Required[str]
     """
-    The Regional Internet Registry to associate with. Possible values:
+    The internet registry to associate with. Possible values:
 
     - `ripe` - RIPE NCC (Europe, the Middle East, and Central Asia).
 
@@ -8074,6 +8047,8 @@ class CreateIpamInternetRegistryAssociationInputDict(TypedDict, total=False):
     - `arin` - ARIN (North America).
 
     - `lacnic` - LACNIC (Latin America and the Caribbean).
+
+    - `nicbr` - NIC.br (Brazil).
     """
     organization_handle: Required[str]
     """
@@ -10047,6 +10022,85 @@ class CreateManagedPrefixListOutput(_SerdeShape):
     """
 
 @dataclass(kw_only=True)
+class CreateMetricCategoryInput(_SerdeShape):
+    """Dataclass for CreateMetricCategoryInput structure."""
+
+    metrics: list[str] | None = ...
+    """
+    The names of the metrics to include in the metric category.
+
+    Specify each metric by its Amazon CloudWatch metric name or its
+    OpenTelemetry metric name. The two names for a measurement are separate
+    entries, and you can include both.
+
+    In Regions where Amazon CloudWatch OpenTelemetry metrics aren't
+    available, you can't specify OpenTelemetry metric names.
+    """
+    tag_specifications: list[TagSpecification] | None = ...
+    """The tags to apply to the metric category during creation."""
+    client_token: str | None = ...
+    """
+    Unique, case-sensitive identifier that you provide to ensure the
+    idempotency of the request. For more information, see [Ensure
+    Idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+
+    This field is autopopulated if not provided.
+    """
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the operation,
+    without actually making the request, and provides an error response. If
+    you have the required permissions, the error response is
+    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class CreateMetricCategoryInputDict(TypedDict, total=False):
+    """Dictionary form of `CreateMetricCategoryInput`."""
+
+    metrics: Required[Sequence[str]]
+    """
+    The names of the metrics to include in the metric category.
+
+    Specify each metric by its Amazon CloudWatch metric name or its
+    OpenTelemetry metric name. The two names for a measurement are separate
+    entries, and you can include both.
+
+    In Regions where Amazon CloudWatch OpenTelemetry metrics aren't
+    available, you can't specify OpenTelemetry metric names.
+    """
+    tag_specifications: Sequence[TagSpecification | TagSpecificationDict] | None
+    """The tags to apply to the metric category during creation."""
+    client_token: str | None
+    """
+    Unique, case-sensitive identifier that you provide to ensure the
+    idempotency of the request. For more information, see [Ensure
+    Idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+
+    This field is autopopulated if not provided.
+    """
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the operation,
+    without actually making the request, and provides an error response. If
+    you have the required permissions, the error response is
+    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class CreateMetricCategoryOutput(_SerdeShape):
+    """Dataclass for CreateMetricCategoryOutput structure."""
+
+    metric_category: MetricCategory | None = ...
+    """Information about the metric category."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
 class CreateNatGatewayInput(_SerdeShape):
     """Dataclass for CreateNatGatewayInput structure."""
 
@@ -10460,6 +10514,158 @@ class CreateNetworkAclOutput(_SerdeShape):
     """
     Unique, case-sensitive identifier to ensure the idempotency of the
     request. Only returned if a client token was provided in the request.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class CreateNetworkingFlexCostAllocationPolicyInput(_SerdeShape):
+    """Dataclass for CreateNetworkingFlexCostAllocationPolicyInput structure."""
+
+    network_resource_type: str | None = ...
+    """
+    The type of network resource that the policy applies to. This parameter
+    is required. Valid values are `natgw` (NAT gateway), `pcx` (Amazon VPC
+    peering connection), and `ec2` (EC2 instance).
+
+    Specify the policy document that matches the resource type:
+    `NatFcaPolicyDocument` for `natgw`, `InstanceFcaPolicyDocument` for
+    `ec2`, or `PcxFcaPolicyDocument` for `pcx`. Don't specify a policy
+    document for a different resource type.
+    """
+    nat_fca_policy_document: NatFlexCostAllocationPolicyDocument | None = ...
+    """
+    The policy document that defines cost allocation for NAT gateways.
+    Provide this document when `NetworkResourceType` is `natgw`.
+    """
+    instance_fca_policy_document: InstanceFlexCostAllocationPolicyDocument | None = ...
+    """
+    The policy document that defines cost allocation for EC2 instances.
+    Provide this document when `NetworkResourceType` is `ec2`.
+    """
+    pcx_fca_policy_document: PcxFlexCostAllocationPolicyDocument | None = ...
+    """
+    The policy document that defines cost allocation for Amazon VPC peering
+    connections. Provide this document when `NetworkResourceType` is `pcx`.
+    """
+    show_back_enabled: bool | None = ...
+    """
+    Specifies whether showback reporting is enabled for the policy.
+
+    Default: `true`
+    """
+    description: str | None = ...
+    """
+    A description for the policy. The description can be up to 1024
+    characters long.
+    """
+    tag_specifications: list[TagSpecification] | None = ...
+    """The tags to assign to the policy."""
+    client_token: str | None = ...
+    """
+    Unique, case-sensitive identifier that you provide to ensure the
+    idempotency of the request. For more information, see [Ensuring
+    idempotency](https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html).
+
+    This field is autopopulated if not provided.
+    """
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class CreateNetworkingFlexCostAllocationPolicyInputDict(TypedDict, total=False):
+    """Dictionary form of `CreateNetworkingFlexCostAllocationPolicyInput`."""
+
+    network_resource_type: Required[str]
+    """
+    The type of network resource that the policy applies to. This parameter
+    is required. Valid values are `natgw` (NAT gateway), `pcx` (Amazon VPC
+    peering connection), and `ec2` (EC2 instance).
+
+    Specify the policy document that matches the resource type:
+    `NatFcaPolicyDocument` for `natgw`, `InstanceFcaPolicyDocument` for
+    `ec2`, or `PcxFcaPolicyDocument` for `pcx`. Don't specify a policy
+    document for a different resource type.
+    """
+    nat_fca_policy_document: (
+        NatFlexCostAllocationPolicyDocument
+        | NatFlexCostAllocationPolicyDocumentDict
+        | None
+    )
+    """
+    The policy document that defines cost allocation for NAT gateways.
+    Provide this document when `NetworkResourceType` is `natgw`.
+    """
+    instance_fca_policy_document: (
+        InstanceFlexCostAllocationPolicyDocument
+        | InstanceFlexCostAllocationPolicyDocumentDict
+        | None
+    )
+    """
+    The policy document that defines cost allocation for EC2 instances.
+    Provide this document when `NetworkResourceType` is `ec2`.
+    """
+    pcx_fca_policy_document: (
+        PcxFlexCostAllocationPolicyDocument
+        | PcxFlexCostAllocationPolicyDocumentDict
+        | None
+    )
+    """
+    The policy document that defines cost allocation for Amazon VPC peering
+    connections. Provide this document when `NetworkResourceType` is `pcx`.
+    """
+    show_back_enabled: bool | None
+    """
+    Specifies whether showback reporting is enabled for the policy.
+
+    Default: `true`
+    """
+    description: str | None
+    """
+    A description for the policy. The description can be up to 1024
+    characters long.
+    """
+    tag_specifications: Sequence[TagSpecification | TagSpecificationDict] | None
+    """The tags to assign to the policy."""
+    client_token: str | None
+    """
+    Unique, case-sensitive identifier that you provide to ensure the
+    idempotency of the request. For more information, see [Ensuring
+    idempotency](https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html).
+
+    This field is autopopulated if not provided.
+    """
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class CreateNetworkingFlexCostAllocationPolicyOutput(_SerdeShape):
+    """Dataclass for CreateNetworkingFlexCostAllocationPolicyOutput structure."""
+
+    fca_policy_id: str | None = ...
+    """The ID of the flex cost allocation policy."""
+    fca_policy_arn: str | None = ...
+    """The Amazon Resource Name (ARN) of the flex cost allocation policy."""
+    created_at: datetime | None = ...
+    """The date and time when the policy was created."""
+    expected_effective_at: datetime | None = ...
+    """
+    The date and time when the policy is expected to apply to network
+    traffic.
     """
     response_metadata: ResponseMetadata = ...
     """
@@ -11120,345 +11326,6 @@ class CreatePlacementGroupOutput(_SerdeShape):
 
     placement_group: PlacementGroup | None = ...
     """Information about the placement group."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class CreatePublicIpv4PoolInput(_SerdeShape):
-    """Dataclass for CreatePublicIpv4PoolInput structure."""
-
-    dry_run: bool | None = ...
-    """
-    A check for whether you have the required permissions for the action
-    without actually making the request and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-    tag_specifications: list[TagSpecification] | None = ...
-    """
-    The key/value combination of a tag assigned to the resource. Use the tag
-    key in the filter name and the tag value as the filter value. For
-    example, to find all resources that have a tag with the key `Owner` and
-    the value `TeamA`, specify `tag:Owner` for the filter name and `TeamA`
-    for the filter value.
-    """
-    network_border_group: str | None = ...
-    """
-    The Availability Zone (AZ) or Local Zone (LZ) network border group that
-    the resource that the IP address is assigned to is in. Defaults to an AZ
-    network border group. For more information on available Local Zones, see
-    [Local Zone
-    availability](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#byoip-zone-avail)
-    in the *Amazon EC2 User Guide*.
-    """
-
-class CreatePublicIpv4PoolInputDict(TypedDict, total=False):
-    """Dictionary form of `CreatePublicIpv4PoolInput`."""
-
-    dry_run: bool | None
-    """
-    A check for whether you have the required permissions for the action
-    without actually making the request and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-    tag_specifications: Sequence[TagSpecification | TagSpecificationDict] | None
-    """
-    The key/value combination of a tag assigned to the resource. Use the tag
-    key in the filter name and the tag value as the filter value. For
-    example, to find all resources that have a tag with the key `Owner` and
-    the value `TeamA`, specify `tag:Owner` for the filter name and `TeamA`
-    for the filter value.
-    """
-    network_border_group: str | None
-    """
-    The Availability Zone (AZ) or Local Zone (LZ) network border group that
-    the resource that the IP address is assigned to is in. Defaults to an AZ
-    network border group. For more information on available Local Zones, see
-    [Local Zone
-    availability](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#byoip-zone-avail)
-    in the *Amazon EC2 User Guide*.
-    """
-
-@dataclass(kw_only=True)
-class CreatePublicIpv4PoolOutput(_SerdeShape):
-    """Dataclass for CreatePublicIpv4PoolOutput structure."""
-
-    pool_id: str | None = ...
-    """The ID of the public IPv4 pool."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class CreateReplaceRootVolumeTaskInput(_SerdeShape):
-    """Dataclass for CreateReplaceRootVolumeTaskInput structure."""
-
-    instance_id: str | None = ...
-    """The ID of the instance for which to replace the root volume."""
-    snapshot_id: str | None = ...
-    """
-    The ID of the snapshot from which to restore the replacement root
-    volume. The specified snapshot must be a snapshot that you previously
-    created from the original root volume.
-
-    If you want to restore the replacement root volume to the initial launch
-    state, if you want to restore the replacement root volume from an AMI,
-    or if you want to replace the root volume with a specified volume, omit
-    this parameter.
-    """
-    client_token: str | None = ...
-    """
-    Unique, case-sensitive identifier you provide to ensure the idempotency
-    of the request. If you do not specify a client token, a randomly
-    generated token is used for the request to ensure idempotency. For more
-    information, see [Ensuring
-    idempotency](https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html).
-
-    This field is autopopulated if not provided.
-    """
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    tag_specifications: list[TagSpecification] | None = ...
-    """The tags to apply to the root volume replacement task."""
-    image_id: str | None = ...
-    """
-    The ID of the AMI to use to restore the root volume. The specified AMI
-    must have the same product code, billing information, architecture type,
-    and virtualization type as that of the instance.
-
-    If you want to restore the replacement volume from a specific snapshot,
-    if you want to restore it to its launch state, or if you want to replace
-    the root volume with a specified volume, omit this parameter.
-    """
-    delete_replaced_root_volume: bool | None = ...
-    """
-    Indicates whether to automatically delete the original root volume after
-    the root volume replacement task completes. To delete the original root
-    volume, specify `true`. If you choose to keep the original root volume
-    after the replacement task completes, you must manually delete it when
-    you no longer need it.
-    """
-    volume_initialization_rate: int | None = ...
-    """
-    Specifies the Amazon EBS Provisioned Rate for Volume Initialization
-    (volume initialization rate), in MiB/s, at which to download the
-    snapshot blocks from Amazon S3 to the replacement root volume. This is
-    also known as *volume initialization*. Specifying a volume
-    initialization rate ensures that the volume is initialized at a
-    predictable and consistent rate after creation.
-
-    Omit this parameter if:
-
-    - You want to create the volume using fast snapshot restore. You must
-      specify a snapshot that is enabled for fast snapshot restore. In this
-      case, the volume is fully initialized at creation.
-
-      Note:
-        If you specify a snapshot that is enabled for fast snapshot restore
-        and a volume initialization rate, the volume will be initialized at
-        the specified rate instead of fast snapshot restore.
-
-    - You want to create a volume that is initialized at the default rate.
-
-    For more information, see [Initialize Amazon EBS
-    volumes](https://docs.aws.amazon.com/ebs/latest/userguide/initalize-volume.html)
-    in the *Amazon EC2 User Guide*.
-
-    Valid range: 100 - 300 MiB/s
-    """
-    volume_id: str | None = ...
-    """
-    The ID of the volume to use as the replacement root volume. The
-    specified volume must be in the same Availability Zone as the instance,
-    must be in the `available` state, and must not be attached to an
-    instance. If the original root volume is encrypted, the specified volume
-    must also be encrypted.
-
-    If you want to restore the replacement root volume from a specific
-    snapshot, an AMI, or to its launch state, omit this parameter.
-    """
-
-class CreateReplaceRootVolumeTaskInputDict(TypedDict, total=False):
-    """Dictionary form of `CreateReplaceRootVolumeTaskInput`."""
-
-    instance_id: Required[str]
-    """The ID of the instance for which to replace the root volume."""
-    snapshot_id: str | None
-    """
-    The ID of the snapshot from which to restore the replacement root
-    volume. The specified snapshot must be a snapshot that you previously
-    created from the original root volume.
-
-    If you want to restore the replacement root volume to the initial launch
-    state, if you want to restore the replacement root volume from an AMI,
-    or if you want to replace the root volume with a specified volume, omit
-    this parameter.
-    """
-    client_token: str | None
-    """
-    Unique, case-sensitive identifier you provide to ensure the idempotency
-    of the request. If you do not specify a client token, a randomly
-    generated token is used for the request to ensure idempotency. For more
-    information, see [Ensuring
-    idempotency](https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html).
-
-    This field is autopopulated if not provided.
-    """
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    tag_specifications: Sequence[TagSpecification | TagSpecificationDict] | None
-    """The tags to apply to the root volume replacement task."""
-    image_id: str | None
-    """
-    The ID of the AMI to use to restore the root volume. The specified AMI
-    must have the same product code, billing information, architecture type,
-    and virtualization type as that of the instance.
-
-    If you want to restore the replacement volume from a specific snapshot,
-    if you want to restore it to its launch state, or if you want to replace
-    the root volume with a specified volume, omit this parameter.
-    """
-    delete_replaced_root_volume: bool | None
-    """
-    Indicates whether to automatically delete the original root volume after
-    the root volume replacement task completes. To delete the original root
-    volume, specify `true`. If you choose to keep the original root volume
-    after the replacement task completes, you must manually delete it when
-    you no longer need it.
-    """
-    volume_initialization_rate: int | None
-    """
-    Specifies the Amazon EBS Provisioned Rate for Volume Initialization
-    (volume initialization rate), in MiB/s, at which to download the
-    snapshot blocks from Amazon S3 to the replacement root volume. This is
-    also known as *volume initialization*. Specifying a volume
-    initialization rate ensures that the volume is initialized at a
-    predictable and consistent rate after creation.
-
-    Omit this parameter if:
-
-    - You want to create the volume using fast snapshot restore. You must
-      specify a snapshot that is enabled for fast snapshot restore. In this
-      case, the volume is fully initialized at creation.
-
-      Note:
-        If you specify a snapshot that is enabled for fast snapshot restore
-        and a volume initialization rate, the volume will be initialized at
-        the specified rate instead of fast snapshot restore.
-
-    - You want to create a volume that is initialized at the default rate.
-
-    For more information, see [Initialize Amazon EBS
-    volumes](https://docs.aws.amazon.com/ebs/latest/userguide/initalize-volume.html)
-    in the *Amazon EC2 User Guide*.
-
-    Valid range: 100 - 300 MiB/s
-    """
-    volume_id: str | None
-    """
-    The ID of the volume to use as the replacement root volume. The
-    specified volume must be in the same Availability Zone as the instance,
-    must be in the `available` state, and must not be attached to an
-    instance. If the original root volume is encrypted, the specified volume
-    must also be encrypted.
-
-    If you want to restore the replacement root volume from a specific
-    snapshot, an AMI, or to its launch state, omit this parameter.
-    """
-
-@dataclass(kw_only=True)
-class CreateReplaceRootVolumeTaskOutput(_SerdeShape):
-    """Dataclass for CreateReplaceRootVolumeTaskOutput structure."""
-
-    replace_root_volume_task: ReplaceRootVolumeTask | None = ...
-    """Information about the root volume replacement task."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class CreateReservedInstancesListingInput(_SerdeShape):
-    """Contains the parameters for CreateReservedInstancesListing."""
-
-    reserved_instances_id: str | None = ...
-    """The ID of the active Standard Reserved Instance."""
-    instance_count: int | None = ...
-    """
-    The number of instances that are a part of a Reserved Instance account
-    to be listed in the Reserved Instance Marketplace. This number should be
-    less than or equal to the instance count associated with the Reserved
-    Instance ID specified in this call.
-    """
-    price_schedules: list[PriceScheduleSpecification] | None = ...
-    """
-    A list specifying the price of the Standard Reserved Instance for each
-    month remaining in the Reserved Instance term.
-    """
-    client_token: str | None = ...
-    """
-    Unique, case-sensitive identifier you provide to ensure idempotency of
-    your listings. This helps avoid duplicate listings. For more
-    information, see [Ensuring
-    Idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-    """
-
-class CreateReservedInstancesListingInputDict(TypedDict, total=False):
-    """Dictionary form of `CreateReservedInstancesListingInput`."""
-
-    reserved_instances_id: Required[str]
-    """The ID of the active Standard Reserved Instance."""
-    instance_count: Required[int]
-    """
-    The number of instances that are a part of a Reserved Instance account
-    to be listed in the Reserved Instance Marketplace. This number should be
-    less than or equal to the instance count associated with the Reserved
-    Instance ID specified in this call.
-    """
-    price_schedules: Required[
-        Sequence[PriceScheduleSpecification | PriceScheduleSpecificationDict]
-    ]
-    """
-    A list specifying the price of the Standard Reserved Instance for each
-    month remaining in the Reserved Instance term.
-    """
-    client_token: Required[str]
-    """
-    Unique, case-sensitive identifier you provide to ensure idempotency of
-    your listings. This helps avoid duplicate listings. For more
-    information, see [Ensuring
-    Idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-    """
-
-@dataclass(kw_only=True)
-class CreateReservedInstancesListingOutput(_SerdeShape):
-    """Contains the output of CreateReservedInstancesListing."""
-
-    reserved_instances_listings: list[ReservedInstancesListing] | None = ...
-    """Information about the Standard Reserved Instance listing."""
     response_metadata: ResponseMetadata = ...
     """
     Metadata about the response that produced this output. Use this to

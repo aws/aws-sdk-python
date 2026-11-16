@@ -15,8 +15,6 @@ from ..models import (
     AddIpamOperatingRegionDict,
     AddIpamOrganizationalUnitExclusion,
     AddIpamOrganizationalUnitExclusionDict,
-    AddPrefixListEntry,
-    AddPrefixListEntryDict,
     AddressAttribute,
     ApplicationStatusCheckResponseObject,
     AttributeBooleanValue,
@@ -44,14 +42,10 @@ from ..models import (
     ConnectionTrackingSpecification,
     ConnectionTrackingSpecificationRequest,
     ConnectionTrackingSpecificationRequestDict,
-    CreateVolumePermissionModifications,
-    CreateVolumePermissionModificationsDict,
     DevicePostureOptions,
     DevicePostureOptionsDict,
     DnsServersOptionsModifyStructure,
     DnsServersOptionsModifyStructureDict,
-    EnaSrdSpecification,
-    EnaSrdSpecificationDict,
     EnaSrdSpecificationRequest,
     EnaSrdSpecificationRequestDict,
     EnclaveOptionsRequest,
@@ -86,6 +80,8 @@ from ..models import (
     InstanceRequirementsDict,
     InstanceStatusEvent,
     Ipam,
+    IpamOperatingRegion,
+    IpamOrganizationalUnitExclusion,
     IpamPolicyAllocationRuleRequest,
     IpamPolicyAllocationRuleRequestDict,
     IpamPolicyDocument,
@@ -95,36 +91,25 @@ from ..models import (
     IpamPrefixListResolverRuleRequest,
     IpamPrefixListResolverRuleRequestDict,
     IpamPrefixListResolverTarget,
-    IpamResourceCidr,
-    IpamResourceDiscovery,
-    IpamRoutingPolicyRegistrationDelta,
-    IpamScope,
-    NetworkInterfaceAttachmentChanges,
-    NetworkInterfaceAttachmentChangesDict,
     OperatorResponse,
     PoolCidrBlock,
+    PrefixListId,
+    PrefixListIdDict,
     PrivateIpAddressSpecification,
     PrivateIpAddressSpecificationDict,
     RemoveIpamOperatingRegion,
     RemoveIpamOperatingRegionDict,
     RemoveIpamOrganizationalUnitExclusion,
     RemoveIpamOrganizationalUnitExclusionDict,
-    RemovePrefixListEntry,
-    RemovePrefixListEntryDict,
     RequestIpamResourceTag,
     RequestIpamResourceTagDict,
-    ReservedInstancesConfiguration,
-    ReservedInstancesConfigurationDict,
     ResponseLaunchTemplateData,
-    RouteServer,
     RunInstancesMonitoringEnabled,
     SecondaryInterfacePrivateIpAddressSpecification,
     SecondaryInterfacePrivateIpAddressSpecificationRequest,
     SecondaryInterfacePrivateIpAddressSpecificationRequestDict,
     SecureBlobAttributeValue,
     SecureBlobAttributeValueDict,
-    SecurityGroupRuleUpdate,
-    SecurityGroupRuleUpdateDict,
     SnapshotRecycleBinInfo,
     SpotPlacement,
     StateReason,
@@ -135,17 +120,821 @@ from ..models import (
     TargetCapacitySpecificationRequestDict,
     TargetGroupsConfig,
     TargetGroupsConfigDict,
-    TrafficMirrorFilter,
-    TrafficMirrorFilterRule,
-    TrafficMirrorPortRangeRequest,
-    TrafficMirrorPortRangeRequestDict,
     TransitGatewayConfigurationInputStructure,
     TransitGatewayConfigurationInputStructureDict,
     UnsuccessfulInstanceCreditSpecificationItem,
     UnsuccessfulItem,
+    UserIdGroupPair,
+    UserIdGroupPairDict,
     VolumeRecycleBinInfo,
     _SerdeShape,
 )
+
+@dataclass(kw_only=True)
+class IpamPublicAddressTag(_SerdeShape):
+    """A tag for a public IP address discovered by IPAM."""
+
+    key: str | None = ...
+    """The tag's key."""
+    value: str | None = ...
+    """The tag's value."""
+
+@dataclass(kw_only=True)
+class IpamPublicAddressTags(_SerdeShape):
+    """Tags for a public IP address discovered by IPAM."""
+
+    eip_tags: list[IpamPublicAddressTag] | None = ...
+    """Tags for an Elastic IP address."""
+
+class IpamPublicAddressType(UnknownEnumMixin, StrEnum):
+    SERVICE_MANAGED_IP = "service-managed-ip"
+    SERVICE_MANAGED_BYOIP = "service-managed-byoip"
+    AMAZON_OWNED_EIP = "amazon-owned-eip"
+    AMAZON_OWNED_CONTIG = "amazon-owned-contig"
+    BYOIP = "byoip"
+    EC2_PUBLIC_IP = "ec2-public-ip"
+    ANYCAST_IP_LIST_IP = "anycast-ip-list-ip"
+
+@dataclass(kw_only=True)
+class IpamResourceCidr(_SerdeShape):
+    """The CIDR for an IPAM resource."""
+
+    ipam_id: str | None = ...
+    """The IPAM ID for an IPAM resource."""
+    ipam_scope_id: str | None = ...
+    """The scope ID for an IPAM resource."""
+    ipam_pool_id: str | None = ...
+    """The pool ID for an IPAM resource."""
+    resource_region: str | None = ...
+    """The Amazon Web Services Region for an IPAM resource."""
+    resource_owner_id: str | None = ...
+    """The Amazon Web Services account number of the owner of an IPAM resource."""
+    resource_id: str | None = ...
+    """The ID of an IPAM resource."""
+    resource_name: str | None = ...
+    """The name of an IPAM resource."""
+    resource_cidr: str | None = ...
+    """The CIDR for an IPAM resource."""
+    resource_type: str | None = ...
+    """The type of IPAM resource."""
+    resource_tags: list[IpamResourceTag] | None = ...
+    """The tags for an IPAM resource."""
+    ip_usage: float | None = ...
+    """
+    The percentage of IP address space in use. To convert the decimal to a
+    percentage, multiply the decimal by 100. Note the following:
+
+    - For resources that are VPCs, this is the percentage of IP address
+      space in the VPC that's taken up by subnet CIDRs.
+
+    - For resources that are subnets, if the subnet has an IPv4 CIDR
+      provisioned to it, this is the percentage of IPv4 address space in the
+      subnet that's in use. If the subnet has an IPv6 CIDR provisioned to
+      it, the percentage of IPv6 address space in use is not represented.
+      The percentage of IPv6 address space in use cannot currently be
+      calculated.
+
+    - For resources that are public IPv4 pools, this is the percentage of IP
+      address space in the pool that's been allocated to Elastic IP
+      addresses (EIPs).
+    """
+    compliance_status: str | None = ...
+    """
+    The compliance status of the IPAM resource. For more information on
+    compliance statuses, see [Monitor CIDR usage by
+    resource](https://docs.aws.amazon.com/vpc/latest/ipam/monitor-cidr-compliance-ipam.html)
+    in the *Amazon VPC IPAM User Guide*.
+    """
+    management_state: str | None = ...
+    """
+    The management state of the resource. For more information about
+    management states, see [Monitor CIDR usage by
+    resource](https://docs.aws.amazon.com/vpc/latest/ipam/monitor-cidr-compliance-ipam.html)
+    in the *Amazon VPC IPAM User Guide*.
+    """
+    overlap_status: str | None = ...
+    """
+    The overlap status of an IPAM resource. The overlap status tells you if
+    the CIDR for a resource overlaps with another CIDR in the scope. For
+    more information on overlap statuses, see [Monitor CIDR usage by
+    resource](https://docs.aws.amazon.com/vpc/latest/ipam/monitor-cidr-compliance-ipam.html)
+    in the *Amazon VPC IPAM User Guide*.
+    """
+    vpc_id: str | None = ...
+    """The ID of a VPC."""
+    availability_zone_id: str | None = ...
+    """The Availability Zone ID."""
+
+class IpamResourceCidrIpSource(UnknownEnumMixin, StrEnum):
+    AMAZON = "amazon"
+    BYOIP = "byoip"
+    NONE = "none"
+
+@dataclass(kw_only=True)
+class IpamResourceDiscovery(_SerdeShape):
+    """
+    A resource discovery is an IPAM component that enables IPAM to manage
+    and monitor resources that belong to the owning account.
+    """
+
+    owner_id: str | None = ...
+    """The ID of the owner."""
+    ipam_resource_discovery_id: str | None = ...
+    """The resource discovery ID."""
+    ipam_resource_discovery_arn: str | None = ...
+    """The resource discovery Amazon Resource Name (ARN)."""
+    ipam_resource_discovery_region: str | None = ...
+    """The resource discovery Region."""
+    description: str | None = ...
+    """The resource discovery description."""
+    operating_regions: list[IpamOperatingRegion] | None = ...
+    """
+    The operating Regions for the resource discovery. Operating Regions are
+    Amazon Web Services Regions where the IPAM is allowed to manage IP
+    address CIDRs. IPAM only discovers and monitors resources in the Amazon
+    Web Services Regions you select as operating Regions.
+    """
+    is_default: bool | None = ...
+    """
+    Defines if the resource discovery is the default. The default resource
+    discovery is the resource discovery automatically created when you
+    create an IPAM.
+    """
+    state: str | None = ...
+    """
+    The lifecycle state of the resource discovery.
+
+    - `create-in-progress` - Resource discovery is being created.
+
+    - `create-complete` - Resource discovery creation is complete.
+
+    - `create-failed` - Resource discovery creation has failed.
+
+    - `modify-in-progress` - Resource discovery is being modified.
+
+    - `modify-complete` - Resource discovery modification is complete.
+
+    - `modify-failed` - Resource discovery modification has failed.
+
+    - `delete-in-progress` - Resource discovery is being deleted.
+
+    - `delete-complete` - Resource discovery deletion is complete.
+
+    - `delete-failed` - Resource discovery deletion has failed.
+
+    - `isolate-in-progress` - Amazon Web Services account that created the
+      resource discovery has been removed and the resource discovery is
+      being isolated.
+
+    - `isolate-complete` - Resource discovery isolation is complete.
+
+    - `restore-in-progress` - Amazon Web Services account that created the
+      resource discovery and was isolated has been restored.
+    """
+    tags: list[Tag] | None = ...
+    """
+    A tag is a label that you assign to an Amazon Web Services resource.
+    Each tag consists of a key and an optional value. You can use tags to
+    search and filter your resources or track your Amazon Web Services
+    costs.
+    """
+    organizational_unit_exclusions: list[IpamOrganizationalUnitExclusion] | None = ...
+    """
+    If your IPAM is integrated with Amazon Web Services Organizations and
+    you add an organizational unit (OU) exclusion, IPAM will not manage the
+    IP addresses in accounts in that OU exclusion.
+    """
+
+@dataclass(kw_only=True)
+class IpamResourceDiscoveryAssociation(_SerdeShape):
+    """
+    An IPAM resource discovery association. An associated resource discovery
+    is a resource discovery that has been associated with an IPAM. IPAM
+    aggregates the resource CIDRs discovered by the associated resource
+    discovery.
+    """
+
+    owner_id: str | None = ...
+    """The Amazon Web Services account ID of the resource discovery owner."""
+    ipam_resource_discovery_association_id: str | None = ...
+    """The resource discovery association ID."""
+    ipam_resource_discovery_association_arn: str | None = ...
+    """The resource discovery association Amazon Resource Name (ARN)."""
+    ipam_resource_discovery_id: str | None = ...
+    """The resource discovery ID."""
+    ipam_id: str | None = ...
+    """The IPAM ID."""
+    ipam_arn: str | None = ...
+    """The IPAM ARN."""
+    ipam_region: str | None = ...
+    """The IPAM home Region."""
+    is_default: bool | None = ...
+    """
+    Defines if the resource discovery is the default. When you create an
+    IPAM, a default resource discovery is created for your IPAM and it's
+    associated with your IPAM.
+    """
+    resource_discovery_status: str | None = ...
+    """
+    The resource discovery status.
+
+    - `active` - Connection or permissions required to read the results of
+      the resource discovery are intact.
+
+    - `not-found` - Connection or permissions required to read the results
+      of the resource discovery are broken. This may happen if the owner of
+      the resource discovery stopped sharing it or deleted the resource
+      discovery. Verify the resource discovery still exists and the Amazon
+      Web Services RAM resource share is still intact.
+    """
+    state: str | None = ...
+    """
+    The lifecycle state of the association when you associate or
+    disassociate a resource discovery.
+
+    - `associate-in-progress` - Resource discovery is being associated.
+
+    - `associate-complete` - Resource discovery association is complete.
+
+    - `associate-failed` - Resource discovery association has failed.
+
+    - `disassociate-in-progress` - Resource discovery is being
+      disassociated.
+
+    - `disassociate-complete` - Resource discovery disassociation is
+      complete.
+
+    - `disassociate-failed ` - Resource discovery disassociation has failed.
+
+    - `isolate-in-progress` - Amazon Web Services account that created the
+      resource discovery association has been removed and the resource
+      discovery association is being isolated.
+
+    - `isolate-complete` - Resource discovery isolation is complete.
+
+    - `restore-in-progress` - Resource discovery is being restored.
+    """
+    tags: list[Tag] | None = ...
+    """
+    A tag is a label that you assign to an Amazon Web Services resource.
+    Each tag consists of a key and an optional value. You can use tags to
+    search and filter your resources or track your Amazon Web Services
+    costs.
+    """
+
+class IpamResourceDiscoveryAssociationState(UnknownEnumMixin, StrEnum):
+    ASSOCIATE_IN_PROGRESS = "associate-in-progress"
+    ASSOCIATE_COMPLETE = "associate-complete"
+    ASSOCIATE_FAILED = "associate-failed"
+    DISASSOCIATE_IN_PROGRESS = "disassociate-in-progress"
+    DISASSOCIATE_COMPLETE = "disassociate-complete"
+    DISASSOCIATE_FAILED = "disassociate-failed"
+    ISOLATE_IN_PROGRESS = "isolate-in-progress"
+    ISOLATE_COMPLETE = "isolate-complete"
+    RESTORE_IN_PROGRESS = "restore-in-progress"
+
+class IpamResourceDiscoveryState(UnknownEnumMixin, StrEnum):
+    CREATE_IN_PROGRESS = "create-in-progress"
+    CREATE_COMPLETE = "create-complete"
+    CREATE_FAILED = "create-failed"
+    MODIFY_IN_PROGRESS = "modify-in-progress"
+    MODIFY_COMPLETE = "modify-complete"
+    MODIFY_FAILED = "modify-failed"
+    DELETE_IN_PROGRESS = "delete-in-progress"
+    DELETE_COMPLETE = "delete-complete"
+    DELETE_FAILED = "delete-failed"
+    ISOLATE_IN_PROGRESS = "isolate-in-progress"
+    ISOLATE_COMPLETE = "isolate-complete"
+    RESTORE_IN_PROGRESS = "restore-in-progress"
+
+@dataclass(kw_only=True)
+class IpamResourceTag(_SerdeShape):
+    """
+    The key/value combination of a tag assigned to the resource. Use the tag
+    key in the filter name and the tag value as the filter value. For
+    example, to find all resources that have a tag with the key `Owner` and
+    the value `TeamA`, specify `tag:Owner` for the filter name and `TeamA`
+    for the filter value.
+    """
+
+    key: str | None = ...
+    """
+    The key of a tag assigned to the resource. Use this filter to find all
+    resources assigned a tag with a specific key, regardless of the tag
+    value.
+    """
+    value: str | None = ...
+    """The value of the tag."""
+
+class IpamResourceType(UnknownEnumMixin, StrEnum):
+    VPC = "vpc"
+    SUBNET = "subnet"
+    EIP = "eip"
+    PUBLIC_IPV4_POOL = "public-ipv4-pool"
+    IPV6_POOL = "ipv6-pool"
+    ENI = "eni"
+    ANYCAST_IP_LIST = "anycast-ip-list"
+
+@dataclass(kw_only=True)
+class IpamRouteOriginAuthorization(_SerdeShape):
+    """
+    Contains information about a Route Origin Authorization (ROA) published
+    in the RPKI. A ROA cryptographically attests that a specific ASN is
+    authorized to originate a specific IP address prefix.
+    """
+
+    asn: str | None = ...
+    """The Autonomous System Number (ASN) authorized by the ROA."""
+    prefix: str | None = ...
+    """The IP address prefix authorized by the ROA in CIDR notation."""
+    max_length: int | None = ...
+    """The maximum prefix length that the ASN is authorized to announce."""
+    match: bool | None = ...
+    """Specifies whether the ROA matches the route announcement."""
+    expiration: datetime | None = ...
+    """The expiration date of the ROA."""
+
+@dataclass(kw_only=True)
+class IpamRouteOriginAuthorizationInfo(_SerdeShape):
+    """
+    Contains information about a Route Origin Authorization (ROA) currently
+    published in the RPKI.
+    """
+
+    cidr: str | None = ...
+    """The IP address prefix in CIDR notation authorized by the ROA."""
+    asn: str | None = ...
+    """The Autonomous System Number (ASN) authorized to originate the prefix."""
+    max_length: int | None = ...
+    """The maximum prefix length that the ASN is authorized to announce."""
+
+@dataclass(kw_only=True)
+class IpamRouteOverlap(_SerdeShape):
+    """
+    Contains information about an overlapping route detected for a BYOIP
+    prefix.
+    """
+
+    prefix: str | None = ...
+    """The overlapping IP address prefix in CIDR notation."""
+    asn: str | None = ...
+    """The ASN originating the overlapping route."""
+    detected_at: datetime | None = ...
+    """The time when the overlap was detected."""
+
+@dataclass(kw_only=True)
+class IpamRouteProtectionFinding(_SerdeShape):
+    """
+    Contains information about a route protection finding, including the
+    RPKI validation status of a BYOIP route announcement.
+    """
+
+    resource_owner_id: str | None = ...
+    """The ID of the resource owner."""
+    resource_region: str | None = ...
+    """The Amazon Web Services Region of the resource."""
+    ipam_pool_id: str | None = ...
+    """The ID of the IPAM pool associated with the finding."""
+    cidr: str | None = ...
+    """The IP address prefix in CIDR notation."""
+    state: str | None = ...
+    """
+    The state of the BYOIP CIDR. Possible values:
+
+    - `advertised` - The CIDR is being advertised.
+
+    - `deprovisioned` - The CIDR has been deprovisioned.
+
+    - `failed-deprovision` - Deprovisioning failed.
+
+    - `failed-provision` - Provisioning failed.
+
+    - `pending-deprovision` - Deprovisioning is in progress.
+
+    - `pending-provision` - Provisioning is in progress.
+
+    - `provisioned` - The CIDR is provisioned.
+
+    - `provisioned-not-publicly-advertisable` - The CIDR is provisioned but
+      not publicly advertisable.
+    """
+    advertisement_type: str | None = ...
+    """
+    The advertisement type. Possible values:
+
+    - `regional` - The IP address is advertised from a single location
+      (regional services such as Amazon EC2).
+
+    - `global` - The IP address is advertised from multiple global locations
+      simultaneously (global services such as Amazon CloudFront).
+    """
+    network_border_group: str | None = ...
+    """The network border group."""
+    pool_id: str | None = ...
+    """The ID of the BYOIP pool."""
+    asn: str | None = ...
+    """The Autonomous System Number (ASN) that originates the route."""
+    rpki_status: str | None = ...
+    """
+    The RPKI validation status of the route. Possible values:
+
+    - `valid` - The route has a matching ROA that covers the prefix and
+      origin ASN.
+
+    - `invalid` - The route has a ROA for the prefix, but the origin ASN or
+      prefix length does not match.
+
+    - `unknown` - No ROA exists for the prefix, so RPKI validation cannot be
+      performed.
+    """
+    rpki_strength: str | None = ...
+    """
+    The RPKI enforcement strength for the route. Possible values:
+
+    - `strict` - Invalid routes are rejected.
+
+    - `permissive` - Invalid routes are accepted but flagged.
+    """
+    roas: list[IpamRouteOriginAuthorization] | None = ...
+    """The Route Origin Authorizations (ROAs) that cover the prefix."""
+    route_overlaps: list[IpamRouteOverlap] | None = ...
+    """The overlapping routes detected for this prefix."""
+    sample_time: datetime | None = ...
+    """The time when the route was last sampled."""
+    roa_sample_time: datetime | None = ...
+    """The time when the ROA data was last sampled."""
+
+@dataclass(kw_only=True)
+class IpamRoutingPolicyRegistration(_SerdeShape):
+    """
+    Contains information about a routing policy registration that represents
+    a Route Origin Authorization (ROA) managed through IPAM.
+    """
+
+    cidr: str | None = ...
+    """The IP address prefix in CIDR notation authorized by the ROA."""
+    asns: list[str] | None = ...
+    """The Autonomous System Numbers (ASNs) authorized to originate the prefix."""
+    permit_more_specific_announcements: bool | None = ...
+    """
+    Specifies whether to permit more specific route announcements than the
+    CIDR prefix. When enabled, ASNs can announce sub-prefixes of the
+    authorized CIDR up to the specified maximum length. Default: `false`.
+    """
+    max_length: int | None = ...
+    """The maximum prefix length that the ASNs are authorized to announce."""
+    description: str | None = ...
+    """The description of the routing policy registration."""
+    latest_delta_id: str | None = ...
+    """The ID of the most recent delta that modified this registration."""
+    state: str | None = ...
+    """
+    The state of the routing policy registration. Valid values:
+    `pending-activate` | `activate-failed` | `create-in-progress` |
+    `create-complete` | `update-in-progress` | `update-complete` |
+    `delete-in-progress` | `delete-complete` | `disable-complete`.
+    """
+
+@dataclass(kw_only=True)
+class IpamRoutingPolicyRegistrationDelta(_SerdeShape):
+    """
+    Contains information about a routing policy registration change,
+    including the changes applied and their publication state.
+    """
+
+    delta_id: str | None = ...
+    """The unique identifier of the delta."""
+    delta_json: str | None = ...
+    """The JSON specification describing the changes applied in this delta."""
+    state: str | None = ...
+    """
+    The state of the delta. Valid values: `pending` | `published` |
+    `failed`.
+    """
+    state_message: str | None = ...
+    """
+    A message describing the current state, including error information if
+    the delta failed.
+    """
+
+class IpamRoutingPolicyRegistrationDeltaState(UnknownEnumMixin, StrEnum):
+    """The state of a routing policy registration delta."""
+
+    PENDING = "pending"
+    PUBLISHED = "published"
+    FAILED = "failed"
+
+class IpamRoutingPolicyRegistrationState(UnknownEnumMixin, StrEnum):
+    """The state of a routing policy registration."""
+
+    PENDING_ACTIVATE = "pending-activate"
+    ACTIVATE_FAILED = "activate-failed"
+    CREATE_IN_PROGRESS = "create-in-progress"
+    CREATE_COMPLETE = "create-complete"
+    UPDATE_IN_PROGRESS = "update-in-progress"
+    UPDATE_COMPLETE = "update-complete"
+    DELETE_IN_PROGRESS = "delete-in-progress"
+    DELETE_COMPLETE = "delete-complete"
+
+class IpamRpkiStatus(UnknownEnumMixin, StrEnum):
+    """The RPKI validation status of a BGP route."""
+
+    VALID = "valid"
+    INVALID = "invalid"
+    UNKNOWN = "unknown"
+
+class IpamRpkiStrength(UnknownEnumMixin, StrEnum):
+    """The RPKI enforcement strength for route protection."""
+
+    STRICT = "strict"
+    PERMISSIVE = "permissive"
+
+@dataclass(kw_only=True)
+class IpamScope(_SerdeShape):
+    """
+    In IPAM, a scope is the highest-level container within IPAM. An IPAM
+    contains two default scopes. Each scope represents the IP space for a
+    single network. The private scope is intended for all private IP address
+    space. The public scope is intended for all public IP address space.
+    Scopes enable you to reuse IP addresses across multiple unconnected
+    networks without causing IP address overlap or conflict.
+
+    For more information, see [How IPAM
+    works](https://docs.aws.amazon.com/vpc/latest/ipam/how-it-works-ipam.html)
+    in the *Amazon VPC IPAM User Guide*.
+    """
+
+    owner_id: str | None = ...
+    """The Amazon Web Services account ID of the owner of the scope."""
+    ipam_scope_id: str | None = ...
+    """The ID of the scope."""
+    ipam_scope_arn: str | None = ...
+    """The Amazon Resource Name (ARN) of the scope."""
+    ipam_arn: str | None = ...
+    """The ARN of the IPAM."""
+    ipam_region: str | None = ...
+    """The Amazon Web Services Region of the IPAM scope."""
+    ipam_scope_type: str | None = ...
+    """The type of the scope."""
+    is_default: bool | None = ...
+    """Defines if the scope is the default scope or not."""
+    description: str | None = ...
+    """The description of the scope."""
+    pool_count: int | None = ...
+    """The number of pools in the scope."""
+    state: str | None = ...
+    """The state of the IPAM scope."""
+    tags: list[Tag] | None = ...
+    """
+    The key/value combination of a tag assigned to the resource. Use the tag
+    key in the filter name and the tag value as the filter value. For
+    example, to find all resources that have a tag with the key `Owner` and
+    the value `TeamA`, specify `tag:Owner` for the filter name and `TeamA`
+    for the filter value.
+    """
+    external_authority_configuration: (
+        IpamScopeExternalAuthorityConfiguration | None
+    ) = ...
+    """
+    The external authority configuration for this IPAM scope, if configured.
+
+    The configuration that links an Amazon VPC IPAM scope to an external
+    authority system. It specifies the type of external system and the
+    external resource identifier that identifies your account or instance in
+    that system.
+
+    In IPAM, an external authority is a third-party IP address management
+    system that provides CIDR blocks when you provision address space for
+    top-level IPAM pools. This allows you to use your existing IP management
+    system to control which address ranges are allocated to Amazon Web
+    Services while using Amazon VPC IPAM to manage subnets within those
+    ranges.
+    """
+
+@dataclass(kw_only=True)
+class IpamScopeExternalAuthorityConfiguration(_SerdeShape):
+    """
+    The configuration that links an Amazon VPC IPAM scope to an external
+    authority system. It specifies the type of external system and the
+    external resource identifier that identifies your account or instance in
+    that system.
+
+    In IPAM, an external authority is a third-party IP address management
+    system that provides CIDR blocks when you provision address space for
+    top-level IPAM pools. This allows you to use your existing IP management
+    system to control which address ranges are allocated to Amazon Web
+    Services while using Amazon VPC IPAM to manage subnets within those
+    ranges.
+    """
+
+    type: str | None = ...
+    """
+    The type of external authority managing this scope. Currently supports
+    `Infoblox` for integration with Infoblox Universal DDI.
+    """
+    external_resource_identifier: str | None = ...
+    """
+    The identifier for the external resource managing this scope. For
+    Infoblox integrations, this is the Infoblox resource identifier in the
+    format
+    `<version>`{=html}`.identity.account.``<entity_realm>`{=html}`.``<entity_id>`{=html}.
+    """
+
+class IpamScopeExternalAuthorityType(UnknownEnumMixin, StrEnum):
+    INFOBLOX = "infoblox"
+
+class IpamScopeState(UnknownEnumMixin, StrEnum):
+    CREATE_IN_PROGRESS = "create-in-progress"
+    CREATE_COMPLETE = "create-complete"
+    CREATE_FAILED = "create-failed"
+    MODIFY_IN_PROGRESS = "modify-in-progress"
+    MODIFY_COMPLETE = "modify-complete"
+    MODIFY_FAILED = "modify-failed"
+    DELETE_IN_PROGRESS = "delete-in-progress"
+    DELETE_COMPLETE = "delete-complete"
+    DELETE_FAILED = "delete-failed"
+    ISOLATE_IN_PROGRESS = "isolate-in-progress"
+    ISOLATE_COMPLETE = "isolate-complete"
+    RESTORE_IN_PROGRESS = "restore-in-progress"
+
+class IpamScopeType(UnknownEnumMixin, StrEnum):
+    PUBLIC = "public"
+    PRIVATE = "private"
+
+class IpamState(UnknownEnumMixin, StrEnum):
+    CREATE_IN_PROGRESS = "create-in-progress"
+    CREATE_COMPLETE = "create-complete"
+    CREATE_FAILED = "create-failed"
+    MODIFY_IN_PROGRESS = "modify-in-progress"
+    MODIFY_COMPLETE = "modify-complete"
+    MODIFY_FAILED = "modify-failed"
+    DELETE_IN_PROGRESS = "delete-in-progress"
+    DELETE_COMPLETE = "delete-complete"
+    DELETE_FAILED = "delete-failed"
+    ISOLATE_IN_PROGRESS = "isolate-in-progress"
+    ISOLATE_COMPLETE = "isolate-complete"
+    RESTORE_IN_PROGRESS = "restore-in-progress"
+
+class IpamTier(UnknownEnumMixin, StrEnum):
+    FREE = "free"
+    ADVANCED = "advanced"
+
+@dataclass(kw_only=True)
+class IpPermission(_SerdeShape):
+    """Describes the permissions for a security group rule."""
+
+    ip_protocol: str | None = ...
+    """
+    The IP protocol name (`tcp`, `udp`, `icmp`, `icmpv6`) or number (see
+    [Protocol
+    Numbers](http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)).
+
+    Use `-1` to specify all protocols. When authorizing security group
+    rules, specifying `-1` or a protocol number other than `tcp`, `udp`,
+    `icmp`, or `icmpv6` allows traffic on all ports, regardless of any port
+    range you specify. For `tcp`, `udp`, and `icmp`, you must specify a port
+    range. For `icmpv6`, the port range is optional; if you omit the port
+    range, traffic for all types and codes is allowed.
+    """
+    from_port: int | None = ...
+    """
+    If the protocol is TCP or UDP, this is the start of the port range. If
+    the protocol is ICMP or ICMPv6, this is the ICMP type or -1 (all ICMP
+    types).
+    """
+    to_port: int | None = ...
+    """
+    If the protocol is TCP or UDP, this is the end of the port range. If the
+    protocol is ICMP or ICMPv6, this is the ICMP code or -1 (all ICMP
+    codes). If the start port is -1 (all ICMP types), then the end port must
+    be -1 (all ICMP codes).
+    """
+    user_id_group_pairs: list[UserIdGroupPair] | None = ...
+    """The security group and Amazon Web Services account ID pairs."""
+    ip_ranges: list[IpRange] | None = ...
+    """The IPv4 address ranges."""
+    ipv6_ranges: list[Ipv6Range] | None = ...
+    """The IPv6 address ranges."""
+    prefix_list_ids: list[PrefixListId] | None = ...
+    """The prefix list IDs."""
+
+class IpPermissionDict(TypedDict, total=False):
+    """Dictionary form of `IpPermission`."""
+
+    ip_protocol: str | None
+    """
+    The IP protocol name (`tcp`, `udp`, `icmp`, `icmpv6`) or number (see
+    [Protocol
+    Numbers](http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)).
+
+    Use `-1` to specify all protocols. When authorizing security group
+    rules, specifying `-1` or a protocol number other than `tcp`, `udp`,
+    `icmp`, or `icmpv6` allows traffic on all ports, regardless of any port
+    range you specify. For `tcp`, `udp`, and `icmp`, you must specify a port
+    range. For `icmpv6`, the port range is optional; if you omit the port
+    range, traffic for all types and codes is allowed.
+    """
+    from_port: int | None
+    """
+    If the protocol is TCP or UDP, this is the start of the port range. If
+    the protocol is ICMP or ICMPv6, this is the ICMP type or -1 (all ICMP
+    types).
+    """
+    to_port: int | None
+    """
+    If the protocol is TCP or UDP, this is the end of the port range. If the
+    protocol is ICMP or ICMPv6, this is the ICMP code or -1 (all ICMP
+    codes). If the start port is -1 (all ICMP types), then the end port must
+    be -1 (all ICMP codes).
+    """
+    user_id_group_pairs: Sequence[UserIdGroupPair | UserIdGroupPairDict] | None
+    """The security group and Amazon Web Services account ID pairs."""
+    ip_ranges: Sequence[IpRange | IpRangeDict] | None
+    """The IPv4 address ranges."""
+    ipv6_ranges: Sequence[Ipv6Range | Ipv6RangeDict] | None
+    """The IPv6 address ranges."""
+    prefix_list_ids: Sequence[PrefixListId | PrefixListIdDict] | None
+    """The prefix list IDs."""
+
+@dataclass(kw_only=True)
+class IpRange(_SerdeShape):
+    """Describes an IPv4 address range."""
+
+    description: str | None = ...
+    """
+    A description for the security group rule that references this IPv4
+    address range.
+
+    Constraints: Up to 255 characters in length. Allowed characters are a-z,
+    A-Z, 0-9, spaces, and ._-:/()#,@[]+=&;{}!$*
+    """
+    cidr_ip: str | None = ...
+    """
+    The IPv4 address range. You can either specify a CIDR block or a source
+    security group, not both. To specify a single IPv4 address, use the /32
+    prefix length.
+
+    Note:
+        Amazon Web Services
+        [canonicalizes](https://en.wikipedia.org/wiki/Canonicalization) IPv4 and
+        IPv6 CIDRs. For example, if you specify 100.68.0.18/18 for the CIDR
+        block, Amazon Web Services canonicalizes the CIDR block to
+        100.68.0.0/18. Any subsequent DescribeSecurityGroups and
+        DescribeSecurityGroupRules calls will return the canonicalized form of
+        the CIDR block. Additionally, if you attempt to add another rule with
+        the non-canonical form of the CIDR (such as 100.68.0.18/18) and there is
+        already a rule for the canonicalized form of the CIDR block (such as
+        100.68.0.0/18), the API throws an duplicate rule error.
+    """
+
+class IpRangeDict(TypedDict, total=False):
+    """Dictionary form of `IpRange`."""
+
+    description: str | None
+    """
+    A description for the security group rule that references this IPv4
+    address range.
+
+    Constraints: Up to 255 characters in length. Allowed characters are a-z,
+    A-Z, 0-9, spaces, and ._-:/()#,@[]+=&;{}!$*
+    """
+    cidr_ip: str | None
+    """
+    The IPv4 address range. You can either specify a CIDR block or a source
+    security group, not both. To specify a single IPv4 address, use the /32
+    prefix length.
+
+    Note:
+        Amazon Web Services
+        [canonicalizes](https://en.wikipedia.org/wiki/Canonicalization) IPv4 and
+        IPv6 CIDRs. For example, if you specify 100.68.0.18/18 for the CIDR
+        block, Amazon Web Services canonicalizes the CIDR block to
+        100.68.0.0/18. Any subsequent DescribeSecurityGroups and
+        DescribeSecurityGroupRules calls will return the canonicalized form of
+        the CIDR block. Additionally, if you attempt to add another rule with
+        the non-canonical form of the CIDR (such as 100.68.0.18/18) and there is
+        already a rule for the canonicalized form of the CIDR block (such as
+        100.68.0.0/18), the API throws an duplicate rule error.
+    """
+
+class IpScopeEnum(UnknownEnumMixin, StrEnum):
+    PRIVATE = "private"
+
+class IpSource(UnknownEnumMixin, StrEnum):
+    AMAZON = "amazon"
+    BYOIP = "byoip"
+    NONE = "none"
+
+@dataclass(kw_only=True)
+class Ipv4PrefixSpecification(_SerdeShape):
+    """Describes an IPv4 prefix."""
+
+    ipv4_prefix: str | None = ...
+    """
+    The IPv4 prefix. For information, see [Assigning prefixes to network
+    interfaces](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html)
+    in the *Amazon EC2 User Guide*.
+    """
 
 @dataclass(kw_only=True)
 class Ipv4PrefixSpecificationRequest(_SerdeShape):
@@ -2442,6 +3231,8 @@ class LaunchTemplatesMonitoring(_SerdeShape):
     Indicates whether detailed monitoring is enabled. Otherwise, basic
     monitoring is enabled.
     """
+    metric_category_ids: list[str] | None = ...
+    """The IDs of the metric categories to associate with the instance."""
 
 @dataclass(kw_only=True)
 class LaunchTemplatesMonitoringRequest(_SerdeShape):
@@ -2452,6 +3243,11 @@ class LaunchTemplatesMonitoringRequest(_SerdeShape):
     Specify `true` to enable detailed monitoring. Otherwise, basic
     monitoring is enabled.
     """
+    metric_category_ids: list[str] | None = ...
+    """
+    The IDs of the metric categories to associate with the instance. To
+    specify metric categories, you must also enable detailed monitoring.
+    """
 
 class LaunchTemplatesMonitoringRequestDict(TypedDict, total=False):
     """Dictionary form of `LaunchTemplatesMonitoringRequest`."""
@@ -2460,6 +3256,11 @@ class LaunchTemplatesMonitoringRequestDict(TypedDict, total=False):
     """
     Specify `true` to enable detailed monitoring. Otherwise, basic
     monitoring is enabled.
+    """
+    metric_category_ids: Sequence[str] | None
+    """
+    The IDs of the metric categories to associate with the instance. To
+    specify metric categories, you must also enable detailed monitoring.
     """
 
 @dataclass(kw_only=True)
@@ -4035,6 +4836,21 @@ class Metric(UnknownEnumMixin, StrEnum):
     SPOT_INST_AZ_FULFILLMENT_RATE = "spot-inst-az-fulfillment-rate"
 
 @dataclass(kw_only=True)
+class MetricCategory(_SerdeShape):
+    """
+    Describes a metric category. A metric category is a set of additional
+    metrics that you can associate with an instance that has detailed
+    monitoring enabled.
+    """
+
+    metric_category_id: str | None = ...
+    """The ID of the metric category."""
+    metrics: list[str] | None = ...
+    """The names of the metrics in the metric category."""
+    tags: list[Tag] | None = ...
+    """Any tags assigned to the metric category."""
+
+@dataclass(kw_only=True)
 class MetricDataResult(_SerdeShape):
     """
     Contains a single data point from a capacity metrics query, including
@@ -4209,6 +5025,16 @@ class ModifyAccountVpcEncryptionControlInput(_SerdeShape):
     Specifies whether to exclude Elastic File System service from
     account-level encryption enforcement.
     """
+    global_accelerator: str | None = ...
+    """
+    Specifies whether to exclude AWS Global Accelerator from account-level
+    encryption enforcement.
+    """
+    api_gateway_v2: str | None = ...
+    """
+    Specifies whether to exclude Amazon API Gateway V2 from account-level
+    encryption enforcement.
+    """
 
 class ModifyAccountVpcEncryptionControlInputDict(TypedDict, total=False):
     """Dictionary form of `ModifyAccountVpcEncryptionControlInput`."""
@@ -4261,6 +5087,16 @@ class ModifyAccountVpcEncryptionControlInputDict(TypedDict, total=False):
     """
     Specifies whether to exclude Elastic File System service from
     account-level encryption enforcement.
+    """
+    global_accelerator: str | None
+    """
+    Specifies whether to exclude AWS Global Accelerator from account-level
+    encryption enforcement.
+    """
+    api_gateway_v2: str | None
+    """
+    Specifies whether to exclude Amazon API Gateway V2 from account-level
+    encryption enforcement.
     """
 
 @dataclass(kw_only=True)
@@ -8287,1507 +9123,3 @@ class ModifyIpamScopeInputDict(TypedDict, total=False):
     """
     remove_external_authority_configuration: bool | None
     """Remove the external authority configuration. `true` to remove."""
-
-@dataclass(kw_only=True)
-class ModifyIpamScopeOutput(_SerdeShape):
-    """Dataclass for ModifyIpamScopeOutput structure."""
-
-    ipam_scope: IpamScope | None = ...
-    """The results of the modification."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class ModifyLaunchTemplateInput(_SerdeShape):
-    """Dataclass for ModifyLaunchTemplateInput structure."""
-
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    client_token: str | None = ...
-    """
-    Unique, case-sensitive identifier you provide to ensure the idempotency
-    of the request. If a client token isn't specified, a randomly generated
-    token is used in the request to ensure idempotency.
-
-    For more information, see [Ensuring
-    idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-
-    Constraint: Maximum 128 ASCII characters.
-
-    This field is autopopulated if not provided.
-    """
-    launch_template_id: str | None = ...
-    """
-    The ID of the launch template.
-
-    You must specify either the launch template ID or the launch template
-    name, but not both.
-    """
-    launch_template_name: str | None = ...
-    """
-    The name of the launch template.
-
-    You must specify either the launch template ID or the launch template
-    name, but not both.
-    """
-    default_version: str | None = ...
-    """The version number of the launch template to set as the default version."""
-
-class ModifyLaunchTemplateInputDict(TypedDict, total=False):
-    """Dictionary form of `ModifyLaunchTemplateInput`."""
-
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    client_token: str | None
-    """
-    Unique, case-sensitive identifier you provide to ensure the idempotency
-    of the request. If a client token isn't specified, a randomly generated
-    token is used in the request to ensure idempotency.
-
-    For more information, see [Ensuring
-    idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-
-    Constraint: Maximum 128 ASCII characters.
-
-    This field is autopopulated if not provided.
-    """
-    launch_template_id: str | None
-    """
-    The ID of the launch template.
-
-    You must specify either the launch template ID or the launch template
-    name, but not both.
-    """
-    launch_template_name: str | None
-    """
-    The name of the launch template.
-
-    You must specify either the launch template ID or the launch template
-    name, but not both.
-    """
-    default_version: str | None
-    """The version number of the launch template to set as the default version."""
-
-@dataclass(kw_only=True)
-class ModifyLaunchTemplateOutput(_SerdeShape):
-    """Dataclass for ModifyLaunchTemplateOutput structure."""
-
-    launch_template: LaunchTemplate | None = ...
-    """Information about the launch template."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class ModifyLocalGatewayRouteInput(_SerdeShape):
-    """Dataclass for ModifyLocalGatewayRouteInput structure."""
-
-    destination_cidr_block: str | None = ...
-    """
-    The CIDR block used for destination matches. The value that you provide
-    must match the CIDR of an existing route in the table.
-    """
-    local_gateway_route_table_id: str | None = ...
-    """The ID of the local gateway route table."""
-    local_gateway_virtual_interface_group_id: str | None = ...
-    """The ID of the virtual interface group."""
-    network_interface_id: str | None = ...
-    """The ID of the network interface."""
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    destination_prefix_list_id: str | None = ...
-    """
-    The ID of the prefix list. Use a prefix list in place of
-    `DestinationCidrBlock`. You cannot use `DestinationPrefixListId` and
-    `DestinationCidrBlock` in the same request.
-    """
-
-class ModifyLocalGatewayRouteInputDict(TypedDict, total=False):
-    """Dictionary form of `ModifyLocalGatewayRouteInput`."""
-
-    destination_cidr_block: str | None
-    """
-    The CIDR block used for destination matches. The value that you provide
-    must match the CIDR of an existing route in the table.
-    """
-    local_gateway_route_table_id: Required[str]
-    """The ID of the local gateway route table."""
-    local_gateway_virtual_interface_group_id: str | None
-    """The ID of the virtual interface group."""
-    network_interface_id: str | None
-    """The ID of the network interface."""
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    destination_prefix_list_id: str | None
-    """
-    The ID of the prefix list. Use a prefix list in place of
-    `DestinationCidrBlock`. You cannot use `DestinationPrefixListId` and
-    `DestinationCidrBlock` in the same request.
-    """
-
-@dataclass(kw_only=True)
-class ModifyLocalGatewayRouteOutput(_SerdeShape):
-    """Dataclass for ModifyLocalGatewayRouteOutput structure."""
-
-    route: LocalGatewayRoute | None = ...
-    """Information about the local gateway route table."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class ModifyManagedPrefixListInput(_SerdeShape):
-    """Dataclass for ModifyManagedPrefixListInput structure."""
-
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    prefix_list_id: str | None = ...
-    """The ID of the prefix list."""
-    current_version: int | None = ...
-    """The current version of the prefix list."""
-    prefix_list_name: str | None = ...
-    """A name for the prefix list."""
-    add_entries: list[AddPrefixListEntry] | None = ...
-    """One or more entries to add to the prefix list."""
-    remove_entries: list[RemovePrefixListEntry] | None = ...
-    """One or more entries to remove from the prefix list."""
-    max_entries: int | None = ...
-    """
-    The maximum number of entries for the prefix list. You cannot modify the
-    entries of a prefix list and modify the size of a prefix list at the
-    same time.
-
-    If any of the resources that reference the prefix list cannot support
-    the new maximum size, the modify operation fails. Check the state
-    message for the IDs of the first ten resources that do not support the
-    new maximum size.
-    """
-    ipam_prefix_list_resolver_sync_enabled: bool | None = ...
-    """
-    Indicates whether synchronization with an IPAM prefix list resolver
-    should be enabled for this managed prefix list. When enabled, the prefix
-    list CIDRs are automatically updated based on the associated resolver's
-    CIDR selection rules.
-    """
-
-class ModifyManagedPrefixListInputDict(TypedDict, total=False):
-    """Dictionary form of `ModifyManagedPrefixListInput`."""
-
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    prefix_list_id: Required[str]
-    """The ID of the prefix list."""
-    current_version: int | None
-    """The current version of the prefix list."""
-    prefix_list_name: str | None
-    """A name for the prefix list."""
-    add_entries: Sequence[AddPrefixListEntry | AddPrefixListEntryDict] | None
-    """One or more entries to add to the prefix list."""
-    remove_entries: Sequence[RemovePrefixListEntry | RemovePrefixListEntryDict] | None
-    """One or more entries to remove from the prefix list."""
-    max_entries: int | None
-    """
-    The maximum number of entries for the prefix list. You cannot modify the
-    entries of a prefix list and modify the size of a prefix list at the
-    same time.
-
-    If any of the resources that reference the prefix list cannot support
-    the new maximum size, the modify operation fails. Check the state
-    message for the IDs of the first ten resources that do not support the
-    new maximum size.
-    """
-    ipam_prefix_list_resolver_sync_enabled: bool | None
-    """
-    Indicates whether synchronization with an IPAM prefix list resolver
-    should be enabled for this managed prefix list. When enabled, the prefix
-    list CIDRs are automatically updated based on the associated resolver's
-    CIDR selection rules.
-    """
-
-@dataclass(kw_only=True)
-class ModifyManagedPrefixListOutput(_SerdeShape):
-    """Dataclass for ModifyManagedPrefixListOutput structure."""
-
-    prefix_list: ManagedPrefixList | None = ...
-    """Information about the prefix list."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class ModifyManagedResourceVisibilityInput(_SerdeShape):
-    """Dataclass for ModifyManagedResourceVisibilityInput structure."""
-
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the operation,
-    without actually making the request, and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-    default_visibility: str | None = ...
-    """
-    The default visibility setting for managed resources. Valid values:
-    `hidden` | `visible`.
-    """
-
-class ModifyManagedResourceVisibilityInputDict(TypedDict, total=False):
-    """Dictionary form of `ModifyManagedResourceVisibilityInput`."""
-
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the operation,
-    without actually making the request, and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-    default_visibility: Required[str]
-    """
-    The default visibility setting for managed resources. Valid values:
-    `hidden` | `visible`.
-    """
-
-@dataclass(kw_only=True)
-class ModifyManagedResourceVisibilityOutput(_SerdeShape):
-    """Dataclass for ModifyManagedResourceVisibilityOutput structure."""
-
-    visibility: ManagedResourceVisibilitySettings | None = ...
-    """The updated managed resource visibility settings for the account."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class ModifyNetworkInterfaceAttributeInput(_SerdeShape):
-    """Contains the parameters for ModifyNetworkInterfaceAttribute."""
-
-    ena_srd_specification: EnaSrdSpecification | None = ...
-    """
-    Updates the ENA Express configuration for the network interface that's
-    attached to the instance.
-    """
-    enable_primary_ipv6: bool | None = ...
-    """
-    If you're modifying a network interface in a dual-stack or IPv6-only
-    subnet, you have the option to assign a primary IPv6 IP address. A
-    primary IPv6 address is an IPv6 GUA address associated with an ENI that
-    you have enabled to use a primary IPv6 address. Use this option if the
-    instance that this ENI will be attached to relies on its IPv6 address
-    not changing. Amazon Web Services will automatically assign an IPv6
-    address associated with the ENI attached to your instance to be the
-    primary IPv6 address. Once you enable an IPv6 GUA address to be a
-    primary IPv6, you cannot disable it. When you enable an IPv6 GUA address
-    to be a primary IPv6, the first IPv6 GUA will be made the primary IPv6
-    address until the instance is terminated or the network interface is
-    detached. If you have multiple IPv6 addresses associated with an ENI
-    attached to your instance and you enable a primary IPv6 address, the
-    first IPv6 GUA address associated with the ENI becomes the primary IPv6
-    address.
-    """
-    connection_tracking_specification: (
-        ConnectionTrackingSpecificationRequest | None
-    ) = ...
-    """A connection tracking specification."""
-    associate_public_ip_address: bool | None = ...
-    """
-    Indicates whether to assign a public IPv4 address to a network
-    interface. This option can be enabled for any network interface but will
-    only apply to the primary network interface (eth0).
-    """
-    associated_subnet_ids: list[str] | None = ...
-    """A list of subnet IDs to associate with the network interface."""
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    network_interface_id: str | None = ...
-    """The ID of the network interface."""
-    description: AttributeValue | None = ...
-    """A description for the network interface."""
-    source_dest_check: AttributeBooleanValue | None = ...
-    """
-    Enable or disable source/destination checks, which ensure that the
-    instance is either the source or the destination of any traffic that it
-    receives. If the value is `true`, source/destination checks are enabled;
-    otherwise, they are disabled. The default value is `true`. You must
-    disable source/destination checks if the instance runs services such as
-    network address translation, routing, or firewalls.
-    """
-    groups: list[str] | None = ...
-    """
-    Changes the security groups for the network interface. The new set of
-    groups you specify replaces the current set. You must specify at least
-    one group, even if it's just the default security group in the VPC. You
-    must specify the ID of the security group, not the name.
-    """
-    attachment: NetworkInterfaceAttachmentChanges | None = ...
-    """
-    Information about the interface attachment. If modifying the
-    `delete on termination` attribute, you must specify the ID of the
-    interface attachment.
-    """
-
-class ModifyNetworkInterfaceAttributeInputDict(TypedDict, total=False):
-    """Dictionary form of `ModifyNetworkInterfaceAttributeInput`."""
-
-    ena_srd_specification: EnaSrdSpecification | EnaSrdSpecificationDict | None
-    """
-    Updates the ENA Express configuration for the network interface that's
-    attached to the instance.
-    """
-    enable_primary_ipv6: bool | None
-    """
-    If you're modifying a network interface in a dual-stack or IPv6-only
-    subnet, you have the option to assign a primary IPv6 IP address. A
-    primary IPv6 address is an IPv6 GUA address associated with an ENI that
-    you have enabled to use a primary IPv6 address. Use this option if the
-    instance that this ENI will be attached to relies on its IPv6 address
-    not changing. Amazon Web Services will automatically assign an IPv6
-    address associated with the ENI attached to your instance to be the
-    primary IPv6 address. Once you enable an IPv6 GUA address to be a
-    primary IPv6, you cannot disable it. When you enable an IPv6 GUA address
-    to be a primary IPv6, the first IPv6 GUA will be made the primary IPv6
-    address until the instance is terminated or the network interface is
-    detached. If you have multiple IPv6 addresses associated with an ENI
-    attached to your instance and you enable a primary IPv6 address, the
-    first IPv6 GUA address associated with the ENI becomes the primary IPv6
-    address.
-    """
-    connection_tracking_specification: (
-        ConnectionTrackingSpecificationRequest
-        | ConnectionTrackingSpecificationRequestDict
-        | None
-    )
-    """A connection tracking specification."""
-    associate_public_ip_address: bool | None
-    """
-    Indicates whether to assign a public IPv4 address to a network
-    interface. This option can be enabled for any network interface but will
-    only apply to the primary network interface (eth0).
-    """
-    associated_subnet_ids: Sequence[str] | None
-    """A list of subnet IDs to associate with the network interface."""
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    network_interface_id: Required[str]
-    """The ID of the network interface."""
-    description: AttributeValue | AttributeValueDict | None
-    """A description for the network interface."""
-    source_dest_check: AttributeBooleanValue | AttributeBooleanValueDict | None
-    """
-    Enable or disable source/destination checks, which ensure that the
-    instance is either the source or the destination of any traffic that it
-    receives. If the value is `true`, source/destination checks are enabled;
-    otherwise, they are disabled. The default value is `true`. You must
-    disable source/destination checks if the instance runs services such as
-    network address translation, routing, or firewalls.
-    """
-    groups: Sequence[str] | None
-    """
-    Changes the security groups for the network interface. The new set of
-    groups you specify replaces the current set. You must specify at least
-    one group, even if it's just the default security group in the VPC. You
-    must specify the ID of the security group, not the name.
-    """
-    attachment: (
-        NetworkInterfaceAttachmentChanges | NetworkInterfaceAttachmentChangesDict | None
-    )
-    """
-    Information about the interface attachment. If modifying the
-    `delete on termination` attribute, you must specify the ID of the
-    interface attachment.
-    """
-
-@dataclass(kw_only=True)
-class ModifyNetworkInterfaceAttributeOutput(_SerdeShape):
-    """Dataclass for ModifyNetworkInterfaceAttributeOutput structure."""
-
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class ModifyPrivateDnsNameOptionsInput(_SerdeShape):
-    """Dataclass for ModifyPrivateDnsNameOptionsInput structure."""
-
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    instance_id: str | None = ...
-    """The ID of the instance."""
-    private_dns_hostname_type: str | None = ...
-    """
-    The type of hostname for EC2 instances. For IPv4 only subnets, an
-    instance DNS name must be based on the instance IPv4 address. For IPv6
-    only subnets, an instance DNS name must be based on the instance ID. For
-    dual-stack subnets, you can specify whether DNS names use the instance
-    IPv4 address or the instance ID.
-    """
-    enable_resource_name_dns_a_record: bool | None = ...
-    """
-    Indicates whether to respond to DNS queries for instance hostnames with
-    DNS A records.
-    """
-    enable_resource_name_dns_aaaa_record: bool | None = ...
-    """
-    Indicates whether to respond to DNS queries for instance hostnames with
-    DNS AAAA records.
-    """
-
-class ModifyPrivateDnsNameOptionsInputDict(TypedDict, total=False):
-    """Dictionary form of `ModifyPrivateDnsNameOptionsInput`."""
-
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    instance_id: Required[str]
-    """The ID of the instance."""
-    private_dns_hostname_type: str | None
-    """
-    The type of hostname for EC2 instances. For IPv4 only subnets, an
-    instance DNS name must be based on the instance IPv4 address. For IPv6
-    only subnets, an instance DNS name must be based on the instance ID. For
-    dual-stack subnets, you can specify whether DNS names use the instance
-    IPv4 address or the instance ID.
-    """
-    enable_resource_name_dns_a_record: bool | None
-    """
-    Indicates whether to respond to DNS queries for instance hostnames with
-    DNS A records.
-    """
-    enable_resource_name_dns_aaaa_record: bool | None
-    """
-    Indicates whether to respond to DNS queries for instance hostnames with
-    DNS AAAA records.
-    """
-
-@dataclass(kw_only=True)
-class ModifyPrivateDnsNameOptionsOutput(_SerdeShape):
-    """Dataclass for ModifyPrivateDnsNameOptionsOutput structure."""
-
-    return_: bool | None = ...
-    """Returns `true` if the request succeeds; otherwise, it returns an error."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class ModifyPublicIpDnsNameOptionsInput(_SerdeShape):
-    """Dataclass for ModifyPublicIpDnsNameOptionsInput structure."""
-
-    network_interface_id: str | None = ...
-    """A network interface ID."""
-    hostname_type: str | None = ...
-    """
-    The public hostname type. For more information, see [EC2 instance
-    hostnames, DNS names, and
-    domains](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html)
-    in the *Amazon EC2 User Guide*.
-
-    - `public-dual-stack-dns-name`: A dual-stack public hostname for a
-      network interface. Requests from within the VPC resolve to both the
-      private IPv4 address and the IPv6 Global Unicast Address of the
-      network interface. Requests from the internet resolve to both the
-      public IPv4 and the IPv6 GUA address of the network interface.
-
-    - `public-ipv4-dns-name`: An IPv4-enabled public hostname for a network
-      interface. Requests from within the VPC resolve to the private primary
-      IPv4 address of the network interface. Requests from the internet
-      resolve to the public IPv4 address of the network interface.
-
-    - `public-ipv6-dns-name`: An IPv6-enabled public hostname for a network
-      interface. Requests from within the VPC or from the internet resolve
-      to the IPv6 GUA of the network interface.
-    """
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the operation,
-    without actually making the request, and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-
-class ModifyPublicIpDnsNameOptionsInputDict(TypedDict, total=False):
-    """Dictionary form of `ModifyPublicIpDnsNameOptionsInput`."""
-
-    network_interface_id: Required[str]
-    """A network interface ID."""
-    hostname_type: Required[str]
-    """
-    The public hostname type. For more information, see [EC2 instance
-    hostnames, DNS names, and
-    domains](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html)
-    in the *Amazon EC2 User Guide*.
-
-    - `public-dual-stack-dns-name`: A dual-stack public hostname for a
-      network interface. Requests from within the VPC resolve to both the
-      private IPv4 address and the IPv6 Global Unicast Address of the
-      network interface. Requests from the internet resolve to both the
-      public IPv4 and the IPv6 GUA address of the network interface.
-
-    - `public-ipv4-dns-name`: An IPv4-enabled public hostname for a network
-      interface. Requests from within the VPC resolve to the private primary
-      IPv4 address of the network interface. Requests from the internet
-      resolve to the public IPv4 address of the network interface.
-
-    - `public-ipv6-dns-name`: An IPv6-enabled public hostname for a network
-      interface. Requests from within the VPC or from the internet resolve
-      to the IPv6 GUA of the network interface.
-    """
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the operation,
-    without actually making the request, and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-
-@dataclass(kw_only=True)
-class ModifyPublicIpDnsNameOptionsOutput(_SerdeShape):
-    """Dataclass for ModifyPublicIpDnsNameOptionsOutput structure."""
-
-    successful: bool | None = ...
-    """Whether or not the request was successful."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class ModifyReservedInstancesInput(_SerdeShape):
-    """Contains the parameters for ModifyReservedInstances."""
-
-    reserved_instances_ids: list[str] | None = ...
-    """The IDs of the Reserved Instances to modify."""
-    client_token: str | None = ...
-    """
-    A unique, case-sensitive token you provide to ensure idempotency of your
-    modification request. For more information, see [Ensuring
-    Idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-    """
-    target_configurations: list[ReservedInstancesConfiguration] | None = ...
-    """The configuration settings for the Reserved Instances to modify."""
-
-class ModifyReservedInstancesInputDict(TypedDict, total=False):
-    """Dictionary form of `ModifyReservedInstancesInput`."""
-
-    reserved_instances_ids: Required[Sequence[str]]
-    """The IDs of the Reserved Instances to modify."""
-    client_token: str | None
-    """
-    A unique, case-sensitive token you provide to ensure idempotency of your
-    modification request. For more information, see [Ensuring
-    Idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-    """
-    target_configurations: Required[
-        Sequence[ReservedInstancesConfiguration | ReservedInstancesConfigurationDict]
-    ]
-    """The configuration settings for the Reserved Instances to modify."""
-
-@dataclass(kw_only=True)
-class ModifyReservedInstancesOutput(_SerdeShape):
-    """Contains the output of ModifyReservedInstances."""
-
-    reserved_instances_modification_id: str | None = ...
-    """The ID for the modification."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class ModifyRouteServerInput(_SerdeShape):
-    """Dataclass for ModifyRouteServerInput structure."""
-
-    route_server_id: str | None = ...
-    """The ID of the route server to modify."""
-    persist_routes: str | None = ...
-    """
-    Specifies whether to persist routes after all BGP sessions are
-    terminated.
-
-    - enable: Routes will be persisted in FIB and RIB after all BGP sessions
-      are terminated.
-
-    - disable: Routes will not be persisted in FIB and RIB after all BGP
-      sessions are terminated.
-
-    - reset: If a route server has persisted routes due to all BGP sessions
-      having ended, reset will withdraw all routes and reset route server to
-      an empty FIB and RIB.
-    """
-    persist_routes_duration: int | None = ...
-    """
-    The number of minutes a route server will wait after BGP is
-    re-established to unpersist the routes in the FIB and RIB. Value must be
-    in the range of 1-5. Required if PersistRoutes is `enabled`.
-
-    If you set the duration to 1 minute, then when your network appliance
-    re-establishes BGP with route server, it has 1 minute to relearn it's
-    adjacent network and advertise those routes to route server before route
-    server resumes normal functionality. In most cases, 1 minute is probably
-    sufficient. If, however, you have concerns that your BGP network may not
-    be capable of fully re-establishing and re-learning everything in 1
-    minute, you can increase the duration up to 5 minutes.
-    """
-    sns_notifications_enabled: bool | None = ...
-    """
-    Specifies whether to enable SNS notifications for route server events.
-    Enabling SNS notifications persists BGP status changes to an SNS topic
-    provisioned by Amazon Web Services.
-    """
-    dry_run: bool | None = ...
-    """
-    A check for whether you have the required permissions for the action
-    without actually making the request and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-
-class ModifyRouteServerInputDict(TypedDict, total=False):
-    """Dictionary form of `ModifyRouteServerInput`."""
-
-    route_server_id: Required[str]
-    """The ID of the route server to modify."""
-    persist_routes: str | None
-    """
-    Specifies whether to persist routes after all BGP sessions are
-    terminated.
-
-    - enable: Routes will be persisted in FIB and RIB after all BGP sessions
-      are terminated.
-
-    - disable: Routes will not be persisted in FIB and RIB after all BGP
-      sessions are terminated.
-
-    - reset: If a route server has persisted routes due to all BGP sessions
-      having ended, reset will withdraw all routes and reset route server to
-      an empty FIB and RIB.
-    """
-    persist_routes_duration: int | None
-    """
-    The number of minutes a route server will wait after BGP is
-    re-established to unpersist the routes in the FIB and RIB. Value must be
-    in the range of 1-5. Required if PersistRoutes is `enabled`.
-
-    If you set the duration to 1 minute, then when your network appliance
-    re-establishes BGP with route server, it has 1 minute to relearn it's
-    adjacent network and advertise those routes to route server before route
-    server resumes normal functionality. In most cases, 1 minute is probably
-    sufficient. If, however, you have concerns that your BGP network may not
-    be capable of fully re-establishing and re-learning everything in 1
-    minute, you can increase the duration up to 5 minutes.
-    """
-    sns_notifications_enabled: bool | None
-    """
-    Specifies whether to enable SNS notifications for route server events.
-    Enabling SNS notifications persists BGP status changes to an SNS topic
-    provisioned by Amazon Web Services.
-    """
-    dry_run: bool | None
-    """
-    A check for whether you have the required permissions for the action
-    without actually making the request and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-
-@dataclass(kw_only=True)
-class ModifyRouteServerOutput(_SerdeShape):
-    """Dataclass for ModifyRouteServerOutput structure."""
-
-    route_server: RouteServer | None = ...
-    """Information about the modified route server."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class ModifySecurityGroupRulesInput(_SerdeShape):
-    """Dataclass for ModifySecurityGroupRulesInput structure."""
-
-    group_id: str | None = ...
-    """The ID of the security group."""
-    security_group_rules: list[SecurityGroupRuleUpdate] | None = ...
-    """Information about the security group properties to update."""
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-class ModifySecurityGroupRulesInputDict(TypedDict, total=False):
-    """Dictionary form of `ModifySecurityGroupRulesInput`."""
-
-    group_id: Required[str]
-    """The ID of the security group."""
-    security_group_rules: Required[
-        Sequence[SecurityGroupRuleUpdate | SecurityGroupRuleUpdateDict]
-    ]
-    """Information about the security group properties to update."""
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-@dataclass(kw_only=True)
-class ModifySecurityGroupRulesOutput(_SerdeShape):
-    """Dataclass for ModifySecurityGroupRulesOutput structure."""
-
-    return_: bool | None = ...
-    """Returns `true` if the request succeeds; otherwise, returns an error."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class ModifySnapshotAttributeInput(_SerdeShape):
-    """Dataclass for ModifySnapshotAttributeInput structure."""
-
-    attribute: str | None = ...
-    """
-    The snapshot attribute to modify. Only volume creation permissions can
-    be modified.
-    """
-    create_volume_permission: CreateVolumePermissionModifications | None = ...
-    """A JSON representation of the snapshot attribute modification."""
-    group_names: list[str] | None = ...
-    """The group to modify for the snapshot."""
-    operation_type: str | None = ...
-    """The type of operation to perform to the attribute."""
-    snapshot_id: str | None = ...
-    """The ID of the snapshot."""
-    user_ids: list[str] | None = ...
-    """The account ID to modify for the snapshot."""
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-class ModifySnapshotAttributeInputDict(TypedDict, total=False):
-    """Dictionary form of `ModifySnapshotAttributeInput`."""
-
-    attribute: str | None
-    """
-    The snapshot attribute to modify. Only volume creation permissions can
-    be modified.
-    """
-    create_volume_permission: (
-        CreateVolumePermissionModifications
-        | CreateVolumePermissionModificationsDict
-        | None
-    )
-    """A JSON representation of the snapshot attribute modification."""
-    group_names: Sequence[str] | None
-    """The group to modify for the snapshot."""
-    operation_type: str | None
-    """The type of operation to perform to the attribute."""
-    snapshot_id: Required[str]
-    """The ID of the snapshot."""
-    user_ids: Sequence[str] | None
-    """The account ID to modify for the snapshot."""
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-@dataclass(kw_only=True)
-class ModifySnapshotAttributeOutput(_SerdeShape):
-    """Dataclass for ModifySnapshotAttributeOutput structure."""
-
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class ModifySnapshotTierInput(_SerdeShape):
-    """Dataclass for ModifySnapshotTierInput structure."""
-
-    snapshot_id: str | None = ...
-    """The ID of the snapshot."""
-    storage_tier: str | None = ...
-    """The name of the storage tier. You must specify `archive`."""
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-class ModifySnapshotTierInputDict(TypedDict, total=False):
-    """Dictionary form of `ModifySnapshotTierInput`."""
-
-    snapshot_id: Required[str]
-    """The ID of the snapshot."""
-    storage_tier: str | None
-    """The name of the storage tier. You must specify `archive`."""
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-@dataclass(kw_only=True)
-class ModifySnapshotTierOutput(_SerdeShape):
-    """Dataclass for ModifySnapshotTierOutput structure."""
-
-    snapshot_id: str | None = ...
-    """The ID of the snapshot."""
-    tiering_start_time: datetime | None = ...
-    """The date and time when the archive process was started."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class ModifySpotFleetRequestInput(_SerdeShape):
-    """Contains the parameters for ModifySpotFleetRequest."""
-
-    launch_template_configs: list[LaunchTemplateConfig] | None = ...
-    """
-    The launch template and overrides. You can only use this parameter if
-    you specified a launch template (`LaunchTemplateConfigs`) in your Spot
-    Fleet request. If you specified `LaunchSpecifications` in your Spot
-    Fleet request, then omit this parameter.
-    """
-    on_demand_target_capacity: int | None = ...
-    """The number of On-Demand Instances in the fleet."""
-    context: str | None = ...
-    """Reserved."""
-    spot_fleet_request_id: str | None = ...
-    """The ID of the Spot Fleet request."""
-    target_capacity: int | None = ...
-    """The size of the fleet."""
-    excess_capacity_termination_policy: str | None = ...
-    """
-    Indicates whether running instances should be terminated if the target
-    capacity of the Spot Fleet request is decreased below the current size
-    of the Spot Fleet.
-
-    Supported only for fleets of type `maintain`.
-    """
-
-class ModifySpotFleetRequestInputDict(TypedDict, total=False):
-    """Dictionary form of `ModifySpotFleetRequestInput`."""
-
-    launch_template_configs: (
-        Sequence[LaunchTemplateConfig | LaunchTemplateConfigDict] | None
-    )
-    """
-    The launch template and overrides. You can only use this parameter if
-    you specified a launch template (`LaunchTemplateConfigs`) in your Spot
-    Fleet request. If you specified `LaunchSpecifications` in your Spot
-    Fleet request, then omit this parameter.
-    """
-    on_demand_target_capacity: int | None
-    """The number of On-Demand Instances in the fleet."""
-    context: str | None
-    """Reserved."""
-    spot_fleet_request_id: Required[str]
-    """The ID of the Spot Fleet request."""
-    target_capacity: int | None
-    """The size of the fleet."""
-    excess_capacity_termination_policy: str | None
-    """
-    Indicates whether running instances should be terminated if the target
-    capacity of the Spot Fleet request is decreased below the current size
-    of the Spot Fleet.
-
-    Supported only for fleets of type `maintain`.
-    """
-
-@dataclass(kw_only=True)
-class ModifySpotFleetRequestOutput(_SerdeShape):
-    """Contains the output of ModifySpotFleetRequest."""
-
-    return_: bool | None = ...
-    """
-    If the request succeeds, the response returns `true`. If the request
-    fails, no response is returned, and instead an error message is
-    returned.
-    """
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class ModifySubnetAttributeInput(_SerdeShape):
-    """Dataclass for ModifySubnetAttributeInput structure."""
-
-    assign_ipv6_address_on_creation: AttributeBooleanValue | None = ...
-    """
-    Specify `true` to indicate that network interfaces created in the
-    specified subnet should be assigned an IPv6 address. This includes a
-    network interface that's created when launching an instance into the
-    subnet (the instance therefore receives an IPv6 address).
-
-    If you enable the IPv6 addressing feature for your subnet, your network
-    interface or instance only receives an IPv6 address if it's created
-    using version `2016-11-15` or later of the Amazon EC2 API.
-    """
-    map_public_ip_on_launch: AttributeBooleanValue | None = ...
-    """
-    Specify `true` to indicate that network interfaces attached to instances
-    created in the specified subnet should be assigned a public IPv4
-    address.
-
-    Amazon Web Services charges for all public IPv4 addresses, including
-    public IPv4 addresses associated with running instances and Elastic IP
-    addresses. For more information, see the *Public IPv4 Address* tab on
-    the [Amazon VPC pricing page](http://aws.amazon.com/vpc/pricing/).
-    """
-    subnet_id: str | None = ...
-    """The ID of the subnet."""
-    map_customer_owned_ip_on_launch: AttributeBooleanValue | None = ...
-    """
-    Specify `true` to indicate that network interfaces attached to instances
-    created in the specified subnet should be assigned a customer-owned IPv4
-    address.
-
-    When this value is `true`, you must specify the customer-owned IP pool
-    using `CustomerOwnedIpv4Pool`.
-    """
-    customer_owned_ipv4_pool: str | None = ...
-    """
-    The customer-owned IPv4 address pool associated with the subnet.
-
-    You must set this value when you specify `true` for
-    `MapCustomerOwnedIpOnLaunch`.
-    """
-    enable_dns64: AttributeBooleanValue | None = ...
-    """
-    Indicates whether DNS queries made to the Amazon-provided DNS Resolver
-    in this subnet should return synthetic IPv6 addresses for IPv4-only
-    destinations.
-
-    You must first configure a NAT gateway in a public subnet (separate from
-    the subnet containing the IPv6-only workloads). For example, the subnet
-    containing the NAT gateway should have a `0.0.0.0/0` route pointing to
-    the internet gateway. For more information, see [Configure DNS64 and
-    NAT64](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-nat64-dns64.html#nat-gateway-nat64-dns64-walkthrough)
-    in the *Amazon VPC User Guide*.
-    """
-    private_dns_hostname_type_on_launch: str | None = ...
-    """
-    The type of hostname to assign to instances in the subnet at launch. For
-    IPv4-only and dual-stack (IPv4 and IPv6) subnets, an instance DNS name
-    can be based on the instance IPv4 address (ip-name) or the instance ID
-    (resource-name). For IPv6 only subnets, an instance DNS name must be
-    based on the instance ID (resource-name).
-    """
-    enable_resource_name_dns_a_record_on_launch: AttributeBooleanValue | None = ...
-    """
-    Indicates whether to respond to DNS queries for instance hostnames with
-    DNS A records.
-    """
-    enable_resource_name_dns_aaaa_record_on_launch: AttributeBooleanValue | None = ...
-    """
-    Indicates whether to respond to DNS queries for instance hostnames with
-    DNS AAAA records.
-    """
-    enable_lni_at_device_index: int | None = ...
-    """
-    Indicates the device position for local network interfaces in this
-    subnet. For example, `1` indicates local network interfaces in this
-    subnet are the secondary network interface (eth1). A local network
-    interface cannot be the primary network interface (eth0).
-    """
-    disable_lni_at_device_index: AttributeBooleanValue | None = ...
-    """
-    Specify `true` to indicate that local network interfaces at the current
-    position should be disabled.
-    """
-
-class ModifySubnetAttributeInputDict(TypedDict, total=False):
-    """Dictionary form of `ModifySubnetAttributeInput`."""
-
-    assign_ipv6_address_on_creation: (
-        AttributeBooleanValue | AttributeBooleanValueDict | None
-    )
-    """
-    Specify `true` to indicate that network interfaces created in the
-    specified subnet should be assigned an IPv6 address. This includes a
-    network interface that's created when launching an instance into the
-    subnet (the instance therefore receives an IPv6 address).
-
-    If you enable the IPv6 addressing feature for your subnet, your network
-    interface or instance only receives an IPv6 address if it's created
-    using version `2016-11-15` or later of the Amazon EC2 API.
-    """
-    map_public_ip_on_launch: AttributeBooleanValue | AttributeBooleanValueDict | None
-    """
-    Specify `true` to indicate that network interfaces attached to instances
-    created in the specified subnet should be assigned a public IPv4
-    address.
-
-    Amazon Web Services charges for all public IPv4 addresses, including
-    public IPv4 addresses associated with running instances and Elastic IP
-    addresses. For more information, see the *Public IPv4 Address* tab on
-    the [Amazon VPC pricing page](http://aws.amazon.com/vpc/pricing/).
-    """
-    subnet_id: Required[str]
-    """The ID of the subnet."""
-    map_customer_owned_ip_on_launch: (
-        AttributeBooleanValue | AttributeBooleanValueDict | None
-    )
-    """
-    Specify `true` to indicate that network interfaces attached to instances
-    created in the specified subnet should be assigned a customer-owned IPv4
-    address.
-
-    When this value is `true`, you must specify the customer-owned IP pool
-    using `CustomerOwnedIpv4Pool`.
-    """
-    customer_owned_ipv4_pool: str | None
-    """
-    The customer-owned IPv4 address pool associated with the subnet.
-
-    You must set this value when you specify `true` for
-    `MapCustomerOwnedIpOnLaunch`.
-    """
-    enable_dns64: AttributeBooleanValue | AttributeBooleanValueDict | None
-    """
-    Indicates whether DNS queries made to the Amazon-provided DNS Resolver
-    in this subnet should return synthetic IPv6 addresses for IPv4-only
-    destinations.
-
-    You must first configure a NAT gateway in a public subnet (separate from
-    the subnet containing the IPv6-only workloads). For example, the subnet
-    containing the NAT gateway should have a `0.0.0.0/0` route pointing to
-    the internet gateway. For more information, see [Configure DNS64 and
-    NAT64](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-nat64-dns64.html#nat-gateway-nat64-dns64-walkthrough)
-    in the *Amazon VPC User Guide*.
-    """
-    private_dns_hostname_type_on_launch: str | None
-    """
-    The type of hostname to assign to instances in the subnet at launch. For
-    IPv4-only and dual-stack (IPv4 and IPv6) subnets, an instance DNS name
-    can be based on the instance IPv4 address (ip-name) or the instance ID
-    (resource-name). For IPv6 only subnets, an instance DNS name must be
-    based on the instance ID (resource-name).
-    """
-    enable_resource_name_dns_a_record_on_launch: (
-        AttributeBooleanValue | AttributeBooleanValueDict | None
-    )
-    """
-    Indicates whether to respond to DNS queries for instance hostnames with
-    DNS A records.
-    """
-    enable_resource_name_dns_aaaa_record_on_launch: (
-        AttributeBooleanValue | AttributeBooleanValueDict | None
-    )
-    """
-    Indicates whether to respond to DNS queries for instance hostnames with
-    DNS AAAA records.
-    """
-    enable_lni_at_device_index: int | None
-    """
-    Indicates the device position for local network interfaces in this
-    subnet. For example, `1` indicates local network interfaces in this
-    subnet are the secondary network interface (eth1). A local network
-    interface cannot be the primary network interface (eth0).
-    """
-    disable_lni_at_device_index: (
-        AttributeBooleanValue | AttributeBooleanValueDict | None
-    )
-    """
-    Specify `true` to indicate that local network interfaces at the current
-    position should be disabled.
-    """
-
-@dataclass(kw_only=True)
-class ModifySubnetAttributeOutput(_SerdeShape):
-    """Dataclass for ModifySubnetAttributeOutput structure."""
-
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class ModifyTrafficMirrorFilterNetworkServicesInput(_SerdeShape):
-    """Dataclass for ModifyTrafficMirrorFilterNetworkServicesInput structure."""
-
-    traffic_mirror_filter_id: str | None = ...
-    """The ID of the Traffic Mirror filter."""
-    add_network_services: list[str] | None = ...
-    """The network service, for example Amazon DNS, that you want to mirror."""
-    remove_network_services: list[str] | None = ...
-    """
-    The network service, for example Amazon DNS, that you no longer want to
-    mirror.
-    """
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-class ModifyTrafficMirrorFilterNetworkServicesInputDict(TypedDict, total=False):
-    """Dictionary form of `ModifyTrafficMirrorFilterNetworkServicesInput`."""
-
-    traffic_mirror_filter_id: Required[str]
-    """The ID of the Traffic Mirror filter."""
-    add_network_services: Sequence[str] | None
-    """The network service, for example Amazon DNS, that you want to mirror."""
-    remove_network_services: Sequence[str] | None
-    """
-    The network service, for example Amazon DNS, that you no longer want to
-    mirror.
-    """
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-@dataclass(kw_only=True)
-class ModifyTrafficMirrorFilterNetworkServicesOutput(_SerdeShape):
-    """Dataclass for ModifyTrafficMirrorFilterNetworkServicesOutput structure."""
-
-    traffic_mirror_filter: TrafficMirrorFilter | None = ...
-    """The Traffic Mirror filter that the network service is associated with."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class ModifyTrafficMirrorFilterRuleInput(_SerdeShape):
-    """Dataclass for ModifyTrafficMirrorFilterRuleInput structure."""
-
-    traffic_mirror_filter_rule_id: str | None = ...
-    """The ID of the Traffic Mirror rule."""
-    traffic_direction: str | None = ...
-    """The type of traffic to assign to the rule."""
-    rule_number: int | None = ...
-    """
-    The number of the Traffic Mirror rule. This number must be unique for
-    each Traffic Mirror rule in a given direction. The rules are processed
-    in ascending order by rule number.
-    """
-    rule_action: str | None = ...
-    """The action to assign to the rule."""
-    destination_port_range: TrafficMirrorPortRangeRequest | None = ...
-    """The destination ports that are associated with the Traffic Mirror rule."""
-    source_port_range: TrafficMirrorPortRangeRequest | None = ...
-    """The port range to assign to the Traffic Mirror rule."""
-    protocol: int | None = ...
-    """The protocol, for example TCP, to assign to the Traffic Mirror rule."""
-    destination_cidr_block: str | None = ...
-    """The destination CIDR block to assign to the Traffic Mirror rule."""
-    source_cidr_block: str | None = ...
-    """The source CIDR block to assign to the Traffic Mirror rule."""
-    description: str | None = ...
-    """The description to assign to the Traffic Mirror rule."""
-    remove_fields: list[str] | None = ...
-    """
-    The properties that you want to remove from the Traffic Mirror filter
-    rule.
-
-    When you remove a property from a Traffic Mirror filter rule, the
-    property is set to the default.
-    """
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-class ModifyTrafficMirrorFilterRuleInputDict(TypedDict, total=False):
-    """Dictionary form of `ModifyTrafficMirrorFilterRuleInput`."""
-
-    traffic_mirror_filter_rule_id: Required[str]
-    """The ID of the Traffic Mirror rule."""
-    traffic_direction: str | None
-    """The type of traffic to assign to the rule."""
-    rule_number: int | None
-    """
-    The number of the Traffic Mirror rule. This number must be unique for
-    each Traffic Mirror rule in a given direction. The rules are processed
-    in ascending order by rule number.
-    """
-    rule_action: str | None
-    """The action to assign to the rule."""
-    destination_port_range: (
-        TrafficMirrorPortRangeRequest | TrafficMirrorPortRangeRequestDict | None
-    )
-    """The destination ports that are associated with the Traffic Mirror rule."""
-    source_port_range: (
-        TrafficMirrorPortRangeRequest | TrafficMirrorPortRangeRequestDict | None
-    )
-    """The port range to assign to the Traffic Mirror rule."""
-    protocol: int | None
-    """The protocol, for example TCP, to assign to the Traffic Mirror rule."""
-    destination_cidr_block: str | None
-    """The destination CIDR block to assign to the Traffic Mirror rule."""
-    source_cidr_block: str | None
-    """The source CIDR block to assign to the Traffic Mirror rule."""
-    description: str | None
-    """The description to assign to the Traffic Mirror rule."""
-    remove_fields: Sequence[str] | None
-    """
-    The properties that you want to remove from the Traffic Mirror filter
-    rule.
-
-    When you remove a property from a Traffic Mirror filter rule, the
-    property is set to the default.
-    """
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-@dataclass(kw_only=True)
-class ModifyTrafficMirrorFilterRuleOutput(_SerdeShape):
-    """Dataclass for ModifyTrafficMirrorFilterRuleOutput structure."""
-
-    traffic_mirror_filter_rule: TrafficMirrorFilterRule | None = ...
-    """
-    Note:
-        Tags are not returned for ModifyTrafficMirrorFilterRule.
-
-    A Traffic Mirror rule.
-    """
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class ModifyTrafficMirrorSessionInput(_SerdeShape):
-    """Dataclass for ModifyTrafficMirrorSessionInput structure."""
-
-    traffic_mirror_session_id: str | None = ...
-    """The ID of the Traffic Mirror session."""
-    traffic_mirror_target_id: str | None = ...
-    """
-    The Traffic Mirror target. The target must be in the same VPC as the
-    source, or have a VPC peering connection with the source.
-    """
-    traffic_mirror_filter_id: str | None = ...
-    """The ID of the Traffic Mirror filter."""
-    packet_length: int | None = ...
-    """
-    The number of bytes in each packet to mirror. These are bytes after the
-    VXLAN header. To mirror a subset, set this to the length (in bytes) to
-    mirror. For example, if you set this value to 100, then the first 100
-    bytes that meet the filter criteria are copied to the target. Do not
-    specify this parameter when you want to mirror the entire packet.
-
-    For sessions with Network Load Balancer (NLB) traffic mirror targets,
-    the default `PacketLength` will be set to 8500. Valid values are 1-8500.
-    Setting a `PacketLength` greater than 8500 will result in an error
-    response.
-    """
-    session_number: int | None = ...
-    """
-    The session number determines the order in which sessions are evaluated
-    when an interface is used by multiple sessions. The first session with a
-    matching filter is the one that mirrors the packets.
-
-    Valid values are 1-32766.
-    """
-    virtual_network_id: int | None = ...
-    """The virtual network ID of the Traffic Mirror session."""
-    description: str | None = ...
-    """The description to assign to the Traffic Mirror session."""
-    remove_fields: list[str] | None = ...
-    """
-    The properties that you want to remove from the Traffic Mirror session.
-
-    When you remove a property from a Traffic Mirror session, the property
-    is set to the default.
-    """
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-class ModifyTrafficMirrorSessionInputDict(TypedDict, total=False):
-    """Dictionary form of `ModifyTrafficMirrorSessionInput`."""
-
-    traffic_mirror_session_id: Required[str]
-    """The ID of the Traffic Mirror session."""
-    traffic_mirror_target_id: str | None
-    """
-    The Traffic Mirror target. The target must be in the same VPC as the
-    source, or have a VPC peering connection with the source.
-    """
-    traffic_mirror_filter_id: str | None
-    """The ID of the Traffic Mirror filter."""
-    packet_length: int | None
-    """
-    The number of bytes in each packet to mirror. These are bytes after the
-    VXLAN header. To mirror a subset, set this to the length (in bytes) to
-    mirror. For example, if you set this value to 100, then the first 100
-    bytes that meet the filter criteria are copied to the target. Do not
-    specify this parameter when you want to mirror the entire packet.
-
-    For sessions with Network Load Balancer (NLB) traffic mirror targets,
-    the default `PacketLength` will be set to 8500. Valid values are 1-8500.
-    Setting a `PacketLength` greater than 8500 will result in an error
-    response.
-    """
-    session_number: int | None
-    """
-    The session number determines the order in which sessions are evaluated
-    when an interface is used by multiple sessions. The first session with a
-    matching filter is the one that mirrors the packets.
-
-    Valid values are 1-32766.
-    """
-    virtual_network_id: int | None
-    """The virtual network ID of the Traffic Mirror session."""
-    description: str | None
-    """The description to assign to the Traffic Mirror session."""
-    remove_fields: Sequence[str] | None
-    """
-    The properties that you want to remove from the Traffic Mirror session.
-
-    When you remove a property from a Traffic Mirror session, the property
-    is set to the default.
-    """
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """

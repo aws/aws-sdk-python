@@ -192,6 +192,8 @@ if TYPE_CHECKING:
         ListFindingsOutput,
         ListIPSetsInput,
         ListIPSetsOutput,
+        ListInvestigationRecordsInput,
+        ListInvestigationRecordsOutput,
         ListInvestigationsInput,
         ListInvestigationsOutput,
         ListInvitationsInput,
@@ -441,6 +443,9 @@ if TYPE_CHECKING:
         Interceptor[ListDetectorsInput, ListDetectorsOutput, Any, Any],
         Interceptor[ListFiltersInput, ListFiltersOutput, Any, Any],
         Interceptor[ListFindingsInput, ListFindingsOutput, Any, Any],
+        Interceptor[
+            ListInvestigationRecordsInput, ListInvestigationRecordsOutput, Any, Any
+        ],
         Interceptor[ListInvestigationsInput, ListInvestigationsOutput, Any, Any],
         Interceptor[ListInvitationsInput, ListInvitationsOutput, Any, Any],
         Interceptor[ListIPSetsInput, ListIPSetsOutput, Any, Any],

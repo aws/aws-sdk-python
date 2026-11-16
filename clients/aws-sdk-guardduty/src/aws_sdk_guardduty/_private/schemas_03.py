@@ -17,12 +17,20 @@ _sN = "smithy.api#jsonName"
 _smi = "smithy.api#output"
 _smith = "smithy.api#http"
 _N = "Name"
+_sV = "smithy.api#enumValue"
+_me = "member"
+_FT = "FindingType"
+_TF = "TotalFindings"
+_tF = "totalFindings"
+_n = "name"
+_FTi = "FindingTypes"
+_fTi = "findingTypes"
 _AIcc = "AccountId"
 _aIc = "accountId"
-_ADc = "AccountDetails"
-_me = "member"
 _AL = "AuditLogs"
 _aL = "auditLogs"
+_SEIWF = "ScanEc2InstanceWithFindings"
+_sEIWF = "scanEc2InstanceWithFindings"
 _CT = "CloudTrail"
 _cT = "cloudTrail"
 _dL = "dnsLogs"
@@ -35,24 +43,28 @@ _k = "kubernetes"
 _MP = "MalwareProtection"
 _mP = "malwareProtection"
 _FL_ = "FLOW_LOGS"
-_sV = "smithy.api#enumValue"
 _CT_ = "CLOUD_TRAIL"
 _DL_ = "DNS_LOGS"
-_n = "name"
+_DS = "DataSources"
+_dS = "dataSources"
+_F = "Features"
+_f = "features"
 _AIcco = "AccountIds"
+_dI = "detectorId"
 _LGA = "LastGeneratedAt"
 _lGA = "lastGeneratedAt"
-_TF = "TotalFindings"
-_tF = "totalFindings"
-_ENABLED = "ENABLED"
-_DISABLED = "DISABLED"
+_DN = "DeviceName"
+_dN = "deviceName"
+_De = "Description"
+_de = "description"
 _AIs = "AssociationId"
-_RI = "RuleId"
+_RIu = "RuleId"
 _Mo = "Mode"
 _mo = "mode"
 _CTl = "ClientToken"
 _St = "Status"
 _st = "status"
+_FAILED = "FAILED"
 _GT = "GreaterThan"
 _gT = "greaterThan"
 _LT = "LessThan"
@@ -60,103 +72,55 @@ _lT = "lessThan"
 _AI_ = "ACCOUNT_ID"
 _CK = "CriterionKey"
 _cK = "criterionKey"
-_FC = "FilterCondition"
-_fC = "filterCondition"
-_FCi = "FilterCriterion"
-_fCi = "filterCriterion"
+_FCi = "FilterCondition"
+_fCi = "filterCondition"
+_FCil = "FilterCriterion"
+_fCil = "filterCriterion"
+_RDe = "ResourceDetails"
+_rD = "resourceDetails"
+_OB = "OrderBy"
+_ASC = "ASC"
+_DESC = "DESC"
+_AN = "AttributeName"
+_aN = "attributeName"
+_oB = "orderBy"
 _sTm = "smithy.api#idempotencyToken"
 _cTl = "clientToken"
-_Ta = "Tags"
-_ta = "tags"
+_Tag = "Tags"
+_tag = "tags"
+_EVb = "EbsVolumes"
+_eVb = "ebsVolumes"
 _FN = "FilterName"
-_TP = "TriggerPrompt"
-_CII = "CreateInvestigationInput"
-_cCIR = "com.amazonaws.guardduty#CreateInvestigationRequest"
-_tP = "triggerPrompt"
-_IInv = "InvestigationId"
-_CIO = "CreateInvestigationOutput"
-_cCIRo = "com.amazonaws.guardduty#CreateInvestigationResponse"
-_iInv = "investigationId"
-_CI = "CreateInvestigation"
-_ISF = "IpSetFormat"
-_TXT = "TXT"
-_STIX = "STIX"
-_OC = "OTX_CSV"
-_AV___ = "ALIEN_VAULT"
-_PP_ = "PROOF_POINT"
-_FE = "FIRE_EYE"
 _Loc = "Location"
-_CIPSI = "CreateIPSetInput"
-_cCIPSR = "com.amazonaws.guardduty#CreateIPSetRequest"
 _Fo = "Format"
 _fo = "format"
 _loc = "location"
 _Activ = "Activate"
-_act = "activate"
+_acti = "activate"
 _EBO = "ExpectedBucketOwner"
 _eBO = "expectedBucketOwner"
-_CIPSO = "CreateIPSetOutput"
-_cCIPSRo = "com.amazonaws.guardduty#CreateIPSetResponse"
 _ISI = "IpSetId"
-_iSI = "ipSetId"
-_CIPS = "CreateIPSet"
-_MPPTAS = "MalwareProtectionPlanTaggingActionStatus"
-_MPPTA = "MalwareProtectionPlanTaggingAction"
-_MPPA = "MalwareProtectionPlanActions"
-_Tag = "Tagging"
-_tag = "tagging"
-_MPPOPL = "MalwareProtectionPlanObjectPrefixesList"
-_CSBR = "CreateS3BucketResource"
-_BN = "BucketName"
-_bN = "bucketName"
-_OP = "ObjectPrefixes"
-_oP = "objectPrefixes"
-_CPR = "CreateProtectedResource"
-_SB = "S3Bucket"
-_sB = "s3Bucket"
-_CMPPI = "CreateMalwareProtectionPlanInput"
-_cCMPPR = "com.amazonaws.guardduty#CreateMalwareProtectionPlanRequest"
-_Ro = "Role"
-_ro = "role"
-_PR = "ProtectedResource"
-_pR = "protectedResource"
-_Actio = "Actions"
-_acti = "actions"
-_CMPPO = "CreateMalwareProtectionPlanOutput"
-_cCMPPRo = "com.amazonaws.guardduty#CreateMalwareProtectionPlanResponse"
 _MPPI = "MalwareProtectionPlanId"
-_mPPI = "malwareProtectionPlanId"
-_CMPP = "CreateMalwareProtectionPlan"
-_CMI = "CreateMembersInput"
-_cCMR = "com.amazonaws.guardduty#CreateMembersRequest"
-_aDc = "accountDetails"
-_UAn = "UnprocessedAccount"
-_Res = "Result"
-_res = "result"
 _UAnp = "UnprocessedAccounts"
-_CMO = "CreateMembersOutput"
-_cCMRo = "com.amazonaws.guardduty#CreateMembersResponse"
 _uAn = "unprocessedAccounts"
-_CM = "CreateMembers"
 _DP = "DestinationProperties"
-_DT = "DestinationType"
+_KKA = "KmsKeyArn"
+_kKA = "kmsKeyArn"
+_DTes = "DestinationType"
 _CPDI = "CreatePublishingDestinationInput"
 _cCPDR = "com.amazonaws.guardduty#CreatePublishingDestinationRequest"
-_dT = "destinationType"
+_dTes = "destinationType"
 _dP = "destinationProperties"
 _CPDO = "CreatePublishingDestinationOutput"
 _cCPDRo = "com.amazonaws.guardduty#CreatePublishingDestinationResponse"
 _DIe = "DestinationId"
 _dIe = "destinationId"
 _CPD = "CreatePublishingDestination"
-_FTi = "FindingTypes"
 _CSFI = "CreateSampleFindingsInput"
 _cCSFR = "com.amazonaws.guardduty#CreateSampleFindingsRequest"
-_fT = "findingTypes"
 _CSFO = "CreateSampleFindingsOutput"
 _cCSFRo = "com.amazonaws.guardduty#CreateSampleFindingsResponse"
 _CSF = "CreateSampleFindings"
-_TESF = "ThreatEntitySetFormat"
 _CTESI = "CreateThreatEntitySetInput"
 _cCTESR = "com.amazonaws.guardduty#CreateThreatEntitySetRequest"
 _CTESO = "CreateThreatEntitySetOutput"
@@ -164,7 +128,6 @@ _cCTESRo = "com.amazonaws.guardduty#CreateThreatEntitySetResponse"
 _TESI = "ThreatEntitySetId"
 _tESI = "threatEntitySetId"
 _CTES = "CreateThreatEntitySet"
-_TISF = "ThreatIntelSetFormat"
 _CTISI = "CreateThreatIntelSetInput"
 _cCTISR = "com.amazonaws.guardduty#CreateThreatIntelSetRequest"
 _CTISO = "CreateThreatIntelSetOutput"
@@ -172,7 +135,6 @@ _cCTISRo = "com.amazonaws.guardduty#CreateThreatIntelSetResponse"
 _TISI = "ThreatIntelSetId"
 _tISI = "threatIntelSetId"
 _CTIS = "CreateThreatIntelSet"
-_TESFr = "TrustedEntitySetFormat"
 _CTESIr = "CreateTrustedEntitySetInput"
 _cCTESRom = "com.amazonaws.guardduty#CreateTrustedEntitySetRequest"
 _CTESOr = "CreateTrustedEntitySetOutput"
@@ -185,7 +147,7 @@ _SI_ = "SCAN_ID"
 _GFI = "GUARDDUTY_FINDING_ID"
 _SST = "SCAN_START_TIME"
 _SS_ = "SCAN_STATUS"
-_ST_ = "SCAN_TYPE"
+_ST__ = "SCAN_TYPE"
 _DSa = "DataSource"
 _SL_ = "S3_LOGS"
 _KAL = "KUBERNETES_AUDIT_LOGS"
@@ -279,293 +241,101 @@ _LV = "LongValue"
 _EVq = "EqualsValue"
 _eVq = "equalsValue"
 _FCL = "FilterCriterionList"
-_FCil = "FilterCriteria"
+_FCilt = "FilterCriteria"
 _IVWM = "IntegerValueWithMax"
-_SCo = "SortCriteria"
+_SCor = "SortCriteria"
 _DMSI = "DescribeMalwareScansInput"
 _cDMSR = "com.amazonaws.guardduty#DescribeMalwareScansRequest"
 _NT = "NextToken"
 _nT = "nextToken"
 _MR = "MaxResults"
 _mR = "maxResults"
-_fCil = "filterCriteria"
-_sCo = "sortCriteria"
+_fCilt = "filterCriteria"
+_sCor = "sortCriteria"
+_VD = "VolumeDetail"
+_VA = "VolumeArn"
+_vA = "volumeArn"
+_VTo = "VolumeType"
+_vTo = "volumeType"
+_VSIGB = "VolumeSizeInGB"
+_vSIGB = "volumeSizeInGB"
+_SAna = "SnapshotArn"
+_sAn = "snapshotArn"
+_VDo = "VolumeDetails"
+_PLo = "PositiveLong"
+_IAns = "InstanceArn"
+_iAn = "instanceArn"
+_SRc = "ScanResult"
+_CLEAN = "CLEAN"
+_INFECTED = "INFECTED"
+_SRD = "ScanResultDetails"
+_sRc = "scanResult"
+_SSc = "ScanStatus"
+_RUNNING = "RUNNING"
+_COMPLETED = "COMPLETED"
+_SKIPPED = "SKIPPED"
+_STc = "ScanType"
+_GI_ = "GUARDDUTY_INITIATED"
+_OD = "ON_DEMAND"
+_TT = "TriggerType"
+_BACKUP = "BACKUP"
+_GUARDDUTY = "GUARDDUTY"
+_TD = "TriggerDetails"
+_GDFI = "GuardDutyFindingId"
+_gDFI = "guardDutyFindingId"
+_tT = "triggerType"
+_Sc = "Scan"
+_ADI = "AdminDetectorId"
+_aDI = "adminDetectorId"
+_SIc = "ScanId"
+_sIc = "scanId"
+_sS = "scanStatus"
+_FRa = "FailureReason"
+_fR = "failureReason"
+_SSTc = "ScanStartTime"
+_sST = "scanStartTime"
+_SET = "ScanEndTime"
+_sET = "scanEndTime"
+_tD = "triggerDetails"
+_sRD = "scanResultDetails"
+_TB = "TotalBytes"
+_tB = "totalBytes"
+_FCile = "FileCount"
+_fCile = "fileCount"
+_AVt = "AttachedVolumes"
+_aVt = "attachedVolumes"
+_sTc = "scanType"
 _Sca = "Scans"
 _DMSO = "DescribeMalwareScansOutput"
 _cDMSRo = "com.amazonaws.guardduty#DescribeMalwareScansResponse"
 _sc = "scans"
 _DMS = "DescribeMalwareScans"
+_DOCI = "DescribeOrganizationConfigurationInput"
+_cDOCR = "com.amazonaws.guardduty#DescribeOrganizationConfigurationRequest"
+_OKALCR = "OrganizationKubernetesAuditLogsConfigurationResult"
+_AE = "AutoEnable"
+_aE = "autoEnable"
+_OKCR = "OrganizationKubernetesConfigurationResult"
+_OEVR = "OrganizationEbsVolumesResult"
+_OSEIWFR = "OrganizationScanEc2InstanceWithFindingsResult"
+_OMPCR = "OrganizationMalwareProtectionConfigurationResult"
+_DOCO = "DescribeOrganizationConfigurationOutput"
+_cDOCRo = "com.amazonaws.guardduty#DescribeOrganizationConfigurationResponse"
+_MALR = "MemberAccountLimitReached"
+_mALR = "memberAccountLimitReached"
+_AEOM = "AutoEnableOrganizationMembers"
+_aEOM = "autoEnableOrganizationMembers"
+_DOC = "DescribeOrganizationConfiguration"
 
-TRIGGER_PROMPT: StaticSchema = (3, n0, _TP, 0)
+FINDING_TYPE: StaticSchema = (3, n0, _FT, 0)
 
-CREATE_INVESTIGATION_INPUT: StaticSchema = (
-    18,
-    n0,
-    _CII,
-    {_sSI: _cCIR, _s: None},
-    (_DI, _TP, _CTl),
-    (
-        (lambda: schemas.DETECTOR_ID, 9),
-        (TRIGGER_PROMPT, {_sN: _tP, _sm: None}),
-        (lambda: schemas.CLIENT_TOKEN, {_sN: _cTl, _sTm: None}),
-    ),
-)
-
-CREATE_INVESTIGATION_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _CIO,
-    {_sSI: _cCIRo, _smi: None},
-    (_IInv,),
-    ((lambda: INVESTIGATION_ID, {_sN: _iInv, _sm: None}),),
-)
-
-CREATE_INVESTIGATION: StaticOperationSchema = (
-    23,
-    n0,
-    _CI,
-    {
-        _smith: MappingProxyType(
-            {
-                "method": "POST",
-                "uri": "/detector/{DetectorId}/investigation",
-                "code": 202,
-            }
-        )
-    },
-    CREATE_INVESTIGATION_INPUT,
-    CREATE_INVESTIGATION_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.BAD_REQUEST_EXCEPTION,
-        lambda: schemas.INTERNAL_SERVER_ERROR_EXCEPTION,
-    ),
-)
-
-INVESTIGATION_ID: StaticSchema = (3, n0, _IInv, 0)
-
-IP_SET_FORMAT: StaticSchema = (
+ORDER_BY: StaticSchema = (
     14,
     n0,
-    _ISF,
+    _OB,
     0,
-    (_TXT, _STIX, _OC, _AV___, _PP_, _FE),
-    (
-        (-1, {_sV: _TXT}),
-        (-1, {_sV: _STIX}),
-        (-1, {_sV: _OC}),
-        (-1, {_sV: _AV___}),
-        (-1, {_sV: _PP_}),
-        (-1, {_sV: _FE}),
-    ),
-)
-
-LOCATION: StaticSchema = (3, n0, _Loc, 0)
-
-NAME: StaticSchema = (3, n0, _N, 0)
-
-CREATE_IP_SET_INPUT: StaticSchema = (
-    18,
-    n0,
-    _CIPSI,
-    {_sSI: _cCIPSR, _s: None},
-    (_DI, _N, _Fo, _Loc, _Activ, _CTl, _Ta, _EBO),
-    (
-        (lambda: schemas.DETECTOR_ID, 9),
-        (NAME, {_sN: _n, _sm: None}),
-        (IP_SET_FORMAT, {_sN: _fo, _sm: None}),
-        (LOCATION, {_sN: _loc, _sm: None}),
-        (lambda: schemas.BOOLEAN, {_sN: _act, _sm: None}),
-        (lambda: schemas.CLIENT_TOKEN, {_sN: _cTl, _sTm: None}),
-        (lambda: schemas.TAG_MAP, {_sN: _ta}),
-        (lambda: schemas.ACCOUNT_ID, {_sN: _eBO}),
-    ),
-)
-
-CREATE_IP_SET_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _CIPSO,
-    {_sSI: _cCIPSRo, _smi: None},
-    (_ISI,),
-    ((lambda: schemas.STRING, {_sN: _iSI, _sm: None}),),
-)
-
-CREATE_IP_SET: StaticOperationSchema = (
-    23,
-    n0,
-    _CIPS,
-    {
-        _smith: MappingProxyType(
-            {"method": "POST", "uri": "/detector/{DetectorId}/ipset", "code": 200}
-        )
-    },
-    CREATE_IP_SET_INPUT,
-    CREATE_IP_SET_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.BAD_REQUEST_EXCEPTION,
-        lambda: schemas.INTERNAL_SERVER_ERROR_EXCEPTION,
-    ),
-)
-
-MALWARE_PROTECTION_PLAN_TAGGING_ACTION_STATUS: StaticSchema = (
-    14,
-    n0,
-    _MPPTAS,
-    0,
-    (_ENABLED, _DISABLED),
-    ((-1, {_sV: _ENABLED}), (-1, {_sV: _DISABLED})),
-)
-
-MALWARE_PROTECTION_PLAN_TAGGING_ACTION: StaticSchema = (
-    18,
-    n0,
-    _MPPTA,
-    0,
-    (_St,),
-    ((MALWARE_PROTECTION_PLAN_TAGGING_ACTION_STATUS, {_sN: _st}),),
-)
-
-MALWARE_PROTECTION_PLAN_ACTIONS: StaticSchema = (
-    18,
-    n0,
-    _MPPA,
-    0,
-    (_Tag,),
-    ((MALWARE_PROTECTION_PLAN_TAGGING_ACTION, {_sN: _tag}),),
-)
-
-MALWARE_PROTECTION_PLAN_OBJECT_PREFIXES_LIST: StaticSchema = (
-    16,
-    n0,
-    _MPPOPL,
-    0,
-    (_me,),
-    ((lambda: schemas.STRING, 0),),
-)
-
-CREATE_S3_BUCKET_RESOURCE: StaticSchema = (
-    18,
-    n0,
-    _CSBR,
-    0,
-    (_BN, _OP),
-    (
-        (lambda: schemas.STRING, {_sN: _bN}),
-        (MALWARE_PROTECTION_PLAN_OBJECT_PREFIXES_LIST, {_sN: _oP}),
-    ),
-)
-
-CREATE_PROTECTED_RESOURCE: StaticSchema = (
-    18,
-    n0,
-    _CPR,
-    0,
-    (_SB,),
-    ((CREATE_S3_BUCKET_RESOURCE, {_sN: _sB}),),
-)
-
-CREATE_MALWARE_PROTECTION_PLAN_INPUT: StaticSchema = (
-    18,
-    n0,
-    _CMPPI,
-    {_sSI: _cCMPPR, _s: None},
-    (_CTl, _Ro, _PR, _Actio, _Ta),
-    (
-        (lambda: schemas.CLIENT_TOKEN, {_sN: _cTl, _sTm: None}),
-        (lambda: schemas.STRING, {_sN: _ro, _sm: None}),
-        (CREATE_PROTECTED_RESOURCE, {_sN: _pR, _sm: None}),
-        (MALWARE_PROTECTION_PLAN_ACTIONS, {_sN: _acti}),
-        (lambda: schemas.TAG_MAP, {_sN: _ta}),
-    ),
-)
-
-CREATE_MALWARE_PROTECTION_PLAN_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _CMPPO,
-    {_sSI: _cCMPPRo, _smi: None},
-    (_MPPI,),
-    ((lambda: schemas.STRING, {_sN: _mPPI}),),
-)
-
-CREATE_MALWARE_PROTECTION_PLAN: StaticOperationSchema = (
-    23,
-    n0,
-    _CMPP,
-    {
-        _smith: MappingProxyType(
-            {"method": "POST", "uri": "/malware-protection-plan", "code": 200}
-        )
-    },
-    CREATE_MALWARE_PROTECTION_PLAN_INPUT,
-    CREATE_MALWARE_PROTECTION_PLAN_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.BAD_REQUEST_EXCEPTION,
-        lambda: schemas.CONFLICT_EXCEPTION,
-        lambda: schemas.INTERNAL_SERVER_ERROR_EXCEPTION,
-    ),
-)
-
-CREATE_MEMBERS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _CMI,
-    {_sSI: _cCMR, _s: None},
-    (_DI, _ADc),
-    (
-        (lambda: schemas.DETECTOR_ID, 9),
-        (lambda: schemas.ACCOUNT_DETAILS, {_sN: _aDc, _sm: None}),
-    ),
-)
-
-CREATE_MEMBERS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _CMO,
-    {_sSI: _cCMRo, _smi: None},
-    (_UAnp,),
-    ((lambda: UNPROCESSED_ACCOUNTS, {_sN: _uAn, _sm: None}),),
-)
-
-CREATE_MEMBERS: StaticOperationSchema = (
-    23,
-    n0,
-    _CM,
-    {
-        _smith: MappingProxyType(
-            {"method": "POST", "uri": "/detector/{DetectorId}/member", "code": 200}
-        )
-    },
-    CREATE_MEMBERS_INPUT,
-    CREATE_MEMBERS_OUTPUT,
-    (
-        lambda: schemas.BAD_REQUEST_EXCEPTION,
-        lambda: schemas.INTERNAL_SERVER_ERROR_EXCEPTION,
-    ),
-)
-
-UNPROCESSED_ACCOUNT: StaticSchema = (
-    18,
-    n0,
-    _UAn,
-    0,
-    (_AIcc, _Res),
-    (
-        (lambda: schemas.ACCOUNT_ID, {_sN: _aIc, _sm: None}),
-        (lambda: schemas.STRING, {_sN: _res, _sm: None}),
-    ),
-)
-
-UNPROCESSED_ACCOUNTS: StaticSchema = (
-    16,
-    n0,
-    _UAnp,
-    0,
-    (_me,),
-    ((UNPROCESSED_ACCOUNT, 0),),
+    (_ASC, _DESC),
+    ((-1, {_sV: _ASC}), (-1, {_sV: _DESC})),
 )
 
 CREATE_PUBLISHING_DESTINATION_INPUT: StaticSchema = (
@@ -573,13 +343,13 @@ CREATE_PUBLISHING_DESTINATION_INPUT: StaticSchema = (
     n0,
     _CPDI,
     {_sSI: _cCPDR, _s: None},
-    (_DI, _DT, _DP, _CTl, _Ta),
+    (_DI, _DTes, _DP, _CTl, _Tag),
     (
         (lambda: schemas.DETECTOR_ID, 9),
-        (lambda: schemas.DESTINATION_TYPE, {_sN: _dT, _sm: None}),
+        (lambda: schemas.DESTINATION_TYPE, {_sN: _dTes, _sm: None}),
         (lambda: schemas.DESTINATION_PROPERTIES, {_sN: _dP, _sm: None}),
         (lambda: schemas.CLIENT_TOKEN, {_sN: _cTl, _sTm: None}),
-        (lambda: schemas.TAG_MAP, {_sN: _ta}),
+        (lambda: schemas.TAG_MAP, {_sN: _tag}),
     ),
 )
 
@@ -613,14 +383,7 @@ CREATE_PUBLISHING_DESTINATION: StaticOperationSchema = (
     ),
 )
 
-FINDING_TYPES: StaticSchema = (
-    16,
-    n0,
-    _FTi,
-    0,
-    (_me,),
-    ((lambda: schemas.FINDING_TYPE, 0),),
-)
+FINDING_TYPES: StaticSchema = (16, n0, _FTi, 0, (_me,), ((FINDING_TYPE, 0),))
 
 CREATE_SAMPLE_FINDINGS_INPUT: StaticSchema = (
     18,
@@ -628,7 +391,7 @@ CREATE_SAMPLE_FINDINGS_INPUT: StaticSchema = (
     _CSFI,
     {_sSI: _cCSFR, _s: None},
     (_DI, _FTi),
-    ((lambda: schemas.DETECTOR_ID, 9), (FINDING_TYPES, {_sN: _fT})),
+    ((lambda: schemas.DETECTOR_ID, 9), (FINDING_TYPES, {_sN: _fTi})),
 )
 
 CREATE_SAMPLE_FINDINGS_OUTPUT: StaticSchema = (
@@ -659,39 +422,21 @@ CREATE_SAMPLE_FINDINGS: StaticOperationSchema = (
     ),
 )
 
-EXPECTED_BUCKET_OWNER: StaticSchema = (3, n0, _EBO, 0)
-
-THREAT_ENTITY_SET_FORMAT: StaticSchema = (
-    14,
-    n0,
-    _TESF,
-    0,
-    (_TXT, _STIX, _OC, _AV___, _PP_, _FE),
-    (
-        (-1, {_sV: _TXT}),
-        (-1, {_sV: _STIX}),
-        (-1, {_sV: _OC}),
-        (-1, {_sV: _AV___}),
-        (-1, {_sV: _PP_}),
-        (-1, {_sV: _FE}),
-    ),
-)
-
 CREATE_THREAT_ENTITY_SET_INPUT: StaticSchema = (
     18,
     n0,
     _CTESI,
     {_sSI: _cCTESR, _s: None},
-    (_DI, _N, _Fo, _Loc, _EBO, _Activ, _CTl, _Ta),
+    (_DI, _N, _Fo, _Loc, _EBO, _Activ, _CTl, _Tag),
     (
         (lambda: schemas.DETECTOR_ID, 9),
-        (NAME, {_sN: _n, _sm: None}),
-        (THREAT_ENTITY_SET_FORMAT, {_sN: _fo, _sm: None}),
-        (LOCATION, {_sN: _loc, _sm: None}),
-        (EXPECTED_BUCKET_OWNER, {_sN: _eBO}),
-        (lambda: schemas.BOOLEAN, {_sN: _act, _sm: None}),
+        (lambda: schemas.NAME, {_sN: _n, _sm: None}),
+        (lambda: schemas.THREAT_ENTITY_SET_FORMAT, {_sN: _fo, _sm: None}),
+        (lambda: schemas.LOCATION, {_sN: _loc, _sm: None}),
+        (lambda: schemas.EXPECTED_BUCKET_OWNER, {_sN: _eBO}),
+        (lambda: schemas.BOOLEAN, {_sN: _acti, _sm: None}),
         (lambda: schemas.CLIENT_TOKEN, {_sN: _cTl, _sTm: None}),
-        (lambda: schemas.TAG_MAP, {_sN: _ta}),
+        (lambda: schemas.TAG_MAP, {_sN: _tag}),
     ),
 )
 
@@ -725,36 +470,20 @@ CREATE_THREAT_ENTITY_SET: StaticOperationSchema = (
     ),
 )
 
-THREAT_INTEL_SET_FORMAT: StaticSchema = (
-    14,
-    n0,
-    _TISF,
-    0,
-    (_TXT, _STIX, _OC, _AV___, _PP_, _FE),
-    (
-        (-1, {_sV: _TXT}),
-        (-1, {_sV: _STIX}),
-        (-1, {_sV: _OC}),
-        (-1, {_sV: _AV___}),
-        (-1, {_sV: _PP_}),
-        (-1, {_sV: _FE}),
-    ),
-)
-
 CREATE_THREAT_INTEL_SET_INPUT: StaticSchema = (
     18,
     n0,
     _CTISI,
     {_sSI: _cCTISR, _s: None},
-    (_DI, _N, _Fo, _Loc, _Activ, _CTl, _Ta, _EBO),
+    (_DI, _N, _Fo, _Loc, _Activ, _CTl, _Tag, _EBO),
     (
         (lambda: schemas.DETECTOR_ID, 9),
-        (NAME, {_sN: _n, _sm: None}),
-        (THREAT_INTEL_SET_FORMAT, {_sN: _fo, _sm: None}),
-        (LOCATION, {_sN: _loc, _sm: None}),
-        (lambda: schemas.BOOLEAN, {_sN: _act, _sm: None}),
+        (lambda: schemas.NAME, {_sN: _n, _sm: None}),
+        (lambda: schemas.THREAT_INTEL_SET_FORMAT, {_sN: _fo, _sm: None}),
+        (lambda: schemas.LOCATION, {_sN: _loc, _sm: None}),
+        (lambda: schemas.BOOLEAN, {_sN: _acti, _sm: None}),
         (lambda: schemas.CLIENT_TOKEN, {_sN: _cTl, _sTm: None}),
-        (lambda: schemas.TAG_MAP, {_sN: _ta}),
+        (lambda: schemas.TAG_MAP, {_sN: _tag}),
         (lambda: schemas.ACCOUNT_ID, {_sN: _eBO}),
     ),
 )
@@ -790,37 +519,21 @@ CREATE_THREAT_INTEL_SET: StaticOperationSchema = (
     ),
 )
 
-TRUSTED_ENTITY_SET_FORMAT: StaticSchema = (
-    14,
-    n0,
-    _TESFr,
-    0,
-    (_TXT, _STIX, _OC, _AV___, _PP_, _FE),
-    (
-        (-1, {_sV: _TXT}),
-        (-1, {_sV: _STIX}),
-        (-1, {_sV: _OC}),
-        (-1, {_sV: _AV___}),
-        (-1, {_sV: _PP_}),
-        (-1, {_sV: _FE}),
-    ),
-)
-
 CREATE_TRUSTED_ENTITY_SET_INPUT: StaticSchema = (
     18,
     n0,
     _CTESIr,
     {_sSI: _cCTESRom, _s: None},
-    (_DI, _N, _Fo, _Loc, _EBO, _Activ, _CTl, _Ta),
+    (_DI, _N, _Fo, _Loc, _EBO, _Activ, _CTl, _Tag),
     (
         (lambda: schemas.DETECTOR_ID, 9),
-        (NAME, {_sN: _n, _sm: None}),
-        (TRUSTED_ENTITY_SET_FORMAT, {_sN: _fo, _sm: None}),
-        (LOCATION, {_sN: _loc, _sm: None}),
-        (EXPECTED_BUCKET_OWNER, {_sN: _eBO}),
-        (lambda: schemas.BOOLEAN, {_sN: _act, _sm: None}),
+        (lambda: schemas.NAME, {_sN: _n, _sm: None}),
+        (lambda: schemas.TRUSTED_ENTITY_SET_FORMAT, {_sN: _fo, _sm: None}),
+        (lambda: schemas.LOCATION, {_sN: _loc, _sm: None}),
+        (lambda: schemas.EXPECTED_BUCKET_OWNER, {_sN: _eBO}),
+        (lambda: schemas.BOOLEAN, {_sN: _acti, _sm: None}),
         (lambda: schemas.CLIENT_TOKEN, {_sN: _cTl, _sTm: None}),
-        (lambda: schemas.TAG_MAP, {_sN: _ta}),
+        (lambda: schemas.TAG_MAP, {_sN: _tag}),
     ),
 )
 
@@ -859,7 +572,7 @@ CRITERION_KEY: StaticSchema = (
     n0,
     _CK,
     0,
-    (_EIA, _SI_, _AI_, _GFI, _SST, _SS_, _ST_),
+    (_EIA, _SI_, _AI_, _GFI, _SST, _SS_, _ST__),
     (
         (-1, {_sV: _EIA}),
         (-1, {_sV: _SI_}),
@@ -867,7 +580,7 @@ CRITERION_KEY: StaticSchema = (
         (-1, {_sV: _GFI}),
         (-1, {_sV: _SST}),
         (-1, {_sV: _SS_}),
-        (-1, {_sV: _ST_}),
+        (-1, {_sV: _ST__}),
     ),
 )
 
@@ -979,7 +692,7 @@ DECLINE_INVITATIONS_OUTPUT: StaticSchema = (
     _DIO,
     {_sSI: _cDIRo, _smi: None},
     (_UAnp,),
-    ((UNPROCESSED_ACCOUNTS, {_sN: _uAn, _sm: None}),),
+    ((lambda: schemas.UNPROCESSED_ACCOUNTS, {_sN: _uAn, _sm: None}),),
 )
 
 DECLINE_INVITATIONS: StaticOperationSchema = (
@@ -1013,7 +726,7 @@ DELETE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT: StaticSchema = (
     n0,
     _DCDRAI,
     {_sSI: _cDCDRAR, _s: None},
-    (_RI, _AIs),
+    (_RIu, _AIs),
     ((lambda: schemas.RULE_ID, 9), (lambda: schemas.ASSOCIATION_ID, 9)),
 )
 
@@ -1052,7 +765,7 @@ DELETE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT: StaticSchema = (
     n0,
     _DCDROCI,
     {_sSI: _cDCDROCR, _s: None},
-    (_RI, _Mo),
+    (_RIu, _Mo),
     (
         (lambda: schemas.RULE_ID, 9),
         (lambda: schemas.ASSOCIATION_MODE, {_sQ: _mo, _sm: None}),
@@ -1165,7 +878,7 @@ DELETE_INVITATIONS_OUTPUT: StaticSchema = (
     _DIOe,
     {_sSI: _cDIRoma, _smi: None},
     (_UAnp,),
-    ((UNPROCESSED_ACCOUNTS, {_sN: _uAn, _sm: None}),),
+    ((lambda: schemas.UNPROCESSED_ACCOUNTS, {_sN: _uAn, _sm: None}),),
 )
 
 DELETE_INVITATIONS: StaticOperationSchema = (
@@ -1274,7 +987,7 @@ DELETE_MEMBERS_OUTPUT: StaticSchema = (
     _DMO,
     {_sSI: _cDMRo, _smi: None},
     (_UAnp,),
-    ((UNPROCESSED_ACCOUNTS, {_sN: _uAn, _sm: None}),),
+    ((lambda: schemas.UNPROCESSED_ACCOUNTS, {_sN: _uAn, _sm: None}),),
 )
 
 DELETE_MEMBERS: StaticOperationSchema = (
@@ -1451,7 +1164,7 @@ LONG_VALUE: StaticSchema = (8, n0, _LV, 0)
 FILTER_CONDITION: StaticSchema = (
     18,
     n0,
-    _FC,
+    _FCi,
     0,
     (_EVq, _GT, _LT),
     (
@@ -1464,10 +1177,10 @@ FILTER_CONDITION: StaticSchema = (
 FILTER_CRITERION: StaticSchema = (
     18,
     n0,
-    _FCi,
+    _FCil,
     0,
-    (_CK, _FC),
-    ((CRITERION_KEY, {_sN: _cK}), (FILTER_CONDITION, {_sN: _fC})),
+    (_CK, _FCi),
+    ((CRITERION_KEY, {_sN: _cK}), (FILTER_CONDITION, {_sN: _fCi})),
 )
 
 FILTER_CRITERION_LIST: StaticSchema = (
@@ -1482,26 +1195,35 @@ FILTER_CRITERION_LIST: StaticSchema = (
 FILTER_CRITERIA: StaticSchema = (
     18,
     n0,
-    _FCil,
+    _FCilt,
     0,
-    (_FCi,),
-    ((FILTER_CRITERION_LIST, {_sN: _fCi}),),
+    (_FCil,),
+    ((FILTER_CRITERION_LIST, {_sN: _fCil}),),
 )
 
 INTEGER_VALUE_WITH_MAX: StaticSchema = (7, n0, _IVWM, 0)
+
+SORT_CRITERIA: StaticSchema = (
+    18,
+    n0,
+    _SCor,
+    0,
+    (_AN, _OB),
+    ((lambda: schemas.STRING, {_sN: _aN}), (ORDER_BY, {_sN: _oB})),
+)
 
 DESCRIBE_MALWARE_SCANS_INPUT: StaticSchema = (
     18,
     n0,
     _DMSI,
     {_sSI: _cDMSR, _s: None},
-    (_DI, _NT, _MR, _FCil, _SCo),
+    (_DI, _NT, _MR, _FCilt, _SCor),
     (
         (lambda: schemas.DETECTOR_ID, 9),
         (lambda: schemas.STRING, {_sN: _nT}),
         (INTEGER_VALUE_WITH_MAX, {_sN: _mR}),
-        (FILTER_CRITERIA, {_sN: _fCil}),
-        (lambda: schemas.SORT_CRITERIA, {_sN: _sCo}),
+        (FILTER_CRITERIA, {_sN: _fCilt}),
+        (SORT_CRITERIA, {_sN: _sCor}),
     ),
 )
 
@@ -1511,10 +1233,7 @@ DESCRIBE_MALWARE_SCANS_OUTPUT: StaticSchema = (
     _DMSO,
     {_sSI: _cDMSRo, _smi: None},
     (_Sca, _NT),
-    (
-        (lambda: schemas.SCANS, {_sN: _sc, _sm: None}),
-        (lambda: schemas.STRING, {_sN: _nT}),
-    ),
+    ((lambda: SCANS, {_sN: _sc, _sm: None}), (lambda: schemas.STRING, {_sN: _nT})),
 )
 
 DESCRIBE_MALWARE_SCANS: StaticOperationSchema = (
@@ -1536,4 +1255,235 @@ DESCRIBE_MALWARE_SCANS: StaticOperationSchema = (
         lambda: schemas.BAD_REQUEST_EXCEPTION,
         lambda: schemas.INTERNAL_SERVER_ERROR_EXCEPTION,
     ),
+)
+
+VOLUME_DETAIL: StaticSchema = (
+    18,
+    n0,
+    _VD,
+    0,
+    (_VA, _VTo, _DN, _VSIGB, _ETn, _SAna, _KKA),
+    (
+        (lambda: schemas.STRING, {_sN: _vA}),
+        (lambda: schemas.STRING, {_sN: _vTo}),
+        (lambda: schemas.STRING, {_sN: _dN}),
+        (lambda: schemas.INTEGER, {_sN: _vSIGB}),
+        (lambda: schemas.STRING, {_sN: _eTn}),
+        (lambda: schemas.STRING, {_sN: _sAn}),
+        (lambda: schemas.STRING, {_sN: _kKA}),
+    ),
+)
+
+VOLUME_DETAILS: StaticSchema = (16, n0, _VDo, 0, (_me,), ((VOLUME_DETAIL, 0),))
+
+POSITIVE_LONG: StaticSchema = (8, n0, _PLo, 0)
+
+INSTANCE_ARN: StaticSchema = (3, n0, _IAns, 0)
+
+RESOURCE_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _RDe,
+    0,
+    (_IAns,),
+    ((INSTANCE_ARN, {_sN: _iAn}),),
+)
+
+SCAN_RESULT: StaticSchema = (
+    14,
+    n0,
+    _SRc,
+    0,
+    (_CLEAN, _INFECTED),
+    ((-1, {_sV: _CLEAN}), (-1, {_sV: _INFECTED})),
+)
+
+SCAN_RESULT_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _SRD,
+    0,
+    (_SRc,),
+    ((SCAN_RESULT, {_sN: _sRc}),),
+)
+
+SCAN_STATUS: StaticSchema = (
+    14,
+    n0,
+    _SSc,
+    0,
+    (_RUNNING, _COMPLETED, _FAILED, _SKIPPED),
+    (
+        (-1, {_sV: _RUNNING}),
+        (-1, {_sV: _COMPLETED}),
+        (-1, {_sV: _FAILED}),
+        (-1, {_sV: _SKIPPED}),
+    ),
+)
+
+SCAN_TYPE: StaticSchema = (
+    14,
+    n0,
+    _STc,
+    0,
+    (_GI_, _OD),
+    ((-1, {_sV: _GI_}), (-1, {_sV: _OD})),
+)
+
+TRIGGER_TYPE: StaticSchema = (
+    14,
+    n0,
+    _TT,
+    0,
+    (_BACKUP, _GUARDDUTY),
+    ((-1, {_sV: _BACKUP}), (-1, {_sV: _GUARDDUTY})),
+)
+
+TRIGGER_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _TD,
+    0,
+    (_GDFI, _De, _TT),
+    (
+        (lambda: schemas.NON_EMPTY_STRING, {_sN: _gDFI}),
+        (lambda: schemas.NON_EMPTY_STRING, {_sN: _de}),
+        (TRIGGER_TYPE, {_sN: _tT}),
+    ),
+)
+
+SCAN: StaticSchema = (
+    18,
+    n0,
+    _Sc,
+    0,
+    (
+        _DI,
+        _ADI,
+        _SIc,
+        _SSc,
+        _FRa,
+        _SSTc,
+        _SET,
+        _TD,
+        _RDe,
+        _SRD,
+        _AIcc,
+        _TB,
+        _FCile,
+        _AVt,
+        _STc,
+    ),
+    (
+        (lambda: schemas.DETECTOR_ID, {_sN: _dI}),
+        (lambda: schemas.DETECTOR_ID, {_sN: _aDI}),
+        (lambda: schemas.NON_EMPTY_STRING, {_sN: _sIc}),
+        (SCAN_STATUS, {_sN: _sS}),
+        (lambda: schemas.NON_EMPTY_STRING, {_sN: _fR}),
+        (lambda: schemas.TIMESTAMP, {_sN: _sST}),
+        (lambda: schemas.TIMESTAMP, {_sN: _sET}),
+        (TRIGGER_DETAILS, {_sN: _tD}),
+        (RESOURCE_DETAILS, {_sN: _rD}),
+        (SCAN_RESULT_DETAILS, {_sN: _sRD}),
+        (lambda: schemas.ACCOUNT_ID, {_sN: _aIc}),
+        (POSITIVE_LONG, {_sN: _tB}),
+        (POSITIVE_LONG, {_sN: _fCile}),
+        (VOLUME_DETAILS, {_sN: _aVt}),
+        (SCAN_TYPE, {_sN: _sTc}),
+    ),
+)
+
+SCANS: StaticSchema = (16, n0, _Sca, 0, (_me,), ((SCAN, 0),))
+
+MAX_RESULTS: StaticSchema = (7, n0, _MR, 0)
+
+DESCRIBE_ORGANIZATION_CONFIGURATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DOCI,
+    {_sSI: _cDOCR, _s: None},
+    (_DI, _MR, _NT),
+    (
+        (lambda: schemas.DETECTOR_ID, 9),
+        (MAX_RESULTS, {_sQ: _mR}),
+        (lambda: schemas.STRING, {_sQ: _nT}),
+    ),
+)
+
+DESCRIBE_ORGANIZATION_CONFIGURATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DOCO,
+    {_sSI: _cDOCRo, _smi: None},
+    (_AE, _MALR, _DS, _F, _NT, _AEOM),
+    (
+        (lambda: schemas.BOOLEAN, {_sN: _aE}),
+        (lambda: schemas.BOOLEAN, {_sN: _mALR, _sm: None}),
+        (lambda: schemas.ORGANIZATION_DATA_SOURCE_CONFIGURATIONS_RESULT, {_sN: _dS}),
+        (lambda: schemas.ORGANIZATION_FEATURES_CONFIGURATIONS_RESULTS, {_sN: _f}),
+        (lambda: schemas.STRING, {_sN: _nT}),
+        (lambda: schemas.AUTO_ENABLE_MEMBERS, {_sN: _aEOM}),
+    ),
+)
+
+DESCRIBE_ORGANIZATION_CONFIGURATION: StaticOperationSchema = (
+    23,
+    n0,
+    _DOC,
+    {
+        _smith: MappingProxyType(
+            {"method": "GET", "uri": "/detector/{DetectorId}/admin", "code": 200}
+        )
+    },
+    DESCRIBE_ORGANIZATION_CONFIGURATION_INPUT,
+    DESCRIBE_ORGANIZATION_CONFIGURATION_OUTPUT,
+    (
+        lambda: schemas.BAD_REQUEST_EXCEPTION,
+        lambda: schemas.INTERNAL_SERVER_ERROR_EXCEPTION,
+    ),
+)
+
+ORGANIZATION_KUBERNETES_AUDIT_LOGS_CONFIGURATION_RESULT: StaticSchema = (
+    18,
+    n0,
+    _OKALCR,
+    0,
+    (_AE,),
+    ((lambda: schemas.BOOLEAN, {_sN: _aE, _sm: None}),),
+)
+
+ORGANIZATION_KUBERNETES_CONFIGURATION_RESULT: StaticSchema = (
+    18,
+    n0,
+    _OKCR,
+    0,
+    (_AL,),
+    ((ORGANIZATION_KUBERNETES_AUDIT_LOGS_CONFIGURATION_RESULT, {_sN: _aL, _sm: None}),),
+)
+
+ORGANIZATION_EBS_VOLUMES_RESULT: StaticSchema = (
+    18,
+    n0,
+    _OEVR,
+    0,
+    (_AE,),
+    ((lambda: schemas.BOOLEAN, {_sN: _aE}),),
+)
+
+ORGANIZATION_SCAN_EC2_INSTANCE_WITH_FINDINGS_RESULT: StaticSchema = (
+    18,
+    n0,
+    _OSEIWFR,
+    0,
+    (_EVb,),
+    ((ORGANIZATION_EBS_VOLUMES_RESULT, {_sN: _eVb}),),
+)
+
+ORGANIZATION_MALWARE_PROTECTION_CONFIGURATION_RESULT: StaticSchema = (
+    18,
+    n0,
+    _OMPCR,
+    0,
+    (_SEIWF,),
+    ((ORGANIZATION_SCAN_EC2_INSTANCE_WITH_FINDINGS_RESULT, {_sN: _sEIWF}),),
 )

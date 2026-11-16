@@ -65,6 +65,9 @@ from ..models import (
     FilterCriteriaDict,
     FilterCriteriaError,
     FunctionConfiguration,
+    FunctionEventInvokeConfig,
+    FunctionRuntimeConfig,
+    FunctionRuntimeConfigDict,
     FunctionScalingConfig,
     FunctionScalingConfigDict,
     FunctionUrlConfig,
@@ -83,6 +86,22 @@ from ..models import (
     ServiceError,
     _SerdeShape,
 )
+
+@dataclass(kw_only=True)
+class ListFunctionEventInvokeConfigsOutput(_SerdeShape):
+    """Dataclass for ListFunctionEventInvokeConfigsOutput structure."""
+
+    function_event_invoke_configs: list[FunctionEventInvokeConfig] | None = ...
+    """A list of configurations."""
+    next_marker: str | None = ...
+    """The pagination token that's included if more results are available."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
 @dataclass(kw_only=True)
 class ListFunctionsByCodeSigningConfigInput(_SerdeShape):
@@ -1638,6 +1657,12 @@ class PublishVersionOutput(_SerdeShape):
     The function's durable execution configuration settings, if the
     function is configured for durability.
     """
+    runtime_config: FunctionRuntimeConfig | None = ...
+    """
+    The customer-managed runtime configuration for your function. Specifies
+    the customer-managed runtime and the runtime alias that your function
+    uses.
+    """
     response_metadata: ResponseMetadata = ...
     """
     Metadata about the response that produced this output. Use this to
@@ -2708,6 +2733,24 @@ class Runtime(UnknownEnumMixin, StrEnum):
     JAVA8AL2023 = "java8.al2023"
     JAVA11AL2023 = "java11.al2023"
     JAVA17AL2023 = "java17.al2023"
+    CUSTOM = "custom"
+
+@dataclass(kw_only=True)
+class RuntimeAliasDeletedException(ServiceError, _SerdeShape):
+    """
+    The runtime alias for your function is no longer available. Update your
+    function to use an available runtime alias.
+    """
+
+    type: str | None = ...
+    """Indicates the exception type for a deleted runtime alias."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
 @dataclass(kw_only=True)
 class RuntimeVersionConfig(_SerdeShape):
@@ -2719,6 +2762,23 @@ class RuntimeVersionConfig(_SerdeShape):
     """
     Error response when Lambda is unable to retrieve the runtime version for
     a function.
+    """
+
+@dataclass(kw_only=True)
+class RuntimeVersionDeletedException(ServiceError, _SerdeShape):
+    """
+    The runtime version used by your function is no longer available. Update
+    your function to use an available runtime version or runtime alias.
+    """
+
+    type: str | None = ...
+    """Indicates the exception type for a deleted runtime version."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
 @dataclass(kw_only=True)
@@ -2922,17 +2982,18 @@ class SelfManagedKafkaEventSourceConfig(_SerdeShape):
     consumption_mode: str | None = ...
     """
     The mode that Lambda uses to consume records from your self-managed
-    Apache Kafka topic. The default is `Stream`.
+    Apache Kafka topic. Valid values are the following:
 
-    - `Stream` -- Lambda consumes records using a Kafka consumer group and
-      preserves the order of records within each partition. This is the
-      default when you omit `ConsumptionMode`.
+    - `Stream` (default) -- Lambda consumes records using a Kafka consumer
+      group and preserves the order of records within each partition.
 
     - `Queue` -- Lambda consumes records using a Kafka share group. Multiple
-      consumers can process records from the same partitions concurrently.
-      Queue mode does not preserve per-partition order. Queue mode requires
-      an Apache Kafka cluster running version 4.2 or later with share groups
+      consumers can process records from the same partition concurrently, so
+      Lambda doesn't preserve per-partition order. To use Queue mode, your
+      cluster must run Apache Kafka version 4.2 or later with share groups
       enabled.
+
+    If you omit this parameter, Lambda uses `Stream`.
 
     You cannot change `ConsumptionMode` after you create the event source
     mapping. To use a different consumption mode, create a new event source
@@ -2962,17 +3023,18 @@ class SelfManagedKafkaEventSourceConfigDict(TypedDict, total=False):
     consumption_mode: str | None
     """
     The mode that Lambda uses to consume records from your self-managed
-    Apache Kafka topic. The default is `Stream`.
+    Apache Kafka topic. Valid values are the following:
 
-    - `Stream` -- Lambda consumes records using a Kafka consumer group and
-      preserves the order of records within each partition. This is the
-      default when you omit `ConsumptionMode`.
+    - `Stream` (default) -- Lambda consumes records using a Kafka consumer
+      group and preserves the order of records within each partition.
 
     - `Queue` -- Lambda consumes records using a Kafka share group. Multiple
-      consumers can process records from the same partitions concurrently.
-      Queue mode does not preserve per-partition order. Queue mode requires
-      an Apache Kafka cluster running version 4.2 or later with share groups
+      consumers can process records from the same partition concurrently, so
+      Lambda doesn't preserve per-partition order. To use Queue mode, your
+      cluster must run Apache Kafka version 4.2 or later with share groups
       enabled.
+
+    If you omit this parameter, Lambda uses `Stream`.
 
     You cannot change `ConsumptionMode` after you create the event source
     mapping. To use a different consumption mode, create a new event source
@@ -4156,10 +4218,11 @@ class UpdateEventSourceMappingInput(_SerdeShape):
     is infinite (-1). When set to infinite (-1), failed records are retried
     until the record expires.
 
-    For Kafka `Stream` consumption mode, the default is `-1` (infinite
-    retries; capped at 10 when an on-failure destination is configured). For
-    Kafka `Queue` consumption mode, the default is `0`, and if no on-failure
-    destination is configured the Kafka broker performs retries.
+    For Kafka event source mappings with `ConsumptionMode` set to `Queue`,
+    the value -1 (infinite retries) is not supported and the default is 0
+    (no retries). Lambda releases failed records back to the broker, which
+    redelivers them up to the share group's
+    `group.share.delivery.count.limit`.
     """
     tumbling_window_in_seconds: int | None = ...
     """
@@ -4345,10 +4408,11 @@ class UpdateEventSourceMappingInputDict(TypedDict, total=False):
     is infinite (-1). When set to infinite (-1), failed records are retried
     until the record expires.
 
-    For Kafka `Stream` consumption mode, the default is `-1` (infinite
-    retries; capped at 10 when an on-failure destination is configured). For
-    Kafka `Queue` consumption mode, the default is `0`, and if no on-failure
-    destination is configured the Kafka broker performs retries.
+    For Kafka event source mappings with `ConsumptionMode` set to `Queue`,
+    the value -1 (infinite retries) is not supported and the default is 0
+    (no retries). Lambda releases failed records back to the broker, which
+    redelivers them up to the share group's
+    `group.share.delivery.count.limit`.
     """
     tumbling_window_in_seconds: int | None
     """
@@ -4971,6 +5035,12 @@ class UpdateFunctionCodeOutput(_SerdeShape):
     The function's durable execution configuration settings, if the
     function is configured for durability.
     """
+    runtime_config: FunctionRuntimeConfig | None = ...
+    """
+    The customer-managed runtime configuration for your function. Specifies
+    the customer-managed runtime and the runtime alias that your function
+    uses.
+    """
     response_metadata: ResponseMetadata = ...
     """
     Metadata about the response that produced this output. Use this to
@@ -5155,6 +5225,12 @@ class UpdateFunctionConfigurationInput(_SerdeShape):
     that is used to encrypt your durable execution's payload data,
     including input, output, and error payloads.
     """
+    runtime_config: FunctionRuntimeConfig | None = ...
+    """
+    The customer-managed runtime configuration for your function. Specifies
+    the customer-managed runtime and the runtime alias that your function
+    uses.
+    """
 
 class UpdateFunctionConfigurationInputDict(TypedDict, total=False):
     """Dictionary form of `UpdateFunctionConfigurationInput`."""
@@ -5330,6 +5406,12 @@ class UpdateFunctionConfigurationInputDict(TypedDict, total=False):
     an optional ARN of the Key Management Service (KMS) customer managed key
     that is used to encrypt your durable execution's payload data,
     including input, output, and error payloads.
+    """
+    runtime_config: FunctionRuntimeConfig | FunctionRuntimeConfigDict | None
+    """
+    The customer-managed runtime configuration for your function. Specifies
+    the customer-managed runtime and the runtime alias that your function
+    uses.
     """
 
 @dataclass(kw_only=True)
@@ -5510,6 +5592,12 @@ class UpdateFunctionConfigurationOutput(_SerdeShape):
     """
     The function's durable execution configuration settings, if the
     function is configured for durability.
+    """
+    runtime_config: FunctionRuntimeConfig | None = ...
+    """
+    The customer-managed runtime configuration for your function. Specifies
+    the customer-managed runtime and the runtime alias that your function
+    uses.
     """
     response_metadata: ResponseMetadata = ...
     """

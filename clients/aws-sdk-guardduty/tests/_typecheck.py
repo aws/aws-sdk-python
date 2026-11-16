@@ -15,32 +15,43 @@ from aws_sdk_guardduty.models import (
     AccessKey,
     AccessKeyDetails,
     Account,
+    AccountAffectedResource,
+    AccountAnalysis,
     AccountDetail,
     AccountDetailDict,
     AccountFreeTrialInfo,
     AccountLevelPermissions,
+    AccountOverview,
     AccountStatistics,
+    AccountSummary,
     Action,
     Activity,
+    ActivityWindow,
     Actor,
     ActorProcess,
     AdditionalInfo,
     AddonDetails,
     AdminAccount,
     Administrator,
+    AffectedResource,
     AgentDetails,
+    AnalysisRecord,
     Anomaly,
     AnomalyObject,
     AnomalyUnusual,
     ApiCall,
+    ArchiveDistribution,
     ArchiveFindingsInput,
     ArchiveFindingsInputDict,
     ArchiveFindingsOutput,
     AssociationDetail,
     AssociationSummary,
+    Attack,
+    AttackPhase,
     AutonomousSystem,
     AutoscalingAutoScalingGroup,
     AwsApiCallAction,
+    Baseline,
     BedrockGuardrail,
     BedrockGuardrailDetails,
     BedrockGuardrailResource,
@@ -59,6 +70,9 @@ from aws_sdk_guardduty.models import (
     ContentPolicyFilter,
     ContinuousScanDetails,
     ContinuousScanDetailsDict,
+    CorrelatedFinding,
+    Countermeasure,
+    CountermeasureAction,
     Country,
     CoverageEc2InstanceDetails,
     CoverageEcsClusterDetails,
@@ -177,6 +191,7 @@ from aws_sdk_guardduty.models import (
     DestinationProperties,
     DestinationPropertiesDict,
     Detection,
+    DetectionCoverage,
     DetectionRuleEc2Requirements,
     DetectionRuleEcsFargateRequirements,
     DetectionRuleEksRequirements,
@@ -204,6 +219,8 @@ from aws_sdk_guardduty.models import (
     DisassociateMembersInput,
     DisassociateMembersInputDict,
     DisassociateMembersOutput,
+    Distribution,
+    DnsContext,
     DnsRequestAction,
     DomainDetails,
     EbsSnapshot,
@@ -226,8 +243,14 @@ from aws_sdk_guardduty.models import (
     EnableOrganizationAdminAccountInput,
     EnableOrganizationAdminAccountInputDict,
     EnableOrganizationAdminAccountOutput,
+    Enrichment,
     Evidence,
     FargateDetails,
+    FetchCriterion,
+    FetchQuery,
+    FetchRecord,
+    FetchResult,
+    FetchTimeWindow,
     FilterCondition,
     FilterConditionDict,
     FilterCriteria,
@@ -237,8 +260,14 @@ from aws_sdk_guardduty.models import (
     Finding,
     FindingCriteria,
     FindingCriteriaDict,
+    FindingDetail,
+    FindingReference,
     FindingStatistics,
+    FindingTypeClassification,
+    FindingTypeCount,
+    FindingTypeDocumentation,
     FindingTypeStatistics,
+    FindingsSummary,
     FlowLogsConfigurationResult,
     FreeTrialFeatureConfigurationResult,
     GeoLocation,
@@ -325,16 +354,39 @@ from aws_sdk_guardduty.models import (
     Indicator,
     InstanceDetails,
     Investigation,
+    InvestigationAccountAnalysis,
+    InvestigationActor,
+    InvestigationDetectorFeatureConfiguration,
+    InvestigationEc2Instance,
+    InvestigationEcsCluster,
+    InvestigationEksCluster,
+    InvestigationFilterCondition,
+    InvestigationFilterConditionDict,
+    InvestigationFilterCriteria,
+    InvestigationFilterCriteriaDict,
+    InvestigationIndicator,
+    InvestigationKubernetesWorkload,
+    InvestigationMalwareScan,
     InvestigationMetadata,
+    InvestigationRecord,
+    InvestigationResource,
+    InvestigationResourceData,
+    InvestigationScope,
     InvestigationSortCriteria,
     InvestigationSortCriteriaDict,
     InvestigationSummary,
+    InvestigationSummaryData,
+    InvestigationThreatAssessment,
     Invitation,
     InviteMembersInput,
     InviteMembersInputDict,
     InviteMembersOutput,
     ItemDetails,
     ItemPath,
+    KeyObservations,
+    KubernetesActivity,
+    KubernetesAnomaly,
+    KubernetesApiCall,
     KubernetesApiCallAction,
     KubernetesAuditLogsConfiguration,
     KubernetesAuditLogsConfigurationDict,
@@ -345,12 +397,14 @@ from aws_sdk_guardduty.models import (
     KubernetesDataSourceFreeTrial,
     KubernetesDetails,
     KubernetesPermissionCheckedDetails,
+    KubernetesPolicyViolation,
     KubernetesRoleBindingDetails,
     KubernetesRoleDetails,
     KubernetesUserDetails,
     KubernetesWorkload,
     KubernetesWorkloadDetails,
     LambdaDetails,
+    LambdaFunction,
     LineageObject,
     ListCoverageInput,
     ListCoverageInputDict,
@@ -376,6 +430,9 @@ from aws_sdk_guardduty.models import (
     ListIPSetsInput,
     ListIPSetsInputDict,
     ListIPSetsOutput,
+    ListInvestigationRecordsInput,
+    ListInvestigationRecordsInputDict,
+    ListInvestigationRecordsOutput,
     ListInvestigationsInput,
     ListInvestigationsInputDict,
     ListInvestigationsOutput,
@@ -429,8 +486,10 @@ from aws_sdk_guardduty.models import (
     MalwareProtectionPlanTaggingActionDict,
     MalwareScan,
     MalwareScanDetails,
+    MalwareThreat,
     Master,
     Member,
+    MemberAccountRanking,
     MemberAdditionalConfiguration,
     MemberAdditionalConfigurationDict,
     MemberAdditionalConfigurationResult,
@@ -438,17 +497,26 @@ from aws_sdk_guardduty.models import (
     MemberFeaturesConfiguration,
     MemberFeaturesConfigurationDict,
     MemberFeaturesConfigurationResult,
+    MetadataRecord,
     ModelDetail,
+    NetworkActivity,
+    NetworkAnomaly,
     NetworkConnection,
     NetworkConnectionAction,
+    NetworkCounts,
     NetworkEndpoint,
     NetworkGeoLocation,
     NetworkInterface,
+    NetworkPorts,
+    NetworkTraffic,
+    ObservationRecord,
     Observations,
+    ObservedFindingType,
     Organization,
     OrganizationAdditionalConfiguration,
     OrganizationAdditionalConfigurationDict,
     OrganizationAdditionalConfigurationResult,
+    OrganizationAnalysis,
     OrganizationDataSourceConfigurations,
     OrganizationDataSourceConfigurationsDict,
     OrganizationDataSourceConfigurationsResult,
@@ -461,6 +529,7 @@ from aws_sdk_guardduty.models import (
     OrganizationFeatureConfigurationResult,
     OrganizationFeatureStatistics,
     OrganizationFeatureStatisticsAdditionalConfiguration,
+    OrganizationFindingsSummary,
     OrganizationKubernetesAuditLogsConfiguration,
     OrganizationKubernetesAuditLogsConfigurationDict,
     OrganizationKubernetesAuditLogsConfigurationResult,
@@ -482,24 +551,35 @@ from aws_sdk_guardduty.models import (
     PortProbeAction,
     PortProbeDetail,
     PrivateIpAddressDetails,
+    Process,
     ProcessDetails,
     Product,
     ProductCode,
+    ProtectionPlan,
     PublicAccess,
     PublicAccessConfiguration,
+    QueryTimeWindow,
+    RdsDbInstance,
     RdsDbInstanceDetails,
+    RdsDbUser,
     RdsDbUserDetails,
     RdsLimitlessDbDetails,
+    RdsLoginActivity,
     RdsLoginAttemptAction,
+    Recommendation,
     RecoveryPoint,
     RecoveryPointDetails,
     RecoveryPointDict,
+    RelatedFindings,
     RemoteAccountDetails,
     RemoteIpDetails,
     RemotePortDetails,
+    RepresentativeFinding,
+    Reputation,
     Resource,
     ResourceData,
     ResourceDetails,
+    ResourceDistribution,
     ResourceStatistics,
     ResourceV2,
     RuleDefinition,
@@ -507,6 +587,9 @@ from aws_sdk_guardduty.models import (
     RuleSummary,
     RuntimeContext,
     RuntimeDetails,
+    RuntimeSignals,
+    S3Activity,
+    S3Analysis,
     S3Bucket,
     S3BucketDetail,
     S3LogsConfiguration,
@@ -546,8 +629,12 @@ from aws_sdk_guardduty.models import (
     Service,
     ServiceAdditionalInfo,
     Session,
+    SeverityBreakdown,
     SeverityStatistics,
+    SharedBehavior,
+    SharedResource,
     Signal,
+    SignalGroup,
     SortCriteria,
     SortCriteriaDict,
     StartMalwareScanConfiguration,
@@ -561,16 +648,23 @@ from aws_sdk_guardduty.models import (
     StopMonitoringMembersInput,
     StopMonitoringMembersInputDict,
     StopMonitoringMembersOutput,
+    TacticCoverage,
     Tag,
     TagResourceInput,
     TagResourceInputDict,
     TagResourceOutput,
+    TechniqueCoverage,
     Threat,
+    ThreatAssessment,
     ThreatDetectedByName,
     ThreatIntelligenceDetail,
+    ThreatReference,
     ThreatsDetectedItemCount,
+    TimeWindowGroup,
     Total,
+    Trend,
     TriggerDetails,
+    TypeDistribution,
     UnarchiveFindingsInput,
     UnarchiveFindingsInputDict,
     UnarchiveFindingsOutput,
@@ -656,30 +750,41 @@ AccessControlList()
 AccessKey()
 AccessKeyDetails()
 Account()
+AccountAffectedResource()
+AccountAnalysis()
 AccountDetail()
 AccountFreeTrialInfo()
 AccountLevelPermissions()
+AccountOverview()
 AccountStatistics()
+AccountSummary()
 Action()
 Activity()
+ActivityWindow()
 Actor()
 ActorProcess()
 AdditionalInfo()
 AddonDetails()
 AdminAccount()
 Administrator()
+AffectedResource()
 AgentDetails()
+AnalysisRecord()
 Anomaly()
 AnomalyObject()
 AnomalyUnusual()
 ApiCall()
+ArchiveDistribution()
 ArchiveFindingsInput()
 ArchiveFindingsOutput()
 AssociationDetail()
 AssociationSummary()
+Attack()
+AttackPhase()
 AutonomousSystem()
 AutoscalingAutoScalingGroup()
 AwsApiCallAction()
+Baseline()
 BedrockGuardrail()
 BedrockGuardrailDetails()
 BedrockGuardrailResource()
@@ -696,6 +801,9 @@ ContainerFindingResource()
 ContainerInstanceDetails()
 ContentPolicyFilter()
 ContinuousScanDetails(end_time=_)
+CorrelatedFinding()
+Countermeasure()
+CountermeasureAction()
 Country()
 CoverageEc2InstanceDetails()
 CoverageEcsClusterDetails()
@@ -776,6 +884,7 @@ DescribePublishingDestinationOutput()
 Destination()
 DestinationProperties()
 Detection()
+DetectionCoverage()
 DetectionRuleEc2Requirements()
 DetectionRuleEcsFargateRequirements()
 DetectionRuleEksRequirements()
@@ -796,6 +905,8 @@ DisassociateFromMasterAccountInput()
 DisassociateFromMasterAccountOutput()
 DisassociateMembersInput()
 DisassociateMembersOutput()
+Distribution()
+DnsContext()
 DNSLogsConfigurationResult()
 DnsRequestAction()
 DomainDetails()
@@ -818,14 +929,26 @@ EksCluster()
 EksClusterDetails()
 EnableOrganizationAdminAccountInput()
 EnableOrganizationAdminAccountOutput()
+Enrichment()
 Evidence()
 FargateDetails()
+FetchCriterion()
+FetchQuery()
+FetchRecord()
+FetchResult()
+FetchTimeWindow()
 FilterCondition()
 FilterCriteria()
 FilterCriterion()
 Finding()
 FindingCriteria()
+FindingDetail()
+FindingReference()
+FindingsSummary()
 FindingStatistics()
+FindingTypeClassification()
+FindingTypeCount()
+FindingTypeDocumentation()
 FindingTypeStatistics()
 FlowLogsConfigurationResult()
 FreeTrialFeatureConfigurationResult()
@@ -888,14 +1011,35 @@ IncrementalScanDetails()
 Indicator()
 InstanceDetails()
 Investigation()
+InvestigationAccountAnalysis()
+InvestigationActor()
+InvestigationDetectorFeatureConfiguration()
+InvestigationEc2Instance()
+InvestigationEcsCluster()
+InvestigationEksCluster()
+InvestigationFilterCondition()
+InvestigationFilterCriteria()
+InvestigationIndicator()
+InvestigationKubernetesWorkload()
+InvestigationMalwareScan()
 InvestigationMetadata()
+InvestigationRecord()
+InvestigationResource()
+InvestigationResourceData()
+InvestigationScope()
 InvestigationSortCriteria()
 InvestigationSummary()
+InvestigationSummaryData()
+InvestigationThreatAssessment()
 Invitation()
 InviteMembersInput()
 InviteMembersOutput()
 ItemDetails()
 ItemPath()
+KeyObservations()
+KubernetesActivity()
+KubernetesAnomaly()
+KubernetesApiCall()
 KubernetesApiCallAction()
 KubernetesAuditLogsConfiguration()
 KubernetesAuditLogsConfigurationResult()
@@ -904,12 +1048,14 @@ KubernetesConfigurationResult()
 KubernetesDataSourceFreeTrial()
 KubernetesDetails()
 KubernetesPermissionCheckedDetails()
+KubernetesPolicyViolation()
 KubernetesRoleBindingDetails()
 KubernetesRoleDetails()
 KubernetesUserDetails()
 KubernetesWorkload()
 KubernetesWorkloadDetails()
 LambdaDetails()
+LambdaFunction()
 LineageObject()
 ListCoverageInput()
 ListCoverageOutput()
@@ -925,6 +1071,8 @@ ListFiltersInput()
 ListFiltersOutput()
 ListFindingsInput()
 ListFindingsOutput()
+ListInvestigationRecordsInput()
+ListInvestigationRecordsOutput()
 ListInvestigationsInput()
 ListInvestigationsOutput()
 ListInvitationsInput()
@@ -964,23 +1112,34 @@ MalwareProtectionPlanSummary()
 MalwareProtectionPlanTaggingAction()
 MalwareScan()
 MalwareScanDetails()
+MalwareThreat()
 Master()
 Member()
+MemberAccountRanking()
 MemberAdditionalConfiguration()
 MemberAdditionalConfigurationResult()
 MemberDataSourceConfiguration()
 MemberFeaturesConfiguration()
 MemberFeaturesConfigurationResult()
+MetadataRecord()
 ModelDetail()
+NetworkActivity()
+NetworkAnomaly()
 NetworkConnection()
 NetworkConnectionAction()
+NetworkCounts()
 NetworkEndpoint()
 NetworkGeoLocation()
 NetworkInterface()
+NetworkPorts()
+NetworkTraffic()
+ObservationRecord()
 Observations()
+ObservedFindingType()
 Organization()
 OrganizationAdditionalConfiguration()
 OrganizationAdditionalConfigurationResult()
+OrganizationAnalysis()
 OrganizationDataSourceConfigurations()
 OrganizationDataSourceConfigurationsResult()
 OrganizationDetails()
@@ -990,6 +1149,7 @@ OrganizationFeatureConfiguration()
 OrganizationFeatureConfigurationResult()
 OrganizationFeatureStatistics()
 OrganizationFeatureStatisticsAdditionalConfiguration()
+OrganizationFindingsSummary()
 OrganizationKubernetesAuditLogsConfiguration()
 OrganizationKubernetesAuditLogsConfigurationResult()
 OrganizationKubernetesConfiguration()
@@ -1006,23 +1166,34 @@ PermissionConfiguration()
 PortProbeAction()
 PortProbeDetail()
 PrivateIpAddressDetails()
+Process()
 ProcessDetails()
 Product()
 ProductCode()
+ProtectionPlan()
 PublicAccess()
 PublicAccessConfiguration()
+QueryTimeWindow()
+RdsDbInstance()
 RdsDbInstanceDetails()
+RdsDbUser()
 RdsDbUserDetails()
 RdsLimitlessDbDetails()
+RdsLoginActivity()
 RdsLoginAttemptAction()
+Recommendation()
 RecoveryPoint()
 RecoveryPointDetails()
+RelatedFindings()
 RemoteAccountDetails()
 RemoteIpDetails()
 RemotePortDetails()
+RepresentativeFinding()
+Reputation()
 Resource()
 ResourceData()
 ResourceDetails()
+ResourceDistribution()
 ResourceStatistics()
 ResourceV2()
 RuleDefinition()
@@ -1030,6 +1201,9 @@ RuleDetail()
 RuleSummary()
 RuntimeContext()
 RuntimeDetails()
+RuntimeSignals()
+S3Activity()
+S3Analysis()
 S3Bucket()
 S3BucketDetail()
 S3LogsConfiguration()
@@ -1062,8 +1236,12 @@ Sequence()
 Service()
 ServiceAdditionalInfo()
 Session()
+SeverityBreakdown()
 SeverityStatistics()
+SharedBehavior()
+SharedResource()
 Signal()
+SignalGroup()
 SortCriteria()
 StartMalwareScanConfiguration()
 StartMalwareScanInput()
@@ -1072,15 +1250,22 @@ StartMonitoringMembersInput()
 StartMonitoringMembersOutput()
 StopMonitoringMembersInput()
 StopMonitoringMembersOutput()
+TacticCoverage()
 Tag()
 TagResourceInput()
 TagResourceOutput()
+TechniqueCoverage()
 Threat()
+ThreatAssessment()
 ThreatDetectedByName()
 ThreatIntelligenceDetail()
+ThreatReference()
 ThreatsDetectedItemCount()
+TimeWindowGroup()
 Total()
+Trend()
 TriggerDetails()
+TypeDistribution()
 UnarchiveFindingsInput()
 UnarchiveFindingsOutput()
 UnprocessedAccount()
@@ -1277,101 +1462,107 @@ _params_78: GetUsageStatisticsInputDict = {
     "usage_criteria": _,
 }
 _params_79: IncrementalScanDetailsDict = {"baseline_resource_arn": _}
-_params_80: InvestigationSortCriteriaDict = {}
-_params_81: InviteMembersInputDict = {"detector_id": _, "account_ids": _}
-_params_82: KubernetesAuditLogsConfigurationDict = {"enable": _}
-_params_83: KubernetesConfigurationDict = {"audit_logs": _}
-_params_84: ListCoverageInputDict = {"detector_id": _}
-_params_85: ListCustomDetectionRuleAssociationsInputDict = {}
-_params_86: ListCustomDetectionRuleOrgConfigurationsInputDict = {}
-_params_87: ListCustomDetectionRulesInputDict = {}
-_params_88: ListDetectorsInputDict = {}
-_params_89: ListFiltersInputDict = {"detector_id": _}
-_params_90: ListFindingsInputDict = {"detector_id": _}
-_params_91: ListInvestigationsInputDict = {"detector_id": _}
-_params_92: ListInvitationsInputDict = {}
-_params_93: ListIPSetsInputDict = {"detector_id": _}
-_params_94: ListMalwareProtectionPlansInputDict = {}
-_params_95: ListMalwareScansFilterCriteriaDict = {}
-_params_96: ListMalwareScansFilterCriterionDict = {}
-_params_97: ListMalwareScansInputDict = {}
-_params_98: ListMembersInputDict = {"detector_id": _}
-_params_99: ListOrganizationAdminAccountsInputDict = {}
-_params_100: ListPublishingDestinationsInputDict = {"detector_id": _}
-_params_101: ListTagsForResourceInputDict = {"resource_arn": _}
-_params_102: ListThreatEntitySetsInputDict = {"detector_id": _}
-_params_103: ListThreatIntelSetsInputDict = {"detector_id": _}
-_params_104: ListTrustedEntitySetsInputDict = {"detector_id": _}
-_params_105: MalwareProtectionConfigurationDict = {}
-_params_106: MalwareProtectionPlanActionsDict = {}
-_params_107: MalwareProtectionPlanTaggingActionDict = {}
-_params_108: MemberAdditionalConfigurationDict = {}
-_params_109: MemberFeaturesConfigurationDict = {}
-_params_110: OrganizationAdditionalConfigurationDict = {}
-_params_111: OrganizationDataSourceConfigurationsDict = {}
-_params_112: OrganizationEbsVolumesDict = {}
-_params_113: OrganizationFeatureConfigurationDict = {}
-_params_114: OrganizationKubernetesAuditLogsConfigurationDict = {"auto_enable": _}
-_params_115: OrganizationKubernetesConfigurationDict = {"audit_logs": _}
-_params_116: OrganizationMalwareProtectionConfigurationDict = {}
-_params_117: OrganizationS3LogsConfigurationDict = {"auto_enable": _}
-_params_118: OrganizationScanEc2InstanceWithFindingsDict = {}
-_params_119: RecoveryPointDict = {"backup_vault_name": _}
-_params_120: S3LogsConfigurationDict = {"enable": _}
-_params_121: S3ObjectForSendObjectMalwareScanDict = {}
-_params_122: ScanConditionDict = {"map_equals": _}
-_params_123: ScanConditionPairDict = {"key": _}
-_params_124: ScanEc2InstanceWithFindingsDict = {}
-_params_125: ScanResourceCriteriaDict = {}
-_params_126: SendObjectMalwareScanInputDict = {}
-_params_127: SortCriteriaDict = {}
-_params_128: StartMalwareScanConfigurationDict = {"role": _}
-_params_129: StartMalwareScanInputDict = {"resource_arn": _}
-_params_130: StartMonitoringMembersInputDict = {"detector_id": _, "account_ids": _}
-_params_131: StopMonitoringMembersInputDict = {"detector_id": _, "account_ids": _}
-_params_132: TagResourceInputDict = {"resource_arn": _, "tags": _}
-_params_133: UnarchiveFindingsInputDict = {"detector_id": _, "finding_ids": _}
-_params_134: UntagResourceInputDict = {"resource_arn": _, "tag_keys": _}
-_params_135: UpdateCustomDetectionRuleAssociationInputDict = {
+_params_80: InvestigationFilterConditionDict = {}
+_params_81: InvestigationFilterCriteriaDict = {}
+_params_82: InvestigationSortCriteriaDict = {}
+_params_83: InviteMembersInputDict = {"detector_id": _, "account_ids": _}
+_params_84: KubernetesAuditLogsConfigurationDict = {"enable": _}
+_params_85: KubernetesConfigurationDict = {"audit_logs": _}
+_params_86: ListCoverageInputDict = {"detector_id": _}
+_params_87: ListCustomDetectionRuleAssociationsInputDict = {}
+_params_88: ListCustomDetectionRuleOrgConfigurationsInputDict = {}
+_params_89: ListCustomDetectionRulesInputDict = {}
+_params_90: ListDetectorsInputDict = {}
+_params_91: ListFiltersInputDict = {"detector_id": _}
+_params_92: ListFindingsInputDict = {"detector_id": _}
+_params_93: ListInvestigationRecordsInputDict = {
+    "detector_id": _,
+    "investigation_id": _,
+}
+_params_94: ListInvestigationsInputDict = {"detector_id": _}
+_params_95: ListInvitationsInputDict = {}
+_params_96: ListIPSetsInputDict = {"detector_id": _}
+_params_97: ListMalwareProtectionPlansInputDict = {}
+_params_98: ListMalwareScansFilterCriteriaDict = {}
+_params_99: ListMalwareScansFilterCriterionDict = {}
+_params_100: ListMalwareScansInputDict = {}
+_params_101: ListMembersInputDict = {"detector_id": _}
+_params_102: ListOrganizationAdminAccountsInputDict = {}
+_params_103: ListPublishingDestinationsInputDict = {"detector_id": _}
+_params_104: ListTagsForResourceInputDict = {"resource_arn": _}
+_params_105: ListThreatEntitySetsInputDict = {"detector_id": _}
+_params_106: ListThreatIntelSetsInputDict = {"detector_id": _}
+_params_107: ListTrustedEntitySetsInputDict = {"detector_id": _}
+_params_108: MalwareProtectionConfigurationDict = {}
+_params_109: MalwareProtectionPlanActionsDict = {}
+_params_110: MalwareProtectionPlanTaggingActionDict = {}
+_params_111: MemberAdditionalConfigurationDict = {}
+_params_112: MemberFeaturesConfigurationDict = {}
+_params_113: OrganizationAdditionalConfigurationDict = {}
+_params_114: OrganizationDataSourceConfigurationsDict = {}
+_params_115: OrganizationEbsVolumesDict = {}
+_params_116: OrganizationFeatureConfigurationDict = {}
+_params_117: OrganizationKubernetesAuditLogsConfigurationDict = {"auto_enable": _}
+_params_118: OrganizationKubernetesConfigurationDict = {"audit_logs": _}
+_params_119: OrganizationMalwareProtectionConfigurationDict = {}
+_params_120: OrganizationS3LogsConfigurationDict = {"auto_enable": _}
+_params_121: OrganizationScanEc2InstanceWithFindingsDict = {}
+_params_122: RecoveryPointDict = {"backup_vault_name": _}
+_params_123: S3LogsConfigurationDict = {"enable": _}
+_params_124: S3ObjectForSendObjectMalwareScanDict = {}
+_params_125: ScanConditionDict = {"map_equals": _}
+_params_126: ScanConditionPairDict = {"key": _}
+_params_127: ScanEc2InstanceWithFindingsDict = {}
+_params_128: ScanResourceCriteriaDict = {}
+_params_129: SendObjectMalwareScanInputDict = {}
+_params_130: SortCriteriaDict = {}
+_params_131: StartMalwareScanConfigurationDict = {"role": _}
+_params_132: StartMalwareScanInputDict = {"resource_arn": _}
+_params_133: StartMonitoringMembersInputDict = {"detector_id": _, "account_ids": _}
+_params_134: StopMonitoringMembersInputDict = {"detector_id": _, "account_ids": _}
+_params_135: TagResourceInputDict = {"resource_arn": _, "tags": _}
+_params_136: UnarchiveFindingsInputDict = {"detector_id": _, "finding_ids": _}
+_params_137: UntagResourceInputDict = {"resource_arn": _, "tag_keys": _}
+_params_138: UpdateCustomDetectionRuleAssociationInputDict = {
     "rule_id": _,
     "association_id": _,
     "mode": _,
 }
-_params_136: UpdateCustomDetectionRuleOrgConfigurationInputDict = {
+_params_139: UpdateCustomDetectionRuleOrgConfigurationInputDict = {
     "rule_id": _,
     "mode": _,
 }
-_params_137: UpdateDetectorInputDict = {"detector_id": _}
-_params_138: UpdateFilterInputDict = {"detector_id": _, "filter_name": _}
-_params_139: UpdateFindingsFeedbackInputDict = {
+_params_140: UpdateDetectorInputDict = {"detector_id": _}
+_params_141: UpdateFilterInputDict = {"detector_id": _, "filter_name": _}
+_params_142: UpdateFindingsFeedbackInputDict = {
     "detector_id": _,
     "finding_ids": _,
     "feedback": _,
 }
-_params_140: UpdateIPSetInputDict = {"detector_id": _, "ip_set_id": _}
-_params_141: UpdateMalwareProtectionPlanInputDict = {"malware_protection_plan_id": _}
-_params_142: UpdateMalwareScanSettingsInputDict = {"detector_id": _}
-_params_143: UpdateMemberDetectorsInputDict = {"detector_id": _, "account_ids": _}
-_params_144: UpdateOrganizationConfigurationInputDict = {"detector_id": _}
-_params_145: UpdateProtectedResourceDict = {}
-_params_146: UpdatePublishingDestinationInputDict = {
+_params_143: UpdateIPSetInputDict = {"detector_id": _, "ip_set_id": _}
+_params_144: UpdateMalwareProtectionPlanInputDict = {"malware_protection_plan_id": _}
+_params_145: UpdateMalwareScanSettingsInputDict = {"detector_id": _}
+_params_146: UpdateMemberDetectorsInputDict = {"detector_id": _, "account_ids": _}
+_params_147: UpdateOrganizationConfigurationInputDict = {"detector_id": _}
+_params_148: UpdateProtectedResourceDict = {}
+_params_149: UpdatePublishingDestinationInputDict = {
     "detector_id": _,
     "destination_id": _,
 }
-_params_147: UpdateS3BucketResourceDict = {}
-_params_148: UpdateThreatEntitySetInputDict = {
+_params_150: UpdateS3BucketResourceDict = {}
+_params_151: UpdateThreatEntitySetInputDict = {
     "detector_id": _,
     "threat_entity_set_id": _,
 }
-_params_149: UpdateThreatIntelSetInputDict = {
+_params_152: UpdateThreatIntelSetInputDict = {
     "detector_id": _,
     "threat_intel_set_id": _,
 }
-_params_150: UpdateTrustedEntitySetInputDict = {
+_params_153: UpdateTrustedEntitySetInputDict = {
     "detector_id": _,
     "trusted_entity_set_id": _,
 }
-_params_151: UsageCriteriaDict = {}
+_params_154: UsageCriteriaDict = {}
 
 
 def _request[T](form: type[T]) -> T:
@@ -1798,6 +1989,12 @@ async def check_async_calls(client: AsyncGuardDutyClient) -> None:
     await client.list_findings(**_request(ListFindingsInputDict))
     await client.list_findings(_request(ListFindingsInput))
     await client.list_findings(_request(ListFindingsInputDict))
+    await client.list_investigation_records(detector_id=_, investigation_id=_)
+    await client.list_investigation_records(
+        **_request(ListInvestigationRecordsInputDict)
+    )
+    await client.list_investigation_records(_request(ListInvestigationRecordsInput))
+    await client.list_investigation_records(_request(ListInvestigationRecordsInputDict))
     await client.list_investigations(detector_id=_)
     await client.list_investigations(**_request(ListInvestigationsInputDict))
     await client.list_investigations(_request(ListInvestigationsInput))
@@ -2370,6 +2567,10 @@ def check_sync_calls(client: GuardDutyClient) -> None:
     client.list_findings(**_request(ListFindingsInputDict))
     client.list_findings(_request(ListFindingsInput))
     client.list_findings(_request(ListFindingsInputDict))
+    client.list_investigation_records(detector_id=_, investigation_id=_)
+    client.list_investigation_records(**_request(ListInvestigationRecordsInputDict))
+    client.list_investigation_records(_request(ListInvestigationRecordsInput))
+    client.list_investigation_records(_request(ListInvestigationRecordsInputDict))
     client.list_investigations(detector_id=_)
     client.list_investigations(**_request(ListInvestigationsInputDict))
     client.list_investigations(_request(ListInvestigationsInput))

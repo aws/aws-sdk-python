@@ -3,11 +3,9 @@
 from collections.abc import Sequence
 from dataclasses import dataclass
 from datetime import datetime
-from enum import StrEnum
 from typing import Required, TypedDict
 
 from smithy_core.response import ResponseMetadata
-from smithy_core.types import UnknownEnumMixin
 
 from ..models import (
     ActiveInstance,
@@ -20,9 +18,15 @@ from ..models import (
     CreateVolumePermission,
     Filter,
     FilterDict,
+    FlexCostAllocationPolicyAssociationDescription,
+    FlexCostAllocationPolicyDescription,
     GroupIdentifier,
     HistoryRecord,
+    InstanceCreditSpecification,
+    InstanceEventWindow,
+    InstanceImageMetadata,
     InstanceStatus,
+    InstanceTagNotificationAttribute,
     InstanceTopology,
     InstanceTypeInfo,
     InstanceTypeOffering,
@@ -52,6 +56,7 @@ from ..models import (
     MacHost,
     MacModificationTask,
     ManagedPrefixList,
+    MetricCategory,
     MovingAddressStatus,
     NatGateway,
     NetworkAcl,
@@ -71,6 +76,7 @@ from ..models import (
     Region,
     RegisteredInstance,
     ReplaceRootVolumeTask,
+    Reservation,
     ReservedInstances,
     ReservedInstancesListing,
     ReservedInstancesModification,
@@ -91,7 +97,6 @@ from ..models import (
     SecurityGroupRule,
     SecurityGroupVpcAssociation,
     ServiceConfiguration,
-    ServiceDetail,
     ServiceLinkVirtualInterface,
     SlotDateTimeRangeRequest,
     SlotDateTimeRangeRequestDict,
@@ -131,20 +136,1499 @@ from ..models import (
     Volume,
     VolumeModification,
     VolumeStatusItem,
-    Vpc,
     VpcBlockPublicAccessExclusion,
     VpcBlockPublicAccessOptions,
     VpcClassicLink,
     VpcEncryptionControl,
-    VpcEndpoint,
     VpcEndpointAssociation,
     VpcEndpointConnection,
-    VpcPeeringConnection,
-    VpnConcentrator,
-    VpnConnection,
-    VpnGateway,
     _SerdeShape,
 )
+
+@dataclass(kw_only=True)
+class DescribeInstanceCreditSpecificationsOutput(_SerdeShape):
+    """Dataclass for DescribeInstanceCreditSpecificationsOutput structure."""
+
+    instance_credit_specifications: list[InstanceCreditSpecification] | None = ...
+    """Information about the credit option for CPU usage of an instance."""
+    next_token: str | None = ...
+    """
+    The token to include in another request to get the next page of items.
+    This value is `null` when there are no more items to return.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DescribeInstanceEventNotificationAttributesInput(_SerdeShape):
+    """
+    Dataclass for DescribeInstanceEventNotificationAttributesInput
+    structure.
+    """
+
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class DescribeInstanceEventNotificationAttributesInputDict(TypedDict, total=False):
+    """Dictionary form of `DescribeInstanceEventNotificationAttributesInput`."""
+
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class DescribeInstanceEventNotificationAttributesOutput(_SerdeShape):
+    """
+    Dataclass for DescribeInstanceEventNotificationAttributesOutput
+    structure.
+    """
+
+    instance_tag_attribute: InstanceTagNotificationAttribute | None = ...
+    """Information about the registered tag keys."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DescribeInstanceEventWindowsInput(_SerdeShape):
+    """Describe instance event windows by InstanceEventWindow."""
+
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    instance_event_window_ids: list[str] | None = ...
+    """The IDs of the event windows."""
+    filters: list[Filter] | None = ...
+    """
+    One or more filters.
+
+    - `dedicated-host-id` - The event windows associated with the specified
+      Dedicated Host ID.
+
+    - `event-window-name` - The event windows associated with the specified
+      names.
+
+    - `instance-id` - The event windows associated with the specified
+      instance ID.
+
+    - `instance-tag` - The event windows associated with the specified tag
+      and value.
+
+    - `instance-tag-key` - The event windows associated with the specified
+      tag key, regardless of the value.
+
+    - `instance-tag-value` - The event windows associated with the specified
+      tag value, regardless of the key.
+
+    - `tag:``<key>`{=html} - The key/value combination of a tag assigned to
+      the event window. Use the tag key in the filter name and the tag value
+      as the filter value. For example, to find all resources that have a
+      tag with the key `Owner` and the value `CMX`, specify `tag:Owner` for
+      the filter name and `CMX` for the filter value.
+
+    - `tag-key` - The key of a tag assigned to the event window. Use this
+      filter to find all event windows that have a tag with a specific key,
+      regardless of the tag value.
+
+    - `tag-value` - The value of a tag assigned to the event window. Use
+      this filter to find all event windows that have a tag with a specific
+      value, regardless of the tag key.
+    """
+    max_results: int | None = ...
+    """
+    The maximum number of results to return in a single call. To retrieve
+    the remaining results, make another call with the returned `NextToken`
+    value. This value can be between 20 and 500. You cannot specify this
+    parameter and the event window IDs parameter in the same call.
+    """
+    next_token: str | None = ...
+    """The token to request the next page of results."""
+
+class DescribeInstanceEventWindowsInputDict(TypedDict, total=False):
+    """Dictionary form of `DescribeInstanceEventWindowsInput`."""
+
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    instance_event_window_ids: Sequence[str] | None
+    """The IDs of the event windows."""
+    filters: Sequence[Filter | FilterDict] | None
+    """
+    One or more filters.
+
+    - `dedicated-host-id` - The event windows associated with the specified
+      Dedicated Host ID.
+
+    - `event-window-name` - The event windows associated with the specified
+      names.
+
+    - `instance-id` - The event windows associated with the specified
+      instance ID.
+
+    - `instance-tag` - The event windows associated with the specified tag
+      and value.
+
+    - `instance-tag-key` - The event windows associated with the specified
+      tag key, regardless of the value.
+
+    - `instance-tag-value` - The event windows associated with the specified
+      tag value, regardless of the key.
+
+    - `tag:``<key>`{=html} - The key/value combination of a tag assigned to
+      the event window. Use the tag key in the filter name and the tag value
+      as the filter value. For example, to find all resources that have a
+      tag with the key `Owner` and the value `CMX`, specify `tag:Owner` for
+      the filter name and `CMX` for the filter value.
+
+    - `tag-key` - The key of a tag assigned to the event window. Use this
+      filter to find all event windows that have a tag with a specific key,
+      regardless of the tag value.
+
+    - `tag-value` - The value of a tag assigned to the event window. Use
+      this filter to find all event windows that have a tag with a specific
+      value, regardless of the tag key.
+    """
+    max_results: int | None
+    """
+    The maximum number of results to return in a single call. To retrieve
+    the remaining results, make another call with the returned `NextToken`
+    value. This value can be between 20 and 500. You cannot specify this
+    parameter and the event window IDs parameter in the same call.
+    """
+    next_token: str | None
+    """The token to request the next page of results."""
+
+@dataclass(kw_only=True)
+class DescribeInstanceEventWindowsOutput(_SerdeShape):
+    """Dataclass for DescribeInstanceEventWindowsOutput structure."""
+
+    instance_event_windows: list[InstanceEventWindow] | None = ...
+    """Information about the event windows."""
+    next_token: str | None = ...
+    """
+    The token to use to retrieve the next page of results. This value is
+    `null` when there are no more results to return.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DescribeInstanceImageMetadataInput(_SerdeShape):
+    """Dataclass for DescribeInstanceImageMetadataInput structure."""
+
+    filters: list[Filter] | None = ...
+    """
+    The filters.
+
+    - `availability-zone` - The name of the Availability Zone (for example,
+      `us-west-2a`) or Local Zone (for example, `us-west-2-lax-1b`) of the
+      instance.
+
+    - `instance-id` - The ID of the instance.
+
+    - `image-allowed` - A Boolean that indicates whether the image meets the
+      criteria specified for Allowed AMIs.
+
+    - `instance-state-name` - The state of the instance (`pending` |
+      `running` | `shutting-down` | `terminated` | `stopping` |
+      `stopped`).
+
+    - `instance-type` - The type of instance (for example, `t3.micro`).
+
+    - `launch-time` - The time when the instance was launched, in the ISO
+      8601 format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), for
+      example, `2023-09-29T11:04:43.305Z`. You can use a wildcard (`*`), for
+      example, `2023-09-29T*`, which matches an entire day.
+
+    - `owner-alias` - The owner alias (`amazon` | `aws-marketplace` |
+      `aws-backup-vault`). The valid aliases are defined in an
+      Amazon-maintained list. This is not the Amazon Web Services account
+      alias that can be set using the IAM console. We recommend that you use
+      the `Owner` request parameter instead of this filter.
+
+    - `owner-id` - The Amazon Web Services account ID of the owner. We
+      recommend that you use the `Owner` request parameter instead of this
+      filter.
+
+    - `tag:``<key>`{=html} - The key/value combination of a tag assigned to
+      the resource. Use the tag key in the filter name and the tag value as
+      the filter value. For example, to find all resources that have a tag
+      with the key `Owner` and the value `TeamA`, specify `tag:Owner` for
+      the filter name and `TeamA` for the filter value.
+
+    - `tag-key` - The key of a tag assigned to the resource. Use this filter
+      to find all resources assigned a tag with a specific key, regardless
+      of the tag value.
+
+    - `zone-id` - The ID of the Availability Zone (for example, `usw2-az2`)
+      or Local Zone (for example, `usw2-lax1-az1`) of the instance.
+    """
+    instance_ids: list[str] | None = ...
+    """
+    The instance IDs.
+
+    If you don't specify an instance ID or filters, the output includes
+    information for all instances.
+    """
+    max_results: int | None = ...
+    """
+    The maximum number of items to return for this request. To get the next
+    page of items, make another request with the token returned in the
+    output. For more information, see
+    [Pagination](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+
+    Default: 1000
+    """
+    next_token: str | None = ...
+    """
+    The token returned from a previous paginated request. Pagination
+    continues from the end of the items returned by the previous request.
+    """
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class DescribeInstanceImageMetadataInputDict(TypedDict, total=False):
+    """Dictionary form of `DescribeInstanceImageMetadataInput`."""
+
+    filters: Sequence[Filter | FilterDict] | None
+    """
+    The filters.
+
+    - `availability-zone` - The name of the Availability Zone (for example,
+      `us-west-2a`) or Local Zone (for example, `us-west-2-lax-1b`) of the
+      instance.
+
+    - `instance-id` - The ID of the instance.
+
+    - `image-allowed` - A Boolean that indicates whether the image meets the
+      criteria specified for Allowed AMIs.
+
+    - `instance-state-name` - The state of the instance (`pending` |
+      `running` | `shutting-down` | `terminated` | `stopping` |
+      `stopped`).
+
+    - `instance-type` - The type of instance (for example, `t3.micro`).
+
+    - `launch-time` - The time when the instance was launched, in the ISO
+      8601 format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), for
+      example, `2023-09-29T11:04:43.305Z`. You can use a wildcard (`*`), for
+      example, `2023-09-29T*`, which matches an entire day.
+
+    - `owner-alias` - The owner alias (`amazon` | `aws-marketplace` |
+      `aws-backup-vault`). The valid aliases are defined in an
+      Amazon-maintained list. This is not the Amazon Web Services account
+      alias that can be set using the IAM console. We recommend that you use
+      the `Owner` request parameter instead of this filter.
+
+    - `owner-id` - The Amazon Web Services account ID of the owner. We
+      recommend that you use the `Owner` request parameter instead of this
+      filter.
+
+    - `tag:``<key>`{=html} - The key/value combination of a tag assigned to
+      the resource. Use the tag key in the filter name and the tag value as
+      the filter value. For example, to find all resources that have a tag
+      with the key `Owner` and the value `TeamA`, specify `tag:Owner` for
+      the filter name and `TeamA` for the filter value.
+
+    - `tag-key` - The key of a tag assigned to the resource. Use this filter
+      to find all resources assigned a tag with a specific key, regardless
+      of the tag value.
+
+    - `zone-id` - The ID of the Availability Zone (for example, `usw2-az2`)
+      or Local Zone (for example, `usw2-lax1-az1`) of the instance.
+    """
+    instance_ids: Sequence[str] | None
+    """
+    The instance IDs.
+
+    If you don't specify an instance ID or filters, the output includes
+    information for all instances.
+    """
+    max_results: int | None
+    """
+    The maximum number of items to return for this request. To get the next
+    page of items, make another request with the token returned in the
+    output. For more information, see
+    [Pagination](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+
+    Default: 1000
+    """
+    next_token: str | None
+    """
+    The token returned from a previous paginated request. Pagination
+    continues from the end of the items returned by the previous request.
+    """
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class DescribeInstanceImageMetadataOutput(_SerdeShape):
+    """Dataclass for DescribeInstanceImageMetadataOutput structure."""
+
+    instance_image_metadata: list[InstanceImageMetadata] | None = ...
+    """Information about the instance and the AMI used to launch the instance."""
+    next_token: str | None = ...
+    """
+    The token to include in another request to get the next page of items.
+    This value is `null` when there are no more items to return.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DescribeInstancesInput(_SerdeShape):
+    """Dataclass for DescribeInstancesInput structure."""
+
+    instance_ids: list[str] | None = ...
+    """
+    The instance IDs.
+
+    Default: Describes all your instances.
+    """
+    include_managed_resources: bool | None = ...
+    """
+    Indicates whether to include managed resources in the output. If this
+    parameter is set to `true`, the output includes resources that are
+    managed by Amazon Web Services services, even if managed resource
+    visibility is set to hidden.
+    """
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the operation,
+    without actually making the request, and provides an error response. If
+    you have the required permissions, the error response is
+    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    """
+    filters: list[Filter] | None = ...
+    """
+    The filters.
+
+    - `affinity` - The affinity setting for an instance running on a
+      Dedicated Host (`default` | `host`).
+
+    - `architecture` - The instance architecture (`i386` | `x86_64` |
+      `arm64`).
+
+    - `availability-zone` - The Availability Zone of the instance.
+
+    - `availability-zone-id` - The ID of the Availability Zone of the
+      instance.
+
+    - `block-device-mapping.attach-time` - The attach time for an EBS volume
+      mapped to the instance, for example, `2022-09-15T17:15:20.000Z`.
+
+    - `block-device-mapping.delete-on-termination` - A Boolean that
+      indicates whether the EBS volume is deleted on instance termination.
+
+    - `block-device-mapping.device-name` - The device name specified in the
+      block device mapping (for example, `/dev/sdh` or `xvdh`).
+
+    - `block-device-mapping.status` - The status for the EBS volume
+      (`attaching` | `attached` | `detaching` | `detached`).
+
+    - `block-device-mapping.volume-id` - The volume ID of the EBS volume.
+
+    - `boot-mode` - The boot mode that was specified by the AMI
+      (`legacy-bios` | `uefi` | `uefi-preferred`).
+
+    - `capacity-reservation-id` - The ID of the Capacity Reservation into
+      which the instance was launched.
+
+    - `capacity-reservation-specification.capacity-reservation-preference` -
+      The instance's Capacity Reservation preference (`open` | `none`).
+
+    - `capacity-reservation-specification.capacity-reservation-target.capacity-reservation-id` -
+      The ID of the targeted Capacity Reservation.
+
+    - `capacity-reservation-specification.capacity-reservation-target.capacity-reservation-resource-group-arn` -
+      The ARN of the targeted Capacity Reservation group.
+
+    - `client-token` - The idempotency token you provided when you launched
+      the instance.
+
+    - `current-instance-boot-mode` - The boot mode that is used to launch
+      the instance at launch or start (`legacy-bios` | `uefi`).
+
+    - `dns-name` - The public DNS name of the instance.
+
+    - `ebs-optimized` - A Boolean that indicates whether the instance is
+      optimized for Amazon EBS I/O.
+
+    - `ena-support` - A Boolean that indicates whether the instance is
+      enabled for enhanced networking with ENA.
+
+    - `enclave-options.enabled` - A Boolean that indicates whether the
+      instance is enabled for Amazon Web Services Nitro Enclaves.
+
+    - `hibernation-options.configured` - A Boolean that indicates whether
+      the instance is enabled for hibernation. A value of `true` means that
+      the instance is enabled for hibernation.
+
+    - `host-id` - The ID of the Dedicated Host on which the instance is
+      running, if applicable.
+
+    - `hypervisor` - The hypervisor type of the instance (`ovm` | `xen`).
+      The value `xen` is used for both Xen and Nitro hypervisors.
+
+    - `iam-instance-profile.arn` - The instance profile associated with the
+      instance. Specified as an ARN.
+
+    - `iam-instance-profile.id` - The instance profile associated with the
+      instance. Specified as an ID.
+
+    - `image-id` - The ID of the image used to launch the instance.
+
+    - `instance-id` - The ID of the instance.
+
+    - `instance-lifecycle` - Indicates whether this is a Spot Instance, a
+      Scheduled Instance, or a Capacity Block (`spot` | `scheduled` |
+      `capacity-block`).
+
+    - `instance-state-code` - The state of the instance, as a 16-bit
+      unsigned integer. The high byte is used for internal purposes and
+      should be ignored. The low byte is set based on the state represented.
+      The valid values are: 0 (pending), 16 (running), 32 (shutting-down),
+      48 (terminated), 64 (stopping), and 80 (stopped).
+
+    - `instance-state-name` - The state of the instance (`pending` |
+      `running` | `shutting-down` | `terminated` | `stopping` |
+      `stopped`).
+
+    - `instance-type` - The type of instance (for example, `t2.micro`).
+
+    - `instance.group-id` - The ID of the security group for the instance.
+
+    - `instance.group-name` - The name of the security group for the
+      instance.
+
+    - `ip-address` - The public IPv4 address of the instance.
+
+    - `ipv6-address` - The IPv6 address of the instance.
+
+    - `kernel-id` - The kernel ID.
+
+    - `key-name` - The name of the key pair used when the instance was
+      launched.
+
+    - `launch-index` - When launching multiple instances, this is the index
+      for the instance in the launch group (for example, 0, 1, 2, and so
+      on).
+
+    - `launch-time` - The time when the instance was launched, in the ISO
+      8601 format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), for
+      example, `2021-09-29T11:04:43.305Z`. You can use a wildcard (`*`), for
+      example, `2021-09-29T*`, which matches an entire day.
+
+    - `maintenance-options.auto-recovery` - The current automatic recovery
+      behavior of the instance (`disabled` | `default`).
+
+    - `metadata-options.http-endpoint` - The status of access to the HTTP
+      metadata endpoint on your instance (`enabled` | `disabled`)
+
+    - `metadata-options.http-protocol-ipv4` - Indicates whether the IPv4
+      endpoint is enabled (`disabled` | `enabled`).
+
+    - `metadata-options.http-protocol-ipv6` - Indicates whether the IPv6
+      endpoint is enabled (`disabled` | `enabled`).
+
+    - `metadata-options.http-put-response-hop-limit` - The HTTP metadata
+      request put response hop limit (integer, possible values `1` to `64`)
+
+    - `metadata-options.http-tokens` - The metadata request authorization
+      state (`optional` | `required`)
+
+    - `metadata-options.instance-metadata-tags` - The status of access to
+      instance tags from the instance metadata (`enabled` | `disabled`)
+
+    - `metadata-options.state` - The state of the metadata option changes
+      (`pending` | `applied`).
+
+    - `monitoring-state` - Indicates whether detailed monitoring is enabled
+      (`disabled` | `enabled`).
+
+    - `network-interface.addresses.association.allocation-id` - The
+      allocation ID.
+
+    - `network-interface.addresses.association.association-id` - The
+      association ID.
+
+    - `network-interface.addresses.association.carrier-ip` - The carrier IP
+      address.
+
+    - `network-interface.addresses.association.customer-owned-ip` - The
+      customer-owned IP address.
+
+    - `network-interface.addresses.association.ip-owner-id` - The owner ID
+      of the private IPv4 address associated with the network interface.
+
+    - `network-interface.addresses.association.public-dns-name` - The public
+      DNS name.
+
+    - `network-interface.addresses.association.public-ip` - The ID of the
+      association of an Elastic IP address (IPv4) with a network interface.
+
+    - `network-interface.addresses.primary` - Specifies whether the IPv4
+      address of the network interface is the primary private IPv4 address.
+
+    - `network-interface.addresses.private-dns-name` - The private DNS name.
+
+    - `network-interface.addresses.private-ip-address` - The private IPv4
+      address associated with the network interface.
+
+    - `network-interface.association.allocation-id` - The allocation ID
+      returned when you allocated the Elastic IP address (IPv4) for your
+      network interface.
+
+    - `network-interface.association.association-id` - The association ID
+      returned when the network interface was associated with an IPv4
+      address.
+
+    - `network-interface.association.carrier-ip` - The customer-owned IP
+      address.
+
+    - `network-interface.association.customer-owned-ip` - The customer-owned
+      IP address.
+
+    - `network-interface.association.ip-owner-id` - The owner of the Elastic
+      IP address (IPv4) associated with the network interface.
+
+    - `network-interface.association.public-dns-name` - The public DNS name.
+
+    - `network-interface.association.public-ip` - The address of the Elastic
+      IP address (IPv4) bound to the network interface.
+
+    - `network-interface.attachment.attach-time` - The time that the network
+      interface was attached to an instance.
+
+    - `network-interface.attachment.attachment-id` - The ID of the interface
+      attachment.
+
+    - `network-interface.attachment.delete-on-termination` - Specifies
+      whether the attachment is deleted when an instance is terminated.
+
+    - `network-interface.attachment.device-index` - The device index to
+      which the network interface is attached.
+
+    - `network-interface.attachment.instance-id` - The ID of the instance to
+      which the network interface is attached.
+
+    - `network-interface.attachment.instance-owner-id` - The owner ID of the
+      instance to which the network interface is attached.
+
+    - `network-interface.attachment.network-card-index` - The index of the
+      network card.
+
+    - `network-interface.attachment.status` - The status of the attachment
+      (`attaching` | `attached` | `detaching` | `detached`).
+
+    - `network-interface.availability-zone` - The Availability Zone for the
+      network interface.
+
+    - `network-interface.deny-all-igw-traffic` - A Boolean that indicates
+      whether a network interface with an IPv6 address is unreachable from
+      the public internet.
+
+    - `network-interface.description` - The description of the network
+      interface.
+
+    - `network-interface.group-id` - The ID of a security group associated
+      with the network interface.
+
+    - `network-interface.group-name` - The name of a security group
+      associated with the network interface.
+
+    - `network-interface.ipv4-prefixes.ipv4-prefix` - The IPv4 prefixes that
+      are assigned to the network interface.
+
+    - `network-interface.ipv6-address` - The IPv6 address associated with
+      the network interface.
+
+    - `network-interface.ipv6-addresses.ipv6-address` - The IPv6 address
+      associated with the network interface.
+
+    - `network-interface.ipv6-addresses.is-primary-ipv6` - A Boolean that
+      indicates whether this is the primary IPv6 address.
+
+    - `network-interface.ipv6-native` - A Boolean that indicates whether
+      this is an IPv6 only network interface.
+
+    - `network-interface.ipv6-prefixes.ipv6-prefix` - The IPv6 prefix
+      assigned to the network interface.
+
+    - `network-interface.mac-address` - The MAC address of the network
+      interface.
+
+    - `network-interface.network-interface-id` - The ID of the network
+      interface.
+
+    - `network-interface.operator.managed` - A Boolean that indicates
+      whether the instance has a managed network interface.
+
+    - `network-interface.operator.principal` - The principal that manages
+      the network interface. Only valid for instances with managed network
+      interfaces, where `managed` is `true`.
+
+    - `network-interface.outpost-arn` - The ARN of the Outpost.
+
+    - `network-interface.owner-id` - The ID of the owner of the network
+      interface.
+
+    - `network-interface.private-dns-name` - The private DNS name of the
+      network interface.
+
+    - `network-interface.private-ip-address` - The private IPv4 address.
+
+    - `network-interface.public-dns-name` - The public DNS name.
+
+    - `network-interface.requester-id` - The requester ID for the network
+      interface.
+
+    - `network-interface.requester-managed` - Indicates whether the network
+      interface is being managed by Amazon Web Services.
+
+    - `network-interface.status` - The status of the network interface
+      (`available`) | `in-use`).
+
+    - `network-interface.source-dest-check` - Whether the network interface
+      performs source/destination checking. A value of `true` means that
+      checking is enabled, and `false` means that checking is disabled. The
+      value must be `false` for the network interface to perform network
+      address translation (NAT) in your VPC.
+
+    - `network-interface.subnet-id` - The ID of the subnet for the network
+      interface.
+
+    - `network-interface.tag-key` - The key of a tag assigned to the network
+      interface.
+
+    - `network-interface.tag-value` - The value of a tag assigned to the
+      network interface.
+
+    - `network-interface.vpc-id` - The ID of the VPC for the network
+      interface.
+
+    - `network-performance-options.bandwidth-weighting` - Where the
+      performance boost is applied, if applicable. Valid values: `default`,
+      `vpc-1`, `ebs-1`.
+
+    - `operator.managed` - A Boolean that indicates whether this is a
+      managed instance.
+
+    - `operator.principal` - The principal that manages the instance. Only
+      valid for managed instances, where `managed` is `true`.
+
+    - `outpost-arn` - The Amazon Resource Name (ARN) of the Outpost.
+
+    - `owner-id` - The Amazon Web Services account ID of the instance owner.
+
+    - `placement-group-name` - The name of the placement group for the
+      instance.
+
+    - `placement-partition-number` - The partition in which the instance is
+      located.
+
+    - `platform` - The platform. To list only Windows instances, use
+      `windows`.
+
+    - `platform-details` - The platform (`Linux/UNIX` |
+      `Red Hat BYOL Linux` | ` Red Hat Enterprise Linux` |
+      `Red Hat Enterprise Linux with HA` |
+      `Red Hat Enterprise Linux with High Availability` |
+      `Red Hat Enterprise Linux with SQL Server Standard and HA` |
+      `Red Hat Enterprise Linux with SQL Server Enterprise and HA` |
+      `Red Hat Enterprise Linux with SQL Server Standard` |
+      `Red Hat Enterprise Linux with SQL Server Web` |
+      `Red Hat Enterprise Linux with SQL Server Enterprise` |
+      `SQL Server Enterprise` | `SQL Server Standard` | `SQL Server Web`
+      | `SUSE Linux` | `Ubuntu Pro` | `Windows` | `Windows BYOL` |
+      `Windows with SQL Server Enterprise` |
+      `Windows with SQL Server Standard` | `Windows with SQL Server Web`).
+
+    - `private-dns-name` - The private IPv4 DNS name of the instance.
+
+    - `private-dns-name-options.enable-resource-name-dns-a-record` - A
+      Boolean that indicates whether to respond to DNS queries for instance
+      hostnames with DNS A records.
+
+    - `private-dns-name-options.enable-resource-name-dns-aaaa-record` - A
+      Boolean that indicates whether to respond to DNS queries for instance
+      hostnames with DNS AAAA records.
+
+    - `private-dns-name-options.hostname-type` - The type of hostname
+      (`ip-name` | `resource-name`).
+
+    - `private-ip-address` - The private IPv4 address of the instance. This
+      can only be used to filter by the primary IP address of the network
+      interface attached to the instance. To filter by additional IP
+      addresses assigned to the network interface, use the filter
+      `network-interface.addresses.private-ip-address`.
+
+    - `product-code` - The product code associated with the AMI used to
+      launch the instance.
+
+    - `product-code.type` - The type of product code (`devpay` |
+      `marketplace`).
+
+    - `ramdisk-id` - The RAM disk ID.
+
+    - `reason` - The reason for the current state of the instance (for
+      example, shows \"User Initiated [date]\" when you stop or terminate
+      the instance). Similar to the state-reason-code filter.
+
+    - `requester-id` - The ID of the entity that launched the instance on
+      your behalf (for example, Amazon Web Services Management Console, Auto
+      Scaling, and so on).
+
+    - `reservation-id` - The ID of the instance's reservation. A
+      reservation ID is created any time you launch an instance. A
+      reservation ID has a one-to-one relationship with an instance launch
+      request, but can be associated with more than one instance if you
+      launch multiple instances using the same launch request. For example,
+      if you launch one instance, you get one reservation ID. If you launch
+      ten instances using the same launch request, you also get one
+      reservation ID.
+
+    - `root-device-name` - The device name of the root device volume (for
+      example, `/dev/sda1`).
+
+    - `root-device-type` - The type of the root device volume (`ebs` |
+      `instance-store`).
+
+    - `source-dest-check` - Indicates whether the instance performs
+      source/destination checking. A value of `true` means that checking is
+      enabled, and `false` means that checking is disabled. The value must
+      be `false` for the instance to perform network address translation
+      (NAT) in your VPC.
+
+    - `spot-instance-request-id` - The ID of the Spot Instance request.
+
+    - `state-reason-code` - The reason code for the state change.
+
+    - `state-reason-message` - A message that describes the state change.
+
+    - `subnet-id` - The ID of the subnet for the instance.
+
+    - `tag:``<key>`{=html} - The key/value combination of a tag assigned to
+      the resource. Use the tag key in the filter name and the tag value as
+      the filter value. For example, to find all resources that have a tag
+      with the key `Owner` and the value `TeamA`, specify `tag:Owner` for
+      the filter name and `TeamA` for the filter value.
+
+    - `tag-key` - The key of a tag assigned to the resource. Use this filter
+      to find all resources that have a tag with a specific key, regardless
+      of the tag value.
+
+    - `tenancy` - The tenancy of an instance (`dedicated` | `default` |
+      `host`).
+
+    - `tpm-support` - Indicates if the instance is configured for NitroTPM
+      support (`v2.0`).
+
+    - `usage-operation` - The usage operation value for the instance
+      (`RunInstances` | `RunInstances:00g0` | `RunInstances:0010` |
+      `RunInstances:1010` | `RunInstances:1014` | `RunInstances:1110` |
+      `RunInstances:0014` | `RunInstances:0210` | `RunInstances:0110` |
+      `RunInstances:0100` | `RunInstances:0004` | `RunInstances:0200` |
+      `RunInstances:000g` | `RunInstances:0g00` | `RunInstances:0002` |
+      `RunInstances:0800` | `RunInstances:0102` | `RunInstances:0006` |
+      `RunInstances:0202`).
+
+    - `usage-operation-update-time` - The time that the usage operation was
+      last updated, for example, `2022-09-15T17:15:20.000Z`.
+
+    - `virtualization-type` - The virtualization type of the instance
+      (`paravirtual` | `hvm`).
+
+    - `vpc-id` - The ID of the VPC that the instance is running in.
+    """
+    next_token: str | None = ...
+    """
+    The token returned from a previous paginated request. Pagination
+    continues from the end of the items returned by the previous request.
+    """
+    max_results: int | None = ...
+    """
+    The maximum number of items to return for this request. To get the next
+    page of items, make another request with the token returned in the
+    output. For more information, see
+    [Pagination](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+
+    You cannot specify this parameter and the instance IDs parameter in the
+    same request.
+    """
+
+class DescribeInstancesInputDict(TypedDict, total=False):
+    """Dictionary form of `DescribeInstancesInput`."""
+
+    instance_ids: Sequence[str] | None
+    """
+    The instance IDs.
+
+    Default: Describes all your instances.
+    """
+    include_managed_resources: bool | None
+    """
+    Indicates whether to include managed resources in the output. If this
+    parameter is set to `true`, the output includes resources that are
+    managed by Amazon Web Services services, even if managed resource
+    visibility is set to hidden.
+    """
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the operation,
+    without actually making the request, and provides an error response. If
+    you have the required permissions, the error response is
+    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    """
+    filters: Sequence[Filter | FilterDict] | None
+    """
+    The filters.
+
+    - `affinity` - The affinity setting for an instance running on a
+      Dedicated Host (`default` | `host`).
+
+    - `architecture` - The instance architecture (`i386` | `x86_64` |
+      `arm64`).
+
+    - `availability-zone` - The Availability Zone of the instance.
+
+    - `availability-zone-id` - The ID of the Availability Zone of the
+      instance.
+
+    - `block-device-mapping.attach-time` - The attach time for an EBS volume
+      mapped to the instance, for example, `2022-09-15T17:15:20.000Z`.
+
+    - `block-device-mapping.delete-on-termination` - A Boolean that
+      indicates whether the EBS volume is deleted on instance termination.
+
+    - `block-device-mapping.device-name` - The device name specified in the
+      block device mapping (for example, `/dev/sdh` or `xvdh`).
+
+    - `block-device-mapping.status` - The status for the EBS volume
+      (`attaching` | `attached` | `detaching` | `detached`).
+
+    - `block-device-mapping.volume-id` - The volume ID of the EBS volume.
+
+    - `boot-mode` - The boot mode that was specified by the AMI
+      (`legacy-bios` | `uefi` | `uefi-preferred`).
+
+    - `capacity-reservation-id` - The ID of the Capacity Reservation into
+      which the instance was launched.
+
+    - `capacity-reservation-specification.capacity-reservation-preference` -
+      The instance's Capacity Reservation preference (`open` | `none`).
+
+    - `capacity-reservation-specification.capacity-reservation-target.capacity-reservation-id` -
+      The ID of the targeted Capacity Reservation.
+
+    - `capacity-reservation-specification.capacity-reservation-target.capacity-reservation-resource-group-arn` -
+      The ARN of the targeted Capacity Reservation group.
+
+    - `client-token` - The idempotency token you provided when you launched
+      the instance.
+
+    - `current-instance-boot-mode` - The boot mode that is used to launch
+      the instance at launch or start (`legacy-bios` | `uefi`).
+
+    - `dns-name` - The public DNS name of the instance.
+
+    - `ebs-optimized` - A Boolean that indicates whether the instance is
+      optimized for Amazon EBS I/O.
+
+    - `ena-support` - A Boolean that indicates whether the instance is
+      enabled for enhanced networking with ENA.
+
+    - `enclave-options.enabled` - A Boolean that indicates whether the
+      instance is enabled for Amazon Web Services Nitro Enclaves.
+
+    - `hibernation-options.configured` - A Boolean that indicates whether
+      the instance is enabled for hibernation. A value of `true` means that
+      the instance is enabled for hibernation.
+
+    - `host-id` - The ID of the Dedicated Host on which the instance is
+      running, if applicable.
+
+    - `hypervisor` - The hypervisor type of the instance (`ovm` | `xen`).
+      The value `xen` is used for both Xen and Nitro hypervisors.
+
+    - `iam-instance-profile.arn` - The instance profile associated with the
+      instance. Specified as an ARN.
+
+    - `iam-instance-profile.id` - The instance profile associated with the
+      instance. Specified as an ID.
+
+    - `image-id` - The ID of the image used to launch the instance.
+
+    - `instance-id` - The ID of the instance.
+
+    - `instance-lifecycle` - Indicates whether this is a Spot Instance, a
+      Scheduled Instance, or a Capacity Block (`spot` | `scheduled` |
+      `capacity-block`).
+
+    - `instance-state-code` - The state of the instance, as a 16-bit
+      unsigned integer. The high byte is used for internal purposes and
+      should be ignored. The low byte is set based on the state represented.
+      The valid values are: 0 (pending), 16 (running), 32 (shutting-down),
+      48 (terminated), 64 (stopping), and 80 (stopped).
+
+    - `instance-state-name` - The state of the instance (`pending` |
+      `running` | `shutting-down` | `terminated` | `stopping` |
+      `stopped`).
+
+    - `instance-type` - The type of instance (for example, `t2.micro`).
+
+    - `instance.group-id` - The ID of the security group for the instance.
+
+    - `instance.group-name` - The name of the security group for the
+      instance.
+
+    - `ip-address` - The public IPv4 address of the instance.
+
+    - `ipv6-address` - The IPv6 address of the instance.
+
+    - `kernel-id` - The kernel ID.
+
+    - `key-name` - The name of the key pair used when the instance was
+      launched.
+
+    - `launch-index` - When launching multiple instances, this is the index
+      for the instance in the launch group (for example, 0, 1, 2, and so
+      on).
+
+    - `launch-time` - The time when the instance was launched, in the ISO
+      8601 format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), for
+      example, `2021-09-29T11:04:43.305Z`. You can use a wildcard (`*`), for
+      example, `2021-09-29T*`, which matches an entire day.
+
+    - `maintenance-options.auto-recovery` - The current automatic recovery
+      behavior of the instance (`disabled` | `default`).
+
+    - `metadata-options.http-endpoint` - The status of access to the HTTP
+      metadata endpoint on your instance (`enabled` | `disabled`)
+
+    - `metadata-options.http-protocol-ipv4` - Indicates whether the IPv4
+      endpoint is enabled (`disabled` | `enabled`).
+
+    - `metadata-options.http-protocol-ipv6` - Indicates whether the IPv6
+      endpoint is enabled (`disabled` | `enabled`).
+
+    - `metadata-options.http-put-response-hop-limit` - The HTTP metadata
+      request put response hop limit (integer, possible values `1` to `64`)
+
+    - `metadata-options.http-tokens` - The metadata request authorization
+      state (`optional` | `required`)
+
+    - `metadata-options.instance-metadata-tags` - The status of access to
+      instance tags from the instance metadata (`enabled` | `disabled`)
+
+    - `metadata-options.state` - The state of the metadata option changes
+      (`pending` | `applied`).
+
+    - `monitoring-state` - Indicates whether detailed monitoring is enabled
+      (`disabled` | `enabled`).
+
+    - `network-interface.addresses.association.allocation-id` - The
+      allocation ID.
+
+    - `network-interface.addresses.association.association-id` - The
+      association ID.
+
+    - `network-interface.addresses.association.carrier-ip` - The carrier IP
+      address.
+
+    - `network-interface.addresses.association.customer-owned-ip` - The
+      customer-owned IP address.
+
+    - `network-interface.addresses.association.ip-owner-id` - The owner ID
+      of the private IPv4 address associated with the network interface.
+
+    - `network-interface.addresses.association.public-dns-name` - The public
+      DNS name.
+
+    - `network-interface.addresses.association.public-ip` - The ID of the
+      association of an Elastic IP address (IPv4) with a network interface.
+
+    - `network-interface.addresses.primary` - Specifies whether the IPv4
+      address of the network interface is the primary private IPv4 address.
+
+    - `network-interface.addresses.private-dns-name` - The private DNS name.
+
+    - `network-interface.addresses.private-ip-address` - The private IPv4
+      address associated with the network interface.
+
+    - `network-interface.association.allocation-id` - The allocation ID
+      returned when you allocated the Elastic IP address (IPv4) for your
+      network interface.
+
+    - `network-interface.association.association-id` - The association ID
+      returned when the network interface was associated with an IPv4
+      address.
+
+    - `network-interface.association.carrier-ip` - The customer-owned IP
+      address.
+
+    - `network-interface.association.customer-owned-ip` - The customer-owned
+      IP address.
+
+    - `network-interface.association.ip-owner-id` - The owner of the Elastic
+      IP address (IPv4) associated with the network interface.
+
+    - `network-interface.association.public-dns-name` - The public DNS name.
+
+    - `network-interface.association.public-ip` - The address of the Elastic
+      IP address (IPv4) bound to the network interface.
+
+    - `network-interface.attachment.attach-time` - The time that the network
+      interface was attached to an instance.
+
+    - `network-interface.attachment.attachment-id` - The ID of the interface
+      attachment.
+
+    - `network-interface.attachment.delete-on-termination` - Specifies
+      whether the attachment is deleted when an instance is terminated.
+
+    - `network-interface.attachment.device-index` - The device index to
+      which the network interface is attached.
+
+    - `network-interface.attachment.instance-id` - The ID of the instance to
+      which the network interface is attached.
+
+    - `network-interface.attachment.instance-owner-id` - The owner ID of the
+      instance to which the network interface is attached.
+
+    - `network-interface.attachment.network-card-index` - The index of the
+      network card.
+
+    - `network-interface.attachment.status` - The status of the attachment
+      (`attaching` | `attached` | `detaching` | `detached`).
+
+    - `network-interface.availability-zone` - The Availability Zone for the
+      network interface.
+
+    - `network-interface.deny-all-igw-traffic` - A Boolean that indicates
+      whether a network interface with an IPv6 address is unreachable from
+      the public internet.
+
+    - `network-interface.description` - The description of the network
+      interface.
+
+    - `network-interface.group-id` - The ID of a security group associated
+      with the network interface.
+
+    - `network-interface.group-name` - The name of a security group
+      associated with the network interface.
+
+    - `network-interface.ipv4-prefixes.ipv4-prefix` - The IPv4 prefixes that
+      are assigned to the network interface.
+
+    - `network-interface.ipv6-address` - The IPv6 address associated with
+      the network interface.
+
+    - `network-interface.ipv6-addresses.ipv6-address` - The IPv6 address
+      associated with the network interface.
+
+    - `network-interface.ipv6-addresses.is-primary-ipv6` - A Boolean that
+      indicates whether this is the primary IPv6 address.
+
+    - `network-interface.ipv6-native` - A Boolean that indicates whether
+      this is an IPv6 only network interface.
+
+    - `network-interface.ipv6-prefixes.ipv6-prefix` - The IPv6 prefix
+      assigned to the network interface.
+
+    - `network-interface.mac-address` - The MAC address of the network
+      interface.
+
+    - `network-interface.network-interface-id` - The ID of the network
+      interface.
+
+    - `network-interface.operator.managed` - A Boolean that indicates
+      whether the instance has a managed network interface.
+
+    - `network-interface.operator.principal` - The principal that manages
+      the network interface. Only valid for instances with managed network
+      interfaces, where `managed` is `true`.
+
+    - `network-interface.outpost-arn` - The ARN of the Outpost.
+
+    - `network-interface.owner-id` - The ID of the owner of the network
+      interface.
+
+    - `network-interface.private-dns-name` - The private DNS name of the
+      network interface.
+
+    - `network-interface.private-ip-address` - The private IPv4 address.
+
+    - `network-interface.public-dns-name` - The public DNS name.
+
+    - `network-interface.requester-id` - The requester ID for the network
+      interface.
+
+    - `network-interface.requester-managed` - Indicates whether the network
+      interface is being managed by Amazon Web Services.
+
+    - `network-interface.status` - The status of the network interface
+      (`available`) | `in-use`).
+
+    - `network-interface.source-dest-check` - Whether the network interface
+      performs source/destination checking. A value of `true` means that
+      checking is enabled, and `false` means that checking is disabled. The
+      value must be `false` for the network interface to perform network
+      address translation (NAT) in your VPC.
+
+    - `network-interface.subnet-id` - The ID of the subnet for the network
+      interface.
+
+    - `network-interface.tag-key` - The key of a tag assigned to the network
+      interface.
+
+    - `network-interface.tag-value` - The value of a tag assigned to the
+      network interface.
+
+    - `network-interface.vpc-id` - The ID of the VPC for the network
+      interface.
+
+    - `network-performance-options.bandwidth-weighting` - Where the
+      performance boost is applied, if applicable. Valid values: `default`,
+      `vpc-1`, `ebs-1`.
+
+    - `operator.managed` - A Boolean that indicates whether this is a
+      managed instance.
+
+    - `operator.principal` - The principal that manages the instance. Only
+      valid for managed instances, where `managed` is `true`.
+
+    - `outpost-arn` - The Amazon Resource Name (ARN) of the Outpost.
+
+    - `owner-id` - The Amazon Web Services account ID of the instance owner.
+
+    - `placement-group-name` - The name of the placement group for the
+      instance.
+
+    - `placement-partition-number` - The partition in which the instance is
+      located.
+
+    - `platform` - The platform. To list only Windows instances, use
+      `windows`.
+
+    - `platform-details` - The platform (`Linux/UNIX` |
+      `Red Hat BYOL Linux` | ` Red Hat Enterprise Linux` |
+      `Red Hat Enterprise Linux with HA` |
+      `Red Hat Enterprise Linux with High Availability` |
+      `Red Hat Enterprise Linux with SQL Server Standard and HA` |
+      `Red Hat Enterprise Linux with SQL Server Enterprise and HA` |
+      `Red Hat Enterprise Linux with SQL Server Standard` |
+      `Red Hat Enterprise Linux with SQL Server Web` |
+      `Red Hat Enterprise Linux with SQL Server Enterprise` |
+      `SQL Server Enterprise` | `SQL Server Standard` | `SQL Server Web`
+      | `SUSE Linux` | `Ubuntu Pro` | `Windows` | `Windows BYOL` |
+      `Windows with SQL Server Enterprise` |
+      `Windows with SQL Server Standard` | `Windows with SQL Server Web`).
+
+    - `private-dns-name` - The private IPv4 DNS name of the instance.
+
+    - `private-dns-name-options.enable-resource-name-dns-a-record` - A
+      Boolean that indicates whether to respond to DNS queries for instance
+      hostnames with DNS A records.
+
+    - `private-dns-name-options.enable-resource-name-dns-aaaa-record` - A
+      Boolean that indicates whether to respond to DNS queries for instance
+      hostnames with DNS AAAA records.
+
+    - `private-dns-name-options.hostname-type` - The type of hostname
+      (`ip-name` | `resource-name`).
+
+    - `private-ip-address` - The private IPv4 address of the instance. This
+      can only be used to filter by the primary IP address of the network
+      interface attached to the instance. To filter by additional IP
+      addresses assigned to the network interface, use the filter
+      `network-interface.addresses.private-ip-address`.
+
+    - `product-code` - The product code associated with the AMI used to
+      launch the instance.
+
+    - `product-code.type` - The type of product code (`devpay` |
+      `marketplace`).
+
+    - `ramdisk-id` - The RAM disk ID.
+
+    - `reason` - The reason for the current state of the instance (for
+      example, shows \"User Initiated [date]\" when you stop or terminate
+      the instance). Similar to the state-reason-code filter.
+
+    - `requester-id` - The ID of the entity that launched the instance on
+      your behalf (for example, Amazon Web Services Management Console, Auto
+      Scaling, and so on).
+
+    - `reservation-id` - The ID of the instance's reservation. A
+      reservation ID is created any time you launch an instance. A
+      reservation ID has a one-to-one relationship with an instance launch
+      request, but can be associated with more than one instance if you
+      launch multiple instances using the same launch request. For example,
+      if you launch one instance, you get one reservation ID. If you launch
+      ten instances using the same launch request, you also get one
+      reservation ID.
+
+    - `root-device-name` - The device name of the root device volume (for
+      example, `/dev/sda1`).
+
+    - `root-device-type` - The type of the root device volume (`ebs` |
+      `instance-store`).
+
+    - `source-dest-check` - Indicates whether the instance performs
+      source/destination checking. A value of `true` means that checking is
+      enabled, and `false` means that checking is disabled. The value must
+      be `false` for the instance to perform network address translation
+      (NAT) in your VPC.
+
+    - `spot-instance-request-id` - The ID of the Spot Instance request.
+
+    - `state-reason-code` - The reason code for the state change.
+
+    - `state-reason-message` - A message that describes the state change.
+
+    - `subnet-id` - The ID of the subnet for the instance.
+
+    - `tag:``<key>`{=html} - The key/value combination of a tag assigned to
+      the resource. Use the tag key in the filter name and the tag value as
+      the filter value. For example, to find all resources that have a tag
+      with the key `Owner` and the value `TeamA`, specify `tag:Owner` for
+      the filter name and `TeamA` for the filter value.
+
+    - `tag-key` - The key of a tag assigned to the resource. Use this filter
+      to find all resources that have a tag with a specific key, regardless
+      of the tag value.
+
+    - `tenancy` - The tenancy of an instance (`dedicated` | `default` |
+      `host`).
+
+    - `tpm-support` - Indicates if the instance is configured for NitroTPM
+      support (`v2.0`).
+
+    - `usage-operation` - The usage operation value for the instance
+      (`RunInstances` | `RunInstances:00g0` | `RunInstances:0010` |
+      `RunInstances:1010` | `RunInstances:1014` | `RunInstances:1110` |
+      `RunInstances:0014` | `RunInstances:0210` | `RunInstances:0110` |
+      `RunInstances:0100` | `RunInstances:0004` | `RunInstances:0200` |
+      `RunInstances:000g` | `RunInstances:0g00` | `RunInstances:0002` |
+      `RunInstances:0800` | `RunInstances:0102` | `RunInstances:0006` |
+      `RunInstances:0202`).
+
+    - `usage-operation-update-time` - The time that the usage operation was
+      last updated, for example, `2022-09-15T17:15:20.000Z`.
+
+    - `virtualization-type` - The virtualization type of the instance
+      (`paravirtual` | `hvm`).
+
+    - `vpc-id` - The ID of the VPC that the instance is running in.
+    """
+    next_token: str | None
+    """
+    The token returned from a previous paginated request. Pagination
+    continues from the end of the items returned by the previous request.
+    """
+    max_results: int | None
+    """
+    The maximum number of items to return for this request. To get the next
+    page of items, make another request with the token returned in the
+    output. For more information, see
+    [Pagination](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+
+    You cannot specify this parameter and the instance IDs parameter in the
+    same request.
+    """
+
+@dataclass(kw_only=True)
+class DescribeInstancesOutput(_SerdeShape):
+    """Dataclass for DescribeInstancesOutput structure."""
+
+    next_token: str | None = ...
+    """
+    The token to include in another request to get the next page of items.
+    This value is `null` when there are no more items to return.
+    """
+    reservations: list[Reservation] | None = ...
+    """Information about the reservations."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DescribeInstanceSqlHaHistoryStatesInput(_SerdeShape):
+    """Dataclass for DescribeInstanceSqlHaHistoryStatesInput structure."""
+
+    instance_ids: list[str] | None = ...
+    """
+    The IDs of the SQL Server High Availability instances to describe. If
+    omitted, the API returns historical states for all SQL Server High
+    Availability instances.
+    """
+    start_time: datetime | None = ...
+    """
+    The start data and time of the period for which to get the historical
+    SQL Server High Availability states. If omitted, the API returns all
+    available historical states.
+
+    Timezone: UTC
+
+    Format: `YYYY-MM-DDThh:mm:ss.sssZ`
+    """
+    end_time: datetime | None = ...
+    """
+    The end data and time of the period for which to get historical SQL
+    Server High Availability states. If omitted, the API returns historical
+    states up to the current date and time.
+
+    Timezone: UTC
+
+    Format: `YYYY-MM-DDThh:mm:ss.sssZ`
+    """
+    next_token: str | None = ...
+    """The token to use to retrieve the next page of results."""
+    max_results: int | None = ...
+    """
+    The maximum number of results to return for the request in a single
+    page. The remaining results can be seen by sending another request with
+    the returned `nextToken` value.
+    """
+    filters: list[Filter] | None = ...
+    """
+    One or more filters to apply to the results. Supported filters include:
+
+    - `tag:``<key>`{=html} - The tag key and value pair assigned to the
+      instance. For example, to find all instances tagged with
+      `Owner:TeamA`, specify `tag:Owner` for the filter name and `TeamA` for
+      the filter value.
+
+    - `tag-key` - The tag key assigned to the instance.
+
+    - `haStatus` - The SQL Server High Availability status of the SQL Server
+      High Availability instance (`processing` | `active` | `standby` |
+      `invalid`).
+
+    - `sqlServerLicenseUsage` - The license type for the SQL Server license
+      (`full` | `waived`).
+    """
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class DescribeInstanceSqlHaHistoryStatesInputDict(TypedDict, total=False):
+    """Dictionary form of `DescribeInstanceSqlHaHistoryStatesInput`."""
+
+    instance_ids: Sequence[str] | None
+    """
+    The IDs of the SQL Server High Availability instances to describe. If
+    omitted, the API returns historical states for all SQL Server High
+    Availability instances.
+    """
+    start_time: datetime | None
+    """
+    The start data and time of the period for which to get the historical
+    SQL Server High Availability states. If omitted, the API returns all
+    available historical states.
+
+    Timezone: UTC
+
+    Format: `YYYY-MM-DDThh:mm:ss.sssZ`
+    """
+    end_time: datetime | None
+    """
+    The end data and time of the period for which to get historical SQL
+    Server High Availability states. If omitted, the API returns historical
+    states up to the current date and time.
+
+    Timezone: UTC
+
+    Format: `YYYY-MM-DDThh:mm:ss.sssZ`
+    """
+    next_token: str | None
+    """The token to use to retrieve the next page of results."""
+    max_results: int | None
+    """
+    The maximum number of results to return for the request in a single
+    page. The remaining results can be seen by sending another request with
+    the returned `nextToken` value.
+    """
+    filters: Sequence[Filter | FilterDict] | None
+    """
+    One or more filters to apply to the results. Supported filters include:
+
+    - `tag:``<key>`{=html} - The tag key and value pair assigned to the
+      instance. For example, to find all instances tagged with
+      `Owner:TeamA`, specify `tag:Owner` for the filter name and `TeamA` for
+      the filter value.
+
+    - `tag-key` - The tag key assigned to the instance.
+
+    - `haStatus` - The SQL Server High Availability status of the SQL Server
+      High Availability instance (`processing` | `active` | `standby` |
+      `invalid`).
+
+    - `sqlServerLicenseUsage` - The license type for the SQL Server license
+      (`full` | `waived`).
+    """
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
 
 @dataclass(kw_only=True)
 class DescribeInstanceSqlHaHistoryStatesOutput(_SerdeShape):
@@ -3790,6 +5274,98 @@ class DescribeManagedPrefixListsOutput(_SerdeShape):
     """
 
 @dataclass(kw_only=True)
+class DescribeMetricCategoriesInput(_SerdeShape):
+    """Dataclass for DescribeMetricCategoriesInput structure."""
+
+    metric_category_ids: list[str] | None = ...
+    """
+    The IDs of the metric categories. If you specify IDs, you can't specify
+    `MaxResults` or `NextToken`.
+    """
+    filters: list[Filter] | None = ...
+    """
+    The filters.
+
+    - `metric-name` - The name of a metric in the metric category.
+    """
+    max_results: int | None = ...
+    """
+    The maximum number of items to return for this request. To get the next
+    page of items, make another request with the token returned in the
+    output. For more information, see
+    [Pagination](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+
+    Valid range: 5 - 100.
+    """
+    next_token: str | None = ...
+    """
+    The token returned from a previous paginated request. Pagination
+    continues from the end of the items returned by the previous request.
+    """
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the operation,
+    without actually making the request, and provides an error response. If
+    you have the required permissions, the error response is
+    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class DescribeMetricCategoriesInputDict(TypedDict, total=False):
+    """Dictionary form of `DescribeMetricCategoriesInput`."""
+
+    metric_category_ids: Sequence[str] | None
+    """
+    The IDs of the metric categories. If you specify IDs, you can't specify
+    `MaxResults` or `NextToken`.
+    """
+    filters: Sequence[Filter | FilterDict] | None
+    """
+    The filters.
+
+    - `metric-name` - The name of a metric in the metric category.
+    """
+    max_results: int | None
+    """
+    The maximum number of items to return for this request. To get the next
+    page of items, make another request with the token returned in the
+    output. For more information, see
+    [Pagination](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+
+    Valid range: 5 - 100.
+    """
+    next_token: str | None
+    """
+    The token returned from a previous paginated request. Pagination
+    continues from the end of the items returned by the previous request.
+    """
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the operation,
+    without actually making the request, and provides an error response. If
+    you have the required permissions, the error response is
+    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class DescribeMetricCategoriesOutput(_SerdeShape):
+    """Dataclass for DescribeMetricCategoriesOutput structure."""
+
+    metric_categories: list[MetricCategory] | None = ...
+    """Information about the metric categories."""
+    next_token: str | None = ...
+    """
+    The token to include in another request to get the next page of items.
+    This value is `null` when there are no more items to return.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
 class DescribeMovingAddressesInput(_SerdeShape):
     """Dataclass for DescribeMovingAddressesInput structure."""
 
@@ -4168,6 +5744,208 @@ class DescribeNetworkAclsOutput(_SerdeShape):
     """
     The token to include in another request to get the next page of items.
     This value is `null` when there are no more items to return.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DescribeNetworkingFlexCostAllocationPoliciesInput(_SerdeShape):
+    """
+    Dataclass for DescribeNetworkingFlexCostAllocationPoliciesInput
+    structure.
+    """
+
+    fca_policy_ids: list[str] | None = ...
+    """The IDs of the flex cost allocation policies to describe."""
+    max_results: int | None = ...
+    """
+    The maximum number of results to return in a single call. The range is 5
+    to 1000. To retrieve the remaining results, make another call with the
+    returned `nextToken` value.
+
+    Default: 100
+    """
+    filters: list[Filter] | None = ...
+    """
+    The filters.
+
+    - `fca-policy-id` - The ID of the policy.
+
+    - `managed-by` - The entity that manages the policy (`account` |
+      `declarative-policy`).
+
+    - `network-resource-type` - The type of network resource that the policy
+      applies to (`natgw` | `ec2` | `pcx`).
+
+    - `showback-enabled` - Indicates whether showback reporting is enabled
+      for the policy (`true` | `false`).
+    """
+    next_token: str | None = ...
+    """The token for the next page of results."""
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class DescribeNetworkingFlexCostAllocationPoliciesInputDict(TypedDict, total=False):
+    """Dictionary form of `DescribeNetworkingFlexCostAllocationPoliciesInput`."""
+
+    fca_policy_ids: Sequence[str] | None
+    """The IDs of the flex cost allocation policies to describe."""
+    max_results: int | None
+    """
+    The maximum number of results to return in a single call. The range is 5
+    to 1000. To retrieve the remaining results, make another call with the
+    returned `nextToken` value.
+
+    Default: 100
+    """
+    filters: Sequence[Filter | FilterDict] | None
+    """
+    The filters.
+
+    - `fca-policy-id` - The ID of the policy.
+
+    - `managed-by` - The entity that manages the policy (`account` |
+      `declarative-policy`).
+
+    - `network-resource-type` - The type of network resource that the policy
+      applies to (`natgw` | `ec2` | `pcx`).
+
+    - `showback-enabled` - Indicates whether showback reporting is enabled
+      for the policy (`true` | `false`).
+    """
+    next_token: str | None
+    """The token for the next page of results."""
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class DescribeNetworkingFlexCostAllocationPoliciesOutput(_SerdeShape):
+    """
+    Dataclass for DescribeNetworkingFlexCostAllocationPoliciesOutput
+    structure.
+    """
+
+    flex_cost_allocation_policies: (
+        list[FlexCostAllocationPolicyDescription] | None
+    ) = ...
+    """Information about the flex cost allocation policies."""
+    next_token: str | None = ...
+    """
+    The token to use to retrieve the next page of results. This value is
+    `null` when there are no more results to return.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DescribeNetworkingFlexCostAllocationPolicyAssociationsInput(_SerdeShape):
+    """
+    Dataclass for
+    DescribeNetworkingFlexCostAllocationPolicyAssociationsInput structure.
+    """
+
+    fca_policy_association_ids: list[str] | None = ...
+    """The IDs of the policy associations to describe."""
+    max_results: int | None = ...
+    """
+    The maximum number of results to return in a single call. The range is 5
+    to 1000. To retrieve the remaining results, make another call with the
+    returned `nextToken` value.
+
+    Default: 100
+    """
+    filters: list[Filter] | None = ...
+    """
+    The filters.
+
+    - `fca-policy-id` - The ID of the policy.
+
+    - `managed-by` - The entity that manages the association (`account` |
+      `declarative-policy`).
+
+    - `resource-id` - The ID of the associated network resource.
+    """
+    next_token: str | None = ...
+    """The token for the next page of results."""
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class DescribeNetworkingFlexCostAllocationPolicyAssociationsInputDict(
+    TypedDict, total=False
+):
+    """Dictionary form of `DescribeNetworkingFlexCostAllocationPolicyAssociationsInput`."""
+
+    fca_policy_association_ids: Sequence[str] | None
+    """The IDs of the policy associations to describe."""
+    max_results: int | None
+    """
+    The maximum number of results to return in a single call. The range is 5
+    to 1000. To retrieve the remaining results, make another call with the
+    returned `nextToken` value.
+
+    Default: 100
+    """
+    filters: Sequence[Filter | FilterDict] | None
+    """
+    The filters.
+
+    - `fca-policy-id` - The ID of the policy.
+
+    - `managed-by` - The entity that manages the association (`account` |
+      `declarative-policy`).
+
+    - `resource-id` - The ID of the associated network resource.
+    """
+    next_token: str | None
+    """The token for the next page of results."""
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class DescribeNetworkingFlexCostAllocationPolicyAssociationsOutput(_SerdeShape):
+    """
+    Dataclass for
+    DescribeNetworkingFlexCostAllocationPolicyAssociationsOutput structure.
+    """
+
+    fca_policy_associations: (
+        list[FlexCostAllocationPolicyAssociationDescription] | None
+    ) = ...
+    """Information about the policy associations."""
+    next_token: str | None = ...
+    """
+    The token to use to retrieve the next page of results. This value is
+    `null` when there are no more results to return.
     """
     response_metadata: ResponseMetadata = ...
     """
@@ -12021,6 +13799,12 @@ class DescribeVolumeStatusInput(_SerdeShape):
 
     - `action.event-id` - The event ID associated with the action.
 
+    - `attachment-status.instance-id` - The ID of the instance that the
+      volume is attached to.
+
+    - `attachment-status.io-performance` - The I/O performance status of the
+      volume's attachment to the instance.
+
     - `availability-zone` - The Availability Zone of the instance.
 
     - `event.description` - A description of the event.
@@ -12092,6 +13876,12 @@ class DescribeVolumeStatusInputDict(TypedDict, total=False):
     - `action.description` - A description of the action.
 
     - `action.event-id` - The event ID associated with the action.
+
+    - `attachment-status.instance-id` - The ID of the instance that the
+      volume is attached to.
+
+    - `attachment-status.io-performance` - The I/O performance status of the
+      volume's attachment to the instance.
 
     - `availability-zone` - The Availability Zone of the instance.
 
@@ -13173,867 +14963,3 @@ class DescribeVpcEndpointServicesInputDict(TypedDict, total=False):
     """
     service_regions: Sequence[str] | None
     """The service Regions."""
-
-@dataclass(kw_only=True)
-class DescribeVpcEndpointServicesOutput(_SerdeShape):
-    """Dataclass for DescribeVpcEndpointServicesOutput structure."""
-
-    service_names: list[str] | None = ...
-    """The supported services."""
-    service_details: list[ServiceDetail] | None = ...
-    """Information about the service."""
-    next_token: str | None = ...
-    """
-    The token to use when requesting the next set of items. If there are no
-    additional items to return, the string is empty.
-    """
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class DescribeVpcEndpointsInput(_SerdeShape):
-    """Dataclass for DescribeVpcEndpointsInput structure."""
-
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    vpc_endpoint_ids: list[str] | None = ...
-    """The IDs of the VPC endpoints."""
-    filters: list[Filter] | None = ...
-    """
-    The filters.
-
-    - `ip-address-type` - The IP address type (`ipv4` | `ipv6`).
-
-    - `service-name` - The name of the service.
-
-    - `service-region` - The Region of the service.
-
-    - `tag`:`<key>`{=html} - The key/value combination of a tag assigned to
-      the resource. Use the tag key in the filter name and the tag value as
-      the filter value. For example, to find all resources that have a tag
-      with the key `Owner` and the value `TeamA`, specify `tag:Owner` for
-      the filter name and `TeamA` for the filter value.
-
-    - `tag-key` - The key of a tag assigned to the resource. Use this filter
-      to find all resources assigned a tag with a specific key, regardless
-      of the tag value.
-
-    - `vpc-id` - The ID of the VPC in which the endpoint resides.
-
-    - `vpc-endpoint-id` - The ID of the endpoint.
-
-    - `vpc-endpoint-state` - The state of the endpoint (`pendingAcceptance`
-      | `pending` | `available` | `deleting` | `deleted` | `rejected`
-      | `failed`).
-
-    - `vpc-endpoint-type` - The type of VPC endpoint (`Interface` |
-      `Gateway` | `GatewayLoadBalancer` | `Resource` | `ServiceNetwork`
-      | `Tunnel`).
-    """
-    max_results: int | None = ...
-    """
-    The maximum number of items to return for this request. The request
-    returns a token that you can specify in a subsequent call to get the
-    next set of results.
-
-    Constraint: If the value is greater than 1,000, we return only 1,000
-    items.
-    """
-    next_token: str | None = ...
-    """
-    The token for the next set of items to return. (You received this token
-    from a prior call.)
-    """
-
-class DescribeVpcEndpointsInputDict(TypedDict, total=False):
-    """Dictionary form of `DescribeVpcEndpointsInput`."""
-
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    vpc_endpoint_ids: Sequence[str] | None
-    """The IDs of the VPC endpoints."""
-    filters: Sequence[Filter | FilterDict] | None
-    """
-    The filters.
-
-    - `ip-address-type` - The IP address type (`ipv4` | `ipv6`).
-
-    - `service-name` - The name of the service.
-
-    - `service-region` - The Region of the service.
-
-    - `tag`:`<key>`{=html} - The key/value combination of a tag assigned to
-      the resource. Use the tag key in the filter name and the tag value as
-      the filter value. For example, to find all resources that have a tag
-      with the key `Owner` and the value `TeamA`, specify `tag:Owner` for
-      the filter name and `TeamA` for the filter value.
-
-    - `tag-key` - The key of a tag assigned to the resource. Use this filter
-      to find all resources assigned a tag with a specific key, regardless
-      of the tag value.
-
-    - `vpc-id` - The ID of the VPC in which the endpoint resides.
-
-    - `vpc-endpoint-id` - The ID of the endpoint.
-
-    - `vpc-endpoint-state` - The state of the endpoint (`pendingAcceptance`
-      | `pending` | `available` | `deleting` | `deleted` | `rejected`
-      | `failed`).
-
-    - `vpc-endpoint-type` - The type of VPC endpoint (`Interface` |
-      `Gateway` | `GatewayLoadBalancer` | `Resource` | `ServiceNetwork`
-      | `Tunnel`).
-    """
-    max_results: int | None
-    """
-    The maximum number of items to return for this request. The request
-    returns a token that you can specify in a subsequent call to get the
-    next set of results.
-
-    Constraint: If the value is greater than 1,000, we return only 1,000
-    items.
-    """
-    next_token: str | None
-    """
-    The token for the next set of items to return. (You received this token
-    from a prior call.)
-    """
-
-@dataclass(kw_only=True)
-class DescribeVpcEndpointsOutput(_SerdeShape):
-    """Dataclass for DescribeVpcEndpointsOutput structure."""
-
-    vpc_endpoints: list[VpcEndpoint] | None = ...
-    """Information about the VPC endpoints."""
-    next_token: str | None = ...
-    """
-    The token to use when requesting the next set of items. If there are no
-    additional items to return, the string is empty.
-    """
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class DescribeVpcPeeringConnectionsInput(_SerdeShape):
-    """Dataclass for DescribeVpcPeeringConnectionsInput structure."""
-
-    next_token: str | None = ...
-    """
-    The token returned from a previous paginated request. Pagination
-    continues from the end of the items returned by the previous request.
-    """
-    max_results: int | None = ...
-    """
-    The maximum number of items to return for this request. To get the next
-    page of items, make another request with the token returned in the
-    output. For more information, see
-    [Pagination](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
-    """
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    vpc_peering_connection_ids: list[str] | None = ...
-    """
-    The IDs of the VPC peering connections.
-
-    Default: Describes all your VPC peering connections.
-    """
-    filters: list[Filter] | None = ...
-    """
-    The filters.
-
-    - `accepter-vpc-info.cidr-block` - The IPv4 CIDR block of the accepter
-      VPC.
-
-    - `accepter-vpc-info.owner-id` - The ID of the Amazon Web Services
-      account that owns the accepter VPC.
-
-    - `accepter-vpc-info.vpc-id` - The ID of the accepter VPC.
-
-    - `expiration-time` - The expiration date and time for the VPC peering
-      connection.
-
-    - `requester-vpc-info.cidr-block` - The IPv4 CIDR block of the
-      requester's VPC.
-
-    - `requester-vpc-info.owner-id` - The ID of the Amazon Web Services
-      account that owns the requester VPC.
-
-    - `requester-vpc-info.vpc-id` - The ID of the requester VPC.
-
-    - `status-code` - The status of the VPC peering connection
-      (`pending-acceptance` | `failed` | `expired` | `provisioning` |
-      `active` | `deleting` | `deleted` | `rejected`).
-
-    - `status-message` - A message that provides more information about the
-      status of the VPC peering connection, if applicable.
-
-    - `tag` - The key/value combination of a tag assigned to the resource.
-      Use the tag key in the filter name and the tag value as the filter
-      value. For example, to find all resources that have a tag with the key
-      `Owner` and the value `TeamA`, specify `tag:Owner` for the filter name
-      and `TeamA` for the filter value.
-
-    - `tag-key` - The key of a tag assigned to the resource. Use this filter
-      to find all resources assigned a tag with a specific key, regardless
-      of the tag value.
-
-    - `vpc-peering-connection-id` - The ID of the VPC peering connection.
-    """
-
-class DescribeVpcPeeringConnectionsInputDict(TypedDict, total=False):
-    """Dictionary form of `DescribeVpcPeeringConnectionsInput`."""
-
-    next_token: str | None
-    """
-    The token returned from a previous paginated request. Pagination
-    continues from the end of the items returned by the previous request.
-    """
-    max_results: int | None
-    """
-    The maximum number of items to return for this request. To get the next
-    page of items, make another request with the token returned in the
-    output. For more information, see
-    [Pagination](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
-    """
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    vpc_peering_connection_ids: Sequence[str] | None
-    """
-    The IDs of the VPC peering connections.
-
-    Default: Describes all your VPC peering connections.
-    """
-    filters: Sequence[Filter | FilterDict] | None
-    """
-    The filters.
-
-    - `accepter-vpc-info.cidr-block` - The IPv4 CIDR block of the accepter
-      VPC.
-
-    - `accepter-vpc-info.owner-id` - The ID of the Amazon Web Services
-      account that owns the accepter VPC.
-
-    - `accepter-vpc-info.vpc-id` - The ID of the accepter VPC.
-
-    - `expiration-time` - The expiration date and time for the VPC peering
-      connection.
-
-    - `requester-vpc-info.cidr-block` - The IPv4 CIDR block of the
-      requester's VPC.
-
-    - `requester-vpc-info.owner-id` - The ID of the Amazon Web Services
-      account that owns the requester VPC.
-
-    - `requester-vpc-info.vpc-id` - The ID of the requester VPC.
-
-    - `status-code` - The status of the VPC peering connection
-      (`pending-acceptance` | `failed` | `expired` | `provisioning` |
-      `active` | `deleting` | `deleted` | `rejected`).
-
-    - `status-message` - A message that provides more information about the
-      status of the VPC peering connection, if applicable.
-
-    - `tag` - The key/value combination of a tag assigned to the resource.
-      Use the tag key in the filter name and the tag value as the filter
-      value. For example, to find all resources that have a tag with the key
-      `Owner` and the value `TeamA`, specify `tag:Owner` for the filter name
-      and `TeamA` for the filter value.
-
-    - `tag-key` - The key of a tag assigned to the resource. Use this filter
-      to find all resources assigned a tag with a specific key, regardless
-      of the tag value.
-
-    - `vpc-peering-connection-id` - The ID of the VPC peering connection.
-    """
-
-@dataclass(kw_only=True)
-class DescribeVpcPeeringConnectionsOutput(_SerdeShape):
-    """Dataclass for DescribeVpcPeeringConnectionsOutput structure."""
-
-    vpc_peering_connections: list[VpcPeeringConnection] | None = ...
-    """Information about the VPC peering connections."""
-    next_token: str | None = ...
-    """
-    The token to include in another request to get the next page of items.
-    This value is `null` when there are no more items to return.
-    """
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class DescribeVpcsInput(_SerdeShape):
-    """Dataclass for DescribeVpcsInput structure."""
-
-    filters: list[Filter] | None = ...
-    """
-    The filters.
-
-    - `cidr` - The primary IPv4 CIDR block of the VPC. The CIDR block you
-      specify must exactly match the VPC's CIDR block for information to be
-      returned for the VPC. Must contain the slash followed by one or two
-      digits (for example, `/28`).
-
-    - `cidr-block-association.cidr-block` - An IPv4 CIDR block associated
-      with the VPC.
-
-    - `cidr-block-association.association-id` - The association ID for an
-      IPv4 CIDR block associated with the VPC.
-
-    - `cidr-block-association.state` - The state of an IPv4 CIDR block
-      associated with the VPC.
-
-    - `dhcp-options-id` - The ID of a set of DHCP options.
-
-    - `ipv6-cidr-block-association.ipv6-cidr-block` - An IPv6 CIDR block
-      associated with the VPC.
-
-    - `ipv6-cidr-block-association.ipv6-pool` - The ID of the IPv6 address
-      pool from which the IPv6 CIDR block is allocated.
-
-    - `ipv6-cidr-block-association.association-id` - The association ID for
-      an IPv6 CIDR block associated with the VPC.
-
-    - `ipv6-cidr-block-association.state` - The state of an IPv6 CIDR block
-      associated with the VPC.
-
-    - `is-default` - Indicates whether the VPC is the default VPC.
-
-    - `owner-id` - The ID of the Amazon Web Services account that owns the
-      VPC.
-
-    - `state` - The state of the VPC (`pending` | `available`).
-
-    - `tag` - The key/value combination of a tag assigned to the resource.
-      Use the tag key in the filter name and the tag value as the filter
-      value. For example, to find all resources that have a tag with the key
-      `Owner` and the value `TeamA`, specify `tag:Owner` for the filter name
-      and `TeamA` for the filter value.
-
-    - `tag-key` - The key of a tag assigned to the resource. Use this filter
-      to find all resources assigned a tag with a specific key, regardless
-      of the tag value.
-
-    - `vpc-id` - The ID of the VPC.
-    """
-    vpc_ids: list[str] | None = ...
-    """The IDs of the VPCs."""
-    next_token: str | None = ...
-    """
-    The token returned from a previous paginated request. Pagination
-    continues from the end of the items returned by the previous request.
-    """
-    max_results: int | None = ...
-    """
-    The maximum number of items to return for this request. To get the next
-    page of items, make another request with the token returned in the
-    output. For more information, see
-    [Pagination](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
-    """
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-class DescribeVpcsInputDict(TypedDict, total=False):
-    """Dictionary form of `DescribeVpcsInput`."""
-
-    filters: Sequence[Filter | FilterDict] | None
-    """
-    The filters.
-
-    - `cidr` - The primary IPv4 CIDR block of the VPC. The CIDR block you
-      specify must exactly match the VPC's CIDR block for information to be
-      returned for the VPC. Must contain the slash followed by one or two
-      digits (for example, `/28`).
-
-    - `cidr-block-association.cidr-block` - An IPv4 CIDR block associated
-      with the VPC.
-
-    - `cidr-block-association.association-id` - The association ID for an
-      IPv4 CIDR block associated with the VPC.
-
-    - `cidr-block-association.state` - The state of an IPv4 CIDR block
-      associated with the VPC.
-
-    - `dhcp-options-id` - The ID of a set of DHCP options.
-
-    - `ipv6-cidr-block-association.ipv6-cidr-block` - An IPv6 CIDR block
-      associated with the VPC.
-
-    - `ipv6-cidr-block-association.ipv6-pool` - The ID of the IPv6 address
-      pool from which the IPv6 CIDR block is allocated.
-
-    - `ipv6-cidr-block-association.association-id` - The association ID for
-      an IPv6 CIDR block associated with the VPC.
-
-    - `ipv6-cidr-block-association.state` - The state of an IPv6 CIDR block
-      associated with the VPC.
-
-    - `is-default` - Indicates whether the VPC is the default VPC.
-
-    - `owner-id` - The ID of the Amazon Web Services account that owns the
-      VPC.
-
-    - `state` - The state of the VPC (`pending` | `available`).
-
-    - `tag` - The key/value combination of a tag assigned to the resource.
-      Use the tag key in the filter name and the tag value as the filter
-      value. For example, to find all resources that have a tag with the key
-      `Owner` and the value `TeamA`, specify `tag:Owner` for the filter name
-      and `TeamA` for the filter value.
-
-    - `tag-key` - The key of a tag assigned to the resource. Use this filter
-      to find all resources assigned a tag with a specific key, regardless
-      of the tag value.
-
-    - `vpc-id` - The ID of the VPC.
-    """
-    vpc_ids: Sequence[str] | None
-    """The IDs of the VPCs."""
-    next_token: str | None
-    """
-    The token returned from a previous paginated request. Pagination
-    continues from the end of the items returned by the previous request.
-    """
-    max_results: int | None
-    """
-    The maximum number of items to return for this request. To get the next
-    page of items, make another request with the token returned in the
-    output. For more information, see
-    [Pagination](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
-    """
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-@dataclass(kw_only=True)
-class DescribeVpcsOutput(_SerdeShape):
-    """Dataclass for DescribeVpcsOutput structure."""
-
-    next_token: str | None = ...
-    """
-    The token to include in another request to get the next page of items.
-    This value is `null` when there are no more items to return.
-    """
-    vpcs: list[Vpc] | None = ...
-    """Information about the VPCs."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class DescribeVpnConcentratorsInput(_SerdeShape):
-    """Dataclass for DescribeVpnConcentratorsInput structure."""
-
-    vpn_concentrator_ids: list[str] | None = ...
-    """One or more VPN concentrator IDs."""
-    filters: list[Filter] | None = ...
-    """One or more filters to limit the results."""
-    max_results: int | None = ...
-    """
-    The maximum number of results to return with a single call. To retrieve
-    the remaining results, make another call with the returned `nextToken`
-    value.
-    """
-    next_token: str | None = ...
-    """The token for the next page of results."""
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-class DescribeVpnConcentratorsInputDict(TypedDict, total=False):
-    """Dictionary form of `DescribeVpnConcentratorsInput`."""
-
-    vpn_concentrator_ids: Sequence[str] | None
-    """One or more VPN concentrator IDs."""
-    filters: Sequence[Filter | FilterDict] | None
-    """One or more filters to limit the results."""
-    max_results: int | None
-    """
-    The maximum number of results to return with a single call. To retrieve
-    the remaining results, make another call with the returned `nextToken`
-    value.
-    """
-    next_token: str | None
-    """The token for the next page of results."""
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-@dataclass(kw_only=True)
-class DescribeVpnConcentratorsOutput(_SerdeShape):
-    """Dataclass for DescribeVpnConcentratorsOutput structure."""
-
-    vpn_concentrators: list[VpnConcentrator] | None = ...
-    """Information about the VPN concentrators."""
-    next_token: str | None = ...
-    """
-    The token to use to retrieve the next page of results. This value is
-    `null` when there are no more results to return.
-    """
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class DescribeVpnConnectionsInput(_SerdeShape):
-    """Contains the parameters for DescribeVpnConnections."""
-
-    filters: list[Filter] | None = ...
-    """
-    One or more filters.
-
-    - `customer-gateway-configuration` - The configuration information for
-      the customer gateway.
-
-    - `customer-gateway-id` - The ID of a customer gateway associated with
-      the VPN connection.
-
-    - `state` - The state of the VPN connection (`pending` | `available` |
-      `deleting` | `deleted`).
-
-    - `option.static-routes-only` - Indicates whether the connection has
-      static routes only. Used for devices that do not support Border
-      Gateway Protocol (BGP).
-
-    - `route.destination-cidr-block` - The destination CIDR block. This
-      corresponds to the subnet used in a customer data center.
-
-    - `bgp-asn` - The BGP Autonomous System Number (ASN) associated with a
-      BGP device.
-
-    - `tag`:`<key>`{=html} - The key/value combination of a tag assigned to
-      the resource. Use the tag key in the filter name and the tag value as
-      the filter value. For example, to find all resources that have a tag
-      with the key `Owner` and the value `TeamA`, specify `tag:Owner` for
-      the filter name and `TeamA` for the filter value.
-
-    - `tag-key` - The key of a tag assigned to the resource. Use this filter
-      to find all resources assigned a tag with a specific key, regardless
-      of the tag value.
-
-    - `type` - The type of VPN connection. Currently the only supported type
-      is `ipsec.1`.
-
-    - `vpn-connection-id` - The ID of the VPN connection.
-
-    - `vpn-gateway-id` - The ID of a virtual private gateway associated with
-      the VPN connection.
-
-    - `transit-gateway-id` - The ID of a transit gateway associated with the
-      VPN connection.
-    """
-    vpn_connection_ids: list[str] | None = ...
-    """
-    One or more VPN connection IDs.
-
-    Default: Describes your VPN connections.
-    """
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-class DescribeVpnConnectionsInputDict(TypedDict, total=False):
-    """Dictionary form of `DescribeVpnConnectionsInput`."""
-
-    filters: Sequence[Filter | FilterDict] | None
-    """
-    One or more filters.
-
-    - `customer-gateway-configuration` - The configuration information for
-      the customer gateway.
-
-    - `customer-gateway-id` - The ID of a customer gateway associated with
-      the VPN connection.
-
-    - `state` - The state of the VPN connection (`pending` | `available` |
-      `deleting` | `deleted`).
-
-    - `option.static-routes-only` - Indicates whether the connection has
-      static routes only. Used for devices that do not support Border
-      Gateway Protocol (BGP).
-
-    - `route.destination-cidr-block` - The destination CIDR block. This
-      corresponds to the subnet used in a customer data center.
-
-    - `bgp-asn` - The BGP Autonomous System Number (ASN) associated with a
-      BGP device.
-
-    - `tag`:`<key>`{=html} - The key/value combination of a tag assigned to
-      the resource. Use the tag key in the filter name and the tag value as
-      the filter value. For example, to find all resources that have a tag
-      with the key `Owner` and the value `TeamA`, specify `tag:Owner` for
-      the filter name and `TeamA` for the filter value.
-
-    - `tag-key` - The key of a tag assigned to the resource. Use this filter
-      to find all resources assigned a tag with a specific key, regardless
-      of the tag value.
-
-    - `type` - The type of VPN connection. Currently the only supported type
-      is `ipsec.1`.
-
-    - `vpn-connection-id` - The ID of the VPN connection.
-
-    - `vpn-gateway-id` - The ID of a virtual private gateway associated with
-      the VPN connection.
-
-    - `transit-gateway-id` - The ID of a transit gateway associated with the
-      VPN connection.
-    """
-    vpn_connection_ids: Sequence[str] | None
-    """
-    One or more VPN connection IDs.
-
-    Default: Describes your VPN connections.
-    """
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-@dataclass(kw_only=True)
-class DescribeVpnConnectionsOutput(_SerdeShape):
-    """Contains the output of DescribeVpnConnections."""
-
-    vpn_connections: list[VpnConnection] | None = ...
-    """Information about one or more VPN connections."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class DescribeVpnGatewaysInput(_SerdeShape):
-    """Contains the parameters for DescribeVpnGateways."""
-
-    filters: list[Filter] | None = ...
-    """
-    One or more filters.
-
-    - `amazon-side-asn` - The Autonomous System Number (ASN) for the Amazon
-      side of the gateway.
-
-    - `attachment.state` - The current state of the attachment between the
-      gateway and the VPC (`attaching` | `attached` | `detaching` |
-      `detached`).
-
-    - `attachment.vpc-id` - The ID of an attached VPC.
-
-    - `availability-zone` - The Availability Zone for the virtual private
-      gateway (if applicable).
-
-    - `state` - The state of the virtual private gateway (`pending` |
-      `available` | `deleting` | `deleted`).
-
-    - `tag`:`<key>`{=html} - The key/value combination of a tag assigned to
-      the resource. Use the tag key in the filter name and the tag value as
-      the filter value. For example, to find all resources that have a tag
-      with the key `Owner` and the value `TeamA`, specify `tag:Owner` for
-      the filter name and `TeamA` for the filter value.
-
-    - `tag-key` - The key of a tag assigned to the resource. Use this filter
-      to find all resources assigned a tag with a specific key, regardless
-      of the tag value.
-
-    - `type` - The type of virtual private gateway. Currently the only
-      supported type is `ipsec.1`.
-
-    - `vpn-gateway-id` - The ID of the virtual private gateway.
-    """
-    vpn_gateway_ids: list[str] | None = ...
-    """
-    One or more virtual private gateway IDs.
-
-    Default: Describes all your virtual private gateways.
-    """
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-class DescribeVpnGatewaysInputDict(TypedDict, total=False):
-    """Dictionary form of `DescribeVpnGatewaysInput`."""
-
-    filters: Sequence[Filter | FilterDict] | None
-    """
-    One or more filters.
-
-    - `amazon-side-asn` - The Autonomous System Number (ASN) for the Amazon
-      side of the gateway.
-
-    - `attachment.state` - The current state of the attachment between the
-      gateway and the VPC (`attaching` | `attached` | `detaching` |
-      `detached`).
-
-    - `attachment.vpc-id` - The ID of an attached VPC.
-
-    - `availability-zone` - The Availability Zone for the virtual private
-      gateway (if applicable).
-
-    - `state` - The state of the virtual private gateway (`pending` |
-      `available` | `deleting` | `deleted`).
-
-    - `tag`:`<key>`{=html} - The key/value combination of a tag assigned to
-      the resource. Use the tag key in the filter name and the tag value as
-      the filter value. For example, to find all resources that have a tag
-      with the key `Owner` and the value `TeamA`, specify `tag:Owner` for
-      the filter name and `TeamA` for the filter value.
-
-    - `tag-key` - The key of a tag assigned to the resource. Use this filter
-      to find all resources assigned a tag with a specific key, regardless
-      of the tag value.
-
-    - `type` - The type of virtual private gateway. Currently the only
-      supported type is `ipsec.1`.
-
-    - `vpn-gateway-id` - The ID of the virtual private gateway.
-    """
-    vpn_gateway_ids: Sequence[str] | None
-    """
-    One or more virtual private gateway IDs.
-
-    Default: Describes all your virtual private gateways.
-    """
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-@dataclass(kw_only=True)
-class DescribeVpnGatewaysOutput(_SerdeShape):
-    """Contains the output of DescribeVpnGateways."""
-
-    vpn_gateways: list[VpnGateway] | None = ...
-    """Information about one or more virtual private gateways."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-class DestinationFileFormat(UnknownEnumMixin, StrEnum):
-    PLAIN_TEXT = "plain-text"
-    PARQUET = "parquet"
-
-@dataclass(kw_only=True)
-class DestinationOptionsRequest(_SerdeShape):
-    """Describes the destination options for a flow log."""
-
-    file_format: str | None = ...
-    """The format for the flow log. The default is `plain-text`."""
-    hive_compatible_partitions: bool | None = ...
-    """
-    Indicates whether to use Hive-compatible prefixes for flow logs stored
-    in Amazon S3. The default is `false`.
-    """
-    per_hour_partition: bool | None = ...
-    """
-    Indicates whether to partition the flow log per hour. This reduces the
-    cost and response time for queries. The default is `false`.
-    """
-
-class DestinationOptionsRequestDict(TypedDict, total=False):
-    """Dictionary form of `DestinationOptionsRequest`."""
-
-    file_format: str | None
-    """The format for the flow log. The default is `plain-text`."""
-    hive_compatible_partitions: bool | None
-    """
-    Indicates whether to use Hive-compatible prefixes for flow logs stored
-    in Amazon S3. The default is `false`.
-    """
-    per_hour_partition: bool | None
-    """
-    Indicates whether to partition the flow log per hour. This reduces the
-    cost and response time for queries. The default is `false`.
-    """
-
-@dataclass(kw_only=True)
-class DestinationOptionsResponse(_SerdeShape):
-    """Describes the destination options for a flow log."""
-
-    file_format: str | None = ...
-    """The format for the flow log."""
-    hive_compatible_partitions: bool | None = ...
-    """
-    Indicates whether to use Hive-compatible prefixes for flow logs stored
-    in Amazon S3.
-    """
-    per_hour_partition: bool | None = ...
-    """Indicates whether to partition the flow log per hour."""

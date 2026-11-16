@@ -12,6 +12,7 @@ from smithy_core.types import UnknownEnumMixin
 from ..models import (
     BlockPublicAccessStates,
     ByoipCidr,
+    CapacityManagerMonitoredTagKey,
     CidrBlock,
     CloudWatchLogOptions,
     CloudWatchLogOptionsSpecification,
@@ -22,6 +23,8 @@ from ..models import (
     IKEVersionsRequestListValue,
     IKEVersionsRequestListValueDict,
     InitializationStatusDetails,
+    IpPermission,
+    IpPermissionDict,
     Ipv6CidrBlock,
     LastError,
     NativeApplicationOidcOptions,
@@ -41,11 +44,953 @@ from ..models import (
     Phase2IntegrityAlgorithmsRequestListValue,
     Phase2IntegrityAlgorithmsRequestListValueDict,
     SecurityGroupIdentifier,
+    SecurityGroupRuleDescription,
+    SecurityGroupRuleDescriptionDict,
     SubnetIpPrefixes,
     Tag,
     TunnelOption,
     _SerdeShape,
 )
+
+@dataclass(kw_only=True)
+class UnsuccessfulInstanceCreditSpecificationItem(_SerdeShape):
+    """
+    Describes the burstable performance instance whose credit option for CPU
+    usage was not modified.
+    """
+
+    instance_id: str | None = ...
+    """The ID of the instance."""
+    error: UnsuccessfulInstanceCreditSpecificationItemError | None = ...
+    """
+    The applicable error for the burstable performance instance whose credit
+    option for CPU usage was not modified.
+    """
+
+@dataclass(kw_only=True)
+class UnsuccessfulInstanceCreditSpecificationItemError(_SerdeShape):
+    """
+    Information about the error for the burstable performance instance whose
+    credit option for CPU usage was not modified.
+    """
+
+    code: str | None = ...
+    """The error code."""
+    message: str | None = ...
+    """The applicable error message."""
+
+@dataclass(kw_only=True)
+class UnsuccessfulItem(_SerdeShape):
+    """
+    Information about items that were not successfully processed in a batch
+    call.
+    """
+
+    error: UnsuccessfulItemError | None = ...
+    """Information about the error."""
+    resource_id: str | None = ...
+    """The ID of the resource."""
+
+@dataclass(kw_only=True)
+class UnsuccessfulItemError(_SerdeShape):
+    """
+    Information about the error that occurred. For more information about
+    errors, see [Error
+    codes](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html).
+    """
+
+    code: str | None = ...
+    """The error code."""
+    message: str | None = ...
+    """The error message accompanying the error code."""
+
+@dataclass(kw_only=True)
+class UnsuccessfulSuppressionResponseObject(_SerdeShape):
+    """Describes an unsuccessful application status check suppression."""
+
+    instance_id: str | None = ...
+    """The ID of the instance."""
+    suppress_at: datetime | None = ...
+    """The date and time when suppression was attempted."""
+    resume_at: datetime | None = ...
+    """The date and time when health checks would have resumed."""
+    reason: str | None = ...
+    """The reason the suppression failed."""
+
+@dataclass(kw_only=True)
+class UpdateCapacityManagerMonitoredTagKeysInput(_SerdeShape):
+    """Dataclass for UpdateCapacityManagerMonitoredTagKeysInput structure."""
+
+    activate_tag_keys: list[str] | None = ...
+    """
+    The tag keys to activate for monitoring. Once activated, these tag keys
+    will be included as dimensions in capacity metric data.
+    """
+    deactivate_tag_keys: list[str] | None = ...
+    """
+    The tag keys to deactivate. Deactivated tag keys will no longer be
+    included as dimensions in capacity metric data.
+    """
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    client_token: str | None = ...
+    """
+    Unique, case-sensitive identifier that you provide to ensure the
+    idempotency of the request.
+
+    This field is autopopulated if not provided.
+    """
+
+class UpdateCapacityManagerMonitoredTagKeysInputDict(TypedDict, total=False):
+    """Dictionary form of `UpdateCapacityManagerMonitoredTagKeysInput`."""
+
+    activate_tag_keys: Sequence[str] | None
+    """
+    The tag keys to activate for monitoring. Once activated, these tag keys
+    will be included as dimensions in capacity metric data.
+    """
+    deactivate_tag_keys: Sequence[str] | None
+    """
+    The tag keys to deactivate. Deactivated tag keys will no longer be
+    included as dimensions in capacity metric data.
+    """
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    client_token: str | None
+    """
+    Unique, case-sensitive identifier that you provide to ensure the
+    idempotency of the request.
+
+    This field is autopopulated if not provided.
+    """
+
+@dataclass(kw_only=True)
+class UpdateCapacityManagerMonitoredTagKeysOutput(_SerdeShape):
+    """Dataclass for UpdateCapacityManagerMonitoredTagKeysOutput structure."""
+
+    capacity_manager_tag_keys: list[CapacityManagerMonitoredTagKey] | None = ...
+    """
+    The list of tag keys affected by the update, including their current
+    status and metadata.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class UpdateCapacityManagerOrganizationsAccessInput(_SerdeShape):
+    """Dataclass for UpdateCapacityManagerOrganizationsAccessInput structure."""
+
+    organizations_access: bool | None = ...
+    """
+    Specifies whether to enable or disable cross-account access for Amazon
+    Web Services Organizations. When enabled, Capacity Manager aggregates
+    data from all accounts in your organization.
+    """
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    client_token: str | None = ...
+    """
+    Unique, case-sensitive identifier that you provide to ensure the
+    idempotency of the request.
+
+    This field is autopopulated if not provided.
+    """
+
+class UpdateCapacityManagerOrganizationsAccessInputDict(TypedDict, total=False):
+    """Dictionary form of `UpdateCapacityManagerOrganizationsAccessInput`."""
+
+    organizations_access: Required[bool]
+    """
+    Specifies whether to enable or disable cross-account access for Amazon
+    Web Services Organizations. When enabled, Capacity Manager aggregates
+    data from all accounts in your organization.
+    """
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    client_token: str | None
+    """
+    Unique, case-sensitive identifier that you provide to ensure the
+    idempotency of the request.
+
+    This field is autopopulated if not provided.
+    """
+
+@dataclass(kw_only=True)
+class UpdateCapacityManagerOrganizationsAccessOutput(_SerdeShape):
+    """Dataclass for UpdateCapacityManagerOrganizationsAccessOutput structure."""
+
+    capacity_manager_status: str | None = ...
+    """The current status of Capacity Manager after the update operation."""
+    organizations_access: bool | None = ...
+    """
+    The updated Organizations access setting indicating whether
+    cross-account data aggregation is enabled.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class UpdateInterruptibleCapacityReservationAllocationInput(_SerdeShape):
+    """
+    Dataclass for UpdateInterruptibleCapacityReservationAllocationInput
+    structure.
+    """
+
+    capacity_reservation_id: str | None = ...
+    """
+    The ID of the source Capacity Reservation containing the interruptible
+    allocation to modify.
+    """
+    target_instance_count: int | None = ...
+    """
+    The new number of instances to allocate. Enter a higher number to add
+    more capacity to share, or a lower number to reclaim capacity to your
+    source Capacity Reservation.
+    """
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response.
+    """
+    zero_size_preference: str | None = ...
+    """
+    Specifies the updated behavior for the interruptible Capacity
+    Reservation when you reduce its allocation to zero instances. Specify
+    `retain` to keep the interruptible Capacity Reservation active at zero
+    capacity so that you can allocate instances to it again later. Specify
+    `default` to cancel the interruptible Capacity Reservation and return
+    the capacity to your source Capacity Reservation.
+    """
+
+class UpdateInterruptibleCapacityReservationAllocationInputDict(TypedDict, total=False):
+    """Dictionary form of `UpdateInterruptibleCapacityReservationAllocationInput`."""
+
+    capacity_reservation_id: Required[str]
+    """
+    The ID of the source Capacity Reservation containing the interruptible
+    allocation to modify.
+    """
+    target_instance_count: int | None
+    """
+    The new number of instances to allocate. Enter a higher number to add
+    more capacity to share, or a lower number to reclaim capacity to your
+    source Capacity Reservation.
+    """
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response.
+    """
+    zero_size_preference: str | None
+    """
+    Specifies the updated behavior for the interruptible Capacity
+    Reservation when you reduce its allocation to zero instances. Specify
+    `retain` to keep the interruptible Capacity Reservation active at zero
+    capacity so that you can allocate instances to it again later. Specify
+    `default` to cancel the interruptible Capacity Reservation and return
+    the capacity to your source Capacity Reservation.
+    """
+
+@dataclass(kw_only=True)
+class UpdateInterruptibleCapacityReservationAllocationOutput(_SerdeShape):
+    """
+    Dataclass for UpdateInterruptibleCapacityReservationAllocationOutput
+    structure.
+    """
+
+    interruptible_capacity_reservation_id: str | None = ...
+    """The ID of the interruptible Capacity Reservation that was modified."""
+    source_capacity_reservation_id: str | None = ...
+    """
+    The ID of the source Capacity Reservation to which capacity was
+    reclaimed or from which capacity was allocated.
+    """
+    instance_count: int | None = ...
+    """
+    The current number of instances allocated to the interruptible
+    reservation.
+    """
+    target_instance_count: int | None = ...
+    """
+    The requested number of instances for the interruptible Capacity
+    Reservation.
+    """
+    status: str | None = ...
+    """
+    The current status of the allocation (updating during reclamation,
+    active when complete).
+    """
+    interruption_type: str | None = ...
+    """The interruption type for the interruptible reservation."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class UpdateSecurityGroupRuleDescriptionsEgressInput(_SerdeShape):
+    """Dataclass for UpdateSecurityGroupRuleDescriptionsEgressInput structure."""
+
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    group_id: str | None = ...
+    """
+    The ID of the security group. You must specify either the security group
+    ID or the security group name in the request. For security groups in a
+    nondefault VPC, you must specify the security group ID.
+    """
+    group_name: str | None = ...
+    """
+    [Default VPC] The name of the security group. You must specify either
+    the security group ID or the security group name.
+    """
+    ip_permissions: list[IpPermission] | None = ...
+    """
+    The IP permissions for the security group rule. You must specify either
+    the IP permissions or the description.
+    """
+    security_group_rule_descriptions: list[SecurityGroupRuleDescription] | None = ...
+    """
+    The description for the egress security group rules. You must specify
+    either the description or the IP permissions.
+    """
+
+class UpdateSecurityGroupRuleDescriptionsEgressInputDict(TypedDict, total=False):
+    """Dictionary form of `UpdateSecurityGroupRuleDescriptionsEgressInput`."""
+
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    group_id: str | None
+    """
+    The ID of the security group. You must specify either the security group
+    ID or the security group name in the request. For security groups in a
+    nondefault VPC, you must specify the security group ID.
+    """
+    group_name: str | None
+    """
+    [Default VPC] The name of the security group. You must specify either
+    the security group ID or the security group name.
+    """
+    ip_permissions: Sequence[IpPermission | IpPermissionDict] | None
+    """
+    The IP permissions for the security group rule. You must specify either
+    the IP permissions or the description.
+    """
+    security_group_rule_descriptions: (
+        Sequence[SecurityGroupRuleDescription | SecurityGroupRuleDescriptionDict] | None
+    )
+    """
+    The description for the egress security group rules. You must specify
+    either the description or the IP permissions.
+    """
+
+@dataclass(kw_only=True)
+class UpdateSecurityGroupRuleDescriptionsEgressOutput(_SerdeShape):
+    """Dataclass for UpdateSecurityGroupRuleDescriptionsEgressOutput structure."""
+
+    return_: bool | None = ...
+    """Returns `true` if the request succeeds; otherwise, returns an error."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class UpdateSecurityGroupRuleDescriptionsIngressInput(_SerdeShape):
+    """Dataclass for UpdateSecurityGroupRuleDescriptionsIngressInput structure."""
+
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    group_id: str | None = ...
+    """
+    The ID of the security group. You must specify either the security group
+    ID or the security group name in the request. For security groups in a
+    nondefault VPC, you must specify the security group ID.
+    """
+    group_name: str | None = ...
+    """
+    [Default VPC] The name of the security group. You must specify either
+    the security group ID or the security group name. For security groups in
+    a nondefault VPC, you must specify the security group ID.
+    """
+    ip_permissions: list[IpPermission] | None = ...
+    """
+    The IP permissions for the security group rule. You must specify either
+    IP permissions or a description.
+    """
+    security_group_rule_descriptions: list[SecurityGroupRuleDescription] | None = ...
+    """
+    The description for the ingress security group rules. You must specify
+    either a description or IP permissions.
+    """
+
+class UpdateSecurityGroupRuleDescriptionsIngressInputDict(TypedDict, total=False):
+    """Dictionary form of `UpdateSecurityGroupRuleDescriptionsIngressInput`."""
+
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    group_id: str | None
+    """
+    The ID of the security group. You must specify either the security group
+    ID or the security group name in the request. For security groups in a
+    nondefault VPC, you must specify the security group ID.
+    """
+    group_name: str | None
+    """
+    [Default VPC] The name of the security group. You must specify either
+    the security group ID or the security group name. For security groups in
+    a nondefault VPC, you must specify the security group ID.
+    """
+    ip_permissions: Sequence[IpPermission | IpPermissionDict] | None
+    """
+    The IP permissions for the security group rule. You must specify either
+    IP permissions or a description.
+    """
+    security_group_rule_descriptions: (
+        Sequence[SecurityGroupRuleDescription | SecurityGroupRuleDescriptionDict] | None
+    )
+    """
+    The description for the ingress security group rules. You must specify
+    either a description or IP permissions.
+    """
+
+@dataclass(kw_only=True)
+class UpdateSecurityGroupRuleDescriptionsIngressOutput(_SerdeShape):
+    """
+    Dataclass for UpdateSecurityGroupRuleDescriptionsIngressOutput
+    structure.
+    """
+
+    return_: bool | None = ...
+    """Returns `true` if the request succeeds; otherwise, returns an error."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+class UsageClassType(UnknownEnumMixin, StrEnum):
+    SPOT = "spot"
+    ON_DEMAND = "on-demand"
+    CAPACITY_BLOCK = "capacity-block"
+
+@dataclass(kw_only=True)
+class UserBucket(_SerdeShape):
+    """Describes the Amazon S3 bucket for the disk image."""
+
+    s3_bucket: str | None = ...
+    """The name of the Amazon S3 bucket where the disk image is located."""
+    s3_key: str | None = ...
+    """The file name of the disk image."""
+
+class UserBucketDict(TypedDict, total=False):
+    """Dictionary form of `UserBucket`."""
+
+    s3_bucket: str | None
+    """The name of the Amazon S3 bucket where the disk image is located."""
+    s3_key: str | None
+    """The file name of the disk image."""
+
+@dataclass(kw_only=True)
+class UserBucketDetails(_SerdeShape):
+    """Describes the Amazon S3 bucket for the disk image."""
+
+    s3_bucket: str | None = ...
+    """The Amazon S3 bucket from which the disk image was created."""
+    s3_key: str | None = ...
+    """The file name of the disk image."""
+
+@dataclass(kw_only=True)
+class UserData(_SerdeShape):
+    """Describes the user data for an instance."""
+
+    data: str | None = ...
+    """
+    The user data. If you are using an Amazon Web Services SDK or command
+    line tool, Base64-encoding is performed for you, and you can load the
+    text from a file. Otherwise, you must provide Base64-encoded text.
+    """
+
+class UserDataDict(TypedDict, total=False):
+    """Dictionary form of `UserData`."""
+
+    data: str | None
+    """
+    The user data. If you are using an Amazon Web Services SDK or command
+    line tool, Base64-encoding is performed for you, and you can load the
+    text from a file. Otherwise, you must provide Base64-encoded text.
+    """
+
+@dataclass(kw_only=True)
+class UserIdGroupPair(_SerdeShape):
+    """Describes a security group and Amazon Web Services account ID pair."""
+
+    description: str | None = ...
+    """
+    A description for the security group rule that references this user ID
+    group pair.
+
+    Constraints: Up to 255 characters in length. Allowed characters are a-z,
+    A-Z, 0-9, spaces, and ._-:/()#,@[]+=;{}!$*
+    """
+    user_id: str | None = ...
+    """
+    The ID of an Amazon Web Services account.
+
+    For a referenced security group in another VPC, the account ID of the
+    referenced security group is returned in the response. If the referenced
+    security group is deleted, this value is not returned.
+    """
+    group_name: str | None = ...
+    """
+    [Default VPC] The name of the security group. For a security group in
+    a nondefault VPC, use the security group ID.
+
+    For a referenced security group in another VPC, this value is not
+    returned if the referenced security group is deleted.
+    """
+    group_id: str | None = ...
+    """The ID of the security group."""
+    vpc_id: str | None = ...
+    """The ID of the VPC for the referenced security group, if applicable."""
+    vpc_peering_connection_id: str | None = ...
+    """The ID of the VPC peering connection, if applicable."""
+    peering_status: str | None = ...
+    """The status of a VPC peering connection, if applicable."""
+
+class UserIdGroupPairDict(TypedDict, total=False):
+    """Dictionary form of `UserIdGroupPair`."""
+
+    description: str | None
+    """
+    A description for the security group rule that references this user ID
+    group pair.
+
+    Constraints: Up to 255 characters in length. Allowed characters are a-z,
+    A-Z, 0-9, spaces, and ._-:/()#,@[]+=;{}!$*
+    """
+    user_id: str | None
+    """
+    The ID of an Amazon Web Services account.
+
+    For a referenced security group in another VPC, the account ID of the
+    referenced security group is returned in the response. If the referenced
+    security group is deleted, this value is not returned.
+    """
+    group_name: str | None
+    """
+    [Default VPC] The name of the security group. For a security group in
+    a nondefault VPC, use the security group ID.
+
+    For a referenced security group in another VPC, this value is not
+    returned if the referenced security group is deleted.
+    """
+    group_id: str | None
+    """The ID of the security group."""
+    vpc_id: str | None
+    """The ID of the VPC for the referenced security group, if applicable."""
+    vpc_peering_connection_id: str | None
+    """The ID of the VPC peering connection, if applicable."""
+    peering_status: str | None
+    """The status of a VPC peering connection, if applicable."""
+
+class UserTrustProviderType(UnknownEnumMixin, StrEnum):
+    IAM_IDENTITY_CENTER = "iam-identity-center"
+    OIDC = "oidc"
+
+@dataclass(kw_only=True)
+class ValidateSecurityGroupQuotasForInterfaceInput(_SerdeShape):
+    """Dataclass for ValidateSecurityGroupQuotasForInterfaceInput structure."""
+
+    security_group_ids: list[str] | None = ...
+    """
+    The IDs of the security groups to validate for association with a single
+    network interface. You must specify at least one ID, and each ID must be
+    unique. The number of IDs cannot exceed the maximum number of security
+    groups allowed per network interface.
+    """
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class ValidateSecurityGroupQuotasForInterfaceInputDict(TypedDict, total=False):
+    """Dictionary form of `ValidateSecurityGroupQuotasForInterfaceInput`."""
+
+    security_group_ids: Required[Sequence[str]]
+    """
+    The IDs of the security groups to validate for association with a single
+    network interface. You must specify at least one ID, and each ID must be
+    unique. The number of IDs cannot exceed the maximum number of security
+    groups allowed per network interface.
+    """
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class ValidateSecurityGroupQuotasForInterfaceOutput(_SerdeShape):
+    """Dataclass for ValidateSecurityGroupQuotasForInterfaceOutput structure."""
+
+    valid: bool | None = ...
+    """
+    Specifies whether the specified security groups can be associated with a
+    single network interface without exceeding the quotas. If associating
+    the security groups would exceed a quota, the operation returns an
+    error.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ValidationError(_SerdeShape):
+    """
+    The error code and error message that is returned for a parameter or
+    parameter combination that is not valid when a new launch template or
+    new version of a launch template is created.
+    """
+
+    code: str | None = ...
+    """
+    The error code that indicates why the parameter or parameter combination
+    is not valid. For more information about error codes, see [Error
+    codes](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html).
+    """
+    message: str | None = ...
+    """
+    The error message that describes why the parameter or parameter
+    combination is not valid. For more information about error messages, see
+    [Error
+    codes](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html).
+    """
+
+@dataclass(kw_only=True)
+class ValidationWarning(_SerdeShape):
+    """
+    The error codes and error messages that are returned for the parameters
+    or parameter combinations that are not valid when a new launch template
+    or new version of a launch template is created.
+    """
+
+    errors: list[ValidationError] | None = ...
+    """The error codes and error messages."""
+
+@dataclass(kw_only=True)
+class VCpuCountRange(_SerdeShape):
+    """The minimum and maximum number of vCPUs."""
+
+    min: int | None = ...
+    """
+    The minimum number of vCPUs. If the value is `0`, there is no minimum
+    limit.
+    """
+    max: int | None = ...
+    """
+    The maximum number of vCPUs. If this parameter is not specified, there
+    is no maximum limit.
+    """
+
+class VCpuCountRangeDict(TypedDict, total=False):
+    """Dictionary form of `VCpuCountRange`."""
+
+    min: int | None
+    """
+    The minimum number of vCPUs. If the value is `0`, there is no minimum
+    limit.
+    """
+    max: int | None
+    """
+    The maximum number of vCPUs. If this parameter is not specified, there
+    is no maximum limit.
+    """
+
+@dataclass(kw_only=True)
+class VCpuCountRangeRequest(_SerdeShape):
+    """The minimum and maximum number of vCPUs."""
+
+    min: int | None = ...
+    """The minimum number of vCPUs. To specify no minimum limit, specify `0`."""
+    max: int | None = ...
+    """
+    The maximum number of vCPUs. To specify no maximum limit, omit this
+    parameter.
+    """
+
+class VCpuCountRangeRequestDict(TypedDict, total=False):
+    """Dictionary form of `VCpuCountRangeRequest`."""
+
+    min: Required[int]
+    """The minimum number of vCPUs. To specify no minimum limit, specify `0`."""
+    max: int | None
+    """
+    The maximum number of vCPUs. To specify no maximum limit, omit this
+    parameter.
+    """
+
+@dataclass(kw_only=True)
+class VCpuInfo(_SerdeShape):
+    """Describes the vCPU configurations for the instance type."""
+
+    default_v_cpus: int | None = ...
+    """The default number of vCPUs for the instance type."""
+    default_cores: int | None = ...
+    """The default number of cores for the instance type."""
+    default_threads_per_core: int | None = ...
+    """The default number of threads per core for the instance type."""
+    valid_cores: list[int] | None = ...
+    """The valid number of cores that can be configured for the instance type."""
+    valid_threads_per_core: list[int] | None = ...
+    """
+    The valid number of threads per core that can be configured for the
+    instance type.
+    """
+
+class VerificationMethod(UnknownEnumMixin, StrEnum):
+    REMARKS_X509 = "remarks-x509"
+    DNS_TOKEN = "dns-token"
+
+@dataclass(kw_only=True)
+class VerifiedAccessEndpoint(_SerdeShape):
+    """
+    An Amazon Web Services Verified Access endpoint specifies the
+    application that Amazon Web Services Verified Access provides access to.
+    It must be attached to an Amazon Web Services Verified Access group. An
+    Amazon Web Services Verified Access endpoint must also have an attached
+    access policy before you attached it to a group.
+    """
+
+    verified_access_instance_id: str | None = ...
+    """The ID of the Amazon Web Services Verified Access instance."""
+    verified_access_group_id: str | None = ...
+    """The ID of the Amazon Web Services Verified Access group."""
+    verified_access_endpoint_id: str | None = ...
+    """The ID of the Amazon Web Services Verified Access endpoint."""
+    application_domain: str | None = ...
+    """The DNS name for users to reach your application."""
+    endpoint_type: str | None = ...
+    """
+    The type of Amazon Web Services Verified Access endpoint. Incoming
+    application requests will be sent to an IP address, load balancer or a
+    network interface depending on the endpoint type specified.
+    """
+    attachment_type: str | None = ...
+    """
+    The type of attachment used to provide connectivity between the Amazon
+    Web Services Verified Access endpoint and the application.
+    """
+    domain_certificate_arn: str | None = ...
+    """
+    The ARN of a public TLS/SSL certificate imported into or created with
+    ACM.
+    """
+    endpoint_domain: str | None = ...
+    """A DNS name that is generated for the endpoint."""
+    device_validation_domain: str | None = ...
+    """Returned if endpoint has a device trust provider attached."""
+    security_group_ids: list[str] | None = ...
+    """The IDs of the security groups for the endpoint."""
+    load_balancer_options: VerifiedAccessEndpointLoadBalancerOptions | None = ...
+    """
+    The load balancer details if creating the Amazon Web Services Verified
+    Access endpoint as `load-balancer`type.
+    """
+    network_interface_options: VerifiedAccessEndpointEniOptions | None = ...
+    """The options for network-interface type endpoint."""
+    status: VerifiedAccessEndpointStatus | None = ...
+    """The endpoint status."""
+    description: str | None = ...
+    """A description for the Amazon Web Services Verified Access endpoint."""
+    creation_time: str | None = ...
+    """The creation time."""
+    last_updated_time: str | None = ...
+    """The last updated time."""
+    deletion_time: str | None = ...
+    """The deletion time."""
+    tags: list[Tag] | None = ...
+    """The tags."""
+    sse_specification: VerifiedAccessSseSpecificationResponse | None = ...
+    """The options in use for server side encryption."""
+    rds_options: VerifiedAccessEndpointRdsOptions | None = ...
+    """The options for an RDS endpoint."""
+    cidr_options: VerifiedAccessEndpointCidrOptions | None = ...
+    """The options for a CIDR endpoint."""
+
+class VerifiedAccessEndpointAttachmentType(UnknownEnumMixin, StrEnum):
+    VPC = "vpc"
+
+@dataclass(kw_only=True)
+class VerifiedAccessEndpointCidrOptions(_SerdeShape):
+    """Describes the CIDR options for a Verified Access endpoint."""
+
+    cidr: str | None = ...
+    """The CIDR."""
+    port_ranges: list[VerifiedAccessEndpointPortRange] | None = ...
+    """The port ranges."""
+    protocol: str | None = ...
+    """The protocol."""
+    subnet_ids: list[str] | None = ...
+    """The IDs of the subnets."""
+
+@dataclass(kw_only=True)
+class VerifiedAccessEndpointEniOptions(_SerdeShape):
+    """Options for a network-interface type endpoint."""
+
+    network_interface_id: str | None = ...
+    """The ID of the network interface."""
+    protocol: str | None = ...
+    """The IP protocol."""
+    port: int | None = ...
+    """The IP port number."""
+    port_ranges: list[VerifiedAccessEndpointPortRange] | None = ...
+    """The port ranges."""
+
+@dataclass(kw_only=True)
+class VerifiedAccessEndpointLoadBalancerOptions(_SerdeShape):
+    """
+    Describes a load balancer when creating an Amazon Web Services Verified
+    Access endpoint using the `load-balancer` type.
+    """
+
+    protocol: str | None = ...
+    """The IP protocol."""
+    port: int | None = ...
+    """The IP port number."""
+    load_balancer_arn: str | None = ...
+    """The ARN of the load balancer."""
+    subnet_ids: list[str] | None = ...
+    """The IDs of the subnets."""
+    port_ranges: list[VerifiedAccessEndpointPortRange] | None = ...
+    """The port ranges."""
+
+@dataclass(kw_only=True)
+class VerifiedAccessEndpointPortRange(_SerdeShape):
+    """Describes a port range."""
+
+    from_port: int | None = ...
+    """The start of the port range."""
+    to_port: int | None = ...
+    """The end of the port range."""
+
+class VerifiedAccessEndpointProtocol(UnknownEnumMixin, StrEnum):
+    HTTP = "http"
+    HTTPS = "https"
+    TCP = "tcp"
+
+@dataclass(kw_only=True)
+class VerifiedAccessEndpointRdsOptions(_SerdeShape):
+    """Describes the RDS options for a Verified Access endpoint."""
+
+    protocol: str | None = ...
+    """The protocol."""
+    port: int | None = ...
+    """The port."""
+    rds_db_instance_arn: str | None = ...
+    """The ARN of the RDS instance."""
+    rds_db_cluster_arn: str | None = ...
+    """The ARN of the DB cluster."""
+    rds_db_proxy_arn: str | None = ...
+    """The ARN of the RDS proxy."""
+    rds_endpoint: str | None = ...
+    """The RDS endpoint."""
+    subnet_ids: list[str] | None = ...
+    """The IDs of the subnets."""
+
+@dataclass(kw_only=True)
+class VerifiedAccessEndpointStatus(_SerdeShape):
+    """Describes the status of a Verified Access endpoint."""
+
+    code: str | None = ...
+    """The status code of the Verified Access endpoint."""
+    message: str | None = ...
+    """The status message of the Verified Access endpoint."""
+
+class VerifiedAccessEndpointStatusCode(UnknownEnumMixin, StrEnum):
+    PENDING = "pending"
+    ACTIVE = "active"
+    UPDATING = "updating"
+    DELETING = "deleting"
+    DELETED = "deleted"
+
+@dataclass(kw_only=True)
+class VerifiedAccessEndpointTarget(_SerdeShape):
+    """Describes the targets for the specified Verified Access endpoint."""
+
+    verified_access_endpoint_id: str | None = ...
+    """The ID of the Verified Access endpoint."""
+    verified_access_endpoint_target_ip_address: str | None = ...
+    """The IP address of the target."""
+    verified_access_endpoint_target_dns: str | None = ...
+    """The DNS name of the target."""
 
 class VerifiedAccessEndpointType(UnknownEnumMixin, StrEnum):
     LOAD_BALANCER = "load-balancer"
@@ -1157,6 +2102,16 @@ class VpcEncryptionControlConfiguration(_SerdeShape):
     Specifies whether to exclude Elastic File System traffic from encryption
     enforcement.
     """
+    global_accelerator_exclusion: str | None = ...
+    """
+    Specifies whether to exclude AWS Global Accelerator traffic from
+    encryption enforcement.
+    """
+    api_gateway_v2_exclusion: str | None = ...
+    """
+    Specifies whether to exclude Amazon API Gateway V2 traffic from
+    encryption enforcement.
+    """
 
 class VpcEncryptionControlConfigurationDict(TypedDict, total=False):
     """Dictionary form of `VpcEncryptionControlConfiguration`."""
@@ -1203,6 +2158,16 @@ class VpcEncryptionControlConfigurationDict(TypedDict, total=False):
     Specifies whether to exclude Elastic File System traffic from encryption
     enforcement.
     """
+    global_accelerator_exclusion: str | None
+    """
+    Specifies whether to exclude AWS Global Accelerator traffic from
+    encryption enforcement.
+    """
+    api_gateway_v2_exclusion: str | None
+    """
+    Specifies whether to exclude Amazon API Gateway V2 traffic from
+    encryption enforcement.
+    """
 
 @dataclass(kw_only=True)
 class VpcEncryptionControlExclusion(_SerdeShape):
@@ -1246,6 +2211,10 @@ class VpcEncryptionControlExclusions(_SerdeShape):
     """The exclusion configuration for VPC Lattice traffic."""
     elastic_file_system: VpcEncryptionControlExclusion | None = ...
     """The exclusion configuration for Elastic File System traffic."""
+    global_accelerator: VpcEncryptionControlExclusion | None = ...
+    """The exclusion configuration for AWS Global Accelerator traffic."""
+    api_gateway_v2: VpcEncryptionControlExclusion | None = ...
+    """The exclusion configuration for Amazon API Gateway V2 traffic."""
 
 class VpcEncryptionControlExclusionState(UnknownEnumMixin, StrEnum):
     ENABLING = "enabling"

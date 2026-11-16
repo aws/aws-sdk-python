@@ -70,6 +70,7 @@ _Pu = "Publish"
 _PTu = "PublishTo"
 _La = "Layers"
 _FSCi = "FileSystemConfigs"
+_RCu = "RuntimeConfig"
 _ICR = "ImageConfigResponse"
 _LUS = "LastUpdateStatus"
 _LUSR = "LastUpdateStatusReason"
@@ -520,6 +521,7 @@ UPDATE_FUNCTION_CODE_OUTPUT: StaticSchema = (
         _CPC,
         _CSon,
         _DC,
+        _RCu,
     ),
     (
         (lambda: schemas.NAMESPACED_FUNCTION_NAME, 0),
@@ -562,6 +564,7 @@ UPDATE_FUNCTION_CODE_OUTPUT: StaticSchema = (
         (lambda: schemas.CAPACITY_PROVIDER_CONFIG, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.DURABLE_CONFIG, 0),
+        (lambda: schemas.FUNCTION_RUNTIME_CONFIG, 0),
     ),
 )
 
@@ -621,6 +624,7 @@ UPDATE_FUNCTION_CONFIGURATION_INPUT: StaticSchema = (
         _LC,
         _CPC,
         _DC,
+        _RCu,
     ),
     (
         (lambda: schemas.FUNCTION_NAME, 9),
@@ -644,6 +648,7 @@ UPDATE_FUNCTION_CONFIGURATION_INPUT: StaticSchema = (
         (lambda: schemas.LOGGING_CONFIG, 0),
         (lambda: schemas.CAPACITY_PROVIDER_CONFIG, 0),
         (lambda: schemas.DURABLE_CONFIG, 0),
+        (lambda: schemas.FUNCTION_RUNTIME_CONFIG, 0),
     ),
 )
 
@@ -693,6 +698,7 @@ UPDATE_FUNCTION_CONFIGURATION_OUTPUT: StaticSchema = (
         _CPC,
         _CSon,
         _DC,
+        _RCu,
     ),
     (
         (lambda: schemas.NAMESPACED_FUNCTION_NAME, 0),
@@ -735,6 +741,7 @@ UPDATE_FUNCTION_CONFIGURATION_OUTPUT: StaticSchema = (
         (lambda: schemas.CAPACITY_PROVIDER_CONFIG, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.DURABLE_CONFIG, 0),
+        (lambda: schemas.FUNCTION_RUNTIME_CONFIG, 0),
     ),
 )
 
@@ -1170,6 +1177,7 @@ PUBLISH_VERSION_OUTPUT: StaticSchema = (
         _CPC,
         _CSon,
         _DC,
+        _RCu,
     ),
     (
         (lambda: schemas.NAMESPACED_FUNCTION_NAME, 0),
@@ -1212,6 +1220,7 @@ PUBLISH_VERSION_OUTPUT: StaticSchema = (
         (lambda: schemas.CAPACITY_PROVIDER_CONFIG, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.DURABLE_CONFIG, 0),
+        (lambda: schemas.FUNCTION_RUNTIME_CONFIG, 0),
     ),
 )
 

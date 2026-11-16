@@ -30,7 +30,7 @@ logger = logging.getLogger(__name__)
 class AsyncSageMakerRuntimeHTTP2Client(AsyncClient[AsyncSageMakerRuntimeHTTP2Config]):
     """The Amazon SageMaker AI runtime HTTP/2 API."""
 
-    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
+    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
 
     @_overload
     async def invoke_endpoint_with_bidirectional_stream(

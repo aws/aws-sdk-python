@@ -72,7 +72,7 @@ class AsyncCognitoIdentityClient(AsyncClient[AsyncCognitoIdentityConfig]):
     Identities](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html).
     """
 
-    _client_plugins = (user_agent_plugin, aws_user_agent_plugin)
+    _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
 
     @_overload
     async def create_identity_pool(

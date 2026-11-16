@@ -36,6 +36,31 @@ class RegistryType(UnknownEnumMixin, StrEnum):
     MODULE = "MODULE"
     HOOK = "HOOK"
 
+@dataclass(kw_only=True)
+class RemoveAliasInput(_SerdeShape):
+    """The input for the RemoveAlias action."""
+
+    alias_name: str | None = ...
+    """The alias name to remove."""
+
+class RemoveAliasInputDict(TypedDict, total=False):
+    """Dictionary form of `RemoveAliasInput`."""
+
+    alias_name: Required[str]
+    """The alias name to remove."""
+
+@dataclass(kw_only=True)
+class RemoveAliasOutput(_SerdeShape):
+    """Dataclass for RemoveAliasOutput structure."""
+
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
 class Replacement(UnknownEnumMixin, StrEnum):
     TRUE = "True"
     FALSE = "False"
@@ -1090,6 +1115,57 @@ class ScanType(UnknownEnumMixin, StrEnum):
     PARTIAL = "PARTIAL"
 
 @dataclass(kw_only=True)
+class SetAliasInput(_SerdeShape):
+    """The input for the SetAlias action."""
+
+    stack_name: str | None = ...
+    """The name or unique stack ID of the stack to assign an alias to."""
+    alias_name: str | None = ...
+    """
+    The alias to assign to the stack. The alias can then be used in place of
+    the stack name in any API call that accepts `StackName`.
+
+    The name must be unique within the same account and Region. It cannot
+    match an existing stack name or another active alias.
+
+    Note:
+        An alias name can contain only alphanumeric characters (case-sensitive)
+        and hyphens. It must start with an alphabetic character and can't be
+        longer than 128 characters.
+    """
+
+class SetAliasInputDict(TypedDict, total=False):
+    """Dictionary form of `SetAliasInput`."""
+
+    stack_name: Required[str]
+    """The name or unique stack ID of the stack to assign an alias to."""
+    alias_name: Required[str]
+    """
+    The alias to assign to the stack. The alias can then be used in place of
+    the stack name in any API call that accepts `StackName`.
+
+    The name must be unique within the same account and Region. It cannot
+    match an existing stack name or another active alias.
+
+    Note:
+        An alias name can contain only alphanumeric characters (case-sensitive)
+        and hyphens. It must start with an alphabetic character and can't be
+        longer than 128 characters.
+    """
+
+@dataclass(kw_only=True)
+class SetAliasOutput(_SerdeShape):
+    """Dataclass for SetAliasOutput structure."""
+
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
 class SetStackPolicyInput(_SerdeShape):
     """The input for the SetStackPolicy action."""
 
@@ -1545,6 +1621,12 @@ class Stack(_SerdeShape):
     """
     last_operations: list[OperationEntry] | None = ...
     """Information about the most recent operations performed on this stack."""
+    alias_name: str | None = ...
+    """
+    The alias assigned to the stack, if one has been set. An alias is an
+    alternative name that can be used in place of the stack name in any
+    CloudFormation API call that accepts the `StackName` parameter.
+    """
 
 @dataclass(kw_only=True)
 class StackDefinition(_SerdeShape):

@@ -24,6 +24,7 @@ _T = "Type"
 _TNA = "TypeNameAlias"
 _ERA = "ExecutionRoleArn"
 _Ar = "Arn"
+_AN = "AliasName"
 _PASSED = "PASSED"
 _SSARN = "StackSetARN"
 _AD = "AutoDeployment"
@@ -580,6 +581,7 @@ STACK: StaticSchema = (
         _DMel,
         _DSe,
         _LO,
+        _AN,
     ),
     (
         (lambda: schemas.STACK_ID, 0),
@@ -609,6 +611,7 @@ STACK: StaticSchema = (
         (lambda: schemas.DELETION_MODE, 0),
         (lambda: schemas.DETAILED_STATUS, 0),
         (LAST_OPERATIONS, 0),
+        (lambda: schemas.ALIAS_NAME, 0),
     ),
 )
 
