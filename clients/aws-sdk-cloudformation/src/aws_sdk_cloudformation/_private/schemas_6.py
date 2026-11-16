@@ -17,6 +17,7 @@ _N = "Name"
 _m = "member"
 _s = "smithy.api#input"
 _sm = "smithy.api#output"
+_sO = "smithy.api#clientOptional"
 _smit = "smithy.api#required"
 _PI = "PublisherId"
 _RESOURCE = "RESOURCE"
@@ -91,7 +92,6 @@ _ETnd = "EndTimestamp"
 _SDta = "StatusDetails"
 _Su = "Summaries"
 _STACK = "STACK"
-_RSMR = "ResourceScannerMaxResults"
 _RTP = "ResourceTypePrefix"
 _LRSRI = "ListResourceScanResourcesInput"
 _SRca = "ScannedResources"
@@ -199,8 +199,6 @@ _LTR = "ListTypeRegistrations"
 _TNP = "TypeNamePrefix"
 _TFy = "TypeFilters"
 
-RESOURCE_SCANNER_MAX_RESULTS: StaticSchema = (7, n0, _RSMR, 0)
-
 LIST_RESOURCE_SCAN_RESOURCES_INPUT: StaticSchema = (
     18,
     n0,
@@ -208,13 +206,13 @@ LIST_RESOURCE_SCAN_RESOURCES_INPUT: StaticSchema = (
     {_s: None},
     (_RSI, _RI, _RTP, _TK, _TV, _NT, _MR),
     (
-        (lambda: schemas.RESOURCE_SCAN_ID, 1),
+        (lambda: schemas.RESOURCE_SCAN_ID, {_sO: None, _smit: None}),
         (lambda: schemas.RESOURCE_IDENTIFIER, 0),
         (lambda: schemas.RESOURCE_TYPE_PREFIX, 0),
         (lambda: schemas.TAG_KEY, 0),
         (lambda: schemas.TAG_VALUE, 0),
         (lambda: schemas.NEXT_TOKEN, 0),
-        (RESOURCE_SCANNER_MAX_RESULTS, 0),
+        (lambda: schemas.RESOURCE_SCANNER_MAX_RESULTS, 0),
     ),
 )
 
@@ -266,7 +264,7 @@ LIST_RESOURCE_SCANS_INPUT: StaticSchema = (
     (_NT, _MR, _STF),
     (
         (lambda: schemas.NEXT_TOKEN, 0),
-        (RESOURCE_SCANNER_MAX_RESULTS, 0),
+        (lambda: schemas.RESOURCE_SCANNER_MAX_RESULTS, 0),
         (SCAN_TYPE, 0),
     ),
 )
@@ -323,13 +321,13 @@ LIST_STACK_INSTANCE_RESOURCE_DRIFTS_INPUT: StaticSchema = (
     {_s: None},
     (_SSN, _NT, _MR, _SIRDS, _SIA, _SIR, _OI, _CA),
     (
-        (lambda: schemas.STACK_SET_NAME_OR_ID, 1),
+        (lambda: schemas.STACK_SET_NAME_OR_ID, {_sO: None, _smit: None}),
         (lambda: schemas.NEXT_TOKEN, 0),
         (lambda: schemas.MAX_RESULTS, 0),
         (lambda: schemas.STACK_RESOURCE_DRIFT_STATUS_FILTERS, 0),
-        (lambda: schemas.ACCOUNT, 1),
-        (lambda: schemas.REGION, 1),
-        (lambda: schemas.CLIENT_REQUEST_TOKEN, 1),
+        (lambda: schemas.ACCOUNT, {_sO: None, _smit: None}),
+        (lambda: schemas.REGION, {_sO: None, _smit: None}),
+        (lambda: schemas.CLIENT_REQUEST_TOKEN, {_sO: None, _smit: None}),
         (lambda: schemas.CALL_AS, 0),
     ),
 )
@@ -367,14 +365,14 @@ STACK_INSTANCE_RESOURCE_DRIFTS_SUMMARY: StaticSchema = (
     0,
     (_SI, _LRI, _PRI, _PRIC, _RT, _PDro, _SRDS, _Ti),
     (
-        (lambda: schemas.STACK_ID, 1),
-        (lambda: schemas.LOGICAL_RESOURCE_ID, 1),
+        (lambda: schemas.STACK_ID, {_sO: None, _smit: None}),
+        (lambda: schemas.LOGICAL_RESOURCE_ID, {_sO: None, _smit: None}),
         (lambda: schemas.PHYSICAL_RESOURCE_ID, 0),
         (lambda: schemas.PHYSICAL_RESOURCE_ID_CONTEXT, 0),
-        (lambda: schemas.RESOURCE_TYPE, 1),
+        (lambda: schemas.RESOURCE_TYPE, {_sO: None, _smit: None}),
         (lambda: schemas.PROPERTY_DIFFERENCES, 0),
-        (lambda: schemas.STACK_RESOURCE_DRIFT_STATUS, 1),
-        (lambda: schemas.TIMESTAMP, 1),
+        (lambda: schemas.STACK_RESOURCE_DRIFT_STATUS, {_sO: None, _smit: None}),
+        (lambda: schemas.TIMESTAMP, {_sO: None, _smit: None}),
     ),
 )
 
@@ -423,7 +421,7 @@ LIST_STACK_INSTANCES_INPUT: StaticSchema = (
     {_s: None},
     (_SSN, _NT, _MR, _Fi, _SIA, _SIR, _CA),
     (
-        (lambda: schemas.STACK_SET_NAME, 1),
+        (lambda: schemas.STACK_SET_NAME, {_sO: None, _smit: None}),
         (lambda: schemas.NEXT_TOKEN, 0),
         (lambda: schemas.MAX_RESULTS, 0),
         (STACK_INSTANCE_FILTERS, 0),
@@ -489,7 +487,7 @@ LIST_STACK_REFACTOR_ACTIONS_INPUT: StaticSchema = (
     {_s: None},
     (_SRI, _NT, _MR),
     (
-        (lambda: schemas.STACK_REFACTOR_ID, 1),
+        (lambda: schemas.STACK_REFACTOR_ID, {_sO: None, _smit: None}),
         (lambda: schemas.NEXT_TOKEN, 0),
         (lambda: schemas.MAX_RESULTS, 0),
     ),
@@ -501,7 +499,10 @@ LIST_STACK_REFACTOR_ACTIONS_OUTPUT: StaticSchema = (
     _LSRAO,
     {_sm: None},
     (_SRAt, _NT),
-    ((lambda: STACK_REFACTOR_ACTIONS, 1), (lambda: schemas.NEXT_TOKEN, 0)),
+    (
+        (lambda: STACK_REFACTOR_ACTIONS, {_sO: None, _smit: None}),
+        (lambda: schemas.NEXT_TOKEN, 0),
+    ),
 )
 
 LIST_STACK_REFACTOR_ACTIONS: StaticOperationSchema = (
@@ -620,7 +621,10 @@ LIST_STACK_REFACTORS_OUTPUT: StaticSchema = (
     _LSRO,
     {_sm: None},
     (_SRSta, _NT),
-    ((lambda: STACK_REFACTOR_SUMMARIES, 1), (lambda: schemas.NEXT_TOKEN, 0)),
+    (
+        (lambda: STACK_REFACTOR_SUMMARIES, {_sO: None, _smit: None}),
+        (lambda: schemas.NEXT_TOKEN, 0),
+    ),
 )
 
 LIST_STACK_REFACTORS: StaticOperationSchema = (
@@ -664,7 +668,10 @@ LIST_STACK_RESOURCES_INPUT: StaticSchema = (
     _LSRIi,
     {_s: None},
     (_SN, _NT),
-    ((lambda: schemas.STACK_NAME, 1), (lambda: schemas.NEXT_TOKEN, 0)),
+    (
+        (lambda: schemas.STACK_NAME, {_sO: None, _smit: None}),
+        (lambda: schemas.NEXT_TOKEN, 0),
+    ),
 )
 
 LIST_STACK_RESOURCES_OUTPUT: StaticSchema = (
@@ -692,7 +699,10 @@ STACK_RESOURCE_DRIFT_INFORMATION_SUMMARY: StaticSchema = (
     _SRDIS,
     0,
     (_SRDS, _LCT),
-    ((lambda: schemas.STACK_RESOURCE_DRIFT_STATUS, 1), (lambda: schemas.TIMESTAMP, 0)),
+    (
+        (lambda: schemas.STACK_RESOURCE_DRIFT_STATUS, {_sO: None, _smit: None}),
+        (lambda: schemas.TIMESTAMP, 0),
+    ),
 )
 
 STACK_RESOURCE_SUMMARY: StaticSchema = (
@@ -702,11 +712,11 @@ STACK_RESOURCE_SUMMARY: StaticSchema = (
     0,
     (_LRI, _PRI, _RT, _LUTa, _RSe, _RSR, _DI, _MI),
     (
-        (lambda: schemas.LOGICAL_RESOURCE_ID, 1),
+        (lambda: schemas.LOGICAL_RESOURCE_ID, {_sO: None, _smit: None}),
         (lambda: schemas.PHYSICAL_RESOURCE_ID, 0),
-        (lambda: schemas.RESOURCE_TYPE, 1),
-        (lambda: schemas.TIMESTAMP, 1),
-        (lambda: schemas.RESOURCE_STATUS, 1),
+        (lambda: schemas.RESOURCE_TYPE, {_sO: None, _smit: None}),
+        (lambda: schemas.TIMESTAMP, {_sO: None, _smit: None}),
+        (lambda: schemas.RESOURCE_STATUS, {_sO: None, _smit: None}),
         (lambda: schemas.RESOURCE_STATUS_REASON, 0),
         (STACK_RESOURCE_DRIFT_INFORMATION_SUMMARY, 0),
         (lambda: schemas.MODULE_INFO, 0),
@@ -765,7 +775,10 @@ STACK_DRIFT_INFORMATION_SUMMARY: StaticSchema = (
     _SDIS,
     0,
     (_SDS, _LCT),
-    ((lambda: schemas.STACK_DRIFT_STATUS, 1), (lambda: schemas.TIMESTAMP, 0)),
+    (
+        (lambda: schemas.STACK_DRIFT_STATUS, {_sO: None, _smit: None}),
+        (lambda: schemas.TIMESTAMP, 0),
+    ),
 )
 
 TEMPLATE_DESCRIPTION: StaticSchema = (3, n0, _TDe, 0)
@@ -778,12 +791,12 @@ STACK_SUMMARY: StaticSchema = (
     (_SI, _SN, _TDe, _CTr, _LUT, _DTel, _SS, _SSR, _PIa, _RIo, _DI, _LO),
     (
         (lambda: schemas.STACK_ID, 0),
-        (lambda: schemas.STACK_NAME, 1),
+        (lambda: schemas.STACK_NAME, {_sO: None, _smit: None}),
         (TEMPLATE_DESCRIPTION, 0),
-        (lambda: schemas.CREATION_TIME, 1),
+        (lambda: schemas.CREATION_TIME, {_sO: None, _smit: None}),
         (lambda: schemas.LAST_UPDATED_TIME, 0),
         (lambda: schemas.DELETION_TIME, 0),
-        (lambda: schemas.STACK_STATUS, 1),
+        (lambda: schemas.STACK_STATUS, {_sO: None, _smit: None}),
         (lambda: schemas.STACK_STATUS_REASON, 0),
         (lambda: schemas.STACK_ID, 0),
         (lambda: schemas.STACK_ID, 0),
@@ -801,7 +814,7 @@ LIST_STACK_SET_AUTO_DEPLOYMENT_TARGETS_INPUT: StaticSchema = (
     {_s: None},
     (_SSN, _NT, _MR, _CA),
     (
-        (lambda: schemas.STACK_SET_NAME_OR_ID, 1),
+        (lambda: schemas.STACK_SET_NAME_OR_ID, {_sO: None, _smit: None}),
         (lambda: schemas.NEXT_TOKEN, 0),
         (lambda: schemas.MAX_RESULTS, 0),
         (lambda: schemas.CALL_AS, 0),
@@ -884,8 +897,8 @@ LIST_STACK_SET_OPERATION_RESULTS_INPUT: StaticSchema = (
     {_s: None},
     (_SSN, _OI, _NT, _MR, _CA, _Fi),
     (
-        (lambda: schemas.STACK_SET_NAME, 1),
-        (lambda: schemas.CLIENT_REQUEST_TOKEN, 1),
+        (lambda: schemas.STACK_SET_NAME, {_sO: None, _smit: None}),
+        (lambda: schemas.CLIENT_REQUEST_TOKEN, {_sO: None, _smit: None}),
         (lambda: schemas.NEXT_TOKEN, 0),
         (lambda: schemas.MAX_RESULTS, 0),
         (lambda: schemas.CALL_AS, 0),
@@ -965,7 +978,7 @@ LIST_STACK_SET_OPERATIONS_INPUT: StaticSchema = (
     {_s: None},
     (_SSN, _NT, _MR, _CA),
     (
-        (lambda: schemas.STACK_SET_NAME, 1),
+        (lambda: schemas.STACK_SET_NAME, {_sO: None, _smit: None}),
         (lambda: schemas.NEXT_TOKEN, 0),
         (lambda: schemas.MAX_RESULTS, 0),
         (lambda: schemas.CALL_AS, 0),

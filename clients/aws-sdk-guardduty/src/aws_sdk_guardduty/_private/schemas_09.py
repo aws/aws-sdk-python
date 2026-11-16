@@ -13,6 +13,7 @@ _sSI = "smithy.synthetic#originalShapeId"
 _s = "smithy.api#input"
 _sm = "smithy.api#required"
 _sL = "smithy.api#httpLabel"
+_sO = "smithy.api#clientOptional"
 _sN = "smithy.api#jsonName"
 _II = "InvitationId"
 _iI = "invitationId"
@@ -63,8 +64,20 @@ _Pr = "Protocol"
 _pr = "protocol"
 _Bl = "Blocked"
 _b = "blocked"
+_SI = "SourceIps"
+_RU = "RequestUri"
+_rU = "requestUri"
+_V = "Verb"
+_ve = "verb"
 _Res = "Resource"
 _res = "resource"
+_Na = "Namespace"
+_na = "namespace"
+_RN = "ResourceName"
+_rN = "resourceName"
+_sIP = "sourceIPs"
+_SC = "StatusCode"
+_sC = "statusCode"
 _Us = "User"
 _us = "user"
 _App = "Application"
@@ -116,6 +129,8 @@ _IIns = "InstanceId"
 _iIn = "instanceId"
 _ITn = "InstanceType"
 _iT = "instanceType"
+_CNl = "ClusterName"
+_cNl = "clusterName"
 _AI_ = "ACCOUNT_ID"
 _RT_ = "RESOURCE_TYPE"
 _cK = "criterionKey"
@@ -204,6 +219,8 @@ _SIu = "SubnetId"
 _sIu = "subnetId"
 _IIm = "ImageId"
 _iIm = "imageId"
+_Use = "Username"
+_use = "username"
 _FAu = "FunctionArn"
 _fA = "functionArn"
 _FNu = "FunctionName"
@@ -238,6 +255,8 @@ _th = "threats"
 _sCc = "scanCategory"
 _UTC = "UniqueThreatCount"
 _uTC = "uniqueThreatCount"
+_UI = "UserId"
+_uI = "userId"
 _FDin = "FindingDetail"
 _aW = "activityWindow"
 _ITnv = "InvestigationType"
@@ -253,6 +272,9 @@ _sRSc = "scanResultStatus"
 _mem = "members"
 _Memb = "Members"
 _RIec = "RecordId"
+_KAC = "KubernetesApiCall"
+_UG = "UserGroups"
+_uG = "userGroups"
 _ECv = "EventCount"
 _eCv = "eventCount"
 _IKW = "InvestigationKubernetesWorkload"
@@ -504,6 +526,29 @@ _LOAA = "ListOrganizationAdminAccounts"
 
 NEXT_TOKEN: StaticSchema = (3, n0, _NT, 0)
 
+KUBERNETES_API_CALL: StaticSchema = (
+    18,
+    n0,
+    _KAC,
+    0,
+    (_CNl, _Use, _UG, _UI, _V, _RT, _RN, _Na, _RU, _SC, _SI, _UA, _ECv),
+    (
+        (lambda: schemas.STRING, {_sN: _cNl}),
+        (lambda: schemas.STRING, {_sN: _use}),
+        (lambda: schemas.STRING, {_sN: _uG}),
+        (lambda: schemas.STRING, {_sN: _uI}),
+        (lambda: schemas.STRING, {_sN: _ve}),
+        (lambda: schemas.STRING, {_sN: _rT}),
+        (lambda: schemas.STRING, {_sN: _rN}),
+        (lambda: schemas.STRING, {_sN: _na}),
+        (lambda: schemas.STRING, {_sN: _rU}),
+        (lambda: schemas.INTEGER, {_sN: _sC}),
+        (lambda: schemas.STRING, {_sN: _sIP}),
+        (lambda: schemas.STRING, {_sN: _uA}),
+        (lambda: schemas.COUNT, {_sN: _eCv}),
+    ),
+)
+
 INVESTIGATION_KUBERNETES_WORKLOAD: StaticSchema = (
     18,
     n0,
@@ -526,7 +571,7 @@ KUBERNETES_ACTIVITY: StaticSchema = (
     0,
     (_AC, _An, _W, _Enr),
     (
-        (lambda: schemas.KUBERNETES_API_CALL, {_sN: _aCp}),
+        (KUBERNETES_API_CALL, {_sN: _aCp}),
         (lambda: schemas.KUBERNETES_ANOMALY, {_sN: _an}),
         (INVESTIGATION_KUBERNETES_WORKLOAD, {_sN: _w}),
         (lambda: schemas.ENRICHMENT, {_sN: _enr}),
@@ -908,9 +953,9 @@ INVESTIGATION_RESOURCE: StaticSchema = (
     0,
     (_U, _N, _RT, _Dat),
     (
-        (lambda: schemas.STRING, {_sN: _u, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sN: _u, _sm: None}),
         (lambda: schemas.STRING, {_sN: _n}),
-        (lambda: schemas.INVESTIGATION_RESOURCE_TYPE, {_sN: _rT, _sm: None}),
+        (lambda: schemas.INVESTIGATION_RESOURCE_TYPE, {_sO: None, _sN: _rT, _sm: None}),
         (INVESTIGATION_RESOURCE_DATA, {_sN: _dat}),
     ),
 )
@@ -998,7 +1043,7 @@ OBSERVATION_RECORD: StaticSchema = (
         _Ind,
     ),
     (
-        (OBSERVATION_TYPE, {_sN: _oT, _sm: None}),
+        (OBSERVATION_TYPE, {_sO: None, _sN: _oT, _sm: None}),
         (lambda: schemas.FINDING_DETAIL, {_sN: _fDi}),
         (INVESTIGATION_RESOURCE, {_sN: _res}),
         (NETWORK_ACTIVITY, {_sN: _nA}),
@@ -1040,11 +1085,11 @@ INVESTIGATION_RECORD: StaticSchema = (
     0,
     (_RIec, _T, _Tit, _Nar, _CAr, _SDup),
     (
-        (lambda: schemas.RECORD_ID, {_sN: _rIec, _sm: None}),
-        (lambda: schemas.RECORD_TYPE, {_sN: _t, _sm: None}),
-        (RECORD_TITLE, {_sN: _ti, _sm: None}),
+        (lambda: schemas.RECORD_ID, {_sO: None, _sN: _rIec, _sm: None}),
+        (lambda: schemas.RECORD_TYPE, {_sO: None, _sN: _t, _sm: None}),
+        (RECORD_TITLE, {_sO: None, _sN: _ti, _sm: None}),
         (lambda: schemas.NARRATIVE, {_sN: _nar}),
-        (lambda: schemas.TIMESTAMP, {_sN: _cA, _sm: None}),
+        (lambda: schemas.TIMESTAMP, {_sO: None, _sN: _cA, _sm: None}),
         (SUPPORTING_DATA, {_sN: _sDup}),
     ),
 )
@@ -1139,7 +1184,7 @@ LIST_INVESTIGATIONS_OUTPUT: StaticSchema = (
     {_sSI: _cLIRo, _smi: None},
     (_Inve, _NT),
     (
-        (lambda: INVESTIGATION_SUMMARIES, {_sN: _inve, _sm: None}),
+        (lambda: INVESTIGATION_SUMMARIES, {_sO: None, _sN: _inve, _sm: None}),
         (NEXT_TOKEN, {_sN: _nT}),
     ),
 )
@@ -1266,7 +1311,7 @@ LIST_IP_SETS_OUTPUT: StaticSchema = (
     {_sSI: _cLIPSRo, _smi: None},
     (_ISIp, _NT),
     (
-        (lambda: IP_SET_IDS, {_sN: _iSIp, _sm: None}),
+        (lambda: IP_SET_IDS, {_sO: None, _sN: _iSIp, _sm: None}),
         (lambda: schemas.STRING, {_sN: _nT}),
     ),
 )
@@ -1416,7 +1461,7 @@ LIST_MALWARE_SCANS_OUTPUT: StaticSchema = (
     {_sSI: _cLMSRo, _smi: None},
     (_Sca, _NT),
     (
-        (lambda: MALWARE_SCANS, {_sN: _sc, _sm: None}),
+        (lambda: MALWARE_SCANS, {_sO: None, _sN: _sc, _sm: None}),
         (lambda: schemas.STRING, {_sN: _nT}),
     ),
 )

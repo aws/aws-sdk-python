@@ -11,8 +11,11 @@ _sN = "smithy.api#xmlName"
 _sV = "smithy.api#enumValue"
 _me = "member"
 _i = "item"
+_Ta = "Tag"
+_Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
+_sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _DR = "DryRun"
 _smit = "smithy.api#output"
@@ -20,6 +23,8 @@ _R = "Return"
 _r = "return"
 _fa = "failed"
 _SIu = "SubnetId"
+_RIe = "ResourceId"
+_rI = "resourceId"
 _C = "Code"
 _co = "code"
 _Me = "Message"
@@ -43,6 +48,7 @@ _NIASAI = "NetworkInsightsAccessScopeAnalysisId"
 _NIASI = "NetworkInsightsAccessScopeId"
 _nIASAI = "networkInsightsAccessScopeAnalysisId"
 _nIASI = "networkInsightsAccessScopeId"
+_Res = "Resources"
 _NBG = "NetworkBorderGroup"
 _PIo = "PoolId"
 _CTl = "ClientToken"
@@ -67,18 +73,10 @@ _LGRTI = "LocalGatewayRouteTableId"
 _succ = "successful"
 _LTI = "LaunchTemplateId"
 _LTN = "LaunchTemplateName"
-_KN = "KeyName"
 _lTI = "launchTemplateId"
 _lTN = "launchTemplateName"
-_ISI = "IpamScopeId"
-_ISpam = "IpamScope"
-_iSpa = "ipamScope"
-_KPI = "KeyPairId"
-_kPI = "keyPairId"
 _MCI = "MetricCategoryId"
 _SSIe = "SecondarySubnetId"
-_LT = "LaunchTemplate"
-_lT = "launchTemplate"
 _LTV = "LaunchTemplateVersion"
 _VNe = "VersionNumber"
 _vNe = "versionNumber"
@@ -120,23 +118,10 @@ _SNec = "SecondaryNetwork"
 _sNec = "secondaryNetwork"
 _SSe = "SecondarySubnet"
 _sSe = "secondarySubnet"
+_SCRIu = "SubnetCidrReservationId"
+_TMFI = "TrafficMirrorFilterId"
+_tMFI = "trafficMirrorFilterId"
 _Fai = "Failed"
-_DISI = "DeleteIpamScopeInput"
-_cDISR = "com.amazonaws.ec2#DeleteIpamScopeRequest"
-_DISO = "DeleteIpamScopeOutput"
-_cDISRo = "com.amazonaws.ec2#DeleteIpamScopeResult"
-_DIS = "DeleteIpamScope"
-_KPNWR = "KeyPairNameWithResolver"
-_DKPI = "DeleteKeyPairInput"
-_cDKPR = "com.amazonaws.ec2#DeleteKeyPairRequest"
-_DKPO = "DeleteKeyPairOutput"
-_cDKPRo = "com.amazonaws.ec2#DeleteKeyPairResult"
-_DKP = "DeleteKeyPair"
-_DLTI = "DeleteLaunchTemplateInput"
-_cDLTR = "com.amazonaws.ec2#DeleteLaunchTemplateRequest"
-_DLTO = "DeleteLaunchTemplateOutput"
-_cDLTRo = "com.amazonaws.ec2#DeleteLaunchTemplateResult"
-_DLT = "DeleteLaunchTemplate"
 _DLTVI = "DeleteLaunchTemplateVersionsInput"
 _cDLTVR = "com.amazonaws.ec2#DeleteLaunchTemplateVersionsRequest"
 _Vers = "Versions"
@@ -342,105 +327,23 @@ _DSIe = "DeleteSubnetInput"
 _cDSRo = "com.amazonaws.ec2#DeleteSubnetRequest"
 _DSOe = "DeleteSubnetOutput"
 _DSele = "DeleteSubnet"
-
-DELETE_IPAM_SCOPE_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DISI,
-    {_sSI: _cDISR, _sm: None},
-    (_DR, _ISI),
-    ((lambda: schemas.BOOLEAN, 0), (lambda: schemas.IPAM_SCOPE_ID, 1)),
-)
-
-DELETE_IPAM_SCOPE_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DISO,
-    {_sSI: _cDISRo, _smit: None},
-    (_ISpam,),
-    ((lambda: schemas.IPAM_SCOPE, {_aQN: _ISpam, _sN: _iSpa}),),
-)
-
-DELETE_IPAM_SCOPE: StaticOperationSchema = (
-    23,
-    n0,
-    _DIS,
-    0,
-    DELETE_IPAM_SCOPE_INPUT,
-    DELETE_IPAM_SCOPE_OUTPUT,
-    (),
-)
-
-KEY_PAIR_NAME_WITH_RESOLVER: StaticSchema = (3, n0, _KPNWR, 0)
-
-KEY_PAIR_ID: StaticSchema = (3, n0, _KPI, 0)
-
-DELETE_KEY_PAIR_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DKPI,
-    {_sSI: _cDKPR, _sm: None},
-    (_KN, _KPI, _DR),
-    (
-        (KEY_PAIR_NAME_WITH_RESOLVER, 0),
-        (KEY_PAIR_ID, 0),
-        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-    ),
-)
-
-DELETE_KEY_PAIR_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DKPO,
-    {_sSI: _cDKPRo, _smit: None},
-    (_R, _KPI),
-    (
-        (lambda: schemas.BOOLEAN, {_aQN: _R, _sN: _r}),
-        (lambda: schemas.STRING, {_aQN: _KPI, _sN: _kPI}),
-    ),
-)
-
-DELETE_KEY_PAIR: StaticOperationSchema = (
-    23,
-    n0,
-    _DKP,
-    0,
-    DELETE_KEY_PAIR_INPUT,
-    DELETE_KEY_PAIR_OUTPUT,
-    (),
-)
-
-DELETE_LAUNCH_TEMPLATE_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DLTI,
-    {_sSI: _cDLTR, _sm: None},
-    (_DR, _LTI, _LTN),
-    (
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.LAUNCH_TEMPLATE_ID, 0),
-        (lambda: schemas.LAUNCH_TEMPLATE_NAME, 0),
-    ),
-)
-
-DELETE_LAUNCH_TEMPLATE_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DLTO,
-    {_sSI: _cDLTRo, _smit: None},
-    (_LT,),
-    ((lambda: schemas.LAUNCH_TEMPLATE, {_aQN: _LT, _sN: _lT}),),
-)
-
-DELETE_LAUNCH_TEMPLATE: StaticOperationSchema = (
-    23,
-    n0,
-    _DLT,
-    0,
-    DELETE_LAUNCH_TEMPLATE_INPUT,
-    DELETE_LAUNCH_TEMPLATE_OUTPUT,
-    (),
-)
+_DSCRI = "DeleteSubnetCidrReservationInput"
+_cDSCRR = "com.amazonaws.ec2#DeleteSubnetCidrReservationRequest"
+_DSCRO = "DeleteSubnetCidrReservationOutput"
+_cDSCRRo = "com.amazonaws.ec2#DeleteSubnetCidrReservationResult"
+_DSCR = "DeletedSubnetCidrReservation"
+_dSCR = "deletedSubnetCidrReservation"
+_DSCRe = "DeleteSubnetCidrReservation"
+_DTIe = "DeleteTagsInput"
+_cDTR = "com.amazonaws.ec2#DeleteTagsRequest"
+_tag = "tag"
+_DTO = "DeleteTagsOutput"
+_DTelet = "DeleteTags"
+_DTMFI = "DeleteTrafficMirrorFilterInput"
+_cDTMFR = "com.amazonaws.ec2#DeleteTrafficMirrorFilterRequest"
+_DTMFO = "DeleteTrafficMirrorFilterOutput"
+_cDTMFRo = "com.amazonaws.ec2#DeleteTrafficMirrorFilterResult"
+_DTMF = "DeleteTrafficMirrorFilter"
 
 DELETE_LAUNCH_TEMPLATE_VERSIONS_INPUT: StaticSchema = (
     18,
@@ -452,7 +355,7 @@ DELETE_LAUNCH_TEMPLATE_VERSIONS_INPUT: StaticSchema = (
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.LAUNCH_TEMPLATE_ID, 0),
         (lambda: schemas.LAUNCH_TEMPLATE_NAME, 0),
-        (lambda: schemas.VERSION_STRING_LIST, {_sN: _LTV, _smi: None}),
+        (lambda: schemas.VERSION_STRING_LIST, {_sN: _LTV, _sO: None, _smi: None}),
     ),
 )
 
@@ -565,7 +468,7 @@ DELETE_LOCAL_GATEWAY_ROUTE_INPUT: StaticSchema = (
     (_DCB, _LGRTI, _DR, _DPLI),
     (
         (lambda: schemas.STRING, 0),
-        (lambda: schemas.LOCAL_GATEWAY_ROUTETABLE_ID, 1),
+        (lambda: schemas.LOCAL_GATEWAY_ROUTETABLE_ID, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.PREFIX_LIST_RESOURCE_ID, 0),
     ),
@@ -596,7 +499,10 @@ DELETE_LOCAL_GATEWAY_ROUTE_TABLE_INPUT: StaticSchema = (
     _DLGRTI,
     {_sSI: _cDLGRTR, _sm: None},
     (_LGRTI, _DR),
-    ((lambda: schemas.LOCAL_GATEWAY_ROUTETABLE_ID, 1), (lambda: schemas.BOOLEAN, 0)),
+    (
+        (lambda: schemas.LOCAL_GATEWAY_ROUTETABLE_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
 )
 
 DELETE_LOCAL_GATEWAY_ROUTE_TABLE_OUTPUT: StaticSchema = (
@@ -629,7 +535,7 @@ DELETE_LOCAL_GATEWAY_ROUTE_TABLE_VIRTUAL_INTERFACE_GROUP_ASSOCIATION_INPUT: Stat
             lambda: (
                 schemas.LOCAL_GATEWAY_ROUTE_TABLE_VIRTUAL_INTERFACE_GROUP_ASSOCIATION_ID
             ),
-            1,
+            {_sO: None, _smi: None},
         ),
         (lambda: schemas.BOOLEAN, 0),
     ),
@@ -668,7 +574,10 @@ DELETE_LOCAL_GATEWAY_ROUTE_TABLE_VPC_ASSOCIATION_INPUT: StaticSchema = (
     {_sSI: _cDLGRTVAR, _sm: None},
     (_LGRTVAI, _DR),
     (
-        (lambda: schemas.LOCAL_GATEWAY_ROUTE_TABLE_VPC_ASSOCIATION_ID, 1),
+        (
+            lambda: schemas.LOCAL_GATEWAY_ROUTE_TABLE_VPC_ASSOCIATION_ID,
+            {_sO: None, _smi: None},
+        ),
         (lambda: schemas.BOOLEAN, 0),
     ),
 )
@@ -704,7 +613,7 @@ DELETE_LOCAL_GATEWAY_VIRTUAL_INTERFACE_INPUT: StaticSchema = (
     {_sSI: _cDLGVIR, _sm: None},
     (_LGVII, _DR),
     (
-        (lambda: schemas.LOCAL_GATEWAY_VIRTUAL_INTERFACE_ID, 1),
+        (lambda: schemas.LOCAL_GATEWAY_VIRTUAL_INTERFACE_ID, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, 0),
     ),
 )
@@ -735,7 +644,10 @@ DELETE_LOCAL_GATEWAY_VIRTUAL_INTERFACE_GROUP_INPUT: StaticSchema = (
     {_sSI: _cDLGVIGR, _sm: None},
     (_LGVIGI, _DR),
     (
-        (lambda: schemas.LOCAL_GATEWAY_VIRTUAL_INTERFACE_GROUP_ID, 1),
+        (
+            lambda: schemas.LOCAL_GATEWAY_VIRTUAL_INTERFACE_GROUP_ID,
+            {_sO: None, _smi: None},
+        ),
         (lambda: schemas.BOOLEAN, 0),
     ),
 )
@@ -770,7 +682,10 @@ DELETE_MANAGED_PREFIX_LIST_INPUT: StaticSchema = (
     _DMPLI,
     {_sSI: _cDMPLR, _sm: None},
     (_DR, _PLI),
-    ((lambda: schemas.BOOLEAN, 0), (lambda: schemas.PREFIX_LIST_RESOURCE_ID, 1)),
+    (
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.PREFIX_LIST_RESOURCE_ID, {_sO: None, _smi: None}),
+    ),
 )
 
 DELETE_MANAGED_PREFIX_LIST_OUTPUT: StaticSchema = (
@@ -798,7 +713,10 @@ DELETE_METRIC_CATEGORY_INPUT: StaticSchema = (
     _DMCI,
     {_sSI: _cDMCR, _sm: None},
     (_MCI, _DR),
-    ((lambda: schemas.METRIC_CATEGORY_ID, 1), (lambda: schemas.BOOLEAN, 0)),
+    (
+        (lambda: schemas.METRIC_CATEGORY_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
 )
 
 DELETE_METRIC_CATEGORY_OUTPUT: StaticSchema = (
@@ -828,7 +746,7 @@ DELETE_NAT_GATEWAY_INPUT: StaticSchema = (
     (_DR, _NGI),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.NAT_GATEWAY_ID, {_sN: _NGI, _smi: None}),
+        (lambda: schemas.NAT_GATEWAY_ID, {_sN: _NGI, _sO: None, _smi: None}),
     ),
 )
 
@@ -859,7 +777,10 @@ DELETE_NETWORK_ACL_INPUT: StaticSchema = (
     (_DR, _NAI),
     (
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (lambda: schemas.NETWORK_ACL_ID, {_aQN: _NAI, _sN: _nAI, _smi: None}),
+        (
+            lambda: schemas.NETWORK_ACL_ID,
+            {_aQN: _NAI, _sN: _nAI, _sO: None, _smi: None},
+        ),
     ),
 )
 
@@ -883,9 +804,12 @@ DELETE_NETWORK_ACL_ENTRY_INPUT: StaticSchema = (
     (_DR, _NAI, _RN, _Eg),
     (
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (lambda: schemas.NETWORK_ACL_ID, {_aQN: _NAI, _sN: _nAI, _smi: None}),
-        (lambda: schemas.INTEGER, {_aQN: _RN, _sN: _rN, _smi: None}),
-        (lambda: schemas.BOOLEAN, {_aQN: _Eg, _sN: _egr, _smi: None}),
+        (
+            lambda: schemas.NETWORK_ACL_ID,
+            {_aQN: _NAI, _sN: _nAI, _sO: None, _smi: None},
+        ),
+        (lambda: schemas.INTEGER, {_aQN: _RN, _sN: _rN, _sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, {_aQN: _Eg, _sN: _egr, _sO: None, _smi: None}),
     ),
 )
 
@@ -921,7 +845,10 @@ DELETE_NETWORKING_FLEX_COST_ALLOCATION_POLICIES_INPUT: StaticSchema = (
     _DNFCAPI,
     {_sSI: _cDNFCAPR, _sm: None},
     (_FPIc, _DR),
-    ((FLEX_COST_ALLOCATION_POLICY_ID_LIST, 1), (lambda: schemas.BOOLEAN, 0)),
+    (
+        (FLEX_COST_ALLOCATION_POLICY_ID_LIST, {_sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
 )
 
 DELETE_NETWORKING_FLEX_COST_ALLOCATION_POLICIES_OUTPUT: StaticSchema = (
@@ -957,7 +884,7 @@ DELETE_NETWORK_INSIGHTS_ACCESS_SCOPE_INPUT: StaticSchema = (
     (_DR, _NIASI),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.NETWORK_INSIGHTS_ACCESS_SCOPE_ID, 1),
+        (lambda: schemas.NETWORK_INSIGHTS_ACCESS_SCOPE_ID, {_sO: None, _smi: None}),
     ),
 )
 
@@ -987,7 +914,10 @@ DELETE_NETWORK_INSIGHTS_ACCESS_SCOPE_ANALYSIS_INPUT: StaticSchema = (
     {_sSI: _cDNIASAR, _sm: None},
     (_NIASAI, _DR),
     (
-        (lambda: schemas.NETWORK_INSIGHTS_ACCESS_SCOPE_ANALYSIS_ID, 1),
+        (
+            lambda: schemas.NETWORK_INSIGHTS_ACCESS_SCOPE_ANALYSIS_ID,
+            {_sO: None, _smi: None},
+        ),
         (lambda: schemas.BOOLEAN, 0),
     ),
 )
@@ -1022,7 +952,10 @@ DELETE_NETWORK_INSIGHTS_ANALYSIS_INPUT: StaticSchema = (
     _DNIAI,
     {_sSI: _cDNIAR, _sm: None},
     (_DR, _NIAI),
-    ((lambda: schemas.BOOLEAN, 0), (lambda: schemas.NETWORK_INSIGHTS_ANALYSIS_ID, 1)),
+    (
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.NETWORK_INSIGHTS_ANALYSIS_ID, {_sO: None, _smi: None}),
+    ),
 )
 
 DELETE_NETWORK_INSIGHTS_ANALYSIS_OUTPUT: StaticSchema = (
@@ -1050,7 +983,10 @@ DELETE_NETWORK_INSIGHTS_PATH_INPUT: StaticSchema = (
     _DNIPI,
     {_sSI: _cDNIPR, _sm: None},
     (_DR, _NIPI),
-    ((lambda: schemas.BOOLEAN, 0), (lambda: schemas.NETWORK_INSIGHTS_PATH_ID, 1)),
+    (
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.NETWORK_INSIGHTS_PATH_ID, {_sO: None, _smi: None}),
+    ),
 )
 
 DELETE_NETWORK_INSIGHTS_PATH_OUTPUT: StaticSchema = (
@@ -1080,7 +1016,10 @@ DELETE_NETWORK_INTERFACE_INPUT: StaticSchema = (
     (_DR, _NII),
     (
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (lambda: schemas.NETWORK_INTERFACE_ID, {_aQN: _NII, _sN: _nII, _smi: None}),
+        (
+            lambda: schemas.NETWORK_INTERFACE_ID,
+            {_aQN: _NII, _sN: _nII, _sO: None, _smi: None},
+        ),
     ),
 )
 
@@ -1110,7 +1049,7 @@ DELETE_NETWORK_INTERFACE_PERMISSION_INPUT: StaticSchema = (
     {_sSI: _cDNIPRom, _sm: None},
     (_NIPIe, _Fo, _DR),
     (
-        (NETWORK_INTERFACE_PERMISSION_ID, 1),
+        (NETWORK_INTERFACE_PERMISSION_ID, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.BOOLEAN, 0),
     ),
@@ -1145,7 +1084,10 @@ DELETE_PLACEMENT_GROUP_INPUT: StaticSchema = (
     (_DR, _GN),
     (
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (PLACEMENT_GROUP_NAME_WITH_RESOLVER, {_aQN: _GN, _sN: _gN, _smi: None}),
+        (
+            PLACEMENT_GROUP_NAME_WITH_RESOLVER,
+            {_aQN: _GN, _sN: _gN, _sO: None, _smi: None},
+        ),
     ),
 )
 
@@ -1169,7 +1111,7 @@ DELETE_PUBLIC_IPV4_POOL_INPUT: StaticSchema = (
     (_DR, _PIo, _NBG),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPV4_POOL_EC2_ID, 1),
+        (lambda: schemas.IPV4_POOL_EC2_ID, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
     ),
 )
@@ -1210,7 +1152,10 @@ DELETE_QUEUED_RESERVED_INSTANCES_INPUT: StaticSchema = (
     (_DR, _RIIese),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (DELETE_QUEUED_RESERVED_INSTANCES_ID_LIST, {_sN: _RIIes, _smi: None}),
+        (
+            DELETE_QUEUED_RESERVED_INSTANCES_ID_LIST,
+            {_sN: _RIIes, _sO: None, _smi: None},
+        ),
     ),
 )
 
@@ -1305,7 +1250,10 @@ DELETE_ROUTE_INPUT: StaticSchema = (
     (
         (lambda: schemas.PREFIX_LIST_RESOURCE_ID, 0),
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (lambda: schemas.ROUTE_TABLE_ID, {_aQN: _RTIo, _sN: _rTIo, _smi: None}),
+        (
+            lambda: schemas.ROUTE_TABLE_ID,
+            {_aQN: _RTIo, _sN: _rTIo, _sO: None, _smi: None},
+        ),
         (lambda: schemas.STRING, {_aQN: _DCB, _sN: _dCB}),
         (lambda: schemas.STRING, {_aQN: _DICB, _sN: _dICB}),
     ),
@@ -1329,7 +1277,10 @@ DELETE_ROUTE_SERVER_INPUT: StaticSchema = (
     _DRSI,
     {_sSI: _cDRSR, _sm: None},
     (_RSI, _DR),
-    ((lambda: schemas.ROUTE_SERVER_ID, 1), (lambda: schemas.BOOLEAN, 0)),
+    (
+        (lambda: schemas.ROUTE_SERVER_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
 )
 
 DELETE_ROUTE_SERVER_OUTPUT: StaticSchema = (
@@ -1357,7 +1308,10 @@ DELETE_ROUTE_SERVER_ENDPOINT_INPUT: StaticSchema = (
     _DRSEI,
     {_sSI: _cDRSER, _sm: None},
     (_RSEI, _DR),
-    ((lambda: schemas.ROUTE_SERVER_ENDPOINT_ID, 1), (lambda: schemas.BOOLEAN, 0)),
+    (
+        (lambda: schemas.ROUTE_SERVER_ENDPOINT_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
 )
 
 DELETE_ROUTE_SERVER_ENDPOINT_OUTPUT: StaticSchema = (
@@ -1385,7 +1339,10 @@ DELETE_ROUTE_SERVER_PEER_INPUT: StaticSchema = (
     _DRSPI,
     {_sSI: _cDRSPR, _sm: None},
     (_RSPI, _DR),
-    ((lambda: schemas.ROUTE_SERVER_PEER_ID, 1), (lambda: schemas.BOOLEAN, 0)),
+    (
+        (lambda: schemas.ROUTE_SERVER_PEER_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
 )
 
 DELETE_ROUTE_SERVER_PEER_OUTPUT: StaticSchema = (
@@ -1415,7 +1372,10 @@ DELETE_ROUTE_TABLE_INPUT: StaticSchema = (
     (_DR, _RTIo),
     (
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (lambda: schemas.ROUTE_TABLE_ID, {_aQN: _RTIo, _sN: _rTIo, _smi: None}),
+        (
+            lambda: schemas.ROUTE_TABLE_ID,
+            {_aQN: _RTIo, _sN: _rTIo, _sO: None, _smi: None},
+        ),
     ),
 )
 
@@ -1440,7 +1400,7 @@ DELETE_SECONDARY_NETWORK_INPUT: StaticSchema = (
     (
         (lambda: schemas.STRING, 2),
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.SECONDARY_NETWORK_ID, 1),
+        (lambda: schemas.SECONDARY_NETWORK_ID, {_sO: None, _smi: None}),
     ),
 )
 
@@ -1475,7 +1435,7 @@ DELETE_SECONDARY_SUBNET_INPUT: StaticSchema = (
     (
         (lambda: schemas.STRING, 2),
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.SECONDARY_SUBNET_ID, 1),
+        (lambda: schemas.SECONDARY_SUBNET_ID, {_sO: None, _smi: None}),
     ),
 )
 
@@ -1543,7 +1503,7 @@ DELETE_SNAPSHOT_INPUT: StaticSchema = (
     {_sSI: _cDSR, _sm: None},
     (_SIn, _DR),
     (
-        (lambda: schemas.SNAPSHOT_ID, 1),
+        (lambda: schemas.SNAPSHOT_ID, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
     ),
 )
@@ -1592,7 +1552,10 @@ DELETE_SUBNET_INPUT: StaticSchema = (
     _DSIe,
     {_sSI: _cDSRo, _sm: None},
     (_SIu, _DR),
-    ((lambda: schemas.SUBNET_ID, 1), (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr})),
+    (
+        (lambda: schemas.SUBNET_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
+    ),
 )
 
 DELETE_SUBNET_OUTPUT: StaticSchema = (18, n0, _DSOe, {_sSI: _sU, _smit: None})
@@ -1604,5 +1567,95 @@ DELETE_SUBNET: StaticOperationSchema = (
     0,
     DELETE_SUBNET_INPUT,
     DELETE_SUBNET_OUTPUT,
+    (),
+)
+
+DELETE_SUBNET_CIDR_RESERVATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DSCRI,
+    {_sSI: _cDSCRR, _sm: None},
+    (_SCRIu, _DR),
+    (
+        (lambda: schemas.SUBNET_CIDR_RESERVATION_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+DELETE_SUBNET_CIDR_RESERVATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DSCRO,
+    {_sSI: _cDSCRRo, _smit: None},
+    (_DSCR,),
+    ((lambda: schemas.SUBNET_CIDR_RESERVATION, {_aQN: _DSCR, _sN: _dSCR}),),
+)
+
+DELETE_SUBNET_CIDR_RESERVATION: StaticOperationSchema = (
+    23,
+    n0,
+    _DSCRe,
+    0,
+    DELETE_SUBNET_CIDR_RESERVATION_INPUT,
+    DELETE_SUBNET_CIDR_RESERVATION_OUTPUT,
+    (),
+)
+
+DELETE_TAGS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DTIe,
+    {_sSI: _cDTR, _sm: None},
+    (_DR, _Res, _Tag),
+    (
+        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
+        (
+            lambda: schemas.RESOURCE_ID_LIST,
+            {_aQN: _RIe, _sN: _rI, _sO: None, _smi: None},
+        ),
+        (lambda: schemas.TAG_LIST, {_aQN: _Ta, _sN: _tag}),
+    ),
+)
+
+DELETE_TAGS_OUTPUT: StaticSchema = (18, n0, _DTO, {_sSI: _sU, _smit: None})
+
+DELETE_TAGS: StaticOperationSchema = (
+    23,
+    n0,
+    _DTelet,
+    0,
+    DELETE_TAGS_INPUT,
+    DELETE_TAGS_OUTPUT,
+    (),
+)
+
+DELETE_TRAFFIC_MIRROR_FILTER_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DTMFI,
+    {_sSI: _cDTMFR, _sm: None},
+    (_TMFI, _DR),
+    (
+        (lambda: schemas.TRAFFIC_MIRROR_FILTER_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+DELETE_TRAFFIC_MIRROR_FILTER_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DTMFO,
+    {_sSI: _cDTMFRo, _smit: None},
+    (_TMFI,),
+    ((lambda: schemas.STRING, {_aQN: _TMFI, _sN: _tMFI}),),
+)
+
+DELETE_TRAFFIC_MIRROR_FILTER: StaticOperationSchema = (
+    23,
+    n0,
+    _DTMF,
+    0,
+    DELETE_TRAFFIC_MIRROR_FILTER_INPUT,
+    DELETE_TRAFFIC_MIRROR_FILTER_OUTPUT,
     (),
 )

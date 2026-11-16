@@ -49,6 +49,7 @@ _nT = "nextToken"
 _vI = "versionId"
 _a = "arn"
 _cPA = "capacityProviderArn"
+_sOm = "smithy.api#clientOptional"
 _mL = "maxLifetime"
 _PUBLIC = "PUBLIC"
 _VPC = "VPC"
@@ -1172,7 +1173,7 @@ DELETE_CONFIGURATION_BUNDLE_OUTPUT: StaticSchema = (
     {_sSI: _cDCBRo, _smithy: None},
     (_bA, _bIu, _st),
     (
-        (CONFIGURATION_BUNDLE_ARN, 1),
+        (CONFIGURATION_BUNDLE_ARN, {_sOm: None, _sm: None}),
         (CONFIGURATION_BUNDLE_ID, 1),
         (lambda: CONFIGURATION_BUNDLE_STATUS, 1),
     ),

@@ -18,10 +18,13 @@ _rT = "resourceType"
 _Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
+_sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _DR = "DryRun"
 _p = "pending"
 _d = "disabled"
+_PI = "PublicIp"
+_pI = "publicIp"
 _smit = "smithy.api#output"
 _St = "State"
 _st = "state"
@@ -47,9 +50,14 @@ _RTe = "ResourceTypes"
 _RTS = "ResourceTypeSet"
 _rTS = "resourceTypeSet"
 _ena = "enabled"
+_disab = "disabling"
 _IT = "InstanceType"
 _iT = "instanceType"
 _Des = "Description"
+_COI = "CustomerOwnedIp"
+_cOI = "customerOwnedIp"
+_CI = "CarrierIp"
+_cI = "carrierIp"
 _SMt = "StatusMessage"
 _sMt = "statusMessage"
 _desc = "description"
@@ -60,6 +68,9 @@ _IIn = "InstanceIds"
 _IEWI = "InstanceEventWindowId"
 _G = "Groups"
 _IIm = "ImageId"
+_ESUS = "EnaSrdUdpSpecification"
+_ESUE = "EnaSrdUdpEnabled"
+_ESE = "EnaSrdEnabled"
 _smith = "smithy.api#sensitive"
 _VIo = "VolumeId"
 _ECI = "EbsCardIndex"
@@ -86,6 +97,7 @@ _sIn = "snapshotId"
 _Op = "Operator"
 _ope = "operator"
 _EO = "EbsOptimized"
+_ap = "applied"
 _sch = "scheduled"
 _eO = "ebsOptimized"
 _requ = "required"
@@ -95,6 +107,9 @@ _dNe = "deviceName"
 _Eb = "Ebs"
 _BDM = "BlockDeviceMapping"
 _opt = "optional"
+_HTt = "HttpTokens"
+_HPRHL = "HttpPutResponseHopLimit"
+_HE = "HttpEndpoint"
 _BDMl = "BlockDeviceMappings"
 _icr = "interruptible-capacity-reservation"
 _CRTap = "CapacityReservationTarget"
@@ -108,7 +123,6 @@ _ON = "OptionName"
 _OV = "OptionValues"
 _RTO = "ResourceTypeOptions"
 _AIcc = "AccountIds"
-_AIcco = "AccountId"
 _rIe = "reportId"
 _ICEI = "InstanceConnectEndpointId"
 _SBu = "S3Bucket"
@@ -125,7 +139,11 @@ _icr_ = "interruptible_capacity_reservation"
 _KI = "KernelId"
 _LCA = "LicenseConfigurationArn"
 _ARu = "AutoRecovery"
+_HPI = "HttpProtocolIpv6"
+_IMT = "InstanceMetadataTags"
+_MCIe = "MetricCategoryIds"
 _RIa = "RamdiskId"
+_Mon = "Monitoring"
 _DAT = "DisableApiTermination"
 _IISB = "InstanceInitiatedShutdownBehavior"
 _UDs = "UserData"
@@ -143,6 +161,16 @@ _cCp = "cpuCredits"
 _conf = "configured"
 _lCA = "licenseConfigurationArn"
 _aRu = "autoRecovery"
+_hTt = "httpTokens"
+_hPRHL = "httpPutResponseHopLimit"
+_hE = "httpEndpoint"
+_hPI = "httpProtocolIpv6"
+_iMT = "instanceMetadataTags"
+_MCIS = "MetricCategoryIdSet"
+_mCIS = "metricCategoryIdSet"
+_eSUE = "enaSrdUdpEnabled"
+_eSE = "enaSrdEnabled"
+_eSUS = "enaSrdUdpSpecification"
 _GS = "GroupSet"
 _gS = "groupSet"
 _dAT = "disableApiTermination"
@@ -152,6 +180,10 @@ _eOn = "enclaveOptions"
 _dASi = "disableApiStop"
 _SRt = "StateReason"
 _sRt = "stateReason"
+_IOI = "IpOwnerId"
+_iOI = "ipOwnerId"
+_PDNu = "PublicDnsName"
+_pDNu = "publicDnsName"
 _IOIn = "InstanceOwnerId"
 _iOIn = "instanceOwnerId"
 _SDC = "SourceDestCheck"
@@ -215,24 +247,6 @@ _IPsu = "IsPublic"
 _iPsu = "isPublic"
 _Arc = "Architecture"
 _arch = "architecture"
-_DIURIISL = "DescribeImageUsageReportsImageIdStringList"
-_DIUREMR = "DescribeImageUsageReportEntriesMaxResults"
-_IURISL = "ImageUsageReportIdStringList"
-_DIUREI = "DescribeImageUsageReportEntriesInput"
-_cDIURER = "com.amazonaws.ec2#DescribeImageUsageReportEntriesRequest"
-_IURE = "ImageUsageReportEntry"
-_UCs = "UsageCount"
-_uCs = "usageCount"
-_aIc = "accountId"
-_RCT = "ReportCreationTime"
-_rCT = "reportCreationTime"
-_IUREL = "ImageUsageReportEntryList"
-_DIUREO = "DescribeImageUsageReportEntriesOutput"
-_cDIURERo = "com.amazonaws.ec2#DescribeImageUsageReportEntriesResult"
-_IUREm = "ImageUsageReportEntries"
-_IURES = "ImageUsageReportEntrySet"
-_iURES = "imageUsageReportEntrySet"
-_DIURE = "DescribeImageUsageReportEntries"
 _DIURMR = "DescribeImageUsageReportsMaxResults"
 _DIURIe = "DescribeImageUsageReportsInput"
 _cDIURRom = "com.amazonaws.ec2#DescribeImageUsageReportsRequest"
@@ -303,6 +317,7 @@ _ISTmp = "ImportSnapshotTasks"
 _ISTS = "ImportSnapshotTaskSet"
 _iSTS = "importSnapshotTaskSet"
 _DIST = "DescribeImportSnapshotTasks"
+_IANn = "InstanceAttributeName"
 _DIAIe = "DescribeInstanceAttributeInput"
 _cDIARo = "com.amazonaws.ec2#DescribeInstanceAttributeRequest"
 _attr = "attribute"
@@ -407,6 +422,12 @@ _IMES = "InstanceMetadataEndpointState"
 _IMPS = "InstanceMetadataProtocolState"
 _HTS = "HttpTokensState"
 _IMTS = "InstanceMetadataTagsState"
+_IMOS = "InstanceMetadataOptionsState"
+_IMOR = "InstanceMetadataOptionsResponse"
+_MSon = "MonitoringState"
+_INIA = "InstanceNetworkInterfaceAssociation"
+_IAESUS = "InstanceAttachmentEnaSrdUdpSpecification"
+_IAESS = "InstanceAttachmentEnaSrdSpecification"
 _DIOesc = "DescribeInstancesOutput"
 _cDIRomamazo = "com.amazonaws.ec2#DescribeInstancesResult"
 _Reser = "Reservations"
@@ -423,89 +444,6 @@ INSTANCE_ID_STRING_LIST: StaticSchema = (
     ((lambda: schemas.INSTANCE_ID, {_sN: _II}),),
 )
 
-DESCRIBE_IMAGE_USAGE_REPORTS_IMAGE_ID_STRING_LIST: StaticSchema = (
-    16,
-    n0,
-    _DIURIISL,
-    0,
-    (_me,),
-    ((lambda: schemas.IMAGE_ID, 0),),
-)
-
-DESCRIBE_IMAGE_USAGE_REPORT_ENTRIES_MAX_RESULTS: StaticSchema = (7, n0, _DIUREMR, 0)
-
-IMAGE_USAGE_REPORT_ID_STRING_LIST: StaticSchema = (
-    16,
-    n0,
-    _IURISL,
-    0,
-    (_me,),
-    ((lambda: schemas.IMAGE_USAGE_REPORT_ID, 0),),
-)
-
-DESCRIBE_IMAGE_USAGE_REPORT_ENTRIES_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DIUREI,
-    {_sSI: _cDIURER, _sm: None},
-    (_IIma, _RIepo, _NTex, _Fil, _DR, _MR),
-    (
-        (DESCRIBE_IMAGE_USAGE_REPORTS_IMAGE_ID_STRING_LIST, {_sN: _IIm}),
-        (IMAGE_USAGE_REPORT_ID_STRING_LIST, {_sN: _RIep}),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (lambda: schemas.BOOLEAN, 0),
-        (DESCRIBE_IMAGE_USAGE_REPORT_ENTRIES_MAX_RESULTS, 0),
-    ),
-)
-
-DESCRIBE_IMAGE_USAGE_REPORT_ENTRIES_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DIUREO,
-    {_sSI: _cDIURERo, _smit: None},
-    (_NTex, _IUREm),
-    (
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-        (lambda: IMAGE_USAGE_REPORT_ENTRY_LIST, {_aQN: _IURES, _sN: _iURES}),
-    ),
-)
-
-DESCRIBE_IMAGE_USAGE_REPORT_ENTRIES: StaticOperationSchema = (
-    23,
-    n0,
-    _DIURE,
-    0,
-    DESCRIBE_IMAGE_USAGE_REPORT_ENTRIES_INPUT,
-    DESCRIBE_IMAGE_USAGE_REPORT_ENTRIES_OUTPUT,
-    (),
-)
-
-IMAGE_USAGE_REPORT_ENTRY: StaticSchema = (
-    18,
-    n0,
-    _IURE,
-    0,
-    (_RT, _RIep, _UCs, _AIcco, _IIm, _RCT),
-    (
-        (lambda: schemas.IMAGE_USAGE_RESOURCE_TYPE_NAME, {_aQN: _RT, _sN: _rT}),
-        (lambda: schemas.IMAGE_USAGE_REPORT_ID, {_aQN: _RIep, _sN: _rIe}),
-        (lambda: schemas.LONG, {_aQN: _UCs, _sN: _uCs}),
-        (lambda: schemas.STRING, {_aQN: _AIcco, _sN: _aIc}),
-        (lambda: schemas.IMAGE_ID, {_aQN: _IIm, _sN: _iIm}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _RCT, _sN: _rCT}),
-    ),
-)
-
-IMAGE_USAGE_REPORT_ENTRY_LIST: StaticSchema = (
-    16,
-    n0,
-    _IUREL,
-    0,
-    (_me,),
-    ((IMAGE_USAGE_REPORT_ENTRY, {_sN: _i}),),
-)
-
 DESCRIBE_IMAGE_USAGE_REPORTS_MAX_RESULTS: StaticSchema = (7, n0, _DIURMR, 0)
 
 DESCRIBE_IMAGE_USAGE_REPORTS_INPUT: StaticSchema = (
@@ -515,8 +453,11 @@ DESCRIBE_IMAGE_USAGE_REPORTS_INPUT: StaticSchema = (
     {_sSI: _cDIURRom, _sm: None},
     (_IIma, _RIepo, _NTex, _Fil, _DR, _MR),
     (
-        (DESCRIBE_IMAGE_USAGE_REPORTS_IMAGE_ID_STRING_LIST, {_sN: _IIm}),
-        (IMAGE_USAGE_REPORT_ID_STRING_LIST, {_sN: _RIep}),
+        (
+            lambda: schemas.DESCRIBE_IMAGE_USAGE_REPORTS_IMAGE_ID_STRING_LIST,
+            {_sN: _IIm},
+        ),
+        (lambda: schemas.IMAGE_USAGE_REPORT_ID_STRING_LIST, {_sN: _RIep}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
         (lambda: schemas.BOOLEAN, 0),
@@ -887,6 +828,49 @@ IMPORT_SNAPSHOT_TASK_LIST: StaticSchema = (
     ((IMPORT_SNAPSHOT_TASK, {_sN: _i}),),
 )
 
+INSTANCE_ATTRIBUTE_NAME: StaticSchema = (
+    14,
+    n0,
+    _IANn,
+    0,
+    (
+        _iT,
+        _ker,
+        _ramd,
+        _uDs,
+        _dAT,
+        _iISB,
+        _rDN,
+        _bDM,
+        _pCr,
+        _sDC,
+        _gS,
+        _eO,
+        _sNS,
+        _eSna,
+        _eOn,
+        _dASi,
+    ),
+    (
+        (-1, {_sV: _iT}),
+        (-1, {_sV: _ker}),
+        (-1, {_sV: _ramd}),
+        (-1, {_sV: _uDs}),
+        (-1, {_sV: _dAT}),
+        (-1, {_sV: _iISB}),
+        (-1, {_sV: _rDN}),
+        (-1, {_sV: _bDM}),
+        (-1, {_sV: _pCr}),
+        (-1, {_sV: _sDC}),
+        (-1, {_sV: _gS}),
+        (-1, {_sV: _eO}),
+        (-1, {_sV: _sNS}),
+        (-1, {_sV: _eSna}),
+        (-1, {_sV: _eOn}),
+        (-1, {_sV: _dASi}),
+    ),
+)
+
 DESCRIBE_INSTANCE_ATTRIBUTE_INPUT: StaticSchema = (
     18,
     n0,
@@ -895,11 +879,8 @@ DESCRIBE_INSTANCE_ATTRIBUTE_INPUT: StaticSchema = (
     (_DR, _II, _Attr),
     (
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (lambda: schemas.INSTANCE_ID, {_aQN: _II, _sN: _iI, _smi: None}),
-        (
-            lambda: schemas.INSTANCE_ATTRIBUTE_NAME,
-            {_aQN: _Attr, _sN: _attr, _smi: None},
-        ),
+        (lambda: schemas.INSTANCE_ID, {_aQN: _II, _sN: _iI, _sO: None, _smi: None}),
+        (INSTANCE_ATTRIBUTE_NAME, {_aQN: _Attr, _sN: _attr, _sO: None, _smi: None}),
     ),
 )
 
@@ -1537,4 +1518,86 @@ INSTANCE_METADATA_TAGS_STATE: StaticSchema = (
     0,
     (_d, _ena),
     ((-1, {_sV: _d}), (-1, {_sV: _ena})),
+)
+
+INSTANCE_METADATA_OPTIONS_STATE: StaticSchema = (
+    14,
+    n0,
+    _IMOS,
+    0,
+    (_p, _ap),
+    ((-1, {_sV: _p}), (-1, {_sV: _ap})),
+)
+
+INSTANCE_METADATA_OPTIONS_RESPONSE: StaticSchema = (
+    18,
+    n0,
+    _IMOR,
+    0,
+    (_St, _HTt, _HPRHL, _HE, _HPI, _IMT),
+    (
+        (INSTANCE_METADATA_OPTIONS_STATE, {_aQN: _St, _sN: _st}),
+        (HTTP_TOKENS_STATE, {_aQN: _HTt, _sN: _hTt}),
+        (lambda: schemas.INTEGER, {_aQN: _HPRHL, _sN: _hPRHL}),
+        (INSTANCE_METADATA_ENDPOINT_STATE, {_aQN: _HE, _sN: _hE}),
+        (INSTANCE_METADATA_PROTOCOL_STATE, {_aQN: _HPI, _sN: _hPI}),
+        (INSTANCE_METADATA_TAGS_STATE, {_aQN: _IMT, _sN: _iMT}),
+    ),
+)
+
+MONITORING_STATE: StaticSchema = (
+    14,
+    n0,
+    _MSon,
+    0,
+    (_d, _disab, _ena, _p),
+    ((-1, {_sV: _d}), (-1, {_sV: _disab}), (-1, {_sV: _ena}), (-1, {_sV: _p})),
+)
+
+MONITORING: StaticSchema = (
+    18,
+    n0,
+    _Mon,
+    0,
+    (_MCIe, _St),
+    (
+        (lambda: schemas.METRIC_CATEGORY_ID_LIST, {_aQN: _MCIS, _sN: _mCIS}),
+        (MONITORING_STATE, {_aQN: _St, _sN: _st}),
+    ),
+)
+
+INSTANCE_NETWORK_INTERFACE_ASSOCIATION: StaticSchema = (
+    18,
+    n0,
+    _INIA,
+    0,
+    (_CI, _COI, _IOI, _PDNu, _PI),
+    (
+        (lambda: schemas.STRING, {_aQN: _CI, _sN: _cI}),
+        (lambda: schemas.STRING, {_aQN: _COI, _sN: _cOI}),
+        (lambda: schemas.STRING, {_aQN: _IOI, _sN: _iOI}),
+        (lambda: schemas.STRING, {_aQN: _PDNu, _sN: _pDNu}),
+        (lambda: schemas.STRING, {_aQN: _PI, _sN: _pI}),
+    ),
+)
+
+INSTANCE_ATTACHMENT_ENA_SRD_UDP_SPECIFICATION: StaticSchema = (
+    18,
+    n0,
+    _IAESUS,
+    0,
+    (_ESUE,),
+    ((lambda: schemas.BOOLEAN, {_aQN: _ESUE, _sN: _eSUE}),),
+)
+
+INSTANCE_ATTACHMENT_ENA_SRD_SPECIFICATION: StaticSchema = (
+    18,
+    n0,
+    _IAESS,
+    0,
+    (_ESE, _ESUS),
+    (
+        (lambda: schemas.BOOLEAN, {_aQN: _ESE, _sN: _eSE}),
+        (INSTANCE_ATTACHMENT_ENA_SRD_UDP_SPECIFICATION, {_aQN: _ESUS, _sN: _eSUS}),
+    ),
 )

@@ -14,11 +14,14 @@ _i = "item"
 _Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
+_sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _DR = "DryRun"
 _PI = "PublicIp"
 _pI = "publicIp"
 _smit = "smithy.api#output"
+_St = "State"
+_st = "state"
 _OIw = "OwnerId"
 _oI = "ownerId"
 _Sta = "Status"
@@ -26,7 +29,6 @@ _sta = "status"
 _TSag = "TagSet"
 _tS = "tagSet"
 _dRr = "dryRun"
-_ex = "expired"
 _NGI = "NatGatewayId"
 _NII = "NetworkInterfaceId"
 _nII = "networkInterfaceId"
@@ -44,6 +46,7 @@ _Des = "Description"
 _SMt = "StatusMessage"
 _sMt = "statusMessage"
 _desc = "description"
+_OA = "OutpostArn"
 _HI = "HostIds"
 _FPI = "FcaPolicyId"
 _fPI = "fcaPolicyId"
@@ -51,12 +54,14 @@ _OAw = "OwnerAccount"
 _oA = "ownerAccount"
 _FPA = "FcaPolicyAssociations"
 _fPA = "fcaPolicyAssociations"
+_GIr = "GroupId"
 _G = "Groups"
 _At = "Attachment"
 _atta = "attachment"
+_GN = "GroupName"
+_gN = "groupName"
 _PLIr = "PrefixListIds"
-_SIn = "SnapshotId"
-_sIn = "snapshotId"
+_oAu = "outpostArn"
 _ED = "EndDate"
 _SDt = "StartDate"
 _sDt = "startDate"
@@ -74,6 +79,11 @@ _GS = "GroupSet"
 _gS = "groupSet"
 _NIS = "NetworkInterfaceSet"
 _nIS = "networkInterfaceSet"
+_OLI = "OutpostLagId"
+_oLI = "outpostLagId"
+_LGVIIS = "LocalGatewayVirtualInterfaceIdSet"
+_LGVIIo = "LocalGatewayVirtualInterfaceIds"
+_lGVIIS = "localGatewayVirtualInterfaceIdSet"
 _NAI = "NetworkAclId"
 _NRT = "NetworkResourceType"
 _NFPD = "NatFcaPolicyDocument"
@@ -87,9 +97,6 @@ _nIPI = "networkInsightsPathId"
 _SDC = "SourceDestCheck"
 _sDC = "sourceDestCheck"
 _NIPIe = "NetworkInterfacePermissionId"
-_SSna = "SnapshotSet"
-_Sn = "Snapshots"
-_sSn = "snapshotSet"
 _UA = "UpdatedAt"
 _uA = "updatedAt"
 _FPIc = "FcaPolicyIds"
@@ -107,36 +114,8 @@ _tags = "tags"
 _filt = "filter"
 _attr = "attribute"
 _IMR = "IncludeManagedResources"
-_LGVIS = "LocalGatewayVirtualInterfaceSet"
-_DLSMR = "DescribeLockedSnapshotsMaxResults"
-_DLSI = "DescribeLockedSnapshotsInput"
-_cDLSR = "com.amazonaws.ec2#DescribeLockedSnapshotsRequest"
-_SInap = "SnapshotIds"
-_COPRH = "CoolOffPeriodResponseHours"
-_RPRD = "RetentionPeriodResponseDays"
-_LSoc = "LockState"
-_compli = "compliance"
-_go = "governance"
-_cc___ = "compliance_cooloff"
-_cc____ = "compliance-cooloff"
-_LSI = "LockedSnapshotsInfo"
-_lSoc = "lockState"
-_LDo = "LockDuration"
-_lDo = "lockDuration"
-_COPo = "CoolOffPeriod"
-_cOPo = "coolOffPeriod"
-_COPEO = "CoolOffPeriodExpiresOn"
-_cOPEO = "coolOffPeriodExpiresOn"
-_LCO = "LockCreatedOn"
-_lCO = "lockCreatedOn"
-_LDST = "LockDurationStartTime"
-_lDST = "lockDurationStartTime"
-_LEO = "LockExpiresOn"
-_lEO = "lockExpiresOn"
+_GNr = "GroupNames"
 _LSIL = "LockedSnapshotsInfoList"
-_DLSO = "DescribeLockedSnapshotsOutput"
-_cDLSRo = "com.amazonaws.ec2#DescribeLockedSnapshotsResult"
-_DLSe = "DescribeLockedSnapshots"
 _DMHRMR = "DescribeMacHostsRequestMaxResults"
 _DMHI = "DescribeMacHostsInput"
 _cDMHR = "com.amazonaws.ec2#DescribeMacHostsRequest"
@@ -368,86 +347,31 @@ _cDNIRom = "com.amazonaws.ec2#DescribeNetworkInterfacesResult"
 _DNIe = "DescribeNetworkInterfaces"
 _OLMR = "OutpostLagMaxResults"
 _OLIS = "OutpostLagIdSet"
-
-LOCAL_GATEWAY_VIRTUAL_INTERFACE_SET: StaticSchema = (
-    16,
-    n0,
-    _LGVIS,
-    0,
-    (_me,),
-    ((lambda: schemas.LOCAL_GATEWAY_VIRTUAL_INTERFACE, {_sN: _i}),),
-)
-
-DESCRIBE_LOCKED_SNAPSHOTS_MAX_RESULTS: StaticSchema = (7, n0, _DLSMR, 0)
-
-DESCRIBE_LOCKED_SNAPSHOTS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DLSI,
-    {_sSI: _cDLSR, _sm: None},
-    (_Fil, _MR, _NTex, _SInap, _DR),
-    (
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (DESCRIBE_LOCKED_SNAPSHOTS_MAX_RESULTS, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.SNAPSHOT_ID_STRING_LIST, {_sN: _SIn}),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DESCRIBE_LOCKED_SNAPSHOTS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DLSO,
-    {_sSI: _cDLSRo, _smit: None},
-    (_Sn, _NTex),
-    (
-        (lambda: LOCKED_SNAPSHOTS_INFO_LIST, {_aQN: _SSna, _sN: _sSn}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_LOCKED_SNAPSHOTS: StaticOperationSchema = (
-    23,
-    n0,
-    _DLSe,
-    0,
-    DESCRIBE_LOCKED_SNAPSHOTS_INPUT,
-    DESCRIBE_LOCKED_SNAPSHOTS_OUTPUT,
-    (),
-)
-
-COOL_OFF_PERIOD_RESPONSE_HOURS: StaticSchema = (7, n0, _COPRH, 0)
-
-RETENTION_PERIOD_RESPONSE_DAYS: StaticSchema = (7, n0, _RPRD, 0)
-
-LOCK_STATE: StaticSchema = (
-    14,
-    n0,
-    _LSoc,
-    0,
-    (_compli, _go, _cc___, _ex),
-    ((-1, {_sV: _compli}), (-1, {_sV: _go}), (-1, {_sV: _cc____}), (-1, {_sV: _ex})),
-)
-
-LOCKED_SNAPSHOTS_INFO: StaticSchema = (
-    18,
-    n0,
-    _LSI,
-    0,
-    (_OIw, _SIn, _LSoc, _LDo, _COPo, _COPEO, _LCO, _LDST, _LEO),
-    (
-        (lambda: schemas.STRING, {_aQN: _OIw, _sN: _oI}),
-        (lambda: schemas.STRING, {_aQN: _SIn, _sN: _sIn}),
-        (LOCK_STATE, {_aQN: _LSoc, _sN: _lSoc}),
-        (RETENTION_PERIOD_RESPONSE_DAYS, {_aQN: _LDo, _sN: _lDo}),
-        (COOL_OFF_PERIOD_RESPONSE_HOURS, {_aQN: _COPo, _sN: _cOPo}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _COPEO, _sN: _cOPEO}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _LCO, _sN: _lCO}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _LDST, _sN: _lDST}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _LEO, _sN: _lEO}),
-    ),
-)
+_DOLI = "DescribeOutpostLagsInput"
+_cDOLR = "com.amazonaws.ec2#DescribeOutpostLagsRequest"
+_OLIu = "OutpostLagIds"
+_SLVII = "ServiceLinkVirtualInterfaceId"
+_SLVIIS = "ServiceLinkVirtualInterfaceIdSet"
+_OL = "OutpostLag"
+_SLVIIe = "ServiceLinkVirtualInterfaceIds"
+_sLVIIS = "serviceLinkVirtualInterfaceIdSet"
+_OLS = "OutpostLagSet"
+_DOLO = "DescribeOutpostLagsOutput"
+_cDOLRo = "com.amazonaws.ec2#DescribeOutpostLagsResult"
+_OLu = "OutpostLags"
+_oLS = "outpostLagSet"
+_DOLe = "DescribeOutpostLags"
+_PGISL = "PlacementGroupIdStringList"
+_PGSLl = "PlacementGroupStringList"
+_DPGIe = "DescribePlacementGroupsInput"
+_cDPGRo = "com.amazonaws.ec2#DescribePlacementGroupsRequest"
+_GIrou = "GroupIds"
+_DPGOe = "DescribePlacementGroupsOutput"
+_cDPGRom = "com.amazonaws.ec2#DescribePlacementGroupsResult"
+_PGl = "PlacementGroups"
+_PGSla = "PlacementGroupSet"
+_pGS = "placementGroupSet"
+_DPGe = "DescribePlacementGroups"
 
 LOCKED_SNAPSHOTS_INFO_LIST: StaticSchema = (
     16,
@@ -455,7 +379,7 @@ LOCKED_SNAPSHOTS_INFO_LIST: StaticSchema = (
     _LSIL,
     0,
     (_me,),
-    ((LOCKED_SNAPSHOTS_INFO, {_sN: _i}),),
+    ((lambda: schemas.LOCKED_SNAPSHOTS_INFO, {_sN: _i}),),
 )
 
 DESCRIBE_MAC_HOSTS_REQUEST_MAX_RESULTS: StaticSchema = (7, n0, _DMHRMR, 0)
@@ -1347,7 +1271,10 @@ DESCRIBE_NETWORK_INTERFACE_ATTRIBUTE_INPUT: StaticSchema = (
     (_DR, _NII, _Attr),
     (
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (lambda: schemas.NETWORK_INTERFACE_ID, {_aQN: _NII, _sN: _nII, _smi: None}),
+        (
+            lambda: schemas.NETWORK_INTERFACE_ID,
+            {_aQN: _NII, _sN: _nII, _sO: None, _smi: None},
+        ),
         (NETWORK_INTERFACE_ATTRIBUTE, {_aQN: _Attr, _sN: _attr}),
     ),
 )
@@ -1501,4 +1428,125 @@ OUTPOST_LAG_ID_SET: StaticSchema = (
     0,
     (_me,),
     ((lambda: schemas.OUTPOST_LAG_ID, {_sN: _i}),),
+)
+
+DESCRIBE_OUTPOST_LAGS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DOLI,
+    {_sSI: _cDOLR, _sm: None},
+    (_OLIu, _Fil, _MR, _NTex, _DR),
+    (
+        (OUTPOST_LAG_ID_SET, {_sN: _OLI}),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+        (OUTPOST_LAG_MAX_RESULTS, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+DESCRIBE_OUTPOST_LAGS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DOLO,
+    {_sSI: _cDOLRo, _smit: None},
+    (_OLu, _NTex),
+    (
+        (lambda: OUTPOST_LAG_SET, {_aQN: _OLS, _sN: _oLS}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+    ),
+)
+
+DESCRIBE_OUTPOST_LAGS: StaticOperationSchema = (
+    23,
+    n0,
+    _DOLe,
+    0,
+    DESCRIBE_OUTPOST_LAGS_INPUT,
+    DESCRIBE_OUTPOST_LAGS_OUTPUT,
+    (),
+)
+
+SERVICE_LINK_VIRTUAL_INTERFACE_ID: StaticSchema = (3, n0, _SLVII, 0)
+
+SERVICE_LINK_VIRTUAL_INTERFACE_ID_SET: StaticSchema = (
+    16,
+    n0,
+    _SLVIIS,
+    0,
+    (_me,),
+    ((SERVICE_LINK_VIRTUAL_INTERFACE_ID, {_sN: _i}),),
+)
+
+OUTPOST_LAG: StaticSchema = (
+    18,
+    n0,
+    _OL,
+    0,
+    (_OA, _OIw, _St, _OLI, _LGVIIo, _SLVIIe, _Tag),
+    (
+        (lambda: schemas.STRING, {_aQN: _OA, _sN: _oAu}),
+        (lambda: schemas.STRING, {_aQN: _OIw, _sN: _oI}),
+        (lambda: schemas.STRING, {_aQN: _St, _sN: _st}),
+        (lambda: schemas.OUTPOST_LAG_ID, {_aQN: _OLI, _sN: _oLI}),
+        (
+            lambda: schemas.LOCAL_GATEWAY_VIRTUAL_INTERFACE_ID_SET,
+            {_aQN: _LGVIIS, _sN: _lGVIIS},
+        ),
+        (SERVICE_LINK_VIRTUAL_INTERFACE_ID_SET, {_aQN: _SLVIIS, _sN: _sLVIIS}),
+        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
+    ),
+)
+
+OUTPOST_LAG_SET: StaticSchema = (16, n0, _OLS, 0, (_me,), ((OUTPOST_LAG, {_sN: _i}),))
+
+PLACEMENT_GROUP_ID_STRING_LIST: StaticSchema = (
+    16,
+    n0,
+    _PGISL,
+    0,
+    (_me,),
+    ((lambda: schemas.PLACEMENT_GROUP_ID, {_sN: _GIr}),),
+)
+
+PLACEMENT_GROUP_STRING_LIST: StaticSchema = (
+    16,
+    n0,
+    _PGSLl,
+    0,
+    (_me,),
+    ((lambda: schemas.PLACEMENT_GROUP_NAME, 0),),
+)
+
+DESCRIBE_PLACEMENT_GROUPS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DPGIe,
+    {_sSI: _cDPGRo, _sm: None},
+    (_GIrou, _DR, _GNr, _Fil),
+    (
+        (PLACEMENT_GROUP_ID_STRING_LIST, {_sN: _GIr}),
+        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
+        (PLACEMENT_GROUP_STRING_LIST, {_aQN: _GN, _sN: _gN}),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+    ),
+)
+
+DESCRIBE_PLACEMENT_GROUPS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DPGOe,
+    {_sSI: _cDPGRom, _smit: None},
+    (_PGl,),
+    ((lambda: schemas.PLACEMENT_GROUP_LIST, {_aQN: _PGSla, _sN: _pGS}),),
+)
+
+DESCRIBE_PLACEMENT_GROUPS: StaticOperationSchema = (
+    23,
+    n0,
+    _DPGe,
+    0,
+    DESCRIBE_PLACEMENT_GROUPS_INPUT,
+    DESCRIBE_PLACEMENT_GROUPS_OUTPUT,
+    (),
 )

@@ -28,6 +28,7 @@ _TS = "TagSpecification"
 _Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
+_sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _TSa = "TagSpecifications"
 _DR = "DryRun"
@@ -64,9 +65,7 @@ _NI = "NetworkInterface"
 _Sub = "Subnet"
 _TGr = "TransitGateway"
 _TGA = "TransitGatewayAttachment"
-_en = "enabling"
 _ena = "enabled"
-_disab = "disabling"
 _EOIG = "EgressOnlyInternetGateway"
 _eOIG = "egressOnlyInternetGateway"
 _IT = "InstanceType"
@@ -113,10 +112,6 @@ _Th = "Throughput"
 _iop = "iops"
 _vT = "volumeType"
 _thr = "throughput"
-_Op = "Operator"
-_ope = "operator"
-_CTr = "CreateTime"
-_cTr = "createTime"
 _Att = "Attachments"
 _AStt = "AttachmentSet"
 _aSt = "attachmentSet"
@@ -454,16 +449,7 @@ _RNG = "RegionalNatGateway"
 _CN = "CoreNetwork"
 _CNE = "CoreNetworkEdge"
 _CNAo = "CoreNetworkAttachment"
-_LT = "LaunchTemplate"
-_CBr = "CreatedBy"
-_cBr = "createdBy"
-_DVN = "DefaultVersionNumber"
-_dVN = "defaultVersionNumber"
-_LVN = "LatestVersionNumber"
-_lVN = "latestVersionNumber"
 _VSLe = "VersionStringList"
-_FSRSC = "FastSnapshotRestoreStateCode"
-_opti = "optimizing"
 _pCr = "productCodes"
 _BDML = "BlockDeviceMappingList"
 _AVr = "ArchitectureValues"
@@ -548,7 +534,7 @@ CREATE_DHCP_OPTIONS_INPUT: StaticSchema = (
     {_sSI: _cCDOR, _sm: None},
     (_DCh, _TSa, _DR),
     (
-        (NEW_DHCP_CONFIGURATION_LIST, {_aQN: _DChc, _sN: _dCh, _smi: None}),
+        (NEW_DHCP_CONFIGURATION_LIST, {_aQN: _DChc, _sN: _dCh, _sO: None, _smi: None}),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
     ),
@@ -626,7 +612,7 @@ CREATE_EGRESS_ONLY_INTERNET_GATEWAY_INPUT: StaticSchema = (
     (
         (lambda: schemas.STRING, 0),
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.VPC_ID, 1),
+        (lambda: schemas.VPC_ID, {_sO: None, _smi: None}),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
     ),
 )
@@ -1096,7 +1082,7 @@ TARGET_CAPACITY_SPECIFICATION_REQUEST: StaticSchema = (
     0,
     (_TTC, _ODTC, _STC, _DTCT, _TCUT),
     (
-        (lambda: schemas.INTEGER, 1),
+        (lambda: schemas.INTEGER, {_sO: None, _smi: None}),
         (lambda: schemas.INTEGER, 0),
         (lambda: schemas.INTEGER, 0),
         (DEFAULT_TARGET_CAPACITY_TYPE, 0),
@@ -1142,8 +1128,8 @@ CREATE_FLEET_INPUT: StaticSchema = (
         (ON_DEMAND_OPTIONS_REQUEST, 0),
         (RESERVED_CAPACITY_OPTIONS_REQUEST, 0),
         (FLEET_EXCESS_CAPACITY_TERMINATION_POLICY, 0),
-        (FLEET_LAUNCH_TEMPLATE_CONFIG_LIST_REQUEST, 1),
-        (TARGET_CAPACITY_SPECIFICATION_REQUEST, 1),
+        (FLEET_LAUNCH_TEMPLATE_CONFIG_LIST_REQUEST, {_sO: None, _smi: None}),
+        (TARGET_CAPACITY_SPECIFICATION_REQUEST, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, 0),
         (FLEET_TYPE, 0),
         (lambda: schemas.DATE_TIME, 0),
@@ -1601,24 +1587,6 @@ INTERNET_GATEWAY: StaticSchema = (
     ),
 )
 
-LAUNCH_TEMPLATE: StaticSchema = (
-    18,
-    n0,
-    _LT,
-    0,
-    (_LTI, _LTN, _CTr, _CBr, _DVN, _LVN, _Tag, _Op),
-    (
-        (lambda: schemas.STRING, {_aQN: _LTI, _sN: _lTI}),
-        (LAUNCH_TEMPLATE_NAME, {_aQN: _LTN, _sN: _lTN}),
-        (lambda: schemas.DATE_TIME, {_aQN: _CTr, _sN: _cTr}),
-        (lambda: schemas.STRING, {_aQN: _CBr, _sN: _cBr}),
-        (lambda: schemas.LONG, {_aQN: _DVN, _sN: _dVN}),
-        (lambda: schemas.LONG, {_aQN: _LVN, _sN: _lVN}),
-        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
-        (lambda: schemas.OPERATOR_RESPONSE, {_aQN: _Op, _sN: _ope}),
-    ),
-)
-
 VERSION_STRING_LIST: StaticSchema = (
     16,
     n0,
@@ -1626,21 +1594,6 @@ VERSION_STRING_LIST: StaticSchema = (
     0,
     (_me,),
     ((lambda: schemas.STRING, {_sN: _i}),),
-)
-
-FAST_SNAPSHOT_RESTORE_STATE_CODE: StaticSchema = (
-    14,
-    n0,
-    _FSRSC,
-    0,
-    (_en, _opti, _ena, _disab, _d),
-    (
-        (-1, {_sV: _en}),
-        (-1, {_sV: _opti}),
-        (-1, {_sV: _ena}),
-        (-1, {_sV: _disab}),
-        (-1, {_sV: _d}),
-    ),
 )
 
 BLOCK_DEVICE_MAPPING_LIST: StaticSchema = (

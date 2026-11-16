@@ -12,23 +12,16 @@ _sV = "smithy.api#enumValue"
 _me = "member"
 _i = "item"
 _RT = "ResourceType"
-_Ke = "Key"
-_ke = "key"
-_Va = "Value"
-_va = "value"
 _rT = "resourceType"
-_Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
-_Ad = "Address"
+_sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _DR = "DryRun"
 _smit = "smithy.api#output"
 _av = "available"
 _St = "State"
 _st = "state"
-_ass = "associated"
-_dis = "disassociated"
 _SIu = "SubnetId"
 _sI = "subnetId"
 _RIe = "ResourceId"
@@ -39,18 +32,9 @@ _VI = "VpcId"
 _vI = "vpcId"
 _Ci = "Cidr"
 _ci = "cidr"
-_ad = "address"
 _AZI = "AvailabilityZoneId"
 _aZI = "availabilityZoneId"
-_II = "InstanceId"
-_iI = "instanceId"
-_NII = "NetworkInterfaceId"
-_nII = "networkInterfaceId"
-_SGe = "SecurityGroups"
-_SGS = "SecurityGroupSet"
-_sGS = "securityGroupSet"
 _unm = "unmanaged"
-_Ser = "Service"
 _al = "alb"
 _rn = "rnat"
 _rd = "rds"
@@ -87,25 +71,20 @@ _RR = "ResourceRegion"
 _rR = "resourceRegion"
 _ROe = "ResourceOwner"
 _rOe = "resourceOwner"
-_ASs = "AssociationStatus"
-_ASSOCIATED = "ASSOCIATED"
-_DISASSOCIATED = "DISASSOCIATED"
 _IIp = "IpamId"
 _IRDI = "IpamResourceDiscoveryId"
 _iRDI = "ipamResourceDiscoveryId"
 _iIp = "ipamId"
-_GIr = "GroupId"
 _ISp = "IpSource"
 _ama = "amazon"
 _b = "byoip"
 _no = "none"
 _iSp = "ipSource"
-_gIr = "groupId"
-_GN = "GroupName"
-_gN = "groupName"
 _IIRAI = "IpamInternetRegistryAssociationId"
+_DIe = "DeltaId"
 _Pre = "Prefix"
 _pre = "prefix"
+_ST = "StartTime"
 _man = "managed"
 _iu = "in_use"
 _iu_ = "in-use"
@@ -132,13 +111,12 @@ _iSI = "ipamScopeId"
 _Ent = "Entries"
 _ESn = "EntrySet"
 _eSn = "entrySet"
-_lb_ = "load-balancer"
 _Fi = "Filter"
 _Fil = "Filters"
 _NTex = "NextToken"
 _MR = "MaxResults"
 _nT = "nextToken"
-_tags = "tags"
+_ETnd = "EndTime"
 _inv = "invalid"
 _IPASp = "IpamPoolAllocationSet"
 _IPApam = "IpamPoolAllocations"
@@ -150,52 +128,6 @@ _RCes = "ResourceCidr"
 _rCes = "resourceCidr"
 _RNes = "ResourceName"
 _rNes = "resourceName"
-_ARd = "AddressRegion"
-_IPAAS = "IpamPublicAddressAssociationStatus"
-_IPASG = "IpamPublicAddressSecurityGroup"
-_IPASGL = "IpamPublicAddressSecurityGroupList"
-_IPAASp = "IpamPublicAddressAwsService"
-_NG_ = "NAT_GATEWAY"
-_ng = "nat-gateway"
-_DMS = "DMS"
-_dms = "database-migration-service"
-_REDSHIFT = "REDSHIFT"
-_red = "redshift"
-_ECS_ = "ECS"
-_ecs = "elastic-container-service"
-_RDS_ = "RDS"
-_rds = "relational-database-service"
-_SV_ = "S2S_VPN"
-_stsv = "site-to-site-vpn"
-_EL_ = "EC2_LB"
-_AGA = "AGA"
-_ga_ = "global-accelerator"
-_CLOUDFRONT = "CLOUDFRONT"
-_clo = "cloudfront"
-_OTHER = "OTHER"
-_oth = "other"
-_IPATp = "IpamPublicAddressTag"
-_IPATL = "IpamPublicAddressTagList"
-_IPATpa = "IpamPublicAddressTags"
-_ETi = "EipTags"
-_ETSi = "EipTagSet"
-_eTSi = "eipTagSet"
-_IDPA = "IpamDiscoveredPublicAddress"
-_aRd = "addressRegion"
-_AOI = "AddressOwnerId"
-_aOI = "addressOwnerId"
-_AAId = "AddressAllocationId"
-_aAId = "addressAllocationId"
-_aSsso = "associationStatus"
-_ATddre = "AddressType"
-_aTddr = "addressType"
-_ser = "service"
-_SRerv = "ServiceResource"
-_sRer = "serviceResource"
-_PIPI = "PublicIpv4PoolId"
-_pIPI = "publicIpv4PoolId"
-_NID = "NetworkInterfaceDescription"
-_nID = "networkInterfaceDescription"
 _STa = "SampleTime"
 _sTa = "sampleTime"
 _IDPAS = "IpamDiscoveredPublicAddressSet"
@@ -366,141 +298,37 @@ _IRSp = "IpamRpkiStatus"
 _IRSpa = "IpamRpkiStrength"
 _stri = "strict"
 _permi = "permissive"
+_IRPF = "IpamRouteProtectionFinding"
+_RSp = "RpkiStatus"
+_rSp = "rpkiStatus"
+_RSpk = "RpkiStrength"
+_rSpk = "rpkiStrength"
+_Roa = "Roas"
+_RSoa = "RoaSet"
+_rSoa = "roaSet"
+_ROou = "RouteOverlaps"
+_ROSo = "RouteOverlapSet"
+_rOSo = "routeOverlapSet"
+_RSTo = "RoaSampleTime"
+_rSTo = "roaSampleTime"
+_IRPFS = "IpamRouteProtectionFindingSet"
 _GIRPFO = "GetIpamRouteProtectionFindingsOutput"
 _cGIRPFRo = "com.amazonaws.ec2#GetIpamRouteProtectionFindingsResult"
 _RPF = "RouteProtectionFindings"
 _RPFS = "RouteProtectionFindingSet"
 _rPFS = "routeProtectionFindingSet"
 _GIRPF = "GetIpamRouteProtectionFindings"
-
-IPAM_PUBLIC_ADDRESS_ASSOCIATION_STATUS: StaticSchema = (
-    14,
-    n0,
-    _IPAAS,
-    0,
-    (_ASSOCIATED, _DISASSOCIATED),
-    ((-1, {_sV: _ass}), (-1, {_sV: _dis})),
-)
-
-IPAM_PUBLIC_ADDRESS_SECURITY_GROUP: StaticSchema = (
-    18,
-    n0,
-    _IPASG,
-    0,
-    (_GN, _GIr),
-    (
-        (lambda: schemas.STRING, {_aQN: _GN, _sN: _gN}),
-        (lambda: schemas.STRING, {_aQN: _GIr, _sN: _gIr}),
-    ),
-)
-
-IPAM_PUBLIC_ADDRESS_SECURITY_GROUP_LIST: StaticSchema = (
-    16,
-    n0,
-    _IPASGL,
-    0,
-    (_me,),
-    ((IPAM_PUBLIC_ADDRESS_SECURITY_GROUP, {_sN: _i}),),
-)
-
-IPAM_PUBLIC_ADDRESS_AWS_SERVICE: StaticSchema = (
-    14,
-    n0,
-    _IPAASp,
-    0,
-    (_NG_, _DMS, _REDSHIFT, _ECS_, _RDS_, _SV_, _EL_, _AGA, _CLOUDFRONT, _OTHER),
-    (
-        (-1, {_sV: _ng}),
-        (-1, {_sV: _dms}),
-        (-1, {_sV: _red}),
-        (-1, {_sV: _ecs}),
-        (-1, {_sV: _rds}),
-        (-1, {_sV: _stsv}),
-        (-1, {_sV: _lb_}),
-        (-1, {_sV: _ga_}),
-        (-1, {_sV: _clo}),
-        (-1, {_sV: _oth}),
-    ),
-)
-
-IPAM_PUBLIC_ADDRESS_TAG: StaticSchema = (
-    18,
-    n0,
-    _IPATp,
-    0,
-    (_Ke, _Va),
-    (
-        (lambda: schemas.STRING, {_aQN: _Ke, _sN: _ke}),
-        (lambda: schemas.STRING, {_aQN: _Va, _sN: _va}),
-    ),
-)
-
-IPAM_PUBLIC_ADDRESS_TAG_LIST: StaticSchema = (
-    16,
-    n0,
-    _IPATL,
-    0,
-    (_me,),
-    ((IPAM_PUBLIC_ADDRESS_TAG, {_sN: _i}),),
-)
-
-IPAM_PUBLIC_ADDRESS_TAGS: StaticSchema = (
-    18,
-    n0,
-    _IPATpa,
-    0,
-    (_ETi,),
-    ((IPAM_PUBLIC_ADDRESS_TAG_LIST, {_aQN: _ETSi, _sN: _eTSi}),),
-)
-
-IPAM_DISCOVERED_PUBLIC_ADDRESS: StaticSchema = (
-    18,
-    n0,
-    _IDPA,
-    0,
-    (
-        _IRDI,
-        _ARd,
-        _Ad,
-        _AOI,
-        _AAId,
-        _ASs,
-        _ATddre,
-        _Ser,
-        _SRerv,
-        _VI,
-        _SIu,
-        _PIPI,
-        _NII,
-        _NID,
-        _II,
-        _Tag,
-        _NBG,
-        _SGe,
-        _STa,
-    ),
-    (
-        (lambda: schemas.IPAM_RESOURCE_DISCOVERY_ID, {_aQN: _IRDI, _sN: _iRDI}),
-        (lambda: schemas.STRING, {_aQN: _ARd, _sN: _aRd}),
-        (lambda: schemas.STRING, {_aQN: _Ad, _sN: _ad}),
-        (lambda: schemas.STRING, {_aQN: _AOI, _sN: _aOI}),
-        (lambda: schemas.STRING, {_aQN: _AAId, _sN: _aAId}),
-        (IPAM_PUBLIC_ADDRESS_ASSOCIATION_STATUS, {_aQN: _ASs, _sN: _aSsso}),
-        (lambda: schemas.IPAM_PUBLIC_ADDRESS_TYPE, {_aQN: _ATddre, _sN: _aTddr}),
-        (IPAM_PUBLIC_ADDRESS_AWS_SERVICE, {_aQN: _Ser, _sN: _ser}),
-        (lambda: schemas.STRING, {_aQN: _SRerv, _sN: _sRer}),
-        (lambda: schemas.STRING, {_aQN: _VI, _sN: _vI}),
-        (lambda: schemas.STRING, {_aQN: _SIu, _sN: _sI}),
-        (lambda: schemas.STRING, {_aQN: _PIPI, _sN: _pIPI}),
-        (lambda: schemas.STRING, {_aQN: _NII, _sN: _nII}),
-        (lambda: schemas.STRING, {_aQN: _NID, _sN: _nID}),
-        (lambda: schemas.STRING, {_aQN: _II, _sN: _iI}),
-        (IPAM_PUBLIC_ADDRESS_TAGS, {_aQN: _Tag, _sN: _tags}),
-        (lambda: schemas.STRING, {_aQN: _NBG, _sN: _nBG}),
-        (IPAM_PUBLIC_ADDRESS_SECURITY_GROUP_LIST, {_aQN: _SGS, _sN: _sGS}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _STa, _sN: _sTa}),
-    ),
-)
+_COh = "ChronologicalOrder"
+_forw = "forward"
+_reve = "reverse"
+_GIRPRDI = "GetIpamRoutingPolicyRegistrationDeltasInput"
+_cGIRPRDR = "com.amazonaws.ec2#GetIpamRoutingPolicyRegistrationDeltasRequest"
+_IRPRDSp = "IpamRoutingPolicyRegistrationDeltaSet"
+_GIRPRDO = "GetIpamRoutingPolicyRegistrationDeltasOutput"
+_cGIRPRDRo = "com.amazonaws.ec2#GetIpamRoutingPolicyRegistrationDeltasResult"
+_IRPRDp = "IpamRoutingPolicyRegistrationDeltas"
+_iRPRDS = "ipamRoutingPolicyRegistrationDeltaSet"
+_GIRPRD = "GetIpamRoutingPolicyRegistrationDeltas"
 
 IPAM_DISCOVERED_PUBLIC_ADDRESS_SET: StaticSchema = (
     16,
@@ -508,7 +336,7 @@ IPAM_DISCOVERED_PUBLIC_ADDRESS_SET: StaticSchema = (
     _IDPAS,
     0,
     (_me,),
-    ((IPAM_DISCOVERED_PUBLIC_ADDRESS, {_sN: _i}),),
+    ((lambda: schemas.IPAM_DISCOVERED_PUBLIC_ADDRESS, {_sN: _i}),),
 )
 
 GET_IPAM_DISCOVERED_RESOURCE_CIDRS_INPUT: StaticSchema = (
@@ -519,8 +347,8 @@ GET_IPAM_DISCOVERED_RESOURCE_CIDRS_INPUT: StaticSchema = (
     (_DR, _IRDI, _RR, _Fil, _NTex, _MR),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_RESOURCE_DISCOVERY_ID, 1),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.IPAM_RESOURCE_DISCOVERY_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
         (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
         (lambda: schemas.NEXT_TOKEN, 0),
         (lambda: schemas.IPAM_MAX_RESULTS, 0),
@@ -625,8 +453,8 @@ GET_IPAM_DISCOVERED_ROUTES_INPUT: StaticSchema = (
     (_DR, _IRDI, _RR, _Fil, _NTex, _MR),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_RESOURCE_DISCOVERY_ID, 1),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.IPAM_RESOURCE_DISCOVERY_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
         (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
         (lambda: schemas.NEXT_TOKEN, 0),
         (lambda: schemas.IPAM_MAX_RESULTS, 0),
@@ -722,7 +550,10 @@ GET_IPAM_INTERNET_REGISTRY_ASSOCIATION_ASNS_INPUT: StaticSchema = (
     (_DR, _IIRAI, _MR, _NTex, _Fil),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_INTERNET_REGISTRY_ASSOCIATION_ID, 1),
+        (
+            lambda: schemas.IPAM_INTERNET_REGISTRY_ASSOCIATION_ID,
+            {_sO: None, _smi: None},
+        ),
         (lambda: schemas.IPAM_MAX_RESULTS, 0),
         (lambda: schemas.NEXT_TOKEN, 0),
         (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
@@ -783,7 +614,10 @@ GET_IPAM_INTERNET_REGISTRY_ASSOCIATION_CIDRS_INPUT: StaticSchema = (
     (_DR, _IIRAI, _MR, _NTex, _Fil),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_INTERNET_REGISTRY_ASSOCIATION_ID, 1),
+        (
+            lambda: schemas.IPAM_INTERNET_REGISTRY_ASSOCIATION_ID,
+            {_sO: None, _smi: None},
+        ),
         (lambda: schemas.IPAM_MAX_RESULTS, 0),
         (lambda: schemas.NEXT_TOKEN, 0),
         (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
@@ -853,7 +687,7 @@ GET_IPAM_POLICY_ALLOCATION_RULES_INPUT: StaticSchema = (
     (_DR, _IPIp, _Fil, _Loc, _RT, _MR, _NTex),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_POLICY_ID, 1),
+        (lambda: schemas.IPAM_POLICY_ID, {_sO: None, _smi: None}),
         (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
         (lambda: schemas.STRING, 0),
         (IPAM_POLICY_RESOURCE_TYPE, 0),
@@ -935,7 +769,7 @@ GET_IPAM_POLICY_ORGANIZATION_TARGETS_INPUT: StaticSchema = (
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.IPAM_MAX_RESULTS, 0),
         (lambda: schemas.NEXT_TOKEN, 0),
-        (lambda: schemas.IPAM_POLICY_ID, 1),
+        (lambda: schemas.IPAM_POLICY_ID, {_sO: None, _smi: None}),
         (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
     ),
 )
@@ -990,7 +824,7 @@ GET_IPAM_POOL_ALLOCATIONS_INPUT: StaticSchema = (
     (_DR, _IPI, _IPAI, _Fil, _MR, _NTex),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_POOL_ID, 1),
+        (lambda: schemas.IPAM_POOL_ID, {_sO: None, _smi: None}),
         (lambda: schemas.IPAM_POOL_ALLOCATION_ID, 0),
         (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
         (GET_IPAM_POOL_ALLOCATIONS_MAX_RESULTS, 0),
@@ -1028,7 +862,7 @@ GET_IPAM_POOL_CIDRS_INPUT: StaticSchema = (
     (_DR, _IPI, _Fil, _MR, _NTex),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_POOL_ID, 1),
+        (lambda: schemas.IPAM_POOL_ID, {_sO: None, _smi: None}),
         (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
         (lambda: schemas.IPAM_MAX_RESULTS, 0),
         (lambda: schemas.NEXT_TOKEN, 0),
@@ -1074,7 +908,7 @@ GET_IPAM_PREFIX_LIST_RESOLVER_RULES_INPUT: StaticSchema = (
     (_DR, _IPLRI, _Fil, _MR, _NTex),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_PREFIX_LIST_RESOLVER_ID, 1),
+        (lambda: schemas.IPAM_PREFIX_LIST_RESOLVER_ID, {_sO: None, _smi: None}),
         (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
         (lambda: schemas.IPAM_MAX_RESULTS, 0),
         (lambda: schemas.NEXT_TOKEN, 0),
@@ -1164,8 +998,8 @@ GET_IPAM_PREFIX_LIST_RESOLVER_VERSION_ENTRIES_INPUT: StaticSchema = (
     (_DR, _IPLRI, _IPLRV, _MR, _NTex),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_PREFIX_LIST_RESOLVER_ID, 1),
-        (lambda: schemas.LONG, 1),
+        (lambda: schemas.IPAM_PREFIX_LIST_RESOLVER_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.LONG, {_sO: None, _smi: None}),
         (lambda: schemas.IPAM_MAX_RESULTS, 0),
         (lambda: schemas.NEXT_TOKEN, 0),
     ),
@@ -1228,7 +1062,7 @@ GET_IPAM_PREFIX_LIST_RESOLVER_VERSIONS_INPUT: StaticSchema = (
     (_DR, _IPLRI, _IPLRVp, _MR, _Fil, _NTex),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_PREFIX_LIST_RESOLVER_ID, 1),
+        (lambda: schemas.IPAM_PREFIX_LIST_RESOLVER_ID, {_sO: None, _smi: None}),
         (IPAM_PREFIX_LIST_RESOLVER_VERSION_NUMBER_SET, {_sN: _IPLRV}),
         (lambda: schemas.IPAM_MAX_RESULTS, 0),
         (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
@@ -1287,7 +1121,7 @@ GET_IPAM_RESOURCE_CIDRS_INPUT: StaticSchema = (
         (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
         (lambda: schemas.IPAM_MAX_RESULTS, 0),
         (lambda: schemas.NEXT_TOKEN, 0),
-        (lambda: schemas.IPAM_SCOPE_ID, 1),
+        (lambda: schemas.IPAM_SCOPE_ID, {_sO: None, _smi: None}),
         (lambda: schemas.IPAM_POOL_ID, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.IPAM_RESOURCE_TYPE, 0),
@@ -1387,7 +1221,10 @@ GET_IPAM_ROUTE_ORIGIN_AUTHORIZATIONS_INPUT: StaticSchema = (
     (_DR, _IIRAI, _Ci, _MR, _NTex),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_INTERNET_REGISTRY_ASSOCIATION_ID, 1),
+        (
+            lambda: schemas.IPAM_INTERNET_REGISTRY_ASSOCIATION_ID,
+            {_sO: None, _smi: None},
+        ),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.IPAM_MAX_RESULTS, 0),
         (lambda: schemas.NEXT_TOKEN, 0),
@@ -1446,7 +1283,7 @@ GET_IPAM_ROUTE_PROTECTION_FINDINGS_INPUT: StaticSchema = (
     (_DR, _IIp, _Fil, _NTex, _MR),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_ID, 1),
+        (lambda: schemas.IPAM_ID, {_sO: None, _smi: None}),
         (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
         (lambda: schemas.NEXT_TOKEN, 0),
         (lambda: schemas.IPAM_MAX_RESULTS, 0),
@@ -1461,7 +1298,7 @@ GET_IPAM_ROUTE_PROTECTION_FINDINGS_OUTPUT: StaticSchema = (
     (_IIp, _RPF, _NTex),
     (
         (lambda: schemas.IPAM_ID, {_aQN: _IIp, _sN: _iIp}),
-        (lambda: schemas.IPAM_ROUTE_PROTECTION_FINDING_SET, {_aQN: _RPFS, _sN: _rPFS}),
+        (lambda: IPAM_ROUTE_PROTECTION_FINDING_SET, {_aQN: _RPFS, _sN: _rPFS}),
         (lambda: schemas.NEXT_TOKEN, {_aQN: _NTex, _sN: _nT}),
     ),
 )
@@ -1538,4 +1375,118 @@ IPAM_RPKI_STRENGTH: StaticSchema = (
     0,
     (_stri, _permi),
     ((-1, {_sV: _stri}), (-1, {_sV: _permi})),
+)
+
+IPAM_ROUTE_PROTECTION_FINDING: StaticSchema = (
+    18,
+    n0,
+    _IRPF,
+    0,
+    (
+        _ROI,
+        _RR,
+        _IPI,
+        _Ci,
+        _St,
+        _ATdv,
+        _NBG,
+        _PIo,
+        _Asn,
+        _RSp,
+        _RSpk,
+        _Roa,
+        _ROou,
+        _STa,
+        _RSTo,
+    ),
+    (
+        (lambda: schemas.STRING, {_aQN: _ROI, _sN: _rOI}),
+        (lambda: schemas.STRING, {_aQN: _RR, _sN: _rR}),
+        (lambda: schemas.IPAM_POOL_ID, {_aQN: _IPI, _sN: _iPI}),
+        (lambda: schemas.STRING, {_aQN: _Ci, _sN: _ci}),
+        (IPAM_BYOIP_CIDR_STATE, {_aQN: _St, _sN: _st}),
+        (IPAM_BYOIP_ADVERTISEMENT_TYPE, {_aQN: _ATdv, _sN: _aTd}),
+        (lambda: schemas.STRING, {_aQN: _NBG, _sN: _nBG}),
+        (lambda: schemas.STRING, {_aQN: _PIo, _sN: _pIo}),
+        (lambda: schemas.STRING, {_aQN: _Asn, _sN: _asn}),
+        (IPAM_RPKI_STATUS, {_aQN: _RSp, _sN: _rSp}),
+        (IPAM_RPKI_STRENGTH, {_aQN: _RSpk, _sN: _rSpk}),
+        (IPAM_ROUTE_ORIGIN_AUTHORIZATION_SET, {_aQN: _RSoa, _sN: _rSoa}),
+        (IPAM_ROUTE_OVERLAP_SET, {_aQN: _ROSo, _sN: _rOSo}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _STa, _sN: _sTa}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _RSTo, _sN: _rSTo}),
+    ),
+)
+
+IPAM_ROUTE_PROTECTION_FINDING_SET: StaticSchema = (
+    16,
+    n0,
+    _IRPFS,
+    0,
+    (_me,),
+    ((IPAM_ROUTE_PROTECTION_FINDING, {_sN: _i}),),
+)
+
+CHRONOLOGICAL_ORDER: StaticSchema = (
+    14,
+    n0,
+    _COh,
+    0,
+    (_forw, _reve),
+    ((-1, {_sV: _forw}), (-1, {_sV: _reve})),
+)
+
+GET_IPAM_ROUTING_POLICY_REGISTRATION_DELTAS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GIRPRDI,
+    {_sSI: _cGIRPRDR, _sm: None},
+    (_DR, _IIRAI, _DIe, _ST, _ETnd, _COh, _MR, _NTex),
+    (
+        (lambda: schemas.BOOLEAN, 0),
+        (
+            lambda: schemas.IPAM_INTERNET_REGISTRY_ASSOCIATION_ID,
+            {_sO: None, _smi: None},
+        ),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.MILLISECOND_DATE_TIME, 0),
+        (lambda: schemas.MILLISECOND_DATE_TIME, 0),
+        (CHRONOLOGICAL_ORDER, 0),
+        (lambda: schemas.IPAM_MAX_RESULTS, 0),
+        (lambda: schemas.NEXT_TOKEN, 0),
+    ),
+)
+
+GET_IPAM_ROUTING_POLICY_REGISTRATION_DELTAS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GIRPRDO,
+    {_sSI: _cGIRPRDRo, _smit: None},
+    (_IRPRDp, _NTex),
+    (
+        (
+            lambda: IPAM_ROUTING_POLICY_REGISTRATION_DELTA_SET,
+            {_aQN: _IRPRDSp, _sN: _iRPRDS},
+        ),
+        (lambda: schemas.NEXT_TOKEN, {_aQN: _NTex, _sN: _nT}),
+    ),
+)
+
+GET_IPAM_ROUTING_POLICY_REGISTRATION_DELTAS: StaticOperationSchema = (
+    23,
+    n0,
+    _GIRPRD,
+    0,
+    GET_IPAM_ROUTING_POLICY_REGISTRATION_DELTAS_INPUT,
+    GET_IPAM_ROUTING_POLICY_REGISTRATION_DELTAS_OUTPUT,
+    (),
+)
+
+IPAM_ROUTING_POLICY_REGISTRATION_DELTA_SET: StaticSchema = (
+    16,
+    n0,
+    _IRPRDSp,
+    0,
+    (_me,),
+    ((lambda: schemas.IPAM_ROUTING_POLICY_REGISTRATION_DELTA, {_sN: _i}),),
 )

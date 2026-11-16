@@ -11,6 +11,7 @@ n0 = "com.amazonaws.rds"
 _m = "member"
 _sN = "smithy.api#xmlName"
 _sV = "smithy.api#enumValue"
+_sO = "smithy.api#clientOptional"
 _sm = "smithy.api#required"
 _sSI = "smithy.synthetic#originalShapeId"
 _smi = "smithy.api#input"
@@ -23,6 +24,7 @@ _aQE = "aws.protocols#awsQueryError"
 _me = "message"
 _DBII = "DBInstanceIdentifier"
 _St = "Status"
+_STo = "SourceType"
 _K = "Key"
 _V = "Value"
 _TL = "TagList"
@@ -35,7 +37,6 @@ _DBPGF = "DBParameterGroupFamily"
 _smithy = "smithy.api#sensitive"
 _P = "Port"
 _MU = "MasterUsername"
-_EV = "EngineVersion"
 _STna = "SnapshotType"
 _DBPG = "DBParameterGroup"
 _DBPGN = "DBParameterGroupName"
@@ -46,38 +47,7 @@ _DRI = "DbiResourceId"
 _EN = "EngineName"
 _MEV = "MajorEngineVersion"
 _So = "Source"
-_CTr = "CreateTime"
-_CDBEVM = "CustomDBEngineVersionManifest"
-_DIFSBN = "DatabaseInstallationFilesS3BucketName"
-_DIFSP = "DatabaseInstallationFilesS3Prefix"
-_DIF = "DatabaseInstallationFiles"
-_KMSKI = "KMSKeyId"
 _CSN = "CharacterSetName"
-_SVFS = "ServerlessV2FeaturesSupport"
-_SEM = "SupportedEngineModes"
-_SPQ = "SupportsParallelQuery"
-_SGD = "SupportsGlobalDatabases"
-_SBu = "SupportsBabelfish"
-_SLD = "SupportsLimitlessDatabase"
-_SLWF = "SupportsLocalWriteForwarding"
-_SIu = "SupportsIntegrations"
-_DBED = "DBEngineDescription"
-_DBEVA = "DBEngineVersionArn"
-_DBEVD = "DBEngineVersionDescription"
-_DCS = "DefaultCharacterSet"
-_FR = "FailureReason"
-_Im = "Image"
-_DBEMT = "DBEngineMediaType"
-_SCS = "SupportedCharacterSets"
-_SNCS = "SupportedNcharCharacterSets"
-_VUT = "ValidUpgradeTarget"
-_STu = "SupportedTimezones"
-_ELT = "ExportableLogTypes"
-_SLETCL = "SupportsLogExportsToCloudwatchLogs"
-_SRR = "SupportsReadReplica"
-_SFN = "SupportedFeatureNames"
-_SCRWR = "SupportsCertificateRotationWithoutRestart"
-_SCACI = "SupportedCACertificateIdentifiers"
 _DBSGNu = "DBSubnetGroupName"
 _PA = "PubliclyAccessible"
 _UNKNOWN = "UNKNOWN"
@@ -346,91 +316,23 @@ _DBSGub = "DBSubnetGroups"
 _DDBSGOescr = "DescribeDBSubnetGroupsOutput"
 _cDBSGMo = "com.amazonaws.rds#DBSubnetGroupMessage"
 _DDBSGescr = "DescribeDBSubnetGroups"
-
-DB_ENGINE_VERSION: StaticSchema = (
-    18,
-    n0,
-    _DBEV,
-    0,
-    (
-        _En,
-        _MEV,
-        _EV,
-        _DIFSBN,
-        _DIFSP,
-        _DIF,
-        _CDBEVM,
-        _DBPGF,
-        _DBED,
-        _DBEVA,
-        _DBEVD,
-        _DCS,
-        _FR,
-        _Im,
-        _DBEMT,
-        _KMSKI,
-        _CTr,
-        _SCS,
-        _SNCS,
-        _VUT,
-        _STu,
-        _ELT,
-        _SLETCL,
-        _SRR,
-        _SEM,
-        _SFN,
-        _St,
-        _SPQ,
-        _SGD,
-        _TL,
-        _SBu,
-        _SLD,
-        _SCRWR,
-        _SCACI,
-        _SLWF,
-        _SIu,
-        _SVFS,
-    ),
-    (
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING_LIST, 0),
-        (lambda: schemas.CUSTOM_DB_ENGINE_VERSION_MANIFEST, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.CHARACTER_SET, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.CUSTOM_DB_ENGINE_VERSION_AMI, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.T_STAMP, 0),
-        (lambda: schemas.SUPPORTED_CHARACTER_SETS_LIST, 0),
-        (lambda: schemas.SUPPORTED_CHARACTER_SETS_LIST, 0),
-        (lambda: schemas.VALID_UPGRADE_TARGET_LIST, 0),
-        (lambda: schemas.SUPPORTED_TIMEZONES_LIST, 0),
-        (lambda: schemas.LOG_TYPE_LIST, 0),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.ENGINE_MODE_LIST, 0),
-        (lambda: schemas.FEATURE_NAME_LIST, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.TAG_LIST, 0),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.BOOLEAN_OPTIONAL, 0),
-        (lambda: schemas.CA_CERTIFICATE_IDENTIFIERS_LIST, 0),
-        (lambda: schemas.BOOLEAN_OPTIONAL, 0),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.SERVERLESS_V2_FEATURES_SUPPORT, 0),
-    ),
-)
+_DEDCPI = "DescribeEngineDefaultClusterParametersInput"
+_cDEDCPM = "com.amazonaws.rds#DescribeEngineDefaultClusterParametersMessage"
+_EDn = "EngineDefaults"
+_DEDCPO = "DescribeEngineDefaultClusterParametersOutput"
+_cDEDCPR = "com.amazonaws.rds#DescribeEngineDefaultClusterParametersResult"
+_DEDCP = "DescribeEngineDefaultClusterParameters"
+_DEDPI = "DescribeEngineDefaultParametersInput"
+_cDEDPM = "com.amazonaws.rds#DescribeEngineDefaultParametersMessage"
+_DEDPO = "DescribeEngineDefaultParametersOutput"
+_cDEDPR = "com.amazonaws.rds#DescribeEngineDefaultParametersResult"
+_DEDP = "DescribeEngineDefaultParameters"
+_DECI = "DescribeEventCategoriesInput"
+_cDECM = "com.amazonaws.rds#DescribeEventCategoriesMessage"
+_ECML = "EventCategoriesMapList"
+_DECO = "DescribeEventCategoriesOutput"
+_cECM = "com.amazonaws.rds#EventCategoriesMessage"
+_DEC = "DescribeEventCategories"
 
 DB_ENGINE_VERSION_LIST: StaticSchema = (
     16,
@@ -438,7 +340,7 @@ DB_ENGINE_VERSION_LIST: StaticSchema = (
     _DBEVL,
     0,
     (_m,),
-    ((DB_ENGINE_VERSION, {_sN: _DBEV}),),
+    ((lambda: schemas.DB_ENGINE_VERSION, {_sN: _DBEV}),),
 )
 
 DESCRIBE_DB_INSTANCE_AUTOMATED_BACKUPS_INPUT: StaticSchema = (
@@ -547,7 +449,7 @@ DESCRIBE_DB_LOG_FILES_INPUT: StaticSchema = (
     {_sSI: _cDDBLFM, _smi: None},
     (_DBII, _FCi, _FLW, _FSi, _Fil, _MR, _Mar),
     (
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.LONG, 0),
         (lambda: schemas.LONG, 0),
@@ -647,9 +549,9 @@ SUPPORTED_ENGINE_LIFECYCLE: StaticSchema = (
     0,
     (_LSN, _LSSD, _LSED),
     (
-        (LIFECYCLE_SUPPORT_NAME, 1),
-        (lambda: schemas.T_STAMP, 1),
-        (lambda: schemas.T_STAMP, 1),
+        (LIFECYCLE_SUPPORT_NAME, {_sO: None, _sm: None}),
+        (lambda: schemas.T_STAMP, {_sO: None, _sm: None}),
+        (lambda: schemas.T_STAMP, {_sO: None, _sm: None}),
     ),
 )
 
@@ -733,7 +635,7 @@ DESCRIBE_DB_PARAMETERS_INPUT: StaticSchema = (
     {_sSI: _cDDBPM, _smi: None},
     (_DBPGN, _So, _Fil, _MR, _Mar),
     (
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.FILTER_LIST, 0),
         (lambda: schemas.INTEGER_OPTIONAL, 0),
@@ -855,7 +757,7 @@ DESCRIBE_DB_PROXY_TARGET_GROUPS_INPUT: StaticSchema = (
     {_sSI: _cDDBPTGR, _smi: None},
     (_DBPN, _TGN, _Fil, _Mar, _MR),
     (
-        (lambda: schemas.DB_PROXY_NAME, 1),
+        (lambda: schemas.DB_PROXY_NAME, {_sO: None, _sm: None}),
         (lambda: schemas.DB_PROXY_TARGET_GROUP_NAME, 0),
         (lambda: schemas.FILTER_LIST, 0),
         (lambda: schemas.STRING, 0),
@@ -937,7 +839,7 @@ DESCRIBE_DB_PROXY_TARGETS_INPUT: StaticSchema = (
     {_sSI: _cDDBPTRom, _smi: None},
     (_DBPN, _TGN, _Fil, _Mar, _MR),
     (
-        (lambda: schemas.DB_PROXY_NAME, 1),
+        (lambda: schemas.DB_PROXY_NAME, {_sO: None, _sm: None}),
         (lambda: schemas.DB_PROXY_TARGET_GROUP_NAME, 0),
         (lambda: schemas.FILTER_LIST, 0),
         (lambda: schemas.STRING, 0),
@@ -1429,7 +1331,7 @@ DESCRIBE_DB_SNAPSHOT_ATTRIBUTES_INPUT: StaticSchema = (
     _DDBSAI,
     {_sSI: _cDDBSAM, _smi: None},
     (_DBSIn,),
-    ((lambda: schemas.STRING, 1),),
+    ((lambda: schemas.STRING, {_sO: None, _sm: None}),),
 )
 
 DESCRIBE_DB_SNAPSHOT_ATTRIBUTES_OUTPUT: StaticSchema = (
@@ -1647,4 +1549,111 @@ DB_SUBNET_GROUPS: StaticSchema = (
     0,
     (_m,),
     ((lambda: schemas.DB_SUBNET_GROUP, {_sN: _DBSGu}),),
+)
+
+DESCRIBE_ENGINE_DEFAULT_CLUSTER_PARAMETERS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DEDCPI,
+    {_sSI: _cDEDCPM, _smi: None},
+    (_DBPGF, _Fil, _MR, _Mar),
+    (
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.FILTER_LIST, 0),
+        (lambda: schemas.INTEGER_OPTIONAL, 0),
+        (lambda: schemas.STRING, 0),
+    ),
+)
+
+DESCRIBE_ENGINE_DEFAULT_CLUSTER_PARAMETERS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DEDCPO,
+    {_sSI: _cDEDCPR, _smit: None},
+    (_EDn,),
+    ((lambda: ENGINE_DEFAULTS, 0),),
+)
+
+DESCRIBE_ENGINE_DEFAULT_CLUSTER_PARAMETERS: StaticOperationSchema = (
+    23,
+    n0,
+    _DEDCP,
+    0,
+    DESCRIBE_ENGINE_DEFAULT_CLUSTER_PARAMETERS_INPUT,
+    DESCRIBE_ENGINE_DEFAULT_CLUSTER_PARAMETERS_OUTPUT,
+    (),
+)
+
+ENGINE_DEFAULTS: StaticSchema = (
+    18,
+    n0,
+    _EDn,
+    0,
+    (_DBPGF, _Mar, _Par),
+    (
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.PARAMETERS_LIST, 0),
+    ),
+)
+
+DESCRIBE_ENGINE_DEFAULT_PARAMETERS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DEDPI,
+    {_sSI: _cDEDPM, _smi: None},
+    (_DBPGF, _Fil, _MR, _Mar),
+    (
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.FILTER_LIST, 0),
+        (lambda: schemas.INTEGER_OPTIONAL, 0),
+        (lambda: schemas.STRING, 0),
+    ),
+)
+
+DESCRIBE_ENGINE_DEFAULT_PARAMETERS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DEDPO,
+    {_sSI: _cDEDPR, _smit: None},
+    (_EDn,),
+    ((ENGINE_DEFAULTS, 0),),
+)
+
+DESCRIBE_ENGINE_DEFAULT_PARAMETERS: StaticOperationSchema = (
+    23,
+    n0,
+    _DEDP,
+    0,
+    DESCRIBE_ENGINE_DEFAULT_PARAMETERS_INPUT,
+    DESCRIBE_ENGINE_DEFAULT_PARAMETERS_OUTPUT,
+    (),
+)
+
+DESCRIBE_EVENT_CATEGORIES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DECI,
+    {_sSI: _cDECM, _smi: None},
+    (_STo, _Fil),
+    ((lambda: schemas.STRING, 0), (lambda: schemas.FILTER_LIST, 0)),
+)
+
+DESCRIBE_EVENT_CATEGORIES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DECO,
+    {_sSI: _cECM, _smit: None},
+    (_ECML,),
+    ((lambda: schemas.EVENT_CATEGORIES_MAP_LIST, 0),),
+)
+
+DESCRIBE_EVENT_CATEGORIES: StaticOperationSchema = (
+    23,
+    n0,
+    _DEC,
+    0,
+    DESCRIBE_EVENT_CATEGORIES_INPUT,
+    DESCRIBE_EVENT_CATEGORIES_OUTPUT,
+    (),
 )

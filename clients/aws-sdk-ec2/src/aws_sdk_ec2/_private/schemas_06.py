@@ -27,6 +27,7 @@ _TS = "TagSpecification"
 _Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
+_sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _TSa = "TagSpecifications"
 _DR = "DryRun"
@@ -39,6 +40,8 @@ _st = "state"
 _fa = "failed"
 _OIw = "OwnerId"
 _oI = "ownerId"
+_Sta = "Status"
+_sta = "status"
 _TSag = "TagSet"
 _tS = "tagSet"
 _act = "active"
@@ -97,6 +100,10 @@ _cIC = "committedInstanceCount"
 _ITnt = "InterruptionType"
 _ZSP = "ZeroSizePreference"
 _ICA = "InterruptibleCapacityAllocation"
+_TIC = "TargetInstanceCount"
+_tIC = "targetInstanceCount"
+_ICRI = "InterruptibleCapacityReservationId"
+_iCRI = "interruptibleCapacityReservationId"
 _iTn = "interruptionType"
 _zSP = "zeroSizePreference"
 _IInt = "InterruptionInfo"
@@ -286,6 +293,25 @@ CAPACITY_RESERVATION_TENANCY: StaticSchema = (
     ((-1, {_sV: _def}), (-1, {_sV: _ded})),
 )
 
+INTERRUPTIBLE_CAPACITY_ALLOCATION: StaticSchema = (
+    18,
+    n0,
+    _ICA,
+    0,
+    (_IC, _TIC, _Sta, _ICRI, _ITnt, _ZSP),
+    (
+        (lambda: schemas.INTEGER, {_aQN: _IC, _sN: _iC}),
+        (lambda: schemas.INTEGER, {_aQN: _TIC, _sN: _tIC}),
+        (
+            lambda: schemas.INTERRUPTIBLE_CAPACITY_RESERVATION_ALLOCATION_STATUS,
+            {_aQN: _Sta, _sN: _sta},
+        ),
+        (lambda: schemas.STRING, {_aQN: _ICRI, _sN: _iCRI}),
+        (lambda: schemas.INTERRUPTION_TYPE, {_aQN: _ITnt, _sN: _iTn}),
+        (lambda: schemas.ZERO_SIZE_PREFERENCE, {_aQN: _ZSP, _sN: _zSP}),
+    ),
+)
+
 INTERRUPTION_INFO: StaticSchema = (
     18,
     n0,
@@ -421,7 +447,7 @@ CAPACITY_RESERVATION: StaticSchema = (
         ),
         (lambda: schemas.CAPACITY_BLOCK_ID, {_aQN: _CBI, _sN: _cBI}),
         (lambda: schemas.BOXED_BOOLEAN, {_aQN: _Inte, _sN: _inte}),
-        (lambda: schemas.INTERRUPTIBLE_CAPACITY_ALLOCATION, {_aQN: _ICA, _sN: _iCA}),
+        (INTERRUPTIBLE_CAPACITY_ALLOCATION, {_aQN: _ICA, _sN: _iCA}),
         (INTERRUPTION_INFO, {_aQN: _IInt, _sN: _iIn}),
         (
             lambda: schemas.CAPACITY_RESERVATION_ADJUSTMENT_STATUS,
@@ -446,8 +472,8 @@ CREATE_CAPACITY_RESERVATION_BY_SPLITTING_INPUT: StaticSchema = (
     (
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.STRING, 2),
-        (lambda: schemas.CAPACITY_RESERVATION_ID, 1),
-        (lambda: schemas.INTEGER, 1),
+        (lambda: schemas.CAPACITY_RESERVATION_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.INTEGER, {_sO: None, _smi: None}),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
     ),
 )
@@ -482,7 +508,7 @@ CREATE_CAPACITY_RESERVATION_CANCELLATION_QUOTE_INPUT: StaticSchema = (
     {_sSI: _cCCRCQR, _sm: None},
     (_CRI, _CTl, _TSa, _DR),
     (
-        (lambda: schemas.CAPACITY_RESERVATION_ID, 1),
+        (lambda: schemas.CAPACITY_RESERVATION_ID, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 2),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
         (lambda: schemas.BOOLEAN, 0),
@@ -581,8 +607,8 @@ CREATE_CAPACITY_RESERVATION_DATE_CHANGE_QUOTE_INPUT: StaticSchema = (
     {_sSI: _cCCRDCQR, _sm: None},
     (_CRI, _NSD, _CTl, _TSa, _DR),
     (
-        (lambda: schemas.CAPACITY_RESERVATION_ID, 1),
-        (lambda: schemas.MILLISECOND_DATE_TIME, 1),
+        (lambda: schemas.CAPACITY_RESERVATION_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 2),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
         (lambda: schemas.BOOLEAN, 0),
@@ -834,7 +860,7 @@ MEMORY_MI_B_REQUEST: StaticSchema = (
     _MMBR,
     0,
     (_M, _Ma),
-    ((lambda: schemas.INTEGER, 1), (lambda: schemas.INTEGER, 0)),
+    ((lambda: schemas.INTEGER, {_sO: None, _smi: None}), (lambda: schemas.INTEGER, 0)),
 )
 
 NETWORK_BANDWIDTH_GBPS_REQUEST: StaticSchema = (
@@ -870,7 +896,7 @@ V_CPU_COUNT_RANGE_REQUEST: StaticSchema = (
     _VCCRR,
     0,
     (_M, _Ma),
-    ((lambda: schemas.INTEGER, 1), (lambda: schemas.INTEGER, 0)),
+    ((lambda: schemas.INTEGER, {_sO: None, _smi: None}), (lambda: schemas.INTEGER, 0)),
 )
 
 INSTANCE_REQUIREMENTS_REQUEST: StaticSchema = (
@@ -907,8 +933,8 @@ INSTANCE_REQUIREMENTS_REQUEST: StaticSchema = (
         _REIT,
     ),
     (
-        (V_CPU_COUNT_RANGE_REQUEST, 1),
-        (MEMORY_MI_B_REQUEST, 1),
+        (V_CPU_COUNT_RANGE_REQUEST, {_sO: None, _smi: None}),
+        (MEMORY_MI_B_REQUEST, {_sO: None, _smi: None}),
         (CPU_MANUFACTURER_SET, {_sN: _CM}),
         (MEMORY_GI_B_PER_V_CPU_REQUEST, 0),
         (EXCLUDED_INSTANCE_TYPE_SET, {_sN: _EIT}),

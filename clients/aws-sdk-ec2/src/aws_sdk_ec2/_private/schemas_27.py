@@ -16,6 +16,7 @@ _rT = "resourceType"
 _Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
+_sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _DR = "DryRun"
 _p = "pending"
@@ -28,10 +29,6 @@ _st = "state"
 _fa = "failed"
 _OIw = "OwnerId"
 _oI = "ownerId"
-_C = "Code"
-_co = "code"
-_Me = "Message"
-_mes = "message"
 _TSag = "TagSet"
 _tS = "tagSet"
 _er = "error"
@@ -68,26 +65,19 @@ _HI = "HostIds"
 _HIS = "HostIdSet"
 _hIS = "hostIdSet"
 _AMIT = "AllowsMultipleInstanceTypes"
-_pu = "public"
 _IIm = "ImageId"
 _WK = "WatermarkKey"
 _wK = "watermarkKey"
 _UIs = "UserId"
 _uI = "userId"
-_UT = "UpdateTime"
-_uT = "updateTime"
+_RIep = "ReportId"
 _CC = "CurrencyCode"
 _cC = "currencyCode"
-_FII = "FpgaImageId"
-_fII = "fpgaImageId"
 _SII = "SourceImageId"
 _iIm = "imageId"
 _oAu = "outpostArn"
-_CTr = "CreateTime"
-_cTr = "createTime"
 _Cou = "Count"
 _cou = "count"
-_unav = "unavailable"
 _ITSn = "InstanceTypeSpecification"
 _BDM = "BlockDeviceMapping"
 _HIo = "HostId"
@@ -98,14 +88,14 @@ _iF = "instanceFamily"
 _Pla = "Platform"
 _plat = "platform"
 _Ins = "Instances"
-_FIGI = "FpgaImageGlobalId"
-_fIGI = "fpgaImageGlobalId"
 _bDM = "blockDeviceMapping"
 _ON = "OptionName"
 _OV = "OptionValues"
 _OVp = "OptionValue"
 _RTO = "ResourceTypeOptions"
 _RTOe = "ResourceTypeOption"
+_AIcco = "AccountId"
+_rIe = "reportId"
 _KI = "KernelId"
 _RIa = "RamdiskId"
 _aSS = "amdSevSnp"
@@ -113,8 +103,6 @@ _kI = "kernelId"
 _cOp = "cpuOptions"
 _SRt = "StateReason"
 _sRt = "stateReason"
-_OAwn = "OwnerAlias"
-_oAw = "ownerAlias"
 _Ow = "Owner"
 _Fi = "Filter"
 _Fil = "Filters"
@@ -131,30 +119,14 @@ _tC = "totalCapacity"
 _mR = "maxResults"
 _AIsso = "AssociationIds"
 _Im = "Image"
+_RIepo = "ReportIds"
 _IIma = "ImageIds"
 _pCr = "productCodes"
 _Gr = "Group"
 _gro = "group"
 _PCro = "ProductCodes"
 _Own = "Owners"
-_ITL = "InstanceTypesList"
-_PIc = "PciId"
-_DIev = "DeviceId"
-_VIe = "VendorId"
-_SIub = "SubsystemId"
-_SVIu = "SubsystemVendorId"
-_FISC = "FpgaImageStateCode"
-_FISp = "FpgaImageState"
-_FIp = "FpgaImage"
-_SVh = "ShellVersion"
-_sVh = "shellVersion"
-_pIc = "pciId"
-_tags = "tags"
 _Pu = "Public"
-_DRSa = "DataRetentionSupport"
-_dRS = "dataRetentionSupport"
-_ITnsta = "InstanceTypes"
-_iTnst = "instanceTypes"
 _FIL = "FpgaImageList"
 _DHRMR = "DescribeHostReservationsMaxResults"
 _DHROI = "DescribeHostReservationOfferingsInput"
@@ -435,95 +407,33 @@ _Ima = "Images"
 _ISmag = "ImagesSet"
 _iSmag = "imagesSet"
 _DIesc = "DescribeImages"
+_DIURIISL = "DescribeImageUsageReportsImageIdStringList"
+_DIUREMR = "DescribeImageUsageReportEntriesMaxResults"
+_IURISL = "ImageUsageReportIdStringList"
+_DIUREI = "DescribeImageUsageReportEntriesInput"
+_cDIURER = "com.amazonaws.ec2#DescribeImageUsageReportEntriesRequest"
+_IURE = "ImageUsageReportEntry"
+_UCs = "UsageCount"
+_uCs = "usageCount"
+_aIc = "accountId"
+_RCT = "ReportCreationTime"
+_rCT = "reportCreationTime"
+_IUREL = "ImageUsageReportEntryList"
+_DIUREO = "DescribeImageUsageReportEntriesOutput"
+_cDIURERo = "com.amazonaws.ec2#DescribeImageUsageReportEntriesResult"
+_IUREm = "ImageUsageReportEntries"
+_IURES = "ImageUsageReportEntrySet"
+_iURES = "imageUsageReportEntrySet"
+_DIURE = "DescribeImageUsageReportEntries"
 
-INSTANCE_TYPES_LIST: StaticSchema = (
+FPGA_IMAGE_LIST: StaticSchema = (
     16,
     n0,
-    _ITL,
+    _FIL,
     0,
     (_me,),
-    ((lambda: schemas.STRING, {_sN: _i}),),
+    ((lambda: schemas.FPGA_IMAGE, {_sN: _i}),),
 )
-
-PCI_ID: StaticSchema = (
-    18,
-    n0,
-    _PIc,
-    0,
-    (_DIev, _VIe, _SIub, _SVIu),
-    (
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-    ),
-)
-
-FPGA_IMAGE_STATE_CODE: StaticSchema = (
-    14,
-    n0,
-    _FISC,
-    0,
-    (_p, _fa, _av, _unav),
-    ((-1, {_sV: _p}), (-1, {_sV: _fa}), (-1, {_sV: _av}), (-1, {_sV: _unav})),
-)
-
-FPGA_IMAGE_STATE: StaticSchema = (
-    18,
-    n0,
-    _FISp,
-    0,
-    (_C, _Me),
-    (
-        (FPGA_IMAGE_STATE_CODE, {_aQN: _C, _sN: _co}),
-        (lambda: schemas.STRING, {_aQN: _Me, _sN: _mes}),
-    ),
-)
-
-FPGA_IMAGE: StaticSchema = (
-    18,
-    n0,
-    _FIp,
-    0,
-    (
-        _FII,
-        _FIGI,
-        _N,
-        _Des,
-        _SVh,
-        _PIc,
-        _St,
-        _CTr,
-        _UT,
-        _OIw,
-        _OAwn,
-        _PCro,
-        _Tag,
-        _Pu,
-        _DRSa,
-        _ITnsta,
-    ),
-    (
-        (lambda: schemas.STRING, {_aQN: _FII, _sN: _fII}),
-        (lambda: schemas.STRING, {_aQN: _FIGI, _sN: _fIGI}),
-        (lambda: schemas.STRING, {_aQN: _N, _sN: _nam}),
-        (lambda: schemas.STRING, {_aQN: _Des, _sN: _desc}),
-        (lambda: schemas.STRING, {_aQN: _SVh, _sN: _sVh}),
-        (PCI_ID, {_aQN: _PIc, _sN: _pIc}),
-        (FPGA_IMAGE_STATE, {_aQN: _St, _sN: _st}),
-        (lambda: schemas.DATE_TIME, {_aQN: _CTr, _sN: _cTr}),
-        (lambda: schemas.DATE_TIME, {_aQN: _UT, _sN: _uT}),
-        (lambda: schemas.STRING, {_aQN: _OIw, _sN: _oI}),
-        (lambda: schemas.STRING, {_aQN: _OAwn, _sN: _oAw}),
-        (lambda: schemas.PRODUCT_CODE_LIST, {_aQN: _PCro, _sN: _pCr}),
-        (lambda: schemas.TAG_LIST, {_aQN: _Tag, _sN: _tags}),
-        (lambda: schemas.BOOLEAN, {_aQN: _Pu, _sN: _pu}),
-        (lambda: schemas.BOOLEAN, {_aQN: _DRSa, _sN: _dRS}),
-        (INSTANCE_TYPES_LIST, {_aQN: _ITnsta, _sN: _iTnst}),
-    ),
-)
-
-FPGA_IMAGE_LIST: StaticSchema = (16, n0, _FIL, 0, (_me,), ((FPGA_IMAGE, {_sN: _i}),))
 
 DESCRIBE_HOST_RESERVATIONS_MAX_RESULTS: StaticSchema = (7, n0, _DHRMR, 0)
 
@@ -931,7 +841,7 @@ DESCRIBE_IDENTITY_ID_FORMAT_INPUT: StaticSchema = (
     (_Reso, _PAr),
     (
         (lambda: schemas.STRING, {_aQN: _Reso, _sN: _reso}),
-        (lambda: schemas.STRING, {_aQN: _PAr, _sN: _pAr, _smi: None}),
+        (lambda: schemas.STRING, {_aQN: _PAr, _sN: _pAr, _sO: None, _smi: None}),
     ),
 )
 
@@ -1012,8 +922,8 @@ DESCRIBE_IMAGE_ATTRIBUTE_INPUT: StaticSchema = (
     {_sSI: _cDIAR, _sm: None},
     (_Attr, _IIm, _DR),
     (
-        (IMAGE_ATTRIBUTE_NAME, 1),
-        (lambda: schemas.IMAGE_ID, 1),
+        (IMAGE_ATTRIBUTE_NAME, {_sO: None, _smi: None}),
+        (lambda: schemas.IMAGE_ID, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
     ),
 )
@@ -1179,7 +1089,10 @@ DESCRIBE_IMAGE_REFERENCES_INPUT: StaticSchema = (
     {_sSI: _cDIRR, _sm: None},
     (_IIma, _IART, _RTe, _NTex, _DR, _MR),
     (
-        (DESCRIBE_IMAGE_REFERENCES_IMAGE_ID_STRING_LIST, {_sN: _IIm, _smi: None}),
+        (
+            DESCRIBE_IMAGE_REFERENCES_IMAGE_ID_STRING_LIST,
+            {_sN: _IIm, _sO: None, _smi: None},
+        ),
         (lambda: schemas.BOOLEAN, 0),
         (RESOURCE_TYPE_REQUEST_LIST, {_sN: _RT}),
         (lambda: schemas.STRING, 0),
@@ -1519,3 +1432,86 @@ IMAGE: StaticSchema = (
 )
 
 IMAGE_LIST: StaticSchema = (16, n0, _ILma, 0, (_me,), ((IMAGE, {_sN: _i}),))
+
+DESCRIBE_IMAGE_USAGE_REPORTS_IMAGE_ID_STRING_LIST: StaticSchema = (
+    16,
+    n0,
+    _DIURIISL,
+    0,
+    (_me,),
+    ((lambda: schemas.IMAGE_ID, 0),),
+)
+
+DESCRIBE_IMAGE_USAGE_REPORT_ENTRIES_MAX_RESULTS: StaticSchema = (7, n0, _DIUREMR, 0)
+
+IMAGE_USAGE_REPORT_ID_STRING_LIST: StaticSchema = (
+    16,
+    n0,
+    _IURISL,
+    0,
+    (_me,),
+    ((lambda: schemas.IMAGE_USAGE_REPORT_ID, 0),),
+)
+
+DESCRIBE_IMAGE_USAGE_REPORT_ENTRIES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DIUREI,
+    {_sSI: _cDIURER, _sm: None},
+    (_IIma, _RIepo, _NTex, _Fil, _DR, _MR),
+    (
+        (DESCRIBE_IMAGE_USAGE_REPORTS_IMAGE_ID_STRING_LIST, {_sN: _IIm}),
+        (IMAGE_USAGE_REPORT_ID_STRING_LIST, {_sN: _RIep}),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+        (lambda: schemas.BOOLEAN, 0),
+        (DESCRIBE_IMAGE_USAGE_REPORT_ENTRIES_MAX_RESULTS, 0),
+    ),
+)
+
+DESCRIBE_IMAGE_USAGE_REPORT_ENTRIES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DIUREO,
+    {_sSI: _cDIURERo, _smit: None},
+    (_NTex, _IUREm),
+    (
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+        (lambda: IMAGE_USAGE_REPORT_ENTRY_LIST, {_aQN: _IURES, _sN: _iURES}),
+    ),
+)
+
+DESCRIBE_IMAGE_USAGE_REPORT_ENTRIES: StaticOperationSchema = (
+    23,
+    n0,
+    _DIURE,
+    0,
+    DESCRIBE_IMAGE_USAGE_REPORT_ENTRIES_INPUT,
+    DESCRIBE_IMAGE_USAGE_REPORT_ENTRIES_OUTPUT,
+    (),
+)
+
+IMAGE_USAGE_REPORT_ENTRY: StaticSchema = (
+    18,
+    n0,
+    _IURE,
+    0,
+    (_RT, _RIep, _UCs, _AIcco, _IIm, _RCT),
+    (
+        (lambda: schemas.IMAGE_USAGE_RESOURCE_TYPE_NAME, {_aQN: _RT, _sN: _rT}),
+        (lambda: schemas.IMAGE_USAGE_REPORT_ID, {_aQN: _RIep, _sN: _rIe}),
+        (lambda: schemas.LONG, {_aQN: _UCs, _sN: _uCs}),
+        (lambda: schemas.STRING, {_aQN: _AIcco, _sN: _aIc}),
+        (lambda: schemas.IMAGE_ID, {_aQN: _IIm, _sN: _iIm}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _RCT, _sN: _rCT}),
+    ),
+)
+
+IMAGE_USAGE_REPORT_ENTRY_LIST: StaticSchema = (
+    16,
+    n0,
+    _IUREL,
+    0,
+    (_me,),
+    ((IMAGE_USAGE_REPORT_ENTRY, {_sN: _i}),),
+)

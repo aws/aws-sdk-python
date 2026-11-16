@@ -11,6 +11,7 @@ n0 = "com.amazonaws.rds"
 _m = "member"
 _sN = "smithy.api#xmlName"
 _sV = "smithy.api#enumValue"
+_sO = "smithy.api#clientOptional"
 _sm = "smithy.api#required"
 _AS = "AllocatedStorage"
 _ST = "StorageThroughput"
@@ -307,12 +308,14 @@ _AP = "AutoPause"
 _SUAP = "SecondsUntilAutoPause"
 _TA = "TimeoutAction"
 _SBT = "SecondsBeforeTimeout"
+_SVSC = "ServerlessV2ScalingConfiguration"
 _DBSGI = "DBShardGroupIdentifier"
 _DBSGAEFh = "DBShardGroupAlreadyExistsFault"
 _IDBSGSFnv = "InvalidDBShardGroupStateFault"
 _IBGDSF = "InvalidBlueGreenDeploymentStateFault"
 _IOGSF = "InvalidOptionGroupStateFault"
-_IRF = "InvalidRestoreFault"
+_ISBF = "InvalidS3BucketFault"
+_IDBCCFn = "InsufficientDBClusterCapacityFault"
 
 COPY_DB_PARAMETER_GROUP_INPUT: StaticSchema = (
     18,
@@ -321,9 +324,9 @@ COPY_DB_PARAMETER_GROUP_INPUT: StaticSchema = (
     {_sSI: _cCDBPGM, _smi: None},
     (_SDBPGI, _TDBPGI, _TDBPGD, _Ta),
     (
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.TAG_LIST, 0),
     ),
 )
@@ -376,8 +379,8 @@ COPY_DB_SNAPSHOT_INPUT: StaticSchema = (
     {_sSI: _cCDBSM, _smi: None},
     (_SDBSI, _TDBSI, _KKI, _Ta, _CT, _PSU, _OGN, _TCAZ, _STnap, _COG, _SAZ, _TSag),
     (
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.TAG_LIST, 0),
         (lambda: schemas.BOOLEAN_OPTIONAL, 0),
@@ -554,9 +557,9 @@ COPY_OPTION_GROUP_INPUT: StaticSchema = (
     {_sSI: _cCOGM, _smi: None},
     (_SOGI, _TOGI, _TOGD, _Ta),
     (
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.TAG_LIST, 0),
     ),
 )
@@ -810,8 +813,8 @@ CREATE_BLUE_GREEN_DEPLOYMENT_INPUT: StaticSchema = (
         _TRCa,
     ),
     (
-        (BLUE_GREEN_DEPLOYMENT_NAME, 1),
-        (DATABASE_ARN, 1),
+        (BLUE_GREEN_DEPLOYMENT_NAME, {_sO: None, _sm: None}),
+        (DATABASE_ARN, {_sO: None, _sm: None}),
         (TARGET_ENGINE_VERSION, 0),
         (TARGET_DB_PARAMETER_GROUP_NAME, 0),
         (TARGET_DB_CLUSTER_PARAMETER_GROUP_NAME, 0),
@@ -1049,8 +1052,8 @@ CREATE_CUSTOM_DB_ENGINE_VERSION_INPUT: StaticSchema = (
     {_sSI: _cCCDBEVM, _smi: None},
     (_En, _EV, _DIFSBN, _DIFSP, _DIF, _II, _KMSKI, _SCDEVI, _UAPLI, _D, _Ma, _Ta),
     (
-        (CUSTOM_ENGINE_NAME, 1),
-        (CUSTOM_ENGINE_VERSION, 1),
+        (CUSTOM_ENGINE_NAME, {_sO: None, _sm: None}),
+        (CUSTOM_ENGINE_VERSION, {_sO: None, _sm: None}),
         (BUCKET_NAME, 0),
         (STRING255, 0),
         (lambda: schemas.STRING_LIST, 0),
@@ -1349,11 +1352,11 @@ CREATE_DB_CAPACITY_RESERVATION_INPUT: StaticSchema = (
     {_sSI: _cCDBCRRom, _smi: None},
     (_DBCRN, _DBIC, _En, _CPAZ, _AZv, _ED, _SD, _CDo, _LM, _Ta),
     (
-        (lambda: schemas.DB_CAPACITY_RESERVATION_NAME, 1),
-        (lambda: schemas.DB_INSTANCE_CLASS, 1),
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.INTEGER_OPTIONAL, 1),
-        (lambda: schemas.AVAILABILITY_ZONES, 1),
+        (lambda: schemas.DB_CAPACITY_RESERVATION_NAME, {_sO: None, _sm: None}),
+        (lambda: schemas.DB_INSTANCE_CLASS, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.INTEGER_OPTIONAL, {_sO: None, _sm: None}),
+        (lambda: schemas.AVAILABILITY_ZONES, {_sO: None, _sm: None}),
         (lambda: schemas.T_STAMP, 0),
         (lambda: schemas.T_STAMP, 0),
         (LONG_OPTIONAL, 0),
@@ -1512,6 +1515,15 @@ SCALING_CONFIGURATION: StaticSchema = (
     ),
 )
 
+SERVERLESS_V2_SCALING_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _SVSC,
+    0,
+    (_MC, _MCa, _SUAP),
+    ((DOUBLE_OPTIONAL, 0), (DOUBLE_OPTIONAL, 0), (lambda: schemas.INTEGER_OPTIONAL, 0)),
+)
+
 DB_SHARD_GROUP_IDENTIFIER: StaticSchema = (3, n0, _DBSGI, 0)
 
 DB_SHARD_GROUP_ALREADY_EXISTS_FAULT: StaticSchema = (
@@ -1576,15 +1588,30 @@ INVALID_OPTION_GROUP_STATE_FAULT: StaticSchema = (
 
 DB_CLUSTER_IDENTIFIER: StaticSchema = (3, n0, _DBCI, 0)
 
-INVALID_RESTORE_FAULT: StaticSchema = (
+INVALID_S3_BUCKET_FAULT: StaticSchema = (
     18,
     n0,
-    _IRF,
+    _ISBF,
     {
         _smith: _c,
         _sE: 400,
         _aQE: MappingProxyType(
-            {"code": "InvalidRestoreFault", "httpResponseCode": 400}
+            {"code": "InvalidS3BucketFault", "httpResponseCode": 400}
+        ),
+    },
+    (_me,),
+    ((lambda: schemas.EXCEPTION_MESSAGE, 0),),
+)
+
+INSUFFICIENT_DB_CLUSTER_CAPACITY_FAULT: StaticSchema = (
+    18,
+    n0,
+    _IDBCCFn,
+    {
+        _smith: _c,
+        _sE: 403,
+        _aQE: MappingProxyType(
+            {"code": "InsufficientDBClusterCapacityFault", "httpResponseCode": 403}
         ),
     },
     (_me,),

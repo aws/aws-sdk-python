@@ -15,6 +15,7 @@ _s = "smithy.api#input"
 _sm = "smithy.api#required"
 _sL = "smithy.api#httpLabel"
 _AI = "AdministratorId"
+_sO = "smithy.api#clientOptional"
 _sN = "smithy.api#jsonName"
 _aI = "administratorId"
 _II = "InvitationId"
@@ -476,8 +477,8 @@ ACCEPT_ADMINISTRATOR_INVITATION_INPUT: StaticSchema = (
     (_DI, _AI, _II),
     (
         (DETECTOR_ID, 9),
-        (STRING, {_sN: _aI, _sm: None}),
-        (STRING, {_sN: _iI, _sm: None}),
+        (STRING, {_sO: None, _sN: _aI, _sm: None}),
+        (STRING, {_sO: None, _sN: _iI, _sm: None}),
     ),
 )
 
@@ -532,8 +533,8 @@ ACCEPT_INVITATION_INPUT: StaticSchema = (
     (_DI, _MI, _II),
     (
         (DETECTOR_ID, 9),
-        (STRING, {_sN: _mI, _sm: None}),
-        (STRING, {_sN: _iI, _sm: None}),
+        (STRING, {_sO: None, _sN: _mI, _sm: None}),
+        (STRING, {_sO: None, _sN: _iI, _sm: None}),
     ),
 )
 
@@ -602,7 +603,7 @@ ACCOUNT: StaticSchema = (
     _A,
     0,
     (_U, _N),
-    ((STRING, {_sN: _u, _sm: None}), (STRING, {_sN: _a})),
+    ((STRING, {_sO: None, _sN: _u, _sm: None}), (STRING, {_sN: _a})),
 )
 
 INTEGER: StaticSchema = (7, n0, _I, 0)
@@ -825,7 +826,10 @@ ACCOUNT_DETAIL: StaticSchema = (
     _AD,
     0,
     (_AIcc, _Em),
-    ((ACCOUNT_ID, {_sN: _aIc, _sm: None}), (EMAIL, {_sN: _e, _sm: None})),
+    (
+        (ACCOUNT_ID, {_sO: None, _sN: _aIc, _sm: None}),
+        (EMAIL, {_sO: None, _sN: _e, _sm: None}),
+    ),
 )
 
 ACCOUNT_DETAILS: StaticSchema = (16, n0, _ADc, 0, (_me,), ((ACCOUNT_DETAIL, 0),))
@@ -1356,7 +1360,7 @@ ACTIVITY: StaticSchema = (
     _Act,
     0,
     (_T, _Ap),
-    ((ACTIVITY_TYPE, {_sN: _t, _sm: None}), (API_CALL, {_sN: _ap})),
+    ((ACTIVITY_TYPE, {_sO: None, _sN: _t, _sm: None}), (API_CALL, {_sN: _ap})),
 )
 
 ACTIVITIES: StaticSchema = (16, n0, _Acti, 0, (_me,), ((ACTIVITY, 0),))
@@ -1383,8 +1387,8 @@ ACTOR_PROCESS: StaticSchema = (
     0,
     (_N, _Pat, _Sh),
     (
-        (PROCESS_NAME, {_sN: _n, _sm: None}),
-        (PROCESS_PATH, {_sN: _pat, _sm: None}),
+        (PROCESS_NAME, {_sO: None, _sN: _n, _sm: None}),
+        (PROCESS_PATH, {_sO: None, _sN: _pat, _sm: None}),
         (PROCESS_SHA256, {_sN: _sh}),
     ),
 )
@@ -1419,9 +1423,9 @@ USER: StaticSchema = (
     0,
     (_N, _U, _T, _CU, _A),
     (
-        (STRING, {_sN: _n, _sm: None}),
-        (STRING, {_sN: _u, _sm: None}),
-        (STRING, {_sN: _t, _sm: None}),
+        (STRING, {_sO: None, _sN: _n, _sm: None}),
+        (STRING, {_sO: None, _sN: _u, _sm: None}),
+        (STRING, {_sO: None, _sN: _t, _sm: None}),
         (STRING, {_sN: _cU}),
         (ACCOUNT, {_sN: _a}),
     ),
@@ -1434,7 +1438,7 @@ ACTOR: StaticSchema = (
     0,
     (_Id_, _Us, _Ses, _Pro),
     (
-        (STRING, {_sN: _id, _sm: None}),
+        (STRING, {_sO: None, _sN: _id, _sm: None}),
         (USER, {_sN: _us}),
         (SESSION, {_sN: _ses}),
         (ACTOR_PROCESS, {_sN: _pro}),
@@ -1475,5 +1479,5 @@ INCREMENTAL_SCAN_DETAILS: StaticSchema = (
     _ISD,
     0,
     (_BRA,),
-    ((NON_EMPTY_STRING, {_sN: _bRA, _sm: None}),),
+    ((NON_EMPTY_STRING, {_sO: None, _sN: _bRA, _sm: None}),),
 )

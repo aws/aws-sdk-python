@@ -17,6 +17,7 @@ _vp = "vpc"
 _Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
+_sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _DR = "DryRun"
 _smit = "smithy.api#output"
@@ -47,6 +48,7 @@ _ET = "ExpirationTime"
 _eT = "expirationTime"
 _Id = "Id"
 _id = "id"
+_IA = "IpAddress"
 _AZ = "AvailabilityZone"
 _aZ = "availabilityZone"
 _AZI = "AvailabilityZoneId"
@@ -64,6 +66,7 @@ _aZS = "availabilityZoneSet"
 _AZIv = "AvailabilityZoneIds"
 _AZIS = "AvailabilityZoneIdSet"
 _aZIS = "availabilityZoneIdSet"
+_CG = "CustomerGateway"
 _SGe = "SecurityGroups"
 _ena = "enabled"
 _Des = "Description"
@@ -75,8 +78,8 @@ _desc = "description"
 _PIo = "PoolId"
 _ca = "cancelling"
 _SGIe = "SecurityGroupIds"
-_IIn = "InstanceIds"
 _DOI = "DhcpOptionsId"
+_CAe = "CertificateArn"
 _Ti = "Timestamp"
 _ti = "timestamp"
 _GIr = "GroupId"
@@ -136,12 +139,20 @@ _DOST = "DisconnectOnSessionTimeout"
 _TGC = "TransitGatewayConfiguration"
 _DN = "DnsName"
 _dN = "dnsName"
+_BA = "BgpAsn"
+_DNe = "DeviceName"
+_BAE = "BgpAsnExtended"
+_cAe = "certificateArn"
+_dNe = "deviceName"
+_bAE = "bgpAsnExtended"
 _CGIu = "CustomerGatewayId"
+_cGIu = "customerGatewayId"
 _ty = "type"
+_iApd = "ipAddress"
+_bA = "bgpAsn"
 _DOh = "DhcpOptions"
 _Pla = "Platform"
 _plat = "platform"
-_Ins = "Instances"
 _rIe = "reportId"
 _SGIS = "SecurityGroupIdSet"
 _sGIS = "securityGroupIdSet"
@@ -159,18 +170,9 @@ _Fil = "Filters"
 _NTex = "NextToken"
 _MR = "MaxResults"
 _nT = "nextToken"
-_CGSa = "CarrierGatewaySet"
-_DCLIMR = "DescribeClassicLinkInstancesMaxResults"
-_DCLII = "DescribeClassicLinkInstancesInput"
-_cDCLIR = "com.amazonaws.ec2#DescribeClassicLinkInstancesRequest"
 _mR = "maxResults"
 _CLI = "ClassicLinkInstance"
 _CLIL = "ClassicLinkInstanceList"
-_DCLIO = "DescribeClassicLinkInstancesOutput"
-_cDCLIRo = "com.amazonaws.ec2#DescribeClassicLinkInstancesResult"
-_ISnst = "InstancesSet"
-_iSns = "instancesSet"
-_DCLI = "DescribeClassicLinkInstances"
 _DCVARMR = "DescribeClientVpnAuthorizationRulesMaxResults"
 _DCVARI = "DescribeClientVpnAuthorizationRulesInput"
 _cDCVARR = "com.amazonaws.ec2#DescribeClientVpnAuthorizationRulesRequest"
@@ -410,59 +412,42 @@ _DEOIGMR = "DescribeEgressOnlyInternetGatewaysMaxResults"
 _DEOIGIe = "DescribeEgressOnlyInternetGatewaysInput"
 _cDEOIGRom = "com.amazonaws.ec2#DescribeEgressOnlyInternetGatewaysRequest"
 _EOIGIg = "EgressOnlyInternetGatewayIds"
+_EOIGL = "EgressOnlyInternetGatewayList"
 _DEOIGOe = "DescribeEgressOnlyInternetGatewaysOutput"
 _cDEOIGRoma = "com.amazonaws.ec2#DescribeEgressOnlyInternetGatewaysResult"
 _EOIGg = "EgressOnlyInternetGateways"
 _EOIGS = "EgressOnlyInternetGatewaySet"
 _eOIGS = "egressOnlyInternetGatewaySet"
 _DEOIGe = "DescribeEgressOnlyInternetGateways"
+_EGI = "ElasticGpuId"
+_EGIS = "ElasticGpuIdSet"
+_DEGMR = "DescribeElasticGpusMaxResults"
+_DEGI = "DescribeElasticGpusInput"
+_cDEGR = "com.amazonaws.ec2#DescribeElasticGpusRequest"
+_EGIl = "ElasticGpuIds"
+_EGSlast = "ElasticGpuSet"
+_DEGO = "DescribeElasticGpusOutput"
+_cDEGRo = "com.amazonaws.ec2#DescribeElasticGpusResult"
+_eGSl = "elasticGpuSet"
+_DEG = "DescribeElasticGpus"
 
-CARRIER_GATEWAY_SET: StaticSchema = (
-    16,
-    n0,
-    _CGSa,
-    0,
-    (_me,),
-    ((lambda: schemas.CARRIER_GATEWAY, {_sN: _i}),),
-)
-
-DESCRIBE_CLASSIC_LINK_INSTANCES_MAX_RESULTS: StaticSchema = (7, n0, _DCLIMR, 0)
-
-DESCRIBE_CLASSIC_LINK_INSTANCES_INPUT: StaticSchema = (
+CUSTOMER_GATEWAY: StaticSchema = (
     18,
     n0,
-    _DCLII,
-    {_sSI: _cDCLIR, _sm: None},
-    (_DR, _IIn, _Fil, _NTex, _MR),
-    (
-        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (lambda: schemas.INSTANCE_ID_STRING_LIST, {_sN: _II}),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-        (DESCRIBE_CLASSIC_LINK_INSTANCES_MAX_RESULTS, {_aQN: _MR, _sN: _mR}),
-    ),
-)
-
-DESCRIBE_CLASSIC_LINK_INSTANCES_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DCLIO,
-    {_sSI: _cDCLIRo, _smit: None},
-    (_Ins, _NTex),
-    (
-        (lambda: CLASSIC_LINK_INSTANCE_LIST, {_aQN: _ISnst, _sN: _iSns}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_CLASSIC_LINK_INSTANCES: StaticOperationSchema = (
-    23,
-    n0,
-    _DCLI,
+    _CG,
     0,
-    DESCRIBE_CLASSIC_LINK_INSTANCES_INPUT,
-    DESCRIBE_CLASSIC_LINK_INSTANCES_OUTPUT,
-    (),
+    (_CAe, _DNe, _Tag, _BAE, _CGIu, _St, _Ty, _IA, _BA),
+    (
+        (lambda: schemas.STRING, {_aQN: _CAe, _sN: _cAe}),
+        (lambda: schemas.STRING, {_aQN: _DNe, _sN: _dNe}),
+        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
+        (lambda: schemas.STRING, {_aQN: _BAE, _sN: _bAE}),
+        (lambda: schemas.STRING, {_aQN: _CGIu, _sN: _cGIu}),
+        (lambda: schemas.STRING, {_aQN: _St, _sN: _st}),
+        (lambda: schemas.STRING, {_aQN: _Ty, _sN: _ty}),
+        (lambda: schemas.STRING, {_aQN: _IA, _sN: _iApd}),
+        (lambda: schemas.STRING, {_aQN: _BA, _sN: _bA}),
+    ),
 )
 
 CLASSIC_LINK_INSTANCE: StaticSchema = (
@@ -497,7 +482,7 @@ DESCRIBE_CLIENT_VPN_AUTHORIZATION_RULES_INPUT: StaticSchema = (
     {_sSI: _cDCVARR, _sm: None},
     (_CVEI, _DR, _NTex, _Fil, _MR),
     (
-        (lambda: schemas.CLIENT_VPN_ENDPOINT_ID, 1),
+        (lambda: schemas.CLIENT_VPN_ENDPOINT_ID, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.NEXT_TOKEN, 0),
         (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
@@ -561,7 +546,7 @@ DESCRIBE_CLIENT_VPN_CONNECTIONS_INPUT: StaticSchema = (
     {_sSI: _cDCVCR, _sm: None},
     (_CVEI, _Fil, _NTex, _MR, _DR),
     (
-        (lambda: schemas.CLIENT_VPN_ENDPOINT_ID, 1),
+        (lambda: schemas.CLIENT_VPN_ENDPOINT_ID, {_sO: None, _smi: None}),
         (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
         (lambda: schemas.NEXT_TOKEN, 0),
         (DESCRIBE_CLIENT_VPN_CONNECTIONS_MAX_RESULTS, 0),
@@ -1000,7 +985,7 @@ DESCRIBE_CLIENT_VPN_ROUTES_INPUT: StaticSchema = (
     {_sSI: _cDCVRRom, _sm: None},
     (_CVEI, _Fil, _MR, _NTex, _DR),
     (
-        (lambda: schemas.CLIENT_VPN_ENDPOINT_ID, 1),
+        (lambda: schemas.CLIENT_VPN_ENDPOINT_ID, {_sO: None, _smi: None}),
         (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
         (DESCRIBE_CLIENT_VPN_ROUTES_MAX_RESULTS, 0),
         (lambda: schemas.NEXT_TOKEN, 0),
@@ -1066,7 +1051,7 @@ DESCRIBE_CLIENT_VPN_TARGET_NETWORKS_INPUT: StaticSchema = (
     {_sSI: _cDCVTNR, _sm: None},
     (_CVEI, _AIsso, _MR, _NTex, _Fil, _DR),
     (
-        (lambda: schemas.CLIENT_VPN_ENDPOINT_ID, 1),
+        (lambda: schemas.CLIENT_VPN_ENDPOINT_ID, {_sO: None, _smi: None}),
         (lambda: schemas.VALUE_STRING_LIST, 0),
         (DESCRIBE_CLIENT_VPN_TARGET_NETWORKS_MAX_RESULTS, 0),
         (lambda: schemas.NEXT_TOKEN, 0),
@@ -1389,7 +1374,7 @@ CUSTOMER_GATEWAY_LIST: StaticSchema = (
     _CGL,
     0,
     (_me,),
-    ((lambda: schemas.CUSTOMER_GATEWAY, {_sN: _i}),),
+    ((CUSTOMER_GATEWAY, {_sN: _i}),),
 )
 
 DECLARATIVE_POLICIES_MAX_RESULTS: StaticSchema = (7, n0, _DPMR, 0)
@@ -1556,10 +1541,7 @@ DESCRIBE_EGRESS_ONLY_INTERNET_GATEWAYS_OUTPUT: StaticSchema = (
     {_sSI: _cDEOIGRoma, _smit: None},
     (_EOIGg, _NTex),
     (
-        (
-            lambda: schemas.EGRESS_ONLY_INTERNET_GATEWAY_LIST,
-            {_aQN: _EOIGS, _sN: _eOIGS},
-        ),
+        (lambda: EGRESS_ONLY_INTERNET_GATEWAY_LIST, {_aQN: _EOIGS, _sN: _eOIGS}),
         (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
     ),
 )
@@ -1571,5 +1553,63 @@ DESCRIBE_EGRESS_ONLY_INTERNET_GATEWAYS: StaticOperationSchema = (
     0,
     DESCRIBE_EGRESS_ONLY_INTERNET_GATEWAYS_INPUT,
     DESCRIBE_EGRESS_ONLY_INTERNET_GATEWAYS_OUTPUT,
+    (),
+)
+
+EGRESS_ONLY_INTERNET_GATEWAY_LIST: StaticSchema = (
+    16,
+    n0,
+    _EOIGL,
+    0,
+    (_me,),
+    ((lambda: schemas.EGRESS_ONLY_INTERNET_GATEWAY, {_sN: _i}),),
+)
+
+ELASTIC_GPU_ID_SET: StaticSchema = (
+    16,
+    n0,
+    _EGIS,
+    0,
+    (_me,),
+    ((lambda: schemas.ELASTIC_GPU_ID, {_sN: _i}),),
+)
+
+DESCRIBE_ELASTIC_GPUS_MAX_RESULTS: StaticSchema = (7, n0, _DEGMR, 0)
+
+DESCRIBE_ELASTIC_GPUS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DEGI,
+    {_sSI: _cDEGR, _sm: None},
+    (_EGIl, _DR, _Fil, _MR, _NTex),
+    (
+        (ELASTIC_GPU_ID_SET, {_sN: _EGI}),
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+        (DESCRIBE_ELASTIC_GPUS_MAX_RESULTS, 0),
+        (lambda: schemas.STRING, 0),
+    ),
+)
+
+DESCRIBE_ELASTIC_GPUS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DEGO,
+    {_sSI: _cDEGRo, _smit: None},
+    (_EGSlast, _MR, _NTex),
+    (
+        (lambda: schemas.ELASTIC_GPU_SET, {_aQN: _EGSlast, _sN: _eGSl}),
+        (lambda: schemas.INTEGER, {_aQN: _MR, _sN: _mR}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+    ),
+)
+
+DESCRIBE_ELASTIC_GPUS: StaticOperationSchema = (
+    23,
+    n0,
+    _DEG,
+    0,
+    DESCRIBE_ELASTIC_GPUS_INPUT,
+    DESCRIBE_ELASTIC_GPUS_OUTPUT,
     (),
 )

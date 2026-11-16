@@ -18,6 +18,7 @@ _TS = "TagSpecification"
 _Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
+_sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _TSa = "TagSpecifications"
 _DR = "DryRun"
@@ -81,8 +82,8 @@ _PRo = "PortRanges"
 _PRS = "PortRangeSet"
 _pRS = "portRangeSet"
 _Vp = "Vpc"
-_TGRT = "TransitGatewayRouteTable"
 _tc = "tcp"
+_Reso = "Resource"
 _Mo = "Mode"
 _LUT = "LastUpdateTimestamp"
 _lUT = "lastUpdateTimestamp"
@@ -185,6 +186,7 @@ _VEC = "VpcEncryptionControl"
 _ITnst = "InstanceTenancy"
 _iTns = "instanceTenancy"
 _du = "dualstack"
+_Ip = "Ipv4"
 _SGIS = "SecurityGroupIdSet"
 _cip = "create_in_progress"
 _cip_ = "create-in-progress"
@@ -211,17 +213,7 @@ _lb = "load_balancer"
 _PTGI = "PeerTransitGatewayId"
 _TGRTAI = "TransitGatewayRouteTableAnnouncementId"
 _tGRTAI = "transitGatewayRouteTableAnnouncementId"
-_TGRTS = "TransitGatewayRouteTableState"
-_DART = "DefaultAssociationRouteTable"
-_dART = "defaultAssociationRouteTable"
-_DPRT = "DefaultPropagationRouteTable"
-_dPRT = "defaultPropagationRouteTable"
-_CTGRTAI = "CreateTransitGatewayRouteTableAnnouncementInput"
-_cCTGRTAR = "com.amazonaws.ec2#CreateTransitGatewayRouteTableAnnouncementRequest"
 _PAIe = "PeeringAttachmentId"
-_TGRTAD = "TransitGatewayRouteTableAnnouncementDirection"
-_ou = "outgoing"
-_incom = "incoming"
 _TGRTAS = "TransitGatewayRouteTableAnnouncementState"
 _TGRTA = "TransitGatewayRouteTableAnnouncement"
 _pTGI = "peerTransitGatewayId"
@@ -230,10 +222,6 @@ _pCNI = "peerCoreNetworkId"
 _pAI = "peeringAttachmentId"
 _ADn = "AnnouncementDirection"
 _aDn = "announcementDirection"
-_CTGRTAO = "CreateTransitGatewayRouteTableAnnouncementOutput"
-_cCTGRTARo = "com.amazonaws.ec2#CreateTransitGatewayRouteTableAnnouncementResult"
-_tGRTA = "transitGatewayRouteTableAnnouncement"
-_CTGRTA = "CreateTransitGatewayRouteTableAnnouncement"
 _CTGVARO = "CreateTransitGatewayVpcAttachmentRequestOptions"
 _CTGVAI = "CreateTransitGatewayVpcAttachmentInput"
 _cCTGVAR = "com.amazonaws.ec2#CreateTransitGatewayVpcAttachmentRequest"
@@ -379,74 +367,24 @@ _DRIT = "DnsRecordIpType"
 _sd = "service_defined"
 _sd_ = "service-defined"
 _PDSDS = "PrivateDnsSpecifiedDomainSet"
-
-TRANSIT_GATEWAY_ROUTE_TABLE_STATE: StaticSchema = (
-    14,
-    n0,
-    _TGRTS,
-    0,
-    (_p, _av, _de, _del),
-    ((-1, {_sV: _p}), (-1, {_sV: _av}), (-1, {_sV: _de}), (-1, {_sV: _del})),
-)
-
-TRANSIT_GATEWAY_ROUTE_TABLE: StaticSchema = (
-    18,
-    n0,
-    _TGRT,
-    0,
-    (_TGRTI, _TGI, _St, _DART, _DPRT, _CT, _Tag),
-    (
-        (lambda: schemas.STRING, {_aQN: _TGRTI, _sN: _tGRTI}),
-        (lambda: schemas.STRING, {_aQN: _TGI, _sN: _tGI}),
-        (TRANSIT_GATEWAY_ROUTE_TABLE_STATE, {_aQN: _St, _sN: _st}),
-        (lambda: schemas.BOOLEAN, {_aQN: _DART, _sN: _dART}),
-        (lambda: schemas.BOOLEAN, {_aQN: _DPRT, _sN: _dPRT}),
-        (lambda: schemas.DATE_TIME, {_aQN: _CT, _sN: _cT}),
-        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
-    ),
-)
-
-CREATE_TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENT_INPUT: StaticSchema = (
-    18,
-    n0,
-    _CTGRTAI,
-    {_sSI: _cCTGRTAR, _sm: None},
-    (_TGRTI, _PAIe, _TSa, _DR),
-    (
-        (lambda: schemas.TRANSIT_GATEWAY_ROUTE_TABLE_ID, 1),
-        (lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, 1),
-        (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-CREATE_TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENT_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _CTGRTAO,
-    {_sSI: _cCTGRTARo, _smit: None},
-    (_TGRTA,),
-    ((lambda: TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENT, {_aQN: _TGRTA, _sN: _tGRTA}),),
-)
-
-CREATE_TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENT: StaticOperationSchema = (
-    23,
-    n0,
-    _CTGRTA,
-    0,
-    CREATE_TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENT_INPUT,
-    CREATE_TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENT_OUTPUT,
-    (),
-)
-
-TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENT_DIRECTION: StaticSchema = (
-    14,
-    n0,
-    _TGRTAD,
-    0,
-    (_ou, _incom),
-    ((-1, {_sV: _ou}), (-1, {_sV: _incom})),
-)
+_DOS = "DnsOptionsSpecification"
+_PDOFIRE = "PrivateDnsOnlyForInboundResolverEndpoint"
+_PDP = "PrivateDnsPreference"
+_PDSD = "PrivateDnsSpecifiedDomains"
+_PDSDr = "PrivateDnsSpecifiedDomain"
+_RCA = "ResourceConfigurationArn"
+_VERTIL = "VpcEndpointRouteTableIdList"
+_VESGIL = "VpcEndpointSecurityGroupIdList"
+_SCu = "SubnetConfiguration"
+_Ipv = "Ipv6"
+_SCL = "SubnetConfigurationsList"
+_VESIL = "VpcEndpointSubnetIdList"
+_VET = "VpcEndpointType"
+_Inter = "Interface"
+_Ga = "Gateway"
+_GLB = "GatewayLoadBalancer"
+_SNer = "ServiceNetwork"
+_Tu = "Tunnel"
 
 TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENT_STATE: StaticSchema = (
     14,
@@ -480,7 +418,10 @@ TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENT: StaticSchema = (
         (lambda: schemas.TRANSIT_GATEWAY_ID, {_aQN: _PTGI, _sN: _pTGI}),
         (lambda: schemas.STRING, {_aQN: _PCNI, _sN: _pCNI}),
         (lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, {_aQN: _PAIe, _sN: _pAI}),
-        (TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENT_DIRECTION, {_aQN: _ADn, _sN: _aDn}),
+        (
+            lambda: schemas.TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENT_DIRECTION,
+            {_aQN: _ADn, _sN: _aDn},
+        ),
         (lambda: schemas.TRANSIT_GATEWAY_ROUTE_TABLE_ID, {_aQN: _TGRTI, _sN: _tGRTI}),
         (TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENT_STATE, {_aQN: _St, _sN: _st}),
         (lambda: schemas.DATE_TIME, {_aQN: _CT, _sN: _cT}),
@@ -509,9 +450,9 @@ CREATE_TRANSIT_GATEWAY_VPC_ATTACHMENT_INPUT: StaticSchema = (
     {_sSI: _cCTGVAR, _sm: None},
     (_TGI, _VI, _SI, _O, _TSa, _DR),
     (
-        (lambda: schemas.TRANSIT_GATEWAY_ID, 1),
-        (lambda: schemas.VPC_ID, 1),
-        (lambda: schemas.TRANSIT_GATEWAY_SUBNET_ID_LIST, 1),
+        (lambda: schemas.TRANSIT_GATEWAY_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.VPC_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.TRANSIT_GATEWAY_SUBNET_ID_LIST, {_sO: None, _smi: None}),
         (CREATE_TRANSIT_GATEWAY_VPC_ATTACHMENT_REQUEST_OPTIONS, 0),
         (lambda: schemas.TAG_SPECIFICATION_LIST, 0),
         (lambda: schemas.BOOLEAN, 0),
@@ -700,9 +641,9 @@ CREATE_VERIFIED_ACCESS_ENDPOINT_INPUT: StaticSchema = (
         _COi,
     ),
     (
-        (lambda: schemas.VERIFIED_ACCESS_GROUP_ID, 1),
-        (VERIFIED_ACCESS_ENDPOINT_TYPE, 1),
-        (VERIFIED_ACCESS_ENDPOINT_ATTACHMENT_TYPE, 1),
+        (lambda: schemas.VERIFIED_ACCESS_GROUP_ID, {_sO: None, _smi: None}),
+        (VERIFIED_ACCESS_ENDPOINT_TYPE, {_sO: None, _smi: None}),
+        (VERIFIED_ACCESS_ENDPOINT_ATTACHMENT_TYPE, {_sO: None, _smi: None}),
         (CERTIFICATE_ARN, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 0),
@@ -919,7 +860,7 @@ CREATE_VERIFIED_ACCESS_GROUP_INPUT: StaticSchema = (
     {_sSI: _cCVAGR, _sm: None},
     (_VAII, _Des, _PDo, _TSa, _CTl, _DR, _SSs),
     (
-        (lambda: schemas.VERIFIED_ACCESS_INSTANCE_ID, 1),
+        (lambda: schemas.VERIFIED_ACCESS_INSTANCE_ID, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
@@ -1034,12 +975,12 @@ CREATE_VERIFIED_ACCESS_TRUST_PROVIDER_INPUT: StaticSchema = (
     {_sSI: _cCVATPR, _sm: None},
     (_TPT, _UTPT, _DTPT, _OO, _DO, _PRN, _Des, _TSa, _CTl, _DR, _SSs, _NAOO),
     (
-        (lambda: schemas.TRUST_PROVIDER_TYPE, 1),
+        (lambda: schemas.TRUST_PROVIDER_TYPE, {_sO: None, _smi: None}),
         (lambda: schemas.USER_TRUST_PROVIDER_TYPE, 0),
         (lambda: schemas.DEVICE_TRUST_PROVIDER_TYPE, 0),
         (CREATE_VERIFIED_ACCESS_TRUST_PROVIDER_OIDC_OPTIONS, 0),
         (CREATE_VERIFIED_ACCESS_TRUST_PROVIDER_DEVICE_OPTIONS, 0),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
         (lambda: schemas.STRING, 2),
@@ -1185,7 +1126,7 @@ VPC_ENCRYPTION_CONTROL_CONFIGURATION: StaticSchema = (
     0,
     (_Mo, _IGE, _EOIGE, _NGE, _VPGE, _VPE, _LE, _VLE, _EFSE, _GAE, _AGVE),
     (
-        (lambda: schemas.VPC_ENCRYPTION_CONTROL_MODE, 1),
+        (lambda: schemas.VPC_ENCRYPTION_CONTROL_MODE, {_sO: None, _smi: None}),
         (lambda: schemas.VPC_ENCRYPTION_CONTROL_EXCLUSION_STATE_INPUT, 0),
         (lambda: schemas.VPC_ENCRYPTION_CONTROL_EXCLUSION_STATE_INPUT, 0),
         (lambda: schemas.VPC_ENCRYPTION_CONTROL_EXCLUSION_STATE_INPUT, 0),
@@ -1274,7 +1215,7 @@ CREATE_VPC_BLOCK_PUBLIC_ACCESS_EXCLUSION_INPUT: StaticSchema = (
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.SUBNET_ID, 0),
         (lambda: schemas.VPC_ID, 0),
-        (INTERNET_GATEWAY_EXCLUSION_MODE, 1),
+        (INTERNET_GATEWAY_EXCLUSION_MODE, {_sO: None, _smi: None}),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
     ),
 )
@@ -1358,7 +1299,7 @@ CREATE_VPC_ENCRYPTION_CONTROL_INPUT: StaticSchema = (
     (_DR, _VI, _TSa),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.VPC_ID, 1),
+        (lambda: schemas.VPC_ID, {_sO: None, _smi: None}),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
     ),
 )
@@ -1398,4 +1339,85 @@ PRIVATE_DNS_SPECIFIED_DOMAIN_SET: StaticSchema = (
     0,
     (_me,),
     ((lambda: schemas.STRING, {_sN: _i}),),
+)
+
+DNS_OPTIONS_SPECIFICATION: StaticSchema = (
+    18,
+    n0,
+    _DOS,
+    0,
+    (_DRIT, _PDOFIRE, _PDP, _PDSD),
+    (
+        (DNS_RECORD_IP_TYPE, 0),
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.STRING, 0),
+        (PRIVATE_DNS_SPECIFIED_DOMAIN_SET, {_sN: _PDSDr}),
+    ),
+)
+
+RESOURCE_CONFIGURATION_ARN: StaticSchema = (3, n0, _RCA, 0)
+
+VPC_ENDPOINT_ROUTE_TABLE_ID_LIST: StaticSchema = (
+    16,
+    n0,
+    _VERTIL,
+    0,
+    (_me,),
+    ((lambda: schemas.ROUTE_TABLE_ID, {_sN: _i}),),
+)
+
+VPC_ENDPOINT_SECURITY_GROUP_ID_LIST: StaticSchema = (
+    16,
+    n0,
+    _VESGIL,
+    0,
+    (_me,),
+    ((lambda: schemas.SECURITY_GROUP_ID, {_sN: _i}),),
+)
+
+SUBNET_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _SCu,
+    0,
+    (_SIu, _Ip, _Ipv),
+    (
+        (lambda: schemas.SUBNET_ID, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+    ),
+)
+
+SUBNET_CONFIGURATIONS_LIST: StaticSchema = (
+    16,
+    n0,
+    _SCL,
+    0,
+    (_me,),
+    ((SUBNET_CONFIGURATION, {_sN: _i}),),
+)
+
+VPC_ENDPOINT_SUBNET_ID_LIST: StaticSchema = (
+    16,
+    n0,
+    _VESIL,
+    0,
+    (_me,),
+    ((lambda: schemas.SUBNET_ID, {_sN: _i}),),
+)
+
+VPC_ENDPOINT_TYPE: StaticSchema = (
+    14,
+    n0,
+    _VET,
+    0,
+    (_Inter, _Ga, _GLB, _Reso, _SNer, _Tu),
+    (
+        (-1, {_sV: _Inter}),
+        (-1, {_sV: _Ga}),
+        (-1, {_sV: _GLB}),
+        (-1, {_sV: _Reso}),
+        (-1, {_sV: _SNer}),
+        (-1, {_sV: _Tu}),
+    ),
 )

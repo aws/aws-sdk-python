@@ -112,6 +112,7 @@ _cJWTA = "customJWTAuthorizer"
 _CPA = "CapacityProviderArn"
 _CPC = "CapacityProviderConfiguration"
 _cPA = "capacityProviderArn"
+_sOm = "smithy.api#clientOptional"
 _D = "Description"
 _EVK = "EnvironmentVariableKey"
 _EVV = "EnvironmentVariableValue"
@@ -479,7 +480,7 @@ CAPACITY_PROVIDER_CONFIGURATION: StaticSchema = (
     _CPC,
     0,
     (_cPA,),
-    ((CAPACITY_PROVIDER_ARN, 1),),
+    ((CAPACITY_PROVIDER_ARN, {_sOm: None, _sm: None}),),
 )
 
 DESCRIPTION: StaticSchema = (3, n0, _D, 4)

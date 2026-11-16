@@ -23,6 +23,7 @@ _rT = "resourceType"
 _Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
+_sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _TSa = "TagSpecifications"
 _DR = "DryRun"
@@ -394,7 +395,7 @@ CREATE_IPAM_POLICY_INPUT: StaticSchema = (
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
         (lambda: schemas.STRING, 2),
-        (lambda: schemas.IPAM_ID, 1),
+        (lambda: schemas.IPAM_ID, {_sO: None, _smi: None}),
     ),
 )
 
@@ -559,11 +560,11 @@ CREATE_IPAM_POOL_INPUT: StaticSchema = (
     ),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_SCOPE_ID, 1),
+        (lambda: schemas.IPAM_SCOPE_ID, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.IPAM_POOL_ID, 0),
         (lambda: schemas.STRING, 0),
-        (lambda: schemas.ADDRESS_FAMILY, 1),
+        (lambda: schemas.ADDRESS_FAMILY, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.BOOLEAN, 0),
         (IPAM_NETMASK_LENGTH, 0),
@@ -751,7 +752,7 @@ IPAM_PREFIX_LIST_RESOLVER_RULE_CONDITION_REQUEST: StaticSchema = (
     0,
     (_Ope, _IPI, _RIe, _ROe, _RR, _RTeso, _Ci),
     (
-        (IPAM_PREFIX_LIST_RESOLVER_RULE_CONDITION_OPERATION, 1),
+        (IPAM_PREFIX_LIST_RESOLVER_RULE_CONDITION_OPERATION, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 0),
@@ -803,7 +804,7 @@ IPAM_PREFIX_LIST_RESOLVER_RULE_REQUEST: StaticSchema = (
     0,
     (_RTu, _SCt, _ISI, _RT, _Condi),
     (
-        (IPAM_PREFIX_LIST_RESOLVER_RULE_TYPE, 1),
+        (IPAM_PREFIX_LIST_RESOLVER_RULE_TYPE, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.IPAM_SCOPE_ID, 0),
         (IPAM_RESOURCE_TYPE, 0),
@@ -828,9 +829,9 @@ CREATE_IPAM_PREFIX_LIST_RESOLVER_INPUT: StaticSchema = (
     (_DR, _IIp, _Des, _AF, _Rul, _TSa, _CTl),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_ID, 1),
+        (lambda: schemas.IPAM_ID, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
-        (lambda: schemas.ADDRESS_FAMILY, 1),
+        (lambda: schemas.ADDRESS_FAMILY, {_sO: None, _smi: None}),
         (IPAM_PREFIX_LIST_RESOLVER_RULE_REQUEST_SET, {_sN: _Ru}),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
         (lambda: schemas.STRING, 2),
@@ -931,11 +932,11 @@ CREATE_IPAM_PREFIX_LIST_RESOLVER_TARGET_INPUT: StaticSchema = (
     (_DR, _IPLRI, _PLI, _PLR, _DVe, _TLV, _TSa, _CTl),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (IPAM_PREFIX_LIST_RESOLVER_ID, 1),
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
+        (IPAM_PREFIX_LIST_RESOLVER_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
         (lambda: schemas.BOXED_LONG, 0),
-        (lambda: schemas.BOOLEAN, 1),
+        (lambda: schemas.BOOLEAN, {_sO: None, _smi: None}),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
         (lambda: schemas.STRING, 2),
     ),
@@ -1138,9 +1139,9 @@ CREATE_IPAM_ROUTING_POLICY_REGISTRATION_INPUT: StaticSchema = (
     (_DR, _IIRAI, _Ci, _Asns, _PMSA, _ML, _Des, _Fo, _CTl),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (IPAM_INTERNET_REGISTRY_ASSOCIATION_ID, 1),
-        (lambda: schemas.STRING, 1),
-        (ASN_LIST, {_sN: _Asn, _smi: None}),
+        (IPAM_INTERNET_REGISTRY_ASSOCIATION_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
+        (ASN_LIST, {_sN: _Asn, _sO: None, _smi: None}),
         (lambda: schemas.BOXED_BOOLEAN, 0),
         (IPAM_ROUTING_POLICY_REGISTRATION_MAX_LENGTH, 0),
         (lambda: schemas.STRING, 0),
@@ -1199,7 +1200,7 @@ CREATE_IPAM_SCOPE_INPUT: StaticSchema = (
     (_DR, _IIp, _Des, _TSa, _CTl, _EAC),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_ID, 1),
+        (lambda: schemas.IPAM_ID, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
         (lambda: schemas.STRING, 2),
@@ -1320,7 +1321,7 @@ CREATE_KEY_PAIR_INPUT: StaticSchema = (
     {_sSI: _cCKPR, _sm: None},
     (_KN, _KT, _TSa, _KF, _DR),
     (
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
         (KEY_TYPE, 0),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
         (KEY_FORMAT, 0),

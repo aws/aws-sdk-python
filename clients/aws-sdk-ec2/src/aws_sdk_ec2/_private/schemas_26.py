@@ -17,17 +17,25 @@ _rT = "resourceType"
 _Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
+_sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _DR = "DryRun"
+_p = "pending"
 _smit = "smithy.api#output"
+_av = "available"
 _St = "State"
 _st = "state"
 _CT = "CreationTime"
 _cT = "creationTime"
+_fa = "failed"
 _RIe = "ResourceId"
 _rI = "resourceId"
 _OIw = "OwnerId"
 _oI = "ownerId"
+_C = "Code"
+_co = "code"
+_Me = "Message"
+_mes = "message"
 _Sta = "Status"
 _sta = "status"
 _TSag = "TagSet"
@@ -65,11 +73,14 @@ _ASll = "AllocationStrategy"
 _IIn = "InstanceIds"
 _Ti = "Timestamp"
 _ti = "timestamp"
+_pu = "public"
 _IIm = "ImageId"
 _UIs = "UserId"
 _uI = "userId"
 _ST = "StartTime"
 _sTt = "startTime"
+_UT = "UpdateTime"
+_uT = "updateTime"
 _Prog = "Progress"
 _prog = "progress"
 _ETI = "ExportTaskId"
@@ -82,6 +93,7 @@ _SIn = "SnapshotId"
 _sIn = "snapshotId"
 _CTr = "CreateTime"
 _cTr = "createTime"
+_unav = "unavailable"
 _TTC = "TotalTargetCapacity"
 _FCu = "FulfilledCapacity"
 _fCu = "fulfilledCapacity"
@@ -163,6 +175,8 @@ _MAI = "MaxAggregationInterval"
 _DOe = "DestinationOptions"
 _TFS = "TagFieldSpecifications"
 _FLI = "FlowLogIds"
+_FIGI = "FpgaImageGlobalId"
+_fIGI = "fpgaImageGlobalId"
 _SBu = "S3Bucket"
 _sB = "s3Bucket"
 _SPr = "S3Prefix"
@@ -171,7 +185,7 @@ _LT = "LaunchTemplate"
 _lT = "launchTemplate"
 _vU = "validUntil"
 _iIB = "instanceInterruptionBehavior"
-_sO = "spotOptions"
+_sOp = "spotOptions"
 _ATTACHED = "ATTACHED"
 _OAwn = "OwnerAlias"
 _oAw = "ownerAlias"
@@ -186,14 +200,7 @@ _MR = "MaxResults"
 _nT = "nextToken"
 _OK_ = "OK"
 _IMPAIRED = "IMPAIRED"
-_mR = "maxResults"
-_EOIGL = "EgressOnlyInternetGatewayList"
 _EGI = "ElasticGpuId"
-_EGIS = "ElasticGpuIdSet"
-_DEGMR = "DescribeElasticGpusMaxResults"
-_DEGI = "DescribeElasticGpusInput"
-_cDEGR = "com.amazonaws.ec2#DescribeElasticGpusRequest"
-_EGIl = "ElasticGpuIds"
 _EGSla = "ElasticGpuStatus"
 _Ok = "Ok"
 _Imp = "Impaired"
@@ -207,10 +214,6 @@ _eGT = "elasticGpuType"
 _eGH = "elasticGpuHealth"
 _eGS = "elasticGpuState"
 _EGSlast = "ElasticGpuSet"
-_DEGO = "DescribeElasticGpusOutput"
-_cDEGRo = "com.amazonaws.ec2#DescribeElasticGpusResult"
-_eGSl = "elasticGpuSet"
-_DEG = "DescribeElasticGpus"
 _EITI = "ExportImageTaskId"
 _EITIL = "ExportImageTaskIdList"
 _DEITMR = "DescribeExportImageTasksMaxResults"
@@ -449,6 +452,24 @@ _DFIIes = "DescribeFpgaImagesInput"
 _cDFIRomam = "com.amazonaws.ec2#DescribeFpgaImagesRequest"
 _FIIp = "FpgaImageIds"
 _Own = "Owners"
+_ITL = "InstanceTypesList"
+_PIc = "PciId"
+_DIev = "DeviceId"
+_VIe = "VendorId"
+_SIub = "SubsystemId"
+_SVIu = "SubsystemVendorId"
+_FISC = "FpgaImageStateCode"
+_FISp = "FpgaImageState"
+_FIp = "FpgaImage"
+_SVh = "ShellVersion"
+_sVh = "shellVersion"
+_pIc = "pciId"
+_tags = "tags"
+_Pu = "Public"
+_DRSa = "DataRetentionSupport"
+_dRS = "dataRetentionSupport"
+_ITnsta = "InstanceTypes"
+_iTnst = "instanceTypes"
 _DFIOes = "DescribeFpgaImagesOutput"
 _cDFIRomama = "com.amazonaws.ec2#DescribeFpgaImagesResult"
 _FIpg = "FpgaImages"
@@ -458,65 +479,7 @@ _DFIescri = "DescribeFpgaImages"
 
 FPGA_IMAGE_ID: StaticSchema = (3, n0, _FII, 0)
 
-EGRESS_ONLY_INTERNET_GATEWAY_LIST: StaticSchema = (
-    16,
-    n0,
-    _EOIGL,
-    0,
-    (_me,),
-    ((lambda: schemas.EGRESS_ONLY_INTERNET_GATEWAY, {_sN: _i}),),
-)
-
 ELASTIC_GPU_ID: StaticSchema = (3, n0, _EGI, 0)
-
-ELASTIC_GPU_ID_SET: StaticSchema = (
-    16,
-    n0,
-    _EGIS,
-    0,
-    (_me,),
-    ((ELASTIC_GPU_ID, {_sN: _i}),),
-)
-
-DESCRIBE_ELASTIC_GPUS_MAX_RESULTS: StaticSchema = (7, n0, _DEGMR, 0)
-
-DESCRIBE_ELASTIC_GPUS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DEGI,
-    {_sSI: _cDEGR, _sm: None},
-    (_EGIl, _DR, _Fil, _MR, _NTex),
-    (
-        (ELASTIC_GPU_ID_SET, {_sN: _EGI}),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (DESCRIBE_ELASTIC_GPUS_MAX_RESULTS, 0),
-        (lambda: schemas.STRING, 0),
-    ),
-)
-
-DESCRIBE_ELASTIC_GPUS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DEGO,
-    {_sSI: _cDEGRo, _smit: None},
-    (_EGSlast, _MR, _NTex),
-    (
-        (lambda: ELASTIC_GPU_SET, {_aQN: _EGSlast, _sN: _eGSl}),
-        (lambda: schemas.INTEGER, {_aQN: _MR, _sN: _mR}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_ELASTIC_GPUS: StaticOperationSchema = (
-    23,
-    n0,
-    _DEG,
-    0,
-    DESCRIBE_ELASTIC_GPUS_INPUT,
-    DESCRIBE_ELASTIC_GPUS_OUTPUT,
-    (),
-)
 
 ELASTIC_GPU_STATUS: StaticSchema = (
     14,
@@ -923,8 +886,8 @@ DESCRIBE_FLEET_HISTORY_INPUT: StaticSchema = (
         (FLEET_EVENT_TYPE, 0),
         (lambda: schemas.INTEGER, 0),
         (lambda: schemas.STRING, 0),
-        (lambda: schemas.FLEET_ID, 1),
-        (lambda: schemas.DATE_TIME, 1),
+        (lambda: schemas.FLEET_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.DATE_TIME, {_sO: None, _smi: None}),
     ),
 )
 
@@ -998,7 +961,7 @@ DESCRIBE_FLEET_INSTANCES_INPUT: StaticSchema = (
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.INTEGER, 0),
         (lambda: schemas.STRING, 0),
-        (lambda: schemas.FLEET_ID, 1),
+        (lambda: schemas.FLEET_ID, {_sO: None, _smi: None}),
         (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
     ),
 )
@@ -1326,7 +1289,7 @@ FLEET_DATA: StaticSchema = (
         (lambda: schemas.DATE_TIME, {_aQN: _VF, _sN: _vF}),
         (lambda: schemas.DATE_TIME, {_aQN: _VU, _sN: _vU}),
         (lambda: schemas.BOOLEAN, {_aQN: _RUI, _sN: _rUI}),
-        (SPOT_OPTIONS, {_aQN: _SO, _sN: _sO}),
+        (SPOT_OPTIONS, {_aQN: _SO, _sN: _sOp}),
         (ON_DEMAND_OPTIONS, {_aQN: _ODO, _sN: _oDO}),
         (RESERVED_CAPACITY_OPTIONS, {_aQN: _RCO, _sN: _rCO}),
         (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
@@ -1471,7 +1434,11 @@ DESCRIBE_FPGA_IMAGE_ATTRIBUTE_INPUT: StaticSchema = (
     _DFIAI,
     {_sSI: _cDFIAR, _sm: None},
     (_DR, _FII, _Attr),
-    ((lambda: schemas.BOOLEAN, 0), (FPGA_IMAGE_ID, 1), (FPGA_IMAGE_ATTRIBUTE_NAME, 1)),
+    (
+        (lambda: schemas.BOOLEAN, 0),
+        (FPGA_IMAGE_ID, {_sO: None, _smi: None}),
+        (FPGA_IMAGE_ATTRIBUTE_NAME, {_sO: None, _smi: None}),
+    ),
 )
 
 DESCRIBE_FPGA_IMAGE_ATTRIBUTE_OUTPUT: StaticSchema = (
@@ -1608,4 +1575,91 @@ DESCRIBE_FPGA_IMAGES: StaticOperationSchema = (
     DESCRIBE_FPGA_IMAGES_INPUT,
     DESCRIBE_FPGA_IMAGES_OUTPUT,
     (),
+)
+
+INSTANCE_TYPES_LIST: StaticSchema = (
+    16,
+    n0,
+    _ITL,
+    0,
+    (_me,),
+    ((lambda: schemas.STRING, {_sN: _i}),),
+)
+
+PCI_ID: StaticSchema = (
+    18,
+    n0,
+    _PIc,
+    0,
+    (_DIev, _VIe, _SIub, _SVIu),
+    (
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+    ),
+)
+
+FPGA_IMAGE_STATE_CODE: StaticSchema = (
+    14,
+    n0,
+    _FISC,
+    0,
+    (_p, _fa, _av, _unav),
+    ((-1, {_sV: _p}), (-1, {_sV: _fa}), (-1, {_sV: _av}), (-1, {_sV: _unav})),
+)
+
+FPGA_IMAGE_STATE: StaticSchema = (
+    18,
+    n0,
+    _FISp,
+    0,
+    (_C, _Me),
+    (
+        (FPGA_IMAGE_STATE_CODE, {_aQN: _C, _sN: _co}),
+        (lambda: schemas.STRING, {_aQN: _Me, _sN: _mes}),
+    ),
+)
+
+FPGA_IMAGE: StaticSchema = (
+    18,
+    n0,
+    _FIp,
+    0,
+    (
+        _FII,
+        _FIGI,
+        _N,
+        _Des,
+        _SVh,
+        _PIc,
+        _St,
+        _CTr,
+        _UT,
+        _OIw,
+        _OAwn,
+        _PCro,
+        _Tag,
+        _Pu,
+        _DRSa,
+        _ITnsta,
+    ),
+    (
+        (lambda: schemas.STRING, {_aQN: _FII, _sN: _fII}),
+        (lambda: schemas.STRING, {_aQN: _FIGI, _sN: _fIGI}),
+        (lambda: schemas.STRING, {_aQN: _N, _sN: _nam}),
+        (lambda: schemas.STRING, {_aQN: _Des, _sN: _desc}),
+        (lambda: schemas.STRING, {_aQN: _SVh, _sN: _sVh}),
+        (PCI_ID, {_aQN: _PIc, _sN: _pIc}),
+        (FPGA_IMAGE_STATE, {_aQN: _St, _sN: _st}),
+        (lambda: schemas.DATE_TIME, {_aQN: _CTr, _sN: _cTr}),
+        (lambda: schemas.DATE_TIME, {_aQN: _UT, _sN: _uT}),
+        (lambda: schemas.STRING, {_aQN: _OIw, _sN: _oI}),
+        (lambda: schemas.STRING, {_aQN: _OAwn, _sN: _oAw}),
+        (PRODUCT_CODE_LIST, {_aQN: _PCro, _sN: _pCr}),
+        (lambda: schemas.TAG_LIST, {_aQN: _Tag, _sN: _tags}),
+        (lambda: schemas.BOOLEAN, {_aQN: _Pu, _sN: _pu}),
+        (lambda: schemas.BOOLEAN, {_aQN: _DRSa, _sN: _dRS}),
+        (INSTANCE_TYPES_LIST, {_aQN: _ITnsta, _sN: _iTnst}),
+    ),
 )

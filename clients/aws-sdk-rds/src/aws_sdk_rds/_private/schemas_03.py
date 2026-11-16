@@ -14,6 +14,7 @@ _ASM = "ActivityStreamMode"
 _sV = "smithy.api#enumValue"
 _ASPS = "ActivityStreamPolicyStatus"
 _ASS = "ActivityStreamStatus"
+_sO = "smithy.api#clientOptional"
 _sm = "smithy.api#required"
 _AS = "AllocatedStorage"
 _MAS = "MaxAllocatedStorage"
@@ -64,6 +65,8 @@ _DBPGN = "DBParameterGroupName"
 _OGN = "OptionGroupName"
 _TSag = "TagSpecifications"
 _N = "Name"
+_DBS = "DBSnapshot"
+_DBSIn = "DBSnapshotIdentifier"
 _ICT = "InstanceCreateTime"
 _Io = "Iops"
 _TCA = "TdeCredentialArn"
@@ -133,15 +136,8 @@ _DDI = "DomainDnsIps"
 _ECOI = "EnableCustomerOwnedIp"
 _BTa = "BackupTarget"
 _CIIP = "CustomIamInstanceProfile"
-_DBIR = "DBInstanceRole"
-_DBIRn = "DBInstanceRoles"
 _AM = "AutomationMode"
-_FULL = "FULL"
-_fu = "full"
-_AP_ = "ALL_PAUSED"
-_ap = "all-paused"
 _DBIABR = "DBInstanceAutomatedBackupsReplication"
-_DBIABA = "DBInstanceAutomatedBackupsArn"
 _DBIABRL = "DBInstanceAutomatedBackupsReplicationList"
 _DBPGS = "DBParameterGroupStatus"
 _PAS = "ParameterApplyStatus"
@@ -303,38 +299,17 @@ _cDBSG = "com.amazonaws.rds#DBShardGroup"
 _DBSGRI = "DBShardGroupResourceId"
 _DBSGAh = "DBShardGroupArn"
 _MDBSGLR = "MaxDBShardGroupLimitReached"
+_UDBEVF = "UnsupportedDBEngineVersionFault"
 _CDBSGr = "CreateDBShardGroup"
+_CDBSIr = "CreateDBSnapshotInput"
+_cCDBSMo = "com.amazonaws.rds#CreateDBSnapshotMessage"
+_CDBSOr = "CreateDBSnapshotOutput"
+_cCDBSRo = "com.amazonaws.rds#CreateDBSnapshotResult"
+_CDBSr = "CreateDBSnapshot"
 _DBIABNFF = "DBInstanceAutomatedBackupNotFoundFault"
 _IDBIABSF = "InvalidDBInstanceAutomatedBackupStateFault"
 _IDBPESF = "InvalidDBProxyEndpointStateFault"
 _DBPTGN = "DBProxyTargetGroupName"
-
-DB_INSTANCE_ROLES: StaticSchema = (
-    16,
-    n0,
-    _DBIRn,
-    0,
-    (_m,),
-    ((lambda: schemas.DB_INSTANCE_ROLE, {_sN: _DBIR}),),
-)
-
-AUTOMATION_MODE: StaticSchema = (
-    14,
-    n0,
-    _AM,
-    0,
-    (_FULL, _AP_),
-    ((-1, {_sV: _fu}), (-1, {_sV: _ap})),
-)
-
-DB_INSTANCE_AUTOMATED_BACKUPS_REPLICATION: StaticSchema = (
-    18,
-    n0,
-    _DBIABR,
-    0,
-    (_DBIABA,),
-    ((lambda: schemas.STRING, 0),),
-)
 
 DB_INSTANCE_AUTOMATED_BACKUPS_REPLICATION_LIST: StaticSchema = (
     16,
@@ -342,7 +317,7 @@ DB_INSTANCE_AUTOMATED_BACKUPS_REPLICATION_LIST: StaticSchema = (
     _DBIABRL,
     0,
     (_m,),
-    ((DB_INSTANCE_AUTOMATED_BACKUPS_REPLICATION, {_sN: _DBIABR}),),
+    ((lambda: schemas.DB_INSTANCE_AUTOMATED_BACKUPS_REPLICATION, {_sN: _DBIABR}),),
 )
 
 DB_PARAMETER_GROUP_STATUS: StaticSchema = (
@@ -486,7 +461,7 @@ PENDING_MODIFIED_VALUES: StaticSchema = (
         (lambda: schemas.STRING, 0),
         (lambda: schemas.PENDING_CLOUDWATCH_LOGS_EXPORTS, 0),
         (lambda: schemas.PROCESSOR_FEATURE_LIST, 0),
-        (AUTOMATION_MODE, 0),
+        (lambda: schemas.AUTOMATION_MODE, 0),
         (lambda: schemas.T_STAMP, 0),
         (lambda: schemas.BOOLEAN_OPTIONAL, 0),
         (lambda: schemas.BOOLEAN_OPTIONAL, 0),
@@ -701,11 +676,11 @@ DB_INSTANCE: StaticSchema = (
         (lambda: schemas.LOG_TYPE_LIST, 0),
         (lambda: schemas.PROCESSOR_FEATURE_LIST, 0),
         (lambda: schemas.BOOLEAN, 0),
-        (DB_INSTANCE_ROLES, 0),
+        (lambda: schemas.DB_INSTANCE_ROLES, 0),
         (ENDPOINT, 0),
         (lambda: schemas.INTEGER_OPTIONAL, 0),
         (lambda: schemas.TAG_LIST, 0),
-        (AUTOMATION_MODE, 0),
+        (lambda: schemas.AUTOMATION_MODE, 0),
         (lambda: schemas.T_STAMP, 0),
         (lambda: schemas.BOOLEAN_OPTIONAL, 0),
         (lambda: schemas.STRING, 0),
@@ -810,7 +785,7 @@ CREATE_DB_INSTANCE_READ_REPLICA_INPUT: StaticSchema = (
         _DBCRI,
     ),
     (
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 0),
@@ -932,9 +907,9 @@ CREATE_DB_PARAMETER_GROUP_INPUT: StaticSchema = (
     {_sSI: _cCDBPGMo, _smi: None},
     (_DBPGN, _DBPGF, _D, _Ta),
     (
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.TAG_LIST, 0),
     ),
 )
@@ -1059,12 +1034,12 @@ CREATE_DB_PROXY_INPUT: StaticSchema = (
     {_sSI: _cCDBPR, _smi: None},
     (_DBPN, _EF, _DAS, _Au, _RA, _VSI, _VSGIp, _RTLS, _ICTd, _DL, _Ta, _ENT, _TCNT),
     (
-        (DB_PROXY_NAME, 1),
-        (ENGINE_FAMILY, 1),
+        (DB_PROXY_NAME, {_sO: None, _sm: None}),
+        (ENGINE_FAMILY, {_sO: None, _sm: None}),
         (DEFAULT_AUTH_SCHEME, 0),
         (USER_AUTH_CONFIG_LIST, 0),
-        (lambda: schemas.ARN, 1),
-        (lambda: schemas.STRING_LIST, 1),
+        (lambda: schemas.ARN, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING_LIST, {_sO: None, _sm: None}),
         (lambda: schemas.STRING_LIST, 0),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.INTEGER_OPTIONAL, 0),
@@ -1247,9 +1222,9 @@ CREATE_DB_PROXY_ENDPOINT_INPUT: StaticSchema = (
     {_sSI: _cCDBPER, _smi: None},
     (_DBPN, _DBPEN, _VSI, _VSGIp, _TR, _Ta, _ENT),
     (
-        (DB_PROXY_NAME, 1),
-        (DB_PROXY_ENDPOINT_NAME, 1),
-        (lambda: schemas.STRING_LIST, 1),
+        (DB_PROXY_NAME, {_sO: None, _sm: None}),
+        (DB_PROXY_ENDPOINT_NAME, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING_LIST, {_sO: None, _sm: None}),
         (lambda: schemas.STRING_LIST, 0),
         (DB_PROXY_ENDPOINT_TARGET_ROLE, 0),
         (lambda: schemas.TAG_LIST, 0),
@@ -1372,8 +1347,8 @@ CREATE_DB_SECURITY_GROUP_INPUT: StaticSchema = (
     {_sSI: _cCDBSGM, _smi: None},
     (_DBSGN, _DBSGD, _Ta),
     (
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.TAG_LIST, 0),
     ),
 )
@@ -1453,10 +1428,10 @@ CREATE_DB_SHARD_GROUP_INPUT: StaticSchema = (
     {_sSI: _cCDBSGMo, _smi: None},
     (_DBSGI, _DBCI, _CR, _MACU, _MACUi, _PA, _Ta),
     (
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.INTEGER_OPTIONAL, 0),
-        (lambda: schemas.DOUBLE_OPTIONAL, 1),
+        (lambda: schemas.DOUBLE_OPTIONAL, {_sO: None, _sm: None}),
         (lambda: schemas.DOUBLE_OPTIONAL, 0),
         (lambda: schemas.BOOLEAN_OPTIONAL, 0),
         (lambda: schemas.TAG_LIST, 0),
@@ -1498,7 +1473,7 @@ CREATE_DB_SHARD_GROUP: StaticOperationSchema = (
         lambda: schemas.INVALID_VPC_NETWORK_STATE_FAULT,
         lambda: MAX_DB_SHARD_GROUP_LIMIT_REACHED,
         lambda: schemas.NETWORK_TYPE_NOT_SUPPORTED,
-        lambda: schemas.UNSUPPORTED_DB_ENGINE_VERSION_FAULT,
+        lambda: UNSUPPORTED_DB_ENGINE_VERSION_FAULT,
     ),
 )
 
@@ -1515,6 +1490,58 @@ MAX_DB_SHARD_GROUP_LIMIT_REACHED: StaticSchema = (
     },
     (_me,),
     ((lambda: schemas.EXCEPTION_MESSAGE, 0),),
+)
+
+UNSUPPORTED_DB_ENGINE_VERSION_FAULT: StaticSchema = (
+    18,
+    n0,
+    _UDBEVF,
+    {
+        _smith: _c,
+        _sE: 400,
+        _aQE: MappingProxyType(
+            {"code": "UnsupportedDBEngineVersion", "httpResponseCode": 400}
+        ),
+    },
+    (_me,),
+    ((lambda: schemas.EXCEPTION_MESSAGE, 0),),
+)
+
+CREATE_DB_SNAPSHOT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CDBSIr,
+    {_sSI: _cCDBSMo, _smi: None},
+    (_DBSIn, _DBII, _Ta),
+    (
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.TAG_LIST, 0),
+    ),
+)
+
+CREATE_DB_SNAPSHOT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CDBSOr,
+    {_sSI: _cCDBSRo, _smit: None},
+    (_DBS,),
+    ((lambda: schemas.DB_SNAPSHOT, 0),),
+)
+
+CREATE_DB_SNAPSHOT: StaticOperationSchema = (
+    23,
+    n0,
+    _CDBSr,
+    0,
+    CREATE_DB_SNAPSHOT_INPUT,
+    CREATE_DB_SNAPSHOT_OUTPUT,
+    (
+        lambda: schemas.DB_INSTANCE_NOT_FOUND_FAULT,
+        lambda: schemas.DB_SNAPSHOT_ALREADY_EXISTS_FAULT,
+        lambda: schemas.INVALID_DB_INSTANCE_STATE_FAULT,
+        lambda: schemas.SNAPSHOT_QUOTA_EXCEEDED_FAULT,
+    ),
 )
 
 DB_INSTANCE_AUTOMATED_BACKUP_NOT_FOUND_FAULT: StaticSchema = (

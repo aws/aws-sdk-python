@@ -18,6 +18,7 @@ _TS = "TagSpecification"
 _rT = "resourceType"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
+_sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _TSa = "TagSpecifications"
 _DR = "DryRun"
@@ -527,7 +528,7 @@ SCHEDULED_INSTANCES_LAUNCH_SPECIFICATION: StaticSchema = (
         (SCHEDULED_INSTANCES_BLOCK_DEVICE_MAPPING_SET, {_sN: _BDM}),
         (lambda: schemas.BOOLEAN, 0),
         (SCHEDULED_INSTANCES_IAM_INSTANCE_PROFILE, 0),
-        (lambda: schemas.IMAGE_ID, 1),
+        (lambda: schemas.IMAGE_ID, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.KERNEL_ID, 0),
         (lambda: schemas.KEY_PAIR_NAME, 0),
@@ -551,8 +552,8 @@ RUN_SCHEDULED_INSTANCES_INPUT: StaticSchema = (
         (lambda: schemas.STRING, 2),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.INTEGER, 0),
-        (SCHEDULED_INSTANCES_LAUNCH_SPECIFICATION, 1),
-        (lambda: schemas.SCHEDULED_INSTANCE_ID, 1),
+        (SCHEDULED_INSTANCES_LAUNCH_SPECIFICATION, {_sO: None, _smi: None}),
+        (lambda: schemas.SCHEDULED_INSTANCE_ID, {_sO: None, _smi: None}),
     ),
 )
 
@@ -591,7 +592,7 @@ SEARCH_LOCAL_GATEWAY_ROUTES_INPUT: StaticSchema = (
     {_sSI: _cSLGRR, _sm: None},
     (_LGRTI, _Fil, _MR, _NTex, _DR),
     (
-        (lambda: schemas.LOCAL_GATEWAY_ROUTETABLE_ID, 1),
+        (lambda: schemas.LOCAL_GATEWAY_ROUTETABLE_ID, {_sO: None, _smi: None}),
         (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
         (lambda: schemas.MAX_RESULTS, 0),
         (lambda: schemas.STRING, 0),
@@ -637,7 +638,7 @@ SEARCH_TRANSIT_GATEWAY_MULTICAST_GROUPS_INPUT: StaticSchema = (
     {_sSI: _cSTGMGR, _sm: None},
     (_TGMDI, _Fil, _MR, _NTex, _DR),
     (
-        (lambda: schemas.TRANSIT_GATEWAY_MULTICAST_DOMAIN_ID, 1),
+        (lambda: schemas.TRANSIT_GATEWAY_MULTICAST_DOMAIN_ID, {_sO: None, _smi: None}),
         (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
         (lambda: schemas.TRANSIT_GATEWAY_MAX_RESULTS, 0),
         (lambda: schemas.STRING, 0),
@@ -716,8 +717,8 @@ SEARCH_TRANSIT_GATEWAY_ROUTES_INPUT: StaticSchema = (
     {_sSI: _cSTGRR, _sm: None},
     (_TGRTI, _Fil, _MR, _DR, _NTex),
     (
-        (lambda: schemas.TRANSIT_GATEWAY_ROUTE_TABLE_ID, 1),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi, _smi: None}),
+        (lambda: schemas.TRANSIT_GATEWAY_ROUTE_TABLE_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi, _sO: None, _smi: None}),
         (lambda: schemas.TRANSIT_GATEWAY_MAX_RESULTS, 0),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.STRING, 0),
@@ -762,7 +763,10 @@ SEND_DIAGNOSTIC_INTERRUPT_INPUT: StaticSchema = (
     _SDII,
     {_sSI: _cSDIR, _sm: None},
     (_II, _DR),
-    ((lambda: schemas.INSTANCE_ID, 1), (lambda: schemas.BOOLEAN, 0)),
+    (
+        (lambda: schemas.INSTANCE_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
 )
 
 SEND_DIAGNOSTIC_INTERRUPT_OUTPUT: StaticSchema = (
@@ -790,9 +794,9 @@ START_DECLARATIVE_POLICIES_REPORT_INPUT: StaticSchema = (
     (_DR, _SBu, _SPr, _TIa, _TSa),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
     ),
 )
@@ -823,7 +827,7 @@ START_INSTANCES_INPUT: StaticSchema = (
     {_sSI: _cSIR, _sm: None},
     (_IIn, _AId, _DR),
     (
-        (lambda: schemas.INSTANCE_ID_STRING_LIST, {_sN: _II, _smi: None}),
+        (lambda: schemas.INSTANCE_ID_STRING_LIST, {_sN: _II, _sO: None, _smi: None}),
         (lambda: schemas.STRING, {_aQN: _AId, _sN: _aId}),
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
     ),
@@ -877,10 +881,10 @@ START_NETWORK_INSIGHTS_ACCESS_SCOPE_ANALYSIS_INPUT: StaticSchema = (
     {_sSI: _cSNIASAR, _sm: None},
     (_NIASI, _DR, _TSa, _CTl),
     (
-        (lambda: schemas.NETWORK_INSIGHTS_ACCESS_SCOPE_ID, 1),
+        (lambda: schemas.NETWORK_INSIGHTS_ACCESS_SCOPE_ID, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
-        (lambda: schemas.STRING, 3),
+        (lambda: schemas.STRING, {_sO: None, _sT: None, _smi: None}),
     ),
 )
 
@@ -915,13 +919,13 @@ START_NETWORK_INSIGHTS_ANALYSIS_INPUT: StaticSchema = (
     {_sSI: _cSNIAR, _sm: None},
     (_NIPI, _AAdd, _FIAi, _FOA, _DR, _TSa, _CTl),
     (
-        (lambda: schemas.NETWORK_INSIGHTS_PATH_ID, 1),
+        (lambda: schemas.NETWORK_INSIGHTS_PATH_ID, {_sO: None, _smi: None}),
         (lambda: schemas.VALUE_STRING_LIST, {_sN: _AAddi}),
         (lambda: schemas.ARN_LIST, {_sN: _FIAil}),
         (lambda: schemas.ARN_LIST, {_sN: _FOAil}),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
-        (lambda: schemas.STRING, 3),
+        (lambda: schemas.STRING, {_sO: None, _sT: None, _smi: None}),
     ),
 )
 
@@ -950,7 +954,10 @@ START_VPC_ENDPOINT_SERVICE_PRIVATE_DNS_VERIFICATION_INPUT: StaticSchema = (
     _SVESPDVI,
     {_sSI: _cSVESPDVR, _sm: None},
     (_DR, _SIe),
-    ((lambda: schemas.BOOLEAN, 0), (lambda: schemas.VPC_ENDPOINT_SERVICE_ID, 1)),
+    (
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.VPC_ENDPOINT_SERVICE_ID, {_sO: None, _smi: None}),
+    ),
 )
 
 START_VPC_ENDPOINT_SERVICE_PRIVATE_DNS_VERIFICATION_OUTPUT: StaticSchema = (
@@ -979,7 +986,7 @@ STOP_INSTANCES_INPUT: StaticSchema = (
     {_sSI: _cSIRom, _sm: None},
     (_IIn, _Hi, _SOS, _DR, _Fo),
     (
-        (lambda: schemas.INSTANCE_ID_STRING_LIST, {_sN: _II, _smi: None}),
+        (lambda: schemas.INSTANCE_ID_STRING_LIST, {_sN: _II, _sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
@@ -1013,7 +1020,7 @@ TERMINATE_CLIENT_VPN_CONNECTIONS_INPUT: StaticSchema = (
     {_sSI: _cTCVCR, _sm: None},
     (_CVEI, _CIon, _Use, _DR),
     (
-        (lambda: schemas.CLIENT_VPN_ENDPOINT_ID, 1),
+        (lambda: schemas.CLIENT_VPN_ENDPOINT_ID, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.BOOLEAN, 0),
@@ -1072,7 +1079,7 @@ TERMINATE_INSTANCES_INPUT: StaticSchema = (
     {_sSI: _cTIR, _sm: None},
     (_IIn, _Fo, _SOS, _DR),
     (
-        (lambda: schemas.INSTANCE_ID_STRING_LIST, {_sN: _II, _smi: None}),
+        (lambda: schemas.INSTANCE_ID_STRING_LIST, {_sN: _II, _sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
@@ -1106,7 +1113,10 @@ UNASSIGN_IPV6_ADDRESSES_INPUT: StaticSchema = (
     (_IPp, _NII, _IAp),
     (
         (lambda: schemas.IP_PREFIX_LIST, {_sN: _IPpv}),
-        (lambda: schemas.NETWORK_INTERFACE_ID, {_aQN: _NII, _sN: _nII, _smi: None}),
+        (
+            lambda: schemas.NETWORK_INTERFACE_ID,
+            {_aQN: _NII, _sN: _nII, _sO: None, _smi: None},
+        ),
         (lambda: schemas.IPV6_ADDRESS_LIST, {_aQN: _IAp, _sN: _iA}),
     ),
 )
@@ -1142,7 +1152,10 @@ UNASSIGN_PRIVATE_IP_ADDRESSES_INPUT: StaticSchema = (
     (_IPpvr, _NII, _PIAri),
     (
         (lambda: schemas.IP_PREFIX_LIST, {_sN: _IPpvre}),
-        (lambda: schemas.NETWORK_INTERFACE_ID, {_aQN: _NII, _sN: _nII, _smi: None}),
+        (
+            lambda: schemas.NETWORK_INTERFACE_ID,
+            {_aQN: _NII, _sN: _nII, _sO: None, _smi: None},
+        ),
         (lambda: schemas.PRIVATE_IP_ADDRESS_STRING_LIST, {_aQN: _PIAr, _sN: _pIAr}),
     ),
 )
@@ -1171,8 +1184,8 @@ UNASSIGN_PRIVATE_NAT_GATEWAY_ADDRESS_INPUT: StaticSchema = (
     {_sSI: _cUPNGAR, _sm: None},
     (_NGI, _PIAri, _MDDS, _DR),
     (
-        (lambda: schemas.NAT_GATEWAY_ID, 1),
-        (lambda: schemas.IP_LIST, {_sN: _PIAr, _smi: None}),
+        (lambda: schemas.NAT_GATEWAY_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.IP_LIST, {_sN: _PIAr, _sO: None, _smi: None}),
         (lambda: schemas.DRAIN_SECONDS, 0),
         (lambda: schemas.BOOLEAN, 0),
     ),
@@ -1206,7 +1219,10 @@ UNLOCK_SNAPSHOT_INPUT: StaticSchema = (
     _USI,
     {_sSI: _cUSR, _sm: None},
     (_SIn, _DR),
-    ((lambda: schemas.SNAPSHOT_ID, 1), (lambda: schemas.BOOLEAN, 0)),
+    (
+        (lambda: schemas.SNAPSHOT_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
 )
 
 UNLOCK_SNAPSHOT_OUTPUT: StaticSchema = (
@@ -1235,7 +1251,7 @@ UNMONITOR_INSTANCES_INPUT: StaticSchema = (
     {_sSI: _cUIR, _sm: None},
     (_IIn, _MCIe, _DR),
     (
-        (lambda: schemas.INSTANCE_ID_STRING_LIST, {_sN: _II, _smi: None}),
+        (lambda: schemas.INSTANCE_ID_STRING_LIST, {_sN: _II, _sO: None, _smi: None}),
         (lambda: schemas.METRIC_CATEGORY_ID_LIST, {_sN: _MCI}),
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
     ),
@@ -1305,7 +1321,7 @@ UPDATE_CAPACITY_MANAGER_ORGANIZATIONS_ACCESS_INPUT: StaticSchema = (
     {_sSI: _cUCMOAR, _sm: None},
     (_OArg, _DR, _CTl),
     (
-        (lambda: schemas.BOXED_BOOLEAN, 1),
+        (lambda: schemas.BOXED_BOOLEAN, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.STRING, 2),
     ),
@@ -1340,7 +1356,7 @@ UPDATE_INTERRUPTIBLE_CAPACITY_RESERVATION_ALLOCATION_INPUT: StaticSchema = (
     {_sSI: _cUICRAR, _sm: None},
     (_CRI, _TIC, _DR, _ZSP),
     (
-        (lambda: schemas.CAPACITY_RESERVATION_ID, 1),
+        (lambda: schemas.CAPACITY_RESERVATION_ID, {_sO: None, _smi: None}),
         (lambda: schemas.INTEGER, 0),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.ZERO_SIZE_PREFERENCE, 0),
@@ -1469,7 +1485,7 @@ VALIDATE_SECURITY_GROUP_QUOTAS_FOR_INTERFACE_INPUT: StaticSchema = (
     {_sSI: _cVSGQFIR, _sm: None},
     (_SGIe, _DR),
     (
-        (lambda: schemas.SECURITY_GROUP_ID_LIST, {_sN: _SGI, _smi: None}),
+        (lambda: schemas.SECURITY_GROUP_ID_LIST, {_sN: _SGI, _sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, 0),
     ),
 )
@@ -1499,7 +1515,7 @@ WITHDRAW_BYOIP_CIDR_INPUT: StaticSchema = (
     _WBCI,
     {_sSI: _cWBCR, _sm: None},
     (_Ci, _DR),
-    ((lambda: schemas.STRING, 1), (lambda: schemas.BOOLEAN, 0)),
+    ((lambda: schemas.STRING, {_sO: None, _smi: None}), (lambda: schemas.BOOLEAN, 0)),
 )
 
 WITHDRAW_BYOIP_CIDR_OUTPUT: StaticSchema = (

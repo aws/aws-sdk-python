@@ -8,27 +8,26 @@ from . import schemas
 n0 = "com.amazonaws.ec2"
 _aQN = "aws.protocols#ec2QueryName"
 _sN = "smithy.api#xmlName"
-_sV = "smithy.api#enumValue"
 _me = "member"
 _i = "item"
 _RT = "ResourceType"
+_im = "image"
 _su = "subnet"
+_vo = "volume"
 _TS = "TagSpecification"
 _rT = "resourceType"
 _Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
+_sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _TSa = "TagSpecifications"
 _DR = "DryRun"
-_p = "pending"
-_d = "disabled"
 _smit = "smithy.api#output"
 _R = "Return"
 _r = "return"
 _TGAI = "TransitGatewayAttachmentId"
 _CVEI = "ClientVpnEndpointId"
-_de = "deleting"
 _TGI = "TransitGatewayId"
 _tGAI = "transitGatewayAttachmentId"
 _tGI = "transitGatewayId"
@@ -43,22 +42,18 @@ _ROI = "ResourceOwnerId"
 _rOI = "resourceOwnerId"
 _As = "Associations"
 _asso = "associations"
-_e = "enable"
-_disa = "disable"
 _Sta = "Status"
 _sta = "status"
 _TSag = "TagSet"
 _tS = "tagSet"
 _VI = "VpcId"
 _dRr = "dryRun"
-_RN = "RuleNumber"
-_rN = "ruleNumber"
 _Id = "Id"
 _id = "id"
+_AZ = "AvailabilityZone"
+_aZ = "availabilityZone"
+_AZI = "AvailabilityZoneId"
 _Sub = "Subnet"
-_en = "enabling"
-_ena = "enabled"
-_disab = "disabling"
 _IT = "InstanceType"
 _iT = "instanceType"
 _Des = "Description"
@@ -71,7 +66,6 @@ _CTl = "ClientToken"
 _GIr = "GroupId"
 _TGPTI = "TransitGatewayPolicyTableId"
 _TGRTI = "TransitGatewayRouteTableId"
-_tGRTI = "transitGatewayRouteTableId"
 _IIm = "ImageId"
 _smith = "smithy.api#sensitive"
 _VGI = "VpnGatewayId"
@@ -137,6 +131,7 @@ _iMU = "importManifestUrl"
 _Im = "Image"
 _CTon = "ConversionTask"
 _IImp = "ImportInstance"
+_IVm = "ImportVolume"
 _BMo = "BootMode"
 _UO = "UsageOperation"
 _uO = "usageOperation"
@@ -152,33 +147,16 @@ _SDna = "SnapshotDetails"
 _SDSn = "SnapshotDetailSet"
 _sDSn = "snapshotDetailSet"
 _lSic = "licenseSpecifications"
+_STDn = "SnapshotTaskDetail"
+_sTD = "snapshotTaskDetail"
 _GNr = "GroupNames"
 _GIrou = "GroupIds"
 _LSaun = "LaunchSpecification"
 _lSau = "launchSpecification"
-_TGANGSS = "TransitGatewayAttachmentNatGatewaySupportState"
 _CRL = "CertificateRevocationList"
 _RNo = "RoleName"
 _VTOIA = "VpnTunnelOutsideIpAddress"
-_activ = "activated"
-_TGNRS = "TransitGatewayNatRuleState"
-_deact = "deactivated"
-_TGNR = "TransitGatewayNatRule"
-_MSC = "MatchSourceCidr"
-_mSC = "matchSourceCidr"
-_NCa = "NatCidr"
-_nCa = "natCidr"
-_TGNRL = "TransitGatewayNatRuleList"
-_TGANSRSV = "TransitGatewayAttachmentNatSystemRouteSupportValue"
-_GTGAPI = "GetTransitGatewayAttachmentPropagationsInput"
-_cGTGAPR = "com.amazonaws.ec2#GetTransitGatewayAttachmentPropagationsRequest"
-_TGAP = "TransitGatewayAttachmentPropagation"
 _TGAPL = "TransitGatewayAttachmentPropagationList"
-_GTGAPO = "GetTransitGatewayAttachmentPropagationsOutput"
-_cGTGAPRo = "com.amazonaws.ec2#GetTransitGatewayAttachmentPropagationsResult"
-_TGAPr = "TransitGatewayAttachmentPropagations"
-_tGAP = "transitGatewayAttachmentPropagations"
-_GTGAP = "GetTransitGatewayAttachmentPropagations"
 _GTGMPEI = "GetTransitGatewayMeteringPolicyEntriesInput"
 _cGTGMPER = "com.amazonaws.ec2#GetTransitGatewayMeteringPolicyEntriesRequest"
 _TGMPEL = "TransitGatewayMeteringPolicyEntryList"
@@ -361,108 +339,16 @@ _IKPO = "ImportKeyPairOutput"
 _cIKPRo = "com.amazonaws.ec2#ImportKeyPairResult"
 _IKP = "ImportKeyPair"
 _SDCn = "SnapshotDiskContainer"
-
-TRANSIT_GATEWAY_ATTACHMENT_NAT_GATEWAY_SUPPORT_STATE: StaticSchema = (
-    14,
-    n0,
-    _TGANGSS,
-    0,
-    (_ena, _d, _en, _disab),
-    ((-1, {_sV: _ena}), (-1, {_sV: _d}), (-1, {_sV: _en}), (-1, {_sV: _disab})),
-)
-
-TRANSIT_GATEWAY_NAT_RULE_STATE: StaticSchema = (
-    14,
-    n0,
-    _TGNRS,
-    0,
-    (_p, _activ, _deact, _de),
-    ((-1, {_sV: _p}), (-1, {_sV: _activ}), (-1, {_sV: _deact}), (-1, {_sV: _de})),
-)
-
-TRANSIT_GATEWAY_NAT_RULE: StaticSchema = (
-    18,
-    n0,
-    _TGNR,
-    0,
-    (_RN, _MSC, _NCa, _St),
-    (
-        (lambda: schemas.INTEGER, {_aQN: _RN, _sN: _rN}),
-        (lambda: schemas.STRING, {_aQN: _MSC, _sN: _mSC}),
-        (lambda: schemas.STRING, {_aQN: _NCa, _sN: _nCa}),
-        (TRANSIT_GATEWAY_NAT_RULE_STATE, {_aQN: _St, _sN: _st}),
-    ),
-)
-
-TRANSIT_GATEWAY_NAT_RULE_LIST: StaticSchema = (
-    16,
-    n0,
-    _TGNRL,
-    0,
-    (_me,),
-    ((TRANSIT_GATEWAY_NAT_RULE, {_sN: _i}),),
-)
-
-TRANSIT_GATEWAY_ATTACHMENT_NAT_SYSTEM_ROUTE_SUPPORT_VALUE: StaticSchema = (
-    14,
-    n0,
-    _TGANSRSV,
-    0,
-    (_e, _disa),
-    ((-1, {_sV: _e}), (-1, {_sV: _disa})),
-)
-
-GET_TRANSIT_GATEWAY_ATTACHMENT_PROPAGATIONS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GTGAPI,
-    {_sSI: _cGTGAPR, _sm: None},
-    (_TGAI, _Fil, _MR, _NTex, _DR),
-    (
-        (lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, 1),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (lambda: schemas.TRANSIT_GATEWAY_MAX_RESULTS, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-GET_TRANSIT_GATEWAY_ATTACHMENT_PROPAGATIONS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GTGAPO,
-    {_sSI: _cGTGAPRo, _smit: None},
-    (_TGAPr, _NTex),
-    (
-        (
-            lambda: TRANSIT_GATEWAY_ATTACHMENT_PROPAGATION_LIST,
-            {_aQN: _TGAPr, _sN: _tGAP},
-        ),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-GET_TRANSIT_GATEWAY_ATTACHMENT_PROPAGATIONS: StaticOperationSchema = (
-    23,
-    n0,
-    _GTGAP,
-    0,
-    GET_TRANSIT_GATEWAY_ATTACHMENT_PROPAGATIONS_INPUT,
-    GET_TRANSIT_GATEWAY_ATTACHMENT_PROPAGATIONS_OUTPUT,
-    (),
-)
-
-TRANSIT_GATEWAY_ATTACHMENT_PROPAGATION: StaticSchema = (
-    18,
-    n0,
-    _TGAP,
-    0,
-    (_TGRTI, _St),
-    (
-        (lambda: schemas.STRING, {_aQN: _TGRTI, _sN: _tGRTI}),
-        (lambda: schemas.TRANSIT_GATEWAY_PROPAGATION_STATE, {_aQN: _St, _sN: _st}),
-    ),
-)
+_ISIm = "ImportSnapshotInput"
+_cISR = "com.amazonaws.ec2#ImportSnapshotRequest"
+_ISO = "ImportSnapshotOutput"
+_cISRo = "com.amazonaws.ec2#ImportSnapshotResult"
+_ISmpo = "ImportSnapshot"
+_IVI = "ImportVolumeInput"
+_cIVR = "com.amazonaws.ec2#ImportVolumeRequest"
+_IVO = "ImportVolumeOutput"
+_cIVRo = "com.amazonaws.ec2#ImportVolumeResult"
+_LIIRBMR = "ListImagesInRecycleBinMaxResults"
 
 TRANSIT_GATEWAY_ATTACHMENT_PROPAGATION_LIST: StaticSchema = (
     16,
@@ -470,7 +356,7 @@ TRANSIT_GATEWAY_ATTACHMENT_PROPAGATION_LIST: StaticSchema = (
     _TGAPL,
     0,
     (_me,),
-    ((TRANSIT_GATEWAY_ATTACHMENT_PROPAGATION, {_sN: _i}),),
+    ((lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_PROPAGATION, {_sN: _i}),),
 )
 
 GET_TRANSIT_GATEWAY_METERING_POLICY_ENTRIES_INPUT: StaticSchema = (
@@ -480,7 +366,7 @@ GET_TRANSIT_GATEWAY_METERING_POLICY_ENTRIES_INPUT: StaticSchema = (
     {_sSI: _cGTGMPER, _sm: None},
     (_TGMPI, _Fil, _MR, _NTex, _DR),
     (
-        (lambda: schemas.TRANSIT_GATEWAY_METERING_POLICY_ID, 1),
+        (lambda: schemas.TRANSIT_GATEWAY_METERING_POLICY_ID, {_sO: None, _smi: None}),
         (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
         (lambda: schemas.TRANSIT_GATEWAY_MAX_RESULTS, 0),
         (lambda: schemas.STRING, 0),
@@ -529,7 +415,7 @@ GET_TRANSIT_GATEWAY_MULTICAST_DOMAIN_ASSOCIATIONS_INPUT: StaticSchema = (
     {_sSI: _cGTGMDAR, _sm: None},
     (_TGMDI, _Fil, _MR, _NTex, _DR),
     (
-        (lambda: schemas.TRANSIT_GATEWAY_MULTICAST_DOMAIN_ID, 1),
+        (lambda: schemas.TRANSIT_GATEWAY_MULTICAST_DOMAIN_ID, {_sO: None, _smi: None}),
         (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
         (lambda: schemas.TRANSIT_GATEWAY_MAX_RESULTS, 0),
         (lambda: schemas.STRING, 0),
@@ -596,7 +482,7 @@ GET_TRANSIT_GATEWAY_POLICY_TABLE_ASSOCIATIONS_INPUT: StaticSchema = (
     {_sSI: _cGTGPTAR, _sm: None},
     (_TGPTI, _Fil, _MR, _NTex, _DR),
     (
-        (lambda: schemas.TRANSIT_GATEWAY_POLICY_TABLE_ID, 1),
+        (lambda: schemas.TRANSIT_GATEWAY_POLICY_TABLE_ID, {_sO: None, _smi: None}),
         (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
         (lambda: schemas.TRANSIT_GATEWAY_MAX_RESULTS, 0),
         (lambda: schemas.STRING, 0),
@@ -645,7 +531,7 @@ GET_TRANSIT_GATEWAY_POLICY_TABLE_ENTRIES_INPUT: StaticSchema = (
     {_sSI: _cGTGPTER, _sm: None},
     (_TGPTI, _Fil, _MR, _NTex, _DR),
     (
-        (lambda: schemas.TRANSIT_GATEWAY_POLICY_TABLE_ID, 1),
+        (lambda: schemas.TRANSIT_GATEWAY_POLICY_TABLE_ID, {_sO: None, _smi: None}),
         (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
         (lambda: schemas.TRANSIT_GATEWAY_MAX_RESULTS, 0),
         (lambda: schemas.STRING, 0),
@@ -694,7 +580,7 @@ GET_TRANSIT_GATEWAY_PREFIX_LIST_REFERENCES_INPUT: StaticSchema = (
     {_sSI: _cGTGPLRR, _sm: None},
     (_TGRTI, _Fil, _MR, _NTex, _DR),
     (
-        (lambda: schemas.TRANSIT_GATEWAY_ROUTE_TABLE_ID, 1),
+        (lambda: schemas.TRANSIT_GATEWAY_ROUTE_TABLE_ID, {_sO: None, _smi: None}),
         (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
         (lambda: schemas.TRANSIT_GATEWAY_MAX_RESULTS, 0),
         (lambda: schemas.STRING, 0),
@@ -743,7 +629,7 @@ GET_TRANSIT_GATEWAY_ROUTE_TABLE_ASSOCIATIONS_INPUT: StaticSchema = (
     {_sSI: _cGTGRTAR, _sm: None},
     (_TGRTI, _Fil, _MR, _NTex, _DR),
     (
-        (lambda: schemas.TRANSIT_GATEWAY_ROUTE_TABLE_ID, 1),
+        (lambda: schemas.TRANSIT_GATEWAY_ROUTE_TABLE_ID, {_sO: None, _smi: None}),
         (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
         (lambda: schemas.TRANSIT_GATEWAY_MAX_RESULTS, 0),
         (lambda: schemas.STRING, 0),
@@ -806,7 +692,7 @@ GET_TRANSIT_GATEWAY_ROUTE_TABLE_PROPAGATIONS_INPUT: StaticSchema = (
     {_sSI: _cGTGRTPR, _sm: None},
     (_TGRTI, _Fil, _MR, _NTex, _DR),
     (
-        (lambda: schemas.TRANSIT_GATEWAY_ROUTE_TABLE_ID, 1),
+        (lambda: schemas.TRANSIT_GATEWAY_ROUTE_TABLE_ID, {_sO: None, _smi: None}),
         (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
         (lambda: schemas.TRANSIT_GATEWAY_MAX_RESULTS, 0),
         (lambda: schemas.STRING, 0),
@@ -875,7 +761,10 @@ GET_VERIFIED_ACCESS_ENDPOINT_POLICY_INPUT: StaticSchema = (
     _GVAEPI,
     {_sSI: _cGVAEPR, _sm: None},
     (_VAEI, _DR),
-    ((lambda: schemas.VERIFIED_ACCESS_ENDPOINT_ID, 1), (lambda: schemas.BOOLEAN, 0)),
+    (
+        (lambda: schemas.VERIFIED_ACCESS_ENDPOINT_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
 )
 
 GET_VERIFIED_ACCESS_ENDPOINT_POLICY_OUTPUT: StaticSchema = (
@@ -909,7 +798,10 @@ GET_VERIFIED_ACCESS_ENDPOINT_TARGETS_INPUT: StaticSchema = (
     {_sSI: _cGVAETR, _sm: None},
     (_VAEI, _MR, _NTex, _DR),
     (
-        (lambda: schemas.VERIFIED_ACCESS_ENDPOINT_ID, {_sN: _VAEI, _smi: None}),
+        (
+            lambda: schemas.VERIFIED_ACCESS_ENDPOINT_ID,
+            {_sN: _VAEI, _sO: None, _smi: None},
+        ),
         (GET_VERIFIED_ACCESS_ENDPOINT_TARGETS_MAX_RESULTS, 0),
         (lambda: schemas.NEXT_TOKEN, 0),
         (lambda: schemas.BOOLEAN, 0),
@@ -966,7 +858,10 @@ GET_VERIFIED_ACCESS_GROUP_POLICY_INPUT: StaticSchema = (
     _GVAGPI,
     {_sSI: _cGVAGPR, _sm: None},
     (_VAGI, _DR),
-    ((lambda: schemas.VERIFIED_ACCESS_GROUP_ID, 1), (lambda: schemas.BOOLEAN, 0)),
+    (
+        (lambda: schemas.VERIFIED_ACCESS_GROUP_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
 )
 
 GET_VERIFIED_ACCESS_GROUP_POLICY_OUTPUT: StaticSchema = (
@@ -1005,7 +900,7 @@ GET_VPC_RESOURCES_BLOCKING_ENCRYPTION_ENFORCEMENT_INPUT: StaticSchema = (
     {_sSI: _cGVRBEER, _sm: None},
     (_VI, _MR, _NTex, _DR),
     (
-        (lambda: schemas.VPC_ID, 1),
+        (lambda: schemas.VPC_ID, {_sO: None, _smi: None}),
         (GET_VPC_RESOURCES_BLOCKING_ENCRYPTION_ENFORCEMENT_MAX_RESULTS, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.BOOLEAN, 0),
@@ -1066,8 +961,8 @@ GET_VPN_CONNECTION_DEVICE_SAMPLE_CONFIGURATION_INPUT: StaticSchema = (
     {_sSI: _cGVCDSCR, _sm: None},
     (_VCIp, _VCDTI, _IKEVn, _STam, _DR),
     (
-        (lambda: schemas.VPN_CONNECTION_ID, 1),
-        (VPN_CONNECTION_DEVICE_TYPE_ID, 1),
+        (lambda: schemas.VPN_CONNECTION_ID, {_sO: None, _smi: None}),
+        (VPN_CONNECTION_DEVICE_TYPE_ID, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.BOOLEAN, 0),
@@ -1165,8 +1060,8 @@ GET_VPN_TUNNEL_REPLACEMENT_STATUS_INPUT: StaticSchema = (
     {_sSI: _cGVTRSR, _sm: None},
     (_VCIp, _VTOIA, _DR),
     (
-        (lambda: schemas.VPN_CONNECTION_ID, 1),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.VPN_CONNECTION_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, 0),
     ),
 )
@@ -1217,8 +1112,8 @@ IMPORT_CLIENT_VPN_CLIENT_CERTIFICATE_REVOCATION_LIST_INPUT: StaticSchema = (
     {_sSI: _cICVCCRLR, _sm: None},
     (_CVEI, _CRL, _DR),
     (
-        (lambda: schemas.CLIENT_VPN_ENDPOINT_ID, 1),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.CLIENT_VPN_ENDPOINT_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, 0),
     ),
 )
@@ -1414,9 +1309,15 @@ DISK_IMAGE_DETAIL: StaticSchema = (
     0,
     (_For, _Byt, _IMU),
     (
-        (lambda: schemas.DISK_IMAGE_FORMAT, {_aQN: _For, _sN: _fo, _smi: None}),
-        (lambda: schemas.LONG, {_aQN: _Byt, _sN: _byt, _smi: None}),
-        (lambda: schemas.IMPORT_MANIFEST_URL, {_aQN: _IMU, _sN: _iMU, _smi: None}),
+        (
+            lambda: schemas.DISK_IMAGE_FORMAT,
+            {_aQN: _For, _sN: _fo, _sO: None, _smi: None},
+        ),
+        (lambda: schemas.LONG, {_aQN: _Byt, _sN: _byt, _sO: None, _smi: None}),
+        (
+            lambda: schemas.IMPORT_MANIFEST_URL,
+            {_aQN: _IMU, _sN: _iMU, _sO: None, _smi: None},
+        ),
     ),
 )
 
@@ -1426,7 +1327,7 @@ VOLUME_DETAIL: StaticSchema = (
     _VDo,
     0,
     (_Si,),
-    ((lambda: schemas.LONG, {_aQN: _Si, _sN: _siz, _smi: None}),),
+    ((lambda: schemas.LONG, {_aQN: _Si, _sN: _siz, _sO: None, _smi: None}),),
 )
 
 DISK_IMAGE: StaticSchema = (
@@ -1481,7 +1382,10 @@ IMPORT_INSTANCE_INPUT: StaticSchema = (
         (lambda: schemas.STRING, {_aQN: _Des, _sN: _desc}),
         (IMPORT_INSTANCE_LAUNCH_SPECIFICATION, {_aQN: _LSaun, _sN: _lSau}),
         (DISK_IMAGE_LIST, {_aQN: _DIisk, _sN: _dIis}),
-        (lambda: schemas.PLATFORM_VALUES, {_aQN: _Pla, _sN: _plat, _smi: None}),
+        (
+            lambda: schemas.PLATFORM_VALUES,
+            {_aQN: _Pla, _sN: _plat, _sO: None, _smi: None},
+        ),
     ),
 )
 
@@ -1515,8 +1419,8 @@ IMPORT_KEY_PAIR_INPUT: StaticSchema = (
     (
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (lambda: schemas.STRING, {_aQN: _KN, _sN: _kN, _smi: None}),
-        (BLOB, {_aQN: _PKM, _sN: _pKM, _smi: None}),
+        (lambda: schemas.STRING, {_aQN: _KN, _sN: _kN, _sO: None, _smi: None}),
+        (BLOB, {_aQN: _PKM, _sN: _pKM, _sO: None, _smi: None}),
     ),
 )
 
@@ -1557,3 +1461,83 @@ SNAPSHOT_DISK_CONTAINER: StaticSchema = (
         (USER_BUCKET, 0),
     ),
 )
+
+IMPORT_SNAPSHOT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _ISIm,
+    {_sSI: _cISR, _sm: None},
+    (_CDl, _CTl, _Des, _DCiskon, _DR, _En, _KKI, _RNo, _TSa),
+    (
+        (CLIENT_DATA, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (SNAPSHOT_DISK_CONTAINER, 0),
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.KMS_KEY_ID, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
+    ),
+)
+
+IMPORT_SNAPSHOT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _ISO,
+    {_sSI: _cISRo, _smit: None},
+    (_Des, _ITI, _STDn, _Tag),
+    (
+        (lambda: schemas.STRING, {_aQN: _Des, _sN: _desc}),
+        (lambda: schemas.STRING, {_aQN: _ITI, _sN: _iTI}),
+        (lambda: schemas.SNAPSHOT_TASK_DETAIL, {_aQN: _STDn, _sN: _sTD}),
+        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
+    ),
+)
+
+IMPORT_SNAPSHOT: StaticOperationSchema = (
+    23,
+    n0,
+    _ISmpo,
+    0,
+    IMPORT_SNAPSHOT_INPUT,
+    IMPORT_SNAPSHOT_OUTPUT,
+    (),
+)
+
+IMPORT_VOLUME_INPUT: StaticSchema = (
+    18,
+    n0,
+    _IVI,
+    {_sSI: _cIVR, _sm: None},
+    (_AZI, _DR, _AZ, _Im, _Des, _Vo),
+    (
+        (lambda: schemas.AVAILABILITY_ZONE_ID, 0),
+        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
+        (lambda: schemas.STRING, {_aQN: _AZ, _sN: _aZ}),
+        (DISK_IMAGE_DETAIL, {_aQN: _Im, _sN: _im, _sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_aQN: _Des, _sN: _desc}),
+        (VOLUME_DETAIL, {_aQN: _Vo, _sN: _vo, _sO: None, _smi: None}),
+    ),
+)
+
+IMPORT_VOLUME_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _IVO,
+    {_sSI: _cIVRo, _smit: None},
+    (_CTon,),
+    ((lambda: schemas.CONVERSION_TASK, {_aQN: _CTon, _sN: _cTonv}),),
+)
+
+IMPORT_VOLUME: StaticOperationSchema = (
+    23,
+    n0,
+    _IVm,
+    0,
+    IMPORT_VOLUME_INPUT,
+    IMPORT_VOLUME_OUTPUT,
+    (),
+)
+
+LIST_IMAGES_IN_RECYCLE_BIN_MAX_RESULTS: StaticSchema = (7, n0, _LIIRBMR, 0)

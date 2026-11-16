@@ -14,6 +14,7 @@ _i = "item"
 _Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
+_sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _DR = "DryRun"
 _p = "pending"
@@ -21,7 +22,6 @@ _ac = "accepted"
 _smit = "smithy.api#output"
 _CRI = "CapacityReservationId"
 _IC = "InstanceCount"
-_OI = "OfferingId"
 _re = "rejected"
 _St = "State"
 _st = "state"
@@ -30,12 +30,14 @@ _Sta = "Status"
 _sta = "status"
 _TSag = "TagSet"
 _tS = "tagSet"
+_dRr = "dryRun"
 _act = "active"
 _ex = "expired"
 _AZ = "AvailabilityZone"
 _aZ = "availabilityZone"
 _AZI = "AvailabilityZoneId"
 _aZI = "availabilityZoneId"
+_II = "InstanceId"
 _CGI = "CarrierGatewayId"
 _IT = "InstanceType"
 _iT = "instanceType"
@@ -44,6 +46,7 @@ _SMt = "StatusMessage"
 _sMt = "statusMessage"
 _ASll = "AllocationStrategy"
 _FAILED = "FAILED"
+_IIn = "InstanceIds"
 _URBOI = "UnusedReservationBillingOwnerId"
 _GN = "GroupName"
 _gN = "groupName"
@@ -95,6 +98,7 @@ _ip_____ = "in-progress"
 _CRIS = "CapacityReservationIdSet"
 _CRIa = "CapacityReservationIds"
 _iRn = "instanceRequirements"
+_Ins = "Instances"
 _PENDING = "PENDING"
 _revo = "revoked"
 _Fi = "Filter"
@@ -108,13 +112,7 @@ _imp = "impaired"
 _AAZ = "AllAvailabilityZones"
 _ZT = "ZoneType"
 _zT = "zoneType"
-_DCBEHI = "DescribeCapacityBlockExtensionHistoryInput"
-_cDCBEHR = "com.amazonaws.ec2#DescribeCapacityBlockExtensionHistoryRequest"
 _CBES = "CapacityBlockExtensionStatus"
-_PP = "PAYMENT_PENDING"
-_PF___ = "PAYMENT_FAILED"
-_PS_ = "PAYMENT_SUCCEEDED"
-_ps = "payment-succeeded"
 _CBE = "CapacityBlockExtension"
 _CBEOI = "CapacityBlockExtensionOfferingId"
 _cBEOI = "capacityBlockExtensionOfferingId"
@@ -130,11 +128,6 @@ _cBEED = "capacityBlockExtensionEndDate"
 _UF = "UpfrontFee"
 _uF = "upfrontFee"
 _CBESa = "CapacityBlockExtensionSet"
-_DCBEHO = "DescribeCapacityBlockExtensionHistoryOutput"
-_cDCBEHRo = "com.amazonaws.ec2#DescribeCapacityBlockExtensionHistoryResult"
-_CBEa = "CapacityBlockExtensions"
-_cBESa = "capacityBlockExtensionSet"
-_DCBEH = "DescribeCapacityBlockExtensionHistory"
 _DCBEOMR = "DescribeCapacityBlockExtensionOfferingsMaxResults"
 _DCBEOI = "DescribeCapacityBlockExtensionOfferingsInput"
 _cDCBEOR = "com.amazonaws.ec2#DescribeCapacityBlockExtensionOfferingsRequest"
@@ -325,63 +318,15 @@ _cDCGRomam = "com.amazonaws.ec2#DescribeCarrierGatewaysResult"
 _CGar = "CarrierGateways"
 _cGS = "carrierGatewaySet"
 _DCGes = "DescribeCarrierGateways"
-
-CAPACITY_RESERVATION_ID_SET: StaticSchema = (
-    16,
-    n0,
-    _CRIS,
-    0,
-    (_me,),
-    ((lambda: schemas.CAPACITY_RESERVATION_ID, {_sN: _i}),),
-)
-
-DESCRIBE_CAPACITY_BLOCK_EXTENSION_HISTORY_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DCBEHI,
-    {_sSI: _cDCBEHR, _sm: None},
-    (_CRIa, _NTex, _MR, _Fil, _DR),
-    (
-        (CAPACITY_RESERVATION_ID_SET, {_sN: _CRI}),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.DESCRIBE_FUTURE_CAPACITY_MAX_RESULTS, 0),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DESCRIBE_CAPACITY_BLOCK_EXTENSION_HISTORY_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DCBEHO,
-    {_sSI: _cDCBEHRo, _smit: None},
-    (_CBEa, _NTex),
-    (
-        (lambda: CAPACITY_BLOCK_EXTENSION_SET, {_aQN: _CBESa, _sN: _cBESa}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_CAPACITY_BLOCK_EXTENSION_HISTORY: StaticOperationSchema = (
-    23,
-    n0,
-    _DCBEH,
-    0,
-    DESCRIBE_CAPACITY_BLOCK_EXTENSION_HISTORY_INPUT,
-    DESCRIBE_CAPACITY_BLOCK_EXTENSION_HISTORY_OUTPUT,
-    (),
-)
-
-OFFERING_ID: StaticSchema = (3, n0, _OI, 0)
-
-CAPACITY_BLOCK_EXTENSION_STATUS: StaticSchema = (
-    14,
-    n0,
-    _CBES,
-    0,
-    (_PP, _PF___, _PS_),
-    ((-1, {_sV: _pp___}), (-1, {_sV: _pf_____}), (-1, {_sV: _ps})),
-)
+_DCLIMR = "DescribeClassicLinkInstancesMaxResults"
+_DCLII = "DescribeClassicLinkInstancesInput"
+_cDCLIR = "com.amazonaws.ec2#DescribeClassicLinkInstancesRequest"
+_mR = "maxResults"
+_DCLIO = "DescribeClassicLinkInstancesOutput"
+_cDCLIRo = "com.amazonaws.ec2#DescribeClassicLinkInstancesResult"
+_ISnst = "InstancesSet"
+_iSns = "instancesSet"
+_DCLI = "DescribeClassicLinkInstances"
 
 CAPACITY_BLOCK_EXTENSION: StaticSchema = (
     18,
@@ -410,9 +355,9 @@ CAPACITY_BLOCK_EXTENSION: StaticSchema = (
         (lambda: schemas.INTEGER, {_aQN: _IC, _sN: _iC}),
         (lambda: schemas.AVAILABILITY_ZONE_NAME, {_aQN: _AZ, _sN: _aZ}),
         (lambda: schemas.AVAILABILITY_ZONE_ID, {_aQN: _AZI, _sN: _aZI}),
-        (OFFERING_ID, {_aQN: _CBEOI, _sN: _cBEOI}),
+        (lambda: schemas.OFFERING_ID, {_aQN: _CBEOI, _sN: _cBEOI}),
         (lambda: schemas.INTEGER, {_aQN: _CBEDH, _sN: _cBEDH}),
-        (CAPACITY_BLOCK_EXTENSION_STATUS, {_aQN: _CBES, _sN: _cBES}),
+        (lambda: schemas.CAPACITY_BLOCK_EXTENSION_STATUS, {_aQN: _CBES, _sN: _cBES}),
         (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _CBEPD, _sN: _cBEPD}),
         (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _CBESD, _sN: _cBESD}),
         (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _CBEED, _sN: _cBEED}),
@@ -446,8 +391,8 @@ DESCRIBE_CAPACITY_BLOCK_EXTENSION_OFFERINGS_INPUT: StaticSchema = (
     (_DR, _CBEDH, _CRI, _NTex, _MR),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.INTEGER, 1),
-        (lambda: schemas.CAPACITY_RESERVATION_ID, 1),
+        (lambda: schemas.INTEGER, {_sO: None, _smi: None}),
+        (lambda: schemas.CAPACITY_RESERVATION_ID, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
         (DESCRIBE_CAPACITY_BLOCK_EXTENSION_OFFERINGS_MAX_RESULTS, 0),
     ),
@@ -482,7 +427,7 @@ CAPACITY_BLOCK_EXTENSION_OFFERING: StaticSchema = (
     0,
     (_CBEOI, _IT, _IC, _AZ, _AZI, _SDt, _CBESD, _CBEED, _CBEDH, _UF, _CC, _Ten, _ZT),
     (
-        (OFFERING_ID, {_aQN: _CBEOI, _sN: _cBEOI}),
+        (lambda: schemas.OFFERING_ID, {_aQN: _CBEOI, _sN: _cBEOI}),
         (lambda: schemas.STRING, {_aQN: _IT, _sN: _iT}),
         (lambda: schemas.INTEGER, {_aQN: _IC, _sN: _iC}),
         (lambda: schemas.AVAILABILITY_ZONE_NAME, {_aQN: _AZ, _sN: _aZ}),
@@ -521,7 +466,7 @@ DESCRIBE_CAPACITY_BLOCK_OFFERINGS_INPUT: StaticSchema = (
         (lambda: schemas.INTEGER, 0),
         (lambda: schemas.MILLISECOND_DATE_TIME, 0),
         (lambda: schemas.MILLISECOND_DATE_TIME, 0),
-        (lambda: schemas.INTEGER, 1),
+        (lambda: schemas.INTEGER, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
         (DESCRIBE_CAPACITY_BLOCK_OFFERINGS_MAX_RESULTS, 0),
         (lambda: schemas.STRING, 0),
@@ -559,7 +504,7 @@ CAPACITY_BLOCK_OFFERING: StaticSchema = (
     0,
     (_CBOI, _IT, _AZ, _IC, _SDt, _ED, _CBDH, _UF, _CC, _Ten, _UTl, _UC, _CBDM, _ZT),
     (
-        (OFFERING_ID, {_aQN: _CBOI, _sN: _cBOI}),
+        (lambda: schemas.OFFERING_ID, {_aQN: _CBOI, _sN: _cBOI}),
         (lambda: schemas.STRING, {_aQN: _IT, _sN: _iT}),
         (lambda: schemas.STRING, {_aQN: _AZ, _sN: _aZ}),
         (lambda: schemas.INTEGER, {_aQN: _IC, _sN: _iC}),
@@ -662,7 +607,7 @@ CAPACITY_BLOCK: StaticSchema = (
         (lambda: schemas.STRING, {_aQN: _UTl, _sN: _uTl}),
         (lambda: schemas.STRING, {_aQN: _AZ, _sN: _aZ}),
         (lambda: schemas.STRING, {_aQN: _AZI, _sN: _aZI}),
-        (CAPACITY_RESERVATION_ID_SET, {_aQN: _CRIS, _sN: _cRIS}),
+        (lambda: schemas.CAPACITY_RESERVATION_ID_SET, {_aQN: _CRIS, _sN: _cRIS}),
         (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _SDt, _sN: _sDt}),
         (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _ED, _sN: _eD}),
         (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _CD, _sN: _cD}),
@@ -894,8 +839,8 @@ DESCRIBE_CAPACITY_RESERVATION_BILLING_REQUESTS_INPUT: StaticSchema = (
     {_sSI: _cDCRBRR, _sm: None},
     (_CRIa, _Ro, _NTex, _MR, _Fil, _DR),
     (
-        (CAPACITY_RESERVATION_ID_SET, {_sN: _CRI}),
-        (CALLER_ROLE, 1),
+        (lambda: schemas.CAPACITY_RESERVATION_ID_SET, {_sN: _CRI}),
+        (CALLER_ROLE, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
         (DESCRIBE_CAPACITY_RESERVATION_BILLING_REQUESTS_REQUEST_MAX_RESULTS, 0),
         (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
@@ -1212,7 +1157,7 @@ DESCRIBE_CAPACITY_RESERVATIONS_INPUT: StaticSchema = (
     {_sSI: _cDCRR, _sm: None},
     (_CRIa, _NTex, _MR, _Fil, _DR),
     (
-        (CAPACITY_RESERVATION_ID_SET, {_sN: _CRI}),
+        (lambda: schemas.CAPACITY_RESERVATION_ID_SET, {_sN: _CRI}),
         (lambda: schemas.STRING, 0),
         (DESCRIBE_CAPACITY_RESERVATIONS_MAX_RESULTS, 0),
         (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
@@ -1263,7 +1208,7 @@ DESCRIBE_CAPACITY_RESERVATION_TOPOLOGY_INPUT: StaticSchema = (
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.STRING, 0),
         (DESCRIBE_CAPACITY_RESERVATION_TOPOLOGY_MAX_RESULTS, 0),
-        (CAPACITY_RESERVATION_ID_SET, {_sN: _CRI}),
+        (lambda: schemas.CAPACITY_RESERVATION_ID_SET, {_sN: _CRI}),
         (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
     ),
 )
@@ -1359,7 +1304,7 @@ DESCRIBE_CARRIER_GATEWAYS_OUTPUT: StaticSchema = (
     {_sSI: _cDCGRomam, _smit: None},
     (_CGar, _NTex),
     (
-        (lambda: schemas.CARRIER_GATEWAY_SET, {_aQN: _CGSa, _sN: _cGS}),
+        (lambda: CARRIER_GATEWAY_SET, {_aQN: _CGSa, _sN: _cGS}),
         (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
     ),
 )
@@ -1371,5 +1316,53 @@ DESCRIBE_CARRIER_GATEWAYS: StaticOperationSchema = (
     0,
     DESCRIBE_CARRIER_GATEWAYS_INPUT,
     DESCRIBE_CARRIER_GATEWAYS_OUTPUT,
+    (),
+)
+
+CARRIER_GATEWAY_SET: StaticSchema = (
+    16,
+    n0,
+    _CGSa,
+    0,
+    (_me,),
+    ((lambda: schemas.CARRIER_GATEWAY, {_sN: _i}),),
+)
+
+DESCRIBE_CLASSIC_LINK_INSTANCES_MAX_RESULTS: StaticSchema = (7, n0, _DCLIMR, 0)
+
+DESCRIBE_CLASSIC_LINK_INSTANCES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DCLII,
+    {_sSI: _cDCLIR, _sm: None},
+    (_DR, _IIn, _Fil, _NTex, _MR),
+    (
+        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
+        (lambda: schemas.INSTANCE_ID_STRING_LIST, {_sN: _II}),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+        (DESCRIBE_CLASSIC_LINK_INSTANCES_MAX_RESULTS, {_aQN: _MR, _sN: _mR}),
+    ),
+)
+
+DESCRIBE_CLASSIC_LINK_INSTANCES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DCLIO,
+    {_sSI: _cDCLIRo, _smit: None},
+    (_Ins, _NTex),
+    (
+        (lambda: schemas.CLASSIC_LINK_INSTANCE_LIST, {_aQN: _ISnst, _sN: _iSns}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+    ),
+)
+
+DESCRIBE_CLASSIC_LINK_INSTANCES: StaticOperationSchema = (
+    23,
+    n0,
+    _DCLI,
+    0,
+    DESCRIBE_CLASSIC_LINK_INSTANCES_INPUT,
+    DESCRIBE_CLASSIC_LINK_INSTANCES_OUTPUT,
     (),
 )

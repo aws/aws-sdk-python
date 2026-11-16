@@ -18,6 +18,7 @@ _vp = "vpc"
 _rT = "resourceType"
 _Tag = "Tags"
 _Ad = "Address"
+_sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _p = "pending"
 _PI = "PublicIp"
@@ -1569,7 +1570,7 @@ ADD_PREFIX_LIST_ENTRY: StaticSchema = (
     _APLE,
     0,
     (_Ci, _Des),
-    ((lambda: schemas.STRING, 1), (lambda: schemas.STRING, 0)),
+    ((lambda: schemas.STRING, {_sO: None, _smi: None}), (lambda: schemas.STRING, 0)),
 )
 
 ADD_PREFIX_LIST_ENTRIES: StaticSchema = (

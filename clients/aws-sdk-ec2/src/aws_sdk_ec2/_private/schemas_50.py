@@ -13,6 +13,7 @@ _i = "item"
 _TS = "TagSpecification"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
+_sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _TSa = "TagSpecifications"
 _DR = "DryRun"
@@ -83,13 +84,10 @@ _aIs = "associationId"
 _NBG = "NetworkBorderGroup"
 _IPI = "IpamPoolId"
 _desc = "description"
-_PIo = "PoolId"
-_pIo = "poolId"
 _CTl = "ClientToken"
 _cTl = "clientToken"
 _HI = "HostIds"
 _HIS = "HostIdSet"
-_NL = "NetmaskLength"
 _sT = "smithy.api#idempotencyToken"
 _IPAI = "IpamPoolAllocationId"
 _IIn = "InstanceIds"
@@ -99,6 +97,8 @@ _IIPA = "IamInstanceProfileAssociation"
 _iIPA = "iamInstanceProfileAssociation"
 _RTIo = "RouteTableId"
 _rTIo = "routeTableId"
+_ASss = "AssociationState"
+_aSs = "associationState"
 _IIm = "ImageId"
 _WK = "WatermarkKey"
 _smith = "smithy.api#sensitive"
@@ -204,13 +204,6 @@ _THP = "TotalHourlyPrice"
 _tHP = "totalHourlyPrice"
 _TUP = "TotalUpfrontPrice"
 _tUP = "totalUpfrontPrice"
-_PPIPCI = "ProvisionPublicIpv4PoolCidrInput"
-_cPPIPCR = "com.amazonaws.ec2#ProvisionPublicIpv4PoolCidrRequest"
-_PPIPCO = "ProvisionPublicIpv4PoolCidrOutput"
-_cPPIPCRo = "com.amazonaws.ec2#ProvisionPublicIpv4PoolCidrResult"
-_PARo = "PoolAddressRange"
-_pAR = "poolAddressRange"
-_PPIPC = "ProvisionPublicIpv4PoolCidr"
 _PCBI = "PurchaseCapacityBlockInput"
 _cPCBR = "com.amazonaws.ec2#PurchaseCapacityBlockRequest"
 _PCBO = "PurchaseCapacityBlockOutput"
@@ -381,43 +374,11 @@ _cRRR = "com.amazonaws.ec2#ReplaceRouteRequest"
 _LToc = "LocalTarget"
 _RRO = "ReplaceRouteOutput"
 _RRep = "ReplaceRoute"
-
-PROVISION_PUBLIC_IPV4_POOL_CIDR_INPUT: StaticSchema = (
-    18,
-    n0,
-    _PPIPCI,
-    {_sSI: _cPPIPCR, _sm: None},
-    (_DR, _IPI, _PIo, _NL, _NBG),
-    (
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_POOL_ID, 1),
-        (lambda: schemas.IPV4_POOL_EC2_ID, 1),
-        (lambda: schemas.INTEGER, 1),
-        (lambda: schemas.STRING, 0),
-    ),
-)
-
-PROVISION_PUBLIC_IPV4_POOL_CIDR_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _PPIPCO,
-    {_sSI: _cPPIPCRo, _smit: None},
-    (_PIo, _PARo),
-    (
-        (lambda: schemas.IPV4_POOL_EC2_ID, {_aQN: _PIo, _sN: _pIo}),
-        (lambda: schemas.PUBLIC_IPV4_POOL_RANGE, {_aQN: _PARo, _sN: _pAR}),
-    ),
-)
-
-PROVISION_PUBLIC_IPV4_POOL_CIDR: StaticOperationSchema = (
-    23,
-    n0,
-    _PPIPC,
-    0,
-    PROVISION_PUBLIC_IPV4_POOL_CIDR_INPUT,
-    PROVISION_PUBLIC_IPV4_POOL_CIDR_OUTPUT,
-    (),
-)
+_RRTAI = "ReplaceRouteTableAssociationInput"
+_cRRTAR = "com.amazonaws.ec2#ReplaceRouteTableAssociationRequest"
+_RRTAO = "ReplaceRouteTableAssociationOutput"
+_cRRTARo = "com.amazonaws.ec2#ReplaceRouteTableAssociationResult"
+_RRTA = "ReplaceRouteTableAssociation"
 
 PURCHASE_CAPACITY_BLOCK_INPUT: StaticSchema = (
     18,
@@ -428,8 +389,11 @@ PURCHASE_CAPACITY_BLOCK_INPUT: StaticSchema = (
     (
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
-        (lambda: schemas.OFFERING_ID, 1),
-        (lambda: schemas.CAPACITY_RESERVATION_INSTANCE_PLATFORM, 1),
+        (lambda: schemas.OFFERING_ID, {_sO: None, _smi: None}),
+        (
+            lambda: schemas.CAPACITY_RESERVATION_INSTANCE_PLATFORM,
+            {_sO: None, _smi: None},
+        ),
     ),
 )
 
@@ -462,8 +426,8 @@ PURCHASE_CAPACITY_BLOCK_EXTENSION_INPUT: StaticSchema = (
     {_sSI: _cPCBER, _sm: None},
     (_CBEOI, _CRI, _DR),
     (
-        (lambda: schemas.OFFERING_ID, 1),
-        (lambda: schemas.CAPACITY_RESERVATION_ID, 1),
+        (lambda: schemas.OFFERING_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.CAPACITY_RESERVATION_ID, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, 0),
     ),
 )
@@ -496,9 +460,9 @@ PURCHASE_HOST_RESERVATION_INPUT: StaticSchema = (
     (
         (lambda: schemas.STRING, 0),
         (lambda: schemas.CURRENCY_CODE_VALUES, 0),
-        (lambda: schemas.REQUEST_HOST_ID_SET, 1),
+        (lambda: schemas.REQUEST_HOST_ID_SET, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
-        (lambda: schemas.OFFERING_ID, 1),
+        (lambda: schemas.OFFERING_ID, {_sO: None, _smi: None}),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
     ),
 )
@@ -547,8 +511,8 @@ PURCHASE_RESERVED_INSTANCES_OFFERING_INPUT: StaticSchema = (
     {_sSI: _cPRIOR, _sm: None},
     (_IC, _RIOI, _PTur, _DR, _LPi),
     (
-        (lambda: schemas.INTEGER, 1),
-        (lambda: schemas.RESERVED_INSTANCES_OFFERING_ID, 1),
+        (lambda: schemas.INTEGER, {_sO: None, _smi: None}),
+        (lambda: schemas.RESERVED_INSTANCES_OFFERING_ID, {_sO: None, _smi: None}),
         (lambda: schemas.DATE_TIME, 0),
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
         (RESERVED_INSTANCE_LIMIT_PRICE, {_aQN: _LPi, _sN: _lPi}),
@@ -580,7 +544,10 @@ PURCHASE_REQUEST: StaticSchema = (
     _PRu,
     0,
     (_IC, _PTu),
-    ((lambda: schemas.INTEGER, 1), (lambda: schemas.STRING, 1)),
+    (
+        (lambda: schemas.INTEGER, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
+    ),
 )
 
 PURCHASE_REQUEST_SET: StaticSchema = (
@@ -601,7 +568,7 @@ PURCHASE_SCHEDULED_INSTANCES_INPUT: StaticSchema = (
     (
         (lambda: schemas.STRING, 2),
         (lambda: schemas.BOOLEAN, 0),
-        (PURCHASE_REQUEST_SET, {_sN: _PRu, _smi: None}),
+        (PURCHASE_REQUEST_SET, {_sN: _PRu, _sO: None, _smi: None}),
     ),
 )
 
@@ -640,7 +607,7 @@ REBOOT_INSTANCES_INPUT: StaticSchema = (
     {_sSI: _cRIR, _sm: None},
     (_IIn, _DR),
     (
-        (lambda: schemas.INSTANCE_ID_STRING_LIST, {_sN: _II, _smi: None}),
+        (lambda: schemas.INSTANCE_ID_STRING_LIST, {_sN: _II, _sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
     ),
 )
@@ -702,7 +669,10 @@ REGISTER_IMAGE_INPUT: StaticSchema = (
         (lambda: schemas.IMDS_SUPPORT_VALUES, 0),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (lambda: schemas.IMAGE_NAME_REQUEST, {_aQN: _N, _sN: _nam, _smi: None}),
+        (
+            lambda: schemas.IMAGE_NAME_REQUEST,
+            {_aQN: _N, _sN: _nam, _sO: None, _smi: None},
+        ),
         (lambda: schemas.IMAGE_DESCRIPTION_REQUEST, {_aQN: _Des, _sN: _desc}),
         (lambda: schemas.ARCHITECTURE_VALUES, {_aQN: _Arc, _sN: _arch}),
         (lambda: schemas.KERNEL_ID, {_aQN: _KI, _sN: _kI}),
@@ -752,7 +722,10 @@ REGISTER_INSTANCE_EVENT_NOTIFICATION_ATTRIBUTES_INPUT: StaticSchema = (
     _RIENAI,
     {_sSI: _cRIENAR, _sm: None},
     (_DR, _ITA),
-    ((lambda: schemas.BOOLEAN, 0), (REGISTER_INSTANCE_TAG_ATTRIBUTE_REQUEST, 1)),
+    (
+        (lambda: schemas.BOOLEAN, 0),
+        (REGISTER_INSTANCE_TAG_ATTRIBUTE_REQUEST, {_sO: None, _smi: None}),
+    ),
 )
 
 REGISTER_INSTANCE_EVENT_NOTIFICATION_ATTRIBUTES_OUTPUT: StaticSchema = (
@@ -781,9 +754,12 @@ REGISTER_TRANSIT_GATEWAY_MULTICAST_GROUP_MEMBERS_INPUT: StaticSchema = (
     {_sSI: _cRTGMGMR, _sm: None},
     (_TGMDI, _GIA, _NIIe, _DR),
     (
-        (lambda: schemas.TRANSIT_GATEWAY_MULTICAST_DOMAIN_ID, 1),
+        (lambda: schemas.TRANSIT_GATEWAY_MULTICAST_DOMAIN_ID, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
-        (lambda: schemas.TRANSIT_GATEWAY_NETWORK_INTERFACE_ID_LIST, 1),
+        (
+            lambda: schemas.TRANSIT_GATEWAY_NETWORK_INTERFACE_ID_LIST,
+            {_sO: None, _smi: None},
+        ),
         (lambda: schemas.BOOLEAN, 0),
     ),
 )
@@ -832,9 +808,12 @@ REGISTER_TRANSIT_GATEWAY_MULTICAST_GROUP_SOURCES_INPUT: StaticSchema = (
     {_sSI: _cRTGMGSR, _sm: None},
     (_TGMDI, _GIA, _NIIe, _DR),
     (
-        (lambda: schemas.TRANSIT_GATEWAY_MULTICAST_DOMAIN_ID, 1),
+        (lambda: schemas.TRANSIT_GATEWAY_MULTICAST_DOMAIN_ID, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
-        (lambda: schemas.TRANSIT_GATEWAY_NETWORK_INTERFACE_ID_LIST, 1),
+        (
+            lambda: schemas.TRANSIT_GATEWAY_NETWORK_INTERFACE_ID_LIST,
+            {_sO: None, _smi: None},
+        ),
         (lambda: schemas.BOOLEAN, 0),
     ),
 )
@@ -882,7 +861,10 @@ REJECT_CAPACITY_RESERVATION_BILLING_OWNERSHIP_INPUT: StaticSchema = (
     _RCRBOI,
     {_sSI: _cRCRBOR, _sm: None},
     (_DR, _CRI),
-    ((lambda: schemas.BOOLEAN, 0), (lambda: schemas.CAPACITY_RESERVATION_ID, 1)),
+    (
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.CAPACITY_RESERVATION_ID, {_sO: None, _smi: None}),
+    ),
 )
 
 REJECT_CAPACITY_RESERVATION_BILLING_OWNERSHIP_OUTPUT: StaticSchema = (
@@ -910,7 +892,10 @@ REJECT_TRANSIT_GATEWAY_CLIENT_VPN_ATTACHMENT_INPUT: StaticSchema = (
     _RTGCVAI,
     {_sSI: _cRTGCVAR, _sm: None},
     (_TGAI, _DR),
-    ((lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, 1), (lambda: schemas.BOOLEAN, 0)),
+    (
+        (lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
 )
 
 REJECT_TRANSIT_GATEWAY_CLIENT_VPN_ATTACHMENT_OUTPUT: StaticSchema = (
@@ -981,7 +966,10 @@ REJECT_TRANSIT_GATEWAY_PEERING_ATTACHMENT_INPUT: StaticSchema = (
     _RTGPAI,
     {_sSI: _cRTGPAR, _sm: None},
     (_TGAI, _DR),
-    ((lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, 1), (lambda: schemas.BOOLEAN, 0)),
+    (
+        (lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
 )
 
 REJECT_TRANSIT_GATEWAY_PEERING_ATTACHMENT_OUTPUT: StaticSchema = (
@@ -1009,7 +997,10 @@ REJECT_TRANSIT_GATEWAY_VPC_ATTACHMENT_INPUT: StaticSchema = (
     _RTGVAI,
     {_sSI: _cRTGVAR, _sm: None},
     (_TGAI, _DR),
-    ((lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, 1), (lambda: schemas.BOOLEAN, 0)),
+    (
+        (lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
 )
 
 REJECT_TRANSIT_GATEWAY_VPC_ATTACHMENT_OUTPUT: StaticSchema = (
@@ -1039,8 +1030,8 @@ REJECT_VPC_ENDPOINT_CONNECTIONS_INPUT: StaticSchema = (
     (_DR, _SIe, _VEIp),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.VPC_ENDPOINT_SERVICE_ID, 1),
-        (lambda: schemas.VPC_ENDPOINT_ID_LIST, {_sN: _VEI, _smi: None}),
+        (lambda: schemas.VPC_ENDPOINT_SERVICE_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.VPC_ENDPOINT_ID_LIST, {_sN: _VEI, _sO: None, _smi: None}),
     ),
 )
 
@@ -1073,7 +1064,7 @@ REJECT_VPC_PEERING_CONNECTION_INPUT: StaticSchema = (
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
         (
             lambda: schemas.VPC_PEERING_CONNECTION_ID,
-            {_aQN: _VPCI, _sN: _vPCI, _smi: None},
+            {_aQN: _VPCI, _sN: _vPCI, _sO: None, _smi: None},
         ),
     ),
 )
@@ -1129,7 +1120,12 @@ RELEASE_HOSTS_INPUT: StaticSchema = (
     _RHI,
     {_sSI: _cRHR, _sm: None},
     (_HI,),
-    ((lambda: schemas.REQUEST_HOST_ID_LIST, {_aQN: _HIo, _sN: _hI, _smi: None}),),
+    (
+        (
+            lambda: schemas.REQUEST_HOST_ID_LIST,
+            {_aQN: _HIo, _sN: _hI, _sO: None, _smi: None},
+        ),
+    ),
 )
 
 RELEASE_HOSTS_OUTPUT: StaticSchema = (
@@ -1162,9 +1158,9 @@ RELEASE_IPAM_POOL_ALLOCATION_INPUT: StaticSchema = (
     (_DR, _IPI, _Ci, _IPAI),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_POOL_ID, 1),
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.IPAM_POOL_ALLOCATION_ID, 1),
+        (lambda: schemas.IPAM_POOL_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
+        (lambda: schemas.IPAM_POOL_ALLOCATION_ID, {_sO: None, _smi: None}),
     ),
 )
 
@@ -1194,8 +1190,8 @@ REPLACE_IAM_INSTANCE_PROFILE_ASSOCIATION_INPUT: StaticSchema = (
     {_sSI: _cRIIPAR, _sm: None},
     (_IIP, _AIs),
     (
-        (lambda: schemas.IAM_INSTANCE_PROFILE_SPECIFICATION, 1),
-        (lambda: schemas.IAM_INSTANCE_PROFILE_ASSOCIATION_ID, 1),
+        (lambda: schemas.IAM_INSTANCE_PROFILE_SPECIFICATION, {_sO: None, _smi: None}),
+        (lambda: schemas.IAM_INSTANCE_PROFILE_ASSOCIATION_ID, {_sO: None, _smi: None}),
     ),
 )
 
@@ -1402,7 +1398,7 @@ REPLACE_IMAGE_INSTANCE_TYPE_SPECIFICATION_INPUT: StaticSchema = (
     {_sSI: _cRIITSR, _sm: None},
     (_IIm, _ITSn, _DR),
     (
-        (lambda: schemas.IMAGE_ID, 1),
+        (lambda: schemas.IMAGE_ID, {_sO: None, _smi: None}),
         (INSTANCE_TYPE_SPECIFICATION_REQUEST, 0),
         (lambda: schemas.BOOLEAN, 0),
     ),
@@ -1437,8 +1433,11 @@ REPLACE_NETWORK_ACL_ASSOCIATION_INPUT: StaticSchema = (
     (_DR, _AIs, _NAI),
     (
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (NETWORK_ACL_ASSOCIATION_ID, {_aQN: _AIs, _sN: _aIs, _smi: None}),
-        (lambda: schemas.NETWORK_ACL_ID, {_aQN: _NAI, _sN: _nAI, _smi: None}),
+        (NETWORK_ACL_ASSOCIATION_ID, {_aQN: _AIs, _sN: _aIs, _sO: None, _smi: None}),
+        (
+            lambda: schemas.NETWORK_ACL_ID,
+            {_aQN: _NAI, _sN: _nAI, _sO: None, _smi: None},
+        ),
     ),
 )
 
@@ -1469,11 +1468,14 @@ REPLACE_NETWORK_ACL_ENTRY_INPUT: StaticSchema = (
     (_DR, _NAI, _RN, _P, _RA, _Eg, _CB, _ICB, _ITC, _PR),
     (
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (lambda: schemas.NETWORK_ACL_ID, {_aQN: _NAI, _sN: _nAI, _smi: None}),
-        (lambda: schemas.INTEGER, {_aQN: _RN, _sN: _rN, _smi: None}),
-        (lambda: schemas.STRING, {_aQN: _P, _sN: _pro, _smi: None}),
-        (lambda: schemas.RULE_ACTION, {_aQN: _RA, _sN: _rA, _smi: None}),
-        (lambda: schemas.BOOLEAN, {_aQN: _Eg, _sN: _egr, _smi: None}),
+        (
+            lambda: schemas.NETWORK_ACL_ID,
+            {_aQN: _NAI, _sN: _nAI, _sO: None, _smi: None},
+        ),
+        (lambda: schemas.INTEGER, {_aQN: _RN, _sN: _rN, _sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_aQN: _P, _sN: _pro, _sO: None, _smi: None}),
+        (lambda: schemas.RULE_ACTION, {_aQN: _RA, _sN: _rA, _sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, {_aQN: _Eg, _sN: _egr, _sO: None, _smi: None}),
         (lambda: schemas.STRING, {_aQN: _CB, _sN: _cB}),
         (lambda: schemas.STRING, {_aQN: _ICB, _sN: _iCB}),
         (lambda: schemas.ICMP_TYPE_CODE, {_sN: _Ic}),
@@ -1533,7 +1535,10 @@ REPLACE_ROUTE_INPUT: StaticSchema = (
         (lambda: schemas.CORE_NETWORK_ARN, 0),
         (lambda: schemas.ODB_NETWORK_ARN, 0),
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (lambda: schemas.ROUTE_TABLE_ID, {_aQN: _RTIo, _sN: _rTIo, _smi: None}),
+        (
+            lambda: schemas.ROUTE_TABLE_ID,
+            {_aQN: _RTIo, _sN: _rTIo, _sO: None, _smi: None},
+        ),
         (lambda: schemas.STRING, {_aQN: _DCB, _sN: _dCB}),
         (lambda: schemas.ROUTE_GATEWAY_ID, {_aQN: _GI, _sN: _gI}),
         (lambda: schemas.STRING, {_aQN: _DICB, _sN: _dICB}),
@@ -1554,5 +1559,46 @@ REPLACE_ROUTE: StaticOperationSchema = (
     0,
     REPLACE_ROUTE_INPUT,
     REPLACE_ROUTE_OUTPUT,
+    (),
+)
+
+REPLACE_ROUTE_TABLE_ASSOCIATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _RRTAI,
+    {_sSI: _cRRTAR, _sm: None},
+    (_DR, _AIs, _RTIo),
+    (
+        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
+        (
+            lambda: schemas.ROUTE_TABLE_ASSOCIATION_ID,
+            {_aQN: _AIs, _sN: _aIs, _sO: None, _smi: None},
+        ),
+        (
+            lambda: schemas.ROUTE_TABLE_ID,
+            {_aQN: _RTIo, _sN: _rTIo, _sO: None, _smi: None},
+        ),
+    ),
+)
+
+REPLACE_ROUTE_TABLE_ASSOCIATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _RRTAO,
+    {_sSI: _cRRTARo, _smit: None},
+    (_NAIew, _ASss),
+    (
+        (lambda: schemas.STRING, {_aQN: _NAIew, _sN: _nAIe}),
+        (lambda: schemas.ROUTE_TABLE_ASSOCIATION_STATE, {_aQN: _ASss, _sN: _aSs}),
+    ),
+)
+
+REPLACE_ROUTE_TABLE_ASSOCIATION: StaticOperationSchema = (
+    23,
+    n0,
+    _RRTA,
+    0,
+    REPLACE_ROUTE_TABLE_ASSOCIATION_INPUT,
+    REPLACE_ROUTE_TABLE_ASSOCIATION_OUTPUT,
     (),
 )

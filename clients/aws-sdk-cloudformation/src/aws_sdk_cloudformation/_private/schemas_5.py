@@ -22,6 +22,7 @@ _c = "client"
 _sE = "smithy.api#httpError"
 _aQE = "aws.protocols#awsQueryError"
 _M = "Message"
+_sO = "smithy.api#clientOptional"
 _smit = "smithy.api#required"
 _RESOURCE = "RESOURCE"
 _TN = "TypeName"
@@ -233,7 +234,10 @@ DETECT_STACK_DRIFT_INPUT: StaticSchema = (
     _DSDI,
     {_s: None},
     (_SN, _LRIo),
-    ((lambda: schemas.STACK_NAME_OR_ID, 1), (LOGICAL_RESOURCE_IDS, 0)),
+    (
+        (lambda: schemas.STACK_NAME_OR_ID, {_sO: None, _smit: None}),
+        (LOGICAL_RESOURCE_IDS, 0),
+    ),
 )
 
 DETECT_STACK_DRIFT_OUTPUT: StaticSchema = (
@@ -242,7 +246,7 @@ DETECT_STACK_DRIFT_OUTPUT: StaticSchema = (
     _DSDO,
     {_sm: None},
     (_SDDI,),
-    ((lambda: schemas.STACK_DRIFT_DETECTION_ID, 1),),
+    ((lambda: schemas.STACK_DRIFT_DETECTION_ID, {_sO: None, _smit: None}),),
 )
 
 DETECT_STACK_DRIFT: StaticOperationSchema = (
@@ -261,7 +265,10 @@ DETECT_STACK_RESOURCE_DRIFT_INPUT: StaticSchema = (
     _DSRDIe,
     {_s: None},
     (_SN, _LRI),
-    ((lambda: schemas.STACK_NAME_OR_ID, 1), (lambda: schemas.LOGICAL_RESOURCE_ID, 1)),
+    (
+        (lambda: schemas.STACK_NAME_OR_ID, {_sO: None, _smit: None}),
+        (lambda: schemas.LOGICAL_RESOURCE_ID, {_sO: None, _smit: None}),
+    ),
 )
 
 DETECT_STACK_RESOURCE_DRIFT_OUTPUT: StaticSchema = (
@@ -270,7 +277,7 @@ DETECT_STACK_RESOURCE_DRIFT_OUTPUT: StaticSchema = (
     _DSRDOe,
     {_sm: None},
     (_SRDt,),
-    ((lambda: schemas.STACK_RESOURCE_DRIFT, 1),),
+    ((lambda: schemas.STACK_RESOURCE_DRIFT, {_sO: None, _smit: None}),),
 )
 
 DETECT_STACK_RESOURCE_DRIFT: StaticOperationSchema = (
@@ -290,7 +297,7 @@ DETECT_STACK_SET_DRIFT_INPUT: StaticSchema = (
     {_s: None},
     (_SSN, _OP, _OI, _CA),
     (
-        (lambda: schemas.STACK_SET_NAME_OR_ID, 1),
+        (lambda: schemas.STACK_SET_NAME_OR_ID, {_sO: None, _smit: None}),
         (lambda: schemas.STACK_SET_OPERATION_PREFERENCES, 0),
         (lambda: schemas.CLIENT_REQUEST_TOKEN, 2),
         (lambda: schemas.CALL_AS, 0),
@@ -361,7 +368,7 @@ EXECUTE_CHANGE_SET_INPUT: StaticSchema = (
     {_s: None},
     (_CSN, _SN, _CRT, _DR, _REOC),
     (
-        (lambda: schemas.CHANGE_SET_NAME_OR_ID, 1),
+        (lambda: schemas.CHANGE_SET_NAME_OR_ID, {_sO: None, _smit: None}),
         (lambda: schemas.STACK_NAME_OR_ID, 0),
         (lambda: schemas.CLIENT_REQUEST_TOKEN, 0),
         (lambda: schemas.DISABLE_ROLLBACK, 0),
@@ -392,7 +399,7 @@ EXECUTE_STACK_REFACTOR_INPUT: StaticSchema = (
     _ESRI,
     {_s: None},
     (_SRI,),
-    ((lambda: schemas.STACK_REFACTOR_ID, 1),),
+    ((lambda: schemas.STACK_REFACTOR_ID, {_sO: None, _smit: None}),),
 )
 
 EXECUTE_STACK_REFACTOR_OUTPUT: StaticSchema = (18, n0, _ESRO, {_sSI: _sU, _sm: None})
@@ -422,7 +429,10 @@ GET_GENERATED_TEMPLATE_INPUT: StaticSchema = (
     _GGTI,
     {_s: None},
     (_Fo, _GTN),
-    ((TEMPLATE_FORMAT, 0), (lambda: schemas.GENERATED_TEMPLATE_NAME, 1)),
+    (
+        (TEMPLATE_FORMAT, 0),
+        (lambda: schemas.GENERATED_TEMPLATE_NAME, {_sO: None, _smit: None}),
+    ),
 )
 
 GET_GENERATED_TEMPLATE_OUTPUT: StaticSchema = (
@@ -512,10 +522,10 @@ HOOK_TARGET: StaticSchema = (
     0,
     (_TT, _TTN, _TI, _Ac),
     (
-        (lambda: schemas.HOOK_TARGET_TYPE, 1),
-        (lambda: schemas.HOOK_TARGET_TYPE_NAME, 1),
-        (HOOK_TARGET_ID, 1),
-        (HOOK_TARGET_ACTION, 1),
+        (lambda: schemas.HOOK_TARGET_TYPE, {_sO: None, _smit: None}),
+        (lambda: schemas.HOOK_TARGET_TYPE_NAME, {_sO: None, _smit: None}),
+        (HOOK_TARGET_ID, {_sO: None, _smit: None}),
+        (HOOK_TARGET_ACTION, {_sO: None, _smit: None}),
     ),
 )
 
@@ -540,7 +550,7 @@ GET_STACK_POLICY_INPUT: StaticSchema = (
     _GSPI,
     {_s: None},
     (_SN,),
-    ((lambda: schemas.STACK_NAME, 1),),
+    ((lambda: schemas.STACK_NAME, {_sO: None, _smit: None}),),
 )
 
 GET_STACK_POLICY_OUTPUT: StaticSchema = (
@@ -757,7 +767,7 @@ IMPORT_STACKS_TO_STACK_SET_INPUT: StaticSchema = (
     {_s: None},
     (_SSN, _SIta, _SIU, _OUIr, _OP, _OI, _CA),
     (
-        (lambda: schemas.STACK_SET_NAME_OR_ID, 1),
+        (lambda: schemas.STACK_SET_NAME_OR_ID, {_sO: None, _smit: None}),
         (STACK_ID_LIST, 0),
         (STACK_IDS_URL, 0),
         (lambda: schemas.ORGANIZATIONAL_UNIT_ID_LIST, 0),
@@ -815,7 +825,10 @@ LIST_CHANGE_SETS_INPUT: StaticSchema = (
     _LCSI,
     {_s: None},
     (_SN, _NT),
-    ((lambda: schemas.STACK_NAME_OR_ID, 1), (lambda: schemas.NEXT_TOKEN, 0)),
+    (
+        (lambda: schemas.STACK_NAME_OR_ID, {_sO: None, _smit: None}),
+        (lambda: schemas.NEXT_TOKEN, 0),
+    ),
 )
 
 LIST_CHANGE_SETS_OUTPUT: StaticSchema = (
@@ -1024,7 +1037,10 @@ LIST_IMPORTS_INPUT: StaticSchema = (
     _LII,
     {_s: None},
     (_EN, _NT),
-    ((lambda: schemas.EXPORT_NAME, 1), (lambda: schemas.NEXT_TOKEN, 0)),
+    (
+        (lambda: schemas.EXPORT_NAME, {_sO: None, _smit: None}),
+        (lambda: schemas.NEXT_TOKEN, 0),
+    ),
 )
 
 LIST_IMPORTS_OUTPUT: StaticSchema = (
@@ -1070,7 +1086,10 @@ SCANNED_RESOURCE_IDENTIFIER: StaticSchema = (
     _SRIc,
     0,
     (_RT, _RI),
-    ((lambda: schemas.RESOURCE_TYPE, 1), (JAZZ_RESOURCE_IDENTIFIER_PROPERTIES, 1)),
+    (
+        (lambda: schemas.RESOURCE_TYPE, {_sO: None, _smit: None}),
+        (JAZZ_RESOURCE_IDENTIFIER_PROPERTIES, {_sO: None, _smit: None}),
+    ),
 )
 
 SCANNED_RESOURCE_IDENTIFIERS: StaticSchema = (
@@ -1089,8 +1108,8 @@ LIST_RESOURCE_SCAN_RELATED_RESOURCES_INPUT: StaticSchema = (
     {_s: None},
     (_RSI, _Reso, _NT, _MR),
     (
-        (lambda: schemas.RESOURCE_SCAN_ID, 1),
-        (SCANNED_RESOURCE_IDENTIFIERS, 1),
+        (lambda: schemas.RESOURCE_SCAN_ID, {_sO: None, _smit: None}),
+        (SCANNED_RESOURCE_IDENTIFIERS, {_sO: None, _smit: None}),
         (lambda: schemas.NEXT_TOKEN, 0),
         (lambda: schemas.BOXED_MAX_RESULTS, 0),
     ),

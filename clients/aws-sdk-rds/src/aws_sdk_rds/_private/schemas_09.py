@@ -10,6 +10,7 @@ from . import schemas
 n0 = "com.amazonaws.rds"
 _m = "member"
 _sN = "smithy.api#xmlName"
+_sO = "smithy.api#clientOptional"
 _sm = "smithy.api#required"
 _STt = "StorageType"
 _sSI = "smithy.synthetic#originalShapeId"
@@ -99,8 +100,6 @@ _End = "Endpoint"
 _DBSGDu = "DBSubnetGroupDescription"
 _DBI = "DBInstance"
 _DBPN = "DBProxyName"
-_DBPEN = "DBProxyEndpointName"
-_DBPE = "DBProxyEndpoint"
 _DBSGI = "DBShardGroupIdentifier"
 _CR = "ComputeRedundancy"
 _MACU = "MaxACU"
@@ -126,11 +125,6 @@ _DBIIn = "DBInstanceIdentifiers"
 _DBCIl = "DBClusterIdentifiers"
 _Par = "Parameters"
 _AN = "AttributeName"
-_MCP = "MaxConnectionsPercent"
-_MICP = "MaxIdleConnectionsPercent"
-_CBT = "ConnectionBorrowTimeout"
-_SPF = "SessionPinningFilters"
-_IQ = "InitQuery"
 _DBPTG = "DBProxyTargetGroup"
 _CPC = "ConnectionPoolConfig"
 _Lo = "Locale"
@@ -149,13 +143,6 @@ _cDBCPGNM = "com.amazonaws.rds#DBClusterParameterGroupNameMessage"
 _VTA = "ValuesToAdd"
 _VTR = "ValuesToRemove"
 _cDBPGNM = "com.amazonaws.rds#DBParameterGroupNameMessage"
-_MDBPEI = "ModifyDBProxyEndpointInput"
-_cMDBPER = "com.amazonaws.rds#ModifyDBProxyEndpointRequest"
-_NDBPEN = "NewDBProxyEndpointName"
-_MDBPEO = "ModifyDBProxyEndpointOutput"
-_cMDBPERo = "com.amazonaws.rds#ModifyDBProxyEndpointResponse"
-_MDBPE = "ModifyDBProxyEndpoint"
-_CPCo = "ConnectionPoolConfiguration"
 _MDBPTGI = "ModifyDBProxyTargetGroupInput"
 _cMDBPTGR = "com.amazonaws.rds#ModifyDBProxyTargetGroupRequest"
 _NN = "NewName"
@@ -316,58 +303,6 @@ _RDBCFSOe = "RestoreDBClusterFromSnapshotOutput"
 _cRDBCFSRo = "com.amazonaws.rds#RestoreDBClusterFromSnapshotResult"
 _RDBCFSe = "RestoreDBClusterFromSnapshot"
 
-MODIFY_DB_PROXY_ENDPOINT_INPUT: StaticSchema = (
-    18,
-    n0,
-    _MDBPEI,
-    {_sSI: _cMDBPER, _smi: None},
-    (_DBPEN, _NDBPEN, _VSGIp),
-    (
-        (lambda: schemas.DB_PROXY_ENDPOINT_NAME, 1),
-        (lambda: schemas.DB_PROXY_ENDPOINT_NAME, 0),
-        (lambda: schemas.STRING_LIST, 0),
-    ),
-)
-
-MODIFY_DB_PROXY_ENDPOINT_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _MDBPEO,
-    {_sSI: _cMDBPERo, _smit: None},
-    (_DBPE,),
-    ((lambda: schemas.DB_PROXY_ENDPOINT, 0),),
-)
-
-MODIFY_DB_PROXY_ENDPOINT: StaticOperationSchema = (
-    23,
-    n0,
-    _MDBPE,
-    0,
-    MODIFY_DB_PROXY_ENDPOINT_INPUT,
-    MODIFY_DB_PROXY_ENDPOINT_OUTPUT,
-    (
-        lambda: schemas.DB_PROXY_ENDPOINT_ALREADY_EXISTS_FAULT,
-        lambda: schemas.DB_PROXY_ENDPOINT_NOT_FOUND_FAULT,
-        lambda: schemas.INVALID_DB_PROXY_ENDPOINT_STATE_FAULT,
-        lambda: schemas.INVALID_DB_PROXY_STATE_FAULT,
-    ),
-)
-
-CONNECTION_POOL_CONFIGURATION: StaticSchema = (
-    18,
-    n0,
-    _CPCo,
-    0,
-    (_MCP, _MICP, _CBT, _SPF, _IQ),
-    (
-        (lambda: schemas.INTEGER_OPTIONAL, 0),
-        (lambda: schemas.INTEGER_OPTIONAL, 0),
-        (lambda: schemas.INTEGER_OPTIONAL, 0),
-        (lambda: schemas.STRING_LIST, 0),
-        (lambda: schemas.OPERATOR_SENSITIVE_STRING, 0),
-    ),
-)
-
 MODIFY_DB_PROXY_TARGET_GROUP_INPUT: StaticSchema = (
     18,
     n0,
@@ -375,9 +310,9 @@ MODIFY_DB_PROXY_TARGET_GROUP_INPUT: StaticSchema = (
     {_sSI: _cMDBPTGR, _smi: None},
     (_TGN, _DBPN, _CPC, _NN),
     (
-        (lambda: schemas.DB_PROXY_TARGET_GROUP_NAME, 1),
-        (lambda: schemas.DB_PROXY_NAME, 1),
-        (CONNECTION_POOL_CONFIGURATION, 0),
+        (lambda: schemas.DB_PROXY_TARGET_GROUP_NAME, {_sO: None, _sm: None}),
+        (lambda: schemas.DB_PROXY_NAME, {_sO: None, _sm: None}),
+        (lambda: schemas.CONNECTION_POOL_CONFIGURATION, 0),
         (lambda: schemas.STRING, 0),
     ),
 )
@@ -411,7 +346,10 @@ RECOMMENDED_ACTION_UPDATE: StaticSchema = (
     _RAU,
     0,
     (_AI, _St),
-    ((lambda: schemas.STRING, 1), (lambda: schemas.STRING, 1)),
+    (
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+    ),
 )
 
 RECOMMENDED_ACTION_UPDATE_LIST: StaticSchema = (
@@ -430,7 +368,7 @@ MODIFY_DB_RECOMMENDATION_INPUT: StaticSchema = (
     {_sSI: _cMDBRM, _smi: None},
     (_RIe, _Lo, _St, _RAUe),
     (
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 0),
         (RECOMMENDED_ACTION_UPDATE_LIST, 0),
@@ -463,7 +401,7 @@ MODIFY_DB_SHARD_GROUP_INPUT: StaticSchema = (
     {_sSI: _cMDBSGM, _smi: None},
     (_DBSGI, _MACU, _MACUi, _CR),
     (
-        (lambda: schemas.DB_SHARD_GROUP_IDENTIFIER, 1),
+        (lambda: schemas.DB_SHARD_GROUP_IDENTIFIER, {_sO: None, _sm: None}),
         (lambda: schemas.DOUBLE_OPTIONAL, 0),
         (lambda: schemas.DOUBLE_OPTIONAL, 0),
         (lambda: schemas.INTEGER_OPTIONAL, 0),
@@ -512,7 +450,7 @@ MODIFY_DB_SNAPSHOT_INPUT: StaticSchema = (
     {_sSI: _cMDBSM, _smi: None},
     (_DBSIn, _EV, _OGN),
     (
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 0),
     ),
@@ -548,8 +486,8 @@ MODIFY_DB_SNAPSHOT_ATTRIBUTE_INPUT: StaticSchema = (
     {_sSI: _cMDBSAM, _smi: None},
     (_DBSIn, _AN, _VTA, _VTR),
     (
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.ATTRIBUTE_VALUE_LIST, 0),
         (lambda: schemas.ATTRIBUTE_VALUE_LIST, 0),
     ),
@@ -585,9 +523,9 @@ MODIFY_DB_SUBNET_GROUP_INPUT: StaticSchema = (
     {_sSI: _cMDBSGMo, _smi: None},
     (_DBSGNu, _DBSGDu, _SIubn),
     (
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.STRING, 0),
-        (lambda: schemas.SUBNET_IDENTIFIER_LIST, 1),
+        (lambda: schemas.SUBNET_IDENTIFIER_LIST, {_sO: None, _sm: None}),
     ),
 )
 
@@ -637,7 +575,7 @@ MODIFY_EVENT_SUBSCRIPTION_INPUT: StaticSchema = (
     {_sSI: _cMESM, _smi: None},
     (_SN, _STA, _STo, _ECv, _E),
     (
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.EVENT_CATEGORIES_LIST, 0),
@@ -678,7 +616,7 @@ MODIFY_GLOBAL_CLUSTER_INPUT: StaticSchema = (
     {_sSI: _cMGCM, _smi: None},
     (_GCI, _NGCI, _DP, _EV, _AMVUl),
     (
-        (lambda: schemas.GLOBAL_CLUSTER_IDENTIFIER, 1),
+        (lambda: schemas.GLOBAL_CLUSTER_IDENTIFIER, {_sO: None, _sm: None}),
         (lambda: schemas.GLOBAL_CLUSTER_IDENTIFIER, 0),
         (lambda: schemas.BOOLEAN_OPTIONAL, 0),
         (lambda: schemas.STRING, 0),
@@ -718,7 +656,7 @@ MODIFY_INTEGRATION_INPUT: StaticSchema = (
     {_sSI: _cMIM, _smi: None},
     (_IIn, _INn, _DFa, _D),
     (
-        (lambda: schemas.INTEGRATION_IDENTIFIER, 1),
+        (lambda: schemas.INTEGRATION_IDENTIFIER, {_sO: None, _sm: None}),
         (lambda: schemas.INTEGRATION_NAME, 0),
         (lambda: schemas.DATA_FILTER, 0),
         (lambda: schemas.INTEGRATION_DESCRIPTION, 0),
@@ -777,7 +715,7 @@ OPTION_CONFIGURATION: StaticSchema = (
     0,
     (_ON, _P, _OV, _DBSGMe, _VSGMp, _OSp),
     (
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.INTEGER_OPTIONAL, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.DB_SECURITY_GROUP_NAME_LIST, 0),
@@ -811,7 +749,7 @@ MODIFY_OPTION_GROUP_INPUT: StaticSchema = (
     {_sSI: _cMOGM, _smi: None},
     (_OGN, _OTI, _OTR, _AIp),
     (
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (OPTION_CONFIGURATION_LIST, 0),
         (OPTION_NAMES_LIST, 0),
         (lambda: schemas.BOOLEAN, 0),
@@ -847,8 +785,8 @@ MODIFY_TENANT_DATABASE_INPUT: StaticSchema = (
     {_sSI: _cMTDM, _smi: None},
     (_DBII, _TDBN, _MUP, _NTDBN, _MMUP, _RMUP, _MUSKKI),
     (
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.SENSITIVE_STRING, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.BOOLEAN_OPTIONAL, 0),
@@ -889,7 +827,7 @@ PROMOTE_READ_REPLICA_INPUT: StaticSchema = (
     {_sSI: _cPRRM, _smi: None},
     (_DBII, _BRP, _PBW, _TSag),
     (
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.INTEGER_OPTIONAL, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.TAG_SPECIFICATION_LIST, 0),
@@ -924,7 +862,7 @@ PROMOTE_READ_REPLICA_DB_CLUSTER_INPUT: StaticSchema = (
     _PRRDBCI,
     {_sSI: _cPRRDBCM, _smi: None},
     (_DBCI,),
-    ((lambda: schemas.STRING, 1),),
+    ((lambda: schemas.STRING, {_sO: None, _sm: None}),),
 )
 
 PROMOTE_READ_REPLICA_DB_CLUSTER_OUTPUT: StaticSchema = (
@@ -956,7 +894,7 @@ PURCHASE_RESERVED_DB_INSTANCES_OFFERING_INPUT: StaticSchema = (
     {_sSI: _cPRDBIOM, _smi: None},
     (_RDBIOI, _RDBII, _DBICn, _Ta),
     (
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.INTEGER_OPTIONAL, 0),
         (lambda: schemas.TAG_LIST, 0),
@@ -1022,7 +960,7 @@ REBOOT_DB_CLUSTER_INPUT: StaticSchema = (
     _RDBCI,
     {_sSI: _cRDBCM, _smi: None},
     (_DBCI,),
-    ((lambda: schemas.STRING, 1),),
+    ((lambda: schemas.STRING, {_sO: None, _sm: None}),),
 )
 
 REBOOT_DB_CLUSTER_OUTPUT: StaticSchema = (
@@ -1054,7 +992,10 @@ REBOOT_DB_INSTANCE_INPUT: StaticSchema = (
     _RDBIIe,
     {_sSI: _cRDBIMo, _smi: None},
     (_DBII, _FF),
-    ((lambda: schemas.STRING, 1), (lambda: schemas.BOOLEAN_OPTIONAL, 0)),
+    (
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.BOOLEAN_OPTIONAL, 0),
+    ),
 )
 
 REBOOT_DB_INSTANCE_OUTPUT: StaticSchema = (
@@ -1086,7 +1027,7 @@ REBOOT_DB_SHARD_GROUP_INPUT: StaticSchema = (
     _RDBSGI,
     {_sSI: _cRDBSGM, _smi: None},
     (_DBSGI,),
-    ((lambda: schemas.DB_SHARD_GROUP_IDENTIFIER, 1),),
+    ((lambda: schemas.DB_SHARD_GROUP_IDENTIFIER, {_sO: None, _sm: None}),),
 )
 
 REBOOT_DB_SHARD_GROUP_OUTPUT: StaticSchema = (
@@ -1160,7 +1101,7 @@ REGISTER_DB_PROXY_TARGETS_INPUT: StaticSchema = (
     {_sSI: _cRDBPTR, _smi: None},
     (_DBPN, _TGN, _DBIIn, _DBCIl),
     (
-        (lambda: schemas.DB_PROXY_NAME, 1),
+        (lambda: schemas.DB_PROXY_NAME, {_sO: None, _sm: None}),
         (lambda: schemas.DB_PROXY_TARGET_GROUP_NAME, 0),
         (lambda: schemas.STRING_LIST, 0),
         (lambda: schemas.STRING_LIST, 0),
@@ -1202,7 +1143,10 @@ REMOVE_FROM_GLOBAL_CLUSTER_INPUT: StaticSchema = (
     _RFGCI,
     {_sSI: _cRFGCM, _smi: None},
     (_GCI, _DCIb),
-    ((lambda: schemas.GLOBAL_CLUSTER_IDENTIFIER, 1), (lambda: schemas.STRING, 1)),
+    (
+        (lambda: schemas.GLOBAL_CLUSTER_IDENTIFIER, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+    ),
 )
 
 REMOVE_FROM_GLOBAL_CLUSTER_OUTPUT: StaticSchema = (
@@ -1251,8 +1195,8 @@ REMOVE_ROLE_FROM_DB_CLUSTER_INPUT: StaticSchema = (
     {_sSI: _cRRFDBCM, _smi: None},
     (_DBCI, _RA, _FN),
     (
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.IAM_ROLE_ARN, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.IAM_ROLE_ARN, {_sO: None, _sm: None}),
         (lambda: schemas.STRING, 0),
     ),
 )
@@ -1300,9 +1244,9 @@ REMOVE_ROLE_FROM_DB_INSTANCE_INPUT: StaticSchema = (
     {_sSI: _cRRFDBIM, _smi: None},
     (_DBII, _RA, _FN),
     (
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
     ),
 )
 
@@ -1333,7 +1277,10 @@ REMOVE_SOURCE_IDENTIFIER_FROM_SUBSCRIPTION_INPUT: StaticSchema = (
     _RSIFSI,
     {_sSI: _cRSIFSM, _smi: None},
     (_SN, _SI),
-    ((lambda: schemas.STRING, 1), (lambda: schemas.STRING, 1)),
+    (
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+    ),
 )
 
 REMOVE_SOURCE_IDENTIFIER_FROM_SUBSCRIPTION_OUTPUT: StaticSchema = (
@@ -1366,7 +1313,10 @@ REMOVE_TAGS_FROM_RESOURCE_INPUT: StaticSchema = (
     _RTFRI,
     {_sSI: _cRTFRM, _smi: None},
     (_RN, _TK),
-    ((lambda: schemas.STRING, 1), (KEY_LIST, 1)),
+    (
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (KEY_LIST, {_sO: None, _sm: None}),
+    ),
 )
 
 REMOVE_TAGS_FROM_RESOURCE_OUTPUT: StaticSchema = (
@@ -1409,7 +1359,7 @@ RESET_DB_CLUSTER_PARAMETER_GROUP_INPUT: StaticSchema = (
     {_sSI: _cRDBCPGM, _smi: None},
     (_DBCPGN, _RAPe, _Par),
     (
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.PARAMETERS_LIST, 0),
     ),
@@ -1444,7 +1394,7 @@ RESET_DB_PARAMETER_GROUP_INPUT: StaticSchema = (
     {_sSI: _cRDBPGM, _smi: None},
     (_DBPGN, _RAPe, _Par),
     (
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.PARAMETERS_LIST, 0),
     ),
@@ -1523,14 +1473,14 @@ RESTORE_DB_CLUSTER_FROM_S3_INPUT: StaticSchema = (
         (lambda: schemas.INTEGER_OPTIONAL, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.VPC_SECURITY_GROUP_ID_LIST, 0),
         (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.INTEGER_OPTIONAL, 0),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.SENSITIVE_STRING, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 0),
@@ -1539,11 +1489,11 @@ RESTORE_DB_CLUSTER_FROM_S3_INPUT: StaticSchema = (
         (lambda: schemas.BOOLEAN_OPTIONAL, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.BOOLEAN_OPTIONAL, 0),
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.LONG_OPTIONAL, 0),
         (lambda: schemas.LOG_TYPE_LIST, 0),
         (lambda: schemas.BOOLEAN_OPTIONAL, 0),
@@ -1648,9 +1598,9 @@ RESTORE_DB_CLUSTER_FROM_SNAPSHOT_INPUT: StaticSchema = (
     ),
     (
         (lambda: schemas.AVAILABILITY_ZONES, 0),
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.INTEGER_OPTIONAL, 0),
         (lambda: schemas.STRING, 0),

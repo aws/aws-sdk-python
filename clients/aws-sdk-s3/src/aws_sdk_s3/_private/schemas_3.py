@@ -99,6 +99,7 @@ _GBLI = "GetBucketLocationInput"
 _cGBLR = "com.amazonaws.s3#GetBucketLocationRequest"
 _GBLO = "GetBucketLocationOutput"
 _GBL = "GetBucketLocation"
+_aUXO = "aws.customizations#s3UnwrappedXmlOutput"
 _GBLIe = "GetBucketLoggingInput"
 _cGBLRo = "com.amazonaws.s3#GetBucketLoggingRequest"
 _TB = "TargetBucket"
@@ -455,6 +456,7 @@ GET_BUCKET_LOCATION: StaticOperationSchema = (
             {"UseS3ExpressControlEndpoint": MappingProxyType({"value": True})}
         ),
         _smith: MappingProxyType({"method": "GET", "uri": "/?location", "code": 200}),
+        _aUXO: None,
     },
     GET_BUCKET_LOCATION_INPUT,
     GET_BUCKET_LOCATION_OUTPUT,

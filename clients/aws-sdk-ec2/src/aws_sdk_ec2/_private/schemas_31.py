@@ -8,6 +8,7 @@ from . import schemas
 n0 = "com.amazonaws.ec2"
 _aQN = "aws.protocols#ec2QueryName"
 _sN = "smithy.api#xmlName"
+_sV = "smithy.api#enumValue"
 _me = "member"
 _i = "item"
 _Tag = "Tags"
@@ -22,6 +23,7 @@ _oI = "ownerId"
 _TSag = "TagSet"
 _tS = "tagSet"
 _dRr = "dryRun"
+_ex = "expired"
 _Ci = "Cidr"
 _LGI = "LocalGatewayId"
 _lGI = "localGatewayId"
@@ -36,9 +38,9 @@ _IIp = "IpamId"
 _IRDI = "IpamResourceDiscoveryId"
 _IRDAI = "IpamResourceDiscoveryAssociationId"
 _IPpvo = "Ipv6Pool"
-_IGI = "InternetGatewayId"
-_iGI = "internetGatewayId"
 _IIRAI = "IpamInternetRegistryAssociationId"
+_SIn = "SnapshotId"
+_sIn = "snapshotId"
 _oAu = "outpostArn"
 _CTr = "CreateTime"
 _cTr = "createTime"
@@ -64,6 +66,9 @@ _LGRTVIGAI = "LocalGatewayRouteTableVirtualInterfaceGroupAssociationId"
 _LGRTVAI = "LocalGatewayRouteTableVpcAssociationId"
 _LGVII = "LocalGatewayVirtualInterfaceId"
 _LGVIIo = "LocalGatewayVirtualInterfaceIds"
+_SSna = "SnapshotSet"
+_Sn = "Snapshots"
+_sSn = "snapshotSet"
 _Vers = "Versions"
 _Fi = "Filter"
 _Fil = "Filters"
@@ -72,28 +77,6 @@ _MR = "MaxResults"
 _nT = "nextToken"
 _PIoo = "PoolIds"
 _IMR = "IncludeManagedResources"
-_ITILn = "InstanceTypeInfoList"
-_IGIL = "InternetGatewayIdList"
-_DIGMR = "DescribeInternetGatewaysMaxResults"
-_DIGIe = "DescribeInternetGatewaysInput"
-_cDIGRo = "com.amazonaws.ec2#DescribeInternetGatewaysRequest"
-_IGIn = "InternetGatewayIds"
-_IGL = "InternetGatewayList"
-_DIGOe = "DescribeInternetGatewaysOutput"
-_cDIGRom = "com.amazonaws.ec2#DescribeInternetGatewaysResult"
-_IGnt = "InternetGateways"
-_IGSn = "InternetGatewaySet"
-_iGSn = "internetGatewaySet"
-_DIGe = "DescribeInternetGateways"
-_DIBMR = "DescribeIpamByoasnMaxResults"
-_DIBIe = "DescribeIpamByoasnInput"
-_cDIBRom = "com.amazonaws.ec2#DescribeIpamByoasnRequest"
-_BSy = "ByoasnSet"
-_DIBOe = "DescribeIpamByoasnOutput"
-_cDIBRoma = "com.amazonaws.ec2#DescribeIpamByoasnResult"
-_Byo = "Byoasns"
-_bSy = "byoasnSet"
-_DIBe = "DescribeIpamByoasn"
 _DIERVTIe = "DescribeIpamExternalResourceVerificationTokensInput"
 _cDIERVTRom = "com.amazonaws.ec2#DescribeIpamExternalResourceVerificationTokensRequest"
 _IERVTIp = "IpamExternalResourceVerificationTokenIds"
@@ -310,118 +293,34 @@ _cDLGVIRoma = "com.amazonaws.ec2#DescribeLocalGatewayVirtualInterfacesResult"
 _LGVIo = "LocalGatewayVirtualInterfaces"
 _lGVIS = "localGatewayVirtualInterfaceSet"
 _DLGVIe = "DescribeLocalGatewayVirtualInterfaces"
-
-INSTANCE_TYPE_INFO_LIST: StaticSchema = (
-    16,
-    n0,
-    _ITILn,
-    0,
-    (_me,),
-    ((lambda: schemas.INSTANCE_TYPE_INFO, {_sN: _i}),),
-)
-
-INTERNET_GATEWAY_ID_LIST: StaticSchema = (
-    16,
-    n0,
-    _IGIL,
-    0,
-    (_me,),
-    ((lambda: schemas.INTERNET_GATEWAY_ID, {_sN: _i}),),
-)
-
-DESCRIBE_INTERNET_GATEWAYS_MAX_RESULTS: StaticSchema = (7, n0, _DIGMR, 0)
-
-DESCRIBE_INTERNET_GATEWAYS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DIGIe,
-    {_sSI: _cDIGRo, _sm: None},
-    (_NTex, _MR, _DR, _IGIn, _Fil),
-    (
-        (lambda: schemas.STRING, 0),
-        (DESCRIBE_INTERNET_GATEWAYS_MAX_RESULTS, 0),
-        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (INTERNET_GATEWAY_ID_LIST, {_aQN: _IGI, _sN: _iGI}),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-    ),
-)
-
-DESCRIBE_INTERNET_GATEWAYS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DIGOe,
-    {_sSI: _cDIGRom, _smit: None},
-    (_IGnt, _NTex),
-    (
-        (lambda: INTERNET_GATEWAY_LIST, {_aQN: _IGSn, _sN: _iGSn}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_INTERNET_GATEWAYS: StaticOperationSchema = (
-    23,
-    n0,
-    _DIGe,
-    0,
-    DESCRIBE_INTERNET_GATEWAYS_INPUT,
-    DESCRIBE_INTERNET_GATEWAYS_OUTPUT,
-    (),
-)
-
-INTERNET_GATEWAY_LIST: StaticSchema = (
-    16,
-    n0,
-    _IGL,
-    0,
-    (_me,),
-    ((lambda: schemas.INTERNET_GATEWAY, {_sN: _i}),),
-)
-
-DESCRIBE_IPAM_BYOASN_MAX_RESULTS: StaticSchema = (7, n0, _DIBMR, 0)
-
-DESCRIBE_IPAM_BYOASN_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DIBIe,
-    {_sSI: _cDIBRom, _sm: None},
-    (_DR, _MR, _NTex),
-    (
-        (lambda: schemas.BOOLEAN, 0),
-        (DESCRIBE_IPAM_BYOASN_MAX_RESULTS, 0),
-        (lambda: schemas.NEXT_TOKEN, 0),
-    ),
-)
-
-DESCRIBE_IPAM_BYOASN_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DIBOe,
-    {_sSI: _cDIBRoma, _smit: None},
-    (_Byo, _NTex),
-    (
-        (lambda: BYOASN_SET, {_aQN: _BSy, _sN: _bSy}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_IPAM_BYOASN: StaticOperationSchema = (
-    23,
-    n0,
-    _DIBe,
-    0,
-    DESCRIBE_IPAM_BYOASN_INPUT,
-    DESCRIBE_IPAM_BYOASN_OUTPUT,
-    (),
-)
-
-BYOASN_SET: StaticSchema = (
-    16,
-    n0,
-    _BSy,
-    0,
-    (_me,),
-    ((lambda: schemas.BYOASN, {_sN: _i}),),
-)
+_DLSMR = "DescribeLockedSnapshotsMaxResults"
+_DLSI = "DescribeLockedSnapshotsInput"
+_cDLSR = "com.amazonaws.ec2#DescribeLockedSnapshotsRequest"
+_SInap = "SnapshotIds"
+_COPRH = "CoolOffPeriodResponseHours"
+_RPRD = "RetentionPeriodResponseDays"
+_LSoc = "LockState"
+_compli = "compliance"
+_go = "governance"
+_cc___ = "compliance_cooloff"
+_cc____ = "compliance-cooloff"
+_LSI = "LockedSnapshotsInfo"
+_lSoc = "lockState"
+_LDo = "LockDuration"
+_lDo = "lockDuration"
+_COPo = "CoolOffPeriod"
+_cOPo = "coolOffPeriod"
+_COPEO = "CoolOffPeriodExpiresOn"
+_cOPEO = "coolOffPeriodExpiresOn"
+_LCO = "LockCreatedOn"
+_lCO = "lockCreatedOn"
+_LDST = "LockDurationStartTime"
+_lDST = "lockDurationStartTime"
+_LEO = "LockExpiresOn"
+_lEO = "lockExpiresOn"
+_DLSO = "DescribeLockedSnapshotsOutput"
+_cDLSRo = "com.amazonaws.ec2#DescribeLockedSnapshotsResult"
+_DLSe = "DescribeLockedSnapshots"
 
 DESCRIBE_IPAM_EXTERNAL_RESOURCE_VERIFICATION_TOKENS_INPUT: StaticSchema = (
     18,
@@ -1537,10 +1436,7 @@ DESCRIBE_LOCAL_GATEWAY_VIRTUAL_INTERFACES_OUTPUT: StaticSchema = (
     {_sSI: _cDLGVIRoma, _smit: None},
     (_LGVIo, _NTex),
     (
-        (
-            lambda: schemas.LOCAL_GATEWAY_VIRTUAL_INTERFACE_SET,
-            {_aQN: _LGVIS, _sN: _lGVIS},
-        ),
+        (lambda: LOCAL_GATEWAY_VIRTUAL_INTERFACE_SET, {_aQN: _LGVIS, _sN: _lGVIS}),
         (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
     ),
 )
@@ -1553,4 +1449,84 @@ DESCRIBE_LOCAL_GATEWAY_VIRTUAL_INTERFACES: StaticOperationSchema = (
     DESCRIBE_LOCAL_GATEWAY_VIRTUAL_INTERFACES_INPUT,
     DESCRIBE_LOCAL_GATEWAY_VIRTUAL_INTERFACES_OUTPUT,
     (),
+)
+
+LOCAL_GATEWAY_VIRTUAL_INTERFACE_SET: StaticSchema = (
+    16,
+    n0,
+    _LGVIS,
+    0,
+    (_me,),
+    ((lambda: schemas.LOCAL_GATEWAY_VIRTUAL_INTERFACE, {_sN: _i}),),
+)
+
+DESCRIBE_LOCKED_SNAPSHOTS_MAX_RESULTS: StaticSchema = (7, n0, _DLSMR, 0)
+
+DESCRIBE_LOCKED_SNAPSHOTS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DLSI,
+    {_sSI: _cDLSR, _sm: None},
+    (_Fil, _MR, _NTex, _SInap, _DR),
+    (
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+        (DESCRIBE_LOCKED_SNAPSHOTS_MAX_RESULTS, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.SNAPSHOT_ID_STRING_LIST, {_sN: _SIn}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+DESCRIBE_LOCKED_SNAPSHOTS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DLSO,
+    {_sSI: _cDLSRo, _smit: None},
+    (_Sn, _NTex),
+    (
+        (lambda: schemas.LOCKED_SNAPSHOTS_INFO_LIST, {_aQN: _SSna, _sN: _sSn}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+    ),
+)
+
+DESCRIBE_LOCKED_SNAPSHOTS: StaticOperationSchema = (
+    23,
+    n0,
+    _DLSe,
+    0,
+    DESCRIBE_LOCKED_SNAPSHOTS_INPUT,
+    DESCRIBE_LOCKED_SNAPSHOTS_OUTPUT,
+    (),
+)
+
+COOL_OFF_PERIOD_RESPONSE_HOURS: StaticSchema = (7, n0, _COPRH, 0)
+
+RETENTION_PERIOD_RESPONSE_DAYS: StaticSchema = (7, n0, _RPRD, 0)
+
+LOCK_STATE: StaticSchema = (
+    14,
+    n0,
+    _LSoc,
+    0,
+    (_compli, _go, _cc___, _ex),
+    ((-1, {_sV: _compli}), (-1, {_sV: _go}), (-1, {_sV: _cc____}), (-1, {_sV: _ex})),
+)
+
+LOCKED_SNAPSHOTS_INFO: StaticSchema = (
+    18,
+    n0,
+    _LSI,
+    0,
+    (_OIw, _SIn, _LSoc, _LDo, _COPo, _COPEO, _LCO, _LDST, _LEO),
+    (
+        (lambda: schemas.STRING, {_aQN: _OIw, _sN: _oI}),
+        (lambda: schemas.STRING, {_aQN: _SIn, _sN: _sIn}),
+        (LOCK_STATE, {_aQN: _LSoc, _sN: _lSoc}),
+        (RETENTION_PERIOD_RESPONSE_DAYS, {_aQN: _LDo, _sN: _lDo}),
+        (COOL_OFF_PERIOD_RESPONSE_HOURS, {_aQN: _COPo, _sN: _cOPo}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _COPEO, _sN: _cOPEO}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _LCO, _sN: _lCO}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _LDST, _sN: _lDST}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _LEO, _sN: _lEO}),
+    ),
 )

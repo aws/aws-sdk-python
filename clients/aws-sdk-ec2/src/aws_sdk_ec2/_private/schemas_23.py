@@ -18,17 +18,19 @@ _va = "value"
 _Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
+_sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _DR = "DryRun"
 _p = "pending"
 _PI = "PublicIp"
 _AI = "AllocationId"
 _smit = "smithy.api#output"
+_CRI = "CapacityReservationId"
 _R = "Return"
 _r = "return"
+_OI = "OfferingId"
 _av = "available"
 _St = "State"
-_st = "state"
 _TGMDI = "TransitGatewayMulticastDomainId"
 _fa = "failed"
 _tGMDI = "transitGatewayMulticastDomainId"
@@ -45,7 +47,6 @@ _dRr = "dryRun"
 _act = "active"
 _ex = "expired"
 _Ci = "Cidr"
-_ci = "cidr"
 _P = "Protocol"
 _pro = "protocol"
 _N = "Name"
@@ -73,19 +74,8 @@ _NBG = "NetworkBorderGroup"
 _nBG = "networkBorderGroup"
 _Rea = "Reason"
 _rea = "reason"
-_dep = "deprovisioned"
-_fd__ = "failed_deprovision"
-_fd___ = "failed-deprovision"
-_fp__ = "failed_provision"
-_fp___ = "failed-provision"
-_pd__ = "pending_deprovision"
-_pd___ = "pending-deprovision"
-_pp = "pending_provision"
-_pp_ = "pending-provision"
-_prov = "provisioned"
 _PIo = "PoolId"
 _pIo = "poolId"
-_NL = "NetmaskLength"
 _AIl = "AllocationIds"
 _FAILED = "FAILED"
 _ASCI = "ApplicationStatusCheckId"
@@ -94,8 +84,6 @@ _aSCI = "applicationStatusCheckId"
 _ATs = "AssociationType"
 _aTs = "associationType"
 _ACTIVE = "ACTIVE"
-_FR = "FailureReason"
-_fR = "failureReason"
 _IIm = "ImageId"
 _GN = "GroupName"
 _gN = "groupName"
@@ -103,12 +91,12 @@ _BIu = "BundleId"
 _EXPIRED = "EXPIRED"
 _CANCELLED = "CANCELLED"
 _can = "cancelled"
+_CCV = "CurrencyCodeValues"
+_USD = "USD"
 _SIn = "SnapshotId"
 _sIn = "snapshotId"
 _Ag = "Aggregation"
 _agg = "aggregation"
-_LUNIX = "Linux/UNIX"
-_W = "Windows"
 _sch = "scheduled"
 _pp___ = "payment-pending"
 _pf_____ = "payment-failed"
@@ -117,6 +105,8 @@ _uns = "unsupported"
 _unav = "unavailable"
 _RSes = "ReservationState"
 _Val = "Values"
+_CRIS = "CapacityReservationIdSet"
+_CRIa = "CapacityReservationIds"
 _Ins = "Instances"
 _NIIe = "NetworkInterfaceIds"
 _rNe = "regionName"
@@ -129,15 +119,6 @@ _Ow = "Owner"
 _RCe = "ReturnCode"
 _rC = "returnCode"
 _tag = "tag"
-_IPCIp = "IpamPoolCidrId"
-_IPCS = "IpamPoolCidrState"
-_pi_ = "pending_import"
-_pi__ = "pending-import"
-_fi__ = "failed_import"
-_fi___ = "failed-import"
-_IPCpa = "IpamPoolCidr"
-_iPCI = "ipamPoolCidrId"
-_nL = "netmaskLength"
 _DPIPCI = "DeprovisionPublicIpv4PoolCidrInput"
 _cDPIPCR = "com.amazonaws.ec2#DeprovisionPublicIpv4PoolCidrRequest"
 _DASe = "DeprovisionedAddressSet"
@@ -445,8 +426,19 @@ _BCy = "ByoipCidrs"
 _bCS = "byoipCidrSet"
 _DBCe = "DescribeByoipCidrs"
 _DFCMR = "DescribeFutureCapacityMaxResults"
+_DCBEHI = "DescribeCapacityBlockExtensionHistoryInput"
+_cDCBEHR = "com.amazonaws.ec2#DescribeCapacityBlockExtensionHistoryRequest"
+_CBES = "CapacityBlockExtensionStatus"
 _PP = "PAYMENT_PENDING"
 _PF___ = "PAYMENT_FAILED"
+_PS_ = "PAYMENT_SUCCEEDED"
+_ps = "payment-succeeded"
+_CBESa = "CapacityBlockExtensionSet"
+_DCBEHO = "DescribeCapacityBlockExtensionHistoryOutput"
+_cDCBEHRo = "com.amazonaws.ec2#DescribeCapacityBlockExtensionHistoryResult"
+_CBEa = "CapacityBlockExtensions"
+_cBESa = "capacityBlockExtensionSet"
+_DCBEH = "DescribeCapacityBlockExtensionHistory"
 _CPMR = "CoipPoolMaxResults"
 _OSL = "OwnerStringList"
 _SCHEDULED = "SCHEDULED"
@@ -458,49 +450,16 @@ _RHILe = "RequestHostIdList"
 _IMRp = "IpamMaxResults"
 _IPASp = "IpamPoolAllocationSet"
 _IPMR = "Ipv6PoolMaxResults"
-_Flo = "Float"
-_RIPD = "RIProductDescription"
-_LU___ = "Linux_UNIX"
-_LUAV = "Linux_UNIX_Amazon_VPC_"
-_LV_ = "Linux/UNIX (Amazon VPC)"
-_WAV = "Windows_Amazon_VPC_"
-_WV = "Windows (Amazon VPC)"
-_RSMR = "RouteServerMaxResults"
-_TMMR = "TrafficMirroringMaxResults"
 
-IPAM_POOL_CIDR_ID: StaticSchema = (3, n0, _IPCIp, 0)
+CURRENCY_CODE_VALUES: StaticSchema = (14, n0, _CCV, 0, (_USD,), ((-1, {_sV: _USD}),))
 
-IPAM_POOL_CIDR_STATE: StaticSchema = (
-    14,
+CAPACITY_RESERVATION_ID_SET: StaticSchema = (
+    16,
     n0,
-    _IPCS,
+    _CRIS,
     0,
-    (_pp, _prov, _fp__, _pd__, _dep, _fd__, _pi_, _fi__),
-    (
-        (-1, {_sV: _pp_}),
-        (-1, {_sV: _prov}),
-        (-1, {_sV: _fp___}),
-        (-1, {_sV: _pd___}),
-        (-1, {_sV: _dep}),
-        (-1, {_sV: _fd___}),
-        (-1, {_sV: _pi__}),
-        (-1, {_sV: _fi___}),
-    ),
-)
-
-IPAM_POOL_CIDR: StaticSchema = (
-    18,
-    n0,
-    _IPCpa,
-    0,
-    (_Ci, _St, _FR, _IPCIp, _NL),
-    (
-        (lambda: schemas.STRING, {_aQN: _Ci, _sN: _ci}),
-        (IPAM_POOL_CIDR_STATE, {_aQN: _St, _sN: _st}),
-        (lambda: schemas.IPAM_POOL_CIDR_FAILURE_REASON, {_aQN: _FR, _sN: _fR}),
-        (IPAM_POOL_CIDR_ID, {_aQN: _IPCIp, _sN: _iPCI}),
-        (lambda: schemas.INTEGER, {_aQN: _NL, _sN: _nL}),
-    ),
+    (_me,),
+    ((lambda: schemas.CAPACITY_RESERVATION_ID, {_sN: _i}),),
 )
 
 DEPROVISION_PUBLIC_IPV4_POOL_CIDR_INPUT: StaticSchema = (
@@ -511,8 +470,8 @@ DEPROVISION_PUBLIC_IPV4_POOL_CIDR_INPUT: StaticSchema = (
     (_DR, _PIo, _Ci),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPV4_POOL_EC2_ID, 1),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.IPV4_POOL_EC2_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
     ),
 )
 
@@ -554,7 +513,7 @@ DEREGISTER_IMAGE_INPUT: StaticSchema = (
     {_sSI: _cDIRom, _sm: None},
     (_IIm, _DASel, _DR),
     (
-        (lambda: schemas.IMAGE_ID, 1),
+        (lambda: schemas.IMAGE_ID, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
     ),
@@ -642,7 +601,10 @@ DEREGISTER_INSTANCE_EVENT_NOTIFICATION_ATTRIBUTES_INPUT: StaticSchema = (
     _DIENAI,
     {_sSI: _cDIENAR, _sm: None},
     (_DR, _ITA),
-    ((lambda: schemas.BOOLEAN, 0), (DEREGISTER_INSTANCE_TAG_ATTRIBUTE_REQUEST, 1)),
+    (
+        (lambda: schemas.BOOLEAN, 0),
+        (DEREGISTER_INSTANCE_TAG_ATTRIBUTE_REQUEST, {_sO: None, _smi: None}),
+    ),
 )
 
 DEREGISTER_INSTANCE_EVENT_NOTIFICATION_ATTRIBUTES_OUTPUT: StaticSchema = (
@@ -1626,7 +1588,7 @@ DESCRIBE_BYOIP_CIDRS_INPUT: StaticSchema = (
     (_DR, _MR, _NTex),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (DESCRIBE_BYOIP_CIDRS_MAX_RESULTS, 1),
+        (DESCRIBE_BYOIP_CIDRS_MAX_RESULTS, {_sO: None, _smi: None}),
         (NEXT_TOKEN, 0),
     ),
 )
@@ -1663,6 +1625,54 @@ BYOIP_CIDR_SET: StaticSchema = (
 )
 
 DESCRIBE_FUTURE_CAPACITY_MAX_RESULTS: StaticSchema = (7, n0, _DFCMR, 0)
+
+DESCRIBE_CAPACITY_BLOCK_EXTENSION_HISTORY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DCBEHI,
+    {_sSI: _cDCBEHR, _sm: None},
+    (_CRIa, _NTex, _MR, _Fil, _DR),
+    (
+        (CAPACITY_RESERVATION_ID_SET, {_sN: _CRI}),
+        (lambda: schemas.STRING, 0),
+        (DESCRIBE_FUTURE_CAPACITY_MAX_RESULTS, 0),
+        (FILTER_LIST, {_sN: _Fi}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+DESCRIBE_CAPACITY_BLOCK_EXTENSION_HISTORY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DCBEHO,
+    {_sSI: _cDCBEHRo, _smit: None},
+    (_CBEa, _NTex),
+    (
+        (lambda: schemas.CAPACITY_BLOCK_EXTENSION_SET, {_aQN: _CBESa, _sN: _cBESa}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+    ),
+)
+
+DESCRIBE_CAPACITY_BLOCK_EXTENSION_HISTORY: StaticOperationSchema = (
+    23,
+    n0,
+    _DCBEH,
+    0,
+    DESCRIBE_CAPACITY_BLOCK_EXTENSION_HISTORY_INPUT,
+    DESCRIBE_CAPACITY_BLOCK_EXTENSION_HISTORY_OUTPUT,
+    (),
+)
+
+OFFERING_ID: StaticSchema = (3, n0, _OI, 0)
+
+CAPACITY_BLOCK_EXTENSION_STATUS: StaticSchema = (
+    14,
+    n0,
+    _CBES,
+    0,
+    (_PP, _PF___, _PS_),
+    ((-1, {_sV: _pp___}), (-1, {_sV: _pf_____}), (-1, {_sV: _ps})),
+)
 
 COIP_POOL_MAX_RESULTS: StaticSchema = (7, n0, _CPMR, 0)
 
@@ -1729,18 +1739,3 @@ IPAM_POOL_ALLOCATION_SET: StaticSchema = (
 )
 
 IPV6_POOL_MAX_RESULTS: StaticSchema = (7, n0, _IPMR, 0)
-
-FLOAT: StaticSchema = (9, n0, _Flo, 0)
-
-RI_PRODUCT_DESCRIPTION: StaticSchema = (
-    14,
-    n0,
-    _RIPD,
-    0,
-    (_LU___, _LUAV, _W, _WAV),
-    ((-1, {_sV: _LUNIX}), (-1, {_sV: _LV_}), (-1, {_sV: _W}), (-1, {_sV: _WV})),
-)
-
-ROUTE_SERVER_MAX_RESULTS: StaticSchema = (7, n0, _RSMR, 0)
-
-TRAFFIC_MIRRORING_MAX_RESULTS: StaticSchema = (7, n0, _TMMR, 0)

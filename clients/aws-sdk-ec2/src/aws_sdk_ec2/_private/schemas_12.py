@@ -19,6 +19,7 @@ _TS = "TagSpecification"
 _Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
+_sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _TSa = "TagSpecifications"
 _DR = "DryRun"
@@ -29,6 +30,7 @@ _CRI = "CapacityReservationId"
 _St = "State"
 _st = "state"
 _SIu = "SubnetId"
+_sI = "subnetId"
 _C = "Code"
 _co = "code"
 _Me = "Message"
@@ -40,6 +42,7 @@ _nam = "name"
 _AZ = "AvailabilityZone"
 _AZI = "AvailabilityZoneId"
 _NII = "NetworkInterfaceId"
+_nII = "networkInterfaceId"
 _SGI = "SecurityGroupId"
 _NI = "NetworkInterface"
 _SG = "SecurityGroup"
@@ -49,6 +52,7 @@ _IT = "InstanceType"
 _Des = "Description"
 _PIAr = "PrivateIpAddress"
 _pIAr = "privateIpAddress"
+_desc = "description"
 _Af = "Affinity"
 _def = "default"
 _ASS = "AmdSevSnp"
@@ -61,15 +65,18 @@ _IPp = "Ipv6Prefixes"
 _IPpv = "Ipv6Prefix"
 _IAp = "Ipv6Addresses"
 _IAC = "Ipv6AddressCount"
+_iAC = "ipv6AddressCount"
 _IPpvr = "Ipv4Prefixes"
 _IPpvre = "Ipv4Prefix"
 _IPCp = "Ipv4PrefixCount"
 _PIAri = "PrivateIpAddresses"
 _SPIAC = "SecondaryPrivateIpAddressCount"
+_sPIAC = "secondaryPrivateIpAddressCount"
 _iPp = "ipv4Prefix"
 _PIAC = "PrivateIpAddressCount"
 _IIP = "IamInstanceProfile"
 _GIr = "GroupId"
+_no = "none"
 _G = "Groups"
 _IIm = "ImageId"
 _ESUS = "EnaSrdUdpSpecification"
@@ -79,11 +86,14 @@ _ESE = "EnaSrdEnabled"
 _NCI = "NetworkCardIndex"
 _EQC = "EnaQueueCount"
 _DI = "DeviceIndex"
+_dI = "deviceIndex"
+_nCI = "networkCardIndex"
 _ECI = "EbsCardIndex"
 _DOT = "DeleteOnTermination"
 _dOT = "deleteOnTermination"
 _eCI = "ebsCardIndex"
 _GN = "GroupName"
+_op = "open"
 _KKI = "KmsKeyId"
 _En = "Encrypted"
 _enc = "encrypted"
@@ -157,6 +167,8 @@ _Er = "Errors"
 _ESr = "ErrorSet"
 _eSr = "errorSet"
 _CRP = "CapacityReservationPreference"
+_cro_ = "capacity_reservations_only"
+_cro__ = "capacity-reservations-only"
 _LTCRSR = "LaunchTemplateCapacityReservationSpecificationRequest"
 _ASSS = "AmdSevSnpSpecification"
 _NVS = "NestedVirtualizationSpecification"
@@ -323,7 +335,7 @@ _vU = "validUntil"
 _iIB = "instanceInterruptionBehavior"
 _LTIMO = "LaunchTemplateInstanceMarketOptions"
 _mTa = "marketType"
-_sO = "spotOptions"
+_sOp = "spotOptions"
 _LTLC = "LaunchTemplateLicenseConfiguration"
 _lCA = "licenseConfigurationArn"
 _LTLL = "LaunchTemplateLicenseList"
@@ -356,11 +368,49 @@ _IIAL = "InstanceIpv6AddressList"
 _IPSRpvre = "Ipv6PrefixSpecificationResponse"
 _iPpvr = "ipv6Prefix"
 _IPLRpv = "Ipv6PrefixListResponse"
+_LTINIS = "LaunchTemplateInstanceNetworkInterfaceSpecification"
+_aCIA = "associateCarrierIpAddress"
+_aPIA = "associatePublicIpAddress"
+_GS = "GroupSet"
+_gS = "groupSet"
+_iTnt = "interfaceType"
+_IAS = "Ipv6AddressesSet"
+_iAS = "ipv6AddressesSet"
+_PIASr = "PrivateIpAddressesSet"
+_pIAS = "privateIpAddressesSet"
+_IPSpv = "Ipv4PrefixSet"
+_iPS = "ipv4PrefixSet"
+_iPC = "ipv4PrefixCount"
+_IPSpvr = "Ipv6PrefixSet"
+_iPSp = "ipv6PrefixSet"
+_iPCp = "ipv6PrefixCount"
+_pIri = "primaryIpv6"
+_eSS = "enaSrdSpecification"
+_cTSo = "connectionTrackingSpecification"
+_eQC = "enaQueueCount"
 _LTV = "LaunchTemplateVersion"
 _CLTVO = "CreateLaunchTemplateVersionOutput"
 _cCLTVRo = "com.amazonaws.ec2#CreateLaunchTemplateVersionResult"
 _lTV = "launchTemplateVersion"
 _CLTV = "CreateLaunchTemplateVersion"
+
+CAPACITY_RESERVATION_PREFERENCE: StaticSchema = (
+    14,
+    n0,
+    _CRP,
+    0,
+    (_cro_, _op, _no),
+    ((-1, {_sV: _cro__}), (-1, {_sV: _op}), (-1, {_sV: _no})),
+)
+
+CAPACITY_RESERVATION_TARGET: StaticSchema = (
+    18,
+    n0,
+    _CRTap,
+    0,
+    (_CRI, _CRRGAa),
+    ((lambda: schemas.CAPACITY_RESERVATION_ID, 0), (lambda: schemas.STRING, 0)),
+)
 
 LAUNCH_TEMPLATE_CAPACITY_RESERVATION_SPECIFICATION_REQUEST: StaticSchema = (
     18,
@@ -368,10 +418,7 @@ LAUNCH_TEMPLATE_CAPACITY_RESERVATION_SPECIFICATION_REQUEST: StaticSchema = (
     _LTCRSR,
     0,
     (_CRP, _CRTap),
-    (
-        (lambda: schemas.CAPACITY_RESERVATION_PREFERENCE, 0),
-        (lambda: schemas.CAPACITY_RESERVATION_TARGET, 0),
-    ),
+    ((CAPACITY_RESERVATION_PREFERENCE, 0), (CAPACITY_RESERVATION_TARGET, 0)),
 )
 
 AMD_SEV_SNP_SPECIFICATION: StaticSchema = (
@@ -412,7 +459,7 @@ CREDIT_SPECIFICATION_REQUEST: StaticSchema = (
     _CSR,
     0,
     (_CCp,),
-    ((lambda: schemas.STRING, 1),),
+    ((lambda: schemas.STRING, {_sO: None, _smi: None}),),
 )
 
 ELASTIC_GPU_SPECIFICATION: StaticSchema = (
@@ -421,7 +468,7 @@ ELASTIC_GPU_SPECIFICATION: StaticSchema = (
     _EGS,
     0,
     (_Ty,),
-    ((lambda: schemas.STRING, 1),),
+    ((lambda: schemas.STRING, {_sO: None, _smi: None}),),
 )
 
 ELASTIC_GPU_SPECIFICATION_LIST: StaticSchema = (
@@ -442,7 +489,7 @@ LAUNCH_TEMPLATE_ELASTIC_INFERENCE_ACCELERATOR: StaticSchema = (
     0,
     (_Ty, _Cou),
     (
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
         (LAUNCH_TEMPLATE_ELASTIC_INFERENCE_ACCELERATOR_COUNT, 0),
     ),
 )
@@ -1077,9 +1124,9 @@ CREATE_LAUNCH_TEMPLATE_INPUT: StaticSchema = (
     (
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.STRING, 2),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
         (VERSION_DESCRIPTION, 0),
-        (REQUEST_LAUNCH_TEMPLATE_DATA, 1),
+        (REQUEST_LAUNCH_TEMPLATE_DATA, {_sO: None, _smi: None}),
         (lambda: schemas.OPERATOR_REQUEST, 0),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
     ),
@@ -1143,7 +1190,7 @@ CREATE_LAUNCH_TEMPLATE_VERSION_INPUT: StaticSchema = (
         (lambda: schemas.LAUNCH_TEMPLATE_NAME, 0),
         (lambda: schemas.STRING, 0),
         (VERSION_DESCRIPTION, 0),
-        (REQUEST_LAUNCH_TEMPLATE_DATA, 1),
+        (REQUEST_LAUNCH_TEMPLATE_DATA, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, 0),
     ),
 )
@@ -1232,7 +1279,7 @@ LAUNCH_TEMPLATE_CAPACITY_RESERVATION_SPECIFICATION_RESPONSE: StaticSchema = (
     0,
     (_CRP, _CRTap),
     (
-        (lambda: schemas.CAPACITY_RESERVATION_PREFERENCE, {_aQN: _CRP, _sN: _cRP}),
+        (CAPACITY_RESERVATION_PREFERENCE, {_aQN: _CRP, _sN: _cRP}),
         (CAPACITY_RESERVATION_TARGET_RESPONSE, {_aQN: _CRTap, _sN: _cRT}),
     ),
 )
@@ -1352,7 +1399,7 @@ LAUNCH_TEMPLATE_INSTANCE_MARKET_OPTIONS: StaticSchema = (
     (_MTar, _SO),
     (
         (MARKET_TYPE, {_aQN: _MTar, _sN: _mTa}),
-        (LAUNCH_TEMPLATE_SPOT_MARKET_OPTIONS, {_aQN: _SO, _sN: _sO}),
+        (LAUNCH_TEMPLATE_SPOT_MARKET_OPTIONS, {_aQN: _SO, _sN: _sOp}),
     ),
 )
 
@@ -1509,4 +1556,61 @@ IPV6_PREFIX_LIST_RESPONSE: StaticSchema = (
     0,
     (_me,),
     ((IPV6_PREFIX_SPECIFICATION_RESPONSE, {_sN: _i}),),
+)
+
+LAUNCH_TEMPLATE_INSTANCE_NETWORK_INTERFACE_SPECIFICATION: StaticSchema = (
+    18,
+    n0,
+    _LTINIS,
+    0,
+    (
+        _ACIA,
+        _APIAsso,
+        _DOT,
+        _Des,
+        _DI,
+        _G,
+        _ITnte,
+        _IAC,
+        _IAp,
+        _NII,
+        _PIAr,
+        _PIAri,
+        _SPIAC,
+        _SIu,
+        _NCI,
+        _IPpvr,
+        _IPCp,
+        _IPp,
+        _IPC,
+        _PIrim,
+        _ESS,
+        _CTSo,
+        _EQC,
+    ),
+    (
+        (lambda: schemas.BOOLEAN, {_aQN: _ACIA, _sN: _aCIA}),
+        (lambda: schemas.BOOLEAN, {_aQN: _APIAsso, _sN: _aPIA}),
+        (lambda: schemas.BOOLEAN, {_aQN: _DOT, _sN: _dOT}),
+        (lambda: schemas.STRING, {_aQN: _Des, _sN: _desc}),
+        (lambda: schemas.INTEGER, {_aQN: _DI, _sN: _dI}),
+        (lambda: schemas.GROUP_ID_STRING_LIST, {_aQN: _GS, _sN: _gS}),
+        (lambda: schemas.STRING, {_aQN: _ITnte, _sN: _iTnt}),
+        (lambda: schemas.INTEGER, {_aQN: _IAC, _sN: _iAC}),
+        (INSTANCE_IPV6_ADDRESS_LIST, {_aQN: _IAS, _sN: _iAS}),
+        (lambda: schemas.NETWORK_INTERFACE_ID, {_aQN: _NII, _sN: _nII}),
+        (lambda: schemas.STRING, {_aQN: _PIAr, _sN: _pIAr}),
+        (PRIVATE_IP_ADDRESS_SPECIFICATION_LIST, {_aQN: _PIASr, _sN: _pIAS}),
+        (lambda: schemas.INTEGER, {_aQN: _SPIAC, _sN: _sPIAC}),
+        (lambda: schemas.SUBNET_ID, {_aQN: _SIu, _sN: _sI}),
+        (lambda: schemas.INTEGER, {_aQN: _NCI, _sN: _nCI}),
+        (IPV4_PREFIX_LIST_RESPONSE, {_aQN: _IPSpv, _sN: _iPS}),
+        (lambda: schemas.INTEGER, {_aQN: _IPCp, _sN: _iPC}),
+        (IPV6_PREFIX_LIST_RESPONSE, {_aQN: _IPSpvr, _sN: _iPSp}),
+        (lambda: schemas.INTEGER, {_aQN: _IPC, _sN: _iPCp}),
+        (lambda: schemas.BOOLEAN, {_aQN: _PIrim, _sN: _pIri}),
+        (LAUNCH_TEMPLATE_ENA_SRD_SPECIFICATION, {_aQN: _ESS, _sN: _eSS}),
+        (CONNECTION_TRACKING_SPECIFICATION, {_aQN: _CTSo, _sN: _cTSo}),
+        (lambda: schemas.INTEGER, {_aQN: _EQC, _sN: _eQC}),
+    ),
 )

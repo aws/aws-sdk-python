@@ -8,6 +8,7 @@ from . import schemas
 
 
 n0 = "com.amazonaws.rds"
+_sO = "smithy.api#clientOptional"
 _sm = "smithy.api#required"
 _AS = "AllocatedStorage"
 _MAS = "MaxAllocatedStorage"
@@ -289,7 +290,7 @@ RESTORE_DB_CLUSTER_TO_POINT_IN_TIME_INPUT: StaticSchema = (
         _AR,
     ),
     (
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.T_STAMP, 0),
@@ -434,7 +435,7 @@ RESTORE_DB_INSTANCE_FROM_DB_SNAPSHOT_INPUT: StaticSchema = (
         _MUSKKI,
     ),
     (
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.INTEGER_OPTIONAL, 0),
@@ -597,10 +598,10 @@ RESTORE_DB_INSTANCE_FROM_S3_INPUT: StaticSchema = (
     ),
     (
         (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.INTEGER_OPTIONAL, 0),
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.SENSITIVE_STRING, 0),
         (lambda: schemas.DB_SECURITY_GROUP_NAME_LIST, 0),
@@ -628,11 +629,11 @@ RESTORE_DB_INSTANCE_FROM_S3_INPUT: StaticSchema = (
         (lambda: schemas.INTEGER_OPTIONAL, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.BOOLEAN_OPTIONAL, 0),
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.DATABASE_INSIGHTS_MODE, 0),
         (lambda: schemas.BOOLEAN_OPTIONAL, 0),
         (lambda: schemas.STRING, 0),
@@ -773,7 +774,7 @@ RESTORE_DB_INSTANCE_TO_POINT_IN_TIME_INPUT: StaticSchema = (
     ),
     (
         (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.T_STAMP, 0),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.STRING, 0),
@@ -883,7 +884,7 @@ REVOKE_DB_SECURITY_GROUP_INGRESS_INPUT: StaticSchema = (
     {_sSI: _cRDBSGIM, _smi: None},
     (_DBSGN, _CIDRIP, _ECSGN, _ECSGI, _ECSGOI),
     (
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 0),
@@ -921,9 +922,9 @@ START_ACTIVITY_STREAM_INPUT: StaticSchema = (
     {_sSI: _cSASR, _smi: None},
     (_RAes, _Mo, _KKI, _AIp, _ENAFI),
     (
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.ACTIVITY_STREAM_MODE, 1),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.ACTIVITY_STREAM_MODE, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.BOOLEAN_OPTIONAL, 0),
         (lambda: schemas.BOOLEAN_OPTIONAL, 0),
     ),
@@ -968,7 +969,7 @@ START_DB_CLUSTER_INPUT: StaticSchema = (
     _SDBCIt,
     {_sSI: _cSDBCM, _smi: None},
     (_DBCI,),
-    ((lambda: schemas.STRING, 1),),
+    ((lambda: schemas.STRING, {_sO: None, _sm: None}),),
 )
 
 START_DB_CLUSTER_OUTPUT: StaticSchema = (
@@ -1004,7 +1005,7 @@ START_DB_INSTANCE_INPUT: StaticSchema = (
     {_sSI: _cSDBIM, _smi: None},
     (_DBII, _DBCRI),
     (
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.DB_CAPACITY_RESERVATION_IDENTIFIER, 0),
     ),
 )
@@ -1050,7 +1051,7 @@ START_DB_INSTANCE_AUTOMATED_BACKUPS_REPLICATION_INPUT: StaticSchema = (
     {_sSI: _cSDBIABRM, _smi: None},
     (_SDBIA, _BRP, _KKI, _PSU, _Ta),
     (
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.INTEGER_OPTIONAL, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.SENSITIVE_STRING, 0),
@@ -1162,11 +1163,11 @@ START_EXPORT_TASK_INPUT: StaticSchema = (
     {_sSI: _cSETM, _smi: None},
     (_ETI, _SA, _SBN, _IRA, _KKI, _SP, _EO),
     (
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING_LIST, 0),
     ),
@@ -1242,7 +1243,10 @@ STOP_ACTIVITY_STREAM_INPUT: StaticSchema = (
     _SASIt,
     {_sSI: _cSASRom, _smi: None},
     (_RAes, _AIp),
-    ((lambda: schemas.STRING, 1), (lambda: schemas.BOOLEAN_OPTIONAL, 0)),
+    (
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.BOOLEAN_OPTIONAL, 0),
+    ),
 )
 
 STOP_ACTIVITY_STREAM_OUTPUT: StaticSchema = (
@@ -1280,7 +1284,7 @@ STOP_DB_CLUSTER_INPUT: StaticSchema = (
     _SDBCIto,
     {_sSI: _cSDBCMo, _smi: None},
     (_DBCI,),
-    ((lambda: schemas.STRING, 1),),
+    ((lambda: schemas.STRING, {_sO: None, _sm: None}),),
 )
 
 STOP_DB_CLUSTER_OUTPUT: StaticSchema = (
@@ -1314,7 +1318,7 @@ STOP_DB_INSTANCE_INPUT: StaticSchema = (
     {_sSI: _cSDBIMo, _smi: None},
     (_DBII, _DBSIn, _DFDBCR),
     (
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.BOOLEAN_OPTIONAL, 0),
     ),
@@ -1352,7 +1356,7 @@ STOP_DB_INSTANCE_AUTOMATED_BACKUPS_REPLICATION_INPUT: StaticSchema = (
     _SDBIABRIt,
     {_sSI: _cSDBIABRMo, _smi: None},
     (_SDBIA,),
-    ((lambda: schemas.STRING, 1),),
+    ((lambda: schemas.STRING, {_sO: None, _sm: None}),),
 )
 
 STOP_DB_INSTANCE_AUTOMATED_BACKUPS_REPLICATION_OUTPUT: StaticSchema = (
@@ -1385,7 +1389,10 @@ SWITCHOVER_BLUE_GREEN_DEPLOYMENT_INPUT: StaticSchema = (
     _SBGDI,
     {_sSI: _cSBGDR, _smi: None},
     (_BGDI, _STw),
-    ((lambda: schemas.BLUE_GREEN_DEPLOYMENT_IDENTIFIER, 1), (SWITCHOVER_TIMEOUT, 0)),
+    (
+        (lambda: schemas.BLUE_GREEN_DEPLOYMENT_IDENTIFIER, {_sO: None, _sm: None}),
+        (SWITCHOVER_TIMEOUT, 0),
+    ),
 )
 
 SWITCHOVER_BLUE_GREEN_DEPLOYMENT_OUTPUT: StaticSchema = (
@@ -1417,8 +1424,8 @@ SWITCHOVER_GLOBAL_CLUSTER_INPUT: StaticSchema = (
     {_sSI: _cSGCM, _smi: None},
     (_GCI, _TDCI),
     (
-        (lambda: schemas.GLOBAL_CLUSTER_IDENTIFIER, 1),
-        (lambda: schemas.DB_CLUSTER_IDENTIFIER, 1),
+        (lambda: schemas.GLOBAL_CLUSTER_IDENTIFIER, {_sO: None, _sm: None}),
+        (lambda: schemas.DB_CLUSTER_IDENTIFIER, {_sO: None, _sm: None}),
     ),
 )
 
@@ -1452,7 +1459,7 @@ SWITCHOVER_READ_REPLICA_INPUT: StaticSchema = (
     _SRRI,
     {_sSI: _cSRRM, _smi: None},
     (_DBII,),
-    ((lambda: schemas.STRING, 1),),
+    ((lambda: schemas.STRING, {_sO: None, _sm: None}),),
 )
 
 SWITCHOVER_READ_REPLICA_OUTPUT: StaticSchema = (

@@ -21,6 +21,7 @@ _TS = "TagSpecification"
 _Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
+_sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _TSa = "TagSpecifications"
 _DR = "DryRun"
@@ -491,8 +492,8 @@ CREATE_FLOW_LOGS_INPUT: StaticSchema = (
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 0),
-        (lambda: schemas.FLOW_LOG_RESOURCE_IDS, {_sN: _RIe, _smi: None}),
-        (lambda: schemas.FLOW_LOGS_RESOURCE_TYPE, 1),
+        (lambda: schemas.FLOW_LOG_RESOURCE_IDS, {_sN: _RIe, _sO: None, _smi: None}),
+        (lambda: schemas.FLOW_LOGS_RESOURCE_TYPE, {_sO: None, _smi: None}),
         (TRAFFIC_TYPE, 0),
         (lambda: schemas.LOG_DESTINATION_TYPE, 0),
         (lambda: schemas.STRING, 0),
@@ -544,7 +545,7 @@ CREATE_FPGA_IMAGE_INPUT: StaticSchema = (
     (_DR, _ISL, _LSL, _Des, _N, _CTl, _TSa),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (STORAGE_LOCATION, 1),
+        (STORAGE_LOCATION, {_sO: None, _smi: None}),
         (STORAGE_LOCATION, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 0),
@@ -641,8 +642,11 @@ CREATE_IMAGE_INPUT: StaticSchema = (
         (lambda: schemas.SNAPSHOT_LOCATION_ENUM, 0),
         (BOOT_MODE_OVERRIDE_VALUES, 0),
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (lambda: schemas.INSTANCE_ID, {_aQN: _II, _sN: _iI, _smi: None}),
-        (lambda: schemas.IMAGE_NAME_REQUEST, {_aQN: _N, _sN: _nam, _smi: None}),
+        (lambda: schemas.INSTANCE_ID, {_aQN: _II, _sN: _iI, _sO: None, _smi: None}),
+        (
+            lambda: schemas.IMAGE_NAME_REQUEST,
+            {_aQN: _N, _sN: _nam, _sO: None, _smi: None},
+        ),
         (lambda: schemas.IMAGE_DESCRIPTION_REQUEST, {_aQN: _Des, _sN: _desc}),
         (lambda: schemas.BOOLEAN, {_aQN: _NR, _sN: _nR}),
         (BLOCK_DEVICE_MAPPING_REQUEST_LIST, {_aQN: _BDM, _sN: _bDM}),
@@ -741,9 +745,9 @@ CREATE_IMAGE_USAGE_REPORT_INPUT: StaticSchema = (
     {_sSI: _cCIURR, _sm: None},
     (_IIm, _DR, _RTe, _AIcc, _CTl, _TSa),
     (
-        (lambda: schemas.IMAGE_ID, 1),
+        (lambda: schemas.IMAGE_ID, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, 0),
-        (IMAGE_USAGE_RESOURCE_TYPE_REQUEST_LIST, {_sN: _RT, _smi: None}),
+        (IMAGE_USAGE_RESOURCE_TYPE_REQUEST_LIST, {_sN: _RT, _sO: None, _smi: None}),
         (IMAGE_USAGE_REPORT_USER_ID_STRING_LIST, {_sN: _AIcco}),
         (CREATE_IMAGE_USAGE_REPORT_CLIENT_TOKEN, 2),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
@@ -797,7 +801,7 @@ CREATE_INSTANCE_CONNECT_ENDPOINT_INPUT: StaticSchema = (
     (_DR, _SIu, _SGIe, _PCI, _CTl, _TSa, _IAT),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.SUBNET_ID, 1),
+        (lambda: schemas.SUBNET_ID, {_sO: None, _smi: None}),
         (SECURITY_GROUP_ID_STRING_LIST_REQUEST, {_sN: _SGI}),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.STRING, 2),
@@ -1029,9 +1033,12 @@ CREATE_INSTANCE_EXPORT_TASK_INPUT: StaticSchema = (
     (
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
         (lambda: schemas.STRING, {_aQN: _Des, _sN: _desc}),
-        (lambda: schemas.INSTANCE_ID, {_aQN: _II, _sN: _iI, _smi: None}),
-        (EXPORT_ENVIRONMENT, {_aQN: _TEa, _sN: _tEa, _smi: None}),
-        (EXPORT_TO_S3_TASK_SPECIFICATION, {_aQN: _ETS, _sN: _eTS, _smi: None}),
+        (lambda: schemas.INSTANCE_ID, {_aQN: _II, _sN: _iI, _sO: None, _smi: None}),
+        (EXPORT_ENVIRONMENT, {_aQN: _TEa, _sN: _tEa, _sO: None, _smi: None}),
+        (
+            EXPORT_TO_S3_TASK_SPECIFICATION,
+            {_aQN: _ETS, _sN: _eTS, _sO: None, _smi: None},
+        ),
     ),
 )
 
@@ -1144,8 +1151,8 @@ CREATE_INTERRUPTIBLE_CAPACITY_RESERVATION_ALLOCATION_INPUT: StaticSchema = (
     {_sSI: _cCICRAR, _sm: None},
     (_CRI, _IC, _CTl, _DR, _TSa, _ZSP),
     (
-        (lambda: schemas.CAPACITY_RESERVATION_ID, 1),
-        (lambda: schemas.INTEGER, 1),
+        (lambda: schemas.CAPACITY_RESERVATION_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.INTEGER, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 2),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
@@ -1346,7 +1353,7 @@ CREATE_IPAM_EXTERNAL_RESOURCE_VERIFICATION_TOKEN_INPUT: StaticSchema = (
     (_DR, _IIp, _TSa, _CTl),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_ID, 1),
+        (lambda: schemas.IPAM_ID, {_sO: None, _smi: None}),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
         (lambda: schemas.STRING, 2),
     ),
@@ -1442,9 +1449,9 @@ CREATE_IPAM_INTERNET_REGISTRY_ASSOCIATION_INPUT: StaticSchema = (
     (_DR, _IIp, _Ri, _OHr, _Des, _TSa, _CTl),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_ID, 1),
-        (RIR, 1),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.IPAM_ID, {_sO: None, _smi: None}),
+        (RIR, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
         (lambda: schemas.STRING, 2),

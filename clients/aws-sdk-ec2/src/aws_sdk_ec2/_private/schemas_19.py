@@ -17,6 +17,7 @@ _TS = "TagSpecification"
 _Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
+_sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _TSa = "TagSpecifications"
 _DR = "DryRun"
@@ -68,7 +69,6 @@ _VE = "VpcEndpoint"
 _vE = "vpcEndpoint"
 _VC = "VpnConnection"
 _vC = "vpnConnection"
-_Reso = "Resource"
 _PEA = "Phase1EncryptionAlgorithm"
 _PEAh = "Phase2EncryptionAlgorithm"
 _PIA = "Phase1IntegrityAlgorithm"
@@ -104,7 +104,6 @@ _CGIu = "CustomerGatewayId"
 _ty = "type"
 _IAT = "IpAddressType"
 _NIIS = "NetworkInterfaceIdSet"
-_Ip = "Ipv4"
 _NIIe = "NetworkInterfaceIds"
 _nIIS = "networkInterfaceIdSet"
 _iAT = "ipAddressType"
@@ -129,25 +128,16 @@ _CTrea = "CreationTimestamp"
 _cTre = "creationTimestamp"
 _DRIT = "DnsRecordIpType"
 _PDSDS = "PrivateDnsSpecifiedDomainSet"
-_DOS = "DnsOptionsSpecification"
 _PDOFIRE = "PrivateDnsOnlyForInboundResolverEndpoint"
 _PDP = "PrivateDnsPreference"
 _PDSD = "PrivateDnsSpecifiedDomains"
-_PDSDr = "PrivateDnsSpecifiedDomain"
 _RCA = "ResourceConfigurationArn"
-_VERTIL = "VpcEndpointRouteTableIdList"
-_VESGIL = "VpcEndpointSecurityGroupIdList"
 _SNAe = "ServiceNetworkArn"
 _SCu = "SubnetConfiguration"
-_Ipv = "Ipv6"
-_SCL = "SubnetConfigurationsList"
-_VESIL = "VpcEndpointSubnetIdList"
 _VET = "VpcEndpointType"
 _Inter = "Interface"
 _Ga = "Gateway"
 _GLB = "GatewayLoadBalancer"
-_SNer = "ServiceNetwork"
-_Tu = "Tunnel"
 _CVEIr = "CreateVpcEndpointInput"
 _cCVER = "com.amazonaws.ec2#CreateVpcEndpointRequest"
 _RTIou = "RouteTableIds"
@@ -392,92 +382,44 @@ _PEALVh = "Phase2EncryptionAlgorithmsListValue"
 _PEALh = "Phase2EncryptionAlgorithmsList"
 _PIALVh = "Phase2IntegrityAlgorithmsListValue"
 _PIALh = "Phase2IntegrityAlgorithmsList"
+_TOu = "TunnelOption"
+_OIA = "OutsideIpAddress"
+_oIA = "outsideIpAddress"
+_tICu = "tunnelInsideCidr"
+_tIIC = "tunnelInsideIpv6Cidr"
+_pLS = "phase1LifetimeSeconds"
+_pLSh = "phase2LifetimeSeconds"
+_rMTS = "rekeyMarginTimeSeconds"
+_rFP = "rekeyFuzzPercentage"
+_rWS = "replayWindowSize"
+_DTS = "DpdTimeoutSeconds"
+_dTS = "dpdTimeoutSeconds"
+_DTA = "DpdTimeoutAction"
+_dTA = "dpdTimeoutAction"
+_PEAS = "Phase1EncryptionAlgorithmSet"
+_pEAS = "phase1EncryptionAlgorithmSet"
+_PEASh = "Phase2EncryptionAlgorithmSet"
+_pEASh = "phase2EncryptionAlgorithmSet"
+_PIASh = "Phase1IntegrityAlgorithmSet"
+_pIASh = "phase1IntegrityAlgorithmSet"
+_PIASha = "Phase2IntegrityAlgorithmSet"
+_pIASha = "phase2IntegrityAlgorithmSet"
+_PDHGNS = "Phase1DHGroupNumberSet"
+_pDHGNS = "phase1DHGroupNumberSet"
+_PDHGNSh = "Phase2DHGroupNumberSet"
+_pDHGNSh = "phase2DHGroupNumberSet"
+_IVk = "IkeVersions"
+_IVS = "IkeVersionSet"
+_iVS = "ikeVersionSet"
+_sAt = "startupAction"
+_lO = "logOptions"
+_eTLC = "enableTunnelLifecycleControl"
+_TOL = "TunnelOptionsList"
 _CVCOr = "CreateVpnConnectionOutput"
 _cCVCRoma = "com.amazonaws.ec2#CreateVpnConnectionResult"
 _CVCr = "CreateVpnConnection"
 
-DNS_OPTIONS_SPECIFICATION: StaticSchema = (
-    18,
-    n0,
-    _DOS,
-    0,
-    (_DRIT, _PDOFIRE, _PDP, _PDSD),
-    (
-        (lambda: schemas.DNS_RECORD_IP_TYPE, 0),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.PRIVATE_DNS_SPECIFIED_DOMAIN_SET, {_sN: _PDSDr}),
-    ),
-)
-
-RESOURCE_CONFIGURATION_ARN: StaticSchema = (3, n0, _RCA, 0)
-
-VPC_ENDPOINT_ROUTE_TABLE_ID_LIST: StaticSchema = (
-    16,
-    n0,
-    _VERTIL,
-    0,
-    (_me,),
-    ((lambda: schemas.ROUTE_TABLE_ID, {_sN: _i}),),
-)
-
-VPC_ENDPOINT_SECURITY_GROUP_ID_LIST: StaticSchema = (
-    16,
-    n0,
-    _VESGIL,
-    0,
-    (_me,),
-    ((lambda: schemas.SECURITY_GROUP_ID, {_sN: _i}),),
-)
-
 SERVICE_NETWORK_ARN: StaticSchema = (3, n0, _SNAe, 0)
-
-SUBNET_CONFIGURATION: StaticSchema = (
-    18,
-    n0,
-    _SCu,
-    0,
-    (_SIu, _Ip, _Ipv),
-    (
-        (lambda: schemas.SUBNET_ID, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-    ),
-)
-
-SUBNET_CONFIGURATIONS_LIST: StaticSchema = (
-    16,
-    n0,
-    _SCL,
-    0,
-    (_me,),
-    ((SUBNET_CONFIGURATION, {_sN: _i}),),
-)
-
-VPC_ENDPOINT_SUBNET_ID_LIST: StaticSchema = (
-    16,
-    n0,
-    _VESIL,
-    0,
-    (_me,),
-    ((lambda: schemas.SUBNET_ID, {_sN: _i}),),
-)
-
-VPC_ENDPOINT_TYPE: StaticSchema = (
-    14,
-    n0,
-    _VET,
-    0,
-    (_Inter, _Ga, _GLB, _Reso, _SNer, _Tu),
-    (
-        (-1, {_sV: _Inter}),
-        (-1, {_sV: _Ga}),
-        (-1, {_sV: _GLB}),
-        (-1, {_sV: _Reso}),
-        (-1, {_sV: _SNer}),
-        (-1, {_sV: _Tu}),
-    ),
-)
 
 CREATE_VPC_ENDPOINT_INPUT: StaticSchema = (
     18,
@@ -505,21 +447,21 @@ CREATE_VPC_ENDPOINT_INPUT: StaticSchema = (
     ),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (VPC_ENDPOINT_TYPE, 0),
-        (lambda: schemas.VPC_ID, 1),
+        (lambda: schemas.VPC_ENDPOINT_TYPE, 0),
+        (lambda: schemas.VPC_ID, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 0),
-        (VPC_ENDPOINT_ROUTE_TABLE_ID_LIST, {_sN: _RTIo}),
-        (VPC_ENDPOINT_SUBNET_ID_LIST, {_sN: _SIu}),
-        (VPC_ENDPOINT_SECURITY_GROUP_ID_LIST, {_sN: _SGI}),
+        (lambda: schemas.VPC_ENDPOINT_ROUTE_TABLE_ID_LIST, {_sN: _RTIo}),
+        (lambda: schemas.VPC_ENDPOINT_SUBNET_ID_LIST, {_sN: _SIu}),
+        (lambda: schemas.VPC_ENDPOINT_SECURITY_GROUP_ID_LIST, {_sN: _SGI}),
         (lambda: schemas.IP_ADDRESS_TYPE, 0),
-        (DNS_OPTIONS_SPECIFICATION, 0),
+        (lambda: schemas.DNS_OPTIONS_SPECIFICATION, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
-        (SUBNET_CONFIGURATIONS_LIST, {_sN: _SCu}),
+        (lambda: schemas.SUBNET_CONFIGURATIONS_LIST, {_sN: _SCu}),
         (SERVICE_NETWORK_ARN, 0),
-        (RESOURCE_CONFIGURATION_ARN, 0),
+        (lambda: schemas.RESOURCE_CONFIGURATION_ARN, 0),
         (lambda: schemas.STRING, 0),
     ),
 )
@@ -721,7 +663,7 @@ VPC_ENDPOINT: StaticSchema = (
     ),
     (
         (lambda: schemas.STRING, {_aQN: _VEI, _sN: _vEI}),
-        (VPC_ENDPOINT_TYPE, {_aQN: _VET, _sN: _vET}),
+        (lambda: schemas.VPC_ENDPOINT_TYPE, {_aQN: _VET, _sN: _vET}),
         (lambda: schemas.STRING, {_aQN: _VI, _sN: _vI}),
         (lambda: schemas.STRING, {_aQN: _SN, _sN: _sNe}),
         (STATE, {_aQN: _St, _sN: _st}),
@@ -743,7 +685,7 @@ VPC_ENDPOINT: StaticSchema = (
         (SUBNET_IP_PREFIXES_LIST, {_aQN: _IPSpvr, _sN: _iPSp}),
         (lambda: schemas.STRING, {_aQN: _FR, _sN: _fR}),
         (SERVICE_NETWORK_ARN, {_aQN: _SNAe, _sN: _sNAe}),
-        (RESOURCE_CONFIGURATION_ARN, {_aQN: _RCA, _sN: _rCA}),
+        (lambda: schemas.RESOURCE_CONFIGURATION_ARN, {_aQN: _RCA, _sN: _rCA}),
         (lambda: schemas.STRING, {_aQN: _SRe, _sN: _sRe}),
         (PAYER_RESPONSIBILITY_SET, {_aQN: _PRSay, _sN: _pRSa}),
     ),
@@ -759,8 +701,8 @@ CREATE_VPC_ENDPOINT_CONNECTION_NOTIFICATION_INPUT: StaticSchema = (
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.VPC_ENDPOINT_SERVICE_ID, 0),
         (lambda: schemas.VPC_ENDPOINT_ID, 0),
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.VALUE_STRING_LIST, 1),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
+        (lambda: schemas.VALUE_STRING_LIST, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
     ),
 )
@@ -1027,7 +969,7 @@ CREATE_VPC_PEERING_CONNECTION_INPUT: StaticSchema = (
         (lambda: schemas.STRING, 0),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (lambda: schemas.VPC_ID, {_aQN: _VI, _sN: _vI, _smi: None}),
+        (lambda: schemas.VPC_ID, {_aQN: _VI, _sN: _vI, _sO: None, _smi: None}),
         (lambda: schemas.STRING, {_aQN: _PVI, _sN: _pVI}),
         (lambda: schemas.STRING, {_aQN: _POI, _sN: _pOI}),
     ),
@@ -1068,7 +1010,7 @@ CREATE_VPN_CONCENTRATOR_INPUT: StaticSchema = (
     {_sSI: _cCVCR, _sm: None},
     (_Ty, _TGI, _TSa, _DR),
     (
-        (VPN_CONCENTRATOR_TYPE, 1),
+        (VPN_CONCENTRATOR_TYPE, {_sO: None, _smi: None}),
         (lambda: schemas.TRANSIT_GATEWAY_ID, 0),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
         (lambda: schemas.BOOLEAN, 0),
@@ -1373,8 +1315,8 @@ CREATE_VPN_CONNECTION_INPUT: StaticSchema = (
     {_sSI: _cCVCRom, _sm: None},
     (_CGIu, _Ty, _VGI, _TGI, _VCI, _TSa, _PSKS, _DR, _O),
     (
-        (lambda: schemas.CUSTOMER_GATEWAY_ID, 1),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.CUSTOMER_GATEWAY_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
         (lambda: schemas.VPN_GATEWAY_ID, 0),
         (lambda: schemas.TRANSIT_GATEWAY_ID, 0),
         (VPN_CONCENTRATOR_ID, 0),
@@ -1564,4 +1506,66 @@ PHASE2_INTEGRITY_ALGORITHMS_LIST: StaticSchema = (
     0,
     (_me,),
     ((PHASE2_INTEGRITY_ALGORITHMS_LIST_VALUE, {_sN: _i}),),
+)
+
+TUNNEL_OPTION: StaticSchema = (
+    18,
+    n0,
+    _TOu,
+    0,
+    (
+        _OIA,
+        _TICu,
+        _TIIC,
+        _PSK,
+        _PLSh,
+        _PLSha,
+        _RMTS,
+        _RFP,
+        _RWS,
+        _DTS,
+        _DTA,
+        _PEAha,
+        _PEAhas,
+        _PIAha,
+        _PIAhas,
+        _PDHGN,
+        _PDHGNha,
+        _IVk,
+        _SAt,
+        _LO,
+        _ETLC,
+    ),
+    (
+        (lambda: schemas.STRING, {_aQN: _OIA, _sN: _oIA}),
+        (lambda: schemas.STRING, {_aQN: _TICu, _sN: _tICu}),
+        (lambda: schemas.STRING, {_aQN: _TIIC, _sN: _tIIC}),
+        (PRE_SHARED_KEY, {_aQN: _PSK, _sN: _pSK}),
+        (lambda: schemas.INTEGER, {_aQN: _PLSh, _sN: _pLS}),
+        (lambda: schemas.INTEGER, {_aQN: _PLSha, _sN: _pLSh}),
+        (lambda: schemas.INTEGER, {_aQN: _RMTS, _sN: _rMTS}),
+        (lambda: schemas.INTEGER, {_aQN: _RFP, _sN: _rFP}),
+        (lambda: schemas.INTEGER, {_aQN: _RWS, _sN: _rWS}),
+        (lambda: schemas.INTEGER, {_aQN: _DTS, _sN: _dTS}),
+        (lambda: schemas.STRING, {_aQN: _DTA, _sN: _dTA}),
+        (PHASE1_ENCRYPTION_ALGORITHMS_LIST, {_aQN: _PEAS, _sN: _pEAS}),
+        (PHASE2_ENCRYPTION_ALGORITHMS_LIST, {_aQN: _PEASh, _sN: _pEASh}),
+        (PHASE1_INTEGRITY_ALGORITHMS_LIST, {_aQN: _PIASh, _sN: _pIASh}),
+        (PHASE2_INTEGRITY_ALGORITHMS_LIST, {_aQN: _PIASha, _sN: _pIASha}),
+        (PHASE1_DH_GROUP_NUMBERS_LIST, {_aQN: _PDHGNS, _sN: _pDHGNS}),
+        (PHASE2_DH_GROUP_NUMBERS_LIST, {_aQN: _PDHGNSh, _sN: _pDHGNSh}),
+        (IKE_VERSIONS_LIST, {_aQN: _IVS, _sN: _iVS}),
+        (lambda: schemas.STRING, {_aQN: _SAt, _sN: _sAt}),
+        (VPN_TUNNEL_LOG_OPTIONS, {_aQN: _LO, _sN: _lO}),
+        (lambda: schemas.BOOLEAN, {_aQN: _ETLC, _sN: _eTLC}),
+    ),
+)
+
+TUNNEL_OPTIONS_LIST: StaticSchema = (
+    16,
+    n0,
+    _TOL,
+    0,
+    (_me,),
+    ((TUNNEL_OPTION, {_sN: _i}),),
 )

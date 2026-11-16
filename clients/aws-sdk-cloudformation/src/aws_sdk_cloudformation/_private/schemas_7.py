@@ -21,6 +21,7 @@ _sE = "smithy.api#httpError"
 _aQE = "aws.protocols#awsQueryError"
 _M = "Message"
 _LC = "LoggingConfig"
+_sO = "smithy.api#clientOptional"
 _smit = "smithy.api#required"
 _PI = "PublisherId"
 _TN = "TypeName"
@@ -491,8 +492,8 @@ RECORD_HANDLER_PROGRESS_INPUT: StaticSchema = (
     {_s: None},
     (_BT, _OS, _COS, _SM, _EC, _RMeso, _CRT),
     (
-        (lambda: schemas.CLIENT_TOKEN, 1),
-        (OPERATION_STATUS, 1),
+        (lambda: schemas.CLIENT_TOKEN, {_sO: None, _smit: None}),
+        (OPERATION_STATUS, {_sO: None, _smit: None}),
         (OPERATION_STATUS, 0),
         (STATUS_MESSAGE, 0),
         (HANDLER_ERROR_CODE, 0),
@@ -555,8 +556,8 @@ REGISTER_TYPE_INPUT: StaticSchema = (
     (_T, _TN, _SHP, _LC, _ERA, _CRT),
     (
         (lambda: schemas.REGISTRY_TYPE, 0),
-        (lambda: schemas.TYPE_NAME, 1),
-        (S3_URL, 1),
+        (lambda: schemas.TYPE_NAME, {_sO: None, _smit: None}),
+        (S3_URL, {_sO: None, _smit: None}),
         (lambda: schemas.LOGGING_CONFIG, 0),
         (lambda: schemas.ROLE_ARN2, 0),
         (REQUEST_TOKEN, 0),
@@ -588,7 +589,7 @@ REMOVE_ALIAS_INPUT: StaticSchema = (
     _RAI,
     {_s: None},
     (_AN,),
-    ((lambda: schemas.ALIAS_NAME, 1),),
+    ((lambda: schemas.ALIAS_NAME, {_sO: None, _smit: None}),),
 )
 
 REMOVE_ALIAS_OUTPUT: StaticSchema = (18, n0, _RAO, {_sSI: _sU, _sm: None})
@@ -610,7 +611,7 @@ ROLLBACK_STACK_INPUT: StaticSchema = (
     {_s: None},
     (_SN, _RARNo, _CRT, _REOC, _DCe),
     (
-        (lambda: schemas.STACK_NAME_OR_ID, 1),
+        (lambda: schemas.STACK_NAME_OR_ID, {_sO: None, _smit: None}),
         (lambda: schemas.ROLE_ARN, 0),
         (lambda: schemas.CLIENT_REQUEST_TOKEN, 0),
         (lambda: schemas.RETAIN_EXCEPT_ON_CREATE, 0),
@@ -643,7 +644,10 @@ SET_ALIAS_INPUT: StaticSchema = (
     _SAI,
     {_s: None},
     (_SN, _AN),
-    ((lambda: schemas.STACK_NAME, 1), (lambda: schemas.ALIAS_NAME, 1)),
+    (
+        (lambda: schemas.STACK_NAME, {_sO: None, _smit: None}),
+        (lambda: schemas.ALIAS_NAME, {_sO: None, _smit: None}),
+    ),
 )
 
 SET_ALIAS_OUTPUT: StaticSchema = (18, n0, _SAO, {_sSI: _sU, _sm: None})
@@ -668,7 +672,7 @@ SET_STACK_POLICY_INPUT: StaticSchema = (
     {_s: None},
     (_SN, _SPB, _SPURL),
     (
-        (lambda: schemas.STACK_NAME, 1),
+        (lambda: schemas.STACK_NAME, {_sO: None, _smit: None}),
         (lambda: schemas.STACK_POLICY_BODY, 0),
         (lambda: schemas.STACK_POLICY_URL, 0),
     ),
@@ -694,7 +698,7 @@ SET_TYPE_CONFIGURATION_INPUT: StaticSchema = (
     (_TA, _C, _CAon, _TN, _T),
     (
         (lambda: schemas.TYPE_ARN, 0),
-        (lambda: schemas.TYPE_CONFIGURATION, 1),
+        (lambda: schemas.TYPE_CONFIGURATION, {_sO: None, _smit: None}),
         (lambda: schemas.TYPE_CONFIGURATION_ALIAS, 0),
         (lambda: schemas.TYPE_NAME, 0),
         (lambda: schemas.THIRD_PARTY_TYPE, 0),
@@ -764,10 +768,10 @@ SIGNAL_RESOURCE_INPUT: StaticSchema = (
     {_s: None},
     (_SN, _LRI, _UI, _S),
     (
-        (lambda: schemas.STACK_NAME_OR_ID, 1),
-        (lambda: schemas.LOGICAL_RESOURCE_ID, 1),
-        (RESOURCE_SIGNAL_UNIQUE_ID, 1),
-        (RESOURCE_SIGNAL_STATUS, 1),
+        (lambda: schemas.STACK_NAME_OR_ID, {_sO: None, _smit: None}),
+        (lambda: schemas.LOGICAL_RESOURCE_ID, {_sO: None, _smit: None}),
+        (RESOURCE_SIGNAL_UNIQUE_ID, {_sO: None, _smit: None}),
+        (RESOURCE_SIGNAL_STATUS, {_sO: None, _smit: None}),
     ),
 )
 
@@ -836,8 +840,8 @@ STOP_STACK_SET_OPERATION_INPUT: StaticSchema = (
     {_s: None},
     (_SSN, _OI, _CA),
     (
-        (lambda: schemas.STACK_SET_NAME, 1),
-        (lambda: schemas.CLIENT_REQUEST_TOKEN, 1),
+        (lambda: schemas.STACK_SET_NAME, {_sO: None, _smit: None}),
+        (lambda: schemas.CLIENT_REQUEST_TOKEN, {_sO: None, _smit: None}),
         (lambda: schemas.CALL_AS, 0),
     ),
 )
@@ -912,7 +916,7 @@ UPDATE_GENERATED_TEMPLATE_INPUT: StaticSchema = (
     {_s: None},
     (_GTN, _NGTN, _AR, _RRem, _RARe, _TCe),
     (
-        (lambda: schemas.GENERATED_TEMPLATE_NAME, 1),
+        (lambda: schemas.GENERATED_TEMPLATE_NAME, {_sO: None, _smit: None}),
         (lambda: schemas.GENERATED_TEMPLATE_NAME, 0),
         (lambda: schemas.RESOURCE_DEFINITIONS, 0),
         (JAZZ_LOGICAL_RESOURCE_IDS, 0),
@@ -976,7 +980,7 @@ UPDATE_STACK_INPUT: StaticSchema = (
         _DV,
     ),
     (
-        (lambda: schemas.STACK_NAME, 1),
+        (lambda: schemas.STACK_NAME, {_sO: None, _smit: None}),
         (lambda: schemas.TEMPLATE_BODY, 0),
         (lambda: schemas.TEMPLATE_URL, 0),
         (lambda: schemas.USE_PREVIOUS_TEMPLATE, 0),
@@ -1028,10 +1032,10 @@ UPDATE_STACK_INSTANCES_INPUT: StaticSchema = (
     {_s: None},
     (_SSN, _Acc, _DT, _Regi, _PO, _OP, _OI, _CA),
     (
-        (lambda: schemas.STACK_SET_NAME_OR_ID, 1),
+        (lambda: schemas.STACK_SET_NAME_OR_ID, {_sO: None, _smit: None}),
         (lambda: schemas.ACCOUNT_LIST, 0),
         (lambda: schemas.DEPLOYMENT_TARGETS, 0),
-        (lambda: schemas.REGION_LIST, 1),
+        (lambda: schemas.REGION_LIST, {_sO: None, _smit: None}),
         (lambda: schemas.PARAMETERS, 0),
         (lambda: schemas.STACK_SET_OPERATION_PREFERENCES, 0),
         (lambda: schemas.CLIENT_REQUEST_TOKEN, 2),
@@ -1092,7 +1096,7 @@ UPDATE_STACK_SET_INPUT: StaticSchema = (
         _ME,
     ),
     (
-        (lambda: schemas.STACK_SET_NAME, 1),
+        (lambda: schemas.STACK_SET_NAME, {_sO: None, _smit: None}),
         (lambda: schemas.DESCRIPTION, 0),
         (lambda: schemas.TEMPLATE_BODY, 0),
         (lambda: schemas.TEMPLATE_URL, 0),
@@ -1147,8 +1151,8 @@ UPDATE_TERMINATION_PROTECTION_INPUT: StaticSchema = (
     {_s: None},
     (_ETP, _SN),
     (
-        (lambda: schemas.ENABLE_TERMINATION_PROTECTION, 1),
-        (lambda: schemas.STACK_NAME_OR_ID, 1),
+        (lambda: schemas.ENABLE_TERMINATION_PROTECTION, {_sO: None, _smit: None}),
+        (lambda: schemas.STACK_NAME_OR_ID, {_sO: None, _smit: None}),
     ),
 )
 

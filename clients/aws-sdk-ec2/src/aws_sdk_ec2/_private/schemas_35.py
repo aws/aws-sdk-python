@@ -22,6 +22,7 @@ _rT = "resourceType"
 _Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
+_sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _TSa = "TagSpecifications"
 _DR = "DryRun"
@@ -46,7 +47,6 @@ _TSag = "TagSet"
 _tS = "tagSet"
 _VI = "VpcId"
 _vI = "vpcId"
-_er = "error"
 _dRr = "dryRun"
 _act = "active"
 _Ar = "Arn"
@@ -70,9 +70,7 @@ _IT = "InstanceType"
 _iT = "instanceType"
 _SIRI = "SpotInstanceRequestId"
 _sIRI = "spotInstanceRequestId"
-_AIS = "ActiveInstanceSet"
 _ASc = "ActivityStatus"
-_ERROR = "ERROR"
 _Des = "Description"
 _PIAr = "PrivateIpAddress"
 _pIAr = "privateIpAddress"
@@ -133,7 +131,6 @@ _uT = "updateTime"
 _can = "cancelled"
 _cl = "closed"
 _SFRI = "SpotFleetRequestId"
-_SFRIp = "SpotFleetRequestIds"
 _sFRI = "spotFleetRequestId"
 _SIRIp = "SpotInstanceRequestIds"
 _op = "open"
@@ -142,6 +139,8 @@ _sIRS = "spotInstanceRequestSet"
 _iIm = "imageId"
 _CTr = "CreateTime"
 _cTr = "createTime"
+_LUNIX = "Linux/UNIX"
+_W = "Windows"
 _Ten = "Tenancy"
 _EO = "EbsOptimized"
 _DEFAULT = "DEFAULT"
@@ -220,29 +219,19 @@ _TSS = "TagSpecificationSet"
 _tSS = "tagSpecificationSet"
 _Fa = "Fault"
 _fau = "fault"
+_TMFRI = "TrafficMirrorFilterRuleId"
+_TMFI = "TrafficMirrorFilterId"
+_TMSI = "TrafficMirrorSessionId"
 _tag = "tag"
 _Fi = "Filter"
 _Fil = "Filters"
 _NTex = "NextToken"
 _MR = "MaxResults"
 _nT = "nextToken"
-_infor = "information"
 _mR = "maxResults"
 _ETnd = "EndTime"
 _eTnd = "endTime"
 _IIma = "ImageIds"
-_IC__ = "INSTANCE_CHANGE"
-_ETv = "EventType"
-_EIv = "EventInformation"
-_eIv = "eventInformation"
-_eTv = "eventType"
-_HRS = "HistoryRecordSet"
-_HRi = "HistoryRecords"
-_hRS = "historyRecordSet"
-_LET = "LastEvaluatedTime"
-_lET = "lastEvaluatedTime"
-_AIct = "ActiveInstances"
-_aIS = "activeInstanceSet"
 _rSepl = "replacementStrategy"
 _tDe = "terminationDelay"
 _cRap = "capacityRebalance"
@@ -258,26 +247,14 @@ _rUI = "replaceUnhealthyInstances"
 _cont = "context"
 _ITnsta = "InstanceTypes"
 _rIa = "ramdiskId"
+_RIPD = "RIProductDescription"
+_LU___ = "Linux_UNIX"
+_LUAV = "Linux_UNIX_Amazon_VPC_"
+_LV_ = "Linux/UNIX (Amazon VPC)"
+_WAV = "Windows_Amazon_VPC_"
+_WV = "Windows (Amazon VPC)"
 _PDr = "ProductDescription"
 _pDr = "productDescription"
-_DSFII = "DescribeSpotFleetInstancesInput"
-_cDSFIR = "com.amazonaws.ec2#DescribeSpotFleetInstancesRequest"
-_DSFIO = "DescribeSpotFleetInstancesOutput"
-_cDSFIRo = "com.amazonaws.ec2#DescribeSpotFleetInstancesResponse"
-_DSFI = "DescribeSpotFleetInstances"
-_iCns = "instanceChange"
-_BC_ = "BATCH_CHANGE"
-_fRC = "fleetRequestChange"
-_INFORMATION = "INFORMATION"
-_DSFRHMR = "DescribeSpotFleetRequestHistoryMaxResults"
-_DSFRHI = "DescribeSpotFleetRequestHistoryInput"
-_cDSFRHR = "com.amazonaws.ec2#DescribeSpotFleetRequestHistoryRequest"
-_HRis = "HistoryRecord"
-_DSFRHO = "DescribeSpotFleetRequestHistoryOutput"
-_cDSFRHRo = "com.amazonaws.ec2#DescribeSpotFleetRequestHistoryResponse"
-_DSFRH = "DescribeSpotFleetRequestHistory"
-_DSFRI = "DescribeSpotFleetRequestsInput"
-_cDSFRR = "com.amazonaws.ec2#DescribeSpotFleetRequestsRequest"
 _nTo = "noTermination"
 _SFM = "SpotFleetMonitoring"
 _INISL = "InstanceNetworkInterfaceSpecificationList"
@@ -329,11 +306,6 @@ _sFRC = "spotFleetRequestConfig"
 _SFRSp = "SpotFleetRequestState"
 _sFRSp = "spotFleetRequestState"
 _SFRCS = "SpotFleetRequestConfigSet"
-_DSFRO = "DescribeSpotFleetRequestsOutput"
-_cDSFRRo = "com.amazonaws.ec2#DescribeSpotFleetRequestsResponse"
-_SFRCp = "SpotFleetRequestConfigs"
-_sFRCS = "spotFleetRequestConfigSet"
-_DSFR = "DescribeSpotFleetRequests"
 _DSIRI = "DescribeSpotInstanceRequestsInput"
 _cDSIRR = "com.amazonaws.ec2#DescribeSpotInstanceRequestsRequest"
 _RIME = "RunInstancesMonitoringEnabled"
@@ -427,158 +399,46 @@ _TDL = "TagDescriptionList"
 _DTOe = "DescribeTagsOutput"
 _cDTRom = "com.amazonaws.ec2#DescribeTagsResult"
 _DTes = "DescribeTags"
+_TMMR = "TrafficMirroringMaxResults"
 _TMFRIL = "TrafficMirrorFilterRuleIdList"
+_DTMFRIe = "DescribeTrafficMirrorFilterRulesInput"
+_cDTMFRRom = "com.amazonaws.ec2#DescribeTrafficMirrorFilterRulesRequest"
+_TMFRIr = "TrafficMirrorFilterRuleIds"
+_TMFRS = "TrafficMirrorFilterRuleSet"
+_DTMFROe = "DescribeTrafficMirrorFilterRulesOutput"
+_cDTMFRRoma = "com.amazonaws.ec2#DescribeTrafficMirrorFilterRulesResult"
+_TMFRr = "TrafficMirrorFilterRules"
+_tMFRS = "trafficMirrorFilterRuleSet"
+_DTMFRe = "DescribeTrafficMirrorFilterRules"
+_TMFIL = "TrafficMirrorFilterIdList"
+_DTMFIe = "DescribeTrafficMirrorFiltersInput"
+_cDTMFRom = "com.amazonaws.ec2#DescribeTrafficMirrorFiltersRequest"
+_TMFIr = "TrafficMirrorFilterIds"
+_TMFS = "TrafficMirrorFilterSet"
+_DTMFOe = "DescribeTrafficMirrorFiltersOutput"
+_cDTMFRoma = "com.amazonaws.ec2#DescribeTrafficMirrorFiltersResult"
+_TMFr = "TrafficMirrorFilters"
+_tMFS = "trafficMirrorFilterSet"
+_DTMFe = "DescribeTrafficMirrorFilters"
+_TMSIL = "TrafficMirrorSessionIdList"
+_DTMSIe = "DescribeTrafficMirrorSessionsInput"
+_cDTMSRom = "com.amazonaws.ec2#DescribeTrafficMirrorSessionsRequest"
+_TMSIr = "TrafficMirrorSessionIds"
+_TMSS = "TrafficMirrorSessionSet"
+_DTMSOe = "DescribeTrafficMirrorSessionsOutput"
+_cDTMSRoma = "com.amazonaws.ec2#DescribeTrafficMirrorSessionsResult"
+_TMSr = "TrafficMirrorSessions"
+_tMSS = "trafficMirrorSessionSet"
+_DTMSe = "DescribeTrafficMirrorSessions"
+_TMTIL = "TrafficMirrorTargetIdList"
 
-SPOT_FLEET_REQUEST_ID: StaticSchema = (3, n0, _SFRI, 0)
-
-DESCRIBE_SPOT_FLEET_INSTANCES_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DSFII,
-    {_sSI: _cDSFIR, _sm: None},
-    (_DR, _SFRI, _NTex, _MR),
-    (
-        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (SPOT_FLEET_REQUEST_ID, {_aQN: _SFRI, _sN: _sFRI, _smi: None}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-        (
-            lambda: schemas.DESCRIBE_SPOT_FLEET_INSTANCES_MAX_RESULTS,
-            {_aQN: _MR, _sN: _mR},
-        ),
-    ),
-)
-
-DESCRIBE_SPOT_FLEET_INSTANCES_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DSFIO,
-    {_sSI: _cDSFIRo, _smit: None},
-    (_AIct, _NTex, _SFRI),
-    (
-        (lambda: schemas.ACTIVE_INSTANCE_SET, {_aQN: _AIS, _sN: _aIS}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-        (lambda: schemas.STRING, {_aQN: _SFRI, _sN: _sFRI}),
-    ),
-)
-
-DESCRIBE_SPOT_FLEET_INSTANCES: StaticOperationSchema = (
-    23,
-    n0,
-    _DSFI,
-    0,
-    DESCRIBE_SPOT_FLEET_INSTANCES_INPUT,
-    DESCRIBE_SPOT_FLEET_INSTANCES_OUTPUT,
-    (),
-)
-
-EVENT_TYPE: StaticSchema = (
+RI_PRODUCT_DESCRIPTION: StaticSchema = (
     14,
     n0,
-    _ETv,
+    _RIPD,
     0,
-    (_IC__, _BC_, _ERROR, _INFORMATION),
-    ((-1, {_sV: _iCns}), (-1, {_sV: _fRC}), (-1, {_sV: _er}), (-1, {_sV: _infor})),
-)
-
-DESCRIBE_SPOT_FLEET_REQUEST_HISTORY_MAX_RESULTS: StaticSchema = (7, n0, _DSFRHMR, 0)
-
-DESCRIBE_SPOT_FLEET_REQUEST_HISTORY_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DSFRHI,
-    {_sSI: _cDSFRHR, _sm: None},
-    (_DR, _SFRI, _ETv, _ST, _NTex, _MR),
-    (
-        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (SPOT_FLEET_REQUEST_ID, {_aQN: _SFRI, _sN: _sFRI, _smi: None}),
-        (EVENT_TYPE, {_aQN: _ETv, _sN: _eTv}),
-        (lambda: schemas.DATE_TIME, {_aQN: _ST, _sN: _sTt, _smi: None}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-        (DESCRIBE_SPOT_FLEET_REQUEST_HISTORY_MAX_RESULTS, {_aQN: _MR, _sN: _mR}),
-    ),
-)
-
-DESCRIBE_SPOT_FLEET_REQUEST_HISTORY_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DSFRHO,
-    {_sSI: _cDSFRHRo, _smit: None},
-    (_HRi, _LET, _NTex, _SFRI, _ST),
-    (
-        (lambda: HISTORY_RECORDS, {_aQN: _HRS, _sN: _hRS}),
-        (lambda: schemas.DATE_TIME, {_aQN: _LET, _sN: _lET}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-        (lambda: schemas.STRING, {_aQN: _SFRI, _sN: _sFRI}),
-        (lambda: schemas.DATE_TIME, {_aQN: _ST, _sN: _sTt}),
-    ),
-)
-
-DESCRIBE_SPOT_FLEET_REQUEST_HISTORY: StaticOperationSchema = (
-    23,
-    n0,
-    _DSFRH,
-    0,
-    DESCRIBE_SPOT_FLEET_REQUEST_HISTORY_INPUT,
-    DESCRIBE_SPOT_FLEET_REQUEST_HISTORY_OUTPUT,
-    (),
-)
-
-HISTORY_RECORD: StaticSchema = (
-    18,
-    n0,
-    _HRis,
-    0,
-    (_EIv, _ETv, _Ti),
-    (
-        (lambda: schemas.EVENT_INFORMATION, {_aQN: _EIv, _sN: _eIv}),
-        (EVENT_TYPE, {_aQN: _ETv, _sN: _eTv}),
-        (lambda: schemas.DATE_TIME, {_aQN: _Ti, _sN: _ti}),
-    ),
-)
-
-HISTORY_RECORDS: StaticSchema = (
-    16,
-    n0,
-    _HRi,
-    0,
-    (_me,),
-    ((HISTORY_RECORD, {_sN: _i}),),
-)
-
-DESCRIBE_SPOT_FLEET_REQUESTS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DSFRI,
-    {_sSI: _cDSFRR, _sm: None},
-    (_DR, _SFRIp, _NTex, _MR),
-    (
-        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (lambda: schemas.SPOT_FLEET_REQUEST_ID_LIST, {_aQN: _SFRI, _sN: _sFRI}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-        (lambda: schemas.INTEGER, {_aQN: _MR, _sN: _mR}),
-    ),
-)
-
-DESCRIBE_SPOT_FLEET_REQUESTS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DSFRO,
-    {_sSI: _cDSFRRo, _smit: None},
-    (_NTex, _SFRCp),
-    (
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-        (lambda: SPOT_FLEET_REQUEST_CONFIG_SET, {_aQN: _SFRCS, _sN: _sFRCS}),
-    ),
-)
-
-DESCRIBE_SPOT_FLEET_REQUESTS: StaticOperationSchema = (
-    23,
-    n0,
-    _DSFR,
-    0,
-    DESCRIBE_SPOT_FLEET_REQUESTS_INPUT,
-    DESCRIBE_SPOT_FLEET_REQUESTS_OUTPUT,
-    (),
+    (_LU___, _LUAV, _W, _WAV),
+    ((-1, {_sV: _LUNIX}), (-1, {_sV: _LV_}), (-1, {_sV: _W}), (-1, {_sV: _WV})),
 )
 
 EXCESS_CAPACITY_TERMINATION_POLICY: StaticSchema = (
@@ -948,11 +808,11 @@ SPOT_FLEET_REQUEST_CONFIG_DATA: StaticSchema = (
         (EXCESS_CAPACITY_TERMINATION_POLICY, {_aQN: _ECTP, _sN: _eCTP}),
         (lambda: schemas.DOUBLE, {_aQN: _FCu, _sN: _fCu}),
         (lambda: schemas.DOUBLE, {_aQN: _ODFC, _sN: _oDFC}),
-        (lambda: schemas.STRING, {_aQN: _IFRa, _sN: _iFR, _smi: None}),
+        (lambda: schemas.STRING, {_aQN: _IFRa, _sN: _iFR, _sO: None, _smi: None}),
         (LAUNCH_SPECS_LIST, {_aQN: _LSau, _sN: _lSa}),
         (LAUNCH_TEMPLATE_CONFIG_LIST, {_aQN: _LTC, _sN: _lTC}),
         (lambda: schemas.STRING, {_aQN: _SPpo, _sN: _sPp}),
-        (lambda: schemas.INTEGER, {_aQN: _TCar, _sN: _tCar, _smi: None}),
+        (lambda: schemas.INTEGER, {_aQN: _TCar, _sN: _tCar, _sO: None, _smi: None}),
         (lambda: schemas.INTEGER, {_aQN: _ODTC, _sN: _oDTC}),
         (lambda: schemas.STRING, {_aQN: _ODMTP, _sN: _oDMTP}),
         (lambda: schemas.STRING, {_aQN: _SMTP, _sN: _sMTP}),
@@ -1040,7 +900,7 @@ RUN_INSTANCES_MONITORING_ENABLED: StaticSchema = (
     (_MCIe, _Ena),
     (
         (lambda: schemas.METRIC_CATEGORY_ID_LIST, {_sN: _MCI}),
-        (lambda: schemas.BOOLEAN, {_aQN: _Ena, _sN: _ena, _smi: None}),
+        (lambda: schemas.BOOLEAN, {_aQN: _Ena, _sN: _ena, _sO: None, _smi: None}),
     ),
 )
 
@@ -1152,7 +1012,7 @@ SPOT_INSTANCE_REQUEST: StaticSchema = (
         (LAUNCH_SPECIFICATION, {_aQN: _LSaun, _sN: _lSau}),
         (lambda: schemas.STRING, {_aQN: _LAZ, _sN: _lAZ}),
         (lambda: schemas.STRING, {_aQN: _LAZI, _sN: _lAZI}),
-        (lambda: schemas.RI_PRODUCT_DESCRIPTION, {_aQN: _PDr, _sN: _pDr}),
+        (RI_PRODUCT_DESCRIPTION, {_aQN: _PDr, _sN: _pDr}),
         (lambda: schemas.STRING, {_aQN: _SIRI, _sN: _sIRI}),
         (lambda: schemas.STRING, {_aQN: _SPpo, _sN: _sPp}),
         (SPOT_INSTANCE_STATE, {_aQN: _St, _sN: _st}),
@@ -1244,7 +1104,7 @@ SPOT_PRICE: StaticSchema = (
         (lambda: schemas.STRING, {_aQN: _AZ, _sN: _aZ}),
         (lambda: schemas.STRING, {_aQN: _AZI, _sN: _aZI}),
         (lambda: schemas.INSTANCE_TYPE, {_aQN: _IT, _sN: _iT}),
-        (lambda: schemas.RI_PRODUCT_DESCRIPTION, {_aQN: _PDr, _sN: _pDr}),
+        (RI_PRODUCT_DESCRIPTION, {_aQN: _PDr, _sN: _pDr}),
         (lambda: schemas.STRING, {_aQN: _SPpo, _sN: _sPp}),
         (lambda: schemas.DATE_TIME, {_aQN: _Ti, _sN: _ti}),
     ),
@@ -1273,7 +1133,7 @@ DESCRIBE_STALE_SECURITY_GROUPS_INPUT: StaticSchema = (
         (lambda: schemas.BOOLEAN, 0),
         (DESCRIBE_STALE_SECURITY_GROUPS_MAX_RESULTS, 0),
         (DESCRIBE_STALE_SECURITY_GROUPS_NEXT_TOKEN, 0),
-        (lambda: schemas.VPC_ID, 1),
+        (lambda: schemas.VPC_ID, {_sO: None, _smi: None}),
     ),
 )
 
@@ -1566,6 +1426,8 @@ TAG_DESCRIPTION_LIST: StaticSchema = (
     ((TAG_DESCRIPTION, {_sN: _i}),),
 )
 
+TRAFFIC_MIRRORING_MAX_RESULTS: StaticSchema = (7, n0, _TMMR, 0)
+
 TRAFFIC_MIRROR_FILTER_RULE_ID_LIST: StaticSchema = (
     16,
     n0,
@@ -1573,4 +1435,170 @@ TRAFFIC_MIRROR_FILTER_RULE_ID_LIST: StaticSchema = (
     0,
     (_me,),
     ((lambda: schemas.TRAFFIC_MIRROR_FILTER_RULE_ID_WITH_RESOLVER, {_sN: _i}),),
+)
+
+DESCRIBE_TRAFFIC_MIRROR_FILTER_RULES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DTMFRIe,
+    {_sSI: _cDTMFRRom, _sm: None},
+    (_TMFRIr, _TMFI, _DR, _Fil, _MR, _NTex),
+    (
+        (TRAFFIC_MIRROR_FILTER_RULE_ID_LIST, {_sN: _TMFRI}),
+        (lambda: schemas.TRAFFIC_MIRROR_FILTER_ID, 0),
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+        (TRAFFIC_MIRRORING_MAX_RESULTS, 0),
+        (lambda: schemas.NEXT_TOKEN, 0),
+    ),
+)
+
+DESCRIBE_TRAFFIC_MIRROR_FILTER_RULES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DTMFROe,
+    {_sSI: _cDTMFRRoma, _smit: None},
+    (_TMFRr, _NTex),
+    (
+        (lambda: TRAFFIC_MIRROR_FILTER_RULE_SET, {_aQN: _TMFRS, _sN: _tMFRS}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+    ),
+)
+
+DESCRIBE_TRAFFIC_MIRROR_FILTER_RULES: StaticOperationSchema = (
+    23,
+    n0,
+    _DTMFRe,
+    0,
+    DESCRIBE_TRAFFIC_MIRROR_FILTER_RULES_INPUT,
+    DESCRIBE_TRAFFIC_MIRROR_FILTER_RULES_OUTPUT,
+    (),
+)
+
+TRAFFIC_MIRROR_FILTER_RULE_SET: StaticSchema = (
+    16,
+    n0,
+    _TMFRS,
+    0,
+    (_me,),
+    ((lambda: schemas.TRAFFIC_MIRROR_FILTER_RULE, {_sN: _i}),),
+)
+
+TRAFFIC_MIRROR_FILTER_ID_LIST: StaticSchema = (
+    16,
+    n0,
+    _TMFIL,
+    0,
+    (_me,),
+    ((lambda: schemas.TRAFFIC_MIRROR_FILTER_ID, {_sN: _i}),),
+)
+
+DESCRIBE_TRAFFIC_MIRROR_FILTERS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DTMFIe,
+    {_sSI: _cDTMFRom, _sm: None},
+    (_TMFIr, _DR, _Fil, _MR, _NTex),
+    (
+        (TRAFFIC_MIRROR_FILTER_ID_LIST, {_sN: _TMFI}),
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+        (TRAFFIC_MIRRORING_MAX_RESULTS, 0),
+        (lambda: schemas.NEXT_TOKEN, 0),
+    ),
+)
+
+DESCRIBE_TRAFFIC_MIRROR_FILTERS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DTMFOe,
+    {_sSI: _cDTMFRoma, _smit: None},
+    (_TMFr, _NTex),
+    (
+        (lambda: TRAFFIC_MIRROR_FILTER_SET, {_aQN: _TMFS, _sN: _tMFS}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+    ),
+)
+
+DESCRIBE_TRAFFIC_MIRROR_FILTERS: StaticOperationSchema = (
+    23,
+    n0,
+    _DTMFe,
+    0,
+    DESCRIBE_TRAFFIC_MIRROR_FILTERS_INPUT,
+    DESCRIBE_TRAFFIC_MIRROR_FILTERS_OUTPUT,
+    (),
+)
+
+TRAFFIC_MIRROR_FILTER_SET: StaticSchema = (
+    16,
+    n0,
+    _TMFS,
+    0,
+    (_me,),
+    ((lambda: schemas.TRAFFIC_MIRROR_FILTER, {_sN: _i}),),
+)
+
+TRAFFIC_MIRROR_SESSION_ID_LIST: StaticSchema = (
+    16,
+    n0,
+    _TMSIL,
+    0,
+    (_me,),
+    ((lambda: schemas.TRAFFIC_MIRROR_SESSION_ID, {_sN: _i}),),
+)
+
+DESCRIBE_TRAFFIC_MIRROR_SESSIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DTMSIe,
+    {_sSI: _cDTMSRom, _sm: None},
+    (_TMSIr, _DR, _Fil, _MR, _NTex),
+    (
+        (TRAFFIC_MIRROR_SESSION_ID_LIST, {_sN: _TMSI}),
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+        (TRAFFIC_MIRRORING_MAX_RESULTS, 0),
+        (lambda: schemas.NEXT_TOKEN, 0),
+    ),
+)
+
+DESCRIBE_TRAFFIC_MIRROR_SESSIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DTMSOe,
+    {_sSI: _cDTMSRoma, _smit: None},
+    (_TMSr, _NTex),
+    (
+        (lambda: TRAFFIC_MIRROR_SESSION_SET, {_aQN: _TMSS, _sN: _tMSS}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+    ),
+)
+
+DESCRIBE_TRAFFIC_MIRROR_SESSIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _DTMSe,
+    0,
+    DESCRIBE_TRAFFIC_MIRROR_SESSIONS_INPUT,
+    DESCRIBE_TRAFFIC_MIRROR_SESSIONS_OUTPUT,
+    (),
+)
+
+TRAFFIC_MIRROR_SESSION_SET: StaticSchema = (
+    16,
+    n0,
+    _TMSS,
+    0,
+    (_me,),
+    ((lambda: schemas.TRAFFIC_MIRROR_SESSION, {_sN: _i}),),
+)
+
+TRAFFIC_MIRROR_TARGET_ID_LIST: StaticSchema = (
+    16,
+    n0,
+    _TMTIL,
+    0,
+    (_me,),
+    ((lambda: schemas.TRAFFIC_MIRROR_TARGET_ID, {_sN: _i}),),
 )
