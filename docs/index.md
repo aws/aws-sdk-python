@@ -7,7 +7,7 @@ Each service has its own package.
 
     The AWS SDK for Python v4 is intended for evaluation and testing only. Do
     not use it for production workloads; use
-    [Boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html)
+    [Boto3](https://docs.aws.amazon.com/boto3/latest/)
     instead.
 
 [Browse clients](clients/index.md){ .md-button .md-button--primary }
