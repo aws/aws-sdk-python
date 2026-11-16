@@ -1,0 +1,8 @@
+{
+  "changes": [
+    {
+      "type": "feature",
+      "description": "Initial client release with support for current Amazon Elastic Compute Cloud operations."
+    }
+  ]
+}

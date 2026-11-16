@@ -1,4 +1,0 @@
-{
-  "type": "feature",
-  "description": "Support the `adaptive` retry mode, set with `retry_mode=\"adaptive\"`, the `AWS_RETRY_MODE` environment variable, or the `retry_mode` profile key. Previously `retry_mode=\"adaptive\"` was rejected, and the environment variable and profile key fell back to `standard` with a warning."
-}

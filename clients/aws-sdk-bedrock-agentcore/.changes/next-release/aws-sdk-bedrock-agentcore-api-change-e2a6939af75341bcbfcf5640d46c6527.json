@@ -1,4 +1,0 @@
-{
-  "type": "api-change",
-  "description": "Adds AgentCore Runtime session endpoint support, including sessionEndpointUrl on the InvokeAgentRuntime response"
-}

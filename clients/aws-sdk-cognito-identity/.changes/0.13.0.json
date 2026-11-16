@@ -1,0 +1,48 @@
+{
+  "changes": [
+    {
+      "type": "breaking",
+      "description": "Codegen sync for [smithy-python b8ecead...d185e3b](https://github.com/smithy-lang/smithy-python/compare/b8eceadb0573bd0c757def9a2b26fe7bf938b239...d185e3b5b5ef2e24661a6256be721101631bdcb2): Add the synchronous `CognitoIdentityClient` and `CognitoIdentityConfig` in `aws_sdk_cognito_identity.client` and `aws_sdk_cognito_identity.config`. The async `AsyncCognitoIdentityClient` and `AsyncCognitoIdentityConfig` moved to `aws_sdk_cognito_identity.aio.client` and `aws_sdk_cognito_identity.aio.config`; update async imports to the `aio` paths. All four are also exported from `aws_sdk_cognito_identity`."
+    },
+    {
+      "type": "breaking",
+      "description": "Operations take the members of their input as keyword arguments, or the whole request as a single positional-only input model or dictionary; the two can't be mixed in one call. `plugins` is keyword-only. Calls that pass the request as `input=` or pass `plugins` positionally must be updated. A request that leaves a required member unset, at any depth, raises a `TypeError` before it is sent."
+    },
+    {
+      "type": "feature",
+      "description": "Resolve endpoints from the service's endpoint rules instead of the standard regional endpoint pattern. Add the `use_fips_endpoint` and `use_dualstack_endpoint` configuration options to select FIPS and dual-stack endpoints, also read from the `AWS_USE_FIPS_ENDPOINT` and `AWS_USE_DUALSTACK_ENDPOINT` environment variables and the `use_fips_endpoint` and `use_dualstack_endpoint` profile keys."
+    },
+    {
+      "type": "feature",
+      "description": "Nested structures and unions in a request may be written as dictionaries. A dictionary may contain models, but the members of a model must be models. Each structure and union reachable from an operation input has a dictionary form with a `Dict` suffix, declared in `models.pyi`."
+    },
+    {
+      "type": "feature",
+      "description": "Support the `adaptive` retry mode, set with `retry_mode=\"adaptive\"`, the `AWS_RETRY_MODE` environment variable, or the `retry_mode` profile key. Previously `retry_mode=\"adaptive\"` was rejected, and the environment variable and profile key fell back to `standard` with a warning."
+    },
+    {
+      "type": "enhancement",
+      "description": "Include a `py.typed` marker so type checkers use the types of the installed client, and expose the typed model surface, including member documentation, through `models.pyi`."
+    },
+    {
+      "type": "enhancement",
+      "description": "Load models, schemas, and operations lazily on first use."
+    },
+    {
+      "type": "enhancement",
+      "description": "Add support for Python 3.15."
+    },
+    {
+      "type": "dependency",
+      "description": "Bump `smithy-http` from `~=0.6.0` to `~=0.10.0`."
+    },
+    {
+      "type": "dependency",
+      "description": "Bump `smithy-aws-core` from `~=0.12.0` to `~=0.16.0`."
+    },
+    {
+      "type": "dependency",
+      "description": "Bump `smithy-core` from `~=0.9.0` to `~=0.13.0`."
+    }
+  ]
+}

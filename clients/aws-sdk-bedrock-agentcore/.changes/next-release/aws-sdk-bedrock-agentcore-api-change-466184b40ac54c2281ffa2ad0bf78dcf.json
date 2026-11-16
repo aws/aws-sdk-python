@@ -1,4 +1,0 @@
-{
-  "type": "api-change",
-  "description": "AgentCore Memory now supports Long-Term Memory Time-to-Live on Batch APIs."
-}

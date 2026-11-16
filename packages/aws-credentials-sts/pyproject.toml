@@ -28,7 +28,7 @@ classifiers = [
   "Topic :: Software Development :: Libraries",
 ]
 dependencies = [
-  "aws-sdk-sts~=0.12.0",
+  "aws-sdk-sts~=0.13.0",
   "smithy-aws-core~=0.16.0",
   "smithy-core~=0.13.0",
   "smithy-http~=0.10.0",

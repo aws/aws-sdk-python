@@ -1,4 +1,0 @@
-{
-  "type": "feature",
-  "description": "Route requests to account-based endpoints, such as `123456789012.ddb.us-west-2.amazonaws.com`, when the credentials carry an account ID. The new `account_id_endpoint_mode` configuration option, also read from the `AWS_ACCOUNT_ID_ENDPOINT_MODE` environment variable and the `account_id_endpoint_mode` profile key, accepts `preferred` (the default), `required`, or `disabled`; set it to `disabled` to keep using `dynamodb.<region>.amazonaws.com`."
-}

@@ -1,4 +1,0 @@
-{
-  "type": "feature",
-  "description": "Resolve endpoints from the service's endpoint rules instead of the standard regional endpoint pattern. The default endpoint changes to the `api.aws` domain, such as `health-agent.us-east-1.api.aws`. Add the `use_fips_endpoint` configuration option to select FIPS endpoints, also read from the `AWS_USE_FIPS_ENDPOINT` environment variable and the `use_fips_endpoint` profile key."
-}

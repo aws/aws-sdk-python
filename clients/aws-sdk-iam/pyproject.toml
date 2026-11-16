@@ -2,7 +2,7 @@
 
 [project]
 name = "aws_sdk_iam"
-version = "0.12.0"
+version = "0.13.0"
 description = "Python client for AWS Identity and Access Management"
 readme = "README.md"
 requires-python = ">=3.12"

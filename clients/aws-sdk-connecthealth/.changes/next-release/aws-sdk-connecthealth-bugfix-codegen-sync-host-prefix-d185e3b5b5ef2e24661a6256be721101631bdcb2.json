@@ -1,4 +1,0 @@
-{
-  "type": "bugfix",
-  "description": "Apply endpoint trait host prefixes, such as `runtime.` and `streaming.`, to the operations that model them. Set the new `disable_host_prefix_injection` configuration option to `True` to send requests without the prefix."
-}

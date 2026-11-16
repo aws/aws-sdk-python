@@ -1,4 +1,0 @@
-{
-  "type": "feature",
-  "description": "Resolve modeled errors from their AWS Query error codes, such as `AWS.SimpleQueueService.NonExistentQueue`, sent in the `x-amzn-query-error` header. Requests send the `x-amzn-query-mode` header."
-}

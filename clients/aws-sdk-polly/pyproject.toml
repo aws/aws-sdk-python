@@ -2,7 +2,7 @@
 
 [project]
 name = "aws_sdk_polly"
-version = "0.12.0"
+version = "0.13.0"
 description = "Python client for Amazon Polly"
 readme = "README.md"
 requires-python = ">=3.12"

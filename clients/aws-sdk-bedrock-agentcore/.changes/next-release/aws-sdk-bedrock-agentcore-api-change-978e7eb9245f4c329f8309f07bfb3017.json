@@ -1,4 +1,0 @@
-{
-  "type": "api-change",
-  "description": "Support SigV4 request signing (cryptographically signed) in the Bedrock AgentCore Harness MCP connector tool."
-}

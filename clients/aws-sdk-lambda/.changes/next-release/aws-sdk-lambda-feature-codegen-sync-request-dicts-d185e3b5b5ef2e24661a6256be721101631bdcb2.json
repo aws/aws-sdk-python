@@ -1,4 +1,0 @@
-{
-  "type": "feature",
-  "description": "Nested structures and unions in a request may be written as dictionaries. A dictionary may contain models, but the members of a model must be models. Each structure and union reachable from an operation input has a dictionary form with a `Dict` suffix, declared in `models.pyi`."
-}
