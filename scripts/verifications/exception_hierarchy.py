@@ -24,9 +24,11 @@ import sys
 
 from _common import (
     Finding,
+    Module,
     analyzed_modules,
     main,
     members,
+    module_findings,
     packages,
     runtime_modules,
 )
@@ -38,56 +40,46 @@ _GENERIC = frozenset({"Exception", "BaseException", "RuntimeError"})
 def check() -> list[Finding]:
     for package in packages():
         sys.path.insert(0, str(package.src))
-    return [*_class_findings(), *_raise_findings()]
+    return [
+        *module_findings(_class_findings, runtime_modules()),
+        *module_findings(_raise_findings, analyzed_modules()),
+    ]
 
 
-def _class_findings() -> list[Finding]:
-    findings: list[Finding] = []
+def _class_findings(module: Module) -> list[Finding]:
+    if "testing" in module.name.split("."):
+        return []
     base = _resolve(_BASE)
-    for module in runtime_modules():
-        if "testing" in module.name.split("."):
-            continue
-        try:
-            loaded = importlib.import_module(module.name)
-        except Exception as e:
-            findings.append(
-                Finding(
-                    f"cannot import {module.name}: {e}", module.path, severity="warning"
-                )
+    try:
+        loaded = importlib.import_module(module.name)
+    except Exception as e:
+        return [
+            Finding(
+                f"cannot import {module.name}: {e}", module.path, severity="warning"
             )
-            continue
-        for name, obj in members(module, loaded):
-            if (
-                inspect.isclass(obj)
-                and issubclass(obj, BaseException)
-                and not issubclass(obj, Warning)
-                and obj.__module__ == module.name
-                and not issubclass(obj, base)
-            ):
-                findings.append(
-                    Finding(
-                        f"{name} does not derive from {base.__qualname__}", module.path
-                    )
-                )
-    return findings
+        ]
+    return [
+        Finding(f"{name} does not derive from {base.__qualname__}", module.path)
+        for name, obj in members(module, loaded)
+        if inspect.isclass(obj)
+        and issubclass(obj, BaseException)
+        and not issubclass(obj, Warning)
+        and obj.__module__ == module.name
+        and not issubclass(obj, base)
+    ]
 
 
-def _raise_findings() -> list[Finding]:
+def _raise_findings(module: Module) -> list[Finding]:
     findings: list[Finding] = []
-    for module in analyzed_modules():
-        shadowed = set(module.defined) | set(module.imported)
-        for node in ast.walk(module.tree):
-            if not isinstance(node, ast.Raise) or node.exc is None:
-                continue
-            exc = node.exc.func if isinstance(node.exc, ast.Call) else node.exc
-            if (
-                isinstance(exc, ast.Name)
-                and exc.id in _GENERIC
-                and exc.id not in shadowed
-            ):
-                findings.append(
-                    Finding(f"raises generic {exc.id}", module.path, node.lineno)
-                )
+    shadowed = set(module.defined) | set(module.imported)
+    for node in ast.walk(module.tree):
+        if not isinstance(node, ast.Raise) or node.exc is None:
+            continue
+        exc = node.exc.func if isinstance(node.exc, ast.Call) else node.exc
+        if isinstance(exc, ast.Name) and exc.id in _GENERIC and exc.id not in shadowed:
+            findings.append(
+                Finding(f"raises generic {exc.id}", module.path, node.lineno)
+            )
     return findings
 
 
