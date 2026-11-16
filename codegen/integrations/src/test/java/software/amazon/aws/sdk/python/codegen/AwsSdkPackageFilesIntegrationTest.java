@@ -5,6 +5,7 @@
 package software.amazon.aws.sdk.python.codegen;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -61,6 +62,17 @@ public class AwsSdkPackageFilesIntegrationTest {
     }
 
     @Test
+    public void pyprojectNamesPackageWithDashes() {
+        var generated = generate(false).expectFileString("pyproject.toml");
+        var underscored = "\nname = \"aws_sdk_secrets_manager\"\n";
+
+        assertTrue(generated.contains(underscored), generated);
+        assertEquals(
+                generated.replace(underscored, "\nname = \"aws-sdk-secrets-manager\"\n"),
+                generate().expectFileString("pyproject.toml"));
+    }
+
+    @Test
     public void legalFilesMatchRepositoryRoot() throws IOException {
         var manifest = generate();
 
@@ -69,8 +81,12 @@ public class AwsSdkPackageFilesIntegrationTest {
         }
     }
 
-    @SuppressWarnings("unchecked")
     private static MockManifest generate() {
+        return generate(true);
+    }
+
+    @SuppressWarnings("unchecked")
+    private static MockManifest generate(boolean intercept) {
         var service = ServiceShape.builder()
                 .id("com.amazonaws.secretsmanager#secretsmanager")
                 .version("2017-10-17")
@@ -100,8 +116,10 @@ public class AwsSdkPackageFilesIntegrationTest {
 
         var integration = new AwsSdkPackageFilesIntegration();
         var interceptors = new ArrayList<CodeInterceptor<CodeSection, PythonWriter>>();
-        for (var interceptor : integration.interceptors(context)) {
-            interceptors.add((CodeInterceptor<CodeSection, PythonWriter>) interceptor);
+        if (intercept) {
+            for (var interceptor : integration.interceptors(context)) {
+                interceptors.add((CodeInterceptor<CodeSection, PythonWriter>) interceptor);
+            }
         }
         delegator.setInterceptors(interceptors);
         SetupGenerator.generateSetup(settings, context);

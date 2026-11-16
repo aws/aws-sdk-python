@@ -6,16 +6,19 @@ package software.amazon.aws.sdk.python.codegen;
 
 import java.util.List;
 import software.amazon.smithy.aws.traits.ServiceTrait;
+import software.amazon.smithy.codegen.core.CodegenException;
 import software.amazon.smithy.model.traits.TitleTrait;
 import software.amazon.smithy.python.codegen.GenerationContext;
 import software.amazon.smithy.python.codegen.integrations.PythonIntegration;
+import software.amazon.smithy.python.codegen.sections.PyprojectSection;
 import software.amazon.smithy.python.codegen.sections.ReadmeSection;
 import software.amazon.smithy.python.codegen.writer.PythonWriter;
 import software.amazon.smithy.utils.CodeInterceptor;
 import software.amazon.smithy.utils.CodeSection;
 
 /**
- * Writes the AWS SDK README, LICENSE, and NOTICE into each generated client package.
+ * Writes the AWS SDK README, LICENSE, and NOTICE into each generated client package,
+ * and names the package in pyproject.toml with dashes.
  */
 public final class AwsSdkPackageFilesIntegration implements PythonIntegration {
 
@@ -26,13 +29,43 @@ public final class AwsSdkPackageFilesIntegration implements PythonIntegration {
     public List<? extends CodeInterceptor<? extends CodeSection, PythonWriter>> interceptors(
             GenerationContext context
     ) {
-        return List.of(new ReadmeInterceptor(context));
+        return List.of(new ReadmeInterceptor(context), new PyprojectInterceptor(context));
     }
 
     @Override
     public void customize(GenerationContext context) {
         for (var name : LEGAL_FILES) {
             context.fileManifest().writeFile(name, AwsSdkPackageFilesIntegration.class, name);
+        }
+    }
+
+    private static String packageName(GenerationContext context) {
+        return context.settings().moduleName().replace('_', '-');
+    }
+
+    private static final class PyprojectInterceptor implements CodeInterceptor<PyprojectSection, PythonWriter> {
+
+        private final GenerationContext context;
+
+        PyprojectInterceptor(GenerationContext context) {
+            this.context = context;
+        }
+
+        @Override
+        public Class<PyprojectSection> sectionType() {
+            return PyprojectSection.class;
+        }
+
+        @Override
+        public void write(PythonWriter writer, String previousText, PyprojectSection section) {
+            // smithy-python names the project after the module, so swap in the dashed name.
+            var generated = "[project]\nname = \"" + context.settings().moduleName() + "\"\n";
+            if (!previousText.contains(generated)) {
+                throw new CodegenException("Expected pyproject.toml to contain: " + generated);
+            }
+            writer.writeWithNoFormatting(previousText.replace(
+                    generated,
+                    "[project]\nname = \"" + packageName(context) + "\"\n"));
         }
     }
 
@@ -54,7 +87,7 @@ public final class AwsSdkPackageFilesIntegration implements PythonIntegration {
             var service = context.settings().service(context.model());
             var title = service.expectTrait(TitleTrait.class).getValue();
             var sdkId = service.expectTrait(ServiceTrait.class).getSdkId();
-            var packageName = context.settings().moduleName().replace('_', '-');
+            var packageName = packageName(context);
             var docsSlug = packageName.substring("aws-sdk-".length());
             writer.write("""
                     # $1L Client
