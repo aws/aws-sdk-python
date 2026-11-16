@@ -15,16 +15,11 @@ _Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
 _DR = "DryRun"
-_p = "pending"
-_d = "disabled"
-_PI = "PublicIp"
-_pI = "publicIp"
 _smit = "smithy.api#output"
 _CRI = "CapacityReservationId"
 _RI = "ReservationId"
 _av = "available"
 _St = "State"
-_st = "state"
 _fa = "failed"
 _SIu = "SubnetId"
 _sI = "subnetId"
@@ -56,8 +51,6 @@ _nII = "networkInterfaceId"
 _AIt = "AttachmentId"
 _aIt = "attachmentId"
 _SGe = "SecurityGroups"
-_ena = "enabled"
-_disab = "disabling"
 _IT = "InstanceType"
 _iT = "instanceType"
 _SIRI = "SpotInstanceRequestId"
@@ -65,14 +58,11 @@ _sIRI = "spotInstanceRequestId"
 _Des = "Description"
 _PIAr = "PrivateIpAddress"
 _pIAr = "privateIpAddress"
-_COI = "CustomerOwnedIp"
-_cOI = "customerOwnedIp"
-_CI = "CarrierIp"
-_cI = "carrierIp"
 _Rea = "Reason"
 _rea = "reason"
 _PIAu = "PublicIpAddress"
 _desc = "description"
+_def = "default"
 _OA = "OutpostArn"
 _CO = "CpuOptions"
 _CTl = "ClientToken"
@@ -91,10 +81,7 @@ _Ass = "Association"
 _assoc = "association"
 _G = "Groups"
 _IIm = "ImageId"
-_ESUS = "EnaSrdUdpSpecification"
-_ESUE = "EnaSrdUdpEnabled"
 _ESS = "EnaSrdSpecification"
-_ESE = "EnaSrdEnabled"
 _NCI = "NetworkCardIndex"
 _EQC = "EnaQueueCount"
 _DI = "DeviceIndex"
@@ -102,8 +89,10 @@ _dI = "deviceIndex"
 _nCI = "networkCardIndex"
 _LUTa = "LastUpdatedTime"
 _lUTa = "lastUpdatedTime"
+_ECI = "EbsCardIndex"
 _DOT = "DeleteOnTermination"
 _dOT = "deleteOnTermination"
+_eCI = "ebsCardIndex"
 _ATtt = "AttachTime"
 _aTtt = "attachTime"
 _At = "Attachment"
@@ -117,9 +106,10 @@ _iu_ = "in-use"
 _oAu = "outpostArn"
 _Op = "Operator"
 _ope = "operator"
+_ded = "dedicated"
 _EO = "EbsOptimized"
-_ap = "applied"
 _CBI = "CapacityBlockId"
+_uns = "unsupported"
 _cRI = "capacityReservationId"
 _eO = "ebsOptimized"
 _cBI = "capacityBlockId"
@@ -133,9 +123,6 @@ _eRNDAR = "enableResourceNameDnsARecord"
 _ERNDAAAAR = "EnableResourceNameDnsAAAARecord"
 _eRNDAAAAR = "enableResourceNameDnsAAAARecord"
 _BDM = "BlockDeviceMapping"
-_HTt = "HttpTokens"
-_HPRHL = "HttpPutResponseHopLimit"
-_HE = "HttpEndpoint"
 _Pl = "Placement"
 _KN = "KeyName"
 _BDMl = "BlockDeviceMappings"
@@ -150,9 +137,6 @@ _NA = "NotAfter"
 _nA = "notAfter"
 _kN = "keyName"
 _KI = "KernelId"
-_HPI = "HttpProtocolIpv6"
-_IMT = "InstanceMetadataTags"
-_MCIe = "MetricCategoryIds"
 _TET = "TcpEstablishedTimeout"
 _UST = "UdpStreamTimeout"
 _UTd = "UdpTimeout"
@@ -172,19 +156,9 @@ _PDNO = "PrivateDnsNameOptions"
 _MOa = "MaintenanceOptions"
 _NPO = "NetworkPerformanceOptions"
 _SIec = "SecondaryInterfaces"
-_hTt = "httpTokens"
-_hPRHL = "httpPutResponseHopLimit"
-_hE = "httpEndpoint"
-_hPI = "httpProtocolIpv6"
-_iMT = "instanceMetadataTags"
-_MCIS = "MetricCategoryIdSet"
-_mCIS = "metricCategoryIdSet"
 _tET = "tcpEstablishedTimeout"
 _uTd = "udpTimeout"
 _uST = "udpStreamTimeout"
-_eSUE = "enaSrdUdpEnabled"
-_eSE = "enaSrdEnabled"
-_eSUS = "enaSrdUdpSpecification"
 _iApv = "ipv6Address"
 _iPpvr = "ipv6Prefix"
 _GS = "GroupSet"
@@ -220,10 +194,7 @@ _SIS = "SecondaryInterfaceSet"
 _sIS = "secondaryInterfaceSet"
 _SRt = "StateReason"
 _sRt = "stateReason"
-_IOI = "IpOwnerId"
-_iOI = "ipOwnerId"
 _PDNu = "PublicDnsName"
-_pDNu = "publicDnsName"
 _CTC = "ConnectionTrackingConfiguration"
 _PDNr = "PrivateDnsName"
 _pDNr = "privateDnsName"
@@ -295,12 +266,6 @@ _LTa = "LaunchTime"
 _lTa = "launchTime"
 _iSnst = "instanceState"
 _IMR = "IncludeManagedResources"
-_IMOS = "InstanceMetadataOptionsState"
-_IMOR = "InstanceMetadataOptionsResponse"
-_MSon = "MonitoringState"
-_INIA = "InstanceNetworkInterfaceAssociation"
-_IAESUS = "InstanceAttachmentEnaSrdUdpSpecification"
-_IAESS = "InstanceAttachmentEnaSrdSpecification"
 _INIAn = "InstanceNetworkInterfaceAttachment"
 _CTSRo = "ConnectionTrackingSpecificationResponse"
 _IIPn = "InstanceIpv4Prefix"
@@ -464,94 +429,34 @@ _ARF = "AutoRecoveryFlag"
 _BMF = "BareMetalFlag"
 _BPFu = "BurstablePerformanceFlag"
 _CGF = "CurrentGenerationFlag"
+_DHF = "DedicatedHostFlag"
+_ALT = "AttachmentLimitType"
+_SHARED = "SHARED"
+_sh = "shared"
+_DEDICATED = "DEDICATED"
+_BBIM = "BaselineBandwidthInMbps"
+_BIa = "BaselineIops"
+_BTIMB = "BaselineThroughputInMBps"
+_MBIM = "MaximumBandwidthInMbps"
+_MI = "MaximumIops"
+_MTIMB = "MaximumThroughputInMBps"
+_ECIb = "EbsCardInfo"
+_bBIM = "baselineBandwidthInMbps"
+_bTIMB = "baselineThroughputInMBps"
+_bIa = "baselineIops"
+_mBIM = "maximumBandwidthInMbps"
+_mTIMB = "maximumThroughputInMBps"
+_mI = "maximumIops"
+_ECIL = "EbsCardInfoList"
+_EOI = "EbsOptimizedInfo"
+_EOS = "EbsOptimizedSupport"
+_supp = "supported"
 _DITOes = "DescribeInstanceTypesOutput"
 _cDITRoma = "com.amazonaws.ec2#DescribeInstanceTypesResult"
 _ITSns = "InstanceTypeSet"
 _iTSns = "instanceTypeSet"
 _DITe = "DescribeInstanceTypes"
 _IIUSL = "InstanceIdUpdateStringList"
-
-INSTANCE_METADATA_OPTIONS_STATE: StaticSchema = (
-    14,
-    n0,
-    _IMOS,
-    0,
-    (_p, _ap),
-    ((-1, {_sV: _p}), (-1, {_sV: _ap})),
-)
-
-INSTANCE_METADATA_OPTIONS_RESPONSE: StaticSchema = (
-    18,
-    n0,
-    _IMOR,
-    0,
-    (_St, _HTt, _HPRHL, _HE, _HPI, _IMT),
-    (
-        (INSTANCE_METADATA_OPTIONS_STATE, {_aQN: _St, _sN: _st}),
-        (lambda: schemas.HTTP_TOKENS_STATE, {_aQN: _HTt, _sN: _hTt}),
-        (lambda: schemas.INTEGER, {_aQN: _HPRHL, _sN: _hPRHL}),
-        (lambda: schemas.INSTANCE_METADATA_ENDPOINT_STATE, {_aQN: _HE, _sN: _hE}),
-        (lambda: schemas.INSTANCE_METADATA_PROTOCOL_STATE, {_aQN: _HPI, _sN: _hPI}),
-        (lambda: schemas.INSTANCE_METADATA_TAGS_STATE, {_aQN: _IMT, _sN: _iMT}),
-    ),
-)
-
-MONITORING_STATE: StaticSchema = (
-    14,
-    n0,
-    _MSon,
-    0,
-    (_d, _disab, _ena, _p),
-    ((-1, {_sV: _d}), (-1, {_sV: _disab}), (-1, {_sV: _ena}), (-1, {_sV: _p})),
-)
-
-MONITORING: StaticSchema = (
-    18,
-    n0,
-    _Mon,
-    0,
-    (_MCIe, _St),
-    (
-        (lambda: schemas.METRIC_CATEGORY_ID_LIST, {_aQN: _MCIS, _sN: _mCIS}),
-        (MONITORING_STATE, {_aQN: _St, _sN: _st}),
-    ),
-)
-
-INSTANCE_NETWORK_INTERFACE_ASSOCIATION: StaticSchema = (
-    18,
-    n0,
-    _INIA,
-    0,
-    (_CI, _COI, _IOI, _PDNu, _PI),
-    (
-        (lambda: schemas.STRING, {_aQN: _CI, _sN: _cI}),
-        (lambda: schemas.STRING, {_aQN: _COI, _sN: _cOI}),
-        (lambda: schemas.STRING, {_aQN: _IOI, _sN: _iOI}),
-        (lambda: schemas.STRING, {_aQN: _PDNu, _sN: _pDNu}),
-        (lambda: schemas.STRING, {_aQN: _PI, _sN: _pI}),
-    ),
-)
-
-INSTANCE_ATTACHMENT_ENA_SRD_UDP_SPECIFICATION: StaticSchema = (
-    18,
-    n0,
-    _IAESUS,
-    0,
-    (_ESUE,),
-    ((lambda: schemas.BOOLEAN, {_aQN: _ESUE, _sN: _eSUE}),),
-)
-
-INSTANCE_ATTACHMENT_ENA_SRD_SPECIFICATION: StaticSchema = (
-    18,
-    n0,
-    _IAESS,
-    0,
-    (_ESE, _ESUS),
-    (
-        (lambda: schemas.BOOLEAN, {_aQN: _ESE, _sN: _eSE}),
-        (INSTANCE_ATTACHMENT_ENA_SRD_UDP_SPECIFICATION, {_aQN: _ESUS, _sN: _eSUS}),
-    ),
-)
 
 INSTANCE_NETWORK_INTERFACE_ATTACHMENT: StaticSchema = (
     18,
@@ -566,7 +471,10 @@ INSTANCE_NETWORK_INTERFACE_ATTACHMENT: StaticSchema = (
         (lambda: schemas.INTEGER, {_aQN: _DI, _sN: _dI}),
         (lambda: schemas.ATTACHMENT_STATUS, {_aQN: _Sta, _sN: _sta}),
         (lambda: schemas.INTEGER, {_aQN: _NCI, _sN: _nCI}),
-        (INSTANCE_ATTACHMENT_ENA_SRD_SPECIFICATION, {_aQN: _ESS, _sN: _eSS}),
+        (
+            lambda: schemas.INSTANCE_ATTACHMENT_ENA_SRD_SPECIFICATION,
+            {_aQN: _ESS, _sN: _eSS},
+        ),
         (lambda: schemas.INTEGER, {_aQN: _EQC, _sN: _eQC}),
     ),
 )
@@ -627,7 +535,10 @@ INSTANCE_PRIVATE_IP_ADDRESS: StaticSchema = (
     0,
     (_Ass, _Prim, _PDNr, _PIAr),
     (
-        (INSTANCE_NETWORK_INTERFACE_ASSOCIATION, {_aQN: _Ass, _sN: _assoc}),
+        (
+            lambda: schemas.INSTANCE_NETWORK_INTERFACE_ASSOCIATION,
+            {_aQN: _Ass, _sN: _assoc},
+        ),
         (lambda: schemas.BOOLEAN, {_aQN: _Prim, _sN: _prim}),
         (lambda: schemas.STRING, {_aQN: _PDNr, _sN: _pDNr}),
         (lambda: schemas.STRING, {_aQN: _PIAr, _sN: _pIAr}),
@@ -671,7 +582,10 @@ INSTANCE_NETWORK_INTERFACE: StaticSchema = (
         _Op,
     ),
     (
-        (INSTANCE_NETWORK_INTERFACE_ASSOCIATION, {_aQN: _Ass, _sN: _assoc}),
+        (
+            lambda: schemas.INSTANCE_NETWORK_INTERFACE_ASSOCIATION,
+            {_aQN: _Ass, _sN: _assoc},
+        ),
         (INSTANCE_NETWORK_INTERFACE_ATTACHMENT, {_aQN: _At, _sN: _atta}),
         (lambda: schemas.STRING, {_aQN: _Des, _sN: _desc}),
         (lambda: schemas.GROUP_IDENTIFIER_LIST, {_aQN: _GS, _sN: _gS}),
@@ -904,7 +818,7 @@ INSTANCE: StaticSchema = (
         ),
         (lambda: schemas.HIBERNATION_OPTIONS, {_aQN: _HO, _sN: _hO}),
         (lambda: schemas.LICENSE_LIST, {_aQN: _LSicen, _sN: _lSi}),
-        (INSTANCE_METADATA_OPTIONS_RESPONSE, {_aQN: _MO, _sN: _mO}),
+        (lambda: schemas.INSTANCE_METADATA_OPTIONS_RESPONSE, {_aQN: _MO, _sN: _mO}),
         (lambda: schemas.ENCLAVE_OPTIONS, {_aQN: _EOn, _sN: _eOn}),
         (lambda: schemas.BOOT_MODE_VALUES, {_aQN: _BMo, _sN: _bMo}),
         (lambda: schemas.STRING, {_aQN: _PDl, _sN: _pDl}),
@@ -933,7 +847,7 @@ INSTANCE: StaticSchema = (
         (lambda: schemas.STRING, {_aQN: _KI, _sN: _kI}),
         (lambda: schemas.STRING, {_aQN: _RIa, _sN: _rIa}),
         (lambda: schemas.PLATFORM_VALUES, {_aQN: _Pla, _sN: _plat}),
-        (MONITORING, {_aQN: _Mon, _sN: _monit}),
+        (lambda: schemas.MONITORING, {_aQN: _Mon, _sN: _monit}),
         (lambda: schemas.STRING, {_aQN: _SIu, _sN: _sI}),
         (lambda: schemas.STRING, {_aQN: _VI, _sN: _vI}),
         (lambda: schemas.STRING, {_aQN: _PIAr, _sN: _pIAr}),
@@ -1541,6 +1455,82 @@ BARE_METAL_FLAG: StaticSchema = (2, n0, _BMF, 0)
 BURSTABLE_PERFORMANCE_FLAG: StaticSchema = (2, n0, _BPFu, 0)
 
 CURRENT_GENERATION_FLAG: StaticSchema = (2, n0, _CGF, 0)
+
+DEDICATED_HOST_FLAG: StaticSchema = (2, n0, _DHF, 0)
+
+ATTACHMENT_LIMIT_TYPE: StaticSchema = (
+    14,
+    n0,
+    _ALT,
+    0,
+    (_SHARED, _DEDICATED),
+    ((-1, {_sV: _sh}), (-1, {_sV: _ded})),
+)
+
+BASELINE_BANDWIDTH_IN_MBPS: StaticSchema = (7, n0, _BBIM, 0)
+
+BASELINE_IOPS: StaticSchema = (7, n0, _BIa, 0)
+
+BASELINE_THROUGHPUT_IN_M_BPS: StaticSchema = (10, n0, _BTIMB, 0)
+
+EBS_CARD_INDEX: StaticSchema = (7, n0, _ECI, 0)
+
+MAXIMUM_BANDWIDTH_IN_MBPS: StaticSchema = (7, n0, _MBIM, 0)
+
+MAXIMUM_IOPS: StaticSchema = (7, n0, _MI, 0)
+
+MAXIMUM_THROUGHPUT_IN_M_BPS: StaticSchema = (10, n0, _MTIMB, 0)
+
+EBS_CARD_INFO: StaticSchema = (
+    18,
+    n0,
+    _ECIb,
+    0,
+    (_ECI, _BBIM, _BTIMB, _BIa, _MBIM, _MTIMB, _MI),
+    (
+        (EBS_CARD_INDEX, {_aQN: _ECI, _sN: _eCI}),
+        (BASELINE_BANDWIDTH_IN_MBPS, {_aQN: _BBIM, _sN: _bBIM}),
+        (BASELINE_THROUGHPUT_IN_M_BPS, {_aQN: _BTIMB, _sN: _bTIMB}),
+        (BASELINE_IOPS, {_aQN: _BIa, _sN: _bIa}),
+        (MAXIMUM_BANDWIDTH_IN_MBPS, {_aQN: _MBIM, _sN: _mBIM}),
+        (MAXIMUM_THROUGHPUT_IN_M_BPS, {_aQN: _MTIMB, _sN: _mTIMB}),
+        (MAXIMUM_IOPS, {_aQN: _MI, _sN: _mI}),
+    ),
+)
+
+EBS_CARD_INFO_LIST: StaticSchema = (
+    16,
+    n0,
+    _ECIL,
+    0,
+    (_me,),
+    ((EBS_CARD_INFO, {_sN: _i}),),
+)
+
+EBS_OPTIMIZED_INFO: StaticSchema = (
+    18,
+    n0,
+    _EOI,
+    0,
+    (_BBIM, _BTIMB, _BIa, _MBIM, _MTIMB, _MI),
+    (
+        (BASELINE_BANDWIDTH_IN_MBPS, {_aQN: _BBIM, _sN: _bBIM}),
+        (BASELINE_THROUGHPUT_IN_M_BPS, {_aQN: _BTIMB, _sN: _bTIMB}),
+        (BASELINE_IOPS, {_aQN: _BIa, _sN: _bIa}),
+        (MAXIMUM_BANDWIDTH_IN_MBPS, {_aQN: _MBIM, _sN: _mBIM}),
+        (MAXIMUM_THROUGHPUT_IN_M_BPS, {_aQN: _MTIMB, _sN: _mTIMB}),
+        (MAXIMUM_IOPS, {_aQN: _MI, _sN: _mI}),
+    ),
+)
+
+EBS_OPTIMIZED_SUPPORT: StaticSchema = (
+    14,
+    n0,
+    _EOS,
+    0,
+    (_uns, _supp, _def),
+    ((-1, {_sV: _uns}), (-1, {_sV: _supp}), (-1, {_sV: _def})),
+)
 
 INSTANCE_ID_UPDATE_STRING_LIST: StaticSchema = (
     16,

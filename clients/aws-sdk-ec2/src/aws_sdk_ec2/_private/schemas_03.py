@@ -18,6 +18,7 @@ _TS = "TagSpecification"
 _Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
+_sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _TSa = "TagSpecifications"
 _DR = "DryRun"
@@ -434,8 +435,8 @@ ASSOCIATE_INSTANCE_EVENT_WINDOW_INPUT: StaticSchema = (
     (_DR, _IEWI, _ATss),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (INSTANCE_EVENT_WINDOW_ID, 1),
-        (INSTANCE_EVENT_WINDOW_ASSOCIATION_REQUEST, 1),
+        (INSTANCE_EVENT_WINDOW_ID, {_sO: None, _smi: None}),
+        (INSTANCE_EVENT_WINDOW_ASSOCIATION_REQUEST, {_sO: None, _smi: None}),
     ),
 )
 
@@ -549,8 +550,8 @@ ASSOCIATE_IPAM_BYOASN_INPUT: StaticSchema = (
     (_DR, _Asn, _Ci),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
     ),
 )
 
@@ -581,8 +582,8 @@ ASSOCIATE_IPAM_RESOURCE_DISCOVERY_INPUT: StaticSchema = (
     (_DR, _IIp, _IRDI, _TSa, _CTl),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_ID, 1),
-        (lambda: schemas.IPAM_RESOURCE_DISCOVERY_ID, 1),
+        (lambda: schemas.IPAM_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.IPAM_RESOURCE_DISCOVERY_ID, {_sO: None, _smi: None}),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
         (lambda: schemas.STRING, 2),
     ),
@@ -666,8 +667,8 @@ ASSOCIATE_NAT_GATEWAY_ADDRESS_INPUT: StaticSchema = (
     {_sSI: _cANGAR, _sm: None},
     (_NGI, _AIl, _PIAri, _DR, _AZ, _AZI),
     (
-        (lambda: schemas.NAT_GATEWAY_ID, 1),
-        (lambda: schemas.ALLOCATION_ID_LIST, {_sN: _AI, _smi: None}),
+        (lambda: schemas.NAT_GATEWAY_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.ALLOCATION_ID_LIST, {_sN: _AI, _sO: None, _smi: None}),
         (lambda: schemas.IP_LIST, {_sN: _PIAr}),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.AVAILABILITY_ZONE_NAME, 0),
@@ -733,8 +734,8 @@ FLEX_COST_ALLOCATION_NETWORK_RESOURCE_SCOPE: StaticSchema = (
     0,
     (_RT, _RIes),
     (
-        (FLEX_COST_ALLOCATION_NETWORK_RESOURCE_SCOPE_TYPE, 1),
-        (FLEX_COST_ALLOCATION_NETWORK_RESOURCE_SCOPE_ID_LIST, 1),
+        (FLEX_COST_ALLOCATION_NETWORK_RESOURCE_SCOPE_TYPE, {_sO: None, _smi: None}),
+        (FLEX_COST_ALLOCATION_NETWORK_RESOURCE_SCOPE_ID_LIST, {_sO: None, _smi: None}),
     ),
 )
 
@@ -745,7 +746,7 @@ ASSOCIATE_NETWORKING_FLEX_COST_ALLOCATION_POLICY_INPUT: StaticSchema = (
     {_sSI: _cANFCAPR, _sm: None},
     (_FPI, _NRI, _NRS, _CTl, _DR),
     (
-        (lambda: schemas.FLEX_COST_ALLOCATION_POLICY_ID, 1),
+        (lambda: schemas.FLEX_COST_ALLOCATION_POLICY_ID, {_sO: None, _smi: None}),
         (FLEX_COST_ALLOCATION_NETWORK_RESOURCE_ID_LIST, 0),
         (FLEX_COST_ALLOCATION_NETWORK_RESOURCE_SCOPE, 0),
         (lambda: schemas.STRING, 2),
@@ -845,8 +846,8 @@ ASSOCIATE_ROUTE_SERVER_INPUT: StaticSchema = (
     {_sSI: _cARSR, _sm: None},
     (_RSI, _VI, _DR),
     (
-        (lambda: schemas.ROUTE_SERVER_ID, 1),
-        (lambda: schemas.VPC_ID, 1),
+        (lambda: schemas.ROUTE_SERVER_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.VPC_ID, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, 0),
     ),
 )
@@ -903,7 +904,10 @@ ASSOCIATE_ROUTE_TABLE_INPUT: StaticSchema = (
         (lambda: schemas.IPV4_POOL_EC2_ID, 0),
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
         (lambda: schemas.SUBNET_ID, {_aQN: _SIu, _sN: _sI}),
-        (lambda: schemas.ROUTE_TABLE_ID, {_aQN: _RTIo, _sN: _rTIo, _smi: None}),
+        (
+            lambda: schemas.ROUTE_TABLE_ID,
+            {_aQN: _RTIo, _sN: _rTIo, _sO: None, _smi: None},
+        ),
     ),
 )
 
@@ -963,8 +967,8 @@ ASSOCIATE_SECURITY_GROUP_VPC_INPUT: StaticSchema = (
     {_sSI: _cASGVR, _sm: None},
     (_GIr, _VI, _DR),
     (
-        (lambda: schemas.SECURITY_GROUP_ID, 1),
-        (lambda: schemas.VPC_ID, 1),
+        (lambda: schemas.SECURITY_GROUP_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.VPC_ID, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, 0),
     ),
 )
@@ -999,7 +1003,7 @@ ASSOCIATE_SUBNET_CIDR_BLOCK_INPUT: StaticSchema = (
     (
         (lambda: schemas.IPAM_POOL_ID, 0),
         (NETMASK_LENGTH, 0),
-        (lambda: schemas.SUBNET_ID, {_aQN: _SIu, _sN: _sI, _smi: None}),
+        (lambda: schemas.SUBNET_ID, {_aQN: _SIu, _sN: _sI, _sO: None, _smi: None}),
         (lambda: schemas.STRING, {_aQN: _ICB, _sN: _iCB}),
     ),
 )
@@ -1096,9 +1100,9 @@ ASSOCIATE_TRANSIT_GATEWAY_MULTICAST_DOMAIN_INPUT: StaticSchema = (
     {_sSI: _cATGMDR, _sm: None},
     (_TGMDI, _TGAI, _SI, _DR),
     (
-        (lambda: schemas.TRANSIT_GATEWAY_MULTICAST_DOMAIN_ID, 1),
-        (lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, 1),
-        (lambda: schemas.TRANSIT_GATEWAY_SUBNET_ID_LIST, 1),
+        (lambda: schemas.TRANSIT_GATEWAY_MULTICAST_DOMAIN_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.TRANSIT_GATEWAY_SUBNET_ID_LIST, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, 0),
     ),
 )
@@ -1134,8 +1138,8 @@ ASSOCIATE_TRANSIT_GATEWAY_POLICY_TABLE_INPUT: StaticSchema = (
     {_sSI: _cATGPTR, _sm: None},
     (_TGPTI, _TGAI, _DR),
     (
-        (lambda: schemas.TRANSIT_GATEWAY_POLICY_TABLE_ID, 1),
-        (lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, 1),
+        (lambda: schemas.TRANSIT_GATEWAY_POLICY_TABLE_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, 0),
     ),
 )
@@ -1171,8 +1175,8 @@ ASSOCIATE_TRANSIT_GATEWAY_ROUTE_TABLE_INPUT: StaticSchema = (
     {_sSI: _cATGRTR, _sm: None},
     (_TGRTI, _TGAI, _DR),
     (
-        (lambda: schemas.TRANSIT_GATEWAY_ROUTE_TABLE_ID, 1),
-        (lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, 1),
+        (lambda: schemas.TRANSIT_GATEWAY_ROUTE_TABLE_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, 0),
     ),
 )
@@ -1203,8 +1207,8 @@ ASSOCIATE_TRUNK_INTERFACE_INPUT: StaticSchema = (
     {_sSI: _cATIR, _sm: None},
     (_BII, _TII, _VIl, _GK, _CTl, _DR),
     (
-        (lambda: schemas.NETWORK_INTERFACE_ID, 1),
-        (lambda: schemas.NETWORK_INTERFACE_ID, 1),
+        (lambda: schemas.NETWORK_INTERFACE_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.NETWORK_INTERFACE_ID, {_sO: None, _smi: None}),
         (lambda: schemas.INTEGER, 0),
         (lambda: schemas.INTEGER, 0),
         (lambda: schemas.STRING, 2),
@@ -1275,7 +1279,7 @@ ASSOCIATE_VPC_CIDR_BLOCK_INPUT: StaticSchema = (
         (NETMASK_LENGTH, 0),
         (lambda: schemas.IPAM_POOL_ID, 0),
         (NETMASK_LENGTH, 0),
-        (lambda: schemas.VPC_ID, {_aQN: _VI, _sN: _vI, _smi: None}),
+        (lambda: schemas.VPC_ID, {_aQN: _VI, _sN: _vI, _sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, {_aQN: _APICB, _sN: _aPICB}),
     ),
 )
@@ -1369,9 +1373,9 @@ ATTACH_CLASSIC_LINK_VPC_INPUT: StaticSchema = (
     (_DR, _II, _VI, _G),
     (
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (lambda: schemas.INSTANCE_ID, {_aQN: _II, _sN: _iI, _smi: None}),
-        (lambda: schemas.VPC_ID, {_aQN: _VI, _sN: _vI, _smi: None}),
-        (lambda: schemas.GROUP_ID_STRING_LIST, {_sN: _SGI, _smi: None}),
+        (lambda: schemas.INSTANCE_ID, {_aQN: _II, _sN: _iI, _sO: None, _smi: None}),
+        (lambda: schemas.VPC_ID, {_aQN: _VI, _sN: _vI, _sO: None, _smi: None}),
+        (lambda: schemas.GROUP_ID_STRING_LIST, {_sN: _SGI, _sO: None, _smi: None}),
     ),
 )
 
@@ -1404,7 +1408,11 @@ ATTACH_IMAGE_WATERMARK_INPUT: StaticSchema = (
     _AIWI,
     {_sSI: _cAIWR, _sm: None},
     (_IIm, _WN, _DR),
-    ((IMAGE_ID, 1), (IMAGE_WATERMARK_NAME_REQUEST, 1), (lambda: schemas.BOOLEAN, 0)),
+    (
+        (IMAGE_ID, {_sO: None, _smi: None}),
+        (IMAGE_WATERMARK_NAME_REQUEST, {_sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
 )
 
 ATTACH_IMAGE_WATERMARK_OUTPUT: StaticSchema = (
@@ -1434,8 +1442,11 @@ ATTACH_INTERNET_GATEWAY_INPUT: StaticSchema = (
     (_DR, _IGI, _VI),
     (
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (lambda: schemas.INTERNET_GATEWAY_ID, {_aQN: _IGI, _sN: _iGI, _smi: None}),
-        (lambda: schemas.VPC_ID, {_aQN: _VI, _sN: _vI, _smi: None}),
+        (
+            lambda: schemas.INTERNET_GATEWAY_ID,
+            {_aQN: _IGI, _sN: _iGI, _sO: None, _smi: None},
+        ),
+        (lambda: schemas.VPC_ID, {_aQN: _VI, _sN: _vI, _sO: None, _smi: None}),
     ),
 )
 
@@ -1480,9 +1491,12 @@ ATTACH_NETWORK_INTERFACE_INPUT: StaticSchema = (
         (ENA_SRD_SPECIFICATION, 0),
         (lambda: schemas.INTEGER, 0),
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (lambda: schemas.NETWORK_INTERFACE_ID, {_aQN: _NII, _sN: _nII, _smi: None}),
-        (lambda: schemas.INSTANCE_ID, {_aQN: _II, _sN: _iI, _smi: None}),
-        (lambda: schemas.INTEGER, {_aQN: _DI, _sN: _dI, _smi: None}),
+        (
+            lambda: schemas.NETWORK_INTERFACE_ID,
+            {_aQN: _NII, _sN: _nII, _sO: None, _smi: None},
+        ),
+        (lambda: schemas.INSTANCE_ID, {_aQN: _II, _sN: _iI, _sO: None, _smi: None}),
+        (lambda: schemas.INTEGER, {_aQN: _DI, _sN: _dI, _sO: None, _smi: None}),
     ),
 )
 

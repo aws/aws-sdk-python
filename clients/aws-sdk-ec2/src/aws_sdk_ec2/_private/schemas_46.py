@@ -11,17 +11,13 @@ _sN = "smithy.api#xmlName"
 _sV = "smithy.api#enumValue"
 _me = "member"
 _i = "item"
-_im = "image"
-_vo = "volume"
 _Va = "Value"
 _va = "value"
-_TS = "TagSpecification"
-_Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
 _Ad = "Address"
+_sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
-_TSa = "TagSpecifications"
 _DR = "DryRun"
 _AI = "AllocationId"
 _smit = "smithy.api#output"
@@ -34,8 +30,6 @@ _St = "State"
 _st = "state"
 _Sta = "Status"
 _sta = "status"
-_TSag = "TagSet"
-_tS = "tagSet"
 _VI = "VpcId"
 _Un = "Unsuccessful"
 _un = "unsuccessful"
@@ -94,12 +88,9 @@ _UIs = "UserId"
 _GN = "GroupName"
 _QI = "QuoteId"
 _CRFI = "CapacityReservationFleetId"
-_ITI = "ImportTaskId"
-_iTI = "importTaskId"
 _PCr = "ProductCode"
 _FII = "FpgaImageId"
 _KKI = "KmsKeyId"
-_En = "Encrypted"
 _kKI = "kmsKeyId"
 _iIm = "imageId"
 _SIn = "SnapshotId"
@@ -109,7 +100,6 @@ _SVI = "SourceVolumeId"
 _Io = "Iops"
 _Si = "Size"
 _Th = "Throughput"
-_Vo = "Volume"
 _oAu = "outpostArn"
 _sVI = "sourceVolumeId"
 _iop = "iops"
@@ -182,7 +172,13 @@ _eb = "ebs"
 _nD = "noDevice"
 _FIl = "FleetId"
 _bDM = "blockDeviceMapping"
+_IAT = "IpAddressType"
+_PCI = "PreserveClientIp"
+_ICEI = "InstanceConnectEndpointId"
 _CRP = "CapacityReservationPreference"
+_CCor = "CoreCount"
+_TPC = "ThreadsPerCore"
+_NV = "NestedVirtualization"
 _CCp = "CpuCredits"
 _DAT = "DisableApiTermination"
 _IISB = "InstanceInitiatedShutdownBehavior"
@@ -190,6 +186,9 @@ _UDs = "UserData"
 _CRSa = "CapacityReservationSpecification"
 _EOn = "EnclaveOptions"
 _DASi = "DisableApiStop"
+_cCor = "coreCount"
+_tPC = "threadsPerCore"
+_nV = "nestedVirtualization"
 _dAT = "disableApiTermination"
 _iISB = "instanceInitiatedShutdownBehavior"
 _uDs = "userData"
@@ -212,9 +211,6 @@ _oi__ = "opted-in"
 _noi = "not_opted_in"
 _noi_ = "not-opted-in"
 _OIS = "OptInStatus"
-_Im = "Image"
-_CTon = "ConversionTask"
-_IVm = "ImportVolume"
 _IIma = "ImageIds"
 _LPo = "LoadPermission"
 _Gr = "Group"
@@ -236,8 +232,6 @@ _ISm = "ImdsSupport"
 _ESna = "EnaSupport"
 _eSna = "enaSupport"
 _Ima = "Images"
-_STDn = "SnapshotTaskDetail"
-_sTD = "snapshotTaskDetail"
 _attr = "attribute"
 _SInap = "SnapshotIds"
 _LSoc = "LockState"
@@ -258,24 +252,10 @@ _LEO = "LockExpiresOn"
 _lEO = "lockExpiresOn"
 _LTCa = "LaunchTemplateConfig"
 _VIol = "VolumeIds"
-_RNo = "RoleName"
 _SMh = "ShadowMode"
 _IFCS = "InstanceFamilyCreditSpecification"
 _iFCS = "instanceFamilyCreditSpecification"
-_CDl = "ClientData"
-_DCiskon = "DiskContainer"
 _AId = "AdditionalInfo"
-_cTonv = "conversionTask"
-_ISIm = "ImportSnapshotInput"
-_cISR = "com.amazonaws.ec2#ImportSnapshotRequest"
-_ISO = "ImportSnapshotOutput"
-_cISRo = "com.amazonaws.ec2#ImportSnapshotResult"
-_ISmpo = "ImportSnapshot"
-_IVI = "ImportVolumeInput"
-_cIVR = "com.amazonaws.ec2#ImportVolumeRequest"
-_IVO = "ImportVolumeOutput"
-_cIVRo = "com.amazonaws.ec2#ImportVolumeResult"
-_LIIRBMR = "ListImagesInRecycleBinMaxResults"
 _LIIRBI = "ListImagesInRecycleBinInput"
 _cLIIRBR = "com.amazonaws.ec2#ListImagesInRecycleBinRequest"
 _IRBI = "ImageRecycleBinInfo"
@@ -432,86 +412,16 @@ _cMICRAR = "com.amazonaws.ec2#ModifyInstanceCapacityReservationAttributesRequest
 _MICRAO = "ModifyInstanceCapacityReservationAttributesOutput"
 _cMICRARo = "com.amazonaws.ec2#ModifyInstanceCapacityReservationAttributesResult"
 _MICRA = "ModifyInstanceCapacityReservationAttributes"
-
-IMPORT_SNAPSHOT_INPUT: StaticSchema = (
-    18,
-    n0,
-    _ISIm,
-    {_sSI: _cISR, _sm: None},
-    (_CDl, _CTl, _Des, _DCiskon, _DR, _En, _KKI, _RNo, _TSa),
-    (
-        (lambda: schemas.CLIENT_DATA, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.SNAPSHOT_DISK_CONTAINER, 0),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.KMS_KEY_ID, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
-    ),
-)
-
-IMPORT_SNAPSHOT_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _ISO,
-    {_sSI: _cISRo, _smit: None},
-    (_Des, _ITI, _STDn, _Tag),
-    (
-        (lambda: schemas.STRING, {_aQN: _Des, _sN: _desc}),
-        (lambda: schemas.STRING, {_aQN: _ITI, _sN: _iTI}),
-        (lambda: schemas.SNAPSHOT_TASK_DETAIL, {_aQN: _STDn, _sN: _sTD}),
-        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
-    ),
-)
-
-IMPORT_SNAPSHOT: StaticOperationSchema = (
-    23,
-    n0,
-    _ISmpo,
-    0,
-    IMPORT_SNAPSHOT_INPUT,
-    IMPORT_SNAPSHOT_OUTPUT,
-    (),
-)
-
-IMPORT_VOLUME_INPUT: StaticSchema = (
-    18,
-    n0,
-    _IVI,
-    {_sSI: _cIVR, _sm: None},
-    (_AZI, _DR, _AZ, _Im, _Des, _Vo),
-    (
-        (lambda: schemas.AVAILABILITY_ZONE_ID, 0),
-        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (lambda: schemas.STRING, {_aQN: _AZ, _sN: _aZ}),
-        (lambda: schemas.DISK_IMAGE_DETAIL, {_aQN: _Im, _sN: _im, _smi: None}),
-        (lambda: schemas.STRING, {_aQN: _Des, _sN: _desc}),
-        (lambda: schemas.VOLUME_DETAIL, {_aQN: _Vo, _sN: _vo, _smi: None}),
-    ),
-)
-
-IMPORT_VOLUME_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _IVO,
-    {_sSI: _cIVRo, _smit: None},
-    (_CTon,),
-    ((lambda: schemas.CONVERSION_TASK, {_aQN: _CTon, _sN: _cTonv}),),
-)
-
-IMPORT_VOLUME: StaticOperationSchema = (
-    23,
-    n0,
-    _IVm,
-    0,
-    IMPORT_VOLUME_INPUT,
-    IMPORT_VOLUME_OUTPUT,
-    (),
-)
-
-LIST_IMAGES_IN_RECYCLE_BIN_MAX_RESULTS: StaticSchema = (7, n0, _LIIRBMR, 0)
+_MICEI = "ModifyInstanceConnectEndpointInput"
+_cMICER = "com.amazonaws.ec2#ModifyInstanceConnectEndpointRequest"
+_MICEO = "ModifyInstanceConnectEndpointOutput"
+_cMICERo = "com.amazonaws.ec2#ModifyInstanceConnectEndpointResult"
+_MICE = "ModifyInstanceConnectEndpoint"
+_MICOI = "ModifyInstanceCpuOptionsInput"
+_cMICOR = "com.amazonaws.ec2#ModifyInstanceCpuOptionsRequest"
+_MICOO = "ModifyInstanceCpuOptionsOutput"
+_cMICORo = "com.amazonaws.ec2#ModifyInstanceCpuOptionsResult"
+_MICO = "ModifyInstanceCpuOptions"
 
 LIST_IMAGES_IN_RECYCLE_BIN_INPUT: StaticSchema = (
     18,
@@ -522,7 +432,7 @@ LIST_IMAGES_IN_RECYCLE_BIN_INPUT: StaticSchema = (
     (
         (lambda: schemas.IMAGE_ID_STRING_LIST, {_sN: _IIm}),
         (lambda: schemas.STRING, 0),
-        (LIST_IMAGES_IN_RECYCLE_BIN_MAX_RESULTS, 0),
+        (lambda: schemas.LIST_IMAGES_IN_RECYCLE_BIN_MAX_RESULTS, 0),
         (lambda: schemas.BOOLEAN, 0),
     ),
 )
@@ -741,9 +651,9 @@ LOCK_SNAPSHOT_INPUT: StaticSchema = (
     {_sSI: _cLSR, _sm: None},
     (_SIn, _DR, _LM, _COPo, _LDo, _EDx),
     (
-        (lambda: schemas.SNAPSHOT_ID, 1),
+        (lambda: schemas.SNAPSHOT_ID, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, 0),
-        (LOCK_MODE, 1),
+        (LOCK_MODE, {_sO: None, _smi: None}),
         (COOL_OFF_PERIOD_REQUEST_HOURS, 0),
         (RETENTION_PERIOD_REQUEST_DAYS, 0),
         (lambda: schemas.MILLISECOND_DATE_TIME, 0),
@@ -826,7 +736,7 @@ MODIFY_ADDRESS_ATTRIBUTE_INPUT: StaticSchema = (
     {_sSI: _cMAAR, _sm: None},
     (_AI, _DNo, _DR),
     (
-        (lambda: schemas.ALLOCATION_ID, 1),
+        (lambda: schemas.ALLOCATION_ID, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.BOOLEAN, 0),
     ),
@@ -876,7 +786,7 @@ MODIFY_APPLICATION_STATUS_CHECK_INPUT: StaticSchema = (
         _DR,
     ),
     (
-        (lambda: schemas.APPLICATION_STATUS_CHECK_ID, 1),
+        (lambda: schemas.APPLICATION_STATUS_CHECK_ID, {_sO: None, _smi: None}),
         (lambda: schemas.AGGREGATION_STATUS_ENUM, 0),
         (lambda: schemas.HEALTH_CHECK_PATH_REQUEST_LIST, {_sN: _HCPe}),
         (lambda: schemas.NETWORK_PROTOCOL_ENUM, 0),
@@ -936,8 +846,8 @@ MODIFY_AVAILABILITY_ZONE_GROUP_INPUT: StaticSchema = (
     {_sSI: _cMAZGR, _sm: None},
     (_GN, _OIS, _DR),
     (
-        (lambda: schemas.STRING, 1),
-        (MODIFY_AVAILABILITY_ZONE_OPT_IN_STATUS, 1),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
+        (MODIFY_AVAILABILITY_ZONE_OPT_IN_STATUS, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, 0),
     ),
 )
@@ -968,7 +878,7 @@ MODIFY_CAPACITY_RESERVATION_INPUT: StaticSchema = (
     {_sSI: _cMCRR, _sm: None},
     (_CRI, _IC, _ED, _EDT, _Accep, _DR, _AId, _IMC, _AMT, _SDt, _QI),
     (
-        (lambda: schemas.CAPACITY_RESERVATION_ID, 1),
+        (lambda: schemas.CAPACITY_RESERVATION_ID, {_sO: None, _smi: None}),
         (lambda: schemas.INTEGER, 0),
         (lambda: schemas.DATE_TIME, 0),
         (lambda: schemas.END_DATE_TYPE, 0),
@@ -1018,7 +928,7 @@ MODIFY_CAPACITY_RESERVATION_FLEET_INPUT: StaticSchema = (
     {_sSI: _cMCRFR, _sm: None},
     (_CRFI, _TTC, _ED, _DR, _RED),
     (
-        (lambda: schemas.CAPACITY_RESERVATION_FLEET_ID, 1),
+        (lambda: schemas.CAPACITY_RESERVATION_FLEET_ID, {_sO: None, _smi: None}),
         (lambda: schemas.INTEGER, 0),
         (lambda: schemas.MILLISECOND_DATE_TIME, 0),
         (lambda: schemas.BOOLEAN, 0),
@@ -1080,7 +990,7 @@ MODIFY_CLIENT_VPN_ENDPOINT_INPUT: StaticSchema = (
         _DPO,
     ),
     (
-        (lambda: schemas.CLIENT_VPN_ENDPOINT_ID, 1),
+        (lambda: schemas.CLIENT_VPN_ENDPOINT_ID, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.CONNECTION_LOG_OPTIONS, 0),
         (DNS_SERVERS_OPTIONS_MODIFY_STRUCTURE, 0),
@@ -1127,7 +1037,7 @@ MODIFY_CLIENT_VPN_ENDPOINT_AUTHORIZATION_POLICY_INPUT: StaticSchema = (
     {_sSI: _cMCVEAPR, _sm: None},
     (_CVEI, _PDo, _Des, _SMh, _CTl, _DR),
     (
-        (lambda: schemas.CLIENT_VPN_ENDPOINT_ID, 1),
+        (lambda: schemas.CLIENT_VPN_ENDPOINT_ID, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.CLIENT_VPN_AUTHORIZATION_POLICY_SHADOW_MODE, 0),
@@ -1168,8 +1078,8 @@ MODIFY_DEFAULT_CREDIT_SPECIFICATION_INPUT: StaticSchema = (
     (_DR, _IF, _CCp),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.UNLIMITED_SUPPORTED_INSTANCE_FAMILY, 1),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.UNLIMITED_SUPPORTED_INSTANCE_FAMILY, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
     ),
 )
 
@@ -1203,7 +1113,10 @@ MODIFY_EBS_DEFAULT_KMS_KEY_ID_INPUT: StaticSchema = (
     _MEDKKII,
     {_sSI: _cMEDKKIR, _sm: None},
     (_KKI, _DR),
-    ((lambda: schemas.KMS_KEY_ID, 1), (lambda: schemas.BOOLEAN, 0)),
+    (
+        (lambda: schemas.KMS_KEY_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
 )
 
 MODIFY_EBS_DEFAULT_KMS_KEY_ID_OUTPUT: StaticSchema = (
@@ -1235,7 +1148,7 @@ MODIFY_FLEET_INPUT: StaticSchema = (
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.FLEET_EXCESS_CAPACITY_TERMINATION_POLICY, 0),
         (lambda: schemas.FLEET_LAUNCH_TEMPLATE_CONFIG_LIST_REQUEST, {_sN: _LTCa}),
-        (lambda: schemas.FLEET_ID, 1),
+        (lambda: schemas.FLEET_ID, {_sO: None, _smi: None}),
         (lambda: schemas.TARGET_CAPACITY_SPECIFICATION_REQUEST, 0),
         (lambda: schemas.STRING, 0),
     ),
@@ -1331,7 +1244,7 @@ MODIFY_FPGA_IMAGE_ATTRIBUTE_INPUT: StaticSchema = (
     (_DR, _FII, _Attr, _OTp, _UIse, _UGs, _PCro, _LPo, _Des, _N),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.FPGA_IMAGE_ID, 1),
+        (lambda: schemas.FPGA_IMAGE_ID, {_sO: None, _smi: None}),
         (lambda: schemas.FPGA_IMAGE_ATTRIBUTE_NAME, 0),
         (OPERATION_TYPE, 0),
         (USER_ID_STRING_LIST, {_sN: _UIs}),
@@ -1373,7 +1286,10 @@ MODIFY_HOSTS_INPUT: StaticSchema = (
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.HOST_MAINTENANCE, 0),
-        (lambda: schemas.REQUEST_HOST_ID_LIST, {_aQN: _HIo, _sN: _hI, _smi: None}),
+        (
+            lambda: schemas.REQUEST_HOST_ID_LIST,
+            {_aQN: _HIo, _sN: _hI, _sO: None, _smi: None},
+        ),
         (lambda: schemas.AUTO_PLACEMENT, {_aQN: _APu, _sN: _aP}),
     ),
 )
@@ -1416,9 +1332,9 @@ MODIFY_IDENTITY_ID_FORMAT_INPUT: StaticSchema = (
     {_sSI: _cMIIFR, _sm: None},
     (_Reso, _ULI, _PAr),
     (
-        (lambda: schemas.STRING, {_aQN: _Reso, _sN: _reso, _smi: None}),
-        (lambda: schemas.BOOLEAN, {_aQN: _ULI, _sN: _uLI, _smi: None}),
-        (lambda: schemas.STRING, {_aQN: _PAr, _sN: _pAr, _smi: None}),
+        (lambda: schemas.STRING, {_aQN: _Reso, _sN: _reso, _sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, {_aQN: _ULI, _sN: _uLI, _sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_aQN: _PAr, _sN: _pAr, _sO: None, _smi: None}),
     ),
 )
 
@@ -1445,7 +1361,10 @@ MODIFY_ID_FORMAT_INPUT: StaticSchema = (
     _MIFI,
     {_sSI: _cMIFR, _sm: None},
     (_Reso, _ULI),
-    ((lambda: schemas.STRING, 1), (lambda: schemas.BOOLEAN, 1)),
+    (
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, {_sO: None, _smi: None}),
+    ),
 )
 
 MODIFY_ID_FORMAT_OUTPUT: StaticSchema = (18, n0, _MIFO, {_sSI: _sU, _smit: None})
@@ -1499,7 +1418,7 @@ MODIFY_IMAGE_ATTRIBUTE_INPUT: StaticSchema = (
     (
         (lambda: schemas.STRING, 0),
         (lambda: schemas.ATTRIBUTE_VALUE, 0),
-        (lambda: schemas.IMAGE_ID, 1),
+        (lambda: schemas.IMAGE_ID, {_sO: None, _smi: None}),
         (LAUNCH_PERMISSION_MODIFICATIONS, 0),
         (OPERATION_TYPE, 0),
         (PRODUCT_CODE_STRING_LIST, {_sN: _PCr}),
@@ -1610,7 +1529,7 @@ MODIFY_INSTANCE_ATTRIBUTE_INPUT: StaticSchema = (
         (ENCLAVE_OPTIONS_REQUEST, 0),
         (lambda: schemas.ATTRIBUTE_BOOLEAN_VALUE, 0),
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (lambda: schemas.INSTANCE_ID, {_aQN: _II, _sN: _iI, _smi: None}),
+        (lambda: schemas.INSTANCE_ID, {_aQN: _II, _sN: _iI, _sO: None, _smi: None}),
         (lambda: schemas.INSTANCE_ATTRIBUTE_NAME, {_aQN: _Attr, _sN: _attr}),
         (MODIFY_INSTANCE_ATTRIBUTE_VALUE, {_aQN: _Va, _sN: _va}),
         (INSTANCE_BLOCK_DEVICE_MAPPING_SPECIFICATION_LIST, {_aQN: _BDM, _sN: _bDM}),
@@ -1663,8 +1582,8 @@ MODIFY_INSTANCE_CAPACITY_RESERVATION_ATTRIBUTES_INPUT: StaticSchema = (
     {_sSI: _cMICRAR, _sm: None},
     (_II, _CRSa, _DR),
     (
-        (lambda: schemas.INSTANCE_ID, 1),
-        (CAPACITY_RESERVATION_SPECIFICATION, 1),
+        (lambda: schemas.INSTANCE_ID, {_sO: None, _smi: None}),
+        (CAPACITY_RESERVATION_SPECIFICATION, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, 0),
     ),
 )
@@ -1685,5 +1604,78 @@ MODIFY_INSTANCE_CAPACITY_RESERVATION_ATTRIBUTES: StaticOperationSchema = (
     0,
     MODIFY_INSTANCE_CAPACITY_RESERVATION_ATTRIBUTES_INPUT,
     MODIFY_INSTANCE_CAPACITY_RESERVATION_ATTRIBUTES_OUTPUT,
+    (),
+)
+
+MODIFY_INSTANCE_CONNECT_ENDPOINT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _MICEI,
+    {_sSI: _cMICER, _sm: None},
+    (_DR, _ICEI, _IAT, _SGIe, _PCI),
+    (
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.INSTANCE_CONNECT_ENDPOINT_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.IP_ADDRESS_TYPE, 0),
+        (lambda: schemas.SECURITY_GROUP_ID_STRING_LIST_REQUEST, {_sN: _SGI}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+MODIFY_INSTANCE_CONNECT_ENDPOINT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _MICEO,
+    {_sSI: _cMICERo, _smit: None},
+    (_R,),
+    ((lambda: schemas.BOOLEAN, {_aQN: _R, _sN: _r}),),
+)
+
+MODIFY_INSTANCE_CONNECT_ENDPOINT: StaticOperationSchema = (
+    23,
+    n0,
+    _MICE,
+    0,
+    MODIFY_INSTANCE_CONNECT_ENDPOINT_INPUT,
+    MODIFY_INSTANCE_CONNECT_ENDPOINT_OUTPUT,
+    (),
+)
+
+MODIFY_INSTANCE_CPU_OPTIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _MICOI,
+    {_sSI: _cMICOR, _sm: None},
+    (_II, _CCor, _TPC, _NV, _DR),
+    (
+        (lambda: schemas.INSTANCE_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.INTEGER, 0),
+        (lambda: schemas.INTEGER, 0),
+        (lambda: schemas.NESTED_VIRTUALIZATION_SPECIFICATION, 0),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+MODIFY_INSTANCE_CPU_OPTIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _MICOO,
+    {_sSI: _cMICORo, _smit: None},
+    (_II, _CCor, _TPC, _NV),
+    (
+        (lambda: schemas.INSTANCE_ID, {_aQN: _II, _sN: _iI}),
+        (lambda: schemas.INTEGER, {_aQN: _CCor, _sN: _cCor}),
+        (lambda: schemas.INTEGER, {_aQN: _TPC, _sN: _tPC}),
+        (lambda: schemas.NESTED_VIRTUALIZATION_SPECIFICATION, {_aQN: _NV, _sN: _nV}),
+    ),
+)
+
+MODIFY_INSTANCE_CPU_OPTIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _MICO,
+    0,
+    MODIFY_INSTANCE_CPU_OPTIONS_INPUT,
+    MODIFY_INSTANCE_CPU_OPTIONS_OUTPUT,
     (),
 )

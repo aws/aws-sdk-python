@@ -14,11 +14,11 @@ _i = "item"
 _Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
+_sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _DR = "DryRun"
 _p = "pending"
 _smit = "smithy.api#output"
-_IC = "InstanceCount"
 _av = "available"
 _de = "deleting"
 _del = "deleted"
@@ -36,6 +36,7 @@ _VI = "VpcId"
 _vI = "vpcId"
 _VOI = "VpcOwnerId"
 _vOI = "vpcOwnerId"
+_er = "error"
 _dRr = "dryRun"
 _VPCI = "VpcPeeringConnectionId"
 _vPCI = "vpcPeeringConnectionId"
@@ -49,8 +50,8 @@ _AIt = "AttachmentId"
 _aIt = "attachmentId"
 _SG = "SecurityGroup"
 _SGe = "SecurityGroups"
-_IT = "InstanceType"
-_iT = "instanceType"
+_AIS = "ActiveInstanceSet"
+_ERROR = "ERROR"
 _Des = "Description"
 _PIAr = "PrivateIpAddress"
 _pIAr = "privateIpAddress"
@@ -58,6 +59,8 @@ _SMt = "StatusMessage"
 _sMt = "statusMessage"
 _desc = "description"
 _OA = "OutpostArn"
+_Ti = "Timestamp"
+_ti = "timestamp"
 _GIr = "GroupId"
 _gIr = "groupId"
 _NCI = "NetworkCardIndex"
@@ -89,9 +92,9 @@ _ST = "StartTime"
 _sTt = "startTime"
 _Prog = "Progress"
 _prog = "progress"
-_iC = "instanceCount"
-_CD = "CreateDate"
-_cD = "createDate"
+_SFRI = "SpotFleetRequestId"
+_SFRIp = "SpotFleetRequestIds"
+_sFRI = "spotFleetRequestId"
 _KKI = "KmsKeyId"
 _En = "Encrypted"
 _enc = "encrypted"
@@ -102,14 +105,8 @@ _sIn = "snapshotId"
 _oAu = "outpostArn"
 _STs = "SseType"
 _sTs = "sseType"
-_Int = "Interval"
-_int = "interval"
-_AIC = "AvailableInstanceCount"
-_aIC = "availableInstanceCount"
 _VSol = "VolumeSize"
 _vSo = "volumeSize"
-_Pla = "Platform"
-_plat = "platform"
 _SITe = "SecondaryInterfaceType"
 _SSIe = "SecondarySubnetId"
 _SIec = "SecondaryInterfaces"
@@ -171,12 +168,24 @@ _NTex = "NextToken"
 _Attr = "Attribute"
 _MR = "MaxResults"
 _nT = "nextToken"
+_infor = "information"
+_mR = "maxResults"
+_IC__ = "INSTANCE_CHANGE"
+_ETv = "EventType"
+_EIv = "EventInformation"
+_eIv = "eventInformation"
+_eTv = "eventType"
+_HRS = "HistoryRecordSet"
+_HRi = "HistoryRecords"
+_hRS = "historyRecordSet"
+_LET = "LastEvaluatedTime"
+_lET = "lastEvaluatedTime"
+_AIct = "ActiveInstances"
+_aIS = "activeInstanceSet"
 _pCr = "productCodes"
 _Gr = "Group"
 _gro = "group"
 _PCro = "ProductCodes"
-_HP = "HourlyPrice"
-_hP = "hourlyPrice"
 _SIIe = "SecondaryInterfaceId"
 _sIIe = "secondaryInterfaceId"
 _GNr = "GroupNames"
@@ -184,47 +193,9 @@ _SInap = "SnapshotIds"
 _SLVII = "ServiceLinkVirtualInterfaceId"
 _SLVIIe = "ServiceLinkVirtualInterfaceIds"
 _GIrou = "GroupIds"
-_Fr = "Frequency"
-_freq = "frequency"
 _ETa = "EarliestTime"
 _LTat = "LatestTime"
-_SIRR = "ScheduledInstanceRecurrenceRequest"
-_ODcc = "OccurrenceDays"
-_ODccu = "OccurrenceDay"
-_ORTE = "OccurrenceRelativeToEnd"
-_OUc = "OccurrenceUnit"
-_DSIAI = "DescribeScheduledInstanceAvailabilityInput"
-_cDSIAR = "com.amazonaws.ec2#DescribeScheduledInstanceAvailabilityRequest"
-_FSSTR = "FirstSlotStartTimeRange"
-_MSDIH = "MaxSlotDurationInHours"
-_MSDIHi = "MinSlotDurationInHours"
-_Rec = "Recurrence"
-_ODS = "OccurrenceDaySet"
-_SIRc = "ScheduledInstanceRecurrence"
-_oDS = "occurrenceDaySet"
-_oRTE = "occurrenceRelativeToEnd"
-_oU = "occurrenceUnit"
-_SIA = "ScheduledInstanceAvailability"
-_FSST = "FirstSlotStartTime"
-_fSST = "firstSlotStartTime"
-_MTDID = "MaxTermDurationInDays"
-_mTDID = "maxTermDurationInDays"
-_MTDIDi = "MinTermDurationInDays"
-_mTDIDi = "minTermDurationInDays"
-_NPet = "NetworkPlatform"
-_nPet = "networkPlatform"
-_PTu = "PurchaseToken"
-_pTu = "purchaseToken"
-_recu = "recurrence"
-_SDIH = "SlotDurationInHours"
-_sDIH = "slotDurationInHours"
-_TSIH = "TotalScheduledInstanceHours"
-_tSIH = "totalScheduledInstanceHours"
 _SIAS = "ScheduledInstanceAvailabilitySet"
-_DSIAO = "DescribeScheduledInstanceAvailabilityOutput"
-_cDSIARo = "com.amazonaws.ec2#DescribeScheduledInstanceAvailabilityResult"
-_sIAS = "scheduledInstanceAvailabilitySet"
-_DSIA = "DescribeScheduledInstanceAvailability"
 _SIIc = "ScheduledInstanceId"
 _SIIRS = "ScheduledInstanceIdRequestSet"
 _SSTRR = "SlotStartTimeRangeRequest"
@@ -232,16 +203,6 @@ _DSII = "DescribeScheduledInstancesInput"
 _cDSIR = "com.amazonaws.ec2#DescribeScheduledInstancesRequest"
 _SIIch = "ScheduledInstanceIds"
 _SSTR = "SlotStartTimeRange"
-_SIc = "ScheduledInstance"
-_NSST = "NextSlotStartTime"
-_nSST = "nextSlotStartTime"
-_PSET = "PreviousSlotEndTime"
-_pSET = "previousSlotEndTime"
-_sIIc = "scheduledInstanceId"
-_TED = "TermEndDate"
-_tED = "termEndDate"
-_TSD = "TermStartDate"
-_tSD = "termStartDate"
 _SISc = "ScheduledInstanceSet"
 _DSIO = "DescribeScheduledInstancesOutput"
 _cDSIRo = "com.amazonaws.ec2#DescribeScheduledInstancesResult"
@@ -412,122 +373,30 @@ _DSDSOe = "DescribeSpotDatafeedSubscriptionOutput"
 _cDSDSRom = "com.amazonaws.ec2#DescribeSpotDatafeedSubscriptionResult"
 _DSDSe = "DescribeSpotDatafeedSubscription"
 _DSFIMR = "DescribeSpotFleetInstancesMaxResults"
-
-SCHEDULED_INSTANCE_RECURRENCE_REQUEST: StaticSchema = (
-    18,
-    n0,
-    _SIRR,
-    0,
-    (_Fr, _Int, _ODcc, _ORTE, _OUc),
-    (
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.INTEGER, 0),
-        (lambda: schemas.OCCURRENCE_DAY_REQUEST_SET, {_sN: _ODccu}),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.STRING, 0),
-    ),
-)
-
-DESCRIBE_SCHEDULED_INSTANCE_AVAILABILITY_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DSIAI,
-    {_sSI: _cDSIAR, _sm: None},
-    (_DR, _Fil, _FSSTR, _MR, _MSDIH, _MSDIHi, _NTex, _Rec),
-    (
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (lambda: schemas.SLOT_DATE_TIME_RANGE_REQUEST, 1),
-        (lambda: schemas.DESCRIBE_SCHEDULED_INSTANCE_AVAILABILITY_MAX_RESULTS, 0),
-        (lambda: schemas.INTEGER, 0),
-        (lambda: schemas.INTEGER, 0),
-        (lambda: schemas.STRING, 0),
-        (SCHEDULED_INSTANCE_RECURRENCE_REQUEST, 1),
-    ),
-)
-
-DESCRIBE_SCHEDULED_INSTANCE_AVAILABILITY_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DSIAO,
-    {_sSI: _cDSIARo, _smit: None},
-    (_NTex, _SIAS),
-    (
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-        (lambda: SCHEDULED_INSTANCE_AVAILABILITY_SET, {_aQN: _SIAS, _sN: _sIAS}),
-    ),
-)
-
-DESCRIBE_SCHEDULED_INSTANCE_AVAILABILITY: StaticOperationSchema = (
-    23,
-    n0,
-    _DSIA,
-    0,
-    DESCRIBE_SCHEDULED_INSTANCE_AVAILABILITY_INPUT,
-    DESCRIBE_SCHEDULED_INSTANCE_AVAILABILITY_OUTPUT,
-    (),
-)
-
-OCCURRENCE_DAY_SET: StaticSchema = (
-    16,
-    n0,
-    _ODS,
-    0,
-    (_me,),
-    ((lambda: schemas.INTEGER, {_sN: _i}),),
-)
-
-SCHEDULED_INSTANCE_RECURRENCE: StaticSchema = (
-    18,
-    n0,
-    _SIRc,
-    0,
-    (_Fr, _Int, _ODS, _ORTE, _OUc),
-    (
-        (lambda: schemas.STRING, {_aQN: _Fr, _sN: _freq}),
-        (lambda: schemas.INTEGER, {_aQN: _Int, _sN: _int}),
-        (OCCURRENCE_DAY_SET, {_aQN: _ODS, _sN: _oDS}),
-        (lambda: schemas.BOOLEAN, {_aQN: _ORTE, _sN: _oRTE}),
-        (lambda: schemas.STRING, {_aQN: _OUc, _sN: _oU}),
-    ),
-)
-
-SCHEDULED_INSTANCE_AVAILABILITY: StaticSchema = (
-    18,
-    n0,
-    _SIA,
-    0,
-    (
-        _AZ,
-        _AIC,
-        _FSST,
-        _HP,
-        _IT,
-        _MTDID,
-        _MTDIDi,
-        _NPet,
-        _Pla,
-        _PTu,
-        _Rec,
-        _SDIH,
-        _TSIH,
-    ),
-    (
-        (lambda: schemas.STRING, {_aQN: _AZ, _sN: _aZ}),
-        (lambda: schemas.INTEGER, {_aQN: _AIC, _sN: _aIC}),
-        (lambda: schemas.DATE_TIME, {_aQN: _FSST, _sN: _fSST}),
-        (lambda: schemas.STRING, {_aQN: _HP, _sN: _hP}),
-        (lambda: schemas.STRING, {_aQN: _IT, _sN: _iT}),
-        (lambda: schemas.INTEGER, {_aQN: _MTDID, _sN: _mTDID}),
-        (lambda: schemas.INTEGER, {_aQN: _MTDIDi, _sN: _mTDIDi}),
-        (lambda: schemas.STRING, {_aQN: _NPet, _sN: _nPet}),
-        (lambda: schemas.STRING, {_aQN: _Pla, _sN: _plat}),
-        (lambda: schemas.STRING, {_aQN: _PTu, _sN: _pTu}),
-        (SCHEDULED_INSTANCE_RECURRENCE, {_aQN: _Rec, _sN: _recu}),
-        (lambda: schemas.INTEGER, {_aQN: _SDIH, _sN: _sDIH}),
-        (lambda: schemas.INTEGER, {_aQN: _TSIH, _sN: _tSIH}),
-    ),
-)
+_DSFII = "DescribeSpotFleetInstancesInput"
+_cDSFIR = "com.amazonaws.ec2#DescribeSpotFleetInstancesRequest"
+_DSFIO = "DescribeSpotFleetInstancesOutput"
+_cDSFIRo = "com.amazonaws.ec2#DescribeSpotFleetInstancesResponse"
+_DSFI = "DescribeSpotFleetInstances"
+_iCns = "instanceChange"
+_BC_ = "BATCH_CHANGE"
+_fRC = "fleetRequestChange"
+_INFORMATION = "INFORMATION"
+_DSFRHMR = "DescribeSpotFleetRequestHistoryMaxResults"
+_DSFRHI = "DescribeSpotFleetRequestHistoryInput"
+_cDSFRHR = "com.amazonaws.ec2#DescribeSpotFleetRequestHistoryRequest"
+_HRis = "HistoryRecord"
+_DSFRHO = "DescribeSpotFleetRequestHistoryOutput"
+_cDSFRHRo = "com.amazonaws.ec2#DescribeSpotFleetRequestHistoryResponse"
+_DSFRH = "DescribeSpotFleetRequestHistory"
+_DSFRI = "DescribeSpotFleetRequestsInput"
+_cDSFRR = "com.amazonaws.ec2#DescribeSpotFleetRequestsRequest"
+_SFRCS = "SpotFleetRequestConfigSet"
+_DSFRO = "DescribeSpotFleetRequestsOutput"
+_cDSFRRo = "com.amazonaws.ec2#DescribeSpotFleetRequestsResponse"
+_SFRCp = "SpotFleetRequestConfigs"
+_sFRCS = "spotFleetRequestConfigSet"
+_DSFR = "DescribeSpotFleetRequests"
 
 SCHEDULED_INSTANCE_AVAILABILITY_SET: StaticSchema = (
     16,
@@ -535,7 +404,7 @@ SCHEDULED_INSTANCE_AVAILABILITY_SET: StaticSchema = (
     _SIAS,
     0,
     (_me,),
-    ((SCHEDULED_INSTANCE_AVAILABILITY, {_sN: _i}),),
+    ((lambda: schemas.SCHEDULED_INSTANCE_AVAILABILITY, {_sN: _i}),),
 )
 
 SCHEDULED_INSTANCE_ID: StaticSchema = (3, n0, _SIIc, 0)
@@ -596,54 +465,13 @@ DESCRIBE_SCHEDULED_INSTANCES: StaticOperationSchema = (
     (),
 )
 
-SCHEDULED_INSTANCE: StaticSchema = (
-    18,
-    n0,
-    _SIc,
-    0,
-    (
-        _AZ,
-        _CD,
-        _HP,
-        _IC,
-        _IT,
-        _NPet,
-        _NSST,
-        _Pla,
-        _PSET,
-        _Rec,
-        _SIIc,
-        _SDIH,
-        _TED,
-        _TSD,
-        _TSIH,
-    ),
-    (
-        (lambda: schemas.STRING, {_aQN: _AZ, _sN: _aZ}),
-        (lambda: schemas.DATE_TIME, {_aQN: _CD, _sN: _cD}),
-        (lambda: schemas.STRING, {_aQN: _HP, _sN: _hP}),
-        (lambda: schemas.INTEGER, {_aQN: _IC, _sN: _iC}),
-        (lambda: schemas.STRING, {_aQN: _IT, _sN: _iT}),
-        (lambda: schemas.STRING, {_aQN: _NPet, _sN: _nPet}),
-        (lambda: schemas.DATE_TIME, {_aQN: _NSST, _sN: _nSST}),
-        (lambda: schemas.STRING, {_aQN: _Pla, _sN: _plat}),
-        (lambda: schemas.DATE_TIME, {_aQN: _PSET, _sN: _pSET}),
-        (SCHEDULED_INSTANCE_RECURRENCE, {_aQN: _Rec, _sN: _recu}),
-        (lambda: schemas.STRING, {_aQN: _SIIc, _sN: _sIIc}),
-        (lambda: schemas.INTEGER, {_aQN: _SDIH, _sN: _sDIH}),
-        (lambda: schemas.DATE_TIME, {_aQN: _TED, _sN: _tED}),
-        (lambda: schemas.DATE_TIME, {_aQN: _TSD, _sN: _tSD}),
-        (lambda: schemas.INTEGER, {_aQN: _TSIH, _sN: _tSIH}),
-    ),
-)
-
 SCHEDULED_INSTANCE_SET: StaticSchema = (
     16,
     n0,
     _SISc,
     0,
     (_me,),
-    ((SCHEDULED_INSTANCE, {_sN: _i}),),
+    ((lambda: schemas.SCHEDULED_INSTANCE, {_sN: _i}),),
 )
 
 DESCRIBE_SECONDARY_INTERFACES_MAX_RESULTS: StaticSchema = (7, n0, _DSIMR, 0)
@@ -909,7 +737,7 @@ DESCRIBE_SECURITY_GROUP_REFERENCES_INPUT: StaticSchema = (
     _DSGRI,
     {_sSI: _cDSGRR, _sm: None},
     (_DR, _GIr),
-    ((lambda: schemas.BOOLEAN, 0), (GROUP_IDS, 1)),
+    ((lambda: schemas.BOOLEAN, 0), (GROUP_IDS, {_sO: None, _smi: None})),
 )
 
 DESCRIBE_SECURITY_GROUP_REFERENCES_OUTPUT: StaticSchema = (
@@ -1227,8 +1055,8 @@ DESCRIBE_SNAPSHOT_ATTRIBUTE_INPUT: StaticSchema = (
     {_sSI: _cDSAR, _sm: None},
     (_Attr, _SIn, _DR),
     (
-        (lambda: schemas.SNAPSHOT_ATTRIBUTE_NAME, 1),
-        (lambda: schemas.SNAPSHOT_ID, 1),
+        (lambda: schemas.SNAPSHOT_ATTRIBUTE_NAME, {_sO: None, _smi: None}),
+        (lambda: schemas.SNAPSHOT_ID, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
     ),
 )
@@ -1504,3 +1332,156 @@ DESCRIBE_SPOT_DATAFEED_SUBSCRIPTION: StaticOperationSchema = (
 )
 
 DESCRIBE_SPOT_FLEET_INSTANCES_MAX_RESULTS: StaticSchema = (7, n0, _DSFIMR, 0)
+
+DESCRIBE_SPOT_FLEET_INSTANCES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DSFII,
+    {_sSI: _cDSFIR, _sm: None},
+    (_DR, _SFRI, _NTex, _MR),
+    (
+        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
+        (
+            lambda: schemas.SPOT_FLEET_REQUEST_ID,
+            {_aQN: _SFRI, _sN: _sFRI, _sO: None, _smi: None},
+        ),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+        (DESCRIBE_SPOT_FLEET_INSTANCES_MAX_RESULTS, {_aQN: _MR, _sN: _mR}),
+    ),
+)
+
+DESCRIBE_SPOT_FLEET_INSTANCES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DSFIO,
+    {_sSI: _cDSFIRo, _smit: None},
+    (_AIct, _NTex, _SFRI),
+    (
+        (lambda: schemas.ACTIVE_INSTANCE_SET, {_aQN: _AIS, _sN: _aIS}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+        (lambda: schemas.STRING, {_aQN: _SFRI, _sN: _sFRI}),
+    ),
+)
+
+DESCRIBE_SPOT_FLEET_INSTANCES: StaticOperationSchema = (
+    23,
+    n0,
+    _DSFI,
+    0,
+    DESCRIBE_SPOT_FLEET_INSTANCES_INPUT,
+    DESCRIBE_SPOT_FLEET_INSTANCES_OUTPUT,
+    (),
+)
+
+EVENT_TYPE: StaticSchema = (
+    14,
+    n0,
+    _ETv,
+    0,
+    (_IC__, _BC_, _ERROR, _INFORMATION),
+    ((-1, {_sV: _iCns}), (-1, {_sV: _fRC}), (-1, {_sV: _er}), (-1, {_sV: _infor})),
+)
+
+DESCRIBE_SPOT_FLEET_REQUEST_HISTORY_MAX_RESULTS: StaticSchema = (7, n0, _DSFRHMR, 0)
+
+DESCRIBE_SPOT_FLEET_REQUEST_HISTORY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DSFRHI,
+    {_sSI: _cDSFRHR, _sm: None},
+    (_DR, _SFRI, _ETv, _ST, _NTex, _MR),
+    (
+        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
+        (
+            lambda: schemas.SPOT_FLEET_REQUEST_ID,
+            {_aQN: _SFRI, _sN: _sFRI, _sO: None, _smi: None},
+        ),
+        (EVENT_TYPE, {_aQN: _ETv, _sN: _eTv}),
+        (lambda: schemas.DATE_TIME, {_aQN: _ST, _sN: _sTt, _sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+        (DESCRIBE_SPOT_FLEET_REQUEST_HISTORY_MAX_RESULTS, {_aQN: _MR, _sN: _mR}),
+    ),
+)
+
+DESCRIBE_SPOT_FLEET_REQUEST_HISTORY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DSFRHO,
+    {_sSI: _cDSFRHRo, _smit: None},
+    (_HRi, _LET, _NTex, _SFRI, _ST),
+    (
+        (lambda: HISTORY_RECORDS, {_aQN: _HRS, _sN: _hRS}),
+        (lambda: schemas.DATE_TIME, {_aQN: _LET, _sN: _lET}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+        (lambda: schemas.STRING, {_aQN: _SFRI, _sN: _sFRI}),
+        (lambda: schemas.DATE_TIME, {_aQN: _ST, _sN: _sTt}),
+    ),
+)
+
+DESCRIBE_SPOT_FLEET_REQUEST_HISTORY: StaticOperationSchema = (
+    23,
+    n0,
+    _DSFRH,
+    0,
+    DESCRIBE_SPOT_FLEET_REQUEST_HISTORY_INPUT,
+    DESCRIBE_SPOT_FLEET_REQUEST_HISTORY_OUTPUT,
+    (),
+)
+
+HISTORY_RECORD: StaticSchema = (
+    18,
+    n0,
+    _HRis,
+    0,
+    (_EIv, _ETv, _Ti),
+    (
+        (lambda: schemas.EVENT_INFORMATION, {_aQN: _EIv, _sN: _eIv}),
+        (EVENT_TYPE, {_aQN: _ETv, _sN: _eTv}),
+        (lambda: schemas.DATE_TIME, {_aQN: _Ti, _sN: _ti}),
+    ),
+)
+
+HISTORY_RECORDS: StaticSchema = (
+    16,
+    n0,
+    _HRi,
+    0,
+    (_me,),
+    ((HISTORY_RECORD, {_sN: _i}),),
+)
+
+DESCRIBE_SPOT_FLEET_REQUESTS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DSFRI,
+    {_sSI: _cDSFRR, _sm: None},
+    (_DR, _SFRIp, _NTex, _MR),
+    (
+        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
+        (lambda: schemas.SPOT_FLEET_REQUEST_ID_LIST, {_aQN: _SFRI, _sN: _sFRI}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+        (lambda: schemas.INTEGER, {_aQN: _MR, _sN: _mR}),
+    ),
+)
+
+DESCRIBE_SPOT_FLEET_REQUESTS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DSFRO,
+    {_sSI: _cDSFRRo, _smit: None},
+    (_NTex, _SFRCp),
+    (
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+        (lambda: schemas.SPOT_FLEET_REQUEST_CONFIG_SET, {_aQN: _SFRCS, _sN: _sFRCS}),
+    ),
+)
+
+DESCRIBE_SPOT_FLEET_REQUESTS: StaticOperationSchema = (
+    23,
+    n0,
+    _DSFR,
+    0,
+    DESCRIBE_SPOT_FLEET_REQUESTS_INPUT,
+    DESCRIBE_SPOT_FLEET_REQUESTS_OUTPUT,
+    (),
+)

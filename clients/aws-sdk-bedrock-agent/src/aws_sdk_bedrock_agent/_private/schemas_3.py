@@ -88,7 +88,7 @@ _co = "condition"
 _FNON = "FlowNodeOutputName"
 _FNIN = "FlowNodeInputName"
 _FDCC = "FlowDataConnectionConfiguration"
-_sO = "sourceOutput"
+_sOo = "sourceOutput"
 _tIa = "targetInput"
 _FCC = "FlowConnectionConfiguration"
 _dat = "data"
@@ -567,7 +567,7 @@ FLOW_DATA_CONNECTION_CONFIGURATION: StaticSchema = (
     n0,
     _FDCC,
     0,
-    (_sO, _tIa),
+    (_sOo, _tIa),
     ((FLOW_NODE_OUTPUT_NAME, 1), (FLOW_NODE_INPUT_NAME, 1)),
 )
 

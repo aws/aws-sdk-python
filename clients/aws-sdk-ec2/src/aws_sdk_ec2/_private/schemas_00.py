@@ -319,6 +319,7 @@ _sSI = "smithy.synthetic#originalShapeId"
 _cAATR = "com.amazonaws.ec2#AcceptAddressTransferRequest"
 _sm = "smithy.api#input"
 _Ad = "Address"
+_sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _TSa = "TagSpecifications"
 _DR = "DryRun"
@@ -1025,7 +1026,11 @@ ACCEPT_ADDRESS_TRANSFER_INPUT: StaticSchema = (
     _AATI,
     {_sSI: _cAATR, _sm: None},
     (_Ad, _TSa, _DR),
-    ((STRING, 1), (TAG_SPECIFICATION_LIST, {_sN: _TS}), (BOOLEAN, 0)),
+    (
+        (STRING, {_sO: None, _smi: None}),
+        (TAG_SPECIFICATION_LIST, {_sN: _TS}),
+        (BOOLEAN, 0),
+    ),
 )
 
 ACCEPT_ADDRESS_TRANSFER_OUTPUT: StaticSchema = (
@@ -1082,7 +1087,7 @@ ACCEPT_CAPACITY_RESERVATION_BILLING_OWNERSHIP_INPUT: StaticSchema = (
     _ACRBOI,
     {_sSI: _cACRBOR, _sm: None},
     (_DR, _CRI),
-    ((BOOLEAN, 0), (CAPACITY_RESERVATION_ID, 1)),
+    ((BOOLEAN, 0), (CAPACITY_RESERVATION_ID, {_sO: None, _smi: None})),
 )
 
 ACCEPT_CAPACITY_RESERVATION_BILLING_OWNERSHIP_OUTPUT: StaticSchema = (
@@ -1123,7 +1128,7 @@ TARGET_CONFIGURATION_REQUEST: StaticSchema = (
     _TCR,
     0,
     (_IC, _OI),
-    ((INTEGER, 0), (RESERVED_INSTANCES_OFFERING_ID, 1)),
+    ((INTEGER, 0), (RESERVED_INSTANCES_OFFERING_ID, {_sO: None, _smi: None})),
 )
 
 TARGET_CONFIGURATION_REQUEST_SET: StaticSchema = (
@@ -1143,7 +1148,7 @@ ACCEPT_RESERVED_INSTANCES_EXCHANGE_QUOTE_INPUT: StaticSchema = (
     (_DR, _RIIe, _TC),
     (
         (BOOLEAN, 0),
-        (RESERVED_INSTANCE_ID_SET, {_sN: _RII, _smi: None}),
+        (RESERVED_INSTANCE_ID_SET, {_sN: _RII, _sO: None, _smi: None}),
         (TARGET_CONFIGURATION_REQUEST_SET, {_sN: _TCa}),
     ),
 )
@@ -1175,7 +1180,7 @@ ACCEPT_TRANSIT_GATEWAY_CLIENT_VPN_ATTACHMENT_INPUT: StaticSchema = (
     _ATGCVAI,
     {_sSI: _cATGCVAR, _sm: None},
     (_TGAI, _DR),
-    ((TRANSIT_GATEWAY_ATTACHMENT_ID, 1), (BOOLEAN, 0)),
+    ((TRANSIT_GATEWAY_ATTACHMENT_ID, {_sO: None, _smi: None}), (BOOLEAN, 0)),
 )
 
 ACCEPT_TRANSIT_GATEWAY_CLIENT_VPN_ATTACHMENT_OUTPUT: StaticSchema = (
@@ -1349,7 +1354,7 @@ ACCEPT_TRANSIT_GATEWAY_PEERING_ATTACHMENT_INPUT: StaticSchema = (
     _ATGPAI,
     {_sSI: _cATGPAR, _sm: None},
     (_TGAI, _DR),
-    ((TRANSIT_GATEWAY_ATTACHMENT_ID, 1), (BOOLEAN, 0)),
+    ((TRANSIT_GATEWAY_ATTACHMENT_ID, {_sO: None, _smi: None}), (BOOLEAN, 0)),
 )
 
 ACCEPT_TRANSIT_GATEWAY_PEERING_ATTACHMENT_OUTPUT: StaticSchema = (
@@ -1462,7 +1467,7 @@ ACCEPT_TRANSIT_GATEWAY_VPC_ATTACHMENT_INPUT: StaticSchema = (
     _ATGVAI,
     {_sSI: _cATGVAR, _sm: None},
     (_TGAI, _DR),
-    ((TRANSIT_GATEWAY_ATTACHMENT_ID, 1), (BOOLEAN, 0)),
+    ((TRANSIT_GATEWAY_ATTACHMENT_ID, {_sO: None, _smi: None}), (BOOLEAN, 0)),
 )
 
 ACCEPT_TRANSIT_GATEWAY_VPC_ATTACHMENT_OUTPUT: StaticSchema = (
@@ -1574,8 +1579,8 @@ ACCEPT_VPC_ENDPOINT_CONNECTIONS_INPUT: StaticSchema = (
     (_DR, _SIe, _VEIp),
     (
         (BOOLEAN, 0),
-        (VPC_ENDPOINT_SERVICE_ID, 1),
-        (VPC_ENDPOINT_ID_LIST, {_sN: _VEI, _smi: None}),
+        (VPC_ENDPOINT_SERVICE_ID, {_sO: None, _smi: None}),
+        (VPC_ENDPOINT_ID_LIST, {_sN: _VEI, _sO: None, _smi: None}),
     ),
 )
 
@@ -1637,7 +1642,7 @@ ACCEPT_VPC_PEERING_CONNECTION_INPUT: StaticSchema = (
         (BOOLEAN, {_aQN: _DR, _sN: _dRr}),
         (
             VPC_PEERING_CONNECTION_ID_WITH_RESOLVER,
-            {_aQN: _VPCI, _sN: _vPCI, _smi: None},
+            {_aQN: _VPCI, _sN: _vPCI, _sO: None, _smi: None},
         ),
     ),
 )

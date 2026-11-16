@@ -11,6 +11,7 @@ n0 = "com.amazonaws.rds"
 _m = "member"
 _sN = "smithy.api#xmlName"
 _sV = "smithy.api#enumValue"
+_sO = "smithy.api#clientOptional"
 _sm = "smithy.api#required"
 _STt = "StorageType"
 _sSI = "smithy.synthetic#originalShapeId"
@@ -50,7 +51,6 @@ _PP = "PercentProgress"
 _TEDIGB = "TotalExtractedDataInGB"
 _FC = "FailureCause"
 _WM = "WarningMessage"
-_DBPGF = "DBParameterGroupFamily"
 _AZv = "AvailabilityZones"
 _EV = "EngineVersion"
 _OGN = "OptionGroupName"
@@ -94,30 +94,13 @@ _MR = "MaxRecords"
 _Fil = "Filters"
 _Mar = "Marker"
 _MEVi = "MinimumEngineVersion"
-_Par = "Parameters"
 _DOe = "DefaultOnly"
 _IAnc = "IncludeAll"
 _Dou = "Double"
 _STtar = "StartTime"
 _ETn = "EndTime"
-_DEDCPI = "DescribeEngineDefaultClusterParametersInput"
-_cDEDCPM = "com.amazonaws.rds#DescribeEngineDefaultClusterParametersMessage"
-_EDn = "EngineDefaults"
-_DEDCPO = "DescribeEngineDefaultClusterParametersOutput"
-_cDEDCPR = "com.amazonaws.rds#DescribeEngineDefaultClusterParametersResult"
-_DEDCP = "DescribeEngineDefaultClusterParameters"
-_DEDPI = "DescribeEngineDefaultParametersInput"
-_cDEDPM = "com.amazonaws.rds#DescribeEngineDefaultParametersMessage"
-_DEDPO = "DescribeEngineDefaultParametersOutput"
-_cDEDPR = "com.amazonaws.rds#DescribeEngineDefaultParametersResult"
-_DEDP = "DescribeEngineDefaultParameters"
-_DECI = "DescribeEventCategoriesInput"
-_cDECM = "com.amazonaws.rds#DescribeEventCategoriesMessage"
 _ECMv = "EventCategoriesMap"
 _ECML = "EventCategoriesMapList"
-_DECO = "DescribeEventCategoriesOutput"
-_cECM = "com.amazonaws.rds#EventCategoriesMessage"
-_DEC = "DescribeEventCategories"
 _di_ = "db_instance"
 _di__ = "db-instance"
 _dpg = "db_parameter_group"
@@ -327,115 +310,28 @@ _DTDOe = "DescribeTenantDatabasesOutput"
 _cTDM = "com.amazonaws.rds#TenantDatabasesMessage"
 _TDe = "TenantDatabases"
 _DTDe = "DescribeTenantDatabases"
+_DVDBIMI = "DescribeValidDBInstanceModificationsInput"
+_cDVDBIMM = "com.amazonaws.rds#DescribeValidDBInstanceModificationsMessage"
+_DR = "DoubleRange"
+_Fr = "From"
+_To = "To"
+_DRL = "DoubleRangeList"
+_Ra = "Range"
+_Ste = "Step"
+_RL = "RangeList"
+_VSO = "ValidStorageOptions"
+_SSt = "StorageSize"
+_PI = "ProvisionedIops"
+_ITSR = "IopsToStorageRatio"
+_PST = "ProvisionedStorageThroughput"
+_STTIR = "StorageThroughputToIopsRatio"
+_VSOL = "ValidStorageOptionsList"
+_VDBIMM = "ValidDBInstanceModificationsMessage"
+_DVDBIMO = "DescribeValidDBInstanceModificationsOutput"
+_cDVDBIMR = "com.amazonaws.rds#DescribeValidDBInstanceModificationsResult"
+_DVDBIM = "DescribeValidDBInstanceModifications"
 
 DOUBLE: StaticSchema = (10, n0, _Dou, 0)
-
-DESCRIBE_ENGINE_DEFAULT_CLUSTER_PARAMETERS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DEDCPI,
-    {_sSI: _cDEDCPM, _smi: None},
-    (_DBPGF, _Fil, _MR, _Mar),
-    (
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.FILTER_LIST, 0),
-        (lambda: schemas.INTEGER_OPTIONAL, 0),
-        (lambda: schemas.STRING, 0),
-    ),
-)
-
-DESCRIBE_ENGINE_DEFAULT_CLUSTER_PARAMETERS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DEDCPO,
-    {_sSI: _cDEDCPR, _smit: None},
-    (_EDn,),
-    ((lambda: ENGINE_DEFAULTS, 0),),
-)
-
-DESCRIBE_ENGINE_DEFAULT_CLUSTER_PARAMETERS: StaticOperationSchema = (
-    23,
-    n0,
-    _DEDCP,
-    0,
-    DESCRIBE_ENGINE_DEFAULT_CLUSTER_PARAMETERS_INPUT,
-    DESCRIBE_ENGINE_DEFAULT_CLUSTER_PARAMETERS_OUTPUT,
-    (),
-)
-
-ENGINE_DEFAULTS: StaticSchema = (
-    18,
-    n0,
-    _EDn,
-    0,
-    (_DBPGF, _Mar, _Par),
-    (
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.PARAMETERS_LIST, 0),
-    ),
-)
-
-DESCRIBE_ENGINE_DEFAULT_PARAMETERS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DEDPI,
-    {_sSI: _cDEDPM, _smi: None},
-    (_DBPGF, _Fil, _MR, _Mar),
-    (
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.FILTER_LIST, 0),
-        (lambda: schemas.INTEGER_OPTIONAL, 0),
-        (lambda: schemas.STRING, 0),
-    ),
-)
-
-DESCRIBE_ENGINE_DEFAULT_PARAMETERS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DEDPO,
-    {_sSI: _cDEDPR, _smit: None},
-    (_EDn,),
-    ((ENGINE_DEFAULTS, 0),),
-)
-
-DESCRIBE_ENGINE_DEFAULT_PARAMETERS: StaticOperationSchema = (
-    23,
-    n0,
-    _DEDP,
-    0,
-    DESCRIBE_ENGINE_DEFAULT_PARAMETERS_INPUT,
-    DESCRIBE_ENGINE_DEFAULT_PARAMETERS_OUTPUT,
-    (),
-)
-
-DESCRIBE_EVENT_CATEGORIES_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DECI,
-    {_sSI: _cDECM, _smi: None},
-    (_STo, _Fil),
-    ((lambda: schemas.STRING, 0), (lambda: schemas.FILTER_LIST, 0)),
-)
-
-DESCRIBE_EVENT_CATEGORIES_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DECO,
-    {_sSI: _cECM, _smit: None},
-    (_ECML,),
-    ((lambda: EVENT_CATEGORIES_MAP_LIST, 0),),
-)
-
-DESCRIBE_EVENT_CATEGORIES: StaticOperationSchema = (
-    23,
-    n0,
-    _DEC,
-    0,
-    DESCRIBE_EVENT_CATEGORIES_INPUT,
-    DESCRIBE_EVENT_CATEGORIES_OUTPUT,
-    (),
-)
 
 EVENT_CATEGORIES_MAP: StaticSchema = (
     18,
@@ -767,7 +663,7 @@ DESCRIBE_OPTION_GROUP_OPTIONS_INPUT: StaticSchema = (
     {_sSI: _cDOGOM, _smi: None},
     (_EN, _MEV, _Fil, _MR, _Mar),
     (
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.FILTER_LIST, 0),
         (lambda: schemas.INTEGER_OPTIONAL, 0),
@@ -982,7 +878,7 @@ DESCRIBE_ORDERABLE_DB_INSTANCE_OPTIONS_INPUT: StaticSchema = (
     {_sSI: _cDODBIOM, _smi: None},
     (_En, _EV, _DBIC, _LM, _AZG, _Vp, _Fil, _MR, _Mar),
     (
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 0),
@@ -1580,4 +1476,87 @@ TENANT_DATABASES_LIST: StaticSchema = (
     0,
     (_m,),
     ((lambda: schemas.TENANT_DATABASE, {_sN: _TD}),),
+)
+
+DESCRIBE_VALID_DB_INSTANCE_MODIFICATIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DVDBIMI,
+    {_sSI: _cDVDBIMM, _smi: None},
+    (_DBII,),
+    ((lambda: schemas.STRING, {_sO: None, _sm: None}),),
+)
+
+DESCRIBE_VALID_DB_INSTANCE_MODIFICATIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DVDBIMO,
+    {_sSI: _cDVDBIMR, _smit: None},
+    (_VDBIMM,),
+    ((lambda: schemas.VALID_DB_INSTANCE_MODIFICATIONS_MESSAGE, 0),),
+)
+
+DESCRIBE_VALID_DB_INSTANCE_MODIFICATIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _DVDBIM,
+    0,
+    DESCRIBE_VALID_DB_INSTANCE_MODIFICATIONS_INPUT,
+    DESCRIBE_VALID_DB_INSTANCE_MODIFICATIONS_OUTPUT,
+    (
+        lambda: schemas.DB_INSTANCE_NOT_FOUND_FAULT,
+        lambda: schemas.INVALID_DB_INSTANCE_STATE_FAULT,
+    ),
+)
+
+DOUBLE_RANGE: StaticSchema = (18, n0, _DR, 0, (_Fr, _To), ((DOUBLE, 0), (DOUBLE, 0)))
+
+DOUBLE_RANGE_LIST: StaticSchema = (
+    16,
+    n0,
+    _DRL,
+    0,
+    (_m,),
+    ((DOUBLE_RANGE, {_sN: _DR}),),
+)
+
+RANGE: StaticSchema = (
+    18,
+    n0,
+    _Ra,
+    0,
+    (_Fr, _To, _Ste),
+    (
+        (lambda: schemas.INTEGER, 0),
+        (lambda: schemas.INTEGER, 0),
+        (lambda: schemas.INTEGER_OPTIONAL, 0),
+    ),
+)
+
+RANGE_LIST: StaticSchema = (16, n0, _RL, 0, (_m,), ((RANGE, {_sN: _Ra}),))
+
+VALID_STORAGE_OPTIONS: StaticSchema = (
+    18,
+    n0,
+    _VSO,
+    0,
+    (_STt, _SSt, _PI, _ITSR, _PST, _STTIR, _SSAu),
+    (
+        (lambda: schemas.STRING, 0),
+        (RANGE_LIST, 0),
+        (RANGE_LIST, 0),
+        (DOUBLE_RANGE_LIST, 0),
+        (RANGE_LIST, 0),
+        (DOUBLE_RANGE_LIST, 0),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+VALID_STORAGE_OPTIONS_LIST: StaticSchema = (
+    16,
+    n0,
+    _VSOL,
+    0,
+    (_m,),
+    ((VALID_STORAGE_OPTIONS, {_sN: _VSO}),),
 )

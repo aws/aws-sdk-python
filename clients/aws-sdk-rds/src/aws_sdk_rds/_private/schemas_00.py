@@ -35,6 +35,7 @@ _sto = "stopping"
 _IO = "IntegerOptional"
 _ASV = "AdditionalStorageVolume"
 _VN = "VolumeName"
+_sO = "smithy.api#clientOptional"
 _sm = "smithy.api#required"
 _AS = "AllocatedStorage"
 _IOPS = "IOPS"
@@ -302,9 +303,9 @@ _DBPGA = "DBParameterGroupArn"
 _DBSAEF = "DBSnapshotAlreadyExistsFault"
 _IDBSSF = "InvalidDBSnapshotStateFault"
 _EML = "EngineModeList"
-_STNSF = "StorageTypeNotSupportedFault"
 _ANFF = "AuthorizationNotFoundFault"
 _CNFF = "CertificateNotFoundFault"
+_Ar = "Arn"
 
 STRING: StaticSchema = (3, n0, _S, 0)
 
@@ -366,7 +367,7 @@ ADDITIONAL_STORAGE_VOLUME: StaticSchema = (
     0,
     (_VN, _AS, _IOPS, _MAS, _ST, _STt),
     (
-        (STRING, 1),
+        (STRING, {_sO: None, _sm: None}),
         (INTEGER_OPTIONAL, 0),
         (INTEGER_OPTIONAL, 0),
         (INTEGER_OPTIONAL, 0),
@@ -422,7 +423,11 @@ ADD_ROLE_TO_DB_CLUSTER_INPUT: StaticSchema = (
     _ARTDBCI,
     {_sSI: _cARTDBCM, _smi: None},
     (_DBCI, _RA, _FN),
-    ((STRING, 1), (IAM_ROLE_ARN, 1), (STRING, 0)),
+    (
+        (STRING, {_sO: None, _sm: None}),
+        (IAM_ROLE_ARN, {_sO: None, _sm: None}),
+        (STRING, 0),
+    ),
 )
 
 ADD_ROLE_TO_DB_CLUSTER_OUTPUT: StaticSchema = (
@@ -515,7 +520,11 @@ ADD_ROLE_TO_DB_INSTANCE_INPUT: StaticSchema = (
     _ARTDBII,
     {_sSI: _cARTDBIM, _smi: None},
     (_DBII, _RA, _FN),
-    ((STRING, 1), (STRING, 1), (STRING, 1)),
+    (
+        (STRING, {_sO: None, _sm: None}),
+        (STRING, {_sO: None, _sm: None}),
+        (STRING, {_sO: None, _sm: None}),
+    ),
 )
 
 ADD_ROLE_TO_DB_INSTANCE_OUTPUT: StaticSchema = (
@@ -604,7 +613,7 @@ ADD_SOURCE_IDENTIFIER_TO_SUBSCRIPTION_INPUT: StaticSchema = (
     _ASITSI,
     {_sSI: _cASITSM, _smi: None},
     (_SN, _SI),
-    ((STRING, 1), (STRING, 1)),
+    ((STRING, {_sO: None, _sm: None}), (STRING, {_sO: None, _sm: None})),
 )
 
 ADD_SOURCE_IDENTIFIER_TO_SUBSCRIPTION_OUTPUT: StaticSchema = (
@@ -690,7 +699,7 @@ ADD_TAGS_TO_RESOURCE_INPUT: StaticSchema = (
     _ATTRI,
     {_sSI: _cATTRM, _smi: None},
     (_RN, _Ta),
-    ((STRING, 1), (TAG_LIST, 1)),
+    ((STRING, {_sO: None, _sm: None}), (TAG_LIST, {_sO: None, _sm: None})),
 )
 
 ADD_TAGS_TO_RESOURCE_OUTPUT: StaticSchema = (18, n0, _ATTRO, {_sSI: _sU, _smit: None})
@@ -890,7 +899,11 @@ APPLY_PENDING_MAINTENANCE_ACTION_INPUT: StaticSchema = (
     _APMAI,
     {_sSI: _cAPMAM, _smi: None},
     (_RI, _AA, _OIT),
-    ((STRING, 1), (STRING, 1), (STRING, 1)),
+    (
+        (STRING, {_sO: None, _sm: None}),
+        (STRING, {_sO: None, _sm: None}),
+        (STRING, {_sO: None, _sm: None}),
+    ),
 )
 
 APPLY_PENDING_MAINTENANCE_ACTION_OUTPUT: StaticSchema = (
@@ -996,7 +1009,13 @@ AUTHORIZE_DB_SECURITY_GROUP_INGRESS_INPUT: StaticSchema = (
     _ADBSGII,
     {_sSI: _cADBSGIM, _smi: None},
     (_DBSGN, _CIDRIP, _ECSGN, _ECSGI, _ECSGOI),
-    ((STRING, 1), (STRING, 0), (STRING, 0), (STRING, 0), (STRING, 0)),
+    (
+        (STRING, {_sO: None, _sm: None}),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+    ),
 )
 
 AUTHORIZE_DB_SECURITY_GROUP_INGRESS_OUTPUT: StaticSchema = (
@@ -1100,7 +1119,12 @@ BACKTRACK_DB_CLUSTER_INPUT: StaticSchema = (
     _BDBCI,
     {_sSI: _cBDBCM, _smi: None},
     (_DBCI, _BT, _F, _UETOPITU),
-    ((STRING, 1), (T_STAMP, 1), (BOOLEAN_OPTIONAL, 0), (BOOLEAN_OPTIONAL, 0)),
+    (
+        (STRING, {_sO: None, _sm: None}),
+        (T_STAMP, {_sO: None, _sm: None}),
+        (BOOLEAN_OPTIONAL, 0),
+        (BOOLEAN_OPTIONAL, 0),
+    ),
 )
 
 BACKTRACK_DB_CLUSTER_OUTPUT: StaticSchema = (
@@ -1130,7 +1154,7 @@ CANCEL_DB_CAPACITY_RESERVATION_INPUT: StaticSchema = (
     _CDBCRI,
     {_sSI: _cCDBCRR, _smi: None},
     (_DBCRI,),
-    ((DB_CAPACITY_RESERVATION_IDENTIFIER, 1),),
+    ((DB_CAPACITY_RESERVATION_IDENTIFIER, {_sO: None, _sm: None}),),
 )
 
 CANCEL_DB_CAPACITY_RESERVATION_OUTPUT: StaticSchema = (
@@ -1265,7 +1289,7 @@ CANCEL_EXPORT_TASK_INPUT: StaticSchema = (
     _CETI,
     {_sSI: _cCETM, _smi: None},
     (_ETI,),
-    ((STRING, 1),),
+    ((STRING, {_sO: None, _sm: None}),),
 )
 
 CANCEL_EXPORT_TASK_OUTPUT: StaticSchema = (
@@ -1366,7 +1390,12 @@ COPY_DB_CLUSTER_PARAMETER_GROUP_INPUT: StaticSchema = (
     _CDBCPGI,
     {_sSI: _cCDBCPGM, _smi: None},
     (_SDBCPGI, _TDBCPGI, _TDBCPGD, _Ta),
-    ((STRING, 1), (STRING, 1), (STRING, 1), (TAG_LIST, 0)),
+    (
+        (STRING, {_sO: None, _sm: None}),
+        (STRING, {_sO: None, _sm: None}),
+        (STRING, {_sO: None, _sm: None}),
+        (TAG_LIST, 0),
+    ),
 )
 
 COPY_DB_CLUSTER_PARAMETER_GROUP_OUTPUT: StaticSchema = (
@@ -1455,8 +1484,8 @@ COPY_DB_CLUSTER_SNAPSHOT_INPUT: StaticSchema = (
     {_sSI: _cCDBCSM, _smi: None},
     (_SDBCSI, _TDBCSI, _KKI, _PSU, _CT, _Ta),
     (
-        (STRING, 1),
-        (STRING, 1),
+        (STRING, {_sO: None, _sm: None}),
+        (STRING, {_sO: None, _sm: None}),
         (STRING, 0),
         (SENSITIVE_STRING, 0),
         (BOOLEAN_OPTIONAL, 0),
@@ -1688,21 +1717,6 @@ DESCRIPTION: StaticSchema = (3, n0, _D, 0)
 
 ENGINE_MODE_LIST: StaticSchema = (16, n0, _EML, 0, (_m,), ((STRING, 0),))
 
-STORAGE_TYPE_NOT_SUPPORTED_FAULT: StaticSchema = (
-    18,
-    n0,
-    _STNSF,
-    {
-        _smith: _c,
-        _sE: 400,
-        _aQE: MappingProxyType(
-            {"code": "StorageTypeNotSupported", "httpResponseCode": 400}
-        ),
-    },
-    (_me,),
-    ((EXCEPTION_MESSAGE, 0),),
-)
-
 AUTHORIZATION_NOT_FOUND_FAULT: StaticSchema = (
     18,
     n0,
@@ -1732,3 +1746,5 @@ CERTIFICATE_NOT_FOUND_FAULT: StaticSchema = (
     (_me,),
     ((EXCEPTION_MESSAGE, 0),),
 )
+
+ARN: StaticSchema = (3, n0, _Ar, 0)

@@ -14,6 +14,7 @@ _s = "smithy.api#input"
 _sm = "smithy.api#required"
 _sL = "smithy.api#httpLabel"
 _AI = "AdministratorId"
+_sO = "smithy.api#clientOptional"
 _sN = "smithy.api#jsonName"
 _aI = "administratorId"
 _smi = "smithy.api#output"
@@ -50,22 +51,8 @@ _F = "Features"
 _f = "features"
 _AIcco = "AccountIds"
 _dI = "detectorId"
-_UA = "UserAgent"
-_uA = "userAgent"
-_SI = "SourceIps"
-_RU = "RequestUri"
-_rU = "requestUri"
-_V = "Verb"
-_ve = "verb"
 _Res = "Resource"
 _res = "resource"
-_Na = "Namespace"
-_na = "namespace"
-_RN = "ResourceName"
-_rN = "resourceName"
-_sIP = "sourceIPs"
-_SC = "StatusCode"
-_sC = "statusCode"
 _Se = "Service"
 _ser = "service"
 _RS = "RelationshipStatus"
@@ -91,11 +78,7 @@ _ta = "tactic"
 _St = "Status"
 _st = "status"
 _ACTIVE = "ACTIVE"
-_RT = "ResourceType"
-_rT = "resourceType"
 _DELETED = "DELETED"
-_CNl = "ClusterName"
-_cNl = "clusterName"
 _Tag = "Tags"
 _tag = "tags"
 _ACd = "AdditionalConfiguration"
@@ -138,10 +121,6 @@ _DIet = "DetectorIds"
 _Fea = "Feature"
 _fe = "feature"
 _FNil = "FilterNames"
-_Use = "Username"
-_use = "username"
-_UI = "UserId"
-_uI = "userId"
 _Lan = "Language"
 _lan = "language"
 _Sch = "Schema"
@@ -342,11 +321,6 @@ _ASn = "AnomalyScore"
 _aSn = "anomalyScore"
 _TPr = "TrainingPeriod"
 _tPr = "trainingPeriod"
-_KAC = "KubernetesApiCall"
-_UG = "UserGroups"
-_uG = "userGroups"
-_ECv = "EventCount"
-_eCv = "eventCount"
 _Recor = "Records"
 _LIRO = "ListInvestigationRecordsOutput"
 _cLIRRo = "com.amazonaws.guardduty#ListInvestigationRecordsResponse"
@@ -363,7 +337,7 @@ GET_MEMBERS_INPUT: StaticSchema = (
     (_DI, _AIcco),
     (
         (lambda: schemas.DETECTOR_ID, 9),
-        (lambda: schemas.ACCOUNT_IDS, {_sN: _aIcc, _sm: None}),
+        (lambda: schemas.ACCOUNT_IDS, {_sO: None, _sN: _aIcc, _sm: None}),
     ),
 )
 
@@ -374,8 +348,8 @@ GET_MEMBERS_OUTPUT: StaticSchema = (
     {_sSI: _cGMRo, _smi: None},
     (_Memb, _UAnp),
     (
-        (lambda: MEMBERS, {_sN: _mem, _sm: None}),
-        (lambda: schemas.UNPROCESSED_ACCOUNTS, {_sN: _uAn, _sm: None}),
+        (lambda: MEMBERS, {_sO: None, _sN: _mem, _sm: None}),
+        (lambda: schemas.UNPROCESSED_ACCOUNTS, {_sO: None, _sN: _uAn, _sm: None}),
     ),
 )
 
@@ -403,13 +377,13 @@ MEMBER: StaticSchema = (
     0,
     (_AIcc, _DI, _MI, _Em, _RS, _IAn, _UAp, _AI),
     (
-        (lambda: schemas.ACCOUNT_ID, {_sN: _aIc, _sm: None}),
+        (lambda: schemas.ACCOUNT_ID, {_sO: None, _sN: _aIc, _sm: None}),
         (lambda: schemas.DETECTOR_ID, {_sN: _dI}),
-        (lambda: schemas.STRING, {_sN: _mI, _sm: None}),
-        (lambda: schemas.EMAIL, {_sN: _e, _sm: None}),
-        (lambda: schemas.STRING, {_sN: _rS, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sN: _mI, _sm: None}),
+        (lambda: schemas.EMAIL, {_sO: None, _sN: _e, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sN: _rS, _sm: None}),
         (lambda: schemas.STRING, {_sN: _iA}),
-        (lambda: schemas.STRING, {_sN: _uAp, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sN: _uAp, _sm: None}),
         (lambda: schemas.STRING, {_sN: _aI}),
     ),
 )
@@ -562,7 +536,10 @@ GET_THREAT_ENTITY_SET_INPUT: StaticSchema = (
     _GTESI,
     {_sSI: _cGTESR, _s: None},
     (_DI, _TESI),
-    ((lambda: schemas.DETECTOR_ID, 9), (lambda: schemas.STRING, 9)),
+    (
+        (lambda: schemas.DETECTOR_ID, 9),
+        (lambda: schemas.STRING, {_sO: None, _sm: None, _sL: None}),
+    ),
 )
 
 GET_THREAT_ENTITY_SET_OUTPUT: StaticSchema = (
@@ -572,11 +549,11 @@ GET_THREAT_ENTITY_SET_OUTPUT: StaticSchema = (
     {_sSI: _cGTESRo, _smi: None},
     (_N, _Fo, _Loc, _EBO, _St, _Tag, _CAr, _UAp, _ED),
     (
-        (lambda: schemas.NAME, {_sN: _n, _sm: None}),
-        (lambda: schemas.THREAT_ENTITY_SET_FORMAT, {_sN: _fo, _sm: None}),
-        (lambda: schemas.LOCATION, {_sN: _loc, _sm: None}),
+        (lambda: schemas.NAME, {_sO: None, _sN: _n, _sm: None}),
+        (lambda: schemas.THREAT_ENTITY_SET_FORMAT, {_sO: None, _sN: _fo, _sm: None}),
+        (lambda: schemas.LOCATION, {_sO: None, _sN: _loc, _sm: None}),
         (lambda: schemas.EXPECTED_BUCKET_OWNER, {_sN: _eBO}),
-        (lambda: THREAT_ENTITY_SET_STATUS, {_sN: _st, _sm: None}),
+        (lambda: THREAT_ENTITY_SET_STATUS, {_sO: None, _sN: _st, _sm: None}),
         (lambda: schemas.TAG_MAP, {_sN: _tag}),
         (lambda: schemas.TIMESTAMP, {_sN: _cA}),
         (lambda: schemas.TIMESTAMP, {_sN: _uAp}),
@@ -638,10 +615,10 @@ GET_THREAT_INTEL_SET_OUTPUT: StaticSchema = (
     {_sSI: _cGTISRo, _smi: None},
     (_N, _Fo, _Loc, _St, _Tag, _EBO),
     (
-        (lambda: schemas.NAME, {_sN: _n, _sm: None}),
-        (lambda: schemas.THREAT_INTEL_SET_FORMAT, {_sN: _fo, _sm: None}),
-        (lambda: schemas.LOCATION, {_sN: _loc, _sm: None}),
-        (lambda: THREAT_INTEL_SET_STATUS, {_sN: _st, _sm: None}),
+        (lambda: schemas.NAME, {_sO: None, _sN: _n, _sm: None}),
+        (lambda: schemas.THREAT_INTEL_SET_FORMAT, {_sO: None, _sN: _fo, _sm: None}),
+        (lambda: schemas.LOCATION, {_sO: None, _sN: _loc, _sm: None}),
+        (lambda: THREAT_INTEL_SET_STATUS, {_sO: None, _sN: _st, _sm: None}),
         (lambda: schemas.TAG_MAP, {_sN: _tag}),
         (lambda: schemas.ACCOUNT_ID, {_sN: _eBO}),
     ),
@@ -701,11 +678,11 @@ GET_TRUSTED_ENTITY_SET_OUTPUT: StaticSchema = (
     {_sSI: _cGTESRoma, _smi: None},
     (_N, _Fo, _Loc, _EBO, _St, _Tag, _CAr, _UAp, _ED),
     (
-        (lambda: schemas.NAME, {_sN: _n, _sm: None}),
-        (lambda: schemas.TRUSTED_ENTITY_SET_FORMAT, {_sN: _fo, _sm: None}),
-        (lambda: schemas.LOCATION, {_sN: _loc, _sm: None}),
+        (lambda: schemas.NAME, {_sO: None, _sN: _n, _sm: None}),
+        (lambda: schemas.TRUSTED_ENTITY_SET_FORMAT, {_sO: None, _sN: _fo, _sm: None}),
+        (lambda: schemas.LOCATION, {_sO: None, _sN: _loc, _sm: None}),
         (lambda: schemas.EXPECTED_BUCKET_OWNER, {_sN: _eBO}),
-        (lambda: TRUSTED_ENTITY_SET_STATUS, {_sN: _st, _sm: None}),
+        (lambda: TRUSTED_ENTITY_SET_STATUS, {_sO: None, _sN: _st, _sm: None}),
         (lambda: schemas.TAG_MAP, {_sN: _tag}),
         (lambda: schemas.TIMESTAMP, {_sN: _cA}),
         (lambda: schemas.TIMESTAMP, {_sN: _uAp}),
@@ -840,8 +817,8 @@ GET_USAGE_STATISTICS_INPUT: StaticSchema = (
     (_DI, _UST, _UCs, _Uni, _MR, _NT),
     (
         (lambda: schemas.DETECTOR_ID, 9),
-        (USAGE_STATISTIC_TYPE, {_sN: _uST, _sm: None}),
-        (USAGE_CRITERIA, {_sN: _uCs, _sm: None}),
+        (USAGE_STATISTIC_TYPE, {_sO: None, _sN: _uST, _sm: None}),
+        (USAGE_CRITERIA, {_sO: None, _sN: _uCs, _sm: None}),
         (lambda: schemas.STRING, {_sN: _uni}),
         (lambda: schemas.MAX_RESULTS, {_sN: _mR}),
         (lambda: schemas.STRING, {_sN: _nT}),
@@ -1019,7 +996,7 @@ INVITE_MEMBERS_INPUT: StaticSchema = (
     (_DI, _AIcco, _DEN, _M),
     (
         (lambda: schemas.DETECTOR_ID, 9),
-        (lambda: schemas.ACCOUNT_IDS, {_sN: _aIcc, _sm: None}),
+        (lambda: schemas.ACCOUNT_IDS, {_sO: None, _sN: _aIcc, _sm: None}),
         (lambda: schemas.BOOLEAN, {_sN: _dEN}),
         (lambda: schemas.STRING, {_sN: _m}),
     ),
@@ -1031,7 +1008,7 @@ INVITE_MEMBERS_OUTPUT: StaticSchema = (
     _IMO,
     {_sSI: _cIMRo, _smi: None},
     (_UAnp,),
-    ((lambda: schemas.UNPROCESSED_ACCOUNTS, {_sN: _uAn, _sm: None}),),
+    ((lambda: schemas.UNPROCESSED_ACCOUNTS, {_sO: None, _sN: _uAn, _sm: None}),),
 )
 
 INVITE_MEMBERS: StaticOperationSchema = (
@@ -1077,7 +1054,7 @@ LIST_COVERAGE_OUTPUT: StaticSchema = (
     {_sSI: _cLCRo, _smi: None},
     (_Reso, _NT),
     (
-        (lambda: schemas.COVERAGE_RESOURCES, {_sN: _reso, _sm: None}),
+        (lambda: schemas.COVERAGE_RESOURCES, {_sO: None, _sN: _reso, _sm: None}),
         (lambda: schemas.STRING, {_sN: _nT}),
     ),
 )
@@ -1120,7 +1097,7 @@ LIST_CUSTOM_DETECTION_RULE_ASSOCIATIONS_OUTPUT: StaticSchema = (
     {_sSI: _cLCDRARo, _smi: None},
     (_RAu, _NT),
     (
-        (lambda: schemas.ASSOCIATION_SUMMARY_LIST, {_sN: _rAu, _sm: None}),
+        (lambda: schemas.ASSOCIATION_SUMMARY_LIST, {_sO: None, _sN: _rAu, _sm: None}),
         (lambda: schemas.STRING, {_sN: _nT}),
     ),
 )
@@ -1165,7 +1142,7 @@ LIST_CUSTOM_DETECTION_RULE_ORG_CONFIGURATIONS_OUTPUT: StaticSchema = (
     (
         (
             lambda: schemas.DETECTION_RULE_ORG_CONFIGURATION_SUMMARY_LIST,
-            {_sN: _confi, _sm: None},
+            {_sO: None, _sN: _confi, _sm: None},
         ),
         (lambda: schemas.STRING, {_sN: _nT}),
     ),
@@ -1213,7 +1190,7 @@ LIST_CUSTOM_DETECTION_RULES_OUTPUT: StaticSchema = (
     {_sSI: _cLCDRRo, _smi: None},
     (_Rul, _NT),
     (
-        (lambda: RULE_SUMMARY_LIST, {_sN: _rul, _sm: None}),
+        (lambda: RULE_SUMMARY_LIST, {_sO: None, _sN: _rul, _sm: None}),
         (lambda: schemas.STRING, {_sN: _nT}),
     ),
 )
@@ -1243,18 +1220,21 @@ RULE_SUMMARY: StaticSchema = (
     0,
     (_RIu, _Ar, _N, _De, _Sev, _DSa, _Ta, _Te, _Se, _Lan, _Sch, _CAr, _UAp),
     (
-        (lambda: schemas.RULE_ID, {_sN: _rI, _sm: None}),
-        (lambda: schemas.DETECTION_RULE_ARN, {_sN: _ar, _sm: None}),
-        (lambda: schemas.RULE_NAME, {_sN: _n, _sm: None}),
-        (lambda: schemas.DETECTION_RULE_DESCRIPTION, {_sN: _de, _sm: None}),
-        (lambda: schemas.DETECTION_RULE_SEVERITY, {_sN: _sev, _sm: None}),
-        (lambda: schemas.DETECTION_RULE_DATA_SOURCE, {_sN: _dSa, _sm: None}),
-        (lambda: schemas.MITRE_TACTIC, {_sN: _ta, _sm: None}),
-        (lambda: schemas.MITRE_TECHNIQUE, {_sN: _te, _sm: None}),
-        (lambda: schemas.DETECTION_RULE_SERVICE_NAME, {_sN: _ser, _sm: None}),
+        (lambda: schemas.RULE_ID, {_sO: None, _sN: _rI, _sm: None}),
+        (lambda: schemas.DETECTION_RULE_ARN, {_sO: None, _sN: _ar, _sm: None}),
+        (lambda: schemas.RULE_NAME, {_sO: None, _sN: _n, _sm: None}),
+        (lambda: schemas.DETECTION_RULE_DESCRIPTION, {_sO: None, _sN: _de, _sm: None}),
+        (lambda: schemas.DETECTION_RULE_SEVERITY, {_sO: None, _sN: _sev, _sm: None}),
+        (lambda: schemas.DETECTION_RULE_DATA_SOURCE, {_sO: None, _sN: _dSa, _sm: None}),
+        (lambda: schemas.MITRE_TACTIC, {_sO: None, _sN: _ta, _sm: None}),
+        (lambda: schemas.MITRE_TECHNIQUE, {_sO: None, _sN: _te, _sm: None}),
+        (
+            lambda: schemas.DETECTION_RULE_SERVICE_NAME,
+            {_sO: None, _sN: _ser, _sm: None},
+        ),
         (lambda: schemas.RULE_LANGUAGE, {_sN: _lan}),
         (lambda: schemas.RULE_SCHEMA, {_sN: _sch}),
-        (lambda: schemas.TIMESTAMP, {_sN: _cA, _sm: None}),
+        (lambda: schemas.TIMESTAMP, {_sO: None, _sN: _cA, _sm: None}),
         (lambda: schemas.TIMESTAMP, {_sN: _uAp}),
     ),
 )
@@ -1277,7 +1257,7 @@ LIST_DETECTORS_OUTPUT: StaticSchema = (
     {_sSI: _cLDRo, _smi: None},
     (_DIet, _NT),
     (
-        (lambda: schemas.DETECTOR_IDS, {_sN: _dIet, _sm: None}),
+        (lambda: schemas.DETECTOR_IDS, {_sO: None, _sN: _dIet, _sm: None}),
         (lambda: schemas.STRING, {_sN: _nT}),
     ),
 )
@@ -1315,7 +1295,7 @@ LIST_FILTERS_OUTPUT: StaticSchema = (
     {_sSI: _cLFRo, _smi: None},
     (_FNil, _NT),
     (
-        (lambda: schemas.FILTER_NAMES, {_sN: _fNi, _sm: None}),
+        (lambda: schemas.FILTER_NAMES, {_sO: None, _sN: _fNi, _sm: None}),
         (lambda: schemas.STRING, {_sN: _nT}),
     ),
 )
@@ -1359,7 +1339,7 @@ LIST_FINDINGS_OUTPUT: StaticSchema = (
     {_sSI: _cLFRoma, _smi: None},
     (_FIi, _NT),
     (
-        (lambda: schemas.FINDING_IDS, {_sN: _fI, _sm: None}),
+        (lambda: schemas.FINDING_IDS, {_sO: None, _sN: _fI, _sm: None}),
         (lambda: schemas.STRING, {_sN: _nT}),
     ),
 )
@@ -1406,7 +1386,7 @@ LIST_INVESTIGATION_RECORDS_INPUT: StaticSchema = (
     (_DI, _IInve, _RTec, _MR, _NT),
     (
         (lambda: schemas.DETECTOR_ID, 9),
-        (lambda: schemas.INVESTIGATION_ID, {_sN: _iInv, _sm: None}),
+        (lambda: schemas.INVESTIGATION_ID, {_sO: None, _sN: _iInv, _sm: None}),
         (RECORD_TYPES, {_sN: _rTe}),
         (lambda: schemas.MAX_RESULTS, {_sN: _mR}),
         (lambda: schemas.NEXT_TOKEN, {_sN: _nT}),
@@ -1420,9 +1400,9 @@ LIST_INVESTIGATION_RECORDS_OUTPUT: StaticSchema = (
     {_sSI: _cLIRRo, _smi: None},
     (_IInve, _St, _Recor, _NT),
     (
-        (lambda: schemas.INVESTIGATION_ID, {_sN: _iInv, _sm: None}),
-        (lambda: schemas.INVESTIGATION_STATUS, {_sN: _st, _sm: None}),
-        (lambda: schemas.RECORDS, {_sN: _reco, _sm: None}),
+        (lambda: schemas.INVESTIGATION_ID, {_sO: None, _sN: _iInv, _sm: None}),
+        (lambda: schemas.INVESTIGATION_STATUS, {_sO: None, _sN: _st, _sm: None}),
+        (lambda: schemas.RECORDS, {_sO: None, _sN: _reco, _sm: None}),
         (lambda: schemas.NEXT_TOKEN, {_sN: _nT}),
     ),
 )
@@ -1476,28 +1456,5 @@ KUBERNETES_ANOMALY: StaticSchema = (
         (lambda: schemas.INVESTIGATION_TEXT, {_sN: _bC}),
         (lambda: schemas.STRING, {_sN: _aSn}),
         (lambda: schemas.STRING, {_sN: _tPr}),
-    ),
-)
-
-KUBERNETES_API_CALL: StaticSchema = (
-    18,
-    n0,
-    _KAC,
-    0,
-    (_CNl, _Use, _UG, _UI, _V, _RT, _RN, _Na, _RU, _SC, _SI, _UA, _ECv),
-    (
-        (lambda: schemas.STRING, {_sN: _cNl}),
-        (lambda: schemas.STRING, {_sN: _use}),
-        (lambda: schemas.STRING, {_sN: _uG}),
-        (lambda: schemas.STRING, {_sN: _uI}),
-        (lambda: schemas.STRING, {_sN: _ve}),
-        (lambda: schemas.STRING, {_sN: _rT}),
-        (lambda: schemas.STRING, {_sN: _rN}),
-        (lambda: schemas.STRING, {_sN: _na}),
-        (lambda: schemas.STRING, {_sN: _rU}),
-        (lambda: schemas.INTEGER, {_sN: _sC}),
-        (lambda: schemas.STRING, {_sN: _sIP}),
-        (lambda: schemas.STRING, {_sN: _uA}),
-        (lambda: schemas.COUNT, {_sN: _eCv}),
     ),
 )

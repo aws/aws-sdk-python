@@ -17,6 +17,7 @@ _TS = "TagSpecification"
 _Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
+_sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _TSa = "TagSpecifications"
 _DR = "DryRun"
@@ -456,7 +457,7 @@ CREATE_CAPACITY_RESERVATION_FLEET_INPUT: StaticSchema = (
         (lambda: schemas.AVAILABILITY_ZONE_NAME, 0),
         (lambda: schemas.AVAILABILITY_ZONE_ID, 0),
         (FLEET_CAPACITY_RESERVATION_TENANCY, 0),
-        (lambda: schemas.INTEGER, 1),
+        (lambda: schemas.INTEGER, {_sO: None, _smi: None}),
         (lambda: schemas.MILLISECOND_DATE_TIME, 0),
         (lambda: schemas.FLEET_INSTANCE_MATCH_CRITERIA, 0),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
@@ -535,7 +536,7 @@ CREATE_CARRIER_GATEWAY_INPUT: StaticSchema = (
     {_sSI: _cCCGR, _sm: None},
     (_VI, _TSa, _DR, _CTl),
     (
-        (lambda: schemas.VPC_ID, 1),
+        (lambda: schemas.VPC_ID, {_sO: None, _smi: None}),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.STRING, 2),
@@ -828,9 +829,9 @@ CREATE_CLIENT_VPN_ENDPOINT_INPUT: StaticSchema = (
     ),
     (
         (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 1),
-        (CLIENT_VPN_AUTHENTICATION_REQUEST_LIST, {_sN: _Au, _smi: None}),
-        (CONNECTION_LOG_OPTIONS, 1),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
+        (CLIENT_VPN_AUTHENTICATION_REQUEST_LIST, {_sN: _Au, _sO: None, _smi: None}),
+        (CONNECTION_LOG_OPTIONS, {_sO: None, _smi: None}),
         (lambda: schemas.VALUE_STRING_LIST, 0),
         (TRANSPORT_PROTOCOL, 0),
         (lambda: schemas.INTEGER, 0),
@@ -911,8 +912,8 @@ CREATE_CLIENT_VPN_ROUTE_INPUT: StaticSchema = (
     {_sSI: _cCCVRR, _sm: None},
     (_CVEI, _DCB, _TVSI, _Des, _CTl, _DR),
     (
-        (lambda: schemas.CLIENT_VPN_ENDPOINT_ID, 1),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.CLIENT_VPN_ENDPOINT_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
         (lambda: schemas.SUBNET_ID, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 2),
@@ -968,7 +969,11 @@ CREATE_COIP_CIDR_INPUT: StaticSchema = (
     _CCCI,
     {_sSI: _cCCCR, _sm: None},
     (_Ci, _CPIo, _DR),
-    ((lambda: schemas.STRING, 1), (IPV4_POOL_COIP_ID, 1), (lambda: schemas.BOOLEAN, 0)),
+    (
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
+        (IPV4_POOL_COIP_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
 )
 
 CREATE_COIP_CIDR_OUTPUT: StaticSchema = (
@@ -1010,7 +1015,7 @@ CREATE_COIP_POOL_INPUT: StaticSchema = (
     {_sSI: _cCCPR, _sm: None},
     (_LGRTI, _TSa, _DR),
     (
-        (lambda: schemas.LOCAL_GATEWAY_ROUTETABLE_ID, 1),
+        (lambda: schemas.LOCAL_GATEWAY_ROUTETABLE_ID, {_sO: None, _smi: None}),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
         (lambda: schemas.BOOLEAN, 0),
     ),
@@ -1060,7 +1065,7 @@ CREATE_CUSTOMER_GATEWAY_INPUT: StaticSchema = (
         (lambda: schemas.INTEGER, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 0),
-        (lambda: schemas.GATEWAY_TYPE, 1),
+        (lambda: schemas.GATEWAY_TYPE, {_sO: None, _smi: None}),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 0),
@@ -1400,8 +1405,8 @@ CREATE_DELEGATE_MAC_VOLUME_OWNERSHIP_TASK_INPUT: StaticSchema = (
     (
         (lambda: schemas.STRING, 2),
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.INSTANCE_ID, 1),
-        (SENSITIVE_MAC_CREDENTIALS, 1),
+        (lambda: schemas.INSTANCE_ID, {_sO: None, _smi: None}),
+        (SENSITIVE_MAC_CREDENTIALS, {_sO: None, _smi: None}),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
     ),
 )

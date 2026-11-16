@@ -9,11 +9,11 @@ from . import schemas
 
 n0 = "com.amazonaws.rds"
 _m = "member"
-_sN = "smithy.api#xmlName"
 _sV = "smithy.api#enumValue"
 _l = "locked"
 _u = "unlocked"
 _VN = "VolumeName"
+_sO = "smithy.api#clientOptional"
 _sm = "smithy.api#required"
 _AS = "AllocatedStorage"
 _IOPS = "IOPS"
@@ -161,6 +161,8 @@ _ICTd = "IdleClientTimeout"
 _DL = "DebugLogging"
 _av = "available"
 _DBP = "DBProxy"
+_DBPEN = "DBProxyEndpointName"
+_DBPE = "DBProxyEndpoint"
 _GC = "GlobalCluster"
 _Fil = "Filters"
 _Mar = "Marker"
@@ -170,26 +172,14 @@ _Par = "Parameters"
 _AN = "AttributeName"
 _DBCSAR = "DBClusterSnapshotAttributesResult"
 _LFN = "LogFileName"
+_MCP = "MaxConnectionsPercent"
+_MICP = "MaxIdleConnectionsPercent"
+_CBT = "ConnectionBorrowTimeout"
+_SPF = "SessionPinningFilters"
+_IQ = "InitQuery"
 _RAes = "ResourceArn"
-_SSAu = "SupportsStorageAutoscaling"
 _SDLV = "SupportsDedicatedLogVolume"
 _SASV = "SupportsAdditionalStorageVolumes"
-_DVDBIMI = "DescribeValidDBInstanceModificationsInput"
-_cDVDBIMM = "com.amazonaws.rds#DescribeValidDBInstanceModificationsMessage"
-_DR = "DoubleRange"
-_Fr = "From"
-_To = "To"
-_DRL = "DoubleRangeList"
-_Ra = "Range"
-_Ste = "Step"
-_RL = "RangeList"
-_VSO = "ValidStorageOptions"
-_SSt = "StorageSize"
-_PI = "ProvisionedIops"
-_ITSR = "IopsToStorageRatio"
-_PST = "ProvisionedStorageThroughput"
-_STTIR = "StorageThroughputToIopsRatio"
-_VSOL = "ValidStorageOptionsList"
 _VVO = "ValidVolumeOptions"
 _Sto = "Storage"
 _VVOL = "ValidVolumeOptionsList"
@@ -198,9 +188,6 @@ _Vo = "Volumes"
 _VDBIMM = "ValidDBInstanceModificationsMessage"
 _VPF = "ValidProcessorFeatures"
 _ASd = "AdditionalStorage"
-_DVDBIMO = "DescribeValidDBInstanceModificationsOutput"
-_cDVDBIMR = "com.amazonaws.rds#DescribeValidDBInstanceModificationsResult"
-_DVDBIM = "DescribeValidDBInstanceModifications"
 _DHEI = "DisableHttpEndpointInput"
 _cDHER = "com.amazonaws.rds#DisableHttpEndpointRequest"
 _DHEO = "DisableHttpEndpointOutput"
@@ -338,96 +325,13 @@ _SG = "SecurityGroups"
 _MDBPO = "ModifyDBProxyOutput"
 _cMDBPRo = "com.amazonaws.rds#ModifyDBProxyResponse"
 _MDBP = "ModifyDBProxy"
-
-DESCRIBE_VALID_DB_INSTANCE_MODIFICATIONS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DVDBIMI,
-    {_sSI: _cDVDBIMM, _smi: None},
-    (_DBII,),
-    ((lambda: schemas.STRING, 1),),
-)
-
-DESCRIBE_VALID_DB_INSTANCE_MODIFICATIONS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DVDBIMO,
-    {_sSI: _cDVDBIMR, _smit: None},
-    (_VDBIMM,),
-    ((lambda: VALID_DB_INSTANCE_MODIFICATIONS_MESSAGE, 0),),
-)
-
-DESCRIBE_VALID_DB_INSTANCE_MODIFICATIONS: StaticOperationSchema = (
-    23,
-    n0,
-    _DVDBIM,
-    0,
-    DESCRIBE_VALID_DB_INSTANCE_MODIFICATIONS_INPUT,
-    DESCRIBE_VALID_DB_INSTANCE_MODIFICATIONS_OUTPUT,
-    (
-        lambda: schemas.DB_INSTANCE_NOT_FOUND_FAULT,
-        lambda: schemas.INVALID_DB_INSTANCE_STATE_FAULT,
-    ),
-)
-
-DOUBLE_RANGE: StaticSchema = (
-    18,
-    n0,
-    _DR,
-    0,
-    (_Fr, _To),
-    ((lambda: schemas.DOUBLE, 0), (lambda: schemas.DOUBLE, 0)),
-)
-
-DOUBLE_RANGE_LIST: StaticSchema = (
-    16,
-    n0,
-    _DRL,
-    0,
-    (_m,),
-    ((DOUBLE_RANGE, {_sN: _DR}),),
-)
-
-RANGE: StaticSchema = (
-    18,
-    n0,
-    _Ra,
-    0,
-    (_Fr, _To, _Ste),
-    (
-        (lambda: schemas.INTEGER, 0),
-        (lambda: schemas.INTEGER, 0),
-        (lambda: schemas.INTEGER_OPTIONAL, 0),
-    ),
-)
-
-RANGE_LIST: StaticSchema = (16, n0, _RL, 0, (_m,), ((RANGE, {_sN: _Ra}),))
-
-VALID_STORAGE_OPTIONS: StaticSchema = (
-    18,
-    n0,
-    _VSO,
-    0,
-    (_STt, _SSt, _PI, _ITSR, _PST, _STTIR, _SSAu),
-    (
-        (lambda: schemas.STRING, 0),
-        (RANGE_LIST, 0),
-        (RANGE_LIST, 0),
-        (DOUBLE_RANGE_LIST, 0),
-        (RANGE_LIST, 0),
-        (DOUBLE_RANGE_LIST, 0),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-VALID_STORAGE_OPTIONS_LIST: StaticSchema = (
-    16,
-    n0,
-    _VSOL,
-    0,
-    (_m,),
-    ((VALID_STORAGE_OPTIONS, {_sN: _VSO}),),
-)
+_MDBPEI = "ModifyDBProxyEndpointInput"
+_cMDBPER = "com.amazonaws.rds#ModifyDBProxyEndpointRequest"
+_NDBPEN = "NewDBProxyEndpointName"
+_MDBPEO = "ModifyDBProxyEndpointOutput"
+_cMDBPERo = "com.amazonaws.rds#ModifyDBProxyEndpointResponse"
+_MDBPE = "ModifyDBProxyEndpoint"
+_CPCo = "ConnectionPoolConfiguration"
 
 VALID_VOLUME_OPTIONS: StaticSchema = (
     18,
@@ -435,7 +339,7 @@ VALID_VOLUME_OPTIONS: StaticSchema = (
     _VVO,
     0,
     (_VN, _Sto),
-    ((lambda: schemas.STRING, 0), (VALID_STORAGE_OPTIONS_LIST, 0)),
+    ((lambda: schemas.STRING, 0), (lambda: schemas.VALID_STORAGE_OPTIONS_LIST, 0)),
 )
 
 VALID_VOLUME_OPTIONS_LIST: StaticSchema = (
@@ -463,7 +367,7 @@ VALID_DB_INSTANCE_MODIFICATIONS_MESSAGE: StaticSchema = (
     0,
     (_Sto, _VPF, _SDLV, _ASd),
     (
-        (VALID_STORAGE_OPTIONS_LIST, 0),
+        (lambda: schemas.VALID_STORAGE_OPTIONS_LIST, 0),
         (lambda: schemas.AVAILABLE_PROCESSOR_FEATURE_LIST, 0),
         (lambda: schemas.BOOLEAN, 0),
         (VALID_ADDITIONAL_STORAGE_OPTIONS, 0),
@@ -476,7 +380,7 @@ DISABLE_HTTP_ENDPOINT_INPUT: StaticSchema = (
     _DHEI,
     {_sSI: _cDHER, _smi: None},
     (_RAes,),
-    ((lambda: schemas.STRING, 1),),
+    ((lambda: schemas.STRING, {_sO: None, _sm: None}),),
 )
 
 DISABLE_HTTP_ENDPOINT_OUTPUT: StaticSchema = (
@@ -535,8 +439,8 @@ DOWNLOAD_DB_LOG_FILE_PORTION_INPUT: StaticSchema = (
     {_sSI: _cDDBLFPM, _smi: None},
     (_DBII, _LFN, _Mar, _NOL),
     (
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.INTEGER, 0),
     ),
@@ -575,7 +479,7 @@ ENABLE_HTTP_ENDPOINT_INPUT: StaticSchema = (
     _EHEI,
     {_sSI: _cEHER, _smi: None},
     (_RAes,),
-    ((lambda: schemas.STRING, 1),),
+    ((lambda: schemas.STRING, {_sO: None, _sm: None}),),
 )
 
 ENABLE_HTTP_ENDPOINT_OUTPUT: StaticSchema = (
@@ -603,7 +507,7 @@ FAILOVER_DB_CLUSTER_INPUT: StaticSchema = (
     _FDBCI,
     {_sSI: _cFDBCM, _smi: None},
     (_DBCI, _TDBII),
-    ((lambda: schemas.STRING, 1), (lambda: schemas.STRING, 0)),
+    ((lambda: schemas.STRING, {_sO: None, _sm: None}), (lambda: schemas.STRING, 0)),
 )
 
 FAILOVER_DB_CLUSTER_OUTPUT: StaticSchema = (
@@ -636,8 +540,8 @@ FAILOVER_GLOBAL_CLUSTER_INPUT: StaticSchema = (
     {_sSI: _cFGCM, _smi: None},
     (_GCI, _TDCI, _ADL, _Sw),
     (
-        (lambda: schemas.GLOBAL_CLUSTER_IDENTIFIER, 1),
-        (lambda: schemas.DB_CLUSTER_IDENTIFIER, 1),
+        (lambda: schemas.GLOBAL_CLUSTER_IDENTIFIER, {_sO: None, _sm: None}),
+        (lambda: schemas.DB_CLUSTER_IDENTIFIER, {_sO: None, _sm: None}),
         (lambda: schemas.BOOLEAN_OPTIONAL, 0),
         (lambda: schemas.BOOLEAN_OPTIONAL, 0),
     ),
@@ -673,7 +577,10 @@ LIST_TAGS_FOR_RESOURCE_INPUT: StaticSchema = (
     _LTFRI,
     {_sSI: _cLTFRM, _smi: None},
     (_RN, _Fil),
-    ((lambda: schemas.STRING, 1), (lambda: schemas.FILTER_LIST, 0)),
+    (
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.FILTER_LIST, 0),
+    ),
 )
 
 LIST_TAGS_FOR_RESOURCE_OUTPUT: StaticSchema = (
@@ -806,7 +713,7 @@ MODIFY_CURRENT_DB_CLUSTER_CAPACITY_INPUT: StaticSchema = (
     {_sSI: _cMCDBCCM, _smi: None},
     (_DBCI, _C, _SBT, _TA),
     (
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.INTEGER_OPTIONAL, 0),
         (lambda: schemas.INTEGER_OPTIONAL, 0),
         (lambda: schemas.STRING, 0),
@@ -858,8 +765,8 @@ MODIFY_CUSTOM_DB_ENGINE_VERSION_INPUT: StaticSchema = (
     {_sSI: _cMCDBEVM, _smi: None},
     (_En, _EV, _D, _St),
     (
-        (lambda: schemas.CUSTOM_ENGINE_NAME, 1),
-        (lambda: schemas.CUSTOM_ENGINE_VERSION, 1),
+        (lambda: schemas.CUSTOM_ENGINE_NAME, {_sO: None, _sm: None}),
+        (lambda: schemas.CUSTOM_ENGINE_VERSION, {_sO: None, _sm: None}),
         (lambda: schemas.DESCRIPTION, 0),
         (CUSTOM_ENGINE_VERSION_STATUS, 0),
     ),
@@ -979,7 +886,7 @@ MODIFY_DB_CAPACITY_RESERVATION_INPUT: StaticSchema = (
     {_sSI: _cMDBCRR, _smi: None},
     (_DBCRI, _CPAZ, _EDT, _ED),
     (
-        (lambda: schemas.DB_CAPACITY_RESERVATION_IDENTIFIER, 1),
+        (lambda: schemas.DB_CAPACITY_RESERVATION_IDENTIFIER, {_sO: None, _sm: None}),
         (lambda: schemas.INTEGER_OPTIONAL, 0),
         (END_DATE_TYPE, 0),
         (lambda: schemas.T_STAMP, 0),
@@ -1077,7 +984,7 @@ MODIFY_DB_CLUSTER_INPUT: StaticSchema = (
         _ELS,
     ),
     (
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.INTEGER_OPTIONAL, 0),
@@ -1191,7 +1098,7 @@ MODIFY_DB_CLUSTER_ENDPOINT_INPUT: StaticSchema = (
     {_sSI: _cMDBCEM, _smi: None},
     (_DBCEI, _ET, _SMt, _EMx),
     (
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING_LIST, 0),
         (lambda: schemas.STRING_LIST, 0),
@@ -1240,7 +1147,10 @@ MODIFY_DB_CLUSTER_PARAMETER_GROUP_INPUT: StaticSchema = (
     _MDBCPGI,
     {_sSI: _cMDBCPGM, _smi: None},
     (_DBCPGN, _Par),
-    ((lambda: schemas.STRING, 1), (lambda: schemas.PARAMETERS_LIST, 1)),
+    (
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.PARAMETERS_LIST, {_sO: None, _sm: None}),
+    ),
 )
 
 MODIFY_DB_CLUSTER_PARAMETER_GROUP_OUTPUT: StaticSchema = (
@@ -1272,8 +1182,8 @@ MODIFY_DB_CLUSTER_SNAPSHOT_ATTRIBUTE_INPUT: StaticSchema = (
     {_sSI: _cMDBCSAM, _smi: None},
     (_DBCSI, _AN, _VTA, _VTR),
     (
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.ATTRIBUTE_VALUE_LIST, 0),
         (lambda: schemas.ATTRIBUTE_VALUE_LIST, 0),
     ),
@@ -1324,7 +1234,7 @@ MODIFY_ADDITIONAL_STORAGE_VOLUME: StaticSchema = (
     0,
     (_VN, _AS, _IOPS, _MAS, _ST, _STt, _SFD),
     (
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.INTEGER_OPTIONAL, 0),
         (lambda: schemas.INTEGER_OPTIONAL, 0),
         (lambda: schemas.INTEGER_OPTIONAL, 0),
@@ -1417,7 +1327,7 @@ MODIFY_DB_INSTANCE_INPUT: StaticSchema = (
         _ELS,
     ),
     (
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.INTEGER_OPTIONAL, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 0),
@@ -1536,7 +1446,10 @@ MODIFY_DB_PARAMETER_GROUP_INPUT: StaticSchema = (
     _MDBPGI,
     {_sSI: _cMDBPGM, _smi: None},
     (_DBPGN, _Par),
-    ((lambda: schemas.STRING, 1), (lambda: schemas.PARAMETERS_LIST, 1)),
+    (
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.PARAMETERS_LIST, {_sO: None, _sm: None}),
+    ),
 )
 
 MODIFY_DB_PARAMETER_GROUP_OUTPUT: StaticSchema = (
@@ -1568,7 +1481,7 @@ MODIFY_DB_PROXY_INPUT: StaticSchema = (
     {_sSI: _cMDBPR, _smi: None},
     (_DBPN, _NDBPN, _DAS, _Au, _RTLS, _ICTd, _DL, _RA, _SG),
     (
-        (lambda: schemas.DB_PROXY_NAME, 1),
+        (lambda: schemas.DB_PROXY_NAME, {_sO: None, _sm: None}),
         (lambda: schemas.DB_PROXY_NAME, 0),
         (lambda: schemas.DEFAULT_AUTH_SCHEME, 0),
         (lambda: schemas.USER_AUTH_CONFIG_LIST, 0),
@@ -1600,5 +1513,57 @@ MODIFY_DB_PROXY: StaticOperationSchema = (
         lambda: schemas.DB_PROXY_ALREADY_EXISTS_FAULT,
         lambda: schemas.DB_PROXY_NOT_FOUND_FAULT,
         lambda: schemas.INVALID_DB_PROXY_STATE_FAULT,
+    ),
+)
+
+MODIFY_DB_PROXY_ENDPOINT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _MDBPEI,
+    {_sSI: _cMDBPER, _smi: None},
+    (_DBPEN, _NDBPEN, _VSGIp),
+    (
+        (lambda: schemas.DB_PROXY_ENDPOINT_NAME, {_sO: None, _sm: None}),
+        (lambda: schemas.DB_PROXY_ENDPOINT_NAME, 0),
+        (lambda: schemas.STRING_LIST, 0),
+    ),
+)
+
+MODIFY_DB_PROXY_ENDPOINT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _MDBPEO,
+    {_sSI: _cMDBPERo, _smit: None},
+    (_DBPE,),
+    ((lambda: schemas.DB_PROXY_ENDPOINT, 0),),
+)
+
+MODIFY_DB_PROXY_ENDPOINT: StaticOperationSchema = (
+    23,
+    n0,
+    _MDBPE,
+    0,
+    MODIFY_DB_PROXY_ENDPOINT_INPUT,
+    MODIFY_DB_PROXY_ENDPOINT_OUTPUT,
+    (
+        lambda: schemas.DB_PROXY_ENDPOINT_ALREADY_EXISTS_FAULT,
+        lambda: schemas.DB_PROXY_ENDPOINT_NOT_FOUND_FAULT,
+        lambda: schemas.INVALID_DB_PROXY_ENDPOINT_STATE_FAULT,
+        lambda: schemas.INVALID_DB_PROXY_STATE_FAULT,
+    ),
+)
+
+CONNECTION_POOL_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _CPCo,
+    0,
+    (_MCP, _MICP, _CBT, _SPF, _IQ),
+    (
+        (lambda: schemas.INTEGER_OPTIONAL, 0),
+        (lambda: schemas.INTEGER_OPTIONAL, 0),
+        (lambda: schemas.INTEGER_OPTIONAL, 0),
+        (lambda: schemas.STRING_LIST, 0),
+        (lambda: schemas.OPERATOR_SENSITIVE_STRING, 0),
     ),
 )

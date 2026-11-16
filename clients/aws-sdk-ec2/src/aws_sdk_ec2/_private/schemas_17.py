@@ -17,6 +17,7 @@ _rT = "resourceType"
 _Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
+_sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _TSa = "TagSpecifications"
 _DR = "DryRun"
@@ -50,10 +51,6 @@ _o = "options"
 _TSag = "TagSet"
 _tS = "tagSet"
 _tGPA = "transitGatewayPeeringAttachment"
-_DS = "DnsSupport"
-_dS = "dnsSupport"
-_SGRS = "SecurityGroupReferencingSupport"
-_sGRS = "securityGroupReferencingSupport"
 _act = "active"
 _P = "Protocol"
 _pro = "protocol"
@@ -65,7 +62,6 @@ _DPR = "DestinationPortRange"
 _dPR = "destinationPortRange"
 _TRTI = "TargetRouteTableId"
 _tRTI = "targetRouteTableId"
-_TGr = "TransitGateway"
 _TGRT = "TransitGatewayRouteTable"
 _tGRT = "transitGatewayRouteTable"
 _TGPT = "TransitGatewayPolicyTable"
@@ -77,14 +73,10 @@ _tGA = "transitGatewayAttachment"
 _en = "enabling"
 _ena = "enabled"
 _disab = "disabling"
-_Des = "Description"
-_desc = "description"
 _TGPTI = "TransitGatewayPolicyTableId"
 _tGPTI = "transitGatewayPolicyTableId"
 _TGRTI = "TransitGatewayRouteTableId"
 _tGRTI = "transitGatewayRouteTableId"
-_SMta = "StateMessage"
-_sMta = "stateMessage"
 _Ty = "Type"
 _DCB = "DestinationCidrBlock"
 _ty = "type"
@@ -98,8 +90,6 @@ _Rou = "Route"
 _rou = "route"
 _PAe = "PeerAddress"
 _pAe = "peerAddress"
-_ASA = "AmazonSideAsn"
-_aSA = "amazonSideAsn"
 _PAee = "PeerAsn"
 _BO = "BgpOptions"
 _up_ = "up"
@@ -109,31 +99,6 @@ _BSg = "BgpStatus"
 _bSg = "bgpStatus"
 _SCB = "SourceCidrBlock"
 _sCB = "sourceCidrBlock"
-_AASA = "AutoAcceptSharedAttachments"
-_DRTA = "DefaultRouteTableAssociation"
-_DRTP = "DefaultRouteTablePropagation"
-_VESp = "VpnEcmpSupport"
-_MSu = "MulticastSupport"
-_TGCB = "TransitGatewayCidrBlocks"
-_ESV = "EncryptionStateValue"
-_ESnc = "EncryptionSupport"
-_ESncr = "EncryptionState"
-_eSnc = "encryptionState"
-_TGO = "TransitGatewayOptions"
-_tGCB = "transitGatewayCidrBlocks"
-_aASA = "autoAcceptSharedAttachments"
-_dRTA = "defaultRouteTableAssociation"
-_ADRTI = "AssociationDefaultRouteTableId"
-_aDRTI = "associationDefaultRouteTableId"
-_dRTP = "defaultRouteTablePropagation"
-_PDRTI = "PropagationDefaultRouteTableId"
-_pDRTI = "propagationDefaultRouteTableId"
-_vESp = "vpnEcmpSupport"
-_mSu = "multicastSupport"
-_eSncr = "encryptionSupport"
-_TGS = "TransitGatewayState"
-_TGAra = "TransitGatewayArn"
-_tGAr = "transitGatewayArn"
 _PVrot = "ProtocolValue"
 _gre = "gre"
 _CTGCRO = "CreateTransitGatewayConnectRequestOptions"
@@ -303,100 +268,28 @@ _cCTGRRo = "com.amazonaws.ec2#CreateTransitGatewayRouteResult"
 _CTGR = "CreateTransitGatewayRoute"
 _CTGRTI = "CreateTransitGatewayRouteTableInput"
 _cCTGRTR = "com.amazonaws.ec2#CreateTransitGatewayRouteTableRequest"
+_TGRTS = "TransitGatewayRouteTableState"
+_DART = "DefaultAssociationRouteTable"
+_dART = "defaultAssociationRouteTable"
+_DPRT = "DefaultPropagationRouteTable"
+_dPRT = "defaultPropagationRouteTable"
 _CTGRTO = "CreateTransitGatewayRouteTableOutput"
 _cCTGRTRo = "com.amazonaws.ec2#CreateTransitGatewayRouteTableResult"
 _CTGRT = "CreateTransitGatewayRouteTable"
+_CTGRTAI = "CreateTransitGatewayRouteTableAnnouncementInput"
+_cCTGRTAR = "com.amazonaws.ec2#CreateTransitGatewayRouteTableAnnouncementRequest"
+_PAIe = "PeeringAttachmentId"
+_TGRTAD = "TransitGatewayRouteTableAnnouncementDirection"
+_ou = "outgoing"
+_incom = "incoming"
+_TGRTA = "TransitGatewayRouteTableAnnouncement"
+_CTGRTAO = "CreateTransitGatewayRouteTableAnnouncementOutput"
+_cCTGRTARo = "com.amazonaws.ec2#CreateTransitGatewayRouteTableAnnouncementResult"
+_tGRTA = "transitGatewayRouteTableAnnouncement"
+_CTGRTA = "CreateTransitGatewayRouteTableAnnouncement"
 _TGMR = "TransitGatewayMaxResults"
 _TGPS = "TransitGatewayPropagationState"
 _TGP = "TransitGatewayPropagation"
-
-ENCRYPTION_STATE_VALUE: StaticSchema = (
-    14,
-    n0,
-    _ESV,
-    0,
-    (_en, _ena, _disab, _d),
-    ((-1, {_sV: _en}), (-1, {_sV: _ena}), (-1, {_sV: _disab}), (-1, {_sV: _d})),
-)
-
-ENCRYPTION_SUPPORT: StaticSchema = (
-    18,
-    n0,
-    _ESnc,
-    0,
-    (_ESncr, _SMta),
-    (
-        (ENCRYPTION_STATE_VALUE, {_aQN: _ESncr, _sN: _eSnc}),
-        (lambda: schemas.STRING, {_aQN: _SMta, _sN: _sMta}),
-    ),
-)
-
-TRANSIT_GATEWAY_OPTIONS: StaticSchema = (
-    18,
-    n0,
-    _TGO,
-    0,
-    (_ASA, _TGCB, _AASA, _DRTA, _ADRTI, _DRTP, _PDRTI, _VESp, _DS, _SGRS, _MSu, _ESnc),
-    (
-        (lambda: schemas.LONG, {_aQN: _ASA, _sN: _aSA}),
-        (lambda: schemas.VALUE_STRING_LIST, {_aQN: _TGCB, _sN: _tGCB}),
-        (
-            lambda: schemas.AUTO_ACCEPT_SHARED_ATTACHMENTS_VALUE,
-            {_aQN: _AASA, _sN: _aASA},
-        ),
-        (
-            lambda: schemas.DEFAULT_ROUTE_TABLE_ASSOCIATION_VALUE,
-            {_aQN: _DRTA, _sN: _dRTA},
-        ),
-        (lambda: schemas.STRING, {_aQN: _ADRTI, _sN: _aDRTI}),
-        (
-            lambda: schemas.DEFAULT_ROUTE_TABLE_PROPAGATION_VALUE,
-            {_aQN: _DRTP, _sN: _dRTP},
-        ),
-        (lambda: schemas.STRING, {_aQN: _PDRTI, _sN: _pDRTI}),
-        (lambda: schemas.VPN_ECMP_SUPPORT_VALUE, {_aQN: _VESp, _sN: _vESp}),
-        (lambda: schemas.DNS_SUPPORT_VALUE, {_aQN: _DS, _sN: _dS}),
-        (
-            lambda: schemas.SECURITY_GROUP_REFERENCING_SUPPORT_VALUE,
-            {_aQN: _SGRS, _sN: _sGRS},
-        ),
-        (lambda: schemas.MULTICAST_SUPPORT_VALUE, {_aQN: _MSu, _sN: _mSu}),
-        (ENCRYPTION_SUPPORT, {_aQN: _ESnc, _sN: _eSncr}),
-    ),
-)
-
-TRANSIT_GATEWAY_STATE: StaticSchema = (
-    14,
-    n0,
-    _TGS,
-    0,
-    (_p, _av, _mo, _de, _del),
-    (
-        (-1, {_sV: _p}),
-        (-1, {_sV: _av}),
-        (-1, {_sV: _mo}),
-        (-1, {_sV: _de}),
-        (-1, {_sV: _del}),
-    ),
-)
-
-TRANSIT_GATEWAY: StaticSchema = (
-    18,
-    n0,
-    _TGr,
-    0,
-    (_TGI, _TGAra, _St, _OIw, _Des, _CT, _O, _Tag),
-    (
-        (lambda: schemas.STRING, {_aQN: _TGI, _sN: _tGI}),
-        (lambda: schemas.STRING, {_aQN: _TGAra, _sN: _tGAr}),
-        (TRANSIT_GATEWAY_STATE, {_aQN: _St, _sN: _st}),
-        (lambda: schemas.STRING, {_aQN: _OIw, _sN: _oI}),
-        (lambda: schemas.STRING, {_aQN: _Des, _sN: _desc}),
-        (lambda: schemas.DATE_TIME, {_aQN: _CT, _sN: _cT}),
-        (TRANSIT_GATEWAY_OPTIONS, {_aQN: _O, _sN: _o}),
-        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
-    ),
-)
 
 PROTOCOL_VALUE: StaticSchema = (14, n0, _PVrot, 0, (_gre,), ((-1, {_sV: _gre}),))
 
@@ -406,7 +299,7 @@ CREATE_TRANSIT_GATEWAY_CONNECT_REQUEST_OPTIONS: StaticSchema = (
     _CTGCRO,
     0,
     (_P,),
-    ((PROTOCOL_VALUE, 1),),
+    ((PROTOCOL_VALUE, {_sO: None, _smi: None}),),
 )
 
 CREATE_TRANSIT_GATEWAY_CONNECT_INPUT: StaticSchema = (
@@ -416,8 +309,8 @@ CREATE_TRANSIT_GATEWAY_CONNECT_INPUT: StaticSchema = (
     {_sSI: _cCTGCR, _sm: None},
     (_TTGAI, _O, _TSa, _DR),
     (
-        (lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, 1),
-        (CREATE_TRANSIT_GATEWAY_CONNECT_REQUEST_OPTIONS, 1),
+        (lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, {_sO: None, _smi: None}),
+        (CREATE_TRANSIT_GATEWAY_CONNECT_REQUEST_OPTIONS, {_sO: None, _smi: None}),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
         (lambda: schemas.BOOLEAN, 0),
     ),
@@ -493,11 +386,11 @@ CREATE_TRANSIT_GATEWAY_CONNECT_PEER_INPUT: StaticSchema = (
     {_sSI: _cCTGCPR, _sm: None},
     (_TGAI, _TGAran, _PAe, _BO, _ICBn, _TSa, _DR),
     (
-        (lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, 1),
+        (lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
         (TRANSIT_GATEWAY_CONNECT_REQUEST_BGP_OPTIONS, 0),
-        (INSIDE_CIDR_BLOCKS_STRING_LIST, 1),
+        (INSIDE_CIDR_BLOCKS_STRING_LIST, {_sO: None, _smi: None}),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
         (lambda: schemas.BOOLEAN, 0),
     ),
@@ -613,7 +506,7 @@ CREATE_TRANSIT_GATEWAY_METERING_POLICY_INPUT: StaticSchema = (
     {_sSI: _cCTGMPR, _sm: None},
     (_TGI, _MAIi, _TSa, _DR),
     (
-        (lambda: schemas.TRANSIT_GATEWAY_ID, 1),
+        (lambda: schemas.TRANSIT_GATEWAY_ID, {_sO: None, _smi: None}),
         (TRANSIT_GATEWAY_ATTACHMENT_ID_STRING_LIST, {_sN: _MAIid}),
         (lambda: schemas.TAG_SPECIFICATION_LIST, 0),
         (lambda: schemas.BOOLEAN, 0),
@@ -702,8 +595,8 @@ CREATE_TRANSIT_GATEWAY_METERING_POLICY_ENTRY_INPUT: StaticSchema = (
         _DR,
     ),
     (
-        (TRANSIT_GATEWAY_METERING_POLICY_ID, 1),
-        (lambda: schemas.INTEGER, 1),
+        (TRANSIT_GATEWAY_METERING_POLICY_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.INTEGER, {_sO: None, _smi: None}),
         (lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, 0),
         (lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_RESOURCE_TYPE, 0),
         (lambda: schemas.STRING, 0),
@@ -713,7 +606,7 @@ CREATE_TRANSIT_GATEWAY_METERING_POLICY_ENTRY_INPUT: StaticSchema = (
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 0),
-        (TRANSIT_GATEWAY_METERING_PAYER_TYPE, 1),
+        (TRANSIT_GATEWAY_METERING_PAYER_TYPE, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, 0),
     ),
 )
@@ -834,7 +727,7 @@ CREATE_TRANSIT_GATEWAY_MULTICAST_DOMAIN_INPUT: StaticSchema = (
     {_sSI: _cCTGMDR, _sm: None},
     (_TGI, _O, _TSa, _DR),
     (
-        (lambda: schemas.TRANSIT_GATEWAY_ID, 1),
+        (lambda: schemas.TRANSIT_GATEWAY_ID, {_sO: None, _smi: None}),
         (CREATE_TRANSIT_GATEWAY_MULTICAST_DOMAIN_REQUEST_OPTIONS, 0),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
         (lambda: schemas.BOOLEAN, 0),
@@ -918,10 +811,10 @@ CREATE_TRANSIT_GATEWAY_PEERING_ATTACHMENT_INPUT: StaticSchema = (
     {_sSI: _cCTGPAR, _sm: None},
     (_TGI, _PTGI, _PAI, _PRee, _O, _TSa, _DR),
     (
-        (lambda: schemas.TRANSIT_GATEWAY_ID, 1),
-        (TRANSIT_ASSOCIATION_GATEWAY_ID, 1),
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.TRANSIT_GATEWAY_ID, {_sO: None, _smi: None}),
+        (TRANSIT_ASSOCIATION_GATEWAY_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
         (CREATE_TRANSIT_GATEWAY_PEERING_ATTACHMENT_REQUEST_OPTIONS, 0),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
         (lambda: schemas.BOOLEAN, 0),
@@ -954,7 +847,7 @@ CREATE_TRANSIT_GATEWAY_POLICY_TABLE_INPUT: StaticSchema = (
     {_sSI: _cCTGPTR, _sm: None},
     (_TGI, _TSa, _DR),
     (
-        (lambda: schemas.TRANSIT_GATEWAY_ID, 1),
+        (lambda: schemas.TRANSIT_GATEWAY_ID, {_sO: None, _smi: None}),
         (lambda: schemas.TAG_SPECIFICATION_LIST, 0),
         (lambda: schemas.BOOLEAN, 0),
     ),
@@ -1035,10 +928,10 @@ CREATE_TRANSIT_GATEWAY_POLICY_TABLE_ENTRY_INPUT: StaticSchema = (
     {_sSI: _cCTGPTER, _sm: None},
     (_TGPTI, _PRNo, _PRol, _TRTI, _DR),
     (
-        (lambda: schemas.TRANSIT_GATEWAY_POLICY_TABLE_ID, 1),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.TRANSIT_GATEWAY_POLICY_TABLE_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
         (TRANSIT_GATEWAY_REQUEST_POLICY_RULE, 0),
-        (lambda: schemas.TRANSIT_GATEWAY_ROUTE_TABLE_ID, 1),
+        (lambda: schemas.TRANSIT_GATEWAY_ROUTE_TABLE_ID, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, 0),
     ),
 )
@@ -1120,8 +1013,8 @@ CREATE_TRANSIT_GATEWAY_PREFIX_LIST_REFERENCE_INPUT: StaticSchema = (
     {_sSI: _cCTGPLRR, _sm: None},
     (_TGRTI, _PLI, _TGAI, _Bl, _DR),
     (
-        (lambda: schemas.TRANSIT_GATEWAY_ROUTE_TABLE_ID, 1),
-        (lambda: schemas.PREFIX_LIST_RESOURCE_ID, 1),
+        (lambda: schemas.TRANSIT_GATEWAY_ROUTE_TABLE_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.PREFIX_LIST_RESOURCE_ID, {_sO: None, _smi: None}),
         (lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, 0),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.BOOLEAN, 0),
@@ -1195,8 +1088,8 @@ CREATE_TRANSIT_GATEWAY_ROUTE_INPUT: StaticSchema = (
     {_sSI: _cCTGRR, _sm: None},
     (_DCB, _TGRTI, _TGAI, _Bl, _DR),
     (
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.TRANSIT_GATEWAY_ROUTE_TABLE_ID, 1),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
+        (lambda: schemas.TRANSIT_GATEWAY_ROUTE_TABLE_ID, {_sO: None, _smi: None}),
         (lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, 0),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.BOOLEAN, 0),
@@ -1296,7 +1189,7 @@ CREATE_TRANSIT_GATEWAY_ROUTE_TABLE_INPUT: StaticSchema = (
     {_sSI: _cCTGRTR, _sm: None},
     (_TGI, _TSa, _DR),
     (
-        (lambda: schemas.TRANSIT_GATEWAY_ID, 1),
+        (lambda: schemas.TRANSIT_GATEWAY_ID, {_sO: None, _smi: None}),
         (lambda: schemas.TAG_SPECIFICATION_LIST, 0),
         (lambda: schemas.BOOLEAN, 0),
     ),
@@ -1308,7 +1201,7 @@ CREATE_TRANSIT_GATEWAY_ROUTE_TABLE_OUTPUT: StaticSchema = (
     _CTGRTO,
     {_sSI: _cCTGRTRo, _smit: None},
     (_TGRT,),
-    ((lambda: schemas.TRANSIT_GATEWAY_ROUTE_TABLE, {_aQN: _TGRT, _sN: _tGRT}),),
+    ((lambda: TRANSIT_GATEWAY_ROUTE_TABLE, {_aQN: _TGRT, _sN: _tGRT}),),
 )
 
 CREATE_TRANSIT_GATEWAY_ROUTE_TABLE: StaticOperationSchema = (
@@ -1319,6 +1212,79 @@ CREATE_TRANSIT_GATEWAY_ROUTE_TABLE: StaticOperationSchema = (
     CREATE_TRANSIT_GATEWAY_ROUTE_TABLE_INPUT,
     CREATE_TRANSIT_GATEWAY_ROUTE_TABLE_OUTPUT,
     (),
+)
+
+TRANSIT_GATEWAY_ROUTE_TABLE_STATE: StaticSchema = (
+    14,
+    n0,
+    _TGRTS,
+    0,
+    (_p, _av, _de, _del),
+    ((-1, {_sV: _p}), (-1, {_sV: _av}), (-1, {_sV: _de}), (-1, {_sV: _del})),
+)
+
+TRANSIT_GATEWAY_ROUTE_TABLE: StaticSchema = (
+    18,
+    n0,
+    _TGRT,
+    0,
+    (_TGRTI, _TGI, _St, _DART, _DPRT, _CT, _Tag),
+    (
+        (lambda: schemas.STRING, {_aQN: _TGRTI, _sN: _tGRTI}),
+        (lambda: schemas.STRING, {_aQN: _TGI, _sN: _tGI}),
+        (TRANSIT_GATEWAY_ROUTE_TABLE_STATE, {_aQN: _St, _sN: _st}),
+        (lambda: schemas.BOOLEAN, {_aQN: _DART, _sN: _dART}),
+        (lambda: schemas.BOOLEAN, {_aQN: _DPRT, _sN: _dPRT}),
+        (lambda: schemas.DATE_TIME, {_aQN: _CT, _sN: _cT}),
+        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
+    ),
+)
+
+CREATE_TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CTGRTAI,
+    {_sSI: _cCTGRTAR, _sm: None},
+    (_TGRTI, _PAIe, _TSa, _DR),
+    (
+        (lambda: schemas.TRANSIT_GATEWAY_ROUTE_TABLE_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+CREATE_TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CTGRTAO,
+    {_sSI: _cCTGRTARo, _smit: None},
+    (_TGRTA,),
+    (
+        (
+            lambda: schemas.TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENT,
+            {_aQN: _TGRTA, _sN: _tGRTA},
+        ),
+    ),
+)
+
+CREATE_TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENT: StaticOperationSchema = (
+    23,
+    n0,
+    _CTGRTA,
+    0,
+    CREATE_TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENT_INPUT,
+    CREATE_TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENT_OUTPUT,
+    (),
+)
+
+TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENT_DIRECTION: StaticSchema = (
+    14,
+    n0,
+    _TGRTAD,
+    0,
+    (_ou, _incom),
+    ((-1, {_sV: _ou}), (-1, {_sV: _incom})),
 )
 
 TRANSIT_GATEWAY_MAX_RESULTS: StaticSchema = (7, n0, _TGMR, 0)

@@ -13,6 +13,7 @@ _sSI = "smithy.synthetic#originalShapeId"
 _s = "smithy.api#input"
 _sm = "smithy.api#required"
 _sL = "smithy.api#httpLabel"
+_sO = "smithy.api#clientOptional"
 _sN = "smithy.api#jsonName"
 _II = "InvitationId"
 _iI = "invitationId"
@@ -495,11 +496,11 @@ GET_FILTER_OUTPUT: StaticSchema = (
     {_sSI: _cGFRo, _smi: None},
     (_N, _De, _Ac, _Ra, _FCin, _Tag, _CAr, _UAp, _Ve),
     (
-        (lambda: schemas.FILTER_NAME, {_sN: _n, _sm: None}),
+        (lambda: schemas.FILTER_NAME, {_sO: None, _sN: _n, _sm: None}),
         (lambda: schemas.FILTER_DESCRIPTION, {_sN: _de}),
-        (lambda: schemas.FILTER_ACTION, {_sN: _ac, _sm: None}),
+        (lambda: schemas.FILTER_ACTION, {_sO: None, _sN: _ac, _sm: None}),
         (lambda: schemas.FILTER_RANK, {_sN: _r}),
-        (lambda: schemas.FINDING_CRITERIA, {_sN: _fCin, _sm: None}),
+        (lambda: schemas.FINDING_CRITERIA, {_sO: None, _sN: _fCin, _sm: None}),
         (lambda: schemas.TAG_MAP, {_sN: _tag}),
         (lambda: schemas.TIMESTAMP, {_sN: _cA}),
         (lambda: schemas.TIMESTAMP, {_sN: _uAp}),
@@ -536,7 +537,7 @@ GET_FINDINGS_INPUT: StaticSchema = (
     (_DI, _FIi, _SCor),
     (
         (lambda: schemas.DETECTOR_ID, 9),
-        (lambda: schemas.FINDING_IDS, {_sN: _fI, _sm: None}),
+        (lambda: schemas.FINDING_IDS, {_sO: None, _sN: _fI, _sm: None}),
         (lambda: schemas.SORT_CRITERIA, {_sN: _sCor}),
     ),
 )
@@ -547,7 +548,7 @@ GET_FINDINGS_OUTPUT: StaticSchema = (
     _GFOe,
     {_sSI: _cGFRoma, _smi: None},
     (_Fi,),
-    ((lambda: schemas.FINDINGS, {_sN: _fi, _sm: None}),),
+    ((lambda: schemas.FINDINGS, {_sO: None, _sN: _fi, _sm: None}),),
 )
 
 GET_FINDINGS: StaticOperationSchema = (
@@ -611,7 +612,7 @@ GET_FINDINGS_STATISTICS_OUTPUT: StaticSchema = (
     {_sSI: _cGFSRo, _smi: None},
     (_FSin, _NT),
     (
-        (lambda: schemas.FINDING_STATISTICS, {_sN: _fSin, _sm: None}),
+        (lambda: schemas.FINDING_STATISTICS, {_sO: None, _sN: _fSin, _sm: None}),
         (lambda: schemas.STRING, {_sN: _nT}),
     ),
 )
@@ -665,7 +666,7 @@ GET_INVESTIGATION_OUTPUT: StaticSchema = (
     _GIO,
     {_sSI: _cGIRo, _smi: None},
     (_Inv,),
-    ((lambda: INVESTIGATION, {_sN: _inv, _sm: None}),),
+    ((lambda: INVESTIGATION, {_sO: None, _sN: _inv, _sm: None}),),
 )
 
 GET_INVESTIGATION: StaticOperationSchema = (
@@ -700,7 +701,7 @@ PRODUCT: StaticSchema = (
     0,
     (_N, _Fea),
     (
-        (lambda: schemas.STRING, {_sN: _n, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sN: _n, _sm: None}),
         (lambda: schemas.STRING, {_sN: _fe}),
     ),
 )
@@ -712,8 +713,8 @@ INVESTIGATION_METADATA: StaticSchema = (
     0,
     (_Ve, _Prod),
     (
-        (lambda: schemas.STRING, {_sN: _ver, _sm: None}),
-        (PRODUCT, {_sN: _prod, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sN: _ver, _sm: None}),
+        (PRODUCT, {_sO: None, _sN: _prod, _sm: None}),
     ),
 )
 
@@ -899,10 +900,10 @@ INVESTIGATION: StaticSchema = (
         _Er,
     ),
     (
-        (lambda: schemas.INVESTIGATION_ID, {_sN: _iInv, _sm: None}),
-        (INVESTIGATION_STATUS, {_sN: _st, _sm: None}),
-        (lambda: schemas.TRIGGER_PROMPT, {_sN: _tP, _sm: None}),
-        (TRIGGERED_BY, {_sN: _tBr, _sm: None}),
+        (lambda: schemas.INVESTIGATION_ID, {_sO: None, _sN: _iInv, _sm: None}),
+        (INVESTIGATION_STATUS, {_sO: None, _sN: _st, _sm: None}),
+        (lambda: schemas.TRIGGER_PROMPT, {_sO: None, _sN: _tP, _sm: None}),
+        (TRIGGERED_BY, {_sO: None, _sN: _tBr, _sm: None}),
         (INVESTIGATION_METADATA, {_sN: _met}),
         (lambda: schemas.CLOUD_DETAILS, {_sN: _clo}),
         (lambda: schemas.RISK_LEVEL, {_sN: _rL}),
@@ -951,7 +952,10 @@ GET_IP_SET_INPUT: StaticSchema = (
     _GIPSI,
     {_sSI: _cGIPSR, _s: None},
     (_DI, _ISI),
-    ((lambda: schemas.DETECTOR_ID, 9), (lambda: schemas.STRING, 9)),
+    (
+        (lambda: schemas.DETECTOR_ID, 9),
+        (lambda: schemas.STRING, {_sO: None, _sm: None, _sL: None}),
+    ),
 )
 
 GET_IP_SET_OUTPUT: StaticSchema = (
@@ -961,10 +965,10 @@ GET_IP_SET_OUTPUT: StaticSchema = (
     {_sSI: _cGIPSRo, _smi: None},
     (_N, _Fo, _Loc, _St, _Tag, _EBO),
     (
-        (lambda: schemas.NAME, {_sN: _n, _sm: None}),
-        (lambda: schemas.IP_SET_FORMAT, {_sN: _fo, _sm: None}),
-        (lambda: schemas.LOCATION, {_sN: _loc, _sm: None}),
-        (lambda: IP_SET_STATUS, {_sN: _st, _sm: None}),
+        (lambda: schemas.NAME, {_sO: None, _sN: _n, _sm: None}),
+        (lambda: schemas.IP_SET_FORMAT, {_sO: None, _sN: _fo, _sm: None}),
+        (lambda: schemas.LOCATION, {_sO: None, _sN: _loc, _sm: None}),
+        (lambda: IP_SET_STATUS, {_sO: None, _sN: _st, _sm: None}),
         (lambda: schemas.TAG_MAP, {_sN: _tag}),
         (lambda: schemas.ACCOUNT_ID, {_sN: _eBO}),
     ),
@@ -1014,7 +1018,7 @@ GET_MALWARE_PROTECTION_PLAN_INPUT: StaticSchema = (
     _GMPPI,
     {_sSI: _cGMPPR, _s: None},
     (_MPPI,),
-    ((lambda: schemas.STRING, 9),),
+    ((lambda: schemas.STRING, {_sO: None, _sm: None, _sL: None}),),
 )
 
 GET_MALWARE_PROTECTION_PLAN_OUTPUT: StaticSchema = (
@@ -1091,7 +1095,7 @@ GET_MALWARE_SCAN_INPUT: StaticSchema = (
     _GMSI,
     {_sSI: _cGMSR, _s: None},
     (_SIc,),
-    ((lambda: schemas.STRING, 9),),
+    ((lambda: schemas.STRING, {_sO: None, _sm: None, _sL: None}),),
 )
 
 GET_MALWARE_SCAN_OUTPUT: StaticSchema = (
@@ -1395,7 +1399,7 @@ SCAN_CONDITION_PAIR: StaticSchema = (
     0,
     (_Ke, _Va),
     (
-        (lambda: schemas.TAG_KEY, {_sN: _ke, _sm: None}),
+        (lambda: schemas.TAG_KEY, {_sO: None, _sN: _ke, _sm: None}),
         (lambda: schemas.TAG_VALUE, {_sN: _v}),
     ),
 )
@@ -1408,7 +1412,7 @@ SCAN_CONDITION: StaticSchema = (
     _SCcan,
     0,
     (_ME,),
-    ((MAP_EQUALS, {_sN: _mE, _sm: None}),),
+    ((MAP_EQUALS, {_sO: None, _sN: _mE, _sm: None}),),
 )
 
 SCAN_CRITERION: StaticSchema = (
@@ -1444,7 +1448,7 @@ GET_MASTER_ACCOUNT_OUTPUT: StaticSchema = (
     _GMAO,
     {_sSI: _cGMARo, _smi: None},
     (_Mas,),
-    ((lambda: MASTER, {_sN: _mas, _sm: None}),),
+    ((lambda: MASTER, {_sO: None, _sN: _mas, _sm: None}),),
 )
 
 GET_MASTER_ACCOUNT: StaticOperationSchema = (
@@ -1486,7 +1490,7 @@ GET_MEMBER_DETECTORS_INPUT: StaticSchema = (
     (_DI, _AIcco),
     (
         (lambda: schemas.DETECTOR_ID, 9),
-        (lambda: schemas.ACCOUNT_IDS, {_sN: _aIcc, _sm: None}),
+        (lambda: schemas.ACCOUNT_IDS, {_sO: None, _sN: _aIcc, _sm: None}),
     ),
 )
 
@@ -1497,8 +1501,8 @@ GET_MEMBER_DETECTORS_OUTPUT: StaticSchema = (
     {_sSI: _cGMDRo, _smi: None},
     (_MDSCe, _UAnp),
     (
-        (lambda: MEMBER_DATA_SOURCE_CONFIGURATIONS, {_sN: _mem, _sm: None}),
-        (lambda: schemas.UNPROCESSED_ACCOUNTS, {_sN: _uAn, _sm: None}),
+        (lambda: MEMBER_DATA_SOURCE_CONFIGURATIONS, {_sO: None, _sN: _mem, _sm: None}),
+        (lambda: schemas.UNPROCESSED_ACCOUNTS, {_sO: None, _sN: _uAn, _sm: None}),
     ),
 )
 
@@ -1577,8 +1581,11 @@ MEMBER_DATA_SOURCE_CONFIGURATION: StaticSchema = (
     0,
     (_AIcc, _DS, _F),
     (
-        (lambda: schemas.ACCOUNT_ID, {_sN: _aIc, _sm: None}),
-        (lambda: schemas.DATA_SOURCE_CONFIGURATIONS_RESULT, {_sN: _dS, _sm: None}),
+        (lambda: schemas.ACCOUNT_ID, {_sO: None, _sN: _aIc, _sm: None}),
+        (
+            lambda: schemas.DATA_SOURCE_CONFIGURATIONS_RESULT,
+            {_sO: None, _sN: _dS, _sm: None},
+        ),
         (MEMBER_FEATURES_CONFIGURATIONS_RESULTS, {_sN: _f}),
     ),
 )

@@ -23,6 +23,7 @@ _c = "client"
 _sE = "smithy.api#httpError"
 _aQE = "aws.protocols#awsQueryError"
 _M = "Message"
+_sO = "smithy.api#clientOptional"
 _smit = "smithy.api#required"
 _RESOURCE = "RESOURCE"
 _TN = "TypeName"
@@ -211,6 +212,8 @@ _SEQUENTIAL = "SEQUENTIAL"
 _PARALLEL = "PARALLEL"
 _Reg = "Region"
 _RLe = "RegionList"
+_SSOP = "StackSetOperationPreferences"
+_RO = "RegionOrder"
 _SRI = "StackRefactorId"
 _ICSSE = "InvalidChangeSetStatusException"
 _GTNFE = "GeneratedTemplateNotFoundException"
@@ -223,15 +226,6 @@ _PPr = "PropertyPath"
 _GTS = "GeneratedTemplateStatus"
 _UP__ = "UPDATE_PENDING"
 _SDDI = "StackDriftDetectionId"
-
-SCOPE: StaticSchema = (
-    16,
-    n0,
-    _Sc,
-    0,
-    (_m,),
-    ((lambda: schemas.RESOURCE_ATTRIBUTE, 0),),
-)
 
 RESOURCE_CHANGE: StaticSchema = (
     18,
@@ -262,7 +256,7 @@ RESOURCE_CHANGE: StaticSchema = (
         (lambda: schemas.PHYSICAL_RESOURCE_ID, 0),
         (lambda: schemas.RESOURCE_TYPE, 0),
         (lambda: schemas.REPLACEMENT, 0),
-        (SCOPE, 0),
+        (lambda: schemas.SCOPE, 0),
         (lambda: schemas.STACK_RESOURCE_DRIFT_STATUS, 0),
         (lambda: schemas.RESOURCE_DRIFT_IGNORED_ATTRIBUTES, 0),
         (lambda: schemas.RESOURCE_CHANGE_DETAILS, 0),
@@ -489,7 +483,7 @@ CONTINUE_UPDATE_ROLLBACK_INPUT: StaticSchema = (
     {_s: None},
     (_SN, _RARNo, _RTSe, _CRT, _FR),
     (
-        (STACK_NAME_OR_ID, 1),
+        (STACK_NAME_OR_ID, {_sO: None, _smit: None}),
         (ROLE_ARN, 0),
         (RESOURCES_TO_SKIP, 0),
         (lambda: schemas.CLIENT_REQUEST_TOKEN, 0),
@@ -588,9 +582,9 @@ RESOURCE_TO_IMPORT: StaticSchema = (
     0,
     (_RT, _LRI, _RI),
     (
-        (lambda: schemas.RESOURCE_TYPE, 1),
-        (lambda: schemas.LOGICAL_RESOURCE_ID, 1),
-        (RESOURCE_IDENTIFIER_PROPERTIES, 1),
+        (lambda: schemas.RESOURCE_TYPE, {_sO: None, _smit: None}),
+        (lambda: schemas.LOGICAL_RESOURCE_ID, {_sO: None, _smit: None}),
+        (RESOURCE_IDENTIFIER_PROPERTIES, {_sO: None, _smit: None}),
     ),
 )
 
@@ -613,7 +607,7 @@ ROLLBACK_TRIGGER: StaticSchema = (
     _RTo,
     0,
     (_Ar, _T),
-    ((lambda: schemas.ARN, 1), (TYPE, 1)),
+    ((lambda: schemas.ARN, {_sO: None, _smit: None}), (TYPE, {_sO: None, _smit: None})),
 )
 
 ROLLBACK_TRIGGERS: StaticSchema = (16, n0, _RTol, 0, (_m,), ((ROLLBACK_TRIGGER, 0),))
@@ -631,7 +625,14 @@ TAG_KEY: StaticSchema = (3, n0, _TK, 0)
 
 TAG_VALUE: StaticSchema = (3, n0, _TV, 0)
 
-TAG: StaticSchema = (18, n0, _Tag, 0, (_K, _V), ((TAG_KEY, 1), (TAG_VALUE, 1)))
+TAG: StaticSchema = (
+    18,
+    n0,
+    _Tag,
+    0,
+    (_K, _V),
+    ((TAG_KEY, {_sO: None, _smit: None}), (TAG_VALUE, {_sO: None, _smit: None})),
+)
 
 TAGS: StaticSchema = (16, n0, _Ta, 0, (_m,), ((TAG, 0),))
 
@@ -671,7 +672,7 @@ CREATE_CHANGE_SET_INPUT: StaticSchema = (
         _DV,
     ),
     (
-        (STACK_NAME_OR_ID, 1),
+        (STACK_NAME_OR_ID, {_sO: None, _smit: None}),
         (TEMPLATE_BODY, 0),
         (TEMPLATE_URL, 0),
         (USE_PREVIOUS_TEMPLATE, 0),
@@ -682,7 +683,7 @@ CREATE_CHANGE_SET_INPUT: StaticSchema = (
         (ROLLBACK_CONFIGURATION, 0),
         (NOTIFICATION_AR_NS, 0),
         (TAGS, 0),
-        (CHANGE_SET_NAME, 1),
+        (CHANGE_SET_NAME, {_sO: None, _smit: None}),
         (lambda: schemas.CLIENT_TOKEN, 0),
         (DESCRIPTION, 0),
         (CHANGE_SET_TYPE, 0),
@@ -758,9 +759,9 @@ RESOURCE_DEFINITION: StaticSchema = (
     0,
     (_RT, _LRI, _RI),
     (
-        (lambda: schemas.RESOURCE_TYPE, 1),
+        (lambda: schemas.RESOURCE_TYPE, {_sO: None, _smit: None}),
         (lambda: schemas.LOGICAL_RESOURCE_ID, 0),
-        (RESOURCE_IDENTIFIER_PROPERTIES, 1),
+        (RESOURCE_IDENTIFIER_PROPERTIES, {_sO: None, _smit: None}),
     ),
 )
 
@@ -811,7 +812,7 @@ CREATE_GENERATED_TEMPLATE_INPUT: StaticSchema = (
     (_Reso, _GTN, _SN, _TCe),
     (
         (RESOURCE_DEFINITIONS, 0),
-        (GENERATED_TEMPLATE_NAME, 1),
+        (GENERATED_TEMPLATE_NAME, {_sO: None, _smit: None}),
         (lambda: schemas.STACK_NAME, 0),
         (TEMPLATE_CONFIGURATION, 0),
     ),
@@ -855,6 +856,8 @@ ON_FAILURE: StaticSchema = (
 
 RETAIN_EXCEPT_ON_CREATE: StaticSchema = (2, n0, _REOC, 0)
 
+STACK_POLICY_URL: StaticSchema = (3, n0, _SPURL, 0)
+
 TIMEOUT_MINUTES: StaticSchema = (7, n0, _TM, 0)
 
 CREATE_STACK_INPUT: StaticSchema = (
@@ -885,7 +888,7 @@ CREATE_STACK_INPUT: StaticSchema = (
         _DV,
     ),
     (
-        (lambda: schemas.STACK_NAME, 1),
+        (lambda: schemas.STACK_NAME, {_sO: None, _smit: None}),
         (TEMPLATE_BODY, 0),
         (TEMPLATE_URL, 0),
         (PARAMETERS, 0),
@@ -898,7 +901,7 @@ CREATE_STACK_INPUT: StaticSchema = (
         (ROLE_ARN, 0),
         (ON_FAILURE, 0),
         (lambda: schemas.STACK_POLICY_BODY, 0),
-        (lambda: schemas.STACK_POLICY_URL, 0),
+        (STACK_POLICY_URL, 0),
         (TAGS, 0),
         (lambda: schemas.CLIENT_REQUEST_TOKEN, 0),
         (ENABLE_TERMINATION_PROTECTION, 0),
@@ -988,6 +991,23 @@ REGION_CONCURRENCY_TYPE: StaticSchema = (
 REGION: StaticSchema = (3, n0, _Reg, 0)
 
 REGION_LIST: StaticSchema = (16, n0, _RLe, 0, (_m,), ((REGION, 0),))
+
+STACK_SET_OPERATION_PREFERENCES: StaticSchema = (
+    18,
+    n0,
+    _SSOP,
+    0,
+    (_RCT, _RO, _FTC, _FTP, _MCC, _MCP, _CM),
+    (
+        (REGION_CONCURRENCY_TYPE, 0),
+        (REGION_LIST, 0),
+        (FAILURE_TOLERANCE_COUNT, 0),
+        (FAILURE_TOLERANCE_PERCENTAGE, 0),
+        (MAX_CONCURRENT_COUNT, 0),
+        (MAX_CONCURRENT_PERCENTAGE, 0),
+        (CONCURRENCY_MODE, 0),
+    ),
+)
 
 STACK_REFACTOR_ID: StaticSchema = (3, n0, _SRI, 0)
 

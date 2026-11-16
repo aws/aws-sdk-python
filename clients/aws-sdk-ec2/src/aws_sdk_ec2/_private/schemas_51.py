@@ -15,6 +15,7 @@ _TS = "TagSpecification"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
 _Ad = "Address"
+_sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _TSa = "TagSpecifications"
 _DR = "DryRun"
@@ -53,8 +54,6 @@ _SGe = "SecurityGroups"
 _IT = "InstanceType"
 _iT = "instanceType"
 _Des = "Description"
-_AIs = "AssociationId"
-_aIs = "associationId"
 _PIAr = "PrivateIpAddress"
 _pIAr = "privateIpAddress"
 _desc = "description"
@@ -72,10 +71,6 @@ _PIAC = "PrivateIpAddressCount"
 _sU = "smithy.api#Unit"
 _IIP = "IamInstanceProfile"
 _iIP = "iamInstanceProfile"
-_RTIo = "RouteTableId"
-_rTIo = "routeTableId"
-_ASss = "AssociationState"
-_aSs = "associationState"
 _GIr = "GroupId"
 _TGRTI = "TransitGatewayRouteTableId"
 _gIr = "groupId"
@@ -255,13 +250,6 @@ _AId = "AdditionalInfo"
 _aId = "additionalInfo"
 _CVu = "CurrentVersion"
 _RGIef = "ReferencedGroupId"
-_NAIew = "NewAssociationId"
-_nAIe = "newAssociationId"
-_RRTAI = "ReplaceRouteTableAssociationInput"
-_cRRTAR = "com.amazonaws.ec2#ReplaceRouteTableAssociationRequest"
-_RRTAO = "ReplaceRouteTableAssociationOutput"
-_cRRTARo = "com.amazonaws.ec2#ReplaceRouteTableAssociationResult"
-_RRTA = "ReplaceRouteTableAssociation"
 _RTGRI = "ReplaceTransitGatewayRouteInput"
 _cRTGRR = "com.amazonaws.ec2#ReplaceTransitGatewayRouteRequest"
 _RTGRO = "ReplaceTransitGatewayRouteOutput"
@@ -434,44 +422,6 @@ _RIOu = "RunInstancesOutput"
 _cRo = "com.amazonaws.ec2#Reservation"
 _RIu = "RunInstances"
 
-REPLACE_ROUTE_TABLE_ASSOCIATION_INPUT: StaticSchema = (
-    18,
-    n0,
-    _RRTAI,
-    {_sSI: _cRRTAR, _sm: None},
-    (_DR, _AIs, _RTIo),
-    (
-        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (
-            lambda: schemas.ROUTE_TABLE_ASSOCIATION_ID,
-            {_aQN: _AIs, _sN: _aIs, _smi: None},
-        ),
-        (lambda: schemas.ROUTE_TABLE_ID, {_aQN: _RTIo, _sN: _rTIo, _smi: None}),
-    ),
-)
-
-REPLACE_ROUTE_TABLE_ASSOCIATION_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _RRTAO,
-    {_sSI: _cRRTARo, _smit: None},
-    (_NAIew, _ASss),
-    (
-        (lambda: schemas.STRING, {_aQN: _NAIew, _sN: _nAIe}),
-        (lambda: schemas.ROUTE_TABLE_ASSOCIATION_STATE, {_aQN: _ASss, _sN: _aSs}),
-    ),
-)
-
-REPLACE_ROUTE_TABLE_ASSOCIATION: StaticOperationSchema = (
-    23,
-    n0,
-    _RRTA,
-    0,
-    REPLACE_ROUTE_TABLE_ASSOCIATION_INPUT,
-    REPLACE_ROUTE_TABLE_ASSOCIATION_OUTPUT,
-    (),
-)
-
 REPLACE_TRANSIT_GATEWAY_ROUTE_INPUT: StaticSchema = (
     18,
     n0,
@@ -479,8 +429,8 @@ REPLACE_TRANSIT_GATEWAY_ROUTE_INPUT: StaticSchema = (
     {_sSI: _cRTGRR, _sm: None},
     (_DCB, _TGRTI, _TGAI, _Bl, _DR),
     (
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.TRANSIT_GATEWAY_ROUTE_TABLE_ID, 1),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
+        (lambda: schemas.TRANSIT_GATEWAY_ROUTE_TABLE_ID, {_sO: None, _smi: None}),
         (lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, 0),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.BOOLEAN, 0),
@@ -513,8 +463,8 @@ REPLACE_VPN_TUNNEL_INPUT: StaticSchema = (
     {_sSI: _cRVTR, _sm: None},
     (_VCIp, _VTOIA, _APM, _DR),
     (
-        (lambda: schemas.VPN_CONNECTION_ID, 1),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.VPN_CONNECTION_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.BOOLEAN, 0),
     ),
@@ -586,11 +536,14 @@ REPORT_INSTANCE_STATUS_INPUT: StaticSchema = (
     (_DR, _Ins, _Sta, _ST, _ETnd, _RCea, _Des),
     (
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (lambda: schemas.INSTANCE_ID_STRING_LIST, {_aQN: _II, _sN: _iI, _smi: None}),
-        (REPORT_STATUS_TYPE, {_aQN: _Sta, _sN: _sta, _smi: None}),
+        (
+            lambda: schemas.INSTANCE_ID_STRING_LIST,
+            {_aQN: _II, _sN: _iI, _sO: None, _smi: None},
+        ),
+        (REPORT_STATUS_TYPE, {_aQN: _Sta, _sN: _sta, _sO: None, _smi: None}),
         (lambda: schemas.DATE_TIME, {_aQN: _ST, _sN: _sTt}),
         (lambda: schemas.DATE_TIME, {_aQN: _ETnd, _sN: _eTnd}),
-        (REASON_CODES_LIST, {_aQN: _RCeas, _sN: _rCea, _smi: None}),
+        (REASON_CODES_LIST, {_aQN: _RCeas, _sN: _rCea, _sO: None, _smi: None}),
         (REPORT_INSTANCE_STATUS_REQUEST_DESCRIPTION, {_aQN: _Des, _sN: _desc}),
     ),
 )
@@ -617,7 +570,7 @@ REQUEST_SPOT_FLEET_INPUT: StaticSchema = (
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
         (
             lambda: schemas.SPOT_FLEET_REQUEST_CONFIG_DATA,
-            {_aQN: _SFRC, _sN: _sFRC, _smi: None},
+            {_aQN: _SFRC, _sN: _sFRC, _sO: None, _smi: None},
         ),
     ),
 )
@@ -751,8 +704,8 @@ RESET_ADDRESS_ATTRIBUTE_INPUT: StaticSchema = (
     {_sSI: _cRAAR, _sm: None},
     (_AI, _Attr, _DR),
     (
-        (lambda: schemas.ALLOCATION_ID, 1),
-        (lambda: schemas.ADDRESS_ATTRIBUTE_NAME, 1),
+        (lambda: schemas.ALLOCATION_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.ADDRESS_ATTRIBUTE_NAME, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, 0),
     ),
 )
@@ -821,7 +774,7 @@ RESET_FPGA_IMAGE_ATTRIBUTE_INPUT: StaticSchema = (
     (_DR, _FII, _Attr),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.FPGA_IMAGE_ID, 1),
+        (lambda: schemas.FPGA_IMAGE_ID, {_sO: None, _smi: None}),
         (RESET_FPGA_IMAGE_ATTRIBUTE_NAME, 0),
     ),
 )
@@ -861,8 +814,8 @@ RESET_IMAGE_ATTRIBUTE_INPUT: StaticSchema = (
     {_sSI: _cRIAR, _sm: None},
     (_Attr, _IIm, _DR),
     (
-        (RESET_IMAGE_ATTRIBUTE_NAME, 1),
-        (lambda: schemas.IMAGE_ID, 1),
+        (RESET_IMAGE_ATTRIBUTE_NAME, {_sO: None, _smi: None}),
+        (lambda: schemas.IMAGE_ID, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
     ),
 )
@@ -887,10 +840,10 @@ RESET_INSTANCE_ATTRIBUTE_INPUT: StaticSchema = (
     (_DR, _II, _Attr),
     (
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (lambda: schemas.INSTANCE_ID, {_aQN: _II, _sN: _iI, _smi: None}),
+        (lambda: schemas.INSTANCE_ID, {_aQN: _II, _sN: _iI, _sO: None, _smi: None}),
         (
             lambda: schemas.INSTANCE_ATTRIBUTE_NAME,
-            {_aQN: _Attr, _sN: _attr, _smi: None},
+            {_aQN: _Attr, _sN: _attr, _sO: None, _smi: None},
         ),
     ),
 )
@@ -920,7 +873,10 @@ RESET_NETWORK_INTERFACE_ATTRIBUTE_INPUT: StaticSchema = (
     (_DR, _NII, _SDC),
     (
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (lambda: schemas.NETWORK_INTERFACE_ID, {_aQN: _NII, _sN: _nII, _smi: None}),
+        (
+            lambda: schemas.NETWORK_INTERFACE_ID,
+            {_aQN: _NII, _sN: _nII, _sO: None, _smi: None},
+        ),
         (lambda: schemas.STRING, {_aQN: _SDC, _sN: _sDC}),
     ),
 )
@@ -949,8 +905,8 @@ RESET_SNAPSHOT_ATTRIBUTE_INPUT: StaticSchema = (
     {_sSI: _cRSAR, _sm: None},
     (_Attr, _SIn, _DR),
     (
-        (lambda: schemas.SNAPSHOT_ATTRIBUTE_NAME, 1),
-        (lambda: schemas.SNAPSHOT_ID, 1),
+        (lambda: schemas.SNAPSHOT_ATTRIBUTE_NAME, {_sO: None, _smi: None}),
+        (lambda: schemas.SNAPSHOT_ID, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
     ),
 )
@@ -980,7 +936,7 @@ RESTORE_ADDRESS_TO_CLASSIC_INPUT: StaticSchema = (
     (_DR, _PI),
     (
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (lambda: schemas.STRING, {_aQN: _PI, _sN: _pI, _smi: None}),
+        (lambda: schemas.STRING, {_aQN: _PI, _sN: _pI, _sO: None, _smi: None}),
     ),
 )
 
@@ -1012,7 +968,7 @@ RESTORE_IMAGE_FROM_RECYCLE_BIN_INPUT: StaticSchema = (
     _RIFRBI,
     {_sSI: _cRIFRBR, _sm: None},
     (_IIm, _DR),
-    ((lambda: schemas.IMAGE_ID, 1), (lambda: schemas.BOOLEAN, 0)),
+    ((lambda: schemas.IMAGE_ID, {_sO: None, _smi: None}), (lambda: schemas.BOOLEAN, 0)),
 )
 
 RESTORE_IMAGE_FROM_RECYCLE_BIN_OUTPUT: StaticSchema = (
@@ -1042,9 +998,9 @@ RESTORE_MANAGED_PREFIX_LIST_VERSION_INPUT: StaticSchema = (
     (_DR, _PLI, _PVre, _CVu),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.PREFIX_LIST_RESOURCE_ID, 1),
-        (lambda: schemas.LONG, 1),
-        (lambda: schemas.LONG, 1),
+        (lambda: schemas.PREFIX_LIST_RESOURCE_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.LONG, {_sO: None, _smi: None}),
+        (lambda: schemas.LONG, {_sO: None, _smi: None}),
     ),
 )
 
@@ -1073,7 +1029,10 @@ RESTORE_SNAPSHOT_FROM_RECYCLE_BIN_INPUT: StaticSchema = (
     _RSFRBI,
     {_sSI: _cRSFRBR, _sm: None},
     (_SIn, _DR),
-    ((lambda: schemas.SNAPSHOT_ID, 1), (lambda: schemas.BOOLEAN, 0)),
+    (
+        (lambda: schemas.SNAPSHOT_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
 )
 
 RESTORE_SNAPSHOT_FROM_RECYCLE_BIN_OUTPUT: StaticSchema = (
@@ -1121,7 +1080,7 @@ RESTORE_SNAPSHOT_TIER_INPUT: StaticSchema = (
     {_sSI: _cRSTR, _sm: None},
     (_SIn, _TRD, _PRer, _DR),
     (
-        (lambda: schemas.SNAPSHOT_ID, 1),
+        (lambda: schemas.SNAPSHOT_ID, {_sO: None, _smi: None}),
         (RESTORE_SNAPSHOT_TIER_REQUEST_TEMPORARY_RESTORE_DAYS, 0),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.BOOLEAN, 0),
@@ -1158,7 +1117,10 @@ RESTORE_VOLUME_FROM_RECYCLE_BIN_INPUT: StaticSchema = (
     _RVFRBI,
     {_sSI: _cRVFRBR, _sm: None},
     (_VIo, _DR),
-    ((lambda: schemas.VOLUME_ID, 1), (lambda: schemas.BOOLEAN, 0)),
+    (
+        (lambda: schemas.VOLUME_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
 )
 
 RESTORE_VOLUME_FROM_RECYCLE_BIN_OUTPUT: StaticSchema = (
@@ -1187,8 +1149,8 @@ REVOKE_CLIENT_VPN_INGRESS_INPUT: StaticSchema = (
     {_sSI: _cRCVIR, _sm: None},
     (_CVEI, _TNC, _AGI, _RAG, _DR),
     (
-        (lambda: schemas.CLIENT_VPN_ENDPOINT_ID, 1),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.CLIENT_VPN_ENDPOINT_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.BOOLEAN, 0),
@@ -1223,7 +1185,10 @@ REVOKE_SECURITY_GROUP_EGRESS_INPUT: StaticSchema = (
     (
         (lambda: schemas.SECURITY_GROUP_RULE_ID_LIST, {_sN: _SGRI}),
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (lambda: schemas.SECURITY_GROUP_ID, {_aQN: _GIr, _sN: _gIr, _smi: None}),
+        (
+            lambda: schemas.SECURITY_GROUP_ID,
+            {_aQN: _GIr, _sN: _gIr, _sO: None, _smi: None},
+        ),
         (lambda: schemas.STRING, {_aQN: _SSGN, _sN: _sSGN}),
         (lambda: schemas.STRING, {_aQN: _SSGOI, _sN: _sSGOI}),
         (lambda: schemas.STRING, {_aQN: _IPpr, _sN: _iPpr}),
@@ -1362,7 +1327,10 @@ ELASTIC_INFERENCE_ACCELERATOR: StaticSchema = (
     _EIAl,
     0,
     (_Ty, _Cou),
-    ((lambda: schemas.STRING, 1), (ELASTIC_INFERENCE_ACCELERATOR_COUNT, 0)),
+    (
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
+        (ELASTIC_INFERENCE_ACCELERATOR_COUNT, 0),
+    ),
 )
 
 ELASTIC_INFERENCE_ACCELERATORS: StaticSchema = (
@@ -1490,7 +1458,7 @@ INSTANCE_SECONDARY_INTERFACE_PRIVATE_IP_ADDRESS_REQUEST: StaticSchema = (
     _ISIPIAR,
     0,
     (_PIAr,),
-    ((lambda: schemas.STRING, 1),),
+    ((lambda: schemas.STRING, {_sO: None, _smi: None}),),
 )
 
 INSTANCE_SECONDARY_INTERFACE_PRIVATE_IP_ADDRESS_LIST_REQUEST: StaticSchema = (
@@ -1589,8 +1557,8 @@ RUN_INSTANCES_INPUT: StaticSchema = (
         (lambda: schemas.INSTANCE_IPV6_ADDRESS_LIST, {_sN: _IApv}),
         (lambda: schemas.KERNEL_ID, 0),
         (lambda: schemas.KEY_PAIR_NAME, 0),
-        (lambda: schemas.INTEGER, 1),
-        (lambda: schemas.INTEGER, 1),
+        (lambda: schemas.INTEGER, {_sO: None, _smi: None}),
+        (lambda: schemas.INTEGER, {_sO: None, _smi: None}),
         (lambda: schemas.RUN_INSTANCES_MONITORING_ENABLED, 0),
         (lambda: schemas.PLACEMENT, 0),
         (lambda: schemas.RAMDISK_ID, 0),

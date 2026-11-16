@@ -25,6 +25,7 @@ _Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
 _Ad = "Address"
+_sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _TSa = "TagSpecifications"
 _DR = "DryRun"
@@ -86,6 +87,7 @@ _nII = "networkInterfaceId"
 _CGI = "CarrierGatewayId"
 _SGI = "SecurityGroupId"
 _AS = "AddressSet"
+_AV = "AttributeValue"
 _ena = "enabled"
 _IT = "InstanceType"
 _iT = "instanceType"
@@ -180,6 +182,11 @@ _ABC = "AdvertiseByoipCidr"
 _Af = "Affinity"
 _def = "default"
 _ho = "host"
+_ASE = "AggregationStatusEnum"
+_INCLUDED = "INCLUDED"
+_inc = "included"
+_EXCLUDED = "EXCLUDED"
+_excl = "excluded"
 _AAI = "AllocateAddressInput"
 _cAAR = "com.amazonaws.ec2#AllocateAddressRequest"
 _AAO = "AllocateAddressOutput"
@@ -442,7 +449,6 @@ _AIIPO = "AssociateIamInstanceProfileOutput"
 _cAIIPRo = "com.amazonaws.ec2#AssociateIamInstanceProfileResult"
 _iIPA = "iamInstanceProfileAssociation"
 _AIIP = "AssociateIamInstanceProfile"
-_RGI = "RouteGatewayId"
 _GIr = "GroupId"
 _TGSIL = "TransitGatewaySubnetIdList"
 _GISL = "GroupIdStringList"
@@ -469,7 +475,6 @@ _in_ = "ip_name"
 _in__ = "ip-name"
 _rn_ = "resource_name"
 _rn__ = "resource-name"
-_ABV = "AttributeBooleanValue"
 
 PTR_UPDATE_STATUS: StaticSchema = (
     18,
@@ -531,7 +536,7 @@ ADVERTISE_BYOIP_CIDR_INPUT: StaticSchema = (
     {_sSI: _cABCR, _sm: None},
     (_Ci, _Asn, _DR, _NBG),
     (
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.STRING, 0),
@@ -642,6 +647,15 @@ AFFINITY: StaticSchema = (
     0,
     (_def, _ho),
     ((-1, {_sV: _def}), (-1, {_sV: _ho})),
+)
+
+AGGREGATION_STATUS_ENUM: StaticSchema = (
+    14,
+    n0,
+    _ASE,
+    0,
+    (_INCLUDED, _EXCLUDED),
+    ((-1, {_sV: _inc}), (-1, {_sV: _excl})),
 )
 
 ALLOCATE_ADDRESS_INPUT: StaticSchema = (
@@ -811,7 +825,7 @@ ALLOCATE_IPAM_POOL_CIDR_INPUT: StaticSchema = (
     (_DR, _IPI, _Ci, _NL, _CTl, _Des, _PNC, _ACl, _DCi, _TSa),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_POOL_ID, 1),
+        (lambda: schemas.IPAM_POOL_ID, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.INTEGER, 0),
         (lambda: schemas.STRING, 2),
@@ -1030,9 +1044,9 @@ APPLY_SECURITY_GROUPS_TO_CLIENT_VPN_TARGET_NETWORK_INPUT: StaticSchema = (
     {_sSI: _cASGTCVTNR, _sm: None},
     (_CVEI, _VI, _SGIe, _DR),
     (
-        (lambda: schemas.CLIENT_VPN_ENDPOINT_ID, 1),
-        (VPC_ID, 1),
-        (CLIENT_VPN_SECURITY_GROUP_ID_SET, {_sN: _SGI, _smi: None}),
+        (lambda: schemas.CLIENT_VPN_ENDPOINT_ID, {_sO: None, _smi: None}),
+        (VPC_ID, {_sO: None, _smi: None}),
+        (CLIENT_VPN_SECURITY_GROUP_ID_SET, {_sN: _SGI, _sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, 0),
     ),
 )
@@ -1085,7 +1099,7 @@ ASSIGN_IPV6_ADDRESSES_INPUT: StaticSchema = (
     (
         (lambda: schemas.INTEGER, 0),
         (IP_PREFIX_LIST, {_sN: _IPpv}),
-        (NETWORK_INTERFACE_ID, {_aQN: _NII, _sN: _nII, _smi: None}),
+        (NETWORK_INTERFACE_ID, {_aQN: _NII, _sN: _nII, _sO: None, _smi: None}),
         (IPV6_ADDRESS_LIST, {_aQN: _IAp, _sN: _iA}),
         (lambda: schemas.INTEGER, {_aQN: _IAC, _sN: _iAC}),
     ),
@@ -1132,7 +1146,7 @@ ASSIGN_PRIVATE_IP_ADDRESSES_INPUT: StaticSchema = (
     (
         (IP_PREFIX_LIST, {_sN: _IPpvre}),
         (lambda: schemas.INTEGER, 0),
-        (NETWORK_INTERFACE_ID, {_aQN: _NII, _sN: _nII, _smi: None}),
+        (NETWORK_INTERFACE_ID, {_aQN: _NII, _sN: _nII, _sO: None, _smi: None}),
         (PRIVATE_IP_ADDRESS_STRING_LIST, {_aQN: _PIAr, _sN: _pIAr}),
         (lambda: schemas.INTEGER, {_aQN: _SPIAC, _sN: _sPIAC}),
         (lambda: schemas.BOOLEAN, {_aQN: _ARl, _sN: _aRl}),
@@ -1209,7 +1223,7 @@ ASSIGN_PRIVATE_NAT_GATEWAY_ADDRESS_INPUT: StaticSchema = (
     {_sSI: _cAPNGAR, _sm: None},
     (_NGI, _PIAri, _PIAC, _DR),
     (
-        (lambda: schemas.NAT_GATEWAY_ID, 1),
+        (lambda: schemas.NAT_GATEWAY_ID, {_sO: None, _smi: None}),
         (IP_LIST, {_sN: _PIAr}),
         (PRIVATE_IP_ADDRESS_COUNT, 0),
         (lambda: schemas.BOOLEAN, 0),
@@ -1348,7 +1362,7 @@ ASSOCIATE_APPLICATION_STATUS_CHECK_INPUT: StaticSchema = (
     {_sSI: _cAASCR, _sm: None},
     (_ASCI, _TTA, _IIn, _CTl, _DR),
     (
-        (lambda: schemas.APPLICATION_STATUS_CHECK_ID, 1),
+        (lambda: schemas.APPLICATION_STATUS_CHECK_ID, {_sO: None, _smi: None}),
         (CUSTOM_KEY_VALUE_PAIR_REQUEST_SET, {_sN: _TTAa}),
         (INSTANCE_ID_LIST, {_sN: _II}),
         (lambda: schemas.STRING, 2),
@@ -1431,8 +1445,8 @@ ASSOCIATE_CAPACITY_RESERVATION_BILLING_OWNER_INPUT: StaticSchema = (
     (_DR, _CRI, _URBOI),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.CAPACITY_RESERVATION_ID, 1),
-        (lambda: schemas.ACCOUNT_ID, 1),
+        (lambda: schemas.CAPACITY_RESERVATION_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.ACCOUNT_ID, {_sO: None, _smi: None}),
     ),
 )
 
@@ -1464,7 +1478,7 @@ ASSOCIATE_CLIENT_VPN_TARGET_NETWORK_INPUT: StaticSchema = (
     {_sSI: _cACVTNR, _sm: None},
     (_CVEI, _SIu, _CTl, _DR, _AZ, _AZI),
     (
-        (lambda: schemas.CLIENT_VPN_ENDPOINT_ID, 1),
+        (lambda: schemas.CLIENT_VPN_ENDPOINT_ID, {_sO: None, _smi: None}),
         (SUBNET_ID, 0),
         (lambda: schemas.STRING, 2),
         (lambda: schemas.BOOLEAN, 0),
@@ -1531,8 +1545,8 @@ ASSOCIATE_DHCP_OPTIONS_INPUT: StaticSchema = (
     {_sSI: _cADOR, _sm: None},
     (_DOI, _VI, _DR),
     (
-        (DEFAULTING_DHCP_OPTIONS_ID, 1),
-        (VPC_ID, 1),
+        (DEFAULTING_DHCP_OPTIONS_ID, {_sO: None, _smi: None}),
+        (VPC_ID, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
     ),
 )
@@ -1556,8 +1570,8 @@ ASSOCIATE_ENCLAVE_CERTIFICATE_IAM_ROLE_INPUT: StaticSchema = (
     {_sSI: _cAECIRR, _sm: None},
     (_CAe, _RAo, _DR),
     (
-        (lambda: schemas.CERTIFICATE_ID, 1),
-        (lambda: schemas.ROLE_ID, 1),
+        (lambda: schemas.CERTIFICATE_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.ROLE_ID, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, 0),
     ),
 )
@@ -1603,7 +1617,10 @@ ASSOCIATE_IAM_INSTANCE_PROFILE_INPUT: StaticSchema = (
     _AIIPI,
     {_sSI: _cAIIPR, _sm: None},
     (_IIP, _II),
-    ((IAM_INSTANCE_PROFILE_SPECIFICATION, 1), (INSTANCE_ID, 1)),
+    (
+        (IAM_INSTANCE_PROFILE_SPECIFICATION, {_sO: None, _smi: None}),
+        (INSTANCE_ID, {_sO: None, _smi: None}),
+    ),
 )
 
 ASSOCIATE_IAM_INSTANCE_PROFILE_OUTPUT: StaticSchema = (
@@ -1660,8 +1677,6 @@ IAM_INSTANCE_PROFILE_ASSOCIATION: StaticSchema = (
         (lambda: schemas.DATE_TIME, {_aQN: _Ti, _sN: _ti}),
     ),
 )
-
-ROUTE_GATEWAY_ID: StaticSchema = (3, n0, _RGI, 0)
 
 TRANSIT_GATEWAY_SUBNET_ID_LIST: StaticSchema = (
     16,
@@ -1743,13 +1758,13 @@ TENANCY: StaticSchema = (
     ((-1, {_sV: _def}), (-1, {_sV: _ded}), (-1, {_sV: _ho})),
 )
 
-EGRESS_ONLY_INTERNET_GATEWAY_ID: StaticSchema = (3, n0, _EOIGI, 0)
-
-ATTRIBUTE_BOOLEAN_VALUE: StaticSchema = (
+ATTRIBUTE_VALUE: StaticSchema = (
     18,
     n0,
-    _ABV,
+    _AV,
     0,
     (_Va,),
-    ((lambda: schemas.BOOLEAN, {_aQN: _Va, _sN: _va}),),
+    ((lambda: schemas.STRING, {_aQN: _Va, _sN: _va}),),
 )
+
+EGRESS_ONLY_INTERNET_GATEWAY_ID: StaticSchema = (3, n0, _EOIGI, 0)

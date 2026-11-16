@@ -13,6 +13,7 @@ _sN = "smithy.api#xmlName"
 _ASM = "ActivityStreamMode"
 _sV = "smithy.api#enumValue"
 _ASS = "ActivityStreamStatus"
+_sO = "smithy.api#clientOptional"
 _sm = "smithy.api#required"
 _AS = "AllocatedStorage"
 _MAS = "MaxAllocatedStorage"
@@ -238,6 +239,7 @@ _IGCSF = "InvalidGlobalClusterStateFault"
 _IS = "InvalidSubnet"
 _IVPCNSF = "InvalidVPCNetworkStateFault"
 _NTNS = "NetworkTypeNotSupported"
+_STNSF = "StorageTypeNotSupportedFault"
 _VECVE = "VpcEncryptionControlViolationException"
 _CDBC = "CreateDBCluster"
 _CDBCEI = "CreateDBClusterEndpointInput"
@@ -280,27 +282,21 @@ _ECOI = "EnableCustomerOwnedIp"
 _BTa = "BackupTarget"
 _CIIP = "CustomIamInstanceProfile"
 _DBIR = "DBInstanceRole"
+_DBIRn = "DBInstanceRoles"
+_AM = "AutomationMode"
+_FULL = "FULL"
+_fu = "full"
+_AP_ = "ALL_PAUSED"
+_ap = "all-paused"
+_DBIABR = "DBInstanceAutomatedBackupsReplication"
+_DBIABA = "DBInstanceAutomatedBackupsArn"
 _DBI = "DBInstance"
 _CDBIO = "CreateDBInstanceOutput"
 _cCDBIR = "com.amazonaws.rds#CreateDBInstanceResult"
 _DBIAEF = "DBInstanceAlreadyExistsFault"
 _TDQEF = "TenantDatabaseQuotaExceededFault"
 _CDBI = "CreateDBInstance"
-_ISBF = "InvalidS3BucketFault"
-_IDBCCFn = "InsufficientDBClusterCapacityFault"
-
-SERVERLESS_V2_SCALING_CONFIGURATION: StaticSchema = (
-    18,
-    n0,
-    _SVSC,
-    0,
-    (_MC, _MCa, _SUAP),
-    (
-        (lambda: schemas.DOUBLE_OPTIONAL, 0),
-        (lambda: schemas.DOUBLE_OPTIONAL, 0),
-        (lambda: schemas.INTEGER_OPTIONAL, 0),
-    ),
-)
+_IRF = "InvalidRestoreFault"
 
 VPC_SECURITY_GROUP_ID_LIST: StaticSchema = (
     16,
@@ -383,11 +379,11 @@ CREATE_DB_CLUSTER_INPUT: StaticSchema = (
         (lambda: schemas.INTEGER_OPTIONAL, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.STRING, 0),
         (VPC_SECURITY_GROUP_ID_LIST, 0),
         (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.INTEGER_OPTIONAL, 0),
         (lambda: schemas.STRING, 0),
@@ -420,7 +416,7 @@ CREATE_DB_CLUSTER_INPUT: StaticSchema = (
         (lambda: schemas.STRING, 0),
         (lambda: schemas.BOOLEAN_OPTIONAL, 0),
         (lambda: schemas.STRING, 0),
-        (SERVERLESS_V2_SCALING_CONFIGURATION, 0),
+        (lambda: schemas.SERVERLESS_V2_SCALING_CONFIGURATION, 0),
         (lambda: schemas.INTEGER_OPTIONAL, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.DATABASE_INSIGHTS_MODE, 0),
@@ -482,7 +478,7 @@ CREATE_DB_CLUSTER: StaticOperationSchema = (
         lambda: NETWORK_TYPE_NOT_SUPPORTED,
         lambda: schemas.OPTION_GROUP_NOT_FOUND_FAULT,
         lambda: schemas.STORAGE_QUOTA_EXCEEDED_FAULT,
-        lambda: schemas.STORAGE_TYPE_NOT_SUPPORTED_FAULT,
+        lambda: STORAGE_TYPE_NOT_SUPPORTED_FAULT,
         lambda: VPC_ENCRYPTION_CONTROL_VIOLATION_EXCEPTION,
     ),
 )
@@ -1120,6 +1116,21 @@ NETWORK_TYPE_NOT_SUPPORTED: StaticSchema = (
     ((lambda: schemas.EXCEPTION_MESSAGE, 0),),
 )
 
+STORAGE_TYPE_NOT_SUPPORTED_FAULT: StaticSchema = (
+    18,
+    n0,
+    _STNSF,
+    {
+        _smith: _c,
+        _sE: 400,
+        _aQE: MappingProxyType(
+            {"code": "StorageTypeNotSupported", "httpResponseCode": 400}
+        ),
+    },
+    (_me,),
+    ((lambda: schemas.EXCEPTION_MESSAGE, 0),),
+)
+
 VPC_ENCRYPTION_CONTROL_VIOLATION_EXCEPTION: StaticSchema = (
     18,
     n0,
@@ -1142,9 +1153,9 @@ CREATE_DB_CLUSTER_ENDPOINT_INPUT: StaticSchema = (
     {_sSI: _cCDBCEM, _smi: None},
     (_DBCI, _DBCEI, _ET, _SMt, _EMx, _Ta),
     (
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.STRING_LIST, 0),
         (lambda: schemas.STRING_LIST, 0),
         (lambda: schemas.TAG_LIST, 0),
@@ -1225,9 +1236,9 @@ CREATE_DB_CLUSTER_PARAMETER_GROUP_INPUT: StaticSchema = (
     {_sSI: _cCDBCPGMo, _smi: None},
     (_DBCPGN, _DBPGF, _D, _Ta),
     (
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.TAG_LIST, 0),
     ),
 )
@@ -1261,8 +1272,8 @@ CREATE_DB_CLUSTER_SNAPSHOT_INPUT: StaticSchema = (
     {_sSI: _cCDBCSMo, _smi: None},
     (_DBCSI, _DBCI, _Ta),
     (
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.TAG_LIST, 0),
     ),
 )
@@ -1393,10 +1404,10 @@ CREATE_DB_INSTANCE_INPUT: StaticSchema = (
     ),
     (
         (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.INTEGER_OPTIONAL, 0),
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.SENSITIVE_STRING, 0),
         (DB_SECURITY_GROUP_NAME_LIST, 0),
@@ -1502,7 +1513,7 @@ CREATE_DB_INSTANCE: StaticOperationSchema = (
         lambda: schemas.OPTION_GROUP_NOT_FOUND_FAULT,
         lambda: schemas.PROVISIONED_IOPS_NOT_AVAILABLE_IN_AZ_FAULT,
         lambda: schemas.STORAGE_QUOTA_EXCEEDED_FAULT,
-        lambda: schemas.STORAGE_TYPE_NOT_SUPPORTED_FAULT,
+        STORAGE_TYPE_NOT_SUPPORTED_FAULT,
         lambda: TENANT_DATABASE_QUOTA_EXCEEDED_FAULT,
         VPC_ENCRYPTION_CONTROL_VIOLATION_EXCEPTION,
     ),
@@ -1519,6 +1530,33 @@ DB_INSTANCE_ROLE: StaticSchema = (
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 0),
     ),
+)
+
+DB_INSTANCE_ROLES: StaticSchema = (
+    16,
+    n0,
+    _DBIRn,
+    0,
+    (_m,),
+    ((DB_INSTANCE_ROLE, {_sN: _DBIR}),),
+)
+
+AUTOMATION_MODE: StaticSchema = (
+    14,
+    n0,
+    _AM,
+    0,
+    (_FULL, _AP_),
+    ((-1, {_sV: _fu}), (-1, {_sV: _ap})),
+)
+
+DB_INSTANCE_AUTOMATED_BACKUPS_REPLICATION: StaticSchema = (
+    18,
+    n0,
+    _DBIABR,
+    0,
+    (_DBIABA,),
+    ((lambda: schemas.STRING, 0),),
 )
 
 DB_INSTANCE_ALREADY_EXISTS_FAULT: StaticSchema = (
@@ -1551,30 +1589,15 @@ TENANT_DATABASE_QUOTA_EXCEEDED_FAULT: StaticSchema = (
     ((lambda: schemas.EXCEPTION_MESSAGE, 0),),
 )
 
-INVALID_S3_BUCKET_FAULT: StaticSchema = (
+INVALID_RESTORE_FAULT: StaticSchema = (
     18,
     n0,
-    _ISBF,
+    _IRF,
     {
         _smith: _c,
         _sE: 400,
         _aQE: MappingProxyType(
-            {"code": "InvalidS3BucketFault", "httpResponseCode": 400}
-        ),
-    },
-    (_me,),
-    ((lambda: schemas.EXCEPTION_MESSAGE, 0),),
-)
-
-INSUFFICIENT_DB_CLUSTER_CAPACITY_FAULT: StaticSchema = (
-    18,
-    n0,
-    _IDBCCFn,
-    {
-        _smith: _c,
-        _sE: 403,
-        _aQE: MappingProxyType(
-            {"code": "InsufficientDBClusterCapacityFault", "httpResponseCode": 403}
+            {"code": "InvalidRestoreFault", "httpResponseCode": 400}
         ),
     },
     (_me,),

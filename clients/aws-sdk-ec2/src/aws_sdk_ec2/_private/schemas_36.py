@@ -16,6 +16,8 @@ _rT = "resourceType"
 _Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
+_sO = "smithy.api#clientOptional"
+_smi = "smithy.api#required"
 _DR = "DryRun"
 _smit = "smithy.api#output"
 _TGAI = "TransitGatewayAttachmentId"
@@ -37,6 +39,7 @@ _Me = "Message"
 _mes = "message"
 _TSag = "TagSet"
 _tS = "tagSet"
+_dRr = "dryRun"
 _TGA = "TransitGatewayAttachment"
 _ena = "enabled"
 _AIs = "AssociationId"
@@ -48,17 +51,23 @@ _assoc = "association"
 _TGRTI = "TransitGatewayRouteTableId"
 _tGRTI = "transitGatewayRouteTableId"
 _VAII = "VerifiedAccessInstanceId"
+_VATPI = "VerifiedAccessTrustProviderId"
 _vAII = "verifiedAccessInstanceId"
+_VATP = "VerifiedAccessTrustProviders"
+_VATPS = "VerifiedAccessTrustProviderSet"
+_vATPS = "verifiedAccessTrustProviderSet"
+_VIo = "VolumeId"
+_vIo = "volumeId"
 _Pre = "Prefix"
 _pre = "prefix"
 _S_ = "S3"
+_Vol = "Volumes"
+_VSo = "VolumeSet"
+_vS = "volumeSet"
 _Ena = "Enabled"
 _s_ = "s3"
 _succe = "success"
-_TMFRI = "TrafficMirrorFilterRuleId"
-_TMFI = "TrafficMirrorFilterId"
 _TMTI = "TrafficMirrorTargetId"
-_TMSI = "TrafficMirrorSessionId"
 _TGAransi = "TransitGatewayAttachments"
 _tGArans = "transitGatewayAttachments"
 _VAGI = "VerifiedAccessGroupId"
@@ -67,39 +76,14 @@ _SUCCESS = "SUCCESS"
 _Fi = "Filter"
 _Fil = "Filters"
 _NTex = "NextToken"
+_Attr = "Attribute"
 _MR = "MaxResults"
 _nT = "nextToken"
+_mR = "maxResults"
 _AIsso = "AssociationIds"
-_DTMFRIe = "DescribeTrafficMirrorFilterRulesInput"
-_cDTMFRRom = "com.amazonaws.ec2#DescribeTrafficMirrorFilterRulesRequest"
-_TMFRIr = "TrafficMirrorFilterRuleIds"
-_TMFRS = "TrafficMirrorFilterRuleSet"
-_DTMFROe = "DescribeTrafficMirrorFilterRulesOutput"
-_cDTMFRRoma = "com.amazonaws.ec2#DescribeTrafficMirrorFilterRulesResult"
-_TMFRr = "TrafficMirrorFilterRules"
-_tMFRS = "trafficMirrorFilterRuleSet"
-_DTMFRe = "DescribeTrafficMirrorFilterRules"
-_TMFIL = "TrafficMirrorFilterIdList"
-_DTMFIe = "DescribeTrafficMirrorFiltersInput"
-_cDTMFRom = "com.amazonaws.ec2#DescribeTrafficMirrorFiltersRequest"
-_TMFIr = "TrafficMirrorFilterIds"
-_TMFS = "TrafficMirrorFilterSet"
-_DTMFOe = "DescribeTrafficMirrorFiltersOutput"
-_cDTMFRoma = "com.amazonaws.ec2#DescribeTrafficMirrorFiltersResult"
-_TMFr = "TrafficMirrorFilters"
-_tMFS = "trafficMirrorFilterSet"
-_DTMFe = "DescribeTrafficMirrorFilters"
-_TMSIL = "TrafficMirrorSessionIdList"
-_DTMSIe = "DescribeTrafficMirrorSessionsInput"
-_cDTMSRom = "com.amazonaws.ec2#DescribeTrafficMirrorSessionsRequest"
-_TMSIr = "TrafficMirrorSessionIds"
-_TMSS = "TrafficMirrorSessionSet"
-_DTMSOe = "DescribeTrafficMirrorSessionsOutput"
-_cDTMSRoma = "com.amazonaws.ec2#DescribeTrafficMirrorSessionsResult"
-_TMSr = "TrafficMirrorSessions"
-_tMSS = "trafficMirrorSessionSet"
-_DTMSe = "DescribeTrafficMirrorSessions"
-_TMTIL = "TrafficMirrorTargetIdList"
+_pCr = "productCodes"
+_PCro = "ProductCodes"
+_IMR = "IncludeManagedResources"
 _DTMTIe = "DescribeTrafficMirrorTargetsInput"
 _cDTMTRom = "com.amazonaws.ec2#DescribeTrafficMirrorTargetsRequest"
 _TMTIr = "TrafficMirrorTargetIds"
@@ -299,178 +283,36 @@ _DVAILC = "DescribeVerifiedAccessInstanceLoggingConfigurations"
 _DVAIMR = "DescribeVerifiedAccessInstancesMaxResults"
 _DVAIIe = "DescribeVerifiedAccessInstancesInput"
 _cDVAIRom = "com.amazonaws.ec2#DescribeVerifiedAccessInstancesRequest"
+_VAIL = "VerifiedAccessInstanceList"
 _DVAIOe = "DescribeVerifiedAccessInstancesOutput"
 _cDVAIRoma = "com.amazonaws.ec2#DescribeVerifiedAccessInstancesResult"
 _VAIe = "VerifiedAccessInstances"
 _VAIS = "VerifiedAccessInstanceSet"
 _vAIS = "verifiedAccessInstanceSet"
 _DVAIe = "DescribeVerifiedAccessInstances"
-
-DESCRIBE_TRAFFIC_MIRROR_FILTER_RULES_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTMFRIe,
-    {_sSI: _cDTMFRRom, _sm: None},
-    (_TMFRIr, _TMFI, _DR, _Fil, _MR, _NTex),
-    (
-        (lambda: schemas.TRAFFIC_MIRROR_FILTER_RULE_ID_LIST, {_sN: _TMFRI}),
-        (lambda: schemas.TRAFFIC_MIRROR_FILTER_ID, 0),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (lambda: schemas.TRAFFIC_MIRRORING_MAX_RESULTS, 0),
-        (lambda: schemas.NEXT_TOKEN, 0),
-    ),
-)
-
-DESCRIBE_TRAFFIC_MIRROR_FILTER_RULES_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DTMFROe,
-    {_sSI: _cDTMFRRoma, _smit: None},
-    (_TMFRr, _NTex),
-    (
-        (lambda: TRAFFIC_MIRROR_FILTER_RULE_SET, {_aQN: _TMFRS, _sN: _tMFRS}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_TRAFFIC_MIRROR_FILTER_RULES: StaticOperationSchema = (
-    23,
-    n0,
-    _DTMFRe,
-    0,
-    DESCRIBE_TRAFFIC_MIRROR_FILTER_RULES_INPUT,
-    DESCRIBE_TRAFFIC_MIRROR_FILTER_RULES_OUTPUT,
-    (),
-)
-
-TRAFFIC_MIRROR_FILTER_RULE_SET: StaticSchema = (
-    16,
-    n0,
-    _TMFRS,
-    0,
-    (_me,),
-    ((lambda: schemas.TRAFFIC_MIRROR_FILTER_RULE, {_sN: _i}),),
-)
-
-TRAFFIC_MIRROR_FILTER_ID_LIST: StaticSchema = (
-    16,
-    n0,
-    _TMFIL,
-    0,
-    (_me,),
-    ((lambda: schemas.TRAFFIC_MIRROR_FILTER_ID, {_sN: _i}),),
-)
-
-DESCRIBE_TRAFFIC_MIRROR_FILTERS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTMFIe,
-    {_sSI: _cDTMFRom, _sm: None},
-    (_TMFIr, _DR, _Fil, _MR, _NTex),
-    (
-        (TRAFFIC_MIRROR_FILTER_ID_LIST, {_sN: _TMFI}),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (lambda: schemas.TRAFFIC_MIRRORING_MAX_RESULTS, 0),
-        (lambda: schemas.NEXT_TOKEN, 0),
-    ),
-)
-
-DESCRIBE_TRAFFIC_MIRROR_FILTERS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DTMFOe,
-    {_sSI: _cDTMFRoma, _smit: None},
-    (_TMFr, _NTex),
-    (
-        (lambda: TRAFFIC_MIRROR_FILTER_SET, {_aQN: _TMFS, _sN: _tMFS}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_TRAFFIC_MIRROR_FILTERS: StaticOperationSchema = (
-    23,
-    n0,
-    _DTMFe,
-    0,
-    DESCRIBE_TRAFFIC_MIRROR_FILTERS_INPUT,
-    DESCRIBE_TRAFFIC_MIRROR_FILTERS_OUTPUT,
-    (),
-)
-
-TRAFFIC_MIRROR_FILTER_SET: StaticSchema = (
-    16,
-    n0,
-    _TMFS,
-    0,
-    (_me,),
-    ((lambda: schemas.TRAFFIC_MIRROR_FILTER, {_sN: _i}),),
-)
-
-TRAFFIC_MIRROR_SESSION_ID_LIST: StaticSchema = (
-    16,
-    n0,
-    _TMSIL,
-    0,
-    (_me,),
-    ((lambda: schemas.TRAFFIC_MIRROR_SESSION_ID, {_sN: _i}),),
-)
-
-DESCRIBE_TRAFFIC_MIRROR_SESSIONS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTMSIe,
-    {_sSI: _cDTMSRom, _sm: None},
-    (_TMSIr, _DR, _Fil, _MR, _NTex),
-    (
-        (TRAFFIC_MIRROR_SESSION_ID_LIST, {_sN: _TMSI}),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (lambda: schemas.TRAFFIC_MIRRORING_MAX_RESULTS, 0),
-        (lambda: schemas.NEXT_TOKEN, 0),
-    ),
-)
-
-DESCRIBE_TRAFFIC_MIRROR_SESSIONS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DTMSOe,
-    {_sSI: _cDTMSRoma, _smit: None},
-    (_TMSr, _NTex),
-    (
-        (lambda: TRAFFIC_MIRROR_SESSION_SET, {_aQN: _TMSS, _sN: _tMSS}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_TRAFFIC_MIRROR_SESSIONS: StaticOperationSchema = (
-    23,
-    n0,
-    _DTMSe,
-    0,
-    DESCRIBE_TRAFFIC_MIRROR_SESSIONS_INPUT,
-    DESCRIBE_TRAFFIC_MIRROR_SESSIONS_OUTPUT,
-    (),
-)
-
-TRAFFIC_MIRROR_SESSION_SET: StaticSchema = (
-    16,
-    n0,
-    _TMSS,
-    0,
-    (_me,),
-    ((lambda: schemas.TRAFFIC_MIRROR_SESSION, {_sN: _i}),),
-)
-
-TRAFFIC_MIRROR_TARGET_ID_LIST: StaticSchema = (
-    16,
-    n0,
-    _TMTIL,
-    0,
-    (_me,),
-    ((lambda: schemas.TRAFFIC_MIRROR_TARGET_ID, {_sN: _i}),),
-)
+_DVATPMR = "DescribeVerifiedAccessTrustProvidersMaxResults"
+_VATPIL = "VerifiedAccessTrustProviderIdList"
+_DVATPIe = "DescribeVerifiedAccessTrustProvidersInput"
+_cDVATPRom = "com.amazonaws.ec2#DescribeVerifiedAccessTrustProvidersRequest"
+_VATPIe = "VerifiedAccessTrustProviderIds"
+_VATPL = "VerifiedAccessTrustProviderList"
+_DVATPOe = "DescribeVerifiedAccessTrustProvidersOutput"
+_cDVATPRoma = "com.amazonaws.ec2#DescribeVerifiedAccessTrustProvidersResult"
+_DVATPe = "DescribeVerifiedAccessTrustProviders"
+_VAN = "VolumeAttributeName"
+_aEIO = "autoEnableIO"
+_DVAIes = "DescribeVolumeAttributeInput"
+_cDVAR = "com.amazonaws.ec2#DescribeVolumeAttributeRequest"
+_DVAO = "DescribeVolumeAttributeOutput"
+_cDVARo = "com.amazonaws.ec2#DescribeVolumeAttributeResult"
+_AEIO = "AutoEnableIO"
+_DVA = "DescribeVolumeAttribute"
+_DVIes = "DescribeVolumesInput"
+_cDVRom = "com.amazonaws.ec2#DescribeVolumesRequest"
+_VIol = "VolumeIds"
+_DVOes = "DescribeVolumesOutput"
+_cDVRoma = "com.amazonaws.ec2#DescribeVolumesResult"
+_DVes = "DescribeVolumes"
 
 DESCRIBE_TRAFFIC_MIRROR_TARGETS_INPUT: StaticSchema = (
     18,
@@ -479,7 +321,7 @@ DESCRIBE_TRAFFIC_MIRROR_TARGETS_INPUT: StaticSchema = (
     {_sSI: _cDTMTRom, _sm: None},
     (_TMTIr, _DR, _Fil, _MR, _NTex),
     (
-        (TRAFFIC_MIRROR_TARGET_ID_LIST, {_sN: _TMTI}),
+        (lambda: schemas.TRAFFIC_MIRROR_TARGET_ID_LIST, {_sN: _TMTI}),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
         (lambda: schemas.TRAFFIC_MIRRORING_MAX_RESULTS, 0),
@@ -1485,7 +1327,7 @@ DESCRIBE_VERIFIED_ACCESS_INSTANCES_OUTPUT: StaticSchema = (
     {_sSI: _cDVAIRoma, _smit: None},
     (_VAIe, _NTex),
     (
-        (lambda: schemas.VERIFIED_ACCESS_INSTANCE_LIST, {_aQN: _VAIS, _sN: _vAIS}),
+        (lambda: VERIFIED_ACCESS_INSTANCE_LIST, {_aQN: _VAIS, _sN: _vAIS}),
         (lambda: schemas.NEXT_TOKEN, {_aQN: _NTex, _sN: _nT}),
     ),
 )
@@ -1497,5 +1339,159 @@ DESCRIBE_VERIFIED_ACCESS_INSTANCES: StaticOperationSchema = (
     0,
     DESCRIBE_VERIFIED_ACCESS_INSTANCES_INPUT,
     DESCRIBE_VERIFIED_ACCESS_INSTANCES_OUTPUT,
+    (),
+)
+
+VERIFIED_ACCESS_INSTANCE_LIST: StaticSchema = (
+    16,
+    n0,
+    _VAIL,
+    0,
+    (_me,),
+    ((lambda: schemas.VERIFIED_ACCESS_INSTANCE, {_sN: _i}),),
+)
+
+DESCRIBE_VERIFIED_ACCESS_TRUST_PROVIDERS_MAX_RESULTS: StaticSchema = (
+    7,
+    n0,
+    _DVATPMR,
+    0,
+)
+
+VERIFIED_ACCESS_TRUST_PROVIDER_ID_LIST: StaticSchema = (
+    16,
+    n0,
+    _VATPIL,
+    0,
+    (_me,),
+    ((lambda: schemas.VERIFIED_ACCESS_TRUST_PROVIDER_ID, {_sN: _i}),),
+)
+
+DESCRIBE_VERIFIED_ACCESS_TRUST_PROVIDERS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DVATPIe,
+    {_sSI: _cDVATPRom, _sm: None},
+    (_VATPIe, _MR, _NTex, _Fil, _DR),
+    (
+        (VERIFIED_ACCESS_TRUST_PROVIDER_ID_LIST, {_sN: _VATPI}),
+        (DESCRIBE_VERIFIED_ACCESS_TRUST_PROVIDERS_MAX_RESULTS, 0),
+        (lambda: schemas.NEXT_TOKEN, 0),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+DESCRIBE_VERIFIED_ACCESS_TRUST_PROVIDERS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DVATPOe,
+    {_sSI: _cDVATPRoma, _smit: None},
+    (_VATP, _NTex),
+    (
+        (lambda: VERIFIED_ACCESS_TRUST_PROVIDER_LIST, {_aQN: _VATPS, _sN: _vATPS}),
+        (lambda: schemas.NEXT_TOKEN, {_aQN: _NTex, _sN: _nT}),
+    ),
+)
+
+DESCRIBE_VERIFIED_ACCESS_TRUST_PROVIDERS: StaticOperationSchema = (
+    23,
+    n0,
+    _DVATPe,
+    0,
+    DESCRIBE_VERIFIED_ACCESS_TRUST_PROVIDERS_INPUT,
+    DESCRIBE_VERIFIED_ACCESS_TRUST_PROVIDERS_OUTPUT,
+    (),
+)
+
+VERIFIED_ACCESS_TRUST_PROVIDER_LIST: StaticSchema = (
+    16,
+    n0,
+    _VATPL,
+    0,
+    (_me,),
+    ((lambda: schemas.VERIFIED_ACCESS_TRUST_PROVIDER, {_sN: _i}),),
+)
+
+VOLUME_ATTRIBUTE_NAME: StaticSchema = (
+    14,
+    n0,
+    _VAN,
+    0,
+    (_aEIO, _pCr),
+    ((-1, {_sV: _aEIO}), (-1, {_sV: _pCr})),
+)
+
+DESCRIBE_VOLUME_ATTRIBUTE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DVAIes,
+    {_sSI: _cDVAR, _sm: None},
+    (_Attr, _VIo, _DR),
+    (
+        (VOLUME_ATTRIBUTE_NAME, {_sO: None, _smi: None}),
+        (lambda: schemas.VOLUME_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
+    ),
+)
+
+DESCRIBE_VOLUME_ATTRIBUTE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DVAO,
+    {_sSI: _cDVARo, _smit: None},
+    (_AEIO, _PCro, _VIo),
+    (
+        (lambda: schemas.ATTRIBUTE_BOOLEAN_VALUE, {_aQN: _AEIO, _sN: _aEIO}),
+        (lambda: schemas.PRODUCT_CODE_LIST, {_aQN: _PCro, _sN: _pCr}),
+        (lambda: schemas.STRING, {_aQN: _VIo, _sN: _vIo}),
+    ),
+)
+
+DESCRIBE_VOLUME_ATTRIBUTE: StaticOperationSchema = (
+    23,
+    n0,
+    _DVA,
+    0,
+    DESCRIBE_VOLUME_ATTRIBUTE_INPUT,
+    DESCRIBE_VOLUME_ATTRIBUTE_OUTPUT,
+    (),
+)
+
+DESCRIBE_VOLUMES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DVIes,
+    {_sSI: _cDVRom, _sm: None},
+    (_VIol, _IMR, _DR, _Fil, _NTex, _MR),
+    (
+        (lambda: schemas.VOLUME_ID_STRING_LIST, {_sN: _VIo}),
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+        (lambda: schemas.INTEGER, {_aQN: _MR, _sN: _mR}),
+    ),
+)
+
+DESCRIBE_VOLUMES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DVOes,
+    {_sSI: _cDVRoma, _smit: None},
+    (_NTex, _Vol),
+    (
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+        (lambda: schemas.VOLUME_LIST, {_aQN: _VSo, _sN: _vS}),
+    ),
+)
+
+DESCRIBE_VOLUMES: StaticOperationSchema = (
+    23,
+    n0,
+    _DVes,
+    0,
+    DESCRIBE_VOLUMES_INPUT,
+    DESCRIBE_VOLUMES_OUTPUT,
     (),
 )

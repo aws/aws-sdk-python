@@ -15,6 +15,7 @@ _TS = "TagSpecification"
 _Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
+_sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _TSa = "TagSpecifications"
 _DR = "DryRun"
@@ -23,9 +24,7 @@ _smit = "smithy.api#output"
 _CRI = "CapacityReservationId"
 _R = "Return"
 _r = "return"
-_IC = "InstanceCount"
 _CVEI = "ClientVpnEndpointId"
-_av = "available"
 _St = "State"
 _st = "state"
 _CT = "CreationTime"
@@ -58,14 +57,12 @@ _Des = "Description"
 _desc = "description"
 _CTl = "ClientToken"
 _sT = "smithy.api#idempotencyToken"
-_ATl = "AllocationType"
-_us = "used"
-_fut = "future"
 _ca = "cancelling"
 _FAILED = "FAILED"
 _sU = "smithy.api#Unit"
 _ACTIVE = "ACTIVE"
 _sc = "scope"
+_RGI = "RouteGatewayId"
 _GIr = "GroupId"
 _gIr = "groupId"
 _G = "Groups"
@@ -254,7 +251,6 @@ _cASGIR = "com.amazonaws.ec2#AuthorizeSecurityGroupIngressRequest"
 _ASGIO = "AuthorizeSecurityGroupIngressOutput"
 _cASGIRo = "com.amazonaws.ec2#AuthorizeSecurityGroupIngressResult"
 _ASGI = "AuthorizeSecurityGroupIngress"
-_BB = "BoxedBoolean"
 _IIRAI = "IpamInternetRegistryAssociationId"
 _BMIRPRI = "BatchModifyIpamRoutingPolicyRegistrationsInput"
 _cBMIRPRR = "com.amazonaws.ec2#BatchModifyIpamRoutingPolicyRegistrationsRequest"
@@ -405,9 +401,6 @@ _RILI = "ReservedInstancesListingId"
 _CRILI = "CancelReservedInstancesListingInput"
 _cCRILR = "com.amazonaws.ec2#CancelReservedInstancesListingRequest"
 _rILI = "reservedInstancesListingId"
-_LSi = "ListingState"
-_sol = "sold"
-_iC = "instanceCount"
 _CRILO = "CancelReservedInstancesListingOutput"
 _cCRILRo = "com.amazonaws.ec2#CancelReservedInstancesListingResult"
 _RILe = "ReservedInstancesListings"
@@ -416,7 +409,6 @@ _rILS = "reservedInstancesListingsSet"
 _CRIL = "CancelReservedInstancesListing"
 _DTe = "DeletionTime"
 _dT = "deletionTime"
-_BL = "BoxedLong"
 _VASSRe = "VerifiedAccessSseSpecificationRequest"
 _VAGI = "VerifiedAccessGroupId"
 _vAGI = "verifiedAccessGroupId"
@@ -429,14 +421,7 @@ _vAGA = "verifiedAccessGroupArn"
 _PLMR = "PrefixListMaxResults"
 _SGRIL = "SecurityGroupRuleIdList"
 
-ALLOCATION_TYPE: StaticSchema = (
-    14,
-    n0,
-    _ATl,
-    0,
-    (_us, _fut, _ca),
-    ((-1, {_sV: _us}), (-1, {_sV: _fut}), (-1, {_sV: _ca})),
-)
+ROUTE_GATEWAY_ID: StaticSchema = (3, n0, _RGI, 0)
 
 VERIFIED_ACCESS_INSTANCE_ID: StaticSchema = (3, n0, _VAII, 0)
 
@@ -449,8 +434,8 @@ ATTACH_VERIFIED_ACCESS_TRUST_PROVIDER_INPUT: StaticSchema = (
     {_sSI: _cAVATPR, _sm: None},
     (_VAII, _VATPI, _CTl, _DR),
     (
-        (VERIFIED_ACCESS_INSTANCE_ID, 1),
-        (VERIFIED_ACCESS_TRUST_PROVIDER_ID, 1),
+        (VERIFIED_ACCESS_INSTANCE_ID, {_sO: None, _smi: None}),
+        (VERIFIED_ACCESS_TRUST_PROVIDER_ID, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 2),
         (lambda: schemas.BOOLEAN, 0),
     ),
@@ -651,9 +636,9 @@ ATTACH_VOLUME_INPUT: StaticSchema = (
     {_sSI: _cAVR, _sm: None},
     (_Dev, _II, _VIo, _ECI, _DR),
     (
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.INSTANCE_ID, 1),
-        (lambda: schemas.VOLUME_ID, 1),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
+        (lambda: schemas.INSTANCE_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.VOLUME_ID, {_sO: None, _smi: None}),
         (lambda: schemas.BOXED_INTEGER, 0),
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
     ),
@@ -695,8 +680,8 @@ ATTACH_VPN_GATEWAY_INPUT: StaticSchema = (
     {_sSI: _cAVGR, _sm: None},
     (_VI, _VGI, _DR),
     (
-        (lambda: schemas.VPC_ID, 1),
-        (lambda: schemas.VPN_GATEWAY_ID, 1),
+        (lambda: schemas.VPC_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.VPN_GATEWAY_ID, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
     ),
 )
@@ -727,8 +712,8 @@ AUTHORIZE_CLIENT_VPN_INGRESS_INPUT: StaticSchema = (
     {_sSI: _cACVIR, _sm: None},
     (_CVEI, _TNC, _AGI, _AAG, _Des, _CTl, _DR),
     (
-        (lambda: schemas.CLIENT_VPN_ENDPOINT_ID, 1),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.CLIENT_VPN_ENDPOINT_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.STRING, 0),
@@ -870,7 +855,10 @@ AUTHORIZE_SECURITY_GROUP_EGRESS_INPUT: StaticSchema = (
     (
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (lambda: schemas.SECURITY_GROUP_ID, {_aQN: _GIr, _sN: _gIr, _smi: None}),
+        (
+            lambda: schemas.SECURITY_GROUP_ID,
+            {_aQN: _GIr, _sN: _gIr, _sO: None, _smi: None},
+        ),
         (lambda: schemas.STRING, {_aQN: _SSGN, _sN: _sSGN}),
         (lambda: schemas.STRING, {_aQN: _SSGOI, _sN: _sSGOI}),
         (lambda: schemas.STRING, {_aQN: _IPpr, _sN: _iPpr}),
@@ -1013,8 +1001,6 @@ AUTHORIZE_SECURITY_GROUP_INGRESS: StaticOperationSchema = (
     (),
 )
 
-BOXED_BOOLEAN: StaticSchema = (2, n0, _BB, 0)
-
 BATCH_MODIFY_IPAM_ROUTING_POLICY_REGISTRATIONS_INPUT: StaticSchema = (
     18,
     n0,
@@ -1023,9 +1009,12 @@ BATCH_MODIFY_IPAM_ROUTING_POLICY_REGISTRATIONS_INPUT: StaticSchema = (
     (_DR, _IIRAI, _DJ, _Fo, _CTl),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_INTERNET_REGISTRY_ASSOCIATION_ID, 1),
-        (lambda: schemas.STRING, 1),
-        (BOXED_BOOLEAN, 0),
+        (
+            lambda: schemas.IPAM_INTERNET_REGISTRY_ASSOCIATION_ID,
+            {_sO: None, _smi: None},
+        ),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
+        (lambda: schemas.BOXED_BOOLEAN, 0),
         (lambda: schemas.STRING, 2),
     ),
 )
@@ -1100,8 +1089,8 @@ BUNDLE_INSTANCE_INPUT: StaticSchema = (
     {_sSI: _cBIR, _sm: None},
     (_II, _Sto, _DR),
     (
-        (lambda: schemas.INSTANCE_ID, 1),
-        (STORAGE, 1),
+        (lambda: schemas.INSTANCE_ID, {_sO: None, _smi: None}),
+        (STORAGE, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
     ),
 )
@@ -1180,7 +1169,10 @@ CANCEL_BUNDLE_TASK_INPUT: StaticSchema = (
     _CBTI,
     {_sSI: _cCBTR, _sm: None},
     (_BIu, _DR),
-    ((BUNDLE_ID, 1), (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr})),
+    (
+        (BUNDLE_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
+    ),
 )
 
 CANCEL_BUNDLE_TASK_OUTPUT: StaticSchema = (
@@ -1220,7 +1212,7 @@ CANCEL_CAPACITY_RESERVATION_INPUT: StaticSchema = (
     {_sSI: _cCCRR, _sm: None},
     (_CRI, _DR, _ACC, _QI),
     (
-        (lambda: schemas.CAPACITY_RESERVATION_ID, 1),
+        (lambda: schemas.CAPACITY_RESERVATION_ID, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, 0),
         (APPLY_CANCELLATION_CHARGES, 0),
         (CAPACITY_RESERVATION_CANCELLATION_QUOTE_ID, 0),
@@ -1265,7 +1257,7 @@ CANCEL_CAPACITY_RESERVATION_FLEETS_INPUT: StaticSchema = (
     (_DR, _CRFIa),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (CAPACITY_RESERVATION_FLEET_ID_SET, {_sN: _CRFI, _smi: None}),
+        (CAPACITY_RESERVATION_FLEET_ID_SET, {_sN: _CRFI, _sO: None, _smi: None}),
     ),
 )
 
@@ -1395,7 +1387,7 @@ CANCEL_CONVERSION_TASK_INPUT: StaticSchema = (
     (_DR, _CTI, _RM),
     (
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (CONVERSION_TASK_ID, {_aQN: _CTI, _sN: _cTI, _smi: None}),
+        (CONVERSION_TASK_ID, {_aQN: _CTI, _sN: _cTI, _sO: None, _smi: None}),
         (lambda: schemas.STRING, {_aQN: _RM, _sN: _rM}),
     ),
 )
@@ -1420,7 +1412,10 @@ CANCEL_DECLARATIVE_POLICIES_REPORT_INPUT: StaticSchema = (
     _CDPRI,
     {_sSI: _cCDPRR, _sm: None},
     (_DR, _RIep),
-    ((lambda: schemas.BOOLEAN, 0), (DECLARATIVE_POLICIES_REPORT_ID, 1)),
+    (
+        (lambda: schemas.BOOLEAN, 0),
+        (DECLARATIVE_POLICIES_REPORT_ID, {_sO: None, _smi: None}),
+    ),
 )
 
 CANCEL_DECLARATIVE_POLICIES_REPORT_OUTPUT: StaticSchema = (
@@ -1450,7 +1445,7 @@ CANCEL_EXPORT_TASK_INPUT: StaticSchema = (
     _CETI,
     {_sSI: _cCETR, _sm: None},
     (_ETI,),
-    ((EXPORT_VM_TASK_ID, {_aQN: _ETI, _sN: _eTI, _smi: None}),),
+    ((EXPORT_VM_TASK_ID, {_aQN: _ETI, _sN: _eTI, _sO: None, _smi: None}),),
 )
 
 CANCEL_EXPORT_TASK_OUTPUT: StaticSchema = (18, n0, _CETO, {_sSI: _sU, _smit: None})
@@ -1471,7 +1466,7 @@ CANCEL_IMAGE_LAUNCH_PERMISSION_INPUT: StaticSchema = (
     _CILPI,
     {_sSI: _cCILPR, _sm: None},
     (_IIm, _DR),
-    ((lambda: schemas.IMAGE_ID, 1), (lambda: schemas.BOOLEAN, 0)),
+    ((lambda: schemas.IMAGE_ID, {_sO: None, _smi: None}), (lambda: schemas.BOOLEAN, 0)),
 )
 
 CANCEL_IMAGE_LAUNCH_PERMISSION_OUTPUT: StaticSchema = (
@@ -1535,7 +1530,12 @@ CANCEL_RESERVED_INSTANCES_LISTING_INPUT: StaticSchema = (
     _CRILI,
     {_sSI: _cCRILR, _sm: None},
     (_RILI,),
-    ((RESERVED_INSTANCES_LISTING_ID, {_aQN: _RILI, _sN: _rILI, _smi: None}),),
+    (
+        (
+            RESERVED_INSTANCES_LISTING_ID,
+            {_aQN: _RILI, _sN: _rILI, _sO: None, _smi: None},
+        ),
+    ),
 )
 
 CANCEL_RESERVED_INSTANCES_LISTING_OUTPUT: StaticSchema = (
@@ -1556,29 +1556,6 @@ CANCEL_RESERVED_INSTANCES_LISTING: StaticOperationSchema = (
     CANCEL_RESERVED_INSTANCES_LISTING_OUTPUT,
     (),
 )
-
-LISTING_STATE: StaticSchema = (
-    14,
-    n0,
-    _LSi,
-    0,
-    (_av, _sol, _can, _p),
-    ((-1, {_sV: _av}), (-1, {_sV: _sol}), (-1, {_sV: _can}), (-1, {_sV: _p})),
-)
-
-INSTANCE_COUNT: StaticSchema = (
-    18,
-    n0,
-    _IC,
-    0,
-    (_IC, _St),
-    (
-        (lambda: schemas.INTEGER, {_aQN: _IC, _sN: _iC}),
-        (LISTING_STATE, {_aQN: _St, _sN: _st}),
-    ),
-)
-
-BOXED_LONG: StaticSchema = (8, n0, _BL, 0)
 
 VERIFIED_ACCESS_SSE_SPECIFICATION_REQUEST: StaticSchema = (
     18,

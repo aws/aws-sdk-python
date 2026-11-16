@@ -22,6 +22,7 @@ _c = "client"
 _sE = "smithy.api#httpError"
 _aQE = "aws.protocols#awsQueryError"
 _M = "Message"
+_sO = "smithy.api#clientOptional"
 _smit = "smithy.api#required"
 _PI = "PublisherId"
 _T = "Type"
@@ -284,7 +285,7 @@ DESCRIBE_GENERATED_TEMPLATE_INPUT: StaticSchema = (
     _DGTIe,
     {_s: None},
     (_GTN,),
-    ((lambda: schemas.GENERATED_TEMPLATE_NAME, 1),),
+    ((lambda: schemas.GENERATED_TEMPLATE_NAME, {_sO: None, _smit: None}),),
 )
 
 DESCRIBE_GENERATED_TEMPLATE_OUTPUT: StaticSchema = (
@@ -520,7 +521,7 @@ DESCRIBE_RESOURCE_SCAN_INPUT: StaticSchema = (
     _DRSI,
     {_s: None},
     (_RSI,),
-    ((RESOURCE_SCAN_ID, 1),),
+    ((RESOURCE_SCAN_ID, {_sO: None, _smit: None}),),
 )
 
 DESCRIBE_RESOURCE_SCAN_OUTPUT: StaticSchema = (
@@ -611,7 +612,7 @@ DESCRIBE_STACK_DRIFT_DETECTION_STATUS_INPUT: StaticSchema = (
     _DSDDSI,
     {_s: None},
     (_SDDI,),
-    ((lambda: schemas.STACK_DRIFT_DETECTION_ID, 1),),
+    ((lambda: schemas.STACK_DRIFT_DETECTION_ID, {_sO: None, _smit: None}),),
 )
 
 DESCRIBE_STACK_DRIFT_DETECTION_STATUS_OUTPUT: StaticSchema = (
@@ -621,13 +622,13 @@ DESCRIBE_STACK_DRIFT_DETECTION_STATUS_OUTPUT: StaticSchema = (
     {_sm: None},
     (_SI, _SDDI, _SDS, _DSet, _DSR, _DSRC, _Ti),
     (
-        (lambda: schemas.STACK_ID, 1),
-        (lambda: schemas.STACK_DRIFT_DETECTION_ID, 1),
+        (lambda: schemas.STACK_ID, {_sO: None, _smit: None}),
+        (lambda: schemas.STACK_DRIFT_DETECTION_ID, {_sO: None, _smit: None}),
         (lambda: schemas.STACK_DRIFT_STATUS, 0),
-        (lambda: STACK_DRIFT_DETECTION_STATUS, 1),
+        (lambda: STACK_DRIFT_DETECTION_STATUS, {_sO: None, _smit: None}),
         (lambda: STACK_DRIFT_DETECTION_STATUS_REASON, 0),
         (lambda: schemas.BOXED_INTEGER, 0),
-        (lambda: schemas.TIMESTAMP, 1),
+        (lambda: schemas.TIMESTAMP, {_sO: None, _smit: None}),
     ),
 )
 
@@ -658,7 +659,10 @@ DESCRIBE_STACK_EVENTS_INPUT: StaticSchema = (
     _DSEI,
     {_s: None},
     (_SN, _NT),
-    ((lambda: schemas.STACK_NAME, 1), (lambda: schemas.NEXT_TOKEN, 0)),
+    (
+        (lambda: schemas.STACK_NAME, {_sO: None, _smit: None}),
+        (lambda: schemas.NEXT_TOKEN, 0),
+    ),
 )
 
 DESCRIBE_STACK_EVENTS_OUTPUT: StaticSchema = (
@@ -707,14 +711,14 @@ STACK_EVENT: StaticSchema = (
         _DSe,
     ),
     (
-        (lambda: schemas.STACK_ID, 1),
-        (lambda: schemas.EVENT_ID, 1),
-        (lambda: schemas.STACK_NAME, 1),
+        (lambda: schemas.STACK_ID, {_sO: None, _smit: None}),
+        (lambda: schemas.EVENT_ID, {_sO: None, _smit: None}),
+        (lambda: schemas.STACK_NAME, {_sO: None, _smit: None}),
         (lambda: schemas.OPERATION_ID, 0),
         (lambda: schemas.LOGICAL_RESOURCE_ID, 0),
         (lambda: schemas.PHYSICAL_RESOURCE_ID, 0),
         (lambda: schemas.RESOURCE_TYPE, 0),
-        (lambda: schemas.TIMESTAMP, 1),
+        (lambda: schemas.TIMESTAMP, {_sO: None, _smit: None}),
         (lambda: schemas.RESOURCE_STATUS, 0),
         (lambda: schemas.RESOURCE_STATUS_REASON, 0),
         (lambda: schemas.RESOURCE_PROPERTIES, 0),
@@ -738,9 +742,9 @@ DESCRIBE_STACK_INSTANCE_INPUT: StaticSchema = (
     {_s: None},
     (_SSN, _SIA, _SIR, _CA),
     (
-        (lambda: schemas.STACK_SET_NAME, 1),
-        (lambda: schemas.ACCOUNT, 1),
-        (lambda: schemas.REGION, 1),
+        (lambda: schemas.STACK_SET_NAME, {_sO: None, _smit: None}),
+        (lambda: schemas.ACCOUNT, {_sO: None, _smit: None}),
+        (lambda: schemas.REGION, {_sO: None, _smit: None}),
         (lambda: schemas.CALL_AS, 0),
     ),
 )
@@ -831,7 +835,7 @@ DESCRIBE_STACK_REFACTOR_INPUT: StaticSchema = (
     _DSRI,
     {_s: None},
     (_SRI,),
-    ((lambda: schemas.STACK_REFACTOR_ID, 1),),
+    ((lambda: schemas.STACK_REFACTOR_ID, {_sO: None, _smit: None}),),
 )
 
 DESCRIBE_STACK_REFACTOR_OUTPUT: StaticSchema = (
@@ -923,7 +927,10 @@ DESCRIBE_STACK_RESOURCE_INPUT: StaticSchema = (
     _DSRIe,
     {_s: None},
     (_SN, _LRI),
-    ((lambda: schemas.STACK_NAME, 1), (lambda: schemas.LOGICAL_RESOURCE_ID, 1)),
+    (
+        (lambda: schemas.STACK_NAME, {_sO: None, _smit: None}),
+        (lambda: schemas.LOGICAL_RESOURCE_ID, {_sO: None, _smit: None}),
+    ),
 )
 
 DESCRIBE_STACK_RESOURCE_OUTPUT: StaticSchema = (
@@ -954,11 +961,11 @@ STACK_RESOURCE_DETAIL: StaticSchema = (
     (
         (lambda: schemas.STACK_NAME, 0),
         (lambda: schemas.STACK_ID, 0),
-        (lambda: schemas.LOGICAL_RESOURCE_ID, 1),
+        (lambda: schemas.LOGICAL_RESOURCE_ID, {_sO: None, _smit: None}),
         (lambda: schemas.PHYSICAL_RESOURCE_ID, 0),
-        (lambda: schemas.RESOURCE_TYPE, 1),
-        (lambda: schemas.TIMESTAMP, 1),
-        (lambda: schemas.RESOURCE_STATUS, 1),
+        (lambda: schemas.RESOURCE_TYPE, {_sO: None, _smit: None}),
+        (lambda: schemas.TIMESTAMP, {_sO: None, _smit: None}),
+        (lambda: schemas.RESOURCE_STATUS, {_sO: None, _smit: None}),
         (lambda: schemas.RESOURCE_STATUS_REASON, 0),
         (lambda: schemas.DESCRIPTION, 0),
         (lambda: schemas.METADATA, 0),

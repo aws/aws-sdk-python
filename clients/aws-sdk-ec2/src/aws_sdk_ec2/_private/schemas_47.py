@@ -15,6 +15,7 @@ _RT = "ResourceType"
 _ip = "ipam"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
+_sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _DR = "DryRun"
 _d = "disabled"
@@ -58,7 +59,6 @@ _IPAI = "IpamPoolAllocationId"
 _IPA = "IpamPoolAllocation"
 _RR = "ResourceRegion"
 _iPA = "ipamPoolAllocation"
-_SGIe = "SecurityGroupIds"
 _sU = "smithy.api#Unit"
 _IEWI = "InstanceEventWindowId"
 _IEW = "InstanceEventWindow"
@@ -88,6 +88,8 @@ _ten = "tenancy"
 _requ = "required"
 _DCB = "DestinationCidrBlock"
 _LGRTI = "LocalGatewayRouteTableId"
+_ERNDAR = "EnableResourceNameDnsARecord"
+_ERNDAAAAR = "EnableResourceNameDnsAAAARecord"
 _LTI = "LaunchTemplateId"
 _LTN = "LaunchTemplateName"
 _Ve = "Version"
@@ -101,9 +103,6 @@ _HIo = "HostId"
 _hI = "hostId"
 _HRGA = "HostResourceGroupArn"
 _ver = "version"
-_IAT = "IpAddressType"
-_PCI = "PreserveClientIp"
-_ICEI = "InstanceConnectEndpointId"
 _TRim = "TimeRange"
 _Tie = "Tier"
 _EPG = "EnablePrivateGua"
@@ -137,9 +136,6 @@ _ML = "MaxLength"
 _EAC = "ExternalAuthorityConfiguration"
 _ISpam = "IpamScope"
 _iSpa = "ipamScope"
-_CCor = "CoreCount"
-_TPC = "ThreadsPerCore"
-_NV = "NestedVirtualization"
 _CCp = "CpuCredits"
 _ARu = "AutoRecovery"
 _HPI = "HttpProtocolIpv6"
@@ -150,9 +146,6 @@ _CTSo = "ConnectionTrackingSpecification"
 _BW = "BandwidthWeighting"
 _LT = "LaunchTemplate"
 _lT = "launchTemplate"
-_cCor = "coreCount"
-_tPC = "threadsPerCore"
-_nV = "nestedVirtualization"
 _aRu = "autoRecovery"
 _bW = "bandwidthWeighting"
 _DVef = "DefaultVersion"
@@ -191,16 +184,6 @@ _IRC = "IpamResourceCidr"
 _DVefa = "DefaultVisibility"
 _Vi = "Visibility"
 _vis = "visibility"
-_MICEI = "ModifyInstanceConnectEndpointInput"
-_cMICER = "com.amazonaws.ec2#ModifyInstanceConnectEndpointRequest"
-_MICEO = "ModifyInstanceConnectEndpointOutput"
-_cMICERo = "com.amazonaws.ec2#ModifyInstanceConnectEndpointResult"
-_MICE = "ModifyInstanceConnectEndpoint"
-_MICOI = "ModifyInstanceCpuOptionsInput"
-_cMICOR = "com.amazonaws.ec2#ModifyInstanceCpuOptionsRequest"
-_MICOO = "ModifyInstanceCpuOptionsOutput"
-_cMICORo = "com.amazonaws.ec2#ModifyInstanceCpuOptionsResult"
-_MICO = "ModifyInstanceCpuOptions"
 _ICSR = "InstanceCreditSpecificationRequest"
 _ICSLR = "InstanceCreditSpecificationListRequest"
 _MICSI = "ModifyInstanceCreditSpecificationInput"
@@ -395,79 +378,12 @@ _cMNIAR = "com.amazonaws.ec2#ModifyNetworkInterfaceAttributeRequest"
 _ASIss = "AssociatedSubnetIds"
 _MNIAO = "ModifyNetworkInterfaceAttributeOutput"
 _MNIA = "ModifyNetworkInterfaceAttribute"
-
-MODIFY_INSTANCE_CONNECT_ENDPOINT_INPUT: StaticSchema = (
-    18,
-    n0,
-    _MICEI,
-    {_sSI: _cMICER, _sm: None},
-    (_DR, _ICEI, _IAT, _SGIe, _PCI),
-    (
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.INSTANCE_CONNECT_ENDPOINT_ID, 1),
-        (lambda: schemas.IP_ADDRESS_TYPE, 0),
-        (lambda: schemas.SECURITY_GROUP_ID_STRING_LIST_REQUEST, {_sN: _SGI}),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-MODIFY_INSTANCE_CONNECT_ENDPOINT_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _MICEO,
-    {_sSI: _cMICERo, _smit: None},
-    (_R,),
-    ((lambda: schemas.BOOLEAN, {_aQN: _R, _sN: _r}),),
-)
-
-MODIFY_INSTANCE_CONNECT_ENDPOINT: StaticOperationSchema = (
-    23,
-    n0,
-    _MICE,
-    0,
-    MODIFY_INSTANCE_CONNECT_ENDPOINT_INPUT,
-    MODIFY_INSTANCE_CONNECT_ENDPOINT_OUTPUT,
-    (),
-)
-
-MODIFY_INSTANCE_CPU_OPTIONS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _MICOI,
-    {_sSI: _cMICOR, _sm: None},
-    (_II, _CCor, _TPC, _NV, _DR),
-    (
-        (lambda: schemas.INSTANCE_ID, 1),
-        (lambda: schemas.INTEGER, 0),
-        (lambda: schemas.INTEGER, 0),
-        (lambda: schemas.NESTED_VIRTUALIZATION_SPECIFICATION, 0),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-MODIFY_INSTANCE_CPU_OPTIONS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _MICOO,
-    {_sSI: _cMICORo, _smit: None},
-    (_II, _CCor, _TPC, _NV),
-    (
-        (lambda: schemas.INSTANCE_ID, {_aQN: _II, _sN: _iI}),
-        (lambda: schemas.INTEGER, {_aQN: _CCor, _sN: _cCor}),
-        (lambda: schemas.INTEGER, {_aQN: _TPC, _sN: _tPC}),
-        (lambda: schemas.NESTED_VIRTUALIZATION_SPECIFICATION, {_aQN: _NV, _sN: _nV}),
-    ),
-)
-
-MODIFY_INSTANCE_CPU_OPTIONS: StaticOperationSchema = (
-    23,
-    n0,
-    _MICO,
-    0,
-    MODIFY_INSTANCE_CPU_OPTIONS_INPUT,
-    MODIFY_INSTANCE_CPU_OPTIONS_OUTPUT,
-    (),
-)
+_MPDNOI = "ModifyPrivateDnsNameOptionsInput"
+_cMPDNOR = "com.amazonaws.ec2#ModifyPrivateDnsNameOptionsRequest"
+_PDHT = "PrivateDnsHostnameType"
+_MPDNOO = "ModifyPrivateDnsNameOptionsOutput"
+_cMPDNORo = "com.amazonaws.ec2#ModifyPrivateDnsNameOptionsResult"
+_MPDNO = "ModifyPrivateDnsNameOptions"
 
 INSTANCE_CREDIT_SPECIFICATION_REQUEST: StaticSchema = (
     18,
@@ -475,7 +391,10 @@ INSTANCE_CREDIT_SPECIFICATION_REQUEST: StaticSchema = (
     _ICSR,
     0,
     (_II, _CCp),
-    ((lambda: schemas.INSTANCE_ID, 1), (lambda: schemas.STRING, 0)),
+    (
+        (lambda: schemas.INSTANCE_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, 0),
+    ),
 )
 
 INSTANCE_CREDIT_SPECIFICATION_LIST_REQUEST: StaticSchema = (
@@ -496,7 +415,10 @@ MODIFY_INSTANCE_CREDIT_SPECIFICATION_INPUT: StaticSchema = (
     (
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.STRING, 0),
-        (INSTANCE_CREDIT_SPECIFICATION_LIST_REQUEST, {_sN: _ICS, _smi: None}),
+        (
+            INSTANCE_CREDIT_SPECIFICATION_LIST_REQUEST,
+            {_sN: _ICS, _sO: None, _smi: None},
+        ),
     ),
 )
 
@@ -601,9 +523,9 @@ MODIFY_INSTANCE_EVENT_START_TIME_INPUT: StaticSchema = (
     (_DR, _II, _IEI, _NB),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.INSTANCE_ID, 1),
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.DATE_TIME, 1),
+        (lambda: schemas.INSTANCE_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
+        (lambda: schemas.DATE_TIME, {_sO: None, _smi: None}),
     ),
 )
 
@@ -635,7 +557,7 @@ MODIFY_INSTANCE_EVENT_WINDOW_INPUT: StaticSchema = (
     (
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.STRING, 0),
-        (lambda: schemas.INSTANCE_EVENT_WINDOW_ID, 1),
+        (lambda: schemas.INSTANCE_EVENT_WINDOW_ID, {_sO: None, _smi: None}),
         (lambda: schemas.INSTANCE_EVENT_WINDOW_TIME_RANGE_REQUEST_SET, {_sN: _TRim}),
         (lambda: schemas.INSTANCE_EVENT_WINDOW_CRON_EXPRESSION, 0),
     ),
@@ -667,7 +589,7 @@ MODIFY_INSTANCE_MAINTENANCE_OPTIONS_INPUT: StaticSchema = (
     {_sSI: _cMIMOR, _sm: None},
     (_II, _ARu, _RMeb, _DR),
     (
-        (lambda: schemas.INSTANCE_ID, 1),
+        (lambda: schemas.INSTANCE_ID, {_sO: None, _smi: None}),
         (lambda: schemas.INSTANCE_AUTO_RECOVERY_STATE, 0),
         (lambda: schemas.INSTANCE_REBOOT_MIGRATION_STATE, 0),
         (lambda: schemas.BOOLEAN, 0),
@@ -775,7 +697,7 @@ MODIFY_INSTANCE_METADATA_OPTIONS_INPUT: StaticSchema = (
     {_sSI: _cMIMORom, _sm: None},
     (_II, _HTt, _HPRHL, _HE, _DR, _HPI, _IMT),
     (
-        (lambda: schemas.INSTANCE_ID, 1),
+        (lambda: schemas.INSTANCE_ID, {_sO: None, _smi: None}),
         (lambda: schemas.HTTP_TOKENS_STATE, 0),
         (lambda: schemas.INTEGER, 0),
         (lambda: schemas.INSTANCE_METADATA_ENDPOINT_STATE, 0),
@@ -817,8 +739,8 @@ MODIFY_INSTANCE_NETWORK_PERFORMANCE_OPTIONS_INPUT: StaticSchema = (
     {_sSI: _cMINPR, _sm: None},
     (_II, _BW, _DR),
     (
-        (lambda: schemas.INSTANCE_ID, 1),
-        (lambda: schemas.INSTANCE_BANDWIDTH_WEIGHTING, 1),
+        (lambda: schemas.INSTANCE_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.INSTANCE_BANDWIDTH_WEIGHTING, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, 0),
     ),
 )
@@ -865,7 +787,7 @@ MODIFY_INSTANCE_PLACEMENT_INPUT: StaticSchema = (
         (lambda: schemas.INTEGER, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.PLACEMENT_GROUP_ID, 0),
-        (lambda: schemas.INSTANCE_ID, {_aQN: _II, _sN: _iI, _smi: None}),
+        (lambda: schemas.INSTANCE_ID, {_aQN: _II, _sN: _iI, _sO: None, _smi: None}),
         (HOST_TENANCY, {_aQN: _Ten, _sN: _ten}),
         (lambda: schemas.AFFINITY, {_aQN: _Af, _sN: _aff}),
         (lambda: schemas.DEDICATED_HOST_ID, {_aQN: _HIo, _sN: _hI}),
@@ -917,7 +839,7 @@ MODIFY_IPAM_INPUT: StaticSchema = (
     (_DR, _IIp, _Des, _AOR, _ROR, _Tie, _EPG, _MAe),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_ID, 1),
+        (lambda: schemas.IPAM_ID, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.ADD_IPAM_OPERATING_REGION_SET, {_sN: _AORd}),
         (REMOVE_IPAM_OPERATING_REGION_SET, {_sN: _RORe}),
@@ -972,9 +894,9 @@ MODIFY_IPAM_POLICY_ALLOCATION_RULES_INPUT: StaticSchema = (
     (_DR, _IPIp, _Loc, _RT, _ARllo),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_POLICY_ID, 1),
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.IPAM_POLICY_RESOURCE_TYPE, 1),
+        (lambda: schemas.IPAM_POLICY_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
+        (lambda: schemas.IPAM_POLICY_RESOURCE_TYPE, {_sO: None, _smi: None}),
         (IPAM_POLICY_ALLOCATION_RULE_LIST_REQUEST, {_sN: _ARlloc}),
     ),
 )
@@ -1006,7 +928,7 @@ MODIFY_IPAM_POOL_INPUT: StaticSchema = (
     (_DR, _IPI, _Des, _AIu, _AMNL, _AMNLl, _ADNL, _CADNL, _AART, _RART),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_POOL_ID, 1),
+        (lambda: schemas.IPAM_POOL_ID, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.IPAM_NETMASK_LENGTH, 0),
@@ -1045,7 +967,7 @@ MODIFY_IPAM_POOL_ALLOCATION_INPUT: StaticSchema = (
     (_DR, _IPAI, _Des),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_POOL_ALLOCATION_ID, 1),
+        (lambda: schemas.IPAM_POOL_ALLOCATION_ID, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
     ),
 )
@@ -1077,7 +999,7 @@ MODIFY_IPAM_PREFIX_LIST_RESOLVER_INPUT: StaticSchema = (
     (_DR, _IPLRI, _Des, _Rul),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_PREFIX_LIST_RESOLVER_ID, 1),
+        (lambda: schemas.IPAM_PREFIX_LIST_RESOLVER_ID, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.IPAM_PREFIX_LIST_RESOLVER_RULE_REQUEST_SET, {_sN: _Ru}),
     ),
@@ -1110,7 +1032,7 @@ MODIFY_IPAM_PREFIX_LIST_RESOLVER_TARGET_INPUT: StaticSchema = (
     (_DR, _IPLRTI, _DVe, _TLV, _CTl),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_PREFIX_LIST_RESOLVER_TARGET_ID, 1),
+        (lambda: schemas.IPAM_PREFIX_LIST_RESOLVER_TARGET_ID, {_sO: None, _smi: None}),
         (lambda: schemas.BOXED_LONG, 0),
         (lambda: schemas.BOXED_BOOLEAN, 0),
         (lambda: schemas.STRING, 2),
@@ -1144,12 +1066,12 @@ MODIFY_IPAM_RESOURCE_CIDR_INPUT: StaticSchema = (
     (_DR, _RIe, _RCes, _RR, _CISIu, _DISIest, _Moni),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.IPAM_SCOPE_ID, 1),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
+        (lambda: schemas.IPAM_SCOPE_ID, {_sO: None, _smi: None}),
         (lambda: schemas.IPAM_SCOPE_ID, 0),
-        (lambda: schemas.BOOLEAN, 1),
+        (lambda: schemas.BOOLEAN, {_sO: None, _smi: None}),
     ),
 )
 
@@ -1198,7 +1120,7 @@ MODIFY_IPAM_RESOURCE_DISCOVERY_INPUT: StaticSchema = (
     (_DR, _IRDI, _Des, _AOR, _ROR, _AOUE, _ROUE),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_RESOURCE_DISCOVERY_ID, 1),
+        (lambda: schemas.IPAM_RESOURCE_DISCOVERY_ID, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.ADD_IPAM_OPERATING_REGION_SET, {_sN: _AORd}),
         (REMOVE_IPAM_OPERATING_REGION_SET, {_sN: _RORe}),
@@ -1234,9 +1156,12 @@ MODIFY_IPAM_ROUTING_POLICY_REGISTRATION_INPUT: StaticSchema = (
     (_DR, _IIRAI, _Ci, _Asns, _PMSA, _ML, _Des, _Fo, _CTl),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_INTERNET_REGISTRY_ASSOCIATION_ID, 1),
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.ASN_LIST, {_sN: _Asn, _smi: None}),
+        (
+            lambda: schemas.IPAM_INTERNET_REGISTRY_ASSOCIATION_ID,
+            {_sO: None, _smi: None},
+        ),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
+        (lambda: schemas.ASN_LIST, {_sN: _Asn, _sO: None, _smi: None}),
         (lambda: schemas.BOXED_BOOLEAN, 0),
         (lambda: schemas.IPAM_ROUTING_POLICY_REGISTRATION_MAX_LENGTH, 0),
         (lambda: schemas.STRING, 0),
@@ -1277,7 +1202,7 @@ MODIFY_IPAM_SCOPE_INPUT: StaticSchema = (
     (_DR, _ISI, _Des, _EAC, _REAC),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_SCOPE_ID, 1),
+        (lambda: schemas.IPAM_SCOPE_ID, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.EXTERNAL_AUTHORITY_CONFIGURATION, 0),
         (lambda: schemas.BOOLEAN, 0),
@@ -1345,7 +1270,7 @@ MODIFY_LOCAL_GATEWAY_ROUTE_INPUT: StaticSchema = (
     (_DCB, _LGRTI, _LGVIGI, _NII, _DR, _DPLI),
     (
         (lambda: schemas.STRING, 0),
-        (lambda: schemas.LOCAL_GATEWAY_ROUTETABLE_ID, 1),
+        (lambda: schemas.LOCAL_GATEWAY_ROUTETABLE_ID, {_sO: None, _smi: None}),
         (lambda: schemas.LOCAL_GATEWAY_VIRTUAL_INTERFACE_GROUP_ID, 0),
         (lambda: schemas.NETWORK_INTERFACE_ID, 0),
         (lambda: schemas.BOOLEAN, 0),
@@ -1378,7 +1303,7 @@ REMOVE_PREFIX_LIST_ENTRY: StaticSchema = (
     _RPLE,
     0,
     (_Ci,),
-    ((lambda: schemas.STRING, 1),),
+    ((lambda: schemas.STRING, {_sO: None, _smi: None}),),
 )
 
 REMOVE_PREFIX_LIST_ENTRIES: StaticSchema = (
@@ -1398,7 +1323,7 @@ MODIFY_MANAGED_PREFIX_LIST_INPUT: StaticSchema = (
     (_DR, _PLI, _CVu, _PLN, _AEd, _REem, _ME, _IPLRSE),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.PREFIX_LIST_RESOURCE_ID, 1),
+        (lambda: schemas.PREFIX_LIST_RESOURCE_ID, {_sO: None, _smi: None}),
         (lambda: schemas.LONG, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.ADD_PREFIX_LIST_ENTRIES, {_sN: _AEdd}),
@@ -1435,7 +1360,7 @@ MODIFY_MANAGED_RESOURCE_VISIBILITY_INPUT: StaticSchema = (
     (_DR, _DVefa),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.MANAGED_RESOURCE_DEFAULT_VISIBILITY, 1),
+        (lambda: schemas.MANAGED_RESOURCE_DEFAULT_VISIBILITY, {_sO: None, _smi: None}),
     ),
 )
 
@@ -1465,8 +1390,11 @@ MODIFY_METRIC_CATEGORY_INPUT: StaticSchema = (
     {_sSI: _cMMCR, _sm: None},
     (_MCI, _Met, _DR),
     (
-        (lambda: schemas.METRIC_CATEGORY_ID, 1),
-        (lambda: schemas.METRIC_CATEGORY_METRIC_NAME_LIST, {_sN: _Metr, _smi: None}),
+        (lambda: schemas.METRIC_CATEGORY_ID, {_sO: None, _smi: None}),
+        (
+            lambda: schemas.METRIC_CATEGORY_METRIC_NAME_LIST,
+            {_sN: _Metr, _sO: None, _smi: None},
+        ),
         (lambda: schemas.BOOLEAN, 0),
     ),
 )
@@ -1497,7 +1425,7 @@ MODIFY_NETWORKING_FLEX_COST_ALLOCATION_POLICY_INPUT: StaticSchema = (
     {_sSI: _cMNFCAPR, _sm: None},
     (_FPI, _NFPD, _IFPD, _PFPD, _SBE, _Des, _CTl, _DR),
     (
-        (lambda: schemas.FLEX_COST_ALLOCATION_POLICY_ID, 1),
+        (lambda: schemas.FLEX_COST_ALLOCATION_POLICY_ID, {_sO: None, _smi: None}),
         (lambda: schemas.NAT_FLEX_COST_ALLOCATION_POLICY_DOCUMENT, 0),
         (lambda: schemas.INSTANCE_FLEX_COST_ALLOCATION_POLICY_DOCUMENT, 0),
         (lambda: schemas.PCX_FLEX_COST_ALLOCATION_POLICY_DOCUMENT, 0),
@@ -1571,7 +1499,10 @@ MODIFY_NETWORK_INTERFACE_ATTRIBUTE_INPUT: StaticSchema = (
         (lambda: schemas.BOOLEAN, 0),
         (SUBNET_ID_LIST, {_sN: _ASIs}),
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (lambda: schemas.NETWORK_INTERFACE_ID, {_aQN: _NII, _sN: _nII, _smi: None}),
+        (
+            lambda: schemas.NETWORK_INTERFACE_ID,
+            {_aQN: _NII, _sN: _nII, _sO: None, _smi: None},
+        ),
         (lambda: schemas.ATTRIBUTE_VALUE, {_aQN: _Des, _sN: _desc}),
         (lambda: schemas.ATTRIBUTE_BOOLEAN_VALUE, {_aQN: _SDC, _sN: _sDC}),
         (lambda: schemas.SECURITY_GROUP_ID_STRING_LIST, {_sN: _SGI}),
@@ -1593,5 +1524,39 @@ MODIFY_NETWORK_INTERFACE_ATTRIBUTE: StaticOperationSchema = (
     0,
     MODIFY_NETWORK_INTERFACE_ATTRIBUTE_INPUT,
     MODIFY_NETWORK_INTERFACE_ATTRIBUTE_OUTPUT,
+    (),
+)
+
+MODIFY_PRIVATE_DNS_NAME_OPTIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _MPDNOI,
+    {_sSI: _cMPDNOR, _sm: None},
+    (_DR, _II, _PDHT, _ERNDAR, _ERNDAAAAR),
+    (
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.INSTANCE_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.HOSTNAME_TYPE, 0),
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+MODIFY_PRIVATE_DNS_NAME_OPTIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _MPDNOO,
+    {_sSI: _cMPDNORo, _smit: None},
+    (_R,),
+    ((lambda: schemas.BOOLEAN, {_aQN: _R, _sN: _r}),),
+)
+
+MODIFY_PRIVATE_DNS_NAME_OPTIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _MPDNO,
+    0,
+    MODIFY_PRIVATE_DNS_NAME_OPTIONS_INPUT,
+    MODIFY_PRIVATE_DNS_NAME_OPTIONS_OUTPUT,
     (),
 )

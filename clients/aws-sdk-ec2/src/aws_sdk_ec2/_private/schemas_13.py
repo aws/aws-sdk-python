@@ -17,10 +17,12 @@ _rT = "resourceType"
 _Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
+_sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _TSa = "TagSpecifications"
 _DR = "DryRun"
 _p = "pending"
+_AI = "AllocationId"
 _smit = "smithy.api#output"
 _av = "available"
 _de = "deleting"
@@ -53,6 +55,8 @@ _LGI = "LocalGatewayId"
 _lGI = "localGatewayId"
 _PLI = "PrefixListId"
 _pLI = "prefixListId"
+_NG = "NatGateway"
+_nG = "natGateway"
 _PL = "PrefixList"
 _pL = "prefixList"
 _SGe = "SecurityGroups"
@@ -62,38 +66,29 @@ _Mo = "Mode"
 _mod = "mode"
 _IT = "InstanceType"
 _iT = "instanceType"
-_Des = "Description"
 _PIAr = "PrivateIpAddress"
 _pIAr = "privateIpAddress"
 _AF = "AddressFamily"
-_desc = "description"
 _Af = "Affinity"
 _OA = "OutpostArn"
 _CO = "CpuOptions"
 _CTl = "ClientToken"
+_cTl = "clientToken"
 _sT = "smithy.api#idempotencyToken"
+_AIl = "AllocationIds"
 _SGIe = "SecurityGroupIds"
-_IPC = "Ipv6PrefixCount"
-_IPp = "Ipv6Prefixes"
-_IAp = "Ipv6Addresses"
-_IAC = "Ipv6AddressCount"
-_iAC = "ipv6AddressCount"
-_IPpvr = "Ipv4Prefixes"
-_IPCp = "Ipv4PrefixCount"
 _PIAri = "PrivateIpAddresses"
 _SPIAC = "SecondaryPrivateIpAddressCount"
-_sPIAC = "secondaryPrivateIpAddressCount"
 _PIAC = "PrivateIpAddressCount"
 _IIP = "IamInstanceProfile"
 _iIP = "iamInstanceProfile"
 _rip = "restore-in-progress"
 _GIr = "GroupId"
+_pu = "public"
+_priv = "private"
 _gIr = "groupId"
-_G = "Groups"
 _IIm = "ImageId"
-_ESS = "EnaSrdSpecification"
 _NCI = "NetworkCardIndex"
-_EQC = "EnaQueueCount"
 _DI = "DeviceIndex"
 _dI = "deviceIndex"
 _nCI = "networkCardIndex"
@@ -109,6 +104,7 @@ _Op = "Operator"
 _ope = "operator"
 _CTr = "CreateTime"
 _cTr = "createTime"
+_PRIVATE = "PRIVATE"
 _Ten = "Tenancy"
 _EO = "EbsOptimized"
 _ten = "tenancy"
@@ -163,6 +159,8 @@ _pla = "placement"
 _iRn = "instanceRequirements"
 _BDMS = "BlockDeviceMappingSet"
 _bDMS = "blockDeviceMappingSet"
+_REGIONAL = "REGIONAL"
+_regi = "regional"
 _SGIS = "SecurityGroupIdSet"
 _cip = "create_in_progress"
 _cip_ = "create-in-progress"
@@ -188,11 +186,7 @@ _iPLRTI = "ipamPrefixListResolverTargetId"
 _kN = "keyName"
 _KI = "KernelId"
 _MCI = "MetricCategoryId"
-_ACIA = "AssociateCarrierIpAddress"
-_APIAsso = "AssociatePublicIpAddress"
 _ITnte = "InterfaceType"
-_PIrim = "PrimaryIpv6"
-_CTSo = "ConnectionTrackingSpecification"
 _BW = "BandwidthWeighting"
 _SIPIAS = "SecondaryInterfacePrivateIpAddressSpecification"
 _SSIe = "SecondarySubnetId"
@@ -219,26 +213,9 @@ _VD = "VersionDescription"
 _LTD = "LaunchTemplateData"
 _CBr = "CreatedBy"
 _cBr = "createdBy"
-_LTINIS = "LaunchTemplateInstanceNetworkInterfaceSpecification"
-_aCIA = "associateCarrierIpAddress"
-_aPIA = "associatePublicIpAddress"
-_GS = "GroupSet"
-_gS = "groupSet"
 _iTnt = "interfaceType"
-_IAS = "Ipv6AddressesSet"
-_iAS = "ipv6AddressesSet"
 _PIASr = "PrivateIpAddressesSet"
 _pIAS = "privateIpAddressesSet"
-_IPSpv = "Ipv4PrefixSet"
-_iPS = "ipv4PrefixSet"
-_iPC = "ipv4PrefixCount"
-_IPSpvr = "Ipv6PrefixSet"
-_iPSp = "ipv6PrefixSet"
-_iPCp = "ipv6PrefixCount"
-_pIri = "primaryIpv6"
-_eSS = "enaSrdSpecification"
-_cTSo = "connectionTrackingSpecification"
-_eQC = "enaQueueCount"
 _LTINISL = "LaunchTemplateInstanceNetworkInterfaceSpecificationList"
 _LTNPO = "LaunchTemplateNetworkPerformanceOptions"
 _bW = "bandwidthWeighting"
@@ -427,69 +404,22 @@ _CMCO = "CreateMetricCategoryOutput"
 _cCMCRo = "com.amazonaws.ec2#CreateMetricCategoryResult"
 _mCe = "metricCategory"
 _CMC = "CreateMetricCategory"
-
-LAUNCH_TEMPLATE_INSTANCE_NETWORK_INTERFACE_SPECIFICATION: StaticSchema = (
-    18,
-    n0,
-    _LTINIS,
-    0,
-    (
-        _ACIA,
-        _APIAsso,
-        _DOT,
-        _Des,
-        _DI,
-        _G,
-        _ITnte,
-        _IAC,
-        _IAp,
-        _NII,
-        _PIAr,
-        _PIAri,
-        _SPIAC,
-        _SIu,
-        _NCI,
-        _IPpvr,
-        _IPCp,
-        _IPp,
-        _IPC,
-        _PIrim,
-        _ESS,
-        _CTSo,
-        _EQC,
-    ),
-    (
-        (lambda: schemas.BOOLEAN, {_aQN: _ACIA, _sN: _aCIA}),
-        (lambda: schemas.BOOLEAN, {_aQN: _APIAsso, _sN: _aPIA}),
-        (lambda: schemas.BOOLEAN, {_aQN: _DOT, _sN: _dOT}),
-        (lambda: schemas.STRING, {_aQN: _Des, _sN: _desc}),
-        (lambda: schemas.INTEGER, {_aQN: _DI, _sN: _dI}),
-        (lambda: schemas.GROUP_ID_STRING_LIST, {_aQN: _GS, _sN: _gS}),
-        (lambda: schemas.STRING, {_aQN: _ITnte, _sN: _iTnt}),
-        (lambda: schemas.INTEGER, {_aQN: _IAC, _sN: _iAC}),
-        (lambda: schemas.INSTANCE_IPV6_ADDRESS_LIST, {_aQN: _IAS, _sN: _iAS}),
-        (lambda: schemas.NETWORK_INTERFACE_ID, {_aQN: _NII, _sN: _nII}),
-        (lambda: schemas.STRING, {_aQN: _PIAr, _sN: _pIAr}),
-        (
-            lambda: schemas.PRIVATE_IP_ADDRESS_SPECIFICATION_LIST,
-            {_aQN: _PIASr, _sN: _pIAS},
-        ),
-        (lambda: schemas.INTEGER, {_aQN: _SPIAC, _sN: _sPIAC}),
-        (lambda: schemas.SUBNET_ID, {_aQN: _SIu, _sN: _sI}),
-        (lambda: schemas.INTEGER, {_aQN: _NCI, _sN: _nCI}),
-        (lambda: schemas.IPV4_PREFIX_LIST_RESPONSE, {_aQN: _IPSpv, _sN: _iPS}),
-        (lambda: schemas.INTEGER, {_aQN: _IPCp, _sN: _iPC}),
-        (lambda: schemas.IPV6_PREFIX_LIST_RESPONSE, {_aQN: _IPSpvr, _sN: _iPSp}),
-        (lambda: schemas.INTEGER, {_aQN: _IPC, _sN: _iPCp}),
-        (lambda: schemas.BOOLEAN, {_aQN: _PIrim, _sN: _pIri}),
-        (
-            lambda: schemas.LAUNCH_TEMPLATE_ENA_SRD_SPECIFICATION,
-            {_aQN: _ESS, _sN: _eSS},
-        ),
-        (lambda: schemas.CONNECTION_TRACKING_SPECIFICATION, {_aQN: _CTSo, _sN: _cTSo}),
-        (lambda: schemas.INTEGER, {_aQN: _EQC, _sN: _eQC}),
-    ),
-)
+_AMv = "AvailabilityMode"
+_ZONAL = "ZONAL"
+_zo = "zonal"
+_AZA = "AvailabilityZoneAddress"
+_AZAv = "AvailabilityZoneAddresses"
+_CTo = "ConnectivityType"
+_PUBLIC = "PUBLIC"
+_CNGI = "CreateNatGatewayInput"
+_cCNGR = "com.amazonaws.ec2#CreateNatGatewayRequest"
+_SAI = "SecondaryAllocationIds"
+_SAIe = "SecondaryAllocationId"
+_SPIA = "SecondaryPrivateIpAddresses"
+_SPIAe = "SecondaryPrivateIpAddress"
+_CNGO = "CreateNatGatewayOutput"
+_cCNGRo = "com.amazonaws.ec2#CreateNatGatewayResult"
+_CNG = "CreateNatGateway"
 
 LAUNCH_TEMPLATE_INSTANCE_NETWORK_INTERFACE_SPECIFICATION_LIST: StaticSchema = (
     16,
@@ -497,7 +427,12 @@ LAUNCH_TEMPLATE_INSTANCE_NETWORK_INTERFACE_SPECIFICATION_LIST: StaticSchema = (
     _LTINISL,
     0,
     (_me,),
-    ((LAUNCH_TEMPLATE_INSTANCE_NETWORK_INTERFACE_SPECIFICATION, {_sN: _i}),),
+    (
+        (
+            lambda: schemas.LAUNCH_TEMPLATE_INSTANCE_NETWORK_INTERFACE_SPECIFICATION,
+            {_sN: _i},
+        ),
+    ),
 )
 
 LAUNCH_TEMPLATE_NETWORK_PERFORMANCE_OPTIONS: StaticSchema = (
@@ -748,7 +683,7 @@ CREATE_LOCAL_GATEWAY_ROUTE_INPUT: StaticSchema = (
     (_DCB, _LGRTI, _LGVIGI, _DR, _NII, _DPLI),
     (
         (lambda: schemas.STRING, 0),
-        (lambda: schemas.LOCAL_GATEWAY_ROUTETABLE_ID, 1),
+        (lambda: schemas.LOCAL_GATEWAY_ROUTETABLE_ID, {_sO: None, _smi: None}),
         (LOCAL_GATEWAY_VIRTUAL_INTERFACE_GROUP_ID, 0),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.NETWORK_INTERFACE_ID, 0),
@@ -838,7 +773,7 @@ CREATE_LOCAL_GATEWAY_ROUTE_TABLE_INPUT: StaticSchema = (
     {_sSI: _cCLGRTR, _sm: None},
     (_LGI, _Mo, _TSa, _DR),
     (
-        (LOCAL_GATEWAY_ID, 1),
+        (LOCAL_GATEWAY_ID, {_sO: None, _smi: None}),
         (LOCAL_GATEWAY_ROUTE_TABLE_MODE, 0),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
         (lambda: schemas.BOOLEAN, 0),
@@ -902,8 +837,8 @@ CREATE_LOCAL_GATEWAY_ROUTE_TABLE_VIRTUAL_INTERFACE_GROUP_ASSOCIATION_INPUT: Stat
     {_sSI: _cCLGRTVIGAR, _sm: None},
     (_LGRTI, _LGVIGI, _TSa, _DR),
     (
-        (lambda: schemas.LOCAL_GATEWAY_ROUTETABLE_ID, 1),
-        (LOCAL_GATEWAY_VIRTUAL_INTERFACE_GROUP_ID, 1),
+        (lambda: schemas.LOCAL_GATEWAY_ROUTETABLE_ID, {_sO: None, _smi: None}),
+        (LOCAL_GATEWAY_VIRTUAL_INTERFACE_GROUP_ID, {_sO: None, _smi: None}),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
         (lambda: schemas.BOOLEAN, 0),
     ),
@@ -968,8 +903,8 @@ CREATE_LOCAL_GATEWAY_ROUTE_TABLE_VPC_ASSOCIATION_INPUT: StaticSchema = (
     {_sSI: _cCLGRTVAR, _sm: None},
     (_LGRTI, _VI, _TSa, _DR),
     (
-        (lambda: schemas.LOCAL_GATEWAY_ROUTETABLE_ID, 1),
-        (lambda: schemas.VPC_ID, 1),
+        (lambda: schemas.LOCAL_GATEWAY_ROUTETABLE_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.VPC_ID, {_sO: None, _smi: None}),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
         (lambda: schemas.BOOLEAN, 0),
     ),
@@ -1028,11 +963,11 @@ CREATE_LOCAL_GATEWAY_VIRTUAL_INTERFACE_INPUT: StaticSchema = (
     {_sSI: _cCLGVIR, _sm: None},
     (_LGVIGI, _OLI, _Vl, _LA, _PAe, _PBA, _TSa, _DR, _PBAE),
     (
-        (LOCAL_GATEWAY_VIRTUAL_INTERFACE_GROUP_ID, 1),
-        (OUTPOST_LAG_ID, 1),
-        (lambda: schemas.INTEGER, 1),
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
+        (LOCAL_GATEWAY_VIRTUAL_INTERFACE_GROUP_ID, {_sO: None, _smi: None}),
+        (OUTPOST_LAG_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.INTEGER, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
         (lambda: schemas.INTEGER, 0),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
         (lambda: schemas.BOOLEAN, 0),
@@ -1116,7 +1051,7 @@ CREATE_LOCAL_GATEWAY_VIRTUAL_INTERFACE_GROUP_INPUT: StaticSchema = (
     {_sSI: _cCLGVIGR, _sm: None},
     (_LGI, _LBAo, _LBAE, _TSa, _DR),
     (
-        (LOCAL_GATEWAY_ID, 1),
+        (LOCAL_GATEWAY_ID, {_sO: None, _smi: None}),
         (lambda: schemas.INTEGER, 0),
         (lambda: schemas.LONG, 0),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
@@ -1215,10 +1150,13 @@ CREATE_MAC_SYSTEM_INTEGRITY_PROTECTION_MODIFICATION_TASK_INPUT: StaticSchema = (
     (
         (lambda: schemas.STRING, 2),
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.INSTANCE_ID, 1),
+        (lambda: schemas.INSTANCE_ID, {_sO: None, _smi: None}),
         (lambda: schemas.SENSITIVE_MAC_CREDENTIALS, 0),
         (MAC_SYSTEM_INTEGRITY_PROTECTION_CONFIGURATION_REQUEST, 0),
-        (lambda: schemas.MAC_SYSTEM_INTEGRITY_PROTECTION_SETTING_STATUS, 1),
+        (
+            lambda: schemas.MAC_SYSTEM_INTEGRITY_PROTECTION_SETTING_STATUS,
+            {_sO: None, _smi: None},
+        ),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
     ),
 )
@@ -1250,11 +1188,11 @@ CREATE_MANAGED_PREFIX_LIST_INPUT: StaticSchema = (
     (_DR, _PLN, _Ent, _ME, _TSa, _AF, _CTl),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
         (lambda: schemas.ADD_PREFIX_LIST_ENTRIES, {_sN: _Entr}),
-        (lambda: schemas.INTEGER, 1),
+        (lambda: schemas.INTEGER, {_sO: None, _smi: None}),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 2),
     ),
 )
@@ -1353,7 +1291,7 @@ CREATE_METRIC_CATEGORY_INPUT: StaticSchema = (
     {_sSI: _cCMCR, _sm: None},
     (_Met, _TSa, _CTl, _DR),
     (
-        (METRIC_CATEGORY_METRIC_NAME_LIST, {_sN: _Metr, _smi: None}),
+        (METRIC_CATEGORY_METRIC_NAME_LIST, {_sN: _Metr, _sO: None, _smi: None}),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
         (lambda: schemas.STRING, 2),
         (lambda: schemas.BOOLEAN, 0),
@@ -1390,4 +1328,89 @@ METRIC_CATEGORY: StaticSchema = (
         (METRIC_CATEGORY_METRIC_NAME_LIST, {_aQN: _MSe, _sN: _mS}),
         (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
     ),
+)
+
+AVAILABILITY_MODE: StaticSchema = (
+    14,
+    n0,
+    _AMv,
+    0,
+    (_ZONAL, _REGIONAL),
+    ((-1, {_sV: _zo}), (-1, {_sV: _regi})),
+)
+
+AVAILABILITY_ZONE_ADDRESS: StaticSchema = (
+    18,
+    n0,
+    _AZA,
+    0,
+    (_AZ, _AZI, _AIl),
+    (
+        (lambda: schemas.AVAILABILITY_ZONE_NAME, 0),
+        (lambda: schemas.AVAILABILITY_ZONE_ID, 0),
+        (lambda: schemas.ALLOCATION_ID_LIST, {_sN: _AI}),
+    ),
+)
+
+AVAILABILITY_ZONE_ADDRESSES: StaticSchema = (
+    16,
+    n0,
+    _AZAv,
+    0,
+    (_me,),
+    ((AVAILABILITY_ZONE_ADDRESS, {_sN: _AZA}),),
+)
+
+CONNECTIVITY_TYPE: StaticSchema = (
+    14,
+    n0,
+    _CTo,
+    0,
+    (_PRIVATE, _PUBLIC),
+    ((-1, {_sV: _priv}), (-1, {_sV: _pu})),
+)
+
+CREATE_NAT_GATEWAY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CNGI,
+    {_sSI: _cCNGR, _sm: None},
+    (_AMv, _AI, _CTl, _DR, _SIu, _VI, _AZAv, _TSa, _CTo, _PIAr, _SAI, _SPIA, _SPIAC),
+    (
+        (AVAILABILITY_MODE, 0),
+        (lambda: schemas.ALLOCATION_ID, 0),
+        (lambda: schemas.STRING, 2),
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.SUBNET_ID, 0),
+        (lambda: schemas.VPC_ID, 0),
+        (AVAILABILITY_ZONE_ADDRESSES, {_sN: _AZA}),
+        (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
+        (CONNECTIVITY_TYPE, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.ALLOCATION_ID_LIST, {_sN: _SAIe}),
+        (lambda: schemas.IP_LIST, {_sN: _SPIAe}),
+        (lambda: schemas.PRIVATE_IP_ADDRESS_COUNT, 0),
+    ),
+)
+
+CREATE_NAT_GATEWAY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CNGO,
+    {_sSI: _cCNGRo, _smit: None},
+    (_CTl, _NG),
+    (
+        (lambda: schemas.STRING, {_aQN: _CTl, _sN: _cTl}),
+        (lambda: schemas.NAT_GATEWAY, {_aQN: _NG, _sN: _nG}),
+    ),
+)
+
+CREATE_NAT_GATEWAY: StaticOperationSchema = (
+    23,
+    n0,
+    _CNG,
+    0,
+    CREATE_NAT_GATEWAY_INPUT,
+    CREATE_NAT_GATEWAY_OUTPUT,
+    (),
 )

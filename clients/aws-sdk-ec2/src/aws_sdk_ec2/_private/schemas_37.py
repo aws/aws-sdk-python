@@ -14,6 +14,7 @@ _i = "item"
 _Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
+_sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _DR = "DryRun"
 _smit = "smithy.api#output"
@@ -33,16 +34,25 @@ _VEI = "VpcEndpointId"
 _SIe = "ServiceId"
 _VEIp = "VpcEndpointIds"
 _dRr = "dryRun"
+_VPCI = "VpcPeeringConnectionId"
 _Id = "Id"
 _id = "id"
 _N = "Name"
 _nam = "name"
+_SN = "ServiceName"
+_sNe = "serviceName"
 _AZ = "AvailabilityZone"
 _aZ = "availabilityZone"
 _AZI = "AvailabilityZoneId"
 _aZI = "availabilityZoneId"
 _II = "InstanceId"
 _iI = "instanceId"
+_AZv = "AvailabilityZones"
+_AZS = "AvailabilityZoneSet"
+_aZS = "availabilityZoneSet"
+_AZIv = "AvailabilityZoneIds"
+_AZIS = "AvailabilityZoneIdSet"
+_aZIS = "availabilityZoneIdSet"
 _MB = "ManagedBy"
 _ds = "default_state"
 _ds_ = "default-state"
@@ -63,10 +73,6 @@ _FCa = "FailureCode"
 _fC = "failureCode"
 _FR = "FailureReason"
 _fR = "failureReason"
-_VATPI = "VerifiedAccessTrustProviderId"
-_VATP = "VerifiedAccessTrustProviders"
-_VATPS = "VerifiedAccessTrustProviderSet"
-_vATPS = "verifiedAccessTrustProviderSet"
 _VIo = "VolumeId"
 _vIo = "volumeId"
 _ST = "StartTime"
@@ -77,9 +83,6 @@ _compl = "completed"
 _oAu = "outpostArn"
 _Op = "Operator"
 _ope = "operator"
-_Vol = "Volumes"
-_VSo = "VolumeSet"
-_vS = "volumeSet"
 _bb = "block_bidirectional"
 _bb_ = "block-bidirectional"
 _bi = "block_ingress"
@@ -99,27 +102,47 @@ _wa = "warning"
 _vEI = "vpcEndpointId"
 _MSo = "ModificationState"
 _mSo = "modificationState"
+_PDNr = "PrivateDnsName"
+_pDNr = "privateDnsName"
 _AAIw = "AwsAccountId"
 _aAI = "awsAccountId"
+_Ow = "Owner"
+_ow = "owner"
 _EIx = "ExclusionId"
 _CTrea = "CreationTimestamp"
 _cTre = "creationTimestamp"
 _SNAe = "ServiceNetworkArn"
+_SRe = "ServiceRegion"
 _DE = "DnsEntry"
 _DES = "DnsEntrySet"
 _PRSay = "PayerResponsibilitySet"
 _DEn = "DnsEntries"
 _dES = "dnsEntrySet"
 _sNAe = "serviceNetworkArn"
+_sRe = "serviceRegion"
 _PRa = "PayerResponsibilities"
 _pRSa = "payerResponsibilitySet"
 _CNIo = "ConnectionNotificationId"
+_ARc = "AcceptanceRequired"
 _NLBAe = "NetworkLoadBalancerArns"
 _GLBA = "GatewayLoadBalancerArns"
+_SIAT = "SupportedIpAddressTypes"
+_PRay = "PayerResponsibility"
+_STe = "ServiceType"
+_sTe = "serviceType"
+_aRc = "acceptanceRequired"
+_MVE = "ManagesVpcEndpoints"
+_mVE = "managesVpcEndpoints"
 _NLBAS = "NetworkLoadBalancerArnSet"
 _nLBAS = "networkLoadBalancerArnSet"
 _GLBAS = "GatewayLoadBalancerArnSet"
 _gLBAS = "gatewayLoadBalancerArnSet"
+_SIATS = "SupportedIpAddressTypeSet"
+_sIATS = "supportedIpAddressTypeSet"
+_BEDN = "BaseEndpointDnsNames"
+_BEDNS = "BaseEndpointDnsNameSet"
+_bEDNS = "baseEndpointDnsNameSet"
+_pRa = "payerResponsibility"
 _SIer = "ServiceIds"
 _Fi = "Filter"
 _Fil = "Filters"
@@ -138,8 +161,6 @@ _eTnd = "endTime"
 _opti = "optimizing"
 _ETv = "EventType"
 _eTv = "eventType"
-_pCr = "productCodes"
-_PCro = "ProductCodes"
 _IMR = "IncludeManagedResources"
 _detai = "details"
 _NB = "NotBefore"
@@ -147,30 +168,7 @@ _nB = "notBefore"
 _Ev = "Events"
 _ESv = "EventsSet"
 _eSv = "eventsSet"
-_VAIL = "VerifiedAccessInstanceList"
-_DVATPMR = "DescribeVerifiedAccessTrustProvidersMaxResults"
-_VATPIL = "VerifiedAccessTrustProviderIdList"
-_DVATPIe = "DescribeVerifiedAccessTrustProvidersInput"
-_cDVATPRom = "com.amazonaws.ec2#DescribeVerifiedAccessTrustProvidersRequest"
-_VATPIe = "VerifiedAccessTrustProviderIds"
-_VATPL = "VerifiedAccessTrustProviderList"
-_DVATPOe = "DescribeVerifiedAccessTrustProvidersOutput"
-_cDVATPRoma = "com.amazonaws.ec2#DescribeVerifiedAccessTrustProvidersResult"
-_DVATPe = "DescribeVerifiedAccessTrustProviders"
-_VAN = "VolumeAttributeName"
-_aEIO = "autoEnableIO"
-_DVAIes = "DescribeVolumeAttributeInput"
-_cDVAR = "com.amazonaws.ec2#DescribeVolumeAttributeRequest"
-_DVAO = "DescribeVolumeAttributeOutput"
-_cDVARo = "com.amazonaws.ec2#DescribeVolumeAttributeResult"
-_AEIO = "AutoEnableIO"
-_DVA = "DescribeVolumeAttribute"
-_DVIes = "DescribeVolumesInput"
-_cDVRom = "com.amazonaws.ec2#DescribeVolumesRequest"
 _VIol = "VolumeIds"
-_DVOes = "DescribeVolumesOutput"
-_cDVRoma = "com.amazonaws.ec2#DescribeVolumesResult"
-_DVes = "DescribeVolumes"
 _DVMI = "DescribeVolumesModificationsInput"
 _cDVMR = "com.amazonaws.ec2#DescribeVolumesModificationsRequest"
 _VMS = "VolumeModificationState"
@@ -396,160 +394,39 @@ _cDVESPRo = "com.amazonaws.ec2#DescribeVpcEndpointServicePermissionsResult"
 _APll = "AllowedPrincipals"
 _aPl = "allowedPrincipals"
 _DVESP = "DescribeVpcEndpointServicePermissions"
-
-VERIFIED_ACCESS_INSTANCE_LIST: StaticSchema = (
-    16,
-    n0,
-    _VAIL,
-    0,
-    (_me,),
-    ((lambda: schemas.VERIFIED_ACCESS_INSTANCE, {_sN: _i}),),
-)
-
-DESCRIBE_VERIFIED_ACCESS_TRUST_PROVIDERS_MAX_RESULTS: StaticSchema = (
-    7,
-    n0,
-    _DVATPMR,
-    0,
-)
-
-VERIFIED_ACCESS_TRUST_PROVIDER_ID_LIST: StaticSchema = (
-    16,
-    n0,
-    _VATPIL,
-    0,
-    (_me,),
-    ((lambda: schemas.VERIFIED_ACCESS_TRUST_PROVIDER_ID, {_sN: _i}),),
-)
-
-DESCRIBE_VERIFIED_ACCESS_TRUST_PROVIDERS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DVATPIe,
-    {_sSI: _cDVATPRom, _sm: None},
-    (_VATPIe, _MR, _NTex, _Fil, _DR),
-    (
-        (VERIFIED_ACCESS_TRUST_PROVIDER_ID_LIST, {_sN: _VATPI}),
-        (DESCRIBE_VERIFIED_ACCESS_TRUST_PROVIDERS_MAX_RESULTS, 0),
-        (lambda: schemas.NEXT_TOKEN, 0),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DESCRIBE_VERIFIED_ACCESS_TRUST_PROVIDERS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DVATPOe,
-    {_sSI: _cDVATPRoma, _smit: None},
-    (_VATP, _NTex),
-    (
-        (lambda: VERIFIED_ACCESS_TRUST_PROVIDER_LIST, {_aQN: _VATPS, _sN: _vATPS}),
-        (lambda: schemas.NEXT_TOKEN, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_VERIFIED_ACCESS_TRUST_PROVIDERS: StaticOperationSchema = (
-    23,
-    n0,
-    _DVATPe,
-    0,
-    DESCRIBE_VERIFIED_ACCESS_TRUST_PROVIDERS_INPUT,
-    DESCRIBE_VERIFIED_ACCESS_TRUST_PROVIDERS_OUTPUT,
-    (),
-)
-
-VERIFIED_ACCESS_TRUST_PROVIDER_LIST: StaticSchema = (
-    16,
-    n0,
-    _VATPL,
-    0,
-    (_me,),
-    ((lambda: schemas.VERIFIED_ACCESS_TRUST_PROVIDER, {_sN: _i}),),
-)
-
-VOLUME_ATTRIBUTE_NAME: StaticSchema = (
-    14,
-    n0,
-    _VAN,
-    0,
-    (_aEIO, _pCr),
-    ((-1, {_sV: _aEIO}), (-1, {_sV: _pCr})),
-)
-
-DESCRIBE_VOLUME_ATTRIBUTE_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DVAIes,
-    {_sSI: _cDVAR, _sm: None},
-    (_Attr, _VIo, _DR),
-    (
-        (VOLUME_ATTRIBUTE_NAME, 1),
-        (lambda: schemas.VOLUME_ID, 1),
-        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-    ),
-)
-
-DESCRIBE_VOLUME_ATTRIBUTE_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DVAO,
-    {_sSI: _cDVARo, _smit: None},
-    (_AEIO, _PCro, _VIo),
-    (
-        (lambda: schemas.ATTRIBUTE_BOOLEAN_VALUE, {_aQN: _AEIO, _sN: _aEIO}),
-        (lambda: schemas.PRODUCT_CODE_LIST, {_aQN: _PCro, _sN: _pCr}),
-        (lambda: schemas.STRING, {_aQN: _VIo, _sN: _vIo}),
-    ),
-)
-
-DESCRIBE_VOLUME_ATTRIBUTE: StaticOperationSchema = (
-    23,
-    n0,
-    _DVA,
-    0,
-    DESCRIBE_VOLUME_ATTRIBUTE_INPUT,
-    DESCRIBE_VOLUME_ATTRIBUTE_OUTPUT,
-    (),
-)
-
-DESCRIBE_VOLUMES_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DVIes,
-    {_sSI: _cDVRom, _sm: None},
-    (_VIol, _IMR, _DR, _Fil, _NTex, _MR),
-    (
-        (lambda: schemas.VOLUME_ID_STRING_LIST, {_sN: _VIo}),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-        (lambda: schemas.INTEGER, {_aQN: _MR, _sN: _mR}),
-    ),
-)
-
-DESCRIBE_VOLUMES_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DVOes,
-    {_sSI: _cDVRoma, _smit: None},
-    (_NTex, _Vol),
-    (
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-        (lambda: schemas.VOLUME_LIST, {_aQN: _VSo, _sN: _vS}),
-    ),
-)
-
-DESCRIBE_VOLUMES: StaticOperationSchema = (
-    23,
-    n0,
-    _DVes,
-    0,
-    DESCRIBE_VOLUMES_INPUT,
-    DESCRIBE_VOLUMES_OUTPUT,
-    (),
-)
+_DVESI = "DescribeVpcEndpointServicesInput"
+_cDVESR = "com.amazonaws.ec2#DescribeVpcEndpointServicesRequest"
+_SNerv = "ServiceNames"
+_SRer = "ServiceRegions"
+_PDD = "PrivateDnsDetails"
+_PDDS = "PrivateDnsDetailsSet"
+_SDe = "ServiceDetail"
+_PDNri = "PrivateDnsNames"
+_PDNS = "PrivateDnsNameSet"
+_pDNS = "privateDnsNameSet"
+_VEPS = "VpcEndpointPolicySupported"
+_vEPS = "vpcEndpointPolicySupported"
+_PDNVS = "PrivateDnsNameVerificationState"
+_pDNVS = "privateDnsNameVerificationState"
+_SDSe = "ServiceDetailSet"
+_DVESO = "DescribeVpcEndpointServicesOutput"
+_cDVESRo = "com.amazonaws.ec2#DescribeVpcEndpointServicesResult"
+_SNSer = "ServiceNameSet"
+_sNSer = "serviceNameSet"
+_SDer = "ServiceDetails"
+_sDSe = "serviceDetailSet"
+_DVES = "DescribeVpcEndpointServices"
+_DVPCMR = "DescribeVpcPeeringConnectionsMaxResults"
+_VPCIL = "VpcPeeringConnectionIdList"
+_DVPCIe = "DescribeVpcPeeringConnectionsInput"
+_cDVPCRom = "com.amazonaws.ec2#DescribeVpcPeeringConnectionsRequest"
+_VPCIp = "VpcPeeringConnectionIds"
+_DVPCOe = "DescribeVpcPeeringConnectionsOutput"
+_cDVPCRoma = "com.amazonaws.ec2#DescribeVpcPeeringConnectionsResult"
+_VPCp = "VpcPeeringConnections"
+_VPCS = "VpcPeeringConnectionSet"
+_vPCS = "vpcPeeringConnectionSet"
+_DVPCe = "DescribeVpcPeeringConnections"
 
 DESCRIBE_VOLUMES_MODIFICATIONS_INPUT: StaticSchema = (
     18,
@@ -877,8 +754,8 @@ DESCRIBE_VPC_ATTRIBUTE_INPUT: StaticSchema = (
     {_sSI: _cDVARom, _sm: None},
     (_Attr, _VI, _DR),
     (
-        (VPC_ATTRIBUTE_NAME, 1),
-        (lambda: schemas.VPC_ID, 1),
+        (VPC_ATTRIBUTE_NAME, {_sO: None, _smi: None}),
+        (lambda: schemas.VPC_ID, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
     ),
 )
@@ -1524,7 +1401,7 @@ DESCRIBE_VPC_ENDPOINT_SERVICE_PERMISSIONS_INPUT: StaticSchema = (
     (_DR, _SIe, _Fil, _MR, _NTex),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.VPC_ENDPOINT_SERVICE_ID, 1),
+        (lambda: schemas.VPC_ENDPOINT_SERVICE_ID, {_sO: None, _smi: None}),
         (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
         (lambda: schemas.INTEGER, 0),
         (lambda: schemas.STRING, 0),
@@ -1550,5 +1427,164 @@ DESCRIBE_VPC_ENDPOINT_SERVICE_PERMISSIONS: StaticOperationSchema = (
     0,
     DESCRIBE_VPC_ENDPOINT_SERVICE_PERMISSIONS_INPUT,
     DESCRIBE_VPC_ENDPOINT_SERVICE_PERMISSIONS_OUTPUT,
+    (),
+)
+
+DESCRIBE_VPC_ENDPOINT_SERVICES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DVESI,
+    {_sSI: _cDVESR, _sm: None},
+    (_DR, _SNerv, _Fil, _MR, _NTex, _SRer),
+    (
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.VALUE_STRING_LIST, {_sN: _SN}),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+        (lambda: schemas.INTEGER, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.VALUE_STRING_LIST, {_sN: _SRe}),
+    ),
+)
+
+DESCRIBE_VPC_ENDPOINT_SERVICES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DVESO,
+    {_sSI: _cDVESRo, _smit: None},
+    (_SNerv, _SDer, _NTex),
+    (
+        (lambda: schemas.VALUE_STRING_LIST, {_aQN: _SNSer, _sN: _sNSer}),
+        (lambda: SERVICE_DETAIL_SET, {_aQN: _SDSe, _sN: _sDSe}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+    ),
+)
+
+DESCRIBE_VPC_ENDPOINT_SERVICES: StaticOperationSchema = (
+    23,
+    n0,
+    _DVES,
+    0,
+    DESCRIBE_VPC_ENDPOINT_SERVICES_INPUT,
+    DESCRIBE_VPC_ENDPOINT_SERVICES_OUTPUT,
+    (),
+)
+
+PRIVATE_DNS_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _PDD,
+    0,
+    (_PDNr,),
+    ((lambda: schemas.STRING, {_aQN: _PDNr, _sN: _pDNr}),),
+)
+
+PRIVATE_DNS_DETAILS_SET: StaticSchema = (
+    16,
+    n0,
+    _PDDS,
+    0,
+    (_me,),
+    ((PRIVATE_DNS_DETAILS, {_sN: _i}),),
+)
+
+SERVICE_DETAIL: StaticSchema = (
+    18,
+    n0,
+    _SDe,
+    0,
+    (
+        _SN,
+        _SIe,
+        _STe,
+        _SRe,
+        _AZIv,
+        _AZv,
+        _Ow,
+        _BEDN,
+        _PDNr,
+        _PDNri,
+        _VEPS,
+        _ARc,
+        _MVE,
+        _PRay,
+        _Tag,
+        _PDNVS,
+        _SIAT,
+    ),
+    (
+        (lambda: schemas.STRING, {_aQN: _SN, _sN: _sNe}),
+        (lambda: schemas.STRING, {_aQN: _SIe, _sN: _sIe}),
+        (lambda: schemas.SERVICE_TYPE_DETAIL_SET, {_aQN: _STe, _sN: _sTe}),
+        (lambda: schemas.STRING, {_aQN: _SRe, _sN: _sRe}),
+        (lambda: schemas.VALUE_STRING_LIST, {_aQN: _AZIS, _sN: _aZIS}),
+        (lambda: schemas.VALUE_STRING_LIST, {_aQN: _AZS, _sN: _aZS}),
+        (lambda: schemas.STRING, {_aQN: _Ow, _sN: _ow}),
+        (lambda: schemas.VALUE_STRING_LIST, {_aQN: _BEDNS, _sN: _bEDNS}),
+        (lambda: schemas.STRING, {_aQN: _PDNr, _sN: _pDNr}),
+        (PRIVATE_DNS_DETAILS_SET, {_aQN: _PDNS, _sN: _pDNS}),
+        (lambda: schemas.BOOLEAN, {_aQN: _VEPS, _sN: _vEPS}),
+        (lambda: schemas.BOOLEAN, {_aQN: _ARc, _sN: _aRc}),
+        (lambda: schemas.BOOLEAN, {_aQN: _MVE, _sN: _mVE}),
+        (lambda: schemas.PAYER_RESPONSIBILITY, {_aQN: _PRay, _sN: _pRa}),
+        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
+        (lambda: schemas.DNS_NAME_STATE, {_aQN: _PDNVS, _sN: _pDNVS}),
+        (lambda: schemas.SUPPORTED_IP_ADDRESS_TYPES, {_aQN: _SIATS, _sN: _sIATS}),
+    ),
+)
+
+SERVICE_DETAIL_SET: StaticSchema = (
+    16,
+    n0,
+    _SDSe,
+    0,
+    (_me,),
+    ((SERVICE_DETAIL, {_sN: _i}),),
+)
+
+DESCRIBE_VPC_PEERING_CONNECTIONS_MAX_RESULTS: StaticSchema = (7, n0, _DVPCMR, 0)
+
+VPC_PEERING_CONNECTION_ID_LIST: StaticSchema = (
+    16,
+    n0,
+    _VPCIL,
+    0,
+    (_me,),
+    ((lambda: schemas.VPC_PEERING_CONNECTION_ID, {_sN: _i}),),
+)
+
+DESCRIBE_VPC_PEERING_CONNECTIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DVPCIe,
+    {_sSI: _cDVPCRom, _sm: None},
+    (_NTex, _MR, _DR, _VPCIp, _Fil),
+    (
+        (lambda: schemas.STRING, 0),
+        (DESCRIBE_VPC_PEERING_CONNECTIONS_MAX_RESULTS, 0),
+        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
+        (VPC_PEERING_CONNECTION_ID_LIST, {_sN: _VPCI}),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+    ),
+)
+
+DESCRIBE_VPC_PEERING_CONNECTIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DVPCOe,
+    {_sSI: _cDVPCRoma, _smit: None},
+    (_VPCp, _NTex),
+    (
+        (lambda: schemas.VPC_PEERING_CONNECTION_LIST, {_aQN: _VPCS, _sN: _vPCS}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+    ),
+)
+
+DESCRIBE_VPC_PEERING_CONNECTIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _DVPCe,
+    0,
+    DESCRIBE_VPC_PEERING_CONNECTIONS_INPUT,
+    DESCRIBE_VPC_PEERING_CONNECTIONS_OUTPUT,
     (),
 )

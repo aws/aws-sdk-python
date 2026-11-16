@@ -14,8 +14,11 @@ _i = "item"
 _Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
+_sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _DR = "DryRun"
+_p = "pending"
+_d = "disabled"
 _smit = "smithy.api#output"
 _RII = "ReservedInstanceId"
 _IC = "InstanceCount"
@@ -25,24 +28,27 @@ _TC = "TargetConfigurations"
 _TCa = "TargetConfiguration"
 _TGAI = "TransitGatewayAttachmentId"
 _re = "rejected"
+_de = "deleting"
 _tGAI = "transitGatewayAttachmentId"
 _St = "State"
 _st = "state"
 _SIu = "SubnetId"
 _RIe = "ResourceId"
 _rI = "resourceId"
-_ROI = "ResourceOwnerId"
-_rOI = "resourceOwnerId"
 _OIw = "OwnerId"
 _oI = "ownerId"
 _Re = "Region"
 _reg = "region"
+_e = "enable"
+_disa = "disable"
 _TSag = "TagSet"
 _tS = "tagSet"
 _VI = "VpcId"
 _dRr = "dryRun"
 _Ci = "Cidr"
 _ci = "cidr"
+_RN = "RuleNumber"
+_rN = "ruleNumber"
 _AZI = "AvailabilityZoneId"
 _aZI = "availabilityZoneId"
 _II = "InstanceId"
@@ -51,24 +57,15 @@ _PLI = "PrefixListId"
 _NIASAI = "NetworkInsightsAccessScopeAnalysisId"
 _NIASI = "NetworkInsightsAccessScopeId"
 _nIASAI = "networkInsightsAccessScopeAnalysisId"
+_en = "enabling"
+_ena = "enabled"
+_disab = "disabling"
 _MB = "ManagedBy"
 _mB = "managedBy"
 _IT = "InstanceType"
 _RNe = "RegionName"
 _Des = "Description"
-_NBG = "NetworkBorderGroup"
-_nBG = "networkBorderGroup"
-_Asn = "Asn"
-_asn = "asn"
-_IPI = "IpamPoolId"
 _desc = "description"
-_ATdv = "AdvertisementType"
-_aTd = "advertisementType"
-_PIo = "PoolId"
-_pIo = "poolId"
-_iPI = "ipamPoolId"
-_RR = "ResourceRegion"
-_rR = "resourceRegion"
 _ROe = "ResourceOwner"
 _rOe = "resourceOwner"
 _Ti = "Timestamp"
@@ -81,15 +78,15 @@ _RSI = "RouteServerId"
 _RTIo = "RouteTableId"
 _rTIo = "routeTableId"
 _GIr = "GroupId"
+_TGRTI = "TransitGatewayRouteTableId"
+_tGRTI = "transitGatewayRouteTableId"
 _gIr = "groupId"
 _smith = "smithy.api#sensitive"
 _GN = "GroupName"
 _gN = "groupName"
 _IIRAI = "IpamInternetRegistryAssociationId"
-_DIe = "DeltaId"
 _Pre = "Prefix"
 _pre = "prefix"
-_ST = "StartTime"
 _iC = "instanceCount"
 _CC = "CurrencyCode"
 _cC = "currencyCode"
@@ -138,7 +135,6 @@ _Fil = "Filters"
 _NTex = "NextToken"
 _MR = "MaxResults"
 _nT = "nextToken"
-_ETnd = "EndTime"
 _ITnsta = "InstanceTypes"
 _HP = "HourlyPrice"
 _hP = "hourlyPrice"
@@ -152,41 +148,16 @@ _ASn = "AnalysisStatus"
 _RNeg = "RegionNames"
 _tCa = "targetConfiguration"
 _TCar = "TargetCapacity"
+_TGANGSS = "TransitGatewayAttachmentNatGatewaySupportState"
 _NGSat = "NatGatewaySupport"
 _nGSa = "natGatewaySupport"
 _SCAE = "SerialConsoleAccessEnabled"
 _sCAE = "serialConsoleAccessEnabled"
+_activ = "activated"
 _IRWM = "InstanceRequirementsWithMetadata"
 _Scor = "Score"
 _scor = "score"
-_STa = "SampleTime"
-_sTa = "sampleTime"
 _mL = "maxLength"
-_IRPF = "IpamRouteProtectionFinding"
-_RSp = "RpkiStatus"
-_rSp = "rpkiStatus"
-_RSpk = "RpkiStrength"
-_rSpk = "rpkiStrength"
-_Roa = "Roas"
-_RSoa = "RoaSet"
-_rSoa = "roaSet"
-_ROou = "RouteOverlaps"
-_ROSo = "RouteOverlapSet"
-_rOSo = "routeOverlapSet"
-_RSTo = "RoaSampleTime"
-_rSTo = "roaSampleTime"
-_IRPFS = "IpamRouteProtectionFindingSet"
-_COh = "ChronologicalOrder"
-_forw = "forward"
-_reve = "reverse"
-_GIRPRDI = "GetIpamRoutingPolicyRegistrationDeltasInput"
-_cGIRPRDR = "com.amazonaws.ec2#GetIpamRoutingPolicyRegistrationDeltasRequest"
-_IRPRDSp = "IpamRoutingPolicyRegistrationDeltaSet"
-_GIRPRDO = "GetIpamRoutingPolicyRegistrationDeltasOutput"
-_cGIRPRDRo = "com.amazonaws.ec2#GetIpamRoutingPolicyRegistrationDeltasResult"
-_IRPRDp = "IpamRoutingPolicyRegistrationDeltas"
-_iRPRDS = "ipamRoutingPolicyRegistrationDeltaSet"
-_GIRPRD = "GetIpamRoutingPolicyRegistrationDeltas"
 _GIRPRI = "GetIpamRoutingPolicyRegistrationsInput"
 _cGIRPRR = "com.amazonaws.ec2#GetIpamRoutingPolicyRegistrationsRequest"
 _IRPRS = "IpamRoutingPolicyRegistrationState"
@@ -412,6 +383,15 @@ _sICRSu = "subnetIpv6CidrReservationSet"
 _GSCR = "GetSubnetCidrReservations"
 _GTGANCI = "GetTransitGatewayAttachmentNatConfigurationInput"
 _cGTGANCR = "com.amazonaws.ec2#GetTransitGatewayAttachmentNatConfigurationRequest"
+_TGNRS = "TransitGatewayNatRuleState"
+_deact = "deactivated"
+_TGNR = "TransitGatewayNatRule"
+_MSC = "MatchSourceCidr"
+_mSC = "matchSourceCidr"
+_NCa = "NatCidr"
+_nCa = "natCidr"
+_TGNRL = "TransitGatewayNatRuleList"
+_TGANSRSV = "TransitGatewayAttachmentNatSystemRouteSupportValue"
 _GTGANCO = "GetTransitGatewayAttachmentNatConfigurationOutput"
 _cGTGANCRo = "com.amazonaws.ec2#GetTransitGatewayAttachmentNatConfigurationResult"
 _NSRS = "NatSystemRouteSupport"
@@ -420,119 +400,22 @@ _NGR = "NatGatewayRules"
 _NGRS = "NatGatewayRuleSet"
 _nGRS = "natGatewayRuleSet"
 _GTGANC = "GetTransitGatewayAttachmentNatConfiguration"
+_GTGAPI = "GetTransitGatewayAttachmentPropagationsInput"
+_cGTGAPR = "com.amazonaws.ec2#GetTransitGatewayAttachmentPropagationsRequest"
+_TGAP = "TransitGatewayAttachmentPropagation"
+_GTGAPO = "GetTransitGatewayAttachmentPropagationsOutput"
+_cGTGAPRo = "com.amazonaws.ec2#GetTransitGatewayAttachmentPropagationsResult"
+_TGAPr = "TransitGatewayAttachmentPropagations"
+_tGAP = "transitGatewayAttachmentPropagations"
+_GTGAP = "GetTransitGatewayAttachmentPropagations"
 
-IPAM_ROUTE_PROTECTION_FINDING: StaticSchema = (
-    18,
-    n0,
-    _IRPF,
-    0,
-    (
-        _ROI,
-        _RR,
-        _IPI,
-        _Ci,
-        _St,
-        _ATdv,
-        _NBG,
-        _PIo,
-        _Asn,
-        _RSp,
-        _RSpk,
-        _Roa,
-        _ROou,
-        _STa,
-        _RSTo,
-    ),
-    (
-        (lambda: schemas.STRING, {_aQN: _ROI, _sN: _rOI}),
-        (lambda: schemas.STRING, {_aQN: _RR, _sN: _rR}),
-        (lambda: schemas.IPAM_POOL_ID, {_aQN: _IPI, _sN: _iPI}),
-        (lambda: schemas.STRING, {_aQN: _Ci, _sN: _ci}),
-        (lambda: schemas.IPAM_BYOIP_CIDR_STATE, {_aQN: _St, _sN: _st}),
-        (lambda: schemas.IPAM_BYOIP_ADVERTISEMENT_TYPE, {_aQN: _ATdv, _sN: _aTd}),
-        (lambda: schemas.STRING, {_aQN: _NBG, _sN: _nBG}),
-        (lambda: schemas.STRING, {_aQN: _PIo, _sN: _pIo}),
-        (lambda: schemas.STRING, {_aQN: _Asn, _sN: _asn}),
-        (lambda: schemas.IPAM_RPKI_STATUS, {_aQN: _RSp, _sN: _rSp}),
-        (lambda: schemas.IPAM_RPKI_STRENGTH, {_aQN: _RSpk, _sN: _rSpk}),
-        (
-            lambda: schemas.IPAM_ROUTE_ORIGIN_AUTHORIZATION_SET,
-            {_aQN: _RSoa, _sN: _rSoa},
-        ),
-        (lambda: schemas.IPAM_ROUTE_OVERLAP_SET, {_aQN: _ROSo, _sN: _rOSo}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _STa, _sN: _sTa}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _RSTo, _sN: _rSTo}),
-    ),
-)
-
-IPAM_ROUTE_PROTECTION_FINDING_SET: StaticSchema = (
-    16,
-    n0,
-    _IRPFS,
-    0,
-    (_me,),
-    ((IPAM_ROUTE_PROTECTION_FINDING, {_sN: _i}),),
-)
-
-CHRONOLOGICAL_ORDER: StaticSchema = (
+TRANSIT_GATEWAY_ATTACHMENT_NAT_GATEWAY_SUPPORT_STATE: StaticSchema = (
     14,
     n0,
-    _COh,
+    _TGANGSS,
     0,
-    (_forw, _reve),
-    ((-1, {_sV: _forw}), (-1, {_sV: _reve})),
-)
-
-GET_IPAM_ROUTING_POLICY_REGISTRATION_DELTAS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GIRPRDI,
-    {_sSI: _cGIRPRDR, _sm: None},
-    (_DR, _IIRAI, _DIe, _ST, _ETnd, _COh, _MR, _NTex),
-    (
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_INTERNET_REGISTRY_ASSOCIATION_ID, 1),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.MILLISECOND_DATE_TIME, 0),
-        (lambda: schemas.MILLISECOND_DATE_TIME, 0),
-        (CHRONOLOGICAL_ORDER, 0),
-        (lambda: schemas.IPAM_MAX_RESULTS, 0),
-        (lambda: schemas.NEXT_TOKEN, 0),
-    ),
-)
-
-GET_IPAM_ROUTING_POLICY_REGISTRATION_DELTAS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GIRPRDO,
-    {_sSI: _cGIRPRDRo, _smit: None},
-    (_IRPRDp, _NTex),
-    (
-        (
-            lambda: IPAM_ROUTING_POLICY_REGISTRATION_DELTA_SET,
-            {_aQN: _IRPRDSp, _sN: _iRPRDS},
-        ),
-        (lambda: schemas.NEXT_TOKEN, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-GET_IPAM_ROUTING_POLICY_REGISTRATION_DELTAS: StaticOperationSchema = (
-    23,
-    n0,
-    _GIRPRD,
-    0,
-    GET_IPAM_ROUTING_POLICY_REGISTRATION_DELTAS_INPUT,
-    GET_IPAM_ROUTING_POLICY_REGISTRATION_DELTAS_OUTPUT,
-    (),
-)
-
-IPAM_ROUTING_POLICY_REGISTRATION_DELTA_SET: StaticSchema = (
-    16,
-    n0,
-    _IRPRDSp,
-    0,
-    (_me,),
-    ((lambda: schemas.IPAM_ROUTING_POLICY_REGISTRATION_DELTA, {_sN: _i}),),
+    (_ena, _d, _en, _disab),
+    ((-1, {_sV: _ena}), (-1, {_sV: _d}), (-1, {_sV: _en}), (-1, {_sV: _disab})),
 )
 
 GET_IPAM_ROUTING_POLICY_REGISTRATIONS_INPUT: StaticSchema = (
@@ -543,7 +426,10 @@ GET_IPAM_ROUTING_POLICY_REGISTRATIONS_INPUT: StaticSchema = (
     (_DR, _IIRAI, _Ci, _MR, _NTex),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_INTERNET_REGISTRY_ASSOCIATION_ID, 1),
+        (
+            lambda: schemas.IPAM_INTERNET_REGISTRY_ASSOCIATION_ID,
+            {_sO: None, _smi: None},
+        ),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.IPAM_MAX_RESULTS, 0),
         (lambda: schemas.NEXT_TOKEN, 0),
@@ -625,7 +511,10 @@ GET_LAUNCH_TEMPLATE_DATA_INPUT: StaticSchema = (
     _GLTDI,
     {_sSI: _cGLTDR, _sm: None},
     (_DR, _II),
-    ((lambda: schemas.BOOLEAN, 0), (lambda: schemas.INSTANCE_ID, 1)),
+    (
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.INSTANCE_ID, {_sO: None, _smi: None}),
+    ),
 )
 
 GET_LAUNCH_TEMPLATE_DATA_OUTPUT: StaticSchema = (
@@ -657,7 +546,7 @@ GET_MANAGED_PREFIX_LIST_ASSOCIATIONS_INPUT: StaticSchema = (
     (_DR, _PLI, _MR, _NTex),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.PREFIX_LIST_RESOURCE_ID, 1),
+        (lambda: schemas.PREFIX_LIST_RESOURCE_ID, {_sO: None, _smi: None}),
         (GET_MANAGED_PREFIX_LIST_ASSOCIATIONS_MAX_RESULTS, 0),
         (lambda: schemas.NEXT_TOKEN, 0),
     ),
@@ -714,7 +603,7 @@ GET_MANAGED_PREFIX_LIST_ENTRIES_INPUT: StaticSchema = (
     (_DR, _PLI, _TVa, _MR, _NTex),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.PREFIX_LIST_RESOURCE_ID, 1),
+        (lambda: schemas.PREFIX_LIST_RESOURCE_ID, {_sO: None, _smi: None}),
         (lambda: schemas.LONG, 0),
         (lambda: schemas.PREFIX_LIST_MAX_RESULTS, 0),
         (lambda: schemas.NEXT_TOKEN, 0),
@@ -826,7 +715,7 @@ GET_NETWORKING_FLEX_COST_ALLOCATION_POLICY_VERSIONS_INPUT: StaticSchema = (
     {_sSI: _cGNFCAPVR, _sm: None},
     (_FPI, _VTI, _DR),
     (
-        (lambda: schemas.FLEX_COST_ALLOCATION_POLICY_ID, 1),
+        (lambda: schemas.FLEX_COST_ALLOCATION_POLICY_ID, {_sO: None, _smi: None}),
         (FLEX_COST_ALLOCATION_VERSIONS_TO_INCLUDE_LIST, 0),
         (lambda: schemas.BOOLEAN, 0),
     ),
@@ -909,7 +798,10 @@ GET_NETWORK_INSIGHTS_ACCESS_SCOPE_ANALYSIS_FINDINGS_INPUT: StaticSchema = (
     {_sSI: _cGNIASAFR, _sm: None},
     (_NIASAI, _MR, _NTex, _DR),
     (
-        (lambda: schemas.NETWORK_INSIGHTS_ACCESS_SCOPE_ANALYSIS_ID, 1),
+        (
+            lambda: schemas.NETWORK_INSIGHTS_ACCESS_SCOPE_ANALYSIS_ID,
+            {_sO: None, _smi: None},
+        ),
         (GET_NETWORK_INSIGHTS_ACCESS_SCOPE_ANALYSIS_FINDINGS_MAX_RESULTS, 0),
         (lambda: schemas.NEXT_TOKEN, 0),
         (lambda: schemas.BOOLEAN, 0),
@@ -950,7 +842,7 @@ GET_NETWORK_INSIGHTS_ACCESS_SCOPE_CONTENT_INPUT: StaticSchema = (
     {_sSI: _cGNIASCR, _sm: None},
     (_NIASI, _DR),
     (
-        (lambda: schemas.NETWORK_INSIGHTS_ACCESS_SCOPE_ID, 1),
+        (lambda: schemas.NETWORK_INSIGHTS_ACCESS_SCOPE_ID, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, 0),
     ),
 )
@@ -986,7 +878,7 @@ GET_PASSWORD_DATA_INPUT: StaticSchema = (
     {_sSI: _cGPDR, _sm: None},
     (_II, _DR),
     (
-        (lambda: schemas.INSTANCE_ID, 1),
+        (lambda: schemas.INSTANCE_ID, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
     ),
 )
@@ -1024,7 +916,7 @@ GET_RESERVED_INSTANCES_EXCHANGE_QUOTE_INPUT: StaticSchema = (
     (_DR, _RIIe, _TC),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.RESERVED_INSTANCE_ID_SET, {_sN: _RII, _smi: None}),
+        (lambda: schemas.RESERVED_INSTANCE_ID_SET, {_sN: _RII, _sO: None, _smi: None}),
         (lambda: schemas.TARGET_CONFIGURATION_REQUEST_SET, {_sN: _TCa}),
     ),
 )
@@ -1131,7 +1023,10 @@ GET_ROUTE_SERVER_ASSOCIATIONS_INPUT: StaticSchema = (
     _GRSAI,
     {_sSI: _cGRSAR, _sm: None},
     (_RSI, _DR),
-    ((lambda: schemas.ROUTE_SERVER_ID, 1), (lambda: schemas.BOOLEAN, 0)),
+    (
+        (lambda: schemas.ROUTE_SERVER_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
 )
 
 GET_ROUTE_SERVER_ASSOCIATIONS_OUTPUT: StaticSchema = (
@@ -1169,7 +1064,7 @@ GET_ROUTE_SERVER_PROPAGATIONS_INPUT: StaticSchema = (
     {_sSI: _cGRSPR, _sm: None},
     (_RSI, _RTIo, _DR),
     (
-        (lambda: schemas.ROUTE_SERVER_ID, 1),
+        (lambda: schemas.ROUTE_SERVER_ID, {_sO: None, _smi: None}),
         (lambda: schemas.ROUTE_TABLE_ID, 0),
         (lambda: schemas.BOOLEAN, 0),
     ),
@@ -1210,7 +1105,7 @@ GET_ROUTE_SERVER_ROUTING_DATABASE_INPUT: StaticSchema = (
     {_sSI: _cGRSRDR, _sm: None},
     (_RSI, _NTex, _MR, _DR, _Fil),
     (
-        (lambda: schemas.ROUTE_SERVER_ID, 1),
+        (lambda: schemas.ROUTE_SERVER_ID, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.ROUTE_SERVER_MAX_RESULTS, 0),
         (lambda: schemas.BOOLEAN, 0),
@@ -1326,7 +1221,7 @@ GET_SECURITY_GROUPS_FOR_VPC_INPUT: StaticSchema = (
     {_sSI: _cGSGFVR, _sm: None},
     (_VI, _NTex, _MR, _Fil, _DR),
     (
-        (lambda: schemas.VPC_ID, 1),
+        (lambda: schemas.VPC_ID, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
         (GET_SECURITY_GROUPS_FOR_VPC_REQUEST_MAX_RESULTS, 0),
         (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
@@ -1466,7 +1361,7 @@ GET_SPOT_PLACEMENT_SCORES_INPUT: StaticSchema = (
     (_ITnsta, _TCar, _TCUT, _SAZ, _RNeg, _IRWM, _DR, _MR, _NTex, _ILZ),
     (
         (INSTANCE_TYPES, {_sN: _IT}),
-        (SPOT_PLACEMENT_SCORES_TARGET_CAPACITY, 1),
+        (SPOT_PLACEMENT_SCORES_TARGET_CAPACITY, {_sO: None, _smi: None}),
         (lambda: schemas.TARGET_CAPACITY_UNIT_TYPE, 0),
         (lambda: schemas.BOOLEAN, 0),
         (REGION_NAMES, {_sN: _RNe}),
@@ -1532,7 +1427,7 @@ GET_SUBNET_CIDR_RESERVATIONS_INPUT: StaticSchema = (
     (_Fil, _SIu, _DR, _NTex, _MR),
     (
         (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (lambda: schemas.SUBNET_ID, 1),
+        (lambda: schemas.SUBNET_ID, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.STRING, 0),
         (GET_SUBNET_CIDR_RESERVATIONS_MAX_RESULTS, 0),
@@ -1577,7 +1472,10 @@ GET_TRANSIT_GATEWAY_ATTACHMENT_NAT_CONFIGURATION_INPUT: StaticSchema = (
     _GTGANCI,
     {_sSI: _cGTGANCR, _sm: None},
     (_TGAI, _DR),
-    ((lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, 1), (lambda: schemas.BOOLEAN, 0)),
+    (
+        (lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
 )
 
 GET_TRANSIT_GATEWAY_ATTACHMENT_NAT_CONFIGURATION_OUTPUT: StaticSchema = (
@@ -1589,14 +1487,14 @@ GET_TRANSIT_GATEWAY_ATTACHMENT_NAT_CONFIGURATION_OUTPUT: StaticSchema = (
     (
         (lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, {_aQN: _TGAI, _sN: _tGAI}),
         (
-            lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_NAT_GATEWAY_SUPPORT_STATE,
+            TRANSIT_GATEWAY_ATTACHMENT_NAT_GATEWAY_SUPPORT_STATE,
             {_aQN: _NGSat, _sN: _nGSa},
         ),
         (
-            lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_NAT_SYSTEM_ROUTE_SUPPORT_VALUE,
+            lambda: TRANSIT_GATEWAY_ATTACHMENT_NAT_SYSTEM_ROUTE_SUPPORT_VALUE,
             {_aQN: _NSRS, _sN: _nSRS},
         ),
-        (lambda: schemas.TRANSIT_GATEWAY_NAT_RULE_LIST, {_aQN: _NGRS, _sN: _nGRS}),
+        (lambda: TRANSIT_GATEWAY_NAT_RULE_LIST, {_aQN: _NGRS, _sN: _nGRS}),
     ),
 )
 
@@ -1608,4 +1506,97 @@ GET_TRANSIT_GATEWAY_ATTACHMENT_NAT_CONFIGURATION: StaticOperationSchema = (
     GET_TRANSIT_GATEWAY_ATTACHMENT_NAT_CONFIGURATION_INPUT,
     GET_TRANSIT_GATEWAY_ATTACHMENT_NAT_CONFIGURATION_OUTPUT,
     (),
+)
+
+TRANSIT_GATEWAY_NAT_RULE_STATE: StaticSchema = (
+    14,
+    n0,
+    _TGNRS,
+    0,
+    (_p, _activ, _deact, _de),
+    ((-1, {_sV: _p}), (-1, {_sV: _activ}), (-1, {_sV: _deact}), (-1, {_sV: _de})),
+)
+
+TRANSIT_GATEWAY_NAT_RULE: StaticSchema = (
+    18,
+    n0,
+    _TGNR,
+    0,
+    (_RN, _MSC, _NCa, _St),
+    (
+        (lambda: schemas.INTEGER, {_aQN: _RN, _sN: _rN}),
+        (lambda: schemas.STRING, {_aQN: _MSC, _sN: _mSC}),
+        (lambda: schemas.STRING, {_aQN: _NCa, _sN: _nCa}),
+        (TRANSIT_GATEWAY_NAT_RULE_STATE, {_aQN: _St, _sN: _st}),
+    ),
+)
+
+TRANSIT_GATEWAY_NAT_RULE_LIST: StaticSchema = (
+    16,
+    n0,
+    _TGNRL,
+    0,
+    (_me,),
+    ((TRANSIT_GATEWAY_NAT_RULE, {_sN: _i}),),
+)
+
+TRANSIT_GATEWAY_ATTACHMENT_NAT_SYSTEM_ROUTE_SUPPORT_VALUE: StaticSchema = (
+    14,
+    n0,
+    _TGANSRSV,
+    0,
+    (_e, _disa),
+    ((-1, {_sV: _e}), (-1, {_sV: _disa})),
+)
+
+GET_TRANSIT_GATEWAY_ATTACHMENT_PROPAGATIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GTGAPI,
+    {_sSI: _cGTGAPR, _sm: None},
+    (_TGAI, _Fil, _MR, _NTex, _DR),
+    (
+        (lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+        (lambda: schemas.TRANSIT_GATEWAY_MAX_RESULTS, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+GET_TRANSIT_GATEWAY_ATTACHMENT_PROPAGATIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GTGAPO,
+    {_sSI: _cGTGAPRo, _smit: None},
+    (_TGAPr, _NTex),
+    (
+        (
+            lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_PROPAGATION_LIST,
+            {_aQN: _TGAPr, _sN: _tGAP},
+        ),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+    ),
+)
+
+GET_TRANSIT_GATEWAY_ATTACHMENT_PROPAGATIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _GTGAP,
+    0,
+    GET_TRANSIT_GATEWAY_ATTACHMENT_PROPAGATIONS_INPUT,
+    GET_TRANSIT_GATEWAY_ATTACHMENT_PROPAGATIONS_OUTPUT,
+    (),
+)
+
+TRANSIT_GATEWAY_ATTACHMENT_PROPAGATION: StaticSchema = (
+    18,
+    n0,
+    _TGAP,
+    0,
+    (_TGRTI, _St),
+    (
+        (lambda: schemas.STRING, {_aQN: _TGRTI, _sN: _tGRTI}),
+        (lambda: schemas.TRANSIT_GATEWAY_PROPAGATION_STATE, {_aQN: _St, _sN: _st}),
+    ),
 )

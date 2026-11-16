@@ -13,6 +13,7 @@ _sSI = "smithy.synthetic#originalShapeId"
 _s = "smithy.api#input"
 _sm = "smithy.api#required"
 _sL = "smithy.api#httpLabel"
+_sO = "smithy.api#clientOptional"
 _sN = "smithy.api#jsonName"
 _smi = "smithy.api#output"
 _smith = "smithy.api#http"
@@ -169,7 +170,6 @@ _DRCS = "DetectionRuleConfigurationStatus"
 _PROCESSING = "PROCESSING"
 _EQUALS = "EQUALS"
 _SEVERITY = "SEVERITY"
-_DRFV = "DetectionRuleFilterValue"
 _DRFVe = "DetectionRuleFilterValues"
 _DRF = "DetectionRuleFilter"
 _cond = "condition"
@@ -442,7 +442,7 @@ CLOUD_TRAIL_CONFIGURATION_RESULT: StaticSchema = (
     _CTCR,
     0,
     (_St,),
-    ((lambda: schemas.DATA_SOURCE_STATUS, {_sN: _st, _sm: None}),),
+    ((lambda: schemas.DATA_SOURCE_STATUS, {_sO: None, _sN: _st, _sm: None}),),
 )
 
 DETECTION_RULE_CONFIGURATION_STATUS: StaticSchema = (
@@ -454,15 +454,13 @@ DETECTION_RULE_CONFIGURATION_STATUS: StaticSchema = (
     ((-1, {_sV: _ACTIVE}), (-1, {_sV: _PROCESSING}), (-1, {_sV: _FAILED})),
 )
 
-DETECTION_RULE_FILTER_VALUE: StaticSchema = (3, n0, _DRFV, 0)
-
 DETECTION_RULE_FILTER_VALUES: StaticSchema = (
     16,
     n0,
     _DRFVe,
     0,
     (_me,),
-    ((DETECTION_RULE_FILTER_VALUE, 0),),
+    ((lambda: schemas.DETECTION_RULE_FILTER_VALUE, 0),),
 )
 
 DETECTION_RULE_FILTER: StaticSchema = (
@@ -472,8 +470,8 @@ DETECTION_RULE_FILTER: StaticSchema = (
     0,
     (_N, _Val, _Cond),
     (
-        (lambda: schemas.FILTER_FIELD_NAME, {_sN: _n, _sm: None}),
-        (DETECTION_RULE_FILTER_VALUES, {_sN: _va, _sm: None}),
+        (lambda: schemas.FILTER_FIELD_NAME, {_sO: None, _sN: _n, _sm: None}),
+        (DETECTION_RULE_FILTER_VALUES, {_sO: None, _sN: _va, _sm: None}),
         (lambda: schemas.DETECTION_RULE_FILTER_CONDITION, {_sN: _cond}),
     ),
 )
@@ -494,14 +492,14 @@ DETECTION_RULE_ORG_CONFIGURATION: StaticSchema = (
     0,
     (_RIu, _Mo, _St, _SRt, _IAI, _EAI, _CAr, _UAp, _EAx),
     (
-        (lambda: schemas.RULE_ID, {_sN: _rI, _sm: None}),
-        (lambda: schemas.ASSOCIATION_MODE, {_sN: _mo, _sm: None}),
-        (DETECTION_RULE_CONFIGURATION_STATUS, {_sN: _st, _sm: None}),
+        (lambda: schemas.RULE_ID, {_sO: None, _sN: _rI, _sm: None}),
+        (lambda: schemas.ASSOCIATION_MODE, {_sO: None, _sN: _mo, _sm: None}),
+        (DETECTION_RULE_CONFIGURATION_STATUS, {_sO: None, _sN: _st, _sm: None}),
         (lambda: schemas.STRING, {_sN: _sRt}),
-        (lambda: schemas.DETECTION_RULE_ACCOUNT_IDS, {_sN: _iAI, _sm: None}),
-        (lambda: schemas.DETECTION_RULE_ACCOUNT_IDS, {_sN: _eAI, _sm: None}),
-        (lambda: schemas.TIMESTAMP, {_sN: _cA, _sm: None}),
-        (lambda: schemas.TIMESTAMP, {_sN: _uAp, _sm: None}),
+        (lambda: schemas.DETECTION_RULE_ACCOUNT_IDS, {_sO: None, _sN: _iAI, _sm: None}),
+        (lambda: schemas.DETECTION_RULE_ACCOUNT_IDS, {_sO: None, _sN: _eAI, _sm: None}),
+        (lambda: schemas.TIMESTAMP, {_sO: None, _sN: _cA, _sm: None}),
+        (lambda: schemas.TIMESTAMP, {_sO: None, _sN: _uAp, _sm: None}),
         (lambda: schemas.TIMESTAMP, {_sN: _eA}),
     ),
 )
@@ -513,12 +511,12 @@ DETECTION_RULE_ORG_CONFIGURATION_SUMMARY: StaticSchema = (
     0,
     (_RIu, _Mo, _St, _SRt, _CAr, _UAp, _EAx),
     (
-        (lambda: schemas.RULE_ID, {_sN: _rI, _sm: None}),
-        (lambda: schemas.ASSOCIATION_MODE, {_sN: _mo, _sm: None}),
-        (DETECTION_RULE_CONFIGURATION_STATUS, {_sN: _st, _sm: None}),
+        (lambda: schemas.RULE_ID, {_sO: None, _sN: _rI, _sm: None}),
+        (lambda: schemas.ASSOCIATION_MODE, {_sO: None, _sN: _mo, _sm: None}),
+        (DETECTION_RULE_CONFIGURATION_STATUS, {_sO: None, _sN: _st, _sm: None}),
         (lambda: schemas.STRING, {_sN: _sRt}),
-        (lambda: schemas.TIMESTAMP, {_sN: _cA, _sm: None}),
-        (lambda: schemas.TIMESTAMP, {_sN: _uAp, _sm: None}),
+        (lambda: schemas.TIMESTAMP, {_sO: None, _sN: _cA, _sm: None}),
+        (lambda: schemas.TIMESTAMP, {_sO: None, _sN: _uAp, _sm: None}),
         (lambda: schemas.TIMESTAMP, {_sN: _eA}),
     ),
 )
@@ -674,7 +672,7 @@ DISABLE_ORGANIZATION_ADMIN_ACCOUNT_INPUT: StaticSchema = (
     _DOAAI,
     {_sSI: _cDOAAR, _s: None},
     (_AAId,),
-    ((lambda: schemas.STRING, {_sN: _aAI, _sm: None}),),
+    ((lambda: schemas.STRING, {_sO: None, _sN: _aAI, _sm: None}),),
 )
 
 DISABLE_ORGANIZATION_ADMIN_ACCOUNT_OUTPUT: StaticSchema = (
@@ -783,7 +781,7 @@ DISASSOCIATE_MEMBERS_INPUT: StaticSchema = (
     (_DI, _AIcco),
     (
         (lambda: schemas.DETECTOR_ID, 9),
-        (lambda: schemas.ACCOUNT_IDS, {_sN: _aIcc, _sm: None}),
+        (lambda: schemas.ACCOUNT_IDS, {_sO: None, _sN: _aIcc, _sm: None}),
     ),
 )
 
@@ -793,7 +791,7 @@ DISASSOCIATE_MEMBERS_OUTPUT: StaticSchema = (
     _DMOi,
     {_sSI: _cDMRoma, _smi: None},
     (_UAnp,),
-    ((lambda: schemas.UNPROCESSED_ACCOUNTS, {_sN: _uAn, _sm: None}),),
+    ((lambda: schemas.UNPROCESSED_ACCOUNTS, {_sO: None, _sN: _uAn, _sm: None}),),
 )
 
 DISASSOCIATE_MEMBERS: StaticOperationSchema = (
@@ -877,7 +875,7 @@ DISTRIBUTION: StaticSchema = (
     0,
     (_Dim, _TF, _SBe, _FTi, _TFT, _Reso, _AVtt, _Arc),
     (
-        (DISTRIBUTION_DIMENSION, {_sN: _dim, _sm: None}),
+        (DISTRIBUTION_DIMENSION, {_sO: None, _sN: _dim, _sm: None}),
         (lambda: schemas.COUNT, {_sN: _tF}),
         (lambda: schemas.SEVERITY_BREAKDOWN, {_sN: _sB}),
         (TYPE_DISTRIBUTIONS, {_sN: _fTi}),
@@ -1135,7 +1133,7 @@ ENABLE_ORGANIZATION_ADMIN_ACCOUNT_INPUT: StaticSchema = (
     _EOAAI,
     {_sSI: _cEOAAR, _s: None},
     (_AAId,),
-    ((lambda: schemas.STRING, {_sN: _aAI, _sm: None}),),
+    ((lambda: schemas.STRING, {_sO: None, _sN: _aAI, _sm: None}),),
 )
 
 ENABLE_ORGANIZATION_ADMIN_ACCOUNT_OUTPUT: StaticSchema = (
@@ -1243,8 +1241,8 @@ FETCH_CRITERION: StaticSchema = (
     0,
     (_Fie, _Cond, _Val),
     (
-        (FETCH_FIELD_NAME, {_sN: _fie, _sm: None}),
-        (FETCH_CRITERION_CONDITION, {_sN: _cond, _sm: None}),
+        (FETCH_FIELD_NAME, {_sO: None, _sN: _fie, _sm: None}),
+        (FETCH_CRITERION_CONDITION, {_sO: None, _sN: _cond, _sm: None}),
         (FETCH_FIELD_VALUES, {_sN: _va}),
     ),
 )
@@ -1386,7 +1384,7 @@ FETCH_RECORD: StaticSchema = (
     0,
     (_FTe, _Q, _Resu),
     (
-        (FETCH_TYPE, {_sN: _fTe, _sm: None}),
+        (FETCH_TYPE, {_sO: None, _sN: _fTe, _sm: None}),
         (FETCH_QUERY, {_sN: _q}),
         (FETCH_RESULT, {_sN: _resu}),
     ),

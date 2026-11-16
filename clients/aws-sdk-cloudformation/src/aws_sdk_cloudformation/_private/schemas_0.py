@@ -49,6 +49,7 @@ _RARN = "RoleARN2"
 _LGN = "LogGroupName"
 _LC = "LoggingConfig"
 _LRA = "LogRoleArn"
+_sO = "smithy.api#clientOptional"
 _smit = "smithy.api#required"
 _MV = "MajorVersion"
 _TPTA = "ThirdPartyTypeArn"
@@ -239,11 +240,11 @@ _NC = "NOT_CHECKED"
 _UNKNOWN = "UNKNOWN"
 _UNSUPPORTED = "UNSUPPORTED"
 _RT = "ResourceType"
+_Sc = "Scope"
 _CTl = "ClientToken"
 _RTe = "ResourceTypes"
 _LEE = "LimitExceededException"
 _SPB = "StackPolicyBody"
-_SPURL = "StackPolicyURL"
 
 ACCEPT_TERMS_AND_CONDITIONS: StaticSchema = (2, n0, _ATAC, 0)
 
@@ -360,7 +361,7 @@ LOGGING_CONFIG: StaticSchema = (
     _LC,
     0,
     (_LRA, _LGN),
-    ((ROLE_ARN2, 1), (LOG_GROUP_NAME, 1)),
+    ((ROLE_ARN2, {_sO: None, _smit: None}), (LOG_GROUP_NAME, {_sO: None, _smit: None})),
 )
 
 MAJOR_VERSION: StaticSchema = (8, n0, _MV, 0)
@@ -612,7 +613,7 @@ BATCH_DESCRIBE_TYPE_CONFIGURATIONS_INPUT: StaticSchema = (
     _BDTCI,
     {_s: None},
     (_TCIy,),
-    ((TYPE_CONFIGURATION_IDENTIFIERS, 1),),
+    ((TYPE_CONFIGURATION_IDENTIFIERS, {_sO: None, _smit: None}),),
 )
 
 BATCH_DESCRIBE_TYPE_CONFIGURATIONS_OUTPUT: StaticSchema = (
@@ -759,7 +760,7 @@ CANCEL_UPDATE_STACK_INPUT: StaticSchema = (
     _CUSI,
     {_s: None},
     (_SN, _CRT),
-    ((STACK_NAME, 1), (CLIENT_REQUEST_TOKEN, 0)),
+    ((STACK_NAME, {_sO: None, _smit: None}), (CLIENT_REQUEST_TOKEN, 0)),
 )
 
 CANCEL_UPDATE_STACK_OUTPUT: StaticSchema = (18, n0, _CUSO, {_sSI: _sU, _sm: None})
@@ -1042,6 +1043,8 @@ STACK_RESOURCE_DRIFT_STATUS: StaticSchema = (
 
 RESOURCE_TYPE: StaticSchema = (3, n0, _RT, 0)
 
+SCOPE: StaticSchema = (16, n0, _Sc, 0, (_m,), ((RESOURCE_ATTRIBUTE, 0),))
+
 CLIENT_TOKEN: StaticSchema = (3, n0, _CTl, 0)
 
 RESOURCE_TYPES: StaticSchema = (16, n0, _RTe, 0, (_m,), ((RESOURCE_TYPE, 0),))
@@ -1062,5 +1065,3 @@ LIMIT_EXCEEDED_EXCEPTION: StaticSchema = (
 )
 
 STACK_POLICY_BODY: StaticSchema = (3, n0, _SPB, 0)
-
-STACK_POLICY_URL: StaticSchema = (3, n0, _SPURL, 0)

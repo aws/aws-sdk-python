@@ -11,6 +11,7 @@ n0 = "com.amazonaws.rds"
 _m = "member"
 _sN = "smithy.api#xmlName"
 _sV = "smithy.api#enumValue"
+_sO = "smithy.api#clientOptional"
 _sm = "smithy.api#required"
 _AS = "AllocatedStorage"
 _ST = "StorageThroughput"
@@ -61,8 +62,6 @@ _PBW = "PreferredBackupWindow"
 _IAMDAE = "IAMDatabaseAuthenticationEnabled"
 _DCRI = "DbClusterResourceId"
 _OGN = "OptionGroupName"
-_DBS = "DBSnapshot"
-_DBSIn = "DBSnapshotIdentifier"
 _ICT = "InstanceCreateTime"
 _Io = "Iops"
 _TCA = "TdeCredentialArn"
@@ -139,7 +138,6 @@ _DBCEA = "DBClusterEndpointArn"
 _NCSN = "NcharCharacterSetName"
 _BTa = "BackupTarget"
 _DBIABA = "DBInstanceAutomatedBackupsArn"
-_Ar = "Arn"
 _SIub = "SubnetIdentifier"
 _DBSGDu = "DBSubnetGroupDescription"
 _DBI = "DBInstance"
@@ -152,12 +150,6 @@ _CREATING = "CREATING"
 _cr = "creating"
 _DELETING = "DELETING"
 _de = "deleting"
-_UDBEVF = "UnsupportedDBEngineVersionFault"
-_CDBSIr = "CreateDBSnapshotInput"
-_cCDBSMo = "com.amazonaws.rds#CreateDBSnapshotMessage"
-_CDBSOr = "CreateDBSnapshotOutput"
-_cCDBSRo = "com.amazonaws.rds#CreateDBSnapshotResult"
-_CDBSr = "CreateDBSnapshot"
 _SILu = "SubnetIdentifierList"
 _CDBSGIre = "CreateDBSubnetGroupInput"
 _cCDBSGMom = "com.amazonaws.rds#CreateDBSubnetGroupMessage"
@@ -317,60 +309,6 @@ _DDBIABO = "DeleteDBInstanceAutomatedBackupOutput"
 _cDDBIABR = "com.amazonaws.rds#DeleteDBInstanceAutomatedBackupResult"
 _DDBIAB = "DeleteDBInstanceAutomatedBackup"
 
-ARN: StaticSchema = (3, n0, _Ar, 0)
-
-UNSUPPORTED_DB_ENGINE_VERSION_FAULT: StaticSchema = (
-    18,
-    n0,
-    _UDBEVF,
-    {
-        _smith: _c,
-        _sE: 400,
-        _aQE: MappingProxyType(
-            {"code": "UnsupportedDBEngineVersion", "httpResponseCode": 400}
-        ),
-    },
-    (_me,),
-    ((lambda: schemas.EXCEPTION_MESSAGE, 0),),
-)
-
-CREATE_DB_SNAPSHOT_INPUT: StaticSchema = (
-    18,
-    n0,
-    _CDBSIr,
-    {_sSI: _cCDBSMo, _smi: None},
-    (_DBSIn, _DBII, _Ta),
-    (
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.TAG_LIST, 0),
-    ),
-)
-
-CREATE_DB_SNAPSHOT_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _CDBSOr,
-    {_sSI: _cCDBSRo, _smit: None},
-    (_DBS,),
-    ((lambda: schemas.DB_SNAPSHOT, 0),),
-)
-
-CREATE_DB_SNAPSHOT: StaticOperationSchema = (
-    23,
-    n0,
-    _CDBSr,
-    0,
-    CREATE_DB_SNAPSHOT_INPUT,
-    CREATE_DB_SNAPSHOT_OUTPUT,
-    (
-        lambda: schemas.DB_INSTANCE_NOT_FOUND_FAULT,
-        lambda: schemas.DB_SNAPSHOT_ALREADY_EXISTS_FAULT,
-        lambda: schemas.INVALID_DB_INSTANCE_STATE_FAULT,
-        lambda: schemas.SNAPSHOT_QUOTA_EXCEEDED_FAULT,
-    ),
-)
-
 SUBNET_IDENTIFIER_LIST: StaticSchema = (
     16,
     n0,
@@ -387,9 +325,9 @@ CREATE_DB_SUBNET_GROUP_INPUT: StaticSchema = (
     {_sSI: _cCDBSGMom, _smi: None},
     (_DBSGNu, _DBSGDu, _SIubn, _Ta),
     (
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
-        (SUBNET_IDENTIFIER_LIST, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (SUBNET_IDENTIFIER_LIST, {_sO: None, _sm: None}),
         (lambda: schemas.TAG_LIST, 0),
     ),
 )
@@ -471,8 +409,8 @@ CREATE_EVENT_SUBSCRIPTION_INPUT: StaticSchema = (
     {_sSI: _cCESM, _smi: None},
     (_SN, _STA, _STo, _ECv, _SIou, _E, _Ta),
     (
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.EVENT_CATEGORIES_LIST, 0),
         (lambda: schemas.SOURCE_IDS_LIST, 0),
@@ -601,7 +539,7 @@ CREATE_GLOBAL_CLUSTER_INPUT: StaticSchema = (
     {_sSI: _cCGCM, _smi: None},
     (_GCI, _SDBCI, _En, _EV, _ELS, _DP, _DN, _SE, _Ta),
     (
-        (lambda: schemas.GLOBAL_CLUSTER_IDENTIFIER, 1),
+        (lambda: schemas.GLOBAL_CLUSTER_IDENTIFIER, {_sO: None, _sm: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 0),
@@ -799,9 +737,9 @@ CREATE_INTEGRATION_INPUT: StaticSchema = (
     {_sSI: _cCIM, _smi: None},
     (_SA, _TAa, _INn, _KMSKI, _AEC, _Ta, _DFa, _D),
     (
-        (SOURCE_ARN, 1),
-        (ARN, 1),
-        (INTEGRATION_NAME, 1),
+        (SOURCE_ARN, {_sO: None, _sm: None}),
+        (lambda: schemas.ARN, {_sO: None, _sm: None}),
+        (INTEGRATION_NAME, {_sO: None, _sm: None}),
         (lambda: schemas.STRING, 0),
         (ENCRYPTION_CONTEXT_MAP, 0),
         (lambda: schemas.TAG_LIST, 0),
@@ -818,7 +756,7 @@ CREATE_INTEGRATION_OUTPUT: StaticSchema = (
     (_SA, _TAa, _INn, _IAn, _KMSKI, _AEC, _St, _Ta, _DFa, _D, _CTr, _Er),
     (
         (SOURCE_ARN, 0),
-        (ARN, 0),
+        (lambda: schemas.ARN, 0),
         (INTEGRATION_NAME, 0),
         (lambda: INTEGRATION_ARN, 0),
         (lambda: schemas.STRING, 0),
@@ -855,7 +793,7 @@ INTEGRATION_ERROR: StaticSchema = (
     _IE,
     0,
     (_ECr, _EMr),
-    ((lambda: schemas.STRING, 1), (lambda: schemas.STRING, 0)),
+    ((lambda: schemas.STRING, {_sO: None, _sm: None}), (lambda: schemas.STRING, 0)),
 )
 
 INTEGRATION_ERROR_LIST: StaticSchema = (
@@ -938,10 +876,10 @@ CREATE_OPTION_GROUP_INPUT: StaticSchema = (
     {_sSI: _cCOGMo, _smi: None},
     (_OGN, _EN, _MEV, _OGD, _Ta),
     (
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.TAG_LIST, 0),
     ),
 )
@@ -975,9 +913,9 @@ CREATE_TENANT_DATABASE_INPUT: StaticSchema = (
     {_sSI: _cCTDM, _smi: None},
     (_DBII, _TDBN, _MU, _MUP, _CSN, _NCSN, _MMUP, _MUSKKI, _Ta),
     (
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.SENSITIVE_STRING, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 0),
@@ -1082,7 +1020,7 @@ DELETE_BLUE_GREEN_DEPLOYMENT_INPUT: StaticSchema = (
     {_sSI: _cDBGDR, _smi: None},
     (_BGDI, _DTel),
     (
-        (lambda: schemas.BLUE_GREEN_DEPLOYMENT_IDENTIFIER, 1),
+        (lambda: schemas.BLUE_GREEN_DEPLOYMENT_IDENTIFIER, {_sO: None, _sm: None}),
         (lambda: schemas.BOOLEAN_OPTIONAL, 0),
     ),
 )
@@ -1116,8 +1054,8 @@ DELETE_CUSTOM_DB_ENGINE_VERSION_INPUT: StaticSchema = (
     {_sSI: _cDCDBEVM, _smi: None},
     (_En, _EV),
     (
-        (lambda: schemas.CUSTOM_ENGINE_NAME, 1),
-        (lambda: schemas.CUSTOM_ENGINE_VERSION, 1),
+        (lambda: schemas.CUSTOM_ENGINE_NAME, {_sO: None, _sm: None}),
+        (lambda: schemas.CUSTOM_ENGINE_VERSION, {_sO: None, _sm: None}),
     ),
 )
 
@@ -1244,7 +1182,7 @@ DELETE_DB_CLUSTER_INPUT: StaticSchema = (
     {_sSI: _cDDBCM, _smi: None},
     (_DBCI, _SFS, _FDBSI, _DAB),
     (
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.BOOLEAN_OPTIONAL, 0),
@@ -1300,7 +1238,7 @@ DELETE_DB_CLUSTER_AUTOMATED_BACKUP_INPUT: StaticSchema = (
     _DDBCABI,
     {_sSI: _cDDBCABM, _smi: None},
     (_DCRI,),
-    ((lambda: schemas.STRING, 1),),
+    ((lambda: schemas.STRING, {_sO: None, _sm: None}),),
 )
 
 DELETE_DB_CLUSTER_AUTOMATED_BACKUP_OUTPUT: StaticSchema = (
@@ -1440,7 +1378,7 @@ DELETE_DB_CLUSTER_ENDPOINT_INPUT: StaticSchema = (
     _DDBCEI,
     {_sSI: _cDDBCEM, _smi: None},
     (_DBCEI,),
-    ((lambda: schemas.STRING, 1),),
+    ((lambda: schemas.STRING, {_sO: None, _sm: None}),),
 )
 
 DELETE_DB_CLUSTER_ENDPOINT_OUTPUT: StaticSchema = (
@@ -1483,7 +1421,7 @@ DELETE_DB_CLUSTER_PARAMETER_GROUP_INPUT: StaticSchema = (
     _DDBCPGI,
     {_sSI: _cDDBCPGM, _smi: None},
     (_DBCPGN,),
-    ((lambda: schemas.STRING, 1),),
+    ((lambda: schemas.STRING, {_sO: None, _sm: None}),),
 )
 
 DELETE_DB_CLUSTER_PARAMETER_GROUP_OUTPUT: StaticSchema = (
@@ -1512,7 +1450,7 @@ DELETE_DB_CLUSTER_SNAPSHOT_INPUT: StaticSchema = (
     _DDBCSI,
     {_sSI: _cDDBCSM, _smi: None},
     (_DBCSI,),
-    ((lambda: schemas.STRING, 1),),
+    ((lambda: schemas.STRING, {_sO: None, _sm: None}),),
 )
 
 DELETE_DB_CLUSTER_SNAPSHOT_OUTPUT: StaticSchema = (
@@ -1559,7 +1497,7 @@ DELETE_DB_INSTANCE_INPUT: StaticSchema = (
     {_sSI: _cDDBIM, _smi: None},
     (_DBII, _SFS, _FDBSI, _DAB),
     (
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _sm: None}),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.BOOLEAN_OPTIONAL, 0),

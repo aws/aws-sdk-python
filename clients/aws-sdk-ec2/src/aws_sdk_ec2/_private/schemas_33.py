@@ -14,6 +14,7 @@ _i = "item"
 _Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
+_sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _DR = "DryRun"
 _smit = "smithy.api#output"
@@ -22,8 +23,6 @@ _IC = "InstanceCount"
 _TCa = "TargetConfiguration"
 _St = "State"
 _st = "state"
-_OIw = "OwnerId"
-_oI = "ownerId"
 _Re = "Region"
 _Sta = "Status"
 _sta = "status"
@@ -60,16 +59,12 @@ _sMt = "statusMessage"
 _desc = "description"
 _PIo = "PoolId"
 _pIo = "poolId"
-_OA = "OutpostArn"
 _CTl = "ClientToken"
 _cTl = "clientToken"
 _sc = "scope"
 _RSI = "RouteServerId"
 _RTIo = "RouteTableId"
-_GIr = "GroupId"
 _Sc = "Scope"
-_GN = "GroupName"
-_gN = "groupName"
 _PLIr = "PrefixListIds"
 _RILI = "ReservedInstancesListingId"
 _rILI = "reservedInstancesListingId"
@@ -87,24 +82,22 @@ _uD = "updateDate"
 _RILe = "ReservedInstancesListings"
 _RILS = "ReservedInstancesListingsSet"
 _rILS = "reservedInstancesListingsSet"
-_oAu = "outpostArn"
+_Int = "Interval"
+_int = "interval"
 _Cou = "Count"
 _cou = "count"
 _pp__ = "payment_pending"
 _pp___ = "payment-pending"
 _pf____ = "payment_failed"
 _pf_____ = "payment-failed"
+_AIC = "AvailableInstanceCount"
+_aIC = "availableInstanceCount"
 _ITnst = "InstanceTenancy"
 _iTns = "instanceTenancy"
 _Pla = "Platform"
 _plat = "platform"
 _REGIONAL = "REGIONAL"
 _rNe = "regionName"
-_OLI = "OutpostLagId"
-_oLI = "outpostLagId"
-_LGVIIS = "LocalGatewayVirtualInterfaceIdSet"
-_LGVIIo = "LocalGatewayVirtualInterfaceIds"
-_lGVIIS = "localGatewayVirtualInterfaceIdSet"
 _PLN = "PrefixListName"
 _pLN = "prefixListName"
 _RRVTI = "ReplaceRootVolumeTaskId"
@@ -132,41 +125,17 @@ _MDa = "MaxDuration"
 _MDi = "MinDuration"
 _Dur = "Duration"
 _dur = "duration"
+_HP = "HourlyPrice"
+_hP = "hourlyPrice"
 _reti = "retired"
 _End = "End"
 _end = "end"
 _Star = "Start"
 _star = "start"
-_GNr = "GroupNames"
 _PLre = "PrefixLists"
 _PLSr = "PrefixListSet"
 _pLSr = "prefixListSet"
-_DOLI = "DescribeOutpostLagsInput"
-_cDOLR = "com.amazonaws.ec2#DescribeOutpostLagsRequest"
-_OLIu = "OutpostLagIds"
-_SLVII = "ServiceLinkVirtualInterfaceId"
-_SLVIIS = "ServiceLinkVirtualInterfaceIdSet"
-_OL = "OutpostLag"
-_SLVIIe = "ServiceLinkVirtualInterfaceIds"
-_sLVIIS = "serviceLinkVirtualInterfaceIdSet"
-_OLS = "OutpostLagSet"
-_DOLO = "DescribeOutpostLagsOutput"
-_cDOLRo = "com.amazonaws.ec2#DescribeOutpostLagsResult"
-_OLu = "OutpostLags"
-_oLS = "outpostLagSet"
-_DOLe = "DescribeOutpostLags"
-_PGISL = "PlacementGroupIdStringList"
-_PGSLl = "PlacementGroupStringList"
-_DPGIe = "DescribePlacementGroupsInput"
-_cDPGRo = "com.amazonaws.ec2#DescribePlacementGroupsRequest"
-_GIrou = "GroupIds"
 _PGL = "PlacementGroupList"
-_DPGOe = "DescribePlacementGroupsOutput"
-_cDPGRom = "com.amazonaws.ec2#DescribePlacementGroupsResult"
-_PGl = "PlacementGroups"
-_PGSla = "PlacementGroupSet"
-_pGS = "placementGroupSet"
-_DPGe = "DescribePlacementGroups"
 _PLRISL = "PrefixListResourceIdStringList"
 _DPLIe = "DescribePrefixListsInput"
 _cDPLR = "com.amazonaws.ec2#DescribePrefixListsRequest"
@@ -262,6 +231,7 @@ _cDRIR = "com.amazonaws.ec2#DescribeReservedInstancesRequest"
 _OC = "OfferingClass"
 _OTf = "OfferingType"
 _oTf = "offeringType"
+_Flo = "Float"
 _RCF = "RecurringChargeFrequency"
 _Hou = "Hourly"
 _RCec = "RecurringCharge"
@@ -392,127 +362,54 @@ _LTat = "LatestTime"
 _DSIAMR = "DescribeScheduledInstanceAvailabilityMaxResults"
 _ODRS = "OccurrenceDayRequestSet"
 _ODc = "OccurenceDay"
-
-DESCRIBE_OUTPOST_LAGS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DOLI,
-    {_sSI: _cDOLR, _sm: None},
-    (_OLIu, _Fil, _MR, _NTex, _DR),
-    (
-        (lambda: schemas.OUTPOST_LAG_ID_SET, {_sN: _OLI}),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (lambda: schemas.OUTPOST_LAG_MAX_RESULTS, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DESCRIBE_OUTPOST_LAGS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DOLO,
-    {_sSI: _cDOLRo, _smit: None},
-    (_OLu, _NTex),
-    (
-        (lambda: OUTPOST_LAG_SET, {_aQN: _OLS, _sN: _oLS}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_OUTPOST_LAGS: StaticOperationSchema = (
-    23,
-    n0,
-    _DOLe,
-    0,
-    DESCRIBE_OUTPOST_LAGS_INPUT,
-    DESCRIBE_OUTPOST_LAGS_OUTPUT,
-    (),
-)
-
-SERVICE_LINK_VIRTUAL_INTERFACE_ID: StaticSchema = (3, n0, _SLVII, 0)
-
-SERVICE_LINK_VIRTUAL_INTERFACE_ID_SET: StaticSchema = (
-    16,
-    n0,
-    _SLVIIS,
-    0,
-    (_me,),
-    ((SERVICE_LINK_VIRTUAL_INTERFACE_ID, {_sN: _i}),),
-)
-
-OUTPOST_LAG: StaticSchema = (
-    18,
-    n0,
-    _OL,
-    0,
-    (_OA, _OIw, _St, _OLI, _LGVIIo, _SLVIIe, _Tag),
-    (
-        (lambda: schemas.STRING, {_aQN: _OA, _sN: _oAu}),
-        (lambda: schemas.STRING, {_aQN: _OIw, _sN: _oI}),
-        (lambda: schemas.STRING, {_aQN: _St, _sN: _st}),
-        (lambda: schemas.OUTPOST_LAG_ID, {_aQN: _OLI, _sN: _oLI}),
-        (
-            lambda: schemas.LOCAL_GATEWAY_VIRTUAL_INTERFACE_ID_SET,
-            {_aQN: _LGVIIS, _sN: _lGVIIS},
-        ),
-        (SERVICE_LINK_VIRTUAL_INTERFACE_ID_SET, {_aQN: _SLVIIS, _sN: _sLVIIS}),
-        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
-    ),
-)
-
-OUTPOST_LAG_SET: StaticSchema = (16, n0, _OLS, 0, (_me,), ((OUTPOST_LAG, {_sN: _i}),))
-
-PLACEMENT_GROUP_ID_STRING_LIST: StaticSchema = (
-    16,
-    n0,
-    _PGISL,
-    0,
-    (_me,),
-    ((lambda: schemas.PLACEMENT_GROUP_ID, {_sN: _GIr}),),
-)
-
-PLACEMENT_GROUP_STRING_LIST: StaticSchema = (
-    16,
-    n0,
-    _PGSLl,
-    0,
-    (_me,),
-    ((lambda: schemas.PLACEMENT_GROUP_NAME, 0),),
-)
-
-DESCRIBE_PLACEMENT_GROUPS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DPGIe,
-    {_sSI: _cDPGRo, _sm: None},
-    (_GIrou, _DR, _GNr, _Fil),
-    (
-        (PLACEMENT_GROUP_ID_STRING_LIST, {_sN: _GIr}),
-        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (PLACEMENT_GROUP_STRING_LIST, {_aQN: _GN, _sN: _gN}),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-    ),
-)
-
-DESCRIBE_PLACEMENT_GROUPS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DPGOe,
-    {_sSI: _cDPGRom, _smit: None},
-    (_PGl,),
-    ((lambda: PLACEMENT_GROUP_LIST, {_aQN: _PGSla, _sN: _pGS}),),
-)
-
-DESCRIBE_PLACEMENT_GROUPS: StaticOperationSchema = (
-    23,
-    n0,
-    _DPGe,
-    0,
-    DESCRIBE_PLACEMENT_GROUPS_INPUT,
-    DESCRIBE_PLACEMENT_GROUPS_OUTPUT,
-    (),
-)
+_SIRR = "ScheduledInstanceRecurrenceRequest"
+_ODcc = "OccurrenceDays"
+_ODccu = "OccurrenceDay"
+_ORTE = "OccurrenceRelativeToEnd"
+_OUc = "OccurrenceUnit"
+_DSIAI = "DescribeScheduledInstanceAvailabilityInput"
+_cDSIAR = "com.amazonaws.ec2#DescribeScheduledInstanceAvailabilityRequest"
+_FSSTR = "FirstSlotStartTimeRange"
+_MSDIH = "MaxSlotDurationInHours"
+_MSDIHi = "MinSlotDurationInHours"
+_Rec = "Recurrence"
+_ODS = "OccurrenceDaySet"
+_SIRc = "ScheduledInstanceRecurrence"
+_oDS = "occurrenceDaySet"
+_oRTE = "occurrenceRelativeToEnd"
+_oU = "occurrenceUnit"
+_SIA = "ScheduledInstanceAvailability"
+_FSST = "FirstSlotStartTime"
+_fSST = "firstSlotStartTime"
+_MTDID = "MaxTermDurationInDays"
+_mTDID = "maxTermDurationInDays"
+_MTDIDi = "MinTermDurationInDays"
+_mTDIDi = "minTermDurationInDays"
+_NPet = "NetworkPlatform"
+_nPet = "networkPlatform"
+_PTu = "PurchaseToken"
+_pTu = "purchaseToken"
+_recu = "recurrence"
+_SDIH = "SlotDurationInHours"
+_sDIH = "slotDurationInHours"
+_TSIH = "TotalScheduledInstanceHours"
+_tSIH = "totalScheduledInstanceHours"
+_SIAS = "ScheduledInstanceAvailabilitySet"
+_DSIAO = "DescribeScheduledInstanceAvailabilityOutput"
+_cDSIARo = "com.amazonaws.ec2#DescribeScheduledInstanceAvailabilityResult"
+_sIAS = "scheduledInstanceAvailabilitySet"
+_DSIA = "DescribeScheduledInstanceAvailability"
+_SIIc = "ScheduledInstanceId"
+_SIc = "ScheduledInstance"
+_NSST = "NextSlotStartTime"
+_nSST = "nextSlotStartTime"
+_PSET = "PreviousSlotEndTime"
+_pSET = "previousSlotEndTime"
+_sIIc = "scheduledInstanceId"
+_TED = "TermEndDate"
+_tED = "termEndDate"
+_TSD = "TermStartDate"
+_tSD = "termStartDate"
 
 PLACEMENT_GROUP_LIST: StaticSchema = (
     16,
@@ -949,6 +846,8 @@ DESCRIBE_RESERVED_INSTANCES: StaticOperationSchema = (
     (),
 )
 
+FLOAT: StaticSchema = (9, n0, _Flo, 0)
+
 RECURRING_CHARGE_FREQUENCY: StaticSchema = (
     14,
     n0,
@@ -1045,8 +944,8 @@ RESERVED_INSTANCES: StaticSchema = (
         (lambda: schemas.DATE_TIME, {_aQN: _Star, _sN: _star}),
         (lambda: schemas.DATE_TIME, {_aQN: _End, _sN: _end}),
         (lambda: schemas.LONG, {_aQN: _Dur, _sN: _dur}),
-        (lambda: schemas.FLOAT, {_aQN: _UPs, _sN: _uPs}),
-        (lambda: schemas.FLOAT, {_aQN: _FPix, _sN: _fPix}),
+        (FLOAT, {_aQN: _UPs, _sN: _uPs}),
+        (FLOAT, {_aQN: _FPix, _sN: _fPix}),
         (lambda: schemas.INTEGER, {_aQN: _IC, _sN: _iC}),
         (lambda: schemas.RI_PRODUCT_DESCRIPTION, {_aQN: _PDr, _sN: _pDr}),
         (RESERVED_INSTANCE_STATE, {_aQN: _St, _sN: _st}),
@@ -1355,8 +1254,8 @@ RESERVED_INSTANCES_OFFERING: StaticSchema = (
         (lambda: schemas.INSTANCE_TYPE, {_aQN: _IT, _sN: _iT}),
         (lambda: schemas.STRING, {_aQN: _AZ, _sN: _aZ}),
         (lambda: schemas.LONG, {_aQN: _Dur, _sN: _dur}),
-        (lambda: schemas.FLOAT, {_aQN: _UPs, _sN: _uPs}),
-        (lambda: schemas.FLOAT, {_aQN: _FPix, _sN: _fPix}),
+        (FLOAT, {_aQN: _UPs, _sN: _uPs}),
+        (FLOAT, {_aQN: _FPix, _sN: _fPix}),
         (lambda: schemas.RI_PRODUCT_DESCRIPTION, {_aQN: _PDr, _sN: _pDr}),
     ),
 )
@@ -1598,7 +1497,10 @@ SLOT_DATE_TIME_RANGE_REQUEST: StaticSchema = (
     _SDTRR,
     0,
     (_ETa, _LTat),
-    ((lambda: schemas.DATE_TIME, 1), (lambda: schemas.DATE_TIME, 1)),
+    (
+        (lambda: schemas.DATE_TIME, {_sO: None, _smi: None}),
+        (lambda: schemas.DATE_TIME, {_sO: None, _smi: None}),
+    ),
 )
 
 DESCRIBE_SCHEDULED_INSTANCE_AVAILABILITY_MAX_RESULTS: StaticSchema = (7, n0, _DSIAMR, 0)
@@ -1610,4 +1512,164 @@ OCCURRENCE_DAY_REQUEST_SET: StaticSchema = (
     0,
     (_me,),
     ((lambda: schemas.INTEGER, {_sN: _ODc}),),
+)
+
+SCHEDULED_INSTANCE_RECURRENCE_REQUEST: StaticSchema = (
+    18,
+    n0,
+    _SIRR,
+    0,
+    (_Fr, _Int, _ODcc, _ORTE, _OUc),
+    (
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.INTEGER, 0),
+        (OCCURRENCE_DAY_REQUEST_SET, {_sN: _ODccu}),
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.STRING, 0),
+    ),
+)
+
+DESCRIBE_SCHEDULED_INSTANCE_AVAILABILITY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DSIAI,
+    {_sSI: _cDSIAR, _sm: None},
+    (_DR, _Fil, _FSSTR, _MR, _MSDIH, _MSDIHi, _NTex, _Rec),
+    (
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+        (SLOT_DATE_TIME_RANGE_REQUEST, {_sO: None, _smi: None}),
+        (DESCRIBE_SCHEDULED_INSTANCE_AVAILABILITY_MAX_RESULTS, 0),
+        (lambda: schemas.INTEGER, 0),
+        (lambda: schemas.INTEGER, 0),
+        (lambda: schemas.STRING, 0),
+        (SCHEDULED_INSTANCE_RECURRENCE_REQUEST, {_sO: None, _smi: None}),
+    ),
+)
+
+DESCRIBE_SCHEDULED_INSTANCE_AVAILABILITY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DSIAO,
+    {_sSI: _cDSIARo, _smit: None},
+    (_NTex, _SIAS),
+    (
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+        (
+            lambda: schemas.SCHEDULED_INSTANCE_AVAILABILITY_SET,
+            {_aQN: _SIAS, _sN: _sIAS},
+        ),
+    ),
+)
+
+DESCRIBE_SCHEDULED_INSTANCE_AVAILABILITY: StaticOperationSchema = (
+    23,
+    n0,
+    _DSIA,
+    0,
+    DESCRIBE_SCHEDULED_INSTANCE_AVAILABILITY_INPUT,
+    DESCRIBE_SCHEDULED_INSTANCE_AVAILABILITY_OUTPUT,
+    (),
+)
+
+OCCURRENCE_DAY_SET: StaticSchema = (
+    16,
+    n0,
+    _ODS,
+    0,
+    (_me,),
+    ((lambda: schemas.INTEGER, {_sN: _i}),),
+)
+
+SCHEDULED_INSTANCE_RECURRENCE: StaticSchema = (
+    18,
+    n0,
+    _SIRc,
+    0,
+    (_Fr, _Int, _ODS, _ORTE, _OUc),
+    (
+        (lambda: schemas.STRING, {_aQN: _Fr, _sN: _freq}),
+        (lambda: schemas.INTEGER, {_aQN: _Int, _sN: _int}),
+        (OCCURRENCE_DAY_SET, {_aQN: _ODS, _sN: _oDS}),
+        (lambda: schemas.BOOLEAN, {_aQN: _ORTE, _sN: _oRTE}),
+        (lambda: schemas.STRING, {_aQN: _OUc, _sN: _oU}),
+    ),
+)
+
+SCHEDULED_INSTANCE_AVAILABILITY: StaticSchema = (
+    18,
+    n0,
+    _SIA,
+    0,
+    (
+        _AZ,
+        _AIC,
+        _FSST,
+        _HP,
+        _IT,
+        _MTDID,
+        _MTDIDi,
+        _NPet,
+        _Pla,
+        _PTu,
+        _Rec,
+        _SDIH,
+        _TSIH,
+    ),
+    (
+        (lambda: schemas.STRING, {_aQN: _AZ, _sN: _aZ}),
+        (lambda: schemas.INTEGER, {_aQN: _AIC, _sN: _aIC}),
+        (lambda: schemas.DATE_TIME, {_aQN: _FSST, _sN: _fSST}),
+        (lambda: schemas.STRING, {_aQN: _HP, _sN: _hP}),
+        (lambda: schemas.STRING, {_aQN: _IT, _sN: _iT}),
+        (lambda: schemas.INTEGER, {_aQN: _MTDID, _sN: _mTDID}),
+        (lambda: schemas.INTEGER, {_aQN: _MTDIDi, _sN: _mTDIDi}),
+        (lambda: schemas.STRING, {_aQN: _NPet, _sN: _nPet}),
+        (lambda: schemas.STRING, {_aQN: _Pla, _sN: _plat}),
+        (lambda: schemas.STRING, {_aQN: _PTu, _sN: _pTu}),
+        (SCHEDULED_INSTANCE_RECURRENCE, {_aQN: _Rec, _sN: _recu}),
+        (lambda: schemas.INTEGER, {_aQN: _SDIH, _sN: _sDIH}),
+        (lambda: schemas.INTEGER, {_aQN: _TSIH, _sN: _tSIH}),
+    ),
+)
+
+SCHEDULED_INSTANCE: StaticSchema = (
+    18,
+    n0,
+    _SIc,
+    0,
+    (
+        _AZ,
+        _CD,
+        _HP,
+        _IC,
+        _IT,
+        _NPet,
+        _NSST,
+        _Pla,
+        _PSET,
+        _Rec,
+        _SIIc,
+        _SDIH,
+        _TED,
+        _TSD,
+        _TSIH,
+    ),
+    (
+        (lambda: schemas.STRING, {_aQN: _AZ, _sN: _aZ}),
+        (lambda: schemas.DATE_TIME, {_aQN: _CD, _sN: _cD}),
+        (lambda: schemas.STRING, {_aQN: _HP, _sN: _hP}),
+        (lambda: schemas.INTEGER, {_aQN: _IC, _sN: _iC}),
+        (lambda: schemas.STRING, {_aQN: _IT, _sN: _iT}),
+        (lambda: schemas.STRING, {_aQN: _NPet, _sN: _nPet}),
+        (lambda: schemas.DATE_TIME, {_aQN: _NSST, _sN: _nSST}),
+        (lambda: schemas.STRING, {_aQN: _Pla, _sN: _plat}),
+        (lambda: schemas.DATE_TIME, {_aQN: _PSET, _sN: _pSET}),
+        (SCHEDULED_INSTANCE_RECURRENCE, {_aQN: _Rec, _sN: _recu}),
+        (lambda: schemas.STRING, {_aQN: _SIIc, _sN: _sIIc}),
+        (lambda: schemas.INTEGER, {_aQN: _SDIH, _sN: _sDIH}),
+        (lambda: schemas.DATE_TIME, {_aQN: _TED, _sN: _tED}),
+        (lambda: schemas.DATE_TIME, {_aQN: _TSD, _sN: _tSD}),
+        (lambda: schemas.INTEGER, {_aQN: _TSIH, _sN: _tSIH}),
+    ),
 )

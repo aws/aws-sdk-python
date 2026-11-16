@@ -19,6 +19,7 @@ _TS = "TagSpecification"
 _Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
+_sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _TSa = "TagSpecifications"
 _DR = "DryRun"
@@ -114,7 +115,6 @@ _OA = "OutpostArn"
 _CTl = "ClientToken"
 _cTl = "clientToken"
 _sT = "smithy.api#idempotencyToken"
-_AIl = "AllocationIds"
 _IPC = "Ipv6PrefixCount"
 _IPp = "Ipv6Prefixes"
 _IPpv = "Ipv6Prefix"
@@ -148,8 +148,6 @@ _eEA = "expectedEffectiveAt"
 _RTIo = "RouteTableId"
 _rTIo = "routeTableId"
 _GIr = "GroupId"
-_pu = "public"
-_priv = "private"
 _Ass = "Association"
 _assoc = "association"
 _gIr = "groupId"
@@ -188,7 +186,6 @@ _Op = "Operator"
 _ope = "operator"
 _CTr = "CreateTime"
 _cTr = "createTime"
-_PRIVATE = "PRIVATE"
 _req = "requested"
 _Ty = "Type"
 _ty = "type"
@@ -196,8 +193,6 @@ _IN = "Ipv6Native"
 _iN = "ipv6Native"
 _DISABLED = "DISABLED"
 _ENABLED = "ENABLED"
-_REGIONAL = "REGIONAL"
-_regi = "regional"
 _CAr = "CreatedAt"
 _cAr = "createdAt"
 _ec__ = "ec2"
@@ -235,18 +230,7 @@ _eSS = "enaSrdSpecification"
 _eQC = "enaQueueCount"
 _Ent = "Entries"
 _AMv = "AvailabilityMode"
-_ZONAL = "ZONAL"
-_zo = "zonal"
-_AZA = "AvailabilityZoneAddress"
-_AZAv = "AvailabilityZoneAddresses"
 _CTo = "ConnectivityType"
-_PUBLIC = "PUBLIC"
-_CNGI = "CreateNatGatewayInput"
-_cCNGR = "com.amazonaws.ec2#CreateNatGatewayRequest"
-_SAI = "SecondaryAllocationIds"
-_SAIe = "SecondaryAllocationId"
-_SPIA = "SecondaryPrivateIpAddresses"
-_SPIAe = "SecondaryPrivateIpAddress"
 _NGASat = "NatGatewayApplianceState"
 _ATTACHING = "ATTACHING"
 _ATTACHED = "ATTACHED"
@@ -296,9 +280,6 @@ _aPZ = "autoProvisionZones"
 _AAt = "AttachedAppliances"
 _AASt = "AttachedApplianceSet"
 _aASt = "attachedApplianceSet"
-_CNGO = "CreateNatGatewayOutput"
-_cCNGRo = "com.amazonaws.ec2#CreateNatGatewayResult"
-_CNG = "CreateNatGateway"
 _CNAI = "CreateNetworkAclInput"
 _cCNAR = "com.amazonaws.ec2#CreateNetworkAclRequest"
 _NAA = "NetworkAclAssociation"
@@ -494,91 +475,6 @@ _cCNIRo = "com.amazonaws.ec2#CreateNetworkInterfaceResult"
 _CNIr = "CreateNetworkInterface"
 _FCAPVN = "FlexCostAllocationPolicyVersionNumber"
 
-AVAILABILITY_MODE: StaticSchema = (
-    14,
-    n0,
-    _AMv,
-    0,
-    (_ZONAL, _REGIONAL),
-    ((-1, {_sV: _zo}), (-1, {_sV: _regi})),
-)
-
-AVAILABILITY_ZONE_ADDRESS: StaticSchema = (
-    18,
-    n0,
-    _AZA,
-    0,
-    (_AZ, _AZI, _AIl),
-    (
-        (lambda: schemas.AVAILABILITY_ZONE_NAME, 0),
-        (lambda: schemas.AVAILABILITY_ZONE_ID, 0),
-        (lambda: schemas.ALLOCATION_ID_LIST, {_sN: _AI}),
-    ),
-)
-
-AVAILABILITY_ZONE_ADDRESSES: StaticSchema = (
-    16,
-    n0,
-    _AZAv,
-    0,
-    (_me,),
-    ((AVAILABILITY_ZONE_ADDRESS, {_sN: _AZA}),),
-)
-
-CONNECTIVITY_TYPE: StaticSchema = (
-    14,
-    n0,
-    _CTo,
-    0,
-    (_PRIVATE, _PUBLIC),
-    ((-1, {_sV: _priv}), (-1, {_sV: _pu})),
-)
-
-CREATE_NAT_GATEWAY_INPUT: StaticSchema = (
-    18,
-    n0,
-    _CNGI,
-    {_sSI: _cCNGR, _sm: None},
-    (_AMv, _AI, _CTl, _DR, _SIu, _VI, _AZAv, _TSa, _CTo, _PIAr, _SAI, _SPIA, _SPIAC),
-    (
-        (AVAILABILITY_MODE, 0),
-        (lambda: schemas.ALLOCATION_ID, 0),
-        (lambda: schemas.STRING, 2),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.SUBNET_ID, 0),
-        (lambda: schemas.VPC_ID, 0),
-        (AVAILABILITY_ZONE_ADDRESSES, {_sN: _AZA}),
-        (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
-        (CONNECTIVITY_TYPE, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.ALLOCATION_ID_LIST, {_sN: _SAIe}),
-        (lambda: schemas.IP_LIST, {_sN: _SPIAe}),
-        (lambda: schemas.PRIVATE_IP_ADDRESS_COUNT, 0),
-    ),
-)
-
-CREATE_NAT_GATEWAY_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _CNGO,
-    {_sSI: _cCNGRo, _smit: None},
-    (_CTl, _NG),
-    (
-        (lambda: schemas.STRING, {_aQN: _CTl, _sN: _cTl}),
-        (lambda: NAT_GATEWAY, {_aQN: _NG, _sN: _nG}),
-    ),
-)
-
-CREATE_NAT_GATEWAY: StaticOperationSchema = (
-    23,
-    n0,
-    _CNG,
-    0,
-    CREATE_NAT_GATEWAY_INPUT,
-    CREATE_NAT_GATEWAY_OUTPUT,
-    (),
-)
-
 NAT_GATEWAY_APPLIANCE_STATE: StaticSchema = (
     14,
     n0,
@@ -723,8 +619,8 @@ NAT_GATEWAY: StaticSchema = (
         (lambda: schemas.STRING, {_aQN: _SIu, _sN: _sI}),
         (lambda: schemas.STRING, {_aQN: _VI, _sN: _vI}),
         (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
-        (CONNECTIVITY_TYPE, {_aQN: _CTo, _sN: _cTo}),
-        (AVAILABILITY_MODE, {_aQN: _AMv, _sN: _aMv}),
+        (lambda: schemas.CONNECTIVITY_TYPE, {_aQN: _CTo, _sN: _cTo}),
+        (lambda: schemas.AVAILABILITY_MODE, {_aQN: _AMv, _sN: _aMv}),
         (AUTO_SCALING_IPS_STATE, {_aQN: _ASI, _sN: _aSI}),
         (AUTO_PROVISION_ZONES_STATE, {_aQN: _APZ, _sN: _aPZ}),
         (NAT_GATEWAY_ATTACHED_APPLIANCE_LIST, {_aQN: _AASt, _sN: _aASt}),
@@ -742,7 +638,7 @@ CREATE_NETWORK_ACL_INPUT: StaticSchema = (
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
         (lambda: schemas.STRING, 2),
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (lambda: schemas.VPC_ID, {_aQN: _VI, _sN: _vI, _smi: None}),
+        (lambda: schemas.VPC_ID, {_aQN: _VI, _sN: _vI, _sO: None, _smi: None}),
     ),
 )
 
@@ -865,11 +761,11 @@ CREATE_NETWORK_ACL_ENTRY_INPUT: StaticSchema = (
     (_DR, _NAI, _RN, _P, _RA, _Eg, _CB, _ICB, _ITC, _PR),
     (
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (NETWORK_ACL_ID, {_aQN: _NAI, _sN: _nAI, _smi: None}),
-        (lambda: schemas.INTEGER, {_aQN: _RN, _sN: _rN, _smi: None}),
-        (lambda: schemas.STRING, {_aQN: _P, _sN: _pro, _smi: None}),
-        (RULE_ACTION, {_aQN: _RA, _sN: _rA, _smi: None}),
-        (lambda: schemas.BOOLEAN, {_aQN: _Eg, _sN: _egr, _smi: None}),
+        (NETWORK_ACL_ID, {_aQN: _NAI, _sN: _nAI, _sO: None, _smi: None}),
+        (lambda: schemas.INTEGER, {_aQN: _RN, _sN: _rN, _sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_aQN: _P, _sN: _pro, _sO: None, _smi: None}),
+        (RULE_ACTION, {_aQN: _RA, _sN: _rA, _sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, {_aQN: _Eg, _sN: _egr, _sO: None, _smi: None}),
         (lambda: schemas.STRING, {_aQN: _CB, _sN: _cB}),
         (lambda: schemas.STRING, {_aQN: _ICB, _sN: _iCB}),
         (ICMP_TYPE_CODE, {_sN: _Ic}),
@@ -910,8 +806,8 @@ FLEX_COST_ALLOCATION_CIDR_MAPPING: StaticSchema = (
     0,
     (_CRi, _CL),
     (
-        (FLEX_COST_ALLOCATION_CIDR_MAPPING_CIDR_RANGE_STRING, 1),
-        (FLEX_COST_ALLOCATION_CIDR_LABEL, 1),
+        (FLEX_COST_ALLOCATION_CIDR_MAPPING_CIDR_RANGE_STRING, {_sO: None, _smi: None}),
+        (FLEX_COST_ALLOCATION_CIDR_LABEL, {_sO: None, _smi: None}),
     ),
 )
 
@@ -938,8 +834,11 @@ FLEX_COST_ALLOCATION_CIDR_RANGE_SPECIFICATIONS: StaticSchema = (
     0,
     (_PTre, _Pref),
     (
-        (FLEX_COST_ALLOCATION_CIDR_RANGE_SPECIFICATIONS_PREFIXES_TYPE_STRING, 1),
-        (FLEX_COST_ALLOCATION_CIDR_MAPPING_LIST, 1),
+        (
+            FLEX_COST_ALLOCATION_CIDR_RANGE_SPECIFICATIONS_PREFIXES_TYPE_STRING,
+            {_sO: None, _smi: None},
+        ),
+        (FLEX_COST_ALLOCATION_CIDR_MAPPING_LIST, {_sO: None, _smi: None}),
     ),
 )
 
@@ -994,8 +893,8 @@ INSTANCE_FLEX_COST_ALLOCATION_POLICY_DOCUMENT: StaticSchema = (
     0,
     (_RG, _Dim, _CRSi),
     (
-        (FLEX_COST_ALLOCATION_REPORTING_GRANULARITY_LIST, 1),
-        (FLEX_COST_ALLOCATION_COST_DIMENSION_LIST, 1),
+        (FLEX_COST_ALLOCATION_REPORTING_GRANULARITY_LIST, {_sO: None, _smi: None}),
+        (FLEX_COST_ALLOCATION_COST_DIMENSION_LIST, {_sO: None, _smi: None}),
         (FLEX_COST_ALLOCATION_CIDR_RANGE_SPECIFICATIONS, 0),
     ),
 )
@@ -1007,8 +906,8 @@ NAT_FLEX_COST_ALLOCATION_POLICY_DOCUMENT: StaticSchema = (
     0,
     (_RG, _Dim, _CRSi),
     (
-        (FLEX_COST_ALLOCATION_REPORTING_GRANULARITY_LIST, 1),
-        (FLEX_COST_ALLOCATION_COST_DIMENSION_LIST, 1),
+        (FLEX_COST_ALLOCATION_REPORTING_GRANULARITY_LIST, {_sO: None, _smi: None}),
+        (FLEX_COST_ALLOCATION_COST_DIMENSION_LIST, {_sO: None, _smi: None}),
         (FLEX_COST_ALLOCATION_CIDR_RANGE_SPECIFICATIONS, 0),
     ),
 )
@@ -1029,8 +928,8 @@ PCX_FLEX_COST_ALLOCATION_POLICY_DOCUMENT: StaticSchema = (
     0,
     (_RG, _Dim, _CRSi),
     (
-        (FLEX_COST_ALLOCATION_REPORTING_GRANULARITY_LIST, 1),
-        (FLEX_COST_ALLOCATION_COST_DIMENSION_LIST, 1),
+        (FLEX_COST_ALLOCATION_REPORTING_GRANULARITY_LIST, {_sO: None, _smi: None}),
+        (FLEX_COST_ALLOCATION_COST_DIMENSION_LIST, {_sO: None, _smi: None}),
         (FLEX_COST_ALLOCATION_CIDR_RANGE_SPECIFICATIONS, 0),
     ),
 )
@@ -1042,7 +941,7 @@ CREATE_NETWORKING_FLEX_COST_ALLOCATION_POLICY_INPUT: StaticSchema = (
     {_sSI: _cCNFCAPR, _sm: None},
     (_NRT, _NFPD, _IFPD, _PFPD, _SBE, _Des, _TSa, _CTl, _DR),
     (
-        (FLEX_COST_ALLOCATION_NETWORK_RESOURCE_TYPE, 1),
+        (FLEX_COST_ALLOCATION_NETWORK_RESOURCE_TYPE, {_sO: None, _smi: None}),
         (NAT_FLEX_COST_ALLOCATION_POLICY_DOCUMENT, 0),
         (INSTANCE_FLEX_COST_ALLOCATION_POLICY_DOCUMENT, 0),
         (PCX_FLEX_COST_ALLOCATION_POLICY_DOCUMENT, 0),
@@ -1089,7 +988,7 @@ CREATE_NETWORK_INSIGHTS_ACCESS_SCOPE_INPUT: StaticSchema = (
     (
         (lambda: schemas.ACCESS_SCOPE_PATH_LIST_REQUEST, {_sN: _MPat}),
         (lambda: schemas.ACCESS_SCOPE_PATH_LIST_REQUEST, {_sN: _EPx}),
-        (lambda: schemas.STRING, 3),
+        (lambda: schemas.STRING, {_sO: None, _sT: None, _smi: None}),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
         (lambda: schemas.BOOLEAN, 0),
     ),
@@ -1154,13 +1053,13 @@ CREATE_NETWORK_INSIGHTS_PATH_INPUT: StaticSchema = (
     (
         (lambda: schemas.IP_ADDRESS, 0),
         (lambda: schemas.IP_ADDRESS, 0),
-        (NETWORK_INSIGHTS_RESOURCE_ID, 1),
+        (NETWORK_INSIGHTS_RESOURCE_ID, {_sO: None, _smi: None}),
         (NETWORK_INSIGHTS_RESOURCE_ID, 0),
-        (lambda: schemas.PROTOCOL, 1),
+        (lambda: schemas.PROTOCOL, {_sO: None, _smi: None}),
         (lambda: schemas.PORT, 0),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.STRING, 3),
+        (lambda: schemas.STRING, {_sO: None, _sT: None, _smi: None}),
         (PATH_REQUEST_FILTER, 0),
         (PATH_REQUEST_FILTER, 0),
     ),
@@ -1296,7 +1195,7 @@ CREATE_NETWORK_INTERFACE_INPUT: StaticSchema = (
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.CONNECTION_TRACKING_SPECIFICATION_REQUEST, 0),
         (lambda: schemas.OPERATOR_REQUEST, 0),
-        (lambda: schemas.SUBNET_ID, {_aQN: _SIu, _sN: _sI, _smi: None}),
+        (lambda: schemas.SUBNET_ID, {_aQN: _SIu, _sN: _sI, _sO: None, _smi: None}),
         (lambda: schemas.STRING, {_aQN: _Des, _sN: _desc}),
         (lambda: schemas.STRING, {_aQN: _PIAr, _sN: _pIAr}),
         (lambda: schemas.SECURITY_GROUP_ID_STRING_LIST, {_sN: _SGI}),

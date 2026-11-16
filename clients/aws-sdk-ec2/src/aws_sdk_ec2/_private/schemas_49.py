@@ -13,6 +13,7 @@ _me = "member"
 _i = "item"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
+_sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _DR = "DryRun"
 _PI = "PublicIp"
@@ -55,6 +56,8 @@ _NBG = "NetworkBorderGroup"
 _Asn = "Asn"
 _IPI = "IpamPoolId"
 _BC = "ByoipCidr"
+_PIo = "PoolId"
+_pIo = "poolId"
 _bC = "byoipCidr"
 _def = "default"
 _CTl = "ClientToken"
@@ -63,7 +66,6 @@ _sT = "smithy.api#idempotencyToken"
 _IIn = "InstanceIds"
 _sU = "smithy.api#Unit"
 _IIp = "IpamId"
-_VAII = "VerifiedAccessInstanceId"
 _VATPI = "VerifiedAccessTrustProviderId"
 _DO = "DeviceOptions"
 _PSKU = "PublicSigningKeyUrl"
@@ -174,7 +176,6 @@ _IPCpa = "IpamPoolCidr"
 _iPCpa = "ipamPoolCidr"
 _ISnst = "InstancesSet"
 _iSns = "instancesSet"
-_ALc = "AccessLogs"
 _AEIO = "AutoEnableIO"
 _VM = "VolumeModification"
 _EDH = "EnableDnsHostnames"
@@ -185,13 +186,6 @@ _vBPAO = "vpcBlockPublicAccessOptions"
 _VTOIA = "VpnTunnelOutsideIpAddress"
 _ASId = "AddSubnetIds"
 _RSIe = "RemoveSubnetIds"
-_MVAILCI = "ModifyVerifiedAccessInstanceLoggingConfigurationInput"
-_cMVAILCR = "com.amazonaws.ec2#ModifyVerifiedAccessInstanceLoggingConfigurationRequest"
-_MVAILCO = "ModifyVerifiedAccessInstanceLoggingConfigurationOutput"
-_cMVAILCRo = "com.amazonaws.ec2#ModifyVerifiedAccessInstanceLoggingConfigurationResult"
-_LCog = "LoggingConfiguration"
-_lC = "loggingConfiguration"
-_MVAILC = "ModifyVerifiedAccessInstanceLoggingConfiguration"
 _MVATPDO = "ModifyVerifiedAccessTrustProviderDeviceOptions"
 _MVANAOO = "ModifyVerifiedAccessNativeApplicationOidcOptions"
 _MVATPOO = "ModifyVerifiedAccessTrustProviderOidcOptions"
@@ -388,44 +382,13 @@ _cPIPCR = "com.amazonaws.ec2#ProvisionIpamPoolCidrRequest"
 _PIPCO = "ProvisionIpamPoolCidrOutput"
 _cPIPCRo = "com.amazonaws.ec2#ProvisionIpamPoolCidrResult"
 _PIPC = "ProvisionIpamPoolCidr"
-
-MODIFY_VERIFIED_ACCESS_INSTANCE_LOGGING_CONFIGURATION_INPUT: StaticSchema = (
-    18,
-    n0,
-    _MVAILCI,
-    {_sSI: _cMVAILCR, _sm: None},
-    (_VAII, _ALc, _DR, _CTl),
-    (
-        (lambda: schemas.VERIFIED_ACCESS_INSTANCE_ID, 1),
-        (lambda: schemas.VERIFIED_ACCESS_LOG_OPTIONS, 1),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.STRING, 2),
-    ),
-)
-
-MODIFY_VERIFIED_ACCESS_INSTANCE_LOGGING_CONFIGURATION_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _MVAILCO,
-    {_sSI: _cMVAILCRo, _smit: None},
-    (_LCog,),
-    (
-        (
-            lambda: schemas.VERIFIED_ACCESS_INSTANCE_LOGGING_CONFIGURATION,
-            {_aQN: _LCog, _sN: _lC},
-        ),
-    ),
-)
-
-MODIFY_VERIFIED_ACCESS_INSTANCE_LOGGING_CONFIGURATION: StaticOperationSchema = (
-    23,
-    n0,
-    _MVAILC,
-    0,
-    MODIFY_VERIFIED_ACCESS_INSTANCE_LOGGING_CONFIGURATION_INPUT,
-    MODIFY_VERIFIED_ACCESS_INSTANCE_LOGGING_CONFIGURATION_OUTPUT,
-    (),
-)
+_PPIPCI = "ProvisionPublicIpv4PoolCidrInput"
+_cPPIPCR = "com.amazonaws.ec2#ProvisionPublicIpv4PoolCidrRequest"
+_PPIPCO = "ProvisionPublicIpv4PoolCidrOutput"
+_cPPIPCRo = "com.amazonaws.ec2#ProvisionPublicIpv4PoolCidrResult"
+_PARo = "PoolAddressRange"
+_pAR = "poolAddressRange"
+_PPIPC = "ProvisionPublicIpv4PoolCidr"
 
 MODIFY_VERIFIED_ACCESS_TRUST_PROVIDER_DEVICE_OPTIONS: StaticSchema = (
     18,
@@ -478,7 +441,7 @@ MODIFY_VERIFIED_ACCESS_TRUST_PROVIDER_INPUT: StaticSchema = (
     {_sSI: _cMVATPR, _sm: None},
     (_VATPI, _OO, _DO, _Des, _DR, _CTl, _SSs, _NAOO),
     (
-        (lambda: schemas.VERIFIED_ACCESS_TRUST_PROVIDER_ID, 1),
+        (lambda: schemas.VERIFIED_ACCESS_TRUST_PROVIDER_ID, {_sO: None, _smi: None}),
         (MODIFY_VERIFIED_ACCESS_TRUST_PROVIDER_OIDC_OPTIONS, 0),
         (MODIFY_VERIFIED_ACCESS_TRUST_PROVIDER_DEVICE_OPTIONS, 0),
         (lambda: schemas.STRING, 0),
@@ -516,7 +479,7 @@ MODIFY_VOLUME_INPUT: StaticSchema = (
     (_DR, _VIo, _Si, _VT, _Io, _Th, _MAE),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.VOLUME_ID, 1),
+        (lambda: schemas.VOLUME_ID, {_sO: None, _smi: None}),
         (lambda: schemas.INTEGER, 0),
         (lambda: schemas.VOLUME_TYPE, 0),
         (lambda: schemas.INTEGER, 0),
@@ -552,7 +515,7 @@ MODIFY_VOLUME_ATTRIBUTE_INPUT: StaticSchema = (
     (_AEIO, _VIo, _DR),
     (
         (lambda: schemas.ATTRIBUTE_BOOLEAN_VALUE, 0),
-        (lambda: schemas.VOLUME_ID, 1),
+        (lambda: schemas.VOLUME_ID, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
     ),
 )
@@ -578,7 +541,7 @@ MODIFY_VPC_ATTRIBUTE_INPUT: StaticSchema = (
     (
         (lambda: schemas.ATTRIBUTE_BOOLEAN_VALUE, 0),
         (lambda: schemas.ATTRIBUTE_BOOLEAN_VALUE, 0),
-        (lambda: schemas.VPC_ID, {_aQN: _VI, _sN: _vI, _smi: None}),
+        (lambda: schemas.VPC_ID, {_aQN: _VI, _sN: _vI, _sO: None, _smi: None}),
         (lambda: schemas.ATTRIBUTE_BOOLEAN_VALUE, 0),
     ),
 )
@@ -603,8 +566,8 @@ MODIFY_VPC_BLOCK_PUBLIC_ACCESS_EXCLUSION_INPUT: StaticSchema = (
     (_DR, _EIx, _IGEM),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.VPC_BLOCK_PUBLIC_ACCESS_EXCLUSION_ID, 1),
-        (lambda: schemas.INTERNET_GATEWAY_EXCLUSION_MODE, 1),
+        (lambda: schemas.VPC_BLOCK_PUBLIC_ACCESS_EXCLUSION_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.INTERNET_GATEWAY_EXCLUSION_MODE, {_sO: None, _smi: None}),
     ),
 )
 
@@ -633,7 +596,10 @@ MODIFY_VPC_BLOCK_PUBLIC_ACCESS_OPTIONS_INPUT: StaticSchema = (
     _MVBPAOI,
     {_sSI: _cMVBPAOR, _sm: None},
     (_DR, _IGBM),
-    ((lambda: schemas.BOOLEAN, 0), (lambda: schemas.INTERNET_GATEWAY_BLOCK_MODE, 1)),
+    (
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.INTERNET_GATEWAY_BLOCK_MODE, {_sO: None, _smi: None}),
+    ),
 )
 
 MODIFY_VPC_BLOCK_PUBLIC_ACCESS_OPTIONS_OUTPUT: StaticSchema = (
@@ -663,7 +629,7 @@ MODIFY_VPC_ENCRYPTION_CONTROL_INPUT: StaticSchema = (
     (_DR, _VECI, _Mo, _IGE, _EOIGE, _NGE, _VPGE, _VPE, _LE, _VLE, _EFSE, _GAE, _AGVE),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.VPC_ENCRYPTION_CONTROL_ID, 1),
+        (lambda: schemas.VPC_ENCRYPTION_CONTROL_ID, {_sO: None, _smi: None}),
         (lambda: schemas.VPC_ENCRYPTION_CONTROL_MODE, 0),
         (lambda: schemas.VPC_ENCRYPTION_CONTROL_EXCLUSION_STATE_INPUT, 0),
         (lambda: schemas.VPC_ENCRYPTION_CONTROL_EXCLUSION_STATE_INPUT, 0),
@@ -720,7 +686,7 @@ MODIFY_VPC_ENDPOINT_INPUT: StaticSchema = (
     ),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.VPC_ENDPOINT_ID, 1),
+        (lambda: schemas.VPC_ENDPOINT_ID, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.VPC_ENDPOINT_ROUTE_TABLE_ID_LIST, {_sN: _ARTIdd}),
@@ -763,7 +729,7 @@ MODIFY_VPC_ENDPOINT_CONNECTION_NOTIFICATION_INPUT: StaticSchema = (
     (_DR, _CNIo, _CNAon, _CEo),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.CONNECTION_NOTIFICATION_ID, 1),
+        (lambda: schemas.CONNECTION_NOTIFICATION_ID, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.VALUE_STRING_LIST, 0),
     ),
@@ -797,9 +763,9 @@ MODIFY_VPC_ENDPOINT_PAYER_RESPONSIBILITY_INPUT: StaticSchema = (
     (
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.VPC_ENDPOINT_SERVICE_ID, 0),
-        (lambda: schemas.VPC_ENDPOINT_ID, 1),
-        (lambda: schemas.PAYER_RESPONSIBILITY_TYPE, 1),
-        (lambda: schemas.PAYER_RESPONSIBILITY_SCOPE, 1),
+        (lambda: schemas.VPC_ENDPOINT_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.PAYER_RESPONSIBILITY_TYPE, {_sO: None, _smi: None}),
+        (lambda: schemas.PAYER_RESPONSIBILITY_SCOPE, {_sO: None, _smi: None}),
     ),
 )
 
@@ -847,7 +813,7 @@ MODIFY_VPC_ENDPOINT_SERVICE_CONFIGURATION_INPUT: StaticSchema = (
     ),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.VPC_ENDPOINT_SERVICE_ID, 1),
+        (lambda: schemas.VPC_ENDPOINT_SERVICE_ID, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.BOOLEAN, 0),
@@ -889,8 +855,8 @@ MODIFY_VPC_ENDPOINT_SERVICE_PAYER_RESPONSIBILITY_INPUT: StaticSchema = (
     (_DR, _SIe, _PRay),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.VPC_ENDPOINT_SERVICE_ID, 1),
-        (lambda: schemas.PAYER_RESPONSIBILITY, 1),
+        (lambda: schemas.VPC_ENDPOINT_SERVICE_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.PAYER_RESPONSIBILITY, {_sO: None, _smi: None}),
     ),
 )
 
@@ -921,7 +887,7 @@ MODIFY_VPC_ENDPOINT_SERVICE_PERMISSIONS_INPUT: StaticSchema = (
     (_DR, _SIe, _AAP, _RAP),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.VPC_ENDPOINT_SERVICE_ID, 1),
+        (lambda: schemas.VPC_ENDPOINT_SERVICE_ID, {_sO: None, _smi: None}),
         (lambda: schemas.VALUE_STRING_LIST, 0),
         (lambda: schemas.VALUE_STRING_LIST, 0),
     ),
@@ -972,7 +938,7 @@ MODIFY_VPC_PEERING_CONNECTION_OPTIONS_INPUT: StaticSchema = (
         (PEERING_CONNECTION_OPTIONS_REQUEST, 0),
         (lambda: schemas.BOOLEAN, 0),
         (PEERING_CONNECTION_OPTIONS_REQUEST, 0),
-        (lambda: schemas.VPC_PEERING_CONNECTION_ID, 1),
+        (lambda: schemas.VPC_PEERING_CONNECTION_ID, {_sO: None, _smi: None}),
     ),
 )
 
@@ -1019,7 +985,11 @@ MODIFY_VPC_TENANCY_INPUT: StaticSchema = (
     _MVTI,
     {_sSI: _cMVTR, _sm: None},
     (_VI, _ITnst, _DR),
-    ((lambda: schemas.VPC_ID, 1), (VPC_TENANCY, 1), (lambda: schemas.BOOLEAN, 0)),
+    (
+        (lambda: schemas.VPC_ID, {_sO: None, _smi: None}),
+        (VPC_TENANCY, {_sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
 )
 
 MODIFY_VPC_TENANCY_OUTPUT: StaticSchema = (
@@ -1048,7 +1018,7 @@ MODIFY_VPN_CONNECTION_INPUT: StaticSchema = (
     {_sSI: _cMVCR, _sm: None},
     (_VCIp, _TGI, _CGIu, _VGI, _DR),
     (
-        (lambda: schemas.VPN_CONNECTION_ID, 1),
+        (lambda: schemas.VPN_CONNECTION_ID, {_sO: None, _smi: None}),
         (lambda: schemas.TRANSIT_GATEWAY_ID, 0),
         (lambda: schemas.CUSTOMER_GATEWAY_ID, 0),
         (lambda: schemas.VPN_GATEWAY_ID, 0),
@@ -1082,7 +1052,7 @@ MODIFY_VPN_CONNECTION_OPTIONS_INPUT: StaticSchema = (
     {_sSI: _cMVCOR, _sm: None},
     (_VCIp, _LINC, _RINC, _LINCo, _RINCe, _TB, _DR),
     (
-        (lambda: schemas.VPN_CONNECTION_ID, 1),
+        (lambda: schemas.VPN_CONNECTION_ID, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 0),
@@ -1118,8 +1088,8 @@ MODIFY_VPN_TUNNEL_CERTIFICATE_INPUT: StaticSchema = (
     {_sSI: _cMVTCR, _sm: None},
     (_VCIp, _VTOIA, _DR),
     (
-        (lambda: schemas.VPN_CONNECTION_ID, 1),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.VPN_CONNECTION_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, 0),
     ),
 )
@@ -1201,9 +1171,9 @@ MODIFY_VPN_TUNNEL_OPTIONS_INPUT: StaticSchema = (
     {_sSI: _cMVTOR, _sm: None},
     (_VCIp, _VTOIA, _TO, _DR, _STRk, _PSKS),
     (
-        (lambda: schemas.VPN_CONNECTION_ID, 1),
-        (lambda: schemas.STRING, 1),
-        (MODIFY_VPN_TUNNEL_OPTIONS_SPECIFICATION, 1),
+        (lambda: schemas.VPN_CONNECTION_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
+        (MODIFY_VPN_TUNNEL_OPTIONS_SPECIFICATION, {_sO: None, _smi: None}),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.STRING, 0),
@@ -1236,7 +1206,7 @@ MONITOR_INSTANCES_INPUT: StaticSchema = (
     {_sSI: _cMIRom, _sm: None},
     (_IIn, _MCIe, _DR),
     (
-        (lambda: schemas.INSTANCE_ID_STRING_LIST, {_sN: _II, _smi: None}),
+        (lambda: schemas.INSTANCE_ID_STRING_LIST, {_sN: _II, _sO: None, _smi: None}),
         (lambda: schemas.METRIC_CATEGORY_ID_LIST, {_sN: _MCI}),
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
     ),
@@ -1290,7 +1260,7 @@ MOVE_ADDRESS_TO_VPC_INPUT: StaticSchema = (
     (_DR, _PI),
     (
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (lambda: schemas.STRING, {_aQN: _PI, _sN: _pI, _smi: None}),
+        (lambda: schemas.STRING, {_aQN: _PI, _sN: _pI, _sO: None, _smi: None}),
     ),
 )
 
@@ -1333,9 +1303,9 @@ MOVE_BYOIP_CIDR_TO_IPAM_INPUT: StaticSchema = (
     (_DR, _Ci, _IPI, _IPO),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.IPAM_POOL_ID, 1),
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
+        (lambda: schemas.IPAM_POOL_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
     ),
 )
 
@@ -1367,9 +1337,9 @@ MOVE_CAPACITY_RESERVATION_INSTANCES_INPUT: StaticSchema = (
     (
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.STRING, 2),
-        (lambda: schemas.CAPACITY_RESERVATION_ID, 1),
-        (lambda: schemas.CAPACITY_RESERVATION_ID, 1),
-        (lambda: schemas.INTEGER, 1),
+        (lambda: schemas.CAPACITY_RESERVATION_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.CAPACITY_RESERVATION_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.INTEGER, {_sO: None, _smi: None}),
     ),
 )
 
@@ -1402,7 +1372,10 @@ CIDR_AUTHORIZATION_CONTEXT: StaticSchema = (
     _CAC,
     0,
     (_Me, _Sig),
-    ((lambda: schemas.STRING, 1), (lambda: schemas.STRING, 1)),
+    (
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
+    ),
 )
 
 PROVISION_BYOIP_CIDR_INPUT: StaticSchema = (
@@ -1412,7 +1385,7 @@ PROVISION_BYOIP_CIDR_INPUT: StaticSchema = (
     {_sSI: _cPBCR, _sm: None},
     (_Ci, _CAC, _PAu, _Des, _DR, _PTS, _MRu, _NBG),
     (
-        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
         (CIDR_AUTHORIZATION_CONTEXT, 0),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.STRING, 0),
@@ -1448,7 +1421,10 @@ ASN_AUTHORIZATION_CONTEXT: StaticSchema = (
     _AACs,
     0,
     (_Me, _Sig),
-    ((lambda: schemas.STRING, 1), (lambda: schemas.STRING, 1)),
+    (
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
+    ),
 )
 
 PROVISION_IPAM_BYOASN_INPUT: StaticSchema = (
@@ -1459,9 +1435,9 @@ PROVISION_IPAM_BYOASN_INPUT: StaticSchema = (
     (_DR, _IIp, _Asn, _AACs),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_ID, 1),
-        (lambda: schemas.STRING, 1),
-        (ASN_AUTHORIZATION_CONTEXT, 1),
+        (lambda: schemas.IPAM_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
+        (ASN_AUTHORIZATION_CONTEXT, {_sO: None, _smi: None}),
     ),
 )
 
@@ -1510,7 +1486,7 @@ PROVISION_IPAM_POOL_CIDR_INPUT: StaticSchema = (
     (_DR, _IPI, _Ci, _CAC, _NL, _CTl, _VMe, _IERVTI),
     (
         (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_POOL_ID, 1),
+        (lambda: schemas.IPAM_POOL_ID, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
         (IPAM_CIDR_AUTHORIZATION_CONTEXT, 0),
         (lambda: schemas.INTEGER, 0),
@@ -1536,5 +1512,42 @@ PROVISION_IPAM_POOL_CIDR: StaticOperationSchema = (
     0,
     PROVISION_IPAM_POOL_CIDR_INPUT,
     PROVISION_IPAM_POOL_CIDR_OUTPUT,
+    (),
+)
+
+PROVISION_PUBLIC_IPV4_POOL_CIDR_INPUT: StaticSchema = (
+    18,
+    n0,
+    _PPIPCI,
+    {_sSI: _cPPIPCR, _sm: None},
+    (_DR, _IPI, _PIo, _NL, _NBG),
+    (
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.IPAM_POOL_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.IPV4_POOL_EC2_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.INTEGER, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, 0),
+    ),
+)
+
+PROVISION_PUBLIC_IPV4_POOL_CIDR_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _PPIPCO,
+    {_sSI: _cPPIPCRo, _smit: None},
+    (_PIo, _PARo),
+    (
+        (lambda: schemas.IPV4_POOL_EC2_ID, {_aQN: _PIo, _sN: _pIo}),
+        (lambda: schemas.PUBLIC_IPV4_POOL_RANGE, {_aQN: _PARo, _sN: _pAR}),
+    ),
+)
+
+PROVISION_PUBLIC_IPV4_POOL_CIDR: StaticOperationSchema = (
+    23,
+    n0,
+    _PPIPC,
+    0,
+    PROVISION_PUBLIC_IPV4_POOL_CIDR_INPUT,
+    PROVISION_PUBLIC_IPV4_POOL_CIDR_OUTPUT,
     (),
 )

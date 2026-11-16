@@ -13,6 +13,7 @@ _sSI = "smithy.synthetic#originalShapeId"
 _s = "smithy.api#input"
 _sm = "smithy.api#required"
 _sL = "smithy.api#httpLabel"
+_sO = "smithy.api#clientOptional"
 _sN = "smithy.api#jsonName"
 _smi = "smithy.api#output"
 _T = "Type"
@@ -1033,23 +1034,23 @@ FINDING: StaticSchema = (
         _CDRN,
     ),
     (
-        (lambda: schemas.STRING, {_sN: _aIc, _sm: None}),
-        (lambda: schemas.STRING, {_sN: _ar, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sN: _aIc, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sN: _ar, _sm: None}),
         (lambda: schemas.DOUBLE, {_sN: _con}),
-        (lambda: schemas.STRING, {_sN: _cA, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sN: _cA, _sm: None}),
         (lambda: schemas.STRING, {_sN: _de}),
-        (lambda: schemas.STRING, {_sN: _id, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sN: _id, _sm: None}),
         (lambda: schemas.STRING, {_sN: _par}),
-        (lambda: schemas.STRING, {_sN: _re, _sm: None}),
-        (RESOURCE, {_sN: _res, _sm: None}),
-        (lambda: schemas.STRING, {_sN: _sVc, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sN: _re, _sm: None}),
+        (RESOURCE, {_sO: None, _sN: _res, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sN: _sVc, _sm: None}),
         (SERVICE, {_sN: _ser}),
-        (lambda: schemas.DOUBLE, {_sN: _sev, _sm: None}),
+        (lambda: schemas.DOUBLE, {_sO: None, _sN: _sev, _sm: None}),
         (lambda: schemas.STRING, {_sN: _ti}),
-        (lambda: schemas.FINDING_TYPE, {_sN: _t, _sm: None}),
-        (lambda: schemas.STRING, {_sN: _uAp, _sm: None}),
+        (lambda: schemas.FINDING_TYPE, {_sO: None, _sN: _t, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sN: _uAp, _sm: None}),
         (lambda: schemas.STRING, {_sN: _aASA}),
-        (lambda: schemas.STRING, {_sN: _cDRN}),
+        (lambda: schemas.STRING, {_sO: None, _sN: _cDRN}),
     ),
 )
 
@@ -1206,7 +1207,7 @@ GET_ADMINISTRATOR_ACCOUNT_OUTPUT: StaticSchema = (
     _GAAO,
     {_sSI: _cGAARo, _smi: None},
     (_Ad,),
-    ((lambda: schemas.ADMINISTRATOR, {_sN: _ad, _sm: None}),),
+    ((lambda: schemas.ADMINISTRATOR, {_sO: None, _sN: _ad, _sm: None}),),
 )
 
 GET_ADMINISTRATOR_ACCOUNT: StaticOperationSchema = (
@@ -1239,7 +1240,10 @@ GET_COVERAGE_STATISTICS_INPUT: StaticSchema = (
     (
         (lambda: schemas.DETECTOR_ID, 9),
         (lambda: schemas.COVERAGE_FILTER_CRITERIA, {_sN: _fCilt}),
-        (lambda: schemas.COVERAGE_STATISTICS_TYPE_LIST, {_sN: _sTt, _sm: None}),
+        (
+            lambda: schemas.COVERAGE_STATISTICS_TYPE_LIST,
+            {_sO: None, _sN: _sTt, _sm: None},
+        ),
     ),
 )
 
@@ -1288,7 +1292,7 @@ GET_CUSTOM_DETECTION_RULE_OUTPUT: StaticSchema = (
     _GCDRO,
     {_sSI: _cGCDRRo, _smi: None},
     (_Ru,),
-    ((lambda: RULE_DETAIL, {_sN: _ru, _sm: None}),),
+    ((lambda: RULE_DETAIL, {_sO: None, _sN: _ru, _sm: None}),),
 )
 
 GET_CUSTOM_DETECTION_RULE: StaticOperationSchema = (
@@ -1322,7 +1326,7 @@ RULE_DEFINITION: StaticSchema = (
     _RDul,
     0,
     (_Expr,),
-    ((RULE_EXPRESSION, {_sN: _exp, _sm: None}),),
+    ((RULE_EXPRESSION, {_sO: None, _sN: _exp, _sm: None}),),
 )
 
 RULE_LANGUAGE: StaticSchema = (14, n0, _RLu, 0, (_SQL,), ((-1, {_sV: _SQL}),))
@@ -1342,20 +1346,23 @@ RULE_DETAIL: StaticSchema = (
     0,
     (_RIu, _Ar, _N, _De, _Sev, _DSa, _Ta, _Te, _Se, _Def, _Lan, _Sch, _RMD, _CAr, _UAp),
     (
-        (lambda: schemas.RULE_ID, {_sN: _rI, _sm: None}),
-        (lambda: schemas.DETECTION_RULE_ARN, {_sN: _ar, _sm: None}),
-        (RULE_NAME, {_sN: _n, _sm: None}),
-        (lambda: schemas.DETECTION_RULE_DESCRIPTION, {_sN: _de, _sm: None}),
-        (lambda: schemas.DETECTION_RULE_SEVERITY, {_sN: _sev, _sm: None}),
-        (lambda: schemas.DETECTION_RULE_DATA_SOURCE, {_sN: _dSa, _sm: None}),
-        (MITRE_TACTIC, {_sN: _ta, _sm: None}),
-        (MITRE_TECHNIQUE, {_sN: _te, _sm: None}),
-        (lambda: schemas.DETECTION_RULE_SERVICE_NAME, {_sN: _ser, _sm: None}),
-        (RULE_DEFINITION, {_sN: _def, _sm: None}),
+        (lambda: schemas.RULE_ID, {_sO: None, _sN: _rI, _sm: None}),
+        (lambda: schemas.DETECTION_RULE_ARN, {_sO: None, _sN: _ar, _sm: None}),
+        (RULE_NAME, {_sO: None, _sN: _n, _sm: None}),
+        (lambda: schemas.DETECTION_RULE_DESCRIPTION, {_sO: None, _sN: _de, _sm: None}),
+        (lambda: schemas.DETECTION_RULE_SEVERITY, {_sO: None, _sN: _sev, _sm: None}),
+        (lambda: schemas.DETECTION_RULE_DATA_SOURCE, {_sO: None, _sN: _dSa, _sm: None}),
+        (MITRE_TACTIC, {_sO: None, _sN: _ta, _sm: None}),
+        (MITRE_TECHNIQUE, {_sO: None, _sN: _te, _sm: None}),
+        (
+            lambda: schemas.DETECTION_RULE_SERVICE_NAME,
+            {_sO: None, _sN: _ser, _sm: None},
+        ),
+        (RULE_DEFINITION, {_sO: None, _sN: _def, _sm: None}),
         (RULE_LANGUAGE, {_sN: _lan}),
         (RULE_SCHEMA, {_sN: _sch}),
         (lambda: schemas.DETECTION_RULE_RUNTIME_MONITORING_DETAILS, {_sN: _rMD}),
-        (lambda: schemas.TIMESTAMP, {_sN: _cA, _sm: None}),
+        (lambda: schemas.TIMESTAMP, {_sO: None, _sN: _cA, _sm: None}),
         (lambda: schemas.TIMESTAMP, {_sN: _uAp}),
     ),
 )
@@ -1376,7 +1383,7 @@ GET_CUSTOM_DETECTION_RULE_ASSOCIATION_OUTPUT: StaticSchema = (
     {_sSI: _cGCDRARo, _smi: None},
     (_RA, _Tag),
     (
-        (lambda: schemas.ASSOCIATION_DETAIL, {_sN: _rA, _sm: None}),
+        (lambda: schemas.ASSOCIATION_DETAIL, {_sO: None, _sN: _rA, _sm: None}),
         (lambda: schemas.TAG_MAP, {_sN: _tag}),
     ),
 )
@@ -1412,7 +1419,7 @@ GET_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT: StaticSchema = (
     (_RIu, _Mo),
     (
         (lambda: schemas.RULE_ID, 9),
-        (lambda: schemas.ASSOCIATION_MODE, {_sQ: _mo, _sm: None}),
+        (lambda: schemas.ASSOCIATION_MODE, {_sO: None, _sQ: _mo, _sm: None}),
     ),
 )
 
@@ -1422,7 +1429,12 @@ GET_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_OUTPUT: StaticSchema = (
     _GCDROCO,
     {_sSI: _cGCDROCRo, _smi: None},
     (_Conf,),
-    ((lambda: schemas.DETECTION_RULE_ORG_CONFIGURATION, {_sN: _conf, _sm: None}),),
+    (
+        (
+            lambda: schemas.DETECTION_RULE_ORG_CONFIGURATION,
+            {_sO: None, _sN: _conf, _sm: None},
+        ),
+    ),
 )
 
 GET_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION: StaticOperationSchema = (
@@ -1466,8 +1478,8 @@ GET_DETECTOR_OUTPUT: StaticSchema = (
     (
         (lambda: schemas.STRING, {_sN: _cA}),
         (lambda: schemas.FINDING_PUBLISHING_FREQUENCY, {_sN: _fPF}),
-        (lambda: schemas.STRING, {_sN: _sRe, _sm: None}),
-        (lambda: schemas.DETECTOR_STATUS, {_sN: _st, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sN: _sRe, _sm: None}),
+        (lambda: schemas.DETECTOR_STATUS, {_sO: None, _sN: _st, _sm: None}),
         (lambda: schemas.STRING, {_sN: _uAp}),
         (lambda: schemas.DATA_SOURCE_CONFIGURATIONS_RESULT, {_sN: _dS}),
         (lambda: schemas.TAG_MAP, {_sN: _tag}),

@@ -195,6 +195,7 @@ _LFM = "ListFoundationModels"
 _PRD = "PromptRouterDescription"
 _PRTMA = "PromptRouterTargetModelArn"
 _PRTM = "PromptRouterTargetModel"
+_sOm = "smithy.api#clientOptional"
 _PRTMr = "PromptRouterTargetModels"
 _PRN = "PromptRouterName"
 _RC = "RoutingCriteria"
@@ -895,7 +896,7 @@ PROMPT_ROUTER_TARGET_MODEL: StaticSchema = (
     _PRTM,
     0,
     (_mA,),
-    ((PROMPT_ROUTER_TARGET_MODEL_ARN, 1),),
+    ((PROMPT_ROUTER_TARGET_MODEL_ARN, {_sOm: None, _smi: None}),),
 )
 
 PROMPT_ROUTER_TARGET_MODELS: StaticSchema = (

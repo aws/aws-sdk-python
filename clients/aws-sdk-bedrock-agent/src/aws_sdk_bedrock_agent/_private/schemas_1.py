@@ -144,6 +144,7 @@ _cPARo = "com.amazonaws.bedrockagent#PrepareAgentResponse"
 _PA = "PrepareAgent"
 _UAI = "UpdateAgentInput"
 _cUAR = "com.amazonaws.bedrockagent#UpdateAgentRequest"
+_sO = "smithy.api#clientOptional"
 _UAO = "UpdateAgentOutput"
 _cUARo = "com.amazonaws.bedrockagent#UpdateAgentResponse"
 _UA = "UpdateAgent"
@@ -865,7 +866,7 @@ UPDATE_AGENT_INPUT: StaticSchema = (
         (lambda: schemas.ID, 9),
         (lambda: schemas.NAME, 1),
         (lambda: schemas.INSTRUCTION, 0),
-        (lambda: schemas.MODEL_IDENTIFIER, 1),
+        (lambda: schemas.MODEL_IDENTIFIER, {_sO: None, _smi: None}),
         (lambda: schemas.DESCRIPTION, 0),
         (lambda: schemas.ORCHESTRATION_TYPE, 0),
         (lambda: schemas.CUSTOM_ORCHESTRATION, 0),

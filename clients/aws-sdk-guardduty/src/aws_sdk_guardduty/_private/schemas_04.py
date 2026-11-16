@@ -13,6 +13,7 @@ _sSI = "smithy.synthetic#originalShapeId"
 _s = "smithy.api#input"
 _sm = "smithy.api#required"
 _sL = "smithy.api#httpLabel"
+_sO = "smithy.api#clientOptional"
 _sN = "smithy.api#jsonName"
 _smi = "smithy.api#output"
 _T = "Type"
@@ -146,7 +147,6 @@ _ETn = "EncryptionType"
 _eTn = "encryptionType"
 _AE = "AutoEnable"
 _aE = "autoEnable"
-_OSLCR = "OrganizationS3LogsConfigurationResult"
 _ODSCR = "OrganizationDataSourceConfigurationsResult"
 _OFS = "OrgFeatureStatus"
 _OFAC = "OrgFeatureAdditionalConfiguration"
@@ -296,7 +296,7 @@ _RDes = "ResourceData"
 _eI = "ec2Instance"
 _aK = "accessKey"
 _eNI = "ec2NetworkInterface"
-_sO = "s3Object"
+_sOb = "s3Object"
 _eCk = "eksCluster"
 _kW = "kubernetesWorkload"
 _cont = "container"
@@ -426,6 +426,7 @@ _SEVERITY = "SEVERITY"
 _TACTIC = "TACTIC"
 _TECHNIQUE = "TECHNIQUE"
 _SERVICE = "SERVICE"
+_DRFV = "DetectionRuleFilterValue"
 
 AUTO_ENABLE_MEMBERS: StaticSchema = (
     14,
@@ -436,15 +437,6 @@ AUTO_ENABLE_MEMBERS: StaticSchema = (
     ((-1, {_sV: _NEW}), (-1, {_sV: _ALL}), (-1, {_sV: _NONE})),
 )
 
-ORGANIZATION_S3_LOGS_CONFIGURATION_RESULT: StaticSchema = (
-    18,
-    n0,
-    _OSLCR,
-    0,
-    (_AE,),
-    ((lambda: schemas.BOOLEAN, {_sN: _aE, _sm: None}),),
-)
-
 ORGANIZATION_DATA_SOURCE_CONFIGURATIONS_RESULT: StaticSchema = (
     18,
     n0,
@@ -452,7 +444,10 @@ ORGANIZATION_DATA_SOURCE_CONFIGURATIONS_RESULT: StaticSchema = (
     0,
     (_SL, _K, _MP),
     (
-        (ORGANIZATION_S3_LOGS_CONFIGURATION_RESULT, {_sN: _sLo, _sm: None}),
+        (
+            lambda: schemas.ORGANIZATION_S3_LOGS_CONFIGURATION_RESULT,
+            {_sO: None, _sN: _sLo, _sm: None},
+        ),
         (lambda: schemas.ORGANIZATION_KUBERNETES_CONFIGURATION_RESULT, {_sN: _k}),
         (
             lambda: schemas.ORGANIZATION_MALWARE_PROTECTION_CONFIGURATION_RESULT,
@@ -556,11 +551,11 @@ DESCRIBE_PUBLISHING_DESTINATION_OUTPUT: StaticSchema = (
     {_sSI: _cDPDRoma, _smi: None},
     (_DIe, _DTes, _St, _PFST, _DP, _Tag),
     (
-        (lambda: schemas.STRING, {_sN: _dIe, _sm: None}),
-        (lambda: schemas.DESTINATION_TYPE, {_sN: _dTes, _sm: None}),
-        (lambda: PUBLISHING_STATUS, {_sN: _st, _sm: None}),
-        (lambda: schemas.LONG, {_sN: _pFST, _sm: None}),
-        (lambda: schemas.DESTINATION_PROPERTIES, {_sN: _dP, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sN: _dIe, _sm: None}),
+        (lambda: schemas.DESTINATION_TYPE, {_sO: None, _sN: _dTes, _sm: None}),
+        (lambda: PUBLISHING_STATUS, {_sO: None, _sN: _st, _sm: None}),
+        (lambda: schemas.LONG, {_sO: None, _sN: _pFST, _sm: None}),
+        (lambda: schemas.DESTINATION_PROPERTIES, {_sO: None, _sN: _dP, _sm: None}),
         (lambda: schemas.TAG_MAP, {_sN: _tag}),
     ),
 )
@@ -607,9 +602,9 @@ DESTINATION: StaticSchema = (
     0,
     (_DIe, _DTes, _St),
     (
-        (lambda: schemas.STRING, {_sN: _dIe, _sm: None}),
-        (lambda: schemas.DESTINATION_TYPE, {_sN: _dTes, _sm: None}),
-        (PUBLISHING_STATUS, {_sN: _st, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sN: _dIe, _sm: None}),
+        (lambda: schemas.DESTINATION_TYPE, {_sO: None, _sN: _dTes, _sm: None}),
+        (PUBLISHING_STATUS, {_sO: None, _sN: _st, _sm: None}),
     ),
 )
 
@@ -632,7 +627,7 @@ NETWORK_CONNECTION: StaticSchema = (
     _NC,
     0,
     (_Dir,),
-    ((NETWORK_DIRECTION, {_sN: _dir, _sm: None}),),
+    ((NETWORK_DIRECTION, {_sO: None, _sN: _dir, _sm: None}),),
 )
 
 NETWORK_GEO_LOCATION: StaticSchema = (
@@ -642,10 +637,10 @@ NETWORK_GEO_LOCATION: StaticSchema = (
     0,
     (_Ci, _Cou, _Lat, _Long),
     (
-        (lambda: schemas.STRING, {_sN: _ci, _sm: None}),
-        (lambda: schemas.STRING, {_sN: _cou, _sm: None}),
-        (lambda: schemas.DOUBLE, {_sN: _la, _sm: None}),
-        (lambda: schemas.DOUBLE, {_sN: _lo, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sN: _ci, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sN: _cou, _sm: None}),
+        (lambda: schemas.DOUBLE, {_sO: None, _sN: _la, _sm: None}),
+        (lambda: schemas.DOUBLE, {_sO: None, _sN: _lo, _sm: None}),
     ),
 )
 
@@ -656,7 +651,7 @@ NETWORK_ENDPOINT: StaticSchema = (
     0,
     (_Id_, _Ip, _Do, _Po, _Loc, _ASu, _Conn),
     (
-        (lambda: schemas.STRING, {_sN: _id, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sN: _id, _sm: None}),
         (lambda: schemas.STRING, {_sN: _ip}),
         (lambda: schemas.STRING, {_sN: _d}),
         (lambda: schemas.INTEGER, {_sN: _po}),
@@ -1017,7 +1012,7 @@ RESOURCE_DATA: StaticSchema = (
         (EC2_INSTANCE, {_sN: _eI}),
         (lambda: schemas.ACCESS_KEY, {_sN: _aK}),
         (EC2_NETWORK_INTERFACE, {_sN: _eNI}),
-        (S3_OBJECT, {_sN: _sO}),
+        (S3_OBJECT, {_sN: _sOb}),
         (EKS_CLUSTER, {_sN: _eCk}),
         (KUBERNETES_WORKLOAD, {_sN: _kW}),
         (lambda: schemas.CONTAINER_FINDING_RESOURCE, {_sN: _cont}),
@@ -1114,10 +1109,10 @@ RESOURCE_V2: StaticSchema = (
     0,
     (_U, _N, _AIcc, _RT, _Re, _Se, _CPl, _Tag, _Dat),
     (
-        (lambda: schemas.STRING, {_sN: _u, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sN: _u, _sm: None}),
         (lambda: schemas.STRING, {_sN: _n}),
         (lambda: schemas.STRING, {_sN: _aIc}),
-        (FINDING_RESOURCE_TYPE, {_sN: _rT, _sm: None}),
+        (FINDING_RESOURCE_TYPE, {_sO: None, _sN: _rT, _sm: None}),
         (lambda: schemas.STRING, {_sN: _re}),
         (lambda: schemas.STRING, {_sN: _ser}),
         (lambda: schemas.STRING, {_sN: _cP}),
@@ -1203,7 +1198,7 @@ INDICATOR: StaticSchema = (
     0,
     (_Ke, _Val, _Tit),
     (
-        (INDICATOR_TYPE, {_sN: _ke, _sm: None}),
+        (INDICATOR_TYPE, {_sO: None, _sN: _ke, _sm: None}),
         (INDICATOR_VALUES, {_sN: _va}),
         (INDICATOR_TITLE, {_sN: _ti}),
     ),
@@ -1257,16 +1252,16 @@ SIGNAL: StaticSchema = (
         _Acti,
     ),
     (
-        (lambda: schemas.STRING, {_sN: _u, _sm: None}),
-        (SIGNAL_TYPE, {_sN: _t, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sN: _u, _sm: None}),
+        (SIGNAL_TYPE, {_sO: None, _sN: _t, _sm: None}),
         (SIGNAL_DESCRIPTION, {_sN: _de}),
-        (lambda: schemas.STRING, {_sN: _n, _sm: None}),
-        (lambda: schemas.TIMESTAMP, {_sN: _cA, _sm: None}),
-        (lambda: schemas.TIMESTAMP, {_sN: _uAp, _sm: None}),
-        (lambda: schemas.TIMESTAMP, {_sN: _fSA, _sm: None}),
-        (lambda: schemas.TIMESTAMP, {_sN: _lSA, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sN: _n, _sm: None}),
+        (lambda: schemas.TIMESTAMP, {_sO: None, _sN: _cA, _sm: None}),
+        (lambda: schemas.TIMESTAMP, {_sO: None, _sN: _uAp, _sm: None}),
+        (lambda: schemas.TIMESTAMP, {_sO: None, _sN: _fSA, _sm: None}),
+        (lambda: schemas.TIMESTAMP, {_sO: None, _sN: _lSA, _sm: None}),
         (lambda: schemas.DOUBLE, {_sN: _sev}),
-        (lambda: schemas.INTEGER, {_sN: _co, _sm: None}),
+        (lambda: schemas.INTEGER, {_sO: None, _sN: _co, _sm: None}),
         (RESOURCE_UIDS, {_sN: _rUe}),
         (lambda: schemas.ACTOR_IDS, {_sN: _aIct}),
         (ENDPOINT_IDS, {_sN: _eIn}),
@@ -1284,12 +1279,12 @@ SEQUENCE: StaticSchema = (
     0,
     (_U, _De, _Actor, _Reso, _End, _Sig, _SIe, _AST),
     (
-        (lambda: schemas.STRING, {_sN: _u, _sm: None}),
-        (SEQUENCE_DESCRIPTION, {_sN: _de, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sN: _u, _sm: None}),
+        (SEQUENCE_DESCRIPTION, {_sO: None, _sN: _de, _sm: None}),
         (lambda: schemas.ACTORS, {_sN: _acto}),
         (RESOURCES, {_sN: _reso}),
         (NETWORK_ENDPOINTS, {_sN: _end}),
-        (SIGNALS, {_sN: _si, _sm: None}),
+        (SIGNALS, {_sO: None, _sN: _si, _sm: None}),
         (INDICATORS, {_sN: _sIe}),
         (lambda: schemas.ADDITIONAL_SEQUENCE_TYPES, {_sN: _aST}),
     ),
@@ -1429,3 +1424,5 @@ FILTER_FIELD_NAME: StaticSchema = (
         (-1, {_sV: _ser}),
     ),
 )
+
+DETECTION_RULE_FILTER_VALUE: StaticSchema = (3, n0, _DRFV, 0)

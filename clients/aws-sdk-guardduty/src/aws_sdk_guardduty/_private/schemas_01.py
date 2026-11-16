@@ -13,6 +13,7 @@ _sSI = "smithy.synthetic#originalShapeId"
 _s = "smithy.api#input"
 _sm = "smithy.api#required"
 _sL = "smithy.api#httpLabel"
+_sO = "smithy.api#clientOptional"
 _sN = "smithy.api#jsonName"
 _II = "InvitationId"
 _iI = "invitationId"
@@ -615,7 +616,7 @@ INVESTIGATION_INDICATOR: StaticSchema = (
     0,
     (_Va, _T),
     (
-        (INDICATOR_VALUE, {_sN: _v, _sm: None}),
+        (INDICATOR_VALUE, {_sO: None, _sN: _v, _sm: None}),
         (INVESTIGATION_INDICATOR_TYPE, {_sN: _t}),
     ),
 )
@@ -665,7 +666,7 @@ PROCESS: StaticSchema = (
     0,
     (_Uu, _N, _Pat, _PU, _Fi),
     (
-        (lambda: schemas.STRING, {_sN: _uu, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sN: _uu, _sm: None}),
         (lambda: schemas.STRING, {_sN: _n}),
         (lambda: schemas.STRING, {_sN: _pat}),
         (lambda: schemas.STRING, {_sN: _pU}),
@@ -744,7 +745,7 @@ ANALYSIS_RECORD: StaticSchema = (
     0,
     (_ATn, _TAh, _KPVu, _SAn, _Proc, _AA, _Ind),
     (
-        (ANALYSIS_TYPE, {_sN: _aTn, _sm: None}),
+        (ANALYSIS_TYPE, {_sO: None, _sN: _aTn, _sm: None}),
         (INVESTIGATION_THREAT_ASSESSMENT, {_sN: _tA}),
         (KUBERNETES_POLICY_VIOLATION, {_sN: _kPV}),
         (S3_ANALYSIS, {_sN: _sA}),
@@ -897,7 +898,7 @@ ARCHIVE_FINDINGS_INPUT: StaticSchema = (
     _AFI,
     {_sSI: _cAFR, _s: None},
     (_DI, _FIi),
-    ((lambda: schemas.DETECTOR_ID, 9), (FINDING_IDS, {_sN: _fI, _sm: None})),
+    ((lambda: schemas.DETECTOR_ID, 9), (FINDING_IDS, {_sO: None, _sN: _fI, _sm: None})),
 )
 
 ARCHIVE_FINDINGS_OUTPUT: StaticSchema = (18, n0, _AFO, {_sSI: _cAFRo, _smi: None})
@@ -945,13 +946,13 @@ ASSOCIATION_DETAIL: StaticSchema = (
     0,
     (_AIs, _Ar, _RIu, _AIcc, _Mo, _CAr, _UAp, _EAx),
     (
-        (ASSOCIATION_ID, {_sN: _aIs, _sm: None}),
-        (DETECTION_RULE_ARN, {_sN: _ar, _sm: None}),
-        (RULE_ID, {_sN: _rI, _sm: None}),
-        (lambda: schemas.ACCOUNT_ID, {_sN: _aIc, _sm: None}),
-        (ASSOCIATION_MODE, {_sN: _mo, _sm: None}),
-        (lambda: schemas.TIMESTAMP, {_sN: _cA, _sm: None}),
-        (lambda: schemas.TIMESTAMP, {_sN: _uAp, _sm: None}),
+        (ASSOCIATION_ID, {_sO: None, _sN: _aIs, _sm: None}),
+        (DETECTION_RULE_ARN, {_sO: None, _sN: _ar, _sm: None}),
+        (RULE_ID, {_sO: None, _sN: _rI, _sm: None}),
+        (lambda: schemas.ACCOUNT_ID, {_sO: None, _sN: _aIc, _sm: None}),
+        (ASSOCIATION_MODE, {_sO: None, _sN: _mo, _sm: None}),
+        (lambda: schemas.TIMESTAMP, {_sO: None, _sN: _cA, _sm: None}),
+        (lambda: schemas.TIMESTAMP, {_sO: None, _sN: _uAp, _sm: None}),
         (lambda: schemas.TIMESTAMP, {_sN: _eA}),
     ),
 )
@@ -963,12 +964,12 @@ ASSOCIATION_SUMMARY: StaticSchema = (
     0,
     (_AIs, _Ar, _RIu, _Mo, _CAr, _UAp, _EAx),
     (
-        (ASSOCIATION_ID, {_sN: _aIs, _sm: None}),
-        (DETECTION_RULE_ARN, {_sN: _ar, _sm: None}),
-        (RULE_ID, {_sN: _rI, _sm: None}),
-        (ASSOCIATION_MODE, {_sN: _mo, _sm: None}),
-        (lambda: schemas.TIMESTAMP, {_sN: _cA, _sm: None}),
-        (lambda: schemas.TIMESTAMP, {_sN: _uAp, _sm: None}),
+        (ASSOCIATION_ID, {_sO: None, _sN: _aIs, _sm: None}),
+        (DETECTION_RULE_ARN, {_sO: None, _sN: _ar, _sm: None}),
+        (RULE_ID, {_sO: None, _sN: _rI, _sm: None}),
+        (ASSOCIATION_MODE, {_sO: None, _sN: _mo, _sm: None}),
+        (lambda: schemas.TIMESTAMP, {_sO: None, _sN: _cA, _sm: None}),
+        (lambda: schemas.TIMESTAMP, {_sO: None, _sN: _uAp, _sm: None}),
         (lambda: schemas.TIMESTAMP, {_sN: _eA}),
     ),
 )
@@ -1020,8 +1021,8 @@ AUTONOMOUS_SYSTEM: StaticSchema = (
     0,
     (_N, _Nu),
     (
-        (lambda: schemas.STRING, {_sN: _n, _sm: None}),
-        (lambda: schemas.INTEGER, {_sN: _nu, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sN: _n, _sm: None}),
+        (lambda: schemas.INTEGER, {_sO: None, _sN: _nu, _sm: None}),
     ),
 )
 
@@ -1186,9 +1187,9 @@ CLOUD_DETAILS: StaticSchema = (
     0,
     (_Prov, _Re, _A),
     (
-        (CLOUD_PROVIDER, {_sN: _prov, _sm: None}),
-        (lambda: schemas.STRING, {_sN: _re, _sm: None}),
-        (lambda: schemas.STRING, {_sN: _a, _sm: None}),
+        (CLOUD_PROVIDER, {_sO: None, _sN: _prov, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sN: _re, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sN: _a, _sm: None}),
     ),
 )
 
@@ -1312,7 +1313,7 @@ CONTAINER_FINDING_RESOURCE: StaticSchema = (
     0,
     (_Ima, _IUm),
     (
-        (lambda: schemas.STRING, {_sN: _im, _sm: None}),
+        (lambda: schemas.STRING, {_sO: None, _sN: _im, _sm: None}),
         (CONTAINER_IMAGE_UID, {_sN: _iU}),
     ),
 )
