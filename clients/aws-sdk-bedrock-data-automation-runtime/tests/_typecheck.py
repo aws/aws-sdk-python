@@ -2,37 +2,63 @@
 
 from typing import Any
 
+from aws_sdk_bedrock_data_automation_runtime.aio.client import (
+    AsyncBedrockDataAutomationRuntimeClient,
+)
+from aws_sdk_bedrock_data_automation_runtime.client import (
+    BedrockDataAutomationRuntimeClient,
+)
 from aws_sdk_bedrock_data_automation_runtime.models import (
     AssetProcessingConfiguration,
+    AssetProcessingConfigurationDict,
     Blueprint,
+    BlueprintDict,
     DataAutomationConfiguration,
+    DataAutomationConfigurationDict,
     EncryptionConfiguration,
+    EncryptionConfigurationDict,
     EventBridgeConfiguration,
+    EventBridgeConfigurationDict,
     GetDataAutomationStatusInput,
+    GetDataAutomationStatusInputDict,
     GetDataAutomationStatusOutput,
     InputConfiguration,
+    InputConfigurationDict,
     InvokeDataAutomationAsyncInput,
+    InvokeDataAutomationAsyncInputDict,
     InvokeDataAutomationAsyncOutput,
     InvokeDataAutomationInput,
+    InvokeDataAutomationInputDict,
     InvokeDataAutomationOutput,
     ListTagsForResourceInput,
+    ListTagsForResourceInputDict,
     ListTagsForResourceOutput,
     NotificationConfiguration,
+    NotificationConfigurationDict,
     OutputConfiguration,
+    OutputConfigurationDict,
     OutputSegment,
     SyncInputConfiguration,
+    SyncInputConfigurationDict,
     Tag,
+    TagDict,
     TagResourceInput,
+    TagResourceInputDict,
     TagResourceOutput,
     TimestampSegment,
+    TimestampSegmentDict,
     UntagResourceInput,
+    UntagResourceInputDict,
     UntagResourceOutput,
     VideoAssetProcessingConfiguration,
+    VideoAssetProcessingConfigurationDict,
+    VideoSegmentConfigurationDict,
 )
 
 
-# Static type fixture: pyright over this validates models.pyi.
-# Not executed as a test; it only needs to type-check.
+# Static type fixture: pyright over this validates models.pyi and the
+# client method signatures. Not executed as a test; it only needs to
+# type-check.
 
 _: Any = ...
 
@@ -61,3 +87,101 @@ TimestampSegment(start_time_millis=_, end_time_millis=_)
 UntagResourceInput()
 UntagResourceOutput()
 VideoAssetProcessingConfiguration()
+_params_0: AssetProcessingConfigurationDict = {}
+_params_1: BlueprintDict = {"blueprint_arn": _}
+_params_2: DataAutomationConfigurationDict = {"data_automation_project_arn": _}
+_params_3: EncryptionConfigurationDict = {"kms_key_id": _}
+_params_4: EventBridgeConfigurationDict = {"event_bridge_enabled": _}
+_params_5: GetDataAutomationStatusInputDict = {"invocation_arn": _}
+_params_6: InputConfigurationDict = {"s3_uri": _}
+_params_7: InvokeDataAutomationAsyncInputDict = {
+    "input_configuration": _,
+    "output_configuration": _,
+    "data_automation_profile_arn": _,
+}
+_params_8: InvokeDataAutomationInputDict = {
+    "input_configuration": _,
+    "data_automation_profile_arn": _,
+}
+_params_9: ListTagsForResourceInputDict = {"resource_arn": _}
+_params_10: NotificationConfigurationDict = {"event_bridge_configuration": _}
+_params_11: OutputConfigurationDict = {"s3_uri": _}
+_params_12: SyncInputConfigurationDict = {}
+_params_13: TagDict = {"key": _, "value": _}
+_params_14: TagResourceInputDict = {"resource_arn": _, "tags": _}
+_params_15: TimestampSegmentDict = {"start_time_millis": _, "end_time_millis": _}
+_params_16: UntagResourceInputDict = {"resource_arn": _, "tag_keys": _}
+_params_17: VideoAssetProcessingConfigurationDict = {}
+_params_18: VideoSegmentConfigurationDict = {"timestamp_segment": _}
+
+
+def _request[T](form: type[T]) -> T:
+    raise NotImplementedError
+
+
+async def check_async_calls(client: AsyncBedrockDataAutomationRuntimeClient) -> None:
+    pass
+    await client.get_data_automation_status(invocation_arn=_)
+    await client.get_data_automation_status(
+        **_request(GetDataAutomationStatusInputDict)
+    )
+    await client.get_data_automation_status(_request(GetDataAutomationStatusInput))
+    await client.get_data_automation_status(_request(GetDataAutomationStatusInputDict))
+    await client.invoke_data_automation(
+        input_configuration=_, data_automation_profile_arn=_
+    )
+    await client.invoke_data_automation(**_request(InvokeDataAutomationInputDict))
+    await client.invoke_data_automation(_request(InvokeDataAutomationInput))
+    await client.invoke_data_automation(_request(InvokeDataAutomationInputDict))
+    await client.invoke_data_automation_async(
+        input_configuration=_, output_configuration=_, data_automation_profile_arn=_
+    )
+    await client.invoke_data_automation_async(
+        **_request(InvokeDataAutomationAsyncInputDict)
+    )
+    await client.invoke_data_automation_async(_request(InvokeDataAutomationAsyncInput))
+    await client.invoke_data_automation_async(
+        _request(InvokeDataAutomationAsyncInputDict)
+    )
+    await client.list_tags_for_resource(resource_arn=_)
+    await client.list_tags_for_resource(**_request(ListTagsForResourceInputDict))
+    await client.list_tags_for_resource(_request(ListTagsForResourceInput))
+    await client.list_tags_for_resource(_request(ListTagsForResourceInputDict))
+    await client.tag_resource(resource_arn=_, tags=_)
+    await client.tag_resource(**_request(TagResourceInputDict))
+    await client.tag_resource(_request(TagResourceInput))
+    await client.tag_resource(_request(TagResourceInputDict))
+    await client.untag_resource(resource_arn=_, tag_keys=_)
+    await client.untag_resource(**_request(UntagResourceInputDict))
+    await client.untag_resource(_request(UntagResourceInput))
+    await client.untag_resource(_request(UntagResourceInputDict))
+
+
+def check_sync_calls(client: BedrockDataAutomationRuntimeClient) -> None:
+    pass
+    client.get_data_automation_status(invocation_arn=_)
+    client.get_data_automation_status(**_request(GetDataAutomationStatusInputDict))
+    client.get_data_automation_status(_request(GetDataAutomationStatusInput))
+    client.get_data_automation_status(_request(GetDataAutomationStatusInputDict))
+    client.invoke_data_automation(input_configuration=_, data_automation_profile_arn=_)
+    client.invoke_data_automation(**_request(InvokeDataAutomationInputDict))
+    client.invoke_data_automation(_request(InvokeDataAutomationInput))
+    client.invoke_data_automation(_request(InvokeDataAutomationInputDict))
+    client.invoke_data_automation_async(
+        input_configuration=_, output_configuration=_, data_automation_profile_arn=_
+    )
+    client.invoke_data_automation_async(**_request(InvokeDataAutomationAsyncInputDict))
+    client.invoke_data_automation_async(_request(InvokeDataAutomationAsyncInput))
+    client.invoke_data_automation_async(_request(InvokeDataAutomationAsyncInputDict))
+    client.list_tags_for_resource(resource_arn=_)
+    client.list_tags_for_resource(**_request(ListTagsForResourceInputDict))
+    client.list_tags_for_resource(_request(ListTagsForResourceInput))
+    client.list_tags_for_resource(_request(ListTagsForResourceInputDict))
+    client.tag_resource(resource_arn=_, tags=_)
+    client.tag_resource(**_request(TagResourceInputDict))
+    client.tag_resource(_request(TagResourceInput))
+    client.tag_resource(_request(TagResourceInputDict))
+    client.untag_resource(resource_arn=_, tag_keys=_)
+    client.untag_resource(**_request(UntagResourceInputDict))
+    client.untag_resource(_request(UntagResourceInput))
+    client.untag_resource(_request(UntagResourceInputDict))

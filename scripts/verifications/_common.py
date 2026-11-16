@@ -5,13 +5,15 @@
 import ast
 import functools
 import importlib.metadata
+import itertools
 import json
+import multiprocessing
 import os
 import subprocess
 import sys
 import tomllib
 from collections.abc import Callable, Iterable, Iterator
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
 from dataclasses import dataclass, replace
 from pathlib import Path
 from types import ModuleType
@@ -186,6 +188,10 @@ class Module:
     def imports(self) -> list[Import]:
         if self.model_data:
             return []
+        if not _IN_WORKER:
+            _load_all_imports()
+            if "imports" in self.__dict__:
+                return self.__dict__["imports"]
         return list(_ImportCollector(self).collect())
 
     @functools.cached_property
@@ -300,6 +306,36 @@ def model_data_globs(package: Package) -> list[str]:
 def analyzed_modules() -> list[Module]:
     """The modules AST analyses read: every runtime module except model data."""
     return [m for m in runtime_modules() if not m.model_data]
+
+
+def map_modules[T](fn: Callable[[Module], T], modules: Iterable[Module]) -> list[T]:
+    """Applies ``fn`` to each module in forked worker processes, in module order.
+
+    ``fn`` must be a module-level function and its result picklable.
+    """
+    names = [m.name for m in modules]
+    index = module_index()
+    if _IN_WORKER or len(names) < 2:
+        return [fn(index[n]) for n in names]
+    workers = os.cpu_count() or 4
+    with ProcessPoolExecutor(
+        max_workers=workers, mp_context=_FORK, initializer=_mark_worker
+    ) as pool:
+        return list(
+            pool.map(
+                _apply,
+                itertools.repeat(fn),
+                names,
+                chunksize=max(1, len(names) // (workers * 4)),
+            )
+        )
+
+
+def module_findings(
+    fn: Callable[[Module], list[Finding]], modules: Iterable[Module]
+) -> list[Finding]:
+    """Runs a per-module check in parallel, keeping findings in module order."""
+    return [f for found in map_modules(fn, modules) for f in found]
 
 
 @functools.cache
@@ -726,3 +762,36 @@ def _soften(finding: Finding) -> Finding:
     ):
         return replace(finding, severity="warning")
     return finding
+
+
+# CAUTION: fork, so workers inherit the parent's module index and the check's
+# own functions; spawn would re-import __main__ and rebuild everything.
+_FORK = multiprocessing.get_context("fork")
+_IN_WORKER = False
+
+
+def _mark_worker() -> None:
+    global _IN_WORKER
+    _IN_WORKER = True
+
+
+def _apply[T](fn: Callable[[Module], T], name: str) -> T:
+    return fn(module_index()[name])
+
+
+type _ImportRow = tuple[str, str | None, str | None, int, Context, bool]
+
+
+def _import_rows(module: Module) -> list[_ImportRow]:
+    return [
+        (i.target, i.name, i.asname, i.line, i.context, i.guarded)
+        for i in module.imports
+    ]
+
+
+@functools.cache
+def _load_all_imports() -> None:
+    """Collects every runtime module's imports in parallel the first time any is read."""
+    modules = [m for m in runtime_modules() if not m.model_data]
+    for module, rows in zip(modules, map_modules(_import_rows, modules), strict=True):
+        module.__dict__["imports"] = [Import(module, *row) for row in rows]

@@ -2,69 +2,100 @@
 
 from typing import Any
 
+from aws_sdk_sqs.aio.client import AsyncSQSClient
+from aws_sdk_sqs.client import SQSClient
 from aws_sdk_sqs.models import (
     AddPermissionInput,
+    AddPermissionInputDict,
     AddPermissionOutput,
     BatchResultErrorEntry,
     CancelMessageMoveTaskInput,
+    CancelMessageMoveTaskInputDict,
     CancelMessageMoveTaskOutput,
     ChangeMessageVisibilityBatchInput,
+    ChangeMessageVisibilityBatchInputDict,
     ChangeMessageVisibilityBatchOutput,
     ChangeMessageVisibilityBatchRequestEntry,
+    ChangeMessageVisibilityBatchRequestEntryDict,
     ChangeMessageVisibilityBatchResultEntry,
     ChangeMessageVisibilityInput,
+    ChangeMessageVisibilityInputDict,
     ChangeMessageVisibilityOutput,
     CreateQueueInput,
+    CreateQueueInputDict,
     CreateQueueOutput,
     DeleteMessageBatchInput,
+    DeleteMessageBatchInputDict,
     DeleteMessageBatchOutput,
     DeleteMessageBatchRequestEntry,
+    DeleteMessageBatchRequestEntryDict,
     DeleteMessageBatchResultEntry,
     DeleteMessageInput,
+    DeleteMessageInputDict,
     DeleteMessageOutput,
     DeleteQueueInput,
+    DeleteQueueInputDict,
     DeleteQueueOutput,
     GetQueueAttributesInput,
+    GetQueueAttributesInputDict,
     GetQueueAttributesOutput,
     GetQueueUrlInput,
+    GetQueueUrlInputDict,
     GetQueueUrlOutput,
     ListDeadLetterSourceQueuesInput,
+    ListDeadLetterSourceQueuesInputDict,
     ListDeadLetterSourceQueuesOutput,
     ListMessageMoveTasksInput,
+    ListMessageMoveTasksInputDict,
     ListMessageMoveTasksOutput,
     ListMessageMoveTasksResultEntry,
     ListQueueTagsInput,
+    ListQueueTagsInputDict,
     ListQueueTagsOutput,
     ListQueuesInput,
+    ListQueuesInputDict,
     ListQueuesOutput,
     Message,
     MessageAttributeValue,
+    MessageAttributeValueDict,
     MessageSystemAttributeValue,
+    MessageSystemAttributeValueDict,
     PurgeQueueInput,
+    PurgeQueueInputDict,
     PurgeQueueOutput,
     ReceiveMessageInput,
+    ReceiveMessageInputDict,
     ReceiveMessageOutput,
     RemovePermissionInput,
+    RemovePermissionInputDict,
     RemovePermissionOutput,
     SendMessageBatchInput,
+    SendMessageBatchInputDict,
     SendMessageBatchOutput,
     SendMessageBatchRequestEntry,
+    SendMessageBatchRequestEntryDict,
     SendMessageBatchResultEntry,
     SendMessageInput,
+    SendMessageInputDict,
     SendMessageOutput,
     SetQueueAttributesInput,
+    SetQueueAttributesInputDict,
     SetQueueAttributesOutput,
     StartMessageMoveTaskInput,
+    StartMessageMoveTaskInputDict,
     StartMessageMoveTaskOutput,
     TagQueueInput,
+    TagQueueInputDict,
     TagQueueOutput,
     UntagQueueInput,
+    UntagQueueInputDict,
     UntagQueueOutput,
 )
 
 
-# Static type fixture: pyright over this validates models.pyi.
-# Not executed as a test; it only needs to type-check.
+# Static type fixture: pyright over this validates models.pyi and the
+# client method signatures. Not executed as a test; it only needs to
+# type-check.
 
 _: Any = ...
 
@@ -125,3 +156,258 @@ TagQueueInput()
 TagQueueOutput()
 UntagQueueInput()
 UntagQueueOutput()
+_params_0: AddPermissionInputDict = {
+    "queue_url": _,
+    "label": _,
+    "aws_account_ids": _,
+    "actions": _,
+}
+_params_1: CancelMessageMoveTaskInputDict = {"task_handle": _}
+_params_2: ChangeMessageVisibilityBatchInputDict = {"queue_url": _, "entries": _}
+_params_3: ChangeMessageVisibilityBatchRequestEntryDict = {"id": _, "receipt_handle": _}
+_params_4: ChangeMessageVisibilityInputDict = {
+    "queue_url": _,
+    "receipt_handle": _,
+    "visibility_timeout": _,
+}
+_params_5: CreateQueueInputDict = {"queue_name": _}
+_params_6: DeleteMessageBatchInputDict = {"queue_url": _, "entries": _}
+_params_7: DeleteMessageBatchRequestEntryDict = {"id": _, "receipt_handle": _}
+_params_8: DeleteMessageInputDict = {"queue_url": _, "receipt_handle": _}
+_params_9: DeleteQueueInputDict = {"queue_url": _}
+_params_10: GetQueueAttributesInputDict = {"queue_url": _}
+_params_11: GetQueueUrlInputDict = {"queue_name": _}
+_params_12: ListDeadLetterSourceQueuesInputDict = {"queue_url": _}
+_params_13: ListMessageMoveTasksInputDict = {"source_arn": _}
+_params_14: ListQueuesInputDict = {}
+_params_15: ListQueueTagsInputDict = {"queue_url": _}
+_params_16: MessageAttributeValueDict = {"data_type": _}
+_params_17: MessageSystemAttributeValueDict = {"data_type": _}
+_params_18: PurgeQueueInputDict = {"queue_url": _}
+_params_19: ReceiveMessageInputDict = {"queue_url": _}
+_params_20: RemovePermissionInputDict = {"queue_url": _, "label": _}
+_params_21: SendMessageBatchInputDict = {"queue_url": _, "entries": _}
+_params_22: SendMessageBatchRequestEntryDict = {"id": _, "message_body": _}
+_params_23: SendMessageInputDict = {"queue_url": _, "message_body": _}
+_params_24: SetQueueAttributesInputDict = {"queue_url": _, "attributes": _}
+_params_25: StartMessageMoveTaskInputDict = {"source_arn": _}
+_params_26: TagQueueInputDict = {"queue_url": _, "tags": _}
+_params_27: UntagQueueInputDict = {"queue_url": _, "tag_keys": _}
+
+
+def _request[T](form: type[T]) -> T:
+    raise NotImplementedError
+
+
+async def check_async_calls(client: AsyncSQSClient) -> None:
+    pass
+    await client.add_permission(queue_url=_, label=_, aws_account_ids=_, actions=_)
+    await client.add_permission(**_request(AddPermissionInputDict))
+    await client.add_permission(_request(AddPermissionInput))
+    await client.add_permission(_request(AddPermissionInputDict))
+    await client.cancel_message_move_task(task_handle=_)
+    await client.cancel_message_move_task(**_request(CancelMessageMoveTaskInputDict))
+    await client.cancel_message_move_task(_request(CancelMessageMoveTaskInput))
+    await client.cancel_message_move_task(_request(CancelMessageMoveTaskInputDict))
+    await client.change_message_visibility(
+        queue_url=_, receipt_handle=_, visibility_timeout=_
+    )
+    await client.change_message_visibility(**_request(ChangeMessageVisibilityInputDict))
+    await client.change_message_visibility(_request(ChangeMessageVisibilityInput))
+    await client.change_message_visibility(_request(ChangeMessageVisibilityInputDict))
+    await client.change_message_visibility_batch(queue_url=_, entries=_)
+    await client.change_message_visibility_batch(
+        **_request(ChangeMessageVisibilityBatchInputDict)
+    )
+    await client.change_message_visibility_batch(
+        _request(ChangeMessageVisibilityBatchInput)
+    )
+    await client.change_message_visibility_batch(
+        _request(ChangeMessageVisibilityBatchInputDict)
+    )
+    await client.create_queue(queue_name=_)
+    await client.create_queue(**_request(CreateQueueInputDict))
+    await client.create_queue(_request(CreateQueueInput))
+    await client.create_queue(_request(CreateQueueInputDict))
+    await client.delete_message(queue_url=_, receipt_handle=_)
+    await client.delete_message(**_request(DeleteMessageInputDict))
+    await client.delete_message(_request(DeleteMessageInput))
+    await client.delete_message(_request(DeleteMessageInputDict))
+    await client.delete_message_batch(queue_url=_, entries=_)
+    await client.delete_message_batch(**_request(DeleteMessageBatchInputDict))
+    await client.delete_message_batch(_request(DeleteMessageBatchInput))
+    await client.delete_message_batch(_request(DeleteMessageBatchInputDict))
+    await client.delete_queue(queue_url=_)
+    await client.delete_queue(**_request(DeleteQueueInputDict))
+    await client.delete_queue(_request(DeleteQueueInput))
+    await client.delete_queue(_request(DeleteQueueInputDict))
+    await client.get_queue_attributes(queue_url=_)
+    await client.get_queue_attributes(**_request(GetQueueAttributesInputDict))
+    await client.get_queue_attributes(_request(GetQueueAttributesInput))
+    await client.get_queue_attributes(_request(GetQueueAttributesInputDict))
+    await client.get_queue_url(queue_name=_)
+    await client.get_queue_url(**_request(GetQueueUrlInputDict))
+    await client.get_queue_url(_request(GetQueueUrlInput))
+    await client.get_queue_url(_request(GetQueueUrlInputDict))
+    await client.list_dead_letter_source_queues(queue_url=_)
+    await client.list_dead_letter_source_queues(
+        **_request(ListDeadLetterSourceQueuesInputDict)
+    )
+    await client.list_dead_letter_source_queues(
+        _request(ListDeadLetterSourceQueuesInput)
+    )
+    await client.list_dead_letter_source_queues(
+        _request(ListDeadLetterSourceQueuesInputDict)
+    )
+    await client.list_message_move_tasks(source_arn=_)
+    await client.list_message_move_tasks(**_request(ListMessageMoveTasksInputDict))
+    await client.list_message_move_tasks(_request(ListMessageMoveTasksInput))
+    await client.list_message_move_tasks(_request(ListMessageMoveTasksInputDict))
+    await client.list_queues()
+    await client.list_queues(**_request(ListQueuesInputDict))
+    await client.list_queues(_request(ListQueuesInput))
+    await client.list_queues(_request(ListQueuesInputDict))
+    await client.list_queue_tags(queue_url=_)
+    await client.list_queue_tags(**_request(ListQueueTagsInputDict))
+    await client.list_queue_tags(_request(ListQueueTagsInput))
+    await client.list_queue_tags(_request(ListQueueTagsInputDict))
+    await client.purge_queue(queue_url=_)
+    await client.purge_queue(**_request(PurgeQueueInputDict))
+    await client.purge_queue(_request(PurgeQueueInput))
+    await client.purge_queue(_request(PurgeQueueInputDict))
+    await client.receive_message(queue_url=_)
+    await client.receive_message(**_request(ReceiveMessageInputDict))
+    await client.receive_message(_request(ReceiveMessageInput))
+    await client.receive_message(_request(ReceiveMessageInputDict))
+    await client.remove_permission(queue_url=_, label=_)
+    await client.remove_permission(**_request(RemovePermissionInputDict))
+    await client.remove_permission(_request(RemovePermissionInput))
+    await client.remove_permission(_request(RemovePermissionInputDict))
+    await client.send_message(queue_url=_, message_body=_)
+    await client.send_message(**_request(SendMessageInputDict))
+    await client.send_message(_request(SendMessageInput))
+    await client.send_message(_request(SendMessageInputDict))
+    await client.send_message_batch(queue_url=_, entries=_)
+    await client.send_message_batch(**_request(SendMessageBatchInputDict))
+    await client.send_message_batch(_request(SendMessageBatchInput))
+    await client.send_message_batch(_request(SendMessageBatchInputDict))
+    await client.set_queue_attributes(queue_url=_, attributes=_)
+    await client.set_queue_attributes(**_request(SetQueueAttributesInputDict))
+    await client.set_queue_attributes(_request(SetQueueAttributesInput))
+    await client.set_queue_attributes(_request(SetQueueAttributesInputDict))
+    await client.start_message_move_task(source_arn=_)
+    await client.start_message_move_task(**_request(StartMessageMoveTaskInputDict))
+    await client.start_message_move_task(_request(StartMessageMoveTaskInput))
+    await client.start_message_move_task(_request(StartMessageMoveTaskInputDict))
+    await client.tag_queue(queue_url=_, tags=_)
+    await client.tag_queue(**_request(TagQueueInputDict))
+    await client.tag_queue(_request(TagQueueInput))
+    await client.tag_queue(_request(TagQueueInputDict))
+    await client.untag_queue(queue_url=_, tag_keys=_)
+    await client.untag_queue(**_request(UntagQueueInputDict))
+    await client.untag_queue(_request(UntagQueueInput))
+    await client.untag_queue(_request(UntagQueueInputDict))
+
+
+def check_sync_calls(client: SQSClient) -> None:
+    pass
+    client.add_permission(queue_url=_, label=_, aws_account_ids=_, actions=_)
+    client.add_permission(**_request(AddPermissionInputDict))
+    client.add_permission(_request(AddPermissionInput))
+    client.add_permission(_request(AddPermissionInputDict))
+    client.cancel_message_move_task(task_handle=_)
+    client.cancel_message_move_task(**_request(CancelMessageMoveTaskInputDict))
+    client.cancel_message_move_task(_request(CancelMessageMoveTaskInput))
+    client.cancel_message_move_task(_request(CancelMessageMoveTaskInputDict))
+    client.change_message_visibility(
+        queue_url=_, receipt_handle=_, visibility_timeout=_
+    )
+    client.change_message_visibility(**_request(ChangeMessageVisibilityInputDict))
+    client.change_message_visibility(_request(ChangeMessageVisibilityInput))
+    client.change_message_visibility(_request(ChangeMessageVisibilityInputDict))
+    client.change_message_visibility_batch(queue_url=_, entries=_)
+    client.change_message_visibility_batch(
+        **_request(ChangeMessageVisibilityBatchInputDict)
+    )
+    client.change_message_visibility_batch(_request(ChangeMessageVisibilityBatchInput))
+    client.change_message_visibility_batch(
+        _request(ChangeMessageVisibilityBatchInputDict)
+    )
+    client.create_queue(queue_name=_)
+    client.create_queue(**_request(CreateQueueInputDict))
+    client.create_queue(_request(CreateQueueInput))
+    client.create_queue(_request(CreateQueueInputDict))
+    client.delete_message(queue_url=_, receipt_handle=_)
+    client.delete_message(**_request(DeleteMessageInputDict))
+    client.delete_message(_request(DeleteMessageInput))
+    client.delete_message(_request(DeleteMessageInputDict))
+    client.delete_message_batch(queue_url=_, entries=_)
+    client.delete_message_batch(**_request(DeleteMessageBatchInputDict))
+    client.delete_message_batch(_request(DeleteMessageBatchInput))
+    client.delete_message_batch(_request(DeleteMessageBatchInputDict))
+    client.delete_queue(queue_url=_)
+    client.delete_queue(**_request(DeleteQueueInputDict))
+    client.delete_queue(_request(DeleteQueueInput))
+    client.delete_queue(_request(DeleteQueueInputDict))
+    client.get_queue_attributes(queue_url=_)
+    client.get_queue_attributes(**_request(GetQueueAttributesInputDict))
+    client.get_queue_attributes(_request(GetQueueAttributesInput))
+    client.get_queue_attributes(_request(GetQueueAttributesInputDict))
+    client.get_queue_url(queue_name=_)
+    client.get_queue_url(**_request(GetQueueUrlInputDict))
+    client.get_queue_url(_request(GetQueueUrlInput))
+    client.get_queue_url(_request(GetQueueUrlInputDict))
+    client.list_dead_letter_source_queues(queue_url=_)
+    client.list_dead_letter_source_queues(
+        **_request(ListDeadLetterSourceQueuesInputDict)
+    )
+    client.list_dead_letter_source_queues(_request(ListDeadLetterSourceQueuesInput))
+    client.list_dead_letter_source_queues(_request(ListDeadLetterSourceQueuesInputDict))
+    client.list_message_move_tasks(source_arn=_)
+    client.list_message_move_tasks(**_request(ListMessageMoveTasksInputDict))
+    client.list_message_move_tasks(_request(ListMessageMoveTasksInput))
+    client.list_message_move_tasks(_request(ListMessageMoveTasksInputDict))
+    client.list_queues()
+    client.list_queues(**_request(ListQueuesInputDict))
+    client.list_queues(_request(ListQueuesInput))
+    client.list_queues(_request(ListQueuesInputDict))
+    client.list_queue_tags(queue_url=_)
+    client.list_queue_tags(**_request(ListQueueTagsInputDict))
+    client.list_queue_tags(_request(ListQueueTagsInput))
+    client.list_queue_tags(_request(ListQueueTagsInputDict))
+    client.purge_queue(queue_url=_)
+    client.purge_queue(**_request(PurgeQueueInputDict))
+    client.purge_queue(_request(PurgeQueueInput))
+    client.purge_queue(_request(PurgeQueueInputDict))
+    client.receive_message(queue_url=_)
+    client.receive_message(**_request(ReceiveMessageInputDict))
+    client.receive_message(_request(ReceiveMessageInput))
+    client.receive_message(_request(ReceiveMessageInputDict))
+    client.remove_permission(queue_url=_, label=_)
+    client.remove_permission(**_request(RemovePermissionInputDict))
+    client.remove_permission(_request(RemovePermissionInput))
+    client.remove_permission(_request(RemovePermissionInputDict))
+    client.send_message(queue_url=_, message_body=_)
+    client.send_message(**_request(SendMessageInputDict))
+    client.send_message(_request(SendMessageInput))
+    client.send_message(_request(SendMessageInputDict))
+    client.send_message_batch(queue_url=_, entries=_)
+    client.send_message_batch(**_request(SendMessageBatchInputDict))
+    client.send_message_batch(_request(SendMessageBatchInput))
+    client.send_message_batch(_request(SendMessageBatchInputDict))
+    client.set_queue_attributes(queue_url=_, attributes=_)
+    client.set_queue_attributes(**_request(SetQueueAttributesInputDict))
+    client.set_queue_attributes(_request(SetQueueAttributesInput))
+    client.set_queue_attributes(_request(SetQueueAttributesInputDict))
+    client.start_message_move_task(source_arn=_)
+    client.start_message_move_task(**_request(StartMessageMoveTaskInputDict))
+    client.start_message_move_task(_request(StartMessageMoveTaskInput))
+    client.start_message_move_task(_request(StartMessageMoveTaskInputDict))
+    client.tag_queue(queue_url=_, tags=_)
+    client.tag_queue(**_request(TagQueueInputDict))
+    client.tag_queue(_request(TagQueueInput))
+    client.tag_queue(_request(TagQueueInputDict))
+    client.untag_queue(queue_url=_, tag_keys=_)
+    client.untag_queue(**_request(UntagQueueInputDict))
+    client.untag_queue(_request(UntagQueueInput))
+    client.untag_queue(_request(UntagQueueInputDict))

@@ -21609,7 +21609,7 @@
             "type": "float",
             "traits": {
                 "smithy.api#range": {
-                    "min": 1e-07,
+                    "min": 1.0E-7,
                     "max": 0.001
                 }
             }

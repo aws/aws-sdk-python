@@ -2,16 +2,20 @@
 
 from typing import Any
 
+from aws_sdk_sagemaker_runtime_http2.aio.client import AsyncSageMakerRuntimeHTTP2Client
+from aws_sdk_sagemaker_runtime_http2.client import SageMakerRuntimeHTTP2Client
 from aws_sdk_sagemaker_runtime_http2.models import (
     InvokeEndpointWithBidirectionalStreamInput,
+    InvokeEndpointWithBidirectionalStreamInputDict,
     InvokeEndpointWithBidirectionalStreamOutput,
     RequestPayloadPart,
     ResponsePayloadPart,
 )
 
 
-# Static type fixture: pyright over this validates models.pyi.
-# Not executed as a test; it only needs to type-check.
+# Static type fixture: pyright over this validates models.pyi and the
+# client method signatures. Not executed as a test; it only needs to
+# type-check.
 
 _: Any = ...
 
@@ -19,3 +23,26 @@ InvokeEndpointWithBidirectionalStreamInput()
 InvokeEndpointWithBidirectionalStreamOutput()
 RequestPayloadPart()
 ResponsePayloadPart()
+_params_0: InvokeEndpointWithBidirectionalStreamInputDict = {"endpoint_name": _}
+
+
+def _request[T](form: type[T]) -> T:
+    raise NotImplementedError
+
+
+async def check_async_calls(client: AsyncSageMakerRuntimeHTTP2Client) -> None:
+    pass
+    await client.invoke_endpoint_with_bidirectional_stream(endpoint_name=_)
+    await client.invoke_endpoint_with_bidirectional_stream(
+        **_request(InvokeEndpointWithBidirectionalStreamInputDict)
+    )
+    await client.invoke_endpoint_with_bidirectional_stream(
+        _request(InvokeEndpointWithBidirectionalStreamInput)
+    )
+    await client.invoke_endpoint_with_bidirectional_stream(
+        _request(InvokeEndpointWithBidirectionalStreamInputDict)
+    )
+
+
+def check_sync_calls(client: SageMakerRuntimeHTTP2Client) -> None:
+    pass

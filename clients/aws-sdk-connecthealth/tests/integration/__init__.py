@@ -4,7 +4,7 @@
 from pathlib import Path
 
 from aws_sdk_connecthealth.aio.client import AsyncConnectHealthClient
-from aws_sdk_connecthealth.aio.config import AsyncConnectHealthConfig, Plugin
+from aws_sdk_connecthealth.aio.config import AsyncConnectHealthConfig
 from smithy_aws_core.aio.config import AsyncAwsConfigOverrides
 from smithy_aws_core.aio.identity import AsyncEnvironmentCredentialsResolver
 from smithy_http.aio.interfaces import AsyncHTTPClient
@@ -29,13 +29,3 @@ async def create_connecthealth_client(
     return AsyncConnectHealthClient(
         config=await AsyncConnectHealthConfig.resolve(**overrides)
     )
-
-
-def streaming_endpoint_plugin(region: str) -> Plugin:
-    """Per-operation plugin that routes to the ``streaming.`` host prefix."""
-    streaming_uri = f"https://streaming.health-agent.{region}.api.aws"
-
-    def _plugin(config: AsyncConnectHealthConfig) -> None:
-        config.endpoint_uri = streaming_uri
-
-    return _plugin

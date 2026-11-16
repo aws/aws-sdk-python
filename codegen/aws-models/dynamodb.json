@@ -27353,7 +27353,7 @@
                                 "ProvisionedThroughput": {
                                     "NumberOfDecreasesToday": 1,
                                     "WriteCapacityUnits": 1,
-                                    "LastIncreaseDateTime": 1421874759.194,
+                                    "LastIncreaseDateTime": 1.421874759194E9,
                                     "ReadCapacityUnits": 1
                                 },
                                 "TableSizeBytes": 0,
@@ -27370,7 +27370,7 @@
                                     }
                                 ],
                                 "ItemCount": 0,
-                                "CreationDateTime": 1421866952.062
+                                "CreationDateTime": 1.421866952062E9
                             }
                         }
                     },

@@ -2,45 +2,75 @@
 
 from typing import Any
 
+from aws_sdk_bedrock_runtime.aio.client import AsyncBedrockRuntimeClient
+from aws_sdk_bedrock_runtime.client import BedrockRuntimeClient
 from aws_sdk_bedrock_runtime.models import (
     AnyToolChoice,
+    AnyToolChoiceDict,
     AppliedGuardrailDetails,
     ApplyGuardrailInput,
+    ApplyGuardrailInputDict,
     ApplyGuardrailOutput,
+    AsyncInvokeOutputDataConfigDict,
     AsyncInvokeS3OutputDataConfig,
+    AsyncInvokeS3OutputDataConfigDict,
     AsyncInvokeSummary,
     AudioBlock,
+    AudioBlockDict,
+    AudioSourceDict,
     AutoToolChoice,
+    AutoToolChoiceDict,
     BidirectionalInputPayloadPart,
     BidirectionalOutputPayloadPart,
     CacheDetail,
     CachePointBlock,
+    CachePointBlockDict,
     Citation,
+    CitationDict,
+    CitationGeneratedContentDict,
+    CitationLocationDict,
     CitationSourceContentDelta,
+    CitationSourceContentDict,
     CitationsConfig,
+    CitationsConfigDict,
     CitationsContentBlock,
+    CitationsContentBlockDict,
     CitationsDelta,
     ContentBlockDeltaEvent,
+    ContentBlockDict,
     ContentBlockStartEvent,
     ContentBlockStopEvent,
     ConverseInput,
+    ConverseInputDict,
     ConverseMetrics,
     ConverseOperationOutput,
     ConverseStreamInput,
+    ConverseStreamInputDict,
     ConverseStreamMetadataEvent,
     ConverseStreamMetrics,
     ConverseStreamOperationOutput,
     ConverseStreamTrace,
     ConverseTokensRequest,
+    ConverseTokensRequestDict,
     ConverseTrace,
+    CountTokensInputDict,
     CountTokensOperationInput,
+    CountTokensOperationInputDict,
     CountTokensOutput,
     DocumentBlock,
+    DocumentBlockDict,
     DocumentCharLocation,
+    DocumentCharLocationDict,
     DocumentChunkLocation,
+    DocumentChunkLocationDict,
+    DocumentContentBlockDict,
     DocumentPageLocation,
+    DocumentPageLocationDict,
+    DocumentSourceDict,
     ErrorBlock,
+    ErrorBlockDict,
     GetAsyncInvokeInput,
+    GetAsyncInvokeInputDict,
     GetAsyncInvokeOutput,
     GuardrailAssessment,
     GuardrailAutomatedReasoningImpossibleFinding,
@@ -59,35 +89,52 @@ from aws_sdk_bedrock_runtime.models import (
     GuardrailAutomatedReasoningTranslationOption,
     GuardrailAutomatedReasoningValidFinding,
     GuardrailChecksConfig,
+    GuardrailChecksConfigDict,
+    GuardrailChecksContentBlockDict,
     GuardrailChecksContentFilterCategoryConfig,
+    GuardrailChecksContentFilterCategoryConfigDict,
     GuardrailChecksContentFilterConfig,
+    GuardrailChecksContentFilterConfigDict,
     GuardrailChecksContentFilterResult,
     GuardrailChecksContentFilterResultEntry,
     GuardrailChecksContentFilterUsage,
     GuardrailChecksMessage,
+    GuardrailChecksMessageDict,
     GuardrailChecksPromptAttackCategoryConfig,
+    GuardrailChecksPromptAttackCategoryConfigDict,
     GuardrailChecksPromptAttackConfig,
+    GuardrailChecksPromptAttackConfigDict,
     GuardrailChecksPromptAttackResult,
     GuardrailChecksPromptAttackResultEntry,
     GuardrailChecksPromptAttackUsage,
     GuardrailChecksResults,
     GuardrailChecksSensitiveInformationConfig,
+    GuardrailChecksSensitiveInformationConfigDict,
     GuardrailChecksSensitiveInformationEntityConfig,
+    GuardrailChecksSensitiveInformationEntityConfigDict,
     GuardrailChecksSensitiveInformationResult,
     GuardrailChecksSensitiveInformationResultEntry,
     GuardrailChecksSensitiveInformationUsage,
     GuardrailChecksUsageResults,
     GuardrailConfiguration,
+    GuardrailConfigurationDict,
+    GuardrailContentBlockDict,
     GuardrailContentFilter,
     GuardrailContentPolicyAssessment,
     GuardrailContextualGroundingFilter,
     GuardrailContextualGroundingPolicyAssessment,
+    GuardrailConverseContentBlockDict,
     GuardrailConverseImageBlock,
+    GuardrailConverseImageBlockDict,
+    GuardrailConverseImageSourceDict,
     GuardrailConverseTextBlock,
+    GuardrailConverseTextBlockDict,
     GuardrailCoverage,
     GuardrailCustomWord,
     GuardrailImageBlock,
+    GuardrailImageBlockDict,
     GuardrailImageCoverage,
+    GuardrailImageSourceDict,
     GuardrailInvocationMetrics,
     GuardrailManagedWord,
     GuardrailOutputContent,
@@ -95,7 +142,9 @@ from aws_sdk_bedrock_runtime.models import (
     GuardrailRegexFilter,
     GuardrailSensitiveInformationPolicyAssessment,
     GuardrailStreamConfiguration,
+    GuardrailStreamConfigurationDict,
     GuardrailTextBlock,
+    GuardrailTextBlockDict,
     GuardrailTextCharactersCoverage,
     GuardrailTopic,
     GuardrailTopicPolicyAssessment,
@@ -104,57 +153,100 @@ from aws_sdk_bedrock_runtime.models import (
     GuardrailWordPolicyAssessment,
     ImageBlock,
     ImageBlockDelta,
+    ImageBlockDict,
     ImageBlockStart,
+    ImageSourceDict,
     InferenceConfiguration,
+    InferenceConfigurationDict,
     InvokeGuardrailChecksInput,
+    InvokeGuardrailChecksInputDict,
     InvokeGuardrailChecksOutput,
     InvokeModelInput,
+    InvokeModelInputDict,
     InvokeModelOutput,
     InvokeModelTokensRequest,
+    InvokeModelTokensRequestDict,
     InvokeModelWithBidirectionalStreamOperationInput,
+    InvokeModelWithBidirectionalStreamOperationInputDict,
     InvokeModelWithBidirectionalStreamOperationOutput,
     InvokeModelWithResponseStreamInput,
+    InvokeModelWithResponseStreamInputDict,
     InvokeModelWithResponseStreamOutput,
     JsonSchemaDefinition,
+    JsonSchemaDefinitionDict,
     ListAsyncInvokesInput,
+    ListAsyncInvokesInputDict,
     ListAsyncInvokesOutput,
     Message,
+    MessageDict,
     MessageStartEvent,
     MessageStopEvent,
     OutputConfig,
+    OutputConfigDict,
     OutputFormat,
+    OutputFormatDict,
+    OutputFormatStructureDict,
     PayloadPart,
     PerformanceConfiguration,
+    PerformanceConfigurationDict,
     PromptRouterTrace,
+    PromptVariableValuesDict,
+    ReasoningContentBlockDict,
     ReasoningTextBlock,
+    ReasoningTextBlockDict,
     S3Location,
+    S3LocationDict,
     SearchResultBlock,
+    SearchResultBlockDict,
     SearchResultContentBlock,
+    SearchResultContentBlockDict,
     SearchResultLocation,
+    SearchResultLocationDict,
     ServiceTier,
+    ServiceTierDict,
     SpecificToolChoice,
+    SpecificToolChoiceDict,
     StartAsyncInvokeInput,
+    StartAsyncInvokeInputDict,
     StartAsyncInvokeOutput,
+    SystemContentBlockDict,
     SystemTool,
+    SystemToolDict,
     Tag,
+    TagDict,
     TokenUsage,
     ToolAdditionBlock,
+    ToolAdditionBlockDict,
+    ToolChoiceDict,
     ToolConfiguration,
+    ToolConfigurationDict,
+    ToolDict,
+    ToolInputSchemaDict,
     ToolReference,
+    ToolReferenceDict,
     ToolRemovalBlock,
+    ToolRemovalBlockDict,
     ToolResultBlock,
+    ToolResultBlockDict,
     ToolResultBlockStart,
+    ToolResultContentBlockDict,
     ToolSpecification,
+    ToolSpecificationDict,
     ToolUseBlock,
     ToolUseBlockDelta,
+    ToolUseBlockDict,
     ToolUseBlockStart,
     VideoBlock,
+    VideoBlockDict,
+    VideoSourceDict,
     WebLocation,
+    WebLocationDict,
 )
 
 
-# Static type fixture: pyright over this validates models.pyi.
-# Not executed as a test; it only needs to type-check.
+# Static type fixture: pyright over this validates models.pyi and the
+# client method signatures. Not executed as a test; it only needs to
+# type-check.
 
 _: Any = ...
 
@@ -321,3 +413,205 @@ ToolUseBlockDelta(input=_)
 ToolUseBlockStart(tool_use_id=_, name=_)
 VideoBlock(format=_, source=_)
 WebLocation()
+_params_0: AnyToolChoiceDict = {}
+_params_1: ApplyGuardrailInputDict = {
+    "guardrail_identifier": _,
+    "guardrail_version": _,
+    "source": _,
+    "content": _,
+}
+_params_2: AsyncInvokeOutputDataConfigDict = {"s3_output_data_config": _}
+_params_3: AsyncInvokeS3OutputDataConfigDict = {"s3_uri": _}
+_params_4: AudioBlockDict = {"format": _, "source": _}
+_params_5: AudioSourceDict = {"bytes_": _}
+_params_6: AutoToolChoiceDict = {}
+_params_7: CachePointBlockDict = {"type": _}
+_params_8: CitationDict = {}
+_params_9: CitationGeneratedContentDict = {"text": _}
+_params_10: CitationLocationDict = {"web": _}
+_params_11: CitationsConfigDict = {"enabled": _}
+_params_12: CitationsContentBlockDict = {}
+_params_13: CitationSourceContentDict = {"text": _}
+_params_14: ContentBlockDict = {"text": _}
+_params_15: ConverseInputDict = {"model_id": _}
+_params_16: ConverseStreamInputDict = {"model_id": _}
+_params_17: ConverseTokensRequestDict = {}
+_params_18: CountTokensInputDict = {"invoke_model": _}
+_params_19: CountTokensOperationInputDict = {"model_id": _, "input": _}
+_params_20: DocumentBlockDict = {"name": _, "source": _}
+_params_21: DocumentCharLocationDict = {}
+_params_22: DocumentChunkLocationDict = {}
+_params_23: DocumentContentBlockDict = {"text": _}
+_params_24: DocumentPageLocationDict = {}
+_params_25: DocumentSourceDict = {"bytes_": _}
+_params_26: ErrorBlockDict = {}
+_params_27: GetAsyncInvokeInputDict = {"invocation_arn": _}
+_params_28: GuardrailChecksConfigDict = {}
+_params_29: GuardrailChecksContentBlockDict = {"text": _}
+_params_30: GuardrailChecksContentFilterCategoryConfigDict = {"category": _}
+_params_31: GuardrailChecksContentFilterConfigDict = {"categories": _}
+_params_32: GuardrailChecksMessageDict = {"role": _, "content": _}
+_params_33: GuardrailChecksPromptAttackCategoryConfigDict = {"category": _}
+_params_34: GuardrailChecksPromptAttackConfigDict = {"categories": _}
+_params_35: GuardrailChecksSensitiveInformationConfigDict = {"entities": _}
+_params_36: GuardrailChecksSensitiveInformationEntityConfigDict = {"type": _}
+_params_37: GuardrailConfigurationDict = {}
+_params_38: GuardrailContentBlockDict = {"text": _}
+_params_39: GuardrailConverseContentBlockDict = {"text": _}
+_params_40: GuardrailConverseImageBlockDict = {"format": _, "source": _}
+_params_41: GuardrailConverseImageSourceDict = {"bytes_": _}
+_params_42: GuardrailConverseTextBlockDict = {"text": _}
+_params_43: GuardrailImageBlockDict = {"format": _, "source": _}
+_params_44: GuardrailImageSourceDict = {"bytes_": _}
+_params_45: GuardrailStreamConfigurationDict = {}
+_params_46: GuardrailTextBlockDict = {"text": _}
+_params_47: ImageBlockDict = {"format": _, "source": _}
+_params_48: ImageSourceDict = {"bytes_": _}
+_params_49: InferenceConfigurationDict = {}
+_params_50: InvokeGuardrailChecksInputDict = {"messages": _, "checks": _}
+_params_51: InvokeModelInputDict = {"model_id": _}
+_params_52: InvokeModelTokensRequestDict = {"body": _}
+_params_53: InvokeModelWithBidirectionalStreamOperationInputDict = {"model_id": _}
+_params_54: InvokeModelWithResponseStreamInputDict = {"model_id": _}
+_params_55: JsonSchemaDefinitionDict = {"schema": _}
+_params_56: ListAsyncInvokesInputDict = {}
+_params_57: MessageDict = {"role": _, "content": _}
+_params_58: OutputConfigDict = {}
+_params_59: OutputFormatDict = {"type": _, "structure": _}
+_params_60: OutputFormatStructureDict = {"json_schema": _}
+_params_61: PerformanceConfigurationDict = {}
+_params_62: PromptVariableValuesDict = {"text": _}
+_params_63: ReasoningContentBlockDict = {"reasoning_text": _}
+_params_64: ReasoningTextBlockDict = {"text": _}
+_params_65: S3LocationDict = {"uri": _}
+_params_66: SearchResultBlockDict = {"source": _, "title": _, "content": _}
+_params_67: SearchResultContentBlockDict = {"text": _}
+_params_68: SearchResultLocationDict = {}
+_params_69: ServiceTierDict = {"type": _}
+_params_70: SpecificToolChoiceDict = {"name": _}
+_params_71: StartAsyncInvokeInputDict = {
+    "model_id": _,
+    "model_input": _,
+    "output_data_config": _,
+}
+_params_72: SystemContentBlockDict = {"text": _}
+_params_73: SystemToolDict = {"name": _}
+_params_74: TagDict = {"key": _, "value": _}
+_params_75: ToolDict = {"tool_spec": _}
+_params_76: ToolAdditionBlockDict = {"tool": _}
+_params_77: ToolChoiceDict = {"auto": _}
+_params_78: ToolConfigurationDict = {"tools": _}
+_params_79: ToolInputSchemaDict = {"json": _}
+_params_80: ToolReferenceDict = {}
+_params_81: ToolRemovalBlockDict = {"tool": _}
+_params_82: ToolResultBlockDict = {"tool_use_id": _, "content": _}
+_params_83: ToolResultContentBlockDict = {"json": _}
+_params_84: ToolSpecificationDict = {"name": _, "input_schema": _}
+_params_85: ToolUseBlockDict = {"tool_use_id": _, "name": _, "input": _}
+_params_86: VideoBlockDict = {"format": _, "source": _}
+_params_87: VideoSourceDict = {"bytes_": _}
+_params_88: WebLocationDict = {}
+
+
+def _request[T](form: type[T]) -> T:
+    raise NotImplementedError
+
+
+async def check_async_calls(client: AsyncBedrockRuntimeClient) -> None:
+    pass
+    await client.apply_guardrail(
+        guardrail_identifier=_, guardrail_version=_, source=_, content=_
+    )
+    await client.apply_guardrail(**_request(ApplyGuardrailInputDict))
+    await client.apply_guardrail(_request(ApplyGuardrailInput))
+    await client.apply_guardrail(_request(ApplyGuardrailInputDict))
+    await client.converse(model_id=_)
+    await client.converse(**_request(ConverseInputDict))
+    await client.converse(_request(ConverseInput))
+    await client.converse(_request(ConverseInputDict))
+    await client.converse_stream(model_id=_)
+    await client.converse_stream(**_request(ConverseStreamInputDict))
+    await client.converse_stream(_request(ConverseStreamInput))
+    await client.converse_stream(_request(ConverseStreamInputDict))
+    await client.count_tokens(model_id=_, input=_)
+    await client.count_tokens(**_request(CountTokensOperationInputDict))
+    await client.count_tokens(_request(CountTokensOperationInput))
+    await client.count_tokens(_request(CountTokensOperationInputDict))
+    await client.get_async_invoke(invocation_arn=_)
+    await client.get_async_invoke(**_request(GetAsyncInvokeInputDict))
+    await client.get_async_invoke(_request(GetAsyncInvokeInput))
+    await client.get_async_invoke(_request(GetAsyncInvokeInputDict))
+    await client.invoke_guardrail_checks(messages=_, checks=_)
+    await client.invoke_guardrail_checks(**_request(InvokeGuardrailChecksInputDict))
+    await client.invoke_guardrail_checks(_request(InvokeGuardrailChecksInput))
+    await client.invoke_guardrail_checks(_request(InvokeGuardrailChecksInputDict))
+    await client.invoke_model(model_id=_)
+    await client.invoke_model(**_request(InvokeModelInputDict))
+    await client.invoke_model(_request(InvokeModelInput))
+    await client.invoke_model(_request(InvokeModelInputDict))
+    await client.invoke_model_with_bidirectional_stream(model_id=_)
+    await client.invoke_model_with_bidirectional_stream(
+        **_request(InvokeModelWithBidirectionalStreamOperationInputDict)
+    )
+    await client.invoke_model_with_bidirectional_stream(
+        _request(InvokeModelWithBidirectionalStreamOperationInput)
+    )
+    await client.invoke_model_with_bidirectional_stream(
+        _request(InvokeModelWithBidirectionalStreamOperationInputDict)
+    )
+    await client.invoke_model_with_response_stream(model_id=_)
+    await client.invoke_model_with_response_stream(
+        **_request(InvokeModelWithResponseStreamInputDict)
+    )
+    await client.invoke_model_with_response_stream(
+        _request(InvokeModelWithResponseStreamInput)
+    )
+    await client.invoke_model_with_response_stream(
+        _request(InvokeModelWithResponseStreamInputDict)
+    )
+    await client.list_async_invokes()
+    await client.list_async_invokes(**_request(ListAsyncInvokesInputDict))
+    await client.list_async_invokes(_request(ListAsyncInvokesInput))
+    await client.list_async_invokes(_request(ListAsyncInvokesInputDict))
+    await client.start_async_invoke(model_id=_, model_input=_, output_data_config=_)
+    await client.start_async_invoke(**_request(StartAsyncInvokeInputDict))
+    await client.start_async_invoke(_request(StartAsyncInvokeInput))
+    await client.start_async_invoke(_request(StartAsyncInvokeInputDict))
+
+
+def check_sync_calls(client: BedrockRuntimeClient) -> None:
+    pass
+    client.apply_guardrail(
+        guardrail_identifier=_, guardrail_version=_, source=_, content=_
+    )
+    client.apply_guardrail(**_request(ApplyGuardrailInputDict))
+    client.apply_guardrail(_request(ApplyGuardrailInput))
+    client.apply_guardrail(_request(ApplyGuardrailInputDict))
+    client.converse(model_id=_)
+    client.converse(**_request(ConverseInputDict))
+    client.converse(_request(ConverseInput))
+    client.converse(_request(ConverseInputDict))
+    client.count_tokens(model_id=_, input=_)
+    client.count_tokens(**_request(CountTokensOperationInputDict))
+    client.count_tokens(_request(CountTokensOperationInput))
+    client.count_tokens(_request(CountTokensOperationInputDict))
+    client.get_async_invoke(invocation_arn=_)
+    client.get_async_invoke(**_request(GetAsyncInvokeInputDict))
+    client.get_async_invoke(_request(GetAsyncInvokeInput))
+    client.get_async_invoke(_request(GetAsyncInvokeInputDict))
+    client.invoke_guardrail_checks(messages=_, checks=_)
+    client.invoke_guardrail_checks(**_request(InvokeGuardrailChecksInputDict))
+    client.invoke_guardrail_checks(_request(InvokeGuardrailChecksInput))
+    client.invoke_guardrail_checks(_request(InvokeGuardrailChecksInputDict))
+    client.invoke_model(model_id=_)
+    client.invoke_model(**_request(InvokeModelInputDict))
+    client.invoke_model(_request(InvokeModelInput))
+    client.invoke_model(_request(InvokeModelInputDict))
+    client.list_async_invokes()
+    client.list_async_invokes(**_request(ListAsyncInvokesInputDict))
+    client.list_async_invokes(_request(ListAsyncInvokesInput))
+    client.list_async_invokes(_request(ListAsyncInvokesInputDict))
+    client.start_async_invoke(model_id=_, model_input=_, output_data_config=_)
+    client.start_async_invoke(**_request(StartAsyncInvokeInputDict))
+    client.start_async_invoke(_request(StartAsyncInvokeInput))
+    client.start_async_invoke(_request(StartAsyncInvokeInputDict))

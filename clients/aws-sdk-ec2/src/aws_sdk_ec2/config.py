@@ -13,8 +13,8 @@ from typing import (
 )
 
 from smithy_aws_core.auth.sigv4 import SigV4AuthScheme
-from smithy_aws_core.config import FileSystem
 from smithy_aws_core.config.aws_config import AwsConfig, AwsConfigOverrides
+from smithy_aws_core.config.filesystem import FileSystem
 from smithy_aws_core.config.resolvers import (
     EndpointUriResolver,
     resolve_use_dualstack_endpoint_program,
@@ -22,7 +22,10 @@ from smithy_aws_core.config.resolvers import (
 )
 from smithy_aws_core.config.types import FieldSpec
 from smithy_aws_core.endpoints import AWS_RULES_EXTENSION
-from smithy_aws_core.identity import AWSCredentialsIdentity, AWSIdentityProperties
+from smithy_aws_core.identity.components import (
+    AWSCredentialsIdentity,
+    AWSIdentityProperties,
+)
 from smithy_aws_core.protocols import Ec2QueryClientProtocol
 from smithy_core.endpoints import BddEndpointResolver
 from smithy_core.interfaces import (
@@ -100,6 +103,8 @@ if TYPE_CHECKING:
         AssociateIpamResourceDiscoveryOutput,
         AssociateNatGatewayAddressInput,
         AssociateNatGatewayAddressOutput,
+        AssociateNetworkingFlexCostAllocationPolicyInput,
+        AssociateNetworkingFlexCostAllocationPolicyOutput,
         AssociateRouteServerInput,
         AssociateRouteServerOutput,
         AssociateRouteTableInput,
@@ -272,6 +277,8 @@ if TYPE_CHECKING:
         CreateMacSystemIntegrityProtectionModificationTaskOutput,
         CreateManagedPrefixListInput,
         CreateManagedPrefixListOutput,
+        CreateMetricCategoryInput,
+        CreateMetricCategoryOutput,
         CreateNatGatewayInput,
         CreateNatGatewayOutput,
         CreateNetworkAclEntryInput,
@@ -286,6 +293,8 @@ if TYPE_CHECKING:
         CreateNetworkInterfaceOutput,
         CreateNetworkInterfacePermissionInput,
         CreateNetworkInterfacePermissionOutput,
+        CreateNetworkingFlexCostAllocationPolicyInput,
+        CreateNetworkingFlexCostAllocationPolicyOutput,
         CreatePlacementGroupInput,
         CreatePlacementGroupOutput,
         CreatePublicIpv4PoolInput,
@@ -470,6 +479,8 @@ if TYPE_CHECKING:
         DeleteLocalGatewayVirtualInterfaceOutput,
         DeleteManagedPrefixListInput,
         DeleteManagedPrefixListOutput,
+        DeleteMetricCategoryInput,
+        DeleteMetricCategoryOutput,
         DeleteNatGatewayInput,
         DeleteNatGatewayOutput,
         DeleteNetworkAclEntryInput,
@@ -488,6 +499,8 @@ if TYPE_CHECKING:
         DeleteNetworkInterfaceOutput,
         DeleteNetworkInterfacePermissionInput,
         DeleteNetworkInterfacePermissionOutput,
+        DeleteNetworkingFlexCostAllocationPoliciesInput,
+        DeleteNetworkingFlexCostAllocationPoliciesOutput,
         DeletePlacementGroupInput,
         DeletePlacementGroupOutput,
         DeletePublicIpv4PoolInput,
@@ -810,6 +823,8 @@ if TYPE_CHECKING:
         DescribeMacModificationTasksOutput,
         DescribeManagedPrefixListsInput,
         DescribeManagedPrefixListsOutput,
+        DescribeMetricCategoriesInput,
+        DescribeMetricCategoriesOutput,
         DescribeMovingAddressesInput,
         DescribeMovingAddressesOutput,
         DescribeNatGatewaysInput,
@@ -830,6 +845,10 @@ if TYPE_CHECKING:
         DescribeNetworkInterfacePermissionsOutput,
         DescribeNetworkInterfacesInput,
         DescribeNetworkInterfacesOutput,
+        DescribeNetworkingFlexCostAllocationPoliciesInput,
+        DescribeNetworkingFlexCostAllocationPoliciesOutput,
+        DescribeNetworkingFlexCostAllocationPolicyAssociationsInput,
+        DescribeNetworkingFlexCostAllocationPolicyAssociationsOutput,
         DescribeOutpostLagsInput,
         DescribeOutpostLagsOutput,
         DescribePlacementGroupsInput,
@@ -1070,6 +1089,8 @@ if TYPE_CHECKING:
         DisassociateIpamResourceDiscoveryOutput,
         DisassociateNatGatewayAddressInput,
         DisassociateNatGatewayAddressOutput,
+        DisassociateNetworkingFlexCostAllocationPolicyInput,
+        DisassociateNetworkingFlexCostAllocationPolicyOutput,
         DisassociateRouteServerInput,
         DisassociateRouteServerOutput,
         DisassociateRouteTableInput,
@@ -1258,6 +1279,8 @@ if TYPE_CHECKING:
         GetNetworkInsightsAccessScopeAnalysisFindingsOutput,
         GetNetworkInsightsAccessScopeContentInput,
         GetNetworkInsightsAccessScopeContentOutput,
+        GetNetworkingFlexCostAllocationPolicyVersionsInput,
+        GetNetworkingFlexCostAllocationPolicyVersionsOutput,
         GetPasswordDataInput,
         GetPasswordDataOutput,
         GetReservedInstancesExchangeQuoteInput,
@@ -1414,8 +1437,12 @@ if TYPE_CHECKING:
         ModifyManagedPrefixListOutput,
         ModifyManagedResourceVisibilityInput,
         ModifyManagedResourceVisibilityOutput,
+        ModifyMetricCategoryInput,
+        ModifyMetricCategoryOutput,
         ModifyNetworkInterfaceAttributeInput,
         ModifyNetworkInterfaceAttributeOutput,
+        ModifyNetworkingFlexCostAllocationPolicyInput,
+        ModifyNetworkingFlexCostAllocationPolicyOutput,
         ModifyPrivateDnsNameOptionsInput,
         ModifyPrivateDnsNameOptionsOutput,
         ModifyPublicIpDnsNameOptionsInput,
@@ -1783,6 +1810,12 @@ if TYPE_CHECKING:
         Interceptor[
             AssociateNatGatewayAddressInput, AssociateNatGatewayAddressOutput, Any, Any
         ],
+        Interceptor[
+            AssociateNetworkingFlexCostAllocationPolicyInput,
+            AssociateNetworkingFlexCostAllocationPolicyOutput,
+            Any,
+            Any,
+        ],
         Interceptor[AssociateRouteServerInput, AssociateRouteServerOutput, Any, Any],
         Interceptor[AssociateRouteTableInput, AssociateRouteTableOutput, Any, Any],
         Interceptor[
@@ -2071,9 +2104,16 @@ if TYPE_CHECKING:
         Interceptor[
             CreateManagedPrefixListInput, CreateManagedPrefixListOutput, Any, Any
         ],
+        Interceptor[CreateMetricCategoryInput, CreateMetricCategoryOutput, Any, Any],
         Interceptor[CreateNatGatewayInput, CreateNatGatewayOutput, Any, Any],
         Interceptor[CreateNetworkAclInput, CreateNetworkAclOutput, Any, Any],
         Interceptor[CreateNetworkAclEntryInput, CreateNetworkAclEntryOutput, Any, Any],
+        Interceptor[
+            CreateNetworkingFlexCostAllocationPolicyInput,
+            CreateNetworkingFlexCostAllocationPolicyOutput,
+            Any,
+            Any,
+        ],
         Interceptor[
             CreateNetworkInsightsAccessScopeInput,
             CreateNetworkInsightsAccessScopeOutput,
@@ -2416,9 +2456,16 @@ if TYPE_CHECKING:
         Interceptor[
             DeleteManagedPrefixListInput, DeleteManagedPrefixListOutput, Any, Any
         ],
+        Interceptor[DeleteMetricCategoryInput, DeleteMetricCategoryOutput, Any, Any],
         Interceptor[DeleteNatGatewayInput, DeleteNatGatewayOutput, Any, Any],
         Interceptor[DeleteNetworkAclInput, DeleteNetworkAclOutput, Any, Any],
         Interceptor[DeleteNetworkAclEntryInput, DeleteNetworkAclEntryOutput, Any, Any],
+        Interceptor[
+            DeleteNetworkingFlexCostAllocationPoliciesInput,
+            DeleteNetworkingFlexCostAllocationPoliciesOutput,
+            Any,
+            Any,
+        ],
         Interceptor[
             DeleteNetworkInsightsAccessScopeInput,
             DeleteNetworkInsightsAccessScopeOutput,
@@ -3066,10 +3113,25 @@ if TYPE_CHECKING:
             DescribeManagedPrefixListsInput, DescribeManagedPrefixListsOutput, Any, Any
         ],
         Interceptor[
+            DescribeMetricCategoriesInput, DescribeMetricCategoriesOutput, Any, Any
+        ],
+        Interceptor[
             DescribeMovingAddressesInput, DescribeMovingAddressesOutput, Any, Any
         ],
         Interceptor[DescribeNatGatewaysInput, DescribeNatGatewaysOutput, Any, Any],
         Interceptor[DescribeNetworkAclsInput, DescribeNetworkAclsOutput, Any, Any],
+        Interceptor[
+            DescribeNetworkingFlexCostAllocationPoliciesInput,
+            DescribeNetworkingFlexCostAllocationPoliciesOutput,
+            Any,
+            Any,
+        ],
+        Interceptor[
+            DescribeNetworkingFlexCostAllocationPolicyAssociationsInput,
+            DescribeNetworkingFlexCostAllocationPolicyAssociationsOutput,
+            Any,
+            Any,
+        ],
         Interceptor[
             DescribeNetworkInsightsAccessScopeAnalysesInput,
             DescribeNetworkInsightsAccessScopeAnalysesOutput,
@@ -3626,6 +3688,12 @@ if TYPE_CHECKING:
             Any,
         ],
         Interceptor[
+            DisassociateNetworkingFlexCostAllocationPolicyInput,
+            DisassociateNetworkingFlexCostAllocationPolicyOutput,
+            Any,
+            Any,
+        ],
+        Interceptor[
             DisassociateRouteServerInput, DisassociateRouteServerOutput, Any, Any
         ],
         Interceptor[
@@ -4025,6 +4093,12 @@ if TYPE_CHECKING:
             Any,
         ],
         Interceptor[
+            GetNetworkingFlexCostAllocationPolicyVersionsInput,
+            GetNetworkingFlexCostAllocationPolicyVersionsOutput,
+            Any,
+            Any,
+        ],
+        Interceptor[
             GetNetworkInsightsAccessScopeAnalysisFindingsInput,
             GetNetworkInsightsAccessScopeAnalysisFindingsOutput,
             Any,
@@ -4360,6 +4434,13 @@ if TYPE_CHECKING:
         Interceptor[
             ModifyManagedResourceVisibilityInput,
             ModifyManagedResourceVisibilityOutput,
+            Any,
+            Any,
+        ],
+        Interceptor[ModifyMetricCategoryInput, ModifyMetricCategoryOutput, Any, Any],
+        Interceptor[
+            ModifyNetworkingFlexCostAllocationPolicyInput,
+            ModifyNetworkingFlexCostAllocationPolicyOutput,
             Any,
             Any,
         ],

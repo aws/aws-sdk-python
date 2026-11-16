@@ -3,11 +3,11 @@
 from __future__ import annotations
 
 import logging
-from typing import cast
+from typing import Unpack as _Unpack, cast, overload as _overload
 
-from smithy_aws_core.config import ConfigSource
-from smithy_aws_core.identity import AWSCredentialsIdentity
-from smithy_aws_core.identity.chain import IdentityChain
+from smithy_aws_core.config.types import ConfigSource
+from smithy_aws_core.identity.chain.resolver import IdentityChain
+from smithy_aws_core.identity.components import AWSCredentialsIdentity
 from smithy_core.client import Client
 from smithy_http.interfaces import HTTPClient
 from smithy_http.plugins import user_agent_plugin
@@ -20,51 +20,31 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from .models import (
-        BatchGetSecretValueInput,
+        AssociateCrossAccountReplicaOutput,
         BatchGetSecretValueOutput,
-        CancelRotateSecretInput,
         CancelRotateSecretOutput,
-        CreateSecretInput,
         CreateSecretOutput,
-        DeleteResourcePolicyInput,
         DeleteResourcePolicyOutput,
-        DeleteSecretInput,
         DeleteSecretOutput,
-        DescribeSecretInput,
         DescribeSecretOutput,
-        GetRandomPasswordInput,
+        DisassociateCrossAccountReplicaOutput,
         GetRandomPasswordOutput,
-        GetResourcePolicyInput,
         GetResourcePolicyOutput,
-        GetSecretValueInput,
         GetSecretValueOutput,
-        ListSecretVersionIdsInput,
+        ListResourcePoliciesOutput,
         ListSecretVersionIdsOutput,
-        ListSecretsInput,
         ListSecretsOutput,
-        PutResourcePolicyInput,
         PutResourcePolicyOutput,
-        PutSecretValueInput,
         PutSecretValueOutput,
-        RemoveRegionsFromReplicationInput,
         RemoveRegionsFromReplicationOutput,
-        ReplicateSecretToRegionsInput,
         ReplicateSecretToRegionsOutput,
-        RestoreSecretInput,
         RestoreSecretOutput,
-        RotateSecretInput,
         RotateSecretOutput,
-        StopReplicationToReplicaInput,
         StopReplicationToReplicaOutput,
-        TagResourceInput,
         TagResourceOutput,
-        UntagResourceInput,
         UntagResourceOutput,
-        UpdateSecretInput,
         UpdateSecretOutput,
-        UpdateSecretVersionStageInput,
         UpdateSecretVersionStageOutput,
-        ValidateResourcePolicyInput,
         ValidateResourcePolicyOutput,
     )
 
@@ -119,10 +99,97 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
 
     _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
 
+    @_overload
+    def associate_cross_account_replica(
+        self,
+        request: _models.AssociateCrossAccountReplicaInput
+        | _models.AssociateCrossAccountReplicaInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AssociateCrossAccountReplicaOutput: ...
+
+    @_overload
+    def associate_cross_account_replica(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AssociateCrossAccountReplicaInputDict],
+    ) -> AssociateCrossAccountReplicaOutput:
+        """
+        Links a primary secret in your account to a replica secret in a
+        different Amazon Web Services account and starts replication to this
+        replica. The replica secret must already exist in the other Amazon Web
+        Services account. Create the replica with CreateSecret and set its
+        `CrossAccountPrimaryARN` field set to this primary secret's ARN. When
+        you call AssociateCrossAccountReplica, Secrets Manager calls
+        AcceptCrossAccountReplication on the replica secret on your behalf.
+
+        The primary and replica secrets must be in the same Amazon Web Services
+        Region and partition, and you must call this operation from the account
+        that owns the primary secret. A primary secret can have at most one
+        cross-account replica. This operation is idempotent, so you can call it
+        again for the same replica to repair replication. If the association
+        fails, Secrets Manager does not modify either the primary or replica
+        secret.
+
+        Secrets Manager generates a CloudTrail log entry when you call this
+        action. Do not include sensitive information in request parameters
+        because it might be logged. For more information, see [Logging Secrets
+        Manager events with
+        CloudTrail](https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html).
+
+        **Required permissions:** `secretsmanager:AssociateCrossAccountReplica`,
+        `secretsmanager:GetSecretValue` on the primary secret, and
+        `secretsmanager:AcceptCrossAccountReplication` on the replica secret.
+        You must also have `kms:Decrypt` permission for the Key Management
+        Service (KMS) key that encrypts the primary secret, and `kms:Encrypt`
+        permission for the Amazon Web Services KMS key that encrypts the replica
+        secret. If you supply `ReplicationRoleARN`, you also need `iam:PassRole`
+        for that role. For more information, see [IAM policy actions for Secrets
+        Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions)
+        and [Authentication and access control in Secrets
+        Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `AssociateCrossAccountReplicaOutput`.
+        """
+
+    def associate_cross_account_replica(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AssociateCrossAccountReplicaOutput:
+        return self._invoke(
+            self._select_input(_models.ASSOCIATE_CROSS_ACCOUNT_REPLICA, args, kwargs),
+            _models.ASSOCIATE_CROSS_ACCOUNT_REPLICA,
+            [],
+            plugins,
+        )
+
+    @_overload
     def batch_get_secret_value(
         self,
-        input: BatchGetSecretValueInput | None = None,
+        request: _models.BatchGetSecretValueInput
+        | _models.BatchGetSecretValueInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> BatchGetSecretValueOutput: ...
+
+    @_overload
+    def batch_get_secret_value(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.BatchGetSecretValueInputDict],
     ) -> BatchGetSecretValueOutput:
         """
         Retrieves the contents of the encrypted fields `SecretString` or
@@ -152,8 +219,6 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 
         Args:
-            input:
-                An instance of `BatchGetSecretValueInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -163,10 +228,33 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Returns:
             An instance of `BatchGetSecretValueOutput`.
         """
-        return self._invoke(input, _models.BATCH_GET_SECRET_VALUE, [], plugins)
 
+    def batch_get_secret_value(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> BatchGetSecretValueOutput:
+        return self._invoke(
+            self._select_input(_models.BATCH_GET_SECRET_VALUE, args, kwargs),
+            _models.BATCH_GET_SECRET_VALUE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def cancel_rotate_secret(
-        self, input: CancelRotateSecretInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CancelRotateSecretInput | _models.CancelRotateSecretInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CancelRotateSecretOutput: ...
+
+    @_overload
+    def cancel_rotate_secret(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CancelRotateSecretInputDict],
     ) -> CancelRotateSecretOutput:
         """
         Turns off automatic rotation, and if a rotation is currently in
@@ -178,8 +266,8 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         determine whether to roll back to the previous version of the secret by
         moving the staging label `AWSCURRENT` to the version that has
         `AWSPENDING`. To determine which version has a specific staging label,
-        call ListSecretVersionIds. Then use UpdateSecretVersionStage to change
-        staging labels. For more information, see [How rotation
+        call DescribeSecret. Then use UpdateSecretVersionStage to change staging
+        labels. For more information, see [How rotation
         works](https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_how.html).
 
         To turn on automatic rotation again, call RotateSecret.
@@ -197,8 +285,6 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 
         Args:
-            input:
-                An instance of `CancelRotateSecretInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -208,19 +294,43 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Returns:
             An instance of `CancelRotateSecretOutput`.
         """
-        return self._invoke(input, _models.CANCEL_ROTATE_SECRET, [], plugins)
 
+    def cancel_rotate_secret(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CancelRotateSecretOutput:
+        return self._invoke(
+            self._select_input(_models.CANCEL_ROTATE_SECRET, args, kwargs),
+            _models.CANCEL_ROTATE_SECRET,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_secret(
-        self, input: CreateSecretInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.CreateSecretInput | _models.CreateSecretInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateSecretOutput: ...
+
+    @_overload
+    def create_secret(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateSecretInputDict],
     ) -> CreateSecretOutput:
         """
         Creates a new secret. A *secret* can be a password, a set of credentials
         such as a user name and password, an OAuth token, or other secret
         information that you store in an encrypted form in Secrets Manager. The
         secret also includes the connection information to access a database or
-        other service, which Secrets Manager doesn't encrypt. A secret in
-        Secrets Manager consists of both the protected secret data and the
-        important information needed to manage the secret.
+        other service. Secrets Manager does not encrypt this connection
+        information. A secret in Secrets Manager consists of both the encrypted
+        secret versions and the metadata that Secrets Manager uses to manage the
+        secret.
 
         For secrets that use *managed rotation*, you need to create the secret
         through the managing service. For more information, see [Secrets Manager
@@ -232,7 +342,7 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
 
         To create a secret, you can provide the secret value to be encrypted in
         either the `SecretString` parameter or the `SecretBinary` parameter, but
-        not both. If you include `SecretString` or `SecretBinary` then Secrets
+        not both. If you include `SecretString` or `SecretBinary`, then Secrets
         Manager creates an initial secret version and automatically attaches the
         staging label `AWSCURRENT` to it.
 
@@ -246,13 +356,18 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         doesn't already exist in your account, then Secrets Manager creates it
         for you automatically. All users and roles in the Amazon Web Services
         account automatically have access to use `aws/secretsmanager`. Creating
-        `aws/secretsmanager` can result in a one-time significant delay in
-        returning the result.
+        `aws/secretsmanager` can result in a one-time delay to complete the
+        secret creation.
 
         If the secret is in a different Amazon Web Services account from the
         credentials calling the API, then you can't use `aws/secretsmanager` to
         encrypt the secret, and you must create and use a customer managed KMS
         key.
+
+        To create a cross-account replica secret, include
+        `CrossAccountPrimaryARN`. The replica must use a customer managed KMS
+        key, and can't include `AddReplicaRegions`, `Description`,
+        `SecretBinary`, `SecretString`, or `Type`.
 
         Secrets Manager generates a CloudTrail log entry when you call this
         action. Do not include sensitive information in request parameters
@@ -263,8 +378,9 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         **Required permissions:** `secretsmanager:CreateSecret`. If you include
         tags in the secret, you also need `secretsmanager:TagResource`. To add
         replica Regions, you must also have
-        `secretsmanager:ReplicateSecretToRegions`. For more information, see
-        [IAM policy actions for Secrets
+        `secretsmanager:ReplicateSecretToRegions`. To create a cross-account
+        replica secret, you must also have `secretsmanager:PutResourcePolicy`
+        permissions. For more information, see [IAM policy actions for Secrets
         Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions)
         and [Authentication and access control in Secrets
         Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
@@ -281,8 +397,6 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
             secrets](https://docs.aws.amazon.com/secretsmanager/latest/userguide/security_cli-exposure-risks.html).
 
         Args:
-            input:
-                An instance of `CreateSecretInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -292,10 +406,34 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Returns:
             An instance of `CreateSecretOutput`.
         """
-        return self._invoke(input, _models.CREATE_SECRET, [], plugins)
 
+    def create_secret(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateSecretOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_SECRET, args, kwargs),
+            _models.CREATE_SECRET,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_resource_policy(
-        self, input: DeleteResourcePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteResourcePolicyInput
+        | _models.DeleteResourcePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteResourcePolicyOutput: ...
+
+    @_overload
+    def delete_resource_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteResourcePolicyInputDict],
     ) -> DeleteResourcePolicyOutput:
         """
         Deletes the resource-based permission policy attached to the secret. To
@@ -314,8 +452,6 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 
         Args:
-            input:
-                An instance of `DeleteResourcePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -325,10 +461,33 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Returns:
             An instance of `DeleteResourcePolicyOutput`.
         """
-        return self._invoke(input, _models.DELETE_RESOURCE_POLICY, [], plugins)
 
+    def delete_resource_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteResourcePolicyOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_RESOURCE_POLICY, args, kwargs),
+            _models.DELETE_RESOURCE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_secret(
-        self, input: DeleteSecretInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DeleteSecretInput | _models.DeleteSecretInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteSecretOutput: ...
+
+    @_overload
+    def delete_secret(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteSecretInputDict],
     ) -> DeleteSecretOutput:
         """
         Deletes a secret and all of its versions. You can specify a recovery
@@ -342,6 +501,13 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         You must first delete the replicas using RemoveRegionsFromReplication,
         and then delete the primary secret. When you delete a replica, it is
         deleted immediately.
+
+        You can't delete a cross-account primary secret that is associated with
+        a cross-account replica secret. You must first disassociate each of the
+        replicas using DisassociateCrossAccountReplica, before deleting the
+        primary secret. Similarly, you can't delete a cross-account replica
+        secret without first stopping replication. Call StopReplicationToReplica
+        to stop replication, and then you can delete the secret.
 
         You can't directly delete a version of a secret. Instead, you remove
         all staging labels from the version using UpdateSecretVersionStage. This
@@ -379,8 +545,6 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 
         Args:
-            input:
-                An instance of `DeleteSecretInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -390,15 +554,45 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Returns:
             An instance of `DeleteSecretOutput`.
         """
-        return self._invoke(input, _models.DELETE_SECRET, [], plugins)
 
+    def delete_secret(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteSecretOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_SECRET, args, kwargs),
+            _models.DELETE_SECRET,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_secret(
-        self, input: DescribeSecretInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.DescribeSecretInput | _models.DescribeSecretInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeSecretOutput: ...
+
+    @_overload
+    def describe_secret(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeSecretInputDict],
     ) -> DescribeSecretOutput:
         """
         Retrieves the details of a secret. It does not include the encrypted
         secret value. Secrets Manager only returns fields that have a value in
         the response.
+
+        Note:
+            The `VersionIdsToStages` field in the response includes every version ID
+            that has a staging label attached, even if that version doesn't contain
+            a secret value. In contrast, `ListSecretVersionIds` only returns
+            versions that contain a secret value. To check whether a secret version
+            contains a value, call GetSecretValue.
 
         Secrets Manager generates a CloudTrail log entry when you call this
         action. Do not include sensitive information in request parameters
@@ -413,8 +607,6 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 
         Args:
-            input:
-                An instance of `DescribeSecretInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -424,19 +616,112 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Returns:
             An instance of `DescribeSecretOutput`.
         """
-        return self._invoke(input, _models.DESCRIBE_SECRET, [], plugins)
 
+    def describe_secret(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeSecretOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_SECRET, args, kwargs),
+            _models.DESCRIBE_SECRET,
+            [],
+            plugins,
+        )
+
+    @_overload
+    def disassociate_cross_account_replica(
+        self,
+        request: _models.DisassociateCrossAccountReplicaInput
+        | _models.DisassociateCrossAccountReplicaInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DisassociateCrossAccountReplicaOutput: ...
+
+    @_overload
+    def disassociate_cross_account_replica(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DisassociateCrossAccountReplicaInputDict],
+    ) -> DisassociateCrossAccountReplicaOutput:
+        """
+        Removes the link between a primary secret in your account and a
+        cross-account replica secret, and stops replication to the replica
+        secret. Call this operation on the primary secret. This action removes
+        the replica association created by AssociateCrossAccountReplica.
+
+        Disassociating the replica from the primary does not delete the replica
+        secret or convert the replica secret to a standalone secret. The replica
+        secret remains in the other account and its replication status changes
+        to `Detached`. Secrets Manager no longer sends updates from the primary
+        secret to the replica secret after disassociation. To convert a detached
+        replica into a standalone secret, call StopReplicationToReplica on the
+        replica secret.
+
+        You must disassociate a cross-account replica before you call
+        DeleteSecret for the primary secret. The DeleteSecret call fails if any
+        replicas are still associated with the primary secret.
+
+        Secrets Manager generates a CloudTrail log entry when you call this
+        action. Do not include sensitive information in request parameters
+        because it might be logged. For more information, see [Logging Secrets
+        Manager events with
+        CloudTrail](https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html).
+
+        **Required permissions:**
+        `secretsmanager:DisassociateCrossAccountReplica`. For more information,
+        see [IAM policy actions for Secrets
+        Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions)
+        and [Authentication and access control in Secrets
+        Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `DisassociateCrossAccountReplicaOutput`.
+        """
+
+    def disassociate_cross_account_replica(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DisassociateCrossAccountReplicaOutput:
+        return self._invoke(
+            self._select_input(
+                _models.DISASSOCIATE_CROSS_ACCOUNT_REPLICA, args, kwargs
+            ),
+            _models.DISASSOCIATE_CROSS_ACCOUNT_REPLICA,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_random_password(
         self,
-        input: GetRandomPasswordInput | None = None,
+        request: _models.GetRandomPasswordInput | _models.GetRandomPasswordInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> GetRandomPasswordOutput: ...
+
+    @_overload
+    def get_random_password(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetRandomPasswordInputDict],
     ) -> GetRandomPasswordOutput:
         """
         Generates a random password. We recommend that you specify the maximum
         length and include every character type that the system you are
         generating a password for can support. By default, Secrets Manager uses
         uppercase and lowercase letters, numbers, and the following characters
-        in passwords: `` !\"#$$%&'()*+,-./:;<=>?@[\\]^_`{|}~ ``
+        in passwords: `` !\\"#$%&'()*+,-./:;<=>?@[\\\\]^_`{|}~ ``
 
         Secrets Manager generates a CloudTrail log entry when you call this
         action.
@@ -448,8 +733,6 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 
         Args:
-            input:
-                An instance of `GetRandomPasswordInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -459,10 +742,33 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Returns:
             An instance of `GetRandomPasswordOutput`.
         """
-        return self._invoke(input, _models.GET_RANDOM_PASSWORD, [], plugins)
 
+    def get_random_password(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetRandomPasswordOutput:
+        return self._invoke(
+            self._select_input(_models.GET_RANDOM_PASSWORD, args, kwargs),
+            _models.GET_RANDOM_PASSWORD,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_resource_policy(
-        self, input: GetResourcePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetResourcePolicyInput | _models.GetResourcePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetResourcePolicyOutput: ...
+
+    @_overload
+    def get_resource_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetResourcePolicyInputDict],
     ) -> GetResourcePolicyOutput:
         """
         Retrieves the JSON text of the resource-based policy document attached
@@ -483,8 +789,6 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 
         Args:
-            input:
-                An instance of `GetResourcePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -494,10 +798,33 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Returns:
             An instance of `GetResourcePolicyOutput`.
         """
-        return self._invoke(input, _models.GET_RESOURCE_POLICY, [], plugins)
 
+    def get_resource_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetResourcePolicyOutput:
+        return self._invoke(
+            self._select_input(_models.GET_RESOURCE_POLICY, args, kwargs),
+            _models.GET_RESOURCE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_secret_value(
-        self, input: GetSecretValueInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.GetSecretValueInput | _models.GetSecretValueInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetSecretValueOutput: ...
+
+    @_overload
+    def get_secret_value(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetSecretValueInputDict],
     ) -> GetSecretValueOutput:
         """
         Retrieves the contents of the encrypted fields `SecretString` or
@@ -531,8 +858,6 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 
         Args:
-            input:
-                An instance of `GetSecretValueInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -542,10 +867,91 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Returns:
             An instance of `GetSecretValueOutput`.
         """
-        return self._invoke(input, _models.GET_SECRET_VALUE, [], plugins)
 
+    def get_secret_value(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetSecretValueOutput:
+        return self._invoke(
+            self._select_input(_models.GET_SECRET_VALUE, args, kwargs),
+            _models.GET_SECRET_VALUE,
+            [],
+            plugins,
+        )
+
+    @_overload
+    def list_resource_policies(
+        self,
+        request: _models.ListResourcePoliciesInput
+        | _models.ListResourcePoliciesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListResourcePoliciesOutput: ...
+
+    @_overload
+    def list_resource_policies(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListResourcePoliciesInputDict],
+    ) -> ListResourcePoliciesOutput:
+        """
+        Lists the resource-based policies attached to a secret. The response
+        contains only the names of the policies, not their contents. Secrets
+        Manager lists `default` first, followed by any other policies in
+        alphabetical order. To get the contents of a policy, use
+        GetResourcePolicy. You can modify only the `default` policy.
+
+        Secrets Manager generates a CloudTrail log entry when you call this
+        action. Do not include sensitive information in request parameters
+        because it might be logged. For more information, see [Logging Secrets
+        Manager events with
+        CloudTrail](https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html).
+
+        **Required permissions:** `secretsmanager:ListResourcePolicies`. For
+        more information, see [IAM policy actions for Secrets
+        Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions)
+        and [Authentication and access control in Secrets
+        Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `ListResourcePoliciesOutput`.
+        """
+
+    def list_resource_policies(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListResourcePoliciesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_RESOURCE_POLICIES, args, kwargs),
+            _models.LIST_RESOURCE_POLICIES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_secrets(
-        self, input: ListSecretsInput | None = None, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListSecretsInput | _models.ListSecretsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListSecretsOutput: ...
+
+    @_overload
+    def list_secrets(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListSecretsInputDict],
     ) -> ListSecretsOutput:
         """
         Lists the secrets that are stored by Secrets Manager in the Amazon Web
@@ -578,8 +984,6 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 
         Args:
-            input:
-                An instance of `ListSecretsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -589,10 +993,34 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Returns:
             An instance of `ListSecretsOutput`.
         """
-        return self._invoke(input, _models.LIST_SECRETS, [], plugins)
 
+    def list_secrets(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListSecretsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_SECRETS, args, kwargs),
+            _models.LIST_SECRETS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_secret_version_ids(
-        self, input: ListSecretVersionIdsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ListSecretVersionIdsInput
+        | _models.ListSecretVersionIdsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListSecretVersionIdsOutput: ...
+
+    @_overload
+    def list_secret_version_ids(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListSecretVersionIdsInputDict],
     ) -> ListSecretVersionIdsOutput:
         """
         Lists the versions of a secret. Secrets Manager uses staging labels to
@@ -601,6 +1029,12 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Versions](https://docs.aws.amazon.com/secretsmanager/latest/userguide/getting-started.html#term_version).
 
         To list the secrets in the account, use ListSecrets.
+
+        Note:
+            `ListSecretVersionIds` only returns versions that contain a secret
+            value. To see all version IDs that have staging labels attached,
+            including ones without a secret value, call `DescribeSecret` and check
+            `VersionIdsToStages`.
 
         Secrets Manager generates a CloudTrail log entry when you call this
         action. Do not include sensitive information in request parameters
@@ -615,8 +1049,6 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 
         Args:
-            input:
-                An instance of `ListSecretVersionIdsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -626,10 +1058,33 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Returns:
             An instance of `ListSecretVersionIdsOutput`.
         """
-        return self._invoke(input, _models.LIST_SECRET_VERSION_IDS, [], plugins)
 
+    def list_secret_version_ids(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListSecretVersionIdsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_SECRET_VERSION_IDS, args, kwargs),
+            _models.LIST_SECRET_VERSION_IDS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_resource_policy(
-        self, input: PutResourcePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutResourcePolicyInput | _models.PutResourcePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutResourcePolicyOutput: ...
+
+    @_overload
+    def put_resource_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutResourcePolicyInputDict],
     ) -> PutResourcePolicyOutput:
         """
         Attaches a resource-based permission policy to a secret. A
@@ -654,8 +1109,6 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 
         Args:
-            input:
-                An instance of `PutResourcePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -665,10 +1118,33 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Returns:
             An instance of `PutResourcePolicyOutput`.
         """
-        return self._invoke(input, _models.PUT_RESOURCE_POLICY, [], plugins)
 
+    def put_resource_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutResourcePolicyOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_RESOURCE_POLICY, args, kwargs),
+            _models.PUT_RESOURCE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def put_secret_value(
-        self, input: PutSecretValueInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.PutSecretValueInput | _models.PutSecretValueInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PutSecretValueOutput: ...
+
+    @_overload
+    def put_secret_value(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PutSecretValueInputDict],
     ) -> PutSecretValueOutput:
         """
         Creates a new version of your secret by creating a new encrypted value
@@ -722,8 +1198,6 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
             secrets](https://docs.aws.amazon.com/secretsmanager/latest/userguide/security_cli-exposure-risks.html).
 
         Args:
-            input:
-                An instance of `PutSecretValueInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -733,12 +1207,34 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Returns:
             An instance of `PutSecretValueOutput`.
         """
-        return self._invoke(input, _models.PUT_SECRET_VALUE, [], plugins)
 
+    def put_secret_value(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PutSecretValueOutput:
+        return self._invoke(
+            self._select_input(_models.PUT_SECRET_VALUE, args, kwargs),
+            _models.PUT_SECRET_VALUE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def remove_regions_from_replication(
         self,
-        input: RemoveRegionsFromReplicationInput,
+        request: _models.RemoveRegionsFromReplicationInput
+        | _models.RemoveRegionsFromReplicationInputDict,
+        /,
+        *,
         plugins: list[Plugin] | None = None,
+    ) -> RemoveRegionsFromReplicationOutput: ...
+
+    @_overload
+    def remove_regions_from_replication(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RemoveRegionsFromReplicationInputDict],
     ) -> RemoveRegionsFromReplicationOutput:
         """
         For a secret that is replicated to other Regions, deletes the secret
@@ -757,8 +1253,6 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 
         Args:
-            input:
-                An instance of `RemoveRegionsFromReplicationInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -768,10 +1262,34 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Returns:
             An instance of `RemoveRegionsFromReplicationOutput`.
         """
-        return self._invoke(input, _models.REMOVE_REGIONS_FROM_REPLICATION, [], plugins)
 
+    def remove_regions_from_replication(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RemoveRegionsFromReplicationOutput:
+        return self._invoke(
+            self._select_input(_models.REMOVE_REGIONS_FROM_REPLICATION, args, kwargs),
+            _models.REMOVE_REGIONS_FROM_REPLICATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def replicate_secret_to_regions(
-        self, input: ReplicateSecretToRegionsInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ReplicateSecretToRegionsInput
+        | _models.ReplicateSecretToRegionsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ReplicateSecretToRegionsOutput: ...
+
+    @_overload
+    def replicate_secret_to_regions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ReplicateSecretToRegionsInputDict],
     ) -> ReplicateSecretToRegionsOutput:
         """
         Replicates the secret to a new Regions. See [Multi-Region
@@ -794,8 +1312,6 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 
         Args:
-            input:
-                An instance of `ReplicateSecretToRegionsInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -805,10 +1321,33 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Returns:
             An instance of `ReplicateSecretToRegionsOutput`.
         """
-        return self._invoke(input, _models.REPLICATE_SECRET_TO_REGIONS, [], plugins)
 
+    def replicate_secret_to_regions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ReplicateSecretToRegionsOutput:
+        return self._invoke(
+            self._select_input(_models.REPLICATE_SECRET_TO_REGIONS, args, kwargs),
+            _models.REPLICATE_SECRET_TO_REGIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def restore_secret(
-        self, input: RestoreSecretInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RestoreSecretInput | _models.RestoreSecretInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RestoreSecretOutput: ...
+
+    @_overload
+    def restore_secret(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RestoreSecretInputDict],
     ) -> RestoreSecretOutput:
         """
         Cancels the scheduled deletion of a secret by removing the `DeletedDate`
@@ -827,8 +1366,6 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 
         Args:
-            input:
-                An instance of `RestoreSecretInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -838,10 +1375,33 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Returns:
             An instance of `RestoreSecretOutput`.
         """
-        return self._invoke(input, _models.RESTORE_SECRET, [], plugins)
 
+    def restore_secret(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RestoreSecretOutput:
+        return self._invoke(
+            self._select_input(_models.RESTORE_SECRET, args, kwargs),
+            _models.RESTORE_SECRET,
+            [],
+            plugins,
+        )
+
+    @_overload
     def rotate_secret(
-        self, input: RotateSecretInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.RotateSecretInput | _models.RotateSecretInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RotateSecretOutput: ...
+
+    @_overload
+    def rotate_secret(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RotateSecretInputDict],
     ) -> RotateSecretOutput:
         """
         Configures and starts the asynchronous process of rotating the secret.
@@ -880,8 +1440,6 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         rotation](https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets-required-permissions-function.html).
 
         Args:
-            input:
-                An instance of `RotateSecretInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -891,17 +1449,51 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Returns:
             An instance of `RotateSecretOutput`.
         """
-        return self._invoke(input, _models.ROTATE_SECRET, [], plugins)
 
+    def rotate_secret(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RotateSecretOutput:
+        return self._invoke(
+            self._select_input(_models.ROTATE_SECRET, args, kwargs),
+            _models.ROTATE_SECRET,
+            [],
+            plugins,
+        )
+
+    @_overload
     def stop_replication_to_replica(
-        self, input: StopReplicationToReplicaInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.StopReplicationToReplicaInput
+        | _models.StopReplicationToReplicaInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StopReplicationToReplicaOutput: ...
+
+    @_overload
+    def stop_replication_to_replica(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StopReplicationToReplicaInputDict],
     ) -> StopReplicationToReplicaOutput:
         """
-        Removes the link between the replica secret and the primary secret and
-        promotes the replica to a primary secret in the replica Region.
+        Removes the link between a replica secret and its primary secret, and
+        stops replication to the replica. You call this operation from the
+        replica account or Region. Depending on the type of replica, the
+        behavior is:
 
-        You must call this operation from the Region in which you want to
-        promote the replica to a primary secret.
+        - **Cross-Region replica**: promotes the replica to a standalone primary
+          secret in the replica Region.
+
+        - **Cross-account replica**: promotes the replica in your account to a
+          standalone secret and stops replication from its primary secret in the
+          other account. Secrets Manager updates the primary secret's
+          replication status to `Detached` for this replica.
+
+        To stop cross-account replication from the primary account instead, use
+        DisassociateCrossAccountReplica.
 
         Secrets Manager generates a CloudTrail log entry when you call this
         action. Do not include sensitive information in request parameters
@@ -910,14 +1502,14 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         CloudTrail](https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html).
 
         **Required permissions:** `secretsmanager:StopReplicationToReplica`. For
-        more information, see [IAM policy actions for Secrets
+        cross-account replica secrets, you must also have
+        `secretsmanager:DeleteResourcePolicy` permissions. For more information,
+        see [IAM policy actions for Secrets
         Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions)
         and [Authentication and access control in Secrets
         Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 
         Args:
-            input:
-                An instance of `StopReplicationToReplicaInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -927,10 +1519,33 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Returns:
             An instance of `StopReplicationToReplicaOutput`.
         """
-        return self._invoke(input, _models.STOP_REPLICATION_TO_REPLICA, [], plugins)
 
+    def stop_replication_to_replica(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StopReplicationToReplicaOutput:
+        return self._invoke(
+            self._select_input(_models.STOP_REPLICATION_TO_REPLICA, args, kwargs),
+            _models.STOP_REPLICATION_TO_REPLICA,
+            [],
+            plugins,
+        )
+
+    @_overload
     def tag_resource(
-        self, input: TagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.TagResourceInput | _models.TagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> TagResourceOutput: ...
+
+    @_overload
+    def tag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.TagResourceInputDict],
     ) -> TagResourceOutput:
         """
         Attaches tags to a secret. Tags consist of a key name and a value. Tags
@@ -961,8 +1576,6 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 
         Args:
-            input:
-                An instance of `TagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -972,10 +1585,33 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Returns:
             An instance of `TagResourceOutput`.
         """
-        return self._invoke(input, _models.TAG_RESOURCE, [], plugins)
 
+    def tag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> TagResourceOutput:
+        return self._invoke(
+            self._select_input(_models.TAG_RESOURCE, args, kwargs),
+            _models.TAG_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def untag_resource(
-        self, input: UntagResourceInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UntagResourceInput | _models.UntagResourceInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UntagResourceOutput: ...
+
+    @_overload
+    def untag_resource(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UntagResourceInputDict],
     ) -> UntagResourceOutput:
         """
         Removes specific tags from a secret.
@@ -1002,8 +1638,6 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 
         Args:
-            input:
-                An instance of `UntagResourceInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1013,10 +1647,33 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Returns:
             An instance of `UntagResourceOutput`.
         """
-        return self._invoke(input, _models.UNTAG_RESOURCE, [], plugins)
 
+    def untag_resource(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UntagResourceOutput:
+        return self._invoke(
+            self._select_input(_models.UNTAG_RESOURCE, args, kwargs),
+            _models.UNTAG_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_secret(
-        self, input: UpdateSecretInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateSecretInput | _models.UpdateSecretInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateSecretOutput: ...
+
+    @_overload
+    def update_secret(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateSecretInputDict],
     ) -> UpdateSecretOutput:
         """
         Modifies the details of a secret, including metadata and the secret
@@ -1078,8 +1735,6 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
             secrets](https://docs.aws.amazon.com/secretsmanager/latest/userguide/security_cli-exposure-risks.html).
 
         Args:
-            input:
-                An instance of `UpdateSecretInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1089,10 +1744,34 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Returns:
             An instance of `UpdateSecretOutput`.
         """
-        return self._invoke(input, _models.UPDATE_SECRET, [], plugins)
 
+    def update_secret(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateSecretOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_SECRET, args, kwargs),
+            _models.UPDATE_SECRET,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_secret_version_stage(
-        self, input: UpdateSecretVersionStageInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.UpdateSecretVersionStageInput
+        | _models.UpdateSecretVersionStageInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateSecretVersionStageOutput: ...
+
+    @_overload
+    def update_secret_version_stage(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateSecretVersionStageInputDict],
     ) -> UpdateSecretVersionStageOutput:
         """
         Modifies the staging labels attached to a version of a secret. Secrets
@@ -1131,8 +1810,6 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 
         Args:
-            input:
-                An instance of `UpdateSecretVersionStageInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1142,10 +1819,34 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Returns:
             An instance of `UpdateSecretVersionStageOutput`.
         """
-        return self._invoke(input, _models.UPDATE_SECRET_VERSION_STAGE, [], plugins)
 
+    def update_secret_version_stage(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateSecretVersionStageOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_SECRET_VERSION_STAGE, args, kwargs),
+            _models.UPDATE_SECRET_VERSION_STAGE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def validate_resource_policy(
-        self, input: ValidateResourcePolicyInput, plugins: list[Plugin] | None = None
+        self,
+        request: _models.ValidateResourcePolicyInput
+        | _models.ValidateResourcePolicyInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ValidateResourcePolicyOutput: ...
+
+    @_overload
+    def validate_resource_policy(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ValidateResourcePolicyInputDict],
     ) -> ValidateResourcePolicyOutput:
         """
         Validates that a resource policy does not grant a wide range of
@@ -1178,8 +1879,6 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 
         Args:
-            input:
-                An instance of `ValidateResourcePolicyInput`.
             plugins:
                 A list of callables that modify the configuration dynamically.
                 Changes made by these plugins only apply for the duration of the
@@ -1189,7 +1888,16 @@ class SecretsManagerClient(Client[SecretsManagerConfig]):
         Returns:
             An instance of `ValidateResourcePolicyOutput`.
         """
-        return self._invoke(input, _models.VALIDATE_RESOURCE_POLICY, [], plugins)
+
+    def validate_resource_policy(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ValidateResourcePolicyOutput:
+        return self._invoke(
+            self._select_input(_models.VALIDATE_RESOURCE_POLICY, args, kwargs),
+            _models.VALIDATE_RESOURCE_POLICY,
+            [],
+            plugins,
+        )
 
     def _new_config(self) -> SecretsManagerConfig:
         return SecretsManagerConfig.resolve()

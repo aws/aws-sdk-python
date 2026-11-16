@@ -2,27 +2,39 @@
 
 from typing import Any
 
+from aws_sdk_dynamodb.aio.client import AsyncDynamoDBClient
+from aws_sdk_dynamodb.client import DynamoDBClient
 from aws_sdk_dynamodb.models import (
     ArchivalSummary,
     AttributeDefinition,
+    AttributeDefinitionDict,
+    AttributeValueDict,
     AttributeValueUpdate,
+    AttributeValueUpdateDict,
     AutoScalingPolicyDescription,
     AutoScalingPolicyUpdate,
+    AutoScalingPolicyUpdateDict,
     AutoScalingSettingsDescription,
     AutoScalingSettingsUpdate,
+    AutoScalingSettingsUpdateDict,
     AutoScalingTargetTrackingScalingPolicyConfigurationDescription,
     AutoScalingTargetTrackingScalingPolicyConfigurationUpdate,
+    AutoScalingTargetTrackingScalingPolicyConfigurationUpdateDict,
     BackupDescription,
     BackupDetails,
     BackupSummary,
     BatchExecuteStatementInput,
+    BatchExecuteStatementInputDict,
     BatchExecuteStatementOutput,
     BatchGetItemInput,
+    BatchGetItemInputDict,
     BatchGetItemOutput,
     BatchStatementError,
     BatchStatementRequest,
+    BatchStatementRequestDict,
     BatchStatementResponse,
     BatchWriteItemInput,
+    BatchWriteItemInputDict,
     BatchWriteItemOutput,
     BillingModeSummary,
     BulkOperationBytes,
@@ -32,239 +44,366 @@ from aws_sdk_dynamodb.models import (
     BulkOperationUsage,
     BulkOperationVectorBytes,
     CancelBulkOperationInput,
+    CancelBulkOperationInputDict,
     CancelBulkOperationOutput,
     CancellationReason,
     Capacity,
     Condition,
     ConditionCheck,
+    ConditionCheckDict,
+    ConditionDict,
     ConsumedCapacity,
     ContinuousBackupsDescription,
     ContributorInsightsSummary,
     CreateBackupInput,
+    CreateBackupInputDict,
     CreateBackupOutput,
     CreateGlobalSecondaryIndexAction,
+    CreateGlobalSecondaryIndexActionDict,
     CreateGlobalTableInput,
+    CreateGlobalTableInputDict,
     CreateGlobalTableOutput,
     CreateGlobalTableWitnessGroupMemberAction,
+    CreateGlobalTableWitnessGroupMemberActionDict,
     CreateReplicaAction,
+    CreateReplicaActionDict,
     CreateReplicationGroupMemberAction,
+    CreateReplicationGroupMemberActionDict,
     CreateTableInput,
+    CreateTableInputDict,
     CreateTableOutput,
     CreateVectorIndexAction,
+    CreateVectorIndexActionDict,
     CsvOptions,
+    CsvOptionsDict,
     Delete,
     DeleteBackupInput,
+    DeleteBackupInputDict,
     DeleteBackupOutput,
+    DeleteDict,
     DeleteGlobalSecondaryIndexAction,
+    DeleteGlobalSecondaryIndexActionDict,
     DeleteGlobalTableWitnessGroupMemberAction,
+    DeleteGlobalTableWitnessGroupMemberActionDict,
     DeleteItemInput,
+    DeleteItemInputDict,
     DeleteItemOutput,
     DeleteReplicaAction,
+    DeleteReplicaActionDict,
     DeleteReplicationGroupMemberAction,
+    DeleteReplicationGroupMemberActionDict,
     DeleteRequest,
+    DeleteRequestDict,
     DeleteResourcePolicyInput,
+    DeleteResourcePolicyInputDict,
     DeleteResourcePolicyOutput,
     DeleteTableInput,
+    DeleteTableInputDict,
     DeleteTableOutput,
     DeleteVectorIndexAction,
+    DeleteVectorIndexActionDict,
     DescribeBackupInput,
+    DescribeBackupInputDict,
     DescribeBackupOutput,
     DescribeBulkOperationInput,
+    DescribeBulkOperationInputDict,
     DescribeBulkOperationOutput,
     DescribeContinuousBackupsInput,
+    DescribeContinuousBackupsInputDict,
     DescribeContinuousBackupsOutput,
     DescribeContributorInsightsInput,
+    DescribeContributorInsightsInputDict,
     DescribeContributorInsightsOutput,
     DescribeEndpointsInput,
+    DescribeEndpointsInputDict,
     DescribeEndpointsOutput,
     DescribeExportInput,
+    DescribeExportInputDict,
     DescribeExportOutput,
     DescribeGlobalTableInput,
+    DescribeGlobalTableInputDict,
     DescribeGlobalTableOutput,
     DescribeGlobalTableSettingsInput,
+    DescribeGlobalTableSettingsInputDict,
     DescribeGlobalTableSettingsOutput,
     DescribeImportInput,
+    DescribeImportInputDict,
     DescribeImportOutput,
     DescribeKinesisStreamingDestinationInput,
+    DescribeKinesisStreamingDestinationInputDict,
     DescribeKinesisStreamingDestinationOutput,
     DescribeLimitsInput,
+    DescribeLimitsInputDict,
     DescribeLimitsOutput,
     DescribeTableInput,
+    DescribeTableInputDict,
     DescribeTableOutput,
     DescribeTableReplicaAutoScalingInput,
+    DescribeTableReplicaAutoScalingInputDict,
     DescribeTableReplicaAutoScalingOutput,
     DescribeTimeToLiveInput,
+    DescribeTimeToLiveInputDict,
     DescribeTimeToLiveOutput,
     DisableKinesisStreamingDestinationInput,
+    DisableKinesisStreamingDestinationInputDict,
     DisableKinesisStreamingDestinationOutput,
     DisassociateReplicationGroupMemberAction,
+    DisassociateReplicationGroupMemberActionDict,
     EnableKinesisStreamingConfiguration,
+    EnableKinesisStreamingConfigurationDict,
     EnableKinesisStreamingDestinationInput,
+    EnableKinesisStreamingDestinationInputDict,
     EnableKinesisStreamingDestinationOutput,
     Endpoint,
     ExecuteStatementInput,
+    ExecuteStatementInputDict,
     ExecuteStatementOutput,
     ExecuteTransactionInput,
+    ExecuteTransactionInputDict,
     ExecuteTransactionOutput,
     ExpectedAttributeValue,
+    ExpectedAttributeValueDict,
     ExportDescription,
     ExportSummary,
     ExportTableToPointInTimeInput,
+    ExportTableToPointInTimeInputDict,
     ExportTableToPointInTimeOutput,
     FailureException,
     FilterSpecification,
+    FilterSpecificationDict,
     Get,
+    GetDict,
     GetItemInput,
+    GetItemInputDict,
     GetItemOutput,
     GetResourcePolicyInput,
+    GetResourcePolicyInputDict,
     GetResourcePolicyOutput,
     GlobalSecondaryIndex,
     GlobalSecondaryIndexAutoScalingUpdate,
+    GlobalSecondaryIndexAutoScalingUpdateDict,
     GlobalSecondaryIndexDescription,
+    GlobalSecondaryIndexDict,
     GlobalSecondaryIndexInfo,
     GlobalSecondaryIndexUpdate,
+    GlobalSecondaryIndexUpdateDict,
     GlobalSecondaryIndexWarmThroughputDescription,
     GlobalTable,
     GlobalTableDescription,
     GlobalTableGlobalSecondaryIndexSettingsUpdate,
+    GlobalTableGlobalSecondaryIndexSettingsUpdateDict,
     GlobalTableWitnessDescription,
     GlobalTableWitnessGroupUpdate,
+    GlobalTableWitnessGroupUpdateDict,
     ImportSummary,
     ImportTableDescription,
     ImportTableInput,
+    ImportTableInputDict,
     ImportTableOutput,
     IncrementalExportSpecification,
+    IncrementalExportSpecificationDict,
     InputFormatOptions,
+    InputFormatOptionsDict,
     InputS3Configuration,
+    InputS3ConfigurationDict,
     ItemCollectionMetrics,
     ItemResponse,
     KeySchemaElement,
+    KeySchemaElementDict,
     KeysAndAttributes,
+    KeysAndAttributesDict,
     KinesisDataStreamDestination,
     ListBackupsInput,
+    ListBackupsInputDict,
     ListBackupsOutput,
     ListBulkOperationsInput,
+    ListBulkOperationsInputDict,
     ListBulkOperationsOutput,
     ListContributorInsightsInput,
+    ListContributorInsightsInputDict,
     ListContributorInsightsOutput,
     ListExportsInput,
+    ListExportsInputDict,
     ListExportsOutput,
     ListGlobalTablesInput,
+    ListGlobalTablesInputDict,
     ListGlobalTablesOutput,
     ListImportsInput,
+    ListImportsInputDict,
     ListImportsOutput,
     ListTablesInput,
+    ListTablesInputDict,
     ListTablesOutput,
     ListTagsOfResourceInput,
+    ListTagsOfResourceInputDict,
     ListTagsOfResourceOutput,
     LocalSecondaryIndex,
     LocalSecondaryIndexDescription,
+    LocalSecondaryIndexDict,
     LocalSecondaryIndexInfo,
     OnDemandThroughput,
+    OnDemandThroughputDict,
     OnDemandThroughputOverride,
+    OnDemandThroughputOverrideDict,
     OutputS3Configuration,
+    OutputS3ConfigurationDict,
     ParameterizedStatement,
+    ParameterizedStatementDict,
     PointInTimeRecoveryDescription,
     PointInTimeRecoverySpecification,
+    PointInTimeRecoverySpecificationDict,
     Projection,
+    ProjectionDict,
     ProvisionedThroughput,
     ProvisionedThroughputDescription,
+    ProvisionedThroughputDict,
     ProvisionedThroughputOverride,
+    ProvisionedThroughputOverrideDict,
     Put,
+    PutDict,
     PutItemInput,
+    PutItemInputDict,
     PutItemOutput,
     PutRequest,
+    PutRequestDict,
     PutResourcePolicyInput,
+    PutResourcePolicyInputDict,
     PutResourcePolicyOutput,
     QueryInput,
+    QueryInputDict,
     QueryOutput,
     Replica,
     ReplicaAutoScalingDescription,
     ReplicaAutoScalingUpdate,
+    ReplicaAutoScalingUpdateDict,
     ReplicaDescription,
+    ReplicaDict,
     ReplicaGlobalSecondaryIndex,
     ReplicaGlobalSecondaryIndexAutoScalingDescription,
     ReplicaGlobalSecondaryIndexAutoScalingUpdate,
+    ReplicaGlobalSecondaryIndexAutoScalingUpdateDict,
     ReplicaGlobalSecondaryIndexDescription,
+    ReplicaGlobalSecondaryIndexDict,
     ReplicaGlobalSecondaryIndexSettingsDescription,
     ReplicaGlobalSecondaryIndexSettingsUpdate,
+    ReplicaGlobalSecondaryIndexSettingsUpdateDict,
     ReplicaSettingsDescription,
     ReplicaSettingsUpdate,
+    ReplicaSettingsUpdateDict,
     ReplicaUpdate,
+    ReplicaUpdateDict,
     ReplicationGroupUpdate,
+    ReplicationGroupUpdateDict,
     RestoreSummary,
     RestoreTableFromBackupInput,
+    RestoreTableFromBackupInputDict,
     RestoreTableFromBackupOutput,
     RestoreTableToPointInTimeInput,
+    RestoreTableToPointInTimeInputDict,
     RestoreTableToPointInTimeOutput,
     S3BucketSource,
+    S3BucketSourceDict,
     SSEDescription,
     SSESpecification,
+    SSESpecificationDict,
     ScanInput,
+    ScanInputDict,
     ScanOutput,
     SearchResultItem,
     SearchSchemaElement,
+    SearchSchemaElementDict,
     SearchVectorsInput,
+    SearchVectorsInputDict,
     SearchVectorsOutput,
     SourceTableDetails,
     SourceTableFeatureDetails,
     StartBulkPutItemsInput,
+    StartBulkPutItemsInputDict,
     StartBulkPutItemsOutput,
     StreamSpecification,
+    StreamSpecificationDict,
     TableAutoScalingDescription,
     TableClassSummary,
     TableCreationParameters,
+    TableCreationParametersDict,
     TableDescription,
     TableWarmThroughputDescription,
     Tag,
+    TagDict,
     TagResourceInput,
+    TagResourceInputDict,
     TagResourceOutput,
     ThrottlingReason,
     TimeToLiveDescription,
     TimeToLiveSpecification,
+    TimeToLiveSpecificationDict,
     TransactGetItem,
+    TransactGetItemDict,
     TransactGetItemsInput,
+    TransactGetItemsInputDict,
     TransactGetItemsOutput,
     TransactWriteItem,
+    TransactWriteItemDict,
     TransactWriteItemsInput,
+    TransactWriteItemsInputDict,
     TransactWriteItemsOutput,
     UntagResourceInput,
+    UntagResourceInputDict,
     UntagResourceOutput,
     Update,
     UpdateContinuousBackupsInput,
+    UpdateContinuousBackupsInputDict,
     UpdateContinuousBackupsOutput,
     UpdateContributorInsightsInput,
+    UpdateContributorInsightsInputDict,
     UpdateContributorInsightsOutput,
+    UpdateDict,
     UpdateGlobalSecondaryIndexAction,
+    UpdateGlobalSecondaryIndexActionDict,
     UpdateGlobalTableInput,
+    UpdateGlobalTableInputDict,
     UpdateGlobalTableOutput,
     UpdateGlobalTableSettingsInput,
+    UpdateGlobalTableSettingsInputDict,
     UpdateGlobalTableSettingsOutput,
     UpdateItemInput,
+    UpdateItemInputDict,
     UpdateItemOutput,
     UpdateKinesisStreamingConfiguration,
+    UpdateKinesisStreamingConfigurationDict,
     UpdateKinesisStreamingDestinationInput,
+    UpdateKinesisStreamingDestinationInputDict,
     UpdateKinesisStreamingDestinationOutput,
     UpdateReplicationGroupMemberAction,
+    UpdateReplicationGroupMemberActionDict,
     UpdateTableInput,
+    UpdateTableInputDict,
     UpdateTableOutput,
     UpdateTableReplicaAutoScalingInput,
+    UpdateTableReplicaAutoScalingInputDict,
     UpdateTableReplicaAutoScalingOutput,
     UpdateTimeToLiveInput,
+    UpdateTimeToLiveInputDict,
     UpdateTimeToLiveOutput,
     VectorAttributeDefinition,
+    VectorAttributeDefinitionDict,
     VectorCapacity,
     VectorIndex,
     VectorIndexDescription,
+    VectorIndexDict,
     VectorIndexInfo,
     VectorIndexUpdate,
+    VectorIndexUpdateDict,
     WarmThroughput,
+    WarmThroughputDict,
     WriteRequest,
+    WriteRequestDict,
 )
 
 
-# Static type fixture: pyright over this validates models.pyi.
-# Not executed as a test; it only needs to type-check.
+# Static type fixture: pyright over this validates models.pyi and the
+# client method signatures. Not executed as a test; it only needs to
+# type-check.
 
 _: Any = ...
 
@@ -541,3 +680,848 @@ VectorIndexInfo()
 VectorIndexUpdate()
 WarmThroughput()
 WriteRequest()
+_params_0: AttributeDefinitionDict = {"attribute_name": _, "attribute_type": _}
+_params_1: AttributeValueDict = {"s": _}
+_params_2: AttributeValueUpdateDict = {}
+_params_3: AutoScalingPolicyUpdateDict = {
+    "target_tracking_scaling_policy_configuration": _
+}
+_params_4: AutoScalingSettingsUpdateDict = {}
+_params_5: AutoScalingTargetTrackingScalingPolicyConfigurationUpdateDict = {
+    "target_value": _
+}
+_params_6: BatchExecuteStatementInputDict = {"statements": _}
+_params_7: BatchGetItemInputDict = {"request_items": _}
+_params_8: BatchStatementRequestDict = {"statement": _}
+_params_9: BatchWriteItemInputDict = {"request_items": _}
+_params_10: CancelBulkOperationInputDict = {"bulk_operation_arn": _}
+_params_11: ConditionDict = {"comparison_operator": _}
+_params_12: ConditionCheckDict = {"key": _, "table_name": _, "condition_expression": _}
+_params_13: CreateBackupInputDict = {"table_name": _, "backup_name": _}
+_params_14: CreateGlobalSecondaryIndexActionDict = {
+    "index_name": _,
+    "key_schema": _,
+    "projection": _,
+}
+_params_15: CreateGlobalTableInputDict = {
+    "global_table_name": _,
+    "replication_group": _,
+}
+_params_16: CreateGlobalTableWitnessGroupMemberActionDict = {"region_name": _}
+_params_17: CreateReplicaActionDict = {"region_name": _}
+_params_18: CreateReplicationGroupMemberActionDict = {"region_name": _}
+_params_19: CreateTableInputDict = {"table_name": _}
+_params_20: CreateVectorIndexActionDict = {
+    "index_name": _,
+    "vector_attribute": _,
+    "projection": _,
+    "dimensions": _,
+    "distance_function": _,
+}
+_params_21: CsvOptionsDict = {}
+_params_22: DeleteDict = {"key": _, "table_name": _}
+_params_23: DeleteBackupInputDict = {"backup_arn": _}
+_params_24: DeleteGlobalSecondaryIndexActionDict = {"index_name": _}
+_params_25: DeleteGlobalTableWitnessGroupMemberActionDict = {"region_name": _}
+_params_26: DeleteItemInputDict = {"table_name": _, "key": _}
+_params_27: DeleteReplicaActionDict = {"region_name": _}
+_params_28: DeleteReplicationGroupMemberActionDict = {"region_name": _}
+_params_29: DeleteRequestDict = {"key": _}
+_params_30: DeleteResourcePolicyInputDict = {"resource_arn": _}
+_params_31: DeleteTableInputDict = {"table_name": _}
+_params_32: DeleteVectorIndexActionDict = {"index_name": _}
+_params_33: DescribeBackupInputDict = {"backup_arn": _}
+_params_34: DescribeBulkOperationInputDict = {"bulk_operation_arn": _}
+_params_35: DescribeContinuousBackupsInputDict = {"table_name": _}
+_params_36: DescribeContributorInsightsInputDict = {"table_name": _}
+_params_37: DescribeEndpointsInputDict = {}
+_params_38: DescribeExportInputDict = {"export_arn": _}
+_params_39: DescribeGlobalTableInputDict = {"global_table_name": _}
+_params_40: DescribeGlobalTableSettingsInputDict = {"global_table_name": _}
+_params_41: DescribeImportInputDict = {"import_arn": _}
+_params_42: DescribeKinesisStreamingDestinationInputDict = {"table_name": _}
+_params_43: DescribeLimitsInputDict = {}
+_params_44: DescribeTableInputDict = {"table_name": _}
+_params_45: DescribeTableReplicaAutoScalingInputDict = {"table_name": _}
+_params_46: DescribeTimeToLiveInputDict = {"table_name": _}
+_params_47: DisableKinesisStreamingDestinationInputDict = {
+    "table_name": _,
+    "stream_arn": _,
+}
+_params_48: DisassociateReplicationGroupMemberActionDict = {
+    "region_name": _,
+    "disassociation_mode": _,
+}
+_params_49: EnableKinesisStreamingConfigurationDict = {}
+_params_50: EnableKinesisStreamingDestinationInputDict = {
+    "table_name": _,
+    "stream_arn": _,
+}
+_params_51: ExecuteStatementInputDict = {"statement": _}
+_params_52: ExecuteTransactionInputDict = {"transact_statements": _}
+_params_53: ExpectedAttributeValueDict = {}
+_params_54: ExportTableToPointInTimeInputDict = {"table_arn": _, "s3_bucket": _}
+_params_55: FilterSpecificationDict = {}
+_params_56: GetDict = {"key": _, "table_name": _}
+_params_57: GetItemInputDict = {"table_name": _, "key": _}
+_params_58: GetResourcePolicyInputDict = {"resource_arn": _}
+_params_59: GlobalSecondaryIndexDict = {
+    "index_name": _,
+    "key_schema": _,
+    "projection": _,
+}
+_params_60: GlobalSecondaryIndexAutoScalingUpdateDict = {}
+_params_61: GlobalSecondaryIndexUpdateDict = {}
+_params_62: GlobalTableGlobalSecondaryIndexSettingsUpdateDict = {"index_name": _}
+_params_63: GlobalTableWitnessGroupUpdateDict = {}
+_params_64: ImportTableInputDict = {
+    "s3_bucket_source": _,
+    "input_format": _,
+    "table_creation_parameters": _,
+}
+_params_65: IncrementalExportSpecificationDict = {}
+_params_66: InputFormatOptionsDict = {}
+_params_67: InputS3ConfigurationDict = {"s3_bucket": _, "input_format": _}
+_params_68: KeysAndAttributesDict = {"keys": _}
+_params_69: KeySchemaElementDict = {"attribute_name": _, "key_type": _}
+_params_70: ListBackupsInputDict = {}
+_params_71: ListBulkOperationsInputDict = {}
+_params_72: ListContributorInsightsInputDict = {}
+_params_73: ListExportsInputDict = {}
+_params_74: ListGlobalTablesInputDict = {}
+_params_75: ListImportsInputDict = {}
+_params_76: ListTablesInputDict = {}
+_params_77: ListTagsOfResourceInputDict = {"resource_arn": _}
+_params_78: LocalSecondaryIndexDict = {
+    "index_name": _,
+    "key_schema": _,
+    "projection": _,
+}
+_params_79: OnDemandThroughputDict = {}
+_params_80: OnDemandThroughputOverrideDict = {}
+_params_81: OutputS3ConfigurationDict = {"output_type": _}
+_params_82: ParameterizedStatementDict = {"statement": _}
+_params_83: PointInTimeRecoverySpecificationDict = {"point_in_time_recovery_enabled": _}
+_params_84: ProjectionDict = {}
+_params_85: ProvisionedThroughputDict = {
+    "read_capacity_units": _,
+    "write_capacity_units": _,
+}
+_params_86: ProvisionedThroughputOverrideDict = {}
+_params_87: PutDict = {"item": _, "table_name": _}
+_params_88: PutItemInputDict = {"table_name": _, "item": _}
+_params_89: PutRequestDict = {"item": _}
+_params_90: PutResourcePolicyInputDict = {"resource_arn": _, "policy": _}
+_params_91: QueryInputDict = {"table_name": _}
+_params_92: ReplicaDict = {}
+_params_93: ReplicaAutoScalingUpdateDict = {"region_name": _}
+_params_94: ReplicaGlobalSecondaryIndexDict = {"index_name": _}
+_params_95: ReplicaGlobalSecondaryIndexAutoScalingUpdateDict = {}
+_params_96: ReplicaGlobalSecondaryIndexSettingsUpdateDict = {"index_name": _}
+_params_97: ReplicaSettingsUpdateDict = {"region_name": _}
+_params_98: ReplicationGroupUpdateDict = {}
+_params_99: ReplicaUpdateDict = {}
+_params_100: RestoreTableFromBackupInputDict = {"target_table_name": _, "backup_arn": _}
+_params_101: RestoreTableToPointInTimeInputDict = {"target_table_name": _}
+_params_102: S3BucketSourceDict = {"s3_bucket": _}
+_params_103: ScanInputDict = {"table_name": _}
+_params_104: SearchSchemaElementDict = {
+    "attribute_name": _,
+    "search_schema_element_type": _,
+}
+_params_105: SearchVectorsInputDict = {
+    "table_name": _,
+    "index_name": _,
+    "search_vector": _,
+    "top_k": _,
+}
+_params_106: SSESpecificationDict = {}
+_params_107: StartBulkPutItemsInputDict = {
+    "input_s3_configuration": _,
+    "output_s3_configuration": _,
+    "table_name": _,
+}
+_params_108: StreamSpecificationDict = {"stream_enabled": _}
+_params_109: TableCreationParametersDict = {
+    "table_name": _,
+    "attribute_definitions": _,
+    "key_schema": _,
+}
+_params_110: TagDict = {"key": _, "value": _}
+_params_111: TagResourceInputDict = {"resource_arn": _, "tags": _}
+_params_112: TimeToLiveSpecificationDict = {"enabled": _, "attribute_name": _}
+_params_113: TransactGetItemDict = {"get": _}
+_params_114: TransactGetItemsInputDict = {"transact_items": _}
+_params_115: TransactWriteItemDict = {}
+_params_116: TransactWriteItemsInputDict = {"transact_items": _}
+_params_117: UntagResourceInputDict = {"resource_arn": _, "tag_keys": _}
+_params_118: UpdateDict = {"key": _, "update_expression": _, "table_name": _}
+_params_119: UpdateContinuousBackupsInputDict = {
+    "table_name": _,
+    "point_in_time_recovery_specification": _,
+}
+_params_120: UpdateContributorInsightsInputDict = {
+    "table_name": _,
+    "contributor_insights_action": _,
+}
+_params_121: UpdateGlobalSecondaryIndexActionDict = {"index_name": _}
+_params_122: UpdateGlobalTableInputDict = {"global_table_name": _, "replica_updates": _}
+_params_123: UpdateGlobalTableSettingsInputDict = {"global_table_name": _}
+_params_124: UpdateItemInputDict = {"table_name": _, "key": _}
+_params_125: UpdateKinesisStreamingConfigurationDict = {}
+_params_126: UpdateKinesisStreamingDestinationInputDict = {
+    "table_name": _,
+    "stream_arn": _,
+}
+_params_127: UpdateReplicationGroupMemberActionDict = {"region_name": _}
+_params_128: UpdateTableInputDict = {"table_name": _}
+_params_129: UpdateTableReplicaAutoScalingInputDict = {"table_name": _}
+_params_130: UpdateTimeToLiveInputDict = {
+    "table_name": _,
+    "time_to_live_specification": _,
+}
+_params_131: VectorAttributeDefinitionDict = {"attribute_name": _}
+_params_132: VectorIndexDict = {
+    "index_name": _,
+    "vector_attribute": _,
+    "projection": _,
+    "dimensions": _,
+    "distance_function": _,
+}
+_params_133: VectorIndexUpdateDict = {}
+_params_134: WarmThroughputDict = {}
+_params_135: WriteRequestDict = {}
+
+
+def _request[T](form: type[T]) -> T:
+    raise NotImplementedError
+
+
+async def check_async_calls(client: AsyncDynamoDBClient) -> None:
+    pass
+    await client.batch_execute_statement(statements=_)
+    await client.batch_execute_statement(**_request(BatchExecuteStatementInputDict))
+    await client.batch_execute_statement(_request(BatchExecuteStatementInput))
+    await client.batch_execute_statement(_request(BatchExecuteStatementInputDict))
+    await client.batch_get_item(request_items=_)
+    await client.batch_get_item(**_request(BatchGetItemInputDict))
+    await client.batch_get_item(_request(BatchGetItemInput))
+    await client.batch_get_item(_request(BatchGetItemInputDict))
+    await client.batch_write_item(request_items=_)
+    await client.batch_write_item(**_request(BatchWriteItemInputDict))
+    await client.batch_write_item(_request(BatchWriteItemInput))
+    await client.batch_write_item(_request(BatchWriteItemInputDict))
+    await client.cancel_bulk_operation(bulk_operation_arn=_)
+    await client.cancel_bulk_operation(**_request(CancelBulkOperationInputDict))
+    await client.cancel_bulk_operation(_request(CancelBulkOperationInput))
+    await client.cancel_bulk_operation(_request(CancelBulkOperationInputDict))
+    await client.create_backup(table_name=_, backup_name=_)
+    await client.create_backup(**_request(CreateBackupInputDict))
+    await client.create_backup(_request(CreateBackupInput))
+    await client.create_backup(_request(CreateBackupInputDict))
+    await client.create_global_table(global_table_name=_, replication_group=_)
+    await client.create_global_table(**_request(CreateGlobalTableInputDict))
+    await client.create_global_table(_request(CreateGlobalTableInput))
+    await client.create_global_table(_request(CreateGlobalTableInputDict))
+    await client.create_table(table_name=_)
+    await client.create_table(**_request(CreateTableInputDict))
+    await client.create_table(_request(CreateTableInput))
+    await client.create_table(_request(CreateTableInputDict))
+    await client.delete_backup(backup_arn=_)
+    await client.delete_backup(**_request(DeleteBackupInputDict))
+    await client.delete_backup(_request(DeleteBackupInput))
+    await client.delete_backup(_request(DeleteBackupInputDict))
+    await client.delete_item(table_name=_, key=_)
+    await client.delete_item(**_request(DeleteItemInputDict))
+    await client.delete_item(_request(DeleteItemInput))
+    await client.delete_item(_request(DeleteItemInputDict))
+    await client.delete_resource_policy(resource_arn=_)
+    await client.delete_resource_policy(**_request(DeleteResourcePolicyInputDict))
+    await client.delete_resource_policy(_request(DeleteResourcePolicyInput))
+    await client.delete_resource_policy(_request(DeleteResourcePolicyInputDict))
+    await client.delete_table(table_name=_)
+    await client.delete_table(**_request(DeleteTableInputDict))
+    await client.delete_table(_request(DeleteTableInput))
+    await client.delete_table(_request(DeleteTableInputDict))
+    await client.describe_backup(backup_arn=_)
+    await client.describe_backup(**_request(DescribeBackupInputDict))
+    await client.describe_backup(_request(DescribeBackupInput))
+    await client.describe_backup(_request(DescribeBackupInputDict))
+    await client.describe_bulk_operation(bulk_operation_arn=_)
+    await client.describe_bulk_operation(**_request(DescribeBulkOperationInputDict))
+    await client.describe_bulk_operation(_request(DescribeBulkOperationInput))
+    await client.describe_bulk_operation(_request(DescribeBulkOperationInputDict))
+    await client.describe_continuous_backups(table_name=_)
+    await client.describe_continuous_backups(
+        **_request(DescribeContinuousBackupsInputDict)
+    )
+    await client.describe_continuous_backups(_request(DescribeContinuousBackupsInput))
+    await client.describe_continuous_backups(
+        _request(DescribeContinuousBackupsInputDict)
+    )
+    await client.describe_contributor_insights(table_name=_)
+    await client.describe_contributor_insights(
+        **_request(DescribeContributorInsightsInputDict)
+    )
+    await client.describe_contributor_insights(
+        _request(DescribeContributorInsightsInput)
+    )
+    await client.describe_contributor_insights(
+        _request(DescribeContributorInsightsInputDict)
+    )
+    await client.describe_endpoints()
+    await client.describe_endpoints(**_request(DescribeEndpointsInputDict))
+    await client.describe_endpoints(_request(DescribeEndpointsInput))
+    await client.describe_endpoints(_request(DescribeEndpointsInputDict))
+    await client.describe_export(export_arn=_)
+    await client.describe_export(**_request(DescribeExportInputDict))
+    await client.describe_export(_request(DescribeExportInput))
+    await client.describe_export(_request(DescribeExportInputDict))
+    await client.describe_global_table(global_table_name=_)
+    await client.describe_global_table(**_request(DescribeGlobalTableInputDict))
+    await client.describe_global_table(_request(DescribeGlobalTableInput))
+    await client.describe_global_table(_request(DescribeGlobalTableInputDict))
+    await client.describe_global_table_settings(global_table_name=_)
+    await client.describe_global_table_settings(
+        **_request(DescribeGlobalTableSettingsInputDict)
+    )
+    await client.describe_global_table_settings(
+        _request(DescribeGlobalTableSettingsInput)
+    )
+    await client.describe_global_table_settings(
+        _request(DescribeGlobalTableSettingsInputDict)
+    )
+    await client.describe_import(import_arn=_)
+    await client.describe_import(**_request(DescribeImportInputDict))
+    await client.describe_import(_request(DescribeImportInput))
+    await client.describe_import(_request(DescribeImportInputDict))
+    await client.describe_kinesis_streaming_destination(table_name=_)
+    await client.describe_kinesis_streaming_destination(
+        **_request(DescribeKinesisStreamingDestinationInputDict)
+    )
+    await client.describe_kinesis_streaming_destination(
+        _request(DescribeKinesisStreamingDestinationInput)
+    )
+    await client.describe_kinesis_streaming_destination(
+        _request(DescribeKinesisStreamingDestinationInputDict)
+    )
+    await client.describe_limits()
+    await client.describe_limits(**_request(DescribeLimitsInputDict))
+    await client.describe_limits(_request(DescribeLimitsInput))
+    await client.describe_limits(_request(DescribeLimitsInputDict))
+    await client.describe_table(table_name=_)
+    await client.describe_table(**_request(DescribeTableInputDict))
+    await client.describe_table(_request(DescribeTableInput))
+    await client.describe_table(_request(DescribeTableInputDict))
+    await client.describe_table_replica_auto_scaling(table_name=_)
+    await client.describe_table_replica_auto_scaling(
+        **_request(DescribeTableReplicaAutoScalingInputDict)
+    )
+    await client.describe_table_replica_auto_scaling(
+        _request(DescribeTableReplicaAutoScalingInput)
+    )
+    await client.describe_table_replica_auto_scaling(
+        _request(DescribeTableReplicaAutoScalingInputDict)
+    )
+    await client.describe_time_to_live(table_name=_)
+    await client.describe_time_to_live(**_request(DescribeTimeToLiveInputDict))
+    await client.describe_time_to_live(_request(DescribeTimeToLiveInput))
+    await client.describe_time_to_live(_request(DescribeTimeToLiveInputDict))
+    await client.disable_kinesis_streaming_destination(table_name=_, stream_arn=_)
+    await client.disable_kinesis_streaming_destination(
+        **_request(DisableKinesisStreamingDestinationInputDict)
+    )
+    await client.disable_kinesis_streaming_destination(
+        _request(DisableKinesisStreamingDestinationInput)
+    )
+    await client.disable_kinesis_streaming_destination(
+        _request(DisableKinesisStreamingDestinationInputDict)
+    )
+    await client.enable_kinesis_streaming_destination(table_name=_, stream_arn=_)
+    await client.enable_kinesis_streaming_destination(
+        **_request(EnableKinesisStreamingDestinationInputDict)
+    )
+    await client.enable_kinesis_streaming_destination(
+        _request(EnableKinesisStreamingDestinationInput)
+    )
+    await client.enable_kinesis_streaming_destination(
+        _request(EnableKinesisStreamingDestinationInputDict)
+    )
+    await client.execute_statement(statement=_)
+    await client.execute_statement(**_request(ExecuteStatementInputDict))
+    await client.execute_statement(_request(ExecuteStatementInput))
+    await client.execute_statement(_request(ExecuteStatementInputDict))
+    await client.execute_transaction(transact_statements=_)
+    await client.execute_transaction(**_request(ExecuteTransactionInputDict))
+    await client.execute_transaction(_request(ExecuteTransactionInput))
+    await client.execute_transaction(_request(ExecuteTransactionInputDict))
+    await client.export_table_to_point_in_time(table_arn=_, s3_bucket=_)
+    await client.export_table_to_point_in_time(
+        **_request(ExportTableToPointInTimeInputDict)
+    )
+    await client.export_table_to_point_in_time(_request(ExportTableToPointInTimeInput))
+    await client.export_table_to_point_in_time(
+        _request(ExportTableToPointInTimeInputDict)
+    )
+    await client.get_item(table_name=_, key=_)
+    await client.get_item(**_request(GetItemInputDict))
+    await client.get_item(_request(GetItemInput))
+    await client.get_item(_request(GetItemInputDict))
+    await client.get_resource_policy(resource_arn=_)
+    await client.get_resource_policy(**_request(GetResourcePolicyInputDict))
+    await client.get_resource_policy(_request(GetResourcePolicyInput))
+    await client.get_resource_policy(_request(GetResourcePolicyInputDict))
+    await client.import_table(
+        s3_bucket_source=_, input_format=_, table_creation_parameters=_
+    )
+    await client.import_table(**_request(ImportTableInputDict))
+    await client.import_table(_request(ImportTableInput))
+    await client.import_table(_request(ImportTableInputDict))
+    await client.list_backups()
+    await client.list_backups(**_request(ListBackupsInputDict))
+    await client.list_backups(_request(ListBackupsInput))
+    await client.list_backups(_request(ListBackupsInputDict))
+    await client.list_bulk_operations()
+    await client.list_bulk_operations(**_request(ListBulkOperationsInputDict))
+    await client.list_bulk_operations(_request(ListBulkOperationsInput))
+    await client.list_bulk_operations(_request(ListBulkOperationsInputDict))
+    await client.list_contributor_insights()
+    await client.list_contributor_insights(**_request(ListContributorInsightsInputDict))
+    await client.list_contributor_insights(_request(ListContributorInsightsInput))
+    await client.list_contributor_insights(_request(ListContributorInsightsInputDict))
+    await client.list_exports()
+    await client.list_exports(**_request(ListExportsInputDict))
+    await client.list_exports(_request(ListExportsInput))
+    await client.list_exports(_request(ListExportsInputDict))
+    await client.list_global_tables()
+    await client.list_global_tables(**_request(ListGlobalTablesInputDict))
+    await client.list_global_tables(_request(ListGlobalTablesInput))
+    await client.list_global_tables(_request(ListGlobalTablesInputDict))
+    await client.list_imports()
+    await client.list_imports(**_request(ListImportsInputDict))
+    await client.list_imports(_request(ListImportsInput))
+    await client.list_imports(_request(ListImportsInputDict))
+    await client.list_tables()
+    await client.list_tables(**_request(ListTablesInputDict))
+    await client.list_tables(_request(ListTablesInput))
+    await client.list_tables(_request(ListTablesInputDict))
+    await client.list_tags_of_resource(resource_arn=_)
+    await client.list_tags_of_resource(**_request(ListTagsOfResourceInputDict))
+    await client.list_tags_of_resource(_request(ListTagsOfResourceInput))
+    await client.list_tags_of_resource(_request(ListTagsOfResourceInputDict))
+    await client.put_item(table_name=_, item=_)
+    await client.put_item(**_request(PutItemInputDict))
+    await client.put_item(_request(PutItemInput))
+    await client.put_item(_request(PutItemInputDict))
+    await client.put_resource_policy(resource_arn=_, policy=_)
+    await client.put_resource_policy(**_request(PutResourcePolicyInputDict))
+    await client.put_resource_policy(_request(PutResourcePolicyInput))
+    await client.put_resource_policy(_request(PutResourcePolicyInputDict))
+    await client.query(table_name=_)
+    await client.query(**_request(QueryInputDict))
+    await client.query(_request(QueryInput))
+    await client.query(_request(QueryInputDict))
+    await client.restore_table_from_backup(target_table_name=_, backup_arn=_)
+    await client.restore_table_from_backup(**_request(RestoreTableFromBackupInputDict))
+    await client.restore_table_from_backup(_request(RestoreTableFromBackupInput))
+    await client.restore_table_from_backup(_request(RestoreTableFromBackupInputDict))
+    await client.restore_table_to_point_in_time(target_table_name=_)
+    await client.restore_table_to_point_in_time(
+        **_request(RestoreTableToPointInTimeInputDict)
+    )
+    await client.restore_table_to_point_in_time(
+        _request(RestoreTableToPointInTimeInput)
+    )
+    await client.restore_table_to_point_in_time(
+        _request(RestoreTableToPointInTimeInputDict)
+    )
+    await client.scan(table_name=_)
+    await client.scan(**_request(ScanInputDict))
+    await client.scan(_request(ScanInput))
+    await client.scan(_request(ScanInputDict))
+    await client.search_vectors(table_name=_, index_name=_, search_vector=_, top_k=_)
+    await client.search_vectors(**_request(SearchVectorsInputDict))
+    await client.search_vectors(_request(SearchVectorsInput))
+    await client.search_vectors(_request(SearchVectorsInputDict))
+    await client.start_bulk_put_items(
+        input_s3_configuration=_, output_s3_configuration=_, table_name=_
+    )
+    await client.start_bulk_put_items(**_request(StartBulkPutItemsInputDict))
+    await client.start_bulk_put_items(_request(StartBulkPutItemsInput))
+    await client.start_bulk_put_items(_request(StartBulkPutItemsInputDict))
+    await client.tag_resource(resource_arn=_, tags=_)
+    await client.tag_resource(**_request(TagResourceInputDict))
+    await client.tag_resource(_request(TagResourceInput))
+    await client.tag_resource(_request(TagResourceInputDict))
+    await client.transact_get_items(transact_items=_)
+    await client.transact_get_items(**_request(TransactGetItemsInputDict))
+    await client.transact_get_items(_request(TransactGetItemsInput))
+    await client.transact_get_items(_request(TransactGetItemsInputDict))
+    await client.transact_write_items(transact_items=_)
+    await client.transact_write_items(**_request(TransactWriteItemsInputDict))
+    await client.transact_write_items(_request(TransactWriteItemsInput))
+    await client.transact_write_items(_request(TransactWriteItemsInputDict))
+    await client.untag_resource(resource_arn=_, tag_keys=_)
+    await client.untag_resource(**_request(UntagResourceInputDict))
+    await client.untag_resource(_request(UntagResourceInput))
+    await client.untag_resource(_request(UntagResourceInputDict))
+    await client.update_continuous_backups(
+        table_name=_, point_in_time_recovery_specification=_
+    )
+    await client.update_continuous_backups(**_request(UpdateContinuousBackupsInputDict))
+    await client.update_continuous_backups(_request(UpdateContinuousBackupsInput))
+    await client.update_continuous_backups(_request(UpdateContinuousBackupsInputDict))
+    await client.update_contributor_insights(
+        table_name=_, contributor_insights_action=_
+    )
+    await client.update_contributor_insights(
+        **_request(UpdateContributorInsightsInputDict)
+    )
+    await client.update_contributor_insights(_request(UpdateContributorInsightsInput))
+    await client.update_contributor_insights(
+        _request(UpdateContributorInsightsInputDict)
+    )
+    await client.update_global_table(global_table_name=_, replica_updates=_)
+    await client.update_global_table(**_request(UpdateGlobalTableInputDict))
+    await client.update_global_table(_request(UpdateGlobalTableInput))
+    await client.update_global_table(_request(UpdateGlobalTableInputDict))
+    await client.update_global_table_settings(global_table_name=_)
+    await client.update_global_table_settings(
+        **_request(UpdateGlobalTableSettingsInputDict)
+    )
+    await client.update_global_table_settings(_request(UpdateGlobalTableSettingsInput))
+    await client.update_global_table_settings(
+        _request(UpdateGlobalTableSettingsInputDict)
+    )
+    await client.update_item(table_name=_, key=_)
+    await client.update_item(**_request(UpdateItemInputDict))
+    await client.update_item(_request(UpdateItemInput))
+    await client.update_item(_request(UpdateItemInputDict))
+    await client.update_kinesis_streaming_destination(table_name=_, stream_arn=_)
+    await client.update_kinesis_streaming_destination(
+        **_request(UpdateKinesisStreamingDestinationInputDict)
+    )
+    await client.update_kinesis_streaming_destination(
+        _request(UpdateKinesisStreamingDestinationInput)
+    )
+    await client.update_kinesis_streaming_destination(
+        _request(UpdateKinesisStreamingDestinationInputDict)
+    )
+    await client.update_table(table_name=_)
+    await client.update_table(**_request(UpdateTableInputDict))
+    await client.update_table(_request(UpdateTableInput))
+    await client.update_table(_request(UpdateTableInputDict))
+    await client.update_table_replica_auto_scaling(table_name=_)
+    await client.update_table_replica_auto_scaling(
+        **_request(UpdateTableReplicaAutoScalingInputDict)
+    )
+    await client.update_table_replica_auto_scaling(
+        _request(UpdateTableReplicaAutoScalingInput)
+    )
+    await client.update_table_replica_auto_scaling(
+        _request(UpdateTableReplicaAutoScalingInputDict)
+    )
+    await client.update_time_to_live(table_name=_, time_to_live_specification=_)
+    await client.update_time_to_live(**_request(UpdateTimeToLiveInputDict))
+    await client.update_time_to_live(_request(UpdateTimeToLiveInput))
+    await client.update_time_to_live(_request(UpdateTimeToLiveInputDict))
+
+
+def check_sync_calls(client: DynamoDBClient) -> None:
+    pass
+    client.batch_execute_statement(statements=_)
+    client.batch_execute_statement(**_request(BatchExecuteStatementInputDict))
+    client.batch_execute_statement(_request(BatchExecuteStatementInput))
+    client.batch_execute_statement(_request(BatchExecuteStatementInputDict))
+    client.batch_get_item(request_items=_)
+    client.batch_get_item(**_request(BatchGetItemInputDict))
+    client.batch_get_item(_request(BatchGetItemInput))
+    client.batch_get_item(_request(BatchGetItemInputDict))
+    client.batch_write_item(request_items=_)
+    client.batch_write_item(**_request(BatchWriteItemInputDict))
+    client.batch_write_item(_request(BatchWriteItemInput))
+    client.batch_write_item(_request(BatchWriteItemInputDict))
+    client.cancel_bulk_operation(bulk_operation_arn=_)
+    client.cancel_bulk_operation(**_request(CancelBulkOperationInputDict))
+    client.cancel_bulk_operation(_request(CancelBulkOperationInput))
+    client.cancel_bulk_operation(_request(CancelBulkOperationInputDict))
+    client.create_backup(table_name=_, backup_name=_)
+    client.create_backup(**_request(CreateBackupInputDict))
+    client.create_backup(_request(CreateBackupInput))
+    client.create_backup(_request(CreateBackupInputDict))
+    client.create_global_table(global_table_name=_, replication_group=_)
+    client.create_global_table(**_request(CreateGlobalTableInputDict))
+    client.create_global_table(_request(CreateGlobalTableInput))
+    client.create_global_table(_request(CreateGlobalTableInputDict))
+    client.create_table(table_name=_)
+    client.create_table(**_request(CreateTableInputDict))
+    client.create_table(_request(CreateTableInput))
+    client.create_table(_request(CreateTableInputDict))
+    client.delete_backup(backup_arn=_)
+    client.delete_backup(**_request(DeleteBackupInputDict))
+    client.delete_backup(_request(DeleteBackupInput))
+    client.delete_backup(_request(DeleteBackupInputDict))
+    client.delete_item(table_name=_, key=_)
+    client.delete_item(**_request(DeleteItemInputDict))
+    client.delete_item(_request(DeleteItemInput))
+    client.delete_item(_request(DeleteItemInputDict))
+    client.delete_resource_policy(resource_arn=_)
+    client.delete_resource_policy(**_request(DeleteResourcePolicyInputDict))
+    client.delete_resource_policy(_request(DeleteResourcePolicyInput))
+    client.delete_resource_policy(_request(DeleteResourcePolicyInputDict))
+    client.delete_table(table_name=_)
+    client.delete_table(**_request(DeleteTableInputDict))
+    client.delete_table(_request(DeleteTableInput))
+    client.delete_table(_request(DeleteTableInputDict))
+    client.describe_backup(backup_arn=_)
+    client.describe_backup(**_request(DescribeBackupInputDict))
+    client.describe_backup(_request(DescribeBackupInput))
+    client.describe_backup(_request(DescribeBackupInputDict))
+    client.describe_bulk_operation(bulk_operation_arn=_)
+    client.describe_bulk_operation(**_request(DescribeBulkOperationInputDict))
+    client.describe_bulk_operation(_request(DescribeBulkOperationInput))
+    client.describe_bulk_operation(_request(DescribeBulkOperationInputDict))
+    client.describe_continuous_backups(table_name=_)
+    client.describe_continuous_backups(**_request(DescribeContinuousBackupsInputDict))
+    client.describe_continuous_backups(_request(DescribeContinuousBackupsInput))
+    client.describe_continuous_backups(_request(DescribeContinuousBackupsInputDict))
+    client.describe_contributor_insights(table_name=_)
+    client.describe_contributor_insights(
+        **_request(DescribeContributorInsightsInputDict)
+    )
+    client.describe_contributor_insights(_request(DescribeContributorInsightsInput))
+    client.describe_contributor_insights(_request(DescribeContributorInsightsInputDict))
+    client.describe_endpoints()
+    client.describe_endpoints(**_request(DescribeEndpointsInputDict))
+    client.describe_endpoints(_request(DescribeEndpointsInput))
+    client.describe_endpoints(_request(DescribeEndpointsInputDict))
+    client.describe_export(export_arn=_)
+    client.describe_export(**_request(DescribeExportInputDict))
+    client.describe_export(_request(DescribeExportInput))
+    client.describe_export(_request(DescribeExportInputDict))
+    client.describe_global_table(global_table_name=_)
+    client.describe_global_table(**_request(DescribeGlobalTableInputDict))
+    client.describe_global_table(_request(DescribeGlobalTableInput))
+    client.describe_global_table(_request(DescribeGlobalTableInputDict))
+    client.describe_global_table_settings(global_table_name=_)
+    client.describe_global_table_settings(
+        **_request(DescribeGlobalTableSettingsInputDict)
+    )
+    client.describe_global_table_settings(_request(DescribeGlobalTableSettingsInput))
+    client.describe_global_table_settings(
+        _request(DescribeGlobalTableSettingsInputDict)
+    )
+    client.describe_import(import_arn=_)
+    client.describe_import(**_request(DescribeImportInputDict))
+    client.describe_import(_request(DescribeImportInput))
+    client.describe_import(_request(DescribeImportInputDict))
+    client.describe_kinesis_streaming_destination(table_name=_)
+    client.describe_kinesis_streaming_destination(
+        **_request(DescribeKinesisStreamingDestinationInputDict)
+    )
+    client.describe_kinesis_streaming_destination(
+        _request(DescribeKinesisStreamingDestinationInput)
+    )
+    client.describe_kinesis_streaming_destination(
+        _request(DescribeKinesisStreamingDestinationInputDict)
+    )
+    client.describe_limits()
+    client.describe_limits(**_request(DescribeLimitsInputDict))
+    client.describe_limits(_request(DescribeLimitsInput))
+    client.describe_limits(_request(DescribeLimitsInputDict))
+    client.describe_table(table_name=_)
+    client.describe_table(**_request(DescribeTableInputDict))
+    client.describe_table(_request(DescribeTableInput))
+    client.describe_table(_request(DescribeTableInputDict))
+    client.describe_table_replica_auto_scaling(table_name=_)
+    client.describe_table_replica_auto_scaling(
+        **_request(DescribeTableReplicaAutoScalingInputDict)
+    )
+    client.describe_table_replica_auto_scaling(
+        _request(DescribeTableReplicaAutoScalingInput)
+    )
+    client.describe_table_replica_auto_scaling(
+        _request(DescribeTableReplicaAutoScalingInputDict)
+    )
+    client.describe_time_to_live(table_name=_)
+    client.describe_time_to_live(**_request(DescribeTimeToLiveInputDict))
+    client.describe_time_to_live(_request(DescribeTimeToLiveInput))
+    client.describe_time_to_live(_request(DescribeTimeToLiveInputDict))
+    client.disable_kinesis_streaming_destination(table_name=_, stream_arn=_)
+    client.disable_kinesis_streaming_destination(
+        **_request(DisableKinesisStreamingDestinationInputDict)
+    )
+    client.disable_kinesis_streaming_destination(
+        _request(DisableKinesisStreamingDestinationInput)
+    )
+    client.disable_kinesis_streaming_destination(
+        _request(DisableKinesisStreamingDestinationInputDict)
+    )
+    client.enable_kinesis_streaming_destination(table_name=_, stream_arn=_)
+    client.enable_kinesis_streaming_destination(
+        **_request(EnableKinesisStreamingDestinationInputDict)
+    )
+    client.enable_kinesis_streaming_destination(
+        _request(EnableKinesisStreamingDestinationInput)
+    )
+    client.enable_kinesis_streaming_destination(
+        _request(EnableKinesisStreamingDestinationInputDict)
+    )
+    client.execute_statement(statement=_)
+    client.execute_statement(**_request(ExecuteStatementInputDict))
+    client.execute_statement(_request(ExecuteStatementInput))
+    client.execute_statement(_request(ExecuteStatementInputDict))
+    client.execute_transaction(transact_statements=_)
+    client.execute_transaction(**_request(ExecuteTransactionInputDict))
+    client.execute_transaction(_request(ExecuteTransactionInput))
+    client.execute_transaction(_request(ExecuteTransactionInputDict))
+    client.export_table_to_point_in_time(table_arn=_, s3_bucket=_)
+    client.export_table_to_point_in_time(**_request(ExportTableToPointInTimeInputDict))
+    client.export_table_to_point_in_time(_request(ExportTableToPointInTimeInput))
+    client.export_table_to_point_in_time(_request(ExportTableToPointInTimeInputDict))
+    client.get_item(table_name=_, key=_)
+    client.get_item(**_request(GetItemInputDict))
+    client.get_item(_request(GetItemInput))
+    client.get_item(_request(GetItemInputDict))
+    client.get_resource_policy(resource_arn=_)
+    client.get_resource_policy(**_request(GetResourcePolicyInputDict))
+    client.get_resource_policy(_request(GetResourcePolicyInput))
+    client.get_resource_policy(_request(GetResourcePolicyInputDict))
+    client.import_table(s3_bucket_source=_, input_format=_, table_creation_parameters=_)
+    client.import_table(**_request(ImportTableInputDict))
+    client.import_table(_request(ImportTableInput))
+    client.import_table(_request(ImportTableInputDict))
+    client.list_backups()
+    client.list_backups(**_request(ListBackupsInputDict))
+    client.list_backups(_request(ListBackupsInput))
+    client.list_backups(_request(ListBackupsInputDict))
+    client.list_bulk_operations()
+    client.list_bulk_operations(**_request(ListBulkOperationsInputDict))
+    client.list_bulk_operations(_request(ListBulkOperationsInput))
+    client.list_bulk_operations(_request(ListBulkOperationsInputDict))
+    client.list_contributor_insights()
+    client.list_contributor_insights(**_request(ListContributorInsightsInputDict))
+    client.list_contributor_insights(_request(ListContributorInsightsInput))
+    client.list_contributor_insights(_request(ListContributorInsightsInputDict))
+    client.list_exports()
+    client.list_exports(**_request(ListExportsInputDict))
+    client.list_exports(_request(ListExportsInput))
+    client.list_exports(_request(ListExportsInputDict))
+    client.list_global_tables()
+    client.list_global_tables(**_request(ListGlobalTablesInputDict))
+    client.list_global_tables(_request(ListGlobalTablesInput))
+    client.list_global_tables(_request(ListGlobalTablesInputDict))
+    client.list_imports()
+    client.list_imports(**_request(ListImportsInputDict))
+    client.list_imports(_request(ListImportsInput))
+    client.list_imports(_request(ListImportsInputDict))
+    client.list_tables()
+    client.list_tables(**_request(ListTablesInputDict))
+    client.list_tables(_request(ListTablesInput))
+    client.list_tables(_request(ListTablesInputDict))
+    client.list_tags_of_resource(resource_arn=_)
+    client.list_tags_of_resource(**_request(ListTagsOfResourceInputDict))
+    client.list_tags_of_resource(_request(ListTagsOfResourceInput))
+    client.list_tags_of_resource(_request(ListTagsOfResourceInputDict))
+    client.put_item(table_name=_, item=_)
+    client.put_item(**_request(PutItemInputDict))
+    client.put_item(_request(PutItemInput))
+    client.put_item(_request(PutItemInputDict))
+    client.put_resource_policy(resource_arn=_, policy=_)
+    client.put_resource_policy(**_request(PutResourcePolicyInputDict))
+    client.put_resource_policy(_request(PutResourcePolicyInput))
+    client.put_resource_policy(_request(PutResourcePolicyInputDict))
+    client.query(table_name=_)
+    client.query(**_request(QueryInputDict))
+    client.query(_request(QueryInput))
+    client.query(_request(QueryInputDict))
+    client.restore_table_from_backup(target_table_name=_, backup_arn=_)
+    client.restore_table_from_backup(**_request(RestoreTableFromBackupInputDict))
+    client.restore_table_from_backup(_request(RestoreTableFromBackupInput))
+    client.restore_table_from_backup(_request(RestoreTableFromBackupInputDict))
+    client.restore_table_to_point_in_time(target_table_name=_)
+    client.restore_table_to_point_in_time(
+        **_request(RestoreTableToPointInTimeInputDict)
+    )
+    client.restore_table_to_point_in_time(_request(RestoreTableToPointInTimeInput))
+    client.restore_table_to_point_in_time(_request(RestoreTableToPointInTimeInputDict))
+    client.scan(table_name=_)
+    client.scan(**_request(ScanInputDict))
+    client.scan(_request(ScanInput))
+    client.scan(_request(ScanInputDict))
+    client.search_vectors(table_name=_, index_name=_, search_vector=_, top_k=_)
+    client.search_vectors(**_request(SearchVectorsInputDict))
+    client.search_vectors(_request(SearchVectorsInput))
+    client.search_vectors(_request(SearchVectorsInputDict))
+    client.start_bulk_put_items(
+        input_s3_configuration=_, output_s3_configuration=_, table_name=_
+    )
+    client.start_bulk_put_items(**_request(StartBulkPutItemsInputDict))
+    client.start_bulk_put_items(_request(StartBulkPutItemsInput))
+    client.start_bulk_put_items(_request(StartBulkPutItemsInputDict))
+    client.tag_resource(resource_arn=_, tags=_)
+    client.tag_resource(**_request(TagResourceInputDict))
+    client.tag_resource(_request(TagResourceInput))
+    client.tag_resource(_request(TagResourceInputDict))
+    client.transact_get_items(transact_items=_)
+    client.transact_get_items(**_request(TransactGetItemsInputDict))
+    client.transact_get_items(_request(TransactGetItemsInput))
+    client.transact_get_items(_request(TransactGetItemsInputDict))
+    client.transact_write_items(transact_items=_)
+    client.transact_write_items(**_request(TransactWriteItemsInputDict))
+    client.transact_write_items(_request(TransactWriteItemsInput))
+    client.transact_write_items(_request(TransactWriteItemsInputDict))
+    client.untag_resource(resource_arn=_, tag_keys=_)
+    client.untag_resource(**_request(UntagResourceInputDict))
+    client.untag_resource(_request(UntagResourceInput))
+    client.untag_resource(_request(UntagResourceInputDict))
+    client.update_continuous_backups(
+        table_name=_, point_in_time_recovery_specification=_
+    )
+    client.update_continuous_backups(**_request(UpdateContinuousBackupsInputDict))
+    client.update_continuous_backups(_request(UpdateContinuousBackupsInput))
+    client.update_continuous_backups(_request(UpdateContinuousBackupsInputDict))
+    client.update_contributor_insights(table_name=_, contributor_insights_action=_)
+    client.update_contributor_insights(**_request(UpdateContributorInsightsInputDict))
+    client.update_contributor_insights(_request(UpdateContributorInsightsInput))
+    client.update_contributor_insights(_request(UpdateContributorInsightsInputDict))
+    client.update_global_table(global_table_name=_, replica_updates=_)
+    client.update_global_table(**_request(UpdateGlobalTableInputDict))
+    client.update_global_table(_request(UpdateGlobalTableInput))
+    client.update_global_table(_request(UpdateGlobalTableInputDict))
+    client.update_global_table_settings(global_table_name=_)
+    client.update_global_table_settings(**_request(UpdateGlobalTableSettingsInputDict))
+    client.update_global_table_settings(_request(UpdateGlobalTableSettingsInput))
+    client.update_global_table_settings(_request(UpdateGlobalTableSettingsInputDict))
+    client.update_item(table_name=_, key=_)
+    client.update_item(**_request(UpdateItemInputDict))
+    client.update_item(_request(UpdateItemInput))
+    client.update_item(_request(UpdateItemInputDict))
+    client.update_kinesis_streaming_destination(table_name=_, stream_arn=_)
+    client.update_kinesis_streaming_destination(
+        **_request(UpdateKinesisStreamingDestinationInputDict)
+    )
+    client.update_kinesis_streaming_destination(
+        _request(UpdateKinesisStreamingDestinationInput)
+    )
+    client.update_kinesis_streaming_destination(
+        _request(UpdateKinesisStreamingDestinationInputDict)
+    )
+    client.update_table(table_name=_)
+    client.update_table(**_request(UpdateTableInputDict))
+    client.update_table(_request(UpdateTableInput))
+    client.update_table(_request(UpdateTableInputDict))
+    client.update_table_replica_auto_scaling(table_name=_)
+    client.update_table_replica_auto_scaling(
+        **_request(UpdateTableReplicaAutoScalingInputDict)
+    )
+    client.update_table_replica_auto_scaling(
+        _request(UpdateTableReplicaAutoScalingInput)
+    )
+    client.update_table_replica_auto_scaling(
+        _request(UpdateTableReplicaAutoScalingInputDict)
+    )
+    client.update_time_to_live(table_name=_, time_to_live_specification=_)
+    client.update_time_to_live(**_request(UpdateTimeToLiveInputDict))
+    client.update_time_to_live(_request(UpdateTimeToLiveInput))
+    client.update_time_to_live(_request(UpdateTimeToLiveInputDict))

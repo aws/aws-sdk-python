@@ -13,11 +13,11 @@ from typing import (
 )
 
 from smithy_aws_core.aio.auth.sigv4 import AsyncSigV4AuthScheme
-from smithy_aws_core.aio.config import AsyncFileSystem
 from smithy_aws_core.aio.config.aws_config import (
     AsyncAwsConfig,
     AsyncAwsConfigOverrides,
 )
+from smithy_aws_core.aio.config.filesystem import AsyncFileSystem
 from smithy_aws_core.aio.protocols import AsyncAwsJson11ClientProtocol
 from smithy_aws_core.config.resolvers import (
     EndpointUriResolver,
@@ -26,7 +26,10 @@ from smithy_aws_core.config.resolvers import (
 )
 from smithy_aws_core.config.types import FieldSpec
 from smithy_aws_core.endpoints import AWS_RULES_EXTENSION
-from smithy_aws_core.identity import AWSCredentialsIdentity, AWSIdentityProperties
+from smithy_aws_core.identity.components import (
+    AWSCredentialsIdentity,
+    AWSIdentityProperties,
+)
 from smithy_core.aio.interfaces import AsyncEndpointResolver
 from smithy_core.aio.interfaces.auth import AsyncAuthScheme
 from smithy_core.aio.interfaces.identity import AsyncIdentityResolver
@@ -49,6 +52,8 @@ from ..auth import HTTPAuthSchemeResolver
 if TYPE_CHECKING:
     from smithy_core.interceptors import Interceptor
     from ..models import (
+        AssociateCrossAccountReplicaInput,
+        AssociateCrossAccountReplicaOutput,
         BatchGetSecretValueInput,
         BatchGetSecretValueOutput,
         CancelRotateSecretInput,
@@ -61,12 +66,16 @@ if TYPE_CHECKING:
         DeleteSecretOutput,
         DescribeSecretInput,
         DescribeSecretOutput,
+        DisassociateCrossAccountReplicaInput,
+        DisassociateCrossAccountReplicaOutput,
         GetRandomPasswordInput,
         GetRandomPasswordOutput,
         GetResourcePolicyInput,
         GetResourcePolicyOutput,
         GetSecretValueInput,
         GetSecretValueOutput,
+        ListResourcePoliciesInput,
+        ListResourcePoliciesOutput,
         ListSecretVersionIdsInput,
         ListSecretVersionIdsOutput,
         ListSecretsInput,
@@ -98,15 +107,28 @@ if TYPE_CHECKING:
     )
 
     _ServiceInterceptor = Union[
+        Interceptor[
+            AssociateCrossAccountReplicaInput,
+            AssociateCrossAccountReplicaOutput,
+            Any,
+            Any,
+        ],
         Interceptor[BatchGetSecretValueInput, BatchGetSecretValueOutput, Any, Any],
         Interceptor[CancelRotateSecretInput, CancelRotateSecretOutput, Any, Any],
         Interceptor[CreateSecretInput, CreateSecretOutput, Any, Any],
         Interceptor[DeleteResourcePolicyInput, DeleteResourcePolicyOutput, Any, Any],
         Interceptor[DeleteSecretInput, DeleteSecretOutput, Any, Any],
         Interceptor[DescribeSecretInput, DescribeSecretOutput, Any, Any],
+        Interceptor[
+            DisassociateCrossAccountReplicaInput,
+            DisassociateCrossAccountReplicaOutput,
+            Any,
+            Any,
+        ],
         Interceptor[GetRandomPasswordInput, GetRandomPasswordOutput, Any, Any],
         Interceptor[GetResourcePolicyInput, GetResourcePolicyOutput, Any, Any],
         Interceptor[GetSecretValueInput, GetSecretValueOutput, Any, Any],
+        Interceptor[ListResourcePoliciesInput, ListResourcePoliciesOutput, Any, Any],
         Interceptor[ListSecretsInput, ListSecretsOutput, Any, Any],
         Interceptor[ListSecretVersionIdsInput, ListSecretVersionIdsOutput, Any, Any],
         Interceptor[PutResourcePolicyInput, PutResourcePolicyOutput, Any, Any],

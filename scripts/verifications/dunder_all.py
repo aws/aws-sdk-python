@@ -19,8 +19,10 @@ import ast
 
 from _common import (
     Finding,
+    Module,
     analyzed_modules,
     main,
+    module_findings,
     module_index,
     owned_roots,
     resolve_from,
@@ -31,56 +33,57 @@ _NOT_API = frozenset({"logger"})
 
 
 def check() -> list[Finding]:
+    return module_findings(_module_findings, analyzed_modules())
+
+
+def _module_findings(module: Module) -> list[Finding]:
     findings: list[Finding] = []
     index = module_index()
-    for module in analyzed_modules():
-        exported = module.dunder_all
-        if exported is None:
-            continue
-        exported_set = set(exported)
-        for name in sorted(module.defined - _NOT_API):
-            if not name.startswith("_") and name not in exported_set:
-                findings.append(
-                    Finding(f"public {name} is missing from __all__", module.path)
-                )
-        if not module.is_package:
-            continue
-        used = _used_names(module.tree)
-        for name, imp in sorted(module.imported.items()):
-            if name.startswith("_") or imp.top not in owned_roots() or imp.name is None:
-                continue
-            # A used import is a private re-export, and a TYPE_CHECKING one is unbound.
-            if name not in exported_set and (
-                imp.context == "type_checking" or name in used
-            ):
-                continue
-            target, attr = resolve_from(imp)
-            if attr is None:
-                continue
-            if name not in exported_set:
-                findings.append(
-                    Finding(
-                        f"{name} (from {target}) is imported only to re-export but "
-                        "is missing from __all__",
-                        module.path,
-                        imp.line,
-                    )
-                )
-                continue
-            source = index.get(target)
-            source_all = (
-                source.dunder_all
-                if source is not None and not source.model_data
-                else None
+    exported = module.dunder_all
+    if exported is None:
+        return findings
+    exported_set = set(exported)
+    for name in sorted(module.defined - _NOT_API):
+        if not name.startswith("_") and name not in exported_set:
+            findings.append(
+                Finding(f"public {name} is missing from __all__", module.path)
             )
-            if source_all is not None and attr not in source_all:
-                findings.append(
-                    Finding(
-                        f"re-exports {attr} from {target}, which does not list it in __all__",
-                        module.path,
-                        imp.line,
-                    )
+    if not module.is_package:
+        return findings
+    used = _used_names(module.tree)
+    for name, imp in sorted(module.imported.items()):
+        if name.startswith("_") or imp.top not in owned_roots() or imp.name is None:
+            continue
+        # A used import is a private re-export, and a TYPE_CHECKING one is unbound.
+        if name not in exported_set and (
+            imp.context == "type_checking" or name in used
+        ):
+            continue
+        target, attr = resolve_from(imp)
+        if attr is None:
+            continue
+        if name not in exported_set:
+            findings.append(
+                Finding(
+                    f"{name} (from {target}) is imported only to re-export but "
+                    "is missing from __all__",
+                    module.path,
+                    imp.line,
                 )
+            )
+            continue
+        source = index.get(target)
+        source_all = (
+            source.dunder_all if source is not None and not source.model_data else None
+        )
+        if source_all is not None and attr not in source_all:
+            findings.append(
+                Finding(
+                    f"re-exports {attr} from {target}, which does not list it in __all__",
+                    module.path,
+                    imp.line,
+                )
+            )
     return findings
 
 

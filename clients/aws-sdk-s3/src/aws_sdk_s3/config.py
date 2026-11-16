@@ -13,8 +13,8 @@ from typing import (
 )
 
 from smithy_aws_core.auth.sigv4 import SigV4AuthScheme
-from smithy_aws_core.config import FileSystem
 from smithy_aws_core.config.aws_config import AwsConfig, AwsConfigOverrides
+from smithy_aws_core.config.filesystem import FileSystem
 from smithy_aws_core.config.resolvers import (
     EndpointUriResolver,
     resolve_bool_program,
@@ -34,7 +34,10 @@ from smithy_aws_core.config.validators import (
     validate_response_checksum_validation,
 )
 from smithy_aws_core.endpoints import AWS_RULES_EXTENSION
-from smithy_aws_core.identity import AWSCredentialsIdentity, AWSIdentityProperties
+from smithy_aws_core.identity.components import (
+    AWSCredentialsIdentity,
+    AWSIdentityProperties,
+)
 from smithy_aws_core.protocols import RestXmlClientProtocol
 from smithy_core.endpoints import BddEndpointResolver
 from smithy_core.interfaces import (
@@ -636,6 +639,7 @@ class _S3ConfigOverrides(AwsConfigOverrides, total=False):
     use_dualstack_endpoint: bool | None
     request_checksum_calculation: RequestChecksumCalculation | None
     response_checksum_validation: ResponseChecksumValidation | None
+    disable_host_prefix_injection: bool | None
 
 
 @dataclass(kw_only=True, repr=False, init=False)
@@ -752,6 +756,12 @@ class S3Config(AwsConfig):
     end, and a mismatch raises ``ChecksumMismatchError``.
     """
 
+    disable_host_prefix_injection: bool | None = None
+    """
+    Whether to skip prepending operations' modeled host prefixes to the
+    endpoint host.
+    """
+
     _FIELDS: ClassVar[dict[str, FieldSpec]] = {
         "force_path_style": FieldSpec(default=None),
         "use_arn_region": FieldSpec(default=None, resolver=_resolve_use_arn_region),
@@ -785,6 +795,7 @@ class S3Config(AwsConfig):
             resolver=resolve_response_checksum_validation_program,
             validator=validate_response_checksum_validation,
         ),
+        "disable_host_prefix_injection": FieldSpec(default=None),
         **AwsConfig._FIELDS,
         "endpoint_uri": FieldSpec(
             default=None, resolver=EndpointUriResolver("s3").program

@@ -2,137 +2,228 @@
 
 from typing import Any
 
+from aws_sdk_bedrock_data_automation.aio.client import AsyncBedrockDataAutomationClient
+from aws_sdk_bedrock_data_automation.client import BedrockDataAutomationClient
 from aws_sdk_bedrock_data_automation.models import (
     AudioExtractionCategory,
+    AudioExtractionCategoryDict,
     AudioExtractionCategoryTypeConfiguration,
+    AudioExtractionCategoryTypeConfigurationDict,
     AudioLanguageConfiguration,
+    AudioLanguageConfigurationDict,
     AudioOverrideConfiguration,
+    AudioOverrideConfigurationDict,
     AudioStandardExtraction,
+    AudioStandardExtractionDict,
     AudioStandardGenerativeField,
+    AudioStandardGenerativeFieldDict,
     AudioStandardOutputConfiguration,
+    AudioStandardOutputConfigurationDict,
     Blueprint,
     BlueprintFilter,
+    BlueprintFilterDict,
     BlueprintItem,
+    BlueprintItemDict,
     BlueprintOptimizationObject,
+    BlueprintOptimizationObjectDict,
     BlueprintOptimizationOutputConfiguration,
+    BlueprintOptimizationOutputConfigurationDict,
     BlueprintOptimizationSample,
+    BlueprintOptimizationSampleDict,
     BlueprintSummary,
     ChannelLabelingConfiguration,
+    ChannelLabelingConfigurationDict,
     CopyBlueprintStageInput,
+    CopyBlueprintStageInputDict,
     CopyBlueprintStageOutput,
     CreateBlueprintInput,
+    CreateBlueprintInputDict,
     CreateBlueprintOutput,
     CreateBlueprintVersionInput,
+    CreateBlueprintVersionInputDict,
     CreateBlueprintVersionOutput,
     CreateDataAutomationLibraryInput,
+    CreateDataAutomationLibraryInputDict,
     CreateDataAutomationLibraryOutput,
     CreateDataAutomationProjectInput,
+    CreateDataAutomationProjectInputDict,
     CreateDataAutomationProjectOutput,
     CustomOutputConfiguration,
+    CustomOutputConfigurationDict,
     DataAutomationLibrary,
     DataAutomationLibraryConfiguration,
+    DataAutomationLibraryConfigurationDict,
     DataAutomationLibraryFilter,
+    DataAutomationLibraryFilterDict,
     DataAutomationLibraryIngestionJob,
     DataAutomationLibraryIngestionJobSummary,
     DataAutomationLibraryItem,
+    DataAutomationLibraryItemDict,
     DataAutomationLibrarySummary,
     DataAutomationProject,
     DataAutomationProjectFilter,
+    DataAutomationProjectFilterDict,
     DataAutomationProjectSummary,
     DeleteBlueprintInput,
+    DeleteBlueprintInputDict,
     DeleteBlueprintOutput,
     DeleteDataAutomationLibraryInput,
+    DeleteDataAutomationLibraryInputDict,
     DeleteDataAutomationLibraryOutput,
     DeleteDataAutomationProjectInput,
+    DeleteDataAutomationProjectInputDict,
     DeleteDataAutomationProjectOutput,
     DeleteEntitiesInfo,
+    DeleteEntitiesInfoDict,
     DocumentBoundingBox,
+    DocumentBoundingBoxDict,
     DocumentCustomOutputConfiguration,
+    DocumentCustomOutputConfigurationDict,
     DocumentExtractionGranularity,
+    DocumentExtractionGranularityDict,
     DocumentOutputAdditionalFileFormat,
+    DocumentOutputAdditionalFileFormatDict,
     DocumentOutputFormat,
+    DocumentOutputFormatDict,
     DocumentOutputTextFormat,
+    DocumentOutputTextFormatDict,
     DocumentOverrideConfiguration,
+    DocumentOverrideConfigurationDict,
     DocumentStandardExtraction,
+    DocumentStandardExtractionDict,
     DocumentStandardGenerativeField,
+    DocumentStandardGenerativeFieldDict,
     DocumentStandardOutputConfiguration,
+    DocumentStandardOutputConfigurationDict,
     EncryptionConfiguration,
+    EncryptionConfigurationDict,
     EntityTypeInfo,
     EventBridgeConfiguration,
+    EventBridgeConfigurationDict,
     GetBlueprintInput,
+    GetBlueprintInputDict,
     GetBlueprintOptimizationStatusInput,
+    GetBlueprintOptimizationStatusInputDict,
     GetBlueprintOptimizationStatusOutput,
     GetBlueprintOutput,
     GetDataAutomationLibraryEntityInput,
+    GetDataAutomationLibraryEntityInputDict,
     GetDataAutomationLibraryEntityOutput,
     GetDataAutomationLibraryIngestionJobInput,
+    GetDataAutomationLibraryIngestionJobInputDict,
     GetDataAutomationLibraryIngestionJobOutput,
     GetDataAutomationLibraryInput,
+    GetDataAutomationLibraryInputDict,
     GetDataAutomationLibraryOutput,
     GetDataAutomationProjectInput,
+    GetDataAutomationProjectInputDict,
     GetDataAutomationProjectOutput,
     ImageBoundingBox,
+    ImageBoundingBoxDict,
     ImageExtractionCategory,
+    ImageExtractionCategoryDict,
     ImageOverrideConfiguration,
+    ImageOverrideConfigurationDict,
     ImageStandardExtraction,
+    ImageStandardExtractionDict,
     ImageStandardGenerativeField,
+    ImageStandardGenerativeFieldDict,
     ImageStandardOutputConfiguration,
+    ImageStandardOutputConfigurationDict,
+    InlinePayloadDict,
     InputConfiguration,
+    InputConfigurationDict,
     InvokeBlueprintOptimizationAsyncInput,
+    InvokeBlueprintOptimizationAsyncInputDict,
     InvokeBlueprintOptimizationAsyncOutput,
     InvokeDataAutomationLibraryIngestionJobInput,
+    InvokeDataAutomationLibraryIngestionJobInputDict,
     InvokeDataAutomationLibraryIngestionJobOutput,
     ListBlueprintsInput,
+    ListBlueprintsInputDict,
     ListBlueprintsOutput,
     ListDataAutomationLibrariesInput,
+    ListDataAutomationLibrariesInputDict,
     ListDataAutomationLibrariesOutput,
     ListDataAutomationLibraryEntitiesInput,
+    ListDataAutomationLibraryEntitiesInputDict,
     ListDataAutomationLibraryEntitiesOutput,
     ListDataAutomationLibraryIngestionJobsInput,
+    ListDataAutomationLibraryIngestionJobsInputDict,
     ListDataAutomationLibraryIngestionJobsOutput,
     ListDataAutomationProjectsInput,
+    ListDataAutomationProjectsInputDict,
     ListDataAutomationProjectsOutput,
     ListTagsForResourceInput,
+    ListTagsForResourceInputDict,
     ListTagsForResourceOutput,
     ModalityProcessingConfiguration,
+    ModalityProcessingConfigurationDict,
     ModalityRoutingConfiguration,
+    ModalityRoutingConfigurationDict,
     NotificationConfiguration,
+    NotificationConfigurationDict,
     OutputConfiguration,
+    OutputConfigurationDict,
     OverrideConfiguration,
+    OverrideConfigurationDict,
     PIIEntitiesConfiguration,
+    PIIEntitiesConfigurationDict,
     Phrase,
+    PhraseDict,
     S3Object,
+    S3ObjectDict,
     SensitiveDataConfiguration,
+    SensitiveDataConfigurationDict,
     SpeakerLabelingConfiguration,
+    SpeakerLabelingConfigurationDict,
     SplitterConfiguration,
+    SplitterConfigurationDict,
     StandardOutputConfiguration,
+    StandardOutputConfigurationDict,
     Tag,
+    TagDict,
     TagResourceInput,
+    TagResourceInputDict,
     TagResourceOutput,
     TranscriptConfiguration,
+    TranscriptConfigurationDict,
     UntagResourceInput,
+    UntagResourceInputDict,
     UntagResourceOutput,
     UpdateBlueprintInput,
+    UpdateBlueprintInputDict,
     UpdateBlueprintOutput,
     UpdateDataAutomationLibraryInput,
+    UpdateDataAutomationLibraryInputDict,
     UpdateDataAutomationLibraryOutput,
     UpdateDataAutomationProjectInput,
+    UpdateDataAutomationProjectInputDict,
     UpdateDataAutomationProjectOutput,
+    UpsertEntityInfoDict,
     ValidationExceptionField,
     VideoBoundingBox,
+    VideoBoundingBoxDict,
     VideoExtractionCategory,
+    VideoExtractionCategoryDict,
     VideoOverrideConfiguration,
+    VideoOverrideConfigurationDict,
     VideoStandardExtraction,
+    VideoStandardExtractionDict,
     VideoStandardGenerativeField,
+    VideoStandardGenerativeFieldDict,
     VideoStandardOutputConfiguration,
+    VideoStandardOutputConfigurationDict,
     VocabularyEntity,
     VocabularyEntityInfo,
+    VocabularyEntityInfoDict,
     VocabularyEntitySummary,
 )
 
 
-# Static type fixture: pyright over this validates models.pyi.
-# Not executed as a test; it only needs to type-check.
+# Static type fixture: pyright over this validates models.pyi and the
+# client method signatures. Not executed as a test; it only needs to
+# type-check.
 
 _: Any = ...
 
@@ -279,3 +370,549 @@ VideoStandardOutputConfiguration()
 VocabularyEntity()
 VocabularyEntityInfo(language=_, phrases=_)
 VocabularyEntitySummary()
+_params_0: AudioExtractionCategoryDict = {"state": _}
+_params_1: AudioExtractionCategoryTypeConfigurationDict = {}
+_params_2: AudioLanguageConfigurationDict = {}
+_params_3: AudioOverrideConfigurationDict = {}
+_params_4: AudioStandardExtractionDict = {"category": _}
+_params_5: AudioStandardGenerativeFieldDict = {"state": _}
+_params_6: AudioStandardOutputConfigurationDict = {}
+_params_7: BlueprintFilterDict = {"blueprint_arn": _}
+_params_8: BlueprintItemDict = {"blueprint_arn": _}
+_params_9: BlueprintOptimizationObjectDict = {"blueprint_arn": _}
+_params_10: BlueprintOptimizationOutputConfigurationDict = {"s3_object": _}
+_params_11: BlueprintOptimizationSampleDict = {
+    "asset_s3_object": _,
+    "ground_truth_s3_object": _,
+}
+_params_12: ChannelLabelingConfigurationDict = {"state": _}
+_params_13: CopyBlueprintStageInputDict = {
+    "blueprint_arn": _,
+    "source_stage": _,
+    "target_stage": _,
+}
+_params_14: CreateBlueprintInputDict = {"blueprint_name": _, "type": _, "schema": _}
+_params_15: CreateBlueprintVersionInputDict = {"blueprint_arn": _}
+_params_16: CreateDataAutomationLibraryInputDict = {"library_name": _}
+_params_17: CreateDataAutomationProjectInputDict = {
+    "project_name": _,
+    "standard_output_configuration": _,
+}
+_params_18: CustomOutputConfigurationDict = {}
+_params_19: DataAutomationLibraryConfigurationDict = {}
+_params_20: DataAutomationLibraryFilterDict = {"library_arn": _}
+_params_21: DataAutomationLibraryItemDict = {"library_arn": _}
+_params_22: DataAutomationProjectFilterDict = {"project_arn": _}
+_params_23: DeleteBlueprintInputDict = {"blueprint_arn": _}
+_params_24: DeleteDataAutomationLibraryInputDict = {"library_arn": _}
+_params_25: DeleteDataAutomationProjectInputDict = {"project_arn": _}
+_params_26: DeleteEntitiesInfoDict = {"entity_ids": _}
+_params_27: DocumentBoundingBoxDict = {"state": _}
+_params_28: DocumentCustomOutputConfigurationDict = {}
+_params_29: DocumentExtractionGranularityDict = {}
+_params_30: DocumentOutputAdditionalFileFormatDict = {"state": _}
+_params_31: DocumentOutputFormatDict = {"text_format": _, "additional_file_format": _}
+_params_32: DocumentOutputTextFormatDict = {}
+_params_33: DocumentOverrideConfigurationDict = {}
+_params_34: DocumentStandardExtractionDict = {"granularity": _, "bounding_box": _}
+_params_35: DocumentStandardGenerativeFieldDict = {"state": _}
+_params_36: DocumentStandardOutputConfigurationDict = {}
+_params_37: EncryptionConfigurationDict = {"kms_key_id": _}
+_params_38: EventBridgeConfigurationDict = {"event_bridge_enabled": _}
+_params_39: GetBlueprintInputDict = {"blueprint_arn": _}
+_params_40: GetBlueprintOptimizationStatusInputDict = {"invocation_arn": _}
+_params_41: GetDataAutomationLibraryEntityInputDict = {
+    "library_arn": _,
+    "entity_type": _,
+    "entity_id": _,
+}
+_params_42: GetDataAutomationLibraryIngestionJobInputDict = {
+    "library_arn": _,
+    "job_arn": _,
+}
+_params_43: GetDataAutomationLibraryInputDict = {"library_arn": _}
+_params_44: GetDataAutomationProjectInputDict = {"project_arn": _}
+_params_45: ImageBoundingBoxDict = {"state": _}
+_params_46: ImageExtractionCategoryDict = {"state": _}
+_params_47: ImageOverrideConfigurationDict = {}
+_params_48: ImageStandardExtractionDict = {"category": _, "bounding_box": _}
+_params_49: ImageStandardGenerativeFieldDict = {"state": _}
+_params_50: ImageStandardOutputConfigurationDict = {}
+_params_51: InlinePayloadDict = {"upsert_entities_info": _}
+_params_52: InputConfigurationDict = {}
+_params_53: InvokeBlueprintOptimizationAsyncInputDict = {
+    "blueprint": _,
+    "samples": _,
+    "output_configuration": _,
+    "data_automation_profile_arn": _,
+}
+_params_54: InvokeDataAutomationLibraryIngestionJobInputDict = {
+    "library_arn": _,
+    "input_configuration": _,
+    "entity_type": _,
+    "operation_type": _,
+    "output_configuration": _,
+}
+_params_55: ListBlueprintsInputDict = {}
+_params_56: ListDataAutomationLibrariesInputDict = {}
+_params_57: ListDataAutomationLibraryEntitiesInputDict = {
+    "library_arn": _,
+    "entity_type": _,
+}
+_params_58: ListDataAutomationLibraryIngestionJobsInputDict = {"library_arn": _}
+_params_59: ListDataAutomationProjectsInputDict = {}
+_params_60: ListTagsForResourceInputDict = {"resource_arn": _}
+_params_61: ModalityProcessingConfigurationDict = {}
+_params_62: ModalityRoutingConfigurationDict = {}
+_params_63: NotificationConfigurationDict = {"event_bridge_configuration": _}
+_params_64: OutputConfigurationDict = {"s3_uri": _}
+_params_65: OverrideConfigurationDict = {}
+_params_66: PhraseDict = {"text": _}
+_params_67: PIIEntitiesConfigurationDict = {}
+_params_68: S3ObjectDict = {"s3_uri": _}
+_params_69: SensitiveDataConfigurationDict = {"detection_mode": _}
+_params_70: SpeakerLabelingConfigurationDict = {"state": _}
+_params_71: SplitterConfigurationDict = {}
+_params_72: StandardOutputConfigurationDict = {}
+_params_73: TagDict = {"key": _, "value": _}
+_params_74: TagResourceInputDict = {"resource_arn": _, "tags": _}
+_params_75: TranscriptConfigurationDict = {}
+_params_76: UntagResourceInputDict = {"resource_arn": _, "tag_keys": _}
+_params_77: UpdateBlueprintInputDict = {"blueprint_arn": _, "schema": _}
+_params_78: UpdateDataAutomationLibraryInputDict = {"library_arn": _}
+_params_79: UpdateDataAutomationProjectInputDict = {
+    "project_arn": _,
+    "standard_output_configuration": _,
+}
+_params_80: UpsertEntityInfoDict = {"vocabulary": _}
+_params_81: VideoBoundingBoxDict = {"state": _}
+_params_82: VideoExtractionCategoryDict = {"state": _}
+_params_83: VideoOverrideConfigurationDict = {}
+_params_84: VideoStandardExtractionDict = {"category": _, "bounding_box": _}
+_params_85: VideoStandardGenerativeFieldDict = {"state": _}
+_params_86: VideoStandardOutputConfigurationDict = {}
+_params_87: VocabularyEntityInfoDict = {"language": _, "phrases": _}
+
+
+def _request[T](form: type[T]) -> T:
+    raise NotImplementedError
+
+
+async def check_async_calls(client: AsyncBedrockDataAutomationClient) -> None:
+    pass
+    await client.copy_blueprint_stage(blueprint_arn=_, source_stage=_, target_stage=_)
+    await client.copy_blueprint_stage(**_request(CopyBlueprintStageInputDict))
+    await client.copy_blueprint_stage(_request(CopyBlueprintStageInput))
+    await client.copy_blueprint_stage(_request(CopyBlueprintStageInputDict))
+    await client.create_blueprint(blueprint_name=_, type=_, schema=_)
+    await client.create_blueprint(**_request(CreateBlueprintInputDict))
+    await client.create_blueprint(_request(CreateBlueprintInput))
+    await client.create_blueprint(_request(CreateBlueprintInputDict))
+    await client.create_blueprint_version(blueprint_arn=_)
+    await client.create_blueprint_version(**_request(CreateBlueprintVersionInputDict))
+    await client.create_blueprint_version(_request(CreateBlueprintVersionInput))
+    await client.create_blueprint_version(_request(CreateBlueprintVersionInputDict))
+    await client.create_data_automation_library(library_name=_)
+    await client.create_data_automation_library(
+        **_request(CreateDataAutomationLibraryInputDict)
+    )
+    await client.create_data_automation_library(
+        _request(CreateDataAutomationLibraryInput)
+    )
+    await client.create_data_automation_library(
+        _request(CreateDataAutomationLibraryInputDict)
+    )
+    await client.create_data_automation_project(
+        project_name=_, standard_output_configuration=_
+    )
+    await client.create_data_automation_project(
+        **_request(CreateDataAutomationProjectInputDict)
+    )
+    await client.create_data_automation_project(
+        _request(CreateDataAutomationProjectInput)
+    )
+    await client.create_data_automation_project(
+        _request(CreateDataAutomationProjectInputDict)
+    )
+    await client.delete_blueprint(blueprint_arn=_)
+    await client.delete_blueprint(**_request(DeleteBlueprintInputDict))
+    await client.delete_blueprint(_request(DeleteBlueprintInput))
+    await client.delete_blueprint(_request(DeleteBlueprintInputDict))
+    await client.delete_data_automation_library(library_arn=_)
+    await client.delete_data_automation_library(
+        **_request(DeleteDataAutomationLibraryInputDict)
+    )
+    await client.delete_data_automation_library(
+        _request(DeleteDataAutomationLibraryInput)
+    )
+    await client.delete_data_automation_library(
+        _request(DeleteDataAutomationLibraryInputDict)
+    )
+    await client.delete_data_automation_project(project_arn=_)
+    await client.delete_data_automation_project(
+        **_request(DeleteDataAutomationProjectInputDict)
+    )
+    await client.delete_data_automation_project(
+        _request(DeleteDataAutomationProjectInput)
+    )
+    await client.delete_data_automation_project(
+        _request(DeleteDataAutomationProjectInputDict)
+    )
+    await client.get_blueprint(blueprint_arn=_)
+    await client.get_blueprint(**_request(GetBlueprintInputDict))
+    await client.get_blueprint(_request(GetBlueprintInput))
+    await client.get_blueprint(_request(GetBlueprintInputDict))
+    await client.get_blueprint_optimization_status(invocation_arn=_)
+    await client.get_blueprint_optimization_status(
+        **_request(GetBlueprintOptimizationStatusInputDict)
+    )
+    await client.get_blueprint_optimization_status(
+        _request(GetBlueprintOptimizationStatusInput)
+    )
+    await client.get_blueprint_optimization_status(
+        _request(GetBlueprintOptimizationStatusInputDict)
+    )
+    await client.get_data_automation_library(library_arn=_)
+    await client.get_data_automation_library(
+        **_request(GetDataAutomationLibraryInputDict)
+    )
+    await client.get_data_automation_library(_request(GetDataAutomationLibraryInput))
+    await client.get_data_automation_library(
+        _request(GetDataAutomationLibraryInputDict)
+    )
+    await client.get_data_automation_library_entity(
+        library_arn=_, entity_type=_, entity_id=_
+    )
+    await client.get_data_automation_library_entity(
+        **_request(GetDataAutomationLibraryEntityInputDict)
+    )
+    await client.get_data_automation_library_entity(
+        _request(GetDataAutomationLibraryEntityInput)
+    )
+    await client.get_data_automation_library_entity(
+        _request(GetDataAutomationLibraryEntityInputDict)
+    )
+    await client.get_data_automation_library_ingestion_job(library_arn=_, job_arn=_)
+    await client.get_data_automation_library_ingestion_job(
+        **_request(GetDataAutomationLibraryIngestionJobInputDict)
+    )
+    await client.get_data_automation_library_ingestion_job(
+        _request(GetDataAutomationLibraryIngestionJobInput)
+    )
+    await client.get_data_automation_library_ingestion_job(
+        _request(GetDataAutomationLibraryIngestionJobInputDict)
+    )
+    await client.get_data_automation_project(project_arn=_)
+    await client.get_data_automation_project(
+        **_request(GetDataAutomationProjectInputDict)
+    )
+    await client.get_data_automation_project(_request(GetDataAutomationProjectInput))
+    await client.get_data_automation_project(
+        _request(GetDataAutomationProjectInputDict)
+    )
+    await client.invoke_blueprint_optimization_async(
+        blueprint=_, samples=_, output_configuration=_, data_automation_profile_arn=_
+    )
+    await client.invoke_blueprint_optimization_async(
+        **_request(InvokeBlueprintOptimizationAsyncInputDict)
+    )
+    await client.invoke_blueprint_optimization_async(
+        _request(InvokeBlueprintOptimizationAsyncInput)
+    )
+    await client.invoke_blueprint_optimization_async(
+        _request(InvokeBlueprintOptimizationAsyncInputDict)
+    )
+    await client.invoke_data_automation_library_ingestion_job(
+        library_arn=_,
+        input_configuration=_,
+        entity_type=_,
+        operation_type=_,
+        output_configuration=_,
+    )
+    await client.invoke_data_automation_library_ingestion_job(
+        **_request(InvokeDataAutomationLibraryIngestionJobInputDict)
+    )
+    await client.invoke_data_automation_library_ingestion_job(
+        _request(InvokeDataAutomationLibraryIngestionJobInput)
+    )
+    await client.invoke_data_automation_library_ingestion_job(
+        _request(InvokeDataAutomationLibraryIngestionJobInputDict)
+    )
+    await client.list_blueprints()
+    await client.list_blueprints(**_request(ListBlueprintsInputDict))
+    await client.list_blueprints(_request(ListBlueprintsInput))
+    await client.list_blueprints(_request(ListBlueprintsInputDict))
+    await client.list_data_automation_libraries()
+    await client.list_data_automation_libraries(
+        **_request(ListDataAutomationLibrariesInputDict)
+    )
+    await client.list_data_automation_libraries(
+        _request(ListDataAutomationLibrariesInput)
+    )
+    await client.list_data_automation_libraries(
+        _request(ListDataAutomationLibrariesInputDict)
+    )
+    await client.list_data_automation_library_entities(library_arn=_, entity_type=_)
+    await client.list_data_automation_library_entities(
+        **_request(ListDataAutomationLibraryEntitiesInputDict)
+    )
+    await client.list_data_automation_library_entities(
+        _request(ListDataAutomationLibraryEntitiesInput)
+    )
+    await client.list_data_automation_library_entities(
+        _request(ListDataAutomationLibraryEntitiesInputDict)
+    )
+    await client.list_data_automation_library_ingestion_jobs(library_arn=_)
+    await client.list_data_automation_library_ingestion_jobs(
+        **_request(ListDataAutomationLibraryIngestionJobsInputDict)
+    )
+    await client.list_data_automation_library_ingestion_jobs(
+        _request(ListDataAutomationLibraryIngestionJobsInput)
+    )
+    await client.list_data_automation_library_ingestion_jobs(
+        _request(ListDataAutomationLibraryIngestionJobsInputDict)
+    )
+    await client.list_data_automation_projects()
+    await client.list_data_automation_projects(
+        **_request(ListDataAutomationProjectsInputDict)
+    )
+    await client.list_data_automation_projects(
+        _request(ListDataAutomationProjectsInput)
+    )
+    await client.list_data_automation_projects(
+        _request(ListDataAutomationProjectsInputDict)
+    )
+    await client.list_tags_for_resource(resource_arn=_)
+    await client.list_tags_for_resource(**_request(ListTagsForResourceInputDict))
+    await client.list_tags_for_resource(_request(ListTagsForResourceInput))
+    await client.list_tags_for_resource(_request(ListTagsForResourceInputDict))
+    await client.tag_resource(resource_arn=_, tags=_)
+    await client.tag_resource(**_request(TagResourceInputDict))
+    await client.tag_resource(_request(TagResourceInput))
+    await client.tag_resource(_request(TagResourceInputDict))
+    await client.untag_resource(resource_arn=_, tag_keys=_)
+    await client.untag_resource(**_request(UntagResourceInputDict))
+    await client.untag_resource(_request(UntagResourceInput))
+    await client.untag_resource(_request(UntagResourceInputDict))
+    await client.update_blueprint(blueprint_arn=_, schema=_)
+    await client.update_blueprint(**_request(UpdateBlueprintInputDict))
+    await client.update_blueprint(_request(UpdateBlueprintInput))
+    await client.update_blueprint(_request(UpdateBlueprintInputDict))
+    await client.update_data_automation_library(library_arn=_)
+    await client.update_data_automation_library(
+        **_request(UpdateDataAutomationLibraryInputDict)
+    )
+    await client.update_data_automation_library(
+        _request(UpdateDataAutomationLibraryInput)
+    )
+    await client.update_data_automation_library(
+        _request(UpdateDataAutomationLibraryInputDict)
+    )
+    await client.update_data_automation_project(
+        project_arn=_, standard_output_configuration=_
+    )
+    await client.update_data_automation_project(
+        **_request(UpdateDataAutomationProjectInputDict)
+    )
+    await client.update_data_automation_project(
+        _request(UpdateDataAutomationProjectInput)
+    )
+    await client.update_data_automation_project(
+        _request(UpdateDataAutomationProjectInputDict)
+    )
+
+
+def check_sync_calls(client: BedrockDataAutomationClient) -> None:
+    pass
+    client.copy_blueprint_stage(blueprint_arn=_, source_stage=_, target_stage=_)
+    client.copy_blueprint_stage(**_request(CopyBlueprintStageInputDict))
+    client.copy_blueprint_stage(_request(CopyBlueprintStageInput))
+    client.copy_blueprint_stage(_request(CopyBlueprintStageInputDict))
+    client.create_blueprint(blueprint_name=_, type=_, schema=_)
+    client.create_blueprint(**_request(CreateBlueprintInputDict))
+    client.create_blueprint(_request(CreateBlueprintInput))
+    client.create_blueprint(_request(CreateBlueprintInputDict))
+    client.create_blueprint_version(blueprint_arn=_)
+    client.create_blueprint_version(**_request(CreateBlueprintVersionInputDict))
+    client.create_blueprint_version(_request(CreateBlueprintVersionInput))
+    client.create_blueprint_version(_request(CreateBlueprintVersionInputDict))
+    client.create_data_automation_library(library_name=_)
+    client.create_data_automation_library(
+        **_request(CreateDataAutomationLibraryInputDict)
+    )
+    client.create_data_automation_library(_request(CreateDataAutomationLibraryInput))
+    client.create_data_automation_library(
+        _request(CreateDataAutomationLibraryInputDict)
+    )
+    client.create_data_automation_project(
+        project_name=_, standard_output_configuration=_
+    )
+    client.create_data_automation_project(
+        **_request(CreateDataAutomationProjectInputDict)
+    )
+    client.create_data_automation_project(_request(CreateDataAutomationProjectInput))
+    client.create_data_automation_project(
+        _request(CreateDataAutomationProjectInputDict)
+    )
+    client.delete_blueprint(blueprint_arn=_)
+    client.delete_blueprint(**_request(DeleteBlueprintInputDict))
+    client.delete_blueprint(_request(DeleteBlueprintInput))
+    client.delete_blueprint(_request(DeleteBlueprintInputDict))
+    client.delete_data_automation_library(library_arn=_)
+    client.delete_data_automation_library(
+        **_request(DeleteDataAutomationLibraryInputDict)
+    )
+    client.delete_data_automation_library(_request(DeleteDataAutomationLibraryInput))
+    client.delete_data_automation_library(
+        _request(DeleteDataAutomationLibraryInputDict)
+    )
+    client.delete_data_automation_project(project_arn=_)
+    client.delete_data_automation_project(
+        **_request(DeleteDataAutomationProjectInputDict)
+    )
+    client.delete_data_automation_project(_request(DeleteDataAutomationProjectInput))
+    client.delete_data_automation_project(
+        _request(DeleteDataAutomationProjectInputDict)
+    )
+    client.get_blueprint(blueprint_arn=_)
+    client.get_blueprint(**_request(GetBlueprintInputDict))
+    client.get_blueprint(_request(GetBlueprintInput))
+    client.get_blueprint(_request(GetBlueprintInputDict))
+    client.get_blueprint_optimization_status(invocation_arn=_)
+    client.get_blueprint_optimization_status(
+        **_request(GetBlueprintOptimizationStatusInputDict)
+    )
+    client.get_blueprint_optimization_status(
+        _request(GetBlueprintOptimizationStatusInput)
+    )
+    client.get_blueprint_optimization_status(
+        _request(GetBlueprintOptimizationStatusInputDict)
+    )
+    client.get_data_automation_library(library_arn=_)
+    client.get_data_automation_library(**_request(GetDataAutomationLibraryInputDict))
+    client.get_data_automation_library(_request(GetDataAutomationLibraryInput))
+    client.get_data_automation_library(_request(GetDataAutomationLibraryInputDict))
+    client.get_data_automation_library_entity(library_arn=_, entity_type=_, entity_id=_)
+    client.get_data_automation_library_entity(
+        **_request(GetDataAutomationLibraryEntityInputDict)
+    )
+    client.get_data_automation_library_entity(
+        _request(GetDataAutomationLibraryEntityInput)
+    )
+    client.get_data_automation_library_entity(
+        _request(GetDataAutomationLibraryEntityInputDict)
+    )
+    client.get_data_automation_library_ingestion_job(library_arn=_, job_arn=_)
+    client.get_data_automation_library_ingestion_job(
+        **_request(GetDataAutomationLibraryIngestionJobInputDict)
+    )
+    client.get_data_automation_library_ingestion_job(
+        _request(GetDataAutomationLibraryIngestionJobInput)
+    )
+    client.get_data_automation_library_ingestion_job(
+        _request(GetDataAutomationLibraryIngestionJobInputDict)
+    )
+    client.get_data_automation_project(project_arn=_)
+    client.get_data_automation_project(**_request(GetDataAutomationProjectInputDict))
+    client.get_data_automation_project(_request(GetDataAutomationProjectInput))
+    client.get_data_automation_project(_request(GetDataAutomationProjectInputDict))
+    client.invoke_blueprint_optimization_async(
+        blueprint=_, samples=_, output_configuration=_, data_automation_profile_arn=_
+    )
+    client.invoke_blueprint_optimization_async(
+        **_request(InvokeBlueprintOptimizationAsyncInputDict)
+    )
+    client.invoke_blueprint_optimization_async(
+        _request(InvokeBlueprintOptimizationAsyncInput)
+    )
+    client.invoke_blueprint_optimization_async(
+        _request(InvokeBlueprintOptimizationAsyncInputDict)
+    )
+    client.invoke_data_automation_library_ingestion_job(
+        library_arn=_,
+        input_configuration=_,
+        entity_type=_,
+        operation_type=_,
+        output_configuration=_,
+    )
+    client.invoke_data_automation_library_ingestion_job(
+        **_request(InvokeDataAutomationLibraryIngestionJobInputDict)
+    )
+    client.invoke_data_automation_library_ingestion_job(
+        _request(InvokeDataAutomationLibraryIngestionJobInput)
+    )
+    client.invoke_data_automation_library_ingestion_job(
+        _request(InvokeDataAutomationLibraryIngestionJobInputDict)
+    )
+    client.list_blueprints()
+    client.list_blueprints(**_request(ListBlueprintsInputDict))
+    client.list_blueprints(_request(ListBlueprintsInput))
+    client.list_blueprints(_request(ListBlueprintsInputDict))
+    client.list_data_automation_libraries()
+    client.list_data_automation_libraries(
+        **_request(ListDataAutomationLibrariesInputDict)
+    )
+    client.list_data_automation_libraries(_request(ListDataAutomationLibrariesInput))
+    client.list_data_automation_libraries(
+        _request(ListDataAutomationLibrariesInputDict)
+    )
+    client.list_data_automation_library_entities(library_arn=_, entity_type=_)
+    client.list_data_automation_library_entities(
+        **_request(ListDataAutomationLibraryEntitiesInputDict)
+    )
+    client.list_data_automation_library_entities(
+        _request(ListDataAutomationLibraryEntitiesInput)
+    )
+    client.list_data_automation_library_entities(
+        _request(ListDataAutomationLibraryEntitiesInputDict)
+    )
+    client.list_data_automation_library_ingestion_jobs(library_arn=_)
+    client.list_data_automation_library_ingestion_jobs(
+        **_request(ListDataAutomationLibraryIngestionJobsInputDict)
+    )
+    client.list_data_automation_library_ingestion_jobs(
+        _request(ListDataAutomationLibraryIngestionJobsInput)
+    )
+    client.list_data_automation_library_ingestion_jobs(
+        _request(ListDataAutomationLibraryIngestionJobsInputDict)
+    )
+    client.list_data_automation_projects()
+    client.list_data_automation_projects(
+        **_request(ListDataAutomationProjectsInputDict)
+    )
+    client.list_data_automation_projects(_request(ListDataAutomationProjectsInput))
+    client.list_data_automation_projects(_request(ListDataAutomationProjectsInputDict))
+    client.list_tags_for_resource(resource_arn=_)
+    client.list_tags_for_resource(**_request(ListTagsForResourceInputDict))
+    client.list_tags_for_resource(_request(ListTagsForResourceInput))
+    client.list_tags_for_resource(_request(ListTagsForResourceInputDict))
+    client.tag_resource(resource_arn=_, tags=_)
+    client.tag_resource(**_request(TagResourceInputDict))
+    client.tag_resource(_request(TagResourceInput))
+    client.tag_resource(_request(TagResourceInputDict))
+    client.untag_resource(resource_arn=_, tag_keys=_)
+    client.untag_resource(**_request(UntagResourceInputDict))
+    client.untag_resource(_request(UntagResourceInput))
+    client.untag_resource(_request(UntagResourceInputDict))
+    client.update_blueprint(blueprint_arn=_, schema=_)
+    client.update_blueprint(**_request(UpdateBlueprintInputDict))
+    client.update_blueprint(_request(UpdateBlueprintInput))
+    client.update_blueprint(_request(UpdateBlueprintInputDict))
+    client.update_data_automation_library(library_arn=_)
+    client.update_data_automation_library(
+        **_request(UpdateDataAutomationLibraryInputDict)
+    )
+    client.update_data_automation_library(_request(UpdateDataAutomationLibraryInput))
+    client.update_data_automation_library(
+        _request(UpdateDataAutomationLibraryInputDict)
+    )
+    client.update_data_automation_project(
+        project_arn=_, standard_output_configuration=_
+    )
+    client.update_data_automation_project(
+        **_request(UpdateDataAutomationProjectInputDict)
+    )
+    client.update_data_automation_project(_request(UpdateDataAutomationProjectInput))
+    client.update_data_automation_project(
+        _request(UpdateDataAutomationProjectInputDict)
+    )

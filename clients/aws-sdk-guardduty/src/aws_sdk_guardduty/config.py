@@ -13,8 +13,8 @@ from typing import (
 )
 
 from smithy_aws_core.auth.sigv4 import SigV4AuthScheme
-from smithy_aws_core.config import FileSystem
 from smithy_aws_core.config.aws_config import AwsConfig, AwsConfigOverrides
+from smithy_aws_core.config.filesystem import FileSystem
 from smithy_aws_core.config.resolvers import (
     EndpointUriResolver,
     resolve_use_dualstack_endpoint_program,
@@ -22,7 +22,10 @@ from smithy_aws_core.config.resolvers import (
 )
 from smithy_aws_core.config.types import FieldSpec
 from smithy_aws_core.endpoints import AWS_RULES_EXTENSION
-from smithy_aws_core.identity import AWSCredentialsIdentity, AWSIdentityProperties
+from smithy_aws_core.identity.components import (
+    AWSCredentialsIdentity,
+    AWSIdentityProperties,
+)
 from smithy_aws_core.protocols import RestJsonClientProtocol
 from smithy_core.endpoints import BddEndpointResolver
 from smithy_core.interfaces import (
@@ -184,6 +187,8 @@ if TYPE_CHECKING:
         ListFindingsOutput,
         ListIPSetsInput,
         ListIPSetsOutput,
+        ListInvestigationRecordsInput,
+        ListInvestigationRecordsOutput,
         ListInvestigationsInput,
         ListInvestigationsOutput,
         ListInvitationsInput,
@@ -433,6 +438,9 @@ if TYPE_CHECKING:
         Interceptor[ListDetectorsInput, ListDetectorsOutput, Any, Any],
         Interceptor[ListFiltersInput, ListFiltersOutput, Any, Any],
         Interceptor[ListFindingsInput, ListFindingsOutput, Any, Any],
+        Interceptor[
+            ListInvestigationRecordsInput, ListInvestigationRecordsOutput, Any, Any
+        ],
         Interceptor[ListInvestigationsInput, ListInvestigationsOutput, Any, Any],
         Interceptor[ListInvitationsInput, ListInvitationsOutput, Any, Any],
         Interceptor[ListIPSetsInput, ListIPSetsOutput, Any, Any],

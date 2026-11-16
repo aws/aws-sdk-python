@@ -13,8 +13,8 @@ from typing import (
 )
 
 from smithy_aws_core.auth.sigv4 import SigV4AuthScheme
-from smithy_aws_core.config import FileSystem
 from smithy_aws_core.config.aws_config import AwsConfig, AwsConfigOverrides
+from smithy_aws_core.config.filesystem import FileSystem
 from smithy_aws_core.config.resolvers import (
     EndpointUriResolver,
     resolve_use_dualstack_endpoint_program,
@@ -22,7 +22,10 @@ from smithy_aws_core.config.resolvers import (
 )
 from smithy_aws_core.config.types import FieldSpec
 from smithy_aws_core.endpoints import AWS_RULES_EXTENSION
-from smithy_aws_core.identity import AWSCredentialsIdentity, AWSIdentityProperties
+from smithy_aws_core.identity.components import (
+    AWSCredentialsIdentity,
+    AWSIdentityProperties,
+)
 from smithy_aws_core.protocols import AwsJson11ClientProtocol
 from smithy_core.endpoints import BddEndpointResolver
 from smithy_core.interfaces import (
@@ -44,6 +47,8 @@ from .auth import HTTPAuthSchemeResolver
 if TYPE_CHECKING:
     from smithy_core.interceptors import Interceptor
     from .models import (
+        AssociateCrossAccountReplicaInput,
+        AssociateCrossAccountReplicaOutput,
         BatchGetSecretValueInput,
         BatchGetSecretValueOutput,
         CancelRotateSecretInput,
@@ -56,12 +61,16 @@ if TYPE_CHECKING:
         DeleteSecretOutput,
         DescribeSecretInput,
         DescribeSecretOutput,
+        DisassociateCrossAccountReplicaInput,
+        DisassociateCrossAccountReplicaOutput,
         GetRandomPasswordInput,
         GetRandomPasswordOutput,
         GetResourcePolicyInput,
         GetResourcePolicyOutput,
         GetSecretValueInput,
         GetSecretValueOutput,
+        ListResourcePoliciesInput,
+        ListResourcePoliciesOutput,
         ListSecretVersionIdsInput,
         ListSecretVersionIdsOutput,
         ListSecretsInput,
@@ -93,15 +102,28 @@ if TYPE_CHECKING:
     )
 
     _ServiceInterceptor = Union[
+        Interceptor[
+            AssociateCrossAccountReplicaInput,
+            AssociateCrossAccountReplicaOutput,
+            Any,
+            Any,
+        ],
         Interceptor[BatchGetSecretValueInput, BatchGetSecretValueOutput, Any, Any],
         Interceptor[CancelRotateSecretInput, CancelRotateSecretOutput, Any, Any],
         Interceptor[CreateSecretInput, CreateSecretOutput, Any, Any],
         Interceptor[DeleteResourcePolicyInput, DeleteResourcePolicyOutput, Any, Any],
         Interceptor[DeleteSecretInput, DeleteSecretOutput, Any, Any],
         Interceptor[DescribeSecretInput, DescribeSecretOutput, Any, Any],
+        Interceptor[
+            DisassociateCrossAccountReplicaInput,
+            DisassociateCrossAccountReplicaOutput,
+            Any,
+            Any,
+        ],
         Interceptor[GetRandomPasswordInput, GetRandomPasswordOutput, Any, Any],
         Interceptor[GetResourcePolicyInput, GetResourcePolicyOutput, Any, Any],
         Interceptor[GetSecretValueInput, GetSecretValueOutput, Any, Any],
+        Interceptor[ListResourcePoliciesInput, ListResourcePoliciesOutput, Any, Any],
         Interceptor[ListSecretsInput, ListSecretsOutput, Any, Any],
         Interceptor[ListSecretVersionIdsInput, ListSecretVersionIdsOutput, Any, Any],
         Interceptor[PutResourcePolicyInput, PutResourcePolicyOutput, Any, Any],

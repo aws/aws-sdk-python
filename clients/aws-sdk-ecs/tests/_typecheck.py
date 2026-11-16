@@ -2,69 +2,107 @@
 
 from typing import Any
 
+from aws_sdk_ecs.aio.client import AsyncECSClient
+from aws_sdk_ecs.client import ECSClient
 from aws_sdk_ecs.models import (
     AcceleratorCountRequest,
+    AcceleratorCountRequestDict,
     AcceleratorTotalMemoryMiBRequest,
+    AcceleratorTotalMemoryMiBRequestDict,
     AdvancedConfiguration,
+    AdvancedConfigurationDict,
     AssociateGatewayWithClusterInput,
+    AssociateGatewayWithClusterInputDict,
     AssociateGatewayWithClusterOutput,
     Attachment,
     AttachmentStateChange,
+    AttachmentStateChangeDict,
     Attribute,
+    AttributeDict,
     AutoRepairConfiguration,
+    AutoRepairConfigurationDict,
     AutoScalingGroupProvider,
+    AutoScalingGroupProviderDict,
     AutoScalingGroupProviderUpdate,
+    AutoScalingGroupProviderUpdateDict,
     AwsVpcConfiguration,
+    AwsVpcConfigurationDict,
     BaselineEbsBandwidthMbpsRequest,
+    BaselineEbsBandwidthMbpsRequestDict,
     CanaryConfiguration,
+    CanaryConfigurationDict,
     CapacityProvider,
     CapacityProviderStrategyItem,
+    CapacityProviderStrategyItemDict,
     CapacityReservationRequest,
+    CapacityReservationRequestDict,
     Cluster,
     ClusterConfiguration,
+    ClusterConfigurationDict,
     ClusterServiceConnectDefaults,
     ClusterServiceConnectDefaultsRequest,
+    ClusterServiceConnectDefaultsRequestDict,
     ClusterSetting,
+    ClusterSettingDict,
     Container,
     ContainerDefinition,
+    ContainerDefinitionDict,
     ContainerDependency,
+    ContainerDependencyDict,
     ContainerImage,
     ContainerInstance,
     ContainerInstanceHealthStatus,
     ContainerOverride,
+    ContainerOverrideDict,
     ContainerRestartPolicy,
+    ContainerRestartPolicyDict,
     ContainerStateChange,
+    ContainerStateChangeDict,
     ContinueServiceDeploymentInput,
+    ContinueServiceDeploymentInputDict,
     ContinueServiceDeploymentOutput,
     CreateCapacityProviderInput,
+    CreateCapacityProviderInputDict,
     CreateCapacityProviderOutput,
     CreateClusterInput,
+    CreateClusterInputDict,
     CreateClusterOutput,
     CreateDaemonInput,
+    CreateDaemonInputDict,
     CreateDaemonOutput,
     CreateExpressGatewayServiceInput,
+    CreateExpressGatewayServiceInputDict,
     CreateExpressGatewayServiceOutput,
     CreateGatewayInput,
+    CreateGatewayInputDict,
     CreateGatewayOutput,
     CreateManagedInstancesProviderConfiguration,
+    CreateManagedInstancesProviderConfigurationDict,
     CreateServiceInput,
+    CreateServiceInputDict,
     CreateServiceOutput,
     CreateTaskSetInput,
+    CreateTaskSetInputDict,
     CreateTaskSetOutput,
     CreatedAt,
+    CreatedAtDict,
     DaemonAlarmConfiguration,
+    DaemonAlarmConfigurationDict,
     DaemonCapacityProvider,
     DaemonCircuitBreaker,
     DaemonContainerDefinition,
+    DaemonContainerDefinitionDict,
     DaemonContainerImage,
     DaemonDeployment,
     DaemonDeploymentAlarms,
     DaemonDeploymentCapacityProvider,
     DaemonDeploymentConfiguration,
+    DaemonDeploymentConfigurationDict,
     DaemonDeploymentRevisionDetail,
     DaemonDeploymentSummary,
     DaemonDetail,
     DaemonLinuxParameters,
+    DaemonLinuxParametersDict,
     DaemonRevision,
     DaemonRevisionDetail,
     DaemonRollback,
@@ -72,118 +110,186 @@ from aws_sdk_ecs.models import (
     DaemonTaskDefinition,
     DaemonTaskDefinitionSummary,
     DaemonVolume,
+    DaemonVolumeDict,
     DeleteAccountSettingInput,
+    DeleteAccountSettingInputDict,
     DeleteAccountSettingOutput,
     DeleteAttributesInput,
+    DeleteAttributesInputDict,
     DeleteAttributesOutput,
     DeleteCapacityProviderInput,
+    DeleteCapacityProviderInputDict,
     DeleteCapacityProviderOutput,
     DeleteClusterInput,
+    DeleteClusterInputDict,
     DeleteClusterOutput,
     DeleteDaemonInput,
+    DeleteDaemonInputDict,
     DeleteDaemonOutput,
     DeleteDaemonTaskDefinitionInput,
+    DeleteDaemonTaskDefinitionInputDict,
     DeleteDaemonTaskDefinitionOutput,
     DeleteExpressGatewayServiceInput,
+    DeleteExpressGatewayServiceInputDict,
     DeleteExpressGatewayServiceOutput,
     DeleteGatewayInput,
+    DeleteGatewayInputDict,
     DeleteGatewayOutput,
     DeleteServiceInput,
+    DeleteServiceInputDict,
     DeleteServiceOutput,
     DeleteTaskDefinitionsInput,
+    DeleteTaskDefinitionsInputDict,
     DeleteTaskDefinitionsOutput,
     DeleteTaskSetInput,
+    DeleteTaskSetInputDict,
     DeleteTaskSetOutput,
     Deployment,
     DeploymentAlarms,
+    DeploymentAlarmsDict,
     DeploymentCircuitBreaker,
+    DeploymentCircuitBreakerDict,
     DeploymentConfiguration,
+    DeploymentConfigurationDict,
     DeploymentController,
+    DeploymentControllerDict,
     DeploymentEarlySuccessCriteria,
+    DeploymentEarlySuccessCriteriaDict,
     DeploymentEphemeralStorage,
     DeploymentLifecycleHook,
     DeploymentLifecycleHookDetail,
+    DeploymentLifecycleHookDict,
     DeploymentLifecycleHookTimeoutConfiguration,
+    DeploymentLifecycleHookTimeoutConfigurationDict,
     DeregisterContainerInstanceInput,
+    DeregisterContainerInstanceInputDict,
     DeregisterContainerInstanceOutput,
     DeregisterTaskDefinitionInput,
+    DeregisterTaskDefinitionInputDict,
     DeregisterTaskDefinitionOutput,
     DescribeCapacityProvidersInput,
+    DescribeCapacityProvidersInputDict,
     DescribeCapacityProvidersOutput,
     DescribeClustersInput,
+    DescribeClustersInputDict,
     DescribeClustersOutput,
     DescribeContainerInstancesInput,
+    DescribeContainerInstancesInputDict,
     DescribeContainerInstancesOutput,
     DescribeDaemonDeploymentsInput,
+    DescribeDaemonDeploymentsInputDict,
     DescribeDaemonDeploymentsOutput,
     DescribeDaemonInput,
+    DescribeDaemonInputDict,
     DescribeDaemonOutput,
     DescribeDaemonRevisionsInput,
+    DescribeDaemonRevisionsInputDict,
     DescribeDaemonRevisionsOutput,
     DescribeDaemonTaskDefinitionInput,
+    DescribeDaemonTaskDefinitionInputDict,
     DescribeDaemonTaskDefinitionOutput,
     DescribeExpressGatewayServiceInput,
+    DescribeExpressGatewayServiceInputDict,
     DescribeExpressGatewayServiceOutput,
     DescribeGatewayAlbConfiguration,
     DescribeGatewayInput,
+    DescribeGatewayInputDict,
     DescribeGatewayOutput,
     DescribeGatewayResourcesInput,
+    DescribeGatewayResourcesInputDict,
     DescribeGatewayResourcesOutput,
     DescribeGatewayRouteInput,
+    DescribeGatewayRouteInputDict,
     DescribeGatewayRouteOutput,
     DescribeServiceDeploymentsInput,
+    DescribeServiceDeploymentsInputDict,
     DescribeServiceDeploymentsOutput,
     DescribeServiceRevisionsInput,
+    DescribeServiceRevisionsInputDict,
     DescribeServiceRevisionsOutput,
     DescribeServicesInput,
+    DescribeServicesInputDict,
     DescribeServicesOutput,
     DescribeTaskDefinitionInput,
+    DescribeTaskDefinitionInputDict,
     DescribeTaskDefinitionOutput,
     DescribeTaskSetsInput,
+    DescribeTaskSetsInputDict,
     DescribeTaskSetsOutput,
     DescribeTasksInput,
+    DescribeTasksInputDict,
     DescribeTasksOutput,
     Device,
+    DeviceDict,
     DisassociateGatewayFromClusterInput,
+    DisassociateGatewayFromClusterInputDict,
     DisassociateGatewayFromClusterOutput,
     DiscoverPollEndpointInput,
+    DiscoverPollEndpointInputDict,
     DiscoverPollEndpointOutput,
     DockerVolumeConfiguration,
+    DockerVolumeConfigurationDict,
     EBSTagSpecification,
+    EBSTagSpecificationDict,
     ECSExpressGatewayService,
     ECSManagedResources,
     EFSAuthorizationConfig,
+    EFSAuthorizationConfigDict,
     EFSVolumeConfiguration,
+    EFSVolumeConfigurationDict,
     ElbGatewayResources,
     EnvironmentFile,
+    EnvironmentFileDict,
     EphemeralStorage,
+    EphemeralStorageDict,
     ExecuteCommandConfiguration,
+    ExecuteCommandConfigurationDict,
     ExecuteCommandInput,
+    ExecuteCommandInputDict,
     ExecuteCommandLogConfiguration,
+    ExecuteCommandLogConfigurationDict,
     ExecuteCommandOutput,
     ExpressGatewayContainer,
+    ExpressGatewayContainerDict,
     ExpressGatewayRepositoryCredentials,
+    ExpressGatewayRepositoryCredentialsDict,
     ExpressGatewayScalingTarget,
+    ExpressGatewayScalingTargetDict,
     ExpressGatewayServiceAwsLogsConfiguration,
+    ExpressGatewayServiceAwsLogsConfigurationDict,
     ExpressGatewayServiceConfiguration,
     ExpressGatewayServiceNetworkConfiguration,
+    ExpressGatewayServiceNetworkConfigurationDict,
     ExpressGatewayServiceStatus,
     FSxWindowsFileServerAuthorizationConfig,
+    FSxWindowsFileServerAuthorizationConfigDict,
     FSxWindowsFileServerVolumeConfiguration,
+    FSxWindowsFileServerVolumeConfigurationDict,
     Failure,
     FirelensConfiguration,
+    FirelensConfigurationDict,
     Gateway,
     GatewayAlbTestTrafficRules,
+    GatewayAlbTestTrafficRulesDict,
     GatewayClusterAssociationSummary,
+    GatewayConfigurationDict,
     GatewayConnection,
     GatewayConnectionAlbResources,
     GatewayConnector,
+    GatewayConnectorDict,
     GatewayConnectorFilters,
+    GatewayConnectorFiltersDict,
     GatewayConnectorHealthCheck,
+    GatewayConnectorHealthCheckDict,
     GatewayConnectorHealthCheckMatcher,
+    GatewayConnectorHealthCheckMatcherDict,
     GatewayElbAccessLogConfiguration,
+    GatewayElbAccessLogConfigurationDict,
+    GatewayElbAccessLogDestinationDict,
     GatewayElbAccessLogS3Destination,
+    GatewayElbAccessLogS3DestinationDict,
     GatewayElbNetworkConfiguration,
+    GatewayElbNetworkConfigurationDict,
     GatewayOperationError,
     GatewayResourceFailure,
     GatewayResources,
@@ -193,72 +299,112 @@ from aws_sdk_ecs.models import (
     GatewayRouteSummary,
     GatewaySummary,
     GatewayTestTrafficHeader,
+    GatewayTestTrafficHeaderDict,
     GetTaskProtectionInput,
+    GetTaskProtectionInputDict,
     GetTaskProtectionOutput,
     GpuDevice,
     HealthCheck,
+    HealthCheckDict,
     HostEntry,
+    HostEntryDict,
     HostSharedAlbConfiguration,
+    HostSharedAlbConfigurationDict,
     HostVolumeProperties,
+    HostVolumePropertiesDict,
     InferenceAccelerator,
+    InferenceAcceleratorDict,
     InferenceAcceleratorOverride,
+    InferenceAcceleratorOverrideDict,
     InfrastructureOptimization,
+    InfrastructureOptimizationDict,
     IngressPathSummary,
     InstanceHealthCheckResult,
     InstanceLaunchTemplate,
+    InstanceLaunchTemplateDict,
     InstanceLaunchTemplateUpdate,
+    InstanceLaunchTemplateUpdateDict,
     InstanceRequirementsRequest,
+    InstanceRequirementsRequestDict,
     KernelCapabilities,
+    KernelCapabilitiesDict,
     KeyValuePair,
+    KeyValuePairDict,
     LinearConfiguration,
+    LinearConfigurationDict,
     LinuxParameters,
+    LinuxParametersDict,
     ListAccountSettingsInput,
+    ListAccountSettingsInputDict,
     ListAccountSettingsOutput,
     ListAttributesInput,
+    ListAttributesInputDict,
     ListAttributesOutput,
     ListClustersInput,
+    ListClustersInputDict,
     ListClustersOutput,
     ListContainerInstancesInput,
+    ListContainerInstancesInputDict,
     ListContainerInstancesOutput,
     ListDaemonDeploymentsInput,
+    ListDaemonDeploymentsInputDict,
     ListDaemonDeploymentsOutput,
     ListDaemonTaskDefinitionsInput,
+    ListDaemonTaskDefinitionsInputDict,
     ListDaemonTaskDefinitionsOutput,
     ListDaemonsInput,
+    ListDaemonsInputDict,
     ListDaemonsOutput,
     ListGatewayClusterAssociationsInput,
+    ListGatewayClusterAssociationsInputDict,
     ListGatewayClusterAssociationsOutput,
     ListGatewayRoutesInput,
+    ListGatewayRoutesInputDict,
     ListGatewayRoutesOutput,
     ListGatewaysInput,
+    ListGatewaysInputDict,
     ListGatewaysOutput,
     ListServiceDeploymentsInput,
+    ListServiceDeploymentsInputDict,
     ListServiceDeploymentsOutput,
     ListServicesByNamespaceInput,
+    ListServicesByNamespaceInputDict,
     ListServicesByNamespaceOutput,
     ListServicesInput,
+    ListServicesInputDict,
     ListServicesOutput,
     ListTagsForResourceInput,
+    ListTagsForResourceInputDict,
     ListTagsForResourceOutput,
     ListTaskDefinitionFamiliesInput,
+    ListTaskDefinitionFamiliesInputDict,
     ListTaskDefinitionFamiliesOutput,
     ListTaskDefinitionsInput,
+    ListTaskDefinitionsInputDict,
     ListTaskDefinitionsOutput,
     ListTasksInput,
+    ListTasksInputDict,
     ListTasksOutput,
     LoadBalancer,
+    LoadBalancerDict,
     LogConfiguration,
+    LogConfigurationDict,
     LogDriverVolumeConfiguration,
+    LogDriverVolumeConfigurationDict,
     ManagedAgent,
     ManagedAgentStateChange,
+    ManagedAgentStateChangeDict,
     ManagedApplicationAutoScalingPolicy,
     ManagedAutoScaling,
     ManagedCertificate,
     ManagedIngressPath,
     ManagedInstancesLocalStorageConfiguration,
+    ManagedInstancesLocalStorageConfigurationDict,
     ManagedInstancesNetworkConfiguration,
+    ManagedInstancesNetworkConfigurationDict,
     ManagedInstancesProvider,
     ManagedInstancesStorageConfiguration,
+    ManagedInstancesStorageConfigurationDict,
     ManagedListener,
     ManagedListenerRule,
     ManagedLoadBalancer,
@@ -266,63 +412,105 @@ from aws_sdk_ecs.models import (
     ManagedMetricAlarm,
     ManagedScalableTarget,
     ManagedScaling,
+    ManagedScalingDict,
     ManagedSecurityGroup,
     ManagedStorageConfiguration,
+    ManagedStorageConfigurationDict,
     ManagedTargetGroup,
     MemoryGiBPerVCpuRequest,
+    MemoryGiBPerVCpuRequestDict,
     MemoryMiBRequest,
+    MemoryMiBRequestDict,
     MetricConfiguration,
+    MetricConfigurationDict,
     MonitoringConfiguration,
+    MonitoringConfigurationDict,
     MountPoint,
+    MountPointDict,
     NetworkBandwidthGbpsRequest,
+    NetworkBandwidthGbpsRequestDict,
     NetworkBinding,
+    NetworkBindingDict,
     NetworkConfiguration,
+    NetworkConfigurationDict,
     NetworkInterface,
     NetworkInterfaceCountRequest,
+    NetworkInterfaceCountRequestDict,
     NvidiaMpsAllocation,
+    NvidiaMpsAllocationDict,
     PlacementConstraint,
+    PlacementConstraintDict,
     PlacementStrategy,
+    PlacementStrategyDict,
     PlatformDevice,
+    PlatformDeviceDict,
     PortMapping,
+    PortMappingDict,
     ProtectedTask,
     ProxyConfiguration,
+    ProxyConfigurationDict,
     PutAccountSettingDefaultInput,
+    PutAccountSettingDefaultInputDict,
     PutAccountSettingDefaultOutput,
     PutAccountSettingInput,
+    PutAccountSettingInputDict,
     PutAccountSettingOutput,
     PutAttributesInput,
+    PutAttributesInputDict,
     PutAttributesOutput,
     PutClusterCapacityProvidersInput,
+    PutClusterCapacityProvidersInputDict,
     PutClusterCapacityProvidersOutput,
     RegisterContainerInstanceInput,
+    RegisterContainerInstanceInputDict,
     RegisterContainerInstanceOutput,
     RegisterDaemonTaskDefinitionInput,
+    RegisterDaemonTaskDefinitionInputDict,
     RegisterDaemonTaskDefinitionOutput,
     RegisterTaskDefinitionInput,
+    RegisterTaskDefinitionInputDict,
     RegisterTaskDefinitionOutput,
     RepositoryCredentials,
+    RepositoryCredentialsDict,
     ResolvedConfiguration,
     Resource,
+    ResourceDict,
     ResourceRequirement,
+    ResourceRequirementDict,
     Rollback,
     RunTaskInput,
+    RunTaskInputDict,
     RunTaskOutput,
     RuntimePlatform,
+    RuntimePlatformDict,
     RuntimePlatformOverride,
     S3FilesVolumeConfiguration,
+    S3FilesVolumeConfigurationDict,
     Scale,
+    ScaleDict,
     Secret,
+    SecretDict,
     Service,
     ServiceConnectAccessLogConfiguration,
+    ServiceConnectAccessLogConfigurationDict,
     ServiceConnectClientAlias,
+    ServiceConnectClientAliasDict,
     ServiceConnectConfiguration,
+    ServiceConnectConfigurationDict,
+    ServiceConnectContainerConfigurationDict,
     ServiceConnectService,
+    ServiceConnectServiceDict,
     ServiceConnectServiceResource,
     ServiceConnectTestTrafficHeaderMatchRules,
+    ServiceConnectTestTrafficHeaderMatchRulesDict,
     ServiceConnectTestTrafficHeaderRules,
+    ServiceConnectTestTrafficHeaderRulesDict,
     ServiceConnectTestTrafficRules,
+    ServiceConnectTestTrafficRulesDict,
     ServiceConnectTlsCertificateAuthority,
+    ServiceConnectTlsCertificateAuthorityDict,
     ServiceConnectTlsConfiguration,
+    ServiceConnectTlsConfigurationDict,
     ServiceCurrentRevisionSummary,
     ServiceDeployment,
     ServiceDeploymentAlarms,
@@ -330,88 +518,136 @@ from aws_sdk_ecs.models import (
     ServiceDeploymentCircuitBreaker,
     ServiceEvent,
     ServiceManagedEBSVolumeConfiguration,
+    ServiceManagedEBSVolumeConfigurationDict,
     ServiceRegistry,
+    ServiceRegistryDict,
     ServiceRevision,
     ServiceRevisionLoadBalancer,
     ServiceRevisionOverrides,
     ServiceRevisionSummary,
     ServiceRevisionVpcLatticeConfiguration,
     ServiceVolumeConfiguration,
+    ServiceVolumeConfigurationDict,
     Session,
     Setting,
+    SharingStrategyDict,
     StartTaskInput,
+    StartTaskInputDict,
     StartTaskOutput,
     StopServiceDeploymentInput,
+    StopServiceDeploymentInputDict,
     StopServiceDeploymentOutput,
     StopTaskInput,
+    StopTaskInputDict,
     StopTaskOutput,
     SubmitAttachmentStateChangesInput,
+    SubmitAttachmentStateChangesInputDict,
     SubmitAttachmentStateChangesOutput,
     SubmitContainerStateChangeInput,
+    SubmitContainerStateChangeInputDict,
     SubmitContainerStateChangeOutput,
     SubmitTaskStateChangeInput,
+    SubmitTaskStateChangeInputDict,
     SubmitTaskStateChangeOutput,
     SystemControl,
+    SystemControlDict,
     Tag,
+    TagDict,
     TagResourceInput,
+    TagResourceInputDict,
     TagResourceOutput,
     Task,
     TaskDefinition,
     TaskDefinitionPlacementConstraint,
+    TaskDefinitionPlacementConstraintDict,
     TaskEphemeralStorage,
     TaskManagedEBSVolumeConfiguration,
+    TaskManagedEBSVolumeConfigurationDict,
     TaskManagedEBSVolumeTerminationPolicy,
+    TaskManagedEBSVolumeTerminationPolicyDict,
     TaskOverride,
+    TaskOverrideDict,
     TaskSet,
     TaskVolumeConfiguration,
+    TaskVolumeConfigurationDict,
     ThresholdConfiguration,
+    ThresholdConfigurationDict,
     TimeoutConfiguration,
+    TimeoutConfigurationDict,
     Tmpfs,
+    TmpfsDict,
     TotalLocalStorageGBRequest,
+    TotalLocalStorageGBRequestDict,
     TrustedExecutionConfiguration,
+    TrustedExecutionConfigurationDict,
     TrustedExecutionSummary,
     Ulimit,
+    UlimitDict,
     UntagResourceInput,
+    UntagResourceInputDict,
     UntagResourceOutput,
     UpdateCapacityProviderInput,
+    UpdateCapacityProviderInputDict,
     UpdateCapacityProviderOutput,
     UpdateClusterInput,
+    UpdateClusterInputDict,
     UpdateClusterOutput,
     UpdateClusterSettingsInput,
+    UpdateClusterSettingsInputDict,
     UpdateClusterSettingsOutput,
     UpdateContainerAgentInput,
+    UpdateContainerAgentInputDict,
     UpdateContainerAgentOutput,
     UpdateContainerInstancesStateInput,
+    UpdateContainerInstancesStateInputDict,
     UpdateContainerInstancesStateOutput,
     UpdateDaemonInput,
+    UpdateDaemonInputDict,
     UpdateDaemonOutput,
     UpdateExpressGatewayServiceInput,
+    UpdateExpressGatewayServiceInputDict,
     UpdateExpressGatewayServiceOutput,
     UpdateGatewayAlbConfiguration,
+    UpdateGatewayAlbConfigurationDict,
+    UpdateGatewayConfigurationDict,
     UpdateGatewayInput,
+    UpdateGatewayInputDict,
     UpdateGatewayNetworkConfiguration,
+    UpdateGatewayNetworkConfigurationDict,
     UpdateGatewayOutput,
     UpdateManagedInstancesProviderConfiguration,
+    UpdateManagedInstancesProviderConfigurationDict,
     UpdateServiceInput,
+    UpdateServiceInputDict,
     UpdateServiceOutput,
     UpdateServicePrimaryTaskSetInput,
+    UpdateServicePrimaryTaskSetInputDict,
     UpdateServicePrimaryTaskSetOutput,
     UpdateTaskProtectionInput,
+    UpdateTaskProtectionInputDict,
     UpdateTaskProtectionOutput,
     UpdateTaskSetInput,
+    UpdateTaskSetInputDict,
     UpdateTaskSetOutput,
     UpdatedExpressGatewayService,
     VCpuCountRangeRequest,
+    VCpuCountRangeRequestDict,
     VersionInfo,
+    VersionInfoDict,
     Volume,
+    VolumeDict,
     VolumeFrom,
+    VolumeFromDict,
     VpcLatticeAdvancedConfiguration,
+    VpcLatticeAdvancedConfigurationDict,
     VpcLatticeConfiguration,
+    VpcLatticeConfigurationDict,
 )
 
 
-# Static type fixture: pyright over this validates models.pyi.
-# Not executed as a test; it only needs to type-check.
+# Static type fixture: pyright over this validates models.pyi and the
+# client method signatures. Not executed as a test; it only needs to
+# type-check.
 
 _: Any = ...
 
@@ -825,3 +1061,1237 @@ Volume()
 VolumeFrom()
 VpcLatticeAdvancedConfiguration()
 VpcLatticeConfiguration(role_arn=_, target_group_arn=_, port_name=_)
+_params_0: AcceleratorCountRequestDict = {}
+_params_1: AcceleratorTotalMemoryMiBRequestDict = {}
+_params_2: AdvancedConfigurationDict = {}
+_params_3: AssociateGatewayWithClusterInputDict = {"gateway": _, "cluster": _}
+_params_4: AttachmentStateChangeDict = {"attachment_arn": _, "status": _}
+_params_5: AttributeDict = {"name": _}
+_params_6: AutoRepairConfigurationDict = {}
+_params_7: AutoScalingGroupProviderDict = {"auto_scaling_group_arn": _}
+_params_8: AutoScalingGroupProviderUpdateDict = {}
+_params_9: AwsVpcConfigurationDict = {"subnets": _}
+_params_10: BaselineEbsBandwidthMbpsRequestDict = {}
+_params_11: CanaryConfigurationDict = {}
+_params_12: CapacityProviderStrategyItemDict = {"capacity_provider": _}
+_params_13: CapacityReservationRequestDict = {}
+_params_14: ClusterConfigurationDict = {}
+_params_15: ClusterServiceConnectDefaultsRequestDict = {"namespace": _}
+_params_16: ClusterSettingDict = {}
+_params_17: ContainerDefinitionDict = {}
+_params_18: ContainerDependencyDict = {"container_name": _, "condition": _}
+_params_19: ContainerOverrideDict = {}
+_params_20: ContainerRestartPolicyDict = {"enabled": _}
+_params_21: ContainerStateChangeDict = {}
+_params_22: ContinueServiceDeploymentInputDict = {
+    "service_deployment_arn": _,
+    "hook_id": _,
+}
+_params_23: CreateCapacityProviderInputDict = {"name": _}
+_params_24: CreateClusterInputDict = {}
+_params_25: CreateDaemonInputDict = {
+    "daemon_name": _,
+    "daemon_task_definition_arn": _,
+    "capacity_provider_arns": _,
+}
+_params_26: CreatedAtDict = {}
+_params_27: CreateExpressGatewayServiceInputDict = {"infrastructure_role_arn": _}
+_params_28: CreateGatewayInputDict = {
+    "name": _,
+    "infrastructure_role_arn": _,
+    "configuration": _,
+}
+_params_29: CreateManagedInstancesProviderConfigurationDict = {
+    "infrastructure_role_arn": _,
+    "instance_launch_template": _,
+}
+_params_30: CreateServiceInputDict = {"service_name": _}
+_params_31: CreateTaskSetInputDict = {"service": _, "cluster": _, "task_definition": _}
+_params_32: DaemonAlarmConfigurationDict = {}
+_params_33: DaemonContainerDefinitionDict = {"image": _}
+_params_34: DaemonDeploymentConfigurationDict = {}
+_params_35: DaemonLinuxParametersDict = {}
+_params_36: DaemonVolumeDict = {}
+_params_37: DeleteAccountSettingInputDict = {"name": _}
+_params_38: DeleteAttributesInputDict = {"attributes": _}
+_params_39: DeleteCapacityProviderInputDict = {"capacity_provider": _}
+_params_40: DeleteClusterInputDict = {"cluster": _}
+_params_41: DeleteDaemonInputDict = {"daemon_arn": _}
+_params_42: DeleteDaemonTaskDefinitionInputDict = {"daemon_task_definition": _}
+_params_43: DeleteExpressGatewayServiceInputDict = {"service_arn": _}
+_params_44: DeleteGatewayInputDict = {"gateway": _}
+_params_45: DeleteServiceInputDict = {"service": _}
+_params_46: DeleteTaskDefinitionsInputDict = {"task_definitions": _}
+_params_47: DeleteTaskSetInputDict = {"cluster": _, "service": _, "task_set": _}
+_params_48: DeploymentAlarmsDict = {"alarm_names": _}
+_params_49: DeploymentCircuitBreakerDict = {}
+_params_50: DeploymentConfigurationDict = {}
+_params_51: DeploymentControllerDict = {"type": _}
+_params_52: DeploymentEarlySuccessCriteriaDict = {}
+_params_53: DeploymentLifecycleHookDict = {}
+_params_54: DeploymentLifecycleHookTimeoutConfigurationDict = {}
+_params_55: DeregisterContainerInstanceInputDict = {"container_instance": _}
+_params_56: DeregisterTaskDefinitionInputDict = {"task_definition": _}
+_params_57: DescribeCapacityProvidersInputDict = {}
+_params_58: DescribeClustersInputDict = {}
+_params_59: DescribeContainerInstancesInputDict = {"container_instances": _}
+_params_60: DescribeDaemonDeploymentsInputDict = {"daemon_deployment_arns": _}
+_params_61: DescribeDaemonInputDict = {"daemon_arn": _}
+_params_62: DescribeDaemonRevisionsInputDict = {"daemon_revision_arns": _}
+_params_63: DescribeDaemonTaskDefinitionInputDict = {"daemon_task_definition": _}
+_params_64: DescribeExpressGatewayServiceInputDict = {"service_arn": _}
+_params_65: DescribeGatewayInputDict = {"gateway": _}
+_params_66: DescribeGatewayResourcesInputDict = {"gateway": _}
+_params_67: DescribeGatewayRouteInputDict = {"gateway_route_arn": _}
+_params_68: DescribeServiceDeploymentsInputDict = {"service_deployment_arns": _}
+_params_69: DescribeServiceRevisionsInputDict = {"service_revision_arns": _}
+_params_70: DescribeServicesInputDict = {"services": _}
+_params_71: DescribeTaskDefinitionInputDict = {"task_definition": _}
+_params_72: DescribeTaskSetsInputDict = {"cluster": _, "service": _}
+_params_73: DescribeTasksInputDict = {"tasks": _}
+_params_74: DeviceDict = {"host_path": _}
+_params_75: DisassociateGatewayFromClusterInputDict = {"gateway": _, "cluster": _}
+_params_76: DiscoverPollEndpointInputDict = {}
+_params_77: DockerVolumeConfigurationDict = {}
+_params_78: EBSTagSpecificationDict = {"resource_type": _}
+_params_79: EFSAuthorizationConfigDict = {}
+_params_80: EFSVolumeConfigurationDict = {"file_system_id": _}
+_params_81: EnvironmentFileDict = {"value": _, "type": _}
+_params_82: EphemeralStorageDict = {}
+_params_83: ExecuteCommandConfigurationDict = {}
+_params_84: ExecuteCommandInputDict = {"command": _, "task": _}
+_params_85: ExecuteCommandLogConfigurationDict = {}
+_params_86: ExpressGatewayContainerDict = {"image": _}
+_params_87: ExpressGatewayRepositoryCredentialsDict = {}
+_params_88: ExpressGatewayScalingTargetDict = {}
+_params_89: ExpressGatewayServiceAwsLogsConfigurationDict = {
+    "log_group": _,
+    "log_stream_prefix": _,
+}
+_params_90: ExpressGatewayServiceNetworkConfigurationDict = {}
+_params_91: FirelensConfigurationDict = {"type": _}
+_params_92: FSxWindowsFileServerAuthorizationConfigDict = {
+    "credentials_parameter": _,
+    "domain": _,
+}
+_params_93: FSxWindowsFileServerVolumeConfigurationDict = {
+    "file_system_id": _,
+    "root_directory": _,
+    "authorization_config": _,
+}
+_params_94: GatewayAlbTestTrafficRulesDict = {}
+_params_95: GatewayConfigurationDict = {"host_shared_alb": _}
+_params_96: GatewayConnectorDict = {"port_name": _}
+_params_97: GatewayConnectorFiltersDict = {}
+_params_98: GatewayConnectorHealthCheckDict = {}
+_params_99: GatewayConnectorHealthCheckMatcherDict = {}
+_params_100: GatewayElbAccessLogConfigurationDict = {}
+_params_101: GatewayElbAccessLogDestinationDict = {"s3": _}
+_params_102: GatewayElbAccessLogS3DestinationDict = {"bucket": _}
+_params_103: GatewayElbNetworkConfigurationDict = {}
+_params_104: GatewayTestTrafficHeaderDict = {"name": _, "values": _}
+_params_105: GetTaskProtectionInputDict = {"cluster": _}
+_params_106: HealthCheckDict = {"command": _}
+_params_107: HostEntryDict = {"hostname": _, "ip_address": _}
+_params_108: HostSharedAlbConfigurationDict = {}
+_params_109: HostVolumePropertiesDict = {}
+_params_110: InferenceAcceleratorDict = {"device_name": _, "device_type": _}
+_params_111: InferenceAcceleratorOverrideDict = {}
+_params_112: InfrastructureOptimizationDict = {}
+_params_113: InstanceLaunchTemplateDict = {
+    "ec2_instance_profile_arn": _,
+    "network_configuration": _,
+}
+_params_114: InstanceLaunchTemplateUpdateDict = {}
+_params_115: InstanceRequirementsRequestDict = {"v_cpu_count": _, "memory_mi_b": _}
+_params_116: KernelCapabilitiesDict = {}
+_params_117: KeyValuePairDict = {}
+_params_118: LinearConfigurationDict = {}
+_params_119: LinuxParametersDict = {}
+_params_120: ListAccountSettingsInputDict = {}
+_params_121: ListAttributesInputDict = {"target_type": _}
+_params_122: ListClustersInputDict = {}
+_params_123: ListContainerInstancesInputDict = {}
+_params_124: ListDaemonDeploymentsInputDict = {"daemon_arn": _}
+_params_125: ListDaemonsInputDict = {}
+_params_126: ListDaemonTaskDefinitionsInputDict = {}
+_params_127: ListGatewayClusterAssociationsInputDict = {}
+_params_128: ListGatewayRoutesInputDict = {}
+_params_129: ListGatewaysInputDict = {}
+_params_130: ListServiceDeploymentsInputDict = {"service": _}
+_params_131: ListServicesByNamespaceInputDict = {"namespace": _}
+_params_132: ListServicesInputDict = {}
+_params_133: ListTagsForResourceInputDict = {"resource_arn": _}
+_params_134: ListTaskDefinitionFamiliesInputDict = {}
+_params_135: ListTaskDefinitionsInputDict = {}
+_params_136: ListTasksInputDict = {}
+_params_137: LoadBalancerDict = {}
+_params_138: LogConfigurationDict = {"log_driver": _}
+_params_139: LogDriverVolumeConfigurationDict = {"driver": _}
+_params_140: ManagedAgentStateChangeDict = {
+    "container_name": _,
+    "managed_agent_name": _,
+    "status": _,
+}
+_params_141: ManagedInstancesLocalStorageConfigurationDict = {}
+_params_142: ManagedInstancesNetworkConfigurationDict = {}
+_params_143: ManagedInstancesStorageConfigurationDict = {}
+_params_144: ManagedScalingDict = {}
+_params_145: ManagedStorageConfigurationDict = {}
+_params_146: MemoryGiBPerVCpuRequestDict = {}
+_params_147: MemoryMiBRequestDict = {"min": _}
+_params_148: MetricConfigurationDict = {"metric_names": _, "resolution_seconds": _}
+_params_149: MonitoringConfigurationDict = {}
+_params_150: MountPointDict = {}
+_params_151: NetworkBandwidthGbpsRequestDict = {}
+_params_152: NetworkBindingDict = {}
+_params_153: NetworkConfigurationDict = {}
+_params_154: NetworkInterfaceCountRequestDict = {}
+_params_155: NvidiaMpsAllocationDict = {"memory": _}
+_params_156: PlacementConstraintDict = {}
+_params_157: PlacementStrategyDict = {}
+_params_158: PlatformDeviceDict = {"id": _, "type": _}
+_params_159: PortMappingDict = {}
+_params_160: ProxyConfigurationDict = {"container_name": _}
+_params_161: PutAccountSettingDefaultInputDict = {"name": _, "value": _}
+_params_162: PutAccountSettingInputDict = {"name": _, "value": _}
+_params_163: PutAttributesInputDict = {"attributes": _}
+_params_164: PutClusterCapacityProvidersInputDict = {
+    "cluster": _,
+    "capacity_providers": _,
+    "default_capacity_provider_strategy": _,
+}
+_params_165: RegisterContainerInstanceInputDict = {}
+_params_166: RegisterDaemonTaskDefinitionInputDict = {
+    "family": _,
+    "container_definitions": _,
+}
+_params_167: RegisterTaskDefinitionInputDict = {"family": _, "container_definitions": _}
+_params_168: RepositoryCredentialsDict = {"credentials_parameter": _}
+_params_169: ResourceDict = {}
+_params_170: ResourceRequirementDict = {"type": _}
+_params_171: RunTaskInputDict = {"task_definition": _}
+_params_172: RuntimePlatformDict = {}
+_params_173: S3FilesVolumeConfigurationDict = {"file_system_arn": _}
+_params_174: ScaleDict = {}
+_params_175: SecretDict = {"name": _, "value_from": _}
+_params_176: ServiceConnectAccessLogConfigurationDict = {"format": _}
+_params_177: ServiceConnectClientAliasDict = {"port": _}
+_params_178: ServiceConnectConfigurationDict = {}
+_params_179: ServiceConnectContainerConfigurationDict = {"log_level": _}
+_params_180: ServiceConnectServiceDict = {"port_name": _}
+_params_181: ServiceConnectTestTrafficHeaderMatchRulesDict = {"exact": _}
+_params_182: ServiceConnectTestTrafficHeaderRulesDict = {"name": _}
+_params_183: ServiceConnectTestTrafficRulesDict = {"header": _}
+_params_184: ServiceConnectTlsCertificateAuthorityDict = {}
+_params_185: ServiceConnectTlsConfigurationDict = {"issuer_certificate_authority": _}
+_params_186: ServiceManagedEBSVolumeConfigurationDict = {"role_arn": _}
+_params_187: ServiceRegistryDict = {}
+_params_188: ServiceVolumeConfigurationDict = {"name": _}
+_params_189: SharingStrategyDict = {"nvidia_mps": _}
+_params_190: StartTaskInputDict = {"container_instances": _, "task_definition": _}
+_params_191: StopServiceDeploymentInputDict = {"service_deployment_arn": _}
+_params_192: StopTaskInputDict = {"task": _}
+_params_193: SubmitAttachmentStateChangesInputDict = {"attachments": _}
+_params_194: SubmitContainerStateChangeInputDict = {}
+_params_195: SubmitTaskStateChangeInputDict = {}
+_params_196: SystemControlDict = {}
+_params_197: TagDict = {}
+_params_198: TagResourceInputDict = {"resource_arn": _, "tags": _}
+_params_199: TaskDefinitionPlacementConstraintDict = {}
+_params_200: TaskManagedEBSVolumeConfigurationDict = {"role_arn": _}
+_params_201: TaskManagedEBSVolumeTerminationPolicyDict = {"delete_on_termination": _}
+_params_202: TaskOverrideDict = {}
+_params_203: TaskVolumeConfigurationDict = {"name": _}
+_params_204: ThresholdConfigurationDict = {"type": _}
+_params_205: TimeoutConfigurationDict = {}
+_params_206: TmpfsDict = {"container_path": _}
+_params_207: TotalLocalStorageGBRequestDict = {}
+_params_208: TrustedExecutionConfigurationDict = {"isolation_mode": _}
+_params_209: UlimitDict = {"name": _}
+_params_210: UntagResourceInputDict = {"resource_arn": _, "tag_keys": _}
+_params_211: UpdateCapacityProviderInputDict = {"name": _}
+_params_212: UpdateClusterInputDict = {"cluster": _}
+_params_213: UpdateClusterSettingsInputDict = {"cluster": _, "settings": _}
+_params_214: UpdateContainerAgentInputDict = {"container_instance": _}
+_params_215: UpdateContainerInstancesStateInputDict = {
+    "container_instances": _,
+    "status": _,
+}
+_params_216: UpdateDaemonInputDict = {
+    "daemon_arn": _,
+    "daemon_task_definition_arn": _,
+    "capacity_provider_arns": _,
+}
+_params_217: UpdateExpressGatewayServiceInputDict = {"service_arn": _}
+_params_218: UpdateGatewayAlbConfigurationDict = {}
+_params_219: UpdateGatewayConfigurationDict = {"host_shared_alb": _}
+_params_220: UpdateGatewayInputDict = {"gateway": _}
+_params_221: UpdateGatewayNetworkConfigurationDict = {}
+_params_222: UpdateManagedInstancesProviderConfigurationDict = {
+    "infrastructure_role_arn": _,
+    "instance_launch_template": _,
+}
+_params_223: UpdateServiceInputDict = {"service": _}
+_params_224: UpdateServicePrimaryTaskSetInputDict = {
+    "cluster": _,
+    "service": _,
+    "primary_task_set": _,
+}
+_params_225: UpdateTaskProtectionInputDict = {"cluster": _, "tasks": _}
+_params_226: UpdateTaskSetInputDict = {
+    "cluster": _,
+    "service": _,
+    "task_set": _,
+    "scale": _,
+}
+_params_227: VCpuCountRangeRequestDict = {"min": _}
+_params_228: VersionInfoDict = {}
+_params_229: VolumeDict = {}
+_params_230: VolumeFromDict = {}
+_params_231: VpcLatticeAdvancedConfigurationDict = {}
+_params_232: VpcLatticeConfigurationDict = {
+    "role_arn": _,
+    "target_group_arn": _,
+    "port_name": _,
+}
+
+
+def _request[T](form: type[T]) -> T:
+    raise NotImplementedError
+
+
+async def check_async_calls(client: AsyncECSClient) -> None:
+    pass
+    await client.associate_gateway_with_cluster(gateway=_, cluster=_)
+    await client.associate_gateway_with_cluster(
+        **_request(AssociateGatewayWithClusterInputDict)
+    )
+    await client.associate_gateway_with_cluster(
+        _request(AssociateGatewayWithClusterInput)
+    )
+    await client.associate_gateway_with_cluster(
+        _request(AssociateGatewayWithClusterInputDict)
+    )
+    await client.continue_service_deployment(service_deployment_arn=_, hook_id=_)
+    await client.continue_service_deployment(
+        **_request(ContinueServiceDeploymentInputDict)
+    )
+    await client.continue_service_deployment(_request(ContinueServiceDeploymentInput))
+    await client.continue_service_deployment(
+        _request(ContinueServiceDeploymentInputDict)
+    )
+    await client.create_capacity_provider(name=_)
+    await client.create_capacity_provider(**_request(CreateCapacityProviderInputDict))
+    await client.create_capacity_provider(_request(CreateCapacityProviderInput))
+    await client.create_capacity_provider(_request(CreateCapacityProviderInputDict))
+    await client.create_cluster()
+    await client.create_cluster(**_request(CreateClusterInputDict))
+    await client.create_cluster(_request(CreateClusterInput))
+    await client.create_cluster(_request(CreateClusterInputDict))
+    await client.create_daemon(
+        daemon_name=_, daemon_task_definition_arn=_, capacity_provider_arns=_
+    )
+    await client.create_daemon(**_request(CreateDaemonInputDict))
+    await client.create_daemon(_request(CreateDaemonInput))
+    await client.create_daemon(_request(CreateDaemonInputDict))
+    await client.create_express_gateway_service(infrastructure_role_arn=_)
+    await client.create_express_gateway_service(
+        **_request(CreateExpressGatewayServiceInputDict)
+    )
+    await client.create_express_gateway_service(
+        _request(CreateExpressGatewayServiceInput)
+    )
+    await client.create_express_gateway_service(
+        _request(CreateExpressGatewayServiceInputDict)
+    )
+    await client.create_gateway(name=_, infrastructure_role_arn=_, configuration=_)
+    await client.create_gateway(**_request(CreateGatewayInputDict))
+    await client.create_gateway(_request(CreateGatewayInput))
+    await client.create_gateway(_request(CreateGatewayInputDict))
+    await client.create_service(service_name=_)
+    await client.create_service(**_request(CreateServiceInputDict))
+    await client.create_service(_request(CreateServiceInput))
+    await client.create_service(_request(CreateServiceInputDict))
+    await client.create_task_set(service=_, cluster=_, task_definition=_)
+    await client.create_task_set(**_request(CreateTaskSetInputDict))
+    await client.create_task_set(_request(CreateTaskSetInput))
+    await client.create_task_set(_request(CreateTaskSetInputDict))
+    await client.delete_account_setting(name=_)
+    await client.delete_account_setting(**_request(DeleteAccountSettingInputDict))
+    await client.delete_account_setting(_request(DeleteAccountSettingInput))
+    await client.delete_account_setting(_request(DeleteAccountSettingInputDict))
+    await client.delete_attributes(attributes=_)
+    await client.delete_attributes(**_request(DeleteAttributesInputDict))
+    await client.delete_attributes(_request(DeleteAttributesInput))
+    await client.delete_attributes(_request(DeleteAttributesInputDict))
+    await client.delete_capacity_provider(capacity_provider=_)
+    await client.delete_capacity_provider(**_request(DeleteCapacityProviderInputDict))
+    await client.delete_capacity_provider(_request(DeleteCapacityProviderInput))
+    await client.delete_capacity_provider(_request(DeleteCapacityProviderInputDict))
+    await client.delete_cluster(cluster=_)
+    await client.delete_cluster(**_request(DeleteClusterInputDict))
+    await client.delete_cluster(_request(DeleteClusterInput))
+    await client.delete_cluster(_request(DeleteClusterInputDict))
+    await client.delete_daemon(daemon_arn=_)
+    await client.delete_daemon(**_request(DeleteDaemonInputDict))
+    await client.delete_daemon(_request(DeleteDaemonInput))
+    await client.delete_daemon(_request(DeleteDaemonInputDict))
+    await client.delete_daemon_task_definition(daemon_task_definition=_)
+    await client.delete_daemon_task_definition(
+        **_request(DeleteDaemonTaskDefinitionInputDict)
+    )
+    await client.delete_daemon_task_definition(
+        _request(DeleteDaemonTaskDefinitionInput)
+    )
+    await client.delete_daemon_task_definition(
+        _request(DeleteDaemonTaskDefinitionInputDict)
+    )
+    await client.delete_express_gateway_service(service_arn=_)
+    await client.delete_express_gateway_service(
+        **_request(DeleteExpressGatewayServiceInputDict)
+    )
+    await client.delete_express_gateway_service(
+        _request(DeleteExpressGatewayServiceInput)
+    )
+    await client.delete_express_gateway_service(
+        _request(DeleteExpressGatewayServiceInputDict)
+    )
+    await client.delete_gateway(gateway=_)
+    await client.delete_gateway(**_request(DeleteGatewayInputDict))
+    await client.delete_gateway(_request(DeleteGatewayInput))
+    await client.delete_gateway(_request(DeleteGatewayInputDict))
+    await client.delete_service(service=_)
+    await client.delete_service(**_request(DeleteServiceInputDict))
+    await client.delete_service(_request(DeleteServiceInput))
+    await client.delete_service(_request(DeleteServiceInputDict))
+    await client.delete_task_definitions(task_definitions=_)
+    await client.delete_task_definitions(**_request(DeleteTaskDefinitionsInputDict))
+    await client.delete_task_definitions(_request(DeleteTaskDefinitionsInput))
+    await client.delete_task_definitions(_request(DeleteTaskDefinitionsInputDict))
+    await client.delete_task_set(cluster=_, service=_, task_set=_)
+    await client.delete_task_set(**_request(DeleteTaskSetInputDict))
+    await client.delete_task_set(_request(DeleteTaskSetInput))
+    await client.delete_task_set(_request(DeleteTaskSetInputDict))
+    await client.deregister_container_instance(container_instance=_)
+    await client.deregister_container_instance(
+        **_request(DeregisterContainerInstanceInputDict)
+    )
+    await client.deregister_container_instance(
+        _request(DeregisterContainerInstanceInput)
+    )
+    await client.deregister_container_instance(
+        _request(DeregisterContainerInstanceInputDict)
+    )
+    await client.deregister_task_definition(task_definition=_)
+    await client.deregister_task_definition(
+        **_request(DeregisterTaskDefinitionInputDict)
+    )
+    await client.deregister_task_definition(_request(DeregisterTaskDefinitionInput))
+    await client.deregister_task_definition(_request(DeregisterTaskDefinitionInputDict))
+    await client.describe_capacity_providers()
+    await client.describe_capacity_providers(
+        **_request(DescribeCapacityProvidersInputDict)
+    )
+    await client.describe_capacity_providers(_request(DescribeCapacityProvidersInput))
+    await client.describe_capacity_providers(
+        _request(DescribeCapacityProvidersInputDict)
+    )
+    await client.describe_clusters()
+    await client.describe_clusters(**_request(DescribeClustersInputDict))
+    await client.describe_clusters(_request(DescribeClustersInput))
+    await client.describe_clusters(_request(DescribeClustersInputDict))
+    await client.describe_container_instances(container_instances=_)
+    await client.describe_container_instances(
+        **_request(DescribeContainerInstancesInputDict)
+    )
+    await client.describe_container_instances(_request(DescribeContainerInstancesInput))
+    await client.describe_container_instances(
+        _request(DescribeContainerInstancesInputDict)
+    )
+    await client.describe_daemon(daemon_arn=_)
+    await client.describe_daemon(**_request(DescribeDaemonInputDict))
+    await client.describe_daemon(_request(DescribeDaemonInput))
+    await client.describe_daemon(_request(DescribeDaemonInputDict))
+    await client.describe_daemon_deployments(daemon_deployment_arns=_)
+    await client.describe_daemon_deployments(
+        **_request(DescribeDaemonDeploymentsInputDict)
+    )
+    await client.describe_daemon_deployments(_request(DescribeDaemonDeploymentsInput))
+    await client.describe_daemon_deployments(
+        _request(DescribeDaemonDeploymentsInputDict)
+    )
+    await client.describe_daemon_revisions(daemon_revision_arns=_)
+    await client.describe_daemon_revisions(**_request(DescribeDaemonRevisionsInputDict))
+    await client.describe_daemon_revisions(_request(DescribeDaemonRevisionsInput))
+    await client.describe_daemon_revisions(_request(DescribeDaemonRevisionsInputDict))
+    await client.describe_daemon_task_definition(daemon_task_definition=_)
+    await client.describe_daemon_task_definition(
+        **_request(DescribeDaemonTaskDefinitionInputDict)
+    )
+    await client.describe_daemon_task_definition(
+        _request(DescribeDaemonTaskDefinitionInput)
+    )
+    await client.describe_daemon_task_definition(
+        _request(DescribeDaemonTaskDefinitionInputDict)
+    )
+    await client.describe_express_gateway_service(service_arn=_)
+    await client.describe_express_gateway_service(
+        **_request(DescribeExpressGatewayServiceInputDict)
+    )
+    await client.describe_express_gateway_service(
+        _request(DescribeExpressGatewayServiceInput)
+    )
+    await client.describe_express_gateway_service(
+        _request(DescribeExpressGatewayServiceInputDict)
+    )
+    await client.describe_gateway(gateway=_)
+    await client.describe_gateway(**_request(DescribeGatewayInputDict))
+    await client.describe_gateway(_request(DescribeGatewayInput))
+    await client.describe_gateway(_request(DescribeGatewayInputDict))
+    await client.describe_gateway_resources(gateway=_)
+    await client.describe_gateway_resources(
+        **_request(DescribeGatewayResourcesInputDict)
+    )
+    await client.describe_gateway_resources(_request(DescribeGatewayResourcesInput))
+    await client.describe_gateway_resources(_request(DescribeGatewayResourcesInputDict))
+    await client.describe_gateway_route(gateway_route_arn=_)
+    await client.describe_gateway_route(**_request(DescribeGatewayRouteInputDict))
+    await client.describe_gateway_route(_request(DescribeGatewayRouteInput))
+    await client.describe_gateway_route(_request(DescribeGatewayRouteInputDict))
+    await client.describe_service_deployments(service_deployment_arns=_)
+    await client.describe_service_deployments(
+        **_request(DescribeServiceDeploymentsInputDict)
+    )
+    await client.describe_service_deployments(_request(DescribeServiceDeploymentsInput))
+    await client.describe_service_deployments(
+        _request(DescribeServiceDeploymentsInputDict)
+    )
+    await client.describe_service_revisions(service_revision_arns=_)
+    await client.describe_service_revisions(
+        **_request(DescribeServiceRevisionsInputDict)
+    )
+    await client.describe_service_revisions(_request(DescribeServiceRevisionsInput))
+    await client.describe_service_revisions(_request(DescribeServiceRevisionsInputDict))
+    await client.describe_services(services=_)
+    await client.describe_services(**_request(DescribeServicesInputDict))
+    await client.describe_services(_request(DescribeServicesInput))
+    await client.describe_services(_request(DescribeServicesInputDict))
+    await client.describe_task_definition(task_definition=_)
+    await client.describe_task_definition(**_request(DescribeTaskDefinitionInputDict))
+    await client.describe_task_definition(_request(DescribeTaskDefinitionInput))
+    await client.describe_task_definition(_request(DescribeTaskDefinitionInputDict))
+    await client.describe_tasks(tasks=_)
+    await client.describe_tasks(**_request(DescribeTasksInputDict))
+    await client.describe_tasks(_request(DescribeTasksInput))
+    await client.describe_tasks(_request(DescribeTasksInputDict))
+    await client.describe_task_sets(cluster=_, service=_)
+    await client.describe_task_sets(**_request(DescribeTaskSetsInputDict))
+    await client.describe_task_sets(_request(DescribeTaskSetsInput))
+    await client.describe_task_sets(_request(DescribeTaskSetsInputDict))
+    await client.disassociate_gateway_from_cluster(gateway=_, cluster=_)
+    await client.disassociate_gateway_from_cluster(
+        **_request(DisassociateGatewayFromClusterInputDict)
+    )
+    await client.disassociate_gateway_from_cluster(
+        _request(DisassociateGatewayFromClusterInput)
+    )
+    await client.disassociate_gateway_from_cluster(
+        _request(DisassociateGatewayFromClusterInputDict)
+    )
+    await client.discover_poll_endpoint()
+    await client.discover_poll_endpoint(**_request(DiscoverPollEndpointInputDict))
+    await client.discover_poll_endpoint(_request(DiscoverPollEndpointInput))
+    await client.discover_poll_endpoint(_request(DiscoverPollEndpointInputDict))
+    await client.execute_command(command=_, task=_)
+    await client.execute_command(**_request(ExecuteCommandInputDict))
+    await client.execute_command(_request(ExecuteCommandInput))
+    await client.execute_command(_request(ExecuteCommandInputDict))
+    await client.get_task_protection(cluster=_)
+    await client.get_task_protection(**_request(GetTaskProtectionInputDict))
+    await client.get_task_protection(_request(GetTaskProtectionInput))
+    await client.get_task_protection(_request(GetTaskProtectionInputDict))
+    await client.list_account_settings()
+    await client.list_account_settings(**_request(ListAccountSettingsInputDict))
+    await client.list_account_settings(_request(ListAccountSettingsInput))
+    await client.list_account_settings(_request(ListAccountSettingsInputDict))
+    await client.list_attributes(target_type=_)
+    await client.list_attributes(**_request(ListAttributesInputDict))
+    await client.list_attributes(_request(ListAttributesInput))
+    await client.list_attributes(_request(ListAttributesInputDict))
+    await client.list_clusters()
+    await client.list_clusters(**_request(ListClustersInputDict))
+    await client.list_clusters(_request(ListClustersInput))
+    await client.list_clusters(_request(ListClustersInputDict))
+    await client.list_container_instances()
+    await client.list_container_instances(**_request(ListContainerInstancesInputDict))
+    await client.list_container_instances(_request(ListContainerInstancesInput))
+    await client.list_container_instances(_request(ListContainerInstancesInputDict))
+    await client.list_daemon_deployments(daemon_arn=_)
+    await client.list_daemon_deployments(**_request(ListDaemonDeploymentsInputDict))
+    await client.list_daemon_deployments(_request(ListDaemonDeploymentsInput))
+    await client.list_daemon_deployments(_request(ListDaemonDeploymentsInputDict))
+    await client.list_daemons()
+    await client.list_daemons(**_request(ListDaemonsInputDict))
+    await client.list_daemons(_request(ListDaemonsInput))
+    await client.list_daemons(_request(ListDaemonsInputDict))
+    await client.list_daemon_task_definitions()
+    await client.list_daemon_task_definitions(
+        **_request(ListDaemonTaskDefinitionsInputDict)
+    )
+    await client.list_daemon_task_definitions(_request(ListDaemonTaskDefinitionsInput))
+    await client.list_daemon_task_definitions(
+        _request(ListDaemonTaskDefinitionsInputDict)
+    )
+    await client.list_gateway_cluster_associations()
+    await client.list_gateway_cluster_associations(
+        **_request(ListGatewayClusterAssociationsInputDict)
+    )
+    await client.list_gateway_cluster_associations(
+        _request(ListGatewayClusterAssociationsInput)
+    )
+    await client.list_gateway_cluster_associations(
+        _request(ListGatewayClusterAssociationsInputDict)
+    )
+    await client.list_gateway_routes()
+    await client.list_gateway_routes(**_request(ListGatewayRoutesInputDict))
+    await client.list_gateway_routes(_request(ListGatewayRoutesInput))
+    await client.list_gateway_routes(_request(ListGatewayRoutesInputDict))
+    await client.list_gateways()
+    await client.list_gateways(**_request(ListGatewaysInputDict))
+    await client.list_gateways(_request(ListGatewaysInput))
+    await client.list_gateways(_request(ListGatewaysInputDict))
+    await client.list_service_deployments(service=_)
+    await client.list_service_deployments(**_request(ListServiceDeploymentsInputDict))
+    await client.list_service_deployments(_request(ListServiceDeploymentsInput))
+    await client.list_service_deployments(_request(ListServiceDeploymentsInputDict))
+    await client.list_services()
+    await client.list_services(**_request(ListServicesInputDict))
+    await client.list_services(_request(ListServicesInput))
+    await client.list_services(_request(ListServicesInputDict))
+    await client.list_services_by_namespace(namespace=_)
+    await client.list_services_by_namespace(
+        **_request(ListServicesByNamespaceInputDict)
+    )
+    await client.list_services_by_namespace(_request(ListServicesByNamespaceInput))
+    await client.list_services_by_namespace(_request(ListServicesByNamespaceInputDict))
+    await client.list_tags_for_resource(resource_arn=_)
+    await client.list_tags_for_resource(**_request(ListTagsForResourceInputDict))
+    await client.list_tags_for_resource(_request(ListTagsForResourceInput))
+    await client.list_tags_for_resource(_request(ListTagsForResourceInputDict))
+    await client.list_task_definition_families()
+    await client.list_task_definition_families(
+        **_request(ListTaskDefinitionFamiliesInputDict)
+    )
+    await client.list_task_definition_families(
+        _request(ListTaskDefinitionFamiliesInput)
+    )
+    await client.list_task_definition_families(
+        _request(ListTaskDefinitionFamiliesInputDict)
+    )
+    await client.list_task_definitions()
+    await client.list_task_definitions(**_request(ListTaskDefinitionsInputDict))
+    await client.list_task_definitions(_request(ListTaskDefinitionsInput))
+    await client.list_task_definitions(_request(ListTaskDefinitionsInputDict))
+    await client.list_tasks()
+    await client.list_tasks(**_request(ListTasksInputDict))
+    await client.list_tasks(_request(ListTasksInput))
+    await client.list_tasks(_request(ListTasksInputDict))
+    await client.put_account_setting(name=_, value=_)
+    await client.put_account_setting(**_request(PutAccountSettingInputDict))
+    await client.put_account_setting(_request(PutAccountSettingInput))
+    await client.put_account_setting(_request(PutAccountSettingInputDict))
+    await client.put_account_setting_default(name=_, value=_)
+    await client.put_account_setting_default(
+        **_request(PutAccountSettingDefaultInputDict)
+    )
+    await client.put_account_setting_default(_request(PutAccountSettingDefaultInput))
+    await client.put_account_setting_default(
+        _request(PutAccountSettingDefaultInputDict)
+    )
+    await client.put_attributes(attributes=_)
+    await client.put_attributes(**_request(PutAttributesInputDict))
+    await client.put_attributes(_request(PutAttributesInput))
+    await client.put_attributes(_request(PutAttributesInputDict))
+    await client.put_cluster_capacity_providers(
+        cluster=_, capacity_providers=_, default_capacity_provider_strategy=_
+    )
+    await client.put_cluster_capacity_providers(
+        **_request(PutClusterCapacityProvidersInputDict)
+    )
+    await client.put_cluster_capacity_providers(
+        _request(PutClusterCapacityProvidersInput)
+    )
+    await client.put_cluster_capacity_providers(
+        _request(PutClusterCapacityProvidersInputDict)
+    )
+    await client.register_container_instance()
+    await client.register_container_instance(
+        **_request(RegisterContainerInstanceInputDict)
+    )
+    await client.register_container_instance(_request(RegisterContainerInstanceInput))
+    await client.register_container_instance(
+        _request(RegisterContainerInstanceInputDict)
+    )
+    await client.register_daemon_task_definition(family=_, container_definitions=_)
+    await client.register_daemon_task_definition(
+        **_request(RegisterDaemonTaskDefinitionInputDict)
+    )
+    await client.register_daemon_task_definition(
+        _request(RegisterDaemonTaskDefinitionInput)
+    )
+    await client.register_daemon_task_definition(
+        _request(RegisterDaemonTaskDefinitionInputDict)
+    )
+    await client.register_task_definition(family=_, container_definitions=_)
+    await client.register_task_definition(**_request(RegisterTaskDefinitionInputDict))
+    await client.register_task_definition(_request(RegisterTaskDefinitionInput))
+    await client.register_task_definition(_request(RegisterTaskDefinitionInputDict))
+    await client.run_task(task_definition=_)
+    await client.run_task(**_request(RunTaskInputDict))
+    await client.run_task(_request(RunTaskInput))
+    await client.run_task(_request(RunTaskInputDict))
+    await client.start_task(container_instances=_, task_definition=_)
+    await client.start_task(**_request(StartTaskInputDict))
+    await client.start_task(_request(StartTaskInput))
+    await client.start_task(_request(StartTaskInputDict))
+    await client.stop_service_deployment(service_deployment_arn=_)
+    await client.stop_service_deployment(**_request(StopServiceDeploymentInputDict))
+    await client.stop_service_deployment(_request(StopServiceDeploymentInput))
+    await client.stop_service_deployment(_request(StopServiceDeploymentInputDict))
+    await client.stop_task(task=_)
+    await client.stop_task(**_request(StopTaskInputDict))
+    await client.stop_task(_request(StopTaskInput))
+    await client.stop_task(_request(StopTaskInputDict))
+    await client.submit_attachment_state_changes(attachments=_)
+    await client.submit_attachment_state_changes(
+        **_request(SubmitAttachmentStateChangesInputDict)
+    )
+    await client.submit_attachment_state_changes(
+        _request(SubmitAttachmentStateChangesInput)
+    )
+    await client.submit_attachment_state_changes(
+        _request(SubmitAttachmentStateChangesInputDict)
+    )
+    await client.submit_container_state_change()
+    await client.submit_container_state_change(
+        **_request(SubmitContainerStateChangeInputDict)
+    )
+    await client.submit_container_state_change(
+        _request(SubmitContainerStateChangeInput)
+    )
+    await client.submit_container_state_change(
+        _request(SubmitContainerStateChangeInputDict)
+    )
+    await client.submit_task_state_change()
+    await client.submit_task_state_change(**_request(SubmitTaskStateChangeInputDict))
+    await client.submit_task_state_change(_request(SubmitTaskStateChangeInput))
+    await client.submit_task_state_change(_request(SubmitTaskStateChangeInputDict))
+    await client.tag_resource(resource_arn=_, tags=_)
+    await client.tag_resource(**_request(TagResourceInputDict))
+    await client.tag_resource(_request(TagResourceInput))
+    await client.tag_resource(_request(TagResourceInputDict))
+    await client.untag_resource(resource_arn=_, tag_keys=_)
+    await client.untag_resource(**_request(UntagResourceInputDict))
+    await client.untag_resource(_request(UntagResourceInput))
+    await client.untag_resource(_request(UntagResourceInputDict))
+    await client.update_capacity_provider(name=_)
+    await client.update_capacity_provider(**_request(UpdateCapacityProviderInputDict))
+    await client.update_capacity_provider(_request(UpdateCapacityProviderInput))
+    await client.update_capacity_provider(_request(UpdateCapacityProviderInputDict))
+    await client.update_cluster(cluster=_)
+    await client.update_cluster(**_request(UpdateClusterInputDict))
+    await client.update_cluster(_request(UpdateClusterInput))
+    await client.update_cluster(_request(UpdateClusterInputDict))
+    await client.update_cluster_settings(cluster=_, settings=_)
+    await client.update_cluster_settings(**_request(UpdateClusterSettingsInputDict))
+    await client.update_cluster_settings(_request(UpdateClusterSettingsInput))
+    await client.update_cluster_settings(_request(UpdateClusterSettingsInputDict))
+    await client.update_container_agent(container_instance=_)
+    await client.update_container_agent(**_request(UpdateContainerAgentInputDict))
+    await client.update_container_agent(_request(UpdateContainerAgentInput))
+    await client.update_container_agent(_request(UpdateContainerAgentInputDict))
+    await client.update_container_instances_state(container_instances=_, status=_)
+    await client.update_container_instances_state(
+        **_request(UpdateContainerInstancesStateInputDict)
+    )
+    await client.update_container_instances_state(
+        _request(UpdateContainerInstancesStateInput)
+    )
+    await client.update_container_instances_state(
+        _request(UpdateContainerInstancesStateInputDict)
+    )
+    await client.update_daemon(
+        daemon_arn=_, daemon_task_definition_arn=_, capacity_provider_arns=_
+    )
+    await client.update_daemon(**_request(UpdateDaemonInputDict))
+    await client.update_daemon(_request(UpdateDaemonInput))
+    await client.update_daemon(_request(UpdateDaemonInputDict))
+    await client.update_express_gateway_service(service_arn=_)
+    await client.update_express_gateway_service(
+        **_request(UpdateExpressGatewayServiceInputDict)
+    )
+    await client.update_express_gateway_service(
+        _request(UpdateExpressGatewayServiceInput)
+    )
+    await client.update_express_gateway_service(
+        _request(UpdateExpressGatewayServiceInputDict)
+    )
+    await client.update_gateway(gateway=_)
+    await client.update_gateway(**_request(UpdateGatewayInputDict))
+    await client.update_gateway(_request(UpdateGatewayInput))
+    await client.update_gateway(_request(UpdateGatewayInputDict))
+    await client.update_service(service=_)
+    await client.update_service(**_request(UpdateServiceInputDict))
+    await client.update_service(_request(UpdateServiceInput))
+    await client.update_service(_request(UpdateServiceInputDict))
+    await client.update_service_primary_task_set(
+        cluster=_, service=_, primary_task_set=_
+    )
+    await client.update_service_primary_task_set(
+        **_request(UpdateServicePrimaryTaskSetInputDict)
+    )
+    await client.update_service_primary_task_set(
+        _request(UpdateServicePrimaryTaskSetInput)
+    )
+    await client.update_service_primary_task_set(
+        _request(UpdateServicePrimaryTaskSetInputDict)
+    )
+    await client.update_task_protection(cluster=_, tasks=_)
+    await client.update_task_protection(**_request(UpdateTaskProtectionInputDict))
+    await client.update_task_protection(_request(UpdateTaskProtectionInput))
+    await client.update_task_protection(_request(UpdateTaskProtectionInputDict))
+    await client.update_task_set(cluster=_, service=_, task_set=_, scale=_)
+    await client.update_task_set(**_request(UpdateTaskSetInputDict))
+    await client.update_task_set(_request(UpdateTaskSetInput))
+    await client.update_task_set(_request(UpdateTaskSetInputDict))
+
+
+def check_sync_calls(client: ECSClient) -> None:
+    pass
+    client.associate_gateway_with_cluster(gateway=_, cluster=_)
+    client.associate_gateway_with_cluster(
+        **_request(AssociateGatewayWithClusterInputDict)
+    )
+    client.associate_gateway_with_cluster(_request(AssociateGatewayWithClusterInput))
+    client.associate_gateway_with_cluster(
+        _request(AssociateGatewayWithClusterInputDict)
+    )
+    client.continue_service_deployment(service_deployment_arn=_, hook_id=_)
+    client.continue_service_deployment(**_request(ContinueServiceDeploymentInputDict))
+    client.continue_service_deployment(_request(ContinueServiceDeploymentInput))
+    client.continue_service_deployment(_request(ContinueServiceDeploymentInputDict))
+    client.create_capacity_provider(name=_)
+    client.create_capacity_provider(**_request(CreateCapacityProviderInputDict))
+    client.create_capacity_provider(_request(CreateCapacityProviderInput))
+    client.create_capacity_provider(_request(CreateCapacityProviderInputDict))
+    client.create_cluster()
+    client.create_cluster(**_request(CreateClusterInputDict))
+    client.create_cluster(_request(CreateClusterInput))
+    client.create_cluster(_request(CreateClusterInputDict))
+    client.create_daemon(
+        daemon_name=_, daemon_task_definition_arn=_, capacity_provider_arns=_
+    )
+    client.create_daemon(**_request(CreateDaemonInputDict))
+    client.create_daemon(_request(CreateDaemonInput))
+    client.create_daemon(_request(CreateDaemonInputDict))
+    client.create_express_gateway_service(infrastructure_role_arn=_)
+    client.create_express_gateway_service(
+        **_request(CreateExpressGatewayServiceInputDict)
+    )
+    client.create_express_gateway_service(_request(CreateExpressGatewayServiceInput))
+    client.create_express_gateway_service(
+        _request(CreateExpressGatewayServiceInputDict)
+    )
+    client.create_gateway(name=_, infrastructure_role_arn=_, configuration=_)
+    client.create_gateway(**_request(CreateGatewayInputDict))
+    client.create_gateway(_request(CreateGatewayInput))
+    client.create_gateway(_request(CreateGatewayInputDict))
+    client.create_service(service_name=_)
+    client.create_service(**_request(CreateServiceInputDict))
+    client.create_service(_request(CreateServiceInput))
+    client.create_service(_request(CreateServiceInputDict))
+    client.create_task_set(service=_, cluster=_, task_definition=_)
+    client.create_task_set(**_request(CreateTaskSetInputDict))
+    client.create_task_set(_request(CreateTaskSetInput))
+    client.create_task_set(_request(CreateTaskSetInputDict))
+    client.delete_account_setting(name=_)
+    client.delete_account_setting(**_request(DeleteAccountSettingInputDict))
+    client.delete_account_setting(_request(DeleteAccountSettingInput))
+    client.delete_account_setting(_request(DeleteAccountSettingInputDict))
+    client.delete_attributes(attributes=_)
+    client.delete_attributes(**_request(DeleteAttributesInputDict))
+    client.delete_attributes(_request(DeleteAttributesInput))
+    client.delete_attributes(_request(DeleteAttributesInputDict))
+    client.delete_capacity_provider(capacity_provider=_)
+    client.delete_capacity_provider(**_request(DeleteCapacityProviderInputDict))
+    client.delete_capacity_provider(_request(DeleteCapacityProviderInput))
+    client.delete_capacity_provider(_request(DeleteCapacityProviderInputDict))
+    client.delete_cluster(cluster=_)
+    client.delete_cluster(**_request(DeleteClusterInputDict))
+    client.delete_cluster(_request(DeleteClusterInput))
+    client.delete_cluster(_request(DeleteClusterInputDict))
+    client.delete_daemon(daemon_arn=_)
+    client.delete_daemon(**_request(DeleteDaemonInputDict))
+    client.delete_daemon(_request(DeleteDaemonInput))
+    client.delete_daemon(_request(DeleteDaemonInputDict))
+    client.delete_daemon_task_definition(daemon_task_definition=_)
+    client.delete_daemon_task_definition(
+        **_request(DeleteDaemonTaskDefinitionInputDict)
+    )
+    client.delete_daemon_task_definition(_request(DeleteDaemonTaskDefinitionInput))
+    client.delete_daemon_task_definition(_request(DeleteDaemonTaskDefinitionInputDict))
+    client.delete_express_gateway_service(service_arn=_)
+    client.delete_express_gateway_service(
+        **_request(DeleteExpressGatewayServiceInputDict)
+    )
+    client.delete_express_gateway_service(_request(DeleteExpressGatewayServiceInput))
+    client.delete_express_gateway_service(
+        _request(DeleteExpressGatewayServiceInputDict)
+    )
+    client.delete_gateway(gateway=_)
+    client.delete_gateway(**_request(DeleteGatewayInputDict))
+    client.delete_gateway(_request(DeleteGatewayInput))
+    client.delete_gateway(_request(DeleteGatewayInputDict))
+    client.delete_service(service=_)
+    client.delete_service(**_request(DeleteServiceInputDict))
+    client.delete_service(_request(DeleteServiceInput))
+    client.delete_service(_request(DeleteServiceInputDict))
+    client.delete_task_definitions(task_definitions=_)
+    client.delete_task_definitions(**_request(DeleteTaskDefinitionsInputDict))
+    client.delete_task_definitions(_request(DeleteTaskDefinitionsInput))
+    client.delete_task_definitions(_request(DeleteTaskDefinitionsInputDict))
+    client.delete_task_set(cluster=_, service=_, task_set=_)
+    client.delete_task_set(**_request(DeleteTaskSetInputDict))
+    client.delete_task_set(_request(DeleteTaskSetInput))
+    client.delete_task_set(_request(DeleteTaskSetInputDict))
+    client.deregister_container_instance(container_instance=_)
+    client.deregister_container_instance(
+        **_request(DeregisterContainerInstanceInputDict)
+    )
+    client.deregister_container_instance(_request(DeregisterContainerInstanceInput))
+    client.deregister_container_instance(_request(DeregisterContainerInstanceInputDict))
+    client.deregister_task_definition(task_definition=_)
+    client.deregister_task_definition(**_request(DeregisterTaskDefinitionInputDict))
+    client.deregister_task_definition(_request(DeregisterTaskDefinitionInput))
+    client.deregister_task_definition(_request(DeregisterTaskDefinitionInputDict))
+    client.describe_capacity_providers()
+    client.describe_capacity_providers(**_request(DescribeCapacityProvidersInputDict))
+    client.describe_capacity_providers(_request(DescribeCapacityProvidersInput))
+    client.describe_capacity_providers(_request(DescribeCapacityProvidersInputDict))
+    client.describe_clusters()
+    client.describe_clusters(**_request(DescribeClustersInputDict))
+    client.describe_clusters(_request(DescribeClustersInput))
+    client.describe_clusters(_request(DescribeClustersInputDict))
+    client.describe_container_instances(container_instances=_)
+    client.describe_container_instances(**_request(DescribeContainerInstancesInputDict))
+    client.describe_container_instances(_request(DescribeContainerInstancesInput))
+    client.describe_container_instances(_request(DescribeContainerInstancesInputDict))
+    client.describe_daemon(daemon_arn=_)
+    client.describe_daemon(**_request(DescribeDaemonInputDict))
+    client.describe_daemon(_request(DescribeDaemonInput))
+    client.describe_daemon(_request(DescribeDaemonInputDict))
+    client.describe_daemon_deployments(daemon_deployment_arns=_)
+    client.describe_daemon_deployments(**_request(DescribeDaemonDeploymentsInputDict))
+    client.describe_daemon_deployments(_request(DescribeDaemonDeploymentsInput))
+    client.describe_daemon_deployments(_request(DescribeDaemonDeploymentsInputDict))
+    client.describe_daemon_revisions(daemon_revision_arns=_)
+    client.describe_daemon_revisions(**_request(DescribeDaemonRevisionsInputDict))
+    client.describe_daemon_revisions(_request(DescribeDaemonRevisionsInput))
+    client.describe_daemon_revisions(_request(DescribeDaemonRevisionsInputDict))
+    client.describe_daemon_task_definition(daemon_task_definition=_)
+    client.describe_daemon_task_definition(
+        **_request(DescribeDaemonTaskDefinitionInputDict)
+    )
+    client.describe_daemon_task_definition(_request(DescribeDaemonTaskDefinitionInput))
+    client.describe_daemon_task_definition(
+        _request(DescribeDaemonTaskDefinitionInputDict)
+    )
+    client.describe_express_gateway_service(service_arn=_)
+    client.describe_express_gateway_service(
+        **_request(DescribeExpressGatewayServiceInputDict)
+    )
+    client.describe_express_gateway_service(
+        _request(DescribeExpressGatewayServiceInput)
+    )
+    client.describe_express_gateway_service(
+        _request(DescribeExpressGatewayServiceInputDict)
+    )
+    client.describe_gateway(gateway=_)
+    client.describe_gateway(**_request(DescribeGatewayInputDict))
+    client.describe_gateway(_request(DescribeGatewayInput))
+    client.describe_gateway(_request(DescribeGatewayInputDict))
+    client.describe_gateway_resources(gateway=_)
+    client.describe_gateway_resources(**_request(DescribeGatewayResourcesInputDict))
+    client.describe_gateway_resources(_request(DescribeGatewayResourcesInput))
+    client.describe_gateway_resources(_request(DescribeGatewayResourcesInputDict))
+    client.describe_gateway_route(gateway_route_arn=_)
+    client.describe_gateway_route(**_request(DescribeGatewayRouteInputDict))
+    client.describe_gateway_route(_request(DescribeGatewayRouteInput))
+    client.describe_gateway_route(_request(DescribeGatewayRouteInputDict))
+    client.describe_service_deployments(service_deployment_arns=_)
+    client.describe_service_deployments(**_request(DescribeServiceDeploymentsInputDict))
+    client.describe_service_deployments(_request(DescribeServiceDeploymentsInput))
+    client.describe_service_deployments(_request(DescribeServiceDeploymentsInputDict))
+    client.describe_service_revisions(service_revision_arns=_)
+    client.describe_service_revisions(**_request(DescribeServiceRevisionsInputDict))
+    client.describe_service_revisions(_request(DescribeServiceRevisionsInput))
+    client.describe_service_revisions(_request(DescribeServiceRevisionsInputDict))
+    client.describe_services(services=_)
+    client.describe_services(**_request(DescribeServicesInputDict))
+    client.describe_services(_request(DescribeServicesInput))
+    client.describe_services(_request(DescribeServicesInputDict))
+    client.describe_task_definition(task_definition=_)
+    client.describe_task_definition(**_request(DescribeTaskDefinitionInputDict))
+    client.describe_task_definition(_request(DescribeTaskDefinitionInput))
+    client.describe_task_definition(_request(DescribeTaskDefinitionInputDict))
+    client.describe_tasks(tasks=_)
+    client.describe_tasks(**_request(DescribeTasksInputDict))
+    client.describe_tasks(_request(DescribeTasksInput))
+    client.describe_tasks(_request(DescribeTasksInputDict))
+    client.describe_task_sets(cluster=_, service=_)
+    client.describe_task_sets(**_request(DescribeTaskSetsInputDict))
+    client.describe_task_sets(_request(DescribeTaskSetsInput))
+    client.describe_task_sets(_request(DescribeTaskSetsInputDict))
+    client.disassociate_gateway_from_cluster(gateway=_, cluster=_)
+    client.disassociate_gateway_from_cluster(
+        **_request(DisassociateGatewayFromClusterInputDict)
+    )
+    client.disassociate_gateway_from_cluster(
+        _request(DisassociateGatewayFromClusterInput)
+    )
+    client.disassociate_gateway_from_cluster(
+        _request(DisassociateGatewayFromClusterInputDict)
+    )
+    client.discover_poll_endpoint()
+    client.discover_poll_endpoint(**_request(DiscoverPollEndpointInputDict))
+    client.discover_poll_endpoint(_request(DiscoverPollEndpointInput))
+    client.discover_poll_endpoint(_request(DiscoverPollEndpointInputDict))
+    client.execute_command(command=_, task=_)
+    client.execute_command(**_request(ExecuteCommandInputDict))
+    client.execute_command(_request(ExecuteCommandInput))
+    client.execute_command(_request(ExecuteCommandInputDict))
+    client.get_task_protection(cluster=_)
+    client.get_task_protection(**_request(GetTaskProtectionInputDict))
+    client.get_task_protection(_request(GetTaskProtectionInput))
+    client.get_task_protection(_request(GetTaskProtectionInputDict))
+    client.list_account_settings()
+    client.list_account_settings(**_request(ListAccountSettingsInputDict))
+    client.list_account_settings(_request(ListAccountSettingsInput))
+    client.list_account_settings(_request(ListAccountSettingsInputDict))
+    client.list_attributes(target_type=_)
+    client.list_attributes(**_request(ListAttributesInputDict))
+    client.list_attributes(_request(ListAttributesInput))
+    client.list_attributes(_request(ListAttributesInputDict))
+    client.list_clusters()
+    client.list_clusters(**_request(ListClustersInputDict))
+    client.list_clusters(_request(ListClustersInput))
+    client.list_clusters(_request(ListClustersInputDict))
+    client.list_container_instances()
+    client.list_container_instances(**_request(ListContainerInstancesInputDict))
+    client.list_container_instances(_request(ListContainerInstancesInput))
+    client.list_container_instances(_request(ListContainerInstancesInputDict))
+    client.list_daemon_deployments(daemon_arn=_)
+    client.list_daemon_deployments(**_request(ListDaemonDeploymentsInputDict))
+    client.list_daemon_deployments(_request(ListDaemonDeploymentsInput))
+    client.list_daemon_deployments(_request(ListDaemonDeploymentsInputDict))
+    client.list_daemons()
+    client.list_daemons(**_request(ListDaemonsInputDict))
+    client.list_daemons(_request(ListDaemonsInput))
+    client.list_daemons(_request(ListDaemonsInputDict))
+    client.list_daemon_task_definitions()
+    client.list_daemon_task_definitions(**_request(ListDaemonTaskDefinitionsInputDict))
+    client.list_daemon_task_definitions(_request(ListDaemonTaskDefinitionsInput))
+    client.list_daemon_task_definitions(_request(ListDaemonTaskDefinitionsInputDict))
+    client.list_gateway_cluster_associations()
+    client.list_gateway_cluster_associations(
+        **_request(ListGatewayClusterAssociationsInputDict)
+    )
+    client.list_gateway_cluster_associations(
+        _request(ListGatewayClusterAssociationsInput)
+    )
+    client.list_gateway_cluster_associations(
+        _request(ListGatewayClusterAssociationsInputDict)
+    )
+    client.list_gateway_routes()
+    client.list_gateway_routes(**_request(ListGatewayRoutesInputDict))
+    client.list_gateway_routes(_request(ListGatewayRoutesInput))
+    client.list_gateway_routes(_request(ListGatewayRoutesInputDict))
+    client.list_gateways()
+    client.list_gateways(**_request(ListGatewaysInputDict))
+    client.list_gateways(_request(ListGatewaysInput))
+    client.list_gateways(_request(ListGatewaysInputDict))
+    client.list_service_deployments(service=_)
+    client.list_service_deployments(**_request(ListServiceDeploymentsInputDict))
+    client.list_service_deployments(_request(ListServiceDeploymentsInput))
+    client.list_service_deployments(_request(ListServiceDeploymentsInputDict))
+    client.list_services()
+    client.list_services(**_request(ListServicesInputDict))
+    client.list_services(_request(ListServicesInput))
+    client.list_services(_request(ListServicesInputDict))
+    client.list_services_by_namespace(namespace=_)
+    client.list_services_by_namespace(**_request(ListServicesByNamespaceInputDict))
+    client.list_services_by_namespace(_request(ListServicesByNamespaceInput))
+    client.list_services_by_namespace(_request(ListServicesByNamespaceInputDict))
+    client.list_tags_for_resource(resource_arn=_)
+    client.list_tags_for_resource(**_request(ListTagsForResourceInputDict))
+    client.list_tags_for_resource(_request(ListTagsForResourceInput))
+    client.list_tags_for_resource(_request(ListTagsForResourceInputDict))
+    client.list_task_definition_families()
+    client.list_task_definition_families(
+        **_request(ListTaskDefinitionFamiliesInputDict)
+    )
+    client.list_task_definition_families(_request(ListTaskDefinitionFamiliesInput))
+    client.list_task_definition_families(_request(ListTaskDefinitionFamiliesInputDict))
+    client.list_task_definitions()
+    client.list_task_definitions(**_request(ListTaskDefinitionsInputDict))
+    client.list_task_definitions(_request(ListTaskDefinitionsInput))
+    client.list_task_definitions(_request(ListTaskDefinitionsInputDict))
+    client.list_tasks()
+    client.list_tasks(**_request(ListTasksInputDict))
+    client.list_tasks(_request(ListTasksInput))
+    client.list_tasks(_request(ListTasksInputDict))
+    client.put_account_setting(name=_, value=_)
+    client.put_account_setting(**_request(PutAccountSettingInputDict))
+    client.put_account_setting(_request(PutAccountSettingInput))
+    client.put_account_setting(_request(PutAccountSettingInputDict))
+    client.put_account_setting_default(name=_, value=_)
+    client.put_account_setting_default(**_request(PutAccountSettingDefaultInputDict))
+    client.put_account_setting_default(_request(PutAccountSettingDefaultInput))
+    client.put_account_setting_default(_request(PutAccountSettingDefaultInputDict))
+    client.put_attributes(attributes=_)
+    client.put_attributes(**_request(PutAttributesInputDict))
+    client.put_attributes(_request(PutAttributesInput))
+    client.put_attributes(_request(PutAttributesInputDict))
+    client.put_cluster_capacity_providers(
+        cluster=_, capacity_providers=_, default_capacity_provider_strategy=_
+    )
+    client.put_cluster_capacity_providers(
+        **_request(PutClusterCapacityProvidersInputDict)
+    )
+    client.put_cluster_capacity_providers(_request(PutClusterCapacityProvidersInput))
+    client.put_cluster_capacity_providers(
+        _request(PutClusterCapacityProvidersInputDict)
+    )
+    client.register_container_instance()
+    client.register_container_instance(**_request(RegisterContainerInstanceInputDict))
+    client.register_container_instance(_request(RegisterContainerInstanceInput))
+    client.register_container_instance(_request(RegisterContainerInstanceInputDict))
+    client.register_daemon_task_definition(family=_, container_definitions=_)
+    client.register_daemon_task_definition(
+        **_request(RegisterDaemonTaskDefinitionInputDict)
+    )
+    client.register_daemon_task_definition(_request(RegisterDaemonTaskDefinitionInput))
+    client.register_daemon_task_definition(
+        _request(RegisterDaemonTaskDefinitionInputDict)
+    )
+    client.register_task_definition(family=_, container_definitions=_)
+    client.register_task_definition(**_request(RegisterTaskDefinitionInputDict))
+    client.register_task_definition(_request(RegisterTaskDefinitionInput))
+    client.register_task_definition(_request(RegisterTaskDefinitionInputDict))
+    client.run_task(task_definition=_)
+    client.run_task(**_request(RunTaskInputDict))
+    client.run_task(_request(RunTaskInput))
+    client.run_task(_request(RunTaskInputDict))
+    client.start_task(container_instances=_, task_definition=_)
+    client.start_task(**_request(StartTaskInputDict))
+    client.start_task(_request(StartTaskInput))
+    client.start_task(_request(StartTaskInputDict))
+    client.stop_service_deployment(service_deployment_arn=_)
+    client.stop_service_deployment(**_request(StopServiceDeploymentInputDict))
+    client.stop_service_deployment(_request(StopServiceDeploymentInput))
+    client.stop_service_deployment(_request(StopServiceDeploymentInputDict))
+    client.stop_task(task=_)
+    client.stop_task(**_request(StopTaskInputDict))
+    client.stop_task(_request(StopTaskInput))
+    client.stop_task(_request(StopTaskInputDict))
+    client.submit_attachment_state_changes(attachments=_)
+    client.submit_attachment_state_changes(
+        **_request(SubmitAttachmentStateChangesInputDict)
+    )
+    client.submit_attachment_state_changes(_request(SubmitAttachmentStateChangesInput))
+    client.submit_attachment_state_changes(
+        _request(SubmitAttachmentStateChangesInputDict)
+    )
+    client.submit_container_state_change()
+    client.submit_container_state_change(
+        **_request(SubmitContainerStateChangeInputDict)
+    )
+    client.submit_container_state_change(_request(SubmitContainerStateChangeInput))
+    client.submit_container_state_change(_request(SubmitContainerStateChangeInputDict))
+    client.submit_task_state_change()
+    client.submit_task_state_change(**_request(SubmitTaskStateChangeInputDict))
+    client.submit_task_state_change(_request(SubmitTaskStateChangeInput))
+    client.submit_task_state_change(_request(SubmitTaskStateChangeInputDict))
+    client.tag_resource(resource_arn=_, tags=_)
+    client.tag_resource(**_request(TagResourceInputDict))
+    client.tag_resource(_request(TagResourceInput))
+    client.tag_resource(_request(TagResourceInputDict))
+    client.untag_resource(resource_arn=_, tag_keys=_)
+    client.untag_resource(**_request(UntagResourceInputDict))
+    client.untag_resource(_request(UntagResourceInput))
+    client.untag_resource(_request(UntagResourceInputDict))
+    client.update_capacity_provider(name=_)
+    client.update_capacity_provider(**_request(UpdateCapacityProviderInputDict))
+    client.update_capacity_provider(_request(UpdateCapacityProviderInput))
+    client.update_capacity_provider(_request(UpdateCapacityProviderInputDict))
+    client.update_cluster(cluster=_)
+    client.update_cluster(**_request(UpdateClusterInputDict))
+    client.update_cluster(_request(UpdateClusterInput))
+    client.update_cluster(_request(UpdateClusterInputDict))
+    client.update_cluster_settings(cluster=_, settings=_)
+    client.update_cluster_settings(**_request(UpdateClusterSettingsInputDict))
+    client.update_cluster_settings(_request(UpdateClusterSettingsInput))
+    client.update_cluster_settings(_request(UpdateClusterSettingsInputDict))
+    client.update_container_agent(container_instance=_)
+    client.update_container_agent(**_request(UpdateContainerAgentInputDict))
+    client.update_container_agent(_request(UpdateContainerAgentInput))
+    client.update_container_agent(_request(UpdateContainerAgentInputDict))
+    client.update_container_instances_state(container_instances=_, status=_)
+    client.update_container_instances_state(
+        **_request(UpdateContainerInstancesStateInputDict)
+    )
+    client.update_container_instances_state(
+        _request(UpdateContainerInstancesStateInput)
+    )
+    client.update_container_instances_state(
+        _request(UpdateContainerInstancesStateInputDict)
+    )
+    client.update_daemon(
+        daemon_arn=_, daemon_task_definition_arn=_, capacity_provider_arns=_
+    )
+    client.update_daemon(**_request(UpdateDaemonInputDict))
+    client.update_daemon(_request(UpdateDaemonInput))
+    client.update_daemon(_request(UpdateDaemonInputDict))
+    client.update_express_gateway_service(service_arn=_)
+    client.update_express_gateway_service(
+        **_request(UpdateExpressGatewayServiceInputDict)
+    )
+    client.update_express_gateway_service(_request(UpdateExpressGatewayServiceInput))
+    client.update_express_gateway_service(
+        _request(UpdateExpressGatewayServiceInputDict)
+    )
+    client.update_gateway(gateway=_)
+    client.update_gateway(**_request(UpdateGatewayInputDict))
+    client.update_gateway(_request(UpdateGatewayInput))
+    client.update_gateway(_request(UpdateGatewayInputDict))
+    client.update_service(service=_)
+    client.update_service(**_request(UpdateServiceInputDict))
+    client.update_service(_request(UpdateServiceInput))
+    client.update_service(_request(UpdateServiceInputDict))
+    client.update_service_primary_task_set(cluster=_, service=_, primary_task_set=_)
+    client.update_service_primary_task_set(
+        **_request(UpdateServicePrimaryTaskSetInputDict)
+    )
+    client.update_service_primary_task_set(_request(UpdateServicePrimaryTaskSetInput))
+    client.update_service_primary_task_set(
+        _request(UpdateServicePrimaryTaskSetInputDict)
+    )
+    client.update_task_protection(cluster=_, tasks=_)
+    client.update_task_protection(**_request(UpdateTaskProtectionInputDict))
+    client.update_task_protection(_request(UpdateTaskProtectionInput))
+    client.update_task_protection(_request(UpdateTaskProtectionInputDict))
+    client.update_task_set(cluster=_, service=_, task_set=_, scale=_)
+    client.update_task_set(**_request(UpdateTaskSetInputDict))
+    client.update_task_set(_request(UpdateTaskSetInput))
+    client.update_task_set(_request(UpdateTaskSetInputDict))

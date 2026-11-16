@@ -13,8 +13,8 @@ from typing import (
 )
 
 from smithy_aws_core.auth.sigv4 import SigV4AuthScheme
-from smithy_aws_core.config import FileSystem
 from smithy_aws_core.config.aws_config import AwsConfig, AwsConfigOverrides
+from smithy_aws_core.config.filesystem import FileSystem
 from smithy_aws_core.config.resolvers import (
     EndpointUriResolver,
     resolve_use_dualstack_endpoint_program,
@@ -22,7 +22,10 @@ from smithy_aws_core.config.resolvers import (
 )
 from smithy_aws_core.config.types import FieldSpec
 from smithy_aws_core.endpoints import AWS_RULES_EXTENSION
-from smithy_aws_core.identity import AWSCredentialsIdentity, AWSIdentityProperties
+from smithy_aws_core.identity.components import (
+    AWSCredentialsIdentity,
+    AWSIdentityProperties,
+)
 from smithy_aws_core.protocols import AwsQueryClientProtocol
 from smithy_core.endpoints import BddEndpointResolver
 from smithy_core.interfaces import (
@@ -196,8 +199,12 @@ if TYPE_CHECKING:
         RegisterPublisherOutput,
         RegisterTypeInput,
         RegisterTypeOutput,
+        RemoveAliasInput,
+        RemoveAliasOutput,
         RollbackStackInput,
         RollbackStackOutput,
+        SetAliasInput,
+        SetAliasOutput,
         SetStackPolicyInput,
         SetStackPolicyOutput,
         SetTypeConfigurationInput,
@@ -381,7 +388,9 @@ if TYPE_CHECKING:
         Interceptor[RecordHandlerProgressInput, RecordHandlerProgressOutput, Any, Any],
         Interceptor[RegisterPublisherInput, RegisterPublisherOutput, Any, Any],
         Interceptor[RegisterTypeInput, RegisterTypeOutput, Any, Any],
+        Interceptor[RemoveAliasInput, RemoveAliasOutput, Any, Any],
         Interceptor[RollbackStackInput, RollbackStackOutput, Any, Any],
+        Interceptor[SetAliasInput, SetAliasOutput, Any, Any],
         Interceptor[SetStackPolicyInput, SetStackPolicyOutput, Any, Any],
         Interceptor[SetTypeConfigurationInput, SetTypeConfigurationOutput, Any, Any],
         Interceptor[SetTypeDefaultVersionInput, SetTypeDefaultVersionOutput, Any, Any],

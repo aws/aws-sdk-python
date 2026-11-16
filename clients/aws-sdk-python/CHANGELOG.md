@@ -1,5 +1,58 @@
 # Changelog
 
+## v0.13.0
+
+### Dependencies
+* Add support for the `aws-sdk-rds` client.
+* Add support for the `aws-sdk-ec2` client.
+* Add support for the `aws-sdk-iam` client.
+* Add support for the `aws-sdk-cloudformation` client.
+* Add support for the `aws-sdk-cloudfront` client.
+* Add support for the `aws-sdk-appconfigdata` client.
+* Add support for the `aws-sdk-s3` client.
+* Add support for the `aws-sdk-kinesis` client.
+* Add support for the `aws-sdk-ecs` client.
+* Add support for the `aws-sdk-kms` client.
+* Add support for the `aws-sdk-acm` client.
+* Add support for the `aws-sdk-cloudfront-keyvaluestore` client.
+* Bump `aws-sdk-acm` from `~=0.12.0` to `~=0.13.0`.
+* Bump `aws-sdk-api-gateway` from `~=0.12.0` to `~=0.13.0`.
+* Bump `aws-sdk-appconfigdata` from `~=0.12.0` to `~=0.13.0`.
+* Bump `aws-sdk-bedrock` from `~=0.12.0` to `~=0.13.0`.
+* Bump `aws-sdk-bedrock-agent` from `~=0.12.0` to `~=0.13.0`.
+* Bump `aws-sdk-bedrock-agent-runtime` from `~=0.12.0` to `~=0.13.0`.
+* Bump `aws-sdk-bedrock-agentcore` from `~=0.12.0` to `~=0.13.0`.
+* Bump `aws-sdk-bedrock-agentcore-control` from `~=0.12.0` to `~=0.13.0`.
+* Bump `aws-sdk-bedrock-data-automation` from `~=0.12.0` to `~=0.13.0`.
+* Bump `aws-sdk-bedrock-data-automation-runtime` from `~=0.12.0` to `~=0.13.0`.
+* Bump `aws-sdk-bedrock-runtime` from `~=0.12.0` to `~=0.13.0`.
+* Bump `aws-sdk-cloudformation` from `~=0.12.0` to `~=0.13.0`.
+* Bump `aws-sdk-cloudfront` from `~=0.12.0` to `~=0.13.0`.
+* Bump `aws-sdk-cloudfront-keyvaluestore` from `~=0.12.0` to `~=0.13.0`.
+* Bump `aws-sdk-cloudtrail` from `~=0.12.0` to `~=0.13.0`.
+* Bump `aws-sdk-cognito-identity` from `~=0.12.0` to `~=0.13.0`.
+* Bump `aws-sdk-connecthealth` from `~=0.12.0` to `~=0.13.0`.
+* Bump `aws-sdk-dynamodb` from `~=0.12.0` to `~=0.13.0`.
+* Bump `aws-sdk-ec2` from `~=0.12.0` to `~=0.13.0`.
+* Bump `aws-sdk-ecs` from `~=0.12.0` to `~=0.13.0`.
+* Bump `aws-sdk-guardduty` from `~=0.12.0` to `~=0.13.0`.
+* Bump `aws-sdk-iam` from `~=0.12.0` to `~=0.13.0`.
+* Bump `aws-sdk-kinesis` from `~=0.12.0` to `~=0.13.0`.
+* Bump `aws-sdk-kms` from `~=0.12.0` to `~=0.13.0`.
+* Bump `aws-sdk-lambda` from `~=0.12.0` to `~=0.13.0`.
+* Bump `aws-sdk-lex-runtime-v2` from `~=0.12.0` to `~=0.13.0`.
+* Bump `aws-sdk-polly` from `~=0.12.0` to `~=0.13.0`.
+* Bump `aws-sdk-qbusiness` from `~=0.12.0` to `~=0.13.0`.
+* Bump `aws-sdk-rds` from `~=0.12.0` to `~=0.13.0`.
+* Bump `aws-sdk-s3` from `~=0.12.0` to `~=0.13.0`.
+* Bump `aws-sdk-sagemaker-runtime-http2` from `~=0.12.0` to `~=0.13.0`.
+* Bump `aws-sdk-secrets-manager` from `~=0.12.0` to `~=0.13.0`.
+* Bump `aws-sdk-signin` from `~=0.12.0` to `~=0.13.0`.
+* Bump `aws-sdk-sns` from `~=0.12.0` to `~=0.13.0`.
+* Bump `aws-sdk-sqs` from `~=0.12.0` to `~=0.13.0`.
+* Bump `aws-sdk-sts` from `~=0.12.0` to `~=0.13.0`.
+* Bump `aws-sdk-transcribe-streaming` from `~=0.12.0` to `~=0.13.0`.
+
 ## v0.12.0
 
 ### Dependencies

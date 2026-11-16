@@ -1,5 +1,16 @@
 # Changelog
 
+## v0.6.0
+
+### Bug fixes
+* Fix installing and importing the package. 0.5.0 requires `aws-sdk-sts~=0.12.0`, which has no synchronous `STSClient` and requires an older `smithy-aws-core` than this package does.
+
+### Dependencies
+* Bump `smithy-core` from `~=0.10.0` to `~=0.13.0`.
+* Bump `smithy-http` from `~=0.7.0` to `~=0.10.0`.
+* Bump `smithy-aws-core` from `~=0.13.0` to `~=0.16.0`.
+* Bump `aws-sdk-sts` from `~=0.12.0` to `~=0.13.0`.
+
 ## v0.5.0
 
 ### Features

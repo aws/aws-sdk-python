@@ -2,66 +2,96 @@
 
 from typing import Any
 
+from aws_sdk_cognito_identity.aio.client import AsyncCognitoIdentityClient
+from aws_sdk_cognito_identity.client import CognitoIdentityClient
 from aws_sdk_cognito_identity.models import (
     CognitoIdentityProvider,
+    CognitoIdentityProviderDict,
     CreateIdentityPoolInput,
+    CreateIdentityPoolInputDict,
     CreateIdentityPoolOutput,
     Credentials,
     DeleteIdentitiesInput,
+    DeleteIdentitiesInputDict,
     DeleteIdentitiesOutput,
     DeleteIdentityPoolInput,
+    DeleteIdentityPoolInputDict,
     DeleteIdentityPoolOutput,
     DescribeIdentityInput,
+    DescribeIdentityInputDict,
     DescribeIdentityOutput,
     DescribeIdentityPoolInput,
+    DescribeIdentityPoolInputDict,
     DescribeIdentityPoolOutput,
     GetCredentialsForIdentityInput,
+    GetCredentialsForIdentityInputDict,
     GetCredentialsForIdentityOutput,
     GetIdInput,
+    GetIdInputDict,
     GetIdOutput,
     GetIdentityPoolRolesInput,
+    GetIdentityPoolRolesInputDict,
     GetIdentityPoolRolesOutput,
     GetOpenIdTokenForDeveloperIdentityInput,
+    GetOpenIdTokenForDeveloperIdentityInputDict,
     GetOpenIdTokenForDeveloperIdentityOutput,
     GetOpenIdTokenInput,
+    GetOpenIdTokenInputDict,
     GetOpenIdTokenOutput,
     GetPrincipalTagAttributeMapInput,
+    GetPrincipalTagAttributeMapInputDict,
     GetPrincipalTagAttributeMapOutput,
     IdentityDescription,
     IdentityPoolShortDescription,
     ListIdentitiesInput,
+    ListIdentitiesInputDict,
     ListIdentitiesOutput,
     ListIdentityPoolsInput,
+    ListIdentityPoolsInputDict,
     ListIdentityPoolsOutput,
     ListTagsForResourceInput,
+    ListTagsForResourceInputDict,
     ListTagsForResourceOutput,
     LookupDeveloperIdentityInput,
+    LookupDeveloperIdentityInputDict,
     LookupDeveloperIdentityOutput,
     MappingRule,
+    MappingRuleDict,
     MergeDeveloperIdentitiesInput,
+    MergeDeveloperIdentitiesInputDict,
     MergeDeveloperIdentitiesOutput,
     RoleMapping,
+    RoleMappingDict,
     RulesConfigurationType,
+    RulesConfigurationTypeDict,
     SetIdentityPoolRolesInput,
+    SetIdentityPoolRolesInputDict,
     SetIdentityPoolRolesOutput,
     SetPrincipalTagAttributeMapInput,
+    SetPrincipalTagAttributeMapInputDict,
     SetPrincipalTagAttributeMapOutput,
     TagResourceInput,
+    TagResourceInputDict,
     TagResourceOutput,
     UnlinkDeveloperIdentityInput,
+    UnlinkDeveloperIdentityInputDict,
     UnlinkDeveloperIdentityOutput,
     UnlinkIdentityInput,
+    UnlinkIdentityInputDict,
     UnlinkIdentityOutput,
     UnprocessedIdentityId,
     UntagResourceInput,
+    UntagResourceInputDict,
     UntagResourceOutput,
     UpdateIdentityPoolInput,
+    UpdateIdentityPoolInputDict,
     UpdateIdentityPoolOutput,
 )
 
 
-# Static type fixture: pyright over this validates models.pyi.
-# Not executed as a test; it only needs to type-check.
+# Static type fixture: pyright over this validates models.pyi and the
+# client method signatures. Not executed as a test; it only needs to
+# type-check.
 
 _: Any = ...
 
@@ -119,3 +149,314 @@ UntagResourceInput()
 UntagResourceOutput()
 UpdateIdentityPoolInput()
 UpdateIdentityPoolOutput(identity_pool_id=_, identity_pool_name=_)
+_params_0: CognitoIdentityProviderDict = {}
+_params_1: CreateIdentityPoolInputDict = {"identity_pool_name": _}
+_params_2: DeleteIdentitiesInputDict = {"identity_ids_to_delete": _}
+_params_3: DeleteIdentityPoolInputDict = {"identity_pool_id": _}
+_params_4: DescribeIdentityInputDict = {"identity_id": _}
+_params_5: DescribeIdentityPoolInputDict = {"identity_pool_id": _}
+_params_6: GetCredentialsForIdentityInputDict = {"identity_id": _}
+_params_7: GetIdentityPoolRolesInputDict = {"identity_pool_id": _}
+_params_8: GetIdInputDict = {"identity_pool_id": _}
+_params_9: GetOpenIdTokenForDeveloperIdentityInputDict = {
+    "identity_pool_id": _,
+    "logins": _,
+}
+_params_10: GetOpenIdTokenInputDict = {"identity_id": _}
+_params_11: GetPrincipalTagAttributeMapInputDict = {
+    "identity_pool_id": _,
+    "identity_provider_name": _,
+}
+_params_12: ListIdentitiesInputDict = {"identity_pool_id": _, "max_results": _}
+_params_13: ListIdentityPoolsInputDict = {"max_results": _}
+_params_14: ListTagsForResourceInputDict = {"resource_arn": _}
+_params_15: LookupDeveloperIdentityInputDict = {"identity_pool_id": _}
+_params_16: MappingRuleDict = {"claim": _, "match_type": _, "value": _, "role_arn": _}
+_params_17: MergeDeveloperIdentitiesInputDict = {
+    "source_user_identifier": _,
+    "destination_user_identifier": _,
+    "developer_provider_name": _,
+    "identity_pool_id": _,
+}
+_params_18: RoleMappingDict = {"type": _}
+_params_19: RulesConfigurationTypeDict = {"rules": _}
+_params_20: SetIdentityPoolRolesInputDict = {"identity_pool_id": _, "roles": _}
+_params_21: SetPrincipalTagAttributeMapInputDict = {
+    "identity_pool_id": _,
+    "identity_provider_name": _,
+}
+_params_22: TagResourceInputDict = {"resource_arn": _, "tags": _}
+_params_23: UnlinkDeveloperIdentityInputDict = {
+    "identity_id": _,
+    "identity_pool_id": _,
+    "developer_provider_name": _,
+    "developer_user_identifier": _,
+}
+_params_24: UnlinkIdentityInputDict = {
+    "identity_id": _,
+    "logins": _,
+    "logins_to_remove": _,
+}
+_params_25: UntagResourceInputDict = {"resource_arn": _, "tag_keys": _}
+_params_26: UpdateIdentityPoolInputDict = {
+    "identity_pool_id": _,
+    "identity_pool_name": _,
+}
+
+
+def _request[T](form: type[T]) -> T:
+    raise NotImplementedError
+
+
+async def check_async_calls(client: AsyncCognitoIdentityClient) -> None:
+    pass
+    await client.create_identity_pool(identity_pool_name=_)
+    await client.create_identity_pool(**_request(CreateIdentityPoolInputDict))
+    await client.create_identity_pool(_request(CreateIdentityPoolInput))
+    await client.create_identity_pool(_request(CreateIdentityPoolInputDict))
+    await client.delete_identities(identity_ids_to_delete=_)
+    await client.delete_identities(**_request(DeleteIdentitiesInputDict))
+    await client.delete_identities(_request(DeleteIdentitiesInput))
+    await client.delete_identities(_request(DeleteIdentitiesInputDict))
+    await client.delete_identity_pool(identity_pool_id=_)
+    await client.delete_identity_pool(**_request(DeleteIdentityPoolInputDict))
+    await client.delete_identity_pool(_request(DeleteIdentityPoolInput))
+    await client.delete_identity_pool(_request(DeleteIdentityPoolInputDict))
+    await client.describe_identity(identity_id=_)
+    await client.describe_identity(**_request(DescribeIdentityInputDict))
+    await client.describe_identity(_request(DescribeIdentityInput))
+    await client.describe_identity(_request(DescribeIdentityInputDict))
+    await client.describe_identity_pool(identity_pool_id=_)
+    await client.describe_identity_pool(**_request(DescribeIdentityPoolInputDict))
+    await client.describe_identity_pool(_request(DescribeIdentityPoolInput))
+    await client.describe_identity_pool(_request(DescribeIdentityPoolInputDict))
+    await client.get_credentials_for_identity(identity_id=_)
+    await client.get_credentials_for_identity(
+        **_request(GetCredentialsForIdentityInputDict)
+    )
+    await client.get_credentials_for_identity(_request(GetCredentialsForIdentityInput))
+    await client.get_credentials_for_identity(
+        _request(GetCredentialsForIdentityInputDict)
+    )
+    await client.get_id(identity_pool_id=_)
+    await client.get_id(**_request(GetIdInputDict))
+    await client.get_id(_request(GetIdInput))
+    await client.get_id(_request(GetIdInputDict))
+    await client.get_identity_pool_roles(identity_pool_id=_)
+    await client.get_identity_pool_roles(**_request(GetIdentityPoolRolesInputDict))
+    await client.get_identity_pool_roles(_request(GetIdentityPoolRolesInput))
+    await client.get_identity_pool_roles(_request(GetIdentityPoolRolesInputDict))
+    await client.get_open_id_token(identity_id=_)
+    await client.get_open_id_token(**_request(GetOpenIdTokenInputDict))
+    await client.get_open_id_token(_request(GetOpenIdTokenInput))
+    await client.get_open_id_token(_request(GetOpenIdTokenInputDict))
+    await client.get_open_id_token_for_developer_identity(identity_pool_id=_, logins=_)
+    await client.get_open_id_token_for_developer_identity(
+        **_request(GetOpenIdTokenForDeveloperIdentityInputDict)
+    )
+    await client.get_open_id_token_for_developer_identity(
+        _request(GetOpenIdTokenForDeveloperIdentityInput)
+    )
+    await client.get_open_id_token_for_developer_identity(
+        _request(GetOpenIdTokenForDeveloperIdentityInputDict)
+    )
+    await client.get_principal_tag_attribute_map(
+        identity_pool_id=_, identity_provider_name=_
+    )
+    await client.get_principal_tag_attribute_map(
+        **_request(GetPrincipalTagAttributeMapInputDict)
+    )
+    await client.get_principal_tag_attribute_map(
+        _request(GetPrincipalTagAttributeMapInput)
+    )
+    await client.get_principal_tag_attribute_map(
+        _request(GetPrincipalTagAttributeMapInputDict)
+    )
+    await client.list_identities(identity_pool_id=_, max_results=_)
+    await client.list_identities(**_request(ListIdentitiesInputDict))
+    await client.list_identities(_request(ListIdentitiesInput))
+    await client.list_identities(_request(ListIdentitiesInputDict))
+    await client.list_identity_pools(max_results=_)
+    await client.list_identity_pools(**_request(ListIdentityPoolsInputDict))
+    await client.list_identity_pools(_request(ListIdentityPoolsInput))
+    await client.list_identity_pools(_request(ListIdentityPoolsInputDict))
+    await client.list_tags_for_resource(resource_arn=_)
+    await client.list_tags_for_resource(**_request(ListTagsForResourceInputDict))
+    await client.list_tags_for_resource(_request(ListTagsForResourceInput))
+    await client.list_tags_for_resource(_request(ListTagsForResourceInputDict))
+    await client.lookup_developer_identity(identity_pool_id=_)
+    await client.lookup_developer_identity(**_request(LookupDeveloperIdentityInputDict))
+    await client.lookup_developer_identity(_request(LookupDeveloperIdentityInput))
+    await client.lookup_developer_identity(_request(LookupDeveloperIdentityInputDict))
+    await client.merge_developer_identities(
+        source_user_identifier=_,
+        destination_user_identifier=_,
+        developer_provider_name=_,
+        identity_pool_id=_,
+    )
+    await client.merge_developer_identities(
+        **_request(MergeDeveloperIdentitiesInputDict)
+    )
+    await client.merge_developer_identities(_request(MergeDeveloperIdentitiesInput))
+    await client.merge_developer_identities(_request(MergeDeveloperIdentitiesInputDict))
+    await client.set_identity_pool_roles(identity_pool_id=_, roles=_)
+    await client.set_identity_pool_roles(**_request(SetIdentityPoolRolesInputDict))
+    await client.set_identity_pool_roles(_request(SetIdentityPoolRolesInput))
+    await client.set_identity_pool_roles(_request(SetIdentityPoolRolesInputDict))
+    await client.set_principal_tag_attribute_map(
+        identity_pool_id=_, identity_provider_name=_
+    )
+    await client.set_principal_tag_attribute_map(
+        **_request(SetPrincipalTagAttributeMapInputDict)
+    )
+    await client.set_principal_tag_attribute_map(
+        _request(SetPrincipalTagAttributeMapInput)
+    )
+    await client.set_principal_tag_attribute_map(
+        _request(SetPrincipalTagAttributeMapInputDict)
+    )
+    await client.tag_resource(resource_arn=_, tags=_)
+    await client.tag_resource(**_request(TagResourceInputDict))
+    await client.tag_resource(_request(TagResourceInput))
+    await client.tag_resource(_request(TagResourceInputDict))
+    await client.unlink_developer_identity(
+        identity_id=_,
+        identity_pool_id=_,
+        developer_provider_name=_,
+        developer_user_identifier=_,
+    )
+    await client.unlink_developer_identity(**_request(UnlinkDeveloperIdentityInputDict))
+    await client.unlink_developer_identity(_request(UnlinkDeveloperIdentityInput))
+    await client.unlink_developer_identity(_request(UnlinkDeveloperIdentityInputDict))
+    await client.unlink_identity(identity_id=_, logins=_, logins_to_remove=_)
+    await client.unlink_identity(**_request(UnlinkIdentityInputDict))
+    await client.unlink_identity(_request(UnlinkIdentityInput))
+    await client.unlink_identity(_request(UnlinkIdentityInputDict))
+    await client.untag_resource(resource_arn=_, tag_keys=_)
+    await client.untag_resource(**_request(UntagResourceInputDict))
+    await client.untag_resource(_request(UntagResourceInput))
+    await client.untag_resource(_request(UntagResourceInputDict))
+    await client.update_identity_pool(identity_pool_id=_, identity_pool_name=_)
+    await client.update_identity_pool(**_request(UpdateIdentityPoolInputDict))
+    await client.update_identity_pool(_request(UpdateIdentityPoolInput))
+    await client.update_identity_pool(_request(UpdateIdentityPoolInputDict))
+
+
+def check_sync_calls(client: CognitoIdentityClient) -> None:
+    pass
+    client.create_identity_pool(identity_pool_name=_)
+    client.create_identity_pool(**_request(CreateIdentityPoolInputDict))
+    client.create_identity_pool(_request(CreateIdentityPoolInput))
+    client.create_identity_pool(_request(CreateIdentityPoolInputDict))
+    client.delete_identities(identity_ids_to_delete=_)
+    client.delete_identities(**_request(DeleteIdentitiesInputDict))
+    client.delete_identities(_request(DeleteIdentitiesInput))
+    client.delete_identities(_request(DeleteIdentitiesInputDict))
+    client.delete_identity_pool(identity_pool_id=_)
+    client.delete_identity_pool(**_request(DeleteIdentityPoolInputDict))
+    client.delete_identity_pool(_request(DeleteIdentityPoolInput))
+    client.delete_identity_pool(_request(DeleteIdentityPoolInputDict))
+    client.describe_identity(identity_id=_)
+    client.describe_identity(**_request(DescribeIdentityInputDict))
+    client.describe_identity(_request(DescribeIdentityInput))
+    client.describe_identity(_request(DescribeIdentityInputDict))
+    client.describe_identity_pool(identity_pool_id=_)
+    client.describe_identity_pool(**_request(DescribeIdentityPoolInputDict))
+    client.describe_identity_pool(_request(DescribeIdentityPoolInput))
+    client.describe_identity_pool(_request(DescribeIdentityPoolInputDict))
+    client.get_credentials_for_identity(identity_id=_)
+    client.get_credentials_for_identity(**_request(GetCredentialsForIdentityInputDict))
+    client.get_credentials_for_identity(_request(GetCredentialsForIdentityInput))
+    client.get_credentials_for_identity(_request(GetCredentialsForIdentityInputDict))
+    client.get_id(identity_pool_id=_)
+    client.get_id(**_request(GetIdInputDict))
+    client.get_id(_request(GetIdInput))
+    client.get_id(_request(GetIdInputDict))
+    client.get_identity_pool_roles(identity_pool_id=_)
+    client.get_identity_pool_roles(**_request(GetIdentityPoolRolesInputDict))
+    client.get_identity_pool_roles(_request(GetIdentityPoolRolesInput))
+    client.get_identity_pool_roles(_request(GetIdentityPoolRolesInputDict))
+    client.get_open_id_token(identity_id=_)
+    client.get_open_id_token(**_request(GetOpenIdTokenInputDict))
+    client.get_open_id_token(_request(GetOpenIdTokenInput))
+    client.get_open_id_token(_request(GetOpenIdTokenInputDict))
+    client.get_open_id_token_for_developer_identity(identity_pool_id=_, logins=_)
+    client.get_open_id_token_for_developer_identity(
+        **_request(GetOpenIdTokenForDeveloperIdentityInputDict)
+    )
+    client.get_open_id_token_for_developer_identity(
+        _request(GetOpenIdTokenForDeveloperIdentityInput)
+    )
+    client.get_open_id_token_for_developer_identity(
+        _request(GetOpenIdTokenForDeveloperIdentityInputDict)
+    )
+    client.get_principal_tag_attribute_map(identity_pool_id=_, identity_provider_name=_)
+    client.get_principal_tag_attribute_map(
+        **_request(GetPrincipalTagAttributeMapInputDict)
+    )
+    client.get_principal_tag_attribute_map(_request(GetPrincipalTagAttributeMapInput))
+    client.get_principal_tag_attribute_map(
+        _request(GetPrincipalTagAttributeMapInputDict)
+    )
+    client.list_identities(identity_pool_id=_, max_results=_)
+    client.list_identities(**_request(ListIdentitiesInputDict))
+    client.list_identities(_request(ListIdentitiesInput))
+    client.list_identities(_request(ListIdentitiesInputDict))
+    client.list_identity_pools(max_results=_)
+    client.list_identity_pools(**_request(ListIdentityPoolsInputDict))
+    client.list_identity_pools(_request(ListIdentityPoolsInput))
+    client.list_identity_pools(_request(ListIdentityPoolsInputDict))
+    client.list_tags_for_resource(resource_arn=_)
+    client.list_tags_for_resource(**_request(ListTagsForResourceInputDict))
+    client.list_tags_for_resource(_request(ListTagsForResourceInput))
+    client.list_tags_for_resource(_request(ListTagsForResourceInputDict))
+    client.lookup_developer_identity(identity_pool_id=_)
+    client.lookup_developer_identity(**_request(LookupDeveloperIdentityInputDict))
+    client.lookup_developer_identity(_request(LookupDeveloperIdentityInput))
+    client.lookup_developer_identity(_request(LookupDeveloperIdentityInputDict))
+    client.merge_developer_identities(
+        source_user_identifier=_,
+        destination_user_identifier=_,
+        developer_provider_name=_,
+        identity_pool_id=_,
+    )
+    client.merge_developer_identities(**_request(MergeDeveloperIdentitiesInputDict))
+    client.merge_developer_identities(_request(MergeDeveloperIdentitiesInput))
+    client.merge_developer_identities(_request(MergeDeveloperIdentitiesInputDict))
+    client.set_identity_pool_roles(identity_pool_id=_, roles=_)
+    client.set_identity_pool_roles(**_request(SetIdentityPoolRolesInputDict))
+    client.set_identity_pool_roles(_request(SetIdentityPoolRolesInput))
+    client.set_identity_pool_roles(_request(SetIdentityPoolRolesInputDict))
+    client.set_principal_tag_attribute_map(identity_pool_id=_, identity_provider_name=_)
+    client.set_principal_tag_attribute_map(
+        **_request(SetPrincipalTagAttributeMapInputDict)
+    )
+    client.set_principal_tag_attribute_map(_request(SetPrincipalTagAttributeMapInput))
+    client.set_principal_tag_attribute_map(
+        _request(SetPrincipalTagAttributeMapInputDict)
+    )
+    client.tag_resource(resource_arn=_, tags=_)
+    client.tag_resource(**_request(TagResourceInputDict))
+    client.tag_resource(_request(TagResourceInput))
+    client.tag_resource(_request(TagResourceInputDict))
+    client.unlink_developer_identity(
+        identity_id=_,
+        identity_pool_id=_,
+        developer_provider_name=_,
+        developer_user_identifier=_,
+    )
+    client.unlink_developer_identity(**_request(UnlinkDeveloperIdentityInputDict))
+    client.unlink_developer_identity(_request(UnlinkDeveloperIdentityInput))
+    client.unlink_developer_identity(_request(UnlinkDeveloperIdentityInputDict))
+    client.unlink_identity(identity_id=_, logins=_, logins_to_remove=_)
+    client.unlink_identity(**_request(UnlinkIdentityInputDict))
+    client.unlink_identity(_request(UnlinkIdentityInput))
+    client.unlink_identity(_request(UnlinkIdentityInputDict))
+    client.untag_resource(resource_arn=_, tag_keys=_)
+    client.untag_resource(**_request(UntagResourceInputDict))
+    client.untag_resource(_request(UntagResourceInput))
+    client.untag_resource(_request(UntagResourceInputDict))
+    client.update_identity_pool(identity_pool_id=_, identity_pool_name=_)
+    client.update_identity_pool(**_request(UpdateIdentityPoolInputDict))
+    client.update_identity_pool(_request(UpdateIdentityPoolInput))
+    client.update_identity_pool(_request(UpdateIdentityPoolInputDict))

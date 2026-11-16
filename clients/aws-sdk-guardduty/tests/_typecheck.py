@@ -2,39 +2,56 @@
 
 from typing import Any
 
+from aws_sdk_guardduty.aio.client import AsyncGuardDutyClient
+from aws_sdk_guardduty.client import GuardDutyClient
 from aws_sdk_guardduty.models import (
     AcceptAdministratorInvitationInput,
+    AcceptAdministratorInvitationInputDict,
     AcceptAdministratorInvitationOutput,
     AcceptInvitationInput,
+    AcceptInvitationInputDict,
     AcceptInvitationOutput,
     AccessControlList,
     AccessKey,
     AccessKeyDetails,
     Account,
+    AccountAffectedResource,
+    AccountAnalysis,
     AccountDetail,
+    AccountDetailDict,
     AccountFreeTrialInfo,
     AccountLevelPermissions,
+    AccountOverview,
     AccountStatistics,
+    AccountSummary,
     Action,
     Activity,
+    ActivityWindow,
     Actor,
     ActorProcess,
     AdditionalInfo,
     AddonDetails,
     AdminAccount,
     Administrator,
+    AffectedResource,
     AgentDetails,
+    AnalysisRecord,
     Anomaly,
     AnomalyObject,
     AnomalyUnusual,
     ApiCall,
+    ArchiveDistribution,
     ArchiveFindingsInput,
+    ArchiveFindingsInputDict,
     ArchiveFindingsOutput,
     AssociationDetail,
     AssociationSummary,
+    Attack,
+    AttackPhase,
     AutonomousSystem,
     AutoscalingAutoScalingGroup,
     AwsApiCallAction,
+    Baseline,
     BedrockGuardrail,
     BedrockGuardrailDetails,
     BedrockGuardrailResource,
@@ -46,112 +63,164 @@ from aws_sdk_guardduty.models import (
     CloudTrailConfigurationResult,
     CloudformationStack,
     Condition,
+    ConditionDict,
     Container,
     ContainerFindingResource,
     ContainerInstanceDetails,
     ContentPolicyFilter,
     ContinuousScanDetails,
+    ContinuousScanDetailsDict,
+    CorrelatedFinding,
+    Countermeasure,
+    CountermeasureAction,
     Country,
     CoverageEc2InstanceDetails,
     CoverageEcsClusterDetails,
     CoverageEksClusterDetails,
     CoverageFilterCondition,
+    CoverageFilterConditionDict,
     CoverageFilterCriteria,
+    CoverageFilterCriteriaDict,
     CoverageFilterCriterion,
+    CoverageFilterCriterionDict,
     CoverageResource,
     CoverageResourceDetails,
     CoverageSortCriteria,
+    CoverageSortCriteriaDict,
     CoverageStatistics,
     CreateCustomDetectionRuleAssociationInput,
+    CreateCustomDetectionRuleAssociationInputDict,
     CreateCustomDetectionRuleAssociationOutput,
     CreateCustomDetectionRuleOrgConfigurationInput,
+    CreateCustomDetectionRuleOrgConfigurationInputDict,
     CreateCustomDetectionRuleOrgConfigurationOutput,
     CreateDetectorInput,
+    CreateDetectorInputDict,
     CreateDetectorOutput,
     CreateFilterInput,
+    CreateFilterInputDict,
     CreateFilterOutput,
     CreateIPSetInput,
+    CreateIPSetInputDict,
     CreateIPSetOutput,
     CreateInvestigationInput,
+    CreateInvestigationInputDict,
     CreateInvestigationOutput,
     CreateMalwareProtectionPlanInput,
+    CreateMalwareProtectionPlanInputDict,
     CreateMalwareProtectionPlanOutput,
     CreateMembersInput,
+    CreateMembersInputDict,
     CreateMembersOutput,
     CreateProtectedResource,
+    CreateProtectedResourceDict,
     CreatePublishingDestinationInput,
+    CreatePublishingDestinationInputDict,
     CreatePublishingDestinationOutput,
     CreateS3BucketResource,
+    CreateS3BucketResourceDict,
     CreateSampleFindingsInput,
+    CreateSampleFindingsInputDict,
     CreateSampleFindingsOutput,
     CreateThreatEntitySetInput,
+    CreateThreatEntitySetInputDict,
     CreateThreatEntitySetOutput,
     CreateThreatIntelSetInput,
+    CreateThreatIntelSetInputDict,
     CreateThreatIntelSetOutput,
     CreateTrustedEntitySetInput,
+    CreateTrustedEntitySetInputDict,
     CreateTrustedEntitySetOutput,
     DNSLogsConfigurationResult,
     DataSourceConfigurations,
+    DataSourceConfigurationsDict,
     DataSourceConfigurationsResult,
     DataSourceFreeTrial,
     DataSourcesFreeTrial,
     DateStatistics,
     DeclineInvitationsInput,
+    DeclineInvitationsInputDict,
     DeclineInvitationsOutput,
     DefaultServerSideEncryption,
     DeleteCustomDetectionRuleAssociationInput,
+    DeleteCustomDetectionRuleAssociationInputDict,
     DeleteCustomDetectionRuleAssociationOutput,
     DeleteCustomDetectionRuleOrgConfigurationInput,
+    DeleteCustomDetectionRuleOrgConfigurationInputDict,
     DeleteCustomDetectionRuleOrgConfigurationOutput,
     DeleteDetectorInput,
+    DeleteDetectorInputDict,
     DeleteDetectorOutput,
     DeleteFilterInput,
+    DeleteFilterInputDict,
     DeleteFilterOutput,
     DeleteIPSetInput,
+    DeleteIPSetInputDict,
     DeleteIPSetOutput,
     DeleteInvitationsInput,
+    DeleteInvitationsInputDict,
     DeleteInvitationsOutput,
     DeleteMalwareProtectionPlanInput,
+    DeleteMalwareProtectionPlanInputDict,
     DeleteMalwareProtectionPlanOutput,
     DeleteMembersInput,
+    DeleteMembersInputDict,
     DeleteMembersOutput,
     DeletePublishingDestinationInput,
+    DeletePublishingDestinationInputDict,
     DeletePublishingDestinationOutput,
     DeleteThreatEntitySetInput,
+    DeleteThreatEntitySetInputDict,
     DeleteThreatEntitySetOutput,
     DeleteThreatIntelSetInput,
+    DeleteThreatIntelSetInputDict,
     DeleteThreatIntelSetOutput,
     DeleteTrustedEntitySetInput,
+    DeleteTrustedEntitySetInputDict,
     DeleteTrustedEntitySetOutput,
     DescribeMalwareScansInput,
+    DescribeMalwareScansInputDict,
     DescribeMalwareScansOutput,
     DescribeOrganizationConfigurationInput,
+    DescribeOrganizationConfigurationInputDict,
     DescribeOrganizationConfigurationOutput,
     DescribePublishingDestinationInput,
+    DescribePublishingDestinationInputDict,
     DescribePublishingDestinationOutput,
     Destination,
     DestinationProperties,
+    DestinationPropertiesDict,
     Detection,
+    DetectionCoverage,
     DetectionRuleEc2Requirements,
     DetectionRuleEcsFargateRequirements,
     DetectionRuleEksRequirements,
     DetectionRuleFilter,
+    DetectionRuleFilterDict,
     DetectionRuleOrgConfiguration,
     DetectionRuleOrgConfigurationSummary,
     DetectionRuleRuntimeMonitoringDetails,
     DetectionRuleRuntimePlatforms,
     DetectorAdditionalConfiguration,
+    DetectorAdditionalConfigurationDict,
     DetectorAdditionalConfigurationResult,
     DetectorFeatureConfiguration,
+    DetectorFeatureConfigurationDict,
     DetectorFeatureConfigurationResult,
     DisableOrganizationAdminAccountInput,
+    DisableOrganizationAdminAccountInputDict,
     DisableOrganizationAdminAccountOutput,
     DisassociateFromAdministratorAccountInput,
+    DisassociateFromAdministratorAccountInputDict,
     DisassociateFromAdministratorAccountOutput,
     DisassociateFromMasterAccountInput,
+    DisassociateFromMasterAccountInputDict,
     DisassociateFromMasterAccountOutput,
     DisassociateMembersInput,
+    DisassociateMembersInputDict,
     DisassociateMembersOutput,
+    Distribution,
+    DnsContext,
     DnsRequestAction,
     DomainDetails,
     EbsSnapshot,
@@ -172,67 +241,108 @@ from aws_sdk_guardduty.models import (
     EksCluster,
     EksClusterDetails,
     EnableOrganizationAdminAccountInput,
+    EnableOrganizationAdminAccountInputDict,
     EnableOrganizationAdminAccountOutput,
+    Enrichment,
     Evidence,
     FargateDetails,
+    FetchCriterion,
+    FetchQuery,
+    FetchRecord,
+    FetchResult,
+    FetchTimeWindow,
     FilterCondition,
+    FilterConditionDict,
     FilterCriteria,
+    FilterCriteriaDict,
     FilterCriterion,
+    FilterCriterionDict,
     Finding,
     FindingCriteria,
+    FindingCriteriaDict,
+    FindingDetail,
+    FindingReference,
     FindingStatistics,
+    FindingTypeClassification,
+    FindingTypeCount,
+    FindingTypeDocumentation,
     FindingTypeStatistics,
+    FindingsSummary,
     FlowLogsConfigurationResult,
     FreeTrialFeatureConfigurationResult,
     GeoLocation,
     GetAdministratorAccountInput,
+    GetAdministratorAccountInputDict,
     GetAdministratorAccountOutput,
     GetCoverageStatisticsInput,
+    GetCoverageStatisticsInputDict,
     GetCoverageStatisticsOutput,
     GetCustomDetectionRuleAssociationInput,
+    GetCustomDetectionRuleAssociationInputDict,
     GetCustomDetectionRuleAssociationOutput,
     GetCustomDetectionRuleInput,
+    GetCustomDetectionRuleInputDict,
     GetCustomDetectionRuleOrgConfigurationInput,
+    GetCustomDetectionRuleOrgConfigurationInputDict,
     GetCustomDetectionRuleOrgConfigurationOutput,
     GetCustomDetectionRuleOutput,
     GetDetectorInput,
+    GetDetectorInputDict,
     GetDetectorOutput,
     GetFilterInput,
+    GetFilterInputDict,
     GetFilterOutput,
     GetFindingsInput,
+    GetFindingsInputDict,
     GetFindingsOutput,
     GetFindingsStatisticsInput,
+    GetFindingsStatisticsInputDict,
     GetFindingsStatisticsOutput,
     GetIPSetInput,
+    GetIPSetInputDict,
     GetIPSetOutput,
     GetInvestigationInput,
+    GetInvestigationInputDict,
     GetInvestigationOutput,
     GetInvitationsCountInput,
+    GetInvitationsCountInputDict,
     GetInvitationsCountOutput,
     GetMalwareProtectionPlanInput,
+    GetMalwareProtectionPlanInputDict,
     GetMalwareProtectionPlanOutput,
     GetMalwareScanInput,
+    GetMalwareScanInputDict,
     GetMalwareScanOutput,
     GetMalwareScanResultDetails,
     GetMalwareScanSettingsInput,
+    GetMalwareScanSettingsInputDict,
     GetMalwareScanSettingsOutput,
     GetMasterAccountInput,
+    GetMasterAccountInputDict,
     GetMasterAccountOutput,
     GetMemberDetectorsInput,
+    GetMemberDetectorsInputDict,
     GetMemberDetectorsOutput,
     GetMembersInput,
+    GetMembersInputDict,
     GetMembersOutput,
     GetOrganizationStatisticsInput,
+    GetOrganizationStatisticsInputDict,
     GetOrganizationStatisticsOutput,
     GetRemainingFreeTrialDaysInput,
+    GetRemainingFreeTrialDaysInputDict,
     GetRemainingFreeTrialDaysOutput,
     GetThreatEntitySetInput,
+    GetThreatEntitySetInputDict,
     GetThreatEntitySetOutput,
     GetThreatIntelSetInput,
+    GetThreatIntelSetInputDict,
     GetThreatIntelSetOutput,
     GetTrustedEntitySetInput,
+    GetTrustedEntitySetInputDict,
     GetTrustedEntitySetOutput,
     GetUsageStatisticsInput,
+    GetUsageStatisticsInputDict,
     GetUsageStatisticsOutput,
     HighestSeverityThreatDetails,
     HostPath,
@@ -240,120 +350,200 @@ from aws_sdk_guardduty.models import (
     IamInstanceProfileV2,
     ImpersonatedUser,
     IncrementalScanDetails,
+    IncrementalScanDetailsDict,
     Indicator,
     InstanceDetails,
     Investigation,
+    InvestigationAccountAnalysis,
+    InvestigationActor,
+    InvestigationDetectorFeatureConfiguration,
+    InvestigationEc2Instance,
+    InvestigationEcsCluster,
+    InvestigationEksCluster,
+    InvestigationFilterCondition,
+    InvestigationFilterConditionDict,
+    InvestigationFilterCriteria,
+    InvestigationFilterCriteriaDict,
+    InvestigationIndicator,
+    InvestigationKubernetesWorkload,
+    InvestigationMalwareScan,
     InvestigationMetadata,
+    InvestigationRecord,
+    InvestigationResource,
+    InvestigationResourceData,
+    InvestigationScope,
     InvestigationSortCriteria,
+    InvestigationSortCriteriaDict,
     InvestigationSummary,
+    InvestigationSummaryData,
+    InvestigationThreatAssessment,
     Invitation,
     InviteMembersInput,
+    InviteMembersInputDict,
     InviteMembersOutput,
     ItemDetails,
     ItemPath,
+    KeyObservations,
+    KubernetesActivity,
+    KubernetesAnomaly,
+    KubernetesApiCall,
     KubernetesApiCallAction,
     KubernetesAuditLogsConfiguration,
+    KubernetesAuditLogsConfigurationDict,
     KubernetesAuditLogsConfigurationResult,
     KubernetesConfiguration,
+    KubernetesConfigurationDict,
     KubernetesConfigurationResult,
     KubernetesDataSourceFreeTrial,
     KubernetesDetails,
     KubernetesPermissionCheckedDetails,
+    KubernetesPolicyViolation,
     KubernetesRoleBindingDetails,
     KubernetesRoleDetails,
     KubernetesUserDetails,
     KubernetesWorkload,
     KubernetesWorkloadDetails,
     LambdaDetails,
+    LambdaFunction,
     LineageObject,
     ListCoverageInput,
+    ListCoverageInputDict,
     ListCoverageOutput,
     ListCustomDetectionRuleAssociationsInput,
+    ListCustomDetectionRuleAssociationsInputDict,
     ListCustomDetectionRuleAssociationsOutput,
     ListCustomDetectionRuleOrgConfigurationsInput,
+    ListCustomDetectionRuleOrgConfigurationsInputDict,
     ListCustomDetectionRuleOrgConfigurationsOutput,
     ListCustomDetectionRulesInput,
+    ListCustomDetectionRulesInputDict,
     ListCustomDetectionRulesOutput,
     ListDetectorsInput,
+    ListDetectorsInputDict,
     ListDetectorsOutput,
     ListFiltersInput,
+    ListFiltersInputDict,
     ListFiltersOutput,
     ListFindingsInput,
+    ListFindingsInputDict,
     ListFindingsOutput,
     ListIPSetsInput,
+    ListIPSetsInputDict,
     ListIPSetsOutput,
+    ListInvestigationRecordsInput,
+    ListInvestigationRecordsInputDict,
+    ListInvestigationRecordsOutput,
     ListInvestigationsInput,
+    ListInvestigationsInputDict,
     ListInvestigationsOutput,
     ListInvitationsInput,
+    ListInvitationsInputDict,
     ListInvitationsOutput,
     ListMalwareProtectionPlansInput,
+    ListMalwareProtectionPlansInputDict,
     ListMalwareProtectionPlansOutput,
     ListMalwareScansFilterCriteria,
+    ListMalwareScansFilterCriteriaDict,
     ListMalwareScansFilterCriterion,
+    ListMalwareScansFilterCriterionDict,
     ListMalwareScansInput,
+    ListMalwareScansInputDict,
     ListMalwareScansOutput,
     ListMembersInput,
+    ListMembersInputDict,
     ListMembersOutput,
     ListOrganizationAdminAccountsInput,
+    ListOrganizationAdminAccountsInputDict,
     ListOrganizationAdminAccountsOutput,
     ListPublishingDestinationsInput,
+    ListPublishingDestinationsInputDict,
     ListPublishingDestinationsOutput,
     ListTagsForResourceInput,
+    ListTagsForResourceInputDict,
     ListTagsForResourceOutput,
     ListThreatEntitySetsInput,
+    ListThreatEntitySetsInputDict,
     ListThreatEntitySetsOutput,
     ListThreatIntelSetsInput,
+    ListThreatIntelSetsInputDict,
     ListThreatIntelSetsOutput,
     ListTrustedEntitySetsInput,
+    ListTrustedEntitySetsInputDict,
     ListTrustedEntitySetsOutput,
     LocalIpDetails,
     LocalPortDetails,
     LoginAttribute,
     MalwareProtectionConfiguration,
+    MalwareProtectionConfigurationDict,
     MalwareProtectionConfigurationResult,
     MalwareProtectionDataSourceFreeTrial,
     MalwareProtectionFindingsScanConfiguration,
     MalwareProtectionPlanActions,
+    MalwareProtectionPlanActionsDict,
     MalwareProtectionPlanStatusReason,
     MalwareProtectionPlanSummary,
     MalwareProtectionPlanTaggingAction,
+    MalwareProtectionPlanTaggingActionDict,
     MalwareScan,
     MalwareScanDetails,
+    MalwareThreat,
     Master,
     Member,
+    MemberAccountRanking,
     MemberAdditionalConfiguration,
+    MemberAdditionalConfigurationDict,
     MemberAdditionalConfigurationResult,
     MemberDataSourceConfiguration,
     MemberFeaturesConfiguration,
+    MemberFeaturesConfigurationDict,
     MemberFeaturesConfigurationResult,
+    MetadataRecord,
     ModelDetail,
+    NetworkActivity,
+    NetworkAnomaly,
     NetworkConnection,
     NetworkConnectionAction,
+    NetworkCounts,
     NetworkEndpoint,
     NetworkGeoLocation,
     NetworkInterface,
+    NetworkPorts,
+    NetworkTraffic,
+    ObservationRecord,
     Observations,
+    ObservedFindingType,
     Organization,
     OrganizationAdditionalConfiguration,
+    OrganizationAdditionalConfigurationDict,
     OrganizationAdditionalConfigurationResult,
+    OrganizationAnalysis,
     OrganizationDataSourceConfigurations,
+    OrganizationDataSourceConfigurationsDict,
     OrganizationDataSourceConfigurationsResult,
     OrganizationDetails,
     OrganizationEbsVolumes,
+    OrganizationEbsVolumesDict,
     OrganizationEbsVolumesResult,
     OrganizationFeatureConfiguration,
+    OrganizationFeatureConfigurationDict,
     OrganizationFeatureConfigurationResult,
     OrganizationFeatureStatistics,
     OrganizationFeatureStatisticsAdditionalConfiguration,
+    OrganizationFindingsSummary,
     OrganizationKubernetesAuditLogsConfiguration,
+    OrganizationKubernetesAuditLogsConfigurationDict,
     OrganizationKubernetesAuditLogsConfigurationResult,
     OrganizationKubernetesConfiguration,
+    OrganizationKubernetesConfigurationDict,
     OrganizationKubernetesConfigurationResult,
     OrganizationMalwareProtectionConfiguration,
+    OrganizationMalwareProtectionConfigurationDict,
     OrganizationMalwareProtectionConfigurationResult,
     OrganizationS3LogsConfiguration,
+    OrganizationS3LogsConfigurationDict,
     OrganizationS3LogsConfigurationResult,
     OrganizationScanEc2InstanceWithFindings,
+    OrganizationScanEc2InstanceWithFindingsDict,
     OrganizationScanEc2InstanceWithFindingsResult,
     OrganizationStatistics,
     Owner,
@@ -361,23 +551,35 @@ from aws_sdk_guardduty.models import (
     PortProbeAction,
     PortProbeDetail,
     PrivateIpAddressDetails,
+    Process,
     ProcessDetails,
     Product,
     ProductCode,
+    ProtectionPlan,
     PublicAccess,
     PublicAccessConfiguration,
+    QueryTimeWindow,
+    RdsDbInstance,
     RdsDbInstanceDetails,
+    RdsDbUser,
     RdsDbUserDetails,
     RdsLimitlessDbDetails,
+    RdsLoginActivity,
     RdsLoginAttemptAction,
+    Recommendation,
     RecoveryPoint,
     RecoveryPointDetails,
+    RecoveryPointDict,
+    RelatedFindings,
     RemoteAccountDetails,
     RemoteIpDetails,
     RemotePortDetails,
+    RepresentativeFinding,
+    Reputation,
     Resource,
     ResourceData,
     ResourceDetails,
+    ResourceDistribution,
     ResourceStatistics,
     ResourceV2,
     RuleDefinition,
@@ -385,24 +587,33 @@ from aws_sdk_guardduty.models import (
     RuleSummary,
     RuntimeContext,
     RuntimeDetails,
+    RuntimeSignals,
+    S3Activity,
+    S3Analysis,
     S3Bucket,
     S3BucketDetail,
     S3LogsConfiguration,
+    S3LogsConfigurationDict,
     S3LogsConfigurationResult,
     S3Object,
     S3ObjectDetail,
     S3ObjectForSendObjectMalwareScan,
+    S3ObjectForSendObjectMalwareScanDict,
     Scan,
     ScanCondition,
+    ScanConditionDict,
     ScanConditionPair,
+    ScanConditionPairDict,
     ScanConfiguration,
     ScanConfigurationContinuousScanDetails,
     ScanConfigurationRecoveryPoint,
     ScanDetections,
     ScanEc2InstanceWithFindings,
+    ScanEc2InstanceWithFindingsDict,
     ScanEc2InstanceWithFindingsResult,
     ScanFilePath,
     ScanResourceCriteria,
+    ScanResourceCriteriaDict,
     ScanResultDetails,
     ScanResultThreat,
     ScanThreatName,
@@ -412,68 +623,105 @@ from aws_sdk_guardduty.models import (
     SecurityContext,
     SecurityGroup,
     SendObjectMalwareScanInput,
+    SendObjectMalwareScanInputDict,
     SendObjectMalwareScanOutput,
     Sequence,
     Service,
     ServiceAdditionalInfo,
     Session,
+    SeverityBreakdown,
     SeverityStatistics,
+    SharedBehavior,
+    SharedResource,
     Signal,
+    SignalGroup,
     SortCriteria,
+    SortCriteriaDict,
     StartMalwareScanConfiguration,
+    StartMalwareScanConfigurationDict,
     StartMalwareScanInput,
+    StartMalwareScanInputDict,
     StartMalwareScanOutput,
     StartMonitoringMembersInput,
+    StartMonitoringMembersInputDict,
     StartMonitoringMembersOutput,
     StopMonitoringMembersInput,
+    StopMonitoringMembersInputDict,
     StopMonitoringMembersOutput,
+    TacticCoverage,
     Tag,
     TagResourceInput,
+    TagResourceInputDict,
     TagResourceOutput,
+    TechniqueCoverage,
     Threat,
+    ThreatAssessment,
     ThreatDetectedByName,
     ThreatIntelligenceDetail,
+    ThreatReference,
     ThreatsDetectedItemCount,
+    TimeWindowGroup,
     Total,
+    Trend,
     TriggerDetails,
+    TypeDistribution,
     UnarchiveFindingsInput,
+    UnarchiveFindingsInputDict,
     UnarchiveFindingsOutput,
     UnprocessedAccount,
     UnprocessedDataSourcesResult,
     UntagResourceInput,
+    UntagResourceInputDict,
     UntagResourceOutput,
     UpdateCustomDetectionRuleAssociationInput,
+    UpdateCustomDetectionRuleAssociationInputDict,
     UpdateCustomDetectionRuleAssociationOutput,
     UpdateCustomDetectionRuleOrgConfigurationInput,
+    UpdateCustomDetectionRuleOrgConfigurationInputDict,
     UpdateCustomDetectionRuleOrgConfigurationOutput,
     UpdateDetectorInput,
+    UpdateDetectorInputDict,
     UpdateDetectorOutput,
     UpdateFilterInput,
+    UpdateFilterInputDict,
     UpdateFilterOutput,
     UpdateFindingsFeedbackInput,
+    UpdateFindingsFeedbackInputDict,
     UpdateFindingsFeedbackOutput,
     UpdateIPSetInput,
+    UpdateIPSetInputDict,
     UpdateIPSetOutput,
     UpdateMalwareProtectionPlanInput,
+    UpdateMalwareProtectionPlanInputDict,
     UpdateMalwareProtectionPlanOutput,
     UpdateMalwareScanSettingsInput,
+    UpdateMalwareScanSettingsInputDict,
     UpdateMalwareScanSettingsOutput,
     UpdateMemberDetectorsInput,
+    UpdateMemberDetectorsInputDict,
     UpdateMemberDetectorsOutput,
     UpdateOrganizationConfigurationInput,
+    UpdateOrganizationConfigurationInputDict,
     UpdateOrganizationConfigurationOutput,
     UpdateProtectedResource,
+    UpdateProtectedResourceDict,
     UpdatePublishingDestinationInput,
+    UpdatePublishingDestinationInputDict,
     UpdatePublishingDestinationOutput,
     UpdateS3BucketResource,
+    UpdateS3BucketResourceDict,
     UpdateThreatEntitySetInput,
+    UpdateThreatEntitySetInputDict,
     UpdateThreatEntitySetOutput,
     UpdateThreatIntelSetInput,
+    UpdateThreatIntelSetInputDict,
     UpdateThreatIntelSetOutput,
     UpdateTrustedEntitySetInput,
+    UpdateTrustedEntitySetInputDict,
     UpdateTrustedEntitySetOutput,
     UsageAccountResult,
     UsageCriteria,
+    UsageCriteriaDict,
     UsageDataSourceResult,
     UsageFeatureResult,
     UsageResourceResult,
@@ -488,8 +736,9 @@ from aws_sdk_guardduty.models import (
 )
 
 
-# Static type fixture: pyright over this validates models.pyi.
-# Not executed as a test; it only needs to type-check.
+# Static type fixture: pyright over this validates models.pyi and the
+# client method signatures. Not executed as a test; it only needs to
+# type-check.
 
 _: Any = ...
 
@@ -501,30 +750,41 @@ AccessControlList()
 AccessKey()
 AccessKeyDetails()
 Account()
+AccountAffectedResource()
+AccountAnalysis()
 AccountDetail()
 AccountFreeTrialInfo()
 AccountLevelPermissions()
+AccountOverview()
 AccountStatistics()
+AccountSummary()
 Action()
 Activity()
+ActivityWindow()
 Actor()
 ActorProcess()
 AdditionalInfo()
 AddonDetails()
 AdminAccount()
 Administrator()
+AffectedResource()
 AgentDetails()
+AnalysisRecord()
 Anomaly()
 AnomalyObject()
 AnomalyUnusual()
 ApiCall()
+ArchiveDistribution()
 ArchiveFindingsInput()
 ArchiveFindingsOutput()
 AssociationDetail()
 AssociationSummary()
+Attack()
+AttackPhase()
 AutonomousSystem()
 AutoscalingAutoScalingGroup()
 AwsApiCallAction()
+Baseline()
 BedrockGuardrail()
 BedrockGuardrailDetails()
 BedrockGuardrailResource()
@@ -541,6 +801,9 @@ ContainerFindingResource()
 ContainerInstanceDetails()
 ContentPolicyFilter()
 ContinuousScanDetails(end_time=_)
+CorrelatedFinding()
+Countermeasure()
+CountermeasureAction()
 Country()
 CoverageEc2InstanceDetails()
 CoverageEcsClusterDetails()
@@ -621,6 +884,7 @@ DescribePublishingDestinationOutput()
 Destination()
 DestinationProperties()
 Detection()
+DetectionCoverage()
 DetectionRuleEc2Requirements()
 DetectionRuleEcsFargateRequirements()
 DetectionRuleEksRequirements()
@@ -641,6 +905,8 @@ DisassociateFromMasterAccountInput()
 DisassociateFromMasterAccountOutput()
 DisassociateMembersInput()
 DisassociateMembersOutput()
+Distribution()
+DnsContext()
 DNSLogsConfigurationResult()
 DnsRequestAction()
 DomainDetails()
@@ -663,14 +929,26 @@ EksCluster()
 EksClusterDetails()
 EnableOrganizationAdminAccountInput()
 EnableOrganizationAdminAccountOutput()
+Enrichment()
 Evidence()
 FargateDetails()
+FetchCriterion()
+FetchQuery()
+FetchRecord()
+FetchResult()
+FetchTimeWindow()
 FilterCondition()
 FilterCriteria()
 FilterCriterion()
 Finding()
 FindingCriteria()
+FindingDetail()
+FindingReference()
+FindingsSummary()
 FindingStatistics()
+FindingTypeClassification()
+FindingTypeCount()
+FindingTypeDocumentation()
 FindingTypeStatistics()
 FlowLogsConfigurationResult()
 FreeTrialFeatureConfigurationResult()
@@ -733,14 +1011,35 @@ IncrementalScanDetails()
 Indicator()
 InstanceDetails()
 Investigation()
+InvestigationAccountAnalysis()
+InvestigationActor()
+InvestigationDetectorFeatureConfiguration()
+InvestigationEc2Instance()
+InvestigationEcsCluster()
+InvestigationEksCluster()
+InvestigationFilterCondition()
+InvestigationFilterCriteria()
+InvestigationIndicator()
+InvestigationKubernetesWorkload()
+InvestigationMalwareScan()
 InvestigationMetadata()
+InvestigationRecord()
+InvestigationResource()
+InvestigationResourceData()
+InvestigationScope()
 InvestigationSortCriteria()
 InvestigationSummary()
+InvestigationSummaryData()
+InvestigationThreatAssessment()
 Invitation()
 InviteMembersInput()
 InviteMembersOutput()
 ItemDetails()
 ItemPath()
+KeyObservations()
+KubernetesActivity()
+KubernetesAnomaly()
+KubernetesApiCall()
 KubernetesApiCallAction()
 KubernetesAuditLogsConfiguration()
 KubernetesAuditLogsConfigurationResult()
@@ -749,12 +1048,14 @@ KubernetesConfigurationResult()
 KubernetesDataSourceFreeTrial()
 KubernetesDetails()
 KubernetesPermissionCheckedDetails()
+KubernetesPolicyViolation()
 KubernetesRoleBindingDetails()
 KubernetesRoleDetails()
 KubernetesUserDetails()
 KubernetesWorkload()
 KubernetesWorkloadDetails()
 LambdaDetails()
+LambdaFunction()
 LineageObject()
 ListCoverageInput()
 ListCoverageOutput()
@@ -770,6 +1071,8 @@ ListFiltersInput()
 ListFiltersOutput()
 ListFindingsInput()
 ListFindingsOutput()
+ListInvestigationRecordsInput()
+ListInvestigationRecordsOutput()
 ListInvestigationsInput()
 ListInvestigationsOutput()
 ListInvitationsInput()
@@ -809,23 +1112,34 @@ MalwareProtectionPlanSummary()
 MalwareProtectionPlanTaggingAction()
 MalwareScan()
 MalwareScanDetails()
+MalwareThreat()
 Master()
 Member()
+MemberAccountRanking()
 MemberAdditionalConfiguration()
 MemberAdditionalConfigurationResult()
 MemberDataSourceConfiguration()
 MemberFeaturesConfiguration()
 MemberFeaturesConfigurationResult()
+MetadataRecord()
 ModelDetail()
+NetworkActivity()
+NetworkAnomaly()
 NetworkConnection()
 NetworkConnectionAction()
+NetworkCounts()
 NetworkEndpoint()
 NetworkGeoLocation()
 NetworkInterface()
+NetworkPorts()
+NetworkTraffic()
+ObservationRecord()
 Observations()
+ObservedFindingType()
 Organization()
 OrganizationAdditionalConfiguration()
 OrganizationAdditionalConfigurationResult()
+OrganizationAnalysis()
 OrganizationDataSourceConfigurations()
 OrganizationDataSourceConfigurationsResult()
 OrganizationDetails()
@@ -835,6 +1149,7 @@ OrganizationFeatureConfiguration()
 OrganizationFeatureConfigurationResult()
 OrganizationFeatureStatistics()
 OrganizationFeatureStatisticsAdditionalConfiguration()
+OrganizationFindingsSummary()
 OrganizationKubernetesAuditLogsConfiguration()
 OrganizationKubernetesAuditLogsConfigurationResult()
 OrganizationKubernetesConfiguration()
@@ -851,23 +1166,34 @@ PermissionConfiguration()
 PortProbeAction()
 PortProbeDetail()
 PrivateIpAddressDetails()
+Process()
 ProcessDetails()
 Product()
 ProductCode()
+ProtectionPlan()
 PublicAccess()
 PublicAccessConfiguration()
+QueryTimeWindow()
+RdsDbInstance()
 RdsDbInstanceDetails()
+RdsDbUser()
 RdsDbUserDetails()
 RdsLimitlessDbDetails()
+RdsLoginActivity()
 RdsLoginAttemptAction()
+Recommendation()
 RecoveryPoint()
 RecoveryPointDetails()
+RelatedFindings()
 RemoteAccountDetails()
 RemoteIpDetails()
 RemotePortDetails()
+RepresentativeFinding()
+Reputation()
 Resource()
 ResourceData()
 ResourceDetails()
+ResourceDistribution()
 ResourceStatistics()
 ResourceV2()
 RuleDefinition()
@@ -875,6 +1201,9 @@ RuleDetail()
 RuleSummary()
 RuntimeContext()
 RuntimeDetails()
+RuntimeSignals()
+S3Activity()
+S3Analysis()
 S3Bucket()
 S3BucketDetail()
 S3LogsConfiguration()
@@ -907,8 +1236,12 @@ Sequence()
 Service()
 ServiceAdditionalInfo()
 Session()
+SeverityBreakdown()
 SeverityStatistics()
+SharedBehavior()
+SharedResource()
 Signal()
+SignalGroup()
 SortCriteria()
 StartMalwareScanConfiguration()
 StartMalwareScanInput()
@@ -917,15 +1250,22 @@ StartMonitoringMembersInput()
 StartMonitoringMembersOutput()
 StopMonitoringMembersInput()
 StopMonitoringMembersOutput()
+TacticCoverage()
 Tag()
 TagResourceInput()
 TagResourceOutput()
+TechniqueCoverage()
 Threat()
+ThreatAssessment()
 ThreatDetectedByName()
 ThreatIntelligenceDetail()
+ThreatReference()
 ThreatsDetectedItemCount()
+TimeWindowGroup()
 Total()
+Trend()
 TriggerDetails()
+TypeDistribution()
 UnarchiveFindingsInput()
 UnarchiveFindingsOutput()
 UnprocessedAccount()
@@ -975,3 +1315,1423 @@ Volume()
 VolumeDetail()
 VolumeMount()
 VpcConfig()
+_params_0: AcceptAdministratorInvitationInputDict = {
+    "detector_id": _,
+    "administrator_id": _,
+    "invitation_id": _,
+}
+_params_1: AcceptInvitationInputDict = {
+    "detector_id": _,
+    "master_id": _,
+    "invitation_id": _,
+}
+_params_2: AccountDetailDict = {"account_id": _, "email": _}
+_params_3: ArchiveFindingsInputDict = {"detector_id": _, "finding_ids": _}
+_params_4: ConditionDict = {}
+_params_5: ContinuousScanDetailsDict = {"end_time": _}
+_params_6: CoverageFilterConditionDict = {}
+_params_7: CoverageFilterCriteriaDict = {}
+_params_8: CoverageFilterCriterionDict = {}
+_params_9: CoverageSortCriteriaDict = {}
+_params_10: CreateCustomDetectionRuleAssociationInputDict = {"rule_id": _, "mode": _}
+_params_11: CreateCustomDetectionRuleOrgConfigurationInputDict = {
+    "rule_id": _,
+    "mode": _,
+}
+_params_12: CreateDetectorInputDict = {"enable": _}
+_params_13: CreateFilterInputDict = {"detector_id": _, "name": _, "finding_criteria": _}
+_params_14: CreateInvestigationInputDict = {"detector_id": _, "trigger_prompt": _}
+_params_15: CreateIPSetInputDict = {
+    "detector_id": _,
+    "name": _,
+    "format": _,
+    "location": _,
+    "activate": _,
+}
+_params_16: CreateMalwareProtectionPlanInputDict = {"role": _, "protected_resource": _}
+_params_17: CreateMembersInputDict = {"detector_id": _, "account_details": _}
+_params_18: CreateProtectedResourceDict = {}
+_params_19: CreatePublishingDestinationInputDict = {
+    "detector_id": _,
+    "destination_type": _,
+    "destination_properties": _,
+}
+_params_20: CreateS3BucketResourceDict = {}
+_params_21: CreateSampleFindingsInputDict = {"detector_id": _}
+_params_22: CreateThreatEntitySetInputDict = {
+    "detector_id": _,
+    "name": _,
+    "format": _,
+    "location": _,
+    "activate": _,
+}
+_params_23: CreateThreatIntelSetInputDict = {
+    "detector_id": _,
+    "name": _,
+    "format": _,
+    "location": _,
+    "activate": _,
+}
+_params_24: CreateTrustedEntitySetInputDict = {
+    "detector_id": _,
+    "name": _,
+    "format": _,
+    "location": _,
+    "activate": _,
+}
+_params_25: DataSourceConfigurationsDict = {}
+_params_26: DeclineInvitationsInputDict = {"account_ids": _}
+_params_27: DeleteCustomDetectionRuleAssociationInputDict = {
+    "rule_id": _,
+    "association_id": _,
+}
+_params_28: DeleteCustomDetectionRuleOrgConfigurationInputDict = {
+    "rule_id": _,
+    "mode": _,
+}
+_params_29: DeleteDetectorInputDict = {"detector_id": _}
+_params_30: DeleteFilterInputDict = {"detector_id": _, "filter_name": _}
+_params_31: DeleteInvitationsInputDict = {"account_ids": _}
+_params_32: DeleteIPSetInputDict = {"detector_id": _, "ip_set_id": _}
+_params_33: DeleteMalwareProtectionPlanInputDict = {"malware_protection_plan_id": _}
+_params_34: DeleteMembersInputDict = {"detector_id": _, "account_ids": _}
+_params_35: DeletePublishingDestinationInputDict = {
+    "detector_id": _,
+    "destination_id": _,
+}
+_params_36: DeleteThreatEntitySetInputDict = {
+    "detector_id": _,
+    "threat_entity_set_id": _,
+}
+_params_37: DeleteThreatIntelSetInputDict = {"detector_id": _, "threat_intel_set_id": _}
+_params_38: DeleteTrustedEntitySetInputDict = {
+    "detector_id": _,
+    "trusted_entity_set_id": _,
+}
+_params_39: DescribeMalwareScansInputDict = {"detector_id": _}
+_params_40: DescribeOrganizationConfigurationInputDict = {"detector_id": _}
+_params_41: DescribePublishingDestinationInputDict = {
+    "detector_id": _,
+    "destination_id": _,
+}
+_params_42: DestinationPropertiesDict = {}
+_params_43: DetectionRuleFilterDict = {"name": _, "values": _}
+_params_44: DetectorAdditionalConfigurationDict = {}
+_params_45: DetectorFeatureConfigurationDict = {}
+_params_46: DisableOrganizationAdminAccountInputDict = {"admin_account_id": _}
+_params_47: DisassociateFromAdministratorAccountInputDict = {"detector_id": _}
+_params_48: DisassociateFromMasterAccountInputDict = {"detector_id": _}
+_params_49: DisassociateMembersInputDict = {"detector_id": _, "account_ids": _}
+_params_50: EnableOrganizationAdminAccountInputDict = {"admin_account_id": _}
+_params_51: FilterConditionDict = {}
+_params_52: FilterCriteriaDict = {}
+_params_53: FilterCriterionDict = {}
+_params_54: FindingCriteriaDict = {}
+_params_55: GetAdministratorAccountInputDict = {"detector_id": _}
+_params_56: GetCoverageStatisticsInputDict = {"detector_id": _, "statistics_type": _}
+_params_57: GetCustomDetectionRuleAssociationInputDict = {
+    "rule_id": _,
+    "association_id": _,
+}
+_params_58: GetCustomDetectionRuleInputDict = {"rule_id": _}
+_params_59: GetCustomDetectionRuleOrgConfigurationInputDict = {"rule_id": _, "mode": _}
+_params_60: GetDetectorInputDict = {"detector_id": _}
+_params_61: GetFilterInputDict = {"detector_id": _, "filter_name": _}
+_params_62: GetFindingsInputDict = {"detector_id": _, "finding_ids": _}
+_params_63: GetFindingsStatisticsInputDict = {"detector_id": _}
+_params_64: GetInvestigationInputDict = {"detector_id": _, "investigation_id": _}
+_params_65: GetInvitationsCountInputDict = {}
+_params_66: GetIPSetInputDict = {"detector_id": _, "ip_set_id": _}
+_params_67: GetMalwareProtectionPlanInputDict = {"malware_protection_plan_id": _}
+_params_68: GetMalwareScanInputDict = {"scan_id": _}
+_params_69: GetMalwareScanSettingsInputDict = {"detector_id": _}
+_params_70: GetMasterAccountInputDict = {"detector_id": _}
+_params_71: GetMemberDetectorsInputDict = {"detector_id": _, "account_ids": _}
+_params_72: GetMembersInputDict = {"detector_id": _, "account_ids": _}
+_params_73: GetOrganizationStatisticsInputDict = {}
+_params_74: GetRemainingFreeTrialDaysInputDict = {"detector_id": _, "account_ids": _}
+_params_75: GetThreatEntitySetInputDict = {"detector_id": _, "threat_entity_set_id": _}
+_params_76: GetThreatIntelSetInputDict = {"detector_id": _, "threat_intel_set_id": _}
+_params_77: GetTrustedEntitySetInputDict = {
+    "detector_id": _,
+    "trusted_entity_set_id": _,
+}
+_params_78: GetUsageStatisticsInputDict = {
+    "detector_id": _,
+    "usage_statistic_type": _,
+    "usage_criteria": _,
+}
+_params_79: IncrementalScanDetailsDict = {"baseline_resource_arn": _}
+_params_80: InvestigationFilterConditionDict = {}
+_params_81: InvestigationFilterCriteriaDict = {}
+_params_82: InvestigationSortCriteriaDict = {}
+_params_83: InviteMembersInputDict = {"detector_id": _, "account_ids": _}
+_params_84: KubernetesAuditLogsConfigurationDict = {"enable": _}
+_params_85: KubernetesConfigurationDict = {"audit_logs": _}
+_params_86: ListCoverageInputDict = {"detector_id": _}
+_params_87: ListCustomDetectionRuleAssociationsInputDict = {}
+_params_88: ListCustomDetectionRuleOrgConfigurationsInputDict = {}
+_params_89: ListCustomDetectionRulesInputDict = {}
+_params_90: ListDetectorsInputDict = {}
+_params_91: ListFiltersInputDict = {"detector_id": _}
+_params_92: ListFindingsInputDict = {"detector_id": _}
+_params_93: ListInvestigationRecordsInputDict = {
+    "detector_id": _,
+    "investigation_id": _,
+}
+_params_94: ListInvestigationsInputDict = {"detector_id": _}
+_params_95: ListInvitationsInputDict = {}
+_params_96: ListIPSetsInputDict = {"detector_id": _}
+_params_97: ListMalwareProtectionPlansInputDict = {}
+_params_98: ListMalwareScansFilterCriteriaDict = {}
+_params_99: ListMalwareScansFilterCriterionDict = {}
+_params_100: ListMalwareScansInputDict = {}
+_params_101: ListMembersInputDict = {"detector_id": _}
+_params_102: ListOrganizationAdminAccountsInputDict = {}
+_params_103: ListPublishingDestinationsInputDict = {"detector_id": _}
+_params_104: ListTagsForResourceInputDict = {"resource_arn": _}
+_params_105: ListThreatEntitySetsInputDict = {"detector_id": _}
+_params_106: ListThreatIntelSetsInputDict = {"detector_id": _}
+_params_107: ListTrustedEntitySetsInputDict = {"detector_id": _}
+_params_108: MalwareProtectionConfigurationDict = {}
+_params_109: MalwareProtectionPlanActionsDict = {}
+_params_110: MalwareProtectionPlanTaggingActionDict = {}
+_params_111: MemberAdditionalConfigurationDict = {}
+_params_112: MemberFeaturesConfigurationDict = {}
+_params_113: OrganizationAdditionalConfigurationDict = {}
+_params_114: OrganizationDataSourceConfigurationsDict = {}
+_params_115: OrganizationEbsVolumesDict = {}
+_params_116: OrganizationFeatureConfigurationDict = {}
+_params_117: OrganizationKubernetesAuditLogsConfigurationDict = {"auto_enable": _}
+_params_118: OrganizationKubernetesConfigurationDict = {"audit_logs": _}
+_params_119: OrganizationMalwareProtectionConfigurationDict = {}
+_params_120: OrganizationS3LogsConfigurationDict = {"auto_enable": _}
+_params_121: OrganizationScanEc2InstanceWithFindingsDict = {}
+_params_122: RecoveryPointDict = {"backup_vault_name": _}
+_params_123: S3LogsConfigurationDict = {"enable": _}
+_params_124: S3ObjectForSendObjectMalwareScanDict = {}
+_params_125: ScanConditionDict = {"map_equals": _}
+_params_126: ScanConditionPairDict = {"key": _}
+_params_127: ScanEc2InstanceWithFindingsDict = {}
+_params_128: ScanResourceCriteriaDict = {}
+_params_129: SendObjectMalwareScanInputDict = {}
+_params_130: SortCriteriaDict = {}
+_params_131: StartMalwareScanConfigurationDict = {"role": _}
+_params_132: StartMalwareScanInputDict = {"resource_arn": _}
+_params_133: StartMonitoringMembersInputDict = {"detector_id": _, "account_ids": _}
+_params_134: StopMonitoringMembersInputDict = {"detector_id": _, "account_ids": _}
+_params_135: TagResourceInputDict = {"resource_arn": _, "tags": _}
+_params_136: UnarchiveFindingsInputDict = {"detector_id": _, "finding_ids": _}
+_params_137: UntagResourceInputDict = {"resource_arn": _, "tag_keys": _}
+_params_138: UpdateCustomDetectionRuleAssociationInputDict = {
+    "rule_id": _,
+    "association_id": _,
+    "mode": _,
+}
+_params_139: UpdateCustomDetectionRuleOrgConfigurationInputDict = {
+    "rule_id": _,
+    "mode": _,
+}
+_params_140: UpdateDetectorInputDict = {"detector_id": _}
+_params_141: UpdateFilterInputDict = {"detector_id": _, "filter_name": _}
+_params_142: UpdateFindingsFeedbackInputDict = {
+    "detector_id": _,
+    "finding_ids": _,
+    "feedback": _,
+}
+_params_143: UpdateIPSetInputDict = {"detector_id": _, "ip_set_id": _}
+_params_144: UpdateMalwareProtectionPlanInputDict = {"malware_protection_plan_id": _}
+_params_145: UpdateMalwareScanSettingsInputDict = {"detector_id": _}
+_params_146: UpdateMemberDetectorsInputDict = {"detector_id": _, "account_ids": _}
+_params_147: UpdateOrganizationConfigurationInputDict = {"detector_id": _}
+_params_148: UpdateProtectedResourceDict = {}
+_params_149: UpdatePublishingDestinationInputDict = {
+    "detector_id": _,
+    "destination_id": _,
+}
+_params_150: UpdateS3BucketResourceDict = {}
+_params_151: UpdateThreatEntitySetInputDict = {
+    "detector_id": _,
+    "threat_entity_set_id": _,
+}
+_params_152: UpdateThreatIntelSetInputDict = {
+    "detector_id": _,
+    "threat_intel_set_id": _,
+}
+_params_153: UpdateTrustedEntitySetInputDict = {
+    "detector_id": _,
+    "trusted_entity_set_id": _,
+}
+_params_154: UsageCriteriaDict = {}
+
+
+def _request[T](form: type[T]) -> T:
+    raise NotImplementedError
+
+
+async def check_async_calls(client: AsyncGuardDutyClient) -> None:
+    pass
+    await client.accept_administrator_invitation(
+        detector_id=_, administrator_id=_, invitation_id=_
+    )
+    await client.accept_administrator_invitation(
+        **_request(AcceptAdministratorInvitationInputDict)
+    )
+    await client.accept_administrator_invitation(
+        _request(AcceptAdministratorInvitationInput)
+    )
+    await client.accept_administrator_invitation(
+        _request(AcceptAdministratorInvitationInputDict)
+    )
+    await client.accept_invitation(detector_id=_, master_id=_, invitation_id=_)
+    await client.accept_invitation(**_request(AcceptInvitationInputDict))
+    await client.accept_invitation(_request(AcceptInvitationInput))
+    await client.accept_invitation(_request(AcceptInvitationInputDict))
+    await client.archive_findings(detector_id=_, finding_ids=_)
+    await client.archive_findings(**_request(ArchiveFindingsInputDict))
+    await client.archive_findings(_request(ArchiveFindingsInput))
+    await client.archive_findings(_request(ArchiveFindingsInputDict))
+    await client.create_custom_detection_rule_association(rule_id=_, mode=_)
+    await client.create_custom_detection_rule_association(
+        **_request(CreateCustomDetectionRuleAssociationInputDict)
+    )
+    await client.create_custom_detection_rule_association(
+        _request(CreateCustomDetectionRuleAssociationInput)
+    )
+    await client.create_custom_detection_rule_association(
+        _request(CreateCustomDetectionRuleAssociationInputDict)
+    )
+    await client.create_custom_detection_rule_org_configuration(rule_id=_, mode=_)
+    await client.create_custom_detection_rule_org_configuration(
+        **_request(CreateCustomDetectionRuleOrgConfigurationInputDict)
+    )
+    await client.create_custom_detection_rule_org_configuration(
+        _request(CreateCustomDetectionRuleOrgConfigurationInput)
+    )
+    await client.create_custom_detection_rule_org_configuration(
+        _request(CreateCustomDetectionRuleOrgConfigurationInputDict)
+    )
+    await client.create_detector(enable=_)
+    await client.create_detector(**_request(CreateDetectorInputDict))
+    await client.create_detector(_request(CreateDetectorInput))
+    await client.create_detector(_request(CreateDetectorInputDict))
+    await client.create_filter(detector_id=_, name=_, finding_criteria=_)
+    await client.create_filter(**_request(CreateFilterInputDict))
+    await client.create_filter(_request(CreateFilterInput))
+    await client.create_filter(_request(CreateFilterInputDict))
+    await client.create_investigation(detector_id=_, trigger_prompt=_)
+    await client.create_investigation(**_request(CreateInvestigationInputDict))
+    await client.create_investigation(_request(CreateInvestigationInput))
+    await client.create_investigation(_request(CreateInvestigationInputDict))
+    await client.create_ip_set(detector_id=_, name=_, format=_, location=_, activate=_)
+    await client.create_ip_set(**_request(CreateIPSetInputDict))
+    await client.create_ip_set(_request(CreateIPSetInput))
+    await client.create_ip_set(_request(CreateIPSetInputDict))
+    await client.create_malware_protection_plan(role=_, protected_resource=_)
+    await client.create_malware_protection_plan(
+        **_request(CreateMalwareProtectionPlanInputDict)
+    )
+    await client.create_malware_protection_plan(
+        _request(CreateMalwareProtectionPlanInput)
+    )
+    await client.create_malware_protection_plan(
+        _request(CreateMalwareProtectionPlanInputDict)
+    )
+    await client.create_members(detector_id=_, account_details=_)
+    await client.create_members(**_request(CreateMembersInputDict))
+    await client.create_members(_request(CreateMembersInput))
+    await client.create_members(_request(CreateMembersInputDict))
+    await client.create_publishing_destination(
+        detector_id=_, destination_type=_, destination_properties=_
+    )
+    await client.create_publishing_destination(
+        **_request(CreatePublishingDestinationInputDict)
+    )
+    await client.create_publishing_destination(
+        _request(CreatePublishingDestinationInput)
+    )
+    await client.create_publishing_destination(
+        _request(CreatePublishingDestinationInputDict)
+    )
+    await client.create_sample_findings(detector_id=_)
+    await client.create_sample_findings(**_request(CreateSampleFindingsInputDict))
+    await client.create_sample_findings(_request(CreateSampleFindingsInput))
+    await client.create_sample_findings(_request(CreateSampleFindingsInputDict))
+    await client.create_threat_entity_set(
+        detector_id=_, name=_, format=_, location=_, activate=_
+    )
+    await client.create_threat_entity_set(**_request(CreateThreatEntitySetInputDict))
+    await client.create_threat_entity_set(_request(CreateThreatEntitySetInput))
+    await client.create_threat_entity_set(_request(CreateThreatEntitySetInputDict))
+    await client.create_threat_intel_set(
+        detector_id=_, name=_, format=_, location=_, activate=_
+    )
+    await client.create_threat_intel_set(**_request(CreateThreatIntelSetInputDict))
+    await client.create_threat_intel_set(_request(CreateThreatIntelSetInput))
+    await client.create_threat_intel_set(_request(CreateThreatIntelSetInputDict))
+    await client.create_trusted_entity_set(
+        detector_id=_, name=_, format=_, location=_, activate=_
+    )
+    await client.create_trusted_entity_set(**_request(CreateTrustedEntitySetInputDict))
+    await client.create_trusted_entity_set(_request(CreateTrustedEntitySetInput))
+    await client.create_trusted_entity_set(_request(CreateTrustedEntitySetInputDict))
+    await client.decline_invitations(account_ids=_)
+    await client.decline_invitations(**_request(DeclineInvitationsInputDict))
+    await client.decline_invitations(_request(DeclineInvitationsInput))
+    await client.decline_invitations(_request(DeclineInvitationsInputDict))
+    await client.delete_custom_detection_rule_association(rule_id=_, association_id=_)
+    await client.delete_custom_detection_rule_association(
+        **_request(DeleteCustomDetectionRuleAssociationInputDict)
+    )
+    await client.delete_custom_detection_rule_association(
+        _request(DeleteCustomDetectionRuleAssociationInput)
+    )
+    await client.delete_custom_detection_rule_association(
+        _request(DeleteCustomDetectionRuleAssociationInputDict)
+    )
+    await client.delete_custom_detection_rule_org_configuration(rule_id=_, mode=_)
+    await client.delete_custom_detection_rule_org_configuration(
+        **_request(DeleteCustomDetectionRuleOrgConfigurationInputDict)
+    )
+    await client.delete_custom_detection_rule_org_configuration(
+        _request(DeleteCustomDetectionRuleOrgConfigurationInput)
+    )
+    await client.delete_custom_detection_rule_org_configuration(
+        _request(DeleteCustomDetectionRuleOrgConfigurationInputDict)
+    )
+    await client.delete_detector(detector_id=_)
+    await client.delete_detector(**_request(DeleteDetectorInputDict))
+    await client.delete_detector(_request(DeleteDetectorInput))
+    await client.delete_detector(_request(DeleteDetectorInputDict))
+    await client.delete_filter(detector_id=_, filter_name=_)
+    await client.delete_filter(**_request(DeleteFilterInputDict))
+    await client.delete_filter(_request(DeleteFilterInput))
+    await client.delete_filter(_request(DeleteFilterInputDict))
+    await client.delete_invitations(account_ids=_)
+    await client.delete_invitations(**_request(DeleteInvitationsInputDict))
+    await client.delete_invitations(_request(DeleteInvitationsInput))
+    await client.delete_invitations(_request(DeleteInvitationsInputDict))
+    await client.delete_ip_set(detector_id=_, ip_set_id=_)
+    await client.delete_ip_set(**_request(DeleteIPSetInputDict))
+    await client.delete_ip_set(_request(DeleteIPSetInput))
+    await client.delete_ip_set(_request(DeleteIPSetInputDict))
+    await client.delete_malware_protection_plan(malware_protection_plan_id=_)
+    await client.delete_malware_protection_plan(
+        **_request(DeleteMalwareProtectionPlanInputDict)
+    )
+    await client.delete_malware_protection_plan(
+        _request(DeleteMalwareProtectionPlanInput)
+    )
+    await client.delete_malware_protection_plan(
+        _request(DeleteMalwareProtectionPlanInputDict)
+    )
+    await client.delete_members(detector_id=_, account_ids=_)
+    await client.delete_members(**_request(DeleteMembersInputDict))
+    await client.delete_members(_request(DeleteMembersInput))
+    await client.delete_members(_request(DeleteMembersInputDict))
+    await client.delete_publishing_destination(detector_id=_, destination_id=_)
+    await client.delete_publishing_destination(
+        **_request(DeletePublishingDestinationInputDict)
+    )
+    await client.delete_publishing_destination(
+        _request(DeletePublishingDestinationInput)
+    )
+    await client.delete_publishing_destination(
+        _request(DeletePublishingDestinationInputDict)
+    )
+    await client.delete_threat_entity_set(detector_id=_, threat_entity_set_id=_)
+    await client.delete_threat_entity_set(**_request(DeleteThreatEntitySetInputDict))
+    await client.delete_threat_entity_set(_request(DeleteThreatEntitySetInput))
+    await client.delete_threat_entity_set(_request(DeleteThreatEntitySetInputDict))
+    await client.delete_threat_intel_set(detector_id=_, threat_intel_set_id=_)
+    await client.delete_threat_intel_set(**_request(DeleteThreatIntelSetInputDict))
+    await client.delete_threat_intel_set(_request(DeleteThreatIntelSetInput))
+    await client.delete_threat_intel_set(_request(DeleteThreatIntelSetInputDict))
+    await client.delete_trusted_entity_set(detector_id=_, trusted_entity_set_id=_)
+    await client.delete_trusted_entity_set(**_request(DeleteTrustedEntitySetInputDict))
+    await client.delete_trusted_entity_set(_request(DeleteTrustedEntitySetInput))
+    await client.delete_trusted_entity_set(_request(DeleteTrustedEntitySetInputDict))
+    await client.describe_malware_scans(detector_id=_)
+    await client.describe_malware_scans(**_request(DescribeMalwareScansInputDict))
+    await client.describe_malware_scans(_request(DescribeMalwareScansInput))
+    await client.describe_malware_scans(_request(DescribeMalwareScansInputDict))
+    await client.describe_organization_configuration(detector_id=_)
+    await client.describe_organization_configuration(
+        **_request(DescribeOrganizationConfigurationInputDict)
+    )
+    await client.describe_organization_configuration(
+        _request(DescribeOrganizationConfigurationInput)
+    )
+    await client.describe_organization_configuration(
+        _request(DescribeOrganizationConfigurationInputDict)
+    )
+    await client.describe_publishing_destination(detector_id=_, destination_id=_)
+    await client.describe_publishing_destination(
+        **_request(DescribePublishingDestinationInputDict)
+    )
+    await client.describe_publishing_destination(
+        _request(DescribePublishingDestinationInput)
+    )
+    await client.describe_publishing_destination(
+        _request(DescribePublishingDestinationInputDict)
+    )
+    await client.disable_organization_admin_account(admin_account_id=_)
+    await client.disable_organization_admin_account(
+        **_request(DisableOrganizationAdminAccountInputDict)
+    )
+    await client.disable_organization_admin_account(
+        _request(DisableOrganizationAdminAccountInput)
+    )
+    await client.disable_organization_admin_account(
+        _request(DisableOrganizationAdminAccountInputDict)
+    )
+    await client.disassociate_from_administrator_account(detector_id=_)
+    await client.disassociate_from_administrator_account(
+        **_request(DisassociateFromAdministratorAccountInputDict)
+    )
+    await client.disassociate_from_administrator_account(
+        _request(DisassociateFromAdministratorAccountInput)
+    )
+    await client.disassociate_from_administrator_account(
+        _request(DisassociateFromAdministratorAccountInputDict)
+    )
+    await client.disassociate_from_master_account(detector_id=_)
+    await client.disassociate_from_master_account(
+        **_request(DisassociateFromMasterAccountInputDict)
+    )
+    await client.disassociate_from_master_account(
+        _request(DisassociateFromMasterAccountInput)
+    )
+    await client.disassociate_from_master_account(
+        _request(DisassociateFromMasterAccountInputDict)
+    )
+    await client.disassociate_members(detector_id=_, account_ids=_)
+    await client.disassociate_members(**_request(DisassociateMembersInputDict))
+    await client.disassociate_members(_request(DisassociateMembersInput))
+    await client.disassociate_members(_request(DisassociateMembersInputDict))
+    await client.enable_organization_admin_account(admin_account_id=_)
+    await client.enable_organization_admin_account(
+        **_request(EnableOrganizationAdminAccountInputDict)
+    )
+    await client.enable_organization_admin_account(
+        _request(EnableOrganizationAdminAccountInput)
+    )
+    await client.enable_organization_admin_account(
+        _request(EnableOrganizationAdminAccountInputDict)
+    )
+    await client.get_administrator_account(detector_id=_)
+    await client.get_administrator_account(**_request(GetAdministratorAccountInputDict))
+    await client.get_administrator_account(_request(GetAdministratorAccountInput))
+    await client.get_administrator_account(_request(GetAdministratorAccountInputDict))
+    await client.get_coverage_statistics(detector_id=_, statistics_type=_)
+    await client.get_coverage_statistics(**_request(GetCoverageStatisticsInputDict))
+    await client.get_coverage_statistics(_request(GetCoverageStatisticsInput))
+    await client.get_coverage_statistics(_request(GetCoverageStatisticsInputDict))
+    await client.get_custom_detection_rule(rule_id=_)
+    await client.get_custom_detection_rule(**_request(GetCustomDetectionRuleInputDict))
+    await client.get_custom_detection_rule(_request(GetCustomDetectionRuleInput))
+    await client.get_custom_detection_rule(_request(GetCustomDetectionRuleInputDict))
+    await client.get_custom_detection_rule_association(rule_id=_, association_id=_)
+    await client.get_custom_detection_rule_association(
+        **_request(GetCustomDetectionRuleAssociationInputDict)
+    )
+    await client.get_custom_detection_rule_association(
+        _request(GetCustomDetectionRuleAssociationInput)
+    )
+    await client.get_custom_detection_rule_association(
+        _request(GetCustomDetectionRuleAssociationInputDict)
+    )
+    await client.get_custom_detection_rule_org_configuration(rule_id=_, mode=_)
+    await client.get_custom_detection_rule_org_configuration(
+        **_request(GetCustomDetectionRuleOrgConfigurationInputDict)
+    )
+    await client.get_custom_detection_rule_org_configuration(
+        _request(GetCustomDetectionRuleOrgConfigurationInput)
+    )
+    await client.get_custom_detection_rule_org_configuration(
+        _request(GetCustomDetectionRuleOrgConfigurationInputDict)
+    )
+    await client.get_detector(detector_id=_)
+    await client.get_detector(**_request(GetDetectorInputDict))
+    await client.get_detector(_request(GetDetectorInput))
+    await client.get_detector(_request(GetDetectorInputDict))
+    await client.get_filter(detector_id=_, filter_name=_)
+    await client.get_filter(**_request(GetFilterInputDict))
+    await client.get_filter(_request(GetFilterInput))
+    await client.get_filter(_request(GetFilterInputDict))
+    await client.get_findings(detector_id=_, finding_ids=_)
+    await client.get_findings(**_request(GetFindingsInputDict))
+    await client.get_findings(_request(GetFindingsInput))
+    await client.get_findings(_request(GetFindingsInputDict))
+    await client.get_findings_statistics(detector_id=_)
+    await client.get_findings_statistics(**_request(GetFindingsStatisticsInputDict))
+    await client.get_findings_statistics(_request(GetFindingsStatisticsInput))
+    await client.get_findings_statistics(_request(GetFindingsStatisticsInputDict))
+    await client.get_investigation(detector_id=_, investigation_id=_)
+    await client.get_investigation(**_request(GetInvestigationInputDict))
+    await client.get_investigation(_request(GetInvestigationInput))
+    await client.get_investigation(_request(GetInvestigationInputDict))
+    await client.get_invitations_count()
+    await client.get_invitations_count(**_request(GetInvitationsCountInputDict))
+    await client.get_invitations_count(_request(GetInvitationsCountInput))
+    await client.get_invitations_count(_request(GetInvitationsCountInputDict))
+    await client.get_ip_set(detector_id=_, ip_set_id=_)
+    await client.get_ip_set(**_request(GetIPSetInputDict))
+    await client.get_ip_set(_request(GetIPSetInput))
+    await client.get_ip_set(_request(GetIPSetInputDict))
+    await client.get_malware_protection_plan(malware_protection_plan_id=_)
+    await client.get_malware_protection_plan(
+        **_request(GetMalwareProtectionPlanInputDict)
+    )
+    await client.get_malware_protection_plan(_request(GetMalwareProtectionPlanInput))
+    await client.get_malware_protection_plan(
+        _request(GetMalwareProtectionPlanInputDict)
+    )
+    await client.get_malware_scan(scan_id=_)
+    await client.get_malware_scan(**_request(GetMalwareScanInputDict))
+    await client.get_malware_scan(_request(GetMalwareScanInput))
+    await client.get_malware_scan(_request(GetMalwareScanInputDict))
+    await client.get_malware_scan_settings(detector_id=_)
+    await client.get_malware_scan_settings(**_request(GetMalwareScanSettingsInputDict))
+    await client.get_malware_scan_settings(_request(GetMalwareScanSettingsInput))
+    await client.get_malware_scan_settings(_request(GetMalwareScanSettingsInputDict))
+    await client.get_master_account(detector_id=_)
+    await client.get_master_account(**_request(GetMasterAccountInputDict))
+    await client.get_master_account(_request(GetMasterAccountInput))
+    await client.get_master_account(_request(GetMasterAccountInputDict))
+    await client.get_member_detectors(detector_id=_, account_ids=_)
+    await client.get_member_detectors(**_request(GetMemberDetectorsInputDict))
+    await client.get_member_detectors(_request(GetMemberDetectorsInput))
+    await client.get_member_detectors(_request(GetMemberDetectorsInputDict))
+    await client.get_members(detector_id=_, account_ids=_)
+    await client.get_members(**_request(GetMembersInputDict))
+    await client.get_members(_request(GetMembersInput))
+    await client.get_members(_request(GetMembersInputDict))
+    await client.get_organization_statistics()
+    await client.get_organization_statistics(
+        **_request(GetOrganizationStatisticsInputDict)
+    )
+    await client.get_organization_statistics(_request(GetOrganizationStatisticsInput))
+    await client.get_organization_statistics(
+        _request(GetOrganizationStatisticsInputDict)
+    )
+    await client.get_remaining_free_trial_days(detector_id=_, account_ids=_)
+    await client.get_remaining_free_trial_days(
+        **_request(GetRemainingFreeTrialDaysInputDict)
+    )
+    await client.get_remaining_free_trial_days(_request(GetRemainingFreeTrialDaysInput))
+    await client.get_remaining_free_trial_days(
+        _request(GetRemainingFreeTrialDaysInputDict)
+    )
+    await client.get_threat_entity_set(detector_id=_, threat_entity_set_id=_)
+    await client.get_threat_entity_set(**_request(GetThreatEntitySetInputDict))
+    await client.get_threat_entity_set(_request(GetThreatEntitySetInput))
+    await client.get_threat_entity_set(_request(GetThreatEntitySetInputDict))
+    await client.get_threat_intel_set(detector_id=_, threat_intel_set_id=_)
+    await client.get_threat_intel_set(**_request(GetThreatIntelSetInputDict))
+    await client.get_threat_intel_set(_request(GetThreatIntelSetInput))
+    await client.get_threat_intel_set(_request(GetThreatIntelSetInputDict))
+    await client.get_trusted_entity_set(detector_id=_, trusted_entity_set_id=_)
+    await client.get_trusted_entity_set(**_request(GetTrustedEntitySetInputDict))
+    await client.get_trusted_entity_set(_request(GetTrustedEntitySetInput))
+    await client.get_trusted_entity_set(_request(GetTrustedEntitySetInputDict))
+    await client.get_usage_statistics(
+        detector_id=_, usage_statistic_type=_, usage_criteria=_
+    )
+    await client.get_usage_statistics(**_request(GetUsageStatisticsInputDict))
+    await client.get_usage_statistics(_request(GetUsageStatisticsInput))
+    await client.get_usage_statistics(_request(GetUsageStatisticsInputDict))
+    await client.invite_members(detector_id=_, account_ids=_)
+    await client.invite_members(**_request(InviteMembersInputDict))
+    await client.invite_members(_request(InviteMembersInput))
+    await client.invite_members(_request(InviteMembersInputDict))
+    await client.list_coverage(detector_id=_)
+    await client.list_coverage(**_request(ListCoverageInputDict))
+    await client.list_coverage(_request(ListCoverageInput))
+    await client.list_coverage(_request(ListCoverageInputDict))
+    await client.list_custom_detection_rule_associations()
+    await client.list_custom_detection_rule_associations(
+        **_request(ListCustomDetectionRuleAssociationsInputDict)
+    )
+    await client.list_custom_detection_rule_associations(
+        _request(ListCustomDetectionRuleAssociationsInput)
+    )
+    await client.list_custom_detection_rule_associations(
+        _request(ListCustomDetectionRuleAssociationsInputDict)
+    )
+    await client.list_custom_detection_rule_org_configurations()
+    await client.list_custom_detection_rule_org_configurations(
+        **_request(ListCustomDetectionRuleOrgConfigurationsInputDict)
+    )
+    await client.list_custom_detection_rule_org_configurations(
+        _request(ListCustomDetectionRuleOrgConfigurationsInput)
+    )
+    await client.list_custom_detection_rule_org_configurations(
+        _request(ListCustomDetectionRuleOrgConfigurationsInputDict)
+    )
+    await client.list_custom_detection_rules()
+    await client.list_custom_detection_rules(
+        **_request(ListCustomDetectionRulesInputDict)
+    )
+    await client.list_custom_detection_rules(_request(ListCustomDetectionRulesInput))
+    await client.list_custom_detection_rules(
+        _request(ListCustomDetectionRulesInputDict)
+    )
+    await client.list_detectors()
+    await client.list_detectors(**_request(ListDetectorsInputDict))
+    await client.list_detectors(_request(ListDetectorsInput))
+    await client.list_detectors(_request(ListDetectorsInputDict))
+    await client.list_filters(detector_id=_)
+    await client.list_filters(**_request(ListFiltersInputDict))
+    await client.list_filters(_request(ListFiltersInput))
+    await client.list_filters(_request(ListFiltersInputDict))
+    await client.list_findings(detector_id=_)
+    await client.list_findings(**_request(ListFindingsInputDict))
+    await client.list_findings(_request(ListFindingsInput))
+    await client.list_findings(_request(ListFindingsInputDict))
+    await client.list_investigation_records(detector_id=_, investigation_id=_)
+    await client.list_investigation_records(
+        **_request(ListInvestigationRecordsInputDict)
+    )
+    await client.list_investigation_records(_request(ListInvestigationRecordsInput))
+    await client.list_investigation_records(_request(ListInvestigationRecordsInputDict))
+    await client.list_investigations(detector_id=_)
+    await client.list_investigations(**_request(ListInvestigationsInputDict))
+    await client.list_investigations(_request(ListInvestigationsInput))
+    await client.list_investigations(_request(ListInvestigationsInputDict))
+    await client.list_invitations()
+    await client.list_invitations(**_request(ListInvitationsInputDict))
+    await client.list_invitations(_request(ListInvitationsInput))
+    await client.list_invitations(_request(ListInvitationsInputDict))
+    await client.list_ip_sets(detector_id=_)
+    await client.list_ip_sets(**_request(ListIPSetsInputDict))
+    await client.list_ip_sets(_request(ListIPSetsInput))
+    await client.list_ip_sets(_request(ListIPSetsInputDict))
+    await client.list_malware_protection_plans()
+    await client.list_malware_protection_plans(
+        **_request(ListMalwareProtectionPlansInputDict)
+    )
+    await client.list_malware_protection_plans(
+        _request(ListMalwareProtectionPlansInput)
+    )
+    await client.list_malware_protection_plans(
+        _request(ListMalwareProtectionPlansInputDict)
+    )
+    await client.list_malware_scans()
+    await client.list_malware_scans(**_request(ListMalwareScansInputDict))
+    await client.list_malware_scans(_request(ListMalwareScansInput))
+    await client.list_malware_scans(_request(ListMalwareScansInputDict))
+    await client.list_members(detector_id=_)
+    await client.list_members(**_request(ListMembersInputDict))
+    await client.list_members(_request(ListMembersInput))
+    await client.list_members(_request(ListMembersInputDict))
+    await client.list_organization_admin_accounts()
+    await client.list_organization_admin_accounts(
+        **_request(ListOrganizationAdminAccountsInputDict)
+    )
+    await client.list_organization_admin_accounts(
+        _request(ListOrganizationAdminAccountsInput)
+    )
+    await client.list_organization_admin_accounts(
+        _request(ListOrganizationAdminAccountsInputDict)
+    )
+    await client.list_publishing_destinations(detector_id=_)
+    await client.list_publishing_destinations(
+        **_request(ListPublishingDestinationsInputDict)
+    )
+    await client.list_publishing_destinations(_request(ListPublishingDestinationsInput))
+    await client.list_publishing_destinations(
+        _request(ListPublishingDestinationsInputDict)
+    )
+    await client.list_tags_for_resource(resource_arn=_)
+    await client.list_tags_for_resource(**_request(ListTagsForResourceInputDict))
+    await client.list_tags_for_resource(_request(ListTagsForResourceInput))
+    await client.list_tags_for_resource(_request(ListTagsForResourceInputDict))
+    await client.list_threat_entity_sets(detector_id=_)
+    await client.list_threat_entity_sets(**_request(ListThreatEntitySetsInputDict))
+    await client.list_threat_entity_sets(_request(ListThreatEntitySetsInput))
+    await client.list_threat_entity_sets(_request(ListThreatEntitySetsInputDict))
+    await client.list_threat_intel_sets(detector_id=_)
+    await client.list_threat_intel_sets(**_request(ListThreatIntelSetsInputDict))
+    await client.list_threat_intel_sets(_request(ListThreatIntelSetsInput))
+    await client.list_threat_intel_sets(_request(ListThreatIntelSetsInputDict))
+    await client.list_trusted_entity_sets(detector_id=_)
+    await client.list_trusted_entity_sets(**_request(ListTrustedEntitySetsInputDict))
+    await client.list_trusted_entity_sets(_request(ListTrustedEntitySetsInput))
+    await client.list_trusted_entity_sets(_request(ListTrustedEntitySetsInputDict))
+    await client.send_object_malware_scan()
+    await client.send_object_malware_scan(**_request(SendObjectMalwareScanInputDict))
+    await client.send_object_malware_scan(_request(SendObjectMalwareScanInput))
+    await client.send_object_malware_scan(_request(SendObjectMalwareScanInputDict))
+    await client.start_malware_scan(resource_arn=_)
+    await client.start_malware_scan(**_request(StartMalwareScanInputDict))
+    await client.start_malware_scan(_request(StartMalwareScanInput))
+    await client.start_malware_scan(_request(StartMalwareScanInputDict))
+    await client.start_monitoring_members(detector_id=_, account_ids=_)
+    await client.start_monitoring_members(**_request(StartMonitoringMembersInputDict))
+    await client.start_monitoring_members(_request(StartMonitoringMembersInput))
+    await client.start_monitoring_members(_request(StartMonitoringMembersInputDict))
+    await client.stop_monitoring_members(detector_id=_, account_ids=_)
+    await client.stop_monitoring_members(**_request(StopMonitoringMembersInputDict))
+    await client.stop_monitoring_members(_request(StopMonitoringMembersInput))
+    await client.stop_monitoring_members(_request(StopMonitoringMembersInputDict))
+    await client.tag_resource(resource_arn=_, tags=_)
+    await client.tag_resource(**_request(TagResourceInputDict))
+    await client.tag_resource(_request(TagResourceInput))
+    await client.tag_resource(_request(TagResourceInputDict))
+    await client.unarchive_findings(detector_id=_, finding_ids=_)
+    await client.unarchive_findings(**_request(UnarchiveFindingsInputDict))
+    await client.unarchive_findings(_request(UnarchiveFindingsInput))
+    await client.unarchive_findings(_request(UnarchiveFindingsInputDict))
+    await client.untag_resource(resource_arn=_, tag_keys=_)
+    await client.untag_resource(**_request(UntagResourceInputDict))
+    await client.untag_resource(_request(UntagResourceInput))
+    await client.untag_resource(_request(UntagResourceInputDict))
+    await client.update_custom_detection_rule_association(
+        rule_id=_, association_id=_, mode=_
+    )
+    await client.update_custom_detection_rule_association(
+        **_request(UpdateCustomDetectionRuleAssociationInputDict)
+    )
+    await client.update_custom_detection_rule_association(
+        _request(UpdateCustomDetectionRuleAssociationInput)
+    )
+    await client.update_custom_detection_rule_association(
+        _request(UpdateCustomDetectionRuleAssociationInputDict)
+    )
+    await client.update_custom_detection_rule_org_configuration(rule_id=_, mode=_)
+    await client.update_custom_detection_rule_org_configuration(
+        **_request(UpdateCustomDetectionRuleOrgConfigurationInputDict)
+    )
+    await client.update_custom_detection_rule_org_configuration(
+        _request(UpdateCustomDetectionRuleOrgConfigurationInput)
+    )
+    await client.update_custom_detection_rule_org_configuration(
+        _request(UpdateCustomDetectionRuleOrgConfigurationInputDict)
+    )
+    await client.update_detector(detector_id=_)
+    await client.update_detector(**_request(UpdateDetectorInputDict))
+    await client.update_detector(_request(UpdateDetectorInput))
+    await client.update_detector(_request(UpdateDetectorInputDict))
+    await client.update_filter(detector_id=_, filter_name=_)
+    await client.update_filter(**_request(UpdateFilterInputDict))
+    await client.update_filter(_request(UpdateFilterInput))
+    await client.update_filter(_request(UpdateFilterInputDict))
+    await client.update_findings_feedback(detector_id=_, finding_ids=_, feedback=_)
+    await client.update_findings_feedback(**_request(UpdateFindingsFeedbackInputDict))
+    await client.update_findings_feedback(_request(UpdateFindingsFeedbackInput))
+    await client.update_findings_feedback(_request(UpdateFindingsFeedbackInputDict))
+    await client.update_ip_set(detector_id=_, ip_set_id=_)
+    await client.update_ip_set(**_request(UpdateIPSetInputDict))
+    await client.update_ip_set(_request(UpdateIPSetInput))
+    await client.update_ip_set(_request(UpdateIPSetInputDict))
+    await client.update_malware_protection_plan(malware_protection_plan_id=_)
+    await client.update_malware_protection_plan(
+        **_request(UpdateMalwareProtectionPlanInputDict)
+    )
+    await client.update_malware_protection_plan(
+        _request(UpdateMalwareProtectionPlanInput)
+    )
+    await client.update_malware_protection_plan(
+        _request(UpdateMalwareProtectionPlanInputDict)
+    )
+    await client.update_malware_scan_settings(detector_id=_)
+    await client.update_malware_scan_settings(
+        **_request(UpdateMalwareScanSettingsInputDict)
+    )
+    await client.update_malware_scan_settings(_request(UpdateMalwareScanSettingsInput))
+    await client.update_malware_scan_settings(
+        _request(UpdateMalwareScanSettingsInputDict)
+    )
+    await client.update_member_detectors(detector_id=_, account_ids=_)
+    await client.update_member_detectors(**_request(UpdateMemberDetectorsInputDict))
+    await client.update_member_detectors(_request(UpdateMemberDetectorsInput))
+    await client.update_member_detectors(_request(UpdateMemberDetectorsInputDict))
+    await client.update_organization_configuration(detector_id=_)
+    await client.update_organization_configuration(
+        **_request(UpdateOrganizationConfigurationInputDict)
+    )
+    await client.update_organization_configuration(
+        _request(UpdateOrganizationConfigurationInput)
+    )
+    await client.update_organization_configuration(
+        _request(UpdateOrganizationConfigurationInputDict)
+    )
+    await client.update_publishing_destination(detector_id=_, destination_id=_)
+    await client.update_publishing_destination(
+        **_request(UpdatePublishingDestinationInputDict)
+    )
+    await client.update_publishing_destination(
+        _request(UpdatePublishingDestinationInput)
+    )
+    await client.update_publishing_destination(
+        _request(UpdatePublishingDestinationInputDict)
+    )
+    await client.update_threat_entity_set(detector_id=_, threat_entity_set_id=_)
+    await client.update_threat_entity_set(**_request(UpdateThreatEntitySetInputDict))
+    await client.update_threat_entity_set(_request(UpdateThreatEntitySetInput))
+    await client.update_threat_entity_set(_request(UpdateThreatEntitySetInputDict))
+    await client.update_threat_intel_set(detector_id=_, threat_intel_set_id=_)
+    await client.update_threat_intel_set(**_request(UpdateThreatIntelSetInputDict))
+    await client.update_threat_intel_set(_request(UpdateThreatIntelSetInput))
+    await client.update_threat_intel_set(_request(UpdateThreatIntelSetInputDict))
+    await client.update_trusted_entity_set(detector_id=_, trusted_entity_set_id=_)
+    await client.update_trusted_entity_set(**_request(UpdateTrustedEntitySetInputDict))
+    await client.update_trusted_entity_set(_request(UpdateTrustedEntitySetInput))
+    await client.update_trusted_entity_set(_request(UpdateTrustedEntitySetInputDict))
+
+
+def check_sync_calls(client: GuardDutyClient) -> None:
+    pass
+    client.accept_administrator_invitation(
+        detector_id=_, administrator_id=_, invitation_id=_
+    )
+    client.accept_administrator_invitation(
+        **_request(AcceptAdministratorInvitationInputDict)
+    )
+    client.accept_administrator_invitation(_request(AcceptAdministratorInvitationInput))
+    client.accept_administrator_invitation(
+        _request(AcceptAdministratorInvitationInputDict)
+    )
+    client.accept_invitation(detector_id=_, master_id=_, invitation_id=_)
+    client.accept_invitation(**_request(AcceptInvitationInputDict))
+    client.accept_invitation(_request(AcceptInvitationInput))
+    client.accept_invitation(_request(AcceptInvitationInputDict))
+    client.archive_findings(detector_id=_, finding_ids=_)
+    client.archive_findings(**_request(ArchiveFindingsInputDict))
+    client.archive_findings(_request(ArchiveFindingsInput))
+    client.archive_findings(_request(ArchiveFindingsInputDict))
+    client.create_custom_detection_rule_association(rule_id=_, mode=_)
+    client.create_custom_detection_rule_association(
+        **_request(CreateCustomDetectionRuleAssociationInputDict)
+    )
+    client.create_custom_detection_rule_association(
+        _request(CreateCustomDetectionRuleAssociationInput)
+    )
+    client.create_custom_detection_rule_association(
+        _request(CreateCustomDetectionRuleAssociationInputDict)
+    )
+    client.create_custom_detection_rule_org_configuration(rule_id=_, mode=_)
+    client.create_custom_detection_rule_org_configuration(
+        **_request(CreateCustomDetectionRuleOrgConfigurationInputDict)
+    )
+    client.create_custom_detection_rule_org_configuration(
+        _request(CreateCustomDetectionRuleOrgConfigurationInput)
+    )
+    client.create_custom_detection_rule_org_configuration(
+        _request(CreateCustomDetectionRuleOrgConfigurationInputDict)
+    )
+    client.create_detector(enable=_)
+    client.create_detector(**_request(CreateDetectorInputDict))
+    client.create_detector(_request(CreateDetectorInput))
+    client.create_detector(_request(CreateDetectorInputDict))
+    client.create_filter(detector_id=_, name=_, finding_criteria=_)
+    client.create_filter(**_request(CreateFilterInputDict))
+    client.create_filter(_request(CreateFilterInput))
+    client.create_filter(_request(CreateFilterInputDict))
+    client.create_investigation(detector_id=_, trigger_prompt=_)
+    client.create_investigation(**_request(CreateInvestigationInputDict))
+    client.create_investigation(_request(CreateInvestigationInput))
+    client.create_investigation(_request(CreateInvestigationInputDict))
+    client.create_ip_set(detector_id=_, name=_, format=_, location=_, activate=_)
+    client.create_ip_set(**_request(CreateIPSetInputDict))
+    client.create_ip_set(_request(CreateIPSetInput))
+    client.create_ip_set(_request(CreateIPSetInputDict))
+    client.create_malware_protection_plan(role=_, protected_resource=_)
+    client.create_malware_protection_plan(
+        **_request(CreateMalwareProtectionPlanInputDict)
+    )
+    client.create_malware_protection_plan(_request(CreateMalwareProtectionPlanInput))
+    client.create_malware_protection_plan(
+        _request(CreateMalwareProtectionPlanInputDict)
+    )
+    client.create_members(detector_id=_, account_details=_)
+    client.create_members(**_request(CreateMembersInputDict))
+    client.create_members(_request(CreateMembersInput))
+    client.create_members(_request(CreateMembersInputDict))
+    client.create_publishing_destination(
+        detector_id=_, destination_type=_, destination_properties=_
+    )
+    client.create_publishing_destination(
+        **_request(CreatePublishingDestinationInputDict)
+    )
+    client.create_publishing_destination(_request(CreatePublishingDestinationInput))
+    client.create_publishing_destination(_request(CreatePublishingDestinationInputDict))
+    client.create_sample_findings(detector_id=_)
+    client.create_sample_findings(**_request(CreateSampleFindingsInputDict))
+    client.create_sample_findings(_request(CreateSampleFindingsInput))
+    client.create_sample_findings(_request(CreateSampleFindingsInputDict))
+    client.create_threat_entity_set(
+        detector_id=_, name=_, format=_, location=_, activate=_
+    )
+    client.create_threat_entity_set(**_request(CreateThreatEntitySetInputDict))
+    client.create_threat_entity_set(_request(CreateThreatEntitySetInput))
+    client.create_threat_entity_set(_request(CreateThreatEntitySetInputDict))
+    client.create_threat_intel_set(
+        detector_id=_, name=_, format=_, location=_, activate=_
+    )
+    client.create_threat_intel_set(**_request(CreateThreatIntelSetInputDict))
+    client.create_threat_intel_set(_request(CreateThreatIntelSetInput))
+    client.create_threat_intel_set(_request(CreateThreatIntelSetInputDict))
+    client.create_trusted_entity_set(
+        detector_id=_, name=_, format=_, location=_, activate=_
+    )
+    client.create_trusted_entity_set(**_request(CreateTrustedEntitySetInputDict))
+    client.create_trusted_entity_set(_request(CreateTrustedEntitySetInput))
+    client.create_trusted_entity_set(_request(CreateTrustedEntitySetInputDict))
+    client.decline_invitations(account_ids=_)
+    client.decline_invitations(**_request(DeclineInvitationsInputDict))
+    client.decline_invitations(_request(DeclineInvitationsInput))
+    client.decline_invitations(_request(DeclineInvitationsInputDict))
+    client.delete_custom_detection_rule_association(rule_id=_, association_id=_)
+    client.delete_custom_detection_rule_association(
+        **_request(DeleteCustomDetectionRuleAssociationInputDict)
+    )
+    client.delete_custom_detection_rule_association(
+        _request(DeleteCustomDetectionRuleAssociationInput)
+    )
+    client.delete_custom_detection_rule_association(
+        _request(DeleteCustomDetectionRuleAssociationInputDict)
+    )
+    client.delete_custom_detection_rule_org_configuration(rule_id=_, mode=_)
+    client.delete_custom_detection_rule_org_configuration(
+        **_request(DeleteCustomDetectionRuleOrgConfigurationInputDict)
+    )
+    client.delete_custom_detection_rule_org_configuration(
+        _request(DeleteCustomDetectionRuleOrgConfigurationInput)
+    )
+    client.delete_custom_detection_rule_org_configuration(
+        _request(DeleteCustomDetectionRuleOrgConfigurationInputDict)
+    )
+    client.delete_detector(detector_id=_)
+    client.delete_detector(**_request(DeleteDetectorInputDict))
+    client.delete_detector(_request(DeleteDetectorInput))
+    client.delete_detector(_request(DeleteDetectorInputDict))
+    client.delete_filter(detector_id=_, filter_name=_)
+    client.delete_filter(**_request(DeleteFilterInputDict))
+    client.delete_filter(_request(DeleteFilterInput))
+    client.delete_filter(_request(DeleteFilterInputDict))
+    client.delete_invitations(account_ids=_)
+    client.delete_invitations(**_request(DeleteInvitationsInputDict))
+    client.delete_invitations(_request(DeleteInvitationsInput))
+    client.delete_invitations(_request(DeleteInvitationsInputDict))
+    client.delete_ip_set(detector_id=_, ip_set_id=_)
+    client.delete_ip_set(**_request(DeleteIPSetInputDict))
+    client.delete_ip_set(_request(DeleteIPSetInput))
+    client.delete_ip_set(_request(DeleteIPSetInputDict))
+    client.delete_malware_protection_plan(malware_protection_plan_id=_)
+    client.delete_malware_protection_plan(
+        **_request(DeleteMalwareProtectionPlanInputDict)
+    )
+    client.delete_malware_protection_plan(_request(DeleteMalwareProtectionPlanInput))
+    client.delete_malware_protection_plan(
+        _request(DeleteMalwareProtectionPlanInputDict)
+    )
+    client.delete_members(detector_id=_, account_ids=_)
+    client.delete_members(**_request(DeleteMembersInputDict))
+    client.delete_members(_request(DeleteMembersInput))
+    client.delete_members(_request(DeleteMembersInputDict))
+    client.delete_publishing_destination(detector_id=_, destination_id=_)
+    client.delete_publishing_destination(
+        **_request(DeletePublishingDestinationInputDict)
+    )
+    client.delete_publishing_destination(_request(DeletePublishingDestinationInput))
+    client.delete_publishing_destination(_request(DeletePublishingDestinationInputDict))
+    client.delete_threat_entity_set(detector_id=_, threat_entity_set_id=_)
+    client.delete_threat_entity_set(**_request(DeleteThreatEntitySetInputDict))
+    client.delete_threat_entity_set(_request(DeleteThreatEntitySetInput))
+    client.delete_threat_entity_set(_request(DeleteThreatEntitySetInputDict))
+    client.delete_threat_intel_set(detector_id=_, threat_intel_set_id=_)
+    client.delete_threat_intel_set(**_request(DeleteThreatIntelSetInputDict))
+    client.delete_threat_intel_set(_request(DeleteThreatIntelSetInput))
+    client.delete_threat_intel_set(_request(DeleteThreatIntelSetInputDict))
+    client.delete_trusted_entity_set(detector_id=_, trusted_entity_set_id=_)
+    client.delete_trusted_entity_set(**_request(DeleteTrustedEntitySetInputDict))
+    client.delete_trusted_entity_set(_request(DeleteTrustedEntitySetInput))
+    client.delete_trusted_entity_set(_request(DeleteTrustedEntitySetInputDict))
+    client.describe_malware_scans(detector_id=_)
+    client.describe_malware_scans(**_request(DescribeMalwareScansInputDict))
+    client.describe_malware_scans(_request(DescribeMalwareScansInput))
+    client.describe_malware_scans(_request(DescribeMalwareScansInputDict))
+    client.describe_organization_configuration(detector_id=_)
+    client.describe_organization_configuration(
+        **_request(DescribeOrganizationConfigurationInputDict)
+    )
+    client.describe_organization_configuration(
+        _request(DescribeOrganizationConfigurationInput)
+    )
+    client.describe_organization_configuration(
+        _request(DescribeOrganizationConfigurationInputDict)
+    )
+    client.describe_publishing_destination(detector_id=_, destination_id=_)
+    client.describe_publishing_destination(
+        **_request(DescribePublishingDestinationInputDict)
+    )
+    client.describe_publishing_destination(_request(DescribePublishingDestinationInput))
+    client.describe_publishing_destination(
+        _request(DescribePublishingDestinationInputDict)
+    )
+    client.disable_organization_admin_account(admin_account_id=_)
+    client.disable_organization_admin_account(
+        **_request(DisableOrganizationAdminAccountInputDict)
+    )
+    client.disable_organization_admin_account(
+        _request(DisableOrganizationAdminAccountInput)
+    )
+    client.disable_organization_admin_account(
+        _request(DisableOrganizationAdminAccountInputDict)
+    )
+    client.disassociate_from_administrator_account(detector_id=_)
+    client.disassociate_from_administrator_account(
+        **_request(DisassociateFromAdministratorAccountInputDict)
+    )
+    client.disassociate_from_administrator_account(
+        _request(DisassociateFromAdministratorAccountInput)
+    )
+    client.disassociate_from_administrator_account(
+        _request(DisassociateFromAdministratorAccountInputDict)
+    )
+    client.disassociate_from_master_account(detector_id=_)
+    client.disassociate_from_master_account(
+        **_request(DisassociateFromMasterAccountInputDict)
+    )
+    client.disassociate_from_master_account(
+        _request(DisassociateFromMasterAccountInput)
+    )
+    client.disassociate_from_master_account(
+        _request(DisassociateFromMasterAccountInputDict)
+    )
+    client.disassociate_members(detector_id=_, account_ids=_)
+    client.disassociate_members(**_request(DisassociateMembersInputDict))
+    client.disassociate_members(_request(DisassociateMembersInput))
+    client.disassociate_members(_request(DisassociateMembersInputDict))
+    client.enable_organization_admin_account(admin_account_id=_)
+    client.enable_organization_admin_account(
+        **_request(EnableOrganizationAdminAccountInputDict)
+    )
+    client.enable_organization_admin_account(
+        _request(EnableOrganizationAdminAccountInput)
+    )
+    client.enable_organization_admin_account(
+        _request(EnableOrganizationAdminAccountInputDict)
+    )
+    client.get_administrator_account(detector_id=_)
+    client.get_administrator_account(**_request(GetAdministratorAccountInputDict))
+    client.get_administrator_account(_request(GetAdministratorAccountInput))
+    client.get_administrator_account(_request(GetAdministratorAccountInputDict))
+    client.get_coverage_statistics(detector_id=_, statistics_type=_)
+    client.get_coverage_statistics(**_request(GetCoverageStatisticsInputDict))
+    client.get_coverage_statistics(_request(GetCoverageStatisticsInput))
+    client.get_coverage_statistics(_request(GetCoverageStatisticsInputDict))
+    client.get_custom_detection_rule(rule_id=_)
+    client.get_custom_detection_rule(**_request(GetCustomDetectionRuleInputDict))
+    client.get_custom_detection_rule(_request(GetCustomDetectionRuleInput))
+    client.get_custom_detection_rule(_request(GetCustomDetectionRuleInputDict))
+    client.get_custom_detection_rule_association(rule_id=_, association_id=_)
+    client.get_custom_detection_rule_association(
+        **_request(GetCustomDetectionRuleAssociationInputDict)
+    )
+    client.get_custom_detection_rule_association(
+        _request(GetCustomDetectionRuleAssociationInput)
+    )
+    client.get_custom_detection_rule_association(
+        _request(GetCustomDetectionRuleAssociationInputDict)
+    )
+    client.get_custom_detection_rule_org_configuration(rule_id=_, mode=_)
+    client.get_custom_detection_rule_org_configuration(
+        **_request(GetCustomDetectionRuleOrgConfigurationInputDict)
+    )
+    client.get_custom_detection_rule_org_configuration(
+        _request(GetCustomDetectionRuleOrgConfigurationInput)
+    )
+    client.get_custom_detection_rule_org_configuration(
+        _request(GetCustomDetectionRuleOrgConfigurationInputDict)
+    )
+    client.get_detector(detector_id=_)
+    client.get_detector(**_request(GetDetectorInputDict))
+    client.get_detector(_request(GetDetectorInput))
+    client.get_detector(_request(GetDetectorInputDict))
+    client.get_filter(detector_id=_, filter_name=_)
+    client.get_filter(**_request(GetFilterInputDict))
+    client.get_filter(_request(GetFilterInput))
+    client.get_filter(_request(GetFilterInputDict))
+    client.get_findings(detector_id=_, finding_ids=_)
+    client.get_findings(**_request(GetFindingsInputDict))
+    client.get_findings(_request(GetFindingsInput))
+    client.get_findings(_request(GetFindingsInputDict))
+    client.get_findings_statistics(detector_id=_)
+    client.get_findings_statistics(**_request(GetFindingsStatisticsInputDict))
+    client.get_findings_statistics(_request(GetFindingsStatisticsInput))
+    client.get_findings_statistics(_request(GetFindingsStatisticsInputDict))
+    client.get_investigation(detector_id=_, investigation_id=_)
+    client.get_investigation(**_request(GetInvestigationInputDict))
+    client.get_investigation(_request(GetInvestigationInput))
+    client.get_investigation(_request(GetInvestigationInputDict))
+    client.get_invitations_count()
+    client.get_invitations_count(**_request(GetInvitationsCountInputDict))
+    client.get_invitations_count(_request(GetInvitationsCountInput))
+    client.get_invitations_count(_request(GetInvitationsCountInputDict))
+    client.get_ip_set(detector_id=_, ip_set_id=_)
+    client.get_ip_set(**_request(GetIPSetInputDict))
+    client.get_ip_set(_request(GetIPSetInput))
+    client.get_ip_set(_request(GetIPSetInputDict))
+    client.get_malware_protection_plan(malware_protection_plan_id=_)
+    client.get_malware_protection_plan(**_request(GetMalwareProtectionPlanInputDict))
+    client.get_malware_protection_plan(_request(GetMalwareProtectionPlanInput))
+    client.get_malware_protection_plan(_request(GetMalwareProtectionPlanInputDict))
+    client.get_malware_scan(scan_id=_)
+    client.get_malware_scan(**_request(GetMalwareScanInputDict))
+    client.get_malware_scan(_request(GetMalwareScanInput))
+    client.get_malware_scan(_request(GetMalwareScanInputDict))
+    client.get_malware_scan_settings(detector_id=_)
+    client.get_malware_scan_settings(**_request(GetMalwareScanSettingsInputDict))
+    client.get_malware_scan_settings(_request(GetMalwareScanSettingsInput))
+    client.get_malware_scan_settings(_request(GetMalwareScanSettingsInputDict))
+    client.get_master_account(detector_id=_)
+    client.get_master_account(**_request(GetMasterAccountInputDict))
+    client.get_master_account(_request(GetMasterAccountInput))
+    client.get_master_account(_request(GetMasterAccountInputDict))
+    client.get_member_detectors(detector_id=_, account_ids=_)
+    client.get_member_detectors(**_request(GetMemberDetectorsInputDict))
+    client.get_member_detectors(_request(GetMemberDetectorsInput))
+    client.get_member_detectors(_request(GetMemberDetectorsInputDict))
+    client.get_members(detector_id=_, account_ids=_)
+    client.get_members(**_request(GetMembersInputDict))
+    client.get_members(_request(GetMembersInput))
+    client.get_members(_request(GetMembersInputDict))
+    client.get_organization_statistics()
+    client.get_organization_statistics(**_request(GetOrganizationStatisticsInputDict))
+    client.get_organization_statistics(_request(GetOrganizationStatisticsInput))
+    client.get_organization_statistics(_request(GetOrganizationStatisticsInputDict))
+    client.get_remaining_free_trial_days(detector_id=_, account_ids=_)
+    client.get_remaining_free_trial_days(**_request(GetRemainingFreeTrialDaysInputDict))
+    client.get_remaining_free_trial_days(_request(GetRemainingFreeTrialDaysInput))
+    client.get_remaining_free_trial_days(_request(GetRemainingFreeTrialDaysInputDict))
+    client.get_threat_entity_set(detector_id=_, threat_entity_set_id=_)
+    client.get_threat_entity_set(**_request(GetThreatEntitySetInputDict))
+    client.get_threat_entity_set(_request(GetThreatEntitySetInput))
+    client.get_threat_entity_set(_request(GetThreatEntitySetInputDict))
+    client.get_threat_intel_set(detector_id=_, threat_intel_set_id=_)
+    client.get_threat_intel_set(**_request(GetThreatIntelSetInputDict))
+    client.get_threat_intel_set(_request(GetThreatIntelSetInput))
+    client.get_threat_intel_set(_request(GetThreatIntelSetInputDict))
+    client.get_trusted_entity_set(detector_id=_, trusted_entity_set_id=_)
+    client.get_trusted_entity_set(**_request(GetTrustedEntitySetInputDict))
+    client.get_trusted_entity_set(_request(GetTrustedEntitySetInput))
+    client.get_trusted_entity_set(_request(GetTrustedEntitySetInputDict))
+    client.get_usage_statistics(detector_id=_, usage_statistic_type=_, usage_criteria=_)
+    client.get_usage_statistics(**_request(GetUsageStatisticsInputDict))
+    client.get_usage_statistics(_request(GetUsageStatisticsInput))
+    client.get_usage_statistics(_request(GetUsageStatisticsInputDict))
+    client.invite_members(detector_id=_, account_ids=_)
+    client.invite_members(**_request(InviteMembersInputDict))
+    client.invite_members(_request(InviteMembersInput))
+    client.invite_members(_request(InviteMembersInputDict))
+    client.list_coverage(detector_id=_)
+    client.list_coverage(**_request(ListCoverageInputDict))
+    client.list_coverage(_request(ListCoverageInput))
+    client.list_coverage(_request(ListCoverageInputDict))
+    client.list_custom_detection_rule_associations()
+    client.list_custom_detection_rule_associations(
+        **_request(ListCustomDetectionRuleAssociationsInputDict)
+    )
+    client.list_custom_detection_rule_associations(
+        _request(ListCustomDetectionRuleAssociationsInput)
+    )
+    client.list_custom_detection_rule_associations(
+        _request(ListCustomDetectionRuleAssociationsInputDict)
+    )
+    client.list_custom_detection_rule_org_configurations()
+    client.list_custom_detection_rule_org_configurations(
+        **_request(ListCustomDetectionRuleOrgConfigurationsInputDict)
+    )
+    client.list_custom_detection_rule_org_configurations(
+        _request(ListCustomDetectionRuleOrgConfigurationsInput)
+    )
+    client.list_custom_detection_rule_org_configurations(
+        _request(ListCustomDetectionRuleOrgConfigurationsInputDict)
+    )
+    client.list_custom_detection_rules()
+    client.list_custom_detection_rules(**_request(ListCustomDetectionRulesInputDict))
+    client.list_custom_detection_rules(_request(ListCustomDetectionRulesInput))
+    client.list_custom_detection_rules(_request(ListCustomDetectionRulesInputDict))
+    client.list_detectors()
+    client.list_detectors(**_request(ListDetectorsInputDict))
+    client.list_detectors(_request(ListDetectorsInput))
+    client.list_detectors(_request(ListDetectorsInputDict))
+    client.list_filters(detector_id=_)
+    client.list_filters(**_request(ListFiltersInputDict))
+    client.list_filters(_request(ListFiltersInput))
+    client.list_filters(_request(ListFiltersInputDict))
+    client.list_findings(detector_id=_)
+    client.list_findings(**_request(ListFindingsInputDict))
+    client.list_findings(_request(ListFindingsInput))
+    client.list_findings(_request(ListFindingsInputDict))
+    client.list_investigation_records(detector_id=_, investigation_id=_)
+    client.list_investigation_records(**_request(ListInvestigationRecordsInputDict))
+    client.list_investigation_records(_request(ListInvestigationRecordsInput))
+    client.list_investigation_records(_request(ListInvestigationRecordsInputDict))
+    client.list_investigations(detector_id=_)
+    client.list_investigations(**_request(ListInvestigationsInputDict))
+    client.list_investigations(_request(ListInvestigationsInput))
+    client.list_investigations(_request(ListInvestigationsInputDict))
+    client.list_invitations()
+    client.list_invitations(**_request(ListInvitationsInputDict))
+    client.list_invitations(_request(ListInvitationsInput))
+    client.list_invitations(_request(ListInvitationsInputDict))
+    client.list_ip_sets(detector_id=_)
+    client.list_ip_sets(**_request(ListIPSetsInputDict))
+    client.list_ip_sets(_request(ListIPSetsInput))
+    client.list_ip_sets(_request(ListIPSetsInputDict))
+    client.list_malware_protection_plans()
+    client.list_malware_protection_plans(
+        **_request(ListMalwareProtectionPlansInputDict)
+    )
+    client.list_malware_protection_plans(_request(ListMalwareProtectionPlansInput))
+    client.list_malware_protection_plans(_request(ListMalwareProtectionPlansInputDict))
+    client.list_malware_scans()
+    client.list_malware_scans(**_request(ListMalwareScansInputDict))
+    client.list_malware_scans(_request(ListMalwareScansInput))
+    client.list_malware_scans(_request(ListMalwareScansInputDict))
+    client.list_members(detector_id=_)
+    client.list_members(**_request(ListMembersInputDict))
+    client.list_members(_request(ListMembersInput))
+    client.list_members(_request(ListMembersInputDict))
+    client.list_organization_admin_accounts()
+    client.list_organization_admin_accounts(
+        **_request(ListOrganizationAdminAccountsInputDict)
+    )
+    client.list_organization_admin_accounts(
+        _request(ListOrganizationAdminAccountsInput)
+    )
+    client.list_organization_admin_accounts(
+        _request(ListOrganizationAdminAccountsInputDict)
+    )
+    client.list_publishing_destinations(detector_id=_)
+    client.list_publishing_destinations(**_request(ListPublishingDestinationsInputDict))
+    client.list_publishing_destinations(_request(ListPublishingDestinationsInput))
+    client.list_publishing_destinations(_request(ListPublishingDestinationsInputDict))
+    client.list_tags_for_resource(resource_arn=_)
+    client.list_tags_for_resource(**_request(ListTagsForResourceInputDict))
+    client.list_tags_for_resource(_request(ListTagsForResourceInput))
+    client.list_tags_for_resource(_request(ListTagsForResourceInputDict))
+    client.list_threat_entity_sets(detector_id=_)
+    client.list_threat_entity_sets(**_request(ListThreatEntitySetsInputDict))
+    client.list_threat_entity_sets(_request(ListThreatEntitySetsInput))
+    client.list_threat_entity_sets(_request(ListThreatEntitySetsInputDict))
+    client.list_threat_intel_sets(detector_id=_)
+    client.list_threat_intel_sets(**_request(ListThreatIntelSetsInputDict))
+    client.list_threat_intel_sets(_request(ListThreatIntelSetsInput))
+    client.list_threat_intel_sets(_request(ListThreatIntelSetsInputDict))
+    client.list_trusted_entity_sets(detector_id=_)
+    client.list_trusted_entity_sets(**_request(ListTrustedEntitySetsInputDict))
+    client.list_trusted_entity_sets(_request(ListTrustedEntitySetsInput))
+    client.list_trusted_entity_sets(_request(ListTrustedEntitySetsInputDict))
+    client.send_object_malware_scan()
+    client.send_object_malware_scan(**_request(SendObjectMalwareScanInputDict))
+    client.send_object_malware_scan(_request(SendObjectMalwareScanInput))
+    client.send_object_malware_scan(_request(SendObjectMalwareScanInputDict))
+    client.start_malware_scan(resource_arn=_)
+    client.start_malware_scan(**_request(StartMalwareScanInputDict))
+    client.start_malware_scan(_request(StartMalwareScanInput))
+    client.start_malware_scan(_request(StartMalwareScanInputDict))
+    client.start_monitoring_members(detector_id=_, account_ids=_)
+    client.start_monitoring_members(**_request(StartMonitoringMembersInputDict))
+    client.start_monitoring_members(_request(StartMonitoringMembersInput))
+    client.start_monitoring_members(_request(StartMonitoringMembersInputDict))
+    client.stop_monitoring_members(detector_id=_, account_ids=_)
+    client.stop_monitoring_members(**_request(StopMonitoringMembersInputDict))
+    client.stop_monitoring_members(_request(StopMonitoringMembersInput))
+    client.stop_monitoring_members(_request(StopMonitoringMembersInputDict))
+    client.tag_resource(resource_arn=_, tags=_)
+    client.tag_resource(**_request(TagResourceInputDict))
+    client.tag_resource(_request(TagResourceInput))
+    client.tag_resource(_request(TagResourceInputDict))
+    client.unarchive_findings(detector_id=_, finding_ids=_)
+    client.unarchive_findings(**_request(UnarchiveFindingsInputDict))
+    client.unarchive_findings(_request(UnarchiveFindingsInput))
+    client.unarchive_findings(_request(UnarchiveFindingsInputDict))
+    client.untag_resource(resource_arn=_, tag_keys=_)
+    client.untag_resource(**_request(UntagResourceInputDict))
+    client.untag_resource(_request(UntagResourceInput))
+    client.untag_resource(_request(UntagResourceInputDict))
+    client.update_custom_detection_rule_association(rule_id=_, association_id=_, mode=_)
+    client.update_custom_detection_rule_association(
+        **_request(UpdateCustomDetectionRuleAssociationInputDict)
+    )
+    client.update_custom_detection_rule_association(
+        _request(UpdateCustomDetectionRuleAssociationInput)
+    )
+    client.update_custom_detection_rule_association(
+        _request(UpdateCustomDetectionRuleAssociationInputDict)
+    )
+    client.update_custom_detection_rule_org_configuration(rule_id=_, mode=_)
+    client.update_custom_detection_rule_org_configuration(
+        **_request(UpdateCustomDetectionRuleOrgConfigurationInputDict)
+    )
+    client.update_custom_detection_rule_org_configuration(
+        _request(UpdateCustomDetectionRuleOrgConfigurationInput)
+    )
+    client.update_custom_detection_rule_org_configuration(
+        _request(UpdateCustomDetectionRuleOrgConfigurationInputDict)
+    )
+    client.update_detector(detector_id=_)
+    client.update_detector(**_request(UpdateDetectorInputDict))
+    client.update_detector(_request(UpdateDetectorInput))
+    client.update_detector(_request(UpdateDetectorInputDict))
+    client.update_filter(detector_id=_, filter_name=_)
+    client.update_filter(**_request(UpdateFilterInputDict))
+    client.update_filter(_request(UpdateFilterInput))
+    client.update_filter(_request(UpdateFilterInputDict))
+    client.update_findings_feedback(detector_id=_, finding_ids=_, feedback=_)
+    client.update_findings_feedback(**_request(UpdateFindingsFeedbackInputDict))
+    client.update_findings_feedback(_request(UpdateFindingsFeedbackInput))
+    client.update_findings_feedback(_request(UpdateFindingsFeedbackInputDict))
+    client.update_ip_set(detector_id=_, ip_set_id=_)
+    client.update_ip_set(**_request(UpdateIPSetInputDict))
+    client.update_ip_set(_request(UpdateIPSetInput))
+    client.update_ip_set(_request(UpdateIPSetInputDict))
+    client.update_malware_protection_plan(malware_protection_plan_id=_)
+    client.update_malware_protection_plan(
+        **_request(UpdateMalwareProtectionPlanInputDict)
+    )
+    client.update_malware_protection_plan(_request(UpdateMalwareProtectionPlanInput))
+    client.update_malware_protection_plan(
+        _request(UpdateMalwareProtectionPlanInputDict)
+    )
+    client.update_malware_scan_settings(detector_id=_)
+    client.update_malware_scan_settings(**_request(UpdateMalwareScanSettingsInputDict))
+    client.update_malware_scan_settings(_request(UpdateMalwareScanSettingsInput))
+    client.update_malware_scan_settings(_request(UpdateMalwareScanSettingsInputDict))
+    client.update_member_detectors(detector_id=_, account_ids=_)
+    client.update_member_detectors(**_request(UpdateMemberDetectorsInputDict))
+    client.update_member_detectors(_request(UpdateMemberDetectorsInput))
+    client.update_member_detectors(_request(UpdateMemberDetectorsInputDict))
+    client.update_organization_configuration(detector_id=_)
+    client.update_organization_configuration(
+        **_request(UpdateOrganizationConfigurationInputDict)
+    )
+    client.update_organization_configuration(
+        _request(UpdateOrganizationConfigurationInput)
+    )
+    client.update_organization_configuration(
+        _request(UpdateOrganizationConfigurationInputDict)
+    )
+    client.update_publishing_destination(detector_id=_, destination_id=_)
+    client.update_publishing_destination(
+        **_request(UpdatePublishingDestinationInputDict)
+    )
+    client.update_publishing_destination(_request(UpdatePublishingDestinationInput))
+    client.update_publishing_destination(_request(UpdatePublishingDestinationInputDict))
+    client.update_threat_entity_set(detector_id=_, threat_entity_set_id=_)
+    client.update_threat_entity_set(**_request(UpdateThreatEntitySetInputDict))
+    client.update_threat_entity_set(_request(UpdateThreatEntitySetInput))
+    client.update_threat_entity_set(_request(UpdateThreatEntitySetInputDict))
+    client.update_threat_intel_set(detector_id=_, threat_intel_set_id=_)
+    client.update_threat_intel_set(**_request(UpdateThreatIntelSetInputDict))
+    client.update_threat_intel_set(_request(UpdateThreatIntelSetInput))
+    client.update_threat_intel_set(_request(UpdateThreatIntelSetInputDict))
+    client.update_trusted_entity_set(detector_id=_, trusted_entity_set_id=_)
+    client.update_trusted_entity_set(**_request(UpdateTrustedEntitySetInputDict))
+    client.update_trusted_entity_set(_request(UpdateTrustedEntitySetInput))
+    client.update_trusted_entity_set(_request(UpdateTrustedEntitySetInputDict))

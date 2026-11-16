@@ -3,9 +3,9 @@
 import logging
 from typing import cast
 
-from smithy_aws_core.config import ConfigSource
-from smithy_aws_core.identity import AWSCredentialsIdentity
-from smithy_aws_core.identity.chain import IdentityChain
+from smithy_aws_core.config.types import ConfigSource
+from smithy_aws_core.identity.chain.resolver import IdentityChain
+from smithy_aws_core.identity.components import AWSCredentialsIdentity
 from smithy_core.client import Client
 from smithy_http.interfaces import HTTPClient
 from smithy_http.plugins import user_agent_plugin

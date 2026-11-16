@@ -1,5 +1,33 @@
 # Changelog
 
+## v0.13.0
+
+### API Changes
+* Releasing support for Custom Detection Rule Runtime Monitoring
+* Adding a new Expected Bucket Owner optional field for GuardDuty publishing destination APIs
+* Added support for GuardDuty RDS Data Activity Monitoring
+* Adds the ListInvestigationRecords API, which returns the step-by-step records of a completed investigation. Adds investigation scope details and an optional structured summary to GetInvestigation. Adds filter criteria and investigation type to ListInvestigations.
+
+### Breaking Changes
+* Operations take the members of their input as keyword arguments, or the whole request as a single positional-only input model or dictionary; the two can't be mixed in one call. `plugins` is keyword-only. Calls that pass the request as `input=` or pass `plugins` positionally must be updated. A request that leaves a required member unset, at any depth, raises a `TypeError` before it is sent.
+* Codegen sync for [smithy-python b8ecead...d185e3b](https://github.com/smithy-lang/smithy-python/compare/b8eceadb0573bd0c757def9a2b26fe7bf938b239...d185e3b5b5ef2e24661a6256be721101631bdcb2): Add the synchronous `GuardDutyClient` and `GuardDutyConfig` in `aws_sdk_guardduty.client` and `aws_sdk_guardduty.config`. The async `AsyncGuardDutyClient` and `AsyncGuardDutyConfig` moved to `aws_sdk_guardduty.aio.client` and `aws_sdk_guardduty.aio.config`; update async imports to the `aio` paths. All four are also exported from `aws_sdk_guardduty`.
+
+### Features
+* Nested structures and unions in a request may be written as dictionaries. A dictionary may contain models, but the members of a model must be models. Each structure and union reachable from an operation input has a dictionary form with a `Dict` suffix, declared in `models.pyi`.
+* Resolve endpoints from the service's endpoint rules instead of the standard regional endpoint pattern. Add the `use_fips_endpoint` and `use_dualstack_endpoint` configuration options to select FIPS and dual-stack endpoints, also read from the `AWS_USE_FIPS_ENDPOINT` and `AWS_USE_DUALSTACK_ENDPOINT` environment variables and the `use_fips_endpoint` and `use_dualstack_endpoint` profile keys.
+* Generate an operation's idempotency token when it is omitted or `None`. It is generated once per call, so every retry sends the same token, and a token passed by the caller is sent unchanged.
+* Support the `adaptive` retry mode, set with `retry_mode="adaptive"`, the `AWS_RETRY_MODE` environment variable, or the `retry_mode` profile key. Previously `retry_mode="adaptive"` was rejected, and the environment variable and profile key fell back to `standard` with a warning.
+
+### Enhancements
+* Load models, schemas, and operations lazily on first use.
+* Add support for Python 3.15.
+* Include a `py.typed` marker so type checkers use the types of the installed client, and expose the typed model surface, including member documentation, through `models.pyi`.
+
+### Dependencies
+* Bump `smithy-http` from `~=0.6.0` to `~=0.10.0`.
+* Bump `smithy-aws-core` from `~=0.12.0` to `~=0.16.0`.
+* Bump `smithy-core` from `~=0.9.0` to `~=0.13.0`.
+
 ## v0.12.0
 
 ### API Changes
