@@ -6,7 +6,7 @@ The `aws-sdk-ec2` package provides a client for making
 requests to Amazon Elastic Compute Cloud.
 
 > **Note:** This SDK is in Developer Preview. Breaking changes may occur prior
-> to the release of version 1.0.0.
+> to the release of version 4.0.0.
 
 ## Installation
 
