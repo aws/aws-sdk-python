@@ -100,7 +100,7 @@ def _check_pin(got: list[str], module: str, client_version: str) -> str | None:
     major, minor, patch = current
     pinned = _version(got[0].removeprefix(prefix))
     if pinned is None or pinned[:2] != (major, minor) or pinned[2] > patch:
-        return f"expected {prefix}{major}.{minor}.x with x <= {patch}"
+        return f"expected ['{prefix}{major}.{minor}.x'] with x <= {patch}"
     return None
 
 
