@@ -62,8 +62,8 @@ public final class AwsSdkPackageFilesIntegration implements PythonIntegration {
                     The `$2L` package provides a client for making
                     requests to $1L.
 
-                    > **Note:** This SDK is experimental and in early development. Breaking changes
-                    > may occur prior to the release of version 1.0.0.
+                    > **Note:** This SDK is in Developer Preview. Breaking changes may occur prior
+                    > to the release of version 1.0.0.
 
                     ## Installation
 

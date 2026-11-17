@@ -5,62 +5,50 @@
 [apache-url]: https://github.com/aws/aws-sdk-python/blob/main/LICENSE
 
 > [!WARNING]
-> The AWS SDK for Python v4 is **experimental** and in early development. It is intended for evaluation and testing in pre-production environments only. Do not use it for production workloads. APIs and behavior might change before general availability.
->
-> **For production deployments, use [Boto3](https://github.com/boto/boto3)**: the established, generally available AWS SDK for Python with full coverage of all AWS services.
+> The AWS SDK for Python v4 is currently in **Developer Preview**. It is intended for evaluation and testing only. Do not use it for production workloads.
 
-[API Reference](https://docs.aws.amazon.com/sdk-for-python/v4/reference/) | [Developer Guide](https://docs.aws.amazon.com/sdk-for-python/v4/guide/welcome.html)
-
-This repository contains the next-generation AWS SDK for Python v4, rebuilt from
-the ground up with an async-first, modular architecture. These new clients allow
-you to interact with select AWS services using Python's native `async`/`await`
-functionality. Unlike Boto3, these clients are distributed per-service, leaving
-you the option to install only what fits your needs.
+The AWS SDK for Python v4 is the next major version of the AWS SDK for Python and the successor to [Boto3](https://github.com/boto/boto3).
 
 ### Key features
 
-+ **Native asynchronous APIs**: Service clients use Python `async` and `await` for non-blocking operations and concurrent I/O.
-+ **Bidirectional streaming**: Supported clients can send and receive event streams concurrently over HTTP/2.
-+ **Modular packages**: Each service client is available as a separate package (e.g., `aws-sdk-dynamodb`), reducing the dependencies you install and deploy.
-+ **Generated types**: Type annotations provide editor completion and static-analysis support.
++ **Synchronous and asynchronous clients**: Each service package provides a synchronous client and an asynchronous client that uses `asyncio` for non-blocking operations and concurrent I/O.
++ **Modular packages**: Each service client is available as a separate package, ensuring you only install services you need.
++ **Bidirectional streaming**: Supported asynchronous clients can send and receive event streams concurrently over HTTP/2.
++ **Generated types**: Every client, operation, and request and response model ships with type annotations and API documentation, so type checkers catch invalid requests before your code runs.
++ **Keyword and dictionary inputs**: Operations accept request parameters as keyword arguments, as a dictionary, or as a typed input model.
 
-### When to use this SDK vs. Boto3
+### Documentation
+- [Developer Guide](https://docs.aws.amazon.com/sdk-for-python/v4/guide/welcome.html)
+- [API Reference](https://docs.aws.amazon.com/sdk-for-python/v4/reference/)
 
-| | **AWS SDK for Python v4** | **[Boto3](https://github.com/boto/boto3)** |
+### Comparison with Boto3
+
+| Capability | **AWS SDK for Python v4** | **Boto3** |
 | --- | --- | --- |
-| Release status | Experimental | General Availability |
-| Production use | Not recommended | Yes |
-| Architecture | Async-first, modular per-service packages | Synchronous, monolithic package |
-| Service coverage | 24 services (expanding) | All AWS services |
+| Release status | Developer Preview | General Availability |
+| Service coverage | 37 services (growing) | All AWS services |
+| Paginators, waiters, presigned URLs | Not yet available | Available |
 
-**Choose [Boto3](https://github.com/boto/boto3) if you** need production stability, full AWS service coverage, synchronous workloads, or features like paginators, waiters, and presigned URLs.
+Boto3 remains fully supported. You can install both SDKs in the same application.
 
-**Choose the AWS SDK for Python v4 if you** are evaluating native async capabilities, building high-throughput async prototypes, working with streaming services in test environments, or want to provide feedback to shape the GA release.
+See [Choosing the AWS SDK for Python](https://docs.aws.amazon.com/sdk-for-python/v4/guide/choosing-sdk.html) in
+the developer guide for a more detailed comparison.
 
 ## Installation
 
-The SDK requires Python 3.12 or later and publishes each service client as a
-separate package. For example, the following command installs the DynamoDB
-and Transcribe Streaming clients as individual packages:
+The SDK requires Python 3.12 or later. For example, the following command
+installs the Amazon S3 and Amazon Bedrock Runtime clients:
 
 ```bash
-python -m pip install aws-sdk-dynamodb aws-sdk-transcribe-streaming
+python -m pip install aws-sdk-s3 aws-sdk-bedrock-runtime
 ```
 
-The same clients are also available as optional dependencies of the
-`aws-sdk-python` meta-package:
+To install several clients at compatible versions, select them as extras of the
+`aws-sdk-python` meta-package, which installs only the clients that you select:
 
 ```bash
-python -m pip install "aws-sdk-python[dynamodb,transcribe_streaming]"
+python -m pip install "aws-sdk-python[s3,bedrock-runtime]"
 ```
-
-The meta-package installs only the service clients that you select as extras;
-without extras, it installs no clients. It coordinates client versions through
-its MAJOR.MINOR version, so it installs compatible client versions together.
-
-Use the meta-package when your application depends on several clients. Install
-individual client packages when your application uses only one or two services
-and you want the smallest dependency set.
 
 ## Quick start
 
@@ -72,10 +60,10 @@ python -m venv .venv
 source .venv/bin/activate
 ```
 
-Then install the Amazon STS client used in this example:
+Then install the Amazon S3 client used in this example:
 
 ```bash
-python -m pip install aws-sdk-sts
+python -m pip install aws-sdk-s3
 ```
 
 Next, set up credentials (in e.g. `~/.aws/credentials`):
@@ -87,7 +75,7 @@ aws_secret_access_key = YOUR_SECRET_ACCESS_KEY
 aws_session_token = YOUR_SESSION_TOKEN
 ```
 
-For the credential sources that the experimental SDK supports, see
+For the credential sources that the SDK supports, see
 [Credential providers](https://docs.aws.amazon.com/sdk-for-python/v4/guide/credential-providers.html)
 in the developer guide.
 
@@ -98,40 +86,64 @@ Then, set up a default Region (in e.g. `~/.aws/config`):
 region = us-east-1
 ```
 
-Finally, run the following example, which calls Amazon STS `GetCallerIdentity`
-to verify your setup:
+Finally, run the following example, which calls Amazon S3 `ListBuckets` to
+verify your setup. Your identity needs the `s3:ListAllMyBuckets` permission.
+
+```python
+from aws_sdk_s3 import S3Client
+
+with S3Client() as client:
+    response = client.list_buckets()
+    for bucket in response.buckets or []:
+        print(bucket.name)
+```
+
+To make the same call asynchronously, use the `Async` variant of the client:
 
 ```python
 import asyncio
 
-from aws_sdk_sts.aio.client import AsyncSTSClient
-from aws_sdk_sts.models import GetCallerIdentityInput
+from aws_sdk_s3 import AsyncS3Client
 
 
 async def main():
-    async with AsyncSTSClient() as client:
-        response = await client.get_caller_identity(GetCallerIdentityInput())
-        print(f"Account: {response.account}")
-        print(f"Arn: {response.arn}")
+    async with AsyncS3Client() as client:
+        response = await client.list_buckets()
+        for bucket in response.buckets or []:
+            print(bucket.name)
 
 
-if __name__ == "__main__":
-    asyncio.run(main())
+asyncio.run(main())
+```
+
+## Constructing requests
+
+Operations accept request parameters as keyword arguments, a dictionary, or a
+typed input model. The following calls are equivalent:
+
+```python
+from aws_sdk_s3 import S3Client
+from aws_sdk_s3.models import ListObjectsV2Input
+
+with S3Client() as client:
+    client.list_objects_v2(bucket="amzn-s3-demo-bucket", max_keys=10)
+    client.list_objects_v2({"bucket": "amzn-s3-demo-bucket", "max_keys": 10})
+    client.list_objects_v2(ListObjectsV2Input(bucket="amzn-s3-demo-bucket", max_keys=10))
 ```
 
 ## Bidirectional streaming transport
 
-Some operations use bidirectional (duplex) event streams. The default aiohttp
-transport doesn't support duplex streaming. To use these operations, install
-the client's `awscrt` extra and set `AWSCRTHTTPClient` as the transport:
+Event stream operations are available only on asynchronous clients. The default
+aiohttp transport doesn't support bidirectional (duplex) streams. To use them,
+install the client's `awscrt` extra and set `AWSCRTHTTPClient` as the transport:
 
 ```bash
 python -m pip install "aws-sdk-bedrock-runtime[awscrt]"
 ```
 
 ```python
-from aws_sdk_bedrock_runtime.aio.client import AsyncBedrockRuntimeClient
-from aws_sdk_bedrock_runtime.aio.config import AsyncBedrockRuntimeConfig
+from aws_sdk_bedrock_runtime import AsyncBedrockRuntimeClient
+from aws_sdk_bedrock_runtime import AsyncBedrockRuntimeConfig
 from smithy_http.aio.crt import AWSCRTHTTPClient
 
 
@@ -145,9 +157,8 @@ async def create_client() -> AsyncBedrockRuntimeClient:
 
 ## Resources
 
-+ [SDK Homepage](https://aws.amazon.com/sdk-for-python/)
-+ [Developer Guide](https://docs.aws.amazon.com/sdk-for-python/v4/guide/welcome.html)
-+ [API Reference](https://docs.aws.amazon.com/sdk-for-python/v4/reference/)
++ [AWS SDK for Python Homepage](https://aws.amazon.com/sdk-for-python/)
++ [AWS SDKs and Tools Reference Guide](https://docs.aws.amazon.com/sdkref/latest/guide/overview.html)
 
 ## Feedback
 
