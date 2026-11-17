@@ -6,7 +6,7 @@ The `aws-sdk-bedrock-data-automation-runtime` package provides a client for maki
 requests to Runtime for Amazon Bedrock Data Automation.
 
 > **Note:** This SDK is in Developer Preview. Breaking changes may occur prior
-> to the release of version 1.0.0.
+> to the release of version 4.0.0.
 
 ## Installation
 

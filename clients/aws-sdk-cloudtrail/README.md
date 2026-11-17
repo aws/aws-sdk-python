@@ -6,7 +6,7 @@ The `aws-sdk-cloudtrail` package provides a client for making
 requests to AWS CloudTrail.
 
 > **Note:** This SDK is in Developer Preview. Breaking changes may occur prior
-> to the release of version 1.0.0.
+> to the release of version 4.0.0.
 
 ## Installation
 

@@ -191,7 +191,7 @@ def main() -> int:
     )
     parser.add_argument("-p", "--package", required=True, help="Package name")
     parser.add_argument(
-        "-v", "--version", required=True, help="Release version (e.g., 1.0.0)"
+        "-v", "--version", required=True, help="Release version (e.g., 4.0.0)"
     )
     parser.add_argument(
         "--dry-run",

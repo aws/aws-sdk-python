@@ -6,7 +6,7 @@ The `aws-sdk-iam` package provides a client for making
 requests to AWS Identity and Access Management.
 
 > **Note:** This SDK is in Developer Preview. Breaking changes may occur prior
-> to the release of version 1.0.0.
+> to the release of version 4.0.0.
 
 ## Installation
 

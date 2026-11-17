@@ -6,7 +6,7 @@ The `aws-sdk-cognito-identity` package provides a client for making
 requests to Amazon Cognito Identity.
 
 > **Note:** This SDK is in Developer Preview. Breaking changes may occur prior
-> to the release of version 1.0.0.
+> to the release of version 4.0.0.
 
 ## Installation
 

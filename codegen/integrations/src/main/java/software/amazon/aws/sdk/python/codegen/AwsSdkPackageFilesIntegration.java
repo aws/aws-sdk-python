@@ -63,7 +63,7 @@ public final class AwsSdkPackageFilesIntegration implements PythonIntegration {
                     requests to $1L.
 
                     > **Note:** This SDK is in Developer Preview. Breaking changes may occur prior
-                    > to the release of version 1.0.0.
+                    > to the release of version 4.0.0.
 
                     ## Installation
 
